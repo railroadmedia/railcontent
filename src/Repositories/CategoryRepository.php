@@ -16,12 +16,18 @@ use Railroad\Railcontent\Services\ConfigService;
  */
 class CategoryRepository extends RepositoryBase
 {
-    public function create($slug, $parentId, $position, array $fields, array $data)
+    /**
+     * @param $slug
+     * @param $parentId
+     * @param $position
+     * @return int
+     */
+    public function create($slug, $parentId, $position)
     {
         $categoryId = null;
 
         $this->transaction(
-            function () use ($slug, $parentId, $position, $fields, $data, &$categoryId) {
+            function () use ($slug, $parentId, $position, &$categoryId) {
                 $categoryId = $this->query()->insertGetId(
                     [
                         'slug' => $slug,
@@ -34,17 +40,12 @@ class CategoryRepository extends RepositoryBase
                     ]
                 );
 
-                $this->repositionCategoryPositions($categoryId, $preferredPosition);
-                $this->repositionTree();
+                $this->reposition($categoryId, $position);
+                $this->regenerateTree();
             }
         );
 
         return $categoryId;
-    }
-
-    public function updatePosition($id, $left, $right, $parentId)
-    {
-
     }
 
     public function updateOrCreateField($id, $key, $value)
@@ -87,36 +88,96 @@ class CategoryRepository extends RepositoryBase
 
     }
 
-    public function repositionTree()
+    /**
+     * @return void
+     */
+    public function regenerateTree()
     {
-        $this->repositionSubTree(null, 1);
+        $this->regenerateSubTree(null, 0);
     }
 
-    public function repositionSubTree($categoryId, $start)
+    /**
+     * @param int $categoryId
+     * @param int $leftStart
+     * @return int
+     */
+    public function regenerateSubTree($categoryId, $leftStart)
     {
         $childCategories =
             $this->query()->where('parent_id', $categoryId)->orderBy('position')->get()->toArray();
 
-        $end = $start + 1;
+        $startRight = $leftStart + 1;
+        $recursiveRight = $startRight;
 
         foreach ($childCategories as $index => $childCategory) {
-            $end =
-                $this->repositionSubTree(
+            $recursiveRight =
+                $this->regenerateSubTree(
                     $childCategory->id,
-                    is_null($categoryId) ? $start : $end
-                ) + 1;
+                    $recursiveRight
+                );
+
+            $recursiveRight++;
         }
 
-        if (!is_null($categoryId)) {
-            $this->query()->where('id', $categoryId)->update(['lft' => $start, 'rgt' => $end]);
+        if ($categoryId != null) {
+            $this->query()->where('id', $categoryId)->update(
+                ['lft' => $leftStart, 'rgt' => $recursiveRight]
+            );
         }
 
-        return $end;
+        return $recursiveRight;
     }
 
-    public function repositionCategoryPositions($categoryId, $childCategoryId, $preferredChildPosition)
+    /**
+     * @param int $categoryId
+     * @param int $position
+     */
+    public function reposition($categoryId, $position)
     {
+        $parentCategoryId = $this->query()->where('id', $categoryId)->first(['parent_id'])->parent_id
+            ?? null;
+        $childCategoryCount = $this->query()->where('parent_id', $parentCategoryId)->count();
 
+        if ($position < 1) {
+            $position = 1;
+        } elseif ($position > $childCategoryCount) {
+            $position = $childCategoryCount;
+        }
+
+        $this->transaction(
+            function () use ($categoryId, $position, $parentCategoryId) {
+                $this->query()
+                    ->where('id', $categoryId)
+                    ->update(
+                        ['position' => $position]
+                    );
+
+                $childCategories =
+                    $this->query()
+                        ->where('parent_id', $parentCategoryId)
+                        ->orderBy('position')
+                        ->get()
+                        ->toArray();
+
+                $start = 1;
+
+                foreach ($childCategories as $childCategory) {
+                    if ($childCategory->id == $categoryId) {
+                        continue;
+                    } elseif ($childCategory->position == $position) {
+                        $start++;
+                    }
+
+                    $this->query()
+                        ->where('id', $childCategory->id)
+                        ->update(
+                            ['position' => $start]
+                        );
+
+                    $start++;
+                }
+            }
+        );
     }
 
     /**
