@@ -60,7 +60,7 @@ class RailcontentTestCase extends BaseTestCase
     protected function getEnvironmentSetUp($app)
     {
         // Setup package config for testing
-        $defaultConfig = require(__DIR__ . '/../config/railtcontent.php');
+        $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
 
         $app['config']->set('railcontent.tables', $defaultConfig['tables']);
         $app['config']->set('railcontent.database_connection_name', 'testbench');
