@@ -48,6 +48,33 @@ class CategoryRepository extends RepositoryBase
         return $categoryId;
     }
 
+    /** Update a category record, recalculate position, regenerate tree and return the category id
+     * @param integer $categoryId
+     * @param string $slug
+     * @param integer $position
+     * @return integer $categoryId
+     */
+    public function update($categoryId, $slug, $position)
+    {
+        $this->transaction(
+            function () use ($slug,  $position, &$categoryId) {
+                $this->query()->where('id', $categoryId)->update(
+                    [
+                        'slug' => $slug,
+                        'position' => $position,
+                        'updated_at' => Carbon::now()->toDateTimeString(),
+                    ]
+                );
+
+                $this->reposition($categoryId, $position);
+                $this->regenerateTree();
+            }
+        );
+
+        return $categoryId;
+
+    }
+
     public function updateOrCreateField($id, $key, $value)
     {
 
@@ -73,9 +100,13 @@ class CategoryRepository extends RepositoryBase
 
     }
 
+    /** Return the category with the requested id from the database
+     * @param integer $id
+     * @return array
+     */
     public function getById($id)
     {
-
+        return $this->query()->where('id', $id)->get()->first();
     }
 
     public function getBySlug($slug)
