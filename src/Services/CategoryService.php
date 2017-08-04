@@ -25,4 +25,19 @@ class CategoryService
 
         return $this->categoryRepository->getById($categoryId);
     }
+
+    /**
+     * Call the update method from Category repository and return the category
+     * @param integer $categoryId
+     * @param string $slug
+     * @param integer $position
+     * @return array
+     */
+    public function update($categoryId, $slug,  $position)
+    {
+        $this->categoryRepository->update($categoryId, $slug,  $position);
+
+        return $this->categoryRepository->getById($categoryId);
+
+    }
 }
