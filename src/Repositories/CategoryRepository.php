@@ -73,9 +73,13 @@ class CategoryRepository extends RepositoryBase
 
     }
 
+    /** Return the category with the requested id from the database
+     * @param integer $id
+     * @return array
+     */
     public function getById($id)
     {
-
+        return $this->query()->where('id', $id)->get()->first();
     }
 
     public function getBySlug($slug)

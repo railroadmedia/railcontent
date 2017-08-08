@@ -25,6 +25,9 @@ class RailcontentServiceProvider extends ServiceProvider
         );
 
         $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
+
+        //load package routes file
+        $this->loadRoutesFrom(__DIR__.'/../routes.php');
     }
 
     /**
