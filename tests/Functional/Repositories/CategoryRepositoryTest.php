@@ -386,4 +386,81 @@ class CategoryRepositoryTest extends RailcontentTestCase
             ]
         );
     }
+
+    public function test_update_category_slug()
+    {
+        $slug = implode('-', $this->faker->words());
+        $updated_slug = implode('-', $this->faker->words());
+
+        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+        $this->classBeingTested->update($categoryId, $updated_slug,1, [], []);
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id' => $categoryId,
+                'slug' => $updated_slug,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+    }
+
+    public function test_update_category_position()
+    {
+        $slug1 = implode('-', $this->faker->words());
+        $slug2 = implode('-', $this->faker->words());
+        $slug3 = implode('-', $this->faker->words());
+
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
+        $categoryId11 = $this->classBeingTested->create($slug2, $categoryId1, 1, [], []);
+        $categoryId12 = $this->classBeingTested->create($slug3, $categoryId1, 2, [], []);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id' => $categoryId11,
+                'position' => 1,
+                'parent_id'=>1,
+                'lft' => 2,
+                'rgt' => 3,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id' => $categoryId12,
+                'position' => 2,
+                'parent_id'=>1,
+                'lft' => 4,
+                'rgt' => 5,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+
+        $categoryId12 = $this->classBeingTested->update($categoryId12, $slug3,1);
+
+        $this->assertDatabaseHas(
+        ConfigService::$tableCategories,
+            [
+                'id' => $categoryId12,
+                'position' => 1,
+                'lft' => 2,
+                'rgt' => 3,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id' => $categoryId11,
+                'position' => 2,
+                'lft' => 4,
+                'rgt' => 5,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+    }
+
 }

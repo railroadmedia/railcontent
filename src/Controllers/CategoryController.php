@@ -28,4 +28,27 @@ class CategoryController extends Controller
 
         return response()->json($category,200);
     }
+
+    /** Update a category based on category id and return it in JSON format
+     * @param integer $categoryId
+     * @param CategoryRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update($categoryId, CategoryRequest $request)
+    {
+        $category = $this->categoryService->get($categoryId);
+
+        if(is_null($category))
+        {
+            return response()->json('Category not found',404);
+        }
+
+        $category = $this->categoryService->update(
+            $categoryId,
+            $request->input('slug'),
+            $request->input('position')
+        );
+
+        return response()->json($category,201);
+    }
 }

@@ -17,10 +17,12 @@ use Railroad\Railcontent\Services\ConfigService;
 class CategoryRepository extends RepositoryBase
 {
     /**
-     * @param $slug
-     * @param $parentId
-     * @param $position
-     * @return int
+     * Insert a new category in the database, recalculate position and regenerate tree
+     *
+     * @param string $slug
+     * @param integer $parentId
+     * @param integer $position
+     * @return int $categoryId
      */
     public function create($slug, $parentId, $position)
     {
@@ -46,6 +48,35 @@ class CategoryRepository extends RepositoryBase
         );
 
         return $categoryId;
+    }
+
+    /**
+     * Update a category record, recalculate position, regenerate tree and return the category id
+     *
+     * @param integer $categoryId
+     * @param string $slug
+     * @param integer $position
+     * @return integer $categoryId
+     */
+    public function update($categoryId, $slug, $position)
+    {
+        $this->transaction(
+            function () use ($slug,  $position, &$categoryId) {
+                $this->query()->where('id', $categoryId)->update(
+                    [
+                        'slug' => $slug,
+                        'position' => $position,
+                        'updated_at' => Carbon::now()->toDateTimeString(),
+                    ]
+                );
+
+                $this->reposition($categoryId, $position);
+                $this->regenerateTree();
+            }
+        );
+
+        return $categoryId;
+
     }
 
     public function updateOrCreateField($id, $key, $value)

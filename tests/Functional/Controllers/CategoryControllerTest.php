@@ -57,7 +57,7 @@ class CategoryControllerTest extends RailcontentTestCase
         $response->assertSessionHasErrors(['position']);
     }
 
-    public function test_new_category_returned_in_json_format()
+    public function test_category_created_is_returned_in_json_format()
     {
         $slug = implode('-', $this->faker->words());
 
@@ -93,5 +93,112 @@ class CategoryControllerTest extends RailcontentTestCase
         $expectedResult->updated_at =  Carbon::now()->toDateTimeString();
 
         $this->assertEquals($expectedResult, $category);
+    }
+
+    public function test_update_response_status()
+    {
+        $slug = implode('-', $this->faker->words());
+        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+
+        $response = $this->call('PUT', 'category/'.$categoryId, ['slug' => $slug, 'position'=> 1]);
+
+        $this->assertEquals(201, $response->status());
+    }
+
+    public function test_update_missing_category_response_status()
+    {
+        $slug = implode('-', $this->faker->words());
+
+        $response = $this->call('PUT', 'category/1', ['slug' => $slug, 'position'=> 1]);
+
+        $this->assertEquals(404, $response->status());
+    }
+
+    public function test_update_with_negative_position()
+    {
+        $slug = implode('-', $this->faker->words());
+        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+
+        $response = $this->call('PUT', 'category/'.$categoryId, ['slug' => $slug, 'position' => -1]);
+
+        //expecting it to redirect us to previous page.
+        $this->assertEquals(302, $response->status());
+
+        $response->assertSessionHasErrors(['position']);
+    }
+
+    public function test_update_not_pass_the_validation()
+    {
+        $slug = implode('-', $this->faker->words());
+        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+
+        $response = $this->call('PUT', 'category/'.$categoryId);
+
+        //expecting it to redirect us to previous page.
+        $this->assertEquals(302, $response->status());
+
+        $response->assertSessionHasErrors();
+
+        //expecting session has error for missing fields
+        $response->assertSessionHasErrors(['slug','position']);
+    }
+
+    public function test_after_update_category_is_returned_in_json_format()
+    {
+        $slug = implode('-', $this->faker->words());
+        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+        $existingCategory = $this->classBeingTested->getById($categoryId);
+
+        $new_slug = implode('-', $this->faker->words());
+        $response = $this->call('PUT', 'category/'.$categoryId,
+                                [   'slug' => $new_slug,
+                                    'position' => $existingCategory->position
+                                ]);
+
+        $response->assertJsonStructure(
+            [
+                'id' ,
+                'slug',
+                'position',
+                'lft',
+                'rgt' ,
+                'parent_id',
+                'created_at',
+                'updated_at',
+            ]
+        );
+
+        $response->assertJson(
+            [
+                'id' => $categoryId,
+                'slug' => $new_slug,
+                'position' => $existingCategory->position,
+                'lft' => $existingCategory->lft,
+                'rgt' => $existingCategory->rgt,
+                'parent_id' => $existingCategory->parent_id,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+    }
+
+    public function test_category_service_return_updated_category_after_update()
+    {
+        $slug = implode('-', $this->faker->words());
+        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+
+        $new_slug = implode('-', $this->faker->words());
+        $updatedCategory = $this->serviceBeingTested->update($categoryId, $new_slug,  1);
+
+        $expectedResult = new \stdClass();
+        $expectedResult->id = $categoryId;
+        $expectedResult->slug = $new_slug;
+        $expectedResult->position = 1;
+        $expectedResult->lft = 1;
+        $expectedResult->rgt = 2;
+        $expectedResult->parent_id = null;
+        $expectedResult->created_at =  Carbon::now()->toDateTimeString();
+        $expectedResult->updated_at =  Carbon::now()->toDateTimeString();
+
+        $this->assertEquals($expectedResult, $updatedCategory);
     }
 }
