@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\CategoryRequest;
 use Railroad\Railcontent\Services\CategoryService;
@@ -50,5 +51,28 @@ class CategoryController extends Controller
         );
 
         return response()->json($category,201);
+    }
+
+    /**
+     * Call the delete method if the category exist
+     * @param integer $categoryId
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delete($categoryId, Request $request)
+    {
+         $category = $this->categoryService->get($categoryId);
+
+        if(is_null($category))
+        {
+            return response()->json('Category not found',404);
+        }
+
+        $category = $this->categoryService->delete(
+            $categoryId,
+            $request->input('deleteChildren')
+        );
+
+        return response()->json($category,200);
     }
 }

@@ -89,9 +89,58 @@ class CategoryRepository extends RepositoryBase
 
     }
 
-    public function delete($id, $deleteChildren = false)
+    /**
+     * Delete category and children, recalculate position for other category with the same parent and regenerate tree
+     * @param $categoryId
+     * @param bool $deleteChildren
+     */
+    public function delete($categoryId, $deleteChildren = false)
     {
+        $delete = false;
 
+        $this->transaction(
+            function () use (&$categoryId, &$deleteChildren, &$delete) {
+                $category = $this->getById($categoryId);
+
+                if(is_null($category))
+                {
+                    return $delete;
+                }
+
+                //unlink category content
+                $this->unlinkCategoryContent($categoryId);
+
+                //unlink category fields
+                $this->unlinkCategoryFields($categoryId);
+
+                //unlink category datum
+                $this->unlinkCategoryDatum($categoryId);
+
+                if($deleteChildren)
+                {
+                    //delete category and children
+                    $this->query()->whereBetween('lft',[$category->lft,$category->rgt])->delete();
+                }
+                else
+                {
+                    //delete category
+                    $this->query()->where('lft',$category->lft)->delete();
+
+                    //move children on category parent id
+                    $this->query()->whereBetween('lft',[$category->lft,$category->rgt])->update(['parent_id'=>$category->parent_id]);
+                }
+
+                //reposition categories with the same parent id
+                $this->otherChildrenRepositions($category->parent_id, $categoryId, 0);
+
+                //regenerate tree
+                $this->regenerateTree();
+
+                $delete = true;
+            }
+        );
+
+        return $delete;
     }
 
     public function deleteField($id, $key)
@@ -187,30 +236,7 @@ class CategoryRepository extends RepositoryBase
                         ['position' => $position]
                     );
 
-                $childCategories =
-                    $this->query()
-                        ->where('parent_id', $parentCategoryId)
-                        ->orderBy('position')
-                        ->get()
-                        ->toArray();
-
-                $start = 1;
-
-                foreach ($childCategories as $childCategory) {
-                    if ($childCategory->id == $categoryId) {
-                        continue;
-                    } elseif ($childCategory->position == $position) {
-                        $start++;
-                    }
-
-                    $this->query()
-                        ->where('id', $childCategory->id)
-                        ->update(
-                            ['position' => $start]
-                        );
-
-                    $start++;
-                }
+                $this->otherChildrenRepositions($parentCategoryId, $categoryId, $position);
             }
         );
     }
@@ -221,5 +247,106 @@ class CategoryRepository extends RepositoryBase
     public function query()
     {
         return parent::connection()->table(ConfigService::$tableCategories);
+    }
+
+    /**
+     * @return Builder
+     */
+    public function field_query()
+    {
+        return parent::connection()->table(ConfigService::$tableFields);
+    }
+
+    /**
+     * @return Builder
+     */
+    public function data_query()
+    {
+        return parent::connection()->table(ConfigService::$tableData);
+    }
+
+    public function content_categories_query()
+    {
+        return parent::connection()->table(ConfigService::$tableContentCategories);
+    }
+
+    public function subject_fields_query()
+    {
+        return parent::connection()->table(ConfigService::$tableSubjectFields);
+    }
+
+    public function subject_data_query()
+    {
+        return parent::connection()->table(ConfigService::$tableSubjectData);
+    }
+
+    /**
+     * Update position for other categories with the same parent id
+     * @param integer $parentCategoryId
+     * @param integer $categoryId
+     * @param integer $position
+     */
+    function otherChildrenRepositions ($parentCategoryId, $categoryId, $position)
+    {
+        $childCategories =
+            $this->query()
+                ->where('parent_id', $parentCategoryId)
+                ->orderBy('position')
+                ->get()
+                ->toArray();
+
+        $start = 1;
+
+        foreach ($childCategories as $childCategory) {
+            if ($childCategory->id == $categoryId) {
+                continue;
+            } elseif ($childCategory->position == $position) {
+                $start++;
+            }
+
+            $this->query()
+                ->where('id', $childCategory->id)
+                ->update(
+                    ['position' => $start]
+                );
+
+            $start++;
+        }
+    }
+
+    /**
+     * Delete the link between category and
+     * @param $categoryId
+     */
+    function unlinkCategoryContent ($categoryId)
+    {
+        $this->content_categories_query()->where('category_id', $categoryId)->delete();
+    }
+
+    /**
+     * @param $categoryId
+     */
+    function unlinkCategoryFields ($categoryId)
+    {
+        $this->subject_fields_query()->where(
+            [
+                'subject_id' => $categoryId,
+                'subject_type' => 'category'
+            ]
+        )->delete();
+    }
+
+    /**
+     * @param $this
+     * @param $categoryId
+     */
+    function unlinkCategoryDatum ($categoryId)
+    {
+        $this->subject_data_query()->where(
+            [
+                'subject_id' => $categoryId,
+                'subject_type' => 'category'
+            ]
+        )->delete();
     }
 }

@@ -7,6 +7,7 @@ use Response;
 use Railroad\Railcontent\Repositories\CategoryRepository;
 use Railroad\Railcontent\Services\CategoryService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
+use Railroad\Railcontent\Services\ConfigService;
 
 class CategoryControllerTest extends RailcontentTestCase
 {
@@ -201,4 +202,48 @@ class CategoryControllerTest extends RailcontentTestCase
 
         $this->assertEquals($expectedResult, $updatedCategory);
     }
+
+    public function test_service_delete_method_result()
+    {
+        $slug = implode('-', $this->faker->words());
+        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+
+        $delete = $this->serviceBeingTested->delete($categoryId);
+
+        $this->assertTrue($delete);
+    }
+
+    public function test_service_delete_method_when_failed()
+    {
+
+        $delete = $this->serviceBeingTested->delete(1);
+
+        $this->assertFalse($delete);
+    }
+
+    public function test_controller_delete_method_response_status()
+    {
+        $slug = implode('-', $this->faker->words());
+        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+
+        $response = $this->call('DELETE', 'category/'.$categoryId, ['deleteChildren' => 1]);
+
+        $this->assertEquals(200, $response->status());
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId,
+                'slug' => $slug
+            ]
+        );
+    }
+
+    public function test_delete_missing_category_response_status()
+    {
+        $response = $this->call('DELETE', 'category/1', ['deleteChildren' => 0]);
+
+        $this->assertEquals(404, $response->status());
+    }
+
 }

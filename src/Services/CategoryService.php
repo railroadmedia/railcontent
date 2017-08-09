@@ -13,7 +13,8 @@ class CategoryService
         $this->categoryRepository = $categoryRepository;
     }
 
-    /** Call the create method from Category repository and return the new created category
+    /**
+     * Call the create method from Category repository and return the new created category
      * @param string $slug
      * @param integer $parentId
      * @param integer $position
@@ -48,4 +49,16 @@ class CategoryService
     {
         return $this->categoryRepository->getById($categoryId);
     }
+
+    /**
+     * Call the delete method from repository and return true if the category was deleted
+     * @param integer $categoryId
+     * @param bool $deleteChildren
+     * @return bool|void
+     */
+    public function delete($categoryId, $deleteChildren = false)
+    {
+        return $this->categoryRepository->delete($categoryId,$deleteChildren);
+    }
+
 }

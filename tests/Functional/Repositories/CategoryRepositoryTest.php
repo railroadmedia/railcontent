@@ -463,4 +463,199 @@ class CategoryRepositoryTest extends RailcontentTestCase
         );
     }
 
+    public function test_delete_category()
+    {
+        $slug = implode('-', $this->faker->words());
+
+        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId,
+                'slug' => $slug
+            ]
+        );
+        $this->classBeingTested->delete($categoryId,1);
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId,
+                'slug' => $slug
+            ]
+        );
+    }
+
+    public function test_delete_category_move_children()
+    {
+        $slug1 = implode('-', $this->faker->words());
+        $slug2 = implode('-', $this->faker->words());
+        $slug3 = implode('-', $this->faker->words());
+        $slug4 = implode('-', $this->faker->words());
+
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
+        $categoryId11 = $this->classBeingTested->create($slug2, $categoryId1, 1, [], []);
+        $categoryId12 = $this->classBeingTested->create($slug3, $categoryId1, 2, [], []);
+        $categoryId2 = $this->classBeingTested->create($slug4, null, 2, [], []);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId1,
+                'slug' => $slug1,
+                'lft' => 1,
+                'rgt' => 6,
+                'position' => 1
+            ]
+        );
+        $this->classBeingTested->delete($categoryId1);
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId1,
+                'slug' => $slug1
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId11,
+                'slug' => $slug2,
+                'parent_id' => null,
+                'lft' => 1,
+                'rgt' => 2,
+                'position' => 1
+            ]
+        );
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId12,
+                'slug' => $slug3,
+                'parent_id' => null,
+                'lft' => 3,
+                'rgt' => 4,
+                'position' => 2
+            ]
+        );
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId2,
+                'slug' => $slug4,
+                'parent_id' => null,
+                'lft' => 5,
+                'rgt' => 6,
+                'position' => 3
+            ]
+        );
+    }
+
+    public function test_delete_category_and_children()
+    {
+        $slug1 = implode('-', $this->faker->words());
+        $slug2 = implode('-', $this->faker->words());
+        $slug3 = implode('-', $this->faker->words());
+        $slug4 = implode('-', $this->faker->words());
+
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
+        $categoryId11 = $this->classBeingTested->create($slug2, $categoryId1, 1, [], []);
+        $categoryId12 = $this->classBeingTested->create($slug3, $categoryId1, 2, [], []);
+        $categoryId2 = $this->classBeingTested->create($slug4, null, 2, [], []);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId1,
+                'slug' => $slug1,
+                'lft' => 1,
+                'rgt' => 6,
+                'position' => 1
+            ]
+        );
+        $this->classBeingTested->delete($categoryId1,true);
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId1,
+                'slug' => $slug1
+            ]
+        );
+
+         $this->assertDatabaseMissing(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId11,
+                'slug' => $slug2
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId12,
+                'slug' => $slug3
+            ]
+        );
+
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId2,
+                'slug' => $slug4,
+                'parent_id' => null,
+                'lft' => 1,
+                'rgt' => 2,
+                'position' => 1
+            ]
+        );
+    }
+
+    public function test_delete_category_reposition_other_children_from_the_same_parent()
+    {
+        $slug1 = implode('-', $this->faker->words());
+        $slug2 = implode('-', $this->faker->words());
+        $slug3 = implode('-', $this->faker->words());
+
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
+        $categoryId11 = $this->classBeingTested->create($slug2, $categoryId1, 1, [], []);
+        $categoryId12 = $this->classBeingTested->create($slug3, $categoryId1, 2, [], []);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId11,
+                'slug' => $slug2,
+                'lft' => 2,
+                'rgt' => 3,
+                'position' => 1
+            ]
+        );
+
+        $this->classBeingTested->delete($categoryId11);
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId11,
+                'slug' => $slug2
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id'=> $categoryId12,
+                'slug' => $slug3,
+                'lft' => 2,
+                'rgt' => 3,
+                'position' => 1
+            ]
+        );
+    }
 }
