@@ -24,8 +24,8 @@ class FieldRequest extends FormRequest
     public function rules()
     {
         return [
-            'key' => 'required',
-            'value' => 'required',
+            'key' => 'required|max:255',
+            'value' => 'required|max:255',
             'category_id' => 'required'
         ];
     }

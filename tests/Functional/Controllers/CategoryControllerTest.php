@@ -326,6 +326,20 @@ class CategoryControllerTest extends RailcontentTestCase
         $response->assertSessionHasErrors(['key','value','category_id']);
     }
 
+    public function test_add_category_field_key_value_not_pass_the_validation()
+    {
+        $key = $this->faker->text(500);
+        $value = $this->faker->text(500);
+        $response = $this->call('POST', 'category/field',['category_id'=>1,'key'=>$key, 'value' => $value]);
+
+        $this->assertEquals(302, $response->status());
+
+        $response->assertSessionHasErrors();
+
+        //expecting session has error for missing fields
+        $response->assertSessionHasErrors(['key','value']);
+    }
+
     public function test_update_category_field_controller_method_response()
     {
         $key = implode('-', $this->faker->words());
