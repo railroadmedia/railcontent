@@ -58,6 +58,18 @@ class CategoryControllerTest extends RailcontentTestCase
         $response->assertSessionHasErrors(['position']);
     }
 
+    public function test_store_with_slug_huge()
+    {
+        $slug =  $this->faker->text(500);
+
+        $response = $this->call('POST', 'category', ['slug' => $slug, 'position' => -1]);
+
+        //expecting it to redirect us to previous page.
+        $this->assertEquals(302, $response->status());
+
+        $response->assertSessionHasErrors(['slug']);
+    }
+
     public function test_category_created_is_returned_in_json_format()
     {
         $slug = implode('-', $this->faker->words());
