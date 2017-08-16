@@ -79,11 +79,44 @@ class CategoryRepository extends RepositoryBase
 
     }
 
+    /**
+     * Update or insert a new record in the railcontent_fields table
+     * @param integer $id
+     * @param string $key
+     * @param string $value
+     * @return int
+     */
     public function updateOrCreateField($id, $key, $value)
     {
+        $update = $this->field_query()->where('id', $id)->update(
+            [
+                       'key' => $key,
+                       'value' => $value,
+                       'updated_at' => Carbon::now()->toDateTimeString()
+            ]
+        );
 
+        if(!$update){
+            $id = $this->field_query()->insertGetId(
+                [
+                       'key' => $key,
+                       'value' => $value,
+                       'created_at' => Carbon::now()->toDateTimeString(),
+                       'updated_at' => Carbon::now()->toDateTimeString()
+                ]
+            );
+        }
+
+        return $id;
     }
 
+    /**
+     * Update or insert a new record in railcontent_data table
+     * @param integer $id
+     * @param string $key
+     * @param string $value
+     * @return int
+     */
     public function updateOrCreateDatum($id, $key, $value)
     {
 
@@ -143,9 +176,16 @@ class CategoryRepository extends RepositoryBase
         return $delete;
     }
 
-    public function deleteField($id, $key)
+    /**
+     * Delete a record from railcontent_fields table
+     * @param integer $id
+     */
+    public function deleteField($id)
     {
-
+        return $this->field_query()->where([
+            'id' => $id
+            ]
+        )->delete();
     }
 
     public function deleteDatum($id, $key)
@@ -159,7 +199,7 @@ class CategoryRepository extends RepositoryBase
      */
     public function getById($id)
     {
-        return $this->query()->where('id', $id)->get()->first();
+        return $this->query()->where('id',$id)->get()->first();
     }
 
     public function getBySlug($slug)
@@ -173,6 +213,7 @@ class CategoryRepository extends RepositoryBase
     }
 
     /**
+     * Call regenerateSubTree function
      * @return void
      */
     public function regenerateTree()
@@ -181,6 +222,7 @@ class CategoryRepository extends RepositoryBase
     }
 
     /**
+     * Regenerate lft and rgt value
      * @param int $categoryId
      * @param int $leftStart
      * @return int
@@ -213,6 +255,7 @@ class CategoryRepository extends RepositoryBase
     }
 
     /**
+     * Update category position and call function that recalculate position for other children
      * @param int $categoryId
      * @param int $position
      */
@@ -265,23 +308,31 @@ class CategoryRepository extends RepositoryBase
         return parent::connection()->table(ConfigService::$tableData);
     }
 
+    /**
+     * @return Builder
+     */
     public function content_categories_query()
     {
         return parent::connection()->table(ConfigService::$tableContentCategories);
     }
 
+    /**
+     * @return Builder
+     */
     public function subject_fields_query()
     {
         return parent::connection()->table(ConfigService::$tableSubjectFields);
     }
 
+    /**
+     * @return Builder
+     */
     public function subject_data_query()
     {
         return parent::connection()->table(ConfigService::$tableSubjectData);
     }
 
-    /**
-     * Update position for other categories with the same parent id
+    /** Update position for other categories with the same parent id
      * @param integer $parentCategoryId
      * @param integer $categoryId
      * @param integer $position
@@ -291,6 +342,7 @@ class CategoryRepository extends RepositoryBase
         $childCategories =
             $this->query()
                 ->where('parent_id', $parentCategoryId)
+                ->where('id', '<>', $categoryId)
                 ->orderBy('position')
                 ->get()
                 ->toArray();
@@ -298,9 +350,8 @@ class CategoryRepository extends RepositoryBase
         $start = 1;
 
         foreach ($childCategories as $childCategory) {
-            if ($childCategory->id == $categoryId) {
-                continue;
-            } elseif ($childCategory->position == $position) {
+            if($start == $position)
+            {
                 $start++;
             }
 
@@ -315,8 +366,8 @@ class CategoryRepository extends RepositoryBase
     }
 
     /**
-     * Delete the link between category and
-     * @param $categoryId
+     * Delete the links between category and content
+     * @param integer $categoryId
      */
     function unlinkCategoryContent ($categoryId)
     {
@@ -324,6 +375,7 @@ class CategoryRepository extends RepositoryBase
     }
 
     /**
+     * Delete the links between category and fields
      * @param $categoryId
      */
     function unlinkCategoryFields ($categoryId)
@@ -331,21 +383,121 @@ class CategoryRepository extends RepositoryBase
         $this->subject_fields_query()->where(
             [
                 'subject_id' => $categoryId,
-                'subject_type' => 'category'
+                'subject_type' => ConfigService::$subjectTypeCategory
             ]
         )->delete();
     }
 
     /**
-     * @param $this
-     * @param $categoryId
+     * Delete the links between category and datum
+     * @param integer $categoryId
      */
     function unlinkCategoryDatum ($categoryId)
     {
         $this->subject_data_query()->where(
             [
                 'subject_id' => $categoryId,
-                'subject_type' => 'category'
+                'subject_type' => ConfigService::$subjectTypeCategory
+            ]
+        )->delete();
+    }
+
+    /**
+     * Insert a new record in railcontent_subject_fields table
+     * @param integer $fieldId
+     * @param integer $categoryId
+     * @param string $subjectType
+     * @return int
+     */
+    public function linkCategoryField($fieldId, $categoryId, $subjectType)
+    {
+        $categoryFieldId =  $this->subject_fields_query()->insertGetId(
+            [
+                 'subject_id' => $categoryId,
+                 'subject_type' => $subjectType,
+                 'field_id' => $fieldId,
+                 'created_at' => Carbon::now()->toDateTimeString(),
+                 'updated_at' => Carbon::now()->toDateTimeString()
+            ]);
+
+        return $categoryFieldId;
+    }
+
+    /**
+     * Get the category and the field data from database
+     * @param integer $fieldId
+     * @return mixed
+     */
+    public function getCategoryField($fieldId, $categoryId)
+    {
+        $fieldIdLabel = ConfigService::$tableFields.'.id';
+
+        return $this->subject_fields_query()
+            ->leftJoin(ConfigService::$tableFields,'field_id','=',$fieldIdLabel)
+            ->where(
+                [
+                    'field_id' => $fieldId,
+                    'subject_id' => $categoryId,
+                    'subject_type' => ConfigService::$subjectTypeCategory
+                ]
+            )->get()->first();
+    }
+
+    /**
+     * Get category data
+     * @param integer $id
+     * @return array
+     */
+    public function getCategory($id)
+    {
+        $category = $this->query()
+            ->where('id', $id)
+            ->get()->toArray();
+
+        return $category;
+    }
+
+    /**
+     * Get all categories order by parent and position
+     * @return array
+     */
+    public function getAllCategories()
+    {
+        return $this->query()->orderBy('parent_id','asc')->orderBy('position','asc')->get()->toArray();
+    }
+
+    /**
+     * Get all category linked fields data
+     * @param integer $categoryId
+     * @return array
+     */
+    public function getCategoryFields($categoryId)
+    {
+        $fieldIdLabel = ConfigService::$tableFields.'.id';
+
+        return $this->subject_fields_query()
+            ->leftJoin(ConfigService::$tableFields,'field_id','=',$fieldIdLabel)
+            ->where(
+        [
+            'subject_id' => $categoryId,
+            'subject_type' => ConfigService::$subjectTypeCategory
+        ]
+        )->get()->toArray();
+    }
+
+    /**
+     * Delete the link between category and field
+     * @param integer $fieldId
+     * @param integer $categoryId
+     * @return int
+     */
+    public function unlinkCategoryField($fieldId, $categoryId)
+    {
+        return $this->subject_fields_query()->where(
+            [
+                'subject_id' => $categoryId,
+                'subject_type' => ConfigService::$subjectTypeCategory,
+                'field_id' => $fieldId
             ]
         )->delete();
     }

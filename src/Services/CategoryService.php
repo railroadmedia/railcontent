@@ -61,4 +61,60 @@ class CategoryService
         return $this->categoryRepository->delete($categoryId,$deleteChildren);
     }
 
+    /**
+     * Create a new field, link the category with the new created field and return the category with the linked field
+     * @param integer $categoryId
+     * @param string $key
+     * @param string $value
+     * @return array
+     */
+    public function createCategoryField($categoryId, $fieldId = null, $key, $value)
+    {
+        $fieldId = $this->categoryRepository->updateOrCreateField($fieldId,$key,$value);
+
+        $this->categoryRepository->linkCategoryField($fieldId, $categoryId, ConfigService::$subjectTypeCategory);
+
+        return $this->categoryRepository->getCategoryField($fieldId, $categoryId);
+    }
+
+    /**
+     * Update a category field and return the category with the field
+     * @param $categoryId
+     * @param $key
+     * @param $value
+     * @return int
+     */
+    public function updateCategoryField($categoryId, $fieldId, $key, $value)
+    {
+        $this->categoryRepository->updateOrCreateField($fieldId, $key ,$value);
+
+        return  $this->categoryRepository->getCategoryField($fieldId, $categoryId);
+    }
+
+    /**
+     * Return the category with the linked field
+     * @param integer $fieldId
+     * @param integer $categoryId
+     * @return array
+     */
+    public function getCategoryField($fieldId, $categoryId)
+    {
+        return $this->categoryRepository->getCategoryField($fieldId, $categoryId);
+    }
+
+    public function getAllCategories()
+    {
+        return $this->categoryRepository->getAllCategories();
+    }
+
+    /**
+     * Call the repository method to unlink the category's field
+     * @param integer $fieldId
+     * @param integer $categoryId
+     * @return bool
+     */
+    public function deleteCategoryField($fieldId, $categoryId)
+    {
+        return $this->categoryRepository->unlinkCategoryField($fieldId, $categoryId);
+    }
 }

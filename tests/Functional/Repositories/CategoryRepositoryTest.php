@@ -463,6 +463,98 @@ class CategoryRepositoryTest extends RailcontentTestCase
         );
     }
 
+    public function test_update_category_and_reposition()
+    {
+        $slug1 = implode('-', $this->faker->words());
+        $slug2 = implode('-', $this->faker->words());
+        $slug3 = implode('-', $this->faker->words());
+
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
+        $categoryId2 = $this->classBeingTested->create($slug2, null, 2, [], []);
+        $categoryId3 = $this->classBeingTested->create($slug3, null, 3, [], []);
+
+        $categoryId1 = $this->classBeingTested->update($categoryId1, $slug1,2);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id' => $categoryId2,
+                'position' => 1,
+                'lft' => 1,
+                'rgt' => 2,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id' => $categoryId1,
+                'position' => 2,
+                'lft' => 3,
+                'rgt' => 4,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id' => $categoryId3,
+                'position' => 3,
+                'lft' => 5,
+                'rgt' => 6,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+    }
+
+    public function test_update_category_and_reposition_2()
+    {
+        $slug1 = implode('-', $this->faker->words());
+        $slug2 = implode('-', $this->faker->words());
+        $slug3 = implode('-', $this->faker->words());
+
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
+        $categoryId2 = $this->classBeingTested->create($slug2, null, 2, [], []);
+        $categoryId3 = $this->classBeingTested->create($slug3, null, 3, [], []);
+
+        $categoryId1 = $this->classBeingTested->update($categoryId1, $slug1,3);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id' => $categoryId2,
+                'position' => 1,
+                'lft' => 1,
+                'rgt' => 2,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id' => $categoryId3,
+                'position' => 2,
+                'lft' => 3,
+                'rgt' => 4,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCategories,
+            [
+                'id' => $categoryId1,
+                'position' => 3,
+                'lft' => 5,
+                'rgt' => 6,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+    }
+
     public function test_delete_category()
     {
         $slug = implode('-', $this->faker->words());
@@ -657,5 +749,157 @@ class CategoryRepositoryTest extends RailcontentTestCase
                 'position' => 1
             ]
         );
+    }
+
+    public function test_insert_field()
+    {
+        $key = implode('-', $this->faker->words());
+        $value = implode('-', $this->faker->words());
+        $field = $this->classBeingTested->updateOrCreateField(1,$key,$value);
+
+        $this->assertEquals(1, $field);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableFields,
+            [
+                'id' => 1,
+                'key' => $key,
+                'value' => $value
+
+            ]
+        );
+    }
+
+    public function test_update_field()
+    {
+        $key = implode('-', $this->faker->words());
+        $value = implode('-', $this->faker->words());
+        $field = $this->classBeingTested->updateOrCreateField(1,$key,$value);
+
+        $this->assertEquals(1, $field);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableFields,
+            [
+                'id' => 1,
+                'key' => $key,
+                'value' => $value
+
+            ]
+        );
+
+        $new_value = implode('-', $this->faker->words());
+        $field = $this->classBeingTested->updateOrCreateField(1,$key,$new_value);
+
+        $this->assertEquals(1, $field);
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableFields,
+            [
+                'id' => 1,
+                'key' => $key,
+                'value' => $value
+
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableFields,
+            [
+                'id' => 1,
+                'key' => $key,
+                'value' => $new_value
+
+            ]
+        );
+    }
+
+    public function test_delete_field()
+    {
+        $id = 1;
+        $key = implode('-', $this->faker->words());
+        $value = implode('-', $this->faker->words());
+
+        $this->classBeingTested->updateOrCreateField($id, $key, $value);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableFields,
+            [
+                'id' => 1,
+                'key' => $key,
+                'value' => $value
+
+            ]
+        );
+
+        $this->classBeingTested->deleteField($id, $key);
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableFields,
+            [
+                'id' => 1,
+                'key' => $key,
+                'value' => $value
+
+            ]
+        );
+    }
+
+    public function test_link_category_field()
+    {
+        $slug = implode('-',$this->faker->words());
+        $categoryId = $this->classBeingTested->create($slug, null, 1);
+
+        $key = implode('-', $this->faker->words());
+        $value = implode('-', $this->faker->words());
+        $fieldId = $this->classBeingTested->updateOrCreateField(null, $key, $value);
+
+        $result = $this->classBeingTested->linkCategoryField($fieldId, $categoryId, ConfigService::$subjectTypeCategory);
+
+        $this->assertEquals(1, $result);
+    }
+
+    public function test_get_category_field()
+    {
+        $slug = implode('-',$this->faker->words());
+        $categoryId = $this->classBeingTested->create($slug, null, 1);
+
+        $key = implode('-', $this->faker->words());
+        $value = implode('-', $this->faker->words());
+        $fieldId = $this->classBeingTested->updateOrCreateField(null, $key, $value);
+
+        $linkCategoryFieldId = $this->classBeingTested->linkCategoryField($fieldId, $categoryId, ConfigService::$subjectTypeCategory);
+
+        $results = $this->classBeingTested->getCategoryField($fieldId, $categoryId);
+
+        $expectedResults = new \stdClass();
+        $expectedResults->id = $linkCategoryFieldId;
+        $expectedResults->subject_id = $categoryId;
+        $expectedResults->subject_type = ConfigService::$subjectTypeCategory;
+        $expectedResults->field_id = $fieldId;
+        $expectedResults->created_at = Carbon::now()->toDateTimeString();
+        $expectedResults->updated_at = Carbon::now()->toDateTimeString();
+        $expectedResults->key = $key;
+        $expectedResults->value = $value;
+
+        $this->assertEquals($expectedResults, $results);
+    }
+
+    public function test_unlink_category_field()
+    {
+        $slug = implode('-',$this->faker->words());
+        $categoryId = $this->classBeingTested->create($slug, null, 1);
+
+        $key = implode('-', $this->faker->words());
+        $value = implode('-', $this->faker->words());
+        $fieldId = $this->classBeingTested->updateOrCreateField(null, $key, $value);
+
+        $this->classBeingTested->linkCategoryField($fieldId, $categoryId, ConfigService::$subjectTypeCategory);
+
+        $results = $this->classBeingTested->unlinkCategoryField($fieldId, $categoryId);
+
+        $this->assertEquals(1, $results);
+
+
     }
 }

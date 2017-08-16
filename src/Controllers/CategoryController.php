@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\CategoryRequest;
+use Railroad\Railcontent\Requests\FieldRequest;
 use Railroad\Railcontent\Services\CategoryService;
 
 class CategoryController extends Controller
@@ -61,7 +62,7 @@ class CategoryController extends Controller
      */
     public function delete($categoryId, Request $request)
     {
-         $category = $this->categoryService->get($categoryId);
+        $category = $this->categoryService->get($categoryId);
 
         if(is_null($category))
         {
@@ -74,5 +75,52 @@ class CategoryController extends Controller
         );
 
         return response()->json($category,200);
+    }
+
+    /**
+     * Create a new field and link category with the new created field.
+     * @param FieldRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function createCategoryField(FieldRequest $request)
+    {
+        $categoryField = $this->categoryService->createCategoryField(
+            $request->input('category_id'),
+            null,
+            $request->input('key'),
+            $request->input('value')
+        );
+
+        return response()->json($categoryField, 200);
+    }
+
+    /**
+     * Call the method from service to update a category field
+     * @param integer $fieldId
+     * @param FieldRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateCategoryField($fieldId, FieldRequest $request)
+    {
+        $categoryField = $this->categoryService->updateCategoryField(
+            $request->input('category_id'),
+            $fieldId,
+            $request->input('key'),
+            $request->input('value')
+        );
+
+        return response()->json($categoryField, 201);
+    }
+
+    /**
+     * Call the method from service to delete the category's field
+     * @param integer $fieldId
+     * @param Request $request
+     */
+    public function deleteCategoryField($fieldId,Request $request)
+    {
+        $categoryField = $this->categoryService->deleteCategoryField($fieldId, $request->input('category_id'));
+
+        return response()->json($categoryField,200);
     }
 }

@@ -53,4 +53,14 @@ class ConfigService
      * @var string
      */
     public static $tableSubjectData;
+
+    /**
+     * @var string
+     */
+    public static $subjectTypeCategory;
+
+    /**
+     * @var string
+     */
+    public static $subjectTypeContent;
 }

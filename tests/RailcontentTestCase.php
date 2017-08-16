@@ -65,6 +65,8 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.tables', $defaultConfig['tables']);
         $app['config']->set('railcontent.database_connection_name', 'testbench');
         $app['config']->set('railcontent.cache_duration', 60);
+        $app['config']->set('railcontent.subject_type_category', $defaultConfig['subject_type_category']);
+        $app['config']->set('railcontent.subject_type_content', $defaultConfig['subject_type_content']);
 
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testbench');
