@@ -23,7 +23,7 @@ class CreateContentTable extends Migration
                 $table->string('status', 64)->index();
                 $table->string('type', 64)->index();
                 $table->integer('position')->index();
-                $table->dateTime('published_on')->index();
+                $table->dateTime('published_on')->index()->nullable();
 
                 $table->timestamps();
             }

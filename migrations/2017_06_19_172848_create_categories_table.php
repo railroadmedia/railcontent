@@ -26,7 +26,7 @@ class CreateCategoriesTable extends Migration
                 $table->integer('rgt')->index();
                 $table->integer('parent_id')->index()->nullable();
                 $table->integer('position')->index();
-                $table->dateTime('published_on')->index();
+                $table->dateTime('published_on')->index()->nullable();
 
                 $table->unique(['slug', 'parent_id']);
 
