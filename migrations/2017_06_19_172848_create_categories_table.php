@@ -20,10 +20,13 @@ class CreateCategoriesTable extends Migration
                 $table->increments('id');
 
                 $table->string('slug', 255)->index();
+                $table->string('status', 64)->index();
+                $table->string('type', 64)->index();
                 $table->integer('lft')->index();
                 $table->integer('rgt')->index();
                 $table->integer('parent_id')->index()->nullable();
                 $table->integer('position')->index();
+                $table->dateTime('published_on')->index();
 
                 $table->unique(['slug', 'parent_id']);
 
