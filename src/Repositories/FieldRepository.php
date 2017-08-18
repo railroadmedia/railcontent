@@ -154,6 +154,6 @@ class FieldRepository extends RepositoryBase
      */
     public function subjectFieldsQuery()
     {
-        return parent::connection()->table(ConfigService::$tableSubjectFields);
+        return parent::connection()->table(ConfigService::$tableContentFields);
     }
 }

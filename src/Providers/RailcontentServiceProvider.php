@@ -2,7 +2,9 @@
 
 namespace Railroad\Railcontent\Providers;
 
+use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use PDO;
 use Railroad\Railcontent\Services\ConfigService;
 
 class RailcontentServiceProvider extends ServiceProvider
@@ -14,6 +16,15 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // this makes all database calls return arrays rather than objects
+        $this->listen = [
+            StatementPrepared::class => [
+                function ($event) {
+                    $event->statement->setFetchMode(PDO::FETCH_ASSOC);
+                }
+            ]
+        ];
+
         parent::boot();
 
         $this->setupConfig();
@@ -27,7 +38,7 @@ class RailcontentServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
 
         //load package routes file
-        $this->loadRoutesFrom(__DIR__.'/../routes.php');
+        $this->loadRoutesFrom(__DIR__ . '/../routes.php');
     }
 
     /**
@@ -49,20 +60,12 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$databaseConnectionName = config('railcontent.database_connection_name');
 
         // Tables
-        ConfigService::$tableCategories = config('railcontent.tables.categories');
         ConfigService::$tableContent = config('railcontent.tables.content');
-        ConfigService::$tableContentCategories = config('railcontent.tables.content_categories');
         ConfigService::$tableVersions = config('railcontent.tables.versions');
         ConfigService::$tableFields = config('railcontent.tables.fields');
-        ConfigService::$tableSubjectFields = config('railcontent.tables.subject_fields');
+        ConfigService::$tableContentFields = config('railcontent.tables.subject_fields');
         ConfigService::$tableData = config('railcontent.tables.data');
-        ConfigService::$tableSubjectData = config('railcontent.tables.subject_data');
-
-        //Subject type category
-        ConfigService::$subjectTypeCategory = config('railcontent.subject_type_category');
-
-        //Subject type content
-        ConfigService::$subjectTypeContent = config('railcontent.subject_type_content');
+        ConfigService::$tableContentData = config('railcontent.tables.subject_data');
 
         //Category status
         ConfigService::$categoryStatusNew = config('railcontent.category_status.new');

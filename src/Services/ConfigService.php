@@ -17,17 +17,7 @@ class ConfigService
     /**
      * @var string
      */
-    public static $tableCategories;
-
-    /**
-     * @var string
-     */
     public static $tableContent;
-
-    /**
-     * @var string
-     */
-    public static $tableContentCategories;
 
     /**
      * @var string
@@ -42,7 +32,7 @@ class ConfigService
     /**
      * @var string
      */
-    public static $tableSubjectFields;
+    public static $tableContentFields;
 
     /**
      * @var string
@@ -52,17 +42,7 @@ class ConfigService
     /**
      * @var string
      */
-    public static $tableSubjectData;
-
-    /**
-     * @var string
-     */
-    public static $subjectTypeCategory;
-
-    /**
-     * @var string
-     */
-    public static $subjectTypeContent;
+    public static $tableContentData;
 
     /**
      * @var string

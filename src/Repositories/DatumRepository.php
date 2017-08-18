@@ -136,7 +136,7 @@ class DatumRepository extends RepositoryBase
      */
     public function subjectDataQuery()
     {
-        return parent::connection()->table(ConfigService::$tableSubjectData);
+        return parent::connection()->table(ConfigService::$tableContentData);
     }
 
 }
