@@ -63,4 +63,9 @@ class ConfigService
      * @var string
      */
     public static $subjectTypeContent;
+
+    /**
+     * @var string
+     */
+    public static $categoryStatusNew;
 }

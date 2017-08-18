@@ -15,5 +15,9 @@ return [
         'subject_fields' => 'railcontent_subject_fields',
         'data' => 'railcontent_data',
         'subject_data' => 'railcontent_subject_data',
+    ],
+    'category_status' => [
+        'new' => 'New'
     ]
+
 ];

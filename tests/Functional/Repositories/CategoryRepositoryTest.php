@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\CategoryRepository;
+use Railroad\Railcontent\Repositories\FieldRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -24,8 +25,9 @@ class CategoryRepositoryTest extends RailcontentTestCase
     public function test_create_single()
     {
         $slug = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+        $categoryId = $this->classBeingTested->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
@@ -47,10 +49,11 @@ class CategoryRepositoryTest extends RailcontentTestCase
         $slug = implode('-', $this->faker->words());
         $slug2 = implode('-', $this->faker->words());
         $slug3 = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
-        $category2Id = $this->classBeingTested->create($slug2, null, 1, [], []);
-        $category3Id = $this->classBeingTested->create($slug3, null, 1, [], []);
+        $categoryId = $this->classBeingTested->create($slug, null, 1,  ConfigService::$categoryStatusNew, $type);
+        $category2Id = $this->classBeingTested->create($slug2, null, 1, ConfigService::$categoryStatusNew, $type);
+        $category3Id = $this->classBeingTested->create($slug3, null, 1, ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
@@ -85,13 +88,14 @@ class CategoryRepositoryTest extends RailcontentTestCase
         $slug4 = implode('-', $this->faker->words());
         $slug5 = implode('-', $this->faker->words());
         $slug6 = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
-        $category2Id = $this->classBeingTested->create($slug2, $categoryId, 1, [], []);
-        $category3Id = $this->classBeingTested->create($slug3, $category2Id, 1, [], []);
-        $category4Id = $this->classBeingTested->create($slug4, $category2Id, 1, [], []);
-        $category5Id = $this->classBeingTested->create($slug5, $categoryId, 1, [], []);
-        $category6Id = $this->classBeingTested->create($slug6, $categoryId, 99, [], []);
+        $categoryId = $this->classBeingTested->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
+        $category2Id = $this->classBeingTested->create($slug2, $categoryId, 1, ConfigService::$categoryStatusNew, $type);
+        $category3Id = $this->classBeingTested->create($slug3, $category2Id, 1, ConfigService::$categoryStatusNew, $type);
+        $category4Id = $this->classBeingTested->create($slug4, $category2Id, 1, ConfigService::$categoryStatusNew, $type);
+        $category5Id = $this->classBeingTested->create($slug5, $categoryId, 1, ConfigService::$categoryStatusNew, $type);
+        $category6Id = $this->classBeingTested->create($slug6, $categoryId, 99, ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
@@ -146,9 +150,10 @@ class CategoryRepositoryTest extends RailcontentTestCase
     {
         $slug = implode('-', $this->faker->words());
         $slug2 = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId = $this->classBeingTested->create($slug, null, 5, [], []);
-        $category2Id = $this->classBeingTested->create($slug2, null, -54, [], []);
+        $categoryId = $this->classBeingTested->create($slug, null, 5, ConfigService::$categoryStatusNew, $type);
+        $category2Id = $this->classBeingTested->create($slug2, null, -54,ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
@@ -202,16 +207,17 @@ class CategoryRepositoryTest extends RailcontentTestCase
         $slug7 = implode('-', $this->faker->words());
         $slug8 = implode('-', $this->faker->words());
         $slug9 = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
-        $categoryId2 = $this->classBeingTested->create($slug2, $categoryId1, 1, [], []);
-        $categoryId3 = $this->classBeingTested->create($slug3, $categoryId2, 1, [], []);
-        $categoryId4 = $this->classBeingTested->create($slug4, $categoryId2, 2, [], []);
-        $categoryId5 = $this->classBeingTested->create($slug5, $categoryId2, 3, [], []);
-        $categoryId6 = $this->classBeingTested->create($slug6, $categoryId2, 4, [], []);
-        $categoryId7 = $this->classBeingTested->create($slug7, $categoryId6, 1, [], []);
-        $categoryId8 = $this->classBeingTested->create($slug8, $categoryId1, 2, [], []);
-        $categoryId9 = $this->classBeingTested->create($slug9, null, 2, [], []);
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId2 = $this->classBeingTested->create($slug2, $categoryId1, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId3 = $this->classBeingTested->create($slug3, $categoryId2, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId4 = $this->classBeingTested->create($slug4, $categoryId2, 2, ConfigService::$categoryStatusNew, $type);
+        $categoryId5 = $this->classBeingTested->create($slug5, $categoryId2, 3, ConfigService::$categoryStatusNew, $type);
+        $categoryId6 = $this->classBeingTested->create($slug6, $categoryId2, 4, ConfigService::$categoryStatusNew, $type);
+        $categoryId7 = $this->classBeingTested->create($slug7, $categoryId6, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId8 = $this->classBeingTested->create($slug8, $categoryId1, 2, ConfigService::$categoryStatusNew, $type);
+        $categoryId9 = $this->classBeingTested->create($slug9, null, 2, ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
@@ -342,10 +348,11 @@ class CategoryRepositoryTest extends RailcontentTestCase
         $slug1 = implode('-', $this->faker->words());
         $slug2 = implode('-', $this->faker->words());
         $slug3 = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
-        $categoryId2 = $this->classBeingTested->create($slug2, $categoryId1, 1, [], []);
-        $categoryId3 = $this->classBeingTested->create($slug3, null, 2, [], []);
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId2 = $this->classBeingTested->create($slug2, $categoryId1, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId3 = $this->classBeingTested->create($slug3, null, 2, ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
@@ -391,9 +398,10 @@ class CategoryRepositoryTest extends RailcontentTestCase
     {
         $slug = implode('-', $this->faker->words());
         $updated_slug = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
-        $this->classBeingTested->update($categoryId, $updated_slug,1, [], []);
+        $categoryId = $this->classBeingTested->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
+        $this->classBeingTested->update($categoryId, $updated_slug,1, ConfigService::$categoryStatusNew, $type);
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
             [
@@ -409,10 +417,11 @@ class CategoryRepositoryTest extends RailcontentTestCase
         $slug1 = implode('-', $this->faker->words());
         $slug2 = implode('-', $this->faker->words());
         $slug3 = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
-        $categoryId11 = $this->classBeingTested->create($slug2, $categoryId1, 1, [], []);
-        $categoryId12 = $this->classBeingTested->create($slug3, $categoryId1, 2, [], []);
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId11 = $this->classBeingTested->create($slug2, $categoryId1, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId12 = $this->classBeingTested->create($slug3, $categoryId1, 2, ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
@@ -438,7 +447,7 @@ class CategoryRepositoryTest extends RailcontentTestCase
             ]
         );
 
-        $categoryId12 = $this->classBeingTested->update($categoryId12, $slug3,1);
+        $categoryId12 = $this->classBeingTested->update($categoryId12, $slug3,1, ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
         ConfigService::$tableCategories,
@@ -468,12 +477,13 @@ class CategoryRepositoryTest extends RailcontentTestCase
         $slug1 = implode('-', $this->faker->words());
         $slug2 = implode('-', $this->faker->words());
         $slug3 = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
-        $categoryId2 = $this->classBeingTested->create($slug2, null, 2, [], []);
-        $categoryId3 = $this->classBeingTested->create($slug3, null, 3, [], []);
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId2 = $this->classBeingTested->create($slug2, null, 2, ConfigService::$categoryStatusNew, $type);
+        $categoryId3 = $this->classBeingTested->create($slug3, null, 3, ConfigService::$categoryStatusNew, $type);
 
-        $categoryId1 = $this->classBeingTested->update($categoryId1, $slug1,2);
+        $categoryId1 = $this->classBeingTested->update($categoryId1, $slug1,2, ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
@@ -514,12 +524,13 @@ class CategoryRepositoryTest extends RailcontentTestCase
         $slug1 = implode('-', $this->faker->words());
         $slug2 = implode('-', $this->faker->words());
         $slug3 = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
-        $categoryId2 = $this->classBeingTested->create($slug2, null, 2, [], []);
-        $categoryId3 = $this->classBeingTested->create($slug3, null, 3, [], []);
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId2 = $this->classBeingTested->create($slug2, null, 2, ConfigService::$categoryStatusNew, $type);
+        $categoryId3 = $this->classBeingTested->create($slug3, null, 3, ConfigService::$categoryStatusNew, $type);
 
-        $categoryId1 = $this->classBeingTested->update($categoryId1, $slug1,3);
+        $categoryId1 = $this->classBeingTested->update($categoryId1, $slug1,3, ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
@@ -558,8 +569,9 @@ class CategoryRepositoryTest extends RailcontentTestCase
     public function test_delete_category()
     {
         $slug = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+        $categoryId = $this->classBeingTested->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
@@ -585,11 +597,12 @@ class CategoryRepositoryTest extends RailcontentTestCase
         $slug2 = implode('-', $this->faker->words());
         $slug3 = implode('-', $this->faker->words());
         $slug4 = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
-        $categoryId11 = $this->classBeingTested->create($slug2, $categoryId1, 1, [], []);
-        $categoryId12 = $this->classBeingTested->create($slug3, $categoryId1, 2, [], []);
-        $categoryId2 = $this->classBeingTested->create($slug4, null, 2, [], []);
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId11 = $this->classBeingTested->create($slug2, $categoryId1, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId12 = $this->classBeingTested->create($slug3, $categoryId1, 2, ConfigService::$categoryStatusNew, $type);
+        $categoryId2 = $this->classBeingTested->create($slug4, null, 2,ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
@@ -652,11 +665,12 @@ class CategoryRepositoryTest extends RailcontentTestCase
         $slug2 = implode('-', $this->faker->words());
         $slug3 = implode('-', $this->faker->words());
         $slug4 = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
-        $categoryId11 = $this->classBeingTested->create($slug2, $categoryId1, 1, [], []);
-        $categoryId12 = $this->classBeingTested->create($slug3, $categoryId1, 2, [], []);
-        $categoryId2 = $this->classBeingTested->create($slug4, null, 2, [], []);
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1,ConfigService::$categoryStatusNew, $type);
+        $categoryId11 = $this->classBeingTested->create($slug2, $categoryId1, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId12 = $this->classBeingTested->create($slug3, $categoryId1, 2, ConfigService::$categoryStatusNew, $type);
+        $categoryId2 = $this->classBeingTested->create($slug4, null, 2, ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
@@ -713,10 +727,11 @@ class CategoryRepositoryTest extends RailcontentTestCase
         $slug1 = implode('-', $this->faker->words());
         $slug2 = implode('-', $this->faker->words());
         $slug3 = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, [], []);
-        $categoryId11 = $this->classBeingTested->create($slug2, $categoryId1, 1, [], []);
-        $categoryId12 = $this->classBeingTested->create($slug3, $categoryId1, 2, [], []);
+        $categoryId1 = $this->classBeingTested->create($slug1, null, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId11 = $this->classBeingTested->create($slug2, $categoryId1, 1, ConfigService::$categoryStatusNew, $type);
+        $categoryId12 = $this->classBeingTested->create($slug3, $categoryId1, 2, ConfigService::$categoryStatusNew, $type);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCategories,
@@ -751,155 +766,5 @@ class CategoryRepositoryTest extends RailcontentTestCase
         );
     }
 
-    public function test_insert_field()
-    {
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-        $field = $this->classBeingTested->updateOrCreateField(1,$key,$value);
 
-        $this->assertEquals(1, $field);
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableFields,
-            [
-                'id' => 1,
-                'key' => $key,
-                'value' => $value
-
-            ]
-        );
-    }
-
-    public function test_update_field()
-    {
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-        $field = $this->classBeingTested->updateOrCreateField(1,$key,$value);
-
-        $this->assertEquals(1, $field);
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableFields,
-            [
-                'id' => 1,
-                'key' => $key,
-                'value' => $value
-
-            ]
-        );
-
-        $new_value = implode('-', $this->faker->words());
-        $field = $this->classBeingTested->updateOrCreateField(1,$key,$new_value);
-
-        $this->assertEquals(1, $field);
-
-        $this->assertDatabaseMissing(
-            ConfigService::$tableFields,
-            [
-                'id' => 1,
-                'key' => $key,
-                'value' => $value
-
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableFields,
-            [
-                'id' => 1,
-                'key' => $key,
-                'value' => $new_value
-
-            ]
-        );
-    }
-
-    public function test_delete_field()
-    {
-        $id = 1;
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-
-        $this->classBeingTested->updateOrCreateField($id, $key, $value);
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableFields,
-            [
-                'id' => 1,
-                'key' => $key,
-                'value' => $value
-
-            ]
-        );
-
-        $this->classBeingTested->deleteField($id, $key);
-
-        $this->assertDatabaseMissing(
-            ConfigService::$tableFields,
-            [
-                'id' => 1,
-                'key' => $key,
-                'value' => $value
-
-            ]
-        );
-    }
-
-    public function test_link_category_field()
-    {
-        $slug = implode('-',$this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1);
-
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-        $fieldId = $this->classBeingTested->updateOrCreateField(null, $key, $value);
-
-        $result = $this->classBeingTested->linkCategoryField($fieldId, $categoryId, ConfigService::$subjectTypeCategory);
-
-        $this->assertEquals(1, $result);
-    }
-
-    public function test_get_category_field()
-    {
-        $slug = implode('-',$this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1);
-
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-        $fieldId = $this->classBeingTested->updateOrCreateField(null, $key, $value);
-
-        $linkCategoryFieldId = $this->classBeingTested->linkCategoryField($fieldId, $categoryId, ConfigService::$subjectTypeCategory);
-
-        $results = $this->classBeingTested->getCategoryField($fieldId, $categoryId);
-
-        $expectedResults = new \stdClass();
-        $expectedResults->id = $linkCategoryFieldId;
-        $expectedResults->subject_id = $categoryId;
-        $expectedResults->subject_type = ConfigService::$subjectTypeCategory;
-        $expectedResults->field_id = $fieldId;
-        $expectedResults->created_at = Carbon::now()->toDateTimeString();
-        $expectedResults->updated_at = Carbon::now()->toDateTimeString();
-        $expectedResults->key = $key;
-        $expectedResults->value = $value;
-
-        $this->assertEquals($expectedResults, $results);
-    }
-
-    public function test_unlink_category_field()
-    {
-        $slug = implode('-',$this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1);
-
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-        $fieldId = $this->classBeingTested->updateOrCreateField(null, $key, $value);
-
-        $this->classBeingTested->linkCategoryField($fieldId, $categoryId, ConfigService::$subjectTypeCategory);
-
-        $results = $this->classBeingTested->unlinkCategoryField($fieldId, $categoryId);
-
-        $this->assertEquals(1, $results);
-
-
-    }
 }

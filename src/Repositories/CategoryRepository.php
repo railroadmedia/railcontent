@@ -24,12 +24,13 @@ class CategoryRepository extends RepositoryBase
      * @param integer $position
      * @return int $categoryId
      */
-    public function create($slug, $parentId, $position)
+    public function create($slug, $parentId, $position, $status, $type)
     {
         $categoryId = null;
 
         $this->transaction(
-            function () use ($slug, $parentId, $position, &$categoryId) {
+            function () use ($slug, $parentId, $position, &$categoryId, $status, $type) {
+
                 $categoryId = $this->query()->insertGetId(
                     [
                         'slug' => $slug,
@@ -37,6 +38,9 @@ class CategoryRepository extends RepositoryBase
                         'lft' => 0,
                         'rgt' => 0,
                         'position' => $position,
+                        'status' => $status,
+                        'type' => $type,
+                        'published_on' => null,
                         'created_at' => Carbon::now()->toDateTimeString(),
                         'updated_at' => Carbon::now()->toDateTimeString(),
                     ]
@@ -58,14 +62,16 @@ class CategoryRepository extends RepositoryBase
      * @param integer $position
      * @return integer $categoryId
      */
-    public function update($categoryId, $slug, $position)
+    public function update($categoryId, $slug, $position, $status, $type)
     {
         $this->transaction(
-            function () use ($slug,  $position, &$categoryId) {
+            function () use ($slug,  $position, &$categoryId, $status, $type) {
                 $this->query()->where('id', $categoryId)->update(
                     [
                         'slug' => $slug,
                         'position' => $position,
+                        'status' => $status,
+                        'type' => $type,
                         'updated_at' => Carbon::now()->toDateTimeString(),
                     ]
                 );
@@ -76,50 +82,6 @@ class CategoryRepository extends RepositoryBase
         );
 
         return $categoryId;
-
-    }
-
-    /**
-     * Update or insert a new record in the railcontent_fields table
-     * @param integer $id
-     * @param string $key
-     * @param string $value
-     * @return int
-     */
-    public function updateOrCreateField($id, $key, $value)
-    {
-        $update = $this->field_query()->where('id', $id)->update(
-            [
-                       'key' => $key,
-                       'value' => $value,
-                       'updated_at' => Carbon::now()->toDateTimeString()
-            ]
-        );
-
-        if(!$update){
-            $id = $this->field_query()->insertGetId(
-                [
-                       'key' => $key,
-                       'value' => $value,
-                       'created_at' => Carbon::now()->toDateTimeString(),
-                       'updated_at' => Carbon::now()->toDateTimeString()
-                ]
-            );
-        }
-
-        return $id;
-    }
-
-    /**
-     * Update or insert a new record in railcontent_data table
-     * @param integer $id
-     * @param string $key
-     * @param string $value
-     * @return int
-     */
-    public function updateOrCreateDatum($id, $key, $value)
-    {
-
     }
 
     /**
@@ -140,14 +102,11 @@ class CategoryRepository extends RepositoryBase
                     return $delete;
                 }
 
-                //unlink category content
-                $this->unlinkCategoryContent($categoryId);
-
-                //unlink category fields
-                $this->unlinkCategoryFields($categoryId);
-
                 //unlink category datum
                 $this->unlinkCategoryDatum($categoryId);
+
+                //unlink category content
+                $this->unlinkCategoryContent($categoryId);
 
                 if($deleteChildren)
                 {
@@ -174,23 +133,6 @@ class CategoryRepository extends RepositoryBase
         );
 
         return $delete;
-    }
-
-    /**
-     * Delete a record from railcontent_fields table
-     * @param integer $id
-     */
-    public function deleteField($id)
-    {
-        return $this->field_query()->where([
-            'id' => $id
-            ]
-        )->delete();
-    }
-
-    public function deleteDatum($id, $key)
-    {
-
     }
 
     /** Return the category with the requested id from the database
@@ -295,41 +237,9 @@ class CategoryRepository extends RepositoryBase
     /**
      * @return Builder
      */
-    public function field_query()
-    {
-        return parent::connection()->table(ConfigService::$tableFields);
-    }
-
-    /**
-     * @return Builder
-     */
-    public function data_query()
-    {
-        return parent::connection()->table(ConfigService::$tableData);
-    }
-
-    /**
-     * @return Builder
-     */
-    public function content_categories_query()
+    public function contentCategoriesQuery()
     {
         return parent::connection()->table(ConfigService::$tableContentCategories);
-    }
-
-    /**
-     * @return Builder
-     */
-    public function subject_fields_query()
-    {
-        return parent::connection()->table(ConfigService::$tableSubjectFields);
-    }
-
-    /**
-     * @return Builder
-     */
-    public function subject_data_query()
-    {
-        return parent::connection()->table(ConfigService::$tableSubjectData);
     }
 
     /** Update position for other categories with the same parent id
@@ -371,76 +281,7 @@ class CategoryRepository extends RepositoryBase
      */
     function unlinkCategoryContent ($categoryId)
     {
-        $this->content_categories_query()->where('category_id', $categoryId)->delete();
-    }
-
-    /**
-     * Delete the links between category and fields
-     * @param $categoryId
-     */
-    function unlinkCategoryFields ($categoryId)
-    {
-        $this->subject_fields_query()->where(
-            [
-                'subject_id' => $categoryId,
-                'subject_type' => ConfigService::$subjectTypeCategory
-            ]
-        )->delete();
-    }
-
-    /**
-     * Delete the links between category and datum
-     * @param integer $categoryId
-     */
-    function unlinkCategoryDatum ($categoryId)
-    {
-        $this->subject_data_query()->where(
-            [
-                'subject_id' => $categoryId,
-                'subject_type' => ConfigService::$subjectTypeCategory
-            ]
-        )->delete();
-    }
-
-    /**
-     * Insert a new record in railcontent_subject_fields table
-     * @param integer $fieldId
-     * @param integer $categoryId
-     * @param string $subjectType
-     * @return int
-     */
-    public function linkCategoryField($fieldId, $categoryId, $subjectType)
-    {
-        $categoryFieldId =  $this->subject_fields_query()->insertGetId(
-            [
-                 'subject_id' => $categoryId,
-                 'subject_type' => $subjectType,
-                 'field_id' => $fieldId,
-                 'created_at' => Carbon::now()->toDateTimeString(),
-                 'updated_at' => Carbon::now()->toDateTimeString()
-            ]);
-
-        return $categoryFieldId;
-    }
-
-    /**
-     * Get the category and the field data from database
-     * @param integer $fieldId
-     * @return mixed
-     */
-    public function getCategoryField($fieldId, $categoryId)
-    {
-        $fieldIdLabel = ConfigService::$tableFields.'.id';
-
-        return $this->subject_fields_query()
-            ->leftJoin(ConfigService::$tableFields,'field_id','=',$fieldIdLabel)
-            ->where(
-                [
-                    'field_id' => $fieldId,
-                    'subject_id' => $categoryId,
-                    'subject_type' => ConfigService::$subjectTypeCategory
-                ]
-            )->get()->first();
+        $this->contentCategoriesQuery()->where('category_id', $categoryId)->delete();
     }
 
     /**
@@ -467,38 +308,25 @@ class CategoryRepository extends RepositoryBase
     }
 
     /**
-     * Get all category linked fields data
-     * @param integer $categoryId
-     * @return array
+     * Unlink category datum
+     * @param $this
+     * @param $categoryId
      */
-    public function getCategoryFields($categoryId)
+    function unlinkCategoryDatum ($categoryId)
     {
-        $fieldIdLabel = ConfigService::$tableFields.'.id';
-
-        return $this->subject_fields_query()
-            ->leftJoin(ConfigService::$tableFields,'field_id','=',$fieldIdLabel)
-            ->where(
-        [
-            'subject_id' => $categoryId,
-            'subject_type' => ConfigService::$subjectTypeCategory
-        ]
-        )->get()->toArray();
+        $this->subjectDataQuery()->where(
+            [
+                'subject_id' => $categoryId,
+                'subject_type' => 'category'
+            ]
+        )->delete();
     }
 
     /**
-     * Delete the link between category and field
-     * @param integer $fieldId
-     * @param integer $categoryId
-     * @return int
+     * @return Builder
      */
-    public function unlinkCategoryField($fieldId, $categoryId)
+    public function subjectDataQuery()
     {
-        return $this->subject_fields_query()->where(
-            [
-                'subject_id' => $categoryId,
-                'subject_type' => ConfigService::$subjectTypeCategory,
-                'field_id' => $fieldId
-            ]
-        )->delete();
+        return parent::connection()->table(ConfigService::$tableSubjectData);
     }
 }

@@ -63,5 +63,8 @@ class RailcontentServiceProvider extends ServiceProvider
 
         //Subject type content
         ConfigService::$subjectTypeContent = config('railcontent.subject_type_content');
+
+        //Category status
+        ConfigService::$categoryStatusNew = config('railcontent.category_status.new');
     }
 }

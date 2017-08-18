@@ -5,16 +5,18 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\CategoryRequest;
-use Railroad\Railcontent\Requests\FieldRequest;
 use Railroad\Railcontent\Services\CategoryService;
+use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\FieldService;
 
 class CategoryController extends Controller
 {
-    private $categoryService;
+    private $categoryService, $fieldService, $datumService;
 
-    public function __construct(CategoryService $categoryService)
+    public function __construct(CategoryService $categoryService, FieldService $fieldService)
     {
         $this->categoryService = $categoryService;
+        $this->fieldService = $fieldService;
     }
 
     /** Create a new category and return it in JSON format
@@ -26,7 +28,10 @@ class CategoryController extends Controller
         $category = $this->categoryService->create(
             $request->input('slug'),
             $request->input('parentId'),
-            $request->input('position'));
+            $request->input('position'),
+            $request->input('status'),
+            $request->input('type')
+    );
 
         return response()->json($category,200);
     }
@@ -48,7 +53,9 @@ class CategoryController extends Controller
         $category = $this->categoryService->update(
             $categoryId,
             $request->input('slug'),
-            $request->input('position')
+            $request->input('position'),
+            $request->input('status'),
+            $request->input('type')
         );
 
         return response()->json($category,201);
@@ -69,58 +76,14 @@ class CategoryController extends Controller
             return response()->json('Category not found',404);
         }
 
-        $category = $this->categoryService->delete(
+        //unlink category fields
+        $this->fieldService->deleteCategoryFields($categoryId);
+
+        $deleted = $this->categoryService->delete(
             $categoryId,
             $request->input('deleteChildren')
         );
 
-        return response()->json($category,200);
-    }
-
-    /**
-     * Create a new field and link category with the new created field.
-     * @param FieldRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function createCategoryField(FieldRequest $request)
-    {
-        $categoryField = $this->categoryService->createCategoryField(
-            $request->input('category_id'),
-            null,
-            $request->input('key'),
-            $request->input('value')
-        );
-
-        return response()->json($categoryField, 200);
-    }
-
-    /**
-     * Call the method from service to update a category field
-     * @param integer $fieldId
-     * @param FieldRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function updateCategoryField($fieldId, FieldRequest $request)
-    {
-        $categoryField = $this->categoryService->updateCategoryField(
-            $request->input('category_id'),
-            $fieldId,
-            $request->input('key'),
-            $request->input('value')
-        );
-
-        return response()->json($categoryField, 201);
-    }
-
-    /**
-     * Call the method from service to delete the category's field
-     * @param integer $fieldId
-     * @param Request $request
-     */
-    public function deleteCategoryField($fieldId,Request $request)
-    {
-        $categoryField = $this->categoryService->deleteCategoryField($fieldId, $request->input('category_id'));
-
-        return response()->json($categoryField,200);
+        return response()->json($deleted,200);
     }
 }

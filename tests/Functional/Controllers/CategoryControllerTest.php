@@ -27,8 +27,9 @@ class CategoryControllerTest extends RailcontentTestCase
     public function test_store_response_status()
     {
         $slug = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $response = $this->call('POST', 'category', ['slug'=>$slug,'position'=>1]);
+        $response = $this->call('POST', 'category', ['slug'=>$slug,'position'=>1, 'status' => ConfigService::$categoryStatusNew, 'type' => $type]);
 
         $this->assertEquals(200, $response->status());
     }
@@ -42,8 +43,8 @@ class CategoryControllerTest extends RailcontentTestCase
 
         $response->assertSessionHasErrors();
 
-        //expecting session has error for missing fields
-        $response->assertSessionHasErrors(['slug','position']);
+        //expecting session has error for all missing fields
+        $response->assertSessionHasErrors(['slug','position','status','type']);
     }
 
     public function test_store_with_negative_position()
@@ -70,11 +71,24 @@ class CategoryControllerTest extends RailcontentTestCase
         $response->assertSessionHasErrors(['slug']);
     }
 
+    public function test_store_published_on_not_required()
+    {
+        $slug = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
+
+        $response = $this->call('POST', 'category', ['slug' => $slug, 'position' => 1,  'status' => ConfigService::$categoryStatusNew, 'type' => $type]);
+
+        //expecting that the response has a successful status code
+        $response->assertSuccessful();
+
+    }
+
     public function test_category_created_is_returned_in_json_format()
     {
         $slug = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $response = $this->call('POST', 'category', ['slug' => $slug, 'position' => 1]);
+        $response = $this->call('POST', 'category', ['slug' => $slug, 'position' => 1,  'status' => ConfigService::$categoryStatusNew, 'type' => $type]);
 
         $response->assertJson(
             [
@@ -84,6 +98,8 @@ class CategoryControllerTest extends RailcontentTestCase
                 'lft' => '1',
                 'rgt' => '2',
                 'parent_id' => null,
+                'status' => ConfigService::$categoryStatusNew,
+                'type' => $type,
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString(),
             ]
@@ -93,7 +109,9 @@ class CategoryControllerTest extends RailcontentTestCase
     public function test_category_service_return_new_category_after_create()
     {
         $slug = implode('-', $this->faker->words());
-        $category = $this->serviceBeingTested->create($slug, null, 1);
+        $type = $this->faker->text(64);
+
+        $category = $this->serviceBeingTested->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
 
         $expectedResult = new \stdClass();
         $expectedResult->id = 1;
@@ -102,18 +120,22 @@ class CategoryControllerTest extends RailcontentTestCase
         $expectedResult->lft = 1;
         $expectedResult->rgt = 2;
         $expectedResult->parent_id = null;
+        $expectedResult->status = ConfigService::$categoryStatusNew;
+        $expectedResult->type = $type;
+        $expectedResult->published_on = null;
         $expectedResult->created_at =  Carbon::now()->toDateTimeString();
         $expectedResult->updated_at =  Carbon::now()->toDateTimeString();
 
         $this->assertEquals($expectedResult, $category);
+
     }
 
     public function test_update_response_status()
     {
         $slug = implode('-', $this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+        $categoryId = $this->classBeingTested->create($slug, null, 1,  'new', 'type');
 
-        $response = $this->call('PUT', 'category/'.$categoryId, ['slug' => $slug, 'position'=> 1]);
+        $response = $this->call('PUT', 'category/'.$categoryId, ['slug' => $slug, 'position'=> 1,  'status' => 'new', 'type' => 'type']);
 
         $this->assertEquals(201, $response->status());
     }
@@ -121,8 +143,9 @@ class CategoryControllerTest extends RailcontentTestCase
     public function test_update_missing_category_response_status()
     {
         $slug = implode('-', $this->faker->words());
+        $type = $this->faker->text(64);
 
-        $response = $this->call('PUT', 'category/1', ['slug' => $slug, 'position'=> 1]);
+        $response = $this->call('PUT', 'category/1', ['slug' => $slug, 'position'=> 1,  'status' => ConfigService::$categoryStatusNew, 'type' => $type]);
 
         $this->assertEquals(404, $response->status());
     }
@@ -130,7 +153,9 @@ class CategoryControllerTest extends RailcontentTestCase
     public function test_update_with_negative_position()
     {
         $slug = implode('-', $this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+        $type = $this->faker->text(64);
+        
+        $categoryId = $this->classBeingTested->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
 
         $response = $this->call('PUT', 'category/'.$categoryId, ['slug' => $slug, 'position' => -1]);
 
@@ -143,7 +168,9 @@ class CategoryControllerTest extends RailcontentTestCase
     public function test_update_not_pass_the_validation()
     {
         $slug = implode('-', $this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+        $type = $this->faker->text(64);
+
+        $categoryId = $this->classBeingTested->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
 
         $response = $this->call('PUT', 'category/'.$categoryId);
 
@@ -153,19 +180,23 @@ class CategoryControllerTest extends RailcontentTestCase
         $response->assertSessionHasErrors();
 
         //expecting session has error for missing fields
-        $response->assertSessionHasErrors(['slug','position']);
+        $response->assertSessionHasErrors(['slug','position','status','type']);
     }
 
     public function test_after_update_category_is_returned_in_json_format()
     {
         $slug = implode('-', $this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+        $type = $this->faker->text(64);
+
+        $categoryId = $this->classBeingTested->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
         $existingCategory = $this->classBeingTested->getById($categoryId);
 
         $new_slug = implode('-', $this->faker->words());
         $response = $this->call('PUT', 'category/'.$categoryId,
                                 [   'slug' => $new_slug,
-                                    'position' => $existingCategory->position
+                                    'position' => $existingCategory->position,
+                                    'status' => ConfigService::$categoryStatusNew,
+                                    'type' => $type
                                 ]);
 
         $response->assertJsonStructure(
@@ -176,6 +207,9 @@ class CategoryControllerTest extends RailcontentTestCase
                 'lft',
                 'rgt' ,
                 'parent_id',
+                'status',
+                'type',
+                'published_on',
                 'created_at',
                 'updated_at',
             ]
@@ -188,6 +222,8 @@ class CategoryControllerTest extends RailcontentTestCase
                 'position' => $existingCategory->position,
                 'lft' => $existingCategory->lft,
                 'rgt' => $existingCategory->rgt,
+                'status' =>  ConfigService::$categoryStatusNew,
+                'type' => $type,
                 'parent_id' => $existingCategory->parent_id,
                 'updated_at' => Carbon::now()->toDateTimeString(),
             ]
@@ -197,10 +233,12 @@ class CategoryControllerTest extends RailcontentTestCase
     public function test_category_service_return_updated_category_after_update()
     {
         $slug = implode('-', $this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+        $type = $this->faker->text(64);
+
+        $categoryId = $this->classBeingTested->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
 
         $new_slug = implode('-', $this->faker->words());
-        $updatedCategory = $this->serviceBeingTested->update($categoryId, $new_slug,  1);
+        $updatedCategory = $this->serviceBeingTested->update($categoryId, $new_slug,  1, ConfigService::$categoryStatusNew, $type);
 
         $expectedResult = new \stdClass();
         $expectedResult->id = $categoryId;
@@ -209,6 +247,9 @@ class CategoryControllerTest extends RailcontentTestCase
         $expectedResult->lft = 1;
         $expectedResult->rgt = 2;
         $expectedResult->parent_id = null;
+        $expectedResult->status = ConfigService::$categoryStatusNew;
+        $expectedResult->type = $type;
+        $expectedResult->published_on = null;
         $expectedResult->created_at =  Carbon::now()->toDateTimeString();
         $expectedResult->updated_at =  Carbon::now()->toDateTimeString();
 
@@ -218,14 +259,16 @@ class CategoryControllerTest extends RailcontentTestCase
     public function test_service_delete_method_result()
     {
         $slug = implode('-', $this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+        $type = $this->faker->text(64);
+
+        $categoryId = $this->classBeingTested->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
 
         $delete = $this->serviceBeingTested->delete($categoryId);
 
         $this->assertTrue($delete);
     }
 
-    public function test_service_delete_method_when_failed()
+    public function test_service_delete_method_when_category_not_exist()
     {
 
         $delete = $this->serviceBeingTested->delete(1);
@@ -236,7 +279,9 @@ class CategoryControllerTest extends RailcontentTestCase
     public function test_controller_delete_method_response_status()
     {
         $slug = implode('-', $this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
+        $type = $this->faker->text(64);
+
+        $categoryId = $this->classBeingTested->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
 
         $response = $this->call('DELETE', 'category/'.$categoryId, ['deleteChildren' => 1]);
 
@@ -256,213 +301,5 @@ class CategoryControllerTest extends RailcontentTestCase
         $response = $this->call('DELETE', 'category/1', ['deleteChildren' => 0]);
 
         $this->assertEquals(404, $response->status());
-    }
-
-    public function test_create_category_field_method_from_service_response()
-    {
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-        $slug = implode('-', $this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
-
-        $categoryField = $this->serviceBeingTested->createCategoryField($categoryId,null,$key,$value);
-
-        $expectedResult = new \stdClass();
-        $expectedResult->id = 1;
-        $expectedResult->subject_id = $categoryId;
-        $expectedResult->subject_type = ConfigService::$subjectTypeCategory;
-        $expectedResult->field_id = 1;
-        $expectedResult->key = $key;
-        $expectedResult->value = $value;
-        $expectedResult->created_at =  Carbon::now()->toDateTimeString();
-        $expectedResult->updated_at =  Carbon::now()->toDateTimeString();
-
-        $this->assertEquals($expectedResult, $categoryField);
-
-    }
-
-    public function test_add_category_field_controller_method_response()
-    {
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-        $response = $this->call('POST', 'category/field', ['category_id'=>1,'key'=>$key, 'value' => $value]);
-
-        $this->assertEquals(200, $response->status());
-
-        $response->assertJsonStructure(
-            [
-                'id' ,
-                'subject_id',
-                'subject_type',
-                'field_id',
-                'created_at',
-                'updated_at',
-            ]
-        );
-
-        $response->assertJson(
-            [
-                'id' => 1,
-                'subject_id' => 1,
-                'subject_type' => ConfigService::$subjectTypeCategory,
-                'field_id' => 1,
-                'created_at' => Carbon::now()->toDateTimeString(),
-                'updated_at' => Carbon::now()->toDateTimeString(),
-                'key' => $key,
-                'value' => $value
-            ]
-        );
-    }
-
-    public function test_add_category_field_not_pass_the_validation()
-    {
-        $response = $this->call('POST', 'category/field');
-
-        $this->assertEquals(302, $response->status());
-
-        $response->assertSessionHasErrors();
-
-        //expecting session has error for missing fields
-        $response->assertSessionHasErrors(['key','value','category_id']);
-    }
-
-    public function test_add_category_field_key_value_not_pass_the_validation()
-    {
-        $key = $this->faker->text(500);
-        $value = $this->faker->text(500);
-        $response = $this->call('POST', 'category/field',['category_id'=>1,'key'=>$key, 'value' => $value]);
-
-        $this->assertEquals(302, $response->status());
-
-        $response->assertSessionHasErrors();
-
-        //expecting session has error for missing fields
-        $response->assertSessionHasErrors(['key','value']);
-    }
-
-    public function test_update_category_field_controller_method_response()
-    {
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-
-        $fieldId = $this->classBeingTested->updateOrCreateField(null,$key,$value);
-        $categoryField = $this->serviceBeingTested->createCategoryField(1,$fieldId,$key,$value);
-
-        $new_value = implode('-', $this->faker->words());
-
-        $response = $this->call('PUT', 'category/field/'.$fieldId, ['category_id'=>1,'key'=>$key, 'value' => $new_value]);
-
-        $this->assertEquals(201, $response->status());
-
-        $response->assertJsonStructure(
-            [
-                'id' ,
-                'subject_id',
-                'subject_type',
-                'field_id',
-                'created_at',
-                'updated_at',
-            ]
-        );
-
-        $response->assertJson(
-            [
-                'id' => 1,
-                'subject_id' => 1,
-                'subject_type' => ConfigService::$subjectTypeCategory,
-                'field_id' => 1,
-                'created_at' => Carbon::now()->toDateTimeString(),
-                'updated_at' => Carbon::now()->toDateTimeString(),
-                'key' => $key,
-                'value' => $new_value
-            ]
-        );
-    }
-
-    public function test_update_category_field_not_pass_validation()
-    {
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-
-        $fieldId = $this->classBeingTested->updateOrCreateField(null,$key,$value);
-        $categoryField = $this->serviceBeingTested->createCategoryField(1,$fieldId,$key,$value);
-
-        $response = $this->call('PUT', 'category/field/'.$fieldId);
-
-        $this->assertEquals(302, $response->status());
-
-        $response->assertSessionHasErrors();
-
-        //expecting session has error for missing fields
-        $response->assertSessionHasErrors(['key','value','category_id']);
-    }
-
-    public function test_delete_category_field_controller()
-    {
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-
-        $fieldId = $this->classBeingTested->updateOrCreateField(null,$key,$value);
-
-        $slug = implode('-', $this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
-
-        $categoryField = $this->serviceBeingTested->createCategoryField($categoryId,$fieldId,$key,$value);
-
-        $response = $this->call('DELETE', 'category/field/'.$fieldId, ['category_id'=>$categoryId]);
-
-        $this->assertEquals(1, $response->content());
-        $this->assertEquals(200, $response->status());
-    }
-
-    public function test_update_category_field_method_from_service_response()
-    {
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-        $slug = implode('-', $this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
-        $categoryField = $this->serviceBeingTested->createCategoryField($categoryId,null,$key,$value);
-
-        $new_value = implode('-', $this->faker->words());
-        $categoryField = $this->serviceBeingTested->updateCategoryField($categoryId, $categoryField->field_id, $key, $new_value);
-
-        $expectedResult = new \stdClass();
-        $expectedResult->id = 1;
-        $expectedResult->subject_id = $categoryId;
-        $expectedResult->subject_type = ConfigService::$subjectTypeCategory;
-        $expectedResult->field_id = 1;
-        $expectedResult->key = $key;
-        $expectedResult->value = $new_value;
-        $expectedResult->created_at =  Carbon::now()->toDateTimeString();
-        $expectedResult->updated_at =  Carbon::now()->toDateTimeString();
-
-        $this->assertEquals($expectedResult, $categoryField);
-
-    }
-
-    public function test_get_category_field_method_from_service_response()
-    {
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-        $slug = implode('-', $this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
-        $categoryField = $this->serviceBeingTested->createCategoryField($categoryId,null,$key,$value);
-
-        $results = $this->serviceBeingTested->getCategoryField($categoryField->field_id, $categoryId);
-
-        $this->assertEquals($categoryField, $results);
-    }
-
-    public function test_delete_category_field_method_from_service_response()
-    {
-        $key = implode('-', $this->faker->words());
-        $value = implode('-', $this->faker->words());
-        $slug = implode('-', $this->faker->words());
-        $categoryId = $this->classBeingTested->create($slug, null, 1, [], []);
-        $categoryField = $this->serviceBeingTested->createCategoryField($categoryId,null,$key,$value);
-
-        $results = $this->serviceBeingTested->deleteCategoryField($categoryField->field_id, $categoryId);
-
-        $this->assertEquals(1, $results);
     }
 }

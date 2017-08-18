@@ -26,7 +26,10 @@ class CategoryRequest extends FormRequest
         return [
             'slug' => 'required|max:255',
             'parentId' => 'nullable',
-            'position' => 'required|numeric|min:0'
+            'position' => 'required|numeric|min:0',
+            'status' => 'required|max:64',
+            'type' => 'required|max:64',
+            'published_on' => 'nullable'
         ];
     }
 }
