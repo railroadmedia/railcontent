@@ -102,9 +102,6 @@ class CategoryRepository extends RepositoryBase
                     return $delete;
                 }
 
-                //unlink category datum
-                $this->unlinkCategoryDatum($categoryId);
-
                 //unlink category content
                 $this->unlinkCategoryContent($categoryId);
 
@@ -305,28 +302,5 @@ class CategoryRepository extends RepositoryBase
     public function getAllCategories()
     {
         return $this->query()->orderBy('parent_id','asc')->orderBy('position','asc')->get()->toArray();
-    }
-
-    /**
-     * Unlink category datum
-     * @param $this
-     * @param $categoryId
-     */
-    function unlinkCategoryDatum ($categoryId)
-    {
-        $this->subjectDataQuery()->where(
-            [
-                'subject_id' => $categoryId,
-                'subject_type' => 'category'
-            ]
-        )->delete();
-    }
-
-    /**
-     * @return Builder
-     */
-    public function subjectDataQuery()
-    {
-        return parent::connection()->table(ConfigService::$tableSubjectData);
     }
 }

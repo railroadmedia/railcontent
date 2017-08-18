@@ -7,16 +7,18 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\CategoryRequest;
 use Railroad\Railcontent\Services\CategoryService;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\DatumService;
 use Railroad\Railcontent\Services\FieldService;
 
 class CategoryController extends Controller
 {
     private $categoryService, $fieldService, $datumService;
 
-    public function __construct(CategoryService $categoryService, FieldService $fieldService)
+    public function __construct(CategoryService $categoryService, FieldService $fieldService, DatumService $datumService)
     {
         $this->categoryService = $categoryService;
         $this->fieldService = $fieldService;
+        $this->datumService = $datumService;
     }
 
     /** Create a new category and return it in JSON format
@@ -78,6 +80,9 @@ class CategoryController extends Controller
 
         //unlink category fields
         $this->fieldService->deleteCategoryFields($categoryId);
+
+        //unlink category datum
+        $this->datumService->unlinkSubjectDatum($categoryId, ConfigService::$subjectTypeCategory);
 
         $deleted = $this->categoryService->delete(
             $categoryId,
