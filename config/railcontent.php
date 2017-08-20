@@ -3,8 +3,6 @@
 return [
     'cache_duration' => 60 * 60 * 24 * 30,
     'database_connection_name' => 'mysql',
-    'subject_type_category' => 'category',
-    'subject_type_content' => 'content',
 
     'tables' => [
         'categories' => 'railcontent_categories',
@@ -16,8 +14,4 @@ return [
         'data' => 'railcontent_data',
         'subject_data' => 'railcontent_subject_data',
     ],
-    'category_status' => [
-        'new' => 'New'
-    ]
-
 ];

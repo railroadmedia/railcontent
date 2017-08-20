@@ -31,13 +31,15 @@ class ContentController extends Controller
      */
     public function index(ContentIndexRequest $request)
     {
-        $this->contentService->getPaginated();
-        'page' => 'numeric|min:1',
-            'amount' => 'numeric|min:1',
-            'statuses' => 'array',
-            'types' => 'array',
-            'parent_slug' => 'string',
-            'include_future_published_on' => 'boolean'
+        // WIP
+//        $this->contentService->getPaginated();
+
+//        'page' => 'numeric|min:1',
+//            'amount' => 'numeric|min:1',
+//            'statuses' => 'array',
+//            'types' => 'array',
+//            'parent_slug' => 'string',
+//            'include_future_published_on' => 'boolean'
     }
 
     /** Create a new category and return it in JSON format

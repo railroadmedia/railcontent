@@ -66,8 +66,5 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableContentFields = config('railcontent.tables.subject_fields');
         ConfigService::$tableData = config('railcontent.tables.data');
         ConfigService::$tableContentData = config('railcontent.tables.subject_data');
-
-        //Category status
-        ConfigService::$categoryStatusNew = config('railcontent.category_status.new');
     }
 }

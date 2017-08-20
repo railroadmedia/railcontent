@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 
 class DatumRepository extends RepositoryBase
@@ -11,7 +12,7 @@ class DatumRepository extends RepositoryBase
      * Update or insert a new record in railcontent_data table
      * @param integer $id
      * @param string $key
-     * @param text $value
+     * @param string $value
      * @return int
      */
     public function updateOrCreateDatum($id, $key, $value)

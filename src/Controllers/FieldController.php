@@ -23,7 +23,7 @@ class FieldController extends Controller
      * @param FieldRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function storeCategoryField(FieldRequest $request)
+    public function store(FieldRequest $request)
     {
         $categoryField = $this->fieldService->createCategoryField(
             $request->input('category_id'),
@@ -42,7 +42,7 @@ class FieldController extends Controller
      * @param FieldRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updateCategoryField($fieldId, FieldRequest $request)
+    public function category($fieldId, FieldRequest $request)
     {
         $categoryField = $this->fieldService->updateCategoryField(
             $request->input('category_id'),
@@ -60,7 +60,7 @@ class FieldController extends Controller
      * @param integer $fieldId
      * @param Request $request
      */
-    public function deleteCategoryField($fieldId, Request $request)
+    public function delete($fieldId, Request $request)
     {
         $categoryField = $this->fieldService->deleteCategoryField(
             $fieldId,

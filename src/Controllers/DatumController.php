@@ -22,7 +22,7 @@ class DatumController extends Controller
      * @param DatumRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function storeCategoryDatum(DatumRequest $request)
+    public function store(DatumRequest $request)
     {
         $categoryData = $this->datumService->createSubjectDatum(
             $request->input('category_id'),
@@ -41,7 +41,7 @@ class DatumController extends Controller
      * @param DatumRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function updateCategoryDatum($dataId, DatumRequest $request)
+    public function update($dataId, DatumRequest $request)
     {
         $categoryData = $this->datumService->updateSubjectDatum(
             $request->input('category_id'),
@@ -59,7 +59,7 @@ class DatumController extends Controller
      * @param integer $dataId
      * @param Request $request
      */
-    public function deleteCategoryDatum($dataId,Request $request)
+    public function delete($dataId,Request $request)
     {
         $categoryData = $this->datumService->deleteSubjectDatum(
             $dataId,
