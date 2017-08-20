@@ -26,6 +26,14 @@ class ContentService
         $this->contentRepository = $contentRepository;
     }
 
+    /**
+     * @param int $page
+     * @param int $amount
+     * @param array $statues
+     * @param array $types
+     * @param null $parentSlug
+     * @param bool $includeFuturePublishedOn
+     */
     public function getPaginated(
         $page,
         $amount,

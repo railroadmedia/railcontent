@@ -21,7 +21,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $this->classBeingTested = $this->app->make(ContentRepository::class);
     }
 
-    public function test_get()
+    public function test_get_by_id()
     {
         $content = [
             'slug' => $this->faker->word,
@@ -36,15 +36,25 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-        $response = $this->classBeingTested->get($contentId);
+        $response = $this->classBeingTested->getById($contentId);
 
         $this->assertEquals(
-            $response,
-            $content
+            array_merge(['id' => $contentId], $content),
+            $response
         );
     }
 
-    public function test_get_many()
+    public function test_get_by_id_none_exist()
+    {
+        $response = $this->classBeingTested->getById(rand());
+
+        $this->assertEquals(
+            null,
+            $response
+        );
+    }
+
+    public function test_get_many_by_id_with_fields()
     {
         // content that is linked via a field
         $linkedContent = [
@@ -168,6 +178,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $this->assertEquals(
             [
                 2 => [
+                    "id" => $contentId,
                     "slug" => $content["slug"],
                     "status" => $content["status"],
                     "type" => $content["type"],
@@ -178,6 +189,7 @@ class ContentRepositoryTest extends RailcontentTestCase
                     "archived_on" => $content["archived_on"],
                     "fields" => [
                         $fieldKey => [
+                            "id" => $linkedContentId,
                             "slug" => $linkedContent["slug"],
                             "status" => $linkedContent["status"],
                             "type" => $linkedContent["type"],
@@ -196,6 +208,349 @@ class ContentRepositoryTest extends RailcontentTestCase
             ],
             $response
         );
+    }
+
+    public function test_get_by_slug_non_exist()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => $this->faker->word,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $response = $this->classBeingTested->getBySlug($this->faker->word . rand(), null);
+
+        $this->assertEquals([], $response);
+    }
+
+    public function test_get_by_slug_any_parent_single()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => $this->faker->word,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $response = $this->classBeingTested->getBySlug($content['slug'], null);
+
+        $this->assertEquals([$contentId => array_merge(['id' => $contentId], $content)], $response);
+    }
+
+    public function test_get_by_slug_any_parent_multiple()
+    {
+        $expectedContent = [];
+
+        $slug = $this->faker->word;
+
+        for ($i = 0; $i < 3; $i++) {
+            $content = [
+                'slug' => $slug,
+                'status' => $this->faker->word,
+                'type' => $this->faker->word,
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $i == 0 ? null : $i,
+                'published_on' => null,
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $expectedContent[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        $response = $this->classBeingTested->getBySlug($slug, null);
+
+        $this->assertEquals($expectedContent, $response);
+    }
+
+    public function test_get_by_slug_specified_parent_multiple()
+    {
+        $expectedContent = [];
+
+        $slug = $this->faker->word;
+        $parentId = $this->faker->randomNumber();
+
+        for ($i = 0; $i < 3; $i++) {
+            $content = [
+                'slug' => $slug,
+                'status' => $this->faker->word,
+                'type' => $this->faker->word,
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => null,
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $expectedContent[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        // add other content with the same slug but different parent id to make sure it gets excluded
+        $this->query()->table(ConfigService::$tableContent)->insertGetId(
+            [
+                'slug' => $slug,
+                'status' => $this->faker->word,
+                'type' => $this->faker->word . rand(),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId + 1,
+                'published_on' => null,
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ]
+        );
+
+        // add some other random content that should be excluded
+        $this->query()->table(ConfigService::$tableContent)->insertGetId(
+            [
+                'slug' => $this->faker->word . rand(),
+                'status' => $this->faker->word,
+                'type' => $this->faker->word . rand(),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId + 1,
+                'published_on' => null,
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ]
+        );
+
+        $response = $this->classBeingTested->getBySlug($slug, $parentId);
+
+        $this->assertEquals($expectedContent, $response);
+    }
+
+    public function test_get_paginated_page_amount()
+    {
+        $page = 1;
+        $amount = 3;
+        $orderByDirection = 'desc';
+        $orderByColumn = 'published_on';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $parentId = null;
+        $includeFuturePublishedOn = false;
+
+        $expectedContent = [];
+
+        // insert matching content
+        for ($i = 0; $i < 3; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => Carbon::now()->subDays(rand(1, 99))->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $expectedContent[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        // insert non-matching content
+        for ($i = 0; $i < 3; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => Carbon::now()->subDays(rand(100, 1000))->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        }
+
+        $response = $this->classBeingTested->getPaginated(
+            $page,
+            $amount,
+            $orderByDirection,
+            $orderByColumn,
+            $statues,
+            $types,
+            $parentId,
+            $includeFuturePublishedOn
+        );
+
+        $this->assertEquals($expectedContent, $response);
+    }
+
+    public function test_get_paginated_page_2_amount()
+    {
+        $page = 2;
+        $amount = 3;
+        $orderByDirection = 'desc';
+        $orderByColumn = 'published_on';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $parentId = null;
+        $includeFuturePublishedOn = false;
+
+        $expectedContent = [];
+
+        // insert matching content
+        for ($i = 0; $i < 3; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => Carbon::now()->subDays(rand(100, 1000))->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $expectedContent[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        // insert non-matching content
+        for ($i = 0; $i < 3; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => Carbon::now()->subDays(rand(1, 99))->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        }
+
+        $response = $this->classBeingTested->getPaginated(
+            $page,
+            $amount,
+            $orderByDirection,
+            $orderByColumn,
+            $statues,
+            $types,
+            $parentId,
+            $includeFuturePublishedOn
+        );
+
+        $this->assertEquals($expectedContent, $response);
+    }
+
+    public function test_get_paginated_order_by_desc()
+    {
+        $page = 1;
+        $amount = 3;
+        $orderByDirection = 'desc';
+        $orderByColumn = 'published_on';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $parentId = null;
+        $includeFuturePublishedOn = false;
+
+        $expectedContent = [];
+
+        // insert matching content
+        for ($i = 0; $i < 3; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $expectedContent[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        $response = $this->classBeingTested->getPaginated(
+            $page,
+            $amount,
+            $orderByDirection,
+            $orderByColumn,
+            $statues,
+            $types,
+            $parentId,
+            $includeFuturePublishedOn
+        );
+
+        $this->assertEquals($expectedContent, $response);
+
+        // for some reason phpunit doesn't test the order of the array values
+        $this->assertEquals(array_keys($expectedContent), array_keys($response));
+    }
+
+    public function test_get_paginated_order_by_asc()
+    {
+        $page = 1;
+        $amount = 3;
+        $orderByDirection = 'asc';
+        $orderByColumn = 'published_on';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $parentId = null;
+        $includeFuturePublishedOn = false;
+
+        $expectedContent = [];
+
+        // insert matching content
+        for ($i = 0; $i < 3; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => Carbon::now()->subDays(1000 - (($i + 1) * 10))->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $expectedContent[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        $response = $this->classBeingTested->getPaginated(
+            $page,
+            $amount,
+            $orderByDirection,
+            $orderByColumn,
+            $statues,
+            $types,
+            $parentId,
+            $includeFuturePublishedOn
+        );
+
+        $this->assertEquals($expectedContent, $response);
+
+        // for some reason phpunit doesn't test the order of the array values
+        $this->assertEquals(array_keys($expectedContent), array_keys($response));
     }
 
     /**

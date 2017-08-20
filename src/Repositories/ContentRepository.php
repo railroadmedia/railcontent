@@ -37,20 +37,76 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     *
+     * If the parent id is null it will pull all rows with that slug under ANY parent including null
+     *
      * @param $slug
      * @param $parentId
      * @return array
      */
-    public function getBySlug($slug, $parentId)
+    public function getBySlug($slug, $parentId = null)
     {
         $fieldsWithContent = $this->queryIndex()
-            ->whereIn(ConfigService::$tableContent . '.slug', $slug);
+            ->where(ConfigService::$tableContent . '.slug', $slug);
 
         if (!is_null($parentId)) {
             $fieldsWithContent = $fieldsWithContent->where('parent_id', $parentId);
         }
 
         $fieldsWithContent = $fieldsWithContent->get();
+
+        return $this->parseAndGetLinkedContent($fieldsWithContent);
+    }
+
+    /**
+     * @param int $page
+     * @param int $amount
+     * @param string $orderByDirection
+     * @param string $orderByColumn
+     * @param array $statues
+     * @param array $types
+     * @param int|null $parentId
+     * @param bool $includeFuturePublishedOn
+     * @return array
+     */
+    public function getPaginated(
+        $page,
+        $amount,
+        $orderByDirection = 'desc',
+        $orderByColumn = 'published_on',
+        array $statues = [],
+        array $types = [],
+        $parentId = null,
+        $includeFuturePublishedOn = false
+    ) {
+        $page--;
+
+        $fieldsWithContent = $this->queryIndex()
+            ->whereIn(ConfigService::$tableContent . '.status', $statues)
+            ->whereIn(ConfigService::$tableContent . '.type', $types);
+
+        if (!is_null($parentId)) {
+            $fieldsWithContent =
+                $fieldsWithContent->where(ConfigService::$tableContent . '.parent_id', $parentId);
+        }
+
+        if (!$includeFuturePublishedOn) {
+            $fieldsWithContent = $fieldsWithContent->where(
+                function (Builder $builder) {
+                    return $builder->where(
+                        ConfigService::$tableContent . '.published_on',
+                        '<',
+                        Carbon::now()->toDateTimeString()
+                    )
+                        ->orWhereNull(ConfigService::$tableContent . '.published_on');
+                }
+            );
+        }
+
+        $fieldsWithContent = $fieldsWithContent->orderBy($orderByColumn, $orderByDirection)
+            ->skip($page * $amount)
+            ->limit($amount)
+            ->get();
 
         return $this->parseAndGetLinkedContent($fieldsWithContent);
     }
@@ -277,6 +333,7 @@ class ContentRepository extends RepositoryBase
 
         foreach ($fieldsWithContent as $fieldWithContent) {
             $content[$fieldWithContent['id']] = [
+                'id' => $fieldWithContent['id'],
                 'slug' => $fieldWithContent['slug'],
                 'status' => $fieldWithContent['status'],
                 'type' => $fieldWithContent['type'],
@@ -296,6 +353,7 @@ class ContentRepository extends RepositoryBase
             if ($fieldWithContent['field_type'] === 'content_id') {
 
                 $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']] = [
+                    'id' => $linkedContents[$fieldWithContent['field_value']]['id'],
                     'slug' => $linkedContents[$fieldWithContent['field_value']]['slug'],
                     'status' => $linkedContents[$fieldWithContent['field_value']]['status'],
                     'type' => $linkedContents[$fieldWithContent['field_value']]['type'],
