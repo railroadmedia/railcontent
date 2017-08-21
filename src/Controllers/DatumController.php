@@ -18,53 +18,52 @@ class DatumController extends Controller
     }
 
     /**
-     * Call the method from service that create new data and link the category with the data.
+     * Call the method from service that create new data and link the content with the data.
      * @param DatumRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(DatumRequest $request)
     {
-        $categoryData = $this->datumService->createSubjectDatum(
-            $request->input('category_id'),
+        $categoryData = $this->datumService->createDatum(
+            $request->input('content_id'),
             null,
             $request->input('key'),
             $request->input('value'),
-            ConfigService::$subjectTypeCategory
+            $request->input('position')
         );
 
         return response()->json($categoryData, 200);
     }
 
     /**
-     * Call the method from service to update a category datum
+     * Call the method from service to update a content datum
      * @param integer $dataId
      * @param DatumRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function update($dataId, DatumRequest $request)
     {
-        $categoryData = $this->datumService->updateSubjectDatum(
-            $request->input('category_id'),
+        $categoryData = $this->datumService->updateDatum(
+            $request->input('content_id'),
             $dataId,
             $request->input('key'),
             $request->input('value'),
-            ConfigService::$subjectTypeCategory
+            $request->input('position')
         );
 
         return response()->json($categoryData, 201);
     }
 
     /**
-     * Call the method from service to delete the category's data
+     * Call the method from service to delete the content data
      * @param integer $dataId
      * @param Request $request
      */
     public function delete($dataId,Request $request)
     {
-        $categoryData = $this->datumService->deleteSubjectDatum(
+        $categoryData = $this->datumService->deleteDatum(
             $dataId,
-            $request->input('category_id'),
-            ConfigService::$subjectTypeCategory
+            $request->input('content_id')
         );
 
         return response()->json($categoryData,200);

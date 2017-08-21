@@ -247,6 +247,42 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * Insert a new record in railcontent_content_data
+     * @param integer $contentId
+     * @param integer $datumId
+     * @return int
+     */
+    public function linkDatum($contentId, $datumId)
+    {
+        return $this->contentDataQuery()->insertGetId(
+            [
+                'content_id' => $contentId,
+                'datum_id' => $datumId
+                //'created_at' => Carbon::now()->toDateTimeString(),
+                //'updated_at' => Carbon::now()->toDateTimeString()
+            ]);
+    }
+
+    /**
+     * Get the content and the linked datum from database
+     * @param integer $datumId
+     * @param integer $contentId
+     */
+    public function getLinkedDatum($datumId, $contentId)
+    {
+        $dataIdLabel = ConfigService::$tableData.'.id';
+
+        return $this->contentDataQuery()
+            ->leftJoin(ConfigService::$tableData,'datum_id','=',$dataIdLabel)
+            ->where(
+                [
+                    'datum_id' => $datumId,
+                    'content_id' => $contentId
+                ]
+            )->get()->first();
+    }
+
+    /**
      * @return Builder
      */
     public function queryTable()

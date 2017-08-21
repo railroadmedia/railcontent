@@ -20,11 +20,13 @@ class DatumRepositoryTest extends RailcontentTestCase
 
     public function test_insert_data()
     {
-        $key = implode('-', $this->faker->words());
+        $key = $this->faker->word;
         $value = $this->faker->text();
-        $data = $this->classBeingTested->updateOrCreateDatum(1,$key,$value);
+        $position = $this->faker->numberBetween();
 
-        $this->assertEquals(1, $data);
+        $result = $this->classBeingTested->updateOrCreateDatum(1,$key,$value, $position);
+
+        $this->assertEquals(1, $result);
 
         $this->assertDatabaseHas(
             ConfigService::$tableData,
@@ -32,83 +34,79 @@ class DatumRepositoryTest extends RailcontentTestCase
                 'id' => 1,
                 'key' => $key,
                 'value' => $value,
-                'created_at' => Carbon::now()->toDateTimeString(),
-                'updated_at' => Carbon::now()->toDateTimeString()
-
+                'position' => $position
             ]
         );
     }
 
     public function test_update_data()
     {
-        $key = implode('-', $this->faker->words());
-        $value = $this->faker->text();
-        $data = $this->classBeingTested->updateOrCreateDatum(1,$key,$value);
+        $data = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->word,
+            'position' => $this->faker->numberBetween()
+        ];
 
-        $this->assertEquals(1, $data);
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableData,
-            [
-                'id' => 1,
-                'key' => $key,
-                'value' => $value
-
-            ]
-        );
+        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
         $new_value = $this->faker->text();
-        $data = $this->classBeingTested->updateOrCreateDatum(1,$key,$new_value);
 
-        $this->assertEquals(1, $data);
+        $result = $this->classBeingTested->updateOrCreateDatum($dataId,$data['key'],$new_value, $data['position']);
 
+        $this->assertEquals(1, $result);
+
+        //assert that old value not exist in the database
         $this->assertDatabaseMissing(
             ConfigService::$tableData,
             [
-                'id' => 1,
-                'key' => $key,
-                'value' => $value
+                'id' => $dataId,
+                'key' => $data['key'],
+                'value' => $data['value'],
+                'position' => $data['position']
             ]
         );
 
         $this->assertDatabaseHas(
             ConfigService::$tableData,
             [
-                'id' => 1,
-                'key' => $key,
+                'id' => $dataId,
+                'key' => $data['key'],
                 'value' => $new_value,
-                'updated_at' => Carbon::now()->toDateTimeString()
+                'position' => $data['position']
             ]
         );
     }
 
     public function test_delete_data()
     {
-        $id = 1;
-        $key = implode('-', $this->faker->words());
-        $value =  $this->faker->text();
+        $data = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->word,
+            'position' => $this->faker->numberBetween()
+        ];
 
-        $this->classBeingTested->updateOrCreateDatum($id, $key, $value);
+        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
-        $this->assertDatabaseHas(
-            ConfigService::$tableData,
-            [
-                'id' => 1,
-                'key' => $key,
-                'value' => $value
-            ]
-        );
-
-        $this->classBeingTested->deleteDatum($id);
+        $this->classBeingTested->deleteDatum($dataId);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableData,
             [
-                'id' => 1,
-                'key' => $key,
-                'value' => $value
+                'id' => $dataId,
+                'key' => $data['key'],
+                'value' => $data['value'],
+                'position' => $data['position']
             ]
         );
     }
 
+
+
+    /**
+     * @return \Illuminate\Database\Connection
+     */
+    public function query()
+    {
+        return $this->databaseManager->connection();
+    }
 }

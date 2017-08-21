@@ -12,6 +12,6 @@ return [
         'fields' => 'railcontent_fields',
         'subject_fields' => 'railcontent_subject_fields',
         'data' => 'railcontent_data',
-        'subject_data' => 'railcontent_subject_data',
+        'content_data' => 'railcontent_content_data',
     ],
 ];

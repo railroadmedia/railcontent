@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Railroad\Railcontent\Services\ConfigService;
 
 class DatumRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class DatumRequest extends FormRequest
         return [
             'key' => 'required|max:255',
             'value' => 'required',
-            'category_id' => 'required'
+            'content_id' => 'required|numeric|exists:' . ConfigService::$tableContent . ',id'
         ];
     }
 }

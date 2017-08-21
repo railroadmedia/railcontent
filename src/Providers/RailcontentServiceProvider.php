@@ -65,6 +65,6 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableFields = config('railcontent.tables.fields');
         ConfigService::$tableContentFields = config('railcontent.tables.subject_fields');
         ConfigService::$tableData = config('railcontent.tables.data');
-        ConfigService::$tableContentData = config('railcontent.tables.subject_data');
+        ConfigService::$tableContentData = config('railcontent.tables.content_data');
     }
 }

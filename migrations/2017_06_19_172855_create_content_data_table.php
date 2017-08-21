@@ -20,7 +20,7 @@ class CreateContentDataTable extends Migration
                 $table->increments('id');
 
                 $table->integer('content_id')->index();
-                $table->integer('data_id')->index();
+                $table->integer('datum_id')->index();
             }
         );
     }

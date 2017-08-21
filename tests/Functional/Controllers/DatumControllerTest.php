@@ -8,6 +8,7 @@ use Railroad\Railcontent\Repositories\DatumRepository;
 use Railroad\Railcontent\Services\DatumService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 
 class DatumControllerTest extends RailcontentTestCase
 {
@@ -19,85 +20,109 @@ class DatumControllerTest extends RailcontentTestCase
 
         $this->serviceBeingTested = $this->app->make(DatumService::class);
         $this->classBeingTested = $this->app->make(DatumRepository::class);
-        $this->categoryClass = $this->app->make(CategoryRepository::class);
+        //$this->categoryClass = $this->app->make(CategoryRepository::class);
     }
 
-    public function test_create_category_datum_method_from_service_response()
+    public function test_create_datum_method_from_service_response()
     {
-        $key = $this->faker->text(255);
+        $key = $this->faker->word;
         $value = $this->faker->text(500);
-        $type = $this->faker->text(64);
-        $slug = implode('-', $this->faker->words());
 
-        $categoryId = $this->categoryClass->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
 
-        $categoryField = $this->serviceBeingTested->createSubjectDatum($categoryId, null, $key, $value, ConfigService::$subjectTypeCategory);
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-        $expectedResult = new \stdClass();
-        $expectedResult->id = 1;
-        $expectedResult->subject_id = $categoryId;
-        $expectedResult->subject_type = ConfigService::$subjectTypeCategory;
-        $expectedResult->data_id = 1;
-        $expectedResult->key = $key;
-        $expectedResult->value = $value;
-        $expectedResult->created_at =  Carbon::now()->toDateTimeString();
-        $expectedResult->updated_at =  Carbon::now()->toDateTimeString();
+        $categoryField = $this->serviceBeingTested->createDatum($contentId, null, $key, $value, 1);
+
+        $expectedResult = [
+            'id' => 1,
+            'content_id' => $contentId,
+            'datum_id' => 1,
+            'key' => $key,
+            'value' => $value,
+            'position' => 1
+        ];
 
         $this->assertEquals($expectedResult, $categoryField);
     }
 
-    public function test_add_category_data_controller_method_response()
+    public function test_add_content_datum_controller_method_response()
     {
-        $key = $this->faker->text(255);
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $key = $this->faker->word;
         $value = $this->faker->text(500);
 
-        $response = $this->call('POST', 'category/datum', ['category_id'=>1,'key'=>$key, 'value' => $value]);
+        $response = $this->call('POST', 'content/datum', [
+            'content_id' => $contentId,
+            'key' => $key,
+            'value' => $value,
+            'position' => 1
+        ]);
 
         $this->assertEquals(200, $response->status());
 
         $response->assertJsonStructure(
             [
                 'id' ,
-                'subject_id',
-                'subject_type',
-                'data_id',
-                'created_at',
-                'updated_at',
+                'content_id',
+                'datum_id',
+                'key',
+                'value',
+                'position',
             ]
         );
 
         $response->assertJson(
             [
                 'id' => 1,
-                'subject_id' => 1,
-                'subject_type' => ConfigService::$subjectTypeCategory,
-                'data_id' => 1,
-                'created_at' => Carbon::now()->toDateTimeString(),
-                'updated_at' => Carbon::now()->toDateTimeString(),
+                'content_id' => $contentId,
+                'datum_id' => 1,
                 'key' => $key,
-                'value' => $value
+                'value' => $value,
+                'position' => 1
             ]
         );
     }
 
-    public function test_add_category_datum_not_pass_the_validation()
+    public function test_add_content_datum_not_pass_the_validation()
     {
-        $response = $this->call('POST', 'category/datum');
+        $response = $this->call('POST', 'content/datum');
 
         $this->assertEquals(302, $response->status());
 
         $response->assertSessionHasErrors();
 
         //expecting session has error for missing fields
-        $response->assertSessionHasErrors(['key','value','category_id']);
+        $response->assertSessionHasErrors(['key', 'value', 'content_id']);
     }
 
-    public function test_add_category_datum_key_not_pass_the_validation()
+    public function test_add_content_datum_key_not_pass_the_validation()
     {
         $key = $this->faker->text(500);
         $value = $this->faker->text(500);
 
-        $response = $this->call('POST', 'category/datum',['category_id'=>1,'key'=>$key, 'value' => $value]);
+        $response = $this->call('POST', 'content/datum',['content_id'=>1,'key'=>$key, 'value' => $value]);
 
         $this->assertEquals(302, $response->status());
 
@@ -107,136 +132,251 @@ class DatumControllerTest extends RailcontentTestCase
         $response->assertSessionHasErrors(['key']);
     }
 
-    public function test_update_category_datum_controller_method_response()
+    public function test_update_content_datum_controller_method_response()
     {
-        $key = $this->faker->text(255);
-        $value = $this->faker->text(500);
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-        $dataId = $this->classBeingTested->updateOrCreateDatum(null,$key,$value);
+        $data = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(),
+            'position' =>$this->faker->numberBetween()
+        ];
+        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
-        $categoryData = $this->serviceBeingTested->createSubjectDatum(1, $dataId, $key, $value, ConfigService::$subjectTypeCategory);
+        $contentData = [
+            'content_id' => $contentId,
+            'datum_id' => $dataId
+        ];
+        $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
 
         $new_value =  $this->faker->text();
 
-        $response = $this->call('PUT', 'category/datum/'.$dataId, ['category_id'=>1,'key'=>$key, 'value' => $new_value]);
+        $response = $this->call('PUT', 'content/datum/'.$dataId, [
+            'content_id' => $contentId,
+            'key' => $data['key'],
+            'value' => $new_value,
+            'position' => $data['position']
+        ]);
 
         $this->assertEquals(201, $response->status());
 
         $response->assertJsonStructure(
             [
                 'id' ,
-                'subject_id',
-                'subject_type',
-                'data_id',
-                'created_at',
-                'updated_at',
+                'content_id',
+                'datum_id',
+                'key',
+                'value',
+                'position'
             ]
         );
 
         $response->assertJson(
             [
                 'id' => 1,
-                'subject_id' => 1,
-                'subject_type' => ConfigService::$subjectTypeCategory,
-                'data_id' => 1,
-                'created_at' => Carbon::now()->toDateTimeString(),
-                'updated_at' => Carbon::now()->toDateTimeString(),
-                'key' => $key,
-                'value' => $new_value
+                'content_id' => $contentId,
+                'datum_id' => $dataId,
+                'key' => $data['key'],
+                'value' => $new_value,
+                'position' => $data['position']
             ]
         );
     }
 
-    public function test_update_category_datum_not_pass_validation()
+    public function test_update_content_datum_not_pass_validation()
     {
-        $key = $this->faker->text(255);
-        $value =  $this->faker->text(500);
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-        $dataId = $this->classBeingTested->updateOrCreateDatum(null,$key,$value);
-        $categoryData = $this->serviceBeingTested->createSubjectDatum(1, $dataId, $key, $value, ConfigService::$subjectTypeCategory);
+        $data = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(),
+            'position' =>$this->faker->numberBetween()
+        ];
+        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
-        $response = $this->call('PUT', 'category/datum/'.$dataId);
+        $contentData = [
+            'content_id' => $contentId,
+            'datum_id' => $dataId
+        ];
+        $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
+
+        $response = $this->call('PUT', 'content/datum/'.$dataId);
 
         $this->assertEquals(302, $response->status());
 
         $response->assertSessionHasErrors();
 
         //expecting session has error for missing fields
-        $response->assertSessionHasErrors(['key','value','category_id']);
+        $response->assertSessionHasErrors(['key','value','content_id']);
     }
 
-    public function test_delete_category_datum_controller()
+    public function test_delete_content_datum_controller()
     {
-        $key = $this->faker->text(255);
-        $value = $this->faker->text(500);
-        $type = $this->faker->text(64);
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-        $dataId = $this->classBeingTested->updateOrCreateDatum(null, $key, $value);
+        $data = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(),
+            'position' =>$this->faker->numberBetween()
+        ];
+        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
-        $slug = implode('-', $this->faker->words());
-        $categoryId = $this->categoryClass->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
+        $contentData = [
+            'content_id' => $contentId,
+            'datum_id' => $dataId
+        ];
+        $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
 
-        $categoryData = $this->serviceBeingTested->createSubjectDatum($categoryId, $dataId, $key, $value, ConfigService::$subjectTypeCategory);
-
-        $response = $this->call('DELETE', 'category/datum/'.$dataId, ['category_id'=>$categoryId]);
+        $response = $this->call('DELETE', 'content/datum/'.$dataId, [
+            'content_id' => $contentId
+        ]);
 
         $this->assertEquals(1, $response->content());
         $this->assertEquals(200, $response->status());
     }
 
-    public function test_update_category_datum_method_from_service_response()
+    public function test_update_content_datum_method_from_service_response()
     {
-        $key = $this->faker->text(255);
-        $value = $this->faker->text(500);
-        $type = $this->faker->text(64);
-        $slug = implode('-', $this->faker->words());
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-        $categoryId = $this->categoryClass->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
-        $categoryData = $this->serviceBeingTested->createSubjectDatum($categoryId, null, $key, $value, ConfigService::$subjectTypeCategory);
+        $data = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(),
+            'position' =>$this->faker->numberBetween()
+        ];
+        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
+
+        $contentData = [
+            'content_id' => $contentId,
+            'datum_id' => $dataId
+        ];
+        $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
 
         $new_value = $this->faker->text(500);
-        $categoryField = $this->serviceBeingTested->updateSubjectDatum($categoryId, $categoryData->data_id, $key, $new_value, ConfigService::$subjectTypeCategory);
+        $categoryField = $this->serviceBeingTested->updateDatum($contentId, $dataId, $data['key'], $new_value, $data['position']);
 
-        $expectedResult = new \stdClass();
-        $expectedResult->id = 1;
-        $expectedResult->subject_id = $categoryId;
-        $expectedResult->subject_type = ConfigService::$subjectTypeCategory;
-        $expectedResult->data_id = 1;
-        $expectedResult->key = $key;
-        $expectedResult->value = $new_value;
-        $expectedResult->created_at =  Carbon::now()->toDateTimeString();
-        $expectedResult->updated_at =  Carbon::now()->toDateTimeString();
+        $expectedResult = [
+            'id' => $contentDataId,
+            'content_id' => $contentId,
+            'datum_id' => $dataId,
+            'key' => $data['key'],
+            'value' => $new_value,
+            'position' => $data['position']
+        ];
 
         $this->assertEquals($expectedResult, $categoryField);
 
     }
 
-    public function test_get_category_datum_method_from_service_response()
+    public function test_get_content_datum_method_from_service_response()
     {
-        $key = $this->faker->text(255);
-        $value = $this->faker->text(500);
-        $type = $this->faker->text(64);
-        $slug = implode('-', $this->faker->words());
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-        $categoryId = $this->categoryClass->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
-        $categoryDatum = $this->serviceBeingTested->createSubjectDatum($categoryId, null, $key, $value, ConfigService::$subjectTypeCategory);
+        $data = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(),
+            'position' =>$this->faker->numberBetween()
+        ];
+        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
-        $results = $this->serviceBeingTested->getSubjectDatum($categoryDatum->data_id, $categoryId, ConfigService::$subjectTypeCategory);
+        $contentData = [
+            'content_id' => $contentId,
+            'datum_id' => $dataId
+        ];
+        $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
 
-        $this->assertEquals($categoryDatum, $results);
+        $results = $this->serviceBeingTested->getDatum($dataId, $contentId);
+
+        $expectedResults = [
+            'id' => $contentDataId,
+            'content_id' => $contentId,
+            'datum_id' => $dataId,
+            'key' => $data['key'],
+            'value' => $data['value'],
+            'position' => $data['position']
+        ];
+
+        $this->assertEquals($expectedResults, $results);
     }
 
-    public function test_delete_category_datum_method_from_service_response()
+    public function test_delete_content_datum_method_from_service_response()
     {
-        $key = $this->faker->text(255);
-        $value = $this->faker->text(500);
-        $type = $this->faker->text(64);
-        $slug = implode('-', $this->faker->words());
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-        $categoryId = $this->categoryClass->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
-        $categoryData = $this->serviceBeingTested->createSubjectDatum($categoryId, null, $key, $value, ConfigService::$subjectTypeCategory);
+        $data = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(),
+            'position' =>$this->faker->numberBetween()
+        ];
+        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
-        $results = $this->serviceBeingTested->deleteSubjectDatum($categoryData->data_id, $categoryId, ConfigService::$subjectTypeCategory);
+        $contentData = [
+            'content_id' => $contentId,
+            'datum_id' => $dataId
+        ];
+        $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
+
+        $results = $this->serviceBeingTested->deleteDatum($dataId, $contentId);
 
         $this->assertEquals(1, $results);
     }

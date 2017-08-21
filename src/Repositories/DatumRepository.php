@@ -13,15 +13,16 @@ class DatumRepository extends RepositoryBase
      * @param integer $id
      * @param string $key
      * @param string $value
+     * @param integer $position
      * @return int
      */
-    public function updateOrCreateDatum($id, $key, $value)
+    public function updateOrCreateDatum($id, $key, $value, $position)
     {
         $update = $this->query()->where('id', $id)->update(
             [
                 'key' => $key,
                 'value' => $value,
-                'updated_at' => Carbon::now()->toDateTimeString()
+                'position' => $position
             ]
         );
 
@@ -30,8 +31,7 @@ class DatumRepository extends RepositoryBase
                 [
                     'key' => $key,
                     'value' => $value,
-                    'created_at' => Carbon::now()->toDateTimeString(),
-                    'updated_at' => Carbon::now()->toDateTimeString()
+                    'position' => $position
                 ]
             );
         }
@@ -53,91 +53,10 @@ class DatumRepository extends RepositoryBase
     }
 
     /**
-     * Insert a new record in railcontent_subject_data
-     * @param $dataId
-     * @param $subjectId
-     * @param $subjectType
-     * @return int
-     */
-    public function linkSubjectDatum($dataId, $subjectId, $subjectType)
-    {
-        return $categoryDataId =  $this->subjectDataQuery()->insertGetId(
-            [
-                'subject_id' => $subjectId,
-                'subject_type' => $subjectType,
-                'data_id' => $dataId,
-                'created_at' => Carbon::now()->toDateTimeString(),
-                'updated_at' => Carbon::now()->toDateTimeString()
-            ]);
-    }
-
-    /**
-     * Delete the link between category and datum
-     * @param integer $subjectId
-     * @param integer $dataId
-     * @param string $subjectType
-     */
-    public function unlinkSubjectDatum ($dataId, $subjectId, $subjectType)
-    {
-        return $this->subjectDataQuery()->where(
-            [
-                'subject_id' => $subjectId,
-                'subject_type' => $subjectType,
-                'data_id' =>$dataId
-            ]
-        )->delete();
-    }
-
-    /**
-     * Delete the subject datum
-     * @param integer $subjectId
-     * @param string $subjectType
-     */
-    public function unlinkAllSubjectDatum ($subjectId, $subjectType)
-    {
-        return $this->subjectDataQuery()->where(
-            [
-                'subject_id' => $subjectId,
-                'subject_type' => $subjectType
-            ]
-        )->delete();
-    }
-
-    /**
-     * Get the category and the linked datum from database
-     * @param integer $dataId
-     * @param integer $subjectId
-     * @param string $subjectType
-     */
-    public function getSubjectDatum($dataId, $subjectId, $subjectType)
-    {
-        $dataIdLabel = ConfigService::$tableData.'.id';
-
-        return $this->subjectDataQuery()
-            ->leftJoin(ConfigService::$tableData,'data_id','=',$dataIdLabel)
-            ->where(
-                [
-                    'data_id' => $dataId,
-                    'subject_id' => $subjectId,
-                    'subject_type' => $subjectType
-                ]
-            )->get()->first();
-    }
-
-    /**
      * @return Builder
      */
     public function query()
     {
         return parent::connection()->table(ConfigService::$tableData);
     }
-
-    /**
-     * @return Builder
-     */
-    public function subjectDataQuery()
-    {
-        return parent::connection()->table(ConfigService::$tableContentData);
-    }
-
 }

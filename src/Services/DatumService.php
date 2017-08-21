@@ -2,78 +2,69 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\DatumRepository;
 
 class DatumService
 {
     private $datumRepository;
 
-    public function __construct (DatumRepository $datumRepository)
+    public function __construct (DatumRepository $datumRepository, ContentRepository $contentRepository)
     {
         $this->datumRepository = $datumRepository;
+        $this->contentRepository = $contentRepository;
     }
 
     /**
-     * Create a new field, link the category with the new created field and return the category with the linked field
-     * @param integer $categoryId
+     * Create a new datum, link the content with the new created datum and return the content with the linked datum
+     * @param integer $contentId
      * @param string $key
      * @param string $value
-     * @param string $subjectType
+     * @param integer $position
      * @return array
      */
-    public function createSubjectDatum($subjectId, $dataId = null, $key, $value, $subjectType)
+    public function createDatum($contentId, $dataId = null, $key, $value, $position)
     {
-        $dataId = $this->datumRepository->updateOrCreateDatum($dataId, $key, $value);
+        $dataId = $this->datumRepository->updateOrCreateDatum($dataId, $key, $value, $position);
 
-        $this->datumRepository->linkSubjectDatum($dataId, $subjectId, $subjectType);
+        $this->contentRepository->linkDatum($contentId, $dataId);
 
-        return $this->datumRepository->getSubjectDatum($dataId, $subjectId, $subjectType);
+        return $this->contentRepository->getLinkedDatum($dataId, $contentId);
     }
 
     /**
-     * Update a category field and return the category with the field
-     * @param $categoryId
-     * @param $key
-     * @param $value
+     * Update a content datum and return the content with the datum
+     * @param integer $contentId
+     * @param string $key
+     * @param string $value
      * @return int
      */
-    public function updateSubjectDatum($subjectId, $dataId, $key, $value, $subjectType)
+    public function updateDatum($contentId, $dataId, $key, $value, $position)
     {
-        $this->datumRepository->updateOrCreateDatum($dataId, $key ,$value);
+        $this->datumRepository->updateOrCreateDatum($dataId, $key ,$value, $position);
 
-        return  $this->datumRepository->getSubjectDatum($dataId, $subjectId, $subjectType);
+        return $this->contentRepository->getLinkedDatum($dataId, $contentId);
     }
 
     /**
-     * Call the repository method to unlink the category's datum
+     * Call the repository method to unlink the content's datum
      * @param integer $dataId
-     * @param integer $subjectId
+     * @param integer $contentId
      * @return bool
      */
-    public function deleteSubjectDatum($dataId, $subjectId, $subjectType)
+    public function deleteDatum($dataId, $contentId)
     {
-        return $this->datumRepository->unlinkSubjectDatum($dataId, $subjectId, $subjectType);
+        return $this->contentRepository->unlinkDatum($contentId, $dataId);
     }
 
     /**
-     * Return the subject with the linked data
+     * Return the content with the linked data
      * @param integer $dataId
-     * @param integer $subjectId
-     * @param string $subjectType
+     * @param integer $contentId
      * @return array
      */
-    public function getSubjectDatum($dataId, $subjectId, $subjectType)
+    public function getDatum($dataId, $contentId)
     {
-        return $this->datumRepository->getSubjectDatum($dataId, $subjectId, $subjectType);
-    }
-
-    /**
-     * Unlink all the datum with specified type associated with the subject id
-     * @param $subjectId
-     * @param $subjectType
-     */
-    public function unlinkSubjectDatum($subjectId, $subjectType)
-    {
-        return $this->datumRepository->unlinkAllSubjectDatum($subjectId, $subjectType);
+        return $this->contentRepository->getLinkedDatum($dataId, $contentId);
     }
 }

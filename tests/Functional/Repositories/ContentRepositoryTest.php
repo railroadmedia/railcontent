@@ -553,10 +553,54 @@ class ContentRepositoryTest extends RailcontentTestCase
         $this->assertEquals(array_keys($expectedContent), array_keys($response));
     }
 
+    public function test_link_datum()
+    {
+        $contentId = $this->faker->numberBetween();
+        $datumId = $this->faker->numberBetween();
+
+        $datumLinkId = $this->classBeingTested->linkDatum($contentId, $datumId);
+
+        $this->assertEquals(1, $datumLinkId);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentData,
+            [
+                'id' => $datumLinkId,
+                'content_id' => $contentId,
+                'datum_id' => $datumId
+            ]
+        );
+
+    }
+
+    public function test_create_single()
+    {
+        $slug = $this->faker->word;
+        $status = $this->faker->word;
+        $type = $this->faker->word;
+
+        $categoryId = $this->classBeingTested->create($slug, $status, $type, 1, null, Carbon::now()->subDays(1000 -  10)->toDateTimeString());
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableContent,
+            [
+                'id' => $categoryId,
+                'slug' => $slug,
+                'status' => $status,
+                'type' => $type,
+                'position' => 1,
+                'parent_id' => null,
+                'published_on' =>  Carbon::now()->subDays(1000 -  10)->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null
+            ]
+        );
+    }
+
     /**
      * @return \Illuminate\Database\Connection
      */
-    private function query()
+    public function query()
     {
         return $this->databaseManager->connection();
     }

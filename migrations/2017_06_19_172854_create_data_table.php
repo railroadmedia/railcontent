@@ -21,8 +21,9 @@ class CreateDataTable extends Migration
 
                 $table->string('key', 255)->index();
                 $table->text('value');
+                $table->integer('position')->index()->nullable();
 
-                $table->timestamps();
+                //$table->timestamps();
             }
         );
     }
