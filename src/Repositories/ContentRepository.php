@@ -126,7 +126,7 @@ class ContentRepository extends RepositoryBase
     {
         $id = null;
 
-        $categoryId = $this->queryTable()->insertGetId(
+        $contentId = $this->queryTable()->insertGetId(
             [
                 'slug' => $slug,
                 'status' => $status,
@@ -138,7 +138,9 @@ class ContentRepository extends RepositoryBase
             ]
         );
 
-        return $categoryId;
+        $this->reposition($contentId, $position);
+
+        return $contentId;
     }
 
     /**
@@ -177,6 +179,8 @@ class ContentRepository extends RepositoryBase
             ]
         );
 
+        $this->reposition($id, $position);
+
         return $id;
     }
 
@@ -187,6 +191,8 @@ class ContentRepository extends RepositoryBase
      */
     public function delete($id, $deleteChildren = false)
     {
+        $content = $this->getById($id);
+
         // unlink fields and data
         $this->unlinkField($id);
         $this->unlinkDatum($id);
@@ -196,7 +202,11 @@ class ContentRepository extends RepositoryBase
             $this->unlinkChildren($id);
         }
 
-        return $this->queryTable()->where('id', $id)->delete();
+        $delete = $this->queryTable()->where('id', $id)->delete();
+
+        $this->otherChildrenRepositions($content['parent_id'], $id, 0);
+
+        return $delete;
     }
 
     /**
@@ -258,8 +268,21 @@ class ContentRepository extends RepositoryBase
             [
                 'content_id' => $contentId,
                 'datum_id' => $datumId
-                //'created_at' => Carbon::now()->toDateTimeString(),
-                //'updated_at' => Carbon::now()->toDateTimeString()
+            ]);
+    }
+
+    /**
+     * Insert a new record in railcontent_content_fields
+     * @param integer $contentId
+     * @param integer $fieldId
+     * @return int
+     */
+    public function linkField($contentId, $fieldId)
+    {
+        return $this->contentFieldsQuery()->insertGetId(
+            [
+                'content_id' => $contentId,
+                'field_id' => $fieldId
             ]);
     }
 
@@ -277,6 +300,25 @@ class ContentRepository extends RepositoryBase
             ->where(
                 [
                     'datum_id' => $datumId,
+                    'content_id' => $contentId
+                ]
+            )->get()->first();
+    }
+
+    /**
+     * Get the content and the associated field from database
+     * @param integer $fieldId
+     * @param integer $contentId
+     */
+    public function getLinkedField($fieldId, $contentId)
+    {
+        $fieldIdLabel = ConfigService::$tableFields.'.id';
+
+        return $this->contentFieldsQuery()
+            ->leftJoin(ConfigService::$tableFields,'field_id','=',$fieldIdLabel)
+            ->where(
+                [
+                    'field_id' => $fieldId,
                     'content_id' => $contentId
                 ]
             )->get()->first();
@@ -429,4 +471,67 @@ class ContentRepository extends RepositoryBase
 
         return $content;
     }
+
+    /**
+     * Update content position and call function that recalculate position for other children
+     * @param int $contentId
+     * @param int $position
+     */
+    public function reposition($contentId, $position)
+    {
+        $parentContentId = $this->queryTable()->where('id', $contentId)->first(['parent_id'])['parent_id']
+            ?? null;
+        $childContentCount = $this->queryTable()->where('parent_id', $parentContentId)->count();
+
+        if ($position < 1) {
+            $position = 1;
+        } elseif ($position > $childContentCount) {
+            $position = $childContentCount;
+        }
+
+        $this->transaction(
+            function () use ($contentId, $position, $parentContentId) {
+                $this->queryTable()
+                    ->where('id', $contentId)
+                    ->update(
+                        ['position' => $position]
+                    );
+
+                $this->otherChildrenRepositions($parentContentId, $contentId, $position);
+            }
+        );
+    }
+
+    /** Update position for other categories with the same parent id
+     * @param integer $parentCategoryId
+     * @param integer $categoryId
+     * @param integer $position
+     */
+    function otherChildrenRepositions ($parentContentId, $contentId, $position)
+    {
+        $childContent =
+            $this->queryTable()
+                ->where('parent_id', $parentContentId)
+                ->where('id', '<>', $contentId)
+                ->orderBy('position')
+                ->get()
+                ->toArray();
+
+        $start = 1;
+
+        foreach ($childContent as $child) {
+            if($start == $position)
+            {
+                $start++;
+            }
+
+            $this->queryTable()
+                ->where('id', $child['id'])
+                ->update(
+                    ['position' => $start]
+                );
+            $start++;
+        }
+    }
+
 }

@@ -7,7 +7,7 @@ use Railroad\Railcontent\Repositories\DatumRepository;
 
 class DatumService
 {
-    private $datumRepository;
+    private $datumRepository, $contentRepository;
 
     public function __construct (DatumRepository $datumRepository, ContentRepository $contentRepository)
     {

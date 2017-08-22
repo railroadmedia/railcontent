@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Repositories\CategoryRepository;
 use Railroad\Railcontent\Repositories\FieldRepository;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Railroad\Railcontent\Services\ConfigService;
@@ -17,163 +16,103 @@ class FieldRepositoryTest extends RailcontentTestCase
         parent::setUp();
 
         $this->classBeingTested = $this->app->make(FieldRepository::class);
-        $this->categoryClass = $this->app->make(CategoryRepository::class);
     }
 
     public function test_insert_field()
     {
         $key = $this->faker->text(255);
         $value = $this->faker->text(255);
-        $field = $this->classBeingTested->updateOrCreateField(1, $key, $value);
+        $type = $this->faker->word;
+        $position = $this->faker->numberBetween();
+
+        $field = $this->classBeingTested->updateOrCreateField(1, $key, $value,  $type, $position);
 
         $this->assertEquals(1, $field);
 
         $this->assertDatabaseHas(
             ConfigService::$tableFields,
             [
-                'id' => 1,
+                'id' => $field,
                 'key' => $key,
-                'value' => $value
-
+                'value' => $value,
+                'type' => $type,
+                'position' => $position
             ]
         );
     }
 
     public function test_update_field()
     {
-        $key = $this->faker->text(255);
-        $value = $this->faker->text(255);
-        $field = $this->classBeingTested->updateOrCreateField(1, $key, $value);
+        $field = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(255),
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween()
+        ];
 
-        $this->assertEquals(1, $field);
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableFields,
-            [
-                'id' => 1,
-                'key' => $key,
-                'value' => $value
-
-            ]
-        );
+        $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
 
         $new_value = $this->faker->text(255);
-        $field = $this->classBeingTested->updateOrCreateField(1, $key, $new_value);
 
-        $this->assertEquals(1, $field);
+        $result = $this->classBeingTested->updateOrCreateField($fieldId, $field['key'], $new_value, $field['type'], $field['position']);
+
+        $this->assertEquals($fieldId, $result);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableFields,
             [
-                'id' => 1,
-                'key' => $key,
-                'value' => $value
-
+                'id' => $fieldId,
+                'key' => $field['key'],
+                'value' => $field['value'],
+                'type' => $field['type'],
+                'position' => $field['position']
             ]
         );
 
         $this->assertDatabaseHas(
             ConfigService::$tableFields,
             [
-                'id' => 1,
-                'key' => $key,
-                'value' => $new_value
-
+                'id' => $fieldId,
+                'key' =>  $field['key'],
+                'value' => $new_value,
+                'type' => $field['type'],
+                'position' => $field['position']
             ]
         );
     }
 
     public function test_delete_field()
     {
-        $id = 1;
-        $key = $this->faker->text(255);
-        $value = $this->faker->text(255);
+        $field = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(255),
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween()
+        ];
 
-        $this->classBeingTested->updateOrCreateField($id, $key, $value);
+        $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
 
-        $this->assertDatabaseHas(
-            ConfigService::$tableFields,
-            [
-                'id' => 1,
-                'key' => $key,
-                'value' => $value
 
-            ]
-        );
-
-        $this->classBeingTested->deleteField($id, $key);
+        $this->classBeingTested->deleteField($fieldId);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableFields,
             [
-                'id' => 1,
-                'key' => $key,
-                'value' => $value
-
+                'id' => $fieldId,
+                'key' => $field['key'],
+                'value' => $field['value'],
+                'type' => $field['type'],
+                'position' => $field['position']
             ]
         );
     }
 
-    public function test_link_category_field()
+    /**
+     * @return \Illuminate\Database\Connection
+     */
+    public function query()
     {
-        $slug = implode('-',$this->faker->words());
-        $type = $this->faker->text(64);
-
-        $categoryId = $this->categoryClass->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
-
-        $key = $this->faker->text(255);
-        $value = $this->faker->text(255);
-        $fieldId = $this->classBeingTested->updateOrCreateField(null, $key, $value);
-
-        $result = $this->classBeingTested->linkSubjectField($fieldId, $categoryId, ConfigService::$subjectTypeCategory);
-
-        $this->assertEquals(1, $result);
-    }
-
-    public function test_get_category_field()
-    {
-        $slug = implode('-',$this->faker->words());
-        $type = $this->faker->text(64);
-
-        $categoryId = $this->categoryClass->create($slug, null, 1,  ConfigService::$categoryStatusNew, $type);
-
-        $key = $this->faker->text(255);
-        $value = $this->faker->text(255);
-        $fieldId = $this->classBeingTested->updateOrCreateField(null, $key, $value);
-
-        $linkCategoryFieldId = $this->classBeingTested->linkSubjectField($fieldId, $categoryId, ConfigService::$subjectTypeCategory);
-
-        $results = $this->classBeingTested->getSubjectField($fieldId, $categoryId);
-
-        $expectedResults = new \stdClass();
-        $expectedResults->id = $linkCategoryFieldId;
-        $expectedResults->subject_id = $categoryId;
-        $expectedResults->subject_type = ConfigService::$subjectTypeCategory;
-        $expectedResults->field_id = $fieldId;
-        $expectedResults->created_at = Carbon::now()->toDateTimeString();
-        $expectedResults->updated_at = Carbon::now()->toDateTimeString();
-        $expectedResults->key = $key;
-        $expectedResults->value = $value;
-
-        $this->assertEquals($expectedResults, $results);
-    }
-
-    public function test_unlink_category_field()
-    {
-        $slug = implode('-',$this->faker->words());
-        $type = $this->faker->text(64);
-
-        $categoryId = $this->categoryClass->create($slug, null, 1, ConfigService::$categoryStatusNew, $type);
-
-        $key = $this->faker->text(255);
-        $value = $this->faker->text(255);
-        $fieldId = $this->classBeingTested->updateOrCreateField(null, $key, $value);
-
-        $this->classBeingTested->linkSubjectField($fieldId, $categoryId, ConfigService::$subjectTypeCategory);
-
-        $results = $this->classBeingTested->unlinkCategoryField($fieldId, $categoryId);
-
-        $this->assertEquals(1, $results);
+        return $this->databaseManager->connection();
     }
 
 }

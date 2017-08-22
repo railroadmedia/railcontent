@@ -100,8 +100,6 @@ class DatumRepositoryTest extends RailcontentTestCase
         );
     }
 
-
-
     /**
      * @return \Illuminate\Database\Connection
      */

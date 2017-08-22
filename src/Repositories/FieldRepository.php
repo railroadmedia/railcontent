@@ -15,13 +15,14 @@ class FieldRepository extends RepositoryBase
      * @param string $value
      * @return int
      */
-    public function updateOrCreateField($id, $key, $value)
+    public function updateOrCreateField($id, $key, $value, $type, $position)
     {
         $update = $this->query()->where('id', $id)->update(
             [
                 'key' => $key,
                 'value' => $value,
-                'updated_at' => Carbon::now()->toDateTimeString()
+                'type' => $type,
+                'position' => $position
             ]
         );
 
@@ -30,8 +31,8 @@ class FieldRepository extends RepositoryBase
                 [
                     'key' => $key,
                     'value' => $value,
-                    'created_at' => Carbon::now()->toDateTimeString(),
-                    'updated_at' => Carbon::now()->toDateTimeString()
+                    'type' => $type,
+                    'position' => $position
                 ]
             );
         }
@@ -72,19 +73,7 @@ class FieldRepository extends RepositoryBase
         return $categoryFieldId;
     }
 
-    /**
-     * Delete the links between category and associated fields
-     * @param $categoryId
-     */
-    public function unlinkCategoryFields ($categoryId)
-    {
-        return $this->subjectFieldsQuery()->where(
-            [
-                'subject_id' => $categoryId,
-                'subject_type' => ConfigService::$subjectTypeCategory
-            ]
-        )->delete();
-    }
+
 
     /**
      * Get the category and the field data from database
@@ -125,22 +114,6 @@ class FieldRepository extends RepositoryBase
             )->get()->toArray();
     }
 
-    /**
-     * Delete the link between category and field
-     * @param integer $fieldId
-     * @param integer $categoryId
-     * @return int
-     */
-    public function unlinkCategoryField($fieldId, $categoryId)
-    {
-        return $this->subjectFieldsQuery()->where(
-            [
-                'subject_id' => $categoryId,
-                'subject_type' => ConfigService::$subjectTypeCategory,
-                'field_id' => $fieldId
-            ]
-        )->delete();
-    }
 
     /**
      * @return Builder

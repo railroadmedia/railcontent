@@ -129,7 +129,7 @@ class ContentControllerTest extends RailcontentTestCase
             [
                 'id' => '1',
                 'slug' => $slug,
-                'position' => $position,
+                'position' => 1,
                 'parent_id' => null,
                 'status' => $status,
                 'type' => $type,
@@ -152,7 +152,7 @@ class ContentControllerTest extends RailcontentTestCase
         $expectedResult = [
             'id' => 1,
             'slug' => $slug,
-            'position' => $position,
+            'position' => 1,
             'parent_id' => null,
             'status' => $status,
             'type' => $type,
@@ -300,7 +300,7 @@ class ContentControllerTest extends RailcontentTestCase
             [
                 'id' => $contentId,
                 'slug' => $new_slug,
-                'position' => $content['position'],
+                'position' => 1,
                 'status' =>  $content['status'],
                 'type' => $content['type'],
                 'parent_id' => $content['parent_id'],
@@ -330,6 +330,7 @@ class ContentControllerTest extends RailcontentTestCase
 
         $content['id'] = $contentId;
         $content['slug'] = $new_slug;
+        $content['position'] = 1;
 
         $this->assertEquals($content, $updatedContent);
     }

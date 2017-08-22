@@ -8,31 +8,33 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\FieldRepository;
 
 class FieldService
 {
-    private $fieldReposity;
+    private $fieldReposity, $contentRepository;
 
-    public function __construct(FieldRepository $fieldRepository)
+    public function __construct(FieldRepository $fieldRepository, ContentRepository $contentRepository)
     {
         $this->fieldReposity = $fieldRepository;
+        $this->contentRepository = $contentRepository;
     }
 
     /**
-     * Create a new field, link the category with the new created field and return the category with the linked field
-     * @param integer $categoryId
+     * Create a new field, link the content with the new created field and return the content with the linked field
+     * @param integer $contentId
      * @param string $key
      * @param string $value
      * @return array
      */
-    public function createCategoryField($categoryId, $fieldId = null, $key, $value, $subjectType)
+    public function createField($contentId, $fieldId = null, $key, $value, $type, $position)
     {
-        $fieldId = $this->fieldReposity->updateOrCreateField($fieldId,$key,$value);
+        $fieldId = $this->fieldReposity->updateOrCreateField($fieldId, $key, $value, $type, $position);
 
-        $this->fieldReposity->linkSubjectField($fieldId, $categoryId, $subjectType);
+        $this->contentRepository->linkField($contentId, $fieldId);
 
-        return $this->fieldReposity->getSubjectField($fieldId, $categoryId, $subjectType);
+        return $this->contentRepository->getLinkedField($fieldId, $contentId);
     }
 
     /**
@@ -42,11 +44,11 @@ class FieldService
      * @param $value
      * @return int
      */
-    public function updateCategoryField($categoryId, $fieldId, $key, $value, $subjectType)
+    public function updateField($contentId, $fieldId, $key, $value, $type, $position)
     {
-        $this->fieldReposity->updateOrCreateField($fieldId, $key ,$value);
+        $this->fieldReposity->updateOrCreateField($fieldId, $key ,$value,  $type, $position);
 
-        return  $this->fieldReposity->getSubjectField($fieldId, $categoryId, $subjectType);
+        return  $this->fieldReposity->getSubjectField($fieldId, $contentId);
     }
 
     /**
@@ -66,9 +68,9 @@ class FieldService
      * @param integer $categoryId
      * @return bool
      */
-    public function deleteCategoryField($fieldId, $categoryId, $subjectType)
+    public function deleteField($fieldId, $contentId)
     {
-        return $this->fieldReposity->unlinkCategoryField($fieldId, $categoryId, $subjectType);
+        return $this->fieldReposity->unlinkCategoryField($fieldId, $contentId);
     }
 
     /**

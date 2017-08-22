@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Railroad\Railcontent\Services\ConfigService;
 
 class FieldRequest extends FormRequest
 {
@@ -26,7 +27,9 @@ class FieldRequest extends FormRequest
         return [
             'key' => 'required|max:255',
             'value' => 'required|max:255',
-            'category_id' => 'required'
+            'type' => 'required',
+            'position' => 'nullable',
+            'content_id' => 'required|numeric|exists:' . ConfigService::$tableContent . ',id'
         ];
     }
 }
