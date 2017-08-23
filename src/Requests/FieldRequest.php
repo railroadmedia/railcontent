@@ -27,8 +27,8 @@ class FieldRequest extends FormRequest
         return [
             'key' => 'required|max:255',
             'value' => 'required|max:255',
-            'type' => 'required',
-            'position' => 'nullable',
+            'type' => 'required|max:255',
+            'position' => 'nullable|numeric|min:0',
             'content_id' => 'required|numeric|exists:' . ConfigService::$tableContent . ',id'
         ];
     }

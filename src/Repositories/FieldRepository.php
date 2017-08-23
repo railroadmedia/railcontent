@@ -52,67 +52,6 @@ class FieldRepository extends RepositoryBase
         )->delete();
     }
 
-    /**
-     * Insert a new record in railcontent_subject_fields table
-     * @param integer $fieldId
-     * @param integer $categoryId
-     * @param string $subjectType
-     * @return int
-     */
-    public function linkSubjectField($fieldId, $categoryId, $subjectType)
-    {
-        $categoryFieldId =  $this->subjectFieldsQuery()->insertGetId(
-            [
-                'subject_id' => $categoryId,
-                'subject_type' => $subjectType,
-                'field_id' => $fieldId,
-                'created_at' => Carbon::now()->toDateTimeString(),
-                'updated_at' => Carbon::now()->toDateTimeString()
-            ]);
-
-        return $categoryFieldId;
-    }
-
-
-
-    /**
-     * Get the category and the field data from database
-     * @param integer $fieldId
-     * @return mixed
-     */
-    public function getSubjectField($fieldId, $categoryId)
-    {
-        $fieldIdLabel = ConfigService::$tableFields.'.id';
-
-        return $this->subjectFieldsQuery()
-            ->leftJoin(ConfigService::$tableFields,'field_id','=',$fieldIdLabel)
-            ->where(
-                [
-                    'field_id' => $fieldId,
-                    'subject_id' => $categoryId,
-                    'subject_type' => ConfigService::$subjectTypeCategory
-                ]
-            )->get()->first();
-    }
-
-    /**
-     * Get all category linked fields data
-     * @param integer $categoryId
-     * @return array
-     */
-    public function getCategoryFields($categoryId)
-    {
-        $fieldIdLabel = ConfigService::$tableFields.'.id';
-
-        return $this->subjectFieldsQuery()
-            ->leftJoin(ConfigService::$tableFields,'field_id','=',$fieldIdLabel)
-            ->where(
-                [
-                    'subject_id' => $categoryId,
-                    'subject_type' => ConfigService::$subjectTypeCategory
-                ]
-            )->get()->toArray();
-    }
 
 
     /**
@@ -121,13 +60,5 @@ class FieldRepository extends RepositoryBase
     public function query()
     {
         return parent::connection()->table(ConfigService::$tableFields);
-    }
-
-    /**
-     * @return Builder
-     */
-    public function subjectFieldsQuery()
-    {
-        return parent::connection()->table(ConfigService::$tableContentFields);
     }
 }

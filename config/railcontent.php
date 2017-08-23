@@ -5,12 +5,10 @@ return [
     'database_connection_name' => 'mysql',
 
     'tables' => [
-        'categories' => 'railcontent_categories',
         'content' => 'railcontent_content',
-        'content_categories' => 'railcontent_content_categories',
-        'versions' => 'railcontent_versions',
+        'versions' => 'railcontent_content_versions',
         'fields' => 'railcontent_fields',
-        'subject_fields' => 'railcontent_subject_fields',
+        'content_fields' => 'railcontent_content_fields',
         'data' => 'railcontent_data',
         'content_data' => 'railcontent_content_data',
     ],

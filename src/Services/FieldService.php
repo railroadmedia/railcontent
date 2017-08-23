@@ -48,18 +48,18 @@ class FieldService
     {
         $this->fieldReposity->updateOrCreateField($fieldId, $key ,$value,  $type, $position);
 
-        return  $this->fieldReposity->getSubjectField($fieldId, $contentId);
+        return $this->contentRepository->getLinkedField($fieldId, $contentId);
     }
 
     /**
-     * Return the category with the linked field
+     * Return the content with the linked field
      * @param integer $fieldId
      * @param integer $categoryId
      * @return array
      */
-    public function getCategoryField($fieldId, $categoryId, $subjectType)
+    public function getField($fieldId, $contentId)
     {
-        return $this->fieldReposity->getSubjectField($fieldId, $categoryId, $subjectType);
+        return $this->contentRepository->getLinkedField($fieldId, $contentId);
     }
 
     /**
@@ -70,7 +70,7 @@ class FieldService
      */
     public function deleteField($fieldId, $contentId)
     {
-        return $this->fieldReposity->unlinkCategoryField($fieldId, $contentId);
+        return $this->contentRepository->unlinkField($contentId, $fieldId);
     }
 
     /**

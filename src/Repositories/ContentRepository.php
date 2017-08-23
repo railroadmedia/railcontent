@@ -325,6 +325,25 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * Get the content and the associated field from database based on key
+     * @param string $key
+     * @param integer $contentId
+     */
+    public function getContentLinkedFieldByKey($key, $contentId)
+    {
+        $fieldIdLabel = ConfigService::$tableFields.'.id';
+
+        return $this->contentFieldsQuery()
+            ->leftJoin(ConfigService::$tableFields,'field_id','=',$fieldIdLabel)
+            ->where(
+                [
+                    'key' => $key,
+                    'content_id' => $contentId
+                ]
+            )->get()->first();
+    }
+
+    /**
      * @return Builder
      */
     public function queryTable()

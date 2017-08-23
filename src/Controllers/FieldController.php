@@ -44,8 +44,14 @@ class FieldController extends Controller
      */
     public function update($fieldId, FieldRequest $request)
     {
-        $categoryField = $this->fieldService->updateField(
-            $request->input('category_id'),
+        $field = $this->fieldService->getField($fieldId,  $request->input('content_id'));
+
+        if (is_null($field)) {
+            return response()->json('Update failed, field not found with id: ' . $field, 404);
+        }
+
+        $contentField = $this->fieldService->updateField(
+            $request->input('content_id'),
             $fieldId,
             $request->input('key'),
             $request->input('value'),
@@ -53,7 +59,7 @@ class FieldController extends Controller
             $request->input('position')
         );
 
-        return response()->json($categoryField, 201);
+        return response()->json($contentField, 201);
     }
 
     /**
@@ -63,11 +69,14 @@ class FieldController extends Controller
      */
     public function delete($fieldId, Request $request)
     {
-        $categoryField = $this->fieldService->deleteField(
+        $deleted = $this->fieldService->deleteField(
             $fieldId,
             $request->input('content_id')
         );
 
-        return response()->json($categoryField,200);
+        if (!$deleted) {
+            return response()->json('Delete failed, content field not found with id: ' . $fieldId, 404);
+        }
+        return response()->json($deleted,200);
     }
 }

@@ -43,6 +43,12 @@ class DatumController extends Controller
      */
     public function update($dataId, DatumRequest $request)
     {
+        $datum = $this->datumService->getDatum($dataId,  $request->input('content_id'));
+
+        if (is_null($datum)) {
+            return response()->json('Update failed, datum not found with id: ' . $dataId, 404);
+        }
+
         $categoryData = $this->datumService->updateDatum(
             $request->input('content_id'),
             $dataId,
@@ -61,11 +67,15 @@ class DatumController extends Controller
      */
     public function delete($dataId,Request $request)
     {
-        $categoryData = $this->datumService->deleteDatum(
+        $deleted = $this->datumService->deleteDatum(
             $dataId,
             $request->input('content_id')
         );
 
-        return response()->json($categoryData,200);
+        if (!$deleted) {
+            return response()->json('Delete failed, datum not found with id: ' . $dataId, 404);
+        }
+
+        return response()->json($deleted,200);
     }
 }
