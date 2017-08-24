@@ -368,12 +368,29 @@ class ContentRepository extends RepositoryBase
                     ConfigService::$tableContent . '.published_on as published_on',
                     ConfigService::$tableContent . '.created_on as created_on',
                     ConfigService::$tableContent . '.archived_on as archived_on',
-                    ConfigService::$tableContentFields . '.field_id as field_id',
+                    //ConfigService::$tableContentFields . '.field_id as field_id',
+                    ConfigService::$tableFields . '.id as field_id',
                     ConfigService::$tableFields . '.key as field_key',
                     ConfigService::$tableFields . '.value as field_value',
                     ConfigService::$tableFields . '.type as field_type',
                     ConfigService::$tableFields . '.position as field_position',
+                    ConfigService::$tableData . '.key as datum_key',
+                    ConfigService::$tableData . '.value as datum_value',
+                    ConfigService::$tableData . '.position as datum_position',
+
                 ]
+            )
+            ->leftJoin(
+                ConfigService::$tableContentData,
+                ConfigService::$tableContentData . '.content_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->leftJoin(
+                ConfigService::$tableData,
+                ConfigService::$tableData . '.id',
+                '=',
+                ConfigService::$tableContentData . '.datum_id'
             )
             ->leftJoin(
                 ConfigService::$tableContentFields,
@@ -387,7 +404,7 @@ class ContentRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContentFields . '.field_id'
             )
-            ->groupBy([ConfigService::$tableFields . '.id', ConfigService::$tableContent . '.id']);
+            ->groupBy([ConfigService::$tableFields . '.id', ConfigService::$tableContent . '.id', ConfigService::$tableData . '.id']);
     }
 
     /**
@@ -443,7 +460,7 @@ class ContentRepository extends RepositoryBase
         }
 
         foreach ($fieldsWithContent as $fieldWithContent) {
-            if ($fieldWithContent['field_key'] === null) {
+            if (($fieldWithContent['field_key'] === null)&&($fieldWithContent['datum_key'] === null)) {
                 continue;
             }
 
@@ -461,12 +478,26 @@ class ContentRepository extends RepositoryBase
                     'archived_on' => $linkedContents[$fieldWithContent['field_value']]['archived_on'],
                 ];
 
-                foreach ($linkedContents[$fieldWithContent['field_value']]['fields'] as
-                         $linkedContentFieldKey => $linkedContentFieldValue) {
+                if (array_key_exists('fields', $linkedContents[$fieldWithContent['field_value']]))
+                {
+                    foreach ($linkedContents[$fieldWithContent['field_value']]['fields'] as
+                             $linkedContentFieldKey => $linkedContentFieldValue) {
 
-                    $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']]
-                    ['fields'][$linkedContentFieldKey] = $linkedContentFieldValue;
+                        $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']]
+                        ['fields'][$linkedContentFieldKey] = $linkedContentFieldValue;
+                    }
                 }
+
+                if (array_key_exists('datum', $linkedContents[$fieldWithContent['field_value']]))
+                {
+                    foreach ($linkedContents[$fieldWithContent['field_value']]['datum'] as
+                             $linkedContentDatumKey => $linkedContentDatumValue) {
+
+                        $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']]
+                        ['datum'][$linkedContentDatumKey] = $linkedContentDatumValue;
+                    }
+                }
+
             } else {
                 // put multiple fields with same key in to an array
                 if ($fieldWithContent['field_type'] == 'multiple') {
@@ -476,16 +507,23 @@ class ContentRepository extends RepositoryBase
                     [$fieldWithContent['field_key']]
                     [$fieldWithContent['field_position']] =
                         $fieldWithContent['field_value'];
-                } else {
+
+                } elseif($fieldWithContent['field_value']) {
 
                     $content[$fieldWithContent['id']]
                     ['fields']
                     [$fieldWithContent['field_key']] =
                         $fieldWithContent['field_value'];
-
                 }
             }
 
+            //put datum as array key => value
+            if($fieldWithContent['datum_value']){
+                $content[$fieldWithContent['id']]
+                ['datum']
+                [$fieldWithContent['datum_key']] =
+                    $fieldWithContent['datum_value'];
+            }
         }
 
         return $content;
@@ -551,6 +589,15 @@ class ContentRepository extends RepositoryBase
                 );
             $start++;
         }
+    }
+
+    /**
+     * Get all contents order by parent and position
+     * @return array
+     */
+    public function getAllContents()
+    {
+        return $this->queryIndex()->orderBy('parent_id','asc')->orderBy('position','asc')->get()->toArray();
     }
 
 }

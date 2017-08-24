@@ -1408,6 +1408,227 @@ class ContentRepositoryTest extends RailcontentTestCase
         );
     }
 
+    public function test_get_many_by_id_with_datum()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => $this->faker->word,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $linkedDatumdKey = $this->faker->word;
+        $linkedDatumValue = $this->faker->word;
+
+        $linkedDatumId = $this->query()->table(ConfigService::$tableData)->insertGetId(
+            [
+                'key' => $linkedDatumdKey,
+                'value' => $linkedDatumValue,
+                'position' => 1,
+            ]
+        );
+
+        $linkedContentDatumLinkId = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'datum_id' => $linkedDatumId,
+            ]
+        );
+
+        $response = $this->classBeingTested->getById($contentId);
+
+        $this->assertEquals(
+            [
+                    "id" => $contentId,
+                    "slug" => $content["slug"],
+                    "status" => $content["status"],
+                    "type" => $content["type"],
+                    "position" => $content["position"],
+                    "parent_id" => $content["parent_id"],
+                    "published_on" => $content["published_on"],
+                    "created_on" => $content["created_on"],
+                    "archived_on" => $content["archived_on"],
+                    "datum" => [
+                        $linkedDatumdKey => $linkedDatumValue
+                    ],
+            ],
+            $response
+        );
+    }
+
+    public function test_get_many_by_id_with_multiple_datum()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => $this->faker->word,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $linkedDatumdKey = $this->faker->word;
+        $linkedDatumValue = $this->faker->word;
+
+        $linkedDatumId = $this->query()->table(ConfigService::$tableData)->insertGetId(
+            [
+                'key' => $linkedDatumdKey,
+                'value' => $linkedDatumValue,
+                'position' => 1,
+            ]
+        );
+
+        $linkedContentDatumLinkId = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'datum_id' => $linkedDatumId,
+            ]
+        );
+
+        $linkedDatumdKey2 = $this->faker->word;
+        $linkedDatumValue2 = $this->faker->word;
+
+        $linkedDatumId2 = $this->query()->table(ConfigService::$tableData)->insertGetId(
+            [
+                'key' => $linkedDatumdKey2,
+                'value' => $linkedDatumValue2,
+                'position' => 1,
+            ]
+        );
+
+        $linkedContentDatumLinkId2 = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'datum_id' => $linkedDatumId2,
+            ]
+        );
+
+        $response = $this->classBeingTested->getById($contentId);
+
+        $this->assertEquals(
+            [
+                "id" => $contentId,
+                "slug" => $content["slug"],
+                "status" => $content["status"],
+                "type" => $content["type"],
+                "position" => $content["position"],
+                "parent_id" => $content["parent_id"],
+                "published_on" => $content["published_on"],
+                "created_on" => $content["created_on"],
+                "archived_on" => $content["archived_on"],
+                "datum" => [
+                    $linkedDatumdKey => $linkedDatumValue,
+                    $linkedDatumdKey2 => $linkedDatumValue2
+                ],
+            ],
+            $response
+        );
+    }
+
+    public function test_get_many_by_id_with_field_and_datum()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => $this->faker->word,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $linkedFieldKey = $this->faker->word;
+        $linkedFieldValue = $this->faker->word;
+
+        $linkedFieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId(
+            [
+                'key' => $linkedFieldKey,
+                'value' => $linkedFieldValue,
+                'type' => 'string',
+                'position' => null,
+            ]
+        );
+
+        $linkedContentFieldLinkId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'field_id' => $linkedFieldId,
+            ]
+        );
+
+        $linkedDatumKey = $this->faker->word;
+        $linkedDatumValue = $this->faker->word;
+
+        $linkedDatumId = $this->query()->table(ConfigService::$tableData)->insertGetId(
+            [
+                'key' => $linkedDatumKey,
+                'value' => $linkedDatumValue,
+                'position' => 1,
+            ]
+        );
+
+        $linkedContentDatumLinkId = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'datum_id' => $linkedDatumId,
+            ]
+        );
+
+        $linkedDatumKey2 = $this->faker->word;
+        $linkedDatumValue2 = $this->faker->word;
+
+        $linkedDatumId2 = $this->query()->table(ConfigService::$tableData)->insertGetId(
+            [
+                'key' => $linkedDatumKey2,
+                'value' => $linkedDatumValue2,
+                'position' => 1,
+            ]
+        );
+
+        $linkedContentDatumLinkId2 = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'datum_id' => $linkedDatumId2,
+            ]
+        );
+
+        $response = $this->classBeingTested->getById($contentId);
+
+        $this->assertEquals(
+            [
+                "id" => $contentId,
+                "slug" => $content["slug"],
+                "status" => $content["status"],
+                "type" => $content["type"],
+                "position" => $content["position"],
+                "parent_id" => $content["parent_id"],
+                "published_on" => $content["published_on"],
+                "created_on" => $content["created_on"],
+                "archived_on" => $content["archived_on"],
+                "fields" => [
+                    $linkedFieldKey => $linkedFieldValue,
+                ],
+                "datum" => [
+                    $linkedDatumKey => $linkedDatumValue,
+                    $linkedDatumKey2 => $linkedDatumValue2
+                ],
+            ],
+            $response
+        );
+    }
     /**
      * @return \Illuminate\Database\Connection
      */
