@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Requests\ContentRequest;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Events\ContentUpdated;
 
 class ContentController extends Controller
 {
@@ -74,6 +75,8 @@ class ContentController extends Controller
         if (is_null($content)) {
             return response()->json('Update failed, content not found with id: ' . $contentId, 404);
         }
+
+        event(new ContentUpdated($contentId));
 
         $content = $this->contentService->update(
             $contentId,

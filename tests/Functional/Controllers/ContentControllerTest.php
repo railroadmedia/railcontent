@@ -3,6 +3,9 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Events\CategoryUpdated;
+use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Listeners\VersionContentEventListener;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Response;
@@ -396,6 +399,44 @@ class ContentControllerTest extends RailcontentTestCase
         $response = $this->call('DELETE', 'content/1', ['deleteChildren' => 0]);
 
         $this->assertEquals(404, $response->status());
+    }
+
+    public function version_old_content_on_update()
+    {
+        $this->expectsEvents(ContentUpdated::class);
+
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => "1",
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $new_slug = $this->faker->word;
+
+        $response = $this->call('PUT', 'content/'.$contentId, [
+            'slug' => $new_slug,
+            'status' => ContentService::STATUS_DRAFT,
+            'position' => $content['position'],
+            'type' => $content['type']
+        ]);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableVersions,
+            [
+                'id' => 1,
+                'content_id' => $contentId,
+                'author_id' => null,
+                'state' => '',
+                //'data' => serialize($content),
+                'saved_on' => Carbon::now()->toDateTimeString()
+            ]
+        );
     }
 
     /**

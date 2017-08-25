@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Railroad\Railcontent\Requests\DatumRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\DatumService;
+use Railroad\Railcontent\Events\ContentUpdated;
 
 class DatumController extends Controller
 {
@@ -24,6 +25,8 @@ class DatumController extends Controller
      */
     public function store(DatumRequest $request)
     {
+        event(new ContentUpdated($request->input('content_id')));
+
         $categoryData = $this->datumService->createDatum(
             $request->input('content_id'),
             null,
@@ -49,6 +52,8 @@ class DatumController extends Controller
             return response()->json('Update failed, datum not found with id: ' . $dataId, 404);
         }
 
+        event(new ContentUpdated($request->input('content_id')));
+
         $categoryData = $this->datumService->updateDatum(
             $request->input('content_id'),
             $dataId,
@@ -67,6 +72,8 @@ class DatumController extends Controller
      */
     public function delete($dataId,Request $request)
     {
+        event(new ContentUpdated($request->input('content_id')));
+
         $deleted = $this->datumService->deleteDatum(
             $dataId,
             $request->input('content_id')

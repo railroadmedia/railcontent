@@ -6,6 +6,8 @@ use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use PDO;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Listeners\VersionContentEventListener;
 
 class RailcontentServiceProvider extends ServiceProvider
 {
@@ -22,7 +24,8 @@ class RailcontentServiceProvider extends ServiceProvider
                 function ($event) {
                     $event->statement->setFetchMode(PDO::FETCH_ASSOC);
                 }
-            ]
+            ],
+            ContentUpdated::class => [VersionContentEventListener::class . '@handle']
         ];
 
         parent::boot();
