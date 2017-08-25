@@ -35,12 +35,45 @@ class ContentController extends Controller
         // WIP
 //        $this->contentService->getPaginated();
 
-//        'page' => 'numeric|min:1',
-//            'amount' => 'numeric|min:1',
-//            'statuses' => 'array',
-//            'types' => 'array',
-//            'parent_slug' => 'string',
-//            'include_future_published_on' => 'boolean'
+
+        /*
+         * Request post data examples:
+         *
+         * Get a courses 10th to 20th lessons where the instructor is caleb and the topic is bass drumming
+         * [
+         *      'page' => 2,
+         *      'amount' => 10,
+         *      'statues' => ['published'],
+         *      'types' => ['course lesson'],
+         *      'parent_slug' => 'my-cool-course-5',
+         *      'include_future_published_on' => false, // this would be true for admins previewing posts
+         *      'required_fields' => ['instructor' => 'caleb', 'topic' => 'bass drumming'],
+         * ]
+         *
+         * Get 40th to 60th library lesson where the topic is snare
+         * [
+         *      'page' => 3,
+         *      'amount' => 20,
+         *      'statues' => ['published'],
+         *      'types' => ['library lesson'],
+         *      'parent_slug' => null,
+         *      'include_future_published_on' => false,
+         *      'required_fields' => ['topic' => 'snare'],
+         * ]
+         *
+         * Get the most recent play along draft lesson
+         * [
+         *      'page' => 1,
+         *      'amount' => 1,
+         *      'statues' => ['draft'],
+         *      'types' => ['play along'],
+         *      'parent_slug' => null,
+         *      'include_future_published_on' => true,
+         *      'required_fields' => [],
+         * ]
+         *
+         */
+
     }
 
     /** Create a new category and return it in JSON format

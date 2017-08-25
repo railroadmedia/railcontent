@@ -65,6 +65,7 @@ class ContentRepository extends RepositoryBase
      * @param string $orderByColumn
      * @param array $statues
      * @param array $types
+     * @param array $requiredFields
      * @param int|null $parentId
      * @param bool $includeFuturePublishedOn
      * @return array
@@ -76,9 +77,12 @@ class ContentRepository extends RepositoryBase
         $orderByColumn = 'published_on',
         array $statues = [],
         array $types = [],
+        array $requiredFields = [],
         $parentId = null,
         $includeFuturePublishedOn = false
     ) {
+        // todo: db logic for required fields
+
         $page--;
 
         $fieldsWithContent = $this->queryIndex()

@@ -31,6 +31,7 @@ class ContentService
      * @param int $amount
      * @param array $statues
      * @param array $types
+     * @param array $requiredFields
      * @param null $parentSlug
      * @param bool $includeFuturePublishedOn
      */
@@ -39,6 +40,7 @@ class ContentService
         $amount,
         array $statues = [],
         array $types = [],
+        array $requiredFields = [],
         $parentSlug = null,
         $includeFuturePublishedOn = false
     ) {
