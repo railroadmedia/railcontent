@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Repositories\FieldRepository;
 use Railroad\Railcontent\Services\FieldService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -383,5 +385,82 @@ class FieldControllerTest extends RailcontentTestCase
         $results = $this->serviceBeingTested->deleteField($fieldId, $contentId);
 
         $this->assertEquals(1, $results);
+    }
+
+    public function test_content_updated_event_dispatched_when_link_content_field()
+    {
+        Event::fake();
+
+        $key = $this->faker->text(255);
+        $value = $this->faker->text(255);
+        $type = $this->faker->word;
+        $position = $this->faker->numberBetween();
+
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $response = $this->call('POST', 'content/field', [
+            'content_id' => $contentId,
+            'key' => $key,
+            'value' => $value,
+            'type' => $type,
+            'position' => $position
+        ]);
+
+        //check that the ContentUpdated event was dispatched with the correct content id
+        Event::assertDispatched(ContentUpdated::class, function ($event) use ($contentId) {
+            return $event->contentId == $contentId;
+        });
+    }
+
+    public function test_content_updated_event_dispatched_when_unlink_content_field()
+    {
+        Event::fake();
+
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $field = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(255),
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween()
+        ];
+
+        $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
+
+        $contentField = [
+            'content_id' => $contentId,
+            'field_id' => $fieldId
+        ];
+
+        $contentFieldId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField);
+
+        $response = $this->call('DELETE', 'content/field/'.$fieldId, ['content_id' => $contentId]);
+
+        //check that the ContentUpdated event was dispatched with the correct content id
+        Event::assertDispatched(ContentUpdated::class, function ($event) use ($contentId) {
+            return $event->contentId == $contentId;
+        });
     }
 }
