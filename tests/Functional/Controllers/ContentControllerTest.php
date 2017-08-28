@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\CategoryUpdated;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Listeners\VersionContentEventListener;
@@ -401,9 +402,9 @@ class ContentControllerTest extends RailcontentTestCase
         $this->assertEquals(404, $response->status());
     }
 
-    public function version_old_content_on_update()
+    public function test_version_old_content_on_update()
     {
-        $this->expectsEvents(ContentUpdated::class);
+        Event::fake();
 
         $content = [
             'slug' => $this->faker->word,
@@ -417,6 +418,7 @@ class ContentControllerTest extends RailcontentTestCase
         ];
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
         $new_slug = $this->faker->word;
 
         $response = $this->call('PUT', 'content/'.$contentId, [
@@ -426,17 +428,37 @@ class ContentControllerTest extends RailcontentTestCase
             'type' => $content['type']
         ]);
 
-        $this->assertDatabaseHas(
-            ConfigService::$tableVersions,
-            [
-                'id' => 1,
-                'content_id' => $contentId,
-                'author_id' => null,
-                'state' => '',
-                //'data' => serialize($content),
-                'saved_on' => Carbon::now()->toDateTimeString()
-            ]
-        );
+        //check that the ContentUpdated event was dispatched with the correct content id
+        Event::assertDispatched(ContentUpdated::class, function ($event) use ($contentId) {
+            return $event->contentId == $contentId;
+        });
+    }
+
+    public function test_version_old_content_before_delete_content()
+    {
+        Event::fake();
+
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => "1",
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $new_slug = $this->faker->word;
+
+        $response = $this->call('DELETE', 'content/'.$contentId);
+
+        //check that the ContentUpdated event was dispatched with the correct content id
+        Event::assertDispatched(ContentUpdated::class, function ($event) use ($contentId) {
+            return $event->contentId == $contentId;
+        });
     }
 
     /**

@@ -134,6 +134,8 @@ class ContentController extends Controller
      */
     public function delete($contentId, Request $request)
     {
+        event(new ContentUpdated($contentId));
+
         $deleted = $this->contentService->delete($contentId, $request->input('delete_children'));
 
         if (!$deleted) {
