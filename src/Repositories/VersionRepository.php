@@ -33,6 +33,18 @@ class VersionRepository extends RepositoryBase
     }
 
     /**
+     * Return content version from database, based on version id
+     * @param integer $versionId
+     * @return mixed
+     */
+    public function get($versionId)
+    {
+        $content = $this->queryTable()->where('id', $versionId)->get()->first();
+
+        return $content;
+    }
+
+    /**
      * @return Builder
      */
     public function queryTable()

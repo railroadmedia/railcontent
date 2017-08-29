@@ -134,14 +134,28 @@ class ContentController extends Controller
      */
     public function delete($contentId, Request $request)
     {
+        $content = $this->contentService->getById($contentId);
+
+        if (is_null($content)) {
+            return response()->json('Delete failed, content not found with id: ' . $contentId, 404);
+        }
+
         event(new ContentUpdated($contentId));
 
         $deleted = $this->contentService->delete($contentId, $request->input('delete_children'));
 
-        if (!$deleted) {
-            return response()->json('Delete failed, content not found with id: ' . $contentId, 404);
-        }
-
         return response()->json($deleted, 200);
+    }
+
+    /**
+     * Call the restore content method and return the new content in JSON format
+     * @param integer $versionId
+     * @return JsonResponse
+     */
+    public function restoreContent($versionId)
+    {
+        $restored = $this->contentService->restoreContent($versionId);
+
+        return response()->json($restored, 200);
     }
 }

@@ -3,13 +3,14 @@
 namespace Railroad\Railcontent\Services;
 
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\VersionRepository;
 
 class ContentService
 {
     /**
      * @var ContentRepository
      */
-    private $contentRepository;
+    private $contentRepository, $versionRepository;
 
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
@@ -21,9 +22,10 @@ class ContentService
      *
      * @param ContentRepository $contentRepository
      */
-    public function __construct(ContentRepository $contentRepository)
+    public function __construct(ContentRepository $contentRepository, VersionRepository $versionRepository)
     {
         $this->contentRepository = $contentRepository;
+        $this->versionRepository = $versionRepository;
     }
 
     /**
@@ -147,5 +149,58 @@ class ContentService
     public function delete($id, $deleteChildren = false)
     {
         return $this->contentRepository->delete($id, $deleteChildren) > 0;
+    }
+
+    /**
+     * Get old version content based on the versionId, restore the content data, link fields and datum
+     * @param integer $versionId
+     * @return bool
+     */
+    public function restoreContent($versionId)
+    {
+        //get saved content version from database
+        $restoredContentVersion = $this->versionRepository->get($versionId);
+
+        $contentId = $restoredContentVersion['content_id'];
+
+        //unserialize content
+        $oldContent = unserialize($restoredContentVersion['data']);
+
+        //update content with version data
+        $this->contentRepository->update(
+            $contentId,
+            $oldContent['slug'],
+            $oldContent['status'],
+            $oldContent['type'],
+            $oldContent['position'],
+            $oldContent['parent_id'],
+            $oldContent['published_on'],
+            $oldContent['archived_on']
+        );
+
+
+        // unlink all fields and data
+        $this->contentRepository->unlinkField($contentId);
+        $this->contentRepository->unlinkDatum($contentId);
+
+        //link fields from content version
+        if(array_key_exists('fields', $oldContent))
+        {
+            foreach ($oldContent['fields'] as $key=>$value)
+            {
+                $this->contentRepository->linkField($contentId, $key);
+            }
+        }
+
+        //link datum from content version
+        if(array_key_exists('datum', $oldContent))
+        {
+            foreach ($oldContent['datum'] as $key=>$value)
+            {
+                $this->contentRepository->linkDatum($contentId, $key);
+            }
+        }
+
+        return $this->contentRepository->getById($contentId);
     }
 }

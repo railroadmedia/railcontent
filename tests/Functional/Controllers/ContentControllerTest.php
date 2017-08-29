@@ -461,6 +461,67 @@ class ContentControllerTest extends RailcontentTestCase
         });
     }
 
+    public function test_restore_content()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => "1",
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $this->call('POST', 'content/datum', [
+            'content_id' => $contentId,
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(500),
+            'position' => 1
+        ]);
+
+        $content = $this->classBeingTested->getById($contentId);
+
+        $this->call('DELETE', 'content/datum/1',[
+            'content_id' => $contentId
+        ]);
+
+        //restore content to version 2, where the datum it's linked to the content
+        $response = $this->call('GET', 'content/restore/2');
+
+        $response->assertJsonStructure(
+            [
+                'id' ,
+                'slug',
+                'status',
+                'type',
+                'position',
+                'parent_id',
+                'published_on',
+                'created_on',
+                'archived_on',
+                'datum'
+            ]
+        );
+
+        $response->assertJson(
+            [
+                'id' => $contentId,
+                'slug' => $content['slug'],
+                'position' => $content['position'],
+                'status' =>  $content['status'],
+                'type' => $content['type'],
+                'parent_id' => $content['parent_id'],
+                'created_on' => $content['created_on'],
+                'archived_on' => $content['archived_on'],
+                'datum' => $content['datum']
+            ]
+        );
+    }
+
     /**
      * @return \Illuminate\Database\Connection
      */

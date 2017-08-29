@@ -19,13 +19,31 @@ class VersionService
         $this->request = $request;
     }
 
+    /**
+     * Call store method that save a content version in the database
+     * @param integer $contentId
+     * @return int
+     */
     public function store($contentId)
     {
+        //get authenticated user id
         $userId = ($this->versionRepository->getAuthenticatedUserId($this->request));
-        $content = $this->contentRepository->getById($contentId);
+
+        //get content
+        $content = $this->contentRepository->getContentForVersion($contentId);
 
         $versionContentId = $this->versionRepository->store($contentId, $userId, '', serialize($content)) ;
 
         return $versionContentId;
+    }
+
+    /**
+     * Get a version of content from database
+     * @param integer $versionId
+     * @return array
+     */
+    public function get($versionId)
+    {
+        return $this->versionRepository->getOldContent($versionId);
     }
 }

@@ -199,7 +199,9 @@ class ContentRepositoryTest extends RailcontentTestCase
                             "created_on" => $linkedContent["created_on"],
                             "archived_on" => $linkedContent["archived_on"],
                             "fields" => [
-                                $linkedFieldKey => $linkedFieldValue,
+                                $linkedFieldId => [
+                                    $linkedFieldKey => $linkedFieldValue,
+                                    ]
                             ]
                         ],
                         $multipleKeyFieldKey => $multipleKeyFieldValues
@@ -345,6 +347,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $types = [$this->faker->word, $this->faker->word, $this->faker->word];
         $parentId = null;
         $includeFuturePublishedOn = false;
+        $requiredFields = [];
 
         $expectedContent = [];
 
@@ -389,6 +392,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $orderByColumn,
             $statues,
             $types,
+            $requiredFields,
             $parentId,
             $includeFuturePublishedOn
         );
@@ -406,6 +410,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $types = [$this->faker->word, $this->faker->word, $this->faker->word];
         $parentId = null;
         $includeFuturePublishedOn = false;
+        $requiredFields = [];
 
         $expectedContent = [];
 
@@ -450,6 +455,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $orderByColumn,
             $statues,
             $types,
+            $requiredFields,
             $parentId,
             $includeFuturePublishedOn
         );
@@ -467,6 +473,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $types = [$this->faker->word, $this->faker->word, $this->faker->word];
         $parentId = null;
         $includeFuturePublishedOn = false;
+        $requiredFields = [];
 
         $expectedContent = [];
 
@@ -495,6 +502,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $orderByColumn,
             $statues,
             $types,
+            $requiredFields,
             $parentId,
             $includeFuturePublishedOn
         );
@@ -515,6 +523,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $types = [$this->faker->word, $this->faker->word, $this->faker->word];
         $parentId = null;
         $includeFuturePublishedOn = false;
+        $requiredFields = [];
 
         $expectedContent = [];
 
@@ -543,6 +552,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $orderByColumn,
             $statues,
             $types,
+            $requiredFields,
             $parentId,
             $includeFuturePublishedOn
         );

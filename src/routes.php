@@ -9,3 +9,4 @@ Route::delete('/content/field/{fieldId}', 'Railroad\Railcontent\Controllers\Fiel
 Route::post('/content/datum',  'Railroad\Railcontent\Controllers\DatumController@store');
 Route::put('/content/datum/{datumId}',  'Railroad\Railcontent\Controllers\DatumController@update');
 Route::delete('/content/datum/{datumId}', 'Railroad\Railcontent\Controllers\DatumController@delete');
+Route::get('/content/restore/{versionId}','Railroad\Railcontent\Controllers\ContentController@restoreContent');

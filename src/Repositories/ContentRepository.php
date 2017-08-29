@@ -378,6 +378,7 @@ class ContentRepository extends RepositoryBase
                     ConfigService::$tableFields . '.value as field_value',
                     ConfigService::$tableFields . '.type as field_type',
                     ConfigService::$tableFields . '.position as field_position',
+                    ConfigService::$tableData. '.id as datum_id',
                     ConfigService::$tableData . '.key as datum_key',
                     ConfigService::$tableData . '.value as datum_value',
                     ConfigService::$tableData . '.position as datum_position',
@@ -427,6 +428,13 @@ class ContentRepository extends RepositoryBase
         return parent::connection()->table(ConfigService::$tableContentData);
     }
 
+    /**
+     * @return Builder
+     */
+    public function contentVersionQuery()
+    {
+        return parent::connection()->table(ConfigService::$tableVersions);
+    }
     /**
      * @param $fieldsWithContent
      * @return array
@@ -488,7 +496,7 @@ class ContentRepository extends RepositoryBase
                              $linkedContentFieldKey => $linkedContentFieldValue) {
 
                         $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']]
-                        ['fields'][$linkedContentFieldKey] = $linkedContentFieldValue;
+                        ['fields'][$linkedContents[$fieldWithContent['field_value']]['id']][$linkedContentFieldKey] = $linkedContentFieldValue;
                     }
                 }
 
@@ -498,7 +506,10 @@ class ContentRepository extends RepositoryBase
                              $linkedContentDatumKey => $linkedContentDatumValue) {
 
                         $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']]
-                        ['datum'][$linkedContentDatumKey] = $linkedContentDatumValue;
+                        ['datum'][$fieldWithContent['field_value']]['datum']['datum_id'] = [
+                            'key' => $linkedContentDatumKey,
+                            'value' => $linkedContentDatumValue
+                    ];
                     }
                 }
 
@@ -604,4 +615,47 @@ class ContentRepository extends RepositoryBase
         return $this->queryIndex()->orderBy('parent_id','asc')->orderBy('position','asc')->get()->toArray();
     }
 
+    /**
+     * Prepare content that will be saved in versions table
+     * @param integer $contentId
+     * @return array
+     */
+    public function getContentForVersion($contentId)
+    {
+        $content = [];
+
+        $fieldsWithContent = $this->queryIndex()
+            ->where(ConfigService::$tableContent . '.id', $contentId)
+            ->get();
+
+        foreach($fieldsWithContent as $fieldWithContent)
+        {
+            $content[$fieldWithContent['id']] = [
+                'id' => $fieldWithContent['id'],
+                'slug' => $fieldWithContent['slug'],
+                'status' => $fieldWithContent['status'],
+                'type' => $fieldWithContent['type'],
+                'position' => $fieldWithContent['position'],
+                'parent_id' => $fieldWithContent['parent_id'],
+                'published_on' => $fieldWithContent['published_on'],
+                'created_on' => $fieldWithContent['created_on'],
+                'archived_on' => $fieldWithContent['archived_on'],
+            ];
+        }
+
+        foreach($fieldsWithContent as $fieldWithContent)
+        {
+
+            if($fieldWithContent['datum_id'])
+            {
+                $content[$fieldWithContent['id']]['datum'][$fieldWithContent['datum_id']][$fieldWithContent['datum_key']] = $fieldWithContent['datum_value'];
+            }
+
+            if($fieldWithContent['field_id'])
+            {
+                $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_id']][$fieldWithContent['field_key']] =  $fieldWithContent['field_value'];
+            }
+        }
+        return $content[$contentId];
+    }
 }
