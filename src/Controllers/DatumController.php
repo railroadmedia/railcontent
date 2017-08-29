@@ -70,8 +70,14 @@ class DatumController extends Controller
      * @param integer $dataId
      * @param Request $request
      */
-    public function delete($dataId,Request $request)
+    public function delete($dataId, Request $request)
     {
+        $datum = $this->datumService->getDatum($dataId,  $request->input('content_id'));
+
+        if (is_null($datum)) {
+            return response()->json('Delete failed, datum not found with id: ' . $dataId, 404);
+        }
+
         event(new ContentUpdated($request->input('content_id')));
 
         $deleted = $this->datumService->deleteDatum(
@@ -79,10 +85,6 @@ class DatumController extends Controller
             $request->input('content_id')
         );
 
-        if (!$deleted) {
-            return response()->json('Delete failed, datum not found with id: ' . $dataId, 404);
-        }
-
-        return response()->json($deleted,200);
+        return response()->json($deleted, 200);
     }
 }
