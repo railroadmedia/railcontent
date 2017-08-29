@@ -75,16 +75,18 @@ class FieldController extends Controller
      */
     public function delete($fieldId, Request $request)
     {
+        $field = $this->fieldService->getField($fieldId,  $request->input('content_id'));
+
+        if (is_null($field)) {
+            return response()->json('Delete failed, content field not found with id: ' . $fieldId, 404);
+        }
+
         event(new ContentUpdated($request->input('content_id')));
 
         $deleted = $this->fieldService->deleteField(
             $fieldId,
             $request->input('content_id')
         );
-
-        if (!$deleted) {
-            return response()->json('Delete failed, content field not found with id: ' . $fieldId, 404);
-        }
 
         return response()->json($deleted,200);
     }
