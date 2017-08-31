@@ -52,6 +52,11 @@ class DatumRepository extends RepositoryBase
         )->delete();
     }
 
+    public function getDatumByKeyAndValue($key, $value)
+    {
+        return $this->query()->where(['key' => $key, 'value' => $value])->get()->first();
+    }
+
     /**
      * @return Builder
      */

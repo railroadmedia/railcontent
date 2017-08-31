@@ -30,7 +30,7 @@ class VersionService
         $userId = ($this->versionRepository->getAuthenticatedUserId($this->request));
 
         //get content
-        $content = $this->contentRepository->getContentForVersion($contentId);
+        $content = $this->contentRepository->getById($contentId);
 
         $versionContentId = $this->versionRepository->store($contentId, $userId, '', serialize($content)) ;
 
