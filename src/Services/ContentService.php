@@ -169,7 +169,7 @@ class ContentService
     public function restoreContent($versionId)
     {
         //get saved content version from database
-        $restoredContentVersion = $this->versionRepository->get($versionId);
+        $restoredContentVersion = $this->getContentVersion($versionId);
 
         $contentId = $restoredContentVersion['content_id'];
 
@@ -287,4 +287,17 @@ class ContentService
     {
         return $this->contentRepository->linkedWithContent($contentId);
     }
+
+    /**
+     * Get the content version based on id
+     * @param integer $versionId
+     * @return mixed
+     */
+    public function getContentVersion($versionId)
+    {
+        $restoredContentVersion = $this->versionRepository->get($versionId);
+        return $restoredContentVersion;
+    }
+
+
 }

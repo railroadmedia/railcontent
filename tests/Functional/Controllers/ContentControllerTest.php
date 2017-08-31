@@ -931,6 +931,16 @@ class ContentControllerTest extends RailcontentTestCase
         );
     }
 
+    public function test_restore_content_version_not_exist()
+    {
+        //restore content to a missing version
+        $response = $this->call('GET', 'content/restore/1');
+
+        $this->assertEquals('"Restore content failed, version not found with id: 1"', $response->content());
+
+        $this->assertEquals(404, $response->status());
+    }
+
     public function test_can_not_delete_content_linked()
     {
         $content = [

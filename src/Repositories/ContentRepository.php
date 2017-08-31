@@ -435,6 +435,7 @@ class ContentRepository extends RepositoryBase
     {
         return parent::connection()->table(ConfigService::$tableVersions);
     }
+
     /**
      * @param $fieldsWithContent
      * @return array
@@ -657,5 +658,25 @@ class ContentRepository extends RepositoryBase
             }
         }
         return $content[$contentId];
+    }
+
+    /**
+     * Get a collection with the contents Ids, where the content it's linked
+     * @param integer $contentId
+     * @return \Illuminate\Support\Collection
+     */
+    public function linkedWithContent($contentId)
+    {
+        $fieldIdLabel = ConfigService::$tableFields.'.id';
+
+        return $this->contentFieldsQuery()
+            ->select('content_id')
+                ->leftJoin(ConfigService::$tableFields,'field_id','=',$fieldIdLabel)
+                ->where(
+                    [
+                        'value' => $contentId,
+                        'type' => 'content_id'
+                    ]
+                )->get();
     }
 }

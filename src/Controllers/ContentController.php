@@ -140,6 +140,14 @@ class ContentController extends Controller
             return response()->json('Delete failed, content not found with id: ' . $contentId, 404);
         }
 
+        $linkedWithContent = $this->contentService->linkedWithContent($contentId);
+
+        if($linkedWithContent->isNotEmpty()){
+            $ids = $linkedWithContent->implode('content_id', ', ');
+
+            return response()->json('This content is being referenced by other content ('.$ids.'), you must delete that content first.' , 404);
+        }
+
         event(new ContentUpdated($contentId));
 
         $deleted = $this->contentService->delete($contentId, $request->input('delete_children'));
@@ -154,6 +162,12 @@ class ContentController extends Controller
      */
     public function restoreContent($versionId)
     {
+        $version = $this->contentService->getContentVersion($versionId);
+
+        if (is_null($version)) {
+            return response()->json('Restore content failed, version not found with id: ' . $versionId, 404);
+        }
+
         $restored = $this->contentService->restoreContent($versionId);
 
         return response()->json($restored, 200);
