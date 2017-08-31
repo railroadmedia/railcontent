@@ -199,9 +199,7 @@ class ContentRepositoryTest extends RailcontentTestCase
                             "created_on" => $linkedContent["created_on"],
                             "archived_on" => $linkedContent["archived_on"],
                             "fields" => [
-                                $linkedFieldId => [
                                     $linkedFieldKey => $linkedFieldValue,
-                                    ]
                             ]
                         ],
                         $multipleKeyFieldKey => $multipleKeyFieldValues

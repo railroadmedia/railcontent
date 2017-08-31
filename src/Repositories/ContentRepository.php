@@ -497,7 +497,7 @@ class ContentRepository extends RepositoryBase
                              $linkedContentFieldKey => $linkedContentFieldValue) {
 
                         $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']]
-                        ['fields'][$linkedContents[$fieldWithContent['field_value']]['id']][$linkedContentFieldKey] = $linkedContentFieldValue;
+                        ['fields'][$linkedContentFieldKey] = $linkedContentFieldValue;
                     }
                 }
 
@@ -507,10 +507,7 @@ class ContentRepository extends RepositoryBase
                              $linkedContentDatumKey => $linkedContentDatumValue) {
 
                         $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']]
-                        ['datum'][$fieldWithContent['field_value']]['datum']['datum_id'] = [
-                            'key' => $linkedContentDatumKey,
-                            'value' => $linkedContentDatumValue
-                    ];
+                        ['datum'][$linkedContentDatumKey] = $linkedContentDatumValue;
                     }
                 }
 
