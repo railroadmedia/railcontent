@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 

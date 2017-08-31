@@ -617,50 +617,6 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * Prepare content that will be saved in versions table
-     * @param integer $contentId
-     * @return array
-     */
-    public function getContentForVersion($contentId)
-    {
-        $content = [];
-
-        $fieldsWithContent = $this->queryIndex()
-            ->where(ConfigService::$tableContent . '.id', $contentId)
-            ->get();
-
-        foreach($fieldsWithContent as $fieldWithContent)
-        {
-            $content[$fieldWithContent['id']] = [
-                'id' => $fieldWithContent['id'],
-                'slug' => $fieldWithContent['slug'],
-                'status' => $fieldWithContent['status'],
-                'type' => $fieldWithContent['type'],
-                'position' => $fieldWithContent['position'],
-                'parent_id' => $fieldWithContent['parent_id'],
-                'published_on' => $fieldWithContent['published_on'],
-                'created_on' => $fieldWithContent['created_on'],
-                'archived_on' => $fieldWithContent['archived_on'],
-            ];
-        }
-
-        foreach($fieldsWithContent as $fieldWithContent)
-        {
-
-            if($fieldWithContent['datum_id'])
-            {
-                $content[$fieldWithContent['id']]['datum'][$fieldWithContent['datum_id']][$fieldWithContent['datum_key']] = $fieldWithContent['datum_value'];
-            }
-
-            if($fieldWithContent['field_id'])
-            {
-                $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_id']][$fieldWithContent['field_key']] =  $fieldWithContent['field_value'];
-            }
-        }
-        return $content[$contentId];
-    }
-
-    /**
      * Get a collection with the contents Ids, where the content it's linked
      * @param integer $contentId
      * @return \Illuminate\Support\Collection

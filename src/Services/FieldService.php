@@ -38,11 +38,11 @@ class FieldService
     }
 
     /**
-     * Update a category field and return the category with the field
-     * @param $categoryId
-     * @param $key
-     * @param $value
-     * @return int
+     * Update a content field and return the content with the field
+     * @param integer $contentId
+     * @param string $key
+     * @param string $value
+     * @return array
      */
     public function updateField($contentId, $fieldId, $key, $value, $type, $position)
     {
@@ -63,9 +63,9 @@ class FieldService
     }
 
     /**
-     * Call the repository method to unlink the category's field
+     * Call the repository method to unlink the content's field
      * @param integer $fieldId
-     * @param integer $categoryId
+     * @param integer $contentId
      * @return bool
      */
     public function deleteField($fieldId, $contentId)
@@ -73,14 +73,4 @@ class FieldService
         return $this->contentRepository->unlinkField($contentId, $fieldId);
     }
 
-    /**
-     * Call the delete method from repository and return true if the category was deleted
-     * @param integer $categoryId
-     * @param bool $deleteChildren
-     * @return bool|void
-     */
-    public function deleteCategoryFields($categoryId)
-    {
-        return $this->fieldReposity->unlinkCategoryFields($categoryId);
-    }
 }

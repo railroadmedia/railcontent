@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -52,6 +51,11 @@ class FieldRepository extends RepositoryBase
         )->delete();
     }
 
+    /** Get field from database based on key and value pair
+     * @param string $key
+     * @param string $value
+     * @return mixed
+     */
     public function getFieldByKeyAndValue($key, $value)
     {
         return $this->query()->where(['key' => $key, 'value' => $value])->get()->first();
