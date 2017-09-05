@@ -30,7 +30,7 @@ class ContentRepository extends RepositoryBase
     public function getManyById($ids, array $permissions = [])
     {
         $fieldsWithContent = $this->queryIndex()
-            ->whereIn(ConfigService::$tableContent . '.id', $ids)
+            ->whereIn(ConfigService::$tableContent.'.id', $ids)
             ->get();
 
         return $this->parseAndGetLinkedContent($fieldsWithContent);
@@ -47,9 +47,9 @@ class ContentRepository extends RepositoryBase
     public function getBySlug($slug, $parentId = null)
     {
         $fieldsWithContent = $this->queryIndex()
-            ->where(ConfigService::$tableContent . '.slug', $slug);
+            ->where(ConfigService::$tableContent.'.slug', $slug);
 
-        if (!is_null($parentId)) {
+        if(!is_null($parentId)) {
             $fieldsWithContent = $fieldsWithContent->where('parent_id', $parentId);
         }
 
@@ -80,29 +80,113 @@ class ContentRepository extends RepositoryBase
         array $requiredFields = [],
         $parentId = null,
         $includeFuturePublishedOn = false
-    ) {
+    )
+    {
         // todo: db logic for required fields
 
         $page--;
 
         $fieldsWithContent = $this->queryIndex()
-            ->whereIn(ConfigService::$tableContent . '.status', $statues)
-            ->whereIn(ConfigService::$tableContent . '.type', $types);
+            ->whereIn(ConfigService::$tableContent.'.status', $statues)
+            ->whereIn(ConfigService::$tableContent.'.type', $types);
 
-        if (!is_null($parentId)) {
+        if(!is_null($parentId)) {
             $fieldsWithContent =
-                $fieldsWithContent->where(ConfigService::$tableContent . '.parent_id', $parentId);
+                $fieldsWithContent->where(ConfigService::$tableContent.'.parent_id', $parentId);
         }
 
-        if (!$includeFuturePublishedOn) {
+
+        foreach($requiredFields as $requiredKeys => $requiredValues) {
+            //join with field table where key and value are the searched value
+            $fieldsWithContent->leftJoin(
+                ConfigService::$tableFields.' as field'.$requiredKeys,
+                function($join) use ($requiredKeys, $requiredValues) {
+                    $join
+                        ->where('field'.$requiredKeys.'.key', $requiredKeys)
+                        ->where('field'.$requiredKeys.'.value', $requiredValues);
+                }
+            );
+
+            //linked content fields
+            $fieldsWithContent->leftJoin(
+                ConfigService::$tableContentFields.' as contentfield'.$requiredKeys,
+                function($join) use ($requiredKeys) {
+                    $join->on('contentfield'.$requiredKeys.'.content_id', '=', ConfigService::$tableContent.'.id')
+                        ->on('contentfield'.$requiredKeys.'.field_id', 'field'.$requiredKeys.'.id');
+                }
+            );
+
+            //linked parent fields
+            $fieldsWithContent->leftJoin(
+                ConfigService::$tableContentFields.' as parentfield'.$requiredKeys,
+                function($join) use ($requiredKeys) {
+                    $join->on('parentfield'.$requiredKeys.'.content_id', '=', ConfigService::$tableContent.'.parent_id')
+                        ->on('parentfield'.$requiredKeys.'.field_id', '=', 'field'.$requiredKeys.'.id');
+                }
+            );
+
+
+            //field with content_id type
+            $fieldsWithContent->leftJoin(
+                ConfigService::$tableFields.' as fieldcontent_id'.$requiredKeys,
+                function($join) use ($requiredKeys, $requiredValues) {
+                    $join
+                        ->where('fieldcontent_id'.$requiredKeys.'.key', $requiredKeys)
+                        ->where('fieldcontent_id'.$requiredKeys.'.type', 'content_id');
+                }
+            );
+
+            //join with content for fields with content_id type
+            $fieldsWithContent->leftJoin(
+                ConfigService::$tableContent.' as content'.$requiredKeys,
+                function($join) use ($requiredKeys, $requiredValues) {
+                    $join->on('content'.$requiredKeys.'.id', '=', 'fieldcontent_id'.$requiredKeys.'.value')
+                        ->where('content'.$requiredKeys.'.slug', $requiredValues);
+                });
+
+            $fieldsWithContent->leftJoin(
+                ConfigService::$tableFields.' as fcontent'.$requiredKeys,
+                function($join) use ($requiredKeys, $requiredValues) {
+                    $join
+                        ->on('fcontent'.$requiredKeys.'.value', '=', 'content'.$requiredKeys.'.id')
+                        ->where('fcontent'.$requiredKeys.'.type', 'content_id')
+                        ->where('fcontent'.$requiredKeys.'.key', $requiredKeys);
+                }
+            );
+
+            $fieldsWithContent->leftJoin(
+                ConfigService::$tableContentFields.' as parentfieldcontent'.$requiredKeys,
+                function($join) use ($requiredKeys) {
+                    $join->on('parentfieldcontent'.$requiredKeys.'.content_id', '=', ConfigService::$tableContent.'.parent_id')
+                        ->where('parentfieldcontent'.$requiredKeys.'.field_id', 'fcontent'.$requiredKeys.'.id');
+                }
+            );
+
+            $fieldsWithContent->leftJoin(
+                ConfigService::$tableContentFields.' as contentfieldcontent'.$requiredKeys,
+                function($join) use ($requiredKeys) {
+                    $join->on('contentfieldcontent'.$requiredKeys.'.content_id', '=', ConfigService::$tableContent.'.id')
+                        ->on('contentfieldcontent'.$requiredKeys.'.field_id', 'fcontent'.$requiredKeys.'.id');
+                }
+            );
+
+            $fieldsWithContent = $fieldsWithContent->where(function($builder) use ($requiredKeys) {
+                return $builder->whereNotNull('contentfield'.$requiredKeys.'.id')
+                    ->orWhereNotNull('parentfield'.$requiredKeys.'.id')
+                    ->orWhereNotNull('contentfieldcontent'.$requiredKeys.'.id')
+                    ->orWhereNotNull('parentfieldcontent'.$requiredKeys.'.id');
+            });
+        }
+
+        if(!$includeFuturePublishedOn) {
             $fieldsWithContent = $fieldsWithContent->where(
-                function (Builder $builder) {
+                function(Builder $builder) {
                     return $builder->where(
-                        ConfigService::$tableContent . '.published_on',
+                        ConfigService::$tableContent.'.published_on',
                         '<',
                         Carbon::now()->toDateTimeString()
                     )
-                        ->orWhereNull(ConfigService::$tableContent . '.published_on');
+                        ->orWhereNull(ConfigService::$tableContent.'.published_on');
                 }
             );
         }
@@ -169,7 +253,8 @@ class ContentRepository extends RepositoryBase
         $parentId,
         $publishedOn,
         $archivedOn
-    ) {
+    )
+    {
         $this->queryTable()->where('id', $id)->update(
             [
                 'slug' => $slug,
@@ -201,7 +286,7 @@ class ContentRepository extends RepositoryBase
         $this->unlinkField($id);
         $this->unlinkDatum($id);
 
-        if ($deleteChildren) {
+        if($deleteChildren) {
             // unlink children content
             $this->unlinkChildren($id);
         }
@@ -222,7 +307,7 @@ class ContentRepository extends RepositoryBase
      */
     public function unlinkField($contentId, $fieldId = null)
     {
-        if (!is_null($fieldId)) {
+        if(!is_null($fieldId)) {
             return $this->contentFieldsQuery()
                 ->where('content_id', $contentId)
                 ->where('field_id', $fieldId)
@@ -241,7 +326,7 @@ class ContentRepository extends RepositoryBase
      */
     public function unlinkDatum($contentId, $datumId = null)
     {
-        if (!is_null($datumId)) {
+        if(!is_null($datumId)) {
             return $this->contentDataQuery()
                 ->where('content_id', $contentId)
                 ->where('datum_id', $datumId)
@@ -300,7 +385,7 @@ class ContentRepository extends RepositoryBase
         $dataIdLabel = ConfigService::$tableData.'.id';
 
         return $this->contentDataQuery()
-            ->leftJoin(ConfigService::$tableData,'datum_id','=',$dataIdLabel)
+            ->leftJoin(ConfigService::$tableData, 'datum_id', '=', $dataIdLabel)
             ->where(
                 [
                     'datum_id' => $datumId,
@@ -319,7 +404,7 @@ class ContentRepository extends RepositoryBase
         $fieldIdLabel = ConfigService::$tableFields.'.id';
 
         return $this->contentFieldsQuery()
-            ->leftJoin(ConfigService::$tableFields,'field_id','=',$fieldIdLabel)
+            ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel)
             ->where(
                 [
                     'field_id' => $fieldId,
@@ -338,7 +423,7 @@ class ContentRepository extends RepositoryBase
         $fieldIdLabel = ConfigService::$tableFields.'.id';
 
         return $this->contentFieldsQuery()
-            ->leftJoin(ConfigService::$tableFields,'field_id','=',$fieldIdLabel)
+            ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel)
             ->where(
                 [
                     'key' => $key,
@@ -363,53 +448,57 @@ class ContentRepository extends RepositoryBase
         return $this->queryTable()
             ->select(
                 [
-                    ConfigService::$tableContent . '.id as id',
-                    ConfigService::$tableContent . '.slug as slug',
-                    ConfigService::$tableContent . '.status as status',
-                    ConfigService::$tableContent . '.type as type',
-                    ConfigService::$tableContent . '.position as position',
-                    ConfigService::$tableContent . '.parent_id as parent_id',
-                    ConfigService::$tableContent . '.published_on as published_on',
-                    ConfigService::$tableContent . '.created_on as created_on',
-                    ConfigService::$tableContent . '.archived_on as archived_on',
+                    ConfigService::$tableContent.'.id as id',
+                    ConfigService::$tableContent.'.slug as slug',
+                    ConfigService::$tableContent.'.status as status',
+                    ConfigService::$tableContent.'.type as type',
+                    ConfigService::$tableContent.'.position as position',
+                    ConfigService::$tableContent.'.parent_id as parent_id',
+                    ConfigService::$tableContent.'.published_on as published_on',
+                    ConfigService::$tableContent.'.created_on as created_on',
+                    ConfigService::$tableContent.'.archived_on as archived_on',
                     //ConfigService::$tableContentFields . '.field_id as field_id',
-                    ConfigService::$tableFields . '.id as field_id',
-                    ConfigService::$tableFields . '.key as field_key',
-                    ConfigService::$tableFields . '.value as field_value',
-                    ConfigService::$tableFields . '.type as field_type',
-                    ConfigService::$tableFields . '.position as field_position',
-                    ConfigService::$tableData. '.id as datum_id',
-                    ConfigService::$tableData . '.key as datum_key',
-                    ConfigService::$tableData . '.value as datum_value',
-                    ConfigService::$tableData . '.position as datum_position',
+                    ConfigService::$tableFields.'.id as field_id',
+                    ConfigService::$tableFields.'.key as field_key',
+                    ConfigService::$tableFields.'.value as field_value',
+                    ConfigService::$tableFields.'.type as field_type',
+                    ConfigService::$tableFields.'.position as field_position',
+                    ConfigService::$tableData.'.id as datum_id',
+                    ConfigService::$tableData.'.key as datum_key',
+                    ConfigService::$tableData.'.value as datum_value',
+                    ConfigService::$tableData.'.position as datum_position',
 
                 ]
             )
             ->leftJoin(
                 ConfigService::$tableContentData,
-                ConfigService::$tableContentData . '.content_id',
+                ConfigService::$tableContentData.'.content_id',
                 '=',
-                ConfigService::$tableContent . '.id'
+                ConfigService::$tableContent.'.id'
             )
             ->leftJoin(
                 ConfigService::$tableData,
-                ConfigService::$tableData . '.id',
+                ConfigService::$tableData.'.id',
                 '=',
-                ConfigService::$tableContentData . '.datum_id'
+                ConfigService::$tableContentData.'.datum_id'
             )
             ->leftJoin(
                 ConfigService::$tableContentFields,
-                ConfigService::$tableContentFields . '.content_id',
+                ConfigService::$tableContentFields.'.content_id',
                 '=',
-                ConfigService::$tableContent . '.id'
+                ConfigService::$tableContent.'.id'
             )
             ->leftJoin(
                 ConfigService::$tableFields,
-                ConfigService::$tableFields . '.id',
+                ConfigService::$tableFields.'.id',
                 '=',
-                ConfigService::$tableContentFields . '.field_id'
+                ConfigService::$tableContentFields.'.field_id'
             )
-            ->groupBy([ConfigService::$tableFields . '.id', ConfigService::$tableContent . '.id', ConfigService::$tableData . '.id']);
+            ->groupBy([
+                ConfigService::$tableFields.'.id',
+                ConfigService::$tableContent.'.id',
+                ConfigService::$tableData.'.id'
+            ]);
     }
 
     /**
@@ -444,21 +533,21 @@ class ContentRepository extends RepositoryBase
     {
         $linkedContentIdsToGrab = [];
 
-        foreach ($fieldsWithContent as $fieldWithContent) {
-            if ($fieldWithContent['field_type'] === 'content_id') {
+        foreach($fieldsWithContent as $fieldWithContent) {
+            if($fieldWithContent['field_type'] === 'content_id') {
                 $linkedContentIdsToGrab[] = $fieldWithContent['field_value'];
             }
         }
 
         $linkedContents = [];
 
-        if (!empty($linkedContentIdsToGrab)) {
+        if(!empty($linkedContentIdsToGrab)) {
             $linkedContents = $this->getManyById($linkedContentIdsToGrab);
         }
 
         $content = [];
 
-        foreach ($fieldsWithContent as $fieldWithContent) {
+        foreach($fieldsWithContent as $fieldWithContent) {
             $content[$fieldWithContent['id']] = [
                 'id' => $fieldWithContent['id'],
                 'slug' => $fieldWithContent['slug'],
@@ -472,12 +561,12 @@ class ContentRepository extends RepositoryBase
             ];
         }
 
-        foreach ($fieldsWithContent as $fieldWithContent) {
-            if (($fieldWithContent['field_key'] === null)&&($fieldWithContent['datum_key'] === null)) {
+        foreach($fieldsWithContent as $fieldWithContent) {
+            if(($fieldWithContent['field_key'] === null) && ($fieldWithContent['datum_key'] === null)) {
                 continue;
             }
 
-            if ($fieldWithContent['field_type'] === 'content_id') {
+            if($fieldWithContent['field_type'] === 'content_id') {
 
                 $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']] = [
                     'id' => $linkedContents[$fieldWithContent['field_value']]['id'],
@@ -491,20 +580,18 @@ class ContentRepository extends RepositoryBase
                     'archived_on' => $linkedContents[$fieldWithContent['field_value']]['archived_on'],
                 ];
 
-                if (array_key_exists('fields', $linkedContents[$fieldWithContent['field_value']]))
-                {
-                    foreach ($linkedContents[$fieldWithContent['field_value']]['fields'] as
-                             $linkedContentFieldKey => $linkedContentFieldValue) {
+                if(array_key_exists('fields', $linkedContents[$fieldWithContent['field_value']])) {
+                    foreach($linkedContents[$fieldWithContent['field_value']]['fields'] as
+                            $linkedContentFieldKey => $linkedContentFieldValue) {
 
                         $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']]
                         ['fields'][$linkedContentFieldKey] = $linkedContentFieldValue;
                     }
                 }
 
-                if (array_key_exists('datum', $linkedContents[$fieldWithContent['field_value']]))
-                {
-                    foreach ($linkedContents[$fieldWithContent['field_value']]['datum'] as
-                             $linkedContentDatumKey => $linkedContentDatumValue) {
+                if(array_key_exists('datum', $linkedContents[$fieldWithContent['field_value']])) {
+                    foreach($linkedContents[$fieldWithContent['field_value']]['datum'] as
+                            $linkedContentDatumKey => $linkedContentDatumValue) {
 
                         $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']]
                         ['datum'][$linkedContentDatumKey] = $linkedContentDatumValue;
@@ -513,7 +600,7 @@ class ContentRepository extends RepositoryBase
 
             } else {
                 // put multiple fields with same key in to an array
-                if ($fieldWithContent['field_type'] == 'multiple') {
+                if($fieldWithContent['field_type'] == 'multiple') {
 
                     $content[$fieldWithContent['id']]
                     ['fields']
@@ -531,7 +618,7 @@ class ContentRepository extends RepositoryBase
             }
 
             //put datum as array key => value
-            if($fieldWithContent['datum_value']){
+            if($fieldWithContent['datum_value']) {
                 $content[$fieldWithContent['id']]
                 ['datum']
                 [$fieldWithContent['datum_key']] =
@@ -553,14 +640,14 @@ class ContentRepository extends RepositoryBase
             ?? null;
         $childContentCount = $this->queryTable()->where('parent_id', $parentContentId)->count();
 
-        if ($position < 1) {
+        if($position < 1) {
             $position = 1;
-        } elseif ($position > $childContentCount) {
+        } elseif($position > $childContentCount) {
             $position = $childContentCount;
         }
 
         $this->transaction(
-            function () use ($contentId, $position, $parentContentId) {
+            function() use ($contentId, $position, $parentContentId) {
                 $this->queryTable()
                     ->where('id', $contentId)
                     ->update(
@@ -577,7 +664,7 @@ class ContentRepository extends RepositoryBase
      * @param integer $categoryId
      * @param integer $position
      */
-    function otherChildrenRepositions ($parentContentId, $contentId, $position)
+    function otherChildrenRepositions($parentContentId, $contentId, $position)
     {
         $childContent =
             $this->queryTable()
@@ -589,9 +676,8 @@ class ContentRepository extends RepositoryBase
 
         $start = 1;
 
-        foreach ($childContent as $child) {
-            if($start == $position)
-            {
+        foreach($childContent as $child) {
+            if($start == $position) {
                 $start++;
             }
 
@@ -610,7 +696,7 @@ class ContentRepository extends RepositoryBase
      */
     public function getAllContents()
     {
-        return $this->queryIndex()->orderBy('parent_id','asc')->orderBy('position','asc')->get()->toArray();
+        return $this->queryIndex()->orderBy('parent_id', 'asc')->orderBy('position', 'asc')->get()->toArray();
     }
 
     /**
@@ -624,12 +710,12 @@ class ContentRepository extends RepositoryBase
 
         return $this->contentFieldsQuery()
             ->select('content_id')
-                ->leftJoin(ConfigService::$tableFields,'field_id','=',$fieldIdLabel)
-                ->where(
-                    [
-                        'value' => $contentId,
-                        'type' => 'content_id'
-                    ]
-                )->get();
+            ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel)
+            ->where(
+                [
+                    'value' => $contentId,
+                    'type' => 'content_id'
+                ]
+            )->get();
     }
 }
