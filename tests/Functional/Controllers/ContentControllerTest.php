@@ -1007,6 +1007,164 @@ class ContentControllerTest extends RailcontentTestCase
         $this->assertEquals(404, $response->status());
     }
 
+    public function test_index_response_no_results()
+    {
+        $response = $this->call('GET', '/', [
+            'page' => 1,
+            'amount' => 10,
+            'statuses' => ['draft', 'published'],
+            'types' => ['course'],
+            'fields' => [],
+            'parent_slug'=>'',
+            'include_future_published_on'=>false
+        ]);
+
+        $expectedResults = [];
+
+        $this->assertEquals(200, $response->status());
+
+        $response->assertJson($expectedResults);
+    }
+
+    public function test_index_with_results()
+    {
+        $statues = ['draft', 'published'];
+        $types = ['course'];
+
+        $expectedContents = [];
+
+        //create courses
+        for($i = 0; $i < 30; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $types[0],
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => null,
+                'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        //create library lessons
+        $libraryLesson = [
+            'slug' => $this->faker->word,
+            'status' => $this->faker->randomElement($statues),
+            'type' => 'library lesson',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $this->query()->table(ConfigService::$tableContent)->insertGetId($libraryLesson);
+
+        //we expect to receive only first 10 courses with status 'draft' or 'published'
+        $expectedContent = array_slice($contents, 0, 10, true);
+
+        $response = $this->call('GET', '/', [
+            'page' => 1,
+            'amount' => 10,
+            'statuses' => $statues,
+            'types' => $types,
+            'fields' => [],
+            'parent_slug'=>'',
+            'include_future_published_on'=>false
+        ]);
+
+        $response->assertJson($expectedContent);
+    }
+
+    public function test_index_service_response()
+    {
+        $page = 1;
+        $amount = 10;
+        $order = 'asc';
+        $orderBy = 'id';
+        $statues = ['published'];
+        $types = ['courses'];
+        $requiredFields = [];
+        $parentSlug = null;
+        $includeFuturePublishedOn = false;
+
+        for($i = 0; $i < 30; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $types[0],
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => null,
+                'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        //we expect to receive an array with first 10 courses with status 'published'
+        $expectedContent = array_slice($contents, 0, 10, true);
+
+        $results = $this->serviceBeingTested->getPaginated($page, $amount, $order, $orderBy, $statues, $types, $requiredFields, $parentSlug, $includeFuturePublishedOn);
+
+        $this->assertEquals($expectedContent, $results);
+    }
+
+    public function test_index_service_by_parent_slug()
+    {
+        $page = 1;
+        $amount = 10;
+        $order = 'asc';
+        $orderBy = 'id';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $requiredFields = [];
+        $parentSlug = $this->faker->word;
+        $includeFuturePublishedOn = false;
+
+        $parent = [
+            'slug' => $parentSlug,
+            'status' => $this->faker->randomElement($statues),
+            'type' => $this->faker->randomElement($types),
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $parentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($parent);
+
+        for($i = 0; $i < 3; $i++) {
+            $child = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $types[0],
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $childId = $this->query()->table(ConfigService::$tableContent)->insertGetId($child);
+
+            $contents[$childId] = array_merge(['id' => $childId], $child);
+        }
+
+        $results = $this->serviceBeingTested->getPaginated($page, $amount, $order, $orderBy, $statues, $types, $requiredFields, $parentSlug, $includeFuturePublishedOn);
+
+        $this->assertEquals($contents, $results);
+    }
+
     /**
      * @return \Illuminate\Database\Connection
      */

@@ -32,10 +32,6 @@ class ContentController extends Controller
      */
     public function index(ContentIndexRequest $request)
     {
-        // WIP
-//        $this->contentService->getPaginated();
-
-
         /*
          * Request post data examples:
          *
@@ -74,6 +70,19 @@ class ContentController extends Controller
          *
          */
 
+        $contents = $this->contentService->getPaginated(
+            $request->input('page'),
+            $request->input('amount'),
+            $request->input('order'),
+            $request->input('order_by'),
+            $request->input('statuses'),
+            $request->input('types'),
+            $request->input('fields'),
+            $request->input('parent_slug'),
+            $request->input('include_future_published_on')
+        );
+
+        return response()->json($contents, 200);
     }
 
     /** Create a new category and return it in JSON format
@@ -105,8 +114,8 @@ class ContentController extends Controller
     {
         $content = $this->contentService->getById($contentId);
 
-        if (is_null($content)) {
-            return response()->json('Update failed, content not found with id: ' . $contentId, 404);
+        if(is_null($content)) {
+            return response()->json('Update failed, content not found with id: '.$contentId, 404);
         }
 
         event(new ContentUpdated($contentId));
@@ -136,16 +145,16 @@ class ContentController extends Controller
     {
         $content = $this->contentService->getById($contentId);
 
-        if (is_null($content)) {
-            return response()->json('Delete failed, content not found with id: ' . $contentId, 404);
+        if(is_null($content)) {
+            return response()->json('Delete failed, content not found with id: '.$contentId, 404);
         }
 
         $linkedWithContent = $this->contentService->linkedWithContent($contentId);
 
-        if($linkedWithContent->isNotEmpty()){
+        if($linkedWithContent->isNotEmpty()) {
             $ids = $linkedWithContent->implode('content_id', ', ');
 
-            return response()->json('This content is being referenced by other content ('.$ids.'), you must delete that content first.' , 404);
+            return response()->json('This content is being referenced by other content ('.$ids.'), you must delete that content first.', 404);
         }
 
         event(new ContentUpdated($contentId));
@@ -164,8 +173,8 @@ class ContentController extends Controller
     {
         $version = $this->contentService->getContentVersion($versionId);
 
-        if (is_null($version)) {
-            return response()->json('Restore content failed, version not found with id: ' . $versionId, 404);
+        if(is_null($version)) {
+            return response()->json('Restore content failed, version not found with id: '.$versionId, 404);
         }
 
         $restored = $this->contentService->restoreContent($versionId);

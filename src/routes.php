@@ -1,5 +1,5 @@
 <?php
-
+Route::get('/', 'Railroad\Railcontent\Controllers\ContentController@index');
 Route::post('/content', 'Railroad\Railcontent\Controllers\ContentController@store');
 Route::put('/content/{contentId}', 'Railroad\Railcontent\Controllers\ContentController@update');
 Route::delete('/content/{contentId}', 'Railroad\Railcontent\Controllers\ContentController@delete');

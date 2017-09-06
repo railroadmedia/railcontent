@@ -199,7 +199,7 @@ class ContentRepositoryTest extends RailcontentTestCase
                             "created_on" => $linkedContent["created_on"],
                             "archived_on" => $linkedContent["archived_on"],
                             "fields" => [
-                                    $linkedFieldKey => $linkedFieldValue,
+                                $linkedFieldKey => $linkedFieldValue,
                             ]
                         ],
                         $multipleKeyFieldKey => $multipleKeyFieldValues
@@ -225,7 +225,7 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-        $response = $this->classBeingTested->getBySlug($this->faker->word . rand(), null);
+        $response = $this->classBeingTested->getBySlug($this->faker->word.rand(), null);
 
         $this->assertEquals([], $response);
     }
@@ -256,7 +256,7 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $slug = $this->faker->word;
 
-        for ($i = 0; $i < 3; $i++) {
+        for($i = 0; $i < 3; $i++) {
             $content = [
                 'slug' => $slug,
                 'status' => $this->faker->word,
@@ -285,7 +285,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $slug = $this->faker->word;
         $parentId = $this->faker->randomNumber();
 
-        for ($i = 0; $i < 3; $i++) {
+        for($i = 0; $i < 3; $i++) {
             $content = [
                 'slug' => $slug,
                 'status' => $this->faker->word,
@@ -307,7 +307,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             [
                 'slug' => $slug,
                 'status' => $this->faker->word,
-                'type' => $this->faker->word . rand(),
+                'type' => $this->faker->word.rand(),
                 'position' => $this->faker->numberBetween(),
                 'parent_id' => $parentId + 1,
                 'published_on' => null,
@@ -319,9 +319,9 @@ class ContentRepositoryTest extends RailcontentTestCase
         // add some other random content that should be excluded
         $this->query()->table(ConfigService::$tableContent)->insertGetId(
             [
-                'slug' => $this->faker->word . rand(),
+                'slug' => $this->faker->word.rand(),
                 'status' => $this->faker->word,
-                'type' => $this->faker->word . rand(),
+                'type' => $this->faker->word.rand(),
                 'position' => $this->faker->numberBetween(),
                 'parent_id' => $parentId + 1,
                 'published_on' => null,
@@ -350,7 +350,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $expectedContent = [];
 
         // insert matching content
-        for ($i = 0; $i < 3; $i++) {
+        for($i = 0; $i < 3; $i++) {
             $content = [
                 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
@@ -368,7 +368,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         }
 
         // insert non-matching content
-        for ($i = 0; $i < 3; $i++) {
+        for($i = 0; $i < 3; $i++) {
             $content = [
                 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
@@ -413,7 +413,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $expectedContent = [];
 
         // insert matching content
-        for ($i = 0; $i < 3; $i++) {
+        for($i = 0; $i < 3; $i++) {
             $content = [
                 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
@@ -431,7 +431,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         }
 
         // insert non-matching content
-        for ($i = 0; $i < 3; $i++) {
+        for($i = 0; $i < 3; $i++) {
             $content = [
                 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
@@ -476,7 +476,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $expectedContent = [];
 
         // insert matching content
-        for ($i = 0; $i < 3; $i++) {
+        for($i = 0; $i < 3; $i++) {
             $content = [
                 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
@@ -526,7 +526,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $expectedContent = [];
 
         // insert matching content
-        for ($i = 0; $i < 3; $i++) {
+        for($i = 0; $i < 3; $i++) {
             $content = [
                 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
@@ -567,7 +567,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $status = $this->faker->word;
         $type = $this->faker->word;
 
-        $categoryId = $this->classBeingTested->create($slug, $status, $type, 1, null, Carbon::now()->subDays(1000 -  10)->toDateTimeString());
+        $categoryId = $this->classBeingTested->create($slug, $status, $type, 1, null, Carbon::now()->subDays(1000 - 10)->toDateTimeString());
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
@@ -578,7 +578,7 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'type' => $type,
                 'position' => 1,
                 'parent_id' => null,
-                'published_on' =>  Carbon::now()->subDays(1000 -  10)->toDateTimeString(),
+                'published_on' => Carbon::now()->subDays(1000 - 10)->toDateTimeString(),
                 'created_on' => Carbon::now()->toDateTimeString(),
                 'archived_on' => null
             ]
@@ -722,17 +722,17 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
-                [
-                    'id' => $contentId2,
-                    'slug' => $slug2,
-                    'status' => $status,
-                    'type' => $type,
-                    'position' => 1,
-                    'parent_id' => $contentId1,
-                    'published_on' => null,
-                    'created_on' => Carbon::now()->toDateTimeString(),
-                    'archived_on' => null
-                ]
+            [
+                'id' => $contentId2,
+                'slug' => $slug2,
+                'status' => $status,
+                'type' => $type,
+                'position' => 1,
+                'parent_id' => $contentId1,
+                'published_on' => null,
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null
+            ]
         );
 
         $this->assertDatabaseHas(
@@ -858,7 +858,7 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $new_slug = $this->faker->word;
 
-        $this->classBeingTested->update($contentId, $new_slug,$content['status'], $content['type'], $content['position'], $content['parent_id'], null, null);
+        $this->classBeingTested->update($contentId, $new_slug, $content['status'], $content['type'], $content['position'], $content['parent_id'], null, null);
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
@@ -914,7 +914,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         ];
         $contentId12 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content3);
 
-        $contentId12 = $this->classBeingTested->update($contentId12, $content3['slug'],$content3['status'], $content3['type'], 1,$content3['parent_id'],null, null);
+        $contentId12 = $this->classBeingTested->update($contentId12, $content3['slug'], $content3['status'], $content3['type'], 1, $content3['parent_id'], null, null);
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
@@ -1077,12 +1077,12 @@ class ContentRepositoryTest extends RailcontentTestCase
         ];
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-        $this->classBeingTested->delete($contentId,1);
+        $this->classBeingTested->delete($contentId, 1);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContent,
             [
-                'id'=> $contentId,
+                'id' => $contentId,
                 'slug' => $content['slug']
             ]
         );
@@ -1143,7 +1143,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $this->assertDatabaseMissing(
             ConfigService::$tableContent,
             [
-                'id'=> $contentId1,
+                'id' => $contentId1,
                 'slug' => $content1['slug']
             ]
         );
@@ -1151,7 +1151,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
             [
-                'id'=> $contentId11,
+                'id' => $contentId11,
                 'slug' => $content11['slug'],
                 'parent_id' => null,
                 'position' => 1
@@ -1161,7 +1161,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
             [
-                'id'=> $contentId12,
+                'id' => $contentId12,
                 'slug' => $content12['slug'],
                 'parent_id' => null,
                 'position' => 2
@@ -1171,7 +1171,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
             [
-                'id'=> $contentId2,
+                'id' => $contentId2,
                 'slug' => $content2['slug'],
                 'parent_id' => null,
                 'position' => 3
@@ -1253,12 +1253,12 @@ class ContentRepositoryTest extends RailcontentTestCase
         ];
         $contentDatumId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentDatum);
 
-        $this->classBeingTested->unlinkDatum($contentDatum['content_id'],$contentDatum['datum_id']);
+        $this->classBeingTested->unlinkDatum($contentDatum['content_id'], $contentDatum['datum_id']);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContentData,
             [
-                'id'=> $contentDatumId,
+                'id' => $contentDatumId,
                 'content_id' => $contentDatum['content_id'],
                 'datum_id' => $contentDatum['datum_id']
             ]
@@ -1371,12 +1371,12 @@ class ContentRepositoryTest extends RailcontentTestCase
         ];
         $contentFieldId2 = $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField2);
 
-        $this->classBeingTested->unlinkField($contentField['content_id'],$contentField['field_id']);
+        $this->classBeingTested->unlinkField($contentField['content_id'], $contentField['field_id']);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContentFields,
             [
-                'id'=> $contentFieldId,
+                'id' => $contentFieldId,
                 'content_id' => $contentField['content_id'],
                 'field_id' => $contentField['field_id']
             ]
@@ -1453,18 +1453,18 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $this->assertEquals(
             [
-                    "id" => $contentId,
-                    "slug" => $content["slug"],
-                    "status" => $content["status"],
-                    "type" => $content["type"],
-                    "position" => $content["position"],
-                    "parent_id" => $content["parent_id"],
-                    "published_on" => $content["published_on"],
-                    "created_on" => $content["created_on"],
-                    "archived_on" => $content["archived_on"],
-                    "datum" => [
-                        $linkedDatumdKey => $linkedDatumValue
-                    ],
+                "id" => $contentId,
+                "slug" => $content["slug"],
+                "status" => $content["status"],
+                "type" => $content["type"],
+                "position" => $content["position"],
+                "parent_id" => $content["parent_id"],
+                "published_on" => $content["published_on"],
+                "created_on" => $content["created_on"],
+                "archived_on" => $content["archived_on"],
+                "datum" => [
+                    $linkedDatumdKey => $linkedDatumValue
+                ],
             ],
             $response
         );
@@ -1637,6 +1637,380 @@ class ContentRepositoryTest extends RailcontentTestCase
             $response
         );
     }
+
+    /*
+     *
+     */
+    public function test_get_paginated_with_searched_fields()
+    {
+        $page = 1;
+        $amount = 10;
+        $orderByDirection = 'desc';
+        $orderByColumn = 'published_on';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $parentId = null;
+        $includeFuturePublishedOn = false;
+        $requiredFields = [
+            'topic' => 'jazz'
+        ];
+
+        $expectedContent = [];
+
+        $field = [
+            'key' => 'topic',
+            'value' => 'jazz',
+            'type' => 'multiple',
+            'position' => 1
+        ];
+
+        $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
+
+
+        // insert matching content
+        for($i = 0; $i < 30; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        //link field to 5 contents
+        for($i = 5; $i < 10; $i++) {
+            $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
+                [
+                    'content_id' => $contents[$i]['id'],
+                    'field_id' => $fieldId,
+                ]
+            );
+            $expectedContent[$i] = array_merge($contents[$i], ['fields' => ['topic' => [1 => 'jazz']]]);
+        }
+
+        $response = $this->classBeingTested->getPaginated(
+            $page,
+            $amount,
+            $orderByDirection,
+            $orderByColumn,
+            $statues,
+            $types,
+            $requiredFields,
+            $parentId,
+            $includeFuturePublishedOn
+        );
+
+        //check that in the response we have 5 results
+        $this->assertEquals(5, count($response));
+
+        $this->assertEquals($expectedContent, $response);
+
+        // for some reason phpunit doesn't test the order of the array values
+        $this->assertEquals(array_keys($expectedContent), array_keys($response));
+    }
+
+    /**
+     * Get a courses 10th to 20th lessons where the instructor is caleb and the topic is bass drumming
+     */
+    public function test_get_paginated_search_parent_fields()
+    {
+        $page = 2;
+        $amount = 10;
+        $orderByDirection = 'desc';
+        $orderByColumn = 'published_on';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = ['course lessons'];
+        $parentId = null;
+        $includeFuturePublishedOn = false;
+        $requiredFields = [
+            'instructor' => 'caleb',
+            'topic' => 'bass drumming'
+        ];
+
+        $expectedContent = [];
+
+        //create 2 courses with instructor 'caleb' and different topics
+        $course1 = [
+            'slug' => $this->faker->word,
+            'status' => $this->faker->randomElement($statues),
+            'type' => 'course',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null
+        ];
+
+        $courseId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($course1);
+
+        $course2 = [
+            'slug' => $this->faker->word,
+            'status' => $this->faker->randomElement($statues),
+            'type' => 'course',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null
+        ];
+
+        $courseId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($course2);
+
+        //create and link instructor caleb to the course
+        $instructor = [
+            'slug' => 'caleb',
+            'status' => $this->faker->word,
+            'type' => 'instructor',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null
+        ];
+        $instructorId = $this->query()->table(ConfigService::$tableContent)->insertGetId($instructor);
+
+        $fieldForInstructor = [
+            'key' => 'instructor',
+            'value' => $instructorId,
+            'type' => 'content_id',
+            'position' => null
+        ];
+
+        $fieldForInstructorId = $this->query()->table(ConfigService::$tableFields)->insertGetId($fieldForInstructor);
+
+        $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
+            [
+                'content_id' => $courseId1,
+                'field_id' => $fieldForInstructorId,
+            ]
+        );
+
+        $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
+            [
+                'content_id' => $courseId2,
+                'field_id' => $fieldForInstructorId,
+            ]
+        );
+
+        //create and link topic bass drumming to the course
+        $fieldForTopic = [
+            'key' => 'topic',
+            'value' => 'bass drumming',
+            'type' => 'multiple',
+            'position' => 1
+        ];
+
+        $fieldForInstructorId = $this->query()->table(ConfigService::$tableFields)->insertGetId($fieldForTopic);
+
+        $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
+            [
+                'content_id' => $courseId1,
+                'field_id' => $fieldForInstructorId,
+            ]
+        );
+
+        //link 25 lessons to the course
+        for($i = 0; $i < 25; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => 'course lessons',
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $courseId1,
+                'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        //Get 10th to 20th lessons for the course with instructor 'caleb' and topic 'bass drumming'
+        $expectedContent = array_slice($contents, 10, 10, true);
+
+        $response = $this->classBeingTested->getPaginated(
+            $page,
+            $amount,
+            $orderByDirection,
+            $orderByColumn,
+            $statues,
+            $types,
+            $requiredFields,
+            $parentId,
+            $includeFuturePublishedOn
+        );
+
+        //check that in the response we have 10 results
+        $this->assertEquals(10, count($response));
+
+        //check that the expected contents are returned
+        $this->assertEquals($expectedContent, $response);
+
+        // for some reason phpunit doesn't test the order of the array values
+        $this->assertEquals(array_keys($expectedContent), array_keys($response));
+    }
+
+    /*
+     * Get 40th to 60th library lesson where the topic is snare
+     */
+    public function test_get_paginated_library_lesson_with_topic()
+    {
+        $page = 3;
+        $amount = 20;
+        $orderByDirection = 'desc';
+        $orderByColumn = 'published_on';
+        $statues = ['published'];
+        $types = ['library lessons'];
+        $parentId = null;
+        $includeFuturePublishedOn = false;
+        $requiredFields = [
+            'topic' => 'snare'
+        ];
+
+        $expectedContent = [];
+
+        for($i = 0; $i < 80; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => 'published',
+                'type' => 'library lessons',
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => null,
+                'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        //link topic snare to 65 library lessons
+        $fieldForTopic = [
+            'key' => 'topic',
+            'value' => 'snare',
+            'type' => 'string',
+            'position' => 1
+        ];
+
+        $fieldForTopicId = $this->query()->table(ConfigService::$tableFields)->insertGetId($fieldForTopic);
+
+
+        for($i = 1; $i < 66; $i++) {
+
+            $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
+                [
+                    'content_id' => $contents[$i]['id'],
+                    'field_id' => $fieldForTopicId,
+                ]
+            );
+
+            $expectedContent[$i] = array_merge($contents[$i], ['fields' => [
+                'topic' => 'snare'
+            ]
+            ]);
+        }
+
+        //Get 40th to 60th library lesson where the topic is snare
+        $expectedContent = array_slice($expectedContent, 40, 20, true);
+
+        $response = $this->classBeingTested->getPaginated(
+            $page,
+            $amount,
+            $orderByDirection,
+            $orderByColumn,
+            $statues,
+            $types,
+            $requiredFields,
+            $parentId,
+            $includeFuturePublishedOn
+        );
+
+        //check that in the response we have 20 results
+        $this->assertEquals(20, count($response));
+
+        //check that the expected contents are returned
+        $this->assertEquals($expectedContent, $response);
+
+        // for some reason phpunit doesn't test the order of the array values
+        $this->assertEquals(array_keys($expectedContent), array_keys($response));
+    }
+
+    /**
+     * Get the most recent play along draft lesson
+     */
+    public function test_get_most_recent_content_with_type()
+    {
+        $page = 1;
+        $amount = 1;
+        $orderByDirection = 'desc';
+        $orderByColumn = 'id';
+        $statues = ['draft'];
+        $types = ['play along'];
+        $parentId = null;
+        $includeFuturePublishedOn = true;
+        $requiredFields = [];
+
+        $expectedContent = [];
+        $content1 = [
+            'slug' => $this->faker->word,
+            'status' => 'draft',
+            'type' => 'play along',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+
+        $content2 = [
+            'slug' => $this->faker->word,
+            'status' => 'draft',
+            'type' => 'play along',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
+
+        //last inserted content it's expected to be returned by the getPaginated method
+        $expectedContent[$contentId2] = array_merge(['id' => $contentId2], $content2);
+
+        $response = $this->classBeingTested->getPaginated(
+            $page,
+            $amount,
+            $orderByDirection,
+            $orderByColumn,
+            $statues,
+            $types,
+            $requiredFields,
+            $parentId,
+            $includeFuturePublishedOn
+        );
+
+        //check that the expected contents are returned
+        $this->assertEquals($expectedContent, $response);
+
+        // for some reason phpunit doesn't test the order of the array values
+        $this->assertEquals(array_keys($expectedContent), array_keys($response));
+    }
+
     /**
      * @return \Illuminate\Database\Connection
      */

@@ -82,8 +82,6 @@ class ContentRepository extends RepositoryBase
         $includeFuturePublishedOn = false
     )
     {
-        // todo: db logic for required fields
-
         $page--;
 
         $fieldsWithContent = $this->queryIndex()
@@ -103,7 +101,11 @@ class ContentRepository extends RepositoryBase
                 function($join) use ($requiredKeys, $requiredValues) {
                     $join
                         ->where('field'.$requiredKeys.'.key', $requiredKeys)
-                        ->where('field'.$requiredKeys.'.value', $requiredValues);
+                        ->where(function($builder) use ($requiredKeys, $requiredValues) {
+                            return $builder->where('field'.$requiredKeys.'.value', $requiredValues)
+                                ->orWhere('field'.$requiredKeys.'.type', 'content_id');
+                        }
+                        );
                 }
             );
 
@@ -125,56 +127,27 @@ class ContentRepository extends RepositoryBase
                 }
             );
 
-
-            //field with content_id type
-            $fieldsWithContent->leftJoin(
-                ConfigService::$tableFields.' as fieldcontent_id'.$requiredKeys,
-                function($join) use ($requiredKeys, $requiredValues) {
-                    $join
-                        ->where('fieldcontent_id'.$requiredKeys.'.key', $requiredKeys)
-                        ->where('fieldcontent_id'.$requiredKeys.'.type', 'content_id');
-                }
-            );
-
             //join with content for fields with content_id type
             $fieldsWithContent->leftJoin(
-                ConfigService::$tableContent.' as content'.$requiredKeys,
+                ConfigService::$tableContent.' as fieldcontent'.$requiredKeys,
                 function($join) use ($requiredKeys, $requiredValues) {
-                    $join->on('content'.$requiredKeys.'.id', '=', 'fieldcontent_id'.$requiredKeys.'.value')
-                        ->where('content'.$requiredKeys.'.slug', $requiredValues);
+                    $join->on('fieldcontent'.$requiredKeys.'.id', '=', 'field'.$requiredKeys.'.value')
+                        ->where(function($builder) use ($requiredKeys) {
+                            return $builder->whereNotNull('contentfield'.$requiredKeys.'.id')->orWhereNotNull('parentfield'.$requiredKeys.'.id');
+                        })
+                        ->where('fieldcontent'.$requiredKeys.'.slug', $requiredValues);
                 });
 
-            $fieldsWithContent->leftJoin(
-                ConfigService::$tableFields.' as fcontent'.$requiredKeys,
-                function($join) use ($requiredKeys, $requiredValues) {
-                    $join
-                        ->on('fcontent'.$requiredKeys.'.value', '=', 'content'.$requiredKeys.'.id')
-                        ->where('fcontent'.$requiredKeys.'.type', 'content_id')
-                        ->where('fcontent'.$requiredKeys.'.key', $requiredKeys);
-                }
-            );
-
-            $fieldsWithContent->leftJoin(
-                ConfigService::$tableContentFields.' as parentfieldcontent'.$requiredKeys,
-                function($join) use ($requiredKeys) {
-                    $join->on('parentfieldcontent'.$requiredKeys.'.content_id', '=', ConfigService::$tableContent.'.parent_id')
-                        ->where('parentfieldcontent'.$requiredKeys.'.field_id', 'fcontent'.$requiredKeys.'.id');
-                }
-            );
-
-            $fieldsWithContent->leftJoin(
-                ConfigService::$tableContentFields.' as contentfieldcontent'.$requiredKeys,
-                function($join) use ($requiredKeys) {
-                    $join->on('contentfieldcontent'.$requiredKeys.'.content_id', '=', ConfigService::$tableContent.'.id')
-                        ->on('contentfieldcontent'.$requiredKeys.'.field_id', 'fcontent'.$requiredKeys.'.id');
-                }
-            );
-
+            //where conditions
             $fieldsWithContent = $fieldsWithContent->where(function($builder) use ($requiredKeys) {
-                return $builder->whereNotNull('contentfield'.$requiredKeys.'.id')
-                    ->orWhereNotNull('parentfield'.$requiredKeys.'.id')
-                    ->orWhereNotNull('contentfieldcontent'.$requiredKeys.'.id')
-                    ->orWhereNotNull('parentfieldcontent'.$requiredKeys.'.id');
+                return $builder->whereNotNull('fieldcontent'.$requiredKeys.'.id')
+                    ->orWhere(function($builder) use ($requiredKeys) {
+                        return $builder->where('field'.$requiredKeys.'.type', '<>', 'content_id')
+                            ->where(function($builder) use ($requiredKeys) {
+                                return $builder->whereNotNull('contentfield'.$requiredKeys.'.id')
+                                    ->orWhereNotNull('parentfield'.$requiredKeys.'.id');
+                            });
+                    });
             });
         }
 
@@ -458,11 +431,11 @@ class ContentRepository extends RepositoryBase
                     ConfigService::$tableContent.'.created_on as created_on',
                     ConfigService::$tableContent.'.archived_on as archived_on',
                     //ConfigService::$tableContentFields . '.field_id as field_id',
-                    ConfigService::$tableFields.'.id as field_id',
-                    ConfigService::$tableFields.'.key as field_key',
-                    ConfigService::$tableFields.'.value as field_value',
-                    ConfigService::$tableFields.'.type as field_type',
-                    ConfigService::$tableFields.'.position as field_position',
+                    'allfieldsvalue.id as field_id',
+                    'allfieldsvalue.key as field_key',
+                    'allfieldsvalue.value as field_value',
+                    'allfieldsvalue.type as field_type',
+                    'allfieldsvalue.position as field_position',
                     ConfigService::$tableData.'.id as datum_id',
                     ConfigService::$tableData.'.key as datum_key',
                     ConfigService::$tableData.'.value as datum_value',
@@ -483,19 +456,19 @@ class ContentRepository extends RepositoryBase
                 ConfigService::$tableContentData.'.datum_id'
             )
             ->leftJoin(
-                ConfigService::$tableContentFields,
-                ConfigService::$tableContentFields.'.content_id',
+                ConfigService::$tableContentFields.' as allcontentfields',
+                'allcontentfields.content_id',
                 '=',
                 ConfigService::$tableContent.'.id'
             )
             ->leftJoin(
-                ConfigService::$tableFields,
-                ConfigService::$tableFields.'.id',
+                ConfigService::$tableFields.' as allfieldsvalue',
+                'allfieldsvalue.id',
                 '=',
-                ConfigService::$tableContentFields.'.field_id'
+                'allcontentfields.field_id'
             )
             ->groupBy([
-                ConfigService::$tableFields.'.id',
+                'allfieldsvalue.id',
                 ConfigService::$tableContent.'.id',
                 ConfigService::$tableData.'.id'
             ]);

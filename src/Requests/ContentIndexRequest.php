@@ -26,10 +26,12 @@ class ContentIndexRequest extends FormRequest
         return [
             'page' => 'numeric|min:1',
             'amount' => 'numeric|min:1',
+            'order' => 'string',
+            'order_by' => 'string',
             'statuses' => 'array',
             'types' => 'array',
             'fields' => 'array',
-            'parent_slug' => 'string',
+            'parent_slug' => 'string|nullable',
             'include_future_published_on' => 'boolean'
         ];
     }

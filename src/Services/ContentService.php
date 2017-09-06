@@ -48,6 +48,8 @@ class ContentService
     public function getPaginated(
         $page,
         $amount,
+        $orderByDirection,
+        $orderByColumn,
         array $statues = [],
         array $types = [],
         array $requiredFields = [],
@@ -58,10 +60,21 @@ class ContentService
         $parentId = null;
 
         if(!is_null($parentSlug)) {
-            $parentId = $this->getBySlug($parentSlug);
+            $parent = $this->getBySlug($parentSlug);
+            $parentId = key($parent);
         }
 
-        // WIP
+        return $this->contentRepository->getPaginated(
+            $page,
+            $amount,
+            $orderByDirection,
+            $orderByColumn,
+            $statues,
+            $types,
+            $requiredFields,
+            $parentId,
+            $includeFuturePublishedOn
+        );
     }
 
     /**
@@ -298,6 +311,4 @@ class ContentService
         $restoredContentVersion = $this->versionRepository->get($versionId);
         return $restoredContentVersion;
     }
-
-
 }
