@@ -10,3 +10,7 @@ Route::post('/content/datum',  'Railroad\Railcontent\Controllers\DatumController
 Route::put('/content/datum/{datumId}',  'Railroad\Railcontent\Controllers\DatumController@update');
 Route::delete('/content/datum/{datumId}', 'Railroad\Railcontent\Controllers\DatumController@delete');
 Route::get('/content/restore/{versionId}','Railroad\Railcontent\Controllers\ContentController@restoreContent');
+Route::post('/permission', 'Railroad\Railcontent\Controllers\PermissionController@store');
+Route::put('/permission/{permissionId}', 'Railroad\Railcontent\Controllers\PermissionController@update');
+Route::delete('/permission/{permissionId}', 'Railroad\Railcontent\Controllers\PermissionController@delete');
+Route::post('/permission/assign', 'Railroad\Railcontent\Controllers\PermissionController@assign');

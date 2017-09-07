@@ -11,5 +11,7 @@ return [
         'content_fields' => 'railcontent_content_fields',
         'data' => 'railcontent_data',
         'content_data' => 'railcontent_content_data',
+        'permissions' => 'railcontent_permissions',
+        'content_permissions' => 'railcontent_content_permissions'
     ],
 ];
