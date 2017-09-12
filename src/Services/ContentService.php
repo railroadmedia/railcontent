@@ -110,7 +110,7 @@ class ContentService
     {
         $id = $this->contentRepository->create($slug, $status, $type, $position, $parentId, $publishedOn);
 
-        return $this->contentRepository->getById($id);
+        return $this->getById($id);
     }
 
     /**

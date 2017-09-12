@@ -17,9 +17,12 @@ class ContentRepository extends RepositoryBase
      * @param $id
      * @return array|null
      */
-    public function getById($id, array $permissions = [])
+    public function getById($id)
     {
-        return $this->getManyById([$id])[$id] ?? null;
+        //get user permissions from request
+        $permissions = request()->request->get('permissions') ?? [];
+
+        return $this->getManyById([$id],$permissions)[$id] ?? null;
     }
 
     /**
@@ -29,7 +32,16 @@ class ContentRepository extends RepositoryBase
      */
     public function getManyById($ids, array $permissions = [])
     {
-        $fieldsWithContent = $this->queryIndex()
+        $fieldsWithContent = $this->queryIndex();
+
+        //check if use have permission to view the content
+        $fieldsWithContent->where(function($builder) use ($permissions) {
+           return $builder->whereNull(ConfigService::$tablePermissions.'.name')
+                ->orWhereIn(ConfigService::$tablePermissions.'.name', $permissions);
+        });
+
+        //get contents based on ids
+        $fieldsWithContent = $fieldsWithContent
             ->whereIn(ConfigService::$tableContent.'.id', $ids)
             ->get();
 
@@ -83,6 +95,9 @@ class ContentRepository extends RepositoryBase
     )
     {
         $page--;
+
+        //get permissions from requests or empty array
+        $permissions = request()->request->get('permissions') ?? [];
 
         $fieldsWithContent = $this->queryIndex()
             ->whereIn(ConfigService::$tableContent.'.status', $statues)
@@ -150,6 +165,13 @@ class ContentRepository extends RepositoryBase
                     });
             });
         }
+
+        //check if use have permission to view the content
+        $fieldsWithContent->where(function($builder) use ($permissions) {
+            return $builder->whereNull(ConfigService::$tablePermissions.'.name')
+                ->orWhereIn(ConfigService::$tablePermissions.'.name', $permissions);
+        });
+
 
         if(!$includeFuturePublishedOn) {
             $fieldsWithContent = $fieldsWithContent->where(
@@ -430,7 +452,6 @@ class ContentRepository extends RepositoryBase
                     ConfigService::$tableContent.'.published_on as published_on',
                     ConfigService::$tableContent.'.created_on as created_on',
                     ConfigService::$tableContent.'.archived_on as archived_on',
-                    //ConfigService::$tableContentFields . '.field_id as field_id',
                     'allfieldsvalue.id as field_id',
                     'allfieldsvalue.key as field_key',
                     'allfieldsvalue.value as field_value',
@@ -466,6 +487,18 @@ class ContentRepository extends RepositoryBase
                 'allfieldsvalue.id',
                 '=',
                 'allcontentfields.field_id'
+            )
+            ->leftJoin(
+                ConfigService::$tableContentPermissions, function($join) {
+                return $join->on(ConfigService::$tableContentPermissions.'.content_id', ConfigService::$tableContent.'.id')
+                    ->orOn(ConfigService::$tableContentPermissions.'.content_type', ConfigService::$tableContent.'.type');
+            }
+            )
+            ->leftJoin(
+                ConfigService::$tablePermissions,
+                ConfigService::$tablePermissions.'.id',
+                '=',
+                ConfigService::$tableContentPermissions.'.required_permission_id'
             )
             ->groupBy([
                 'allfieldsvalue.id',
@@ -504,6 +537,8 @@ class ContentRepository extends RepositoryBase
      */
     private function parseAndGetLinkedContent($fieldsWithContent)
     {
+        $permissions = request()->request->get('permissions') ?? [];
+
         $linkedContentIdsToGrab = [];
 
         foreach($fieldsWithContent as $fieldWithContent) {
@@ -515,7 +550,7 @@ class ContentRepository extends RepositoryBase
         $linkedContents = [];
 
         if(!empty($linkedContentIdsToGrab)) {
-            $linkedContents = $this->getManyById($linkedContentIdsToGrab);
+            $linkedContents = $this->getManyById($linkedContentIdsToGrab, $permissions);
         }
 
         $content = [];

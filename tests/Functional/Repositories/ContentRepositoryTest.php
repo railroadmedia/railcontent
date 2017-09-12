@@ -2011,6 +2011,308 @@ class ContentRepositoryTest extends RailcontentTestCase
         $this->assertEquals(array_keys($expectedContent), array_keys($response));
     }
 
+    public function test_can_not_view_content_if_dont_have_permission()
+    {
+        $page = 1;
+        $amount = 1;
+        $orderByDirection = 'desc';
+        $orderByColumn = 'id';
+        $statues = ['draft'];
+        $types = ['play along'];
+        $parentId = null;
+        $includeFuturePublishedOn = true;
+        $requiredFields = [];
+
+        $content1 = [
+            'slug' => $this->faker->word,
+            'status' => 'draft',
+            'type' => 'play along',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+
+        $permission = [
+            'name' => $this->faker->word,
+            'created_on' => Carbon::now()->toDateTimeString()
+        ];
+
+        $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+
+        $contentPermission = [
+            'content_id' => $contentId1,
+            'content_type' => null,
+            'required_permission_id' => $permissionId
+        ];
+
+        $this->query()->table(ConfigService::$tableContentPermissions)->insertGetId($contentPermission);
+
+        $response = $this->classBeingTested->getPaginated(
+            $page,
+            $amount,
+            $orderByDirection,
+            $orderByColumn,
+            $statues,
+            $types,
+            $requiredFields,
+            $parentId,
+            $includeFuturePublishedOn
+        );
+
+        $this->assertEquals([], $response);
+    }
+
+    public function test_can_view_specific_content_if_have_permission()
+    {
+        $permissionName = $this->faker->word;
+
+        //add user permission on request
+        request()->request->add(['permissions' => [$permissionName]]);
+
+        $page = 1;
+        $amount = 1;
+        $orderByDirection = 'desc';
+        $orderByColumn = 'id';
+        $statues = ['draft'];
+        $types = ['play along'];
+        $parentId = null;
+        $includeFuturePublishedOn = true;
+        $requiredFields = [];
+
+        $expectedContent = [];
+        $content1 = [
+            'slug' => $this->faker->word,
+            'status' => 'draft',
+            'type' => 'play along',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+
+        $permission = [
+            'name' => $permissionName,
+            'created_on' => Carbon::now()->toDateTimeString()
+        ];
+
+        $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+
+        $contentPermission = [
+            'content_id' => $contentId1,
+            'content_type' => null,
+            'required_permission_id' => $permissionId
+        ];
+
+        $this->query()->table(ConfigService::$tableContentPermissions)->insertGetId($contentPermission);
+
+        $response = $this->classBeingTested->getPaginated(
+            $page,
+            $amount,
+            $orderByDirection,
+            $orderByColumn,
+            $statues,
+            $types,
+            $requiredFields,
+            $parentId,
+            $includeFuturePublishedOn
+        );
+        $expectedContent[$contentId1] = array_merge(['id' => $contentId1], $content1);
+
+        $this->assertEquals($expectedContent, $response);
+    }
+
+    public function test_can_view_all_contents_with_specific_type_if_have_permission()
+    {
+        $permissionName = $this->faker->word;
+
+        $permission = [
+            'name' => $permissionName,
+            'created_on' => Carbon::now()->toDateTimeString()
+        ];
+
+        $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+
+        $contentType = $this->faker->word;
+
+        $contentPermission = [
+            'content_id' => null,
+            'content_type' => $contentType,
+            'required_permission_id' => $permissionId
+        ];
+
+
+        $this->query()->table(ConfigService::$tableContentPermissions)->insertGetId($contentPermission);
+
+        //add user permission on request
+        request()->request->add(['permissions' => [$permissionName]]);
+
+        $page = 1;
+        $amount = 100;
+        $orderByDirection = 'asc';
+        $orderByColumn = 'id';
+        $statues = ['draft'];
+        $types = [$contentType];
+        $parentId = null;
+        $includeFuturePublishedOn = true;
+        $requiredFields = [];
+
+        for($i = 0; $i < 50; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => 'draft',
+                'type' => $contentType,
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => null,
+                'published_on' => Carbon::now()->subDays(($i+10))->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        $response = $this->classBeingTested->getPaginated(
+            $page,
+            $amount,
+            $orderByDirection,
+            $orderByColumn,
+            $statues,
+            $types,
+            $requiredFields,
+            $parentId,
+            $includeFuturePublishedOn
+        );
+
+        $this->assertEquals($contents, $response);
+    }
+
+    public function test_can_not_view_content_without_permission()
+    {
+        $content1 = [
+            'slug' => $this->faker->word,
+            'status' => 'draft',
+            'type' => 'play along',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+
+        $permissionName = $this->faker->word;
+        $permission = [
+            'name' => $permissionName,
+            'created_on' => Carbon::now()->toDateTimeString()
+        ];
+
+        $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+
+        $contentPermission = [
+            'content_id' => $contentId1,
+            'content_type' => null,
+            'required_permission_id' => $permissionId
+        ];
+
+        $this->query()->table(ConfigService::$tableContentPermissions)->insertGetId($contentPermission);
+
+        $response = $this->classBeingTested->getById($contentId1);
+
+        $this->assertNull($response);
+
+    }
+
+    public function test_can_view_content_if_have_permission_to_access_specific_id()
+    {
+        $content1 = [
+            'slug' => $this->faker->word,
+            'status' => 'draft',
+            'type' => 'play along',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+
+        $permissionName = $this->faker->word;
+        $permission = [
+            'name' => $permissionName,
+            'created_on' => Carbon::now()->toDateTimeString()
+        ];
+
+        $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+
+        $contentPermission = [
+            'content_id' => $contentId1,
+            'content_type' => null,
+            'required_permission_id' => $permissionId
+        ];
+
+        $this->query()->table(ConfigService::$tableContentPermissions)->insertGetId($contentPermission);
+
+        //add user permission on request
+        request()->request->add(['permissions' => [$permissionName]]);
+
+        $response = $this->classBeingTested->getById($contentId1);
+
+        $this->assertEquals(array_merge(['id' => $contentId1], $content1),$response);
+    }
+
+    public function test_can_view_content_with_type_if_have_permission_to_access_type()
+    {
+        $contentType = $this->faker->word;
+
+        $content1 = [
+            'slug' => $this->faker->word,
+            'status' => 'draft',
+            'type' => $contentType,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+
+        $permissionName = $this->faker->word;
+        $permission = [
+            'name' => $permissionName,
+            'created_on' => Carbon::now()->toDateTimeString()
+        ];
+
+        $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+
+        $contentPermission = [
+            'content_id' => null,
+            'content_type' => $contentType,
+            'required_permission_id' => $permissionId
+        ];
+
+        $this->query()->table(ConfigService::$tableContentPermissions)->insertGetId($contentPermission);
+
+        //add user permission on request
+        request()->request->add(['permissions' => [$permissionName]]);
+
+        $response = $this->classBeingTested->getById($contentId1);
+
+        $this->assertEquals(array_merge(['id' => $contentId1], $content1),$response);
+
+    }
+
     /**
      * @return \Illuminate\Database\Connection
      */
