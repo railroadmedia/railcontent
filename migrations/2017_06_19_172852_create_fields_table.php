@@ -21,8 +21,8 @@ class CreateFieldsTable extends Migration
 
                 $table->string('key', 255)->index();
                 $table->string('value', 255)->index();
-
-                $table->timestamps();
+                $table->string('type', 255)->index();
+                $table->integer('position')->index()->nullable();
             }
         );
     }

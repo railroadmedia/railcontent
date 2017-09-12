@@ -2,8 +2,12 @@
 
 namespace Railroad\Railcontent\Providers;
 
+use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use PDO;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Listeners\VersionContentEventListener;
 
 class RailcontentServiceProvider extends ServiceProvider
 {
@@ -14,6 +18,16 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // this makes all database calls return arrays rather than objects
+        $this->listen = [
+            StatementPrepared::class => [
+                function ($event) {
+                    $event->statement->setFetchMode(PDO::FETCH_ASSOC);
+                }
+            ],
+            ContentUpdated::class => [VersionContentEventListener::class . '@handle']
+        ];
+
         parent::boot();
 
         $this->setupConfig();
@@ -25,6 +39,9 @@ class RailcontentServiceProvider extends ServiceProvider
         );
 
         $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
+
+        //load package routes file
+        $this->loadRoutesFrom(__DIR__ . '/../routes.php');
     }
 
     /**
@@ -46,13 +63,13 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$databaseConnectionName = config('railcontent.database_connection_name');
 
         // Tables
-        ConfigService::$tableCategories = config('railcontent.tables.categories');
         ConfigService::$tableContent = config('railcontent.tables.content');
-        ConfigService::$tableContentCategories = config('railcontent.tables.content_categories');
         ConfigService::$tableVersions = config('railcontent.tables.versions');
         ConfigService::$tableFields = config('railcontent.tables.fields');
-        ConfigService::$tableSubjectFields = config('railcontent.tables.subject_fields');
+        ConfigService::$tableContentFields = config('railcontent.tables.content_fields');
         ConfigService::$tableData = config('railcontent.tables.data');
-        ConfigService::$tableSubjectData = config('railcontent.tables.subject_data');
+        ConfigService::$tableContentData = config('railcontent.tables.content_data');
+        ConfigService::$tablePermissions = config('railcontent.tables.permissions');
+        ConfigService::$tableContentPermissions = config('railcontent.tables.content_permissions');
     }
 }

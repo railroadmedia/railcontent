@@ -60,11 +60,14 @@ class RailcontentTestCase extends BaseTestCase
     protected function getEnvironmentSetUp($app)
     {
         // Setup package config for testing
-        $defaultConfig = require(__DIR__ . '/../config/railtcontent.php');
+        $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
 
         $app['config']->set('railcontent.tables', $defaultConfig['tables']);
         $app['config']->set('railcontent.database_connection_name', 'testbench');
         $app['config']->set('railcontent.cache_duration', 60);
+//        $app['config']->set('railcontent.subject_type_category', $defaultConfig['subject_type_category']);
+//        $app['config']->set('railcontent.subject_type_content', $defaultConfig['subject_type_content']);
+//        $app['config']->set('railcontent.category_status', $defaultConfig['category_status']);
 
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testbench');
@@ -146,5 +149,13 @@ class RailcontentTestCase extends BaseTestCase
         $this->authManager->guard()->onceUsingId($userId);
 
         return $userId;
+    }
+
+    /**
+     * @return \Illuminate\Database\Connection
+     */
+    public function query()
+    {
+        return $this->databaseManager->connection();
     }
 }

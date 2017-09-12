@@ -19,14 +19,11 @@ class CreateVersionsTable extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
 
-                $table->integer('subject_id')->index();
-                $table->string('subject_type', 64)->index();
+                $table->integer('content_id')->index();
                 $table->integer('author_id')->index()->nullable();
                 $table->string('state', 64)->index();
                 $table->text('data');
                 $table->dateTime('saved_on')->index();
-
-                $table->timestamps();
             }
         );
     }

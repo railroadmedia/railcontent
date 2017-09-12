@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Railroad\Railcontent\Services\ConfigService;
 
-class CreateSubjectDataTable extends Migration
+class CreateContentFieldsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,15 +15,12 @@ class CreateSubjectDataTable extends Migration
     public function up()
     {
         Schema::create(
-            ConfigService::$tableSubjectData,
+            ConfigService::$tableContentFields,
             function (Blueprint $table) {
                 $table->increments('id');
 
-                $table->integer('subject_id')->index();
-                $table->string('subject_type', 64)->index();
-                $table->integer('data_id')->index();
-
-                $table->timestamps();
+                $table->integer('content_id')->index();
+                $table->integer('field_id')->index();
             }
         );
     }
@@ -35,6 +32,6 @@ class CreateSubjectDataTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableSubjectData);
+        Schema::dropIfExists(ConfigService::$tableContentFields);
     }
 }
