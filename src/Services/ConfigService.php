@@ -54,6 +54,10 @@ class ConfigService
      */
     public static $tableContentPermissions;
 
+    /**
+     * @var
+     */
+    public static $tableUserContent;
 
     /**
      * @var string

@@ -71,5 +71,6 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableContentData = config('railcontent.tables.content_data');
         ConfigService::$tablePermissions = config('railcontent.tables.permissions');
         ConfigService::$tableContentPermissions = config('railcontent.tables.content_permissions');
-    }
+        ConfigService::$tableUserContent = config('railcontent.tables.user_content');
+}
 }
