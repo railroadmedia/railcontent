@@ -50,14 +50,24 @@ class ConfigService
     public static $tablePermissions;
 
     /**
-     * @var
+     * @var string
      */
     public static $tableContentPermissions;
 
     /**
-     * @var
+     * @var string
      */
     public static $tableUserContent;
+
+    /**
+     * @var string
+     */
+    public static $tablePlaylists;
+
+    /**
+     * @var string
+     */
+    public static $tableUserContentPlaylists;
 
     /**
      * @var string

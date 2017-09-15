@@ -9,22 +9,24 @@ use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Requests\ContentRequest;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Services\UserContentService;
 
 class ContentController extends Controller
 {
     /**
      * @var ContentService
      */
-    private $contentService;
+    private $contentService, $userContentService;
 
     /**
      * ContentController constructor.
      *
      * @param ContentService $contentService
      */
-    public function __construct(ContentService $contentService)
+    public function __construct(ContentService $contentService, UserContentService $userContentService)
     {
         $this->contentService = $contentService;
+        $this->userContentService = $userContentService;
     }
 
     /**
@@ -180,5 +182,44 @@ class ContentController extends Controller
         $restored = $this->contentService->restoreContent($versionId);
 
         return response()->json($restored, 200);
+    }
+
+    public function startContent(Request $request)
+    {
+        $content = $this->contentService->getById($request->input('content_id'));
+
+        if(is_null($content)) {
+            return response()->json('Start content failed, content not found with id: '.$request->input('content_id'), 404);
+        }
+
+        $response = $this->userContentService->startContent($request->input('content_id'));
+
+        return response()->json($response, 200);
+    }
+
+    public function completeContent(Request $request)
+    {
+        $content = $this->contentService->getById($request->input('content_id'));
+
+        if(is_null($content)) {
+            return response()->json('Complete content failed, content not found with id: '.$request->input('content_id'), 404);
+        }
+
+        $response = $this->userContentService->completeContent($request->input('content_id'));
+
+        return response()->json($response, 201);
+    }
+
+    public function saveProgress(Request $request)
+    {
+        $content = $this->contentService->getById($request->input('content_id'));
+
+        if(is_null($content)) {
+            return response()->json('Save user progress failed, content not found with id: '.$request->input('content_id'), 404);
+        }
+
+        $response = $this->userContentService->saveContentProgress($request->input('content_id'), $request->input('progress'));
+
+        return response()->json($response, 201);
     }
 }

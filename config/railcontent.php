@@ -13,6 +13,8 @@ return [
         'content_data' => 'railcontent_content_data',
         'permissions' => 'railcontent_permissions',
         'content_permissions' => 'railcontent_content_permissions',
-        'user_content' => 'railcontent_user_content'
+        'user_content' => 'railcontent_user_content',
+        'playlists' => 'railcontent_playlists',
+        'user_content_playlists' => 'railcontent_user_content_playlists'
     ],
 ];

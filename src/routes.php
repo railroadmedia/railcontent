@@ -14,3 +14,6 @@ Route::post('/permission', 'Railroad\Railcontent\Controllers\PermissionControlle
 Route::put('/permission/{permissionId}', 'Railroad\Railcontent\Controllers\PermissionController@update');
 Route::delete('/permission/{permissionId}', 'Railroad\Railcontent\Controllers\PermissionController@delete');
 Route::post('/permission/assign', 'Railroad\Railcontent\Controllers\PermissionController@assign');
+Route::put('/start', 'Railroad\Railcontent\Controllers\ContentController@startContent');
+Route::put('/complete', 'Railroad\Railcontent\Controllers\ContentController@completeContent');
+Route::put('/progress', 'Railroad\Railcontent\Controllers\ContentController@saveProgress');

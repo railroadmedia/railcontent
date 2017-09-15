@@ -4,11 +4,10 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
-use Railroad\Railcontent\Events\CategoryUpdated;
 use Railroad\Railcontent\Events\ContentUpdated;
-use Railroad\Railcontent\Listeners\VersionContentEventListener;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserContentService;
 use Response;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Railroad\Railcontent\Services\ConfigService;
@@ -18,7 +17,7 @@ class ContentControllerTest extends RailcontentTestCase
     /**
      * @var ContentRepository
      */
-    protected $classBeingTested;
+    protected $classBeingTested, $serviceBeingTested;
 
     protected function setUp()
     {
@@ -1163,6 +1162,126 @@ class ContentControllerTest extends RailcontentTestCase
         $results = $this->serviceBeingTested->getPaginated($page, $amount, $order, $orderBy, $statues, $types, $requiredFields, $parentSlug, $includeFuturePublishedOn);
 
         $this->assertEquals($contents, $results);
+    }
+
+    public function test_start_content()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => "1",
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $this->createAndLogInNewUser();
+
+        $response = $this->call('PUT','start',['content_id' => $contentId]);
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals('true', $response->content());
+    }
+
+    public function test_start_content_invalid_content_id()
+    {
+        $this->createAndLogInNewUser();
+
+        $response = $this->call('PUT','start',['content_id' => 1]);
+
+        $this->assertEquals(404, $response->status());
+
+        $this->assertEquals('"Start content failed, content not found with id: 1"', $response->content());
+    }
+
+    public function test_complete_content()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => "1",
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $userId = $this->createAndLogInNewUser();
+
+        $userContent = [
+            'content_id' => $contentId,
+            'user_id' => $userId,
+            'state' => UserContentService::STATE_STARTED,
+            'progress' => $this->faker->numberBetween(0,99)
+        ];
+
+        $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+
+        $response = $this->call('PUT','complete',['content_id' => $contentId]);
+
+        $this->assertEquals(201, $response->status());
+        $this->assertEquals('true', $response->content());
+    }
+
+    public function test_complete_content_invalid_content_id()
+    {
+        $this->createAndLogInNewUser();
+
+        $response = $this->call('PUT','complete',['content_id' => 1]);
+
+        $this->assertEquals(404, $response->status());
+
+        $this->assertEquals('"Complete content failed, content not found with id: 1"', $response->content());
+    }
+
+    public function test_save_user_progress_on_content()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_DRAFT,
+            'type' => $this->faker->word,
+            'position' => "1",
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $userId = $this->createAndLogInNewUser();
+
+        $userContent = [
+            'content_id' => $contentId,
+            'user_id' => $userId,
+            'state' => UserContentService::STATE_STARTED,
+            'progress' => $this->faker->numberBetween(0,10)
+        ];
+
+        $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+
+        $response = $this->call('PUT','progress',['content_id' => $contentId, 'progress' => $this->faker->numberBetween(10,99)]);
+
+        $this->assertEquals(201, $response->status());
+        $this->assertEquals('true', $response->content());
+    }
+
+    public function test_save_user_progress_on_content_inexistent()
+    {
+        $contentId = 1;
+        $userId = $this->createAndLogInNewUser();
+
+        $response = $this->call('PUT','progress',['content_id' => $contentId, 'progress' => $this->faker->numberBetween(10,99)]);
+
+        $this->assertEquals(404, $response->status());
+        $this->assertEquals('"Save user progress failed, content not found with id: 1"', $response->content());
     }
 
     /**
