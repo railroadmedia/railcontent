@@ -4,14 +4,16 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
+use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\SearchInterface;
 
 /**
  * Class ContentRepository
  *
  * @package Railroad\Railcontent\Repositories
  */
-class ContentRepository extends RepositoryBase
+class ContentRepository extends RepositoryBase implements SearchInterface
 {
     /**
      * @param $id
@@ -725,5 +727,76 @@ class ContentRepository extends RepositoryBase
                     'type' => 'content_id'
                 ]
             )->get();
+    }
+
+    /**
+     * @param ContentIndexRequest $request
+     * @return mixed
+     */
+    public function generateQuery(ContentIndexRequest $request)
+    {
+        $statues = $request->input('statues');
+
+        $types = $request->input('types');
+        $parentId = $request->input('parent_id');
+
+        $query = $this->setQuery()
+            ->whereIn(ConfigService::$tableContent.'.status', $statues)
+            ->whereIn(ConfigService::$tableContent.'.type', $types);
+
+        if(!is_null($parentId)) {
+            $query->where(ConfigService::$tableContent.'.parent_id', $parentId);
+        }
+        return $query;
+    }
+
+    public function setQuery()
+    {
+        return $this->queryTable()
+            ->select(
+                [
+                    ConfigService::$tableContent.'.id as id',
+                    ConfigService::$tableContent.'.slug as slug',
+                    ConfigService::$tableContent.'.status as status',
+                    ConfigService::$tableContent.'.type as type',
+                    ConfigService::$tableContent.'.position as position',
+                    ConfigService::$tableContent.'.parent_id as parent_id',
+                    ConfigService::$tableContent.'.published_on as published_on',
+                    ConfigService::$tableContent.'.created_on as created_on',
+                    ConfigService::$tableContent.'.archived_on as archived_on',
+                    'allfieldsvalue.id as field_id',
+                    'allfieldsvalue.key as field_key',
+                    'allfieldsvalue.value as field_value',
+                    'allfieldsvalue.type as field_type',
+                    'allfieldsvalue.position as field_position',
+                    ConfigService::$tableData.'.id as datum_id',
+                    ConfigService::$tableData.'.key as datum_key',
+                    ConfigService::$tableData.'.value as datum_value',
+                    ConfigService::$tableData.'.position as datum_position',
+
+                ]
+            )->leftJoin(
+                ConfigService::$tableContentData,
+                ConfigService::$tableContentData.'.content_id',
+                '=',
+                ConfigService::$tableContent.'.id'
+            )
+            ->leftJoin(
+                ConfigService::$tableData,
+                ConfigService::$tableData.'.id',
+                '=',
+                ConfigService::$tableContentData.'.datum_id'
+            )->leftJoin(
+                ConfigService::$tableContentFields.' as allcontentfields',
+                'allcontentfields.content_id',
+                '=',
+                ConfigService::$tableContent.'.id'
+            )
+            ->leftJoin(
+                ConfigService::$tableFields.' as allfieldsvalue',
+                'allfieldsvalue.id',
+                '=',
+                'allcontentfields.field_id'
+            );
     }
 }
