@@ -32,9 +32,11 @@ class ContentController extends Controller
         $this->contentService = $contentService;
         $this->userContentService = $userContentService;
         $this->contentRepository = $contentRepository;
-        $this->search = new SearchService($this->contentRepository->databaseManager,
-            new FieldRepository($this->contentRepository->databaseManager,
-                new PermissionRepository($this->contentRepository->databaseManager, $this->contentRepository)
+        $this->search = new SearchService(
+            new FieldRepository(
+                new PermissionRepository(
+                    $this->contentRepository
+                )
             )
         );
     }

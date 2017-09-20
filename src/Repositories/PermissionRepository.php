@@ -9,11 +9,8 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
-use Illuminate\Database\DatabaseManager;
-use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\SearchInterface;
-use Railroad\Railcontent\Services\SearchService;
 
 /**
  * Class PermissionRepository
@@ -28,12 +25,9 @@ class PermissionRepository extends RepositoryBase implements SearchInterface
      * Search constructor.
      * @param $searchService
      */
-    public function __construct(DatabaseManager $databaseManager, SearchInterface $search)
+    public function __construct(SearchInterface $search)
     {
         $this->search = $search;
-        $this->databaseManager = $databaseManager;
-
-        parent::__construct($databaseManager);
     }
     /**
      * Create a new permisssion and return the permission id

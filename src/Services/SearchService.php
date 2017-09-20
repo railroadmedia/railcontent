@@ -9,7 +9,6 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
@@ -18,23 +17,18 @@ use Railroad\Railcontent\Requests\ContentIndexRequest;
 
 class SearchService extends RepositoryBase implements SearchInterface
 {
-    private $search, $databaseManager;
+    private $search;
 
     /**
      * Search constructor.
      * @param $searchService
      */
-    public function __construct(DatabaseManager $databaseManager, SearchInterface $searchService)
+    public function __construct( SearchInterface $searchService)
     {
         $this->search = $searchService;
-
-        $this->databaseManager = $databaseManager;
-
-        parent::__construct($databaseManager);
     }
 
     /**
-     * @param ContentIndexRequest $request
      * @return mixed
      */
     public function generateQuery()
@@ -44,7 +38,9 @@ class SearchService extends RepositoryBase implements SearchInterface
         return $queryBuilder;
     }
 
-
+    /**Search the content based on request input value
+     * @return array
+     */
     public function search()
     {
         $query = $this->generateQuery();
@@ -93,6 +89,9 @@ class SearchService extends RepositoryBase implements SearchInterface
         return $query->get();
     }
 
+    /*
+     * Return contents in correct format
+     */
     public function getPaginated()
     {
         $fieldsWithContent = $this->search();
@@ -204,6 +203,9 @@ class SearchService extends RepositoryBase implements SearchInterface
         return $content;
     }
 
+    /*
+     * Get content based on id or null
+     */
     public function getById($id)
     {
         return $this->getManyById([$id])[$id] ?? null;
@@ -215,10 +217,11 @@ class SearchService extends RepositoryBase implements SearchInterface
      */
     public function getManyById($ids)
     {
-        $search = new SearchService($this->search->databaseManager,new PermissionRepository($this->search->databaseManager, new ContentRepository($this->search->databaseManager)));
+        $search = new SearchService(new PermissionRepository(new ContentRepository()));
 
         $builder = $search->generateQuery();
         $builder->whereIn(ConfigService::$tableContent.'.id', $ids);
+
         $builder = $builder->get();
 
         return $this->parseAndGetLinkedContent($builder);
@@ -234,7 +237,7 @@ class SearchService extends RepositoryBase implements SearchInterface
      */
     public function getBySlug($slug, $parentId = null)
     {
-        $search = new SearchService($this->search->databaseManager,new PermissionRepository($this->search->databaseManager, new ContentRepository($this->search->databaseManager)));
+        $search = new SearchService(new PermissionRepository(new ContentRepository()));
 
         $builder = $search->generateQuery();
         $builder->where(ConfigService::$tableContent.'.slug', $slug);

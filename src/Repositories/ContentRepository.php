@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Services\ConfigService;
@@ -16,19 +15,6 @@ use Railroad\Railcontent\Services\SearchInterface;
  */
 class ContentRepository extends RepositoryBase implements SearchInterface
 {
-    public $databaseManager;
-
-    /**
-     * ContentRepository constructor.
-     * @param $databaseManager
-     */
-    public function __construct(DatabaseManager $databaseManager)
-    {
-        $this->databaseManager = $databaseManager;
-
-        parent::__construct($databaseManager);
-    }
-
     /**
      * Insert a new category in the database, recalculate position and regenerate tree
      *

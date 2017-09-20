@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Services\ConfigService;
@@ -10,28 +9,16 @@ use Railroad\Railcontent\Services\SearchInterface;
 
 class FieldRepository extends RepositoryBase implements SearchInterface
 {
-    public $search, $databaseManager;
+    public $search;
 
     /**
      * FieldRepository constructor.
      * @param $search
      */
-    public function __construct(DatabaseManager $databaseManager, SearchInterface $search)
+    public function __construct(SearchInterface $search)
     {
         $this->search = $search;
-        $this->databaseManager = $databaseManager;
-
-        parent::__construct($databaseManager);
     }
-
-    /**
-     * FieldRepository constructor.
-     * @param $search
-     */
-   /* public function __construct(SearchInterface $search)
-    {
-        $this->search = $search;
-    }*/
 
     /**
      * Update or insert a new record in the railcontent_fields table
