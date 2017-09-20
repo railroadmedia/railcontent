@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Services\ConfigService;
@@ -15,185 +16,17 @@ use Railroad\Railcontent\Services\SearchInterface;
  */
 class ContentRepository extends RepositoryBase implements SearchInterface
 {
-    /**
-     * @param $id
-     * @return array|null
-     */
-    public function getById($id)
-    {
-        //get user permissions from request
-        $permissions = request()->request->get('permissions') ?? [];
-
-        return $this->getManyById([$id],$permissions)[$id] ?? null;
-    }
+    public $databaseManager;
 
     /**
-     * @param $ids
-     * @param array $permissions
-     * @return array
+     * ContentRepository constructor.
+     * @param $databaseManager
      */
-    public function getManyById($ids, array $permissions = [])
+    public function __construct(DatabaseManager $databaseManager)
     {
-        $fieldsWithContent = $this->queryIndex();
+        $this->databaseManager = $databaseManager;
 
-        //check if use have permission to view the content
-        $fieldsWithContent->where(function($builder) use ($permissions) {
-           return $builder->whereNull(ConfigService::$tablePermissions.'.name')
-                ->orWhereIn(ConfigService::$tablePermissions.'.name', $permissions);
-        });
-
-        //get contents based on ids
-        $fieldsWithContent = $fieldsWithContent
-            ->whereIn(ConfigService::$tableContent.'.id', $ids)
-            ->get();
-
-        return $this->parseAndGetLinkedContent($fieldsWithContent);
-    }
-
-    /**
-     *
-     * If the parent id is null it will pull all rows with that slug under ANY parent including null
-     *
-     * @param $slug
-     * @param $parentId
-     * @return array
-     */
-    public function getBySlug($slug, $parentId = null)
-    {
-        $fieldsWithContent = $this->queryIndex()
-            ->where(ConfigService::$tableContent.'.slug', $slug);
-
-        if(!is_null($parentId)) {
-            $fieldsWithContent = $fieldsWithContent->where('parent_id', $parentId);
-        }
-
-        $fieldsWithContent = $fieldsWithContent->get();
-
-        return $this->parseAndGetLinkedContent($fieldsWithContent);
-    }
-
-    /**
-     * @param int $page
-     * @param int $amount
-     * @param string $orderByDirection
-     * @param string $orderByColumn
-     * @param array $statues
-     * @param array $types
-     * @param array $requiredFields
-     * @param int|null $parentId
-     * @param bool $includeFuturePublishedOn
-     * @return array
-     */
-    public function getPaginated(
-        $page,
-        $amount,
-        $orderByDirection = 'desc',
-        $orderByColumn = 'published_on',
-        array $statues = [],
-        array $types = [],
-        array $requiredFields = [],
-        $parentId = null,
-        $includeFuturePublishedOn = false
-    )
-    {
-        $page--;
-
-        //get permissions from requests or empty array
-        $permissions = request()->request->get('permissions') ?? [];
-
-        $fieldsWithContent = $this->queryIndex()
-            ->whereIn(ConfigService::$tableContent.'.status', $statues)
-            ->whereIn(ConfigService::$tableContent.'.type', $types);
-
-        if(!is_null($parentId)) {
-            $fieldsWithContent =
-                $fieldsWithContent->where(ConfigService::$tableContent.'.parent_id', $parentId);
-        }
-
-
-        foreach($requiredFields as $requiredKeys => $requiredValues) {
-            //join with field table where key and value are the searched value
-            $fieldsWithContent->leftJoin(
-                ConfigService::$tableFields.' as field'.$requiredKeys,
-                function($join) use ($requiredKeys, $requiredValues) {
-                    $join
-                        ->where('field'.$requiredKeys.'.key', $requiredKeys)
-                        ->where(function($builder) use ($requiredKeys, $requiredValues) {
-                            return $builder->where('field'.$requiredKeys.'.value', $requiredValues)
-                                ->orWhere('field'.$requiredKeys.'.type', 'content_id');
-                        }
-                        );
-                }
-            );
-
-            //linked content fields
-            $fieldsWithContent->leftJoin(
-                ConfigService::$tableContentFields.' as contentfield'.$requiredKeys,
-                function($join) use ($requiredKeys) {
-                    $join->on('contentfield'.$requiredKeys.'.content_id', '=', ConfigService::$tableContent.'.id')
-                        ->on('contentfield'.$requiredKeys.'.field_id', 'field'.$requiredKeys.'.id');
-                }
-            );
-
-            //linked parent fields
-            $fieldsWithContent->leftJoin(
-                ConfigService::$tableContentFields.' as parentfield'.$requiredKeys,
-                function($join) use ($requiredKeys) {
-                    $join->on('parentfield'.$requiredKeys.'.content_id', '=', ConfigService::$tableContent.'.parent_id')
-                        ->on('parentfield'.$requiredKeys.'.field_id', '=', 'field'.$requiredKeys.'.id');
-                }
-            );
-
-            //join with content for fields with content_id type
-            $fieldsWithContent->leftJoin(
-                ConfigService::$tableContent.' as fieldcontent'.$requiredKeys,
-                function($join) use ($requiredKeys, $requiredValues) {
-                    $join->on('fieldcontent'.$requiredKeys.'.id', '=', 'field'.$requiredKeys.'.value')
-                        ->where(function($builder) use ($requiredKeys) {
-                            return $builder->whereNotNull('contentfield'.$requiredKeys.'.id')->orWhereNotNull('parentfield'.$requiredKeys.'.id');
-                        })
-                        ->where('fieldcontent'.$requiredKeys.'.slug', $requiredValues);
-                });
-
-            //where conditions
-            $fieldsWithContent = $fieldsWithContent->where(function($builder) use ($requiredKeys) {
-                return $builder->whereNotNull('fieldcontent'.$requiredKeys.'.id')
-                    ->orWhere(function($builder) use ($requiredKeys) {
-                        return $builder->where('field'.$requiredKeys.'.type', '<>', 'content_id')
-                            ->where(function($builder) use ($requiredKeys) {
-                                return $builder->whereNotNull('contentfield'.$requiredKeys.'.id')
-                                    ->orWhereNotNull('parentfield'.$requiredKeys.'.id');
-                            });
-                    });
-            });
-        }
-
-        //check if use have permission to view the content
-        $fieldsWithContent->where(function($builder) use ($permissions) {
-            return $builder->whereNull(ConfigService::$tablePermissions.'.name')
-                ->orWhereIn(ConfigService::$tablePermissions.'.name', $permissions);
-        });
-
-
-        if(!$includeFuturePublishedOn) {
-            $fieldsWithContent = $fieldsWithContent->where(
-                function(Builder $builder) {
-                    return $builder->where(
-                        ConfigService::$tableContent.'.published_on',
-                        '<',
-                        Carbon::now()->toDateTimeString()
-                    )
-                        ->orWhereNull(ConfigService::$tableContent.'.published_on');
-                }
-            );
-        }
-
-        $fieldsWithContent = $fieldsWithContent->orderBy($orderByColumn, $orderByDirection)
-            ->skip($page * $amount)
-            ->limit($amount)
-            ->get();
-
-        return $this->parseAndGetLinkedContent($fieldsWithContent);
+        parent::__construct($databaseManager);
     }
 
     /**
@@ -275,9 +108,9 @@ class ContentRepository extends RepositoryBase implements SearchInterface
      * @param bool $deleteChildren
      * @return int
      */
-    public function delete($id, $deleteChildren = false)
+    public function delete($content, $deleteChildren = false)
     {
-        $content = $this->getById($id);
+        $id = $content['id'];
 
         // unlink fields and data
         $this->unlinkField($id);
@@ -534,112 +367,6 @@ class ContentRepository extends RepositoryBase implements SearchInterface
     }
 
     /**
-     * @param $fieldsWithContent
-     * @return array
-     */
-    private function parseAndGetLinkedContent($fieldsWithContent)
-    {
-        $permissions = request()->request->get('permissions') ?? [];
-
-        $linkedContentIdsToGrab = [];
-
-        foreach($fieldsWithContent as $fieldWithContent) {
-            if($fieldWithContent['field_type'] === 'content_id') {
-                $linkedContentIdsToGrab[] = $fieldWithContent['field_value'];
-            }
-        }
-
-        $linkedContents = [];
-
-        if(!empty($linkedContentIdsToGrab)) {
-            $linkedContents = $this->getManyById($linkedContentIdsToGrab, $permissions);
-        }
-
-        $content = [];
-
-        foreach($fieldsWithContent as $fieldWithContent) {
-            $content[$fieldWithContent['id']] = [
-                'id' => $fieldWithContent['id'],
-                'slug' => $fieldWithContent['slug'],
-                'status' => $fieldWithContent['status'],
-                'type' => $fieldWithContent['type'],
-                'position' => $fieldWithContent['position'],
-                'parent_id' => $fieldWithContent['parent_id'],
-                'published_on' => $fieldWithContent['published_on'],
-                'created_on' => $fieldWithContent['created_on'],
-                'archived_on' => $fieldWithContent['archived_on'],
-            ];
-        }
-
-        foreach($fieldsWithContent as $fieldWithContent) {
-            if(($fieldWithContent['field_key'] === null) && ($fieldWithContent['datum_key'] === null)) {
-                continue;
-            }
-
-            if($fieldWithContent['field_type'] === 'content_id') {
-
-                $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']] = [
-                    'id' => $linkedContents[$fieldWithContent['field_value']]['id'],
-                    'slug' => $linkedContents[$fieldWithContent['field_value']]['slug'],
-                    'status' => $linkedContents[$fieldWithContent['field_value']]['status'],
-                    'type' => $linkedContents[$fieldWithContent['field_value']]['type'],
-                    'position' => $linkedContents[$fieldWithContent['field_value']]['position'],
-                    'parent_id' => $linkedContents[$fieldWithContent['field_value']]['parent_id'],
-                    'published_on' => $linkedContents[$fieldWithContent['field_value']]['published_on'],
-                    'created_on' => $linkedContents[$fieldWithContent['field_value']]['created_on'],
-                    'archived_on' => $linkedContents[$fieldWithContent['field_value']]['archived_on'],
-                ];
-
-                if(array_key_exists('fields', $linkedContents[$fieldWithContent['field_value']])) {
-                    foreach($linkedContents[$fieldWithContent['field_value']]['fields'] as
-                            $linkedContentFieldKey => $linkedContentFieldValue) {
-
-                        $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']]
-                        ['fields'][$linkedContentFieldKey] = $linkedContentFieldValue;
-                    }
-                }
-
-                if(array_key_exists('datum', $linkedContents[$fieldWithContent['field_value']])) {
-                    foreach($linkedContents[$fieldWithContent['field_value']]['datum'] as
-                            $linkedContentDatumKey => $linkedContentDatumValue) {
-
-                        $content[$fieldWithContent['id']]['fields'][$fieldWithContent['field_key']]
-                        ['datum'][$linkedContentDatumKey] = $linkedContentDatumValue;
-                    }
-                }
-
-            } else {
-                // put multiple fields with same key in to an array
-                if($fieldWithContent['field_type'] == 'multiple') {
-
-                    $content[$fieldWithContent['id']]
-                    ['fields']
-                    [$fieldWithContent['field_key']]
-                    [$fieldWithContent['field_position']] =
-                        $fieldWithContent['field_value'];
-
-                } elseif($fieldWithContent['field_value']) {
-
-                    $content[$fieldWithContent['id']]
-                    ['fields']
-                    [$fieldWithContent['field_key']] =
-                        $fieldWithContent['field_value'];
-                }
-            }
-
-            //put datum as array key => value
-            if($fieldWithContent['datum_value']) {
-                $content[$fieldWithContent['id']]
-                ['datum']
-                [$fieldWithContent['datum_key']] =
-                    $fieldWithContent['datum_value'];
-            }
-        }
-
-        return $content;
-    }
-
-    /**
      * Update content position and call function that recalculate position for other children
      * @param int $contentId
      * @param int $position
@@ -733,24 +460,7 @@ class ContentRepository extends RepositoryBase implements SearchInterface
      * @param ContentIndexRequest $request
      * @return mixed
      */
-    public function generateQuery(ContentIndexRequest $request)
-    {
-        $statues = $request->input('statues');
-
-        $types = $request->input('types');
-        $parentId = $request->input('parent_id');
-
-        $query = $this->setQuery()
-            ->whereIn(ConfigService::$tableContent.'.status', $statues)
-            ->whereIn(ConfigService::$tableContent.'.type', $types);
-
-        if(!is_null($parentId)) {
-            $query->where(ConfigService::$tableContent.'.parent_id', $parentId);
-        }
-        return $query;
-    }
-
-    public function setQuery()
+    public function generateQuery()
     {
         return $this->queryTable()
             ->select(
@@ -764,6 +474,7 @@ class ContentRepository extends RepositoryBase implements SearchInterface
                     ConfigService::$tableContent.'.published_on as published_on',
                     ConfigService::$tableContent.'.created_on as created_on',
                     ConfigService::$tableContent.'.archived_on as archived_on',
+                    //ConfigService::$tableContentFields . '.field_id as field_id',
                     'allfieldsvalue.id as field_id',
                     'allfieldsvalue.key as field_key',
                     'allfieldsvalue.value as field_value',

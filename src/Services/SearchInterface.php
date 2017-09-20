@@ -12,6 +12,6 @@ use Railroad\Railcontent\Requests\ContentIndexRequest;
 
 interface SearchInterface
 {
-    public function generateQuery(ContentIndexRequest $request);
+    public function generateQuery();
 
 }

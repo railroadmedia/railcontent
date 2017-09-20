@@ -9,15 +9,32 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Database\DatabaseManager;
+use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\SearchInterface;
+use Railroad\Railcontent\Services\SearchService;
 
 /**
  * Class PermissionRepository
  *
  * @package Railroad\Railcontent\Repositories
  */
-class PermissionRepository extends RepositoryBase
+class PermissionRepository extends RepositoryBase implements SearchInterface
 {
+    protected $search, $databaseManager;
+
+    /**
+     * Search constructor.
+     * @param $searchService
+     */
+    public function __construct(DatabaseManager $databaseManager, SearchInterface $search)
+    {
+        $this->search = $search;
+        $this->databaseManager = $databaseManager;
+
+        parent::__construct($databaseManager);
+    }
     /**
      * Create a new permisssion and return the permission id
      *
@@ -141,5 +158,35 @@ class PermissionRepository extends RepositoryBase
     public function contentPermissionQuery()
     {
         return parent::connection()->table(ConfigService::$tableContentPermissions);
+    }
+
+    /**
+     *      * @return mixed
+     */
+    public function generateQuery()
+    {
+        $query = $this->search->generateQuery();
+
+        //get permissions from requests or empty array
+        $permissions = request()->permissions ?? [];
+
+        $query->leftJoin(
+            ConfigService::$tableContentPermissions, function($join) {
+            return $join->on(ConfigService::$tableContentPermissions.'.content_id', ConfigService::$tableContent.'.id')
+                ->orOn(ConfigService::$tableContentPermissions.'.content_type', ConfigService::$tableContent.'.type');
+        }
+        )
+            ->leftJoin(
+                ConfigService::$tablePermissions,
+                ConfigService::$tablePermissions.'.id',
+                '=',
+                ConfigService::$tableContentPermissions.'.required_permission_id'
+            )
+            ->where(function($builder) use ($permissions) {
+                return $builder->whereNull(ConfigService::$tablePermissions.'.name')
+                    ->orWhereIn(ConfigService::$tablePermissions.'.name', $permissions);
+            });;
+
+        return $query;
     }
 }

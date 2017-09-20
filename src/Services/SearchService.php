@@ -8,46 +8,94 @@
 
 namespace Railroad\Railcontent\Services;
 
-
+use Carbon\Carbon;
+use Illuminate\Database\DatabaseManager;
+use Illuminate\Database\Query\Builder;
+use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Requests\ContentIndexRequest;
 
 class SearchService extends RepositoryBase implements SearchInterface
 {
-    protected $search, $contentRepository;
+    private $search, $databaseManager;
 
     /**
      * Search constructor.
      * @param $searchService
      */
-    public function __construct(SearchInterface $searchService)
+    public function __construct(DatabaseManager $databaseManager, SearchInterface $searchService)
     {
         $this->search = $searchService;
+
+        $this->databaseManager = $databaseManager;
+
+        parent::__construct($databaseManager);
     }
 
     /**
      * @param ContentIndexRequest $request
      * @return mixed
      */
-    public function generateQuery(ContentIndexRequest $request)
+    public function generateQuery()
     {
-        $queryBuilder = $this->search->generateQuery($request);
+        $queryBuilder = $this->search->generateQuery();
 
         return $queryBuilder;
     }
 
 
-    public function search(ContentIndexRequest $request)
+    public function search()
     {
+        $query = $this->generateQuery();
+        $statues = request()->statues ?? [];
+        $types = request()->types ?? [];
+        $parentSlug = request()->parent_id ?? null;
 
-        $query = $this->generateQuery($request);
+        $query
+            ->whereIn(ConfigService::$tableContent.'.status', $statues)
+            ->whereIn(ConfigService::$tableContent.'.type', $types);
+
+        $parentId = null;
+
+        if(!is_null($parentSlug)) {
+            $parent = $this->getBySlug($parentSlug);
+            $parentId = key($parent);
+        }
+
+        if(!is_null($parentId)) {
+            $query->where(ConfigService::$tableContent.'.parent_id', $parentId);
+        }
+
+        if(!request()->include_feature) {
+            $query->where(
+                function(Builder $builder) {
+                    return $builder->where(
+                        ConfigService::$tableContent.'.published_on',
+                        '<',
+                        Carbon::now()->toDateTimeString()
+                    )
+                        ->orWhereNull(ConfigService::$tableContent.'.published_on');
+                }
+            );
+        }
+
+        $page = request()->page;
+        $page--;
+        $orderByColumn = request()->order_by;
+        $orderByDirection = request()->order;
+        $amount = request()->amount;
+
+        $query->orderBy($orderByColumn, $orderByDirection)
+            ->skip($page * $amount)
+            ->limit($amount);
 
         return $query->get();
     }
 
-    public function getPaginated(ContentIndexRequest $request)
+    public function getPaginated()
     {
-        $fieldsWithContent = $this->search($request);
+        $fieldsWithContent = $this->search();
 
         return $this->parseAndGetLinkedContent($fieldsWithContent);
     }
@@ -154,5 +202,49 @@ class SearchService extends RepositoryBase implements SearchInterface
         }
 
         return $content;
+    }
+
+    public function getById($id)
+    {
+        return $this->getManyById([$id])[$id] ?? null;
+    }
+
+    /**
+     * @param $ids
+     * @return array
+     */
+    public function getManyById($ids)
+    {
+        $search = new SearchService($this->search->databaseManager,new PermissionRepository($this->search->databaseManager, new ContentRepository($this->search->databaseManager)));
+
+        $builder = $search->generateQuery();
+        $builder->whereIn(ConfigService::$tableContent.'.id', $ids);
+        $builder = $builder->get();
+
+        return $this->parseAndGetLinkedContent($builder);
+    }
+
+    /**
+     *
+     * If the parent id is null it will pull all rows with that slug under ANY parent including null
+     *
+     * @param $slug
+     * @param $parentId
+     * @return array
+     */
+    public function getBySlug($slug, $parentId = null)
+    {
+        $search = new SearchService($this->search->databaseManager,new PermissionRepository($this->search->databaseManager, new ContentRepository($this->search->databaseManager)));
+
+        $builder = $search->generateQuery();
+        $builder->where(ConfigService::$tableContent.'.slug', $slug);
+
+        if(!is_null($parentId)) {
+            $builder = $builder->where('parent_id', $parentId);
+        }
+
+        $builder = $builder->get();
+
+        return $this->parseAndGetLinkedContent($builder);
     }
 }

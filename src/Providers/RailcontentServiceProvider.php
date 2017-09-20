@@ -5,9 +5,18 @@ namespace Railroad\Railcontent\Providers;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use PDO;
+use Railroad\Railcontent\Controllers\ContentController;
+use Railroad\Railcontent\Controllers\PermissionController;
+use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\FieldRepository;
+use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Listeners\VersionContentEventListener;
+use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\PermissionService;
+use Railroad\Railcontent\Services\SearchInterface;
+use Railroad\Railcontent\Services\SearchService;
 
 class RailcontentServiceProvider extends ServiceProvider
 {
@@ -51,7 +60,35 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app
+            ->when(PermissionRepository::class)
+            ->needs(SearchInterface::class)
+            ->give(ContentRepository::class);
 
+        $this->app
+            ->when(PermissionController::class)
+            ->needs(SearchInterface::class)
+            ->give(PermissionRepository::class);
+
+        $this->app
+            ->when(ContentService::class)
+            ->needs(SearchInterface::class)
+            ->give(ContentRepository::class);
+
+        $this->app
+            ->when(ContentController::class)
+            ->needs(SearchInterface::class)
+            ->give(ContentRepository::class);
+
+        $this->app
+            ->when(FieldRepository::class)
+            ->needs(SearchInterface::class)
+            ->give(ContentRepository::class);
+
+        $this->app
+            ->when(SearchService::class)
+            ->needs(SearchInterface::class)
+            ->give(ContentRepository::class);
     }
 
     private function setupConfig()

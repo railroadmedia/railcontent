@@ -5,10 +5,14 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\FieldRepository;
+use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Requests\ContentRequest;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Services\SearchService;
 use Railroad\Railcontent\Services\UserContentService;
 
 class ContentController extends Controller
@@ -16,17 +20,23 @@ class ContentController extends Controller
     /**
      * @var ContentService
      */
-    private $contentService, $userContentService;
+    private $contentService, $userContentService, $contentRepository, $search;
 
     /**
      * ContentController constructor.
      *
      * @param ContentService $contentService
      */
-    public function __construct(ContentService $contentService, UserContentService $userContentService)
+    public function __construct(ContentService $contentService, ContentRepository $contentRepository, UserContentService $userContentService)
     {
         $this->contentService = $contentService;
         $this->userContentService = $userContentService;
+        $this->contentRepository = $contentRepository;
+        $this->search = new SearchService($this->contentRepository->databaseManager,
+            new FieldRepository($this->contentRepository->databaseManager,
+                new PermissionRepository($this->contentRepository->databaseManager, $this->contentRepository)
+            )
+        );
     }
 
     /**
@@ -72,17 +82,7 @@ class ContentController extends Controller
          *
          */
 
-        $contents = $this->contentService->getPaginated(
-            $request->input('page'),
-            $request->input('amount'),
-            $request->input('order'),
-            $request->input('order_by'),
-            $request->input('statuses'),
-            $request->input('types'),
-            $request->input('fields'),
-            $request->input('parent_slug'),
-            $request->input('include_future_published_on')
-        );
+        $contents = $this->search->getPaginated();
 
         return response()->json($contents, 200);
     }
@@ -114,7 +114,7 @@ class ContentController extends Controller
      */
     public function update($contentId, ContentRequest $request)
     {
-        $content = $this->contentService->getById($contentId);
+        $content = $this->search->getById($contentId);
 
         if(is_null($content)) {
             return response()->json('Update failed, content not found with id: '.$contentId, 404);
@@ -145,7 +145,7 @@ class ContentController extends Controller
      */
     public function delete($contentId, Request $request)
     {
-        $content = $this->contentService->getById($contentId);
+        $content = $this->search->getById($contentId);
 
         if(is_null($content)) {
             return response()->json('Delete failed, content not found with id: '.$contentId, 404);
@@ -161,7 +161,7 @@ class ContentController extends Controller
 
         event(new ContentUpdated($contentId));
 
-        $deleted = $this->contentService->delete($contentId, $request->input('delete_children'));
+        $deleted = $this->contentService->delete($content, $request->input('delete_children'));
 
         return response()->json($deleted, 200);
     }

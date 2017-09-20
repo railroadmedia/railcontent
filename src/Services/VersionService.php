@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 
 class VersionService
 {
-    private $versionRepository, $contentRepository;
+    private $versionRepository, $contentRepository, $search;
     private $request;
 
-    public function __construct (VersionRepository $versionRepository, Request $request, ContentRepository $contentRepository)
+    public function __construct (VersionRepository $versionRepository, Request $request, ContentRepository $contentRepository, SearchService $search)
     {
         $this->versionRepository = $versionRepository;
         $this->contentRepository = $contentRepository;
+        $this->search = $search;
         $this->request = $request;
     }
 
@@ -30,7 +31,7 @@ class VersionService
         $userId = ($this->versionRepository->getAuthenticatedUserId($this->request));
 
         //get content
-        $content = $this->contentRepository->getById($contentId);
+        $content = $this->search->getById($contentId);
 
         $versionContentId = $this->versionRepository->store($contentId, $userId, '', serialize($content)) ;
 

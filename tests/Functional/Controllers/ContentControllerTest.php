@@ -111,7 +111,6 @@ class ContentControllerTest extends RailcontentTestCase
 
         //expecting that the response has a successful status code
         $response->assertSuccessful();
-
     }
 
     public function test_content_created_is_returned_in_json_format()
@@ -353,7 +352,9 @@ class ContentControllerTest extends RailcontentTestCase
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-        $delete = $this->serviceBeingTested->delete($contentId);
+        $content['id'] = $contentId;
+
+        $delete = $this->serviceBeingTested->delete($content);
 
         $this->assertTrue($delete);
     }
@@ -475,14 +476,21 @@ class ContentControllerTest extends RailcontentTestCase
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
+        $datum = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(500)
+        ];
+
         $this->call('POST', 'content/datum', [
             'content_id' => $contentId,
-            'key' => $this->faker->word,
-            'value' => $this->faker->text(500),
+            'key' => $datum['key'],
+            'value' => $datum['value'],
             'position' => 1
         ]);
 
-        $content = $this->classBeingTested->getById($contentId);
+        $content = $this->query()->table(ConfigService::$tableContent)->where(['id' => $contentId])->get()->first();
+
+        $content['datum'] = [$datum['key'] => $datum['value']];
 
         $this->call('DELETE', 'content/datum/1', [
             'content_id' => $contentId
@@ -569,7 +577,8 @@ class ContentControllerTest extends RailcontentTestCase
         ]);
 
         //get content that will be restored
-        $content = $this->classBeingTested->getById($contentId);
+        $content = $this->query()->table(ConfigService::$tableContent)->where(['id' => $contentId])->get()->first();
+        $content['fields'] = [$fieldKey => $linkedContent];
 
         $this->call('DELETE', 'content/field/1', [
             'content_id' => $contentId
@@ -638,6 +647,7 @@ class ContentControllerTest extends RailcontentTestCase
         ];
 
         $linkedContentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($linkedContent);
+        $linkedContent['id'] = $linkedContentId;
 
         $fieldKey = $this->faker->word;
 
@@ -649,7 +659,8 @@ class ContentControllerTest extends RailcontentTestCase
             'position' => 2
         ]);
 
-        $content = $this->classBeingTested->getById($contentId);
+        $content = $this->query()->table(ConfigService::$tableContent)->where(['id' => $contentId])->get()->first();
+        $content['fields'] = [$fieldKey => $linkedContent];
 
         $this->call('DELETE', 'content/field/1', [
             'content_id' => $contentId
@@ -766,8 +777,8 @@ class ContentControllerTest extends RailcontentTestCase
             ]
         );
 
-        $content = $this->classBeingTested->getById($contentId);
-
+        $content = $this->query()->table(ConfigService::$tableContent)->where(['id' => $contentId])->get()->first();
+        $content['fields'] = [$multipleKeyFieldKey => [0 => $multipleKeyFieldValues[0], 2 => $multipleKeyFieldValues[2], 1 => $multipleKeyFieldValues[1]]];
         $response = $this->call('DELETE', 'content/field/'.$multipleField1, [
             'content_id' => $contentId
         ]);
@@ -863,15 +874,22 @@ class ContentControllerTest extends RailcontentTestCase
             'position' => 1
         ]);
 
+        $datum = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(500)
+        ];
+
         //link second datum to content
         $this->call('POST', 'content/datum', [
             'content_id' => $contentId,
-            'key' => $this->faker->word,
-            'value' => $this->faker->text(500),
+            'key' => $datum['key'],
+            'value' => $datum['value'],
             'position' => 2
         ]);
 
-        $versionContent = $this->classBeingTested->getById($contentId);
+        $versionContent = $this->query()->table(ConfigService::$tableContent)->where(['id' => $contentId])->get()->first();
+        $versionContent['fields'] = [$fieldKey => $linkedContent];
+        $versionContent['datum'] = [$datum['key'] => $datum['value']];
 
         //delete first linked field
         $this->call('DELETE', 'content/field/1', [
@@ -1011,11 +1029,11 @@ class ContentControllerTest extends RailcontentTestCase
         $response = $this->call('GET', '/', [
             'page' => 1,
             'amount' => 10,
-            'statuses' => ['draft', 'published'],
+            'statues' => ['draft', 'published'],
             'types' => ['course'],
             'fields' => [],
-            'parent_slug'=>'',
-            'include_future_published_on'=>false
+            'parent_slug' => '',
+            'include_future_published_on' => false
         ]);
 
         $expectedResults = [];
@@ -1070,17 +1088,75 @@ class ContentControllerTest extends RailcontentTestCase
         $response = $this->call('GET', '/', [
             'page' => 1,
             'amount' => 10,
-            'statuses' => $statues,
+            'statues' => $statues,
             'types' => $types,
             'fields' => [],
-            'parent_slug'=>'',
-            'include_future_published_on'=>false
+            'parent_slug' => '',
+            'include_future_published_on' => false
         ]);
 
         $response->assertJson($expectedContent);
     }
 
-    public function test_index_service_response()
+    public function test_index_with_required_fields()
+    {
+        $expectedResults = [];
+        $statues = ['draft', 'published'];
+        $types = ['course'];
+
+        //create courses
+        for($i = 0; $i < 30; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $types[0],
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => null,
+                'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        $field = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(255),
+            'type' => 'string',
+            'position' => $this->faker->numberBetween()
+        ];
+
+        $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
+
+        for($i = 1; $i < 5; $i++) {
+            $contentField = [
+                'content_id' => $contents[$i]['id'],
+                'field_id' => $fieldId
+            ];
+
+            $contentFieldId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField);
+            $expectedResults[$i] = $contents[$i];
+            $expectedResults[$i]['fields'] = [$field['key'] => $field['value']];
+        }
+
+        $response = $this->call('GET', '/', [
+            'page' => 1,
+            'amount' => 10,
+            'statues' => $statues,
+            'types' => $types,
+            'fields' => [$field['key'] => $field['value']],
+            'parent_slug' => '',
+            'include_future_published_on' => false
+        ]);
+
+        $response->assertJson($expectedResults);
+
+    }
+
+    public function index_service_response()
     {
         $page = 1;
         $amount = 10;
@@ -1117,7 +1193,7 @@ class ContentControllerTest extends RailcontentTestCase
         $this->assertEquals($expectedContent, $results);
     }
 
-    public function test_index_service_by_parent_slug()
+    public function index_service_by_parent_slug()
     {
         $page = 1;
         $amount = 10;
@@ -1181,7 +1257,7 @@ class ContentControllerTest extends RailcontentTestCase
 
         $this->createAndLogInNewUser();
 
-        $response = $this->call('PUT','start',['content_id' => $contentId]);
+        $response = $this->call('PUT', 'start', ['content_id' => $contentId]);
 
         $this->assertEquals(200, $response->status());
         $this->assertEquals('true', $response->content());
@@ -1191,7 +1267,7 @@ class ContentControllerTest extends RailcontentTestCase
     {
         $this->createAndLogInNewUser();
 
-        $response = $this->call('PUT','start',['content_id' => 1]);
+        $response = $this->call('PUT', 'start', ['content_id' => 1]);
 
         $this->assertEquals(404, $response->status());
 
@@ -1219,12 +1295,12 @@ class ContentControllerTest extends RailcontentTestCase
             'content_id' => $contentId,
             'user_id' => $userId,
             'state' => UserContentService::STATE_STARTED,
-            'progress' => $this->faker->numberBetween(0,99)
+            'progress' => $this->faker->numberBetween(0, 99)
         ];
 
         $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
 
-        $response = $this->call('PUT','complete',['content_id' => $contentId]);
+        $response = $this->call('PUT', 'complete', ['content_id' => $contentId]);
 
         $this->assertEquals(201, $response->status());
         $this->assertEquals('true', $response->content());
@@ -1234,7 +1310,7 @@ class ContentControllerTest extends RailcontentTestCase
     {
         $this->createAndLogInNewUser();
 
-        $response = $this->call('PUT','complete',['content_id' => 1]);
+        $response = $this->call('PUT', 'complete', ['content_id' => 1]);
 
         $this->assertEquals(404, $response->status());
 
@@ -1262,12 +1338,12 @@ class ContentControllerTest extends RailcontentTestCase
             'content_id' => $contentId,
             'user_id' => $userId,
             'state' => UserContentService::STATE_STARTED,
-            'progress' => $this->faker->numberBetween(0,10)
+            'progress' => $this->faker->numberBetween(0, 10)
         ];
 
         $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
 
-        $response = $this->call('PUT','progress',['content_id' => $contentId, 'progress' => $this->faker->numberBetween(10,99)]);
+        $response = $this->call('PUT', 'progress', ['content_id' => $contentId, 'progress' => $this->faker->numberBetween(10, 99)]);
 
         $this->assertEquals(201, $response->status());
         $this->assertEquals('true', $response->content());
@@ -1278,7 +1354,7 @@ class ContentControllerTest extends RailcontentTestCase
         $contentId = 1;
         $userId = $this->createAndLogInNewUser();
 
-        $response = $this->call('PUT','progress',['content_id' => $contentId, 'progress' => $this->faker->numberBetween(10,99)]);
+        $response = $this->call('PUT', 'progress', ['content_id' => $contentId, 'progress' => $this->faker->numberBetween(10, 99)]);
 
         $this->assertEquals(404, $response->status());
         $this->assertEquals('"Save user progress failed, content not found with id: 1"', $response->content());
