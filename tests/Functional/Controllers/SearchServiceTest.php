@@ -11,6 +11,7 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 use Carbon\Carbon;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\SearchService;
+use Railroad\Railcontent\Services\UserContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 /**
@@ -1164,6 +1165,67 @@ class SearchServiceTest extends RailcontentTestCase
         $this->assertEquals(array_keys($expectedContent), array_keys($results));
     }
 
+    public function test_get_only_published_content()
+    {
+        $page = 1;
+        $amount = 10;
+        $orderByDirection = 'desc';
+        $orderByColumn = 'id';
+        $statues = ['draft'];
+        $types = ['play along'];
+        $parentId = null;
+        $includeFuturePublishedOn = false;
+        $requiredFields = [];
+
+        $expectedContent = [];
+        $content1 = [
+            'slug' => $this->faker->word,
+            'status' => 'draft',
+            'type' => 'play along',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => Carbon::tomorrow()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+
+        $content2 = [
+            'slug' => $this->faker->word,
+            'status' => 'draft',
+            'type' => 'play along',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => Carbon::yesterday()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
+
+        //last inserted content it's expected to be returned by the getPaginated method
+        $expectedContent[$contentId2] = array_merge(['id' => $contentId2], $content2);
+
+        $response = $this->call('GET','/',[
+            'page' => $page,
+            'amount' => $amount,
+            'fields' => $requiredFields,
+            'parent_id' => $parentId,
+            'statues' => $statues,
+            'types' => $types,
+            'order_by' => $orderByColumn,
+            'order' => $orderByDirection,
+            'include_future' => $includeFuturePublishedOn
+        ]);
+
+        $results = json_decode($response->content(), true);
+        $this->assertEquals($expectedContent, $results);
+
+        // for some reason phpunit doesn't test the order of the array values
+        $this->assertEquals(array_keys($expectedContent), array_keys($results));
+    }
+    
     public function test_can_not_view_content_if_dont_have_permission()
     {
         $page = 1;

@@ -43,7 +43,7 @@ class UserContentRepositoryTest extends RailcontentTestCase
         $state = UserContentService::STATE_STARTED;
 
 
-        $userContentId = $this->classBeingTested->startContent($contentId, $userId, $state);
+        $userContentId = $this->classBeingTested->saveUserContent($contentId, $userId, $state);
 
         $this->assertDatabaseHas(
             ConfigService::$tableUserContent,
@@ -148,6 +148,37 @@ class UserContentRepositoryTest extends RailcontentTestCase
                 'progress' => $progress
             ]
         );
+    }
+
+    public function test_get_user_content()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => $this->faker->word,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $userId = 1;
+
+        $userContent = [
+            'content_id' => $contentId,
+            'user_id' => $userId,
+            'state' => UserContentService::STATE_STARTED,
+            'progress' => $this->faker->numberBetween(0, 99)
+        ];
+
+        $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+
+        $results = $this->classBeingTested->getUserContent($contentId, $userId);
+
+        $this->assertEquals(array_merge(['id' => $userContentId], $userContent), $results);
     }
 
 }

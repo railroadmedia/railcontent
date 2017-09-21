@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\FieldRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
+use Railroad\Railcontent\Repositories\UserContentRepository;
 use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Requests\ContentRequest;
 use Railroad\Railcontent\Services\ContentService;
@@ -35,7 +36,9 @@ class ContentController extends Controller
         $this->search = new SearchService(
             new FieldRepository(
                 new PermissionRepository(
-                    $this->contentRepository
+                    new UserContentRepository(
+                        $this->contentRepository
+                    )
                 )
             )
         );

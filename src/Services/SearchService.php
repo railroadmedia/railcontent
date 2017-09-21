@@ -17,7 +17,7 @@ use Railroad\Railcontent\Requests\ContentIndexRequest;
 
 class SearchService extends RepositoryBase implements SearchInterface
 {
-    private $search;
+    protected $search;
 
     /**
      * Search constructor.
@@ -41,7 +41,7 @@ class SearchService extends RepositoryBase implements SearchInterface
     /**Search the content based on request input value
      * @return array
      */
-    public function search()
+    private function search()
     {
         $query = $this->generateQuery();
         $statues = request()->statues ?? [];

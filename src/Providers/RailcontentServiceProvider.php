@@ -10,6 +10,7 @@ use Railroad\Railcontent\Controllers\PermissionController;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\FieldRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
+use Railroad\Railcontent\Repositories\UserContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Listeners\VersionContentEventListener;
@@ -17,6 +18,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PermissionService;
 use Railroad\Railcontent\Services\SearchInterface;
 use Railroad\Railcontent\Services\SearchService;
+use Railroad\Railcontent\Services\UserContentService;
 
 class RailcontentServiceProvider extends ServiceProvider
 {
@@ -87,6 +89,16 @@ class RailcontentServiceProvider extends ServiceProvider
 
         $this->app
             ->when(SearchService::class)
+            ->needs(SearchInterface::class)
+            ->give(ContentRepository::class);
+
+        $this->app
+            ->when(UserContentService::class)
+            ->needs(SearchInterface::class)
+            ->give(UserContentRepository::class);
+
+        $this->app
+            ->when(UserContentRepository::class)
             ->needs(SearchInterface::class)
             ->give(ContentRepository::class);
     }

@@ -18,6 +18,7 @@ class UserContentService
     // all possible user content state
     const STATE_STARTED = 'started';
     const STATE_COMPLETED = 'completed';
+    const STATE_ADDED_TO_LIST = 'added';
 
     /**
      * UserContentService constructor.
@@ -26,43 +27,37 @@ class UserContentService
     public function __construct(UserContentRepository $userContentRepository)
     {
         $this->userContentRepository = $userContentRepository;
+        $this->userId = $this->userContentRepository->getAuthenticatedUserId(request());
     }
 
     public function startContent($contentId)
     {
-        //get authenticated user id
-        $userId = ($this->userContentRepository->getAuthenticatedUserId(request()));
-
-        $userContentId = $this->userContentRepository->startContent($contentId, $userId, UserContentService::STATE_STARTED);
+        $userContentId = $this->userContentRepository->saveUserContent($contentId, $this->userId, UserContentService::STATE_STARTED);
 
         return $userContentId > 0;
     }
 
     public function completeContent($contentId)
     {
-        //get authenticated user id
-        $userId = ($this->userContentRepository->getAuthenticatedUserId(request()));
         $progress = 100;
         $data = [
             'state' => UserContentService::STATE_COMPLETED,
             'progress' => $progress
         ];
 
-        $userContentId = $this->userContentRepository->updateUserContent($contentId, $userId, $data);
+        $userContentId = $this->userContentRepository->updateUserContent($contentId, $this->userId, $data);
 
         return $userContentId > 0;
     }
 
     public function saveContentProgress($contentId, $progress)
     {
-        //get authenticated user id
-        $userId = $this->userContentRepository->getAuthenticatedUserId(request());
 
         $data = [
             'progress' => $progress
         ];
 
-        $userContentId = $this->userContentRepository->updateUserContent($contentId, $userId, $data);
+        $userContentId = $this->userContentRepository->updateUserContent($contentId, $this->userId, $data);
 
         return $userContentId > 0;
     }

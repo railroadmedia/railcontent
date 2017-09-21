@@ -9,7 +9,7 @@ use Railroad\Railcontent\Services\SearchInterface;
 
 class FieldRepository extends RepositoryBase implements SearchInterface
 {
-    public $search;
+    protected $search;
 
     /**
      * FieldRepository constructor.

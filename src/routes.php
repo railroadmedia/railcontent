@@ -17,3 +17,4 @@ Route::post('/permission/assign', 'Railroad\Railcontent\Controllers\PermissionCo
 Route::put('/start', 'Railroad\Railcontent\Controllers\ContentController@startContent');
 Route::put('/complete', 'Railroad\Railcontent\Controllers\ContentController@completeContent');
 Route::put('/progress', 'Railroad\Railcontent\Controllers\ContentController@saveProgress');
+Route::post('/playlists/add', 'Railroad\Railcontent\Controllers\PlaylistsController@addToPlaylist');
