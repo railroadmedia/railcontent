@@ -16,6 +16,10 @@ class PlaylistsService
 
     protected $playlistsRepository, $userContentRepository;
 
+    // playlist type
+    const TYPE_PUBLIC = 'public';
+    const TYPE_PRIVATE = 'private';
+
     /**
      * PlaylistsService constructor.
      * @param $playlistsRepository
@@ -24,6 +28,7 @@ class PlaylistsService
     {
         $this->playlistsRepository = $playlistsRepository;
         $this->userContentRepository = $userContentRepository;
+        $this->user = $this->playlistsRepository->getAuthenticatedUserId(request());
     }
 
     /**
@@ -36,14 +41,23 @@ class PlaylistsService
      */
     public function addToPlaylist($contentId, $playlistId)
     {
-        $userId = $this->userContentRepository->getAuthenticatedUserId();
+        $userContent = $this->userContentRepository->getUserContent($contentId, $this->user);
 
-        $userContentId = $this->userContentRepository->getUserContent($contentId, $userId);
+        $userContentId = (!$userContent) ? $this->userContentRepository->saveUserContent($contentId, $this->user, UserContentService::STATE_ADDED_TO_LIST) :
+            $userContent['id'];
 
-        if(!$userContentId) {
-            $userContentId = $this->userContentRepository->saveUserContent($contentId, $userId, UserContentService::STATE_ADDED_TO_LIST);
-        }
+        return $this->playlistsRepository->addToPlaylist($userContentId, $playlistId);
+    }
 
-        return  $this->playlistsRepository->addToPlaylist($userContentId, $playlistId);
+    /**
+     * Call the repository method to save a new playlist. If the authenticated user it's admin the playlist it's public, otherwise it's private
+     * @param string $name
+     * @return mixed
+     */
+    public function store($name)
+    {
+        $type = (request()->user['is_admin'] == 1) ? $this::TYPE_PUBLIC : $this::TYPE_PRIVATE;
+
+        return $this->playlistsRepository->store($name, $this->user, $type);
     }
 }

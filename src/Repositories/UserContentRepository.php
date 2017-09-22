@@ -90,7 +90,7 @@ class UserContentRepository extends RepositoryBase implements SearchInterface
 
         $userId = $this->getAuthenticatedUserId(request());
 
-        $state = (request()->exists('only_completed')) ? UserContentService::STATE_COMPLETED : (request()->exists('only_started')) ? UserContentService::STATE_STARTED : null;
+        $state = (request()->exists('only_completed')) ? (UserContentService::STATE_COMPLETED) : ((request()->exists('only_started')) ? UserContentService::STATE_STARTED : null);
         $playlists = request()->playlists ?? [];
 
         if($state) {

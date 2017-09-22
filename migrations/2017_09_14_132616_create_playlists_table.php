@@ -18,6 +18,8 @@ class CreatePlaylistsTable extends Migration
             function(Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 255)->index();
+                $table->string('type', 64)->index();
+                $table->integer('user_id')->nullable();
             });
     }
 

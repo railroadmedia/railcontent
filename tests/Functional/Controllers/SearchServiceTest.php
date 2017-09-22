@@ -10,6 +10,7 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\PlaylistsService;
 use Railroad\Railcontent\Services\SearchService;
 use Railroad\Railcontent\Services\UserContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -1225,7 +1226,335 @@ class SearchServiceTest extends RailcontentTestCase
         // for some reason phpunit doesn't test the order of the array values
         $this->assertEquals(array_keys($expectedContent), array_keys($results));
     }
-    
+
+    public function test_get_only_my_completed_content()
+    {
+        $page = 1;
+        $amount = 10;
+        $orderByDirection = 'asc';
+        $orderByColumn = 'id';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $parentId = null;
+        $includeFuturePublishedOn = true;
+        $requiredFields = [];
+        $userId = $this->createAndLogInNewUser();
+
+        $expectedContent = [];
+
+        // insert contents
+        for($i = 0; $i < 10; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => null,
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        // save content as completed
+        for($i = 1; $i < 3; $i++) {
+            $userContent = [
+                'content_id' => $contents[$i]['id'],
+                'user_id' => $userId,
+                'state' => UserContentService::STATE_COMPLETED,
+                'progress' => 100
+            ];
+
+            $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+
+            $expectedContent[$i] = $contents[$i];
+        }
+
+        $response = $this->call('GET','/',[
+            'page' => $page,
+            'amount' => $amount,
+            'fields' => $requiredFields,
+            'parent_id' => $parentId,
+            'statues' => $statues,
+            'types' => $types,
+            'order_by' => $orderByColumn,
+            'order' => $orderByDirection,
+            'include_future' => $includeFuturePublishedOn,
+            'only_completed' => 1
+        ]);
+
+        $results = json_decode($response->content(), true);
+
+        $this->assertEquals($expectedContent, $results);
+
+        // for some reason phpunit doesn't test the order of the array values
+        $this->assertEquals(array_keys($expectedContent), array_keys($results));
+    }
+
+    public function test_get_only_my_started_content()
+    {
+        $page = 1;
+        $amount = 10;
+        $orderByDirection = 'asc';
+        $orderByColumn = 'id';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $parentId = null;
+        $includeFuturePublishedOn = true;
+        $requiredFields = [];
+        $userId = $this->createAndLogInNewUser();
+
+        $expectedContent = [];
+
+        // insert contents
+        for($i = 0; $i < 10; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => null,
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        // save content as completed
+        for($i = 1; $i < 3; $i++) {
+            $userContent = [
+                'content_id' => $contents[$i]['id'],
+                'user_id' => $userId,
+                'state' => UserContentService::STATE_STARTED,
+                'progress' => 100
+            ];
+
+            $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+
+            $expectedContent[$i] = $contents[$i];
+        }
+
+        $response = $this->call('GET','/',[
+            'page' => $page,
+            'amount' => $amount,
+            'fields' => $requiredFields,
+            'parent_id' => $parentId,
+            'statues' => $statues,
+            'types' => $types,
+            'order_by' => $orderByColumn,
+            'order' => $orderByDirection,
+            'include_future' => $includeFuturePublishedOn,
+            'only_started' => 1
+        ]);
+
+        $results = json_decode($response->content(), true);
+
+        $this->assertEquals($expectedContent, $results);
+
+        // for some reason phpunit doesn't test the order of the array values
+        $this->assertEquals(array_keys($expectedContent), array_keys($results));
+    }
+
+    public function test_get_content_from_my_playlist()
+    {
+        $page = 1;
+        $amount = 10;
+        $orderByDirection = 'asc';
+        $orderByColumn = 'id';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $parentId = null;
+        $includeFuturePublishedOn = true;
+        $requiredFields = [];
+        $userId = $this->createAndLogInNewUser();
+
+        $expectedContent = [];
+
+        $playlist = [
+            'name' =>$this->faker->word,
+            'type' => PlaylistsService::TYPE_PUBLIC,
+            'user_id' => $userId
+        ];
+
+        $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
+
+        // insert contents
+        for($i = 0; $i < 10; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => null,
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        // save content in playlist
+        for($i = 1; $i < 3; $i++) {
+            $userContent = [
+                'content_id' => $contents[$i]['id'],
+                'user_id' => $userId,
+                'state' => UserContentService::STATE_STARTED,
+                'progress' => 100
+            ];
+
+            $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+
+            $userContentPlaylist = [
+                'content_user_id' => $userContentId,
+                'playlist_id' => $playlistId
+            ];
+
+            $userContentPlaylistId = $this->query()->table(ConfigService::$tableUserContentPlaylists)->insertGetId($userContentPlaylist);
+            $expectedContent[$i] = $contents[$i];
+        }
+
+        $response = $this->call('GET','/',[
+            'page' => $page,
+            'amount' => $amount,
+            'fields' => $requiredFields,
+            'parent_id' => $parentId,
+            'statues' => $statues,
+            'types' => $types,
+            'order_by' => $orderByColumn,
+            'order' => $orderByDirection,
+            'include_future' => $includeFuturePublishedOn,
+            'playlists' => [$playlist['name']]
+        ]);
+
+        $results = json_decode($response->content(), true);
+
+        $this->assertEquals($expectedContent, $results);
+
+        // for some reason phpunit doesn't test the order of the array values
+        $this->assertEquals(array_keys($expectedContent), array_keys($results));
+    }
+
+    public function test_get_content_from_multiple_playlists()
+    {
+        $page = 1;
+        $amount = 10;
+        $orderByDirection = 'asc';
+        $orderByColumn = 'id';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $parentId = null;
+        $includeFuturePublishedOn = true;
+        $requiredFields = [];
+        $userId = $this->createAndLogInNewUser();
+
+        $expectedContent = [];
+
+        $playlist1 = [
+            'name' =>$this->faker->word,
+            'type' => PlaylistsService::TYPE_PUBLIC,
+            'user_id' => $userId
+        ];
+
+        $playlistId1 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist1);
+
+        $playlist2 = [
+            'name' =>$this->faker->word,
+            'type' => PlaylistsService::TYPE_PRIVATE,
+            'user_id' => $userId
+        ];
+
+        $playlistId2 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist2);
+
+        // insert contents
+        for($i = 0; $i < 10; $i++) {
+            $content = [
+                'slug' => $this->faker->word,
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => null,
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+        }
+
+        // save content in playlist 1
+        for($i = 1; $i < 3; $i++) {
+            $userContent = [
+                'content_id' => $contents[$i]['id'],
+                'user_id' => $userId,
+                'state' => UserContentService::STATE_STARTED,
+                'progress' => 100
+            ];
+
+            $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+
+            $userContentPlaylist = [
+                'content_user_id' => $userContentId,
+                'playlist_id' => $playlistId1
+            ];
+
+            $userContentPlaylistId = $this->query()->table(ConfigService::$tableUserContentPlaylists)->insertGetId($userContentPlaylist);
+            $expectedContent[$i] = $contents[$i];
+        }
+
+        // save content in playlist 1
+        for($i = 4; $i < 6; $i++) {
+            $userContent = [
+                'content_id' => $contents[$i]['id'],
+                'user_id' => $userId,
+                'state' => UserContentService::STATE_STARTED,
+                'progress' => 100
+            ];
+
+            $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+
+            $userContentPlaylist = [
+                'content_user_id' => $userContentId,
+                'playlist_id' => $playlistId2
+            ];
+
+            $userContentPlaylistId = $this->query()->table(ConfigService::$tableUserContentPlaylists)->insertGetId($userContentPlaylist);
+            $expectedContent[$i] = $contents[$i];
+        }
+
+        $response = $this->call('GET','/',[
+            'page' => $page,
+            'amount' => $amount,
+            'fields' => $requiredFields,
+            'parent_id' => $parentId,
+            'statues' => $statues,
+            'types' => $types,
+            'order_by' => $orderByColumn,
+            'order' => $orderByDirection,
+            'include_future' => $includeFuturePublishedOn,
+            'playlists' => [$playlist1['name'], $playlist2['name']]
+        ]);
+
+        $results = json_decode($response->content(), true);
+
+        $this->assertEquals($expectedContent, $results);
+
+        // for some reason phpunit doesn't test the order of the array values
+        $this->assertEquals(array_keys($expectedContent), array_keys($results));
+    }
+
     public function test_can_not_view_content_if_dont_have_permission()
     {
         $page = 1;

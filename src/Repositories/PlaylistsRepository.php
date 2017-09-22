@@ -9,6 +9,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\PlaylistsService;
 
 class PlaylistsRepository extends RepositoryBase
 {
@@ -28,6 +29,44 @@ class PlaylistsRepository extends RepositoryBase
         );
 
         return $userPlaylistId;
+    }
+
+    /**
+     * Get user's playlists and public playlists
+     * @return mixed
+     */
+    public function getUserPlaylists($userId)
+    {
+        return $this->queryTable()->where(['type' => PlaylistsService::TYPE_PUBLIC])
+            ->orWhere(['user_id' => $userId])
+            ->get()->toArray();
+    }
+
+    /**
+     * Create a new playlist
+     * @param string $name
+     * @param int $userId
+     * @param string $type
+     * @return int
+     */
+    public function store($name, $userId, $type)
+    {
+        $playlist = $this->queryTable()->insertGetId(
+            [
+                'name' => $name,
+                'type' => $type,
+                'user_id' => $userId
+            ]
+        );
+        return $playlist;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function queryTable()
+    {
+        return parent::connection()->table(ConfigService::$tablePlaylists);
     }
 
     /**

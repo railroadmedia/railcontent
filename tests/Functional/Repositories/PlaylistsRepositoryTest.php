@@ -11,6 +11,7 @@ namespace Railroad\Railcontent\Tests\Functional\Repositories;
 use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\PlaylistsRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\PlaylistsService;
 use Railroad\Railcontent\Services\UserContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -27,6 +28,7 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
 
     public function test_add_content_to_playlist()
     {
+        $userId =  $this->createAndLogInNewUser();
         $content = [
             'slug' => $this->faker->word,
             'status' => $this->faker->word,
@@ -42,7 +44,7 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
 
         $contentUser = [
             'content_id' => $contentId,
-            'user_id' => $this->createAndLogInNewUser(),
+            'user_id' => $userId,
             'state' => UserContentService::STATE_STARTED,
             'progress' => $this->faker->numberBetween(1,99)
         ];
@@ -50,7 +52,9 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
         $contentUserId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($contentUser);
 
         $playlist = [
-            'name' => $this->faker->word
+            'name' => $this->faker->word,
+            'type' => PlaylistsService::TYPE_PUBLIC,
+            'user_id' => $userId
         ];
 
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
@@ -65,7 +69,105 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
                 'playlist_id' => $playlistId
             ]
         );
+    }
 
+    public function test_create_a_private_playlist()
+    {
+        $playlist = [
+            'name' => $this->faker->word,
+            'type' => PlaylistsService::TYPE_PRIVATE,
+            'userId' => $this->createAndLogInNewUser()
+        ];
 
+        $results = $this->classBeingTested->store($playlist['name'], $playlist['userId'], $playlist['type']);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tablePlaylists,
+            [
+                'id' => $results,
+                'name' => $playlist['name'],
+                'user_id' => $playlist['userId'],
+                'type' => $playlist['type']
+            ]
+        );
+    }
+
+    public function test_create_a_public_playlist()
+    {
+        $playlist = [
+            'name' => $this->faker->word,
+            'type' => PlaylistsService::TYPE_PUBLIC,
+            'userId' => $this->createAndLogInNewUser()
+        ];
+
+        $results = $this->classBeingTested->store($playlist['name'], $playlist['userId'], $playlist['type']);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tablePlaylists,
+            [
+                'id' => $results,
+                'name' => $playlist['name'],
+                'user_id' => $playlist['userId'],
+                'type' => $playlist['type']
+            ]
+        );
+    }
+
+    public function test_get_all_public_playlists()
+    {
+        $userId =  $this->createAndLogInNewUser();
+
+        $playlist1 = [
+            'name' => $this->faker->word,
+            'type' => PlaylistsService::TYPE_PUBLIC,
+            'user_id' => $userId
+        ];
+
+        $playlistId1 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist1);
+
+        $expectedResults[] = array_merge(['id' => $playlistId1], $playlist1);
+
+        $playlist2 = [
+            'name' => $this->faker->word,
+            'type' => PlaylistsService::TYPE_PUBLIC,
+            'user_id' => $userId
+        ];
+
+        $playlistId2 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist2);
+
+        $expectedResults[] = array_merge(['id' => $playlistId2], $playlist2);
+
+        $results = $this->classBeingTested->getUserPlaylists($userId);
+
+        $this->assertEquals($expectedResults, $results);
+    }
+
+    public function test_get_my_playlists()
+    {
+        $userId = $this->createAndLogInNewUser();
+
+        $playlist1 = [
+            'name' => $this->faker->word,
+            'type' => PlaylistsService::TYPE_PRIVATE,
+            'user_id' => $userId
+        ];
+
+        $playlistId1 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist1);
+
+        $expectedResults[] = array_merge(['id' => $playlistId1], $playlist1);
+
+        $playlist2 = [
+            'name' => $this->faker->word,
+            'type' => PlaylistsService::TYPE_PRIVATE,
+            'user_id' => $userId
+        ];
+
+        $playlistId2 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist2);
+
+        $expectedResults[] = array_merge(['id' => $playlistId2], $playlist2);
+
+        $results = $this->classBeingTested->getUserPlaylists($userId);
+
+        $this->assertEquals($expectedResults, $results);
     }
 }

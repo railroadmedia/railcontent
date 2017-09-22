@@ -18,3 +18,4 @@ Route::put('/start', 'Railroad\Railcontent\Controllers\ContentController@startCo
 Route::put('/complete', 'Railroad\Railcontent\Controllers\ContentController@completeContent');
 Route::put('/progress', 'Railroad\Railcontent\Controllers\ContentController@saveProgress');
 Route::post('/playlists/add', 'Railroad\Railcontent\Controllers\PlaylistsController@addToPlaylist');
+Route::post('/playlists/create', 'Railroad\Railcontent\Controllers\PlaylistsController@store');
