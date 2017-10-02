@@ -1,13 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: roxana
- * Date: 9/21/2017
- * Time: 9:11 AM
- */
 
 namespace Railroad\Railcontent\Repositories;
 
+use Illuminate\Support\Collection;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\PlaylistsService;
 
@@ -32,8 +27,8 @@ class PlaylistsRepository extends RepositoryBase
     }
 
     /**
-     * Get user's playlists and public playlists
-     * @return mixed
+     * Get the public playlists and the playlists created by the authenticated user
+     * @return array
      */
     public function getUserPlaylists($userId)
     {
@@ -59,6 +54,62 @@ class PlaylistsRepository extends RepositoryBase
             ]
         );
         return $playlist;
+    }
+
+    /**
+     * Get playlist data and the associated content for the authenticated user
+     * @param int $playlistId
+     * @param int $userId
+     * @return array
+     */
+    public function getPlaylistWithContent($playlistId, $userId)
+    {
+        $playlist = $this->queryTable()
+            ->select(
+                [
+                    ConfigService::$tablePlaylists.'.id as playlist_id',
+                    ConfigService::$tablePlaylists.'.name as playlist_name',
+                    ConfigService::$tablePlaylists.'.type as playlist_type',
+                    ConfigService::$tablePlaylists.'.user_id as user_id',
+                    'usercontent.content_id as content_id',
+                    'usercontent.state as content_state',
+                    'usercontent.progress as content_progress'
+                ]
+            )
+            ->leftJoin(ConfigService::$tableUserContentPlaylists.' as usercontentplaylist', 'playlist_id', '=', ConfigService::$tablePlaylists.'.id', 'left outer')
+            ->leftJoin(ConfigService::$tableUserContent.' as usercontent', function($join) use ($userId) {
+                $join->on('usercontentplaylist.content_user_id', '=', 'usercontent.id')
+                    ->on('usercontent.user_id', '=', $userId);
+            }, 'left outer')
+            ->where(ConfigService::$tablePlaylists.'.id', '=', $playlistId)
+            ->get();
+        return $this->parseAndGetLinkedContent($playlist);
+    }
+
+    /** Prepare playlist data
+     * @param Collection $playlists
+     * @return array
+     */
+    private function parseAndGetLinkedContent(Collection $playlists)
+    {
+        $playlistArr = [];
+        foreach($playlists as $playlist) {
+            $playlistArr[$playlist['playlist_id']] = [
+                'id' => $playlist['playlist_id'],
+                'name' => $playlist['playlist_name'],
+                'type' => $playlist['playlist_type']];
+        }
+
+        foreach($playlists as $playlist) {
+            if(!is_null($playlist['content_id'])) {
+                $playlistArr[$playlist['playlist_id']]['contents'][$playlist['content_id']] = [
+                    'id' => $playlist['content_id'],
+                    'state' => $playlist['content_state'],
+                    'progress' => $playlist['content_progress']
+                ];
+            }
+        }
+        return $playlistArr;
     }
 
     /**

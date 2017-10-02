@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: roxana
- * Date: 9/21/2017
- * Time: 9:10 AM
- */
 
 namespace Railroad\Railcontent\Services;
 
@@ -13,7 +7,6 @@ use Railroad\Railcontent\Repositories\UserContentRepository;
 
 class PlaylistsService
 {
-
     protected $playlistsRepository, $userContentRepository;
 
     // playlist type
@@ -22,42 +15,59 @@ class PlaylistsService
 
     /**
      * PlaylistsService constructor.
-     * @param $playlistsRepository
+     * @param PlaylistsRepository $playlistsRepository
+     * @param UserContentRepository $userContentRepository
      */
     public function __construct(PlaylistsRepository $playlistsRepository, UserContentRepository $userContentRepository)
     {
         $this->playlistsRepository = $playlistsRepository;
         $this->userContentRepository = $userContentRepository;
-        $this->user = $this->playlistsRepository->getAuthenticatedUserId(request());
     }
 
     /**
      * Call the repository method to save user content to playlist.
-     * If the content it's not associated with the user call the repository method to save user content
-     *
-     * @param $contentId
-     * @param $playlistId
-     * @return int
+     * If the content it's not associated with the user, call the repository method to save user content
+     * @param int $contentId
+     * @param int $playlistId
+     * @param int $userId
+     * @return array - the playlist with associated user's content
      */
-    public function addToPlaylist($contentId, $playlistId)
+    public function addToPlaylist($contentId, $playlistId, $userId)
     {
-        $userContent = $this->userContentRepository->getUserContent($contentId, $this->user);
+        $userContent = $this->userContentRepository->getUserContent($contentId, $userId);
 
-        $userContentId = (!$userContent) ? $this->userContentRepository->saveUserContent($contentId, $this->user, UserContentService::STATE_ADDED_TO_LIST) :
+        $userContentId = (!$userContent) ? $this->userContentRepository->saveUserContent($contentId, $userId, UserContentService::STATE_ADDED_TO_LIST) :
             $userContent['id'];
 
-        return $this->playlistsRepository->addToPlaylist($userContentId, $playlistId);
+        $this->playlistsRepository->addToPlaylist($userContentId, $playlistId);
+
+        return $this->getPlaylist($playlistId, $userId);
     }
 
     /**
-     * Call the repository method to save a new playlist. If the authenticated user it's admin the playlist it's public, otherwise it's private
+     * Call the repository method to save a new playlist. If the authenticated user it's admin the playlist type it's PUBLIC, otherwise it's PRIVATE
      * @param string $name
-     * @return mixed
+     * @param int $userId
+     * @param int|null $isAdmin
+     * @return array - the playlist with associated user contents
      */
-    public function store($name)
+    public function store($name, $userId, $isAdmin)
     {
-        $type = (request()->user['is_admin'] == 1) ? $this::TYPE_PUBLIC : $this::TYPE_PRIVATE;
+        $type = ($isAdmin == 1) ? $this::TYPE_PUBLIC : $this::TYPE_PRIVATE;
 
-        return $this->playlistsRepository->store($name, $this->user, $type);
+        $playlistId = $this->playlistsRepository->store($name, $userId, $type);
+
+        return $this->getPlaylist($playlistId, $userId);
+    }
+
+    /**
+     * Call the methods from the repository that get the playlist with the associated user's content
+     * @param int $playlistId
+     * @param int $userId
+     * @return array
+     */
+    public function getPlaylist($playlistId, $userId)
+    {
+        return $this->playlistsRepository->getPlaylistWithContent($playlistId, $userId);
     }
 }

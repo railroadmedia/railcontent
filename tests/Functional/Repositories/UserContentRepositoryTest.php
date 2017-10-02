@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: roxana
- * Date: 9/15/2017
- * Time: 7:50 AM
- */
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 

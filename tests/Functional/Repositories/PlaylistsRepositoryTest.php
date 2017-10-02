@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: roxana
- * Date: 9/21/2017
- * Time: 4:03 PM
- */
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
@@ -167,6 +161,100 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
         $expectedResults[] = array_merge(['id' => $playlistId2], $playlist2);
 
         $results = $this->classBeingTested->getUserPlaylists($userId);
+
+        $this->assertEquals($expectedResults, $results);
+    }
+
+    public function test_get_playlist_with_my_content()
+    {
+        $userId =  $this->createAndLogInNewUser();
+
+        $playlist = [
+            'name' => $this->faker->word,
+            'type' => PlaylistsService::TYPE_PRIVATE,
+            'user_id' => $userId
+        ];
+
+        $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
+
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => $this->faker->word,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $content2 = [
+            'slug' => $this->faker->word,
+            'status' => $this->faker->word,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
+
+        $contentUser = [
+            'content_id' => $contentId,
+            'user_id' => $userId,
+            'state' => UserContentService::STATE_STARTED,
+            'progress' => $this->faker->numberBetween(1,99)
+        ];
+
+        $contentUserId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($contentUser);
+
+        $expectedContents[$contentId] = [
+            'id' => $contentId,
+            'state' => $contentUser['state'],
+            'progress' => $contentUser['progress']
+        ];
+
+        $contentUser2 = [
+            'content_id' => $contentId2,
+            'user_id' => $userId,
+            'state' => UserContentService::STATE_STARTED,
+            'progress' => $this->faker->numberBetween(1,99)
+        ];
+
+        $contentUserId2 = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($contentUser2);
+
+        $expectedContents[$contentId2] = [
+            'id' => $contentId2,
+            'state' => $contentUser2['state'],
+            'progress' => $contentUser2['progress']
+        ];
+
+        $userPlaylist = [
+            'content_user_id' =>$contentUserId,
+            'playlist_id' => $playlistId
+        ];
+
+        $userPlaylistId = $this->query()->table(ConfigService::$tableUserContentPlaylists)->insertGetId($userPlaylist);
+
+        $userPlaylist2 = [
+            'content_user_id' =>$contentUserId2,
+            'playlist_id' => $playlistId
+        ];
+
+        $userPlaylistId2 = $this->query()->table(ConfigService::$tableUserContentPlaylists)->insertGetId($userPlaylist2);
+
+        $results = $this->classBeingTested->getPlaylistWithContent($playlistId, $userId);
+
+        $expectedResults[$playlistId] = [
+            'id' => $playlistId,
+            'name' => $playlist['name'],
+            'type' => $playlist['type'],
+            'contents' => $expectedContents
+        ];
 
         $this->assertEquals($expectedResults, $results);
     }

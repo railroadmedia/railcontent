@@ -3,8 +3,9 @@
 namespace Railroad\Railcontent\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Railroad\Railcontent\Services\ConfigService;
 
-class PlaylistRequest extends FormRequest
+class UserContentPlaylistRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +25,8 @@ class PlaylistRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255'
+            'content_id' => 'required|numeric|exists:' . ConfigService::$tableContent . ',id',
+            'playlist_id' => 'required|numeric|exists:' . ConfigService::$tablePlaylists . ',id'
         ];
     }
 }
