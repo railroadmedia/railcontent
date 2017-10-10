@@ -44,6 +44,14 @@ class PermissionRepository extends RepositoryBase implements SearchInterface
             ]
         );
 
+        $this->saveTranslation(
+            [
+                'entity_type' => ConfigService::$tablePermissions,
+                'entity_id' => $permissionId,
+                'value' => $name
+            ]
+        );
+
         return $permissionId;
     }
 
@@ -80,7 +88,10 @@ class PermissionRepository extends RepositoryBase implements SearchInterface
 
     public function getAll()
     {
-        return $this->queryTable()->get();
+        $query = $this->queryTable();
+        $query = $this->addTranslations($query);
+
+        return $query->get();
     }
 
     /**
@@ -143,7 +154,7 @@ class PermissionRepository extends RepositoryBase implements SearchInterface
      */
     public function queryTable()
     {
-        return parent::connection()->table(ConfigService::$tablePermissions);
+        return parent::connection()->table(ConfigService::$tablePermissions)->select(ConfigService::$tablePermissions.'.*');
     }
 
     /**

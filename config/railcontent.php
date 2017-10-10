@@ -15,6 +15,10 @@ return [
         'content_permissions' => 'railcontent_content_permissions',
         'user_content' => 'railcontent_user_content',
         'playlists' => 'railcontent_playlists',
-        'user_content_playlists' => 'railcontent_user_content_playlists'
+        'user_content_playlists' => 'railcontent_user_content_playlists',
+        'language' => 'railcontent_language',
+        'translations' => 'railcontent_translations',
+        'user_preference' => 'railcontent_user_preference'
+
     ],
 ];

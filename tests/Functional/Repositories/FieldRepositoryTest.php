@@ -16,6 +16,8 @@ class FieldRepositoryTest extends RailcontentTestCase
         parent::setUp();
 
         $this->classBeingTested = $this->app->make(FieldRepository::class);
+        $userId = $this->createAndLogInNewUser();
+        $this->setUserLanguage($userId);
     }
 
     public function test_insert_field()

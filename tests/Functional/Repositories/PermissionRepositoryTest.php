@@ -22,6 +22,8 @@ class PermissionRepositoryTest extends RailcontentTestCase
         parent::setUp();
 
         $this->classBeingTested = $this->app->make(PermissionRepository::class);
+        $userId = $this->createAndLogInNewUser();
+        $this->setUserLanguage($userId);
     }
 
     public function test_create_permission()
@@ -119,7 +121,7 @@ class PermissionRepositoryTest extends RailcontentTestCase
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
 
         $content = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -154,7 +156,7 @@ class PermissionRepositoryTest extends RailcontentTestCase
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
 
         $content = [
-            'slug' => $this->faker->word,
+          //  'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),

@@ -21,6 +21,8 @@ class FieldControllerTest extends RailcontentTestCase
 
         $this->serviceBeingTested = $this->app->make(FieldService::class);
         $this->classBeingTested = $this->app->make(FieldRepository::class);
+        $userId = $this->createAndLogInNewUser();
+        $this->setUserLanguage($userId);
         //$this->categoryClass = $this->app->make(CategoryRepository::class);
     }
 
@@ -32,7 +34,7 @@ class FieldControllerTest extends RailcontentTestCase
         $position = $this->faker->numberBetween();
 
         $content = [
-            'slug' => $this->faker->word,
+          //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -67,7 +69,7 @@ class FieldControllerTest extends RailcontentTestCase
         $position = $this->faker->numberBetween();
 
         $content = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -151,7 +153,7 @@ class FieldControllerTest extends RailcontentTestCase
     public function test_update_content_field_controller_method_response()
     {
         $content = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -219,7 +221,7 @@ class FieldControllerTest extends RailcontentTestCase
     public function test_update_content_field_not_pass_validation()
     {
         $content = [
-            'slug' => $this->faker->word,
+          //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -260,7 +262,7 @@ class FieldControllerTest extends RailcontentTestCase
     public function test_delete_content_field_controller()
     {
         $content = [
-            'slug' => $this->faker->word,
+          //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -307,7 +309,7 @@ class FieldControllerTest extends RailcontentTestCase
     public function test_update_content_field_method_from_service_response()
     {
         $content = [
-            'slug' => $this->faker->word,
+            //'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -354,7 +356,7 @@ class FieldControllerTest extends RailcontentTestCase
     public function test_delete_content_field_method_from_service_response()
     {
         $content = [
-            'slug' => $this->faker->word,
+          //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -397,7 +399,7 @@ class FieldControllerTest extends RailcontentTestCase
         $position = $this->faker->numberBetween();
 
         $content = [
-            'slug' => $this->faker->word,
+          //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -428,7 +430,7 @@ class FieldControllerTest extends RailcontentTestCase
         Event::fake();
 
         $content = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),

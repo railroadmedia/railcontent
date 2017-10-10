@@ -32,8 +32,13 @@ class PlaylistsRepository extends RepositoryBase
      */
     public function getUserPlaylists($userId)
     {
-        return $this->queryTable()->where(['type' => PlaylistsService::TYPE_PUBLIC])
-            ->orWhere(['user_id' => $userId])
+        return $this->queryTable()
+            ->select(ConfigService::$tablePlaylists.'.*')
+            ->where(function($query) use ($userId) {
+                $query->where(['type' => PlaylistsService::TYPE_PUBLIC])
+                    ->orWhere([ConfigService::$tablePlaylists.'.user_id' => $userId]);
+            })
+            ->where(ConfigService::$tableUserPreference.'.user_id', '=', $userId)
             ->get()->toArray();
     }
 
@@ -51,6 +56,14 @@ class PlaylistsRepository extends RepositoryBase
                 'name' => $name,
                 'type' => $type,
                 'user_id' => $userId
+            ]
+        );
+        $this->saveTranslation(
+            [
+                'entity_type' => ConfigService::$tablePlaylists,
+                'entity_id' => $playlist,
+                'language_id' => 1,
+                'value' => $name
             ]
         );
         return $playlist;
@@ -79,8 +92,8 @@ class PlaylistsRepository extends RepositoryBase
             ->leftJoin(ConfigService::$tableUserContentPlaylists.' as usercontentplaylist', 'playlist_id', '=', ConfigService::$tablePlaylists.'.id', 'left outer')
             ->leftJoin(ConfigService::$tableUserContent.' as usercontent', function($join) use ($userId) {
                 $join->on('usercontentplaylist.content_user_id', '=', 'usercontent.id')
-                    ->on('usercontent.user_id', '=', $userId);
-            }, 'left outer')
+                    ->where('usercontent.user_id', '=', $userId);
+            })
             ->where(ConfigService::$tablePlaylists.'.id', '=', $playlistId)
             ->get();
         return $this->parseAndGetLinkedContent($playlist);
@@ -117,7 +130,12 @@ class PlaylistsRepository extends RepositoryBase
      */
     public function queryTable()
     {
-        return parent::connection()->table(ConfigService::$tablePlaylists);
+        return parent::connection()->table(ConfigService::$tablePlaylists)
+            ->leftJoin(ConfigService::$tableTranslations, function($join) {
+                $join->on(ConfigService::$tableTranslations.'.entity_id', '=', ConfigService::$tablePlaylists.'.id')
+                    ->where(ConfigService::$tableTranslations.'.entity_type', ConfigService::$tablePlaylists);
+            })
+            ->leftJoin(ConfigService::$tableUserPreference, ConfigService::$tableTranslations.'.language_id', '=', ConfigService::$tableUserPreference.'.language_id');
     }
 
     /**

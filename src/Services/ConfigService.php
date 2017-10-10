@@ -72,5 +72,22 @@ class ConfigService
     /**
      * @var string
      */
+    public static $tableLanguage;
+
+    /**
+     * @var string
+     */
+    public static $tableTranslations;
+
+    /**
+     * @var string
+     */
+    public static $tableUserPreference;
+
+    public static $translatableTables;
+
+    /**
+     * @var string
+     */
     public static $categoryStatusNew;
 }

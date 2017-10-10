@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 use Railroad\Railcontent\Services\ConfigService;
 
-class CreateDataTable extends Migration
+class CreateLanguageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,12 @@ class CreateDataTable extends Migration
      */
     public function up()
     {
-        Schema::create(
-            ConfigService::$tableData,
+        Schema::create(ConfigService::$tableLanguage,
             function(Blueprint $table) {
                 $table->increments('id');
-                $table->string('key', 255)->index();
-                $table->integer('position')->index()->nullable();
-            }
-        );
+                $table->string('name', 255)->index();
+                $table->string('locale', 255)->index();
+            });
     }
 
     /**
@@ -31,6 +29,6 @@ class CreateDataTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableData);
+        Schema::dropIfExists(ConfigService::$tableLanguage);
     }
 }

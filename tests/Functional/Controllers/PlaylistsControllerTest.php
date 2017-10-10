@@ -18,6 +18,8 @@ class PlaylistsControllerTest extends RailcontentTestCase
         parent::setUp();
 
         $this->serviceBeingTested = $this->app->make(PlaylistsService::class);
+        $userId = $this->createAndLogInNewUser();
+        $this->setUserLanguage($userId);
     }
 
     public function test_add_content_to_playlist()
@@ -32,7 +34,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
 
         $content = [
-            'slug' => $this->faker->word,
+            //'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -72,7 +74,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
 
     public function test_create_a_playlist()
     {
-        $this->createAndLogInNewUser();
+        //$this->createAndLogInNewUser();
         $playlistName = $this->faker->word();
         $response = $this->call('POST', '/playlists/create', [
             'name' => $playlistName
@@ -173,7 +175,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
 
         $content1 = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -186,7 +188,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
         $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
 
         $content2 = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),

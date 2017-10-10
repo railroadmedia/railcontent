@@ -16,6 +16,9 @@ class DatumRepositoryTest extends RailcontentTestCase
         parent::setUp();
 
         $this->classBeingTested = $this->app->make(DatumRepository::class);
+
+        $userId = $this->createAndLogInNewUser();
+        $this->setUserLanguage($userId);
     }
 
     public function test_insert_data()
@@ -33,8 +36,18 @@ class DatumRepositoryTest extends RailcontentTestCase
             [
                 'id' => 1,
                 'key' => $key,
-                'value' => $value,
                 'position' => $position
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableTranslations,
+            [
+                'id' => 1,
+                'entity_id' => 1,
+                'value' => $value,
+                'language_id' => $this->classBeingTested->getUserLanguage(),
+                'entity_type' => ConfigService::$tableData
             ]
         );
     }
@@ -43,11 +56,18 @@ class DatumRepositoryTest extends RailcontentTestCase
     {
         $data = [
             'key' => $this->faker->word,
-            'value' => $this->faker->word,
             'position' => $this->faker->numberBetween()
         ];
 
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
+
+        $translation = [
+            'language_id' =>$this->classBeingTested->getUserLanguage(),
+            'entity_type' => ConfigService::$tableData,
+            'entity_id' => $dataId,
+            'value' => $this->faker->word
+        ];
+        $translationId = $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translation);
 
         $new_value = $this->faker->text();
 
@@ -57,22 +77,24 @@ class DatumRepositoryTest extends RailcontentTestCase
 
         //assert that old value not exist in the database
         $this->assertDatabaseMissing(
-            ConfigService::$tableData,
+            ConfigService::$tableTranslations,
             [
-                'id' => $dataId,
-                'key' => $data['key'],
-                'value' => $data['value'],
-                'position' => $data['position']
+                'id' => $translationId,
+                'entity_type' => ConfigService::$tableData,
+                'entity_id' => $dataId,
+                'value' => $translation['value'],
+                'language_id' => $translation['language_id']
             ]
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableData,
+            ConfigService::$tableTranslations,
             [
-                'id' => $dataId,
-                'key' => $data['key'],
+                'id' => $translationId,
+                'entity_type' => ConfigService::$tableData,
+                'entity_id' => $dataId,
                 'value' => $new_value,
-                'position' => $data['position']
+                'language_id' => $translation['language_id']
             ]
         );
     }
@@ -81,11 +103,18 @@ class DatumRepositoryTest extends RailcontentTestCase
     {
         $data = [
             'key' => $this->faker->word,
-            'value' => $this->faker->word,
             'position' => $this->faker->numberBetween()
         ];
 
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
+
+        $translation = [
+            'language_id' =>$this->classBeingTested->getUserLanguage(),
+            'entity_type' => ConfigService::$tableData,
+            'entity_id' => $dataId,
+            'value' => $this->faker->word
+        ];
+        $translationId = $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translation);
 
         $this->classBeingTested->deleteDatum($dataId);
 
@@ -94,8 +123,18 @@ class DatumRepositoryTest extends RailcontentTestCase
             [
                 'id' => $dataId,
                 'key' => $data['key'],
-                'value' => $data['value'],
                 'position' => $data['position']
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableTranslations,
+            [
+                'id' => $translationId,
+                'entity_type' => ConfigService::$tableData,
+                'entity_id' => $dataId,
+                'value' => $translation['value'],
+                'language_id' => $translation['language_id']
             ]
         );
     }

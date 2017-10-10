@@ -12,6 +12,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\Resources\Models\User;
 
 class RailcontentTestCase extends BaseTestCase
@@ -60,7 +61,7 @@ class RailcontentTestCase extends BaseTestCase
     protected function getEnvironmentSetUp($app)
     {
         // Setup package config for testing
-        $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
+        $defaultConfig = require(__DIR__.'/../config/railcontent.php');
 
         $app['config']->set('railcontent.tables', $defaultConfig['tables']);
         $app['config']->set('railcontent.database_connection_name', 'testbench');
@@ -83,7 +84,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $app['db']->connection()->getSchemaBuilder()->create(
             'users',
-            function (Blueprint $table) {
+            function(Blueprint $table) {
                 $table->increments('id');
                 $table->string('email');
             }
@@ -109,13 +110,13 @@ class RailcontentTestCase extends BaseTestCase
             ->getMockForAbstractClass();
 
         $mock->method('fire')->willReturnCallback(
-            function ($called) {
+            function($called) {
                 $this->firedEvents[] = $called;
             }
         );
 
         $mock->method('dispatch')->willReturnCallback(
-            function ($called) {
+            function($called) {
                 $this->firedEvents[] = $called;
             }
         );
@@ -123,12 +124,12 @@ class RailcontentTestCase extends BaseTestCase
         $this->app->instance('events', $mock);
 
         $this->beforeApplicationDestroyed(
-            function () use ($events) {
+            function() use ($events) {
                 $fired = $this->getFiredEvents($events);
-                if ($eventsNotFired = array_diff($events, $fired)) {
+                if($eventsNotFired = array_diff($events, $fired)) {
                     throw new Exception(
-                        'These expected events were not fired: [' .
-                        implode(', ', $eventsNotFired) . ']'
+                        'These expected events were not fired: ['.
+                        implode(', ', $eventsNotFired).']'
                     );
                 }
             }
@@ -149,6 +150,44 @@ class RailcontentTestCase extends BaseTestCase
         $this->authManager->guard()->onceUsingId($userId);
 
         return $userId;
+    }
+
+    public function setUserLanguage($userId)
+    {
+        return $this->databaseManager->connection()->query()->from(ConfigService::$tableUserPreference)->insertGetId(
+            [
+                'user_id' => $userId,
+                'language_id' => 1
+            ]
+        );
+    }
+
+    public function createContent()
+    {
+        $content = [
+            'status' => $this->faker->word,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        return $contentId;
+    }
+
+    public function translateItem($language, $entityId, $entityType, $value)
+    {
+        $translation = [
+            'language_id' =>$language,
+            'entity_type' => $entityType,
+            'entity_id' => $entityId,
+            'value' => $value
+        ];
+        return $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translation);
     }
 
     /**

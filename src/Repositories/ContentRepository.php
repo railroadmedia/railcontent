@@ -32,13 +32,19 @@ class ContentRepository extends RepositoryBase implements SearchInterface
 
         $contentId = $this->queryTable()->insertGetId(
             [
-                'slug' => $slug,
                 'status' => $status,
                 'type' => $type,
                 'position' => $position,
                 'parent_id' => $parentId,
                 'published_on' => $publishedOn,
                 'created_on' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+        $this->saveTranslation(
+            [
+                'entity_type' => ConfigService::$tableContent,
+                'entity_id' => $contentId,
+                'value' => $slug
             ]
         );
 
@@ -73,7 +79,6 @@ class ContentRepository extends RepositoryBase implements SearchInterface
     {
         $this->queryTable()->where('id', $id)->update(
             [
-                'slug' => $slug,
                 'status' => $status,
                 'type' => $type,
                 'position' => $position,
@@ -81,6 +86,14 @@ class ContentRepository extends RepositoryBase implements SearchInterface
                 'published_on' => $publishedOn,
                 'created_on' => Carbon::now()->toDateTimeString(),
                 'archived_on' => $archivedOn,
+            ]
+        );
+
+        $this->saveTranslation(
+            [
+                'entity_type' => ConfigService::$tableContent,
+                'entity_id' => $id,
+                'value' => $slug
             ]
         );
 
@@ -199,9 +212,11 @@ class ContentRepository extends RepositoryBase implements SearchInterface
     public function getLinkedDatum($datumId, $contentId)
     {
         $dataIdLabel = ConfigService::$tableData.'.id';
-
-        return $this->contentDataQuery()
-            ->leftJoin(ConfigService::$tableData, 'datum_id', '=', $dataIdLabel)
+        $queryBuilder = $this->contentDataQuery()
+            ->leftJoin(ConfigService::$tableData, 'datum_id', '=', $dataIdLabel);
+        $builder = $this->addTranslations($queryBuilder);
+        return $builder
+            ->select(ConfigService::$tableContentData.'.*', ConfigService::$tableData.'.*', 'translation_'.ConfigService::$tableData.'.value as value')
             ->where(
                 [
                     'datum_id' => $datumId,
@@ -452,7 +467,7 @@ class ContentRepository extends RepositoryBase implements SearchInterface
             ->select(
                 [
                     ConfigService::$tableContent.'.id as id',
-                    ConfigService::$tableContent.'.slug as slug',
+                    // 'content_translation.value as slug',
                     ConfigService::$tableContent.'.status as status',
                     ConfigService::$tableContent.'.type as type',
                     ConfigService::$tableContent.'.position as position',
@@ -461,14 +476,14 @@ class ContentRepository extends RepositoryBase implements SearchInterface
                     ConfigService::$tableContent.'.created_on as created_on',
                     ConfigService::$tableContent.'.archived_on as archived_on',
                     //ConfigService::$tableContentFields . '.field_id as field_id',
-                    'allfieldsvalue.id as field_id',
-                    'allfieldsvalue.key as field_key',
-                    'allfieldsvalue.value as field_value',
-                    'allfieldsvalue.type as field_type',
-                    'allfieldsvalue.position as field_position',
+                    ConfigService::$tableFields.'.id as field_id',
+                    ConfigService::$tableFields.'.key as field_key',
+                    ConfigService::$tableFields.'.value as field_value',
+                    ConfigService::$tableFields.'.type as field_type',
+                    ConfigService::$tableFields.'.position as field_position',
                     ConfigService::$tableData.'.id as datum_id',
                     ConfigService::$tableData.'.key as datum_key',
-                    ConfigService::$tableData.'.value as datum_value',
+                    // ConfigService::$tableData.'.value as datum_value',
                     ConfigService::$tableData.'.position as datum_position',
 
                 ]
@@ -490,8 +505,8 @@ class ContentRepository extends RepositoryBase implements SearchInterface
                 ConfigService::$tableContent.'.id'
             )
             ->leftJoin(
-                ConfigService::$tableFields.' as allfieldsvalue',
-                'allfieldsvalue.id',
+                ConfigService::$tableFields,
+                ConfigService::$tableFields.'.id',
                 '=',
                 'allcontentfields.field_id'
             );

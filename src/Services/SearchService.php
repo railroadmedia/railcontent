@@ -23,9 +23,10 @@ class SearchService extends RepositoryBase implements SearchInterface
      * Search constructor.
      * @param $searchService
      */
-    public function __construct( SearchInterface $searchService)
+    public function __construct(SearchInterface $searchService)
     {
         $this->search = $searchService;
+
     }
 
     /**
@@ -44,6 +45,8 @@ class SearchService extends RepositoryBase implements SearchInterface
     private function search()
     {
         $query = $this->generateQuery();
+        $query = $this->addTranslations($query);
+
         $statues = request()->statues ?? [];
         $types = request()->types ?? [];
         $parentSlug = request()->parent_id ?? null;
@@ -78,9 +81,9 @@ class SearchService extends RepositoryBase implements SearchInterface
 
         $page = request()->page;
         $page--;
-        $orderByColumn = request()->order_by;
-        $orderByDirection = request()->order;
-        $amount = request()->amount;
+        $orderByColumn = request()->order_by ?? 'id';
+        $orderByDirection = request()->order ?? 'desc';
+        $amount = request()->amount ?? 10;
 
         $query->orderBy($orderByColumn, $orderByDirection)
             ->skip($page * $amount)
@@ -124,7 +127,7 @@ class SearchService extends RepositoryBase implements SearchInterface
         foreach($fieldsWithContent as $fieldWithContent) {
             $content[$fieldWithContent['id']] = [
                 'id' => $fieldWithContent['id'],
-                'slug' => $fieldWithContent['slug'],
+                'slug' => $fieldWithContent['translation_railcontent_content_value'],
                 'status' => $fieldWithContent['status'],
                 'type' => $fieldWithContent['type'],
                 'position' => $fieldWithContent['position'],
@@ -136,7 +139,7 @@ class SearchService extends RepositoryBase implements SearchInterface
         }
 
         foreach($fieldsWithContent as $fieldWithContent) {
-            if(($fieldWithContent['field_key'] === null) && ($fieldWithContent['datum_key'] === null)) {
+            if(($fieldWithContent['field_id'] === null) && ($fieldWithContent['datum_id'] === null)) {
                 continue;
             }
 
@@ -180,23 +183,23 @@ class SearchService extends RepositoryBase implements SearchInterface
                     ['fields']
                     [$fieldWithContent['field_key']]
                     [$fieldWithContent['field_position']] =
-                        $fieldWithContent['field_value'];
+                        $fieldWithContent['translation_railcontent_fields_value'];
 
-                } elseif($fieldWithContent['field_value']) {
+                } elseif($fieldWithContent['field_id']) {
 
                     $content[$fieldWithContent['id']]
                     ['fields']
                     [$fieldWithContent['field_key']] =
-                        $fieldWithContent['field_value'];
+                        $fieldWithContent['translation_railcontent_fields_value'];
                 }
             }
 
             //put datum as array key => value
-            if($fieldWithContent['datum_value']) {
+            if($fieldWithContent['datum_id']) {
                 $content[$fieldWithContent['id']]
                 ['datum']
                 [$fieldWithContent['datum_key']] =
-                    $fieldWithContent['datum_value'];
+                    $fieldWithContent['translation_railcontent_data_value'];
             }
         }
 
@@ -220,6 +223,7 @@ class SearchService extends RepositoryBase implements SearchInterface
         $search = new SearchService(new PermissionRepository(new ContentRepository()));
 
         $builder = $search->generateQuery();
+        $builder = $this->addTranslations($builder);
         $builder->whereIn(ConfigService::$tableContent.'.id', $ids);
 
         $builder = $builder->get();
@@ -240,7 +244,9 @@ class SearchService extends RepositoryBase implements SearchInterface
         $search = new SearchService(new PermissionRepository(new ContentRepository()));
 
         $builder = $search->generateQuery();
-        $builder->where(ConfigService::$tableContent.'.slug', $slug);
+        $builder = $this->addTranslations($builder);
+
+        $builder->where('translation_'.ConfigService::$tableContent.'.value', $slug);
 
         if(!is_null($parentId)) {
             $builder = $builder->where('parent_id', $parentId);
@@ -251,3 +257,4 @@ class SearchService extends RepositoryBase implements SearchInterface
         return $this->parseAndGetLinkedContent($builder);
     }
 }
+

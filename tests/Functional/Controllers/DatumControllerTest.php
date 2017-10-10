@@ -22,6 +22,8 @@ class DatumControllerTest extends RailcontentTestCase
 
         $this->serviceBeingTested = $this->app->make(DatumService::class);
         $this->classBeingTested = $this->app->make(DatumRepository::class);
+        $userId = $this->createAndLogInNewUser();
+        $this->setUserLanguage($userId);
         //$this->categoryClass = $this->app->make(CategoryRepository::class);
     }
 
@@ -31,7 +33,7 @@ class DatumControllerTest extends RailcontentTestCase
         $value = $this->faker->text(500);
 
         $content = [
-            'slug' => $this->faker->word,
+            //'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -60,7 +62,7 @@ class DatumControllerTest extends RailcontentTestCase
     public function test_add_content_datum_controller_method_response()
     {
         $content = [
-            'slug' => $this->faker->word,
+          //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -90,7 +92,7 @@ class DatumControllerTest extends RailcontentTestCase
                 'content_id',
                 'datum_id',
                 'key',
-                'value',
+             //   'value',
                 'position',
             ]
         );
@@ -101,7 +103,7 @@ class DatumControllerTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'datum_id' => 1,
                 'key' => $key,
-                'value' => $value,
+               // 'value' => $value,
                 'position' => 1
             ]
         );
@@ -137,7 +139,7 @@ class DatumControllerTest extends RailcontentTestCase
     public function test_update_content_datum_controller_method_response()
     {
         $content = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -150,7 +152,7 @@ class DatumControllerTest extends RailcontentTestCase
 
         $data = [
             'key' => $this->faker->word,
-            'value' => $this->faker->text(),
+           // 'value' => $this->faker->text(),
             'position' =>$this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
@@ -178,7 +180,7 @@ class DatumControllerTest extends RailcontentTestCase
                 'content_id',
                 'datum_id',
                 'key',
-                'value',
+             //   'value',
                 'position'
             ]
         );
@@ -189,7 +191,7 @@ class DatumControllerTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'datum_id' => $dataId,
                 'key' => $data['key'],
-                'value' => $new_value,
+                //'value' => $new_value,
                 'position' => $data['position']
             ]
         );
@@ -198,7 +200,7 @@ class DatumControllerTest extends RailcontentTestCase
     public function test_update_content_datum_not_pass_validation()
     {
         $content = [
-            'slug' => $this->faker->word,
+          //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -211,7 +213,7 @@ class DatumControllerTest extends RailcontentTestCase
 
         $data = [
             'key' => $this->faker->word,
-            'value' => $this->faker->text(),
+            //'value' => $this->faker->text(),
             'position' =>$this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
@@ -235,7 +237,7 @@ class DatumControllerTest extends RailcontentTestCase
     public function test_delete_content_datum_controller()
     {
         $content = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -248,7 +250,7 @@ class DatumControllerTest extends RailcontentTestCase
 
         $data = [
             'key' => $this->faker->word,
-            'value' => $this->faker->text(),
+           // 'value' => $this->faker->text(),
             'position' =>$this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
@@ -270,7 +272,7 @@ class DatumControllerTest extends RailcontentTestCase
     public function test_update_content_datum_method_from_service_response()
     {
         $content = [
-            'slug' => $this->faker->word,
+          //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -283,7 +285,7 @@ class DatumControllerTest extends RailcontentTestCase
 
         $data = [
             'key' => $this->faker->word,
-            'value' => $this->faker->text(),
+           // 'value' => $this->faker->text(),
             'position' =>$this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
@@ -313,7 +315,7 @@ class DatumControllerTest extends RailcontentTestCase
     public function test_get_content_datum_method_from_service_response()
     {
         $content = [
-            'slug' => $this->faker->word,
+          //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -323,13 +325,16 @@ class DatumControllerTest extends RailcontentTestCase
             'archived_on' => null,
         ];
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
         $data = [
             'key' => $this->faker->word,
-            'value' => $this->faker->text(),
             'position' =>$this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
+        $dataValue= $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $dataId, ConfigService::$tableData, $dataValue);
 
         $contentData = [
             'content_id' => $contentId,
@@ -344,7 +349,7 @@ class DatumControllerTest extends RailcontentTestCase
             'content_id' => $contentId,
             'datum_id' => $dataId,
             'key' => $data['key'],
-            'value' => $data['value'],
+            'value' => $dataValue,
             'position' => $data['position']
         ];
 
@@ -354,7 +359,7 @@ class DatumControllerTest extends RailcontentTestCase
     public function test_delete_content_datum_method_from_service_response()
     {
         $content = [
-            'slug' => $this->faker->word,
+          //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -367,7 +372,7 @@ class DatumControllerTest extends RailcontentTestCase
 
         $data = [
             'key' => $this->faker->word,
-            'value' => $this->faker->text(),
+           // 'value' => $this->faker->text(),
             'position' =>$this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
@@ -388,7 +393,7 @@ class DatumControllerTest extends RailcontentTestCase
         Event::fake();
 
         $content = [
-            'slug' => $this->faker->word,
+          //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -421,7 +426,7 @@ class DatumControllerTest extends RailcontentTestCase
         Event::fake();
 
         $content = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -434,7 +439,7 @@ class DatumControllerTest extends RailcontentTestCase
 
         $data = [
             'key' => $this->faker->word,
-            'value' => $this->faker->text(),
+           // 'value' => $this->faker->text(),
             'position' =>$this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);

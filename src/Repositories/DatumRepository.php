@@ -17,23 +17,29 @@ class DatumRepository extends RepositoryBase
      */
     public function updateOrCreateDatum($id, $key, $value, $position)
     {
-        $update = $this->query()->where('id', $id)->update(
+        $update = $this->query()->where(ConfigService::$tableData.'.id', $id)->update(
             [
                 'key' => $key,
-                'value' => $value,
                 'position' => $position
             ]
         );
 
-        if(!$update){
+        if(!$update) {
             $id = $this->query()->insertGetId(
                 [
                     'key' => $key,
-                    'value' => $value,
                     'position' => $position
                 ]
             );
         }
+
+        $this->saveTranslation(
+            [
+                'entity_type' => ConfigService::$tableData,
+                'entity_id' => $id,
+                'value' => $value
+            ]
+        );
 
         return $id;
     }
@@ -45,6 +51,14 @@ class DatumRepository extends RepositoryBase
      */
     public function deleteDatum($id)
     {
+
+        $this->deleteTranslations(
+            [
+                'entity_type' => ConfigService::$tableData,
+                'entity_id' => $id
+            ]
+        );
+
         return $this->query()->where([
                 'id' => $id
             ]

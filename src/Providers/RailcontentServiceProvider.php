@@ -32,11 +32,11 @@ class RailcontentServiceProvider extends ServiceProvider
         // this makes all database calls return arrays rather than objects
         $this->listen = [
             StatementPrepared::class => [
-                function ($event) {
+                function($event) {
                     $event->statement->setFetchMode(PDO::FETCH_ASSOC);
                 }
             ],
-            ContentUpdated::class => [VersionContentEventListener::class . '@handle']
+            ContentUpdated::class => [VersionContentEventListener::class.'@handle']
         ];
 
         parent::boot();
@@ -45,11 +45,11 @@ class RailcontentServiceProvider extends ServiceProvider
 
         $this->publishes(
             [
-                __DIR__ . '/../../config/railcontent.php' => config_path('railcontent.php'),
+                __DIR__.'/../../config/railcontent.php' => config_path('railcontent.php'),
             ]
         );
 
-        $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../../migrations');
 
         //load package routes file
         $this->loadRoutesFrom(__DIR__ . '/../routes.php');
@@ -123,5 +123,9 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableUserContent = config('railcontent.tables.user_content');
         ConfigService::$tablePlaylists = config('railcontent.tables.playlists');
         ConfigService::$tableUserContentPlaylists = config('railcontent.tables.user_content_playlists');
-}
+        ConfigService::$tableLanguage = config('railcontent.tables.language');
+        ConfigService::$tableTranslations = config('railcontent.tables.translations');
+        ConfigService::$tableUserPreference = config('railcontent.tables.user_preference');
+        ConfigService::$translatableTables = [ConfigService::$tableData, ConfigService::$tableFields, ConfigService::$tableContent];
+    }
 }

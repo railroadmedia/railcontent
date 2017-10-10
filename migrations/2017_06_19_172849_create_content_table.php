@@ -16,10 +16,8 @@ class CreateContentTable extends Migration
     {
         Schema::create(
             ConfigService::$tableContent,
-            function (Blueprint $table) {
+            function(Blueprint $table) {
                 $table->increments('id');
-
-                $table->string('slug', 255)->index();
                 $table->string('status', 64)->index();
                 $table->string('type', 64)->index();
                 $table->integer('position')->index()->nullable();

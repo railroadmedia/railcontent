@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: roxana
- * Date: 9/20/2017
- * Time: 12:26 PM
- */
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
@@ -24,19 +18,21 @@ class SearchServiceTest extends RailcontentTestCase
     /**
      * @var
      */
-    protected $classBeingTested;
+    protected $classBeingTested, $userId;
 
     protected function setUp()
     {
         parent::setUp();
 
         $this->classBeingTested = $this->app->make(SearchService::class);
+
+        $this->userId = $this->createAndLogInNewUser();
+        $this->setUserLanguage($this->userId);
     }
 
     public function test_get_by_id()
     {
         $content = [
-            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -48,10 +44,13 @@ class SearchServiceTest extends RailcontentTestCase
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+
         $response = $this->classBeingTested->getById($contentId);
 
         $this->assertEquals(
-            array_merge(['id' => $contentId], $content),
+            array_merge(['id' => $contentId, 'slug' => $contentSlug], $content),
             $response
         );
     }
@@ -70,7 +69,7 @@ class SearchServiceTest extends RailcontentTestCase
     {
         // content that is linked via a field
         $linkedContent = [
-            'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -79,8 +78,9 @@ class SearchServiceTest extends RailcontentTestCase
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
         ];
-
+        $slugLinkedContent = $this->faker->word;
         $linkedContentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($linkedContent);
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $linkedContentId, ConfigService::$tableContent, $slugLinkedContent);
 
         $linkedFieldKey = $this->faker->word;
         $linkedFieldValue = $this->faker->word;
@@ -93,6 +93,7 @@ class SearchServiceTest extends RailcontentTestCase
                 'position' => null,
             ]
         );
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $linkedFieldId, ConfigService::$tableFields, $linkedFieldValue);
 
         $linkedContentFieldLinkId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
             [
@@ -103,7 +104,7 @@ class SearchServiceTest extends RailcontentTestCase
 
         // main content
         $content = [
-            'slug' => $this->faker->word,
+            //'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -113,7 +114,9 @@ class SearchServiceTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
+        $slugContent = $this->faker->word;
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $slugContent);
 
         $fieldKey = $this->faker->word;
 
@@ -145,6 +148,7 @@ class SearchServiceTest extends RailcontentTestCase
                 'position' => 0,
             ]
         );
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $multipleField1, ConfigService::$tableFields, $multipleKeyFieldValues[0]);
 
         $multipleFieldLink1 = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
             [
@@ -162,6 +166,8 @@ class SearchServiceTest extends RailcontentTestCase
             ]
         );
 
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $multipleField2, ConfigService::$tableFields, $multipleKeyFieldValues[2]);
+
         $multipleFieldLink2 = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
             [
                 'content_id' => $contentId,
@@ -177,6 +183,7 @@ class SearchServiceTest extends RailcontentTestCase
                 'position' => 1,
             ]
         );
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $multipleField3, ConfigService::$tableFields, $multipleKeyFieldValues[1]);
 
         $multipleFieldLink3 = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
             [
@@ -185,13 +192,15 @@ class SearchServiceTest extends RailcontentTestCase
             ]
         );
 
+        $multipleFieldIds = [$multipleField1, $multipleField3, $multipleField2];
+
         $response = $this->classBeingTested->getManyById([$contentId]);
 
         $this->assertEquals(
             [
                 2 => [
                     "id" => $contentId,
-                    "slug" => $content["slug"],
+                    "slug" => $slugContent,
                     "status" => $content["status"],
                     "type" => $content["type"],
                     "position" => $content["position"],
@@ -202,7 +211,7 @@ class SearchServiceTest extends RailcontentTestCase
                     "fields" => [
                         $fieldKey => [
                             "id" => $linkedContentId,
-                            "slug" => $linkedContent["slug"],
+                            "slug" => $slugLinkedContent,
                             "status" => $linkedContent["status"],
                             "type" => $linkedContent["type"],
                             "position" => $linkedContent["position"],
@@ -225,7 +234,6 @@ class SearchServiceTest extends RailcontentTestCase
     public function test_get_many_by_id_with_datum()
     {
         $content = [
-            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -237,16 +245,20 @@ class SearchServiceTest extends RailcontentTestCase
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+
         $linkedDatumdKey = $this->faker->word;
         $linkedDatumValue = $this->faker->word;
 
         $linkedDatumId = $this->query()->table(ConfigService::$tableData)->insertGetId(
             [
                 'key' => $linkedDatumdKey,
-                'value' => $linkedDatumValue,
                 'position' => 1,
             ]
         );
+
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $linkedDatumId, ConfigService::$tableData, $linkedDatumValue);
 
         $linkedContentDatumLinkId = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
             [
@@ -260,7 +272,7 @@ class SearchServiceTest extends RailcontentTestCase
         $this->assertEquals(
             [
                 "id" => $contentId,
-                "slug" => $content["slug"],
+                "slug" => $contentSlug,
                 "status" => $content["status"],
                 "type" => $content["type"],
                 "position" => $content["position"],
@@ -279,7 +291,7 @@ class SearchServiceTest extends RailcontentTestCase
     public function test_get_many_by_id_with_multiple_datum()
     {
         $content = [
-            'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -290,17 +302,26 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+        /* $translationContent = [
+             'language_id' => $this->classBeingTested->getUserLanguage(),
+             'entity_type' => ConfigService::$tableContent,
+             'entity_id' => $contentId,
+             'value' => $this->faker->word
+         ];
+         $translationContentId = $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translationContent);
+ */
         $linkedDatumdKey = $this->faker->word;
         $linkedDatumValue = $this->faker->word;
 
         $linkedDatumId = $this->query()->table(ConfigService::$tableData)->insertGetId(
             [
                 'key' => $linkedDatumdKey,
-                'value' => $linkedDatumValue,
                 'position' => 1,
             ]
         );
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $linkedDatumId, ConfigService::$tableData, $linkedDatumValue);
 
         $linkedContentDatumLinkId = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
             [
@@ -315,11 +336,11 @@ class SearchServiceTest extends RailcontentTestCase
         $linkedDatumId2 = $this->query()->table(ConfigService::$tableData)->insertGetId(
             [
                 'key' => $linkedDatumdKey2,
-                'value' => $linkedDatumValue2,
                 'position' => 1,
             ]
         );
 
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $linkedDatumId2, ConfigService::$tableData, $linkedDatumValue2);
         $linkedContentDatumLinkId2 = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
             [
                 'content_id' => $contentId,
@@ -332,7 +353,7 @@ class SearchServiceTest extends RailcontentTestCase
         $this->assertEquals(
             [
                 "id" => $contentId,
-                "slug" => $content["slug"],
+                "slug" => $contentSlug,
                 "status" => $content["status"],
                 "type" => $content["type"],
                 "position" => $content["position"],
@@ -352,7 +373,7 @@ class SearchServiceTest extends RailcontentTestCase
     public function test_get_many_by_id_with_field_and_datum()
     {
         $content = [
-            'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -364,17 +385,33 @@ class SearchServiceTest extends RailcontentTestCase
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
+        $translationContent = [
+            'language_id' => $this->classBeingTested->getUserLanguage(),
+            'entity_type' => ConfigService::$tableContent,
+            'entity_id' => $contentId,
+            'value' => $this->faker->word
+        ];
+        $translationContentId = $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translationContent);
+
         $linkedFieldKey = $this->faker->word;
         $linkedFieldValue = $this->faker->word;
 
         $linkedFieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId(
             [
                 'key' => $linkedFieldKey,
-                'value' => $linkedFieldValue,
+                // 'value' => $linkedFieldValue,
                 'type' => 'string',
                 'position' => null,
             ]
         );
+
+        $translationField = [
+            'language_id' => $this->classBeingTested->getUserLanguage(),
+            'entity_type' => ConfigService::$tableFields,
+            'entity_id' => $linkedFieldId,
+            'value' => $linkedFieldValue
+        ];
+        $translationFieldId = $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translationField);
 
         $linkedContentFieldLinkId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
             [
@@ -389,10 +426,18 @@ class SearchServiceTest extends RailcontentTestCase
         $linkedDatumId = $this->query()->table(ConfigService::$tableData)->insertGetId(
             [
                 'key' => $linkedDatumKey,
-                'value' => $linkedDatumValue,
+                // 'value' => $linkedDatumValue,
                 'position' => 1,
             ]
         );
+
+        $translationDatum = [
+            'language_id' => $this->classBeingTested->getUserLanguage(),
+            'entity_type' => ConfigService::$tableData,
+            'entity_id' => $linkedDatumId,
+            'value' => $linkedDatumValue
+        ];
+        $translationDatumId = $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translationDatum);
 
         $linkedContentDatumLinkId = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
             [
@@ -407,10 +452,17 @@ class SearchServiceTest extends RailcontentTestCase
         $linkedDatumId2 = $this->query()->table(ConfigService::$tableData)->insertGetId(
             [
                 'key' => $linkedDatumKey2,
-                'value' => $linkedDatumValue2,
+                // 'value' => $linkedDatumValue2,
                 'position' => 1,
             ]
         );
+        $translationDatum2 = [
+            'language_id' => $this->classBeingTested->getUserLanguage(),
+            'entity_type' => ConfigService::$tableData,
+            'entity_id' => $linkedDatumId2,
+            'value' => $linkedDatumValue2
+        ];
+        $translationDatumId2 = $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translationDatum2);
 
         $linkedContentDatumLinkId2 = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
             [
@@ -424,7 +476,7 @@ class SearchServiceTest extends RailcontentTestCase
         $this->assertEquals(
             [
                 "id" => $contentId,
-                "slug" => $content["slug"],
+                "slug" => $translationContent["value"],
                 "status" => $content["status"],
                 "type" => $content["type"],
                 "position" => $content["position"],
@@ -447,7 +499,7 @@ class SearchServiceTest extends RailcontentTestCase
     public function test_get_by_slug_non_exist()
     {
         $content = [
-            'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -458,6 +510,8 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
         $response = $this->classBeingTested->getBySlug($this->faker->word.rand(), null);
 
@@ -467,7 +521,7 @@ class SearchServiceTest extends RailcontentTestCase
     public function test_get_by_slug_any_parent_single()
     {
         $content = [
-            'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -478,10 +532,12 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
-        $response = $this->classBeingTested->getBySlug($content['slug'], null);
+        $response = $this->classBeingTested->getBySlug($contentSlug, null);
 
-        $this->assertEquals([$contentId => array_merge(['id' => $contentId], $content)], $response);
+        $this->assertEquals([$contentId => array_merge(['id' => $contentId, 'slug' => $contentSlug], $content)], $response);
     }
 
     public function test_get_by_slug_any_parent_multiple()
@@ -492,7 +548,7 @@ class SearchServiceTest extends RailcontentTestCase
 
         for($i = 0; $i < 3; $i++) {
             $content = [
-                'slug' => $slug,
+                // 'slug' => $slug,
                 'status' => $this->faker->word,
                 'type' => $this->faker->word,
                 'position' => $this->faker->numberBetween(),
@@ -503,8 +559,9 @@ class SearchServiceTest extends RailcontentTestCase
             ];
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-            $expectedContent[$contentId] = array_merge(['id' => $contentId], $content);
+            // $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $slug);
+            $expectedContent[$contentId] = array_merge(['id' => $contentId, 'slug' => $slug], $content);
         }
 
         $response = $this->classBeingTested->getBySlug($slug, null);
@@ -521,7 +578,7 @@ class SearchServiceTest extends RailcontentTestCase
 
         for($i = 0; $i < 3; $i++) {
             $content = [
-                'slug' => $slug,
+                // 'slug' => $slug,
                 'status' => $this->faker->word,
                 'type' => $this->faker->word,
                 'position' => $this->faker->numberBetween(),
@@ -532,14 +589,15 @@ class SearchServiceTest extends RailcontentTestCase
             ];
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-            $expectedContent[$contentId] = array_merge(['id' => $contentId], $content);
+            // $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $slug);
+            $expectedContent[$contentId] = array_merge(['id' => $contentId, 'slug' => $slug], $content);
         }
 
         // add other content with the same slug but different parent id to make sure it gets excluded
-        $this->query()->table(ConfigService::$tableContent)->insertGetId(
+        $contentID = $this->query()->table(ConfigService::$tableContent)->insertGetId(
             [
-                'slug' => $slug,
+                // 'slug' => $slug,
                 'status' => $this->faker->word,
                 'type' => $this->faker->word.rand(),
                 'position' => $this->faker->numberBetween(),
@@ -549,11 +607,12 @@ class SearchServiceTest extends RailcontentTestCase
                 'archived_on' => null,
             ]
         );
-
+        // $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentID, ConfigService::$tableContent, $slug);
         // add some other random content that should be excluded
-        $this->query()->table(ConfigService::$tableContent)->insertGetId(
+        $randContentId = $this->query()->table(ConfigService::$tableContent)->insertGetId(
             [
-                'slug' => $this->faker->word.rand(),
+                //'slug' => $this->faker->word.rand(),
                 'status' => $this->faker->word,
                 'type' => $this->faker->word.rand(),
                 'position' => $this->faker->numberBetween(),
@@ -564,6 +623,7 @@ class SearchServiceTest extends RailcontentTestCase
             ]
         );
 
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $randContentId, ConfigService::$tableContent, $this->faker->word);
         $response = $this->classBeingTested->getBySlug($slug, $parentId);
 
         $this->assertEquals($expectedContent, $response);
@@ -586,7 +646,7 @@ class SearchServiceTest extends RailcontentTestCase
         // insert matching content
         for($i = 0; $i < 3; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                // 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => $this->faker->randomElement($types),
                 'position' => $this->faker->numberBetween(),
@@ -598,13 +658,16 @@ class SearchServiceTest extends RailcontentTestCase
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-            $expectedContent[$contentId] = array_merge(['id' => $contentId], $content);
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+
+            $expectedContent[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
         }
 
         // insert non-matching content
         for($i = 0; $i < 3; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                // 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => $this->faker->randomElement($types),
                 'position' => $this->faker->numberBetween(),
@@ -614,10 +677,13 @@ class SearchServiceTest extends RailcontentTestCase
                 'archived_on' => null,
             ];
 
-            $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
         }
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -633,6 +699,7 @@ class SearchServiceTest extends RailcontentTestCase
     }
 
     public function test_get_paginated_page_2_amount()
+
     {
         $page = 2;
         $amount = 3;
@@ -649,7 +716,7 @@ class SearchServiceTest extends RailcontentTestCase
         // insert matching content
         for($i = 0; $i < 3; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                //  'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => $this->faker->randomElement($types),
                 'position' => $this->faker->numberBetween(),
@@ -661,13 +728,16 @@ class SearchServiceTest extends RailcontentTestCase
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-            $expectedContent[$contentId] = array_merge(['id' => $contentId], $content);
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+
+            $expectedContent[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
         }
 
         // insert non-matching content
         for($i = 0; $i < 3; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                // 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => $this->faker->randomElement($types),
                 'position' => $this->faker->numberBetween(),
@@ -678,9 +748,12 @@ class SearchServiceTest extends RailcontentTestCase
             ];
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
         }
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -712,7 +785,7 @@ class SearchServiceTest extends RailcontentTestCase
         // insert matching content
         for($i = 0; $i < 3; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                //'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => $this->faker->randomElement($types),
                 'position' => $this->faker->numberBetween(),
@@ -724,10 +797,13 @@ class SearchServiceTest extends RailcontentTestCase
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-            $expectedContent[$contentId] = array_merge(['id' => $contentId], $content);
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+
+            $expectedContent[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
         }
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -762,7 +838,7 @@ class SearchServiceTest extends RailcontentTestCase
         // insert matching content
         for($i = 0; $i < 3; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                // 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => $this->faker->randomElement($types),
                 'position' => $this->faker->numberBetween(),
@@ -773,11 +849,12 @@ class SearchServiceTest extends RailcontentTestCase
             ];
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-            $expectedContent[$contentId] = array_merge(['id' => $contentId], $content);
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+            $expectedContent[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
         }
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -813,18 +890,27 @@ class SearchServiceTest extends RailcontentTestCase
 
         $field = [
             'key' => 'topic',
-            'value' => 'jazz',
+            //'value' => 'jazz',
             'type' => 'multiple',
             'position' => 1
         ];
 
         $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
 
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $fieldId, ConfigService::$tableFields, 'jazz');
 
+        /*$translationField = [
+            'language_id' =>$this->classBeingTested->getUserLanguage(),
+            'entity_type' => ConfigService::$tableFields,
+            'entity_id' => $fieldId,
+            'value' => 'jazz'
+        ];
+        $translationFieldId = $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translationField);
+*/
         // insert matching content
-        for($i = 0; $i < 30; $i++) {
+        for($i = 0; $i < 10; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                //'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => $this->faker->randomElement($types),
                 'position' => $this->faker->numberBetween(),
@@ -836,7 +922,16 @@ class SearchServiceTest extends RailcontentTestCase
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+            $slug = $this->faker->word;
+            /*   $translationContent = [
+                   'language_id' =>$this->classBeingTested->getUserLanguage(),
+                   'entity_type' => ConfigService::$tableContent,
+                   'entity_id' => $contentId,
+                   'value' => $this->faker->word
+               ];
+               $translationContentId = $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translationContent); */
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $slug);
+            $contents[$contentId] = array_merge(['id' => $contentId, 'slug' => $slug], $content);
         }
 
         //link field to 5 contents
@@ -850,7 +945,7 @@ class SearchServiceTest extends RailcontentTestCase
             $expectedContent[$i] = array_merge($contents[$i], ['fields' => ['topic' => [1 => 'jazz']]]);
         }
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -863,6 +958,7 @@ class SearchServiceTest extends RailcontentTestCase
         ]);
 
         $results = json_decode($response->content(), true);
+
         $this->assertEquals($expectedContent, $results);
 
         // for some reason phpunit doesn't test the order of the array values
@@ -870,6 +966,115 @@ class SearchServiceTest extends RailcontentTestCase
 
         //check that in the response we have 5 results
         $this->assertEquals(5, count($results));
+    }
+
+    public function test_get_course_lessons_for_instructor()
+    {
+        $page = 1;
+        $amount = 10;
+        $orderByDirection = 'asc';
+        $orderByColumn = 'id';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = ['course lessons'];
+        $parentId = null;
+        $includeFuturePublishedOn = false;
+
+        $requiredFields = [
+            'instructor' => 'roxana',
+        ];
+
+        $course1 = [
+            'status' => $this->faker->randomElement($statues),
+            'type' => 'course',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null
+        ];
+
+        $courseId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($course1);
+        $contentSlug1 = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $courseId1, ConfigService::$tableContent, $contentSlug1);
+
+        $instructor = [
+            'status' => $this->faker->randomElement($statues),
+            'type' => 'instructor',
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null
+        ];
+        $instructorId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($instructor);
+        $instructorSlug = 'roxana';
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $instructorId1, ConfigService::$tableContent, $instructorSlug);
+
+        $fieldInstructor = [
+            'key' => 'instructor',
+            'value' => $instructorId1,
+            'type' => 'content_id'
+        ];
+        $fieldId1 = $this->query()->table(ConfigService::$tableFields)->insertGetId($fieldInstructor);
+
+        $contentField = [
+            'content_id' => $courseId1,
+            'field_id' => $fieldId1
+        ];
+
+        $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField);
+
+        for($i = 0; $i < 25; $i++) {
+            $content = [
+                'status' => $this->faker->randomElement($statues),
+                'type' => 'course lessons',
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $courseId1,
+                'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+            $contents[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
+        }
+
+        //Get 10th to 20th lessons for the course with instructor 'caleb' and topic 'bass drumming'
+        $expectedContent = array_slice($contents, 0, 10, true);
+
+        for($i = 0; $i < 5; $i++) {
+            $content2 = [
+                'status' => $this->faker->randomElement($statues),
+                'type' => 'course lessons',
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => null,
+                'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
+            $contentSlug2 = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId2, ConfigService::$tableContent, $contentSlug2);
+        }
+
+        $response = $this->call('GET', '/', [
+            'page' => $page,
+            'amount' => $amount,
+            'fields' => $requiredFields,
+            'parent_id' => $parentId,
+            'statues' => $statues,
+            'types' => $types,
+            'order_by' => $orderByColumn,
+            'order' => $orderByDirection,
+            'include_future' => $includeFuturePublishedOn
+        ]);
+
+        $results = json_decode($response->content(), true);
+
+        $this->assertEquals($expectedContent, $results);
     }
 
     /**
@@ -886,15 +1091,15 @@ class SearchServiceTest extends RailcontentTestCase
         $parentId = null;
         $includeFuturePublishedOn = false;
         $requiredFields = [
-            'instructor' => 'caleb',
-            'topic' => 'bass drumming'
+            'instructor' => 'roxana',
+            //  'topic' => 'bass drumming'
         ];
 
         $expectedContent = [];
 
         //create 2 courses with instructor 'caleb' and different topics
         $course1 = [
-            'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => $this->faker->randomElement($statues),
             'type' => 'course',
             'position' => $this->faker->numberBetween(),
@@ -905,9 +1110,20 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $courseId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($course1);
+        $contentSlug1 = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $courseId1, ConfigService::$tableContent, $contentSlug1);
+        /*$translation = [
+            'language_id' =>$this->classBeingTested->getUserLanguage(),
+            'entity_type' => ConfigService::$tableContent,
+            'entity_id' => $courseId1,
+            'value' => $this->faker->word
+        ];
+        $translationId = $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translation);*/
+        // $courseId1 = $this->createContent();
+        //$this->translateItem($this->classBeingTested->getUserLanguage(), $courseId1, ConfigService::$tableContent, $this->faker->word);
 
         $course2 = [
-            'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => $this->faker->randomElement($statues),
             'type' => 'course',
             'position' => $this->faker->numberBetween(),
@@ -918,11 +1134,13 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $courseId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($course2);
+        $contentSlug2 = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $courseId2, ConfigService::$tableContent, $contentSlug2);
 
         //create and link instructor caleb to the course
         $instructor = [
-            'slug' => 'caleb',
-            'status' => $this->faker->word,
+            //  'slug' => 'caleb',
+            'status' => 'published',
             'type' => 'instructor',
             'position' => $this->faker->numberBetween(),
             'parent_id' => null,
@@ -931,6 +1149,9 @@ class SearchServiceTest extends RailcontentTestCase
             'archived_on' => null
         ];
         $instructorId = $this->query()->table(ConfigService::$tableContent)->insertGetId($instructor);
+
+        $instructorSlug = 'roxana';
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $instructorId, ConfigService::$tableContent, $instructorSlug);
 
         $fieldForInstructor = [
             'key' => 'instructor',
@@ -944,14 +1165,14 @@ class SearchServiceTest extends RailcontentTestCase
         $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
             [
                 'content_id' => $courseId1,
-                'field_id' => $fieldForInstructorId,
+                'field_id' => 1,
             ]
         );
 
         $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
             [
                 'content_id' => $courseId2,
-                'field_id' => $fieldForInstructorId,
+                'field_id' => 1,
             ]
         );
 
@@ -963,19 +1184,20 @@ class SearchServiceTest extends RailcontentTestCase
             'position' => 1
         ];
 
-        $fieldForInstructorId = $this->query()->table(ConfigService::$tableFields)->insertGetId($fieldForTopic);
+        $fieldForTopicId = $this->query()->table(ConfigService::$tableFields)->insertGetId($fieldForTopic);
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $fieldForTopicId, ConfigService::$tableFields, 'bass drumming');
 
         $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
             [
                 'content_id' => $courseId1,
-                'field_id' => $fieldForInstructorId,
+                'field_id' => $fieldForTopicId,
             ]
         );
 
         //link 25 lessons to the course
         for($i = 0; $i < 25; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                // 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => 'course lessons',
                 'position' => $this->faker->numberBetween(),
@@ -986,14 +1208,15 @@ class SearchServiceTest extends RailcontentTestCase
             ];
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+            $contents[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
         }
 
         //Get 10th to 20th lessons for the course with instructor 'caleb' and topic 'bass drumming'
         $expectedContent = array_slice($contents, 10, 10, true);
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -1006,6 +1229,7 @@ class SearchServiceTest extends RailcontentTestCase
         ]);
 
         $results = json_decode($response->content(), true);
+        //dd($results);
         $this->assertEquals($expectedContent, $results);
 
         // for some reason phpunit doesn't test the order of the array values
@@ -1014,7 +1238,6 @@ class SearchServiceTest extends RailcontentTestCase
         //check that in the response we have 10 results
         $this->assertEquals(10, count($results));
     }
-
     /*
      * Get 40th to 60th library lesson where the topic is snare
      */
@@ -1036,7 +1259,7 @@ class SearchServiceTest extends RailcontentTestCase
 
         for($i = 0; $i < 80; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                //  'slug' => $this->faker->word,
                 'status' => 'published',
                 'type' => 'library lessons',
                 'position' => $this->faker->numberBetween(),
@@ -1047,20 +1270,23 @@ class SearchServiceTest extends RailcontentTestCase
             ];
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+            $contents[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
         }
 
         //link topic snare to 65 library lessons
+        $fieldSlug = 'snare';
         $fieldForTopic = [
             'key' => 'topic',
-            'value' => 'snare',
+            'value' => $fieldSlug,
             'type' => 'string',
             'position' => 1
         ];
 
         $fieldForTopicId = $this->query()->table(ConfigService::$tableFields)->insertGetId($fieldForTopic);
 
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $fieldForTopicId, ConfigService::$tableFields, $fieldSlug);
 
         for($i = 1; $i < 66; $i++) {
 
@@ -1080,7 +1306,7 @@ class SearchServiceTest extends RailcontentTestCase
         //Get 40th to 60th library lesson where the topic is snare
         $expectedContent = array_slice($expectedContent, 40, 20, true);
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -1119,7 +1345,7 @@ class SearchServiceTest extends RailcontentTestCase
 
         $expectedContent = [];
         $content1 = [
-            'slug' => $this->faker->word,
+            //  'slug' => $this->faker->word,
             'status' => 'draft',
             'type' => 'play along',
             'position' => $this->faker->numberBetween(),
@@ -1130,9 +1356,11 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+        $contentSlug1 = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId1, ConfigService::$tableContent, $contentSlug1);
 
         $content2 = [
-            'slug' => $this->faker->word,
+            //   'slug' => $this->faker->word,
             'status' => 'draft',
             'type' => 'play along',
             'position' => $this->faker->numberBetween(),
@@ -1143,11 +1371,13 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $contentId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
+        $contentSlug2 = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId2, ConfigService::$tableContent, $contentSlug2);
 
         //last inserted content it's expected to be returned by the getPaginated method
-        $expectedContent[$contentId2] = array_merge(['id' => $contentId2], $content2);
+        $expectedContent[$contentId2] = array_merge(['id' => $contentId2, 'slug' => $contentSlug2], $content2);
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -1180,7 +1410,7 @@ class SearchServiceTest extends RailcontentTestCase
 
         $expectedContent = [];
         $content1 = [
-            'slug' => $this->faker->word,
+            //  'slug' => $this->faker->word,
             'status' => 'draft',
             'type' => 'play along',
             'position' => $this->faker->numberBetween(),
@@ -1191,9 +1421,11 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+        $contentSlug1 = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId1, ConfigService::$tableContent, $contentSlug1);
 
         $content2 = [
-            'slug' => $this->faker->word,
+            //  'slug' => $this->faker->word,
             'status' => 'draft',
             'type' => 'play along',
             'position' => $this->faker->numberBetween(),
@@ -1202,13 +1434,13 @@ class SearchServiceTest extends RailcontentTestCase
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
         ];
-
+        $content2Slug = $this->faker->word;
         $contentId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
-
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId2, ConfigService::$tableContent, $content2Slug);
         //last inserted content it's expected to be returned by the getPaginated method
-        $expectedContent[$contentId2] = array_merge(['id' => $contentId2], $content2);
+        $expectedContent[$contentId2] = array_merge(['id' => $contentId2, 'slug' => $content2Slug], $content2);
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -1238,14 +1470,14 @@ class SearchServiceTest extends RailcontentTestCase
         $parentId = null;
         $includeFuturePublishedOn = true;
         $requiredFields = [];
-        $userId = $this->createAndLogInNewUser();
+        //$userId = $this->createAndLogInNewUser();
 
         $expectedContent = [];
 
         // insert contents
         for($i = 0; $i < 10; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                //   'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => $this->faker->randomElement($types),
                 'position' => $this->faker->numberBetween(),
@@ -1256,15 +1488,16 @@ class SearchServiceTest extends RailcontentTestCase
             ];
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+            $contents[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
         }
 
         // save content as completed
         for($i = 1; $i < 3; $i++) {
             $userContent = [
                 'content_id' => $contents[$i]['id'],
-                'user_id' => $userId,
+                'user_id' => $this->userId,
                 'state' => UserContentService::STATE_COMPLETED,
                 'progress' => 100
             ];
@@ -1274,7 +1507,7 @@ class SearchServiceTest extends RailcontentTestCase
             $expectedContent[$i] = $contents[$i];
         }
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -1306,14 +1539,14 @@ class SearchServiceTest extends RailcontentTestCase
         $parentId = null;
         $includeFuturePublishedOn = true;
         $requiredFields = [];
-        $userId = $this->createAndLogInNewUser();
+        //$userId = $this->createAndLogInNewUser();
 
         $expectedContent = [];
 
         // insert contents
         for($i = 0; $i < 10; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                // 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => $this->faker->randomElement($types),
                 'position' => $this->faker->numberBetween(),
@@ -1324,15 +1557,16 @@ class SearchServiceTest extends RailcontentTestCase
             ];
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+            $contents[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
         }
 
         // save content as completed
         for($i = 1; $i < 3; $i++) {
             $userContent = [
                 'content_id' => $contents[$i]['id'],
-                'user_id' => $userId,
+                'user_id' => $this->userId,
                 'state' => UserContentService::STATE_STARTED,
                 'progress' => 100
             ];
@@ -1342,7 +1576,7 @@ class SearchServiceTest extends RailcontentTestCase
             $expectedContent[$i] = $contents[$i];
         }
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -1374,22 +1608,24 @@ class SearchServiceTest extends RailcontentTestCase
         $parentId = null;
         $includeFuturePublishedOn = true;
         $requiredFields = [];
-        $userId = $this->createAndLogInNewUser();
+        //$userId = $this->createAndLogInNewUser();
 
         $expectedContent = [];
 
         $playlist = [
-            'name' =>$this->faker->word,
+            'name' => $this->faker->word,
             'type' => PlaylistsService::TYPE_PUBLIC,
-            'user_id' => $userId
+            'user_id' => $this->userId
         ];
 
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
+        $playlistName = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId, ConfigService::$tablePlaylists, $playlistName);
 
         // insert contents
         for($i = 0; $i < 10; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                //  'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => $this->faker->randomElement($types),
                 'position' => $this->faker->numberBetween(),
@@ -1400,15 +1636,16 @@ class SearchServiceTest extends RailcontentTestCase
             ];
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+            $contents[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
         }
 
         // save content in playlist
         for($i = 1; $i < 3; $i++) {
             $userContent = [
                 'content_id' => $contents[$i]['id'],
-                'user_id' => $userId,
+                'user_id' => $this->userId,
                 'state' => UserContentService::STATE_STARTED,
                 'progress' => 100
             ];
@@ -1424,7 +1661,7 @@ class SearchServiceTest extends RailcontentTestCase
             $expectedContent[$i] = $contents[$i];
         }
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -1456,30 +1693,34 @@ class SearchServiceTest extends RailcontentTestCase
         $parentId = null;
         $includeFuturePublishedOn = true;
         $requiredFields = [];
-        $userId = $this->createAndLogInNewUser();
+        // $userId = $this->createAndLogInNewUser();
 
         $expectedContent = [];
 
         $playlist1 = [
-            'name' =>$this->faker->word,
+            'name' => $this->faker->word,
             'type' => PlaylistsService::TYPE_PUBLIC,
-            'user_id' => $userId
+            'user_id' => $this->userId
         ];
 
         $playlistId1 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist1);
+        $playlistName = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId1, ConfigService::$tablePlaylists, $playlistName);
 
         $playlist2 = [
-            'name' =>$this->faker->word,
+            'name' => $this->faker->word,
             'type' => PlaylistsService::TYPE_PRIVATE,
-            'user_id' => $userId
+            'user_id' => $this->userId
         ];
 
         $playlistId2 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist2);
+        $playlistName2 = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId2, ConfigService::$tablePlaylists, $playlistName2);
 
         // insert contents
         for($i = 0; $i < 10; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                //  'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => $this->faker->randomElement($types),
                 'position' => $this->faker->numberBetween(),
@@ -1490,15 +1731,16 @@ class SearchServiceTest extends RailcontentTestCase
             ];
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+            $contents[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
         }
 
         // save content in playlist 1
         for($i = 1; $i < 3; $i++) {
             $userContent = [
                 'content_id' => $contents[$i]['id'],
-                'user_id' => $userId,
+                'user_id' => $this->userId,
                 'state' => UserContentService::STATE_STARTED,
                 'progress' => 100
             ];
@@ -1518,7 +1760,7 @@ class SearchServiceTest extends RailcontentTestCase
         for($i = 4; $i < 6; $i++) {
             $userContent = [
                 'content_id' => $contents[$i]['id'],
-                'user_id' => $userId,
+                'user_id' => $this->userId,
                 'state' => UserContentService::STATE_STARTED,
                 'progress' => 100
             ];
@@ -1534,7 +1776,7 @@ class SearchServiceTest extends RailcontentTestCase
             $expectedContent[$i] = $contents[$i];
         }
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -1568,7 +1810,7 @@ class SearchServiceTest extends RailcontentTestCase
         $requiredFields = [];
 
         $content1 = [
-            'slug' => $this->faker->word,
+            //  'slug' => $this->faker->word,
             'status' => 'draft',
             'type' => 'play along',
             'position' => $this->faker->numberBetween(),
@@ -1579,6 +1821,8 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId1, ConfigService::$tableContent, $contentSlug);
 
         $permission = [
             'name' => $this->faker->word,
@@ -1586,7 +1830,8 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
-
+        $permissionName = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $permissionId, ConfigService::$tablePermissions, $permissionName);
         $contentPermission = [
             'content_id' => $contentId1,
             'content_type' => null,
@@ -1595,7 +1840,7 @@ class SearchServiceTest extends RailcontentTestCase
 
         $this->query()->table(ConfigService::$tableContentPermissions)->insertGetId($contentPermission);
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -1630,7 +1875,7 @@ class SearchServiceTest extends RailcontentTestCase
 
         $expectedContent = [];
         $content1 = [
-            'slug' => $this->faker->word,
+            //  'slug' => $this->faker->word,
             'status' => 'draft',
             'type' => 'play along',
             'position' => $this->faker->numberBetween(),
@@ -1641,6 +1886,8 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId1, ConfigService::$tableContent, $contentSlug);
 
         $permission = [
             'name' => $permissionName,
@@ -1648,6 +1895,8 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+        // $permissionName= $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $permissionId, ConfigService::$tablePermissions, $permissionName);
 
         $contentPermission = [
             'content_id' => $contentId1,
@@ -1657,9 +1906,9 @@ class SearchServiceTest extends RailcontentTestCase
 
         $this->query()->table(ConfigService::$tableContentPermissions)->insertGetId($contentPermission);
 
-        $expectedContent[$contentId1] = array_merge(['id' => $contentId1], $content1);
+        $expectedContent[$contentId1] = array_merge(['id' => $contentId1, 'slug' => $contentSlug], $content1);
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -1691,6 +1940,7 @@ class SearchServiceTest extends RailcontentTestCase
 
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
 
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $permissionId, ConfigService::$tablePermissions, $permissionName);
         $contentType = $this->faker->word;
 
         $contentPermission = [
@@ -1713,22 +1963,23 @@ class SearchServiceTest extends RailcontentTestCase
 
         for($i = 0; $i < 50; $i++) {
             $content = [
-                'slug' => $this->faker->word,
+                //   'slug' => $this->faker->word,
                 'status' => 'draft',
                 'type' => $contentType,
                 'position' => $this->faker->numberBetween(),
                 'parent_id' => null,
-                'published_on' => Carbon::now()->subDays(($i+10))->toDateTimeString(),
+                'published_on' => Carbon::now()->subDays(($i + 10))->toDateTimeString(),
                 'created_on' => Carbon::now()->toDateTimeString(),
                 'archived_on' => null,
             ];
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+            $contents[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
         }
 
-        $response = $this->call('GET','/',[
+        $response = $this->call('GET', '/', [
             'page' => $page,
             'amount' => $amount,
             'fields' => $requiredFields,
@@ -1749,7 +2000,7 @@ class SearchServiceTest extends RailcontentTestCase
     public function test_can_not_view_content_without_permission()
     {
         $content1 = [
-            'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => 'draft',
             'type' => 'play along',
             'position' => $this->faker->numberBetween(),
@@ -1760,6 +2011,8 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId1, ConfigService::$tableContent, $contentSlug);
 
         $permissionName = $this->faker->word;
         $permission = [
@@ -1768,6 +2021,7 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $permissionId, ConfigService::$tablePermissions, $permissionName);
 
         $contentPermission = [
             'content_id' => $contentId1,
@@ -1786,7 +2040,6 @@ class SearchServiceTest extends RailcontentTestCase
     public function test_can_view_content_if_have_permission_to_access_specific_id()
     {
         $content1 = [
-            'slug' => $this->faker->word,
             'status' => 'draft',
             'type' => 'play along',
             'position' => $this->faker->numberBetween(),
@@ -1797,6 +2050,8 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId1, ConfigService::$tableContent, $contentSlug);
 
         $permissionName = $this->faker->word;
         $permission = [
@@ -1805,6 +2060,7 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $permissionId, ConfigService::$tablePermissions, $permissionName);
 
         $contentPermission = [
             'content_id' => $contentId1,
@@ -1815,11 +2071,11 @@ class SearchServiceTest extends RailcontentTestCase
         $this->query()->table(ConfigService::$tableContentPermissions)->insertGetId($contentPermission);
 
         //add user permission on request
-        request()->merge(['permissions'=> [$permissionName]]);
+        request()->merge(['permissions' => [$permissionName]]);
 
         $response = $this->classBeingTested->getById($contentId1);
 
-        $this->assertEquals(array_merge(['id' => $contentId1], $content1),$response);
+        $this->assertEquals(array_merge(['id' => $contentId1, 'slug' => $contentSlug], $content1), $response);
     }
 
     public function test_can_view_content_with_type_if_have_permission_to_access_type()
@@ -1827,7 +2083,6 @@ class SearchServiceTest extends RailcontentTestCase
         $contentType = $this->faker->word;
 
         $content1 = [
-            'slug' => $this->faker->word,
             'status' => 'draft',
             'type' => $contentType,
             'position' => $this->faker->numberBetween(),
@@ -1838,6 +2093,8 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId1, ConfigService::$tableContent, $contentSlug);
 
         $permissionName = $this->faker->word;
         $permission = [
@@ -1846,6 +2103,7 @@ class SearchServiceTest extends RailcontentTestCase
         ];
 
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $permissionId, ConfigService::$tablePermissions, $permissionName);
 
         $contentPermission = [
             'content_id' => null,
@@ -1856,11 +2114,17 @@ class SearchServiceTest extends RailcontentTestCase
         $this->query()->table(ConfigService::$tableContentPermissions)->insertGetId($contentPermission);
 
         //add user permission on request
-        request()->merge(['permissions'=> [$permissionName]]);
+        request()->merge(['permissions' => [$permissionName]]);
 
         $response = $this->classBeingTested->getById($contentId1);
 
-        $this->assertEquals(array_merge(['id' => $contentId1], $content1),$response);
+        $this->assertEquals(array_merge(
+            [
+                'id' => $contentId1,
+                'slug' => $contentSlug
+            ],
+            $content1),
+            $response);
 
     }
 }

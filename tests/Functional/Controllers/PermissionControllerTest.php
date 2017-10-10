@@ -22,6 +22,9 @@ class PermissionControllerTest extends RailcontentTestCase
         parent::setUp();
 
         $this->serviceBeingTested = $this->app->make(PermissionService::class);
+
+        $userId = $this->createAndLogInNewUser();
+        $this->setUserLanguage($userId);
     }
 
     public function test_store_response()
@@ -242,7 +245,7 @@ class PermissionControllerTest extends RailcontentTestCase
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
 
         $content = [
-            'slug' => $this->faker->word,
+            //'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -274,7 +277,7 @@ class PermissionControllerTest extends RailcontentTestCase
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
 
         $content = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -315,7 +318,7 @@ class PermissionControllerTest extends RailcontentTestCase
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
 
         $content = [
-            'slug' => $this->faker->word,
+          //  'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -347,7 +350,7 @@ class PermissionControllerTest extends RailcontentTestCase
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
 
         $content = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),

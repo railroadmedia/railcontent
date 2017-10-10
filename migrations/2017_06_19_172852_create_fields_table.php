@@ -20,7 +20,7 @@ class CreateFieldsTable extends Migration
                 $table->increments('id');
 
                 $table->string('key', 255)->index();
-                $table->string('value', 255)->index();
+                $table->string('value', 255)->nullable()->index();
                 $table->string('type', 255)->index();
                 $table->integer('position')->index()->nullable();
             }

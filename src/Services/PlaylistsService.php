@@ -70,4 +70,9 @@ class PlaylistsService
     {
         return $this->playlistsRepository->getPlaylistWithContent($playlistId, $userId);
     }
+
+    public function getPlaylists()
+    {
+        return $this->playlistsRepository->getUserPlaylists($this->playlistsRepository->getAuthenticatedUserId(request()));
+    }
 }
