@@ -84,8 +84,20 @@ class ConfigService
      */
     public static $tableUserPreference;
 
+    /*
+     * @var array
+     */
     public static $translatableTables;
 
+    /**
+     * @var array
+     */
+    public static $availableLanguages;
+
+    /**
+     * @var string
+     */
+    public static $defaultLanguage;
     /**
      * @var string
      */

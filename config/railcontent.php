@@ -21,4 +21,6 @@ return [
         'user_preference' => 'railcontent_user_preference'
 
     ],
+    'available_languages' => ['en','fr'],
+    'default_language' => 'en'
 ];

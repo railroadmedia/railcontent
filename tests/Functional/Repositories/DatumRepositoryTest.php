@@ -27,7 +27,7 @@ class DatumRepositoryTest extends RailcontentTestCase
         $value = $this->faker->text();
         $position = $this->faker->numberBetween();
 
-        $result = $this->classBeingTested->updateOrCreateDatum(1,$key,$value, $position);
+        $result = $this->classBeingTested->updateOrCreateDatum(1, $key, $value, $position);
 
         $this->assertEquals(1, $result);
 
@@ -62,7 +62,7 @@ class DatumRepositoryTest extends RailcontentTestCase
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
         $translation = [
-            'language_id' =>$this->classBeingTested->getUserLanguage(),
+            'language_id' => $this->classBeingTested->getUserLanguage(),
             'entity_type' => ConfigService::$tableData,
             'entity_id' => $dataId,
             'value' => $this->faker->word
@@ -71,7 +71,7 @@ class DatumRepositoryTest extends RailcontentTestCase
 
         $new_value = $this->faker->text();
 
-        $result = $this->classBeingTested->updateOrCreateDatum($dataId,$data['key'],$new_value, $data['position']);
+        $result = $this->classBeingTested->updateOrCreateDatum($dataId, $data['key'], $new_value, $data['position']);
 
         $this->assertEquals(1, $result);
 
@@ -90,7 +90,7 @@ class DatumRepositoryTest extends RailcontentTestCase
         $this->assertDatabaseHas(
             ConfigService::$tableTranslations,
             [
-                'id' => $translationId,
+                'id' => ($translationId + 1),
                 'entity_type' => ConfigService::$tableData,
                 'entity_id' => $dataId,
                 'value' => $new_value,
@@ -109,7 +109,7 @@ class DatumRepositoryTest extends RailcontentTestCase
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
         $translation = [
-            'language_id' =>$this->classBeingTested->getUserLanguage(),
+            'language_id' => $this->classBeingTested->getUserLanguage(),
             'entity_type' => ConfigService::$tableData,
             'entity_id' => $dataId,
             'value' => $this->faker->word

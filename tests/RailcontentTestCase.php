@@ -149,6 +149,12 @@ class RailcontentTestCase extends BaseTestCase
 
         $this->authManager->guard()->onceUsingId($userId);
 
+        request()->setUserResolver(
+            function () use ($userId) {
+                return User::query()->find($userId);
+            }
+        );
+
         return $userId;
     }
 

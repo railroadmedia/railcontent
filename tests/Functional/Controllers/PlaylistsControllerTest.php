@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Repositories\PlaylistsRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PlaylistsService;
@@ -11,27 +12,29 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class PlaylistsControllerTest extends RailcontentTestCase
 {
-    protected $serviceBeingTested;
+    protected $serviceBeingTested, $userId;
 
     protected function setUp()
     {
         parent::setUp();
 
         $this->serviceBeingTested = $this->app->make(PlaylistsService::class);
-        $userId = $this->createAndLogInNewUser();
-        $this->setUserLanguage($userId);
+        $this->classBeingTested = $this->app->make(PlaylistsRepository::class);
+        $this->userId = $this->createAndLogInNewUser();
+        $this->setUserLanguage($this->userId);
     }
 
     public function test_add_content_to_playlist()
     {
-        $this->createAndLogInNewUser();
-
         $playlist = [
-            'name' => $this->faker->word,
+           // 'name' => $this->faker->word,
             'type' => PlaylistsService::TYPE_PUBLIC
         ];
 
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
+
+        $playlistName = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId, ConfigService::$tablePlaylists, $playlistName);
 
         $content = [
             //'slug' => $this->faker->word,
@@ -49,7 +52,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
         $expectedResults = [
             1 => [
                 'id' => 1,
-                'name' => $playlist['name'],
+                'name' => $playlistName,
                 'type' => $playlist['type'],
                 'contents' => [
                     $contentId => [
@@ -74,7 +77,6 @@ class PlaylistsControllerTest extends RailcontentTestCase
 
     public function test_create_a_playlist()
     {
-        //$this->createAndLogInNewUser();
         $playlistName = $this->faker->word();
         $response = $this->call('POST', '/playlists/create', [
             'name' => $playlistName
@@ -87,6 +89,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
                 'type' => PlaylistsService::TYPE_PRIVATE
             ]
         ];
+
         $this->assertEquals(200, $response->status());
 
         $this->assertEquals($expectedResults, json_decode($response->content(), true));
@@ -97,18 +100,19 @@ class PlaylistsControllerTest extends RailcontentTestCase
         $contentId = 1;
 
         $playlist = [
-            'name' => $this->faker->word,
+            //'name' => $this->faker->word,
             'type' => PlaylistsService::TYPE_PUBLIC
         ];
 
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
 
-        $userId = $this->createAndLogInNewUser();
+        $playlistName = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId, ConfigService::$tablePlaylists, $playlistName);
 
         $expectedResults = [
             1 => [
                 'id' => 1,
-                'name' => $playlist['name'],
+                'name' => $playlistName,
                 'type' => $playlist['type'],
                 'contents' => [
                     1 => [
@@ -119,18 +123,18 @@ class PlaylistsControllerTest extends RailcontentTestCase
                 ]
             ]
         ];
-        $results = $this->serviceBeingTested->addToPlaylist($contentId, $playlistId, $userId);
+        $results = $this->serviceBeingTested->addToPlaylist($contentId, $playlistId, $this->userId);
 
         $this->assertEquals($expectedResults, $results);
     }
 
     public function test_store_playlist_private_service()
     {
-        $userId = $this->createAndLogInNewUser();
+       // $userId = $this->createAndLogInNewUser();
         $paylistName = $this->faker->word();
         $isAdmin = false;
 
-        $results = $this->serviceBeingTested->store($paylistName, $userId, $isAdmin);
+        $results = $this->serviceBeingTested->store($paylistName, $this->userId, $isAdmin);
 
         $expectedResults = [
             1 => [
@@ -145,11 +149,11 @@ class PlaylistsControllerTest extends RailcontentTestCase
 
     public function test_store_playlist_public_service()
     {
-        $userId = $this->createAndLogInNewUser();
+       // $userId = $this->createAndLogInNewUser();
         $paylistName = $this->faker->word();
         $isAdmin = true;
 
-        $results = $this->serviceBeingTested->store($paylistName, $userId, $isAdmin);
+        $results = $this->serviceBeingTested->store($paylistName, $this->userId, $isAdmin);
 
         $expectedResults = [
             1 => [
@@ -165,14 +169,17 @@ class PlaylistsControllerTest extends RailcontentTestCase
     public function test_get_playlist_with_contents()
     {
 
-        $userId = $this->createAndLogInNewUser();
+      //  $userId = $this->createAndLogInNewUser();
 
         $playlist = [
-            'name' => $this->faker->word,
+           // 'name' => $this->faker->word,
             'type' => PlaylistsService::TYPE_PUBLIC
         ];
 
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
+
+        $playlistName = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId, ConfigService::$tablePlaylists, $playlistName);
 
         $content1 = [
            // 'slug' => $this->faker->word,
@@ -202,7 +209,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
 
         $userContent1 = [
             'content_id' => $contentId1,
-            'user_id' => $userId,
+            'user_id' => $this->userId,
             'state' => UserContentService::STATE_ADDED_TO_LIST,
             'progress' => 0
         ];
@@ -211,7 +218,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
 
         $userContent2 = [
             'content_id' => $contentId2,
-            'user_id' => $userId,
+            'user_id' => $this->userId,
             'state' => UserContentService::STATE_ADDED_TO_LIST,
             'progress' => 0
         ];
@@ -235,7 +242,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
         $expectedResults = [
             $playlistId => [
                 'id' => $playlistId,
-                'name' => $playlist['name'],
+                'name' => $playlistName,
                 'type' => $playlist['type'],
                 'contents' => [
                     $contentId1 => [
@@ -251,7 +258,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
                 ]
             ]
         ];
-        $results = $this->serviceBeingTested->getPlaylist($playlistId, $userId);
+        $results = $this->serviceBeingTested->getPlaylist($playlistId, $this->userId);
 
         $this->assertEquals($expectedResults, $results);
     }

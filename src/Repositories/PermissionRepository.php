@@ -17,7 +17,7 @@ use Railroad\Railcontent\Services\SearchInterface;
  *
  * @package Railroad\Railcontent\Repositories
  */
-class PermissionRepository extends RepositoryBase implements SearchInterface
+class PermissionRepository extends LanguageRepository implements SearchInterface
 {
     protected $search, $databaseManager;
 
@@ -29,6 +29,7 @@ class PermissionRepository extends RepositoryBase implements SearchInterface
     {
         $this->search = $search;
     }
+
     /**
      * Create a new permisssion and return the permission id
      *
@@ -39,11 +40,12 @@ class PermissionRepository extends RepositoryBase implements SearchInterface
     {
         $permissionId = $this->queryTable()->insertGetId(
             [
-                'name' => $name,
+                // 'name' => $name,
                 'created_on' => Carbon::now()->toDateTimeString(),
             ]
         );
 
+        //save permission name
         $this->saveTranslation(
             [
                 'entity_type' => ConfigService::$tablePermissions,
@@ -64,9 +66,18 @@ class PermissionRepository extends RepositoryBase implements SearchInterface
      */
     public function update($id, $name)
     {
-        $this->queryTable()->where('id', $id)->update(
+        //delete old permission nanme
+        $this->deleteTranslations([
+            'entity_type' => ConfigService::$tablePermissions,
+            'entity_id' => $id
+        ]);
+
+        //save new permission name
+        $this->saveTranslation(
             [
-                'name' => $name
+                'entity_type' => ConfigService::$tablePermissions,
+                'entity_id' => $id,
+                'value' => $name
             ]
         );
 
@@ -81,6 +92,12 @@ class PermissionRepository extends RepositoryBase implements SearchInterface
      */
     public function delete($id)
     {
+        //delete permission nanme
+        $this->deleteTranslations([
+            'entity_type' => ConfigService::$tablePermissions,
+            'entity_id' => $id
+        ]);
+
         $delete = $this->queryTable()->where('id', $id)->delete();
 
         return $delete;
@@ -102,7 +119,12 @@ class PermissionRepository extends RepositoryBase implements SearchInterface
      */
     public function getById($id)
     {
-        return $this->queryTable()->where('id', $id)->get()->first();
+        $query = $this->queryTable();
+        $query = $this->addTranslations($query);
+
+        return $query
+            ->select (ConfigService::$tablePermissions.'.*', 'translation_'.ConfigService::$tablePermissions.'.value as name')
+            ->where(ConfigService::$tablePermissions.'.id', $id)->get()->first();
     }
 
     /**
@@ -187,11 +209,17 @@ class PermissionRepository extends RepositoryBase implements SearchInterface
                 '=',
                 ConfigService::$tableContentPermissions.'.required_permission_id'
             )
-            ->where(function($builder) use ($permissions) {
-                return $builder->whereNull(ConfigService::$tablePermissions.'.name')
-                    ->orWhereIn(ConfigService::$tablePermissions.'.name', $permissions);
-            });;
+            ->leftJoin(
+                ConfigService::$tableTranslations, function ($join) {
+                    return $join->on(ConfigService::$tableTranslations.'.entity_id', ConfigService::$tablePermissions.'.id')
+                        ->where(ConfigService::$tableTranslations.'.entity_type', '=', ConfigService::$tablePermissions);
+            }
 
+            )
+            ->where(function($builder) use ($permissions) {
+                return $builder->whereNull(ConfigService::$tablePermissions.'.id')
+                 ->orWhereIn(ConfigService::$tableTranslations.'.value', $permissions);
+            });;
         return $query;
     }
 }

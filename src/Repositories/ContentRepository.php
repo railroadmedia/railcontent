@@ -13,7 +13,7 @@ use Railroad\Railcontent\Services\SearchInterface;
  *
  * @package Railroad\Railcontent\Repositories
  */
-class ContentRepository extends RepositoryBase implements SearchInterface
+class ContentRepository extends LanguageRepository implements SearchInterface
 {
     /**
      * Insert a new category in the database, recalculate position and regenerate tree
@@ -121,6 +121,13 @@ class ContentRepository extends RepositoryBase implements SearchInterface
         }
 
         $delete = $this->queryTable()->where('id', $id)->delete();
+        $this->deleteTranslations(
+            [
+                'entity_type' => ConfigService::$tableContent,
+                'entity_id' => $id
+
+            ]
+        );
 
         $this->otherChildrenRepositions($content['parent_id'], $id, 0);
 
@@ -233,10 +240,13 @@ class ContentRepository extends RepositoryBase implements SearchInterface
     public function getLinkedField($fieldId, $contentId)
     {
         $fieldIdLabel = ConfigService::$tableFields.'.id';
-
-        return $this->contentFieldsQuery()
-            ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel)
-            ->where(
+        $queryBuilder =  $this->contentFieldsQuery()
+            ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel);
+        $builder = $this->addTranslations($queryBuilder);
+        return
+            $builder
+                ->select(ConfigService::$tableContentFields.'.*', ConfigService::$tableFields.'.*', 'translation_'.ConfigService::$tableFields.'.value as value')
+                ->where(
                 [
                     'field_id' => $fieldId,
                     'content_id' => $contentId
@@ -252,9 +262,10 @@ class ContentRepository extends RepositoryBase implements SearchInterface
     public function getContentLinkedFieldByKey($key, $contentId)
     {
         $fieldIdLabel = ConfigService::$tableFields.'.id';
-
-        return $this->contentFieldsQuery()
-            ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel)
+        $queryBuilder =  $this->contentFieldsQuery()
+            ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel);
+        $builder = $this->addTranslations($queryBuilder);
+        return $builder
             ->where(
                 [
                     'key' => $key,

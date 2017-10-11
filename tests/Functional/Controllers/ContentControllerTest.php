@@ -17,7 +17,7 @@ class ContentControllerTest extends RailcontentTestCase
     /**
      * @var ContentRepository
      */
-    protected $classBeingTested, $serviceBeingTested;
+    protected $classBeingTested, $serviceBeingTested, $userId;
 
     protected function setUp()
     {
@@ -25,8 +25,8 @@ class ContentControllerTest extends RailcontentTestCase
 
         $this->serviceBeingTested = $this->app->make(ContentService::class);
         $this->classBeingTested = $this->app->make(ContentRepository::class);
-        $userId = $this->createAndLogInNewUser();
-        $this->setUserLanguage($userId);
+        $this->userId = $this->createAndLogInNewUser();
+        $this->setUserLanguage($this->userId);
     }
 
     public function test_store_response_status()
@@ -463,7 +463,7 @@ class ContentControllerTest extends RailcontentTestCase
         });
     }
 
-    public function restore_content_with_datum()
+    public function test_restore_content_with_datum()
     {
         $content = [
            // 'slug' => $this->faker->word,
@@ -477,6 +477,8 @@ class ContentControllerTest extends RailcontentTestCase
         ];
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
         $datum = [
             'key' => $this->faker->word,
@@ -519,7 +521,7 @@ class ContentControllerTest extends RailcontentTestCase
         $response->assertJson(
             [
                 'id' => $contentId,
-                'slug' => $content['slug'],
+                'slug' => $contentSlug,
                 'position' => $content['position'],
                 'status' => $content['status'],
                 'type' => $content['type'],
@@ -531,10 +533,10 @@ class ContentControllerTest extends RailcontentTestCase
         );
     }
 
-    public function restore_content_with_fields()
+    public function test_restore_content_with_fields()
     {
         $content = [
-            'slug' => $this->faker->word,
+            //'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => "1",
@@ -545,6 +547,8 @@ class ContentControllerTest extends RailcontentTestCase
         ];
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
         $this->call('POST', 'content/field', [
             'content_id' => $contentId,
@@ -556,7 +560,7 @@ class ContentControllerTest extends RailcontentTestCase
 
         // content that is linked via a field
         $linkedContent = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => 2,
@@ -567,6 +571,8 @@ class ContentControllerTest extends RailcontentTestCase
         ];
 
         $linkedContentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($linkedContent);
+        $linkedContentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $linkedContentId, ConfigService::$tableContent, $linkedContentSlug);
 
         $fieldKey = $this->faker->word;
 
@@ -609,7 +615,7 @@ class ContentControllerTest extends RailcontentTestCase
         $response->assertJson(
             [
                 'id' => $contentId,
-                'slug' => $content['slug'],
+                'slug' => $contentSlug,
                 'position' => $content['position'],
                 'status' => $content['status'],
                 'type' => $content['type'],
@@ -621,10 +627,10 @@ class ContentControllerTest extends RailcontentTestCase
         );
     }
 
-    public function restore_and_recreate_missing_field()
+    public function test_restore_and_recreate_missing_field()
     {
         $content = [
-            'slug' => $this->faker->word,
+            //'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => "1",
@@ -635,10 +641,12 @@ class ContentControllerTest extends RailcontentTestCase
         ];
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
         // content that is linked via a field
         $linkedContent = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => 2,
@@ -649,6 +657,9 @@ class ContentControllerTest extends RailcontentTestCase
         ];
 
         $linkedContentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($linkedContent);
+        $linkedContentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $linkedContentId, ConfigService::$tableContent, $linkedContentSlug);
+
         $linkedContent['id'] = $linkedContentId;
 
         $fieldKey = $this->faker->word;
@@ -700,7 +711,7 @@ class ContentControllerTest extends RailcontentTestCase
         $response->assertJson(
             [
                 'id' => $contentId,
-                'slug' => $content['slug'],
+                'slug' => $contentSlug,
                 'position' => $content['position'],
                 'status' => $content['status'],
                 'type' => $content['type'],
@@ -712,10 +723,10 @@ class ContentControllerTest extends RailcontentTestCase
         );
     }
 
-    public function restore_multiple_fields()
+    public function test_restore_multiple_fields()
     {
         $content = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => "1",
@@ -726,6 +737,8 @@ class ContentControllerTest extends RailcontentTestCase
         ];
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
         // Add a multiple key field
         $multipleKeyFieldKey = $this->faker->word;
@@ -739,6 +752,7 @@ class ContentControllerTest extends RailcontentTestCase
                 'position' => 0,
             ]
         );
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $multipleField1, ConfigService::$tableFields, $multipleKeyFieldValues[0]);
 
         $multipleFieldLink1 = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
             [
@@ -755,6 +769,7 @@ class ContentControllerTest extends RailcontentTestCase
                 'position' => 2,
             ]
         );
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $multipleField2, ConfigService::$tableFields, $multipleKeyFieldValues[2]);
 
         $multipleFieldLink2 = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
             [
@@ -771,6 +786,7 @@ class ContentControllerTest extends RailcontentTestCase
                 'position' => 1,
             ]
         );
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $multipleField3, ConfigService::$tableFields, $multipleKeyFieldValues[1]);
 
         $multipleFieldLink3 = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
             [
@@ -808,7 +824,7 @@ class ContentControllerTest extends RailcontentTestCase
         $response->assertJson(
             [
                 'id' => $contentId,
-                'slug' => $content['slug'],
+                'slug' => $contentSlug,
                 'position' => $content['position'],
                 'status' => $content['status'],
                 'type' => $content['type'],
@@ -820,10 +836,10 @@ class ContentControllerTest extends RailcontentTestCase
         );
     }
 
-    public function restore_with_fields_and_datum()
+    public function test_restore_with_fields_and_datum()
     {
         $content = [
-            'slug' => $this->faker->word,
+            //'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => "1",
@@ -834,6 +850,8 @@ class ContentControllerTest extends RailcontentTestCase
         ];
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
         //link a field with 'string' type
         $this->call('POST', 'content/field', [
@@ -846,7 +864,7 @@ class ContentControllerTest extends RailcontentTestCase
 
         // content linked
         $linkedContent = [
-            'slug' => $this->faker->word,
+           // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => 2,
@@ -857,6 +875,8 @@ class ContentControllerTest extends RailcontentTestCase
         ];
 
         $linkedContentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($linkedContent);
+        $linkedContentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $linkedContentId, ConfigService::$tableContent, $linkedContentSlug);
 
         $fieldKey = $this->faker->word;
 
@@ -892,6 +912,7 @@ class ContentControllerTest extends RailcontentTestCase
         $versionContent = $this->query()->table(ConfigService::$tableContent)->where(['id' => $contentId])->get()->first();
         $versionContent['fields'] = [$fieldKey => $linkedContent];
         $versionContent['datum'] = [$datum['key'] => $datum['value']];
+        $versionContent['slug'] = $contentSlug;
 
         //delete first linked field
         $this->call('DELETE', 'content/field/1', [
@@ -950,7 +971,7 @@ class ContentControllerTest extends RailcontentTestCase
         );
     }
 
-    public function restore_content_version_not_exist()
+    public function test_restore_content_version_not_exist()
     {
         //restore content to a missing version
         $response = $this->call('GET', 'content/restore/1');

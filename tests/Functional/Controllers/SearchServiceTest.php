@@ -1613,7 +1613,7 @@ class SearchServiceTest extends RailcontentTestCase
         $expectedContent = [];
 
         $playlist = [
-            'name' => $this->faker->word,
+           // 'name' => $this->faker->word,
             'type' => PlaylistsService::TYPE_PUBLIC,
             'user_id' => $this->userId
         ];
@@ -1671,7 +1671,7 @@ class SearchServiceTest extends RailcontentTestCase
             'order_by' => $orderByColumn,
             'order' => $orderByDirection,
             'include_future' => $includeFuturePublishedOn,
-            'playlists' => [$playlist['name']]
+            'playlists' => [$playlistName]
         ]);
 
         $results = json_decode($response->content(), true);
@@ -1698,7 +1698,7 @@ class SearchServiceTest extends RailcontentTestCase
         $expectedContent = [];
 
         $playlist1 = [
-            'name' => $this->faker->word,
+          //  'name' => $this->faker->word,
             'type' => PlaylistsService::TYPE_PUBLIC,
             'user_id' => $this->userId
         ];
@@ -1708,7 +1708,7 @@ class SearchServiceTest extends RailcontentTestCase
         $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId1, ConfigService::$tablePlaylists, $playlistName);
 
         $playlist2 = [
-            'name' => $this->faker->word,
+           // 'name' => $this->faker->word,
             'type' => PlaylistsService::TYPE_PRIVATE,
             'user_id' => $this->userId
         ];
@@ -1786,7 +1786,7 @@ class SearchServiceTest extends RailcontentTestCase
             'order_by' => $orderByColumn,
             'order' => $orderByDirection,
             'include_future' => $includeFuturePublishedOn,
-            'playlists' => [$playlist1['name'], $playlist2['name']]
+            'playlists' => [$playlistName, $playlistName2]
         ]);
 
         $results = json_decode($response->content(), true);
@@ -1825,7 +1825,7 @@ class SearchServiceTest extends RailcontentTestCase
         $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId1, ConfigService::$tableContent, $contentSlug);
 
         $permission = [
-            'name' => $this->faker->word,
+          //  'name' => $this->faker->word,
             'created_on' => Carbon::now()->toDateTimeString()
         ];
 
@@ -1890,7 +1890,7 @@ class SearchServiceTest extends RailcontentTestCase
         $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId1, ConfigService::$tableContent, $contentSlug);
 
         $permission = [
-            'name' => $permissionName,
+           // 'name' => $permissionName,
             'created_on' => Carbon::now()->toDateTimeString()
         ];
 
@@ -1934,7 +1934,7 @@ class SearchServiceTest extends RailcontentTestCase
         $permissionName = $this->faker->word;
 
         $permission = [
-            'name' => $permissionName,
+           // 'name' => $permissionName,
             'created_on' => Carbon::now()->toDateTimeString()
         ];
 
@@ -2016,7 +2016,7 @@ class SearchServiceTest extends RailcontentTestCase
 
         $permissionName = $this->faker->word;
         $permission = [
-            'name' => $permissionName,
+           // 'name' => $permissionName,
             'created_on' => Carbon::now()->toDateTimeString()
         ];
 
@@ -2055,7 +2055,7 @@ class SearchServiceTest extends RailcontentTestCase
 
         $permissionName = $this->faker->word;
         $permission = [
-            'name' => $permissionName,
+            //'name' => $permissionName,
             'created_on' => Carbon::now()->toDateTimeString()
         ];
 
@@ -2098,7 +2098,7 @@ class SearchServiceTest extends RailcontentTestCase
 
         $permissionName = $this->faker->word;
         $permission = [
-            'name' => $permissionName,
+           // 'name' => $permissionName,
             'created_on' => Carbon::now()->toDateTimeString()
         ];
 

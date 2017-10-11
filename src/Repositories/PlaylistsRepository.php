@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\PlaylistsService;
 
-class PlaylistsRepository extends RepositoryBase
+class PlaylistsRepository extends LanguageRepository
 {
     /**
      * Save a new record in railcontent_user_content_playlists table
@@ -33,12 +33,11 @@ class PlaylistsRepository extends RepositoryBase
     public function getUserPlaylists($userId)
     {
         return $this->queryTable()
-            ->select(ConfigService::$tablePlaylists.'.*')
+            ->select(ConfigService::$tablePlaylists.'.*', 'translation_'.ConfigService::$tablePlaylists.'.value as name')
             ->where(function($query) use ($userId) {
                 $query->where(['type' => PlaylistsService::TYPE_PUBLIC])
                     ->orWhere([ConfigService::$tablePlaylists.'.user_id' => $userId]);
             })
-            ->where(ConfigService::$tableUserPreference.'.user_id', '=', $userId)
             ->get()->toArray();
     }
 
@@ -53,7 +52,6 @@ class PlaylistsRepository extends RepositoryBase
     {
         $playlist = $this->queryTable()->insertGetId(
             [
-                'name' => $name,
                 'type' => $type,
                 'user_id' => $userId
             ]
@@ -77,11 +75,12 @@ class PlaylistsRepository extends RepositoryBase
      */
     public function getPlaylistWithContent($playlistId, $userId)
     {
-        $playlist = $this->queryTable()
+        $builder = $this->queryTable();
+        $playlist = $builder
             ->select(
                 [
                     ConfigService::$tablePlaylists.'.id as playlist_id',
-                    ConfigService::$tablePlaylists.'.name as playlist_name',
+                    'translation_'.ConfigService::$tablePlaylists.'.value as playlist_name',
                     ConfigService::$tablePlaylists.'.type as playlist_type',
                     ConfigService::$tablePlaylists.'.user_id as user_id',
                     'usercontent.content_id as content_id',
@@ -130,12 +129,8 @@ class PlaylistsRepository extends RepositoryBase
      */
     public function queryTable()
     {
-        return parent::connection()->table(ConfigService::$tablePlaylists)
-            ->leftJoin(ConfigService::$tableTranslations, function($join) {
-                $join->on(ConfigService::$tableTranslations.'.entity_id', '=', ConfigService::$tablePlaylists.'.id')
-                    ->where(ConfigService::$tableTranslations.'.entity_type', ConfigService::$tablePlaylists);
-            })
-            ->leftJoin(ConfigService::$tableUserPreference, ConfigService::$tableTranslations.'.language_id', '=', ConfigService::$tableUserPreference.'.language_id');
+        $builder = parent::connection()->table(ConfigService::$tablePlaylists);
+        return $this->addTranslations($builder);
     }
 
     /**

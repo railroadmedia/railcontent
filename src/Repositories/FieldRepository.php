@@ -7,7 +7,7 @@ use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\SearchInterface;
 
-class FieldRepository extends RepositoryBase implements SearchInterface
+class FieldRepository extends LanguageRepository implements SearchInterface
 {
     protected $search;
 
@@ -29,6 +29,14 @@ class FieldRepository extends RepositoryBase implements SearchInterface
      */
     public function updateOrCreateField($id, $key, $value, $type, $position)
     {
+        //delete old translation
+        $this->deleteTranslations(
+            [
+                'entity_type' => ConfigService::$tableFields,
+                'entity_id' => $id
+            ]
+        );
+
         $update = $this->query()->where('id', $id)->update(
             [
                 'key' => $key,
@@ -49,6 +57,14 @@ class FieldRepository extends RepositoryBase implements SearchInterface
             );
         }
 
+        //save new translation
+        $this->saveTranslation(
+            [
+                'entity_type' => ConfigService::$tableFields,
+                'entity_id' => $id,
+                'value' => $value
+            ]
+        );
         return $id;
     }
 
@@ -78,7 +94,12 @@ class FieldRepository extends RepositoryBase implements SearchInterface
      */
     public function getFieldByKeyAndValue($key, $value)
     {
-        return $this->query()->where(['key' => $key, 'value' => $value])->get()->first();
+        $builder = $this->query();
+        $builder = $this->addTranslations($builder);
+
+        return $builder
+            ->select( ConfigService::$tableFields.'.*', 'translation_'.ConfigService::$tableFields.'.value as translate_value')
+            ->where(['key' => $key, 'translate_value' => $value])->get()->first();
     }
 
     /**
@@ -101,6 +122,7 @@ class FieldRepository extends RepositoryBase implements SearchInterface
         $fields = request()->fields ?? [];
 
         foreach($fields as $requiredKeys => $requiredValues) {
+            //get the field with translated value
             $queryBuilder->leftJoin(
                 ConfigService::$tableTranslations.' as searched_field'.$requiredKeys,
                 function($join) use ($requiredKeys, $requiredValues) {
@@ -109,6 +131,7 @@ class FieldRepository extends RepositoryBase implements SearchInterface
                 }
             );
 
+            //get the field from tableFields
             $queryBuilder->leftJoin(
                 ConfigService::$tableFields.' as field'.$requiredKeys,
                 function($join) use ($requiredKeys, $requiredValues) {
@@ -120,6 +143,7 @@ class FieldRepository extends RepositoryBase implements SearchInterface
                 }
             );
 
+            //get the link between content or content parent and the field
             $queryBuilder->leftJoin(ConfigService::$tableContentFields.' as incontentfield'.$requiredKeys, function($join) use ($requiredKeys) {
                 return $join->on('incontentfield'.$requiredKeys.'.field_id', 'field'.$requiredKeys.'.id')
                     ->on('incontentfield'.$requiredKeys.'.content_id', ConfigService::$tableContent.'.parent_id')

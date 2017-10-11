@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 
-class DatumRepository extends RepositoryBase
+class DatumRepository extends LanguageRepository
 {
     /**
      * Update or insert a new record in railcontent_data table
@@ -17,6 +17,14 @@ class DatumRepository extends RepositoryBase
      */
     public function updateOrCreateDatum($id, $key, $value, $position)
     {
+        //delete old value
+        $this->deleteTranslations(
+            [
+                'entity_type' => ConfigService::$tableData,
+                'entity_id' => $id
+            ]
+        );
+
         $update = $this->query()->where(ConfigService::$tableData.'.id', $id)->update(
             [
                 'key' => $key,
@@ -33,6 +41,7 @@ class DatumRepository extends RepositoryBase
             );
         }
 
+        //save new value
         $this->saveTranslation(
             [
                 'entity_type' => ConfigService::$tableData,
@@ -51,7 +60,7 @@ class DatumRepository extends RepositoryBase
      */
     public function deleteDatum($id)
     {
-
+        //delete datum value
         $this->deleteTranslations(
             [
                 'entity_type' => ConfigService::$tableData,
@@ -67,7 +76,12 @@ class DatumRepository extends RepositoryBase
 
     public function getDatumByKeyAndValue($key, $value)
     {
-        return $this->query()->where(['key' => $key, 'value' => $value])->get()->first();
+        $builder = $this->query();
+        $builder = $this->addTranslations($builder);
+
+        return $builder
+            ->select(ConfigService::$tableData.'.*', 'translation_'.ConfigService::$tableData.'.value as value')
+            ->where(['key' => $key, 'value' => $value])->get()->first();
     }
 
     /**

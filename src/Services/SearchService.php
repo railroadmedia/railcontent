@@ -11,11 +11,12 @@ namespace Railroad\Railcontent\Services;
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\LanguageRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Requests\ContentIndexRequest;
 
-class SearchService extends RepositoryBase implements SearchInterface
+class SearchService extends LanguageRepository implements SearchInterface
 {
     protected $search;
 

@@ -36,12 +36,15 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
         $contentUserId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($contentUser);
 
         $playlist = [
-            'name' => $this->faker->word,
+            //'name' => $this->faker->word,
             'type' => PlaylistsService::TYPE_PUBLIC,
             'user_id' => $this->userId
         ];
 
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
+
+        $playlistName = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId, ConfigService::$tablePlaylists, $playlistName);
 
         $results = $this->classBeingTested->addToPlaylist($contentUserId, $playlistId);
 
@@ -69,9 +72,18 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
             ConfigService::$tablePlaylists,
             [
                 'id' => $results,
-                'name' => $playlist['name'],
                 'user_id' => $playlist['userId'],
                 'type' => $playlist['type']
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableTranslations,
+            [
+                'entity_type' => ConfigService::$tablePlaylists,
+                'entity_id' => $results,
+                'value' => $playlist['name'],
+                'language_id' => $this->classBeingTested->getUserLanguage()
             ]
         );
     }
@@ -90,9 +102,18 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
             ConfigService::$tablePlaylists,
             [
                 'id' => $results,
-                'name' => $playlist['name'],
                 'user_id' => $playlist['userId'],
                 'type' => $playlist['type']
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableTranslations,
+            [
+                'entity_type' => ConfigService::$tablePlaylists,
+                'entity_id' => $results,
+                'value' => $playlist['name'],
+                'language_id' => $this->classBeingTested->getUserLanguage()
             ]
         );
     }
@@ -102,28 +123,29 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
         //$userId =  $this->createAndLogInNewUser();
 
         $playlist1 = [
-            'name' => $this->faker->word,
+          //  'name' => $this->faker->word,
             'type' => PlaylistsService::TYPE_PUBLIC,
             'user_id' => $this->userId
         ];
 
         $playlistId1 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist1);
 
-        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId1, ConfigService::$tablePlaylists, $playlist1['name']);
+        $playlistName1 = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId1, ConfigService::$tablePlaylists, $playlistName1);
 
-        $expectedResults[] = array_merge(['id' => $playlistId1], $playlist1);
+        $expectedResults[] = array_merge(['id' => $playlistId1, 'name' => $playlistName1], $playlist1);
 
         $playlist2 = [
-            'name' => $this->faker->word,
             'type' => PlaylistsService::TYPE_PUBLIC,
             'user_id' => $this->userId
         ];
 
         $playlistId2 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist2);
 
-        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId2, ConfigService::$tablePlaylists, $playlist2['name']);
+        $playlistName2 = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId2, ConfigService::$tablePlaylists, $playlistName2);
 
-        $expectedResults[] = array_merge(['id' => $playlistId2], $playlist2);
+        $expectedResults[] = array_merge(['id' => $playlistId2, 'name' => $playlistName2], $playlist2);
 
         $results = $this->classBeingTested->getUserPlaylists($this->userId);
 
@@ -132,27 +154,28 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
 
     public function test_get_my_playlists()
     {
-        // $userId = $this->createAndLogInNewUser();
+
 
         $playlist1 = [
-            'name' => $this->faker->word,
+
             'type' => PlaylistsService::TYPE_PRIVATE,
             'user_id' => $this->userId
         ];
 
         $playlistId1 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist1);
-        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId1, ConfigService::$tablePlaylists, $playlist1['name']);
-        $expectedResults[] = array_merge(['id' => $playlistId1], $playlist1);
+        $playlistName1  = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId1, ConfigService::$tablePlaylists, $playlistName1);
+        $expectedResults[] = array_merge(['id' => $playlistId1, 'name' => $playlistName1], $playlist1);
 
         $playlist2 = [
-            'name' => $this->faker->word,
-            'type' => PlaylistsService::TYPE_PRIVATE,
+                    'type' => PlaylistsService::TYPE_PRIVATE,
             'user_id' => $this->userId
         ];
 
         $playlistId2 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist2);
-        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId2, ConfigService::$tablePlaylists, $playlist2['name']);
-        $expectedResults[] = array_merge(['id' => $playlistId2], $playlist2);
+        $playlistName2 = $this->faker->word();
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId2, ConfigService::$tablePlaylists, $playlistName2);
+        $expectedResults[] = array_merge(['id' => $playlistId2,'name' => $playlistName2], $playlist2);
 
         $results = $this->classBeingTested->getUserPlaylists($this->userId);
 
@@ -165,15 +188,17 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
         //$this->createAndLogInNewUser();
 
         $playlist = [
-            'name' => $this->faker->word,
             'type' => PlaylistsService::TYPE_PRIVATE,
             'user_id' => $userId
         ];
 
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
 
+        $playlistName = $this->faker->word();
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId, ConfigService::$tablePlaylists, $playlistName);
+
+
         $content = [
-            // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -185,8 +210,10 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
+        $contentSlug = $this->faker->word();
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+
         $content2 = [
-            //  'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -197,6 +224,9 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
         ];
 
         $contentId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
+
+        $contentSlug2 = $this->faker->word();
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId2, ConfigService::$tableContent, $contentSlug2);
 
         $contentUser = [
             'content_id' => $contentId,
@@ -246,7 +276,7 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
 
         $expectedResults[$playlistId] = [
             'id' => $playlistId,
-            'name' => $playlist['name'],
+            'name' => $playlistName,
             'type' => $playlist['type'],
             'contents' => $expectedContents
         ];

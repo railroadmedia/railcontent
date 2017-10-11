@@ -11,6 +11,7 @@ namespace Railroad\Railcontent\Tests\Functional\Repositories;
 use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class PermissionRepositoryTest extends RailcontentTestCase
@@ -36,8 +37,17 @@ class PermissionRepositoryTest extends RailcontentTestCase
             ConfigService::$tablePermissions,
             [
                 'id' => $permissionId,
-                'name' => $name,
                 'created_on' => Carbon::now()->toDateTimeString()
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableTranslations,
+            [
+                'entity_type' => ConfigService::$tablePermissions,
+                'entity_id' => $permissionId,
+                'language_id' => $this->classBeingTested->getUserLanguage(),
+                'value' => $name
             ]
         );
     }
@@ -45,11 +55,14 @@ class PermissionRepositoryTest extends RailcontentTestCase
     public function test_update_permission_name()
     {
         $permission = [
-            'name' => $this->faker->word,
+            //'name' => $this->faker->word,
             'created_on' => Carbon::now()->toDateTimeString()
         ];
 
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+
+        $permissionName = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $permissionId, ConfigService::$tablePermissions, $permissionName);
 
         $newName = $this->faker->word;
 
@@ -59,8 +72,27 @@ class PermissionRepositoryTest extends RailcontentTestCase
             ConfigService::$tablePermissions,
             [
                 'id' => $permissionId,
-                'name' => $newName,
                 'created_on' => Carbon::now()->toDateTimeString()
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableTranslations,
+            [
+                'entity_type' => ConfigService::$tablePermissions,
+                'entity_id' => $permissionId,
+                'value' => $permissionName,
+                'language_id' => $this->classBeingTested->getUserLanguage()
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableTranslations,
+            [
+                'entity_type' => ConfigService::$tablePermissions,
+                'entity_id' => $permissionId,
+                'value' => $newName,
+                'language_id' => $this->classBeingTested->getUserLanguage()
             ]
         );
     }
@@ -68,18 +100,29 @@ class PermissionRepositoryTest extends RailcontentTestCase
     public function test_delete_permission()
     {
         $permission = [
-            'name' => $this->faker->word,
+           // 'name' => $this->faker->word,
             'created_on' => Carbon::now()->toDateTimeString()
         ];
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+
+        $permissionName = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $permissionId, ConfigService::$tablePermissions, $permissionName);
 
         $this->classBeingTested->delete($permissionId);
 
         $this->assertDatabaseMissing(
             ConfigService::$tablePermissions,
             [
-                'id' => $permissionId,
-                'name' => $permission['name']
+                'id' => $permissionId
+            ]
+        );
+
+        //check that the permission name was deleted
+        $this->assertDatabaseMissing(
+            ConfigService::$tableTranslations,
+            [
+                'entity_type' => ConfigService::$tablePermissions,
+                'entity_id' => $permissionId
             ]
         );
     }
@@ -87,16 +130,19 @@ class PermissionRepositoryTest extends RailcontentTestCase
     public function test_get_permission_by_id()
     {
         $permission = [
-            'name' => $this->faker->word,
+           // 'name' => $this->faker->word,
             'created_on' => Carbon::now()->toDateTimeString()
         ];
 
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
 
+        $permissionName = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $permissionId, ConfigService::$tablePermissions, $permissionName);
+
         $response = $this->classBeingTested->getById($permissionId);
 
         $this->assertEquals(
-            array_merge(['id' => $permissionId], $permission),
+            array_merge(['id' => $permissionId, 'name' => $permissionName], $permission),
             $response
         );
     }
@@ -114,11 +160,14 @@ class PermissionRepositoryTest extends RailcontentTestCase
     public function test_assign_permission_to_specific_content()
     {
         $permission = [
-            'name' => $this->faker->word,
+            //'name' => $this->faker->word,
             'created_on' => Carbon::now()->toDateTimeString()
         ];
 
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+
+        $permissionName = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $permissionId, ConfigService::$tablePermissions, $permissionName);
 
         $content = [
            // 'slug' => $this->faker->word,
@@ -132,6 +181,9 @@ class PermissionRepositoryTest extends RailcontentTestCase
         ];
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
         $this->classBeingTested->assign($permissionId, $contentId, null);
 
@@ -149,11 +201,14 @@ class PermissionRepositoryTest extends RailcontentTestCase
     public function test_assign_permission_to_content_type()
     {
         $permission = [
-            'name' => $this->faker->word,
+           // 'name' => $this->faker->word,
             'created_on' => Carbon::now()->toDateTimeString()
         ];
 
         $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+
+        $permissionName = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $permissionId, ConfigService::$tablePermissions, $permissionName);
 
         $content = [
           //  'slug' => $this->faker->word,
@@ -166,7 +221,10 @@ class PermissionRepositoryTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $contentSlug = $this->faker->word;
+        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
         $this->classBeingTested->assign($permissionId, null, $content['type']);
 

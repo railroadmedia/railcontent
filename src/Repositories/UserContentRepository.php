@@ -13,7 +13,7 @@ use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\SearchInterface;
 use Railroad\Railcontent\Services\UserContentService;
 
-class UserContentRepository extends RepositoryBase implements SearchInterface
+class UserContentRepository extends LanguageRepository implements SearchInterface
 {
     protected $search;
 
@@ -106,7 +106,7 @@ class UserContentRepository extends RepositoryBase implements SearchInterface
 
             $this->generateUserPlaylistsQuery($queryBuilder);
 
-            $queryBuilder->whereIn(ConfigService::$tablePlaylists.'.name', $playlists);
+            $queryBuilder->whereIn('translation_'.ConfigService::$tablePlaylists.'.value', $playlists);
         }
 
         return $queryBuilder;
@@ -141,6 +141,8 @@ class UserContentRepository extends RepositoryBase implements SearchInterface
             ConfigService::$tablePlaylists.'.id',
             '=',
             ConfigService::$tableUserContentPlaylists.'.playlist_id'
+
+
         );
     }
 }
