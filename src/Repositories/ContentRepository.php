@@ -16,7 +16,7 @@ use Railroad\Railcontent\Services\SearchInterface;
 class ContentRepository extends LanguageRepository implements SearchInterface
 {
     /**
-     * Insert a new category in the database, recalculate position and regenerate tree
+     * Insert a new content in the database, save the content slug in the translation table and recalculate position
      *
      * @param string $slug
      * @param string $status
@@ -30,6 +30,7 @@ class ContentRepository extends LanguageRepository implements SearchInterface
     {
         $id = null;
 
+        //insert the content in the database
         $contentId = $this->queryTable()->insertGetId(
             [
                 'status' => $status,
@@ -40,6 +41,8 @@ class ContentRepository extends LanguageRepository implements SearchInterface
                 'created_on' => Carbon::now()->toDateTimeString(),
             ]
         );
+
+        //save content slug translation
         $this->saveTranslation(
             [
                 'entity_type' => ConfigService::$tableContent,
@@ -48,13 +51,14 @@ class ContentRepository extends LanguageRepository implements SearchInterface
             ]
         );
 
+        //reposition content
         $this->reposition($contentId, $position);
 
         return $contentId;
     }
 
     /**
-     * Update a category record, recalculate position, regenerate tree and return the category id
+     * Update a content record, recalculate position and return the content id
      *
      * @param $id
      * @param string $slug
@@ -77,6 +81,7 @@ class ContentRepository extends LanguageRepository implements SearchInterface
         $archivedOn
     )
     {
+        //update content
         $this->queryTable()->where('id', $id)->update(
             [
                 'status' => $status,
@@ -89,6 +94,7 @@ class ContentRepository extends LanguageRepository implements SearchInterface
             ]
         );
 
+        //update the content slug
         $this->saveTranslation(
             [
                 'entity_type' => ConfigService::$tableContent,
@@ -97,12 +103,14 @@ class ContentRepository extends LanguageRepository implements SearchInterface
             ]
         );
 
+        //reposition content
         $this->reposition($id, $position);
 
         return $id;
     }
 
-    /**
+    /** Unlink content's fields, content's datum and content's children,
+     *  delete the translations, delete the content and reposition the content childrens
      * @param int $id
      * @param bool $deleteChildren
      * @return int
@@ -172,9 +180,9 @@ class ContentRepository extends LanguageRepository implements SearchInterface
         return $this->contentDataQuery()->where('content_id', $contentId)->delete();
     }
 
-    /**
-     * @param $id
-     * @return int
+    /** Unlink content childrens
+     * @param integer $id
+     * @return integer
      */
     public function unlinkChildren($id)
     {
@@ -468,9 +476,8 @@ class ContentRepository extends LanguageRepository implements SearchInterface
             )->get();
     }
 
-    /**
-     * @param ContentIndexRequest $request
-     * @return mixed
+    /** Generate the Query Builder
+     * @return Builder
      */
     public function generateQuery()
     {
@@ -478,7 +485,6 @@ class ContentRepository extends LanguageRepository implements SearchInterface
             ->select(
                 [
                     ConfigService::$tableContent.'.id as id',
-                    // 'content_translation.value as slug',
                     ConfigService::$tableContent.'.status as status',
                     ConfigService::$tableContent.'.type as type',
                     ConfigService::$tableContent.'.position as position',
@@ -486,7 +492,6 @@ class ContentRepository extends LanguageRepository implements SearchInterface
                     ConfigService::$tableContent.'.published_on as published_on',
                     ConfigService::$tableContent.'.created_on as created_on',
                     ConfigService::$tableContent.'.archived_on as archived_on',
-                    //ConfigService::$tableContentFields . '.field_id as field_id',
                     ConfigService::$tableFields.'.id as field_id',
                     ConfigService::$tableFields.'.key as field_key',
                     ConfigService::$tableFields.'.value as field_value',
@@ -494,9 +499,7 @@ class ContentRepository extends LanguageRepository implements SearchInterface
                     ConfigService::$tableFields.'.position as field_position',
                     ConfigService::$tableData.'.id as datum_id',
                     ConfigService::$tableData.'.key as datum_key',
-                    // ConfigService::$tableData.'.value as datum_value',
                     ConfigService::$tableData.'.position as datum_position',
-
                 ]
             )->leftJoin(
                 ConfigService::$tableContentData,

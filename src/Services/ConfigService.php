@@ -82,7 +82,7 @@ class ConfigService
     /**
      * @var string
      */
-    public static $tableUserPreference;
+    public static $tableUserLanguagePreference;
 
     /*
      * @var array

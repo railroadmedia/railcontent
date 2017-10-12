@@ -74,6 +74,7 @@ class FieldRepository extends LanguageRepository implements SearchInterface
      */
     public function deleteField($id)
     {
+        //delete field value from translation table
         $this->deleteTranslations(
             [
                 'entity_type' => ConfigService::$tableFields,
@@ -90,7 +91,7 @@ class FieldRepository extends LanguageRepository implements SearchInterface
     /** Get field from database based on key and value pair
      * @param string $key
      * @param string $value
-     * @return mixed
+     * @return array
      */
     public function getFieldByKeyAndValue($key, $value)
     {
@@ -98,7 +99,7 @@ class FieldRepository extends LanguageRepository implements SearchInterface
         $builder = $this->addTranslations($builder);
 
         return $builder
-            ->select( ConfigService::$tableFields.'.*', 'translation_'.ConfigService::$tableFields.'.value as translate_value')
+            ->select(ConfigService::$tableFields.'.*', 'translation_'.ConfigService::$tableFields.'.value as translate_value')
             ->where(['key' => $key, 'translate_value' => $value])->get()->first();
     }
 
@@ -110,9 +111,8 @@ class FieldRepository extends LanguageRepository implements SearchInterface
         return parent::connection()->table(ConfigService::$tableFields);
     }
 
-    /**
-     * @param ContentIndexRequest $request
-     * @return mixed
+    /** Generate the query builder
+     * @return Builder
      */
     public function generateQuery()
     {

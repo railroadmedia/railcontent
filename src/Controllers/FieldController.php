@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\FieldService;
 use Railroad\Railcontent\Requests\FieldRequest;
 use Railroad\Railcontent\Events\ContentUpdated;
@@ -13,6 +12,10 @@ class FieldController extends Controller
 {
     private $fieldService;
 
+    /**
+     * FieldController constructor.
+     * @param FieldService $fieldService
+     */
     public function __construct(FieldService $fieldService)
     {
         $this->fieldService = $fieldService;
@@ -48,12 +51,14 @@ class FieldController extends Controller
      */
     public function update($fieldId, FieldRequest $request)
     {
+        //Check if field exist in the database
         $field = $this->fieldService->getField($fieldId,  $request->input('content_id'));
 
         if (is_null($field)) {
             return response()->json('Update failed, field not found with id: ' . $field, 404);
         }
 
+        //Save a content version
         event(new ContentUpdated($request->input('content_id')));
 
         $contentField = $this->fieldService->updateField(
@@ -75,12 +80,14 @@ class FieldController extends Controller
      */
     public function delete($fieldId, Request $request)
     {
+        //Check if field exist in the database
         $field = $this->fieldService->getField($fieldId,  $request->input('content_id'));
 
         if (is_null($field)) {
             return response()->json('Delete failed, content field not found with id: ' . $fieldId, 404);
         }
 
+        //Save a content version before content modification
         event(new ContentUpdated($request->input('content_id')));
 
         $deleted = $this->fieldService->deleteField(

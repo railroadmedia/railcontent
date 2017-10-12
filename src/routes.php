@@ -19,3 +19,4 @@ Route::put('/complete', 'Railroad\Railcontent\Controllers\ContentController@comp
 Route::put('/progress', 'Railroad\Railcontent\Controllers\ContentController@saveProgress');
 Route::post('/playlists/add', 'Railroad\Railcontent\Controllers\PlaylistsController@addToPlaylist');
 Route::post('/playlists/create', 'Railroad\Railcontent\Controllers\PlaylistsController@store');
+Route::post('switchLang', ['as' => 'switchLang', 'uses' => 'Railroad\Railcontent\Controllers\LanguageController@switchLang']);

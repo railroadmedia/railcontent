@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\PlaylistRequest;
 use Railroad\Railcontent\Requests\UserContentPlaylistRequest;

@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Railroad\Railcontent\Services\ConfigService;
 
-class CreateUserPreferenceTable extends Migration
+class CreateUserLanguagePreferenceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateUserPreferenceTable extends Migration
      */
     public function up()
     {
-        Schema::create(ConfigService::$tableUserPreference,
+        Schema::create(ConfigService::$tableUserLanguagePreference,
             function(Blueprint $table) {
                 $table->increments('id');
                 $table->integer('user_id')->index();
@@ -31,6 +31,6 @@ class CreateUserPreferenceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableUserPreference);
+        Schema::dropIfExists(ConfigService::$tableUserLanguagePreference);
     }
 }

@@ -160,7 +160,7 @@ class RailcontentTestCase extends BaseTestCase
 
     public function setUserLanguage($userId)
     {
-        return $this->databaseManager->connection()->query()->from(ConfigService::$tableUserPreference)->insertGetId(
+        return $this->databaseManager->connection()->query()->from(ConfigService::$tableUserLanguagePreference)->insertGetId(
             [
                 'user_id' => $userId,
                 'language_id' => 1

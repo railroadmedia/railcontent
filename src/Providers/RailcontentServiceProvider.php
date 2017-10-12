@@ -125,9 +125,10 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableUserContentPlaylists = config('railcontent.tables.user_content_playlists');
         ConfigService::$tableLanguage = config('railcontent.tables.language');
         ConfigService::$tableTranslations = config('railcontent.tables.translations');
-        ConfigService::$tableUserPreference = config('railcontent.tables.user_preference');
-        ConfigService::$translatableTables = [ConfigService::$tableData, ConfigService::$tableFields, ConfigService::$tableContent, ConfigService::$tablePlaylists];
+        ConfigService::$tableUserLanguagePreference = config('railcontent.tables.user_language_preference');
 
+        //Multilingual support
+        ConfigService::$translatableTables = [ConfigService::$tableData, ConfigService::$tableFields, ConfigService::$tableContent, ConfigService::$tablePlaylists];
         ConfigService::$defaultLanguage = config('railcontent.default_language');
         ConfigService::$availableLanguages = config('railcontent.available_languages');
     }

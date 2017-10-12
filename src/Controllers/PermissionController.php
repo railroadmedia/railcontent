@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\PermissionAssignRequest;
 use Railroad\Railcontent\Requests\PermissionRequest;
@@ -52,6 +51,7 @@ class PermissionController extends Controller
      */
     public function update($id, PermissionRequest $request)
     {
+        //check if permission exist in the database
         $permission = $this->permissionService->getById($id);
 
         if(is_null($permission)) {
@@ -71,12 +71,14 @@ class PermissionController extends Controller
      */
     public function delete($id)
     {
+        //check if permission exist in the database
         $permission = $this->permissionService->getById($id);
 
         if(is_null($permission)) {
             return response()->json('Delete failed, permission not found with id: '.$id, 404);
         }
 
+        //check if exist contents attached to the permission
         $linkedWithContent = $this->permissionService->linkedWithContent($id);
 
         if($linkedWithContent->isNotEmpty()) {

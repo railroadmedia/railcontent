@@ -2,18 +2,30 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-
+use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 
 class LanguageRepository extends RepositoryBase
 {
+    /** Get the preference language saved in the database for the authenticated user
+     * @return integer - user language id
+     */
     public function getUserLanguage()
     {
-        $user_preference = $this->connection()->table(ConfigService::$tableUserPreference)->where(['user_id' => $this->getAuthenticatedUserId(request())])->get()->first();
+        $user_preference = $this->connection()->table(ConfigService::$tableUserLanguagePreference)->where(
+            [
+                'user_id' => $this->getAuthenticatedUserId(request())
+            ]
+        )->get()->first();
 
         return $user_preference['language_id'];
     }
 
+    /** Set the preference language for the authenticated user
+     * If in the database dows not exist a language with the locale return a 403 page with the appropriate message
+     * @param string $locale
+     * @return bool|void
+     */
     public function setUserLanguage($locale)
     {
         $userId = $this->getAuthenticatedUserId(request());
@@ -24,11 +36,33 @@ class LanguageRepository extends RepositoryBase
             ]
         )->get()->first();
 
-        $update = $this->connection()->table(ConfigService::$tableUserPreference)->updateOrInsert(['user_id' => $userId], ['language_id' => $language['id']]);
+        //check if the locale it's supported by the CMS
+        if(!$language) {
+            return abort(403, 'Language not supported.');
+        }
 
-        return $update;
+        $this->connection()->table(ConfigService::$tableUserPreference)->updateOrInsert(
+            [
+                'user_id' => $userId
+            ],
+            [
+                'language_id' => $language['id']
+            ]
+        );
+
+        return true;
     }
 
+    /** Insert/Update a record in translations table.
+     * The translation table contain the following columns:
+     *    id - autoincrement
+     *    entity_type - contain the table name for the translatable value
+     *    entity_id - contain the entity id
+     *    language_id - contain the language for the translation
+     *    value - the entity value (e.g: can be content slug, field value, datum value, playlist name, permission name)
+     *
+     * @param array $translate
+     */
     public function saveTranslation($translate)
     {
         $update = $this->connection()->table(ConfigService::$tableTranslations)->where(
@@ -55,6 +89,10 @@ class LanguageRepository extends RepositoryBase
         }
     }
 
+    /** Delete a record from the translations table
+     * @param array $translate
+     * @return int
+     */
     public function deleteTranslations($translate)
     {
         return $this->connection()->table(ConfigService::$tableTranslations)->where(
@@ -65,9 +103,17 @@ class LanguageRepository extends RepositoryBase
         )->delete();
     }
 
+    /** Based on QueryBuilder object, links(join) to the translation table are generated.
+     * In the configuration file we have an array with the translatable tables; only for these tables are the joins generated
+     * @param $query
+     * @return mixed
+     */
     protected function addTranslations($query)
     {
+        //get language id for the authenticated user
         $userLanguage = $this->getUserLanguage();
+
+        //generate join with the translation table for the FROM table
         $this->generateTranslationQuery($query, $query->from, $query->from, $userLanguage);
 
         foreach($query->joins as $joinClause) {
@@ -83,9 +129,11 @@ class LanguageRepository extends RepositoryBase
         return $query;
     }
 
-    /**
-     * @param $query
-     * @param $joinClause
+    /** Update the Query Builder object with the links to the translation table
+     * @param Builder $query
+     * @param string $joinClauseTable
+     * @param string $table
+     * @param int $userLanguage
      */
     private function generateTranslationQuery($query, $joinClauseTable, $table, $userLanguage)
     {
