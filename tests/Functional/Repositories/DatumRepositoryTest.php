@@ -9,7 +9,7 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class DatumRepositoryTest extends RailcontentTestCase
 {
-    protected $classBeingTested;
+    protected $classBeingTested, $languageId;
 
     protected function setUp()
     {
@@ -18,7 +18,7 @@ class DatumRepositoryTest extends RailcontentTestCase
         $this->classBeingTested = $this->app->make(DatumRepository::class);
 
         $userId = $this->createAndLogInNewUser();
-        $this->setUserLanguage($userId);
+        $this->languageId = $this->setUserLanguage($userId);
     }
 
     public function test_insert_data()
@@ -46,7 +46,7 @@ class DatumRepositoryTest extends RailcontentTestCase
                 'id' => 1,
                 'entity_id' => 1,
                 'value' => $value,
-                'language_id' => $this->classBeingTested->getUserLanguage(),
+                'language_id' => $this->languageId,
                 'entity_type' => ConfigService::$tableData
             ]
         );
@@ -61,13 +61,8 @@ class DatumRepositoryTest extends RailcontentTestCase
 
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
-        $translation = [
-            'language_id' => $this->classBeingTested->getUserLanguage(),
-            'entity_type' => ConfigService::$tableData,
-            'entity_id' => $dataId,
-            'value' => $this->faker->word
-        ];
-        $translationId = $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translation);
+        $datumValue = $this->faker->word;
+        $translationId = $this->translateItem($this->languageId, $dataId, ConfigService::$tableData, $datumValue);
 
         $new_value = $this->faker->text();
 
@@ -82,8 +77,8 @@ class DatumRepositoryTest extends RailcontentTestCase
                 'id' => $translationId,
                 'entity_type' => ConfigService::$tableData,
                 'entity_id' => $dataId,
-                'value' => $translation['value'],
-                'language_id' => $translation['language_id']
+                'value' => $datumValue,
+                'language_id' => $this->languageId
             ]
         );
 
@@ -94,7 +89,7 @@ class DatumRepositoryTest extends RailcontentTestCase
                 'entity_type' => ConfigService::$tableData,
                 'entity_id' => $dataId,
                 'value' => $new_value,
-                'language_id' => $translation['language_id']
+                'language_id' => $this->languageId
             ]
         );
     }
@@ -108,13 +103,8 @@ class DatumRepositoryTest extends RailcontentTestCase
 
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
-        $translation = [
-            'language_id' => $this->classBeingTested->getUserLanguage(),
-            'entity_type' => ConfigService::$tableData,
-            'entity_id' => $dataId,
-            'value' => $this->faker->word
-        ];
-        $translationId = $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translation);
+        $datumValue = $this->faker->word;
+        $translationId = $this->translateItem($this->languageId, $dataId, ConfigService::$tableData, $datumValue);
 
         $this->classBeingTested->deleteDatum($dataId);
 
@@ -133,8 +123,8 @@ class DatumRepositoryTest extends RailcontentTestCase
                 'id' => $translationId,
                 'entity_type' => ConfigService::$tableData,
                 'entity_id' => $dataId,
-                'value' => $translation['value'],
-                'language_id' => $translation['language_id']
+                'value' => $datumValue,
+                'language_id' => $this->languageId
             ]
         );
     }

@@ -38,10 +38,10 @@ class LanguageRepository extends RepositoryBase
 
         //check if the locale it's supported by the CMS
         if(!$language) {
-            return abort(403, 'Language not supported.');
+            return false;
         }
 
-        $this->connection()->table(ConfigService::$tableUserPreference)->updateOrInsert(
+        $this->connection()->table(ConfigService::$tableUserLanguagePreference)->updateOrInsert(
             [
                 'user_id' => $userId
             ],

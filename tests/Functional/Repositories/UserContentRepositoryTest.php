@@ -24,7 +24,6 @@ class UserContentRepositoryTest extends RailcontentTestCase
     public function test_start_content()
     {
         $content = [
-           // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -35,9 +34,8 @@ class UserContentRepositoryTest extends RailcontentTestCase
         ];
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-        //$userId = 1;
-        $state = UserContentService::STATE_STARTED;
 
+        $state = UserContentService::STATE_STARTED;
 
         $userContentId = $this->classBeingTested->saveUserContent($contentId, $this->userId, $state);
 
@@ -56,7 +54,6 @@ class UserContentRepositoryTest extends RailcontentTestCase
     public function test_complete_content()
     {
         $content = [
-           // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -65,9 +62,7 @@ class UserContentRepositoryTest extends RailcontentTestCase
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
         ];
-
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-        //$userId = 1;
 
         $userContent = [
             'content_id' => $contentId,
@@ -75,7 +70,6 @@ class UserContentRepositoryTest extends RailcontentTestCase
             'state' => UserContentService::STATE_STARTED,
             'progress' => $this->faker->numberBetween(0, 99)
         ];
-
         $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
 
         $progress = 100;
@@ -103,7 +97,6 @@ class UserContentRepositoryTest extends RailcontentTestCase
     public function test_save_user_progress_content()
     {
         $content = [
-          //  'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -112,10 +105,7 @@ class UserContentRepositoryTest extends RailcontentTestCase
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
         ];
-
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-       // $userId = 1;
 
         $userContent = [
             'content_id' => $contentId,
@@ -123,7 +113,6 @@ class UserContentRepositoryTest extends RailcontentTestCase
             'state' => UserContentService::STATE_STARTED,
             'progress' => $this->faker->numberBetween(0, 99)
         ];
-
         $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
 
         $progress = $this->faker->numberBetween(1, 99);
@@ -149,7 +138,6 @@ class UserContentRepositoryTest extends RailcontentTestCase
     public function test_get_user_content()
     {
         $content = [
-         //   'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -158,10 +146,7 @@ class UserContentRepositoryTest extends RailcontentTestCase
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
         ];
-
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-       //$userId = 1;
 
         $userContent = [
             'content_id' => $contentId,
@@ -169,7 +154,6 @@ class UserContentRepositoryTest extends RailcontentTestCase
             'state' => UserContentService::STATE_STARTED,
             'progress' => $this->faker->numberBetween(0, 99)
         ];
-
         $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
 
         $results = $this->classBeingTested->getUserContent($contentId, $this->userId);

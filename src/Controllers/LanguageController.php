@@ -29,8 +29,11 @@ class LanguageController extends Controller
     public function switchLang(Request $request)
     {
         $locale = $request->input('locale');
-        $this->languageRepository->setUserLanguage($locale);
-
-        return redirect()->back();
+        $setUserLanguage = $this->languageRepository->setUserLanguage($locale);
+        if(!$setUserLanguage)
+        {
+            return response()->json('Language with locale '.$locale.' not supported.', 404);
+        }
+        return response()->json('Set language with success.', 201);
     }
 }

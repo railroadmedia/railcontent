@@ -18,7 +18,7 @@ class SearchServiceTest extends RailcontentTestCase
     /**
      * @var
      */
-    protected $classBeingTested, $userId;
+    protected $classBeingTested, $userId, $languageId, $secondaryLanguageId;
 
     protected function setUp()
     {
@@ -27,7 +27,8 @@ class SearchServiceTest extends RailcontentTestCase
         $this->classBeingTested = $this->app->make(SearchService::class);
 
         $this->userId = $this->createAndLogInNewUser();
-        $this->setUserLanguage($this->userId);
+        $this->languageId = $this->setUserLanguage($this->userId);
+        $this->secondaryLanguageId = 2;
     }
 
     public function test_get_by_id()
@@ -2126,5 +2127,165 @@ class SearchServiceTest extends RailcontentTestCase
             $content1),
             $response);
 
+    }
+
+    public function test_get_translated_content()
+    {
+        $page = 1;
+        $amount = 10;
+        $orderByDirection = 'desc';
+        $orderByColumn = 'published_on';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $parentId = null;
+        $includeFuturePublishedOn = false;
+        $requiredFields = [];
+
+        $expectedContent = [];
+
+        // insert matching content
+        for($i = 0; $i < 3; $i++) {
+            $content = [
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => $parentId,
+                'published_on' => Carbon::now()->subDays(rand(1, 99))->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+            ];
+
+            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+            $contentSlug = $this->faker->word;
+            $contentSlugSecondaryLanguage = $this->faker->word;
+            $this->translateItem($this->languageId, $contentId, ConfigService::$tableContent, $contentSlug);
+            $this->translateItem($this->secondaryLanguageId, $contentId, ConfigService::$tableContent, $contentSlugSecondaryLanguage);
+
+            $expectedContent[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
+        }
+
+        $response = $this->call('GET', '/', [
+            'page' => $page,
+            'amount' => $amount,
+            'fields' => $requiredFields,
+            'parent_id' => $parentId,
+            'statues' => $statues,
+            'types' => $types,
+            'order_by' => $orderByColumn,
+            'order' => $orderByDirection,
+            'include_future' => $includeFuturePublishedOn
+        ]);
+
+        $this->assertEquals($expectedContent, json_decode($response->content(), true));
+    }
+
+    public function test_get_content_with_fields_and_datum_in_my_language()
+    {
+        $content = [
+            'status' => $this->faker->word,
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $contentSlug = $this->faker->word;
+        $contentSlugSecondaryLanguage = $this->faker->word;
+        $this->translateItem($this->languageId, $contentId, ConfigService::$tableContent, $contentSlug);
+        $this->translateItem($this->secondaryLanguageId, $contentId, ConfigService::$tableContent, $contentSlugSecondaryLanguage);
+
+        $linkedFieldKey = $this->faker->word;
+        $linkedFieldValue = $this->faker->word;
+
+        $linkedFieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId(
+            [
+                'key' => $linkedFieldKey,
+                'type' => 'string',
+                'position' => null,
+            ]
+        );
+
+        $fieldValueSecondaryLanguage = $this->faker->word;
+        $this->translateItem($this->languageId, $linkedFieldId, ConfigService::$tableFields, $linkedFieldValue);
+        $this->translateItem($this->secondaryLanguageId, $linkedFieldId, ConfigService::$tableFields, $fieldValueSecondaryLanguage);
+
+        $linkedContentFieldLinkId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'field_id' => $linkedFieldId,
+            ]
+        );
+
+        $linkedDatumKey = $this->faker->word;
+        $linkedDatumValue = $this->faker->word;
+
+        $linkedDatumId = $this->query()->table(ConfigService::$tableData)->insertGetId(
+            [
+                'key' => $linkedDatumKey,
+                'position' => 1,
+            ]
+        );
+
+        $datumValue = $linkedDatumValue;
+        $datumValueSecondaryLanguage = $this->faker->word;
+        $this->translateItem($this->languageId, $linkedDatumId, ConfigService::$tableData, $datumValue);
+        $this->translateItem($this->secondaryLanguageId, $linkedDatumId, ConfigService::$tableData, $datumValueSecondaryLanguage);
+
+        $linkedContentDatumLinkId = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'datum_id' => $linkedDatumId,
+            ]
+        );
+
+        $linkedDatumKey2 = $this->faker->word;
+        $linkedDatumValue2 = $this->faker->word;
+
+        $linkedDatumId2 = $this->query()->table(ConfigService::$tableData)->insertGetId(
+            [
+                'key' => $linkedDatumKey2,
+                'position' => 1,
+            ]
+        );
+
+        $datumValueSecondaryLanguage2 = $this->faker->word;
+        $this->translateItem($this->languageId, $linkedDatumId2, ConfigService::$tableData, $linkedDatumValue2);
+        $this->translateItem($this->secondaryLanguageId, $linkedDatumId2, ConfigService::$tableData, $datumValueSecondaryLanguage2);
+
+        $linkedContentDatumLinkId2 = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'datum_id' => $linkedDatumId2,
+            ]
+        );
+
+        $response = $this->classBeingTested->getById($contentId);
+
+        $this->assertEquals(
+            [
+                "id" => $contentId,
+                "slug" => $contentSlug,
+                "status" => $content["status"],
+                "type" => $content["type"],
+                "position" => $content["position"],
+                "parent_id" => $content["parent_id"],
+                "published_on" => $content["published_on"],
+                "created_on" => $content["created_on"],
+                "archived_on" => $content["archived_on"],
+                "fields" => [
+                    $linkedFieldKey => $linkedFieldValue,
+                ],
+                "datum" => [
+                    $linkedDatumKey => $linkedDatumValue,
+                    $linkedDatumKey2 => $linkedDatumValue2
+                ],
+            ],
+            $response
+        );
     }
 }
