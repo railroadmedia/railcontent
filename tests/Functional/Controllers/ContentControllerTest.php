@@ -162,7 +162,8 @@ class ContentControllerTest extends RailcontentTestCase
             'type' => $type,
             'created_on' => Carbon::now()->toDateTimeString(),
             'published_on' => null,
-            'archived_on' => null
+            'archived_on' => null,
+            'brand' => ConfigService::$brand
         ];
 
         $this->assertEquals($expectedResult, $content);
@@ -171,18 +172,7 @@ class ContentControllerTest extends RailcontentTestCase
 
     public function test_update_response_status()
     {
-        $content = [
-           // 'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $slug = implode('-', $this->faker->words());
 
@@ -214,7 +204,7 @@ class ContentControllerTest extends RailcontentTestCase
     public function test_update_with_negative_position()
     {
         $content = [
-          //  'slug' => $this->faker->word,
+            //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -222,9 +212,10 @@ class ContentControllerTest extends RailcontentTestCase
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
+            'brand' => ConfigService::$brand
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
 
         $response = $this->call('PUT', 'content/'.$contentId, [
 //            'slug' => $content['slug'],
@@ -240,7 +231,7 @@ class ContentControllerTest extends RailcontentTestCase
     public function test_update_not_pass_the_validation()
     {
         $content = [
-         //   'slug' => $this->faker->word,
+            //   'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -248,9 +239,10 @@ class ContentControllerTest extends RailcontentTestCase
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
+            'brand' => ConfigService::$brand
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
 
         $response = $this->call('PUT', 'content/'.$contentId);
 
@@ -266,7 +258,7 @@ class ContentControllerTest extends RailcontentTestCase
     public function test_after_update_content_is_returned_in_json_format()
     {
         $content = [
-          //  'slug' => $this->faker->word,
+            //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -274,9 +266,10 @@ class ContentControllerTest extends RailcontentTestCase
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
+            'brand' => ConfigService::$brand
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
 
         $new_slug = implode('-', $this->faker->words());
         $response = $this->call('PUT', 'content/'.$contentId,
@@ -317,7 +310,7 @@ class ContentControllerTest extends RailcontentTestCase
     public function test_content_service_return_updated_content_after_update()
     {
         $content = [
-          //  'slug' => $this->faker->word,
+            //  'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -325,9 +318,10 @@ class ContentControllerTest extends RailcontentTestCase
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
+            'brand' => ConfigService::$brand
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
 
         $new_slug = implode('-', $this->faker->words());
         $updatedContent = $this->serviceBeingTested->update($contentId, $new_slug, ContentService::STATUS_DRAFT, $content['type'], $content['position'], null, null, null);
@@ -342,7 +336,6 @@ class ContentControllerTest extends RailcontentTestCase
     public function test_service_delete_method_result()
     {
         $content = [
-         //   'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -350,9 +343,10 @@ class ContentControllerTest extends RailcontentTestCase
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
+            'brand' => ConfigService::$brand
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
 
         $content['id'] = $contentId;
 
@@ -372,7 +366,6 @@ class ContentControllerTest extends RailcontentTestCase
     public function test_controller_delete_method_response_status()
     {
         $content = [
-         //   'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
@@ -380,9 +373,10 @@ class ContentControllerTest extends RailcontentTestCase
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
+            'brand' => ConfigService::$brand
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
 
         $response = $this->call('DELETE', 'content/'.$contentId, ['deleteChildren' => 1]);
 
@@ -392,7 +386,7 @@ class ContentControllerTest extends RailcontentTestCase
             ConfigService::$tableContent,
             [
                 'id' => $contentId,
-             //   'slug' => $content['slug']
+                //   'slug' => $content['slug']
             ]
         );
     }
@@ -409,17 +403,17 @@ class ContentControllerTest extends RailcontentTestCase
         Event::fake();
 
         $content = [
-           // 'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
+             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => "1",
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
+            'brand' => ConfigService::$brand
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
 
         $new_slug = $this->faker->word;
 
@@ -440,20 +434,7 @@ class ContentControllerTest extends RailcontentTestCase
     {
         Event::fake();
 
-        $content = [
-            //'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => "1",
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-        $new_slug = $this->faker->word;
+        $contentId = $this->createContent();
 
         $response = $this->call('DELETE', 'content/'.$contentId);
 
@@ -466,17 +447,18 @@ class ContentControllerTest extends RailcontentTestCase
     public function test_restore_content_with_datum()
     {
         $content = [
-           // 'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => "1",
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
+            'archived_on' => null
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
+        //query()->table(ConfigService::$tableContent)->insertGetId($content);
         $contentSlug = $this->faker->word;
         $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
@@ -546,7 +528,8 @@ class ContentControllerTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
+        //query()->table(ConfigService::$tableContent)->insertGetId($content);
         $contentSlug = $this->faker->word;
         $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
@@ -560,7 +543,7 @@ class ContentControllerTest extends RailcontentTestCase
 
         // content that is linked via a field
         $linkedContent = [
-           // 'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => 2,
@@ -570,7 +553,8 @@ class ContentControllerTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $linkedContentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($linkedContent);
+        $linkedContentId = $this->createContent($linkedContent);
+        //query()->table(ConfigService::$tableContent)->insertGetId($linkedContent);
         $linkedContentSlug = $this->faker->word;
         $this->translateItem($this->classBeingTested->getUserLanguage(), $linkedContentId, ConfigService::$tableContent, $linkedContentSlug);
 
@@ -588,7 +572,7 @@ class ContentControllerTest extends RailcontentTestCase
         $content = $this->query()->table(ConfigService::$tableContent)->where(['id' => $contentId])->get()->first();
         $content['fields'] = [$fieldKey => $linkedContent];
 
-        $this->call('DELETE', 'content/field/1', [
+        $del = $this->call('DELETE', 'content/field/1', [
             'content_id' => $contentId
         ]);
 
@@ -622,7 +606,8 @@ class ContentControllerTest extends RailcontentTestCase
                 'parent_id' => $content['parent_id'],
                 'created_on' => $content['created_on'],
                 'archived_on' => $content['archived_on'],
-                'fields' => $content['fields']
+                'fields' => $content['fields'],
+                'brand' => ConfigService::$brand
             ]
         );
     }
@@ -640,13 +625,14 @@ class ContentControllerTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
+
         $contentSlug = $this->faker->word;
         $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
         // content that is linked via a field
         $linkedContent = [
-           // 'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => 2,
@@ -656,7 +642,8 @@ class ContentControllerTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $linkedContentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($linkedContent);
+        $linkedContentId = $this->createContent($linkedContent);
+
         $linkedContentSlug = $this->faker->word;
         $this->translateItem($this->classBeingTested->getUserLanguage(), $linkedContentId, ConfigService::$tableContent, $linkedContentSlug);
 
@@ -726,7 +713,7 @@ class ContentControllerTest extends RailcontentTestCase
     public function test_restore_multiple_fields()
     {
         $content = [
-           // 'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => "1",
@@ -736,7 +723,8 @@ class ContentControllerTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
+
         $contentSlug = $this->faker->word;
         $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
@@ -849,7 +837,8 @@ class ContentControllerTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
+
         $contentSlug = $this->faker->word;
         $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
@@ -864,7 +853,7 @@ class ContentControllerTest extends RailcontentTestCase
 
         // content linked
         $linkedContent = [
-           // 'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'position' => 2,
@@ -874,7 +863,8 @@ class ContentControllerTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $linkedContentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($linkedContent);
+        $linkedContentId = $this->createContent($linkedContent);
+
         $linkedContentSlug = $this->faker->word;
         $this->translateItem($this->classBeingTested->getUserLanguage(), $linkedContentId, ConfigService::$tableContent, $linkedContentSlug);
 
@@ -983,45 +973,11 @@ class ContentControllerTest extends RailcontentTestCase
 
     public function test_can_not_delete_content_linked()
     {
-        $content = [
-          //  'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => 1,
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-        $content2 = [
-          //  'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => 1,
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
+        $contentId = $this->createContent();
+        $contentId2 = $this->createContent();
 
         // content linked
-        $linkedContent = [
-          //  'slug' => $this->faker->word,
-            'status' => $this->faker->word,
-            'type' => $this->faker->word,
-            'position' => 2,
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $linkedContentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($linkedContent);
+        $linkedContentId = $this->createContent();
 
         $fieldKey = $this->faker->word;
 
@@ -1076,7 +1032,7 @@ class ContentControllerTest extends RailcontentTestCase
         //create courses
         for($i = 0; $i < 30; $i++) {
             $content = [
-            //    'slug' => $this->faker->word,
+                //    'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => $types[0],
                 'position' => $this->faker->numberBetween(),
@@ -1086,14 +1042,14 @@ class ContentControllerTest extends RailcontentTestCase
                 'archived_on' => null,
             ];
 
-            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+            $contentId = $this->createContent($content);
 
             $contents[$contentId] = array_merge(['id' => $contentId], $content);
         }
 
         //create library lessons
         $libraryLesson = [
-           // 'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => $this->faker->randomElement($statues),
             'type' => 'library lesson',
             'position' => $this->faker->numberBetween(),
@@ -1103,7 +1059,7 @@ class ContentControllerTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $this->query()->table(ConfigService::$tableContent)->insertGetId($libraryLesson);
+        $this->createContent($libraryLesson);
 
         //we expect to receive only first 10 courses with status 'draft' or 'published'
         $expectedContent = array_slice($contents, 0, 10, true);
@@ -1142,7 +1098,7 @@ class ContentControllerTest extends RailcontentTestCase
                 'archived_on' => null,
             ];
 
-            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+            $contentId = $this->createContent($content);
             $contentSlug = $this->faker->word;
             $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
             $contents[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
@@ -1185,21 +1141,7 @@ class ContentControllerTest extends RailcontentTestCase
 
     public function test_start_content()
     {
-        $content = [
-          //  'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => "1",
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-        $this->createAndLogInNewUser();
-
+        $contentId = $this->createContent();
         $response = $this->call('PUT', 'start', ['content_id' => $contentId]);
 
         $this->assertEquals(200, $response->status());
@@ -1219,18 +1161,7 @@ class ContentControllerTest extends RailcontentTestCase
 
     public function test_complete_content()
     {
-        $content = [
-           // 'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => "1",
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $userId = $this->createAndLogInNewUser();
 
@@ -1263,7 +1194,7 @@ class ContentControllerTest extends RailcontentTestCase
     public function test_save_user_progress_on_content()
     {
         $content = [
-           // 'slug' => $this->faker->word,
+            // 'slug' => $this->faker->word,
             'status' => ContentService::STATUS_DRAFT,
             'type' => $this->faker->word,
             'position' => "1",
@@ -1273,7 +1204,7 @@ class ContentControllerTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
 
         $userId = $this->createAndLogInNewUser();
 

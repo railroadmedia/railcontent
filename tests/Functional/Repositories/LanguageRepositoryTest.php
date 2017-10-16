@@ -52,6 +52,7 @@ class LanguageRepositoryTest extends RailcontentTestCase
             [
                 'id' => 1,
                 'user_id' => $this->userId,
+                'brand' => ConfigService::$brand,
                 'language_id' => $languageId
             ]
         );
@@ -159,5 +160,13 @@ class LanguageRepositoryTest extends RailcontentTestCase
         $this->assertEquals(201, $response->status());
 
         $this->assertEquals('"Set language with success."', $response->content());
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableUserLanguagePreference, [
+                'user_id' => $this->userId,
+                'language_id' => $languageId,
+                'brand' => ConfigService::$brand
+            ]
+        );
     }
 }

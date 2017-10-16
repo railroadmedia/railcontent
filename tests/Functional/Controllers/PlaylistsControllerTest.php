@@ -27,8 +27,8 @@ class PlaylistsControllerTest extends RailcontentTestCase
     public function test_add_content_to_playlist()
     {
         $playlist = [
-           // 'name' => $this->faker->word,
-            'type' => PlaylistsService::TYPE_PUBLIC
+            'type' => PlaylistsService::TYPE_PUBLIC,
+            'brand' => ConfigService::$brand
         ];
 
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
@@ -47,13 +47,14 @@ class PlaylistsControllerTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $expectedResults = [
             1 => [
                 'id' => 1,
                 'name' => $playlistName,
                 'type' => $playlist['type'],
+                'brand' => ConfigService::$brand,
                 'contents' => [
                     $contentId => [
                         'id' => $contentId,
@@ -86,7 +87,8 @@ class PlaylistsControllerTest extends RailcontentTestCase
             1 => [
                 'id' => 1,
                 'name' => $playlistName,
-                'type' => PlaylistsService::TYPE_PRIVATE
+                'type' => PlaylistsService::TYPE_PRIVATE,
+                'brand' => ConfigService::$brand
             ]
         ];
 
@@ -100,8 +102,8 @@ class PlaylistsControllerTest extends RailcontentTestCase
         $contentId = 1;
 
         $playlist = [
-            //'name' => $this->faker->word,
-            'type' => PlaylistsService::TYPE_PUBLIC
+            'type' => PlaylistsService::TYPE_PUBLIC,
+            'brand' => ConfigService::$brand
         ];
 
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
@@ -114,6 +116,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
                 'id' => 1,
                 'name' => $playlistName,
                 'type' => $playlist['type'],
+                'brand' => ConfigService::$brand,
                 'contents' => [
                     1 => [
                         'id' => 1,
@@ -130,7 +133,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
 
     public function test_store_playlist_private_service()
     {
-       // $userId = $this->createAndLogInNewUser();
+        // $userId = $this->createAndLogInNewUser();
         $paylistName = $this->faker->word();
         $isAdmin = false;
 
@@ -140,7 +143,8 @@ class PlaylistsControllerTest extends RailcontentTestCase
             1 => [
                 'id' => 1,
                 'name' => $paylistName,
-                'type' => PlaylistsService::TYPE_PRIVATE
+                'type' => PlaylistsService::TYPE_PRIVATE,
+                'brand' => ConfigService::$brand
             ]
         ];
 
@@ -149,7 +153,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
 
     public function test_store_playlist_public_service()
     {
-       // $userId = $this->createAndLogInNewUser();
+        // $userId = $this->createAndLogInNewUser();
         $paylistName = $this->faker->word();
         $isAdmin = true;
 
@@ -159,7 +163,8 @@ class PlaylistsControllerTest extends RailcontentTestCase
             1 => [
                 'id' => 1,
                 'name' => $paylistName,
-                'type' => PlaylistsService::TYPE_PUBLIC
+                'type' => PlaylistsService::TYPE_PUBLIC,
+                'brand' => ConfigService::$brand
             ]
         ];
 
@@ -168,12 +173,9 @@ class PlaylistsControllerTest extends RailcontentTestCase
 
     public function test_get_playlist_with_contents()
     {
-
-      //  $userId = $this->createAndLogInNewUser();
-
         $playlist = [
-           // 'name' => $this->faker->word,
-            'type' => PlaylistsService::TYPE_PUBLIC
+            'type' => PlaylistsService::TYPE_PUBLIC,
+            'brand' => ConfigService::$brand
         ];
 
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
@@ -181,31 +183,8 @@ class PlaylistsControllerTest extends RailcontentTestCase
         $playlistName = $this->faker->word;
         $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId, ConfigService::$tablePlaylists, $playlistName);
 
-        $content1 = [
-           // 'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
-
-        $content2 = [
-           // 'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
+        $contentId1 = $this->createContent();
+        $contentId2 = $this->createContent();
 
         $userContent1 = [
             'content_id' => $contentId1,
@@ -244,6 +223,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
                 'id' => $playlistId,
                 'name' => $playlistName,
                 'type' => $playlist['type'],
+                'brand' => ConfigService::$brand,
                 'contents' => [
                     $contentId1 => [
                         'id' => $contentId1,

@@ -38,6 +38,7 @@ class PlaylistsRepository extends LanguageRepository
                 $query->where(['type' => PlaylistsService::TYPE_PUBLIC])
                     ->orWhere([ConfigService::$tablePlaylists.'.user_id' => $userId]);
             })
+            ->where('brand', ConfigService::$brand)
             ->get()->toArray();
     }
 
@@ -53,7 +54,8 @@ class PlaylistsRepository extends LanguageRepository
         $playlist = $this->queryTable()->insertGetId(
             [
                 'type' => $type,
-                'user_id' => $userId
+                'user_id' => $userId,
+                'brand' => ConfigService::$brand
             ]
         );
         $this->saveTranslation(
@@ -83,6 +85,7 @@ class PlaylistsRepository extends LanguageRepository
                     'translation_'.ConfigService::$tablePlaylists.'.value as playlist_name',
                     ConfigService::$tablePlaylists.'.type as playlist_type',
                     ConfigService::$tablePlaylists.'.user_id as user_id',
+                    ConfigService::$tablePlaylists.'.brand as brand',
                     'usercontent.content_id as content_id',
                     'usercontent.state as content_state',
                     'usercontent.progress as content_progress'
@@ -109,7 +112,8 @@ class PlaylistsRepository extends LanguageRepository
             $playlistArr[$playlist['playlist_id']] = [
                 'id' => $playlist['playlist_id'],
                 'name' => $playlist['playlist_name'],
-                'type' => $playlist['playlist_type']];
+                'type' => $playlist['playlist_type'],
+                'brand' => $playlist['brand']];
         }
 
         foreach($playlists as $playlist) {

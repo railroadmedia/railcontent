@@ -54,7 +54,8 @@ class SearchService extends LanguageRepository implements SearchInterface
 
         $query
             ->whereIn(ConfigService::$tableContent.'.status', $statues)
-            ->whereIn(ConfigService::$tableContent.'.type', $types);
+            ->whereIn(ConfigService::$tableContent.'.type', $types)
+            ->where(ConfigService::$tableContent.'.brand', ConfigService::$brand);
 
         $parentId = null;
 
@@ -136,6 +137,7 @@ class SearchService extends LanguageRepository implements SearchInterface
                 'published_on' => $fieldWithContent['published_on'],
                 'created_on' => $fieldWithContent['created_on'],
                 'archived_on' => $fieldWithContent['archived_on'],
+                'brand' => $fieldWithContent['brand']
             ];
         }
 
@@ -156,6 +158,7 @@ class SearchService extends LanguageRepository implements SearchInterface
                     'published_on' => $linkedContents[$fieldWithContent['field_value']]['published_on'],
                     'created_on' => $linkedContents[$fieldWithContent['field_value']]['created_on'],
                     'archived_on' => $linkedContents[$fieldWithContent['field_value']]['archived_on'],
+                    'brand' => $linkedContents[$fieldWithContent['field_value']]['brand']
                 ];
 
                 if(array_key_exists('fields', $linkedContents[$fieldWithContent['field_value']])) {

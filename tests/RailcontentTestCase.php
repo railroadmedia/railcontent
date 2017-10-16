@@ -66,9 +66,9 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.tables', $defaultConfig['tables']);
         $app['config']->set('railcontent.database_connection_name', 'testbench');
         $app['config']->set('railcontent.cache_duration', 60);
-//        $app['config']->set('railcontent.subject_type_category', $defaultConfig['subject_type_category']);
-//        $app['config']->set('railcontent.subject_type_content', $defaultConfig['subject_type_content']);
-//        $app['config']->set('railcontent.category_status', $defaultConfig['category_status']);
+        $app['config']->set('railcontent.brand', $defaultConfig['brand']);
+        $app['config']->set('railcontent.available_languages', $defaultConfig['available_languages']);
+        $app['config']->set('railcontent.default_language', $defaultConfig['default_language']);
 
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testbench');
@@ -150,7 +150,7 @@ class RailcontentTestCase extends BaseTestCase
         $this->authManager->guard()->onceUsingId($userId);
 
         request()->setUserResolver(
-            function () use ($userId) {
+            function() use ($userId) {
                 return User::query()->find($userId);
             }
         );
@@ -160,25 +160,32 @@ class RailcontentTestCase extends BaseTestCase
 
     public function setUserLanguage($userId)
     {
-        return $this->databaseManager->connection()->query()->from(ConfigService::$tableUserLanguagePreference)->insertGetId(
+        return $this->databaseManager->connection()->query()->from(ConfigService::$tableUserLanguagePreference)->updateOrInsert(
             [
-                'user_id' => $userId,
-                'language_id' => 1
+                'user_id' => $userId,]
+            , [
+                'language_id' => 1,
+                'brand' => ConfigService::$brand
             ]
         );
     }
 
-    public function createContent()
+    public function createContent($content = null)
     {
-        $content = [
-            'status' => $this->faker->word,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
+        if(!$content) {
+            $content = [
+                'status' => $this->faker->word,
+                'type' => $this->faker->word,
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => null,
+                'published_on' => null,
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+                'brand' => ConfigService::$brand
+            ];
+        } else if(!array_key_exists('brand', $content)){
+            $content['brand'] = ConfigService::$brand;
+        }
 
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
@@ -188,7 +195,7 @@ class RailcontentTestCase extends BaseTestCase
     public function translateItem($language, $entityId, $entityType, $value)
     {
         $translation = [
-            'language_id' =>$language,
+            'language_id' => $language,
             'entity_type' => $entityType,
             'entity_id' => $entityId,
             'value' => $value

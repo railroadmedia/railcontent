@@ -98,6 +98,8 @@ class ConfigService
      * @var string
      */
     public static $defaultLanguage;
+
+    public static $brand;
     /**
      * @var string
      */

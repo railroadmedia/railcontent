@@ -18,9 +18,10 @@ return [
         'user_content_playlists' => 'railcontent_user_content_playlists',
         'language' => 'railcontent_language',
         'translations' => 'railcontent_translations',
-        'user_language_preference' => 'railcontent_user_language_preference'
-
+        'user_language_preference' => 'railcontent_user_language_preference',
     ],
+
     'available_languages' => ['en','fr'],
-    'default_language' => 'en'
+    'default_language' => 'en',
+    'brand' => 'drumeo'
 ];

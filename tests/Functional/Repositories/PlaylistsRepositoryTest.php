@@ -37,6 +37,7 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
 
         $playlist = [
             'type' => PlaylistsService::TYPE_PUBLIC,
+            'brand' => ConfigService::$brand,
             'user_id' => $this->userId
         ];
 
@@ -72,7 +73,8 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
             [
                 'id' => $results,
                 'user_id' => $playlist['userId'],
-                'type' => $playlist['type']
+                'type' => $playlist['type'],
+                'brand' => ConfigService::$brand
             ]
         );
 
@@ -121,7 +123,8 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
     {
         $playlist1 = [
             'type' => PlaylistsService::TYPE_PUBLIC,
-            'user_id' => $this->userId
+            'user_id' => $this->userId,
+            'brand' => ConfigService::$brand
         ];
 
         $playlistId1 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist1);
@@ -133,7 +136,8 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
 
         $playlist2 = [
             'type' => PlaylistsService::TYPE_PUBLIC,
-            'user_id' => $this->userId
+            'user_id' => $this->userId,
+            'brand' => ConfigService::$brand
         ];
 
         $playlistId2 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist2);
@@ -152,7 +156,8 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
     {
         $playlist1 = [
             'type' => PlaylistsService::TYPE_PRIVATE,
-            'user_id' => $this->userId
+            'user_id' => $this->userId,
+            'brand' => ConfigService::$brand
         ];
 
         $playlistId1 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist1);
@@ -162,7 +167,8 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
 
         $playlist2 = [
             'type' => PlaylistsService::TYPE_PRIVATE,
-            'user_id' => $this->userId
+            'user_id' => $this->userId,
+            'brand' => ConfigService::$brand
         ];
 
         $playlistId2 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist2);
@@ -181,7 +187,8 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
 
         $playlist = [
             'type' => PlaylistsService::TYPE_PRIVATE,
-            'user_id' => $userId
+            'user_id' => $userId,
+            'brand' => ConfigService::$brand
         ];
 
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
@@ -198,7 +205,7 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent($content);
         $contentSlug = $this->faker->word();
         $this->translateItem($this->languageId, $contentId, ConfigService::$tableContent, $contentSlug);
 
@@ -212,7 +219,7 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $contentId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
+        $contentId2 = $this->createContent($content2);
         $contentSlug2 = $this->faker->word();
         $this->translateItem($this->languageId, $contentId2, ConfigService::$tableContent, $contentSlug2);
 
@@ -266,8 +273,64 @@ class PlaylistsRepositoryTest extends RailcontentTestCase
             'id' => $playlistId,
             'name' => $playlistName,
             'type' => $playlist['type'],
+            'brand' => ConfigService::$brand,
             'contents' => $expectedContents
         ];
+
+        $this->assertEquals($expectedResults, $results);
+    }
+
+    public function test_get_playlists_from_brand()
+    {
+        $playlist1 = [
+            'type' => PlaylistsService::TYPE_PUBLIC,
+            'user_id' => $this->userId,
+            'brand' => ConfigService::$brand
+        ];
+
+        $playlistId1 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist1);
+
+        $playlistName1 = $this->faker->word;
+        $this->translateItem($this->languageId, $playlistId1, ConfigService::$tablePlaylists, $playlistName1);
+
+        $expectedResults[] = array_merge(['id' => $playlistId1, 'name' => $playlistName1], $playlist1);
+
+        $playlist2 = [
+            'type' => PlaylistsService::TYPE_PUBLIC,
+            'user_id' => $this->userId,
+            'brand' => ConfigService::$brand
+        ];
+
+        $playlistId2 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist2);
+
+        $playlistName2 = $this->faker->word;
+        $this->translateItem($this->languageId, $playlistId2, ConfigService::$tablePlaylists, $playlistName2);
+
+        $expectedResults[] = array_merge(['id' => $playlistId2, 'name' => $playlistName2], $playlist2);
+
+        $playlist3 = [
+            'type' => PlaylistsService::TYPE_PUBLIC,
+            'user_id' => $this->userId,
+            'brand' => $this->faker->word
+        ];
+
+        $playlistId3 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist3);
+
+        $playlistName3 = $this->faker->word;
+        $this->translateItem($this->languageId, $playlistId3, ConfigService::$tablePlaylists, $playlistName3);
+
+        $playlist4 = [
+            'type' => PlaylistsService::TYPE_PUBLIC,
+            'user_id' => $this->userId,
+            'brand' => $this->faker->word
+        ];
+
+        $playlistId4 = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist4);
+
+        $playlistName4 = $this->faker->word;
+        $this->translateItem($this->languageId, $playlistId4, ConfigService::$tablePlaylists, $playlistName4);
+
+        $results = $this->classBeingTested->getUserPlaylists($this->userId);
 
         $this->assertEquals($expectedResults, $results);
     }

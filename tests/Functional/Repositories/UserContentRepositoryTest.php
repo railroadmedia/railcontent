@@ -23,17 +23,7 @@ class UserContentRepositoryTest extends RailcontentTestCase
 
     public function test_start_content()
     {
-        $content = [
-            'status' => $this->faker->word,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $state = UserContentService::STATE_STARTED;
 
@@ -53,16 +43,7 @@ class UserContentRepositoryTest extends RailcontentTestCase
 
     public function test_complete_content()
     {
-        $content = [
-            'status' => $this->faker->word,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $userContent = [
             'content_id' => $contentId,
@@ -96,16 +77,7 @@ class UserContentRepositoryTest extends RailcontentTestCase
 
     public function test_save_user_progress_content()
     {
-        $content = [
-            'status' => $this->faker->word,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $userContent = [
             'content_id' => $contentId,
@@ -137,16 +109,7 @@ class UserContentRepositoryTest extends RailcontentTestCase
 
     public function test_get_user_content()
     {
-        $content = [
-            'status' => $this->faker->word,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $userContent = [
             'content_id' => $contentId,

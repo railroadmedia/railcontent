@@ -315,6 +315,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
             'parent_id' => null,
             'published_on' => null,
@@ -334,6 +335,7 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'id' => $contentId,
                 'status' => $content['status'],
                 'type' => $content['type'],
+                'brand' => ConfigService::$brand,
                 'position' => 1,
                 'parent_id' => null,
                 'published_on' => null,
@@ -358,6 +360,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content1 = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
             'parent_id' => null,
             'published_on' => null,
@@ -371,6 +374,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content2 = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => 1,
             'parent_id' => $contentId1,
             'published_on' => null,
@@ -382,6 +386,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content3 = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => 2,
             'parent_id' => $contentId1,
             'published_on' => null,
@@ -415,6 +420,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content1 = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
             'parent_id' => null,
             'published_on' => null,
@@ -427,6 +433,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content2 = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => 2,
             'parent_id' => null,
             'published_on' => null,
@@ -438,6 +445,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content3 = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => 3,
             'parent_id' => null,
             'published_on' => null,
@@ -489,6 +497,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content1 = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
             'parent_id' => null,
             'published_on' => null,
@@ -501,6 +510,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content2 = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => 2,
             'parent_id' => null,
             'published_on' => null,
@@ -512,6 +522,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content3 = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => 3,
             'parent_id' => null,
             'published_on' => null,
@@ -563,6 +574,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
             'parent_id' => null,
             'published_on' => null,
@@ -610,6 +622,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content1 = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => 1,
             'parent_id' => null,
             'published_on' => null,
@@ -622,6 +635,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content11 = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => 1,
             'parent_id' => $contentId1,
             'published_on' => null,
@@ -633,6 +647,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content12 = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => 2,
             'parent_id' => $contentId1,
             'published_on' => null,
@@ -644,6 +659,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content2 = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => 2,
             'parent_id' => null,
             'published_on' => null,
@@ -720,6 +736,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
             'parent_id' => null,
             'published_on' => null,
@@ -832,6 +849,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content = [
             'status' => $this->faker->word,
             'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
             'parent_id' => null,
             'published_on' => null,

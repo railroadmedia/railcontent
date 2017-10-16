@@ -35,6 +35,7 @@ class ContentRepository extends LanguageRepository implements SearchInterface
             [
                 'status' => $status,
                 'type' => $type,
+                'brand' => ConfigService::$brand,
                 'position' => $position,
                 'parent_id' => $parentId,
                 'published_on' => $publishedOn,
@@ -307,6 +308,7 @@ class ContentRepository extends LanguageRepository implements SearchInterface
                     ConfigService::$tableContent.'.published_on as published_on',
                     ConfigService::$tableContent.'.created_on as created_on',
                     ConfigService::$tableContent.'.archived_on as archived_on',
+                    ConfigService::$tableContent.'.brand as brand',
                     'allfieldsvalue.id as field_id',
                     'allfieldsvalue.key as field_key',
                     'allfieldsvalue.value as field_value',
@@ -492,6 +494,7 @@ class ContentRepository extends LanguageRepository implements SearchInterface
                     ConfigService::$tableContent.'.published_on as published_on',
                     ConfigService::$tableContent.'.created_on as created_on',
                     ConfigService::$tableContent.'.archived_on as archived_on',
+                    ConfigService::$tableContent.'.brand as brand',
                     ConfigService::$tableFields.'.id as field_id',
                     ConfigService::$tableFields.'.key as field_key',
                     ConfigService::$tableFields.'.value as field_value',

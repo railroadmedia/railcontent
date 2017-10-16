@@ -14,7 +14,8 @@ class LanguageRepository extends RepositoryBase
     {
         $user_preference = $this->connection()->table(ConfigService::$tableUserLanguagePreference)->where(
             [
-                'user_id' => $this->getAuthenticatedUserId(request())
+                'user_id' => $this->getAuthenticatedUserId(request()),
+                'brand' => ConfigService::$brand
             ]
         )->get()->first();
 
@@ -43,7 +44,8 @@ class LanguageRepository extends RepositoryBase
 
         $this->connection()->table(ConfigService::$tableUserLanguagePreference)->updateOrInsert(
             [
-                'user_id' => $userId
+                'user_id' => $userId,
+                'brand' => ConfigService::$brand
             ],
             [
                 'language_id' => $language['id']

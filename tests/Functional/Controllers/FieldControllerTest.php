@@ -33,18 +33,7 @@ class FieldControllerTest extends RailcontentTestCase
         $type = $this->faker->text(64);
         $position = $this->faker->numberBetween();
 
-        $content = [
-          //  'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $contentField = $this->serviceBeingTested->createField($contentId, null, $key, $value, $type, $position);
 
@@ -68,18 +57,7 @@ class FieldControllerTest extends RailcontentTestCase
         $type = $this->faker->word;
         $position = $this->faker->numberBetween();
 
-        $content = [
-           // 'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $response = $this->call('POST', 'content/field', [
             'content_id' => $contentId,
@@ -152,18 +130,7 @@ class FieldControllerTest extends RailcontentTestCase
 
     public function test_update_content_field_controller_method_response()
     {
-        $content = [
-           // 'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $field = [
             'key' => $this->faker->word,
@@ -220,18 +187,7 @@ class FieldControllerTest extends RailcontentTestCase
 
     public function test_update_content_field_not_pass_validation()
     {
-        $content = [
-          //  'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $field = [
             'key' => $this->faker->word,
@@ -261,18 +217,7 @@ class FieldControllerTest extends RailcontentTestCase
 
     public function test_delete_content_field_controller()
     {
-        $content = [
-          //  'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $field = [
             'key' => $this->faker->word,
@@ -308,18 +253,7 @@ class FieldControllerTest extends RailcontentTestCase
 
     public function test_update_content_field_method_from_service_response()
     {
-        $content = [
-            //'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $field = [
             'key' => $this->faker->word,
@@ -355,18 +289,7 @@ class FieldControllerTest extends RailcontentTestCase
 
     public function test_delete_content_field_method_from_service_response()
     {
-        $content = [
-          //  'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $field = [
             'key' => $this->faker->word,
@@ -398,18 +321,7 @@ class FieldControllerTest extends RailcontentTestCase
         $type = $this->faker->word;
         $position = $this->faker->numberBetween();
 
-        $content = [
-          //  'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $response = $this->call('POST', 'content/field', [
             'content_id' => $contentId,
@@ -429,18 +341,7 @@ class FieldControllerTest extends RailcontentTestCase
     {
         Event::fake();
 
-        $content = [
-           // 'slug' => $this->faker->word,
-            'status' => ContentService::STATUS_DRAFT,
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+        $contentId = $this->createContent();
 
         $field = [
             'key' => $this->faker->word,
