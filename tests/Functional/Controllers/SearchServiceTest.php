@@ -2211,4 +2211,71 @@ class SearchServiceTest extends RailcontentTestCase
             $response
         );
     }
+
+    public function test_get_contents_for_brand()
+    {
+        $otherBrand = $this->faker->word;
+
+        $page = 1;
+        $amount = 10;
+        $orderByDirection = 'desc';
+        $orderByColumn = 'published_on';
+        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $types = [$this->faker->word, $this->faker->word, $this->faker->word];
+        $parentId = null;
+        $includeFuturePublishedOn = false;
+        $requiredFields = [];
+
+        //create 10 contents for a brand value that it's not the value from the config file
+        for ($i=0; $i<10; $i++){
+            $content = [
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => null,
+                'published_on' => null,
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+                'brand' => $otherBrand
+            ];
+            $contentId = $this->createContent($content);
+
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->languageId, $contentId, ConfigService::$tableContent, $contentSlug);
+        }
+
+        //create 5 contents for the config brand value
+        for ($i=0; $i<5; $i++){
+            $content = [
+                'status' => $this->faker->randomElement($statues),
+                'type' => $this->faker->randomElement($types),
+                'position' => $this->faker->numberBetween(),
+                'parent_id' => null,
+                'published_on' => null,
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => null,
+                'brand' => ConfigService::$brand
+            ];
+            $contentId = $this->createContent($content);
+
+            $contentSlug = $this->faker->word;
+            $this->translateItem($this->languageId, $contentId, ConfigService::$tableContent, $contentSlug);
+
+            $expectedContent[$contentId] = array_merge(['id' => $contentId, 'slug' => $contentSlug], $content);
+        }
+
+        $response = $this->call('GET', '/', [
+            'page' => $page,
+            'amount' => $amount,
+            'fields' => $requiredFields,
+            'parent_id' => $parentId,
+            'statues' => $statues,
+            'types' => $types,
+            'order_by' => $orderByColumn,
+            'order' => $orderByDirection,
+            'include_future' => $includeFuturePublishedOn
+        ]);
+
+        $this->assertEquals($expectedContent, json_decode($response->content(), true));
+    }
 }
