@@ -20,7 +20,6 @@ class CreateUserLanguagePreferenceTable extends Migration
                 $table->integer('user_id')->index();
                 $table->integer('language_id')->index();
                 $table->string('brand', 255)->index();
-                $table->foreign('language_id')->references('id')->on(ConfigService::$tableLanguage);
             });
     }
 

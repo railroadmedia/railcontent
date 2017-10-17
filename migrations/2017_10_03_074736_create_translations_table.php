@@ -22,8 +22,7 @@ class CreateTranslationsTable extends Migration
                 $table->integer('language_id')->index();
                 $table->string('value', 255)->index();
 
-                $table->unique(['entity_type','entity_id','language_id']);
-                $table->foreign('language_id')->references('id')->on(ConfigService::$tableLanguage);
+                $table->unique(['entity_type','entity_id','language_id'], 'et_ei_li');
             });
     }
 
