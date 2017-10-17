@@ -5,26 +5,45 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\FieldRepository;
+use Railroad\Railcontent\Repositories\PermissionRepository;
+use Railroad\Railcontent\Repositories\UserContentRepository;
 use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Requests\ContentRequest;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Services\SearchService;
+use Railroad\Railcontent\Services\UserContentService;
 
 class ContentController extends Controller
 {
     /**
      * @var ContentService
      */
-    private $contentService;
+    private $contentService, $userContentService, $contentRepository, $search;
 
     /**
      * ContentController constructor.
      *
      * @param ContentService $contentService
+     * @param ContentRepository $contentRepository
+     * @param UserContentService $userContentService
      */
-    public function __construct(ContentService $contentService)
+    public function __construct(ContentService $contentService, ContentRepository $contentRepository, UserContentService $userContentService)
     {
         $this->contentService = $contentService;
+        $this->userContentService = $userContentService;
+        $this->contentRepository = $contentRepository;
+        $this->search = new SearchService(
+            new FieldRepository(
+                new PermissionRepository(
+                    new UserContentRepository(
+                        $this->contentRepository
+                    )
+                )
+            )
+        );
     }
 
     /**
@@ -70,22 +89,12 @@ class ContentController extends Controller
          *
          */
 
-        $contents = $this->contentService->getPaginated(
-            $request->input('page'),
-            $request->input('amount'),
-            $request->input('order'),
-            $request->input('order_by'),
-            $request->input('statuses'),
-            $request->input('types'),
-            $request->input('fields'),
-            $request->input('parent_slug'),
-            $request->input('include_future_published_on')
-        );
+        $contents = $this->search->getPaginated();
 
         return response()->json($contents, 200);
     }
 
-    /** Create a new category and return it in JSON format
+    /** Create a new content and return it in JSON format
      *
      * @param ContentRequest $request
      * @return JsonResponse
@@ -104,7 +113,7 @@ class ContentController extends Controller
         return response()->json($content, 200);
     }
 
-    /** Update a category based on category id and return it in JSON format
+    /** Update a content based on content id and return it in JSON format
      *
      * @param integer $contentId
      * @param ContentRequest $request
@@ -112,14 +121,17 @@ class ContentController extends Controller
      */
     public function update($contentId, ContentRequest $request)
     {
-        $content = $this->contentService->getById($contentId);
+        $content = $this->search->getById($contentId);
 
+        //check if content exist
         if(is_null($content)) {
             return response()->json('Update failed, content not found with id: '.$contentId, 404);
         }
 
+        //call the event that save a new content version in the database
         event(new ContentUpdated($contentId));
 
+        //update content with the data sent on the request
         $content = $this->contentService->update(
             $contentId,
             $request->input('slug'),
@@ -135,7 +147,7 @@ class ContentController extends Controller
     }
 
     /**
-     * Call the delete method if the category exist
+     * Call the delete method if the content exist
      *
      * @param integer $contentId
      * @param Request $request
@@ -143,12 +155,14 @@ class ContentController extends Controller
      */
     public function delete($contentId, Request $request)
     {
-        $content = $this->contentService->getById($contentId);
+        $content = $this->search->getById($contentId);
 
+        //check if content exist
         if(is_null($content)) {
             return response()->json('Delete failed, content not found with id: '.$contentId, 404);
         }
 
+        //check if the content it's being referenced by other content
         $linkedWithContent = $this->contentService->linkedWithContent($contentId);
 
         if($linkedWithContent->isNotEmpty()) {
@@ -157,9 +171,11 @@ class ContentController extends Controller
             return response()->json('This content is being referenced by other content ('.$ids.'), you must delete that content first.', 404);
         }
 
+        //call the event that save a new content version in the database
         event(new ContentUpdated($contentId));
 
-        $deleted = $this->contentService->delete($contentId, $request->input('delete_children'));
+        //delete content
+        $deleted = $this->contentService->delete($content, $request->input('delete_children'));
 
         return response()->json($deleted, 200);
     }
@@ -171,14 +187,76 @@ class ContentController extends Controller
      */
     public function restoreContent($versionId)
     {
+        //get the content data saved in the database for the version id
         $version = $this->contentService->getContentVersion($versionId);
 
         if(is_null($version)) {
             return response()->json('Restore content failed, version not found with id: '.$versionId, 404);
         }
 
+        //restore content
         $restored = $this->contentService->restoreContent($versionId);
 
         return response()->json($restored, 200);
+    }
+
+    /** Start a content for the authenticated user
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function startContent(Request $request)
+    {
+        $content = $this->contentService->getById($request->input('content_id'));
+
+        if(is_null($content)) {
+            return response()->json('Start content failed, content not found with id: '.$request->input('content_id'), 404);
+        }
+
+        $response = $this->userContentService->startContent($request->input('content_id'));
+
+        return response()->json($response, 200);
+    }
+
+    /** Set content as complete for the authenticated user
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function completeContent(Request $request)
+    {
+        $content = $this->contentService->getById($request->input('content_id'));
+
+        if(is_null($content)) {
+            return response()->json('Complete content failed, content not found with id: '.$request->input('content_id'), 404);
+        }
+
+        $response = $this->userContentService->completeContent($request->input('content_id'));
+
+        return response()->json($response, 201);
+    }
+
+    /** Save the progress on a content for the authenticated user
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function saveProgress(Request $request)
+    {
+        $content = $this->contentService->getById($request->input('content_id'));
+
+        if(is_null($content)) {
+            return response()->json('Save user progress failed, content not found with id: '.$request->input('content_id'), 404);
+        }
+
+        $response = $this->userContentService->saveContentProgress($request->input('content_id'), $request->input('progress'));
+
+        return response()->json($response, 201);
+    }
+
+    /** Get content based on id
+     * @param integer $contentId
+     * @return array|mixed|null
+     */
+    public function getContent($contentId)
+    {
+        return $this->search->getById($contentId);
     }
 }

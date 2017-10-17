@@ -12,7 +12,7 @@ class ContentService
     /**
      * @var ContentRepository
      */
-    private $contentRepository, $versionRepository, $fieldRepository, $datumRepository;
+    private $contentRepository, $versionRepository, $fieldRepository, $datumRepository, $search;
 
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
@@ -28,71 +28,14 @@ class ContentService
         ContentRepository $contentRepository,
         VersionRepository $versionRepository,
         FieldRepository $fieldRepository,
-        DatumRepository $datumRepository)
+        DatumRepository $datumRepository,
+        SearchService $searchService)
     {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
         $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
-    }
-
-    /**
-     * @param int $page
-     * @param int $amount
-     * @param array $statues
-     * @param array $types
-     * @param array $requiredFields
-     * @param null $parentSlug
-     * @param bool $includeFuturePublishedOn
-     */
-    public function getPaginated(
-        $page,
-        $amount,
-        $orderByDirection,
-        $orderByColumn,
-        array $statues = [],
-        array $types = [],
-        array $requiredFields = [],
-        $parentSlug = null,
-        $includeFuturePublishedOn = false
-    )
-    {
-        $parentId = null;
-
-        if(!is_null($parentSlug)) {
-            $parent = $this->getBySlug($parentSlug);
-            $parentId = key($parent);
-        }
-
-        return $this->contentRepository->getPaginated(
-            $page,
-            $amount,
-            $orderByDirection,
-            $orderByColumn,
-            $statues,
-            $types,
-            $requiredFields,
-            $parentId,
-            $includeFuturePublishedOn
-        );
-    }
-
-    /**
-     * Call the get by id method from repository and return the category
-     *
-     * @param string $slug
-     * @param int|null $parentSlug
-     * @return array|null
-     */
-    public function getBySlug($slug, $parentSlug = null)
-    {
-        $parentId = null;
-
-        if(!is_null($parentSlug)) {
-            $parentId = $this->getBySlug($parentSlug);
-        }
-
-        return $this->contentRepository->getBySlug($slug, $parentId);
+        $this->search = $searchService;
     }
 
     /**
@@ -159,19 +102,19 @@ class ContentService
      */
     public function getById($id)
     {
-        return $this->contentRepository->getById($id);
+        return $this->search->getById($id);
     }
 
     /**
      * Call the delete method from repository and returns true if the category was deleted
      *
-     * @param integer $id
+     * @param array $content
      * @param bool $deleteChildren
      * @return bool
      */
-    public function delete($id, $deleteChildren = false)
+    public function delete($content, $deleteChildren = false)
     {
-        return $this->contentRepository->delete($id, $deleteChildren) > 0;
+        return $this->contentRepository->delete($content, $deleteChildren) > 0;
     }
 
     /**
@@ -249,7 +192,7 @@ class ContentService
             }
         }
 
-        return $this->contentRepository->getById($contentId);
+        return $this->getById($contentId);
     }
 
     /**

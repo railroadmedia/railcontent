@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Railroad\Railcontent\Services\ConfigService;
 
-class CreatePermissionsTable extends Migration
+class CreateUserContentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,13 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create(
-            ConfigService::$tablePermissions,
+        Schema::create(ConfigService::$tableUserContent,
             function(Blueprint $table) {
                 $table->increments('id');
-                $table->dateTime('created_on')->index();
+                $table->integer('content_id')->index();
+                $table->integer('user_id')->index();
+                $table->string('state', 255)->index();
+                $table->integer('progress')->index();
             });
     }
 
@@ -29,6 +31,6 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tablePermissions);
+        Schema::dropIfExists(ConfigService::$tableUserContent);
     }
 }

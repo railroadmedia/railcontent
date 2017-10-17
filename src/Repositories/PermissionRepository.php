@@ -1,23 +1,31 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: roxana
- * Date: 9/7/2017
- * Time: 9:29 AM
- */
 
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\SearchInterface;
+use Railroad\Railcontent\Services\SearchService;
 
 /**
  * Class PermissionRepository
  *
  * @package Railroad\Railcontent\Repositories
  */
-class PermissionRepository extends RepositoryBase
+class PermissionRepository extends LanguageRepository implements SearchInterface
 {
+    protected $search, $databaseManager;
+
+    /**
+     * Search constructor.
+     * @param SearchInterface $searchService
+     */
+    public function __construct(SearchInterface $search)
+    {
+        $this->search = $search;
+    }
+
     /**
      * Create a new permisssion and return the permission id
      *
@@ -28,8 +36,16 @@ class PermissionRepository extends RepositoryBase
     {
         $permissionId = $this->queryTable()->insertGetId(
             [
-                'name' => $name,
                 'created_on' => Carbon::now()->toDateTimeString(),
+            ]
+        );
+
+        //save permission name
+        $this->saveTranslation(
+            [
+                'entity_type' => ConfigService::$tablePermissions,
+                'entity_id' => $permissionId,
+                'value' => $name
             ]
         );
 
@@ -45,9 +61,18 @@ class PermissionRepository extends RepositoryBase
      */
     public function update($id, $name)
     {
-        $this->queryTable()->where('id', $id)->update(
+        //delete old permission nanme
+        $this->deleteTranslations([
+            'entity_type' => ConfigService::$tablePermissions,
+            'entity_id' => $id
+        ]);
+
+        //save new permission name
+        $this->saveTranslation(
             [
-                'name' => $name
+                'entity_type' => ConfigService::$tablePermissions,
+                'entity_id' => $id,
+                'value' => $name
             ]
         );
 
@@ -62,6 +87,12 @@ class PermissionRepository extends RepositoryBase
      */
     public function delete($id)
     {
+        //delete permission name
+        $this->deleteTranslations([
+            'entity_type' => ConfigService::$tablePermissions,
+            'entity_id' => $id
+        ]);
+
         $delete = $this->queryTable()->where('id', $id)->delete();
 
         return $delete;
@@ -69,7 +100,10 @@ class PermissionRepository extends RepositoryBase
 
     public function getAll()
     {
-        return $this->queryTable()->get();
+        $query = $this->queryTable();
+        $query = $this->addTranslations($query);
+
+        return $query->get();
     }
 
     /**
@@ -80,7 +114,12 @@ class PermissionRepository extends RepositoryBase
      */
     public function getById($id)
     {
-        return $this->queryTable()->where('id', $id)->get()->first();
+        $query = $this->queryTable();
+        $query = $this->addTranslations($query);
+
+        return $query
+            ->select(ConfigService::$tablePermissions.'.*', 'translation_'.ConfigService::$tablePermissions.'.value as name')
+            ->where(ConfigService::$tablePermissions.'.id', $id)->get()->first();
     }
 
     /**
@@ -132,7 +171,7 @@ class PermissionRepository extends RepositoryBase
      */
     public function queryTable()
     {
-        return parent::connection()->table(ConfigService::$tablePermissions);
+        return parent::connection()->table(ConfigService::$tablePermissions)->select(ConfigService::$tablePermissions.'.*');
     }
 
     /**
@@ -141,5 +180,40 @@ class PermissionRepository extends RepositoryBase
     public function contentPermissionQuery()
     {
         return parent::connection()->table(ConfigService::$tableContentPermissions);
+    }
+
+    /** Generate the query builder
+     * @return Builder
+     */
+    public function generateQuery()
+    {
+        $query = $this->search->generateQuery();
+
+        //get permissions from requests or empty array
+        $permissions = request()->permissions ?? [];
+
+        $query->leftJoin(
+            ConfigService::$tableContentPermissions, function($join) {
+            return $join->on(ConfigService::$tableContentPermissions.'.content_id', ConfigService::$tableContent.'.id')
+                ->orOn(ConfigService::$tableContentPermissions.'.content_type', ConfigService::$tableContent.'.type');
+        }
+        )
+            ->leftJoin(
+                ConfigService::$tablePermissions,
+                ConfigService::$tablePermissions.'.id',
+                '=',
+                ConfigService::$tableContentPermissions.'.required_permission_id'
+            )
+            ->leftJoin(
+                ConfigService::$tableTranslations, function($join) {
+                return $join->on(ConfigService::$tableTranslations.'.entity_id', ConfigService::$tablePermissions.'.id')
+                    ->where(ConfigService::$tableTranslations.'.entity_type', '=', ConfigService::$tablePermissions);
+            }
+            )
+            ->where(function($builder) use ($permissions) {
+                return $builder->whereNull(ConfigService::$tablePermissions.'.id')
+                    ->orWhereIn(ConfigService::$tableTranslations.'.value', $permissions);
+            });
+        return $query;
     }
 }

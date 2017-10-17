@@ -17,9 +17,9 @@ class RepositoryBase
     /**
      * CategoryRepository constructor.
      */
-    public function __construct(DatabaseManager $databaseManager)
+    public function __construct()
     {
-        $this->databaseManager = $databaseManager;
+        $this->databaseManager = app('db');
     }
 
     /**
@@ -27,7 +27,7 @@ class RepositoryBase
      */
     protected function connection()
     {
-        return $this->databaseManager->connection(ConfigService::$databaseConnectionName);
+        return app('db')->connection(ConfigService::$databaseConnectionName);
     }
 
     /**

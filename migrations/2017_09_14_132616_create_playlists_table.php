@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Railroad\Railcontent\Services\ConfigService;
 
-class CreatePermissionsTable extends Migration
+class CreatePlaylistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,12 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create(
-            ConfigService::$tablePermissions,
+        Schema::create(ConfigService::$tablePlaylists,
             function(Blueprint $table) {
                 $table->increments('id');
-                $table->dateTime('created_on')->index();
+                $table->string('type', 64)->index();
+                $table->string('brand', 255)->index();
+                $table->integer('user_id')->nullable();
             });
     }
 
@@ -29,6 +30,6 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tablePermissions);
+        Schema::dropIfExists(ConfigService::$tablePlaylists);
     }
 }

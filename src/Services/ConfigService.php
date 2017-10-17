@@ -50,11 +50,56 @@ class ConfigService
     public static $tablePermissions;
 
     /**
-     * @var
+     * @var string
      */
     public static $tableContentPermissions;
 
+    /**
+     * @var string
+     */
+    public static $tableUserContent;
 
+    /**
+     * @var string
+     */
+    public static $tablePlaylists;
+
+    /**
+     * @var string
+     */
+    public static $tableUserContentPlaylists;
+
+    /**
+     * @var string
+     */
+    public static $tableLanguage;
+
+    /**
+     * @var string
+     */
+    public static $tableTranslations;
+
+    /**
+     * @var string
+     */
+    public static $tableUserLanguagePreference;
+
+    /*
+     * @var array
+     */
+    public static $translatableTables;
+
+    /**
+     * @var array
+     */
+    public static $availableLanguages;
+
+    /**
+     * @var string
+     */
+    public static $defaultLanguage;
+
+    public static $brand;
     /**
      * @var string
      */

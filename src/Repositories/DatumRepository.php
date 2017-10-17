@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 
-class DatumRepository extends RepositoryBase
+class DatumRepository extends LanguageRepository
 {
     /**
      * Update or insert a new record in railcontent_data table
@@ -17,23 +17,38 @@ class DatumRepository extends RepositoryBase
      */
     public function updateOrCreateDatum($id, $key, $value, $position)
     {
-        $update = $this->query()->where('id', $id)->update(
+        //delete old datum value from translation table
+        $this->deleteTranslations(
+            [
+                'entity_type' => ConfigService::$tableData,
+                'entity_id' => $id
+            ]
+        );
+
+        $update = $this->query()->where(ConfigService::$tableData.'.id', $id)->update(
             [
                 'key' => $key,
-                'value' => $value,
                 'position' => $position
             ]
         );
 
-        if(!$update){
+        if(!$update) {
             $id = $this->query()->insertGetId(
                 [
                     'key' => $key,
-                    'value' => $value,
                     'position' => $position
                 ]
             );
         }
+
+        //save new value
+        $this->saveTranslation(
+            [
+                'entity_type' => ConfigService::$tableData,
+                'entity_id' => $id,
+                'value' => $value
+            ]
+        );
 
         return $id;
     }
@@ -45,15 +60,33 @@ class DatumRepository extends RepositoryBase
      */
     public function deleteDatum($id)
     {
+        //delete datum value
+        $this->deleteTranslations(
+            [
+                'entity_type' => ConfigService::$tableData,
+                'entity_id' => $id
+            ]
+        );
+
         return $this->query()->where([
                 'id' => $id
             ]
         )->delete();
     }
 
+    /** Get datum details based on key and value
+     * @param string $key
+     * @param string $value
+     * @return array
+     */
     public function getDatumByKeyAndValue($key, $value)
     {
-        return $this->query()->where(['key' => $key, 'value' => $value])->get()->first();
+        $builder = $this->query();
+        $builder = $this->addTranslations($builder);
+
+        return $builder
+            ->select(ConfigService::$tableData.'.*', 'translation_'.ConfigService::$tableData.'.value as value')
+            ->where(['key' => $key, 'value' => $value])->get()->first();
     }
 
     /**

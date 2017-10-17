@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Railroad\Railcontent\Services\ConfigService;
 
-class CreatePermissionsTable extends Migration
+class CreateUserLanguagePreferenceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,13 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create(
-            ConfigService::$tablePermissions,
+        Schema::create(ConfigService::$tableUserLanguagePreference,
             function(Blueprint $table) {
                 $table->increments('id');
-                $table->dateTime('created_on')->index();
+                $table->integer('user_id')->index();
+                $table->integer('language_id')->index();
+                $table->string('brand', 255)->index();
+                $table->foreign('language_id')->references('id')->on(ConfigService::$tableLanguage);
             });
     }
 
@@ -29,6 +31,6 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tablePermissions);
+        Schema::dropIfExists(ConfigService::$tableUserLanguagePreference);
     }
 }
