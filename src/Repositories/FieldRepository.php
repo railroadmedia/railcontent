@@ -29,14 +29,6 @@ class FieldRepository extends LanguageRepository implements SearchInterface
      */
     public function updateOrCreateField($id, $key, $value, $type, $position)
     {
-        //delete old translation
-        $this->deleteTranslations(
-            [
-                'entity_type' => ConfigService::$tableFields,
-                'entity_id' => $id
-            ]
-        );
-
         $update = $this->query()->where('id', $id)->update(
             [
                 'key' => $key,
@@ -57,14 +49,6 @@ class FieldRepository extends LanguageRepository implements SearchInterface
             );
         }
 
-        //save new translation
-        $this->saveTranslation(
-            [
-                'entity_type' => ConfigService::$tableFields,
-                'entity_id' => $id,
-                'value' => $value
-            ]
-        );
         return $id;
     }
 

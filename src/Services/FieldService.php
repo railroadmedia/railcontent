@@ -28,19 +28,9 @@ class FieldService
      * @param string $value
      * @return array
      */
-    public function createField($contentId, $fieldId = null, $key, $value, $type, $position)
+    public function createField($contentId, $key, $value, $type, $position)
     {
-        $fieldId = $this->fieldReposity->updateOrCreateField($fieldId, $key, $value, $type, $position);
-
-        if($type != 'content_id') {
-            $this->fieldReposity->saveTranslation(
-                [
-                    'entity_type' => ConfigService::$tableFields,
-                    'entity_id' => $fieldId,
-                    'value' => $value
-                ]
-            );
-        }
+        $fieldId = $this->fieldReposity->updateOrCreateField(null, $key, $value, $type, $position);
 
         $this->contentRepository->linkField($contentId, $fieldId);
 

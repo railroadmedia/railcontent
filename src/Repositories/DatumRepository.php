@@ -17,14 +17,6 @@ class DatumRepository extends LanguageRepository
      */
     public function updateOrCreateDatum($id, $key, $value, $position)
     {
-        //delete old datum value from translation table
-        $this->deleteTranslations(
-            [
-                'entity_type' => ConfigService::$tableData,
-                'entity_id' => $id
-            ]
-        );
-
         $update = $this->query()->where(ConfigService::$tableData.'.id', $id)->update(
             [
                 'key' => $key,
@@ -40,15 +32,6 @@ class DatumRepository extends LanguageRepository
                 ]
             );
         }
-
-        //save new value
-        $this->saveTranslation(
-            [
-                'entity_type' => ConfigService::$tableData,
-                'entity_id' => $id,
-                'value' => $value
-            ]
-        );
 
         return $id;
     }

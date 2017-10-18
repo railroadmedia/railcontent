@@ -23,9 +23,9 @@ class DatumService
      * @param integer $position
      * @return array
      */
-    public function createDatum($contentId, $dataId = null, $key, $value, $position)
+    public function createDatum($contentId, $key, $value, $position)
     {
-        $dataId = $this->datumRepository->updateOrCreateDatum($dataId, $key, $value, $position);
+        $dataId = $this->datumRepository->updateOrCreateDatum(null, $key, $value, $position);
 
         $this->contentRepository->linkDatum($contentId, $dataId);
 

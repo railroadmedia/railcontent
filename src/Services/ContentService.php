@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Services;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\DatumRepository;
 use Railroad\Railcontent\Repositories\FieldRepository;
+use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Repositories\VersionRepository;
 
 class ContentService
@@ -12,7 +13,29 @@ class ContentService
     /**
      * @var ContentRepository
      */
-    private $contentRepository, $versionRepository, $fieldRepository, $datumRepository, $search;
+    private $contentRepository;
+
+    /**
+     * @var VersionRepository
+     */
+    private $versionRepository;
+
+    /**
+     * @var FieldRepository
+     */
+    private $fieldRepository;
+
+    /**
+     * @var DatumRepository
+     */
+    private $datumRepository;
+
+    /**
+     * @var SearchService
+     */
+    private $search;
+
+
 
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
@@ -23,14 +46,18 @@ class ContentService
      * ContentService constructor.
      *
      * @param ContentRepository $contentRepository
+     * @param VersionRepository $versionRepository
+     * @param FieldRepository $fieldRepository
+     * @param DatumRepository $datumRepository
+     * @param SearchService $searchService
      */
     public function __construct(
         ContentRepository $contentRepository,
         VersionRepository $versionRepository,
         FieldRepository $fieldRepository,
         DatumRepository $datumRepository,
-        SearchService $searchService)
-    {
+        SearchService $searchService
+    ) {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
         $this->fieldRepository = $fieldRepository;
@@ -47,11 +74,28 @@ class ContentService
      * @param integer $position
      * @param integer $parentId
      * @param string|null $publishedOn
+     * @param null $language
      * @return array
      */
-    public function create($slug, $status, $type, $position, $parentId, $publishedOn = null)
-    {
-        $id = $this->contentRepository->create($slug, $status, $type, $position, $parentId, $publishedOn);
+    public function create(
+        $slug,
+        $status,
+        $type,
+        $position,
+        $language = null,
+        $parentId = null,
+        $publishedOn = null
+    ) {
+        $id =
+            $this->contentRepository->create(
+                $slug,
+                $status,
+                $type,
+                $position,
+                $language ?? ConfigService::$defaultLanguage,
+                $parentId,
+                $publishedOn
+            );
 
         return $this->getById($id);
     }
@@ -61,10 +105,11 @@ class ContentService
      *
      * @param integer $id
      * @param string $slug
-     * @param integer $position
      * @param string $status
      * @param string $type
-     * @param integer $parentId
+     * @param integer $position
+     * @param string|null $language
+     * @param integer|null $parentId
      * @param string|null $publishedOn
      * @param string|null $archivedOn
      * @return array
@@ -75,17 +120,18 @@ class ContentService
         $status,
         $type,
         $position,
-        $parentId,
-        $publishedOn,
-        $archivedOn
-    )
-    {
+        $language = null,
+        $parentId = null,
+        $publishedOn = null,
+        $archivedOn = null
+    ) {
         $this->contentRepository->update(
             $id,
             $slug,
             $status,
             $type,
             $position,
+            $language,
             $parentId,
             $publishedOn,
             $archivedOn
@@ -119,6 +165,7 @@ class ContentService
 
     /**
      * Get old version content based on the versionId, restore the content data, link fields and datum
+     *
      * @param integer $versionId
      * @return bool
      */
@@ -144,35 +191,47 @@ class ContentService
             $oldContent['archived_on']
         );
 
-
         // unlink all fields and datum
         $this->contentRepository->unlinkField($contentId);
         $this->contentRepository->unlinkDatum($contentId);
 
         //link fields from content version
-        if(array_key_exists('fields', $oldContent)) {
+        if (array_key_exists('fields', $oldContent)) {
 
-            foreach($oldContent['fields'] as $key => $value) {
+            foreach ($oldContent['fields'] as $key => $value) {
 
-                if(is_array($value)) {
+                if (is_array($value)) {
 
                     //check if file type is 'content_id'
-                    if(array_key_exists('id', $value)) {
+                    if (array_key_exists('id', $value)) {
 
                         $linkedContentField = $this->getById($value['id']);
 
                         //check if the linked content still exist; if not create a new content
                         $linkedContentFieldId = (is_null($linkedContentField)) ?
-                            $this->contentRepository->create($value['slug'], $value['status'], $value['type'], $value['position'], $value['parent_id'], $value['published_on']) :
+                            $this->contentRepository->create(
+                                $value['slug'],
+                                $value['status'],
+                                $value['type'],
+                                $value['position'],
+                                $value['parent_id'],
+                                $value['published_on']
+                            ) :
                             $linkedContentField['id'];
 
                         //create field if not exist and link it to content
-                        $this->restoreContentField($contentId, $key, $linkedContentFieldId, 'content_id', null);
+                        $this->restoreContentField(
+                            $contentId,
+                            $key,
+                            $linkedContentFieldId,
+                            'content_id',
+                            null
+                        );
 
                     } else {
 
                         //field type it's multiple
-                        foreach($value as $pos => $val) {
+                        foreach ($value as $pos => $val) {
                             //create field if not exist and link it to content
                             $this->restoreContentField($contentId, $key, $val, 'multiple', $pos);
                         }
@@ -186,8 +245,8 @@ class ContentService
         }
 
         //link datum from content version
-        if(array_key_exists('datum', $oldContent)) {
-            foreach($oldContent['datum'] as $key => $value) {
+        if (array_key_exists('datum', $oldContent)) {
+            foreach ($oldContent['datum'] as $key => $value) {
                 $this->restoreContentDatum($contentId, $key, $value);
             }
         }
@@ -197,6 +256,7 @@ class ContentService
 
     /**
      * Create field if not exist and link it to the content
+     *
      * @param integer $contentId
      * @param string $key
      * @param string $value
@@ -219,6 +279,7 @@ class ContentService
 
     /**
      * Create datum if not exist and link it to the content
+     *
      * @param integer $contentId
      * @param string $key
      * @param string $value
@@ -236,6 +297,7 @@ class ContentService
 
     /**
      * Get a collection with the contents Ids, where the content it's linked
+     *
      * @param integer $contentId
      * @return \Illuminate\Support\Collection
      */
@@ -246,6 +308,7 @@ class ContentService
 
     /**
      * Get the content version based on id
+     *
      * @param integer $versionId
      * @return mixed
      */
@@ -253,5 +316,44 @@ class ContentService
     {
         $restoredContentVersion = $this->versionRepository->get($versionId);
         return $restoredContentVersion;
+    }
+
+    /**
+     * @param $text
+     * @return mixed|string
+     */
+    public function slugify($text)
+    {
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // remove duplicate -
+        $text = preg_replace('~-+~', '-', $text);
+
+        // lowercase
+        $text = strtolower($text);
+
+        if (empty($text)) {
+            return 'n-a';
+        }
+
+        return $text;
+    }
+
+    /**
+     * @param array $contentPermissionIds
+     * @return $this
+     */
+    public function setContentPermissionIds(array $contentPermissionIds)
+    {
+        PermissionRepository::$availableContentPermissionIds = $contentPermissionIds;
+
+        return $this;
     }
 }

@@ -21,7 +21,10 @@ return [
         'user_language_preference' => 'railcontent_user_language_preference',
     ],
 
-    'available_languages' => ['en','fr'],
-    'default_language' => 'en',
-    'brand' => 'drumeo'
+    'brand' => 'drumeo',
+
+    'default_language' => 'en-US',
+    'available_languages' => [
+        'es-US',
+    ]
 ];

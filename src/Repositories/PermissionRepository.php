@@ -4,9 +4,9 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\SearchInterface;
-use Railroad\Railcontent\Services\SearchService;
 
 /**
  * Class PermissionRepository
@@ -18,7 +18,18 @@ class PermissionRepository extends LanguageRepository implements SearchInterface
     protected $search, $databaseManager;
 
     /**
+     * This tells the query to only pull content that has its required permissions satisfied by these ids.
+     *
+     * If false, content permissions are ignored.
+     * If an array, only content with those permissions are returned.
+     *
+     * @var bool|array
+     */
+    public static $availableContentPermissionIds = false;
+
+    /**
      * Search constructor.
+     *
      * @param SearchInterface $searchService
      */
     public function __construct(SearchInterface $search)
@@ -40,15 +51,6 @@ class PermissionRepository extends LanguageRepository implements SearchInterface
             ]
         );
 
-        //save permission name
-        $this->saveTranslation(
-            [
-                'entity_type' => ConfigService::$tablePermissions,
-                'entity_id' => $permissionId,
-                'value' => $name
-            ]
-        );
-
         return $permissionId;
     }
 
@@ -62,10 +64,12 @@ class PermissionRepository extends LanguageRepository implements SearchInterface
     public function update($id, $name)
     {
         //delete old permission nanme
-        $this->deleteTranslations([
-            'entity_type' => ConfigService::$tablePermissions,
-            'entity_id' => $id
-        ]);
+        $this->deleteTranslations(
+            [
+                'entity_type' => ConfigService::$tablePermissions,
+                'entity_id' => $id
+            ]
+        );
 
         //save new permission name
         $this->saveTranslation(
@@ -88,10 +92,12 @@ class PermissionRepository extends LanguageRepository implements SearchInterface
     public function delete($id)
     {
         //delete permission name
-        $this->deleteTranslations([
-            'entity_type' => ConfigService::$tablePermissions,
-            'entity_id' => $id
-        ]);
+        $this->deleteTranslations(
+            [
+                'entity_type' => ConfigService::$tablePermissions,
+                'entity_id' => $id
+            ]
+        );
 
         $delete = $this->queryTable()->where('id', $id)->delete();
 
@@ -118,8 +124,11 @@ class PermissionRepository extends LanguageRepository implements SearchInterface
         $query = $this->addTranslations($query);
 
         return $query
-            ->select(ConfigService::$tablePermissions.'.*', 'translation_'.ConfigService::$tablePermissions.'.value as name')
-            ->where(ConfigService::$tablePermissions.'.id', $id)->get()->first();
+            ->select(
+                ConfigService::$tablePermissions . '.*',
+                'translation_' . ConfigService::$tablePermissions . '.value as name'
+            )
+            ->where(ConfigService::$tablePermissions . '.id', $id)->get()->first();
     }
 
     /**
@@ -130,7 +139,7 @@ class PermissionRepository extends LanguageRepository implements SearchInterface
      */
     public function linkedWithContent($id)
     {
-        $contentIdLabel = ConfigService::$tableContent.'.id';
+        $contentIdLabel = ConfigService::$tableContent . '.id';
 
         return $this->contentPermissionQuery()
             ->select('content_id', 'content_type')
@@ -153,8 +162,8 @@ class PermissionRepository extends LanguageRepository implements SearchInterface
     public function assign(
         $permissionId,
         $contentId = null,
-        $contentType = null)
-    {
+        $contentType = null
+    ) {
         $permissionId = $this->contentPermissionQuery()->insert(
             [
                 'content_id' => $contentId,
@@ -171,7 +180,9 @@ class PermissionRepository extends LanguageRepository implements SearchInterface
      */
     public function queryTable()
     {
-        return parent::connection()->table(ConfigService::$tablePermissions)->select(ConfigService::$tablePermissions.'.*');
+        return parent::connection()->table(ConfigService::$tablePermissions)->select(
+            ConfigService::$tablePermissions . '.*'
+        );
     }
 
     /**
@@ -183,37 +194,59 @@ class PermissionRepository extends LanguageRepository implements SearchInterface
     }
 
     /** Generate the query builder
+     *
      * @return Builder
      */
     public function generateQuery()
     {
         $query = $this->search->generateQuery();
 
-        //get permissions from requests or empty array
-        $permissions = request()->permissions ?? [];
-
         $query->leftJoin(
-            ConfigService::$tableContentPermissions, function($join) {
-            return $join->on(ConfigService::$tableContentPermissions.'.content_id', ConfigService::$tableContent.'.id')
-                ->orOn(ConfigService::$tableContentPermissions.'.content_type', ConfigService::$tableContent.'.type');
-        }
+            ConfigService::$tableContentPermissions,
+            function (JoinClause $join) {
+                return $join->on(
+                    ConfigService::$tableContentPermissions . '.content_id',
+                    ConfigService::$tableContent . '.id'
+                )
+                    ->orOn(
+                        ConfigService::$tableContentPermissions . '.content_type',
+                        ConfigService::$tableContent . '.type'
+                    );
+            }
         )
             ->leftJoin(
                 ConfigService::$tablePermissions,
-                ConfigService::$tablePermissions.'.id',
+                ConfigService::$tablePermissions . '.id',
                 '=',
-                ConfigService::$tableContentPermissions.'.required_permission_id'
+                ConfigService::$tableContentPermissions . '.required_permission_id'
             )
             ->leftJoin(
-                ConfigService::$tableTranslations, function($join) {
-                return $join->on(ConfigService::$tableTranslations.'.entity_id', ConfigService::$tablePermissions.'.id')
-                    ->where(ConfigService::$tableTranslations.'.entity_type', '=', ConfigService::$tablePermissions);
-            }
-            )
-            ->where(function($builder) use ($permissions) {
-                return $builder->whereNull(ConfigService::$tablePermissions.'.id')
-                    ->orWhereIn(ConfigService::$tableTranslations.'.value', $permissions);
-            });
+                ConfigService::$tableTranslations,
+                function (JoinClause $join) {
+                    return $join->on(
+                        ConfigService::$tableTranslations . '.entity_id',
+                        ConfigService::$tablePermissions . '.id'
+                    )
+                        ->where(
+                            ConfigService::$tableTranslations . '.entity_type',
+                            '=',
+                            ConfigService::$tablePermissions
+                        );
+                }
+            );
+
+        if (is_array(self::$availableContentPermissionIds)) {
+            $query->where(
+                function (Builder $builder) {
+                    return $builder->whereNull(ConfigService::$tablePermissions . '.id')
+                        ->orWhereIn(
+                            ConfigService::$tableTranslations . '.value',
+                            self::$availableContentPermissionIds
+                        );
+                }
+            );
+        }
+        
         return $query;
     }
 }

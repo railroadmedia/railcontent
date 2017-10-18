@@ -18,9 +18,11 @@ class CreateContentTable extends Migration
             ConfigService::$tableContent,
             function(Blueprint $table) {
                 $table->increments('id');
+                $table->string('slug', 255)->index();
                 $table->string('status', 64)->index();
                 $table->string('type', 64)->index();
-                $table->string('brand', 255)->index();
+                $table->string('brand', 64)->index();
+                $table->string('language', 16)->index();
                 $table->integer('position')->index()->nullable();
                 $table->integer('parent_id')->index()->nullable();
                 $table->dateTime('published_on')->index()->nullable();
