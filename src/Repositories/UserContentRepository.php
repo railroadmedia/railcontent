@@ -13,20 +13,8 @@ use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\SearchInterface;
 use Railroad\Railcontent\Services\UserContentService;
 
-class UserContentRepository extends LanguageRepository implements SearchInterface
+class UserContentRepository extends RepositoryBase
 {
-    protected $search;
-
-    /**
-     * UserContentRepository constructor.
-     * @param $searchService
-     */
-    public function __construct(SearchInterface $searchService)
-    {
-        $this->search = $searchService;
-
-    }
-
     /**
      * Return a record from railcontent_user_content table based on content_id and user_id
      *

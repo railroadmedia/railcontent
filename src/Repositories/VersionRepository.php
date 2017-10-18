@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 
 class VersionRepository extends RepositoryBase
@@ -34,6 +35,7 @@ class VersionRepository extends RepositoryBase
 
     /**
      * Return content version from database, based on version id
+     *
      * @param integer $versionId
      * @return mixed
      */
@@ -49,6 +51,6 @@ class VersionRepository extends RepositoryBase
      */
     public function queryTable()
     {
-        return parent::connection()->table(ConfigService::$tableVersions);
+        return $this->connection()->table(ConfigService::$tableVersions);
     }
 }

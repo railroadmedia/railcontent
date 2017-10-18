@@ -5,10 +5,11 @@ namespace Railroad\Railcontent\Repositories;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 
-class DatumRepository extends LanguageRepository
+class DatumRepository extends RepositoryBase
 {
     /**
      * Update or insert a new record in railcontent_data table
+     *
      * @param integer $id
      * @param string $key
      * @param string $value
@@ -17,14 +18,14 @@ class DatumRepository extends LanguageRepository
      */
     public function updateOrCreateDatum($id, $key, $value, $position)
     {
-        $update = $this->query()->where(ConfigService::$tableData.'.id', $id)->update(
+        $update = $this->query()->where(ConfigService::$tableData . '.id', $id)->update(
             [
                 'key' => $key,
                 'position' => $position
             ]
         );
 
-        if(!$update) {
+        if (!$update) {
             $id = $this->query()->insertGetId(
                 [
                     'key' => $key,
@@ -38,18 +39,21 @@ class DatumRepository extends LanguageRepository
 
     /**
      * Delete a record from railcontent_data table
+     *
      * @param integer $id
      * @return bool
      */
     public function deleteDatum($id)
     {
-        return $this->query()->where([
+        return $this->query()->where(
+            [
                 'id' => $id
             ]
         )->delete();
     }
 
     /** Get datum details based on key and value
+     *
      * @param string $key
      * @param string $value
      * @return array
@@ -59,8 +63,32 @@ class DatumRepository extends LanguageRepository
         $builder = $this->query();
 
         return $builder
-            ->select(ConfigService::$tableData.'.*', 'translation_'.ConfigService::$tableData.'.value as value')
+            ->select(
+                ConfigService::$tableData . '.*',
+                'translation_' . ConfigService::$tableData . '.value as value'
+            )
             ->where(['key' => $key, 'value' => $value])->get()->first();
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder
+     */
+    public function attachDatumToContentQuery(Builder $query)
+    {
+        return $query
+            ->leftJoin(
+                ConfigService::$tableContentData,
+                ConfigService::$tableContentData . '.content_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->leftJoin(
+                ConfigService::$tableData,
+                ConfigService::$tableData . '.id',
+                '=',
+                ConfigService::$tableContentData . '.datum_id'
+            );
     }
 
     /**
@@ -68,6 +96,6 @@ class DatumRepository extends LanguageRepository
      */
     public function query()
     {
-        return parent::connection()->table(ConfigService::$tableData);
+        return $this->connection()->table(ConfigService::$tableData);
     }
 }

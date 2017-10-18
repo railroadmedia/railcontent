@@ -14,12 +14,30 @@ class ContentRepository extends RepositoryBase
     private $permissionRepository;
 
     /**
+     * @var FieldRepository
+     */
+    private $fieldRepository;
+
+    /**
+     * @var DatumRepository
+     */
+    private $datumRepository;
+
+    /**
      * If this is false content with any status will be pulled. If its an array, only content with those
      * statuses will be pulled.
      *
      * @var array|bool
      */
     public static $availableContentStatues = false;
+
+    /**
+     * If this is false content with any language will be pulled. If its an array, only content with those
+     * languages will be pulled.
+     *
+     * @var array|bool
+     */
+    public static $includedLanguages = false;
 
     /**
      * Determines whether content with a published_on date in the future will be pulled or not.
@@ -32,12 +50,19 @@ class ContentRepository extends RepositoryBase
      * ContentRepository constructor.
      *
      * @param PermissionRepository $permissionRepository
+     * @param FieldRepository $fieldRepository
+     * @param DatumRepository $datumRepository
      */
-    public function __construct(PermissionRepository $permissionRepository)
-    {
+    public function __construct(
+        PermissionRepository $permissionRepository,
+        FieldRepository $fieldRepository,
+        DatumRepository $datumRepository
+    ) {
         parent::__construct();
 
         $this->permissionRepository = $permissionRepository;
+        $this->fieldRepository = $fieldRepository;
+        $this->datumRepository = $datumRepository;
     }
 
     /**
@@ -590,39 +615,23 @@ class ContentRepository extends RepositoryBase
                     ConfigService::$tableData . '.key as datum_key',
                     ConfigService::$tableData . '.position as datum_position',
                 ]
-            )->leftJoin(
-                ConfigService::$tableContentData,
-                ConfigService::$tableContentData . '.content_id',
-                '=',
-                ConfigService::$tableContent . '.id'
-            )
-            ->leftJoin(
-                ConfigService::$tableData,
-                ConfigService::$tableData . '.id',
-                '=',
-                ConfigService::$tableContentData . '.datum_id'
-            )->leftJoin(
-                ConfigService::$tableContentFields . ' as allcontentfields',
-                'allcontentfields.content_id',
-                '=',
-                ConfigService::$tableContent . '.id'
-            )
-            ->leftJoin(
-                ConfigService::$tableFields,
-                ConfigService::$tableFields . '.id',
-                '=',
-                'allcontentfields.field_id'
             );
+
+        $query = $this->fieldRepository->attachFieldsToContentQuery($query);
+        $query = $this->datumRepository->attachDatumToContentQuery($query);
+        $query = $this->permissionRepository->restrictContentQueryByPermissions($query);
 
         if (is_array(self::$availableContentStatues)) {
             $query = $query->whereIn('status', self::$availableContentStatues);
         }
 
+        if (is_array(self::$includedLanguages)) {
+            $query = $query->whereIn('language', self::$includedLanguages);
+        }
+
         if (!self::$pullFutureContent) {
             $query = $query->where('published_on', '<', Carbon::now()->toDateTimeString());
         }
-
-        $query = $this->permissionRepository->restrictContentQueryByPermissions($query);
 
         return $query;
     }

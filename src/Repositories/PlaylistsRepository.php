@@ -2,11 +2,12 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\PlaylistsService;
 
-class PlaylistsRepository extends LanguageRepository
+class PlaylistsRepository extends RepositoryBase
 {
     /**
      * Save a new record in railcontent_user_content_playlists table
@@ -58,14 +59,7 @@ class PlaylistsRepository extends LanguageRepository
                 'brand' => ConfigService::$brand
             ]
         );
-        $this->saveTranslation(
-            [
-                'entity_type' => ConfigService::$tablePlaylists,
-                'entity_id' => $playlist,
-                'language_id' => 1,
-                'value' => $name
-            ]
-        );
+
         return $playlist;
     }
 
@@ -98,6 +92,7 @@ class PlaylistsRepository extends LanguageRepository
             })
             ->where(ConfigService::$tablePlaylists.'.id', '=', $playlistId)
             ->get();
+
         return $this->parseAndGetLinkedContent($playlist);
     }
 
@@ -108,6 +103,7 @@ class PlaylistsRepository extends LanguageRepository
     private function parseAndGetLinkedContent(Collection $playlists)
     {
         $playlistArr = [];
+
         foreach($playlists as $playlist) {
             $playlistArr[$playlist['playlist_id']] = [
                 'id' => $playlist['playlist_id'],
@@ -125,6 +121,7 @@ class PlaylistsRepository extends LanguageRepository
                 ];
             }
         }
+
         return $playlistArr;
     }
 
@@ -133,8 +130,7 @@ class PlaylistsRepository extends LanguageRepository
      */
     public function queryTable()
     {
-        $builder = parent::connection()->table(ConfigService::$tablePlaylists);
-        return $this->addTranslations($builder);
+        return $this->connection()->table(ConfigService::$tablePlaylists);
     }
 
     /**
@@ -142,6 +138,6 @@ class PlaylistsRepository extends LanguageRepository
      */
     public function queryUserPlaylistTable()
     {
-        return parent::connection()->table(ConfigService::$tableUserContentPlaylists);
+        return $this->connection()->table(ConfigService::$tableUserContentPlaylists);
     }
 }

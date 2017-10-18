@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\LanguageRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -35,33 +36,25 @@ class LanguageMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // check if the language it's already defined for user
-        $userLanguage = $this->language->getUserLanguage();
+        // read the language from the request header
+        $locale = $request->header('Content-Language');
 
-        if(!$userLanguage) {
-            // read the language from the request header
-            $locale = $request->header('Content-Language');
-
-            // if the header is missed
-            if(!$locale) {
-                // take the default local language
-                $locale = ConfigService::$defaultLanguage;
-            }
-
-            // check if the language defined is supported by the CMS
-            if(!in_array($locale, ConfigService::$availableLanguages)) {
-                // respond with error
-                return abort(403, 'Language not supported.');
-            }
-
-            //save user language
-            $this->language->setUserLanguage($locale);
+        // if the header is missed
+        if (!$locale) {
+            // take the default local language
+            $locale = ConfigService::$defaultLanguage;
         }
 
-        // get the response after the request is done
-        $response = $next($request);
+        // check if the language defined is supported by the CMS
+        if (!in_array($locale, ConfigService::$availableLanguages)) {
+            // respond with error
+            return abort(403, 'Language not supported.');
+        }
 
-        // return the response
-        return $response;
+        // only show content in this language
+        // this may change in the future
+        ContentRepository::$includedLanguages = [$locale];
+
+        return $next($request);
     }
 }
