@@ -9,28 +9,12 @@ use Railroad\Railcontent\Services\ConfigService;
 class ContentRepository extends RepositoryBase
 {
     /**
-     * @var PermissionRepository
-     */
-    private $permissionRepository;
-
-    /**
-     * @var FieldRepository
-     */
-    private $fieldRepository;
-
-    /**
-     * @var DatumRepository
-     */
-    private $datumRepository;
-
-    /**
      * If this is false content with any status will be pulled. If its an array, only content with those
      * statuses will be pulled.
      *
      * @var array|bool
      */
     public static $availableContentStatues = false;
-
     /**
      * If this is false content with any language will be pulled. If its an array, only content with those
      * languages will be pulled.
@@ -38,13 +22,24 @@ class ContentRepository extends RepositoryBase
      * @var array|bool
      */
     public static $includedLanguages = false;
-
     /**
      * Determines whether content with a published_on date in the future will be pulled or not.
      *
      * @var array|bool
      */
     public static $pullFutureContent = true;
+    /**
+     * @var PermissionRepository
+     */
+    private $permissionRepository;
+    /**
+     * @var FieldRepository
+     */
+    private $fieldRepository;
+    /**
+     * @var DatumRepository
+     */
+    private $datumRepository;
 
     /**
      * ContentRepository constructor.
@@ -77,6 +72,62 @@ class ContentRepository extends RepositoryBase
             ->where([ConfigService::$tableContent . '.id' => $id])
             ->get()
             ->first();
+    }
+
+    /** Generate the Query Builder
+     *
+     * @return Builder
+     */
+    public function baseQuery()
+    {
+        $query = $this->queryTable()
+            ->select(
+                [
+                    ConfigService::$tableContent . '.id as id',
+                    ConfigService::$tableContent . '.status as status',
+                    ConfigService::$tableContent . '.type as type',
+                    ConfigService::$tableContent . '.position as position',
+                    ConfigService::$tableContent . '.parent_id as parent_id',
+                    ConfigService::$tableContent . '.published_on as published_on',
+                    ConfigService::$tableContent . '.created_on as created_on',
+                    ConfigService::$tableContent . '.archived_on as archived_on',
+                    ConfigService::$tableContent . '.brand as brand',
+                    ConfigService::$tableFields . '.id as field_id',
+                    ConfigService::$tableFields . '.key as field_key',
+                    ConfigService::$tableFields . '.value as field_value',
+                    ConfigService::$tableFields . '.type as field_type',
+                    ConfigService::$tableFields . '.position as field_position',
+                    ConfigService::$tableData . '.id as datum_id',
+                    ConfigService::$tableData . '.key as datum_key',
+                    ConfigService::$tableData . '.position as datum_position',
+                ]
+            );
+
+        $query = $this->fieldRepository->attachFieldsToContentQuery($query);
+        $query = $this->datumRepository->attachDatumToContentQuery($query);
+        $query = $this->permissionRepository->restrictContentQueryByPermissions($query);
+
+        if (is_array(self::$availableContentStatues)) {
+            $query = $query->whereIn('status', self::$availableContentStatues);
+        }
+
+        if (is_array(self::$includedLanguages)) {
+            $query = $query->whereIn('language', self::$includedLanguages);
+        }
+
+        if (!self::$pullFutureContent) {
+            $query = $query->where('published_on', '<', Carbon::now()->toDateTimeString());
+        }
+
+        return $query;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function queryTable()
+    {
+        return $this->connection()->table(ConfigService::$tableContent);
     }
 
     /**
@@ -144,6 +195,69 @@ class ContentRepository extends RepositoryBase
         $this->reposition($contentId, $position);
 
         return $contentId;
+    }
+
+    /**
+     * Update content position and call function that recalculate position for other children
+     *
+     * @param int $contentId
+     * @param int $position
+     */
+    public function reposition($contentId, $position)
+    {
+        $parentContentId = $this->queryTable()->where('id', $contentId)->first(['parent_id'])['parent_id']
+            ?? null;
+        $childContentCount = $this->queryTable()->where('parent_id', $parentContentId)->count();
+
+        if ($position < 1) {
+            $position = 1;
+        } elseif ($position > $childContentCount) {
+            $position = $childContentCount;
+        }
+
+        $this->transaction(
+            function () use ($contentId, $position, $parentContentId) {
+                $this->queryTable()
+                    ->where('id', $contentId)
+                    ->update(
+                        ['position' => $position]
+                    );
+
+                $this->otherChildrenRepositions($parentContentId, $contentId, $position);
+            }
+        );
+    }
+
+    /** Update position for other categories with the same parent id
+     *
+     * @param integer $parentCategoryId
+     * @param integer $categoryId
+     * @param integer $position
+     */
+    function otherChildrenRepositions($parentContentId, $contentId, $position)
+    {
+        $childContent =
+            $this->queryTable()
+                ->where('parent_id', $parentContentId)
+                ->where('id', '<>', $contentId)
+                ->orderBy('position')
+                ->get()
+                ->toArray();
+
+        $start = 1;
+
+        foreach ($childContent as $child) {
+            if ($start == $position) {
+                $start++;
+            }
+
+            $this->queryTable()
+                ->where('id', $child['id'])
+                ->update(
+                    ['position' => $start]
+                );
+            $start++;
+        }
     }
 
     /**
@@ -216,6 +330,55 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * Unlink all fields for a content id.
+     *
+     * @param $contentId
+     * @return int
+     */
+    public function unlinkFields($contentId)
+    {
+        return $this->contentFieldsQuery()->where('content_id', $contentId)->delete();
+    }
+
+    /**
+     * @return Builder
+     */
+    public function contentFieldsQuery()
+    {
+        return parent::connection()->table(ConfigService::$tableContentFields);
+    }
+
+    /**
+     * Unlink all datum for a content id.
+     *
+     * @param $contentId
+     * @return int
+     */
+    public function unlinkData($contentId)
+    {
+        return $this->contentDataQuery()->where('content_id', $contentId)->delete();
+    }
+
+    /**
+     * @return Builder
+     */
+    public function contentDataQuery()
+    {
+        return parent::connection()->table(ConfigService::$tableContentData);
+    }
+
+    /**
+     * Unlink content children.
+     *
+     * @param integer $id
+     * @return integer
+     */
+    public function unlinkChildren($id)
+    {
+        return $this->queryTable()->where('parent_id', $id)->update(['parent_id' => null]);
+    }
+
+    /**
      * Delete a specific content field link
      *
      * @param $contentId
@@ -231,17 +394,6 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * Unlink all fields for a content id.
-     *
-     * @param $contentId
-     * @return int
-     */
-    public function unlinkFields($contentId)
-    {
-        return $this->contentFieldsQuery()->where('content_id', $contentId)->delete();
-    }
-
-    /**
      * Delete a specific content datum link
      *
      * @param $contentId
@@ -254,28 +406,6 @@ class ContentRepository extends RepositoryBase
             ->where('content_id', $contentId)
             ->where('datum_id', $datumId)
             ->delete();
-    }
-
-    /**
-     * Unlink all datum for a content id.
-     *
-     * @param $contentId
-     * @return int
-     */
-    public function unlinkData($contentId)
-    {
-        return $this->contentDataQuery()->where('content_id', $contentId)->delete();
-    }
-
-    /**
-     * Unlink content children.
-     *
-     * @param integer $id
-     * @return integer
-     */
-    public function unlinkChildren($id)
-    {
-        return $this->queryTable()->where('parent_id', $id)->update(['parent_id' => null]);
     }
 
     /**
@@ -393,14 +523,6 @@ class ContentRepository extends RepositoryBase
     /**
      * @return Builder
      */
-    public function queryTable()
-    {
-        return $this->connection()->table(ConfigService::$tableContent);
-    }
-
-    /**
-     * @return Builder
-     */
     public function queryIndex()
     {
         return $this->queryTable()
@@ -483,88 +605,9 @@ class ContentRepository extends RepositoryBase
     /**
      * @return Builder
      */
-    public function contentFieldsQuery()
-    {
-        return parent::connection()->table(ConfigService::$tableContentFields);
-    }
-
-    /**
-     * @return Builder
-     */
-    public function contentDataQuery()
-    {
-        return parent::connection()->table(ConfigService::$tableContentData);
-    }
-
-    /**
-     * @return Builder
-     */
     public function contentVersionQuery()
     {
         return parent::connection()->table(ConfigService::$tableVersions);
-    }
-
-    /**
-     * Update content position and call function that recalculate position for other children
-     *
-     * @param int $contentId
-     * @param int $position
-     */
-    public function reposition($contentId, $position)
-    {
-        $parentContentId = $this->queryTable()->where('id', $contentId)->first(['parent_id'])['parent_id']
-            ?? null;
-        $childContentCount = $this->queryTable()->where('parent_id', $parentContentId)->count();
-
-        if ($position < 1) {
-            $position = 1;
-        } elseif ($position > $childContentCount) {
-            $position = $childContentCount;
-        }
-
-        $this->transaction(
-            function () use ($contentId, $position, $parentContentId) {
-                $this->queryTable()
-                    ->where('id', $contentId)
-                    ->update(
-                        ['position' => $position]
-                    );
-
-                $this->otherChildrenRepositions($parentContentId, $contentId, $position);
-            }
-        );
-    }
-
-    /** Update position for other categories with the same parent id
-     *
-     * @param integer $parentCategoryId
-     * @param integer $categoryId
-     * @param integer $position
-     */
-    function otherChildrenRepositions($parentContentId, $contentId, $position)
-    {
-        $childContent =
-            $this->queryTable()
-                ->where('parent_id', $parentContentId)
-                ->where('id', '<>', $contentId)
-                ->orderBy('position')
-                ->get()
-                ->toArray();
-
-        $start = 1;
-
-        foreach ($childContent as $child) {
-            if ($start == $position) {
-                $start++;
-            }
-
-            $this->queryTable()
-                ->where('id', $child['id'])
-                ->update(
-                    ['position' => $start]
-                );
-            $start++;
-        }
     }
 
     /**
@@ -586,53 +629,5 @@ class ContentRepository extends RepositoryBase
                     'type' => 'content_id'
                 ]
             )->get();
-    }
-
-    /** Generate the Query Builder
-     *
-     * @return Builder
-     */
-    public function baseQuery()
-    {
-        $query = $this->queryTable()
-            ->select(
-                [
-                    ConfigService::$tableContent . '.id as id',
-                    ConfigService::$tableContent . '.status as status',
-                    ConfigService::$tableContent . '.type as type',
-                    ConfigService::$tableContent . '.position as position',
-                    ConfigService::$tableContent . '.parent_id as parent_id',
-                    ConfigService::$tableContent . '.published_on as published_on',
-                    ConfigService::$tableContent . '.created_on as created_on',
-                    ConfigService::$tableContent . '.archived_on as archived_on',
-                    ConfigService::$tableContent . '.brand as brand',
-                    ConfigService::$tableFields . '.id as field_id',
-                    ConfigService::$tableFields . '.key as field_key',
-                    ConfigService::$tableFields . '.value as field_value',
-                    ConfigService::$tableFields . '.type as field_type',
-                    ConfigService::$tableFields . '.position as field_position',
-                    ConfigService::$tableData . '.id as datum_id',
-                    ConfigService::$tableData . '.key as datum_key',
-                    ConfigService::$tableData . '.position as datum_position',
-                ]
-            );
-
-        $query = $this->fieldRepository->attachFieldsToContentQuery($query);
-        $query = $this->datumRepository->attachDatumToContentQuery($query);
-        $query = $this->permissionRepository->restrictContentQueryByPermissions($query);
-
-        if (is_array(self::$availableContentStatues)) {
-            $query = $query->whereIn('status', self::$availableContentStatues);
-        }
-
-        if (is_array(self::$includedLanguages)) {
-            $query = $query->whereIn('language', self::$includedLanguages);
-        }
-
-        if (!self::$pullFutureContent) {
-            $query = $query->where('published_on', '<', Carbon::now()->toDateTimeString());
-        }
-
-        return $query;
     }
 }

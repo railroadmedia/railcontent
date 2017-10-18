@@ -14,8 +14,6 @@ use Railroad\Railcontent\Services\ConfigService;
  */
 class PermissionRepository extends RepositoryBase
 {
-    protected $search, $databaseManager;
-
     /**
      * This tells the query to only pull content that has its required permissions satisfied by these ids.
      *
@@ -25,6 +23,7 @@ class PermissionRepository extends RepositoryBase
      * @var bool|array
      */
     public static $availableContentPermissionIds = false;
+    protected $search, $databaseManager;
 
     /**
      * Create a new permisssion and return the permission id
@@ -41,6 +40,16 @@ class PermissionRepository extends RepositoryBase
         );
 
         return $permissionId;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function queryTable()
+    {
+        return parent::connection()->table(ConfigService::$tablePermissions)->select(
+            ConfigService::$tablePermissions . '.*'
+        );
     }
 
     /**
@@ -114,6 +123,14 @@ class PermissionRepository extends RepositoryBase
     }
 
     /**
+     * @return Builder
+     */
+    public function contentPermissionQuery()
+    {
+        return parent::connection()->table(ConfigService::$tableContentPermissions);
+    }
+
+    /**
      * Create a new record in railcontent_content_permission with the permission id and the specific content($contentId) or the content type
      *
      * @param integer $permissionId
@@ -135,24 +152,6 @@ class PermissionRepository extends RepositoryBase
         );
 
         return $permissionId;
-    }
-
-    /**
-     * @return Builder
-     */
-    public function queryTable()
-    {
-        return parent::connection()->table(ConfigService::$tablePermissions)->select(
-            ConfigService::$tablePermissions . '.*'
-        );
-    }
-
-    /**
-     * @return Builder
-     */
-    public function contentPermissionQuery()
-    {
-        return parent::connection()->table(ConfigService::$tableContentPermissions);
     }
 
     /** Generate the query builder

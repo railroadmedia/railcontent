@@ -8,7 +8,6 @@
 
 namespace Railroad\Railcontent\Services;
 
-
 use Railroad\Railcontent\Repositories\PermissionRepository;
 
 /**
@@ -47,6 +46,17 @@ class PermissionService
     }
 
     /**
+     * Call getById method from PermissionRepository and return the permission
+     *
+     * @param integer $id
+     * @return mixed
+     */
+    public function getById($id)
+    {
+        return $this->permissionRepository->getById($id);
+    }
+
+    /**
      * Call update method from PermissionRepository and return the updated permission
      *
      * @param integer $id
@@ -72,17 +82,6 @@ class PermissionService
     }
 
     /**
-     * Call getById method from PermissionRepository and return the permission
-     *
-     * @param integer $id
-     * @return mixed
-     */
-    public function getById($id)
-    {
-        return $this->permissionRepository->getById($id);
-    }
-
-    /**
      * Call the method that check if the permission it's linked with content ids or content types from PermissionRepository
      * and return the content ids, content types that are linked
      *
@@ -96,6 +95,7 @@ class PermissionService
 
     /**
      * Attach permission to a specific content($contentId) or to all content of a certain type($contentType)
+     *
      * @param integer $permissionId
      * @param integer|null $contentId
      * @param string|null $contentType

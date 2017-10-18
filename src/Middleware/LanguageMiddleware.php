@@ -5,25 +5,10 @@ namespace Railroad\Railcontent\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\LanguageRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
 class LanguageMiddleware
 {
-    /**
-     * @var LanguageRepository
-     */
-    protected $language;
-
-    /** Localization constructor.
-     *
-     * @param LanguageRepository $language
-     */
-    public function __construct(LanguageRepository $language)
-    {
-        $this->language = $language;
-    }
-
     /**
      * Handle an incoming request.
      * If in the database does not exist a favorite language for the authenticated user, read the locale from the request header.

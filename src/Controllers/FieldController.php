@@ -4,9 +4,9 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Railroad\Railcontent\Services\FieldService;
-use Railroad\Railcontent\Requests\FieldRequest;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Requests\FieldRequest;
+use Railroad\Railcontent\Services\FieldService;
 
 class FieldController extends Controller
 {
@@ -14,6 +14,7 @@ class FieldController extends Controller
 
     /**
      * FieldController constructor.
+     *
      * @param FieldService $fieldService
      */
     public function __construct(FieldService $fieldService)
@@ -23,6 +24,7 @@ class FieldController extends Controller
 
     /**
      * Call the method from service that create a new field and link the category with the field.
+     *
      * @param FieldRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -45,6 +47,7 @@ class FieldController extends Controller
 
     /**
      * Call the method from service to update a content field
+     *
      * @param integer $fieldId
      * @param FieldRequest $request
      * @return \Illuminate\Http\JsonResponse
@@ -52,7 +55,7 @@ class FieldController extends Controller
     public function update($fieldId, FieldRequest $request)
     {
         //Check if field exist in the database
-        $field = $this->fieldService->getField($fieldId,  $request->input('content_id'));
+        $field = $this->fieldService->getField($fieldId, $request->input('content_id'));
 
         if (is_null($field)) {
             return response()->json('Update failed, field not found with id: ' . $field, 404);
@@ -75,13 +78,14 @@ class FieldController extends Controller
 
     /**
      * Call the method from service to delete the content's field
+     *
      * @param integer $fieldId
      * @param Request $request
      */
     public function delete($fieldId, Request $request)
     {
         //Check if field exist in the database
-        $field = $this->fieldService->getField($fieldId,  $request->input('content_id'));
+        $field = $this->fieldService->getField($fieldId, $request->input('content_id'));
 
         if (is_null($field)) {
             return response()->json('Delete failed, content field not found with id: ' . $fieldId, 404);
@@ -95,6 +99,6 @@ class FieldController extends Controller
             $request->input('content_id')
         );
 
-        return response()->json($deleted,200);
+        return response()->json($deleted, 200);
     }
 }

@@ -8,20 +8,20 @@
 
 namespace Railroad\Railcontent\Services;
 
-
 use Railroad\Railcontent\Repositories\UserContentRepository;
 
 class UserContentService
 {
-    public $userContentRepository;
+    const STATE_STARTED = 'started';
 
     // all possible user content state
-    const STATE_STARTED = 'started';
     const STATE_COMPLETED = 'completed';
     const STATE_ADDED_TO_LIST = 'added';
+    public $userContentRepository;
 
     /**
      * UserContentService constructor.
+     *
      * @param $userContentRepository
      */
     public function __construct(UserContentRepository $userContentRepository)
@@ -32,7 +32,12 @@ class UserContentService
 
     public function startContent($contentId)
     {
-        $userContentId = $this->userContentRepository->saveUserContent($contentId, $this->userId, UserContentService::STATE_STARTED);
+        $userContentId =
+            $this->userContentRepository->saveUserContent(
+                $contentId,
+                $this->userId,
+                UserContentService::STATE_STARTED
+            );
 
         return $userContentId > 0;
     }

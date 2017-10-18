@@ -2,11 +2,11 @@
 
 namespace Railroad\Railcontent\Controllers;
 
-use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Requests\DatumRequest;
 use Railroad\Railcontent\Services\DatumService;
-use Railroad\Railcontent\Events\ContentUpdated;
 
 class DatumController extends Controller
 {
@@ -14,6 +14,7 @@ class DatumController extends Controller
 
     /**
      * DatumController constructor.
+     *
      * @param DatumService $datumService
      */
     public function __construct(DatumService $datumService)
@@ -23,6 +24,7 @@ class DatumController extends Controller
 
     /**
      * Call the method from service that create new data and link the content with the data.
+     *
      * @param DatumRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -44,6 +46,7 @@ class DatumController extends Controller
 
     /**
      * Call the method from service to update a content datum
+     *
      * @param integer $dataId
      * @param DatumRequest $request
      * @return \Illuminate\Http\JsonResponse
@@ -53,8 +56,8 @@ class DatumController extends Controller
         //check if datum exist in the database
         $datum = $this->datumService->getDatum($dataId, $request->input('content_id'));
 
-        if(is_null($datum)) {
-            return response()->json('Update failed, datum not found with id: '.$dataId, 404);
+        if (is_null($datum)) {
+            return response()->json('Update failed, datum not found with id: ' . $dataId, 404);
         }
 
         //save a content version before datum update
@@ -73,6 +76,7 @@ class DatumController extends Controller
 
     /**
      * Call the method from service to delete the content data
+     *
      * @param integer $dataId
      * @param Request $request
      */
@@ -81,8 +85,8 @@ class DatumController extends Controller
         //check if datum exist in the database
         $datum = $this->datumService->getDatum($dataId, $request->input('content_id'));
 
-        if(is_null($datum)) {
-            return response()->json('Delete failed, datum not found with id: '.$dataId, 404);
+        if (is_null($datum)) {
+            return response()->json('Delete failed, datum not found with id: ' . $dataId, 404);
         }
 
         //save a content version before datum deletion

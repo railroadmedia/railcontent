@@ -5,35 +5,31 @@ namespace Railroad\Railcontent\Services;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\DatumRepository;
 use Railroad\Railcontent\Repositories\FieldRepository;
-use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Repositories\VersionRepository;
 
 class ContentService
 {
+    const STATUS_DRAFT = 'draft';
+    const STATUS_PUBLISHED = 'published';
+    const STATUS_ARCHIVED = 'archived';
     /**
      * @var ContentRepository
      */
     private $contentRepository;
 
+    // all possible content statuses
     /**
      * @var VersionRepository
      */
     private $versionRepository;
-
     /**
      * @var FieldRepository
      */
     private $fieldRepository;
-
     /**
      * @var DatumRepository
      */
     private $datumRepository;
-
-    // all possible content statuses
-    const STATUS_DRAFT = 'draft';
-    const STATUS_PUBLISHED = 'published';
-    const STATUS_ARCHIVED = 'archived';
 
     /**
      * ContentService constructor.
@@ -53,17 +49,6 @@ class ContentService
         $this->versionRepository = $versionRepository;
         $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
-    }
-
-    /**
-     * Call the get by id method from repository and return the category
-     *
-     * @param integer $id
-     * @return array|null
-     */
-    public function getById($id)
-    {
-        return $this->contentRepository->getById($id);
     }
 
     /**
@@ -149,6 +134,17 @@ class ContentService
             );
 
         return $this->getById($id);
+    }
+
+    /**
+     * Call the get by id method from repository and return the category
+     *
+     * @param integer $id
+     * @return array|null
+     */
+    public function getById($id)
+    {
+        return $this->contentRepository->getById($id);
     }
 
     /**
@@ -295,6 +291,18 @@ class ContentService
     }
 
     /**
+     * Get the content version based on id
+     *
+     * @param integer $versionId
+     * @return mixed
+     */
+    public function getContentVersion($versionId)
+    {
+        $restoredContentVersion = $this->versionRepository->get($versionId);
+        return $restoredContentVersion;
+    }
+
+    /**
      * Create field if not exist and link it to the content
      *
      * @param integer $contentId
@@ -344,18 +352,6 @@ class ContentService
     public function linkedWithContent($contentId)
     {
         return $this->contentRepository->linkedWithContent($contentId);
-    }
-
-    /**
-     * Get the content version based on id
-     *
-     * @param integer $versionId
-     * @return mixed
-     */
-    public function getContentVersion($versionId)
-    {
-        $restoredContentVersion = $this->versionRepository->get($versionId);
-        return $restoredContentVersion;
     }
 
     /**

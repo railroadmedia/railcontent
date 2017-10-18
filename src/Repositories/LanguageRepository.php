@@ -7,23 +7,9 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class LanguageRepository extends RepositoryBase
 {
-    /** Get the preference language saved in the database for the authenticated user
-     * @return integer - user language id
-     */
-    public function getUserLanguage()
-    {
-        $user_preference = $this->connection()->table(ConfigService::$tableUserLanguagePreference)->where(
-            [
-                'user_id' => $this->getAuthenticatedUserId(request()),
-                'brand' => ConfigService::$brand
-            ]
-        )->get()->first();
-
-        return $user_preference['language_id'];
-    }
-
     /** Set the preference language for the authenticated user
      * If in the database dows not exist a language with the locale return a 403 page with the appropriate message
+     *
      * @param string $locale
      * @return bool|void
      */
@@ -38,7 +24,7 @@ class LanguageRepository extends RepositoryBase
         )->get()->first();
 
         //check if the locale it's supported by the CMS
-        if(!$language) {
+        if (!$language) {
             return false;
         }
 
@@ -79,19 +65,37 @@ class LanguageRepository extends RepositoryBase
             ]
         );
 
-        if(!$update) {
+        if (!$update) {
 
             $this->connection()->table(ConfigService::$tableTranslations)->insertGetId(
                 [
                     'entity_type' => $translate['entity_type'],
                     'entity_id' => $translate['entity_id'],
                     'language_id' => $this->getUserLanguage(),
-                    'value' => $translate['value']]
+                    'value' => $translate['value']
+                ]
             );
         }
     }
 
+    /** Get the preference language saved in the database for the authenticated user
+     *
+     * @return integer - user language id
+     */
+    public function getUserLanguage()
+    {
+        $user_preference = $this->connection()->table(ConfigService::$tableUserLanguagePreference)->where(
+            [
+                'user_id' => $this->getAuthenticatedUserId(request()),
+                'brand' => ConfigService::$brand
+            ]
+        )->get()->first();
+
+        return $user_preference['language_id'];
+    }
+
     /** Delete a record from the translations table
+     *
      * @param array $translate
      * @return int
      */
@@ -107,6 +111,7 @@ class LanguageRepository extends RepositoryBase
 
     /** Based on QueryBuilder object, links(join) to the translation table are generated.
      * In the configuration file we have an array with the translatable tables; only for these tables are the joins generated
+     *
      * @param $query
      * @return mixed
      */
@@ -118,11 +123,11 @@ class LanguageRepository extends RepositoryBase
         //generate join with the translation table for the FROM table
         $this->generateTranslationQuery($query, $query->from, $query->from, $userLanguage);
 
-        foreach($query->joins as $joinClause) {
+        foreach ($query->joins as $joinClause) {
             $tableName = explode(' as ', $joinClause->table);
-            if(in_array($tableName[0], ConfigService::$translatableTables)) {
+            if (in_array($tableName[0], ConfigService::$translatableTables)) {
                 $alias = $tableName[0];
-                if(isset($tableName[1])) {
+                if (isset($tableName[1])) {
                     $alias = $tableName[1];
                 }
                 $this->generateTranslationQuery($query, $alias, $tableName[0], $userLanguage);
@@ -132,6 +137,7 @@ class LanguageRepository extends RepositoryBase
     }
 
     /** Update the Query Builder object with the links to the translation table
+     *
      * @param Builder $query
      * @param string $joinClauseTable
      * @param string $table
@@ -139,12 +145,17 @@ class LanguageRepository extends RepositoryBase
      */
     private function generateTranslationQuery($query, $joinClauseTable, $table, $userLanguage)
     {
-        $query->leftJoin(ConfigService::$tableTranslations.' as translation_'.$joinClauseTable, function($join) use ($joinClauseTable, $userLanguage, $table) {
-            $join->on('translation_'.$joinClauseTable.'.entity_id', '=', $joinClauseTable.'.id')
-                ->where('translation_'.$joinClauseTable.'.entity_type', $table)
-                ->where('translation_'.$joinClauseTable.'.language_id', '=', $userLanguage);
-        });
+        $query->leftJoin(
+            ConfigService::$tableTranslations . ' as translation_' . $joinClauseTable,
+            function ($join) use ($joinClauseTable, $userLanguage, $table) {
+                $join->on('translation_' . $joinClauseTable . '.entity_id', '=', $joinClauseTable . '.id')
+                    ->where('translation_' . $joinClauseTable . '.entity_type', $table)
+                    ->where('translation_' . $joinClauseTable . '.language_id', '=', $userLanguage);
+            }
+        );
 
-        $query->addSelect('translation_'.$joinClauseTable.'.value as translation_'.$joinClauseTable.'_value');
+        $query->addSelect(
+            'translation_' . $joinClauseTable . '.value as translation_' . $joinClauseTable . '_value'
+        );
     }
 }

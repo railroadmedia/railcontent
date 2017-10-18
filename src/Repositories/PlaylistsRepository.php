@@ -11,6 +11,7 @@ class PlaylistsRepository extends RepositoryBase
 {
     /**
      * Save a new record in railcontent_user_content_playlists table
+     *
      * @param int $contentId
      * @param int $playlistId
      * @return int - the record id
@@ -28,23 +29,46 @@ class PlaylistsRepository extends RepositoryBase
     }
 
     /**
+     * @return Builder
+     */
+    public function queryUserPlaylistTable()
+    {
+        return $this->connection()->table(ConfigService::$tableUserContentPlaylists);
+    }
+
+    /**
      * Get the public playlists and the playlists created by the authenticated user
+     *
      * @return array
      */
     public function getUserPlaylists($userId)
     {
         return $this->queryTable()
-            ->select(ConfigService::$tablePlaylists.'.*', 'translation_'.ConfigService::$tablePlaylists.'.value as name')
-            ->where(function($query) use ($userId) {
-                $query->where(['type' => PlaylistsService::TYPE_PUBLIC])
-                    ->orWhere([ConfigService::$tablePlaylists.'.user_id' => $userId]);
-            })
+            ->select(
+                ConfigService::$tablePlaylists . '.*',
+                'translation_' . ConfigService::$tablePlaylists . '.value as name'
+            )
+            ->where(
+                function ($query) use ($userId) {
+                    $query->where(['type' => PlaylistsService::TYPE_PUBLIC])
+                        ->orWhere([ConfigService::$tablePlaylists . '.user_id' => $userId]);
+                }
+            )
             ->where('brand', ConfigService::$brand)
             ->get()->toArray();
     }
 
     /**
+     * @return Builder
+     */
+    public function queryTable()
+    {
+        return $this->connection()->table(ConfigService::$tablePlaylists);
+    }
+
+    /**
      * Create a new playlist
+     *
      * @param string $name
      * @param int $userId
      * @param string $type
@@ -65,6 +89,7 @@ class PlaylistsRepository extends RepositoryBase
 
     /**
      * Get playlist data and the associated content for the authenticated user
+     *
      * @param int $playlistId
      * @param int $userId
      * @return array
@@ -75,28 +100,38 @@ class PlaylistsRepository extends RepositoryBase
         $playlist = $builder
             ->select(
                 [
-                    ConfigService::$tablePlaylists.'.id as playlist_id',
-                    'translation_'.ConfigService::$tablePlaylists.'.value as playlist_name',
-                    ConfigService::$tablePlaylists.'.type as playlist_type',
-                    ConfigService::$tablePlaylists.'.user_id as user_id',
-                    ConfigService::$tablePlaylists.'.brand as brand',
+                    ConfigService::$tablePlaylists . '.id as playlist_id',
+                    'translation_' . ConfigService::$tablePlaylists . '.value as playlist_name',
+                    ConfigService::$tablePlaylists . '.type as playlist_type',
+                    ConfigService::$tablePlaylists . '.user_id as user_id',
+                    ConfigService::$tablePlaylists . '.brand as brand',
                     'usercontent.content_id as content_id',
                     'usercontent.state as content_state',
                     'usercontent.progress as content_progress'
                 ]
             )
-            ->leftJoin(ConfigService::$tableUserContentPlaylists.' as usercontentplaylist', 'playlist_id', '=', ConfigService::$tablePlaylists.'.id', 'left outer')
-            ->leftJoin(ConfigService::$tableUserContent.' as usercontent', function($join) use ($userId) {
-                $join->on('usercontentplaylist.content_user_id', '=', 'usercontent.id')
-                    ->where('usercontent.user_id', '=', $userId);
-            })
-            ->where(ConfigService::$tablePlaylists.'.id', '=', $playlistId)
+            ->leftJoin(
+                ConfigService::$tableUserContentPlaylists . ' as usercontentplaylist',
+                'playlist_id',
+                '=',
+                ConfigService::$tablePlaylists . '.id',
+                'left outer'
+            )
+            ->leftJoin(
+                ConfigService::$tableUserContent . ' as usercontent',
+                function ($join) use ($userId) {
+                    $join->on('usercontentplaylist.content_user_id', '=', 'usercontent.id')
+                        ->where('usercontent.user_id', '=', $userId);
+                }
+            )
+            ->where(ConfigService::$tablePlaylists . '.id', '=', $playlistId)
             ->get();
 
         return $this->parseAndGetLinkedContent($playlist);
     }
 
     /** Prepare playlist data
+     *
      * @param Collection $playlists
      * @return array
      */
@@ -104,16 +139,17 @@ class PlaylistsRepository extends RepositoryBase
     {
         $playlistArr = [];
 
-        foreach($playlists as $playlist) {
+        foreach ($playlists as $playlist) {
             $playlistArr[$playlist['playlist_id']] = [
                 'id' => $playlist['playlist_id'],
                 'name' => $playlist['playlist_name'],
                 'type' => $playlist['playlist_type'],
-                'brand' => $playlist['brand']];
+                'brand' => $playlist['brand']
+            ];
         }
 
-        foreach($playlists as $playlist) {
-            if(!is_null($playlist['content_id'])) {
+        foreach ($playlists as $playlist) {
+            if (!is_null($playlist['content_id'])) {
                 $playlistArr[$playlist['playlist_id']]['contents'][$playlist['content_id']] = [
                     'id' => $playlist['content_id'],
                     'state' => $playlist['content_state'],
@@ -123,21 +159,5 @@ class PlaylistsRepository extends RepositoryBase
         }
 
         return $playlistArr;
-    }
-
-    /**
-     * @return Builder
-     */
-    public function queryTable()
-    {
-        return $this->connection()->table(ConfigService::$tablePlaylists);
-    }
-
-    /**
-     * @return Builder
-     */
-    public function queryUserPlaylistTable()
-    {
-        return $this->connection()->table(ConfigService::$tableUserContentPlaylists);
     }
 }

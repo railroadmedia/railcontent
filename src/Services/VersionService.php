@@ -2,18 +2,21 @@
 
 namespace Railroad\Railcontent\Services;
 
-
+use Illuminate\Http\Request;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\VersionRepository;
-use Illuminate\Http\Request;
 
 class VersionService
 {
     private $versionRepository, $contentRepository, $search;
     private $request;
 
-    public function __construct (VersionRepository $versionRepository, Request $request, ContentRepository $contentRepository, SearchService $search)
-    {
+    public function __construct(
+        VersionRepository $versionRepository,
+        Request $request,
+        ContentRepository $contentRepository,
+        SearchService $search
+    ) {
         $this->versionRepository = $versionRepository;
         $this->contentRepository = $contentRepository;
         $this->search = $search;
@@ -22,6 +25,7 @@ class VersionService
 
     /**
      * Call store method that save a content version in the database
+     *
      * @param integer $contentId
      * @return int
      */
@@ -33,13 +37,14 @@ class VersionService
         //get content
         $content = $this->search->getById($contentId);
 
-        $versionContentId = $this->versionRepository->store($contentId, $userId, '', serialize($content)) ;
+        $versionContentId = $this->versionRepository->store($contentId, $userId, '', serialize($content));
 
         return $versionContentId;
     }
 
     /**
      * Get a version of content from database
+     *
      * @param integer $versionId
      * @return array
      */

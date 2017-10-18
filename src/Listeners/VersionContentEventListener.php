@@ -9,7 +9,7 @@ class VersionContentEventListener
 {
     private $versionService;
 
-    public function __construct (VersionService $versionService)
+    public function __construct(VersionService $versionService)
     {
         $this->versionService = $versionService;
     }

@@ -13,6 +13,7 @@ class PlaylistsController extends Controller
 
     /**
      * PlaylistsController constructor.
+     *
      * @param $playlistsService
      */
     public function __construct(PlaylistsService $playlistsService)
@@ -21,6 +22,7 @@ class PlaylistsController extends Controller
     }
 
     /** Call the method from service that add content to playlist
+     *
      * @param UserContentPlaylistRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -36,6 +38,7 @@ class PlaylistsController extends Controller
     }
 
     /** Call the method from service that create a new playlist (with type PUBLIC or PRIVATE)
+     *
      * @param PlaylistRequest $request
      * @return \Illuminate\Http\JsonResponse
      */

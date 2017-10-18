@@ -9,7 +9,7 @@ class DatumService
 {
     private $datumRepository, $contentRepository;
 
-    public function __construct (DatumRepository $datumRepository, ContentRepository $contentRepository)
+    public function __construct(DatumRepository $datumRepository, ContentRepository $contentRepository)
     {
         $this->datumRepository = $datumRepository;
         $this->contentRepository = $contentRepository;
@@ -17,6 +17,7 @@ class DatumService
 
     /**
      * Create a new datum, link the content with the new created datum and return the content with the linked datum
+     *
      * @param integer $contentId
      * @param string $key
      * @param string $value
@@ -34,6 +35,7 @@ class DatumService
 
     /**
      * Update a content datum and return the content with the datum
+     *
      * @param integer $contentId
      * @param string $key
      * @param string $value
@@ -41,13 +43,14 @@ class DatumService
      */
     public function updateDatum($contentId, $dataId, $key, $value, $position)
     {
-        $this->datumRepository->updateOrCreateDatum($dataId, $key ,$value, $position);
+        $this->datumRepository->updateOrCreateDatum($dataId, $key, $value, $position);
 
         return $this->contentRepository->getLinkedDatum($dataId, $contentId);
     }
 
     /**
      * Call the repository method to unlink the content's datum
+     *
      * @param integer $dataId
      * @param integer $contentId
      * @return bool
@@ -59,6 +62,7 @@ class DatumService
 
     /**
      * Return the content with the linked data
+     *
      * @param integer $dataId
      * @param integer $contentId
      * @return array

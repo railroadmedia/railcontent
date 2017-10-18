@@ -23,6 +23,7 @@ class FieldService
 
     /**
      * Create a new field, link the content with the new created field and return the content with the linked field
+     *
      * @param integer $contentId
      * @param string $key
      * @param string $value
@@ -39,6 +40,7 @@ class FieldService
 
     /**
      * Update a content field and return the content with the field
+     *
      * @param integer $contentId
      * @param string $key
      * @param string $value
@@ -46,13 +48,14 @@ class FieldService
      */
     public function updateField($contentId, $fieldId, $key, $value, $type, $position)
     {
-        $this->fieldReposity->updateOrCreateField($fieldId, $key ,$value,  $type, $position);
+        $this->fieldReposity->updateOrCreateField($fieldId, $key, $value, $type, $position);
 
         return $this->contentRepository->getLinkedField($fieldId, $contentId);
     }
 
     /**
      * Return the content with the linked field
+     *
      * @param integer $fieldId
      * @param integer $categoryId
      * @return array
@@ -64,6 +67,7 @@ class FieldService
 
     /**
      * Call the repository method to unlink the content's field
+     *
      * @param integer $fieldId
      * @param integer $contentId
      * @return bool

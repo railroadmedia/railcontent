@@ -38,6 +38,14 @@ class DatumRepository extends RepositoryBase
     }
 
     /**
+     * @return Builder
+     */
+    public function query()
+    {
+        return $this->connection()->table(ConfigService::$tableData);
+    }
+
+    /**
      * Delete a record from railcontent_data table
      *
      * @param integer $id
@@ -89,13 +97,5 @@ class DatumRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContentData . '.datum_id'
             );
-    }
-
-    /**
-     * @return Builder
-     */
-    public function query()
-    {
-        return $this->connection()->table(ConfigService::$tableData);
     }
 }

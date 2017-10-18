@@ -9,7 +9,6 @@
 namespace Railroad\Railcontent\Services;
 
 use Illuminate\Database\Query\Builder;
-use Railroad\Railcontent\Requests\ContentIndexRequest;
 
 interface SearchInterface
 {

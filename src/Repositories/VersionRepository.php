@@ -34,6 +34,14 @@ class VersionRepository extends RepositoryBase
     }
 
     /**
+     * @return Builder
+     */
+    public function queryTable()
+    {
+        return $this->connection()->table(ConfigService::$tableVersions);
+    }
+
+    /**
      * Return content version from database, based on version id
      *
      * @param integer $versionId
@@ -44,13 +52,5 @@ class VersionRepository extends RepositoryBase
         $content = $this->queryTable()->where('id', $versionId)->get()->first();
 
         return $content;
-    }
-
-    /**
-     * @return Builder
-     */
-    public function queryTable()
-    {
-        return $this->connection()->table(ConfigService::$tableVersions);
     }
 }

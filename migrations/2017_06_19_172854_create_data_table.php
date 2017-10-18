@@ -16,7 +16,7 @@ class CreateDataTable extends Migration
     {
         Schema::create(
             ConfigService::$tableData,
-            function(Blueprint $table) {
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('key', 255)->index();
                 $table->integer('position')->index()->nullable();

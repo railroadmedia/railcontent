@@ -54,8 +54,8 @@ class PermissionController extends Controller
         //check if permission exist in the database
         $permission = $this->permissionService->getById($id);
 
-        if(is_null($permission)) {
-            return response()->json('Update failed, permission not found with id: '.$id, 404);
+        if (is_null($permission)) {
+            return response()->json('Update failed, permission not found with id: ' . $id, 404);
         }
 
         $permission = $this->permissionService->update($id, $request->input('name'));
@@ -74,25 +74,30 @@ class PermissionController extends Controller
         //check if permission exist in the database
         $permission = $this->permissionService->getById($id);
 
-        if(is_null($permission)) {
-            return response()->json('Delete failed, permission not found with id: '.$id, 404);
+        if (is_null($permission)) {
+            return response()->json('Delete failed, permission not found with id: ' . $id, 404);
         }
 
         //check if exist contents attached to the permission
         $linkedWithContent = $this->permissionService->linkedWithContent($id);
 
-        if($linkedWithContent->isNotEmpty()) {
+        if ($linkedWithContent->isNotEmpty()) {
             $ids = $linkedWithContent->implode('content_id', ', ');
             $types = $linkedWithContent->implode('content_type', ', ');
             $message = '';
-            if($ids != '') {
-                $message .= ' content('.$ids.')';
+            if ($ids != '') {
+                $message .= ' content(' . $ids . ')';
             }
-            if($types != '') {
-                $message .= ' content types('.$types.')';
+            if ($types != '') {
+                $message .= ' content types(' . $types . ')';
             }
 
-            return response()->json('This permission is being referenced by other'.$message.', you must delete that reference first.', 404);
+            return response()->json(
+                'This permission is being referenced by other' .
+                $message .
+                ', you must delete that reference first.',
+                404
+            );
         }
 
         $deleted = $this->permissionService->delete($id);

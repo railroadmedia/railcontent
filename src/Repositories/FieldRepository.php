@@ -41,6 +41,14 @@ class FieldRepository
     }
 
     /**
+     * @return Builder
+     */
+    public function query()
+    {
+        return parent::connection()->table(ConfigService::$tableFields);
+    }
+
+    /**
      * Delete a record from railcontent_fields table
      *
      * @param integer $id
@@ -71,14 +79,6 @@ class FieldRepository
                 'translation_' . ConfigService::$tableFields . '.value as translate_value'
             )
             ->where(['key' => $key, 'translate_value' => $value])->get()->first();
-    }
-
-    /**
-     * @return Builder
-     */
-    public function query()
-    {
-        return parent::connection()->table(ConfigService::$tableFields);
     }
 
     /** Generate the query builder
