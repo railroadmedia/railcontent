@@ -6,59 +6,51 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\FieldRepository;
-use Railroad\Railcontent\Repositories\PermissionRepository;
-use Railroad\Railcontent\Repositories\UserContentRepository;
-use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Requests\ContentRequest;
 use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Services\SearchService;
-use Railroad\Railcontent\Services\UserContentService;
 
 class ContentController extends Controller
 {
     /**
      * @var ContentService
      */
-    private $contentService, $userContentService, $contentRepository, $search;
+    private $contentService;
 
     /**
      * ContentController constructor.
      *
      * @param ContentService $contentService
-     * @param ContentRepository $contentRepository
-     * @param UserContentService $userContentService
      */
-    public function __construct(
-        ContentService $contentService,
-        ContentRepository $contentRepository,
-        UserContentService $userContentService
-    ) {
+    public function __construct(ContentService $contentService)
+    {
         $this->contentService = $contentService;
-        $this->userContentService = $userContentService;
-        $this->contentRepository = $contentRepository;
-        $this->search = new SearchService(
-            new FieldRepository(
-                new PermissionRepository(
-                    new UserContentRepository(
-                        $this->contentRepository
-                    )
-                )
-            )
-        );
     }
 
     /**
-     * @param ContentIndexRequest $request
+     * @param Request $request
      * @return JsonResponse
      */
-    public function index(ContentIndexRequest $request)
+    public function index(Request $request)
     {
-
-        $contents = $this->search->getPaginated();
+        $contents = $this->contentService->getFiltered(
+            $request->get('page'),
+            $request->get('page'),
+            $request->get('page'),
+            $request->get('page'),
+            $request->get('page')
+        );
 
         return response()->json($contents, 200);
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     * @return array|null
+     */
+    public function show(Request $request, $id)
+    {
+        return $this->contentService->getById($id);
     }
 
     /** Create a new content and return it in JSON format
@@ -69,12 +61,12 @@ class ContentController extends Controller
     public function store(ContentRequest $request)
     {
         $content = $this->contentService->create(
-            $request->input('slug'),
-            $request->input('status'),
-            $request->input('type'),
-            $request->input('position'),
-            $request->input('parent_id'),
-            $request->input('published_on')
+            $request->get('slug'),
+            $request->get('status'),
+            $request->get('type'),
+            $request->get('position'),
+            $request->get('parent_id'),
+            $request->get('published_on')
         );
 
         return response()->json($content, 200);
@@ -122,6 +114,8 @@ class ContentController extends Controller
      */
     public function delete($contentId, Request $request)
     {
+        // todo: refactor most of this to the service
+
         $content = $this->search->getById($contentId);
 
         //check if content exist
@@ -160,6 +154,8 @@ class ContentController extends Controller
      */
     public function restoreContent($versionId)
     {
+        // todo: move to ContentVersionController
+
         //get the content data saved in the database for the version id
         $version = $this->contentService->getContentVersion($versionId);
 
@@ -180,6 +176,8 @@ class ContentController extends Controller
      */
     public function startContent(Request $request)
     {
+        // todo: move to ContentProgressController
+
         $content = $this->contentService->getById($request->input('content_id'));
 
         if (is_null($content)) {
@@ -201,6 +199,8 @@ class ContentController extends Controller
      */
     public function completeContent(Request $request)
     {
+        // todo: move to ContentProgressController
+
         $content = $this->contentService->getById($request->input('content_id'));
 
         if (is_null($content)) {
@@ -222,6 +222,8 @@ class ContentController extends Controller
      */
     public function saveProgress(Request $request)
     {
+        // todo: move to ContentProgressController
+
         $content = $this->contentService->getById($request->input('content_id'));
 
         if (is_null($content)) {
@@ -240,13 +242,4 @@ class ContentController extends Controller
         return response()->json($response, 201);
     }
 
-    /** Get content based on id
-     *
-     * @param integer $contentId
-     * @return array|mixed|null
-     */
-    public function getContent($contentId)
-    {
-        return $this->search->getById($contentId);
-    }
 }

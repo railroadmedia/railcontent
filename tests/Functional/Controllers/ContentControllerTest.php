@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentService;
@@ -17,16 +18,32 @@ class ContentControllerTest extends RailcontentTestCase
     /**
      * @var ContentRepository
      */
-    protected $classBeingTested, $serviceBeingTested, $userId;
+    protected $classBeingTested;
+
+    /**
+     * @var ContentFactory
+     */
+    protected $contentFactory;
+
+    protected $serviceBeingTested;
+
+    protected $userId;
 
     protected function setUp()
     {
         parent::setUp();
 
+        $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->serviceBeingTested = $this->app->make(ContentService::class);
         $this->classBeingTested = $this->app->make(ContentRepository::class);
         $this->userId = $this->createAndLogInNewUser();
-        $this->setUserLanguage($this->userId);
+    }
+
+    public function test_show()
+    {
+        $content = $this->contentFactory->create();
+
+//        dd($content);
     }
 
     public function test_store_response_status()

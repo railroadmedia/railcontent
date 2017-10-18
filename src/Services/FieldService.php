@@ -48,16 +48,6 @@ class FieldService
     {
         $this->fieldReposity->updateOrCreateField($fieldId, $key ,$value,  $type, $position);
 
-        if($type != 'content_id') {
-            $this->fieldReposity->saveTranslation(
-                [
-                    'entity_type' => ConfigService::$tableFields,
-                    'entity_id' => $fieldId,
-                    'value' => $value
-                ]
-            );
-        }
-
         return $this->contentRepository->getLinkedField($fieldId, $contentId);
     }
 

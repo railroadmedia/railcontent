@@ -43,14 +43,6 @@ class DatumRepository extends LanguageRepository
      */
     public function deleteDatum($id)
     {
-        //delete datum value
-        $this->deleteTranslations(
-            [
-                'entity_type' => ConfigService::$tableData,
-                'entity_id' => $id
-            ]
-        );
-
         return $this->query()->where([
                 'id' => $id
             ]
@@ -65,7 +57,6 @@ class DatumRepository extends LanguageRepository
     public function getDatumByKeyAndValue($key, $value)
     {
         $builder = $this->query();
-        $builder = $this->addTranslations($builder);
 
         return $builder
             ->select(ConfigService::$tableData.'.*', 'translation_'.ConfigService::$tableData.'.value as value')

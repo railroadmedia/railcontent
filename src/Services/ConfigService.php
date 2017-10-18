@@ -84,7 +84,7 @@ class ConfigService
      */
     public static $tableUserLanguagePreference;
 
-    /*
+    /**
      * @var array
      */
     public static $translatableTables;
@@ -99,7 +99,11 @@ class ConfigService
      */
     public static $defaultLanguage;
 
+    /**
+     * @var string
+     */
     public static $brand;
+
     /**
      * @var string
      */

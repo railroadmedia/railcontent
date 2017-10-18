@@ -5,15 +5,89 @@ namespace Railroad\Railcontent\Repositories;
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\SearchInterface;
 
-/**
- * Class ContentRepository
- *
- * @package Railroad\Railcontent\Repositories
- */
-class ContentRepository extends LanguageRepository implements SearchInterface
+class ContentRepository extends RepositoryBase
 {
+    /**
+     * @var PermissionRepository
+     */
+    private $permissionRepository;
+
+    /**
+     * If this is false content with any status will be pulled. If its an array, only content with those
+     * statuses will be pulled.
+     *
+     * @var array|bool
+     */
+    public static $availableContentStatues = false;
+
+    /**
+     * Determines whether content with a published_on date in the future will be pulled or not.
+     *
+     * @var array|bool
+     */
+    public static $pullFutureContent = true;
+
+    /**
+     * ContentRepository constructor.
+     *
+     * @param PermissionRepository $permissionRepository
+     */
+    public function __construct(PermissionRepository $permissionRepository)
+    {
+        parent::__construct();
+
+        $this->permissionRepository = $permissionRepository;
+    }
+
+    /**
+     * Call the get by id method from repository and return the category
+     *
+     * @param integer $id
+     * @return array|null
+     */
+    public function getById($id)
+    {
+        return (array)$this->baseQuery()
+            ->where([ConfigService::$tableContent . '.id' => $id])
+            ->get()
+            ->first();
+    }
+
+    /**
+     * @param string $slug
+     * @return array|null
+     */
+    public function getBySlug($slug)
+    {
+        // todo: write function
+    }
+
+    /**
+     *
+     * Returns an array of lesson data arrays.
+     *
+     * @param $page
+     * @param $limit
+     * @param $orderBy
+     * @param $orderDirection
+     * @param array $statuses
+     * @param array $types
+     * @param array $requiredFields
+     * @return array|null
+     */
+    public function getFiltered(
+        $page,
+        $limit,
+        $orderBy,
+        $orderDirection,
+        array $statuses,
+        array $types,
+        array $requiredFields
+    ) {
+        // todo: write function
+    }
+
     /**
      * Insert a new content in the database, save the content slug in the translation table and recalculate position
      *
@@ -21,7 +95,7 @@ class ContentRepository extends LanguageRepository implements SearchInterface
      * @param string $status
      * @param string $type
      * @param integer $position
-     * @param string $language|null
+     * @param string $language |null
      * @param integer|null $parentId
      * @param string|null $publishedOn
      * @return int
@@ -91,79 +165,85 @@ class ContentRepository extends LanguageRepository implements SearchInterface
         return $id;
     }
 
-    /** Unlink content's fields, content's datum and content's children,
-     *  delete the translations, delete the content and reposition the content childrens
+    /**
+     * Unlink content's fields, content's datum and content's children,
+     * delete the content and reposition the content children.
      *
      * @param int $id
      * @param bool $deleteChildren
      * @return int
      */
-    public function delete($content, $deleteChildren = false)
+    public function delete($id, $deleteChildren = false)
     {
-        $id = $content['id'];
-
-        // unlink fields and data
-        $this->unlinkField($id);
-        $this->unlinkDatum($id);
+        $this->unlinkFields($id);
+        $this->unlinkData($id);
 
         if ($deleteChildren) {
-            // unlink children content
             $this->unlinkChildren($id);
         }
 
         $delete = $this->queryTable()->where('id', $id)->delete();
-        $this->deleteTranslations(
-            [
-                'entity_type' => ConfigService::$tableContent,
-                'entity_id' => $id
 
-            ]
-        );
-
-        $this->otherChildrenRepositions($content['parent_id'], $id, 0);
+        // todo: get parent id for this content id and replace null with it
+        $this->otherChildrenRepositions(null, $id, 0);
 
         return $delete;
     }
 
     /**
-     * Unlink all fields for a content id, or pass in the field id to delete a specific content field link
+     * Delete a specific content field link
      *
      * @param $contentId
      * @param null $fieldId
      * @return int
      */
-    public function unlinkField($contentId, $fieldId = null)
+    public function unlinkField($contentId, $fieldId)
     {
-        if (!is_null($fieldId)) {
-            return $this->contentFieldsQuery()
-                ->where('content_id', $contentId)
-                ->where('field_id', $fieldId)
-                ->delete();
-        }
+        return $this->contentFieldsQuery()
+            ->where('content_id', $contentId)
+            ->where('field_id', $fieldId)
+            ->delete();
+    }
 
+    /**
+     * Unlink all fields for a content id.
+     *
+     * @param $contentId
+     * @return int
+     */
+    public function unlinkFields($contentId)
+    {
         return $this->contentFieldsQuery()->where('content_id', $contentId)->delete();
     }
 
     /**
-     * Unlink all datum for a content id, or pass in the field id to delete a specific content datum link
+     * Delete a specific content datum link
      *
      * @param $contentId
      * @param null $datumId
      * @return int
      */
-    public function unlinkDatum($contentId, $datumId = null)
+    public function unlinkDatum($contentId, $datumId)
     {
-        if (!is_null($datumId)) {
-            return $this->contentDataQuery()
-                ->where('content_id', $contentId)
-                ->where('datum_id', $datumId)
-                ->delete();
-        }
+        return $this->contentDataQuery()
+            ->where('content_id', $contentId)
+            ->where('datum_id', $datumId)
+            ->delete();
+    }
 
+    /**
+     * Unlink all datum for a content id.
+     *
+     * @param $contentId
+     * @return int
+     */
+    public function unlinkData($contentId)
+    {
         return $this->contentDataQuery()->where('content_id', $contentId)->delete();
     }
 
-    /** Unlink content childrens
+    /**
+     * Unlink content children.
      *
      * @param integer $id
      * @return integer
@@ -212,14 +292,14 @@ class ContentRepository extends LanguageRepository implements SearchInterface
      *
      * @param integer $datumId
      * @param integer $contentId
+     * @return mixed
      */
     public function getLinkedDatum($datumId, $contentId)
     {
         $dataIdLabel = ConfigService::$tableData . '.id';
-        $queryBuilder = $this->contentDataQuery()
-            ->leftJoin(ConfigService::$tableData, 'datum_id', '=', $dataIdLabel);
-        $builder = $this->addTranslations($queryBuilder);
-        return $builder
+
+        return $this->contentDataQuery()
+            ->leftJoin(ConfigService::$tableData, 'datum_id', '=', $dataIdLabel)
             ->select(
                 ConfigService::$tableContentData . '.*',
                 ConfigService::$tableData . '.*',
@@ -230,7 +310,9 @@ class ContentRepository extends LanguageRepository implements SearchInterface
                     'datum_id' => $datumId,
                     'content_id' => $contentId
                 ]
-            )->get()->first();
+            )
+            ->get()
+            ->first();
     }
 
     /**
@@ -238,15 +320,15 @@ class ContentRepository extends LanguageRepository implements SearchInterface
      *
      * @param integer $fieldId
      * @param integer $contentId
+     * @return mixed
      */
     public function getLinkedField($fieldId, $contentId)
     {
         $fieldIdLabel = ConfigService::$tableFields . '.id';
-        $queryBuilder = $this->contentFieldsQuery()
-            ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel);
-        $builder = $this->addTranslations($queryBuilder);
+
         return
-            $builder
+            $this->contentFieldsQuery()
+                ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel)
                 ->select(
                     ConfigService::$tableContentFields . '.*',
                     ConfigService::$tableFields . '.*',
@@ -257,7 +339,9 @@ class ContentRepository extends LanguageRepository implements SearchInterface
                         'field_id' => $fieldId,
                         'content_id' => $contentId
                     ]
-                )->get()->first();
+                )
+                ->get()
+                ->first();
     }
 
     /**
@@ -265,14 +349,14 @@ class ContentRepository extends LanguageRepository implements SearchInterface
      *
      * @param string $key
      * @param integer $contentId
+     * @return mixed
      */
     public function getContentLinkedFieldByKey($key, $contentId)
     {
         $fieldIdLabel = ConfigService::$tableFields . '.id';
-        $queryBuilder = $this->contentFieldsQuery()
-            ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel);
-        $builder = $this->addTranslations($queryBuilder);
-        return $builder
+
+        return $this->contentFieldsQuery()
+            ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel)
             ->where(
                 [
                     'key' => $key,
@@ -286,7 +370,7 @@ class ContentRepository extends LanguageRepository implements SearchInterface
      */
     public function queryTable()
     {
-        return parent::connection()->table(ConfigService::$tableContent);
+        return $this->connection()->table(ConfigService::$tableContent);
     }
 
     /**
@@ -459,16 +543,6 @@ class ContentRepository extends LanguageRepository implements SearchInterface
     }
 
     /**
-     * Get all contents order by parent and position
-     *
-     * @return array
-     */
-    public function getAllContents()
-    {
-        return $this->queryIndex()->orderBy('parent_id', 'asc')->orderBy('position', 'asc')->get()->toArray();
-    }
-
-    /**
      * Get a collection with the contents Ids, where the content it's linked
      *
      * @param integer $contentId
@@ -493,9 +567,9 @@ class ContentRepository extends LanguageRepository implements SearchInterface
      *
      * @return Builder
      */
-    public function generateQuery()
+    public function baseQuery()
     {
-        return $this->queryTable()
+        $query = $this->queryTable()
             ->select(
                 [
                     ConfigService::$tableContent . '.id as id',
@@ -539,5 +613,17 @@ class ContentRepository extends LanguageRepository implements SearchInterface
                 '=',
                 'allcontentfields.field_id'
             );
+
+        if (is_array(self::$availableContentStatues)) {
+            $query = $query->whereIn('status', self::$availableContentStatues);
+        }
+
+        if (!self::$pullFutureContent) {
+            $query = $query->where('published_on', '<', Carbon::now()->toDateTimeString());
+        }
+
+        $query = $this->permissionRepository->restrictContentQueryByPermissions($query);
+
+        return $query;
     }
 }

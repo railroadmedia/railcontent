@@ -4,6 +4,8 @@ namespace Railroad\Railcontent\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Services\ContentService;
 
 class ContentPermissionsMiddleware
@@ -30,7 +32,32 @@ class ContentPermissionsMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $this->contentService->setContentPermissionIds($request->get('user_content_permission_ids', []));
+        if ($request->get('auth_level') == 'administrator') {
+
+            // admins can see drafts, archived lessons, and future content
+
+            ContentRepository::$availableContentStatues = [
+                ContentService::STATUS_PUBLISHED,
+                ContentService::STATUS_DRAFT,
+                ContentService::STATUS_ARCHIVED,
+            ];
+
+            ContentRepository::$pullFutureContent = true;
+
+            PermissionRepository::$availableContentPermissionIds = false;
+        } else {
+
+            // users can only see published lessons
+
+            ContentRepository::$availableContentStatues = [
+                ContentService::STATUS_PUBLISHED
+            ];
+
+            ContentRepository::$pullFutureContent = false;
+
+            PermissionRepository::$availableContentPermissionIds =
+                $request->get('user_content_permission_ids', []);
+        }
 
         return $next($request);
     }

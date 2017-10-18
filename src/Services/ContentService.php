@@ -30,13 +30,6 @@ class ContentService
      */
     private $datumRepository;
 
-    /**
-     * @var SearchService
-     */
-    private $search;
-
-
-
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
@@ -49,20 +42,78 @@ class ContentService
      * @param VersionRepository $versionRepository
      * @param FieldRepository $fieldRepository
      * @param DatumRepository $datumRepository
-     * @param SearchService $searchService
      */
     public function __construct(
         ContentRepository $contentRepository,
         VersionRepository $versionRepository,
         FieldRepository $fieldRepository,
-        DatumRepository $datumRepository,
-        SearchService $searchService
+        DatumRepository $datumRepository
     ) {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
         $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
-        $this->search = $searchService;
+    }
+
+    /**
+     * Call the get by id method from repository and return the category
+     *
+     * @param integer $id
+     * @return array|null
+     */
+    public function getById($id)
+    {
+        return $this->contentRepository->getById($id);
+    }
+
+    /**
+     * @param string $slug
+     * @return array|null
+     */
+    public function getBySlug($slug)
+    {
+        return $this->contentRepository->getBySlug(
+            $page,
+            $limit,
+            $orderBy,
+            $orderDirection,
+            $statuses,
+            $types,
+            $requiredFields
+        );
+    }
+
+    /**
+     *
+     * Returns an array of lesson data arrays.
+     *
+     * @param $page
+     * @param $limit
+     * @param $orderBy
+     * @param $orderDirection
+     * @param array $statuses
+     * @param array $types
+     * @param array $requiredFields
+     * @return array|null
+     */
+    public function getFiltered(
+        $page,
+        $limit,
+        $orderBy,
+        $orderDirection,
+        array $statuses,
+        array $types,
+        array $requiredFields
+    ) {
+        return $this->contentRepository->getFiltered(
+            $page,
+            $limit,
+            $orderBy,
+            $orderDirection,
+            $statuses,
+            $types,
+            $requiredFields
+        );
     }
 
     /**
@@ -138,17 +189,6 @@ class ContentService
         );
 
         return $this->getById($id);
-    }
-
-    /**
-     * Call the get by id method from repository and return the category
-     *
-     * @param integer $id
-     * @return array|null
-     */
-    public function getById($id)
-    {
-        return $this->search->getById($id);
     }
 
     /**
@@ -344,16 +384,5 @@ class ContentService
         }
 
         return $text;
-    }
-
-    /**
-     * @param array $contentPermissionIds
-     * @return $this
-     */
-    public function setContentPermissionIds(array $contentPermissionIds)
-    {
-        PermissionRepository::$availableContentPermissionIds = $contentPermissionIds;
-
-        return $this;
     }
 }
