@@ -8,18 +8,19 @@ use Railroad\Railcontent\Repositories\VersionRepository;
 
 class VersionService
 {
-    private $versionRepository, $contentRepository, $search;
+    // todo: revamp this class
+
+    private $versionRepository;
+    private $contentRepository;
     private $request;
 
     public function __construct(
         VersionRepository $versionRepository,
         Request $request,
-        ContentRepository $contentRepository,
-        SearchService $search
+        ContentRepository $contentRepository
     ) {
         $this->versionRepository = $versionRepository;
         $this->contentRepository = $contentRepository;
-        $this->search = $search;
         $this->request = $request;
     }
 

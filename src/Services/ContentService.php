@@ -9,27 +9,30 @@ use Railroad\Railcontent\Repositories\VersionRepository;
 
 class ContentService
 {
-    const STATUS_DRAFT = 'draft';
-    const STATUS_PUBLISHED = 'published';
-    const STATUS_ARCHIVED = 'archived';
     /**
      * @var ContentRepository
      */
     private $contentRepository;
 
-    // all possible content statuses
     /**
      * @var VersionRepository
      */
     private $versionRepository;
+
     /**
      * @var FieldRepository
      */
     private $fieldRepository;
+
     /**
      * @var DatumRepository
      */
     private $datumRepository;
+
+    // all possible content statuses
+    const STATUS_DRAFT = 'draft';
+    const STATUS_PUBLISHED = 'published';
+    const STATUS_ARCHIVED = 'archived';
 
     /**
      * ContentService constructor.
@@ -57,15 +60,7 @@ class ContentService
      */
     public function getBySlug($slug)
     {
-        return $this->contentRepository->getBySlug(
-            $page,
-            $limit,
-            $orderBy,
-            $orderDirection,
-            $statuses,
-            $types,
-            $requiredFields
-        );
+        return $this->contentRepository->getBySlug($slug);
     }
 
     /**

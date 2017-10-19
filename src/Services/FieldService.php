@@ -7,11 +7,25 @@ use Railroad\Railcontent\Repositories\FieldRepository;
 
 class FieldService
 {
-    private $fieldReposity, $contentRepository;
+    /**
+     * @var FieldRepository
+     */
+    private $fieldRepository;
 
+    /**
+     * @var ContentRepository
+     */
+    private $contentRepository;
+
+    /**
+     * FieldService constructor.
+     *
+     * @param FieldRepository $fieldRepository
+     * @param ContentRepository $contentRepository
+     */
     public function __construct(FieldRepository $fieldRepository, ContentRepository $contentRepository)
     {
-        $this->fieldReposity = $fieldRepository;
+        $this->fieldRepository = $fieldRepository;
         $this->contentRepository = $contentRepository;
     }
 
@@ -25,7 +39,7 @@ class FieldService
      */
     public function createField($contentId, $key, $value, $type, $position)
     {
-        $fieldId = $this->fieldReposity->updateOrCreateField(null, $key, $value, $type, $position);
+        $fieldId = $this->fieldRepository->updateOrCreateField(null, $key, $value, $type, $position);
 
         $this->contentRepository->linkField($contentId, $fieldId);
 
@@ -42,7 +56,7 @@ class FieldService
      */
     public function updateField($contentId, $fieldId, $key, $value, $type, $position)
     {
-        $this->fieldReposity->updateOrCreateField($fieldId, $key, $value, $type, $position);
+        $this->fieldRepository->updateOrCreateField($fieldId, $key, $value, $type, $position);
 
         return $this->contentRepository->getLinkedField($fieldId, $contentId);
     }
@@ -51,7 +65,7 @@ class FieldService
      * Return the content with the linked field
      *
      * @param integer $fieldId
-     * @param integer $categoryId
+     * @param $contentId
      * @return array
      */
     public function getField($fieldId, $contentId)

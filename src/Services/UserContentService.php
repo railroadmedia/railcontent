@@ -6,12 +6,20 @@ use Railroad\Railcontent\Repositories\UserContentRepository;
 
 class UserContentService
 {
-    const STATE_STARTED = 'started';
+    /**
+     * @var UserContentRepository
+     */
+    public $userContentRepository;
+
+    /**
+     * @var int|null
+     */
+    public $userId;
 
     // all possible user content state
+    const STATE_STARTED = 'started';
     const STATE_COMPLETED = 'completed';
     const STATE_ADDED_TO_LIST = 'added';
-    public $userContentRepository;
 
     /**
      * UserContentService constructor.
@@ -24,6 +32,10 @@ class UserContentService
         $this->userId = $this->userContentRepository->getAuthenticatedUserId(request());
     }
 
+    /**
+     * @param integer $contentId
+     * @return bool
+     */
     public function startContent($contentId)
     {
         $userContentId =
@@ -36,6 +48,10 @@ class UserContentService
         return $userContentId > 0;
     }
 
+    /**
+     * @param integer $contentId
+     * @return bool
+     */
     public function completeContent($contentId)
     {
         $progress = 100;
@@ -49,9 +65,13 @@ class UserContentService
         return $userContentId > 0;
     }
 
+    /**
+     * @param integer$contentId
+     * @param string $progress
+     * @return bool
+     */
     public function saveContentProgress($contentId, $progress)
     {
-
         $data = [
             'progress' => $progress
         ];

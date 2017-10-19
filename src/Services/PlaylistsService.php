@@ -7,11 +7,19 @@ use Railroad\Railcontent\Repositories\UserContentRepository;
 
 class PlaylistsService
 {
-    const TYPE_PUBLIC = 'public';
+    /**
+     * @var PlaylistRepository
+     */
+    protected $playlistsRepository;
 
-    // playlist type
+    /**
+     * @var UserContentRepository
+     */
+    protected$userContentRepository;
+
+    // playlist types
+    const TYPE_PUBLIC = 'public';
     const TYPE_PRIVATE = 'private';
-    protected $playlistsRepository, $userContentRepository;
 
     /**
      * PlaylistsService constructor.
@@ -63,7 +71,7 @@ class PlaylistsService
      */
     public function getPlaylist($playlistId, $userId)
     {
-        return $this->playlistsRepository->getPlaylistWithContent($playlistId, $userId);
+        return $this->playlistsRepository->get($playlistId, $userId);
     }
 
     /**
