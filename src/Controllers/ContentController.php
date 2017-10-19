@@ -32,6 +32,8 @@ class ContentController extends Controller
      */
     public function index(Request $request)
     {
+        // todo: pass real input values
+        
         $contents = $this->contentService->getFiltered(
             $request->get('page'),
             $request->get('page'),

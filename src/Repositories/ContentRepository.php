@@ -15,6 +15,7 @@ class ContentRepository extends RepositoryBase
      * @var array|bool
      */
     public static $availableContentStatues = false;
+
     /**
      * If this is false content with any language will be pulled. If its an array, only content with those
      * languages will be pulled.
@@ -22,20 +23,24 @@ class ContentRepository extends RepositoryBase
      * @var array|bool
      */
     public static $includedLanguages = false;
+
     /**
      * Determines whether content with a published_on date in the future will be pulled or not.
      *
      * @var array|bool
      */
     public static $pullFutureContent = true;
+
     /**
      * @var PermissionRepository
      */
     private $permissionRepository;
+
     /**
      * @var FieldRepository
      */
     private $fieldRepository;
+
     /**
      * @var DatumRepository
      */
@@ -72,63 +77,6 @@ class ContentRepository extends RepositoryBase
             ->where([ConfigService::$tableContent . '.id' => $id])
             ->get()
             ->first();
-    }
-
-    /** Generate the Query Builder
-     *
-     * @return Builder
-     */
-    public function baseQuery()
-    {
-        $query = $this->queryTable()
-            ->select(
-                [
-                    ConfigService::$tableContent . '.id as id',
-                    ConfigService::$tableContent . '.slug as slug',
-                    ConfigService::$tableContent . '.status as status',
-                    ConfigService::$tableContent . '.type as type',
-                    ConfigService::$tableContent . '.position as position',
-                    ConfigService::$tableContent . '.parent_id as parent_id',
-                    ConfigService::$tableContent . '.published_on as published_on',
-                    ConfigService::$tableContent . '.created_on as created_on',
-                    ConfigService::$tableContent . '.archived_on as archived_on',
-                    ConfigService::$tableContent . '.brand as brand',
-                    ConfigService::$tableFields . '.id as field_id',
-                    ConfigService::$tableFields . '.key as field_key',
-                    ConfigService::$tableFields . '.value as field_value',
-                    ConfigService::$tableFields . '.type as field_type',
-                    ConfigService::$tableFields . '.position as field_position',
-                    ConfigService::$tableData . '.id as datum_id',
-                    ConfigService::$tableData . '.key as datum_key',
-                    ConfigService::$tableData . '.position as datum_position',
-                ]
-            );
-
-        $query = $this->fieldRepository->attachFieldsToContentQuery($query);
-        $query = $this->datumRepository->attachDatumToContentQuery($query);
-        $query = $this->permissionRepository->restrictContentQueryByPermissions($query);
-
-        if (is_array(self::$availableContentStatues)) {
-            $query = $query->whereIn('status', self::$availableContentStatues);
-        }
-
-        if (is_array(self::$includedLanguages)) {
-            $query = $query->whereIn('language', self::$includedLanguages);
-        }
-
-        if (!self::$pullFutureContent) {
-            $query = $query->where('published_on', '<', Carbon::now()->toDateTimeString());
-        }
-
-        return $query;
-    }
-
-    /**
-     * @return Builder
-     */
-    public function queryTable()
-    {
-        return $this->connection()->table(ConfigService::$tableContent);
     }
 
     /**
@@ -458,8 +406,7 @@ class ContentRepository extends RepositoryBase
             ->leftJoin(ConfigService::$tableData, 'datum_id', '=', $dataIdLabel)
             ->select(
                 ConfigService::$tableContentData . '.*',
-                ConfigService::$tableData . '.*',
-                'translation_' . ConfigService::$tableData . '.value as value'
+                ConfigService::$tableData . '.*'
             )
             ->where(
                 [
@@ -487,8 +434,7 @@ class ContentRepository extends RepositoryBase
                 ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel)
                 ->select(
                     ConfigService::$tableContentFields . '.*',
-                    ConfigService::$tableFields . '.*',
-                    'translation_' . ConfigService::$tableFields . '.value as value'
+                    ConfigService::$tableFields . '.*'
                 )
                 ->where(
                     [
@@ -630,5 +576,62 @@ class ContentRepository extends RepositoryBase
                     'type' => 'content_id'
                 ]
             )->get();
+    }
+
+    /**
+     * @return Builder
+     */
+    public function queryTable()
+    {
+        return $this->connection()->table(ConfigService::$tableContent);
+    }
+
+    /** Generate the Query Builder
+     *
+     * @return Builder
+     */
+    public function baseQuery()
+    {
+        $query = $this->queryTable()
+            ->select(
+                [
+                    ConfigService::$tableContent . '.id as id',
+                    ConfigService::$tableContent . '.slug as slug',
+                    ConfigService::$tableContent . '.status as status',
+                    ConfigService::$tableContent . '.type as type',
+                    ConfigService::$tableContent . '.position as position',
+                    ConfigService::$tableContent . '.parent_id as parent_id',
+                    ConfigService::$tableContent . '.published_on as published_on',
+                    ConfigService::$tableContent . '.created_on as created_on',
+                    ConfigService::$tableContent . '.archived_on as archived_on',
+                    ConfigService::$tableContent . '.brand as brand',
+                    ConfigService::$tableFields . '.id as field_id',
+                    ConfigService::$tableFields . '.key as field_key',
+                    ConfigService::$tableFields . '.value as field_value',
+                    ConfigService::$tableFields . '.type as field_type',
+                    ConfigService::$tableFields . '.position as field_position',
+                    ConfigService::$tableData . '.id as datum_id',
+                    ConfigService::$tableData . '.key as datum_key',
+                    ConfigService::$tableData . '.position as datum_position',
+                ]
+            );
+
+        $query = $this->fieldRepository->attachFieldsToContentQuery($query);
+        $query = $this->datumRepository->attachDatumToContentQuery($query);
+        $query = $this->permissionRepository->restrictContentQueryByPermissions($query);
+
+        if (is_array(self::$availableContentStatues)) {
+            $query = $query->whereIn('status', self::$availableContentStatues);
+        }
+
+        if (is_array(self::$includedLanguages)) {
+            $query = $query->whereIn('language', self::$includedLanguages);
+        }
+
+        if (!self::$pullFutureContent) {
+            $query = $query->where('published_on', '<', Carbon::now()->toDateTimeString());
+        }
+
+        return $query;
     }
 }

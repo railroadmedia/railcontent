@@ -19,6 +19,7 @@ class CreateDataTable extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('key', 255)->index();
+                $table->text('value');
                 $table->integer('position')->index()->nullable();
             }
         );

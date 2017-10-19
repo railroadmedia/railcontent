@@ -31,6 +31,7 @@ class DatumController extends Controller
     public function store(DatumRequest $request)
     {
         //save a content version before datum creation
+        // todo: rename to ContentCreated (after save to db) or ContentCreation (before save to db)
         event(new ContentUpdated($request->input('content_id')));
 
         $categoryData = $this->datumService->createDatum(
@@ -61,6 +62,7 @@ class DatumController extends Controller
         }
 
         //save a content version before datum update
+        // todo: this should be after the datum is saved, or renamed to 'ContentUpdating' if its being triggered before the actual update
         event(new ContentUpdated($request->input('content_id')));
 
         $categoryData = $this->datumService->updateDatum(
@@ -90,6 +92,7 @@ class DatumController extends Controller
         }
 
         //save a content version before datum deletion
+        // todo: this should be after the datum is deleted and renamed to ContentDeleted
         event(new ContentUpdated($request->input('content_id')));
 
         $deleted = $this->datumService->deleteDatum(

@@ -29,8 +29,18 @@ class ContentRepositoryTest extends RailcontentTestCase
         $slug = $this->faker->word;
         $status = $this->faker->word;
         $type = $this->faker->word;
+        $language = 'en-US';
 
-        $contentId = $this->classBeingTested->create($slug, $status, $type, 1, null, Carbon::now()->subDays(1000 - 10)->toDateTimeString());
+        $contentId =
+            $this->classBeingTested->create(
+                $slug,
+                $status,
+                $type,
+                1,
+                $language,
+                null,
+                Carbon::now()->subDays(1000 - 10)->toDateTimeString()
+            );
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
@@ -43,17 +53,6 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'published_on' => Carbon::now()->subDays(1000 - 10)->toDateTimeString(),
                 'created_on' => Carbon::now()->toDateTimeString(),
                 'archived_on' => null
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableTranslations,
-            [
-                'id' => 1,
-                'value' => $slug,
-                'entity_type' => ConfigService::$tableContent,
-                'entity_id' => $contentId,
-                'language_id' => $this->languageId
             ]
         );
     }
@@ -69,10 +68,29 @@ class ContentRepositoryTest extends RailcontentTestCase
         $type = $this->faker->word;
         $type2 = $this->faker->word;
         $type3 = $this->faker->word;
+        $language = 'en-US';
 
-        $contentId = $this->classBeingTested->create($slug, $status, $type, 1, null, Carbon::now()->subDays(990)->toDateTimeString());
-        $content2Id = $this->classBeingTested->create($slug2, $status2, $type2, 1, null, Carbon::now()->subDays(10)->toDateTimeString());
-        $content3Id = $this->classBeingTested->create($slug3, $status3, $type3, 1, null, null);
+        $contentId =
+            $this->classBeingTested->create(
+                $slug,
+                $status,
+                $type,
+                1,
+                $language,
+                null,
+                Carbon::now()->subDays(990)->toDateTimeString()
+            );
+        $content2Id =
+            $this->classBeingTested->create(
+                $slug2,
+                $status2,
+                $type2,
+                1,
+                $language,
+                null,
+                Carbon::now()->subDays(10)->toDateTimeString()
+            );
+        $content3Id = $this->classBeingTested->create($slug3, $status3, $type3, 1, $language, null, null);
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
@@ -107,9 +125,26 @@ class ContentRepositoryTest extends RailcontentTestCase
         $status2 = $this->faker->word;
         $type = $this->faker->word;
         $type2 = $this->faker->word;
+        $language = 'en-US';
 
-        $contentId = $this->classBeingTested->create($slug, $status, $type, 1, null, null);
-        $content2Id = $this->classBeingTested->create($slug2, $status2, $type2, -581, null, null);
+        $contentId = $this->classBeingTested->create(
+            $slug,
+            $status,
+            $type,
+            1,
+            $language,
+            null,
+            null
+        );
+        $content2Id = $this->classBeingTested->create(
+            $slug2,
+            $status2,
+            $type2,
+            -581,
+            $language,
+            null,
+            null
+        );
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
@@ -165,16 +200,89 @@ class ContentRepositoryTest extends RailcontentTestCase
         $slug9 = implode('-', $this->faker->words());
         $status = $this->faker->word;
         $type = $this->faker->text(64);
+        $language = 'en-US';
 
-        $contentId1 = $this->classBeingTested->create($slug1, $status, $type, 1, null, null);
-        $contentId2 = $this->classBeingTested->create($slug2, $status, $type, 1, $contentId1, null);
-        $contentId3 = $this->classBeingTested->create($slug3, $status, $type, 1, $contentId2, null);
-        $contentId4 = $this->classBeingTested->create($slug4, $status, $type, 2, $contentId2, null);
-        $contentId5 = $this->classBeingTested->create($slug5, $status, $type, 3, $contentId2, null);
-        $contentId6 = $this->classBeingTested->create($slug6, $status, $type, 4, $contentId2, null);
-        $contentId7 = $this->classBeingTested->create($slug7, $status, $type, 1, $contentId6, null);
-        $contentId8 = $this->classBeingTested->create($slug8, $status, $type, 2, $contentId1, null);
-        $contentId9 = $this->classBeingTested->create($slug9, $status, $type, 2, null, null);
+        $contentId1 = $this->classBeingTested->create(
+            $slug1,
+            $status,
+            $type,
+            1,
+            $language,
+            null,
+            null
+        );
+        $contentId2 = $this->classBeingTested->create(
+            $slug2,
+            $status,
+            $type,
+            1,
+            $language,
+            $contentId1,
+            null
+        );
+        $contentId3 = $this->classBeingTested->create(
+            $slug3,
+            $status,
+            $type,
+            1,
+            $language,
+            $contentId2,
+            null
+        );
+        $contentId4 = $this->classBeingTested->create(
+            $slug4,
+            $status,
+            $type,
+            2,
+            $language,
+            $contentId2,
+            null
+        );
+        $contentId5 = $this->classBeingTested->create(
+            $slug5,
+            $status,
+            $type,
+            3,
+            $language,
+            $contentId2,
+            null
+        );
+        $contentId6 = $this->classBeingTested->create(
+            $slug6,
+            $status,
+            $type,
+            4,
+            $language,
+            $contentId2,
+            null
+        );
+        $contentId7 = $this->classBeingTested->create(
+            $slug7,
+            $status,
+            $type,
+            1,
+            $language,
+            $contentId6,
+            null
+        );
+        $contentId8 = $this->classBeingTested->create(
+            $slug8,
+            $status,
+            $type,
+            2,
+            $language,
+            $contentId1,
+            null
+        );
+        $contentId9 = $this->classBeingTested->create(
+            $slug9,
+            $status,
+            $type,
+            2,
+            $language,
+            null,
+            null
+        );
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
@@ -208,7 +316,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             ConfigService::$tableContent,
             [
                 'id' => $contentId3,
-                //'slug' => $slug3,
+                'slug' => $slug3,
                 'status' => $status,
                 'type' => $type,
                 'position' => 1,
@@ -223,7 +331,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             ConfigService::$tableContent,
             [
                 'id' => $contentId4,
-               // 'slug' => $slug4,
+                'slug' => $slug4,
                 'status' => $status,
                 'type' => $type,
                 'position' => 2,
@@ -238,7 +346,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             ConfigService::$tableContent,
             [
                 'id' => $contentId5,
-               // 'slug' => $slug5,
+                'slug' => $slug5,
                 'status' => $status,
                 'type' => $type,
                 'position' => 3,
@@ -253,7 +361,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             ConfigService::$tableContent,
             [
                 'id' => $contentId6,
-              //  'slug' => $slug6,
+                'slug' => $slug6,
                 'status' => $status,
                 'type' => $type,
                 'position' => 4,
@@ -268,7 +376,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             ConfigService::$tableContent,
             [
                 'id' => $contentId7,
-               // 'slug' => $slug7,
+                'slug' => $slug7,
                 'status' => $status,
                 'type' => $type,
                 'position' => 1,
@@ -283,7 +391,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             ConfigService::$tableContent,
             [
                 'id' => $contentId8,
-              //  'slug' => $slug8,
+                'slug' => $slug8,
                 'status' => $status,
                 'type' => $type,
                 'position' => 2,
@@ -298,7 +406,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             ConfigService::$tableContent,
             [
                 'id' => $contentId9,
-               // 'slug' => $slug9,
+                'slug' => $slug9,
                 'status' => $status,
                 'type' => $type,
                 'position' => 2,
@@ -313,10 +421,12 @@ class ContentRepositoryTest extends RailcontentTestCase
     public function test_update_content_slug()
     {
         $content = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
+            'language' => 'en-US',
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
@@ -327,7 +437,17 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $new_slug = $this->faker->word;
 
-        $this->classBeingTested->update($contentId, $new_slug, $content['status'], $content['type'], $content['position'], $content['parent_id'], null, null);
+        $this->classBeingTested->update(
+            $contentId,
+            $new_slug,
+            $content['status'],
+            $content['type'],
+            $content['position'],
+            $content['language'],
+            $content['parent_id'],
+            null,
+            null
+        );
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
@@ -343,39 +463,32 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'archived_on' => null,
             ]
         );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableTranslations,
-            [
-                'value' => $new_slug,
-                'entity_type' => ConfigService::$tableContent,
-                'entity_id' => $contentId,
-                'language_id' => $this->languageId
-            ]
-        );
     }
 
     public function test_update_content_position()
     {
         $content1 = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
+            'language' => 'en-US',
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
         ];
 
-
         $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
 
         $content2 = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => 1,
+            'language' => 'en-US',
             'parent_id' => $contentId1,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
@@ -384,19 +497,31 @@ class ContentRepositoryTest extends RailcontentTestCase
         $contentId11 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
 
         $content3 = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => 2,
+            'language' => 'en-US',
             'parent_id' => $contentId1,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
         ];
-        $content3Slug = $this->faker->word;
         $contentId12 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content3);
 
-        $contentId12 = $this->classBeingTested->update($contentId12, $content3Slug, $content3['status'], $content3['type'], 1, $content3['parent_id'], null, null);
+        $contentId12 =
+            $this->classBeingTested->update(
+                $contentId12,
+                $this->faker->word,
+                $content3['status'],
+                $content3['type'],
+                1,
+                'en-US',
+                $content3['parent_id'],
+                null,
+                null
+            );
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
@@ -418,10 +543,12 @@ class ContentRepositoryTest extends RailcontentTestCase
     public function test_update_content_and_reposition()
     {
         $content1 = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
+            'language' => 'en-US',
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
@@ -431,10 +558,12 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content1Slug = $this->faker->word;
 
         $content2 = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => 2,
+            'language' => 'en-US',
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
@@ -443,10 +572,12 @@ class ContentRepositoryTest extends RailcontentTestCase
         $contentId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
 
         $content3 = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => 3,
+            'language' => 'en-US',
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
@@ -454,7 +585,18 @@ class ContentRepositoryTest extends RailcontentTestCase
         ];
         $contentId3 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content3);
 
-        $contentId1 = $this->classBeingTested->update($contentId1, $content1Slug, $content1['status'], $content1['type'], 2, $content1['parent_id'], null, null);
+        $contentId1 =
+            $this->classBeingTested->update(
+                $contentId1,
+                $content1Slug,
+                $content1['status'],
+                $content1['type'],
+                2,
+                'en-US',
+                $content1['parent_id'],
+                null,
+                null
+            );
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
@@ -477,17 +619,6 @@ class ContentRepositoryTest extends RailcontentTestCase
             [
                 'id' => $contentId3,
                 'position' => 3
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableTranslations,
-            [
-                'id' => 1,
-                'value' => $content1Slug,
-                'entity_type' => ConfigService::$tableContent,
-                'entity_id' => $contentId1,
-                'language_id' => $this->languageId
             ]
         );
     }
@@ -495,10 +626,12 @@ class ContentRepositoryTest extends RailcontentTestCase
     public function test_update_content_and_children_reposition()
     {
         $content1 = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
+            'language' => 'en-US',
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
@@ -508,10 +641,12 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content1Slug = $this->faker->word;
 
         $content2 = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => 2,
+            'language' => 'en-US',
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
@@ -520,10 +655,12 @@ class ContentRepositoryTest extends RailcontentTestCase
         $contentId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
 
         $content3 = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => 3,
+            'language' => 'en-US',
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
@@ -531,7 +668,18 @@ class ContentRepositoryTest extends RailcontentTestCase
         ];
         $contentId3 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content3);
 
-        $contentId1 = $this->classBeingTested->update($contentId1,$content1Slug, $content1['status'], $content1['type'], 3, $content1['parent_id'], null, null);
+        $contentId1 =
+            $this->classBeingTested->update(
+                $contentId1,
+                $content1Slug,
+                $content1['status'],
+                $content1['type'],
+                3,
+                'en-US',
+                $content1['parent_id'],
+                null,
+                null
+            );
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
@@ -556,47 +704,26 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'position' => 3
             ]
         );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableTranslations,
-            [
-                'id' => 1,
-                'value' => $content1Slug,
-                'entity_type' => ConfigService::$tableContent,
-                'entity_id' => $contentId1,
-                'language_id' => $this->languageId
-            ]
-        );
     }
 
     public function test_delete_content()
     {
         $content = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
+            'language' => 'en-US',
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
         ];
+
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-        $contentSlug = $this->faker->word;
-
-        $translation = [
-            'entity_type' => ConfigService::$tableContent,
-            'entity_id' => $contentId,
-            'value' => $contentSlug,
-            'language_id' => $this->languageId
-        ];
-
-        $translationId = $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translation);
-
-        $content['id'] = $contentId;
-
-        $this->classBeingTested->delete($content, 1);
+        $this->classBeingTested->delete($contentId, 1);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContent,
@@ -604,26 +731,17 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'id' => $contentId,
             ]
         );
-
-        $this->assertDatabaseMissing(
-            ConfigService::$tableTranslations,
-            [
-                'id' => $translationId,
-                'value' => $contentSlug,
-                'entity_type' => ConfigService::$tableContent,
-                'entity_id' => $contentId,
-                'language_id' => $this->languageId
-            ]
-        );
     }
 
     public function test_delete_content_move_children()
     {
         $content1 = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => 1,
+            'language' => 'en-US',
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
@@ -633,10 +751,12 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content1['id'] = $contentId1;
 
         $content11 = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => 1,
+            'language' => 'en-US',
             'parent_id' => $contentId1,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
@@ -645,10 +765,12 @@ class ContentRepositoryTest extends RailcontentTestCase
         $contentId11 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content11);
 
         $content12 = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => 2,
+            'language' => 'en-US',
             'parent_id' => $contentId1,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
@@ -657,10 +779,12 @@ class ContentRepositoryTest extends RailcontentTestCase
         $contentId12 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content12);
 
         $content2 = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => 2,
+            'language' => 'en-US',
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
@@ -668,7 +792,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         ];
         $contentId2 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
 
-        $this->classBeingTested->delete($content1, 1);
+        $this->classBeingTested->delete($contentId1, true);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContent,
@@ -728,38 +852,40 @@ class ContentRepositoryTest extends RailcontentTestCase
     public function test_get_content_datum_non_exist()
     {
         $contentDatum = $this->classBeingTested->getLinkedDatum(1, 1);
+        
         $this->assertEquals(null, $contentDatum);
     }
 
     public function test_get_content_datum()
     {
         $content = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
+            'language' => 'en-US',
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
         ];
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-        $contentSlug = $this->faker->word;
-        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
         $datum = [
             'key' => $this->faker->word,
+            'value' => $this->faker->text(),
             'position' => $this->faker->numberBetween()
         ];
 
-        $datumValue = $this->faker->text();
         $datumId = $this->query()->table(ConfigService::$tableData)->insertGetId($datum);
-        $this->translateItem($this->classBeingTested->getUserLanguage(), $datumId, ConfigService::$tableData, $datumValue);
 
-        $datumLinkId = $this->query()->table(ConfigService::$tableContentData)->insertGetId([
-            'content_id' => $contentId,
-            'datum_id' => $datumId
-        ]);
+        $datumLinkId = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'datum_id' => $datumId
+            ]
+        );
 
         $contentDatum = $this->classBeingTested->getLinkedDatum($datumId, $contentId);
 
@@ -768,7 +894,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             'content_id' => $contentId,
             'datum_id' => $datumId,
             'key' => $datum['key'],
-            'value' => $datumValue,
+            'value' => $datum['value'],
             'position' => $datum['position']
         ];
 
@@ -795,7 +921,7 @@ class ContentRepositoryTest extends RailcontentTestCase
         );
     }
 
-    public function test_unlink_content_all_datum()
+    public function test_unlink_content_all_data()
     {
         $contentDatum = [
             'content_id' => $this->faker->numberBetween(),
@@ -807,9 +933,10 @@ class ContentRepositoryTest extends RailcontentTestCase
             'content_id' => $contentDatum['content_id'],
             'datum_id' => $this->faker->numberBetween()
         ];
-        $contentDatumId2 = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentDatum2);
+        $contentDatumId2 =
+            $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentDatum2);
 
-        $this->classBeingTested->unlinkDatum($contentDatum['content_id']);
+        $this->classBeingTested->unlinkData($contentDatum['content_id']);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContentData,
@@ -841,24 +968,25 @@ class ContentRepositoryTest extends RailcontentTestCase
     public function test_get_content_field_non_exist()
     {
         $contentField = $this->classBeingTested->getLinkedField(1, 1);
+
         $this->assertEquals(null, $contentField);
     }
 
     public function test_get_content_field()
     {
         $content = [
+            'slug' => $this->faker->word,
             'status' => $this->faker->word,
             'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'position' => $this->faker->numberBetween(),
+            'language' => 'en-US',
             'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
         ];
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-        $contentSlug = $this->faker->word;
-        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
 
         $field = [
             'key' => $this->faker->word,
@@ -866,13 +994,15 @@ class ContentRepositoryTest extends RailcontentTestCase
             'type' => $this->faker->word,
             'position' => $this->faker->numberBetween()
         ];
-        $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
-        $this->translateItem($this->classBeingTested->getUserLanguage(), $fieldId, ConfigService::$tableFields, $field['value']);
 
-        $fieldLinkId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId([
-            'content_id' => $contentId,
-            'field_id' => $fieldId
-        ]);
+        $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
+
+        $fieldLinkId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'field_id' => $fieldId
+            ]
+        );
 
         $contentField = $this->classBeingTested->getLinkedField($fieldId, $contentId);
 
@@ -895,13 +1025,15 @@ class ContentRepositoryTest extends RailcontentTestCase
             'content_id' => $this->faker->numberBetween(),
             'field_id' => $this->faker->numberBetween()
         ];
-        $contentFieldId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField);
+        $contentFieldId =
+            $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField);
 
         $contentField2 = [
             'content_id' => $contentField['content_id'],
             'field_id' => $this->faker->numberBetween()
         ];
-        $contentFieldId2 = $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField2);
+        $contentFieldId2 =
+            $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField2);
 
         $this->classBeingTested->unlinkField($contentField['content_id'], $contentField['field_id']);
 
@@ -930,15 +1062,17 @@ class ContentRepositoryTest extends RailcontentTestCase
             'content_id' => $this->faker->numberBetween(),
             'field_id' => $this->faker->numberBetween()
         ];
-        $contentFieldId1 = $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField1);
+        $contentFieldId1 =
+            $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField1);
 
         $contentField2 = [
             'content_id' => $contentField1['content_id'],
             'field_id' => $this->faker->numberBetween()
         ];
-        $contentFieldId2 = $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField2);
+        $contentFieldId2 =
+            $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField2);
 
-        $this->classBeingTested->unlinkField($contentField1['content_id']);
+        $this->classBeingTested->unlinkFields($contentField1['content_id']);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContentFields,
@@ -946,13 +1080,5 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentField1['content_id']
             ]
         );
-    }
-
-    /**
-     * @return \Illuminate\Database\Connection
-     */
-    public function query()
-    {
-        return $this->databaseManager->connection();
     }
 }
