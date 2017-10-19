@@ -117,31 +117,22 @@ class ContentRepository extends RepositoryBase
         array $types,
         array $requiredFields
     ) {
-        $subQuery = $this->baseQuery(false)
+        // we must use a sub query here since the main query is full of joined rows that throw off the
+        // limit and skip
+        $subQueryString = $this->baseQuery(false)
             ->select(ConfigService::$tableContent . '.id')
             ->whereIn(ConfigService::$tableContent . '.type', $types)
             ->limit($limit)
-            ->skip(($page - 1) * $limit);
-
-        $subQueryString = $subQuery->toSql();
-
-        $bindings = $subQuery->getBindings();
-
-        foreach ($bindings as &$binding) {
-            $binding = is_numeric($binding) ? $binding : "'" . $binding . "'";
-        }
-
-        $subQueryString = str_replace_array('?', $bindings, $subQueryString);
+            ->skip(($page - 1) * $limit)->toSql();
 
         $query = $this->baseQuery()
             ->join(
-                $this->databaseManager->raw(
-                    '(' . $subQueryString . ') inner_content'
-                ),
+                $this->databaseManager->raw('(' . $subQueryString . ') inner_content'),
                 function (JoinClause $joinClause) {
                     $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
                 }
             )
+            ->addBinding($types)
             ->orderBy($orderBy, $orderDirection);
 
         return $this->parseBaseQueryRows($query->get()->toArray());
@@ -707,7 +698,7 @@ class ContentRepository extends RepositoryBase
                 'brand' => $row['brand'],
             ];
 
-            $contents[$row['id']][] = $content;
+            $contents[$row['id']] = $content;
 
             $contents[$row['id']] =
                 array_map("unserialize", array_unique(array_map("serialize", $contents[$row['id']])));
@@ -742,8 +733,12 @@ class ContentRepository extends RepositoryBase
             }
 
         }
-        var_dump($contents);
 
-        die();
+        foreach ($contents as $contentId => $content) {
+            $contents[$contentId]['fields'] = $fields[$contentId];
+            $contents[$contentId]['data'] = $data[$contentId];
+        }
+
+        return $contents;
     }
 }
