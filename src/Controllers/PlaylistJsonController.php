@@ -7,7 +7,7 @@ use Railroad\Railcontent\Requests\PlaylistRequest;
 use Railroad\Railcontent\Requests\UserContentPlaylistRequest;
 use Railroad\Railcontent\Services\PlaylistsService;
 
-class PlaylistController extends Controller
+class PlaylistJsonController extends Controller
 {
     protected $playlistsService;
 

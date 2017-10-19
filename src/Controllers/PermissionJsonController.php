@@ -12,7 +12,7 @@ use Railroad\Railcontent\Services\PermissionService;
  *
  * @package Railroad\Railcontent\Controllers
  */
-class PermissionController extends Controller
+class PermissionJsonController extends Controller
 {
     /**
      * @var PermissionService

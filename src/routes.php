@@ -1,28 +1,27 @@
 <?php
-Route::get('/', 'Railroad\Railcontent\Controllers\ContentController@index');
-Route::post('/content', 'Railroad\Railcontent\Controllers\ContentController@store');
-Route::put('/content/{contentId}', 'Railroad\Railcontent\Controllers\ContentController@update');
-Route::delete('/content/{contentId}', 'Railroad\Railcontent\Controllers\ContentController@delete');
-Route::post('/content/field', 'Railroad\Railcontent\Controllers\FieldController@store');
-Route::put('/content/field/{fieldId}', 'Railroad\Railcontent\Controllers\FieldController@update');
-Route::delete('/content/field/{fieldId}', 'Railroad\Railcontent\Controllers\FieldController@delete');
-Route::post('/content/datum', 'Railroad\Railcontent\Controllers\DatumController@store');
-Route::put('/content/datum/{datumId}', 'Railroad\Railcontent\Controllers\DatumController@update');
-Route::delete('/content/datum/{datumId}', 'Railroad\Railcontent\Controllers\DatumController@delete');
+Route::get('/', 'Railroad\Railcontent\Controllers\ContentJsonController@index');
+Route::post('/content', 'Railroad\Railcontent\Controllers\ContentJsonController@store');
+Route::put('/content/{contentId}', 'Railroad\Railcontent\Controllers\ContentJsonController@update');
+Route::delete('/content/{contentId}', 'Railroad\Railcontent\Controllers\ContentJsonController@delete');
+Route::post('/content/field', 'Railroad\Railcontent\Controllers\FieldJsonController@store');
+Route::put('/content/field/{fieldId}', 'Railroad\Railcontent\Controllers\FieldJsonController@update');
+Route::delete('/content/field/{fieldId}', 'Railroad\Railcontent\Controllers\FieldJsonController@delete');
+Route::post('/content/datum', 'Railroad\Railcontent\Controllers\DatumJsonController@store');
+Route::put('/content/datum/{datumId}', 'Railroad\Railcontent\Controllers\DatumJsonController@update');
+Route::delete('/content/datum/{datumId}', 'Railroad\Railcontent\Controllers\DatumJsonController@delete');
 Route::get(
     '/content/restore/{versionId}',
-    'Railroad\Railcontent\Controllers\ContentController@restoreContent'
+    'Railroad\Railcontent\Controllers\ContentJsonController@restoreContent'
 );
-Route::post('/permission', 'Railroad\Railcontent\Controllers\PermissionController@store');
-Route::put('/permission/{permissionId}', 'Railroad\Railcontent\Controllers\PermissionController@update');
-Route::delete('/permission/{permissionId}', 'Railroad\Railcontent\Controllers\PermissionController@delete');
-Route::post('/permission/assign', 'Railroad\Railcontent\Controllers\PermissionController@assign');
-Route::put('/start', 'Railroad\Railcontent\Controllers\ContentController@startContent');
-Route::put('/complete', 'Railroad\Railcontent\Controllers\ContentController@completeContent');
-Route::put('/progress', 'Railroad\Railcontent\Controllers\ContentController@saveProgress');
-Route::post('/playlists/add', 'Railroad\Railcontent\Controllers\PlaylistsController@addToPlaylist');
-Route::post('/playlists/create', 'Railroad\Railcontent\Controllers\PlaylistsController@store');
-Route::post(
-    'switchLang',
-    ['as' => 'switchLang', 'uses' => 'Railroad\Railcontent\Controllers\LanguageController@switchLang']
+Route::post('/permission', 'Railroad\Railcontent\Controllers\PermissionJsonController@store');
+Route::put('/permission/{permissionId}', 'Railroad\Railcontent\Controllers\PermissionJsonController@update');
+Route::delete(
+    '/permission/{permissionId}',
+    'Railroad\Railcontent\Controllers\PermissionJsonController@delete'
 );
+Route::post('/permission/assign', 'Railroad\Railcontent\Controllers\PermissionJsonController@assign');
+Route::put('/start', 'Railroad\Railcontent\Controllers\ContentJsonController@startContent');
+Route::put('/complete', 'Railroad\Railcontent\Controllers\ContentJsonController@completeContent');
+Route::put('/progress', 'Railroad\Railcontent\Controllers\ContentJsonController@saveProgress');
+Route::post('/playlists/add', 'Railroad\Railcontent\Controllers\PlaylistJsonController@addToPlaylist');
+Route::post('/playlists/create', 'Railroad\Railcontent\Controllers\PlaylistJsonController@store');

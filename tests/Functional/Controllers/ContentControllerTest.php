@@ -68,7 +68,7 @@ class ContentControllerTest extends RailcontentTestCase
         $response = $this->call('POST', 'content');
 
         //expecting it to redirect us to previous page.
-        $this->assertEquals(302, $response->status());
+        $this->assertEquals(422, $response->status());
 
         $response->assertSessionHasErrors();
 

@@ -9,7 +9,7 @@ use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Requests\ContentRequest;
 use Railroad\Railcontent\Services\ContentService;
 
-class ContentController extends Controller
+class ContentJsonController extends Controller
 {
     /**
      * @var ContentService

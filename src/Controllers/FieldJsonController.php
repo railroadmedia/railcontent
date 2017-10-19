@@ -8,7 +8,7 @@ use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Requests\FieldRequest;
 use Railroad\Railcontent\Services\FieldService;
 
-class FieldController extends Controller
+class FieldJsonController extends Controller
 {
     private $fieldService;
 

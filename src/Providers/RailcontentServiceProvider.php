@@ -5,8 +5,8 @@ namespace Railroad\Railcontent\Providers;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use PDO;
-use Railroad\Railcontent\Controllers\ContentController;
-use Railroad\Railcontent\Controllers\PermissionController;
+use Railroad\Railcontent\Controllers\ContentJsonController;
+use Railroad\Railcontent\Controllers\PermissionJsonController;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Listeners\VersionContentEventListener;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -108,7 +108,7 @@ class RailcontentServiceProvider extends ServiceProvider
             ->give(ContentRepository::class);
 
         $this->app
-            ->when(PermissionController::class)
+            ->when(PermissionJsonController::class)
             ->needs(SearchInterface::class)
             ->give(PermissionRepository::class);
 
@@ -118,7 +118,7 @@ class RailcontentServiceProvider extends ServiceProvider
             ->give(ContentRepository::class);
 
         $this->app
-            ->when(ContentController::class)
+            ->when(ContentJsonController::class)
             ->needs(SearchInterface::class)
             ->give(ContentRepository::class);
 

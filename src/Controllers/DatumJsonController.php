@@ -8,7 +8,7 @@ use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Requests\DatumRequest;
 use Railroad\Railcontent\Services\DatumService;
 
-class DatumController extends Controller
+class DatumJsonController extends Controller
 {
     private $datumService;
 
