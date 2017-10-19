@@ -21,6 +21,7 @@ class DatumRepository extends RepositoryBase
         $update = $this->query()->where(ConfigService::$tableData . '.id', $id)->update(
             [
                 'key' => $key,
+                'value' => $value,
                 'position' => $position
             ]
         );
@@ -29,6 +30,7 @@ class DatumRepository extends RepositoryBase
             $id = $this->query()->insertGetId(
                 [
                     'key' => $key,
+                    'value' => $value,
                     'position' => $position
                 ]
             );

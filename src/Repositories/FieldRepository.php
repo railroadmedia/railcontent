@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 
-class FieldRepository
+class FieldRepository extends RepositoryBase
 {
     /**
      * Update or insert a new record in the railcontent_fields table
@@ -13,6 +13,8 @@ class FieldRepository
      * @param integer $id
      * @param string $key
      * @param string $value
+     * @param string $type
+     * @param int $position
      * @return int
      */
     public function updateOrCreateField($id, $key, $value, $type, $position)
@@ -45,7 +47,7 @@ class FieldRepository
      */
     public function query()
     {
-        return parent::connection()->table(ConfigService::$tableFields);
+        return $this->connection()->table(ConfigService::$tableFields);
     }
 
     /**

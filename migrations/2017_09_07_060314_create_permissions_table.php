@@ -18,6 +18,7 @@ class CreatePermissionsTable extends Migration
             ConfigService::$tablePermissions,
             function(Blueprint $table) {
                 $table->increments('id');
+                $table->string('name', 128)->index();
                 $table->dateTime('created_on')->index();
             });
     }

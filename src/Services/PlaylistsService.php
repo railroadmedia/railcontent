@@ -2,7 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Railroad\Railcontent\Repositories\PlaylistsRepository;
+use Railroad\Railcontent\Repositories\PlaylistRepository;
 use Railroad\Railcontent\Repositories\UserContentRepository;
 
 class PlaylistsService
@@ -16,11 +16,11 @@ class PlaylistsService
     /**
      * PlaylistsService constructor.
      *
-     * @param PlaylistsRepository $playlistsRepository
+     * @param PlaylistRepository $playlistsRepository
      * @param UserContentRepository $userContentRepository
      */
     public function __construct(
-        PlaylistsRepository $playlistsRepository,
+        PlaylistRepository $playlistsRepository,
         UserContentRepository $userContentRepository
     ) {
         $this->playlistsRepository = $playlistsRepository;

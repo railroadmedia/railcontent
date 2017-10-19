@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\PlaylistsService;
 
-class PlaylistsRepository extends RepositoryBase
+class PlaylistRepository extends RepositoryBase
 {
     /**
      * Save a new record in railcontent_user_content_playlists table

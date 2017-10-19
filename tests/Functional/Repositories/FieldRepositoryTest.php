@@ -2,22 +2,22 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
-use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\FieldRepository;
-use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class FieldRepositoryTest extends RailcontentTestCase
 {
-    protected $classBeingTested, $languageId;
+    /**
+     * @var FieldRepository
+     */
+    protected $classBeingTested;
 
     protected function setUp()
     {
         parent::setUp();
 
         $this->classBeingTested = $this->app->make(FieldRepository::class);
-        $userId = $this->createAndLogInNewUser();
-        $this->languageId = $this->setUserLanguage($userId);
     }
 
     public function test_insert_field()
@@ -27,7 +27,7 @@ class FieldRepositoryTest extends RailcontentTestCase
         $type = $this->faker->word;
         $position = $this->faker->numberBetween();
 
-        $field = $this->classBeingTested->updateOrCreateField(1, $key, $value,  $type, $position);
+        $field = $this->classBeingTested->updateOrCreateField(1, $key, $value, $type, $position);
 
         $this->assertEquals(1, $field);
 
@@ -39,16 +39,6 @@ class FieldRepositoryTest extends RailcontentTestCase
                 'value' => $value,
                 'type' => $type,
                 'position' => $position
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableTranslations,
-            [
-                'entity_type' => ConfigService::$tableFields,
-                'entity_id' => $field,
-                'value' => $value,
-                'language_id' => $this->languageId
             ]
         );
     }
@@ -64,11 +54,16 @@ class FieldRepositoryTest extends RailcontentTestCase
 
         $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
 
-        $translationId = $this->translateItem($this->languageId, $fieldId, ConfigService::$tableFields, $field['value']);
-
         $new_value = $this->faker->text(255);
 
-        $result = $this->classBeingTested->updateOrCreateField($fieldId, $field['key'], $new_value, $field['type'], $field['position']);
+        $result =
+            $this->classBeingTested->updateOrCreateField(
+                $fieldId,
+                $field['key'],
+                $new_value,
+                $field['type'],
+                $field['position']
+            );
 
         $this->assertEquals($fieldId, $result);
 
@@ -87,32 +82,10 @@ class FieldRepositoryTest extends RailcontentTestCase
             ConfigService::$tableFields,
             [
                 'id' => $fieldId,
-                'key' =>  $field['key'],
+                'key' => $field['key'],
                 'value' => $new_value,
                 'type' => $field['type'],
                 'position' => $field['position']
-            ]
-        );
-
-        $this->assertDatabaseMissing(
-            ConfigService::$tableTranslations,
-            [
-                'id' => $translationId,
-                'entity_type' => ConfigService::$tableFields,
-                'entity_id' => $fieldId,
-                'value' => $field['value'],
-                'language_id' => $this->languageId
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableTranslations,
-            [
-                'id' => ($translationId + 1),
-                'entity_type' => ConfigService::$tableFields,
-                'entity_id' => $fieldId,
-                'value' => $new_value,
-                'language_id' => $this->languageId
             ]
         );
     }
@@ -128,8 +101,6 @@ class FieldRepositoryTest extends RailcontentTestCase
 
         $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
 
-        $translationId = $this->translateItem($this->languageId, $fieldId, ConfigService::$tableFields, $field['value']);
-
         $this->classBeingTested->deleteField($fieldId);
 
         $this->assertDatabaseMissing(
@@ -142,25 +113,5 @@ class FieldRepositoryTest extends RailcontentTestCase
                 'position' => $field['position']
             ]
         );
-
-        $this->assertDatabaseMissing(
-            ConfigService::$tableTranslations,
-            [
-                'id' => $translationId,
-                'entity_type' => ConfigService::$tableFields,
-                'entity_id' => $fieldId,
-                'value' => $field['value'],
-                'language_id' => $this->languageId
-            ]
-        );
     }
-
-    /**
-     * @return \Illuminate\Database\Connection
-     */
-    public function query()
-    {
-        return $this->databaseManager->connection();
-    }
-
 }

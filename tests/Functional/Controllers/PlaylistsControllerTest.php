@@ -3,7 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Repositories\PlaylistsRepository;
+use Railroad\Railcontent\Repositories\PlaylistRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PlaylistsService;
@@ -19,7 +19,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
         parent::setUp();
 
         $this->serviceBeingTested = $this->app->make(PlaylistsService::class);
-        $this->classBeingTested = $this->app->make(PlaylistsRepository::class);
+        $this->classBeingTested = $this->app->make(PlaylistRepository::class);
         $this->userId = $this->createAndLogInNewUser();
         $this->setUserLanguage($this->userId);
     }

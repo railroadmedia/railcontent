@@ -35,6 +35,7 @@ class PermissionRepository extends RepositoryBase
     {
         $permissionId = $this->queryTable()->insertGetId(
             [
+                'name' => $name,
                 'created_on' => Carbon::now()->toDateTimeString(),
             ]
         );
@@ -57,11 +58,11 @@ class PermissionRepository extends RepositoryBase
      *
      * @param integer $id
      * @param string $name
-     * @return integer
+     * @return bool
      */
     public function update($id, $name)
     {
-        return $id;
+        return $this->queryTable()->where(['id' => $id])->update(['name' => $name]) > 0;
     }
 
     /**
@@ -96,8 +97,7 @@ class PermissionRepository extends RepositoryBase
 
         return $query
             ->select(
-                ConfigService::$tablePermissions . '.*',
-                'translation_' . ConfigService::$tablePermissions . '.value as name'
+                ConfigService::$tablePermissions . '.*'
             )
             ->where(ConfigService::$tablePermissions . '.id', $id)->get()->first();
     }
