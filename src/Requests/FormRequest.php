@@ -78,20 +78,17 @@ class FormRequest extends LaravelFormRequest
      */
     public function setCustomRules($request, $entity = null)
     {
-
         $customRules = [];
-
         $contentType = (!is_null($entity)) ? $this->getContentTypeVal($request) : $request->request->get('type');
-        $contentType = 'library-lesson';
+
         if(array_key_exists($contentType, ConfigService::$validationRules[ConfigService::$brand])) {
             if(!$entity) {
                 $customRules = ConfigService::$validationRules[ConfigService::$brand][$contentType];
             } else {
-                //$customRules = ConfigService::$validationRules[ConfigService::$brand][$contentType][$entity];
+
                 $customRules = $this->prepareCustomRules($request, $contentType, $entity);
             }
         }
-
 
         $this->customRules = $customRules;
     }
@@ -141,7 +138,6 @@ class FormRequest extends LaravelFormRequest
                 }
             }
         }
-
         return $rules;
     }
 
