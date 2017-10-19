@@ -69,6 +69,7 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.brand', $defaultConfig['brand']);
         $app['config']->set('railcontent.available_languages', $defaultConfig['available_languages']);
         $app['config']->set('railcontent.default_language', $defaultConfig['default_language']);
+        $app['config']->set('railcontent.validation', $defaultConfig['validation']);
 
         // Setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testbench');
@@ -160,6 +161,7 @@ class RailcontentTestCase extends BaseTestCase
 
     public function setUserLanguage($userId)
     {
+       return true;
         return $this->databaseManager->connection()->query()->from(ConfigService::$tableUserLanguagePreference)->updateOrInsert(
             [
                 'user_id' => $userId,]

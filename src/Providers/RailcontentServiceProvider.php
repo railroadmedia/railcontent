@@ -90,6 +90,9 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$availableLanguages = config('railcontent.available_languages');
 
         ConfigService::$brand = config('railcontent.brand');
+
+        //Validation rules defined for each brand and content type
+        ConfigService::$validationRules = config('railcontent.validation');
     }
 
     /**

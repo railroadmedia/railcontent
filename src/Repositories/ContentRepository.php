@@ -84,6 +84,7 @@ class ContentRepository extends RepositoryBase
             ->select(
                 [
                     ConfigService::$tableContent . '.id as id',
+                    ConfigService::$tableContent . '.slug as slug',
                     ConfigService::$tableContent . '.status as status',
                     ConfigService::$tableContent . '.type as type',
                     ConfigService::$tableContent . '.position as position',

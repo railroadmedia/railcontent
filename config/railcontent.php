@@ -26,5 +26,21 @@ return [
     'default_language' => 'en-US',
     'available_languages' => [
         'es-US',
+    ],
+    //validation rules
+    'validation' => [
+        'drumeo' => [
+            'library-lesson' => [
+                'slug' => 'required|max:64',
+                'fields' => [
+                    'title|string' => 'required|string|min:3|max:64',
+                    'instructor|multiple' => 'required|exists:content,id'
+
+                ],
+                'datum' => [
+                    'description|string' => 'required|max:1024'
+                ]
+            ]
+        ]
     ]
 ];

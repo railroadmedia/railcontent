@@ -2,21 +2,11 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Railroad\Railcontent\Services\ConfigService;
+
 
 class DatumRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,10 +14,17 @@ class DatumRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        //set the general validation rules
+        $this->setGeneralRules([
             'key' => 'required|max:255',
-            'value' => 'required',
-            'content_id' => 'required|numeric|exists:' . ConfigService::$tableContent . ',id'
-        ];
+            'position' => 'nullable|numeric|min:0',
+            'content_id' => 'required|numeric|exists:'.ConfigService::$tableContent.',id'
+        ]);
+
+        //set the custom validation rules
+        $this->setCustomRules($this, 'datum');
+
+        //get all the rules for the request
+        return parent::rules();
     }
 }

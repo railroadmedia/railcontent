@@ -105,7 +105,7 @@ class ConfigService
     public static $brand;
 
     /**
-     * @var string
+     * @var array
      */
-    public static $categoryStatusNew;
+    public static $validationRules;
 }

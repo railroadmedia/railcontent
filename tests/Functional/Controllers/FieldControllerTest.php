@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\FieldRepository;
 use Railroad\Railcontent\Services\FieldService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -13,7 +14,7 @@ use Railroad\Railcontent\Services\ContentService;
 
 class FieldControllerTest extends RailcontentTestCase
 {
-    protected $classBeingTested;
+    protected $classBeingTested, $contentFactory;
 
     protected function setUp()
     {
@@ -23,7 +24,7 @@ class FieldControllerTest extends RailcontentTestCase
         $this->classBeingTested = $this->app->make(FieldRepository::class);
         $userId = $this->createAndLogInNewUser();
         $this->setUserLanguage($userId);
-        //$this->categoryClass = $this->app->make(CategoryRepository::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
     }
 
     public function test_create_content_field_method_from_service_response()
@@ -33,13 +34,13 @@ class FieldControllerTest extends RailcontentTestCase
         $type = $this->faker->text(64);
         $position = $this->faker->numberBetween();
 
-        $contentId = $this->createContent();
+        $content = $this->contentFactory->create();
 
-        $contentField = $this->serviceBeingTested->createField($contentId, null, $key, $value, $type, $position);
+        $contentField = $this->serviceBeingTested->createField($content['id'], null, $key, $value, $type, $position);
 
         $expectedResult = [
             'id' => 1,
-            'content_id' => $contentId,
+            'content_id' => $content['id'],
             'key' => $key,
             'value' => $value,
             'position' => $position,
@@ -57,7 +58,8 @@ class FieldControllerTest extends RailcontentTestCase
         $type = $this->faker->word;
         $position = $this->faker->numberBetween();
 
-        $contentId = $this->createContent();
+        $content = $this->contentFactory->create();
+        $contentId = $content['id'];
 
         $response = $this->call('POST', 'content/field', [
             'content_id' => $contentId,
@@ -96,14 +98,18 @@ class FieldControllerTest extends RailcontentTestCase
 
     public function test_add_content_field_not_pass_the_validation()
     {
-        $response = $this->call('POST', 'content/field');
+        $content = $this->contentFactory->create();
+        $response = $this->call('POST', 'content/field',[
+            'content_id' => $content['id']
+        ]);
 
-        $this->assertEquals(302, $response->status());
+        $this->assertEquals(422, $response->status());
 
-        $response->assertSessionHasErrors();
+        $this->assertEquals(2, count(json_decode($response->content(), true)));
 
-        //expecting session has error for missing fields
-        $response->assertSessionHasErrors(['key', 'value', 'content_id', 'type']);
+        //check that all the error messages are received
+        $this->assertArrayHasKey('key', json_decode($response->content(), true));
+        $this->assertArrayHasKey('type', json_decode($response->content(), true));
     }
 
     public function test_add_content_field_incorrect_fields()
