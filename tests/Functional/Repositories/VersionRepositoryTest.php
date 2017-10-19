@@ -1,21 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: roxana
- * Date: 8/25/2017
- * Time: 3:03 PM
- */
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Railroad\Railcontent\Repositories\VersionRepository;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
-USE Railroad\Railcontent\Services\ConfigService;
 
-class VersionRepositoryTest extends RailcontentTestCase{
-
+class VersionRepositoryTest extends RailcontentTestCase
+{
+    /**
+     * @var VersionRepository
+     */
     protected $classBeingTested;
 
     protected function setUp()
@@ -38,7 +34,7 @@ class VersionRepositoryTest extends RailcontentTestCase{
             'archived_on' => null,
         ];
 
-       $versionContentId = $this->classBeingTested->store(1, null, '', serialize($content));
+        $versionContentId = $this->classBeingTested->store(1, null, '', serialize($content));
 
         $this->assertDatabaseHas(
             ConfigService::$tableVersions,
@@ -65,7 +61,7 @@ class VersionRepositoryTest extends RailcontentTestCase{
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
             'datum' => [
-                1 =>[
+                1 => [
                     $this->faker->word => $this->faker->word
                 ]
             ]
@@ -101,7 +97,7 @@ class VersionRepositoryTest extends RailcontentTestCase{
 
         $versionContentId1 = $this->classBeingTested->store(1, null, '', serialize($content));
 
-        $newContent = array_merge($content,['slug' => $this->faker->word]);
+        $newContent = array_merge($content, ['slug' => $this->faker->word]);
 
         $versionContentId2 = $this->classBeingTested->store(1, null, '', serialize($newContent));
 

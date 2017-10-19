@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: roxana
- * Date: 8/17/2017
- * Time: 8:47 AM
- */
 
 namespace Railroad\Railcontent\Services;
 
