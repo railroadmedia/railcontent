@@ -71,7 +71,6 @@ class ContentService
      * @param $limit
      * @param $orderBy
      * @param $orderDirection
-     * @param array $statuses
      * @param array $types
      * @param array $requiredFields
      * @return array|null
@@ -81,7 +80,6 @@ class ContentService
         $limit,
         $orderBy,
         $orderDirection,
-        array $statuses,
         array $types,
         array $requiredFields
     ) {
@@ -90,7 +88,6 @@ class ContentService
             $limit,
             $orderBy,
             $orderDirection,
-            $statuses,
             $types,
             $requiredFields
         );

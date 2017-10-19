@@ -35,11 +35,12 @@ class ContentJsonController extends Controller
         // todo: pass real input values
         
         $contents = $this->contentService->getFiltered(
-            $request->get('page'),
-            $request->get('page'),
-            $request->get('page'),
-            $request->get('page'),
-            $request->get('page')
+            $request->get('page', 1),
+            $request->get('limit', 25),
+            $request->get('order-by', 'published_on'),
+            $request->get('order-direction', 'desc'),
+            $request->get('types', []),
+            $request->get('required-fields', [])
         );
 
         return response()->json($contents, 200);

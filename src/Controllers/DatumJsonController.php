@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Events\DatumUpdate;
 use Railroad\Railcontent\Requests\DatumRequest;
 use Railroad\Railcontent\Services\DatumService;
 
@@ -31,12 +32,11 @@ class DatumJsonController extends Controller
     public function store(DatumRequest $request)
     {
         //save a content version before datum creation
-        // todo: rename to ContentCreated (after save to db) or ContentCreation (before save to db)
-        event(new ContentUpdated($request->input('content_id')));
+        // todo: rename to DatumCreated (after save to db) or ContentCreation (before save to db)
+//        event(new DatumUpdate($request->input('content_id')));
 
         $categoryData = $this->datumService->createDatum(
             $request->input('content_id'),
-            null,
             $request->input('key'),
             $request->input('value'),
             $request->input('position')
@@ -92,7 +92,7 @@ class DatumJsonController extends Controller
         }
 
         //save a content version before datum deletion
-        // todo: this should be after the datum is deleted and renamed to ContentDeleted
+        // todo: this should be after the datum is deleted and renamed to DatumDeleted
         event(new ContentUpdated($request->input('content_id')));
 
         $deleted = $this->datumService->deleteDatum(

@@ -3,7 +3,9 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Services\ConfigService;
 
 class ContentRepository extends RepositoryBase
@@ -47,6 +49,11 @@ class ContentRepository extends RepositoryBase
     private $datumRepository;
 
     /**
+     * @var DatabaseManager
+     */
+    private $databaseManager;
+
+    /**
      * ContentRepository constructor.
      *
      * @param PermissionRepository $permissionRepository
@@ -56,13 +63,15 @@ class ContentRepository extends RepositoryBase
     public function __construct(
         PermissionRepository $permissionRepository,
         FieldRepository $fieldRepository,
-        DatumRepository $datumRepository
+        DatumRepository $datumRepository,
+        DatabaseManager $databaseManager
     ) {
         parent::__construct();
 
         $this->permissionRepository = $permissionRepository;
         $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
+        $this->databaseManager = $databaseManager;
     }
 
     /**
@@ -96,7 +105,6 @@ class ContentRepository extends RepositoryBase
      * @param $limit
      * @param $orderBy
      * @param $orderDirection
-     * @param array $statuses
      * @param array $types
      * @param array $requiredFields
      * @return array|null
@@ -106,11 +114,37 @@ class ContentRepository extends RepositoryBase
         $limit,
         $orderBy,
         $orderDirection,
-        array $statuses,
         array $types,
         array $requiredFields
     ) {
-        // todo: write function
+        $subQuery = $this->baseQuery(false)
+            ->select(ConfigService::$tableContent . '.id')
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->limit($limit)
+            ->skip(($page - 1) * $limit);
+
+        $subQueryString = $subQuery->toSql();
+
+        $bindings = $subQuery->getBindings();
+
+        foreach ($bindings as &$binding) {
+            $binding = is_numeric($binding) ? $binding : "'" . $binding . "'";
+        }
+
+        $subQueryString = str_replace_array('?', $bindings, $subQueryString);
+
+        $query = $this->baseQuery()
+            ->join(
+                $this->databaseManager->raw(
+                    '(' . $subQueryString . ') inner_content'
+                ),
+                function (JoinClause $joinClause) {
+                    $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
+                }
+            )
+            ->orderBy($orderBy, $orderDirection);
+
+        return $this->parseBaseQueryRows($query->get()->toArray());
     }
 
     /**
@@ -588,37 +622,51 @@ class ContentRepository extends RepositoryBase
 
     /** Generate the Query Builder
      *
+     * @param bool $includeJoins
      * @return Builder
      */
-    public function baseQuery()
+    public function baseQuery($includeJoins = true)
     {
-        $query = $this->queryTable()
-            ->select(
+        $selects = [
+            ConfigService::$tableContent . '.id as id',
+            ConfigService::$tableContent . '.slug as slug',
+            ConfigService::$tableContent . '.status as status',
+            ConfigService::$tableContent . '.type as type',
+            ConfigService::$tableContent . '.position as position',
+            ConfigService::$tableContent . '.parent_id as parent_id',
+            ConfigService::$tableContent . '.language as language',
+            ConfigService::$tableContent . '.published_on as published_on',
+            ConfigService::$tableContent . '.created_on as created_on',
+            ConfigService::$tableContent . '.archived_on as archived_on',
+            ConfigService::$tableContent . '.brand as brand',
+        ];
+
+        if ($includeJoins) {
+            $selects = array_merge(
+                $selects,
                 [
-                    ConfigService::$tableContent . '.id as id',
-                    ConfigService::$tableContent . '.slug as slug',
-                    ConfigService::$tableContent . '.status as status',
-                    ConfigService::$tableContent . '.type as type',
-                    ConfigService::$tableContent . '.position as position',
-                    ConfigService::$tableContent . '.parent_id as parent_id',
-                    ConfigService::$tableContent . '.published_on as published_on',
-                    ConfigService::$tableContent . '.created_on as created_on',
-                    ConfigService::$tableContent . '.archived_on as archived_on',
-                    ConfigService::$tableContent . '.brand as brand',
                     ConfigService::$tableFields . '.id as field_id',
                     ConfigService::$tableFields . '.key as field_key',
                     ConfigService::$tableFields . '.value as field_value',
                     ConfigService::$tableFields . '.type as field_type',
                     ConfigService::$tableFields . '.position as field_position',
+
                     ConfigService::$tableData . '.id as datum_id',
+                    ConfigService::$tableData . '.value as datum_value',
                     ConfigService::$tableData . '.key as datum_key',
                     ConfigService::$tableData . '.position as datum_position',
                 ]
             );
+        }
 
-        $query = $this->fieldRepository->attachFieldsToContentQuery($query);
-        $query = $this->datumRepository->attachDatumToContentQuery($query);
-        $query = $this->permissionRepository->restrictContentQueryByPermissions($query);
+        $query = $this->queryTable()
+            ->select($selects);
+
+        if ($includeJoins) {
+            $query = $this->fieldRepository->attachFieldsToContentQuery($query);
+            $query = $this->datumRepository->attachDatumToContentQuery($query);
+            $query = $this->permissionRepository->restrictContentQueryByPermissions($query);
+        }
 
         if (is_array(self::$availableContentStatues)) {
             $query = $query->whereIn('status', self::$availableContentStatues);
@@ -633,5 +681,69 @@ class ContentRepository extends RepositoryBase
         }
 
         return $query;
+    }
+
+    /**
+     * @param array $rows
+     */
+    private function parseBaseQueryRows(array $rows)
+    {
+        $contents = [];
+        $fields = [];
+        $data = [];
+
+        foreach ($rows as $row) {
+            $content = [
+                'id' => $row['id'],
+                'slug' => $row['slug'],
+                'status' => $row['status'],
+                'type' => $row['type'],
+                'position' => $row['position'],
+                'parent_id' => $row['parent_id'],
+                'language' => $row['language'],
+                'published_on' => $row['published_on'],
+                'created_on' => $row['created_on'],
+                'archived_on' => $row['archived_on'],
+                'brand' => $row['brand'],
+            ];
+
+            $contents[$row['id']][] = $content;
+
+            $contents[$row['id']] =
+                array_map("unserialize", array_unique(array_map("serialize", $contents[$row['id']])));
+
+            if (!empty($row['field_id'])) {
+                $field = [
+                    'id' => $row['field_id'],
+                    'key' => $row['field_key'],
+                    'value' => $row['field_value'],
+                    'type' => $row['field_type'],
+                    'position' => $row['field_position'],
+                ];
+
+                $fields[$row['id']][] = $field;
+
+                $fields[$row['id']] =
+                    array_map("unserialize", array_unique(array_map("serialize", $fields[$row['id']])));
+            }
+
+            if (!empty($row['datum_id'])) {
+                $datum = [
+                    'id' => $row['datum_id'],
+                    'key' => $row['datum_key'],
+                    'value' => $row['datum_value'],
+                    'position' => $row['datum_position'],
+                ];
+
+                $data[$row['id']][] = $datum;
+
+                $data[$row['id']] =
+                    array_map("unserialize", array_unique(array_map("serialize", $data[$row['id']])));
+            }
+
+        }
+        var_dump($contents);
+
+        die();
     }
 }
