@@ -45,8 +45,7 @@ class PlaylistRepository extends RepositoryBase
     {
         return $this->queryTable()
             ->select(
-                ConfigService::$tablePlaylists . '.*',
-                'translation_' . ConfigService::$tablePlaylists . '.value as name'
+                ConfigService::$tablePlaylists . '.*'
             )
             ->where(
                 function ($query) use ($userId) {
@@ -78,6 +77,7 @@ class PlaylistRepository extends RepositoryBase
     {
         $playlist = $this->queryTable()->insertGetId(
             [
+                'name' => $name,
                 'type' => $type,
                 'user_id' => $userId,
                 'brand' => ConfigService::$brand
@@ -85,79 +85,5 @@ class PlaylistRepository extends RepositoryBase
         );
 
         return $playlist;
-    }
-
-    /**
-     * Get playlist data and the associated content for the authenticated user
-     *
-     * @param int $playlistId
-     * @param int $userId
-     * @return array
-     */
-    public function getPlaylistWithContent($playlistId, $userId)
-    {
-        $builder = $this->queryTable();
-        $playlist = $builder
-            ->select(
-                [
-                    ConfigService::$tablePlaylists . '.id as playlist_id',
-                    'translation_' . ConfigService::$tablePlaylists . '.value as playlist_name',
-                    ConfigService::$tablePlaylists . '.type as playlist_type',
-                    ConfigService::$tablePlaylists . '.user_id as user_id',
-                    ConfigService::$tablePlaylists . '.brand as brand',
-                    'usercontent.content_id as content_id',
-                    'usercontent.state as content_state',
-                    'usercontent.progress as content_progress'
-                ]
-            )
-            ->leftJoin(
-                ConfigService::$tableUserContentPlaylists . ' as usercontentplaylist',
-                'playlist_id',
-                '=',
-                ConfigService::$tablePlaylists . '.id',
-                'left outer'
-            )
-            ->leftJoin(
-                ConfigService::$tableUserContent . ' as usercontent',
-                function ($join) use ($userId) {
-                    $join->on('usercontentplaylist.content_user_id', '=', 'usercontent.id')
-                        ->where('usercontent.user_id', '=', $userId);
-                }
-            )
-            ->where(ConfigService::$tablePlaylists . '.id', '=', $playlistId)
-            ->get();
-
-        return $this->parseAndGetLinkedContent($playlist);
-    }
-
-    /** Prepare playlist data
-     *
-     * @param Collection $playlists
-     * @return array
-     */
-    private function parseAndGetLinkedContent(Collection $playlists)
-    {
-        $playlistArr = [];
-
-        foreach ($playlists as $playlist) {
-            $playlistArr[$playlist['playlist_id']] = [
-                'id' => $playlist['playlist_id'],
-                'name' => $playlist['playlist_name'],
-                'type' => $playlist['playlist_type'],
-                'brand' => $playlist['brand']
-            ];
-        }
-
-        foreach ($playlists as $playlist) {
-            if (!is_null($playlist['content_id'])) {
-                $playlistArr[$playlist['playlist_id']]['contents'][$playlist['content_id']] = [
-                    'id' => $playlist['content_id'],
-                    'state' => $playlist['content_state'],
-                    'progress' => $playlist['content_progress']
-                ];
-            }
-        }
-
-        return $playlistArr;
     }
 }
