@@ -33,11 +33,9 @@ class ContentJsonController extends Controller
      */
     public function index(Request $request)
     {
-        // todo: pass real input values
-
         $contents = $this->contentService->getFiltered(
             $request->get('page', 1),
-            $request->get('limit', 25),
+            $request->get('limit', 100),
             $request->get('order-by', 'published_on'),
             $request->get('order-direction', 'desc'),
             $request->get('types', []),
