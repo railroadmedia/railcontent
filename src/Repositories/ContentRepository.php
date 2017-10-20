@@ -65,7 +65,8 @@ class ContentRepository extends RepositoryBase
         FieldRepository $fieldRepository,
         DatumRepository $datumRepository,
         DatabaseManager $databaseManager
-    ) {
+    )
+    {
         parent::__construct();
 
         $this->permissionRepository = $permissionRepository;
@@ -83,7 +84,7 @@ class ContentRepository extends RepositoryBase
     public function getById($id)
     {
         return (array)$this->baseQuery()
-            ->where([ConfigService::$tableContent . '.id' => $id])
+            ->where([ConfigService::$tableContent.'.id' => $id])
             ->get()
             ->first();
     }
@@ -116,20 +117,21 @@ class ContentRepository extends RepositoryBase
         $orderDirection,
         array $types,
         array $requiredFields
-    ) {
+    )
+    {
         // we must use a sub query here since the main query is full of joined rows that throw off the
         // limit and skip
         $subQueryString = $this->baseQuery(false)
-            ->select(ConfigService::$tableContent . '.id')
-            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->select(ConfigService::$tableContent.'.id')
+            ->whereIn(ConfigService::$tableContent.'.type', $types)
             ->limit($limit)
             ->skip(($page - 1) * $limit)->toSql();
 
         $query = $this->baseQuery()
             ->join(
-                $this->databaseManager->raw('(' . $subQueryString . ') inner_content'),
-                function (JoinClause $joinClause) {
-                    $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
+                $this->databaseManager->raw('('.$subQueryString.') inner_content'),
+                function(JoinClause $joinClause) {
+                    $joinClause->on(ConfigService::$tableContent.'.id', '=', 'inner_content.id');
                 }
             )
             ->addBinding($types)
@@ -183,14 +185,14 @@ class ContentRepository extends RepositoryBase
             ?? null;
         $childContentCount = $this->queryTable()->where('parent_id', $parentContentId)->count();
 
-        if ($position < 1) {
+        if($position < 1) {
             $position = 1;
-        } elseif ($position > $childContentCount) {
+        } elseif($position > $childContentCount) {
             $position = $childContentCount;
         }
 
         $this->transaction(
-            function () use ($contentId, $position, $parentContentId) {
+            function() use ($contentId, $position, $parentContentId) {
                 $this->queryTable()
                     ->where('id', $contentId)
                     ->update(
@@ -220,8 +222,8 @@ class ContentRepository extends RepositoryBase
 
         $start = 1;
 
-        foreach ($childContent as $child) {
-            if ($start == $position) {
+        foreach($childContent as $child) {
+            if($start == $position) {
                 $start++;
             }
 
@@ -258,7 +260,8 @@ class ContentRepository extends RepositoryBase
         $parentId,
         $publishedOn,
         $archivedOn
-    ) {
+    )
+    {
         $this->queryTable()->where('id', $id)->update(
             [
                 'slug' => $slug,
@@ -288,10 +291,11 @@ class ContentRepository extends RepositoryBase
      */
     public function delete($id, $deleteChildren = false)
     {
+
         $this->unlinkFields($id);
         $this->unlinkData($id);
 
-        if ($deleteChildren) {
+        if($deleteChildren) {
             $this->unlinkChildren($id);
         }
 
@@ -425,13 +429,13 @@ class ContentRepository extends RepositoryBase
      */
     public function getLinkedDatum($datumId, $contentId)
     {
-        $dataIdLabel = ConfigService::$tableData . '.id';
+        $dataIdLabel = ConfigService::$tableData.'.id';
 
         return $this->contentDataQuery()
             ->leftJoin(ConfigService::$tableData, 'datum_id', '=', $dataIdLabel)
             ->select(
-                ConfigService::$tableContentData . '.*',
-                ConfigService::$tableData . '.*'
+                ConfigService::$tableContentData.'.*',
+                ConfigService::$tableData.'.*'
             )
             ->where(
                 [
@@ -452,14 +456,14 @@ class ContentRepository extends RepositoryBase
      */
     public function getLinkedField($fieldId, $contentId)
     {
-        $fieldIdLabel = ConfigService::$tableFields . '.id';
+        $fieldIdLabel = ConfigService::$tableFields.'.id';
 
         return
             $this->contentFieldsQuery()
                 ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel)
                 ->select(
-                    ConfigService::$tableContentFields . '.*',
-                    ConfigService::$tableFields . '.*'
+                    ConfigService::$tableContentFields.'.*',
+                    ConfigService::$tableFields.'.*'
                 )
                 ->where(
                     [
@@ -480,7 +484,7 @@ class ContentRepository extends RepositoryBase
      */
     public function getContentLinkedFieldByKey($key, $contentId)
     {
-        $fieldIdLabel = ConfigService::$tableFields . '.id';
+        $fieldIdLabel = ConfigService::$tableFields.'.id';
 
         return $this->contentFieldsQuery()
             ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel)
@@ -500,76 +504,76 @@ class ContentRepository extends RepositoryBase
         return $this->queryTable()
             ->select(
                 [
-                    ConfigService::$tableContent . '.id as id',
-                    ConfigService::$tableContent . '.slug as slug',
-                    ConfigService::$tableContent . '.status as status',
-                    ConfigService::$tableContent . '.type as type',
-                    ConfigService::$tableContent . '.position as position',
-                    ConfigService::$tableContent . '.parent_id as parent_id',
-                    ConfigService::$tableContent . '.published_on as published_on',
-                    ConfigService::$tableContent . '.created_on as created_on',
-                    ConfigService::$tableContent . '.archived_on as archived_on',
-                    ConfigService::$tableContent . '.brand as brand',
+                    ConfigService::$tableContent.'.id as id',
+                    ConfigService::$tableContent.'.slug as slug',
+                    ConfigService::$tableContent.'.status as status',
+                    ConfigService::$tableContent.'.type as type',
+                    ConfigService::$tableContent.'.position as position',
+                    ConfigService::$tableContent.'.parent_id as parent_id',
+                    ConfigService::$tableContent.'.published_on as published_on',
+                    ConfigService::$tableContent.'.created_on as created_on',
+                    ConfigService::$tableContent.'.archived_on as archived_on',
+                    ConfigService::$tableContent.'.brand as brand',
                     'allfieldsvalue.id as field_id',
                     'allfieldsvalue.key as field_key',
                     'allfieldsvalue.value as field_value',
                     'allfieldsvalue.type as field_type',
                     'allfieldsvalue.position as field_position',
-                    ConfigService::$tableData . '.id as datum_id',
-                    ConfigService::$tableData . '.key as datum_key',
-                    ConfigService::$tableData . '.value as datum_value',
-                    ConfigService::$tableData . '.position as datum_position',
+                    ConfigService::$tableData.'.id as datum_id',
+                    ConfigService::$tableData.'.key as datum_key',
+                    ConfigService::$tableData.'.value as datum_value',
+                    ConfigService::$tableData.'.position as datum_position',
 
                 ]
             )
             ->leftJoin(
                 ConfigService::$tableContentData,
-                ConfigService::$tableContentData . '.content_id',
+                ConfigService::$tableContentData.'.content_id',
                 '=',
-                ConfigService::$tableContent . '.id'
+                ConfigService::$tableContent.'.id'
             )
             ->leftJoin(
                 ConfigService::$tableData,
-                ConfigService::$tableData . '.id',
+                ConfigService::$tableData.'.id',
                 '=',
-                ConfigService::$tableContentData . '.datum_id'
+                ConfigService::$tableContentData.'.datum_id'
             )
             ->leftJoin(
-                ConfigService::$tableContentFields . ' as allcontentfields',
+                ConfigService::$tableContentFields.' as allcontentfields',
                 'allcontentfields.content_id',
                 '=',
-                ConfigService::$tableContent . '.id'
+                ConfigService::$tableContent.'.id'
             )
             ->leftJoin(
-                ConfigService::$tableFields . ' as allfieldsvalue',
+                ConfigService::$tableFields.' as allfieldsvalue',
                 'allfieldsvalue.id',
                 '=',
                 'allcontentfields.field_id'
             )
             ->leftJoin(
                 ConfigService::$tableContentPermissions,
-                function ($join) {
+                function($join) {
                     return $join->on(
-                        ConfigService::$tableContentPermissions . '.content_id',
-                        ConfigService::$tableContent . '.id'
+                        ConfigService::$tableContentPermissions.'.content_id',
+                        ConfigService::$tableContent.'.id'
                     )
                         ->orOn(
-                            ConfigService::$tableContentPermissions . '.content_type',
-                            ConfigService::$tableContent . '.type'
+                            ConfigService::$tableContentPermissions.'.content_type',
+                            ConfigService::$tableContent.'.type'
                         );
                 }
             )
             ->leftJoin(
                 ConfigService::$tablePermissions,
-                ConfigService::$tablePermissions . '.id',
+                ConfigService::$tablePermissions.'.id',
                 '=',
-                ConfigService::$tableContentPermissions . '.required_permission_id'
+                ConfigService::$tableContentPermissions.'.required_permission_id'
             )
             ->groupBy(
                 [
                     'allfieldsvalue.id',
-                    ConfigService::$tableContent . '.id',
-                    ConfigService::$tableData . '.id'
+                    ConfigService::$tableContent.'.id',
+                    ConfigService::$tableData.'.id'
                 ]
             );
     }
@@ -590,7 +594,7 @@ class ContentRepository extends RepositoryBase
      */
     public function linkedWithContent($contentId)
     {
-        $fieldIdLabel = ConfigService::$tableFields . '.id';
+        $fieldIdLabel = ConfigService::$tableFields.'.id';
 
         return $this->contentFieldsQuery()
             ->select('content_id')
@@ -619,33 +623,33 @@ class ContentRepository extends RepositoryBase
     public function baseQuery($includeJoins = true)
     {
         $selects = [
-            ConfigService::$tableContent . '.id as id',
-            ConfigService::$tableContent . '.slug as slug',
-            ConfigService::$tableContent . '.status as status',
-            ConfigService::$tableContent . '.type as type',
-            ConfigService::$tableContent . '.position as position',
-            ConfigService::$tableContent . '.parent_id as parent_id',
-            ConfigService::$tableContent . '.language as language',
-            ConfigService::$tableContent . '.published_on as published_on',
-            ConfigService::$tableContent . '.created_on as created_on',
-            ConfigService::$tableContent . '.archived_on as archived_on',
-            ConfigService::$tableContent . '.brand as brand',
+            ConfigService::$tableContent.'.id as id',
+            ConfigService::$tableContent.'.slug as slug',
+            ConfigService::$tableContent.'.status as status',
+            ConfigService::$tableContent.'.type as type',
+            ConfigService::$tableContent.'.position as position',
+            ConfigService::$tableContent.'.parent_id as parent_id',
+            ConfigService::$tableContent.'.language as language',
+            ConfigService::$tableContent.'.published_on as published_on',
+            ConfigService::$tableContent.'.created_on as created_on',
+            ConfigService::$tableContent.'.archived_on as archived_on',
+            ConfigService::$tableContent.'.brand as brand',
         ];
 
-        if ($includeJoins) {
+        if($includeJoins) {
             $selects = array_merge(
                 $selects,
                 [
-                    ConfigService::$tableFields . '.id as field_id',
-                    ConfigService::$tableFields . '.key as field_key',
-                    ConfigService::$tableFields . '.value as field_value',
-                    ConfigService::$tableFields . '.type as field_type',
-                    ConfigService::$tableFields . '.position as field_position',
+                    ConfigService::$tableFields.'.id as field_id',
+                    ConfigService::$tableFields.'.key as field_key',
+                    ConfigService::$tableFields.'.value as field_value',
+                    ConfigService::$tableFields.'.type as field_type',
+                    ConfigService::$tableFields.'.position as field_position',
 
-                    ConfigService::$tableData . '.id as datum_id',
-                    ConfigService::$tableData . '.value as datum_value',
-                    ConfigService::$tableData . '.key as datum_key',
-                    ConfigService::$tableData . '.position as datum_position',
+                    ConfigService::$tableData.'.id as datum_id',
+                    ConfigService::$tableData.'.value as datum_value',
+                    ConfigService::$tableData.'.key as datum_key',
+                    ConfigService::$tableData.'.position as datum_position',
                 ]
             );
         }
@@ -653,21 +657,21 @@ class ContentRepository extends RepositoryBase
         $query = $this->queryTable()
             ->select($selects);
 
-        if ($includeJoins) {
+        if($includeJoins) {
             $query = $this->fieldRepository->attachFieldsToContentQuery($query);
             $query = $this->datumRepository->attachDatumToContentQuery($query);
             $query = $this->permissionRepository->restrictContentQueryByPermissions($query);
         }
 
-        if (is_array(self::$availableContentStatues)) {
+        if(is_array(self::$availableContentStatues)) {
             $query = $query->whereIn('status', self::$availableContentStatues);
         }
 
-        if (is_array(self::$includedLanguages)) {
+        if(is_array(self::$includedLanguages)) {
             $query = $query->whereIn('language', self::$includedLanguages);
         }
 
-        if (!self::$pullFutureContent) {
+        if(!self::$pullFutureContent) {
             $query = $query->where('published_on', '<', Carbon::now()->toDateTimeString());
         }
 
@@ -683,7 +687,7 @@ class ContentRepository extends RepositoryBase
         $fields = [];
         $data = [];
 
-        foreach ($rows as $row) {
+        foreach($rows as $row) {
             $content = [
                 'id' => $row['id'],
                 'slug' => $row['slug'],
@@ -703,7 +707,7 @@ class ContentRepository extends RepositoryBase
             $contents[$row['id']] =
                 array_map("unserialize", array_unique(array_map("serialize", $contents[$row['id']])));
 
-            if (!empty($row['field_id'])) {
+            if(!empty($row['field_id'])) {
                 $field = [
                     'id' => $row['field_id'],
                     'key' => $row['field_key'],
@@ -718,7 +722,7 @@ class ContentRepository extends RepositoryBase
                     array_map("unserialize", array_unique(array_map("serialize", $fields[$row['id']])));
             }
 
-            if (!empty($row['datum_id'])) {
+            if(!empty($row['datum_id'])) {
                 $datum = [
                     'id' => $row['datum_id'],
                     'key' => $row['datum_key'],
@@ -734,9 +738,9 @@ class ContentRepository extends RepositoryBase
 
         }
 
-        foreach ($contents as $contentId => $content) {
-            $contents[$contentId]['fields'] = $fields[$contentId];
-            $contents[$contentId]['data'] = $data[$contentId];
+        foreach($contents as $contentId => $content) {
+            $contents[$contentId]['fields'] = $fields[$contentId] ?? null;
+            $contents[$contentId]['data'] = $data[$contentId] ?? null;
         }
 
         return $contents;

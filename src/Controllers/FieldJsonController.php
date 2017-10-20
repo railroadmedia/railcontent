@@ -35,7 +35,6 @@ class FieldJsonController extends Controller
 
         $categoryField = $this->fieldService->createField(
             $request->input('content_id'),
-            null,
             $request->input('key'),
             $request->input('value'),
             $request->input('type'),

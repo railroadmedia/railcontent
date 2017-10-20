@@ -83,6 +83,7 @@ class ContentService
         array $types,
         array $requiredFields
     ) {
+
         return $this->contentRepository->getFiltered(
             $page,
             $limit,
@@ -214,14 +215,15 @@ class ContentService
             $oldContent['status'],
             $oldContent['type'],
             $oldContent['position'],
+            $oldContent['language'],
             $oldContent['parent_id'],
             $oldContent['published_on'],
             $oldContent['archived_on']
         );
 
         // unlink all fields and datum
-        $this->contentRepository->unlinkField($contentId);
-        $this->contentRepository->unlinkDatum($contentId);
+        $this->contentRepository->unlinkFields($contentId);
+        $this->contentRepository->unlinkData($contentId);
 
         //link fields from content version
         if (array_key_exists('fields', $oldContent)) {
@@ -242,6 +244,7 @@ class ContentService
                                 $value['status'],
                                 $value['type'],
                                 $value['position'],
+                                $value['language'],
                                 $value['parent_id'],
                                 $value['published_on']
                             ) :

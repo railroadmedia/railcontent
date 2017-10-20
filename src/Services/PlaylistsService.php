@@ -57,9 +57,9 @@ class PlaylistsService
                 ) :
                 $userContent['id'];
 
-        $this->playlistsRepository->addToPlaylist($userContentId, $playlistId);
+        return $this->playlistsRepository->addToPlaylist($userContentId, $playlistId) > 0;
 
-        return $this->getPlaylist($playlistId, $userId);
+        //return $this->getPlaylist($playlistId, $userId);
     }
 
     /**
@@ -88,7 +88,8 @@ class PlaylistsService
 
         $playlistId = $this->playlistsRepository->store($name, $userId, $type);
 
-        return $this->getPlaylist($playlistId, $userId);
+        return $playlistId > 0;
+        //return $this->getPlaylist($playlistId, $userId);
     }
 
     public function getPlaylists()

@@ -30,7 +30,7 @@ Route::group(
 
         Route::get(
             '/content/restore/{versionId}',
-            'Railroad\Railcontent\Controllers\ContentJsonController@restoreContent'
+            'Railroad\Railcontent\Controllers\ContentVersionJsonController@restoreContent'
         );
 
         Route::post('/permission', 'Railroad\Railcontent\Controllers\PermissionJsonController@store');
@@ -44,9 +44,9 @@ Route::group(
         );
         Route::post('/permission/assign', 'Railroad\Railcontent\Controllers\PermissionJsonController@assign');
 
-        Route::put('/start', 'Railroad\Railcontent\Controllers\ContentJsonController@startContent');
-        Route::put('/complete', 'Railroad\Railcontent\Controllers\ContentJsonController@completeContent');
-        Route::put('/progress', 'Railroad\Railcontent\Controllers\ContentJsonController@saveProgress');
+        Route::put('/start', 'Railroad\Railcontent\Controllers\ContentProgressJsonController@startContent');
+        Route::put('/complete', 'Railroad\Railcontent\Controllers\ContentProgressJsonController@completeContent');
+        Route::put('/progress', 'Railroad\Railcontent\Controllers\ContentProgressJsonController@saveProgress');
 
         Route::post(
             '/playlists/add',

@@ -32,22 +32,7 @@ class PermissionControllerTest extends RailcontentTestCase
         ]);
 
         $this->assertEquals(200, $response->status());
-
-        $response->assertJsonStructure(
-            [
-                'id',
-                'name',
-                'created_on'
-            ]
-        );
-
-        $response->assertJson(
-            [
-                'id' => '1',
-                'name' => $name,
-                'created_on' => Carbon::now()->toDateTimeString()
-            ]
-        );
+        $this->assertTrue($response->content());
     }
 
     public function test_store_validation()
