@@ -99,8 +99,10 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     *
      * Returns an array of lesson data arrays.
+     *
+     * You can switch the field pulling style between inclusive and exclusive by changing the $subLimitQuery
+     * between whereIn and orWhereIn.
      *
      * @param $page
      * @param $limit
@@ -117,27 +119,260 @@ class ContentRepository extends RepositoryBase
         $orderDirection,
         array $types,
         array $requiredFields
-    )
-    {
-        // we must use a sub query here since the main query is full of joined rows that throw off the
-        // limit and skip
-        $subQueryString = $this->baseQuery(false)
-            ->select(ConfigService::$tableContent.'.id')
-            ->whereIn(ConfigService::$tableContent.'.type', $types)
-            ->limit($limit)
-            ->skip(($page - 1) * $limit)->toSql();
+    ) {
+        // options:
+        // style: drilldown
+        // style: build up
 
-        $query = $this->baseQuery()
-            ->join(
-                $this->databaseManager->raw('('.$subQueryString.') inner_content'),
-                function(JoinClause $joinClause) {
-                    $joinClause->on(ConfigService::$tableContent.'.id', '=', 'inner_content.id');
+        $subLimitQuery = $this->baseQuery(false)
+            ->select(ConfigService::$tableContent . '.id as id')
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->whereExists(
+                function (Builder $builder) {
+                    return $builder
+                        ->select([ConfigService::$tableFields . '.id'])
+                        ->from(ConfigService::$tableContentFields)
+                        ->join(
+                            ConfigService::$tableFields,
+                            ConfigService::$tableFields . '.id',
+                            '=',
+                            ConfigService::$tableContentFields . '.field_id'
+                        )
+                        ->where(
+                            [
+                                ConfigService::$tableFields . '.key' => 'difficulty',
+                                ConfigService::$tableFields . '.value' => 'beginner',
+                                ConfigService::$tableContentFields .
+                                '.content_id' => $this->databaseManager->raw(
+                                    ConfigService::$tableContent . '.id'
+                                )
+                            ]
+                        );
+
                 }
             )
-            ->addBinding($types)
+            ->whereExists(
+                function (Builder $builder) {
+                    return $builder
+                        ->select([ConfigService::$tableFields . '.id'])
+                        ->from(ConfigService::$tableContentFields)
+                        ->join(
+                            ConfigService::$tableFields,
+                            ConfigService::$tableFields . '.id',
+                            '=',
+                            ConfigService::$tableContentFields . '.field_id'
+                        )
+                        ->where(
+                            [
+                                ConfigService::$tableFields . '.key' => 'topic',
+                                ConfigService::$tableFields . '.value' => 'Latin',
+                                ConfigService::$tableContentFields .
+                                '.content_id' => $this->databaseManager->raw(
+                                    ConfigService::$tableContent . '.id'
+                                )
+                            ]
+                        );
+
+                }
+            )
+            ->limit($limit)
+            ->skip(($page - 1) * $limit);
+
+        $subLimitQueryString = $subLimitQuery->toSql();
+
+        $query = $this->queryTable()
+            ->select(
+                [
+                    ConfigService::$tableContent . '.id as id',
+                    ConfigService::$tableContent . '.slug as slug',
+                    ConfigService::$tableContent . '.status as status',
+                    ConfigService::$tableContent . '.type as type',
+                    ConfigService::$tableContent . '.position as position',
+                    ConfigService::$tableContent . '.parent_id as parent_id',
+                    ConfigService::$tableContent . '.language as language',
+                    ConfigService::$tableContent . '.published_on as published_on',
+                    ConfigService::$tableContent . '.created_on as created_on',
+                    ConfigService::$tableContent . '.archived_on as archived_on',
+                    ConfigService::$tableContent . '.brand as brand',
+                    ConfigService::$tableFields . '.id as field_id',
+                    ConfigService::$tableFields . '.key as field_key',
+                    ConfigService::$tableFields . '.value as field_value',
+                    ConfigService::$tableFields . '.type as field_type',
+                    ConfigService::$tableFields . '.position as field_position',
+                    ConfigService::$tableData . '.id as datum_id',
+                    ConfigService::$tableData . '.key as datum_key',
+                    ConfigService::$tableData . '.value as datum_value',
+                    ConfigService::$tableData . '.position as datum_position',
+                ]
+            )
+            ->leftJoin(
+                ConfigService::$tableContentFields,
+                ConfigService::$tableContentFields . '.content_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->leftJoin(
+                ConfigService::$tableFields,
+                ConfigService::$tableFields . '.id',
+                '=',
+                ConfigService::$tableContentFields . '.field_id'
+            )
+            ->leftJoin(
+                ConfigService::$tableContentData,
+                ConfigService::$tableContentData . '.content_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->leftJoin(
+                ConfigService::$tableData,
+                ConfigService::$tableData . '.id',
+                '=',
+                ConfigService::$tableContentData . '.datum_id'
+            )
+            ->join(
+                $this->databaseManager->raw('(' . $subLimitQueryString . ') inner_content'),
+                function (JoinClause $joinClause) {
+                    $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
+                }
+            )
+            ->addBinding($subLimitQuery->getBindings())
             ->orderBy($orderBy, $orderDirection);
 
         return $this->parseBaseQueryRows($query->get()->toArray());
+//
+//        // close
+//        $query = $this->queryTable()
+//            ->select(
+//                $this->databaseManager->raw(
+//                    '
+//                    railcontent_content.id,
+//                    railcontent_fields.key,
+//                    (CASE WHEN railcontent_fields.key = \'difficulty\'
+//                THEN railcontent_fields.value END) AS
+//                 \'difficulty\',
+//                    COUNT((CASE WHEN railcontent_fields.key = \'difficulty\'
+//                THEN railcontent_fields.value END)) AS
+//                 \'difficulty_count\',
+//                    (CASE WHEN railcontent_fields.key = \'topic\'
+//                THEN railcontent_fields.value END) AS
+//                 \'topic\',
+//                    (CASE WHEN railcontent_fields.key = \'topic_count\'
+//                THEN railcontent_fields.value END) AS
+//                 \'topic_count\'
+//
+//                    '
+//                )
+//            )
+//            ->join(
+//                ConfigService::$tableContentFields,
+//                ConfigService::$tableContentFields . '.content_id',
+//                '=',
+//                ConfigService::$tableContent . '.id'
+//            )
+//            ->join(
+//                ConfigService::$tableFields,
+//                ConfigService::$tableFields . '.id',
+//                '=',
+//                ConfigService::$tableContentFields . '.field_id'
+//            )
+//            ->having('difficulty_count', '<', 0)
+//            ->groupBy(
+//                ConfigService::$tableContentFields . '.id',
+//                ConfigService::$tableContent . '.id',
+//                ConfigService::$tableFields . '.key',
+//                ConfigService::$tableFields . '.value'
+//            );
+//
+//        echo($query->toSql());
+//        dd($query->get()->toArray());
+//
+//        // lets try selects
+//
+//        $query = $this->queryTable()
+//            ->join(
+//                ConfigService::$tableContentFields,
+//                ConfigService::$tableContentFields . '.content_id',
+//                '=',
+//                ConfigService::$tableContent . '.id'
+//            );
+//
+//        foreach ($requiredFields as $fieldKey => $fieldValues) {
+//            $dynamicTableName = $fieldKey . '_field_table';
+//
+//            $query = $query->join(
+//                ConfigService::$tableFields . ' as ' . $dynamicTableName,
+//                function (JoinClause $joinClause) use ($fieldKey, $fieldValues, $dynamicTableName) {
+//                    $joinClause->on(
+//                        $this->databaseManager->raw($dynamicTableName . '.id'),
+//                        '=',
+//                        ConfigService::$tableContentFields . '.field_id'
+//                    )
+//                        ->where($dynamicTableName . '.key', '=', $fieldKey)
+//                        ->where($dynamicTableName . '.value', '=', $fieldValues[0]);
+//                }
+//            );
+//        }
+//
+//        echo($query->toSql());
+//        dd($query->get()->toArray());
+//
+//        // we must use a sub query here since the main query is full of joined rows that throw off the
+//        // limit and skip
+//        $subQuery = $this->baseQuery(false)
+//            ->select(
+//                [
+//                    ConfigService::$tableContent . '.id as id',
+//                    ConfigService::$tableContentFields . '.field_id as content_field_id',
+//                ]
+//            )
+//            ->join(
+//                ConfigService::$tableContentFields,
+//                ConfigService::$tableContentFields . '.content_id',
+//                '=',
+//                ConfigService::$tableContent . '.id'
+//            )
+//            ->whereIn(ConfigService::$tableContent . '.type', $types);
+////            ->limit($limit)
+////            ->skip(($page - 1) * $limit);
+//
+//        $count = 0;
+//
+//        $subQuery = $subQuery->where(
+//            function (Builder $builder) use ($requiredFields) {
+//                foreach ($requiredFields as $fieldKey => $fieldValues) {
+//                    $builder->where(
+//                        function (Builder $builder) use ($fieldKey, $fieldValues) {
+//                            return $builder->orWhereIn(
+//                                ConfigService::$tableContentFields . '.field_id',
+//                                function (Builder $builder) use ($fieldKey, $fieldValues) {
+//                                    return $builder->select('id')
+//                                        ->from(ConfigService::$tableFields)
+//                                        ->where(
+//                                            ['key' => $fieldKey, 'value' => $fieldValues[0]]
+//                                        );
+//                                }
+//                            );
+//                        }
+//                    );
+//                }
+//            }
+//        );
+//
+//        echo($subQuery->toSql());
+//        dd($subQuery->get()->toArray());
+//
+//        $query = $this->baseQuery()
+//            ->join(
+//                $this->databaseManager->raw('(' . $subQueryString . ') inner_content'),
+//                function (JoinClause $joinClause) {
+//                    $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
+//                }
+//            )
+//            ->where(['field_key' => 'topic', ['field_value' => 'tuning']])
+//            ->addBinding($types)
+//            ->orderBy($orderBy, $orderDirection);
+//
+//        return $this->parseBaseQueryRows($query->get()->toArray());
     }
 
     /**

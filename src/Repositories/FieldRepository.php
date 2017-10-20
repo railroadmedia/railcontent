@@ -19,17 +19,27 @@ class FieldRepository extends RepositoryBase
      */
     public function updateOrCreateField($id, $key, $value, $type, $position)
     {
-        $update = $this->query()->where('id', $id)->update(
+        $existing = $this->query()->where(
             [
                 'key' => $key,
                 'value' => $value,
                 'type' => $type,
                 'position' => $position
             ]
-        );
+        )->first();
 
-        if (!$update) {
-            $id = $this->query()->insertGetId(
+
+        if (empty($existing)) {
+            return $this->query()->insertGetId(
+                [
+                    'key' => $key,
+                    'value' => $value,
+                    'type' => $type,
+                    'position' => $position
+                ]
+            );
+        } else {
+            $update = $this->query()->where(['id' => $existing['id']])->update(
                 [
                     'key' => $key,
                     'value' => $value,
@@ -39,7 +49,7 @@ class FieldRepository extends RepositoryBase
             );
         }
 
-        return $id;
+        return $existing['id'];
     }
 
     /**
