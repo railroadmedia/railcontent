@@ -188,7 +188,7 @@ class PermissionRepository extends RepositoryBase
                     function (Builder $builder) {
                         return $builder->whereNull(ConfigService::$tablePermissions . '.id')
                             ->orWhereIn(
-                                ConfigService::$tableTranslations . '.value',
+                               ConfigService::$tablePermissions . '.name',
                                 self::$availableContentPermissionIds
                             );
                     }

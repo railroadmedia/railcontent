@@ -39,7 +39,8 @@ class ContentJsonController extends Controller
             $request->get('order-by', 'published_on'),
             $request->get('order-direction', 'desc'),
             $request->get('types', []),
-            $request->get('required-fields', [])
+            $request->get('required-fields', []),
+            $request->get('playlists',[])
         );
 
         return response()->json($contents, 200);

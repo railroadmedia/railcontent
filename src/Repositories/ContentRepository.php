@@ -117,8 +117,9 @@ class ContentRepository extends RepositoryBase
         $orderBy,
         $orderDirection,
         array $types,
-        array $requiredFields
-    ) {
+        array $requiredFields,
+        array $playlists
+    ){
         $subLimitQuery = $this->baseQuery(false)
             ->select(ConfigService::$tableContent . '.id as id');
 
@@ -154,7 +155,32 @@ class ContentRepository extends RepositoryBase
             }
         }
 
+        if(!empty($playlists)) {
+            $subLimitQuery->whereIn(ConfigService::$tableContent.'.id',
+                function(Builder $builder) use ($playlists) {
+                    return $builder
+                        ->select([ConfigService::$tableUserContent.'.content_id'])
+                        ->from(ConfigService::$tableUserContent)
+                        ->leftJoin(
+                            ConfigService::$tableUserContentPlaylists,
+                            ConfigService::$tableUserContent.'.id',
+                            '=',
+                            ConfigService::$tableUserContentPlaylists.'.content_user_id')
+                        ->leftJoin(
+                            ConfigService::$tablePlaylists,
+                            ConfigService::$tablePlaylists.'.id',
+                            '=',
+                            ConfigService::$tableUserContentPlaylists.'.playlist_id'
+                        )
+                        ->where(
+                            ConfigService::$tableUserContent.'.user_id', $this->getAuthenticatedUserId())
+                        ->whereIn(ConfigService::$tablePlaylists.'.name', $playlists);
+                }
+            );
+        }
+
         $subLimitQuery
+            ->orderBy($orderBy, $orderDirection)
             ->limit($limit)
             ->skip(($page - 1) * $limit);
 

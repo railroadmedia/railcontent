@@ -56,7 +56,7 @@ class ContentPermissionsMiddleware
             ContentRepository::$pullFutureContent = false;
 
             PermissionRepository::$availableContentPermissionIds =
-                $request->get('user_content_permission_ids', []);
+                $request->get('user_content_permission_ids', false);
         }
 
         return $next($request);

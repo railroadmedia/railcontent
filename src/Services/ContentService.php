@@ -81,17 +81,27 @@ class ContentService
         $orderBy,
         $orderDirection,
         array $types,
-        array $requiredFields
+        array $requiredFields,
+        array $playlists
     ) {
 
-        return $this->contentRepository->getFiltered(
+        $data =  $this->contentRepository->getFiltered(
             $page,
             $limit,
             $orderBy,
             $orderDirection,
             $types,
-            $requiredFields
+            $requiredFields,
+            $playlists
         );
+
+        $results = new \stdClass();
+        $results->page = $page;
+        $results->limit = $limit;
+        $results->totalItems = count($data);
+        $results->items = $data;
+
+        return $results;
     }
 
     /**

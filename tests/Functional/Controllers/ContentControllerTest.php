@@ -492,7 +492,7 @@ class ContentControllerTest extends RailcontentTestCase
 
         $response = $this->call('GET', 'railcontent/', [
             'page' => 1,
-            'limit' => 10,
+            'amount' => 10,
             'order-by' => 'id',
             'order-direction' => 'asc',
             'types' => $types,
@@ -556,7 +556,7 @@ class ContentControllerTest extends RailcontentTestCase
             'amount' => 10,
             'statues' => $statues,
             'types' => $types,
-            'fields' => [$field['key'] => $field['value']],
+            'required-fields' => [$field['key'] => [$field['value']]],
             'parent_slug' => '',
             'include_future_published_on' => false
         ]);
