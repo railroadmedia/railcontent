@@ -24,10 +24,10 @@ class ContentFactory extends FactoryBase
     }
 
     /**
-     * @param array $attributeOverrides
+     * @param array $parameterOverwrites
      * @return array
      */
-    public function create(array $attributeOverrides = [])
+    public function create(...$parameterOverwrites)
     {
         $parameters = array_merge(
             [
@@ -45,7 +45,7 @@ class ContentFactory extends FactoryBase
                 null,
                 $this->faker->dateTime()
             ],
-            $attributeOverrides
+            $parameterOverwrites
         );
 
         return $this->contentService->create(...$parameters);

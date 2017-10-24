@@ -20,8 +20,8 @@ abstract class FactoryBase
     }
 
     /**
-     * @param array $attributeOverrides
+     * @param array $parameterOverwrites
      * @return mixed
      */
-    public abstract function create(array $attributeOverrides = []);
+    public abstract function create(...$parameterOverwrites);
 }
