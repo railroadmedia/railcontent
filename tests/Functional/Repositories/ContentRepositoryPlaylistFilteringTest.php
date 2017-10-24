@@ -43,6 +43,9 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
 
     public function test_require_playlists_with_pagination()
     {
+        
+        // todo: this is a work in progress, and was copied and edited from the field filtering tests
+
         /*
          * Expected content ids before pagination:
          * [ 5, 6, 7... 14 ]

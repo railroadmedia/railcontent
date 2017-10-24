@@ -651,7 +651,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type])
+        $rows = $this->contentRepository->startFilter(2, 3, 'id', 'asc', [$type])
             ->includeField(
                 $includedFieldName,
                 $includedFieldValue,
