@@ -139,12 +139,11 @@ class ContentRepositoryFilteringTest extends RailcontentTestCase
                 ]
             );
 
-            $randomField =
-                $this->fieldFactory->create(
-                    [
-                        0 => $content['id']
-                    ]
-                );
+            $randomField = $this->fieldFactory->create(
+                [
+                    0 => $content['id']
+                ]
+            );
         }
 
         // content that only has 1 of the required fields
@@ -156,23 +155,21 @@ class ContentRepositoryFilteringTest extends RailcontentTestCase
                 ]
             );
 
-            $field =
-                $this->fieldFactory->create(
-                    [
-                        0 => $content['id'],
-                        1 => $requiredFieldName,
-                        2 => $requiredFieldValue,
-                        3 => $requiredFieldType,
-                        4 => 1
-                    ]
-                );
+            $field = $this->fieldFactory->create(
+                [
+                    0 => $content['id'],
+                    1 => $requiredFieldName,
+                    2 => $requiredFieldValue,
+                    3 => $requiredFieldType,
+                    4 => 1
+                ]
+            );
 
-            $randomField =
-                $this->fieldFactory->create(
-                    [
-                        0 => $content['id']
-                    ]
-                );
+            $randomField = $this->fieldFactory->create(
+                [
+                    0 => $content['id']
+                ]
+            );
         }
 
         // content that has all the required fields
@@ -184,34 +181,31 @@ class ContentRepositoryFilteringTest extends RailcontentTestCase
                 ]
             );
 
-            $requiredField =
-                $this->fieldFactory->create(
-                    [
-                        0 => $expectedContent['id'],
-                        1 => $requiredFieldName,
-                        2 => $requiredFieldValue,
-                        3 => $requiredFieldType,
-                        4 => 1
-                    ]
-                );
+            $requiredField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id'],
+                    1 => $requiredFieldName,
+                    2 => $requiredFieldValue,
+                    3 => $requiredFieldType,
+                    4 => 1
+                ]
+            );
 
-            $otherRequiredField =
-                $this->fieldFactory->create(
-                    [
-                        0 => $expectedContent['id'],
-                        1 => $otherRequiredFieldName,
-                        2 => $otherRequiredFieldValue,
-                        3 => $otherRequiredFieldType,
-                        4 => 1
-                    ]
-                );
+            $otherRequiredField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id'],
+                    1 => $otherRequiredFieldName,
+                    2 => $otherRequiredFieldValue,
+                    3 => $otherRequiredFieldType,
+                    4 => 1
+                ]
+            );
 
-            $randomField =
-                $this->fieldFactory->create(
-                    [
-                        0 => $expectedContent['id']
-                    ]
-                );
+            $randomField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id']
+                ]
+            );
         }
 
         $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type])
@@ -263,12 +257,11 @@ class ContentRepositoryFilteringTest extends RailcontentTestCase
                 ]
             );
 
-            $randomField =
-                $this->fieldFactory->create(
-                    [
-                        0 => $content['id']
-                    ]
-                );
+            $randomField = $this->fieldFactory->create(
+                [
+                    0 => $content['id']
+                ]
+            );
         }
 
         // content that only has 1 of the included fields
@@ -280,23 +273,21 @@ class ContentRepositoryFilteringTest extends RailcontentTestCase
                 ]
             );
 
-            $field =
-                $this->fieldFactory->create(
-                    [
-                        0 => $content['id'],
-                        1 => $includedFieldName,
-                        2 => $includedFieldValue,
-                        3 => $includedFieldType,
-                        4 => 1
-                    ]
-                );
+            $field = $this->fieldFactory->create(
+                [
+                    0 => $content['id'],
+                    1 => $includedFieldName,
+                    2 => $includedFieldValue,
+                    3 => $includedFieldType,
+                    4 => 1
+                ]
+            );
 
-            $randomField =
-                $this->fieldFactory->create(
-                    [
-                        0 => $content['id']
-                    ]
-                );
+            $randomField = $this->fieldFactory->create(
+                [
+                    0 => $content['id']
+                ]
+            );
         }
 
         // content that has all the included fields
@@ -308,34 +299,31 @@ class ContentRepositoryFilteringTest extends RailcontentTestCase
                 ]
             );
 
-            $includedField =
-                $this->fieldFactory->create(
-                    [
-                        0 => $expectedContent['id'],
-                        1 => $includedFieldName,
-                        2 => $includedFieldValue,
-                        3 => $includedFieldType,
-                        4 => 1
-                    ]
-                );
+            $includedField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id'],
+                    1 => $includedFieldName,
+                    2 => $includedFieldValue,
+                    3 => $includedFieldType,
+                    4 => 1
+                ]
+            );
 
-            $otherIncludedField =
-                $this->fieldFactory->create(
-                    [
-                        0 => $expectedContent['id'],
-                        1 => $otherIncludedFieldName,
-                        2 => $otherIncludedFieldValue,
-                        3 => $otherIncludedFieldType,
-                        4 => 1
-                    ]
-                );
+            $otherIncludedField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id'],
+                    1 => $otherIncludedFieldName,
+                    2 => $otherIncludedFieldValue,
+                    3 => $otherIncludedFieldType,
+                    4 => 1
+                ]
+            );
 
-            $randomField =
-                $this->fieldFactory->create(
-                    [
-                        0 => $expectedContent['id']
-                    ]
-                );
+            $randomField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id']
+                ]
+            );
         }
 
         $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type])
