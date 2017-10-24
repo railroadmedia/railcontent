@@ -8,7 +8,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
-class ContentRepositoryFilteringTest extends RailcontentTestCase
+class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
 {
     /**
      * @var ContentRepository
@@ -32,78 +32,6 @@ class ContentRepositoryFilteringTest extends RailcontentTestCase
         $this->classBeingTested = $this->app->make(ContentRepository::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->fieldFactory = $this->app->make(FieldFactory::class);
-    }
-
-    public function test_empty()
-    {
-        $rows = $this->classBeingTested->getFiltered(1, 1, 'published_on', 'desc', [], [], []);
-
-        $this->assertEmpty($rows);
-    }
-
-    public function test_pagination_and_order_by()
-    {
-        /*
-         * Expected content ids before pagination:
-         * [ 1, 2, 3... 10 ]
-         *
-         * Expected content ids after pagination:
-         * [ 4, 5, 6 ]
-         *
-         */
-
-        for ($i = 0; $i < 10; $i++) {
-            $this->contentFactory->create([1 => ContentService::STATUS_PUBLISHED]);
-        }
-
-        $rows = $this->classBeingTested->getFiltered(2, 3, 'id', 'asc', [], [], []);
-
-        $this->assertEquals([4, 5, 6], array_column($rows, 'id'));
-    }
-
-    public function test_include_types()
-    {
-        /*
-         * Expected content ids:
-         * [ 1, 2, 3, 4, 5 ]
-         *
-         */
-
-        $typesToInclude = [
-            $this->faker->word . rand(),
-            $this->faker->word . rand(),
-            $this->faker->word . rand()
-        ];
-
-        $typesToExclude = [
-            $this->faker->word . rand(),
-            $this->faker->word . rand(),
-            $this->faker->word . rand()
-        ];
-
-        $expectedContents = [];
-
-        for ($i = 0; $i < 5; $i++) {
-            $expectedContents[] = $this->contentFactory->create(
-                [
-                    1 => ContentService::STATUS_PUBLISHED,
-                    2 => $this->faker->randomElement($typesToInclude),
-                ]
-            );
-        }
-
-        for ($i = 0; $i < 5; $i++) {
-            $this->contentFactory->create(
-                [
-                    1 => ContentService::STATUS_PUBLISHED,
-                    2 => $this->faker->randomElement($typesToExclude),
-                ]
-            );
-        }
-
-        $rows = $this->classBeingTested->getFiltered(1, 10, 'id', 'asc', $typesToInclude, [], []);
-
-        $this->assertEquals(array_column($expectedContents, 'id'), array_column($rows, 'id'));
     }
 
     public function test_require_fields_with_pagination()

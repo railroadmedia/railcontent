@@ -1025,6 +1025,30 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @param $userId
+     * @param $name
+     * @return $this
+     */
+    public function requireUserPlaylist($userId, $name)
+    {
+        $this->requiredUserPlaylists[] = ['user_id' => $userId, 'name' => $name];
+
+        return $this;
+    }
+
+    /**
+     * @param $userId
+     * @param $name
+     * @return $this
+     */
+    public function includeUserPlaylist($userId, $name)
+    {
+        $this->includedUserPlaylists[] = ['user_id' => $userId, 'name' => $name];
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function get()
@@ -1104,33 +1128,79 @@ class ContentRepository extends RepositoryBase
             }
         );
 
-//        if (!empty($playlists)) {
-//            $subLimitQuery->whereIn(
-//                ConfigService::$tableContent . '.id',
-//                function (Builder $builder) use ($playlists) {
-//                    return $builder
-//                        ->select([ConfigService::$tableUserContent . '.content_id'])
-//                        ->from(ConfigService::$tableUserContent)
-//                        ->leftJoin(
-//                            ConfigService::$tableUserContentPlaylists,
-//                            ConfigService::$tableUserContent . '.id',
-//                            '=',
-//                            ConfigService::$tableUserContentPlaylists . '.content_user_id'
-//                        )
-//                        ->leftJoin(
-//                            ConfigService::$tablePlaylists,
-//                            ConfigService::$tablePlaylists . '.id',
-//                            '=',
-//                            ConfigService::$tableUserContentPlaylists . '.playlist_id'
-//                        )
-//                        ->where(
-//                            ConfigService::$tableUserContent . '.user_id',
-//                            $this->getAuthenticatedUserId()
-//                        )
-//                        ->whereIn(ConfigService::$tablePlaylists . '.name', $playlists);
-//                }
-//            );
-//        }
+        // exclusive user playlist filters
+        $subLimitQuery->where(
+            function (Builder $builder) use ($subLimitQuery) {
+
+                foreach ($this->requiredUserPlaylists as $requiredUserPlaylistData) {
+                    $builder->whereExists(
+                        function (Builder $builder) use ($requiredUserPlaylistData) {
+                            return $builder
+                                ->select([ConfigService::$tableUserContent . '.content_id'])
+                                ->from(ConfigService::$tableUserContent)
+                                ->leftJoin(
+                                    ConfigService::$tableUserContentPlaylists,
+                                    ConfigService::$tableUserContent . '.id',
+                                    '=',
+                                    ConfigService::$tableUserContentPlaylists . '.content_user_id'
+                                )
+                                ->leftJoin(
+                                    ConfigService::$tablePlaylists,
+                                    ConfigService::$tablePlaylists . '.id',
+                                    '=',
+                                    ConfigService::$tableUserContentPlaylists . '.playlist_id'
+                                )
+                                ->where(
+                                    ConfigService::$tableUserContent . '.user_id',
+                                    $requiredUserPlaylistData['user_id']
+                                )
+                                ->where(
+                                    ConfigService::$tablePlaylists . '.name',
+                                    $requiredUserPlaylistData['name']
+                                );
+                        }
+                    );
+                }
+
+            }
+        );
+
+        // inclusive user playlist filters
+        $subLimitQuery->where(
+            function (Builder $builder) use ($subLimitQuery) {
+
+                foreach ($this->requiredUserPlaylists as $requiredUserPlaylistData) {
+                    $builder->orWhereExists(
+                        function (Builder $builder) use ($requiredUserPlaylistData) {
+                            return $builder
+                                ->select([ConfigService::$tableUserContent . '.content_id'])
+                                ->from(ConfigService::$tableUserContent)
+                                ->leftJoin(
+                                    ConfigService::$tableUserContentPlaylists,
+                                    ConfigService::$tableUserContent . '.id',
+                                    '=',
+                                    ConfigService::$tableUserContentPlaylists . '.content_user_id'
+                                )
+                                ->leftJoin(
+                                    ConfigService::$tablePlaylists,
+                                    ConfigService::$tablePlaylists . '.id',
+                                    '=',
+                                    ConfigService::$tableUserContentPlaylists . '.playlist_id'
+                                )
+                                ->where(
+                                    ConfigService::$tableUserContent . '.user_id',
+                                    $requiredUserPlaylistData['user_id']
+                                )
+                                ->where(
+                                    ConfigService::$tablePlaylists . '.name',
+                                    $requiredUserPlaylistData['name']
+                                );
+                        }
+                    );
+                }
+
+            }
+        );
 
         $subLimitQuery
             ->orderBy($this->orderBy, $this->orderDirection)
