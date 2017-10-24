@@ -109,6 +109,7 @@ class ContentRepository extends RepositoryBase
      * @param $orderDirection
      * @param array $types
      * @param array $requiredFields
+     * @param array $playlists
      * @return array|null
      */
     public function getFiltered(
@@ -119,7 +120,7 @@ class ContentRepository extends RepositoryBase
         array $types,
         array $requiredFields,
         array $playlists
-    ){
+    ) {
         $subLimitQuery = $this->baseQuery(false)
             ->select(ConfigService::$tableContent . '.id as id');
 
@@ -141,36 +142,56 @@ class ContentRepository extends RepositoryBase
                                 ConfigService::$tableContentFields . '.field_id'
                             )
                             ->where(ConfigService::$tableFields . '.key', $requiredFieldName)
-                            ->whereIn(ConfigService::$tableContentFields .
+                            ->whereIn(
+                                ConfigService::$tableContentFields .
                                 '.content_id',
                                 [
                                     $this->databaseManager->raw(ConfigService::$tableContent . '.id'),
                                     $this->databaseManager->raw(ConfigService::$tableContent . '.parent_id')
-                                ])
-                            ->where(function ($builder) use ($requiredFieldName, $requiredFieldValue) {
-                                $builder
-                                    ->where(ConfigService::$tableFields . '.value', $requiredFieldValue)
-                                    ->orWhereExists(
-                                        function ($builder) use ($requiredFieldName, $requiredFieldValue) {
-                                            $builder
-                                                ->select([ConfigService::$tableContent . '.id'])
-                                                ->from(ConfigService::$tableContent)
-                                                ->where(ConfigService::$tableContent . '.slug', $requiredFieldValue)
-                                                ->where($this->databaseManager->raw(
-                                                    ConfigService::$tableFields . '.type'
-                                                ), 'content_id')
-                                                ->whereIn(
-                                                    $this->databaseManager->raw(
-                                                        ConfigService::$tableFields . '.value'
+                                ]
+                            )
+                            ->where(
+                                function ($builder) use ($requiredFieldName, $requiredFieldValue) {
+                                    $builder
+                                        ->where(ConfigService::$tableFields . '.value', $requiredFieldValue)
+                                        ->orWhereExists(
+                                            function ($builder) use (
+                                                $requiredFieldName,
+                                                $requiredFieldValue
+                                            ) {
+                                                $builder
+                                                    ->select([ConfigService::$tableContent . '.id'])
+                                                    ->from(ConfigService::$tableContent)
+                                                    ->where(
+                                                        ConfigService::$tableContent . '.slug',
+                                                        $requiredFieldValue
                                                     )
-                                                    , [
-                                                        $this->databaseManager->raw(ConfigService::$tableContent . '.id'),
-                                                        $this->databaseManager->raw(ConfigService::$tableContent . '.parent_id')
-                                                    ]
-                                                );
-                                        });
-                            });
-                    });
+                                                    ->where(
+                                                        $this->databaseManager->raw(
+                                                            ConfigService::$tableFields . '.type'
+                                                        ),
+                                                        'content_id'
+                                                    )
+                                                    ->whereIn(
+                                                        $this->databaseManager->raw(
+                                                            ConfigService::$tableFields . '.value'
+                                                        )
+                                                        ,
+                                                        [
+                                                            $this->databaseManager->raw(
+                                                                ConfigService::$tableContent . '.id'
+                                                            ),
+                                                            $this->databaseManager->raw(
+                                                                ConfigService::$tableContent . '.parent_id'
+                                                            )
+                                                        ]
+                                                    );
+                                            }
+                                        );
+                                }
+                            );
+                    }
+                );
             }
         }
 
@@ -184,19 +205,23 @@ class ContentRepository extends RepositoryBase
                             ConfigService::$tableUserContentPlaylists,
                             ConfigService::$tableUserContent . '.id',
                             '=',
-                            ConfigService::$tableUserContentPlaylists . '.content_user_id')
+                            ConfigService::$tableUserContentPlaylists . '.content_user_id'
+                        )
                         ->leftJoin(
                             ConfigService::$tablePlaylists,
                             ConfigService::$tablePlaylists . '.id',
                             '=',
                             ConfigService::$tableUserContentPlaylists . '.playlist_id'
                         )
-                        ->where([
-                            ConfigService::$tableUserContent . '.user_id' => 1,
-                            ConfigService::$tableUserContent . '.content_id' => $this->databaseManager->raw(
-                                ConfigService::$tableContent . '.id'
-                            )
-                        ])
+                        ->where(
+                            [
+                                ConfigService::$tableUserContent . '.user_id' => 1,
+                                ConfigService::$tableUserContent .
+                                '.content_id' => $this->databaseManager->raw(
+                                    ConfigService::$tableContent . '.id'
+                                )
+                            ]
+                        )
                         ->whereIn(ConfigService::$tablePlaylists . '.name', $playlists);
                 }
             );
@@ -299,72 +324,9 @@ class ContentRepository extends RepositoryBase
             ]
         );
 
-        $this->reposition($contentId, $position);
+        $this->reposition($contentId, $type, $position);
 
         return $contentId;
-    }
-
-    /**
-     * Update content position and call function that recalculate position for other children
-     *
-     * @param int $contentId
-     * @param int $position
-     */
-    public function reposition($contentId, $position)
-    {
-        $parentContentId = $this->queryTable()->where('id', $contentId)->first(['parent_id'])['parent_id']
-            ?? null;
-        $childContentCount = $this->queryTable()->where('parent_id', $parentContentId)->count();
-
-        if ($position < 1) {
-            $position = 1;
-        } elseif ($position > $childContentCount) {
-            $position = $childContentCount;
-        }
-
-        $this->transaction(
-            function () use ($contentId, $position, $parentContentId) {
-                $this->queryTable()
-                    ->where('id', $contentId)
-                    ->update(
-                        ['position' => $position]
-                    );
-
-                $this->otherChildrenRepositions($parentContentId, $contentId, $position);
-            }
-        );
-    }
-
-    /** Update position for other categories with the same parent id
-     *
-     * @param integer $parentCategoryId
-     * @param integer $categoryId
-     * @param integer $position
-     */
-    function otherChildrenRepositions($parentContentId, $contentId, $position)
-    {
-        $childContent =
-            $this->queryTable()
-                ->where('parent_id', $parentContentId)
-                ->where('id', '<>', $contentId)
-                ->orderBy('position')
-                ->get()
-                ->toArray();
-
-        $start = 1;
-
-        foreach ($childContent as $child) {
-            if ($start == $position) {
-                $start++;
-            }
-
-            $this->queryTable()
-                ->where('id', $child['id'])
-                ->update(
-                    ['position' => $start]
-                );
-            $start++;
-        }
     }
 
     /**
@@ -392,6 +354,8 @@ class ContentRepository extends RepositoryBase
         $publishedOn,
         $archivedOn
     ) {
+        $oldPosition = $this->queryTable()->where('id', $id)->first(['position'])['position'] ?? null;
+
         $this->queryTable()->where('id', $id)->update(
             [
                 'slug' => $slug,
@@ -406,7 +370,7 @@ class ContentRepository extends RepositoryBase
             ]
         );
 
-        $this->reposition($id, $position);
+        $this->reposition($id, $type, $position, $oldPosition);
 
         return $id;
     }
@@ -421,6 +385,9 @@ class ContentRepository extends RepositoryBase
      */
     public function delete($id, $deleteChildren = false)
     {
+        $contentBeingDeleted = $this->queryTable()
+            ->where('id', $id)
+            ->first();
 
         $this->unlinkFields($id);
         $this->unlinkData($id);
@@ -431,10 +398,120 @@ class ContentRepository extends RepositoryBase
 
         $delete = $this->queryTable()->where('id', $id)->delete();
 
-        // todo: get parent id for this content id and replace null with it
-        $this->otherChildrenRepositions(null, $id, 0);
+        $this->otherChildrenRepositions(
+            $contentBeingDeleted['parent_id'],
+            $id,
+            $contentBeingDeleted['type'],
+            null,
+            $contentBeingDeleted['position']
+        );
 
         return $delete;
+    }
+
+    /**
+     * Update content position and call function that recalculate position for other children
+     *
+     * @param int $contentId
+     * @param string $type
+     * @param int $newPosition
+     * @param int|null $oldPosition
+     */
+    public function reposition($contentId, $type, $newPosition, $oldPosition = null)
+    {
+        $parentContentId = $this->queryTable()
+                ->where('id', $contentId)
+                ->first(['parent_id'])
+            ['parent_id'] ?? null;
+
+        $childContentCount = $this->queryTable()
+            ->where('parent_id', $parentContentId)
+            ->where('type', $type)
+            ->count();
+
+        if ($newPosition < 1) {
+            $newPosition = 1;
+        } elseif ($newPosition > $childContentCount) {
+            $newPosition = $childContentCount;
+        }
+
+        $this->transaction(
+            function () use ($oldPosition, $type, $contentId, $newPosition, $parentContentId) {
+                $this->queryTable()
+                    ->where('id', $contentId)
+                    ->update(
+                        ['position' => $newPosition]
+                    );
+
+                $this->otherChildrenRepositions(
+                    $parentContentId,
+                    $contentId,
+                    $type,
+                    $newPosition,
+                    $oldPosition
+                );
+            }
+        );
+    }
+
+    /** Update position for other categories with the same parent id
+     *
+     * @param $parentContentId
+     * @param $contentId
+     * @param $type
+     * @param $newPosition
+     * @param null $oldPosition
+     * @return int
+     */
+    function otherChildrenRepositions(
+        $parentContentId,
+        $contentId,
+        $type,
+        $newPosition = null,
+        $oldPosition = null
+    ) {
+        if (!is_null($newPosition) && !is_null($oldPosition) && $newPosition > $oldPosition) {
+
+            // content position is being updated to larger position in the stack
+            return $this->queryTable()
+                ->where('parent_id', $parentContentId)
+                ->where('id', '!=', $contentId)
+                ->where('position', '>', $oldPosition)
+                ->where('position', '<=', $newPosition)
+                ->where('type', $type)
+                ->decrement('position');
+
+        } elseif (!is_null($newPosition) && !is_null($oldPosition) && $newPosition < $oldPosition) {
+
+            // content position is being updated to smaller position in the stack
+            return $this->queryTable()
+                ->where('parent_id', $parentContentId)
+                ->where('id', '!=', $contentId)
+                ->where('position', '<', $oldPosition)
+                ->where('position', '>=', $newPosition)
+                ->where('type', $type)
+                ->increment('position');
+
+        } elseif (is_null($oldPosition)) {
+
+            // content is being created with position anywhere in stack
+            return $this->queryTable()
+                ->where('parent_id', $parentContentId)
+                ->where('id', '!=', $contentId)
+                ->where('position', '>=', $newPosition)
+                ->where('type', $type)
+                ->increment('position');
+        } else {
+
+            // content is being deleted
+            return $this->queryTable()
+                ->where('parent_id', $parentContentId)
+                ->where('id', '!=', $contentId)
+                ->where('position', '>=', $oldPosition)
+                ->where('type', $type)
+                ->decrement('position');
+
+        }
     }
 
     /**
