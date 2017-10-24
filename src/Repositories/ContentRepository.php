@@ -1009,6 +1009,9 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * Including a single field is basically the same as requiring it. Only after
+     * including a second field does it start to behave inclusively.
+     *
      * @param $name
      * @param $value
      * @param $type
