@@ -33,6 +33,21 @@ class ContentRepository extends RepositoryBase
      */
     public static $pullFutureContent = true;
 
+    private $requiredFields = [];
+    private $includedFields = [];
+
+    private $requiredUserPlaylists = [];
+    private $includedUserPlaylists = [];
+
+    private $requiredUserStates = [];
+    private $includedUserStates = [];
+
+    private $page;
+    private $limit;
+    private $orderBy;
+    private $orderDirection;
+    private $types = [];
+
     /**
      * @var PermissionRepository
      */
@@ -954,5 +969,231 @@ class ContentRepository extends RepositoryBase
         }
 
         return $contents;
+    }
+
+    /**
+     * @param $page
+     * @param $limit
+     * @param $orderBy
+     * @param $orderDirection
+     * @param array $types
+     * @return $this
+     */
+    public function startFilter(
+        $page,
+        $limit,
+        $orderBy,
+        $orderDirection,
+        array $types
+    ) {
+        $this->page = $page;
+        $this->limit = $limit;
+        $this->orderBy = $orderBy;
+        $this->orderDirection = $orderDirection;
+        $this->types = $types;
+
+        return $this;
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     * @param $type
+     * @return $this
+     */
+    public function requireField($name, $value, $type)
+    {
+        $this->requiredFields[] = ['name' => $name, 'value' => $value, 'type' => $type];
+
+        return $this;
+    }
+
+    /**
+     * @param $name
+     * @param $value
+     * @param $type
+     * @return $this
+     */
+    public function includeField($name, $value, $type)
+    {
+        $this->includedFields[] = ['name' => $name, 'value' => $value, 'type' => $type];
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function get()
+    {
+        $subLimitQuery = $this->baseQuery(false)
+            ->select(ConfigService::$tableContent . '.id as id');
+
+        if (!empty($types)) {
+            $subLimitQuery->whereIn(ConfigService::$tableContent . '.type', $this->types);
+        }
+
+        // exclusive field filters
+        $subLimitQuery->where(
+            function (Builder $builder) use ($subLimitQuery) {
+
+                foreach ($this->requiredFields as $requiredFieldData) {
+                    $builder->whereExists(
+                        function (Builder $builder) use ($requiredFieldData) {
+                            return $builder
+                                ->select([ConfigService::$tableFields . '.id'])
+                                ->from(ConfigService::$tableContentFields)
+                                ->join(
+                                    ConfigService::$tableFields,
+                                    ConfigService::$tableFields . '.id',
+                                    '=',
+                                    ConfigService::$tableContentFields . '.field_id'
+                                )
+                                ->where(
+                                    [
+                                        ConfigService::$tableFields . '.key' => $requiredFieldData['name'],
+                                        ConfigService::$tableFields . '.value' => $requiredFieldData['value'],
+                                        ConfigService::$tableFields . '.type' => $requiredFieldData['type'],
+                                        ConfigService::$tableContentFields .
+                                        '.content_id' => $this->databaseManager->raw(
+                                            ConfigService::$tableContent . '.id'
+                                        )
+                                    ]
+                                );
+                        }
+                    );
+                }
+
+            }
+        );
+
+        // inclusive field filters
+        $subLimitQuery->where(
+            function (Builder $builder) use ($subLimitQuery) {
+
+                foreach ($this->includedFields as $includedFieldData) {
+                    $builder->orWhereExists(
+                        function (Builder $builder) use ($includedFieldData) {
+                            return $builder
+                                ->select([ConfigService::$tableFields . '.id'])
+                                ->from(ConfigService::$tableContentFields)
+                                ->join(
+                                    ConfigService::$tableFields,
+                                    ConfigService::$tableFields . '.id',
+                                    '=',
+                                    ConfigService::$tableContentFields . '.field_id'
+                                )
+                                ->where(
+                                    [
+                                        ConfigService::$tableFields . '.key' => $includedFieldData['name'],
+                                        ConfigService::$tableFields . '.value' => $includedFieldData['value'],
+                                        ConfigService::$tableFields . '.type' => $includedFieldData['type'],
+                                        ConfigService::$tableContentFields .
+                                        '.content_id' => $this->databaseManager->raw(
+                                            ConfigService::$tableContent . '.id'
+                                        )
+                                    ]
+                                );
+                        }
+                    );
+                }
+
+            }
+        );
+
+//        if (!empty($playlists)) {
+//            $subLimitQuery->whereIn(
+//                ConfigService::$tableContent . '.id',
+//                function (Builder $builder) use ($playlists) {
+//                    return $builder
+//                        ->select([ConfigService::$tableUserContent . '.content_id'])
+//                        ->from(ConfigService::$tableUserContent)
+//                        ->leftJoin(
+//                            ConfigService::$tableUserContentPlaylists,
+//                            ConfigService::$tableUserContent . '.id',
+//                            '=',
+//                            ConfigService::$tableUserContentPlaylists . '.content_user_id'
+//                        )
+//                        ->leftJoin(
+//                            ConfigService::$tablePlaylists,
+//                            ConfigService::$tablePlaylists . '.id',
+//                            '=',
+//                            ConfigService::$tableUserContentPlaylists . '.playlist_id'
+//                        )
+//                        ->where(
+//                            ConfigService::$tableUserContent . '.user_id',
+//                            $this->getAuthenticatedUserId()
+//                        )
+//                        ->whereIn(ConfigService::$tablePlaylists . '.name', $playlists);
+//                }
+//            );
+//        }
+
+        $subLimitQuery
+            ->orderBy($this->orderBy, $this->orderDirection)
+            ->limit($this->limit)
+            ->skip(($this->page - 1) * $this->limit);
+
+        $subLimitQueryString = $subLimitQuery->toSql();
+
+        $query = $this->queryTable()
+            ->select(
+                [
+                    ConfigService::$tableContent . '.id as id',
+                    ConfigService::$tableContent . '.slug as slug',
+                    ConfigService::$tableContent . '.status as status',
+                    ConfigService::$tableContent . '.type as type',
+                    ConfigService::$tableContent . '.position as position',
+                    ConfigService::$tableContent . '.parent_id as parent_id',
+                    ConfigService::$tableContent . '.language as language',
+                    ConfigService::$tableContent . '.published_on as published_on',
+                    ConfigService::$tableContent . '.created_on as created_on',
+                    ConfigService::$tableContent . '.archived_on as archived_on',
+                    ConfigService::$tableContent . '.brand as brand',
+                    ConfigService::$tableFields . '.id as field_id',
+                    ConfigService::$tableFields . '.key as field_key',
+                    ConfigService::$tableFields . '.value as field_value',
+                    ConfigService::$tableFields . '.type as field_type',
+                    ConfigService::$tableFields . '.position as field_position',
+                    ConfigService::$tableData . '.id as datum_id',
+                    ConfigService::$tableData . '.key as datum_key',
+                    ConfigService::$tableData . '.value as datum_value',
+                    ConfigService::$tableData . '.position as datum_position',
+                ]
+            )
+            ->leftJoin(
+                ConfigService::$tableContentFields,
+                ConfigService::$tableContentFields . '.content_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->leftJoin(
+                ConfigService::$tableFields,
+                ConfigService::$tableFields . '.id',
+                '=',
+                ConfigService::$tableContentFields . '.field_id'
+            )
+            ->leftJoin(
+                ConfigService::$tableContentData,
+                ConfigService::$tableContentData . '.content_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->leftJoin(
+                ConfigService::$tableData,
+                ConfigService::$tableData . '.id',
+                '=',
+                ConfigService::$tableContentData . '.datum_id'
+            )
+            ->join(
+                $this->databaseManager->raw('(' . $subLimitQueryString . ') inner_content'),
+                function (JoinClause $joinClause) {
+                    $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
+                }
+            )
+            ->addBinding($subLimitQuery->getBindings())
+            ->orderBy($this->orderBy, $this->orderDirection);
+
+        return $this->parseBaseQueryRows($query->get()->toArray());
     }
 }

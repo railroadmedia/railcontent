@@ -68,6 +68,7 @@ class ContentJsonController extends Controller
             $request->get('status'),
             $request->get('type'),
             $request->get('position'),
+            $request->input('language') ?? ConfigService::$defaultLanguage,
             $request->get('parent_id'),
             $request->get('published_on')
         );

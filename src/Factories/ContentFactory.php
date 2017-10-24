@@ -27,10 +27,10 @@ class ContentFactory extends FactoryBase
      * @param array $parameterOverwrites
      * @return array
      */
-    public function create(...$parameterOverwrites)
+    public function create(array $parameterOverwrites)
     {
-        $parameters = array_merge(
-            [
+        $parameters =
+            $parameterOverwrites + [
                 $this->contentService->slugify($this->faker->words(rand(2, 6), true)),
                 $this->faker->randomElement(
                     [
@@ -44,9 +44,9 @@ class ContentFactory extends FactoryBase
                 'en-US',
                 null,
                 $this->faker->dateTime()
-            ],
-            $parameterOverwrites
-        );
+            ];
+
+        ksort($parameters);
 
         return $this->contentService->create(...$parameters);
     }
