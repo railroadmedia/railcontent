@@ -140,46 +140,70 @@ class ContentRepository extends RepositoryBase
                                 '=',
                                 ConfigService::$tableContentFields . '.field_id'
                             )
-                            ->where(
+                            ->where(ConfigService::$tableFields . '.key', $requiredFieldName)
+                            ->whereIn(ConfigService::$tableContentFields .
+                                '.content_id',
                                 [
-                                    ConfigService::$tableFields . '.key' => $requiredFieldName,
-                                    ConfigService::$tableFields . '.value' => $requiredFieldValue,
-                                    ConfigService::$tableContentFields .
-                                    '.content_id' => $this->databaseManager->raw(
-                                        ConfigService::$tableContent . '.id'
-                                    )
-                                ]
-                            );
-                    }
-                );
+                                    $this->databaseManager->raw(ConfigService::$tableContent . '.id'),
+                                    $this->databaseManager->raw(ConfigService::$tableContent . '.parent_id')
+                                ])
+                            ->where(function ($builder) use ($requiredFieldName, $requiredFieldValue) {
+                                $builder
+                                    ->where(ConfigService::$tableFields . '.value', $requiredFieldValue)
+                                    ->orWhereExists(
+                                        function ($builder) use ($requiredFieldName, $requiredFieldValue) {
+                                            $builder
+                                                ->select([ConfigService::$tableContent . '.id'])
+                                                ->from(ConfigService::$tableContent)
+                                                ->where(ConfigService::$tableContent . '.slug', $requiredFieldValue)
+                                                ->where($this->databaseManager->raw(
+                                                    ConfigService::$tableFields . '.type'
+                                                ), 'content_id')
+                                                ->whereIn(
+                                                    $this->databaseManager->raw(
+                                                        ConfigService::$tableFields . '.value'
+                                                    )
+                                                    , [
+                                                        $this->databaseManager->raw(ConfigService::$tableContent . '.id'),
+                                                        $this->databaseManager->raw(ConfigService::$tableContent . '.parent_id')
+                                                    ]
+                                                );
+                                        });
+                            });
+                    });
             }
         }
 
-        if(!empty($playlists)) {
-            $subLimitQuery->whereIn(ConfigService::$tableContent.'.id',
-                function(Builder $builder) use ($playlists) {
+        if (!empty($playlists)) {
+            $subLimitQuery->whereExists(
+                function (Builder $builder) use ($playlists) {
                     return $builder
-                        ->select([ConfigService::$tableUserContent.'.content_id'])
+                        ->select([ConfigService::$tableUserContent . '.content_id'])
                         ->from(ConfigService::$tableUserContent)
                         ->leftJoin(
                             ConfigService::$tableUserContentPlaylists,
-                            ConfigService::$tableUserContent.'.id',
+                            ConfigService::$tableUserContent . '.id',
                             '=',
-                            ConfigService::$tableUserContentPlaylists.'.content_user_id')
+                            ConfigService::$tableUserContentPlaylists . '.content_user_id')
                         ->leftJoin(
                             ConfigService::$tablePlaylists,
-                            ConfigService::$tablePlaylists.'.id',
+                            ConfigService::$tablePlaylists . '.id',
                             '=',
-                            ConfigService::$tableUserContentPlaylists.'.playlist_id'
+                            ConfigService::$tableUserContentPlaylists . '.playlist_id'
                         )
-                        ->where(
-                            ConfigService::$tableUserContent.'.user_id', $this->getAuthenticatedUserId())
-                        ->whereIn(ConfigService::$tablePlaylists.'.name', $playlists);
+                        ->where([
+                            ConfigService::$tableUserContent . '.user_id' => 1,
+                            ConfigService::$tableUserContent . '.content_id' => $this->databaseManager->raw(
+                                ConfigService::$tableContent . '.id'
+                            )
+                        ])
+                        ->whereIn(ConfigService::$tablePlaylists . '.name', $playlists);
                 }
             );
         }
 
         $subLimitQuery
+            ->groupBy(ConfigService::$tableContent . '.id')
             ->orderBy($orderBy, $orderDirection)
             ->limit($limit)
             ->skip(($page - 1) * $limit);
@@ -847,6 +871,9 @@ class ContentRepository extends RepositoryBase
         foreach ($contents as $contentId => $content) {
             $contents[$contentId]['fields'] = $fields[$contentId] ?? null;
             $contents[$contentId]['data'] = $data[$contentId] ?? null;
+
+            $contents[$contentId] =
+                array_map("unserialize", array_unique(array_map("serialize", $contents[$contentId])));
         }
 
         return $contents;
