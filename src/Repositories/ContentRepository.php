@@ -314,7 +314,7 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * Insert a new content in the database, save the content slug in the translation table and recalculate position
+     * Insert a new content in the database and recalculate position
      *
      * @param string $slug
      * @param string $status
@@ -1165,6 +1165,12 @@ class ContentRepository extends RepositoryBase
                                     $requiredUserPlaylistData['user_id']
                                 )
                                 ->where(
+                                    ConfigService::$tableUserContent . '.content_id',
+                                    $this->databaseManager->raw(
+                                        ConfigService::$tableContent . '.id'
+                                    )
+                                )
+                                ->where(
                                     ConfigService::$tablePlaylists . '.name',
                                     $requiredUserPlaylistData['name']
                                 );
@@ -1178,8 +1184,7 @@ class ContentRepository extends RepositoryBase
         // inclusive user playlist filters
         $subLimitQuery->where(
             function (Builder $builder) use ($subLimitQuery) {
-
-                foreach ($this->requiredUserPlaylists as $requiredUserPlaylistData) {
+                foreach ($this->includedUserPlaylists as $requiredUserPlaylistData) {
                     $builder->orWhereExists(
                         function (Builder $builder) use ($requiredUserPlaylistData) {
                             return $builder
@@ -1200,6 +1205,12 @@ class ContentRepository extends RepositoryBase
                                 ->where(
                                     ConfigService::$tableUserContent . '.user_id',
                                     $requiredUserPlaylistData['user_id']
+                                )
+                                ->where(
+                                    ConfigService::$tableUserContent . '.content_id',
+                                    $this->databaseManager->raw(
+                                        ConfigService::$tableContent . '.id'
+                                    )
                                 )
                                 ->where(
                                     ConfigService::$tablePlaylists . '.name',

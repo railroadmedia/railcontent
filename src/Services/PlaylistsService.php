@@ -88,7 +88,7 @@ class PlaylistsService
 
         $playlistId = $this->playlistsRepository->store($name, $userId, $type);
 
-        return $playlistId > 0;
+        return $playlistId;
         //return $this->getPlaylist($playlistId, $userId);
     }
 
