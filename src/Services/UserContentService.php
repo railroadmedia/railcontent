@@ -29,30 +29,29 @@ class UserContentService
     public function __construct(UserContentRepository $userContentRepository)
     {
         $this->userContentRepository = $userContentRepository;
-        $this->userId = $this->userContentRepository->getAuthenticatedUserId(request());
     }
 
     /**
      * @param integer $contentId
      * @return bool
      */
-    public function startContent($contentId)
+    public function startContent($contentId, $userId)
     {
         $userContentId =
             $this->userContentRepository->saveUserContent(
                 $contentId,
-                $this->userId,
+                $userId,
                 UserContentService::STATE_STARTED
             );
 
-        return $userContentId > 0;
+        return $userContentId;
     }
 
     /**
      * @param integer $contentId
      * @return bool
      */
-    public function completeContent($contentId)
+    public function completeContent($contentId, $userId)
     {
         $progress = 100;
         $data = [
@@ -60,7 +59,7 @@ class UserContentService
             'progress' => $progress
         ];
 
-        $userContentId = $this->userContentRepository->updateUserContent($contentId, $this->userId, $data);
+        $userContentId = $this->userContentRepository->updateUserContent($contentId, $userId, $data);
 
         return $userContentId > 0;
     }
@@ -70,13 +69,13 @@ class UserContentService
      * @param string $progress
      * @return bool
      */
-    public function saveContentProgress($contentId, $progress)
+    public function saveContentProgress($contentId, $progress, $userId)
     {
         $data = [
             'progress' => $progress
         ];
 
-        $userContentId = $this->userContentRepository->updateUserContent($contentId, $this->userId, $data);
+        $userContentId = $this->userContentRepository->updateUserContent($contentId, $userId, $data);
 
         return $userContentId > 0;
     }

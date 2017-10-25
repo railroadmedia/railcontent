@@ -1058,6 +1058,20 @@ class ContentRepository extends RepositoryBase
         return $this;
     }
 
+    public function requireUserStates($userId, $state)
+    {
+        $this->requiredUserStates = ['user_id' => $userId, 'state' => $state];
+
+        return $this;
+    }
+
+    public function includeUserStates($userId, $state)
+    {
+        $this->includedUserStates[] = ['user_id' => $userId, 'state' => $state];
+
+        return $this;
+    }
+
     /**
      * @return array
      */
@@ -1184,6 +1198,7 @@ class ContentRepository extends RepositoryBase
         // inclusive user playlist filters
         $subLimitQuery->where(
             function (Builder $builder) use ($subLimitQuery) {
+
                 foreach ($this->includedUserPlaylists as $requiredUserPlaylistData) {
                     $builder->orWhereExists(
                         function (Builder $builder) use ($requiredUserPlaylistData) {
@@ -1220,6 +1235,67 @@ class ContentRepository extends RepositoryBase
                     );
                 }
 
+            }
+        );
+
+        // exclusive user state filter
+        $subLimitQuery->where(
+            function (Builder $builder) use ($subLimitQuery) {
+
+                if (count($this->requiredUserStates) > 0) {
+                    $requiredUserStateData = $this->requiredUserStates;
+                    $builder->whereExists(
+                        function (Builder $builder) use ($requiredUserStateData) {
+                            return $builder
+                                ->select([ConfigService::$tableUserContent . '.content_id'])
+                                ->from(ConfigService::$tableUserContent)
+                                ->where(
+                                    ConfigService::$tableUserContent . '.user_id',
+                                    $requiredUserStateData['user_id']
+                                )
+                                ->where(
+                                    ConfigService::$tableUserContent . '.content_id',
+                                    $this->databaseManager->raw(
+                                        ConfigService::$tableContent . '.id'
+                                    )
+                                )
+                                ->where(
+                                    ConfigService::$tableUserContent . '.state',
+                                    $requiredUserStateData['state']
+                                );
+                        }
+                    );
+                }
+            }
+        );
+
+        // inclusive user state filters
+        $subLimitQuery->where(
+            function (Builder $builder) use ($subLimitQuery) {
+
+                foreach ($this->includedUserStates as $requiredUserStateData) {
+                    $builder->orWhereExists(
+                        function (Builder $builder) use ($requiredUserStateData) {
+                            return $builder
+                                ->select([ConfigService::$tableUserContent . '.content_id'])
+                                ->from(ConfigService::$tableUserContent)
+                                ->where(
+                                    ConfigService::$tableUserContent . '.user_id',
+                                    $requiredUserStateData['user_id']
+                                )
+                                ->where(
+                                    ConfigService::$tableUserContent . '.content_id',
+                                    $this->databaseManager->raw(
+                                        ConfigService::$tableContent . '.id'
+                                    )
+                                )
+                                ->where(
+                                    ConfigService::$tableUserContent . '.state',
+                                    $requiredUserStateData['state']
+                                );
+                        }
+                    );
+                }
             }
         );
 
