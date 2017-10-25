@@ -34,20 +34,39 @@ class ContentJsonController extends Controller
      */
     public function index(Request $request)
     {
-        $contents = $this->contentService->getFiltered(
+        $filters = $request->get('filter', []);
+        $parsedFilters = [];
+
+        foreach ($filters as $filterName => $filterValues) {
+            foreach ($filterValues as $filterString) {
+                $parsedFilters[$filterName][] = explode(',', $filterString);
+            }
+        }
+
+        $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 10),
             $request->get('sort', 'published_on'),
             $request->get('included_types', []),
-            $request->get('required_fields', []),
-            $request->get('included_fields', []),
-            $request->get('required_user_states', []),
-            $request->get('included_user_states', []),
-            $request->get('required_user_playlists', []),
-            $request->get('included_user_playlists', [])
+            $parsedFilters['required_fields'] ?? [],
+            $parsedFilters['included_fields'] ?? [],
+            $parsedFilters['required_user_states'] ?? [],
+            $parsedFilters['included_user_states'] ?? [],
+            $parsedFilters['required_user_playlists'] ?? [],
+            $parsedFilters['included_user_playlists'] ?? []
         );
 
-        return response()->json($contents, 200);
+        return response()->json(
+            [
+                'status' => 'ok',
+                'code' => 200,
+                'page' => $request->get('page', 1),
+                'limit' => $request->get('limit', 10),
+                'total_results' => $contentData['total_results'],
+                'results' => $contentData['results'],
+            ],
+            200
+        );
     }
 
     /**

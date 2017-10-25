@@ -65,7 +65,8 @@ class ContentService
 
     /**
      *
-     * Returns an array of lesson data arrays.
+     * Returns:
+     * ['results' => $lessons, 'total_results' => $totalLessonsAfterFiltering]
      *
      * @param int $page
      * @param int $limit
@@ -103,27 +104,27 @@ class ContentService
         );
 
         foreach ($requiredFields as $requiredField) {
-            $filter->requireField(...explode($requiredField, ','));
+            $filter->requireField(...$requiredField);
         }
 
         foreach ($includedFields as $includedField) {
-            $filter->includeField(...explode($includedField, ','));
+            $filter->includeField(...$includedField);
         }
 
         foreach ($requiredUserStates as $requiredUserState) {
-            $filter->requireUserStates(...explode($requiredUserState, ','));
+            $filter->requireUserStates(...$requiredUserState);
         }
 
         foreach ($includedUserStates as $includedUserState) {
-            $filter->includeUserStates(...explode($includedUserState, ','));
+            $filter->includeUserStates(...$includedUserState);
         }
 
         foreach ($requiredUserPlaylists as $requiredUserPlaylist) {
-            $filter->requireUserStates(...explode($requiredUserPlaylist, ','));
+            $filter->requireUserStates(...$requiredUserPlaylist);
         }
 
         foreach ($includedUserPlaylists as $includedUserPlaylist) {
-            $filter->includeUserStates(...explode($includedUserPlaylist, ','));
+            $filter->includeUserStates(...$includedUserPlaylist);
         }
 
         return ['results' => $filter->get(), 'total_results' => $filter->count()];
