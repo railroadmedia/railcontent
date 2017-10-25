@@ -36,7 +36,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
 
     public function test_empty()
     {
-        $rows = $this->classBeingTested->getFiltered(1, 1, 'published_on', 'desc', [], [], []);
+        $rows = $this->classBeingTested->startFilter(1, 1, 'published_on', 'desc', [])->get();
 
         $this->assertEmpty($rows);
     }
@@ -56,7 +56,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $this->contentFactory->create([1 => ContentService::STATUS_PUBLISHED]);
         }
 
-        $rows = $this->classBeingTested->getFiltered(2, 3, 'id', 'asc', [], [], []);
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])->get();
 
         $this->assertEquals([4, 5, 6], array_column($rows, 'id'));
     }
@@ -101,7 +101,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->getFiltered(1, 10, 'id', 'asc', $typesToInclude, [], []);
+        $rows = $this->classBeingTested->startFilter(1, 10, 'id', 'asc', $typesToInclude)->get();
 
         $this->assertEquals(array_column($expectedContents, 'id'), array_column($rows, 'id'));
     }
@@ -651,7 +651,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->contentRepository->startFilter(2, 3, 'id', 'asc', [$type])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type])
             ->includeField(
                 $includedFieldName,
                 $includedFieldValue,

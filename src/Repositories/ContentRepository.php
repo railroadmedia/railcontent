@@ -109,7 +109,10 @@ class ContentRepository extends RepositoryBase
      */
     public function getBySlug($slug)
     {
-        // todo: write function
+        return (array)$this->baseQuery()
+            ->where([ConfigService::$tableContent . '.slug' => $slug])
+            ->get()
+            ->first();
     }
 
     /**
@@ -1077,10 +1080,11 @@ class ContentRepository extends RepositoryBase
      */
     public function get()
     {
+
         $subLimitQuery = $this->baseQuery(false)
             ->select(ConfigService::$tableContent . '.id as id');
 
-        if (!empty($types)) {
+        if (!empty($this->types)) {
             $subLimitQuery->whereIn(ConfigService::$tableContent . '.type', $this->types);
         }
 
