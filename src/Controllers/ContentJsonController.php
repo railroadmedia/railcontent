@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Requests\ContentRequest;
@@ -33,6 +34,8 @@ class ContentJsonController extends Controller
      */
     public function index(Request $request)
     {
+        dd($request->all());
+
         $contents = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 100),
@@ -40,7 +43,7 @@ class ContentJsonController extends Controller
             $request->get('order-direction', 'desc'),
             $request->get('types', []),
             $request->get('required-fields', []),
-            $request->get('playlists',[])
+            $request->get('playlists', [])
         );
 
         return response()->json($contents, 200);
@@ -87,8 +90,8 @@ class ContentJsonController extends Controller
         $content = $this->contentService->getById($contentId);
 
         //check if content exist
-        if(empty($content)) {
-            return response()->json('Update failed, content not found with id: '.$contentId, 404);
+        if (empty($content)) {
+            return response()->json('Update failed, content not found with id: ' . $contentId, 404);
         }
 
         //call the event that save a new content version in the database
@@ -124,19 +127,19 @@ class ContentJsonController extends Controller
         $content = $this->contentService->getById($contentId);
 
         //check if content exist
-        if(empty($content)) {
-            return response()->json('Delete failed, content not found with id: '.$contentId, 404);
+        if (empty($content)) {
+            return response()->json('Delete failed, content not found with id: ' . $contentId, 404);
         }
 
         //check if the content it's being referenced by other content
         $linkedWithContent = $this->contentService->linkedWithContent($contentId);
 
-        if($linkedWithContent->isNotEmpty()) {
+        if ($linkedWithContent->isNotEmpty()) {
             $ids = $linkedWithContent->implode('content_id', ', ');
 
             return response()->json(
-                'This content is being referenced by other content ('.
-                $ids.
+                'This content is being referenced by other content (' .
+                $ids .
                 '), you must delete that content first.',
                 404
             );
@@ -149,5 +152,22 @@ class ContentJsonController extends Controller
         $deleted = $this->contentService->delete($contentId, $request->input('delete_children'));
 
         return response()->json($deleted, 200);
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function options(Request $request)
+    {
+        return response()->make(
+            '',
+            200,
+            [
+                'Access-Control-Allow-Origin' => '*',
+                'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
+                'Access-Control-Allow-Headers' => 'X-Requested-With, content-type'
+            ]
+        );
     }
 }

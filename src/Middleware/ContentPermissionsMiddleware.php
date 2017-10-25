@@ -34,15 +34,20 @@ class ContentPermissionsMiddleware
     {
         if ($request->get('auth_level') == 'administrator') {
 
-            // admins can see drafts, archived lessons, and future content
+            // admins can see drafts, archived lessons, and future content by default
+            ContentRepository::$availableContentStatues = $request->get(
+                'statuses',
+                [
+                    ContentService::STATUS_PUBLISHED,
+                    ContentService::STATUS_DRAFT,
+                    ContentService::STATUS_ARCHIVED,
+                ]
+            );
 
-            ContentRepository::$availableContentStatues = [
-                ContentService::STATUS_PUBLISHED,
-                ContentService::STATUS_DRAFT,
-                ContentService::STATUS_ARCHIVED,
-            ];
-
-            ContentRepository::$pullFutureContent = true;
+            ContentRepository::$pullFutureContent = (bool)$request->get(
+                'include_future',
+                true
+            );
 
             PermissionRepository::$availableContentPermissionIds = false;
         } else {

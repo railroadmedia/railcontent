@@ -6,7 +6,8 @@ Route::group(
     ],
     function () {
 
-        Route::get('/', 'Railroad\Railcontent\Controllers\ContentJsonController@index');
+        Route::options('/content', 'Railroad\Railcontent\Controllers\ContentJsonController@options');
+        Route::get('/content', 'Railroad\Railcontent\Controllers\ContentJsonController@index');
         Route::post('/content', 'Railroad\Railcontent\Controllers\ContentJsonController@store');
         Route::put('/content/{contentId}', 'Railroad\Railcontent\Controllers\ContentJsonController@update');
         Route::delete(
