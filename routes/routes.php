@@ -6,13 +6,29 @@ Route::group(
     ],
     function () {
 
-        Route::options('/content', 'Railroad\Railcontent\Controllers\ContentJsonController@options');
-        Route::get('/content', 'Railroad\Railcontent\Controllers\ContentJsonController@index');
-        Route::post('/content', 'Railroad\Railcontent\Controllers\ContentJsonController@store');
-        Route::put('/content/{contentId}', 'Railroad\Railcontent\Controllers\ContentJsonController@update');
+        Route::options(
+            '/content',
+            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@options'
+        );
+        Route::get(
+            '/content',
+            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@index'
+        );
+        Route::get(
+            '/content/{id}',
+            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@show'
+        );
+        Route::post(
+            '/content',
+            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@store'
+        );
+        Route::put(
+            '/content/{id}',
+            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@update'
+        );
         Route::delete(
-            '/content/{contentId}',
-            'Railroad\Railcontent\Controllers\ContentJsonController@delete'
+            '/content/{id}',
+            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@delete'
         );
 
         Route::post('/content/field', 'Railroad\Railcontent\Controllers\FieldJsonController@store');
@@ -46,8 +62,14 @@ Route::group(
         Route::post('/permission/assign', 'Railroad\Railcontent\Controllers\PermissionJsonController@assign');
 
         Route::put('/start', 'Railroad\Railcontent\Controllers\ContentProgressJsonController@startContent');
-        Route::put('/complete', 'Railroad\Railcontent\Controllers\ContentProgressJsonController@completeContent');
-        Route::put('/progress', 'Railroad\Railcontent\Controllers\ContentProgressJsonController@saveProgress');
+        Route::put(
+            '/complete',
+            'Railroad\Railcontent\Controllers\ContentProgressJsonController@completeContent'
+        );
+        Route::put(
+            '/progress',
+            'Railroad\Railcontent\Controllers\ContentProgressJsonController@saveProgress'
+        );
 
         Route::post(
             '/playlists/add',

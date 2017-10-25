@@ -97,10 +97,12 @@ class ContentRepository extends RepositoryBase
      */
     public function getById($id)
     {
-        return (array)$this->baseQuery()
-            ->where([ConfigService::$tableContent . '.id' => $id])
-            ->get()
-            ->first();
+        return $this->parseBaseQueryRows(
+                $this->baseQuery()
+                    ->where([ConfigService::$tableContent . '.id' => $id])
+                    ->get()
+                    ->toArray()
+            )[$id] ?? null;
     }
 
     /**
@@ -322,20 +324,21 @@ class ContentRepository extends RepositoryBase
      * @param string $slug
      * @param string $status
      * @param string $type
+     * @param string $brand
      * @param integer $position
      * @param string $language |null
      * @param integer|null $parentId
      * @param string|null $publishedOn
      * @return int
      */
-    public function create($slug, $status, $type, $position, $language, $parentId, $publishedOn)
+    public function create($slug, $status, $type, $brand, $position, $language, $parentId, $publishedOn)
     {
         $contentId = $this->queryTable()->insertGetId(
             [
                 'slug' => $slug,
                 'status' => $status,
                 'type' => $type,
-                'brand' => ConfigService::$brand,
+                'brand' => $brand,
                 'position' => $position,
                 'language' => $language,
                 'parent_id' => $parentId,
@@ -923,10 +926,10 @@ class ContentRepository extends RepositoryBase
                 'position' => $row['position'],
                 'parent_id' => $row['parent_id'],
                 'language' => $row['language'],
+                'brand' => $row['brand'],
                 'published_on' => $row['published_on'],
                 'created_on' => $row['created_on'],
                 'archived_on' => $row['archived_on'],
-                'brand' => $row['brand'],
             ];
 
             $contents[$row['id']] = $content;

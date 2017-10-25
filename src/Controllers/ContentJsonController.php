@@ -96,7 +96,14 @@ class ContentJsonController extends Controller
             $request->get('published_on')
         );
 
-        return response()->json($content, 200);
+        return response()->json(
+            [
+                'status' => 'ok',
+                'code' => 201,
+                'results' => $content
+            ],
+            201
+        );
     }
 
     /** Update a content based on content id and return it in JSON format

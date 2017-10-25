@@ -156,6 +156,7 @@ class ContentService
                 $slug,
                 $status,
                 $type,
+                ConfigService::$brand,
                 $position,
                 $language ?? ConfigService::$defaultLanguage,
                 $parentId,
