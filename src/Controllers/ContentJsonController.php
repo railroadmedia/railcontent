@@ -34,16 +34,17 @@ class ContentJsonController extends Controller
      */
     public function index(Request $request)
     {
-        dd($request->all());
-
         $contents = $this->contentService->getFiltered(
             $request->get('page', 1),
-            $request->get('limit', 100),
-            $request->get('order-by', 'published_on'),
-            $request->get('order-direction', 'desc'),
-            $request->get('types', []),
-            $request->get('required-fields', []),
-            $request->get('playlists', [])
+            $request->get('limit', 10),
+            $request->get('sort', 'published_on'),
+            $request->get('included_types', []),
+            $request->get('required_fields', []),
+            $request->get('included_fields', []),
+            $request->get('required_user_states', []),
+            $request->get('included_user_states', []),
+            $request->get('required_user_playlists', []),
+            $request->get('included_user_playlists', [])
         );
 
         return response()->json($contents, 200);

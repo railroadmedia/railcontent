@@ -677,4 +677,251 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
         $this->assertEquals([10, 11, 12], array_column($rows, 'id'));
     }
 
+
+    public function test_include_and_require_fields_count()
+    {
+        $type = $this->faker->word;
+
+        $includedFieldName = $this->faker->word;
+        $includedFieldValue = $this->faker->word;
+        $includedFieldType = $this->faker->word;
+
+        $otherIncludedFieldName = $this->faker->word;
+        $otherIncludedFieldValue = $this->faker->word;
+        $otherIncludedFieldType = $this->faker->word;
+
+        $requiredFieldName = $this->faker->word;
+        $requiredFieldValue = $this->faker->word;
+        $requiredFieldType = $this->faker->word;
+
+        $otherRequiredFieldName = $this->faker->word;
+        $otherRequiredFieldValue = $this->faker->word;
+        $otherRequiredFieldType = $this->faker->word;
+
+        // content that has none of the required or included fields
+        // (should not be in results)
+
+        for ($i = 0; $i < 2; $i++) {
+            $content = $this->contentFactory->create(
+                [
+                    1 => ContentService::STATUS_PUBLISHED,
+                    2 => $type,
+                ]
+            );
+
+            $randomField = $this->fieldFactory->create(
+                [
+                    0 => $content['id']
+                ]
+            );
+        }
+
+        // content that only has 1 of the required fields and 1 of the included fields
+        // (should not be in results)
+
+        for ($i = 0; $i < 2; $i++) {
+            $content = $this->contentFactory->create(
+                [
+                    1 => ContentService::STATUS_PUBLISHED,
+                    2 => $type,
+                ]
+            );
+
+            $field = $this->fieldFactory->create(
+                [
+                    0 => $content['id'],
+                    1 => $requiredFieldName,
+                    2 => $requiredFieldValue,
+                    3 => $requiredFieldType,
+                    4 => 1
+                ]
+            );
+
+            $field = $this->fieldFactory->create(
+                [
+                    0 => $content['id'],
+                    1 => $includedFieldName,
+                    2 => $includedFieldValue,
+                    3 => $includedFieldType,
+                    4 => 1
+                ]
+            );
+
+            $randomField = $this->fieldFactory->create(
+                [
+                    0 => $content['id']
+                ]
+            );
+        }
+
+        // content that has all the required fields but none of the included fields
+        // (should not be in results)
+
+        for ($i = 0; $i < 2; $i++) {
+            $content = $this->contentFactory->create(
+                [
+                    1 => ContentService::STATUS_PUBLISHED,
+                    2 => $type,
+                ]
+            );
+
+            $requiredField = $this->fieldFactory->create(
+                [
+                    0 => $content['id'],
+                    1 => $requiredFieldName,
+                    2 => $requiredFieldValue,
+                    3 => $requiredFieldType,
+                    4 => 1
+                ]
+            );
+
+            $otherRequiredField = $this->fieldFactory->create(
+                [
+                    0 => $content['id'],
+                    1 => $otherRequiredFieldName,
+                    2 => $otherRequiredFieldValue,
+                    3 => $otherRequiredFieldType,
+                    4 => 1
+                ]
+            );
+
+            $randomField = $this->fieldFactory->create(
+                [
+                    0 => $content['id']
+                ]
+            );
+        }
+
+        // content that has all the required fields and 1 of the included fields
+        // (should be in results)
+
+        for ($i = 0; $i < 5; $i++) {
+            $expectedContent = $this->contentFactory->create(
+                [
+                    1 => ContentService::STATUS_PUBLISHED,
+                    2 => $type,
+                ]
+            );
+
+            $requiredField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id'],
+                    1 => $requiredFieldName,
+                    2 => $requiredFieldValue,
+                    3 => $requiredFieldType,
+                    4 => 1
+                ]
+            );
+
+            $otherRequiredField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id'],
+                    1 => $otherRequiredFieldName,
+                    2 => $otherRequiredFieldValue,
+                    3 => $otherRequiredFieldType,
+                    4 => 1
+                ]
+            );
+
+            $includedField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id'],
+                    1 => $includedFieldName,
+                    2 => $includedFieldValue,
+                    3 => $includedFieldType,
+                    4 => 1
+                ]
+            );
+
+            $randomField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id']
+                ]
+            );
+        }
+
+        // content that has all the required fields and all of the included fields
+        // (should be in results)
+
+        for ($i = 0; $i < 5; $i++) {
+            $expectedContent = $this->contentFactory->create(
+                [
+                    1 => ContentService::STATUS_PUBLISHED,
+                    2 => $type,
+                ]
+            );
+
+            $requiredField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id'],
+                    1 => $requiredFieldName,
+                    2 => $requiredFieldValue,
+                    3 => $requiredFieldType,
+                    4 => 1
+                ]
+            );
+
+            $otherRequiredField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id'],
+                    1 => $otherRequiredFieldName,
+                    2 => $otherRequiredFieldValue,
+                    3 => $otherRequiredFieldType,
+                    4 => 1
+                ]
+            );
+
+            $includedField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id'],
+                    1 => $includedFieldName,
+                    2 => $includedFieldValue,
+                    3 => $includedFieldType,
+                    4 => 1
+                ]
+            );
+
+            $otherIncludedField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id'],
+                    1 => $otherIncludedFieldName,
+                    2 => $otherIncludedFieldValue,
+                    3 => $otherIncludedFieldType,
+                    4 => 1
+                ]
+            );
+
+            $randomField = $this->fieldFactory->create(
+                [
+                    0 => $expectedContent['id']
+                ]
+            );
+        }
+
+        $count = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type])
+            ->includeField(
+                $includedFieldName,
+                $includedFieldValue,
+                $includedFieldType
+            )
+            ->includeField(
+                $otherIncludedFieldName,
+                $otherIncludedFieldValue,
+                $otherIncludedFieldType
+            )
+            ->requireField(
+                $requiredFieldName,
+                $requiredFieldValue,
+                $requiredFieldType
+            )
+            ->requireField(
+                $otherRequiredFieldName,
+                $otherRequiredFieldValue,
+                $otherRequiredFieldType
+            )
+            ->count();
+
+        $this->assertEquals(10, $count);
+    }
+
 }

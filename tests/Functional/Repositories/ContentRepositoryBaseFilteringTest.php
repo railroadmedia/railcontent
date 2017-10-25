@@ -98,4 +98,52 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         $this->assertEquals(array_column($expectedContents, 'id'), array_column($rows, 'id'));
     }
+
+    public function test_include_types_count()
+    {
+        /*
+         * Expected content ids:
+         * [ 1, 2, 3, 4, 5 ]
+         *
+         */
+
+        $typesToInclude = [
+            $this->faker->word . rand(),
+            $this->faker->word . rand(),
+            $this->faker->word . rand()
+        ];
+
+        $typesToExclude = [
+            $this->faker->word . rand(),
+            $this->faker->word . rand(),
+            $this->faker->word . rand()
+        ];
+
+        $expectedContents = [];
+
+        for ($i = 0; $i < 5; $i++) {
+            $expectedContents[] = $this->contentFactory->create(
+                [
+                    1 => ContentService::STATUS_PUBLISHED,
+                    2 => $this->faker->randomElement($typesToInclude),
+                ]
+            );
+        }
+
+        for ($i = 0; $i < 5; $i++) {
+            $this->contentFactory->create(
+                [
+                    1 => ContentService::STATUS_PUBLISHED,
+                    2 => $this->faker->randomElement($typesToExclude),
+                ]
+            );
+        }
+
+        $filter = $this->classBeingTested->startFilter(1, 10, 'id', 'asc', $typesToInclude);
+        $rows = $filter->get();
+        $count = $filter->count();
+
+        $this->assertEquals(array_column($expectedContents, 'id'), array_column($rows, 'id'));
+        $this->assertEquals(5, $count);
+    }
 }

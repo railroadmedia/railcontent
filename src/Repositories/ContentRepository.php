@@ -1014,7 +1014,7 @@ class ContentRepository extends RepositoryBase
      * @param $type
      * @return $this
      */
-    public function requireField($name, $value, $type)
+    public function requireField($name, $value, $type = '')
     {
         $this->requiredFields[] = ['name' => $name, 'value' => $value, 'type' => $type];
 
@@ -1030,7 +1030,7 @@ class ContentRepository extends RepositoryBase
      * @param $type
      * @return $this
      */
-    public function includeField($name, $value, $type)
+    public function includeField($name, $value, $type = '')
     {
         $this->includedFields[] = ['name' => $name, 'value' => $value, 'type' => $type];
 
@@ -1080,7 +1080,34 @@ class ContentRepository extends RepositoryBase
      */
     public function get()
     {
+        return $this->parseBaseQueryRows($this->filter()->get()->toArray());
+    }
 
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        $mainQuery = $this->filter(false)
+            ->select([ConfigService::$tableContent . '.id'])
+            ->groupBy(
+                ConfigService::$tableContent . '.id',
+                ConfigService::$tableContent . '.' . $this->orderBy
+            );
+
+        return $this->connection()->table(
+            $this->databaseManager->raw('(' . $mainQuery->toSql() . ') as rows')
+        )
+            ->addBinding($mainQuery->getBindings())
+            ->count();
+    }
+
+    /**
+     * @param bool $pagination
+     * @return Builder
+     */
+    private function filter($pagination = true)
+    {
         $subLimitQuery = $this->baseQuery(false)
             ->select(ConfigService::$tableContent . '.id as id');
 
@@ -1095,7 +1122,7 @@ class ContentRepository extends RepositoryBase
                 foreach ($this->requiredFields as $requiredFieldData) {
                     $builder->whereExists(
                         function (Builder $builder) use ($requiredFieldData) {
-                            return $builder
+                            $builder
                                 ->select([ConfigService::$tableFields . '.id'])
                                 ->from(ConfigService::$tableContentFields)
                                 ->join(
@@ -1108,13 +1135,21 @@ class ContentRepository extends RepositoryBase
                                     [
                                         ConfigService::$tableFields . '.key' => $requiredFieldData['name'],
                                         ConfigService::$tableFields . '.value' => $requiredFieldData['value'],
-                                        ConfigService::$tableFields . '.type' => $requiredFieldData['type'],
                                         ConfigService::$tableContentFields .
                                         '.content_id' => $this->databaseManager->raw(
                                             ConfigService::$tableContent . '.id'
                                         )
                                     ]
                                 );
+
+                            if ($requiredFieldData['type'] !== '') {
+                                $builder->where(
+                                    ConfigService::$tableFields . '.type',
+                                    $requiredFieldData['type']
+                                );
+                            }
+
+                            return $builder;
                         }
                     );
                 }
@@ -1129,7 +1164,7 @@ class ContentRepository extends RepositoryBase
                 foreach ($this->includedFields as $includedFieldData) {
                     $builder->orWhereExists(
                         function (Builder $builder) use ($includedFieldData) {
-                            return $builder
+                            $builder
                                 ->select([ConfigService::$tableFields . '.id'])
                                 ->from(ConfigService::$tableContentFields)
                                 ->join(
@@ -1142,13 +1177,21 @@ class ContentRepository extends RepositoryBase
                                     [
                                         ConfigService::$tableFields . '.key' => $includedFieldData['name'],
                                         ConfigService::$tableFields . '.value' => $includedFieldData['value'],
-                                        ConfigService::$tableFields . '.type' => $includedFieldData['type'],
                                         ConfigService::$tableContentFields .
                                         '.content_id' => $this->databaseManager->raw(
                                             ConfigService::$tableContent . '.id'
                                         )
                                     ]
                                 );
+
+                            if ($includedFieldData['type'] !== '') {
+                                $builder->where(
+                                    ConfigService::$tableFields . '.type',
+                                    $includedFieldData['type']
+                                );
+                            }
+
+                            return $builder;
                         }
                     );
                 }
@@ -1303,10 +1346,12 @@ class ContentRepository extends RepositoryBase
             }
         );
 
-        $subLimitQuery
-            ->orderBy($this->orderBy, $this->orderDirection)
-            ->limit($this->limit)
-            ->skip(($this->page - 1) * $this->limit);
+        if ($pagination) {
+            $subLimitQuery
+                ->orderBy($this->orderBy, $this->orderDirection)
+                ->limit($this->limit)
+                ->skip(($this->page - 1) * $this->limit);
+        }
 
         $subLimitQueryString = $subLimitQuery->toSql();
 
@@ -1366,8 +1411,8 @@ class ContentRepository extends RepositoryBase
                 }
             )
             ->addBinding($subLimitQuery->getBindings())
-            ->orderBy($this->orderBy, $this->orderDirection);
+            ->orderBy(ConfigService::$tableContent . '.' . $this->orderBy, $this->orderDirection);
 
-        return $this->parseBaseQueryRows($query->get()->toArray());
+        return $query;
     }
 }

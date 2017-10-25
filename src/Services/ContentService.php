@@ -67,41 +67,66 @@ class ContentService
      *
      * Returns an array of lesson data arrays.
      *
-     * @param $page
-     * @param $limit
-     * @param $orderBy
-     * @param $orderDirection
-     * @param array $types
+     * @param int $page
+     * @param int $limit
+     * @param string $orderByAndDirection
+     * @param array $includedTypes
      * @param array $requiredFields
+     * @param array $includedFields
+     * @param array $requiredUserStates
+     * @param array $includedUserStates
+     * @param array $requiredUserPlaylists
+     * @param array $includedUserPlaylists
      * @return array|null
      */
     public function getFiltered(
         $page,
         $limit,
-        $orderBy,
-        $orderDirection,
-        array $types,
-        array $requiredFields,
-        array $playlists
+        $orderByAndDirection,
+        array $includedTypes,
+        array $requiredFields = [],
+        array $includedFields = [],
+        array $requiredUserStates = [],
+        array $includedUserStates = [],
+        array $requiredUserPlaylists = [],
+        array $includedUserPlaylists = []
     ) {
+        $orderByDirection = substr($orderByAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
+        $orderByColumn = trim($orderByAndDirection, '-');
 
-        $data =  $this->contentRepository->getFiltered(
+        $filter = $this->contentRepository->startFilter(
             $page,
             $limit,
-            $orderBy,
-            $orderDirection,
-            $types,
-            $requiredFields,
-            $playlists
+            $orderByColumn,
+            $orderByDirection,
+            $includedTypes
         );
 
-        $results = new \stdClass();
-        $results->page = $page;
-        $results->limit = $limit;
-        $results->totalItems = count($data);
-        $results->items = $data;
+        foreach ($requiredFields as $requiredField) {
+            $filter->requireField(...explode($requiredField, ','));
+        }
 
-        return $results;
+        foreach ($includedFields as $includedField) {
+            $filter->includeField(...explode($includedField, ','));
+        }
+
+        foreach ($requiredUserStates as $requiredUserState) {
+            $filter->requireUserStates(...explode($requiredUserState, ','));
+        }
+
+        foreach ($includedUserStates as $includedUserState) {
+            $filter->includeUserStates(...explode($includedUserState, ','));
+        }
+
+        foreach ($requiredUserPlaylists as $requiredUserPlaylist) {
+            $filter->requireUserStates(...explode($requiredUserPlaylist, ','));
+        }
+
+        foreach ($includedUserPlaylists as $includedUserPlaylist) {
+            $filter->includeUserStates(...explode($includedUserPlaylist, ','));
+        }
+
+        return ['results' => $filter->get(), 'total_results' => $filter->count()];
     }
 
     /**
