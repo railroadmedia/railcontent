@@ -994,6 +994,14 @@ class ContentRepository extends RepositoryBase
         $this->orderDirection = $orderDirection;
         $this->types = $types;
 
+        // reset all the filters for the new query
+        $this->requiredFields = [];
+        $this->includedFields = [];
+        $this->requiredUserPlaylists = [];
+        $this->includedUserPlaylists = [];
+        $this->requiredUserStates = [];
+        $this->includedUserStates = [];
+
         return $this;
     }
 
