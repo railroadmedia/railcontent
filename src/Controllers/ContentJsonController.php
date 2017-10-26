@@ -76,7 +76,38 @@ class ContentJsonController extends Controller
      */
     public function show(Request $request, $id)
     {
-        return $this->contentService->getById($id);
+        $content = $this->contentService->getById($id);
+
+        if (empty($content)) {
+            return response()->json(
+                [
+                    'status' => 'error',
+                    'code' => 404,
+                    'total_results' => 0,
+                    'results' => [],
+                    'error' => [
+                        'title' => 'Content not found.',
+                        'detail' => 'No content with id ' . $id . ' exists.',
+                    ]
+                ],
+                404
+            );
+        }
+
+        return response()->json(
+            [
+                'status' => 'ok',
+                'code' => 200,
+                'total_results' => 1,
+                'results' => [$id => $content],
+            ],
+            200
+        );
+    }
+
+    public function slugs(Request $request, ...$slugs)
+    {
+
     }
 
     /** Create a new content and return it in JSON format

@@ -106,9 +106,10 @@ class ContentRepository extends RepositoryBase
 
     /**
      * @param string $slug
+     * @param int|null $parentId
      * @return array|null
      */
-    public function getBySlug($slug)
+    public function getBySlug($slug, $parentId = null)
     {
         $this->slug = $slug;
 
