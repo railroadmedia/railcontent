@@ -47,6 +47,8 @@ class ContentRepository extends RepositoryBase
     private $orderBy;
     private $orderDirection;
     private $types = [];
+    private $contentId;
+    private $slug;
 
     /**
      * @var PermissionRepository
@@ -97,12 +99,9 @@ class ContentRepository extends RepositoryBase
      */
     public function getById($id)
     {
-        return $this->parseBaseQueryRows(
-                $this->baseQuery()
-                    ->where([ConfigService::$tableContent . '.id' => $id])
-                    ->get()
-                    ->toArray()
-            )[$id] ?? null;
+        $this->contentId = $id;
+
+        return $this->parseBaseQueryRows($this->filter(false)->get()->toArray())[$id] ?? null;
     }
 
     /**
@@ -111,10 +110,11 @@ class ContentRepository extends RepositoryBase
      */
     public function getBySlug($slug)
     {
-        return (array)$this->baseQuery()
-            ->where([ConfigService::$tableContent . '.slug' => $slug])
-            ->get()
-            ->first();
+        $this->slug = $slug;
+
+        $content = $this->parseBaseQueryRows($this->filter(false)->get()->toArray()) ?? null;
+
+        return array_shift($content) ?? null;
     }
 
     /**
@@ -1118,6 +1118,14 @@ class ContentRepository extends RepositoryBase
             $subLimitQuery->whereIn(ConfigService::$tableContent . '.type', $this->types);
         }
 
+        if (!empty($this->contentId)) {
+            $subLimitQuery->where(ConfigService::$tableContent . '.id', $this->contentId);
+        }
+
+        if (!empty($this->slug)) {
+            $subLimitQuery->where(ConfigService::$tableContent . '.slug', $this->slug);
+        }
+
         // exclusive field filters
         $subLimitQuery->where(
             function (Builder $builder) use ($subLimitQuery) {
@@ -1413,8 +1421,11 @@ class ContentRepository extends RepositoryBase
                     $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
                 }
             )
-            ->addBinding($subLimitQuery->getBindings())
-            ->orderBy(ConfigService::$tableContent . '.' . $this->orderBy, $this->orderDirection);
+            ->addBinding($subLimitQuery->getBindings());
+
+        if (!empty($this->orderBy)) {
+            $query->orderBy(ConfigService::$tableContent . '.' . $this->orderBy, $this->orderDirection);
+        }
 
         return $query;
     }

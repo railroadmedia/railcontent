@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Tests\Functional\Repositories;
 use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentRepositoryTest extends RailcontentTestCase
@@ -36,6 +37,7 @@ class ContentRepositoryTest extends RailcontentTestCase
                 $slug,
                 $status,
                 $type,
+                ConfigService::$brand,
                 1,
                 $language,
                 null,
@@ -73,6 +75,7 @@ class ContentRepositoryTest extends RailcontentTestCase
                 $slug,
                 $status,
                 $type,
+                ConfigService::$brand,
                 1,
                 $language,
                 null,
@@ -83,6 +86,7 @@ class ContentRepositoryTest extends RailcontentTestCase
                 $slug2,
                 $status2,
                 $type,
+                ConfigService::$brand,
                 1,
                 $language,
                 null,
@@ -93,6 +97,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $slug3,
             $status3,
             $type,
+            ConfigService::$brand,
             1,
             $language,
             null,
@@ -137,6 +142,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $slug,
             $status,
             $type,
+            ConfigService::$brand,
             1,
             $language,
             null,
@@ -146,6 +152,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $slug2,
             $status2,
             $type,
+            ConfigService::$brand,
             -581,
             $language,
             null,
@@ -212,6 +219,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $slug1,
             $status,
             $type,
+            ConfigService::$brand,
             1,
             $language,
             null,
@@ -221,6 +229,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $slug2,
             $status,
             $type,
+            ConfigService::$brand,
             1,
             $language,
             $contentId1,
@@ -230,6 +239,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $slug3,
             $status,
             $type,
+            ConfigService::$brand,
             1,
             $language,
             $contentId2,
@@ -239,6 +249,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $slug4,
             $status,
             $type,
+            ConfigService::$brand,
             2,
             $language,
             $contentId2,
@@ -248,6 +259,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $slug5,
             $status,
             $type,
+            ConfigService::$brand,
             3,
             $language,
             $contentId2,
@@ -257,6 +269,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $slug6,
             $status,
             $type,
+            ConfigService::$brand,
             4,
             $language,
             $contentId2,
@@ -266,6 +279,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $slug7,
             $status,
             $type,
+            ConfigService::$brand,
             1,
             $language,
             $contentId6,
@@ -275,6 +289,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $slug8,
             $status,
             $type,
+            ConfigService::$brand,
             2,
             $language,
             $contentId1,
@@ -284,6 +299,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $slug9,
             $status,
             $type,
+            ConfigService::$brand,
             2,
             $language,
             null,
@@ -1033,5 +1049,163 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentField1['content_id']
             ]
         );
+    }
+
+    public function test_get_content_with_fields_and_datum_by_id()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_PUBLISHED,
+            'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
+            'position' => $this->faker->numberBetween(),
+            'language' => 'en-US',
+            'parent_id' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+        ];
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $field = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(),
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween()
+        ];
+
+        $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
+
+        $fieldLinkId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'field_id' => $fieldId
+            ]
+        );
+
+        $linkedContent = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_PUBLISHED,
+            'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
+            'position' => $this->faker->numberBetween(),
+            'language' => 'en-US',
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+        $linkedContentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($linkedContent);
+
+        $linkedContentField = [
+            'key' => $this->faker->word,
+            'value' => $linkedContentId,
+            'type' => 'content_id',
+            'position' => null,
+        ];
+
+        $linkedContentFieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($linkedContentField);
+
+        $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'field_id' => $linkedContentFieldId,
+            ]
+        );
+
+        $expectedResults = array_merge($content, [
+            'id' => $contentId,
+            'fields' => [
+                array_merge($field, ['id' => $fieldId]),
+                array_merge($linkedContentField, ['id' => $linkedContentFieldId])
+            ]
+        ]);
+        $results = $this->classBeingTested->getById($contentId);
+
+        $this->assertEquals($expectedResults, $results);
+    }
+
+    public function test_get_by_id_not_exist()
+    {
+        $results = $this->classBeingTested->getById($this->faker->numberBetween());
+
+        $this->assertNull($results);
+    }
+
+    public function test_get_content_with_fields_and_datum_by_slug()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_PUBLISHED,
+            'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
+            'position' => $this->faker->numberBetween(),
+            'language' => 'en-US',
+            'parent_id' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+        ];
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
+        $field = [
+            'key' => $this->faker->word,
+            'value' => $this->faker->text(),
+            'type' => $this->faker->word,
+            'position' => $this->faker->numberBetween()
+        ];
+
+        $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
+
+        $fieldLinkId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'field_id' => $fieldId
+            ]
+        );
+
+        $linkedContent = [
+            'slug' => $this->faker->word,
+            'status' => ContentService::STATUS_PUBLISHED,
+            'type' => $this->faker->word,
+            'brand' => ConfigService::$brand,
+            'position' => $this->faker->numberBetween(),
+            'language' => 'en-US',
+            'parent_id' => null,
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+        $linkedContentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($linkedContent);
+
+        $linkedContentField = [
+            'key' => $this->faker->word,
+            'value' => $linkedContentId,
+            'type' => 'content_id',
+            'position' => null,
+        ];
+
+        $linkedContentFieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($linkedContentField);
+
+        $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
+            [
+                'content_id' => $contentId,
+                'field_id' => $linkedContentFieldId,
+            ]
+        );
+
+        $expectedResults = array_merge($content, [
+            'id' => $contentId,
+            'fields' => [
+                array_merge($field, ['id' => $fieldId]),
+                array_merge($linkedContentField, ['id' => $linkedContentFieldId])
+            ]
+        ]);
+        $results = $this->classBeingTested->getBySlug($content['slug']);
+
+        $this->assertEquals($expectedResults, $results);
+    }
+
+    public function test_get_by_slug_not_exist()
+    {
+        $results = $this->classBeingTested->getBySlug($this->faker->word());
+
+        $this->assertNull($results);
     }
 }

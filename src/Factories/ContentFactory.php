@@ -48,6 +48,8 @@ class ContentFactory extends FactoryBase
 
         ksort($parameters);
 
-        return $this->contentService->create(...$parameters);
+        $content = $this->contentService->create(...$parameters);
+
+        return $content["results"];
     }
 }

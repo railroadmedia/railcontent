@@ -60,7 +60,7 @@ class ContentService
      */
     public function getBySlug($slug)
     {
-        return $this->contentRepository->getBySlug($slug);
+        return ['results' => $this->contentRepository->getBySlug($slug)];
     }
 
     /**
@@ -174,7 +174,7 @@ class ContentService
      */
     public function getById($id)
     {
-        return $this->contentRepository->getById($id);
+        return ['results' => $this->contentRepository->getById($id)];
     }
 
     /**
