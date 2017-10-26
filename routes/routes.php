@@ -6,76 +6,143 @@ Route::group(
     ],
     function () {
 
+        // content
         Route::options(
             '/content',
             \Railroad\Railcontent\Controllers\ContentJsonController::class . '@options'
-        );
+        )
+            ->name('content.options');
+
         Route::get(
             '/content',
             \Railroad\Railcontent\Controllers\ContentJsonController::class . '@index'
-        );
+        )
+            ->name('content.index');
+
         Route::get(
             '/content/{id}',
             \Railroad\Railcontent\Controllers\ContentJsonController::class . '@show'
-        );
+        )
+            ->name('content.show');
+
         Route::post(
             '/content',
             \Railroad\Railcontent\Controllers\ContentJsonController::class . '@store'
-        );
+        )
+            ->name('content.store');
+
         Route::put(
             '/content/{id}',
             \Railroad\Railcontent\Controllers\ContentJsonController::class . '@update'
-        );
+        )
+            ->name('content.update');
+
         Route::delete(
             '/content/{id}',
             \Railroad\Railcontent\Controllers\ContentJsonController::class . '@delete'
-        );
-
-        Route::post('/content/field', 'Railroad\Railcontent\Controllers\FieldJsonController@store');
-        Route::put('/content/field/{fieldId}', 'Railroad\Railcontent\Controllers\FieldJsonController@update');
-        Route::delete(
-            '/content/field/{fieldId}',
-            'Railroad\Railcontent\Controllers\FieldJsonController@delete'
-        );
-
-        Route::post('/content/datum', 'Railroad\Railcontent\Controllers\DatumJsonController@store');
-        Route::put('/content/datum/{datumId}', 'Railroad\Railcontent\Controllers\DatumJsonController@update');
-        Route::delete(
-            '/content/datum/{datumId}',
-            'Railroad\Railcontent\Controllers\DatumJsonController@delete'
-        );
+        )
+            ->name('content.delete');
 
         Route::get(
             '/content/restore/{versionId}',
-            'Railroad\Railcontent\Controllers\ContentVersionJsonController@restoreContent'
-        );
+            \Railroad\Railcontent\Controllers\ContentVersionJsonController::class . '@restoreContent'
+        )
+            ->name('content.restore');
 
-        Route::post('/permission', 'Railroad\Railcontent\Controllers\PermissionJsonController@store');
+        // content fields
+        Route::post(
+            '/content/field',
+            \Railroad\Railcontent\Controllers\FieldJsonController::class . '@store'
+        )
+            ->name('content.field.store');
+
+        Route::put(
+            '/content/field/{fieldId}',
+            \Railroad\Railcontent\Controllers\FieldJsonController::class . '@update'
+        )
+            ->name('content.field.update');
+
+        Route::delete(
+            '/content/field/{fieldId}',
+            \Railroad\Railcontent\Controllers\FieldJsonController::class . '@delete'
+        )
+            ->name('content.field.delete');
+
+        // content datum
+        Route::post(
+            '/content/datum',
+            \Railroad\Railcontent\Controllers\DatumJsonController::class . '@store'
+        )
+            ->name('content.data.store');
+
+        Route::put(
+            '/content/datum/{datumId}',
+            \Railroad\Railcontent\Controllers\DatumJsonController::class . '@update'
+        )
+            ->name('content.data.update');
+
+        Route::delete(
+            '/content/datum/{datumId}',
+            \Railroad\Railcontent\Controllers\DatumJsonController::class . '@delete'
+        )
+            ->name('content.data.delete');
+
+        // permissions
+        Route::post(
+            '/permission',
+            \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@store'
+        )
+            ->name('permissions.store');
+
         Route::put(
             '/permission/{permissionId}',
-            'Railroad\Railcontent\Controllers\PermissionJsonController@update'
-        );
+            \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@update'
+        )
+            ->name('permissions.update');
+
         Route::delete(
             '/permission/{permissionId}',
-            'Railroad\Railcontent\Controllers\PermissionJsonController@delete'
-        );
-        Route::post('/permission/assign', 'Railroad\Railcontent\Controllers\PermissionJsonController@assign');
-
-        Route::put('/start', 'Railroad\Railcontent\Controllers\ContentProgressJsonController@startContent');
-        Route::put(
-            '/complete',
-            'Railroad\Railcontent\Controllers\ContentProgressJsonController@completeContent'
-        );
-        Route::put(
-            '/progress',
-            'Railroad\Railcontent\Controllers\ContentProgressJsonController@saveProgress'
-        );
+            \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@delete'
+        )
+            ->name('permissions.delete');
 
         Route::post(
-            '/playlists/add',
-            'Railroad\Railcontent\Controllers\PlaylistJsonController@addToPlaylist'
-        );
-        Route::post('/playlists/create', 'Railroad\Railcontent\Controllers\PlaylistJsonController@store');
+            '/permission/assign',
+            \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@assign'
+        )
+            ->name('permissions.assign');
+
+        // content user progression
+        Route::put(
+            '/start',
+            Railroad\Railcontent\Controllers\ContentProgressJsonController::class . '@startContent'
+        )
+            ->name('content.progress.start');
+
+        Route::put(
+            '/complete',
+            Railroad\Railcontent\Controllers\ContentProgressJsonController::class . '@completeContent'
+        )
+            ->name('content.progress.complete');
+
+        Route::put(
+            '/progress',
+            Railroad\Railcontent\Controllers\ContentProgressJsonController::class . '@saveProgress'
+        )
+            ->name('content.progress.store');
+
+        // content user playlists
+        Route::put(
+            '/playlists',
+            Railroad\Railcontent\Controllers\PlaylistJsonController::class . '@store'
+        )
+            ->name('playlists.store');
+
+        Route::post(
+            '/playlists/add-content',
+            Railroad\Railcontent\Controllers\PlaylistJsonController::class . '@addToPlaylist'
+        )
+            ->name('playlists.content.store');
 
     }
 );
