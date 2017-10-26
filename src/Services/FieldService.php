@@ -41,7 +41,7 @@ class FieldService
     {
         $fieldId = $this->fieldRepository->updateOrCreateField(null, $key, $value, $type, $position);
 
-        $this->contentRepository->linkField($contentId, $fieldId);
+        $this->fieldRepository->linkFieldToContent($contentId, $fieldId);
 
         return $this->fieldRepository->getLinkedField($fieldId, $contentId);
     }

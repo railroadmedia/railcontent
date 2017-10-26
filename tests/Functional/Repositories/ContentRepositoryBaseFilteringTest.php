@@ -36,7 +36,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
     public function test_empty()
     {
-        $rows = $this->classBeingTested->startFilter(1, 1, 'published_on', 'desc', [])->get();
+        $rows = $this->classBeingTested->startFilter(1, 1, 'published_on', 'desc', [])->retrieveFilter();
 
         $this->assertEmpty($rows);
     }
@@ -56,7 +56,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
             $this->contentFactory->create([1 => ContentService::STATUS_PUBLISHED]);
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])->get();
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])->retrieveFilter();
 
         $this->assertEquals([4, 5, 6], array_column($rows, 'id'));
     }
@@ -65,7 +65,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
     {
         /*
          * Expected content ids:
-         * [ 1, 2, 3, 4, 5 ]
+         * [ 7, 8, 9, 10, 11 ]
          *
          */
 
@@ -126,7 +126,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         }
 
-        $rows = $this->classBeingTested->startFilter(1, 10, 'id', 'asc', $slugsToInclude)->get();
+        $rows = $this->classBeingTested->startFilter(1, 10, 'id', 'asc', $slugsToInclude)->retrieveFilter();
 
         $this->assertEquals(array_column($expectedContents, 'id'), array_column($rows, 'id'));
     }
@@ -196,7 +196,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         }
 
-        $count = $this->classBeingTested->startFilter(1, 10, 'id', 'asc', $slugsToInclude)->count();
+        $count = $this->classBeingTested->startFilter(1, 10, 'id', 'asc', $slugsToInclude)->countFilter();
 
         $this->assertEquals(5, $count);
     }

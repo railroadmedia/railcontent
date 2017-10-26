@@ -60,20 +60,12 @@ class FieldRepository extends RepositoryBase
      */
     public function linkFieldToContent($contentId, $fieldId)
     {
-        return $this->query()->insertGetId(
+        return $this->queryContentFields()->insertGetId(
             [
                 'content_id' => $contentId,
                 'field_id' => $fieldId
             ]
         );
-    }
-
-    /**
-     * @return Builder
-     */
-    public function query()
-    {
-        return $this->connection()->table(ConfigService::$tableFields);
     }
 
     /**
@@ -165,7 +157,6 @@ class FieldRepository extends RepositoryBase
             ->delete();
     }
 
-
     /** Generate the query builder
      *
      * @return Builder
@@ -217,5 +208,22 @@ class FieldRepository extends RepositoryBase
                 '=',
                 'allcontentfields.field_id'
             );
+    }
+
+
+    /**
+     * @return Builder
+     */
+    public function query()
+    {
+        return $this->connection()->table(ConfigService::$tableFields);
+    }
+
+    /**
+     * @return Builder
+     */
+    public function queryContentFields()
+    {
+        return $this->connection()->table(ConfigService::$tableContentFields);
     }
 }

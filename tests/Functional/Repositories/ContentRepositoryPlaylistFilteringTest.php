@@ -156,7 +156,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
                 $otherRequiredUserPlaylistUserId,
                 $otherRequiredUserPlaylistName
             )
-            ->get();
+            ->retrieveFilter();
 
         $this->assertEquals([8, 9, 10], array_column($rows, 'id'));
     }
@@ -220,7 +220,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
                 $userId,
                 $includedUserPlaylistName
             )
-            ->get();
+            ->retrieveFilter();
 
         $this->assertEquals([6, 7, 8], array_column($rows, 'id'));
     }
@@ -334,7 +334,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
                 $userId,
                 $otherIncludedUserPlaylistName
             )
-            ->get();
+            ->retrieveFilter();
 
         $this->assertEquals([9, 10, 11], array_column($rows, 'id'));
     }
@@ -487,7 +487,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
                 $userId,
                 $otherIncludedUserPlaylistName
             )
-            ->get();
+            ->retrieveFilter();
 
         $this->assertEquals([11, 12, 13], array_column($rows, 'id'));
     }

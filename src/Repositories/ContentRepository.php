@@ -51,6 +51,11 @@ class ContentRepository extends RepositoryBase
     private $slug;
 
     /**
+     * @var Builder
+     */
+    private $query;
+
+    /**
      * @var PermissionRepository
      */
     private $permissionRepository;
@@ -108,9 +113,16 @@ class ContentRepository extends RepositoryBase
      */
     public function getById($id)
     {
-        $this->contentId = $id;
+        $query = $this->initQuery();
 
-        return $this->parseRows($this->filter(false)->get()->toArray())[$id] ?? null;
+        $this->addInheritedContentToQuery($query);
+        $this->addFieldsAndDatumToQuery($query);
+
+        return $this->parseRows(
+                $query->where(ConfigService::$tableContent . '.id', $id)
+                    ->get()
+                    ->toArray()
+            )[$id] ?? null;
     }
 
     /**
@@ -123,20 +135,42 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * @return array
-     */
-    public function getMany()
-    {
-        return $this->parseRows($this->filter()->get()->toArray());
-    }
-
-    /**
      * @param string|null $parentSlug
      * @return array|null
      */
     public function getManyByParentSlug($parentSlug)
     {
-        return $this->filter(false)->where('parent_slug', $parentSlug)->get()->toArray();
+        $query = $this->initQuery();
+
+        $this->addFieldsAndDatumToQuery($query);
+        $this->addInheritedContentToQuery($query);
+        $this->addFilteringToQuery($query);
+
+        return $query->where('parent_slug', $parentSlug)->get()->toArray();
+    }
+
+    /**
+     * @return int
+     */
+    public function countFilter()
+    {
+        $mainQuery = $this->initQuery();
+
+        $this->addFieldsAndDatumToQuery($mainQuery);
+        $this->addInheritedContentToQuery($mainQuery);
+        $this->addFilteringToQuery($mainQuery);
+
+        $mainQuery->select([ConfigService::$tableContent . '.id'])
+            ->groupBy(
+                ConfigService::$tableContent . '.id',
+                ConfigService::$tableContent . '.' . $this->orderBy
+            );
+
+        return $this->connection()->table(
+            $this->databaseManager->raw('(' . $mainQuery->toSql() . ') as rows')
+        )
+            ->addBinding($mainQuery->getBindings())
+            ->count();
     }
 
     /**
@@ -197,7 +231,7 @@ class ContentRepository extends RepositoryBase
      * delete the content and reposition the content children.
      *
      * @param int $id
-     * @return int
+     * @return bool
      */
     public function delete($id)
     {
@@ -214,17 +248,6 @@ class ContentRepository extends RepositoryBase
             ->delete();
 
         return $amountOfDeletedRows > 0;
-    }
-
-    /** Generate the Query Builder
-     *
-     * @param bool $includeJoins
-     * @return Builder
-     */
-    public function baseQuery($includeJoins = true)
-    {
-
-        return $query;
     }
 
     /**
@@ -344,6 +367,27 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @return array
+     */
+    public function retrieveFilter()
+    {
+        $subQuery = $this->initQuery();
+
+        $this->addInheritedContentToQuery($subQuery);
+        $this->addFieldsAndDatumToQuery($subQuery);
+        $this->addFilteringToQuery($subQuery);
+        $this->addPaginationToQuery($subQuery);
+
+        $query = $this->initQuery();
+
+        $this->addInheritedContentToQuery($query);
+        $this->addFieldsAndDatumToQuery($query);
+        $this->addSubJoinToQuery($query, $subQuery);
+
+        return $this->parseRows($query->get()->toArray());
+    }
+
+    /**
      * @param $name
      * @param $value
      * @param $type
@@ -421,70 +465,10 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * @return int
+     * @param Builder $query
      */
-    private function count()
+    private function addFilteringToQuery(Builder &$query)
     {
-        $mainQuery = $this->filter()
-            ->select([ConfigService::$tableContent . '.id'])
-            ->groupBy(
-                ConfigService::$tableContent . '.id',
-                ConfigService::$tableContent . '.' . $this->orderBy
-            );
-
-        return $this->connection()->table(
-            $this->databaseManager->raw('(' . $mainQuery->toSql() . ') as rows')
-        )
-            ->addBinding($mainQuery->getBindings())
-            ->count();
-    }
-
-    /**
-     * @return Builder
-     */
-    private function filter()
-    {
-        $selects = [
-            ConfigService::$tableContent . '.id as id',
-            ConfigService::$tableContent . '.slug as slug',
-            ConfigService::$tableContent . '.status as status',
-            ConfigService::$tableContent . '.language as language',
-            ConfigService::$tableContent . '.published_on as published_on',
-            ConfigService::$tableContent . '.created_on as created_on',
-            ConfigService::$tableContent . '.archived_on as archived_on',
-            ConfigService::$tableContent . '.brand as brand',
-            'inherited_content.slug as parent_slug',
-            ConfigService::$tableContentHierarchy . '.parent_id as parent_id',
-            ConfigService::$tableContentHierarchy . '.child_position as parent_child_position',
-        ];
-
-        if ($includeJoins) {
-            $selects = array_merge(
-                $selects,
-                [
-                    ConfigService::$tableFields . '.id as field_id',
-                    ConfigService::$tableFields . '.key as field_key',
-                    ConfigService::$tableFields . '.value as field_value',
-                    ConfigService::$tableFields . '.type as field_type',
-                    ConfigService::$tableFields . '.position as field_position',
-
-                    ConfigService::$tableData . '.id as datum_id',
-                    ConfigService::$tableData . '.value as datum_value',
-                    ConfigService::$tableData . '.key as datum_key',
-                    ConfigService::$tableData . '.position as datum_position',
-                ]
-            );
-        }
-
-        $query = $this->query()
-            ->select($selects);
-
-        if ($includeJoins) {
-            $query = $this->fieldRepository->attachFieldsToContentQuery($query);
-            $query = $this->datumRepository->attachDatumToContentQuery($query);
-            $query = $this->permissionRepository->restrictContentQueryByPermissions($query);
-        }
-
         if (is_array(self::$availableContentStatues)) {
             $query = $query->whereIn('status', self::$availableContentStatues);
         }
@@ -497,37 +481,29 @@ class ContentRepository extends RepositoryBase
             $query = $query->where('published_on', '<', Carbon::now()->toDateTimeString());
         }
 
-        $subLimitQuery = $query
-            ->select(ConfigService::$tableContent . '.id as id')
-            ->groupBy(ConfigService::$tableContent . '.id')
-            ->leftJoin(
-                ConfigService::$tableContentHierarchy,
-                ConfigService::$tableContentHierarchy . '.child_id',
-                '=',
-                ConfigService::$tableContent . '.id'
-            )
-            ->leftJoin(
-                ConfigService::$tableContent . ' as inherited_content',
-                'inherited_content.id',
-                '=',
-                ConfigService::$tableContentHierarchy . '.parent_id'
-            );
+        // todo: fix, this doesn't work properly
 
         if (!empty($this->includedParentSlugs)) {
-            $subLimitQuery->whereIn('inherited_content.slug', $this->includedParentSlugs);
-        }
+            $subQuery = $this->initQuery();
 
-        if (!empty($this->contentId)) {
-            $subLimitQuery->where(ConfigService::$tableContent . '.id', $this->contentId);
-        }
+            $this->addInheritedContentToQuery($subQuery);
 
-        if (!empty($this->slug)) {
-            $subLimitQuery->where(ConfigService::$tableContent . '.slug', $this->slug);
+            $subQuery->select([ConfigService::$tableContent . '.id'])
+                ->whereIn('inherited_content.slug', $this->includedParentSlugs);
+
+            $query
+                ->join(
+                    $this->databaseManager->raw('(' . $subQuery->toSql() . ') inner_content_2'),
+                    function (JoinClause $joinClause) {
+                        $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content_2.id');
+                    }
+                )
+                ->addBinding($subQuery->getBindings());
         }
 
         // exclusive field filters
-        $subLimitQuery->where(
-            function (Builder $builder) use ($subLimitQuery) {
+        $query->where(
+            function (Builder $builder) use ($query) {
 
                 foreach ($this->requiredFields as $requiredFieldData) {
                     $builder->whereExists(
@@ -568,8 +544,8 @@ class ContentRepository extends RepositoryBase
         );
 
         // inclusive field filters
-        $subLimitQuery->where(
-            function (Builder $builder) use ($subLimitQuery) {
+        $query->where(
+            function (Builder $builder) use ($query) {
 
                 foreach ($this->includedFields as $includedFieldData) {
                     $builder->orWhereExists(
@@ -610,8 +586,8 @@ class ContentRepository extends RepositoryBase
         );
 
         // exclusive user playlist filters
-        $subLimitQuery->where(
-            function (Builder $builder) use ($subLimitQuery) {
+        $query->where(
+            function (Builder $builder) use ($query) {
 
                 foreach ($this->requiredUserPlaylists as $requiredUserPlaylistData) {
                     $builder->whereExists(
@@ -653,8 +629,8 @@ class ContentRepository extends RepositoryBase
         );
 
         // inclusive user playlist filters
-        $subLimitQuery->where(
-            function (Builder $builder) use ($subLimitQuery) {
+        $query->where(
+            function (Builder $builder) use ($query) {
 
                 foreach ($this->includedUserPlaylists as $requiredUserPlaylistData) {
                     $builder->orWhereExists(
@@ -696,8 +672,8 @@ class ContentRepository extends RepositoryBase
         );
 
         // exclusive user state filter
-        $subLimitQuery->where(
-            function (Builder $builder) use ($subLimitQuery) {
+        $query->where(
+            function (Builder $builder) use ($query) {
 
                 if (count($this->requiredUserStates) > 0) {
                     $requiredUserStateData = $this->requiredUserStates;
@@ -727,8 +703,8 @@ class ContentRepository extends RepositoryBase
         );
 
         // inclusive user state filters
-        $subLimitQuery->where(
-            function (Builder $builder) use ($subLimitQuery) {
+        $query->where(
+            function (Builder $builder) use ($query) {
 
                 foreach ($this->includedUserStates as $requiredUserStateData) {
                     $builder->orWhereExists(
@@ -755,30 +731,46 @@ class ContentRepository extends RepositoryBase
                 }
             }
         );
+    }
 
-        if (!empty($this->page)) {
-            $subLimitQuery
-                ->orderBy(ConfigService::$tableContent . '.' . $this->orderBy, $this->orderDirection)
-                ->limit($this->limit)
-                ->skip(($this->page - 1) * $this->limit);
-        }
+    /**
+     * @param Builder $query
+     */
+    private function addPaginationToQuery(Builder &$query)
+    {
+        $query
+            ->orderBy(ConfigService::$tableContent . '.' . $this->orderBy, $this->orderDirection)
+            ->limit($this->limit)
+            ->skip(($this->page - 1) * $this->limit);
+    }
 
-        $subLimitQueryString = $subLimitQuery->toSql();
+    /**
+     * Sub query must be completely created before being passed in here.
+     * Any changes to the $subQuery object after being passed in will not be reflected at retrieval time.
+     *
+     * @param Builder $query
+     * @param Builder $subQuery
+     */
+    private function addSubJoinToQuery(Builder &$query, Builder $subQuery)
+    {
+        $query
+            ->join(
+                $this->databaseManager->raw('(' . $subQuery->toSql() . ') inner_content'),
+                function (JoinClause $joinClause) {
+                    $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
+                }
+            )
+            ->addBinding($subQuery->getBindings());
+    }
 
-        $query = $this->query()
-            ->select(
+    /**
+     * @param Builder $query
+     */
+    private function addFieldsAndDatumToQuery(Builder &$query)
+    {
+        $query
+            ->addSelect(
                 [
-                    ConfigService::$tableContent . '.id as id',
-                    ConfigService::$tableContent . '.slug as slug',
-                    ConfigService::$tableContent . '.status as status',
-                    ConfigService::$tableContent . '.language as language',
-                    ConfigService::$tableContent . '.published_on as published_on',
-                    ConfigService::$tableContent . '.created_on as created_on',
-                    ConfigService::$tableContent . '.archived_on as archived_on',
-                    ConfigService::$tableContent . '.brand as brand',
-                    'inherited_content.slug as parent_slug',
-                    ConfigService::$tableContentHierarchy . '.parent_id as parent_id',
-                    ConfigService::$tableContentHierarchy . '.child_position as parent_child_position',
                     ConfigService::$tableFields . '.id as field_id',
                     ConfigService::$tableFields . '.key as field_key',
                     ConfigService::$tableFields . '.value as field_value',
@@ -813,6 +805,21 @@ class ContentRepository extends RepositoryBase
                 ConfigService::$tableData . '.id',
                 '=',
                 ConfigService::$tableContentData . '.datum_id'
+            );
+    }
+
+    /**
+     * @param Builder $query
+     */
+    private function addInheritedContentToQuery(Builder &$query)
+    {
+        $query
+            ->addSelect(
+                [
+                    'inherited_content.slug as parent_slug',
+                    ConfigService::$tableContentHierarchy . '.parent_id as parent_id',
+                    ConfigService::$tableContentHierarchy . '.child_position as parent_child_position',
+                ]
             )
             ->leftJoin(
                 ConfigService::$tableContentHierarchy,
@@ -825,20 +832,31 @@ class ContentRepository extends RepositoryBase
                 'inherited_content.id',
                 '=',
                 ConfigService::$tableContentHierarchy . '.parent_id'
-            )
-            ->join(
-                $this->databaseManager->raw('(' . $subLimitQueryString . ') inner_content'),
-                function (JoinClause $joinClause) {
-                    $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
-                }
-            )
-            ->addBinding($subLimitQuery->getBindings());
+            );
+    }
 
-        if (!empty($this->orderBy)) {
-            $query->orderBy(ConfigService::$tableContent . '.' . $this->orderBy, $this->orderDirection);
-        }
-
-        return $query;
+    /**
+     * @return Builder
+     */
+    private function initQuery()
+    {
+        return $this->query()
+            ->select(
+                [
+                    ConfigService::$tableContent . '.id as id',
+                    ConfigService::$tableContent . '.slug as slug',
+                    ConfigService::$tableContent . '.status as status',
+                    ConfigService::$tableContent . '.language as language',
+                    ConfigService::$tableContent . '.brand as brand',
+                    ConfigService::$tableContent . '.published_on as published_on',
+                    ConfigService::$tableContent . '.created_on as created_on',
+                    ConfigService::$tableContent . '.archived_on as archived_on',
+                ]
+            )
+            ->orderBy(
+                ConfigService::$tableContent . '.' . ($this->orderBy ?? 'published_on'),
+                $this->orderDirection ?? 'desc'
+            );
     }
 
     /**

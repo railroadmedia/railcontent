@@ -36,7 +36,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
 
     public function test_empty()
     {
-        $rows = $this->classBeingTested->startFilter(1, 1, 'published_on', 'desc', [])->get();
+        $rows = $this->classBeingTested->startFilter(1, 1, 'published_on', 'desc', [])->retrieveFilter();
 
         $this->assertEmpty($rows);
     }
@@ -149,7 +149,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
                 $otherRequiredFieldValue,
                 $otherRequiredFieldType
             )
-            ->get();
+            ->retrieveFilter();
 
         $this->assertEquals([8, 9, 10], array_column($rows, 'id'));
     }
@@ -220,7 +220,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
                 $includedFieldValue,
                 $includedFieldType
             )
-            ->get();
+            ->retrieveFilter();
 
         $this->assertEquals([6, 7, 8], array_column($rows, 'id'));
     }
@@ -335,7 +335,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
                 $otherIncludedFieldValue,
                 $otherIncludedFieldType
             )
-            ->get();
+            ->retrieveFilter();
 
         $this->assertEquals([8, 9, 10], array_column($rows, 'id'));
     }
@@ -586,7 +586,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
                 $otherRequiredFieldValue,
                 $otherRequiredFieldType
             )
-            ->get();
+            ->retrieveFilter();
 
         $this->assertEquals([10, 11, 12], array_column($rows, 'id'));
     }
@@ -825,7 +825,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
                 $otherRequiredFieldValue,
                 $otherRequiredFieldType
             )
-            ->count();
+            ->countFilter();
 
         $this->assertEquals(10, $count);
     }

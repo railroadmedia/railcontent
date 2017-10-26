@@ -3,9 +3,9 @@
 namespace Railroad\Railcontent\Services;
 
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\ContentVersionRepository;
 use Railroad\Railcontent\Repositories\DatumRepository;
 use Railroad\Railcontent\Repositories\FieldRepository;
-use Railroad\Railcontent\Repositories\ContentVersionRepository;
 
 class ContentService
 {
@@ -63,16 +63,6 @@ class ContentService
     public function getById($id)
     {
         return $this->contentRepository->getById($id);
-    }
-
-    /**
-     * @param string $slug
-     * @param int|null $parentId
-     * @return array|null
-     */
-    public function getBySlug($slug, $parentId = null)
-    {
-        return $this->contentRepository->getBySlug($slug, $parentId);
     }
 
     /**
@@ -154,7 +144,7 @@ class ContentService
             $filter->includeUserStates(...$includedUserPlaylist);
         }
 
-        return ['results' => $filter->get(), 'total_results' => $filter->count()];
+        return ['results' => $filter->retrieveFilter(), 'total_results' => $filter->countFilter()];
     }
 
     /**
@@ -188,55 +178,28 @@ class ContentService
     }
 
     /**
-     * Call the update method from Category repository and return the category
+     * Update and return the updated content.
      *
      * @param integer $id
-     * @param string $slug
-     * @param string $status
-     * @param string $type
-     * @param integer $position
-     * @param string|null $language
-     * @param integer|null $parentId
-     * @param string|null $publishedOn
-     * @param string|null $archivedOn
+     * @param array $data
      * @return array
      */
-    public function update(
-        $id,
-        $slug,
-        $status,
-        $type,
-        $position,
-        $language = null,
-        $parentId = null,
-        $publishedOn = null,
-        $archivedOn = null
-    ) {
-        $this->contentRepository->update(
-            $id,
-            $slug,
-            $status,
-            $type,
-            $position,
-            $language,
-            $parentId,
-            $publishedOn,
-            $archivedOn
-        );
+    public function update($id, array $data)
+    {
+        $this->contentRepository->update($id, $data);
 
         return $this->getById($id);
     }
 
     /**
-     * Call the delete method from repository and returns true if the category was deleted
+     * Call the delete method from repository and returns true if the content was deleted
      *
-     * @param array $content
-     * @param bool $deleteChildren
+     * @param $id
      * @return bool
      */
-    public function delete($content, $deleteChildren = false)
+    public function delete($id)
     {
-        return $this->contentRepository->delete($content, $deleteChildren) > 0;
+        return $this->contentRepository->delete($id);
     }
 
     /**
@@ -247,6 +210,8 @@ class ContentService
      */
     public function restoreContent($versionId)
     {
+        // todo: update with new methods
+
         //get saved content version from database
         $restoredContentVersion = $this->getContentVersion($versionId);
 
@@ -258,14 +223,15 @@ class ContentService
         //update content with version data
         $this->contentRepository->update(
             $contentId,
-            $oldContent['slug'],
-            $oldContent['status'],
-            $oldContent['type'],
-            $oldContent['position'],
-            $oldContent['language'],
-            $oldContent['parent_id'],
-            $oldContent['published_on'],
-            $oldContent['archived_on']
+            [
+                'slug' => $oldContent['slug'],
+                'status' => $oldContent['status'],
+                'language' => $oldContent['language'],
+                'brand' => $oldContent['brand'],
+                'created_on' => $oldContent['published_on'],
+                'published_on' => $oldContent['published_on'],
+                'archived_on' => $oldContent['archived_on']
+            ]
         );
 
         // unlink all fields and datum
