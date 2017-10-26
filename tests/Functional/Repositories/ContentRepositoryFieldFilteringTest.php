@@ -41,71 +41,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
         $this->assertEmpty($rows);
     }
 
-    public function test_pagination_and_order_by()
-    {
-        /*
-         * Expected content ids before pagination:
-         * [ 1, 2, 3... 10 ]
-         *
-         * Expected content ids after pagination:
-         * [ 4, 5, 6 ]
-         *
-         */
-
-        for ($i = 0; $i < 10; $i++) {
-            $this->contentFactory->create([1 => ContentService::STATUS_PUBLISHED]);
-        }
-
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])->get();
-
-        $this->assertEquals([4, 5, 6], array_column($rows, 'id'));
-    }
-
-    public function test_include_types()
-    {
-        /*
-         * Expected content ids:
-         * [ 1, 2, 3, 4, 5 ]
-         *
-         */
-
-        $typesToInclude = [
-            $this->faker->word . rand(),
-            $this->faker->word . rand(),
-            $this->faker->word . rand()
-        ];
-
-        $typesToExclude = [
-            $this->faker->word . rand(),
-            $this->faker->word . rand(),
-            $this->faker->word . rand()
-        ];
-
-        $expectedContents = [];
-
-        for ($i = 0; $i < 5; $i++) {
-            $expectedContents[] = $this->contentFactory->create(
-                [
-                    1 => ContentService::STATUS_PUBLISHED,
-                    2 => $this->faker->randomElement($typesToInclude),
-                ]
-            );
-        }
-
-        for ($i = 0; $i < 5; $i++) {
-            $this->contentFactory->create(
-                [
-                    1 => ContentService::STATUS_PUBLISHED,
-                    2 => $this->faker->randomElement($typesToExclude),
-                ]
-            );
-        }
-
-        $rows = $this->classBeingTested->startFilter(1, 10, 'id', 'asc', $typesToInclude)->get();
-
-        $this->assertEquals(array_column($expectedContents, 'id'), array_column($rows, 'id'));
-    }
-
     public function test_require_fields_with_pagination()
     {
         /*
@@ -120,8 +55,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
          *
          */
 
-        $type = $this->faker->word;
-
         $requiredFieldName = $this->faker->word;
         $requiredFieldValue = $this->faker->word;
         $requiredFieldType = $this->faker->word;
@@ -135,7 +68,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -151,7 +83,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -177,7 +108,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $expectedContent = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -208,7 +138,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])
             ->requireField(
                 $requiredFieldName,
                 $requiredFieldValue,
@@ -240,8 +170,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
          *
          */
 
-        $type = $this->faker->word;
-
         $includedFieldName = $this->faker->word;
         $includedFieldValue = $this->faker->word;
         $includedFieldType = $this->faker->word;
@@ -251,7 +179,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -267,7 +194,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -288,7 +214,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])
             ->includeField(
                 $includedFieldName,
                 $includedFieldValue,
@@ -315,8 +241,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
          *
          */
 
-        $type = $this->faker->word;
-
         $includedFieldName = $this->faker->word;
         $includedFieldValue = $this->faker->word;
         $includedFieldType = $this->faker->word;
@@ -330,7 +254,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -346,7 +269,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -372,7 +294,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $expectedContent = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -403,7 +324,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])
             ->includeField(
                 $includedFieldName,
                 $includedFieldValue,
@@ -433,8 +354,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
          *
          */
 
-        $type = $this->faker->word;
-
         $includedFieldName = $this->faker->word;
         $includedFieldValue = $this->faker->word;
         $includedFieldType = $this->faker->word;
@@ -458,7 +377,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -476,7 +394,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -514,7 +431,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -552,7 +468,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $expectedContent = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -600,7 +515,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $expectedContent = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -651,7 +565,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])
             ->includeField(
                 $includedFieldName,
                 $includedFieldValue,
@@ -677,11 +591,8 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
         $this->assertEquals([10, 11, 12], array_column($rows, 'id'));
     }
 
-
     public function test_include_and_require_fields_count()
     {
-        $type = $this->faker->word;
-
         $includedFieldName = $this->faker->word;
         $includedFieldValue = $this->faker->word;
         $includedFieldType = $this->faker->word;
@@ -705,7 +616,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -723,7 +633,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -761,7 +670,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -799,7 +707,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $expectedContent = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -847,7 +754,6 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $expectedContent = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -898,7 +804,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             );
         }
 
-        $count = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type])
+        $count = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])
             ->includeField(
                 $includedFieldName,
                 $includedFieldValue,

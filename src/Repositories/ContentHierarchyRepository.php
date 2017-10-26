@@ -141,6 +141,17 @@ class ContentHierarchyRepository extends RepositoryBase
     }
 
     /**
+     * @param int $parentId
+     * @return bool
+     */
+    public function deleteParentChildLinks($parentId)
+    {
+        return $this->queryTable()
+            ->where(['parent_id' => $parentId])
+            ->delete() > 0;
+    }
+
+    /**
      * @return Builder
      */
     private function queryTable()

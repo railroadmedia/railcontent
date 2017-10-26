@@ -52,7 +52,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
          *
          */
 
-        $type = $this->faker->word;
         $userId = $this->faker->randomNumber();
 
         $requiredUserPlaylistName = $this->faker->word;
@@ -77,13 +76,11 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             ]
         );
 
-
         // content that has none of the required playlists
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -100,7 +97,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -125,7 +121,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             $expectedContent = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -152,7 +147,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])
             ->requireUserPlaylist(
                 $requiredUserPlaylistUserId,
                 $requiredUserPlaylistName
@@ -177,7 +172,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
          *
          */
 
-        $type = $this->faker->word;
         $userId = $this->faker->numberBetween();
         $includedUserPlaylistName = $this->faker->word;
 
@@ -193,7 +187,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -210,7 +203,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -223,7 +215,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])
             ->includeUserPlaylist(
                 $userId,
                 $includedUserPlaylistName
@@ -244,7 +236,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
          *
          */
 
-        $type = $this->faker->word;
         $userId = $this->faker->numberBetween();
         $includedUserPlaylistName = $this->faker->word;
         $otherIncludedUserPlaylistName = $this->faker->word;
@@ -268,7 +259,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -285,7 +275,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -309,7 +298,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -337,7 +325,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(3, 3, 'id', 'asc', [$type])
+        $rows = $this->classBeingTested->startFilter(3, 3, 'id', 'asc', [])
             ->includeUserPlaylist(
                 $userId,
                 $includedUserPlaylistName
@@ -362,7 +350,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
          *
          */
 
-        $type = $this->faker->word;
         $userId = $this->faker->numberBetween();
         $requiredUserPlaylistName = $this->faker->word;
         $otherRequiredUserPlaylistName = $this->faker->word;
@@ -402,7 +389,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -419,7 +405,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -451,7 +436,6 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $type,
                 ]
             );
 
@@ -486,7 +470,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])
             ->requireUserPlaylist(
                 $userId,
                 $requiredUserPlaylistName

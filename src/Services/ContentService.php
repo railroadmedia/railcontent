@@ -98,7 +98,7 @@ class ContentService
      * @param int $page
      * @param int $limit
      * @param string $orderByAndDirection
-     * @param array $includedTypes
+     * @param array $includedParentSlugs
      * @param array $requiredFields
      * @param array $includedFields
      * @param array $requiredUserStates
@@ -111,7 +111,7 @@ class ContentService
         $page,
         $limit,
         $orderByAndDirection,
-        array $includedTypes,
+        array $includedParentSlugs,
         array $requiredFields = [],
         array $includedFields = [],
         array $requiredUserStates = [],
@@ -127,7 +127,7 @@ class ContentService
             $limit,
             $orderByColumn,
             $orderByDirection,
-            $includedTypes
+            $includedParentSlugs
         );
 
         foreach ($requiredFields as $requiredField) {
@@ -162,32 +162,26 @@ class ContentService
      *
      * @param string $slug
      * @param string $status
-     * @param string $type
-     * @param integer $position
-     * @param integer $parentId
+     * @param string|null $language
      * @param string|null $publishedOn
-     * @param null $language
+     * @param string|null $createdOn
      * @return array
      */
     public function create(
         $slug,
         $status,
-        $type,
-        $position,
-        $language = null,
-        $parentId = null,
-        $publishedOn = null
+        $language,
+        $publishedOn,
+        $createdOn = null
     ) {
         $id =
             $this->contentRepository->create(
                 $slug,
                 $status,
-                $type,
                 ConfigService::$brand,
-                $position,
                 $language ?? ConfigService::$defaultLanguage,
-                $parentId,
-                $publishedOn
+                $publishedOn,
+                $createdOn
             );
 
         return $this->getById($id);

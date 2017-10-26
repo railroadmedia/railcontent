@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Railroad\Railcontent\Factories\ContentFactory;
+use Railroad\Railcontent\Factories\ContentHierarchyFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -19,12 +20,18 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
      */
     protected $contentFactory;
 
+    /**
+     * @var ContentHierarchyFactory
+     */
+    protected $contentHierarchyFactory;
+
     protected function setUp()
     {
         parent::setUp();
 
         $this->classBeingTested = $this->app->make(ContentRepository::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
     }
 
     public function test_empty()
@@ -54,7 +61,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
         $this->assertEquals([4, 5, 6], array_column($rows, 'id'));
     }
 
-    public function test_include_types()
+    public function test_include_parent_slugs()
     {
         /*
          * Expected content ids:
@@ -62,39 +69,64 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
          *
          */
 
-        $typesToInclude = [
+        $slugsToInclude = [
             $this->faker->word . rand(),
             $this->faker->word . rand(),
             $this->faker->word . rand()
         ];
 
-        $typesToExclude = [
+        $includedParentContentIds = [];
+
+        foreach ($slugsToInclude as $slugToInclude) {
+            $includedParentContentIds[] = $this->contentFactory->create([0 => $slugToInclude])['id'];
+        }
+
+        $slugsToExclude = [
             $this->faker->word . rand(),
             $this->faker->word . rand(),
             $this->faker->word . rand()
         ];
+
+        $excludedParentContentIds = [];
+
+        foreach ($slugsToExclude as $slugToExclude) {
+            $excludedParentContentIds[] = $this->contentFactory->create([0 => $slugToExclude])['id'];
+        }
 
         $expectedContents = [];
 
         for ($i = 0; $i < 5; $i++) {
-            $expectedContents[] = $this->contentFactory->create(
+            $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $this->faker->randomElement($typesToInclude),
                 ]
             );
+
+            foreach ($includedParentContentIds as $includedParentContentId) {
+                $this->contentHierarchyFactory->create(
+                    [$includedParentContentId, $content['id']]
+                );
+            }
+
+            $expectedContents[] = $content;
         }
 
         for ($i = 0; $i < 5; $i++) {
-            $this->contentFactory->create(
+            $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $this->faker->randomElement($typesToExclude),
                 ]
             );
+
+            foreach ($excludedParentContentIds as $excludedParentContentId) {
+                $this->contentHierarchyFactory->create(
+                    [$excludedParentContentId, $content['id']]
+                );
+            }
+
         }
 
-        $rows = $this->classBeingTested->startFilter(1, 10, 'id', 'asc', $typesToInclude)->get();
+        $rows = $this->classBeingTested->startFilter(1, 10, 'id', 'asc', $slugsToInclude)->get();
 
         $this->assertEquals(array_column($expectedContents, 'id'), array_column($rows, 'id'));
     }
@@ -107,43 +139,65 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
          *
          */
 
-        $typesToInclude = [
+        $slugsToInclude = [
             $this->faker->word . rand(),
             $this->faker->word . rand(),
             $this->faker->word . rand()
         ];
 
-        $typesToExclude = [
+        $includedParentContentIds = [];
+
+        foreach ($slugsToInclude as $slugToInclude) {
+            $includedParentContentIds[] = $this->contentFactory->create([0 => $slugToInclude])['id'];
+        }
+
+        $slugsToExclude = [
             $this->faker->word . rand(),
             $this->faker->word . rand(),
             $this->faker->word . rand()
         ];
+
+        $excludedParentContentIds = [];
+
+        foreach ($slugsToExclude as $slugToExclude) {
+            $excludedParentContentIds[] = $this->contentFactory->create([0 => $slugToExclude])['id'];
+        }
 
         $expectedContents = [];
 
         for ($i = 0; $i < 5; $i++) {
-            $expectedContents[] = $this->contentFactory->create(
+            $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $this->faker->randomElement($typesToInclude),
                 ]
             );
+
+            foreach ($includedParentContentIds as $includedParentContentId) {
+                $this->contentHierarchyFactory->create(
+                    [$includedParentContentId, $content['id']]
+                );
+            }
+
+            $expectedContents[] = $content;
         }
 
         for ($i = 0; $i < 5; $i++) {
-            $this->contentFactory->create(
+            $content = $this->contentFactory->create(
                 [
                     1 => ContentService::STATUS_PUBLISHED,
-                    2 => $this->faker->randomElement($typesToExclude),
                 ]
             );
+
+            foreach ($excludedParentContentIds as $excludedParentContentId) {
+                $this->contentHierarchyFactory->create(
+                    [$excludedParentContentId, $content['id']]
+                );
+            }
+
         }
 
-        $filter = $this->classBeingTested->startFilter(1, 10, 'id', 'asc', $typesToInclude);
-        $rows = $filter->get();
-        $count = $filter->count();
+        $count = $this->classBeingTested->startFilter(1, 10, 'id', 'asc', $slugsToInclude)->count();
 
-        $this->assertEquals(array_column($expectedContents, 'id'), array_column($rows, 'id'));
         $this->assertEquals(5, $count);
     }
 }

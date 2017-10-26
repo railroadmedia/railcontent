@@ -47,7 +47,7 @@ class ContentJsonController extends Controller
             $request->get('page', 1),
             $request->get('limit', 10),
             $request->get('sort', 'published_on'),
-            $request->get('included_types', []),
+            $request->get('included_parent_slugs', []),
             $parsedFilters['required_fields'] ?? [],
             $parsedFilters['included_fields'] ?? [],
             $parsedFilters['required_user_states'] ?? [],

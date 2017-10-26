@@ -39,17 +39,14 @@ class ContentFactory extends FactoryBase
                         ContentService::STATUS_ARCHIVED
                     ]
                 ),
-                $this->faker->word,
-                rand(),
                 'en-US',
-                null,
-                $this->faker->dateTime()
+                $this->faker->dateTimeThisCentury()
             ];
 
         ksort($parameters);
 
         $content = $this->contentService->create(...$parameters);
 
-        return $content["results"];
+        return $content;
     }
 }

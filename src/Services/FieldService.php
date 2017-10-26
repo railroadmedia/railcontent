@@ -43,7 +43,7 @@ class FieldService
 
         $this->contentRepository->linkField($contentId, $fieldId);
 
-        return $this->contentRepository->getLinkedField($fieldId, $contentId);
+        return $this->fieldRepository->getLinkedField($fieldId, $contentId);
     }
 
     /**
@@ -58,7 +58,7 @@ class FieldService
     {
         $this->fieldRepository->updateOrCreateField($fieldId, $key, $value, $type, $position);
 
-        return $this->contentRepository->getLinkedField($fieldId, $contentId);
+        return $this->fieldRepository->getLinkedField($fieldId, $contentId);
     }
 
     /**
@@ -70,7 +70,7 @@ class FieldService
      */
     public function getField($fieldId, $contentId)
     {
-        return $this->contentRepository->getLinkedField($fieldId, $contentId);
+        return $this->fieldRepository->getLinkedField($fieldId, $contentId);
     }
 
     /**

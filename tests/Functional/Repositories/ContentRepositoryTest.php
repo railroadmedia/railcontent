@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -13,7 +14,12 @@ class ContentRepositoryTest extends RailcontentTestCase
     /**
      * @var ContentRepository
      */
-    protected $classBeingTested, $languageId;
+    protected $classBeingTested;
+
+    /**
+     * @var ContentHierarchyRepository
+     */
+    protected $contentHierarchyRepository;
 
     protected function setUp()
     {
@@ -21,737 +27,133 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $this->classBeingTested = $this->app->make(ContentRepository::class);
 
-        $userId = $this->createAndLogInNewUser();
-        $this->languageId = $this->setUserLanguage($userId);
+        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
     }
 
     public function test_create_content()
     {
         $slug = $this->faker->word;
         $status = $this->faker->word;
-        $type = $this->faker->word;
         $language = 'en-US';
 
         $contentId =
             $this->classBeingTested->create(
                 $slug,
                 $status,
-                $type,
                 ConfigService::$brand,
-                1,
                 $language,
-                null,
-                Carbon::now()->subDays(1000 - 10)->toDateTimeString()
-            );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId,
-                'status' => $status,
-                'type' => $type,
-                'position' => 1,
-                'parent_id' => null,
-                'published_on' => Carbon::now()->subDays(1000 - 10)->toDateTimeString(),
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null
-            ]
-        );
-    }
-
-    public function test_push_position_stack()
-    {
-        $slug = implode('-', $this->faker->words());
-        $slug2 = implode('-', $this->faker->words());
-        $slug3 = implode('-', $this->faker->words());
-        $status = $this->faker->word;
-        $status2 = $this->faker->word;
-        $status3 = $this->faker->word;
-        $type = $this->faker->word;
-        $language = 'en-US';
-
-        $contentId =
-            $this->classBeingTested->create(
-                $slug,
-                $status,
-                $type,
-                ConfigService::$brand,
-                1,
-                $language,
-                null,
-                Carbon::now()->subDays(990)->toDateTimeString()
-            );
-        $content2Id =
-            $this->classBeingTested->create(
-                $slug2,
-                $status2,
-                $type,
-                ConfigService::$brand,
-                1,
-                $language,
-                null,
-                Carbon::now()->subDays(10)->toDateTimeString()
-            );
-
-        $content3Id = $this->classBeingTested->create(
-            $slug3,
-            $status3,
-            $type,
-            ConfigService::$brand,
-            1,
-            $language,
-            null,
-            null
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId,
-                'position' => 3,
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $content2Id,
-                'position' => 2,
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $content3Id,
-                'position' => 1,
-            ]
-        );
-    }
-
-    public function test_push_position_stack_abnormal()
-    {
-        $slug = implode('-', $this->faker->words());
-        $slug2 = implode('-', $this->faker->words());
-        $status = $this->faker->word;
-        $status2 = $this->faker->word;
-        $type = $this->faker->word;
-        $language = 'en-US';
-
-        $contentId = $this->classBeingTested->create(
-            $slug,
-            $status,
-            $type,
-            ConfigService::$brand,
-            1,
-            $language,
-            null,
-            null
-        );
-        $content2Id = $this->classBeingTested->create(
-            $slug2,
-            $status2,
-            $type,
-            ConfigService::$brand,
-            -581,
-            $language,
-            null,
-            null
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId,
-                'status' => $status,
-                'type' => $type,
-                'position' => 2,
-                'parent_id' => null,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $content2Id,
-                'status' => $status2,
-                'type' => $type,
-                'position' => 1,
-                'parent_id' => null,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null
-            ]
-        );
-    }
-
-    public function test_create_full_content_tree()
-    {
-        /*
-         * --- $slug1 null - 1
-         * ------ $slug2 1 - 1
-         * --------- $slug3 2 - 1
-         * --------- $slug4 2 - 2
-         * --------- $slug5 2 - 3
-         * --------- $slug6 2 - 4
-         * ------------ $slug7 6 - 1
-         * ------ $slug8 1 - 2
-         * --- $slug9 null - 2
-         */
-
-        $slug1 = implode('-', $this->faker->words());
-        $slug2 = implode('-', $this->faker->words());
-        $slug3 = implode('-', $this->faker->words());
-        $slug4 = implode('-', $this->faker->words());
-        $slug5 = implode('-', $this->faker->words());
-        $slug6 = implode('-', $this->faker->words());
-        $slug7 = implode('-', $this->faker->words());
-        $slug8 = implode('-', $this->faker->words());
-        $slug9 = implode('-', $this->faker->words());
-        $status = $this->faker->word;
-        $type = $this->faker->text(64);
-        $language = 'en-US';
-
-        $contentId1 = $this->classBeingTested->create(
-            $slug1,
-            $status,
-            $type,
-            ConfigService::$brand,
-            1,
-            $language,
-            null,
-            null
-        );
-        $contentId2 = $this->classBeingTested->create(
-            $slug2,
-            $status,
-            $type,
-            ConfigService::$brand,
-            1,
-            $language,
-            $contentId1,
-            null
-        );
-        $contentId3 = $this->classBeingTested->create(
-            $slug3,
-            $status,
-            $type,
-            ConfigService::$brand,
-            1,
-            $language,
-            $contentId2,
-            null
-        );
-        $contentId4 = $this->classBeingTested->create(
-            $slug4,
-            $status,
-            $type,
-            ConfigService::$brand,
-            2,
-            $language,
-            $contentId2,
-            null
-        );
-        $contentId5 = $this->classBeingTested->create(
-            $slug5,
-            $status,
-            $type,
-            ConfigService::$brand,
-            3,
-            $language,
-            $contentId2,
-            null
-        );
-        $contentId6 = $this->classBeingTested->create(
-            $slug6,
-            $status,
-            $type,
-            ConfigService::$brand,
-            4,
-            $language,
-            $contentId2,
-            null
-        );
-        $contentId7 = $this->classBeingTested->create(
-            $slug7,
-            $status,
-            $type,
-            ConfigService::$brand,
-            1,
-            $language,
-            $contentId6,
-            null
-        );
-        $contentId8 = $this->classBeingTested->create(
-            $slug8,
-            $status,
-            $type,
-            ConfigService::$brand,
-            2,
-            $language,
-            $contentId1,
-            null
-        );
-        $contentId9 = $this->classBeingTested->create(
-            $slug9,
-            $status,
-            $type,
-            ConfigService::$brand,
-            2,
-            $language,
-            null,
-            null
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId1,
-                'status' => $status,
-                'type' => $type,
-                'position' => 1,
-                'parent_id' => null,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId2,
-                'status' => $status,
-                'type' => $type,
-                'position' => 1,
-                'parent_id' => $contentId1,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId3,
-                'slug' => $slug3,
-                'status' => $status,
-                'type' => $type,
-                'position' => 1,
-                'parent_id' => $contentId2,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId4,
-                'slug' => $slug4,
-                'status' => $status,
-                'type' => $type,
-                'position' => 2,
-                'parent_id' => $contentId2,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId5,
-                'slug' => $slug5,
-                'status' => $status,
-                'type' => $type,
-                'position' => 3,
-                'parent_id' => $contentId2,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId6,
-                'slug' => $slug6,
-                'status' => $status,
-                'type' => $type,
-                'position' => 4,
-                'parent_id' => $contentId2,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId7,
-                'slug' => $slug7,
-                'status' => $status,
-                'type' => $type,
-                'position' => 1,
-                'parent_id' => $contentId6,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId8,
-                'slug' => $slug8,
-                'status' => $status,
-                'type' => $type,
-                'position' => 2,
-                'parent_id' => $contentId1,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId9,
-                'slug' => $slug9,
-                'status' => $status,
-                'type' => $type,
-                'position' => 2,
-                'parent_id' => null,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null
-            ]
-        );
-    }
-
-    public function test_update_content_slug()
-    {
-        $content = [
-            'slug' => $this->faker->word,
-            'status' => $this->faker->word,
-            'type' => $this->faker->word,
-            'brand' => ConfigService::$brand,
-            'position' => $this->faker->numberBetween(),
-            'language' => 'en-US',
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-        $new_slug = $this->faker->word;
-
-        $this->classBeingTested->update(
-            $contentId,
-            $new_slug,
-            $content['status'],
-            $content['type'],
-            $content['position'],
-            $content['language'],
-            $content['parent_id'],
-            null,
-            null
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId,
-                'status' => $content['status'],
-                'type' => $content['type'],
-                'brand' => ConfigService::$brand,
-                'position' => 1,
-                'parent_id' => null,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null,
-            ]
-        );
-    }
-
-    public function test_update_content_position()
-    {
-        $type = $this->faker->word;
-
-        $content1 = [
-            'slug' => $this->faker->word,
-            'status' => $this->faker->word,
-            'type' => $type,
-            'brand' => ConfigService::$brand,
-            'position' => $this->faker->numberBetween(),
-            'language' => 'en-US',
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-
-        $contentId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content1);
-
-        $content2 = [
-            'slug' => $this->faker->word,
-            'status' => $this->faker->word,
-            'type' => $type,
-            'brand' => ConfigService::$brand,
-            'position' => 1,
-            'language' => 'en-US',
-            'parent_id' => $contentId1,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-        $contentId11 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content2);
-
-        $content3 = [
-            'slug' => $this->faker->word,
-            'status' => $this->faker->word,
-            'type' => $type,
-            'brand' => ConfigService::$brand,
-            'position' => 2,
-            'language' => 'en-US',
-            'parent_id' => $contentId1,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-        $contentId12 = $this->query()->table(ConfigService::$tableContent)->insertGetId($content3);
-
-        $contentId12 =
-            $this->classBeingTested->update(
-                $contentId12,
-                $type,
-                $content3['status'],
-                $content3['type'],
-                1,
-                'en-US',
-                $content3['parent_id'],
-                null,
                 null
             );
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
             [
-                'id' => $contentId12,
-                'position' => 1
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => $contentId11,
-                'position' => 2
-            ]
-        );
-    }
-
-    public function test_update_content_and_reposition_forwards()
-    {
-        $type = $this->faker->word;
-        $contents = [];
-
-        for ($i = 0; $i < 6; $i++) {
-            $contents[$i + 1] = [
-                'slug' => $this->faker->word,
-                'status' => $this->faker->word,
-                'type' => $type,
-                'brand' => ConfigService::$brand,
-                'position' => $i + 1,
-                'language' => 'en-US',
-                'parent_id' => null,
+                'id' => $contentId,
+                'slug' => $slug,
+                'status' => $status,
                 'published_on' => null,
                 'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null,
-            ];
-
-            $this->query()
-                ->table(ConfigService::$tableContent)
-                ->insertGetId(
-                    $contents[$i + 1]
-                );
-        }
-
-        $id = $this->classBeingTested->update(
-            2,
-            $contents[1]['slug'],
-            $contents[1]['status'],
-            $contents[1]['type'],
-            4,
-            $contents[1]['language'],
-            $contents[1]['parent_id'],
-            null,
-            null
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => 1,
-                'position' => 1
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => 2,
-                'position' => 4
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => 3,
-                'position' => 2
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => 4,
-                'position' => 3
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => 5,
-                'position' => 5
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => 6,
-                'position' => 6
+                'archived_on' => null
             ]
         );
     }
 
-    public function test_update_content_and_reposition_backwards()
+    public function test_get_many_by_parent_slug()
     {
-        $type = $this->faker->word;
-        $contents = [];
+
+        $parentSlug = $this->faker->word;
+
+        $parentContentId =
+            $this->classBeingTested->create(
+                $parentSlug,
+                $this->faker->word,
+                ConfigService::$brand,
+                'en-US',
+                null
+            );
+
+        // to see if having another link will mess it up
+        $randomParentContentId =
+            $this->classBeingTested->create(
+                $this->faker->word,
+                $this->faker->word,
+                ConfigService::$brand,
+                'en-US',
+                null
+            );
 
         for ($i = 0; $i < 6; $i++) {
-            $contents[$i + 1] = [
-                'slug' => $this->faker->word,
-                'status' => $this->faker->word,
-                'type' => $type,
-                'brand' => ConfigService::$brand,
-                'position' => $i + 1,
-                'language' => 'en-US',
-                'parent_id' => null,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null,
-            ];
+            $contentId = $this->classBeingTested->create(
+                $this->faker->word,
+                $this->faker->word,
+                ConfigService::$brand,
+                'en-US',
+                null
+            );
 
-            $this->query()
-                ->table(ConfigService::$tableContent)
-                ->insertGetId(
-                    $contents[$i + 1]
-                );
+            $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
+                $parentContentId,
+                $contentId
+            );
+
+            $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
+                $randomParentContentId,
+                $contentId
+            );
         }
 
-        $id = $this->classBeingTested->update(
-            5,
-            $contents[1]['slug'],
-            $contents[1]['status'],
-            $contents[1]['type'],
-            2,
-            $contents[1]['language'],
-            $contents[1]['parent_id'],
-            null,
-            null
-        );
+        $content = $this->classBeingTested->getManyByParentSlug($parentSlug);
+
+        $this->assertEquals(6, count($content));
+    }
+
+    public function test_update()
+    {
+        $oldContent = [
+            'slug' => $this->faker->word,
+            'status' => $this->faker->word,
+            'brand' => ConfigService::$brand,
+            'language' => 'en-US',
+            'published_on' => null,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($oldContent);
+
+        $newContent = [
+            'slug' => $this->faker->word,
+            'status' => $this->faker->word,
+            'brand' => ConfigService::$brand,
+            'language' => 'en-CA',
+            'published_on' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => Carbon::now()->toDateTimeString(),
+        ];
+
+        $this->classBeingTested->update($contentId, $newContent);
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
-            [
-                'id' => 1,
-                'position' => 1
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => 2,
-                'position' => 3
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => 3,
-                'position' => 4
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => 4,
-                'position' => 5
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => 5,
-                'position' => 2
-            ]
-        );
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContent,
-            [
-                'id' => 6,
-                'position' => 6
-            ]
+            array_merge(
+                $newContent,
+                [
+                    'id' => $contentId,
+                ]
+            )
         );
     }
 
-    public function test_delete_content_and_reposition()
+    public function test_delete()
     {
-        $type = $this->faker->word;
         $contents = [];
 
         for ($i = 0; $i < 4; $i++) {
             $contents[$i + 1] = [
                 'slug' => $this->faker->word,
                 'status' => $this->faker->word,
-                'type' => $type,
                 'brand' => ConfigService::$brand,
-                'position' => $i + 1,
                 'language' => 'en-US',
-                'parent_id' => null,
                 'published_on' => null,
                 'created_on' => Carbon::now()->toDateTimeString(),
                 'archived_on' => null,
@@ -764,37 +166,26 @@ class ContentRepositoryTest extends RailcontentTestCase
                 );
         }
 
-        $this->classBeingTested->delete(2, true);
+        $this->classBeingTested->delete(2);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContent,
-            [
-                'id' => 2,
-            ]
+            ['id' => 2]
         );
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
-            [
-                'id' => 1,
-                'position' => 1
-            ]
+            ['id' => 1]
         );
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
-            [
-                'id' => 3,
-                'position' => 2
-            ]
+            ['id' => 3]
         );
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
-            [
-                'id' => 4,
-                'position' => 3
-            ]
+            ['id' => 4]
         );
     }
 
@@ -816,58 +207,6 @@ class ContentRepositoryTest extends RailcontentTestCase
             ]
         );
 
-    }
-
-    public function test_get_content_datum_non_exist()
-    {
-        $contentDatum = $this->classBeingTested->getLinkedDatum(1, 1);
-
-        $this->assertEquals(null, $contentDatum);
-    }
-
-    public function test_get_content_datum()
-    {
-        $content = [
-            'slug' => $this->faker->word,
-            'status' => $this->faker->word,
-            'type' => $this->faker->word,
-            'brand' => ConfigService::$brand,
-            'position' => $this->faker->numberBetween(),
-            'language' => 'en-US',
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-        $datum = [
-            'key' => $this->faker->word,
-            'value' => $this->faker->text(),
-            'position' => $this->faker->numberBetween()
-        ];
-
-        $datumId = $this->query()->table(ConfigService::$tableData)->insertGetId($datum);
-
-        $datumLinkId = $this->query()->table(ConfigService::$tableContentData)->insertGetId(
-            [
-                'content_id' => $contentId,
-                'datum_id' => $datumId
-            ]
-        );
-
-        $contentDatum = $this->classBeingTested->getLinkedDatum($datumId, $contentId);
-
-        $expectedResults = [
-            'id' => $datumLinkId,
-            'content_id' => $contentId,
-            'datum_id' => $datumId,
-            'key' => $datum['key'],
-            'value' => $datum['value'],
-            'position' => $datum['position']
-        ];
-
-        $this->assertEquals($expectedResults, $contentDatum);
     }
 
     public function test_unlink_content_specific_datum()
@@ -932,60 +271,6 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'field_id' => $fieldId
             ]
         );
-    }
-
-    public function test_get_content_field_non_exist()
-    {
-        $contentField = $this->classBeingTested->getLinkedField(1, 1);
-
-        $this->assertEquals(null, $contentField);
-    }
-
-    public function test_get_content_field()
-    {
-        $content = [
-            'slug' => $this->faker->word,
-            'status' => $this->faker->word,
-            'type' => $this->faker->word,
-            'brand' => ConfigService::$brand,
-            'position' => $this->faker->numberBetween(),
-            'language' => 'en-US',
-            'parent_id' => null,
-            'published_on' => null,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-        ];
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-        $field = [
-            'key' => $this->faker->word,
-            'value' => $this->faker->text(),
-            'type' => $this->faker->word,
-            'position' => $this->faker->numberBetween()
-        ];
-
-        $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
-
-        $fieldLinkId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
-            [
-                'content_id' => $contentId,
-                'field_id' => $fieldId
-            ]
-        );
-
-        $contentField = $this->classBeingTested->getLinkedField($fieldId, $contentId);
-
-        $expectedResults = [
-            'id' => $fieldLinkId,
-            'content_id' => $contentId,
-            'field_id' => $fieldId,
-            'key' => $field['key'],
-            'value' => $field['value'],
-            'type' => $field['type'],
-            'position' => $field['position'],
-        ];
-
-        $this->assertEquals($expectedResults, $contentField);
     }
 
     public function test_unlink_content_specific_field()
@@ -1056,11 +341,8 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content = [
             'slug' => $this->faker->word,
             'status' => ContentService::STATUS_PUBLISHED,
-            'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
-            'position' => $this->faker->numberBetween(),
             'language' => 'en-US',
-            'parent_id' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
         ];
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
@@ -1084,11 +366,8 @@ class ContentRepositoryTest extends RailcontentTestCase
         $linkedContent = [
             'slug' => $this->faker->word,
             'status' => ContentService::STATUS_PUBLISHED,
-            'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
-            'position' => $this->faker->numberBetween(),
             'language' => 'en-US',
-            'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
@@ -1102,7 +381,8 @@ class ContentRepositoryTest extends RailcontentTestCase
             'position' => null,
         ];
 
-        $linkedContentFieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($linkedContentField);
+        $linkedContentFieldId =
+            $this->query()->table(ConfigService::$tableFields)->insertGetId($linkedContentField);
 
         $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
             [
@@ -1111,13 +391,17 @@ class ContentRepositoryTest extends RailcontentTestCase
             ]
         );
 
-        $expectedResults = array_merge($content, [
-            'id' => $contentId,
-            'fields' => [
-                array_merge($field, ['id' => $fieldId]),
-                array_merge($linkedContentField, ['id' => $linkedContentFieldId])
+        $expectedResults = array_merge(
+            $content,
+            [
+                'id' => $contentId,
+                'published_on' => null,
+                'fields' => [
+                    array_merge($field, ['id' => $fieldId]),
+                    array_merge($linkedContentField, ['id' => $linkedContentFieldId])
+                ]
             ]
-        ]);
+        );
         $results = $this->classBeingTested->getById($contentId);
 
         $this->assertEquals($expectedResults, $results);
@@ -1135,11 +419,8 @@ class ContentRepositoryTest extends RailcontentTestCase
         $content = [
             'slug' => $this->faker->word,
             'status' => ContentService::STATUS_PUBLISHED,
-            'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
-            'position' => $this->faker->numberBetween(),
             'language' => 'en-US',
-            'parent_id' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
         ];
         $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
@@ -1163,11 +444,8 @@ class ContentRepositoryTest extends RailcontentTestCase
         $linkedContent = [
             'slug' => $this->faker->word,
             'status' => ContentService::STATUS_PUBLISHED,
-            'type' => $this->faker->word,
             'brand' => ConfigService::$brand,
-            'position' => $this->faker->numberBetween(),
             'language' => 'en-US',
-            'parent_id' => null,
             'published_on' => null,
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => null,
@@ -1181,7 +459,8 @@ class ContentRepositoryTest extends RailcontentTestCase
             'position' => null,
         ];
 
-        $linkedContentFieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($linkedContentField);
+        $linkedContentFieldId =
+            $this->query()->table(ConfigService::$tableFields)->insertGetId($linkedContentField);
 
         $this->query()->table(ConfigService::$tableContentFields)->insertGetId(
             [
@@ -1190,21 +469,24 @@ class ContentRepositoryTest extends RailcontentTestCase
             ]
         );
 
-        $expectedResults = array_merge($content, [
-            'id' => $contentId,
-            'fields' => [
-                array_merge($field, ['id' => $fieldId]),
-                array_merge($linkedContentField, ['id' => $linkedContentFieldId])
+        $expectedResults = array_merge(
+            $content,
+            [
+                'id' => $contentId,
+                'fields' => [
+                    array_merge($field, ['id' => $fieldId]),
+                    array_merge($linkedContentField, ['id' => $linkedContentFieldId])
+                ]
             ]
-        ]);
-        $results = $this->classBeingTested->getBySlug($content['slug']);
+        );
+        $results = $this->classBeingTested->getBySlugHierarchy($content['slug']);
 
         $this->assertEquals($expectedResults, $results);
     }
 
     public function test_get_by_slug_not_exist()
     {
-        $results = $this->classBeingTested->getBySlug($this->faker->word());
+        $results = $this->classBeingTested->getBySlugHierarchy($this->faker->word);
 
         $this->assertNull($results);
     }

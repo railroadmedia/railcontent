@@ -28,7 +28,6 @@ class FieldRepository extends RepositoryBase
             ]
         )->first();
 
-
         if (empty($existing)) {
             return $this->query()->insertGetId(
                 [
@@ -91,6 +90,36 @@ class FieldRepository extends RepositoryBase
                 'translation_' . ConfigService::$tableFields . '.value as translate_value'
             )
             ->where(['key' => $key, 'translate_value' => $value])->get()->first();
+    }
+
+    /**
+     * Get the content and the associated field from database
+     *
+     * @param integer $fieldId
+     * @param integer $contentId
+     * @return mixed
+     */
+    public function getLinkedField($fieldId, $contentId)
+    {
+        return $this->query()
+            ->leftJoin(
+                ConfigService::$tableContentFields,
+                'field_id',
+                '=',
+                ConfigService::$tableFields . '.id'
+            )
+            ->select(
+                ConfigService::$tableContentFields . '.*',
+                ConfigService::$tableFields . '.*'
+            )
+            ->where(
+                [
+                    'field_id' => $fieldId,
+                    'content_id' => $contentId
+                ]
+            )
+            ->get()
+            ->first();
     }
 
     /** Generate the query builder

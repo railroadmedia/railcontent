@@ -46,7 +46,7 @@ class ContentRepository extends RepositoryBase
     private $limit;
     private $orderBy;
     private $orderDirection;
-    private $types = [];
+    private $includedParentSlugs = [];
     private $contentId;
     private $slug;
 
@@ -66,6 +66,11 @@ class ContentRepository extends RepositoryBase
     private $datumRepository;
 
     /**
+     * @var ContentHierarchyRepository
+     */
+    private $contentHierarchyRepository;
+
+    /**
      * @var DatabaseManager
      */
     private $databaseManager;
@@ -76,11 +81,14 @@ class ContentRepository extends RepositoryBase
      * @param PermissionRepository $permissionRepository
      * @param FieldRepository $fieldRepository
      * @param DatumRepository $datumRepository
+     * @param ContentHierarchyRepository $contentHierarchyRepository
+     * @param DatabaseManager $databaseManager
      */
     public function __construct(
         PermissionRepository $permissionRepository,
         FieldRepository $fieldRepository,
         DatumRepository $datumRepository,
+        ContentHierarchyRepository $contentHierarchyRepository,
         DatabaseManager $databaseManager
     ) {
         parent::__construct();
@@ -88,6 +96,7 @@ class ContentRepository extends RepositoryBase
         $this->permissionRepository = $permissionRepository;
         $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
+        $this->contentHierarchyRepository = $contentHierarchyRepository;
         $this->databaseManager = $databaseManager;
     }
 
@@ -119,7 +128,7 @@ class ContentRepository extends RepositoryBase
      */
     public function getManyByParentSlug($parentSlug)
     {
-
+        return $this->filter(false)->where('parent_slug', $parentSlug)->get()->toArray();
     }
 
     /**
@@ -180,128 +189,23 @@ class ContentRepository extends RepositoryBase
      * delete the content and reposition the content children.
      *
      * @param int $id
-     * @param bool $deleteChildren
      * @return int
      */
-    public function delete($id, $deleteChildren = false)
+    public function delete($id)
     {
-        if (!$deleteChildren) {
-            $this->unlinkChildren($id);
-        }
+        $this->contentHierarchyRepository->deleteChildParentLinks($id);
+        $this->contentHierarchyRepository->deleteParentChildLinks($id);
 
-        // todo: unlink fields, data, permissions, playlists
-        // todo: reposition all parents children
+        $this->unlinkFields($id);
+        $this->unlinkData($id);
+
+        // todo: unlink permissions, playlists
 
         $amountOfDeletedRows = $this->queryTable()
             ->where('id', $id)
             ->delete();
 
         return $amountOfDeletedRows > 0;
-    }
-
-    /**
-     * Update content position and call function that recalculate position for other children
-     *
-     * @param int $contentId
-     * @param string $type
-     * @param int $newPosition
-     * @param int|null $oldPosition
-     */
-    public function reposition($contentId, $type, $newPosition, $oldPosition = null)
-    {
-        $parentContentId = $this->queryTable()
-                ->where('id', $contentId)
-                ->first(['parent_id'])
-            ['parent_id'] ?? null;
-
-        $childContentCount = $this->queryTable()
-            ->where('parent_id', $parentContentId)
-            ->where('type', $type)
-            ->count();
-
-        if ($newPosition < 1) {
-            $newPosition = 1;
-        } elseif ($newPosition > $childContentCount) {
-            $newPosition = $childContentCount;
-        }
-
-        $this->transaction(
-            function () use ($oldPosition, $type, $contentId, $newPosition, $parentContentId) {
-                $this->queryTable()
-                    ->where('id', $contentId)
-                    ->update(
-                        ['position' => $newPosition]
-                    );
-
-                $this->otherChildrenRepositions(
-                    $parentContentId,
-                    $contentId,
-                    $type,
-                    $newPosition,
-                    $oldPosition
-                );
-            }
-        );
-    }
-
-    /** Update position for other categories with the same parent id
-     *
-     * @param $parentContentId
-     * @param $contentId
-     * @param $type
-     * @param $newPosition
-     * @param null $oldPosition
-     * @return int
-     */
-    function otherChildrenRepositions(
-        $parentContentId,
-        $contentId,
-        $type,
-        $newPosition = null,
-        $oldPosition = null
-    ) {
-        if (!is_null($newPosition) && !is_null($oldPosition) && $newPosition > $oldPosition) {
-
-            // content position is being updated to larger position in the stack
-            return $this->queryTable()
-                ->where('parent_id', $parentContentId)
-                ->where('id', '!=', $contentId)
-                ->where('position', '>', $oldPosition)
-                ->where('position', '<=', $newPosition)
-                ->where('type', $type)
-                ->decrement('position');
-
-        } elseif (!is_null($newPosition) && !is_null($oldPosition) && $newPosition < $oldPosition) {
-
-            // content position is being updated to smaller position in the stack
-            return $this->queryTable()
-                ->where('parent_id', $parentContentId)
-                ->where('id', '!=', $contentId)
-                ->where('position', '<', $oldPosition)
-                ->where('position', '>=', $newPosition)
-                ->where('type', $type)
-                ->increment('position');
-
-        } elseif (is_null($oldPosition)) {
-
-            // content is being created with position anywhere in stack
-            return $this->queryTable()
-                ->where('parent_id', $parentContentId)
-                ->where('id', '!=', $contentId)
-                ->where('position', '>=', $newPosition)
-                ->where('type', $type)
-                ->increment('position');
-        } else {
-
-            // content is being deleted
-            return $this->queryTable()
-                ->where('parent_id', $parentContentId)
-                ->where('id', '!=', $contentId)
-                ->where('position', '>=', $oldPosition)
-                ->where('type', $type)
-                ->decrement('position');
-
-        }
     }
 
     /**
@@ -312,6 +216,8 @@ class ContentRepository extends RepositoryBase
      */
     public function unlinkFields($contentId)
     {
+        // todo: move to field repository
+
         return $this->contentFieldsQuery()->where('content_id', $contentId)->delete();
     }
 
@@ -331,6 +237,8 @@ class ContentRepository extends RepositoryBase
      */
     public function unlinkData($contentId)
     {
+        // todo: move to data repository
+
         return $this->contentDataQuery()->where('content_id', $contentId)->delete();
     }
 
@@ -343,17 +251,6 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * Unlink content children.
-     *
-     * @param integer $id
-     * @return integer
-     */
-    public function unlinkChildren($id)
-    {
-        return $this->queryTable()->where('parent_id', $id)->update(['parent_id' => null]);
-    }
-
-    /**
      * Delete a specific content field link
      *
      * @param $contentId
@@ -362,6 +259,8 @@ class ContentRepository extends RepositoryBase
      */
     public function unlinkField($contentId, $fieldId)
     {
+        // todo: move to field repository
+
         return $this->contentFieldsQuery()
             ->where('content_id', $contentId)
             ->where('field_id', $fieldId)
@@ -377,6 +276,8 @@ class ContentRepository extends RepositoryBase
      */
     public function unlinkDatum($contentId, $datumId)
     {
+        // todo: move to data repository
+
         return $this->contentDataQuery()
             ->where('content_id', $contentId)
             ->where('datum_id', $datumId)
@@ -392,6 +293,8 @@ class ContentRepository extends RepositoryBase
      */
     public function linkDatum($contentId, $datumId)
     {
+        // todo: move to data repository
+
         return $this->contentDataQuery()->insertGetId(
             [
                 'content_id' => $contentId,
@@ -409,88 +312,14 @@ class ContentRepository extends RepositoryBase
      */
     public function linkField($contentId, $fieldId)
     {
+        // todo: move to field repository
+
         return $this->contentFieldsQuery()->insertGetId(
             [
                 'content_id' => $contentId,
                 'field_id' => $fieldId
             ]
         );
-    }
-
-    /**
-     * Get the content and the linked datum from database
-     *
-     * @param integer $datumId
-     * @param integer $contentId
-     * @return mixed
-     */
-    public function getLinkedDatum($datumId, $contentId)
-    {
-        $dataIdLabel = ConfigService::$tableData . '.id';
-
-        return $this->contentDataQuery()
-            ->leftJoin(ConfigService::$tableData, 'datum_id', '=', $dataIdLabel)
-            ->select(
-                ConfigService::$tableContentData . '.*',
-                ConfigService::$tableData . '.*'
-            )
-            ->where(
-                [
-                    'datum_id' => $datumId,
-                    'content_id' => $contentId
-                ]
-            )
-            ->get()
-            ->first();
-    }
-
-    /**
-     * Get the content and the associated field from database
-     *
-     * @param integer $fieldId
-     * @param integer $contentId
-     * @return mixed
-     */
-    public function getLinkedField($fieldId, $contentId)
-    {
-        $fieldIdLabel = ConfigService::$tableFields . '.id';
-
-        return
-            $this->contentFieldsQuery()
-                ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel)
-                ->select(
-                    ConfigService::$tableContentFields . '.*',
-                    ConfigService::$tableFields . '.*'
-                )
-                ->where(
-                    [
-                        'field_id' => $fieldId,
-                        'content_id' => $contentId
-                    ]
-                )
-                ->get()
-                ->first();
-    }
-
-    /**
-     * Get the content and the associated field from database based on key
-     *
-     * @param string $key
-     * @param integer $contentId
-     * @return mixed
-     */
-    public function getContentLinkedFieldByKey($key, $contentId)
-    {
-        $fieldIdLabel = ConfigService::$tableFields . '.id';
-
-        return $this->contentFieldsQuery()
-            ->leftJoin(ConfigService::$tableFields, 'field_id', '=', $fieldIdLabel)
-            ->where(
-                [
-                    'key' => $key,
-                    'content_id' => $contentId
-                ]
-            )->get()->first();
     }
 
     /**
@@ -504,9 +333,6 @@ class ContentRepository extends RepositoryBase
                     ConfigService::$tableContent . '.id as id',
                     ConfigService::$tableContent . '.slug as slug',
                     ConfigService::$tableContent . '.status as status',
-                    ConfigService::$tableContent . '.type as type',
-                    ConfigService::$tableContent . '.position as position',
-                    ConfigService::$tableContent . '.parent_id as parent_id',
                     ConfigService::$tableContent . '.published_on as published_on',
                     ConfigService::$tableContent . '.created_on as created_on',
                     ConfigService::$tableContent . '.archived_on as archived_on',
@@ -546,6 +372,18 @@ class ContentRepository extends RepositoryBase
                 'allfieldsvalue.id',
                 '=',
                 'allcontentfields.field_id'
+            )
+            ->leftJoin(
+                ConfigService::$tableContentHierarchy . ' as content_hierarchy',
+                'content_hierarchy.child_id',
+                '=',
+                ConfigService::$tableContent . 'id'
+            )
+            ->leftJoin(
+                ConfigService::$tableContent . ' as inherited_content',
+                ConfigService::$tableContent . '.id',
+                '=',
+                ConfigService::$tableContentHierarchy . 'parent_id'
             )
             ->leftJoin(
                 ConfigService::$tableContentPermissions,
@@ -623,14 +461,14 @@ class ContentRepository extends RepositoryBase
             ConfigService::$tableContent . '.id as id',
             ConfigService::$tableContent . '.slug as slug',
             ConfigService::$tableContent . '.status as status',
-            ConfigService::$tableContent . '.type as type',
-            ConfigService::$tableContent . '.position as position',
-            ConfigService::$tableContent . '.parent_id as parent_id',
             ConfigService::$tableContent . '.language as language',
             ConfigService::$tableContent . '.published_on as published_on',
             ConfigService::$tableContent . '.created_on as created_on',
             ConfigService::$tableContent . '.archived_on as archived_on',
             ConfigService::$tableContent . '.brand as brand',
+            'inherited_content.slug as parent_slug',
+            ConfigService::$tableContentHierarchy . '.parent_id as parent_id',
+            ConfigService::$tableContentHierarchy . '.child_position as parent_child_position',
         ];
 
         if ($includeJoins) {
@@ -681,6 +519,7 @@ class ContentRepository extends RepositoryBase
     private function parseBaseQueryRows(array $rows)
     {
         $contents = [];
+        $parents = [];
         $fields = [];
         $data = [];
 
@@ -689,9 +528,6 @@ class ContentRepository extends RepositoryBase
                 'id' => $row['id'],
                 'slug' => $row['slug'],
                 'status' => $row['status'],
-                'type' => $row['type'],
-                'position' => $row['position'],
-                'parent_id' => $row['parent_id'],
                 'language' => $row['language'],
                 'brand' => $row['brand'],
                 'published_on' => $row['published_on'],
@@ -733,11 +569,25 @@ class ContentRepository extends RepositoryBase
                     array_map("unserialize", array_unique(array_map("serialize", $data[$row['id']])));
             }
 
+            if (!empty($row['parent_id'])) {
+                $parent = [
+                    'parent_child_position' => $row['parent_child_position'],
+                    'id' => $row['parent_id'],
+                    'slug' => $row['parent_slug'],
+                ];
+
+                $parents[$row['id']][] = $parent;
+
+                $parents[$row['id']] =
+                    array_map("unserialize", array_unique(array_map("serialize", $parents[$row['id']])));
+            }
+
         }
 
         foreach ($contents as $contentId => $content) {
             $contents[$contentId]['fields'] = $fields[$contentId] ?? null;
             $contents[$contentId]['data'] = $data[$contentId] ?? null;
+            $contents[$contentId]['parents'] = $parents[$contentId] ?? null;
 
             $contents[$contentId] =
                 array_map("unserialize", array_unique(array_map("serialize", $contents[$contentId])));
@@ -751,7 +601,7 @@ class ContentRepository extends RepositoryBase
      * @param $limit
      * @param $orderBy
      * @param $orderDirection
-     * @param array $types
+     * @param array $includedParentSlugs
      * @return $this
      */
     public function startFilter(
@@ -759,13 +609,13 @@ class ContentRepository extends RepositoryBase
         $limit,
         $orderBy,
         $orderDirection,
-        array $types
+        array $includedParentSlugs
     ) {
         $this->page = $page;
         $this->limit = $limit;
         $this->orderBy = $orderBy;
         $this->orderDirection = $orderDirection;
-        $this->types = $types;
+        $this->includedParentSlugs = $includedParentSlugs;
 
         // reset all the filters for the new query
         $this->requiredFields = [];
@@ -879,10 +729,23 @@ class ContentRepository extends RepositoryBase
     private function filter($pagination = true)
     {
         $subLimitQuery = $this->baseQuery(false)
-            ->select(ConfigService::$tableContent . '.id as id');
+            ->select(ConfigService::$tableContent . '.id as id')
+            ->groupBy(ConfigService::$tableContent . '.id')
+            ->leftJoin(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.child_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->leftJoin(
+                ConfigService::$tableContent . ' as inherited_content',
+                'inherited_content.id',
+                '=',
+                ConfigService::$tableContentHierarchy . '.parent_id'
+            );
 
-        if (!empty($this->types)) {
-            $subLimitQuery->whereIn(ConfigService::$tableContent . '.type', $this->types);
+        if (!empty($this->includedParentSlugs)) {
+            $subLimitQuery->whereIn('inherited_content.slug', $this->includedParentSlugs);
         }
 
         if (!empty($this->contentId)) {
@@ -1126,7 +989,7 @@ class ContentRepository extends RepositoryBase
 
         if ($pagination) {
             $subLimitQuery
-                ->orderBy($this->orderBy, $this->orderDirection)
+                ->orderBy(ConfigService::$tableContent . '.' . $this->orderBy, $this->orderDirection)
                 ->limit($this->limit)
                 ->skip(($this->page - 1) * $this->limit);
         }
@@ -1139,14 +1002,14 @@ class ContentRepository extends RepositoryBase
                     ConfigService::$tableContent . '.id as id',
                     ConfigService::$tableContent . '.slug as slug',
                     ConfigService::$tableContent . '.status as status',
-                    ConfigService::$tableContent . '.type as type',
-                    ConfigService::$tableContent . '.position as position',
-                    ConfigService::$tableContent . '.parent_id as parent_id',
                     ConfigService::$tableContent . '.language as language',
                     ConfigService::$tableContent . '.published_on as published_on',
                     ConfigService::$tableContent . '.created_on as created_on',
                     ConfigService::$tableContent . '.archived_on as archived_on',
                     ConfigService::$tableContent . '.brand as brand',
+                    'inherited_content.slug as parent_slug',
+                    ConfigService::$tableContentHierarchy . '.parent_id as parent_id',
+                    ConfigService::$tableContentHierarchy . '.child_position as parent_child_position',
                     ConfigService::$tableFields . '.id as field_id',
                     ConfigService::$tableFields . '.key as field_key',
                     ConfigService::$tableFields . '.value as field_value',
@@ -1181,6 +1044,18 @@ class ContentRepository extends RepositoryBase
                 ConfigService::$tableData . '.id',
                 '=',
                 ConfigService::$tableContentData . '.datum_id'
+            )
+            ->leftJoin(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.child_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->leftJoin(
+                ConfigService::$tableContent . ' as inherited_content',
+                'inherited_content.id',
+                '=',
+                ConfigService::$tableContentHierarchy . '.parent_id'
             )
             ->join(
                 $this->databaseManager->raw('(' . $subLimitQueryString . ') inner_content'),

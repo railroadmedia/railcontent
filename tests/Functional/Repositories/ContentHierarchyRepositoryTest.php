@@ -49,7 +49,7 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
         for ($i = 0; $i < 3; $i++) {
             $this->classBeingTested->updateOrCreateChildToParentLink($parentId, $i + 1);
         }
-        
+
         $result = $this->classBeingTested->updateOrCreateChildToParentLink($parentId, $childId, $position);
 
         $this->assertTrue($result);
@@ -373,6 +373,21 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
                 'child_position' => 1
             ]
         );
+    }
+
+    public function test_delete_parent_child_links()
+    {
+        $parentId = rand();
+
+        for ($i = 0; $i < 6; $i++) {
+            $this->classBeingTested->updateOrCreateChildToParentLink($parentId, $i + 1);
+        }
+
+        $result = $this->classBeingTested->deleteParentChildLinks($parentId);
+
+        $this->assertTrue($result);
+
+        $this->assertDatabaseMissing(ConfigService::$tableContentHierarchy, ['parent_id' => $parentId]);
     }
 
 }
