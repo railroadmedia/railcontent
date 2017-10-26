@@ -3,7 +3,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Railroad\Railcontent\Services\ConfigService;
 
 class UserContentRequest extends FormRequest

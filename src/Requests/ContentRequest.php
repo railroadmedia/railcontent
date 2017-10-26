@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Requests;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService as ContentService;
 
-class ContentRequest extends FormRequest
+class ContentRequest extends CustomFormRequest
 {
     protected $generalRules;
 

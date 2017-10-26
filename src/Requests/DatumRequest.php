@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Requests;
 use Railroad\Railcontent\Services\ConfigService;
 
 
-class DatumRequest extends FormRequest
+class DatumRequest extends CustomFormRequest
 {
     /**
      * Get the validation rules that apply to the request.

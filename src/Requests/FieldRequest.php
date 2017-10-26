@@ -4,7 +4,7 @@ namespace Railroad\Railcontent\Requests;
 
 use Railroad\Railcontent\Services\ConfigService;
 
-class FieldRequest extends FormRequest
+class FieldRequest extends CustomFormRequest
 {
     /**
      * Get the validation rules that apply to the request.

@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 
 class ContentIndexRequest extends FormRequest
 {

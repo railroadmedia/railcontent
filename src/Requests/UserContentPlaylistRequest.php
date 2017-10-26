@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Railroad\Railcontent\Services\ConfigService;
 
 class UserContentPlaylistRequest extends FormRequest
