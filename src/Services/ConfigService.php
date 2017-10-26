@@ -22,6 +22,11 @@ class ConfigService
     /**
      * @var string
      */
+    public static $tableContentHierarchy;
+
+    /**
+     * @var string
+     */
     public static $tableVersions;
 
     /**

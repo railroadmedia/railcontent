@@ -6,6 +6,7 @@ return [
 
     'tables' => [
         'content' => 'railcontent_content',
+        'content_hierarchy' => 'railcontent_content_hierarchy',
         'versions' => 'railcontent_content_versions',
         'fields' => 'railcontent_fields',
         'content_fields' => 'railcontent_content_fields',

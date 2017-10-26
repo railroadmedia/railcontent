@@ -105,17 +105,21 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * @param string $slug
-     * @param int|null $parentId
+     * @param array $slugs
      * @return array|null
      */
-    public function getBySlug($slug, $parentId = null)
+    public function getBySlugHierarchy(...$slugs)
     {
-        $this->slug = $slug;
 
-        $content = $this->parseBaseQueryRows($this->filter(false)->get()->toArray()) ?? null;
+    }
 
-        return array_shift($content) ?? null;
+    /**
+     * @param string|null $parentSlug
+     * @return array|null
+     */
+    public function getManyByParentSlug($parentSlug)
+    {
+
     }
 
     /**
@@ -123,79 +127,52 @@ class ContentRepository extends RepositoryBase
      *
      * @param string $slug
      * @param string $status
-     * @param string $type
      * @param string $brand
-     * @param integer $position
      * @param string $language |null
-     * @param integer|null $parentId
      * @param string|null $publishedOn
+     * @param string|null $createdOn
+     * @param string|null $archivedOn
      * @return int
      */
-    public function create($slug, $status, $type, $brand, $position, $language, $parentId, $publishedOn)
-    {
-        $contentId = $this->queryTable()->insertGetId(
-            [
-                'slug' => $slug,
-                'status' => $status,
-                'type' => $type,
-                'brand' => $brand,
-                'position' => $position,
-                'language' => $language,
-                'parent_id' => $parentId,
-                'published_on' => $publishedOn,
-                'created_on' => Carbon::now()->toDateTimeString(),
-            ]
-        );
-
-        $this->reposition($contentId, $type, $position);
+    public function create(
+        $slug,
+        $status,
+        $brand,
+        $language,
+        $publishedOn,
+        $createdOn = null,
+        $archivedOn = null
+    ) {
+        $contentId = $this->queryTable()
+            ->insertGetId(
+                [
+                    'slug' => $slug,
+                    'status' => $status,
+                    'brand' => $brand,
+                    'language' => $language,
+                    'published_on' => $publishedOn,
+                    'created_on' => $createdOn ?? Carbon::now()->toDateTimeString(),
+                    'archived_on' => $archivedOn
+                ]
+            );
 
         return $contentId;
     }
 
     /**
-     * Update a content record, recalculate position and return the content id
+     * Update a content record, recalculate position and return whether a row was updated or not.
      *
      * @param $id
-     * @param string $slug
-     * @param string $status
-     * @param string $type
-     * @param integer $position
-     * @param string|null $language
-     * @param integer|null $parentId
-     * @param string|null $publishedOn
-     * @param string|null $archivedOn
-     * @return int $categoryId
+     * @param array $newData
+     * @return bool
      */
-    public function update(
-        $id,
-        $slug,
-        $status,
-        $type,
-        $position,
-        $language,
-        $parentId,
-        $publishedOn,
-        $archivedOn
-    ) {
-        $oldPosition = $this->queryTable()->where('id', $id)->first(['position'])['position'] ?? null;
+    public function update($id, array $newData)
+    {
+        $amountOfUpdatedRows = $this->queryTable()
+            ->where('id', $id)
+            ->update($newData);
 
-        $this->queryTable()->where('id', $id)->update(
-            [
-                'slug' => $slug,
-                'status' => $status,
-                'type' => $type,
-                'position' => $position,
-                'language' => $language,
-                'parent_id' => $parentId,
-                'published_on' => $publishedOn,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => $archivedOn,
-            ]
-        );
-
-        $this->reposition($id, $type, $position, $oldPosition);
-
-        return $id;
+        return $amountOfUpdatedRows > 0;
     }
 
     /**
@@ -208,28 +185,18 @@ class ContentRepository extends RepositoryBase
      */
     public function delete($id, $deleteChildren = false)
     {
-        $contentBeingDeleted = $this->queryTable()
-            ->where('id', $id)
-            ->first();
-
-        $this->unlinkFields($id);
-        $this->unlinkData($id);
-
-        if ($deleteChildren) {
+        if (!$deleteChildren) {
             $this->unlinkChildren($id);
         }
 
-        $delete = $this->queryTable()->where('id', $id)->delete();
+        // todo: unlink fields, data, permissions, playlists
+        // todo: reposition all parents children
 
-        $this->otherChildrenRepositions(
-            $contentBeingDeleted['parent_id'],
-            $id,
-            $contentBeingDeleted['type'],
-            null,
-            $contentBeingDeleted['position']
-        );
+        $amountOfDeletedRows = $this->queryTable()
+            ->where('id', $id)
+            ->delete();
 
-        return $delete;
+        return $amountOfDeletedRows > 0;
     }
 
     /**
@@ -1228,5 +1195,13 @@ class ContentRepository extends RepositoryBase
         }
 
         return $query;
+    }
+
+    /**
+     * @return Builder
+     */
+    private function queryHierarchyTable()
+    {
+        return $this->connection()->table(ConfigService::$tableContentHierarchy);
     }
 }
