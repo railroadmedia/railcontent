@@ -4,7 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\VersionRepository;
+use Railroad\Railcontent\Repositories\ContentVersionRepository;
 
 class VersionService
 {
@@ -15,7 +15,7 @@ class VersionService
     private $request;
 
     public function __construct(
-        VersionRepository $versionRepository,
+        ContentVersionRepository $versionRepository,
         Request $request,
         ContentRepository $contentRepository
     ) {

@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 
-class VersionRepository extends RepositoryBase
+class ContentVersionRepository extends RepositoryBase
 {
 
     /**

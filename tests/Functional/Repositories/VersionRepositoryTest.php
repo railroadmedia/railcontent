@@ -3,14 +3,14 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Repositories\VersionRepository;
+use Railroad\Railcontent\Repositories\ContentVersionRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class VersionRepositoryTest extends RailcontentTestCase
 {
     /**
-     * @var VersionRepository
+     * @var ContentVersionRepository
      */
     protected $classBeingTested;
 
@@ -18,7 +18,7 @@ class VersionRepositoryTest extends RailcontentTestCase
     {
         parent::setUp();
 
-        $this->classBeingTested = $this->app->make(VersionRepository::class);
+        $this->classBeingTested = $this->app->make(ContentVersionRepository::class);
     }
 
     public function test_store_content_version()

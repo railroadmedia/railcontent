@@ -40,6 +40,24 @@ class DatumRepository extends RepositoryBase
     }
 
     /**
+     * Insert a new record in railcontent_content_data
+     *
+     * @param integer $contentId
+     * @param integer $datumId
+     * @return int
+     */
+    public function linkContentToDatum($contentId, $datumId)
+    {
+        return $this->query()->insertGetId(
+            [
+                'content_id' => $contentId,
+                'datum_id' => $datumId
+            ]
+        );
+    }
+
+
+    /**
      * @return Builder
      */
     public function query()
@@ -79,6 +97,37 @@ class DatumRepository extends RepositoryBase
             )
             ->where(['key' => $key, 'value' => $value])->get()->first();
     }
+
+    /**
+     * Unlink all datum for a content id.
+     *
+     * @param $contentId
+     * @return int
+     */
+    public function unlinkContentData($contentId)
+    {
+        // todo: move to data repository
+
+        return $this->query()->where('content_id', $contentId)->delete();
+    }
+
+    /**
+     * Delete a specific content datum link
+     *
+     * @param $contentId
+     * @param null $datumId
+     * @return int
+     */
+    public function unlinkContentDatum($contentId, $datumId)
+    {
+        // todo: move to data repository
+
+        return $this->query()
+            ->where('content_id', $contentId)
+            ->where('datum_id', $datumId)
+            ->delete();
+    }
+
 
     /**
      * @param Builder $query

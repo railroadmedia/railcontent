@@ -52,6 +52,23 @@ class FieldRepository extends RepositoryBase
     }
 
     /**
+     * Insert a new record in railcontent_content_fields
+     *
+     * @param integer $contentId
+     * @param integer $fieldId
+     * @return int
+     */
+    public function linkFieldToContent($contentId, $fieldId)
+    {
+        return $this->query()->insertGetId(
+            [
+                'content_id' => $contentId,
+                'field_id' => $fieldId
+            ]
+        );
+    }
+
+    /**
      * @return Builder
      */
     public function query()
@@ -121,6 +138,33 @@ class FieldRepository extends RepositoryBase
             ->get()
             ->first();
     }
+
+    /**
+     * Unlink all fields for a content id.
+     *
+     * @param $contentId
+     * @return int
+     */
+    public function unlinkContentFields($contentId)
+    {
+        return $this->query()->where('content_id', $contentId)->delete();
+    }
+
+    /**
+     * Delete a specific content field link
+     *
+     * @param $contentId
+     * @param null $fieldId
+     * @return int
+     */
+    public function unlinkContentField($contentId, $fieldId)
+    {
+        return $this->query()
+            ->where('content_id', $contentId)
+            ->where('field_id', $fieldId)
+            ->delete();
+    }
+
 
     /** Generate the query builder
      *
