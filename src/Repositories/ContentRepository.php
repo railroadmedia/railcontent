@@ -115,7 +115,7 @@ class ContentRepository extends RepositoryBase
     {
         $query = $this->initQuery();
 
-        $this->addInheritedContentToQuery($query);
+        //$this->addInheritedContentToQuery($query);
         $this->addFieldsAndDatumToQuery($query);
 
         return $this->parseRows(
@@ -143,7 +143,7 @@ class ContentRepository extends RepositoryBase
         $query = $this->initQuery();
 
         $this->addFieldsAndDatumToQuery($query);
-        $this->addInheritedContentToQuery($query);
+        //$this->addInheritedContentToQuery($query);
         $this->addFilteringToQuery($query);
 
         return $query->where('parent_slug', $parentSlug)->get()->toArray();
@@ -157,7 +157,7 @@ class ContentRepository extends RepositoryBase
         $mainQuery = $this->initQuery();
 
         $this->addFieldsAndDatumToQuery($mainQuery);
-        $this->addInheritedContentToQuery($mainQuery);
+        //$this->addInheritedContentToQuery($mainQuery);
         $this->addFilteringToQuery($mainQuery);
 
         $mainQuery->select([ConfigService::$tableContent . '.id'])
@@ -373,14 +373,14 @@ class ContentRepository extends RepositoryBase
     {
         $subQuery = $this->initQuery();
 
-        $this->addInheritedContentToQuery($subQuery);
+        //  $this->addInheritedContentToQuery($subQuery);
         $this->addFieldsAndDatumToQuery($subQuery);
         $this->addFilteringToQuery($subQuery);
         $this->addPaginationToQuery($subQuery);
 
         $query = $this->initQuery();
 
-        $this->addInheritedContentToQuery($query);
+        //$this->addInheritedContentToQuery($query);
         $this->addFieldsAndDatumToQuery($query);
         $this->addSubJoinToQuery($query, $subQuery);
 
@@ -484,21 +484,31 @@ class ContentRepository extends RepositoryBase
         // todo: fix, this doesn't work properly
 
         if (!empty($this->includedParentSlugs)) {
-            $subQuery = $this->initQuery();
+            $query->where(
+                function (Builder $builder) use ($query) {
+                    $parentsSlugs = $this->includedParentSlugs;
+                    $builder->whereExists(
+                        function (Builder $builder) use ($parentsSlugs) {
+                            $builder
+                                ->select([ConfigService::$tableContentHierarchy . '.child_id'])
+                                ->from(ConfigService::$tableContentHierarchy)
+                                ->join(
+                                    ConfigService::$tableContent . ' as inherited_content',
+                                    ConfigService::$tableContentHierarchy . '.parent_id',
+                                    '=',
+                                    'inherited_content.id'
+                                )
+                                ->whereIn('inherited_content.slug', $parentsSlugs)
+                                ->where([ConfigService::$tableContentHierarchy .
+                                '.child_id' => $this->databaseManager->raw(
+                                    ConfigService::$tableContent . '.id')
+                                ]);
 
-            $this->addInheritedContentToQuery($subQuery);
-
-            $subQuery->select([ConfigService::$tableContent . '.id'])
-                ->whereIn('inherited_content.slug', $this->includedParentSlugs);
-
-            $query
-                ->join(
-                    $this->databaseManager->raw('(' . $subQuery->toSql() . ') inner_content_2'),
-                    function (JoinClause $joinClause) {
-                        $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content_2.id');
-                    }
-                )
-                ->addBinding($subQuery->getBindings());
+                            return $builder;
+                        }
+                    );
+                }
+            );
         }
 
         // exclusive field filters
