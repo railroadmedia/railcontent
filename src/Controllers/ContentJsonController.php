@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -41,6 +42,10 @@ class ContentJsonController extends Controller
             foreach ($filterValues as $filterString) {
                 $parsedFilters[$filterName][] = explode(',', $filterString);
             }
+        }
+
+        if ($request->has('statuses') && $request->get('auth_level') == 'administrator') {
+            ContentRepository::$availableContentStatues = $request->get('statuses');
         }
 
         $contentData = $this->contentService->getFiltered(
@@ -120,6 +125,7 @@ class ContentJsonController extends Controller
     {
         $content = $this->contentService->create(
             $request->get('slug'),
+            $request->get('type'),
             $request->get('status'),
             $request->input('language') ?? ConfigService::$defaultLanguage,
             $request->get('published_on')

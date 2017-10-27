@@ -46,6 +46,7 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
          *
          */
 
+        $type = $this->faker->word;
         $startedState = UserContentService::STATE_STARTED;
         $completeState = UserContentService::STATE_COMPLETED;
         $userId = $this->faker->randomNumber();
@@ -54,7 +55,8 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
             $userState = $this->userStateFactory->create(
@@ -70,7 +72,8 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 10; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
 
@@ -83,12 +86,12 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
             ->requireUserStates(
                 $userId,
                 $startedState
             )
-            ->get();
+            ->retrieveFilter();
 
         $this->assertEquals([6, 7, 8], array_column($rows, 'id'));
     }
@@ -104,6 +107,7 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
         *
         */
 
+        $type = $this->faker->word;
         $startedState = UserContentService::STATE_STARTED;
         $completedState = UserContentService::STATE_COMPLETED;
         $userId = $this->faker->randomNumber();
@@ -112,7 +116,8 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 3; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
         }
@@ -120,7 +125,8 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
             $userState = $this->userStateFactory->create(
@@ -136,7 +142,8 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 10; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
 
@@ -149,7 +156,7 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
             ->includeUserStates(
                 $userId,
                 $startedState
@@ -158,7 +165,7 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
                 $userId,
                 $completedState
             )
-            ->get();
+            ->retrieveFilter();
 
         $this->assertEquals([7, 8, 9], array_column($rows, 'id'));
     }

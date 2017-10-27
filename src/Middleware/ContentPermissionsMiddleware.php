@@ -32,6 +32,9 @@ class ContentPermissionsMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        // todo: for testing! remove
+        $request->attributes->set('auth_level', 'administrator');
+
         if ($request->get('auth_level') == 'administrator') {
 
             // admins can see drafts, archived lessons, and future content by default
