@@ -52,6 +52,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
          *
          */
 
+        $type = $this->faker->word;
         $userId = $this->faker->randomNumber();
 
         $requiredUserPlaylistName = $this->faker->word;
@@ -80,7 +81,8 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
 
@@ -96,7 +98,8 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
 
@@ -120,7 +123,8 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 10; $i++) {
             $expectedContent = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
 
@@ -147,7 +151,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
             ->requireUserPlaylist(
                 $requiredUserPlaylistUserId,
                 $requiredUserPlaylistName
@@ -172,6 +176,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
          *
          */
 
+        $type = $this->faker->word;
         $userId = $this->faker->numberBetween();
         $includedUserPlaylistName = $this->faker->word;
 
@@ -186,7 +191,8 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
 
@@ -202,7 +208,8 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 10; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
 
@@ -215,7 +222,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
             ->includeUserPlaylist(
                 $userId,
                 $includedUserPlaylistName
@@ -236,6 +243,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
          *
          */
 
+        $type = $this->faker->word;
         $userId = $this->faker->numberBetween();
         $includedUserPlaylistName = $this->faker->word;
         $otherIncludedUserPlaylistName = $this->faker->word;
@@ -258,7 +266,8 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
 
@@ -274,7 +283,8 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
 
@@ -297,7 +307,8 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 10; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
 
@@ -325,7 +336,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(3, 3, 'id', 'asc', [])
+        $rows = $this->classBeingTested->startFilter(3, 3, 'id', 'asc', [$type], [])
             ->includeUserPlaylist(
                 $userId,
                 $includedUserPlaylistName
@@ -350,6 +361,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
          *
          */
 
+        $type = $this->faker->word;
         $userId = $this->faker->numberBetween();
         $requiredUserPlaylistName = $this->faker->word;
         $otherRequiredUserPlaylistName = $this->faker->word;
@@ -388,7 +400,8 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 5; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
 
@@ -404,7 +417,8 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
 
@@ -435,7 +449,8 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
         for ($i = 0; $i < 10; $i++) {
             $content = $this->contentFactory->create(
                 [
-                    1 => ContentService::STATUS_PUBLISHED,
+                    1 => $type,
+                    2 => ContentService::STATUS_PUBLISHED,
                 ]
             );
 
@@ -470,7 +485,7 @@ class ContentRepositoryPlaylistFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
             ->requireUserPlaylist(
                 $userId,
                 $requiredUserPlaylistName

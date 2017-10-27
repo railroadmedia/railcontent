@@ -47,7 +47,8 @@ class ContentJsonController extends Controller
             $request->get('page', 1),
             $request->get('limit', 10),
             $request->get('sort', 'published_on'),
-            $request->get('included_parent_slugs', []),
+            $request->get('included_types', []),
+            $request->get('slug_hierarchy', []),
             $parsedFilters['required_fields'] ?? [],
             $parsedFilters['included_fields'] ?? [],
             $parsedFilters['required_user_states'] ?? [],
@@ -120,10 +121,7 @@ class ContentJsonController extends Controller
         $content = $this->contentService->create(
             $request->get('slug'),
             $request->get('status'),
-            $request->get('type'),
-            $request->get('position'),
             $request->input('language') ?? ConfigService::$defaultLanguage,
-            $request->get('parent_id'),
             $request->get('published_on')
         );
 

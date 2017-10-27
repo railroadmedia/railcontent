@@ -88,7 +88,8 @@ class ContentService
      * @param int $page
      * @param int $limit
      * @param string $orderByAndDirection
-     * @param array $includedParentSlugs
+     * @param array $includedTypes
+     * @param array $slugHierarchy
      * @param array $requiredFields
      * @param array $includedFields
      * @param array $requiredUserStates
@@ -101,7 +102,8 @@ class ContentService
         $page,
         $limit,
         $orderByAndDirection,
-        array $includedParentSlugs,
+        array $includedTypes,
+        array $slugHierarchy,
         array $requiredFields = [],
         array $includedFields = [],
         array $requiredUserStates = [],
@@ -117,7 +119,8 @@ class ContentService
             $limit,
             $orderByColumn,
             $orderByDirection,
-            $includedParentSlugs
+            $includedTypes,
+            $slugHierarchy
         );
 
         foreach ($requiredFields as $requiredField) {
@@ -151,6 +154,7 @@ class ContentService
      * Call the create method from ContentRepository and return the new created content
      *
      * @param string $slug
+     * @param string $type
      * @param string $status
      * @param string|null $language
      * @param string|null $publishedOn
@@ -159,6 +163,7 @@ class ContentService
      */
     public function create(
         $slug,
+        $type,
         $status,
         $language,
         $publishedOn,
@@ -167,6 +172,7 @@ class ContentService
         $id =
             $this->contentRepository->create(
                 $slug,
+                $type,
                 $status,
                 ConfigService::$brand,
                 $language ?? ConfigService::$defaultLanguage,

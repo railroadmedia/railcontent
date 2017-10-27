@@ -32,6 +32,7 @@ class ContentFactory extends FactoryBase
         $parameters =
             $parameterOverwrites + [
                 $this->contentService->slugify($this->faker->words(rand(2, 6), true)),
+                $this->faker->word,
                 $this->faker->randomElement(
                     [
                         ContentService::STATUS_PUBLISHED,

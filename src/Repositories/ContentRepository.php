@@ -46,14 +46,8 @@ class ContentRepository extends RepositoryBase
     private $limit;
     private $orderBy;
     private $orderDirection;
-    private $includedParentSlugs = [];
-    private $contentId;
-    private $slug;
-
-    /**
-     * @var Builder
-     */
-    private $query;
+    private $typesToInclude = [];
+    private $slugHierarchy = [];
 
     /**
      * @var PermissionRepository
@@ -135,41 +129,31 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * @param string|null $parentSlug
-     * @return array|null
-     */
-    public function getManyByParentSlug($parentSlug)
-    {
-        $query = $this->initQuery();
-
-        $this->addFieldsAndDatumToQuery($query);
-        //$this->addInheritedContentToQuery($query);
-        $this->addFilteringToQuery($query);
-
-        return $query->where('parent_slug', $parentSlug)->get()->toArray();
-    }
-
-    /**
      * @return int
      */
     public function countFilter()
     {
-        $mainQuery = $this->initQuery();
+        $subQuery = $this->initQuery();
 
-        $this->addFieldsAndDatumToQuery($mainQuery);
-        //$this->addInheritedContentToQuery($mainQuery);
-        $this->addFilteringToQuery($mainQuery);
+        $this->addSlugInheritanceToQuery($subQuery);
+        $this->addFilteringToQuery($subQuery);
 
-        $mainQuery->select([ConfigService::$tableContent . '.id'])
+        $query = $this->initQuery();
+
+        $this->addFieldsAndDatumToQuery($query);
+        $this->addSlugInheritanceToQuery($query);
+        $this->addSubJoinToQuery($query, $subQuery);
+
+        $query->select([ConfigService::$tableContent . '.id'])
             ->groupBy(
                 ConfigService::$tableContent . '.id',
                 ConfigService::$tableContent . '.' . $this->orderBy
             );
 
         return $this->connection()->table(
-            $this->databaseManager->raw('(' . $mainQuery->toSql() . ') as rows')
+            $this->databaseManager->raw('(' . $query->toSql() . ') as rows')
         )
-            ->addBinding($mainQuery->getBindings())
+            ->addBinding($query->getBindings())
             ->count();
     }
 
@@ -177,6 +161,7 @@ class ContentRepository extends RepositoryBase
      * Insert a new content in the database and recalculate position
      *
      * @param string $slug
+     * @param string $type
      * @param string $status
      * @param string $brand
      * @param string $language |null
@@ -187,6 +172,7 @@ class ContentRepository extends RepositoryBase
      */
     public function create(
         $slug,
+        $type,
         $status,
         $brand,
         $language,
@@ -198,6 +184,7 @@ class ContentRepository extends RepositoryBase
             ->insertGetId(
                 [
                     'slug' => $slug,
+                    'type' => $type,
                     'status' => $status,
                     'brand' => $brand,
                     'language' => $language,
@@ -265,6 +252,7 @@ class ContentRepository extends RepositoryBase
             $content = [
                 'id' => $row['id'],
                 'slug' => $row['slug'],
+                'type' => $row['type'],
                 'status' => $row['status'],
                 'language' => $row['language'],
                 'brand' => $row['brand'],
@@ -339,7 +327,8 @@ class ContentRepository extends RepositoryBase
      * @param $limit
      * @param $orderBy
      * @param $orderDirection
-     * @param array $includedParentSlugs
+     * @param array $typesToInclude
+     * @param array $slugHierarchy
      * @return $this
      */
     public function startFilter(
@@ -347,13 +336,15 @@ class ContentRepository extends RepositoryBase
         $limit,
         $orderBy,
         $orderDirection,
-        array $includedParentSlugs
+        array $typesToInclude,
+        array $slugHierarchy
     ) {
         $this->page = $page;
         $this->limit = $limit;
         $this->orderBy = $orderBy;
         $this->orderDirection = $orderDirection;
-        $this->includedParentSlugs = $includedParentSlugs;
+        $this->typesToInclude = $typesToInclude;
+        $this->slugHierarchy = $slugHierarchy;
 
         // reset all the filters for the new query
         $this->requiredFields = [];
@@ -373,15 +364,14 @@ class ContentRepository extends RepositoryBase
     {
         $subQuery = $this->initQuery();
 
-        //  $this->addInheritedContentToQuery($subQuery);
-        $this->addFieldsAndDatumToQuery($subQuery);
+        $this->addSlugInheritanceToQuery($subQuery);
         $this->addFilteringToQuery($subQuery);
         $this->addPaginationToQuery($subQuery);
 
         $query = $this->initQuery();
 
-        //$this->addInheritedContentToQuery($query);
         $this->addFieldsAndDatumToQuery($query);
+        $this->addSlugInheritanceToQuery($query);
         $this->addSubJoinToQuery($query, $subQuery);
 
         return $this->parseRows($query->get()->toArray());
@@ -464,52 +454,93 @@ class ContentRepository extends RepositoryBase
         return $this;
     }
 
+    private function addSlugInheritanceToQuery(Builder &$query)
+    {
+        $previousTableName = ConfigService::$tableContent;
+        $previousTableJoinColumn = '.id';
+
+        foreach ($this->slugHierarchy as $i => $slug) {
+            $tableName = 'inheritance_' . $i;
+
+            $query->leftJoin(
+                ConfigService::$tableContentHierarchy . ' as ' . $tableName,
+                $tableName . '.child_id',
+                '=',
+                $previousTableName . $previousTableJoinColumn
+            );
+
+            $inheritedContentTableName = 'inherited_content_' . $i;
+
+            $query->leftJoin(
+                ConfigService::$tableContent . ' as ' . $inheritedContentTableName,
+                $inheritedContentTableName . '.id',
+                '=',
+                $tableName . '.parent_id'
+            );
+
+            $query->addSelect([$tableName . '.child_position as child_position_' . $i]);
+            $query->addSelect([$tableName . '.parent_id as parent_id_' . $i]);
+            $query->addSelect([$inheritedContentTableName . '.slug as parent_slug_' . $i]);
+
+            $previousTableName = $tableName;
+            $previousTableJoinColumn = '.parent_id';
+        }
+    }
+
     /**
      * @param Builder $query
      */
     private function addFilteringToQuery(Builder &$query)
     {
         if (is_array(self::$availableContentStatues)) {
-            $query = $query->whereIn('status', self::$availableContentStatues);
+            $query->whereIn('status', self::$availableContentStatues);
         }
 
         if (is_array(self::$includedLanguages)) {
-            $query = $query->whereIn('language', self::$includedLanguages);
+            $query->whereIn('language', self::$includedLanguages);
         }
 
         if (!self::$pullFutureContent) {
-            $query = $query->where('published_on', '<', Carbon::now()->toDateTimeString());
+            $query->where('published_on', '<', Carbon::now()->toDateTimeString());
         }
 
-        // todo: fix, this doesn't work properly
-
-        if (!empty($this->includedParentSlugs)) {
-            $query->where(
-                function (Builder $builder) use ($query) {
-                    $parentsSlugs = $this->includedParentSlugs;
-                    $builder->whereExists(
-                        function (Builder $builder) use ($parentsSlugs) {
-                            $builder
-                                ->select([ConfigService::$tableContentHierarchy . '.child_id'])
-                                ->from(ConfigService::$tableContentHierarchy)
-                                ->join(
-                                    ConfigService::$tableContent . ' as inherited_content',
-                                    ConfigService::$tableContentHierarchy . '.parent_id',
-                                    '=',
-                                    'inherited_content.id'
-                                )
-                                ->whereIn('inherited_content.slug', $parentsSlugs)
-                                ->where([ConfigService::$tableContentHierarchy .
-                                '.child_id' => $this->databaseManager->raw(
-                                    ConfigService::$tableContent . '.id')
-                                ]);
-
-                            return $builder;
-                        }
-                    );
-                }
-            );
+        if (!empty($this->typesToInclude)) {
+            $query->whereIn(ConfigService::$tableContent . '.type', $this->typesToInclude);
         }
+
+        foreach (array_reverse($this->slugHierarchy) as $i => $slug) {
+            $query->where('parent_slug_' . $i, $slug);
+        }
+
+//        dd($query->orderBy(ConfigService::$tableContent . '.id')->get()->toArray());
+
+//        if (!empty($this->includedParentSlugs)) {
+//            $query->where(
+//                function (Builder $builder) use ($query) {
+//                    $parentsSlugs = $this->includedParentSlugs;
+//                    $builder->whereExists(
+//                        function (Builder $builder) use ($parentsSlugs) {
+//                            $builder
+//                                ->select([ConfigService::$tableContentHierarchy . '.child_id'])
+//                                ->from(ConfigService::$tableContentHierarchy)
+//                                ->join(
+//                                    ConfigService::$tableContent . ' as inherited_content',
+//                                    ConfigService::$tableContentHierarchy . '.parent_id',
+//                                    '=',
+//                                    'inherited_content.id'
+//                                )
+//                                ->whereIn('inherited_content.slug', $parentsSlugs)
+//                                ->where([ConfigService::$tableContentHierarchy .
+//                                '.child_id' => $this->databaseManager->raw(
+//                                    ConfigService::$tableContent . '.id')
+//                                ]);
+//
+//                            return $builder;
+//                        }
+//                    );
+//                }
+//            );
+//        }
 
         // exclusive field filters
         $query->where(
@@ -855,6 +886,7 @@ class ContentRepository extends RepositoryBase
                 [
                     ConfigService::$tableContent . '.id as id',
                     ConfigService::$tableContent . '.slug as slug',
+                    ConfigService::$tableContent . '.type as type',
                     ConfigService::$tableContent . '.status as status',
                     ConfigService::$tableContent . '.language as language',
                     ConfigService::$tableContent . '.brand as brand',

@@ -20,6 +20,7 @@ class CreateContentTable extends Migration
                 $table->increments('id');
                 
                 $table->string('slug', 255)->index();
+                $table->string('type', 128)->index();
                 $table->string('status', 64)->index();
                 $table->string('brand', 64)->index();
                 $table->string('language', 16)->index();
