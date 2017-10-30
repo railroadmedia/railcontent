@@ -225,8 +225,10 @@ class ContentRepository extends RepositoryBase
         $this->contentHierarchyRepository->deleteChildParentLinks($id);
         $this->contentHierarchyRepository->deleteParentChildLinks($id);
 
-        $this->fieldRepository->unlinkContentFields($id);
-        $this->datumRepository->unlinkContentData($id);
+        $this->unlinkContentFields($id);
+        $this->unlinkContentData($id);
+        $this->unlinkContentPermission($id);
+        $this->unlinkContentPlaylist($id);
 
         // todo: unlink permissions, playlists
 
@@ -907,5 +909,131 @@ class ContentRepository extends RepositoryBase
     private function query()
     {
         return $this->connection()->table(ConfigService::$tableContent);
+    }
+
+    /**
+     * @return Builder
+     */
+    private function contentDataQuery()
+    {
+        return $this->connection()->table(ConfigService::$tableContentData);
+    }
+
+    /**
+     * @return Builder
+     */
+    private function contentFieldsQuery()
+    {
+        return $this->connection()->table(ConfigService::$tableContentFields);
+    }
+
+    /**
+     * @return Builder
+     */
+    private function contentPermissionQuery()
+    {
+        return $this->connection()->table(ConfigService::$tableContentPermissions);
+    }
+
+    /**
+     * @return Builder
+     */
+    private function userContentQuery()
+    {
+        return $this->connection()->table(ConfigService::$tableUserContent);
+    }
+
+    /**
+     * @return Builder
+     */
+    private function fieldQuery()
+    {
+        return $this->connection()->table(ConfigService::$tableFields);
+    }
+
+    /**
+     * @return Builder
+     */
+    private function userPlaylistQuery()
+    {
+        return $this->connection()->table(ConfigService::$tableUserContentPlaylists);
+    }
+
+
+    /**
+     * Unlink all data for a content id.
+     *
+     * @param $contentId
+     * @return int
+     */
+    private function unlinkContentData($contentId)
+    {
+        return $this->contentDataQuery()->where(
+            [
+                'content_id' => $contentId
+            ]
+        )->delete();
+    }
+
+    /**
+     * Unlink all fields for a content id.
+     *
+     * @param $contentId
+     * @return int
+     */
+    private function unlinkContentFields($contentId)
+    {
+        return $this->contentFieldsQuery()->where(
+            [
+                'content_id' => $contentId
+            ]
+        )->delete();
+    }
+
+    /** Delete all the permissions for the content_id
+     * @param integer $contentId
+     * @return int
+     */
+    private function unlinkContentPermission($contentId)
+    {
+        return $this->contentPermissionQuery()->where(
+            [
+                'content_id' => $contentId
+            ]
+        )->delete();
+    }
+
+    private function unlinkContentPlaylist($contentId)
+    {
+        $userContents = $this->userContentQuery()->where([
+            'content_id' => $contentId
+        ]) ->get()->toArray();
+
+        foreach($userContents as $userContent){
+            $this->userPlaylistQuery()->where([
+                'content_user_id' => $userContent['id']
+            ]) -> delete();
+
+            $this->userContentQuery()->where([
+                'id' => $userContent['id']
+            ])->delete();
+        }
+
+        return true;
+    }
+
+    public function getLinkedContent($contentId)
+    {
+        return $this->fieldQuery()
+            ->join(ConfigService::$tableContentFields,
+                ConfigService::$tableContentFields.'.field_id',
+                '=',
+                ConfigService::$tableFields.'.id')
+            ->where(
+                [
+                    'value' => $contentId,
+                    'type' => 'content_id'
+                ]
+            )->get()->toArray();
     }
 }

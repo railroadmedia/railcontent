@@ -70,7 +70,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(201, $response->status());
     }
 
     public function test_store_not_pass_the_validation()
@@ -80,11 +80,18 @@ class ContentJsonControllerTest extends RailcontentTestCase
         //expecting it to redirect us to previous page.
         $this->assertEquals(422, $response->status());
 
-        $this->assertEquals(2, count(json_decode($response->content(), true)));
-
         //check that all the error messages are received
-        $this->assertArrayHasKey('status', json_decode($response->content(), true));
-        $this->assertArrayHasKey('type', json_decode($response->content(), true));
+        $errors = [
+            [
+                'source' => "status",
+                "detail" => "The status field is required."]
+            ,
+            [
+                'source' => "type",
+                "detail" => "The type field is required."
+            ]
+        ];
+        $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
 
     }
 
@@ -108,10 +115,15 @@ class ContentJsonControllerTest extends RailcontentTestCase
         //expecting it to redirect us to previous page.
         $this->assertEquals(422, $response->status());
 
-        $this->assertEquals(1, count(json_decode($response->content(), true)));
+        //check that all the error messages are received
+        $errors = [
+            [
+                'source' => "position",
+                "detail" => "The position must be at least 0."
+            ]
 
-        //the position should be positive value; check that the error message id received
-        $this->assertArrayHasKey('position', json_decode($response->content(), true));
+        ];
+        $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
     }
 
     public function test_store_with_custom_validation_and_slug_huge()
@@ -131,13 +143,16 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        //expecting it to redirect us to previous page.
         $this->assertEquals(422, $response->status());
 
-        $this->assertEquals(1, count(json_decode($response->content(), true)));
+        $errors = [
+            [
+                'source' => "slug",
+                "detail" => "The slug may not be greater than 64 characters."
+            ]
 
-        //check that all the error messages are received
-        $this->assertArrayHasKey('slug', json_decode($response->content(), true));
+        ];
+        $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
     }
 
     public function test_store_published_on_not_required()
@@ -181,17 +196,18 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $response->assertJson(
-            [
-                'id' => '1',
-                'slug' => $slug,
-                'position' => 1,
-                'brand' => ConfigService::$brand,
-                'parent_id' => null,
-                'language' => ConfigService::$defaultLanguage,
-                'status' => $status,
-                'type' => $type,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null,
+            ['status' => 'ok',
+                'code' => 201,
+                'results' =>
+                    [
+                        'id' => '1',
+                        'slug' => $slug,
+                        'brand' => ConfigService::$brand,
+                        'language' => ConfigService::$defaultLanguage,
+                        'status' => $status,
+                        'type' => $type,
+                        'created_on' => Carbon::now()->toDateTimeString()
+                    ]
             ]
         );
     }
@@ -204,29 +220,17 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_DRAFT;
         $parentId = null;
 
-        $content = $this->serviceBeingTested->create($slug, $status, $type, $position, null, $parentId);
+        $content = $this->serviceBeingTested->create($slug, $type, $status, null, null, null);
 
         $expectedResult = [
             'id' => 1,
             'slug' => $slug,
-            'position' => 1,
-            'parent_id' => null,
             'status' => $status,
             'type' => $type,
             'created_on' => Carbon::now()->toDateTimeString(),
             'published_on' => null,
-            'archived_on' => null,
             'brand' => ConfigService::$brand,
-            'language' => ConfigService::$defaultLanguage,
-            'field_id' => null,
-            'field_key' => null,
-            'field_value' => null,
-            'field_type' => null,
-            'field_position' => null,
-            'datum_id' => null,
-            'datum_value' => null,
-            'datum_key' => null,
-            'datum_position' => null
+            'language' => ConfigService::$defaultLanguage
         ];
 
         $this->assertEquals($expectedResult, $content);
@@ -235,14 +239,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_update_response_status()
     {
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create([]);
 
         $response = $this->call(
             'PUT',
             'railcontent/content/' . $content['id'],
             [
                 'slug' => $content['slug'],
-                'position' => 1,
                 'status' => ContentService::STATUS_DRAFT,
                 'type' => $this->faker->word
             ]
@@ -419,7 +422,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_controller_delete_method_response_status()
     {
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create([]);
 
         $response = $this->call('DELETE', 'railcontent/content/' . $content['id'], ['deleteChildren' => 1]);
 
@@ -442,14 +445,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_can_not_delete_content_linked()
     {
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create([]);
         $contentId = $content['id'];
 
-        $content2 = $this->contentFactory->create();
+        $content2 = $this->contentFactory->create([]);
         $contentId2 = $content2['id'];
 
         // content linked
-        $linkedContent = $this->contentFactory->create();
+        $linkedContent = $this->contentFactory->create([]);
         $linkedContentId = $linkedContent['id'];
 
         $fieldKey = $this->faker->word;
@@ -480,12 +483,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call('DELETE', 'railcontent/content/' . $linkedContentId);
 
         $this->assertEquals(
-            '"This content is being referenced by other content (' .
+            'This content is being referenced by other content (' .
             $contentId .
-            ', ' .
+            ',' .
             $contentId2 .
-            '), you must delete that content first."',
-            $response->content()
+            '), you must delete that content first.',
+            json_decode($response->content(), true)['error']['detail']
         );
 
         $this->assertEquals(404, $response->status());

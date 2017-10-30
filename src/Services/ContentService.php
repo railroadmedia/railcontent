@@ -358,14 +358,22 @@ class ContentService
     }
 
     /**
-     * Get a collection with the contents Ids, where the content it's linked
+     * Return a string with the linked contents Ids
      *
      * @param integer $contentId
-     * @return \Illuminate\Support\Collection
+     * @return string
      */
     public function linkedWithContent($contentId)
     {
-        return $this->contentRepository->linkedWithContent($contentId);
+        $linkedWithContent = $this->contentRepository->getLinkedContent($contentId);
+
+        $linkedContentsIds = implode(',', array_pluck($linkedWithContent, ['content_id']));
+
+        request()->request->add([
+            'linked_content_ids' => $linkedContentsIds
+        ]);
+
+        return $linkedContentsIds;
     }
 
     /**

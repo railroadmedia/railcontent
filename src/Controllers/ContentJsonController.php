@@ -4,7 +4,9 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Railroad\Railcontent\Exceptions\ContentNotFoundException;
+use Railroad\Railcontent\Exceptions\ContentReferencedByOtherContentException;
+use Railroad\Railcontent\Exceptions\RailcontentException;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -84,21 +86,10 @@ class ContentJsonController extends Controller
     {
         $content = $this->contentService->getById($id);
 
-        if (empty($content)) {
-            return response()->json(
-                [
-                    'status' => 'error',
-                    'code' => 404,
-                    'total_results' => 0,
-                    'results' => [],
-                    'error' => [
-                        'title' => 'Content not found.',
-                        'detail' => 'No content with id ' . $id . ' exists.',
-                    ]
-                ],
-                404
-            );
-        }
+        $request->request->add(['content_id' => $id]);
+
+        //check if content exist; if not throw exception
+        throw_unless($content, ContentNotFoundException::class);
 
         return response()->json(
             [
@@ -150,11 +141,10 @@ class ContentJsonController extends Controller
     public function update($contentId, ContentRequest $request)
     {
         $content = $this->contentService->getById($contentId);
+        request()->request->add(['content_id' => $contentId]);
 
-        //check if content exist
-        if (empty($content)) {
-            return response()->json('Update failed, content not found with id: ' . $contentId, 404);
-        }
+        //check if content exist; if not throw exception
+        throw_unless($content, ContentNotFoundException::class);
 
         //call the event that save a new content version in the database
         event(new ContentUpdated($content['id']));
@@ -172,7 +162,14 @@ class ContentJsonController extends Controller
             $request->input('archived_on')
         );
 
-        return response()->json($content, 201);
+        return response()->json(
+            [
+                'status' => 'ok',
+                'code' => 201,
+                'results' => $content
+            ],
+            201
+        );
     }
 
     /**
@@ -188,32 +185,27 @@ class ContentJsonController extends Controller
 
         $content = $this->contentService->getById($contentId);
 
-        //check if content exist
-        if (empty($content)) {
-            return response()->json('Delete failed, content not found with id: ' . $contentId, 404);
-        }
+        $request->request->add(['content_id' => $contentId]);
 
-        //check if the content it's being referenced by other content
+        //check if content exist; if not throw exception
+        throw_unless($content, ContentNotFoundException::class);
+
+        //check if the content it's being referenced by other content; it yes throw an exception
         $linkedWithContent = $this->contentService->linkedWithContent($contentId);
 
-        if ($linkedWithContent->isNotEmpty()) {
-            $ids = $linkedWithContent->implode('content_id', ', ');
+        throw_if($linkedWithContent, ContentReferencedByOtherContentException::class);
 
-            return response()->json(
-                'This content is being referenced by other content (' .
-                $ids .
-                '), you must delete that content first.',
-                404
-            );
-        }
-
-        //call the event that save a new content version in the database
+         //call the event that save a new content version in the database
         event(new ContentUpdated($contentId));
 
         //delete content
-        $deleted = $this->contentService->delete($contentId, $request->input('delete_children'));
+        $this->contentService->delete($contentId, $request->input('delete_children'));
 
-        return response()->json($deleted, 200);
+        return response()->json(
+            null,
+            204
+        );
+        //return response()->json($deleted, 200);
     }
 
     /**

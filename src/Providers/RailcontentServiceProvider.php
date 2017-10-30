@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Providers;
 
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Railroad\Railcontent\Exceptions\RailcontentException;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use PDO;
@@ -52,6 +54,8 @@ class RailcontentServiceProvider extends ServiceProvider
 
         //load package routes file
         $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
+
+        $this->app->singleton('Illuminate\Contracts\Debug\ExceptionHandler','Railroad\Railcontent\Exceptions\RailcontentException');
     }
 
     private function setupConfig()

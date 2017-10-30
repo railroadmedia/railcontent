@@ -132,17 +132,6 @@ class FieldRepository extends RepositoryBase
     }
 
     /**
-     * Unlink all fields for a content id.
-     *
-     * @param $contentId
-     * @return int
-     */
-    public function unlinkContentFields($contentId)
-    {
-        return $this->query()->where('content_id', $contentId)->delete();
-    }
-
-    /**
      * Delete a specific content field link
      *
      * @param $contentId
