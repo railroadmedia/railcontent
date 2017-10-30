@@ -28,7 +28,7 @@ class ContentHierarchyFactory extends FactoryBase
      * @param array $parameterOverwrites
      * @return void
      */
-    public function create(array $parameterOverwrites)
+    public function create(array $parameterOverwrites = [])
     {
         $parameters =
             $parameterOverwrites + [

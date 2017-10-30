@@ -23,5 +23,5 @@ abstract class FactoryBase
      * @param array $parameterOverwrites
      * @return mixed
      */
-    public abstract function create(array $parameterOverwrites);
+    public abstract function create(array $parameterOverwrites = []);
 }

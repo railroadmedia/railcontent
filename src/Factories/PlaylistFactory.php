@@ -27,7 +27,7 @@ class PlaylistFactory extends FactoryBase
      * @param array $parameterOverwrites
      * @return array
      */
-    public function create(array $parameterOverwrites)
+    public function create(array $parameterOverwrites = [])
     {
         $parameters =
             $parameterOverwrites + [

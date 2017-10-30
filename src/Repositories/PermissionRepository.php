@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Services\ConfigService;
@@ -23,7 +24,11 @@ class PermissionRepository extends RepositoryBase
      * @var bool|array
      */
     public static $availableContentPermissionIds = false;
-    protected $search, $databaseManager;
+
+    /**
+     * @var DatabaseManager
+     */
+    protected $databaseManager;
 
     /**
      * Create a new permisssion and return the permission id
@@ -33,7 +38,7 @@ class PermissionRepository extends RepositoryBase
      */
     public function create($name)
     {
-        $permissionId = $this->queryTable()->insertGetId(
+        $permissionId = $this->query()->insertGetId(
             [
                 'name' => $name,
                 'created_on' => Carbon::now()->toDateTimeString(),
@@ -41,16 +46,6 @@ class PermissionRepository extends RepositoryBase
         );
 
         return $permissionId;
-    }
-
-    /**
-     * @return Builder
-     */
-    public function queryTable()
-    {
-        return parent::connection()->table(ConfigService::$tablePermissions)->select(
-            ConfigService::$tablePermissions . '.*'
-        );
     }
 
     /**
@@ -62,7 +57,7 @@ class PermissionRepository extends RepositoryBase
      */
     public function update($id, $name)
     {
-        return $this->queryTable()->where(['id' => $id])->update(['name' => $name]) > 0;
+        return $this->query()->where(['id' => $id])->update(['name' => $name]) > 0;
     }
 
     /**
@@ -73,14 +68,14 @@ class PermissionRepository extends RepositoryBase
      */
     public function delete($id)
     {
-        $delete = $this->queryTable()->where('id', $id)->delete();
+        $delete = $this->query()->where('id', $id)->delete();
 
         return $delete;
     }
 
     public function getAll()
     {
-        $query = $this->queryTable();
+        $query = $this->query();
 
         return $query->get();
     }
@@ -93,41 +88,13 @@ class PermissionRepository extends RepositoryBase
      */
     public function getById($id)
     {
-        $query = $this->queryTable();
+        $query = $this->query();
 
         return $query
             ->select(
                 ConfigService::$tablePermissions . '.*'
             )
             ->where(ConfigService::$tablePermissions . '.id', $id)->get()->first();
-    }
-
-    /**
-     * Return the content ids or type that are linked with the permission
-     *
-     * @param $id
-     * @return mixed
-     */
-    public function linkedWithContent($id)
-    {
-        $contentIdLabel = ConfigService::$tableContent . '.id';
-
-        return $this->contentPermissionQuery()
-            ->select('content_id', 'content_type')
-            ->leftJoin(ConfigService::$tableContent, 'content_id', '=', $contentIdLabel)
-            ->where(
-                [
-                    'required_permission_id' => $id
-                ]
-            )->get();
-    }
-
-    /**
-     * @return Builder
-     */
-    public function contentPermissionQuery()
-    {
-        return parent::connection()->table(ConfigService::$tableContentPermissions);
     }
 
     /**
@@ -154,48 +121,22 @@ class PermissionRepository extends RepositoryBase
         return $permissionId;
     }
 
-    /** Generate the query builder
-     *
-     * @param Builder $query
+    /**
      * @return Builder
      */
-    public function restrictContentQueryByPermissions(Builder $query)
+    public function query()
     {
-        if (is_array(self::$availableContentPermissionIds)) {
-
-            $query
-                ->leftJoin(
-                    ConfigService::$tableContentPermissions,
-                    function (JoinClause $join) {
-                        return $join
-                            ->on(
-                                ConfigService::$tableContentPermissions . '.content_id',
-                                ConfigService::$tableContent . '.id'
-                            )
-                            ->orOn(
-                                ConfigService::$tableContentPermissions . '.content_type',
-                                ConfigService::$tableContent . '.type'
-                            );
-                    }
-                )
-                ->leftJoin(
-                    ConfigService::$tablePermissions,
-                    ConfigService::$tablePermissions . '.id',
-                    '=',
-                    ConfigService::$tableContentPermissions . '.required_permission_id'
-                )
-                ->where(
-                    function (Builder $builder) {
-                        return $builder->whereNull(ConfigService::$tablePermissions . '.id')
-                            ->orWhereIn(
-                               ConfigService::$tablePermissions . '.name',
-                                self::$availableContentPermissionIds
-                            );
-                    }
-                );
-
-        }
-
-        return $query;
+        return parent::connection()->table(ConfigService::$tablePermissions)->select(
+            ConfigService::$tablePermissions . '.*'
+        );
     }
+
+    /**
+     * @return Builder
+     */
+    public function contentPermissionQuery()
+    {
+        return parent::connection()->table(ConfigService::$tableContentPermissions);
+    }
+
 }

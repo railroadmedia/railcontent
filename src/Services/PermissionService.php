@@ -27,6 +27,17 @@ class PermissionService
     }
 
     /**
+     * Call getById method from PermissionRepository and return the permission
+     *
+     * @param integer $id
+     * @return mixed
+     */
+    public function getById($id)
+    {
+        return $this->permissionRepository->getById($id);
+    }
+
+    /**
      * Call the create method from PermissionRepository and return the new permission
      *
      * @param string $name
@@ -37,17 +48,6 @@ class PermissionService
         $permissionId = $this->permissionRepository->create($name);
 
         return $this->getById($permissionId);
-    }
-
-    /**
-     * Call getById method from PermissionRepository and return the permission
-     *
-     * @param integer $id
-     * @return mixed
-     */
-    public function getById($id)
-    {
-        return $this->permissionRepository->getById($id);
     }
 
     /**
@@ -74,19 +74,7 @@ class PermissionService
     {
         return $this->permissionRepository->delete($id) > 0;
     }
-
-    /**
-     * Call the method that check if the permission it's linked with content ids or content types from PermissionRepository
-     * and return the content ids, content types that are linked
-     *
-     * @param integer $id
-     * @return mixed
-     */
-    public function linkedWithContent($id)
-    {
-        return $this->permissionRepository->linkedWithContent($id);
-    }
-
+    
     /**
      * Attach permission to a specific content($contentId) or to all content of a certain type($contentType)
      *

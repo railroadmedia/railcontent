@@ -897,6 +897,39 @@ class ContentRepository extends RepositoryBase
                     ConfigService::$tableContent . '.archived_on as archived_on',
                 ]
             )
+            ->leftJoin(
+                ConfigService::$tableContentPermissions,
+                function (JoinClause $join) {
+                    return $join
+                        ->on(
+                            ConfigService::$tableContentPermissions . '.content_id',
+                            ConfigService::$tableContent . '.id'
+                        )
+                        ->orOn(
+                            ConfigService::$tableContentPermissions . '.content_type',
+                            ConfigService::$tableContent . '.type'
+                        );
+                }
+            )
+            ->leftJoin(
+                ConfigService::$tablePermissions,
+                ConfigService::$tablePermissions . '.id',
+                '=',
+                ConfigService::$tableContentPermissions . '.required_permission_id'
+            )
+            ->where(
+                function (Builder $builder) {
+                    if (is_array(PermissionRepository::$availableContentPermissionIds)) {
+                        return $builder->whereNull(ConfigService::$tablePermissions . '.id')
+                            ->orWhereIn(
+                                ConfigService::$tablePermissions . '.id',
+                                PermissionRepository::$availableContentPermissionIds
+                            );
+                    }
+
+                    return $builder;
+                }
+            )
             ->orderBy(
                 ConfigService::$tableContent . '.' . ($this->orderBy ?? 'published_on'),
                 $this->orderDirection ?? 'desc'

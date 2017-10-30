@@ -2,25 +2,25 @@
 
 namespace Railroad\Railcontent\Factories;
 
-use Railroad\Railcontent\Services\PlaylistsService;
+use Railroad\Railcontent\Services\PermissionService;
 
-class UserPlaylistFactory extends FactoryBase
+class ContentPermissionsFactory extends FactoryBase
 {
     /**
-     * @var PlaylistsService
+     * @var PermissionService
      */
-    private $playlistsService;
+    private $permissionService;
 
     /**
      * ContentFactory constructor.
      *
-     * @param PlaylistsService $playlistsService
+     * @param PermissionService $permissionService
      */
-    public function __construct(PlaylistsService $playlistsService)
+    public function __construct(PermissionService $permissionService)
     {
         parent::__construct();
 
-        $this->playlistsService = $playlistsService;
+        $this->permissionService = $permissionService;
     }
 
     /**
@@ -33,11 +33,13 @@ class UserPlaylistFactory extends FactoryBase
             $parameterOverwrites + [
                 $this->faker->randomNumber(),
                 $this->faker->randomNumber(),
-                $this->faker->randomNumber()
+                $this->faker->boolean() ? $this->faker->word : null,
             ];
 
         ksort($parameters);
 
-        return $this->playlistsService->addToPlaylist(...$parameters);
+        $content = $this->permissionService->assign(...$parameters);
+
+        return $content;
     }
 }

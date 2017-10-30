@@ -27,7 +27,7 @@ class UserStateFactory extends FactoryBase
      * @param array $parameterOverwrites
      * @return mixed
      */
-    public function create(array $parameterOverwrites)
+    public function create(array $parameterOverwrites = [])
     {
         $parameters =
             $parameterOverwrites + [
