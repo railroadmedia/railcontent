@@ -30,22 +30,19 @@ class DatumService
     }
 
     /**
-     * Create a new datum, link the content with the new created datum and
-     * return the content with the linked datum
+     * Create a new datum, link the content with the new created datum.
      *
      * @param integer $contentId
      * @param string $key
      * @param string $value
      * @param integer $position
-     * @return array
+     * @return int
      */
     public function createDatum($contentId, $key, $value, $position)
     {
         $dataId = $this->datumRepository->updateOrCreateDatum(null, $key, $value, $position);
 
-        $this->contentRepository->linkDatum($contentId, $dataId);
-
-        return $this->contentRepository->getLinkedDatum($dataId, $contentId);
+        return $this->datumRepository->linkContentToDatum($contentId, $dataId);
     }
 
     /**
@@ -60,32 +57,17 @@ class DatumService
      */
     public function updateDatum($contentId, $dataId, $key, $value, $position)
     {
-        $this->datumRepository->updateOrCreateDatum($dataId, $key, $value, $position);
-
-        return $this->contentRepository->getLinkedDatum($dataId, $contentId);
+        return $this->datumRepository->updateOrCreateDatum($dataId, $key, $value, $position);
     }
 
     /**
      * Call the repository method to unlink the content's datum
      *
-     * @param integer $dataId
-     * @param integer $contentId
+     * @param $id
      * @return bool
      */
-    public function deleteDatum($dataId, $contentId)
+    public function deleteDatum($id)
     {
-        return $this->contentRepository->unlinkDatum($contentId, $dataId);
-    }
-
-    /**
-     * Return the content with the linked data
-     *
-     * @param integer $dataId
-     * @param integer $contentId
-     * @return array
-     */
-    public function getDatum($dataId, $contentId)
-    {
-        return $this->contentRepository->getLinkedDatum($dataId, $contentId);
+        return $this->datumRepository->deleteDatum($id);
     }
 }

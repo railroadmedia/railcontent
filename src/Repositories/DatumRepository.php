@@ -48,7 +48,7 @@ class DatumRepository extends RepositoryBase
      */
     public function linkContentToDatum($contentId, $datumId)
     {
-        return $this->query()->insertGetId(
+        return $this->contentDatumQuery()->insertGetId(
             [
                 'content_id' => $contentId,
                 'datum_id' => $datumId
@@ -63,6 +63,14 @@ class DatumRepository extends RepositoryBase
     public function query()
     {
         return $this->connection()->table(ConfigService::$tableData);
+    }
+
+    /**
+     * @return Builder
+     */
+    public function contentDatumQuery()
+    {
+        return $this->connection()->table(ConfigService::$tableContentData);
     }
 
     /**
