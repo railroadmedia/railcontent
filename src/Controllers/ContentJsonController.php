@@ -72,6 +72,7 @@ class ContentJsonController extends Controller
                 'limit' => $request->get('limit', 10),
                 'total_results' => $contentData['total_results'],
                 'results' => $contentData['results'],
+                'filter_options' => $contentData['filter_options'],
             ],
             200
         );

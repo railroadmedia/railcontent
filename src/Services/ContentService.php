@@ -147,7 +147,11 @@ class ContentService
             $filter->includeUserStates(...$includedUserPlaylist);
         }
 
-        return ['results' => $filter->retrieveFilter(), 'total_results' => $filter->countFilter()];
+        return [
+            'results' => $filter->retrieveFilter(),
+            'total_results' => $filter->countFilter(),
+            'filter_options' => $filter->getFilterFields()
+        ];
     }
 
     /**
@@ -369,9 +373,11 @@ class ContentService
 
         $linkedContentsIds = implode(',', array_pluck($linkedWithContent, ['content_id']));
 
-        request()->request->add([
-            'linked_content_ids' => $linkedContentsIds
-        ]);
+        request()->request->add(
+            [
+                'linked_content_ids' => $linkedContentsIds
+            ]
+        );
 
         return $linkedContentsIds;
     }

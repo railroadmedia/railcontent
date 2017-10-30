@@ -380,6 +380,36 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @return array
+     */
+    public function getFilterFields()
+    {
+        $query = $this->initQuery();
+
+        $this->addFieldsAndDatumToQuery($query);
+        $this->addFilteringToQuery($query);
+
+        $query->select(
+            [
+                ConfigService::$tableFields . '.id as field_id',
+                ConfigService::$tableFields . '.key as field_key',
+                ConfigService::$tableFields . '.value as field_value',
+                ConfigService::$tableFields . '.type as field_type',
+            ]
+        )
+            ->groupBy(
+                [
+                    ConfigService::$tableFields . '.id',
+                    ConfigService::$tableFields . '.key',
+                    ConfigService::$tableFields . '.value',
+                    ConfigService::$tableFields . '.type',
+                ]
+            );
+
+        return $this->parseAvailableFields($query->get()->toArray());
+    }
+
+    /**
      * @param $name
      * @param $value
      * @param $type
@@ -513,36 +543,6 @@ class ContentRepository extends RepositoryBase
         foreach (array_reverse($this->slugHierarchy) as $i => $slug) {
             $query->where('parent_slug_' . $i, $slug);
         }
-
-//        dd($query->orderBy(ConfigService::$tableContent . '.id')->get()->toArray());
-
-//        if (!empty($this->includedParentSlugs)) {
-//            $query->where(
-//                function (Builder $builder) use ($query) {
-//                    $parentsSlugs = $this->includedParentSlugs;
-//                    $builder->whereExists(
-//                        function (Builder $builder) use ($parentsSlugs) {
-//                            $builder
-//                                ->select([ConfigService::$tableContentHierarchy . '.child_id'])
-//                                ->from(ConfigService::$tableContentHierarchy)
-//                                ->join(
-//                                    ConfigService::$tableContent . ' as inherited_content',
-//                                    ConfigService::$tableContentHierarchy . '.parent_id',
-//                                    '=',
-//                                    'inherited_content.id'
-//                                )
-//                                ->whereIn('inherited_content.slug', $parentsSlugs)
-//                                ->where([ConfigService::$tableContentHierarchy .
-//                                '.child_id' => $this->databaseManager->raw(
-//                                    ConfigService::$tableContent . '.id')
-//                                ]);
-//
-//                            return $builder;
-//                        }
-//                    );
-//                }
-//            );
-//        }
 
         // exclusive field filters
         $query->where(
@@ -929,10 +929,6 @@ class ContentRepository extends RepositoryBase
 
                     return $builder;
                 }
-            )
-            ->orderBy(
-                ConfigService::$tableContent . '.' . ($this->orderBy ?? 'published_on'),
-                $this->orderDirection ?? 'desc'
             );
     }
 
@@ -992,7 +988,6 @@ class ContentRepository extends RepositoryBase
         return $this->connection()->table(ConfigService::$tableUserContentPlaylists);
     }
 
-
     /**
      * Unlink all data for a content id.
      *
@@ -1024,6 +1019,7 @@ class ContentRepository extends RepositoryBase
     }
 
     /** Delete all the permissions for the content_id
+     *
      * @param integer $contentId
      * @return int
      */
@@ -1038,18 +1034,24 @@ class ContentRepository extends RepositoryBase
 
     private function unlinkContentPlaylist($contentId)
     {
-        $userContents = $this->userContentQuery()->where([
-            'content_id' => $contentId
-        ]) ->get()->toArray();
+        $userContents = $this->userContentQuery()->where(
+            [
+                'content_id' => $contentId
+            ]
+        )->get()->toArray();
 
-        foreach($userContents as $userContent){
-            $this->userPlaylistQuery()->where([
-                'content_user_id' => $userContent['id']
-            ]) -> delete();
+        foreach ($userContents as $userContent) {
+            $this->userPlaylistQuery()->where(
+                [
+                    'content_user_id' => $userContent['id']
+                ]
+            )->delete();
 
-            $this->userContentQuery()->where([
-                'id' => $userContent['id']
-            ])->delete();
+            $this->userContentQuery()->where(
+                [
+                    'id' => $userContent['id']
+                ]
+            )->delete();
         }
 
         return true;
@@ -1058,15 +1060,28 @@ class ContentRepository extends RepositoryBase
     public function getLinkedContent($contentId)
     {
         return $this->fieldQuery()
-            ->join(ConfigService::$tableContentFields,
-                ConfigService::$tableContentFields.'.field_id',
+            ->join(
+                ConfigService::$tableContentFields,
+                ConfigService::$tableContentFields . '.field_id',
                 '=',
-                ConfigService::$tableFields.'.id')
+                ConfigService::$tableFields . '.id'
+            )
             ->where(
                 [
                     'value' => $contentId,
                     'type' => 'content_id'
                 ]
             )->get()->toArray();
+    }
+
+    private function parseAvailableFields($rows)
+    {
+        $availableFields = [];
+
+        foreach ($rows as $row) {
+            $availableFields[$row['field_key']][] = $row['field_value'];
+        }
+
+        return $availableFields;
     }
 }
