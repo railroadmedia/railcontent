@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Controllers;
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Exceptions\ContentNotFoundException;
 use Railroad\Railcontent\Exceptions\ContentReferencedByOtherContentException;
@@ -13,6 +12,8 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Responses\JsonPaginatedResponse;
+use Railroad\Railcontent\Responses\JsonResponse;
 
 class ContentJsonController extends Controller
 {
@@ -33,7 +34,7 @@ class ContentJsonController extends Controller
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return JsonPaginatedResponse
      */
     public function index(Request $request)
     {
@@ -64,18 +65,7 @@ class ContentJsonController extends Controller
             $parsedFilters['included_user_playlists'] ?? []
         );
 
-        return response()->json(
-            [
-                'status' => 'ok',
-                'code' => 200,
-                'page' => $request->get('page', 1),
-                'limit' => $request->get('limit', 10),
-                'total_results' => $contentData['total_results'],
-                'results' => $contentData['results'],
-                'filter_options' => $contentData['filter_options'],
-            ],
-            200
-        );
+        return new JsonPaginatedResponse($contentData['results'], $contentData['total_results'], $contentData['filter_options'], 200);
     }
 
     /**
@@ -92,15 +82,9 @@ class ContentJsonController extends Controller
         //check if content exist; if not throw exception
         throw_unless($content, ContentNotFoundException::class);
 
-        return response()->json(
-            [
-                'status' => 'ok',
-                'code' => 200,
-                'total_results' => 1,
-                'results' => [$id => $content],
-            ],
-            200
-        );
+        $results = [$id => $content];
+
+        return new JsonResponse($results, 200);
     }
 
     public function slugs(Request $request, ...$slugs)
@@ -123,14 +107,7 @@ class ContentJsonController extends Controller
             $request->get('published_on')
         );
 
-        return response()->json(
-            [
-                'status' => 'ok',
-                'code' => 201,
-                'results' => $content
-            ],
-            201
-        );
+        return new JsonResponse($content, 201);
     }
 
     /** Update a content based on content id and return it in JSON format
@@ -153,24 +130,16 @@ class ContentJsonController extends Controller
         //update content with the data sent on the request
         $content = $this->contentService->update(
             $contentId,
-            $request->input('slug'),
-            $request->input('status'),
-            $request->input('type'),
-            $request->input('position'),
-            $request->input('language') ?? ConfigService::$defaultLanguage,
-            $request->input('parent_id'),
-            $request->input('published_on'),
-            $request->input('archived_on')
+            [
+                "slug" => $request->input('slug'),
+                "status" => $request->input('status'),
+                "type" => $request->input('type'),
+                "language" => $request->input('language') ?? ConfigService::$defaultLanguage,
+                "published_on" => $request->input('published_on'),
+                "archived_on" => $request->input('archived_on')]
         );
 
-        return response()->json(
-            [
-                'status' => 'ok',
-                'code' => 201,
-                'results' => $content
-            ],
-            201
-        );
+        return new JsonResponse($content, 201);
     }
 
     /**
@@ -196,17 +165,13 @@ class ContentJsonController extends Controller
 
         throw_if($linkedWithContent, ContentReferencedByOtherContentException::class);
 
-         //call the event that save a new content version in the database
+        //call the event that save a new content version in the database
         event(new ContentUpdated($contentId));
 
         //delete content
         $this->contentService->delete($contentId, $request->input('delete_children'));
 
-        return response()->json(
-            null,
-            204
-        );
-        //return response()->json($deleted, 200);
+        return new JsonResponse(null, 204);
     }
 
     /**

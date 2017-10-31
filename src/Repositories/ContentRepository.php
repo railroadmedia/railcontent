@@ -230,8 +230,6 @@ class ContentRepository extends RepositoryBase
         $this->unlinkContentPermission($id);
         $this->unlinkContentPlaylist($id);
 
-        // todo: unlink permissions, playlists
-
         $amountOfDeletedRows = $this->query()
             ->where('id', $id)
             ->delete();
@@ -570,6 +568,38 @@ class ContentRepository extends RepositoryBase
                                         )
                                     ]
                                 );
+
+                            if ($requiredFieldData['type'] == 'content_id') {
+                                $builder->orWhereExists(
+                                    function ($builder) use ($requiredFieldData) {
+                                        $builder
+                                            ->select([ConfigService::$tableContent . '.id'])
+                                            ->from(ConfigService::$tableContent)
+                                            ->leftJoin(ConfigService::$tableContentHierarchy,
+                                                ConfigService::$tableContent . '.id',
+                                                '=',
+                                                ConfigService::$tableContentHierarchy . '.child_id')
+                                            ->where(
+                                                ConfigService::$tableContent . '.slug',
+                                                $requiredFieldData['value']
+                                            )
+                                            ->whereIn(
+                                                $this->databaseManager->raw(
+                                                    ConfigService::$tableFields . '.value'
+                                                )
+                                                ,
+                                                [
+                                                    $this->databaseManager->raw(
+                                                        ConfigService::$tableContent . '.id'
+                                                    ),
+                                                    $this->databaseManager->raw(
+                                                        ConfigService::$tableContentHierarchy . '.parent_id'
+                                                    )
+                                                ]
+                                            );
+                                    }
+                                );
+                            }
 
                             if ($requiredFieldData['type'] !== '') {
                                 $builder->where(
@@ -1079,7 +1109,9 @@ class ContentRepository extends RepositoryBase
         $availableFields = [];
 
         foreach ($rows as $row) {
-            $availableFields[$row['field_key']][] = $row['field_value'];
+            if ($row['field_id']) {
+                $availableFields[$row['field_key']][] = $row['field_value'];
+            }
         }
 
         return $availableFields;

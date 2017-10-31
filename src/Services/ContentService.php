@@ -140,11 +140,11 @@ class ContentService
         }
 
         foreach ($requiredUserPlaylists as $requiredUserPlaylist) {
-            $filter->requireUserStates(...$requiredUserPlaylist);
+            $filter->requireUserPlaylist(...$requiredUserPlaylist);
         }
 
         foreach ($includedUserPlaylists as $includedUserPlaylist) {
-            $filter->includeUserStates(...$includedUserPlaylist);
+            $filter->includeUserPlaylist(...$includedUserPlaylist);
         }
 
         return [

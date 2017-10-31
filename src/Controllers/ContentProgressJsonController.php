@@ -31,7 +31,7 @@ class ContentProgressJsonController extends Controller
      */
     public function startContent(UserContentRequest $request)
     {
-        $response = $this->userContentService->startContent($request->input('content_id'));
+        $response = $this->userContentService->startContent($request->input('content_id'), $request->user()->id);
 
         return response()->json($response, 200);
     }
@@ -43,7 +43,7 @@ class ContentProgressJsonController extends Controller
      */
     public function completeContent(UserContentRequest $request)
     {
-        $response = $this->userContentService->completeContent($request->input('content_id'));
+        $response = $this->userContentService->completeContent($request->input('content_id'), $request->user()->id);
 
         return response()->json($response, 201);
     }
@@ -58,7 +58,8 @@ class ContentProgressJsonController extends Controller
         $response =
             $this->userContentService->saveContentProgress(
                 $request->input('content_id'),
-                $request->input('progress')
+                $request->input('progress'),
+                $request->user()->id
             );
 
         return response()->json($response, 201);

@@ -42,13 +42,10 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             'railcontent/start',
             [
                 'content_id' => $content['id']
-            ],
-            [
-                'Accept' => 'application/json'
             ]);
 
         $this->assertEquals(200, $response->status());
-        $this->assertEquals('true', $response->content());
+        $this->assertEquals(1, $response->content());
     }
 
     public function test_start_content_invalid_content_id()
@@ -57,19 +54,19 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             'railcontent/start',
             [
                 'content_id' => 1
-            ],
-            [
-                'Accept' => 'application/json'
             ]);
 
         $this->assertEquals(422, $response->status());
         $responseContent = json_decode($response->content(), true);
         $responseErrors = $responseContent['errors'];
 
-        $this->assertEquals(1, count($responseErrors));
+        $expectedErrors = [
+            "source" => "content_id",
+            "detail" => "The selected content id is invalid."
+        ];
 
-        //check that the error message it's received
-        $this->assertArrayHasKey('content_id', $responseErrors);
+        $this->assertEquals([$expectedErrors], $responseErrors);
+
     }
 
     public function test_complete_content()
@@ -89,9 +86,6 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             'railcontent/complete',
             [
                 'content_id' => $content['id']
-            ],
-            [
-                'Accept' => 'application/json'
             ]
         );
 
@@ -104,9 +98,6 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put('railcontent/complete',
             [
                 'content_id' => 1
-            ],
-            [
-                'Accept' => 'application/json'
             ]
         );
 
@@ -115,10 +106,12 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $responseContent = json_decode($response->content(), true);
         $responseErrors = $responseContent['errors'];
 
-        $this->assertEquals(1, count($responseErrors));
+        $expectedErrors = [
+            "source" => "content_id",
+            "detail" => "The selected content id is invalid."
+        ];
 
-        //check that the error message it's received
-        $this->assertArrayHasKey('content_id', $responseErrors);
+        $this->assertEquals([$expectedErrors], $responseErrors);
     }
 
     public function test_save_user_progress_on_content()
@@ -138,9 +131,6 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             [
                 'content_id' => $content['id'],
                 'progress' => $this->faker->numberBetween(10, 99)
-            ],
-            [
-                'Accept' => 'application/json'
             ]
         );
 
@@ -156,9 +146,6 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             [
                 'content_id' => $contentId,
                 'progress' => $this->faker->numberBetween(10, 99)
-            ],
-            [
-                'Accept' => 'application/json'
             ]);
 
         $this->assertEquals(422, $response->status());
@@ -166,9 +153,11 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $responseContent = json_decode($response->content(), true);
         $responseErrors = $responseContent['errors'];
 
-        $this->assertEquals(1, count($responseErrors));
+        $expectedErrors = [
+            "source" => "content_id",
+            "detail" => "The selected content id is invalid."
+        ];
 
-        //check that the error message it's received
-        $this->assertArrayHasKey('content_id', $responseErrors);
+        $this->assertEquals([$expectedErrors], $responseErrors);
     }
 }

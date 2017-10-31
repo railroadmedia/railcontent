@@ -39,16 +39,14 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_get_by_id()
     {
-        $content = $this->contentFactory->create([]);
+        $content = $this->contentFactory->create();
 
         $results = $this->serviceBeingTested->getById($content['id']);
 
         $this->assertEquals(
-            [
-                "results" => array_merge($content, [
-                    'id' => $content['id']
-                ])
-            ]
+            array_merge($content, [
+                'id' => $content['id']
+            ])
             , $results);
     }
 
@@ -57,16 +55,14 @@ class ContentServiceTest extends RailcontentTestCase
         $results = $this->serviceBeingTested->getById($this->faker->numberBetween());
 
         $this->assertEquals(
-            [
-                "results" => null
-            ]
+           null
             , $results
         );
     }
 
     public function test_get_by_id_content_with_fields_and_datum()
     {
-        $content = $this->contentFactory->create([]);
+        $content = $this->contentFactory->create();
 
         $randomField = $this->fieldFactory->create(
             [
@@ -90,13 +86,12 @@ class ContentServiceTest extends RailcontentTestCase
         );
 
         $this->assertEquals(
-            [
-                "results" => array_merge($content, [
+            array_merge($content, [
                     'id' => $content['id'],
                     'fields' => [$randomField],
                     'data' => [$randomDatum]
                 ])
-            ]
+
             , $results);
     }
 
