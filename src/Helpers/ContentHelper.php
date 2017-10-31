@@ -104,4 +104,22 @@ class ContentHelper
 
         return null;
     }
+
+    /**
+     * @param $contents
+     * @param $key
+     * @param int $position
+     * @param null $type
+     * @return array
+     */
+    public static function getFilterOptionsSubContentFieldValue($contents, $key, $position = 1, $type = null)
+    {
+        $filterOptions = [];
+
+        foreach ($contents as $content) {
+            $filterOptions[$content['id']] = self::getFieldValue($content, $key, $position, $type);
+        }
+
+        return $filterOptions;
+    }
 }

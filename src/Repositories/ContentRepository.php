@@ -305,8 +305,10 @@ class ContentRepository extends RepositoryBase
 
             foreach ($parsedContents as $contentId => $parsedContent) {
                 if (!empty($parsedContent['fields'])) {
-                    foreach ($parsedContent['fields'] as $field) {
+                    foreach ($parsedContent['fields'] as $fieldIndex => $field) {
                         if ($field['type'] === 'content_id') {
+                            unset($parsedContents[$contentId]['fields'][$fieldIndex]);
+
                             $linkedContent = $linkedContents[$field['value']];
 
                             $parsedContents[$contentId]['fields'][] = [
@@ -1197,10 +1199,25 @@ class ContentRepository extends RepositoryBase
     private function parseAvailableFields($rows)
     {
         $availableFields = [];
+        $subContentIds = [];
 
         foreach ($rows as $row) {
-            if ($row['field_id']) {
-                $availableFields[$row['field_key']][] = $row['field_value'];
+            if (!empty($row['field_id'])) {
+
+                if ($row['field_type'] == 'content_id') {
+                    $subContentIds[] = $row['field_value'];
+                } else {
+                    $availableFields[$row['field_key']][] = $row['field_value'];
+                }
+
+            }
+        }
+
+        $subContents = $this->getByIds($subContentIds);
+
+        foreach ($rows as $row) {
+            if ($row['field_type'] == 'content_id' && !empty($subContents[$row['field_value']])) {
+                $availableFields[$row['field_key']][] = $subContents[$row['field_value']];
             }
         }
 
