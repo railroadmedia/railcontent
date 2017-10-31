@@ -40,7 +40,7 @@ class DatumService
      */
     public function createDatum($contentId, $key, $value, $position)
     {
-        $dataId = $this->datumRepository->updateOrCreateDatum(null, $key, $value, $position);
+        $dataId = $this->datumRepository->createDatum($key, $value, $position);
 
         return $this->datumRepository->linkContentToDatum($contentId, $dataId);
     }

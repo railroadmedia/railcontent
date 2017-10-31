@@ -16,18 +16,19 @@ class DatumRepository extends RepositoryBase
      * @param integer $position
      * @return int
      */
-    public function updateOrCreateDatum($id, $key, $value, $position)
+    public function createDatum($key, $value, $position)
     {
-        $update = $this->query()->where(ConfigService::$tableData . '.id', $id)->update(
+        $existing = $this->query()->where(
             [
                 'key' => $key,
                 'value' => $value,
                 'position' => $position
             ]
-        );
+        )
+            ->first();
 
-        if (!$update) {
-            $id = $this->query()->insertGetId(
+        if (empty($existing)) {
+            return $this->query()->insertGetId(
                 [
                     'key' => $key,
                     'value' => $value,
@@ -36,7 +37,26 @@ class DatumRepository extends RepositoryBase
             );
         }
 
-        return $id;
+        return $existing['id'];
+    }
+
+    public function updateDatum($id, $key, $value, $position)
+    {
+        $existing = $this->query()->where(['id' => $id])
+            ->first();
+
+        if (!empty($existing)) {
+            $this->query()->where(['id' => $id])
+                ->update(
+                    [
+                        'key' => $key,
+                        'value' => $value,
+                        'position' => $position
+                    ]
+                );
+        }
+
+        return $existing['id'];
     }
 
     /**
@@ -48,14 +68,17 @@ class DatumRepository extends RepositoryBase
      */
     public function linkContentToDatum($contentId, $datumId)
     {
-        return $this->contentDatumQuery()->insertGetId(
+        return $this->contentDatumQuery()->updateOrInsert(
+            [
+                'content_id' => $contentId,
+                'datum_id' => $datumId
+            ],
             [
                 'content_id' => $contentId,
                 'datum_id' => $datumId
             ]
         );
     }
-
 
     /**
      * @return Builder
@@ -135,7 +158,6 @@ class DatumRepository extends RepositoryBase
             ->where('datum_id', $datumId)
             ->delete();
     }
-
 
     /**
      * @param Builder $query
