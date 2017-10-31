@@ -109,7 +109,8 @@ class ContentRepository extends RepositoryBase
     {
         $query = $this->initQuery();
 
-        //$this->addInheritedContentToQuery($query);
+//        $this->addInheritedContentToQuery($query);
+        $this->addSlugInheritanceToQuery($query);
         $this->addFieldsAndDatumToQuery($query);
 
         return $this->parseRows(
@@ -117,6 +118,27 @@ class ContentRepository extends RepositoryBase
                     ->get()
                     ->toArray()
             )[$id] ?? null;
+    }
+
+    /**
+     * Call the get by id method from repository and return the category
+     *
+     * @param array $ids
+     * @return array
+     */
+    public function getByIds(array $ids)
+    {
+        $query = $this->initQuery();
+
+//        $this->addInheritedContentToQuery($query);
+        $this->addSlugInheritanceToQuery($query);
+        $this->addFieldsAndDatumToQuery($query);
+
+        return $this->parseRows(
+            $query->whereIn(ConfigService::$tableContent . '.id', $ids)
+                ->get()
+                ->toArray()
+        );
     }
 
     /**
@@ -238,6 +260,49 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @param array $parsedContents
+     * @return array
+     */
+    public function attachContentsLinkedByField(array $parsedContents)
+    {
+        $contentIdsToPull = [];
+
+        foreach ($parsedContents as $parsedContent) {
+            if (!empty($parsedContent['fields'])) {
+                foreach ($parsedContent['fields'] as $field) {
+                    if ($field['type'] === 'content_id') {
+                        $contentIdsToPull[$field['id']] = $field['value'];
+                    }
+                }
+            }
+        }
+
+        if (!empty($contentIdsToPull)) {
+            $linkedContents = $this->getByIds($contentIdsToPull);
+
+            foreach ($parsedContents as $contentId => $parsedContent) {
+                if (!empty($parsedContent['fields'])) {
+                    foreach ($parsedContent['fields'] as $field) {
+                        if ($field['type'] === 'content_id') {
+                            $linkedContent = $linkedContents[$field['value']];
+
+                            $parsedContents[$contentId]['fields'][] = [
+                                'id' => $field['id'],
+                                'key' => $field['key'],
+                                'value' => $linkedContent,
+                                'type' => 'content',
+                                'position' => $field['position']
+                            ];
+                        }
+                    }
+                }
+            }
+        }
+
+        return $parsedContents;
+    }
+
+    /**
      * @param array $rows
      * @return array
      */
@@ -319,7 +384,34 @@ class ContentRepository extends RepositoryBase
                 array_map("unserialize", array_unique(array_map("serialize", $contents[$contentId])));
         }
 
-        return $contents;
+        return $this->attachContentsLinkedByField($contents);
+    }
+
+    /**
+     * @param Builder $query
+     */
+    private function addInheritedContentToQuery(Builder &$query)
+    {
+        $query
+            ->addSelect(
+                [
+                    'inherited_content.slug as parent_slug',
+                    ConfigService::$tableContentHierarchy . '.parent_id as parent_id',
+                    ConfigService::$tableContentHierarchy . '.child_position as parent_child_position',
+                ]
+            )
+            ->leftJoin(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.child_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->leftJoin(
+                ConfigService::$tableContent . ' as inherited_content',
+                'inherited_content.id',
+                '=',
+                ConfigService::$tableContentHierarchy . '.parent_id'
+            );
     }
 
     /**
@@ -575,10 +667,12 @@ class ContentRepository extends RepositoryBase
                                         $builder
                                             ->select([ConfigService::$tableContent . '.id'])
                                             ->from(ConfigService::$tableContent)
-                                            ->leftJoin(ConfigService::$tableContentHierarchy,
+                                            ->leftJoin(
+                                                ConfigService::$tableContentHierarchy,
                                                 ConfigService::$tableContent . '.id',
                                                 '=',
-                                                ConfigService::$tableContentHierarchy . '.child_id')
+                                                ConfigService::$tableContentHierarchy . '.child_id'
+                                            )
                                             ->where(
                                                 ConfigService::$tableContent . '.slug',
                                                 $requiredFieldData['value']
@@ -878,33 +972,6 @@ class ContentRepository extends RepositoryBase
                 ConfigService::$tableData . '.id',
                 '=',
                 ConfigService::$tableContentData . '.datum_id'
-            );
-    }
-
-    /**
-     * @param Builder $query
-     */
-    private function addInheritedContentToQuery(Builder &$query)
-    {
-        $query
-            ->addSelect(
-                [
-                    'inherited_content.slug as parent_slug',
-                    ConfigService::$tableContentHierarchy . '.parent_id as parent_id',
-                    ConfigService::$tableContentHierarchy . '.child_position as parent_child_position',
-                ]
-            )
-            ->leftJoin(
-                ConfigService::$tableContentHierarchy,
-                ConfigService::$tableContentHierarchy . '.child_id',
-                '=',
-                ConfigService::$tableContent . '.id'
-            )
-            ->leftJoin(
-                ConfigService::$tableContent . ' as inherited_content',
-                'inherited_content.id',
-                '=',
-                ConfigService::$tableContentHierarchy . '.parent_id'
             );
     }
 

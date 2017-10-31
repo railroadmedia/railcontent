@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Factories\ContentFactory;
+use Railroad\Railcontent\Factories\FieldFactory;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -21,6 +23,16 @@ class ContentRepositoryTest extends RailcontentTestCase
      */
     protected $contentHierarchyRepository;
 
+    /**
+     * @var ContentFactory
+     */
+    protected $contentFactory;
+
+    /**
+     * @var FieldFactory
+     */
+    protected $fieldFactory;
+
     protected function setUp()
     {
         parent::setUp();
@@ -28,6 +40,8 @@ class ContentRepositoryTest extends RailcontentTestCase
         $this->classBeingTested = $this->app->make(ContentRepository::class);
 
         $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->fieldFactory = $this->app->make(FieldFactory::class);
     }
 
     public function test_create_content()
@@ -151,5 +165,69 @@ class ContentRepositoryTest extends RailcontentTestCase
         $results = $this->classBeingTested->getBySlugHierarchy($this->faker->word);
 
         $this->assertNull($results);
+    }
+
+    public function test_get_linked_content_by_fields()
+    {
+        $type = $this->faker->word;
+        $linkedType = $this->faker->word;
+
+        $content = $this->contentFactory->create(
+            [
+                1 => $type,
+                2 => ContentService::STATUS_PUBLISHED,
+            ]
+        );
+
+        $linkedContent = $this->contentFactory->create(
+            [
+                1 => $linkedType,
+                2 => ContentService::STATUS_PUBLISHED,
+            ]
+        );
+
+        $randomLinkedContentField = $this->fieldFactory->create(
+            [
+                $linkedContent['id'],
+            ]
+        );
+
+        // linked field
+        $linkedField = $this->fieldFactory->create(
+            [
+                $content['id'],
+                'instructor_id',
+                $linkedContent['id'],
+                'content_id',
+                1
+            ]
+        );
+
+        $response = $this->classBeingTested->getById($content['id']);
+
+        $this->assertEquals(
+            [
+                'id' => '2',
+                'type' => 'content',
+                'key' => 'instructor_id',
+                'value' => array_merge(
+                    $linkedContent,
+                    [
+                        'fields' =>
+                            [
+                                [
+                                    'id' => '1',
+                                    'key' => $randomLinkedContentField['key'],
+                                    'value' => $randomLinkedContentField['value'],
+                                    'type' => $randomLinkedContentField['type'],
+                                    'position' => $randomLinkedContentField['position'],
+                                ]
+                            ]
+                    ]
+                ),
+                'position' => '1'
+            ],
+            $response['fields'][1]
+        );
     }
 }
