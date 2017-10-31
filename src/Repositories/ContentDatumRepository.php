@@ -13,7 +13,16 @@ class ContentDatumRepository extends RepositoryBase
      */
     public function get($id)
     {
-        return $this->query()->where(['id' => $id])->first()->toArray();
+        return $this->query()->where(['id' => $id])->first();
+    }
+
+    /**
+     * @param integer $contentId
+     * @return array
+     */
+    public function getByContentId($contentId)
+    {
+        return $this->query()->where('content_id', $contentId)->get()->toArray();
     }
 
     /**

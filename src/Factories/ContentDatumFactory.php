@@ -24,7 +24,6 @@ class ContentDatumFactory extends FactoryBase
         $this->datumService = $datumService;
     }
 
-
     /**
      * @param array $parameterOverwrites
      * @return array
@@ -41,6 +40,6 @@ class ContentDatumFactory extends FactoryBase
 
         ksort($parameters);
 
-        return $this->datumService->createDatum(...$parameters);
+        return $this->datumService->create(...$parameters);
     }
 }

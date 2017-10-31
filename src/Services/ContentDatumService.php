@@ -46,11 +46,13 @@ class ContentDatumService
      * @param string $key
      * @param string $value
      * @param integer $position
-     * @return int
+     * @return array
      */
     public function create($contentId, $key, $value, $position)
     {
-        return $this->datumRepository->create($contentId, $key, $value, $position);
+        $id = $this->datumRepository->create($contentId, $key, $value, $position);
+
+        return $this->get($id);
     }
 
     /**
