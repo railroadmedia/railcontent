@@ -288,6 +288,7 @@ class ContentRepository extends RepositoryBase
      */
     public function attachContentsLinkedByField(array $parsedContents)
     {
+
         $contentIdsToPull = [];
 
         foreach ($parsedContents as $parsedContent) {
@@ -318,9 +319,15 @@ class ContentRepository extends RepositoryBase
                                 'type' => 'content',
                                 'position' => $field['position']
                             ];
+
+
                         }
                     }
                 }
+
+                // this prevent json from casting the fields to an object instead of an array
+                $parsedContents[$contentId]['fields'] =
+                    array_values($parsedContents[$contentId]['fields']);
             }
         }
 
