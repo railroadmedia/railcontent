@@ -66,6 +66,17 @@ class ContentService
     }
 
     /**
+     * Call the get by ids method from repository
+     *
+     * @param integer[] $ids
+     * @return array|null
+     */
+    public function getByIds($ids)
+    {
+        return $this->contentRepository->getByIds($ids);
+    }
+
+    /**
      * Get content based on the slug hierarchy, for example if you have course lessons as children of
      * a course, you can pull the course lesson using the slugs:
      *
@@ -78,6 +89,16 @@ class ContentService
     public function getBySlugHierarchy(...$slugs)
     {
         return $this->contentRepository->getBySlugHierarchy($slugs);
+    }
+
+    /**
+     * @param string $slug
+     * @param string $type
+     * @return array
+     */
+    public function getBySlugAndType($slug, $type)
+    {
+        return $this->contentRepository->getBySlugAndType($slug, $type);
     }
 
     /**

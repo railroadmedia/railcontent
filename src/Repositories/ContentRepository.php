@@ -151,6 +151,29 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @param string $slug
+     * @param string $type
+     * @return array|null
+     */
+    public function getBySlugAndType($slug, $type)
+    {
+        $query = $this->initQuery();
+
+//        $this->addInheritedContentToQuery($query);
+        $this->addSlugInheritanceToQuery($query);
+        $this->addFieldsAndDatumToQuery($query);
+
+        return reset(
+                $this->parseRows(
+                    $query->where(ConfigService::$tableContent . '.slug', $slug)
+                        ->where(ConfigService::$tableContent . '.type', $type)
+                        ->get()
+                        ->toArray()
+                )
+            ) ?? null;
+    }
+
+    /**
      * @return int
      */
     public function countFilter()
