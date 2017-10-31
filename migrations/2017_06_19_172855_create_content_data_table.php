@@ -18,9 +18,10 @@ class CreateContentDataTable extends Migration
             ConfigService::$tableContentData,
             function (Blueprint $table) {
                 $table->increments('id');
-
                 $table->integer('content_id')->index();
-                $table->integer('datum_id')->index();
+                $table->string('key', 255)->index();
+                $table->text('value');
+                $table->integer('position')->index()->nullable();
             }
         );
     }

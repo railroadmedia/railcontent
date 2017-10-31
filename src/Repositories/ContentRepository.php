@@ -60,7 +60,7 @@ class ContentRepository extends RepositoryBase
     private $fieldRepository;
 
     /**
-     * @var DatumRepository
+     * @var ContentDatumRepository
      */
     private $datumRepository;
 
@@ -79,14 +79,14 @@ class ContentRepository extends RepositoryBase
      *
      * @param PermissionRepository $permissionRepository
      * @param FieldRepository $fieldRepository
-     * @param DatumRepository $datumRepository
+     * @param ContentDatumRepository $datumRepository
      * @param ContentHierarchyRepository $contentHierarchyRepository
      * @param DatabaseManager $databaseManager
      */
     public function __construct(
         PermissionRepository $permissionRepository,
         FieldRepository $fieldRepository,
-        DatumRepository $datumRepository,
+        ContentDatumRepository $datumRepository,
         ContentHierarchyRepository $contentHierarchyRepository,
         DatabaseManager $databaseManager
     ) {

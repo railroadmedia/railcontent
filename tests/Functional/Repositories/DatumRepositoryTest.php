@@ -2,14 +2,14 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
-use Railroad\Railcontent\Repositories\DatumRepository;
+use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class DatumRepositoryTest extends RailcontentTestCase
 {
     /**
-     * @var DatumRepository
+     * @var ContentDatumRepository
      */
     protected $classBeingTested;
 
@@ -17,7 +17,7 @@ class DatumRepositoryTest extends RailcontentTestCase
     {
         parent::setUp();
 
-        $this->classBeingTested = $this->app->make(DatumRepository::class);
+        $this->classBeingTested = $this->app->make(ContentDatumRepository::class);
     }
 
     public function test_insert_data()

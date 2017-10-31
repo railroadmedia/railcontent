@@ -6,8 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Repositories\CategoryRepository;
-use Railroad\Railcontent\Repositories\DatumRepository;
-use Railroad\Railcontent\Services\DatumService;
+use Railroad\Railcontent\Repositories\ContentDatumRepository;
+use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -20,8 +20,8 @@ class DatumControllerTest extends RailcontentTestCase
     {
         parent::setUp();
 
-        $this->serviceBeingTested = $this->app->make(DatumService::class);
-        $this->classBeingTested = $this->app->make(DatumRepository::class);
+        $this->serviceBeingTested = $this->app->make(ContentDatumService::class);
+        $this->classBeingTested = $this->app->make(ContentDatumRepository::class);
         $userId = $this->createAndLogInNewUser();
         $this->setUserLanguage($userId);
         //$this->categoryClass = $this->app->make(CategoryRepository::class);

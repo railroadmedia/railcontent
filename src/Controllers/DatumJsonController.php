@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\DatumUpdate;
 use Railroad\Railcontent\Requests\DatumRequest;
-use Railroad\Railcontent\Services\DatumService;
+use Railroad\Railcontent\Services\ContentDatumService;
 
 class DatumJsonController extends Controller
 {
@@ -16,9 +16,9 @@ class DatumJsonController extends Controller
     /**
      * DatumController constructor.
      *
-     * @param DatumService $datumService
+     * @param ContentDatumService $datumService
      */
-    public function __construct(DatumService $datumService)
+    public function __construct(ContentDatumService $datumService)
     {
         $this->datumService = $datumService;
     }

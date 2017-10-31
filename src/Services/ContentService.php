@@ -4,7 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\ContentVersionRepository;
-use Railroad\Railcontent\Repositories\DatumRepository;
+use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\FieldRepository;
 
 class ContentService
@@ -25,7 +25,7 @@ class ContentService
     private $fieldRepository;
 
     /**
-     * @var DatumRepository
+     * @var ContentDatumRepository
      */
     private $datumRepository;
 
@@ -40,13 +40,13 @@ class ContentService
      * @param ContentRepository $contentRepository
      * @param ContentVersionRepository $versionRepository
      * @param FieldRepository $fieldRepository
-     * @param DatumRepository $datumRepository
+     * @param ContentDatumRepository $datumRepository
      */
     public function __construct(
         ContentRepository $contentRepository,
         ContentVersionRepository $versionRepository,
         FieldRepository $fieldRepository,
-        DatumRepository $datumRepository
+        ContentDatumRepository $datumRepository
     ) {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;

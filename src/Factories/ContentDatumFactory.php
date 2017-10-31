@@ -2,21 +2,22 @@
 
 namespace Railroad\Railcontent\Factories;
 
-use Railroad\Railcontent\Services\DatumService;
+use Railroad\Railcontent\Services\ContentDatumService;
 
-class DatumFactory extends FactoryBase
+class ContentDatumFactory extends FactoryBase
 {
 
     /**
-     * @var DatumService
+     * @var ContentDatumService
      */
     private $datumService;
 
     /**
      * DatumFactory constructor.
-     * @param DatumService $datumService
+     *
+     * @param ContentDatumService $datumService
      */
-    public function __construct(DatumService $datumService)
+    public function __construct(ContentDatumService $datumService)
     {
         parent::__construct();
 
