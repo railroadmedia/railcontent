@@ -30,20 +30,20 @@ class FieldService
     }
 
     /**
-     * Create a new field, link the content with the new created field and return the content with the linked field
+     * Create a new field and return it.
      *
      * @param integer $contentId
      * @param string $key
      * @param string $value
+     * @param string $position
+     * @param string $type
      * @return array
      */
-    public function createField($contentId, $key, $value, $type, $position)
+    public function createField($contentId, $key, $value, $position, $type)
     {
-        $fieldId = $this->fieldRepository->updateOrCreateField(null, $key, $value, $type, $position);
+        $fieldId = $this->fieldRepository->create($contentId, $key, $value, $type, $position);
 
-        $this->fieldRepository->linkFieldToContent($contentId, $fieldId);
-
-        return $this->fieldRepository->getLinkedField($fieldId, $contentId);
+        return $this->fieldRepository->get($fieldId);
     }
 
     /**

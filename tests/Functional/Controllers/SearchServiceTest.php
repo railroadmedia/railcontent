@@ -1441,7 +1441,7 @@ class SearchServiceTest extends RailcontentTestCase
                 'progress' => 100
             ];
 
-            $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+            $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
 
             $expectedContent[$i] = $contents[$i];
         }
@@ -1508,7 +1508,7 @@ class SearchServiceTest extends RailcontentTestCase
                 'progress' => 100
             ];
 
-            $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+            $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
 
             $expectedContent[$i] = $contents[$i];
         }
@@ -1585,14 +1585,14 @@ class SearchServiceTest extends RailcontentTestCase
                 'progress' => 100
             ];
 
-            $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+            $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
 
             $userContentPlaylist = [
                 'content_user_id' => $userContentId,
                 'playlist_id' => $playlistId
             ];
 
-            $userContentPlaylistId = $this->query()->table(ConfigService::$tableUserContentPlaylists)->insertGetId($userContentPlaylist);
+            $userContentPlaylistId = $this->query()->table(ConfigService::$tablePlaylistContents)->insertGetId($userContentPlaylist);
             $expectedContent[$i] = $contents[$i];
         }
 
@@ -1678,14 +1678,14 @@ class SearchServiceTest extends RailcontentTestCase
                 'progress' => 100
             ];
 
-            $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+            $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
 
             $userContentPlaylist = [
                 'content_user_id' => $userContentId,
                 'playlist_id' => $playlistId1
             ];
 
-            $userContentPlaylistId = $this->query()->table(ConfigService::$tableUserContentPlaylists)->insertGetId($userContentPlaylist);
+            $userContentPlaylistId = $this->query()->table(ConfigService::$tablePlaylistContents)->insertGetId($userContentPlaylist);
             $expectedContent[$i] = $contents[$i];
         }
 
@@ -1698,14 +1698,14 @@ class SearchServiceTest extends RailcontentTestCase
                 'progress' => 100
             ];
 
-            $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+            $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
 
             $userContentPlaylist = [
                 'content_user_id' => $userContentId,
                 'playlist_id' => $playlistId2
             ];
 
-            $userContentPlaylistId = $this->query()->table(ConfigService::$tableUserContentPlaylists)->insertGetId($userContentPlaylist);
+            $userContentPlaylistId = $this->query()->table(ConfigService::$tablePlaylistContents)->insertGetId($userContentPlaylist);
             $expectedContent[$i] = $contents[$i];
         }
 

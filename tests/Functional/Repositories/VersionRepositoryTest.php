@@ -38,7 +38,7 @@ class VersionRepositoryTest extends RailcontentTestCase
         $versionContentId = $this->classBeingTested->store(1, null, '', serialize($content));
 
         $this->assertDatabaseHas(
-            ConfigService::$tableVersions,
+            ConfigService::$tableContentVersions,
             [
                 'id' => $versionContentId,
                 'content_id' => 1,
@@ -72,7 +72,7 @@ class VersionRepositoryTest extends RailcontentTestCase
         $versionContentId = $this->classBeingTested->store(1, null, '', serialize($content));
 
         $this->assertDatabaseHas(
-            ConfigService::$tableVersions,
+            ConfigService::$tableContentVersions,
             [
                 'id' => $versionContentId,
                 'content_id' => 1,

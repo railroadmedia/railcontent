@@ -20,7 +20,7 @@ class PlaylistRepository extends RepositoryBase
     {
         $userPlaylistId = $this->queryUserPlaylistTable()->insertGetId(
             [
-                'content_user_id' => $contentId,
+                'content_id' => $contentId,
                 'playlist_id' => $playlistId
             ]
         );
@@ -33,7 +33,7 @@ class PlaylistRepository extends RepositoryBase
      */
     public function queryUserPlaylistTable()
     {
-        return $this->connection()->table(ConfigService::$tableUserContentPlaylists);
+        return $this->connection()->table(ConfigService::$tablePlaylistContents);
     }
 
     /**
@@ -43,7 +43,7 @@ class PlaylistRepository extends RepositoryBase
      */
     public function getUserPlaylists($userId)
     {
-        return $this->queryTable()
+        return $this->query()
             ->select(
                 ConfigService::$tablePlaylists . '.*'
             )
@@ -60,7 +60,7 @@ class PlaylistRepository extends RepositoryBase
     /**
      * @return Builder
      */
-    public function queryTable()
+    public function query()
     {
         return $this->connection()->table(ConfigService::$tablePlaylists);
     }
@@ -75,7 +75,7 @@ class PlaylistRepository extends RepositoryBase
      */
     public function store($name, $userId, $type)
     {
-        $playlist = $this->queryTable()->insertGetId(
+        $playlist = $this->query()->insertGetId(
             [
                 'name' => $name,
                 'type' => $type,

@@ -35,8 +35,8 @@ class FieldFactory extends FactoryBase
                 rand(),
                 $this->faker->word,
                 $this->faker->word,
-                $this->faker->word,
-                rand()
+                rand(),
+                $this->faker->word
             ];
 
         ksort($parameters);

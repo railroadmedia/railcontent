@@ -31,6 +31,24 @@ class ContentPermissionsFactory extends FactoryBase
     {
         $parameters =
             $parameterOverwrites + [
+                $this->faker->word,
+            ];
+
+        ksort($parameters);
+
+        $content = $this->permissionService->create(...$parameters);
+
+        return $content;
+    }
+
+    /**
+     * @param array $parameterOverwrites
+     * @return array
+     */
+    public function assign(array $parameterOverwrites = [])
+    {
+        $parameters =
+            $parameterOverwrites + [
                 $this->faker->randomNumber(),
                 $this->faker->randomNumber(),
                 $this->faker->boolean() ? $this->faker->word : null,

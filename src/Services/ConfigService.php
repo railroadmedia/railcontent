@@ -17,6 +17,11 @@ class ConfigService
     /**
      * @var string
      */
+    public static $tablePrefix;
+
+    /**
+     * @var string
+     */
     public static $tableContent;
 
     /**
@@ -27,22 +32,12 @@ class ConfigService
     /**
      * @var string
      */
-    public static $tableVersions;
-
-    /**
-     * @var string
-     */
-    public static $tableFields;
+    public static $tableContentVersions;
 
     /**
      * @var string
      */
     public static $tableContentFields;
-
-    /**
-     * @var string
-     */
-    public static $tableData;
 
     /**
      * @var string
@@ -62,7 +57,7 @@ class ConfigService
     /**
      * @var string
      */
-    public static $tableUserContent;
+    public static $tableUserContentProgress;
 
     /**
      * @var string
@@ -72,27 +67,7 @@ class ConfigService
     /**
      * @var string
      */
-    public static $tableUserContentPlaylists;
-
-    /**
-     * @var string
-     */
-    public static $tableLanguage;
-
-    /**
-     * @var string
-     */
-    public static $tableTranslations;
-
-    /**
-     * @var string
-     */
-    public static $tableUserLanguagePreference;
-
-    /**
-     * @var array
-     */
-    public static $translatableTables;
+    public static $tablePlaylistContents;
 
     /**
      * @var array

@@ -20,7 +20,7 @@ class CreateContentPermissionsTable extends Migration
                 $table->increments('id');
                 $table->integer('content_id')->index()->nullable();
                 $table->string('content_type', 64)->index()->nullable();
-                $table->integer('required_permission_id')->index();
+                $table->integer('permission_id')->index();
             });
     }
 

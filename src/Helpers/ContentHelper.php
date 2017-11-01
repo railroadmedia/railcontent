@@ -5,6 +5,32 @@ namespace Railroad\Railcontent\Helpers;
 class ContentHelper
 {
     /**
+     * @param array $array
+     * @param $column
+     * @return array
+     */
+    public static function groupArrayBy(array $array, $column)
+    {
+        $result = [];
+
+        foreach ($array as $element) {
+            if (!isset($element[$column])) {
+                continue;
+            }
+
+            $columnValue = $element[$column];
+
+            if (isset($result[$columnValue])) {
+                $result[$columnValue][] = $element;
+            } else {
+                $result[$columnValue] = [$element];
+            }
+        }
+
+        return $result;
+    }
+    
+    /**
      * @param array $content
      * @param string $key
      * @param integer $position

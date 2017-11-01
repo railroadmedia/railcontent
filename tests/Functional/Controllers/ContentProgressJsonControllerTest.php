@@ -80,7 +80,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             'progress' => $this->faker->numberBetween(0, 99)
         ];
 
-        $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+        $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
 
         $response = $this->put(
             'railcontent/complete',
@@ -125,7 +125,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             'progress' => $this->faker->numberBetween(0, 10)
         ];
 
-        $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+        $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
 
         $response = $this->put('railcontent/progress',
             [

@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
+use Railroad\Railcontent\Helpers\ContentHelper;
+use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 
 class ContentRepository extends RepositoryBase
@@ -107,17 +109,22 @@ class ContentRepository extends RepositoryBase
      */
     public function getById($id)
     {
-        $query = $this->initQuery();
+        $contentRows = $this->query()
+            ->selectCoreColumns()
+            ->addSlugInheritance($this->slugHierarchy)
+            ->where(['id' => $id])
+            ->getToArray();
 
-//        $this->addInheritedContentToQuery($query);
-        $this->addSlugInheritanceToQuery($query);
-        $this->addFieldsAndDatumToQuery($query);
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentPermissionRows = $this->permissionRepository->getByContentIds(array_column($contentRows, 'id'));
 
-        return $this->parseRows(
-                $query->where(ConfigService::$tableContent . '.id', $id)
-                    ->get()
-                    ->toArray()
-            )[$id] ?? null;
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        )[$id] ?? null;
     }
 
     /**
@@ -128,7 +135,7 @@ class ContentRepository extends RepositoryBase
      */
     public function getByIds(array $ids)
     {
-        $query = $this->initQuery();
+        $query = $this->query();
 
 //        $this->addInheritedContentToQuery($query);
         $this->addSlugInheritanceToQuery($query);
@@ -157,7 +164,7 @@ class ContentRepository extends RepositoryBase
      */
     public function getBySlugAndType($slug, $type)
     {
-        $query = $this->initQuery();
+        $query = $this->query();
 
 //        $this->addInheritedContentToQuery($query);
         $this->addSlugInheritanceToQuery($query);
@@ -178,12 +185,12 @@ class ContentRepository extends RepositoryBase
      */
     public function countFilter()
     {
-        $subQuery = $this->initQuery();
+        $subQuery = $this->query();
 
         $this->addSlugInheritanceToQuery($subQuery);
         $this->addFilteringToQuery($subQuery);
 
-        $query = $this->initQuery();
+        $query = $this->query();
 
         // $this->addFieldsAndDatumToQuery($query);
         $this->addSlugInheritanceToQuery($query);
@@ -320,18 +327,76 @@ class ContentRepository extends RepositoryBase
                                 'position' => $field['position']
                             ];
 
-
                         }
                     }
 
-                // this prevent json from casting the fields to an object instead of an array
-                $parsedContents[$contentId]['fields'] =
-                    array_values($parsedContents[$contentId]['fields']);
+                    // this prevent json from casting the fields to an object instead of an array
+                    $parsedContents[$contentId]['fields'] =
+                        array_values($parsedContents[$contentId]['fields']);
+                }
             }
-        }
         }
 
         return $parsedContents;
+    }
+
+    /**
+     * @param array $contentRows
+     * @param array $fieldRows
+     * @param array $datumRows
+     * @param array $permissionRows
+     * @return array
+     */
+    private function processRows(
+        array $contentRows,
+        array $fieldRows,
+        array $datumRows,
+        array $permissionRows
+    ) {
+        $contents = [];
+        $parents = [];
+
+        $fieldRowsGrouped = ContentHelper::groupArrayBy($fieldRows, 'content_id');
+        $datumRowsGrouped = ContentHelper::groupArrayBy($datumRows, 'content_id');
+        $permissionRowsGrouped = ContentHelper::groupArrayBy($permissionRows, 'content_id');
+
+        foreach ($contentRows as $contentRow) {
+            $content = [
+                'id' => $contentRow['id'],
+                'slug' => $contentRow['slug'],
+                'type' => $contentRow['type'],
+                'status' => $contentRow['status'],
+                'language' => $contentRow['language'],
+                'brand' => $contentRow['brand'],
+                'published_on' => $contentRow['published_on'],
+                'created_on' => $contentRow['created_on'],
+                'archived_on' => $contentRow['archived_on'],
+                'fields' => $fieldRowsGrouped[$contentRow['id']] ?? [],
+                'datum' => $datumRowsGrouped[$contentRow['id']] ?? [],
+                'permissions' => $permissionRowsGrouped[$contentRow['id']] ?? [],
+            ];
+
+            $contents[$contentRow['id']] = $content;
+
+//            if (!empty($contentRow['parent_id'])) {
+//                $parent = [
+//                    'parent_child_position' => $contentRow['parent_child_position'],
+//                    'id' => $contentRow['parent_id'],
+//                    'slug' => $contentRow['parent_slug'],
+//                ];
+//
+//                $parents[$contentRow['id']][] = $parent;
+//
+//                $parents[$contentRow['id']] =
+//                    array_map(
+//                        "unserialize",
+//                        array_unique(array_map("serialize", $parents[$contentRow['id']]))
+//                    );
+//            }
+
+        }
+
+        return $contents;
     }
 
     /**
@@ -458,13 +523,13 @@ class ContentRepository extends RepositoryBase
      */
     public function retrieveFilter()
     {
-        $subQuery = $this->initQuery();
+        $subQuery = $this->query();
 
         $this->addSlugInheritanceToQuery($subQuery);
         $this->addFilteringToQuery($subQuery);
         $this->addPaginationToQuery($subQuery);
 
-        $query = $this->initQuery();
+        $query = $this->query();
 
         //$this->addFieldsAndDatumToQuery($query);
         $this->addSlugInheritanceToQuery($query);
@@ -478,7 +543,7 @@ class ContentRepository extends RepositoryBase
      */
     public function getFilterFields()
     {
-        $query = $this->initQuery();
+        $query = $this->query();
 
         $this->addFieldsAndDatumToQuery($query);
         $this->addFilteringToQuery($query);
@@ -580,39 +645,6 @@ class ContentRepository extends RepositoryBase
         return $this;
     }
 
-    private function addSlugInheritanceToQuery(Builder &$query)
-    {
-        $previousTableName = ConfigService::$tableContent;
-        $previousTableJoinColumn = '.id';
-
-        foreach ($this->slugHierarchy as $i => $slug) {
-            $tableName = 'inheritance_' . $i;
-
-            $query->leftJoin(
-                ConfigService::$tableContentHierarchy . ' as ' . $tableName,
-                $tableName . '.child_id',
-                '=',
-                $previousTableName . $previousTableJoinColumn
-            );
-
-            $inheritedContentTableName = 'inherited_content_' . $i;
-
-            $query->leftJoin(
-                ConfigService::$tableContent . ' as ' . $inheritedContentTableName,
-                $inheritedContentTableName . '.id',
-                '=',
-                $tableName . '.parent_id'
-            );
-
-            $query->addSelect([$tableName . '.child_position as child_position_' . $i]);
-            $query->addSelect([$tableName . '.parent_id as parent_id_' . $i]);
-            $query->addSelect([$inheritedContentTableName . '.slug as parent_slug_' . $i]);
-
-            $previousTableName = $tableName;
-            $previousTableJoinColumn = '.parent_id';
-        }
-    }
-
     /**
      * @param Builder $query
      */
@@ -650,39 +682,48 @@ class ContentRepository extends RepositoryBase
                                 ->from(ConfigService::$tableContentFields)
                                 ->where(
                                     [
-                                        ConfigService::$tableContentFields . '.key' => $requiredFieldData['name'],
+                                        ConfigService::$tableContentFields .
+                                        '.key' => $requiredFieldData['name'],
                                         ConfigService::$tableContentFields .
                                         '.content_id' => $this->databaseManager->raw(
                                             ConfigService::$tableContent . '.id'
                                         )
-                                    ])
-                                ->where(function ($builder) use ($requiredFieldData) {
-                                    $builder->where([
-                                        ConfigService::$tableContentFields . '.value' => $requiredFieldData['value']
-                                    ])
-                                        ->orWhereExists(
+                                    ]
+                                )
+                                ->where(
                                     function ($builder) use ($requiredFieldData) {
-                                        $builder
-                                                    ->select(['linked_content.id'])
-                                                    ->from(ConfigService::$tableContent . ' as linked_content')
-                                                    ->where(
-                                                        'linked_content.slug',
-                                                $requiredFieldData['value']
-                                            )
-                                            ->whereIn(
-                                                $this->databaseManager->raw(
-                                                            ConfigService::$tableContentFields . '.value'
-                                                )
-                                                ,
-                                                [
-                                                    $this->databaseManager->raw(
-                                                                'linked_content.id'
+                                        $builder->where(
+                                            [
+                                                ConfigService::$tableContentFields .
+                                                '.value' => $requiredFieldData['value']
+                                            ]
+                                        )
+                                            ->orWhereExists(
+                                                function ($builder) use ($requiredFieldData) {
+                                                    $builder
+                                                        ->select(['linked_content.id'])
+                                                        ->from(
+                                                            ConfigService::$tableContent .
+                                                            ' as linked_content'
+                                                        )
+                                                        ->where(
+                                                            'linked_content.slug',
+                                                            $requiredFieldData['value']
+                                                        )
+                                                        ->whereIn(
+                                                            $this->databaseManager->raw(
+                                                                ConfigService::$tableContentFields . '.value'
                                                             )
-                                                        ]
-                                                    );
-                                            }
-                                        );
-                                }
+                                                            ,
+                                                            [
+                                                                $this->databaseManager->raw(
+                                                                    'linked_content.id'
+                                                                )
+                                                            ]
+                                                        );
+                                                }
+                                            );
+                                    }
                                 );
 
                             if ($requiredFieldData['type'] !== '') {
@@ -749,26 +790,26 @@ class ContentRepository extends RepositoryBase
                     $builder->whereExists(
                         function (Builder $builder) use ($requiredUserPlaylistData) {
                             return $builder
-                                ->select([ConfigService::$tableUserContent . '.content_id'])
-                                ->from(ConfigService::$tableUserContent)
+                                ->select([ConfigService::$tableUserContentProgress . '.content_id'])
+                                ->from(ConfigService::$tableUserContentProgress)
                                 ->leftJoin(
-                                    ConfigService::$tableUserContentPlaylists,
-                                    ConfigService::$tableUserContent . '.id',
+                                    ConfigService::$tablePlaylistContents,
+                                    ConfigService::$tableUserContentProgress . '.id',
                                     '=',
-                                    ConfigService::$tableUserContentPlaylists . '.content_user_id'
+                                    ConfigService::$tablePlaylistContents . '.content_user_id'
                                 )
                                 ->leftJoin(
                                     ConfigService::$tablePlaylists,
                                     ConfigService::$tablePlaylists . '.id',
                                     '=',
-                                    ConfigService::$tableUserContentPlaylists . '.playlist_id'
+                                    ConfigService::$tablePlaylistContents . '.playlist_id'
                                 )
                                 ->where(
-                                    ConfigService::$tableUserContent . '.user_id',
+                                    ConfigService::$tableUserContentProgress . '.user_id',
                                     $requiredUserPlaylistData['user_id']
                                 )
                                 ->where(
-                                    ConfigService::$tableUserContent . '.content_id',
+                                    ConfigService::$tableUserContentProgress . '.content_id',
                                     $this->databaseManager->raw(
                                         ConfigService::$tableContent . '.id'
                                     )
@@ -792,26 +833,26 @@ class ContentRepository extends RepositoryBase
                     $builder->orWhereExists(
                         function (Builder $builder) use ($requiredUserPlaylistData) {
                             return $builder
-                                ->select([ConfigService::$tableUserContent . '.content_id'])
-                                ->from(ConfigService::$tableUserContent)
+                                ->select([ConfigService::$tableUserContentProgress . '.content_id'])
+                                ->from(ConfigService::$tableUserContentProgress)
                                 ->leftJoin(
-                                    ConfigService::$tableUserContentPlaylists,
-                                    ConfigService::$tableUserContent . '.id',
+                                    ConfigService::$tablePlaylistContents,
+                                    ConfigService::$tableUserContentProgress . '.id',
                                     '=',
-                                    ConfigService::$tableUserContentPlaylists . '.content_user_id'
+                                    ConfigService::$tablePlaylistContents . '.content_user_id'
                                 )
                                 ->leftJoin(
                                     ConfigService::$tablePlaylists,
                                     ConfigService::$tablePlaylists . '.id',
                                     '=',
-                                    ConfigService::$tableUserContentPlaylists . '.playlist_id'
+                                    ConfigService::$tablePlaylistContents . '.playlist_id'
                                 )
                                 ->where(
-                                    ConfigService::$tableUserContent . '.user_id',
+                                    ConfigService::$tableUserContentProgress . '.user_id',
                                     $requiredUserPlaylistData['user_id']
                                 )
                                 ->where(
-                                    ConfigService::$tableUserContent . '.content_id',
+                                    ConfigService::$tableUserContentProgress . '.content_id',
                                     $this->databaseManager->raw(
                                         ConfigService::$tableContent . '.id'
                                     )
@@ -836,20 +877,20 @@ class ContentRepository extends RepositoryBase
                     $builder->whereExists(
                         function (Builder $builder) use ($requiredUserStateData) {
                             return $builder
-                                ->select([ConfigService::$tableUserContent . '.content_id'])
-                                ->from(ConfigService::$tableUserContent)
+                                ->select([ConfigService::$tableUserContentProgress . '.content_id'])
+                                ->from(ConfigService::$tableUserContentProgress)
                                 ->where(
-                                    ConfigService::$tableUserContent . '.user_id',
+                                    ConfigService::$tableUserContentProgress . '.user_id',
                                     $requiredUserStateData['user_id']
                                 )
                                 ->where(
-                                    ConfigService::$tableUserContent . '.content_id',
+                                    ConfigService::$tableUserContentProgress . '.content_id',
                                     $this->databaseManager->raw(
                                         ConfigService::$tableContent . '.id'
                                     )
                                 )
                                 ->where(
-                                    ConfigService::$tableUserContent . '.state',
+                                    ConfigService::$tableUserContentProgress . '.state',
                                     $requiredUserStateData['state']
                                 );
                         }
@@ -866,20 +907,20 @@ class ContentRepository extends RepositoryBase
                     $builder->orWhereExists(
                         function (Builder $builder) use ($requiredUserStateData) {
                             return $builder
-                                ->select([ConfigService::$tableUserContent . '.content_id'])
-                                ->from(ConfigService::$tableUserContent)
+                                ->select([ConfigService::$tableUserContentProgress . '.content_id'])
+                                ->from(ConfigService::$tableUserContentProgress)
                                 ->where(
-                                    ConfigService::$tableUserContent . '.user_id',
+                                    ConfigService::$tableUserContentProgress . '.user_id',
                                     $requiredUserStateData['user_id']
                                 )
                                 ->where(
-                                    ConfigService::$tableUserContent . '.content_id',
+                                    ConfigService::$tableUserContentProgress . '.content_id',
                                     $this->databaseManager->raw(
                                         ConfigService::$tableContent . '.id'
                                     )
                                 )
                                 ->where(
-                                    ConfigService::$tableUserContent . '.state',
+                                    ConfigService::$tableUserContentProgress . '.state',
                                     $requiredUserStateData['state']
                                 );
                         }
@@ -920,148 +961,16 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * @param Builder $query
-     */
-    private function addFieldsAndDatumToQuery(Builder &$query)
-    {
-        $query
-            ->addSelect(
-                [
-                    ConfigService::$tableContentFields . '.id as field_id',
-                    ConfigService::$tableContentFields . '.key as field_key',
-                    ConfigService::$tableContentFields . '.value as field_value',
-                    ConfigService::$tableContentFields . '.type as field_type',
-                    ConfigService::$tableContentFields . '.position as field_position',
-                    ConfigService::$tableContentData . '.id as datum_id',
-                    ConfigService::$tableContentData . '.key as datum_key',
-                    ConfigService::$tableContentData . '.value as datum_value',
-                    ConfigService::$tableContentData . '.position as datum_position',
-                ]
-            )
-            ->leftJoin(
-                ConfigService::$tableContentFields,
-                ConfigService::$tableContentFields . '.content_id',
-                '=',
-                ConfigService::$tableContent . '.id'
-            )
-
-            ->leftJoin(
-                ConfigService::$tableContentData,
-                ConfigService::$tableContentData . '.content_id',
-                '=',
-                ConfigService::$tableContent . '.id'
-            )
-            ;
-    }
-
-    /**
-     * @return Builder
-     */
-    private function initQuery()
-    {
-        return $this->query()
-            ->select(
-                [
-                    ConfigService::$tableContent . '.id as id',
-                    ConfigService::$tableContent . '.slug as slug',
-                    ConfigService::$tableContent . '.type as type',
-                    ConfigService::$tableContent . '.status as status',
-                    ConfigService::$tableContent . '.language as language',
-                    ConfigService::$tableContent . '.brand as brand',
-                    ConfigService::$tableContent . '.published_on as published_on',
-                    ConfigService::$tableContent . '.created_on as created_on',
-                    ConfigService::$tableContent . '.archived_on as archived_on',
-                ]
-            )
-            ->leftJoin(
-                ConfigService::$tableContentPermissions,
-                function (JoinClause $join) {
-                    return $join
-                        ->on(
-                            ConfigService::$tableContentPermissions . '.content_id',
-                            ConfigService::$tableContent . '.id'
-                        )
-                        ->orOn(
-                            ConfigService::$tableContentPermissions . '.content_type',
-                            ConfigService::$tableContent . '.type'
-                        );
-                }
-            )
-            ->leftJoin(
-                ConfigService::$tablePermissions,
-                ConfigService::$tablePermissions . '.id',
-                '=',
-                ConfigService::$tableContentPermissions . '.required_permission_id'
-            )
-            ->where(
-                function (Builder $builder) {
-                    if (is_array(PermissionRepository::$availableContentPermissionIds)) {
-                        return $builder->whereNull(ConfigService::$tablePermissions . '.id')
-                            ->orWhereIn(
-                                ConfigService::$tablePermissions . '.id',
-                                PermissionRepository::$availableContentPermissionIds
-                            );
-                    }
-
-                    return $builder;
-                }
-            );
-    }
-
-    /**
-     * @return Builder
+     * @return ContentQueryBuilder
      */
     private function query()
     {
-        return $this->connection()->table(ConfigService::$tableContent);
-    }
-
-    /**
-     * @return Builder
-     */
-    private function contentDataQuery()
-    {
-        return $this->connection()->table(ConfigService::$tableContentData);
-    }
-
-    /**
-     * @return Builder
-     */
-    private function contentFieldsQuery()
-    {
-        return $this->connection()->table(ConfigService::$tableContentFields);
-    }
-
-    /**
-     * @return Builder
-     */
-    private function contentPermissionQuery()
-    {
-        return $this->connection()->table(ConfigService::$tableContentPermissions);
-    }
-
-    /**
-     * @return Builder
-     */
-    private function userContentQuery()
-    {
-        return $this->connection()->table(ConfigService::$tableUserContent);
-    }
-
-    /**
-     * @return Builder
-     */
-    private function fieldQuery()
-    {
-        return $this->connection()->table(ConfigService::$tableFields);
-    }
-
-    /**
-     * @return Builder
-     */
-    private function userPlaylistQuery()
-    {
-        return $this->connection()->table(ConfigService::$tableUserContentPlaylists);
+        return (new ContentQueryBuilder(
+            $this->connection(),
+            $this->connection()->getQueryGrammar(),
+            $this->connection()->getPostProcessor()
+        ))
+            ->from(ConfigService::$tableContent);
     }
 
     /**

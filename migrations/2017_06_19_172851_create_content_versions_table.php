@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Railroad\Railcontent\Services\ConfigService;
 
-class CreateVersionsTable extends Migration
+class CreateContentVersionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateVersionsTable extends Migration
     public function up()
     {
         Schema::create(
-            ConfigService::$tableVersions,
+            ConfigService::$tableContentVersions,
             function (Blueprint $table) {
                 $table->increments('id');
 
@@ -35,6 +35,6 @@ class CreateVersionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableVersions);
+        Schema::dropIfExists(ConfigService::$tableContentVersions);
     }
 }

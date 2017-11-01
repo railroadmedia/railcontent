@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Railroad\Railcontent\Services\ConfigService;
 
-class CreateUserContentTable extends Migration
+class CreateUserContentProgressTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateUserContentTable extends Migration
      */
     public function up()
     {
-        Schema::create(ConfigService::$tableUserContent,
+        Schema::create(ConfigService::$tableUserContentProgress,
             function(Blueprint $table) {
                 $table->increments('id');
                 $table->integer('content_id')->index();
@@ -31,6 +31,6 @@ class CreateUserContentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableUserContent);
+        Schema::dropIfExists(ConfigService::$tableUserContentProgress);
     }
 }

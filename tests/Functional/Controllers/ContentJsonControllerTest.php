@@ -994,14 +994,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'state' => UserContentService::STATE_ADDED_TO_LIST,
             'progress' => $this->faker->numberBetween(1, 99)
         ];
-        $userContentId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($userContent);
+        $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
 
         $userContentPlaylist = [
             'content_user_id' => $userContentId,
             'playlist_id' => $playlistId
         ];
         $userContentPlaylistId =
-            $this->query()->table(ConfigService::$tableUserContentPlaylists)->insertGetId(
+            $this->query()->table(ConfigService::$tablePlaylistContents)->insertGetId(
                 $userContentPlaylist
             );
 

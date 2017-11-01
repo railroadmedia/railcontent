@@ -43,7 +43,7 @@ class PermissionService
      * @param string $name
      * @return mixed
      */
-    public function store($name)
+    public function create($name)
     {
         $permissionId = $this->permissionRepository->create($name);
 

@@ -9,26 +9,6 @@ use Railroad\Railcontent\Services\ConfigService;
 class ContentHierarchyRepository extends RepositoryBase
 {
     /**
-     * @var DatabaseManager
-     */
-    private $databaseManager;
-
-    /**
-     * ContentRepository constructor.
-     *
-     * @param DatabaseManager $databaseManager
-     * @internal param PermissionRepository $permissionRepository
-     * @internal param FieldRepository $fieldRepository
-     * @internal param DatumRepository $datumRepository
-     */
-    public function __construct(DatabaseManager $databaseManager)
-    {
-        parent::__construct();
-
-        $this->databaseManager = $databaseManager;
-    }
-
-    /**
      * @param int $parentId
      * @param int $childId
      * @param int|null $position
@@ -36,11 +16,11 @@ class ContentHierarchyRepository extends RepositoryBase
      */
     public function updateOrCreateChildToParentLink($parentId, $childId, $position = null)
     {
-        $existingLink = $this->queryTable()
+        $existingLink = $this->query()
             ->where(['parent_id' => $parentId, 'child_id' => $childId])
             ->first();
 
-        $childCount = $this->queryTable()
+        $childCount = $this->query()
             ->where('parent_id', $parentId)
             ->count();
 
@@ -58,12 +38,12 @@ class ContentHierarchyRepository extends RepositoryBase
 
         if (empty($existingLink)) {
 
-            $this->queryTable()
+            $this->query()
                 ->where('parent_id', $parentId)
                 ->where('child_position', '>=', $position)
                 ->increment('child_position');
 
-            return $this->queryTable()
+            return $this->query()
                 ->insert(
                     [
                         'parent_id' => $parentId,
@@ -74,7 +54,7 @@ class ContentHierarchyRepository extends RepositoryBase
 
         } elseif ($position > $existingLink['child_position']) {
 
-            $this->queryTable()
+            $this->query()
                 ->where(
                     [
                         'parent_id' => $parentId,
@@ -83,7 +63,7 @@ class ContentHierarchyRepository extends RepositoryBase
                 )
                 ->update(['child_position' => $position]);
 
-            return $this->queryTable()
+            return $this->query()
                     ->where('parent_id', $parentId)
                     ->where('child_id', '!=', $childId)
                     ->where('child_position', '>', $existingLink['child_position'])
@@ -92,7 +72,7 @@ class ContentHierarchyRepository extends RepositoryBase
 
         } elseif ($position < $existingLink['child_position']) {
 
-            $this->queryTable()
+            $this->query()
                 ->where(
                     [
                         'parent_id' => $parentId,
@@ -101,7 +81,7 @@ class ContentHierarchyRepository extends RepositoryBase
                 )
                 ->update(['child_position' => $position]);
 
-            return $this->queryTable()
+            return $this->query()
                     ->where('parent_id', $parentId)
                     ->where('child_id', '!=', $childId)
                     ->where('child_position', '<', $existingLink['child_position'])
@@ -119,7 +99,7 @@ class ContentHierarchyRepository extends RepositoryBase
      */
     public function deleteChildParentLinks($childId)
     {
-        $existingLinks = $this->queryTable()
+        $existingLinks = $this->query()
             ->where(['child_id' => $childId])
             ->get()
             ->toArray();
@@ -127,11 +107,11 @@ class ContentHierarchyRepository extends RepositoryBase
         $totalRowsDeleted = 0;
 
         foreach ($existingLinks as $existingLink) {
-            $totalRowsDeleted += $this->queryTable()
+            $totalRowsDeleted += $this->query()
                 ->where(['parent_id' => $existingLink['parent_id'], 'child_id' => $childId])
                 ->delete();
 
-            $this->queryTable()
+            $this->query()
                 ->where('parent_id', $existingLink['parent_id'])
                 ->where('child_position', '>=', $existingLink['child_position'])
                 ->decrement('child_position');
@@ -146,7 +126,7 @@ class ContentHierarchyRepository extends RepositoryBase
      */
     public function deleteParentChildLinks($parentId)
     {
-        return $this->queryTable()
+        return $this->query()
             ->where(['parent_id' => $parentId])
             ->delete() > 0;
     }
@@ -154,7 +134,7 @@ class ContentHierarchyRepository extends RepositoryBase
     /**
      * @return Builder
      */
-    private function queryTable()
+    protected function query()
     {
         return $this->connection()->table(ConfigService::$tableContentHierarchy);
     }

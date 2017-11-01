@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Railroad\Railcontent\Services\ConfigService;
 
-class CreateUserContentPlaylistsTable extends Migration
+class CreatePlaylistContentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,11 @@ class CreateUserContentPlaylistsTable extends Migration
      */
     public function up()
     {
-        Schema::create(ConfigService::$tableUserContentPlaylists,
+        Schema::create(ConfigService::$tablePlaylistContents,
             function(Blueprint $table) {
                 $table->increments('id');
-                $table->integer('content_user_id')->index();
                 $table->integer('playlist_id')->index();
+                $table->integer('content_id')->index();
             });
     }
 
@@ -29,6 +29,6 @@ class CreateUserContentPlaylistsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableUserContentPlaylists);
+        Schema::dropIfExists(ConfigService::$tablePlaylistContents);
     }
 }

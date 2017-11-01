@@ -27,12 +27,14 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
         $value = $this->faker->text();
         $position = rand();
 
-        $result = $this->classBeingTested->get(
+        $result = $this->classBeingTested->getById(
             $this->classBeingTested->create(
-                $contentId,
-                $key,
-                $value,
-                $position
+                [
+                    'content_id' => $contentId,
+                    'key' => $key,
+                    'value' => $value,
+                    'position' => $position
+                ]
             )
         );
 

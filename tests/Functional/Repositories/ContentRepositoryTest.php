@@ -3,7 +3,9 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
+use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\FieldFactory;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -33,6 +35,16 @@ class ContentRepositoryTest extends RailcontentTestCase
      */
     protected $fieldFactory;
 
+    /**
+     * @var ContentDatumFactory
+     */
+    protected $contentDatumFactory;
+
+    /**
+     * @var ContentPermissionsFactory
+     */
+    protected $contentPermissionFactory;
+
     protected function setUp()
     {
         parent::setUp();
@@ -42,6 +54,96 @@ class ContentRepositoryTest extends RailcontentTestCase
         $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->fieldFactory = $this->app->make(FieldFactory::class);
+        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
+        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
+    }
+
+    public function test_get_by_id()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'type' => $this->faker->word,
+            'status' => $this->faker->word,
+            'brand' => ConfigService::$brand,
+            'language' => 'en-US',
+            'published_on' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => Carbon::now()->toDateTimeString(),
+        ];
+
+        $contentId =
+            $this->classBeingTested->create(
+                $content['slug'],
+                $content['type'],
+                $content['status'],
+                $content['brand'],
+                $content['language'],
+                $content['published_on'],
+                $content['created_on'],
+                $content['archived_on']
+            );
+
+        $results = $this->classBeingTested->getById($contentId);
+
+        $this->assertEquals(
+            array_merge($content, ['id' => $contentId, 'fields' => [], 'datum' => [], 'permissions' => []]),
+            $results
+        );
+    }
+
+    public function test_get_by_id_with_fields_datum_permissions()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'type' => $this->faker->word,
+            'status' => $this->faker->word,
+            'brand' => ConfigService::$brand,
+            'language' => 'en-US',
+            'published_on' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => Carbon::now()->toDateTimeString(),
+        ];
+
+        $contentId =
+            $this->classBeingTested->create(
+                $content['slug'],
+                $content['type'],
+                $content['status'],
+                $content['brand'],
+                $content['language'],
+                $content['published_on'],
+                $content['created_on'],
+                $content['archived_on']
+            );
+
+        $expectedFields = [];
+        $expectedData = [];
+        $expectedPermissions = [];
+
+        for ($i = 0; $i < 3; $i++) {
+            $expectedFields[] = $this->fieldFactory->create([$contentId]);
+            $expectedData[] = $this->contentDatumFactory->create([$contentId]);
+            $expectedPermissions[] = $this->contentPermissionFactory->create();
+
+            $this->contentPermissionFactory->assign(
+                [end($expectedPermissions)['id'], $contentId]
+            );
+        }
+
+        $results = $this->classBeingTested->getById($contentId);
+
+        $this->assertEquals(
+            array_merge(
+                $content,
+                [
+                    'id' => $contentId,
+                    'fields' => $expectedFields,
+                    'datum' => $expectedData,
+                    'permissions' => $expectedPermissions
+                ]
+            ),
+            $results
+        );
     }
 
     public function test_create_content()

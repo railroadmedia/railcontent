@@ -32,7 +32,7 @@ class UserContentRepository extends RepositoryBase
 
     public function queryTable()
     {
-        return parent::connection()->table(ConfigService::$tableUserContent);
+        return parent::connection()->table(ConfigService::$tableUserContentProgress);
     }
 
     /**
@@ -94,7 +94,7 @@ class UserContentRepository extends RepositoryBase
         if ($state) {
             $this->generateUserContentQuery($queryBuilder, $userId);
 
-            $queryBuilder->where(ConfigService::$tableUserContent . '.state', '=', $state);
+            $queryBuilder->where(ConfigService::$tableUserContentProgress . '.state', '=', $state);
         }
 
         if (request()->exists('playlists')) {
@@ -117,11 +117,11 @@ class UserContentRepository extends RepositoryBase
     {
         //join with user content
         $queryBuilder->leftJoin(
-            ConfigService::$tableUserContent,
-            ConfigService::$tableUserContent . '.content_id',
+            ConfigService::$tableUserContentProgress,
+            ConfigService::$tableUserContentProgress . '.content_id',
             '=',
             ConfigService::$tableContent . '.id'
-        )->where(ConfigService::$tableUserContent . '.user_id', '=', $userId);
+        )->where(ConfigService::$tableUserContentProgress . '.user_id', '=', $userId);
     }
 
     /**
@@ -130,15 +130,15 @@ class UserContentRepository extends RepositoryBase
     private function generateUserPlaylistsQuery($queryBuilder)
     {
         $queryBuilder->leftJoin(
-            ConfigService::$tableUserContentPlaylists,
-            ConfigService::$tableUserContent . '.id',
+            ConfigService::$tablePlaylistContents,
+            ConfigService::$tableUserContentProgress . '.id',
             '=',
-            ConfigService::$tableUserContentPlaylists . '.content_user_id'
+            ConfigService::$tablePlaylistContents . '.content_user_id'
         )->leftJoin(
             ConfigService::$tablePlaylists,
             ConfigService::$tablePlaylists . '.id',
             '=',
-            ConfigService::$tableUserContentPlaylists . '.playlist_id'
+            ConfigService::$tablePlaylistContents . '.playlist_id'
 
         );
     }

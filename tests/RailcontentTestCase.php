@@ -159,52 +159,6 @@ class RailcontentTestCase extends BaseTestCase
         return $userId;
     }
 
-    public function setUserLanguage($userId)
-    {
-       return true;
-        return $this->databaseManager->connection()->query()->from(ConfigService::$tableUserLanguagePreference)->updateOrInsert(
-            [
-                'user_id' => $userId,]
-            , [
-                'language_id' => 1,
-                'brand' => ConfigService::$brand
-            ]
-        );
-    }
-
-    public function createContent($content = null)
-    {
-        if(!$content) {
-            $content = [
-                'status' => $this->faker->word,
-                'type' => $this->faker->word,
-                'position' => $this->faker->numberBetween(),
-                'parent_id' => null,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null,
-                'brand' => ConfigService::$brand
-            ];
-        } else if(!array_key_exists('brand', $content)){
-            $content['brand'] = ConfigService::$brand;
-        }
-
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-        return $contentId;
-    }
-
-    public function translateItem($language, $entityId, $entityType, $value)
-    {
-        $translation = [
-            'language_id' => $language,
-            'entity_type' => $entityType,
-            'entity_id' => $entityId,
-            'value' => $value
-        ];
-        return $this->query()->table(ConfigService::$tableTranslations)->insertGetId($translation);
-    }
-
     /**
      * @return \Illuminate\Database\Connection
      */

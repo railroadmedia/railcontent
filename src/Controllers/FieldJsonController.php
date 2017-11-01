@@ -37,8 +37,8 @@ class FieldJsonController extends Controller
             $request->input('content_id'),
             $request->input('key'),
             $request->input('value'),
-            $request->input('type'),
-            $request->input('position')
+            $request->input('position'),
+            $request->input('type')
         );
 
         return response()->json($categoryField, 200);

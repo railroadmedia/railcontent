@@ -35,7 +35,7 @@ class PlaylistRepositoryTest extends RailcontentTestCase
             'progress' => $this->faker->numberBetween(1, 99)
         ];
 
-        $contentUserId = $this->query()->table(ConfigService::$tableUserContent)->insertGetId($contentUser);
+        $contentUserId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($contentUser);
 
         $playlist = [
             'name' => $this->faker->word,
@@ -49,7 +49,7 @@ class PlaylistRepositoryTest extends RailcontentTestCase
         $results = $this->classBeingTested->addToPlaylist($contentUserId, $playlistId);
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentPlaylists,
+            ConfigService::$tablePlaylistContents,
             [
                 'id' => $results,
                 'content_user_id' => $contentUserId,
