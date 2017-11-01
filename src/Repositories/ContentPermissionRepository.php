@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Illuminate\Database\Query\Builder;
+use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 
 /**
@@ -12,15 +13,7 @@ use Railroad\Railcontent\Services\ConfigService;
  */
 class ContentPermissionRepository extends RepositoryBase
 {
-    /**
-     * This tells the query to only pull content that has its required permissions satisfied by these ids.
-     *
-     * If false, content permissions are ignored.
-     * If an array, only content with those permissions are returned.
-     *
-     * @var bool|array
-     */
-    public static $availableContentPermissionIds = false;
+    use ByContentIdTrait;
 
     /**
      * Return a permission based on it's id

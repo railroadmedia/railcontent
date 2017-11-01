@@ -51,7 +51,7 @@ abstract class RepositoryBase
     /**
      * @param integer $id
      * @param array $data
-     * @return mixed
+     * @return integer
      */
     public function update($id, array $data)
     {

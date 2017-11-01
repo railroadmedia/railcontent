@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
-use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -25,73 +24,66 @@ class PermissionRepositoryTest extends RailcontentTestCase
     {
         $name = $this->faker->word;
 
-        $permissionId = $this->classBeingTested->create($name);
+        $id = $this->classBeingTested->create(['name' => $name]);
+
+        $this->assertEquals(1, $id);
 
         $this->assertDatabaseHas(
             ConfigService::$tablePermissions,
             [
-                'id' => $permissionId,
-                'name' => $name,
-                'created_on' => Carbon::now()->toDateTimeString()
+                'name' => $name
             ]
         );
     }
 
     public function test_update_permission_name()
     {
-        $permission = [
-            'name' => $this->faker->word,
-            'created_on' => Carbon::now()->toDateTimeString()
-        ];
+        $name = $this->faker->word;
 
-        $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+        $id = $this->classBeingTested->create(['name' => $name]);
 
         $newName = $this->faker->word;
 
-        $this->classBeingTested->update($permissionId, $newName);
+        $id = $this->classBeingTested->update($id, ['name' => $newName]);
+
+        $this->assertEquals(1, $id);
 
         $this->assertDatabaseHas(
             ConfigService::$tablePermissions,
             [
-                'id' => $permissionId,
-                'name' => $newName,
-                'created_on' => Carbon::now()->toDateTimeString()
+                'name' => $newName
             ]
         );
     }
 
     public function test_delete_permission()
     {
-        $permission = [
-            'name' => $this->faker->word,
-            'created_on' => Carbon::now()->toDateTimeString()
-        ];
+        $name = $this->faker->word;
 
-        $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+        $id = $this->classBeingTested->create(['name' => $name]);
 
-        $this->classBeingTested->delete($permissionId);
+        $result = $this->classBeingTested->delete($id);
+
+        $this->assertTrue($result);
 
         $this->assertDatabaseMissing(
             ConfigService::$tablePermissions,
             [
-                'id' => $permissionId
+                'name' => $name
             ]
         );
     }
 
     public function test_get_permission_by_id()
     {
-        $permission = [
-            'name' => $this->faker->word,
-            'created_on' => Carbon::now()->toDateTimeString()
-        ];
+        $name = $this->faker->word;
 
-        $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+        $id = $this->classBeingTested->create(['name' => $name]);
 
-        $response = $this->classBeingTested->getById($permissionId);
+        $response = $this->classBeingTested->getById($id);
 
         $this->assertEquals(
-            array_merge(['id' => $permissionId], $permission),
+            ['id' => $id, 'name' => $name],
             $response
         );
     }
@@ -100,57 +92,6 @@ class PermissionRepositoryTest extends RailcontentTestCase
     {
         $response = $this->classBeingTested->getById(rand());
 
-        $this->assertEquals(
-            null,
-            $response
-        );
-    }
-
-    public function test_assign_permission_to_specific_content()
-    {
-        $permission = [
-            'name' => $this->faker->word,
-            'created_on' => Carbon::now()->toDateTimeString()
-        ];
-
-        $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
-
-        $contentId = $this->faker->randomNumber();
-
-        $this->classBeingTested->assign($permissionId, $contentId, null);
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContentPermissions,
-            [
-                'id' => $permissionId,
-                'content_id' => $contentId,
-                'content_type' => null,
-                'required_permission_id' => $permissionId
-            ]
-        );
-    }
-
-    public function test_assign_permission_to_content_type()
-    {
-        $permission = [
-            'name' => $this->faker->word,
-            'created_on' => Carbon::now()->toDateTimeString()
-        ];
-
-        $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
-
-        $contentType = $this->faker->word;
-
-        $this->classBeingTested->assign($permissionId, null, $contentType);
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableContentPermissions,
-            [
-                'id' => $permissionId,
-                'content_id' => null,
-                'content_type' => $contentType,
-                'required_permission_id' => $permissionId
-            ]
-        );
+        $this->assertEmpty($response);
     }
 }
