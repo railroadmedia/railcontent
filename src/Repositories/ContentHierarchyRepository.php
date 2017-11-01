@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -127,8 +126,8 @@ class ContentHierarchyRepository extends RepositoryBase
     public function deleteParentChildLinks($parentId)
     {
         return $this->query()
-            ->where(['parent_id' => $parentId])
-            ->delete() > 0;
+                ->where(['parent_id' => $parentId])
+                ->delete() > 0;
     }
 
     /**

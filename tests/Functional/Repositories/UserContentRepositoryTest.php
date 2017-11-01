@@ -3,7 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Repositories\UserContentRepository;
+use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\UserContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -11,7 +11,7 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 class UserContentRepositoryTest extends RailcontentTestCase
 {
     /**
-     * @var UserContentRepository
+     * @var UserContentProgressRepository
      */
     protected $classBeingTested;
 
@@ -19,7 +19,7 @@ class UserContentRepositoryTest extends RailcontentTestCase
     {
         parent::setUp();
 
-        $this->classBeingTested = $this->app->make(UserContentRepository::class);
+        $this->classBeingTested = $this->app->make(UserContentProgressRepository::class);
     }
 
     public function test_start_content()

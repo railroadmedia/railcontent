@@ -3,7 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Railroad\Railcontent\Repositories\PlaylistRepository;
-use Railroad\Railcontent\Repositories\UserContentRepository;
+use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 
 class PlaylistsService
 {
@@ -13,7 +13,7 @@ class PlaylistsService
     protected $playlistsRepository;
 
     /**
-     * @var UserContentRepository
+     * @var UserContentProgressRepository
      */
     protected$userContentRepository;
 
@@ -25,11 +25,11 @@ class PlaylistsService
      * PlaylistsService constructor.
      *
      * @param PlaylistRepository $playlistsRepository
-     * @param UserContentRepository $userContentRepository
+     * @param UserContentProgressRepository $userContentRepository
      */
     public function __construct(
         PlaylistRepository $playlistsRepository,
-        UserContentRepository $userContentRepository
+        UserContentProgressRepository $userContentRepository
     ) {
         $this->playlistsRepository = $playlistsRepository;
         $this->userContentRepository = $userContentRepository;

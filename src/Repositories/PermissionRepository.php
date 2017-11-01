@@ -5,11 +5,6 @@ namespace Railroad\Railcontent\Repositories;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 
-/**
- * Class PermissionRepository
- *
- * @package Railroad\Railcontent\Repositories
- */
 class PermissionRepository extends RepositoryBase
 {
     /**

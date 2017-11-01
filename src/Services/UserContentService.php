@@ -2,12 +2,12 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Railroad\Railcontent\Repositories\UserContentRepository;
+use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 
 class UserContentService
 {
     /**
-     * @var UserContentRepository
+     * @var UserContentProgressRepository
      */
     public $userContentRepository;
 
@@ -26,7 +26,7 @@ class UserContentService
      *
      * @param $userContentRepository
      */
-    public function __construct(UserContentRepository $userContentRepository)
+    public function __construct(UserContentProgressRepository $userContentRepository)
     {
         $this->userContentRepository = $userContentRepository;
     }
