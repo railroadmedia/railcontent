@@ -12,7 +12,7 @@ use Railroad\Railcontent\Controllers\PermissionJsonController;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Listeners\VersionContentEventListener;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\FieldRepository;
+use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Repositories\UserContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -128,7 +128,7 @@ class RailcontentServiceProvider extends ServiceProvider
             ->give(ContentRepository::class);
 
         $this->app
-            ->when(FieldRepository::class)
+            ->when(ContentFieldRepository::class)
             ->needs(SearchInterface::class)
             ->give(ContentRepository::class);
 

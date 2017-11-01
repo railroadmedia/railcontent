@@ -3,12 +3,12 @@
 namespace Railroad\Railcontent\Services;
 
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\FieldRepository;
+use Railroad\Railcontent\Repositories\ContentFieldRepository;
 
 class FieldService
 {
     /**
-     * @var FieldRepository
+     * @var ContentFieldRepository
      */
     private $fieldRepository;
 
@@ -20,10 +20,10 @@ class FieldService
     /**
      * FieldService constructor.
      *
-     * @param FieldRepository $fieldRepository
+     * @param ContentFieldRepository $fieldRepository
      * @param ContentRepository $contentRepository
      */
-    public function __construct(FieldRepository $fieldRepository, ContentRepository $contentRepository)
+    public function __construct(ContentFieldRepository $fieldRepository, ContentRepository $contentRepository)
     {
         $this->fieldRepository = $fieldRepository;
         $this->contentRepository = $contentRepository;
