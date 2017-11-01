@@ -18,8 +18,8 @@ class PlaylistsService
     protected$userContentRepository;
 
     // playlist types
-    const TYPE_PUBLIC = 'public';
-    const TYPE_PRIVATE = 'private';
+    const PRIVACY_PUBLIC = 'public';
+    const PRIVACY_PRIVATE = 'private';
 
     /**
      * PlaylistsService constructor.
@@ -84,7 +84,7 @@ class PlaylistsService
      */
     public function store($name, $userId, $isAdmin)
     {
-        $type = ($isAdmin == 1) ? $this::TYPE_PUBLIC : $this::TYPE_PRIVATE;
+        $type = ($isAdmin == 1) ? $this::PRIVACY_PUBLIC : $this::PRIVACY_PRIVATE;
 
         $playlistId = $this->playlistsRepository->store($name, $userId, $type);
 

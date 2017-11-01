@@ -1549,7 +1549,7 @@ class SearchServiceTest extends RailcontentTestCase
         $expectedContent = [];
 
         $playlist = [
-            'type' => PlaylistsService::TYPE_PUBLIC,
+            'type' => PlaylistsService::PRIVACY_PUBLIC,
             'brand' => ConfigService::$brand,
             'user_id' => $this->userId
         ];
@@ -1632,7 +1632,7 @@ class SearchServiceTest extends RailcontentTestCase
         $expectedContent = [];
 
         $playlist1 = [
-            'type' => PlaylistsService::TYPE_PUBLIC,
+            'type' => PlaylistsService::PRIVACY_PUBLIC,
             'brand' => ConfigService::$brand,
             'user_id' => $this->userId
         ];
@@ -1642,7 +1642,7 @@ class SearchServiceTest extends RailcontentTestCase
         $this->translateItem($this->classBeingTested->getUserLanguage(), $playlistId1, ConfigService::$tablePlaylists, $playlistName);
 
         $playlist2 = [
-            'type' => PlaylistsService::TYPE_PRIVATE,
+            'type' => PlaylistsService::PRIVACY_PRIVATE,
             'brand' => ConfigService::$brand,
             'user_id' => $this->userId
         ];

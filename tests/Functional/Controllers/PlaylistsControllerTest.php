@@ -30,7 +30,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
     {
         $playlist = [
             'name' => $this->faker->word,
-            'type' => PlaylistsService::TYPE_PUBLIC,
+            'type' => PlaylistsService::PRIVACY_PUBLIC,
             'brand' => ConfigService::$brand
         ];
 
@@ -71,7 +71,7 @@ class PlaylistsControllerTest extends RailcontentTestCase
 
         $playlist = [
             'name' => $this->faker->word,
-            'type' => PlaylistsService::TYPE_PUBLIC,
+            'type' => PlaylistsService::PRIVACY_PUBLIC,
             'brand' => ConfigService::$brand
         ];
 

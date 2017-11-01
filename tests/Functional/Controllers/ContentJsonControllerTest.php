@@ -982,7 +982,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         //create playlists
         $playlist = [
             'name' => $this->faker->word,
-            'type' => PlaylistsService::TYPE_PUBLIC,
+            'type' => PlaylistsService::PRIVACY_PUBLIC,
             'brand' => ConfigService::$brand
         ];
         $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
