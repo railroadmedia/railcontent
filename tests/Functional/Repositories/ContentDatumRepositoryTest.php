@@ -239,7 +239,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             $expectedData[] = $data;
         }
 
-        $this->classBeingTested->deleteContentData($contentId);
+        $this->classBeingTested->deleteByContentId($contentId);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContentData,

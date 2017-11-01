@@ -255,7 +255,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
             $expectedData[] = $data;
         }
 
-        $this->classBeingTested->deleteContentFields($contentId);
+        $this->classBeingTested->deleteByContentId($contentId);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContentFields,
