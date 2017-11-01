@@ -28,13 +28,15 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
         $position = rand();
         $type = $this->faker->text();
 
-        $result = $this->classBeingTested->get(
+        $result = $this->classBeingTested->getById(
             $this->classBeingTested->create(
-                $contentId,
-                $key,
-                $value,
-                $position,
-                $type
+                [
+                    'content_id' => $contentId,
+                    'key' => $key,
+                    'value' => $value,
+                    'position' => $position,
+                    'type' => $type
+                ]
             )
         );
 
@@ -75,13 +77,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'type' => $this->faker->word,
             ];
 
-            $data['id'] = $this->classBeingTested->create(
-                $data['content_id'],
-                $data['key'],
-                $data['value'],
-                $data['position'],
-                $data['type']
-            );
+            $data['id'] = $this->classBeingTested->create($data);
 
             $expectedData[] = $data;
         }
@@ -96,13 +92,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'type' => $this->faker->word,
             ];
 
-            $this->classBeingTested->create(
-                $data['content_id'],
-                $data['key'],
-                $data['value'],
-                $data['position'],
-                $data['type']
-            );
+            $this->classBeingTested->create($data);
         }
 
         $response = $this->classBeingTested->getByContentId($contentId);
@@ -126,13 +116,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'type' => $this->faker->word,
             ];
 
-            $data['id'] = $this->classBeingTested->create(
-                $data['content_id'],
-                $data['key'],
-                $data['value'],
-                $data['position'],
-                $data['type']
-            );
+            $data['id'] = $this->classBeingTested->create($data);
 
             $expectedData[] = $data;
         }
@@ -147,13 +131,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'type' => $this->faker->word,
             ];
 
-            $this->classBeingTested->create(
-                $data['content_id'],
-                $data['key'],
-                $data['value'],
-                $data['position'],
-                $data['type']
-            );
+            $this->classBeingTested->create($data);
         }
 
         $response = $this->classBeingTested->getByContentIds([1, 2, 3]);
@@ -171,13 +149,21 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
         $position = rand();
         $type = $this->faker->word;
 
-        $result = $this->classBeingTested->create(1, $key, $value, $position, $type);
+        $result = $this->classBeingTested->create(
+            [
+                'content_id' => 1,
+                'key' => $key,
+                'value' => $value,
+                'position' => $position,
+                'type' => $type
+            ]
+        );
 
         $this->assertEquals(1, $result);
+
         $this->assertDatabaseHas(
             ConfigService::$tableContentFields,
             [
-                'id' => 1,
                 'content_id' => 1,
                 'key' => $key,
                 'value' => $value,
@@ -214,10 +200,10 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
             );
 
         $this->assertEquals(1, $result);
+
         $this->assertDatabaseHas(
             ConfigService::$tableContentFields,
             [
-                'id' => 1,
                 'content_id' => $newData['content_id'],
                 'key' => $newData['key'],
                 'value' => $newData['value'],
@@ -264,13 +250,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'type' => $this->faker->word,
             ];
 
-            $data['id'] = $this->classBeingTested->create(
-                $data['content_id'],
-                $data['key'],
-                $data['value'],
-                $data['position'],
-                $data['type']
-            );
+            $data['id'] = $this->classBeingTested->create($data);
 
             $expectedData[] = $data;
         }
