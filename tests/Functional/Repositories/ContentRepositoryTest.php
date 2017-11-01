@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
-use Railroad\Railcontent\Factories\ContentFieldFactory;
+use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -31,7 +31,7 @@ class ContentRepositoryTest extends RailcontentTestCase
     protected $contentFactory;
 
     /**
-     * @var ContentFieldFactory
+     * @var ContentContentFieldFactory
      */
     protected $fieldFactory;
 
@@ -53,7 +53,7 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentFieldFactory::class);
+        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
         $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
         $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
     }

@@ -32,7 +32,7 @@ class PermissionService
      * @param integer $id
      * @return mixed
      */
-    public function getById($id)
+    public function get($id)
     {
         return $this->permissionRepository->getById($id);
     }
@@ -45,9 +45,9 @@ class PermissionService
      */
     public function create($name)
     {
-        $permissionId = $this->permissionRepository->create($name);
+        $permissionId = $this->permissionRepository->create(['name' => $name]);
 
-        return $this->getById($permissionId);
+        return $this->get($permissionId);
     }
 
     /**
@@ -59,9 +59,9 @@ class PermissionService
      */
     public function update($id, $name)
     {
-        $this->permissionRepository->update($id, $name);
+        $this->permissionRepository->update($id, ['name' => $name]);
 
-        return $this->getById($id);
+        return $this->get($id);
     }
 
     /**
@@ -73,18 +73,5 @@ class PermissionService
     public function delete($id)
     {
         return $this->permissionRepository->delete($id) > 0;
-    }
-    
-    /**
-     * Attach permission to a specific content($contentId) or to all content of a certain type($contentType)
-     *
-     * @param integer $permissionId
-     * @param integer|null $contentId
-     * @param string|null $contentType
-     * @return mixed
-     */
-    public function assign($permissionId, $contentId, $contentType)
-    {
-        return $this->permissionRepository->assign($permissionId, $contentId, $contentType) > 0;
     }
 }

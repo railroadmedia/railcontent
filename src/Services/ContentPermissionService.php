@@ -2,7 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Railroad\Railcontent\Repositories\PermissionRepository;
+use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 
 /**
  * Class PermissionService
@@ -12,79 +12,66 @@ use Railroad\Railcontent\Repositories\PermissionRepository;
 class ContentPermissionService
 {
     /**
-     * @var PermissionRepository
+     * @var ContentPermissionRepository
      */
-    public $permissionRepository;
+    private $contentPermissionRepository;
 
     /**
      * PermissionService constructor.
      *
-     * @param PermissionRepository $permissionRepository
+     * @param ContentPermissionRepository $contentPermissionRepository
      */
-    public function __construct(PermissionRepository $permissionRepository)
+    public function __construct(ContentPermissionRepository $contentPermissionRepository)
     {
-        $this->permissionRepository = $permissionRepository;
+        $this->contentPermissionRepository = $contentPermissionRepository;
     }
 
     /**
-     * Call getById method from PermissionRepository and return the permission
-     *
      * @param integer $id
      * @return mixed
      */
-    public function getById($id)
+    public function get($id)
     {
-        return $this->permissionRepository->getById($id);
+        return $this->contentPermissionRepository->getById($id);
     }
 
     /**
-     * Call the create method from PermissionRepository and return the new permission
-     *
-     * @param string $name
+     * @param int|null $contentId
+     * @param string|null $contentType
+     * @param int $permissionId
      * @return mixed
      */
-    public function create($name)
+    public function create($contentId = null, $contentType = null, $permissionId)
     {
-        $permissionId = $this->permissionRepository->create(['name' => $name]);
+        $id = $this->contentPermissionRepository->create(
+            [
+                'content_id' => $contentId,
+                'content_type' => $contentType,
+                'permission_id' => $permissionId,
+            ]
+        );
 
-        return $this->getById($permissionId);
+        return $this->get($id);
     }
 
     /**
-     * Call update method from PermissionRepository and return the updated permission
-     *
      * @param integer $id
-     * @param string $name
+     * @param array $data
      * @return mixed
      */
-    public function update($id, $name)
+    public function update($id, array $data)
     {
-        $this->permissionRepository->update($id, $name);
+        $this->contentPermissionRepository->update($id, $data);
 
-        return $this->getById($id);
+        return $this->get($id);
     }
 
     /**
-     * Call delete method from PermissionRepository and return true if the permission was deleted
-     *
      * @param integer $id
      * @return bool
      */
     public function delete($id)
     {
-        return $this->permissionRepository->delete($id) > 0;
-    }
-
-    /**
-     * Attach permission to a specific content($contentId) or to all content of a certain type($contentType)
-     *
-     * @param integer $permissionId
-     * @param integer|null $contentId
-     * @param string|null $contentType
-     * @return mixed
-     */
-    public function assign($permissionId, $contentId, $contentType)
-    {
-        return $this->permissionRepository->assign($permissionId, $contentId, $contentType) > 0;
+        return $this->contentPermissionRepository->delete($id) > 0;
     }
 }

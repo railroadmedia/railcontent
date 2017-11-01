@@ -3,9 +3,9 @@
 namespace Railroad\Railcontent\Factories;
 
 use Faker\Generator;
-use Railroad\Railcontent\Services\FieldService;
+use Railroad\Railcontent\Services\ContentFieldService;
 
-class ContentFieldFactory extends FieldService
+class ContentContentFieldFactory extends ContentFieldService
 {
     /**
      * @var Generator

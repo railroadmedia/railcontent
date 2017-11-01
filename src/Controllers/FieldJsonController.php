@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Requests\FieldRequest;
-use Railroad\Railcontent\Services\FieldService;
+use Railroad\Railcontent\Services\ContentFieldService;
 
 class FieldJsonController extends Controller
 {
@@ -15,9 +15,9 @@ class FieldJsonController extends Controller
     /**
      * FieldController constructor.
      *
-     * @param FieldService $fieldService
+     * @param ContentFieldService $fieldService
      */
-    public function __construct(FieldService $fieldService)
+    public function __construct(ContentFieldService $fieldService)
     {
         $this->fieldService = $fieldService;
     }

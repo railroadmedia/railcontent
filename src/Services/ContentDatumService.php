@@ -27,7 +27,7 @@ class ContentDatumService
      */
     public function get($id)
     {
-        return $this->datumRepository->get($id);
+        return $this->datumRepository->getById($id);
     }
 
     /**
@@ -40,8 +40,6 @@ class ContentDatumService
     }
 
     /**
-     * Create a new datum, link the content with the new created datum.
-     *
      * @param integer $contentId
      * @param string $key
      * @param string $value
@@ -50,14 +48,19 @@ class ContentDatumService
      */
     public function create($contentId, $key, $value, $position)
     {
-        $id = $this->datumRepository->create($contentId, $key, $value, $position);
+        $id = $this->datumRepository->create(
+            [
+                'content_id' => $contentId,
+                'key' => $key,
+                'value' => $value,
+                'position' => $position
+            ]
+        );
 
         return $this->get($id);
     }
 
     /**
-     * Update the datum and return the new datum.
-     *
      * @param integer $id
      * @param array $data
      * @return array
@@ -70,8 +73,6 @@ class ContentDatumService
     }
 
     /**
-     * Call the repository method to unlink the content's datum
-     *
      * @param $id
      * @return bool
      */

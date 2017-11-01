@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
-use Railroad\Railcontent\Services\FieldService;
+use Railroad\Railcontent\Services\ContentFieldService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -20,7 +20,7 @@ class FieldControllerTest extends RailcontentTestCase
     {
         parent::setUp();
 
-        $this->serviceBeingTested = $this->app->make(FieldService::class);
+        $this->serviceBeingTested = $this->app->make(ContentFieldService::class);
         $this->classBeingTested = $this->app->make(ContentFieldRepository::class);
         $userId = $this->createAndLogInNewUser();
         $this->setUserLanguage($userId);
