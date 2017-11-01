@@ -132,7 +132,7 @@ class ContentRepository extends RepositoryBase
 
 //        $this->addInheritedContentToQuery($query);
         $this->addSlugInheritanceToQuery($query);
-        $this->addFieldsAndDatumToQuery($query);
+        // $this->addFieldsAndDatumToQuery($query);
 
         return $this->parseRows(
             $query->whereIn(ConfigService::$tableContent . '.id', $ids)
@@ -185,7 +185,7 @@ class ContentRepository extends RepositoryBase
 
         $query = $this->initQuery();
 
-        $this->addFieldsAndDatumToQuery($query);
+        // $this->addFieldsAndDatumToQuery($query);
         $this->addSlugInheritanceToQuery($query);
         $this->addSubJoinToQuery($query, $subQuery);
 
@@ -323,12 +323,12 @@ class ContentRepository extends RepositoryBase
 
                         }
                     }
-                }
 
                 // this prevent json from casting the fields to an object instead of an array
                 $parsedContents[$contentId]['fields'] =
                     array_values($parsedContents[$contentId]['fields']);
             }
+        }
         }
 
         return $parsedContents;
@@ -342,8 +342,9 @@ class ContentRepository extends RepositoryBase
     {
         $contents = [];
         $parents = [];
-        $fields = [];
-        $data = [];
+
+        $fields = $this->getContentsFields($rows);
+        $data = $this->getContentsData($rows);
 
         foreach ($rows as $row) {
             $content = [
@@ -356,41 +357,14 @@ class ContentRepository extends RepositoryBase
                 'published_on' => $row['published_on'],
                 'created_on' => $row['created_on'],
                 'archived_on' => $row['archived_on'],
+                'datum' => $data[$row['id']] ?? [],
+                'fields' => $fields[$row['id']] ?? []
             ];
 
             $contents[$row['id']] = $content;
 
             $contents[$row['id']] =
                 array_map("unserialize", array_unique(array_map("serialize", $contents[$row['id']])));
-
-            if (!empty($row['field_id'])) {
-                $field = [
-                    'id' => $row['field_id'],
-                    'key' => $row['field_key'],
-                    'value' => $row['field_value'],
-                    'type' => $row['field_type'],
-                    'position' => $row['field_position'],
-                ];
-
-                $fields[$row['id']][] = $field;
-
-                $fields[$row['id']] =
-                    array_map("unserialize", array_unique(array_map("serialize", $fields[$row['id']])));
-            }
-
-            if (!empty($row['datum_id'])) {
-                $datum = [
-                    'id' => $row['datum_id'],
-                    'key' => $row['datum_key'],
-                    'value' => $row['datum_value'],
-                    'position' => $row['datum_position'],
-                ];
-
-                $data[$row['id']][] = $datum;
-
-                $data[$row['id']] =
-                    array_map("unserialize", array_unique(array_map("serialize", $data[$row['id']])));
-            }
 
             if (!empty($row['parent_id'])) {
                 $parent = [
@@ -408,8 +382,6 @@ class ContentRepository extends RepositoryBase
         }
 
         foreach ($contents as $contentId => $content) {
-            $contents[$contentId]['fields'] = $fields[$contentId] ?? null;
-            $contents[$contentId]['data'] = $data[$contentId] ?? null;
             $contents[$contentId]['parents'] = $parents[$contentId] ?? null;
 
             $contents[$contentId] =
@@ -494,7 +466,7 @@ class ContentRepository extends RepositoryBase
 
         $query = $this->initQuery();
 
-        $this->addFieldsAndDatumToQuery($query);
+        //$this->addFieldsAndDatumToQuery($query);
         $this->addSlugInheritanceToQuery($query);
         $this->addSubJoinToQuery($query, $subQuery);
 
@@ -513,18 +485,18 @@ class ContentRepository extends RepositoryBase
 
         $query->select(
             [
-                ConfigService::$tableFields . '.id as field_id',
-                ConfigService::$tableFields . '.key as field_key',
-                ConfigService::$tableFields . '.value as field_value',
-                ConfigService::$tableFields . '.type as field_type',
+                ConfigService::$tableContentFields . '.id as field_id',
+                ConfigService::$tableContentFields . '.key as field_key',
+                ConfigService::$tableContentFields . '.value as field_value',
+                ConfigService::$tableContentFields . '.type as field_type',
             ]
         )
             ->groupBy(
                 [
-                    ConfigService::$tableFields . '.id',
-                    ConfigService::$tableFields . '.key',
-                    ConfigService::$tableFields . '.value',
-                    ConfigService::$tableFields . '.type',
+                    ConfigService::$tableContentFields . '.id',
+                    ConfigService::$tableContentFields . '.key',
+                    ConfigService::$tableContentFields . '.value',
+                    ConfigService::$tableContentFields . '.type',
                 ]
             );
 
@@ -674,66 +646,51 @@ class ContentRepository extends RepositoryBase
                     $builder->whereExists(
                         function (Builder $builder) use ($requiredFieldData) {
                             $builder
-                                ->select([ConfigService::$tableFields . '.id'])
+                                ->select([ConfigService::$tableContentFields . '.id'])
                                 ->from(ConfigService::$tableContentFields)
-                                ->join(
-                                    ConfigService::$tableFields,
-                                    ConfigService::$tableFields . '.id',
-                                    '=',
-                                    ConfigService::$tableContentFields . '.field_id'
-                                )
                                 ->where(
                                     [
-                                        ConfigService::$tableFields . '.key' => $requiredFieldData['name'],
-                                        ConfigService::$tableFields . '.value' => $requiredFieldData['value'],
+                                        ConfigService::$tableContentFields . '.key' => $requiredFieldData['name'],
                                         ConfigService::$tableContentFields .
                                         '.content_id' => $this->databaseManager->raw(
                                             ConfigService::$tableContent . '.id'
                                         )
-                                    ]
-                                );
-
-                            if ($requiredFieldData['type'] == 'content_id') {
-                                $builder->orWhereExists(
+                                    ])
+                                ->where(function ($builder) use ($requiredFieldData) {
+                                    $builder->where([
+                                        ConfigService::$tableContentFields . '.value' => $requiredFieldData['value']
+                                    ])
+                                        ->orWhereExists(
                                     function ($builder) use ($requiredFieldData) {
                                         $builder
-                                            ->select([ConfigService::$tableContent . '.id'])
-                                            ->from(ConfigService::$tableContent)
-                                            ->leftJoin(
-                                                ConfigService::$tableContentHierarchy,
-                                                ConfigService::$tableContent . '.id',
-                                                '=',
-                                                ConfigService::$tableContentHierarchy . '.child_id'
-                                            )
-                                            ->where(
-                                                ConfigService::$tableContent . '.slug',
+                                                    ->select(['linked_content.id'])
+                                                    ->from(ConfigService::$tableContent . ' as linked_content')
+                                                    ->where(
+                                                        'linked_content.slug',
                                                 $requiredFieldData['value']
                                             )
                                             ->whereIn(
                                                 $this->databaseManager->raw(
-                                                    ConfigService::$tableFields . '.value'
+                                                            ConfigService::$tableContentFields . '.value'
                                                 )
                                                 ,
                                                 [
                                                     $this->databaseManager->raw(
-                                                        ConfigService::$tableContent . '.id'
-                                                    ),
-                                                    $this->databaseManager->raw(
-                                                        ConfigService::$tableContentHierarchy . '.parent_id'
-                                                    )
-                                                ]
-                                            );
-                                    }
+                                                                'linked_content.id'
+                                                            )
+                                                        ]
+                                                    );
+                                            }
+                                        );
+                                }
                                 );
-                            }
 
                             if ($requiredFieldData['type'] !== '') {
                                 $builder->where(
-                                    ConfigService::$tableFields . '.type',
+                                    ConfigService::$tableContentFields . '.type',
                                     $requiredFieldData['type']
                                 );
                             }
-
                             return $builder;
                         }
                     );
@@ -970,15 +927,15 @@ class ContentRepository extends RepositoryBase
         $query
             ->addSelect(
                 [
-                    ConfigService::$tableFields . '.id as field_id',
-                    ConfigService::$tableFields . '.key as field_key',
-                    ConfigService::$tableFields . '.value as field_value',
-                    ConfigService::$tableFields . '.type as field_type',
-                    ConfigService::$tableFields . '.position as field_position',
-                    ConfigService::$tableData . '.id as datum_id',
-                    ConfigService::$tableData . '.key as datum_key',
-                    ConfigService::$tableData . '.value as datum_value',
-                    ConfigService::$tableData . '.position as datum_position',
+                    ConfigService::$tableContentFields . '.id as field_id',
+                    ConfigService::$tableContentFields . '.key as field_key',
+                    ConfigService::$tableContentFields . '.value as field_value',
+                    ConfigService::$tableContentFields . '.type as field_type',
+                    ConfigService::$tableContentFields . '.position as field_position',
+                    ConfigService::$tableContentData . '.id as datum_id',
+                    ConfigService::$tableContentData . '.key as datum_key',
+                    ConfigService::$tableContentData . '.value as datum_value',
+                    ConfigService::$tableContentData . '.position as datum_position',
                 ]
             )
             ->leftJoin(
@@ -987,24 +944,14 @@ class ContentRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContent . '.id'
             )
-            ->leftJoin(
-                ConfigService::$tableFields,
-                ConfigService::$tableFields . '.id',
-                '=',
-                ConfigService::$tableContentFields . '.field_id'
-            )
+
             ->leftJoin(
                 ConfigService::$tableContentData,
                 ConfigService::$tableContentData . '.content_id',
                 '=',
                 ConfigService::$tableContent . '.id'
             )
-            ->leftJoin(
-                ConfigService::$tableData,
-                ConfigService::$tableData . '.id',
-                '=',
-                ConfigService::$tableContentData . '.datum_id'
-            );
+            ;
     }
 
     /**
@@ -1229,5 +1176,37 @@ class ContentRepository extends RepositoryBase
         }
 
         return $availableFields;
+    }
+
+    /**
+     * @param array $rows
+     * @param $contentFiels
+     */
+    private function getContentsFields(array $rows)
+    {
+        $contentFields = [];
+
+        $contentFieldsResults = $this->fieldRepository->getByContentIds(array_pluck($rows, 'id'));
+        foreach ($contentFieldsResults as $key => $contentFieldResult) {
+            $contentFields[$contentFieldResult['content_id']][] = $contentFieldResult;
+        }
+
+        return $contentFields;
+    }
+
+    /**
+     * @param array $rows
+     * @param $contentFiels
+     */
+    private function getContentsData(array $rows)
+    {
+        $contentData = [];
+
+        $contentDataResults = $this->datumRepository->getByContentIds(array_pluck($rows, 'id'));
+        foreach ($contentDataResults as $key => $contentDataResult) {
+            $contentData[$contentDataResult['content_id']][] = $contentDataResult;
+        }
+
+        return $contentData;
     }
 }
