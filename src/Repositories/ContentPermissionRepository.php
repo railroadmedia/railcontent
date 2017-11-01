@@ -47,7 +47,7 @@ class ContentPermissionRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContentPermissions . '.permission_id'
             )
-            ->whereIn(ConfigService::$tableContentPermissions . '.id', $contentIds)
+            ->whereIn(ConfigService::$tableContentPermissions . '.content_id', $contentIds)
             ->get()
             ->toArray();
     }

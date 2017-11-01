@@ -7,7 +7,6 @@ use Railroad\Railcontent\Services\ContentDatumService;
 
 class ContentDatumFactory extends ContentDatumService
 {
-
     /**
      * @var Generator
      */

@@ -2,7 +2,9 @@
 
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
 class ContentQueryBuilder extends Builder
@@ -79,6 +81,66 @@ class ContentQueryBuilder extends Builder
 
             $previousTableName = $tableName;
             $previousTableJoinColumn = '.parent_id';
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function restrictStatuses()
+    {
+        if (is_array(ContentRepository::$availableContentStatues)) {
+            $this->whereIn('status', ContentRepository::$availableContentStatues);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function restrictPublishedOnDate()
+    {
+        if (!ContentRepository::$pullFutureContent) {
+            $this->where('published_on', '<', Carbon::now()->toDateTimeString());
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function restrictBrand()
+    {
+        $this->where('brand', ConfigService::$brand);
+
+        return $this;
+    }
+
+    /**
+     * @param array $typesToInclude
+     * @return $this
+     */
+    public function restrictByTypes(array $typesToInclude)
+    {
+        if (!empty($typesToInclude)) {
+            $this->whereIn(ConfigService::$tableContent . '.type', $typesToInclude);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param array $slugHierarchy
+     * @return $this
+     */
+    public function restrictBySlugHierarchy(array $slugHierarchy)
+    {
+        foreach (array_reverse($slugHierarchy) as $i => $slug) {
+            $this->where('parent_slug_' . $i, $slug);
         }
 
         return $this;

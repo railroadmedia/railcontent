@@ -3,10 +3,11 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
-use Railroad\Railcontent\Factories\ContentContentFieldFactory;
+use Railroad\Railcontent\Factories\PermissionsFactory;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -33,12 +34,17 @@ class ContentRepositoryTest extends RailcontentTestCase
     /**
      * @var ContentContentFieldFactory
      */
-    protected $fieldFactory;
+    protected $contentFieldFactory;
 
     /**
      * @var ContentDatumFactory
      */
     protected $contentDatumFactory;
+
+    /**
+     * @var PermissionsFactory
+     */
+    protected $permissionFactory;
 
     /**
      * @var ContentPermissionsFactory
@@ -53,9 +59,14 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
         $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
+        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
         $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
+
+        ContentRepository::$pullFutureContent = true;
+        ContentRepository::$availableContentStatues = false;
+        ContentRepository::$includedLanguages = false;
     }
 
     public function test_get_by_id()
@@ -101,13 +112,17 @@ class ContentRepositoryTest extends RailcontentTestCase
         $expectedPermissions = [];
 
         for ($i = 0; $i < 3; $i++) {
-            $expectedFields[] = $this->fieldFactory->create($contentId);
-            $expectedData[] = $this->contentDatumFactory->create([$contentId]);
-            $expectedPermissions[] = $this->contentPermissionFactory->create();
+            $expectedFields[] = $this->contentFieldFactory->create($contentId);
+            $expectedData[] = $this->contentDatumFactory->create($contentId);
 
-            $this->contentPermissionFactory->assign(
-                [end($expectedPermissions)['id'], $contentId]
+            $permission = $this->permissionFactory->create();
+            $contentPermission = $this->contentPermissionFactory->create(
+                $contentId,
+                null,
+                $permission['id']
             );
+
+            $expectedPermissions[] = array_merge($permission, $contentPermission);
         }
 
         $results = $this->classBeingTested->getById($contentId);
@@ -126,34 +141,165 @@ class ContentRepositoryTest extends RailcontentTestCase
         );
     }
 
+    public function test_get_by_id_restricted_by_content_status()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'type' => $this->faker->word,
+            'status' => $this->faker->word,
+            'brand' => ConfigService::$brand,
+            'language' => 'en-US',
+            'published_on' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => Carbon::now()->toDateTimeString(),
+        ];
+
+        $contentId = $this->classBeingTested->create($content);
+
+        $results = $this->classBeingTested->getById($contentId);
+
+        $this->assertNotEmpty($results);
+
+        ContentRepository::$availableContentStatues = [rand()];
+
+        $results = $this->classBeingTested->getById($contentId);
+
+        $this->assertEmpty($results);
+    }
+
+    public function test_get_by_id_accepted_by_content_status()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'type' => $this->faker->word,
+            'status' => $this->faker->word,
+            'brand' => ConfigService::$brand,
+            'language' => 'en-US',
+            'published_on' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => Carbon::now()->toDateTimeString(),
+        ];
+
+        $contentId = $this->classBeingTested->create($content);
+
+        ContentRepository::$availableContentStatues = [$content['status']];
+
+        $results = $this->classBeingTested->getById($contentId);
+
+        $this->assertNotEmpty($results);
+    }
+
+    public function test_get_by_id_restricted_by_published_date()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'type' => $this->faker->word,
+            'status' => $this->faker->word,
+            'brand' => ConfigService::$brand,
+            'language' => 'en-US',
+            'published_on' => Carbon::now()->addDay()->toDateTimeString(),
+            'created_on' => Carbon::now()->addDay()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->classBeingTested->create($content);
+
+        $results = $this->classBeingTested->getById($contentId);
+
+        $this->assertNotEmpty($results);
+
+        ContentRepository::$pullFutureContent = false;
+
+        $results = $this->classBeingTested->getById($contentId);
+
+        $this->assertEmpty($results);
+    }
+
+    public function test_get_by_id_accepted_by_published_date()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'type' => $this->faker->word,
+            'status' => $this->faker->word,
+            'brand' => ConfigService::$brand,
+            'language' => 'en-US',
+            'published_on' => Carbon::now()->subDay()->toDateTimeString(),
+            'created_on' => Carbon::now()->subDay()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->classBeingTested->create($content);
+
+        ContentRepository::$pullFutureContent = false;
+
+        $results = $this->classBeingTested->getById($contentId);
+
+        $this->assertNotEmpty($results);
+    }
+
+    public function test_get_by_id_restricted_by_brand()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'type' => $this->faker->word,
+            'status' => $this->faker->word,
+            'brand' => $this->faker->word,
+            'language' => 'en-US',
+            'published_on' => Carbon::now()->addDay()->toDateTimeString(),
+            'created_on' => Carbon::now()->addDay()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->classBeingTested->create($content);
+
+        $results = $this->classBeingTested->getById($contentId);
+
+        $this->assertEmpty($results);
+    }
+
+    public function test_get_by_id_accepted_by_brand()
+    {
+        $content = [
+            'slug' => $this->faker->word,
+            'type' => $this->faker->word,
+            'status' => $this->faker->word,
+            'brand' => ConfigService::$brand,
+            'language' => 'en-US',
+            'published_on' => Carbon::now()->addDay()->toDateTimeString(),
+            'created_on' => Carbon::now()->addDay()->toDateTimeString(),
+            'archived_on' => null,
+        ];
+
+        $contentId = $this->classBeingTested->create($content);
+
+        $results = $this->classBeingTested->getById($contentId);
+
+        $this->assertNotEmpty($results);
+    }
+
     public function test_create_content()
     {
-        $slug = $this->faker->word;
-        $type = $this->faker->word;
-        $status = $this->faker->word;
-        $language = 'en-US';
+        $data = [
+            'slug' => $this->faker->word,
+            'type' => $this->faker->word,
+            'status' => $this->faker->word,
+            'language' => 'en-US',
+            'brand' => ConfigService::$brand,
+            'published_on' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => Carbon::now()->toDateTimeString()
+        ];
 
-        $contentId =
-            $this->classBeingTested->create(
-                $slug,
-                $type,
-                $status,
-                ConfigService::$brand,
-                $language,
-                null
-            );
+        $contentId = $this->classBeingTested->create($data);
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
-            [
-                'id' => $contentId,
-                'slug' => $slug,
-                'type' => $type,
-                'status' => $status,
-                'published_on' => null,
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null
-            ]
+            array_merge(
+                [
+                    'id' => $contentId,
+                ],
+                $data
+            )
         );
     }
 
@@ -163,24 +309,24 @@ class ContentRepositoryTest extends RailcontentTestCase
             'slug' => $this->faker->word,
             'type' => $this->faker->word,
             'status' => $this->faker->word,
-            'brand' => ConfigService::$brand,
             'language' => 'en-US',
-            'published_on' => null,
+            'brand' => ConfigService::$brand,
+            'published_on' => Carbon::now()->toDateTimeString(),
             'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
+            'archived_on' => Carbon::now()->toDateTimeString()
         ];
 
-        $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($oldContent);
+        $contentId = $this->classBeingTested->create($oldContent);
 
         $newContent = [
             'slug' => $this->faker->word,
             'type' => $this->faker->word,
             'status' => $this->faker->word,
+            'language' => 'en-US',
             'brand' => ConfigService::$brand,
-            'language' => 'en-CA',
             'published_on' => Carbon::now()->toDateTimeString(),
             'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => Carbon::now()->toDateTimeString()
         ];
 
         $this->classBeingTested->update($contentId, $newContent);
@@ -205,18 +351,14 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'slug' => $this->faker->word,
                 'type' => $this->faker->word,
                 'status' => $this->faker->word,
-                'brand' => ConfigService::$brand,
                 'language' => 'en-US',
-                'published_on' => null,
+                'brand' => ConfigService::$brand,
+                'published_on' => Carbon::now()->toDateTimeString(),
                 'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null,
+                'archived_on' => Carbon::now()->toDateTimeString()
             ];
 
-            $this->query()
-                ->table(ConfigService::$tableContent)
-                ->insertGetId(
-                    $contents[$i + 1]
-                );
+            $contentId = $this->classBeingTested->create($contents[$i + 1]);
         }
 
         $this->classBeingTested->delete(2);
@@ -247,69 +389,5 @@ class ContentRepositoryTest extends RailcontentTestCase
         $results = $this->classBeingTested->getBySlugHierarchy($this->faker->word);
 
         $this->assertNull($results);
-    }
-
-    public function test_get_linked_content_by_fields()
-    {
-        $type = $this->faker->word;
-        $linkedType = $this->faker->word;
-
-        $content = $this->contentFactory->create(
-            [
-                1 => $type,
-                2 => ContentService::STATUS_PUBLISHED,
-            ]
-        );
-
-        $linkedContent = $this->contentFactory->create(
-            [
-                1 => $linkedType,
-                2 => ContentService::STATUS_PUBLISHED,
-            ]
-        );
-
-        $randomLinkedContentField = $this->fieldFactory->create(
-            [
-                $linkedContent['id'],
-            ]
-        );
-
-        // linked field
-        $linkedField = $this->fieldFactory->create(
-            [
-                $content['id'],
-                'instructor_id',
-                $linkedContent['id'],
-                'content_id',
-                1
-            ]
-        );
-
-        $response = $this->classBeingTested->getById($content['id']);
-
-        $this->assertEquals(
-            [
-                'id' => '2',
-                'type' => 'content',
-                'key' => 'instructor_id',
-                'value' => array_merge(
-                    $linkedContent,
-                    [
-                        'fields' =>
-                            [
-                                [
-                                    'id' => '1',
-                                    'key' => $randomLinkedContentField['key'],
-                                    'value' => $randomLinkedContentField['value'],
-                                    'type' => $randomLinkedContentField['type'],
-                                    'position' => $randomLinkedContentField['position'],
-                                ]
-                            ]
-                    ]
-                ),
-                'position' => '1'
-            ],
-            $response['fields'][1]
-        );
     }
 }

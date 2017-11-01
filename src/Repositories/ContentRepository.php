@@ -52,9 +52,9 @@ class ContentRepository extends RepositoryBase
     private $slugHierarchy = [];
 
     /**
-     * @var PermissionRepository
+     * @var ContentPermissionRepository
      */
-    private $permissionRepository;
+    private $contentPermissionRepository;
 
     /**
      * @var ContentFieldRepository
@@ -79,14 +79,14 @@ class ContentRepository extends RepositoryBase
     /**
      * ContentRepository constructor.
      *
-     * @param PermissionRepository $permissionRepository
+     * @param ContentPermissionRepository $contentPermissionRepository
      * @param ContentFieldRepository $fieldRepository
      * @param ContentDatumRepository $datumRepository
      * @param ContentHierarchyRepository $contentHierarchyRepository
      * @param DatabaseManager $databaseManager
      */
     public function __construct(
-        PermissionRepository $permissionRepository,
+        ContentPermissionRepository $contentPermissionRepository,
         ContentFieldRepository $fieldRepository,
         ContentDatumRepository $datumRepository,
         ContentHierarchyRepository $contentHierarchyRepository,
@@ -94,7 +94,7 @@ class ContentRepository extends RepositoryBase
     ) {
         parent::__construct();
 
-        $this->permissionRepository = $permissionRepository;
+        $this->contentPermissionRepository = $contentPermissionRepository;
         $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
         $this->contentHierarchyRepository = $contentHierarchyRepository;
@@ -111,14 +111,17 @@ class ContentRepository extends RepositoryBase
     {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
-            ->addSlugInheritance($this->slugHierarchy)
+            ->restrictStatuses()
+            ->restrictPublishedOnDate()
+            ->restrictBrand()
+//            ->addSlugInheritance($this->slugHierarchy)
             ->where(['id' => $id])
             ->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentPermissionRows =
-            $this->permissionRepository->getByContentIds(array_column($contentRows, 'id'));
+            $this->contentPermissionRepository->getByContentIds(array_column($contentRows, 'id'));
 
         return $this->processRows(
                 $contentRows,
@@ -235,13 +238,14 @@ class ContentRepository extends RepositoryBase
      */
     public function delete($id)
     {
-        $this->contentHierarchyRepository->deleteChildParentLinks($id);
-        $this->contentHierarchyRepository->deleteParentChildLinks($id);
-
-        $this->unlinkContentFields($id);
-        $this->unlinkContentData($id);
-        $this->unlinkContentPermission($id);
-        $this->unlinkContentPlaylist($id);
+        // todo: fix
+//        $this->contentHierarchyRepository->deleteChildParentLinks($id);
+//        $this->contentHierarchyRepository->deleteParentChildLinks($id);
+//
+//        $this->unlinkContentFields($id);
+//        $this->unlinkContentData($id);
+//        $this->unlinkContentPermission($id);
+//        $this->unlinkContentPlaylist($id);
 
         $amountOfDeletedRows = $this->query()
             ->where('id', $id)
