@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentHierarchyFactory;
+use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -56,7 +57,11 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
         $type = $this->faker->word;
 
         for ($i = 0; $i < 10; $i++) {
-            $this->contentFactory->create([1 => $type, 2 => ContentService::STATUS_PUBLISHED]);
+            $this->contentFactory->create(
+                ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+                $type,
+                ContentService::STATUS_PUBLISHED
+            );
         }
 
         $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])

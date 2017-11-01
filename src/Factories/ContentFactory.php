@@ -2,36 +2,39 @@
 
 namespace Railroad\Railcontent\Factories;
 
+use Faker\Generator;
+use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Services\ContentService;
 
-class ContentFactory extends FactoryBase
+class ContentFactory extends ContentService
 {
     /**
-     * @var ContentService
+     * @var Generator
      */
-    private $contentService;
+    protected $faker;
 
     /**
-     * ContentFactory constructor.
-     *
-     * @param ContentService $contentService
-     */
-    public function __construct(ContentService $contentService)
-    {
-        parent::__construct();
-
-        $this->contentService = $contentService;
-    }
-
-    /**
-     * @param array $parameterOverwrites
+     * @param null $slug
+     * @param null $type
+     * @param null $status
+     * @param null $language
+     * @param null $publishedOn
+     * @param null $createdOn
      * @return array
      */
-    public function create(array $parameterOverwrites = [])
-    {
+    public function create(
+        $slug = null,
+        $type = null,
+        $status = null,
+        $language = null,
+        $publishedOn = null,
+        $createdOn = null
+    ) {
+        $this->faker = app(Generator::class);
+
         $parameters =
-            $parameterOverwrites + [
-                $this->contentService->slugify($this->faker->words(rand(2, 6), true)),
+            func_get_args() + [
+                ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
                 $this->faker->word,
                 $this->faker->randomElement(
                     [
@@ -44,10 +47,6 @@ class ContentFactory extends FactoryBase
                 $this->faker->dateTimeThisCentury()
             ];
 
-        ksort($parameters);
-
-        $content = $this->contentService->create(...$parameters);
-
-        return $content;
+        return parent::create(...$parameters);
     }
 }

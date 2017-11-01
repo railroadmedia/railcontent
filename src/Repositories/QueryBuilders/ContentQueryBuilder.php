@@ -42,7 +42,7 @@ class ContentQueryBuilder extends Builder
     {
         $this->orderBy(ConfigService::$tableContent . '.' . $orderByColumn, $orderByDirection)
             ->limit($limit)
-            ->skip(($page - 1) * $page);
+            ->skip(($page - 1) * $limit);
 
         return $this;
     }
@@ -82,6 +82,52 @@ class ContentQueryBuilder extends Builder
             $previousTableName = $tableName;
             $previousTableJoinColumn = '.parent_id';
         }
+
+        return $this;
+    }
+
+    /**
+     * @param array $slugHierarchy
+     * @return $this
+     */
+    public function restrictBySlugHierarchy(array $slugHierarchy)
+    {
+        $this->whereIn(
+            ConfigService::$tableContent . '.id',
+            function (Builder $builder) use ($slugHierarchy) {
+                $builder
+                    ->select([ConfigService::$tableContent . '.id'])
+                    ->from(ConfigService::$tableContent);
+
+                $previousTableName = ConfigService::$tableContent;
+                $previousTableJoinColumn = '.id';
+
+                foreach (array_reverse($slugHierarchy) as $i => $slug) {
+                    $tableName = 'inheritance_' . $i;
+
+                    $builder->leftJoin(
+                        ConfigService::$tableContentHierarchy . ' as ' . $tableName,
+                        $tableName . '.child_id',
+                        '=',
+                        $previousTableName . $previousTableJoinColumn
+                    );
+
+                    $inheritedContentTableName = 'inherited_content_' . $i;
+
+                    $builder->leftJoin(
+                        ConfigService::$tableContent . ' as ' . $inheritedContentTableName,
+                        $inheritedContentTableName . '.id',
+                        '=',
+                        $tableName . '.parent_id'
+                    );
+
+                    $builder->where($inheritedContentTableName . '.slug', $slug);
+
+                    $previousTableName = $tableName;
+                    $previousTableJoinColumn = '.parent_id';
+                }
+            }
+        );
 
         return $this;
     }
@@ -134,14 +180,125 @@ class ContentQueryBuilder extends Builder
     }
 
     /**
-     * @param array $slugHierarchy
+     * @param array $requiredFields
      * @return $this
      */
-    public function restrictBySlugHierarchy(array $slugHierarchy)
+    public function restrictByFields(array $requiredFields)
     {
-        foreach (array_reverse($slugHierarchy) as $i => $slug) {
-            $this->where('parent_slug_' . $i, $slug);
-        }
+        $this->where(
+            function (Builder $builder) use ($requiredFields) {
+
+                foreach ($requiredFields as $requiredFieldData) {
+                    $builder->whereExists(
+                        function (Builder $builder) use ($requiredFieldData) {
+                            $builder
+                                ->select([ConfigService::$tableContentFields . '.id'])
+                                ->from(ConfigService::$tableContentFields)
+                                ->where(
+                                    [
+                                        ConfigService::$tableContentFields .
+                                        '.key' => $requiredFieldData['name'],
+                                        ConfigService::$tableContentFields .
+                                        '.content_id' => $this->getConnection()->raw(
+                                            ConfigService::$tableContent . '.id'
+                                        )
+                                    ]
+                                )
+                                ->where(
+                                    function (Builder $builder) use ($requiredFieldData) {
+                                        $builder->where(
+                                            [
+                                                ConfigService::$tableContentFields .
+                                                '.value' => $requiredFieldData['value']
+                                            ]
+                                        )
+                                            ->orWhereExists(
+                                                function (Builder $builder) use ($requiredFieldData) {
+                                                    $builder
+                                                        ->select(['linked_content.id'])
+                                                        ->from(
+                                                            ConfigService::$tableContent .
+                                                            ' as linked_content'
+                                                        )
+                                                        ->where(
+                                                            'linked_content.slug',
+                                                            $requiredFieldData['value']
+                                                        )
+                                                        ->whereIn(
+                                                            $this->connection->raw(
+                                                                ConfigService::$tableContentFields . '.value'
+                                                            )
+                                                            ,
+                                                            [
+                                                                $this->connection->raw(
+                                                                    'linked_content.id'
+                                                                )
+                                                            ]
+                                                        );
+                                                }
+                                            );
+                                    }
+                                );
+
+                            if ($requiredFieldData['type'] !== '') {
+                                $builder->where(
+                                    ConfigService::$tableContentFields . '.type',
+                                    $requiredFieldData['type']
+                                );
+                            }
+                            return $builder;
+                        }
+                    );
+                }
+
+            }
+        );
+
+        return $this;
+    }
+
+    /**
+     * @param array $includedFields
+     * @return $this
+     */
+    public function includeByFields(array $includedFields)
+    {
+        $this->where(
+            function (Builder $builder) use ($includedFields) {
+
+                foreach ($includedFields as $includedFieldData) {
+                    $builder->orWhereExists(
+                        function (Builder $builder) use ($includedFieldData) {
+                            $builder
+                                ->select([ConfigService::$tableContentFields . '.id'])
+                                ->from(ConfigService::$tableContentFields)
+                                ->where(
+                                    [
+                                        ConfigService::$tableContentFields .
+                                        '.key' => $includedFieldData['name'],
+                                        ConfigService::$tableContentFields .
+                                        '.value' => $includedFieldData['value'],
+                                        ConfigService::$tableContentFields .
+                                        '.content_id' => $this->connection->raw(
+                                            ConfigService::$tableContent . '.id'
+                                        )
+                                    ]
+                                );
+
+                            if ($includedFieldData['type'] !== '') {
+                                $builder->where(
+                                    ConfigService::$tableContentFields . '.type',
+                                    $includedFieldData['type']
+                                );
+                            }
+
+                            return $builder;
+                        }
+                    );
+                }
+
+            }
+        );
 
         return $this;
     }

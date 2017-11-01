@@ -2,43 +2,33 @@
 
 namespace Railroad\Railcontent\Factories;
 
-use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
-use Railroad\Railcontent\Services\ContentService;
+use Faker\Generator;
+use Railroad\Railcontent\Services\ContentHierarchyService;
 
-class ContentHierarchyFactory extends FactoryBase
+class ContentHierarchyFactory extends ContentHierarchyService
 {
     /**
-     * @var ContentHierarchyRepository
+     * @var Generator
      */
-    private $contentHierarchyRepository;
+    protected $faker;
 
     /**
-     * ContentFactory constructor.
-     *
-     * @param ContentHierarchyRepository $contentHierarchyRepository
-     */
-    public function __construct(ContentHierarchyRepository $contentHierarchyRepository)
-    {
-        parent::__construct();
-
-        $this->contentHierarchyRepository = $contentHierarchyRepository;
-    }
-
-    /**
-     * @param array $parameterOverwrites
+     * @param null $parentId
+     * @param null $childId
+     * @param null $childPosition
      * @return void
      */
-    public function create(array $parameterOverwrites = [])
+    public function create($parentId = null, $childId = null, $childPosition = null)
     {
+        $this->faker = app(Generator::class);
+
         $parameters =
-            $parameterOverwrites + [
+            func_get_args() + [
                 rand(),
                 rand(),
                 rand(),
             ];
 
-        ksort($parameters);
-
-        $this->contentHierarchyRepository->updateOrCreateChildToParentLink(...$parameters);
+        parent::create(...$parameters);
     }
 }

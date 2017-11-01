@@ -2,10 +2,11 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\ContentVersionRepository;
+use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
+use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\ContentVersionRepository;
 
 class ContentService
 {
@@ -196,13 +197,15 @@ class ContentService
     ) {
         $id =
             $this->contentRepository->create(
-                $slug,
-                $type,
-                $status,
-                ConfigService::$brand,
-                $language ?? ConfigService::$defaultLanguage,
-                $publishedOn,
-                $createdOn
+                [
+                    'slug' => $slug,
+                    'type' => $type,
+                    'status' => $status,
+                    'language' => $language ?? ConfigService::$defaultLanguage,
+                    'published_on' => $publishedOn,
+                    'created_on' => $createdOn ?? Carbon::now()->toDateTimeString(),
+                    'brand' => ConfigService::$brand,
+                ]
             );
 
         return $this->getById($id);
@@ -401,33 +404,5 @@ class ContentService
         );
 
         return $linkedContentsIds;
-    }
-
-    /**
-     * @param $text
-     * @return mixed|string
-     */
-    public function slugify($text)
-    {
-        // replace non letter or digits by -
-        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
-
-        // remove unwanted characters
-        $text = preg_replace('~[^-\w]+~', '', $text);
-
-        // trim
-        $text = trim($text, '-');
-
-        // remove duplicate -
-        $text = preg_replace('~-+~', '-', $text);
-
-        // lowercase
-        $text = strtolower($text);
-
-        if (empty($text)) {
-            return 'n-a';
-        }
-
-        return $text;
     }
 }

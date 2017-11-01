@@ -102,8 +102,6 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * Call the get by id method from repository and return the category
-     *
      * @param integer $id
      * @return array|null
      */
@@ -132,23 +130,30 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * Call the get by id method from repository and return the category
-     *
      * @param array $ids
      * @return array
      */
     public function getByIds(array $ids)
     {
-        $query = $this->query();
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictStatuses()
+            ->restrictPublishedOnDate()
+            ->restrictBrand()
+//            ->addSlugInheritance($this->slugHierarchy)
+            ->whereIn('id', $ids)
+            ->getToArray();
 
-//        $this->addInheritedContentToQuery($query);
-        $this->addSlugInheritanceToQuery($query);
-        // $this->addFieldsAndDatumToQuery($query);
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIds(array_column($contentRows, 'id'));
 
-        return $this->parseRows(
-            $query->whereIn(ConfigService::$tableContent . '.id', $ids)
-                ->get()
-                ->toArray()
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
         );
     }
 
@@ -168,20 +173,27 @@ class ContentRepository extends RepositoryBase
      */
     public function getBySlugAndType($slug, $type)
     {
-        $query = $this->query();
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictStatuses()
+            ->restrictPublishedOnDate()
+            ->restrictBrand()
+//            ->addSlugInheritance($this->slugHierarchy)
+            ->where('slug', $slug)
+            ->where('type', $type)
+            ->getToArray();
 
-//        $this->addInheritedContentToQuery($query);
-        $this->addSlugInheritanceToQuery($query);
-        $this->addFieldsAndDatumToQuery($query);
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIds(array_column($contentRows, 'id'));
 
-        return reset(
-                $this->parseRows(
-                    $query->where(ConfigService::$tableContent . '.slug', $slug)
-                        ->where(ConfigService::$tableContent . '.type', $type)
-                        ->get()
-                        ->toArray()
-                )
-            ) ?? null;
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
     }
 
     /**
@@ -488,16 +500,14 @@ class ContentRepository extends RepositoryBase
      */
     public function retrieveFilter()
     {
-        $subQuery = $this->query();
+        $subQuery = $this->query()
+            ->paginateAndOrder($this->page, $this->limit, $this->orderBy, $this->orderDirection)
+            ->restrictByFields($this->requiredFields)
+            ->restrictBySlugHierarchy($this->slugHierarchy);
 
-        $this->addSlugInheritanceToQuery($subQuery);
-        $this->addFilteringToQuery($subQuery);
-        $this->addPaginationToQuery($subQuery);
+        $query = $this->query()
+            ->paginateAndOrder($this->page, $this->limit, $this->orderBy, $this->orderDirection);
 
-        $query = $this->query();
-
-        //$this->addFieldsAndDatumToQuery($query);
-        $this->addSlugInheritanceToQuery($query);
         $this->addSubJoinToQuery($query, $subQuery);
 
         return $this->parseRows($query->get()->toArray());
