@@ -3,11 +3,10 @@
 namespace Railroad\Railcontent\Factories;
 
 use Faker\Generator;
-use Railroad\Railcontent\Services\ContentDatumService;
+use Railroad\Railcontent\Services\FieldService;
 
-class ContentDatumFactory extends ContentDatumService
+class ContentFieldFactory extends FieldService
 {
-
     /**
      * @var Generator
      */
@@ -18,9 +17,10 @@ class ContentDatumFactory extends ContentDatumService
      * @param null $key
      * @param null $value
      * @param null $position
+     * @param null $type
      * @return array
      */
-    public function create($contentId = null, $key = null, $value = null, $position = null)
+    public function create($contentId = null, $key = null, $value = null, $position = null, $type = null)
     {
         $this->faker = app(Generator::class);
 
@@ -29,7 +29,8 @@ class ContentDatumFactory extends ContentDatumService
                 rand(),
                 $this->faker->word,
                 $this->faker->word,
-                rand()
+                rand(),
+                $this->faker->word
             ];
 
         return parent::create(...$parameters);

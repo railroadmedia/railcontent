@@ -2,62 +2,29 @@
 
 namespace Railroad\Railcontent\Factories;
 
-use Railroad\Railcontent\Services\PermissionService;
+use Faker\Generator;
+use Railroad\Railcontent\Services\ContentPermissionService;
 
-class ContentPermissionsFactory extends FactoryBase
+class ContentPermissionsFactory extends ContentPermissionService
 {
     /**
-     * @var PermissionService
+     * @var Generator
      */
-    private $permissionService;
+    protected $faker;
 
     /**
-     * ContentFactory constructor.
-     *
-     * @param PermissionService $permissionService
-     */
-    public function __construct(PermissionService $permissionService)
-    {
-        parent::__construct();
-
-        $this->permissionService = $permissionService;
-    }
-
-    /**
-     * @param array $parameterOverwrites
+     * @param null $name
      * @return array
      */
-    public function create(array $parameterOverwrites = [])
+    public function create($name = null)
     {
+        $this->faker = app(Generator::class);
+
         $parameters =
-            $parameterOverwrites + [
+            func_get_args() + [
                 $this->faker->word,
             ];
 
-        ksort($parameters);
-
-        $content = $this->permissionService->create(...$parameters);
-
-        return $content;
-    }
-
-    /**
-     * @param array $parameterOverwrites
-     * @return array
-     */
-    public function assign(array $parameterOverwrites = [])
-    {
-        $parameters =
-            $parameterOverwrites + [
-                $this->faker->randomNumber(),
-                $this->faker->randomNumber(),
-                $this->faker->boolean() ? $this->faker->word : null,
-            ];
-
-        ksort($parameters);
-
-        $content = $this->permissionService->assign(...$parameters);
-
-        return $content;
+        return parent::create(...$parameters);
     }
 }

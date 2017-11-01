@@ -7,7 +7,10 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class ContentQueryBuilder extends Builder
 {
-    public function selectCoreColumns()
+    /**
+     * @return $this
+     */
+    public function selectPrimaryColumns()
     {
         $this->select(
             [
@@ -26,6 +29,13 @@ class ContentQueryBuilder extends Builder
         return $this;
     }
 
+    /**
+     * @param integer $page
+     * @param integer $limit
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @return $this
+     */
     public function paginateAndOrder($page, $limit, $orderByColumn, $orderByDirection)
     {
         $this->orderBy(ConfigService::$tableContent . '.' . $orderByColumn, $orderByDirection)
@@ -35,6 +45,10 @@ class ContentQueryBuilder extends Builder
         return $this;
     }
 
+    /**
+     * @param array $slugHierarchy
+     * @return $this
+     */
     public function addSlugInheritance(array $slugHierarchy)
     {
         $previousTableName = ConfigService::$tableContent;

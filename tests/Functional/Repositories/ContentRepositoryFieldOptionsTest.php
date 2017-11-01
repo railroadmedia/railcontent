@@ -3,7 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Factories\FieldFactory;
+use Railroad\Railcontent\Factories\ContentFieldFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -21,7 +21,7 @@ class ContentRepositoryFieldOptionsTest extends RailcontentTestCase
     protected $contentFactory;
 
     /**
-     * @var FieldFactory
+     * @var ContentFieldFactory
      */
     protected $fieldFactory;
 
@@ -31,7 +31,7 @@ class ContentRepositoryFieldOptionsTest extends RailcontentTestCase
 
         $this->classBeingTested = $this->app->make(ContentRepository::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(FieldFactory::class);
+        $this->fieldFactory = $this->app->make(ContentFieldFactory::class);
     }
 
     public function test_get_field_options_single()

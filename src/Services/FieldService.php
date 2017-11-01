@@ -39,7 +39,7 @@ class FieldService
      * @param string $type
      * @return array
      */
-    public function createField($contentId, $key, $value, $position, $type)
+    public function create($contentId, $key, $value, $position, $type)
     {
         $fieldId = $this->fieldRepository->create($contentId, $key, $value, $type, $position);
 

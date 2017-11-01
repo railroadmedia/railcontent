@@ -11,7 +11,7 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
-use Railroad\Railcontent\Factories\FieldFactory;
+use Railroad\Railcontent\Factories\ContentFieldFactory;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -31,7 +31,7 @@ class ContentServiceTest extends RailcontentTestCase
 
         $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->datumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->fieldFactory = $this->app->make(FieldFactory::class);
+        $this->fieldFactory = $this->app->make(ContentFieldFactory::class);
 
         $this->serviceBeingTested = $this->app->make(ContentService::class);
 

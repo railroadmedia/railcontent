@@ -110,7 +110,7 @@ class ContentRepository extends RepositoryBase
     public function getById($id)
     {
         $contentRows = $this->query()
-            ->selectCoreColumns()
+            ->selectPrimaryColumns()
             ->addSlugInheritance($this->slugHierarchy)
             ->where(['id' => $id])
             ->getToArray();
@@ -208,46 +208,6 @@ class ContentRepository extends RepositoryBase
         )
             ->addBinding($query->getBindings())
             ->count();
-    }
-
-    /**
-     * Insert a new content in the database and recalculate position
-     *
-     * @param string $slug
-     * @param string $type
-     * @param string $status
-     * @param string $brand
-     * @param string $language |null
-     * @param string|null $publishedOn
-     * @param string|null $createdOn
-     * @param string|null $archivedOn
-     * @return int
-     */
-    public function create(
-        $slug,
-        $type,
-        $status,
-        $brand,
-        $language,
-        $publishedOn,
-        $createdOn = null,
-        $archivedOn = null
-    ) {
-        $contentId = $this->query()
-            ->insertGetId(
-                [
-                    'slug' => $slug,
-                    'type' => $type,
-                    'status' => $status,
-                    'brand' => $brand,
-                    'language' => $language,
-                    'published_on' => $publishedOn,
-                    'created_on' => $createdOn ?? Carbon::now()->toDateTimeString(),
-                    'archived_on' => $archivedOn
-                ]
-            );
-
-        return $contentId;
     }
 
     /**
@@ -964,7 +924,7 @@ class ContentRepository extends RepositoryBase
     /**
      * @return ContentQueryBuilder
      */
-    private function query()
+    protected function query()
     {
         return (new ContentQueryBuilder(
             $this->connection(),

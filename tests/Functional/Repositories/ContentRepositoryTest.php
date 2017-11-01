@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
-use Railroad\Railcontent\Factories\FieldFactory;
+use Railroad\Railcontent\Factories\ContentFieldFactory;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -31,7 +31,7 @@ class ContentRepositoryTest extends RailcontentTestCase
     protected $contentFactory;
 
     /**
-     * @var FieldFactory
+     * @var ContentFieldFactory
      */
     protected $fieldFactory;
 
@@ -53,7 +53,7 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(FieldFactory::class);
+        $this->fieldFactory = $this->app->make(ContentFieldFactory::class);
         $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
         $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
     }
@@ -71,17 +71,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             'archived_on' => Carbon::now()->toDateTimeString(),
         ];
 
-        $contentId =
-            $this->classBeingTested->create(
-                $content['slug'],
-                $content['type'],
-                $content['status'],
-                $content['brand'],
-                $content['language'],
-                $content['published_on'],
-                $content['created_on'],
-                $content['archived_on']
-            );
+        $contentId = $this->classBeingTested->create($content);
 
         $results = $this->classBeingTested->getById($contentId);
 
@@ -104,24 +94,14 @@ class ContentRepositoryTest extends RailcontentTestCase
             'archived_on' => Carbon::now()->toDateTimeString(),
         ];
 
-        $contentId =
-            $this->classBeingTested->create(
-                $content['slug'],
-                $content['type'],
-                $content['status'],
-                $content['brand'],
-                $content['language'],
-                $content['published_on'],
-                $content['created_on'],
-                $content['archived_on']
-            );
+        $contentId = $this->classBeingTested->create($content);
 
         $expectedFields = [];
         $expectedData = [];
         $expectedPermissions = [];
 
         for ($i = 0; $i < 3; $i++) {
-            $expectedFields[] = $this->fieldFactory->create([$contentId]);
+            $expectedFields[] = $this->fieldFactory->create($contentId);
             $expectedData[] = $this->contentDatumFactory->create([$contentId]);
             $expectedPermissions[] = $this->contentPermissionFactory->create();
 
