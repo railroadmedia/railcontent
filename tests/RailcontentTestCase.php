@@ -7,12 +7,12 @@ use Exception;
 use Faker\Generator;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\Resources\Models\User;
 
 class RailcontentTestCase extends BaseTestCase
@@ -60,18 +60,18 @@ class RailcontentTestCase extends BaseTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        // Setup package config for testing
-        $defaultConfig = require(__DIR__.'/../config/railcontent.php');
+        // setup package config for testing
+        $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
 
-        $app['config']->set('railcontent.tables', $defaultConfig['tables']);
         $app['config']->set('railcontent.database_connection_name', 'testbench');
         $app['config']->set('railcontent.cache_duration', 60);
+        $app['config']->set('railcontent.table_prefix', $defaultConfig['table_prefix']);
         $app['config']->set('railcontent.brand', $defaultConfig['brand']);
         $app['config']->set('railcontent.available_languages', $defaultConfig['available_languages']);
         $app['config']->set('railcontent.default_language', $defaultConfig['default_language']);
         $app['config']->set('railcontent.validation', $defaultConfig['validation']);
 
-        // Setup default database to use sqlite :memory:
+        // setup default database to use sqlite :memory:
         $app['config']->set('database.default', 'testbench');
         $app['config']->set(
             'database.connections.testbench',
@@ -81,16 +81,19 @@ class RailcontentTestCase extends BaseTestCase
                 'prefix' => '',
             ]
         );
+
+        // allows access to built in user auth
         $app['config']->set('auth.providers.users.model', User::class);
 
         $app['db']->connection()->getSchemaBuilder()->create(
             'users',
-            function(Blueprint $table) {
+            function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('email');
             }
         );
 
+        // register provider
         $app->register(RailcontentServiceProvider::class);
     }
 
@@ -111,13 +114,13 @@ class RailcontentTestCase extends BaseTestCase
             ->getMockForAbstractClass();
 
         $mock->method('fire')->willReturnCallback(
-            function($called) {
+            function ($called) {
                 $this->firedEvents[] = $called;
             }
         );
 
         $mock->method('dispatch')->willReturnCallback(
-            function($called) {
+            function ($called) {
                 $this->firedEvents[] = $called;
             }
         );
@@ -125,12 +128,12 @@ class RailcontentTestCase extends BaseTestCase
         $this->app->instance('events', $mock);
 
         $this->beforeApplicationDestroyed(
-            function() use ($events) {
+            function () use ($events) {
                 $fired = $this->getFiredEvents($events);
-                if($eventsNotFired = array_diff($events, $fired)) {
+                if ($eventsNotFired = array_diff($events, $fired)) {
                     throw new Exception(
-                        'These expected events were not fired: ['.
-                        implode(', ', $eventsNotFired).']'
+                        'These expected events were not fired: [' .
+                        implode(', ', $eventsNotFired) . ']'
                     );
                 }
             }
@@ -151,7 +154,7 @@ class RailcontentTestCase extends BaseTestCase
         $this->authManager->guard()->onceUsingId($userId);
 
         request()->setUserResolver(
-            function() use ($userId) {
+            function () use ($userId) {
                 return User::query()->find($userId);
             }
         );
@@ -160,7 +163,7 @@ class RailcontentTestCase extends BaseTestCase
     }
 
     /**
-     * @return \Illuminate\Database\Connection
+     * @return Connection
      */
     public function query()
     {

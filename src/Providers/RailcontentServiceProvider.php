@@ -5,19 +5,9 @@ namespace Railroad\Railcontent\Providers;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use PDO;
-use Railroad\Railcontent\Controllers\ContentJsonController;
-use Railroad\Railcontent\Controllers\PermissionJsonController;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Listeners\VersionContentEventListener;
-use Railroad\Railcontent\Repositories\ContentFieldRepository;
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\PermissionRepository;
-use Railroad\Railcontent\Repositories\UserContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Services\SearchInterface;
-use Railroad\Railcontent\Services\SearchService;
-use Railroad\Railcontent\Services\UserContentService;
 
 class RailcontentServiceProvider extends ServiceProvider
 {

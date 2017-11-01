@@ -20,7 +20,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
         $this->classBeingTested = $this->app->make(ContentDatumRepository::class);
     }
 
-    public function test_get()
+    public function test_get_by_id()
     {
         $contentId = rand();
         $key = $this->faker->word;
@@ -73,12 +73,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $data['id'] = $this->classBeingTested->create(
-                $data['content_id'],
-                $data['key'],
-                $data['value'],
-                $data['position']
-            );
+            $data['id'] = $this->classBeingTested->create($data);
 
             $expectedData[] = $data;
         }
@@ -92,12 +87,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $this->classBeingTested->create(
-                $data['content_id'],
-                $data['key'],
-                $data['value'],
-                $data['position']
-            );
+            $this->classBeingTested->create($data);
         }
 
         $response = $this->classBeingTested->getByContentId($contentId);
@@ -120,12 +110,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $data['id'] = $this->classBeingTested->create(
-                $data['content_id'],
-                $data['key'],
-                $data['value'],
-                $data['position']
-            );
+            $data['id'] = $this->classBeingTested->create($data);
 
             $expectedData[] = $data;
         }
@@ -139,12 +124,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $this->classBeingTested->create(
-                $data['content_id'],
-                $data['key'],
-                $data['value'],
-                $data['position']
-            );
+            $this->classBeingTested->create($data);
         }
 
         $response = $this->classBeingTested->getByContentIds([1, 2, 3]);
@@ -157,18 +137,26 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
 
     public function test_create()
     {
+        $contentId = rand();
         $key = $this->faker->word;
         $value = $this->faker->text();
         $position = rand();
 
-        $result = $this->classBeingTested->create(1, $key, $value, $position);
+        $result = $this->classBeingTested->create(
+            [
+                'content_id' => $contentId,
+                'key' => $key,
+                'value' => $value,
+                'position' => $position
+            ]
+        );
 
         $this->assertEquals(1, $result);
+
         $this->assertDatabaseHas(
             ConfigService::$tableContentData,
             [
-                'id' => 1,
-                'content_id' => 1,
+                'content_id' => $contentId,
                 'key' => $key,
                 'value' => $value,
                 'position' => $position
@@ -192,19 +180,15 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             'position' => rand(),
         ];
 
-        $dataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($oldData);
+        $id = $this->query()->table(ConfigService::$tableContentData)->insertGetId($oldData);
 
-        $result =
-            $this->classBeingTested->update(
-                $dataId,
-                $newData
-            );
+        $result = $this->classBeingTested->update($id, $newData);
 
         $this->assertEquals(1, $result);
+
         $this->assertDatabaseHas(
             ConfigService::$tableContentData,
             [
-                'id' => 1,
                 'content_id' => $newData['content_id'],
                 'key' => $newData['key'],
                 'value' => $newData['value'],
@@ -223,14 +207,16 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             'position' => rand(),
         ];
 
-        $dataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($data);
+        $id = $this->query()->table(ConfigService::$tableContentData)->insertGetId($data);
 
-        $this->classBeingTested->delete($dataId);
+        $deleted = $this->classBeingTested->delete($id);
+
+        $this->assertTrue($deleted);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContentData,
             [
-                'id' => $dataId,
+                'id' => $id,
             ]
         );
     }
@@ -248,12 +234,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $data['id'] = $this->classBeingTested->create(
-                $data['content_id'],
-                $data['key'],
-                $data['value'],
-                $data['position']
-            );
+            $data['id'] = $this->classBeingTested->create($data);
 
             $expectedData[] = $data;
         }
