@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -34,15 +35,44 @@ class ContentQueryBuilder extends Builder
     /**
      * @param integer $page
      * @param integer $limit
-     * @param string $orderByColumn
-     * @param string $orderByDirection
      * @return $this
      */
-    public function paginateAndOrder($page, $limit, $orderByColumn, $orderByDirection)
+    public function directPaginate($page, $limit)
     {
-        $this->orderBy(ConfigService::$tableContent . '.' . $orderByColumn, $orderByDirection)
-            ->limit($limit)
+        $this->limit($limit)
             ->skip(($page - 1) * $limit);
+
+        return $this;
+    }
+
+    /**
+     * @param null $column
+     * @param string $direction
+     * @return $this
+     */
+    public function orderBy($column = null, $direction = 'asc')
+    {
+        parent::orderBy(ConfigService::$tableContent . '.' . $column, $direction);
+
+        return $this;
+    }
+
+    /**
+     * Sub query must be completely created before being passed in here.
+     * Any changes to the $subQuery object after being passed in will not be reflected at retrieval time.
+     *
+     * @param Builder $subQuery
+     */
+    public function addSubJoinToQuery(Builder $subQuery)
+    {
+        $this
+            ->join(
+                $this->connection->raw('(' . $subQuery->toSql() . ') inner_content'),
+                function (JoinClause $joinClause) {
+                    $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
+                }
+            )
+            ->addBinding($subQuery->getBindings());
 
         return $this;
     }
@@ -92,6 +122,10 @@ class ContentQueryBuilder extends Builder
      */
     public function restrictBySlugHierarchy(array $slugHierarchy)
     {
+        if (empty($slugHierarchy)) {
+            return $this;
+        }
+
         $this->whereIn(
             ConfigService::$tableContent . '.id',
             function (Builder $builder) use ($slugHierarchy) {

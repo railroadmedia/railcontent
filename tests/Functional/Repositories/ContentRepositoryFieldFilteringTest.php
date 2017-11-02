@@ -2,8 +2,10 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
-use Railroad\Railcontent\Factories\ContentFactory;
+use Carbon\Carbon;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
+use Railroad\Railcontent\Factories\ContentFactory;
+use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -68,79 +70,58 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
         // content that has none of the required fields
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
-            $randomField = $this->fieldFactory->create(
-                [
-                    0 => $content['id']
-                ]
-            );
+            $randomField = $this->fieldFactory->create($content['id']);
         }
 
         // content that only has 1 of the required fields
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $field = $this->fieldFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $requiredFieldName,
-                    2 => $requiredFieldValue,
-                    3 => $requiredFieldType,
-                    4 => 1
-                ]
+                $content['id'],
+                $requiredFieldName,
+                $requiredFieldValue,
+                1,
+                $requiredFieldType
             );
 
-            $randomField = $this->fieldFactory->create(
-                [
-                    0 => $content['id']
-                ]
-            );
+            $randomField = $this->fieldFactory->create($content['id']);
         }
 
         // content that has all the required fields
         for ($i = 0; $i < 10; $i++) {
             $expectedContent = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $requiredField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $requiredFieldName,
-                    2 => $requiredFieldValue,
-                    3 => $requiredFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $requiredFieldName,
+                $requiredFieldValue,
+                1,
+                $requiredFieldType
             );
 
             $otherRequiredField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $otherRequiredFieldName,
-                    2 => $otherRequiredFieldValue,
-                    3 => $otherRequiredFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $otherRequiredFieldName,
+                $otherRequiredFieldValue,
+                1,
+                $otherRequiredFieldType
             );
 
-            $randomField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id']
-                ]
-            );
+            $randomField = $this->fieldFactory->create($expectedContent['id']);
         }
 
         $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
@@ -159,7 +140,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
         $this->assertEquals([8, 9, 10], array_column($rows, 'id'));
     }
 
-    public function test_include_single_field_with_pagination()
+    public function test_include_single_field_with_pagination_and_order_by()
     {
         /*
          * If only 1 include field is passed in its basically treated the same as a required field.
@@ -168,7 +149,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
          * [ 3, 4, 5... 12 ]
          *
          * Expected content ids after  pagination:
-         * [ 6, 7, 8 ]
+         * [ 9, 8, 7]
          *
          * Adding in some random fields to make that having extra unfiltered fields doesn't
          * throw off the query.
@@ -184,46 +165,38 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
         // content that has none of the included fields
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED,
+                $this->faker->word,
+                Carbon::now()->subDays($i)->toDateTimeString()
             );
 
-            $randomField = $this->fieldFactory->create(
-                [
-                    0 => $content['id']
-                ]
-            );
+            $randomField = $this->fieldFactory->create($content['id']);
         }
 
         // content that only has 1 of the included fields
         for ($i = 0; $i < 10; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED,
+                $this->faker->word,
+                Carbon::now()->subDays($i * 10)->toDateTimeString()
             );
 
             $field = $this->fieldFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $includedFieldName,
-                    2 => $includedFieldValue,
-                    3 => $includedFieldType,
-                    4 => 1
-                ]
+                $content['id'],
+                $includedFieldName,
+                $includedFieldValue,
+                1,
+                $includedFieldType
             );
 
-            $randomField = $this->fieldFactory->create(
-                [
-                    0 => $content['id']
-                ]
-            );
+            $randomField = $this->fieldFactory->create($content['id']);
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'published_on', 'asc', [$type], [])
             ->includeField(
                 $includedFieldName,
                 $includedFieldValue,
@@ -231,7 +204,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             )
             ->retrieveFilter();
 
-        $this->assertEquals([6, 7, 8], array_column($rows, 'id'));
+        $this->assertEquals([9, 8, 7], array_column($rows, 'id'));
     }
 
     public function test_include_fields_with_pagination()
@@ -263,78 +236,59 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
         // content that has none of the included fields
         for ($i = 0; $i < 4; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
-            $randomField = $this->fieldFactory->create(
-                [
-                    0 => $content['id']
-                ]
-            );
+            $randomField = $this->fieldFactory->create($content['id']);
         }
 
         // content that only has 1 of the included fields
         for ($i = 0; $i < 5; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $field = $this->fieldFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $includedFieldName,
-                    2 => $includedFieldValue,
-                    3 => $includedFieldType,
-                    4 => 1
-                ]
+                $content['id'],
+                $includedFieldName,
+                $includedFieldValue,
+                1,
+                $includedFieldType
             );
 
-            $randomField = $this->fieldFactory->create(
-                [
-                    0 => $content['id']
-                ]
-            );
+            $randomField = $this->fieldFactory->create($content['id']);
         }
 
         // content that has all the included fields
         for ($i = 0; $i < 5; $i++) {
             $expectedContent = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $includedField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $includedFieldName,
-                    2 => $includedFieldValue,
-                    3 => $includedFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $includedFieldName,
+                $includedFieldValue,
+                1,
+                $includedFieldType
             );
 
             $otherIncludedField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $otherIncludedFieldName,
-                    2 => $otherIncludedFieldValue,
-                    3 => $otherIncludedFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $otherIncludedFieldName,
+                $otherIncludedFieldValue,
+                1,
+                $otherIncludedFieldType
             );
 
             $randomField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id']
-                ]
+                $expectedContent['id']
             );
         }
 
@@ -391,17 +345,12 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
-            $randomField = $this->fieldFactory->create(
-                [
-                    0 => $content['id']
-                ]
-            );
+            $randomField = $this->fieldFactory->create($content['id']);
         }
 
         // content that only has 1 of the required fields and 1 of the included fields
@@ -409,37 +358,28 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $field = $this->fieldFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $requiredFieldName,
-                    2 => $requiredFieldValue,
-                    3 => $requiredFieldType,
-                    4 => 1
-                ]
+                $content['id'],
+                $requiredFieldName,
+                $requiredFieldValue,
+                1,
+                $requiredFieldType
             );
 
             $field = $this->fieldFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $includedFieldName,
-                    2 => $includedFieldValue,
-                    3 => $includedFieldType,
-                    4 => 1
-                ]
+                $content['id'],
+                $includedFieldName,
+                $includedFieldValue,
+                1,
+                $includedFieldType
             );
 
-            $randomField = $this->fieldFactory->create(
-                [
-                    0 => $content['id']
-                ]
-            );
+            $randomField = $this->fieldFactory->create($content['id']);
         }
 
         // content that has all the required fields but none of the included fields
@@ -447,37 +387,28 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $requiredField = $this->fieldFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $requiredFieldName,
-                    2 => $requiredFieldValue,
-                    3 => $requiredFieldType,
-                    4 => 1
-                ]
+                $content['id'],
+                $requiredFieldName,
+                $requiredFieldValue,
+                1,
+                $requiredFieldType
             );
 
             $otherRequiredField = $this->fieldFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $otherRequiredFieldName,
-                    2 => $otherRequiredFieldValue,
-                    3 => $otherRequiredFieldType,
-                    4 => 1
-                ]
+                $content['id'],
+                $otherRequiredFieldName,
+                $otherRequiredFieldValue,
+                1,
+                $otherRequiredFieldType
             );
 
-            $randomField = $this->fieldFactory->create(
-                [
-                    0 => $content['id']
-                ]
-            );
+            $randomField = $this->fieldFactory->create($content['id']);
         }
 
         // content that has all the required fields and 1 of the included fields
@@ -485,46 +416,37 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 5; $i++) {
             $expectedContent = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $requiredField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $requiredFieldName,
-                    2 => $requiredFieldValue,
-                    3 => $requiredFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $requiredFieldName,
+                $requiredFieldValue,
+                1,
+                $requiredFieldType
             );
 
             $otherRequiredField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $otherRequiredFieldName,
-                    2 => $otherRequiredFieldValue,
-                    3 => $otherRequiredFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $otherRequiredFieldName,
+                $otherRequiredFieldValue,
+                1,
+                $otherRequiredFieldType
             );
 
             $includedField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $includedFieldName,
-                    2 => $includedFieldValue,
-                    3 => $includedFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $includedFieldName,
+                $includedFieldValue,
+                1,
+                $includedFieldType
             );
 
             $randomField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id']
-                ]
+                $expectedContent['id']
             );
         }
 
@@ -533,56 +455,45 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 5; $i++) {
             $expectedContent = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $requiredField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $requiredFieldName,
-                    2 => $requiredFieldValue,
-                    3 => $requiredFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $requiredFieldName,
+                $requiredFieldValue,
+                1,
+                $requiredFieldType
             );
 
             $otherRequiredField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $otherRequiredFieldName,
-                    2 => $otherRequiredFieldValue,
-                    3 => $otherRequiredFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $otherRequiredFieldName,
+                $otherRequiredFieldValue,
+                1,
+                $otherRequiredFieldType
             );
 
             $includedField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $includedFieldName,
-                    2 => $includedFieldValue,
-                    3 => $includedFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $includedFieldName,
+                $includedFieldValue,
+                1,
+                $includedFieldType
             );
 
             $otherIncludedField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $otherIncludedFieldName,
-                    2 => $otherIncludedFieldValue,
-                    3 => $otherIncludedFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $otherIncludedFieldName,
+                $otherIncludedFieldValue,
+                1,
+                $otherIncludedFieldType
             );
 
             $randomField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id']
-                ]
+                $expectedContent['id']
             );
         }
 
@@ -637,17 +548,12 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
-            $randomField = $this->fieldFactory->create(
-                [
-                    0 => $content['id']
-                ]
-            );
+            $randomField = $this->fieldFactory->create($content['id']);
         }
 
         // content that only has 1 of the required fields and 1 of the included fields
@@ -655,37 +561,28 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $field = $this->fieldFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $requiredFieldName,
-                    2 => $requiredFieldValue,
-                    3 => $requiredFieldType,
-                    4 => 1
-                ]
+                $content['id'],
+                $requiredFieldName,
+                $requiredFieldValue,
+                1,
+                $requiredFieldType
             );
 
             $field = $this->fieldFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $includedFieldName,
-                    2 => $includedFieldValue,
-                    3 => $includedFieldType,
-                    4 => 1
-                ]
+                $content['id'],
+                $includedFieldName,
+                $includedFieldValue,
+                1,
+                $includedFieldType
             );
 
-            $randomField = $this->fieldFactory->create(
-                [
-                    0 => $content['id']
-                ]
-            );
+            $randomField = $this->fieldFactory->create($content['id']);
         }
 
         // content that has all the required fields but none of the included fields
@@ -693,37 +590,28 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $requiredField = $this->fieldFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $requiredFieldName,
-                    2 => $requiredFieldValue,
-                    3 => $requiredFieldType,
-                    4 => 1
-                ]
+                $content['id'],
+                $requiredFieldName,
+                $requiredFieldValue,
+                1,
+                $requiredFieldType
             );
 
             $otherRequiredField = $this->fieldFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $otherRequiredFieldName,
-                    2 => $otherRequiredFieldValue,
-                    3 => $otherRequiredFieldType,
-                    4 => 1
-                ]
+                $content['id'],
+                $otherRequiredFieldName,
+                $otherRequiredFieldValue,
+                1,
+                $otherRequiredFieldType
             );
 
-            $randomField = $this->fieldFactory->create(
-                [
-                    0 => $content['id']
-                ]
-            );
+            $randomField = $this->fieldFactory->create($content['id']);
         }
 
         // content that has all the required fields and 1 of the included fields
@@ -731,46 +619,37 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 5; $i++) {
             $expectedContent = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $requiredField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $requiredFieldName,
-                    2 => $requiredFieldValue,
-                    3 => $requiredFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $requiredFieldName,
+                $requiredFieldValue,
+                1,
+                $requiredFieldType
             );
 
             $otherRequiredField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $otherRequiredFieldName,
-                    2 => $otherRequiredFieldValue,
-                    3 => $otherRequiredFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $otherRequiredFieldName,
+                $otherRequiredFieldValue,
+                1,
+                $otherRequiredFieldType
             );
 
             $includedField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $includedFieldName,
-                    2 => $includedFieldValue,
-                    3 => $includedFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $includedFieldName,
+                $includedFieldValue,
+                1,
+                $includedFieldType
             );
 
             $randomField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id']
-                ]
+                $expectedContent['id']
             );
         }
 
@@ -779,56 +658,45 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 5; $i++) {
             $expectedContent = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->word),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $requiredField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $requiredFieldName,
-                    2 => $requiredFieldValue,
-                    3 => $requiredFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $requiredFieldName,
+                $requiredFieldValue,
+                1,
+                $requiredFieldType
             );
 
             $otherRequiredField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $otherRequiredFieldName,
-                    2 => $otherRequiredFieldValue,
-                    3 => $otherRequiredFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $otherRequiredFieldName,
+                $otherRequiredFieldValue,
+                1,
+                $otherRequiredFieldType
             );
 
             $includedField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $includedFieldName,
-                    2 => $includedFieldValue,
-                    3 => $includedFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $includedFieldName,
+                $includedFieldValue,
+                1,
+                $includedFieldType
             );
 
             $otherIncludedField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id'],
-                    1 => $otherIncludedFieldName,
-                    2 => $otherIncludedFieldValue,
-                    3 => $otherIncludedFieldType,
-                    4 => 1
-                ]
+                $expectedContent['id'],
+                $otherIncludedFieldName,
+                $otherIncludedFieldValue,
+                1,
+                $otherIncludedFieldType
             );
 
             $randomField = $this->fieldFactory->create(
-                [
-                    0 => $expectedContent['id']
-                ]
+                $expectedContent['id']
             );
         }
 
