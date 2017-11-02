@@ -216,6 +216,83 @@ class ContentQueryBuilder extends Builder
     }
 
     /**
+     * @param array $requiredUserStates
+     * @return $this
+     */
+    public function restrictByUserStates(array $requiredUserStates)
+    {
+        $this->where(
+            function (Builder $builder) use ($requiredUserStates) {
+
+                if (count($requiredUserStates) > 0) {
+                    $requiredUserStateData = $requiredUserStates;
+                    $builder->whereExists(
+                        function (Builder $builder) use ($requiredUserStateData) {
+                            return $builder
+                                ->select([ConfigService::$tableUserContentProgress . '.content_id'])
+                                ->from(ConfigService::$tableUserContentProgress)
+                                ->where(
+                                    ConfigService::$tableUserContentProgress . '.user_id',
+                                    $requiredUserStateData['user_id']
+                                )
+                                ->where(
+                                    ConfigService::$tableUserContentProgress . '.content_id',
+                                    $this->connection->raw(
+                                        ConfigService::$tableContent . '.id'
+                                    )
+                                )
+                                ->where(
+                                    ConfigService::$tableUserContentProgress . '.state',
+                                    $requiredUserStateData['state']
+                                );
+                        }
+                    );
+                }
+            }
+        );
+
+        return $this;
+    }
+
+    /**
+     * @param array $includedUserStates
+     * @return $this
+     */
+    public function includeByUserStates(array $includedUserStates)
+    {
+        $this->where(
+            function (Builder $builder) use ($includedUserStates) {
+
+                foreach ($includedUserStates as $requiredUserStateData) {
+                    $builder->orWhereExists(
+                        function (Builder $builder) use ($requiredUserStateData) {
+                            return $builder
+                                ->select([ConfigService::$tableUserContentProgress . '.content_id'])
+                                ->from(ConfigService::$tableUserContentProgress)
+                                ->where(
+                                    ConfigService::$tableUserContentProgress . '.user_id',
+                                    $requiredUserStateData['user_id']
+                                )
+                                ->where(
+                                    ConfigService::$tableUserContentProgress . '.content_id',
+                                    $this->connection->raw(
+                                        ConfigService::$tableContent . '.id'
+                                    )
+                                )
+                                ->where(
+                                    ConfigService::$tableUserContentProgress . '.state',
+                                    $requiredUserStateData['state']
+                                );
+                        }
+                    );
+                }
+            }
+        );
+
+        return $this;
+    }
+
+    /**
      * @param array $requiredFields
      * @return $this
      */

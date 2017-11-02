@@ -992,7 +992,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'content_id' => $courseId1,
             'user_id' => $this->createAndLogInNewUser(),
             'state' => UserContentProgressService::STATE_ADDED_TO_LIST,
-            'progress' => $this->faker->numberBetween(1, 99)
+            'progress_percent' => $this->faker->numberBetween(1, 99)
         ];
         $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
 

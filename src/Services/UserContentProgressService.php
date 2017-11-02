@@ -62,7 +62,7 @@ class UserContentProgressService
                 ],
                 [
                     'state' => UserContentProgressService::STATE_COMPLETED,
-                    'complete' => $progress,
+                    'progress_percent' => $progress,
                 ]
             );
 
@@ -83,7 +83,7 @@ class UserContentProgressService
                 'user_id' => $userId,
             ],
             [
-                'complete' => $progress
+                'progress_percent' => $progress
             ]
         );
 

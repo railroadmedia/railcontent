@@ -77,7 +77,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             'content_id' => $content['id'],
             'user_id' => $this->userId,
             'state' => UserContentProgressService::STATE_STARTED,
-            'progress' => $this->faker->numberBetween(0, 99)
+            'progress_percent' => $this->faker->numberBetween(0, 99)
         ];
 
         $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
@@ -122,7 +122,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             'content_id' => $content['id'],
             'user_id' => $this->userId,
             'state' => UserContentProgressService::STATE_STARTED,
-            'progress' => $this->faker->numberBetween(0, 10)
+            'progress_percent' => $this->faker->numberBetween(0, 10)
         ];
 
         $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
@@ -130,7 +130,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put('railcontent/progress',
             [
                 'content_id' => $content['id'],
-                'progress' => $this->faker->numberBetween(10, 99)
+                'progress_percent' => $this->faker->numberBetween(10, 99)
             ]
         );
 
@@ -145,7 +145,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put('railcontent/progress',
             [
                 'content_id' => $contentId,
-                'progress' => $this->faker->numberBetween(10, 99)
+                'progress_percent' => $this->faker->numberBetween(10, 99)
             ]);
 
         $this->assertEquals(422, $response->status());

@@ -59,7 +59,7 @@ class ContentProgressJsonController extends Controller
         $response =
             $this->userContentService->saveContentProgress(
                 $request->input('content_id'),
-                $request->input('progress'),
+                $request->input('progress_percent'),
                 $request->user()->id
             );
 

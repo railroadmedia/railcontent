@@ -21,7 +21,7 @@ class CreateUserContentProgressTable extends Migration
                 $table->integer('content_id')->index();
                 $table->integer('user_id')->index();
                 $table->string('state', 255)->index();
-                $table->integer('progress')->index()->default(0);
+                $table->integer('progress_percent')->index()->default(0);
 
                 $table->unique(['content_id', 'user_id']);
             }

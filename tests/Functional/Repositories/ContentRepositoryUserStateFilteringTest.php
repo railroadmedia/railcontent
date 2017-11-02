@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\UserContentProgressFactory;
+use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
@@ -41,7 +42,7 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
          * Expected content ids before pagination:
          * [ 3, 4, 5, 6, 7... 13 ]
          *
-         * Expected content ids after  pagination:
+         * Expected content ids after pagination:
          * [ 6, 7, 8 ]
          *
          */
@@ -54,35 +55,27 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
         // content with complete state
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
-            $userState = $this->userStateFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $userId,
-                    2 => $completeState
-                ]
+            $userState = $this->userStateFactory->completeContent(
+                $content['id'],
+                $userId
             );
         }
 
         // content with started state (the required state)
         for ($i = 0; $i < 10; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
-            $userState = $this->userStateFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $userId,
-                    2 => $startedState
-                ]
+            $userState = $this->userStateFactory->startContent(
+                $content['id'],
+                $userId
             );
         }
 
@@ -115,44 +108,35 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
         //content without user state
         for ($i = 0; $i < 3; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
         }
         // content with complete state (included state)
         for ($i = 0; $i < 2; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
-            $userState = $this->userStateFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $userId,
-                    2 => $completedState
-                ]
+            $userState = $this->userStateFactory->completeContent(
+                $content['id'],
+                $userId
             );
         }
 
         // content with started state (included state)
         for ($i = 0; $i < 10; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
-            $userState = $this->userStateFactory->create(
-                [
-                    0 => $content['id'],
-                    1 => $userId,
-                    2 => $startedState
-                ]
+            $userState = $this->userStateFactory->startContent(
+                $content['id'],
+                $userId
             );
         }
 

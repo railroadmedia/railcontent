@@ -43,7 +43,7 @@ class UserContentProgressRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'user_id' => $userId,
                 'state' => $state,
-                'progress' => 0
+                'progress_percent' => 0
             ]
         );
     }
@@ -57,7 +57,7 @@ class UserContentProgressRepositoryTest extends RailcontentTestCase
             'content_id' => $contentId,
             'user_id' => $userId,
             'state' => UserContentProgressService::STATE_STARTED,
-            'progress' => $this->faker->numberBetween(0, 99)
+            'progress_percent' => $this->faker->numberBetween(0, 99)
         ];
         $userContentId =
             $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
@@ -67,7 +67,7 @@ class UserContentProgressRepositoryTest extends RailcontentTestCase
 
         $data = [
             'state' => $state,
-            'progress' => $progress
+            'progress_percent' => $progress
         ];
 
         $this->classBeingTested->updateOrCreate(
@@ -85,7 +85,7 @@ class UserContentProgressRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'user_id' => $userId,
                 'state' => $state,
-                'progress' => $progress
+                'progress_percent' => $progress
             ]
         );
     }
@@ -99,7 +99,7 @@ class UserContentProgressRepositoryTest extends RailcontentTestCase
             'content_id' => $contentId,
             'user_id' => $userId,
             'state' => UserContentProgressService::STATE_STARTED,
-            'progress' => $this->faker->numberBetween(0, 99)
+            'progress_percent' => $this->faker->numberBetween(0, 99)
         ];
         $userContentId =
             $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
@@ -107,7 +107,7 @@ class UserContentProgressRepositoryTest extends RailcontentTestCase
         $progress = $this->faker->numberBetween(1, 99);
 
         $data = [
-            'progress' => $progress
+            'progress_percent' => $progress
         ];
 
         $this->classBeingTested->updateOrCreate(
@@ -125,7 +125,7 @@ class UserContentProgressRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'user_id' => $userId,
                 'state' => $userContent['state'],
-                'progress' => $progress
+                'progress_percent' => $progress
             ]
         );
     }

@@ -350,6 +350,8 @@ class ContentRepository extends RepositoryBase
             ->directPaginate($this->page, $this->limit)
             ->restrictByFields($this->requiredFields)
             ->includeByFields($this->includedFields)
+            ->restrictByUserStates($this->requiredUserStates)
+            ->includeByUserStates($this->includedUserStates)
             ->restrictBySlugHierarchy($this->slugHierarchy);
 
         $query = $this->query()

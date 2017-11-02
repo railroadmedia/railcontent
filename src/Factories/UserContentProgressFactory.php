@@ -2,37 +2,75 @@
 
 namespace Railroad\Railcontent\Factories;
 
-
+use Faker\Generator;
 use Railroad\Railcontent\Services\UserContentProgressService;
 
 class UserContentProgressFactory extends UserContentProgressService
 {
     /**
-     * @param array $parameterOverwrites
-     * @return mixed
+     * @var Generator
      */
-    public function create(array $parameterOverwrites = [])
+    protected $faker;
+
+    /**
+     * @param int|null $contentId
+     * @param int|null $userId
+     * @return bool
+     */
+    public function startContent($contentId = null, $userId = null)
     {
+        $this->faker = app(Generator::class);
+
         $parameters =
-            $parameterOverwrites + [
+            func_get_args() + [
                 $this->faker->randomNumber(),
                 $this->faker->randomNumber(),
-                $this->faker->randomElement(
-                    [
-                        UserContentProgressService::STATE_STARTED,
-                        UserContentProgressService::STATE_COMPLETED
-                    ]
-                )
             ];
 
-        ksort($parameters);
-        $userContentId = $this->userContentService->startContent(...$parameters);
-        if (last($parameters) == UserContentProgressService::STATE_COMPLETED) {
-            $userContentId = $this->userContentService->completeContent(...$parameters);
-        }
+        $userContentId = parent::startContent(...$parameters);
 
         return $userContentId;
+    }
 
+    /**
+     * @param int|null $contentId
+     * @param int|null $userId
+     * @return bool
+     */
+    public function completeContent($contentId = null, $userId = null)
+    {
+        $this->faker = app(Generator::class);
 
+        $parameters =
+            func_get_args() + [
+                $this->faker->randomNumber(),
+                $this->faker->randomNumber(),
+            ];
+
+        $userContentId = parent::completeContent(...$parameters);
+
+        return $userContentId;
+    }
+
+    /**
+     * @param int|null $contentId
+     * @param int|null $progress
+     * @param int|null $userId
+     * @return bool
+     */
+    public function saveContentProgress($contentId = null, $progress = null, $userId = null)
+    {
+        $this->faker = app(Generator::class);
+
+        $parameters =
+            func_get_args() + [
+                $this->faker->randomNumber(),
+                $this->faker->randomNumber(0, 199),
+                $this->faker->randomNumber(),
+            ];
+
+        $userContentId = parent::saveContentProgress(...$parameters);
+
+        return $userContentId;
     }
 }

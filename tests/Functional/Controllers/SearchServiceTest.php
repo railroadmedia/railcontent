@@ -1438,7 +1438,7 @@ class SearchServiceTest extends RailcontentTestCase
                 'content_id' => $contents[$i]['id'],
                 'user_id' => $this->userId,
                 'state' => UserContentProgressService::STATE_COMPLETED,
-                'progress' => 100
+                'progress_percent' => 100
             ];
 
             $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
@@ -1505,7 +1505,7 @@ class SearchServiceTest extends RailcontentTestCase
                 'content_id' => $contents[$i]['id'],
                 'user_id' => $this->userId,
                 'state' => UserContentProgressService::STATE_STARTED,
-                'progress' => 100
+                'progress_percent' => 100
             ];
 
             $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
@@ -1582,7 +1582,7 @@ class SearchServiceTest extends RailcontentTestCase
                 'content_id' => $contents[$i]['id'],
                 'user_id' => $this->userId,
                 'state' => UserContentProgressService::STATE_STARTED,
-                'progress' => 100
+                'progress_percent' => 100
             ];
 
             $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
@@ -1675,7 +1675,7 @@ class SearchServiceTest extends RailcontentTestCase
                 'content_id' => $contents[$i]['id'],
                 'user_id' => $this->userId,
                 'state' => UserContentProgressService::STATE_STARTED,
-                'progress' => 100
+                'progress_percent' => 100
             ];
 
             $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
@@ -1695,7 +1695,7 @@ class SearchServiceTest extends RailcontentTestCase
                 'content_id' => $contents[$i]['id'],
                 'user_id' => $this->userId,
                 'state' => UserContentProgressService::STATE_STARTED,
-                'progress' => 100
+                'progress_percent' => 100
             ];
 
             $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
