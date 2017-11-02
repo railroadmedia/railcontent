@@ -3,17 +3,16 @@
 namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
-use Railroad\Railcontent\Exceptions\ContentNotFoundException;
-use Railroad\Railcontent\Exceptions\ContentReferencedByOtherContentException;
-use Railroad\Railcontent\Exceptions\RailcontentException;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Exceptions\ContentNotFoundException;
+use Railroad\Railcontent\Exceptions\ContentReferencedByOtherContentException;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentRequest;
-use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Responses\JsonPaginatedResponse;
 use Railroad\Railcontent\Responses\JsonResponse;
+use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 
 class ContentJsonController extends Controller
 {
@@ -51,7 +50,6 @@ class ContentJsonController extends Controller
             ContentRepository::$availableContentStatues = $request->get('statuses');
         }
 
-        $tStart = microtime(true);
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 10),
@@ -65,10 +63,13 @@ class ContentJsonController extends Controller
             $parsedFilters['required_user_playlists'] ?? [],
             $parsedFilters['included_user_playlists'] ?? []
         );
-        $tEnd = microtime(true);
-//        dd($tEnd - $tStart);
 
-        return new JsonPaginatedResponse($contentData['results'], $contentData['total_results'], $contentData['filter_options'], 200);
+        return new JsonPaginatedResponse(
+            $contentData['results'],
+            $contentData['total_results'],
+            $contentData['filter_options'],
+            200
+        );
     }
 
     /**
@@ -142,7 +143,8 @@ class ContentJsonController extends Controller
                 "type" => $request->input('type'),
                 "language" => $request->input('language') ?? ConfigService::$defaultLanguage,
                 "published_on" => $request->input('published_on'),
-                "archived_on" => $request->input('archived_on')]
+                "archived_on" => $request->input('archived_on')
+            ]
         );
 
         return new JsonResponse($content, 201);

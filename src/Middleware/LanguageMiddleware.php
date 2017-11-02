@@ -25,7 +25,7 @@ class LanguageMiddleware
         $locale = $request->header('Content-Language');
 
         // if the header is missed
-        if (!$locale) {
+        if (empty($locale)) {
             // take the default local language
             $locale = ConfigService::$defaultLanguage;
         }
