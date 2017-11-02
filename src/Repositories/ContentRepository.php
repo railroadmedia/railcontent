@@ -113,7 +113,7 @@ class ContentRepository extends RepositoryBase
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
-        
+
         $contentPermissionRows =
             $this->contentPermissionRepository->getByContentIdsOrTypes(
                 array_column($contentRows, 'id'),
@@ -145,8 +145,12 @@ class ContentRepository extends RepositoryBase
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
         $contentPermissionRows =
-            $this->contentPermissionRepository->getByContentIds(array_column($contentRows, 'id'));
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
 
         return $this->processRows(
             $contentRows,
@@ -205,8 +209,12 @@ class ContentRepository extends RepositoryBase
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
         $contentPermissionRows =
-            $this->contentPermissionRepository->getByContentIds(array_column($contentRows, 'id'));
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
 
         return $this->processRows(
             $contentRows,
@@ -383,7 +391,10 @@ class ContentRepository extends RepositoryBase
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentPermissionRows =
-            $this->contentPermissionRepository->getByContentIds(array_column($contentRows, 'id'));
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
 
         return $this->processRows(
             $contentRows,
