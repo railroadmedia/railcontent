@@ -66,7 +66,7 @@ class ContentRepositoryFieldOptionsTest extends RailcontentTestCase
         $this->assertEquals([$fieldName => [$fieldValue]], $rows);
     }
 
-    public function test_get_field_options_mulitple()
+    public function test_get_field_options_multiple()
     {
         $type = $this->faker->word;
 

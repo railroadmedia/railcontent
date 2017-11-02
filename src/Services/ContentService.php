@@ -161,14 +161,6 @@ class ContentService
             $filter->includeUserStates(...$includedUserState);
         }
 
-        foreach ($requiredUserPlaylists as $requiredUserPlaylist) {
-            $filter->requireUserPlaylist(...$requiredUserPlaylist);
-        }
-
-        foreach ($includedUserPlaylists as $includedUserPlaylist) {
-            $filter->includeUserPlaylist(...$includedUserPlaylist);
-        }
-
         return [
             'results' => $filter->retrieveFilter(),
             'total_results' => $filter->countFilter(),
@@ -196,8 +188,7 @@ class ContentService
         $language,
         $brand,
         $userId,
-        $publishedOn,
-        $createdOn
+        $publishedOn
     ) {
         $id =
             $this->contentRepository->create(
@@ -209,7 +200,7 @@ class ContentService
                     'brand' => $brand ?? ConfigService::$brand,
                     'user_id' => $userId,
                     'published_on' => $publishedOn,
-                    'created_on' => $createdOn ?? Carbon::now()->toDateTimeString(),
+                    'created_on' => Carbon::now()->toDateTimeString(),
                 ]
             );
 

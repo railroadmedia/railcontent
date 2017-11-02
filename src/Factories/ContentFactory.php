@@ -51,8 +51,7 @@ class ContentFactory extends ContentService
                 'en-US',
                 ConfigService::$brand,
                 rand(),
-                $this->faker->dateTimeThisCentury(),
-                $this->faker->dateTimeThisCentury(),
+                $this->faker->dateTimeThisCentury()
             ];
 
         return parent::create(...$parameters);

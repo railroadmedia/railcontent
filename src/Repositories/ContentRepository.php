@@ -113,6 +113,7 @@ class ContentRepository extends RepositoryBase
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        
         $contentPermissionRows =
             $this->contentPermissionRepository->getByContentIdsOrTypes(
                 array_column($contentRows, 'id'),
@@ -138,7 +139,7 @@ class ContentRepository extends RepositoryBase
             ->restrictStatuses()
             ->restrictPublishedOnDate()
             ->restrictBrand()
-//            ->addSlugInheritance($this->slugHierarchy)
+            //            ->addSlugInheritance($this->slugHierarchy)
             ->whereIn('id', $ids)
             ->getToArray();
 
@@ -167,6 +168,7 @@ class ContentRepository extends RepositoryBase
             ->selectPrimaryColumns()
             ->restrictStatuses()
             ->restrictPublishedOnDate()
+            ->restrictByTypes($this->typesToInclude)
             ->restrictBrand()
             ->where(['parent_id' => $parentId])
             ->getToArray(['id']);
@@ -195,7 +197,8 @@ class ContentRepository extends RepositoryBase
             ->restrictStatuses()
             ->restrictPublishedOnDate()
             ->restrictBrand()
-//            ->addSlugInheritance($this->slugHierarchy)
+            ->restrictByTypes($this->typesToInclude)
+            //            ->addSlugInheritance($this->slugHierarchy)
             ->where('slug', $slug)
             ->where('type', $type)
             ->getToArray();
@@ -314,7 +317,7 @@ class ContentRepository extends RepositoryBase
 
         }
 
-        return $contents;
+        return $this->attachContentsLinkedByField($contents);
     }
 
     /**
@@ -368,6 +371,7 @@ class ContentRepository extends RepositoryBase
             ->includeByFields($this->includedFields)
             ->restrictByUserStates($this->requiredUserStates)
             ->includeByUserStates($this->includedUserStates)
+            ->restrictByTypes($this->typesToInclude)
             ->restrictBySlugHierarchy($this->slugHierarchy);
 
         $query = $this->query()
@@ -402,6 +406,7 @@ class ContentRepository extends RepositoryBase
             ->restrictBrand()
             ->restrictByFields($this->requiredFields)
             ->includeByFields($this->includedFields)
+            ->restrictByTypes($this->typesToInclude)
             ->restrictBySlugHierarchy($this->slugHierarchy);
 
         $query = $this->query()
@@ -429,6 +434,10 @@ class ContentRepository extends RepositoryBase
         $query = $this->query()
             ->restrictByFields($this->requiredFields)
             ->includeByFields($this->includedFields)
+            ->restrictStatuses()
+            ->restrictPublishedOnDate()
+            ->restrictByTypes($this->typesToInclude)
+            ->restrictBrand()
             ->join(
                 ConfigService::$tableContentFields,
                 ConfigService::$tableContentFields . '.content_id',
@@ -438,11 +447,9 @@ class ContentRepository extends RepositoryBase
 
         $query->select(
             [
-                ConfigService::$tableContentFields . '.id as field_id',
                 ConfigService::$tableContentFields . '.key as field_key',
                 ConfigService::$tableContentFields . '.value as field_value',
                 ConfigService::$tableContentFields . '.type as field_type',
-                ConfigService::$tableContentFields . '.position as field_position',
             ]
         )
             ->groupBy(
@@ -522,21 +529,59 @@ class ContentRepository extends RepositoryBase
             ->from(ConfigService::$tableContent);
     }
 
-    public function getLinkedContent($contentId)
+    /**
+     * @param array $parsedContents
+     * @return array
+     */
+    public function attachContentsLinkedByField(array $parsedContents)
     {
-        return $this->fieldQuery()
-            ->join(
-                ConfigService::$tableContentFields,
-                ConfigService::$tableContentFields . '.field_id',
-                '=',
-                ConfigService::$tableFields . '.id'
-            )
-            ->where(
-                [
-                    'value' => $contentId,
-                    'type' => 'content_id'
-                ]
-            )->get()->toArray();
+        $contentIdsToPull = [];
+
+        foreach ($parsedContents as $parsedContent) {
+            if (!empty($parsedContent['fields'])) {
+                foreach ($parsedContent['fields'] as $field) {
+                    if ($field['type'] === 'content_id') {
+                        $contentIdsToPull[$field['id']] = $field['value'];
+                    }
+                }
+            }
+        }
+
+        if (!empty($contentIdsToPull)) {
+            $linkedContents = $this->getByIds($contentIdsToPull);
+
+            foreach ($parsedContents as $contentId => $parsedContent) {
+                if (!empty($parsedContent['fields'])) {
+                    foreach ($parsedContent['fields'] as $fieldIndex => $field) {
+                        if ($field['type'] === 'content_id') {
+                            unset($parsedContents[$contentId]['fields'][$fieldIndex]);
+
+                            if (empty($linkedContents[$field['value']])) {
+                                continue;
+                            }
+
+                            $linkedContent = $linkedContents[$field['value']];
+
+                            $parsedContents[$contentId]['fields'][] = [
+                                'id' => $field['id'],
+                                'content_id' => $field['content_id'],
+                                'key' => $field['key'],
+                                'value' => $linkedContent,
+                                'type' => 'content',
+                                'position' => $field['position']
+                            ];
+
+                        }
+                    }
+                }
+
+                // this prevent json from casting the fields to an object instead of an array
+                $parsedContents[$contentId]['fields'] =
+                    array_values($parsedContents[$contentId]['fields']);
+            }
+        }
+
+        return $parsedContents;
     }
 
     private function parseAvailableFields($rows)
@@ -545,14 +590,10 @@ class ContentRepository extends RepositoryBase
         $subContentIds = [];
 
         foreach ($rows as $row) {
-            if (!empty($row['field_id'])) {
-
-                if ($row['field_type'] == 'content_id') {
-                    $subContentIds[] = $row['field_value'];
-                } else {
-                    $availableFields[$row['field_key']][] = $row['field_value'];
-                }
-
+            if ($row['field_type'] == 'content_id') {
+                $subContentIds[] = $row['field_value'];
+            } else {
+                $availableFields[$row['field_key']][] = $row['field_value'];
             }
         }
 

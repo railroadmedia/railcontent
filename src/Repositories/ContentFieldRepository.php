@@ -17,4 +17,47 @@ class ContentFieldRepository extends RepositoryBase
     {
         return $this->connection()->table(ConfigService::$tableContentFields);
     }
+
+    public function attachLinkedContents(array $fieldRows)
+    {
+        $contentIdsToGrab = [];
+
+        foreach($fieldRows as $fieldRow) {
+            if ($fieldRow['type'] === 'content_id') {
+                $contentIdsToGrab[] = $fieldRow['valye'];
+            }
+        }
+
+        $contentIdsToGrab = array_unique($contentIdsToGrab);
+
+        $subContents = $this->query()
+            ->select(
+                [
+                    ConfigService::$tableContentFields . '.type as field_type',
+                    ConfigService::$tableContentFields . '.value as field_value',
+                    ConfigService::$tableContentFields . '.content_id'
+                ]
+            )
+            ->join(
+                ConfigService::$tableContent,
+                ConfigService::$tableContent . '.id',
+                '=',
+                ConfigService::$tableContentFields . '.content_id'
+            )
+            ->where([ConfigService::$tableContentFields . '.type' => 'content_id'])
+            ->whereIn(ConfigService::$tableContent . '.id', array_column($fieldRows, 'value'))
+            ->get()
+            ->keyBy('content_id')
+            ->toArray();
+
+        var_dump($fieldRows);
+
+//        foreach ($fieldRows as $rowIndex => $fieldRow) {
+//            if ($fieldRow['type'] === 'content_id') {
+//                $fieldRows[$rowIndex]['value'] = $subContents[$fieldRow['value']];
+//            }
+//        }
+
+        dd($subContents);
+    }
 }

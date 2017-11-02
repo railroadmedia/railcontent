@@ -51,6 +51,7 @@ class ContentJsonController extends Controller
             ContentRepository::$availableContentStatues = $request->get('statuses');
         }
 
+        $tStart = microtime(true);
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 10),
@@ -64,6 +65,8 @@ class ContentJsonController extends Controller
             $parsedFilters['required_user_playlists'] ?? [],
             $parsedFilters['included_user_playlists'] ?? []
         );
+        $tEnd = microtime(true);
+//        dd($tEnd - $tStart);
 
         return new JsonPaginatedResponse($contentData['results'], $contentData['total_results'], $contentData['filter_options'], 200);
     }
