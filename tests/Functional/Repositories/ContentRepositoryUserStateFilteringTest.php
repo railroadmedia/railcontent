@@ -3,10 +3,10 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Factories\UserStateFactory;
+use Railroad\Railcontent\Factories\UserContentProgressFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Services\UserContentService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
@@ -22,7 +22,7 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
     protected $contentFactory;
 
     /**
-     * @var UserStateFactory
+     * @var UserContentProgressFactory
      */
     protected $userStateFactory;
 
@@ -32,7 +32,7 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
 
         $this->classBeingTested = $this->app->make(ContentRepository::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->userStateFactory = $this->app->make(UserStateFactory::class);
+        $this->userStateFactory = $this->app->make(UserContentProgressFactory::class);
     }
 
     public function test_require_started_state_with_pagination()
@@ -47,8 +47,8 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
          */
 
         $type = $this->faker->word;
-        $startedState = UserContentService::STATE_STARTED;
-        $completeState = UserContentService::STATE_COMPLETED;
+        $startedState = UserContentProgressService::STATE_STARTED;
+        $completeState = UserContentProgressService::STATE_COMPLETED;
         $userId = $this->faker->randomNumber();
 
         // content with complete state
@@ -108,8 +108,8 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
         */
 
         $type = $this->faker->word;
-        $startedState = UserContentService::STATE_STARTED;
-        $completedState = UserContentService::STATE_COMPLETED;
+        $startedState = UserContentProgressService::STATE_STARTED;
+        $completedState = UserContentProgressService::STATE_COMPLETED;
         $userId = $this->faker->randomNumber();
 
         //content without user state

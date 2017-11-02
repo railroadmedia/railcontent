@@ -6,7 +6,7 @@ use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Services\UserContentService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentProgressJsonControllerTest extends RailcontentTestCase
@@ -76,7 +76,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $userContent = [
             'content_id' => $content['id'],
             'user_id' => $this->userId,
-            'state' => UserContentService::STATE_STARTED,
+            'state' => UserContentProgressService::STATE_STARTED,
             'progress' => $this->faker->numberBetween(0, 99)
         ];
 
@@ -121,7 +121,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $userContent = [
             'content_id' => $content['id'],
             'user_id' => $this->userId,
-            'state' => UserContentService::STATE_STARTED,
+            'state' => UserContentProgressService::STATE_STARTED,
             'progress' => $this->faker->numberBetween(0, 10)
         ];
 

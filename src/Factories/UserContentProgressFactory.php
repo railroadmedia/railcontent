@@ -3,26 +3,10 @@
 namespace Railroad\Railcontent\Factories;
 
 
-use Railroad\Railcontent\Services\UserContentService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 
-class UserStateFactory extends FactoryBase
+class UserContentProgressFactory extends UserContentProgressService
 {
-    /**
-     * @var UserContentService
-     */
-    private $userContentService;
-
-    /**
-     * UserStateFactory constructor.
-     * @param $userContentService
-     */
-    public function __construct(UserContentService $userContentService)
-    {
-        parent::__construct();
-
-        $this->userContentService = $userContentService;
-    }
-
     /**
      * @param array $parameterOverwrites
      * @return mixed
@@ -35,15 +19,15 @@ class UserStateFactory extends FactoryBase
                 $this->faker->randomNumber(),
                 $this->faker->randomElement(
                     [
-                        UserContentService::STATE_STARTED,
-                        UserContentService::STATE_COMPLETED
+                        UserContentProgressService::STATE_STARTED,
+                        UserContentProgressService::STATE_COMPLETED
                     ]
                 )
             ];
 
         ksort($parameters);
         $userContentId = $this->userContentService->startContent(...$parameters);
-        if (last($parameters) == UserContentService::STATE_COMPLETED) {
+        if (last($parameters) == UserContentProgressService::STATE_COMPLETED) {
             $userContentId = $this->userContentService->completeContent(...$parameters);
         }
 

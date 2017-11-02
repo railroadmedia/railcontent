@@ -6,20 +6,21 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\UserContentRequest;
 use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Services\UserContentService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 
 class ContentProgressJsonController extends Controller
 {
     /**
-     * @var UserContentService
+     * @var UserContentProgressService
      */
     private $userContentService;
 
     /**
      * ContentProgressJsonController constructor.
-     * @param UserContentService $userContentService
+     *
+     * @param UserContentProgressService $userContentService
      */
-    public function __construct(UserContentService $userContentService)
+    public function __construct(UserContentProgressService $userContentService)
     {
         $this->userContentService = $userContentService;
     }

@@ -2,13 +2,12 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
-use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\UserContentService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
-class UserContentRepositoryTest extends RailcontentTestCase
+class UserContentProgressRepositoryTest extends RailcontentTestCase
 {
     /**
      * @var UserContentProgressRepository
@@ -27,9 +26,15 @@ class UserContentRepositoryTest extends RailcontentTestCase
         $contentId = $this->faker->randomNumber();
         $userId = $this->faker->randomNumber();
 
-        $state = UserContentService::STATE_STARTED;
+        $state = UserContentProgressService::STATE_STARTED;
 
-        $userContentId = $this->classBeingTested->saveUserContent($contentId, $userId, $state);
+        $userContentId = $this->classBeingTested->create(
+            [
+                'content_id' => $contentId,
+                'user_id' => $userId,
+                'state' => $state,
+            ]
+        );
 
         $this->assertDatabaseHas(
             ConfigService::$tableUserContentProgress,
@@ -51,20 +56,27 @@ class UserContentRepositoryTest extends RailcontentTestCase
         $userContent = [
             'content_id' => $contentId,
             'user_id' => $userId,
-            'state' => UserContentService::STATE_STARTED,
+            'state' => UserContentProgressService::STATE_STARTED,
             'progress' => $this->faker->numberBetween(0, 99)
         ];
-        $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
+        $userContentId =
+            $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
 
         $progress = 100;
-        $state = UserContentService::STATE_COMPLETED;
+        $state = UserContentProgressService::STATE_COMPLETED;
 
         $data = [
             'state' => $state,
             'progress' => $progress
         ];
 
-        $this->classBeingTested->updateUserContent($contentId, $userId, $data);
+        $this->classBeingTested->updateOrCreate(
+            [
+                'content_id' => $contentId,
+                'user_id' => $userId,
+            ],
+            $data
+        );
 
         $this->assertDatabaseHas(
             ConfigService::$tableUserContentProgress,
@@ -86,10 +98,11 @@ class UserContentRepositoryTest extends RailcontentTestCase
         $userContent = [
             'content_id' => $contentId,
             'user_id' => $userId,
-            'state' => UserContentService::STATE_STARTED,
+            'state' => UserContentProgressService::STATE_STARTED,
             'progress' => $this->faker->numberBetween(0, 99)
         ];
-        $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
+        $userContentId =
+            $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
 
         $progress = $this->faker->numberBetween(1, 99);
 
@@ -97,7 +110,13 @@ class UserContentRepositoryTest extends RailcontentTestCase
             'progress' => $progress
         ];
 
-        $this->classBeingTested->updateUserContent($contentId, $userId, $data);
+        $this->classBeingTested->updateOrCreate(
+            [
+                'content_id' => $contentId,
+                'user_id' => $userId,
+            ],
+            $data
+        );
 
         $this->assertDatabaseHas(
             ConfigService::$tableUserContentProgress,
@@ -109,24 +128,6 @@ class UserContentRepositoryTest extends RailcontentTestCase
                 'progress' => $progress
             ]
         );
-    }
-
-    public function test_get_user_content()
-    {
-        $contentId = $this->faker->randomNumber();
-        $userId = $this->faker->randomNumber();
-
-        $userContent = [
-            'content_id' => $contentId,
-            'user_id' => $userId,
-            'state' => UserContentService::STATE_STARTED,
-            'progress' => $this->faker->numberBetween(0, 99)
-        ];
-        $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
-
-        $results = $this->classBeingTested->getUserContent($contentId, $userId);
-
-        $this->assertEquals(array_merge(['id' => $userContentId], $userContent), $results);
     }
 
 }

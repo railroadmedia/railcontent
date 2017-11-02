@@ -10,7 +10,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PlaylistsService;
-use Railroad\Railcontent\Services\UserContentService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Response;
 
@@ -991,7 +991,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $userContent = [
             'content_id' => $courseId1,
             'user_id' => $this->createAndLogInNewUser(),
-            'state' => UserContentService::STATE_ADDED_TO_LIST,
+            'state' => UserContentProgressService::STATE_ADDED_TO_LIST,
             'progress' => $this->faker->numberBetween(1, 99)
         ];
         $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);

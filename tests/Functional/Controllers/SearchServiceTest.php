@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\PlaylistsService;
 use Railroad\Railcontent\Services\SearchService;
-use Railroad\Railcontent\Services\UserContentService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 /**
@@ -1437,7 +1437,7 @@ class SearchServiceTest extends RailcontentTestCase
             $userContent = [
                 'content_id' => $contents[$i]['id'],
                 'user_id' => $this->userId,
-                'state' => UserContentService::STATE_COMPLETED,
+                'state' => UserContentProgressService::STATE_COMPLETED,
                 'progress' => 100
             ];
 
@@ -1504,7 +1504,7 @@ class SearchServiceTest extends RailcontentTestCase
             $userContent = [
                 'content_id' => $contents[$i]['id'],
                 'user_id' => $this->userId,
-                'state' => UserContentService::STATE_STARTED,
+                'state' => UserContentProgressService::STATE_STARTED,
                 'progress' => 100
             ];
 
@@ -1581,7 +1581,7 @@ class SearchServiceTest extends RailcontentTestCase
             $userContent = [
                 'content_id' => $contents[$i]['id'],
                 'user_id' => $this->userId,
-                'state' => UserContentService::STATE_STARTED,
+                'state' => UserContentProgressService::STATE_STARTED,
                 'progress' => 100
             ];
 
@@ -1674,7 +1674,7 @@ class SearchServiceTest extends RailcontentTestCase
             $userContent = [
                 'content_id' => $contents[$i]['id'],
                 'user_id' => $this->userId,
-                'state' => UserContentService::STATE_STARTED,
+                'state' => UserContentProgressService::STATE_STARTED,
                 'progress' => 100
             ];
 
@@ -1694,7 +1694,7 @@ class SearchServiceTest extends RailcontentTestCase
             $userContent = [
                 'content_id' => $contents[$i]['id'],
                 'user_id' => $this->userId,
-                'state' => UserContentService::STATE_STARTED,
+                'state' => UserContentProgressService::STATE_STARTED,
                 'progress' => 100
             ];
 

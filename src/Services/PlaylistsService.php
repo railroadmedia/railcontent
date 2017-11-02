@@ -53,7 +53,7 @@ class PlaylistsService
                 $this->userContentRepository->saveUserContent(
                     $contentId,
                     $userId,
-                    UserContentService::STATE_ADDED_TO_LIST
+                    UserContentProgressService::STATE_ADDED_TO_LIST
                 ) :
                 $userContent['id'];
 
