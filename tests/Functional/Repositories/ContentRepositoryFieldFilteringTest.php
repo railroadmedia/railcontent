@@ -167,9 +167,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 ContentHelper::slugify($this->faker->word),
                 $type,
-                ContentService::STATUS_PUBLISHED,
-                $this->faker->word,
-                Carbon::now()->subDays($i)->toDateTimeString()
+                ContentService::STATUS_PUBLISHED
             );
 
             $randomField = $this->fieldFactory->create($content['id']);
@@ -180,9 +178,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 ContentHelper::slugify($this->faker->word),
                 $type,
-                ContentService::STATUS_PUBLISHED,
-                $this->faker->word,
-                Carbon::now()->subDays($i * 10)->toDateTimeString()
+                ContentService::STATUS_PUBLISHED
             );
 
             $field = $this->fieldFactory->create(
@@ -196,7 +192,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $randomField = $this->fieldFactory->create($content['id']);
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'published_on', 'asc', [$type], [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'desc', [$type], [])
             ->includeField(
                 $includedFieldName,
                 $includedFieldValue,

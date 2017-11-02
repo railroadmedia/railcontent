@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Factories;
 
 use Faker\Generator;
 use Railroad\Railcontent\Helpers\ContentHelper;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 
 class ContentFactory extends ContentService
@@ -48,7 +49,10 @@ class ContentFactory extends ContentService
                     ]
                 ),
                 'en-US',
-                $this->faker->dateTimeThisCentury()
+                ConfigService::$brand,
+                rand(),
+                $this->faker->dateTimeThisCentury(),
+                $this->faker->dateTimeThisCentury(),
             ];
 
         return parent::create(...$parameters);
