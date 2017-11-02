@@ -59,9 +59,7 @@ class ContentJsonController extends Controller
             $parsedFilters['required_fields'] ?? [],
             $parsedFilters['included_fields'] ?? [],
             $parsedFilters['required_user_states'] ?? [],
-            $parsedFilters['included_user_states'] ?? [],
-            $parsedFilters['required_user_playlists'] ?? [],
-            $parsedFilters['included_user_playlists'] ?? []
+            $parsedFilters['included_user_states'] ?? []
         );
 
         return new JsonPaginatedResponse(
@@ -168,16 +166,11 @@ class ContentJsonController extends Controller
         //check if content exist; if not throw exception
         throw_unless($content, ContentNotFoundException::class);
 
-        //check if the content it's being referenced by other content; it yes throw an exception
-        $linkedWithContent = $this->contentService->linkedWithContent($contentId);
-
-        throw_if($linkedWithContent, ContentReferencedByOtherContentException::class);
-
         //call the event that save a new content version in the database
         event(new ContentUpdated($contentId));
 
         //delete content
-        $this->contentService->delete($contentId, $request->input('delete_children'));
+        $this->contentService->delete($contentId);
 
         return new JsonResponse(null, 204);
     }

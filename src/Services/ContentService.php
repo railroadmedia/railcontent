@@ -116,8 +116,6 @@ class ContentService
      * @param array $includedFields
      * @param array $requiredUserStates
      * @param array $includedUserStates
-     * @param array $requiredUserPlaylists
-     * @param array $includedUserPlaylists
      * @return array|null
      */
     public function getFiltered(
@@ -129,9 +127,7 @@ class ContentService
         array $requiredFields = [],
         array $includedFields = [],
         array $requiredUserStates = [],
-        array $includedUserStates = [],
-        array $requiredUserPlaylists = [],
-        array $includedUserPlaylists = []
+        array $includedUserStates = []
     ) {
         $orderByDirection = substr($orderByAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($orderByAndDirection, '-');

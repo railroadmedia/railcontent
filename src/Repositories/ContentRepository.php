@@ -449,7 +449,10 @@ class ContentRepository extends RepositoryBase
             ->restrictPublishedOnDate()
             ->restrictByTypes($this->typesToInclude)
             ->restrictBrand()
-            ->whereIn(ConfigService::$tableContentFields . '.key', config('railcontent.field_option_list'))
+            ->whereIn(
+                ConfigService::$tableContentFields . '.key',
+                config('railcontent.field_option_list', [])
+            )
             ->leftJoin(
                 ConfigService::$tableContentFields,
                 ConfigService::$tableContentFields . '.content_id',

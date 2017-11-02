@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\ContentVersionRepository;
@@ -33,12 +34,21 @@ class VersionService
     public function store($contentId)
     {
         //get authenticated user id
-        $userId = ($this->versionRepository->getAuthenticatedUserId($this->request));
+        $userId = $this->request->user()->id ?? null;
 
         //get content
         $content = $this->contentRepository->getById($contentId);
 
-        $versionContentId = $this->versionRepository->store($contentId, $userId, '', serialize($content));
+        $versionContentId =
+            $this->versionRepository->create(
+                [
+                    'content_id' => $contentId,
+                    'author_id' => $userId,
+                    'state' => '',
+                    'data' => serialize($content),
+                    'saved_on' => Carbon::now()->toDateTimeString(),
+                ]
+            );
 
         return $versionContentId;
     }

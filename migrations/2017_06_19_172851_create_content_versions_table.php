@@ -21,7 +21,7 @@ class CreateContentVersionsTable extends Migration
 
                 $table->integer('content_id')->index();
                 $table->integer('author_id')->index()->nullable();
-                $table->string('state', 64)->index();
+                $table->string('state', 64)->index()->nullable();
                 $table->text('data');
                 $table->dateTime('saved_on')->index();
             }

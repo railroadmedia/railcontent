@@ -220,32 +220,24 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_content_service_return_new_content_after_create()
     {
-        $slug = $this->faker->word;
-        $type = $this->faker->word;
-        $position = $this->faker->numberBetween();
-        $status = ContentService::STATUS_DRAFT;
-        $parentId = null;
 
-        $content = $this->serviceBeingTested->create($slug, $type, $status, null, null, null);
+        $content = $this->contentFactory->create();
 
-        $expectedResult = [
-            'id' => 1,
-            'slug' => $slug,
-            'status' => $status,
-            'type' => $type,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'published_on' => null,
-            'brand' => ConfigService::$brand,
-            'language' => ConfigService::$defaultLanguage
-        ];
+        $response = $this->call('GET', 'railcontent/content/' . $content['id']);
 
-        $this->assertEquals($expectedResult, $content);
-
+        $this->assertEquals(
+            [
+                "status" => "ok",
+                "code" => 200,
+                "results" => [$content['id'] => $content]
+            ],
+            $response->json()
+        );
     }
 
     public function test_update_response_status()
     {
-        $content = $this->contentFactory->create([]);
+        $content = $this->contentFactory->create();
 
         $response = $this->call(
             'PUT',
@@ -439,7 +431,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_controller_delete_method_response_status()
     {
-        $content = $this->contentFactory->create([]);
+        $content = $this->contentFactory->create();
 
         $response = $this->call('DELETE', 'railcontent/content/' . $content['id'], ['deleteChildren' => 1]);
 
@@ -456,57 +448,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
     public function test_delete_missing_content_response_status()
     {
         $response = $this->call('DELETE', 'railcontent/content/1', ['deleteChildren' => 0]);
-
-        $this->assertEquals(404, $response->status());
-    }
-
-    public function test_can_not_delete_content_linked()
-    {
-        $content = $this->contentFactory->create([]);
-        $contentId = $content['id'];
-
-        $content2 = $this->contentFactory->create([]);
-        $contentId2 = $content2['id'];
-
-        // content linked
-        $linkedContent = $this->contentFactory->create([]);
-        $linkedContentId = $linkedContent['id'];
-
-        $fieldKey = $this->faker->word;
-
-        $this->call(
-            'POST',
-            'railcontent/content/field',
-            [
-                'content_id' => $contentId,
-                'key' => $fieldKey,
-                'value' => $linkedContentId,
-                'type' => 'content_id',
-                'position' => 2
-            ]
-        );
-
-        $this->call(
-            'POST',
-            'railcontent/content/field',
-            [
-                'content_id' => $contentId2,
-                'key' => $fieldKey,
-                'value' => $linkedContentId,
-                'type' => 'content_id',
-                'position' => 2
-            ]
-        );
-        $response = $this->call('DELETE', 'railcontent/content/' . $linkedContentId);
-
-        $this->assertEquals(
-            'This content is being referenced by other content (' .
-            $contentId .
-            ',' .
-            $contentId2 .
-            '), you must delete that content first.',
-            json_decode($response->content(), true)['error']['detail']
-        );
 
         $this->assertEquals(404, $response->status());
     }
@@ -636,31 +577,26 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ];
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
+
             $contents[$contentId] = array_merge(['id' => $contentId], $content);
         }
-
-        $field = [
-            'key' => $this->faker->word,
-            'value' => $this->faker->text(255),
-            'type' => 'string',
-            'position' => $this->faker->numberBetween()
-        ];
-
-        $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
-
-        $filter = [$field['key'] . ',' . $field['value'] . ',' . $field['type']];
-        $expectedContent['filter_options'] = [$field['key'] => [$field['value']]];
 
         $contentWithFieldsNr = 5;
 
         for ($i = 1; $i < $contentWithFieldsNr; $i++) {
-            $contentField = [
-                'content_id' => $contents[$i]['id'],
-                'field_id' => $fieldId
+            $field = [
+                'content_id' => $this->faker->word,
+                'key' => $this->faker->word,
+                'value' => $this->faker->text(255),
+                'type' => 'string',
+                'position' => $this->faker->numberBetween()
             ];
 
-            $contentFieldId =
-                $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField);
+            $fieldId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId($field);
+
+            $filter = [$field['key'] . ',' . $field['value'] . ',' . $field['type']];
+            $expectedContent['filter_options'] = [$field['key'] => [$field['value']]];
+
             $expectedResults[$i] = $contents[$i];
             $expectedResults[$i]['fields'][] = array_merge($field, ['id' => $fieldId]);
         }

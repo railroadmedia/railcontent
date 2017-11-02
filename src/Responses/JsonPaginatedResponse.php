@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 
-
 class JsonPaginatedResponse implements Responsable
 {
     protected $results;
