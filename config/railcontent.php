@@ -12,6 +12,12 @@ return [
         'es-US',
     ],
 
+    'field_option_list' => [
+        'instructor',
+        'topic',
+        'difficulty'
+    ],
+
     'validation' => [
         'drumeo' => [
             'library-lesson' => [
