@@ -33,7 +33,7 @@ class FieldJsonController extends Controller
         //Fire an event that the content was modified
         event(new ContentUpdated($request->input('content_id')));
 
-        $categoryField = $this->fieldService->createField(
+        $categoryField = $this->fieldService->create(
             $request->input('content_id'),
             $request->input('key'),
             $request->input('value'),

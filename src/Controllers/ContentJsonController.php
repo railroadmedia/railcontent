@@ -103,8 +103,11 @@ class ContentJsonController extends Controller
             $request->get('slug'),
             $request->get('type'),
             $request->get('status'),
-            $request->input('language') ?? ConfigService::$defaultLanguage,
-            $request->get('published_on')
+            $request->get('language'),
+            $request->get('brand'),
+            $request->get('user_id'),
+            $request->get('published_on'),
+            $request->get('created_on')
         );
 
         return new JsonResponse($content, 201);

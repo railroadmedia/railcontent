@@ -24,6 +24,7 @@ class CreateContentTable extends Migration
                 $table->string('status', 64)->index();
                 $table->string('brand', 64)->index();
                 $table->string('language', 16)->index();
+                $table->integer('user_id')->index()->nullable();
 
                 $table->dateTime('published_on')->index()->nullable();
                 $table->dateTime('created_on')->index();

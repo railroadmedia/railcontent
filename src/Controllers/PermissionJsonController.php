@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\PermissionAssignRequest;
 use Railroad\Railcontent\Requests\PermissionRequest;
+use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\PermissionService;
 
 /**
@@ -18,15 +19,23 @@ class PermissionJsonController extends Controller
      * @var PermissionService
      */
     private $permissionService;
+    /**
+     * @var ContentPermissionService
+     */
+    private $contentPermissionService;
 
     /**
      * PermissionController constructor.
      *
      * @param PermissionService $permissionService
+     * @param ContentPermissionService $contentPermissionService
      */
-    public function __construct(PermissionService $permissionService)
-    {
+    public function __construct(
+        PermissionService $permissionService,
+        ContentPermissionService $contentPermissionService
+    ) {
         $this->permissionService = $permissionService;
+        $this->contentPermissionService = $contentPermissionService;
     }
 
     /**
@@ -37,7 +46,7 @@ class PermissionJsonController extends Controller
      */
     public function store(PermissionRequest $request)
     {
-        $permission = $this->permissionService->store($request->input('name'));
+        $permission = $this->permissionService->create($request->input('name'));
 
         return response()->json($permission, 200);
     }
@@ -52,7 +61,7 @@ class PermissionJsonController extends Controller
     public function update($id, PermissionRequest $request)
     {
         //check if permission exist in the database
-        $permission = $this->permissionService->getById($id);
+        $permission = $this->permissionService->get($id);
 
         if (is_null($permission)) {
             return response()->json('Update failed, permission not found with id: ' . $id, 404);
@@ -72,33 +81,33 @@ class PermissionJsonController extends Controller
     public function delete($id)
     {
         //check if permission exist in the database
-        $permission = $this->permissionService->getById($id);
+        $permission = $this->permissionService->get($id);
 
         if (is_null($permission)) {
             return response()->json('Delete failed, permission not found with id: ' . $id, 404);
         }
 
         //check if exist contents attached to the permission
-        $linkedWithContent = $this->permissionService->linkedWithContent($id);
-
-        if ($linkedWithContent->isNotEmpty()) {
-            $ids = $linkedWithContent->implode('content_id', ', ');
-            $types = $linkedWithContent->implode('content_type', ', ');
-            $message = '';
-            if ($ids != '') {
-                $message .= ' content(' . $ids . ')';
-            }
-            if ($types != '') {
-                $message .= ' content types(' . $types . ')';
-            }
-
-            return response()->json(
-                'This permission is being referenced by other' .
-                $message .
-                ', you must delete that reference first.',
-                404
-            );
-        }
+//        $linkedWithContent = $this->permissionService->linkedWithContent($id);
+//
+//        if ($linkedWithContent->isNotEmpty()) {
+//            $ids = $linkedWithContent->implode('content_id', ', ');
+//            $types = $linkedWithContent->implode('content_type', ', ');
+//            $message = '';
+//            if ($ids != '') {
+//                $message .= ' content(' . $ids . ')';
+//            }
+//            if ($types != '') {
+//                $message .= ' content types(' . $types . ')';
+//            }
+//
+//            return response()->json(
+//                'This permission is being referenced by other' .
+//                $message .
+//                ', you must delete that reference first.',
+//                404
+//            );
+//        }
 
         $deleted = $this->permissionService->delete($id);
 
@@ -113,10 +122,10 @@ class PermissionJsonController extends Controller
      */
     public function assign(PermissionAssignRequest $request)
     {
-        $assignedPermission = $this->permissionService->assign(
-            $request->input('permission_id'),
+        $assignedPermission = $this->contentPermissionService->create(
             $request->input('content_id'),
-            $request->input('content_type')
+            $request->input('content_type'),
+            $request->input('permission_id')
         );
 
         return response()->json($assignedPermission, 200);

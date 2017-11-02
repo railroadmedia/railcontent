@@ -18,6 +18,8 @@ class ContentFactory extends ContentService
      * @param null $type
      * @param null $status
      * @param null $language
+     * @param null $brand
+     * @param null $userId
      * @param null $publishedOn
      * @param null $createdOn
      * @return array
@@ -27,6 +29,8 @@ class ContentFactory extends ContentService
         $type = null,
         $status = null,
         $language = null,
+        $brand = null,
+        $userId = null,
         $publishedOn = null,
         $createdOn = null
     ) {

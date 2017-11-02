@@ -183,6 +183,8 @@ class ContentService
      * @param string $type
      * @param string $status
      * @param string|null $language
+     * @param string|null $brand
+     * @param int|null $userId
      * @param string|null $publishedOn
      * @param string|null $createdOn
      * @return array
@@ -192,8 +194,10 @@ class ContentService
         $type,
         $status,
         $language,
+        $brand,
+        $userId,
         $publishedOn,
-        $createdOn = null
+        $createdOn
     ) {
         $id =
             $this->contentRepository->create(
@@ -202,9 +206,10 @@ class ContentService
                     'type' => $type,
                     'status' => $status,
                     'language' => $language ?? ConfigService::$defaultLanguage,
+                    'brand' => $brand ?? ConfigService::$brand,
+                    'user_id' => $userId,
                     'published_on' => $publishedOn,
                     'created_on' => $createdOn ?? Carbon::now()->toDateTimeString(),
-                    'brand' => ConfigService::$brand,
                 ]
             );
 

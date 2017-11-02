@@ -35,9 +35,6 @@ class ContentRepository extends RepositoryBase
     private $requiredFields = [];
     private $includedFields = [];
 
-    private $requiredUserPlaylists = [];
-    private $includedUserPlaylists = [];
-
     private $requiredUserStates = [];
     private $includedUserStates = [];
 
@@ -156,6 +153,25 @@ class ContentRepository extends RepositoryBase
             $contentDatumRows,
             $contentPermissionRows
         );
+    }
+
+    public function getByParentId($parentId)
+    {
+        $parentContentIds = $this->query()
+            ->join(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.child_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->selectPrimaryColumns()
+            ->restrictStatuses()
+            ->restrictPublishedOnDate()
+            ->restrictBrand()
+            ->where(['parent_id' => $parentId])
+            ->getToArray(['id']);
+
+        return $this->getByIds(array_column($parentContentIds, 'id'));
     }
 
     /**
@@ -465,30 +481,6 @@ class ContentRepository extends RepositoryBase
     public function includeField($name, $value, $type = '')
     {
         $this->includedFields[] = ['name' => $name, 'value' => $value, 'type' => $type];
-
-        return $this;
-    }
-
-    /**
-     * @param $userId
-     * @param $name
-     * @return $this
-     */
-    public function requireUserPlaylist($userId, $name)
-    {
-        $this->requiredUserPlaylists[] = ['user_id' => $userId, 'name' => $name];
-
-        return $this;
-    }
-
-    /**
-     * @param $userId
-     * @param $name
-     * @return $this
-     */
-    public function includeUserPlaylist($userId, $name)
-    {
-        $this->includedUserPlaylists[] = ['user_id' => $userId, 'name' => $name];
 
         return $this;
     }
