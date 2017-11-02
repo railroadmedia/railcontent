@@ -36,9 +36,10 @@ class ContentPermissionRepository extends RepositoryBase
 
     /**
      * @param array $contentIds
+     * @param array $contentTypes
      * @return array
      */
-    public function getByContentIds(array $contentIds)
+    public function getByContentIdsOrTypes(array $contentIds, array $contentTypes)
     {
         return $this->query()
             ->join(
@@ -47,7 +48,8 @@ class ContentPermissionRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContentPermissions . '.permission_id'
             )
-            ->whereIn(ConfigService::$tableContentPermissions . '.content_id', $contentIds)
+            ->orWhereIn(ConfigService::$tableContentPermissions . '.content_id', $contentIds)
+            ->orWhereIn(ConfigService::$tableContentPermissions . '.content_type', $contentTypes)
             ->get()
             ->toArray();
     }

@@ -90,13 +90,13 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         foreach ($slugHierarchyToInclude as $slugToInclude) {
             $includedParentContentIds[] =
-                $this->contentFactory->create([0 => $slugToInclude, 1 => $type])['id'];
+                $this->contentFactory->create($slugToInclude, $type)['id'];
         }
 
         foreach ($includedParentContentIds as $index => $includedParentContentId) {
             if ($index > 0) {
                 $this->contentHierarchyFactory->create(
-                    [$includedParentContentIds[$index - 1], $includedParentContentId]
+                    $includedParentContentIds[$index - 1], $includedParentContentId
                 );
             }
         }
@@ -111,13 +111,13 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         foreach ($slugHierarchyToExclude as $slugToExclude) {
             $excludedParentContentIds[] =
-                $this->contentFactory->create([0 => $slugToExclude, 1 => $type])['id'];
+                $this->contentFactory->create($slugToExclude, $type)['id'];
         }
 
         foreach ($excludedParentContentIds as $index => $excludedParentContentId) {
             if ($index > 0) {
                 $this->contentHierarchyFactory->create(
-                    [$excludedParentContentIds[$index - 1], $excludedParentContentId]
+                    $excludedParentContentIds[$index - 1], $excludedParentContentId
                 );
             }
         }
@@ -126,14 +126,13 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 5; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $this->contentHierarchyFactory->create(
-                [$includedParentContentIds[2], $content['id']]
+                $includedParentContentIds[2], $content['id']
             );
 
             $expectedContents[] = $content;
@@ -141,14 +140,13 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 5; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $this->contentHierarchyFactory->create(
-                [$excludedParentContentIds[2], $content['id']]
+                $excludedParentContentIds[2], $content['id']
             );
         }
 
@@ -168,10 +166,10 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
     public function test_include_types_count()
     {
         /*
-  * Expected content ids:
-  * [ 7, 8, 9, 10, 11 ]
-  *
-  */
+        * Expected content ids:
+        * [ 7, 8, 9, 10, 11 ]
+        *
+        */
 
         $type = $this->faker->word;
 
@@ -185,13 +183,13 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         foreach ($slugHierarchyToInclude as $slugToInclude) {
             $includedParentContentIds[] =
-                $this->contentFactory->create([0 => $slugToInclude, 1 => $type])['id'];
+                $this->contentFactory->create($slugToInclude, $type)['id'];
         }
 
         foreach ($includedParentContentIds as $index => $includedParentContentId) {
             if ($index > 0) {
                 $this->contentHierarchyFactory->create(
-                    [$includedParentContentIds[$index - 1], $includedParentContentId]
+                    $includedParentContentIds[$index - 1], $includedParentContentId
                 );
             }
         }
@@ -206,13 +204,13 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         foreach ($slugHierarchyToExclude as $slugToExclude) {
             $excludedParentContentIds[] =
-                $this->contentFactory->create([0 => $slugToExclude, 1 => $type])['id'];
+                $this->contentFactory->create($slugToExclude, $type)['id'];
         }
 
         foreach ($excludedParentContentIds as $index => $excludedParentContentId) {
             if ($index > 0) {
                 $this->contentHierarchyFactory->create(
-                    [$excludedParentContentIds[$index - 1], $excludedParentContentId]
+                    $excludedParentContentIds[$index - 1], $excludedParentContentId
                 );
             }
         }
@@ -221,14 +219,13 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 5; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $this->contentHierarchyFactory->create(
-                [$includedParentContentIds[2], $content['id']]
+                $includedParentContentIds[2], $content['id']
             );
 
             $expectedContents[] = $content;
@@ -236,14 +233,13 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         for ($i = 0; $i < 5; $i++) {
             $content = $this->contentFactory->create(
-                [
-                    1 => $type,
-                    2 => ContentService::STATUS_PUBLISHED,
-                ]
+                ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+                $type,
+                ContentService::STATUS_PUBLISHED
             );
 
             $this->contentHierarchyFactory->create(
-                [$excludedParentContentIds[2], $content['id']]
+                $excludedParentContentIds[2], $content['id']
             );
         }
 

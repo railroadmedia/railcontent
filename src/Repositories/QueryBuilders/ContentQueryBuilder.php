@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
 class ContentQueryBuilder extends Builder
@@ -62,6 +63,7 @@ class ContentQueryBuilder extends Builder
      * Any changes to the $subQuery object after being passed in will not be reflected at retrieval time.
      *
      * @param Builder $subQuery
+     * @return $this
      */
     public function addSubJoinToQuery(Builder $subQuery)
     {
@@ -331,6 +333,55 @@ class ContentQueryBuilder extends Builder
                     );
                 }
 
+            }
+        );
+
+        return $this;
+    }
+
+    public function restrictByPermissions()
+    {
+        $this->whereIn(
+            ConfigService::$tableContent . '.id',
+            function (Builder $builder) {
+                $builder
+                    ->select([ConfigService::$tableContent . '.id'])
+                    ->from(ConfigService::$tableContent)
+                    ->leftJoin(
+                        ConfigService::$tableContentPermissions,
+                        function (JoinClause $join) {
+                            return $join
+                                ->on(
+                                    ConfigService::$tableContentPermissions . '.content_id',
+                                    ConfigService::$tableContent . '.id'
+                                )
+                                ->orOn(
+                                    ConfigService::$tableContentPermissions . '.content_type',
+                                    ConfigService::$tableContent . '.type'
+                                );
+                        }
+                    )
+                    ->leftJoin(
+                        ConfigService::$tablePermissions,
+                        ConfigService::$tablePermissions . '.id',
+                        '=',
+                        ConfigService::$tableContentPermissions . '.permission_id'
+                    )
+                    ->where(
+                        function (Builder $builder) {
+                            if (is_array(PermissionRepository::$availableContentPermissionIds)) {
+                                return $builder->whereNull(
+                                    ConfigService::$tableContentPermissions . '.permission_id'
+                                )
+                                    ->orWhereIn(
+                                        ConfigService::$tablePermissions . '.id',
+                                        PermissionRepository::$availableContentPermissionIds
+                                    );
+                            }
+
+                            return $builder;
+                        }
+                    );
             }
         );
 

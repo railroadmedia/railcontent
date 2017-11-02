@@ -49,8 +49,12 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
     public function test_get_by_id_is_protected_by_single()
     {
         $content = $this->contentFactory->create();
-        $permission = $this->permissionFactory->create([$this->faker->word]);
-        $contentPermission = $this->contentPermissionFactory->create([$permission['id'], $content['id']]);
+        $permission = $this->permissionFactory->create($this->faker->word);
+        $contentPermission = $this->contentPermissionFactory->create(
+            $content['id'],
+            null,
+            $permission['id']
+        );
 
         PermissionRepository::$availableContentPermissionIds = [];
 
@@ -63,12 +67,20 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $permission = $this->permissionFactory->create([$this->faker->word]);
-        $contentPermission = $this->contentPermissionFactory->create([$permission['id'], $content['id']]);
+        $permission = $this->permissionFactory->create($this->faker->word);
+        $contentPermission = $this->contentPermissionFactory->create(
+            $content['id'],
+            null,
+            $permission['id']
+        );
 
-        $otherPermission = $this->permissionFactory->create([$this->faker->word]);
+        $otherPermission = $this->permissionFactory->create($this->faker->word);
         $otherContentPermission =
-            $this->contentPermissionFactory->create([$permission['id'], $content['id']]);
+            $this->contentPermissionFactory->create(
+                $content['id'],
+                null,
+                $permission['id']
+            );
 
         PermissionRepository::$availableContentPermissionIds = [];
 
@@ -81,8 +93,14 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $permission = $this->permissionFactory->create([$this->faker->word]);
-        $contentPermission = $this->contentPermissionFactory->create([$permission['id'], $content['id']]);
+        $permission = $this->permissionFactory->create($this->faker->word);
+        $contentPermission = $this->contentPermissionFactory->create(
+            $content['id'],
+            null,
+            $permission['id']
+        );
+
+        $content['permissions'][] = $contentPermission;
 
         PermissionRepository::$availableContentPermissionIds = [$permission['id']];
 
@@ -95,12 +113,18 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $permission = $this->permissionFactory->create([$this->faker->word]);
-        $contentPermission = $this->contentPermissionFactory->create([$permission['id'], $content['id']]);
+        $permission = $this->permissionFactory->create($this->faker->word);
+        $contentPermission = $this->contentPermissionFactory->create(
+            $content['id'],
+            null,
+            $permission['id']
+        );
+        $content['permissions'][] = $contentPermission;
 
-        $otherPermission = $this->permissionFactory->create([$this->faker->word]);
+        $otherPermission = $this->permissionFactory->create($this->faker->word);
         $otherContentPermission =
-            $this->contentPermissionFactory->create([$otherPermission['id'], $content['id']]);
+            $this->contentPermissionFactory->create($content['id'], null, $otherPermission['id']);
+        $content['permissions'][] = $otherContentPermission;
 
         PermissionRepository::$availableContentPermissionIds = [$otherPermission['id']];
 
@@ -113,9 +137,9 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $permission = $this->permissionFactory->create([$this->faker->word]);
+        $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
-            [$permission['id'], null, $content['type']]
+            null, $content['type'], $permission['id']
         );
 
         PermissionRepository::$availableContentPermissionIds = [];
@@ -129,14 +153,14 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $permission = $this->permissionFactory->create([$this->faker->word]);
+        $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
-            [$permission['id'], null, $content['type']]
+            null, $content['type'], $permission['id']
         );
 
-        $otherPermission = $this->permissionFactory->create([$this->faker->word]);
+        $otherPermission = $this->permissionFactory->create($this->faker->word);
         $otherContentPermission =
-            $this->contentPermissionFactory->create([$permission['id'], null, $content['type']]);
+            $this->contentPermissionFactory->create(null, $content['type'], $permission['id']);
 
         PermissionRepository::$availableContentPermissionIds = [];
 
@@ -149,10 +173,11 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $permission = $this->permissionFactory->create([$this->faker->word]);
+        $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
-            [$permission['id'], null, $content['type']]
+            null, $content['type'], $permission['id']
         );
+        $content['permissions'][] = $contentPermission;
 
         PermissionRepository::$availableContentPermissionIds = [$permission['id']];
 
@@ -165,14 +190,16 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $permission = $this->permissionFactory->create([$this->faker->word]);
+        $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
-            [$permission['id'], null, $content['type']]
+            null, $content['type'], $permission['id']
         );
+        $content['permissions'][] = $contentPermission;
 
-        $otherPermission = $this->permissionFactory->create([$this->faker->word]);
+        $otherPermission = $this->permissionFactory->create($this->faker->word);
         $otherContentPermission =
-            $this->contentPermissionFactory->create([$otherPermission['id'], null, $content['type']]);
+            $this->contentPermissionFactory->create(null, $content['type'], $otherPermission['id']);
+        $content['permissions'][] = $otherContentPermission;
 
         PermissionRepository::$availableContentPermissionIds = [$otherPermission['id']];
 

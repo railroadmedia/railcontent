@@ -109,6 +109,7 @@ class ContentRepository extends RepositoryBase
             ->restrictStatuses()
             ->restrictPublishedOnDate()
             ->restrictBrand()
+            ->restrictByPermissions()
 //            ->addSlugInheritance($this->slugHierarchy)
             ->where(['id' => $id])
             ->getToArray();
@@ -116,7 +117,10 @@ class ContentRepository extends RepositoryBase
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentPermissionRows =
-            $this->contentPermissionRepository->getByContentIds(array_column($contentRows, 'id'));
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
 
         return $this->processRows(
                 $contentRows,
@@ -252,7 +256,8 @@ class ContentRepository extends RepositoryBase
 
         $fieldRowsGrouped = ContentHelper::groupArrayBy($fieldRows, 'content_id');
         $datumRowsGrouped = ContentHelper::groupArrayBy($datumRows, 'content_id');
-        $permissionRowsGrouped = ContentHelper::groupArrayBy($permissionRows, 'content_id');
+        $permissionRowsGroupedById = ContentHelper::groupArrayBy($permissionRows, 'content_id');
+        $permissionRowsGroupedByType = ContentHelper::groupArrayBy($permissionRows, 'content_type');
 
         foreach ($contentRows as $contentRow) {
             $content = [
@@ -267,7 +272,10 @@ class ContentRepository extends RepositoryBase
                 'archived_on' => $contentRow['archived_on'],
                 'fields' => $fieldRowsGrouped[$contentRow['id']] ?? [],
                 'datum' => $datumRowsGrouped[$contentRow['id']] ?? [],
-                'permissions' => $permissionRowsGrouped[$contentRow['id']] ?? [],
+                'permissions' => array_merge(
+                    $permissionRowsGroupedById[$contentRow['id']] ?? [],
+                    $permissionRowsGroupedByType[$contentRow['type']] ?? []
+                ),
             ];
 
             $contents[$contentRow['id']] = $content;
@@ -334,8 +342,12 @@ class ContentRepository extends RepositoryBase
     public function retrieveFilter()
     {
         $subQuery = $this->query()
-            ->directPaginate($this->page, $this->limit)
+            ->selectPrimaryColumns()
             ->orderBy($this->orderBy, $this->orderDirection)
+            ->restrictStatuses()
+            ->restrictPublishedOnDate()
+            ->restrictBrand()
+            ->directPaginate($this->page, $this->limit)
             ->restrictByFields($this->requiredFields)
             ->includeByFields($this->includedFields)
             ->restrictBySlugHierarchy($this->slugHierarchy);
@@ -365,7 +377,11 @@ class ContentRepository extends RepositoryBase
     public function countFilter()
     {
         $subQuery = $this->query()
+            ->selectPrimaryColumns()
             ->orderBy($this->orderBy, $this->orderDirection)
+            ->restrictStatuses()
+            ->restrictPublishedOnDate()
+            ->restrictBrand()
             ->restrictByFields($this->requiredFields)
             ->includeByFields($this->includedFields)
             ->restrictBySlugHierarchy($this->slugHierarchy);
