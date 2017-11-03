@@ -12,18 +12,13 @@ class RemoteStorageJsonControllerTest extends RailcontentTestCase
     {
         parent::setUp();
     }
-
-
-    public function test_put() // PUT|PATCH | remote-storage/json/{json}   | json.update
+    
+    public function test_put()
     {
         $useThisFilenameWithoutExtension = $this->faker->word;
 
-        // https://stackoverflow.com/a/44068554
-
-        $filenameAbsolute = $this->faker->image(sys_get_temp_dir());
-
         $filenameAbsolute = $this->changeImageNameLocally(
-            $filenameAbsolute,
+            $this->faker->image(sys_get_temp_dir()),
             $useThisFilenameWithoutExtension
         );
 
@@ -33,21 +28,15 @@ class RemoteStorageJsonControllerTest extends RailcontentTestCase
         );
 
         if ($useThisFilename !== $this->getFilenameRelativeFromAbsolute($filenameAbsolute)) {
-            $this->fail(
-                '$useThisFilename !== $this->getFilenameRelativeFromAbsolute($filenameAbsolute)'
-            );
+            $this->fail( '$useThisFilename !== $this->getFilenameRelativeFromAbsolute($filenameAbsolute)' );
         }
 
         $filenameToUseTestDirectoryPrefixAdded = $this->s3DirectoryForThisInstance . '/' . $useThisFilename;
 
-        $response = $this->call(
-            'PUT',
-            '/railcontent/remote-storage',
-            [
-                'target' => $filenameToUseTestDirectoryPrefixAdded,
-                'file' => new UploadedFile($filenameAbsolute, $useThisFilename)
-            ]
-        );
+        $response = $this->call( 'PUT', '/railcontent/remote-storage', [
+            'target' => $filenameToUseTestDirectoryPrefixAdded,
+            'file' => new UploadedFile($filenameAbsolute, $useThisFilename)
+        ] );
 
         $this->assertEquals(201, $response->status());
 
