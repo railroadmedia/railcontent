@@ -8,7 +8,7 @@ use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Requests\FieldRequest;
 use Railroad\Railcontent\Services\ContentFieldService;
 
-class FieldJsonController extends Controller
+class ContentFieldJsonController extends Controller
 {
     private $fieldService;
 
@@ -54,7 +54,7 @@ class FieldJsonController extends Controller
     public function update($fieldId, FieldRequest $request)
     {
         //Check if field exist in the database
-        $field = $this->fieldService->getField($fieldId, $request->input('content_id'));
+        $field = $this->fieldService->get($fieldId);
 
         if (is_null($field)) {
             return response()->json('Update failed, field not found with id: ' . $field, 404);
@@ -63,13 +63,13 @@ class FieldJsonController extends Controller
         //Save a content version
         event(new ContentUpdated($request->input('content_id')));
 
-        $contentField = $this->fieldService->updateField(
-            $request->input('content_id'),
+        $contentField = $this->fieldService->update(
             $fieldId,
+            $request->input('content_id'),
             $request->input('key'),
             $request->input('value'),
-            $request->input('type'),
-            $request->input('position')
+            $request->input('position'),
+            $request->input('type')
         );
 
         return response()->json($contentField, 201);

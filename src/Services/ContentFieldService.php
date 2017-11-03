@@ -57,12 +57,25 @@ class ContentFieldService
 
     /**
      * @param integer $id
-     * @param array $data
+     * @param $contentId
+     * @param $key
+     * @param $value
+     * @param $position
+     * @param $type
      * @return array
      */
-    public function update($id, array $data)
+    public function update($id, $contentId, $key, $value, $position, $type)
     {
-        $this->fieldRepository->update($id, $data);
+        $this->fieldRepository->update(
+            $id,
+            [
+                'content_id' => $contentId,
+                'key' => $key,
+                'value' => $value,
+                'position' => $position,
+                'type' => $type,
+            ]
+        );
 
         return $this->get($id);
     }
