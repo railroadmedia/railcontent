@@ -9,7 +9,7 @@ use Railroad\Railcontent\Events\DatumUpdate;
 use Railroad\Railcontent\Requests\DatumRequest;
 use Railroad\Railcontent\Services\ContentDatumService;
 
-class DatumJsonController extends Controller
+class ContentDatumJsonController extends Controller
 {
     private $datumService;
 
@@ -35,7 +35,7 @@ class DatumJsonController extends Controller
         // todo: rename to DatumCreated (after save to db) or ContentCreation (before save to db)
 //        event(new DatumUpdate($request->input('content_id')));
 
-        $categoryData = $this->datumService->createDatum(
+        $categoryData = $this->datumService->create(
             $request->input('content_id'),
             $request->input('key'),
             $request->input('value'),
@@ -55,7 +55,7 @@ class DatumJsonController extends Controller
     public function update($dataId, DatumRequest $request)
     {
         //check if datum exist in the database
-        $datum = $this->datumService->getDatum($dataId, $request->input('content_id'));
+        $datum = $this->datumService->get($dataId);
 
         if (is_null($datum)) {
             return response()->json('Update failed, datum not found with id: ' . $dataId, 404);
@@ -65,9 +65,9 @@ class DatumJsonController extends Controller
         // todo: this should be after the datum is saved, or renamed to 'ContentUpdating' if its being triggered before the actual update
         event(new ContentUpdated($request->input('content_id')));
 
-        $categoryData = $this->datumService->updateDatum(
-            $request->input('content_id'),
+        $categoryData = $this->datumService->update(
             $dataId,
+            $request->input('content_id'),
             $request->input('key'),
             $request->input('value'),
             $request->input('position')

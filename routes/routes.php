@@ -27,17 +27,17 @@ Route::group(
         // content datum
         Route::post(
             '/content/datum',
-            \Railroad\Railcontent\Controllers\DatumJsonController::class . '@store'
+            \Railroad\Railcontent\Controllers\ContentDatumJsonController::class . '@store'
         )->name('content.data.store');
 
         Route::put(
             '/content/datum/{datumId}',
-            \Railroad\Railcontent\Controllers\DatumJsonController::class . '@update'
+            \Railroad\Railcontent\Controllers\ContentDatumJsonController::class . '@update'
         )->name('content.data.update');
 
         Route::delete(
             '/content/datum/{datumId}',
-            \Railroad\Railcontent\Controllers\DatumJsonController::class . '@delete'
+            \Railroad\Railcontent\Controllers\ContentDatumJsonController::class . '@delete'
         )->name('content.data.delete');
 
         // permissions

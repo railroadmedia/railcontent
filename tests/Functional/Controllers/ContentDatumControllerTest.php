@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\CategoryRepository;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Services\ContentDatumService;
@@ -12,9 +13,13 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 
-class DatumControllerTest extends RailcontentTestCase
+class ContentDatumControllerTest extends RailcontentTestCase
 {
     protected $classBeingTested;
+    /**
+     * @var ContentFactory
+     */
+    protected $contentFactory;
 
     protected function setUp()
     {
@@ -22,41 +27,19 @@ class DatumControllerTest extends RailcontentTestCase
 
         $this->serviceBeingTested = $this->app->make(ContentDatumService::class);
         $this->classBeingTested = $this->app->make(ContentDatumRepository::class);
+        $this->contentFactory = $this->app->make(ContentFactory::class);
         $userId = $this->createAndLogInNewUser();
-        $this->setUserLanguage($userId);
-        //$this->categoryClass = $this->app->make(CategoryRepository::class);
-    }
-
-    public function test_create_datum_method_from_service_response()
-    {
-        $key = $this->faker->word;
-        $value = $this->faker->text(500);
-
-        $contentId = $this->createContent();
-
-        $categoryField = $this->serviceBeingTested->createDatum($contentId, null, $key, $value, 1);
-
-        $expectedResult = [
-            'id' => 1,
-            'content_id' => $contentId,
-            'datum_id' => 1,
-            'key' => $key,
-            'value' => $value,
-            'position' => 1
-        ];
-
-        $this->assertEquals($expectedResult, $categoryField);
     }
 
     public function test_add_content_datum_controller_method_response()
     {
-        $contentId = $this->createContent();
+        $content = $this->contentFactory->create();
 
         $key = $this->faker->word;
         $value = $this->faker->text(500);
 
-        $response = $this->call('POST', 'content/datum', [
-            'content_id' => $contentId,
+        $response = $this->call('POST', 'railcontent/content/datum', [
+            'content_id' => $content['id'],
             'key' => $key,
             'value' => $value,
             'position' => 1
@@ -68,7 +51,6 @@ class DatumControllerTest extends RailcontentTestCase
             [
                 'id' ,
                 'content_id',
-                'datum_id',
                 'key',
                 'position',
             ]
@@ -77,8 +59,7 @@ class DatumControllerTest extends RailcontentTestCase
         $response->assertJson(
             [
                 'id' => 1,
-                'content_id' => $contentId,
-                'datum_id' => 1,
+                'content_id' => $content['id'],
                 'key' => $key,
                 'value' => $value,
                 'position' => 1
@@ -88,7 +69,7 @@ class DatumControllerTest extends RailcontentTestCase
 
     public function test_add_content_datum_not_pass_the_validation()
     {
-        $response = $this->call('POST', 'content/datum');
+        $response = $this->call('POST', 'railcontent/content/datum');
 
         $this->assertEquals(302, $response->status());
 
@@ -103,7 +84,7 @@ class DatumControllerTest extends RailcontentTestCase
         $key = $this->faker->text(600);
         $value = $this->faker->text(500);
 
-        $response = $this->call('POST', 'content/datum',['content_id'=>1,'key'=>$key, 'value' => $value]);
+        $response = $this->call('POST', 'railcontent/content/datum',['content_id'=>1,'key'=>$key, 'value' => $value]);
 
         $this->assertEquals(302, $response->status());
 
@@ -115,25 +96,20 @@ class DatumControllerTest extends RailcontentTestCase
 
     public function test_update_content_datum_controller_method_response()
     {
-        $contentId = $this->createContent();
+        $content = $this->contentFactory->create();
 
         $data = [
+            'content_id' => $content['id'],
             'key' => $this->faker->word,
-           // 'value' => $this->faker->text(),
+            'value' => $this->faker->text(),
             'position' =>$this->faker->numberBetween()
         ];
-        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
-
-        $contentData = [
-            'content_id' => $contentId,
-            'datum_id' => $dataId
-        ];
-        $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
+        $dataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($data);
 
         $new_value =  $this->faker->text();
 
-        $response = $this->call('PUT', 'content/datum/'.$dataId, [
-            'content_id' => $contentId,
+        $response = $this->call('PUT', 'railcontent/content/datum/'.$dataId, [
+            'content_id' => $content['id'],
             'key' => $data['key'],
             'value' => $new_value,
             'position' => $data['position']
@@ -145,7 +121,6 @@ class DatumControllerTest extends RailcontentTestCase
             [
                 'id' ,
                 'content_id',
-                'datum_id',
                 'key',
                 'value',
                 'position'
@@ -155,8 +130,7 @@ class DatumControllerTest extends RailcontentTestCase
         $response->assertJson(
             [
                 'id' => 1,
-                'content_id' => $contentId,
-                'datum_id' => $dataId,
+                'content_id' => $content['id'],
                 'key' => $data['key'],
                 'value' => $new_value,
                 'position' => $data['position']
@@ -180,7 +154,7 @@ class DatumControllerTest extends RailcontentTestCase
         ];
         $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
 
-        $response = $this->call('PUT', 'content/datum/'.$dataId);
+        $response = $this->call('PUT', 'railcontent/content/datum/'.$dataId);
 
         $this->assertEquals(302, $response->status());
 
@@ -206,7 +180,7 @@ class DatumControllerTest extends RailcontentTestCase
         ];
         $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
 
-        $response = $this->call('DELETE', 'content/datum/'.$dataId, [
+        $response = $this->call('DELETE', 'railcontent/content/datum/'.$dataId, [
             'content_id' => $contentId
         ]);
 
@@ -309,7 +283,7 @@ class DatumControllerTest extends RailcontentTestCase
         $key = $this->faker->word;
         $value = $this->faker->text(500);
 
-        $response = $this->call('POST', 'content/datum', [
+        $response = $this->call('POST', 'railcontent/content/datum', [
             'content_id' => $contentId,
             'key' => $key,
             'value' => $value,
@@ -340,7 +314,7 @@ class DatumControllerTest extends RailcontentTestCase
         ];
         $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
 
-        $response = $this->call('DELETE', 'content/datum/'.$dataId, [
+        $response = $this->call('DELETE', 'railcontent/content/datum/'.$dataId, [
             'content_id' => $contentId
         ]);
 
