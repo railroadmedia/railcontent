@@ -2,8 +2,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 
@@ -13,6 +11,7 @@ use Railroad\Railcontent\Services\ContentService;
  *      custom rules - are defined by the developers in the configuration file and are defined per brand and content type
  *
  * Class FormRequest
+ *
  * @package Railroad\Railcontent\Requests
  */
 class CustomFormRequest extends FormRequest
@@ -34,6 +33,7 @@ class CustomFormRequest extends FormRequest
 
     /**
      * ValidationService constructor.
+     *
      * @param $contentService
      */
     public function __construct(ContentService $contentService)
@@ -52,6 +52,7 @@ class CustomFormRequest extends FormRequest
     }
 
     /** Get the general validation rules and the custom validation rules that apply to the request.
+     *
      * @return array
      */
     public function rules()
@@ -62,6 +63,7 @@ class CustomFormRequest extends FormRequest
     }
 
     /** Set general rules
+     *
      * @param array $rules
      */
     public function setGeneralRules(array $rules)
@@ -70,6 +72,7 @@ class CustomFormRequest extends FormRequest
     }
 
     /** Set the validation custom rules defined in the configuration file per brand and content type
+     *
      * @param ContentRequest|FieldRequest|DatumRequest $request - the requests
      * @param null|string $entity - can be null, 'fields' or 'datum'
      *
@@ -78,9 +81,11 @@ class CustomFormRequest extends FormRequest
     public function setCustomRules($request, $entity = null)
     {
         $customRules = [];
-        $contentType = (!is_null($entity)) ? $this->getContentTypeVal($request) : $request->request->get('type');
+        $contentType =
+            (!is_null($entity)) ? $this->getContentTypeVal($request) : $request->request->get('type');
 
-        if (array_key_exists($contentType, ConfigService::$validationRules[ConfigService::$brand])) {
+        if (isset(ConfigService::$validationRules[ConfigService::$brand]) &&
+            array_key_exists($contentType, ConfigService::$validationRules[ConfigService::$brand])) {
             if (!$entity) {
                 $customRules = ConfigService::$validationRules[ConfigService::$brand][$contentType];
             } else {
@@ -93,6 +98,7 @@ class CustomFormRequest extends FormRequest
     }
 
     /** Get the content's type based on content id for DatumRequest and FieldRequest instances
+     *
      * @param DatumRequest|FieldRequest $request
      * @return string
      */
@@ -110,6 +116,7 @@ class CustomFormRequest extends FormRequest
     }
 
     /** Prepare the custom validation rules.
+     *
      * @param $entity
      * @param $contentType
      * @param $rules
@@ -128,12 +135,16 @@ class CustomFormRequest extends FormRequest
 
             foreach ($customRules as $key => $value) {
                 if (
-                    (($request instanceof FieldRequest) && ($key == implode('|', $entity_key, $entity_type))) ||
+                    (($request instanceof FieldRequest) &&
+                        ($key == implode('|', $entity_key, $entity_type))) ||
                     (($request instanceof DatumRequest) && ($key == $entity_key))
                 ) {
-                    $rules = array_merge($rules, [
-                        'value' => $value
-                    ]);
+                    $rules = array_merge(
+                        $rules,
+                        [
+                            'value' => $value
+                        ]
+                    );
                 }
             }
         }
