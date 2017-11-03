@@ -88,4 +88,9 @@ class ConfigService
      * @var array
      */
     public static $validationRules;
+
+    /**
+     * @var @array
+     */
+    public static $fieldOptionList;
 }

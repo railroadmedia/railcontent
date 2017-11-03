@@ -298,7 +298,7 @@ class ContentRepository extends RepositoryBase
                 'created_on' => $contentRow['created_on'],
                 'archived_on' => $contentRow['archived_on'],
                 'fields' => $fieldRowsGrouped[$contentRow['id']] ?? [],
-                'datum' => $datumRowsGrouped[$contentRow['id']] ?? [],
+                'data' => $datumRowsGrouped[$contentRow['id']] ?? [],
                 'permissions' => array_merge(
                     $permissionRowsGroupedById[$contentRow['id']] ?? [],
                     $permissionRowsGroupedByType[$contentRow['type']] ?? []
@@ -451,7 +451,7 @@ class ContentRepository extends RepositoryBase
             ->restrictBrand()
             ->whereIn(
                 ConfigService::$tableContentFields . '.key',
-                config('railcontent.field_option_list', [])
+                ConfigService::$fieldOptionList
             )
             ->leftJoin(
                 ConfigService::$tableContentFields,

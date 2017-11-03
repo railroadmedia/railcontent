@@ -104,7 +104,7 @@ class ContentRepositoryPlaylistTest extends RailcontentTestCase
 
             $playlistContent['id'] = $this->classBeingTested->create($playlistContent);
             $playlistContent['fields'] = [];
-            $playlistContent['datum'] = [];
+            $playlistContent['data'] = [];
             $playlistContent['permissions'] = [];
 
             $playlistContents[$playlistContent['id']] = $playlistContent;

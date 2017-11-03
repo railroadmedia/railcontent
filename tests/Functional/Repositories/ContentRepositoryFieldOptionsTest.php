@@ -6,6 +6,7 @@ use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -55,9 +56,11 @@ class ContentRepositoryFieldOptionsTest extends RailcontentTestCase
                 $expectedContent['id'],
                 $fieldName,
                 $fieldValue,
-                $fieldType,
-                1
+                1,
+                $fieldType
             );
+
+            ConfigService::$fieldOptionList[] = $fieldName;
         }
 
         $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
@@ -88,9 +91,11 @@ class ContentRepositoryFieldOptionsTest extends RailcontentTestCase
                 $expectedContent['id'],
                 $fieldName,
                 $fieldValue,
-                $fieldType,
-                1
+                1,
+                $fieldType
             );
+
+            ConfigService::$fieldOptionList[] = $fieldName;
 
             $expectedFields[$fieldName][] = $fieldValue;
         }
@@ -105,9 +110,11 @@ class ContentRepositoryFieldOptionsTest extends RailcontentTestCase
                 rand(1000, 100000),
                 $fieldName,
                 $fieldValue,
-                $fieldType,
-                1
+                1,
+                $fieldType
             );
+
+            ConfigService::$fieldOptionList[] = $fieldName;
         }
 
         $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])

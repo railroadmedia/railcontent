@@ -80,6 +80,9 @@ class RailcontentServiceProvider extends ServiceProvider
 
         // validation rules defined for each brand and content type
         ConfigService::$validationRules = config('railcontent.validation');
+
+        // restrict which fields can be listed to avoid massive queries
+        ConfigService::$fieldOptionList = config('railcontent.field_option_list', []);
     }
 
     /**
