@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Exceptions\ContentNotFoundException;
-use Railroad\Railcontent\Exceptions\ContentReferencedByOtherContentException;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Requests\ContentRequest;
+use Railroad\Railcontent\Requests\ContentCreateRequest;
+use Railroad\Railcontent\Requests\ContentUpdateRequest;
 use Railroad\Railcontent\Responses\JsonPaginatedResponse;
 use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ConfigService;
@@ -96,10 +96,10 @@ class ContentJsonController extends Controller
 
     /** Create a new content and return it in JSON format
      *
-     * @param ContentRequest $request
+     * @param ContentUpdateRequest $request
      * @return JsonResponse
      */
-    public function store(ContentRequest $request)
+    public function store(ContentCreateRequest $request)
     {
         $content = $this->contentService->create(
             $request->get('slug'),
@@ -118,10 +118,10 @@ class ContentJsonController extends Controller
     /** Update a content based on content id and return it in JSON format
      *
      * @param integer $contentId
-     * @param ContentRequest $request
+     * @param ContentUpdateRequest $request
      * @return JsonResponse
      */
-    public function update($contentId, ContentRequest $request)
+    public function update(ContentUpdateRequest $request, $contentId)
     {
         $content = $this->contentService->getById($contentId);
         request()->request->add(['content_id' => $contentId]);
@@ -186,7 +186,7 @@ class ContentJsonController extends Controller
             200,
             [
                 'Access-Control-Allow-Origin' => '*',
-                'Access-Control-Allow-Methods' => 'POST, GET, OPTIONS, PUT, DELETE',
+                'Access-Control-Allow-Methods' => 'POST, PATCH, GET, OPTIONS, PUT, DELETE',
                 'Access-Control-Allow-Headers' => 'X-Requested-With, content-type'
             ]
         );

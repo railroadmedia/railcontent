@@ -63,14 +63,19 @@ class ContentDatumJsonController extends Controller
 
         //save a content version before datum update
         // todo: this should be after the datum is saved, or renamed to 'ContentUpdating' if its being triggered before the actual update
-        event(new ContentUpdated($request->input('content_id')));
+        event(new ContentUpdated($datum['content_id']));
 
         $categoryData = $this->datumService->update(
             $dataId,
-            $request->input('content_id'),
-            $request->input('key'),
-            $request->input('value'),
-            $request->input('position')
+            array_intersect_key(
+                $request->all(),
+                [
+                    'content_id' => '',
+                    'key' => '',
+                    'value' => '',
+                    'position' => '',
+                ]
+            )
         );
 
         return response()->json($categoryData, 201);

@@ -73,7 +73,7 @@ class CustomFormRequest extends FormRequest
 
     /** Set the validation custom rules defined in the configuration file per brand and content type
      *
-     * @param ContentRequest|FieldRequest|DatumRequest $request - the requests
+     * @param ContentUpdateRequest|ContentFieldCreateRequest|DatumRequest $request - the requests
      * @param null|string $entity - can be null, 'fields' or 'datum'
      *
      * @return array $customRules
@@ -99,13 +99,13 @@ class CustomFormRequest extends FormRequest
 
     /** Get the content's type based on content id for DatumRequest and FieldRequest instances
      *
-     * @param DatumRequest|FieldRequest $request
+     * @param DatumRequest|ContentFieldCreateRequest $request
      * @return string
      */
     private function getContentTypeVal($request)
     {
         $type = '';
-        if (($request instanceof DatumRequest) || ($request instanceof FieldRequest)) {
+        if (($request instanceof DatumRequest) || ($request instanceof ContentFieldCreateRequest)) {
             $contentId = $request->request->get('content_id');
             $content = $this->contentService->getById($contentId);
 
@@ -135,7 +135,7 @@ class CustomFormRequest extends FormRequest
 
             foreach ($customRules as $key => $value) {
                 if (
-                    (($request instanceof FieldRequest) &&
+                    (($request instanceof ContentFieldCreateRequest) &&
                         ($key == implode('|', $entity_key, $entity_type))) ||
                     (($request instanceof DatumRequest) && ($key == $entity_key))
                 ) {

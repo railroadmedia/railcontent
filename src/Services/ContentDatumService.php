@@ -62,23 +62,12 @@ class ContentDatumService
 
     /**
      * @param integer $id
-     * @param $contentId
-     * @param $key
-     * @param $value
-     * @param $position
+     * @param array $data
      * @return array
      */
-    public function update($id, $contentId, $key, $value, $position)
+    public function update($id, array $data)
     {
-        $this->datumRepository->update(
-            $id,
-            [
-                'content_id' => $contentId,
-                'key' => $key,
-                'value' => $value,
-                'position' => $position
-            ]
-        );
+        $this->datumRepository->update($id, $data);
 
         return $this->get($id);
     }

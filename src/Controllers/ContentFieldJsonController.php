@@ -5,7 +5,8 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
-use Railroad\Railcontent\Requests\FieldRequest;
+use Railroad\Railcontent\Requests\ContentFieldCreateRequest;
+use Railroad\Railcontent\Requests\ContentFieldUpdateRequest;
 use Railroad\Railcontent\Services\ContentFieldService;
 
 class ContentFieldJsonController extends Controller
@@ -25,10 +26,10 @@ class ContentFieldJsonController extends Controller
     /**
      * Call the method from service that create a new field and link the category with the field.
      *
-     * @param FieldRequest $request
+     * @param ContentFieldCreateRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(FieldRequest $request)
+    public function store(ContentFieldCreateRequest $request)
     {
         //Fire an event that the content was modified
         event(new ContentUpdated($request->input('content_id')));
@@ -47,11 +48,11 @@ class ContentFieldJsonController extends Controller
     /**
      * Call the method from service to update a content field
      *
+     * @param ContentFieldUpdateRequest $request
      * @param integer $fieldId
-     * @param FieldRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($fieldId, FieldRequest $request)
+    public function update(ContentFieldUpdateRequest $request, $fieldId)
     {
         //Check if field exist in the database
         $field = $this->fieldService->get($fieldId);
@@ -61,15 +62,20 @@ class ContentFieldJsonController extends Controller
         }
 
         //Save a content version
-        event(new ContentUpdated($request->input('content_id')));
+        event(new ContentUpdated($request->input('content_id', $field['content_id'])));
 
         $contentField = $this->fieldService->update(
             $fieldId,
-            $request->input('content_id'),
-            $request->input('key'),
-            $request->input('value'),
-            $request->input('position'),
-            $request->input('type')
+            array_intersect_key(
+                $request->all(),
+                [
+                    'content_id' => '',
+                    'key' => '',
+                    'value' => '',
+                    'position' => '',
+                    'type' => '',
+                ]
+            )
         );
 
         return response()->json($contentField, 201);

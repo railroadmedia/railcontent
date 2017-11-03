@@ -9,12 +9,12 @@ Route::group(
     function () {
 
         // content fields
-        Route::post(
+        Route::put(
             '/content/field',
             \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@store'
         )->name('content.field.store');
 
-        Route::put(
+        Route::patch(
             '/content/field/{fieldId}',
             \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@update'
         )->name('content.field.update');
@@ -25,12 +25,12 @@ Route::group(
         )->name('content.field.delete');
 
         // content datum
-        Route::post(
+        Route::put(
             '/content/datum',
             \Railroad\Railcontent\Controllers\ContentDatumJsonController::class . '@store'
         )->name('content.data.store');
 
-        Route::put(
+        Route::patch(
             '/content/datum/{datumId}',
             \Railroad\Railcontent\Controllers\ContentDatumJsonController::class . '@update'
         )->name('content.data.update');
@@ -41,12 +41,12 @@ Route::group(
         )->name('content.data.delete');
 
         // permissions
-        Route::post(
+        Route::put(
             '/permission',
             \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@store'
         )->name('permissions.store');
 
-        Route::put(
+        Route::patch(
             '/permission/{permissionId}',
             \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@update'
         )->name('permissions.update');
@@ -105,12 +105,12 @@ Route::group(
             \Railroad\Railcontent\Controllers\ContentJsonController::class . '@show'
         )->name('content.show');
 
-        Route::post(
+        Route::put(
             '/content',
             \Railroad\Railcontent\Controllers\ContentJsonController::class . '@store'
         )->name('content.store');
 
-        Route::put(
+        Route::patch(
             '/content/{id}',
             \Railroad\Railcontent\Controllers\ContentJsonController::class . '@update'
         )->name('content.update');
