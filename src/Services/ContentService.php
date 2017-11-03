@@ -191,7 +191,7 @@ class ContentService
                 [
                     'slug' => $slug,
                     'type' => $type,
-                    'status' => $status,
+                    'status' => $status ?? self::STATUS_DRAFT,
                     'language' => $language ?? ConfigService::$defaultLanguage,
                     'brand' => $brand ?? ConfigService::$brand,
                     'user_id' => $userId,

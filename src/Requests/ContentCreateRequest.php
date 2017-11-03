@@ -19,7 +19,7 @@ class ContentCreateRequest extends CustomFormRequest
         //set the general validation rules
         $this->setGeneralRules(
             [
-                'status' => 'required|max:64|in:' .
+                'status' => 'max:64|in:' .
                     implode(
                         ',',
                         [

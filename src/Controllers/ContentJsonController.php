@@ -108,11 +108,10 @@ class ContentJsonController extends Controller
             $request->get('language'),
             $request->get('brand'),
             $request->get('user_id'),
-            $request->get('published_on'),
-            $request->get('created_on')
+            $request->get('published_on')
         );
 
-        return new JsonResponse($content, 201);
+        return new JsonResponse([$content['id'] => $content], 201);
     }
 
     /** Update a content based on content id and return it in JSON format
