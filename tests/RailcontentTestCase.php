@@ -13,6 +13,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
+use Railroad\Railcontent\Services\RemoteStorageService;
 use Railroad\Railcontent\Tests\Resources\Models\User;
 
 class RailcontentTestCase extends BaseTestCase
@@ -37,8 +38,15 @@ class RailcontentTestCase extends BaseTestCase
      */
     protected $router;
 
+    /** @var string $s3DirectoryForThisInstance */
+    protected $s3DirectoryForThisInstance;
+
+    /** @var RemoteStorageService $remoteStorageService */
+    protected $remoteStorageService;
+
     protected function setUp()
     {
+        $this->awsConfigInitForTesting();
         parent::setUp();
 
         $this->artisan('migrate', []);
@@ -48,6 +56,9 @@ class RailcontentTestCase extends BaseTestCase
         $this->databaseManager = $this->app->make(DatabaseManager::class);
         $this->authManager = $this->app->make(AuthManager::class);
         $this->router = $this->app->make(Router::class);
+
+        $this->s3DirectoryForThisInstance = '/test' . time();
+        $this->remoteStorageService = new RemoteStorageService($this->s3DirectoryForThisInstance);
 
         Carbon::setTestNow(Carbon::now());
     }
@@ -84,6 +95,15 @@ class RailcontentTestCase extends BaseTestCase
 
         // allows access to built in user auth
         $app['config']->set('auth.providers.users.model', User::class);
+
+        $app['config']->set('railcontent.awsS3', [
+            'accessKey' => AWS_S3_ACCESS_KEY,
+            'accessSecret' => AWS_S3_ACCESS_SECRET,
+            'region' => AWS_S3_REGION,
+            'bucket' => AWS_S3_BUCKET
+        ]);
+
+        $app['config']->set('railcontent.awsCloudFront', 'd1923uyy6spedc.cloudfront.net');
 
         $app['db']->connection()->getSchemaBuilder()->create(
             'users',
@@ -169,4 +189,193 @@ class RailcontentTestCase extends BaseTestCase
     {
         return $this->databaseManager->connection();
     }
+
+    protected function tearDown()
+    {
+        $contentsList = $this->remoteStorageService->listContents($this->s3DirectoryForThisInstance);
+        $notDeleted = [];
+
+        /*
+         * We're injecting an instance of RemoteStorageService into this test class (This file).
+         * When we do that we're setting a "root" dir of `$this->s3DirectoryForThisInstance` (which
+         * looks something like "/test1509570412"). But when we're done we want to delete everything
+         * added to s3 for running these tests. That means not only the files added to the directory,
+         * but also the directory itself. We can't call deleteDir() on root-even if it's only root
+         * relative to this test class instance. So, just create another instance of RemoteStorageService
+         * and do not declare a "root", thus defaulting to the one in the config. Then you can target
+         * the one created for the test class with deleteDir.
+         *      Jonathan, Nov 2017
+         */
+        $newRemoteStorageService = new RemoteStorageService();
+        $deleteDir = $newRemoteStorageService->deleteDir($this->s3DirectoryForThisInstance);
+
+        if(!$deleteDir){
+            $this->fail('Failed to delete directory ' . $this->s3DirectoryForThisInstance . '.');
+        }
+
+        foreach($contentsList as $item){
+            if($this->remoteStorageService->exists($item['path'])){
+                $notDeleted[] = $item['path'];
+            };
+        }
+
+        if(!empty($notDeleted)){
+            $this->fail('contents not deleted (' . var_export($notDeleted, true) . ')');
+        }
+
+        parent::tearDown();
+    }
+
+    // -------------------- used by RemoteStorage Service & Controller tests --------------------
+
+    /**
+     * @param string $dir
+     */
+    protected function awsConfigInitForTesting($dir = '/') // sad code is sad
+    {
+        if (
+            !defined('AWS_S3_ACCESS_KEY') ||
+            !defined('AWS_S3_ACCESS_SECRET') ||
+            !defined('AWS_S3_REGION') ||
+            !defined('AWS_S3_BUCKET')
+        ) {
+            if (
+                !defined('AWS_S3_ACCESS_KEY') &&
+                !defined('AWS_S3_ACCESS_SECRET') &&
+                !defined('AWS_S3_REGION') &&
+                !defined('AWS_S3_BUCKET')
+            ) {
+                try {
+                    include __DIR__ . '../../.env.testing';
+                } catch (Exception $e) {
+
+                    if ($e->getMessage() === (
+                            'include(/app/railcontent/tests/Integration../../../.env.testing): ' .
+                            'failed to open stream: No such file or directory'
+                        )) {
+                        $this->fail(
+                            'You must create and fill the `/.env.testing` file first in order to run these tests.'
+                        );
+                    }
+
+                    $this->fail('Something is not right. Exception of type \"' . get_class($e) . '\" returns this ' .
+                        'message \"' . $e->getMessage() . '\".');
+                }
+            } else {
+                $this->fail('At least one (but not all) of the constants defined in `/.env.testing` are missing');
+            }
+            if (
+                !defined('AWS_S3_ACCESS_KEY') ||
+                !defined('AWS_S3_ACCESS_SECRET') ||
+                !defined('AWS_S3_REGION') ||
+                !defined('AWS_S3_BUCKET')
+            ) {
+                $this->fail('At least one (but not all) of the constants defined in `/.env.testing` are missing');
+            }
+        }
+
+        if (empty(AWS_S3_ACCESS_KEY)) {
+            $this->fail("You must provide a value for the AWS_S3_ACCESS_KEY constant in `/.env.testing`.");
+        }
+        if (empty(AWS_S3_ACCESS_SECRET)) {
+            $this->fail("You must provide a value for the AWS_S3_ACCESS_SECRET constant in `/.env.testing`.");
+        }
+        if (empty(AWS_S3_REGION)) {
+            $this->fail("You must provide a value for the AWS_S3_REGION constant in `/.env.testing`.");
+        }
+        if (empty(AWS_S3_BUCKET)) {
+            $this->fail("You must provide a value for the AWS_S3_BUCKET constant in `/.env.testing`.");
+        }
+    }
+
+    /**
+     * @param string|null $useThisFilenameWithoutExtension
+     * @return string
+     */
+    protected function create($useThisFilenameWithoutExtension = null){
+        $filenameAbsolute = $this->faker->image(sys_get_temp_dir());
+
+        if(!empty($useThisFilenameWithoutExtension)){
+            $filenameAbsolute = $this->changeImageNameLocally($filenameAbsolute, $useThisFilenameWithoutExtension);
+        }
+
+        $filenameRelative = $this->getFilenameRelativeFromAbsolute($filenameAbsolute);
+
+        $upload = $this->remoteStorageService->put($filenameRelative, $filenameAbsolute);
+
+        if(!$upload){
+            $this->fail('s3 upload appears to have failed.');
+        }
+
+        return $filenameAbsolute;
+    }
+
+    /**
+     * @param string $filenameRelative
+     * @return string
+     */
+    protected function getExtensionFromRelative($filenameRelative){
+        $stringExplodedToCreateArray = explode(".", $filenameRelative);
+        $extension = end($stringExplodedToCreateArray);
+        if(!$extension){
+            $this->fail('No file extension retrieved from the image created by Faker.');
+        }
+        if(!is_string($extension)){
+            $this->fail('Value retrieved for file extension is not a string.');
+        }
+        return $extension;
+    }
+
+    /**
+     * @param string $filenameAbsolute
+     * @return string
+     */
+    protected function getExtensionFromAbsolute($filenameAbsolute){
+        return $this->getExtensionFromRelative($this->getFilenameRelativeFromAbsolute($filenameAbsolute));
+    }
+
+    /**
+     * @param string $filenameAbsolute
+     * @return string
+     */
+    protected function getFilenameRelativeFromAbsolute($filenameAbsolute)
+    {
+        $tempDirPath = sys_get_temp_dir() . '/';
+
+        return str_replace($tempDirPath, '', $filenameAbsolute);
+    }
+
+    /**
+     * @param string $filenameRelative
+     * @return string
+     */
+    protected function getFilenameAbsoluteFromRelative($filenameRelative)
+    {
+        return sys_get_temp_dir() . '/' . $filenameRelative;
+    }
+
+    /**
+     * @param string $filenameAbsolute
+     * @param string $name
+     * @return string
+     */
+    protected function changeImageNameLocally($filenameAbsolute, $name)
+    {
+        $extension = $this->getExtensionFromAbsolute($filenameAbsolute);
+        $nameWithExtension = $this->concatNameAndExtension($name, $extension);
+        $newFilenameAbsolute = sys_get_temp_dir() . '/' . $nameWithExtension;
+        rename($filenameAbsolute, $newFilenameAbsolute);
+        return $newFilenameAbsolute;
+    }
+
+    /**
+     * @param string $name
+     * @param string $extension
+     * @return string
+     */
+    protected function concatNameAndExtension($name, $extension)
+    {
+        return $name . '.' . $extension;
+    }
+
 }

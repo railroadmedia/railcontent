@@ -124,5 +124,11 @@ Route::group(
             '/content/restore/{versionId}',
             \Railroad\Railcontent\Controllers\ContentVersionJsonController::class . '@restoreContent'
         )->name('content.restore');
+
+        // remote storage
+        Route::put(
+            '/remote-storage',
+            Railroad\Railcontent\Controllers\RemoteStorageJsonController::class . '@put'
+        )->name('remote-storage.put');
     }
 );
