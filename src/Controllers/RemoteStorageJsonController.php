@@ -3,8 +3,6 @@
 namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Railroad\Railcontent\Responses\JsonPaginatedResponse;
 use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\RemoteStorageService;
 
@@ -24,9 +22,9 @@ class RemoteStorageJsonController
     {
         $target = $request->get('target');
 
-        if( $this->remoteStorageService->put($target, $request->file('file')) ){
-            return new JsonResponse( 'https://' . config('railcontent.awsCloudFront') . $target, 201 );
-        };
+        if ($this->remoteStorageService->put($target, $request->file('file'))) {
+            return new JsonResponse('https://' . config('railcontent.awsCloudFront') . $target, 201);
+        }
 
         return new JsonResponse('RemoteStorageService@put failed', 400);
     }

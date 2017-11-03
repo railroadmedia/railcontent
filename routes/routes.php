@@ -127,8 +127,8 @@ Route::group(
 
         // remote storage
         Route::put(
-            '/remote-storage',
+            '/remote',
             Railroad\Railcontent\Controllers\RemoteStorageJsonController::class . '@put'
-        )->name('remote-storage.put');
+        )->name('remote.put');
     }
 );

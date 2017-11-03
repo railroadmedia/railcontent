@@ -33,7 +33,7 @@ class RemoteStorageJsonControllerTest extends RailcontentTestCase
 
         $filenameToUseTestDirectoryPrefixAdded = $this->s3DirectoryForThisInstance . '/' . $useThisFilename;
 
-        $response = $this->call( 'PUT', '/railcontent/remote-storage', [
+        $response = $this->call( 'PUT', '/railcontent/remote', [
             'target' => $filenameToUseTestDirectoryPrefixAdded,
             'file' => new UploadedFile($filenameAbsolute, $useThisFilename)
         ] );
