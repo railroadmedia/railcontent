@@ -231,7 +231,7 @@ class RailcontentTestCase extends BaseTestCase
     /**
      * @param string $dir
      */
-    protected function awsConfigInitForTesting($dir = '/') // sad code is sad
+    protected function awsConfigInitForTesting($dir = '/')
     {
         include __DIR__ . '../../.env.testing';
 
