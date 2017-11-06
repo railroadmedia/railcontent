@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\DatumUpdate;
 use Railroad\Railcontent\Requests\DatumRequest;
+use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ContentDatumService;
 
 class ContentDatumJsonController extends Controller
@@ -42,7 +43,7 @@ class ContentDatumJsonController extends Controller
             $request->input('position')
         );
 
-        return response()->json($categoryData, 200);
+        return new JsonResponse($categoryData, 200);
     }
 
     /**
@@ -78,7 +79,7 @@ class ContentDatumJsonController extends Controller
             )
         );
 
-        return response()->json($categoryData, 201);
+        return new JsonResponse($categoryData, 201);
     }
 
     /**
@@ -105,6 +106,6 @@ class ContentDatumJsonController extends Controller
             $request->input('content_id')
         );
 
-        return response()->json($deleted, 200);
+        return new JsonResponse(null, 204);
     }
 }

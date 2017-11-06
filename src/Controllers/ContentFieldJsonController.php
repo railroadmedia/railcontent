@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Requests\ContentFieldCreateRequest;
 use Railroad\Railcontent\Requests\ContentFieldUpdateRequest;
+use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ContentFieldService;
 
 class ContentFieldJsonController extends Controller
@@ -42,7 +43,7 @@ class ContentFieldJsonController extends Controller
             $request->input('type')
         );
 
-        return response()->json($categoryField, 200);
+        return new JsonResponse($categoryField, 200);
     }
 
     /**
@@ -78,7 +79,7 @@ class ContentFieldJsonController extends Controller
             )
         );
 
-        return response()->json($contentField, 201);
+        return new JsonResponse($contentField, 201);
     }
 
     /**
@@ -104,6 +105,6 @@ class ContentFieldJsonController extends Controller
             $request->input('content_id')
         );
 
-        return response()->json($deleted, 200);
+        return new JsonResponse(null, 204);
     }
 }
