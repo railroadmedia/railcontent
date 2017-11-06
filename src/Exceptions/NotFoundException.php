@@ -1,8 +1,19 @@
 <?php
 namespace Railroad\Railcontent\Exceptions;
 
-class ContentNotFoundException extends \Exception
+class NotFoundException extends \Exception
 {
+    protected $message;
+
+    /**
+     * NotFoundException constructor.
+     * @param string $message
+     */
+    public function __construct($message)
+    {
+        $this->message = $message;
+    }
+
     public function render($request){
 
         return response()->json(
@@ -12,8 +23,8 @@ class ContentNotFoundException extends \Exception
                 'total_results' => 0,
                 'results' => [],
                 'error' => [
-                    'title' => 'Content not found.',
-                    'detail' => 'No content with id ' . $request->request->get('content_id') . ' exists.',
+                    'title' => 'Entity not found.',
+                    'detail' => $this->message,
                 ]
             ],
             404

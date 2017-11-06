@@ -65,7 +65,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_DRAFT;
 
         $response = $this->call(
-            'POST',
+            'PUT',
             'railcontent/content',
             [
                 'slug' => $slug,
@@ -81,17 +81,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_store_not_pass_the_validation()
     {
-        $response = $this->post('railcontent/content', [], ['Accept' => 'application/json']);
+        $response = $this->put('railcontent/content');
 
         //expecting it to redirect us to previous page.
         $this->assertEquals(422, $response->status());
 
         //check that all the error messages are received
         $errors = [
-            [
-                'source' => "status",
-                "detail" => "The status field is required."]
-            ,
             [
                 'source' => "type",
                 "detail" => "The type field is required."
@@ -108,7 +104,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_DRAFT;
 
         $response = $this->call(
-            'POST',
+            'PUT',
             'railcontent/content',
             [
                 'slug' => $slug,
@@ -139,7 +135,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_DRAFT;
 
         $response = $this->call(
-            'POST',
+            'PUT',
             'railcontent/content',
             [
                 'slug' => $slug,
@@ -169,7 +165,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_DRAFT;
 
         $response = $this->call(
-            'POST',
+            'PUT',
             'railcontent/content',
             [
                 'slug' => $slug,
@@ -191,7 +187,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_DRAFT;
 
         $response = $this->call(
-            'POST',
+            'PUT',
             'railcontent/content',
             [
                 'slug' => $slug,
@@ -201,19 +197,22 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
+        $this->assertEquals(201, $response->getStatusCode());
+
         $response->assertJson(
-            ['status' => 'ok',
-                'code' => 201,
-                'results' =>
-                    [
-                        'id' => '1',
-                        'slug' => $slug,
-                        'brand' => ConfigService::$brand,
-                        'language' => ConfigService::$defaultLanguage,
-                        'status' => $status,
-                        'type' => $type,
-                        'created_on' => Carbon::now()->toDateTimeString()
-                    ]
+            [
+                'results' => [
+                    1 =>
+                        [
+                            'id' => '1',
+                            'slug' => $slug,
+                            'brand' => ConfigService::$brand,
+                            'language' => ConfigService::$defaultLanguage,
+                            'status' => $status,
+                            'type' => $type,
+                            'created_on' => Carbon::now()->toDateTimeString()
+                        ]
+                ]
             ]
         );
     }
@@ -240,7 +239,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $content = $this->contentFactory->create();
 
         $response = $this->call(
-            'PUT',
+            'PATCH',
             'railcontent/content/' . $content['id'],
             [
                 'slug' => $content['slug'],
@@ -258,7 +257,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $type = $this->faker->word;
 
         $response = $this->call(
-            'PUT',
+            'PATCH',
             'railcontent/content/' . rand(),
             [
                 'slug' => $slug,
@@ -277,7 +276,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $content = $this->contentFactory->create();
 
         $response = $this->call(
-            'PUT',
+            'PATCH',
             'railcontent/content/' . $content['id'],
             [
                 'position' => -1,
@@ -302,7 +301,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $response = $this->call('PUT', 'railcontent/content/' . $content['id']);
+        $response = $this->call('PATCH', 'railcontent/content/' . $content['id'], [
+            'status' => $this->faker->word
+        ]);
 
         //expecting a response with 422 status
         $this->assertEquals(422, $response->status());
@@ -311,11 +312,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $errors = [
             [
                 'source' => "status",
-                "detail" => "The status field is required."]
-            ,
-            [
-                'source' => "type",
-                "detail" => "The type field is required."
+                "detail" => "The selected status is invalid."
             ]
         ];
         $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
@@ -339,7 +336,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $new_slug = implode('-', $this->faker->words());
         $response = $this->call(
-            'PUT',
+            'PATCH',
             'railcontent/content/' . $content['id'],
             [
                 'slug' => $new_slug,
@@ -426,7 +423,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $delete = $this->serviceBeingTested->delete(1);
 
-        $this->assertFalse($delete);
+        $this->assertNull($delete);
     }
 
     public function test_controller_delete_method_response_status()
@@ -447,9 +444,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_delete_missing_content_response_status()
     {
-        $response = $this->call('DELETE', 'railcontent/content/1', ['deleteChildren' => 0]);
+        $randomId = $this->faker->numberBetween();
+        $response = $this->call('DELETE', 'railcontent/content/' . $randomId, ['deleteChildren' => 0]);
 
         $this->assertEquals(404, $response->status());
+        $this->assertEquals('Entity not found.', json_decode($response->getContent())->error->title, true);
+        $this->assertEquals('Delete failed, content not found with id: ' . $randomId, json_decode($response->getContent())->error->detail, true);
     }
 
     public function test_index_response_no_results()
@@ -506,7 +506,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'archived_on' => null
             ];
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+            $contents[$contentId] = array_merge([
+                'id' => $contentId,
+                'fields' => [],
+                'data' => [],
+                'permissions' => []
+            ], $content);
         }
 
         //create library lessons
@@ -837,7 +842,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
             //save the hierarchy
             $this->contentHierarchyFactory->create(
-                [$courseId1, $contentId, $i+1]
+                [$courseId1, $contentId, $i + 1]
             );
 
             $contents[$contentId] = array_merge($content, ['id' => $contentId]);
@@ -853,7 +858,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'page' => $page,
                 'limit' => $limit,
                 'included_types' => ['course lesson'],
-                'filter' => ['required_fields' => [$fieldInstructor['key']. ','.$instructorSlug.','.$fieldInstructor['type']]],
+                'filter' => ['required_fields' => [$fieldInstructor['key'] . ',' . $instructorSlug . ',' . $fieldInstructor['type']]],
                 'sort' => $orderByColumn,
             ]
         );
@@ -958,10 +963,10 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'included_types' => ['course'],
                 'filter' => [
                     'required_fields' => [
-                        $fieldInstructor['key'].','.$instructorSlug.','.$fieldInstructor['type']
+                        $fieldInstructor['key'] . ',' . $instructorSlug . ',' . $fieldInstructor['type']
                     ],
                     'required_user_playlists' => [
-                        $userContent['user_id'].','.$playlist['name']
+                        $userContent['user_id'] . ',' . $playlist['name']
                     ]
                 ],
                 'sort' => $orderByColumn

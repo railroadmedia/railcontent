@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Events\ContentUpdated;
-use Railroad\Railcontent\Exceptions\ContentNotFoundException;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -216,9 +215,8 @@ class ContentService
     {
         $content = $this->getById($id);
 
-        //if the content not exist set the id on the request for the exception and return null
+        //if the content not exist return null
         if(!$content){
-            request()->request->add(['content_id' => $id]);
             return $content;
         }
 
@@ -241,9 +239,8 @@ class ContentService
 
         $content = $this->getById($id);
 
-        //if the content not exist set the id on the request for the exception and return null
+        //if the content not exist return null
         if(!$content){
-            request()->request->add(['content_id' => $id]);
             return $content;
         }
 

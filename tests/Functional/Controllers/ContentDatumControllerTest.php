@@ -38,7 +38,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $key = $this->faker->word;
         $value = $this->faker->text(500);
 
-        $response = $this->call('POST', 'railcontent/content/datum', [
+        $response = $this->call('PUT', 'railcontent/content/datum', [
             'content_id' => $content['id'],
             'key' => $key,
             'value' => $value,
@@ -47,36 +47,27 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->status());
 
-        $response->assertJsonStructure(
-            [
-                'id' ,
-                'content_id',
-                'key',
-                'position',
-            ]
-        );
-
         $response->assertJson(
             [
-                'id' => 1,
-                'content_id' => $content['id'],
-                'key' => $key,
-                'value' => $value,
-                'position' => 1
+                'results' => [
+                    'id' => '1',
+                    'content_id' => $content['id'],
+                    'key' => $key,
+                    'value' => $value,
+                    'position' => 1
+
+                ]
             ]
         );
     }
 
     public function test_add_content_datum_not_pass_the_validation()
     {
-        $response = $this->call('POST', 'railcontent/content/datum');
+        $response = $this->call('PUT', 'railcontent/content/datum');
 
-        $this->assertEquals(302, $response->status());
-
-        $response->assertSessionHasErrors();
-
-        //expecting session has error for missing fields
-        $response->assertSessionHasErrors(['key', 'value', 'content_id']);
+        $this->assertEquals(422, $response->status());
+        $this->assertContains('key', array_column(json_decode($response->getContent())->errors,'source'));
+        $this->assertContains('content_id', array_column(json_decode($response->getContent())->errors,'source'));
     }
 
     public function test_add_content_datum_key_not_pass_the_validation()
@@ -84,14 +75,15 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $key = $this->faker->text(600);
         $value = $this->faker->text(500);
 
-        $response = $this->call('POST', 'railcontent/content/datum',['content_id'=>1,'key'=>$key, 'value' => $value]);
+        $response = $this->call('PUT', 'railcontent/content/datum', ['content_id' => 1, 'key' => $key, 'value' => $value]);
 
-        $this->assertEquals(302, $response->status());
-
-        $response->assertSessionHasErrors();
+        $this->assertEquals(422, $response->status());
+        $this->assertContains('key', array_column(json_decode($response->getContent())->errors,'source'));
+        $this->assertContains('content_id', array_column(json_decode($response->getContent())->errors,'source'));
+        //$response->assertSessionHasErrors();
 
         //expecting session has error for key field
-        $response->assertSessionHasErrors(['key']);
+        //$response->assertSessionHasErrors(['key']);
     }
 
     public function test_update_content_datum_controller_method_response()
@@ -102,13 +94,13 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'content_id' => $content['id'],
             'key' => $this->faker->word,
             'value' => $this->faker->text(),
-            'position' =>$this->faker->numberBetween()
+            'position' => $this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($data);
 
-        $new_value =  $this->faker->text();
+        $new_value = $this->faker->text();
 
-        $response = $this->call('PUT', 'railcontent/content/datum/'.$dataId, [
+        $response = $this->call('PUT', 'railcontent/content/datum/' . $dataId, [
             'content_id' => $content['id'],
             'key' => $data['key'],
             'value' => $new_value,
@@ -119,7 +111,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
         $response->assertJsonStructure(
             [
-                'id' ,
+                'id',
                 'content_id',
                 'key',
                 'value',
@@ -144,7 +136,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
         $data = [
             'key' => $this->faker->word,
-            'position' =>$this->faker->numberBetween()
+            'position' => $this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
@@ -154,14 +146,14 @@ class ContentDatumControllerTest extends RailcontentTestCase
         ];
         $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
 
-        $response = $this->call('PUT', 'railcontent/content/datum/'.$dataId);
+        $response = $this->call('PUT', 'railcontent/content/datum/' . $dataId);
 
         $this->assertEquals(302, $response->status());
 
         $response->assertSessionHasErrors();
 
         //expecting session has error for missing fields
-        $response->assertSessionHasErrors(['key','value','content_id']);
+        $response->assertSessionHasErrors(['key', 'value', 'content_id']);
     }
 
     public function test_delete_content_datum_controller()
@@ -170,7 +162,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
         $data = [
             'key' => $this->faker->word,
-            'position' =>$this->faker->numberBetween()
+            'position' => $this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
@@ -180,7 +172,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
         ];
         $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
 
-        $response = $this->call('DELETE', 'railcontent/content/datum/'.$dataId, [
+        $response = $this->call('DELETE', 'railcontent/content/datum/' . $dataId, [
             'content_id' => $contentId
         ]);
 
@@ -194,7 +186,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
         $data = [
             'key' => $this->faker->word,
-            'position' =>$this->faker->numberBetween()
+            'position' => $this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
@@ -227,10 +219,10 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
         $data = [
             'key' => $this->faker->word,
-            'position' =>$this->faker->numberBetween()
+            'position' => $this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
-        $dataValue= $this->faker->word;
+        $dataValue = $this->faker->word;
         $this->translateItem($this->classBeingTested->getUserLanguage(), $dataId, ConfigService::$tableData, $dataValue);
 
         $contentData = [
@@ -259,7 +251,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
         $data = [
             'key' => $this->faker->word,
-            'position' =>$this->faker->numberBetween()
+            'position' => $this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
@@ -304,7 +296,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
         $data = [
             'key' => $this->faker->word,
-            'position' =>$this->faker->numberBetween()
+            'position' => $this->faker->numberBetween()
         ];
         $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
@@ -314,7 +306,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
         ];
         $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
 
-        $response = $this->call('DELETE', 'railcontent/content/datum/'.$dataId, [
+        $response = $this->call('DELETE', 'railcontent/content/datum/' . $dataId, [
             'content_id' => $contentId
         ]);
 

@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Routing\Controller;
+use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\PermissionAssignRequest;
 use Railroad\Railcontent\Requests\PermissionRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
@@ -64,9 +65,7 @@ class PermissionJsonController extends Controller
         //check if permission exist in the database
         $permission = $this->permissionService->get($id);
 
-        if (is_null($permission)) {
-            return response()->json('Update failed, permission not found with id: ' . $id, 404);
-        }
+        throw_unless($permission, new NotFoundException('Update failed, permission not found with id: ' . $id));
 
         $permission = $this->permissionService->update($id, $request->input('name'));
 

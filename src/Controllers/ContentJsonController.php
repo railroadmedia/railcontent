@@ -4,7 +4,7 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Railroad\Railcontent\Exceptions\ContentNotFoundException;
+use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentCreateRequest;
@@ -79,10 +79,8 @@ class ContentJsonController extends Controller
     {
         $content = $this->contentService->getById($id);
 
-        $request->request->add(['content_id' => $id]);
-
         //check if content exist; if not throw exception
-        throw_unless($content, ContentNotFoundException::class);
+        throw_unless($content, new NotFoundException('No content with id '. $id.' exists.'));
 
         $results = [$id => $content];
 
@@ -125,18 +123,11 @@ class ContentJsonController extends Controller
         //update content with the data sent on the request
         $content = $this->contentService->update(
             $contentId,
-            [
-                "slug" => $request->input('slug'),
-                "status" => $request->input('status'),
-                "type" => $request->input('type'),
-                "language" => $request->input('language') ?? ConfigService::$defaultLanguage,
-                "published_on" => $request->input('published_on'),
-                "archived_on" => $request->input('archived_on')
-            ]
+            $request->all()
         );
 
         //if the update method response it's null the content not exist; we throw the proper exception
-        throw_if(is_null($content), ContentNotFoundException::class);
+        throw_if(is_null($content), new NotFoundException('Update failed, content not found with id: ' . $contentId));
 
         return new JsonResponse($content, 201);
     }
@@ -154,7 +145,7 @@ class ContentJsonController extends Controller
         $delete = $this->contentService->delete($contentId);
 
         //if the delete method response it's null the content not exist; we throw the proper exception
-        throw_if(is_null($delete), ContentNotFoundException::class);
+        throw_if(is_null($delete), new NotFoundException('Delete failed, content not found with id: '. $contentId));
 
         //if the delete method response it's false the mysql delete method was failed; we throw the proper exception
         throw_if(!($delete), DeleteFailedException::class);
