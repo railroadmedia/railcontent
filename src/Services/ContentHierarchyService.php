@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 
 class ContentHierarchyService
@@ -25,19 +24,17 @@ class ContentHierarchyService
     /**
      * Create a new field and return it.
      *
-     * @param $parentId
-     * @param $childId
-     * @param $childPosition
+     * @param int $parentId
+     * @param int $childId
+     * @param int|null $childPosition
      * @return array
      */
-    public function create($parentId, $childId, $childPosition)
+    public function create($parentId, $childId, $childPosition = null)
     {
-        $id = $this->contentHierarchyRepository->create(
-            [
-                'parent_id' => $parentId,
-                'child_id' => $childId,
-                'child_position' => $childPosition,
-            ]
+        $id = $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
+            $parentId,
+            $childId,
+            $childPosition
         );
 
         return $this->contentHierarchyRepository->getById($id);
