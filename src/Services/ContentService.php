@@ -214,6 +214,17 @@ class ContentService
      */
     public function update($id, array $data)
     {
+        $content = $this->getById($id);
+
+        //if the content not exist set the id on the request for the exception and return null
+        if(!$content){
+            request()->request->add(['content_id' => $id]);
+            return $content;
+        }
+
+        //call the event that save a new content version in the database
+        event(new ContentUpdated($id));
+
         $this->contentRepository->update($id, $data);
 
         return $this->getById($id);

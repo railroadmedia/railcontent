@@ -4,10 +4,8 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Exceptions\ContentNotFoundException;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
-use Railroad\Railcontent\Exceptions\RailcontentException;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
@@ -124,15 +122,6 @@ class ContentJsonController extends Controller
      */
     public function update(ContentUpdateRequest $request, $contentId)
     {
-        $content = $this->contentService->getById($contentId);
-        request()->request->add(['content_id' => $contentId]);
-
-        //check if content exist; if not throw exception
-        throw_unless($content, ContentNotFoundException::class);
-
-        //call the event that save a new content version in the database
-        event(new ContentUpdated($content['id']));
-
         //update content with the data sent on the request
         $content = $this->contentService->update(
             $contentId,
@@ -145,6 +134,9 @@ class ContentJsonController extends Controller
                 "archived_on" => $request->input('archived_on')
             ]
         );
+
+        //if the update method response it's null the content not exist; we throw the proper exception
+        throw_if(is_null($content), ContentNotFoundException::class);
 
         return new JsonResponse($content, 201);
     }
