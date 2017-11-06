@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
-use Carbon\Carbon;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Helpers\ContentHelper;
@@ -38,7 +37,8 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
 
     public function test_empty()
     {
-        $rows = $this->classBeingTested->startFilter(1, 1, 'published_on', 'desc', [], [])->retrieveFilter();
+        $rows =
+            $this->classBeingTested->startFilter(1, 1, 'published_on', 'desc', [], [], [])->retrieveFilter();
 
         $this->assertEmpty($rows);
     }
@@ -124,7 +124,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $randomField = $this->fieldFactory->create($expectedContent['id']);
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [], [])
             ->requireField(
                 $requiredFieldName,
                 $requiredFieldValue,
@@ -192,7 +192,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             $randomField = $this->fieldFactory->create($content['id']);
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'desc', [$type], [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'desc', [$type], [], [])
             ->includeField(
                 $includedFieldName,
                 $includedFieldValue,
@@ -288,7 +288,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [], [])
             ->includeField(
                 $includedFieldName,
                 $includedFieldValue,
@@ -493,7 +493,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [], [])
             ->includeField(
                 $includedFieldName,
                 $includedFieldValue,
@@ -696,7 +696,7 @@ class ContentRepositoryFieldFilteringTest extends RailcontentTestCase
             );
         }
 
-        $count = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
+        $count = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [], [])
             ->includeField(
                 $includedFieldName,
                 $includedFieldValue,

@@ -44,6 +44,7 @@ class ContentRepository extends RepositoryBase
     private $orderDirection;
     private $typesToInclude = [];
     private $slugHierarchy = [];
+    private $requiredParentIds = [];
 
     /**
      * @var ContentPermissionRepository
@@ -160,26 +161,6 @@ class ContentRepository extends RepositoryBase
         );
     }
 
-    public function getByParentId($parentId)
-    {
-        $parentContentIds = $this->query()
-            ->join(
-                ConfigService::$tableContentHierarchy,
-                ConfigService::$tableContentHierarchy . '.child_id',
-                '=',
-                ConfigService::$tableContent . '.id'
-            )
-            ->selectPrimaryColumns()
-            ->restrictStatuses()
-            ->restrictPublishedOnDate()
-            ->restrictByTypes($this->typesToInclude)
-            ->restrictBrand()
-            ->where(['parent_id' => $parentId])
-            ->getToArray(['id']);
-
-        return $this->getByIds(array_column($parentContentIds, 'id'));
-    }
-
     /**
      * @param array $slugs
      * @return array|null
@@ -204,46 +185,6 @@ class ContentRepository extends RepositoryBase
             ->restrictByTypes($this->typesToInclude)
             //            ->addSlugInheritance($this->slugHierarchy)
             ->where('slug', $slug)
-            ->where('type', $type)
-            ->getToArray();
-
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
-
-        $contentPermissionRows =
-            $this->contentPermissionRepository->getByContentIdsOrTypes(
-                array_column($contentRows, 'id'),
-                array_column($contentRows, 'type')
-            );
-
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
-    }
-
-    /**
-     * @param integer $parentId
-     * @param string $type
-     * @return array|null
-     */
-    public function getByParentIdAndType($parentId, $type)
-    {
-        $contentRows = $this->query()
-            ->join(
-                ConfigService::$tableContentHierarchy,
-                ConfigService::$tableContentHierarchy . '.child_id',
-                '=',
-                ConfigService::$tableContent . '.id'
-            )
-            ->selectPrimaryColumns()
-            ->restrictStatuses()
-            ->restrictPublishedOnDate()
-            ->restrictBrand()
-            ->restrictByTypes($this->typesToInclude)
-            ->where('parent_id', $parentId)
             ->where('type', $type)
             ->getToArray();
 
@@ -375,7 +316,9 @@ class ContentRepository extends RepositoryBase
      * @param $orderDirection
      * @param array $typesToInclude
      * @param array $slugHierarchy
+     * @param array $requiredParentIds
      * @return $this
+     * @internal param array $requiredParentIds
      */
     public function startFilter(
         $page,
@@ -383,7 +326,8 @@ class ContentRepository extends RepositoryBase
         $orderBy,
         $orderDirection,
         array $typesToInclude,
-        array $slugHierarchy
+        array $slugHierarchy,
+        array $requiredParentIds
     ) {
         $this->page = $page;
         $this->limit = $limit;
@@ -391,6 +335,7 @@ class ContentRepository extends RepositoryBase
         $this->orderDirection = $orderDirection;
         $this->typesToInclude = $typesToInclude;
         $this->slugHierarchy = $slugHierarchy;
+        $this->requiredParentIds = $requiredParentIds;
 
         // reset all the filters for the new query
         $this->requiredFields = [];
@@ -420,7 +365,8 @@ class ContentRepository extends RepositoryBase
             ->restrictByUserStates($this->requiredUserStates)
             ->includeByUserStates($this->includedUserStates)
             ->restrictByTypes($this->typesToInclude)
-            ->restrictBySlugHierarchy($this->slugHierarchy);
+            ->restrictBySlugHierarchy($this->slugHierarchy)
+            ->restrictByParentIds($this->requiredParentIds);
 
         $query = $this->query()
             ->orderBy($this->orderBy, $this->orderDirection)
@@ -458,7 +404,8 @@ class ContentRepository extends RepositoryBase
             ->restrictByFields($this->requiredFields)
             ->includeByFields($this->includedFields)
             ->restrictByTypes($this->typesToInclude)
-            ->restrictBySlugHierarchy($this->slugHierarchy);
+            ->restrictBySlugHierarchy($this->slugHierarchy)
+            ->restrictByParentIds($this->requiredParentIds);
 
         $query = $this->query()
             ->orderBy($this->orderBy, $this->orderDirection)
@@ -489,6 +436,7 @@ class ContentRepository extends RepositoryBase
             ->restrictPublishedOnDate()
             ->restrictByTypes($this->typesToInclude)
             ->restrictBrand()
+            ->restrictByParentIds($this->requiredParentIds)
             ->whereIn(
                 ConfigService::$tableContentFields . '.key',
                 ConfigService::$fieldOptionList

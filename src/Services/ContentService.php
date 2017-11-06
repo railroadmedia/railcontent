@@ -104,6 +104,15 @@ class ContentService
     }
 
     /**
+     * @param integer $parentId
+     * @return array
+     */
+    public function getByParentId($parentId)
+    {
+        return $this->contentRepository->getByParentId($parentId);
+    }
+
+    /**
      *
      * Returns:
      * ['results' => $lessons, 'total_results' => $totalLessonsAfterFiltering]
@@ -113,6 +122,7 @@ class ContentService
      * @param string $orderByAndDirection
      * @param array $includedTypes
      * @param array $slugHierarchy
+     * @param array $requiredParentIds
      * @param array $requiredFields
      * @param array $includedFields
      * @param array $requiredUserStates
@@ -123,13 +133,18 @@ class ContentService
         $page,
         $limit,
         $orderByAndDirection,
-        array $includedTypes,
-        array $slugHierarchy,
+        array $includedTypes = [],
+        array $slugHierarchy = [],
+        array $requiredParentIds = [],
         array $requiredFields = [],
         array $includedFields = [],
         array $requiredUserStates = [],
         array $includedUserStates = []
     ) {
+        if ($limit == 'null') {
+            $limit = -1;
+        }
+
         $orderByDirection = substr($orderByAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($orderByAndDirection, '-');
 
@@ -139,7 +154,8 @@ class ContentService
             $orderByColumn,
             $orderByDirection,
             $includedTypes,
-            $slugHierarchy
+            $slugHierarchy,
+            $requiredParentIds
         );
 
         foreach ($requiredFields as $requiredField) {

@@ -56,6 +56,7 @@ class ContentJsonController extends Controller
             $request->get('sort', 'published_on'),
             $request->get('included_types', []),
             $request->get('slug_hierarchy', []),
+            $request->get('required_parent_ids', []),
             $parsedFilters['required_fields'] ?? [],
             $parsedFilters['included_fields'] ?? [],
             $parsedFilters['required_user_states'] ?? [],
@@ -73,7 +74,7 @@ class ContentJsonController extends Controller
     /**
      * @param Request $request
      * @param $id
-     * @return array|null
+     * @return JsonResponse
      */
     public function show(Request $request, $id)
     {

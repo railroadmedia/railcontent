@@ -40,8 +40,10 @@ class ContentQueryBuilder extends Builder
      */
     public function directPaginate($page, $limit)
     {
-        $this->limit($limit)
-            ->skip(($page - 1) * $limit);
+        if ($limit >= 0) {
+            $this->limit($limit)
+                ->skip(($page - 1) * $limit);
+        }
 
         return $this;
     }
@@ -211,6 +213,29 @@ class ContentQueryBuilder extends Builder
         if (!empty($typesToInclude)) {
             $this->whereIn(ConfigService::$tableContent . '.type', $typesToInclude);
         }
+
+        return $this;
+    }
+
+    /**
+     * @param array $parentIds
+     * @return $this
+     */
+    public function restrictByParentIds(array $parentIds)
+    {
+        if (empty($parentIds)) {
+            return $this;
+        }
+
+        $this->whereIn(
+            ConfigService::$tableContent . '.id',
+            function (Builder $builder) use ($parentIds) {
+                $builder
+                    ->select([ConfigService::$tableContentHierarchy . '.child_id'])
+                    ->from(ConfigService::$tableContentHierarchy)
+                    ->whereIn('parent_id', $parentIds);
+            }
+        );
 
         return $this;
     }

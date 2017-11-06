@@ -79,7 +79,7 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [], [])
             ->requireUserStates(
                 $userId,
                 $startedState
@@ -140,7 +140,7 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [], [])
             ->includeUserStates(
                 $userId,
                 $startedState

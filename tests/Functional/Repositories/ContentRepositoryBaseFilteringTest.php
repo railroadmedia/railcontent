@@ -2,10 +2,12 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentHierarchyFactory;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -35,9 +37,14 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
         $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
     }
 
+    protected function tearDown()
+    {
+        parent::tearDown();
+    }
+
     public function test_empty()
     {
-        $rows = $this->classBeingTested->startFilter(1, 1, 'published_on', 'desc', [], [])
+        $rows = $this->classBeingTested->startFilter(1, 1, 'published_on', 'desc', [], [], [])
             ->retrieveFilter();
 
         $this->assertEmpty($rows);
@@ -64,7 +71,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
             );
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [], [])
             ->retrieveFilter();
 
         $this->assertEquals([4, 5, 6], array_column($rows, 'id'));
@@ -96,7 +103,8 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
         foreach ($includedParentContentIds as $index => $includedParentContentId) {
             if ($index > 0) {
                 $this->contentHierarchyFactory->create(
-                    $includedParentContentIds[$index - 1], $includedParentContentId
+                    $includedParentContentIds[$index - 1],
+                    $includedParentContentId
                 );
             }
         }
@@ -117,7 +125,8 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
         foreach ($excludedParentContentIds as $index => $excludedParentContentId) {
             if ($index > 0) {
                 $this->contentHierarchyFactory->create(
-                    $excludedParentContentIds[$index - 1], $excludedParentContentId
+                    $excludedParentContentIds[$index - 1],
+                    $excludedParentContentId
                 );
             }
         }
@@ -132,7 +141,8 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
             );
 
             $this->contentHierarchyFactory->create(
-                $includedParentContentIds[2], $content['id']
+                $includedParentContentIds[2],
+                $content['id']
             );
 
             $expectedContents[] = $content;
@@ -146,7 +156,8 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
             );
 
             $this->contentHierarchyFactory->create(
-                $excludedParentContentIds[2], $content['id']
+                $excludedParentContentIds[2],
+                $content['id']
             );
         }
 
@@ -156,7 +167,8 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
             'id',
             'asc',
             [$type],
-            $slugHierarchyToInclude
+            $slugHierarchyToInclude,
+            []
         )
             ->retrieveFilter();
 
@@ -189,7 +201,8 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
         foreach ($includedParentContentIds as $index => $includedParentContentId) {
             if ($index > 0) {
                 $this->contentHierarchyFactory->create(
-                    $includedParentContentIds[$index - 1], $includedParentContentId
+                    $includedParentContentIds[$index - 1],
+                    $includedParentContentId
                 );
             }
         }
@@ -210,7 +223,8 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
         foreach ($excludedParentContentIds as $index => $excludedParentContentId) {
             if ($index > 0) {
                 $this->contentHierarchyFactory->create(
-                    $excludedParentContentIds[$index - 1], $excludedParentContentId
+                    $excludedParentContentIds[$index - 1],
+                    $excludedParentContentId
                 );
             }
         }
@@ -225,7 +239,8 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
             );
 
             $this->contentHierarchyFactory->create(
-                $includedParentContentIds[2], $content['id']
+                $includedParentContentIds[2],
+                $content['id']
             );
 
             $expectedContents[] = $content;
@@ -239,7 +254,8 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
             );
 
             $this->contentHierarchyFactory->create(
-                $excludedParentContentIds[2], $content['id']
+                $excludedParentContentIds[2],
+                $content['id']
             );
         }
 
@@ -249,10 +265,69 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
             'id',
             'asc',
             [$type],
-            $slugHierarchyToInclude
+            $slugHierarchyToInclude,
+            []
         )
             ->countFilter();
 
         $this->assertEquals(5, $count);
     }
+
+    public function test_require_parent_ids()
+    {
+        $parentContent = [
+            'slug' => $this->faker->word,
+            'type' => 'lesson',
+            'status' => $this->faker->word,
+            'language' => 'en-US',
+            'brand' => ConfigService::$brand,
+            'published_on' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => Carbon::now()->toDateTimeString()
+        ];
+
+        $parentContentId = $this->classBeingTested->create($parentContent);
+
+        $expectedChildContents = [];
+
+        for ($i = 0; $i < 3; $i++) {
+            $childContent = [
+                'slug' => $this->faker->word,
+                'type' => 'lesson-part',
+                'status' => $this->faker->word,
+                'language' => 'en-US',
+                'brand' => ConfigService::$brand,
+                'published_on' => Carbon::now()->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => Carbon::now()->toDateTimeString()
+            ];
+
+            $childContent['id'] = $this->classBeingTested->create($childContent);
+            $childContent['fields'] = [];
+            $childContent['data'] = [];
+            $childContent['permissions'] = [];
+
+            $this->contentHierarchyFactory->create(
+                $parentContentId,
+                $childContent['id'],
+                1
+            );
+
+            $expectedChildContents[$childContent['id']] = $childContent;
+        }
+
+        $results = $this->classBeingTested->startFilter(
+            1,
+            10,
+            'id',
+            'asc',
+            ['lesson-part'],
+            [],
+            [$parentContentId]
+        )
+            ->retrieveFilter();
+
+        $this->assertEquals($expectedChildContents, $results);
+    }
+
 }

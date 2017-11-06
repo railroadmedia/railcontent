@@ -191,7 +191,7 @@ class RailcontentTestCase extends BaseTestCase
 
     protected function tearDown()
     {
-         parent::tearDown();
+        parent::tearDown();
     }
 
     // -------------------- used by RemoteStorage Service & Controller tests --------------------

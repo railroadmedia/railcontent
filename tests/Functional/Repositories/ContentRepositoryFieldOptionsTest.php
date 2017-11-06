@@ -63,7 +63,7 @@ class ContentRepositoryFieldOptionsTest extends RailcontentTestCase
             ConfigService::$fieldOptionList[] = $fieldName;
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [], [])
             ->getFilterFields();
 
         $this->assertEquals([$fieldName => [$fieldValue]], $rows);
@@ -117,7 +117,7 @@ class ContentRepositoryFieldOptionsTest extends RailcontentTestCase
             ConfigService::$fieldOptionList[] = $fieldName;
         }
 
-        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [])
+        $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [], [])
             ->getFilterFields();
 
         $this->assertEquals($expectedFields, $rows);

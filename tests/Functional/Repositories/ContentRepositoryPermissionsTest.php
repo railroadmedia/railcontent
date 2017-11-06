@@ -139,7 +139,9 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
         $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
-            null, $content['type'], $permission['id']
+            null,
+            $content['type'],
+            $permission['id']
         );
 
         PermissionRepository::$availableContentPermissionIds = [];
@@ -155,7 +157,9 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
         $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
-            null, $content['type'], $permission['id']
+            null,
+            $content['type'],
+            $permission['id']
         );
 
         $otherPermission = $this->permissionFactory->create($this->faker->word);
@@ -175,7 +179,9 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
         $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
-            null, $content['type'], $permission['id']
+            null,
+            $content['type'],
+            $permission['id']
         );
         $content['permissions'][] = $contentPermission;
 
@@ -192,7 +198,9 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
         $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
-            null, $content['type'], $permission['id']
+            null,
+            $content['type'],
+            $permission['id']
         );
         $content['permissions'][] = $contentPermission;
 

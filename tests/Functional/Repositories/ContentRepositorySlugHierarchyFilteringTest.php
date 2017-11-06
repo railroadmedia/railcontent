@@ -37,7 +37,7 @@ class ContentRepositorySlugHierarchyFilteringTest extends RailcontentTestCase
 
     public function test_empty()
     {
-        $rows = $this->classBeingTested->startFilter(1, 1, 'published_on', 'desc', [], [])
+        $rows = $this->classBeingTested->startFilter(1, 1, 'published_on', 'desc', [], [], [])
             ->retrieveFilter();
 
         $this->assertEmpty($rows);
@@ -133,17 +133,18 @@ class ContentRepositorySlugHierarchyFilteringTest extends RailcontentTestCase
         }
 
         $tStart = microtime(true);
-        
+
         $rows = $this->classBeingTested->startFilter(
             1,
             20,
             'id',
             'asc',
             [$type],
-            $slugHierarchyToInclude
+            $slugHierarchyToInclude,
+            []
         )
             ->retrieveFilter();
-        
+
         $tEnd = microtime(true);
         var_dump($tEnd - $tStart);
 
