@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\DatumUpdate;
-use Railroad\Railcontent\Requests\DatumRequest;
+use Railroad\Railcontent\Requests\ContentDatumCreateRequest;
+use Railroad\Railcontent\Requests\ContentDatumUpdateRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ContentDatumService;
 
@@ -27,10 +28,10 @@ class ContentDatumJsonController extends Controller
     /**
      * Call the method from service that create new data and link the content with the data.
      *
-     * @param DatumRequest $request
+     * @param ContentDatumCreateRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(DatumRequest $request)
+    public function store(ContentDatumCreateRequest $request)
     {
         //save a content version before datum creation
         // todo: rename to DatumCreated (after save to db) or ContentCreation (before save to db)
@@ -50,10 +51,10 @@ class ContentDatumJsonController extends Controller
      * Call the method from service to update a content datum
      *
      * @param integer $dataId
-     * @param DatumRequest $request
+     * @param ContentDatumUpdateRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($dataId, DatumRequest $request)
+    public function update($dataId, ContentDatumUpdateRequest $request)
     {
         //check if datum exist in the database
         $datum = $this->datumService->get($dataId);
