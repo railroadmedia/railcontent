@@ -45,7 +45,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             ]);
 
         $this->assertEquals(200, $response->status());
-        $this->assertEquals(1, $response->content());
+        $this->assertTrue(json_decode($response->content())->results);
     }
 
     public function test_start_content_invalid_content_id()
@@ -90,7 +90,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(201, $response->status());
-        $this->assertEquals('true', $response->content());
+        $this->assertTrue(json_decode($response->content())->results);
     }
 
     public function test_complete_content_invalid_content_id()
@@ -135,12 +135,12 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(201, $response->status());
-        $this->assertEquals('true', $response->content());
+        $this->assertTrue(json_decode($response->content())->results);
     }
 
     public function test_save_user_progress_on_content_inexistent()
     {
-        $contentId = 1;
+        $contentId = $this->faker->numberBetween();
 
         $response = $this->put('railcontent/progress',
             [

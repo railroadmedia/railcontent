@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\PermissionAssignRequest;
 use Railroad\Railcontent\Requests\PermissionRequest;
+use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\PermissionService;
 
@@ -48,7 +49,7 @@ class PermissionJsonController extends Controller
     {
         $permission = $this->permissionService->create($request->input('name'));
 
-        return response()->json($permission, 200);
+        return new JsonResponse($permission, 200);
     }
 
     /**
@@ -69,7 +70,7 @@ class PermissionJsonController extends Controller
 
         $permission = $this->permissionService->update($id, $request->input('name'));
 
-        return response()->json($permission, 201);
+        return new JsonResponse($permission, 201);
     }
 
     /**
@@ -111,7 +112,7 @@ class PermissionJsonController extends Controller
 
         $deleted = $this->permissionService->delete($id);
 
-        return response()->json($deleted, 200);
+        return new JsonResponse(null, 204);
     }
 
     /**
@@ -128,6 +129,6 @@ class PermissionJsonController extends Controller
             $request->input('permission_id')
         );
 
-        return response()->json($assignedPermission, 200);
+        return new JsonResponse($assignedPermission, 200);
     }
 }

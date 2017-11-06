@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Routing\Controller;
+use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ContentService;
 
 class ContentVersionJsonController extends Controller
@@ -41,6 +42,6 @@ class ContentVersionJsonController extends Controller
         //restore content
         $restored = $this->contentService->restoreContent($versionId);
 
-        return response()->json($restored, 200);
+        return new JsonResponse($restored, 200);
     }
 }

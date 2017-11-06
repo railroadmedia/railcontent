@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\UserContentRequest;
-use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\UserContentProgressService;
 
 class ContentProgressJsonController extends Controller
@@ -34,7 +34,7 @@ class ContentProgressJsonController extends Controller
     {
         $response = $this->userContentService->startContent($request->input('content_id'), $request->user()->id);
 
-        return response()->json($response, 200);
+        return new JsonResponse($response, 200);
     }
 
     /** Set content as complete for the authenticated user
@@ -46,7 +46,7 @@ class ContentProgressJsonController extends Controller
     {
         $response = $this->userContentService->completeContent($request->input('content_id'), $request->user()->id);
 
-        return response()->json($response, 201);
+        return new JsonResponse($response, 201);
     }
 
     /** Save the progress on a content for the authenticated user
@@ -63,6 +63,6 @@ class ContentProgressJsonController extends Controller
                 $request->user()->id
             );
 
-        return response()->json($response, 201);
+        return new JsonResponse($response, 201);
     }
 }

@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\PlaylistRequest;
 use Railroad\Railcontent\Requests\UserContentPlaylistRequest;
+use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\PlaylistsService;
 
 class PlaylistJsonController extends Controller
@@ -34,7 +35,7 @@ class PlaylistJsonController extends Controller
             $request->user()->id
         );
 
-        return response()->json($playlist, 200);
+        return new JsonResponse($playlist, 200);
     }
 
     /** Call the method from service that create a new playlist (with type PUBLIC or PRIVATE)
@@ -50,6 +51,6 @@ class PlaylistJsonController extends Controller
             $request->user()->is_admin
         );
 
-        return response()->json($playlist, 200);
+        return new JsonResponse($playlist, 200);
     }
 }
