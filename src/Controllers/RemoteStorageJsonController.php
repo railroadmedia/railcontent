@@ -23,7 +23,9 @@ class RemoteStorageJsonController
         $target = $request->get('target');
 
         if ($this->remoteStorageService->put($target, $request->file('file'))) {
-            return new JsonResponse('https://' . config('railcontent.awsCloudFront') . $target, 201);
+            return new JsonResponse(
+                'https://' . config('railcontent.awsCloudFront') . '/' . $target, 201
+            );
         }
 
         return new JsonResponse('RemoteStorageService@put failed', 400);
