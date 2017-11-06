@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Exceptions\ContentNotFoundException;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -221,10 +223,20 @@ class ContentService
      * Call the delete method from repository and returns true if the content was deleted
      *
      * @param $id
-     * @return bool
+     * @return bool|null - if the content not exist
      */
     public function delete($id)
     {
+
+        $content = $this->getById($id);
+
+        //if the content not exist set the id on the request for the exception and return null
+        if(!$content){
+            request()->request->add(['content_id' => $id]);
+            return $content;
+        }
+
+        event(new ContentUpdated($id));
         return $this->contentRepository->delete($id);
     }
 

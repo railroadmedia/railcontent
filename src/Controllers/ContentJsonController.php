@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Exceptions\ContentNotFoundException;
+use Railroad\Railcontent\Exceptions\DeleteFailedException;
+use Railroad\Railcontent\Exceptions\RailcontentException;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
@@ -156,20 +158,14 @@ class ContentJsonController extends Controller
      */
     public function delete($contentId, Request $request)
     {
-        // todo: refactor most of this to the service
-
-        $content = $this->contentService->getById($contentId);
-
-        $request->request->add(['content_id' => $contentId]);
-
-        //check if content exist; if not throw exception
-        throw_unless($content, ContentNotFoundException::class);
-
-        //call the event that save a new content version in the database
-        event(new ContentUpdated($contentId));
-
         //delete content
-        $this->contentService->delete($contentId);
+        $delete = $this->contentService->delete($contentId);
+
+        //if the delete method response it's null the content not exist; we throw the proper exception
+        throw_if(is_null($delete), ContentNotFoundException::class);
+
+        //if the delete method response it's false the mysql delete method was failed; we throw the proper exception
+        throw_if(!($delete), DeleteFailedException::class);
 
         return new JsonResponse(null, 204);
     }
