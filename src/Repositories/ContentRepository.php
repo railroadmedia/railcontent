@@ -225,6 +225,46 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @param integer $parentId
+     * @param string $type
+     * @return array|null
+     */
+    public function getByParentIdAndType($parentId, $type)
+    {
+        $contentRows = $this->query()
+            ->join(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.child_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->selectPrimaryColumns()
+            ->restrictStatuses()
+            ->restrictPublishedOnDate()
+            ->restrictBrand()
+            ->restrictByTypes($this->typesToInclude)
+            ->where('parent_id', $parentId)
+            ->where('type', $type)
+            ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
+    /**
      * Update a content record, recalculate position and return whether a row was updated or not.
      *
      * @param $id

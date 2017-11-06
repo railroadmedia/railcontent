@@ -11,7 +11,6 @@ use Railroad\Railcontent\Factories\PermissionsFactory;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentRepositoryTest extends RailcontentTestCase
@@ -389,5 +388,53 @@ class ContentRepositoryTest extends RailcontentTestCase
         $results = $this->classBeingTested->getBySlugHierarchy($this->faker->word);
 
         $this->assertNull($results);
+    }
+
+    public function test_get_by_parent_id_and_type()
+    {
+        $parentContent = [
+            'slug' => $this->faker->word,
+            'type' => 'lesson',
+            'status' => $this->faker->word,
+            'language' => 'en-US',
+            'brand' => ConfigService::$brand,
+            'published_on' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'archived_on' => Carbon::now()->toDateTimeString()
+        ];
+
+        $parentContentId = $this->classBeingTested->create($parentContent);
+
+        $expectedChildContents = [];
+
+        for ($i = 0; $i < 3; $i++) {
+            $childContent = [
+                'slug' => $this->faker->word,
+                'type' => 'lesson-part',
+                'status' => $this->faker->word,
+                'language' => 'en-US',
+                'brand' => ConfigService::$brand,
+                'published_on' => Carbon::now()->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+                'archived_on' => Carbon::now()->toDateTimeString()
+            ];
+
+            $childContent['id'] = $this->classBeingTested->create($childContent);
+            $childContent['fields'] = [];
+            $childContent['data'] = [];
+            $childContent['permissions'] = [];
+
+            $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
+                $parentContentId,
+                $childContent['id'],
+                1
+            );
+
+            $expectedChildContents[$childContent['id']] = $childContent;
+        }
+
+        $results = $this->classBeingTested->getByParentIdAndType($parentContentId, 'lesson-part');
+
+        $this->assertEquals($expectedChildContents, $results);
     }
 }

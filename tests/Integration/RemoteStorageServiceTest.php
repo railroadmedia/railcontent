@@ -12,6 +12,53 @@ class RemoteStorageServiceTest extends RailcontentTestCase
     /** @var string */
     protected $s3DirectoryForThisInstance;
 
+    protected function setUp()
+    {
+        parent::setUp();
+        
+        $this->awsConfigInitForTesting();
+
+        $this->s3DirectoryForThisInstance = '/test' . time();
+        $this->remoteStorageService = new RemoteStorageService($this->s3DirectoryForThisInstance);
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+
+        $contentsList = $this->remoteStorageService->listContents($this->s3DirectoryForThisInstance);
+        $notDeleted = [];
+
+        /*
+         * We're injecting an instance of RemoteStorageService into this test class (This file).
+         * When we do that we're setting a "root" dir of `$this->s3DirectoryForThisInstance` (which
+         * looks something like "/test1509570412"). But when we're done we want to delete everything
+         * added to s3 for running these tests. That means not only the files added to the directory,
+         * but also the directory itself. We can't call deleteDir() on root-even if it's only root
+         * relative to this test class instance. So, just create another instance of RemoteStorageService
+         * and do not declare a "root", thus defaulting to the one in the config. Then you can target
+         * the one created for the test class with deleteDir.
+         *      Jonathan, Nov 2017
+         */
+        $newRemoteStorageService = new RemoteStorageService();
+        $deleteDir = $newRemoteStorageService->deleteDir($this->s3DirectoryForThisInstance);
+
+        if (!$deleteDir) {
+            $this->fail('Failed to delete directory ' . $this->s3DirectoryForThisInstance . '.');
+        }
+
+        foreach ($contentsList as $item) {
+            if ($this->remoteStorageService->exists($item['path'])) {
+                $notDeleted[] = $item['path'];
+            };
+        }
+
+        if (!empty($notDeleted)) {
+            $this->fail('contents not deleted (' . var_export($notDeleted, true) . ')');
+        }
+    }
+
+
     /*
      * about filename vs filepath...
      *
