@@ -21,14 +21,16 @@ class RemoteStorageService
     {
         $client = new S3Client([
             'credentials' => [
-                'key'    => config('railcontent.awsS3.accessKey'),
-                'secret' => config('railcontent.awsS3.accessSecret')
+                'key'    => config('railcontent.awsS3_remote_storage.accessKey'),
+                'secret' => config('railcontent.awsS3_remote_storage.accessSecret')
             ],
-            'region' => config('railcontent.awsS3.region'),
+            'region' => config('railcontent.awsS3_remote_storage.region'),
             'version' => 'latest',
         ]);
 
-        $adapter = new AwsS3Adapter($client, config('railcontent.awsS3.bucket'), $optionalPathPrefix);
+        $adapter = new AwsS3Adapter(
+            $client, config('railcontent.awsS3_remote_storage.bucket'), $optionalPathPrefix
+        );
         $this->filesystem = new Filesystem($adapter);
     }
 

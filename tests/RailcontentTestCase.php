@@ -96,11 +96,11 @@ class RailcontentTestCase extends BaseTestCase
         // allows access to built in user auth
         $app['config']->set('auth.providers.users.model', User::class);
 
-        $app['config']->set('railcontent.awsS3', [
-            'accessKey' => AWS_S3_ACCESS_KEY,
-            'accessSecret' => AWS_S3_ACCESS_SECRET,
-            'region' => AWS_S3_REGION,
-            'bucket' => AWS_S3_BUCKET
+        $app['config']->set('railcontent.awsS3_remote_storage', [
+            'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
+            'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
+            'region' => env('AWS_S3_REMOTE_STORAGE_REGION'),
+            'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET')
         ]);
 
         $app['config']->set('railcontent.awsCloudFront', 'd1923uyy6spedc.cloudfront.net');
@@ -233,58 +233,31 @@ class RailcontentTestCase extends BaseTestCase
      */
     protected function awsConfigInitForTesting($dir = '/') // sad code is sad
     {
-        if (
-            !defined('AWS_S3_ACCESS_KEY') ||
-            !defined('AWS_S3_ACCESS_SECRET') ||
-            !defined('AWS_S3_REGION') ||
-            !defined('AWS_S3_BUCKET')
-        ) {
-            if (
-                !defined('AWS_S3_ACCESS_KEY') &&
-                !defined('AWS_S3_ACCESS_SECRET') &&
-                !defined('AWS_S3_REGION') &&
-                !defined('AWS_S3_BUCKET')
-            ) {
-                try {
-                    include __DIR__ . '../../.env.testing';
-                } catch (Exception $e) {
+        include __DIR__ . '../../.env.testing';
 
-                    if ($e->getMessage() === (
-                            'include(/app/railcontent/tests/Integration../../../.env.testing): ' .
-                            'failed to open stream: No such file or directory'
-                        )) {
-                        $this->fail(
-                            'You must create and fill the `/.env.testing` file first in order to run these tests.'
-                        );
-                    }
-
-                    $this->fail('Something is not right. Exception of type \"' . get_class($e) . '\" returns this ' .
-                        'message \"' . $e->getMessage() . '\".');
-                }
-            } else {
-                $this->fail('At least one (but not all) of the constants defined in `/.env.testing` are missing');
-            }
-            if (
-                !defined('AWS_S3_ACCESS_KEY') ||
-                !defined('AWS_S3_ACCESS_SECRET') ||
-                !defined('AWS_S3_REGION') ||
-                !defined('AWS_S3_BUCKET')
-            ) {
-                $this->fail('At least one (but not all) of the constants defined in `/.env.testing` are missing');
-            }
+        if (empty(env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'))) {
+            $this->fail(
+                "You must provide a value for the AWS_S3_REMOTE_STORAGE_ACCESS_KEY \'putenv' (" .
+                "environmental variable setting) function in `/.env.testing`."
+            );
         }
-
-        if (empty(AWS_S3_ACCESS_KEY)) {
-            $this->fail("You must provide a value for the AWS_S3_ACCESS_KEY constant in `/.env.testing`.");
+        if (empty(env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'))) {
+            $this->fail(
+                "You must provide a value for the AWS_S3_REMOTE_STORAGE_ACCESS_SECRET \'putenv' (" .
+                "environmental variable setting) function in `/.env.testing`."
+            );
         }
-        if (empty(AWS_S3_ACCESS_SECRET)) {
-            $this->fail("You must provide a value for the AWS_S3_ACCESS_SECRET constant in `/.env.testing`.");
+        if (empty(env('AWS_S3_REMOTE_STORAGE_REGION'))) {
+            $this->fail(
+                "You must provide a value for the AWS_S3_REMOTE_STORAGE_REGION \'putenv' (" .
+                "environmental variable setting) function in `/.env.testing`."
+            );
         }
-        if (empty(AWS_S3_REGION)) {
-            $this->fail("You must provide a value for the AWS_S3_REGION constant in `/.env.testing`.");
-        }
-        if (empty(AWS_S3_BUCKET)) {
-            $this->fail("You must provide a value for the AWS_S3_BUCKET constant in `/.env.testing`.");
+        if (empty(env('AWS_S3_REMOTE_STORAGE_BUCKET'))) {
+            $this->fail(
+                "You must provide a value for the AWS_S3_REMOTE_STORAGE_BUCKET \'putenv' (" .
+                "environmental variable setting) function in `/.env.testing`."
+            );
         }
     }
 

@@ -33,11 +33,11 @@ return [
             ]
         ]
     ],
-    'awsS3' => [
-        'accessKey' => AWS_S3_ACCESS_KEY,
-        'accessSecret' => AWS_S3_ACCESS_SECRET,
-        'region' => AWS_S3_REGION,
-        'bucket' => AWS_S3_BUCKET
+    'awsS3_remote_storage' => [
+        'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
+        'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
+        'region' => env('AWS_S3_REMOTE_STORAGE_REGION'),
+        'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET')
     ],
     'awsCloudFront' => 'd1923uyy6spedc.cloudfront.net'
 ];
