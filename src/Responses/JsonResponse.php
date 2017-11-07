@@ -1,5 +1,7 @@
 <?php
+
 namespace Railroad\Railcontent\Responses;
+
 use Illuminate\Contracts\Support\Responsable;
 
 
@@ -22,10 +24,9 @@ class JsonResponse implements Responsable
 
     public function toResponse($request)
     {
-        return response()->json(
-            $this->transformResult(),
-            $this->code
-        );
+        return response()
+            ->json($this->transformResult())
+            ->setStatusCode($this->code);
     }
 
     public function transformResult()
