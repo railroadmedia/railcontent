@@ -150,6 +150,53 @@ class ContentHelper
     }
 
     /**
+     * @param $userId
+     * @param $content
+     * @return string
+     */
+    public static function getUserContentProgressState($userId, $content)
+    {
+        if (!empty($content['user_progress'][$userId]['state'])) {
+            return $content['user_progress'][$userId]['state'];
+        }
+
+        return 'unbegun';
+    }
+
+    /**
+     * @param $userId
+     * @param $content
+     * @return string
+     */
+    public static function getUserContentProgressPercent($userId, $content)
+    {
+        if (!empty($content['user_progress'][$userId]['progress_percent'])) {
+            return $content['user_progress'][$userId]['progress_percent'];
+        }
+
+        return 0;
+    }
+
+    /**
+     * @param $content
+     * @param $playlistSlug
+     * @param $userId
+     * @return bool
+     */
+    public static function isContentInUserPlaylist($content, $playlistSlug, $userId)
+    {
+        if (!empty($content['user_playlists'][$userId])) {
+            foreach ($content['user_playlists'][$userId] as $userPlaylistContent) {
+                if ($userPlaylistContent['slug'] === $playlistSlug) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * @param $text
      * @return mixed|string
      */

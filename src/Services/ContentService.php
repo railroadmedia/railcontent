@@ -113,6 +113,16 @@ class ContentService
     }
 
     /**
+     * @param $childId
+     * @param $type
+     * @return array
+     */
+    public function getByChildIdWhereType($childId, $type)
+    {
+        return $this->contentRepository->getByChildIdWhereType($childId, $type);
+    }
+
+    /**
      *
      * Returns:
      * ['results' => $lessons, 'total_results' => $totalLessonsAfterFiltering]
@@ -232,7 +242,7 @@ class ContentService
         $content = $this->getById($id);
 
         //if the content not exist return null
-        if(!$content){
+        if (!$content) {
             return $content;
         }
 
@@ -252,36 +262,51 @@ class ContentService
      */
     public function delete($id)
     {
-
         $content = $this->getById($id);
 
         //if the content not exist return null
-        if(!$content){
+        if (!$content) {
             return $content;
         }
 
         event(new ContentUpdated($id));
+
         return $this->contentRepository->delete($id);
     }
 
     /**
-     * Return a string with the linked contents Ids
-     *
-     * @param integer $contentId
-     * @return string
+     * @param $userId
+     * @param array $contents
+     * @param null $singlePlaylistSlug
+     * @return array
      */
-    public function linkedWithContent($contentId)
+    public function attachUserPlaylistsToContents($userId, $contents, $singlePlaylistSlug = null)
     {
-        $linkedWithContent = $this->contentRepository->getLinkedContent($contentId);
+        $isArray = !isset($contents['id']);
 
-        $linkedContentsIds = implode(',', array_pluck($linkedWithContent, ['content_id']));
+        if (!$isArray) {
+            $contents = [$contents];
+        }
 
-        request()->request->add(
-            [
-                'linked_content_ids' => $linkedContentsIds
-            ]
+        $userPlaylistContents = $this->contentRepository->getByUserIdWhereChildIdIn(
+            $userId,
+            $contents,
+            $singlePlaylistSlug
         );
 
-        return $linkedContentsIds;
+        foreach ($contents as $index => $content) {
+            $contents[$index]['user_playlists'][$userId] = [];
+            foreach ($userPlaylistContents as $userPlaylistContent) {
+                if ($userPlaylistContent['parent_id'] == $content['id']) {
+                    $contents[$index]['user_playlists'][$userId][] = $userPlaylistContent;
+                }
+            }
+        }
+
+        if ($isArray) {
+            return $contents;
+        } else {
+            return reset($contents);
+        }
     }
 }

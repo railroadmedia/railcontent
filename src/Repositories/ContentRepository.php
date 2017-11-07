@@ -162,6 +162,81 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @param $parentId
+     * @return array
+     */
+    public function getByParentId($parentId)
+    {
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictStatuses()
+            ->restrictPublishedOnDate()
+            ->restrictBrand()
+            ->leftJoin(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.child_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
+            ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
+    /**
+     * @param $parentId
+     * @return array
+     */
+    public function getByChildIdWhereType($childId, $type)
+    {
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictStatuses()
+            ->restrictPublishedOnDate()
+            ->restrictBrand()
+            ->leftJoin(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.parent_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
+            ->where(ConfigService::$tableContent . '.type', $type)
+            ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
+    /**
      * @param array $slugs
      * @return array|null
      */
@@ -187,6 +262,50 @@ class ContentRepository extends RepositoryBase
             ->where('slug', $slug)
             ->where('type', $type)
             ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
+    /**
+     * @param $userId
+     * @param $childContentIds
+     * @param null $slug
+     * @return array
+     */
+    public function getByUserIdWhereChildIdIn($userId, $childContentIds, $slug = null)
+    {
+        $query = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictBrand()
+            ->restrictStatuses()
+            ->leftJoin(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.parent_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->whereIn(ConfigService::$tableContentHierarchy . '.child_id', $childContentIds)
+            ->where('user_id', $userId);
+
+        if (!empty($slug)) {
+            $query->where('slug', $slug);
+        }
+
+        $contentRows = $query->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
@@ -260,7 +379,6 @@ class ContentRepository extends RepositoryBase
         array $permissionRows
     ) {
         $contents = [];
-        $parents = [];
 
         $fieldRowsGrouped = ContentHelper::groupArrayBy($fieldRows, 'content_id');
         $datumRowsGrouped = ContentHelper::groupArrayBy($datumRows, 'content_id');
@@ -278,6 +396,7 @@ class ContentRepository extends RepositoryBase
                 'published_on' => $contentRow['published_on'],
                 'created_on' => $contentRow['created_on'],
                 'archived_on' => $contentRow['archived_on'],
+                'parent_id' => $contentRow['parent_id'] ?? null,
                 'fields' => $fieldRowsGrouped[$contentRow['id']] ?? [],
                 'data' => $datumRowsGrouped[$contentRow['id']] ?? [],
                 'permissions' => array_merge(
