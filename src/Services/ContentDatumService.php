@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 
 class ContentDatumService
@@ -67,6 +68,22 @@ class ContentDatumService
      */
     public function update($id, array $data)
     {
+        //check if datum exist in the database
+        $datum = $this->get($id);
+
+        if (is_null($datum)) {
+            return $datum;
+        }
+
+        //don't update the datum if the request not contain any value
+        if(count($data) == 0) {
+            return $datum;
+        }
+
+        //save a content version before datum update
+        // todo: this should be after the datum is saved, or renamed to 'ContentUpdating' if its being triggered before the actual update
+        event(new ContentUpdated($datum['content_id']));
+
         $this->datumRepository->update($id, $data);
 
         return $this->get($id);
@@ -78,6 +95,17 @@ class ContentDatumService
      */
     public function delete($id)
     {
+        //check if datum exist in the database
+        $datum = $this->get($id);
+
+        if (is_null($datum)) {
+           return $datum;
+        }
+
+        //save a content version before datum deletion
+        // todo: this should be after the datum is deleted and renamed to DatumDeleted
+        event(new ContentUpdated($datum['content_id']));
+
         return $this->datumRepository->delete($id);
     }
 }

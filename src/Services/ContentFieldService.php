@@ -62,6 +62,19 @@ class ContentFieldService
      */
     public function update($id, array $data)
     {
+        //Check if field exist in the database
+        $field = $this->get($id);
+
+        if (is_null($field)) {
+            return $field;
+        }
+
+        if(count($data) == 0) {
+            return $field;
+        }
+        //Save a content version
+       // event(new ContentUpdated($request->input('content_id', $field['content_id'])));
+
         $this->fieldRepository->update($id, $data);
 
         return $this->get($id);
@@ -75,6 +88,13 @@ class ContentFieldService
      */
     public function delete($id)
     {
+        //Check if field exist in the database
+        $field = $this->get($id);
+
+        if (is_null($field)) {
+            return $field;
+        }
+
         return $this->fieldRepository->delete($id);
     }
 

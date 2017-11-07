@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\DatumUpdate;
+use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentDatumCreateRequest;
 use Railroad\Railcontent\Requests\ContentDatumUpdateRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
@@ -29,7 +30,7 @@ class ContentDatumJsonController extends Controller
      * Call the method from service that create new data and link the content with the data.
      *
      * @param ContentDatumCreateRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Railroad\Railcontent\Responses\JsonResponse
      */
     public function store(ContentDatumCreateRequest $request)
     {
@@ -52,21 +53,10 @@ class ContentDatumJsonController extends Controller
      *
      * @param integer $dataId
      * @param ContentDatumUpdateRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Railroad\Railcontent\Responses\JsonResponse
      */
     public function update($dataId, ContentDatumUpdateRequest $request)
     {
-        //check if datum exist in the database
-        $datum = $this->datumService->get($dataId);
-
-        if (is_null($datum)) {
-            return response()->json('Update failed, datum not found with id: ' . $dataId, 404);
-        }
-
-        //save a content version before datum update
-        // todo: this should be after the datum is saved, or renamed to 'ContentUpdating' if its being triggered before the actual update
-        event(new ContentUpdated($datum['content_id']));
-
         $categoryData = $this->datumService->update(
             $dataId,
             array_intersect_key(
@@ -80,6 +70,9 @@ class ContentDatumJsonController extends Controller
             )
         );
 
+        //if the update method response it's null the datum not exist; we throw the proper exception
+        throw_if(is_null($categoryData), new NotFoundException('Update failed, datum not found with id: ' . $dataId));
+
         return new JsonResponse($categoryData, 201);
     }
 
@@ -88,24 +81,14 @@ class ContentDatumJsonController extends Controller
      *
      * @param integer $dataId
      * @param Request $request
+     * @return \Railroad\Railcontent\Responses\JsonResponse
      */
-    public function delete($dataId, Request $request)
+    public function delete($dataId)
     {
-        //check if datum exist in the database
-        $datum = $this->datumService->getDatum($dataId, $request->input('content_id'));
+        $deleted = $this->datumService->delete($dataId);
 
-        if (is_null($datum)) {
-            return response()->json('Delete failed, datum not found with id: ' . $dataId, 404);
-        }
-
-        //save a content version before datum deletion
-        // todo: this should be after the datum is deleted and renamed to DatumDeleted
-        event(new ContentUpdated($request->input('content_id')));
-
-        $deleted = $this->datumService->deleteDatum(
-            $dataId,
-            $request->input('content_id')
-        );
+        //if the update method response it's null the datum not exist; we throw the proper exception
+        throw_if(is_null($deleted), new NotFoundException('Delete failed, datum not found with id: ' . $dataId));
 
         return new JsonResponse(null, 204);
     }

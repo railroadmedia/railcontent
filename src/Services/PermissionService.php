@@ -59,6 +59,13 @@ class PermissionService
      */
     public function update($id, $name)
     {
+        //check if permission exist in the database
+        $permission = $this->get($id);
+
+        if(is_null($permission)){
+            return $permission;
+        }
+
         $this->permissionRepository->update($id, ['name' => $name]);
 
         return $this->get($id);
@@ -72,6 +79,13 @@ class PermissionService
      */
     public function delete($id)
     {
+        //check if permission exist in the database
+        $permission = $this->get($id);
+
+        if(is_null($permission)){
+            return $permission;
+        }
+
         return $this->permissionRepository->delete($id) > 0;
     }
 }
