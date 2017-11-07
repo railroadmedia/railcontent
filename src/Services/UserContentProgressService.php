@@ -32,17 +32,21 @@ class UserContentProgressService
      */
     public function startContent($contentId, $userId)
     {
-        $userContentId =
-            $this->userContentRepository->updateOrCreate(
-                [
-                    'content_id' => $contentId,
-                    'user_id' => $userId,
-                ],
-                [
-                    'state' => UserContentProgressService::STATE_STARTED,
-                    'updated_on' => Carbon::now()->toDateTimeString(),
-                ]
-            );
+        $isCompleted = $this->userContentRepository->isContentAlreadyCompleteForUser($contentId, $userId);
+
+        if (!$isCompleted) {
+            $userContentId =
+                $this->userContentRepository->updateOrCreate(
+                    [
+                        'content_id' => $contentId,
+                        'user_id' => $userId,
+                    ],
+                    [
+                        'state' => UserContentProgressService::STATE_STARTED,
+                        'updated_on' => Carbon::now()->toDateTimeString(),
+                    ]
+                );
+        }
 
         return true;
     }

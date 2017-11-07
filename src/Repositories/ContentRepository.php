@@ -178,6 +178,7 @@ class ContentRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContent . '.id'
             )
+            ->orderBy('child_position', 'asc', ConfigService::$tableContentHierarchy)
             ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
             ->getToArray();
 

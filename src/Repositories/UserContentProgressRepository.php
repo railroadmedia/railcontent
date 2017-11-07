@@ -20,6 +20,20 @@ class UserContentProgressRepository extends RepositoryBase
             ->toArray();
     }
 
+    /**
+     * @param $userId
+     * @param $contentId
+     * @return bool
+     */
+    public function isContentAlreadyCompleteForUser($contentId, $userId)
+    {
+        return $this->query()
+            ->where('user_id', $userId)
+            ->where('content_id', $contentId)
+            ->where('state', 'completed')
+            ->exists();
+    }
+
     public function query()
     {
         return parent::connection()->table(ConfigService::$tableUserContentProgress);

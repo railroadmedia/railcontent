@@ -53,9 +53,9 @@ class ContentQueryBuilder extends Builder
      * @param string $direction
      * @return $this
      */
-    public function orderBy($column = null, $direction = 'asc')
+    public function orderBy($column = null, $direction = 'asc', $table = null)
     {
-        parent::orderBy(ConfigService::$tableContent . '.' . $column, $direction);
+        parent::orderBy(($table ?? ConfigService::$tableContent) . '.' . $column, $direction);
 
         return $this;
     }
