@@ -30,11 +30,8 @@ class LanguageMiddleware
             $locale = ConfigService::$defaultLanguage;
         }
 
-        // check if the language defined is supported by the CMS
-        if (!in_array($locale, ConfigService::$availableLanguages)) {
-            // respond with error
-            return abort(403, 'Language not supported.');
-        }
+        // check if the language defined is supported by the CMS; if not return not found exception
+        throw_if(!in_array($locale, ConfigService::$availableLanguages), new NotFoundException('The language with locale ' . $locale . ' is not supported by the CMS.'));
 
         // only show content in this language
         // this may change in the future
