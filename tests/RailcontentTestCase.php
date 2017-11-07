@@ -323,4 +323,13 @@ class RailcontentTestCase extends BaseTestCase
         return $name . '.' . $extension;
     }
 
+    public function createExpectedResult($status, $code, $results)
+    {
+        return [
+            "status" => $status,
+            "code" => $code,
+            "results" => $results
+        ];
+    }
+
 }
