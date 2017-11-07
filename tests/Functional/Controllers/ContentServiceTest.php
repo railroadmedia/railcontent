@@ -65,23 +65,19 @@ class ContentServiceTest extends RailcontentTestCase
         $content = $this->contentFactory->create();
 
         $randomField = $this->fieldFactory->create(
-            [
-                0 => $content['id']
-            ]
+            $content['id']
+
         );
 
         $randomDatum = $this->datumFactory->create(
-            [
-                0 => $content['id']
-            ]
+            $content['id']
+
         );
 
         $results = $this->serviceBeingTested->getById($content['id']);
 
         unset(
-            $randomField['content_id'],
             $randomField['field_id'],
-            $randomDatum['content_id'],
             $randomDatum['datum_id']
         );
 

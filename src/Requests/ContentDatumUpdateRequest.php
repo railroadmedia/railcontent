@@ -16,7 +16,7 @@ class ContentDatumUpdateRequest extends CustomFormRequest
         //set the general validation rules
         $this->setGeneralRules(
             [
-                'id' => 'required|max:255|exists:' . ConfigService::$tableContentData . ',id',
+               // 'id' => 'required|max:255|exists:' . ConfigService::$tableContentData . ',id',
                 'key' => 'max:255',
                 'position' => 'nullable|numeric|min:0',
                 'content_id' => 'numeric|exists:' . ConfigService::$tableContent . ',id'

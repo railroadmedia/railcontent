@@ -2,16 +2,14 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Repositories\CategoryRepository;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentService;
 
 class ContentDatumControllerTest extends RailcontentTestCase
 {
@@ -21,6 +19,11 @@ class ContentDatumControllerTest extends RailcontentTestCase
      */
     protected $contentFactory;
 
+    /**
+     * @var ContentDatumFactory
+     */
+    protected $contentDatumFactory;
+
     protected function setUp()
     {
         parent::setUp();
@@ -28,7 +31,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $this->serviceBeingTested = $this->app->make(ContentDatumService::class);
         $this->classBeingTested = $this->app->make(ContentDatumRepository::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
-        $userId = $this->createAndLogInNewUser();
+        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
     }
 
     public function test_add_content_datum_controller_method_response()
@@ -66,8 +69,8 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $response = $this->call('PUT', 'railcontent/content/datum');
 
         $this->assertEquals(422, $response->status());
-        $this->assertContains('key', array_column(json_decode($response->getContent())->errors,'source'));
-        $this->assertContains('content_id', array_column(json_decode($response->getContent())->errors,'source'));
+        $this->assertContains('key', array_column(json_decode($response->getContent())->errors, 'source'));
+        $this->assertContains('content_id', array_column(json_decode($response->getContent())->errors, 'source'));
     }
 
     public function test_add_content_datum_key_not_pass_the_validation()
@@ -78,12 +81,8 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $response = $this->call('PUT', 'railcontent/content/datum', ['content_id' => 1, 'key' => $key, 'value' => $value]);
 
         $this->assertEquals(422, $response->status());
-        $this->assertContains('key', array_column(json_decode($response->getContent())->errors,'source'));
-        $this->assertContains('content_id', array_column(json_decode($response->getContent())->errors,'source'));
-        //$response->assertSessionHasErrors();
-
-        //expecting session has error for key field
-        //$response->assertSessionHasErrors(['key']);
+        $this->assertContains('key', array_column(json_decode($response->getContent())->errors, 'source'));
+        $this->assertContains('content_id', array_column(json_decode($response->getContent())->errors, 'source'));
     }
 
     public function test_update_content_datum_controller_method_response()
@@ -100,7 +99,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
         $new_value = $this->faker->text();
 
-        $response = $this->call('PUT', 'railcontent/content/datum/' . $dataId, [
+        $response = $this->call('PATCH', 'railcontent/content/datum/' . $dataId, [
             'content_id' => $content['id'],
             'key' => $data['key'],
             'value' => $new_value,
@@ -109,186 +108,120 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
         $this->assertEquals(201, $response->status());
 
-        $response->assertJsonStructure(
-            [
-                'id',
-                'content_id',
-                'key',
-                'value',
-                'position'
-            ]
-        );
-
         $response->assertJson(
             [
-                'id' => 1,
-                'content_id' => $content['id'],
-                'key' => $data['key'],
-                'value' => $new_value,
-                'position' => $data['position']
+                'results' =>
+                    [
+                        'id' => 1,
+                        'content_id' => $content['id'],
+                        'key' => $data['key'],
+                        'value' => $new_value,
+                        'position' => $data['position']
+                    ]
             ]
         );
     }
 
     public function test_update_content_datum_not_pass_validation()
     {
-        $contentId = $this->createContent();
+        $content = $this->contentFactory->create();
 
         $data = [
             'key' => $this->faker->word,
-            'position' => $this->faker->numberBetween()
+            'value' => $this->faker->word,
+            'position' => $this->faker->numberBetween(),
+            'content_id' => $content['id'],
         ];
-        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
+        $dataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($data);
 
-        $contentData = [
-            'content_id' => $contentId,
-            'datum_id' => $dataId
-        ];
-        $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
+        $response = $this->call('PATCH', 'railcontent/content/datum/' . $dataId, [
+            'key' => $this->faker->text(500)
+        ]);
 
-        $response = $this->call('PUT', 'railcontent/content/datum/' . $dataId);
-
-        $this->assertEquals(302, $response->status());
-
-        $response->assertSessionHasErrors();
-
-        //expecting session has error for missing fields
-        $response->assertSessionHasErrors(['key', 'value', 'content_id']);
+        $this->assertEquals(422, $response->status());
+        $this->assertContains('key', array_column(json_decode($response->getContent())->errors, 'source'));
     }
 
     public function test_delete_content_datum_controller()
     {
-        $contentId = $this->createContent();
+        $content = $this->contentFactory->create();
 
-        $data = [
-            'key' => $this->faker->word,
-            'position' => $this->faker->numberBetween()
-        ];
-        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
 
-        $contentData = [
-            'content_id' => $contentId,
-            'datum_id' => $dataId
-        ];
-        $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
+        $data = $this->contentDatumFactory->create($content['id']);
 
-        $response = $this->call('DELETE', 'railcontent/content/datum/' . $dataId, [
-            'content_id' => $contentId
-        ]);
+        $response = $this->call('DELETE', 'railcontent/content/datum/' . $data['id']);
 
-        $this->assertEquals(1, $response->content());
-        $this->assertEquals(200, $response->status());
+        $this->assertNull(json_decode($response->content()));
+        $this->assertEquals(204, $response->status());
     }
 
     public function test_update_content_datum_method_from_service_response()
     {
-        $contentId = $this->createContent();
+        $content = $this->contentFactory->create();
 
-        $data = [
-            'key' => $this->faker->word,
+        $data = $this->contentDatumFactory->create($content['id']);
+
+        $newData = [
+            'key' => $data['key'],
+            'value' => $this->faker->text(500),
             'position' => $this->faker->numberBetween()
         ];
-        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
+        $updatedData = $this->serviceBeingTested->update($data['id'], $newData);
 
-        $contentData = [
-            'content_id' => $contentId,
-            'datum_id' => $dataId
-        ];
-        $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
-
-        $new_value = $this->faker->text(500);
-        $categoryField = $this->serviceBeingTested->updateDatum($contentId, $dataId, $data['key'], $new_value, $data['position']);
-
-        $expectedResult = [
-            'id' => $contentDataId,
-            'content_id' => $contentId,
-            'datum_id' => $dataId,
-            'key' => $data['key'],
-            'value' => $new_value,
-            'position' => $data['position']
-        ];
-
-        $this->assertEquals($expectedResult, $categoryField);
+        $this->assertEquals(array_merge(
+            [
+                'id' => $data['id'],
+                'content_id' => $content['id']
+            ],
+            $newData), $updatedData);
     }
 
     public function test_get_content_datum_method_from_service_response()
     {
-        $contentId = $this->createContent();
-        $contentSlug = $this->faker->word;
-        $this->translateItem($this->classBeingTested->getUserLanguage(), $contentId, ConfigService::$tableContent, $contentSlug);
+        $content = $this->contentFactory->create();
 
-        $data = [
-            'key' => $this->faker->word,
-            'position' => $this->faker->numberBetween()
-        ];
-        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
-        $dataValue = $this->faker->word;
-        $this->translateItem($this->classBeingTested->getUserLanguage(), $dataId, ConfigService::$tableData, $dataValue);
+        $data = $this->contentDatumFactory->create($content['id']);
 
-        $contentData = [
-            'content_id' => $contentId,
-            'datum_id' => $dataId
-        ];
-        $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
+        $results = $this->serviceBeingTested->get($data['id']);
 
-        $results = $this->serviceBeingTested->getDatum($dataId, $contentId);
-
-        $expectedResults = [
-            'id' => $contentDataId,
-            'content_id' => $contentId,
-            'datum_id' => $dataId,
-            'key' => $data['key'],
-            'value' => $dataValue,
-            'position' => $data['position']
-        ];
-
-        $this->assertEquals($expectedResults, $results);
+        $this->assertEquals($data, $results);
     }
 
     public function test_delete_content_datum_method_from_service_response()
     {
-        $contentId = $this->createContent();
+        $content = $this->contentFactory->create();
 
-        $data = [
-            'key' => $this->faker->word,
-            'position' => $this->faker->numberBetween()
-        ];
-        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
+        $data = $this->contentDatumFactory->create($content['id']);
 
-        $contentData = [
-            'content_id' => $contentId,
-            'datum_id' => $dataId
-        ];
-        $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
-
-        $results = $this->serviceBeingTested->deleteDatum($dataId, $contentId);
+        $results = $this->serviceBeingTested->delete($data['id']);
 
         $this->assertEquals(1, $results);
     }
 
-    public function test_content_updated_event_dispatched_when_link_content_datum()
+    public function content_updated_event_dispatched_when_link_content_datum()
     {
-        Event::fake();
+        // Event::fake();
 
-        $contentId = $this->createContent();
+        $content = $this->contentFactory->create();
 
         $key = $this->faker->word;
         $value = $this->faker->text(500);
 
-        $response = $this->call('POST', 'railcontent/content/datum', [
-            'content_id' => $contentId,
+        $response = $this->call('PATCH', 'railcontent/content/datum', [
+            'content_id' => $content['id'],
             'key' => $key,
             'value' => $value,
             'position' => 1
         ]);
 
+        $this->expectsEvents(\Railroad\Railcontent\Events\ContentUpdated::class);
         //check that the ContentUpdated event was dispatched with the correct content id
-        Event::assertDispatched(ContentUpdated::class, function ($event) use ($contentId) {
-            return $event->contentId == $contentId;
-        });
+        /* Event::assertDispatched(ContentUpdated::class, function ($event) use ($content) {
+             return $event->contentId == $content['id'];
+         }); */
     }
 
-    public function test_content_updated_event_dispatched_when_unlink_content_datum()
+    public function content_updated_event_dispatched_when_unlink_content_datum()
     {
         Event::fake();
 

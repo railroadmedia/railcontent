@@ -3,14 +3,13 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Factories\ContentContentFieldFactory;
+use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentHierarchyFactory;
-use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Services\PlaylistsService;
-use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Response;
 
@@ -26,8 +25,24 @@ class ContentJsonControllerTest extends RailcontentTestCase
      */
     protected $contentFactory;
 
+    /**
+     * @var ContentHierarchyFactory
+     */
     protected $contentHierarchyFactory;
 
+    /**
+     * @var ContentContentFieldFactory
+     */
+    protected $fieldFactory;
+
+    /**
+     * @var ContentDatumFactory
+     */
+    protected $contentDatumFactory;
+
+    /**
+     * @var ContentService
+     */
     protected $serviceBeingTested;
 
     protected function setUp()
@@ -36,6 +51,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
+        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
         $this->serviceBeingTested = $this->app->make(ContentService::class);
         $this->classBeingTested = $this->app->make(ContentRepository::class);
     }
@@ -197,24 +214,27 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(201, $response->getStatusCode());
-
-        $response->assertJson(
-            [
-                'results' => [
-                    1 =>
-                        [
-                            'id' => '1',
-                            'slug' => $slug,
-                            'brand' => ConfigService::$brand,
-                            'language' => ConfigService::$defaultLanguage,
-                            'status' => $status,
-                            'type' => $type,
-                            'created_on' => Carbon::now()->toDateTimeString()
-                        ]
+        $expectedResults = $this->createExpectedResult('ok', 201, [
+            1 =>
+                [
+                    'id' => '1',
+                    'slug' => $slug,
+                    'brand' => ConfigService::$brand,
+                    'language' => ConfigService::$defaultLanguage,
+                    'status' => $status,
+                    'type' => $type,
+                    'created_on' => Carbon::now()->toDateTimeString(),
+                    'published_on' => null,
+                    'archived_on' => null,
+                    'fields' => [],
+                    'data' => [],
+                    'permissions' => []
                 ]
-            ]
-        );
+        ]);
+
+        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+
+
     }
 
     public function test_content_service_return_new_content_after_create()
@@ -572,8 +592,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
                 'type' => $types[0],
-                //'position' => $this->faker->numberBetween(),
-                //'parent_id' => null,
                 'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
                 'created_on' => Carbon::now()->toDateTimeString(),
                 'brand' => ConfigService::$brand,
@@ -587,23 +605,20 @@ class ContentJsonControllerTest extends RailcontentTestCase
         }
 
         $contentWithFieldsNr = 5;
+        $fieldKey = $this->faker->word;
+        $fieldValue = $this->faker->text();
+        $fieldType = 'string';
+
+        $filter = [$fieldKey . ',' . $fieldValue . ',' . $fieldType];
+        $expectedContent['filter_options'] = [];
 
         for ($i = 1; $i < $contentWithFieldsNr; $i++) {
-            $field = [
-                'content_id' => $this->faker->word,
-                'key' => $this->faker->word,
-                'value' => $this->faker->text(255),
-                'type' => 'string',
-                'position' => $this->faker->numberBetween()
-            ];
-
-            $fieldId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId($field);
-
-            $filter = [$field['key'] . ',' . $field['value'] . ',' . $field['type']];
-            $expectedContent['filter_options'] = [$field['key'] => [$field['value']]];
+            $field = $this->fieldFactory->create($contents[$i]['id'], $fieldKey, $fieldValue, null, $fieldType);
 
             $expectedResults[$i] = $contents[$i];
-            $expectedResults[$i]['fields'][] = array_merge($field, ['id' => $fieldId]);
+            $expectedResults[$i]['fields'][] = array_merge($field, ['id' => $field['id']]);
+            $expectedResults[$i]['data'] = [];
+            $expectedResults[$i]['permissions'] = [];
         }
         $expectedContent['results'] = $expectedResults;
         $expectedContent['total_results'] = $contentWithFieldsNr - 1;
@@ -641,111 +656,54 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         //create 30th courses
         for ($i = 0; $i < 30; $i++) {
-            $content = [
-                'slug' => $this->faker->word,
-                'status' => $this->faker->randomElement($statues),
-                'type' => $types[0],
-                //'position' => $this->faker->numberBetween(),
-                //'parent_id' => null,
-                'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'brand' => ConfigService::$brand,
-                'language' => ConfigService::$defaultLanguage,
-                'archived_on' => null
-            ];
-
-            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+            $content = $this->contentFactory->create($this->faker->word, $types[0]);
+            $contents[$content['id']] = $content;
         }
 
         //create the required field
-        $field = [
+        $requiredField = [
             'key' => $this->faker->word,
             'value' => $this->faker->text(255),
-            'type' => 'string',
-            'position' => $this->faker->numberBetween()
+            'type' => 'string'
         ];
-
-        $fieldId = $this->query()->table(ConfigService::$tableFields)->insertGetId($field);
 
         //only first 5 courses have the required field associated
         for ($i = 1; $i < 6; $i++) {
-            $contentField = [
-                'content_id' => $contents[$i]['id'],
-                'field_id' => $fieldId
-            ];
+            $field = $this->fieldFactory->create($contents[$i]['id'], $requiredField['key'], $requiredField['value'], null, $requiredField['type']);
 
-            $contentFieldId =
-                $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField);
             $expectedResults[$i] = $contents[$i];
-            $expectedResults[$i]['fields'][] = array_merge($field, ['id' => $fieldId]);
+            $expectedResults[$i]['fields'][] = $field;
         }
 
-        $instructor = [
-            'slug' => $this->faker->word,
-            'status' => $this->faker->randomElement($statues),
-            'type' => 'instructor',
-            // 'position' => $this->faker->numberBetween(),
-            // 'parent_id' => null,
-            'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'brand' => ConfigService::$brand,
-            'language' => ConfigService::$defaultLanguage
-        ];
-
-        $instructorId = $this->query()->table(ConfigService::$tableContent)->insertGetId($instructor);
+        $instructor = $this->contentFactory->create($this->faker->word, 'instructor', $this->faker->randomElement($statues));
 
         $fieldInstructor = [
             'key' => 'instructor',
-            'value' => $instructorId,
-            'type' => 'content_id',
-            'position' => $this->faker->numberBetween()
+            'value' => $instructor['id'],
+            'type' => 'content_id'
         ];
 
-        $fieldInstructorId =
-            $this->query()->table(ConfigService::$tableFields)->insertGetId($fieldInstructor);
-
         for ($i = 1; $i < 7; $i++) {
-            $contentField = [
-                'content_id' => $contents[$i]['id'],
-                'field_id' => $fieldInstructorId
-            ];
-
-            $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField);
-
+            $contentField = $this->fieldFactory->create($contents[$i]['id'], $fieldInstructor['key'], $fieldInstructor['value'], null, $fieldInstructor['type']);
+            $contentField['type'] = 'content';
+            $contentField['value'] = $instructor;
             if (array_key_exists($i, $expectedResults)) {
-                $expectedResults[$i]['fields'][] =
-                    array_merge($fieldInstructor, ['id' => $fieldInstructorId]);
+                $expectedResults[$i]['fields'][] = $contentField;
+
             }
         }
 
-        $datum = [
-            'key' => $this->faker->word,
-            'value' => $this->faker->word,
-            'position' => $this->faker->numberBetween()
-        ];
-
-        $datumId = $this->query()->table(ConfigService::$tableData)->insertGetId($datum);
-
         for ($i = 1; $i < 25; $i++) {
-            $contentDatum = [
-                'content_id' => $contents[$i]['id'],
-                'datum_id' => $datumId
-            ];
-
-            $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentDatum);
+            $datum = $this->contentDatumFactory->create($contents[$i]['id']);
 
             if (array_key_exists($i, $expectedResults)) {
-                $expectedResults[$i]['data'][] = array_merge($datum, ['id' => $datumId]);
+                $expectedResults[$i]['data'][] = $datum;
             }
         }
 
         $expectedContent['results'] = $expectedResults;
         $expectedContent['total_results'] = count($expectedContent['results']);
-        $expectedContent['filter_options'] = [
-            $field['key'] => [$field['value']],
-            $fieldInstructor['key'] => [$fieldInstructor['value']]
-        ];
+        $expectedContent['filter_options'] = [];
 
         $response = $this->call(
             'GET',
@@ -758,7 +716,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'filter' => [
                     'required_fields' =>
                         [
-                            $field['key'] . ',' . $field['value'] . ',' . $field['type'],
+                            $requiredField['key'] . ',' . $requiredField['value'] . ',' . $requiredField['type'],
                             $fieldInstructor['key'] . ',' . $fieldInstructor['value'] . ',' . $fieldInstructor['type']
                         ]
                 ],
@@ -768,214 +726,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $responseContent = $response->content();
 
         $this->assertEquals($expectedContent, json_decode($responseContent, true));
-    }
-
-    //Get first 10 lessons for the course with given instructor
-    public function test_get_course_lesson_for_instructor()
-    {
-        $page = 1;
-        $limit = 10;
-        $orderByDirection = 'asc';
-        $orderByColumn = 'id';
-        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
-        $parentId = null;
-        $instructorSlug = $this->faker->word;
-
-        $requiredFields = [
-            'instructor' => [$instructorSlug],
-        ];
-
-        $course1 = [
-            'slug' => $this->faker->word,
-            'status' => $this->faker->randomElement($statues),
-            'type' => 'course',
-            'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-            'brand' => ConfigService::$brand,
-            'language' => ConfigService::$defaultLanguage,
-            'archived_on' => null
-        ];
-        $courseId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($course1);
-
-        $instructor = [
-            'slug' => $instructorSlug,
-            'status' => $this->faker->randomElement($statues),
-            'type' => 'instructor',
-            'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => null,
-            'brand' => ConfigService::$brand,
-            'language' => ConfigService::$defaultLanguage,
-            'archived_on' => null
-        ];
-        $instructorId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($instructor);
-
-        $fieldInstructor = [
-            'key' => 'instructor',
-            'value' => $instructorId1,
-            'type' => 'content_id'
-        ];
-        $fieldId1 = $this->query()->table(ConfigService::$tableFields)->insertGetId($fieldInstructor);
-
-        $contentField = [
-            'content_id' => $courseId1,
-            'field_id' => $fieldId1
-        ];
-
-        $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField);
-
-        for ($i = 0; $i < 25; $i++) {
-            $content = [
-                'slug' => $this->faker->word,
-                'status' => $this->faker->randomElement($statues),
-                'type' => 'course lesson',
-                'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => null,
-                'brand' => ConfigService::$brand,
-                'language' => ConfigService::$defaultLanguage,
-                'archived_on' => null
-            ];
-
-            $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
-
-            //save the hierarchy
-            $this->contentHierarchyFactory->create(
-                [$courseId1, $contentId, $i + 1]
-            );
-
-            $contents[$contentId] = array_merge($content, ['id' => $contentId]);
-        }
-
-        //Get the course lesson with instructor
-        $expectedContent = array_slice($contents, 0, $limit, true);
-
-        $response = $this->call(
-            'GET',
-            'railcontent/content',
-            [
-                'page' => $page,
-                'limit' => $limit,
-                'included_types' => ['course lesson'],
-                'filter' => ['required_fields' => [$fieldInstructor['key'] . ',' . $instructorSlug . ',' . $fieldInstructor['type']]],
-                'sort' => $orderByColumn,
-            ]
-        );
-
-        $results = json_decode($response->content(), true);
-
-        $this->assertEquals($expectedContent, $results['results']);
-    }
-
-    //get courses from my playlist with given name and with given instructor
-    public function test_pull_lessons_from_playlist_with_instructor()
-    {
-        $page = 1;
-        $limit = 10;
-        $orderByDirection = 'asc';
-        $orderByColumn = 'id';
-        $statues = [$this->faker->word, $this->faker->word, $this->faker->word];
-        $parentId = null;
-        $instructorSlug = $this->faker->word;
-
-        $requiredFields = [
-            'instructor' => [$instructorSlug],
-        ];
-
-        $course1 = [
-            'slug' => $this->faker->word,
-            'status' => $this->faker->randomElement($statues),
-            'type' => 'course',
-            'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'brand' => ConfigService::$brand,
-            'language' => ConfigService::$defaultLanguage,
-            'archived_on' => null
-        ];
-        $courseId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($course1);
-
-        $instructor = [
-            'slug' => $instructorSlug,
-            'status' => $this->faker->randomElement($statues),
-            'type' => 'instructor',
-            'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'brand' => ConfigService::$brand,
-            'language' => ConfigService::$defaultLanguage
-        ];
-        $instructorId1 = $this->query()->table(ConfigService::$tableContent)->insertGetId($instructor);
-
-        $fieldInstructor = [
-            'key' => 'instructor',
-            'value' => $instructorId1,
-            'type' => 'content_id'
-        ];
-        $fieldId1 = $this->query()->table(ConfigService::$tableFields)->insertGetId($fieldInstructor);
-
-        $contentField = [
-            'content_id' => $courseId1,
-            'field_id' => $fieldId1
-        ];
-
-        $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField);
-
-        //create playlists
-        $playlist = [
-            'name' => $this->faker->word,
-            'type' => PlaylistsService::PRIVACY_PUBLIC,
-            'brand' => ConfigService::$brand
-        ];
-        $playlistId = $this->query()->table(ConfigService::$tablePlaylists)->insertGetId($playlist);
-
-        //add content to the playlist
-        $userContent = [
-            'content_id' => $courseId1,
-            'user_id' => $this->createAndLogInNewUser(),
-            'state' => UserContentProgressService::STATE_ADDED_TO_LIST,
-            'progress_percent' => $this->faker->numberBetween(1, 99)
-        ];
-        $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
-
-        $userContentPlaylist = [
-            'content_user_id' => $userContentId,
-            'playlist_id' => $playlistId
-        ];
-        $userContentPlaylistId =
-            $this->query()->table(ConfigService::$tablePlaylistContents)->insertGetId(
-                $userContentPlaylist
-            );
-
-        $expectedContent[$courseId1] = array_merge(
-            $course1,
-            [
-                'id' => $courseId1,
-                'fields' => [array_merge($fieldInstructor, ['id' => $fieldId1, 'position' => null])]
-            ]
-        );
-
-        $response = $this->call(
-            'GET',
-            'railcontent/content',
-            [
-                'page' => $page,
-                'limit' => $limit,
-                'included_types' => ['course'],
-                'filter' => [
-                    'required_fields' => [
-                        $fieldInstructor['key'] . ',' . $instructorSlug . ',' . $fieldInstructor['type']
-                    ],
-                    'required_user_playlists' => [
-                        $userContent['user_id'] . ',' . $playlist['name']
-                    ]
-                ],
-                'sort' => $orderByColumn
-            ]
-        );
-
-        $results = json_decode($response->content(), true);
-
-        $this->assertEquals($expectedContent, $results['results']);
     }
 
     /**
