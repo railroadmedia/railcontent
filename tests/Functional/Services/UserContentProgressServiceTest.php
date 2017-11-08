@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\UserContentProgressService;
@@ -58,7 +59,8 @@ class UserContentProgressServiceTest extends RailcontentTestCase
             'content_id' => $contentId,
             'user_id' => $userId,
             'state' => UserContentProgressService::STATE_STARTED,
-            'progress_percent' => $this->faker->numberBetween(0, 99)
+            'progress_percent' => $this->faker->numberBetween(0, 99),
+            'updated_on' => Carbon::now()->toDateString()
         ];
         $userContentId =
             $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
@@ -94,7 +96,8 @@ class UserContentProgressServiceTest extends RailcontentTestCase
             'content_id' => $contentId,
             'user_id' => $userId,
             'state' => UserContentProgressService::STATE_STARTED,
-            'progress_percent' => $this->faker->numberBetween(0, 99)
+            'progress_percent' => $this->faker->numberBetween(0, 99),
+            'updated_on' => Carbon::now()->toDateString()
         ];
 
         $userContentId =
@@ -152,6 +155,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
                 'user_id' => $userId,
                 'state' => 'started',
                 'progress_percent' => '0',
+                'updated_on' => Carbon::now()->toDateTimeString()
             ];
 
             $expectedContents[] = $content;

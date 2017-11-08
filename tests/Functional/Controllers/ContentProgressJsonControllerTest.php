@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -77,7 +78,8 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             'content_id' => $content['id'],
             'user_id' => $this->userId,
             'state' => UserContentProgressService::STATE_STARTED,
-            'progress_percent' => $this->faker->numberBetween(0, 99)
+            'progress_percent' => $this->faker->numberBetween(0, 99),
+            'updated_on' => Carbon::now()->toDateTimeString()
         ];
 
         $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
@@ -122,7 +124,8 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             'content_id' => $content['id'],
             'user_id' => $this->userId,
             'state' => UserContentProgressService::STATE_STARTED,
-            'progress_percent' => $this->faker->numberBetween(0, 10)
+            'progress_percent' => $this->faker->numberBetween(0, 10),
+            'updated_on' => Carbon::now()->toDateTimeString()
         ];
 
         $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);

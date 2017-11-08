@@ -86,7 +86,13 @@ class ContentRepositoryTest extends RailcontentTestCase
         $results = $this->classBeingTested->getById($contentId);
 
         $this->assertEquals(
-            array_merge($content, ['id' => $contentId, 'fields' => [], 'data' => [], 'permissions' => []]),
+            array_merge($content, [
+                'id' => $contentId,
+                'fields' => [],
+                'data' => [],
+                'permissions' => [],
+                'parent_id' => null
+            ]),
             $results
         );
     }
@@ -133,7 +139,8 @@ class ContentRepositoryTest extends RailcontentTestCase
                     'id' => $contentId,
                     'fields' => $expectedFields,
                     'data' => $expectedData,
-                    'permissions' => $expectedPermissions
+                    'permissions' => $expectedPermissions,
+                    'parent_id' => null
                 ]
             ),
             $results

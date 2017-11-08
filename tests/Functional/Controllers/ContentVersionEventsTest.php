@@ -17,7 +17,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Illuminate\Support\Facades\Event;
 
-class ContentVersionJsonControllerTest extends RailcontentTestCase
+class ContentVersionEventsTest extends RailcontentTestCase
 {
     /**
      * @var ContentFactory

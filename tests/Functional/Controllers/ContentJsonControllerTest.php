@@ -226,6 +226,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     'created_on' => Carbon::now()->toDateTimeString(),
                     'published_on' => null,
                     'archived_on' => null,
+                    'parent_id' => null,
                     'fields' => [],
                     'data' => [],
                     'permissions' => []
@@ -528,6 +529,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
             $contents[$contentId] = array_merge([
                 'id' => $contentId,
+                'parent_id' => null,
                 'fields' => [],
                 'data' => [],
                 'permissions' => []
@@ -539,8 +541,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'slug' => $this->faker->word,
             'status' => $this->faker->randomElement($statues),
             'type' => 'library lesson',
-            //'position' => $this->faker->numberBetween(),
-            // 'parent_id' => null,
             'published_on' => Carbon::now()->subDays(($i + 1) * 10)->toDateTimeString(),
             'created_on' => Carbon::now()->toDateTimeString(),
             'brand' => ConfigService::$brand,
@@ -601,7 +601,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
             $contentId = $this->query()->table(ConfigService::$tableContent)->insertGetId($content);
 
-            $contents[$contentId] = array_merge(['id' => $contentId], $content);
+            $contents[$contentId] = array_merge(
+                [
+                    'id' => $contentId,
+                    'parent_id' => null
+                ]
+                , $content);
         }
 
         $contentWithFieldsNr = 5;
