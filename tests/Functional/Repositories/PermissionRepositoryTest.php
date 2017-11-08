@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
+use Railroad\Railcontent\Factories\PermissionsFactory;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -12,12 +13,17 @@ class PermissionRepositoryTest extends RailcontentTestCase
      * @var PermissionRepository
      */
     protected $classBeingTested;
+    /**
+     * @var PermissionsFactory
+     */
+    protected $permissionsFactory;
 
     protected function setUp()
     {
         parent::setUp();
 
         $this->classBeingTested = $this->app->make(PermissionRepository::class);
+        $this->permissionsFactory = $this->app->make(PermissionsFactory::class);
     }
 
     public function test_create_permission()
@@ -38,15 +44,13 @@ class PermissionRepositoryTest extends RailcontentTestCase
 
     public function test_update_permission_name()
     {
-        $name = $this->faker->word;
-
-        $id = $this->classBeingTested->create(['name' => $name]);
+        $permission = $this->permissionsFactory->create();
 
         $newName = $this->faker->word;
 
-        $id = $this->classBeingTested->update($id, ['name' => $newName]);
+        $result = $this->classBeingTested->update($permission['id'], ['name' => $newName]);
 
-        $this->assertEquals(1, $id);
+        $this->assertEquals(1, $result);
 
         $this->assertDatabaseHas(
             ConfigService::$tablePermissions,
@@ -58,32 +62,28 @@ class PermissionRepositoryTest extends RailcontentTestCase
 
     public function test_delete_permission()
     {
-        $name = $this->faker->word;
+        $permission = $this->permissionsFactory->create();
 
-        $id = $this->classBeingTested->create(['name' => $name]);
-
-        $result = $this->classBeingTested->delete($id);
+        $result = $this->classBeingTested->delete($permission['id']);
 
         $this->assertTrue($result);
 
         $this->assertDatabaseMissing(
             ConfigService::$tablePermissions,
             [
-                'name' => $name
+                'name' => $permission['name']
             ]
         );
     }
 
     public function test_get_permission_by_id()
     {
-        $name = $this->faker->word;
+        $permission = $this->permissionsFactory->create();
 
-        $id = $this->classBeingTested->create(['name' => $name]);
-
-        $response = $this->classBeingTested->getById($id);
+        $response = $this->classBeingTested->getById($permission['id']);
 
         $this->assertEquals(
-            ['id' => $id, 'name' => $name],
+            $permission,
             $response
         );
     }

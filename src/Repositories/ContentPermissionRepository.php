@@ -76,6 +76,16 @@ class ContentPermissionRepository extends RepositoryBase
     }
 
     /**
+     * Unlink content permission links
+     * @param integer $permissionId
+     * @return bool
+     */
+    public function unlinkPermission($permissionId)
+    {
+        return $this->query()->where('permission_id', $permissionId)->delete() > 0;
+    }
+
+    /**
      * @return Builder
      */
     public function query()

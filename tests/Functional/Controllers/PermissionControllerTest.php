@@ -179,8 +179,23 @@ class PermissionControllerTest extends RailcontentTestCase
     public function test_delete_permission_service_result()
     {
         $permission = $this->permissionFactory->create();
+        $assignPemission = $this->contentPermissionFactory->create(rand(), null, $permission['id']);
 
         $delete = $this->serviceBeingTested->delete($permission['id']);
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableContentPermissions,
+            [
+                'id' => $assignPemission['id']
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tablePermissions,
+            [
+                'name' => $permission['name']
+            ]
+        );
 
         $this->assertTrue($delete);
     }

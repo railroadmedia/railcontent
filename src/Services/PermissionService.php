@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 
 /**
@@ -17,13 +18,21 @@ class PermissionService
     public $permissionRepository;
 
     /**
+     * @var ContentPermissionRepository
+     */
+    protected $contentPermissionRepository;
+
+    /**
      * PermissionService constructor.
      *
      * @param PermissionRepository $permissionRepository
      */
-    public function __construct(PermissionRepository $permissionRepository)
-    {
+    public function __construct(
+        PermissionRepository $permissionRepository,
+        ContentPermissionRepository $contentPermissionRepository
+    ) {
         $this->permissionRepository = $permissionRepository;
+        $this->contentPermissionRepository = $contentPermissionRepository;
     }
 
     /**
@@ -62,7 +71,7 @@ class PermissionService
         //check if permission exist in the database
         $permission = $this->get($id);
 
-        if(is_null($permission)){
+        if (is_null($permission)) {
             return $permission;
         }
 
@@ -82,9 +91,10 @@ class PermissionService
         //check if permission exist in the database
         $permission = $this->get($id);
 
-        if(is_null($permission)){
+        if (is_null($permission)) {
             return $permission;
         }
+        $this->contentPermissionRepository->unlinkPermission($id);
 
         return $this->permissionRepository->delete($id) > 0;
     }
