@@ -2,6 +2,9 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Railroad\Railcontent\Events\ContentFieldCreated;
+use Railroad\Railcontent\Events\ContentFieldDeleted;
+use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
 
 class ContentFieldService
@@ -52,6 +55,9 @@ class ContentFieldService
             ]
         );
 
+        //Fire an event that the content was modified
+        event(new ContentFieldCreated($contentId));
+
         return $this->get($id);
     }
 
@@ -72,10 +78,11 @@ class ContentFieldService
         if(count($data) == 0) {
             return $field;
         }
-        //Save a content version
-       // event(new ContentUpdated($request->input('content_id', $field['content_id'])));
 
         $this->fieldRepository->update($id, $data);
+
+        //Save a new content version
+        event(new ContentFieldUpdated($field['content_id']));
 
         return $this->get($id);
     }
@@ -95,7 +102,12 @@ class ContentFieldService
             return $field;
         }
 
-        return $this->fieldRepository->delete($id);
+        $deleted = $this->fieldRepository->delete($id);
+
+        //Save a new content version
+        event(new ContentFieldDeleted($field['content_id']));
+
+        return $deleted;
     }
 
 }

@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
@@ -227,6 +228,9 @@ class ContentService
                 ]
             );
 
+        //call the event that save a new content version in the database
+        event(new ContentCreated($id));
+
         return $this->getById($id);
     }
 
@@ -246,10 +250,10 @@ class ContentService
             return $content;
         }
 
+        $this->contentRepository->update($id, $data);
+
         //call the event that save a new content version in the database
         event(new ContentUpdated($id));
-
-        $this->contentRepository->update($id, $data);
 
         return $this->getById($id);
     }
@@ -268,8 +272,6 @@ class ContentService
         if (!$content) {
             return $content;
         }
-
-        event(new ContentUpdated($id));
 
         return $this->contentRepository->delete($id);
     }

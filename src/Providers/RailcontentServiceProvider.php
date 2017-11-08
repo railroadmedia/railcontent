@@ -5,6 +5,13 @@ namespace Railroad\Railcontent\Providers;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use PDO;
+use Railroad\Railcontent\Events\ContentCreated;
+use Railroad\Railcontent\Events\ContentDatumCreated;
+use Railroad\Railcontent\Events\ContentDatumDeleted;
+use Railroad\Railcontent\Events\ContentDatumUpdated;
+use Railroad\Railcontent\Events\ContentFieldCreated;
+use Railroad\Railcontent\Events\ContentFieldDeleted;
+use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Listeners\VersionContentEventListener;
 use Railroad\Railcontent\Services\ConfigService;
@@ -25,7 +32,14 @@ class RailcontentServiceProvider extends ServiceProvider
                     $event->statement->setFetchMode(PDO::FETCH_ASSOC);
                 }
             ],
-            ContentUpdated::class => [VersionContentEventListener::class . '@handle']
+            ContentCreated::class => [VersionContentEventListener::class . '@handle'],
+            ContentUpdated::class => [VersionContentEventListener::class . '@handle'],
+            ContentFieldCreated::class => [VersionContentEventListener::class . '@handle'],
+            ContentFieldUpdated::class => [VersionContentEventListener::class . '@handle'],
+            ContentFieldDeleted::class => [VersionContentEventListener::class . '@handle'],
+            ContentDatumCreated::class => [VersionContentEventListener::class . '@handle'],
+            ContentDatumUpdated::class => [VersionContentEventListener::class . '@handle'],
+            ContentDatumDeleted::class => [VersionContentEventListener::class . '@handle'],
         ];
 
         parent::boot();

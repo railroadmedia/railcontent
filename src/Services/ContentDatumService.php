@@ -2,7 +2,9 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Events\ContentDatumCreated;
+use Railroad\Railcontent\Events\ContentDatumDeleted;
+use Railroad\Railcontent\Events\ContentDatumUpdated;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 
 class ContentDatumService
@@ -58,6 +60,9 @@ class ContentDatumService
             ]
         );
 
+        //call the event that save a new content version in the database
+        event(new ContentDatumCreated($contentId));
+
         return $this->get($id);
     }
 
@@ -76,15 +81,14 @@ class ContentDatumService
         }
 
         //don't update the datum if the request not contain any value
-        if(count($data) == 0) {
+        if (count($data) == 0) {
             return $datum;
         }
 
-        //save a content version before datum update
-        // todo: this should be after the datum is saved, or renamed to 'ContentUpdating' if its being triggered before the actual update
-        event(new ContentUpdated($datum['content_id']));
-
         $this->datumRepository->update($id, $data);
+
+        //save a content version
+        event(new ContentDatumUpdated($datum['content_id']));
 
         return $this->get($id);
     }
@@ -99,13 +103,14 @@ class ContentDatumService
         $datum = $this->get($id);
 
         if (is_null($datum)) {
-           return $datum;
+            return $datum;
         }
 
-        //save a content version before datum deletion
-        // todo: this should be after the datum is deleted and renamed to DatumDeleted
-        event(new ContentUpdated($datum['content_id']));
+        $delete = $this->datumRepository->delete($id);
 
-        return $this->datumRepository->delete($id);
+        //save a content version 
+        event(new ContentDatumDeleted($datum['content_id']));
+
+        return $delete;
     }
 }

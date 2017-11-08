@@ -4,8 +4,6 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Railroad\Railcontent\Events\ContentUpdated;
-use Railroad\Railcontent\Events\DatumUpdate;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentDatumCreateRequest;
 use Railroad\Railcontent\Requests\ContentDatumUpdateRequest;
@@ -34,18 +32,14 @@ class ContentDatumJsonController extends Controller
      */
     public function store(ContentDatumCreateRequest $request)
     {
-        //save a content version before datum creation
-        // todo: rename to DatumCreated (after save to db) or ContentCreation (before save to db)
-//        event(new DatumUpdate($request->input('content_id')));
-
-        $categoryData = $this->datumService->create(
+        $contentData = $this->datumService->create(
             $request->input('content_id'),
             $request->input('key'),
             $request->input('value'),
             $request->input('position')
         );
 
-        return new JsonResponse($categoryData, 200);
+        return new JsonResponse($contentData, 200);
     }
 
     /**
@@ -57,7 +51,7 @@ class ContentDatumJsonController extends Controller
      */
     public function update($dataId, ContentDatumUpdateRequest $request)
     {
-        $categoryData = $this->datumService->update(
+        $contentData = $this->datumService->update(
             $dataId,
             array_intersect_key(
                 $request->all(),
@@ -71,16 +65,15 @@ class ContentDatumJsonController extends Controller
         );
 
         //if the update method response it's null the datum not exist; we throw the proper exception
-        throw_if(is_null($categoryData), new NotFoundException('Update failed, datum not found with id: ' . $dataId));
+        throw_if(is_null($contentData), new NotFoundException('Update failed, datum not found with id: ' . $dataId));
 
-        return new JsonResponse($categoryData, 201);
+        return new JsonResponse($contentData, 201);
     }
 
     /**
      * Call the method from service to delete the content data
      *
      * @param integer $dataId
-     * @param Request $request
      * @return \Railroad\Railcontent\Responses\JsonResponse
      */
     public function delete($dataId)

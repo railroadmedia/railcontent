@@ -17,7 +17,7 @@ class UserContentProgressFactory extends UserContentProgressService
      * @param int|null $userId
      * @return bool
      */
-    public function startContent($contentId = null, $userId = null)
+    public function startContent($contentId = null, $userId = null, $forceEvenIfComplete = false)
     {
         $this->faker = app(Generator::class);
 
@@ -25,6 +25,7 @@ class UserContentProgressFactory extends UserContentProgressService
             func_get_args() + [
                 $this->faker->randomNumber(),
                 $this->faker->randomNumber(),
+                false
             ];
 
         $userContentId = parent::startContent(...$parameters);

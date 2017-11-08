@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Listeners;
 
+use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Services\VersionService;
 
@@ -14,7 +15,7 @@ class VersionContentEventListener
         $this->versionService = $versionService;
     }
 
-    public function handle(ContentUpdated $event)
+    public function handle(Event $event)
     {
         $results = $this->versionService->store($event->contentId);
 

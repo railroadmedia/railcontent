@@ -26,17 +26,14 @@ class ContentFieldJsonController extends Controller
     }
 
     /**
-     * Call the method from service that create a new field and link the category with the field.
+     * Call the method from service that create a new field and link the content with the field.
      *
      * @param ContentFieldCreateRequest $request
-     * @return @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return \Railroad\Railcontent\Responses\JsonResponse
      */
     public function store(ContentFieldCreateRequest $request)
     {
-        //Fire an event that the content was modified
-        event(new ContentUpdated($request->input('content_id')));
-
-        $categoryField = $this->fieldService->create(
+        $contentField = $this->fieldService->create(
             $request->input('content_id'),
             $request->input('key'),
             $request->input('value'),
@@ -44,7 +41,7 @@ class ContentFieldJsonController extends Controller
             $request->input('type')
         );
 
-        return new JsonResponse($categoryField, 200);
+        return new JsonResponse($contentField, 200);
     }
 
     /**
@@ -52,7 +49,7 @@ class ContentFieldJsonController extends Controller
      *
      * @param ContentFieldUpdateRequest $request
      * @param integer $fieldId
-     * @return @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return \Railroad\Railcontent\Responses\JsonResponse
      */
     public function update(ContentFieldUpdateRequest $request, $fieldId)
     {
