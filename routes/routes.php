@@ -125,11 +125,6 @@ Route::group(
             \Railroad\Railcontent\Controllers\ContentJsonController::class . '@delete'
         )->name('content.delete');
 
-        Route::get(
-            '/content/restore/{versionId}',
-            \Railroad\Railcontent\Controllers\ContentVersionJsonController::class . '@restoreContent'
-        )->name('content.restore');
-
         // remote storage
         Route::put(
             '/remote',
