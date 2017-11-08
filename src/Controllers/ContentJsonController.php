@@ -124,7 +124,19 @@ class ContentJsonController extends Controller
         //update content with the data sent on the request
         $content = $this->contentService->update(
             $contentId,
-            $request->all()
+            array_intersect_key(
+                $request->all(),
+                [
+                    'slug' => '',
+                    'type' => '',
+                    'status' => '',
+                    'brand' => '',
+                    'language' => '',
+                    'user_id' => '',
+                    'published_on' => '',
+                    'archived_on' => ''
+                ]
+            )
         );
 
         //if the update method response it's null the content not exist; we throw the proper exception

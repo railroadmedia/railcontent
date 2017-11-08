@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
