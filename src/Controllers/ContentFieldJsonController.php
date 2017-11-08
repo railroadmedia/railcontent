@@ -82,9 +82,6 @@ class ContentFieldJsonController extends Controller
      */
     public function delete($fieldId, Request $request)
     {
-        //Save a content version before content modification
-        event(new ContentUpdated($request->input('content_id')));
-
         $deleted = $this->fieldService->delete($fieldId);
 
         //if the update method response it's null the field not exist; we throw the proper exception
