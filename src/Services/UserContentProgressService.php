@@ -26,15 +26,16 @@ class UserContentProgressService
     }
 
     /**
-     * @param integer $contentId
-     * @param integer $userId
-     * @return integer
+     * @param $contentId
+     * @param $userId
+     * @param bool $forceEvenIfComplete
+     * @return bool
      */
-    public function startContent($contentId, $userId)
+    public function startContent($contentId, $userId, $forceEvenIfComplete = false)
     {
         $isCompleted = $this->userContentRepository->isContentAlreadyCompleteForUser($contentId, $userId);
 
-        if (!$isCompleted) {
+        if (!$isCompleted || $forceEvenIfComplete) {
             $userContentId =
                 $this->userContentRepository->updateOrCreate(
                     [
