@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: roxana
- * Date: 10/26/2017
- * Time: 4:45 PM
- */
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
-
 
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
