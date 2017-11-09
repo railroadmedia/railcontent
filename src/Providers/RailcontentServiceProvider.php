@@ -84,6 +84,7 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableUserContentProgress = ConfigService::$tablePrefix . 'user_content_progress';
         ConfigService::$tablePlaylists = ConfigService::$tablePrefix . 'playlists';
         ConfigService::$tablePlaylistContents = ConfigService::$tablePrefix . 'playlist_contents';
+        ConfigService::$tableComments = ConfigService::$tablePrefix . 'comments';
 
         // brand
         ConfigService::$brand = config('railcontent.brand');

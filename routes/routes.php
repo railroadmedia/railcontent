@@ -56,7 +56,7 @@ Route::group(
             \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@delete'
         )->name('permissions.delete');
 
-        Route::post(
+        Route::put(
             '/permission/assign',
             \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@assign'
         )->name('permissions.assign');
@@ -130,5 +130,16 @@ Route::group(
             '/remote',
             Railroad\Railcontent\Controllers\RemoteStorageJsonController::class . '@put'
         )->name('remote.put');
+
+        //comments
+        Route::put(
+            '/comment',
+            \Railroad\Railcontent\Controllers\CommentJsonController::class . '@store'
+        )->name('comment.store');
+
+        Route::patch(
+            '/comment/{id}',
+            \Railroad\Railcontent\Controllers\CommentJsonController::class . '@update'
+        )->name('comment.update');
     }
 );

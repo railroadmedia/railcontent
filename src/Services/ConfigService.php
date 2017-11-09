@@ -70,6 +70,11 @@ class ConfigService
     public static $tablePlaylistContents;
 
     /**
+     * @var string
+     */
+    public static $tableComments;
+
+    /**
      * @var array
      */
     public static $availableLanguages;
