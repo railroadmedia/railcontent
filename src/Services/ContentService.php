@@ -292,7 +292,7 @@ class ContentService
 
         $userPlaylistContents = $this->contentRepository->getByUserIdWhereChildIdIn(
             $userId,
-            $contents,
+            array_column($contents, 'id'),
             $singlePlaylistSlug
         );
 

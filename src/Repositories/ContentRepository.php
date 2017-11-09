@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
@@ -295,12 +296,16 @@ class ContentRepository extends RepositoryBase
             ->restrictStatuses()
             ->leftJoin(
                 ConfigService::$tableContentHierarchy,
-                ConfigService::$tableContentHierarchy . '.parent_id',
-                '=',
-                ConfigService::$tableContent . '.id'
+                function (JoinClause $joinClause) use ($childContentIds) {
+                    $joinClause->on(
+                        ConfigService::$tableContentHierarchy . '.parent_id',
+                        '=',
+                        ConfigService::$tableContent . '.id'
+                    )
+                        ->whereIn(ConfigService::$tableContentHierarchy . '.child_id', $childContentIds);
+                }
             )
-            ->whereIn(ConfigService::$tableContentHierarchy . '.child_id', $childContentIds)
-            ->where('user_id', $userId);
+            ->where(ConfigService::$tableContent . '.user_id', $userId);
 
         if (!empty($slug)) {
             $query->where('slug', $slug);
@@ -474,7 +479,7 @@ class ContentRepository extends RepositoryBase
     public function retrieveFilter()
     {
         $subQuery = $this->query()
-            ->selectPrimaryColumns()
+            ->selectCountColumns()
             ->orderBy($this->orderBy, $this->orderDirection)
             ->restrictStatuses()
             ->restrictPublishedOnDate()
@@ -486,7 +491,11 @@ class ContentRepository extends RepositoryBase
             ->includeByUserStates($this->includedUserStates)
             ->restrictByTypes($this->typesToInclude)
             ->restrictBySlugHierarchy($this->slugHierarchy)
-            ->restrictByParentIds($this->requiredParentIds);
+            ->restrictByParentIds($this->requiredParentIds)
+            ->groupBy(
+                ConfigService::$tableContent . '.id',
+                ConfigService::$tableContent . '.' . $this->orderBy
+            );
 
         $query = $this->query()
             ->orderBy($this->orderBy, $this->orderDirection)
@@ -516,31 +525,23 @@ class ContentRepository extends RepositoryBase
     public function countFilter()
     {
         $subQuery = $this->query()
-            ->selectPrimaryColumns()
-            ->orderBy($this->orderBy, $this->orderDirection)
+            ->selectCountColumns()
             ->restrictStatuses()
             ->restrictPublishedOnDate()
             ->restrictBrand()
             ->restrictByFields($this->requiredFields)
             ->includeByFields($this->includedFields)
+            ->restrictByUserStates($this->requiredUserStates)
+            ->includeByUserStates($this->includedUserStates)
             ->restrictByTypes($this->typesToInclude)
             ->restrictBySlugHierarchy($this->slugHierarchy)
-            ->restrictByParentIds($this->requiredParentIds);
-
-        $query = $this->query()
-            ->orderBy($this->orderBy, $this->orderDirection)
-            ->addSubJoinToQuery($subQuery);
-
-        $query->select([ConfigService::$tableContent . '.id'])
-            ->groupBy(
-                ConfigService::$tableContent . '.id',
-                ConfigService::$tableContent . '.' . $this->orderBy
-            );
+            ->restrictByParentIds($this->requiredParentIds)
+            ->groupBy(ConfigService::$tableContent . '.id');
 
         return $this->connection()->table(
-            $this->databaseManager->raw('(' . $query->toSql() . ') as rows')
+            $this->databaseManager->raw('(' . $subQuery->toSql() . ') as rows')
         )
-            ->addBinding($query->getBindings())
+            ->addBinding($subQuery->getBindings())
             ->count();
     }
 
@@ -549,41 +550,47 @@ class ContentRepository extends RepositoryBase
      */
     public function getFilterFields()
     {
-        $query = $this->query()
+        $possibleContentIds = $this->query()
+            ->selectCountColumns()
             ->restrictByFields($this->requiredFields)
             ->includeByFields($this->includedFields)
+            ->restrictByUserStates($this->requiredUserStates)
+            ->includeByUserStates($this->includedUserStates)
             ->restrictStatuses()
             ->restrictPublishedOnDate()
             ->restrictByTypes($this->typesToInclude)
             ->restrictBrand()
             ->restrictByParentIds($this->requiredParentIds)
-            ->whereIn(
-                ConfigService::$tableContentFields . '.key',
-                ConfigService::$fieldOptionList
-            )
-            ->leftJoin(
-                ConfigService::$tableContentFields,
-                ConfigService::$tableContentFields . '.content_id',
-                '=',
-                ConfigService::$tableContent . '.id'
-            );
+            ->pluck('id');
 
-        $query->select(
-            [
-                ConfigService::$tableContentFields . '.key as field_key',
-                ConfigService::$tableContentFields . '.value as field_value',
-                ConfigService::$tableContentFields . '.type as field_type',
-            ]
-        )
-            ->groupBy(
-                [
+        $possibleContentFields =
+            $this->databaseManager->connection()->table(ConfigService::$tableContentFields)
+                ->select()
+                ->whereIn(
                     ConfigService::$tableContentFields . '.key',
-                    ConfigService::$tableContentFields . '.value',
-                    ConfigService::$tableContentFields . '.type',
-                ]
-            );
+                    ConfigService::$fieldOptionList
+                )
+                ->orderBy('value')
+                ->get();
 
-        return $this->parseAvailableFields($query->get()->toArray());
+//        var_dump($possibleContentFields);
+
+//        $query->select(
+//            [
+//                ConfigService::$tableContentFields . '.key as field_key',
+//                ConfigService::$tableContentFields . '.value as field_value',
+//                ConfigService::$tableContentFields . '.type as field_type',
+//            ]
+//        )
+//            ->groupBy(
+//                [
+//                    ConfigService::$tableContentFields . '.key',
+//                    ConfigService::$tableContentFields . '.value',
+//                    ConfigService::$tableContentFields . '.type',
+//                ]
+//            );
+
+        return $this->parseAvailableFields($possibleContentFields->toArray());
     }
 
     /**
@@ -622,7 +629,7 @@ class ContentRepository extends RepositoryBase
      */
     public function requireUserStates($userId, $state)
     {
-        $this->requiredUserStates = ['user_id' => $userId, 'state' => $state];
+        $this->requiredUserStates[] = ['user_id' => $userId, 'state' => $state];
 
         return $this;
     }

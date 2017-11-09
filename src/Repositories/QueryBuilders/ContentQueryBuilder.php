@@ -34,6 +34,20 @@ class ContentQueryBuilder extends Builder
     }
 
     /**
+     * @return $this
+     */
+    public function selectCountColumns()
+    {
+        $this->select(
+            [
+                ConfigService::$tableContent . '.id as id',
+            ]
+        );
+
+        return $this;
+    }
+
+    /**
      * @param integer $page
      * @param integer $limit
      * @return $this
@@ -246,35 +260,35 @@ class ContentQueryBuilder extends Builder
      */
     public function restrictByUserStates(array $requiredUserStates)
     {
-        $this->where(
-            function (Builder $builder) use ($requiredUserStates) {
+        if (empty($requiredUserStates)) {
+            return $this;
+        }
 
-                if (count($requiredUserStates) > 0) {
-                    $requiredUserStateData = $requiredUserStates;
-                    $builder->whereExists(
-                        function (Builder $builder) use ($requiredUserStateData) {
-                            return $builder
-                                ->select([ConfigService::$tableUserContentProgress . '.content_id'])
-                                ->from(ConfigService::$tableUserContentProgress)
-                                ->where(
-                                    ConfigService::$tableUserContentProgress . '.user_id',
-                                    $requiredUserStateData['user_id']
-                                )
-                                ->where(
-                                    ConfigService::$tableUserContentProgress . '.content_id',
-                                    $this->connection->raw(
-                                        ConfigService::$tableContent . '.id'
-                                    )
-                                )
-                                ->where(
-                                    ConfigService::$tableUserContentProgress . '.state',
-                                    $requiredUserStateData['state']
-                                );
-                        }
+        foreach ($requiredUserStates as $index => $requiredUserState) {
+            $tableName = 'ucp_' . $index;
+
+            $this->join(
+                ConfigService::$tableUserContentProgress . ' as ' . $tableName,
+                function (JoinClause $joinClause) use ($requiredUserState, $tableName) {
+                    $joinClause->on(
+                        $tableName . '.content_id',
+                        '=',
+                        ConfigService::$tableContent . '.id'
+                    )->on(
+                        $tableName .
+                        '.user_id',
+                        '=',
+                        $joinClause->raw("'" . $requiredUserState['user_id'] . "'")
+                    )->on(
+                        $tableName .
+                        '.state',
+                        '=',
+                        $joinClause->raw("'" . $requiredUserState['state'] . "'")
                     );
+
                 }
-            }
-        );
+            );
+        }
 
         return $this;
     }
@@ -285,32 +299,42 @@ class ContentQueryBuilder extends Builder
      */
     public function includeByUserStates(array $includedUserStates)
     {
-        $this->where(
-            function (Builder $builder) use ($includedUserStates) {
+        if (empty($includedUserStates)) {
+            return $this;
+        }
 
-                foreach ($includedUserStates as $requiredUserStateData) {
-                    $builder->orWhereExists(
-                        function (Builder $builder) use ($requiredUserStateData) {
-                            return $builder
-                                ->select([ConfigService::$tableUserContentProgress . '.content_id'])
-                                ->from(ConfigService::$tableUserContentProgress)
-                                ->where(
-                                    ConfigService::$tableUserContentProgress . '.user_id',
-                                    $requiredUserStateData['user_id']
-                                )
-                                ->where(
-                                    ConfigService::$tableUserContentProgress . '.content_id',
-                                    $this->connection->raw(
-                                        ConfigService::$tableContent . '.id'
-                                    )
-                                )
-                                ->where(
-                                    ConfigService::$tableUserContentProgress . '.state',
-                                    $requiredUserStateData['state']
-                                );
+        $this->join(
+            ConfigService::$tableUserContentProgress,
+            function (JoinClause $joinClause) use ($includedUserStates) {
+                $joinClause->on(
+                    ConfigService::$tableUserContentProgress . '.content_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                );
+
+                $joinClause->on(
+                    function (JoinClause $joinClause) use ($includedUserStates) {
+                        foreach ($includedUserStates as $index => $includedUserState) {
+                            $joinClause->orOn(
+                                function (JoinClause $joinClause) use ($includedUserState) {
+                                    $joinClause->on(
+                                        ConfigService::$tableUserContentProgress .
+                                        '.user_id',
+                                        '=',
+                                        $joinClause->raw("'" . $includedUserState['user_id'] . "'")
+                                    )->on(
+                                        ConfigService::$tableUserContentProgress .
+                                        '.state',
+                                        '=',
+                                        $joinClause->raw("'" . $includedUserState['state'] . "'")
+                                    );
+
+                                }
+                            );
                         }
-                    );
-                }
+                    }
+
+                );
             }
         );
 
@@ -323,74 +347,35 @@ class ContentQueryBuilder extends Builder
      */
     public function restrictByFields(array $requiredFields)
     {
-        $this->where(
-            function (Builder $builder) use ($requiredFields) {
+        if (empty($requiredFields)) {
+            return $this;
+        }
+        
+        foreach ($requiredFields as $index => $requiredFieldData) {
+            $tableName = 'cf_' . $index;
 
-                foreach ($requiredFields as $requiredFieldData) {
-                    $builder->whereExists(
-                        function (Builder $builder) use ($requiredFieldData) {
-                            $builder
-                                ->select([ConfigService::$tableContentFields . '.id'])
-                                ->from(ConfigService::$tableContentFields)
-                                ->where(
-                                    [
-                                        ConfigService::$tableContentFields .
-                                        '.key' => $requiredFieldData['name'],
-                                        ConfigService::$tableContentFields .
-                                        '.content_id' => $this->getConnection()->raw(
-                                            ConfigService::$tableContent . '.id'
-                                        )
-                                    ]
-                                )
-                                ->where(
-                                    function (Builder $builder) use ($requiredFieldData) {
-                                        $builder->where(
-                                            [
-                                                ConfigService::$tableContentFields .
-                                                '.value' => $requiredFieldData['value']
-                                            ]
-                                        )
-                                            ->orWhereExists(
-                                                function (Builder $builder) use ($requiredFieldData) {
-                                                    $builder
-                                                        ->select(['linked_content.id'])
-                                                        ->from(
-                                                            ConfigService::$tableContent .
-                                                            ' as linked_content'
-                                                        )
-                                                        ->where(
-                                                            'linked_content.slug',
-                                                            $requiredFieldData['value']
-                                                        )
-                                                        ->whereIn(
-                                                            $this->connection->raw(
-                                                                ConfigService::$tableContentFields . '.value'
-                                                            )
-                                                            ,
-                                                            [
-                                                                $this->connection->raw(
-                                                                    'linked_content.id'
-                                                                )
-                                                            ]
-                                                        );
-                                                }
-                                            );
-                                    }
-                                );
-
-                            if ($requiredFieldData['type'] !== '') {
-                                $builder->where(
-                                    ConfigService::$tableContentFields . '.type',
-                                    $requiredFieldData['type']
-                                );
-                            }
-                            return $builder;
-                        }
+            $this->join(
+                ConfigService::$tableContentFields . ' as ' . $tableName,
+                function (JoinClause $joinClause) use ($requiredFieldData, $tableName) {
+                    $joinClause->on(
+                        $tableName . '.content_id',
+                        '=',
+                        ConfigService::$tableContent . '.id'
+                    )->on(
+                        $tableName .
+                        '.key',
+                        '=',
+                        $joinClause->raw("'" . $requiredFieldData['name'] . "'")
+                    )->on(
+                        $tableName .
+                        '.value',
+                        '=',
+                        $joinClause->raw("'" . $requiredFieldData['value'] . "'")
                     );
-                }
 
-            }
-        );
+                }
+            );
+        }
 
         return $this;
     }
@@ -401,40 +386,42 @@ class ContentQueryBuilder extends Builder
      */
     public function includeByFields(array $includedFields)
     {
-        $this->where(
-            function (Builder $builder) use ($includedFields) {
+        if (empty($includedFields)) {
+            return $this;
+        }
 
-                foreach ($includedFields as $includedFieldData) {
-                    $builder->orWhereExists(
-                        function (Builder $builder) use ($includedFieldData) {
-                            $builder
-                                ->select([ConfigService::$tableContentFields . '.id'])
-                                ->from(ConfigService::$tableContentFields)
-                                ->where(
-                                    [
-                                        ConfigService::$tableContentFields .
-                                        '.key' => $includedFieldData['name'],
-                                        ConfigService::$tableContentFields .
-                                        '.value' => $includedFieldData['value'],
-                                        ConfigService::$tableContentFields .
-                                        '.content_id' => $this->connection->raw(
-                                            ConfigService::$tableContent . '.id'
-                                        )
-                                    ]
-                                );
+        $this->join(
+            ConfigService::$tableContentFields,
+            function (JoinClause $joinClause) use ($includedFields) {
+                $joinClause->on(
+                    ConfigService::$tableContentFields . '.content_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                );
 
-                            if ($includedFieldData['type'] !== '') {
-                                $builder->where(
-                                    ConfigService::$tableContentFields . '.type',
-                                    $includedFieldData['type']
-                                );
-                            }
+                $joinClause->on(
+                    function (JoinClause $joinClause) use ($includedFields) {
+                        foreach ($includedFields as $index => $includedFieldData) {
+                            $joinClause->orOn(
+                                function (JoinClause $joinClause) use ($includedFieldData) {
+                                    $joinClause->on(
+                                        ConfigService::$tableContentFields .
+                                        '.key',
+                                        '=',
+                                        $joinClause->raw("'" . $includedFieldData['name'] . "'")
+                                    )->on(
+                                        ConfigService::$tableContentFields .
+                                        '.value',
+                                        '=',
+                                        $joinClause->raw("'" . $includedFieldData['value'] . "'")
+                                    );
 
-                            return $builder;
+                                }
+                            );
                         }
-                    );
-                }
+                    }
 
+                );
             }
         );
 

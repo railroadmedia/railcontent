@@ -15,7 +15,10 @@ return [
     'field_option_list' => [
         'instructor',
         'topic',
-        'difficulty'
+        'difficulty',
+        'bpm',
+        'style',
+        'artist',
     ],
 
     'validation' => [
