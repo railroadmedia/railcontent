@@ -58,7 +58,7 @@ class ContentService
     }
 
     /**
-     * Call the get by id method from repository and return the category
+     * Call the get by id method from repository and return the content
      *
      * @param integer $id
      * @return array|null
@@ -202,7 +202,6 @@ class ContentService
      * @param string|null $brand
      * @param int|null $userId
      * @param string|null $publishedOn
-     * @param string|null $createdOn
      * @return array
      */
     public function create(
@@ -228,7 +227,6 @@ class ContentService
                 ]
             );
 
-        //call the event that save a new content version in the database
         event(new ContentCreated($id));
 
         return $this->getById($id);
@@ -245,14 +243,12 @@ class ContentService
     {
         $content = $this->getById($id);
 
-        //if the content not exist return null
-        if (!$content) {
-            return $content;
+        if (empty($content)) {
+            return null;
         }
 
         $this->contentRepository->update($id, $data);
 
-        //call the event that save a new content version in the database
         event(new ContentUpdated($id));
 
         return $this->getById($id);
@@ -268,9 +264,8 @@ class ContentService
     {
         $content = $this->getById($id);
 
-        //if the content not exist return null
-        if (!$content) {
-            return $content;
+        if (empty($content)) {
+            return null;
         }
 
         return $this->contentRepository->delete($id);

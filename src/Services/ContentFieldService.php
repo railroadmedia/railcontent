@@ -15,13 +15,20 @@ class ContentFieldService
     private $fieldRepository;
 
     /**
+     * @var ContentService
+     */
+    private $contentService;
+
+    /**
      * FieldService constructor.
      *
      * @param ContentFieldRepository $fieldRepository
+     * @param ContentService $contentService
      */
-    public function __construct(ContentFieldRepository $fieldRepository)
+    public function __construct(ContentFieldRepository $fieldRepository, ContentService $contentService)
     {
         $this->fieldRepository = $fieldRepository;
+        $this->contentService = $contentService;
     }
 
     /**
@@ -30,7 +37,13 @@ class ContentFieldService
      */
     public function get($id)
     {
-        return $this->fieldRepository->getById($id);
+        $contentField = $this->fieldRepository->getById($id);
+        
+        if (!empty($contentField) && $contentField['type'] == 'content') {
+            $contentField['value'] = $this->contentService->getById($contentField['value']);
+        }
+
+        return $contentField;
     }
 
     /**
@@ -75,7 +88,7 @@ class ContentFieldService
             return $field;
         }
 
-        if(count($data) == 0) {
+        if (count($data) == 0) {
             return $field;
         }
 

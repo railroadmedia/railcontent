@@ -28,6 +28,20 @@ class ContentFieldJsonController extends Controller
     /**
      * Call the method from service that create a new field and link the content with the field.
      *
+     * @param Request $request
+     * @param $id
+     * @return JsonResponse
+     */
+    public function show(Request $request, $id)
+    {
+        $contentField = $this->fieldService->get($id);
+
+        return new JsonResponse($contentField, 200);
+    }
+
+    /**
+     * Call the method from service that create a new field and link the content with the field.
+     *
      * @param ContentFieldCreateRequest $request
      * @return \Railroad\Railcontent\Responses\JsonResponse
      */

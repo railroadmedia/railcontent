@@ -9,6 +9,11 @@ Route::group(
     function () {
 
         // content fields
+        Route::get(
+            '/content/field/{id}',
+            \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@show'
+        )->name('content.field.show');
+
         Route::put(
             '/content/field',
             \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@store'
