@@ -47,6 +47,14 @@ class PermissionService
     }
 
     /**
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->permissionRepository->getAll();
+    }
+
+    /**
      * Call the create method from PermissionRepository and return the new permission
      *
      * @param string $name

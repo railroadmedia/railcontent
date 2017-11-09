@@ -46,6 +46,11 @@ Route::group(
         )->name('content.data.delete');
 
         // permissions
+        Route::get(
+            '/permission',
+            \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@index'
+        )->name('permissions.index');
+
         Route::put(
             '/permission',
             \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@store'

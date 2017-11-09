@@ -9,6 +9,7 @@ use Railroad\Railcontent\Requests\PermissionRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\PermissionService;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class PermissionController
@@ -38,6 +39,19 @@ class PermissionJsonController extends Controller
     ) {
         $this->permissionService = $permissionService;
         $this->contentPermissionService = $contentPermissionService;
+    }
+
+    /**
+     * Create a new permission and return it in JSON format
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function index(Request $request)
+    {
+        $permissions = $this->permissionService->getAll();
+
+        return new JsonResponse($permissions, 200);
     }
 
     /**
