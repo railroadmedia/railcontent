@@ -48,6 +48,21 @@ class ContentQueryBuilder extends Builder
     }
 
     /**
+     * @return $this
+     */
+    public function selectFilterOptionColumns()
+    {
+        $this->select(
+            [
+                ConfigService::$tableContentFields . '.key as key',
+                ConfigService::$tableContentFields . '.value as value',
+            ]
+        );
+
+        return $this;
+    }
+
+    /**
      * @param integer $page
      * @param integer $limit
      * @return $this

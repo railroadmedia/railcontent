@@ -23,6 +23,8 @@ class CreateContentFieldsTable extends Migration
                 $table->string('value', 255)->nullable()->index();
                 $table->string('type', 255)->index();
                 $table->integer('position')->index()->nullable();
+
+                $table->index(['key', 'value', 'content_id'], 'kvc');
             }
         );
     }

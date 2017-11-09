@@ -550,8 +550,8 @@ class ContentRepository extends RepositoryBase
      */
     public function getFilterFields()
     {
-        $possibleContentIds = $this->query()
-            ->selectCountColumns()
+        $possibleContentFields = $this->query()
+            ->selectFilterOptionColumns()
             ->restrictByFields($this->requiredFields)
             ->includeByFields($this->includedFields)
             ->restrictByUserStates($this->requiredUserStates)
@@ -561,36 +561,24 @@ class ContentRepository extends RepositoryBase
             ->restrictByTypes($this->typesToInclude)
             ->restrictBrand()
             ->restrictByParentIds($this->requiredParentIds)
-            ->pluck('id');
+            ->leftJoin(
+                ConfigService::$tableContentFields,
+                ConfigService::$tableContentFields . '.content_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->whereIn(
+                ConfigService::$tableContentFields . '.key',
+                ConfigService::$fieldOptionList
+            )
+            ->groupBy(
+                ConfigService::$tableContentFields . '.key',
+                ConfigService::$tableContentFields . '.value'
+            )
+            ->get()
+            ->toArray();
 
-        $possibleContentFields =
-            $this->databaseManager->connection()->table(ConfigService::$tableContentFields)
-                ->select()
-                ->whereIn(
-                    ConfigService::$tableContentFields . '.key',
-                    ConfigService::$fieldOptionList
-                )
-                ->orderBy('value')
-                ->get();
-
-//        var_dump($possibleContentFields);
-
-//        $query->select(
-//            [
-//                ConfigService::$tableContentFields . '.key as field_key',
-//                ConfigService::$tableContentFields . '.value as field_value',
-//                ConfigService::$tableContentFields . '.type as field_type',
-//            ]
-//        )
-//            ->groupBy(
-//                [
-//                    ConfigService::$tableContentFields . '.key',
-//                    ConfigService::$tableContentFields . '.value',
-//                    ConfigService::$tableContentFields . '.type',
-//                ]
-//            );
-
-        return $this->parseAvailableFields($possibleContentFields->toArray());
+        return $this->parseAvailableFields($possibleContentFields);
     }
 
     /**
