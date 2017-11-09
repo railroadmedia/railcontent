@@ -80,7 +80,7 @@ class ContentFieldJsonController extends Controller
      * @param Request $request
      * @return \Railroad\Railcontent\Responses\JsonResponse
      */
-    public function delete($fieldId, Request $request)
+    public function delete(Request $request, $fieldId)
     {
         $deleted = $this->fieldService->delete($fieldId);
 

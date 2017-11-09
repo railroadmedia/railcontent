@@ -56,6 +56,7 @@ class ContentQueryBuilder extends Builder
             [
                 ConfigService::$tableContentFields . '.key as key',
                 ConfigService::$tableContentFields . '.value as value',
+                ConfigService::$tableContentFields . '.type as type',
             ]
         );
 

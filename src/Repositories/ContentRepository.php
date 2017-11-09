@@ -573,7 +573,8 @@ class ContentRepository extends RepositoryBase
             )
             ->groupBy(
                 ConfigService::$tableContentFields . '.key',
-                ConfigService::$tableContentFields . '.value'
+                ConfigService::$tableContentFields . '.value',
+                ConfigService::$tableContentFields . '.type'
             )
             ->get()
             ->toArray();
@@ -708,18 +709,18 @@ class ContentRepository extends RepositoryBase
         $subContentIds = [];
 
         foreach ($rows as $row) {
-            if ($row['field_type'] == 'content_id') {
-                $subContentIds[] = $row['field_value'];
+            if ($row['type'] == 'content_id') {
+                $subContentIds[] = $row['value'];
             } else {
-                $availableFields[$row['field_key']][] = $row['field_value'];
+                $availableFields[$row['key']][] = $row['value'];
             }
         }
 
         $subContents = $this->getByIds($subContentIds);
 
         foreach ($rows as $row) {
-            if ($row['field_type'] == 'content_id' && !empty($subContents[$row['field_value']])) {
-                $availableFields[$row['field_key']][] = $subContents[$row['field_value']];
+            if ($row['type'] == 'content_id' && !empty($subContents[$row['value']])) {
+                $availableFields[$row['key']][] = $subContents[$row['value']];
             }
         }
 

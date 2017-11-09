@@ -14,9 +14,9 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 class ContentFieldControllerTest extends RailcontentTestCase
 {
     /**
-     * @var
+     * @var ContentFieldService
      */
-    protected $classBeingTested;
+    protected $contentFieldService;
 
     /**
      * @var ContentFactory
@@ -32,8 +32,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
     {
         parent::setUp();
 
-        $this->serviceBeingTested = $this->app->make(ContentFieldService::class);
-        $this->classBeingTested = $this->app->make(ContentFieldRepository::class);
+        $this->contentFieldService = $this->app->make(ContentFieldService::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
     }
@@ -57,14 +56,18 @@ class ContentFieldControllerTest extends RailcontentTestCase
                 'position' => $position
             ]
         );
-        $expectedResults = $this->createExpectedResult("ok", "200", [
-            "id" => "1",
-            "content_id" => $content['id'],
-            "key" => $key,
-            "value" => $value,
-            "type" => $type,
-            "position" => $position
-        ]);
+        $expectedResults = $this->createExpectedResult(
+            "ok",
+            "200",
+            [
+                "id" => "1",
+                "content_id" => $content['id'],
+                "key" => $key,
+                "value" => $value,
+                "type" => $type,
+                "position" => $position
+            ]
+        );
 
         $this->assertEquals(200, $response->status());
         $this->assertEquals($expectedResults, $response->decodeResponseJson());
@@ -153,14 +156,18 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $this->assertEquals(201, $response->status());
 
-        $expectedResults = $this->createExpectedResult("ok", "201", [
-            "id" => "1",
-            "content_id" => $content['id'],
-            "key" => $field['key'],
-            "value" => $new_value,
-            "type" => $field['type'],
-            "position" => $field['position']
-        ]);
+        $expectedResults = $this->createExpectedResult(
+            "ok",
+            "201",
+            [
+                "id" => "1",
+                "content_id" => $content['id'],
+                "key" => $field['key'],
+                "value" => $new_value,
+                "type" => $field['type'],
+                "position" => $field['position']
+            ]
+        );
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson());
     }
@@ -171,10 +178,13 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $field = $this->contentFieldFactory->create($content['id']);
 
-        $response = $this->call('PATCH', 'railcontent/content/field/' . $field['id'],
+        $response = $this->call(
+            'PATCH',
+            'railcontent/content/field/' . $field['id'],
             [
                 'content_id' => $this->faker->numberBetween()
-            ]);
+            ]
+        );
         $decodedResponse = $response->decodeResponseJson();
 
         $this->assertEquals(422, $response->status());
@@ -196,7 +206,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $field = $this->contentFieldFactory->create($content['id']);
 
         $response =
-            $this->call('DELETE', 'railcontent/content/field/' . $field['id'], ['content_id' => $content['id']]);
+            $this->call('DELETE', 'railcontent/content/field/' . $field['id']);
 
         $this->assertEquals(null, json_decode($response->getContent()));
         $this->assertEquals(204, $response->status());
@@ -207,7 +217,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $fieldId = $this->faker->numberBetween();
         $contentId = $this->faker->numberBetween();
         $response =
-            $this->call('DELETE', 'railcontent/content/field/' . $fieldId, ['content_id' => $contentId]);
+            $this->call('DELETE', 'railcontent/content/field/' . $fieldId);
 
         $this->assertEquals(
             'Delete failed, field not found with id: ' . $fieldId,
@@ -232,7 +242,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
             'position' => $field['position']
         ];
 
-        $results = $this->serviceBeingTested->update($field['id'], $updatedField);
+        $results = $this->contentFieldService->update($field['id'], $updatedField);
 
         $this->assertEquals($updatedField, $results);
     }
@@ -243,7 +253,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $field = $this->contentFieldFactory->create($content['id']);
 
-        $results = $this->serviceBeingTested->delete($field['id']);
+        $results = $this->contentFieldService->delete($field['id']);
 
         $this->assertTrue($results);
     }
@@ -304,7 +314,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
             $this->query()->table(ConfigService::$tableContentFields)->insertGetId($contentField);
 
         $response =
-            $this->call('DELETE', 'railcontent/content/field/' . $fieldId, ['content_id' => $contentId]);
+            $this->call('DELETE', 'railcontent/content/field/' . $fieldId);
 
         //check that the ContentUpdated event was dispatched with the correct content id
         Event::assertDispatched(
