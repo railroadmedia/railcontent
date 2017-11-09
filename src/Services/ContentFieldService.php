@@ -39,7 +39,7 @@ class ContentFieldService
     {
         $contentField = $this->fieldRepository->getById($id);
         
-        if (!empty($contentField) && $contentField['type'] == 'content') {
+        if (!empty($contentField) && $contentField['type'] == 'content_id') {
             $contentField['value'] = $this->contentService->getById($contentField['value']);
         }
 
