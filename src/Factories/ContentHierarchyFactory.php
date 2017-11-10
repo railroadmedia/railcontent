@@ -16,7 +16,7 @@ class ContentHierarchyFactory extends ContentHierarchyService
      * @param null $parentId
      * @param null $childId
      * @param null $childPosition
-     * @return void
+     * @return array
      */
     public function create($parentId = null, $childId = null, $childPosition = null)
     {
@@ -29,6 +29,6 @@ class ContentHierarchyFactory extends ContentHierarchyService
                 rand(),
             ];
 
-        parent::create(...$parameters);
+        return parent::create(...$parameters);
     }
 }

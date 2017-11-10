@@ -87,17 +87,21 @@ Route::group(
             Railroad\Railcontent\Controllers\ContentProgressJsonController::class . '@saveProgress'
         )->name('content.progress.store');
 
-        // content user playlists
+        // content hierarchy
         Route::put(
-            '/playlists',
-            Railroad\Railcontent\Controllers\PlaylistJsonController::class . '@store'
-        )->name('playlists.store');
+            '/content/hierarchy',
+            \Railroad\Railcontent\Controllers\ContentHierarchyJsonController::class . '@store'
+        )->name('content.hierarchy.store');
 
-        Route::post(
-            '/playlists/add-content',
-            Railroad\Railcontent\Controllers\PlaylistJsonController::class . '@addToPlaylist'
-        )->name('playlists.content.store');
+        Route::patch(
+            '/content/hierarchy/{parentId}/{childId}',
+            \Railroad\Railcontent\Controllers\ContentHierarchyJsonController::class . '@update'
+        )->name('content.hierarchy.update');
 
+        Route::delete(
+            '/content/hierarchy/{parentId}/{childId}',
+            \Railroad\Railcontent\Controllers\ContentHierarchyJsonController::class . '@delete'
+        )->name('content.hierarchy.delete');
 
         // content
         Route::options(

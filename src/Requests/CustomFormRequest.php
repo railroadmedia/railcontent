@@ -73,7 +73,7 @@ class CustomFormRequest extends FormRequest
 
     /** Set the validation custom rules defined in the configuration file per brand and content type
      *
-     * @param ContentUpdateRequest|ContentFieldCreateRequest|ContentDatumCreateRequest $request - the requests
+     * @param CustomFormRequest $request - the requests
      * @param null|string $entity - can be null, 'fields' or 'datum'
      *
      * @return array $customRules

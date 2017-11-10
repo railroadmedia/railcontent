@@ -8,6 +8,18 @@ use Railroad\Railcontent\Services\ConfigService;
 class ContentHierarchyRepository extends RepositoryBase
 {
     /**
+     * @param $parentId
+     * @param $childId
+     * @return array|null
+     */
+    public function getByChildIdParentId($parentId, $childId)
+    {
+        return $this->query()
+            ->where(['parent_id' => $parentId, 'child_id' => $childId])
+            ->first();
+    }
+
+    /**
      * @param int $parentId
      * @param int $childId
      * @param int|null $position
@@ -117,6 +129,20 @@ class ContentHierarchyRepository extends RepositoryBase
         }
 
         return $totalRowsDeleted == count($existingLinks);
+    }
+
+    /**
+     * @param $parentId
+     * @param $childId
+     * @return bool
+     */
+    public function deleteParentChildLink($parentId, $childId)
+    {
+        // todo: reposition
+
+        return $this->query()
+                ->where(['parent_id' => $parentId, 'child_id' => $childId])
+                ->delete() > 0;
     }
 
     /**
