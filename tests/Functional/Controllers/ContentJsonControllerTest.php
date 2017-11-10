@@ -708,7 +708,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $expectedContent['results'] = $expectedResults;
         $expectedContent['total_results'] = count($expectedContent['results']);
-        $expectedContent['filter_options'] = [];
+        $expectedContent['filter_options'] = [$fieldInstructor['key'] => [$instructor]];
 
         $response = $this->call(
             'GET',

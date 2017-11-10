@@ -151,5 +151,15 @@ Route::group(
             '/comment/{id}',
             \Railroad\Railcontent\Controllers\CommentJsonController::class . '@update'
         )->name('comment.update');
+
+        Route::delete(
+            '/comment/{id}',
+            \Railroad\Railcontent\Controllers\CommentJsonController::class . '@delete'
+        )->name('comment.delete');
+
+        Route::put(
+            '/comment/reply',
+            \Railroad\Railcontent\Controllers\CommentJsonController::class . '@reply'
+        )->name('comment.reply');
     }
 );

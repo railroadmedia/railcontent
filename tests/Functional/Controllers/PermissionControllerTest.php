@@ -212,7 +212,7 @@ class PermissionControllerTest extends RailcontentTestCase
         $permission = $this->permissionFactory->create();
         $content = $this->contentFactory->create();
 
-        $response = $this->call('POST', 'railcontent/permission/assign', [
+        $response = $this->call('PUT', 'railcontent/permission/assign', [
             'permission_id' => $permission['id'],
             'content_id' => $content['id']
         ]);
@@ -234,7 +234,7 @@ class PermissionControllerTest extends RailcontentTestCase
         $permission = $this->permissionFactory->create();
         $content = $this->contentFactory->create();
 
-        $response = $this->call('POST', 'railcontent/permission/assign', [
+        $response = $this->call('PUT', 'railcontent/permission/assign', [
             'permission_id' => $permission['id'],
             'content_type' => $content['type']
         ]);
@@ -245,7 +245,7 @@ class PermissionControllerTest extends RailcontentTestCase
     public function test_assign_permission_validation()
     {
         $randomPermissionId = $this->faker->numberBetween();
-        $response = $this->call('POST', 'railcontent/permission/assign', [
+        $response = $this->call('PUT', 'railcontent/permission/assign', [
             'permission_id' => $randomPermissionId
         ]);
 
@@ -277,7 +277,7 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $content = $this->contentFactory->create();
 
-        $response = $this->call('POST', 'railcontent/permission/assign', [
+        $response = $this->call('PUT', 'railcontent/permission/assign', [
             'permission_id' => $permission['id'],
             'content_id' => ($content['id'] + 1)
         ]);
@@ -302,7 +302,7 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $content = $this->contentFactory->create();
 
-        $response = $this->call('POST', 'railcontent/permission/assign', [
+        $response = $this->call('PUT', 'railcontent/permission/assign', [
             'permission_id' => $permission['id'],
             'content_type' => $this->faker->word
         ]);

@@ -9,7 +9,7 @@ return [
 
     'default_language' => 'en-US',
     'available_languages' => [
-        'es-US',
+        'en-US',
     ],
 
     'field_option_list' => [
@@ -20,7 +20,9 @@ return [
         'style',
         'artist',
     ],
-
+    'commentable_content_types' => [
+        'course',
+    ],
     'validation' => [
         'drumeo' => [
             'library-lesson' => [

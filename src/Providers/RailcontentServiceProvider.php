@@ -98,6 +98,9 @@ class RailcontentServiceProvider extends ServiceProvider
 
         // restrict which fields can be listed to avoid massive queries
         ConfigService::$fieldOptionList = config('railcontent.field_option_list', []);
+
+        //restrict which content type can have comment
+        ConfigService::$commentableContentTypes = config('railcontent.commentable_content_types');
     }
 
     /**

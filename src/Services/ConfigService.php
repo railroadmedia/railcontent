@@ -98,4 +98,9 @@ class ConfigService
      * @var @array
      */
     public static $fieldOptionList;
+
+    /**
+     * @var array
+     */
+    public static $commentableContentTypes;
 }

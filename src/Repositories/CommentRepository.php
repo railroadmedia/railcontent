@@ -8,22 +8,18 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class CommentRepository extends RepositoryBase
 {
-    /**
-     * If this is false the comment with all his replies will be deleted.
+    /** The value it's set in ContentPermissionMiddleware: if the user it's admin the value it's false, otherwise it's true.
+     * If the value it' is false the comment with all his replies will be deleted.
      * If it's true the comment with the replies are only soft deleted (marked as deleted).
      *
      * @var bool
      */
     public static $softDelete = true;
 
-    /**
-     * @return array
+    /** Based on softDelete we soft delete or permanently delete the comment with all his replies
+     * @param int $id
+     * @return bool|int
      */
-    public function getAll()
-    {
-        return $this->query()->get()->toArray();
-    }
-
     public function delete($id)
     {
         if ($this::$softDelete) {
@@ -42,9 +38,9 @@ class CommentRepository extends RepositoryBase
         return parent::connection()->table(ConfigService::$tableComments);
     }
 
-    /**
-     * @param $id
-     * @return int
+    /** Mark comment and it's replies as deleted
+     * @param integer $id
+     * @return bool
      */
     private function softDeleteCommentWithReplies($id)
     {
@@ -56,11 +52,12 @@ class CommentRepository extends RepositoryBase
                     'deleted_at' => Carbon::now()->toDateTimeString()
                 ]
             );
+
         return $deleted;
     }
 
-    /**
-     * @param $id
+    /** Delete comment and it's replies
+     * @param integer $id
      * @return bool
      */
     private function deleteCommentWithReplies($id)

@@ -76,6 +76,8 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.brand', $defaultConfig['brand']);
         $app['config']->set('railcontent.available_languages', $defaultConfig['available_languages']);
         $app['config']->set('railcontent.default_language', $defaultConfig['default_language']);
+        $app['config']->set('railcontent.field_option_list', $defaultConfig['field_option_list']);
+        $app['config']->set('railcontent.commentable_content_types', $defaultConfig['commentable_content_types']);
         $app['config']->set('railcontent.validation', $defaultConfig['validation']);
 
         // setup default database to use sqlite :memory:

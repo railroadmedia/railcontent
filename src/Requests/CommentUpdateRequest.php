@@ -25,7 +25,9 @@ class CommentUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => 'max:1024'
+            'comment' => 'nullable|max:1024',
+            'content_id' => 'numeric|exists:' . ConfigService::$tableContent . ',id',
+            'parent_id' => 'numeric|exists:' . ConfigService::$tableComments . ',id'
         ];
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
+use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentService;
 
 class ContentPermissionsMiddleware
@@ -56,6 +57,8 @@ class ContentPermissionsMiddleware
             PermissionRepository::$availableContentPermissionIds = false;
 
             CommentRepository::$softDelete = false;
+
+            CommentService::$canManageOtherComments = true;
         } else {
 
             // users can only see published lessons
@@ -70,6 +73,8 @@ class ContentPermissionsMiddleware
                 $request->get('user_content_permission_ids', false);
 
             CommentRepository::$softDelete = true;
+
+            CommentService::$canManageOtherComments = false;
         }
 
         return $next($request);

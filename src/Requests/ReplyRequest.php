@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Requests;
 
 use Railroad\Railcontent\Services\ConfigService;
 
-class CommentCreateRequest extends FormRequest
+class ReplyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class CommentCreateRequest extends FormRequest
     {
         return [
             'comment' => 'required|max:1024',
-            'content_id' => 'required|numeric|exists:' . ConfigService::$tableContent . ',id'
+            'parent_id' => 'required|numeric|exists:' . ConfigService::$tableComments . ',id'
         ];
     }
 }
