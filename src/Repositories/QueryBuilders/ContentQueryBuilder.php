@@ -9,7 +9,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
-class ContentQueryBuilder extends Builder
+class ContentQueryBuilder extends QueryBuilder
 {
     /**
      * @return $this
@@ -63,32 +63,6 @@ class ContentQueryBuilder extends Builder
         return $this;
     }
 
-    /**
-     * @param integer $page
-     * @param integer $limit
-     * @return $this
-     */
-    public function directPaginate($page, $limit)
-    {
-        if ($limit >= 0) {
-            $this->limit($limit)
-                ->skip(($page - 1) * $limit);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param null $column
-     * @param string $direction
-     * @return $this
-     */
-    public function orderBy($column = null, $direction = 'asc', $table = null)
-    {
-        parent::orderBy(($table ?? ConfigService::$tableContent) . '.' . $column, $direction);
-
-        return $this;
-    }
 
     /**
      * Sub query must be completely created before being passed in here.

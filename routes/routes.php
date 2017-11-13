@@ -165,5 +165,10 @@ Route::group(
             '/comment/reply',
             \Railroad\Railcontent\Controllers\CommentJsonController::class . '@reply'
         )->name('comment.reply');
+
+        Route::get(
+            '/comment',
+            \Railroad\Railcontent\Controllers\CommentJsonController::class . '@index'
+        )->name('comment.index');
     }
 );

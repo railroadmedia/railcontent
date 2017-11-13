@@ -6,6 +6,7 @@ namespace Railroad\Railcontent\Tests\Functional\Repositories;
 use Carbon\Carbon;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
+use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -80,7 +81,7 @@ class CommentServiceTest extends RailcontentTestCase
 
     public function test_create_comment_on_not_commentable_content_type()
     {
-        $result = $this->classBeingTested->create($this->faker->text,rand(), null, rand());
+        $result = $this->classBeingTested->create($this->faker->text, rand(), null, rand());
 
         $this->assertNull($result);
     }
@@ -140,7 +141,8 @@ class CommentServiceTest extends RailcontentTestCase
             $this->faker->randomElement(ConfigService::$commentableContentTypes)
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-
+        CommentService::$canManageOtherComments = false;
+        
         $newCommentValues = [
             'comment' => $this->faker->text
         ];

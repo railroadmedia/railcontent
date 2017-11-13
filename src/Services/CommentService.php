@@ -60,8 +60,7 @@ class CommentService
     public function create($comment, $contentId, $parentId, $userId)
     {
         //if we have defined parentId we have a comment reply
-        if($parentId)
-        {
+        if ($parentId) {
             $parentComment = $this->get($parentId);
             //set for the reply the comment content_id
             $contentId = $parentComment['content_id'];
@@ -148,5 +147,32 @@ class CommentService
         }
 
         return $canManage;
+    }
+
+    /**
+     *  Set the data necessary for the pagination ($page, $limit, $orderByDirection and $orderByColumn),
+     * call the method from the repository to pull the paginated comments that meet the criteria and call a method that return the total number of comments.
+     * Return an array with the paginated results and the total number of results
+     *@param int $page
+     *@param int $limit
+     *@param string $orderByAndDirection
+     *@return array
+     */
+    public function getComments($page, $limit, $orderByAndDirection)
+    {
+        if ($limit == 'null') {
+            $limit = -1;
+        }
+
+        $orderByDirection = substr($orderByAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
+
+        $orderByColumn = trim($orderByAndDirection, '-');
+
+        $this->commentRepository->setData($page, $limit, $orderByDirection, $orderByColumn);
+
+        return [
+            'results' => $this->commentRepository->getComments(),
+            'total_results' => $this->commentRepository->countComments()
+        ];
     }
 }

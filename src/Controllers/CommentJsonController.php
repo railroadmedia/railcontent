@@ -3,12 +3,15 @@
 namespace Railroad\Railcontent\Controllers;
 
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Exceptions\NotAllowedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
+use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Requests\CommentCreateRequest;
 use Railroad\Railcontent\Requests\CommentUpdateRequest;
 use Railroad\Railcontent\Requests\ReplyRequest;
+use Railroad\Railcontent\Responses\JsonPaginatedResponse;
 use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\CommentService;
 
@@ -28,13 +31,42 @@ class CommentJsonController extends Controller
         $this->commentService = $commentService;
     }
 
+    /** Call the method from the service to pull the comments based on the criteria passed in request:
+     *      - content_id   => pull the comments for given content id
+     *      - user_id      => pull user's comments
+     *      - content_type => pull the comments for the contents with given type
+     *  Return a Json paginated response with the comments
+     *
+     * @param Request $request
+     * @return JsonPaginatedResponse
+     */
+    public function index(Request $request)
+    {
+        CommentRepository::$availableContentId = $request->get('content_id')?? null;
+        CommentRepository::$availableUserId = $request->get('user_id') ?? null;
+        CommentRepository::$availableContentType = $request->get('content_type') ?? null;
+
+        $commentData = $this->commentService->getComments(
+            $request->get('page', 1),
+            $request->get('limit', 10),
+            $request->get('sort', 'created_on')
+        );
+
+        return new JsonPaginatedResponse(
+            $commentData['results'],
+            $commentData['total_results'],
+            null,
+            200
+        );
+    }
+
     /** Call the method from service that create a new comment if the request data pass the validation
      * @param CommentCreateRequest $request
      * @return JsonResponse|NotAllowedException
      */
     public function store(CommentCreateRequest $request)
     {
-       $comment = $this->commentService->create(
+        $comment = $this->commentService->create(
 
             $request->get('comment'),
             $request->get('content_id'),
@@ -42,9 +74,9 @@ class CommentJsonController extends Controller
             $request->user()->id
         );
 
-       throw_if(is_null($comment), new NotAllowedException('The content type does not allow comments.'));
+        throw_if(is_null($comment), new NotAllowedException('The content type does not allow comments.'));
 
-       return new JsonResponse($comment, 200);
+        return new JsonResponse($comment, 200);
     }
 
     /** Update a comment based on id and return it in JSON format
@@ -87,10 +119,10 @@ class CommentJsonController extends Controller
         $deleted = $this->commentService->delete($commentId);
 
         //if the delete method response it's null the comment not exist; we throw the proper exception
-        throw_if(is_null($deleted), new NotFoundException('Delete failed, comment not found with id: '. $commentId));
+        throw_if(is_null($deleted), new NotFoundException('Delete failed, comment not found with id: ' . $commentId));
 
         //if the delete method response it's false the mysql delete method was failed; we throw the proper exception
-        throw_if(($deleted == -1),  new NotAllowedException('Delete failed, you can delete only your comments.'));
+        throw_if(($deleted == -1), new NotAllowedException('Delete failed, you can delete only your comments.'));
 
         return new JsonResponse(null, 204);
     }

@@ -165,4 +165,81 @@ class CommentRepositoryTest extends RailcontentTestCase
             ]
         );
     }
+
+    public function test_get_user_comments()
+    {
+        $userId = $this->createAndLogInNewUser();
+        $content = $this->contentFactory->create($this->faker->word, 'course');
+
+        // create random comments
+        for ($i = 1; $i < 5; $i++) {
+            $comments = $this->commentFactory->create($this->faker->text(), $content['id']);
+        }
+
+        for ($i = 1; $i < 12; $i++) {
+            $expectedComments[] = $this->commentFactory->create($this->faker->text(), $content['id'], null, $userId);
+        }
+        CommentRepository::$availableUserId = $userId;
+
+        // CommentRepository::$availableContentId = [1];
+       // CommentRepository::$availableContentType = 'course';
+
+        $results = $this->classBeingTested->getComments();
+        $this->assertEquals($expectedComments, $results);
+    }
+
+    public function test_get_content_comments()
+    {
+        $firstContent = $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes));
+        $secondContent =  $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes));
+
+        //create comments for first content
+        for($i = 0; $i<5; $i++)
+        {
+            $comments = $this->commentFactory->create($this->faker->text(), $firstContent['id']);
+        }
+
+        //create comments for second content
+        for($i = 0; $i<5; $i++)
+        {
+            $expectedComments[] = $this->commentFactory->create($this->faker->text(), $secondContent['id']);
+        }
+
+        CommentRepository::$availableUserId = null;
+        CommentRepository::$availableContentId = $secondContent['id'];
+        // CommentRepository::$availableContentType = 'course';
+
+        $results = $this->classBeingTested->getComments();
+
+        $this->assertEquals($expectedComments, $results);
+    }
+
+    public function test_get_content_type_comments()
+    {
+        $userId = $this->createAndLogInNewUser();
+
+        $firstContent = $this->contentFactory->create($this->faker->word, ConfigService::$commentableContentTypes[0]);
+        $secondContentWithOtherType = $this->contentFactory->create($this->faker->word, ConfigService::$commentableContentTypes[1]);
+
+        //create comments for first content
+        for($i = 0; $i<5; $i++)
+        {
+            $expectedComments[] = $this->commentFactory->create($this->faker->text(), $firstContent['id'], null, $userId);
+
+        }
+
+        //create comments for second content
+        for($i = 0; $i<5; $i++)
+        {
+            $otherComments = $this->commentFactory->create($this->faker->text(), $secondContentWithOtherType['id']);
+        }
+
+        CommentRepository::$availableUserId = null;
+        CommentRepository::$availableContentId = null;
+        CommentRepository::$availableContentType =  $firstContent['type'];
+
+        $results = $this->classBeingTested->getComments();
+
+        $this->assertEquals($expectedComments, $results);
+    }
 }

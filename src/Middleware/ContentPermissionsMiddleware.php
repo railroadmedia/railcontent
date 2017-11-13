@@ -58,6 +58,8 @@ class ContentPermissionsMiddleware
 
             CommentRepository::$softDelete = false;
 
+            CommentRepository::$pullSoftDeletedComments = true;
+
             CommentService::$canManageOtherComments = true;
         } else {
 
@@ -73,6 +75,8 @@ class ContentPermissionsMiddleware
                 $request->get('user_content_permission_ids', false);
 
             CommentRepository::$softDelete = true;
+
+            CommentRepository::$pullSoftDeletedComments = false;
 
             CommentService::$canManageOtherComments = false;
         }
