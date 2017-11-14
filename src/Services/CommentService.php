@@ -161,7 +161,7 @@ class CommentService
      *@param string $orderByAndDirection
      *@return array
      */
-    public function getComments($page, $limit, $orderByAndDirection)
+    public function getComments($page = 1, $limit = 25, $orderByAndDirection = '-created_on')
     {
         if ($limit == 'null') {
             $limit = -1;
