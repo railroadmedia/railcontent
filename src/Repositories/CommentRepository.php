@@ -82,6 +82,7 @@ class CommentRepository extends RepositoryBase
             ->restrictByVisibility()
             ->orderBy($this->orderBy, $this->orderDirection, ConfigService::$tableComments)
             ->directPaginate($this->page, $this->limit);
+
         $rows = $query->getToArray();
 
         return $this->parseRows($rows);
@@ -190,13 +191,17 @@ class CommentRepository extends RepositoryBase
     private function parseRows($rows)
     {
         $results = [];
+
         foreach($rows as $row){
             if(is_null($row['parent_id'])){
-                $results[$row['id']] = $row;
+                $row['replies'] = [];
+
+                $results[$row['id']] = array_merge($row, $results[$row['id']] ?? []);
             } else {
                 $results[$row['parent_id']]['replies'][$row['id']] = $row;
             }
         }
+
         return $results;
     }
 }
