@@ -29,7 +29,7 @@ class ContentHelper
 
         return $result;
     }
-    
+
     /**
      * @param array $content
      * @param string $key
@@ -56,6 +56,34 @@ class ContentHelper
         }
 
         return null;
+    }
+
+    /**
+     * @param array $content
+     * @param string $key
+     * @param integer $position
+     * @param string|null $type
+     * @return array
+     */
+    public static function getFieldValues(array $content, $key, $type = null)
+    {
+        if (empty($content['fields']) || !is_array($content['fields'])) {
+            return [];
+        }
+
+        $values = [];
+
+        foreach ($content['fields'] as $field) {
+            if (!is_null($type) && $field['type'] != $type) {
+                continue;
+            }
+
+            if ($field['key'] == $key) {
+                $values[] = $field['value'];
+            }
+        }
+
+        return $values;
     }
 
     /**
@@ -105,6 +133,29 @@ class ContentHelper
         }
 
         return null;
+    }
+
+    /**
+     * @param array $content
+     * @param string $key
+     * @param integer $position
+     * @return array
+     */
+    public static function getDatumValues(array $content, $key)
+    {
+        if (empty($content['data']) || !is_array($content['data'])) {
+            return [];
+        }
+
+        $values = [];
+
+        foreach ($content['data'] as $field) {
+            if ($field['key'] == $key) {
+                $values[] = $field['value'];
+            }
+        }
+
+        return $values;
     }
 
     /**
