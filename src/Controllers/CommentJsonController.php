@@ -101,7 +101,7 @@ class CommentJsonController extends Controller
         );
 
         //if the update response method = -1 => the user have not rights to update other user comment; we throw the exception
-        throw_if(($comment == -1), new NotAllowedException('Update failed, you can update only your comments.'));
+        throw_if(($comment === -1), new NotAllowedException('Update failed, you can update only your comments.'));
 
         //if the update method response it's null the comment not exist; we throw the proper exception
         throw_if(is_null($comment), new NotFoundException('Update failed, comment not found with id: ' . $commentId));
