@@ -181,9 +181,6 @@ class CommentRepositoryTest extends RailcontentTestCase
         }
         CommentRepository::$availableUserId = $userId;
 
-        // CommentRepository::$availableContentId = [1];
-       // CommentRepository::$availableContentType = 'course';
-
         $results = $this->classBeingTested->getComments();
         $this->assertEquals($expectedComments, $results);
     }

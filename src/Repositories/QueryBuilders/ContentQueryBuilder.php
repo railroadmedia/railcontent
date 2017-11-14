@@ -466,13 +466,4 @@ class ContentQueryBuilder extends QueryBuilder
 
         return $this;
     }
-
-    /**
-     * @param array $columns
-     * @return array
-     */
-    public function getToArray(array $columns = ['*'])
-    {
-        return parent::get($columns)->toArray();
-    }
 }

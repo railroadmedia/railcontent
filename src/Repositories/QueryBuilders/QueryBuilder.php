@@ -15,7 +15,7 @@ class QueryBuilder extends Builder
      */
     public function directPaginate($page, $limit)
     {
-        if ($limit >= 0) {
+        if (is_numeric($limit)) {
             $this->limit($limit)
                 ->skip(($page - 1) * $limit);
         }
@@ -30,8 +30,19 @@ class QueryBuilder extends Builder
      */
     public function orderBy($column = null, $direction = 'asc', $table = null)
     {
-        parent::orderBy(($table ?? ConfigService::$tableContent) . '.' . $column, $direction);
+        if ($column) {
+            parent::orderBy(($table ?? ConfigService::$tableContent) . '.' . $column, $direction);
+        }
 
         return $this;
+    }
+
+    /**
+     * @param array $columns
+     * @return array
+     */
+    public function getToArray(array $columns = ['*'])
+    {
+        return parent::get($columns)->toArray();
     }
 }

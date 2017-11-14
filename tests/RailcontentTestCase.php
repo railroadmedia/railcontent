@@ -334,4 +334,17 @@ class RailcontentTestCase extends BaseTestCase
         ];
     }
 
+    public function createPaginatedExpectedResult($status, $code, $page, $limit, $totalResults, $results, $filter)
+    {
+        return [
+            "status" => $status,
+            "code" => $code,
+            "page" => $page,
+            "limit" => $limit,
+            "total_results" => $totalResults,
+            "results" => $results,
+            "filter_options" => $filter
+        ];
+    }
+
 }

@@ -21,7 +21,7 @@ return [
         'artist',
     ],
     'commentable_content_types' => [
-        'course',
+        'course','course lesson'
     ],
     'validation' => [
         'drumeo' => [

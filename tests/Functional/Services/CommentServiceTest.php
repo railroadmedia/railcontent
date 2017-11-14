@@ -186,4 +186,34 @@ class CommentServiceTest extends RailcontentTestCase
         $this->assertEquals(-1, $result);
     }
 
+    public function test_get_comment_when_not_exist()
+    {
+        $results = $this->classBeingTested->getComments(1, 10, 'id');
+        $this->assertArrayHasKey('results',$results);
+        $this->assertArrayHasKey('total_results',$results);
+
+        $this->assertEquals(0, $results['total_results']);
+        $this->assertEquals([], $results['results']);
+    }
+
+    public function test_get_comments_paginated()
+    {
+        $userId = $this->createAndLogInNewUser();
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+        );
+        $limit = 3;
+
+        $totalNumber = $this->faker->numberBetween($limit, ($limit+5));
+        for($i = 0; $i<$totalNumber; $i++) {
+            $comment[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        }
+
+        $results = $this->classBeingTested->getComments(1, $limit, 'id');
+
+        $this->assertEquals($totalNumber, $results['total_results']);
+        $this->assertEquals(array_slice($comment, 0, $limit, true), $results['results']);
+    }
+
 }

@@ -258,4 +258,168 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $response->assertJsonFragment(['The comment field is required.']);
         $response->assertJsonFragment(['The parent id field is required.']);
     }
+
+    public function test_pull_comments_when_not_exists()
+    {
+        $response = $this->call('GET', 'railcontent/comment');
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $expectedResults = $this->createPaginatedExpectedResult('ok', 200, 1, 10, 0, [], null);
+        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+    }
+
+    public function test_pull_comments_paginated()
+    {
+        $page = 2;
+        $limit = 10;
+        $totalNumber = $this->faker->numberBetween($limit, ($limit + 25));
+
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+        );
+
+        for ($i = 1; $i <= $totalNumber; $i++) {
+            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        }
+
+        $response = $this->call('GET', 'railcontent/comment',
+            [
+                'page' => $page,
+                'limit' => $limit
+            ]);
+
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $expectedResults = $this->createPaginatedExpectedResult(
+            'ok',
+            200,
+            $page,
+            $limit,
+            $totalNumber,
+            array_slice($comments, ($limit * ($page - 1)), $limit, true),
+            null);
+
+        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+    }
+
+    public function test_pull_content_comments_paginated()
+    {
+        $page = 2;
+        $limit = 3;
+        $totalNumber = $this->faker->numberBetween($limit, ($limit + 25));
+
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+        );
+
+        $otherContent = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+        );
+
+        for ($i = 1; $i <= $totalNumber; $i++) {
+            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        }
+
+        for ($i = 1; $i <= $totalNumber; $i++) {
+            $otherContentcomments[$i] = $this->commentFactory->create($this->faker->text, $otherContent['id'], null, rand());
+        }
+
+        $response = $this->call('GET', 'railcontent/comment',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'content_id' => $content['id']
+            ]);
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $expectedResults = $this->createPaginatedExpectedResult(
+            'ok',
+            200,
+            $page,
+            $limit,
+            $totalNumber,
+            array_slice($comments, ($limit * ($page - 1)), $limit, true),
+            null);
+
+        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+    }
+
+    public function test_pull_user_comments_paginated()
+    {
+        $page = 2;
+        $limit = 3;
+        $totalNumber = $this->faker->numberBetween($limit, ($limit + 25));
+        $userId = 1;
+
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+        );
+
+        for ($i = 1; $i <= $totalNumber; $i++) {
+            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
+        }
+
+        for ($i = 1; $i <= 5; $i++) {
+            $otherUsercomments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        }
+
+        $response = $this->call('GET', 'railcontent/comment',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'user_id' => $userId
+            ]);
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $expectedResults = $this->createPaginatedExpectedResult(
+            'ok',
+            200,
+            $page,
+            $limit,
+            $totalNumber,
+            array_slice($comments, ($limit * ($page - 1)), $limit, true),
+            null);
+
+        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+    }
+
+    public function test_pull_comments_filtered_by_content_type()
+    {
+        $page = 2;
+        $limit = 3;
+        $totalNumber = $this->faker->numberBetween($limit, ($limit + 25));
+
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            ConfigService::$commentableContentTypes[0]
+        );
+
+        for ($i = 1; $i <= $totalNumber; $i++) {
+            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        }
+
+        $response = $this->call('GET', 'railcontent/comment',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'content_type' => $content['type']
+            ]);
+        $this->assertEquals(200, $response->getStatusCode());
+
+        $expectedResults = $this->createPaginatedExpectedResult(
+            'ok',
+            200,
+            $page,
+            $limit,
+            $totalNumber,
+            array_slice($comments, ($limit * ($page - 1)), $limit, true),
+            null);
+
+        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+    }
 }

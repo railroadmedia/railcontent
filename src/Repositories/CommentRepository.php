@@ -82,8 +82,9 @@ class CommentRepository extends RepositoryBase
             ->restrictByVisibility()
             ->orderBy($this->orderBy, $this->orderDirection, ConfigService::$tableComments)
             ->directPaginate($this->page, $this->limit);
+        $rows = $query->getToArray();
 
-        return $query->get()->toArray();
+        return $this->parseRows($rows);
     }
 
     /** Count all the comments
@@ -158,5 +159,12 @@ class CommentRepository extends RepositoryBase
         $deleted = parent::delete($id);
 
         return $deleted;
+    }
+
+    private function parseRows($rows)
+    {
+        $ids = array_pluck($rows, 'id');
+
+        return array_combine($ids, $rows);
     }
 }
