@@ -122,7 +122,7 @@ class CommentJsonController extends Controller
         throw_if(is_null($deleted), new NotFoundException('Delete failed, comment not found with id: ' . $commentId));
 
         //if the delete method response it's false the mysql delete method was failed; we throw the proper exception
-        throw_if(($deleted == -1), new NotAllowedException('Delete failed, you can delete only your comments.'));
+        throw_if(($deleted === -1), new NotAllowedException('Delete failed, you can delete only your comments.'));
 
         return new JsonResponse(null, 204);
     }

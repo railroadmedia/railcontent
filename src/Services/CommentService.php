@@ -123,6 +123,7 @@ class CommentService
     {
         //check if comment exist
         $comment = $this->get($id);
+
         if (is_null($comment)) {
             return $comment;
         }
