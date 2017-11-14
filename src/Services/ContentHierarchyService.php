@@ -41,13 +41,13 @@ class ContentHierarchyService
      */
     public function create($parentId, $childId, $childPosition = null)
     {
-        $id = $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
+        $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
             $parentId,
             $childId,
             $childPosition
         );
 
-        return $this->contentHierarchyRepository->getById($id);
+        return $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
     }
 
     /**
@@ -60,13 +60,13 @@ class ContentHierarchyService
      */
     public function update($parentId, $childId, $childPosition = null)
     {
-        $id = $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
+        $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
             $parentId,
             $childId,
             $childPosition
         );
 
-        return $this->contentHierarchyRepository->getById($id);
+        return $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
     }
 
     /**

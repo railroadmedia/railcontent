@@ -34,8 +34,8 @@ class ContentHierarchyJsonController extends Controller
     public function store(ContentHierarchyCreateRequest $request)
     {
         $contentField = $this->contentHierarchyService->create(
-            $request->input('child_id'),
             $request->input('parent_id'),
+            $request->input('child_id'),
             $request->input('child_position')
         );
 
