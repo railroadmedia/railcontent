@@ -4,6 +4,8 @@ namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\CommentRepository;
@@ -77,6 +79,41 @@ class CommentServiceTest extends RailcontentTestCase
         $result = $this->classBeingTested->create($comment['comment'], $content['id'], $comment['parent_id'], $userId);
 
         $this->assertEquals($comment, $result);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableCommentsAssignment,
+            [
+                'comment_id' => $comment['id'],
+                'user_id' => ConfigService::$commentsAssignation[$content['type']]
+            ]
+        );
+    }
+
+    public function test_comment_assignation()
+    {
+        Event::fake();
+
+        $userId = $this->createAndLogInNewUser();
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+        );
+
+        $comment = [
+            'id' => 1,
+            'content_id' => $content['id'],
+            'parent_id' => null,
+            'user_id' => $userId,
+            'comment' => $this->faker->text,
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'deleted_at' => null
+        ];
+        $result = $this->classBeingTested->create($comment['comment'], $content['id'], $comment['parent_id'], $userId);
+
+        //check that the ContentCreated event was dispatched with the correct content id
+        Event::assertDispatched(CommentCreated::class, function($event) use ($comment, $content) {
+            return (($event->commentId == $comment['id']) && ($event->contentType == $content['type']));
+        });
     }
 
     public function test_create_comment_on_not_commentable_content_type()
@@ -206,8 +243,8 @@ class CommentServiceTest extends RailcontentTestCase
         $limit = 3;
 
         $totalNumber = $this->faker->numberBetween($limit, ($limit+5));
-        for($i = 0; $i<$totalNumber; $i++) {
-            $comment[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        for($i = 1; $i<=$totalNumber; $i++) {
+            $comment[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
         }
 
         $results = $this->classBeingTested->getComments(1, $limit, 'id');

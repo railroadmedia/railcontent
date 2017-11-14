@@ -23,6 +23,10 @@ return [
     'commentable_content_types' => [
         'course','course lesson'
     ],
+    'comments_assignation' => [
+        'course' => 1,
+        'course lesson' => 1
+    ],
     'validation' => [
         'drumeo' => [
             'library-lesson' => [

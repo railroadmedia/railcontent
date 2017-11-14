@@ -161,10 +161,42 @@ class CommentRepository extends RepositoryBase
         return $deleted;
     }
 
+    /** Parse the rows to return the results in the following format:
+     * [
+     *      comment_id => [
+     *              'id' => comment id,
+     *              'content_id' => content id,
+     *              'comment' => comment text,
+     *              'parent_id' => null for the comments
+     *              'user_id' => the user id that create the comment,
+     *              'created_on' => creation date,
+     *              'deleted_at' => null|date when the comment was marked deleted
+     *              'replies' => [
+     *                  reply_id => [
+     *                      'id' => reply id,
+     *                      'content_id' => content id,
+     *                      'comment' => reply text,
+     *                      'parent_id' => the comment id
+     *                      'user_id' => the user id that create the reply,
+     *                      'created_on' => creation date,
+     *                      'deleted_at' => null|date when the comment was marked deleted
+     *                  ]
+     *              ]
+     *       ]
+     * ]
+     * @param $rows
+     * @return array
+     */
     private function parseRows($rows)
     {
-        $ids = array_pluck($rows, 'id');
-
-        return array_combine($ids, $rows);
+        $results = [];
+        foreach($rows as $row){
+            if(is_null($row['parent_id'])){
+                $results[$row['id']] = $row;
+            } else {
+                $results[$row['parent_id']]['replies'][$row['id']] = $row;
+            }
+        }
+        return $results;
     }
 }

@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
@@ -83,6 +84,8 @@ class CommentService
                 'created_on' => Carbon::now()->toDateTimeString()
             ]
         );
+
+        event(new CommentCreated($commentId, $content['type']));
 
         return $this->get($commentId);
     }

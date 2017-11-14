@@ -171,14 +171,15 @@ class CommentRepositoryTest extends RailcontentTestCase
         $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create($this->faker->word, 'course');
 
+        for ($i = 1; $i < 12; $i++) {
+            $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $content['id'], null, $userId);
+        }
+
         // create random comments
         for ($i = 1; $i < 5; $i++) {
             $comments = $this->commentFactory->create($this->faker->text(), $content['id']);
         }
 
-        for ($i = 1; $i < 12; $i++) {
-            $expectedComments[] = $this->commentFactory->create($this->faker->text(), $content['id'], null, $userId);
-        }
         CommentRepository::$availableUserId = $userId;
 
         $results = $this->classBeingTested->getComments();
@@ -190,16 +191,16 @@ class CommentRepositoryTest extends RailcontentTestCase
         $firstContent = $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes));
         $secondContent =  $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes));
 
+        //create comments for second content
+        for($i = 1; $i<5; $i++)
+        {
+            $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $secondContent['id']);
+        }
+
         //create comments for first content
         for($i = 0; $i<5; $i++)
         {
             $comments = $this->commentFactory->create($this->faker->text(), $firstContent['id']);
-        }
-
-        //create comments for second content
-        for($i = 0; $i<5; $i++)
-        {
-            $expectedComments[] = $this->commentFactory->create($this->faker->text(), $secondContent['id']);
         }
 
         CommentRepository::$availableUserId = null;
@@ -219,9 +220,9 @@ class CommentRepositoryTest extends RailcontentTestCase
         $secondContentWithOtherType = $this->contentFactory->create($this->faker->word, ConfigService::$commentableContentTypes[1]);
 
         //create comments for first content
-        for($i = 0; $i<5; $i++)
+        for($i = 1; $i<5; $i++)
         {
-            $expectedComments[] = $this->commentFactory->create($this->faker->text(), $firstContent['id'], null, $userId);
+            $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $firstContent['id'], null, $userId);
 
         }
 
@@ -234,6 +235,25 @@ class CommentRepositoryTest extends RailcontentTestCase
         CommentRepository::$availableUserId = null;
         CommentRepository::$availableContentId = null;
         CommentRepository::$availableContentType =  $firstContent['type'];
+
+        $results = $this->classBeingTested->getComments();
+
+        $this->assertEquals($expectedComments, $results);
+    }
+
+    public function test_comments_with_replies()
+    {
+        $userId = $this->createAndLogInNewUser();
+        $content = $this->contentFactory->create($this->faker->word, 'course');
+        $numberOfComments = 12;
+
+        for ($i = 1; $i <= $numberOfComments; $i++) {
+            $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $content['id'], null, $userId);
+        }
+
+        for($i = 1; $i<=3; $i++){
+            $expectedComments[$i]['replies'][$numberOfComments+$i] = $this->commentFactory->create($this->faker->text(), null, $expectedComments[$i]['id'], rand());
+        }
 
         $results = $this->classBeingTested->getComments();
 

@@ -63,7 +63,7 @@ class CommentQueryBuilder extends QueryBuilder
     public function restrictByUser()
     {
         if (CommentRepository::$availableUserId) {
-            $this->where('user_id', CommentRepository::$availableUserId);
+            $this->where(ConfigService::$tableComments . '.user_id', CommentRepository::$availableUserId);
         }
 
         return $this;

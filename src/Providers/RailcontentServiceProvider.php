@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Providers;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use PDO;
+use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDatumCreated;
 use Railroad\Railcontent\Events\ContentDatumDeleted;
@@ -13,6 +14,7 @@ use Railroad\Railcontent\Events\ContentFieldCreated;
 use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\VersionContentEventListener;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -40,6 +42,7 @@ class RailcontentServiceProvider extends ServiceProvider
             ContentDatumCreated::class => [VersionContentEventListener::class . '@handle'],
             ContentDatumUpdated::class => [VersionContentEventListener::class . '@handle'],
             ContentDatumDeleted::class => [VersionContentEventListener::class . '@handle'],
+            CommentCreated::class => [AssignCommentEventListener::class . '@handle']
         ];
 
         parent::boot();
@@ -85,6 +88,7 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tablePlaylists = ConfigService::$tablePrefix . 'playlists';
         ConfigService::$tablePlaylistContents = ConfigService::$tablePrefix . 'playlist_contents';
         ConfigService::$tableComments = ConfigService::$tablePrefix . 'comments';
+        ConfigService::$tableCommentsAssignment = ConfigService::$tablePrefix . 'comment_assignment';
 
         // brand
         ConfigService::$brand = config('railcontent.brand');
@@ -101,6 +105,8 @@ class RailcontentServiceProvider extends ServiceProvider
 
         //restrict which content type can have comment
         ConfigService::$commentableContentTypes = config('railcontent.commentable_content_types');
+
+        ConfigService::$commentsAssignation = config('railcontent.comments_assignation');
     }
 
     /**

@@ -75,6 +75,11 @@ class ConfigService
     public static $tableComments;
 
     /**
+     * @var string
+     */
+    public static $tableCommentsAssignment;
+
+    /**
      * @var array
      */
     public static $availableLanguages;
@@ -103,4 +108,7 @@ class ConfigService
      * @var array
      */
     public static $commentableContentTypes;
+
+    public static $commentsAssignation;
+
 }
