@@ -170,5 +170,15 @@ Route::group(
             '/comment',
             \Railroad\Railcontent\Controllers\CommentJsonController::class . '@index'
         )->name('comment.index');
+
+        Route::get(
+            '/assigned-comments',
+            \Railroad\Railcontent\Controllers\CommentAssignationJsonController::class . '@index'
+        )->name('comment.assigned-to-me');
+
+        Route::delete(
+            '/assigned-comment/{commentId}',
+            \Railroad\Railcontent\Controllers\CommentAssignationJsonController::class . '@delete'
+        )->name('comment.assignation-delete');
     }
 );

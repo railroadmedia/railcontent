@@ -109,6 +109,10 @@ class CommentService
             return -1;
         }
 
+        if (count($data) == 0) {
+            return $comment;
+        }
+
         $this->commentRepository->update($id, $data);
 
         return $this->get($id);

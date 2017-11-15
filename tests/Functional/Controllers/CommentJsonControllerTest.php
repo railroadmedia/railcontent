@@ -282,6 +282,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         for ($i = 1; $i <= $totalNumber; $i++) {
             $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+            $comments[$i]['replies'] = [];
         }
 
         $response = $this->call('GET', 'railcontent/comment',
@@ -322,6 +323,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         for ($i = 1; $i <= $totalNumber; $i++) {
             $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+            $comments[$i]['replies'] = [];
         }
 
         for ($i = 1; $i <= $totalNumber; $i++) {
@@ -362,6 +364,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         for ($i = 1; $i <= $totalNumber; $i++) {
             $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
+            $comments[$i]['replies'] = [];
         }
 
         for ($i = 1; $i <= 5; $i++) {
@@ -401,6 +404,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         for ($i = 1; $i <= $totalNumber; $i++) {
             $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+            $comments[$i]['replies'] = [];
         }
 
         $response = $this->call('GET', 'railcontent/comment',

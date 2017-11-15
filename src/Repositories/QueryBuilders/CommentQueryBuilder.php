@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
 
+use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ConfigService;
@@ -74,9 +75,33 @@ class CommentQueryBuilder extends QueryBuilder
      */
     public function restrictByVisibility()
     {
-        if(!CommentRepository::$pullSoftDeletedComments)
-        {
+        if (!CommentRepository::$pullSoftDeletedComments) {
             $this->whereNull('deleted_at');
+        }
+
+        return $this;
+    }
+
+    public function onlyComments()
+    {
+        $this->whereNull('parent_id');
+
+        return $this;
+    }
+
+    public function restrictByAssociatedManagerId()
+    {
+        if (!CommentAssignmentRepository::$availableAssociatedManagerId) {
+            $this->where(ConfigService::$tableCommentsAssignment . '.user_id', CommentAssignmentRepository::$availableAssociatedManagerId);
+        }
+
+        return $this;
+    }
+
+    public function restrictByCommentId()
+    {
+        if (!CommentAssignmentRepository::$availableCommentId) {
+            $this->where(ConfigService::$tableCommentsAssignment . '.comment_id', CommentAssignmentRepository::$availableCommentId);
         }
 
         return $this;

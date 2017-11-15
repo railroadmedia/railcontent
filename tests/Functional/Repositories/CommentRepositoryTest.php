@@ -173,6 +173,7 @@ class CommentRepositoryTest extends RailcontentTestCase
 
         for ($i = 1; $i < 12; $i++) {
             $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $content['id'], null, $userId);
+            $expectedComments[$i]['replies'] = [];
         }
 
         // create random comments
@@ -195,6 +196,7 @@ class CommentRepositoryTest extends RailcontentTestCase
         for($i = 1; $i<5; $i++)
         {
             $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $secondContent['id']);
+            $expectedComments[$i]['replies'] = [];
         }
 
         //create comments for first content
@@ -223,6 +225,7 @@ class CommentRepositoryTest extends RailcontentTestCase
         for($i = 1; $i<5; $i++)
         {
             $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $firstContent['id'], null, $userId);
+            $expectedComments[$i]['replies'] = [];
 
         }
 
@@ -249,10 +252,11 @@ class CommentRepositoryTest extends RailcontentTestCase
 
         for ($i = 1; $i <= $numberOfComments; $i++) {
             $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $content['id'], null, $userId);
+            $expectedComments[$i]['replies'] = [];
         }
 
         for($i = 1; $i<=3; $i++){
-            $expectedComments[$i]['replies'][$numberOfComments+$i] = $this->commentFactory->create($this->faker->text(), null, $expectedComments[$i]['id'], rand());
+            $expectedComments[$i]['replies'][] = $this->commentFactory->create($this->faker->text(), null, $expectedComments[$i]['id'], rand());
         }
 
         $results = $this->classBeingTested->getComments();

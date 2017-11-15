@@ -36,16 +36,25 @@ class CommentAssignmentService
     {
         $userId = ConfigService::$commentsAssignation[$contentType];
 
-        return $this->commentAssignmentRepository->create(
+        $this->commentAssignmentRepository->create(
             [
                 'comment_id' => $commentId,
                 'user_id' => $userId
             ]);
+        CommentAssignmentRepository::$availableAssociatedManagerId = $userId;
+        CommentAssignmentRepository::$availableCommentId = $commentId;
+
+        return $this->getAssignedComments();
     }
 
-    public function getAssignedComment($userId)
+    public function getAssignedComments()
     {
-        return $this->commentAssignmentRepository->getAssignedComments($userId);
+        return $this->commentAssignmentRepository->getAssignedComments();
+    }
+
+    public function deleteCommentAssignation($commentId, $userId)
+    {
+        return $this->commentAssignmentRepository->deleteCommentAssignation($commentId, $userId);
     }
 
 

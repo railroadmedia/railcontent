@@ -245,6 +245,7 @@ class CommentServiceTest extends RailcontentTestCase
         $totalNumber = $this->faker->numberBetween($limit, ($limit+5));
         for($i = 1; $i<=$totalNumber; $i++) {
             $comment[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+            $comment[$i]['replies'] = [];
         }
 
         $results = $this->classBeingTested->getComments(1, $limit, 'id');

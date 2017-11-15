@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
+use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -80,12 +81,15 @@ class CommentRepository extends RepositoryBase
             ->restrictByContentId()
             ->restrictByUser()
             ->restrictByVisibility()
+            ->onlyComments()
             ->orderBy($this->orderBy, $this->orderDirection, ConfigService::$tableComments)
             ->directPaginate($this->page, $this->limit);
 
         $rows = $query->getToArray();
 
-        return $this->parseRows($rows);
+        $repliesRows =  $this->getRepliesByCommentIds(array_column($rows, 'id'));
+
+        return $this->parseRows($rows, $repliesRows);
     }
 
     /** Count all the comments
@@ -98,7 +102,8 @@ class CommentRepository extends RepositoryBase
             ->restrictByType()
             ->restrictByContentId()
             ->restrictByUser()
-            ->restrictByVisibility();
+            ->restrictByVisibility()
+            ->onlyComments();
 
         return $query->count();
     }
@@ -173,7 +178,7 @@ class CommentRepository extends RepositoryBase
      *              'created_on' => creation date,
      *              'deleted_at' => null|date when the comment was marked deleted
      *              'replies' => [
-     *                  reply_id => [
+     *                  0 => [
      *                      'id' => reply id,
      *                      'content_id' => content id,
      *                      'comment' => reply text,
@@ -188,20 +193,31 @@ class CommentRepository extends RepositoryBase
      * @param $rows
      * @return array
      */
-    private function parseRows($rows)
+    private function parseRows($rows, $repliesRows)
     {
         $results = [];
 
-        foreach($rows as $row){
-            if(is_null($row['parent_id'])){
-                $row['replies'] = [];
+        $repliesRowsGrouped = ContentHelper::groupArrayBy($repliesRows, 'parent_id');
 
-                $results[$row['id']] = array_merge($row, $results[$row['id']] ?? []);
-            } else {
-                $results[$row['parent_id']]['replies'][$row['id']] = $row;
-            }
+        foreach($rows as $row){
+            $comment = [
+                'id' => $row['id'],
+                'comment' => $row['comment'],
+                'content_id' => $row['content_id'],
+                'parent_id' => $row['parent_id'],
+                'user_id' => $row['user_id'],
+                'created_on' => $row['created_on'],
+                'deleted_at' => $row['deleted_at'],
+                'replies' => $repliesRowsGrouped[$row['id']] ?? []
+            ];
+            $results[$comment['id']] = $comment;
         }
 
         return $results;
+    }
+
+    private function getRepliesByCommentIds(array $commentIds)
+    {
+        return $this->query()->whereIn('parent_id', $commentIds)->get()->toArray();
     }
 }

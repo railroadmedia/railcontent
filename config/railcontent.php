@@ -25,7 +25,7 @@ return [
     ],
     'comments_assignation' => [
         'course' => 1,
-        'course lesson' => 1
+        'course lesson' => 2
     ],
     'validation' => [
         'drumeo' => [
