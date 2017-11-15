@@ -27,11 +27,17 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // this makes all database calls return arrays rather than objects
         $this->listen = [
             StatementPrepared::class => [
-                function ($event) {
-                    $event->statement->setFetchMode(PDO::FETCH_ASSOC);
+                function (StatementPrepared $event) {
+
+                    // we only want to use assoc fetching for this packages database calls
+                    // so we need to use a separate 'mask' connection
+
+                    if ($event->connection->getName() ==
+                        ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {
+                        $event->statement->setFetchMode(PDO::FETCH_ASSOC);
+                    }
                 }
             ],
             ContentCreated::class => [VersionContentEventListener::class . '@handle'],
@@ -73,6 +79,7 @@ class RailcontentServiceProvider extends ServiceProvider
 
         // database
         ConfigService::$databaseConnectionName = config('railcontent.database_connection_name');
+        ConfigService::$connectionMaskPrefix = config('railcontent.connection_mask_prefix');
 
         // tables
         ConfigService::$tablePrefix = config('railcontent.table_prefix');

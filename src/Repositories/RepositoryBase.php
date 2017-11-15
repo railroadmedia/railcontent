@@ -97,6 +97,22 @@ abstract class RepositoryBase
      */
     protected function connection()
     {
-        return app('db')->connection(ConfigService::$databaseConnectionName);
+        /**
+         * @var $realConnection Connection
+         */
+        $realConnection = app('db')->connection(ConfigService::$databaseConnectionName);
+        $realConfig = $realConnection->getConfig();
+
+        $realConfig['name'] = ConfigService::$connectionMaskPrefix . $realConfig['name'];
+
+        $maskConnection =
+            new Connection(
+                $realConnection->getPdo(),
+                $realConnection->getDatabaseName(),
+                $realConnection->getTablePrefix(),
+                $realConfig
+            );
+
+        return $maskConnection;
     }
 }

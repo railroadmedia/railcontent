@@ -13,6 +13,11 @@ class ConfigService
      * @var string
      */
     public static $databaseConnectionName;
+    
+    /**
+     * @var string
+     */
+    public static $connectionMaskPrefix;
 
     /**
      * @var string
