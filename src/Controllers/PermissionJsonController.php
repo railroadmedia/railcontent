@@ -62,7 +62,7 @@ class PermissionJsonController extends Controller
      */
     public function store(PermissionRequest $request)
     {
-        $permission = $this->permissionService->create($request->input('name'));
+        $permission = $this->permissionService->create($request->input('name'), $request->input('brand'));
 
         return new JsonResponse($permission, 200);
     }
@@ -76,9 +76,13 @@ class PermissionJsonController extends Controller
      */
     public function update($id, PermissionRequest $request)
     {
-        $permission = $this->permissionService->update($id, $request->input('name'));
+        $permission =
+            $this->permissionService->update($id, $request->input('name'), $request->input('brand'));
 
-        throw_unless($permission, new NotFoundException('Update failed, permission not found with id: ' . $id));
+        throw_unless(
+            $permission,
+            new NotFoundException('Update failed, permission not found with id: ' . $id)
+        );
 
         return new JsonResponse($permission, 201);
     }

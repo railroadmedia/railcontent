@@ -19,6 +19,7 @@ class CreatePermissionsTable extends Migration
             function(Blueprint $table) {
                 $table->increments('id');
                 $table->string('name', 128)->index();
+                $table->string('brand', 64)->index();
             });
     }
 

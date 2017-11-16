@@ -14,14 +14,16 @@ class PermissionsFactory extends PermissionService
 
     /**
      * @param null $name
+     * @param null $brand
      * @return array
      */
-    public function create($name = null)
+    public function create($name = null, $brand = null)
     {
         $this->faker = app(Generator::class);
 
         $parameters =
             func_get_args() + [
+                $this->faker->word,
                 $this->faker->word,
             ];
 

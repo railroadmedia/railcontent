@@ -29,15 +29,17 @@ class PermissionRepositoryTest extends RailcontentTestCase
     public function test_create_permission()
     {
         $name = $this->faker->word;
+        $brand = $this->faker->word;
 
-        $id = $this->classBeingTested->create(['name' => $name]);
+        $id = $this->classBeingTested->create(['name' => $name, 'brand' => $brand]);
 
         $this->assertEquals(1, $id);
 
         $this->assertDatabaseHas(
             ConfigService::$tablePermissions,
             [
-                'name' => $name
+                'name' => $name,
+                'brand' => $brand,
             ]
         );
     }
@@ -47,16 +49,16 @@ class PermissionRepositoryTest extends RailcontentTestCase
         $permission = $this->permissionsFactory->create();
 
         $newName = $this->faker->word;
+        $newBrand = $this->faker->word;
 
-        $result = $this->classBeingTested->update($permission['id'], ['name' => $newName]);
+        $result =
+            $this->classBeingTested->update($permission['id'], ['name' => $newName, 'brand' => $newBrand]);
 
         $this->assertEquals(1, $result);
 
         $this->assertDatabaseHas(
             ConfigService::$tablePermissions,
-            [
-                'name' => $newName
-            ]
+            ['name' => $newName, 'brand' => $newBrand]
         );
     }
 
@@ -71,7 +73,8 @@ class PermissionRepositoryTest extends RailcontentTestCase
         $this->assertDatabaseMissing(
             ConfigService::$tablePermissions,
             [
-                'name' => $permission['name']
+                'name' => $permission['name'],
+                'brand' => $permission['brand'],
             ]
         );
     }

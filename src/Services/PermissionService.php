@@ -26,6 +26,7 @@ class PermissionService
      * PermissionService constructor.
      *
      * @param PermissionRepository $permissionRepository
+     * @param ContentPermissionRepository $contentPermissionRepository
      */
     public function __construct(
         PermissionRepository $permissionRepository,
@@ -58,11 +59,17 @@ class PermissionService
      * Call the create method from PermissionRepository and return the new permission
      *
      * @param string $name
+     * @param null $brand
      * @return mixed
      */
-    public function create($name)
+    public function create($name, $brand = null)
     {
-        $permissionId = $this->permissionRepository->create(['name' => $name]);
+        $permissionId = $this->permissionRepository->create(
+            [
+                'name' => $name,
+                'brand' => $brand ?? ConfigService::$brand
+            ]
+        );
 
         return $this->get($permissionId);
     }
@@ -72,9 +79,10 @@ class PermissionService
      *
      * @param integer $id
      * @param string $name
+     * @param null $brand
      * @return mixed
      */
-    public function update($id, $name)
+    public function update($id, $name, $brand = null)
     {
         //check if permission exist in the database
         $permission = $this->get($id);
@@ -83,7 +91,10 @@ class PermissionService
             return $permission;
         }
 
-        $this->permissionRepository->update($id, ['name' => $name]);
+        $this->permissionRepository->update(
+            $id,
+            ['name' => $name, 'brand' => $brand ?? ConfigService::$brand]
+        );
 
         return $this->get($id);
     }
