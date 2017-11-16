@@ -16,7 +16,7 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function selectPrimaryColumns()
     {
-        $this->select(
+        $this->addSelect(
             [
                 ConfigService::$tableContent . '.id as id',
                 ConfigService::$tableContent . '.slug as slug',
@@ -38,7 +38,7 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function selectCountColumns()
     {
-        $this->select(
+        $this->addSelect(
             [
                 ConfigService::$tableContent . '.id as id',
             ]
@@ -50,9 +50,24 @@ class ContentQueryBuilder extends QueryBuilder
     /**
      * @return $this
      */
+    public function selectInheritenceColumns()
+    {
+        $this->addSelect(
+            [
+                ConfigService::$tableContentHierarchy . '.child_position as child_position',
+                ConfigService::$tableContentHierarchy . '.parent_id as parent_id',
+            ]
+        );
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
     public function selectFilterOptionColumns()
     {
-        $this->select(
+        $this->addSelect(
             [
                 ConfigService::$tableContentFields . '.key as key',
                 ConfigService::$tableContentFields . '.value as value',

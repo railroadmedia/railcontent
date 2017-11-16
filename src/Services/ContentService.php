@@ -109,9 +109,9 @@ class ContentService
      * @param integer $parentId
      * @return array
      */
-    public function getByParentId($parentId)
+    public function getByParentId($parentId, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
-        return $this->contentRepository->getByParentId($parentId);
+        return $this->contentRepository->getByParentId($parentId, $orderBy, $orderByDirection);
     }
 
     /**

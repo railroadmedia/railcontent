@@ -30,7 +30,7 @@ class QueryBuilder extends Builder
      */
     public function orderBy($column = null, $direction = 'asc', $table = null)
     {
-        if ($column) {
+        if (!empty($column)) {
             parent::orderBy(($table ?? ConfigService::$tableContent) . '.' . $column, $direction);
         }
 

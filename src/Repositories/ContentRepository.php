@@ -159,7 +159,7 @@ class ContentRepository extends RepositoryBase
      * @param $parentId
      * @return array
      */
-    public function getByParentId($parentId)
+    public function getByParentId($parentId, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
@@ -170,8 +170,9 @@ class ContentRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContent . '.id'
             )
-            ->orderBy('child_position', 'asc', ConfigService::$tableContentHierarchy)
+            ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
             ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
+            ->selectInheritenceColumns()
             ->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
@@ -246,8 +247,6 @@ class ContentRepository extends RepositoryBase
         $contentRows = $this->query()
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
-            ->restrictByTypes($this->typesToInclude)
-            //            ->addSlugInheritance($this->slugHierarchy)
             ->where('slug', $slug)
             ->where('type', $type)
             ->getToArray();
@@ -399,21 +398,10 @@ class ContentRepository extends RepositoryBase
 
             $contents[$contentRow['id']] = $content;
 
-//            if (!empty($contentRow['parent_id'])) {
-//                $parent = [
-//                    'parent_child_position' => $contentRow['parent_child_position'],
-//                    'id' => $contentRow['parent_id'],
-//                    'slug' => $contentRow['parent_slug'],
-//                ];
-//
-//                $parents[$contentRow['id']][] = $parent;
-//
-//                $parents[$contentRow['id']] =
-//                    array_map(
-//                        "unserialize",
-//                        array_unique(array_map("serialize", $parents[$contentRow['id']]))
-//                    );
-//            }
+            if (!empty($contentRow['parent_id'])) {
+                $content['parent_id'] = $contentRow['parent_id'];
+                $content['position'] = $contentRow['child_position'] ?? null;
+            }
 
         }
 
