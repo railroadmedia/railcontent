@@ -113,6 +113,11 @@ abstract class RepositoryBase
                 $realConfig
             );
 
+        $maskConnection->setQueryGrammar($realConnection->getQueryGrammar());
+        $maskConnection->setSchemaGrammar($realConnection->getSchemaGrammar());
+        $maskConnection->setEventDispatcher($realConnection->getEventDispatcher());
+        $maskConnection->setPostProcessor($realConnection->getPostProcessor());
+
         return $maskConnection;
     }
 }

@@ -63,7 +63,6 @@ class ContentQueryBuilder extends QueryBuilder
         return $this;
     }
 
-
     /**
      * Sub query must be completely created before being passed in here.
      * Any changes to the $subQuery object after being passed in will not be reflected at retrieval time.
@@ -340,7 +339,7 @@ class ContentQueryBuilder extends QueryBuilder
         if (empty($requiredFields)) {
             return $this;
         }
-        
+
         foreach ($requiredFields as $index => $requiredFieldData) {
             $tableName = 'cf_' . $index;
 
