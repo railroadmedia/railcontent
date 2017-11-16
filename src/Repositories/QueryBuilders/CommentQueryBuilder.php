@@ -82,6 +82,9 @@ class CommentQueryBuilder extends QueryBuilder
         return $this;
     }
 
+    /** Only the comments are returned
+     * @return $this
+     */
     public function onlyComments()
     {
         $this->whereNull('parent_id');
@@ -89,19 +92,27 @@ class CommentQueryBuilder extends QueryBuilder
         return $this;
     }
 
+    /** Restrict comments by associated manager id
+     * @return $this
+     */
     public function restrictByAssociatedManagerId()
     {
-        if (!CommentAssignmentRepository::$availableAssociatedManagerId) {
+
+        if (CommentAssignmentRepository::$availableAssociatedManagerId) {
             $this->where(ConfigService::$tableCommentsAssignment . '.user_id', CommentAssignmentRepository::$availableAssociatedManagerId);
         }
 
         return $this;
     }
 
-    public function restrictByCommentId()
+    /** Restrict by comment id
+     * @param $commentId
+     * @return $this
+     */
+    public function restrictByCommentId($commentId)
     {
-        if (!CommentAssignmentRepository::$availableCommentId) {
-            $this->where(ConfigService::$tableCommentsAssignment . '.comment_id', CommentAssignmentRepository::$availableCommentId);
+        if ($commentId) {
+            $this->where(ConfigService::$tableCommentsAssignment . '.comment_id', $commentId);
         }
 
         return $this;

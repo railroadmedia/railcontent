@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Event;
 
 class CommentCreated extends Event
 {
-    public $commentId;
+    public $comment;
 
     public $contentType;
 
-    public function __construct($commentId, $contentType)
+    public function __construct($comment, $contentType)
     {
-        $this->commentId = $commentId;
+        $this->comment = $comment;
         $this->contentType = $contentType;
     }
 }

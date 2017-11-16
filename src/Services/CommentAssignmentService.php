@@ -28,32 +28,54 @@ class CommentAssignmentService
     /** Call the create method from repository that save the comment assignation to user.
      * The user id it's specified in the config file for content types.
      * Return the comment assignment id
-     * @param integer $commentId
+     * @param array $comment
      * @param string $contentType
      * @return integer
      */
-    public function store($commentId, $contentType)
+    public function store($comment, $contentType)
     {
-        $userId = ConfigService::$commentsAssignation[$contentType];
+        if(!array_key_exists($contentType, ConfigService::$commentsAssignation)){
+            return false;
+        }
+
+        $managerUserId = ConfigService::$commentsAssignation[$contentType];
+
+        //if the manager create the comment we should not assign it
+        if($comment['user_id'] == $managerUserId){
+            return false;
+        }
 
         $this->commentAssignmentRepository->create(
             [
-                'comment_id' => $commentId,
-                'user_id' => $userId
+                'comment_id' => $comment['id'],
+                'user_id' => $managerUserId
             ]);
-        CommentAssignmentRepository::$availableAssociatedManagerId = $userId;
-        CommentAssignmentRepository::$availableCommentId = $commentId;
+        CommentAssignmentRepository::$availableAssociatedManagerId = $managerUserId;
 
-        return $this->getAssignedComments();
+        return $this->getAssignedComments($comment['id']);
     }
 
-    public function getAssignedComments()
+    /** Call the repository function to get the assigned comments
+     * @param bool|integer $commentId
+     * @return array
+     */
+    public function getAssignedComments($commentId = false)
     {
-        return $this->commentAssignmentRepository->getAssignedComments();
+        return $this->commentAssignmentRepository->getAssignedComments($commentId);
     }
 
+    /** Call the method from repository that delete the link between comment and manager id if the link exist.
+     * Return null if the link not exist or the method response.
+     * @param integer $commentId
+     * @param integer $userId
+     * @return bool|null
+     */
     public function deleteCommentAssignation($commentId, $userId)
     {
+        $commentAssignation = $this->getAssignedComments($commentId);
+        if(count($commentAssignation) == 0){
+            return null;
+        }
         return $this->commentAssignmentRepository->deleteCommentAssignation($commentId, $userId);
     }
 

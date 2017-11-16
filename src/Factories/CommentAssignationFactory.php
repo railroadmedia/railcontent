@@ -27,7 +27,7 @@ class CommentAssignationFactory extends CommentAssignmentService
 
         $parameters =
             func_get_args() + [
-                rand(),
+                ['user_id' => rand()],
                 $this->faker->randomElement(ConfigService::$commentsAssignation),
             ];
 

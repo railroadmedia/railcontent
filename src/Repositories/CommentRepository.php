@@ -216,6 +216,10 @@ class CommentRepository extends RepositoryBase
         return $results;
     }
 
+    /** Pull all the comment's replies
+     * @param array $commentIds
+     * @return array
+     */
     private function getRepliesByCommentIds(array $commentIds)
     {
         return $this->query()->whereIn('parent_id', $commentIds)->get()->toArray();

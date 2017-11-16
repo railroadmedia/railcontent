@@ -15,9 +15,13 @@ class AssignCommentEventListener
         $this->commentAssignmentService = $commentAssignmentService;
     }
 
+    /** Call the store method from service to assign the comment to the corresponding manager id
+     * @param Event $event
+     * @return int
+     */
     public function handle(Event $event)
     {
-        $results = $this->commentAssignmentService->store($event->commentId, $event->contentType);
+        $results = $this->commentAssignmentService->store($event->comment, $event->contentType);
 
         return $results;
     }

@@ -71,12 +71,12 @@ class CommentServiceTest extends RailcontentTestCase
             'id' => 1,
             'content_id' => $content['id'],
             'parent_id' => null,
-            'user_id' => $userId,
+            'user_id' => rand(),
             'comment' => $this->faker->text,
             'created_on' => Carbon::now()->toDateTimeString(),
             'deleted_at' => null
         ];
-        $result = $this->classBeingTested->create($comment['comment'], $content['id'], $comment['parent_id'], $userId);
+        $result = $this->classBeingTested->create($comment['comment'], $content['id'], $comment['parent_id'], $comment['user_id']);
 
         $this->assertEquals($comment, $result);
 
@@ -112,7 +112,7 @@ class CommentServiceTest extends RailcontentTestCase
 
         //check that the ContentCreated event was dispatched with the correct content id
         Event::assertDispatched(CommentCreated::class, function($event) use ($comment, $content) {
-            return (($event->commentId == $comment['id']) && ($event->contentType == $content['type']));
+            return (($event->comment == $comment) && ($event->contentType == $content['type']));
         });
     }
 

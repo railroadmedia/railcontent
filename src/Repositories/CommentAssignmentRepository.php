@@ -7,12 +7,12 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class CommentAssignmentRepository extends RepositoryBase
 {
-    /**
+    /** If it's false all the comments assigned to manager id are returned. Otherwise return the comment id with manadgr id association
      * @var integer|bool
      */
     public static $availableCommentId = false;
 
-    /**
+    /** If it's false all the comments for any manager id are returned. Otherwise return the comments associated with the manager
      * @var integer|bool
      */
     public static $availableAssociatedManagerId = false;
@@ -30,7 +30,11 @@ class CommentAssignmentRepository extends RepositoryBase
             ->from(ConfigService::$tableCommentsAssignment);
     }
 
-    public function getAssignedComments()
+    /** Pull the comments assignation
+     * @param bool|integer $commentId
+     * @return array
+     */
+    public function getAssignedComments($commentId = false)
     {
         $assignments = $this->query()
             ->selectColumns()
@@ -39,7 +43,7 @@ class CommentAssignmentRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableComments.'.id')
             ->restrictByAssociatedManagerId()
-            ->restrictByCommentId()
+            ->restrictByCommentId($commentId)
             ->getToArray();
 
         //get an array with comment ids that will be used as keys in the results
@@ -48,6 +52,11 @@ class CommentAssignmentRepository extends RepositoryBase
         return array_combine($commentIds, $assignments);
     }
 
+    /** Delete the association between comment and manager user id
+     * @param integer $commentId
+     * @param intereg $userId
+     * @return bool
+     */
     public function deleteCommentAssignation($commentId, $userId)
     {
         return $this->query()->where(

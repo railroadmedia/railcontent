@@ -85,9 +85,10 @@ class CommentService
             ]
         );
 
-        event(new CommentCreated($commentId, $content['type']));
+        $createdComment = $this->get($commentId);
+        event(new CommentCreated($createdComment, $content['type']));
 
-        return $this->get($commentId);
+        return $createdComment;
     }
 
     /** Call the update method from repository if the comment exist and the user have rights to update the comment

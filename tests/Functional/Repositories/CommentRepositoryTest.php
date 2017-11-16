@@ -34,6 +34,10 @@ class CommentRepositoryTest extends RailcontentTestCase
         $this->commentFactory = $this->app->make(CommentFactory::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->classBeingTested = $this->app->make(CommentRepository::class);
+
+        CommentRepository::$availableContentType = null;
+        CommentRepository::$availableUserId = null;
+        CommentRepository::$availableContentId = null;
     }
 
     public function test_create_comment()
