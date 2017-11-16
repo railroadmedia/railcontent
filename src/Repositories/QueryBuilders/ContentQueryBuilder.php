@@ -417,8 +417,15 @@ class ContentQueryBuilder extends QueryBuilder
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function restrictByPermissions()
     {
+        if (PermissionRepository::$availableContentPermissionIds === false) {
+            return $this;
+        }
+
         $this->whereIn(
             ConfigService::$tableContent . '.id',
             function (Builder $builder) {
@@ -462,6 +469,19 @@ class ContentQueryBuilder extends QueryBuilder
                     );
             }
         );
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function restrictByUserAccess()
+    {
+        $this->restrictStatuses()
+            ->restrictPublishedOnDate()
+            ->restrictBrand()
+            ->restrictByPermissions();
 
         return $this;
     }

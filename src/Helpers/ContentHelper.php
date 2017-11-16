@@ -248,6 +248,24 @@ class ContentHelper
     }
 
     /**
+     * @param array $content
+     * @param integer $permissionId
+     * @return bool
+     */
+    public static function doesContentHavePermissionId($content, $permissionId)
+    {
+        if (!empty($content['permissions'])) {
+            foreach ($content['permissions'] as $permission) {
+                if ($permission['id'] === $permissionId) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * @param $text
      * @return mixed|string
      */

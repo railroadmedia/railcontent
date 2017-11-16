@@ -35,6 +35,7 @@ class ContentService
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
+    const STATUS_SCHEDULED = 'scheduled';
     const STATUS_ARCHIVED = 'archived';
 
     /**
@@ -143,7 +144,7 @@ class ContentService
     public function getFiltered(
         $page,
         $limit,
-        $orderByAndDirection,
+        $orderByAndDirection = '-published_on',
         array $includedTypes = [],
         array $slugHierarchy = [],
         array $requiredParentIds = [],

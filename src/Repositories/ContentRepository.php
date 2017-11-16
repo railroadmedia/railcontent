@@ -105,11 +105,7 @@ class ContentRepository extends RepositoryBase
     {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
-            ->restrictStatuses()
-            ->restrictPublishedOnDate()
-            ->restrictBrand()
-            ->restrictByPermissions()
-//            ->addSlugInheritance($this->slugHierarchy)
+            ->restrictByUserAccess()
             ->where(['id' => $id])
             ->getToArray();
 
@@ -138,10 +134,7 @@ class ContentRepository extends RepositoryBase
     {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
-            ->restrictStatuses()
-            ->restrictPublishedOnDate()
-            ->restrictBrand()
-            //            ->addSlugInheritance($this->slugHierarchy)
+            ->restrictByUserAccess()
             ->whereIn('id', $ids)
             ->getToArray();
 
@@ -170,9 +163,7 @@ class ContentRepository extends RepositoryBase
     {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
-            ->restrictStatuses()
-            ->restrictPublishedOnDate()
-            ->restrictBrand()
+            ->restrictByUserAccess()
             ->leftJoin(
                 ConfigService::$tableContentHierarchy,
                 ConfigService::$tableContentHierarchy . '.child_id',
@@ -208,9 +199,7 @@ class ContentRepository extends RepositoryBase
     {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
-            ->restrictStatuses()
-            ->restrictPublishedOnDate()
-            ->restrictBrand()
+            ->restrictByUserAccess()
             ->leftJoin(
                 ConfigService::$tableContentHierarchy,
                 ConfigService::$tableContentHierarchy . '.parent_id',
@@ -256,9 +245,7 @@ class ContentRepository extends RepositoryBase
     {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
-            ->restrictStatuses()
-            ->restrictPublishedOnDate()
-            ->restrictBrand()
+            ->restrictByUserAccess()
             ->restrictByTypes($this->typesToInclude)
             //            ->addSlugInheritance($this->slugHierarchy)
             ->where('slug', $slug)
@@ -292,8 +279,7 @@ class ContentRepository extends RepositoryBase
     {
         $query = $this->query()
             ->selectPrimaryColumns()
-            ->restrictBrand()
-            ->restrictStatuses()
+            ->restrictByUserAccess()
             ->leftJoin(
                 ConfigService::$tableContentHierarchy,
                 function (JoinClause $joinClause) use ($childContentIds) {
@@ -481,9 +467,7 @@ class ContentRepository extends RepositoryBase
         $subQuery = $this->query()
             ->selectCountColumns()
             ->orderBy($this->orderBy, $this->orderDirection)
-            ->restrictStatuses()
-            ->restrictPublishedOnDate()
-            ->restrictBrand()
+            ->restrictByUserAccess()
             ->directPaginate($this->page, $this->limit)
             ->restrictByFields($this->requiredFields)
             ->includeByFields($this->includedFields)

@@ -15,7 +15,7 @@ class QueryBuilder extends Builder
      */
     public function directPaginate($page, $limit)
     {
-        if (is_numeric($limit)) {
+        if ($limit >= 0) {
             $this->limit($limit)
                 ->skip(($page - 1) * $limit);
         }

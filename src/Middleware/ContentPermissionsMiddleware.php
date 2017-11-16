@@ -34,9 +34,6 @@ class ContentPermissionsMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // todo: for testing! remove
-        $request->attributes->set('auth_level', 'administrator');
-
         if ($request->get('auth_level') == 'administrator') {
 
             // admins can see drafts, archived lessons, and future content by default
@@ -45,6 +42,7 @@ class ContentPermissionsMiddleware
                 [
                     ContentService::STATUS_PUBLISHED,
                     ContentService::STATUS_DRAFT,
+                    ContentService::STATUS_SCHEDULED,
                     ContentService::STATUS_ARCHIVED,
                 ]
             );
@@ -66,13 +64,14 @@ class ContentPermissionsMiddleware
             // users can only see published lessons
 
             ContentRepository::$availableContentStatues = [
-                ContentService::STATUS_PUBLISHED
+                ContentService::STATUS_PUBLISHED,
+                ContentService::STATUS_SCHEDULED,
             ];
 
             ContentRepository::$pullFutureContent = false;
 
             PermissionRepository::$availableContentPermissionIds =
-                $request->get('user_content_permission_ids', false);
+                $request->get('user_content_permission_ids', []);
 
             CommentRepository::$softDelete = true;
 
