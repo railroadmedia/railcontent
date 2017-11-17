@@ -68,11 +68,6 @@ class ContentRepository extends RepositoryBase
     private $contentHierarchyRepository;
 
     /**
-     * @var DatabaseManager
-     */
-    private $databaseManager;
-
-    /**
      * ContentRepository constructor.
      *
      * @param ContentPermissionRepository $contentPermissionRepository
@@ -85,8 +80,7 @@ class ContentRepository extends RepositoryBase
         ContentPermissionRepository $contentPermissionRepository,
         ContentFieldRepository $fieldRepository,
         ContentDatumRepository $datumRepository,
-        ContentHierarchyRepository $contentHierarchyRepository,
-        DatabaseManager $databaseManager
+        ContentHierarchyRepository $contentHierarchyRepository
     ) {
         parent::__construct();
 
@@ -94,7 +88,6 @@ class ContentRepository extends RepositoryBase
         $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
         $this->contentHierarchyRepository = $contentHierarchyRepository;
-        $this->databaseManager = $databaseManager;
     }
 
     /**

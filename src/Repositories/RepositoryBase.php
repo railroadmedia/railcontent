@@ -12,7 +12,17 @@ abstract class RepositoryBase
     /**
      * @var DatabaseManager
      */
-    private $databaseManager;
+    protected $databaseManager;
+
+    /**
+     * @var Connection
+     */
+    protected $connection;
+
+    /**
+     * @var Connection
+     */
+    public static $connectionMask;
 
     /**
      * CategoryRepository constructor.
@@ -20,6 +30,33 @@ abstract class RepositoryBase
     public function __construct()
     {
         $this->databaseManager = app('db');
+
+        if (empty(self::$connectionMask)) {
+            /**
+             * @var $realConnection Connection
+             */
+            $realConnection = app('db')->connection(ConfigService::$databaseConnectionName);
+            $realConfig = $realConnection->getConfig();
+
+            $realConfig['name'] = ConfigService::$connectionMaskPrefix . $realConfig['name'];
+
+            $maskConnection =
+                new Connection(
+                    $realConnection->getPdo(),
+                    $realConnection->getDatabaseName(),
+                    $realConnection->getTablePrefix(),
+                    $realConfig
+                );
+
+            $maskConnection->setQueryGrammar($realConnection->getQueryGrammar());
+            $maskConnection->setSchemaGrammar($realConnection->getSchemaGrammar());
+            $maskConnection->setEventDispatcher($realConnection->getEventDispatcher());
+            $maskConnection->setPostProcessor($realConnection->getPostProcessor());
+
+            self::$connectionMask = $maskConnection;
+        }
+
+        $this->connection = self::$connectionMask;
     }
 
     /**
@@ -97,27 +134,6 @@ abstract class RepositoryBase
      */
     protected function connection()
     {
-        /**
-         * @var $realConnection Connection
-         */
-        $realConnection = app('db')->connection(ConfigService::$databaseConnectionName);
-        $realConfig = $realConnection->getConfig();
-
-        $realConfig['name'] = ConfigService::$connectionMaskPrefix . $realConfig['name'];
-
-        $maskConnection =
-            new Connection(
-                $realConnection->getPdo(),
-                $realConnection->getDatabaseName(),
-                $realConnection->getTablePrefix(),
-                $realConfig
-            );
-
-        $maskConnection->setQueryGrammar($realConnection->getQueryGrammar());
-        $maskConnection->setSchemaGrammar($realConnection->getSchemaGrammar());
-        $maskConnection->setEventDispatcher($realConnection->getEventDispatcher());
-        $maskConnection->setPostProcessor($realConnection->getPostProcessor());
-
-        return $maskConnection;
+        return $this->connection;
     }
 }

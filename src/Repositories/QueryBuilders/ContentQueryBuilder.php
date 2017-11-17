@@ -217,7 +217,7 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictBrand()
     {
-        $this->where('brand', ConfigService::$brand);
+        $this->where(ConfigService::$tableContent . '.brand', ConfigService::$brand);
 
         return $this;
     }
@@ -441,49 +441,24 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        $this->whereIn(
-            ConfigService::$tableContent . '.id',
-            function (Builder $builder) {
-                $builder
-                    ->select([ConfigService::$tableContent . '.id'])
-                    ->from(ConfigService::$tableContent)
-                    ->leftJoin(
-                        ConfigService::$tableContentPermissions,
-                        function (JoinClause $join) {
-                            return $join
-                                ->on(
-                                    ConfigService::$tableContentPermissions . '.content_id',
-                                    ConfigService::$tableContent . '.id'
-                                )
-                                ->orOn(
-                                    ConfigService::$tableContentPermissions . '.content_type',
-                                    ConfigService::$tableContent . '.type'
-                                );
-                        }
-                    )
-                    ->leftJoin(
-                        ConfigService::$tablePermissions,
-                        ConfigService::$tablePermissions . '.id',
-                        '=',
-                        ConfigService::$tableContentPermissions . '.permission_id'
-                    )
-                    ->where(
-                        function (Builder $builder) {
-                            if (is_array(PermissionRepository::$availableContentPermissionIds)) {
-                                return $builder->whereNull(
-                                    ConfigService::$tableContentPermissions . '.permission_id'
-                                )
-                                    ->orWhereIn(
-                                        ConfigService::$tablePermissions . '.id',
-                                        PermissionRepository::$availableContentPermissionIds
-                                    );
-                            }
-
-                            return $builder;
-                        }
-                    );
-            }
-        );
+        $this
+            ->join(
+                ConfigService::$tableContentPermissions,
+                function (JoinClause $join) {
+                    return $join
+                        ->on(
+                            ConfigService::$tableContentPermissions . '.content_id',
+                            ConfigService::$tableContent . '.id'
+                        )
+                        ->orOn(
+                            ConfigService::$tableContentPermissions . '.content_type',
+                            ConfigService::$tableContent . '.type'
+                        )->whereIn(
+                            ConfigService::$tableContentPermissions . '.permission_id',
+                            PermissionRepository::$availableContentPermissionIds
+                        );
+                }
+            );
 
         return $this;
     }
