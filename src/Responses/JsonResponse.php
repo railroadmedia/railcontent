@@ -34,7 +34,7 @@ class JsonResponse implements Responsable
         return [
             'status' => 'ok',
             'code' => $this->code,
-            'results' => array_values($this->results),
+            'results' => $this->results,
         ];
     }
 }

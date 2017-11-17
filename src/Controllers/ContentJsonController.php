@@ -64,7 +64,7 @@ class ContentJsonController extends Controller
         );
 
         return new JsonPaginatedResponse(
-            $contentData['results'],
+            array_values($contentData['results']),
             $contentData['total_results'],
             $contentData['filter_options'],
             200
@@ -100,7 +100,7 @@ class ContentJsonController extends Controller
 
         $results = [$id => $content];
 
-        return new JsonResponse($results, 200);
+        return new JsonResponse(array_values($results), 200);
     }
 
     public function slugs(Request $request, ...$slugs)
@@ -125,7 +125,7 @@ class ContentJsonController extends Controller
             $request->get('published_on')
         );
 
-        return new JsonResponse([$content['id'] => $content], 201);
+        return new JsonResponse([$content], 201);
     }
 
     /** Update a content based on content id and return it in JSON format
