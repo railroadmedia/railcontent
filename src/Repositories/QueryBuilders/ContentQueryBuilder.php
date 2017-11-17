@@ -442,20 +442,47 @@ class ContentQueryBuilder extends QueryBuilder
         }
 
         $this
-            ->join(
-                ConfigService::$tableContentPermissions,
+            ->leftJoin(
+                ConfigService::$tableContentPermissions . ' as id_content_permissions',
                 function (JoinClause $join) {
-                    return $join
+                    $join
                         ->on(
-                            ConfigService::$tableContentPermissions . '.content_id',
+                            'id_content_permissions' . '.content_id',
                             ConfigService::$tableContent . '.id'
-                        )
-                        ->orOn(
-                            ConfigService::$tableContentPermissions . '.content_type',
+                        );
+                }
+            )
+            ->leftJoin(
+                ConfigService::$tableContentPermissions . ' as type_content_permissions',
+                function (JoinClause $join) {
+                    $join
+                        ->on(
+                            'type_content_permissions' . '.content_type',
                             ConfigService::$tableContent . '.type'
-                        )->whereIn(
-                            ConfigService::$tableContentPermissions . '.permission_id',
+                        );
+                }
+            )
+            ->where(
+                function (Builder $builder) {
+                    return $builder
+                        ->whereIn(
+                            'id_content_permissions' . '.permission_id',
                             PermissionRepository::$availableContentPermissionIds
+                        )
+                        ->orWhereNull(
+                            'id_content_permissions' . '.permission_id'
+                        );
+                }
+            )
+            ->where(
+                function (Builder $builder) {
+                    return $builder
+                        ->whereIn(
+                            'type_content_permissions' . '.permission_id',
+                            PermissionRepository::$availableContentPermissionIds
+                        )
+                        ->orWhereNull(
+                            'type_content_permissions' . '.permission_id'
                         );
                 }
             );

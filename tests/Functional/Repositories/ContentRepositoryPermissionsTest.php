@@ -57,7 +57,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
         );
 
         PermissionRepository::$availableContentPermissionIds = [];
-
+        
         $response = $this->classBeingTested->getById($content['id']);
 
         $this->assertNull($response);

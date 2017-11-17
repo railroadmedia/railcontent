@@ -99,7 +99,7 @@ class ContentRepository extends RepositoryBase
         $contentRows = $this->query()
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
-            ->where(['id' => $id])
+            ->where([ConfigService::$tableContent . '.id' => $id])
             ->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
@@ -493,7 +493,7 @@ class ContentRepository extends RepositoryBase
             ->selectCountColumns()
             ->restrictStatuses()
             ->restrictPublishedOnDate()
-            ->restrictBrand()
+            ->restrictByUserAccess()
             ->restrictByFields($this->requiredFields)
             ->includeByFields($this->includedFields)
             ->restrictByUserStates($this->requiredUserStates)
@@ -517,6 +517,7 @@ class ContentRepository extends RepositoryBase
     {
         $possibleContentFields = $this->query()
             ->selectFilterOptionColumns()
+            ->restrictByUserAccess()
             ->restrictByFields($this->requiredFields)
             ->includeByFields($this->includedFields)
             ->restrictByUserStates($this->requiredUserStates)
