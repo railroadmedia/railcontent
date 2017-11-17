@@ -73,6 +73,21 @@ class ContentJsonController extends Controller
 
     /**
      * @param Request $request
+     * @param $parentId
+     * @return JsonResponse
+     */
+    public function getByParentId(Request $request, $parentId)
+    {
+        $contentData = $this->contentService->getByParentId($parentId);
+
+        return new JsonResponse(
+            $contentData,
+            200
+        );
+    }
+
+    /**
+     * @param Request $request
      * @param $id
      * @return JsonResponse
      */

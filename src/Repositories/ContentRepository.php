@@ -389,13 +389,12 @@ class ContentRepository extends RepositoryBase
                 ),
             ];
 
-            $contents[$contentRow['id']] = $content;
-
             if (!empty($contentRow['parent_id'])) {
                 $content['parent_id'] = $contentRow['parent_id'];
                 $content['position'] = $contentRow['child_position'] ?? null;
             }
 
+            $contents[$contentRow['id']] = $content;
         }
 
         return $this->attachContentsLinkedByField($contents);

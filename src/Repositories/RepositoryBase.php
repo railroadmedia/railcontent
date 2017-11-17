@@ -48,8 +48,11 @@ abstract class RepositoryBase
                     $realConfig
                 );
 
+            if (!empty($realConnection->getSchemaGrammar())) {
+                $maskConnection->setSchemaGrammar($realConnection->getSchemaGrammar());
+            }
+
             $maskConnection->setQueryGrammar($realConnection->getQueryGrammar());
-            $maskConnection->setSchemaGrammar($realConnection->getSchemaGrammar());
             $maskConnection->setEventDispatcher($realConnection->getEventDispatcher());
             $maskConnection->setPostProcessor($realConnection->getPostProcessor());
 

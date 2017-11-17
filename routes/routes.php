@@ -115,9 +115,9 @@ Route::group(
         )->name('content.index');
 
         Route::get(
-            '/content-by-parent/{parentId}/{type}',
-            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@parentIdAndType'
-        )->name('content.index-by-parent-and-type');
+            '/content/parent/{parentId}',
+            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getByParentId'
+        )->name('content.get-by-parent-id');
 
         Route::get(
             '/content/{id}',
