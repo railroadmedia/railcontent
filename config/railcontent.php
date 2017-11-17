@@ -50,5 +50,25 @@ return [
         'region' => env('AWS_S3_REMOTE_STORAGE_REGION'),
         'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET')
     ],
-    'awsCloudFront' => 'd1923uyy6spedc.cloudfront.net'
+    'awsCloudFront' => 'd1923uyy6spedc.cloudfront.net',
+
+    'searchable_content_types' => ['recordings', 'courses'],
+
+    'search_index_values' => [
+        'high_value' => [
+            'content_attributes' => ['slug'],
+            'field_keys' => ['title', 'instructor:name'],
+            'data_keys' => [],
+        ],
+        'medium_value' => [
+            'content_attributes' => [],
+            'field_keys' => ['*'],
+            'data_keys' => ['*'],
+        ],
+        'low_value' => [
+            'content_attributes' => [],
+            'field_keys' => ['*'],
+            'data_keys' => ['description'],
+        ],
+    ]
 ];

@@ -15,7 +15,7 @@ class QueryBuilder extends Builder
      */
     public function directPaginate($page, $limit)
     {
-        if ($limit >= 0) {
+        if ($limit >= 1) {
             $this->limit($limit)
                 ->skip(($page - 1) * $limit);
         }
@@ -30,7 +30,7 @@ class QueryBuilder extends Builder
      */
     public function orderBy($column = null, $direction = 'asc', $table = null)
     {
-        if (!empty($column)) {
+        if ($column) {
             parent::orderBy(($table ?? ConfigService::$tableContent) . '.' . $column, $direction);
         }
 
