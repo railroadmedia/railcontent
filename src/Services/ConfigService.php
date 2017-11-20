@@ -85,6 +85,11 @@ class ConfigService
     public static $tableCommentsAssignment;
 
     /**
+     * @var string
+     */
+    public static $tableSearchIndexes;
+
+    /**
      * @var array
      */
     public static $availableLanguages;
@@ -114,6 +119,19 @@ class ConfigService
      */
     public static $commentableContentTypes;
 
+    /**
+     * @var array
+     */
     public static $commentsAssignation;
+
+    /**
+     * @var array
+     */
+    public static $searchableContentTypes;
+
+    /**
+     * @var array
+     */
+    public static $searchIndexValues;
 
 }

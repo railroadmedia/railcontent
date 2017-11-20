@@ -96,6 +96,7 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tablePlaylistContents = ConfigService::$tablePrefix . 'playlist_contents';
         ConfigService::$tableComments = ConfigService::$tablePrefix . 'comments';
         ConfigService::$tableCommentsAssignment = ConfigService::$tablePrefix . 'comment_assignment';
+        ConfigService::$tableSearchIndexes = ConfigService::$tablePrefix . 'search_indexes';
 
         // brand
         ConfigService::$brand = config('railcontent.brand');
@@ -114,6 +115,10 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$commentableContentTypes = config('railcontent.commentable_content_types');
 
         ConfigService::$commentsAssignation = config('railcontent.comments_assignation');
+
+        ConfigService::$searchableContentTypes = config('railcontent.searchable_content_types');
+
+        ConfigService::$searchIndexValues = config('railcontent.search_index_values');
     }
 
     /**
