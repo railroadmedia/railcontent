@@ -100,14 +100,16 @@ class CommentServiceTest extends RailcontentTestCase
         );
 
         $comment = [
-            'id' => 1,
+            'comment' => $this->faker->text,
             'content_id' => $content['id'],
+            'created_on' => Carbon::now()->toDateTimeString(),
+            'deleted_at' => null,
+            'id' => 1,
             'parent_id' => null,
             'user_id' => $userId,
-            'comment' => $this->faker->text,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'deleted_at' => null
+            'replies' => null
         ];
+
         $result = $this->classBeingTested->create($comment['comment'], $content['id'], $comment['parent_id'], $userId);
 
         //check that the ContentCreated event was dispatched with the correct content id

@@ -53,6 +53,21 @@ class CommentRepository extends RepositoryBase
     protected $orderBy;
     protected $orderDirection;
 
+    /**
+     * @param integer $id
+     * @return array|null
+     */
+    public function getById($id)
+    {
+        $row = $this->query()->where(['id' => $id])->first();
+        if($row){
+            $repliesRows =  $this->getRepliesByCommentIds(array_column([$row], 'id'));
+            $parsedRows = $this->parseRows([$row], $repliesRows);
+            $row = reset($parsedRows);
+        }
+        return $row;
+    }
+    
     /** Set the pagination parameters
      * @param int $page
      * @param int $limit
@@ -223,5 +238,14 @@ class CommentRepository extends RepositoryBase
     private function getRepliesByCommentIds(array $commentIds)
     {
         return $this->query()->whereIn('parent_id', $commentIds)->get()->toArray();
+    }
+
+    /**
+     * @param array $comment
+     * @return array
+     */
+    public function populateCommentWithReplies($comment)
+    {
+        return $this->parseRows($comment, $this->getRepliesByCommentIds([$comment['id']]));
     }
 }
