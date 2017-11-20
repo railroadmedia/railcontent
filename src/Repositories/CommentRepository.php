@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
-use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
