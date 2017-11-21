@@ -83,7 +83,7 @@ class ContentPermissionRepositoryTest extends RailcontentTestCase
         $permission = $this->permissionFactory->create();
         $assigmPermission = $this->contentPermissionFactory->create(rand(), null, $permission['id']);
 
-        $this->classBeingTested->unlinkPermission($permission['id']);
+        $this->classBeingTested->unlinkPermissionFromAllContent($permission['id']);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContentPermissions,

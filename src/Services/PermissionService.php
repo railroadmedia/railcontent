@@ -113,7 +113,7 @@ class PermissionService
         if (is_null($permission)) {
             return $permission;
         }
-        $this->contentPermissionRepository->unlinkPermission($id);
+        $this->contentPermissionRepository->unlinkPermissionFromAllContent($id);
 
         return $this->permissionRepository->delete($id) > 0;
     }
