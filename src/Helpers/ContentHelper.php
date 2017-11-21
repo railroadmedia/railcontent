@@ -292,4 +292,28 @@ class ContentHelper
 
         return $text;
     }
+
+
+    /**
+     * @param array $content
+     * @param string $key
+     * @param integer $position
+     * @param string $subKey
+     * @param integer $subPosition
+     * @param null $subType
+     * @return string|null
+     */
+    public static function getFieldSubContentValues(
+        array $content,
+        $key,
+        $subKey,
+        $subType = null
+    ) {
+        $subContent = self::getFieldValues($content, $key, 'content');
+        if (count($subContent) > 0) {
+            return self::getFieldValues($subContent[0], $subKey, $subType);
+        }
+
+        return [];
+    }
 }
