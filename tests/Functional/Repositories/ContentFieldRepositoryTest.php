@@ -264,4 +264,47 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
             ]
         );
     }
+
+    public function test_delete_field_and_reposition()
+    {
+        $contentId = rand();
+        $expectedData = [];
+        $key = $this->faker->word;
+        for ($i = 0; $i < 5; $i++) {
+            $field = [
+                'content_id' => $contentId,
+                'key' => $key,
+                'value' => $this->faker->word,
+                'type' => $this->faker->word,
+                'position' => rand()
+            ];
+
+            $field['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $field);
+            $field['position'] = $i + 1;
+
+            $expectedData[] = $field;
+        }
+
+        $this->classBeingTested->deleteAndReposition($expectedData[2]);
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableContentFields,
+            [
+                'id' => 3,
+            ]
+        );
+
+        //decrement position in expected results
+        $expectedData[4]['position'] = $expectedData[3]['position'];
+        $expectedData[3]['position'] = $expectedData[2]['position'];
+
+        unset($expectedData[2]);
+
+        foreach ($expectedData as $expectedDatum) {
+            $this->assertDatabaseHas(
+                ConfigService::$tableContentFields,
+                $expectedDatum
+            );
+        }
+    }
 }

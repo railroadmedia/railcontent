@@ -44,7 +44,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'key' => $key,
                 'value' => $value,
-                'position' => $position
+                'position' => 1
             ],
             $result
         );
@@ -74,7 +74,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             ];
 
             $data['id'] = $this->classBeingTested->create($data);
-
+            $data['position'] = 1;
             $expectedData[] = $data;
         }
 
@@ -111,7 +111,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             ];
 
             $data['id'] = $this->classBeingTested->create($data);
-
+            $data['position'] = 1;
             $expectedData[] = $data;
         }
 
@@ -159,7 +159,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'key' => $key,
                 'value' => $value,
-                'position' => $position
+                'position' => 1
             ]
         );
     }
@@ -192,7 +192,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $newData['content_id'],
                 'key' => $newData['key'],
                 'value' => $newData['value'],
-                'position' => $newData['position']
+                'position' => 1
             ]
         );
 
@@ -247,5 +247,187 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
             ]
         );
+    }
+
+    public function test_reposition_other_datum_after_creation()
+    {
+        $contentId = rand();
+        $key = $this->faker->word;
+        $expectedData = [];
+
+        for ($i = 0; $i < 3; $i++) {
+            $data = [
+                'content_id' => $contentId,
+                'key' => $key,
+                'value' => $this->faker->word,
+                'position' => rand()
+            ];
+            $data['position'] = $i + 1;
+            $data['id'] = $this->classBeingTested->create($data);
+
+            $expectedData[] = $data;
+        }
+
+        foreach ($expectedData as $expectedDatum) {
+            $this->assertDatabaseHas(
+                ConfigService::$tableContentData,
+                $expectedDatum
+            );
+        }
+    }
+
+    public function test_reposition_other_datum_after_update()
+    {
+        $contentId = rand();
+        $key = $this->faker->word;
+        $value = $this->faker->word;
+        $expectedData = [];
+
+        for ($i = 0; $i < 3; $i++) {
+            $data = [
+                'content_id' => $contentId,
+                'key' => $key,
+                'value' => $value,
+                'position' => rand()
+            ];
+            $data['position'] = $i + 1;
+            $data['id'] = $this->classBeingTested->create($data);
+
+            $expectedData[] = $data;
+        }
+
+        $newData = [
+            'content_id' => $contentId,
+            'key' => $key,
+            'value' => $value,
+            'position' => 0
+        ];
+        $this->classBeingTested->update(2, $newData);
+        $expectedData[1]['position'] = 1;
+        $expectedData[0]['position'] = 2;
+
+        foreach ($expectedData as $expectedDatum) {
+            $this->assertDatabaseHas(
+                ConfigService::$tableContentData,
+                $expectedDatum
+            );
+        }
+    }
+    public function test_reposition_other_datum_after_update_with_position_null()
+    {
+        $contentId = rand();
+        $key = $this->faker->word;
+        $value = $this->faker->word;
+        $expectedData = [];
+
+        for ($i = 0; $i < 3; $i++) {
+            $data = [
+                'content_id' => $contentId,
+                'key' => $key,
+                'value' => $value,
+                'position' => rand()
+            ];
+            $data['position'] = $i + 1;
+            $data['id'] = $this->classBeingTested->create($data);
+
+            $expectedData[] = $data;
+        }
+
+        $newData = [
+            'content_id' => $contentId,
+            'key' => $key,
+            'value' => $value,
+            'position' => null
+        ];
+        $this->classBeingTested->update(2, $newData);
+        $expectedData[1]['position'] = 3;
+        $expectedData[2]['position'] = 2;
+
+        foreach ($expectedData as $expectedDatum) {
+            $this->assertDatabaseHas(
+                ConfigService::$tableContentData,
+                $expectedDatum
+            );
+        }
+    }
+
+    public function test_reposition_other_datum_after_update_with_position_huge()
+    {
+        $contentId = rand();
+        $key = $this->faker->word;
+        $value = $this->faker->word;
+        $expectedData = [];
+
+        for ($i = 0; $i < 3; $i++) {
+            $data = [
+                'content_id' => $contentId,
+                'key' => $key,
+                'value' => $value,
+                'position' => rand()
+            ];
+            $data['position'] = $i + 1;
+            $data['id'] = $this->classBeingTested->create($data);
+
+            $expectedData[] = $data;
+        }
+
+        $newData = [
+            'content_id' => $contentId,
+            'key' => $key,
+            'value' => $value,
+            'position' => $this->faker->numberBetween(500, 550)
+        ];
+        $this->classBeingTested->update(2, $newData);
+        $expectedData[1]['position'] = 3;
+        $expectedData[2]['position'] = 2;
+
+        foreach ($expectedData as $expectedDatum) {
+            $this->assertDatabaseHas(
+                ConfigService::$tableContentData,
+                $expectedDatum
+            );
+        }
+    }
+
+    public function test_delete_data_and_reposition()
+    {
+        $contentId = rand();
+        $expectedData = [];
+        $key = $this->faker->word;
+        for ($i = 0; $i < 5; $i++) {
+            $data = [
+                'content_id' => $contentId,
+                'key' => $key,
+                'value' => $this->faker->word,
+                'position' => rand()
+            ];
+
+            $data['id'] = $this->classBeingTested->create($data);
+            $data['position'] = $i + 1;
+
+            $expectedData[] = $data;
+        }
+
+        $this->classBeingTested->deleteAndReposition($expectedData[2]);
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableContentData,
+            [
+                'id' => 3,
+            ]
+        );
+
+        //decrement position in expected results
+        $expectedData[4]['position'] = $expectedData[3]['position'];
+        $expectedData[3]['position'] = $expectedData[2]['position'];
+
+        unset($expectedData[2]);
+
+        foreach ($expectedData as $expectedDatum) {
+            $this->assertDatabaseHas(
+                ConfigService::$tableContentData,
+                $expectedDatum
+            );
+        }
     }
 }

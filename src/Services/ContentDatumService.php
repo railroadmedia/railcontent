@@ -51,7 +51,8 @@ class ContentDatumService
      */
     public function create($contentId, $key, $value, $position)
     {
-        $id = $this->datumRepository->create(
+        $id = $this->datumRepository->createOrUpdateAndReposition(
+            null,
             [
                 'content_id' => $contentId,
                 'key' => $key,
@@ -85,7 +86,7 @@ class ContentDatumService
             return $datum;
         }
 
-        $this->datumRepository->update($id, $data);
+        $this->datumRepository->createOrUpdateAndReposition($id, $data);
 
         //save a content version
         event(new ContentDatumUpdated($datum['content_id']));
@@ -106,7 +107,7 @@ class ContentDatumService
             return $datum;
         }
 
-        $delete = $this->datumRepository->delete($id);
+        $delete = $this->datumRepository->deleteAndReposition($datum);
 
         //save a content version 
         event(new ContentDatumDeleted($datum['content_id']));

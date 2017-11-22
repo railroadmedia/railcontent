@@ -116,7 +116,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
                         'content_id' => $content['id'],
                         'key' => $data['key'],
                         'value' => $new_value,
-                        'position' => $data['position']
+                        'position' => 1
                     ]
             ]
         );
@@ -164,7 +164,8 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $newData = [
             'key' => $data['key'],
             'value' => $this->faker->text(500),
-            'position' => $this->faker->numberBetween()
+            'position' =>1,
+            'content_id' => $content['id']
         ];
         $updatedData = $this->serviceBeingTested->update($data['id'], $newData);
 

@@ -58,7 +58,7 @@ class ContentFieldService
      */
     public function create($contentId, $key, $value, $position, $type)
     {
-        $id = $this->fieldRepository->create(
+        $id = $this->fieldRepository->createOrUpdateAndReposition(null,
             [
                 'content_id' => $contentId,
                 'key' => $key,
@@ -92,7 +92,7 @@ class ContentFieldService
             return $field;
         }
 
-        $this->fieldRepository->update($id, $data);
+        $this->fieldRepository->createOrUpdateAndReposition($id, $data);
 
         //Save a new content version
         event(new ContentFieldUpdated($field['content_id']));
@@ -115,7 +115,7 @@ class ContentFieldService
             return $field;
         }
 
-        $deleted = $this->fieldRepository->delete($id);
+        $deleted = $this->fieldRepository->deleteAndReposition($field);
 
         //Save a new content version
         event(new ContentFieldDeleted($field['content_id']));

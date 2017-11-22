@@ -116,6 +116,50 @@ abstract class RepositoryBase
         return $id;
     }
 
+    public function createOrUpdateAndReposition($dataId = null, $data)
+    {
+        $existingData = $this->query()
+            ->where('id', $dataId)
+            ->get()->first();
+
+        $dataCount = $this->query()
+            ->where(
+                [
+                    'content_id' => $data['content_id'],
+                    'key' => $data['key']
+                ]
+            )->count();
+
+        $data['position'] = $this->recalculatePosition($data['position'], $dataCount, $existingData);
+
+        if (empty($existingData)) {
+            $this->incrementOtherEntitiesPosition(null, $data['content_id'], $data['key'],  $data['position'], null);
+
+            return $this->query()->insertGetId($data);
+
+        } elseif ($data['position'] > $existingData['position']) {
+
+            $this->query()
+                ->where('id', $dataId)
+                ->update($data);
+
+            return $this->decrementOtherEntitiesPosition($dataId, $data['content_id'], $data['key'], $existingData['position'], $data['position']);
+
+        } elseif ($data['position'] < $existingData['position']) {
+            $updated =  $this->query()
+                ->where('id', $dataId)
+                ->update($data);
+            $this->incrementOtherEntitiesPosition($dataId, $data['content_id'], $data['key'],  $data['position'], $existingData['position']);
+
+            return $updated;
+
+        } else {
+           return $this->query()
+                ->where('id', $dataId)
+                ->update($data);
+        }
+    }
+
     /**
      * Delete a record.
      *
@@ -125,6 +169,29 @@ abstract class RepositoryBase
     public function delete($id)
     {
         return $this->query()->where(['id' => $id])->delete() > 0;
+    }
+
+    public function deleteAndReposition($entity)
+    {
+        $existingLinks = $this->query()
+            ->where(['content_id' => $entity['content_id'],
+                'key' => $entity['key']])
+            ->where('id', '!=', $entity['id'])
+            ->get()
+            ->toArray();
+
+        $deleted = $this->query()
+            ->where(['id' => $entity['id']])
+            ->delete();
+
+        foreach ($existingLinks as $existingLink) {
+            $this->query()
+                ->where('id', $existingLink['id'])
+                ->where('position', '>', $entity['position'])
+                ->decrement('position');
+        }
+
+        return $deleted;
     }
 
     /**
@@ -138,5 +205,54 @@ abstract class RepositoryBase
     protected function connection()
     {
         return $this->connection;
+    }
+
+    /**
+     * @param $data
+     * @param $dataCount
+     * @param $existingData
+     * @return mixed
+     */
+    private function recalculatePosition($position, $dataCount, $existingData)
+    {
+        if ($position === null || $position > $dataCount) {
+            if (empty($existingData)) {
+                $position = $dataCount + 1;
+            } else {
+                $position = $dataCount;
+            }
+        }
+
+        if ($position < 1) {
+            $position = 1;
+        }
+        return $position;
+    }
+
+    private function incrementOtherEntitiesPosition($excludedEntityId = null, $contentId, $key, $startPosition, $endPosition = null){
+        $query = $this->query()
+            ->where('content_id', $contentId)
+            ->where('key', $key)
+            ->where('position', '>=', $startPosition);
+
+        if($excludedEntityId){
+            $query->where('id', '!=', $excludedEntityId);
+        }
+
+        if($endPosition){
+            $query->where('position', '<', $endPosition);
+        }
+
+        return $query->increment('position') > 0;
+    }
+
+    private function decrementOtherEntitiesPosition($excludedEntityId, $contentId, $key, $startPosition, $endPosition){
+        return $this->query()
+            ->where('content_id', $contentId)
+            ->where('key', $key)
+            ->where('id', '!=', $excludedEntityId)
+            ->where('position', '>', $startPosition)
+            ->where('position', '<=', $endPosition)
+            ->decrement('position') > 0;
     }
 }
