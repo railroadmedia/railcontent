@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\PermissionAssignRequest;
+use Railroad\Railcontent\Requests\PermissionDissociateRequest;
 use Railroad\Railcontent\Requests\PermissionRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ContentPermissionService;
@@ -117,5 +118,31 @@ class PermissionJsonController extends Controller
         );
 
         return new JsonResponse($assignedPermission, 200);
+    }
+
+    /**
+     * Dissociate ("unattach") permissions either:
+     *      1. from a specific content, all content of a certain type
+     *      2. or, just delete a content-permission by id
+     *
+     * @param PermissionDissociateRequest $request
+     * @return \Railroad\Railcontent\Responses\JsonResponse
+     */
+    public function dissociate(PermissionDissociateRequest $request)
+    {
+        if(!empty($request->input('content_id')) || !empty($request->input('content_type'))){
+            $contentPermissions = $this->contentPermissionService->getByContentTypeOrIdAndByPermissionId(
+                $request->input('content_id'),
+                $request->input('content_type'),
+                $request->input('permission_id')
+            );
+            foreach($contentPermissions as $contentPermission){
+                $this->contentPermissionService->delete($contentPermission[$request->input('content_permission_id')]);
+            }
+        }else{
+            $this->contentPermissionService->delete($request->input('content_permission_id'));
+        }
+
+        return new JsonResponse(200);
     }
 }

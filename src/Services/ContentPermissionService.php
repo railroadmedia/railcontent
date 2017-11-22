@@ -36,6 +36,27 @@ class ContentPermissionService
     }
 
     /**
+     * @param null $contentId
+     * @param null $contentType
+     * @param $permissionId
+     * @return array
+     */
+    public function getByContentTypeOrIdAndByPermissionId($contentId = null, $contentType = null, $permissionId)
+    {
+        $contentPermissions = $this->contentPermissionRepository->getByContentIdsOrTypes($contentId, $contentType);
+
+        $contentPermissionsMatchingPermissionId = [];
+
+        foreach($contentPermissions as $contentPermission){
+            if($contentPermission['permission_id'] === $permissionId){
+                $contentPermissionsMatchingPermissionId[] = $contentPermission;
+            }
+        }
+
+        return $contentPermissionsMatchingPermissionId;
+    }
+
+    /**
      * @param int|null $contentId
      * @param string|null $contentType
      * @param int $permissionId

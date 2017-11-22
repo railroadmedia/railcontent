@@ -71,6 +71,11 @@ Route::group(
             \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@assign'
         )->name('permissions.assign');
 
+        Route::delete(
+            '/permission/dissociate',
+            \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@dissociate'
+        )->name('permissions.dissociate');
+
         // content user progression
         Route::put(
             '/start',
