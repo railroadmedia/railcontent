@@ -128,15 +128,10 @@ class PermissionJsonController extends Controller
      */
     public function dissociate(PermissionDissociateRequest $request)
     {
-        $contentPermissions = $this->contentPermissionService->getByContentTypeOrIdAndByPermissionId(
+        return new JsonResponse($this->contentPermissionService->dissociate(
             $request->input('content_id'),
             $request->input('content_type'),
             $request->input('permission_id')
-        );
-        foreach($contentPermissions as $contentPermission){
-            $this->contentPermissionService->delete($contentPermission[$request->input('content_permission_id')]);
-        }
-
-        return new JsonResponse(200);
+        ), 200);
     }
 }

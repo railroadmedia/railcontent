@@ -43,7 +43,7 @@ class ContentPermissionService
      */
     public function getByContentTypeOrIdAndByPermissionId($contentId = null, $contentType = null, $permissionId)
     {
-        $contentPermissions = $this->contentPermissionRepository->getByContentIdsOrTypes($contentId, $contentType);
+        $contentPermissions = $this->contentPermissionRepository->getByContentIdsOrTypes([$contentId], [$contentType]);
 
         $contentPermissionsMatchingPermissionId = [];
 
@@ -54,6 +54,18 @@ class ContentPermissionService
         }
 
         return $contentPermissionsMatchingPermissionId;
+    }
+
+
+    /**
+     * @param null $contentId
+     * @param null $contentType
+     * @param $permissionId
+     * @return array
+     */
+    public function dissociate($contentId = null, $contentType = null, $permissionId)
+    {
+        return $this->contentPermissionRepository->dissociate($contentId, $contentType, $permissionId);
     }
 
     /**

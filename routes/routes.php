@@ -57,6 +57,11 @@ Route::group(
         )->name('permissions.store');
 
         Route::patch(
+            '/permission/dissociate',
+            \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@dissociate'
+        )->name('permissions.dissociate');
+
+        Route::patch(
             '/permission/{permissionId}',
             \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@update'
         )->name('permissions.update');
@@ -71,10 +76,7 @@ Route::group(
             \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@assign'
         )->name('permissions.assign');
 
-        Route::delete(
-            '/permission/dissociate',
-            \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@dissociate'
-        )->name('permissions.dissociate');
+
 
         // content user progression
         Route::put(

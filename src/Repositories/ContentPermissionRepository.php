@@ -16,6 +16,14 @@ class ContentPermissionRepository extends RepositoryBase
     use ByContentIdTrait;
 
     /**
+     * @return Builder
+     */
+    public function query()
+    {
+        return parent::connection()->table(ConfigService::$tableContentPermissions);
+    }
+
+    /**
      * Return a permission based on it's id
      *
      * @param integer $id
@@ -85,12 +93,13 @@ class ContentPermissionRepository extends RepositoryBase
         return $this->query()->where('permission_id', $permissionId)->delete() > 0;
     }
 
-    /**
-     * @return Builder
-     */
-    public function query()
+    public function dissociate($contentId = null, $contentType = null, $permissionId)
     {
-        return parent::connection()->table(ConfigService::$tableContentPermissions);
+        return $this->query()->where([
+            'content_id' => $contentId,
+            'content_type' => $contentType,
+            'permission_id' => $permissionId
+        ])->delete();
     }
 
 }
