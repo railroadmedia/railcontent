@@ -24,18 +24,13 @@ class PermissionDissociateRequest extends FormRequest
     public function rules()
     {
         return [
-            'permission_id' => 'nullable|integer|exists:' . ConfigService::$tablePermissions . ',id' .
-                '|required_without_all:content_type,content_permission_id',
-
-            'content_id' => 'nullable|numeric|exists:' . ConfigService::$tableContent . ',id' .
-                '|required_without_all:content_type,content_permission_id',
-
-            'content_type' => 'nullable|string|exists:' . ConfigService::$tableContent . ',type' .
-                '|required_without_all:content_id,content_permission_id',
-
-            'content_permission_id' => 'nullable|numeric|exists:' . ConfigService::$tableContentPermissions . ',id' .
-                '|required_without_all:content_type,content_id',
-
+            'permission_id' => 'required|integer|exists:' . ConfigService::$tablePermissions . ',id',
+            'content_id' => 'nullable|numeric|required_without_all:content_type|exists:' .
+                ConfigService::$tableContent .
+                ',id',
+            'content_type' => 'nullable|string|required_without_all:content_id|exists:' .
+                ConfigService::$tableContent .
+                ',type'
         ];
     }
 
