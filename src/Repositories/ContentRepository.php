@@ -102,6 +102,10 @@ class ContentRepository extends RepositoryBase
             ->where([ConfigService::$tableContent . '.id' => $id])
             ->getToArray();
 
+        if (empty($contentRows)) {
+            return null;
+        }
+
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
@@ -228,6 +232,35 @@ class ContentRepository extends RepositoryBase
     public function getBySlugHierarchy(...$slugs)
     {
         // todo: write function
+    }
+
+    /**
+     * @param string $type
+     * @return array|null
+     */
+    public function getByType($type)
+    {
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->where('type', $type)
+            ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
     }
 
     /**

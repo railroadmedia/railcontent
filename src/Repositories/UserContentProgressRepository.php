@@ -38,4 +38,50 @@ class UserContentProgressRepository extends RepositoryBase
     {
         return parent::connection()->table(ConfigService::$tableUserContentProgress);
     }
+
+    /**
+     * @param $contentType
+     * @param $userId
+     * @param $state
+     * @return array
+     */
+    public function getMostRecentByContentTypeUserState($contentType, $userId, $state)
+    {
+        return $this->query()
+            ->select([ConfigService::$tableUserContentProgress . '.*'])
+            ->join(
+                ConfigService::$tableContent,
+                ConfigService::$tableContent . '.id',
+                '=',
+                ConfigService::$tableUserContentProgress . '.content_id'
+            )
+            ->where(ConfigService::$tableContent . '.type', $contentType)
+            ->where(ConfigService::$tableUserContentProgress . '.state', $state)
+            ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
+            ->orderBy(ConfigService::$tableUserContentProgress . '.updated_on', 'desc')
+            ->first();
+    }
+
+    /**
+     * @param $state
+     * @param array $contentIds
+     * @return array
+     */
+    public function countTotalStatesForContentIds($state, array $contentIds)
+    {
+        return $this->query()
+            ->select(
+                [
+                    $this->databaseManager->raw(
+                        'COUNT(' . ConfigService::$tableUserContentProgress . '.id) as count'
+                    ),
+                    'content_id'
+                ]
+            )
+            ->whereIn(ConfigService::$tableUserContentProgress . '.content_id', $contentIds)
+            ->where(ConfigService::$tableUserContentProgress . '.state', $state)
+            ->groupBy(ConfigService::$tableUserContentProgress . '.content_id')
+            ->get()
+            ->toArray();
+    }
 }

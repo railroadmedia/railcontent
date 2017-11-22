@@ -32,6 +32,16 @@ class ContentHierarchyService
     }
 
     /**
+     * @param array $parentIds
+     */
+    public function countParentsChildren(array $parentIds)
+    {
+        $results = $this->contentHierarchyRepository->countParentsChildren($parentIds);
+
+        return array_combine(array_column($results, 'parent_id'), array_column($results, 'count'));
+    }
+
+    /**
      * Create a new field and return it.
      *
      * @param int $parentId

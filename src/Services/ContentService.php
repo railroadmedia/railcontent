@@ -100,6 +100,16 @@ class ContentService
      * @param string $type
      * @return array
      */
+    public function getAllByType($type)
+    {
+        return $this->contentRepository->getByType($type);
+    }
+
+    /**
+     * @param string $slug
+     * @param string $type
+     * @return array
+     */
     public function getBySlugAndType($slug, $type)
     {
         return $this->contentRepository->getBySlugAndType($slug, $type);
@@ -274,11 +284,47 @@ class ContentService
 
     /**
      * @param $userId
+     * @param $contents
+     * @param null $singlePlaylistSlug
+     * @return array
+     */
+    public function attachPlaylistsToContents($userId, $contentOrContents, $singlePlaylistSlug = null)
+    {
+        $isArray = !isset($contentOrContents['id']);
+
+        if (!$isArray) {
+            $contentOrContents = [$contentOrContents];
+        }
+
+        $userPlaylistContents = $this->contentRepository->getByUserIdWhereChildIdIn(
+            $userId,
+            array_column($contentOrContents, 'id'),
+            $singlePlaylistSlug
+        );
+
+        foreach ($contentOrContents as $index => $content) {
+            $contentOrContents[$index]['user_playlists'][$userId] = [];
+            foreach ($userPlaylistContents as $userPlaylistContent) {
+                if ($userPlaylistContent['parent_id'] == $content['id']) {
+                    $contentOrContents[$index]['user_playlists'][$userId][] = $userPlaylistContent;
+                }
+            }
+        }
+
+        if ($isArray) {
+            return $contentOrContents;
+        } else {
+            return reset($contentOrContents);
+        }
+    }
+
+    /**
+     * @param $userId
      * @param array $contents
      * @param null $singlePlaylistSlug
      * @return array
      */
-    public function attachUserPlaylistsToContents($userId, $contents, $singlePlaylistSlug = null)
+    public function attachChildrenToContents($userId, $contents, $singlePlaylistSlug = null)
     {
         $isArray = !isset($contents['id']);
 

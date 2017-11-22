@@ -26,6 +26,37 @@ class UserContentProgressService
     }
 
     /**
+     * @param $contentType
+     * @param $userId
+     * @param $state
+     * @return array
+     */
+    public function getMostRecentByContentTypeUserState($contentType, $userId, $state)
+    {
+        return $this->userContentRepository->getMostRecentByContentTypeUserState(
+            $contentType,
+            $userId,
+            $state
+        );
+    }
+
+    /**
+     * Keyed by content id.
+     *
+     * [ content_id => count ]
+     *
+     * @param $state
+     * @param $contentIds
+     * @return mixed
+     */
+    public function countTotalStatesForContentIds($state, $contentIds)
+    {
+        $results = $this->userContentRepository->countTotalStatesForContentIds($state, $contentIds);
+
+        return array_combine(array_column($results, 'content_id'), array_column($results, 'count'));
+    }
+
+    /**
      * @param $contentId
      * @param $userId
      * @param bool $forceEvenIfComplete
@@ -74,6 +105,8 @@ class UserContentProgressService
                 ]
             );
 
+        // todo: complete parents if all children are complete
+
         return true;
     }
 
@@ -101,18 +134,18 @@ class UserContentProgressService
 
     /**
      * @param $userId
-     * @param array $contents
+     * @param $contents
      * @return array
      */
-    public function attachUserProgressToContents($userId, $contents)
+    public function attachProgressToContents($userId, $contentOrContents)
     {
-        $isArray = !isset($contents['id']);
+        $isArray = !isset($contentOrContents['id']);
 
         if (!$isArray) {
-            $contents = [$contents];
+            $contentOrContents = [$contentOrContents];
         }
 
-        $contentIds = array_column($contents, 'id');
+        $contentIds = array_column($contentOrContents, 'id');
 
         if (!empty($contentIds)) {
             $contentProgressions =
@@ -121,20 +154,29 @@ class UserContentProgressService
             $contentProgressionsByContentId =
                 array_combine(array_column($contentProgressions, 'content_id'), $contentProgressions);
 
-            foreach ($contents as $index => $content) {
+            foreach ($contentOrContents as $index => $content) {
                 if (!empty($contentProgressionsByContentId[$content['id']])) {
-                    $contents[$index]['user_progress'][$userId] =
+                    $contentOrContents[$index]['user_progress'][$userId] =
                         $contentProgressionsByContentId[$content['id']];
+
+                    $contentOrContents[$index]['completed'] = $contentProgressionsByContentId[$content['id']]['state'] ==
+                        self::STATE_COMPLETED;
+
+                    $contentOrContents[$index]['started'] = $contentProgressionsByContentId[$content['id']]['state'] ==
+                        self::STATE_STARTED;
                 } else {
-                    $contents[$index]['user_progress'][$userId] = [];
+                    $contentOrContents[$index]['user_progress'][$userId] = [];
+
+                    $contentOrContents[$index]['completed'] = false;
+                    $contentOrContents[$index]['started'] = false;
                 }
             }
         }
 
         if ($isArray) {
-            return $contents;
+            return $contentOrContents;
         } else {
-            return reset($contents);
+            return reset($contentOrContents);
         }
     }
 }

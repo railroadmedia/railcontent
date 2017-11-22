@@ -20,6 +20,27 @@ class ContentHierarchyRepository extends RepositoryBase
     }
 
     /**
+     * @param array $parentIds
+     * @return array
+     */
+    public function countParentsChildren(array $parentIds)
+    {
+        return $this->query()
+            ->select(
+                [
+                    $this->databaseManager->raw(
+                        'COUNT(' . ConfigService::$tableContentHierarchy . '.child_id) as count'
+                    ),
+                    'parent_id'
+                ]
+            )
+            ->whereIn(ConfigService::$tableContentHierarchy . '.parent_id', $parentIds)
+            ->groupBy(ConfigService::$tableContentHierarchy . '.parent_id')
+            ->get()
+            ->toArray();
+    }
+
+    /**
      * @param int $parentId
      * @param int $childId
      * @param int|null $position
