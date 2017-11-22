@@ -189,6 +189,44 @@ class ContentRepository extends RepositoryBase
         );
     }
 
+
+    /**
+     * @param $parentId
+     * @return array
+     */
+    public function getByParentIds(array $parentIds, $orderBy = 'child_position', $orderByDirection = 'asc')
+    {
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->leftJoin(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.child_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
+            ->whereIn(ConfigService::$tableContentHierarchy . '.parent_id', $parentIds)
+            ->selectInheritenceColumns()
+            ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
     /**
      * @param $parentId
      * @return array

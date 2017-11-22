@@ -125,6 +125,15 @@ class ContentService
     }
 
     /**
+     * @param integer $parentId
+     * @return array
+     */
+    public function getByParentIds(array $parentIds, $orderBy = 'child_position', $orderByDirection = 'asc')
+    {
+        return $this->contentRepository->getByParentIds($parentIds, $orderBy, $orderByDirection);
+    }
+
+    /**
      * @param $childId
      * @param $type
      * @return array
