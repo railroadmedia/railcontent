@@ -14,7 +14,8 @@ class CreateSearchIndexes extends Migration
      */
     public function up()
     {
-        Schema::create(
+        if(!Schema::connection('mysql')->hasTable(ConfigService::$tableSearchIndexes)) {
+            Schema::connection('mysql')->create(
                 ConfigService::$tableSearchIndexes,
                 function ($table) {
                     /**
@@ -29,9 +30,10 @@ class CreateSearchIndexes extends Migration
                 }
             );
 
-        DB::statement('ALTER TABLE '.ConfigService::$tableSearchIndexes.' ADD FULLTEXT high_full_text(high_value)');
-        DB::statement('ALTER TABLE '.ConfigService::$tableSearchIndexes.' ADD FULLTEXT medium_full_text(medium_value)');
-        DB::statement('ALTER TABLE '.ConfigService::$tableSearchIndexes.' ADD FULLTEXT low_full_text(low_value)');
+            DB::statement('ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' ADD FULLTEXT high_full_text(high_value)');
+            DB::statement('ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' ADD FULLTEXT medium_full_text(medium_value)');
+            DB::statement('ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' ADD FULLTEXT low_full_text(low_value)');
+        }
     }
 
     /**
@@ -41,6 +43,6 @@ class CreateSearchIndexes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableSearchIndexes);
+        Schema::connection('mysql')->dropIfExists(ConfigService::$tableSearchIndexes);
     }
 }

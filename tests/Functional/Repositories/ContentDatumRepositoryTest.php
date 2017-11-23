@@ -28,7 +28,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
         $position = rand();
 
         $result = $this->classBeingTested->getById(
-            $this->classBeingTested->create(
+            $this->classBeingTested->createOrUpdateAndReposition(null,
                 [
                     'content_id' => $contentId,
                     'key' => $key,
@@ -73,7 +73,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $data['id'] = $this->classBeingTested->create($data);
+            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
             $data['position'] = 1;
             $expectedData[] = $data;
         }
@@ -87,7 +87,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $this->classBeingTested->create($data);
+            $this->classBeingTested->createOrUpdateAndReposition(null, $data);
         }
 
         $response = $this->classBeingTested->getByContentId($contentId);
@@ -110,7 +110,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $data['id'] = $this->classBeingTested->create($data);
+            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
             $data['position'] = 1;
             $expectedData[] = $data;
         }
@@ -124,7 +124,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $this->classBeingTested->create($data);
+            $this->classBeingTested->createOrUpdateAndReposition(null, $data);
         }
 
         $response = $this->classBeingTested->getByContentIds([1, 2, 3]);
@@ -142,7 +142,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
         $value = $this->faker->text();
         $position = rand();
 
-        $result = $this->classBeingTested->create(
+        $result = $this->classBeingTested->createOrUpdateAndReposition(null,
             [
                 'content_id' => $contentId,
                 'key' => $key,
@@ -182,7 +182,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
 
         $id = $this->query()->table(ConfigService::$tableContentData)->insertGetId($oldData);
 
-        $result = $this->classBeingTested->update($id, $newData);
+        $result = $this->classBeingTested->createOrUpdateAndReposition($id, $newData);
 
         $this->assertEquals(1, $result);
 
@@ -234,7 +234,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $data['id'] = $this->classBeingTested->create($data);
+            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
 
             $expectedData[] = $data;
         }
@@ -263,7 +263,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
             $data['position'] = $i + 1;
-            $data['id'] = $this->classBeingTested->create($data);
+            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
 
             $expectedData[] = $data;
         }
@@ -291,7 +291,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
             $data['position'] = $i + 1;
-            $data['id'] = $this->classBeingTested->create($data);
+            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
 
             $expectedData[] = $data;
         }
@@ -302,7 +302,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             'value' => $value,
             'position' => 0
         ];
-        $this->classBeingTested->update(2, $newData);
+        $this->classBeingTested->createOrUpdateAndReposition(2, $newData);
         $expectedData[1]['position'] = 1;
         $expectedData[0]['position'] = 2;
 
@@ -328,7 +328,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
             $data['position'] = $i + 1;
-            $data['id'] = $this->classBeingTested->create($data);
+            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
 
             $expectedData[] = $data;
         }
@@ -337,9 +337,9 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             'content_id' => $contentId,
             'key' => $key,
             'value' => $value,
-            'position' => null
+            'position' => 3
         ];
-        $this->classBeingTested->update(2, $newData);
+        $this->classBeingTested->createOrUpdateAndReposition(2, $newData);
         $expectedData[1]['position'] = 3;
         $expectedData[2]['position'] = 2;
 
@@ -366,7 +366,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
             $data['position'] = $i + 1;
-            $data['id'] = $this->classBeingTested->create($data);
+            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
 
             $expectedData[] = $data;
         }
@@ -377,7 +377,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             'value' => $value,
             'position' => $this->faker->numberBetween(500, 550)
         ];
-        $this->classBeingTested->update(2, $newData);
+        $this->classBeingTested->createOrUpdateAndReposition(2, $newData);
         $expectedData[1]['position'] = 3;
         $expectedData[2]['position'] = 2;
 
@@ -402,7 +402,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $data['id'] = $this->classBeingTested->create($data);
+            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
             $data['position'] = $i + 1;
 
             $expectedData[] = $data;

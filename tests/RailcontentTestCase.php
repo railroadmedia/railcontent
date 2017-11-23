@@ -11,9 +11,12 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Repositories\RepositoryBase;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\RemoteStorageService;
 use Railroad\Railcontent\Tests\Resources\Models\User;
 
@@ -45,6 +48,12 @@ class RailcontentTestCase extends BaseTestCase
     /** @var RemoteStorageService $remoteStorageService */
     protected $remoteStorageService;
 
+    /**
+     * @var string database connexion type
+     * by default it's testbench; for full text search it's mysql
+     */
+    protected $connectionType = 'testbench';
+
     protected function setUp()
     {
         parent::setUp();
@@ -73,7 +82,7 @@ class RailcontentTestCase extends BaseTestCase
         // setup package config for testing
         $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
 
-        $app['config']->set('railcontent.database_connection_name', 'testbench');
+        $app['config']->set('railcontent.database_connection_name', $this->getConnectionType());
         $app['config']->set('railcontent.cache_duration', 60);
         $app['config']->set('railcontent.table_prefix', $defaultConfig['table_prefix']);
         $app['config']->set('railcontent.brand', $defaultConfig['brand']);
@@ -83,9 +92,25 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.commentable_content_types', $defaultConfig['commentable_content_types']);
         $app['config']->set('railcontent.validation', $defaultConfig['validation']);
         $app['config']->set('railcontent.comments_assignation', $defaultConfig['comments_assignation']);
+        $app['config']->set('railcontent.search_index_values', $defaultConfig['search_index_values']);
 
         // setup default database to use sqlite :memory:
-        $app['config']->set('database.default', 'testbench');
+        $app['config']->set('database.default', $this->getConnectionType());
+        $app['config']->set(
+            'database.connections.mysql',
+            [
+                'driver' => 'mysql',
+                'host' => 'mysql',
+                'port' => env('MYSQL_PORT', '3306'),
+                'database' => env('MYSQL_DB','railcontent2'),
+                'username' => 'root',
+                'password' => 'root',
+                'charset' => 'utf8',
+                'collation' => 'utf8_general_ci',
+                'prefix' => '',
+            ]
+        );
+
         $app['config']->set(
             'database.connections.testbench',
             [
@@ -349,6 +374,16 @@ class RailcontentTestCase extends BaseTestCase
             "results" => $results,
             "filter_options" => $filter
         ];
+    }
+
+    public function setConnectionType($type = 'testbench')
+    {
+        $this->connectionType = $type;
+    }
+
+    public function getConnectionType()
+    {
+        return $this->connectionType;
     }
 
 }
