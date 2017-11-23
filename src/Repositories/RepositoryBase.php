@@ -125,7 +125,7 @@ abstract class RepositoryBase
         $dataCount = $this->query()
             ->where(
                 [
-                    'content_id' => $data['content_id'],
+                    'content_id' => $data['content_id'] ?? $existingData['content_id'],
                     'key' => $data['key']
                 ]
             )->count();
