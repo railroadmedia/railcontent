@@ -126,14 +126,24 @@ abstract class RepositoryBase
             ->where(
                 [
                     'content_id' => $data['content_id'] ?? $existingData['content_id'],
-                    'key' => $data['key']
+                    'key' => $data['key'] ?? $existingData['key']
                 ]
             )->count();
 
-        $data['position'] = $this->recalculatePosition($data['position'], $dataCount, $existingData);
+        $data['position'] = $this->recalculatePosition(
+            $data['position'] ?? $existingData['position'],
+            $dataCount,
+            $existingData
+        );
 
         if (empty($existingData)) {
-            $this->incrementOtherEntitiesPosition(null, $data['content_id'], $data['key'],  $data['position'], null);
+            $this->incrementOtherEntitiesPosition(
+                null,
+                $data['content_id'],
+                $data['key'],
+                $data['position'],
+                null
+            );
 
             return $this->query()->insertGetId($data);
 
@@ -143,18 +153,30 @@ abstract class RepositoryBase
                 ->where('id', $dataId)
                 ->update($data);
 
-            return $this->decrementOtherEntitiesPosition($dataId, $data['content_id'], $data['key'], $existingData['position'], $data['position']);
+            return $this->decrementOtherEntitiesPosition(
+                $dataId,
+                $data['content_id'],
+                $data['key'],
+                $existingData['position'],
+                $data['position']
+            );
 
         } elseif ($data['position'] < $existingData['position']) {
-            $updated =  $this->query()
+            $updated = $this->query()
                 ->where('id', $dataId)
                 ->update($data);
-            $this->incrementOtherEntitiesPosition($dataId, $data['content_id'], $data['key'],  $data['position'], $existingData['position']);
+            $this->incrementOtherEntitiesPosition(
+                $dataId,
+                $data['content_id'],
+                $data['key'],
+                $data['position'],
+                $existingData['position']
+            );
 
             return $updated;
 
         } else {
-           return $this->query()
+            return $this->query()
                 ->where('id', $dataId)
                 ->update($data);
         }
@@ -174,8 +196,12 @@ abstract class RepositoryBase
     public function deleteAndReposition($entity)
     {
         $existingLinks = $this->query()
-            ->where(['content_id' => $entity['content_id'],
-                'key' => $entity['key']])
+            ->where(
+                [
+                    'content_id' => $entity['content_id'],
+                    'key' => $entity['key']
+                ]
+            )
             ->where('id', '!=', $entity['id'])
             ->get()
             ->toArray();
@@ -229,30 +255,42 @@ abstract class RepositoryBase
         return $position;
     }
 
-    private function incrementOtherEntitiesPosition($excludedEntityId = null, $contentId, $key, $startPosition, $endPosition = null){
+    private function incrementOtherEntitiesPosition(
+        $excludedEntityId = null,
+        $contentId,
+        $key,
+        $startPosition,
+        $endPosition = null
+    ) {
         $query = $this->query()
             ->where('content_id', $contentId)
             ->where('key', $key)
             ->where('position', '>=', $startPosition);
 
-        if($excludedEntityId){
+        if ($excludedEntityId) {
             $query->where('id', '!=', $excludedEntityId);
         }
 
-        if($endPosition){
+        if ($endPosition) {
             $query->where('position', '<', $endPosition);
         }
 
         return $query->increment('position') > 0;
     }
 
-    private function decrementOtherEntitiesPosition($excludedEntityId, $contentId, $key, $startPosition, $endPosition){
+    private function decrementOtherEntitiesPosition(
+        $excludedEntityId,
+        $contentId,
+        $key,
+        $startPosition,
+        $endPosition
+    ) {
         return $this->query()
-            ->where('content_id', $contentId)
-            ->where('key', $key)
-            ->where('id', '!=', $excludedEntityId)
-            ->where('position', '>', $startPosition)
-            ->where('position', '<=', $endPosition)
-            ->decrement('position') > 0;
+                ->where('content_id', $contentId)
+                ->where('key', $key)
+                ->where('id', '!=', $excludedEntityId)
+                ->where('position', '>', $startPosition)
+                ->where('position', '<=', $endPosition)
+                ->decrement('position') > 0;
     }
 }
