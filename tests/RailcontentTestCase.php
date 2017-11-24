@@ -134,6 +134,7 @@ class RailcontentTestCase extends BaseTestCase
         );
 
         $app['config']->set('railcontent.awsCloudFront', 'd1923uyy6spedc.cloudfront.net');
+        if (!$app['db']->connection()->getSchemaBuilder()->hasTable('users')) {
 
         $app['db']->connection()->getSchemaBuilder()->create(
             'users',
@@ -142,6 +143,7 @@ class RailcontentTestCase extends BaseTestCase
                 $table->string('email');
             }
         );
+    }
 
         // register provider
         $app->register(RailcontentServiceProvider::class);

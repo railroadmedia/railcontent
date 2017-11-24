@@ -4,7 +4,7 @@ namespace Railroad\Railcontent\Commands;
 
 use Illuminate\Console\Command;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\SearchRepository;
+use Railroad\Railcontent\Repositories\FullTextSearchRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
 class CreateSearchIndexes extends Command
@@ -32,7 +32,7 @@ class CreateSearchIndexes extends Command
      *
      * @return void
      */
-    public function __construct(SearchRepository $searchRepository, ContentRepository $contentRepository)
+    public function __construct(FullTextSearchRepository $searchRepository, ContentRepository $contentRepository)
     {
         parent::__construct();
 

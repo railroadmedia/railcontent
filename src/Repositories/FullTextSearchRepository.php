@@ -4,18 +4,23 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Helpers\ContentHelper;
+use Railroad\Railcontent\Repositories\QueryBuilders\FullTextSearchQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 
 
-class SearchRepository extends RepositoryBase
+class FullTextSearchRepository extends RepositoryBase
 {
-
     /**
-     * @return mixed
+     * @return FullTextSearchQueryBuilder
      */
     protected function query()
     {
-        return parent::connection()->table(ConfigService::$tableSearchIndexes);
+        return (new FullTextSearchQueryBuilder(
+            $this->connection(),
+            $this->connection()->getQueryGrammar(),
+            $this->connection()->getPostProcessor()
+        ))
+            ->from(ConfigService::$tableSearchIndexes);
     }
 
     public function createSearchIndexes($contents)
@@ -90,5 +95,26 @@ class SearchRepository extends RepositoryBase
             }
         }
         return implode(' ', $values);
+    }
+
+    public function search(
+        $term,
+        $page = 1,
+        $limit = 10
+    ) {
+
+        $query = $this->query()
+            ->selectColumns($term)
+            ->restrictByTerm($term)
+            ->orderByRaw('(high_score + medium_score + low_score) DESC')
+            ->limit($limit)
+            ->offset($page);
+
+        return $query->get()->toArray();
+    }
+
+    public function getAll()
+    {
+        return $this->query()->get()->toArray();
     }
 }
