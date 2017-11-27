@@ -4,19 +4,18 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\FullTextSearchRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class FullTextSearchRepositoryTest extends RailcontentTestCase
 {
-    use RefreshDatabase;
     /**
-     * @var PermissionRepository
+     * @var FullTextSearchRepository
      */
     protected $classBeingTested;
 
@@ -64,8 +63,10 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
 
     public function test_search()
     {
-        for ($i = 0; $i < 10; $i++) {
-            $content[$i] = $this->contentFactory->create();
+        for ($i = 1; $i < 10; $i++) {
+            $content[$i] = $this->contentFactory->create( $this->faker->word,
+                $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                ContentService::STATUS_PUBLISHED);
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title');
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], $this->faker->word);
@@ -74,14 +75,14 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
             $descriptionData = $this->datumFactory->create($content[$i]['id'], 'description');
             $otherData = $this->datumFactory->create($content[$i]['id'], $this->faker->word);
             $content[$i]['data'] = [$descriptionData, $otherData];
-
-
         }
+
         $this->classBeingTested->createSearchIndexes($content);
+
         $results = $this->classBeingTested->search($content[1]['slug'] . ' ' . $titleField[1]['value']);
 
         //check that first result it's the content with given slug and title
-        $this->assertArraySubset([0 => ['content_id' => $content[1]['id']]], $results);
+        $this->assertArrayHasKey($content[1]['id'], $results);
     }
 
     public function test_search_no_results()
@@ -100,6 +101,7 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
 
         }
         $this->classBeingTested->createSearchIndexes($content);
+
         $results = $this->classBeingTested->search('rock lessons');
 
         //check that no results are found

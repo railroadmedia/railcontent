@@ -44,4 +44,21 @@ class FullTextSearchQueryBuilder extends QueryBuilder
 
         return $this;
     }
+
+    /**
+     * @return $this
+     */
+    public function restrictBrand()
+    {
+        $this->where(ConfigService::$tableSearchIndexes . '.brand', ConfigService::$brand);
+
+        return $this;
+    }
+
+    public function orderByScore()
+    {
+        $this->orderByRaw('(high_score + medium_score + low_score) DESC');
+
+        return $this;
+    }
 }

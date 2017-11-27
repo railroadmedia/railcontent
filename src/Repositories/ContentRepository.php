@@ -132,7 +132,7 @@ class ContentRepository extends RepositoryBase
         $contentRows = $this->query()
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
-            ->whereIn('id', $ids)
+            ->whereIn(ConfigService::$tableContent.'.id', $ids)
             ->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));

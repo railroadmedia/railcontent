@@ -187,5 +187,11 @@ Route::group(
             '/assigned-comment/{commentId}',
             \Railroad\Railcontent\Controllers\CommentAssignationJsonController::class . '@delete'
         )->name('comment.assignation-delete');
+
+        //full text search
+        Route::get(
+            '/search',
+            \Railroad\Railcontent\Controllers\FullTextSearchJsonController::class . '@index'
+        )->name('search.index');
     }
 );

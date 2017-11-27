@@ -92,6 +92,7 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.commentable_content_types', $defaultConfig['commentable_content_types']);
         $app['config']->set('railcontent.validation', $defaultConfig['validation']);
         $app['config']->set('railcontent.comments_assignation', $defaultConfig['comments_assignation']);
+        $app['config']->set('railcontent.searchable_content_types', $defaultConfig['searchable_content_types']);
         $app['config']->set('railcontent.search_index_values', $defaultConfig['search_index_values']);
 
         // setup default database to use sqlite :memory:

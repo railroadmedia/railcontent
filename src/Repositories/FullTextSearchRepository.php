@@ -10,6 +10,24 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class FullTextSearchRepository extends RepositoryBase
 {
+
+    private $contentRepository;
+
+    /**
+     * ContentRepository constructor.
+     *
+     * @param ContentRepository $contentRepository
+     * @param DatabaseManager $databaseManager
+     */
+    public function __construct(
+        ContentRepository $contentRepository
+    ) {
+        parent::__construct();
+
+        $this->contentRepository = $contentRepository;
+    }
+
+
     /**
      * @return FullTextSearchQueryBuilder
      */
@@ -27,8 +45,8 @@ class FullTextSearchRepository extends RepositoryBase
     {
         $searchInsertData = [];
 
-        //truncate old indexes
-        $this->truncateOldIndexes();
+        //delete old indexes
+        $this->deleteOldIndexes();
 
         $searchIndexValues = ConfigService::$searchIndexValues;
 
@@ -39,6 +57,7 @@ class FullTextSearchRepository extends RepositoryBase
                 'high_value' => $this->prepareIndexesValues($searchIndexValues['high_value'], $content),
                 'medium_value' => $this->prepareIndexesValues($searchIndexValues['medium_value'], $content),
                 'low_value' => $this->prepareIndexesValues($searchIndexValues['low_value'], $content),
+                'brand' => ConfigService::$brand,
                 'created_at' => Carbon::parse($content['created_on'])
                     ->toDateTimeString()
             ];
@@ -47,12 +66,12 @@ class FullTextSearchRepository extends RepositoryBase
 
     }
 
-    /** Truncate old indexes
+    /** Delete old indexes for the brand
      * @return mixed
      */
-    private function truncateOldIndexes()
+    private function deleteOldIndexes()
     {
-        return $this->query()->truncate();
+        return $this->query()->where('brand', ConfigService::$brand)->delete();
     }
 
     /** Prepare search indexes based on config settings
@@ -97,24 +116,41 @@ class FullTextSearchRepository extends RepositoryBase
         return implode(' ', $values);
     }
 
+    /** Perform a boolean full text search by term, paginate and order the results by score.
+     * Returns an array with the contents that contain the search criteria
+     * @param string|null $term
+     * @param int $page
+     * @param int $limit
+     * @return array
+     */
     public function search(
         $term,
         $page = 1,
         $limit = 10
     ) {
+        $query = $this->query()
+            ->selectColumns($term)
+            ->restrictBrand()
+            ->restrictByTerm($term)
+            ->orderByScore()
+            ->directPaginate($page, $limit);
+        $contentRows = $query->getToArray();
 
+        return $this->contentRepository->getByIds(array_column($contentRows, 'content_id'));
+
+    }
+
+    /** Count all the matches
+     * @param string|null $term
+     * @return int
+     */
+    public function countTotalResults($term)
+    {
         $query = $this->query()
             ->selectColumns($term)
             ->restrictByTerm($term)
-            ->orderByRaw('(high_score + medium_score + low_score) DESC')
-            ->limit($limit)
-            ->offset($page);
+            ->restrictBrand();
 
-        return $query->get()->toArray();
-    }
-
-    public function getAll()
-    {
-        return $this->query()->get()->toArray();
+        return $query->count();
     }
 }

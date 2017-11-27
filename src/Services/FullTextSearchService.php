@@ -25,8 +25,11 @@ class FullTextSearchService
      * @param string $term
      * @return array|null
      */
-    public function search($term, $page=1, $limit=10)
+    public function search($term, $page = 1, $limit = 10)
     {
-        return $this->fullTextSearchRepository->search($term, $page, $limit);
+        return [
+            'results' => $this->fullTextSearchRepository->search($term, $page, $limit),
+            'total_results' => $this->fullTextSearchRepository->countTotalResults($term)
+        ];
     }
 }
