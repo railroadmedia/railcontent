@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\FullTextSearchRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 
 class CreateSearchIndexes extends Command
 {

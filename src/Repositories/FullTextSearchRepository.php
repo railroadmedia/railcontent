@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\FullTextSearchQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
@@ -10,7 +11,7 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class FullTextSearchRepository extends RepositoryBase
 {
-
+    use RefreshDatabase;
     private $contentRepository;
 
     /**

@@ -58,7 +58,7 @@ class RailcontentTestCase extends BaseTestCase
     {
         parent::setUp();
 
-        $this->artisan('migrate', []);
+        $this->artisan('migrate:fresh', []);
         $this->artisan('cache:clear', []);
 
         $this->faker = $this->app->make(Generator::class);
@@ -109,6 +109,9 @@ class RailcontentTestCase extends BaseTestCase
                 'charset' => 'utf8',
                 'collation' => 'utf8_general_ci',
                 'prefix' => '',
+                'options' => [
+                    \PDO::ATTR_PERSISTENT => true,
+                ]
             ]
         );
 

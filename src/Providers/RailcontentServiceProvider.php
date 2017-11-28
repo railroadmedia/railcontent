@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Providers;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use PDO;
+use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDatumCreated;
@@ -70,6 +71,10 @@ class RailcontentServiceProvider extends ServiceProvider
             'Illuminate\Contracts\Debug\ExceptionHandler',
             'Railroad\Railcontent\Exceptions\RailcontentException'
         );
+
+        $this->commands([
+            CreateSearchIndexes::class
+        ]);
     }
 
     private function setupConfig()

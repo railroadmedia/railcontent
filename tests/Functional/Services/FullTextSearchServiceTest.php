@@ -32,8 +32,14 @@ class FullTextSearchServiceTest extends RailcontentTestCase
 
     protected $fieldFactory;
 
+    /**
+     * @var ContentDatumFactory $datumFactory
+     */
     protected $datumFactory;
 
+    /**
+     * @var FullTextSearchRepository $fullSearchRepository
+     */
     protected $fullSearchRepository;
 
 
@@ -52,6 +58,7 @@ class FullTextSearchServiceTest extends RailcontentTestCase
 
     public function test_search_no_results()
     {
+        $this->fullSearchRepository->createSearchIndexes([]);
         $result = $this->classBeingTested->search($this->faker->word);
 
         $this->assertEquals([
@@ -60,7 +67,7 @@ class FullTextSearchServiceTest extends RailcontentTestCase
         ], $result);
     }
 
-    public function test_search()
+    public function test_search_paginated()
     {
         $page = 1;
         $limit = 10;
@@ -71,14 +78,24 @@ class FullTextSearchServiceTest extends RailcontentTestCase
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field '.$i);
             $content[$i]['fields'] = [$titleField[$i], $otherField[$i]];
 
-            $descriptionData = $this->datumFactory->create($content[$i]['id'], 'description '.$i);
+            $descriptionData = $this->datumFactory->create($content[$i]['id'], 'description', 'description '.$this->faker->word);
             $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum '.$i);
             $content[$i]['data'] = [$descriptionData, $otherData];
         }
 
         $this->fullSearchRepository->createSearchIndexes($content);
-        $results = $this->classBeingTested->search('slug field description',$page, $limit);
+
+        $results = $this->classBeingTested->search('slug field description', $page, $limit);
+
+        $contents = $results['results'];
+        $expectedContents = array_splice($contents, 0, $limit);
+        $espectedResults = array_combine(
+                                    array_column($expectedContents, 'id'),
+                                    $expectedContents
+                            );
+
         $this->assertArraySubset([
+            'results' => $espectedResults,
             'total_results' => count($content)
         ], $results);
     }
