@@ -260,7 +260,7 @@ class CommentRepositoryTest extends RailcontentTestCase
         }
 
         for($i = 1; $i<=3; $i++){
-            $expectedComments[$i]['replies'][] = $this->commentFactory->create($this->faker->text(), null, $expectedComments[$i]['id'], rand());
+            $expectedComments[$i]['replies'] = $this->commentFactory->create($this->faker->text(),  $expectedComments[$i]['id'], null, rand());
         }
 
         $results = $this->classBeingTested->getComments();

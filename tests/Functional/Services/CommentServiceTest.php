@@ -78,7 +78,7 @@ class CommentServiceTest extends RailcontentTestCase
         ];
         $result = $this->classBeingTested->create($comment['comment'], $content['id'], $comment['parent_id'], $comment['user_id']);
 
-        $this->assertEquals($comment, $result);
+        $this->assertEquals(array_add($comment, 'replies',[]), $result);
 
         $this->assertDatabaseHas(
             ConfigService::$tableCommentsAssignment,
@@ -145,7 +145,7 @@ class CommentServiceTest extends RailcontentTestCase
 
         $result = $this->classBeingTested->create($reply['comment'], null, $comment['id'], $userId);
 
-        $this->assertEquals($reply, $result);
+        $this->assertEquals(array_add($reply,'replies',[]), $result);
     }
 
     public function test_update_my_comment()

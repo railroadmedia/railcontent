@@ -61,7 +61,7 @@ class PermissionControllerTest extends RailcontentTestCase
         ]);
 
         $this->assertEquals(200, $response->status());
-        $this->assertEquals($permission, json_decode($response->content(), true)['results']);
+        $this->assertEquals(array_add($permission,'brand', ConfigService::$brand), json_decode($response->content(), true)['results']);
     }
 
     public function test_store_validation()
@@ -83,20 +83,16 @@ class PermissionControllerTest extends RailcontentTestCase
             'name' => $name
         ];
 
-        $this->assertEquals($expectedResult, $permission);
+        $this->assertEquals(array_add($expectedResult, 'brand', ConfigService::$brand), $permission);
     }
 
     public function test_update_response()
     {
-        $permission = [
-            'name' => $this->faker->word
-        ];
-
-        $permissionId = $this->query()->table(ConfigService::$tablePermissions)->insertGetId($permission);
+        $permission = $this->permissionFactory->create();
 
         $name = $this->faker->word;
 
-        $response = $this->call('PATCH', 'railcontent/permission/' . $permissionId, [
+        $response = $this->call('PATCH', 'railcontent/permission/' . $permission['id'], [
             'name' => $name
         ]);
 
@@ -153,6 +149,7 @@ class PermissionControllerTest extends RailcontentTestCase
         $updatedPermission = $this->serviceBeingTested->update($permission['id'], $newName);
 
         $permission['name'] = $newName;
+        $permission['brand'] = ConfigService::$brand;
 
         $this->assertEquals($permission, $updatedPermission);
     }
@@ -222,7 +219,8 @@ class PermissionControllerTest extends RailcontentTestCase
             "content_id" => $content['id'],
             "content_type" => null,
             "permission_id" => $permission['id'],
-            "name" => $permission['name']
+            "name" => $permission['name'],
+            "brand" => ConfigService::$brand
         ]);
 
         $this->assertEquals(200, $response->status());
@@ -332,7 +330,8 @@ class PermissionControllerTest extends RailcontentTestCase
             'content_id' => null,
             'content_type' => $contentType,
             'permission_id' => $permission['id'],
-            'name' => $permission['name']
+            'name' => $permission['name'],
+            'brand' => ConfigService::$brand
         ], $assigned);
     }
 

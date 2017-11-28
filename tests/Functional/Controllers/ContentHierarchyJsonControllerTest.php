@@ -67,8 +67,8 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
                 'code' => 200,
                 'results' => [
                     'id' => 1,
-                    'parent_id' => 1,
-                    'child_id' => 2,
+                    'parent_id' => $parentContent['id'],
+                    'child_id' => $childContent['id'],
                     'child_position' => 1,
                 ],
             ],
@@ -100,8 +100,8 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
                 'code' => 200,
                 'results' => [
                     'id' => 1,
-                    'parent_id' => 1,
-                    'child_id' => 2,
+                    'parent_id' => $parentContent['id'],
+                    'child_id' => $childContent['id'],
                     'child_position' => 1,
                 ],
             ],

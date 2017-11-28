@@ -215,7 +215,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $expectedResults = $this->createExpectedResult('ok', 201, [
-            1 =>
+            0 =>
                 [
                     'id' => '1',
                     'slug' => $slug,
@@ -249,7 +249,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 "status" => "ok",
                 "code" => 200,
-                "results" => [$content['id'] => $content]
+                "results" => [0 => $content]
             ],
             $response->json()
         );

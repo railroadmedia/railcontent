@@ -90,7 +90,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'parent_id' => null,
             'user_id' => $userId,
             'created_on' => Carbon::now()->toDateTimeString(),
-            'deleted_at' => null
+            'deleted_at' => null,
+            'replies' => []
         ]);
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson());

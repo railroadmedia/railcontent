@@ -121,7 +121,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
     public function test_attach_user_progress_to_content_empty()
     {
-        $results = $this->classBeingTested->attachUserProgressToContents(rand(), []);
+        $results = $this->classBeingTested->attachProgressToContents(rand(), []);
 
         $this->assertEquals([], $results);
     }
@@ -131,7 +131,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $userId = rand();
         $content = $this->contentFactory->create();
 
-        $results = $this->classBeingTested->attachUserProgressToContents($userId, [$content]);
+        $results = $this->classBeingTested->attachProgressToContents($userId, [$content]);
 
         $content['user_progress'][$userId] = [];
 
@@ -161,7 +161,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
             $expectedContents[] = $content;
         }
 
-        $results = $this->classBeingTested->attachUserProgressToContents($userId, $expectedContents);
+        $results = $this->classBeingTested->attachProgressToContents($userId, $expectedContents);
 
         $this->assertEquals($expectedContents, $results);
     }

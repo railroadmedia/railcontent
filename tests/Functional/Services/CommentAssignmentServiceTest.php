@@ -13,12 +13,24 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 class CommentAssignmentServiceTest extends RailcontentTestCase
 {
 
+    /**
+     * @var CommentAssignmentService
+     */
     protected $classBeingTested;
 
+    /**
+     * @var ContentFactory
+     */
     protected $contentFactory;
 
+    /**
+     * @var CommentFactory
+     */
     protected $commentFactory;
 
+    /**
+     * @var CommentAssignationFactory
+     */
     protected $commentAssignationFactory;
 
     protected function setUp()
@@ -39,6 +51,7 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
             $this->faker->randomElement(ConfigService::$commentableContentTypes)
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        unset($comment['replies']);
         $store = $this->classBeingTested->store($comment, $content['type']);
 
         $this->assertEquals([$comment['id'] => $comment], $store);

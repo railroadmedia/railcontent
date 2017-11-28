@@ -65,7 +65,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
                 "key" => $key,
                 "value" => $value,
                 "type" => $type,
-                "position" => $position
+                "position" => 1
             ]
         );
 

@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Factories;
 
 use Faker\Generator;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\PermissionService;
 
 class PermissionsFactory extends PermissionService
@@ -24,7 +25,7 @@ class PermissionsFactory extends PermissionService
         $parameters =
             func_get_args() + [
                 $this->faker->word,
-                $this->faker->word,
+                ConfigService::$brand,
             ];
 
         return parent::create(...$parameters);
