@@ -21,6 +21,19 @@ class ContentHierarchyRepository extends RepositoryBase
 
     /**
      * @param array $parentIds
+     * @param $childId
+     * @return array|null
+     */
+    public function getByParentIds(array $parentIds)
+    {
+        return $this->query()
+            ->whereIn('parent_id', $parentIds)
+            ->get()
+            ->toArray();
+    }
+
+    /**
+     * @param array $parentIds
      * @return array
      */
     public function countParentsChildren(array $parentIds)

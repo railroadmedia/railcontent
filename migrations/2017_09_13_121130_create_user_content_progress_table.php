@@ -14,7 +14,7 @@ class CreateUserContentProgressTable extends Migration
      */
     public function up()
     {
-        Schema::create(
+        Schema::connection(ConfigService::$databaseConnectionName)->create(
             ConfigService::$tableUserContentProgress,
             function (Blueprint $table) {
                 $table->increments('id');

@@ -55,6 +55,7 @@ class ContentQueryBuilder extends QueryBuilder
         $this->addSelect(
             [
                 ConfigService::$tableContentHierarchy . '.child_position as child_position',
+                ConfigService::$tableContentHierarchy . '.child_id as child_id',
                 ConfigService::$tableContentHierarchy . '.parent_id as parent_id',
             ]
         );

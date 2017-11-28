@@ -7,6 +7,7 @@ use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
+use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\ContentVersionRepository;
 
@@ -32,11 +33,17 @@ class ContentService
      */
     private $datumRepository;
 
+    /**
+     * @var ContentHierarchyRepository
+     */
+    private $contentHierarchyRepository;
+
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
     const STATUS_SCHEDULED = 'scheduled';
     const STATUS_ARCHIVED = 'archived';
+    const STATUS_DELETED = 'deleted';
 
     /**
      * ContentService constructor.
@@ -45,17 +52,20 @@ class ContentService
      * @param ContentVersionRepository $versionRepository
      * @param ContentFieldRepository $fieldRepository
      * @param ContentDatumRepository $datumRepository
+     * @param ContentHierarchyRepository $contentHierarchyRepository
      */
     public function __construct(
         ContentRepository $contentRepository,
         ContentVersionRepository $versionRepository,
         ContentFieldRepository $fieldRepository,
-        ContentDatumRepository $datumRepository
+        ContentDatumRepository $datumRepository,
+        ContentHierarchyRepository $contentHierarchyRepository
     ) {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
         $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
+        $this->contentHierarchyRepository = $contentHierarchyRepository;
     }
 
     /**
@@ -106,6 +116,60 @@ class ContentService
     }
 
     /**
+     * @param array $types
+     * @param $status
+     * @param $fieldKey
+     * @param $fieldValue
+     * @param $fieldType
+     * @param string $fieldComparisonOperator
+     * @return array
+     */
+    public function getWhereTypeInAndStatusAndField(
+        array $types,
+        $status,
+        $fieldKey,
+        $fieldValue,
+        $fieldType,
+        $fieldComparisonOperator = '='
+    ) {
+        return $this->contentRepository->getWhereTypeInAndStatusAndField(
+            $types,
+            $status,
+            $fieldKey,
+            $fieldValue,
+            $fieldType,
+            $fieldComparisonOperator
+        );
+    }
+
+    /**
+     * @param array $types
+     * @param $status
+     * @param $publishedOnValue
+     * @param string $publishedOnComparisonOperator
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @return array
+     */
+    public function getWhereTypeInAndStatusAndPublishedOnOrdered(
+        array $types,
+        $status,
+        $publishedOnValue,
+        $publishedOnComparisonOperator = '=',
+        $orderByColumn = 'published_on',
+        $orderByDirection = 'desc'
+    ) {
+        return $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            $types,
+            $status,
+            $publishedOnValue,
+            $publishedOnComparisonOperator,
+            $orderByColumn,
+            $orderByDirection
+        );
+    }
+
+    /**
      * @param string $slug
      * @param string $type
      * @return array
@@ -113,6 +177,17 @@ class ContentService
     public function getBySlugAndType($slug, $type)
     {
         return $this->contentRepository->getBySlugAndType($slug, $type);
+    }
+
+    /**
+     * @param $userId
+     * @param $type
+     * @param $slug
+     * @return array
+     */
+    public function getByUserIdTypeSlug($userId, $type, $slug)
+    {
+        return $this->contentRepository->getByUserIdTypeSlug($userId, $type, $slug);
     }
 
     /**
@@ -311,11 +386,21 @@ class ContentService
             $singlePlaylistSlug
         );
 
+        $contentsHierarchy = $this->contentHierarchyRepository->getByParentIds(
+            array_column($userPlaylistContents, 'parent_id')
+        );
+
         foreach ($contentOrContents as $index => $content) {
             $contentOrContents[$index]['user_playlists'][$userId] = [];
+
             foreach ($userPlaylistContents as $userPlaylistContent) {
-                if ($userPlaylistContent['parent_id'] == $content['id']) {
-                    $contentOrContents[$index]['user_playlists'][$userId][] = $userPlaylistContent;
+                foreach ($contentsHierarchy as $contentHierarchy) {
+
+                    if ($contentHierarchy['parent_id'] == $userPlaylistContent['id'] &&
+                        $contentHierarchy['child_id'] == $content['id']) {
+                        $contentOrContents[$index]['user_playlists'][$userId][] = $userPlaylistContent;
+                    }
+
                 }
             }
         }

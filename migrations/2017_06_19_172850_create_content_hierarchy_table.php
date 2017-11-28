@@ -14,7 +14,7 @@ class CreateContentHierarchyTable extends Migration
      */
     public function up()
     {
-        Schema::create(
+        Schema::connection(ConfigService::$databaseConnectionName)->create(
             ConfigService::$tableContentHierarchy,
             function(Blueprint $table) {
                 $table->increments('id');

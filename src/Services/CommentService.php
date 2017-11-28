@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Services;
 
-
 use Carbon\Carbon;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Repositories\CommentRepository;
@@ -24,12 +23,14 @@ class CommentService
     /** The value it's set in ContentPermissionMiddleware;
      * if the user it's an administrator the value it's true and the administrator can update/delete any comment;
      * otherwise the value it's false and the user can update/delete only his own comments
+     *
      * @var bool
      */
     public static $canManageOtherComments = false;
 
     /**
      * CommentService constructor.
+     *
      * @param CommentRepository $commentRepository
      */
     public function __construct(
@@ -41,6 +42,7 @@ class CommentService
     }
 
     /** Call the getById method from repository and return the comment if exist and null otherwise
+     *
      * @param integer $id
      * @return array|null
      */
@@ -52,6 +54,7 @@ class CommentService
     /** Call the create method from repository that save a comment or a comment reply (based on the parent_id: if the parent_id it's null the method save a comment;
      * otherwise save a reply for the comment with given id)
      * Return the comment or null if the content it's not commentable
+     *
      * @param string $comment
      * @param integer|null $contentId
      * @param integer|null $parentId
@@ -93,6 +96,7 @@ class CommentService
 
     /** Call the update method from repository if the comment exist and the user have rights to update the comment
      * Return the updated comment; null if the comment it's inexistent or -1 if the user have not rights to update the comment
+     *
      * @param integer $id
      * @param array $data
      * @return array|int|null
@@ -121,6 +125,7 @@ class CommentService
 
     /** Call the delete method from repository if the comment exist and the user have rights to delete the comment
      * Return null if the comment not exist in database, -1 if the user have not rights to delete the comment or bool
+     *
      * @param integer $id
      * @return bool|int|null
      */
@@ -143,6 +148,7 @@ class CommentService
 
     /** Administrator can edit/delete any comment; other users can edit/delete only their comments
      * Return true if the user have rights to edit/update the comment and false otherwise
+     *
      * @param array $comment
      * @return boolean
      */
@@ -162,10 +168,11 @@ class CommentService
      *  Set the data necessary for the pagination ($page, $limit, $orderByDirection and $orderByColumn),
      * call the method from the repository to pull the paginated comments that meet the criteria and call a method that return the total number of comments.
      * Return an array with the paginated results and the total number of results
-     *@param int $page
-     *@param int $limit
-     *@param string $orderByAndDirection
-     *@return array
+     *
+     * @param int $page
+     * @param int $limit
+     * @param string $orderByAndDirection
+     * @return array
      */
     public function getComments($page = 1, $limit = 25, $orderByAndDirection = '-created_on')
     {
@@ -184,4 +191,38 @@ class CommentService
             'total_results' => $this->commentRepository->countComments()
         ];
     }
+
+    /**
+     * @param $userId
+     * @param $contents
+     * @param null $singlePlaylistSlug
+     * @return array
+     */
+    public function attachCommentsToContents($contentOrContents)
+    {
+        $isArray = !isset($contentOrContents['id']);
+
+        if (!$isArray) {
+            $contentOrContents = [$contentOrContents];
+        }
+
+        foreach ($contentOrContents as $index => $content) {
+            CommentRepository::$availableContentId = $content['id'];
+
+            $comments = $this->getComments(1, null);
+
+            $contentOrContents[$index]['comments'] = [];
+
+            foreach ($comments['results'] as $comment) {
+                $contentOrContents[$index]['comments'][] = $comment;
+            }
+        }
+
+        if ($isArray) {
+            return $contentOrContents;
+        } else {
+            return reset($contentOrContents);
+        }
+    }
+
 }

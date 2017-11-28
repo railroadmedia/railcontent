@@ -189,7 +189,6 @@ class ContentRepository extends RepositoryBase
         );
     }
 
-
     /**
      * @param $parentId
      * @return array
@@ -342,6 +341,7 @@ class ContentRepository extends RepositoryBase
     {
         $query = $this->query()
             ->selectPrimaryColumns()
+            ->selectInheritenceColumns()
             ->restrictByUserAccess()
             ->leftJoin(
                 ConfigService::$tableContentHierarchy,
@@ -361,6 +361,117 @@ class ContentRepository extends RepositoryBase
         }
 
         $contentRows = $query->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
+    /**
+     * @param array $types
+     * @param $status
+     * @param $fieldKey
+     * @param $fieldValue
+     * @param $fieldType
+     * @param string $fieldComparisonOperator
+     * @return array
+     */
+    public function getWhereTypeInAndStatusAndField(
+        array $types,
+        $status,
+        $fieldKey,
+        $fieldValue,
+        $fieldType,
+        $fieldComparisonOperator = '='
+    ) {
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->join(
+                ConfigService::$tableContentFields,
+                function (JoinClause $joinClause) use (
+                    $fieldKey,
+                    $fieldValue,
+                    $fieldType,
+                    $fieldComparisonOperator
+                ) {
+                    $joinClause->on(
+                        ConfigService::$tableContentFields . '.content_id',
+                        '=',
+                        ConfigService::$tableContent . '.id'
+                    )->where(
+                        ConfigService::$tableContentFields . '.key',
+                        '=',
+                        $fieldKey
+                    )->where(
+                        ConfigService::$tableContentFields . '.type',
+                        '=',
+                        $fieldType
+                    )->where(
+                        ConfigService::$tableContentFields . '.value',
+                        $fieldComparisonOperator,
+                        $fieldValue
+                    );
+                }
+            )
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->where(ConfigService::$tableContent . '.status', $status)
+            ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
+    /**
+     * @param array $types
+     * @param $status
+     * @return array
+     */
+    public function getWhereTypeInAndStatusAndPublishedOnOrdered(
+        array $types,
+        $status,
+        $publishedOnValue,
+        $publishedOnComparisonOperator = '=',
+        $orderByColumn = 'published_on',
+        $orderByDirection = 'desc'
+    ) {
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->where(ConfigService::$tableContent . '.status', $status)
+            ->where(
+                ConfigService::$tableContent . '.published_on',
+                $publishedOnComparisonOperator,
+                $publishedOnValue
+            )
+            ->orderBy($orderByColumn, $orderByDirection)
+            ->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
@@ -452,6 +563,7 @@ class ContentRepository extends RepositoryBase
                 'created_on' => $contentRow['created_on'],
                 'archived_on' => $contentRow['archived_on'],
                 'parent_id' => $contentRow['parent_id'] ?? null,
+                'child_id' => $contentRow['child_id'] ?? null,
                 'fields' => $fieldRowsGrouped[$contentRow['id']] ?? [],
                 'data' => $datumRowsGrouped[$contentRow['id']] ?? [],
                 'permissions' => array_merge(
@@ -502,8 +614,6 @@ class ContentRepository extends RepositoryBase
         // reset all the filters for the new query
         $this->requiredFields = [];
         $this->includedFields = [];
-        $this->requiredUserPlaylists = [];
-        $this->includedUserPlaylists = [];
         $this->requiredUserStates = [];
         $this->includedUserStates = [];
 

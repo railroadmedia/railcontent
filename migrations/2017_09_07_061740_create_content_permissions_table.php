@@ -14,7 +14,7 @@ class CreateContentPermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create(
+        Schema::connection(ConfigService::$databaseConnectionName)->create(
             ConfigService::$tableContentPermissions,
             function(Blueprint $table) {
                 $table->increments('id');

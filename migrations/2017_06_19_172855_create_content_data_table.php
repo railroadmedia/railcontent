@@ -14,7 +14,7 @@ class CreateContentDataTable extends Migration
      */
     public function up()
     {
-        Schema::create(
+        Schema::connection(ConfigService::$databaseConnectionName)->create(
             ConfigService::$tableContentData,
             function (Blueprint $table) {
                 $table->increments('id');

@@ -14,7 +14,7 @@ class CreateContentFieldsTable extends Migration
      */
     public function up()
     {
-        Schema::create(
+        Schema::connection(ConfigService::$databaseConnectionName)->create(
             ConfigService::$tableContentFields,
             function (Blueprint $table) {
                 $table->increments('id');
