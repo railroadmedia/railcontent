@@ -193,31 +193,27 @@ abstract class RepositoryBase
         return $this->query()->where(['id' => $id])->delete() > 0;
     }
 
-    public function deleteAndReposition($entity)
+    public function deleteAndReposition($entity, $positionColumnPrefix = '')
     {
-        $existingLinks = $this->query()
-            ->where(
-                [
-                    'content_id' => $entity['content_id'],
-                    'key' => $entity['key']
-                ]
-            )
-            ->where('id', '!=', $entity['id'])
-            ->get()
-            ->toArray();
+        $existingLink = $this->query()
+            ->where($entity)
+            ->first();
+
+        unset($entity['position']);
+        unset($entity['id']);
+        unset($entity['value']);
+        unset($entity['type']);
+        unset($entity['child_id']);
+
+        $this->query()
+            ->where($entity)
+            ->where($positionColumnPrefix . 'position', '>', $existingLink[$positionColumnPrefix . "position"])
+            ->decrement($positionColumnPrefix . 'position');
 
         $deleted = $this->query()
-            ->where(['id' => $entity['id']])
+            ->where(['id' => $existingLink['id']])
             ->delete();
-
-        foreach ($existingLinks as $existingLink) {
-            $this->query()
-                ->where('id', $existingLink['id'])
-                ->where('position', '>', $entity['position'])
-                ->decrement('position');
-        }
-
-        return $deleted;
+        return $deleted > 0;
     }
 
     /**

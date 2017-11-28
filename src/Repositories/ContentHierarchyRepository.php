@@ -159,11 +159,11 @@ class ContentHierarchyRepository extends RepositoryBase
      */
     public function deleteParentChildLink($parentId, $childId)
     {
-        // todo: reposition
-
-        return $this->query()
-                ->where(['parent_id' => $parentId, 'child_id' => $childId])
-                ->delete() > 0;
+        // delete parent child link and reposition other children
+        return $this->deleteAndReposition([
+            'parent_id' => $parentId,
+            'child_id' => $childId
+        ], 'child_');
     }
 
     /**
