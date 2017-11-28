@@ -18,6 +18,11 @@ class ConfigService
      * @var string
      */
     public static $connectionMaskPrefix;
+    
+    /**
+     * @var string
+     */
+    public static $dataMode;
 
     /**
      * @var string

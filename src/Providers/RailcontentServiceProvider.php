@@ -62,7 +62,9 @@ class RailcontentServiceProvider extends ServiceProvider
             ]
         );
 
-        $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
+        if (ConfigService::$dataMode == 'host') {
+            $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
+        }
 
         //load package routes file
         $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
@@ -85,6 +87,7 @@ class RailcontentServiceProvider extends ServiceProvider
         // database
         ConfigService::$databaseConnectionName = config('railcontent.database_connection_name');
         ConfigService::$connectionMaskPrefix = config('railcontent.connection_mask_prefix');
+        ConfigService::$dataMode = config('railcontent.data_mode');
 
         // tables
         ConfigService::$tablePrefix = config('railcontent.table_prefix');

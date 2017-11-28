@@ -4,7 +4,8 @@ return [
     'cache_duration' => 60 * 60 * 24 * 30,
     'database_connection_name' => 'mysql',
     'connection_mask_prefix' => 'railcontent_',
-    
+    'data_mode' => 'host',
+
     'table_prefix' => 'railcontent_',
 
     'brand' => 'drumeo',
