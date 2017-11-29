@@ -85,6 +85,7 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.database_connection_name', $this->getConnectionType());
         $app['config']->set('railcontent.cache_duration', 60);
         $app['config']->set('railcontent.table_prefix', $defaultConfig['table_prefix']);
+        $app['config']->set('railcontent.data_mode', $defaultConfig['data_mode']);
         $app['config']->set('railcontent.brand', $defaultConfig['brand']);
         $app['config']->set('railcontent.available_languages', $defaultConfig['available_languages']);
         $app['config']->set('railcontent.default_language', $defaultConfig['default_language']);
