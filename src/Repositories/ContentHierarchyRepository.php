@@ -197,4 +197,16 @@ class ContentHierarchyRepository extends RepositoryBase
     {
         return $this->connection()->table(ConfigService::$tableContentHierarchy);
     }
+
+    /** Get parent Id based on child Id
+     * @param integer $childId
+     * @return array|null
+     */
+    public function getParentByChildId($childId)
+    {
+        return $this->query()
+            ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
+            ->first();
+    }
+
 }
