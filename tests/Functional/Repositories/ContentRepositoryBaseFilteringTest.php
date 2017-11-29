@@ -306,7 +306,8 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
             $childContent['fields'] = [];
             $childContent['data'] = [];
             $childContent['permissions'] = [];
-            $childContent['parent_id'] = null;
+            $childContent['parent_id'] = $parentContentId;
+            $childContent['child_id'] = null;
 
             $this->contentHierarchyFactory->create(
                 $parentContentId,

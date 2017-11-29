@@ -91,7 +91,8 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'fields' => [],
                 'data' => [],
                 'permissions' => [],
-                'parent_id' => null
+                'parent_id' => null,
+                'child_id' => null
             ]),
             $results
         );
@@ -140,7 +141,8 @@ class ContentRepositoryTest extends RailcontentTestCase
                     'fields' => $expectedFields,
                     'data' => $expectedData,
                     'permissions' => $expectedPermissions,
-                    'parent_id' => null
+                    'parent_id' => null,
+                    'child_id' => null
                 ]
             ),
             $results
