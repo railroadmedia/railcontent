@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 
 class UserContentProgressService
@@ -12,6 +13,11 @@ class UserContentProgressService
      */
     protected $userContentRepository;
 
+    /**
+     * @var ContentHierarchyRepository
+     */
+    protected $contentHierarchyRepository;
+
     const STATE_STARTED = 'started';
     const STATE_COMPLETED = 'completed';
 
@@ -20,9 +26,11 @@ class UserContentProgressService
      *
      * @param $userContentRepository
      */
-    public function __construct(UserContentProgressRepository $userContentRepository)
+    public function __construct(UserContentProgressRepository $userContentRepository,
+                                ContentHierarchyRepository $contentHierarchyRepository)
     {
         $this->userContentRepository = $userContentRepository;
+        $this->contentHierarchyRepository = $contentHierarchyRepository;
     }
 
     /**
@@ -83,37 +91,30 @@ class UserContentProgressService
         return true;
     }
 
-    /**
+    /** Complete user content. Complete parent content if all the children are completed.
      * @param integer $contentId
-     * @param $userId
+     * @param integer $userId
      * @return bool
      */
     public function completeContent($contentId, $userId)
     {
-        $progress = 100;
+        $this->setStateCompleted($contentId, $userId);
 
-        $userContentId =
-            $this->userContentRepository->updateOrCreate(
-                [
-                    'content_id' => $contentId,
-                    'user_id' => $userId,
-                ],
-                [
-                    'state' => UserContentProgressService::STATE_COMPLETED,
-                    'progress_percent' => $progress,
-                    'updated_on' => Carbon::now()->toDateTimeString(),
-                ]
-            );
+        list($parent, $completeParent) = $this->completeParentContent($contentId, $userId);
 
-        // todo: complete parents if all children are complete
+        // Complete parent if all children are complete
+        if($completeParent)
+        {
+            $this->setStateCompleted($parent['id'], $userId);
+        }
 
         return true;
     }
 
-    /**
+    /** Call the method that create or update the user content with given progress value
      * @param integer $contentId
      * @param string $progress
-     * @param $userId
+     * @param integer $userId
      * @return bool
      */
     public function saveContentProgress($contentId, $progress, $userId)
@@ -178,5 +179,50 @@ class UserContentProgressService
         } else {
             return reset($contentOrContents);
         }
+    }
+
+    /** Call the method that create/update user content with state completed and progress percent 100%
+     * @param integer $contentId
+     * @param integer $userId
+     */
+    private function setStateCompleted($contentId, $userId)
+    {
+        $progress = 100;
+
+        return $this->userContentRepository->updateOrCreate(
+                [
+                    'content_id' => $contentId,
+                    'user_id' => $userId,
+                ],
+                [
+                    'state' => UserContentProgressService::STATE_COMPLETED,
+                    'progress_percent' => $progress,
+                    'updated_on' => Carbon::now()->toDateTimeString(),
+                ]
+            );
+    }
+
+    /** Check if the parent should be completed (all the children are completed)
+     * @param integer $contentId - child id
+     * @param integer $userId
+     * @return array
+     */
+    private function completeParentContent($contentId, $userId)
+    {
+        $completeParent = false;
+
+        $parent = $this->contentHierarchyRepository->getParentByChildId($contentId);
+        if ($parent) {
+            $childrens = $this->contentHierarchyRepository->getByParentIds([$parent['parent_id']]);
+            foreach ($childrens as $child) {
+                $isChildCompleted = $this->userContentRepository->isContentAlreadyCompleteForUser($child['child_id'], $userId);
+                if ($isChildCompleted != 1) {
+                    $completeParent = false;
+                } else {
+                    $completeParent = true;
+                }
+            }
+        }
+        return array($parent, $completeParent);
     }
 }

@@ -4,6 +4,9 @@ namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Factories\ContentFactory;
+use Railroad\Railcontent\Factories\ContentHierarchyFactory;
+use Railroad\Railcontent\Factories\UserContentProgressFactory;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -20,13 +23,27 @@ class UserContentProgressServiceTest extends RailcontentTestCase
      */
     protected $contentFactory;
 
+    /**
+     * @var ContentHierarchyFactory
+     */
+    protected $contentHierarchyFactory;
+
+    /**
+     * @var UserContentProgressFactory
+     */
+    protected $userContentProgressFactory;
+
     protected function setUp()
     {
+        // $this->setConnectionType('mysql');
         parent::setUp();
 
         $this->classBeingTested = $this->app->make(UserContentProgressService::class);
 
         $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
+        $this->userContentProgressFactory = $this->app->make(UserContentProgressFactory::class);
+
     }
 
     public function test_start_content()
@@ -134,6 +151,8 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $results = $this->classBeingTested->attachProgressToContents($userId, [$content]);
 
         $content['user_progress'][$userId] = [];
+        $content['completed'] = false;
+        $content['started'] = false;
 
         $this->assertEquals([$content], $results);
     }
@@ -157,6 +176,8 @@ class UserContentProgressServiceTest extends RailcontentTestCase
                 'progress_percent' => '0',
                 'updated_on' => Carbon::now()->toDateTimeString()
             ];
+            $content['started'] = true;
+            $content['completed'] = false;
 
             $expectedContents[] = $content;
         }
@@ -164,6 +185,103 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $results = $this->classBeingTested->attachProgressToContents($userId, $expectedContents);
 
         $this->assertEquals($expectedContents, $results);
+    }
+
+    public function test_complete_child_and_parent()
+    {
+        $userId = $this->faker->randomNumber();
+        $parent = $this->contentFactory->create();
+
+        $child = $this->contentFactory->create();
+        $child2 = $this->contentFactory->create();
+        $child3 = $this->contentFactory->create();
+
+        $hierarchy = $this->contentHierarchyFactory->create($parent['id'], $child['id'], 1);
+        $hierarchy2 = $this->contentHierarchyFactory->create($parent['id'], $child2['id'], 2);
+        $hierarchy3 = $this->contentHierarchyFactory->create($parent['id'], $child3['id'], 3);
+
+        $this->userContentProgressFactory->startContent($parent['id'], $userId);
+        $this->userContentProgressFactory->completeContent($child2['id'], $userId);
+        $this->userContentProgressFactory->completeContent($child3['id'], $userId);
+
+        $results = $this->classBeingTested->completeContent($child['id'], $userId);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableUserContentProgress,
+            [
+                'content_id' => $child['id'],
+                'user_id' => $userId,
+                'state' => UserContentProgressService::STATE_COMPLETED,
+                'progress_percent' => 100
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableUserContentProgress,
+            [
+                'content_id' => $parent['id'],
+                'user_id' => $userId,
+                'state' => UserContentProgressService::STATE_COMPLETED,
+                'progress_percent' => 100
+            ]
+        );
+    }
+
+    public function test_parent_not_completed_if_the_children_are_not_completed()
+    {
+        $userId = $this->faker->randomNumber();
+        $parent = $this->contentFactory->create();
+
+        $child = $this->contentFactory->create();
+        $child2 = $this->contentFactory->create();
+        $child3 = $this->contentFactory->create();
+
+        $hierarchy = $this->contentHierarchyFactory->create($parent['id'], $child['id'], 1);
+        $hierarchy2 = $this->contentHierarchyFactory->create($parent['id'], $child2['id'], 2);
+        $hierarchy3 = $this->contentHierarchyFactory->create($parent['id'], $child3['id'], 3);
+
+        $this->userContentProgressFactory->startContent($parent['id'], $userId);
+        $this->userContentProgressFactory->startContent($child2['id'], $userId);
+
+        $results = $this->classBeingTested->completeContent($child['id'], $userId);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableUserContentProgress,
+            [
+                'content_id' => $child['id'],
+                'user_id' => $userId,
+                'state' => UserContentProgressService::STATE_COMPLETED,
+                'progress_percent' => 100
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableUserContentProgress,
+            [
+                'content_id' => $parent['id'],
+                'user_id' => $userId,
+                'state' => UserContentProgressService::STATE_COMPLETED,
+                'progress_percent' => 100
+            ]
+        );
+    }
+
+    public function test_complete_parent_content()
+    {
+        $userId = $this->faker->randomNumber();
+        $parent = $this->contentFactory->create();
+
+        $results = $this->classBeingTested->completeContent($parent['id'], $userId);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableUserContentProgress,
+            [
+                'content_id' => $parent['id'],
+                'user_id' => $userId,
+                'state' => UserContentProgressService::STATE_COMPLETED,
+                'progress_percent' => 100
+            ]
+        );
     }
 
 }
