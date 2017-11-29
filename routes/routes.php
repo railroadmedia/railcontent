@@ -127,6 +127,11 @@ Route::group(
         )->name('content.get-by-parent-id');
 
         Route::get(
+            '/content/get-by-ids',
+            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getByIds'
+        )->name('content.get-by-ids');
+
+        Route::get(
             '/content/{id}',
             \Railroad\Railcontent\Controllers\ContentJsonController::class . '@show'
         )->name('content.show');

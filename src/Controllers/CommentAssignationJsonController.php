@@ -49,7 +49,6 @@ class CommentAssignationJsonController extends Controller
         throw_if(is_null($deleted), new NotFoundException("Delete failed, the comment it's not assigned to your account."));
 
         return new JsonResponse(null, 204);
-
     }
 
 }
