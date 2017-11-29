@@ -29,10 +29,9 @@ class CreateSearchIndexes extends Migration
                     $table->timestamps();
                 }
             );
-
-            DB::statement('ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' ADD FULLTEXT high_full_text(high_value)');
-            DB::statement('ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' ADD FULLTEXT medium_full_text(medium_value)');
-            DB::statement('ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' ADD FULLTEXT low_full_text(low_value)');
+            Schema::connection('mysql')->getConnection()->getPdo()->exec('ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' ADD FULLTEXT high_full_text(high_value)');
+            Schema::connection('mysql')->getConnection()->getPdo()->exec('ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' ADD FULLTEXT medium_full_text(medium_value)');
+            Schema::connection('mysql')->getConnection()->getPdo()->exec('ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' ADD FULLTEXT low_full_text(low_value)');
         }
     }
 
