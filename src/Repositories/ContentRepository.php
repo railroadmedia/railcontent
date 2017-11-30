@@ -274,6 +274,43 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @param $childId
+     * @param array $types
+     * @return array
+     */
+    public function getByChildIdWhereTypes($childId, array $types)
+    {
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->leftJoin(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.parent_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
+    /**
      * @param $type
      * @param $userId
      * @param $state

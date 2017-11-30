@@ -219,6 +219,16 @@ class ContentService
     }
 
     /**
+     * @param $childId
+     * @param array $types
+     * @return array
+     */
+    public function getByChildIdWhereTypes($childId, array $types)
+    {
+        return $this->contentRepository->getByChildIdWhereTypes($childId, $types);
+    }
+
+    /**
      * @param $type
      * @param $userId
      * @param $state

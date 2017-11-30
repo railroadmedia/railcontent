@@ -45,8 +45,7 @@ class UserContentProgressService
         ContentHierarchyService $contentHierarchyService,
         ContentRepository $contentRepository,
         ContentService $contentService
-    )
-    {
+    ) {
         $this->userContentRepository = $userContentRepository;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentRepository = $contentRepository;
@@ -142,12 +141,11 @@ class UserContentProgressService
      * @param integer $progress
      * @param integer $userId
      * @param null|string $state
-
      * @return bool
      */
     public function saveContentProgress($contentId, $progress, $userId)
     {
-        if($progress === 100){
+        if ($progress === 100) {
             return $this->completeContent($contentId, $userId);
         }
 
@@ -227,46 +225,39 @@ class UserContentProgressService
         $content = $this->attachProgressToContents($userId, $this->contentRepository->getById($contentId));
         $parents = $this->attachProgressToContents(
             $userId,
-            $this->contentService->getByChildIdWhereType($content['id'], $content['type'])
+            $this->contentService->getByChildIdWhereTypes(
+                $content['id'],
+                config(
+                    'railcontent.allowed_types_for_bubble_progress'
+                )
+            )
         );
 
-        if(empty($parents)){
-            return true;
-        }
-
-        $allowedParents = [];
-
-        foreach($parents as $parent){
-            if(in_array($parent['type'], config('railcontent.allowed_types_for_bubble_progress'))){
-                $allowedParents[] = $parent;
-            }
-        }
-
-        foreach($allowedParents as $parent){
-
-
+        foreach ($parents as $parent) {
             // One ------------------------------------------------------------
 
-            if($content[self::STATE_STARTED] && !$parent[self::STATE_STARTED]) {
+            if ($content[self::STATE_STARTED] && !$parent[self::STATE_STARTED]) {
                 $this->startContent($parent['id'], $userId);
             }
 
-            $siblings = $this->attachProgressToContents($userId, $this->contentService->getByParentId($parent['id']));
+            $siblings = $this->attachProgressToContents(
+                $userId,
+                $this->contentService->getByParentId($parent['id'])
+            );
 
             // Two ------------------------------------------------------------
 
-            if($content[self::STATE_COMPLETED]) {
+            if ($content[self::STATE_COMPLETED]) {
                 $complete = true;
-                foreach($siblings as $sibling){
-                    if(!$sibling[self::STATE_COMPLETED]){
+                foreach ($siblings as $sibling) {
+                    if (!$sibling[self::STATE_COMPLETED]) {
                         $complete = false;
                     }
                 }
-                if($complete && !$parent[self::STATE_COMPLETED]){
+                if ($complete && !$parent[self::STATE_COMPLETED]) {
                     $this->completeContent($parent['id'], $userId);
                 }
             }
-
 
             // Three ----------------------------------------------------------
 
@@ -274,16 +265,16 @@ class UserContentProgressService
 
             $progressOfSiblingsDeNested = [];
 
-            foreach($progressOfSiblings as $progressOfSingleSibling){
+            foreach ($progressOfSiblings as $progressOfSingleSibling) {
                 $progressOfSiblingsDeNested[] = reset($progressOfSingleSibling);
             }
 
             $percentages = [];
 
-            foreach($progressOfSiblingsDeNested as $progressOfSingleDeNestedSibling){
-                if(!empty($progressOfSingleDeNestedSibling)){
+            foreach ($progressOfSiblingsDeNested as $progressOfSingleDeNestedSibling) {
+                if (!empty($progressOfSingleDeNestedSibling)) {
                     $percentages[] = $progressOfSingleDeNestedSibling['progress_percent'];
-                }else{
+                } else {
                     $percentages[] = 0;
                 }
             }
@@ -291,7 +282,7 @@ class UserContentProgressService
             $arraySum = array_sum($percentages);
             $siblingCount = count($siblings);
 
-            $progress = $arraySum/$siblingCount;
+            $progress = $arraySum / $siblingCount;
 
             $this->saveContentProgress(
                 $parent['id'],
