@@ -30,6 +30,11 @@ class CommentAssignationJsonController extends Controller
     public function index(Request $request)
     {
         CommentAssignmentRepository::$availableAssociatedManagerId = $request->user()->id ?? null;
+
+        if (!empty($request->get('user_id'))) {
+            CommentAssignmentRepository::$availableAssociatedManagerId = $request->get('user_id');
+        }
+
         $assignedComments = $this->commentAssignationService->getAssignedComments();
 
         return new JsonResponse($assignedComments, 200);
