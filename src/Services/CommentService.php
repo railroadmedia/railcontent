@@ -59,9 +59,10 @@ class CommentService
      * @param integer|null $contentId
      * @param integer|null $parentId
      * @param integer $userId
+     * @param string $temporaryUserDisplayName
      * @return array|null
      */
-    public function create($comment, $contentId, $parentId, $userId)
+    public function create($comment, $contentId, $parentId, $userId, $temporaryUserDisplayName = '')
     {
         //if we have defined parentId we have a comment reply
         if ($parentId) {
@@ -84,6 +85,7 @@ class CommentService
                 'content_id' => $contentId,
                 'parent_id' => $parentId,
                 'user_id' => $userId,
+                'temporary_display_name' => $temporaryUserDisplayName,
                 'created_on' => Carbon::now()->toDateTimeString()
             ]
         );

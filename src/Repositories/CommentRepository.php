@@ -220,6 +220,7 @@ class CommentRepository extends RepositoryBase
                 'content_id' => $row['content_id'],
                 'parent_id' => $row['parent_id'],
                 'user_id' => $row['user_id'],
+                'display_name' => $row['display_name'],
                 'created_on' => $row['created_on'],
                 'deleted_at' => $row['deleted_at'],
                 'replies' => $repliesRowsGrouped[$row['id']] ?? []

@@ -67,7 +67,6 @@ class CommentJsonController extends Controller
     public function store(CommentCreateRequest $request)
     {
         $comment = $this->commentService->create(
-
             $request->get('comment'),
             $request->get('content_id'),
             null,

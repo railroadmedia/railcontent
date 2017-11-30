@@ -22,6 +22,10 @@ class CreateCommentsTable extends Migration
                 $table->integer('parent_id')->index()->nullable();
                 $table->integer('user_id')->index();
                 $table->text('comment');
+
+                // this will get deleted once the UMS is finished
+                $table->string('temporary_display_name');
+
                 $table->dateTime('created_on')->index();
                 $table->dateTime('deleted_at')->index()->nullable();
             });

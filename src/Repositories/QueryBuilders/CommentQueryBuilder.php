@@ -22,6 +22,7 @@ class CommentQueryBuilder extends QueryBuilder
                 ConfigService::$tableComments . '.comment as comment',
                 ConfigService::$tableComments . '.parent_id as parent_id',
                 ConfigService::$tableComments . '.user_id as user_id',
+                ConfigService::$tableComments . '.temporary_display_name as display_name',
                 ConfigService::$tableComments . '.created_on as created_on',
                 ConfigService::$tableComments . '.deleted_at as deleted_at',
             ]
