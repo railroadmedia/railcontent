@@ -13,6 +13,7 @@ class FullTextSearchService
 
     /**
      * FullTextSearchService constructor.
+     *
      * @param FullTextSearchRepository $fullTextSearchRepository
      */
     public function __construct(
@@ -22,14 +23,28 @@ class FullTextSearchService
     }
 
     /** Full text search by term
+     *
      * @param string $term
+     * @param int $page
+     * @param int $limit
+     * @param null $contentType
      * @return array|null
      */
-    public function search($term, $page = 1, $limit = 10)
+    public function search($term, $page = 1, $limit = 10, $contentType = null, $dateTimeCutoff = null)
     {
         return [
-            'results' => $this->fullTextSearchRepository->search($term, $page, $limit),
-            'total_results' => $this->fullTextSearchRepository->countTotalResults($term)
+            'results' => $this->fullTextSearchRepository->search(
+                $term,
+                $page,
+                $limit,
+                $contentType,
+                $dateTimeCutoff
+            ),
+            'total_results' => $this->fullTextSearchRepository->countTotalResults(
+                $term,
+                $contentType,
+                $dateTimeCutoff
+            )
         ];
     }
 }

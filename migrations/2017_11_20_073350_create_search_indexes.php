@@ -26,6 +26,8 @@ class CreateSearchIndexes extends Migration
                     $table->text('medium_value');
                     $table->text('low_value');
                     $table->string('brand', 64)->index();
+                    $table->string('content_type', 128)->index();
+                    $table->dateTime('content_published_on')->index();
                     $table->timestamps();
                 }
             );

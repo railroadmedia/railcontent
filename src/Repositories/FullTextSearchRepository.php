@@ -8,7 +8,6 @@ use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\FullTextSearchQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 
-
 class FullTextSearchRepository extends RepositoryBase
 {
     use RefreshDatabase;
@@ -27,7 +26,6 @@ class FullTextSearchRepository extends RepositoryBase
 
         $this->contentRepository = $contentRepository;
     }
-
 
     /**
      * @return FullTextSearchQueryBuilder
@@ -59,8 +57,9 @@ class FullTextSearchRepository extends RepositoryBase
                 'medium_value' => $this->prepareIndexesValues($searchIndexValues['medium_value'], $content),
                 'low_value' => $this->prepareIndexesValues($searchIndexValues['low_value'], $content),
                 'brand' => ConfigService::$brand,
-                'created_at' => Carbon::parse($content['published_on'])
-                    ->toDateTimeString()
+                'content_type' => $content['type'],
+                'content_published_on' => $content['published_on'],
+                'created_at' => Carbon::now()->toDateTimeString()
             ];
 
             $this->create($searchInsertData);
@@ -69,6 +68,7 @@ class FullTextSearchRepository extends RepositoryBase
     }
 
     /** Delete old indexes for the brand
+     *
      * @return mixed
      */
     private function deleteOldIndexes()
@@ -77,6 +77,7 @@ class FullTextSearchRepository extends RepositoryBase
     }
 
     /** Prepare search indexes based on config settings
+     *
      * @param array $configSearchIndexValues
      * @param array $content
      * @return string
@@ -99,9 +100,18 @@ class FullTextSearchRepository extends RepositoryBase
             foreach ($configSearchIndexValues['field_keys'] as $fieldKey) {
                 $conff = explode(':', $fieldKey);
                 if (count($conff) == 2) {
-                    $values = array_merge($values, ContentHelper::getFieldSubContentValues($content, $conff[0], $conff[1]));
-                } else if (count($conff) == 1) {
-                    $values = array_merge($values, ContentHelper::getFieldValues($content, $conff[0]));
+                    $values = array_merge(
+                        $values,
+                        ContentHelper::getFieldSubContentValues(
+                            $content,
+                            $conff[0],
+                            $conff[1]
+                        )
+                    );
+                } else {
+                    if (count($conff) == 1) {
+                        $values = array_merge($values, ContentHelper::getFieldValues($content, $conff[0]));
+                    }
                 }
             }
         }
@@ -120,15 +130,19 @@ class FullTextSearchRepository extends RepositoryBase
 
     /** Perform a boolean full text search by term, paginate and order the results by score.
      * Returns an array with the contents that contain the search criteria
+     *
      * @param string|null $term
      * @param int $page
      * @param int $limit
+     * @param null $contentType
      * @return array
      */
     public function search(
         $term,
         $page = 1,
-        $limit = 10
+        $limit = 10,
+        $contentType = null,
+        $dateTimeCutoff = null
     ) {
         $query = $this->query()
             ->selectColumns($term)
@@ -136,24 +150,41 @@ class FullTextSearchRepository extends RepositoryBase
             ->restrictByTerm($term)
             ->orderByScore()
             ->directPaginate($page, $limit);
-        $contentRows = $query->getToArray();
 
-        dd($contentRows);
+        if (!empty($contentType)) {
+            $query->where('content_type', $contentType);
+        }
+
+        if (!empty($dateCutoff)) {
+            $query->where('content_published_on', '>', $dateTimeCutoff);
+        }
+
+        $contentRows = $query->getToArray();
 
         return $this->contentRepository->getByIds(array_column($contentRows, 'content_id'));
 
     }
 
     /** Count all the matches
+     *
      * @param string|null $term
+     * @param null $contentType
      * @return int
      */
-    public function countTotalResults($term)
+    public function countTotalResults($term, $contentType = null, $dateTimeCutoff = null)
     {
         $query = $this->query()
             ->selectColumns($term)
             ->restrictByTerm($term)
             ->restrictBrand();
+
+        if (!empty($contentType)) {
+            $query->where('content_type', $contentType);
+        }
+
+        if (!empty($dateCutoff)) {
+            $query->where('content_published_on', '>', $dateTimeCutoff);
+        }
 
         return $query->count();
     }
