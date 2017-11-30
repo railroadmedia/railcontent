@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -18,7 +19,7 @@ class CommentAssignmentRepository extends RepositoryBase
     public static $availableAssociatedManagerId = false;
 
     /**
-     * @return Builder
+     * @return CommentQueryBuilder
      */
     protected function query()
     {
@@ -44,6 +45,7 @@ class CommentAssignmentRepository extends RepositoryBase
                 ConfigService::$tableComments.'.id')
             ->restrictByAssociatedManagerId()
             ->restrictByCommentId($commentId)
+            ->orderBy('assigned_on', 'desc')
             ->getToArray();
 
         //get an array with comment ids that will be used as keys in the results

@@ -20,6 +20,7 @@ class CreateCommentAssignmentTable extends Migration
                 $table->increments('id');
                 $table->integer('comment_id')->index();
                 $table->integer('user_id')->index();
+                $table->dateTime('assigned_on')->index();
             });
     }
 

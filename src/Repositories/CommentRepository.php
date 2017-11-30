@@ -224,7 +224,7 @@ class CommentRepository extends RepositoryBase
                 'deleted_at' => $row['deleted_at'],
                 'replies' => $repliesRowsGrouped[$row['id']] ?? []
             ];
-            $results[$comment['id']] = $comment;
+            $results[] = $comment;
         }
 
         return $results;

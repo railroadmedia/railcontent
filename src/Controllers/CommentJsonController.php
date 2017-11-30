@@ -49,7 +49,7 @@ class CommentJsonController extends Controller
         $commentData = $this->commentService->getComments(
             $request->get('page', 1),
             $request->get('limit', 10),
-            $request->get('sort', 'created_on')
+            $request->get('sort', '-created_on')
         );
 
         return new JsonPaginatedResponse(
