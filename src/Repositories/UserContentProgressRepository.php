@@ -63,6 +63,31 @@ class UserContentProgressRepository extends RepositoryBase
     }
 
     /**
+     * @param $contentType
+     * @param $userId
+     * @param $state
+     * @param int $limit
+     * @param int $skip
+     * @return array
+     */
+    public function getPaginatedByContentTypeUserState($contentType, $userId, $state, $limit = 25, $skip = 0)
+    {
+        return $this->query()
+            ->select([ConfigService::$tableUserContentProgress . '.*'])
+            ->join(
+                ConfigService::$tableContent,
+                ConfigService::$tableContent . '.id',
+                '=',
+                ConfigService::$tableUserContentProgress . '.content_id'
+            )
+            ->where(ConfigService::$tableContent . '.type', $contentType)
+            ->where(ConfigService::$tableUserContentProgress . '.state', $state)
+            ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
+            ->orderBy(ConfigService::$tableUserContentProgress . '.updated_on', 'desc')
+            ->get();
+    }
+
+    /**
      * @param $state
      * @param array $contentIds
      * @return array

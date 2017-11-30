@@ -26,9 +26,10 @@ class UserContentProgressService
      *
      * @param $userContentRepository
      */
-    public function __construct(UserContentProgressRepository $userContentRepository,
-                                ContentHierarchyRepository $contentHierarchyRepository)
-    {
+    public function __construct(
+        UserContentProgressRepository $userContentRepository,
+        ContentHierarchyRepository $contentHierarchyRepository
+    ) {
         $this->userContentRepository = $userContentRepository;
         $this->contentHierarchyRepository = $contentHierarchyRepository;
     }
@@ -45,6 +46,23 @@ class UserContentProgressService
             $contentType,
             $userId,
             $state
+        );
+    }
+
+    /**
+     * @param $contentType
+     * @param $userId
+     * @param $state
+     * @return array
+     */
+    public function getPaginatedByContentTypeUserState($contentType, $userId, $state, $limit = 25, $skip = 0)
+    {
+        return $this->userContentRepository->getPaginatedByContentTypeUserState(
+            $contentType,
+            $userId,
+            $state,
+            $limit,
+            $skip
         );
     }
 
@@ -92,6 +110,7 @@ class UserContentProgressService
     }
 
     /** Complete user content. Complete parent content if all the children are completed.
+     *
      * @param integer $contentId
      * @param integer $userId
      * @return bool
@@ -103,8 +122,7 @@ class UserContentProgressService
         list($parent, $completeParent) = $this->completeParentContent($contentId, $userId);
 
         // Complete parent if all children are complete
-        if($completeParent)
-        {
+        if ($completeParent) {
             $this->setStateCompleted($parent['id'], $userId);
         }
 
@@ -112,6 +130,7 @@ class UserContentProgressService
     }
 
     /** Call the method that create or update the user content with given progress value
+     *
      * @param integer $contentId
      * @param string $progress
      * @param integer $userId
@@ -182,6 +201,7 @@ class UserContentProgressService
     }
 
     /** Call the method that create/update user content with state completed and progress percent 100%
+     *
      * @param integer $contentId
      * @param integer $userId
      */
@@ -190,19 +210,20 @@ class UserContentProgressService
         $progress = 100;
 
         return $this->userContentRepository->updateOrCreate(
-                [
-                    'content_id' => $contentId,
-                    'user_id' => $userId,
-                ],
-                [
-                    'state' => UserContentProgressService::STATE_COMPLETED,
-                    'progress_percent' => $progress,
-                    'updated_on' => Carbon::now()->toDateTimeString(),
-                ]
-            );
+            [
+                'content_id' => $contentId,
+                'user_id' => $userId,
+            ],
+            [
+                'state' => UserContentProgressService::STATE_COMPLETED,
+                'progress_percent' => $progress,
+                'updated_on' => Carbon::now()->toDateTimeString(),
+            ]
+        );
     }
 
     /** Check if the parent should be completed (all the children are completed)
+     *
      * @param integer $contentId - child id
      * @param integer $userId
      * @return array
@@ -215,7 +236,10 @@ class UserContentProgressService
         if ($parent) {
             $childrens = $this->contentHierarchyRepository->getByParentIds([$parent['parent_id']]);
             foreach ($childrens as $child) {
-                $isChildCompleted = $this->userContentRepository->isContentAlreadyCompleteForUser($child['child_id'], $userId);
+                $isChildCompleted = $this->userContentRepository->isContentAlreadyCompleteForUser(
+                    $child['child_id'],
+                    $userId
+                );
                 if ($isChildCompleted != 1) {
                     $completeParent = false;
                 } else {

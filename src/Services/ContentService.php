@@ -219,6 +219,22 @@ class ContentService
     }
 
     /**
+     * @param $type
+     * @param $userId
+     * @param $state
+     */
+    public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit = 25, $skip = 0)
+    {
+        return $this->contentRepository->getPaginatedByTypeUserProgressState(
+            $type,
+            $userId,
+            $state,
+            $limit,
+            $skip
+        );
+    }
+
+    /**
      *
      * Returns:
      * ['results' => $lessons, 'total_results' => $totalLessonsAfterFiltering]

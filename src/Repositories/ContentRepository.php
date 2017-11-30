@@ -129,11 +129,22 @@ class ContentRepository extends RepositoryBase
      */
     public function getByIds(array $ids)
     {
-        $contentRows = $this->query()
+        $unorderedContentRows = $this->query()
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
-            ->whereIn(ConfigService::$tableContent.'.id', $ids)
+            ->whereIn(ConfigService::$tableContent . '.id', $ids)
             ->getToArray();
+
+        // restore order of ids passed in
+        $contentRows = [];
+
+        foreach ($ids as $id) {
+            foreach ($unorderedContentRows as $index => $unorderedContentRow) {
+                if ($id == $unorderedContentRow['id']) {
+                    $contentRows[] = $unorderedContentRow;
+                }
+            }
+        }
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
@@ -243,6 +254,47 @@ class ContentRepository extends RepositoryBase
             )
             ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
             ->where(ConfigService::$tableContent . '.type', $type)
+            ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
+    /**
+     * @param $type
+     * @param $userId
+     * @param $state
+     */
+    public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit, $skip)
+    {
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->leftJoin(
+                ConfigService::$tableUserContentProgress,
+                ConfigService::$tableUserContentProgress . '.content_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->where(ConfigService::$tableContent . '.type', $type)
+            ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
+            ->where(ConfigService::$tableUserContentProgress . '.state', $state)
+            ->orderBy('published_on', 'desc')
+            ->limit($limit)
+            ->skip($skip)
             ->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
