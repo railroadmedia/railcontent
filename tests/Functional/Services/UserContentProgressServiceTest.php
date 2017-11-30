@@ -60,18 +60,22 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
     public function test_start_content()
     {
-        $contentId = $this->faker->randomNumber();
         $userId = $this->faker->randomNumber();
+
+        $content = $this->contentFactory->create(
+            $this->faker->words(rand(2, 6), true),
+            $this->faker->randomElement($this->allowedTypes)
+        );
 
         $state = UserContentProgressService::STATE_STARTED;
 
-        $userContentId = $this->classBeingTested->startContent($contentId, $userId);
+        $userContentId = $this->classBeingTested->startContent($content['id'], $userId);
 
         $this->assertDatabaseHas(
             ConfigService::$tableUserContentProgress,
             [
                 'id' => $userContentId,
-                'content_id' => $contentId,
+                'content_id' => $content['id'],
                 'user_id' => $userId,
                 'state' => $state,
                 'progress_percent' => 0
@@ -81,11 +85,15 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
     public function test_complete_content()
     {
-        $contentId = $this->faker->randomNumber();
         $userId = $this->faker->randomNumber();
 
+        $content = $this->contentFactory->create(
+            $this->faker->words(rand(2, 6), true),
+            $this->faker->randomElement($this->allowedTypes)
+        );
+
         $userContent = [
-            'content_id' => $contentId,
+            'content_id' => $content['id'],
             'user_id' => $userId,
             'state' => UserContentProgressService::STATE_STARTED,
             'progress_percent' => $this->faker->numberBetween(0, 99),
@@ -94,37 +102,33 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $userContentId =
             $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
 
-        $progress = 100;
-        $state = UserContentProgressService::STATE_COMPLETED;
-
-        $data = [
-            'state' => $state,
-            'progress_percent' => $progress
-        ];
-
-        $this->classBeingTested->completeContent($contentId, $userId);
+        $this->classBeingTested->completeContent($content['id'], $userId);
 
         $this->assertDatabaseHas(
             ConfigService::$tableUserContentProgress,
             [
                 'id' => $userContentId,
-                'content_id' => $contentId,
+                'content_id' => $content['id'],
                 'user_id' => $userId,
-                'state' => $state,
-                'progress_percent' => $progress
+                'state' => UserContentProgressService::STATE_COMPLETED,
+                'progress_percent' => 100
             ]
         );
     }
 
     public function test_save_user_progress_content()
     {
-        $contentId = $this->faker->randomNumber();
         $userId = $this->faker->randomNumber();
+
+        $content = $this->contentFactory->create(
+            $this->faker->words(rand(2, 6), true),
+            $this->faker->randomElement($this->allowedTypes)
+        );
 
         $state = UserContentProgressService::STATE_STARTED;
         $progress = $this->faker->numberBetween(1, 100);
         $userContent = [
-            'content_id' => $contentId,
+            'content_id' => $content['id'],
             'user_id' => $userId,
             'state' => $state,
             'progress_percent' => $progress,
@@ -133,13 +137,13 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
         $userContentId = $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
 
-        $this->classBeingTested->saveContentProgress($contentId, $progress, $userId, $state);
+        $this->classBeingTested->saveContentProgress($content['id'], $progress, $userId);
 
         $this->assertDatabaseHas(
             ConfigService::$tableUserContentProgress,
             [
                 'id' => $userContentId,
-                'content_id' => $contentId,
+                'content_id' => $content['id'],
                 'user_id' => $userId,
                 'state' => $state,
                 'progress_percent' => $progress
@@ -158,6 +162,8 @@ class UserContentProgressServiceTest extends RailcontentTestCase
     {
         $userId = rand();
         $content = $this->contentFactory->create();
+        $content['completed'] = false;
+        $content['started'] = false;
 
         $results = $this->classBeingTested->attachProgressToContents($userId, [$content]);
 
@@ -174,9 +180,8 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
         for ($i = 0; $i < 3; $i++) {
             $content = $this->contentFactory->create();
-
-            $this->classBeingTested->startContent($content['id'], $userId);
-
+            $content['completed'] = false;
+            $content['started'] = true;
             $content['user_progress'][$userId] = [
                 'id' => $i + 1,
                 'content_id' => $i + 1,
@@ -185,8 +190,9 @@ class UserContentProgressServiceTest extends RailcontentTestCase
                 'progress_percent' => '0',
                 'updated_on' => Carbon::now()->toDateTimeString()
             ];
-
             $expectedContents[] = $content;
+
+            $this->classBeingTested->startContent($content['id'], $userId);
         }
 
         $results = $this->classBeingTested->attachProgressToContents($userId, $expectedContents);
