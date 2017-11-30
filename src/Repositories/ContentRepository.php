@@ -333,6 +333,39 @@ class ContentRepository extends RepositoryBase
 
     /**
      * @param $userId
+     * @param string $type
+     * @param string $slug
+     * @return array|null
+     */
+    public function getByUserIdTypeSlug($userId, $type, $slug)
+    {
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->where('slug', $slug)
+            ->where('type', $type)
+            ->where('user_id', $userId)
+            ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
+    /**
+     * @param $userId
      * @param $childContentIds
      * @param null $slug
      * @return array
