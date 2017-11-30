@@ -59,9 +59,10 @@ class FullTextSearchRepository extends RepositoryBase
                 'medium_value' => $this->prepareIndexesValues($searchIndexValues['medium_value'], $content),
                 'low_value' => $this->prepareIndexesValues($searchIndexValues['low_value'], $content),
                 'brand' => ConfigService::$brand,
-                'created_at' => Carbon::parse($content['created_on'])
+                'created_at' => Carbon::parse($content['published_on'])
                     ->toDateTimeString()
             ];
+
             $this->create($searchInsertData);
         }
 
@@ -136,6 +137,8 @@ class FullTextSearchRepository extends RepositoryBase
             ->orderByScore()
             ->directPaginate($page, $limit);
         $contentRows = $query->getToArray();
+
+        dd($contentRows);
 
         return $this->contentRepository->getByIds(array_column($contentRows, 'content_id'));
 

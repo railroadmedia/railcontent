@@ -20,7 +20,7 @@ class FullTextSearchQueryBuilder extends QueryBuilder
                 ConfigService::$tableSearchIndexes . '.medium_value as medium_value',
                 ConfigService::$tableSearchIndexes . '.low_value as low_value',
                 ConfigService::$tableSearchIndexes . '.created_at as created_at',
-                DB::raw(" MATCH (high_value) AGAINST ('+\"" . implode('" +"', explode(' ', $term)) . "\"' IN BOOLEAN MODE) * 10 AS high_score"),
+                DB::raw(" MATCH (high_value) AGAINST ('+\"" . implode('" +"', explode(' ', $term)) . "\"' IN BOOLEAN MODE) * 10 * (UNIX_TIMESTAMP(created_at) / 1350517005) AS high_score"),
                 DB::raw(" MATCH (medium_value) AGAINST (\"'$term'\") * 2 AS medium_score"),
                 DB::raw(" MATCH (low_value) AGAINST (\"'$term'\") AS low_score")
             ]
