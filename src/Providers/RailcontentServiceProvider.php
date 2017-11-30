@@ -15,6 +15,8 @@ use Railroad\Railcontent\Events\ContentFieldCreated;
 use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Events\UserContentProgressSaved;
+use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
 use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\VersionContentEventListener;
 use Railroad\Railcontent\Services\ConfigService;
@@ -49,7 +51,8 @@ class RailcontentServiceProvider extends ServiceProvider
             ContentDatumCreated::class => [VersionContentEventListener::class . '@handle'],
             ContentDatumUpdated::class => [VersionContentEventListener::class . '@handle'],
             ContentDatumDeleted::class => [VersionContentEventListener::class . '@handle'],
-            CommentCreated::class => [AssignCommentEventListener::class . '@handle']
+            CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
+            UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle']
         ];
 
         parent::boot();

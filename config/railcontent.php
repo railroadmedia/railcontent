@@ -71,5 +71,7 @@ return [
             'field_keys' => ['*'],
             'data_keys' => ['description'],
         ],
-    ]
+    ],
+
+    'allowed_types_for_bubble_progress' => []
 ];

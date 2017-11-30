@@ -3,7 +3,8 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
+use Railroad\Railcontent\Events\UserContentProgressSaved;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 
 class UserContentProgressService
@@ -14,9 +15,19 @@ class UserContentProgressService
     protected $userContentRepository;
 
     /**
-     * @var ContentHierarchyRepository
+     * @var ContentHierarchyService
      */
-    protected $contentHierarchyRepository;
+    private $contentHierarchyService;
+
+    /**
+     * @var ContentRepository
+     */
+    private $contentRepository;
+
+    /**
+     * @var ContentService
+     */
+    private $contentService;
 
     const STATE_STARTED = 'started';
     const STATE_COMPLETED = 'completed';
@@ -24,14 +35,22 @@ class UserContentProgressService
     /**
      * UserContentService constructor.
      *
-     * @param $userContentRepository
+     * @param UserContentProgressRepository $userContentRepository
+     * @param ContentHierarchyService $contentHierarchyService
+     * @param ContentRepository $contentRepository
+     * @param ContentService $contentService
      */
     public function __construct(
         UserContentProgressRepository $userContentRepository,
-        ContentHierarchyRepository $contentHierarchyRepository
-    ) {
+        ContentHierarchyService $contentHierarchyService,
+        ContentRepository $contentRepository,
+        ContentService $contentService
+    )
+    {
         $this->userContentRepository = $userContentRepository;
-        $this->contentHierarchyRepository = $contentHierarchyRepository;
+        $this->contentHierarchyService = $contentHierarchyService;
+        $this->contentRepository = $contentRepository;
+        $this->contentService = $contentService;
     }
 
     /**
@@ -46,23 +65,6 @@ class UserContentProgressService
             $contentType,
             $userId,
             $state
-        );
-    }
-
-    /**
-     * @param $contentType
-     * @param $userId
-     * @param $state
-     * @return array
-     */
-    public function getPaginatedByContentTypeUserState($contentType, $userId, $state, $limit = 25, $skip = 0)
-    {
-        return $this->userContentRepository->getPaginatedByContentTypeUserState(
-            $contentType,
-            $userId,
-            $state,
-            $limit,
-            $skip
         );
     }
 
@@ -93,68 +95,83 @@ class UserContentProgressService
         $isCompleted = $this->userContentRepository->isContentAlreadyCompleteForUser($contentId, $userId);
 
         if (!$isCompleted || $forceEvenIfComplete) {
-            $userContentId =
-                $this->userContentRepository->updateOrCreate(
-                    [
-                        'content_id' => $contentId,
-                        'user_id' => $userId,
-                    ],
-                    [
-                        'state' => UserContentProgressService::STATE_STARTED,
-                        'updated_on' => Carbon::now()->toDateTimeString(),
-                    ]
-                );
+            $this->userContentRepository->updateOrCreate(
+                [
+                    'content_id' => $contentId,
+                    'user_id' => $userId,
+                ],
+                [
+                    'state' => self::STATE_STARTED,
+                    'progress_percent' => 0,
+                    'updated_on' => Carbon::now()->toDateTimeString(),
+                ]
+            );
         }
+
+        event(new UserContentProgressSaved($userId, $contentId));
 
         return true;
     }
 
-    /** Complete user content. Complete parent content if all the children are completed.
-     *
+    /**
      * @param integer $contentId
      * @param integer $userId
      * @return bool
      */
     public function completeContent($contentId, $userId)
     {
-        $this->setStateCompleted($contentId, $userId);
-
-        list($parent, $completeParent) = $this->completeParentContent($contentId, $userId);
-
-        // Complete parent if all children are complete
-        if ($completeParent) {
-            $this->setStateCompleted($parent['id'], $userId);
-        }
-
-        return true;
-    }
-
-    /** Call the method that create or update the user content with given progress value
-     *
-     * @param integer $contentId
-     * @param string $progress
-     * @param integer $userId
-     * @return bool
-     */
-    public function saveContentProgress($contentId, $progress, $userId)
-    {
-        $userContentId = $this->userContentRepository->updateOrCreate(
+        $this->userContentRepository->updateOrCreate(
             [
                 'content_id' => $contentId,
                 'user_id' => $userId,
             ],
             [
-                'progress_percent' => $progress,
-                'updated_on' => Carbon::now()->toDateTimeString()
+                'state' => self::STATE_COMPLETED,
+                'progress_percent' => 100,
+                'updated_on' => Carbon::now()->toDateTimeString(),
             ]
         );
+
+        event(new UserContentProgressSaved($userId, $contentId));
 
         return true;
     }
 
     /**
-     * @param $userId
-     * @param $contents
+     * @param integer $contentId
+     * @param integer $progress
+     * @param integer $userId
+     * @param null|string $state
+
+     * @return bool
+     */
+    public function saveContentProgress($contentId, $progress, $userId)
+    {
+        if($progress === 100){
+            return $this->completeContent($contentId, $userId);
+        }
+
+        $this->userContentRepository->updateOrCreate(
+            [
+                'content_id' => $contentId,
+                'user_id' => $userId
+            ],
+            [
+                'state' => self::STATE_STARTED,
+                'progress_percent' => $progress,
+                'updated_on' => Carbon::now()->toDateTimeString()
+            ]
+        );
+
+        event(new UserContentProgressSaved($userId, $contentId));
+
+        return true;
+    }
+
+    /**
+     * @param integer $userId
+     * @param array $contentOrContents
+     *
      * @return array
      */
     public function attachProgressToContents($userId, $contentOrContents)
@@ -179,16 +196,16 @@ class UserContentProgressService
                     $contentOrContents[$index]['user_progress'][$userId] =
                         $contentProgressionsByContentId[$content['id']];
 
-                    $contentOrContents[$index]['completed'] = $contentProgressionsByContentId[$content['id']]['state'] ==
+                    $contentOrContents[$index][self::STATE_COMPLETED] = $contentProgressionsByContentId[$content['id']]['state'] ==
                         self::STATE_COMPLETED;
 
-                    $contentOrContents[$index]['started'] = $contentProgressionsByContentId[$content['id']]['state'] ==
+                    $contentOrContents[$index][self::STATE_STARTED] = $contentProgressionsByContentId[$content['id']]['state'] ==
                         self::STATE_STARTED;
                 } else {
                     $contentOrContents[$index]['user_progress'][$userId] = [];
 
-                    $contentOrContents[$index]['completed'] = false;
-                    $contentOrContents[$index]['started'] = false;
+                    $contentOrContents[$index][self::STATE_COMPLETED] = false;
+                    $contentOrContents[$index][self::STATE_STARTED] = false;
                 }
             }
         }
@@ -200,53 +217,89 @@ class UserContentProgressService
         }
     }
 
-    /** Call the method that create/update user content with state completed and progress percent 100%
-     *
-     * @param integer $contentId
-     * @param integer $userId
+    /**
+     * @param int $userId
+     * @param int $contentId
+     * @return bool
      */
-    private function setStateCompleted($contentId, $userId)
+    public function bubbleProgress($userId, $contentId)
     {
-        $progress = 100;
-
-        return $this->userContentRepository->updateOrCreate(
-            [
-                'content_id' => $contentId,
-                'user_id' => $userId,
-            ],
-            [
-                'state' => UserContentProgressService::STATE_COMPLETED,
-                'progress_percent' => $progress,
-                'updated_on' => Carbon::now()->toDateTimeString(),
-            ]
+        $content = $this->attachProgressToContents($userId, $this->contentRepository->getById($contentId));
+        $parents = $this->attachProgressToContents(
+            $userId,
+            $this->contentService->getByChildIdWhereType($content['id'], $content['type'])
         );
-    }
 
-    /** Check if the parent should be completed (all the children are completed)
-     *
-     * @param integer $contentId - child id
-     * @param integer $userId
-     * @return array
-     */
-    private function completeParentContent($contentId, $userId)
-    {
-        $completeParent = false;
+        if(empty($parents)){
+            return true;
+        }
 
-        $parent = $this->contentHierarchyRepository->getParentByChildId($contentId);
-        if ($parent) {
-            $childrens = $this->contentHierarchyRepository->getByParentIds([$parent['parent_id']]);
-            foreach ($childrens as $child) {
-                $isChildCompleted = $this->userContentRepository->isContentAlreadyCompleteForUser(
-                    $child['child_id'],
-                    $userId
-                );
-                if ($isChildCompleted != 1) {
-                    $completeParent = false;
-                } else {
-                    $completeParent = true;
-                }
+        $allowedParents = [];
+
+        foreach($parents as $parent){
+            if(in_array($parent['type'], config('railcontent.allowed_types_for_bubble_progress'))){
+                $allowedParents[] = $parent;
             }
         }
-        return array($parent, $completeParent);
+
+        foreach($allowedParents as $parent){
+
+
+            // One ------------------------------------------------------------
+
+            if($content[self::STATE_STARTED] && !$parent[self::STATE_STARTED]) {
+                $this->startContent($parent['id'], $userId);
+            }
+
+            $siblings = $this->attachProgressToContents($userId, $this->contentService->getByParentId($parent['id']));
+
+            // Two ------------------------------------------------------------
+
+            if($content[self::STATE_COMPLETED]) {
+                $complete = true;
+                foreach($siblings as $sibling){
+                    if(!$sibling[self::STATE_COMPLETED]){
+                        $complete = false;
+                    }
+                }
+                if($complete && !$parent[self::STATE_COMPLETED]){
+                    $this->completeContent($parent['id'], $userId);
+                }
+            }
+
+
+            // Three ----------------------------------------------------------
+
+            $progressOfSiblings = array_column($siblings, 'user_progress');
+
+            $progressOfSiblingsDeNested = [];
+
+            foreach($progressOfSiblings as $progressOfSingleSibling){
+                $progressOfSiblingsDeNested[] = reset($progressOfSingleSibling);
+            }
+
+            $percentages = [];
+
+            foreach($progressOfSiblingsDeNested as $progressOfSingleDeNestedSibling){
+                if(!empty($progressOfSingleDeNestedSibling)){
+                    $percentages[] = $progressOfSingleDeNestedSibling['progress_percent'];
+                }else{
+                    $percentages[] = 0;
+                }
+            }
+
+            $arraySum = array_sum($percentages);
+            $siblingCount = count($siblings);
+
+            $progress = $arraySum/$siblingCount;
+
+            $this->saveContentProgress(
+                $parent['id'],
+                $progress,
+                $userId
+            );
+        }
+
+        return true;
     }
 }
