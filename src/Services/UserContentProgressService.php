@@ -234,19 +234,19 @@ class UserContentProgressService
         );
 
         foreach ($parents as $parent) {
-            // One ------------------------------------------------------------
 
+            // start parent if necessary
             if ($content[self::STATE_STARTED] && !$parent[self::STATE_STARTED]) {
                 $this->startContent($parent['id'], $userId);
             }
 
+            // get siblings
             $siblings = $this->attachProgressToContents(
                 $userId,
                 $this->contentService->getByParentId($parent['id'])
             );
 
-            // Two ------------------------------------------------------------
-
+            // complete parent content if necessary
             if ($content[self::STATE_COMPLETED]) {
                 $complete = true;
                 foreach ($siblings as $sibling) {
@@ -259,8 +259,7 @@ class UserContentProgressService
                 }
             }
 
-            // Three ----------------------------------------------------------
-
+            // calculate and save parent progress percent from children
             $progressOfSiblings = array_column($siblings, 'user_progress');
 
             $progressOfSiblingsDeNested = [];
