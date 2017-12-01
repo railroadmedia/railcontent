@@ -24,7 +24,8 @@ return [
         'artist',
     ],
     'commentable_content_types' => [
-        'course','course lesson'
+        'course',
+        'course lesson'
     ],
     'comments_assignation' => [
         'course' => 1,
@@ -73,5 +74,17 @@ return [
         ],
     ],
 
-    'allowed_types_for_bubble_progress' => []
+    'allowed_types_for_bubble_progress' => [],
+
+    'video_sync' => [
+        'vimeo' =>
+            [
+                'drumeo' => [
+                    'account_id' => 'saasdasdasd',
+                ],
+                'pianote' => [
+                    'account_id' => 'saasdasdasd',
+                ],
+            ]
+    ]
 ];

@@ -352,6 +352,50 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @param array $types
+     * @param $userId
+     * @param $state
+     * @param $limit
+     * @param $skip
+     * @return array
+     */
+    public function getPaginatedByTypesUserProgressState(array $types, $userId, $state, $limit, $skip)
+    {
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->leftJoin(
+                ConfigService::$tableUserContentProgress,
+                ConfigService::$tableUserContentProgress . '.content_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
+            ->where(ConfigService::$tableUserContentProgress . '.state', $state)
+            ->orderBy('published_on', 'desc')
+            ->limit($limit)
+            ->skip($skip)
+            ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
+    /**
      * @param array $slugs
      * @return array|null
      */

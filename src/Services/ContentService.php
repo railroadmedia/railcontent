@@ -232,11 +232,33 @@ class ContentService
      * @param $type
      * @param $userId
      * @param $state
+     * @param int $limit
+     * @param int $skip
+     * @return array
      */
     public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit = 25, $skip = 0)
     {
         return $this->contentRepository->getPaginatedByTypeUserProgressState(
             $type,
+            $userId,
+            $state,
+            $limit,
+            $skip
+        );
+    }
+
+    /**
+     * @param array $types
+     * @param $userId
+     * @param $state
+     * @param int $limit
+     * @param int $skip
+     * @return array
+     */
+    public function getPaginatedByTypesUserProgressState(array $types, $userId, $state, $limit = 25, $skip = 0)
+    {
+        return $this->contentRepository->getPaginatedByTypeUserProgressState(
+            $types,
             $userId,
             $state,
             $limit,
