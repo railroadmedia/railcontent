@@ -45,7 +45,7 @@ class CommentAssignmentRepository extends RepositoryBase
                 ConfigService::$tableComments.'.id')
             ->restrictByAssociatedManagerId()
             ->restrictByCommentId($commentId)
-            ->orderBy(ConfigService::$tableCommentsAssignment . '.assigned_on', 'desc')
+            ->orderBy('assigned_on', 'desc', ConfigService::$tableCommentsAssignment)
             ->getToArray();
 
         //get an array with comment ids that will be used as keys in the results
