@@ -38,7 +38,22 @@ class ContentFieldService
     public function get($id)
     {
         $contentField = $this->fieldRepository->getById($id);
-        
+
+        if (!empty($contentField) && $contentField['type'] == 'content_id') {
+            $contentField['value'] = $this->contentService->getById($contentField['value']);
+        }
+
+        return $contentField;
+    }
+
+    /**
+     * @param integer $id
+     * @return array
+     */
+    public function getByKeyValueTypePosition($key, $value, $type, $position)
+    {
+        $contentField = $this->fieldRepository->getByKeyValueTypePosition($key, $value, $type, $position);
+
         if (!empty($contentField) && $contentField['type'] == 'content_id') {
             $contentField['value'] = $this->contentService->getById($contentField['value']);
         }
@@ -58,7 +73,8 @@ class ContentFieldService
      */
     public function create($contentId, $key, $value, $position, $type)
     {
-        $id = $this->fieldRepository->createOrUpdateAndReposition(null,
+        $id = $this->fieldRepository->createOrUpdateAndReposition(
+            null,
             [
                 'content_id' => $contentId,
                 'key' => $key,

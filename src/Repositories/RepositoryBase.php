@@ -72,6 +72,23 @@ abstract class RepositoryBase
     }
 
     /**
+     * @param $key
+     * @param $value
+     * @param $type
+     * @param $position
+     * @return array
+     */
+    public function getByKeyValueTypePosition($key, $value, $type, $position)
+    {
+        return $this->query()
+            ->where(
+                ['key' => $key, 'value' => $value, 'type' => $type, 'position' => $position]
+            )
+            ->get()
+            ->toArray();
+    }
+
+    /**
      * @param array $attributes
      * @param array $values
      * @return integer|null
@@ -207,7 +224,11 @@ abstract class RepositoryBase
 
         $this->query()
             ->where($entity)
-            ->where($positionColumnPrefix . 'position', '>', $existingLink[$positionColumnPrefix . "position"])
+            ->where(
+                $positionColumnPrefix . 'position',
+                '>',
+                $existingLink[$positionColumnPrefix . "position"]
+            )
             ->decrement($positionColumnPrefix . 'position');
 
         $deleted = $this->query()
