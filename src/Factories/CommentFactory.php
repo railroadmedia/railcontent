@@ -19,7 +19,7 @@ class CommentFactory extends CommentService
      * @param null $position
      * @return array
      */
-    public function create($comment=null, $contentId = null, $parentId = null, $userId = null)
+    public function create($comment=null, $contentId = null, $parentId = null, $userId = null, $temporaryUserDisplayName = '')
     {
         $this->faker = app(Generator::class);
 
@@ -28,7 +28,8 @@ class CommentFactory extends CommentService
                 $this->faker->word,
                 rand(),
                 null,
-                rand()
+                rand(),
+                ''
             ];
 
         return parent::create(...$parameters);

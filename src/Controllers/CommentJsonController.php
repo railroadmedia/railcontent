@@ -70,10 +70,12 @@ class CommentJsonController extends Controller
             $request->get('comment'),
             $request->get('content_id'),
             null,
-            $request->user()->id
+            $request->user()->id ?? null
         );
 
         throw_if(is_null($comment), new NotAllowedException('The content type does not allow comments.'));
+
+        throw_if(($comment === -1), new NotAllowedException('Only registered user can add comment. Please sign in.'));
 
         return new JsonResponse($comment, 200);
     }
@@ -98,6 +100,8 @@ class CommentJsonController extends Controller
                 ]
             )
         );
+        //if the user it's not logged in into the application
+        throw_if(($comment === 0), new NotAllowedException('Only registered user can modify own comments. Please sign in.'));
 
         //if the update response method = -1 => the user have not rights to update other user comment; we throw the exception
         throw_if(($comment === -1), new NotAllowedException('Update failed, you can update only your comments.'));
@@ -137,10 +141,12 @@ class CommentJsonController extends Controller
             $request->get('comment'),
             null,
             $request->get('parent_id'),
-            $request->user()->id
+            $request->user()->id ?? null
         );
 
         throw_if(is_null($request), new NotAllowedException('The content type does not allow comments.'));
+
+        throw_if(($reply === -1), new NotAllowedException('Only registered user can reply to comment. Please sign in.'));
 
         return new JsonResponse($reply, 200);
     }

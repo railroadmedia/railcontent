@@ -79,6 +79,11 @@ class CommentService
             return null;
         }
 
+        if(!$userId)
+        {
+            return -1;
+        }
+
         $commentId = $this->commentRepository->create(
             [
                 'comment' => $comment,
@@ -111,6 +116,9 @@ class CommentService
             return $comment;
         }
 
+        if(!array_key_exists('user_id', $data)){
+            return 0;
+        }
         //check if user can update the comment
         if (!$this->userCanManageComment($comment)) {
             return -1;
@@ -159,7 +167,7 @@ class CommentService
         $canManage = true;
 
         //if the user it's not an administrator check if it is the comment owner
-        if ((self::$canManageOtherComments === false) && ($comment['user_id'] != request()->user()->id)) {
+        if ((self::$canManageOtherComments === false) && ($comment['user_id'] != (request()->user()->id ?? null))) {
             $canManage = false;
         }
 

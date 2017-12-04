@@ -58,9 +58,10 @@ class CommentRepository extends RepositoryBase
      */
     public function getById($id)
     {
-        $row = $this->query()->where(['id' => $id])->first();
-        if($row){
-            $repliesRows =  $this->getRepliesByCommentIds(array_column([$row], 'id'));
+        $row = $this->query()->selectColumns()->where(['id' => $id])->first();
+
+        if ($row) {
+            $repliesRows = $this->getRepliesByCommentIds(array_column([$row], 'id'));
             $parsedRows = $this->parseRows([$row], $repliesRows);
             $row = reset($parsedRows);
         }
@@ -237,7 +238,7 @@ class CommentRepository extends RepositoryBase
      */
     private function getRepliesByCommentIds(array $commentIds)
     {
-        return $this->query()->whereIn('parent_id', $commentIds)->get()->toArray();
+        return $this->query()->selectColumns()->whereIn('parent_id', $commentIds)->get()->toArray();
     }
 
     /**

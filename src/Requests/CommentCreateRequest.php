@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Requests;
 
 
+use Illuminate\Validation\Rule;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
 class CommentCreateRequest extends FormRequest
@@ -26,7 +28,15 @@ class CommentCreateRequest extends FormRequest
     {
         return [
             'comment' => 'required|max:1024',
-            'content_id' => 'required|numeric|exists:' . ConfigService::$tableContent . ',id'
+            'content_id' =>
+                ['required',
+                    'numeric',
+                    Rule::exists(ConfigService::$tableContent, 'id')->where(function($query) {
+                        if(is_array(ContentRepository::$availableContentStatues)) {
+                            $query->whereIn('status', ContentRepository::$availableContentStatues);
+                        }
+                    })
+                ]
         ];
     }
 }

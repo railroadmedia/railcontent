@@ -91,6 +91,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'user_id' => $userId,
             'created_on' => Carbon::now()->toDateTimeString(),
             'deleted_at' => null,
+            'display_name' => '',
             'replies' => []
         ]);
 
@@ -300,7 +301,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             $page,
             $limit,
             $totalNumber,
-            array_slice($comments, ($limit * ($page - 1)), $limit, true),
+            array_slice($comments, ($limit * ($page - 1)), $limit, false),
             null);
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson());
@@ -345,7 +346,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             $page,
             $limit,
             $totalNumber,
-            array_slice($comments, ($limit * ($page - 1)), $limit, true),
+            array_slice($comments, ($limit * ($page - 1)), $limit, false),
             null);
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson());
@@ -386,7 +387,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             $page,
             $limit,
             $totalNumber,
-            array_slice($comments, ($limit * ($page - 1)), $limit, true),
+            array_slice($comments, ($limit * ($page - 1)), $limit, false),
             null);
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson());
@@ -422,7 +423,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             $page,
             $limit,
             $totalNumber,
-            array_slice($comments, ($limit * ($page - 1)), $limit, true),
+            array_slice($comments, ($limit * ($page - 1)), $limit, false),
             null);
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson());
