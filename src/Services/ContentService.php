@@ -8,6 +8,7 @@ use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
+use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\ContentVersionRepository;
 
@@ -38,6 +39,11 @@ class ContentService
      */
     private $contentHierarchyRepository;
 
+    /**
+     * @var ContentPermissionsRepository
+     */
+    private $contentPermissionRepository;
+
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
@@ -53,19 +59,22 @@ class ContentService
      * @param ContentFieldRepository $fieldRepository
      * @param ContentDatumRepository $datumRepository
      * @param ContentHierarchyRepository $contentHierarchyRepository
+     * @param ContentPermissionRepository $contentPermissionRepository
      */
     public function __construct(
         ContentRepository $contentRepository,
         ContentVersionRepository $versionRepository,
         ContentFieldRepository $fieldRepository,
         ContentDatumRepository $datumRepository,
-        ContentHierarchyRepository $contentHierarchyRepository
+        ContentHierarchyRepository $contentHierarchyRepository,
+        ContentPermissionRepository $contentPermissionRepository
     ) {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
         $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
         $this->contentHierarchyRepository = $contentHierarchyRepository;
+        $this->contentPermissionRepository = $contentPermissionRepository;
     }
 
     /**
@@ -415,6 +424,24 @@ class ContentService
         if (empty($content)) {
             return null;
         }
+
+        //delete the content fields
+        $this->fieldRepository->deleteByContentId($content['id']);
+
+        //delete the content datum
+        $this->datumRepository->deleteByContentId($content['id']);
+
+        //delete the link with the parent and reposition other children
+        $this->contentHierarchyRepository->deleteChildParentLinks($content['id']);
+
+        //delete the content children
+        $this->contentHierarchyRepository->deleteParentChildLinks($content['id']);
+
+        //delete the link with the permissions
+        $this->contentPermissionRepository->deleteByContentId($content['id']);
+
+        //TODO: delete the content comments
+
 
         return $this->contentRepository->delete($id);
     }
