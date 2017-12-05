@@ -94,5 +94,7 @@ return [
                 'access_token' => env('VIMEO_ACCESS_TOKEN_GUITAREO')
             ]
         ]
-    ]
+    ],
+    
+    'routes_middleware' => ['auth'],
 ];

@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(
     [
-        'prefix' => 'railcontent'
+        'prefix' => 'railcontent',
+        'middleware' => config('railcontent.routes_middleware')
     ],
     function () {
 
