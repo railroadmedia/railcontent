@@ -89,6 +89,22 @@ abstract class RepositoryBase
     }
 
     /**
+     * @param $key
+     * @param $value
+     * @param $type
+     * @return array
+     */
+    public function getByKeyValueType($key, $value, $type)
+    {
+        return $this->query()
+            ->where(
+                ['key' => $key, 'value' => $value, 'type' => $type]
+            )
+            ->get()
+            ->toArray();
+    }
+
+    /**
      * @param array $attributes
      * @param array $values
      * @return integer|null

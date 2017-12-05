@@ -52,13 +52,62 @@ class ContentFieldService
      */
     public function getByKeyValueTypePosition($key, $value, $type, $position)
     {
-        $contentField = $this->fieldRepository->getByKeyValueTypePosition($key, $value, $type, $position);
+        $contentFields = $this->fieldRepository->getByKeyValueTypePosition($key, $value, $type, $position);
 
-        if (!empty($contentField) && $contentField['type'] == 'content_id') {
-            $contentField['value'] = $this->contentService->getById($contentField['value']);
+        $contentIds = [];
+        $contents = [];
+
+        foreach ($contentFields as $contentField) {
+            if (!empty($contentField) && $contentField['type'] == 'content_id') {
+                $contentIds[] = $contentField['value'];
+            }
         }
 
-        return $contentField;
+        if (!empty($contentIds)) {
+            $contents = $this->contentService->getByIds($contentIds);
+        }
+
+        foreach ($contentFields as $contentFieldIndex => $contentField) {
+            foreach ($contents as $content) {
+                if ($contentField['type'] == 'content_id' && $contentField['value'] == $content['id']) {
+                    $contentFields[$contentFieldIndex]['value'] = $content;
+                }
+            }
+        }
+
+        return $contentFields;
+    }
+
+    /**
+     * @param integer $id
+     * @return array
+     */
+    public function getByKeyValueType($key, $value, $type)
+    {
+        $contentFields = $this->fieldRepository->getByKeyValueType($key, $value, $type);
+
+        $contentIds = [];
+        $contents = [];
+
+        foreach ($contentFields as $contentField) {
+            if (!empty($contentField) && $contentField['type'] == 'content_id') {
+                $contentIds[] = $contentField['value'];
+            }
+        }
+
+        if (!empty($contentIds)) {
+            $contents = $this->contentService->getByIds($contentIds);
+        }
+
+        foreach ($contentFields as $contentFieldIndex => $contentField) {
+            foreach ($contents as $content) {
+                if ($contentField['type'] == 'content_id' && $contentField['value'] == $content['id']) {
+                    $contentFields[$contentFieldIndex]['value'] = $content;
+                }
+            }
+        }
+
+        return $contentFields;
     }
 
     /**
