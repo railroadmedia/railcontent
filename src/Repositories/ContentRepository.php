@@ -254,6 +254,44 @@ class ContentRepository extends RepositoryBase
             )
             ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
             ->where(ConfigService::$tableContent . '.type', $type)
+            ->selectInheritenceColumns()
+            ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($contentRows, 'id'),
+                array_column($contentRows, 'type')
+            );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
+    /**
+     * @param $parentId
+     * @return array
+     */
+    public function getByChildIdsWhereType(array $childIds, $type)
+    {
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->leftJoin(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.parent_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->whereIn(ConfigService::$tableContentHierarchy . '.child_id', $childIds)
+            ->where(ConfigService::$tableContent . '.type', $type)
+            ->selectInheritenceColumns()
             ->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
@@ -291,6 +329,7 @@ class ContentRepository extends RepositoryBase
             )
             ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
             ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->selectInheritenceColumns()
             ->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
