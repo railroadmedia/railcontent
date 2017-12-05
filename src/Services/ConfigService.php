@@ -139,4 +139,8 @@ class ConfigService
      */
     public static $searchIndexValues;
 
+    /**
+     * @var array
+     */
+    public static $videoSync;
 }

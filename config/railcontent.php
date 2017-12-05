@@ -77,14 +77,22 @@ return [
     'allowed_types_for_bubble_progress' => [],
 
     'video_sync' => [
-        'vimeo' =>
-            [
-                'drumeo' => [
-                    'account_id' => 'saasdasdasd',
-                ],
-                'pianote' => [
-                    'account_id' => 'saasdasdasd',
-                ],
+        'vimeo' => [
+            'drumeo' => [
+                'client_id' => env('VIMEO_CLIENT_ID_DRUMEO'),
+                'client_secret' => env('VIMEO_CLIENT_SECRET_DRUMEO'),
+                'access_token' => env('VIMEO_ACCESS_TOKEN_DRUMEO')
+            ],
+            'pianote' => [
+                'client_id' => env('VIMEO_CLIENT_ID_PIANOTE'),
+                'client_secret' => env('VIMEO_CLIENT_SECRET_PIANOTE'),
+                'access_token' => env('VIMEO_ACCESS_TOKEN_PIANOTE')
+            ],
+            'guitareo' => [
+                'client_id' => env('VIMEO_CLIENT_ID_GUITAREO'),
+                'client_secret' => env('VIMEO_CLIENT_SECRET_GUITAREO'),
+                'access_token' => env('VIMEO_ACCESS_TOKEN_GUITAREO')
             ]
+        ]
     ]
 ];

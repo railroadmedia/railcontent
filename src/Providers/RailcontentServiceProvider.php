@@ -6,6 +6,7 @@ use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use PDO;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
+use Railroad\Railcontent\Commands\CreateContentFromExternalResources;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Events\ContentCreated;
@@ -86,7 +87,8 @@ class RailcontentServiceProvider extends ServiceProvider
         );
 
         $this->commands([
-            CreateSearchIndexes::class
+            CreateSearchIndexes::class,
+            CreateContentFromExternalResources::class
         ]);
     }
 
@@ -138,6 +140,8 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$searchableContentTypes = config('railcontent.searchable_content_types');
 
         ConfigService::$searchIndexValues = config('railcontent.search_index_values');
+
+        ConfigService::$videoSync = config('railcontent.video_sync');
     }
 
     /**
