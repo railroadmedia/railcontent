@@ -84,4 +84,10 @@ class CommentAssignmentService
         return $this->commentAssignmentRepository->deleteCommentAssignation($commentId, $userId);
     }
 
+    public function unassignComment($commentId)
+    {
+        return $this->commentAssignmentRepository->deleteCommentsAssignationByCommentIds([$commentId]);
+    }
+
+
 }

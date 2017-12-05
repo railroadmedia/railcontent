@@ -4,13 +4,18 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Events\ContentCreated;
+use Railroad\Railcontent\Events\ContentDeleted;
+use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
+use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\ContentVersionRepository;
+use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 
 class ContentService
 {
@@ -40,9 +45,24 @@ class ContentService
     private $contentHierarchyRepository;
 
     /**
+     * @var CommentRepository
+     */
+    private $commentRepository;
+
+    /**
+     * @var CommentAssignmentRepository
+     */
+    private $commentAssignationRepository;
+
+    /**
      * @var ContentPermissionsRepository
      */
     private $contentPermissionRepository;
+
+    /**
+     * @var UserContentProgressRepository
+     */
+    private $userContentProgressRepository;
 
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
@@ -60,6 +80,10 @@ class ContentService
      * @param ContentDatumRepository $datumRepository
      * @param ContentHierarchyRepository $contentHierarchyRepository
      * @param ContentPermissionRepository $contentPermissionRepository
+     * @param CommentRepository $commentRepository
+     * @param CommentAssignmentRepository $commentAssignationRepository
+     * @param UserContentProgressRepository
+     *
      */
     public function __construct(
         ContentRepository $contentRepository,
@@ -67,7 +91,10 @@ class ContentService
         ContentFieldRepository $fieldRepository,
         ContentDatumRepository $datumRepository,
         ContentHierarchyRepository $contentHierarchyRepository,
-        ContentPermissionRepository $contentPermissionRepository
+        ContentPermissionRepository $contentPermissionRepository,
+        CommentRepository $commentRepository,
+        CommentAssignmentRepository $commentAssignmentRepository,
+        UserContentProgressRepository $userContentProgressRepository
     ) {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
@@ -75,6 +102,9 @@ class ContentService
         $this->datumRepository = $datumRepository;
         $this->contentHierarchyRepository = $contentHierarchyRepository;
         $this->contentPermissionRepository = $contentPermissionRepository;
+        $this->commentRepository = $commentRepository;
+        $this->commentAssignationRepository = $commentAssignmentRepository;
+        $this->userContentProgressRepository = $userContentProgressRepository;
     }
 
     /**
@@ -424,26 +454,37 @@ class ContentService
         if (empty($content)) {
             return null;
         }
-
-        //delete the content fields
-        $this->fieldRepository->deleteByContentId($content['id']);
-
-        //delete the content datum
-        $this->datumRepository->deleteByContentId($content['id']);
-
-        //delete the link with the parent and reposition other children
-        $this->contentHierarchyRepository->deleteChildParentLinks($content['id']);
-
-        //delete the content children
-        $this->contentHierarchyRepository->deleteParentChildLinks($content['id']);
-
-        //delete the link with the permissions
-        $this->contentPermissionRepository->deleteByContentId($content['id']);
-
-        //TODO: delete the content comments
-
+        event(new ContentDeleted($id));
 
         return $this->contentRepository->delete($id);
+    }
+
+    public function deleteContentRelated($contentId)
+    {
+        //delete the link with the parent and reposition other siblings
+        $this->contentHierarchyRepository->deleteChildParentLinks($contentId);
+
+        //delete the content children
+        $this->contentHierarchyRepository->deleteParentChildLinks($contentId);
+
+        //delete the content fields
+        $this->fieldRepository->deleteByContentId($contentId);
+
+        //delete the content datum
+        $this->datumRepository->deleteByContentId($contentId);
+
+        //delete the links with the permissions
+        $this->contentPermissionRepository->deleteByContentId($contentId);
+
+        //delete the content comments, replies and assignation
+        $comments = $this->commentRepository->getByContentId($contentId);
+
+        $this->commentAssignationRepository->deleteCommentsAssignationByCommentIds(array_pluck($comments,'id'));
+
+        $this->commentRepository->deleteByContentId($contentId);
+
+        //delete content playlists
+        $this->userContentProgressRepository->deleteByContentId($contentId);
     }
 
     /**
@@ -526,5 +567,30 @@ class ContentService
         } else {
             return reset($contents);
         }
+    }
+
+    /**
+     * Call the update method from repository to mark the content as deleted and returns true if the content was updated
+     *
+     * @param $id
+     * @return bool|null - if the content not exist
+     */
+    public function softDelete($id)
+    {
+        $content = $this->getById($id);
+
+        if (empty($content)) {
+            return null;
+        }
+
+        event(new ContentSoftDeleted($id));
+
+        return $this->contentRepository->update($id, ['status' => self::STATUS_DELETED]);
+    }
+
+    public function softDeleteContentChildrens($id)
+    {
+
+        //TODO: change the content childrens status to deleted
     }
 }

@@ -5,10 +5,12 @@ namespace Railroad\Railcontent\Repositories;
 use Carbon\Carbon;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
+use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 
 class CommentRepository extends RepositoryBase
 {
+    use ByContentIdTrait;
     /** The value it's set in ContentPermissionMiddleware: if the user it's admin the value it's false, otherwise it's true.
      * If the value it' is false the comment with all his replies will be deleted.
      * If it's true the comment with the replies are only soft deleted (marked as deleted).
@@ -127,13 +129,13 @@ class CommentRepository extends RepositoryBase
      * @param int $id
      * @return bool|int
      */
-    public function delete($id)
+    public function deleteCommentReplies($id)
     {
         if ($this::$softDelete) {
-            return $this->softDeleteCommentWithReplies($id);
+            return $this->softDeleteReplies($id);
         }
 
-        return $this->deleteCommentWithReplies($id);
+        return $this->deleteReplies($id);
     }
 
     /**
@@ -153,11 +155,10 @@ class CommentRepository extends RepositoryBase
      * @param integer $id
      * @return bool
      */
-    private function softDeleteCommentWithReplies($id)
+    private function softDeleteReplies($id)
     {
         $deleted = $this->query()
             ->where(['parent_id' => $id])
-            ->orWhere(['id' => $id])
             ->update(
                 [
                     'deleted_at' => Carbon::now()->toDateTimeString()
@@ -171,13 +172,11 @@ class CommentRepository extends RepositoryBase
      * @param integer $id
      * @return bool
      */
-    private function deleteCommentWithReplies($id)
+    private function deleteReplies($id)
     {
-        $this->query()
+        $deleted = $this->query()
             ->where(['parent_id' => $id])
             ->delete();
-
-        $deleted = parent::delete($id);
 
         return $deleted;
     }
@@ -248,5 +247,15 @@ class CommentRepository extends RepositoryBase
     public function populateCommentWithReplies($comment)
     {
         return $this->parseRows($comment, $this->getRepliesByCommentIds([$comment['id']]));
+    }
+
+    public function deleteCommentsReplyAndAssignmentByContentId($contentId)
+    {
+        $commentsAndAssignment = $this->getByContentId($contentId);
+    }
+
+    public function getSoftDelete()
+    {
+        return $this::$softDelete;
     }
 }

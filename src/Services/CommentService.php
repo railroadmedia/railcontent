@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Events\CommentCreated;
+use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
@@ -79,8 +80,7 @@ class CommentService
             return null;
         }
 
-        if(!$userId)
-        {
+        if (!$userId) {
             return -1;
         }
 
@@ -116,7 +116,7 @@ class CommentService
             return $comment;
         }
 
-        if(!array_key_exists('user_id', $data)){
+        if (!array_key_exists('user_id', $data)) {
             return 0;
         }
         //check if user can update the comment
@@ -150,10 +150,20 @@ class CommentService
 
         //check if user can delete the comment
         if (!$this->userCanManageComment($comment)) {
-            return -1;
+              return -1;
         }
 
-        return $this->commentRepository->delete($id);
+        $isSoftDelete = $this->commentRepository->getSoftDelete();
+
+        //trigger an event that delete the corresponding comment assignments if the deletion it's not soft
+        event(new CommentDeleted($id));
+
+        if ($isSoftDelete) {
+            $this->commentRepository->update($id, ['deleted_at' => Carbon::now()->toDateTimeString()]);
+        } else {
+            $this->commentRepository->delete($id);
+        }
+        return true;
     }
 
     /** Administrator can edit/delete any comment; other users can edit/delete only their comments

@@ -69,4 +69,9 @@ class CommentAssignmentRepository extends RepositoryBase
         )->delete() > 0;
     }
 
+    public function deleteCommentsAssignationByCommentIds(array $commentIds)
+    {
+        return $this->query()->whereIn('comment_id', $commentIds)->delete() > 0;
+    }
+
 }

@@ -88,4 +88,11 @@ class ContentHierarchyService
     {
         return $this->contentHierarchyRepository->deleteParentChildLink($parentId, $childId);
     }
+
+    public function repositionSiblings($childId)
+    {
+        $parentId = $this->contentHierarchyRepository->getParentByChildId($childId);
+
+
+    }
 }

@@ -2,12 +2,15 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
+use Railroad\Railcontent\Factories\CommentAssignationFactory;
+use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentHierarchyFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\PermissionsFactory;
+use Railroad\Railcontent\Factories\UserContentProgressFactory;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -55,6 +58,21 @@ class ContentServiceTest extends RailcontentTestCase
      */
     protected $contentHierarchyRepository;
 
+    /**
+     * @var CommentFactory
+     */
+    protected $commentFactory;
+
+    /**
+     * @var CommentAssignationFactory
+     */
+    protected $commentAssignationFactory;
+
+    /**
+     * @var UserContentProgressFactory
+     */
+    protected $userContentProgressFactory;
+
     protected function setUp()
     {
         parent::setUp();
@@ -67,12 +85,15 @@ class ContentServiceTest extends RailcontentTestCase
         $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
         $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
         $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
+        $this->commentFactory = $this->app->make(CommentFactory::class);
+        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
+        $this->userContentProgressFactory = $this->app->make(UserContentProgressFactory::class);
     }
 
     public function test_delete_content()
     {
         $parent = $this->contentFactory->create();
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$commentableContentTypes));
         $otherContent = $this->contentFactory->create();
         for ($i = 0; $i < 3; $i++) {
             $expectedFields = $this->fieldFactory->create($content['id']);
@@ -84,7 +105,12 @@ class ContentServiceTest extends RailcontentTestCase
                 $permission['id']
             );
             $children = $this->contentHierarchyFactory->create($content['id']);
+            $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+            $reply = $this->commentFactory->create($this->faker->text, null, $comment['id'], rand());
         }
+
+        //save content in user playlist
+        $playlist = $this->userContentProgressFactory->startContent($content['id'], rand());
 
         $parentLink = $this->contentHierarchyFactory->create($parent['id'], $content['id'], 1);
 
@@ -151,5 +177,93 @@ class ContentServiceTest extends RailcontentTestCase
                 'content_id' => $content['id']
             ]
         );
+
+        //check that the content comments and replies are deleted
+        $this->assertDatabaseMissing(
+            ConfigService::$tableComments,
+            [
+                'content_id' => $content['id']
+            ]
+        );
+
+        //check that the comments/replies assignments are deleted
+        $this->assertDatabaseMissing(
+            ConfigService::$tableCommentsAssignment,
+            []
+        );
+
+        //check that the content it's deleted from the playlists
+        $this->assertDatabaseMissing(
+            ConfigService::$tableUserContentProgress,
+            [
+                'content_id' => $content['id']
+            ]
+        );
+    }
+
+    public function test_soft_delete_content()
+    {
+        $parent = $this->contentFactory->create();
+        $content = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$commentableContentTypes));
+        $otherContent = $this->contentFactory->create();
+        for ($i = 0; $i < 3; $i++) {
+            $expectedFields = $this->fieldFactory->create($content['id']);
+            $expectedData[] = $this->datumFactory->create($content['id']);
+            $permission = $this->permissionFactory->create();
+            $contentPermission = $this->contentPermissionFactory->create(
+                $content['id'],
+                null,
+                $permission['id']
+            );
+            $children = $this->contentHierarchyFactory->create($content['id']);
+            $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+            $reply = $this->commentFactory->create($this->faker->text, null, $comment['id'], rand());
+        }
+
+        //save content in user playlist
+        $playlist = $this->userContentProgressFactory->startContent($content['id'], rand());
+
+        $parentLink = $this->contentHierarchyFactory->create($parent['id'], $content['id'], 1);
+
+        $otherChildLink = $this->contentHierarchyFactory->create($parent['id'], $otherContent['id'], 2);
+
+        $results = $this->classBeingTested->softDelete($content['id']);
+
+        //check that the results it's true
+        $this->assertTrue($results);
+
+        //check that the content it's marked as deleted
+        $this->assertDatabaseHas(
+            ConfigService::$tableContent,
+            [
+                'id' => $content['id'],
+                'status' => ContentService::STATUS_DELETED
+            ]
+        );
+
+        //check that the content fields are not deleted
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentFields,
+            [
+                'content_id' => $content['id']
+            ]
+        );
+
+        //check that the content datum are not deleted
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentData,
+            [
+                'content_id' => $content['id']
+            ]
+        );
+
+        //check that the link with the parent was not deleted
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentHierarchy,
+            [
+                'child_id' => $content['id']
+            ]
+        );
+
     }
 }

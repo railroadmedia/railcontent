@@ -2,10 +2,12 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 
 class UserContentProgressRepository extends RepositoryBase
 {
+    use ByContentIdTrait;
     /**
      * @param $userId
      * @param array $contentIds
