@@ -36,7 +36,8 @@ class CommentCreateRequest extends FormRequest
                             $query->whereIn('status', ContentRepository::$availableContentStatues);
                         }
                     })
-                ]
+                ],
+            'display_name' => 'required|max:255'
         ];
     }
 }

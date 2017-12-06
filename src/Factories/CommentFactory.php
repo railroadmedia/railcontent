@@ -29,7 +29,7 @@ class CommentFactory extends CommentService
                 rand(),
                 null,
                 rand(),
-                ''
+                $this->faker->word
             ];
 
         return parent::create(...$parameters);

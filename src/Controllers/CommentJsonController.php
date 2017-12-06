@@ -70,7 +70,8 @@ class CommentJsonController extends Controller
             $request->get('comment'),
             $request->get('content_id'),
             null,
-            $request->user()->id ?? null
+            $request->user()->id ?? null,
+            $request->get('display_name') ?? ''
         );
 
         throw_if(is_null($comment), new NotAllowedException('The content type does not allow comments.'));
@@ -96,7 +97,8 @@ class CommentJsonController extends Controller
                     'comment' => '',
                     'content_id' => '',
                     'parent_id' => '',
-                    'user_id' => ''
+                    'user_id' => '',
+                    'display_name' => ''
                 ]
             )
         );

@@ -36,7 +36,8 @@ class CommentUpdateRequest extends FormRequest
                         }
                     })
                 ],
-            'parent_id' => 'numeric|exists:' . ConfigService::$tableComments . ',id'
+            'parent_id' => 'numeric|exists:' . ConfigService::$tableComments . ',id',
+            'display_name' => 'filled'
         ];
     }
 }

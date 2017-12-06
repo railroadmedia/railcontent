@@ -116,7 +116,7 @@ class CommentService
             return $comment;
         }
 
-        if (!array_key_exists('user_id', $data)) {
+        if (!(request()->user()->id)) {
             return 0;
         }
         //check if user can update the comment

@@ -12,8 +12,14 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentJsonControllerTest extends RailcontentTestCase
 {
+    /**
+     * @var ContentFactory
+     */
     protected $contentFactory;
 
+    /**
+     * @var CommentFactory
+     */
     protected $commentFactory;
 
     protected function setUp()
@@ -34,7 +40,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call('PUT', 'railcontent/comment', [
             'comment' => $this->faker->text(),
-            'content_id' => $content['id']
+            'content_id' => $content['id'],
+            'display_name' => $this->faker->word()
         ]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -47,7 +54,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call('PUT', 'railcontent/comment', [
             'comment' => $this->faker->text(),
-            'content_id' => $content['id']
+            'content_id' => $content['id'],
+            'display_name' => $this->faker->word()
         ]);
 
         $this->assertEquals(403, $response->getStatusCode());
@@ -63,8 +71,11 @@ class CommentJsonControllerTest extends RailcontentTestCase
         ]);
 
         $this->assertEquals(422, $response->getStatusCode());
-        $response->assertJsonFragment(['The comment field is required.']);
-        $response->assertJsonFragment(['The selected content id is invalid.']);
+        $response->assertJsonFragment(
+            ['The comment field is required.'],
+            ['The selected content id is invalid.'],
+            ['The display name field is required.']
+        );
     }
 
     public function test_update_my_comment_response()
@@ -91,7 +102,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'user_id' => $userId,
             'created_on' => Carbon::now()->toDateTimeString(),
             'deleted_at' => null,
-            'display_name' => '',
+            'display_name' => $comment['display_name'],
             'replies' => []
         ]);
 
@@ -128,13 +139,15 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call('PATCH', 'railcontent/comment/' . $comment['id'], [
             'content_id' => rand(),
-            'parent_id' => rand()
+            'parent_id' => rand(),
+            'display_name' => ''
         ]);
 
         $this->assertEquals(422, $response->getStatusCode());
 
         $response->assertJsonFragment(['The selected content id is invalid.']);
         $response->assertJsonFragment(['The selected parent id is invalid.']);
+        $response->assertJsonFragment(['The display name field must have a value.']);
     }
 
     public function test_update_inexistent_comment_response()
@@ -144,7 +157,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(404, $response->getStatusCode());
 
-        $response->assertJsonFragment(['Update failed, comment not found with id: '.$randomId]);
+        $response->assertJsonFragment(['Update failed, comment not found with id: ' . $randomId]);
     }
 
     public function test_admin_can_update_other_comment_response()
@@ -210,7 +223,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(404, $response->getStatusCode());
 
-        $response->assertJsonFragment(['Delete failed, comment not found with id: '.$randomId]);
+        $response->assertJsonFragment(['Delete failed, comment not found with id: ' . $randomId]);
     }
 
     public function test_admin_can_delete_other_comment_response()
