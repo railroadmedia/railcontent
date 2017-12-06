@@ -44,6 +44,7 @@ class ContentPermissionsMiddleware
                     ContentService::STATUS_DRAFT,
                     ContentService::STATUS_SCHEDULED,
                     ContentService::STATUS_ARCHIVED,
+                    ContentService::STATUS_DELETED,
                 ]
             );
 

@@ -184,8 +184,6 @@ class ContentJsonController extends Controller
      */
     public function delete($contentId)
     {
-        ContentRepository::$availableContentStatues = array_merge(ContentRepository::$availableContentStatues, [ContentService::STATUS_DELETED]);
-
         //delete content
         $delete = $this->contentService->delete($contentId);
 

@@ -705,6 +705,9 @@ class ContentRepository extends RepositoryBase
      */
     public function update($id, array $newData)
     {
+        if(count($newData) == 0) {
+            return true;
+        };
         $amountOfUpdatedRows = $this->query()
             ->where('id', $id)
             ->update($newData);
@@ -721,15 +724,6 @@ class ContentRepository extends RepositoryBase
      */
     public function delete($id)
     {
-        // todo: fix
-//        $this->contentHierarchyRepository->deleteChildParentLinks($id);
-//        $this->contentHierarchyRepository->deleteParentChildLinks($id);
-//
-//        $this->unlinkContentFields($id);
-//        $this->unlinkContentData($id);
-//        $this->unlinkContentPermission($id);
-//        $this->unlinkContentPlaylist($id);
-
         $amountOfDeletedRows = $this->query()
             ->where('id', $id)
             ->delete();
