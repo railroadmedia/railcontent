@@ -229,7 +229,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     'parent_id' => null,
                     'fields' => [],
                     'data' => [],
-                    'permissions' => []
+                    'permissions' => [],
+                    'child_id' => null
                 ]
         ]);
 
@@ -515,7 +516,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         //create courses
         $nrCourses = 30;
 
-        for ($i = 0; $i < $nrCourses; $i++) {
+        for ($i = 1; $i < $nrCourses; $i++) {
             $content = [
                 'slug' => $this->faker->word,
                 'status' => $this->faker->randomElement($statues),
@@ -530,6 +531,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $contents[$contentId] = array_merge([
                 'id' => $contentId,
                 'parent_id' => null,
+                'child_id' => null,
                 'fields' => [],
                 'data' => [],
                 'permissions' => []
