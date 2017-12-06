@@ -180,11 +180,12 @@ class ContentJsonController extends Controller
      * Call the delete method if the content exist
      *
      * @param integer $contentId
-     * @param Request $request
      * @return JsonResponse
      */
-    public function delete($contentId, Request $request)
+    public function delete($contentId)
     {
+        ContentRepository::$availableContentStatues = array_merge(ContentRepository::$availableContentStatues, [ContentService::STATUS_DELETED]);
+
         //delete content
         $delete = $this->contentService->delete($contentId);
 
@@ -215,5 +216,29 @@ class ContentJsonController extends Controller
                 'Access-Control-Allow-Headers' => 'X-Requested-With, content-type'
             ]
         );
+    }
+
+    /**
+     * Call the soft delete method if the content exist
+     *
+     * @param integer $contentId
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function softDelete($contentId)
+    {
+        //delete content
+        $delete = $this->contentService->softDelete($contentId);
+
+        //if the delete method response it's null the content not exist; we throw the proper exception
+        throw_if(
+            is_null($delete),
+            new NotFoundException('Delete failed, content not found with id: ' . $contentId)
+        );
+
+        //if the delete method response it's false the mysql delete method was failed; we throw the proper exception
+        throw_if(!($delete), DeleteFailedException::class);
+
+        return new JsonResponse(null, 204);
     }
 }
