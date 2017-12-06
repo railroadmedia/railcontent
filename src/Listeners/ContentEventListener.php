@@ -29,11 +29,11 @@ class ContentEventListener
 
     public function handleSoftDelete(Event $event)
     {
-        //TODO: reposition other siblings
+        //reposition other siblings
         $this->contentHierarchyService->repositionSiblings($event->contentId);
 
-        //TODO: soft delete content childrens
-        $results = $this->contentService->softDeleteContentChildrens($event->contentId);
+        //soft delete content children
+        $results = $this->contentService->softDeleteContentChildren($event->contentId);
 
         return $results;
     }

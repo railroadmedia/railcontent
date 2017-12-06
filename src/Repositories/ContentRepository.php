@@ -7,6 +7,7 @@ use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 
 class ContentRepository extends RepositoryBase
 {
@@ -1076,5 +1077,10 @@ class ContentRepository extends RepositoryBase
         }
 
         return $availableFields;
+    }
+
+    public function softDelete(array $contentIds)
+    {
+        return $this->query()->whereIn('id', $contentIds)->update(['status' => ContentService::STATUS_DELETED]);
     }
 }

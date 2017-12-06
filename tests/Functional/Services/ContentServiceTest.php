@@ -205,7 +205,7 @@ class ContentServiceTest extends RailcontentTestCase
     {
         $parent = $this->contentFactory->create();
         $content = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$commentableContentTypes));
-        $otherContent = $this->contentFactory->create();
+        $otherSiblingContent = $this->contentFactory->create();
         for ($i = 0; $i < 3; $i++) {
             $expectedFields = $this->fieldFactory->create($content['id']);
             $expectedData[] = $this->datumFactory->create($content['id']);
@@ -215,22 +215,24 @@ class ContentServiceTest extends RailcontentTestCase
                 null,
                 $permission['id']
             );
-            $children = $this->contentHierarchyFactory->create($content['id']);
             $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
             $reply = $this->commentFactory->create($this->faker->text, null, $comment['id'], rand());
         }
+
+        $children = $this->contentFactory->create();
+        $childrenHierarchy = $this->contentHierarchyFactory->create($content['id'], $children['id']);
 
         //save content in user playlist
         $playlist = $this->userContentProgressFactory->startContent($content['id'], rand());
 
         $parentLink = $this->contentHierarchyFactory->create($parent['id'], $content['id'], 1);
 
-        $otherChildLink = $this->contentHierarchyFactory->create($parent['id'], $otherContent['id'], 2);
+        $otherChildLink = $this->contentHierarchyFactory->create($parent['id'], $otherSiblingContent['id'], 2);
 
         $results = $this->classBeingTested->softDelete($content['id']);
 
         //check that the results it's true
-        $this->assertTrue($results);
+        $this->assertEquals(1, $results);
 
         //check that the content it's marked as deleted
         $this->assertDatabaseHas(
@@ -262,6 +264,24 @@ class ContentServiceTest extends RailcontentTestCase
             ConfigService::$tableContentHierarchy,
             [
                 'child_id' => $content['id']
+            ]
+        );
+
+        //check that the link with the parent was not deleted
+        $this->assertDatabaseHas(
+            ConfigService::$tableContent,
+            [
+                'id' => $children['id'],
+                'status' => ContentService::STATUS_DELETED
+            ]
+        );
+
+        //check that the siblings was repositioned
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentHierarchy,
+            [
+                'child_id' => $otherSiblingContent['id'],
+                'child_position' => $otherChildLink['child_position'] - 1
             ]
         );
 

@@ -596,12 +596,13 @@ class ContentService
 
         event(new ContentSoftDeleted($id));
 
-        return $this->contentRepository->update($id, ['status' => self::STATUS_DELETED]);
+        return $this->contentRepository->softDelete([$id]);
     }
 
-    public function softDeleteContentChildrens($id)
+    public function softDeleteContentChildren($id)
     {
+        $children = $this->contentHierarchyRepository->getByParentIds([$id]);
 
-        //TODO: change the content childrens status to deleted
+        return $this->contentRepository->softDelete(array_pluck($children, 'child_id'));
     }
 }

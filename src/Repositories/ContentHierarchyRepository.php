@@ -209,4 +209,9 @@ class ContentHierarchyRepository extends RepositoryBase
             ->first();
     }
 
+    public function decrementSiblings($parentId, $position)
+    {
+        return $this->query()->where('parent_id', $parentId)->where('child_position','>',$position)->decrement('child_position');
+    }
+
 }

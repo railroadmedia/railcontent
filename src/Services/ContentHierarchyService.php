@@ -91,8 +91,11 @@ class ContentHierarchyService
 
     public function repositionSiblings($childId)
     {
-        $parentId = $this->contentHierarchyRepository->getParentByChildId($childId);
-
+        $parentHierarchy = $this->contentHierarchyRepository->getParentByChildId($childId);
+        if(!$parentHierarchy){
+            return true;
+        }
+        return $this->contentHierarchyRepository->decrementSiblings($parentHierarchy['parent_id'], $parentHierarchy['child_position']);
 
     }
 }

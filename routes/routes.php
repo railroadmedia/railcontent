@@ -152,6 +152,11 @@ Route::group(
             \Railroad\Railcontent\Controllers\ContentJsonController::class . '@delete'
         )->name('content.delete');
 
+        Route::delete(
+            '/soft/content/{id}',
+            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@softDelete'
+        )->name('content.softdelete');
+
         // remote storage
         Route::put(
             '/remote',
