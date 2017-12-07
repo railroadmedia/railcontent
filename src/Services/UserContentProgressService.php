@@ -302,7 +302,7 @@ class UserContentProgressService
         return $this->userContentRepository->getForUser($id);
     }
 
-    public function getLessonsForUserByTypeAndProgressState($id, $type, $state){
+    public function getLessonsForUserByType($id, $type, $state = null){
         return $this->userContentRepository->getLessonsForUserByType($id, $type, $state);
     }
 

@@ -155,8 +155,11 @@ class UserContentProgressRepository extends RepositoryBase
                         ->where(ConfigService::$tableContent. '.type', '=', $type);
                 }
             )
-            ->where(ConfigService::$tableUserContentProgress . '.user_id', '=', $id)
-            ->where(ConfigService::$tableUserContentProgress . '.state', '=',  $state);
+            ->where(ConfigService::$tableUserContentProgress . '.user_id', '=', $id);
+
+        if(!is_null($state)){
+            $query = $query->where(ConfigService::$tableUserContentProgress . '.state', '=',  $state);
+        }
 
         if($count){
             return $query->get()->first()['count'];
