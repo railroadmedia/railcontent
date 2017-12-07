@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -123,5 +124,47 @@ class UserContentProgressRepository extends RepositoryBase
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $id)
             ->get()
             ->toArray();
+    }
+
+    /**
+     * @param $id
+     * @param $type
+     * @param null $state
+     * @param bool $count
+     * @return mixed
+     */
+    public function getLessonsForUserByType($id, $type, $state = null, $count = false)
+    {
+        $progressTable = ConfigService::$tableUserContentProgress;
+
+        $query = $this->query();
+
+        if($count){
+            $query = $query->select(
+                $this->databaseManager->raw('COUNT(' . $progressTable . '.id) as count')
+            );
+        }else{
+            $query = $query->select();
+        }
+
+        $query = $query
+            ->join(
+                ConfigService::$tableContent,
+                function(JoinClause $join) use ($type, $progressTable){
+                    $join
+                        ->on(ConfigService::$tableContent . '.id',
+                            '=',
+                            $progressTable . '.content_id'
+                        )
+                        ->where(ConfigService::$tableContent. '.type', '=', $type);
+                }
+            )
+            ->where($progressTable . '.user_id', '=', $id)
+            ->where($progressTable . '.state', '=',  $state);
+
+        if($count){
+            return $query->get()->first()['count'];
+        }
+        return $query->get()->toArray();
     }
 }
