@@ -135,36 +135,33 @@ class UserContentProgressRepository extends RepositoryBase
      */
     public function getLessonsForUserByType($id, $type, $state = null, $count = false)
     {
-        $progressTable = ConfigService::$tableUserContentProgress;
-
-        $query = $this->query();
+        $select = '*';
 
         if($count){
-            $query = $query->select(
-                $this->databaseManager->raw('COUNT(' . $progressTable . '.id) as count')
+            $select = $this->databaseManager->raw(
+                'COUNT(' . ConfigService::$tableUserContentProgress . '.id) as count'
             );
-        }else{
-            $query = $query->select();
         }
 
-        $query = $query
-            ->join(
+        $query = $this->query()
+            ->select($select)->join(
                 ConfigService::$tableContent,
-                function(JoinClause $join) use ($type, $progressTable){
+                function(JoinClause $join) use ($type){
                     $join
                         ->on(ConfigService::$tableContent . '.id',
                             '=',
-                            $progressTable . '.content_id'
+                            ConfigService::$tableUserContentProgress . '.content_id'
                         )
                         ->where(ConfigService::$tableContent. '.type', '=', $type);
                 }
             )
-            ->where($progressTable . '.user_id', '=', $id)
-            ->where($progressTable . '.state', '=',  $state);
+            ->where(ConfigService::$tableUserContentProgress . '.user_id', '=', $id)
+            ->where(ConfigService::$tableUserContentProgress . '.state', '=',  $state);
 
         if($count){
             return $query->get()->first()['count'];
         }
+
         return $query->get()->toArray();
     }
 }
