@@ -111,4 +111,17 @@ class UserContentProgressRepository extends RepositoryBase
             ->get()
             ->toArray();
     }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function getForUser($id)
+    {
+        return $this->query()
+            ->select()
+            ->where(ConfigService::$tableUserContentProgress . '.user_id', $id)
+            ->get()
+            ->toArray();
+    }
 }

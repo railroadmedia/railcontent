@@ -292,4 +292,13 @@ class UserContentProgressService
 
         return true;
     }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function getForUser($id)
+    {
+        return $this->userContentRepository->getForUser($id);
+    }
 }
