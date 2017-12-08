@@ -705,7 +705,7 @@ class ContentRepository extends RepositoryBase
      */
     public function update($id, array $newData)
     {
-        if(count($newData) == 0) {
+        if (count($newData) == 0) {
             return true;
         };
         $amountOfUpdatedRows = $this->query()
@@ -845,8 +845,18 @@ class ContentRepository extends RepositoryBase
             );
 
         $query = $this->query()
-            ->orderBy($this->orderBy, $this->orderDirection)
-            ->orderBy('created_on', $this->orderDirection)
+            ->orderByRaw(
+                $this->databaseManager->raw(
+                    'COALESCE(' .
+                    ConfigService::$tableContent .
+                    '.' .
+                    $this->orderBy .
+                    ', ' .
+                    ConfigService::$tableContent .
+                    '.created_on) ' .
+                    $this->orderDirection
+                )
+            )
             ->addSubJoinToQuery($subQuery);
 
         $contentRows = $query->getToArray();
@@ -1085,6 +1095,8 @@ class ContentRepository extends RepositoryBase
 
     public function softDelete(array $contentIds)
     {
-        return $this->query()->whereIn('id', $contentIds)->update(['status' => ContentService::STATUS_DELETED]);
+        return $this->query()->whereIn('id', $contentIds)->update(
+            ['status' => ContentService::STATUS_DELETED]
+        );
     }
 }
