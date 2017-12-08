@@ -1016,7 +1016,12 @@ class ContentRepository extends RepositoryBase
         }
 
         if (!empty($contentIdsToPull)) {
+            $restoreStatuses = self::$availableContentStatues;
+            self::$availableContentStatues = false;
+
             $linkedContents = $this->getByIds($contentIdsToPull);
+
+            self::$availableContentStatues = $restoreStatuses;
 
             foreach ($parsedContents as $contentId => $parsedContent) {
                 if (!empty($parsedContent['fields'])) {
