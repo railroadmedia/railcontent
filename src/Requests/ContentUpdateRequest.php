@@ -25,7 +25,9 @@ class ContentUpdateRequest extends CustomFormRequest
                         [
                             ContentService::STATUS_DRAFT,
                             ContentService::STATUS_PUBLISHED,
-                            ContentService::STATUS_ARCHIVED
+                            ContentService::STATUS_ARCHIVED,
+                            ContentService::STATUS_SCHEDULED,
+                            ContentService::STATUS_DELETED,
                         ]
                     ),
                 'type' => 'max:64',
