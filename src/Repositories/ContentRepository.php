@@ -828,6 +828,7 @@ class ContentRepository extends RepositoryBase
         $subQuery = $this->query()
             ->selectCountColumns()
             ->orderBy($this->orderBy, $this->orderDirection)
+            ->orderBy('created_on', $this->orderDirection)
             ->restrictByUserAccess()
             ->directPaginate($this->page, $this->limit)
             ->restrictByFields($this->requiredFields)
@@ -839,11 +840,13 @@ class ContentRepository extends RepositoryBase
             ->restrictByParentIds($this->requiredParentIds)
             ->groupBy(
                 ConfigService::$tableContent . '.id',
-                ConfigService::$tableContent . '.' . $this->orderBy
+                ConfigService::$tableContent . '.' . $this->orderBy,
+                ConfigService::$tableContent . '.' . 'created_on'
             );
 
         $query = $this->query()
             ->orderBy($this->orderBy, $this->orderDirection)
+            ->orderBy('created_on', $this->orderDirection)
             ->addSubJoinToQuery($subQuery);
 
         $contentRows = $query->getToArray();

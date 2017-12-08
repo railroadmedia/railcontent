@@ -180,7 +180,7 @@ class ContentFieldService
             return $field;
         }
 
-        $deleted = $this->fieldRepository->deleteAndReposition($field);
+        $deleted = $this->fieldRepository->deleteAndReposition(['id' => $id]);
 
         //Save a new content version
         event(new ContentFieldDeleted($field['content_id']));

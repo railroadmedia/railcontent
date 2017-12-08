@@ -237,20 +237,28 @@ abstract class RepositoryBase
         return $this->query()->where(['id' => $id])->delete() > 0;
     }
 
+    /**
+     * @param $entity
+     * @param string $positionColumnPrefix
+     * @return bool
+     */
     public function deleteAndReposition($entity, $positionColumnPrefix = '')
     {
         $existingLink = $this->query()
             ->where($entity)
             ->first();
 
-        unset($entity['position']);
-        unset($entity['id']);
-        unset($entity['value']);
-        unset($entity['type']);
-        unset($entity['child_id']);
+        if (empty($existingLink)) {
+            return true;
+        }
 
         $this->query()
-            ->where($entity)
+            ->where(
+                [
+                    'content_id' => $existingLink['content_id'],
+                    'key' => $existingLink['key'],
+                ]
+            )
             ->where(
                 $positionColumnPrefix . 'position',
                 '>',
@@ -261,6 +269,7 @@ abstract class RepositoryBase
         $deleted = $this->query()
             ->where(['id' => $existingLink['id']])
             ->delete();
+
         return $deleted > 0;
     }
 
