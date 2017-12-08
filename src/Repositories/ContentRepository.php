@@ -827,8 +827,18 @@ class ContentRepository extends RepositoryBase
     {
         $subQuery = $this->query()
             ->selectCountColumns()
-            ->orderBy($this->orderBy, $this->orderDirection)
-            ->orderBy('created_on', $this->orderDirection)
+            ->orderByRaw(
+                $this->databaseManager->raw(
+                    'COALESCE(' .
+                    ConfigService::$tableContent .
+                    '.' .
+                    $this->orderBy .
+                    ', ' .
+                    ConfigService::$tableContent .
+                    '.created_on) ' .
+                    $this->orderDirection
+                )
+            )
             ->restrictByUserAccess()
             ->directPaginate($this->page, $this->limit)
             ->restrictByFields($this->requiredFields)
