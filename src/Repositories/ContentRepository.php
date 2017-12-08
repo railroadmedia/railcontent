@@ -1016,6 +1016,8 @@ class ContentRepository extends RepositoryBase
         }
 
         if (!empty($contentIdsToPull)) {
+
+            // we want always to pull content id fields regardless of content status
             $restoreStatuses = self::$availableContentStatues;
             self::$availableContentStatues = false;
 
