@@ -149,19 +149,29 @@ abstract class RepositoryBase
         return $id;
     }
 
+    /**
+     * @param null $dataId
+     * @param $data
+     * @return bool|int
+     */
     public function createOrUpdateAndReposition($dataId = null, $data)
     {
         $existingData = $this->query()
             ->where('id', $dataId)
-            ->get()->first();
+            ->get()
+            ->first();
+
+        $contentId = $existingData['content_id'] ?? $data['content_id'];
+        $key = $existingData['key'] ?? $data['key'];
 
         $dataCount = $this->query()
             ->where(
                 [
-                    'content_id' => $data['content_id'] ?? $existingData['content_id'],
-                    'key' => $data['key'] ?? $existingData['key']
+                    'content_id' => $contentId,
+                    'key' => $key
                 ]
-            )->count();
+            )
+            ->count();
 
         $data['position'] = $this->recalculatePosition(
             $data['position'] ?? $existingData['position'],
@@ -172,8 +182,8 @@ abstract class RepositoryBase
         if (empty($existingData)) {
             $this->incrementOtherEntitiesPosition(
                 null,
-                $data['content_id'],
-                $data['key'],
+                $contentId,
+                $key,
                 $data['position'],
                 null
             );
@@ -188,8 +198,8 @@ abstract class RepositoryBase
 
             return $this->decrementOtherEntitiesPosition(
                 $dataId,
-                $data['content_id'],
-                $data['key'],
+                $contentId,
+                $key,
                 $existingData['position'],
                 $data['position']
             );
@@ -198,10 +208,11 @@ abstract class RepositoryBase
             $updated = $this->query()
                 ->where('id', $dataId)
                 ->update($data);
+
             $this->incrementOtherEntitiesPosition(
                 $dataId,
-                $data['content_id'],
-                $data['key'],
+                $contentId,
+                $key,
                 $data['position'],
                 $existingData['position']
             );
@@ -267,7 +278,7 @@ abstract class RepositoryBase
     }
 
     /**
-     * @param $data
+     * @param $position
      * @param $dataCount
      * @param $existingData
      * @return mixed
@@ -285,6 +296,7 @@ abstract class RepositoryBase
         if ($position < 1) {
             $position = 1;
         }
+
         return $position;
     }
 

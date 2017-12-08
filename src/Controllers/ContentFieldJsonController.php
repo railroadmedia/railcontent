@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentFieldCreateRequest;
 use Railroad\Railcontent\Requests\ContentFieldUpdateRequest;
@@ -69,20 +68,22 @@ class ContentFieldJsonController extends Controller
     {
         $contentField = $this->fieldService->update(
             $fieldId,
-            array_intersect_key(
-                $request->all(),
+            $request->only(
                 [
-                    'content_id' => '',
-                    'key' => '',
-                    'value' => '',
-                    'position' => '',
-                    'type' => '',
+                    'content_id',
+                    'key',
+                    'value',
+                    'position',
+                    'type',
                 ]
             )
         );
 
         //if the update method response it's null the field not exist; we throw the proper exception
-        throw_if(is_null($contentField), new NotFoundException('Update failed, field not found with id: ' . $fieldId));
+        throw_if(
+            is_null($contentField),
+            new NotFoundException('Update failed, field not found with id: ' . $fieldId)
+        );
 
         return new JsonResponse($contentField, 201);
     }
@@ -99,7 +100,10 @@ class ContentFieldJsonController extends Controller
         $deleted = $this->fieldService->delete($fieldId);
 
         //if the update method response it's null the field not exist; we throw the proper exception
-        throw_if(is_null($deleted), new NotFoundException('Delete failed, field not found with id: ' . $fieldId));
+        throw_if(
+            is_null($deleted),
+            new NotFoundException('Delete failed, field not found with id: ' . $fieldId)
+        );
 
         return new JsonResponse(null, 204);
     }

@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentDatumCreateRequest;
@@ -53,19 +52,21 @@ class ContentDatumJsonController extends Controller
     {
         $contentData = $this->datumService->update(
             $dataId,
-            array_intersect_key(
-                $request->all(),
+            $request->only(
                 [
-                    'content_id' => '',
-                    'key' => '',
-                    'value' => '',
-                    'position' => '',
+                    'content_id',
+                    'key',
+                    'value',
+                    'position',
                 ]
             )
         );
 
         //if the update method response it's null the datum not exist; we throw the proper exception
-        throw_if(is_null($contentData), new NotFoundException('Update failed, datum not found with id: ' . $dataId));
+        throw_if(
+            is_null($contentData),
+            new NotFoundException('Update failed, datum not found with id: ' . $dataId)
+        );
 
         return new JsonResponse($contentData, 201);
     }
@@ -81,7 +82,10 @@ class ContentDatumJsonController extends Controller
         $deleted = $this->datumService->delete($dataId);
 
         //if the update method response it's null the datum not exist; we throw the proper exception
-        throw_if(is_null($deleted), new NotFoundException('Delete failed, datum not found with id: ' . $dataId));
+        throw_if(
+            is_null($deleted),
+            new NotFoundException('Delete failed, datum not found with id: ' . $dataId)
+        );
 
         return new JsonResponse(null, 204);
     }
