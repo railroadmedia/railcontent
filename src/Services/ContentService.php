@@ -273,9 +273,9 @@ class ContentService
      * @param array $types
      * @return array
      */
-    public function getByChildIdWhereTypes($childId, array $types)
+    public function getByChildIdWhereParentTypeIn($childId, array $types)
     {
-        return $this->contentRepository->getByChildIdWhereTypes($childId, $types);
+        return $this->contentRepository->getByChildIdWhereParentTypeIn($childId, $types);
     }
 
     /**

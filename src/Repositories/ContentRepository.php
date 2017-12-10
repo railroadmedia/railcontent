@@ -317,7 +317,7 @@ class ContentRepository extends RepositoryBase
      * @param array $types
      * @return array
      */
-    public function getByChildIdWhereTypes($childId, array $types)
+    public function getByChildIdWhereParentTypeIn($childId, array $types)
     {
         $contentRows = $this->query()
             ->selectPrimaryColumns()

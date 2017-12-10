@@ -74,7 +74,10 @@ return [
         ],
     ],
 
-    'allowed_types_for_bubble_progress' => [],
+    'allowed_types_for_bubble_progress' => [
+        'started' => [],
+        'completed' => [],
+    ],
 
     'video_sync' => [
         'vimeo' => [

@@ -223,20 +223,27 @@ class UserContentProgressService
     public function bubbleProgress($userId, $contentId)
     {
         $content = $this->attachProgressToContents($userId, $this->contentRepository->getById($contentId));
+
+        $allowedTypesForStarted = config('railcontent.allowed_types_for_bubble_progress')['started'];
+        $allowedTypesForCompleted = config('railcontent.allowed_types_for_bubble_progress')['completed'];
+        $allowedTypes = array_unique(array_merge($allowedTypesForStarted, $allowedTypesForCompleted));
+
         $parents = $this->attachProgressToContents(
             $userId,
-            $this->contentService->getByChildIdWhereTypes(
+            $this->contentService->getByChildIdWhereParentTypeIn(
                 $content['id'],
-                config(
-                    'railcontent.allowed_types_for_bubble_progress'
-                )
+                $allowedTypes
             )
         );
 
         foreach ($parents as $parent) {
 
             // start parent if necessary
-            if ($content[self::STATE_STARTED] && !$parent[self::STATE_STARTED]) {
+            if (
+                $content[self::STATE_STARTED] &&
+                !$parent[self::STATE_STARTED] &&
+                in_array($parent['type'], $allowedTypesForStarted)
+            ) {
                 $this->startContent($parent['id'], $userId);
             }
 
@@ -254,40 +261,46 @@ class UserContentProgressService
                         $complete = false;
                     }
                 }
-                if ($complete && !$parent[self::STATE_COMPLETED]) {
+                if (
+                    $complete &&
+                    !$parent[self::STATE_COMPLETED] &&
+                    in_array($parent['type'], $allowedTypesForCompleted)
+                ) {
                     $this->completeContent($parent['id'], $userId);
                 }
             }
 
             // calculate and save parent progress percent from children
-            $progressOfSiblings = array_column($siblings, 'user_progress');
+            if(in_array($parent['type'], $allowedTypesForStarted)){
 
-            $progressOfSiblingsDeNested = [];
+                $progressOfSiblingsDeNested = [];
+                $percentages = [];
 
-            foreach ($progressOfSiblings as $progressOfSingleSibling) {
-                $progressOfSiblingsDeNested[] = reset($progressOfSingleSibling);
-            }
+                $progressOfSiblings = array_column($siblings, 'user_progress');
 
-            $percentages = [];
-
-            foreach ($progressOfSiblingsDeNested as $progressOfSingleDeNestedSibling) {
-                if (!empty($progressOfSingleDeNestedSibling)) {
-                    $percentages[] = $progressOfSingleDeNestedSibling['progress_percent'];
-                } else {
-                    $percentages[] = 0;
+                foreach ($progressOfSiblings as $progressOfSingleSibling) {
+                    $progressOfSiblingsDeNested[] = reset($progressOfSingleSibling);
                 }
+
+                foreach ($progressOfSiblingsDeNested as $progressOfSingleDeNestedSibling) {
+                    if (!empty($progressOfSingleDeNestedSibling)) {
+                        $percentages[] = $progressOfSingleDeNestedSibling['progress_percent'];
+                    } else {
+                        $percentages[] = 0;
+                    }
+                }
+
+                $arraySum = array_sum($percentages);
+                $siblingCount = count($siblings);
+
+                $progress = $arraySum / $siblingCount;
+
+                $this->saveContentProgress(
+                    $parent['id'],
+                    $progress,
+                    $userId
+                );
             }
-
-            $arraySum = array_sum($percentages);
-            $siblingCount = count($siblings);
-
-            $progress = $arraySum / $siblingCount;
-
-            $this->saveContentProgress(
-                $parent['id'],
-                $progress,
-                $userId
-            );
         }
 
         return true;
