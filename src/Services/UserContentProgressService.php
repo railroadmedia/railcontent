@@ -271,7 +271,14 @@ class UserContentProgressService
             }
 
             // calculate and save parent progress percent from children
-            if(in_array($parent['type'], $allowedTypesForStarted)){
+
+            /*
+             * Content of types that are *not* allowed
+             */
+            $alreadyStarted = $parent[self::STATE_STARTED];
+            $typeAllows = in_array($parent['type'], $allowedTypesForStarted);
+
+            if($alreadyStarted || $typeAllows){
 
                 $progressOfSiblingsDeNested = [];
                 $percentages = [];
