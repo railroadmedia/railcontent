@@ -79,10 +79,8 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
         $content = $this->contentFactory->create(
             $this->faker->words(rand(2, 6), true),
-            $this->faker->randomElement($this->allowedTypes) // todo: update per new config structure
+            $this->faker->randomElement($this->allowedTypes['started'])
         );
-
-        $this->markTestIncomplete('This test must be updated as per new config structure.');
 
         $state = UserContentProgressService::STATE_STARTED;
 
@@ -106,10 +104,8 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
         $content = $this->contentFactory->create(
             $this->faker->words(rand(2, 6), true),
-            $this->faker->randomElement($this->allowedTypes) // todo: update per new config structure
+            $this->faker->randomElement($this->allowedTypes['completed'])
         );
-
-        $this->markTestIncomplete('This test must be updated as per new config structure.');
 
         $userContent = [
             'content_id' => $content['id'],
@@ -141,10 +137,8 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
         $content = $this->contentFactory->create(
             $this->faker->words(rand(2, 6), true),
-            $this->faker->randomElement($this->allowedTypes) // todo: update per new config structure
+            $this->faker->randomElement($this->allowedTypes['started'])
         );
-
-        $this->markTestIncomplete('This test must be updated as per new config structure.');
 
         $state = UserContentProgressService::STATE_STARTED;
         $progress = $this->faker->numberBetween(1, 100);
@@ -227,8 +221,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         // Set up some basic variables ---------------------------------------------------------------------------------
 
         $userId = rand();
-        $type = $this->faker->randomElement($this->allowedTypes); // todo: update per new config structure
-        $this->markTestIncomplete('This test must be updated as per new config structure.');
+        $type = $this->faker->randomElement($this->allowedTypes['started']);
         $numberOfChildren = 5;
         $content = [];
 
@@ -284,8 +277,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         // Set up some basic variables ---------------------------------------------------------------------------------
 
         $userId = rand();
-        $type = $this->faker->randomElement($this->allowedTypes); // todo: update per new config structure
-        $this->markTestIncomplete('This test must be updated as per new config structure.');
+        $type = $this->faker->randomElement($this->allowedTypes['completed']);
         $numberOfChildren = 5;
         $content = [];
 
@@ -352,8 +344,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         // Set up some basic variables ---------------------------------------------------------------------------------
 
         $userId = rand();
-        $type = $this->faker->randomElement($this->allowedTypes); // todo: update per new config structure
-        $this->markTestIncomplete('This test must be updated as per new config structure.');
+        $type = $this->faker->randomElement($this->allowedTypes['started']);
         $numberOfChildren = 4;
         $content = [];
 
@@ -539,5 +530,4 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
         $this->assertFalse($parentWithProgressAttached[UserContentProgressService::STATE_STARTED]);
     }
-
 }
