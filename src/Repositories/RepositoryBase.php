@@ -252,14 +252,21 @@ abstract class RepositoryBase
             return true;
         }
 
-        $this->query()
-            ->where(
+        $query = $this->query();
+        if(array_key_exists('content_id', $existingLink)){
+            $query->where(
                 [
                     'content_id' => $existingLink['content_id'],
                     'key' => $existingLink['key'],
                 ]
-            )
-            ->where(
+            );
+        }
+
+        if(array_key_exists('parent_id', $existingLink)){
+            $query->where('parent_id', $existingLink['parent_id']);
+        }
+
+           $query->where(
                 $positionColumnPrefix . 'position',
                 '>',
                 $existingLink[$positionColumnPrefix . "position"]
