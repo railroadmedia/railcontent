@@ -28,6 +28,9 @@ class CommentAssignmentRepositoryTest extends RailcontentTestCase
      */
     protected $contentFactory;
 
+    /**
+     * @var CommentAssignationFactory
+     */
     protected $commentAssignationFactory;
 
     protected function setUp()
@@ -81,7 +84,9 @@ class CommentAssignmentRepositoryTest extends RailcontentTestCase
     public function test_delete_comment_assignation()
     {
         $content = $this->contentFactory->create($this->faker->word, 'course');
-        $comments = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+
+        $comments = $this->commentFactory->create($this->faker->text, $content['id'], null, rand(1,10));
+
         $assignedComments = $this->commentAssignationFactory->create($comments, $content['type']);
 
         $results = $this->classBeingTested->deleteCommentAssignation($comments['id'], 1);

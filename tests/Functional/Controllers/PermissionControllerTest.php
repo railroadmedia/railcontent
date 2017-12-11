@@ -8,6 +8,7 @@ use Railroad\Railcontent\Factories\PermissionsFactory;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentPermissionService;
+use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PermissionService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -207,7 +208,7 @@ class PermissionControllerTest extends RailcontentTestCase
     public function test_assign_permission_to_specific_content()
     {
         $permission = $this->permissionFactory->create();
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED );
 
         $response = $this->call('PUT', 'railcontent/permission/assign', [
             'permission_id' => $permission['id'],
@@ -230,7 +231,7 @@ class PermissionControllerTest extends RailcontentTestCase
     public function test_assign_permission_to_specific_content_type()
     {
         $permission = $this->permissionFactory->create();
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED );
 
         $response = $this->call('PUT', 'railcontent/permission/assign', [
             'permission_id' => $permission['id'],
@@ -272,12 +273,9 @@ class PermissionControllerTest extends RailcontentTestCase
     public function test_assign_permission_incorrect_content_id()
     {
         $permission = $this->permissionFactory->create();
-
-        $content = $this->contentFactory->create();
-
         $response = $this->call('PUT', 'railcontent/permission/assign', [
             'permission_id' => $permission['id'],
-            'content_id' => ($content['id'] + 1)
+            'content_id' => rand()
         ]);
 
         $decodedResponse = $response->decodeResponseJson();
@@ -297,8 +295,6 @@ class PermissionControllerTest extends RailcontentTestCase
     public function test_assign_permission_incorrect_content_type()
     {
         $permission = $this->permissionFactory->create();
-
-        $content = $this->contentFactory->create();
 
         $response = $this->call('PUT', 'railcontent/permission/assign', [
             'permission_id' => $permission['id'],
@@ -354,7 +350,8 @@ class PermissionControllerTest extends RailcontentTestCase
     public function test_dissociation_by_content_id()
     {
         $permission = $this->permissionFactory->create();
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED );
+
         $this->contentPermissionService->create($content['id'], null, $permission['id']);
         $data = [ 'content_id' => $content['id'], 'permission_id' => $permission['id'] ];
         $this->assertDatabaseHas(ConfigService::$tableContentPermissions, $data);
@@ -367,7 +364,7 @@ class PermissionControllerTest extends RailcontentTestCase
 
     public function test_dissociation_by_content_type(){
         $permission = $this->permissionFactory->create();
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED );
         $this->contentPermissionService->create(null, $content['type'], $permission['id']);
         $data = [ 'content_type' => $content['type'], 'permission_id' => $permission['id'] ];
         $this->assertDatabaseHas(ConfigService::$tableContentPermissions, $data);
