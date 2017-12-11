@@ -409,7 +409,8 @@ class ContentService
         $language,
         $brand,
         $userId,
-        $publishedOn
+        $publishedOn,
+        $parentId
     ) {
         $id =
             $this->contentRepository->create(
@@ -421,10 +422,18 @@ class ContentService
                     'brand' => $brand ?? ConfigService::$brand,
                     'user_id' => $userId,
                     'published_on' => $publishedOn,
-                    'created_on' => Carbon::now()->toDateTimeString(),
+                    'created_on' => Carbon::now()->toDateTimeString()
                 ]
             );
-
+        //save the link with parent if the parent id exist on the request
+        if($parentId){
+            $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
+                $parentId,
+                $id,
+                null
+            );
+            
+        }
         event(new ContentCreated($id));
 
         return $this->getById($id);

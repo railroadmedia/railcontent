@@ -33,7 +33,8 @@ class ContentFactory extends ContentService
         $brand = null,
         $userId = null,
         $publishedOn = null,
-        $createdOn = null
+        $createdOn = null,
+        $parentId = null
     ) {
         $this->faker = app(Generator::class);
 
@@ -51,7 +52,8 @@ class ContentFactory extends ContentService
                 'en-US',
                 ConfigService::$brand,
                 rand(),
-                $this->faker->dateTimeThisCentury()
+                $this->faker->dateTimeThisCentury(),
+                null
             ];
 
         return parent::create(...$parameters);

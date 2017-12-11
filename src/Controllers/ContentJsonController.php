@@ -135,7 +135,8 @@ class ContentJsonController extends Controller
             $request->get('language'),
             $request->get('brand'),
             $request->get('user_id'),
-            $request->get('published_on')
+            $request->get('published_on'),
+            $request->get('parent_id')
         );
 
         return new JsonResponse([$content], 201);
