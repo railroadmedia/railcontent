@@ -91,6 +91,25 @@ class UserContentProgressService
      */
     public function startContent($contentId, $userId, $forceEvenIfComplete = false)
     {
+        $progressPercent = 0;
+
+        $children = $this->contentService->getByParentId($contentId);
+
+        if(!empty($children)){
+
+            /*
+             * Check for children with progress_percent values that should be used in calculating the progress_percent
+             * to set here on the parent. For (edge) cases where parent is of type not allowed for progress-bubbling on
+             * child start. Otherwise despite child progress, parent would be marked started here but with inaccurate
+             * progress value of 0.
+             *
+             * Jonathan, Dec 2017
+             */
+
+            $progressPercent = $this->getProgressPercentage($userId, $children);
+        }
+
+
         $isCompleted = $this->userContentRepository->isContentAlreadyCompleteForUser($contentId, $userId);
 
         if (!$isCompleted || $forceEvenIfComplete) {
@@ -101,7 +120,7 @@ class UserContentProgressService
                 ],
                 [
                     'state' => self::STATE_STARTED,
-                    'progress_percent' => 0,
+                    'progress_percent' => $progressPercent,
                     'updated_on' => Carbon::now()->toDateTimeString(),
                 ]
             );
@@ -272,45 +291,52 @@ class UserContentProgressService
 
             // calculate and save parent progress percent from children
 
-            /*
-             * Content of types that are *not* allowed
-             */
             $alreadyStarted = $parent[self::STATE_STARTED];
             $typeAllows = in_array($parent['type'], $allowedTypesForStarted);
 
             if($alreadyStarted || $typeAllows){
-
-                $progressOfSiblingsDeNested = [];
-                $percentages = [];
-
-                $progressOfSiblings = array_column($siblings, 'user_progress');
-
-                foreach ($progressOfSiblings as $progressOfSingleSibling) {
-                    $progressOfSiblingsDeNested[] = reset($progressOfSingleSibling);
-                }
-
-                foreach ($progressOfSiblingsDeNested as $progressOfSingleDeNestedSibling) {
-                    if (!empty($progressOfSingleDeNestedSibling)) {
-                        $percentages[] = $progressOfSingleDeNestedSibling['progress_percent'];
-                    } else {
-                        $percentages[] = 0;
-                    }
-                }
-
-                $arraySum = array_sum($percentages);
-                $siblingCount = count($siblings);
-
-                $progress = $arraySum / $siblingCount;
-
                 $this->saveContentProgress(
                     $parent['id'],
-                    $progress,
+                    $this->getProgressPercentage($userId, $siblings),
                     $userId
                 );
             }
         }
 
         return true;
+    }
+
+    private function getProgressPercentage($userId, $siblings)
+    {
+        $progressOfSiblingsDeNested = [];
+        $percentages = [];
+
+        $progressOfSiblings = array_column($siblings, 'user_progress');
+
+        if(empty($progressOfSiblings)){
+            $siblings = $this->attachProgressToContents(
+                $userId,
+                $siblings
+            );
+            $progressOfSiblings = array_column($siblings, 'user_progress');
+        }
+
+        foreach ($progressOfSiblings as $progressOfSingleSibling) {
+            $progressOfSiblingsDeNested[] = reset($progressOfSingleSibling);
+        }
+
+        foreach ($progressOfSiblingsDeNested as $progressOfSingleDeNestedSibling) {
+            if (!empty($progressOfSingleDeNestedSibling)) {
+                $percentages[] = $progressOfSingleDeNestedSibling['progress_percent'];
+            } else {
+                $percentages[] = 0;
+            }
+        }
+
+        $arraySum = array_sum($percentages);
+        $siblingCount = count($siblings);
+
+        return $arraySum / $siblingCount;
     }
 
     /**

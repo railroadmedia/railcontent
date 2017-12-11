@@ -530,4 +530,84 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
         $this->assertFalse($parentWithProgressAttached[UserContentProgressService::STATE_STARTED]);
     }
+
+    public function test_parent_that_is_not_allowed_type_for_started_when_started_progress_calculated_from_childred()
+    {
+        $userId = rand();
+        $numberOfChildren = 5;
+        $content = [];
+
+        // Create the content
+
+        $parent = $this->contentFactory->create(
+            $this->faker->words(rand(2, 6), true),
+            $this->typeAllowedForCompletedButNotStarted
+        );
+
+        for ($i = 0; $i < $numberOfChildren; $i++) {
+            $content[$i] = $this->contentFactory->create(
+                $this->faker->words(rand(2, 6), true),
+                $this->typeAllowedForCompletedButNotStarted
+//                $this->faker->randomElement($this->allowedTypes)
+            );
+            $this->contentHierarchyService->create($parent['id'], $content[$i]['id'], $i + 1);
+        }
+
+        // Make sure that the parent is as expected at this point, so that it's change marks success
+
+        $parentWithProgressAttached = $this->classBeingTested->attachProgressToContents(
+            $userId,
+            $this->contentService->getById($parent['id'])
+        );
+
+        if ($parentWithProgressAttached[UserContentProgressService::STATE_STARTED]) {
+            $this->fail('$parentWithProgressAttached[\'started\'] should be false at this point in the test');
+        }
+
+        // set two child (of 5) each to 80 percent.
+
+        $twoRandomChildren = $this->faker->randomElements($content, 2);
+
+        foreach($twoRandomChildren as $child){
+            $this->classBeingTested->saveContentProgress($child['id'], 80, $userId);
+        }
+
+        // assert the parent still has no record.
+
+        $parentWithProgressAttached = $this->classBeingTested->attachProgressToContents(
+            $userId,
+            $this->contentService->getById($parent['id'])
+        );
+
+        if (!empty($parentWithProgressAttached['user_progress'][$userId])) {
+            $this->fail('$parentWithProgressAttached[\'started\'] should be false at this point in the test');
+        }
+
+        // start the parent
+
+        $this->classBeingTested->startContent($parent['id'], $userId);
+
+        // assert that the parent has the progress_percent value of (80*2/5) 32
+
+
+        $parentWithProgressAttached = $this->classBeingTested->attachProgressToContents(
+            $userId,
+            $this->contentService->getById($parent['id'])
+        );
+
+        $parentProgress = $parentWithProgressAttached['user_progress'][$userId];
+
+        $this->assertEquals(32, $parentProgress['progress_percent']);
+
+        // wait on this though
+        // wait on this though
+        // wait on this though
+
+        // first to make sure this test is accurate we should have this happen where by the parent's progress is 0
+
+//        $this->assertEquals(0, $parentProgress['progress_percent']);
+
+
+
+    }
 }
