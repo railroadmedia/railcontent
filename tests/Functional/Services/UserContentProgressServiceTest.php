@@ -485,11 +485,18 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
     public function test_progress_bubble_does_not_start_parents_that_are_not_allowed_type()
     {
+        $this->parentBubblingRestrictionTestSubRoutine($this->typeAllowedForCompletedButNotStarted);
+
+        // ensure child type is irrelevant
+        $this->parentBubblingRestrictionTestSubRoutine($this->typeAllowedForStartedButNotCompleted);
+    }
+
+    private function parentBubblingRestrictionTestSubRoutine($childType){
         $userId = rand();
         $numberOfChildren = 5;
         $content = [];
 
-        // Create the content
+        // create content
 
         $parent = $this->contentFactory->create(
             $this->faker->words(rand(2, 6), true),
@@ -499,7 +506,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         for ($i = 0; $i < $numberOfChildren; $i++) {
             $content[$i] = $this->contentFactory->create(
                 $this->faker->words(rand(2, 6), true),
-                $this->typeAllowedForCompletedButNotStarted
+                $childType
             );
             $this->contentHierarchyService->create($parent['id'], $content[$i]['id'], $i + 1);
         }
@@ -531,7 +538,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $this->assertFalse($parentWithProgressAttached[UserContentProgressService::STATE_STARTED]);
     }
 
-    public function test_parent_that_is_not_allowed_type_for_started_when_started_progress_calculated_from_childred()
+    public function test_started_restricted_parent_progress_calculated_from_children_when_started()
     {
         $userId = rand();
         $numberOfChildren = 5;
@@ -547,8 +554,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         for ($i = 0; $i < $numberOfChildren; $i++) {
             $content[$i] = $this->contentFactory->create(
                 $this->faker->words(rand(2, 6), true),
-                $this->typeAllowedForCompletedButNotStarted
-//                $this->faker->randomElement($this->allowedTypes)
+                $this->typeAllowedForStartedButNotCompleted
             );
             $this->contentHierarchyService->create($parent['id'], $content[$i]['id'], $i + 1);
         }
@@ -589,7 +595,6 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
         // assert that the parent has the progress_percent value of (80*2/5) 32
 
-
         $parentWithProgressAttached = $this->classBeingTested->attachProgressToContents(
             $userId,
             $this->contentService->getById($parent['id'])
@@ -598,16 +603,5 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $parentProgress = $parentWithProgressAttached['user_progress'][$userId];
 
         $this->assertEquals(32, $parentProgress['progress_percent']);
-
-        // wait on this though
-        // wait on this though
-        // wait on this though
-
-        // first to make sure this test is accurate we should have this happen where by the parent's progress is 0
-
-//        $this->assertEquals(0, $parentProgress['progress_percent']);
-
-
-
     }
 }
