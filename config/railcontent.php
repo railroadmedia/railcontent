@@ -99,5 +99,8 @@ return [
         ]
     ],
     
-    'routes_middleware' => ['auth'],
+    'all_routes_middleware' => [],
+    
+    'user_routes_middleware' => [],
+    'administrator_routes_middleware' => [],
 ];
