@@ -207,7 +207,7 @@ class ContentQueryBuilder extends QueryBuilder
     public function restrictPublishedOnDate()
     {
         if (!ContentRepository::$pullFutureContent) {
-            $this->where('published_on', '<', Carbon::now()->toDateTimeString());
+            $this->where('published_on', '<=', Carbon::now()->toDateTimeString());
         }
 
         return $this;
