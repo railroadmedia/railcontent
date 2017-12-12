@@ -97,7 +97,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         foreach ($slugHierarchyToInclude as $slugToInclude) {
             $includedParentContentIds[] =
-                $this->contentFactory->create($slugToInclude, $type)['id'];
+                $this->contentFactory->create($slugToInclude, $type, ContentService::STATUS_PUBLISHED)['id'];
         }
 
         foreach ($includedParentContentIds as $index => $includedParentContentId) {
@@ -119,7 +119,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         foreach ($slugHierarchyToExclude as $slugToExclude) {
             $excludedParentContentIds[] =
-                $this->contentFactory->create($slugToExclude, $type)['id'];
+                $this->contentFactory->create($slugToExclude, $type, ContentService::STATUS_PUBLISHED)['id'];
         }
 
         foreach ($excludedParentContentIds as $index => $excludedParentContentId) {
@@ -195,7 +195,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         foreach ($slugHierarchyToInclude as $slugToInclude) {
             $includedParentContentIds[] =
-                $this->contentFactory->create($slugToInclude, $type)['id'];
+                $this->contentFactory->create($slugToInclude, $type,ContentService::STATUS_PUBLISHED)['id'];
         }
 
         foreach ($includedParentContentIds as $index => $includedParentContentId) {
@@ -217,7 +217,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
 
         foreach ($slugHierarchyToExclude as $slugToExclude) {
             $excludedParentContentIds[] =
-                $this->contentFactory->create($slugToExclude, $type)['id'];
+                $this->contentFactory->create($slugToExclude, $type, ContentService::STATUS_PUBLISHED)['id'];
         }
 
         foreach ($excludedParentContentIds as $index => $excludedParentContentId) {
@@ -278,10 +278,10 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
         $parentContent = [
             'slug' => $this->faker->word,
             'type' => 'lesson',
-            'status' => $this->faker->word,
+            'status' => ContentService::STATUS_PUBLISHED,
             'language' => 'en-US',
             'brand' => ConfigService::$brand,
-            'published_on' => Carbon::now()->toDateTimeString(),
+            'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => Carbon::now()->toDateTimeString()
         ];
@@ -294,10 +294,10 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
             $childContent = [
                 'slug' => $this->faker->word,
                 'type' => 'lesson-part',
-                'status' => $this->faker->word,
+                'status' => ContentService::STATUS_PUBLISHED,
                 'language' => 'en-US',
                 'brand' => ConfigService::$brand,
-                'published_on' => Carbon::now()->toDateTimeString(),
+                'published_on' => Carbon::now()->subDays(10)->toDateTimeString(),
                 'created_on' => Carbon::now()->toDateTimeString(),
                 'archived_on' => Carbon::now()->toDateTimeString()
             ];

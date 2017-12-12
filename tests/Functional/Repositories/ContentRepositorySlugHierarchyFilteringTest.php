@@ -63,7 +63,7 @@ class ContentRepositorySlugHierarchyFilteringTest extends RailcontentTestCase
 
         foreach ($slugHierarchyToInclude as $slugToInclude) {
             $includedParentContentIds[] =
-                $this->contentFactory->create($slugToInclude, $type)['id'];
+                $this->contentFactory->create($slugToInclude, $type, ContentService::STATUS_PUBLISHED)['id'];
         }
 
         foreach ($includedParentContentIds as $index => $includedParentContentId) {
@@ -85,7 +85,7 @@ class ContentRepositorySlugHierarchyFilteringTest extends RailcontentTestCase
 
         foreach ($slugHierarchyToExclude as $slugToExclude) {
             $excludedParentContentIds[] =
-                $this->contentFactory->create($slugToExclude, $type)['id'];
+                $this->contentFactory->create($slugToExclude, $type, ContentService::STATUS_PUBLISHED)['id'];
         }
 
         foreach ($excludedParentContentIds as $index => $excludedParentContentId) {

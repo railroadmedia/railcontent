@@ -7,6 +7,7 @@ use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\PermissionsFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
+use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentRepositoryPermissionsTest extends RailcontentTestCase
@@ -91,7 +92,10 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
     public function test_get_by_id_is_satisfiable_by_single()
     {
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->word,
+            ContentService::STATUS_PUBLISHED);
 
         $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
@@ -111,7 +115,10 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
     public function test_get_by_id_is_satisfiable_by_multiple()
     {
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->word,
+            ContentService::STATUS_PUBLISHED);
 
         $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
@@ -175,7 +182,10 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
     public function test_get_by_id_is_satisfiable_by_single_type()
     {
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->word,
+            ContentService::STATUS_PUBLISHED);
 
         $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
@@ -194,7 +204,10 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
     public function test_get_by_id_is_satisfiable_by_multiple_type()
     {
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->word,
+            ContentService::STATUS_PUBLISHED);
 
         $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(
