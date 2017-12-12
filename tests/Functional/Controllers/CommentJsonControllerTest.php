@@ -8,6 +8,7 @@ use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentJsonControllerTest extends RailcontentTestCase
@@ -35,7 +36,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
 
         $response = $this->call('PUT', 'railcontent/comment', [
@@ -50,7 +52,9 @@ class CommentJsonControllerTest extends RailcontentTestCase
     public function test_add_comment_on_not_commentable_type_response()
     {
         $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create( $this->faker->word,
+            $this->faker->word,
+            ContentService::STATUS_PUBLISHED);
 
         $response = $this->call('PUT', 'railcontent/comment', [
             'comment' => $this->faker->text(),
@@ -114,7 +118,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
 
@@ -133,7 +138,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
 
