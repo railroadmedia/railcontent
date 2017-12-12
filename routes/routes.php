@@ -188,6 +188,11 @@ Route::group(
                     \Railroad\Railcontent\Controllers\ContentJsonController::class . '@options'
                 )->name('content.options');
 
+                Route::put(
+                    '/content',
+                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@store'
+                )->name('content.store');
+
                 Route::patch(
                     '/content/{id}',
                     \Railroad\Railcontent\Controllers\ContentJsonController::class . '@update'
