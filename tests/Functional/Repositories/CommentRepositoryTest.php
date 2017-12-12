@@ -69,7 +69,7 @@ class CommentRepositoryTest extends RailcontentTestCase
     public function test_update_comment()
     {
         $userId = $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes));
+        $content = $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED);
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
 
         $newComment = [
@@ -112,8 +112,8 @@ class CommentRepositoryTest extends RailcontentTestCase
 
     public function test_get_content_comments()
     {
-        $firstContent = $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes));
-        $secondContent =  $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes));
+        $firstContent = $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED);
+        $secondContent =  $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED);
 
         //create comments for second content
         for($i = 0; $i<5; $i++)
@@ -141,8 +141,8 @@ class CommentRepositoryTest extends RailcontentTestCase
     {
         $userId = $this->createAndLogInNewUser();
 
-        $firstContent = $this->contentFactory->create($this->faker->word, ConfigService::$commentableContentTypes[0]);
-        $secondContentWithOtherType = $this->contentFactory->create($this->faker->word, ConfigService::$commentableContentTypes[1]);
+        $firstContent = $this->contentFactory->create($this->faker->word, ConfigService::$commentableContentTypes[0], ContentService::STATUS_PUBLISHED);
+        $secondContentWithOtherType = $this->contentFactory->create($this->faker->word, ConfigService::$commentableContentTypes[1], ContentService::STATUS_PUBLISHED);
 
         //create comments for first content
         for($i = 0; $i<5; $i++)
@@ -170,7 +170,7 @@ class CommentRepositoryTest extends RailcontentTestCase
     public function test_comments_with_replies()
     {
         $userId = $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create($this->faker->word, 'course');
+        $content = $this->contentFactory->create($this->faker->word, 'course', ContentService::STATUS_PUBLISHED);
         $numberOfComments = 12;
 
         for ($i = 0; $i <= $numberOfComments; $i++) {
