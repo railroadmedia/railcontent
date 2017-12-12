@@ -32,7 +32,7 @@ class CommentCreateRequest extends FormRequest
                 ['required',
                     'numeric',
                     Rule::exists(
-                        ConfigService::$databaseConnectionName . ConfigService::$tableContent, 'id'
+                        ConfigService::$databaseConnectionName . '.' . ConfigService::$tableContent, 'id'
                     )->where(function ($query) {
                         if (is_array(ContentRepository::$availableContentStatues)) {
                             $query->whereIn('status', ContentRepository::$availableContentStatues);
