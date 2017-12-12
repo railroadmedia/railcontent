@@ -96,6 +96,9 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.searchable_content_types', $defaultConfig['searchable_content_types']);
         $app['config']->set('railcontent.search_index_values', $defaultConfig['search_index_values']);
         $app['config']->set('railcontent.allowed_types_for_bubble_progress', $defaultConfig['allowed_types_for_bubble_progress']);
+        $app['config']->set('railcontent.all_routes_middleware', $defaultConfig['all_routes_middleware']);
+        $app['config']->set('railcontent.user_routes_middleware', $defaultConfig['user_routes_middleware']);
+        $app['config']->set('railcontent.administrator_routes_middleware', $defaultConfig['administrator_routes_middleware']);
 
         // setup default database to use sqlite :memory:
         $app['config']->set('database.default', $this->getConnectionType());
