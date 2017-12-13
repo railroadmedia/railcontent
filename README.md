@@ -6,19 +6,11 @@ Data first simple CMS.
 
 ### Progress-Bubbling
 
-Something to watch out for with this...
+When a content has its progress saved, a `UserContentProgressSaved` event is fired. This event triggers the `bubbleProgress` method of `UserContentProgressService`. If the content saved—that triggered the event—has a parent, the type of that parent will be evaluated against config values defined in you're application's copy of */config/railcontent.php*.
 
-The "started" setting (array for listing strings) in the "allowed_types_for_bubble_progress" config setting enables the following:
+This is useful when you have a kind of content (like "course" for Drumeo) that should be marked as started when a child is started. However, if you have a kind of content that you don't want marked as started (say perhaps because it has it's own system, like Learning-Paths for Drumeo), you don't want the parent started when the child is. Keep in mind that children can have multiple parents, thus if a lesson is started we may want that to cause one parent to be started, but another to *remain unstarted*.
 
-When a child content is started, the parent will also be started."
-
-This is useful when you have a kind of content (like "course" for Drumeo) that should be marked as started when a child is started. However, if you have a kind of content that you don't want marked as started (say perhaps because it has it's own system with other consideration that are beyond the concern here), you don't want the parent started when the child is.
-
-Keep in mind that children here can have multiple parents.
-
-What we've done is offer the ability to specify which content **parent** types should be marked as started when their children are started. That is the "started" setting (array for listing strings) in the "allowed_types_for_bubble_progress" config setting. There is also a "completed" setting.
-
-You can have a value in both list if it has no restrictions, or just one, or neither;
+You can restrict which content **parent** types should be marked as started or completed when their children are started by ***omitting*** them from the allowed_types lists.
 
 ```php
 'allowed_types_for_bubble_progress' => [
@@ -31,7 +23,12 @@ You can have a value in both list if it has no restrictions, or just one, or nei
 ];
 ```
 
-But note that this only applies for progress ***bubbling***. Look at `UserContentProgressService` method `bubbleProgress` and you will see the following:
+You can have a value in both list if it has no restrictions, or just one, or neither.
+
+Note that this only applies for progress ***bubbling***. This does not effect the `startContent`, `completeContent`, or `saveContentProgress` methods of `UserContentProgressService`.
+
+
+#### Example
 
 Say you have a parent of a type for which *bubbling of **started** progress event is **not** allowed*.
 
