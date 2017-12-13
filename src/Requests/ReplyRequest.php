@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-
 use Railroad\Railcontent\Services\ConfigService;
 
 class ReplyRequest extends FormRequest
@@ -26,7 +25,11 @@ class ReplyRequest extends FormRequest
     {
         return [
             'comment' => 'required|max:1024',
-            'parent_id' => 'required|numeric|exists:' . ConfigService::$tableComments . ',id'
+            'parent_id' => 'required|numeric|exists:' .
+                ConfigService::$databaseConnectionName .
+                '.' .
+                ConfigService::$tableComments .
+                ',id'
         ];
     }
 }
