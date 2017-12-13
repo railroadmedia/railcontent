@@ -39,7 +39,7 @@ class CommentCreateRequest extends FormRequest
                         }
                     })
                 ],
-            'display_name' => 'required|max:255'
+//            'display_name' => 'required|max:255'
         ];
     }
 }
