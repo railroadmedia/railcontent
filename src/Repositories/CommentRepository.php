@@ -237,7 +237,12 @@ class CommentRepository extends RepositoryBase
      */
     private function getRepliesByCommentIds(array $commentIds)
     {
-        return $this->query()->selectColumns()->whereIn('parent_id', $commentIds)->get()->toArray();
+        return $this->query()
+            ->selectColumns()
+            ->whereIn('parent_id', $commentIds)
+            ->restrictByVisibility()
+            ->get()
+            ->toArray();
     }
 
     /**
