@@ -36,7 +36,8 @@ class FullTextSearchJsonController extends Controller
         $contentsData = $this->fullTextSearchService->search(
             $request->get('term', null),
             $request->get('page', 1),
-            $request->get('limit', 10)
+            $request->get('limit', 10),
+            $request->get('contentType', null)
         );
 
         return new JsonPaginatedResponse(
