@@ -169,19 +169,20 @@ class CommentService
     /** Administrator can edit/delete any comment; other users can edit/delete only their comments
      * Return true if the user have rights to edit/update the comment and false otherwise
      *
+     * You **may** have to set a 'user_id' attribute in the Request before you can call this method.
+     * Ex (w/ param: Illuminate\Http\Request $request):
+     *      ```$request->attributes->set('user_id', current_member()->getId());```
+     *
      * @param array $comment
      * @return boolean
      */
     private function userCanManageComment($comment)
     {
-        $canManage = true;
-
-        //if the user it's not an administrator check if it is the comment owner
-        if ((self::$canManageOtherComments === false) && ($comment['user_id'] != (request()->user()->id ?? null))) {
-            $canManage = false;
+        if( is_null($comment['user_id']) ){ // Very unlikely, but better safe than sorry.
+            return false;
         }
 
-        return $canManage;
+        return self::$canManageOtherComments || ( $comment['user_id'] == request()->get('user_id') );
     }
 
     /**
