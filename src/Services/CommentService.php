@@ -137,7 +137,7 @@ class CommentService
      * Return null if the comment not exist in database, -1 if the user have not rights to delete the comment or bool
      *
      * @param integer $id
-     * @return bool|int|null
+     * @return bool|int|null|array
      */
     public function delete($id)
     {
@@ -214,16 +214,18 @@ class CommentService
     }
 
     /**
-     * @param $userId
-     * @param $contents
-     * @param null $singlePlaylistSlug
+     * @param array $contentOrContents
      * @return array
      */
     public function attachCommentsToContents($contentOrContents)
     {
-        $isArray = !isset($contentOrContents['id']);
+        /*
+         * Remember comments *are* arrays, so here have to distinguish between a single comment
+         * *not* nested in another array and an array containing any number of "comment-arrays".
+         */
+        $arrayOfCommentsPassedIn = !isset($contentOrContents['id']);
 
-        if (!$isArray) {
+        if (!$arrayOfCommentsPassedIn) {
             $contentOrContents = [$contentOrContents];
         }
 
@@ -239,7 +241,7 @@ class CommentService
             }
         }
 
-        if ($isArray) {
+        if ($arrayOfCommentsPassedIn) {
             return $contentOrContents;
         } else {
             return reset($contentOrContents);
