@@ -39,7 +39,8 @@ class FullTextSearchJsonController extends Controller
             $request->get('limit', 10),
             $request->get('included_types', []),
             $request->get('statuses', []),
-            $request->get('sort', 'score')
+            $request->get('sort', 'score'),
+            $request->get('brand', null)
         );
 
         return new JsonPaginatedResponse(

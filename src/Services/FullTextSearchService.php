@@ -28,10 +28,12 @@ class FullTextSearchService
      * @param int $page
      * @param int $limit
      * @param array $contentTypes
-     * @param array $contentStatus
+     * @param array $contentStatuses
      * @param string $sort
      * @param null $dateTimeCutoff
+     * @param null $brand
      * @return array|null
+     * @internal param null $brand
      */
     public function search(
         $term,
@@ -40,12 +42,19 @@ class FullTextSearchService
         $contentTypes = [],
         $contentStatuses = [],
         $sort = '-score',
-        $dateTimeCutoff = null
+        $dateTimeCutoff = null,
+        $brand = null
     ) {
         $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($sort, '-');
 
-        return [
+        $oldBrand = ConfigService::$brand;
+
+        if (!empty($brand)) {
+            ConfigService::$brand = $brand;
+        }
+
+        $return = [
             'results' => $this->fullTextSearchRepository->search(
                 $term,
                 $page,
@@ -63,5 +72,9 @@ class FullTextSearchService
                 $dateTimeCutoff
             )
         ];
+
+        ConfigService::$brand = $oldBrand;
+
+        return $return;
     }
 }
