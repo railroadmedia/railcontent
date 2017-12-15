@@ -13,7 +13,7 @@ class AddContentStatusToSearchIndexes extends Migration
      */
     public function up()
     {
-        Schema::table(
+        Schema::connection(ConfigService::$databaseConnectionName)->table(
             ConfigService::$tableSearchIndexes,
             function ($table) {
                 /**
@@ -32,7 +32,7 @@ class AddContentStatusToSearchIndexes extends Migration
      */
     public function down()
     {
-        Schema::table(
+        Schema::connection(ConfigService::$databaseConnectionName)->table(
             ConfigService::$tableSearchIndexes,
             function ($table) {
                 /**
