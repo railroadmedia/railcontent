@@ -20,6 +20,8 @@ class FullTextSearchQueryBuilder extends QueryBuilder
                 ConfigService::$tableSearchIndexes . '.medium_value as medium_value',
                 ConfigService::$tableSearchIndexes . '.low_value as low_value',
                 ConfigService::$tableSearchIndexes . '.created_at as created_at',
+                ConfigService::$tableSearchIndexes . '.content_status as content_status',
+                DB::raw('( '.ConfigService::$tableSearchIndexes . '.high_value'.' + '.ConfigService::$tableSearchIndexes.'.medium_value +'.ConfigService::$tableSearchIndexes.'.low_value) as score'),
                 DB::raw(" MATCH (high_value) AGAINST ('+\"" . implode('" +"', explode(' ', $term)) . "\"' IN BOOLEAN MODE) * 18 * (UNIX_TIMESTAMP(content_published_on) / 1000000000) AS high_score"),
                 DB::raw(" MATCH (medium_value) AGAINST (\"'$term'\") * 2 AS medium_score"),
                 DB::raw(" MATCH (low_value) AGAINST (\"'$term'\") AS low_score")
@@ -55,9 +57,11 @@ class FullTextSearchQueryBuilder extends QueryBuilder
         return $this;
     }
 
-    public function orderByScore()
+    public function order($column = null, $direction = 'asc')
     {
-        $this->orderByRaw('(high_score + medium_score + low_score) DESC');
+        if ($column) {
+            $this->orderByRaw($column .' '. $direction);
+        }
 
         return $this;
     }

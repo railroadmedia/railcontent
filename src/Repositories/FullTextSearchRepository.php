@@ -58,6 +58,7 @@ class FullTextSearchRepository extends RepositoryBase
                 'low_value' => $this->prepareIndexesValues($searchIndexValues['low_value'], $content),
                 'brand' => ConfigService::$brand,
                 'content_type' => $content['type'],
+                'content_status' => $content['status'],
                 'content_published_on' => $content['published_on'],
                 'created_at' => Carbon::now()->toDateTimeString()
             ];
@@ -142,17 +143,24 @@ class FullTextSearchRepository extends RepositoryBase
         $page = 1,
         $limit = 10,
         $contentType = null,
+        $contentStatus = null,
+        $orderByColumn,
+        $orderByDirection,
         $dateTimeCutoff = null
     ) {
         $query = $this->query()
             ->selectColumns($term)
             ->restrictBrand()
             ->restrictByTerm($term)
-            ->orderByScore()
+            ->order($orderByColumn, $orderByDirection)
             ->directPaginate($page, $limit);
 
         if (!empty($contentType)) {
             $query->where('content_type', $contentType);
+        }
+
+        if (!empty($contentStatus)) {
+            $query->where('content_status', $contentStatus);
         }
 
         if (!empty($dateCutoff)) {
@@ -171,7 +179,7 @@ class FullTextSearchRepository extends RepositoryBase
      * @param null $contentType
      * @return int
      */
-    public function countTotalResults($term, $contentType = null, $dateTimeCutoff = null)
+    public function countTotalResults($term, $contentType = null, $contentStatus = null, $dateTimeCutoff = null)
     {
         $query = $this->query()
             ->selectColumns($term)
@@ -180,6 +188,10 @@ class FullTextSearchRepository extends RepositoryBase
 
         if (!empty($contentType)) {
             $query->where('content_type', $contentType);
+        }
+
+        if (!empty($contentStatus)) {
+            $query->where('content_status', $contentStatus);
         }
 
         if (!empty($dateCutoff)) {

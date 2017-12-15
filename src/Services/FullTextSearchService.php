@@ -30,19 +30,26 @@ class FullTextSearchService
      * @param null $contentType
      * @return array|null
      */
-    public function search($term, $page = 1, $limit = 10, $contentType = null, $dateTimeCutoff = null)
+    public function search($term, $page = 1, $limit = 10, $contentType = null, $contentStatus, $sort = '-score', $dateTimeCutoff = null)
     {
+        $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
+        $orderByColumn = trim($sort, '-');
+
         return [
             'results' => $this->fullTextSearchRepository->search(
                 $term,
                 $page,
                 $limit,
                 $contentType,
+                $contentStatus,
+                $orderByColumn,
+                $orderByDirection,
                 $dateTimeCutoff
             ),
             'total_results' => $this->fullTextSearchRepository->countTotalResults(
                 $term,
                 $contentType,
+                $contentStatus,
                 $dateTimeCutoff
             )
         ];
