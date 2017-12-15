@@ -37,8 +37,8 @@ class FullTextSearchJsonController extends Controller
             $request->get('term', null),
             $request->get('page', 1),
             $request->get('limit', 10),
-            $request->get('contentType', null),
-            $request->get('content_status', null),
+            $request->get('included_types', []),
+            $request->get('statuses', []),
             $request->get('sort', 'score')
         );
 

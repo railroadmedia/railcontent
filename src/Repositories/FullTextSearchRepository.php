@@ -129,21 +129,27 @@ class FullTextSearchRepository extends RepositoryBase
         return implode(' ', $values);
     }
 
-    /** Perform a boolean full text search by term, paginate and order the results by score.
+    /**
+     * Perform a boolean full text search by term, paginate and order the results by score.
      * Returns an array with the contents that contain the search criteria
      *
      * @param string|null $term
      * @param int $page
      * @param int $limit
-     * @param null $contentType
+     * @param array $contentTypes
+     * @param array $contentStatuses
+     * @param $orderByColumn
+     * @param $orderByDirection
+     * @param null $dateTimeCutoff
      * @return array
+     * @internal param null $contentType
      */
     public function search(
         $term,
         $page = 1,
         $limit = 10,
-        $contentType = null,
-        $contentStatus = null,
+        $contentTypes = [],
+        $contentStatuses = [],
         $orderByColumn,
         $orderByDirection,
         $dateTimeCutoff = null
@@ -155,12 +161,12 @@ class FullTextSearchRepository extends RepositoryBase
             ->order($orderByColumn, $orderByDirection)
             ->directPaginate($page, $limit);
 
-        if (!empty($contentType)) {
-            $query->where('content_type', $contentType);
+        if (!empty($contentTypes)) {
+            $query->whereIn('content_type', $contentTypes);
         }
 
-        if (!empty($contentStatus)) {
-            $query->where('content_status', $contentStatus);
+        if (!empty($contentStatuses)) {
+            $query->whereIn('content_status', $contentStatuses);
         }
 
         if (!empty($dateCutoff)) {

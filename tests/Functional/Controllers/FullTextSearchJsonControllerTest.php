@@ -147,7 +147,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             'page' => $page,
             'limit' => $limit,
             'sort' => '-content_published_on',
-            'contentType' => $contentType
+            'included_types' => [$contentType]
         ]);
 
         $results = $response->decodeResponseJson();
@@ -184,7 +184,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             'page' => $page,
             'limit' => $limit,
             'sort' => '-content_published_on',
-            'content_status' => $contentStatus
+            'statuses' => [$contentStatus]
         ]);
 
         $results = $response->decodeResponseJson();
@@ -203,8 +203,4 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals($expectedResults->decodeResponseJson()['results'], array_values($results['results']));
     }
-
-
-
-
 }
