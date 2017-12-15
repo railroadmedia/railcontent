@@ -119,6 +119,7 @@ class CommentService
         if (!(request()->user()->id)) {
             return 0;
         }
+        request()->attributes->set('user_id', request()->user()->id ?? null);
         //check if user can update the comment
         if (!$this->userCanManageComment($comment)) {
             return -1;
