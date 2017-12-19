@@ -73,7 +73,7 @@ class CommentAssignmentRepositoryTest extends RailcontentTestCase
     public function test_delete_comment_assignation()
     {
         $content = $this->contentFactory->create($this->faker->word, 'course', ContentService::STATUS_PUBLISHED);
-        $managerId = ConfigService::$commentsAssignation[$content['type']];
+        $managerId = ConfigService::$commentsAssignationOwnerIds[$content['type']];
 
         $comments = $this->commentFactory->create($this->faker->text, $content['id'], null, rand(2, 10));
 

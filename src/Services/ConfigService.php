@@ -127,7 +127,7 @@ class ConfigService
     /**
      * @var array
      */
-    public static $commentsAssignation;
+    public static $commentsAssignationOwnerIds;
 
     /**
      * @var array

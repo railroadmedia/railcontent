@@ -2,15 +2,14 @@
 
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
-
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 use Railroad\Railcontent\Repositories\CommentRepository;
-use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ConfigService;
 
 class CommentQueryBuilder extends QueryBuilder
 {
     /** Select the comments columns
+     *
      * @return $this
      */
     public function selectColumns()
@@ -24,7 +23,7 @@ class CommentQueryBuilder extends QueryBuilder
                 ConfigService::$tableComments . '.user_id as user_id',
                 ConfigService::$tableComments . '.temporary_display_name as display_name',
                 ConfigService::$tableComments . '.created_on as created_on',
-                ConfigService::$tableComments . '.deleted_at as deleted_at',
+                ConfigService::$tableComments . '.deleted_at as deleted_at'
             ]
         );
 
@@ -32,15 +31,18 @@ class CommentQueryBuilder extends QueryBuilder
     }
 
     /** Restrict the comments by content type
+     *
      * @return $this
      */
     public function restrictByType()
     {
         if (CommentRepository::$availableContentType) {
-            $this->leftJoin(ConfigService::$tableContent,
+            $this->leftJoin(
+                ConfigService::$tableContent,
                 'content_id',
                 '=',
-                ConfigService::$tableContent . '.id');
+                ConfigService::$tableContent . '.id'
+            );
             $this->where(ConfigService::$tableContent . '.type', CommentRepository::$availableContentType);
         }
 
@@ -48,6 +50,7 @@ class CommentQueryBuilder extends QueryBuilder
     }
 
     /** Restrict the comments by content id
+     *
      * @return $this
      */
     public function restrictByContentId()
@@ -60,6 +63,7 @@ class CommentQueryBuilder extends QueryBuilder
     }
 
     /** Restrict the comments by user id
+     *
      * @return $this
      */
     public function restrictByUser()
@@ -72,6 +76,7 @@ class CommentQueryBuilder extends QueryBuilder
     }
 
     /** Restrict the comments by visibility
+     *
      * @return $this
      */
     public function restrictByVisibility()
@@ -83,7 +88,31 @@ class CommentQueryBuilder extends QueryBuilder
         return $this;
     }
 
+    /** Restrict the comments by visibility
+     *
+     * @return $this
+     */
+    public function restrictByAssignedUserId()
+    {
+        if (CommentRepository::$assignedToUserId !== false) {
+            $this->leftJoin(
+                ConfigService::$tableCommentsAssignment,
+                ConfigService::$tableCommentsAssignment . '.comment_id',
+                '=',
+                ConfigService::$tableComments . '.id'
+            )
+                ->where(
+                    ConfigService::$tableCommentsAssignment . '.user_id',
+                    CommentRepository::$assignedToUserId
+                )
+                ->addSelect(ConfigService::$tableCommentsAssignment . '.assigned_on');
+        }
+
+        return $this;
+    }
+
     /** Only the comments are returned
+     *
      * @return $this
      */
     public function onlyComments()
@@ -94,19 +123,24 @@ class CommentQueryBuilder extends QueryBuilder
     }
 
     /** Restrict comments by associated manager id
+     *
      * @return $this
      */
     public function restrictByAssociatedManagerId()
     {
 
         if (CommentAssignmentRepository::$availableAssociatedManagerId) {
-            $this->where(ConfigService::$tableCommentsAssignment . '.user_id', CommentAssignmentRepository::$availableAssociatedManagerId);
+            $this->where(
+                ConfigService::$tableCommentsAssignment . '.user_id',
+                CommentAssignmentRepository::$availableAssociatedManagerId
+            );
         }
 
         return $this;
     }
 
     /** Restrict by comment id
+     *
      * @param $commentId
      * @return $this
      */

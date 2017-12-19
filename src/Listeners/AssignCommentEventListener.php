@@ -2,28 +2,31 @@
 
 namespace Railroad\Railcontent\Listeners;
 
-use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Services\CommentAssignmentService;
-
+use Railroad\Railcontent\Services\CommentService;
+use Railroad\Railcontent\Services\ConfigService;
 
 class AssignCommentEventListener
 {
     private $commentAssignmentService;
+    private $commentService;
 
-    public function __construct(CommentAssignmentService $commentAssignmentService)
-    {
+    public function __construct(
+        CommentAssignmentService $commentAssignmentService,
+        CommentService $commentService
+    ) {
         $this->commentAssignmentService = $commentAssignmentService;
+        $this->commentService = $commentService;
     }
 
-    /** Call the store method from service to assign the comment to the corresponding manager id
-     * @param Event $event
-     * @return int
+    /**
+     * @param CommentCreated $commentCreatedEvent
      */
-    public function handle(Event $event)
+    public function handle(CommentCreated $commentCreatedEvent)
     {
-        $results = $this->commentAssignmentService->store($event->comment, $event->contentType);
-
-        return $results;
+        if (in_array($commentCreatedEvent->userId, ConfigService::$commentsAssignationOwnerIds)) {
+            $this->commentAssignmentService->deleteCommentAssignations($commentCreatedEvent->parentId);
+        }
     }
-
 }

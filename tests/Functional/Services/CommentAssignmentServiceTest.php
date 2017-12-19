@@ -66,7 +66,7 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
 
     public function test_delete_comment_assignation()
     {
-        $userId = ConfigService::$commentsAssignation['course'];
+        $userId = ConfigService::$commentsAssignationOwnerIds['course'];
 
         $content = $this->contentFactory->create(
             $this->faker->word,

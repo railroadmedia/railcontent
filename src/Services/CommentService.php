@@ -96,7 +96,8 @@ class CommentService
         );
 
         $createdComment = $this->get($commentId);
-        event(new CommentCreated($createdComment, $content['type']));
+
+        event(new CommentCreated($commentId, $userId, $parentId, $comment));
 
         return $createdComment;
     }
@@ -151,7 +152,7 @@ class CommentService
 
         //check if user can delete the comment
         if (!$this->userCanManageComment($comment)) {
-              return -1;
+            return -1;
         }
 
         $isSoftDelete = $this->commentRepository->getSoftDelete();
@@ -179,11 +180,11 @@ class CommentService
      */
     private function userCanManageComment($comment)
     {
-        if( is_null($comment['user_id']) ){ // Very unlikely, but better safe than sorry.
+        if (is_null($comment['user_id'])) { // Very unlikely, but better safe than sorry.
             return false;
         }
 
-        return self::$canManageOtherComments || ( $comment['user_id'] == request()->get('user_id') );
+        return self::$canManageOtherComments || ($comment['user_id'] == request()->get('user_id'));
     }
 
     /**

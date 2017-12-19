@@ -39,7 +39,7 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
 
     public function test_pull_my_assigned_comments()
     {
-        $userId = ConfigService::$commentsAssignation['course'];
+        $userId = ConfigService::$commentsAssignationOwnerIds['course'];
         $assignedComments = [];
         $content = $this->contentFactory->create(
             $this->faker->word,

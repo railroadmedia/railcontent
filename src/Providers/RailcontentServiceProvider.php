@@ -135,7 +135,7 @@ class RailcontentServiceProvider extends ServiceProvider
         //restrict which content type can have comment
         ConfigService::$commentableContentTypes = config('railcontent.commentable_content_types');
 
-        ConfigService::$commentsAssignation = config('railcontent.comments_assignation');
+        ConfigService::$commentsAssignationOwnerIds = config('railcontent.comment_assignation_owner_ids');
 
         ConfigService::$searchableContentTypes = config('railcontent.searchable_content_types');
 

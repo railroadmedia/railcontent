@@ -85,7 +85,7 @@ class CommentServiceTest extends RailcontentTestCase
             ConfigService::$tableCommentsAssignment,
             [
                 'comment_id' => $comment['id'],
-                'user_id' => ConfigService::$commentsAssignation[$content['type']]
+                'user_id' => ConfigService::$commentsAssignationOwnerIds[$content['type']]
             ]
         );
     }

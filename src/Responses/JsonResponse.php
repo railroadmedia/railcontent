@@ -13,7 +13,9 @@ class JsonResponse implements Responsable
 
     /**
      * JsonPaginatedResponse constructor.
+     *
      * @param $results
+     * @param $code
      */
     public function __construct($results, $code)
     {

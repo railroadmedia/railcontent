@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Listeners;
 
 use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Services\CommentAssignmentService;
 
@@ -19,15 +20,17 @@ class UnassignCommentEventListener
         $this->commentRepository = $commentRepository;
     }
 
-    /** Call the store method from service to assign the comment to the corresponding manager id
-     * @param Event $event
+    /**
+     * Call the store method from service to assign the comment to the corresponding manager id
+     *
+     * @param CommentDeleted $event
      * @return int
      */
-    public function handle(Event $event)
+    public function handle(CommentDeleted $event)
     {
         $this->commentRepository->deleteCommentReplies($event->commentId);
 
-        $results = $this->commentAssignmentService->unassignComment($event->commentId);
+        $results = $this->commentAssignmentService->deleteCommentAssignations($event->commentId);
 
         return $results;
     }

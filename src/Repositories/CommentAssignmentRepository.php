@@ -2,22 +2,11 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 
 class CommentAssignmentRepository extends RepositoryBase
 {
-    /** If it's false all the comments assigned to manager id are returned. Otherwise return the comment id with manadgr id association
-     * @var integer|bool
-     */
-    public static $availableCommentId = false;
-
-    /** If it's false all the comments for any manager id are returned. Otherwise return the comments associated with the manager
-     * @var integer|bool
-     */
-    public static $availableAssociatedManagerId = false;
-
     /**
      * @return CommentQueryBuilder
      */
@@ -31,47 +20,66 @@ class CommentAssignmentRepository extends RepositoryBase
             ->from(ConfigService::$tableCommentsAssignment);
     }
 
-    /** Pull the comments assignation
-     * @param bool|integer $commentId
+    /**
+     * @param int $userId
+     * @param int $page
+     * @param int $limit
+     * @param string $orderByColumn
+     * @param string $orderByDirection
      * @return array
      */
-    public function getAssignedComments($commentId = false)
-    {
+    public function getAssignedCommentsForUser(
+        $userId,
+        $page = 1,
+        $limit = 25,
+        $orderByColumn = 'assigned_on',
+        $orderByDirection = 'desc'
+    ) {
         $assignments = $this->query()
             ->selectColumns()
-            ->leftJoin(ConfigService::$tableComments,
+            ->leftJoin(
+                ConfigService::$tableComments,
                 'comment_id',
                 '=',
-                ConfigService::$tableComments.'.id')
-            ->restrictByAssociatedManagerId()
-            ->restrictByCommentId($commentId)
-            ->orderBy('assigned_on', 'desc', ConfigService::$tableCommentsAssignment)
+                ConfigService::$tableComments . '.id'
+            )
+            ->where(ConfigService::$tableCommentsAssignment . '.user_id', $userId)
+            ->orderBy(
+                $orderByColumn,
+                $orderByDirection,
+                ConfigService::$tableCommentsAssignment
+            )
+            ->skip(($page - 1) * $limit)
+            ->limit($limit)
             ->getToArray();
 
-        //get an array with comment ids that will be used as keys in the results
-        $commentIds = array_pluck($assignments, 'id');
-
-        return array_combine($commentIds, $assignments);
+        return $assignments;
     }
 
-    /** Delete the association between comment and manager user id
-     * @param integer $commentId
-     * @param intereg $userId
+    /**
+     * @param int $userId
+     * @return integer
+     */
+    public function countAssignedCommentsForUser($userId)
+    {
+        return $this->query()
+            ->selectColumns()
+            ->leftJoin(
+                ConfigService::$tableComments,
+                'comment_id',
+                '=',
+                ConfigService::$tableComments . '.id'
+            )
+            ->where(ConfigService::$tableCommentsAssignment . '.user_id', $userId)
+            ->count();
+    }
+
+    /**
+     * @param $commentId
      * @return bool
      */
-    public function deleteCommentAssignation($commentId, $userId)
+    public function deleteCommentAssignations($commentId)
     {
-        return $this->query()->where(
-            [
-                'user_id' => $userId,
-                'comment_id' => $commentId
-            ]
-        )->delete() > 0;
+        return $this->query()->where('comment_id', $commentId)->delete() > 0;
     }
-
-    public function deleteCommentsAssignationByCommentIds(array $commentIds)
-    {
-        return $this->query()->whereIn('comment_id', $commentIds)->delete() > 0;
-    }
-
 }

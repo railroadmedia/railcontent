@@ -27,9 +27,18 @@ return [
         'course',
         'course lesson'
     ],
-    'comments_assignation' => [
-        'course' => 1,
-        'course lesson' => 2
+    'comment_assignation_owner_ids' => [
+        102905,
+        8,
+        5,
+        87011,
+        5814,
+        40641,
+        98085,
+        63599,
+        70324,
+        136145,
+        7776,
     ],
     'validation' => [
         'drumeo' => [
@@ -98,9 +107,9 @@ return [
             ]
         ]
     ],
-    
+
     'all_routes_middleware' => [],
-    
+
     'user_routes_middleware' => [],
     'administrator_routes_middleware' => [],
 ];

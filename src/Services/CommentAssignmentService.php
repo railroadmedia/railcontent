@@ -7,7 +7,6 @@ use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 
 class CommentAssignmentService
 {
-
     /**
      * @var CommentAssignmentRepository
      */
@@ -18,76 +17,79 @@ class CommentAssignmentService
      *
      * @param CommentAssignmentRepository $commentAssignmentRepository
      */
-    public function __construct(
-        CommentAssignmentRepository $commentAssignmentRepository
-    ) {
+    public function __construct(CommentAssignmentRepository $commentAssignmentRepository)
+    {
         $this->commentAssignmentRepository = $commentAssignmentRepository;
     }
 
-    /** Call the create method from repository that save the comment assignation to user.
-     * The user id it's specified in the config file for content types.
-     * Return the comment assignment id
-     *
-     * @param array $comment
-     * @param string $contentType
+    /**
+     * @param $commentId
+     * @param $userId
      * @return array
      */
-    public function store($comment, $contentType)
+    public function store($commentId, $userId)
     {
-        if (!array_key_exists($contentType, ConfigService::$commentsAssignation)) {
-            return false;
-        }
-
-        $managerUserId = ConfigService::$commentsAssignation[$contentType];
-
-        //if the manager create the comment we should not assign it
-        if ($comment['user_id'] == $managerUserId) {
-            return false;
-        }
-
-        $this->commentAssignmentRepository->create(
+        $id = $this->commentAssignmentRepository->updateOrCreate(
             [
-                'comment_id' => $comment['id'],
-                'user_id' => $managerUserId,
+                'comment_id' => $commentId,
+                'user_id' => $userId,
+            ],
+            [
                 'assigned_on' => Carbon::now()->toDateTimeString(),
             ]
         );
 
-        CommentAssignmentRepository::$availableAssociatedManagerId = $managerUserId;
-
-        return $this->getAssignedComments($comment['id']);
+        return $this->commentAssignmentRepository->getById($id);
     }
 
-    /** Call the repository function to get the assigned comments
+    /**
+     * Call the repository function to get the assigned comments
      *
-     * @param bool|integer $commentId
+     * @param integer $userId
+     * @param int $page
+     * @param int $limit
+     * @param string $orderByColumnAndDirection
      * @return array
+     * @internal param string $orderByColumn
+     * @internal param string $orderByDirection
      */
-    public function getAssignedComments($commentId = false)
-    {
-        return $this->commentAssignmentRepository->getAssignedComments($commentId);
+    public function getAssignedCommentsForUser(
+        $userId,
+        $page = 1,
+        $limit = 25,
+        $orderByColumnAndDirection = '-assigned_on'
+    ) {
+        $orderByDirection = substr($orderByColumnAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
+        $orderByColumn = trim($orderByColumnAndDirection, '-');
+
+        return $this->commentAssignmentRepository->getAssignedCommentsForUser(
+            $userId,
+            $page,
+            $limit,
+            $orderByColumn,
+            $orderByDirection
+        );
     }
 
-    /** Call the method from repository that delete the link between comment and manager id if the link exist.
-     * Return null if the link not exist or the method response.
+    /**
+     * Call the repository function to get the assigned comments
+     *
+     * @param integer $userId
+     * @return int
+     */
+    public function countAssignedCommentsForUser($userId)
+    {
+        return $this->commentAssignmentRepository->countAssignedCommentsForUser($userId);
+    }
+
+    /**
+     * Delete all assignments for a given comment.
      *
      * @param integer $commentId
-     * @param integer $userId
      * @return bool|null
      */
-    public function deleteCommentAssignation($commentId, $userId)
+    public function deleteCommentAssignations($commentId)
     {
-        $commentAssignation = $this->getAssignedComments($commentId);
-        if (count($commentAssignation) == 0) {
-            return null;
-        }
-        return $this->commentAssignmentRepository->deleteCommentAssignation($commentId, $userId);
+        return $this->commentAssignmentRepository->deleteCommentAssignations($commentId);
     }
-
-    public function unassignComment($commentId)
-    {
-        return $this->commentAssignmentRepository->deleteCommentsAssignationByCommentIds([$commentId]);
-    }
-
-
 }

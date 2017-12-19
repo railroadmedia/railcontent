@@ -49,6 +49,13 @@ class CommentRepository extends RepositoryBase
      */
     public static $pullSoftDeletedComments = false;
 
+    /**
+     * If not false only pull comments that have been assigned to this user id.
+     *
+     * @var integer|bool
+     */
+    public static $assignedToUserId = false;
+
     protected $page;
     protected $limit;
     protected $orderBy;
@@ -98,6 +105,7 @@ class CommentRepository extends RepositoryBase
             ->restrictByContentId()
             ->restrictByUser()
             ->restrictByVisibility()
+            ->restrictByAssignedUserId()
             ->onlyComments()
             ->orderBy($this->orderBy, $this->orderDirection, ConfigService::$tableComments)
             ->directPaginate($this->page, $this->limit);
@@ -120,6 +128,7 @@ class CommentRepository extends RepositoryBase
             ->restrictByContentId()
             ->restrictByUser()
             ->restrictByVisibility()
+            ->restrictByAssignedUserId()
             ->onlyComments();
 
         return $query->count();
@@ -225,6 +234,11 @@ class CommentRepository extends RepositoryBase
                 'deleted_at' => $row['deleted_at'],
                 'replies' => $repliesRowsGrouped[$row['id']] ?? []
             ];
+
+            if (!empty($comment['assigned_on'])) {
+                $comment['assigned_on'] = $row['assigned_on'];
+            }
+
             $results[] = $comment;
         }
 

@@ -16,7 +16,11 @@ class JsonPaginatedResponse implements Responsable
 
     /**
      * JsonPaginatedResponse constructor.
+     *
      * @param $results
+     * @param $totalResults
+     * @param $filterOptions
+     * @param $code
      */
     public function __construct($results, $totalResults, $filterOptions, $code)
     {
