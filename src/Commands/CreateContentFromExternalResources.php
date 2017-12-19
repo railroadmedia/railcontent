@@ -325,11 +325,11 @@ class CreateContentFromExternalResources extends Command
                     'GET'
                 );
 
-                $firstPage = $this->pageToGet() === 1;
-
                 if($lastPage){
                     // Note that we're getting the videos by date in descending order.
-                    $response = array_slice($response, 0, $totalNumberRemainingToProcess);
+                    $response['body']['data'] = array_slice(
+                        $response['body']['data'], 0, $totalNumberRemainingToProcess
+                    );
                 }
 
             } catch (VimeoRequestException $e){
