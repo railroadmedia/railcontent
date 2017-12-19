@@ -53,10 +53,6 @@ class CreateContentFromExternalResources extends Command
     {
         $this->info('Starting. The requests can take 5-30 seconds.');
 
-        // =============================================================================================================
-        // 1. Just setting up some variables ===========================================================================
-        // =============================================================================================================
-
         $this->numberOnLastPage = null;
         $this->total = null;
         $this->totalNumberToProcess = null;
@@ -65,9 +61,7 @@ class CreateContentFromExternalResources extends Command
         $this->perPage = 50;
 
 
-        // =============================================================================================================
-        // 2. Figure out how many videos we need to get ================================================================
-        // =============================================================================================================
+        // how many videos to get
 
         $amountRequested = $this->argument('totalNumberToProcess');
 
@@ -101,9 +95,7 @@ class CreateContentFromExternalResources extends Command
         }
 
 
-        // =============================================================================================================
-        // 3. Prepare Vimeo library ====================================================================================
-        // =============================================================================================================
+        // Vimeo library
 
         $client_id = ConfigService::$videoSync['vimeo']['drumeo']['client_id'];
         $client_secret = ConfigService::$videoSync['vimeo']['drumeo']['client_secret'];
@@ -113,24 +105,14 @@ class CreateContentFromExternalResources extends Command
         $this->lib->setToken($access_token);
 
 
-        // =============================================================================================================
-        // 4. Make the calls until complete ============================================================================
-        // =============================================================================================================
+        // Make calls until complete
 
         do {
-
-
-            // =========================================================================================================
-            // 4.1 - Create and/or reset some variables ================================================================
-            // =========================================================================================================
-
             $contentCreatedCount = 0;
             $contentFieldsInsertData = [];
 
 
-            // =========================================================================================================
-            // 4.2 - Get and parse some videos =========================================================================
-            // =========================================================================================================
+            // Get and parse videos
 
             $response = $this->getVideos();
 
@@ -140,19 +122,12 @@ class CreateContentFromExternalResources extends Command
 
                 foreach ($videos as $video) {
 
-
-                    // =================================================================================================
-                    // 4.2.1 - Create and set some variables ===========================================================
-                    // =================================================================================================
-
                     $uri = $video['uri'];
                     $id = str_replace('/videos/', '', $uri);
                     $duration = $video['duration'];
 
 
-                    // =================================================================================================
-                    // 4.2.2 - Make sure we've got valid data ==========================================================
-                    // =================================================================================================
+                    // validate
 
                     if (!is_numeric($id)) {
                         $this->info('URI "' . $uri . '" failed to convert to a numeric video id. (used: "$id = ' .
@@ -164,9 +139,7 @@ class CreateContentFromExternalResources extends Command
                     }
 
 
-                    // =================================================================================================
-                    // 4.2.3 - Does the video exist yet in the CMS? If not, start the process to add it ================
-                    // =================================================================================================
+                    // create if needed
 
                     $noRecordOfVideoInCMS = empty($this->contentService->getBySlugAndType(
                         'vimeo-video-' . $id, 'vimeo-video'
@@ -175,9 +148,7 @@ class CreateContentFromExternalResources extends Command
                     if($noRecordOfVideoInCMS){
 
 
-                        // =============================================================================================
-                        // 4.2.3.1 - Add video to content table, and store data for mass insert to content-fields table
-                        // =============================================================================================
+                        // store and add to array for mass insert
 
                         $content = $this->contentService->create(
                             'vimeo-video-' . $id,
@@ -210,11 +181,6 @@ class CreateContentFromExternalResources extends Command
                         }
                     }
 
-
-                    // =================================================================================================
-                    // 4.2.4 - increment number of videos looped-through ===============================================
-                    // =================================================================================================
-
                     $this->amountProcessed++;
                 }
             }else{
@@ -226,10 +192,7 @@ class CreateContentFromExternalResources extends Command
             }
 
 
-            // =========================================================================================================
-            // 4.3 - If we just made the first request we now have information we were previously missing ==============
-            // ... set some variables from them ========================================================================
-            // =========================================================================================================
+            // if first request, now have information previously missing
 
             if(is_null($this->total)){ // if not yet set, then this if the first iteration
                 $this->total = $response['body']['total'];
@@ -248,9 +211,7 @@ class CreateContentFromExternalResources extends Command
             }
 
 
-            // =========================================================================================================
-            // 4.4 - Write content-field data and assess it and original content-writing attempts ======================
-            // =========================================================================================================
+            // content-field data insert and assess DB-writing success
 
             $contentFieldsWriteSuccess = $this->databaseManager->connection(ConfigService::$databaseConnectionName)
                 ->table(ConfigService::$tableContentFields)
@@ -274,18 +235,11 @@ class CreateContentFromExternalResources extends Command
             }
 
 
-            // =========================================================================================================
-            // 4.5 - Do we need to loop again? =========================================================================
-            // =========================================================================================================
+            // loop again?
 
             $getMore = $this->amountProcessed < $this->totalNumberToProcess;
 
         } while ( $getMore );
-
-
-        // =============================================================================================================
-        // 5. That's it ================================================================================================
-        // =============================================================================================================
 
         $this->info('');
         $this->info('------------------------------------------------------------');
@@ -317,7 +271,6 @@ class CreateContentFromExternalResources extends Command
         $response = null;
 
         do{
-            $firstPage = false;
 
             try{
 
