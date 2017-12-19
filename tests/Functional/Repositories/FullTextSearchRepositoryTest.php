@@ -29,6 +29,7 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
     protected function setUp()
     {
         $this->setConnectionType('mysql');
+        
         parent::setUp();
 
         $this->classBeingTested = $this->app->make(FullTextSearchRepository::class);

@@ -752,32 +752,32 @@ class ContentRepository extends RepositoryBase
         $permissionRowsGroupedByType = ContentHelper::groupArrayBy($permissionRows, 'content_type');
 
         foreach ($contentRows as $contentRow) {
-            $content = [
-                'id' => $contentRow['id'],
-                'slug' => $contentRow['slug'],
-                'type' => $contentRow['type'],
-                'status' => $contentRow['status'],
-                'language' => $contentRow['language'],
-                'brand' => $contentRow['brand'],
-                'published_on' => $contentRow['published_on'],
-                'created_on' => $contentRow['created_on'],
-                'archived_on' => $contentRow['archived_on'],
-                'parent_id' => $contentRow['parent_id'] ?? null,
-                'child_id' => $contentRow['child_id'] ?? null,
-                'fields' => $fieldRowsGrouped[$contentRow['id']] ?? [],
-                'data' => $datumRowsGrouped[$contentRow['id']] ?? [],
-                'permissions' => array_merge(
-                    $permissionRowsGroupedById[$contentRow['id']] ?? [],
-                    $permissionRowsGroupedByType[$contentRow['type']] ?? []
-                ),
-            ];
+            $contents[$contentRow['id']]['id'] = $contentRow['id'];
+            $contents[$contentRow['id']]['slug'] = $contentRow['slug'];
+            $contents[$contentRow['id']]['type'] = $contentRow['type'];
+            $contents[$contentRow['id']]['status'] = $contentRow['status'];
+            $contents[$contentRow['id']]['language'] = $contentRow['language'];
+            $contents[$contentRow['id']]['brand'] = $contentRow['brand'];
+            $contents[$contentRow['id']]['published_on'] = $contentRow['published_on'];
+            $contents[$contentRow['id']]['created_on'] = $contentRow['created_on'];
+            $contents[$contentRow['id']]['archived_on'] = $contentRow['archived_on'];
+            $contents[$contentRow['id']]['parent_id'] = $contentRow['parent_id'] ?? null;
+            $contents[$contentRow['id']]['child_id'] = $contentRow['child_id'] ?? null;
+            $contents[$contentRow['id']]['fields'] = $fieldRowsGrouped[$contentRow['id']] ?? [];
+            $contents[$contentRow['id']]['data'] = $datumRowsGrouped[$contentRow['id']] ?? [];
+            $contents[$contentRow['id']]['permissions'] = array_merge(
+                $permissionRowsGroupedById[$contentRow['id']] ?? [],
+                $permissionRowsGroupedByType[$contentRow['type']] ?? []
+            );
 
-            if (!empty($contentRow['parent_id'])) {
-                $content['parent_id'] = $contentRow['parent_id'];
-                $content['position'] = $contentRow['child_position'] ?? null;
+            if (!empty($contentRow['child_id'])) {
+                $contents[$contentRow['id']]['child_ids'][] = $contentRow['child_id'];
             }
 
-            $contents[$contentRow['id']] = $content;
+            if (!empty($contentRow['parent_id'])) {
+                $contents[$contentRow['id']]['parent_id'] = $contentRow['parent_id'];
+                $contents[$contentRow['id']]['position'] = $contentRow['child_position'] ?? null;
+            }
         }
 
         return $this->attachContentsLinkedByField($contents);

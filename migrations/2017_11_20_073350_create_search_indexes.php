@@ -13,9 +13,7 @@ class CreateSearchIndexes extends Migration
      */
     public function up()
     {
-        if (!Schema::connection(ConfigService::$databaseConnectionName)->hasTable(
-            ConfigService::$tableSearchIndexes
-        )) {
+        if (config()->get('database.default') != 'testbench') {
             Schema::connection(ConfigService::$databaseConnectionName)->create(
                 ConfigService::$tableSearchIndexes,
                 function ($table) {

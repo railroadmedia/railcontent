@@ -13,16 +13,18 @@ class AddContentStatusToSearchIndexes extends Migration
      */
     public function up()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)->table(
-            ConfigService::$tableSearchIndexes,
-            function ($table) {
-                /**
-                 * @var $table \Illuminate\Database\Schema\Blueprint
-                 */
+        if (config()->get('database.default') != 'testbench') {
+            Schema::connection(ConfigService::$databaseConnectionName)->table(
+                ConfigService::$tableSearchIndexes,
+                function ($table) {
+                    /**
+                     * @var $table \Illuminate\Database\Schema\Blueprint
+                     */
 
-                $table->string('content_status', 64)->after('content_type')->index();
-            }
-        );
+                    $table->string('content_status', 64)->after('content_type')->index();
+                }
+            );
+        }
     }
 
     /**
@@ -32,15 +34,18 @@ class AddContentStatusToSearchIndexes extends Migration
      */
     public function down()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)->table(
-            ConfigService::$tableSearchIndexes,
-            function ($table) {
-                /**
-                 * @var $table \Illuminate\Database\Schema\Blueprint
-                 */
+        if (config()->get('database.default') != 'testbench') {
 
-                $table->dropColumn('content_status');
-            }
-        );
+            Schema::connection(ConfigService::$databaseConnectionName)->table(
+                ConfigService::$tableSearchIndexes,
+                function ($table) {
+                    /**
+                     * @var $table \Illuminate\Database\Schema\Blueprint
+                     */
+
+                    $table->dropColumn('content_status');
+                }
+            );
+        }
     }
 }
