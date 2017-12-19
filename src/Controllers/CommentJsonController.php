@@ -140,9 +140,8 @@ class CommentJsonController extends Controller
     public function reply(ReplyRequest $request)
     {
         $reply = $this->commentService->create(
-
             $request->get('comment'),
-            null,
+            $request->get('content_id'),
             $request->get('parent_id'),
             $request->user()->id ?? null
         );
