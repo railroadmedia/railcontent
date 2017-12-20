@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentHierarchyFactory;
 use Railroad\Railcontent\Services\ConfigService;
@@ -70,6 +71,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
                     'parent_id' => $parentContent['id'],
                     'child_id' => $childContent['id'],
                     'child_position' => 1,
+                    'created_on' =>Carbon::now()->toDateTimeString()
                 ],
             ],
             $response->json()
@@ -103,6 +105,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
                     'parent_id' => $parentContent['id'],
                     'child_id' => $childContent['id'],
                     'child_position' => 1,
+                    'created_on' => Carbon::now()->toDateTimeString()
                 ],
             ],
             $response->json()
