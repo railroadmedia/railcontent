@@ -22,6 +22,7 @@ class CreateContentHierarchyTable extends Migration
                 $table->integer('parent_id')->index()->nullable();
                 $table->integer('child_id')->index();
                 $table->integer('child_position')->index();
+                $table->dateTime('created_on')->index();
 
                 $table->unique(['child_id', 'parent_id']);
             }

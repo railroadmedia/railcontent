@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -93,7 +94,8 @@ class ContentHierarchyRepository extends RepositoryBase
                     [
                         'parent_id' => $parentId,
                         'child_id' => $childId,
-                        'child_position' => $position
+                        'child_position' => $position,
+                        'created_on' => Carbon::now()->toDateTimeString()
                     ]
                 );
 

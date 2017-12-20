@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -35,7 +36,8 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => $childId,
-                'child_position' => 1
+                'child_position' => 1,
+                'created_on' => Carbon::now()->toDateTimeString()
             ]
         );
     }
@@ -59,7 +61,8 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => $childId,
-                'child_position' => $position
+                'child_position' => $position,
+                'created_on' => Carbon::now()->toDateTimeString()
             ]
         );
 
@@ -68,7 +71,8 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 1,
-                'child_position' => 1
+                'child_position' => 1,
+                'created_on' => Carbon::now()->toDateTimeString()
             ]
         );
 
@@ -77,7 +81,8 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 2,
-                'child_position' => 3
+                'child_position' => 3,
+                'created_on' => Carbon::now()->toDateTimeString()
             ]
         );
 
@@ -86,7 +91,8 @@ class ContentHierarchyRepositoryTest extends RailcontentTestCase
             [
                 'parent_id' => $parentId,
                 'child_id' => 3,
-                'child_position' => 4
+                'child_position' => 4,
+                'created_on' => Carbon::now()->toDateTimeString()
             ]
         );
     }
