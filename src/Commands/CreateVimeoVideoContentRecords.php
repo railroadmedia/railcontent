@@ -10,9 +10,9 @@ use Railroad\Railcontent\Services\ContentService;
 use Vimeo\Vimeo;
 use Vimeo\Exceptions\VimeoRequestException;
 
-class CreateContentFromExternalResources extends Command
+class CreateVimeoVideoContentRecords extends Command
 {
-    protected $signature = 'CreateContentFromExternalResources {totalNumberToProcess?}';
+    protected $signature = 'CreateVimeoVideoContentRecords {totalNumberToProcess?}';
     protected $description = 'Content from external resources.';
 
     /**
@@ -185,7 +185,7 @@ class CreateContentFromExternalResources extends Command
                 }
             }else{
                 error_log(
-                    'ERROR: "src/Commands/CreateContentFromExternalResources.php" requested videos ' .
+                    'ERROR: "src/Commands/CreateVimeoVideoContentRecords.php" requested videos ' .
                     'but received an empty response. This makes no sense and should not have happened. It *may* be ' .
                     'indicative of something being wrong somewhere.'
                 );
