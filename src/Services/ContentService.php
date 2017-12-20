@@ -501,7 +501,7 @@ class ContentService
         //delete the content comments, replies and assignation
         $comments = $this->commentRepository->getByContentId($contentId);
 
-        $this->commentAssignationRepository->deleteCommentsAssignationByCommentIds(array_pluck($comments,'id'));
+        $this->commentAssignationRepository->deleteCommentAssignations(array_pluck($comments,'id'));
 
         $this->commentRepository->deleteByContentId($contentId);
 

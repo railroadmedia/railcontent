@@ -90,6 +90,6 @@ class CommentAssignmentService
      */
     public function deleteCommentAssignations($commentId)
     {
-        return $this->commentAssignmentRepository->deleteCommentAssignations($commentId);
+        return $this->commentAssignmentRepository->deleteCommentAssignations([$commentId]);
     }
 }
