@@ -80,14 +80,6 @@ class CommentServiceTest extends RailcontentTestCase
         $result = $this->classBeingTested->create($comment['comment'], $content['id'], $comment['parent_id'], $comment['user_id'], $comment['display_name']);
 
         $this->assertEquals(array_add($comment, 'replies',[]), $result);
-
-        $this->assertDatabaseHas(
-            ConfigService::$tableCommentsAssignment,
-            [
-                'comment_id' => $comment['id'],
-                'user_id' => ConfigService::$commentsAssignationOwnerIds[$content['type']]
-            ]
-        );
     }
 
     public function test_comment_assignation()
@@ -116,7 +108,7 @@ class CommentServiceTest extends RailcontentTestCase
 
         //check that the ContentCreated event was dispatched with the correct content id
         Event::assertDispatched(CommentCreated::class, function($event) use ($comment, $content) {
-            return (($event->comment == $comment) && ($event->contentType == $content['type']));
+            return (($event->commentId == $comment['id']));
         });
     }
 

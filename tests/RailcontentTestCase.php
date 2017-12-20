@@ -11,12 +11,9 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Repositories\RepositoryBase;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\RemoteStorageService;
 use Railroad\Railcontent\Tests\Resources\Models\User;
 
@@ -92,7 +89,7 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.field_option_list', $defaultConfig['field_option_list']);
         $app['config']->set('railcontent.commentable_content_types', $defaultConfig['commentable_content_types']);
         $app['config']->set('railcontent.validation', $defaultConfig['validation']);
-        $app['config']->set('railcontent.comments_assignation', $defaultConfig['comments_assignation']);
+        $app['config']->set('railcontent.comment_assignation_owner_ids', $defaultConfig['comment_assignation_owner_ids']);
         $app['config']->set('railcontent.searchable_content_types', $defaultConfig['searchable_content_types']);
         $app['config']->set('railcontent.search_index_values', $defaultConfig['search_index_values']);
         $app['config']->set('railcontent.allowed_types_for_bubble_progress', $defaultConfig['allowed_types_for_bubble_progress']);

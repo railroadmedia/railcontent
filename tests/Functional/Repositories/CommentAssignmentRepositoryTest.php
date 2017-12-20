@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 
+use Railroad\Railcontent\Factories\CommentAssignationFactory;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
@@ -28,11 +29,17 @@ class CommentAssignmentRepositoryTest extends RailcontentTestCase
      */
     protected $contentFactory;
 
+    /**
+     * @var CommentAssignationFactory
+     */
+    protected $commentAssignationFactory;
+
     protected function setUp()
     {
         parent::setUp();
 
         $this->commentFactory = $this->app->make(CommentFactory::class);
+        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
 
         $this->classBeingTested = $this->app->make(CommentAssignmentRepository::class);
@@ -40,13 +47,13 @@ class CommentAssignmentRepositoryTest extends RailcontentTestCase
         CommentRepository::$availableContentType = false;
         CommentRepository::$availableUserId = false;
         CommentRepository::$availableContentId = false;
-        CommentAssignmentRepository::$availableAssociatedManagerId = false;
-        CommentAssignmentRepository::$availableCommentId = false;
+      //  CommentAssignmentRepository::$availableAssociatedManagerId = false;
+       // CommentAssignmentRepository::$availableCommentId = false;
     }
 
-    public function test_get_assigned_comments_empty()
+    public function get_assigned_comments_empty()
     {
-        CommentAssignmentRepository::$availableAssociatedManagerId = rand();
+        //CommentAssignmentRepository::$availableAssociatedManagerId = rand();
         $this->assertEquals([], $this->classBeingTested->getAssignedComments());
     }
 
@@ -54,18 +61,14 @@ class CommentAssignmentRepositoryTest extends RailcontentTestCase
     {
         $oneContent = $this->contentFactory->create($this->faker->word, 'course', ContentService::STATUS_PUBLISHED);
         $otherContent = $this->contentFactory->create($this->faker->word, 'course lesson', ContentService::STATUS_PUBLISHED);
-
-        for ($i = 1; $i <= 4; $i++) {
+        $userId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
+        for ($i = 0; $i <= 4; $i++) {
             $comments[$i] = $this->commentFactory->create($this->faker->text, $oneContent['id'], null, rand());
+            $assignedComments[$i] = $this->commentAssignationFactory->create($comments[$i]['id'], $userId);
             unset($comments[$i]['replies']);
         }
 
-        for ($i = 1; $i <= 4; $i++) {
-            $otherContentComments[$i] = $this->commentFactory->create($this->faker->text, $otherContent['id'], null, rand());
-        }
-
-        CommentAssignmentRepository::$availableAssociatedManagerId = 1;
-        $response = $this->classBeingTested->getAssignedComments();
+        $response = $this->classBeingTested->getAssignedCommentsForUser($userId, 1,25,'comment_id','asc');
 
         $this->assertEquals($comments, $response);
     }
@@ -73,11 +76,12 @@ class CommentAssignmentRepositoryTest extends RailcontentTestCase
     public function test_delete_comment_assignation()
     {
         $content = $this->contentFactory->create($this->faker->word, 'course', ContentService::STATUS_PUBLISHED);
-        $managerId = ConfigService::$commentsAssignationOwnerIds[$content['type']];
+        $managerId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
 
         $comments = $this->commentFactory->create($this->faker->text, $content['id'], null, rand(2, 10));
+        $assignedComment = $this->commentAssignationFactory->create($comments['id'], $managerId);
 
-        $results = $this->classBeingTested->deleteCommentAssignation($comments['id'], $managerId);
+        $results = $this->classBeingTested->deleteCommentAssignations([$comments['id']]);
 
         $this->assertTrue($results);
 

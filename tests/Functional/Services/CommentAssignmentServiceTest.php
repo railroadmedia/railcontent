@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Factories\CommentAssignationFactory;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -46,27 +47,33 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
 
     public function test_store()
     {
+        $managerId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
         $content = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->randomElement(ConfigService::$commentableContentTypes)
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-        unset($comment['replies']);
-        $store = $this->classBeingTested->store($comment, $content['type']);
 
-        $this->assertEquals([$comment['id'] => $comment], $store);
+        $store = $this->classBeingTested->store($comment['id'], $managerId);
+
+        $this->assertEquals([
+            'id' => 1,
+            'comment_id' => $comment['id'],
+            'user_id' => $managerId,
+            'assigned_on' => Carbon::now()->toDateTimeString()
+        ], $store);
     }
 
     public function test_delete_comment_assignation_when_not_exist()
     {
-        $results = $this->classBeingTested->deleteCommentAssignation(rand(), rand());
+        $results = $this->classBeingTested->deleteCommentAssignations(rand());
 
-        $this->assertNull($results);
+        $this->assertFalse($results);
     }
 
     public function test_delete_comment_assignation()
     {
-        $userId = ConfigService::$commentsAssignationOwnerIds['course'];
+        $userId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
 
         $content = $this->contentFactory->create(
             $this->faker->word,
@@ -74,9 +81,9 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
         );
 
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-        $this->commentAssignationFactory->create($comment, 'course');
+        $this->commentAssignationFactory->create($comment['id'], $userId);
 
-        $results = $this->classBeingTested->deleteCommentAssignation($comment['id'], $userId);
+        $results = $this->classBeingTested->deleteCommentAssignations($comment['id']);
 
         $this->assertTrue($results);
     }
