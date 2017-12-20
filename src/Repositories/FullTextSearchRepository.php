@@ -150,8 +150,8 @@ class FullTextSearchRepository extends RepositoryBase
         $limit = 10,
         $contentTypes = [],
         $contentStatuses = [],
-        $orderByColumn,
-        $orderByDirection,
+        $orderByColumn = 'score',
+        $orderByDirection = 'desc',
         $dateTimeCutoff = null
     ) {
         $query = $this->query()
