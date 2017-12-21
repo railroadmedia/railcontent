@@ -6,6 +6,7 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 use Carbon\Carbon;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -171,7 +172,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
 
@@ -198,7 +200,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
         $response = $this->call('DELETE', 'railcontent/comment/' . $comment['id']);
@@ -211,8 +214,10 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
+
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $this->faker->randomNumber());
         CommentService::$canManageOtherComments = false;
 
@@ -237,12 +242,13 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
 
         CommentService::$canManageOtherComments = true;
-        $response = $this->call('DELETE', 'railcontent/comment/' . $comment['id']);
+        $response = $this->call('DELETE', 'railcontent/comment/' . $comment['id'],['auth_level' => 'administrator']);
 
         $this->assertEquals(204, $response->getStatusCode());
     }
@@ -252,7 +258,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
 
@@ -269,7 +276,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
 
@@ -298,7 +306,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
 
         for ($i = 1; $i <= $totalNumber; $i++) {
@@ -334,7 +343,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
 
         $otherContent = $this->contentFactory->create(
@@ -380,7 +390,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
 
         for ($i = 1; $i <= $totalNumber; $i++) {

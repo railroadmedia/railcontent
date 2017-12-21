@@ -92,18 +92,12 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_delete_content()
     {
-        $parent = $this->contentFactory->create();
-        $content = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$commentableContentTypes));
-        $otherContent = $this->contentFactory->create();
+        $parent = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED);
+        $content = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED);
+        $otherContent = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED);
         for ($i = 0; $i < 3; $i++) {
             $expectedFields = $this->fieldFactory->create($content['id']);
             $expectedData[] = $this->datumFactory->create($content['id']);
-            $permission = $this->permissionFactory->create();
-            $contentPermission = $this->contentPermissionFactory->create(
-                $content['id'],
-                null,
-                $permission['id']
-            );
             $children = $this->contentHierarchyFactory->create($content['id']);
             $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
             $reply = $this->commentFactory->create($this->faker->text, null, $comment['id'], rand());
@@ -170,14 +164,6 @@ class ContentServiceTest extends RailcontentTestCase
             ]
         );
 
-        //check that the links with the permissions are deleted
-        $this->assertDatabaseMissing(
-            ConfigService::$tableContentPermissions,
-            [
-                'content_id' => $content['id']
-            ]
-        );
-
         //check that the content comments and replies are deleted
         $this->assertDatabaseMissing(
             ConfigService::$tableComments,
@@ -203,18 +189,13 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_soft_delete_content()
     {
-        $parent = $this->contentFactory->create();
-        $content = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$commentableContentTypes));
-        $otherSiblingContent = $this->contentFactory->create();
+        $parent = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED);
+        $content = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED);
+        $otherSiblingContent = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED);
         for ($i = 0; $i < 3; $i++) {
             $expectedFields = $this->fieldFactory->create($content['id']);
             $expectedData[] = $this->datumFactory->create($content['id']);
-            $permission = $this->permissionFactory->create();
-            $contentPermission = $this->contentPermissionFactory->create(
-                $content['id'],
-                null,
-                $permission['id']
-            );
+
             $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
             $reply = $this->commentFactory->create($this->faker->text, null, $comment['id'], rand());
         }

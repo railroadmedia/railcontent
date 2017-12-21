@@ -113,7 +113,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $response = $this->call('GET', 'railcontent/search', [
             'page' => $page,
             'limit' => $limit,
-            'term' =>  $titleField[2]['value']
+            'term' =>  $titleField[2]['value'].' '.$otherField[2]['value']
         ]);
 
         //check that first result it's the most relevant

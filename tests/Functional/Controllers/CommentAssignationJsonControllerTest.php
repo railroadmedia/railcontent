@@ -6,11 +6,16 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 use Railroad\Railcontent\Factories\CommentAssignationFactory;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentAssignationJsonControllerTest extends RailcontentTestCase
 {
+    /**
+     * @var ContentFactory
+     */
     protected $contentFactory;
 
     /**
@@ -49,7 +54,8 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
         $assignedComments = [];
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
 
         for ($i = 0; $i < 5; $i++) {
@@ -80,7 +86,8 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
 
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
         $assignedComments = $this->commentAssignationFactory->create($comment['id'], rand());
