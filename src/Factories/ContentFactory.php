@@ -45,8 +45,7 @@ class ContentFactory extends ContentService
                 $this->faker->randomElement(
                     [
                         ContentService::STATUS_PUBLISHED,
-                        ContentService::STATUS_DRAFT,
-                        ContentService::STATUS_ARCHIVED
+                        ContentService::STATUS_SCHEDULED
                     ]
                 ),
                 'en-US',
