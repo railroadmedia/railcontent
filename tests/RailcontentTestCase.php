@@ -12,6 +12,7 @@ use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Services\RemoteStorageService;
@@ -66,6 +67,10 @@ class RailcontentTestCase extends BaseTestCase
         RepositoryBase::$connectionMask = null;
 
         Carbon::setTestNow(Carbon::now());
+
+        //call the ContentPermissionsMiddleware
+        $middleware = $this->app->make(ContentPermissionsMiddleware::class);
+        $middleware->handle(request(), function(){});
     }
 
     /**
