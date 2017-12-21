@@ -81,10 +81,10 @@ class RailcontentServiceProvider extends ServiceProvider
         //load package routes file
         $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
 
-        $this->app->singleton(
-            'Illuminate\Contracts\Debug\ExceptionHandler',
-            'Railroad\Railcontent\Exceptions\RailcontentException'
-        );
+//        $this->app->singleton(
+//            'Illuminate\Contracts\Debug\ExceptionHandler',
+//            'Railroad\Railcontent\Exceptions\RailcontentException'
+//        );
 
         $this->commands([
             CreateSearchIndexes::class,
