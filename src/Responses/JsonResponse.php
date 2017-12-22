@@ -7,9 +7,8 @@ use Illuminate\Contracts\Support\Responsable;
 
 class JsonResponse implements Responsable
 {
-    protected $results;
-
-    protected $code;
+    public $results;
+    public $code;
 
     /**
      * JsonPaginatedResponse constructor.
