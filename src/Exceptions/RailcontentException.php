@@ -44,14 +44,6 @@ class RailcontentException extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-
-        if ($exception instanceof NotFoundHttpException) {
-            return response()->json(['errors' =>[
-                'title' => 'Route not found.',
-                'detail' => 'NotFoundHttpException line '.$exception->getLine().' in '.$exception->getFile()
-            ]],$exception->getStatusCode());
-        }
-
         return parent::render($request, $exception);
     }
 
