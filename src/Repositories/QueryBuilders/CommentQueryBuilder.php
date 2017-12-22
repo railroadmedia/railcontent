@@ -94,12 +94,12 @@ class CommentQueryBuilder extends QueryBuilder
     public function restrictByBrand()
     {
         $this->leftJoin(
-            ConfigService::$tableContent,
-            ConfigService::$tableContent . '.id',
+            ConfigService::$tableContent .' as content',
+             'content.id',
             '=',
             ConfigService::$tableComments . '.content_id'
         )
-            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand);
+            ->where('content.brand', ConfigService::$brand);
 
         return $this;
     }
