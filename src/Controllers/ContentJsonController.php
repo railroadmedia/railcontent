@@ -113,6 +113,17 @@ class ContentJsonController extends Controller
 
         $results = [$id => $content];
 
+        // todo: validate
+//        $validationResults = $this->contentService->validate($content);
+        $validationResults = $this->contentService->validate($content, true);
+
+        if(!$validationResults['valid']){
+            return new JsonResponse(
+                $validationResults['message'],
+                $validationResults['statusCode']
+            );
+        }
+
         return new JsonResponse(array_values($results), 200);
     }
 

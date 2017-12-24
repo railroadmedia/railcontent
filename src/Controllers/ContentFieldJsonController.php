@@ -9,9 +9,12 @@ use Railroad\Railcontent\Requests\ContentFieldCreateRequest;
 use Railroad\Railcontent\Requests\ContentFieldUpdateRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ContentFieldService;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 class ContentFieldJsonController extends Controller
 {
+    use ValidatesRequests;
+
     private $fieldService;
 
     /**
