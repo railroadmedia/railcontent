@@ -4,6 +4,9 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Validator;
+use Illuminate\Validation\Factory as ValidationFactory;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -21,13 +24,22 @@ class ContentJsonController extends Controller
     private $contentService;
 
     /**
+     * @var ValidationFactory
+     */
+    private $validationFactory;
+
+    /**
      * ContentController constructor.
      *
      * @param ContentService $contentService
      */
-    public function __construct(ContentService $contentService)
+    public function __construct(
+        ContentService $contentService,
+        ValidationFactory $validationFactory
+    )
     {
         $this->contentService = $contentService;
+        $this->validationFactory = $validationFactory;
     }
 
     /**
@@ -104,27 +116,25 @@ class ContentJsonController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
         $content = $this->contentService->getById($id);
-
-        //check if content exist; if not throw exception
         throw_unless($content, new NotFoundException('No content with id ' . $id . ' exists.'));
 
-        $results = [$id => $content];
-
-        // todo: validate
-//        $validationResults = $this->contentService->validate($content);
-        $validationResults = $this->contentService->validate($content, true);
-
-        if(!$validationResults['valid']){
-            return new JsonResponse(
-                $validationResults['message'],
-                $validationResults['statusCode']
-            );
+        $rules = $this->contentService->getValidationRules($content);
+        if($rules === false){
+            return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503 );
         }
 
-        return new JsonResponse(array_values($results), 200);
+        $validator = $this->validationFactory->make($content, $rules);
+
+        try{
+            $validator->validate();
+        }catch(ValidationException $exception){
+            return new JsonResponse( $exception->getMessage(), $exception->getCode() );
+        }
+
+        return new JsonResponse(array_values([$id => $content]), 200);
     }
 
     public function slugs(Request $request, ...$slugs)
