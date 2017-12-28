@@ -617,70 +617,50 @@ class ContentService
         return $this->contentRepository->softDelete(array_pluck($children, 'child_id'));
     }
 
-    public function validate($content, $forceTrue = false)
+    /**
+     * @param $content
+     * @param bool $forceTrue
+     * @return array|bool
+     */
+    public function getValidationRules($content)
     {
-//        if($forceTrue){
-//            return [
-//                'valid' => true
-//            ];
-//        }
-
         $brand = ConfigService::$brand;
         $contentType = $content['type'];
         $rulesAll = ConfigService::$validationRules;
 
-//        if(!array_key_exists($brand, $rulesAll)){
-//            $message = 'No validation rules for the brand \'' . ConfigService::$brand . '\'.';
-//            if(empty($brand)){
-//                $message = 'No brand set in configuration.';
-//            }
-//            return [
-//                'valid' => false,
-//                'message' => $message,
-//                'statusCode' => 503
-//            ];
-//        }
+        if(!array_key_exists($brand, $rulesAll)){
+            $message = 'No validation rules for the brand \'' . ConfigService::$brand . '\'.';
+            if(empty($brand)){
+                $message = 'No brand set in configuration.';
+            }
+            error_log('railcontent/src/Services/ContentService.php failed with message: "' . $message. '"');
+            return false;
+        }
 
         $rulesForBrand = $rulesAll[$brand];
 
-//        if(!array_key_exists($contentType, $rulesForBrand)){
-//            return [
-//                'valid' => false,
-//                'message' => 'No validation rules for this content-type \'' . $content['type'] . '\'.',
-//                'statusCode' => 503
-//            ];
-//        }
+        if(!array_key_exists($contentType, $rulesForBrand)){
+            error_log(
+                'railcontent/src/Services/ContentService.php failed at: ' .
+                '"!array_key_exists($contentType, $rulesForBrand)"'
+            );
+            return false;
+        }
 
-//        $rules = $rulesForBrand[$contentType];
+        $rulesForType = $rulesForBrand[$contentType];
 
-        $rules = $rulesForBrand;
-
-        if($rules['everyThingRequiredEverywhere']){
-            foreach($rules as $type => &$rulesForType){
-//            foreach($rules as $type => &$rulesForType){
-                if(is_array($rulesForType)){
-                    foreach($rulesForType as &$rule){
-                        if(empty($rule)){
-                            $rule = $rule . 'required';
-                        }else{
-                            if(strpos($rule, 'required') === false){
-                                $rule = $rule . '|required';
-                            }
-                        }
+        if($rulesForBrand['everyThingRequiredEverywhere']){
+            foreach($rulesForType as &$rule){
+                if(empty($rule)){
+                    $rule = $rule . 'required';
+                }else{
+                    if(strpos($rule, 'required') === false){
+                        $rule = $rule . '|required';
                     }
                 }
             }
         }
 
-        // todo: do validation
-        // todo: do validation
-        // todo: do validation
-        // todo: do validation
-        // todo: do validation
-        // todo: do validation
-        // todo: do validation
-        // todo: do validation
-
-        return true;
+        return $rulesForType;
     }
 }
