@@ -651,8 +651,12 @@ class ContentService
 
         if($rulesForBrand['everyThingRequiredEverywhere']){
             foreach($rulesForType as &$rule){
-                if(empty($rule)){
+                if(empty($rule)) {
                     $rule = $rule . 'required';
+                }elseif(is_array($rule)){
+                    if(!in_array('required', $rule)){
+                        $rule[] = 'required';
+                    }
                 }else{
                     if(strpos($rule, 'required') === false){
                         $rule = $rule . '|required';
@@ -683,7 +687,7 @@ class ContentService
                     $forValidation[$nestedValue['key']] = [];
                 }
 
-                $forValidation[$nestedValue['key']][] = $nestedValue['value']['id'];
+                $forValidation[$nestedValue['key']] = $nestedValue['value']['id'];
             }
         }
 
