@@ -663,4 +663,30 @@ class ContentService
 
         return $rulesForType;
     }
+
+    public function getContentForValidation($content)
+    {
+        $nestedValues = array_merge($content['data'], $content['fields']);
+
+        $forValidation = [];
+
+        foreach($nestedValues as $key => $nestedValue){
+            $value = $nestedValue['value'];
+            $forValidation[$nestedValue['key']] = $value;
+
+            if(is_array($value)){
+
+                $arrayIsAssociative = array_keys($value) !== range(0, count($value) - 1);
+
+                // shrek if not already shrekt. If not associative has already been shrekt and thus has only the data we want.
+                if($arrayIsAssociative){
+                    $forValidation[$nestedValue['key']] = [];
+                }
+
+                $forValidation[$nestedValue['key']][] = $nestedValue['value']['id'];
+            }
+        }
+
+        return $forValidation;
+    }
 }

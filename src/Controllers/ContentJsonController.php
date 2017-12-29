@@ -5,7 +5,6 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Validation\Validator;
 use Illuminate\Validation\Factory as ValidationFactory;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
@@ -126,7 +125,9 @@ class ContentJsonController extends Controller
             return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503 );
         }
 
-        $validator = $this->validationFactory->make($content, $rules);
+        $contentForValidation = $this->contentService->getContentForValidation($content);
+        
+        $validator = $this->validationFactory->make($contentForValidation, $rules);
 
         try{
             $validator->validate();
