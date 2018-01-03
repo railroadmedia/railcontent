@@ -127,10 +127,13 @@ class ContentJsonController extends Controller
 
         $contentForValidation = $this->contentService->getContentForValidation($content);
 
+        $validator = $this->validationFactory->make($contentForValidation, $rules);
+
         try{
-            $this->validationFactory->make($contentForValidation, $rules)->validate();
+            $validator->validate();
         }catch(ValidationException $exception){
-            return new JsonResponse($exception->validator->messages()->messages(), $exception->status);
+            $messages = $exception->validator->messages()->messages();
+            return new JsonResponse($messages, $exception->status);
         }
 
         return new JsonResponse(array_values([$id => $content]), 200);
