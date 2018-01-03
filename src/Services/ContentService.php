@@ -649,7 +649,9 @@ class ContentService
 
         $rulesForType = $rulesForBrand[$contentType];
 
-        if($rulesForBrand['everyThingRequiredEverywhere']){
+        if(array_key_exists('everyThingRequiredEverywhere', $rulesForBrand) ?
+            $rulesForBrand['everyThingRequiredEverywhere'] : false
+        ){
             foreach($rulesForType as &$rule){
                 if(empty($rule)) {
                     $rule = $rule . 'required';
