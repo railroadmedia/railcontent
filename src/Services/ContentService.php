@@ -672,36 +672,30 @@ class ContentService
 
     public function getContentForValidation($content)
     {
-        $nestedValues = array_merge($content['data'], $content['fields']);
+        $contentProperties = array_merge($content['data'], $content['fields']);
+
+        // todo: get permissions
+        // todo: get status
+        // todo: get publish on
 
         /*
          * Gather Like-Values When Preparing Content for Validation
          */
-        $this->key_by_array_item_value($nestedValues, 'key');
+        $this->gatherByKey($contentProperties, 'key');
 
         $forValidation = [];
 
-        foreach($nestedValues as $key => $nestedValue){
-            $value = $nestedValue['value'];
-            $forValidation[$nestedValue['key']] = $value;
-
-            if(is_array($value)){
-
-                $arrayIsAssociative = array_keys($value) !== range(0, count($value) - 1);
-
-                // shrek if not already shrekt. If not associative has already been shrekt and thus has only the data we want.
-                if($arrayIsAssociative){
-                    $forValidation[$nestedValue['key']] = [];
-                }
-
-                $forValidation[$nestedValue['key']] = $nestedValue['value']['id'];
+        foreach($contentProperties as $key => $propertyValues){
+            foreach($propertyValues as $propertyValue){
+                $value = $propertyValue['value'];
+                $forValidation[$propertyValue['key']][] = $value;
             }
         }
 
         return $forValidation;
     }
 
-    private function key_by_array_item_value(array &$nestedArrays, $keyName)
+    private function gatherByKey(array &$nestedArrays, $keyName)
     {
         $betterArray = [];
 
