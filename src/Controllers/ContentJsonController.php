@@ -124,9 +124,9 @@ class ContentJsonController extends Controller
             return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503 );
         }
 
-        $contentForValidation = $this->contentService->getContentForValidation($content);
+        $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation($content, $rules);
 
-        $validator = $this->validationFactory->make($contentForValidation, $rules);
+        $validator = $this->validationFactory->make($contentPropertiesForValidation, $rules);
 
         try{
             $validator->validate();
