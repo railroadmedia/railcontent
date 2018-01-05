@@ -670,20 +670,19 @@ class ContentService
         return $rulesForType;
     }
 
-    public function getContentForValidation($content)
+    /**
+     * @param $content
+     * @param $rules
+     * @return array
+     */
+    public function getContentPropertiesForValidation($content, $rules)
     {
+        $forValidation = [];
+        $namesOfPropertiesToValidate = array_keys($rules);
+
         $contentProperties = array_merge($content['data'], $content['fields']);
 
-        // todo: get permissions
-        // todo: get status
-        // todo: get publish on
-
-        /*
-         * Gather Like-Values When Preparing Content for Validation
-         */
-        $this->gatherByKey($contentProperties, 'key');
-
-        $forValidation = [];
+        $this->gatherByPropertyNameAvailableAsItemInArray($contentProperties, 'key');
 
         foreach($contentProperties as $key => $propertyValues){
             foreach($propertyValues as $propertyValue){
@@ -692,10 +691,18 @@ class ContentService
             }
         }
 
+        $this->findAndAddMissingProperties($forValidation, $namesOfPropertiesToValidate, $content);
+
         return $forValidation;
     }
 
-    private function gatherByKey(array &$nestedArrays, $keyName)
+    /**
+     * Gather Like-Values When Preparing Content Properties for Validation
+     *
+     * @param array $nestedArrays
+     * @param $keyName
+     */
+    private function gatherByPropertyNameAvailableAsItemInArray(array &$nestedArrays, $keyName)
     {
         $betterArray = [];
 
@@ -713,9 +720,8 @@ class ContentService
 
                 if(isset($currentToSet)){
                     /*
-                     * We don't want to overwrite when there are duplicates,
-                     * rather we want to turn that value into an array
-                     * so that we can create a collection of values.
+                     * We don't want to overwrite when there are duplicates, rather we want to turn
+                     * that value into an array so that we can create a collection of values.
                      *
                      * Jonathan, January 2018
                      */
@@ -732,16 +738,6 @@ class ContentService
                     }
                 }
 
-                /*
-                 * Even if there's only one, we still want them nested because otherwise we'll have some "primative"
-                 * values (that is arrays that one piece of data for one category), and then we'll have values with
-                 * nested arrays (that is categories with multiples pieces of data - each represented by it's own
-                 * nested array. It's better to just have them all similar and then a simple `if count() === 1` can
-                 * be used to determine which each is if necessary.
-                 *
-                 * Jonathan, January 2018
-                 */
-
                 $currentToSet[] = $nestedArrayItem;
 
                 unset($nestedArrays[$index]);
@@ -751,5 +747,54 @@ class ContentService
         }
 
         $nestedArrays = $betterArray;
+    }
+
+    /**
+     * Get values required by rules, but not in content-data or content-fields
+     *
+     * @param $propertyValuesPreparedForValidation
+     * @param $namesOfPropertiesToValidate
+     * @param $content
+     * @return void
+     */
+    private function findAndAddMissingProperties(
+        &$propertyValuesPreparedForValidation,
+        $namesOfPropertiesToValidate,
+        $content
+    )
+    {
+        foreach(array_diff($namesOfPropertiesToValidate, array_keys($propertyValuesPreparedForValidation)) as $toGet){
+
+            if(isset($content[$toGet])){
+
+                $plural = true;
+                $valueOrValuesOfProperty = $content[$toGet];
+
+                /*
+                 * If it's an indexed array that means the content-property has multiple values.
+                 *
+                 * Jonathan, January 2018
+                 */
+
+                if(gettype($valueOrValuesOfProperty) === 'array'){
+                    $i = 0;
+                    foreach($valueOrValuesOfProperty as $key => $value){
+                        if(gettype($key) === 'integer' && $key === $i){ // could still be an indexed array
+                            $i++;
+                        }else{ // definitely not an indexed array
+                            $plural = false;
+                        }
+                    }
+                }else{
+                    $plural = false;
+                }
+
+                if(!$plural){
+                    $valueOrValuesOfProperty = [$valueOrValuesOfProperty];
+                }
+
+                $propertyValuesPreparedForValidation[$toGet] = $valueOrValuesOfProperty;
+            }
+        }
     }
 }
