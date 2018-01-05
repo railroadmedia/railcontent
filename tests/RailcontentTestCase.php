@@ -11,6 +11,7 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Redis;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
@@ -145,6 +146,21 @@ class RailcontentTestCase extends BaseTestCase
         );
 
         $app['config']->set('railcontent.awsCloudFront', 'd1923uyy6spedc.cloudfront.net');
+
+        $app['config']->set(
+            'database.redis',
+            [
+                'client' => 'predis',
+                'default' => [
+                    'host' => env('REDIS_HOST', 'redis'),
+                    'password' => env('REDIS_PASSWORD', null),
+                    'port' => env('REDIS_PORT', 6379),
+                    'database' => 0,
+                ]
+            ]
+        );
+        $app['config']->set('cache.default', env('CACHE_DRIVER', 'redis'));
+
         if (!$app['db']->connection()->getSchemaBuilder()->hasTable('users')) {
 
         $app['db']->connection()->getSchemaBuilder()->create(
@@ -235,6 +251,7 @@ class RailcontentTestCase extends BaseTestCase
 
     protected function tearDown()
     {
+        Redis::flushDB();
         parent::tearDown();
     }
 

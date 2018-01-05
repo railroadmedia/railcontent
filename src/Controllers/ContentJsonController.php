@@ -4,8 +4,10 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
+use Railroad\Railcontent\Helpers\SettingsHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
@@ -36,6 +38,10 @@ class ContentJsonController extends Controller
      */
     public function index(Request $request)
     {
+        $settings = SettingsHelper::getSettings();
+        $hash = md5($request->getQueryString() . ' ' . $settings);
+        $contentDataCached = Redis::get('results_' . $hash);
+        if (!$contentDataCached) {
         $filters = $request->get('filter', []);
         $parsedFilters = [];
 
@@ -62,6 +68,16 @@ class ContentJsonController extends Controller
             $parsedFilters['included_user_states'] ?? []
         );
 
+            Redis::set('results_' . $hash, serialize($contentData));
+
+            foreach (array_keys($contentData['results']) as $contentId) {
+                Redis::rpush('content_' . $contentId, 'results_' . $hash);
+            }
+
+        } else {
+            $contentData = unserialize($contentDataCached);
+        }
+
         return new JsonPaginatedResponse(
             array_values($contentData['results']),
             $contentData['total_results'],
@@ -76,7 +92,22 @@ class ContentJsonController extends Controller
      */
     public function getByParentId($parentId)
     {
+        $settings = SettingsHelper::getSettings();
+        $hash = md5($parentId . ' ' . $settings);
+        $contentDataCached = Redis::get('results_by_parent_id_' . $hash);
+        if (!$contentDataCached) {
         $contentData = $this->contentService->getByParentId($parentId);
+
+            Redis::set('results_by_parent_id_' . $hash, serialize($contentData));
+            if(array_key_exists('results',$contentData)) {
+                foreach (array_keys($contentData['results']) as $contentId) {
+                    Redis::rpush('content_' . $contentId, 'results_by_parent_id_' . $hash);
+                }
+            }
+
+        } else {
+            $contentData = unserialize($contentDataCached);
+        }
 
         return new JsonResponse(
             $contentData,
@@ -172,6 +203,11 @@ class ContentJsonController extends Controller
             is_null($content),
             new NotFoundException('Update failed, content not found with id: ' . $contentId)
         );
+
+        $cachedSeaarches = Redis::lrange('content_'.$contentId,0,100000);
+        foreach ($cachedSeaarches as $cachedSearch){
+            Redis::del($cachedSearch);
+        }
 
         return new JsonResponse($content, 201);
     }
