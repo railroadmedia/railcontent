@@ -674,6 +674,8 @@ class ContentService
     {
         $nestedValues = array_merge($content['data'], $content['fields']);
 
+        $this->key_by_array_item_value($nestedValues, 'key');
+
         $forValidation = [];
 
         foreach($nestedValues as $key => $nestedValue){
@@ -694,5 +696,63 @@ class ContentService
         }
 
         return $forValidation;
+    }
+
+    private function key_by_array_item_value(array &$nestedArrays, $keyName)
+    {
+        $betterArray = [];
+
+        $nestedArrayItemCount = count($nestedArrays);
+        $loopCount = 0;
+
+        foreach ($nestedArrays as $index => $nestedArrayItem) {
+            if ($loopCount == $nestedArrayItemCount) {
+                break;
+            }
+
+            if (isset($nestedArrayItem[$keyName])) {
+
+                $currentToSet = &$betterArray[$nestedArrayItem[$keyName]];
+
+                if(isset($currentToSet)){
+                    /*
+                     * We don't want to overwrite when there are duplicates,
+                     * rather we want to turn that value into an array
+                     * so that we can create a collection of values.
+                     *
+                     * Jonathan, January 2018
+                     */
+
+                    if(isset($currentToSet['id'])){
+                        /*
+                         * only one item here so far, so let's put that in it's own nested array so it will play
+                         * better with it's coming sibling(s).
+                         *
+                         * Jonathan, January 2018
+                         */
+                        $oldestChild = $currentToSet;
+                        $currentToSet = [$oldestChild];
+                    }
+                }
+
+                /*
+                 * Even if there's only one, we still want them nested because otherwise we'll have some "primative"
+                 * values (that is arrays that one piece of data for one category), and then we'll have values with
+                 * nested arrays (that is categories with multiples pieces of data - each represented by it's own
+                 * nested array. It's better to just have them all similar and then a simple `if count() === 1` can
+                 * be used to determine which each is if necessary.
+                 *
+                 * Jonathan, January 2018
+                 */
+
+                $currentToSet[] = $nestedArrayItem;
+
+                unset($nestedArrays[$index]);
+            }
+
+            $loopCount++;
+        }
+
+        $nestedArrays = $betterArray;
     }
 }
