@@ -3,10 +3,12 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
@@ -115,7 +117,13 @@ class ContentService
      */
     public function getById($id)
     {
-        return $this->contentRepository->getById($id);
+        $contentDataCached = $this->getCachedResults($id);
+
+        if (!$contentDataCached) {
+            $contentDataCached = $this->contentRepository->getById($id);
+            $this->saveCacheResults('content_', $contentDataCached, [$id]);
+        }
+        return $contentDataCached;
     }
 
     /**
@@ -126,7 +134,14 @@ class ContentService
      */
     public function getByIds($ids)
     {
-        return $this->contentRepository->getByIds($ids);
+        $contentDataCached = $this->getCachedResults(...$ids);
+
+        if (!$contentDataCached) {
+            $contentDataCached = $this->contentRepository->getByIds($ids);
+            $this->saveCacheResults('contents_', $contentDataCached, $ids);
+        }
+
+        return $contentDataCached;
     }
 
     /**
@@ -151,7 +166,14 @@ class ContentService
      */
     public function getAllByType($type)
     {
-        return $this->contentRepository->getByType($type);
+        $contentDataCached = $this->getCachedResults($type);
+
+        if (!$contentDataCached) {
+            $contentDataCached = $this->contentRepository->getByType($type);
+            $this->saveCacheResults('contents_by_type_', $contentDataCached, array_keys($contentDataCached));
+        }
+
+        return $contentDataCached;
     }
 
     /**
@@ -357,37 +379,57 @@ class ContentService
         $orderByDirection = substr($orderByAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($orderByAndDirection, '-');
 
-        $filter = $this->contentRepository->startFilter(
-            $page,
+        $contentDataCached = $this->getCachedResults($page,
             $limit,
             $orderByColumn,
             $orderByDirection,
-            $includedTypes,
-            $slugHierarchy,
-            $requiredParentIds
+            implode(' ', array_values($includedTypes) ?? ''),
+            implode(' ', array_values($slugHierarchy) ?? ''),
+            implode(' ', array_values(array_collapse($requiredParentIds)) ?? ''),
+            implode(' ', array_values(array_collapse($requiredFields)) ?? ''),
+            implode(' ', array_values(array_collapse($includedFields)) ?? ''),
+            implode(' ', array_values(array_collapse($requiredUserStates)) ?? ''),
+            implode(' ', array_values(array_collapse($includedUserStates)) ?? '')
         );
 
-        foreach ($requiredFields as $requiredField) {
-            $filter->requireField(...$requiredField);
+        if (!$contentDataCached) {
+            $filter = $this->contentRepository->startFilter(
+                $page,
+                $limit,
+                $orderByColumn,
+                $orderByDirection,
+                $includedTypes,
+                $slugHierarchy,
+                $requiredParentIds
+            );
+
+            foreach ($requiredFields as $requiredField) {
+                $filter->requireField(...$requiredField);
+            }
+
+            foreach ($includedFields as $includedField) {
+                $filter->includeField(...$includedField);
+            }
+
+            foreach ($requiredUserStates as $requiredUserState) {
+                $filter->requireUserStates(...$requiredUserState);
+            }
+
+            foreach ($includedUserStates as $includedUserState) {
+                $filter->includeUserStates(...$includedUserState);
+            }
+
+            $contentDataCached = [
+                'results' => $filter->retrieveFilter(),
+                'total_results' => $filter->countFilter(),
+                'filter_options' => $filter->getFilterFields()];
+
+            $this->saveCacheResults('results_', serialize($contentDataCached), array_keys($contentDataCached));
+        } else{
+            $contentDataCached = unserialize($contentDataCached);
         }
 
-        foreach ($includedFields as $includedField) {
-            $filter->includeField(...$includedField);
-        }
-
-        foreach ($requiredUserStates as $requiredUserState) {
-            $filter->requireUserStates(...$requiredUserState);
-        }
-
-        foreach ($includedUserStates as $includedUserState) {
-            $filter->includeUserStates(...$includedUserState);
-        }
-
-        return [
-            'results' => $filter->retrieveFilter(),
-            'total_results' => $filter->countFilter(),
-            'filter_options' => $filter->getFilterFields()
-        ];
+        return $contentDataCached;
     }
 
     /**
@@ -428,13 +470,13 @@ class ContentService
             );
 
         //save the link with parent if the parent id exist on the request
-        if($parentId){
+        if ($parentId) {
             $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
                 $parentId,
                 $id,
                 null
             );
-            
+
         }
         event(new ContentCreated($id));
 
@@ -460,6 +502,8 @@ class ContentService
 
         event(new ContentUpdated($id));
 
+        CacheHelper::deleteCache('content_' . $id);
+
         return $this->getById($id);
     }
 
@@ -477,6 +521,8 @@ class ContentService
             return null;
         }
         event(new ContentDeleted($id));
+
+        CacheHelper::deleteCache('content_' . $id);
 
         return $this->contentRepository->delete($id);
     }
@@ -501,7 +547,7 @@ class ContentService
         //delete the content comments, replies and assignation
         $comments = $this->commentRepository->getByContentId($contentId);
 
-        $this->commentAssignationRepository->deleteCommentAssignations(array_pluck($comments,'id'));
+        $this->commentAssignationRepository->deleteCommentAssignations(array_pluck($comments, 'id'));
 
         $this->commentRepository->deleteByContentId($contentId);
 
@@ -607,6 +653,8 @@ class ContentService
 
         event(new ContentSoftDeleted($id));
 
+        CacheHelper::deleteCache('content_' . $id);
+
         return $this->contentRepository->softDelete([$id]);
     }
 
@@ -615,5 +663,22 @@ class ContentService
         $children = $this->contentHierarchyRepository->getByParentIds([$id]);
 
         return $this->contentRepository->softDelete(array_pluck($children, 'child_id'));
+    }
+
+    private function getCachedResults($key)
+    {
+        $results = CacheHelper::getCache(CacheHelper::getKey($key));
+
+        return unserialize($results);
+    }
+
+    private function saveCacheResults($keyPrefix, $value, $contentIds)
+    {
+        CacheHelper::setCache($keyPrefix . CacheHelper::$hash, serialize($value));
+
+        CacheHelper::addLists('results_' . CacheHelper::$hash, $contentIds);
+
+        return true;
+
     }
 }
