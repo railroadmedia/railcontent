@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
@@ -117,13 +118,14 @@ class ContentService
      */
     public function getById($id)
     {
-        $contentDataCached = $this->getCachedResults($id);
+        $hash = 'content_' . CacheHelper::getKey($id);
+        $results = Cache::rememberForever($hash, function () use ($id) {
+            $results = $this->contentRepository->getById($id);
+            $this->saveCacheResults('content_', $results, [$id]);
+            return $results;
+        });
 
-        if (!$contentDataCached) {
-            $contentDataCached = $this->contentRepository->getById($id);
-            $this->saveCacheResults('content_', $contentDataCached, [$id]);
-        }
-        return $contentDataCached;
+        return $results;
     }
 
     /**
@@ -134,14 +136,13 @@ class ContentService
      */
     public function getByIds($ids)
     {
-        $contentDataCached = $this->getCachedResults(...$ids);
+        $hash = 'contents_' . CacheHelper::getKey(...$ids);
+        $results = Cache::rememberForever($hash, function () use ($ids) {
+            return $this->contentRepository->getByIds($ids);
+        });
+        $this->saveCacheResults('contents_', $results, $ids);
 
-        if (!$contentDataCached) {
-            $contentDataCached = $this->contentRepository->getByIds($ids);
-            $this->saveCacheResults('contents_', $contentDataCached, $ids);
-        }
-
-        return $contentDataCached;
+        return $results;
     }
 
     /**
@@ -166,14 +167,14 @@ class ContentService
      */
     public function getAllByType($type)
     {
-        $contentDataCached = $this->getCachedResults($type);
+        $hash = 'contents_by_type_' . CacheHelper::getKey($type);
+        $results = Cache::rememberForever($hash, function () use ($type) {
+            $res = $this->contentRepository->getByType($type);
+            $this->saveCacheResults('contents_by_type_', $res, array_keys($res));
+            return $res;
+        });
 
-        if (!$contentDataCached) {
-            $contentDataCached = $this->contentRepository->getByType($type);
-            $this->saveCacheResults('contents_by_type_', $contentDataCached, array_keys($contentDataCached));
-        }
-
-        return $contentDataCached;
+        return $results;
     }
 
     /**
@@ -193,14 +194,34 @@ class ContentService
         $fieldType,
         $fieldComparisonOperator = '='
     ) {
-        return $this->contentRepository->getWhereTypeInAndStatusAndField(
+        $hash = 'contents_by_type_field_and_status_' . CacheHelper::getKey($types,
+                $status,
+                $fieldKey,
+                $fieldValue,
+                $fieldType,
+                $fieldComparisonOperator);
+
+        $results = Cache::rememberForever($hash, function () use (
             $types,
             $status,
             $fieldKey,
             $fieldValue,
             $fieldType,
             $fieldComparisonOperator
-        );
+        ) {
+            $res = $this->contentRepository->getWhereTypeInAndStatusAndField(
+                $types,
+                $status,
+                $fieldKey,
+                $fieldValue,
+                $fieldType,
+                $fieldComparisonOperator
+            );
+            $this->saveCacheResults('contents_by_type_field_and_status_', $res, array_keys($res));
+            return $res;
+        });
+
+        return $results;
     }
 
     /**
@@ -379,20 +400,29 @@ class ContentService
         $orderByDirection = substr($orderByAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($orderByAndDirection, '-');
 
-        $contentDataCached = $this->getCachedResults($page,
+        $hash = 'contents_results_' . CacheHelper::getKey($page,
+                $limit,
+                $orderByColumn,
+                $orderByDirection,
+                implode(' ', array_values($includedTypes) ?? ''),
+                implode(' ', array_values($slugHierarchy) ?? ''),
+                implode(' ', array_values(array_collapse($requiredParentIds)) ?? ''),
+                implode(' ', array_values(array_collapse($requiredFields)) ?? ''),
+                implode(' ', array_values(array_collapse($includedFields)) ?? ''),
+                implode(' ', array_values(array_collapse($requiredUserStates)) ?? ''),
+                implode(' ', array_values(array_collapse($includedUserStates)) ?? ''));
+
+        $results = Cache::rememberForever($hash, function () use ($page,
             $limit,
             $orderByColumn,
             $orderByDirection,
-            implode(' ', array_values($includedTypes) ?? ''),
-            implode(' ', array_values($slugHierarchy) ?? ''),
-            implode(' ', array_values(array_collapse($requiredParentIds)) ?? ''),
-            implode(' ', array_values(array_collapse($requiredFields)) ?? ''),
-            implode(' ', array_values(array_collapse($includedFields)) ?? ''),
-            implode(' ', array_values(array_collapse($requiredUserStates)) ?? ''),
-            implode(' ', array_values(array_collapse($includedUserStates)) ?? '')
-        );
-
-        if (!$contentDataCached) {
+            $includedTypes,
+            $slugHierarchy,
+            $requiredParentIds,
+            $requiredFields,
+            $includedFields,
+            $requiredUserStates,
+            $includedUserStates) {
             $filter = $this->contentRepository->startFilter(
                 $page,
                 $limit,
@@ -419,17 +449,15 @@ class ContentService
                 $filter->includeUserStates(...$includedUserState);
             }
 
-            $contentDataCached = [
+            $res = [
                 'results' => $filter->retrieveFilter(),
                 'total_results' => $filter->countFilter(),
                 'filter_options' => $filter->getFilterFields()];
+            $this->saveCacheResults('results_', $res, array_keys($res));
+            return $res;
+        });
 
-            $this->saveCacheResults('results_', serialize($contentDataCached), array_keys($contentDataCached));
-        } else{
-            $contentDataCached = unserialize($contentDataCached);
-        }
-
-        return $contentDataCached;
+        return $results;
     }
 
     /**
@@ -674,9 +702,9 @@ class ContentService
 
     private function saveCacheResults($keyPrefix, $value, $contentIds)
     {
-        CacheHelper::setCache($keyPrefix . CacheHelper::$hash, serialize($value));
+        //CacheHelper::setCache($keyPrefix . CacheHelper::$hash, serialize($value));
 
-        CacheHelper::addLists('results_' . CacheHelper::$hash, $contentIds);
+        CacheHelper::addLists(CacheHelper::$hash, $contentIds);
 
         return true;
 

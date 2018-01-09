@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Helpers;
 
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
@@ -11,11 +12,17 @@ use Railroad\Railcontent\Services\ConfigService;
 class CacheHelper
 {
     public static $hash;
+
     public static function getSettings()
     {
-        return ContentRepository::$pullFutureContent . ' ' .
-            ConfigService::$brand . ' ' .
-            implode(' ',array_values(PermissionRepository::$availableContentPermissionIds));
+        $contentPermissionIds = PermissionRepository::$availableContentPermissionIds ?? [];
+        $settings = ContentRepository::$pullFutureContent . ' ' .
+            ConfigService::$brand . ' ';
+        if ($contentPermissionIds) {
+            $settings .= implode(' ', array_values($contentPermissionIds));
+        }
+
+        return $settings;
     }
 
     public static function getCache($key)
@@ -26,9 +33,11 @@ class CacheHelper
     public static function getKey()
     {
         $args = func_get_args();
-        $key = $args[0] . self::getSettings();
-        self::$hash = md5($key);
-        return  self::$hash;
+
+        $key = implode(' ', $args) . self::getSettings();
+        $generatedHas = md5($key);
+        self::$hash = $generatedHas;
+        return  $generatedHas;
     }
 
     public static function setCache($key, $value)
@@ -38,24 +47,29 @@ class CacheHelper
 
     public static function addLists($key, array $elements)
     {
-        foreach ($elements as $element)
-        {
+        foreach ($elements as $element) {
             Redis::rpush('content_' . $element, 'results_' . $key);
         }
     }
 
     public static function getListElement($key)
     {
-        return Redis::lrange($key,0,100000);
+        return Redis::lrange($key, 0, -1);
     }
 
     public static function deleteCache($key)
     {
         $keys = self::getListElement($key);
-        foreach ($keys as $cacheKey){
-            Redis::del($cacheKey);
+        foreach ($keys as $cacheKey) {
+            // delete all the cached search results where the content was returned
+            Cache::forget($cacheKey);
         }
-        Redis::del($key);
+
+        //delete the list element (mapping between content and search hashes)
+        Cache::forget($key);
+
+        //delete the cache for the content
+        Cache::forget('content_' . self::$hash);
 
         return true;
 

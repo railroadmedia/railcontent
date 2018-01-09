@@ -11,6 +11,7 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
@@ -251,6 +252,7 @@ class RailcontentTestCase extends BaseTestCase
 
     protected function tearDown()
     {
+        Cache::flush();
         Redis::flushDB();
         parent::tearDown();
     }

@@ -78,22 +78,7 @@ class ContentJsonController extends Controller
      */
     public function getByParentId($parentId)
     {
-        $settings = CacheHelper::getSettings();
-        $hash = md5($parentId . ' ' . $settings);
-        $contentDataCached = Redis::get('results_by_parent_id_' . $hash);
-        if (!$contentDataCached) {
         $contentData = $this->contentService->getByParentId($parentId);
-
-            Redis::set('results_by_parent_id_' . $hash, serialize($contentData));
-            if(array_key_exists('results',$contentData)) {
-                foreach (array_keys($contentData['results']) as $contentId) {
-                    Redis::rpush('content_' . $contentId, 'results_by_parent_id_' . $hash);
-                }
-            }
-
-        } else {
-            $contentData = unserialize($contentDataCached);
-        }
 
         return new JsonResponse(
             $contentData,
