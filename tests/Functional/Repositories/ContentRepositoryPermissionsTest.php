@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\PermissionsFactory;
@@ -47,6 +48,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
     protected function tearDown()
     {
         PermissionRepository::$availableContentPermissionIds = false;
+        Cache::store('redis')->flush();
     }
 
     public function test_get_by_id_is_protected_by_single()

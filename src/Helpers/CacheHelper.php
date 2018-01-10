@@ -28,11 +28,6 @@ class CacheHelper
         return $settings;
     }
 
-    public static function getCache($key)
-    {
-        return Redis::get('results_' . $key);
-    }
-
     public static function  getKey()
     {
         $args = func_get_args();
@@ -41,11 +36,6 @@ class CacheHelper
         $generatedHas = md5($key);
         self::$hash = $generatedHas;
         return  $generatedHas;
-    }
-
-    public static function setCache($key, $value)
-    {
-        return Redis::set($key, $value);
     }
 
     public static function addLists($key, array $elements)
@@ -62,7 +52,6 @@ class CacheHelper
 
     public static function deleteCache($key)
     {
-
         $keys = self::getListElement($key);
 
         foreach ($keys as $cacheKey) {
@@ -76,5 +65,15 @@ class CacheHelper
 
         return true;
 
+    }
+
+    public static function deleteAllCachedSearchResults()
+    {
+        $keys = Redis::keys('*contents_results_*');
+        foreach ($keys as $key)
+        {
+            Redis::del($key);
+        }
+        return true;
     }
 }

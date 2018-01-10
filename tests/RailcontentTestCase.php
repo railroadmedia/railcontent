@@ -252,7 +252,6 @@ class RailcontentTestCase extends BaseTestCase
 
     protected function tearDown()
     {
-        Cache::flush();
         Redis::flushDB();
         parent::tearDown();
     }

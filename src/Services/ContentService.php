@@ -242,14 +242,35 @@ class ContentService
         $orderByColumn = 'published_on',
         $orderByDirection = 'desc'
     ) {
-        return $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
+        $hash = 'contents_by_type_status_published_' . CacheHelper::getKey(implode(' ',$types),
+                $status,
+                $publishedOnValue,
+                $publishedOnComparisonOperator,
+                $orderByColumn,
+                $orderByDirection);
+
+        $results = Cache::store('redis')->rememberForever($hash, function () use (
+            $hash,
             $types,
             $status,
             $publishedOnValue,
             $publishedOnComparisonOperator,
             $orderByColumn,
             $orderByDirection
-        );
+        ) {
+            $res = $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
+                $types,
+                $status,
+                $publishedOnValue,
+                $publishedOnComparisonOperator,
+                $orderByColumn,
+                $orderByDirection
+            );
+            $this->saveCacheResults($hash, array_keys($res));
+            return $res;
+        });
+
+        return $results;
     }
 
     /**
@@ -259,7 +280,14 @@ class ContentService
      */
     public function getBySlugAndType($slug, $type)
     {
-        return $this->contentRepository->getBySlugAndType($slug, $type);
+        $hash = 'contents_by_slug_type' . CacheHelper::getKey($slug, $type);
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $slug, $type) {
+            $results = $this->contentRepository->getBySlugAndType($slug, $type);
+            $this->saveCacheResults($hash, array_keys($results));
+            return $results;
+        });
+
+        return $results;
     }
 
     /**
@@ -270,7 +298,14 @@ class ContentService
      */
     public function getByUserIdTypeSlug($userId, $type, $slug)
     {
-        return $this->contentRepository->getByUserIdTypeSlug($userId, $type, $slug);
+        $hash = 'contents_by_user_slug_type' . CacheHelper::getKey($userId, $type, $slug);
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $userId, $slug, $type) {
+            $results = $this->contentRepository->getByUserIdTypeSlug($userId, $type, $slug);
+            $this->saveCacheResults($hash, array_keys($results));
+            return $results;
+        });
+
+        return $results;
     }
 
     /**
@@ -508,6 +543,9 @@ class ContentService
 
         }
         event(new ContentCreated($id));
+
+        //delete all the search results from cache
+        CacheHelper::deleteAllCachedSearchResults();
 
         return $this->getById($id);
     }
