@@ -119,9 +119,9 @@ class ContentService
     public function getById($id)
     {
         $hash = 'content_' . CacheHelper::getKey($id);
-        $results = Cache::rememberForever($hash, function () use ($id) {
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($id, $hash) {
             $results = $this->contentRepository->getById($id);
-            $this->saveCacheResults('content_', $results, [$id]);
+            $this->saveCacheResults($hash, [$id]);
             return $results;
         });
 
@@ -137,10 +137,10 @@ class ContentService
     public function getByIds($ids)
     {
         $hash = 'contents_' . CacheHelper::getKey(...$ids);
-        $results = Cache::rememberForever($hash, function () use ($ids) {
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($ids, $hash) {
             return $this->contentRepository->getByIds($ids);
         });
-        $this->saveCacheResults('contents_', $results, $ids);
+        $this->saveCacheResults($hash, $ids);
 
         return $results;
     }
@@ -168,9 +168,9 @@ class ContentService
     public function getAllByType($type)
     {
         $hash = 'contents_by_type_' . CacheHelper::getKey($type);
-        $results = Cache::rememberForever($hash, function () use ($type) {
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($type, $hash) {
             $res = $this->contentRepository->getByType($type);
-            $this->saveCacheResults('contents_by_type_', $res, array_keys($res));
+            $this->saveCacheResults($hash, array_keys($res));
             return $res;
         });
 
@@ -201,7 +201,8 @@ class ContentService
                 $fieldType,
                 $fieldComparisonOperator);
 
-        $results = Cache::rememberForever($hash, function () use (
+        $results = Cache::store('redis')->rememberForever($hash, function () use (
+            $hash,
             $types,
             $status,
             $fieldKey,
@@ -217,7 +218,7 @@ class ContentService
                 $fieldType,
                 $fieldComparisonOperator
             );
-            $this->saveCacheResults('contents_by_type_field_and_status_', $res, array_keys($res));
+            $this->saveCacheResults($hash, array_keys($res));
             return $res;
         });
 
@@ -412,7 +413,8 @@ class ContentService
                 implode(' ', array_values(array_collapse($requiredUserStates)) ?? ''),
                 implode(' ', array_values(array_collapse($includedUserStates)) ?? ''));
 
-        $results = Cache::rememberForever($hash, function () use ($page,
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash,
+            $page,
             $limit,
             $orderByColumn,
             $orderByDirection,
@@ -453,10 +455,9 @@ class ContentService
                 'results' => $filter->retrieveFilter(),
                 'total_results' => $filter->countFilter(),
                 'filter_options' => $filter->getFilterFields()];
-            $this->saveCacheResults('results_', $res, array_keys($res));
+            $this->saveCacheResults($hash, array_keys($res['results']));
             return $res;
         });
-
         return $results;
     }
 
@@ -530,7 +531,7 @@ class ContentService
 
         event(new ContentUpdated($id));
 
-        CacheHelper::deleteCache('content_' . $id);
+        CacheHelper::deleteCache('content_list_' . $id);
 
         return $this->getById($id);
     }
@@ -693,18 +694,9 @@ class ContentService
         return $this->contentRepository->softDelete(array_pluck($children, 'child_id'));
     }
 
-    private function getCachedResults($key)
+    private function saveCacheResults($hash, $contentIds)
     {
-        $results = CacheHelper::getCache(CacheHelper::getKey($key));
-
-        return unserialize($results);
-    }
-
-    private function saveCacheResults($keyPrefix, $value, $contentIds)
-    {
-        //CacheHelper::setCache($keyPrefix . CacheHelper::$hash, serialize($value));
-
-        CacheHelper::addLists(CacheHelper::$hash, $contentIds);
+        CacheHelper::addLists($hash, $contentIds);
 
         return true;
 

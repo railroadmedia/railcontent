@@ -66,7 +66,7 @@ class ContentDatumService
         event(new ContentDatumCreated($contentId));
 
         //delete cache for the content id
-        CacheHelper::deleteCache('content_' . $contentId);
+        CacheHelper::deleteCache('content_list_' . $contentId);
 
         return $this->get($id);
     }
@@ -96,7 +96,7 @@ class ContentDatumService
         event(new ContentDatumUpdated($datum['content_id']));
 
         //delete cache for the content id
-        CacheHelper::deleteCache('content_' . $datum['content_id']);
+        CacheHelper::deleteCache('content_list_' . $datum['content_id']);
 
         return $this->get($id);
     }
@@ -120,7 +120,7 @@ class ContentDatumService
         event(new ContentDatumDeleted($datum['content_id']));
 
         //delete cache for the content id
-        CacheHelper::deleteCache('content_' . $datum['content_id']);
+        CacheHelper::deleteCache('content_list_' . $datum['content_id']);
 
         return $delete;
     }

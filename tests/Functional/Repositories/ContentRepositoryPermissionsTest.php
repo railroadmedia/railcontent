@@ -2,11 +2,13 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\PermissionsFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -184,8 +186,12 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->word,
-            ContentService::STATUS_PUBLISHED);
+            'course',
+            ContentService::STATUS_PUBLISHED,
+            'en-US',
+            ConfigService::$brand,
+            rand(),
+            Carbon::now()->toDateTimeString());
 
         $permission = $this->permissionFactory->create($this->faker->word);
         $contentPermission = $this->contentPermissionFactory->create(

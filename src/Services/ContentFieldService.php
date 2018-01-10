@@ -138,7 +138,7 @@ class ContentFieldService
         event(new ContentFieldCreated($contentId));
 
         //delete cache for the content id
-        CacheHelper::deleteCache('content_' . $id);
+        CacheHelper::deleteCache('content_list_' . $contentId);
 
         return $this->get($id);
     }
@@ -167,7 +167,7 @@ class ContentFieldService
         event(new ContentFieldUpdated($field['content_id']));
 
         //delete cache for the content id
-        CacheHelper::deleteCache('content_' . $field['content_id']);
+        CacheHelper::deleteCache('content_list_' . $field['content_id']);
 
         return $this->get($id);
     }
@@ -193,7 +193,7 @@ class ContentFieldService
         event(new ContentFieldDeleted($field['content_id']));
 
         //delete cache for the content id
-        CacheHelper::deleteCache('content_' . $field['content_id']);
+        CacheHelper::deleteCache('content_list_' . $field['content_id']);
 
         return $deleted;
     }

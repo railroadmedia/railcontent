@@ -2,7 +2,9 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
+use Railroad\Railcontent\Repositories\ContentRepository;
 
 /**
  * Class PermissionService
@@ -17,13 +19,19 @@ class ContentPermissionService
     private $contentPermissionRepository;
 
     /**
+     * @var ContentRepository
+     */
+    private $contentRepository;
+
+    /**
      * PermissionService constructor.
      *
      * @param ContentPermissionRepository $contentPermissionRepository
      */
-    public function __construct(ContentPermissionRepository $contentPermissionRepository)
+    public function __construct(ContentPermissionRepository $contentPermissionRepository, ContentRepository $contentRepository)
     {
         $this->contentPermissionRepository = $contentPermissionRepository;
+        $this->contentRepository = $contentRepository;
     }
 
     /**
@@ -65,7 +73,11 @@ class ContentPermissionService
      */
     public function dissociate($contentId = null, $contentType = null, $permissionId)
     {
-        return $this->contentPermissionRepository->dissociate($contentId, $contentType, $permissionId);
+        $results = $this->contentPermissionRepository->dissociate($contentId, $contentType, $permissionId);
+
+        $this->clearContentCache($contentId, $contentType);
+
+        return $results;
     }
 
     /**
@@ -83,6 +95,8 @@ class ContentPermissionService
                 'permission_id' => $permissionId,
             ]
         );
+
+        $this->clearContentCache($contentId, $contentType);
 
         return $this->get($id);
     }
@@ -106,5 +120,26 @@ class ContentPermissionService
     public function delete($id)
     {
         return $this->contentPermissionRepository->delete($id) > 0;
+    }
+
+    /**
+     * @param $contentId
+     * @param $contentType
+     */
+    private function clearContentCache($contentId, $contentType)
+    {
+        if ($contentId) {
+            //delete cache for the content id
+            CacheHelper::deleteCache('content_list_' . $contentId);
+        }
+        if ($contentType) {
+            // dd($contentType);
+            $contents = $this->contentRepository->getByType($contentType);
+
+            foreach ($contents as $content) {
+                //delete cache for the content id
+                CacheHelper::deleteCache('content_list_' . $content['id']);
+            }
+        }
     }
 }

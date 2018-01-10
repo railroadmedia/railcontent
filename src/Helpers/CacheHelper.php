@@ -15,11 +15,14 @@ class CacheHelper
 
     public static function getSettings()
     {
-        $contentPermissionIds = PermissionRepository::$availableContentPermissionIds ?? [];
         $settings = ContentRepository::$pullFutureContent . ' ' .
-            ConfigService::$brand . ' ';
-        if ($contentPermissionIds) {
-            $settings .= implode(' ', array_values($contentPermissionIds));
+            ConfigService::$brand;
+        if(ContentRepository::$availableContentStatues)
+        {
+            $settings .= implode(' ', array_values(ContentRepository::$availableContentStatues));
+        }
+        if (PermissionRepository::$availableContentPermissionIds) {
+            $settings .= implode(' ', array_values(PermissionRepository::$availableContentPermissionIds));
         }
 
         return $settings;
@@ -30,7 +33,7 @@ class CacheHelper
         return Redis::get('results_' . $key);
     }
 
-    public static function getKey()
+    public static function  getKey()
     {
         $args = func_get_args();
 
@@ -48,28 +51,28 @@ class CacheHelper
     public static function addLists($key, array $elements)
     {
         foreach ($elements as $element) {
-            Redis::rpush('content_' . $element, 'results_' . $key);
+            Redis::rpush(Cache::store('redis')->getPrefix().'content_list_' . $element, $key);
         }
     }
 
     public static function getListElement($key)
     {
-        return Redis::lrange($key, 0, -1);
+        return Redis::lrange(Cache::store('redis')->getPrefix().$key, 0, -1);
     }
 
     public static function deleteCache($key)
     {
+
         $keys = self::getListElement($key);
+
         foreach ($keys as $cacheKey) {
             // delete all the cached search results where the content was returned
-            Cache::forget($cacheKey);
+            Redis::del(Cache::store('redis')->getPrefix().$cacheKey);
         }
 
         //delete the list element (mapping between content and search hashes)
-        Cache::forget($key);
+        Cache::store('redis')->forget($key);
 
-        //delete the cache for the content
-        Cache::forget('content_' . self::$hash);
 
         return true;
 
