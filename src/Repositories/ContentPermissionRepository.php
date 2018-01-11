@@ -102,4 +102,24 @@ class ContentPermissionRepository extends RepositoryBase
         ])->delete();
     }
 
+    /**
+     * Return all the contents associated with the permission id
+     *
+     * @param integer $id
+     * @return array|null
+     */
+    public function getContentAssociationBasedOnPermissionId($id)
+    {
+        return $this->query()
+            ->join(
+                ConfigService::$tablePermissions,
+                ConfigService::$tablePermissions . '.id',
+                '=',
+                ConfigService::$tableContentPermissions . '.permission_id'
+            )
+            ->where(ConfigService::$tablePermissions . '.id', $id)
+            ->get()
+            ->toArray();
+    }
+
 }

@@ -2,7 +2,10 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Illuminate\Support\Facades\Cache;
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 
 /**
@@ -23,6 +26,11 @@ class PermissionService
     protected $contentPermissionRepository;
 
     /**
+     * @var ContentRepository
+     */
+    protected $contentRepository;
+
+    /**
      * PermissionService constructor.
      *
      * @param PermissionRepository $permissionRepository
@@ -30,10 +38,12 @@ class PermissionService
      */
     public function __construct(
         PermissionRepository $permissionRepository,
-        ContentPermissionRepository $contentPermissionRepository
+        ContentPermissionRepository $contentPermissionRepository,
+    ContentRepository $contentRepository
     ) {
         $this->permissionRepository = $permissionRepository;
         $this->contentPermissionRepository = $contentPermissionRepository;
+        $this->contentRepository = $contentRepository;
     }
 
     /**
@@ -52,7 +62,14 @@ class PermissionService
      */
     public function getAll()
     {
-        return $this->permissionRepository->getAll();
+        $hash = 'permissions_';
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash) {
+            $results = $this->permissionRepository->getAll();
+            return $results;
+        });
+
+        return $results;
+       // return $this->permissionRepository->getAll();
     }
 
     /**
@@ -70,6 +87,7 @@ class PermissionService
                 'brand' => $brand ?? ConfigService::$brand
             ]
         );
+        CacheHelper::deleteAllCachedSearchResults('permissions_');
 
         return $this->get($permissionId);
     }
@@ -96,6 +114,8 @@ class PermissionService
             ['name' => $name, 'brand' => $brand ?? ConfigService::$brand]
         );
 
+        CacheHelper::deleteAllCachedSearchResults('permissions_');
+
         return $this->get($id);
     }
 
@@ -113,6 +133,15 @@ class PermissionService
         if (is_null($permission)) {
             return $permission;
         }
+        $associatedContentIds = array_filter(array_pluck($this->contentPermissionRepository->getContentAssociationBasedOnPermissionId($id), 'content_id'));
+        CacheHelper::deleteCacheKeys($associatedContentIds);
+        $associatedContentTypes = array_filter(array_pluck($this->contentPermissionRepository->getContentAssociationBasedOnPermissionId($id), 'content_type'));
+        foreach ($associatedContentTypes as $contentType) {
+            $contentIds = $this->contentRepository->getByType($contentType);
+            CacheHelper::deleteCacheKeys($contentIds);
+        }
+        CacheHelper::deleteAllCachedSearchResults('permissions_');
+
         $this->contentPermissionRepository->unlinkPermissionFromAllContent($id);
 
         return $this->permissionRepository->delete($id) > 0;

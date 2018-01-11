@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 
 class ContentHierarchyService
@@ -57,6 +58,9 @@ class ContentHierarchyService
             $childPosition
         );
 
+        //delete the cached results for getByParentId('parent_id')
+        CacheHelper::deleteCache('content_list_' . $parentId);
+
         return $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
     }
 
@@ -76,6 +80,9 @@ class ContentHierarchyService
             $childPosition
         );
 
+        //delete the cached results for getByParentId('parent_id')
+        CacheHelper::deleteCache('content_list_' . $parentId);
+
         return $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
     }
 
@@ -86,6 +93,9 @@ class ContentHierarchyService
      */
     public function delete($parentId, $childId)
     {
+        //delete the cached results for getByParentId('parent_id')
+        CacheHelper::deleteCache('content_list_' . $parentId);
+
         return $this->contentHierarchyRepository->deleteParentChildLink($parentId, $childId);
     }
 
@@ -95,6 +105,9 @@ class ContentHierarchyService
         if(!$parentHierarchy){
             return true;
         }
+        //delete the cached results for getByParentId('parent_id')
+        CacheHelper::deleteCache('content_list_' . $parentHierarchy['parent_id']);
+
         return $this->contentHierarchyRepository->decrementSiblings($parentHierarchy['parent_id'], $parentHierarchy['child_position']);
 
     }

@@ -14,7 +14,11 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class PermissionControllerTest extends RailcontentTestCase
 {
-    protected $serviceBeingTested, $userId;
+    /**
+     * @var PermissionService
+     */
+    protected $serviceBeingTested;
+    protected $userId;
 
     /**
      * @var PermissionsFactory
@@ -178,6 +182,7 @@ class PermissionControllerTest extends RailcontentTestCase
     {
         $permission = $this->permissionFactory->create();
         $assignPemission = $this->contentPermissionFactory->create(rand(), null, $permission['id']);
+        $assignPemission2 = $this->contentPermissionFactory->create(rand(), null, $permission['id']);
 
         $delete = $this->serviceBeingTested->delete($permission['id']);
 

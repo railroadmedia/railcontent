@@ -55,8 +55,8 @@ class ContentPermissionService
 
         $contentPermissionsMatchingPermissionId = [];
 
-        foreach($contentPermissions as $contentPermission){
-            if($contentPermission['permission_id'] === $permissionId){
+        foreach ($contentPermissions as $contentPermission) {
+            if ($contentPermission['permission_id'] === $permissionId) {
                 $contentPermissionsMatchingPermissionId[] = $contentPermission;
             }
         }
@@ -75,7 +75,7 @@ class ContentPermissionService
     {
         $results = $this->contentPermissionRepository->dissociate($contentId, $contentType, $permissionId);
 
-        $this->clearContentCache($contentId, $contentType);
+        $this->clearAssociatedContentCache([$contentId], [$contentType]);
 
         return $results;
     }
@@ -96,7 +96,7 @@ class ContentPermissionService
             ]
         );
 
-        $this->clearContentCache($contentId, $contentType);
+        $this->clearAssociatedContentCache([$contentId], [$contentType]);
 
         return $this->get($id);
     }
@@ -126,13 +126,13 @@ class ContentPermissionService
      * @param $contentId
      * @param $contentType
      */
-    private function clearContentCache($contentId, $contentType)
+    private function clearAssociatedContentCache(array $contentIds, array $contentTypes)
     {
-        if ($contentId) {
+        foreach ($contentIds as $contentId) {
             //delete cache for the content id
             CacheHelper::deleteCache('content_list_' . $contentId);
         }
-        if ($contentType) {
+        foreach ($contentTypes as $contentType) {
             // dd($contentType);
             $contents = $this->contentRepository->getByType($contentType);
 
@@ -142,4 +142,5 @@ class ContentPermissionService
             }
         }
     }
+
 }

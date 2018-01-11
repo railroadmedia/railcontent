@@ -17,8 +17,7 @@ class CacheHelper
     {
         $settings = ContentRepository::$pullFutureContent . ' ' .
             ConfigService::$brand;
-        if(ContentRepository::$availableContentStatues)
-        {
+        if (ContentRepository::$availableContentStatues) {
             $settings .= implode(' ', array_values(ContentRepository::$availableContentStatues));
         }
         if (PermissionRepository::$availableContentPermissionIds) {
@@ -28,26 +27,26 @@ class CacheHelper
         return $settings;
     }
 
-    public static function  getKey()
+    public static function getKey()
     {
         $args = func_get_args();
 
         $key = implode(' ', $args) . self::getSettings();
         $generatedHas = md5($key);
         self::$hash = $generatedHas;
-        return  $generatedHas;
+        return $generatedHas;
     }
 
     public static function addLists($key, array $elements)
     {
         foreach ($elements as $element) {
-            Redis::rpush(Cache::store('redis')->getPrefix().'content_list_' . $element, $key);
+            Redis::rpush(Cache::store('redis')->getPrefix() . 'content_list_' . $element, $key);
         }
     }
 
     public static function getListElement($key)
     {
-        return Redis::lrange(Cache::store('redis')->getPrefix().$key, 0, -1);
+        return Redis::lrange(Cache::store('redis')->getPrefix() . $key, 0, -1);
     }
 
     public static function deleteCache($key)
@@ -56,7 +55,7 @@ class CacheHelper
 
         foreach ($keys as $cacheKey) {
             // delete all the cached search results where the content was returned
-            Redis::del(Cache::store('redis')->getPrefix().$cacheKey);
+            Redis::del(Cache::store('redis')->getPrefix() . $cacheKey);
         }
 
         //delete the list element (mapping between content and search hashes)
@@ -67,13 +66,17 @@ class CacheHelper
 
     }
 
-    public static function deleteAllCachedSearchResults()
+    public static function deleteAllCachedSearchResults($key)
     {
-        $keys = Redis::keys('*contents_results_*');
-        foreach ($keys as $key)
-        {
+        $keys = Redis::keys("*$key*");
+        foreach ($keys as $key) {
             Redis::del($key);
         }
         return true;
+    }
+
+    public static function deleteCacheKeys(array $keys)
+    {
+        Redis::del(implode(' ', $keys));
     }
 }

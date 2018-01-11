@@ -136,7 +136,7 @@ class ContentService
      */
     public function getByIds($ids)
     {
-        $hash = 'contents_' . CacheHelper::getKey(...$ids);
+        $hash = 'contents_ids_' . CacheHelper::getKey(...$ids);
         $results = Cache::store('redis')->rememberForever($hash, function () use ($ids, $hash) {
             return $this->contentRepository->getByIds($ids);
         });
@@ -314,7 +314,17 @@ class ContentService
      */
     public function getByParentId($parentId, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
-        return $this->contentRepository->getByParentId($parentId, $orderBy, $orderByDirection);
+        $hash = 'contents_by_parent_id_'. CacheHelper::getKey($parentId, $orderBy, $orderByDirection);
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $parentId, $orderBy, $orderByDirection) {
+            //dd('se cheama rep');
+            $results = $this->contentRepository->getByParentId($parentId, $orderBy, $orderByDirection);
+            $this->saveCacheResults($hash, array_merge(array_keys($results),[$parentId]));
+            //$this->saveCacheResults($hash, [$parentId]);
+            return $results;
+        });
+
+        return $results;
+
     }
 
     /**
@@ -545,7 +555,7 @@ class ContentService
         event(new ContentCreated($id));
 
         //delete all the search results from cache
-        CacheHelper::deleteAllCachedSearchResults();
+        CacheHelper::deleteAllCachedSearchResults('contents_results_');
 
         return $this->getById($id);
     }
