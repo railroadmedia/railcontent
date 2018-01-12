@@ -112,4 +112,5 @@ return [
 
     'user_routes_middleware' => [],
     'administrator_routes_middleware' => [],
+    'redis_prefix' =>'railcontent'
 ];

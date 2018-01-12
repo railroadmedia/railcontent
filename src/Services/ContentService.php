@@ -316,7 +316,6 @@ class ContentService
     {
         $hash = 'contents_by_parent_id_'. CacheHelper::getKey($parentId, $orderBy, $orderByDirection);
         $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $parentId, $orderBy, $orderByDirection) {
-            //dd('se cheama rep');
             $results = $this->contentRepository->getByParentId($parentId, $orderBy, $orderByDirection);
             $this->saveCacheResults($hash, array_merge(array_keys($results),[$parentId]));
             //$this->saveCacheResults($hash, [$parentId]);
@@ -333,7 +332,15 @@ class ContentService
      */
     public function getByParentIds(array $parentIds, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
-        return $this->contentRepository->getByParentIds($parentIds, $orderBy, $orderByDirection);
+        $hash = 'contents_by_parent_ids_'. CacheHelper::getKey($parentIds, $orderBy, $orderByDirection);
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $parentIds, $orderBy, $orderByDirection) {
+            $results = $this->contentRepository->getByParentIds($parentIds, $orderBy, $orderByDirection);
+            $this->saveCacheResults($hash, array_merge(array_keys($results),$parentIds));
+
+            return $results;
+        });
+
+        return $results;
     }
 
     /**
@@ -738,6 +745,9 @@ class ContentService
     public function softDeleteContentChildren($id)
     {
         $children = $this->contentHierarchyRepository->getByParentIds([$id]);
+
+        //delete parent content cache
+        CacheHelper::deleteCache('content_' . $id);
 
         return $this->contentRepository->softDelete(array_pluck($children, 'child_id'));
     }
