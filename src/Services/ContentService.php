@@ -616,4 +616,13 @@ class ContentService
 
         return $this->contentRepository->softDelete(array_pluck($children, 'child_id'));
     }
+
+    public function getByContentFieldValuesForTypes(
+        array $contentTypes, $contentFieldKey, array $contentFieldValues = []
+    )
+    {
+        return $this->contentRepository->getByContentFieldValuesForTypes(
+            $contentTypes, $contentFieldKey, $contentFieldValues
+        );
+    }
 }

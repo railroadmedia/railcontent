@@ -1109,4 +1109,58 @@ class ContentRepository extends RepositoryBase
             ['status' => ContentService::STATUS_DELETED]
         );
     }
+
+    /**
+     * @param $contentTypes
+     * @param $contentFieldKey
+     * @param array $contentFieldValues
+     * @return array
+     *
+     * can get all for content_field key by not passing content_field values, or can filter by values.
+     *
+     */
+    public function getByContentFieldValuesForTypes($contentTypes, $contentFieldKey, $contentFieldValues = [])
+    {
+        $query = $this->query()
+            ->addSelect(
+                [
+                    ConfigService::$tableContent . '.id as id',
+                ]
+            );
+
+        $rows = $query->restrictByUserAccess()
+            ->join(
+                ConfigService::$tableContentFields,
+                function (JoinClause $joinClause) use (
+                    $contentFieldKey,
+                    $contentFieldValues
+                ) {
+                    $joinClause->on(
+                        ConfigService::$tableContentFields . '.content_id',
+                        '=',
+                        ConfigService::$tableContent . '.id'
+                    )->where(
+                        ConfigService::$tableContentFields . '.key',
+                        '=',
+                        $contentFieldKey
+                    );
+                    if(!empty($contentFieldValues)){
+                        $joinClause->whereIn(
+                            ConfigService::$tableContentFields . '.value',
+                            $contentFieldValues
+                        );
+                    }
+                }
+            )
+            ->whereIn(ConfigService::$tableContent . '.type', $contentTypes)
+            ->getToArray();
+
+        $ids = [];
+
+        foreach ($rows as $row){
+            $ids[] = $row['id'];
+        }
+
+        return $rows;
+    }
 }
