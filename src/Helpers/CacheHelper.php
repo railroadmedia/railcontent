@@ -15,7 +15,7 @@ class CacheHelper
 
     public static function setPrefix()
     {
-        Cache::store('redis')->setPrefix('railcontent');
+        Cache::store('redis')->setPrefix(ConfigService::$redisPrefix);
     }
     /**
      * Return a string with the user's settings, that it's used when we calculate the cache key
@@ -60,6 +60,7 @@ class CacheHelper
      */
     public static function addLists($key, array $elements)
     {
+        self::setPrefix();
         foreach ($elements as $element) {
             Redis::rpush(Cache::store('redis')->getPrefix() . 'content_list_' . $element, $key);
         }
@@ -76,6 +77,8 @@ class CacheHelper
      */
     public static function getListElement($key)
     {
+        self::setPrefix();
+
         return Redis::lrange(Cache::store('redis')->getPrefix() . $key, 0, -1);
     }
 
@@ -86,6 +89,7 @@ class CacheHelper
      */
     public static function deleteCache($key)
     {
+        self::setPrefix();
         $keys = self::getListElement($key);
         Cache::store('redis')->deleteMultiple($keys);
 
@@ -104,6 +108,7 @@ class CacheHelper
     public static function deleteAllCachedSearchResults($key)
     {
         $keys = Redis::keys("*$key*");
+
         foreach ($keys as $key) {
             Redis::del($key);
         }

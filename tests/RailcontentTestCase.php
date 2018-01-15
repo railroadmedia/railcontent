@@ -161,7 +161,7 @@ class RailcontentTestCase extends BaseTestCase
             ]
         );
         $app['config']->set('cache.default', env('CACHE_DRIVER', 'redis'));
-        $app['config']->set('railcontent.redisPrefix', $defaultConfig['redis_prefix']);
+        $app['config']->set('railcontent.redisPrefix', $defaultConfig['cache_prefix']);
 
         if (!$app['db']->connection()->getSchemaBuilder()->hasTable('users')) {
 
