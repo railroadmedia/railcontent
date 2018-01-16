@@ -121,21 +121,23 @@ class ContentJsonController extends Controller
 
         $rules = $this->contentService->getValidationRules($content);
         if($rules === false){
-            return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503 );
+            return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503);
         }
 
         $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation($content, $rules);
 
         $validator = $this->validationFactory->make($contentPropertiesForValidation, $rules);
 
+        $response = [ $id => $content, 'validation' => [ 'status' => 200, 'messages' => [] ] ];
+
         try{
             $validator->validate();
         }catch(ValidationException $exception){
             $messages = $exception->validator->messages()->messages();
-            return new JsonResponse($messages, $exception->status);
+            $response['validation'] = ['status' => 422, 'messages' => $messages];
         }
 
-        return new JsonResponse(array_values([$id => $content]), 200);
+        return new JsonResponse($response, 200);
     }
 
     public function slugs(Request $request, ...$slugs)
