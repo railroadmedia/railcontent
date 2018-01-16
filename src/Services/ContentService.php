@@ -619,7 +619,6 @@ class ContentService
 
     /**
      * @param $content
-     * @param bool $forceTrue
      * @return array|bool
      */
     public function getValidationRules($content)
@@ -633,7 +632,10 @@ class ContentService
             if(empty($brand)){
                 $message = 'No brand set in configuration.';
             }
-            error_log('railcontent/src/Services/ContentService.php failed with message: "' . $message. '"');
+            error_log(
+                '\Railroad\Railcontent\Services\ContentService::getValidationRules failed with message: "'
+                . $message. '"'
+            );
             return false;
         }
 
@@ -641,7 +643,7 @@ class ContentService
 
         if(!array_key_exists($contentType, $rulesForBrand)){
             error_log(
-                'railcontent/src/Services/ContentService.php failed at: ' .
+                '\Railroad\Railcontent\Services\ContentService::getValidationRules failed at: ' .
                 '"!array_key_exists($contentType, $rulesForBrand)"'
             );
             return false;
