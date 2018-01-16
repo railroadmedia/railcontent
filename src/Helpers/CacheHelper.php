@@ -11,11 +11,10 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class CacheHelper
 {
-    public static $hash;
 
     public static function setPrefix()
     {
-        Cache::store('redis')->setPrefix(ConfigService::$redisPrefix);
+        return Cache::store('redis')->setPrefix(ConfigService::$redisPrefix);
     }
     /**
      * Return a string with the user's settings, that it's used when we calculate the cache key
@@ -24,13 +23,13 @@ class CacheHelper
     public static function getSettings()
     {
         self::setPrefix();
-        $settings = ContentRepository::$pullFutureContent . ' ' .
-            ConfigService::$brand;
+        $settings = ' '.ContentRepository::$pullFutureContent . ' ' .
+            ConfigService::$brand.' ';
         if (ContentRepository::$availableContentStatues) {
-            $settings .= implode(' ', array_values(ContentRepository::$availableContentStatues));
+            $settings .= implode(' ', array_values(ContentRepository::$availableContentStatues)).' ';
         }
         if (PermissionRepository::$availableContentPermissionIds) {
-            $settings .= implode(' ', array_values(PermissionRepository::$availableContentPermissionIds));
+            $settings .= implode(' ', array_values(PermissionRepository::$availableContentPermissionIds)). ' ';
         }
 
         return $settings;
@@ -43,11 +42,17 @@ class CacheHelper
     public static function getKey()
     {
         $args = func_get_args();
+        $key = '';
+        foreach($args as $arg){
+            if(!is_array($arg))
+            {
+                $key .= $arg.' ';
+            } else{
+                $key.= implode(' ', array_values($arg));
+            }
+        }
 
-        $key = implode(' ', $args) . self::getSettings();
-        $generatedHas = md5($key);
-        self::$hash = $generatedHas;
-        return $generatedHas;
+        return md5($key);
     }
 
     /**
@@ -91,10 +96,10 @@ class CacheHelper
     {
         self::setPrefix();
         $keys = self::getListElement($key);
-        Cache::store('redis')->deleteMultiple($keys);
 
-        //delete the list element (mapping between content and search hashes)
-        Cache::store('redis')->delete($key);
+        foreach ($keys as $key1) {
+            Redis::del(Cache::store('redis')->getPrefix().$key1);
+        }
 
         return true;
 

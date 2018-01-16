@@ -143,7 +143,7 @@ class RailcontentServiceProvider extends ServiceProvider
 
         ConfigService::$videoSync = config('railcontent.video_sync');
 
-        ConfigService::$redisPrefix = config('railcontent.redis_prefix');
+        ConfigService::$redisPrefix = config('railcontent.cache_prefix');
     }
 
     /**

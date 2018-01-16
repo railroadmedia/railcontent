@@ -277,4 +277,18 @@ class ContentServiceTest extends RailcontentTestCase
         $results = $this->classBeingTested->getWhereTypeInAndStatusAndPublishedOnOrdered([$content1['type']], $content1['status'], $content1['published_on']);
         $this->assertEquals([$content1['id'] => $content1], $results);
     }
+
+    public function test_getByChildIdWhereType()
+    {
+        $content = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_PUBLISHED);
+        $children = $this->contentFactory->create();
+        $childrenHierarchy = $this->contentHierarchyFactory->create($content['id'], $children['id']);
+        $content['child_ids'] = [$children['id']];
+        $content['position'] = 1;
+        $content['parent_id'] = $content['id'];
+        $content['child_id'] = $children['id'];
+
+        $results = $this->classBeingTested->getByChildIdsWhereType([$children['id']], $content['type']);
+        $this->assertEquals([$content['id'] => $content], $results);
+    }
 }

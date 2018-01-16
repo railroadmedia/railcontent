@@ -61,6 +61,9 @@ class ContentHierarchyService
         //delete the cached results for getByParentId('parent_id')
         CacheHelper::deleteCache('content_list_' . $parentId);
 
+        //delete the cached results for child id
+        CacheHelper::deleteCache('content_list_' . $childId);
+
         return $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
     }
 
@@ -83,6 +86,8 @@ class ContentHierarchyService
         //delete the cached results for getByParentId('parent_id')
         CacheHelper::deleteCache('content_list_' . $parentId);
 
+        CacheHelper::deleteCache('content_list_' . $childId);
+
         return $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
     }
 
@@ -96,6 +101,8 @@ class ContentHierarchyService
         //delete the cached results for getByParentId('parent_id')
         CacheHelper::deleteCache('content_list_' . $parentId);
 
+        CacheHelper::deleteCache('content_list_' . $childId);
+
         return $this->contentHierarchyRepository->deleteParentChildLink($parentId, $childId);
     }
 
@@ -107,6 +114,8 @@ class ContentHierarchyService
         }
         //delete the cached results for getByParentId('parent_id')
         CacheHelper::deleteCache('content_list_' . $parentHierarchy['parent_id']);
+
+        CacheHelper::deleteCache('content_list_' . $childId);
 
         return $this->contentHierarchyRepository->decrementSiblings($parentHierarchy['parent_id'], $parentHierarchy['child_position']);
 
