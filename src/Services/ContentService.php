@@ -350,7 +350,19 @@ class ContentService
      */
     public function getByChildIdWhereType($childId, $type)
     {
-        return $this->contentRepository->getByChildIdWhereType($childId, $type);
+        $hash = 'contents_by_child_id_and_type_'. CacheHelper::getKey($childId, $type);
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $childId, $type) {
+            $results = $this->contentRepository->getByChildIdWhereType($childId, $type);
+            $this->saveCacheResults($hash, array_merge(array_keys($results),[$childId]));
+
+            return $results;
+        });
+
+        return $results;
+
+       // $results = $this->contentRepository->getByChildIdWhereType($childId, $type);
+       // dd($results);
+        //return $results;
     }
 
 
@@ -361,7 +373,16 @@ class ContentService
      */
     public function getByChildIdsWhereType(array $childIds, $type)
     {
-        return $this->contentRepository->getByChildIdsWhereType($childIds, $type);
+        $hash = 'contents_by_child_ids_and_type_'. CacheHelper::getKey($childIds, $type);
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $childIds, $type) {
+            $results = $this->contentRepository->getByChildIdsWhereType($childIds, $type);
+            $this->saveCacheResults($hash, array_merge(array_keys($results),$childIds));
+
+            return $results;
+        });
+
+        return $results;
+        //return $this->contentRepository->getByChildIdsWhereType($childIds, $type);
     }
 
     /**
@@ -371,7 +392,16 @@ class ContentService
      */
     public function getByChildIdWhereParentTypeIn($childId, array $types)
     {
-        return $this->contentRepository->getByChildIdWhereParentTypeIn($childId, $types);
+        $hash = 'contents_by_child_ids_and_parent_type_'. CacheHelper::getKey($childId, $types);
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $childId, $types) {
+            $results = $this->contentRepository->getByChildIdWhereParentTypeIn($childId, $types);
+            $this->saveCacheResults($hash, array_merge(array_keys($results),[$childId]));
+
+            return $results;
+        });
+
+        return $results;
+        //return $this->contentRepository->getByChildIdWhereParentTypeIn($childId, $types);
     }
 
     /**
@@ -750,6 +780,15 @@ class ContentService
         CacheHelper::deleteCache('content_' . $id);
 
         return $this->contentRepository->softDelete(array_pluck($children, 'child_id'));
+    }
+
+    public function getByContentFieldValuesForTypes(
+        array $contentTypes, $contentFieldKey, array $contentFieldValues = []
+    )
+    {
+        return $this->contentRepository->getByContentFieldValuesForTypes(
+            $contentTypes, $contentFieldKey, $contentFieldValues
+        );
     }
 
     private function saveCacheResults($hash, $contentIds)
