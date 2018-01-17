@@ -118,7 +118,7 @@ class ContentService
      */
     public function getById($id)
     {
-        $hash = 'content_' . CacheHelper::getKey($id);
+        $hash = 'contents_by_id_' . CacheHelper::getKey($id);
         $results = Cache::store('redis')->rememberForever($hash, function () use ($id, $hash) {
             $results = $this->contentRepository->getById($id);
             $this->saveCacheResults($hash, [$id]);
@@ -136,7 +136,7 @@ class ContentService
      */
     public function getByIds($ids)
     {
-        $hash = 'contents_ids_' . CacheHelper::getKey(...$ids);
+        $hash = 'contents_by_ids_' . CacheHelper::getKey(...$ids);
         $results = Cache::store('redis')->rememberForever($hash, function () use ($ids, $hash) {
             return $this->contentRepository->getByIds($ids);
         });
@@ -280,7 +280,7 @@ class ContentService
      */
     public function getBySlugAndType($slug, $type)
     {
-        $hash = 'contents_by_slug_type' . CacheHelper::getKey($slug, $type);
+        $hash = 'contents_by_slug_type_' . CacheHelper::getKey($slug, $type);
         $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $slug, $type) {
             $results = $this->contentRepository->getBySlugAndType($slug, $type);
             $this->saveCacheResults($hash, array_keys($results));
@@ -298,7 +298,7 @@ class ContentService
      */
     public function getByUserIdTypeSlug($userId, $type, $slug)
     {
-        $hash = 'contents_by_user_slug_type' . CacheHelper::getKey($userId, $type, $slug);
+        $hash = 'contents_by_user_slug_type_' . CacheHelper::getKey($userId, $type, $slug);
         $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $userId, $slug, $type) {
             $results = $this->contentRepository->getByUserIdTypeSlug($userId, $type, $slug);
             $this->saveCacheResults($hash, array_keys($results));
@@ -414,13 +414,28 @@ class ContentService
      */
     public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit = 25, $skip = 0)
     {
-        return $this->contentRepository->getPaginatedByTypeUserProgressState(
+        $hash = 'contents_paginated_by_type_and_user_progress_'.$userId.'_'. CacheHelper::getKey($type, $userId, $state, $limit, $skip);
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $type, $userId, $state, $limit, $skip) {
+            $results = $this->contentRepository->getPaginatedByTypeUserProgressState(
+                $type,
+                $userId,
+                $state,
+                $limit,
+                $skip
+            );
+            $this->saveCacheResults($hash, array_keys($results));
+
+            return $results;
+        });
+
+        return $results;
+        /*return $this->contentRepository->getPaginatedByTypeUserProgressState(
             $type,
             $userId,
             $state,
             $limit,
             $skip
-        );
+        );*/
     }
 
     /**
@@ -438,13 +453,28 @@ class ContentService
         $limit = 25,
         $skip = 0
     ) {
-        return $this->contentRepository->getPaginatedByTypesUserProgressState(
+        $hash = 'contents_paginated_by_types_and_user_progress_'.$userId.'_'. CacheHelper::getKey($types, $userId, $state, $limit, $skip);
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $types, $userId, $state, $limit, $skip) {
+            $results = $this->contentRepository->getPaginatedByTypesUserProgressState(
+                $types,
+                $userId,
+                $state,
+                $limit,
+                $skip
+            );
+            $this->saveCacheResults($hash, array_keys($results));
+
+            return $results;
+        });
+
+        return $results;
+        /*return $this->contentRepository->getPaginatedByTypesUserProgressState(
             $types,
             $userId,
             $state,
             $limit,
             $skip
-        );
+        ); */
     }
 
     /**
@@ -636,7 +666,7 @@ class ContentService
         }
         event(new ContentDeleted($id));
 
-        CacheHelper::deleteCache('content_' . $id);
+        CacheHelper::deleteCache('content_list_' . $id);
 
         return $this->contentRepository->delete($id);
     }
@@ -767,7 +797,7 @@ class ContentService
 
         event(new ContentSoftDeleted($id));
 
-        CacheHelper::deleteCache('content_' . $id);
+        CacheHelper::deleteCache('content_list_' . $id);
 
         return $this->contentRepository->softDelete([$id]);
     }
@@ -777,7 +807,7 @@ class ContentService
         $children = $this->contentHierarchyRepository->getByParentIds([$id]);
 
         //delete parent content cache
-        CacheHelper::deleteCache('content_' . $id);
+        CacheHelper::deleteCache('content_list_' . $id);
 
         return $this->contentRepository->softDelete(array_pluck($children, 'child_id'));
     }
@@ -786,9 +816,21 @@ class ContentService
         array $contentTypes, $contentFieldKey, array $contentFieldValues = []
     )
     {
-        return $this->contentRepository->getByContentFieldValuesForTypes(
+        $hash = 'contents_by_types_and_field_value_'. CacheHelper::getKey($contentTypes, $contentFieldKey, $contentFieldValues);
+        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $contentTypes, $contentFieldKey, $contentFieldValues) {
+            $results =  $this->contentRepository->getByContentFieldValuesForTypes(
             $contentTypes, $contentFieldKey, $contentFieldValues
         );
+            $this->saveCacheResults($hash, array_keys($results));
+
+            return $results;
+        });
+
+        return $results;
+
+        /* return $this->contentRepository->getByContentFieldValuesForTypes(
+            $contentTypes, $contentFieldKey, $contentFieldValues
+        ); */
     }
 
     private function saveCacheResults($hash, $contentIds)
