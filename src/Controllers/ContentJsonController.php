@@ -128,16 +128,18 @@ class ContentJsonController extends Controller
 
         $validator = $this->validationFactory->make($contentPropertiesForValidation, $rules);
 
-        $response = [ $id => $content, 'validation' => [ 'status' => 200, 'messages' => [] ] ];
+        $validation = [ 'status' => 200, 'messages' => [] ];
 
         try{
             $validator->validate();
         }catch(ValidationException $exception){
             $messages = $exception->validator->messages()->messages();
-            $response['validation'] = ['status' => 422, 'messages' => $messages];
+            $validation = ['status' => 422, 'messages' => $messages];
         }
 
-        return new JsonResponse($response, 200);
+        $content = array_merge($content, ['validation' => $validation]);
+
+        return new JsonResponse(array_values([$id => $content]), 200);
     }
 
     public function slugs(Request $request, ...$slugs)
