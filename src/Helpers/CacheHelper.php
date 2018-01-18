@@ -52,7 +52,7 @@ class CacheHelper
             }
         }
 
-        return md5($key);
+        return md5($key.self::getSettings());
     }
 
     /**
@@ -67,7 +67,9 @@ class CacheHelper
     {
         self::setPrefix();
         foreach ($elements as $element) {
-            Redis::rpush(Cache::store('redis')->getPrefix() . 'content_list_' . $element, $key);
+           // Redis::rpush(Cache::store('redis')->getPrefix() . 'content_list_' . $element, $key);
+             //use sets to store the mapping between content and cached methods keys
+             Cache::store('redis')->connection()->sadd(Cache::store('redis')->getPrefix() . 'content_list_' . $element, $key);
         }
     }
 
@@ -83,8 +85,8 @@ class CacheHelper
     public static function getListElement($key)
     {
         self::setPrefix();
-
-        return Redis::lrange(Cache::store('redis')->getPrefix() . $key, 0, -1);
+        return Cache::store('redis')->connection()->smembers(Cache::store('redis')->getPrefix() . $key);
+        //return Redis::lrange(Cache::store('redis')->getPrefix() . $key, 0, -1);
     }
 
     /**

@@ -618,6 +618,9 @@ class ContentService
                 null
             );
 
+            //delete all the results related to the user's progress
+            CacheHelper::deleteAllCachedSearchResults('user_');
+
         }
         event(new ContentCreated($id));
 
