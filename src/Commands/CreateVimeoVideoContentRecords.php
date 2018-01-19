@@ -104,7 +104,8 @@ class CreateVimeoVideoContentRecords extends Command
                     $noRecordOfVideoInCMS = empty($this->contentService->getBySlugAndType(
                         'vimeo-video-' . $id, 'vimeo-video'
                     ));
-                    if($noRecordOfVideoInCMS | $duration !== 0 | !is_numeric($duration) ){
+
+                    if($noRecordOfVideoInCMS && $duration !== 0 && !is_numeric($duration) ){
                         // store and add to array for mass insert
                         $content = $this->contentService->create(
                             'vimeo-video-' . $id,
@@ -136,9 +137,17 @@ class CreateVimeoVideoContentRecords extends Command
                         }
                     }else{
                         if($duration === 0){
-                            $this->info('Duration for video ' . $id . ' is zero and thus video not added.');
-                        }elseif(is_numeric($duration)){
-                            $this->info('Duration for video ' . $id . ' is not numeric and thus video not added.');
+                            $this->info(
+                                'Duration ' .
+                                // '("print_r($duration, true)" returned: `' . print_r($duration, true) . '`) ' .
+                                'for video ' . $id . ' is zero and thus video not added.'
+                            );
+                        }elseif(!is_numeric($duration)){
+                            $this->info(
+                                'Duration ' .
+                                // '("print_r($duration, true)" returned: `' . print_r($duration, true) . '`) ' .
+                                'for video ' . $id . ' is not numeric and thus video not added.'
+                            );
                         }
                     }
                     $this->amountProcessed++;
