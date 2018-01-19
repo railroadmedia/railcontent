@@ -466,24 +466,34 @@ class ContentQueryBuilder extends QueryBuilder
             ->where(
                 function (Builder $builder) {
                     return $builder
-                        ->whereIn(
-                            'id_content_permissions' . '.permission_id',
-                            PermissionRepository::$availableContentPermissionIds
+                        ->where(
+                            function (Builder $builder) {
+                                return $builder
+                                    ->whereIn(
+                                        'id_content_permissions' . '.permission_id',
+                                        PermissionRepository::$availableContentPermissionIds
+                                    );
+                            }
                         )
-                        ->orWhereNull(
-                            'id_content_permissions' . '.permission_id'
-                        );
-                }
-            )
-            ->where(
-                function (Builder $builder) {
-                    return $builder
-                        ->whereIn(
-                            'type_content_permissions' . '.permission_id',
-                            PermissionRepository::$availableContentPermissionIds
+                        ->orWhere(
+                            function (Builder $builder) {
+                                return $builder
+                                    ->whereIn(
+                                        'type_content_permissions' . '.permission_id',
+                                        PermissionRepository::$availableContentPermissionIds
+                                    );
+                            }
                         )
-                        ->orWhereNull(
-                            'type_content_permissions' . '.permission_id'
+                        ->orWhere(
+                            function (Builder $builder) {
+                                return $builder
+                                    ->whereNull(
+                                        'id_content_permissions' . '.permission_id'
+                                    )
+                                    ->whereNull(
+                                        'type_content_permissions' . '.permission_id'
+                                    );
+                            }
                         );
                 }
             );

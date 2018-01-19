@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use PDO;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
+use Railroad\Railcontent\Commands\RepairMissingDurations;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Events\ContentCreated;
@@ -81,14 +82,15 @@ class RailcontentServiceProvider extends ServiceProvider
         //load package routes file
         $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
 
-        $this->app->singleton(
-            'Illuminate\Contracts\Debug\ExceptionHandler',
-            'Railroad\Railcontent\Exceptions\RailcontentException'
-        );
+//        $this->app->singleton(
+//            'Illuminate\Contracts\Debug\ExceptionHandler',
+//            'Railroad\Railcontent\Exceptions\RailcontentException'
+//        );
 
         $this->commands([
             CreateSearchIndexes::class,
-            CreateVimeoVideoContentRecords::class
+            CreateVimeoVideoContentRecords::class,
+            RepairMissingDurations::class
         ]);
     }
 

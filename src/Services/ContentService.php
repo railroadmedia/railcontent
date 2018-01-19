@@ -799,4 +799,14 @@ class ContentService
             }
         }
     }
+
+    public function getByContentFieldValuesForTypes(
+        array $contentTypes,
+        $contentFieldKey,
+        array $contentFieldValues = []
+    ){
+        return $this->contentRepository->getByContentFieldValuesForTypes(
+            $contentTypes, $contentFieldKey, $contentFieldValues
+        );
+    }
 }

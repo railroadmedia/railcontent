@@ -11,6 +11,7 @@ use Railroad\Railcontent\Factories\PermissionsFactory;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentRepositoryTest extends RailcontentTestCase
@@ -98,37 +99,20 @@ class ContentRepositoryTest extends RailcontentTestCase
         );
     }
 
-    public function test_get_by_id_with_fields_datum_permissions()
+    public function test_get_by_id_with_fields_datum()
     {
-        $content = [
-            'slug' => $this->faker->word,
-            'type' => $this->faker->word,
-            'status' => $this->faker->word,
-            'brand' => ConfigService::$brand,
-            'language' => 'en-US',
-            'published_on' => Carbon::now()->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => Carbon::now()->toDateTimeString(),
-        ];
-
-        $contentId = $this->classBeingTested->create($content);
+        $content = $this->contentFactory->create($this->faker->word,
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED);
+        $contentId = $content['id'];
 
         $expectedFields = [];
         $expectedData = [];
         $expectedPermissions = [];
 
-        for ($i = 0; $i < 3; $i++) {
+       for ($i = 0; $i < 3; $i++) {
             $expectedFields[] = $this->contentFieldFactory->create($contentId);
             $expectedData[] = $this->contentDatumFactory->create($contentId);
-
-            $permission = $this->permissionFactory->create();
-            $contentPermission = $this->contentPermissionFactory->create(
-                $contentId,
-                null,
-                $permission['id']
-            );
-
-            $expectedPermissions[] = array_merge($permission, $contentPermission);
         }
 
         $results = $this->classBeingTested->getById($contentId);
@@ -140,7 +124,7 @@ class ContentRepositoryTest extends RailcontentTestCase
                     'id' => $contentId,
                     'fields' => $expectedFields,
                     'data' => $expectedData,
-                    'permissions' => $expectedPermissions,
+                    'permissions' => [],
                     'parent_id' => null,
                     'child_id' => null
                 ]

@@ -6,13 +6,10 @@ use Illuminate\Contracts\Support\Responsable;
 
 class JsonPaginatedResponse implements Responsable
 {
-    protected $results;
-
-    protected $totalResults;
-
-    protected $filterOptions;
-
-    protected $code;
+    public $results;
+    public $totalResults;
+    public $filterOptions;
+    public $code;
 
     /**
      * JsonPaginatedResponse constructor.

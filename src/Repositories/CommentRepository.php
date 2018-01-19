@@ -101,6 +101,7 @@ class CommentRepository extends RepositoryBase
     {
         $query = $this->query()
             ->selectColumns()
+            ->restrictByBrand()
             ->restrictByType()
             ->restrictByContentId()
             ->restrictByUser()
@@ -124,6 +125,7 @@ class CommentRepository extends RepositoryBase
     {
         $query = $this->query()
             ->selectColumns()
+            ->restrictByBrand()
             ->restrictByType()
             ->restrictByContentId()
             ->restrictByUser()
