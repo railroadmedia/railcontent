@@ -81,52 +81,15 @@ class CustomFormRequest extends FormRequest
     public function setCustomRules($request, $entity = null)
     {
         $customRules = [];
-        $contentType = $this->getContentTypeVal($request, $entity);
-
-        // Differentiate between `Create` and `Update` Requests. Each requires it's own rule-set
-        // or just determine which fields are present|submitted in the request and evaluation only for those.
-
-        switch(get_class($request)){
-
-            // ------ Content --------------------------
-            case ContentCreateRequest::class:
-
-                break;
-            case ContentUpdateRequest::class:
-
-                break;
-
-            // ------ ContentHierarchy -----------------
-            case ContentHierarchyCreateRequest::class:
-
-                break;
-            case ContentHierarchyUpdateRequest::class:
-
-                break;
-
-            // ------ ContentDatum ---------------------
-            case ContentDatumCreateRequest::class:
-
-                break;
-            case ContentDatumUpdateRequest::class:
-
-                break;
-
-            // ------ ContentField ---------------------
-            case ContentFieldCreateRequest::class:
-
-                break;
-            case ContentFieldUpdateRequest::class:
-
-                break;
-
-        };
+        $contentType =
+            (!is_null($entity)) ? $this->getContentTypeVal($request) : $request->request->get('type');
 
         if (isset(ConfigService::$validationRules[ConfigService::$brand]) &&
             array_key_exists($contentType, ConfigService::$validationRules[ConfigService::$brand])) {
             if (!$entity) {
                 $customRules = ConfigService::$validationRules[ConfigService::$brand][$contentType];
             } else {
+
                 $customRules = $this->prepareCustomRules($request, $contentType, $entity);
             }
         }
@@ -136,24 +99,20 @@ class CustomFormRequest extends FormRequest
 
     /** Get the content's type based on content id for DatumRequest and FieldRequest instances
      *
-     * @param CustomFormRequest $request
-     * @param $entity null|string
+     * @param ContentDatumCreateRequest|ContentFieldCreateRequest $request
      * @return string
      */
-    private function getContentTypeVal($request, $entity)
+    private function getContentTypeVal($request)
     {
-        if(!is_null($entity)){
-            $type = '';
-            if (($request instanceof ContentDatumCreateRequest) || ($request instanceof ContentFieldCreateRequest)) {
-                $contentId = $request->request->get('content_id');
-                $content = $this->contentService->getById($contentId);
+        $type = '';
+        if (($request instanceof ContentDatumCreateRequest) || ($request instanceof ContentFieldCreateRequest)) {
+            $contentId = $request->request->get('content_id');
+            $content = $this->contentService->getById($contentId);
 
-                return $content['type'];
-            }
-            return $type;
+            return $content['type'];
         }
 
-        return $this->getContentTypeVal($request, $entity);
+        return $type;
     }
 
     /** Prepare the custom validation rules.
