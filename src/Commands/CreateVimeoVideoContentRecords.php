@@ -100,14 +100,11 @@ class CreateVimeoVideoContentRecords extends Command
                         $this->info('URI "' . $uri . '" failed to convert to a numeric video id. (used: "$id = ' .
                             'str_replace(\'/videos/\', \'\', $uri);"');
                     }
-                    if (!is_numeric($duration)) {
-                        $this->info('Video failed to provide numeric duration value. (video with URI "' . $uri . '")');
-                    }
                     // create if needed
                     $noRecordOfVideoInCMS = empty($this->contentService->getBySlugAndType(
                         'vimeo-video-' . $id, 'vimeo-video'
                     ));
-                    if($noRecordOfVideoInCMS){
+                    if($noRecordOfVideoInCMS | $duration !== 0 | !is_numeric($duration) ){
                         // store and add to array for mass insert
                         $content = $this->contentService->create(
                             'vimeo-video-' . $id,
@@ -118,9 +115,6 @@ class CreateVimeoVideoContentRecords extends Command
                             null,
                             Carbon::now()->toDateTimeString()
                         );
-                        if($duration == 0 || empty($duration)){
-                            $this->info('Warning empty duration for video ' . $id);
-                        }
                         if (empty($content)) {
                             $contentCreationFailed[] = $id;
                         }else{
@@ -141,7 +135,11 @@ class CreateVimeoVideoContentRecords extends Command
                             ];
                         }
                     }else{
-                        $preExistingToCheckForLengthInSeconds[] = $id;
+                        if($duration === 0){
+                            $this->info('Duration for video ' . $id . ' is zero and thus video not added.');
+                        }elseif(is_numeric($duration)){
+                            $this->info('Duration for video ' . $id . ' is not numeric and thus video not added.');
+                        }
                     }
                     $this->amountProcessed++;
                 }
