@@ -140,6 +140,8 @@ class ContentFieldService
         //delete cache for the content id
         CacheHelper::deleteCache('content_list_' . $contentId);
 
+        CacheHelper::deleteAllCachedSearchResults('types');
+
         return $this->get($id);
     }
 

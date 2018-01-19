@@ -99,7 +99,7 @@ class CommentService
 
         CacheHelper::deleteCache('content_list_' . $contentId);
 
-        CacheHelper::deleteAllCachedSearchResults('get_comments_'.$contentId);
+        CacheHelper::deleteAllCachedSearchResults('get_comments_');
 
         $createdComment = $this->get($commentId);
 
@@ -150,6 +150,7 @@ class CommentService
      */
     public function delete($id)
     {
+
         //check if comment exist
         $comment = $this->get($id);
 
@@ -157,7 +158,7 @@ class CommentService
             return $comment;
         }
 
-        request()->attributes->set('user_id', request()->user()->id ?? null);
+        request()->attributes->set('user_id', request()->get('user_id') ?? null);
 
         //check if user can delete the comment
         if (!$this->userCanManageComment($comment)) {
@@ -218,7 +219,7 @@ class CommentService
 
         $orderByColumn = trim($orderByAndDirection, '-');
 
-        $hash = 'get_comments_'.(CommentRepository::$availableContentId??'').CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
+        $hash = 'get_comments_'.CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
 
         $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $page, $limit, $orderByDirection, $orderByColumn) {
         $this->commentRepository->setData($page, $limit, $orderByDirection, $orderByColumn);

@@ -167,7 +167,7 @@ class ContentService
      */
     public function getAllByType($type)
     {
-        $hash = 'contents_by_type_' . CacheHelper::getKey($type);
+        $hash = 'contents_by_type_' .$type.'_'. CacheHelper::getKey($type);
         $results = Cache::store('redis')->rememberForever($hash, function () use ($type, $hash) {
             $res = $this->contentRepository->getByType($type);
             $this->saveCacheResults($hash, array_keys($res));
@@ -194,7 +194,7 @@ class ContentService
         $fieldType,
         $fieldComparisonOperator = '='
     ) {
-        $hash = 'contents_by_type_field_and_status_' . CacheHelper::getKey($types,
+        $hash = 'contents_by_types_field_and_status_' . CacheHelper::getKey($types,
                 $status,
                 $fieldKey,
                 $fieldValue,
@@ -242,7 +242,8 @@ class ContentService
         $orderByColumn = 'published_on',
         $orderByDirection = 'desc'
     ) {
-        $hash = 'contents_by_type_status_published_' . CacheHelper::getKey(implode(' ',$types),
+
+        $hash = 'contents_by_types_status_published_' . CacheHelper::getKey(implode(' ',$types),
                 $status,
                 $publishedOnValue,
                 $publishedOnComparisonOperator,
@@ -280,7 +281,7 @@ class ContentService
      */
     public function getBySlugAndType($slug, $type)
     {
-        $hash = 'contents_by_slug_type_' . CacheHelper::getKey($slug, $type);
+        $hash = 'contents_by_slug_type_'.$type.'_' . CacheHelper::getKey($slug, $type);
         $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $slug, $type) {
             $results = $this->contentRepository->getBySlugAndType($slug, $type);
             $this->saveCacheResults($hash, array_keys($results));
@@ -298,7 +299,7 @@ class ContentService
      */
     public function getByUserIdTypeSlug($userId, $type, $slug)
     {
-        $hash = 'contents_by_user_slug_type_' . CacheHelper::getKey($userId, $type, $slug);
+        $hash = 'contents_by_user_slug_type_'.$type.'_' . CacheHelper::getKey($userId, $type, $slug);
         $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $userId, $slug, $type) {
             $results = $this->contentRepository->getByUserIdTypeSlug($userId, $type, $slug);
             $this->saveCacheResults($hash, array_keys($results));
@@ -350,7 +351,7 @@ class ContentService
      */
     public function getByChildIdWhereType($childId, $type)
     {
-        $hash = 'contents_by_child_id_and_type_'. CacheHelper::getKey($childId, $type);
+        $hash = 'contents_by_child_id_and_type_'.$type.'_'. CacheHelper::getKey($childId, $type);
         $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $childId, $type) {
             $results = $this->contentRepository->getByChildIdWhereType($childId, $type);
             $this->saveCacheResults($hash, array_merge(array_keys($results),[$childId]));
@@ -373,7 +374,7 @@ class ContentService
      */
     public function getByChildIdsWhereType(array $childIds, $type)
     {
-        $hash = 'contents_by_child_ids_and_type_'. CacheHelper::getKey($childIds, $type);
+        $hash = 'contents_by_child_ids_and_type_'.$type.'_'. CacheHelper::getKey($childIds, $type);
         $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $childIds, $type) {
             $results = $this->contentRepository->getByChildIdsWhereType($childIds, $type);
             $this->saveCacheResults($hash, array_merge(array_keys($results),$childIds));
@@ -392,7 +393,7 @@ class ContentService
      */
     public function getByChildIdWhereParentTypeIn($childId, array $types)
     {
-        $hash = 'contents_by_child_ids_and_parent_type_'. CacheHelper::getKey($childId, $types);
+        $hash = 'contents_by_child_ids_and_parent_types_'. CacheHelper::getKey($childId, $types);
         $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $childId, $types) {
             $results = $this->contentRepository->getByChildIdWhereParentTypeIn($childId, $types);
             $this->saveCacheResults($hash, array_merge(array_keys($results),[$childId]));
@@ -414,7 +415,7 @@ class ContentService
      */
     public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit = 25, $skip = 0)
     {
-        $hash = 'contents_paginated_by_type_and_user_progress_'.$userId.'_'. CacheHelper::getKey($type, $userId, $state, $limit, $skip);
+        $hash = 'contents_paginated_by_type_'.$type.'_and_user_progress_'.$userId.'_'. CacheHelper::getKey($type, $userId, $state, $limit, $skip);
         $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $type, $userId, $state, $limit, $skip) {
             $results = $this->contentRepository->getPaginatedByTypeUserProgressState(
                 $type,
@@ -627,6 +628,10 @@ class ContentService
         //delete all the search results from cache
         CacheHelper::deleteAllCachedSearchResults('contents_results_');
 
+        CacheHelper::deleteAllCachedSearchResults('_type_'.$type);
+
+        CacheHelper::deleteAllCachedSearchResults('types');
+
         return $this->getById($id);
     }
 
@@ -650,6 +655,13 @@ class ContentService
         event(new ContentUpdated($id));
 
         CacheHelper::deleteCache('content_list_' . $id);
+
+        //delete all the search results from cache
+        //CacheHelper::deleteAllCachedSearchResults('contents_by_type_'.$content['type'].'_');
+        CacheHelper::deleteAllCachedSearchResults('contents_results_');
+        CacheHelper::deleteAllCachedSearchResults('_type_'.$content['type']);
+        CacheHelper::deleteAllCachedSearchResults('types_');
+
 
         return $this->getById($id);
     }

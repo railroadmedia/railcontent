@@ -175,7 +175,7 @@ class UserContentProgressService
      */
     public function saveContentProgress($contentId, $progress, $userId)
     {
-        if ($progress === 100) {
+        if ($progress == 100) {
             return $this->completeContent($contentId, $userId);
         }
 

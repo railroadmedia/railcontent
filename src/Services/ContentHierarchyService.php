@@ -64,7 +64,11 @@ class ContentHierarchyService
         //delete the cached results for child id
         CacheHelper::deleteCache('content_list_' . $childId);
 
-        return $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
+
+
+        $results = $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
+        CacheHelper::deleteAllCachedSearchResults('_type_');
+        return $results;
     }
 
     /**
