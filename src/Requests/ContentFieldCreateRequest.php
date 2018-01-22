@@ -26,6 +26,8 @@ class ContentFieldCreateRequest extends CustomFormRequest
         //set the custom validation rules
         $this->setCustomRules($this, 'fields');
 
+        $this->validateContent($this);
+
         //get all the validation rules that apply to the request
         return parent::rules();
     }
