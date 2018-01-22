@@ -26,6 +26,8 @@ class ContentDatumUpdateRequest extends CustomFormRequest
         //set the custom validation rules
         $this->setCustomRules($this, 'datum');
 
+        $this->validateContent($this);
+
         //get all the rules for the request
         return parent::rules();
     }
