@@ -268,7 +268,6 @@ class CustomFormRequest extends FormRequest
             $lynchPin = $lynchPin['special_cases'][$contentType];
         }
         $lynchPinFieldKey = $lynchPin['field'];
-        $lynchPinDisallowedIfInvalid = $lynchPin['if_invalid_disallow'];
 
         if($contentDatumOrFieldKey === $lynchPinFieldKey){
 
