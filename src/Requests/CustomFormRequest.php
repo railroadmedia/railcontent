@@ -166,7 +166,7 @@ class CustomFormRequest extends FormRequest
             foreach ($customRules as $key => $value) {
                 if (
                     (($request instanceof ContentFieldCreateRequest) &&
-                        ($key == implode('|', $entity_key, $entity_type))) ||
+                        ($key == implode('|', [$entity_key, $entity_type]))) ||
                     (($request instanceof ContentDatumCreateRequest) && ($key == $entity_key))
                 ) {
                     $rules = array_merge(
