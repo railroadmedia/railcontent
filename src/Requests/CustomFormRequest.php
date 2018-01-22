@@ -286,6 +286,13 @@ class CustomFormRequest extends FormRequest
             }catch(ValidationException $exception){
                 $messages = $exception->validator->messages()->messages();
                 return new JsonResponse(['messages' => $messages], 422);
+
+                /*
+                 * Validation failure will interrupt writing field|datum - thus preventing the publication or
+                 * scheduling of a ill-formed lesson.
+                 *
+                 * Jonathan, January 2018
+                 */
             }
         }
 
