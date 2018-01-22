@@ -2,10 +2,14 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\ValidationException;
+use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Services\ContentFieldService;
 use Railroad\Railcontent\Services\ContentService;
+use Illuminate\Validation\Factory as ValidationFactory;
 
 /** Custom Form Request that contain the validation logic for the CMS.
  * There are:
@@ -40,6 +44,10 @@ class CustomFormRequest extends FormRequest
      * @var ContentFieldService
      */
     private $contentFieldService;
+    /**
+     * @var ValidationFactory
+     */
+    private $validationFactory;
 
     /**
      * ValidationService constructor.
@@ -49,12 +57,14 @@ class CustomFormRequest extends FormRequest
     public function __construct(
         ContentService $contentService,
         ContentDatumService $contentDatumService,
-        ContentFieldService $contentFieldService
+        ContentFieldService $contentFieldService,
+        ValidationFactory $validationFactory
     )
     {
         $this->contentService = $contentService;
         $this->contentDatumService = $contentDatumService;
         $this->contentFieldService = $contentFieldService;
+        $this->validationFactory = $validationFactory;
     }
 
     /**
@@ -173,74 +183,111 @@ class CustomFormRequest extends FormRequest
 
     public function validateContent($request)
     {
-        $contentType = null;
-        $contentDatumOrFieldKey = null;
+        $content = null;                // code-smell!
+        $contentId = null;              // code-smell!
+        $contentType = null;            // code-smell!
+        $contentDatumOrFieldKey = null; // code-smell!
+        $lynchPin = null;           // code-smell!
 
         if(!empty($request->request->get('content_id'))){
-            // create request
-            $contentType = $this->contentService->getById($request->request->get('content_id'))['type'];
 
-            $contentType = $this->contentService->getById($request->request->get('key'))['type'];
+            /*
+             * ContentDatumCreateRequest and ContentFieldCreateRequest both pass in a content_id for the new field or
+             * datum to describe. However, if the field|datum already exists, then we just need *its* id, not the
+             * content_id. Thus here we're using the content_id to determine if the request is a create or an update.
+             *
+             * note the code smell below with the "elseif"
+             * $request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest
+             *
+             * Jonathan Jan 2018
+             */
+
+            // create request
+            $contentId = $request->request->get('content_id');
+            $content = $this->contentService->getById($contentId);
+            $contentType = $content['type'];
             $contentDatumOrFieldKey = $request->request->get('key');
+
         }elseif($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest){
+
             // update request
+
             $id = $request->request->get('id');
 
-            $contentDatumOrField = null;
+            $contentDatumOrField = null; // code-smell!
+
             if ($request instanceof ContentDatumUpdateRequest){
                 $contentDatumOrField = $this->contentDatumService->get($id);
             }elseif($request instanceof ContentFieldUpdateRequest) {
                 $contentDatumOrField = $this->contentFieldService->get($id);
             }
-            if(empty($contentDatumOrField)){
-                throw new \Exception(
-                    '$contentDatumOrField not filled in 
-                    \Railroad\Railcontent\Requests\CustomFormRequest::validateContent'
-                );
-            }
 
-            $content = $this->contentService->getById($contentDatumOrField['content_id']);
+            throw_if(empty($contentDatumOrField), // code-smell!
+                new \Exception('$contentDatumOrField not filled in ' . '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent')
+            );
+
+            $contentId = $contentDatumOrField['content_id'];
+            $content = $this->contentService->getById($contentId);
             $contentType = $content['type'];
             $contentDatumOrFieldKey = $contentDatumOrField['key'];
-        }
-
-        if(empty($contentType)){
+        }else{
             throw new \Exception(
-                '$contentType not filled in 
-                \Railroad\Railcontent\Requests\CustomFormRequest::validateContent'
+                'Both "!empty($request->request->get(\'content_id\'))"  and ' .
+                '"$request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest"... ' .
+                'are false. Should not be possible.'
             );
         }
 
-        if(empty($contentDatumOrFieldKey)){
-            throw new \Exception(
-                '$contentDatumOrFieldKey not filled in 
-                \Railroad\Railcontent\Requests\CustomFormRequest::validateContent'
-            );
+        throw_if(empty($contentType), // code-smell!
+            new \Exception('$contentType not filled in (Railroad) CustomFormRequest::validateContent')
+        );
+        throw_if(empty($contentDatumOrFieldKey), // code-smell!
+            new \Exception('$contentDatumOrFieldKey not filled in (Railroad) CustomFormRequest::validateContent')
+        );
+
+        throw_unless(isset(ConfigService::$validationRules[ConfigService::$brand]),
+            new \Exception('lynchPin not set for brand: "' . ConfigService::$brand . '"')
+        );
+
+        $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
+
+        $lynchPinExistsForBrand = array_key_exists(
+            'lynchPin',
+            ConfigService::$validationRules[ConfigService::$brand]
+        );
+
+        if ($rulesExistForBrand && $lynchPinExistsForBrand){
+            $lynchPin = ConfigService::$validationRules[ConfigService::$brand]['lynchPin'];
         }
 
-        if (
-            isset(ConfigService::$validationRules[ConfigService::$brand])
-            &&
-            array_key_exists('lynchPinInfo', ConfigService::$validationRules[ConfigService::$brand])
-        ){
-            $lynchPinInfo = ConfigService::$validationRules[ConfigService::$brand][$contentType]['lynchPinInfo'];
+        throw_if(empty($lynchPin), // code-smell!
+            new \Exception('$lynchPin not filled in (Railroad) CustomFormRequest::validateContent')
+        );
+
+        if(in_array($contentType, array_keys($lynchPin['special_cases']))){
+            $lynchPin = $lynchPin['special_cases'][$contentType];
         }
+        $lynchPinFieldKey = $lynchPin['field'];
+        $lynchPinDisallowedIfInvalid = $lynchPin['if_invalid_disallow'];
 
+        if($contentDatumOrFieldKey === $lynchPinFieldKey){
 
-        if(empty($lynchPinInfo)){
-            throw new \Exception(
-                '$lynchPinInfo not filled in 
-                \Railroad\Railcontent\Requests\CustomFormRequest::validateContent'
-            );
-        }
+            throw_unless($content, new NotFoundException('No content with id ' . $contentId . ' exists.')); // code-smell
 
-        if($contentDatumOrFieldKey === $lynchPinInfo){
-            // todo: validate content
-            // todo: validate content
-            // todo: validate content
+            $rules = $this->contentService->getValidationRules($content);
 
+            if($rules === false){
+                return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503);
+            }
 
+            $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation($content, $rules);
 
+            try{
+                $this->validationFactory->make($contentPropertiesForValidation, $rules)->validate();
+            }catch(ValidationException $exception){
+                $messages = $exception->validator->messages()->messages();
+                return new JsonResponse(['messages' => $messages], 422);
+            }
         }
 
         return true;
