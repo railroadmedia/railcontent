@@ -181,12 +181,16 @@ class CustomFormRequest extends FormRequest
 
     public function validateContent($request)
     {
+        // 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+
         $content = null;                // code-smell!
         $contentId = null;              // code-smell!
         $contentType = null;            // code-smell!
         $contentDatumOrFieldKey = null; // code-smell!
         $lynchPin = null;           // code-smell!
 
+
+        // 222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 
         $contentCreate = $request instanceof ContentCreateRequest;
         $contentUpdate = $request instanceof ContentUpdateRequest;
@@ -251,6 +255,9 @@ class CustomFormRequest extends FormRequest
             new \Exception('lynchPin not set for brand: "' . ConfigService::$brand . '"')
         );
 
+
+        // 333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+
         $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
 
         $lynchPinExistsForBrand = array_key_exists(
@@ -269,6 +276,10 @@ class CustomFormRequest extends FormRequest
         if(in_array($contentType, array_keys($lynchPin['special_cases']))){
             $lynchPin = $lynchPin['special_cases'][$contentType];
         }
+
+
+        // 444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+
         $lynchPinFieldKey = $lynchPin['field'];
 
         if($contentDatumOrFieldKey === $lynchPinFieldKey){
@@ -297,6 +308,14 @@ class CustomFormRequest extends FormRequest
                  */
             }
         }
+
+
+        // 555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+
+        
+
+
+        // 666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
 
         return true;
     }
