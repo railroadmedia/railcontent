@@ -187,26 +187,23 @@ class CustomFormRequest extends FormRequest
         $contentDatumOrFieldKey = null; // code-smell!
         $lynchPin = null;           // code-smell!
 
-        if(!empty($request->request->get('content_id'))){
 
-            /*
-             * ContentDatumCreateRequest and ContentFieldCreateRequest both pass in a content_id for the new field or
-             * datum to describe. However, if the field|datum already exists, then we just need *its* id, not the
-             * content_id. Thus here we're using the content_id to determine if the request is a create or an update.
-             *
-             * note the code smell below with the "elseif"
-             * $request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest
-             *
-             * Jonathan Jan 2018
-             */
+        $fieldOrDatumCreate = $request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest;
+        $fieldOrDatumUpdate = $request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest;
 
-            // create request
+        if($fieldOrDatumCreate){
             $contentId = $request->request->get('content_id');
+
+            if(empty($contentId)){
+                error_log('Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
+                    'content_id passed. This is at odds with what we\'re expecting and might be cause for concern');
+            }
+
             $content = $this->contentService->getById($contentId);
             $contentType = $content['type'];
             $contentDatumOrFieldKey = $request->request->get('key');
 
-        }elseif($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest){
+        }elseif($fieldOrDatumUpdate){
 
             // update request
 
