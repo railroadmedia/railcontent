@@ -187,30 +187,32 @@ class CustomFormRequest extends FormRequest
         $contentId = null;              // code-smell!
         $contentType = null;            // code-smell!
         $contentDatumOrFieldKey = null; // code-smell!
-        $lynchPin = null;           // code-smell!
+        $restricted = null;           // code-smell!
 
 
         // 222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 
         $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
 
-        $lynchPinExistsForBrand = array_key_exists(
-            'lynchPin',
+        $restrictedExistsForBrand = array_key_exists(
+            'restricted_for_invalid_content',
             ConfigService::$validationRules[ConfigService::$brand]
         );
 
-        if ($rulesExistForBrand && $lynchPinExistsForBrand){
-            $lynchPin = ConfigService::$validationRules[ConfigService::$brand]['lynchPin'];
+        if ($rulesExistForBrand && $restrictedExistsForBrand){
+            $restricted = ConfigService::$validationRules[ConfigService::$brand]['restricted_for_invalid_content'];
         }
 
-        throw_if(empty($lynchPin), // code-smell!
-            new \Exception('$lynchPin not filled in (Railroad) CustomFormRequest::validateContent')
+        $restricted = $restricted['default'];
+        if(in_array($contentType, array_keys($restricted['custom']))){
+            $restricted = $restricted['custom'][$contentType];
+        }
+
+        throw_if(empty($restricted), // code-smell! Why are we doing this? Is it not obvious that it should just be set?
+            new \Exception('$restricted not filled in (Railroad) CustomFormRequest::validateContent')
         );
 
-        if(in_array($contentType, array_keys($lynchPin['special_cases']))){
-            $lynchPin = $lynchPin['special_cases'][$contentType];
-        }
-        $lynchPinFieldKey = $lynchPin['field'];
+        $restrictedFieldKey = $restricted['field'];
 
 
         // 333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
@@ -259,9 +261,14 @@ class CustomFormRequest extends FormRequest
         }elseif($contentCreate) {
 
             $input = $request->request->all();
-            $lynchPinAttemptedToSet = $request->request->get($lynchPinFieldKey);
+            $restrictedAttemptedToSet = false;
+            foreach($input as $inputKey => $inputValue){
+                if(in_array($inputKey, $restricted)){
+                    $restrictedAttemptedToSet = true;
+                }
+            }
 
-            if(!$lynchPinAttemptedToSet){
+            if(!$restrictedAttemptedToSet){
 
                 /*
                  * No need to validate - the user is just creating the content and thus of course it won't pass, and
@@ -275,7 +282,7 @@ class CustomFormRequest extends FormRequest
 
             throw new \Exception(
                 'Trying to create new content and passing a value that is protected by the content validation' .
-                ' system ("' . $lynchPinFieldKey . '" is the "lynchpin" and thus cannot be set on ' . 'create)'
+                ' system ("' . $restrictedFieldKey . '" is the "lynchpin" and thus cannot be set on ' . 'create)'
             );
 
             $content = $this->contentService->getById($contentId);
@@ -283,7 +290,7 @@ class CustomFormRequest extends FormRequest
 //            $contentDatumOrFieldKey = $contentDatumOrField['key'];
         }elseif($contentUpdate) {
 
-            if(!$lynchPinAttemptedToSet){
+            if(!$restrictedAttemptedToSet){
                 /*
                  * No need to validate - the user is just updating or setting a content attribute that is not
                  * disallowed for invalid contents and thus must not be protected.
@@ -316,7 +323,7 @@ class CustomFormRequest extends FormRequest
         // 444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
 
 
-        if($contentDatumOrFieldKey === $lynchPinFieldKey){
+        if($contentDatumOrFieldKey === $restrictedFieldKey){
 
             throw_unless($content, new NotFoundException('No content with id ' . $contentId . ' exists.')); // code-smell
 
