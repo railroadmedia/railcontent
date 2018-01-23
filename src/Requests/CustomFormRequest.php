@@ -188,8 +188,14 @@ class CustomFormRequest extends FormRequest
         $lynchPin = null;           // code-smell!
 
 
-        $fieldOrDatumCreate = $request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest;
-        $fieldOrDatumUpdate = $request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest;
+        $contentCreate = $request instanceof ContentCreateRequest;
+        $contentUpdate = $request instanceof ContentUpdateRequest;
+        $fieldOrDatumCreate = $request instanceof ContentDatumCreateRequest ||
+            $request instanceof ContentFieldCreateRequest;
+        $fieldOrDatumUpdate = $request instanceof ContentDatumUpdateRequest ||
+            $request instanceof ContentFieldUpdateRequest;
+        $hierarchyCreate = $request instanceof ContentHierarchyCreateRequest;
+        $hierarchyUpdate = $request instanceof ContentHierarchyUpdateRequest;
 
         if($fieldOrDatumCreate){
             $contentId = $request->request->get('content_id');
@@ -204,9 +210,6 @@ class CustomFormRequest extends FormRequest
             $contentDatumOrFieldKey = $request->request->get('key');
 
         }elseif($fieldOrDatumUpdate){
-
-            // update request
-
             $id = $request->request->get('id');
 
             $contentDatumOrField = null; // code-smell!
@@ -225,12 +228,16 @@ class CustomFormRequest extends FormRequest
             $content = $this->contentService->getById($contentId);
             $contentType = $content['type'];
             $contentDatumOrFieldKey = $contentDatumOrField['key'];
+        }elseif($contentCreate) {
+
+        }elseif($contentUpdate) {
+
+        }elseif($hierarchyCreate) {
+
+        }elseif($hierarchyUpdate) {
+
         }else{
-            throw new \Exception(
-                'Both "!empty($request->request->get(\'content_id\'))"  and ' .
-                '"$request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest"... ' .
-                'are false. Should not be possible.'
-            );
+            throw new \Exception('Unexpected request type');
         }
 
         throw_if(empty($contentType), // code-smell!
