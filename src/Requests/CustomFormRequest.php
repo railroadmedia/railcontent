@@ -192,6 +192,29 @@ class CustomFormRequest extends FormRequest
 
         // 222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 
+        $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
+
+        $lynchPinExistsForBrand = array_key_exists(
+            'lynchPin',
+            ConfigService::$validationRules[ConfigService::$brand]
+        );
+
+        if ($rulesExistForBrand && $lynchPinExistsForBrand){
+            $lynchPin = ConfigService::$validationRules[ConfigService::$brand]['lynchPin'];
+        }
+
+        throw_if(empty($lynchPin), // code-smell!
+            new \Exception('$lynchPin not filled in (Railroad) CustomFormRequest::validateContent')
+        );
+
+        if(in_array($contentType, array_keys($lynchPin['special_cases']))){
+            $lynchPin = $lynchPin['special_cases'][$contentType];
+        }
+        $lynchPinFieldKey = $lynchPin['field'];
+
+
+        // 333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+
         $contentCreate = $request instanceof ContentCreateRequest;
         $contentUpdate = $request instanceof ContentUpdateRequest;
         $fieldOrDatumCreate = $request instanceof ContentDatumCreateRequest ||
@@ -232,10 +255,44 @@ class CustomFormRequest extends FormRequest
             $content = $this->contentService->getById($contentId);
             $contentType = $content['type'];
             $contentDatumOrFieldKey = $contentDatumOrField['key'];
+
         }elseif($contentCreate) {
 
+            $input = $request->request->all();
+            $lynchPinAttemptedToSet = $request->request->get($lynchPinFieldKey);
+
+            if(!$lynchPinAttemptedToSet){
+
+                /*
+                 * No need to validate - the user is just creating the content and thus of course it won't pass, and
+                 * we know they're not setting a value that would set it live.
+                 *
+                 * Jonathan, January 2018
+                 */
+
+                return true;
+            }
+
+            throw new \Exception(
+                'Trying to create new content and passing a value that is protected by the content validation' .
+                ' system ("' . $lynchPinFieldKey . '" is the "lynchpin" and thus cannot be set on ' . 'create)'
+            );
+
+            $content = $this->contentService->getById($contentId);
+            $contentType = $content['type'];
+//            $contentDatumOrFieldKey = $contentDatumOrField['key'];
         }elseif($contentUpdate) {
 
+            if(!$lynchPinAttemptedToSet){
+                /*
+                 * No need to validate - the user is just updating or setting a content attribute that is not
+                 * disallowed for invalid contents and thus must not be protected.
+                 *
+                 * Jonathan, January 2018
+                 */
+
+                return true;
+            }
         }elseif($hierarchyCreate) {
 
         }elseif($hierarchyUpdate) {
@@ -256,31 +313,8 @@ class CustomFormRequest extends FormRequest
         );
 
 
-        // 333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
-
-        $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
-
-        $lynchPinExistsForBrand = array_key_exists(
-            'lynchPin',
-            ConfigService::$validationRules[ConfigService::$brand]
-        );
-
-        if ($rulesExistForBrand && $lynchPinExistsForBrand){
-            $lynchPin = ConfigService::$validationRules[ConfigService::$brand]['lynchPin'];
-        }
-
-        throw_if(empty($lynchPin), // code-smell!
-            new \Exception('$lynchPin not filled in (Railroad) CustomFormRequest::validateContent')
-        );
-
-        if(in_array($contentType, array_keys($lynchPin['special_cases']))){
-            $lynchPin = $lynchPin['special_cases'][$contentType];
-        }
-
-
         // 444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
 
-        $lynchPinFieldKey = $lynchPin['field'];
 
         if($contentDatumOrFieldKey === $lynchPinFieldKey){
 

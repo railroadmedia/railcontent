@@ -16,6 +16,8 @@ class ContentCreateRequest extends CustomFormRequest
      */
     public function rules()
     {
+        $this->validateContent($this);
+
         //set the general validation rules
         $this->setGeneralRules(
             [
