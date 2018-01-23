@@ -164,25 +164,15 @@ class CustomFormRequest extends FormRequest
             $entity_type = $request->request->get('type');
 
             foreach ($customRules as $key => $value) {
-                if (
-                    (
-                        ($request instanceof ContentFieldCreateRequest)
-                        &&
-                        ($key == implode('|', [$entity_key, $entity_type]))
-                    )
-                    ||
-                    (
-                        ($request instanceof ContentDatumCreateRequest)
-                        &&
-                        ($key == $entity_key)
-                    )
-                ) {
-                    $rules = array_merge(
-                        $rules,
-                        [
-                            'value' => $value
-                        ]
-                    );
+
+                $keyForField = $key == implode('|', [$entity_key, $entity_type]);
+                $keyForDatum = $key == $entity_key;
+
+                $getRulesForField = $keyForField && ($request instanceof ContentFieldCreateRequest);
+                $getRulesForDatum = $keyForDatum && ($request instanceof ContentDatumCreateRequest);
+
+                if ($getRulesForField || $getRulesForDatum) {
+                    $rules = array_merge( $rules, ['value' => $value]);
                 }
             }
         }
