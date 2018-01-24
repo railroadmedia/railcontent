@@ -148,4 +148,9 @@ class ConfigService
      * @var string
      */
     public static $redisPrefix;
+
+    /**
+     * @var string
+     */
+    public static $cacheDriver;
 }

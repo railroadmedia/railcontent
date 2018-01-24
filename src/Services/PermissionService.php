@@ -64,7 +64,7 @@ class PermissionService
     {
         $hash = 'permissions_';
         CacheHelper::setPrefix();
-        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash) {
+        $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash) {
             $results = $this->permissionRepository->getAll();
             return $results;
         });

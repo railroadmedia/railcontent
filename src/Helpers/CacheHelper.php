@@ -14,7 +14,7 @@ class CacheHelper
 
     public static function setPrefix()
     {
-        return Cache::store('redis')->setPrefix(ConfigService::$redisPrefix);
+        return Cache::store(ConfigService::$cacheDriver)->setPrefix(ConfigService::$redisPrefix);
     }
     /**
      * Return a string with the user's settings, that it's used when we calculate the cache key
@@ -67,9 +67,9 @@ class CacheHelper
     {
         self::setPrefix();
         foreach ($elements as $element) {
-           // Redis::rpush(Cache::store('redis')->getPrefix() . 'content_list_' . $element, $key);
+           // Redis::rpush(Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element, $key);
              //use sets to store the mapping between content and cached methods keys
-             Cache::store('redis')->connection()->sadd(Cache::store('redis')->getPrefix() . 'content_list_' . $element, $key);
+             Cache::store(ConfigService::$cacheDriver)->connection()->sadd(Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element, $key);
         }
     }
 
@@ -85,8 +85,8 @@ class CacheHelper
     public static function getListElement($key)
     {
         self::setPrefix();
-        return Cache::store('redis')->connection()->smembers(Cache::store('redis')->getPrefix() . $key);
-        //return Redis::lrange(Cache::store('redis')->getPrefix() . $key, 0, -1);
+        return Cache::store(ConfigService::$cacheDriver)->connection()->smembers(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key);
+        //return Redis::lrange(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key, 0, -1);
     }
 
     /**
@@ -100,7 +100,7 @@ class CacheHelper
         $keys = self::getListElement($key);
 
         foreach ($keys as $key1) {
-            Redis::del(Cache::store('redis')->getPrefix().$key1);
+            Redis::del(Cache::store(ConfigService::$cacheDriver)->getPrefix().$key1);
         }
 
         return true;

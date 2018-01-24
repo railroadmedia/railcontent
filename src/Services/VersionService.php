@@ -63,7 +63,7 @@ class VersionService
     public function get($versionId)
     {
         $hash = 'version_'. CacheHelper::getKey($versionId);
-        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $versionId) {
+        $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash, $versionId) {
             $results = $this->versionRepository->getOldContent($versionId);
             return $results;
         });

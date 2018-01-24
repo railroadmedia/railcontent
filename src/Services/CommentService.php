@@ -221,7 +221,7 @@ class CommentService
 
         $hash = 'get_comments_'.CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
 
-        $results = Cache::store('redis')->rememberForever($hash, function () use ($hash, $page, $limit, $orderByDirection, $orderByColumn) {
+        $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash, $page, $limit, $orderByDirection, $orderByColumn) {
         $this->commentRepository->setData($page, $limit, $orderByDirection, $orderByColumn);
 
             $results = [
