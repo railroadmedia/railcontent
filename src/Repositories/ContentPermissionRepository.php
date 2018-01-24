@@ -39,6 +39,7 @@ class ContentPermissionRepository extends RepositoryBase
                 ConfigService::$tableContentPermissions . '.permission_id'
             )
             ->where(ConfigService::$tablePermissions . '.id', $id)
+            ->where(ConfigService::$tablePermissions . '.brand', ConfigService::$brand)
             ->first();
     }
 
@@ -58,6 +59,7 @@ class ContentPermissionRepository extends RepositoryBase
             )
             ->orWhereIn(ConfigService::$tableContentPermissions . '.content_id', $contentIds)
             ->orWhereIn(ConfigService::$tableContentPermissions . '.content_type', $contentTypes)
+            ->where(ConfigService::$tablePermissions . '.brand', ConfigService::$brand)
             ->get()
             ->toArray();
     }
@@ -85,6 +87,7 @@ class ContentPermissionRepository extends RepositoryBase
 
     /**
      * Unlink content permission links
+     *
      * @param integer $permissionId
      * @return bool
      */
@@ -95,11 +98,13 @@ class ContentPermissionRepository extends RepositoryBase
 
     public function dissociate($contentId = null, $contentType = null, $permissionId)
     {
-        return $this->query()->where([
-            'content_id' => $contentId,
-            'content_type' => $contentType,
-            'permission_id' => $permissionId
-        ])->delete();
+        return $this->query()->where(
+            [
+                'content_id' => $contentId,
+                'content_type' => $contentType,
+                'permission_id' => $permissionId
+            ]
+        )->delete();
     }
 
     /**
@@ -118,6 +123,7 @@ class ContentPermissionRepository extends RepositoryBase
                 ConfigService::$tableContentPermissions . '.permission_id'
             )
             ->where(ConfigService::$tablePermissions . '.id', $id)
+            ->where(ConfigService::$tablePermissions . '.brand', ConfigService::$brand)
             ->get()
             ->toArray();
     }

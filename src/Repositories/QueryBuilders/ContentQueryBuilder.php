@@ -456,12 +456,32 @@ class ContentQueryBuilder extends QueryBuilder
                 }
             )
             ->leftJoin(
+                ConfigService::$tablePermissions . ' as id_permissions',
+                function (JoinClause $join) {
+                    $join
+                        ->on(
+                            'id_permissions' . '.id',
+                            'id_content_permissions' . '.permission_id'
+                        );
+                }
+            )
+            ->leftJoin(
                 ConfigService::$tableContentPermissions . ' as type_content_permissions',
                 function (JoinClause $join) {
                     $join
                         ->on(
                             'type_content_permissions' . '.content_type',
                             ConfigService::$tableContent . '.type'
+                        );
+                }
+            )
+            ->leftJoin(
+                ConfigService::$tablePermissions . ' as type_permissions',
+                function (JoinClause $join) {
+                    $join
+                        ->on(
+                            'type_permissions' . '.id',
+                            'type_content_permissions' . '.permission_id'
                         );
                 }
             )
@@ -474,7 +494,8 @@ class ContentQueryBuilder extends QueryBuilder
                                     ->whereIn(
                                         'id_content_permissions' . '.permission_id',
                                         PermissionRepository::$availableContentPermissionIds
-                                    );
+                                    )
+                                    ->where('id_permissions' . '.brand', ConfigService::$brand);
                             }
                         )
                         ->orWhere(
@@ -483,7 +504,9 @@ class ContentQueryBuilder extends QueryBuilder
                                     ->whereIn(
                                         'type_content_permissions' . '.permission_id',
                                         PermissionRepository::$availableContentPermissionIds
-                                    );
+                                    )
+                                    ->where('type_permissions' . '.brand', ConfigService::$brand);
+
                             }
                         )
                         ->orWhere(
