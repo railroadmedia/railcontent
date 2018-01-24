@@ -33,6 +33,16 @@ class ContentHierarchyService
 
     /**
      * @param array $parentIds
+     * @param $childId
+     * @return array|null
+     */
+    public function getByParentIds(array $parentIds)
+    {
+        return $this->contentHierarchyRepository->getByParentIds($parentIds);
+    }
+
+    /**
+     * @param array $parentIds
      */
     public function countParentsChildren(array $parentIds)
     {
