@@ -395,27 +395,29 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
+        $tableName = '_icf';
+
         $this->join(
-            ConfigService::$tableContentFields,
-            function (JoinClause $joinClause) use ($includedFields) {
+            ConfigService::$tableContentFields . ' as ' . $tableName,
+            function (JoinClause $joinClause) use ($includedFields, $tableName) {
                 $joinClause->on(
-                    ConfigService::$tableContentFields . '.content_id',
+                    $tableName . '.content_id',
                     '=',
                     ConfigService::$tableContent . '.id'
                 );
 
                 $joinClause->on(
-                    function (JoinClause $joinClause) use ($includedFields) {
+                    function (JoinClause $joinClause) use ($tableName, $includedFields) {
                         foreach ($includedFields as $index => $includedFieldData) {
                             $joinClause->orOn(
-                                function (JoinClause $joinClause) use ($includedFieldData) {
+                                function (JoinClause $joinClause) use ($tableName, $includedFieldData) {
                                     $joinClause->on(
-                                        ConfigService::$tableContentFields .
+                                        $tableName .
                                         '.key',
                                         '=',
                                         $joinClause->raw("'" . $includedFieldData['name'] . "'")
                                     )->on(
-                                        ConfigService::$tableContentFields .
+                                        $tableName .
                                         '.value',
                                         '=',
                                         $joinClause->raw("'" . $includedFieldData['value'] . "'")
