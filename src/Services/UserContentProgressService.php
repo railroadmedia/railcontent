@@ -126,6 +126,15 @@ class UserContentProgressService
             );
         }
 
+        if(is_null($contentId)){
+            error_log(print_r([
+                'method' => 'startContent',
+                '$contentId' => $contentId,
+                '$progress' => '(not present for "startContent" method. -Jonathan)',
+                '$userId' => $userId
+            ], true));
+        }
+
         event(new UserContentProgressSaved($userId, $contentId));
 
         return true;
@@ -149,6 +158,15 @@ class UserContentProgressService
                 'updated_on' => Carbon::now()->toDateTimeString(),
             ]
         );
+
+        if(is_null($contentId)){
+            error_log(print_r([
+                'method' => 'completeContent',
+                '$contentId' => $contentId,
+                '$progress' => '(not present for "completeContent" method. -Jonathan)',
+                '$userId' => $userId
+            ], true));
+        }
 
         event(new UserContentProgressSaved($userId, $contentId));
 
@@ -179,6 +197,15 @@ class UserContentProgressService
                 'updated_on' => Carbon::now()->toDateTimeString()
             ]
         );
+
+        if(is_null($contentId)){
+            error_log(print_r([
+                'method' => 'saveContentProgress',
+                '$contentId' => $contentId,
+                '$progress' => print_r($progress, true),
+                '$userId' => $userId
+            ], true));
+        }
 
         event(new UserContentProgressSaved($userId, $contentId));
 
