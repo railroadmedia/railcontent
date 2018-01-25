@@ -216,13 +216,10 @@ class CustomFormRequest extends FormRequest
 
         $input = $request->request->all();
 
-        if($request instanceof ContentCreateRequest) {
-            $contentType = $input['type'];
-        }
+        // todo: what about number of children???
+        // todo: what about number of children???
+        // todo: what about number of children???
 
-        // todo: $contentUpdate = $request instanceof ContentUpdateRequest;
-        // todo: $fieldOrDatumCreate = $request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest;
-        // todo: $fieldOrDatumUpdate = $request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest;
 
 
         // 2 -----------------------------------------------------------------------------------------------------------
@@ -271,13 +268,40 @@ class CustomFormRequest extends FormRequest
             }
         }
 
-        // todo: $fieldOrDatumCreate = $request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest;
-        // todo: $fieldOrDatumUpdate = $request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest;
+        // get content status, if content status is restricted, then validation is required
 
+        if($request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest){
 
+            $contentId = $request->request->get('content_id');
 
+            if(empty($contentId)){
+                error_log('Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
+                    'content_id passed. This is at odds with what we\'re expecting and might be cause for concern');
+            }
 
+            $content = $this->contentService->getById($contentId);
+            $contentValidationRequired = in_array($content['status'], $restrictedStatuses);
+        }
+
+        if($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest){
+
+            $contentDatumOrField = $this->contentFieldService->get($request->request->get('id'));
+
+            throw_if(empty($contentDatumOrField), // code-smell!
+                new \Exception('$contentDatumOrField not filled in ' . '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent')
+            );
+
+            $contentId = $contentDatumOrField['content_id'];
+
+            $content = $this->contentService->getById($contentId);
+            $contentValidationRequired = in_array($content['status'], $restrictedStatuses);
+        }
+        
         if($contentValidationRequired){
+
+
+
+            // todo: $contentUpdate = $request instanceof ContentUpdateRequest;
 
             // todo: do content validation
 
@@ -292,49 +316,24 @@ class CustomFormRequest extends FormRequest
 
     public function validateContent_OLD_VERSION($request)
     {
-
-        // 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-
-        $content = null;                // code-smell!
-        $contentId = null;              // code-smell!
-        $contentType = null;            // code-smell!
-        $keysOfValuesRequestedToSet = []; // code-smell!
-        $restricted = null;             // code-smell!
-
-        $input = $request->request->all();
-
-        // 222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
-
-//        $contentCreate = $request instanceof ContentCreateRequest;
-//        $contentUpdate = $request instanceof ContentUpdateRequest;
-//        $fieldOrDatumCreate = $request instanceof ContentDatumCreateRequest ||
-//            $request instanceof ContentFieldCreateRequest;
-//        $fieldOrDatumUpdate = $request instanceof ContentDatumUpdateRequest ||
-//            $request instanceof ContentFieldUpdateRequest;
-//        $hierarchyCreate = $request instanceof ContentHierarchyCreateRequest;
-//        $hierarchyUpdate = $request instanceof ContentHierarchyUpdateRequest;
-
-
-        // 333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
-
         if($fieldOrDatumCreate){
-            $contentId = $request->request->get('content_id');
-            if(empty($contentId)){
-                error_log('Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
-                    'content_id passed. This is at odds with what we\'re expecting and might be cause for concern');
-            }
-            $content = $this->contentService->getById($contentId);
-            $contentType = $content['type'];
-            $keysOfValuesRequestedToSet[] = $request->request->get('key');
-        }elseif($fieldOrDatumUpdate){
-            $contentDatumOrField = $this->contentFieldService->get($request->request->get('id'));
-            throw_if(empty($contentDatumOrField), // code-smell!
-                new \Exception('$contentDatumOrField not filled in ' . '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent')
-            );
-            $contentId = $contentDatumOrField['content_id'];
-            $content = $this->contentService->getById($contentId);
-            $contentType = $content['type'];
-            $keysOfValuesRequestedToSet[] = $contentDatumOrField['key'];
+//            $contentId = $request->request->get('content_id');
+//            if(empty($contentId)){
+//                error_log('Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
+//                    'content_id passed. This is at odds with what we\'re expecting and might be cause for concern');
+//            }
+//            $content = $this->contentService->getById($contentId);
+//            $contentType = $content['type'];
+//            $keysOfValuesRequestedToSet[] = $request->request->get('key');
+//        }elseif($fieldOrDatumUpdate){
+//            $contentDatumOrField = $this->contentFieldService->get($request->request->get('id'));
+//            throw_if(empty($contentDatumOrField), // code-smell!
+//                new \Exception('$contentDatumOrField not filled in ' . '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent')
+//            );
+//            $contentId = $contentDatumOrField['content_id'];
+//            $content = $this->contentService->getById($contentId);
+//            $contentType = $content['type'];
+//            $keysOfValuesRequestedToSet[] = $contentDatumOrField['key'];
         }elseif($contentCreate) {
             $contentType = $input['type'];
         }elseif($contentUpdate) {
