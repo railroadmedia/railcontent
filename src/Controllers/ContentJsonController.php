@@ -118,25 +118,25 @@ class ContentJsonController extends Controller
         $content = $this->contentService->getById($id);
         throw_unless($content, new NotFoundException('No content with id ' . $id . ' exists.'));
 
-        $rules = $this->contentService->getValidationRules($content);
-        if($rules === false){
-            return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503);
-        }
-
-        $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation($content, $rules);
-
-        $validator = $this->validationFactory->make($contentPropertiesForValidation, $rules);
-
-        $validation = [ 'status' => 200, 'messages' => [] ];
-
-        try{
-            $validator->validate();
-        }catch(ValidationException $exception){
-            $messages = $exception->validator->messages()->messages();
-            $validation = ['status' => 422, 'messages' => $messages];
-        }
-
-        $content = array_merge($content, ['validation' => $validation]);
+//        $rules = $this->contentService->getValidationRules($content);
+//        if($rules === false){
+//            return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503);
+//        }
+//
+//        $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation($content, $rules);
+//
+//        $validator = $this->validationFactory->make($contentPropertiesForValidation, $rules);
+//
+//        $validation = [ 'status' => 200, 'messages' => [] ];
+//
+//        try{
+//            $validator->validate();
+//        }catch(ValidationException $exception){
+//            $messages = $exception->validator->messages()->messages();
+//            $validation = ['status' => 422, 'messages' => $messages];
+//        }
+//
+//        $content = array_merge($content, ['validation' => $validation]);
 
         return new JsonResponse(array_values([$id => $content]), 200);
     }
