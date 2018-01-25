@@ -59,12 +59,13 @@ class CustomFormRequest extends FormRequest
         ContentDatumService $contentDatumService,
         ContentFieldService $contentFieldService,
         ValidationFactory $validationFactory
-    )
-    {
+    ){
         $this->contentService = $contentService;
         $this->contentDatumService = $contentDatumService;
         $this->contentFieldService = $contentFieldService;
         $this->validationFactory = $validationFactory;
+
+        parent::__construct();
     }
 
     /**
@@ -181,7 +182,7 @@ class CustomFormRequest extends FormRequest
 
     public function validateContent($request)
     {
-        // 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        // 1--------------------------------------------------------
 
         $content = null;                // code-smell!
         $contentId = null;              // code-smell!
@@ -191,80 +192,11 @@ class CustomFormRequest extends FormRequest
 
         $input = $request->request->all();
 
-        // 222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+        // 2--------------------------------------------------------
 
-        $contentCreate = $request instanceof ContentCreateRequest;
-        $contentUpdate = $request instanceof ContentUpdateRequest;
-        $fieldOrDatumCreate = $request instanceof ContentDatumCreateRequest ||
-            $request instanceof ContentFieldCreateRequest;
-        $fieldOrDatumUpdate = $request instanceof ContentDatumUpdateRequest ||
-            $request instanceof ContentFieldUpdateRequest;
-        $hierarchyCreate = $request instanceof ContentHierarchyCreateRequest;
-        $hierarchyUpdate = $request instanceof ContentHierarchyUpdateRequest;
+        $this->setContentToValidate();
 
-
-        // 333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
-
-        if($fieldOrDatumCreate){
-            $contentId = $request->request->get('content_id');
-            if(empty($contentId)){
-                error_log('Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
-                    'content_id passed. This is at odds with what we\'re expecting and might be cause for concern');
-            }
-            $content = $this->contentService->getById($contentId);
-            $contentType = $content['type'];
-            $keysOfValuesRequestedToSet[] = $request->request->get('key');
-        }elseif($fieldOrDatumUpdate){
-            $contentDatumOrField = $this->contentFieldService->get($request->request->get('id'));
-            throw_if(empty($contentDatumOrField), // code-smell!
-                new \Exception('$contentDatumOrField not filled in ' . '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent')
-            );
-            $contentId = $contentDatumOrField['content_id'];
-            $content = $this->contentService->getById($contentId);
-            $contentType = $content['type'];
-            $keysOfValuesRequestedToSet[] = $contentDatumOrField['key'];
-        }elseif($contentCreate) {
-            $contentType = $input['type'];
-        }elseif($contentUpdate) {
-
-            $urlPath = parse_url($_SERVER['HTTP_REFERER'])['path'];
-            $urlPath = explode('/', $urlPath);
-
-            // if this is equal to content-type continue, else error
-            $urlPathThirdLastElement = array_values(array_slice($urlPath, -3))[0];
-
-            // if this is edit continue, else error
-            $urlPathSecondLastElement = array_values(array_slice($urlPath, -2))[0];
-
-            if($urlPathSecondLastElement !== 'edit'){
-                error_log(
-                    'Attempting to validate content-update, but url path\'s second-last element does not ' .
-                    'match expectations. (expected "edit", got "' . $urlPathSecondLastElement . '")'
-                );
-            }
-
-            // content_id
-            $urlPathLastElement = array_values(array_slice($urlPath, -1))[0];
-
-            $contentId = (integer) $urlPathLastElement;
-            $content = $this->contentService->getById($contentId);
-            $contentType = $content['type'];
-
-            if($urlPathThirdLastElement !== $contentType){
-                error_log(
-                    'Attempting to validate content-update, but url path\'s third-last element does not ' .
-                    'match expectations. (expected "' . $contentType . '", got "' . $urlPathSecondLastElement . '")'
-                );
-            }
-        }elseif($hierarchyCreate) {
-            $contentType = null;
-        }elseif($hierarchyUpdate) {
-            $contentType = null;
-        }else{
-            throw new \Exception('Unexpected request type');
-        }
-
-        // 444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+        // 3--------------------------------------------------------
 
         $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
 
@@ -288,67 +220,9 @@ class CustomFormRequest extends FormRequest
         );
 
 
-        // 555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
+        // 4--------------------------------------------------------
 
-        if($fieldOrDatumCreate){
-            // moved
-        }elseif($fieldOrDatumUpdate){
-            // moved
-        }elseif($contentCreate) {
-            foreach($input as $inputKey => $inputValue){
-                if(in_array($inputKey, $restricted)){
-                    throw new \Exception(
-                        'Trying to create new content and passing a value that is protected by the ' .
-                        'content validation system ("' . $inputKey . '" is restricted and thus cannot be set on ' .
-                        'create). This value should not be sent in create requests such as this. It happening is ' .
-                        'likely due to an incorrectly configured form.'
-                    );
-                }
-                $keysOfValuesRequestedToSet[] = $inputKey;
-            }
-            /*
-             * No need to validate - the user is just creating the content and thus of course it won't pass, and
-             * we know they're not setting a value that would set it live.
-             *
-             * Jonathan, January 2018
-             */
-            return true;
-        }elseif($contentUpdate) {
-
-            $restrictedAttemptedToSet = false;
-
-            foreach($input as $inputKey => $inputValue){
-                if(in_array($inputKey, $restricted)){
-                    $restrictedAttemptedToSet = true;
-                }
-                $keysOfValuesRequestedToSet[] = $inputKey;
-            }
-
-            if(!$restrictedAttemptedToSet){
-                /*
-                 * No need to validate - the user is just updating or setting a content attribute that is not
-                 * disallowed for invalid contents and thus must not be protected.
-                 *
-                 * Jonathan, January 2018
-                 */
-
-                return true;
-            }
-        }elseif($hierarchyCreate) {
-
-            // todo...?
-            // todo...?
-            // todo...?
-
-        }elseif($hierarchyUpdate) {
-
-            // todo...?
-            // todo...?
-            // todo...?
-
-        }else{
-            throw new \Exception('Unexpected request type');
-        }
+        $this->prepareForContentValidation();
 
         throw_if(empty($contentType), // code-smell!
             new \Exception('$contentType not filled in (Railroad) CustomFormRequest::validateContent')
@@ -362,7 +236,7 @@ class CustomFormRequest extends FormRequest
         );
 
 
-        // 666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
+        // 5--------------------------------------------------------
 
         $attemptingToSetRestricted = false;
 
@@ -400,8 +274,16 @@ class CustomFormRequest extends FormRequest
         }
 
 
-        // 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
+        // 6--------------------------------------------------------
 
         return true;
+    }
+
+    protected function setContentToValidate(){
+
+    }
+
+    protected function prepareForContentValidation(){
+
     }
 }

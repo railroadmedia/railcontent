@@ -45,4 +45,31 @@ class ContentCreateRequest extends CustomFormRequest
         //get the validation rules
         return parent::rules();
     }
+
+    protected function setContentToValidate(){
+        $contentType = $input['type'];
+    }
+
+    protected function prepareForContentValidation(){
+        foreach($input as $inputKey => $inputValue){
+            if(in_array($inputKey, $restricted)){
+                throw new \Exception(
+                    'Trying to create new content and passing a value that is protected by the ' .
+                    'content validation system ("' . $inputKey . '" is restricted and thus cannot be set on ' .
+                    'create). This value should not be sent in create requests such as this. It happening is ' .
+                    'likely due to an incorrectly configured form.'
+                );
+            }
+            $keysOfValuesRequestedToSet[] = $inputKey;
+        }
+        /*
+         * No need to validate - the user is just creating the content and thus of course it won't pass, and
+         * we know they're not setting a value that would set it live.
+         *
+         * Jonathan, January 2018
+         */
+
+        // todo: adjust so that this triggers exiting the content-validation. If we get here it means we don't need to validate
+        return true;
+    }
 }
