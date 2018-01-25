@@ -182,61 +182,23 @@ class CustomFormRequest extends FormRequest
 
     public function validateContent($request)
     {
-        // 1--------------------------------------------------------
-
         $content = null;
         $keysOfValuesRequestedToSet = [];
         $restricted = null;
         $input = $request->request->all();
-
-        // 2--------------------------------------------------------
 
         $this->setContentToValidate($content, $keysOfValuesRequestedToSet, $restricted, $input);
 
         $contentId = null;
         $contentType = null;
 
-        // 3--------------------------------------------------------
+        $contentValidationRequired = $this->contentValidationRequired($request);
 
-        $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
-
-        $restrictedExistsForBrand = array_key_exists(
-            'restricted_for_invalid_content',
-            ConfigService::$validationRules[ConfigService::$brand]
-        );
-
-        if ($rulesExistForBrand && $restrictedExistsForBrand){
-            $restricted = ConfigService::$validationRules[ConfigService::$brand]['restricted_for_invalid_content'];
-        }
-
-        if(in_array($contentType, array_keys($restricted['custom']))){
-            $restricted = $restricted['custom'][$contentType];
-        }else{
-            $restricted = $restricted['default'];
-        }
-
-        throw_if(empty($restricted), // code-smell! Why are we doing this? Is it not obvious that it should just be set?
-            new \Exception('$restricted not filled in (Railroad) CustomFormRequest::validateContent')
-        );
-
-
-        // 4--------------------------------------------------------
+        $this->setRulesForBrandAndContentType($contentType, $restricted);
 
         $this->prepareForContentValidation();
 
-        // 5--------------------------------------------------------
-
-        $attemptingToSetRestricted = false;
-
-        foreach($keysOfValuesRequestedToSet as $keyRequestedToSet){
-            if(in_array($keyRequestedToSet, $restricted)){
-                $attemptingToSetRestricted = true;
-            }
-        }
-
-        if($attemptingToSetRestricted){ // ... then we need to validate lest we set restricted on an invalid content
-
-            throw_unless($content, new NotFoundException('No content with id ' . $contentId . ' exists.')); // code-smell
+        if($contentValidationRequired){ // ... then we need to validate lest we set restricted on an invalid content
 
             $rules = $this->contentService->getValidationRules($content);
 
@@ -261,17 +223,68 @@ class CustomFormRequest extends FormRequest
             }
         }
 
-
-        // 6--------------------------------------------------------
-
         return true;
     }
 
     protected function setContentToValidate(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
-
+        return true;
     }
 
     protected function prepareForContentValidation(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
-
+        return true;
     }
+
+    protected function contentValidationRequired($request){
+        /*
+         * We have to validate the content if:
+         * 1. the user is setting the status to a restricted value
+         * or
+         * 2. the user is creating|updating a content-field or content-datum for a content with a status value that
+         * is currently a restricted value.
+         */
+
+        if($request instanceof ContentCreateRequest || $request instanceof ContentUpdateRequest){
+
+            // are they attempting to set the status?
+
+            // if so are they attempting to set it to a restricted value?
+
+
+        }elseif(
+            $request instanceof ContentDatumCreateRequest ||
+            $request instanceof ContentFieldCreateRequest ||
+            $request instanceof ContentDatumUpdateRequest ||
+            $request instanceof ContentFieldUpdateRequest
+        ){
+
+            // what is the content's current status?
+
+            // is the content's current status a restricted value?
+
+        }
+    }
+
+    protected function setRulesForBrandAndContentType($contentType, &$restricted){
+        $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
+
+        $restrictedExistsForBrand = array_key_exists(
+            'restricted_for_invalid_content',
+            ConfigService::$validationRules[ConfigService::$brand]
+        );
+
+        if ($rulesExistForBrand && $restrictedExistsForBrand){
+            $restricted = ConfigService::$validationRules[ConfigService::$brand]['restricted_for_invalid_content'];
+        }
+
+        if(in_array($contentType, array_keys($restricted['custom']))){
+            $restricted = $restricted['custom'][$contentType];
+        }else{
+            $restricted = $restricted['default'];
+        }
+
+        throw_if(empty($restricted), // code-smell! Why are we doing this? Is it not obvious that it should just be set?
+            new \Exception('$restricted not filled in (Railroad) CustomFormRequest::validateContent')
+        );
+    }
+
 }

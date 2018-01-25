@@ -47,7 +47,11 @@ class ContentCreateRequest extends CustomFormRequest
     }
 
     protected function setContentToValidate(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
-        $contentType['type'] = $input['type'];
+        $content['type'] = $input['type'];
+    }
+
+    protected function contentValidationRequired(){
+
     }
 
     protected function prepareForContentValidation(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
