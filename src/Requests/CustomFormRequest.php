@@ -184,17 +184,17 @@ class CustomFormRequest extends FormRequest
     {
         // 1--------------------------------------------------------
 
-        $content = null;                // code-smell!
-        $contentId = null;              // code-smell!
-        $contentType = null;            // code-smell!
-        $keysOfValuesRequestedToSet = []; // code-smell!
-        $restricted = null;             // code-smell!
-
+        $content = null;
+        $keysOfValuesRequestedToSet = [];
+        $restricted = null;
         $input = $request->request->all();
 
         // 2--------------------------------------------------------
 
-        $this->setContentToValidate();
+        $this->setContentToValidate($content, $keysOfValuesRequestedToSet, $restricted, $input);
+
+        $contentId = null;
+        $contentType = null;
 
         // 3--------------------------------------------------------
 
@@ -223,18 +223,6 @@ class CustomFormRequest extends FormRequest
         // 4--------------------------------------------------------
 
         $this->prepareForContentValidation();
-
-        throw_if(empty($contentType), // code-smell!
-            new \Exception('$contentType not filled in (Railroad) CustomFormRequest::validateContent')
-        );
-        throw_if(empty($keysOfValuesRequestedToSet), // code-smell!
-            new \Exception('$keysOfValuesRequestedToSet not filled in (Railroad) CustomFormRequest::validateContent')
-        );
-
-        throw_unless(isset(ConfigService::$validationRules[ConfigService::$brand]),
-            new \Exception('lynchPin not set for brand: "' . ConfigService::$brand . '"')
-        );
-
 
         // 5--------------------------------------------------------
 
@@ -279,11 +267,11 @@ class CustomFormRequest extends FormRequest
         return true;
     }
 
-    protected function setContentToValidate(){
+    protected function setContentToValidate(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
 
     }
 
-    protected function prepareForContentValidation(){
+    protected function prepareForContentValidation(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
 
     }
 }

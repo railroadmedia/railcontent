@@ -32,7 +32,7 @@ class ContentFieldUpdateRequest extends CustomFormRequest
         return parent::rules();
     }
 
-    protected function setContentToValidate(){
+    protected function setContentToValidate(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
         $contentDatumOrField = $this->contentFieldService->get($request->request->get('id'));
         throw_if(empty($contentDatumOrField), // code-smell!
             new \Exception('$contentDatumOrField not filled in ' . '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent')

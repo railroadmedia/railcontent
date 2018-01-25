@@ -46,11 +46,11 @@ class ContentCreateRequest extends CustomFormRequest
         return parent::rules();
     }
 
-    protected function setContentToValidate(){
-        $contentType = $input['type'];
+    protected function setContentToValidate(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
+        $contentType['type'] = $input['type'];
     }
 
-    protected function prepareForContentValidation(){
+    protected function prepareForContentValidation(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
         foreach($input as $inputKey => $inputValue){
             if(in_array($inputKey, $restricted)){
                 throw new \Exception(

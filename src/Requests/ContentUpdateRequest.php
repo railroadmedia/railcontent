@@ -46,7 +46,7 @@ class ContentUpdateRequest extends CustomFormRequest
         return parent::rules();
     }
 
-    protected function setContentToValidate(){
+    protected function setContentToValidate(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
         $urlPath = parse_url($_SERVER['HTTP_REFERER'])['path'];
         $urlPath = explode('/', $urlPath);
 
@@ -78,7 +78,7 @@ class ContentUpdateRequest extends CustomFormRequest
         }
     }
 
-    protected function prepareForContentValidation(){
+    protected function prepareForContentValidation(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
         $restrictedAttemptedToSet = false;
 
         foreach($input as $inputKey => $inputValue){

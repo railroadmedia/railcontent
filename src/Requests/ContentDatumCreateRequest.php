@@ -30,7 +30,7 @@ class ContentDatumCreateRequest extends CustomFormRequest
         return parent::rules();
     }
 
-    protected function setContentToValidate(){
+    protected function setContentToValidate(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
         $contentId = $request->request->get('content_id');
         if(empty($contentId)){
             error_log('Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
