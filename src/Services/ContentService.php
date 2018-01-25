@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
@@ -322,6 +321,38 @@ class ContentService
             //$this->saveCacheResults($hash, [$parentId]);
             return $results;
         });
+
+        return $results;
+
+    }
+
+    /**
+     * @param integer $parentId
+     * @return array
+     */
+    public function getByParentIdWhereTypeIn(
+        $parentId,
+        $types,
+        $orderBy = 'child_position',
+        $orderByDirection = 'asc'
+    ) {
+        $hash = 'contents_by_parent_id_type_' .
+            CacheHelper::getKey($parentId, $types, $orderBy, $orderByDirection);
+
+        $results = Cache::store(ConfigService::$cacheDriver)->rememberForever(
+            $hash,
+            function () use ($hash, $parentId, $types, $orderBy, $orderByDirection) {
+                $results = $this->contentRepository->getByParentIdWhereTypeIn(
+                    $parentId,
+                    $types,
+                    $orderBy,
+                    $orderByDirection
+                );
+                $this->saveCacheResults($hash, array_merge(array_keys($results), [$parentId]));
+                //$this->saveCacheResults($hash, [$parentId]);
+                return $results;
+            }
+        );
 
         return $results;
 
