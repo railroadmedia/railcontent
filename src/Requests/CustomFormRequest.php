@@ -181,6 +181,112 @@ class CustomFormRequest extends FormRequest
 
     public function validateContent($request)
     {
+        /*
+         * get "the states to guard"
+         *
+         * are we writing|updating status?
+         *
+         * if yes
+         *
+         *      to what value are we wanting to set it to?
+         *
+         *      if the value we want to set is in "the states to guard"
+         *
+         *          validate content (return 422 if fails)
+         *
+         *          exit
+         *
+         * if no
+         *
+         *      get the current status means
+         *
+         *      if the current status is in "the states to guard"
+         *
+         *          validate content (return 422 if fails)
+         *
+         *          exit
+         */
+
+        // 1 -----------------------------------------------------------------------------------------------------------
+
+        $rulesForBrand = [];
+        $restrictedStatuses = [];
+
+        $contentValidationRequired = false;
+
+        $input = $request->request->all();
+
+        if($request instanceof ContentCreateRequest) {
+            $contentType = $input['type'];
+        }
+
+        // todo: $contentUpdate = $request instanceof ContentUpdateRequest;
+        // todo: $fieldOrDatumCreate = $request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest;
+        // todo: $fieldOrDatumUpdate = $request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest;
+
+
+        // 2 -----------------------------------------------------------------------------------------------------------
+
+        // todo: get "restricted"
+
+        $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
+
+        if ($rulesExistForBrand){
+            $rulesForBrand = ConfigService::$validationRules[ConfigService::$brand];
+        }
+
+        if(!is_array($rulesForBrand)){
+            throw_unless(is_string($rulesForBrand), new \Exception(
+                '"$rulesForBrand" is neither string nor array. wtf.'
+            ));
+            $rulesForBrand = [$rulesForBrand];
+        }
+
+        foreach($rulesForBrand as $restrictedStatusesComposite => $rulesForContentTypes){
+            $restrictedStatusesComposite = explode('|', $restrictedStatusesComposite);
+            foreach($restrictedStatusesComposite as $status){
+                $restrictedStatuses[] = $status;
+            }
+        }
+
+        // 3 -----------------------------------------------------------------------------------------------------------
+
+
+        if($request instanceof ContentCreateRequest) {
+            if(isset($input['status'])){
+                if(in_array($input['status'], $restrictedStatuses)){
+                    throw new \Exception(
+                        'Status cannot be set to: "' . $input['status'] . '" on content-create.'
+                    );
+                }
+            }
+
+            $contentValidationRequired = false;
+        }
+
+        // todo: $contentUpdate = $request instanceof ContentUpdateRequest;
+        // todo: $fieldOrDatumCreate = $request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest;
+        // todo: $fieldOrDatumUpdate = $request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest;
+
+
+
+
+        if($contentValidationRequired){
+
+            // todo: do content validation
+
+            $foo = 'bar';
+
+        }
+
+        return true;
+    }
+
+
+
+    public function validateContent_OLD_VERSION($request)
+    {
+
         // 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
 
         $content = null;                // code-smell!
@@ -193,14 +299,14 @@ class CustomFormRequest extends FormRequest
 
         // 222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
 
-        $contentCreate = $request instanceof ContentCreateRequest;
-        $contentUpdate = $request instanceof ContentUpdateRequest;
-        $fieldOrDatumCreate = $request instanceof ContentDatumCreateRequest ||
-            $request instanceof ContentFieldCreateRequest;
-        $fieldOrDatumUpdate = $request instanceof ContentDatumUpdateRequest ||
-            $request instanceof ContentFieldUpdateRequest;
-        $hierarchyCreate = $request instanceof ContentHierarchyCreateRequest;
-        $hierarchyUpdate = $request instanceof ContentHierarchyUpdateRequest;
+//        $contentCreate = $request instanceof ContentCreateRequest;
+//        $contentUpdate = $request instanceof ContentUpdateRequest;
+//        $fieldOrDatumCreate = $request instanceof ContentDatumCreateRequest ||
+//            $request instanceof ContentFieldCreateRequest;
+//        $fieldOrDatumUpdate = $request instanceof ContentDatumUpdateRequest ||
+//            $request instanceof ContentFieldUpdateRequest;
+//        $hierarchyCreate = $request instanceof ContentHierarchyCreateRequest;
+//        $hierarchyUpdate = $request instanceof ContentHierarchyUpdateRequest;
 
 
         // 333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
@@ -266,16 +372,16 @@ class CustomFormRequest extends FormRequest
 
         // 444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
 
-        $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
+//        $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
+//
+//        $restrictedExistsForBrand = array_key_exists(
+//            'restricted_for_invalid_content',
+//            ConfigService::$validationRules[ConfigService::$brand]
+//        );
 
-        $restrictedExistsForBrand = array_key_exists(
-            'restricted_for_invalid_content',
-            ConfigService::$validationRules[ConfigService::$brand]
-        );
-
-        if ($rulesExistForBrand && $restrictedExistsForBrand){
-            $restricted = ConfigService::$validationRules[ConfigService::$brand]['restricted_for_invalid_content'];
-        }
+//        if ($rulesExistForBrand && $restrictedExistsForBrand){
+//            $restricted = ConfigService::$validationRules[ConfigService::$brand]['restricted_for_invalid_content'];
+//        }
 
         if(in_array($contentType, array_keys($restricted['custom']))){
             $restricted = $restricted['custom'][$contentType];
@@ -295,24 +401,24 @@ class CustomFormRequest extends FormRequest
         }elseif($fieldOrDatumUpdate){
             // moved
         }elseif($contentCreate) {
-            foreach($input as $inputKey => $inputValue){
-                if(in_array($inputKey, $restricted)){
-                    throw new \Exception(
-                        'Trying to create new content and passing a value that is protected by the ' .
-                        'content validation system ("' . $inputKey . '" is restricted and thus cannot be set on ' .
-                        'create). This value should not be sent in create requests such as this. It happening is ' .
-                        'likely due to an incorrectly configured form.'
-                    );
-                }
-                $keysOfValuesRequestedToSet[] = $inputKey;
-            }
-            /*
-             * No need to validate - the user is just creating the content and thus of course it won't pass, and
-             * we know they're not setting a value that would set it live.
-             *
-             * Jonathan, January 2018
-             */
-            return true;
+//            foreach($input as $inputKey => $inputValue){
+//                if(in_array($inputKey, $restricted)){
+//                    throw new \Exception(
+//                        'Trying to create new content and passing a value that is protected by the ' .
+//                        'content validation system ("' . $inputKey . '" is restricted and thus cannot be set on ' .
+//                        'create). This value should not be sent in create requests such as this. It happening is ' .
+//                        'likely due to an incorrectly configured form.'
+//                    );
+//                }
+//                $keysOfValuesRequestedToSet[] = $inputKey;
+//            }
+//            /*
+//             * No need to validate - the user is just creating the content and thus of course it won't pass, and
+//             * we know they're not setting a value that would set it live.
+//             *
+//             * Jonathan, January 2018
+//             */
+//            return true;
         }elseif($contentUpdate) {
 
             $restrictedAttemptedToSet = false;
