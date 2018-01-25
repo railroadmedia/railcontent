@@ -260,11 +260,17 @@ class CustomFormRequest extends FormRequest
                     );
                 }
             }
-
             $contentValidationRequired = false;
         }
 
-        // todo: $contentUpdate = $request instanceof ContentUpdateRequest;
+        if($request instanceof ContentCreateRequest) {
+            if(isset($input['status'])){
+                if(in_array($input['status'], $restrictedStatuses)){
+                    $contentValidationRequired = true;
+                }
+            }
+        }
+
         // todo: $fieldOrDatumCreate = $request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest;
         // todo: $fieldOrDatumUpdate = $request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest;
 
