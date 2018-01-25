@@ -266,77 +266,8 @@ class CustomFormRequest extends FormRequest
                     $contentValidationRequired = true;
                 }
             }
-        }
 
-        // get content status, if content status is restricted, then validation is required
-
-        if($request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest){
-
-            $contentId = $request->request->get('content_id');
-
-            if(empty($contentId)){
-                error_log('Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
-                    'content_id passed. This is at odds with what we\'re expecting and might be cause for concern');
-            }
-
-            $content = $this->contentService->getById($contentId);
-            $contentValidationRequired = in_array($content['status'], $restrictedStatuses);
-        }
-
-        if($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest){
-
-            $contentDatumOrField = $this->contentFieldService->get($request->request->get('id'));
-
-            throw_if(empty($contentDatumOrField), // code-smell!
-                new \Exception('$contentDatumOrField not filled in ' . '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent')
-            );
-
-            $contentId = $contentDatumOrField['content_id'];
-
-            $content = $this->contentService->getById($contentId);
-            $contentValidationRequired = in_array($content['status'], $restrictedStatuses);
-        }
-        
-        if($contentValidationRequired){
-
-
-
-            // todo: $contentUpdate = $request instanceof ContentUpdateRequest;
-
-            // todo: do content validation
-
-            $foo = 'bar';
-
-        }
-
-        return true;
-    }
-
-
-
-    public function validateContent_OLD_VERSION($request)
-    {
-        if($fieldOrDatumCreate){
-//            $contentId = $request->request->get('content_id');
-//            if(empty($contentId)){
-//                error_log('Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
-//                    'content_id passed. This is at odds with what we\'re expecting and might be cause for concern');
-//            }
-//            $content = $this->contentService->getById($contentId);
-//            $contentType = $content['type'];
-//            $keysOfValuesRequestedToSet[] = $request->request->get('key');
-//        }elseif($fieldOrDatumUpdate){
-//            $contentDatumOrField = $this->contentFieldService->get($request->request->get('id'));
-//            throw_if(empty($contentDatumOrField), // code-smell!
-//                new \Exception('$contentDatumOrField not filled in ' . '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent')
-//            );
-//            $contentId = $contentDatumOrField['content_id'];
-//            $content = $this->contentService->getById($contentId);
-//            $contentType = $content['type'];
-//            $keysOfValuesRequestedToSet[] = $contentDatumOrField['key'];
-        }elseif($contentCreate) {
-            $contentType = $input['type'];
-        }elseif($contentUpdate) {
+            // get content
 
             $urlPath = parse_url($_SERVER['HTTP_REFERER'])['path'];
             $urlPath = explode('/', $urlPath);
@@ -359,133 +290,36 @@ class CustomFormRequest extends FormRequest
 
             $contentId = (integer) $urlPathLastElement;
             $content = $this->contentService->getById($contentId);
-            $contentType = $content['type'];
 
-            if($urlPathThirdLastElement !== $contentType){
-                error_log(
-                    'Attempting to validate content-update, but url path\'s third-last element does not ' .
-                    'match expectations. (expected "' . $contentType . '", got "' . $urlPathSecondLastElement . '")'
-                );
-            }
-        }elseif($hierarchyCreate) {
-            $contentType = null;
-        }elseif($hierarchyUpdate) {
-            $contentType = null;
-        }else{
-            throw new \Exception('Unexpected request type');
+            if($urlPathThirdLastElement !== $content['type']){error_log(
+                'Attempting to validate content-update, but url path\'s third-last element does not ' .
+                'match expectations. (expected "' . $content['type'] . '", got "' . $urlPathSecondLastElement . '")'
+            );}
         }
 
-        // 444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
+        // get content status, if content status is restricted, then validation is required
 
-//        $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
-//
-//        $restrictedExistsForBrand = array_key_exists(
-//            'restricted_for_invalid_content',
-//            ConfigService::$validationRules[ConfigService::$brand]
-//        );
-
-//        if ($rulesExistForBrand && $restrictedExistsForBrand){
-//            $restricted = ConfigService::$validationRules[ConfigService::$brand]['restricted_for_invalid_content'];
-//        }
-
-        if(in_array($contentType, array_keys($restricted['custom']))){
-            $restricted = $restricted['custom'][$contentType];
-        }else{
-            $restricted = $restricted['default'];
+        if($request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest){
+            $contentId = $request->request->get('content_id');
+            if(empty($contentId)){
+                error_log('Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
+                    'content_id passed. This is at odds with what we\'re expecting and might be cause for concern');
+            }
+            $content = $this->contentService->getById($contentId);
+            $contentValidationRequired = in_array($content['status'], $restrictedStatuses);
         }
 
-        throw_if(empty($restricted), // code-smell! Why are we doing this? Is it not obvious that it should just be set?
-            new \Exception('$restricted not filled in (Railroad) CustomFormRequest::validateContent')
-        );
-
-
-        // 555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555555
-
-        if($fieldOrDatumCreate){
-            // moved
-        }elseif($fieldOrDatumUpdate){
-            // moved
-        }elseif($contentCreate) {
-//            foreach($input as $inputKey => $inputValue){
-//                if(in_array($inputKey, $restricted)){
-//                    throw new \Exception(
-//                        'Trying to create new content and passing a value that is protected by the ' .
-//                        'content validation system ("' . $inputKey . '" is restricted and thus cannot be set on ' .
-//                        'create). This value should not be sent in create requests such as this. It happening is ' .
-//                        'likely due to an incorrectly configured form.'
-//                    );
-//                }
-//                $keysOfValuesRequestedToSet[] = $inputKey;
-//            }
-//            /*
-//             * No need to validate - the user is just creating the content and thus of course it won't pass, and
-//             * we know they're not setting a value that would set it live.
-//             *
-//             * Jonathan, January 2018
-//             */
-//            return true;
-        }elseif($contentUpdate) {
-
-            $restrictedAttemptedToSet = false;
-
-            foreach($input as $inputKey => $inputValue){
-                if(in_array($inputKey, $restricted)){
-                    $restrictedAttemptedToSet = true;
-                }
-                $keysOfValuesRequestedToSet[] = $inputKey;
-            }
-
-            if(!$restrictedAttemptedToSet){
-                /*
-                 * No need to validate - the user is just updating or setting a content attribute that is not
-                 * disallowed for invalid contents and thus must not be protected.
-                 *
-                 * Jonathan, January 2018
-                 */
-
-                return true;
-            }
-        }elseif($hierarchyCreate) {
-
-            // todo...?
-            // todo...?
-            // todo...?
-
-        }elseif($hierarchyUpdate) {
-
-            // todo...?
-            // todo...?
-            // todo...?
-
-        }else{
-            throw new \Exception('Unexpected request type');
+        if($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest){
+            $contentDatumOrField = $this->contentFieldService->get($request->request->get('id'));
+            throw_if(empty($contentDatumOrField), // code-smell!
+                new \Exception('$contentDatumOrField not filled in ' . '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent')
+            );
+            $contentId = $contentDatumOrField['content_id'];
+            $content = $this->contentService->getById($contentId);
+            $contentValidationRequired = in_array($content['status'], $restrictedStatuses);
         }
 
-        throw_if(empty($contentType), // code-smell!
-            new \Exception('$contentType not filled in (Railroad) CustomFormRequest::validateContent')
-        );
-        throw_if(empty($keysOfValuesRequestedToSet), // code-smell!
-            new \Exception('$keysOfValuesRequestedToSet not filled in (Railroad) CustomFormRequest::validateContent')
-        );
-
-        throw_unless(isset(ConfigService::$validationRules[ConfigService::$brand]),
-            new \Exception('lynchPin not set for brand: "' . ConfigService::$brand . '"')
-        );
-
-
-        // 666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666
-
-        $attemptingToSetRestricted = false;
-
-        foreach($keysOfValuesRequestedToSet as $keyRequestedToSet){
-            if(in_array($keyRequestedToSet, $restricted)){
-                $attemptingToSetRestricted = true;
-            }
-        }
-
-        if($attemptingToSetRestricted){ // ... then we need to validate lest we set restricted on an invalid content
-
-            throw_unless($content, new NotFoundException('No content with id ' . $contentId . ' exists.')); // code-smell
+        if($contentValidationRequired){
 
             $rules = $this->contentService->getValidationRules($content);
 
@@ -509,9 +343,6 @@ class CustomFormRequest extends FormRequest
                  */
             }
         }
-
-
-        // 7777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777
 
         return true;
     }
