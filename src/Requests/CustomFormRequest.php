@@ -263,7 +263,7 @@ class CustomFormRequest extends FormRequest
             $contentValidationRequired = false;
         }
 
-        if($request instanceof ContentCreateRequest) {
+        if($request instanceof ContentUpdateRequest) {
             if(isset($input['status'])){
                 if(in_array($input['status'], $restrictedStatuses)){
                     $contentValidationRequired = true;
