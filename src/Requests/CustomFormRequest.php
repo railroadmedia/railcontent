@@ -209,8 +209,11 @@ class CustomFormRequest extends FormRequest
 
         // 1 -----------------------------------------------------------------------------------------------------------
 
+        $content = null;
+
         $rulesForBrand = [];
         $restrictedStatuses = [];
+        $rulesForContentType = [];
 
         $contentValidationRequired = false;
 
@@ -321,16 +324,34 @@ class CustomFormRequest extends FormRequest
 
         if($contentValidationRequired){
 
-            $rules = $this->contentService->getValidationRules($content);
+            throw_if(empty($content), new \Exception('Content not set'));
 
-            if($rules === false){
+            $contentType = $content['type'];
+            $brand = ConfigService::$brand;
+            $allRules = ConfigService::$validationRules;
+
+            throw_unless(array_key_exists($brand, $allRules), new \Exception(
+                'No validation rules for brand "' . $brand . '"'
+            ));
+
+            $rulesForBrand = $allRules[$brand];
+
+            if(empty($rulesForBrand)){
                 return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503);
             }
 
-            $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation($content, $rules);
+            foreach($rulesForBrand as $rulesForTypes){
+                if(array_key_exists($contentType, $rulesForTypes)){
+                    $rulesForContentType = $rulesForTypes[$contentType];
+                }
+            }
+
+            $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation(
+                $content, $rulesForContentType
+            );
 
             try{
-                $this->validationFactory->make($contentPropertiesForValidation, $rules)->validate();
+                $this->validationFactory->make($contentPropertiesForValidation, $rulesForContentType)->validate();
             }catch(ValidationException $exception){
                 $messages = $exception->validator->messages()->messages();
                 return new JsonResponse(['messages' => $messages], 422);
