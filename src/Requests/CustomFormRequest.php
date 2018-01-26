@@ -323,6 +323,34 @@ class CustomFormRequest extends FormRequest
                 $content, $rulesForContentType
             );
 
+            $rulesForContentTypeReorganized = [];
+
+            foreach($rulesForContentType as $primaryKey => $rulesOrArrayOfRules){
+                if(($primaryKey === 'datum') || ($primaryKey === 'fields')){
+                    foreach($rulesOrArrayOfRules as $keyForRule => $rule){
+                        $rulesForContentTypeReorganized[$keyForRule] = $rule;
+                    }
+                }else{
+                    $rulesForContentTypeReorganized[$primaryKey] = $rulesOrArrayOfRules;
+                }
+            }
+
+            $rulesForContentType = $rulesForContentTypeReorganized;
+
+            $rulesForContentTypeReorganized = [];
+            $whichCanHaveMultiple = [];
+
+            foreach($rulesForContentType as $ruleKey => $ruleValue){
+                if(in_array('can_have_multiple', array_keys($ruleValue))){
+                    $rulesForContentTypeReorganized[$ruleKey] = $ruleValue['rules'];
+                    if($ruleValue['can_have_multiple']){
+                        $whichCanHaveMultiple[] = $ruleKey;
+                    }
+                }else{
+                    $rulesForContentTypeReorganized[$ruleKey] = $ruleValue;
+                }
+            }
+
             try{
                 $this->validationFactory->make($contentPropertiesForValidation, $rulesForContentType)->validate();
             }catch(ValidationException $exception){
