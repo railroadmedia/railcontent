@@ -325,6 +325,7 @@ class CustomFormRequest extends FormRequest
 
             $rulesForContentTypeReorganized = [];
 
+            // flatten content-details to easily-validated set
             foreach($rulesForContentType as $primaryKey => $rulesOrArrayOfRules){
                 if(($primaryKey === 'datum') || ($primaryKey === 'fields')){
                     foreach($rulesOrArrayOfRules as $keyForRule => $rule){
@@ -334,26 +335,35 @@ class CustomFormRequest extends FormRequest
                     $rulesForContentTypeReorganized[$primaryKey] = $rulesOrArrayOfRules;
                 }
             }
-
             $rulesForContentType = $rulesForContentTypeReorganized;
 
-            $rulesForContentTypeReorganized = [];
-            $whichCanHaveMultiple = [];
-
+            // flatten rules so can be parsed by validator
+            $rulesForContentTypeModified = [];
             foreach($rulesForContentType as $ruleKey => $ruleValue){
+                // we want to get rid of the "can_have_multiple" item and "de-nest" the rules in $rules['rules']
+                $rulesForContentTypeModified[$ruleKey] = $ruleValue['rules'];
+
+                $rulesForContentTypeModified[$ruleKey . '_count'] = 'max:1';
                 if(in_array('can_have_multiple', array_keys($ruleValue))){
-                    $rulesForContentTypeReorganized[$ruleKey] = $ruleValue['rules'];
                     if($ruleValue['can_have_multiple']){
-                        $whichCanHaveMultiple[] = $ruleKey;
+                        $rulesForContentTypeModified[$ruleKey . '_count'] = '';
                     }
-                }else{
-                    $rulesForContentTypeReorganized[$ruleKey] = $ruleValue;
                 }
             }
+            $rulesForContentType = $rulesForContentTypeModified;
 
-            // todo:
-            // we need to add rules for the "can_have_multiple" and then a count for each so that all the validation
-            // ... happens in one push.
+            // add rules for "can_have_multiple" then a count for each so all the validation happens in 1 call
+            $contentPropertiesForValidationWithCounts = [];
+            foreach($contentPropertiesForValidation as $propertyName =>$property){
+                $contentPropertiesForValidationWithCounts[$propertyName . '_count'] = count($property);
+            }
+            $contentPropertiesForValidation = array_merge(
+                $contentPropertiesForValidation, $contentPropertiesForValidationWithCounts
+            );
+
+            // todo: get number of children from content-hierarchy and get minimum number from config for content-type
+            // todo: get number of children from content-hierarchy and get minimum number from config for content-type
+            // todo: get number of children from content-hierarchy and get minimum number from config for content-type
 
             try{
                 $this->validationFactory->make($contentPropertiesForValidation, $rulesForContentType)->validate();
