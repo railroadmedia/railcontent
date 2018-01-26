@@ -122,22 +122,18 @@ class ContentPermissionService
         return $this->contentPermissionRepository->delete($id) > 0;
     }
 
-    /**
-     * @param $contentId
-     * @param $contentType
+    /** Clear the cache records associated with the content or the cache records associated with the contents that have the specified content type
+     * @param int $contentId
+     * @param string $contentType
      */
     private function clearAssociatedContentCache(array $contentIds, array $contentTypes)
     {
         foreach ($contentIds as $contentId) {
-            //delete cache for the content id
             CacheHelper::deleteCache('content_list_' . $contentId);
         }
         foreach ($contentTypes as $contentType) {
-            // dd($contentType);
             $contents = $this->contentRepository->getByType($contentType);
-
             foreach ($contents as $content) {
-                //delete cache for the content id
                 CacheHelper::deleteCache('content_list_' . $content['id']);
             }
         }

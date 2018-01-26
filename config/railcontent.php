@@ -114,5 +114,5 @@ return [
     'administrator_routes_middleware' => [],
     
     'cache_prefix' =>'railcontent',
-    'cache_driver' => env('CACHE_DRIVER', 'redis'),
+    'cache_driver' => 'redis'
 ];

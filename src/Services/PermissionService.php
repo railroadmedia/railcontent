@@ -39,7 +39,7 @@ class PermissionService
     public function __construct(
         PermissionRepository $permissionRepository,
         ContentPermissionRepository $contentPermissionRepository,
-    ContentRepository $contentRepository
+        ContentRepository $contentRepository
     ) {
         $this->permissionRepository = $permissionRepository;
         $this->contentPermissionRepository = $contentPermissionRepository;
@@ -62,15 +62,14 @@ class PermissionService
      */
     public function getAll()
     {
-        $hash = 'permissions_';
-        CacheHelper::setPrefix();
+        $hash = 'permissions_' . CacheHelper::getKey();
+
         $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash) {
             $results = $this->permissionRepository->getAll();
             return $results;
         });
 
         return $results;
-       // return $this->permissionRepository->getAll();
     }
 
     /**

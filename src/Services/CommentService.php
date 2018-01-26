@@ -219,11 +219,10 @@ class CommentService
 
         $orderByColumn = trim($orderByAndDirection, '-');
 
-        $hash = 'get_comments_'.CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
+        $hash = 'get_comments_' .(CommentRepository::$availableContentId ?? ''). CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
 
         $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash, $page, $limit, $orderByDirection, $orderByColumn) {
         $this->commentRepository->setData($page, $limit, $orderByDirection, $orderByColumn);
-
             $results = [
             'results' => $this->commentRepository->getComments(),
             'total_results' => $this->commentRepository->countComments()

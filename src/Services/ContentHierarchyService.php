@@ -68,16 +68,16 @@ class ContentHierarchyService
             $childPosition
         );
 
-        //delete the cached results for getByParentId('parent_id')
+        //delete the cached results for parent id
         CacheHelper::deleteCache('content_list_' . $parentId);
 
         //delete the cached results for child id
         CacheHelper::deleteCache('content_list_' . $childId);
 
-
-
         $results = $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
+
         CacheHelper::deleteAllCachedSearchResults('_type_');
+
         return $results;
     }
 
@@ -97,7 +97,7 @@ class ContentHierarchyService
             $childPosition
         );
 
-        //delete the cached results for getByParentId('parent_id')
+        //delete the cached results for parent id and child id
         CacheHelper::deleteCache('content_list_' . $parentId);
 
         CacheHelper::deleteCache('content_list_' . $childId);
@@ -112,7 +112,7 @@ class ContentHierarchyService
      */
     public function delete($parentId, $childId)
     {
-        //delete the cached results for getByParentId('parent_id')
+        //delete the cached results for parent id
         CacheHelper::deleteCache('content_list_' . $parentId);
 
         CacheHelper::deleteCache('content_list_' . $childId);
@@ -129,7 +129,7 @@ class ContentHierarchyService
         if(!$parentHierarchy){
             return true;
         }
-        //delete the cached results for getByParentId('parent_id')
+        //delete the cached results for parent id
         CacheHelper::deleteCache('content_list_' . $parentHierarchy['parent_id']);
 
         CacheHelper::deleteCache('content_list_' . $childId);

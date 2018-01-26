@@ -16,6 +16,7 @@ class CacheHelper
     {
         return Cache::store(ConfigService::$cacheDriver)->setPrefix(ConfigService::$redisPrefix);
     }
+
     /**
      * Return a string with the user's settings, that it's used when we calculate the cache key
      * @return string
@@ -23,14 +24,10 @@ class CacheHelper
     public static function getSettings()
     {
         self::setPrefix();
-        $settings = ' '.ContentRepository::$pullFutureContent . ' ' .
-            ConfigService::$brand.' ';
-        if (ContentRepository::$availableContentStatues) {
-            $settings .= implode(' ', array_values(ContentRepository::$availableContentStatues)).' ';
-        }
-        if (PermissionRepository::$availableContentPermissionIds) {
-            $settings .= implode(' ', array_values(PermissionRepository::$availableContentPermissionIds)). ' ';
-        }
+        $settings = ' ' . ContentRepository::$pullFutureContent
+                  . ' ' . ConfigService::$brand
+                  . ' ' . implode(' ', array_values(array_wrap(ContentRepository::$availableContentStatues)))
+                  . ' ' . implode(' ', array_values(array_wrap(PermissionRepository::$availableContentPermissionIds)));
 
         return $settings;
     }
@@ -43,21 +40,16 @@ class CacheHelper
     {
         $args = func_get_args();
         $key = '';
-        foreach($args as $arg){
-            if(!is_array($arg))
-            {
-                $key .= $arg.' ';
-            } else{
-                $key.= implode(' ', array_values($arg));
-            }
+        foreach ($args as $arg) {
+            $key .= implode(' ', array_values(array_wrap($arg)));
         }
 
-        return md5($key.self::getSettings());
+        return md5($key . self::getSettings());
     }
 
     /**
-     * Insert all the specified value (content search key) at the tail of the list stored at key(content id).
-     * If not exist a list for content id, it is created as empty list before performing the push operation.
+     * Insert all the specified value (content search key) at the tail of the set stored at key(content id).
+     * If not exist a set for content id, it is created as empty set before performing the push operation.
      * e.g.: musora:content_list_contentId => "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
      *
      * @param string $key
@@ -66,27 +58,26 @@ class CacheHelper
     public static function addLists($key, array $elements)
     {
         self::setPrefix();
+
         foreach ($elements as $element) {
-           // Redis::rpush(Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element, $key);
-             //use sets to store the mapping between content and cached methods keys
-             Cache::store(ConfigService::$cacheDriver)->connection()->sadd(Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element, $key);
+            Cache::store(ConfigService::$cacheDriver)->connection()->sadd(Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element, $key);
         }
     }
 
     /**
-     * Return all the elements of the list stored at key(content id).
+     * Return all the elements of the set stored at key(content id).
      * e.g.:
-    1) "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
-    2) "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
-    3) "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
+     * 1) "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
+     * 2) "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
+     * 3) "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
      * @param string $key
      * @return mixed
      */
     public static function getListElement($key)
     {
         self::setPrefix();
+
         return Cache::store(ConfigService::$cacheDriver)->connection()->smembers(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key);
-        //return Redis::lrange(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key, 0, -1);
     }
 
     /**
@@ -100,11 +91,10 @@ class CacheHelper
         $keys = self::getListElement($key);
 
         foreach ($keys as $key1) {
-            Redis::del(Cache::store(ConfigService::$cacheDriver)->getPrefix().$key1);
+            Redis::del(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key1);
         }
 
         return true;
-
     }
 
     /**
@@ -119,6 +109,7 @@ class CacheHelper
         foreach ($keys as $key) {
             Redis::del($key);
         }
+
         return true;
     }
 
