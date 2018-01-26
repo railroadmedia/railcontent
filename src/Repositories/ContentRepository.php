@@ -478,6 +478,30 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @param array $types
+     * @param $userId
+     * @param $state
+     * @return integer
+     */
+    public function countByTypesUserProgressState(array $types, $userId, $state)
+    {
+        return $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->leftJoin(
+                ConfigService::$tableUserContentProgress,
+                ConfigService::$tableUserContentProgress . '.content_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
+            ->where(ConfigService::$tableUserContentProgress . '.state', $state)
+            ->orderBy('published_on', 'desc')
+            ->count();
+    }
+
+    /**
      * @param array $slugs
      * @return array|null
      */

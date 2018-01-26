@@ -484,6 +484,28 @@ class ContentService
     }
 
     /**
+     * @param array $types
+     * @param $userId
+     * @param $state
+     * @return integer
+     */
+    public function countByTypesUserProgressState(
+        array $types,
+        $userId,
+        $state
+    ) {
+        $hash = 'contents_count_by_types_and_user_progress_' . $userId . '_' . CacheHelper::getKey($types, $userId, $state);
+
+        $results = $this->contentRepository->countByTypesUserProgressState(
+            $types,
+            $userId,
+            $state
+        );
+
+        return $results;
+    }
+
+    /**
      *
      * Returns:
      * ['results' => $lessons, 'total_results' => $totalLessonsAfterFiltering]
