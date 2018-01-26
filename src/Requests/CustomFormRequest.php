@@ -351,6 +351,10 @@ class CustomFormRequest extends FormRequest
                 }
             }
 
+            // todo:
+            // we need to add rules for the "can_have_multiple" and then a count for each so that all the validation
+            // ... happens in one push.
+
             try{
                 $this->validationFactory->make($contentPropertiesForValidation, $rulesForContentType)->validate();
             }catch(ValidationException $exception){
