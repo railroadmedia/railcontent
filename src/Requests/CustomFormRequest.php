@@ -8,6 +8,7 @@ use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Services\ContentFieldService;
+use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Illuminate\Validation\Factory as ValidationFactory;
 
@@ -48,6 +49,10 @@ class CustomFormRequest extends FormRequest
      * @var ValidationFactory
      */
     private $validationFactory;
+    /**
+     * @var ContentHierarchyService
+     */
+    private $contentHierarchyService;
 
     /**
      * ValidationService constructor.
@@ -58,13 +63,15 @@ class CustomFormRequest extends FormRequest
         ContentService $contentService,
         ContentDatumService $contentDatumService,
         ContentFieldService $contentFieldService,
-        ValidationFactory $validationFactory
+        ValidationFactory $validationFactory,
+        ContentHierarchyService $contentHierarchyService
     )
     {
         $this->contentService = $contentService;
         $this->contentDatumService = $contentDatumService;
         $this->contentFieldService = $contentFieldService;
         $this->validationFactory = $validationFactory;
+        $this->contentHierarchyService = $contentHierarchyService;
     }
 
     /**
@@ -335,22 +342,23 @@ class CustomFormRequest extends FormRequest
                     $rulesForContentTypeReorganized[$primaryKey] = $rulesOrArrayOfRules;
                 }
             }
-            $rulesForContentType = $rulesForContentTypeReorganized;
 
             // flatten rules so can be parsed by validator
             $rulesForContentTypeModified = [];
-            foreach($rulesForContentType as $ruleKey => $ruleValue){
+            foreach($rulesForContentTypeReorganized as $ruleKey => $ruleValue){
                 // we want to get rid of the "can_have_multiple" item and "de-nest" the rules in $rules['rules']
-                $rulesForContentTypeModified[$ruleKey] = $ruleValue['rules'];
+                if(isset($ruleValue['rules'])){
+                    $rulesForContentTypeModified[$ruleKey] = $ruleValue['rules'];
 
-                $rulesForContentTypeModified[$ruleKey . '_count'] = 'max:1';
-                if(in_array('can_have_multiple', array_keys($ruleValue))){
-                    if($ruleValue['can_have_multiple']){
-                        $rulesForContentTypeModified[$ruleKey . '_count'] = '';
+                    $rulesForContentTypeModified[$ruleKey . '_count'] = 'max:1';
+                    if(in_array('can_have_multiple', array_keys($ruleValue))){
+                        if($ruleValue['can_have_multiple']){
+                            $rulesForContentTypeModified[$ruleKey . '_count'] = '';
+                        }
                     }
                 }
             }
-            $rulesForContentType = $rulesForContentTypeModified;
+            $rulesForContentTypeReorganized = $rulesForContentTypeModified;
 
             // add rules for "can_have_multiple" then a count for each so all the validation happens in 1 call
             $contentPropertiesForValidationWithCounts = [];
@@ -361,12 +369,14 @@ class CustomFormRequest extends FormRequest
                 $contentPropertiesForValidation, $contentPropertiesForValidationWithCounts
             );
 
-            // todo: get number of children from content-hierarchy and get minimum number from config for content-type
-            // todo: get number of children from content-hierarchy and get minimum number from config for content-type
-            // todo: get number of children from content-hierarchy and get minimum number from config for content-type
+            // get number of children from content-hierarchy and get minimum number from config for content-type
+            $rulesForContentTypeReorganized['number_of_children'] = 'min:' .
+                $rulesForContentType['minimum_required_children'][0];
+            $contentPropertiesForValidation['number_of_children'] = $this->contentHierarchyService
+                ->countParentsChildren([$content['id']]);
 
             try{
-                $this->validationFactory->make($contentPropertiesForValidation, $rulesForContentType)->validate();
+                $this->validationFactory->make($contentPropertiesForValidation, $rulesForContentTypeReorganized)->validate();
             }catch(ValidationException $exception){
                 $messages = $exception->validator->messages()->messages();
                 return new JsonResponse(['messages' => $messages], 422);
