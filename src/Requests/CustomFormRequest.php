@@ -182,32 +182,16 @@ class CustomFormRequest extends FormRequest
     public function validateContent($request)
     {
         /*
-         * get "the states to guard"
-         *
-         * are we writing|updating status?
-         *
-         * if yes
-         *
-         *      to what value are we wanting to set it to?
-         *
-         *      if the value we want to set is in "the states to guard"
-         *
-         *          validate content (return 422 if fails)
-         *
-         *          exit
-         *
-         * if no
-         *
-         *      get the current status means
-         *
-         *      if the current status is in "the states to guard"
-         *
-         *          validate content (return 422 if fails)
-         *
-         *          exit
+         *      - get "the states to guard", are we writing|updating status?
+         *      - if yes, to what value are we wanting to set it to?
+         *          - if the value we want to set is in "the states to guard"
+         *              - validate content (return 422 if fails)
+         *              - exit
+         *      - if no, get the current status means
+         *          - if the current status is in "the states to guard"
+         *              - validate content (return 422 if fails)
+         *              - exit
          */
-
-        // 1 -----------------------------------------------------------------------------------------------------------
 
         $content = null;
 
@@ -220,14 +204,6 @@ class CustomFormRequest extends FormRequest
         $input = $request->request->all();
 
         // todo: what about number of children???
-        // todo: what about number of children???
-        // todo: what about number of children???
-
-
-
-        // 2 -----------------------------------------------------------------------------------------------------------
-
-        // todo: get "restricted"
 
         $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
 
@@ -248,9 +224,6 @@ class CustomFormRequest extends FormRequest
                 $restrictedStatuses[] = $status;
             }
         }
-
-        // 3 -----------------------------------------------------------------------------------------------------------
-
 
         if($request instanceof ContentCreateRequest) {
             if(isset($input['status'])){
