@@ -109,13 +109,13 @@ return [
         'youtube' => [
             'key' => 'AIzaSyA2Q0B77vr9FrThobCKt6cb1Mnj-QGZxUk',
             'drumeo' => [
-                'channel_id' => 'drumlessonscom'
+                'user' => env('YOUTUBE_USERNAME_DRUMEO','drumlessonscom')
             ],
             'pianote' => [
-                'channel_id' => env('YOUTUBE_CLIENT_ID_PIANOTE')
+                'user' => env('YOUTUBE_USERNAME_PIANOTE','PianoLessonscom')
             ],
             'guitareo' => [
-                'channel_id' => env('YOUTUBE_CLIENT_ID_GUITAREO')
+                'user' => env('YOUTUBE_USERNAME_GUITAREO','guitarlessonscom')
             ]
         ]
     ],

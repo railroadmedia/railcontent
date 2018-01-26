@@ -31,6 +31,8 @@ class CreateYoutubeVideoContentRecords extends Command
      */
     protected $contentService;
 
+    protected $scope = 'https://www.googleapis.com/auth/youtube';
+
     /**
      * @var ContentFieldService
      */
@@ -57,20 +59,17 @@ class CreateYoutubeVideoContentRecords extends Command
      */
     public function handle()
     {
-        // $client_id = ConfigService::$videoSync['vimeo']['drumeo']['client_id'];
-        // $client_secret = ConfigService::$videoSync['vimeo']['drumeo']['client_secret'];
-        // $access_token = ConfigService::$videoSync['vimeo']['drumeo']['access_token'];
-
         $client = new Google_Client();
         $client->setDeveloperKey(ConfigService::$videoSync['youtube']['key']);
-        $client->setScopes('https://www.googleapis.com/auth/youtube');
+        $client->setScopes($this->scope);
+
         $youtube = new \Google_Service_YouTube($client);
 
         $items = [];
 
-        //get the channels list for youtube user drumlessonscom
+        //get the channels list for youtube user
         $channelsResponse = $youtube->channels->listChannels('contentDetails', array(
-            'forUsername' => ConfigService::$videoSync['youtube']['drumeo']['channel_id'],
+            'forUsername' => ConfigService::$videoSync['youtube'][ConfigService::$brand]['user'],
             'maxResults' => 50
         ));
 
