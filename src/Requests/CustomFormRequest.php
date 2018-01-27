@@ -210,8 +210,6 @@ class CustomFormRequest extends FormRequest
 
         $input = $request->request->all();
 
-        // todo: what about number of children???
-
         $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
 
         if ($rulesExistForBrand){
@@ -323,6 +321,11 @@ class CustomFormRequest extends FormRequest
             foreach($rulesForBrand as $rulesForTypes){
                 if(array_key_exists($contentType, $rulesForTypes)){
                     $rulesForContentType = $rulesForTypes[$contentType];
+                }else{ // maybe config uses underscores instead of dashes to delimit words in content-type names?
+                    $contentTypeAdjusted = implode('_', explode('-', $contentType));
+                    if(array_key_exists($contentTypeAdjusted, $rulesForTypes)){
+                        $rulesForContentType = $rulesForTypes[$contentTypeAdjusted];
+                    }
                 }
             }
 
@@ -370,10 +373,12 @@ class CustomFormRequest extends FormRequest
             );
 
             // get number of children from content-hierarchy and get minimum number from config for content-type
-            $rulesForContentTypeReorganized['number_of_children'] = 'min:' .
-                $rulesForContentType['minimum_required_children'][0];
-            $contentPropertiesForValidation['number_of_children'] = $this->contentHierarchyService
-                ->countParentsChildren([$content['id']]);
+            if(isset($rulesForContentType['minimum_required_children'])){
+                $rulesForContentTypeReorganized['number_of_children'] = 'min:' .
+                    $rulesForContentType['minimum_required_children'][0];
+                $contentPropertiesForValidation['number_of_children'] = $this->contentHierarchyService
+                    ->countParentsChildren([$content['id']]);
+            }
 
             try{
                 $this->validationFactory->make($contentPropertiesForValidation, $rulesForContentTypeReorganized)->validate();
