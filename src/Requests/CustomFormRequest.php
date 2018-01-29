@@ -201,6 +201,7 @@ class CustomFormRequest extends FormRequest
          */
 
         $content = null;
+        $requestedDatumOrFieldToSet = null;
 
         $rulesForBrand = [];
         $restrictedStatuses = [];
@@ -288,6 +289,8 @@ class CustomFormRequest extends FormRequest
             }
             $content = $this->contentService->getById($contentId);
             $contentValidationRequired = in_array($content['status'], $restrictedStatuses);
+
+            $requestedDatumOrFieldToSet = [$input['key'] => $input['value']];
         }
 
         if($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest){
@@ -298,6 +301,8 @@ class CustomFormRequest extends FormRequest
             $contentId = $contentDatumOrField['content_id'];
             $content = $this->contentService->getById($contentId);
             $contentValidationRequired = in_array($content['status'], $restrictedStatuses);
+
+            $requestedDatumOrFieldToSet = [$contentDatumOrField['key'] => $input['value']];
         }
 
         if($contentValidationRequired){
@@ -380,18 +385,32 @@ class CustomFormRequest extends FormRequest
                     ->countParentsChildren([$content['id']]);
             }
 
+            if(!empty($rulesForContentTypeReorganized)){
+                /*
+                 * We want to validate the content with the **yet-unsaved** requested (field|datum) change (*not* the
+                 * current state, but rather the state that would exist *after* we apply the requested change, if with
+                 * that change the content would be valid and we would therefore make that change).
+                 *
+                 * Jonathan, January 2018
+                 */
+                $nameOfDatumOrFieldToSet = array_keys($requestedDatumOrFieldToSet)[0];
+                if(isset($contentPropertiesForValidation[$nameOfDatumOrFieldToSet])){
+                    $contentPropertiesForValidation[$nameOfDatumOrFieldToSet] =
+                        $requestedDatumOrFieldToSet[$nameOfDatumOrFieldToSet];
+                }
+            }
+
             try{
                 $this->validationFactory->make($contentPropertiesForValidation, $rulesForContentTypeReorganized)->validate();
             }catch(ValidationException $exception){
-                $messages = $exception->validator->messages()->messages();
-                return new JsonResponse(['messages' => $messages], 422);
-
                 /*
                  * Validation failure will interrupt writing field|datum - thus preventing the publication or
                  * scheduling of a ill-formed lesson.
                  *
                  * Jonathan, January 2018
                  */
+                $messages = $exception->validator->messages()->messages();
+                return new JsonResponse(['messages' => $messages], 422);
             }
         }
 
