@@ -385,7 +385,9 @@ class CustomFormRequest extends FormRequest
                     ->countParentsChildren([$content['id']]);
             }
 
-            if(!empty($rulesForContentTypeReorganized)){
+            // the `!is_null($requestedDatumOrFieldToSet)` is basically for Datum|Field Requests (abstract it out
+            // ... with those if you refactor this)
+            if(!empty($rulesForContentTypeReorganized) && !is_null($requestedDatumOrFieldToSet)){
                 /*
                  * We want to validate the content with the **yet-unsaved** requested (field|datum) change (*not* the
                  * current state, but rather the state that would exist *after* we apply the requested change, if with
