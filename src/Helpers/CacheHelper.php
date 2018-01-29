@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Helpers;
 
 
+use Illuminate\Cache\RedisStore;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -14,7 +15,11 @@ class CacheHelper
 
     public static function setPrefix()
     {
-        return Cache::store(ConfigService::$cacheDriver)->setPrefix(ConfigService::$redisPrefix);
+        if (method_exists(Cache::getStore(), 'setPrefix')) {
+            return Cache::store(ConfigService::$cacheDriver)->setPrefix(ConfigService::$redisPrefix);
+        }
+        return Cache::store(ConfigService::$cacheDriver)->getPrefix();
+
     }
 
     /**
@@ -25,9 +30,9 @@ class CacheHelper
     {
         self::setPrefix();
         $settings = ' ' . ContentRepository::$pullFutureContent
-                  . ' ' . ConfigService::$brand
-                  . ' ' . implode(' ', array_values(array_wrap(ContentRepository::$availableContentStatues)))
-                  . ' ' . implode(' ', array_values(array_wrap(PermissionRepository::$availableContentPermissionIds)));
+            . ' ' . ConfigService::$brand
+            . ' ' . implode(' ', array_values(array_wrap(ContentRepository::$availableContentStatues)))
+            . ' ' . implode(' ', array_values(array_wrap(PermissionRepository::$availableContentPermissionIds)));
 
         return $settings;
     }
@@ -58,9 +63,10 @@ class CacheHelper
     public static function addLists($key, array $elements)
     {
         self::setPrefix();
-
-        foreach ($elements as $element) {
-            Cache::store(ConfigService::$cacheDriver)->connection()->sadd(Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element, $key);
+        if (Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore) {
+            foreach ($elements as $element) {
+                Cache::store(ConfigService::$cacheDriver)->connection()->sadd(Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element, $key);
+            }
         }
     }
 
@@ -77,7 +83,13 @@ class CacheHelper
     {
         self::setPrefix();
 
-        return Cache::store(ConfigService::$cacheDriver)->connection()->smembers(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key);
+        if (Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore) {
+            $keys = Cache::store(ConfigService::$cacheDriver)->connection()->smembers(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key);
+            return array_map(function ($val) {
+                return Cache::store(ConfigService::$cacheDriver)->getPrefix() . $val;
+            }, $keys);
+        }
+        return null;
     }
 
     /**
@@ -90,9 +102,11 @@ class CacheHelper
         self::setPrefix();
         $keys = self::getListElement($key);
 
-        foreach ($keys as $key1) {
-            Redis::del(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key1);
+        if (!$keys) {
+            return Cache::flush();
         }
+
+        self::deleteCacheKeys($keys);
 
         return true;
     }
@@ -106,9 +120,7 @@ class CacheHelper
     {
         $keys = Redis::keys("*$key*");
 
-        foreach ($keys as $key) {
-            Redis::del($key);
-        }
+        self::deleteCacheKeys($keys);
 
         return true;
     }
@@ -119,6 +131,14 @@ class CacheHelper
      */
     public static function deleteCacheKeys(array $keys)
     {
-        Redis::del(implode(' ', $keys));
+        if (Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore) {
+            return Redis::del(implode(' ', $keys));
+        }
+
+        foreach ($keys as $key) {
+            Cache::flush($key);
+        }
+
+        return true;
     }
 }
