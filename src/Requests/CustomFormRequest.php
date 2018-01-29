@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use Illuminate\Http\Exception\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
@@ -204,8 +205,6 @@ class CustomFormRequest extends FormRequest
         $requestedDatumOrFieldToSet = null;
 
         $rulesForBrand = [];
-        $restrictedStatuses = [];
-        $rulesForContentType = [];
 
         $contentValidationRequired = false;
 
@@ -224,16 +223,11 @@ class CustomFormRequest extends FormRequest
             $rulesForBrand = [$rulesForBrand];
         }
 
-        foreach($rulesForBrand as $restrictedStatusesComposite => $rulesForContentTypes){
-            $restrictedStatusesComposite = explode('|', $restrictedStatusesComposite);
-            foreach($restrictedStatusesComposite as $status){
-                $restrictedStatuses[] = $status;
-            }
-        }
+        $restrictions = $rulesForBrand['restrictions'];
 
         if($request instanceof ContentCreateRequest) {
             if(isset($input['status'])){
-                if(in_array($input['status'], $restrictedStatuses)){
+                if(in_array($input['status'], $restrictions)){
                     throw new \Exception(
                         'Status cannot be set to: "' . $input['status'] . '" on content-create.'
                     );
@@ -244,7 +238,7 @@ class CustomFormRequest extends FormRequest
 
         if($request instanceof ContentUpdateRequest) {
             if(isset($input['status'])){
-                if(in_array($input['status'], $restrictedStatuses)){
+                if(in_array($input['status'], $restrictions)){
                     $contentValidationRequired = true;
                 }
             }
@@ -288,7 +282,7 @@ class CustomFormRequest extends FormRequest
                     'content_id passed. This is at odds with what we\'re expecting and might be cause for concern');
             }
             $content = $this->contentService->getById($contentId);
-            $contentValidationRequired = in_array($content['status'], $restrictedStatuses);
+            $contentValidationRequired = in_array($content['status'], $restrictions);
 
             $requestedDatumOrFieldToSet = [$input['key'] => $input['value']];
         }
@@ -300,126 +294,196 @@ class CustomFormRequest extends FormRequest
             );
             $contentId = $contentDatumOrField['content_id'];
             $content = $this->contentService->getById($contentId);
-            $contentValidationRequired = in_array($content['status'], $restrictedStatuses);
+            $contentValidationRequired = in_array($content['status'], $restrictions);
 
             $requestedDatumOrFieldToSet = [$contentDatumOrField['key'] => $input['value']];
         }
 
-        if($contentValidationRequired){
-
-            throw_if(empty($content), new \Exception('Content not set'));
+        if($contentValidationRequired) {
 
             $contentType = $content['type'];
             $brand = ConfigService::$brand;
             $allRules = ConfigService::$validationRules;
 
-            throw_unless(array_key_exists($brand, $allRules), new \Exception(
-                'No validation rules for brand "' . $brand . '"'
-            ));
+            if(!array_key_exists($brand, $allRules)){
+                return true;
+            }
 
             $rulesForBrand = $allRules[$brand];
 
-            if(empty($rulesForBrand)){
-                return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503);
-            }
-
             foreach($rulesForBrand as $rulesForTypes){
                 if(array_key_exists($contentType, $rulesForTypes)){
-                    $rulesForContentType = $rulesForTypes[$contentType];
-                }else{ // maybe config uses underscores instead of dashes to delimit words in content-type names?
-                    $contentTypeAdjusted = implode('_', explode('-', $contentType));
-                    if(array_key_exists($contentTypeAdjusted, $rulesForTypes)){
-                        $rulesForContentType = $rulesForTypes[$contentTypeAdjusted];
-                    }
+                    $rulesForContentType = $rulesForBrand[$contentType];
                 }
             }
 
-            $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation(
-                $content, $rulesForContentType
-            );
 
-            $rulesForContentTypeReorganized = [];
+            // =========================================================================================================
+            // =========================================================================================================
+            // =========================================================================================================
 
-            // flatten content-details to easily-validated set
-            foreach($rulesForContentType as $primaryKey => $rulesOrArrayOfRules){
-                if(($primaryKey === 'datum') || ($primaryKey === 'fields')){
-                    foreach($rulesOrArrayOfRules as $keyForRule => $rule){
-                        $rulesForContentTypeReorganized[$keyForRule] = $rule;
-                    }
-                }else{
-                    $rulesForContentTypeReorganized[$primaryKey] = $rulesOrArrayOfRules;
+
+//            $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation(
+//                $content, $rulesForContentType
+//            );
+//
+//            $rulesForContentTypeReorganized = [];
+//
+//            // flatten content-details to easily-validated set
+//            foreach($rulesForContentType as $primaryKey => $rulesOrArrayOfRules){
+//                if(($primaryKey === 'datum') || ($primaryKey === 'fields')){
+//                    foreach($rulesOrArrayOfRules as $keyForRule => $rule){
+//                        $rulesForContentTypeReorganized[$keyForRule] = $rule;
+//                    }
+//                }else{
+//                    $rulesForContentTypeReorganized[$primaryKey] = $rulesOrArrayOfRules;
+//                }
+//            }
+//
+//            // flatten rules so can be parsed by validator
+//            $rulesForContentTypeModified = [];
+//            foreach($rulesForContentTypeReorganized as $ruleKey => $ruleValue){
+//                // we want to get rid of the "can_have_multiple" item and "de-nest" the rules in $rules['rules']
+//                if(isset($ruleValue['rules'])){
+//                    $rulesForContentTypeModified[$ruleKey] = $ruleValue['rules'];
+//
+//                    $rulesForContentTypeModified[$ruleKey . '_count'] = 'max:1';
+//                    if(in_array('can_have_multiple', array_keys($ruleValue))){
+//                        if($ruleValue['can_have_multiple']){
+//                            $rulesForContentTypeModified[$ruleKey . '_count'] = '';
+//                        }
+//                    }
+//                }
+//            }
+//            $rulesForContentTypeReorganized = $rulesForContentTypeModified;
+//
+//            // add rules for "can_have_multiple" then a count for each so all the validation happens in 1 call
+//            $contentPropertiesForValidationWithCounts = [];
+//            foreach($contentPropertiesForValidation as $propertyName =>$property){
+//                $contentPropertiesForValidationWithCounts[$propertyName . '_count'] = count($property);
+//            }
+//            $contentPropertiesForValidation = array_merge(
+//                $contentPropertiesForValidation, $contentPropertiesForValidationWithCounts
+//            );
+//
+//            // get number of children from content-hierarchy and get minimum number from config for content-type
+//            if(isset($rulesForContentType['minimum_required_children'])){
+//
+//                $rulesForContentTypeReorganized['number_of_children'] =
+//                    $rulesForContentType['minimum_required_children'];
+//
+//                $contentPropertiesForValidation['number_of_children'] =
+//                    (int)$this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']];
+//
+//                $aa_typeOf_rulesForContentTypeReorganized = gettype($rulesForContentTypeReorganized['number_of_children']);
+//                $aa_typeOf_contentPropertiesForValidation = gettype($contentPropertiesForValidation['number_of_children']);
+//
+//
+//            }
+//
+//            // the `!is_null($requestedDatumOrFieldToSet)` is basically for Datum|Field Requests (abstract it out
+//            // ... with those if you refactor this)
+//            if(!empty($rulesForContentTypeReorganized) && !is_null($requestedDatumOrFieldToSet)){
+//                /*
+//                 * We want to validate the content with the **yet-unsaved** requested (field|datum) change (*not* the
+//                 * current state, but rather the state that would exist *after* we apply the requested change, if with
+//                 * that change the content would be valid and we would therefore make that change).
+//                 *
+//                 * Jonathan, January 2018
+//                 */
+//                $nameOfDatumOrFieldToSet = array_keys($requestedDatumOrFieldToSet)[0];
+//                if(isset($contentPropertiesForValidation[$nameOfDatumOrFieldToSet])){
+//                    $contentPropertiesForValidation[$nameOfDatumOrFieldToSet] =
+//                        $requestedDatumOrFieldToSet[$nameOfDatumOrFieldToSet];
+//                }
+//            }
+//
+//            try{
+//                $this->validationFactory->make($contentPropertiesForValidation, $rulesForContentTypeReorganized)->validate();
+//            }catch(ValidationException $exception){
+//                /*
+//                 * Validation failure will interrupt writing field|datum - thus preventing the publication or
+//                 * scheduling of a ill-formed lesson.
+//                 *
+//                 * Jonathan, January 2018
+//                 */
+//                $messages = $exception->validator->messages()->messages();
+//                return new JsonResponse(['messages' => $messages], 422);
+//            }
+
+            // =========================================================================================================
+            // =========================================================================================================
+            // =========================================================================================================
+
+            $content['number_of_children'] = $this->contentHierarchyService->
+            countParentsChildren([$content['id']])[$content['id']];
+
+            $minimumRequiredChildren = null;
+
+            $validate = function ($value, $rule){
+                $rule = is_array($rule) ? $rule : [$rule];
+                $value = is_array($value) ? $value : [$value];
+
+                $bbb_validateRanWith[] = [
+                    'rule' => $rule,
+                    'value' => $value
+                ];
+
+                try {
+                    $this->validationFactory->make($value, $rule)->validate();
+                } catch (ValidationException $exception) {
+                    $messages = $exception->validator->messages()->messages();
+                    throw new HttpResponseException(
+                        new JsonResponse(['messages' => $messages], 422)
+                    );
                 }
-            }
+            };
 
-            // flatten rules so can be parsed by validator
-            $rulesForContentTypeModified = [];
-            foreach($rulesForContentTypeReorganized as $ruleKey => $ruleValue){
-                // we want to get rid of the "can_have_multiple" item and "de-nest" the rules in $rules['rules']
-                if(isset($ruleValue['rules'])){
-                    $rulesForContentTypeModified[$ruleKey] = $ruleValue['rules'];
+            foreach($content as $aaa_c_1_contentPropertyKey => $aaa_c_1_contentPropertyValue){
 
-                    $rulesForContentTypeModified[$ruleKey . '_count'] = 'max:1';
-                    if(in_array('can_have_multiple', array_keys($ruleValue))){
-                        if($ruleValue['can_have_multiple']){
-                            $rulesForContentTypeModified[$ruleKey . '_count'] = '';
+                foreach(
+                    $rulesForBrand[$contentType] as
+                    $aaa_r_1_contentPropertyName => $aaa_r_1_contentPropertyValidationCriteria
+                ){
+                    if($aaa_r_1_contentPropertyName === 'number_of_children'){
+                        // todo
+                    }else{
+                         if(!is_array($aaa_r_1_contentPropertyValidationCriteria)){
+                             break;
+                         }
+                        foreach(
+                            $aaa_r_1_contentPropertyValidationCriteria as
+                            $aaa_r_2_contentPropertyValidationCriteria_key => $aaa_r_2_contentPropertyValidationCriteria_value
+                        ){
+                            foreach($aaa_r_2_contentPropertyValidationCriteria_value as $aaa_r_3_criteria_key => $aaa_r_3_criteria_value){
+
+                                if($aaa_r_3_criteria_key === $aaa_c_1_contentPropertyKey){
+
+                                    if($aaa_r_3_criteria_key === 'rules'){
+                                        $rule = $aaa_r_3_criteria_value;
+                                        $value = $aaa_c_1_contentPropertyValue;
+                                        $validate($value, $rule);
+                                    }
+
+                                    // todo
+                                    // todo
+                                    // todo
+                                    // if($aaa_r_3_criteria_key === 'can_have_multiple'){
+                                    //     $can_have_multiple[$aaa_r_3_criteria_value][] = $aaa_r_2_contentPropertyValidationCriteria_value;
+                                    // }
+
+                                }
+                            }
                         }
                     }
                 }
-            }
-            $rulesForContentTypeReorganized = $rulesForContentTypeModified;
 
-            // add rules for "can_have_multiple" then a count for each so all the validation happens in 1 call
-            $contentPropertiesForValidationWithCounts = [];
-            foreach($contentPropertiesForValidation as $propertyName =>$property){
-                $contentPropertiesForValidationWithCounts[$propertyName . '_count'] = count($property);
-            }
-            $contentPropertiesForValidation = array_merge(
-                $contentPropertiesForValidation, $contentPropertiesForValidationWithCounts
-            );
+//                if($a_1_contentPropertyKey === 'field' || $a_1_contentPropertyKey === 'datum'){
+//                    if($a_1_contentPropertyKey === $aaa_r_3_criteria_key){
+//                        $value = $a_1_propertyValue;
+//                    }
+//                }
 
-            // get number of children from content-hierarchy and get minimum number from config for content-type
-            if(isset($rulesForContentType['minimum_required_children'])){
-
-                $rulesForContentTypeReorganized['number_of_children'] =
-                    $rulesForContentType['minimum_required_children'];
-
-                $contentPropertiesForValidation['number_of_children'] =
-                    (int)$this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']];
-
-                $aa_typeOf_rulesForContentTypeReorganized = gettype($rulesForContentTypeReorganized['number_of_children']);
-                $aa_typeOf_contentPropertiesForValidation = gettype($contentPropertiesForValidation['number_of_children']);
-
-
-            }
-
-            // the `!is_null($requestedDatumOrFieldToSet)` is basically for Datum|Field Requests (abstract it out
-            // ... with those if you refactor this)
-            if(!empty($rulesForContentTypeReorganized) && !is_null($requestedDatumOrFieldToSet)){
-                /*
-                 * We want to validate the content with the **yet-unsaved** requested (field|datum) change (*not* the
-                 * current state, but rather the state that would exist *after* we apply the requested change, if with
-                 * that change the content would be valid and we would therefore make that change).
-                 *
-                 * Jonathan, January 2018
-                 */
-                $nameOfDatumOrFieldToSet = array_keys($requestedDatumOrFieldToSet)[0];
-                if(isset($contentPropertiesForValidation[$nameOfDatumOrFieldToSet])){
-                    $contentPropertiesForValidation[$nameOfDatumOrFieldToSet] =
-                        $requestedDatumOrFieldToSet[$nameOfDatumOrFieldToSet];
-                }
-            }
-
-            try{
-                $this->validationFactory->make($contentPropertiesForValidation, $rulesForContentTypeReorganized)->validate();
-            }catch(ValidationException $exception){
-                /*
-                 * Validation failure will interrupt writing field|datum - thus preventing the publication or
-                 * scheduling of a ill-formed lesson.
-                 *
-                 * Jonathan, January 2018
-                 */
-                $messages = $exception->validator->messages()->messages();
-                return new JsonResponse(['messages' => $messages], 422);
             }
         }
 
