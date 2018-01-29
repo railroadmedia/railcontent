@@ -689,7 +689,11 @@ class ContentService
         foreach($contentProperties as $key => $propertyValues){
             foreach($propertyValues as $propertyValue){
                 $value = $propertyValue['value'];
-                $forValidation[$propertyValue['key']][] = $value;
+                if(count($propertyValues) === 1){
+                    $forValidation[$propertyValue['key']] = $value;
+                }else{
+                    $forValidation[$propertyValue['key']][] = $value;
+                }
             }
         }
 

@@ -8,6 +8,7 @@ use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Services\ContentFieldService;
+use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Illuminate\Validation\Factory as ValidationFactory;
 
@@ -48,6 +49,10 @@ class CustomFormRequest extends FormRequest
      * @var ValidationFactory
      */
     private $validationFactory;
+    /**
+     * @var ContentHierarchyService
+     */
+    private $contentHierarchyService;
 
     /**
      * ValidationService constructor.
@@ -58,14 +63,15 @@ class CustomFormRequest extends FormRequest
         ContentService $contentService,
         ContentDatumService $contentDatumService,
         ContentFieldService $contentFieldService,
-        ValidationFactory $validationFactory
-    ){
+        ValidationFactory $validationFactory,
+        ContentHierarchyService $contentHierarchyService
+    )
+    {
         $this->contentService = $contentService;
         $this->contentDatumService = $contentDatumService;
         $this->contentFieldService = $contentFieldService;
         $this->validationFactory = $validationFactory;
-
-        parent::__construct();
+        $this->contentHierarchyService = $contentHierarchyService;
     }
 
     /**
@@ -182,109 +188,241 @@ class CustomFormRequest extends FormRequest
 
     public function validateContent($request)
     {
+        /*
+         *      - get "the states to guard", are we writing|updating status?
+         *      - if yes, to what value are we wanting to set it to?
+         *          - if the value we want to set is in "the states to guard"
+         *              - validate content (return 422 if fails)
+         *              - exit
+         *      - if no, get the current status means
+         *          - if the current status is in "the states to guard"
+         *              - validate content (return 422 if fails)
+         *              - exit
+         */
+
         $content = null;
-        $keysOfValuesRequestedToSet = [];
-        $restricted = null;
+        $requestedDatumOrFieldToSet = null;
+
+        $rulesForBrand = [];
+        $restrictedStatuses = [];
+        $rulesForContentType = [];
+
+        $contentValidationRequired = false;
+
         $input = $request->request->all();
 
-        $this->setContentToValidate($content, $keysOfValuesRequestedToSet, $restricted, $input);
+        $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
 
-        $contentId = null;
-        $contentType = null;
+        if ($rulesExistForBrand){
+            $rulesForBrand = ConfigService::$validationRules[ConfigService::$brand];
+        }
 
-        $contentValidationRequired = $this->contentValidationRequired($request);
+        if(!is_array($rulesForBrand)){
+            throw_unless(is_string($rulesForBrand), new \Exception(
+                '"$rulesForBrand" is neither string nor array. wtf.'
+            ));
+            $rulesForBrand = [$rulesForBrand];
+        }
 
-        $this->setRulesForBrandAndContentType($contentType, $restricted);
+        foreach($rulesForBrand as $restrictedStatusesComposite => $rulesForContentTypes){
+            $restrictedStatusesComposite = explode('|', $restrictedStatusesComposite);
+            foreach($restrictedStatusesComposite as $status){
+                $restrictedStatuses[] = $status;
+            }
+        }
 
-        $this->prepareForContentValidation();
+        if($request instanceof ContentCreateRequest) {
+            if(isset($input['status'])){
+                if(in_array($input['status'], $restrictedStatuses)){
+                    throw new \Exception(
+                        'Status cannot be set to: "' . $input['status'] . '" on content-create.'
+                    );
+                }
+            }
+            $contentValidationRequired = false;
+        }
 
-        if($contentValidationRequired){ // ... then we need to validate lest we set restricted on an invalid content
+        if($request instanceof ContentUpdateRequest) {
+            if(isset($input['status'])){
+                if(in_array($input['status'], $restrictedStatuses)){
+                    $contentValidationRequired = true;
+                }
+            }
 
-            $rules = $this->contentService->getValidationRules($content);
+            // get content
 
-            if($rules === false){
+            $urlPath = parse_url($_SERVER['HTTP_REFERER'])['path'];
+            $urlPath = explode('/', $urlPath);
+
+            // if this is equal to content-type continue, else error
+            $urlPathThirdLastElement = array_values(array_slice($urlPath, -3))[0];
+
+            // if this is edit continue, else error
+            $urlPathSecondLastElement = array_values(array_slice($urlPath, -2))[0];
+
+            if($urlPathSecondLastElement !== 'edit'){
+                error_log(
+                    'Attempting to validate content-update, but url path\'s second-last element does not ' .
+                    'match expectations. (expected "edit", got "' . $urlPathSecondLastElement . '")'
+                );
+            }
+
+            // content_id
+            $urlPathLastElement = array_values(array_slice($urlPath, -1))[0];
+
+            $contentId = (integer) $urlPathLastElement;
+            $content = $this->contentService->getById($contentId);
+
+            if($urlPathThirdLastElement !== $content['type']){error_log(
+                'Attempting to validate content-update, but url path\'s third-last element does not ' .
+                'match expectations. (expected "' . $content['type'] . '", got "' . $urlPathSecondLastElement . '")'
+            );}
+        }
+
+        // get content status, if content status is restricted, then validation is required
+
+        if($request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest){
+            $contentId = $request->request->get('content_id');
+            if(empty($contentId)){
+                error_log('Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
+                    'content_id passed. This is at odds with what we\'re expecting and might be cause for concern');
+            }
+            $content = $this->contentService->getById($contentId);
+            $contentValidationRequired = in_array($content['status'], $restrictedStatuses);
+
+            $requestedDatumOrFieldToSet = [$input['key'] => $input['value']];
+        }
+
+        if($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest){
+            $contentDatumOrField = $this->contentFieldService->get($request->request->get('id'));
+            throw_if(empty($contentDatumOrField), // code-smell!
+                new \Exception('$contentDatumOrField not filled in ' . '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent')
+            );
+            $contentId = $contentDatumOrField['content_id'];
+            $content = $this->contentService->getById($contentId);
+            $contentValidationRequired = in_array($content['status'], $restrictedStatuses);
+
+            $requestedDatumOrFieldToSet = [$contentDatumOrField['key'] => $input['value']];
+        }
+
+        if($contentValidationRequired){
+
+            throw_if(empty($content), new \Exception('Content not set'));
+
+            $contentType = $content['type'];
+            $brand = ConfigService::$brand;
+            $allRules = ConfigService::$validationRules;
+
+            throw_unless(array_key_exists($brand, $allRules), new \Exception(
+                'No validation rules for brand "' . $brand . '"'
+            ));
+
+            $rulesForBrand = $allRules[$brand];
+
+            if(empty($rulesForBrand)){
                 return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503);
             }
 
-            $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation($content, $rules);
+            foreach($rulesForBrand as $rulesForTypes){
+                if(array_key_exists($contentType, $rulesForTypes)){
+                    $rulesForContentType = $rulesForTypes[$contentType];
+                }else{ // maybe config uses underscores instead of dashes to delimit words in content-type names?
+                    $contentTypeAdjusted = implode('_', explode('-', $contentType));
+                    if(array_key_exists($contentTypeAdjusted, $rulesForTypes)){
+                        $rulesForContentType = $rulesForTypes[$contentTypeAdjusted];
+                    }
+                }
+            }
+
+            $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation(
+                $content, $rulesForContentType
+            );
+
+            $rulesForContentTypeReorganized = [];
+
+            // flatten content-details to easily-validated set
+            foreach($rulesForContentType as $primaryKey => $rulesOrArrayOfRules){
+                if(($primaryKey === 'datum') || ($primaryKey === 'fields')){
+                    foreach($rulesOrArrayOfRules as $keyForRule => $rule){
+                        $rulesForContentTypeReorganized[$keyForRule] = $rule;
+                    }
+                }else{
+                    $rulesForContentTypeReorganized[$primaryKey] = $rulesOrArrayOfRules;
+                }
+            }
+
+            // flatten rules so can be parsed by validator
+            $rulesForContentTypeModified = [];
+            foreach($rulesForContentTypeReorganized as $ruleKey => $ruleValue){
+                // we want to get rid of the "can_have_multiple" item and "de-nest" the rules in $rules['rules']
+                if(isset($ruleValue['rules'])){
+                    $rulesForContentTypeModified[$ruleKey] = $ruleValue['rules'];
+
+                    $rulesForContentTypeModified[$ruleKey . '_count'] = 'max:1';
+                    if(in_array('can_have_multiple', array_keys($ruleValue))){
+                        if($ruleValue['can_have_multiple']){
+                            $rulesForContentTypeModified[$ruleKey . '_count'] = '';
+                        }
+                    }
+                }
+            }
+            $rulesForContentTypeReorganized = $rulesForContentTypeModified;
+
+            // add rules for "can_have_multiple" then a count for each so all the validation happens in 1 call
+            $contentPropertiesForValidationWithCounts = [];
+            foreach($contentPropertiesForValidation as $propertyName =>$property){
+                $contentPropertiesForValidationWithCounts[$propertyName . '_count'] = count($property);
+            }
+            $contentPropertiesForValidation = array_merge(
+                $contentPropertiesForValidation, $contentPropertiesForValidationWithCounts
+            );
+
+            // get number of children from content-hierarchy and get minimum number from config for content-type
+            if(isset($rulesForContentType['minimum_required_children'])){
+
+                $rulesForContentTypeReorganized['number_of_children'] =
+                    $rulesForContentType['minimum_required_children'];
+
+                $contentPropertiesForValidation['number_of_children'] =
+                    (int)$this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']];
+
+                $aa_typeOf_rulesForContentTypeReorganized = gettype($rulesForContentTypeReorganized['number_of_children']);
+                $aa_typeOf_contentPropertiesForValidation = gettype($contentPropertiesForValidation['number_of_children']);
+
+
+            }
+
+            // the `!is_null($requestedDatumOrFieldToSet)` is basically for Datum|Field Requests (abstract it out
+            // ... with those if you refactor this)
+            if(!empty($rulesForContentTypeReorganized) && !is_null($requestedDatumOrFieldToSet)){
+                /*
+                 * We want to validate the content with the **yet-unsaved** requested (field|datum) change (*not* the
+                 * current state, but rather the state that would exist *after* we apply the requested change, if with
+                 * that change the content would be valid and we would therefore make that change).
+                 *
+                 * Jonathan, January 2018
+                 */
+                $nameOfDatumOrFieldToSet = array_keys($requestedDatumOrFieldToSet)[0];
+                if(isset($contentPropertiesForValidation[$nameOfDatumOrFieldToSet])){
+                    $contentPropertiesForValidation[$nameOfDatumOrFieldToSet] =
+                        $requestedDatumOrFieldToSet[$nameOfDatumOrFieldToSet];
+                }
+            }
 
             try{
-                $this->validationFactory->make($contentPropertiesForValidation, $rules)->validate();
+                $this->validationFactory->make($contentPropertiesForValidation, $rulesForContentTypeReorganized)->validate();
             }catch(ValidationException $exception){
-                $messages = $exception->validator->messages()->messages();
-                return new JsonResponse(['messages' => $messages], 422);
-
                 /*
                  * Validation failure will interrupt writing field|datum - thus preventing the publication or
                  * scheduling of a ill-formed lesson.
                  *
                  * Jonathan, January 2018
                  */
+                $messages = $exception->validator->messages()->messages();
+                return new JsonResponse(['messages' => $messages], 422);
             }
         }
 
         return true;
     }
-
-    protected function setContentToValidate(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
-        return true;
-    }
-
-    protected function prepareForContentValidation(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
-        return true;
-    }
-
-    protected function contentValidationRequired($request){
-        /*
-         * We have to validate the content if:
-         * 1. the user is setting the status to a restricted value
-         * or
-         * 2. the user is creating|updating a content-field or content-datum for a content with a status value that
-         * is currently a restricted value.
-         */
-
-        if($request instanceof ContentCreateRequest || $request instanceof ContentUpdateRequest){
-
-            // are they attempting to set the status?
-
-            // if so are they attempting to set it to a restricted value?
-
-
-        }elseif(
-            $request instanceof ContentDatumCreateRequest ||
-            $request instanceof ContentFieldCreateRequest ||
-            $request instanceof ContentDatumUpdateRequest ||
-            $request instanceof ContentFieldUpdateRequest
-        ){
-
-            // what is the content's current status?
-
-            // is the content's current status a restricted value?
-
-        }
-    }
-
-    protected function setRulesForBrandAndContentType($contentType, &$restricted){
-        $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
-
-        $restrictedExistsForBrand = array_key_exists(
-            'restricted_for_invalid_content',
-            ConfigService::$validationRules[ConfigService::$brand]
-        );
-
-        if ($rulesExistForBrand && $restrictedExistsForBrand){
-            $restricted = ConfigService::$validationRules[ConfigService::$brand]['restricted_for_invalid_content'];
-        }
-
-        if(in_array($contentType, array_keys($restricted['custom']))){
-            $restricted = $restricted['custom'][$contentType];
-        }else{
-            $restricted = $restricted['default'];
-        }
-
-        throw_if(empty($restricted), // code-smell! Why are we doing this? Is it not obvious that it should just be set?
-            new \Exception('$restricted not filled in (Railroad) CustomFormRequest::validateContent')
-        );
-    }
-
 }
