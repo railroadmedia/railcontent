@@ -379,10 +379,17 @@ class CustomFormRequest extends FormRequest
 
             // get number of children from content-hierarchy and get minimum number from config for content-type
             if(isset($rulesForContentType['minimum_required_children'])){
-                $rulesForContentTypeReorganized['number_of_children'] = 'min:' .
-                    $rulesForContentType['minimum_required_children'][0];
-                $contentPropertiesForValidation['number_of_children'] = $this->contentHierarchyService
-                    ->countParentsChildren([$content['id']])[$content['id']];
+
+                $rulesForContentTypeReorganized['number_of_children'] =
+                    $rulesForContentType['minimum_required_children'];
+
+                $contentPropertiesForValidation['number_of_children'] =
+                    (int)$this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']];
+
+                $aa_typeOf_rulesForContentTypeReorganized = gettype($rulesForContentTypeReorganized['number_of_children']);
+                $aa_typeOf_contentPropertiesForValidation = gettype($contentPropertiesForValidation['number_of_children']);
+
+
             }
 
             // the `!is_null($requestedDatumOrFieldToSet)` is basically for Datum|Field Requests (abstract it out
