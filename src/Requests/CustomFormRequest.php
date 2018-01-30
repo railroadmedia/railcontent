@@ -2,7 +2,7 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Illuminate\Http\Exception\HttpResponseException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Factory as ValidationFactory;
 use Illuminate\Validation\ValidationException;
@@ -317,6 +317,9 @@ class CustomFormRequest extends FormRequest
             $contentValidationRequired = in_array($content['status'], $restrictions);
 
             $requestedDatumOrFieldToSet = [$contentDatumOrField['key'] => $input['value']];
+
+            if ($request instanceof ContentDatumUpdateRequest) {
+            }
         }
 
         // =============================================================================================================
@@ -330,7 +333,9 @@ class CustomFormRequest extends FormRequest
                     $this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']]
                     ??
                     0,
-                    $rulesForContentType['number_of_children']
+                    $rulesForContentType['number_of_children'],
+                    'number_of_children',
+                    1
                 );
             }
 
@@ -342,8 +347,18 @@ class CustomFormRequest extends FormRequest
                             if ($propertyName === $rulesPropertyKey) { // matches field & datum segments
                                 foreach ($contentPropertySet as $contentProperty) {
                                     $key = $contentProperty['key'];
+
+                                    if ($request->get('id') == $contentProperty['id']) {
+                                        $contentProperty['value'] = $request->get('value');
+                                    }
+
                                     if ($key === $criteriaKey) {
-                                        $this->validateRule($contentProperty['value'], $criteria['rules']);
+                                        $this->validateRule(
+                                            $contentProperty['value'],
+                                            $criteria['rules'],
+                                            $key,
+                                            $contentProperty['position']
+                                        );
                                         $can_have_multiple[(bool)$criteria['can_have_multiple']][$key][] = $criteria;
                                         $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
                                     }
@@ -355,24 +370,34 @@ class CustomFormRequest extends FormRequest
             }
             foreach ($can_have_multiple[false] as $key => $value) {
                 // todo: ensure that if this fails, you get a good message for the user
-                $this->validateRule((int)$counts[$key], 'max:1');
+                $this->validateRule((int)$counts[$key], 'max:1', $key . '_can_have_multiple', 1);
             }
         }
 
         return true;
     }
 
-    public function validateRule($value, $rule)
+    public function validateRule($value, $rule, $key, $position)
     {
         try {
             $this->validationFactory->make(
-                is_array($rule) ? $rule : [$rule],
-                is_array($value) ? $value : [$value]
+                [$key => $value],
+                [$key => $rule]
             )->validate();
         } catch (ValidationException $exception) {
             $messages = $exception->validator->messages()->messages();
+            $formattedValidationMessages = [];
+
+            foreach ($messages as $messageKey => $errors) {
+                $formattedValidationMessages[] = [
+                    'key' => $messageKey,
+                    'position' => $position,
+                    'errors' => $errors,
+                ];
+            }
+
             throw new HttpResponseException(
-                new JsonResponse(['messages' => $messages], 422)
+                new JsonResponse(['messages' => $formattedValidationMessages], 422)
             );
         }
     }
