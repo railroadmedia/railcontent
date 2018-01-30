@@ -375,8 +375,9 @@ class CustomFormRequest extends FormRequest
                                             $key,
                                             $contentProperty['position']
                                         );
-                                        $can_have_multiple[(bool)$criteria['can_have_multiple']][$key][] = $criteria;
-                                        $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
+//                                        $can_have_multiple[(bool)$criteria['can_have_multiple']]
+//                                        [$key][] = $criteria;
+//                                        $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
                                     }
                                 }
                             }
