@@ -202,10 +202,6 @@ class CustomFormRequest extends FormRequest
          *              - exit
          */
 
-        // =============================================================================================================
-        // ===================================1. make some variables ===================================================
-        // =============================================================================================================
-
         $content = null;
         $requestedDatumOrFieldToSet = null;
         $minimumRequiredChildren = null;
@@ -233,8 +229,6 @@ class CustomFormRequest extends FormRequest
 
         $restrictions = $rulesForBrand['restrictions'];
 
-        // =============================================================================================================
-        // =====================================2. get the content =====================================================
         // =============================================================================================================
 
         if($request instanceof ContentCreateRequest) {
@@ -312,19 +306,15 @@ class CustomFormRequest extends FormRequest
         }
 
         // =============================================================================================================
-        // ===================================3. validation happens here ===============================================
-        // =============================================================================================================
 
         if($contentValidationRequired) {
 
-            $content['number_of_children'] =
-                $this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']];
-
             $validate = function ($value, $rule){
-                $rule = is_array($rule) ? $rule : [$rule];
-                $value = is_array($value) ? $value : [$value];
                 try {
-                    $this->validationFactory->make($value, $rule)->validate();
+                    $this->validationFactory->make(
+                        is_array($rule) ? $rule : [$rule],
+                        is_array($value) ? $value : [$value]
+                    )->validate();
                 } catch (ValidationException $exception) {
                     $messages = $exception->validator->messages()->messages();
                     throw new HttpResponseException(
@@ -335,24 +325,22 @@ class CustomFormRequest extends FormRequest
 
             $rulesForContentType = $rulesForBrand[$content['type']];
 
+            if(isset($rulesForContentType['number_of_children'])){
+                $validate($this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']],
+                    $rulesForContentType['number_of_children']);
+            }
+
             foreach($content as $propertyName => $contentPropertySet){
-                foreach($rulesForContentType as $rulesPropertyKey => $rulesSuper){
-                    // if($rulesPropertyKey === 'number_of_children'){
-                    //     todo
-                    // }
+                foreach($rulesForContentType as $rulesPropertyKey => $rules){
                     if($rulesPropertyKey !== 'number_of_children'){
-                        foreach($rulesSuper as $criteriaKey => $criteria){
+                        foreach($rules as $criteriaKey => $criteria){
                             if($propertyName === $rulesPropertyKey){ // matches field & datum segments
                                 foreach($contentPropertySet as $contentProperty){
                                     $key = $contentProperty['key'];
                                     if($key === $criteriaKey){
                                         $validate($contentProperty['value'], $criteria['rules']);
                                         $can_have_multiple[(bool) $criteria['can_have_multiple']][$key][] = $criteria;
-                                        if(isset($counts[$key])){
-                                            $counts[$key]++;
-                                        }else{
-                                            $counts[$key] = 1;
-                                        }
+                                        $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
                                     }
                                 }
                             }
@@ -365,10 +353,6 @@ class CustomFormRequest extends FormRequest
                 $validate((int) $counts[$key], 'max:1');
             }
         }
-
-        // =============================================================================================================
-        // ===================================4. It's over. ============================================================
-        // =============================================================================================================
 
         return true;
     }
