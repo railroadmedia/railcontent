@@ -4,14 +4,13 @@ namespace Railroad\Railcontent\Requests;
 
 use Illuminate\Http\Exception\HttpResponseException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\Factory as ValidationFactory;
 use Illuminate\Validation\ValidationException;
-use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Services\ContentFieldService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
-use Illuminate\Validation\Factory as ValidationFactory;
 
 /** Custom Form Request that contain the validation logic for the CMS.
  * There are:
@@ -66,8 +65,7 @@ class CustomFormRequest extends FormRequest
         ContentFieldService $contentFieldService,
         ValidationFactory $validationFactory,
         ContentHierarchyService $contentHierarchyService
-    )
-    {
+    ) {
         $this->contentService = $contentService;
         $this->contentDatumService = $contentDatumService;
         $this->contentFieldService = $contentFieldService;
@@ -143,7 +141,8 @@ class CustomFormRequest extends FormRequest
     private function getContentTypeVal($request)
     {
         $type = '';
-        if ( ($request instanceof ContentDatumCreateRequest) || ($request instanceof ContentFieldCreateRequest) ) {
+        if (($request instanceof ContentDatumCreateRequest) ||
+            ($request instanceof ContentFieldCreateRequest)) {
             $contentId = $request->request->get('content_id');
             $content = $this->contentService->getById($contentId);
 
@@ -180,7 +179,7 @@ class CustomFormRequest extends FormRequest
                 $getRulesForDatum = $keyForDatum && ($request instanceof ContentDatumCreateRequest);
 
                 if ($getRulesForField || $getRulesForDatum) {
-                    $rules = array_merge( $rules, ['value' => $value]);
+                    $rules = array_merge($rules, ['value' => $value]);
                 }
             }
         }
@@ -216,14 +215,17 @@ class CustomFormRequest extends FormRequest
 
         $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
 
-        if ($rulesExistForBrand){
+        if ($rulesExistForBrand) {
             $rulesForBrand = ConfigService::$validationRules[ConfigService::$brand];
         }
 
-        if(!is_array($rulesForBrand)){
-            throw_unless(is_string($rulesForBrand), new \Exception(
-                '"$rulesForBrand" is neither string nor array. wtf.'
-            ));
+        if (!is_array($rulesForBrand)) {
+            throw_unless(
+                is_string($rulesForBrand),
+                new \Exception(
+                    '"$rulesForBrand" is neither string nor array. wtf.'
+                )
+            );
             $rulesForBrand = [$rulesForBrand];
         }
 
@@ -231,9 +233,9 @@ class CustomFormRequest extends FormRequest
 
         // =============================================================================================================
 
-        if($request instanceof ContentCreateRequest) {
-            if(isset($input['status'])){
-                if(in_array($input['status'], $restrictions)){
+        if ($request instanceof ContentCreateRequest) {
+            if (isset($input['status'])) {
+                if (in_array($input['status'], $restrictions)) {
                     throw new \Exception(
                         'Status cannot be set to: "' . $input['status'] . '" on content-create.'
                     );
@@ -242,9 +244,9 @@ class CustomFormRequest extends FormRequest
             $contentValidationRequired = false;
         }
 
-        if($request instanceof ContentUpdateRequest) {
-            if(isset($input['status'])){
-                if(in_array($input['status'], $restrictions)){
+        if ($request instanceof ContentUpdateRequest) {
+            if (isset($input['status'])) {
+                if (in_array($input['status'], $restrictions)) {
                     $contentValidationRequired = true;
                 }
             }
@@ -260,7 +262,7 @@ class CustomFormRequest extends FormRequest
             // if this is edit continue, else error
             $urlPathSecondLastElement = array_values(array_slice($urlPath, -2))[0];
 
-            if($urlPathSecondLastElement !== 'edit'){
+            if ($urlPathSecondLastElement !== 'edit') {
                 error_log(
                     'Attempting to validate content-update, but url path\'s second-last element does not ' .
                     'match expectations. (expected "edit", got "' . $urlPathSecondLastElement . '")'
@@ -270,22 +272,30 @@ class CustomFormRequest extends FormRequest
             // content_id
             $urlPathLastElement = array_values(array_slice($urlPath, -1))[0];
 
-            $contentId = (integer) $urlPathLastElement;
+            $contentId = (integer)$urlPathLastElement;
             $content = $this->contentService->getById($contentId);
 
-            if($urlPathThirdLastElement !== $content['type']){error_log(
-                'Attempting to validate content-update, but url path\'s third-last element does not ' .
-                'match expectations. (expected "' . $content['type'] . '", got "' . $urlPathSecondLastElement . '")'
-            );}
+            if ($urlPathThirdLastElement !== $content['type']) {
+                error_log(
+                    'Attempting to validate content-update, but url path\'s third-last element does not ' .
+                    'match expectations. (expected "' .
+                    $content['type'] .
+                    '", got "' .
+                    $urlPathSecondLastElement .
+                    '")'
+                );
+            }
         }
 
         // get content status, if content status is restricted, then validation is required
 
-        if($request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest){
+        if ($request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest) {
             $contentId = $request->request->get('content_id');
-            if(empty($contentId)){
-                error_log('Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
-                    'content_id passed. This is at odds with what we\'re expecting and might be cause for concern');
+            if (empty($contentId)) {
+                error_log(
+                    'Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
+                    'content_id passed. This is at odds with what we\'re expecting and might be cause for concern'
+                );
             }
             $content = $this->contentService->getById($contentId);
             $contentValidationRequired = in_array($content['status'], $restrictions);
@@ -293,10 +303,14 @@ class CustomFormRequest extends FormRequest
             $requestedDatumOrFieldToSet = [$input['key'] => $input['value']];
         }
 
-        if($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest){
+        if ($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest) {
             $contentDatumOrField = $this->contentFieldService->get($request->request->get('id'));
-            throw_if(empty($contentDatumOrField), // code-smell!
-                new \Exception('$contentDatumOrField not filled in ' . '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent')
+            throw_if(
+                empty($contentDatumOrField), // code-smell!
+                new \Exception(
+                    '$contentDatumOrField not filled in ' .
+                    '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent'
+                )
             );
             $contentId = $contentDatumOrField['content_id'];
             $content = $this->contentService->getById($contentId);
@@ -307,39 +321,30 @@ class CustomFormRequest extends FormRequest
 
         // =============================================================================================================
 
-        if($contentValidationRequired) {
-
-            $validate = function ($value, $rule){
-                try {
-                    $this->validationFactory->make(
-                        is_array($rule) ? $rule : [$rule],
-                        is_array($value) ? $value : [$value]
-                    )->validate();
-                } catch (ValidationException $exception) {
-                    $messages = $exception->validator->messages()->messages();
-                    throw new HttpResponseException(
-                        new JsonResponse(['messages' => $messages], 422)
-                    );
-                }
-            };
+        if ($contentValidationRequired) {
 
             $rulesForContentType = $rulesForBrand[$content['type']];
 
-            if(isset($rulesForContentType['number_of_children'])){
-                $validate($this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']],
-                    $rulesForContentType['number_of_children']);
+            if (isset($rulesForContentType['number_of_children'])) {
+                $this->validateRule(
+                    $this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']]
+                    ??
+                    0,
+                    $rulesForContentType['number_of_children']
+                );
             }
 
-            foreach($content as $propertyName => $contentPropertySet){
-                foreach($rulesForContentType as $rulesPropertyKey => $rules){
-                    if($rulesPropertyKey !== 'number_of_children'){
-                        foreach($rules as $criteriaKey => $criteria){
-                            if($propertyName === $rulesPropertyKey){ // matches field & datum segments
-                                foreach($contentPropertySet as $contentProperty){
+            foreach ($content as $propertyName => $contentPropertySet) {
+                foreach ($rulesForContentType as $rulesPropertyKey => $rules) {
+
+                    if ($rulesPropertyKey !== 'minimum_required_children') {
+                        foreach ($rules as $criteriaKey => $criteria) {
+                            if ($propertyName === $rulesPropertyKey) { // matches field & datum segments
+                                foreach ($contentPropertySet as $contentProperty) {
                                     $key = $contentProperty['key'];
-                                    if($key === $criteriaKey){
-                                        $validate($contentProperty['value'], $criteria['rules']);
-                                        $can_have_multiple[(bool) $criteria['can_have_multiple']][$key][] = $criteria;
+                                    if ($key === $criteriaKey) {
+                                        $this->validateRule($contentProperty['value'], $criteria['rules']);
+                                        $can_have_multiple[(bool)$criteria['can_have_multiple']][$key][] = $criteria;
                                         $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
                                     }
                                 }
@@ -348,12 +353,27 @@ class CustomFormRequest extends FormRequest
                     }
                 }
             }
-            foreach($can_have_multiple[false] as $key => $value){
+            foreach ($can_have_multiple[false] as $key => $value) {
                 // todo: ensure that if this fails, you get a good message for the user
-                $validate((int) $counts[$key], 'max:1');
+                $this->validateRule((int)$counts[$key], 'max:1');
             }
         }
 
         return true;
+    }
+
+    public function validateRule($value, $rule)
+    {
+        try {
+            $this->validationFactory->make(
+                is_array($rule) ? $rule : [$rule],
+                is_array($value) ? $value : [$value]
+            )->validate();
+        } catch (ValidationException $exception) {
+            $messages = $exception->validator->messages()->messages();
+            throw new HttpResponseException(
+                new JsonResponse(['messages' => $messages], 422)
+            );
+        }
     }
 }
