@@ -15,7 +15,7 @@ class CacheHelper
 
     public static function setPrefix()
     {
-        if (method_exists(Cache::getStore(), 'setPrefix')) {
+        if (method_exists(Cache::store(ConfigService::$cacheDriver)->getStore(), 'setPrefix')) {
             return Cache::store(ConfigService::$cacheDriver)->setPrefix(ConfigService::$redisPrefix);
         }
         return Cache::store(ConfigService::$cacheDriver)->getPrefix();
@@ -131,12 +131,9 @@ class CacheHelper
      */
     public static function deleteCacheKeys(array $keys)
     {
-        if (Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore) {
-            return Redis::del(implode(' ', $keys));
-        }
 
         foreach ($keys as $key) {
-            Cache::flush($key);
+            Cache::store(ConfigService::$cacheDriver)->flush($key);
         }
 
         return true;
