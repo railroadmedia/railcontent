@@ -304,7 +304,9 @@ class CustomFormRequest extends FormRequest
         }
 
         if ($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest) {
-            $contentDatumOrField = $this->contentFieldService->get($request->request->get('id'));
+            $contentDatumOrField = $this->contentFieldService->get(
+                array_values($request->route()->parameters())[0]
+            );
             throw_if(
                 empty($contentDatumOrField), // code-smell!
                 new \Exception(
@@ -352,6 +354,11 @@ class CustomFormRequest extends FormRequest
                                         $contentProperty['value'] = $request->get('value');
                                     }
 
+                                    if ($contentProperty['type'] == 'content' &&
+                                        isset($contentProperty['value']['id'])) {
+                                        $contentProperty['value'] = $contentProperty['value']['id'];
+                                    }
+
                                     if ($key === $criteriaKey) {
                                         $this->validateRule(
                                             $contentProperty['value'],
@@ -368,10 +375,10 @@ class CustomFormRequest extends FormRequest
                     }
                 }
             }
-            foreach ($can_have_multiple[false] as $key => $value) {
-                // todo: ensure that if this fails, you get a good message for the user
-                $this->validateRule((int)$counts[$key], 'max:1', $key . '_can_have_multiple', 1);
-            }
+//            foreach ($can_have_multiple[false] ?? [] as $key => $value) {
+//                // todo: ensure that if this fails, you get a good message for the user
+//                $this->validateRule((int)$counts[$key], 'max:1', $key . '_can_have_multiple', 1);
+//            }
         }
 
         return true;
