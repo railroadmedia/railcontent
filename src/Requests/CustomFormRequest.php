@@ -205,6 +205,8 @@ class CustomFormRequest extends FormRequest
         $requestedDatumOrFieldToSet = null;
 
         $rulesForBrand = [];
+        $counts = [];
+        $can_have_multiple = [];
 
         $contentValidationRequired = false;
 
@@ -316,72 +318,27 @@ class CustomFormRequest extends FormRequest
                     'rule' => $rule,
                     'value' => $value
                 ];
-
-//                try {
-//                    $this->validationFactory->make($value, $rule)->validate();
-//                } catch (ValidationException $exception) {
-//                    $messages = $exception->validator->messages()->messages();
-//                    throw new HttpResponseException(
-//                        new JsonResponse(['messages' => $messages], 422)
-//                    );
-//                }
             };
 
-            foreach($content as $aaa_c_1_contentPropertyKey => $aaa_c_1_contentPropertyValue){
+            $rulesForContentType = $rulesForBrand[$content['type']];
 
-                foreach(
-                    $rulesForBrand[$content['type']] as
-                    $aaa_r_1_contentPropertyName => $aaa_r_1_contentPropertyValidationCriteria
-                ){
-                    if($aaa_r_1_contentPropertyName === 'number_of_children'){
-                        // todo
-                    }else{
-                        // if(!is_array($aaa_r_1_contentPropertyValidationCriteria)){
-                            // todo...? ↓ ?
-                            // break;
-                        // }
-                        foreach(
-                            $aaa_r_1_contentPropertyValidationCriteria as
-                            $aaa_r_2_contentPropertyValidationCriteria_key =>
-                            $aaa_r_2_contentPropertyValidationCriteria_value
-                        ){
-
-//                            if($aaa_c_1_contentPropertyKey=== 'fields'){
-//                                $foo = true;
-//                            }
-
-                            foreach(
-                                $aaa_r_2_contentPropertyValidationCriteria_value as
-                                $aaa_r_3_criteria_key => $aaa_r_3_criteria_value
-                            ){
-//                                if($aaa_r_2_contentPropertyValidationCriteria_key === $aaa_c_1_contentPropertyKey){
-                                if($aaa_c_1_contentPropertyKey === $aaa_r_1_contentPropertyName){
-
-                                    if(!is_array($aaa_c_1_contentPropertyValue)) {
-                                        break;
-                                    }
-
-                                    foreach($aaa_c_1_contentPropertyValue as $aaa_c_2_contentPropertyValue){
-
-                                        if(
-                                            $aaa_c_2_contentPropertyValue['key'] === $aaa_r_2_contentPropertyValidationCriteria_key
-                                        ){
-
-                                            if($aaa_r_3_criteria_key === 'rules'){
-
-                                                $validate(
-                                                    $aaa_c_2_contentPropertyValue['value'], // value
-                                                    $aaa_r_3_criteria_value // rule
-                                                );
-
-                                            }
-
-                                            // todo
-                                            // todo
-                                            // todo
-                                            // if($aaa_r_3_criteria_key === 'can_have_multiple'){
-                                            //     $can_have_multiple[$aaa_r_3_criteria_value][] = $aaa_r_2_contentPropertyValidationCriteria_value;
-                                            // }
+            foreach($content as $propertyName => $contentPropertySet){
+                foreach($rulesForContentType as $rulesPropertyKey => $rulesSuper){
+                    // if($rulesPropertyKey === 'number_of_children'){
+                    //     todo
+                    // }
+                    if($rulesPropertyKey !== 'number_of_children'){
+                        foreach($rulesSuper as $criteriaKey => $criteria){
+                            if($propertyName === $rulesPropertyKey){ // matches field & datum segments
+                                foreach($contentPropertySet as $contentProperty){
+                                    if($contentProperty['key'] === $criteriaKey){
+                                        $validate($contentProperty['value'], $criteria['rules']);
+                                        $can_have_multiple[$criteria['can_have_multiple']][$contentProperty['key']][] =
+                                            $criteria;
+                                        if(isset($counts[$contentProperty['key']])){
+                                            $counts[$contentProperty['key']]++;
+                                        }else{
+                                            $counts[$contentProperty['key']] = 1;
                                         }
                                     }
                                 }
@@ -389,6 +346,9 @@ class CustomFormRequest extends FormRequest
                         }
                     }
                 }
+            }
+            foreach($can_have_multiple[false] as $canNotHaveMultiple){
+                $validate((int) $counts[$canNotHaveMultiple],'max:1');
             }
         }
 
