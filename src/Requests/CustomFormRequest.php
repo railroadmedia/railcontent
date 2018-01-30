@@ -304,9 +304,18 @@ class CustomFormRequest extends FormRequest
         }
 
         if ($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest) {
-            $contentDatumOrField = $this->contentFieldService->get(
-                array_values($request->route()->parameters())[0]
-            );
+            if ($request instanceof ContentFieldUpdateRequest) {
+                $contentDatumOrField = $this->contentFieldService->get(
+                    array_values($request->route()->parameters())[0]
+                );
+            }
+
+            if ($request instanceof ContentDatumUpdateRequest) {
+                $contentDatumOrField = $this->contentDatumService->get(
+                    array_values($request->route()->parameters())[0]
+                );
+            }
+
             throw_if(
                 empty($contentDatumOrField), // code-smell!
                 new \Exception(
@@ -354,7 +363,7 @@ class CustomFormRequest extends FormRequest
                                         $contentProperty['value'] = $request->get('value');
                                     }
 
-                                    if ($contentProperty['type'] == 'content' &&
+                                    if (($contentProperty['type'] ?? null) == 'content' &&
                                         isset($contentProperty['value']['id'])) {
                                         $contentProperty['value'] = $contentProperty['value']['id'];
                                     }
