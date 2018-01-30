@@ -301,126 +301,14 @@ class CustomFormRequest extends FormRequest
 
         if($contentValidationRequired) {
 
-            $contentType = $content['type'];
-            $brand = ConfigService::$brand;
-            $allRules = ConfigService::$validationRules;
-
-            if(!array_key_exists($brand, $allRules)){
-                return true;
-            }
-
-            $rulesForBrand = $allRules[$brand];
-
-            foreach($rulesForBrand as $rulesForTypes){
-                if(array_key_exists($contentType, $rulesForTypes)){
-                    $rulesForContentType = $rulesForBrand[$contentType];
-                }
-            }
-
-
-            // =========================================================================================================
-            // =========================================================================================================
-            // =========================================================================================================
-
-
-//            $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation(
-//                $content, $rulesForContentType
-//            );
-//
-//            $rulesForContentTypeReorganized = [];
-//
-//            // flatten content-details to easily-validated set
-//            foreach($rulesForContentType as $primaryKey => $rulesOrArrayOfRules){
-//                if(($primaryKey === 'datum') || ($primaryKey === 'fields')){
-//                    foreach($rulesOrArrayOfRules as $keyForRule => $rule){
-//                        $rulesForContentTypeReorganized[$keyForRule] = $rule;
-//                    }
-//                }else{
-//                    $rulesForContentTypeReorganized[$primaryKey] = $rulesOrArrayOfRules;
-//                }
-//            }
-//
-//            // flatten rules so can be parsed by validator
-//            $rulesForContentTypeModified = [];
-//            foreach($rulesForContentTypeReorganized as $ruleKey => $ruleValue){
-//                // we want to get rid of the "can_have_multiple" item and "de-nest" the rules in $rules['rules']
-//                if(isset($ruleValue['rules'])){
-//                    $rulesForContentTypeModified[$ruleKey] = $ruleValue['rules'];
-//
-//                    $rulesForContentTypeModified[$ruleKey . '_count'] = 'max:1';
-//                    if(in_array('can_have_multiple', array_keys($ruleValue))){
-//                        if($ruleValue['can_have_multiple']){
-//                            $rulesForContentTypeModified[$ruleKey . '_count'] = '';
-//                        }
-//                    }
-//                }
-//            }
-//            $rulesForContentTypeReorganized = $rulesForContentTypeModified;
-//
-//            // add rules for "can_have_multiple" then a count for each so all the validation happens in 1 call
-//            $contentPropertiesForValidationWithCounts = [];
-//            foreach($contentPropertiesForValidation as $propertyName =>$property){
-//                $contentPropertiesForValidationWithCounts[$propertyName . '_count'] = count($property);
-//            }
-//            $contentPropertiesForValidation = array_merge(
-//                $contentPropertiesForValidation, $contentPropertiesForValidationWithCounts
-//            );
-//
-//            // get number of children from content-hierarchy and get minimum number from config for content-type
-//            if(isset($rulesForContentType['minimum_required_children'])){
-//
-//                $rulesForContentTypeReorganized['number_of_children'] =
-//                    $rulesForContentType['minimum_required_children'];
-//
-//                $contentPropertiesForValidation['number_of_children'] =
-//                    (int)$this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']];
-//
-//                $aa_typeOf_rulesForContentTypeReorganized = gettype($rulesForContentTypeReorganized['number_of_children']);
-//                $aa_typeOf_contentPropertiesForValidation = gettype($contentPropertiesForValidation['number_of_children']);
-//
-//
-//            }
-//
-//            // the `!is_null($requestedDatumOrFieldToSet)` is basically for Datum|Field Requests (abstract it out
-//            // ... with those if you refactor this)
-//            if(!empty($rulesForContentTypeReorganized) && !is_null($requestedDatumOrFieldToSet)){
-//                /*
-//                 * We want to validate the content with the **yet-unsaved** requested (field|datum) change (*not* the
-//                 * current state, but rather the state that would exist *after* we apply the requested change, if with
-//                 * that change the content would be valid and we would therefore make that change).
-//                 *
-//                 * Jonathan, January 2018
-//                 */
-//                $nameOfDatumOrFieldToSet = array_keys($requestedDatumOrFieldToSet)[0];
-//                if(isset($contentPropertiesForValidation[$nameOfDatumOrFieldToSet])){
-//                    $contentPropertiesForValidation[$nameOfDatumOrFieldToSet] =
-//                        $requestedDatumOrFieldToSet[$nameOfDatumOrFieldToSet];
-//                }
-//            }
-//
-//            try{
-//                $this->validationFactory->make($contentPropertiesForValidation, $rulesForContentTypeReorganized)->validate();
-//            }catch(ValidationException $exception){
-//                /*
-//                 * Validation failure will interrupt writing field|datum - thus preventing the publication or
-//                 * scheduling of a ill-formed lesson.
-//                 *
-//                 * Jonathan, January 2018
-//                 */
-//                $messages = $exception->validator->messages()->messages();
-//                return new JsonResponse(['messages' => $messages], 422);
-//            }
-
-            // =========================================================================================================
-            // =========================================================================================================
-            // =========================================================================================================
-
-            $content['number_of_children'] = $this->contentHierarchyService->
-            countParentsChildren([$content['id']])[$content['id']];
+            $content['number_of_children'] =
+                $this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']];
 
             $minimumRequiredChildren = null;
 
-            $validate = function ($value, $rule){
+            $bbb_validateRanWith = [];
+
+            $validate = function ($value, $rule) use (&$bbb_validateRanWith){
                 $rule = is_array($rule) ? $rule : [$rule];
                 $value = is_array($value) ? $value : [$value];
 
@@ -429,61 +317,78 @@ class CustomFormRequest extends FormRequest
                     'value' => $value
                 ];
 
-                try {
-                    $this->validationFactory->make($value, $rule)->validate();
-                } catch (ValidationException $exception) {
-                    $messages = $exception->validator->messages()->messages();
-                    throw new HttpResponseException(
-                        new JsonResponse(['messages' => $messages], 422)
-                    );
-                }
+//                try {
+//                    $this->validationFactory->make($value, $rule)->validate();
+//                } catch (ValidationException $exception) {
+//                    $messages = $exception->validator->messages()->messages();
+//                    throw new HttpResponseException(
+//                        new JsonResponse(['messages' => $messages], 422)
+//                    );
+//                }
             };
 
             foreach($content as $aaa_c_1_contentPropertyKey => $aaa_c_1_contentPropertyValue){
 
                 foreach(
-                    $rulesForBrand[$contentType] as
+                    $rulesForBrand[$content['type']] as
                     $aaa_r_1_contentPropertyName => $aaa_r_1_contentPropertyValidationCriteria
                 ){
                     if($aaa_r_1_contentPropertyName === 'number_of_children'){
                         // todo
                     }else{
-                         if(!is_array($aaa_r_1_contentPropertyValidationCriteria)){
-                             break;
-                         }
+                        // if(!is_array($aaa_r_1_contentPropertyValidationCriteria)){
+                            // todo...? ↓ ?
+                            // break;
+                        // }
                         foreach(
                             $aaa_r_1_contentPropertyValidationCriteria as
-                            $aaa_r_2_contentPropertyValidationCriteria_key => $aaa_r_2_contentPropertyValidationCriteria_value
+                            $aaa_r_2_contentPropertyValidationCriteria_key =>
+                            $aaa_r_2_contentPropertyValidationCriteria_value
                         ){
-                            foreach($aaa_r_2_contentPropertyValidationCriteria_value as $aaa_r_3_criteria_key => $aaa_r_3_criteria_value){
 
-                                if($aaa_r_3_criteria_key === $aaa_c_1_contentPropertyKey){
+//                            if($aaa_c_1_contentPropertyKey=== 'fields'){
+//                                $foo = true;
+//                            }
 
-                                    if($aaa_r_3_criteria_key === 'rules'){
-                                        $rule = $aaa_r_3_criteria_value;
-                                        $value = $aaa_c_1_contentPropertyValue;
-                                        $validate($value, $rule);
+                            foreach(
+                                $aaa_r_2_contentPropertyValidationCriteria_value as
+                                $aaa_r_3_criteria_key => $aaa_r_3_criteria_value
+                            ){
+//                                if($aaa_r_2_contentPropertyValidationCriteria_key === $aaa_c_1_contentPropertyKey){
+                                if($aaa_c_1_contentPropertyKey === $aaa_r_1_contentPropertyName){
+
+                                    if(!is_array($aaa_c_1_contentPropertyValue)) {
+                                        break;
                                     }
 
-                                    // todo
-                                    // todo
-                                    // todo
-                                    // if($aaa_r_3_criteria_key === 'can_have_multiple'){
-                                    //     $can_have_multiple[$aaa_r_3_criteria_value][] = $aaa_r_2_contentPropertyValidationCriteria_value;
-                                    // }
+                                    foreach($aaa_c_1_contentPropertyValue as $aaa_c_2_contentPropertyValue){
 
+                                        if(
+                                            $aaa_c_2_contentPropertyValue['key'] === $aaa_r_2_contentPropertyValidationCriteria_key
+                                        ){
+
+                                            if($aaa_r_3_criteria_key === 'rules'){
+
+                                                $validate(
+                                                    $aaa_c_2_contentPropertyValue['value'], // value
+                                                    $aaa_r_3_criteria_value // rule
+                                                );
+
+                                            }
+
+                                            // todo
+                                            // todo
+                                            // todo
+                                            // if($aaa_r_3_criteria_key === 'can_have_multiple'){
+                                            //     $can_have_multiple[$aaa_r_3_criteria_value][] = $aaa_r_2_contentPropertyValidationCriteria_value;
+                                            // }
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
                 }
-
-//                if($a_1_contentPropertyKey === 'field' || $a_1_contentPropertyKey === 'datum'){
-//                    if($a_1_contentPropertyKey === $aaa_r_3_criteria_key){
-//                        $value = $a_1_propertyValue;
-//                    }
-//                }
-
             }
         }
 
