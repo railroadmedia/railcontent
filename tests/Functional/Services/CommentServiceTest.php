@@ -193,7 +193,7 @@ class CommentServiceTest extends RailcontentTestCase
             $this->faker->randomElement(ConfigService::$commentableContentTypes)
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
-
+        request()->attributes->set('user_id',$userId);
         $result = $this->classBeingTested->delete($comment['id']);
 
         $this->assertEquals(1, $result);
@@ -256,6 +256,7 @@ class CommentServiceTest extends RailcontentTestCase
         $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes));
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
+        request()->attributes->set('user_id',$userId);
 
         $this->classBeingTested->delete($comment['id']);
 
@@ -275,6 +276,7 @@ class CommentServiceTest extends RailcontentTestCase
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
 
         $reply = $this->commentFactory->create($this->faker->word, $comment['content_id'], $comment['id']);
+        request()->attributes->set('user_id',$userId);
 
         $this->classBeingTested->delete($comment['id']);
 

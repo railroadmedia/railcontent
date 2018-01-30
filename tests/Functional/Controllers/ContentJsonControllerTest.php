@@ -267,6 +267,17 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ContentService::STATUS_PUBLISHED
         );
 
+        $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => 1,
+                'limit' => 10,
+                'sort' => 'id',
+                'statuses' => [ContentService::STATUS_PUBLISHED]
+            ]
+        );
+
         $response = $this->call(
             'PATCH',
             'railcontent/content/' . $content['id'],
@@ -368,6 +379,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $new_slug = implode('-', $this->faker->words());
+
         $response = $this->call(
             'PATCH',
             'railcontent/content/' . $content['id'],
@@ -537,6 +549,16 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $expectedContent['results'] = array_slice($contents, 0, $limit, true);
         $expectedContent['total_results'] = $nrCourses;
 
+        $response = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => 'id',
+                'included_types' => $types
+            ]
+        );
         $response = $this->call(
             'GET',
             'railcontent/content',
@@ -790,6 +812,58 @@ class ContentJsonControllerTest extends RailcontentTestCase
         ];
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson()['results']);
+    }
+
+    public function test_get_id_cached()
+    {
+        $content1 = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
+        );
+        $start1 = microtime(true);
+        $response = $this->call('GET', 'railcontent/content/' . $content1['id']);
+        $time1 = microtime(true) - $start1;
+
+        $start2 = microtime(true);
+        $response = $this->call('GET', 'railcontent/content/' . $content1['id']);
+        $time2 = microtime(true) - $start2;
+
+        $start3 = microtime(true);
+        $response = $this->call('GET', 'railcontent/content/' . $content1['id']);
+        $time3 = microtime(true) - $start3;
+
+        $start4 = microtime(true);
+        $response = $this->call('GET', 'railcontent/content/' . $content1['id']);
+        $time4 = microtime(true) - $start4;
+
+        $start5 = microtime(true);
+        $response = $this->call('GET', 'railcontent/content/' . $content1['id']);
+        $time5 = microtime(true) - $start5;
+
+        $start6 = microtime(true);
+        $response = $this->call(
+            'GET',
+            'railcontent/content/get-by-ids', [$content1['id']]
+        );
+        $time6 = microtime(true) - $start6;
+
+        $start7 = microtime(true);
+        $response = $this->call(
+            'GET',
+            'railcontent/content/get-by-ids', [$content1['id']]
+        );
+        $time7 = microtime(true) - $start7;
+
+        $response->assertStatus(200);
+        print_r('Execution time::');
+        var_dump($time1);
+        var_dump($time2);
+        var_dump($time3);
+        var_dump($time4);
+        var_dump($time5);
+        var_dump($time6);
+        var_dump($time7);
     }
 
     /**

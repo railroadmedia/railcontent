@@ -3,8 +3,10 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
@@ -95,6 +97,10 @@ class CommentService
             ]
         );
 
+        CacheHelper::deleteCache('content_list_' . $contentId);
+
+        CacheHelper::deleteAllCachedSearchResults('get_comments_');
+
         $createdComment = $this->get($commentId);
 
         event(new CommentCreated($commentId, $userId, $parentId, $comment));
@@ -129,6 +135,7 @@ class CommentService
         if (count($data) == 0) {
             return $comment;
         }
+        CacheHelper::deleteCache('content_list_' . $comment['content_id']);
 
         $this->commentRepository->update($id, $data);
 
@@ -143,6 +150,7 @@ class CommentService
      */
     public function delete($id)
     {
+
         //check if comment exist
         $comment = $this->get($id);
 
@@ -150,7 +158,7 @@ class CommentService
             return $comment;
         }
 
-        request()->attributes->set('user_id', request()->user()->id ?? null);
+        request()->attributes->set('user_id', request()->get('user_id') ?? null);
 
         //check if user can delete the comment
         if (!$this->userCanManageComment($comment)) {
@@ -167,6 +175,8 @@ class CommentService
         } else {
             $this->commentRepository->delete($id);
         }
+        CacheHelper::deleteCache('content_list_' . $comment['content_id']);
+
         return true;
     }
 
@@ -209,12 +219,21 @@ class CommentService
 
         $orderByColumn = trim($orderByAndDirection, '-');
 
-        $this->commentRepository->setData($page, $limit, $orderByDirection, $orderByColumn);
+        $hash = 'get_comments_' .(CommentRepository::$availableContentId ?? ''). CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
 
-        return [
+        $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash, $page, $limit, $orderByDirection, $orderByColumn) {
+        $this->commentRepository->setData($page, $limit, $orderByDirection, $orderByColumn);
+            $results = [
             'results' => $this->commentRepository->getComments(),
             'total_results' => $this->commentRepository->countComments()
         ];
+            CacheHelper::addLists($hash, array_pluck(array_values($results['results']), 'content_id'));
+            return $results;
+        });
+
+        return $results;
+
+
     }
 
     /**

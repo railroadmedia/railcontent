@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 
@@ -126,6 +127,11 @@ class UserContentProgressService
             );
         }
 
+        CacheHelper::deleteCache('content_list_' . $contentId);
+
+        //delete all the search results from cache
+        CacheHelper::deleteAllCachedSearchResults('user_progress_'.$userId.'_');
+
         event(new UserContentProgressSaved($userId, $contentId));
 
         return true;
@@ -152,6 +158,11 @@ class UserContentProgressService
 
         event(new UserContentProgressSaved($userId, $contentId));
 
+        CacheHelper::deleteCache('content_list_' . $contentId);
+
+        //delete all the search results from cache
+        CacheHelper::deleteAllCachedSearchResults('user_progress_'.$userId.'_');
+
         return true;
     }
 
@@ -164,7 +175,7 @@ class UserContentProgressService
      */
     public function saveContentProgress($contentId, $progress, $userId)
     {
-        if ($progress === 100) {
+        if ($progress == 100) {
             return $this->completeContent($contentId, $userId);
         }
 
@@ -181,6 +192,9 @@ class UserContentProgressService
         );
 
         event(new UserContentProgressSaved($userId, $contentId));
+
+        //delete all the search results from cache
+        CacheHelper::deleteAllCachedSearchResults('user_progress_'.$userId.'_');
 
         return true;
     }

@@ -218,8 +218,7 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictBrand()
     {
-        $this->where(ConfigService::$tableContent . '.brand', ConfigService::$brand);
-
+        $this->whereIn(ConfigService::$tableContent . '.brand', array_values(array_wrap(ConfigService::$brand)));
         return $this;
     }
 
@@ -395,27 +394,29 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
+        $tableName = '_icf';
+
         $this->join(
-            ConfigService::$tableContentFields,
-            function (JoinClause $joinClause) use ($includedFields) {
+            ConfigService::$tableContentFields . ' as ' . $tableName,
+            function (JoinClause $joinClause) use ($includedFields, $tableName) {
                 $joinClause->on(
-                    ConfigService::$tableContentFields . '.content_id',
+                    $tableName . '.content_id',
                     '=',
                     ConfigService::$tableContent . '.id'
                 );
 
                 $joinClause->on(
-                    function (JoinClause $joinClause) use ($includedFields) {
+                    function (JoinClause $joinClause) use ($tableName, $includedFields) {
                         foreach ($includedFields as $index => $includedFieldData) {
                             $joinClause->orOn(
-                                function (JoinClause $joinClause) use ($includedFieldData) {
+                                function (JoinClause $joinClause) use ($tableName, $includedFieldData) {
                                     $joinClause->on(
-                                        ConfigService::$tableContentFields .
+                                        $tableName .
                                         '.key',
                                         '=',
                                         $joinClause->raw("'" . $includedFieldData['name'] . "'")
                                     )->on(
-                                        ConfigService::$tableContentFields .
+                                        $tableName .
                                         '.value',
                                         '=',
                                         $joinClause->raw("'" . $includedFieldData['value'] . "'")
@@ -454,12 +455,32 @@ class ContentQueryBuilder extends QueryBuilder
                 }
             )
             ->leftJoin(
+                ConfigService::$tablePermissions . ' as id_permissions',
+                function (JoinClause $join) {
+                    $join
+                        ->on(
+                            'id_permissions' . '.id',
+                            'id_content_permissions' . '.permission_id'
+                        );
+                }
+            )
+            ->leftJoin(
                 ConfigService::$tableContentPermissions . ' as type_content_permissions',
                 function (JoinClause $join) {
                     $join
                         ->on(
                             'type_content_permissions' . '.content_type',
                             ConfigService::$tableContent . '.type'
+                        );
+                }
+            )
+            ->leftJoin(
+                ConfigService::$tablePermissions . ' as type_permissions',
+                function (JoinClause $join) {
+                    $join
+                        ->on(
+                            'type_permissions' . '.id',
+                            'type_content_permissions' . '.permission_id'
                         );
                 }
             )
@@ -472,7 +493,8 @@ class ContentQueryBuilder extends QueryBuilder
                                     ->whereIn(
                                         'id_content_permissions' . '.permission_id',
                                         PermissionRepository::$availableContentPermissionIds
-                                    );
+                                    )
+                                    ->where('id_permissions' . '.brand', ConfigService::$brand);
                             }
                         )
                         ->orWhere(
@@ -481,7 +503,9 @@ class ContentQueryBuilder extends QueryBuilder
                                     ->whereIn(
                                         'type_content_permissions' . '.permission_id',
                                         PermissionRepository::$availableContentPermissionIds
-                                    );
+                                    )
+                                    ->where('type_permissions' . '.brand', ConfigService::$brand);
+
                             }
                         )
                         ->orWhere(

@@ -143,4 +143,14 @@ class ConfigService
      * @var array
      */
     public static $videoSync;
+
+    /**
+     * @var string
+     */
+    public static $redisPrefix;
+
+    /**
+     * @var string
+     */
+    public static $cacheDriver;
 }

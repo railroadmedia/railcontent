@@ -105,7 +105,7 @@ class CreateVimeoVideoContentRecords extends Command
                         'vimeo-video-' . $id, 'vimeo-video'
                     ));
 
-                    if($noRecordOfVideoInCMS && $duration !== 0 && !is_numeric($duration) ){
+                    if($noRecordOfVideoInCMS && $duration !== 0 && is_numeric($duration) ){
                         // store and add to array for mass insert
                         $content = $this->contentService->create(
                             'vimeo-video-' . $id,

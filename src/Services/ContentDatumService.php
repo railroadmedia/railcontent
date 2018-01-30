@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Services;
 use Railroad\Railcontent\Events\ContentDatumCreated;
 use Railroad\Railcontent\Events\ContentDatumDeleted;
 use Railroad\Railcontent\Events\ContentDatumUpdated;
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 
 class ContentDatumService
@@ -64,6 +65,9 @@ class ContentDatumService
         //call the event that save a new content version in the database
         event(new ContentDatumCreated($contentId));
 
+        //delete cache associated with the content id
+        CacheHelper::deleteCache('content_list_' . $contentId);
+
         return $this->get($id);
     }
 
@@ -91,6 +95,9 @@ class ContentDatumService
         //save a content version
         event(new ContentDatumUpdated($datum['content_id']));
 
+        //delete cache associated with the content id
+        CacheHelper::deleteCache('content_list_' . $datum['content_id']);
+
         return $this->get($id);
     }
 
@@ -111,6 +118,9 @@ class ContentDatumService
 
         //save a content version 
         event(new ContentDatumDeleted($datum['content_id']));
+
+        //delete cache associated with the content id
+        CacheHelper::deleteCache('content_list_' . $datum['content_id']);
 
         return $delete;
     }

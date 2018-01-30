@@ -144,6 +144,9 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$searchIndexValues = config('railcontent.search_index_values');
 
         ConfigService::$videoSync = config('railcontent.video_sync');
+
+        ConfigService::$redisPrefix = config('railcontent.cache_prefix');
+        ConfigService::$cacheDriver = config('railcontent.cache_driver');
     }
 
     /**

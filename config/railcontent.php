@@ -112,4 +112,7 @@ return [
 
     'user_routes_middleware' => [],
     'administrator_routes_middleware' => [],
+    
+    'cache_prefix' =>'railcontent',
+    'cache_driver' => 'redis'
 ];

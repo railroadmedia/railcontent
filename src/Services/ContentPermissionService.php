@@ -2,7 +2,9 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
+use Railroad\Railcontent\Repositories\ContentRepository;
 
 /**
  * Class PermissionService
@@ -17,13 +19,19 @@ class ContentPermissionService
     private $contentPermissionRepository;
 
     /**
+     * @var ContentRepository
+     */
+    private $contentRepository;
+
+    /**
      * PermissionService constructor.
      *
      * @param ContentPermissionRepository $contentPermissionRepository
      */
-    public function __construct(ContentPermissionRepository $contentPermissionRepository)
+    public function __construct(ContentPermissionRepository $contentPermissionRepository, ContentRepository $contentRepository)
     {
         $this->contentPermissionRepository = $contentPermissionRepository;
+        $this->contentRepository = $contentRepository;
     }
 
     /**
@@ -47,8 +55,8 @@ class ContentPermissionService
 
         $contentPermissionsMatchingPermissionId = [];
 
-        foreach($contentPermissions as $contentPermission){
-            if($contentPermission['permission_id'] === $permissionId){
+        foreach ($contentPermissions as $contentPermission) {
+            if ($contentPermission['permission_id'] === $permissionId) {
                 $contentPermissionsMatchingPermissionId[] = $contentPermission;
             }
         }
@@ -65,7 +73,11 @@ class ContentPermissionService
      */
     public function dissociate($contentId = null, $contentType = null, $permissionId)
     {
-        return $this->contentPermissionRepository->dissociate($contentId, $contentType, $permissionId);
+        $results = $this->contentPermissionRepository->dissociate($contentId, $contentType, $permissionId);
+
+        $this->clearAssociatedContentCache([$contentId], [$contentType]);
+
+        return $results;
     }
 
     /**
@@ -83,6 +95,8 @@ class ContentPermissionService
                 'permission_id' => $permissionId,
             ]
         );
+
+        $this->clearAssociatedContentCache([$contentId], [$contentType]);
 
         return $this->get($id);
     }
@@ -107,4 +121,22 @@ class ContentPermissionService
     {
         return $this->contentPermissionRepository->delete($id) > 0;
     }
+
+    /** Clear the cache records associated with the content or the cache records associated with the contents that have the specified content type
+     * @param int $contentId
+     * @param string $contentType
+     */
+    private function clearAssociatedContentCache(array $contentIds, array $contentTypes)
+    {
+        foreach ($contentIds as $contentId) {
+            CacheHelper::deleteCache('content_list_' . $contentId);
+        }
+        foreach ($contentTypes as $contentType) {
+            $contents = $this->contentRepository->getByType($contentType);
+            foreach ($contents as $content) {
+                CacheHelper::deleteCache('content_list_' . $content['id']);
+            }
+        }
+    }
+
 }

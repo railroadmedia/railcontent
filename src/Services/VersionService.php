@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\ContentVersionRepository;
 
@@ -61,6 +62,12 @@ class VersionService
      */
     public function get($versionId)
     {
-        return $this->versionRepository->getOldContent($versionId);
+        $hash = 'version_'. CacheHelper::getKey($versionId);
+        $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash, $versionId) {
+            $results = $this->versionRepository->getOldContent($versionId);
+            return $results;
+        });
+
+        return $results;
     }
 }

@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Services;
 use Railroad\Railcontent\Events\ContentFieldCreated;
 use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
 
 class ContentFieldService
@@ -136,6 +137,12 @@ class ContentFieldService
         //Fire an event that the content was modified
         event(new ContentFieldCreated($contentId));
 
+        //delete cache associated with the content id
+        CacheHelper::deleteCache('content_list_' . $contentId);
+
+        //delete search cache for pull methods that use type as parameter
+        CacheHelper::deleteAllCachedSearchResults('types');
+
         return $this->get($id);
     }
 
@@ -162,6 +169,9 @@ class ContentFieldService
         //Save a new content version
         event(new ContentFieldUpdated($field['content_id']));
 
+        //delete cache for associated content id
+        CacheHelper::deleteCache('content_list_' . $field['content_id']);
+
         return $this->get($id);
     }
 
@@ -184,6 +194,9 @@ class ContentFieldService
 
         //Save a new content version
         event(new ContentFieldDeleted($field['content_id']));
+
+        //delete cache for associated content id
+        CacheHelper::deleteCache('content_list_' . $field['content_id']);
 
         return $deleted;
     }
