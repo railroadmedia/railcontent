@@ -218,8 +218,7 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictBrand()
     {
-        $this->where(ConfigService::$tableContent . '.brand', ConfigService::$brand);
-
+        $this->whereIn(ConfigService::$tableContent . '.brand', array_values(array_wrap(ConfigService::$brand)));
         return $this;
     }
 

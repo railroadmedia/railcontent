@@ -52,7 +52,7 @@ class FullTextSearchQueryBuilder extends QueryBuilder
      */
     public function restrictBrand()
     {
-        $this->where(ConfigService::$tableSearchIndexes . '.brand', ConfigService::$brand);
+        $this->whereIn(ConfigService::$tableSearchIndexes . '.brand', array_values(array_wrap(ConfigService::$brand)));
 
         return $this;
     }
