@@ -201,13 +201,95 @@ class CustomFormRequest extends FormRequest
          *              - exit
          */
 
+        $aa______ = '================================================================================================';
+        $aa_____1 = '================================================================================================';
+        $aa_____2 = '================================================================================================';
+        $aa_____3 = '================================================================================================';
+        $aa_____4 = '================================================================================================';
+
+        $cc______ = '================================================================================================';
+        $cc_____1 = '================================================================================================';
+        $cc_____2 = '================================================================================================';
+        $cc_____3 = '================================================================================================';
+        $cc_____4 = '================================================================================================';
+
+
+        $contentValidationRequired = null;
+        $rulesForBrand = null;
+        $aa_content = null;
+
+        $counts = [];
+        $cannotHaveMultiple = [];
+
+        $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $aa_content);
+
+        if ($contentValidationRequired) {
+
+            $rulesForContentType = $rulesForBrand[$aa_content['type']];
+
+            if (isset($rulesForContentType['number_of_children'])) {
+                $this->validateRule(
+                    $this->contentHierarchyService->countParentsChildren([$aa_content['id']])[$aa_content['id']]
+                    ??
+                    0,
+                    $rulesForContentType['number_of_children'],
+                    'number_of_children',
+                    1
+                );
+            }
+
+            foreach ($aa_content as $aa_propertyName => $aa_contentPropertySet) {
+                foreach ($rulesForContentType as $bb_rulesPropertyKey => $bb_rules) {
+
+                    if ($bb_rulesPropertyKey !== 'number_of_children') {
+                        foreach ($bb_rules as $bb_criteriaKey => $bb_criteria) {
+                            if ($aa_propertyName === $bb_rulesPropertyKey && !empty($bb_criteria)) { // matches field & datum segments
+                                foreach ($aa_contentPropertySet as $contentProperty) {
+                                    $aa_key = $contentProperty['key'];
+
+                                    if ($request->get('id') == $contentProperty['id']) {
+                                        $contentProperty['value'] = $request->get('value');
+                                    }
+
+                                    if (($contentProperty['type'] ?? null) == 'content' &&
+                                        isset($contentProperty['value']['id'])) {
+                                        $contentProperty['value'] = $contentProperty['value']['id'];
+                                    }
+
+                                    if ($aa_key === $bb_criteriaKey) {
+                                        $this->validateRule(
+                                            $contentProperty['value'],
+                                            $bb_criteria['rules'],
+                                            $aa_key,
+                                            $contentProperty['position']
+                                        );
+                                        if(!$bb_criteria['can_have_multiple']){
+                                            $cannotHaveMultiple[] = $aa_key;
+                                            $counts[$aa_key] = isset($counts[$aa_key]) ? $counts[$aa_key] + 1 : 1;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            foreach ($cannotHaveMultiple as $key) {
+                // todo: ensure that if this fails, you get a good message for the user
+                $count = (int)$counts[$key];
+                $this->validateRule($count, 'max:1', $key . '_count', 1);
+            }
+        }
+
+        return true;
+    }
+
+    private function getContentForValidation($request, &$contentValidationRequired, &$rulesForBrand, &$content){
         $content = null;
         $requestedDatumOrFieldToSet = null;
         $minimumRequiredChildren = null;
 
         $rulesForBrand = [];
-        $counts = [];
-        $can_have_multiple = [];
 
         $contentValidationRequired = false;
 
@@ -332,66 +414,6 @@ class CustomFormRequest extends FormRequest
             if ($request instanceof ContentDatumUpdateRequest) {
             }
         }
-
-        // =============================================================================================================
-
-        if ($contentValidationRequired) {
-
-            $rulesForContentType = $rulesForBrand[$content['type']];
-
-            if (isset($rulesForContentType['number_of_children'])) {
-                $this->validateRule(
-                    $this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']]
-                    ??
-                    0,
-                    $rulesForContentType['number_of_children'],
-                    'number_of_children',
-                    1
-                );
-            }
-
-            foreach ($content as $propertyName => $contentPropertySet) {
-                foreach ($rulesForContentType as $rulesPropertyKey => $rules) {
-
-                    if ($rulesPropertyKey !== 'minimum_required_children') {
-                        foreach ($rules as $criteriaKey => $criteria) {
-                            if ($propertyName === $rulesPropertyKey) { // matches field & datum segments
-                                foreach ($contentPropertySet as $contentProperty) {
-                                    $key = $contentProperty['key'];
-
-                                    if ($request->get('id') == $contentProperty['id']) {
-                                        $contentProperty['value'] = $request->get('value');
-                                    }
-
-                                    if (($contentProperty['type'] ?? null) == 'content' &&
-                                        isset($contentProperty['value']['id'])) {
-                                        $contentProperty['value'] = $contentProperty['value']['id'];
-                                    }
-
-                                    if ($key === $criteriaKey) {
-                                        $this->validateRule(
-                                            $contentProperty['value'],
-                                            $criteria['rules'],
-                                            $key,
-                                            $contentProperty['position']
-                                        );
-//                                        $can_have_multiple[(bool)$criteria['can_have_multiple']]
-//                                        [$key][] = $criteria;
-//                                        $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-//            foreach ($can_have_multiple[false] ?? [] as $key => $value) {
-//                // todo: ensure that if this fails, you get a good message for the user
-//                $this->validateRule((int)$counts[$key], 'max:1', $key . '_can_have_multiple', 1);
-//            }
-        }
-
-        return true;
     }
 
     public function validateRule($value, $rule, $key, $position)
