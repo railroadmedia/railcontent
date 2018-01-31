@@ -153,4 +153,9 @@ class ConfigService
      * @var string
      */
     public static $cacheDriver;
+
+    /**
+     * @var array
+     */
+    public static $availableBrands;
 }

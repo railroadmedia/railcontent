@@ -10,6 +10,8 @@ return [
 
     'brand' => 'drumeo',
 
+    'available_brands' => ['drumeo'],
+
     'default_language' => 'en-US',
     'available_languages' => [
         'en-US',
