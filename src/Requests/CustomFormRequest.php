@@ -285,7 +285,7 @@ class CustomFormRequest extends FormRequest
                 // todo: ensure that if this fails, you get a good message for the user
                 $count = (int)$counts[$key];
 //                $this->validateRule($count, 'max:1', $key . '_count', 1);
-                $this->validateRule($count, 'max:1', $key, 1);
+                $this->validateRule($count, 'numeric|max:1', $key, 1);
             }
         }
 
