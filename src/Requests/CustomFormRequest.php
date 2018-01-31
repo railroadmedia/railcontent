@@ -186,9 +186,12 @@ class CustomFormRequest extends FormRequest
         return $rules;
     }
 
+    /**
+     * @param CustomFormRequest $request
+     * @return bool
+     */
     public function validateContent($request)
-    {
-        //  - get the status "states to guard"
+    {   //  - get the status "states to guard"
         //      - if we *are* writing|updating status, to what value are we wanting to set it to?
         //      - if the value we want to set is in "the states to guard", validate content (return 422 if fails)
         //  - if we *not* are writing|updating status, get the current status
@@ -238,7 +241,19 @@ class CustomFormRequest extends FormRequest
         return true;
     }
 
-    private function getContentForValidation($request, &$contentValidationRequired, &$rulesForBrand, &$content){
+    /**
+     * @param CustomFormRequest $request
+     * @param $contentValidationRequired
+     * @param $rulesForBrand
+     * @param $content
+     * @throws \Exception
+     */
+    private function getContentForValidation(
+        CustomFormRequest $request,
+        &$contentValidationRequired,
+        &$rulesForBrand,
+        &$content
+    ){
         $content = null;
         $minimumRequiredChildren = null;
 
@@ -266,17 +281,12 @@ class CustomFormRequest extends FormRequest
 
         $restrictions = $rulesForBrand['restrictions'];
 
-        // =============================================================================================================
-
         if ($request instanceof ContentCreateRequest) {
             if (isset($input['status'])) {
                 if (in_array($input['status'], $restrictions)) {
-                    throw new \Exception(
-                        'Status cannot be set to: "' . $input['status'] . '" on content-create.'
-                    );
+                    throw new \Exception('Status cannot be set to: "' . $input['status'] . '" on content-create.');
                 }
             }
-            $contentValidationRequired = false;
         }
 
         if ($request instanceof ContentUpdateRequest) {
