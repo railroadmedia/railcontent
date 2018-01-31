@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
-use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 
@@ -127,10 +126,14 @@ class UserContentProgressService
             );
         }
 
-        CacheHelper::deleteCache('content_list_' . $contentId);
-
-        //delete all the search results from cache
-        CacheHelper::deleteAllCachedSearchResults('user_progress_'.$userId.'_');
+        if(is_null($contentId)){
+            error_log(print_r([
+                'method' => 'startContent',
+                '$contentId' => $contentId,
+                '$progress' => '(not present for "startContent" method. -Jonathan)',
+                '$userId' => $userId
+            ], true));
+        }
 
         event(new UserContentProgressSaved($userId, $contentId));
 
@@ -156,12 +159,16 @@ class UserContentProgressService
             ]
         );
 
+        if(is_null($contentId)){
+            error_log(print_r([
+                'method' => 'completeContent',
+                '$contentId' => $contentId,
+                '$progress' => '(not present for "completeContent" method. -Jonathan)',
+                '$userId' => $userId
+            ], true));
+        }
+
         event(new UserContentProgressSaved($userId, $contentId));
-
-        CacheHelper::deleteCache('content_list_' . $contentId);
-
-        //delete all the search results from cache
-        CacheHelper::deleteAllCachedSearchResults('user_progress_'.$userId.'_');
 
         return true;
     }
@@ -175,7 +182,7 @@ class UserContentProgressService
      */
     public function saveContentProgress($contentId, $progress, $userId)
     {
-        if ($progress == 100) {
+        if ($progress === 100) {
             return $this->completeContent($contentId, $userId);
         }
 
@@ -191,10 +198,16 @@ class UserContentProgressService
             ]
         );
 
-        event(new UserContentProgressSaved($userId, $contentId));
+        if(is_null($contentId)){
+            error_log(print_r([
+                'method' => 'saveContentProgress',
+                '$contentId' => $contentId,
+                '$progress' => print_r($progress, true),
+                '$userId' => $userId
+            ], true));
+        }
 
-        //delete all the search results from cache
-        CacheHelper::deleteAllCachedSearchResults('user_progress_'.$userId.'_');
+        event(new UserContentProgressSaved($userId, $contentId));
 
         return true;
     }

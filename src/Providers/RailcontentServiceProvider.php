@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use PDO;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
+use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
@@ -90,7 +91,8 @@ class RailcontentServiceProvider extends ServiceProvider
         $this->commands([
             CreateSearchIndexes::class,
             CreateVimeoVideoContentRecords::class,
-            RepairMissingDurations::class
+            RepairMissingDurations::class,
+            CreateYoutubeVideoContentRecords::class
         ]);
     }
 

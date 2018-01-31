@@ -105,6 +105,18 @@ return [
                 'client_secret' => env('VIMEO_CLIENT_SECRET_GUITAREO'),
                 'access_token' => env('VIMEO_ACCESS_TOKEN_GUITAREO')
             ]
+        ],
+        'youtube' => [
+            'key' => 'AIzaSyA2Q0B77vr9FrThobCKt6cb1Mnj-QGZxUk',
+            'drumeo' => [
+                'user' => env('YOUTUBE_USERNAME_DRUMEO','drumlessonscom')
+            ],
+            'pianote' => [
+                'user' => env('YOUTUBE_USERNAME_PIANOTE','PianoLessonscom')
+            ],
+            'guitareo' => [
+                'user' => env('YOUTUBE_USERNAME_GUITAREO','guitarlessonscom')
+            ]
         ]
     ],
 
