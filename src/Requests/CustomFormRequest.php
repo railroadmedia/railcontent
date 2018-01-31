@@ -284,7 +284,8 @@ class CustomFormRequest extends FormRequest
             foreach ($cannotHaveMultiple as $key) {
                 // todo: ensure that if this fails, you get a good message for the user
                 $count = (int)$counts[$key];
-                $this->validateRule($count, 'max:1', $key . '_count', 1);
+//                $this->validateRule($count, 'max:1', $key . '_count', 1);
+                $this->validateRule($count, 'max:1', $key, 1);
             }
         }
 
@@ -399,7 +400,6 @@ class CustomFormRequest extends FormRequest
         }
 
         if ($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest) {
-
             $contentDatumOrField = [];
 
             if ($request instanceof ContentFieldUpdateRequest) {
@@ -427,11 +427,11 @@ class CustomFormRequest extends FormRequest
 
 
             if ($request instanceof ContentFieldUpdateRequest) {
-                $content['fields'][] = ['key' => $input['key'], 'value' => $input['value']];
+                $content['fields'][] = ['key' => $contentDatumOrField['key'], 'value' => $input['value']];
             }
 
             if ($request instanceof ContentDatumUpdateRequest) {
-                $content['data'][] = ['key' => $input['key'], 'value' => $input['value']];
+                $content['data'][] = ['key' => $contentDatumOrField['key'], 'value' => $input['value']];
             }
         }
     }
