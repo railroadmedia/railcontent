@@ -243,12 +243,19 @@ class CustomFormRequest extends FormRequest
 
                     if ($bb_rulesPropertyKey !== 'number_of_children') {
                         foreach ($bb_rules as $bb_criteriaKey => $bb_criteria) {
+
+                            if($bb_criteriaKey === 'sheet_music_image_url' && $aa_propertyName === 'data'){
+                                $stop = 'here';
+                            }
+
                             if ($aa_propertyName === $bb_rulesPropertyKey && !empty($bb_criteria)) { // matches field & datum segments
                                 foreach ($aa_contentPropertySet as $contentProperty) {
                                     $aa_key = $contentProperty['key'];
 
-                                    if ($request->get('id') == $contentProperty['id']) {
-                                        $contentProperty['value'] = $request->get('value');
+                                    if(!empty($contentProperty['id'])){ // will be empty for field & datum creates
+                                        if ($request->get('id') == $contentProperty['id']) {
+                                            $contentProperty['value'] = $request->get('value');
+                                        }
                                     }
 
                                     if (($contentProperty['type'] ?? null) == 'content' &&
@@ -261,7 +268,7 @@ class CustomFormRequest extends FormRequest
                                             $contentProperty['value'],
                                             $bb_criteria['rules'],
                                             $aa_key,
-                                            $contentProperty['position']
+                                            $contentProperty['position'] ?? null
                                         );
                                         if(!$bb_criteria['can_have_multiple']){
                                             $cannotHaveMultiple[] = $aa_key;
@@ -286,7 +293,6 @@ class CustomFormRequest extends FormRequest
 
     private function getContentForValidation($request, &$contentValidationRequired, &$rulesForBrand, &$content){
         $content = null;
-        $requestedDatumOrFieldToSet = null;
         $minimumRequiredChildren = null;
 
         $rulesForBrand = [];
@@ -382,10 +388,20 @@ class CustomFormRequest extends FormRequest
             $content = $this->contentService->getById($contentId);
             $contentValidationRequired = in_array($content['status'], $restrictions);
 
-            $requestedDatumOrFieldToSet = [$input['key'] => $input['value']];
+
+            if ($request instanceof ContentFieldCreateRequest) {
+                $content['fields'][] = ['key' => $input['key'], 'value' => $input['value']];
+            }
+
+            if ($request instanceof ContentDatumCreateRequest) {
+                $content['data'][] = ['key' => $input['key'], 'value' => $input['value']];
+            }
         }
 
         if ($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest) {
+
+            $contentDatumOrField = [];
+
             if ($request instanceof ContentFieldUpdateRequest) {
                 $contentDatumOrField = $this->contentFieldService->get(
                     array_values($request->route()->parameters())[0]
@@ -399,7 +415,7 @@ class CustomFormRequest extends FormRequest
             }
 
             throw_if(
-                empty($contentDatumOrField), // code-smell!
+                empty($contentDatumOrField),
                 new \Exception(
                     '$contentDatumOrField not filled in ' .
                     '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent'
@@ -409,14 +425,18 @@ class CustomFormRequest extends FormRequest
             $content = $this->contentService->getById($contentId);
             $contentValidationRequired = in_array($content['status'], $restrictions);
 
-            $requestedDatumOrFieldToSet = [$contentDatumOrField['key'] => $input['value']];
+
+            if ($request instanceof ContentFieldUpdateRequest) {
+                $content['fields'][] = ['key' => $input['key'], 'value' => $input['value']];
+            }
 
             if ($request instanceof ContentDatumUpdateRequest) {
+                $content['data'][] = ['key' => $input['key'], 'value' => $input['value']];
             }
         }
     }
 
-    public function validateRule($value, $rule, $key, $position)
+    public function validateRule($value, $rule, $key, $position = 0)
     {
         try {
             $this->validationFactory->make(
