@@ -14,6 +14,8 @@ class ContentDatumCreateRequest extends CustomFormRequest
      */
     public function rules()
     {
+        $this->validateContent($this);
+
         //set the general validation rules
         $this->setGeneralRules([
             'key' => 'required|max:255',
@@ -23,8 +25,6 @@ class ContentDatumCreateRequest extends CustomFormRequest
 
         //set the custom validation rules
         $this->setCustomRules($this, 'datum');
-
-        $this->validateContent($this);
 
         //get all the rules for the request
         return parent::rules();

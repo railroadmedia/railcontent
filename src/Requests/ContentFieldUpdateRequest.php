@@ -13,6 +13,8 @@ class ContentFieldUpdateRequest extends CustomFormRequest
      */
     public function rules()
     {
+        $this->validateContent($this);
+
         //set the general validation rules
         $this->setGeneralRules(
             [
@@ -25,8 +27,6 @@ class ContentFieldUpdateRequest extends CustomFormRequest
 
         //set the custom validation rules
         $this->setCustomRules($this, 'fields');
-
-        $this->validateContent($this);
 
         //get all the validation rules that apply to the request
         return parent::rules();
