@@ -156,6 +156,15 @@ class UserContentProgressService
             ]
         );
 
+        if(is_null($contentId)){
+            error_log(print_r([
+                'method' => 'completeContent',
+                '$contentId' => $contentId,
+                '$progress' => '(not present for "completeContent" method. -Jonathan)',
+                '$userId' => $userId
+            ], true));
+        }
+
         event(new UserContentProgressSaved($userId, $contentId));
 
         CacheHelper::deleteCache('content_list_' . $contentId);
@@ -190,6 +199,15 @@ class UserContentProgressService
                 'updated_on' => Carbon::now()->toDateTimeString()
             ]
         );
+
+        if(is_null($contentId)){
+            error_log(print_r([
+                'method' => 'saveContentProgress',
+                '$contentId' => $contentId,
+                '$progress' => print_r($progress, true),
+                '$userId' => $userId
+            ], true));
+        }
 
         event(new UserContentProgressSaved($userId, $contentId));
 

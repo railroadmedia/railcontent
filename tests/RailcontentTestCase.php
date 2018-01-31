@@ -165,6 +165,9 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.cache_prefix', $defaultConfig['cache_prefix']);
         $app['config']->set('railcontent.cache_driver',$defaultConfig['cache_driver']);
 
+        $app['config']->set('railcontent.video_sync.youtube.key', $defaultConfig['video_sync']['youtube']['key']);
+        $app['config']->set('railcontent.video_sync.youtube.drumeo', $defaultConfig['video_sync']['youtube']['drumeo']);
+
         if (!$app['db']->connection()->getSchemaBuilder()->hasTable('users')) {
 
         $app['db']->connection()->getSchemaBuilder()->create(
