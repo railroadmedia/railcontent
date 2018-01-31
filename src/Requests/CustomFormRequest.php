@@ -188,91 +188,41 @@ class CustomFormRequest extends FormRequest
 
     public function validateContent($request)
     {
-        // todo: ↓ is this comment still valid|helpful?
-        /*
-         *      - get "the states to guard", are we writing|updating status?
-         *      - if yes, to what value are we wanting to set it to?
-         *          - if the value we want to set is in "the states to guard"
-         *              - validate content (return 422 if fails)
-         *              - exit
-         *      - if no, get the current status means
-         *          - if the current status is in "the states to guard"
-         *              - validate content (return 422 if fails)
-         *              - exit
-         */
-
-        $aa______ = '================================================================================================';
-        $aa_____1 = '================================================================================================';
-        $aa_____2 = '================================================================================================';
-        $aa_____3 = '================================================================================================';
-        $aa_____4 = '================================================================================================';
-
-        $cc______ = '================================================================================================';
-        $cc_____1 = '================================================================================================';
-        $cc_____2 = '================================================================================================';
-        $cc_____3 = '================================================================================================';
-        $cc_____4 = '================================================================================================';
-
-
-        $contentValidationRequired = null;
-        $rulesForBrand = null;
-        $aa_content = null;
-
-        $counts = [];
-        $cannotHaveMultiple = [];
-
-        $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $aa_content);
-
+        //  - get the status "states to guard"
+        //      - if we *are* writing|updating status, to what value are we wanting to set it to?
+        //      - if the value we want to set is in "the states to guard", validate content (return 422 if fails)
+        //  - if we *not* are writing|updating status, get the current status
+        //      - if the current status is in "the states to guard", validate content (return 422 if fails)
+        $contentValidationRequired = null; $rulesForBrand = null; $content = null; $counts = []; $cannotHaveMultiple = [];
+        $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
         if ($contentValidationRequired) {
-
-            $rulesForContentType = $rulesForBrand[$aa_content['type']];
-
+            $rulesForContentType = $rulesForBrand[$content['type']];
             if (isset($rulesForContentType['number_of_children'])) {
-                $this->validateRule(
-                    $this->contentHierarchyService->countParentsChildren([$aa_content['id']])[$aa_content['id']]
-                    ??
-                    0,
-                    $rulesForContentType['number_of_children'],
-                    'number_of_children',
-                    1
-                );
+                $value = $this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']] ?? 0;
+                $rule = $rulesForContentType['number_of_children'];
+                $this->validateRule( $value, $rule, 'number_of_children', 1);
             }
-
-            foreach ($aa_content as $aa_propertyName => $aa_contentPropertySet) {
-                foreach ($rulesForContentType as $bb_rulesPropertyKey => $bb_rules) {
-
-                    if ($bb_rulesPropertyKey !== 'number_of_children') {
-                        foreach ($bb_rules as $bb_criteriaKey => $bb_criteria) {
-
-                            if($bb_criteriaKey === 'sheet_music_image_url' && $aa_propertyName === 'data'){
-                                $stop = 'here';
-                            }
-
-                            if ($aa_propertyName === $bb_rulesPropertyKey && !empty($bb_criteria)) { // matches field & datum segments
-                                foreach ($aa_contentPropertySet as $contentProperty) {
-                                    $aa_key = $contentProperty['key'];
-
+            foreach ($content as $propertyName => $contentPropertySet) {
+                foreach ($rulesForContentType as $rulesPropertyKey => $rules) {
+                    if ($rulesPropertyKey !== 'number_of_children') {
+                        foreach ($rules as $criteriaKey => $criteria) {
+                            if ($propertyName === $rulesPropertyKey && !empty($criteria)) { // matches field & datum segments
+                                foreach ($contentPropertySet as $contentProperty) {
+                                    $key = $contentProperty['key']; $value = $contentProperty['value'];
                                     if(!empty($contentProperty['id'])){ // will be empty for field & datum creates
                                         if ($request->get('id') == $contentProperty['id']) {
-                                            $contentProperty['value'] = $request->get('value');
+                                            $value = $request->get('value');
                                         }
                                     }
-
-                                    if (($contentProperty['type'] ?? null) == 'content' &&
-                                        isset($contentProperty['value']['id'])) {
-                                        $contentProperty['value'] = $contentProperty['value']['id'];
+                                    if (($contentProperty['type'] ?? null) === 'content' && isset($value['id'])) {
+                                        $value = $value['id'];
                                     }
-
-                                    if ($aa_key === $bb_criteriaKey) {
-                                        $this->validateRule(
-                                            $contentProperty['value'],
-                                            $bb_criteria['rules'],
-                                            $aa_key,
-                                            $contentProperty['position'] ?? null
-                                        );
-                                        if(!$bb_criteria['can_have_multiple']){
-                                            $cannotHaveMultiple[] = $aa_key;
-                                            $counts[$aa_key] = isset($counts[$aa_key]) ? $counts[$aa_key] + 1 : 1;
+                                    if ($key === $criteriaKey) {
+                                        $position = $contentProperty['position'] ?? null;
+                                        $this->validateRule( $value, $criteria['rules'], $key, $position );
+                                        if(!$criteria['can_have_multiple']){
+                                            $cannotHaveMultiple[] = $key;
+                                            $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
                                         }
                                     }
                                 }
@@ -285,7 +235,6 @@ class CustomFormRequest extends FormRequest
                 $this->validateRule((int)$counts[$key], 'numeric|max:1', $key . '_count', 1);
             }
         }
-
         return true;
     }
 
