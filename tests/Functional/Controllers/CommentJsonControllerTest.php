@@ -508,4 +508,24 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson());
     }
+
+    public function test_get_linked_comment()
+    {
+        $commentsNr = 12;
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            ConfigService::$commentableContentTypes[0]
+        );
+        $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+
+        for ($i = 1; $i <= $commentsNr; $i++) {
+            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        }
+
+        $response = $this->call('GET', 'railcontent/comment/'.$comment['id']);
+
+        $this->assertEquals([$comments[2], $comments[1],$comment],$response->decodeResponseJson()['results']);
+        $this->assertEquals(($commentsNr + 1),$response->decodeResponseJson()['total_results']);
+
+    }
 }

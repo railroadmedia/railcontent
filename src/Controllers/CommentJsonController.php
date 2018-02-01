@@ -42,7 +42,7 @@ class CommentJsonController extends Controller
      */
     public function index(Request $request)
     {
-        CommentRepository::$availableContentId = $request->get('content_id')?? null;
+        CommentRepository::$availableContentId = $request->get('content_id') ?? null;
         CommentRepository::$availableUserId = $request->get('user_id') ?? null;
         CommentRepository::$availableContentType = $request->get('content_type') ?? null;
         CommentRepository::$assignedToUserId = $request->get('assigned_to_user_id', false);
@@ -151,5 +151,33 @@ class CommentJsonController extends Controller
         throw_if(($reply === -1), new NotAllowedException('Only registered user can reply to comment. Please sign in.'));
 
         return new JsonResponse($reply, 200);
+    }
+
+    /** Return the comments, the current page it's the page with the comment
+     * @param int $commentId
+     * @param Request $request
+     * @return JsonPaginatedResponse
+     */
+    public function getLinkedComment($commentId, Request $request)
+    {
+        $limitOnPage = $request->get('limit', 10);
+
+        $activePage = $this->commentService->getCommentPage($commentId, $limitOnPage);
+
+        //set the page on the request; we need this info for JsonPaginatedResponse
+        $request->merge(['page' => $activePage]);
+
+        $commentData = $this->commentService->getComments(
+            $activePage,
+            $limitOnPage,
+            '-id'
+        );
+
+        return new JsonPaginatedResponse(
+            $commentData['results'],
+            $commentData['total_results'],
+            null,
+            200
+        );
     }
 }

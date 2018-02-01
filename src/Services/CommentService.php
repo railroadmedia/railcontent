@@ -219,14 +219,14 @@ class CommentService
 
         $orderByColumn = trim($orderByAndDirection, '-');
 
-        $hash = 'get_comments_' .(CommentRepository::$availableContentId ?? ''). CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
+        $hash = 'get_comments_' . (CommentRepository::$availableContentId ?? '') . CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
 
         $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash, $page, $limit, $orderByDirection, $orderByColumn) {
-        $this->commentRepository->setData($page, $limit, $orderByDirection, $orderByColumn);
+            $this->commentRepository->setData($page, $limit, $orderByDirection, $orderByColumn);
             $results = [
-            'results' => $this->commentRepository->getComments(),
-            'total_results' => $this->commentRepository->countComments()
-        ];
+                'results' => $this->commentRepository->getComments(),
+                'total_results' => $this->commentRepository->countComments()
+            ];
             CacheHelper::addLists($hash, array_pluck(array_values($results['results']), 'content_id'));
             return $results;
         });
@@ -269,6 +269,30 @@ class CommentService
         } else {
             return reset($contentOrContents);
         }
+    }
+
+    /** Count the comments that have been created after the comment
+     * @param $commentId
+     * @return int
+     */
+    public function countLatestComments($commentId)
+    {
+        $comment = $this->get($commentId);
+        CommentRepository::$availableContentId = $comment['content_id'];
+
+        return $this->commentRepository->countLatestComments($comment['created_on']);
+    }
+
+    /** Calculate the page that should be current page to display the comment
+     * @param int $commentId
+     * @param int $limit
+     * @return float|int
+     */
+    public function getCommentPage($commentId, $limit)
+    {
+        $countLatestComments = $this->countLatestComments($commentId);
+
+        return floor($countLatestComments / $limit) + 1;
     }
 
 }
