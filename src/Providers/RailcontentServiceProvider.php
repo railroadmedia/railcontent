@@ -125,6 +125,7 @@ class RailcontentServiceProvider extends ServiceProvider
 
         // brand
         ConfigService::$brand = config('railcontent.brand');
+        ConfigService::$availableBrands = config('railcontent.available_brands');
 
         // lanuage
         ConfigService::$defaultLanguage = config('railcontent.default_language');

@@ -11,6 +11,8 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
@@ -89,6 +91,7 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.table_prefix', $defaultConfig['table_prefix']);
         $app['config']->set('railcontent.data_mode', $defaultConfig['data_mode']);
         $app['config']->set('railcontent.brand', $defaultConfig['brand']);
+        $app['config']->set('railcontent.available_brands', $defaultConfig['available_brands']);
         $app['config']->set('railcontent.available_languages', $defaultConfig['available_languages']);
         $app['config']->set('railcontent.default_language', $defaultConfig['default_language']);
         $app['config']->set('railcontent.field_option_list', $defaultConfig['field_option_list']);
@@ -145,9 +148,26 @@ class RailcontentTestCase extends BaseTestCase
         );
 
         $app['config']->set('railcontent.awsCloudFront', 'd1923uyy6spedc.cloudfront.net');
-        //dd($defaultConfig);
+
+        $app['config']->set(
+            'database.redis',
+            [
+                'client' => 'predis',
+                'default' => [
+                    'host' => env('REDIS_HOST', 'redis'),
+                    'password' => env('REDIS_PASSWORD', null),
+                    'port' => env('REDIS_PORT', 6379),
+                    'database' => 0,
+                ]
+            ]
+        );
+        $app['config']->set('cache.default', env('CACHE_DRIVER', 'redis'));
+        $app['config']->set('railcontent.cache_prefix', $defaultConfig['cache_prefix']);
+        $app['config']->set('railcontent.cache_driver',$defaultConfig['cache_driver']);
+
         $app['config']->set('railcontent.video_sync.youtube.key', $defaultConfig['video_sync']['youtube']['key']);
         $app['config']->set('railcontent.video_sync.youtube.drumeo', $defaultConfig['video_sync']['youtube']['drumeo']);
+
         if (!$app['db']->connection()->getSchemaBuilder()->hasTable('users')) {
 
         $app['db']->connection()->getSchemaBuilder()->create(
@@ -238,6 +258,7 @@ class RailcontentTestCase extends BaseTestCase
 
     protected function tearDown()
     {
+        Redis::flushDB();
         parent::tearDown();
     }
 

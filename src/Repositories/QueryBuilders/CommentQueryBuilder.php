@@ -99,7 +99,7 @@ class CommentQueryBuilder extends QueryBuilder
             '=',
             ConfigService::$tableComments . '.content_id'
         )
-            ->whereIn('content.brand', array_values(array_wrap(ConfigService::$brand)));
+            ->whereIn('content.brand', array_values(array_wrap(ConfigService::$availableBrands)));
 
         return $this;
     }

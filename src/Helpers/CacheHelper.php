@@ -30,7 +30,8 @@ class CacheHelper
     {
         self::setPrefix();
         $settings = ' ' . ContentRepository::$pullFutureContent
-            . ' ' . implode(' ', array_values(array_wrap(ConfigService::$brand)))
+            . ' ' . ConfigService::$brand
+            . ' ' . implode(' ', array_values(array_wrap(ConfigService::$availableBrands)))
             . ' ' . implode(' ', array_values(array_wrap(ContentRepository::$availableContentStatues)))
             . ' ' . implode(' ', array_values(array_wrap(PermissionRepository::$availableContentPermissionIds)));
 
