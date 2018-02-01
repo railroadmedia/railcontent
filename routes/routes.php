@@ -95,6 +95,11 @@ Route::group(
                     \Railroad\Railcontent\Controllers\CommentJsonController::class . '@index'
                 )->name('comment.index');
 
+                Route::get(
+                    '/comment/{id}',
+                    \Railroad\Railcontent\Controllers\CommentJsonController::class . '@getLinkedComment'
+                )->name('comment.linked');
+
                 //full text search
                 Route::get(
                     '/search',
