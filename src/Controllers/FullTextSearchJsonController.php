@@ -44,7 +44,6 @@ class FullTextSearchJsonController extends Controller
             $request->get('brands', null)
         );
 
-
         return new JsonPaginatedResponse(
             $contentsData['results'],
             $contentsData['total_results'],
