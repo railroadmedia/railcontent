@@ -31,7 +31,7 @@ class FullTextSearchService
      * @param array $contentStatuses
      * @param string $sort
      * @param null $dateTimeCutoff
-     * @param null $brand
+     * @param null $brands
      * @return array|null
      * @internal param null $brand
      */
@@ -43,15 +43,15 @@ class FullTextSearchService
         $contentStatuses = [],
         $sort = '-score',
         $dateTimeCutoff = null,
-        $brand = null
+        $brands = null
     ) {
         $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($sort, '-');
 
-        $oldBrand = ConfigService::$brand;
+        $oldBrands = ConfigService::$availableBrands;
 
-        if (!empty($brand)) {
-            ConfigService::$brand = $brand;
+        if (!empty($brands)) {
+            ConfigService::$availableBrands = $brands;
         }
 
         $return = [
@@ -73,7 +73,7 @@ class FullTextSearchService
             )
         ];
 
-        ConfigService::$brand = $oldBrand;
+        ConfigService::$availableBrands = $oldBrands;
 
         return $return;
     }

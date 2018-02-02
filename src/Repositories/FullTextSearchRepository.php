@@ -83,33 +83,39 @@ class FullTextSearchRepository extends RepositoryBase
             ->restrictByTypes(ConfigService::$searchableContentTypes)
             ->orderBy('id');
 
-        $query->chunk(100, function ($query) {
-            $contentFieldRows = $this->fieldRepository->getByContentIds($query->pluck('id')->toArray());
-            $contentDatumRows = $this->datumRepository->getByContentIds($query->pluck('id')->toArray());
+        $query->chunk(
+            100,
+            function ($query) {
+                $contentFieldRows = $this->fieldRepository->getByContentIds($query->pluck('id')->toArray());
+                $contentDatumRows = $this->datumRepository->getByContentIds($query->pluck('id')->toArray());
 
-            $fieldRowsGrouped = ContentHelper::groupArrayBy($contentFieldRows, 'content_id');
-            $datumRowsGrouped = ContentHelper::groupArrayBy($contentDatumRows, 'content_id');
+                $fieldRowsGrouped = ContentHelper::groupArrayBy($contentFieldRows, 'content_id');
+                $datumRowsGrouped = ContentHelper::groupArrayBy($contentDatumRows, 'content_id');
 
-            //insert new indexes in the DB
-            foreach ($query as $content) {
-                $content['fields'] = $fieldRowsGrouped[$content['id']] ?? [];
-                $content['data'] = $datumRowsGrouped[$content['id']] ?? [];
+                //insert new indexes in the DB
+                foreach ($query as $content) {
+                    $content['fields'] = $fieldRowsGrouped[$content['id']] ?? [];
+                    $content['data'] = $datumRowsGrouped[$content['id']] ?? [];
 
-            $searchInsertData = [
-                'content_id' => $content['id'],
-                    'high_value' => $this->prepareIndexesValues('high_value', $content),
-                    'medium_value' => $this->prepareIndexesValues('medium_value', $content),
-                    'low_value' => $this->prepareIndexesValues('low_value', $content),
-                    'brand' => $content['brand'],
-                'content_type' => $content['type'],
-                'content_status' => $content['status'],
-                'content_published_on' => $content['published_on'],
-                'created_at' => Carbon::now()->toDateTimeString()
-            ];
+                    $searchInsertData = [
+                        'high_value' => $this->prepareIndexesValues('high_value', $content),
+                        'medium_value' => $this->prepareIndexesValues('medium_value', $content),
+                        'low_value' => $this->prepareIndexesValues('low_value', $content),
+                        'brand' => $content['brand'],
+                        'content_type' => $content['type'],
+                        'content_status' => $content['status'],
+                        'content_published_on' => $content['published_on'],
+                        'created_at' => Carbon::now()->toDateTimeString()
+                    ];
 
-            $this->create($searchInsertData);
-        }
-        });
+                    $this->updateOrCreate(
+                        ['content_id' => $content['id'],],
+                        $searchInsertData,
+                        'content_id'
+                    );
+                }
+            }
+        );
     }
 
     /** Delete old indexes for the brand
@@ -120,7 +126,6 @@ class FullTextSearchRepository extends RepositoryBase
     {
         return $this->query()->where('brand', ConfigService::$brand)->delete();
     }
-
 
     /** Prepare search indexes based on config settings
      *
@@ -232,8 +237,12 @@ class FullTextSearchRepository extends RepositoryBase
      * @param null $contentType
      * @return int
      */
-    public function countTotalResults($term, $contentType = null, $contentStatus = null, $dateTimeCutoff = null)
-    {
+    public function countTotalResults(
+        $term,
+        $contentType = null,
+        $contentStatus = null,
+        $dateTimeCutoff = null
+    ) {
         $query = $this->query()
             ->selectColumns($term)
             ->restrictByTerm($term)
