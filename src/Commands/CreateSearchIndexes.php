@@ -53,11 +53,10 @@ class CreateSearchIndexes extends Command
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
         ];
-
         ContentRepository::$pullFutureContent = false;
 
-        $this->contentRepository->startFilter(1, null, 'id',  'asc', ConfigService::$searchableContentTypes, [], []);
-        $contents = $this->contentRepository->retrieveFilter();
-        $this->searchRepository->createSearchIndexes($contents);
+        $this->searchRepository->createSearchIndexes();
     }
+
+
 }

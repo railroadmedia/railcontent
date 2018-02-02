@@ -41,7 +41,7 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
 
     public function test_indexes_are_created()
     {
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$searchableContentTypes));
 
         $titleField = $this->fieldFactory->create($content['id'], 'title');
         $otherField = $this->fieldFactory->create($content['id'], $this->faker->word);
@@ -89,7 +89,7 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
     public function test_search_no_results()
     {
         for ($i = 0; $i < 10; $i++) {
-            $content[$i] = $this->contentFactory->create('slug');
+            $content[$i] = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$searchableContentTypes));
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title','field'.$i);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field'.$i);
@@ -114,7 +114,7 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
         $page = 1;
         $limit = 10;
         for ($i = 0; $i < 15; $i++) {
-            $content[$i] = $this->contentFactory->create('slug');
+            $content[$i] = $this->contentFactory->create('slug',  $this->faker->randomElement(ConfigService::$searchableContentTypes));
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title','field '.$i);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field '.$i);
@@ -123,9 +123,8 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
             $descriptionData = $this->datumFactory->create($content[$i]['id'], 'description '.$i);
             $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum '.$i);
             $content[$i]['data'] = [$descriptionData, $otherData];
-
-
         }
+
         $this->classBeingTested->createSearchIndexes($content);
         $results = $this->classBeingTested->search('slug field description',$page, $limit);
 
