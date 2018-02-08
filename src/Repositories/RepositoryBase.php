@@ -107,13 +107,14 @@ abstract class RepositoryBase
     /**
      * @param array $attributes
      * @param array $values
-     * @return integer|null
+     * @param string $getterColumn
+     * @return int|null
      */
-    public function updateOrCreate(array $attributes, array $values = [])
+    public function updateOrCreate(array $attributes, array $values = [], $getterColumn = 'id')
     {
         $this->query()->updateOrInsert($attributes, $values);
 
-        return $this->query()->where($attributes)->get(['id'])->first()['id'] ?? null;
+        return $this->query()->where($attributes)->get([$getterColumn])->first()[$getterColumn] ?? null;
     }
 
     /**

@@ -72,7 +72,7 @@ class FullTextSearchServiceTest extends RailcontentTestCase
         $page = 1;
         $limit = 10;
         for ($i = 0; $i < 15; $i++) {
-            $content[$i] = $this->contentFactory->create('slug');
+            $content[$i] = $this->contentFactory->create('slug',  $this->faker->randomElement(ConfigService::$searchableContentTypes));
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title','field '.$i);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field '.$i);

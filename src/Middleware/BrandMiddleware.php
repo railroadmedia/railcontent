@@ -19,6 +19,7 @@ class BrandMiddleware
     {
         if ($request->has('brand') && ConfigService::$dataMode == 'host') {
             ConfigService::$brand = $request->get('brand');
+            ConfigService::$availableBrands = array_wrap($request->get('brand'));
         }
 
         return $next($request);

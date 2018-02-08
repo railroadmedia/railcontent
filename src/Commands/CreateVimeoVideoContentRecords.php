@@ -7,8 +7,8 @@ use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
-use Vimeo\Vimeo;
 use Vimeo\Exceptions\VimeoRequestException;
+use Vimeo\Vimeo;
 
 class CreateVimeoVideoContentRecords extends Command
 {
@@ -30,8 +30,7 @@ class CreateVimeoVideoContentRecords extends Command
     public function __construct(
         ContentService $contentService,
         DatabaseManager $databaseManager
-    )
-    {
+    ) {
         parent::__construct();
         $this->contentService = $contentService;
         $this->databaseManager = $databaseManager;
@@ -48,25 +47,25 @@ class CreateVimeoVideoContentRecords extends Command
 
         $this->info('Starting. The requests can take 5-30 seconds.');
 
-        $client_id = ConfigService::$videoSync['vimeo']['drumeo']['client_id'];
-        $client_secret = ConfigService::$videoSync['vimeo']['drumeo']['client_secret'];
-        $access_token = ConfigService::$videoSync['vimeo']['drumeo']['access_token'];
+        $client_id = ConfigService::$videoSync['vimeo'][ConfigService::$brand]['client_id'];
+        $client_secret = ConfigService::$videoSync['vimeo'][ConfigService::$brand]['client_secret'];
+        $access_token = ConfigService::$videoSync['vimeo'][ConfigService::$brand]['access_token'];
         $this->lib = new Vimeo($client_id, $client_secret);
         $this->lib->setToken($access_token);
 
         // how many videos to get
         $amountRequested = $this->argument('totalNumberToProcess');
-        if(empty($amountRequested)) {
+        if (empty($amountRequested)) {
             $amountRequested = $this->ask('how many of the latest do you want to get?', 'all');
         }
 
-        if($amountRequested === 'all'){
+        if ($amountRequested === 'all') {
             $this->totalNumberToProcess = null;
             $this->info('This\'ll take a while.');
             // If they request all, we don't yet set $this->totalNumberOfPagesToProcess. We have...
             // to wait until the first request returns how many there are available to process.
-        }else{
-            if(!is_numeric($amountRequested)){
+        } else {
+            if (!is_numeric($amountRequested)) {
                 $this->info(
                     'ERROR: Non-numeric value (other than allowed string \'all\' passed to ' .
                     '$this->totalNumberToProcess.'
@@ -74,10 +73,10 @@ class CreateVimeoVideoContentRecords extends Command
                 die();
             }
             $this->totalNumberToProcess = $amountRequested;
-            $this->totalNumberOfPagesToProcess = ceil( $this->totalNumberToProcess / $this->perPage);
+            $this->totalNumberOfPagesToProcess = ceil($this->totalNumberToProcess / $this->perPage);
 
             // If we can get it all done in one page request, there's no point requesting more than needed.
-            if($this->totalNumberToProcess <= $this->perPage){
+            if ($this->totalNumberToProcess <= $this->perPage) {
                 $this->totalNumberOfPagesToProcess = 1;
                 $this->perPage = $this->totalNumberToProcess;
             }
@@ -90,22 +89,27 @@ class CreateVimeoVideoContentRecords extends Command
             // Get and parse videos
             $response = $this->getVideos();
             $videos = $response['body']['data'];
-            if(!empty($videos)){
+            if (!empty($videos)) {
                 foreach ($videos as $video) {
                     $uri = $video['uri'];
                     $id = str_replace('/videos/', '', $uri);
                     $duration = $video['duration'];
                     // validate
                     if (!is_numeric($id)) {
-                        $this->info('URI "' . $uri . '" failed to convert to a numeric video id. (used: "$id = ' .
-                            'str_replace(\'/videos/\', \'\', $uri);"');
+                        $this->info(
+                            'URI "' . $uri . '" failed to convert to a numeric video id. (used: "$id = ' .
+                            'str_replace(\'/videos/\', \'\', $uri);"'
+                        );
                     }
                     // create if needed
-                    $noRecordOfVideoInCMS = empty($this->contentService->getBySlugAndType(
-                        'vimeo-video-' . $id, 'vimeo-video'
-                    ));
+                    $noRecordOfVideoInCMS = empty(
+                    $this->contentService->getBySlugAndType(
+                        'vimeo-video-' . $id,
+                        'vimeo-video'
+                    )
+                    );
 
-                    if($noRecordOfVideoInCMS && $duration !== 0 && is_numeric($duration) ){
+                    if ($noRecordOfVideoInCMS && $duration !== 0 && is_numeric($duration)) {
                         // store and add to array for mass insert
                         $content = $this->contentService->create(
                             'vimeo-video-' . $id,
@@ -118,7 +122,7 @@ class CreateVimeoVideoContentRecords extends Command
                         );
                         if (empty($content)) {
                             $contentCreationFailed[] = $id;
-                        }else{
+                        } else {
                             $contentCreatedCount++;
                             $contentFieldsInsertData[] = [
                                 'content_id' => $content['id'],
@@ -135,18 +139,22 @@ class CreateVimeoVideoContentRecords extends Command
                                 'position' => 1
                             ];
                         }
-                    }else{
-                        if($duration === 0){
+                    } else {
+                        if ($duration === 0) {
                             $this->info(
                                 'Duration ' .
                                 // '("print_r($duration, true)" returned: `' . print_r($duration, true) . '`) ' .
-                                'for video ' . $id . ' is zero and thus video not added.'
+                                'for video ' .
+                                $id .
+                                ' is zero and thus video not added.'
                             );
-                        }elseif(!is_numeric($duration)){
+                        } elseif (!is_numeric($duration)) {
                             $this->info(
                                 'Duration ' .
                                 // '("print_r($duration, true)" returned: `' . print_r($duration, true) . '`) ' .
-                                'for video ' . $id . ' is not numeric and thus video not added.'
+                                'for video ' .
+                                $id .
+                                ' is not numeric and thus video not added.'
                             );
                         }
                     }
@@ -155,42 +163,47 @@ class CreateVimeoVideoContentRecords extends Command
             }
 
             // set values now that we have them
-            if(is_null($this->total)){ // if not yet set, then this if the first iteration
+            if (is_null($this->total)) { // if not yet set, then this if the first iteration
                 $this->total = $response['body']['total'];
-                if($this->totalNumberToProcess > $this->total){
+                if ($this->totalNumberToProcess > $this->total) {
                     $this->info(
-                        'You\'ve requested that we process ' . $this->totalNumberToProcess .
-                        ' videos but there are only ' . $this->total . ' available to process for this user. Thus, ' .
+                        'You\'ve requested that we process ' .
+                        $this->totalNumberToProcess .
+                        ' videos but there are only ' .
+                        $this->total .
+                        ' available to process for this user. Thus, ' .
                         'we\'ll do the sensible thing here.'
                     );
                     $this->totalNumberToProcess = $this->total;
                 }
-                if(is_null($this->numberOnLastPage)){
+                if (is_null($this->numberOnLastPage)) {
                     $this->numberOnLastPage = $this->totalNumberToProcess % $this->perPage;
                 }
-                $this->totalNumberOfPagesToProcess = ceil( $this->totalNumberToProcess / $this->perPage);
+                $this->totalNumberOfPagesToProcess = ceil($this->totalNumberToProcess / $this->perPage);
             }
 
             // content-field data insert and assess DB-writing success
-            $contentFieldsWriteSuccess = $this->databaseManager->connection(ConfigService::$databaseConnectionName)
+            $contentFieldsWriteSuccess = $this->databaseManager->connection(
+                ConfigService::$databaseConnectionName
+            )
                 ->table(ConfigService::$tableContentFields)->insert($contentFieldsInsertData);
-            if($contentFieldsWriteSuccess && empty($contentCreationFailed)){
+            if ($contentFieldsWriteSuccess && empty($contentCreationFailed)) {
                 $this->info(
                     'Processed ' . count($videos) . ' videos. ' .
                     (count($contentFieldsInsertData) + $contentCreatedCount) . ' DB rows created.'
                 );
-            }else{
-                if(!empty($contentCreationFailed)){
+            } else {
+                if (!empty($contentCreationFailed)) {
                     $this->info(
                         'There was|were ' . count($contentCreationFailed) . ' content creation failure(s):'
                     );
-                    $this->info(print_r($contentCreationFailed,true));
+                    $this->info(print_r($contentCreationFailed, true));
                 }
-                if(!$contentFieldsWriteSuccess){
+                if (!$contentFieldsWriteSuccess) {
                     $this->info("contentFields write failed");
                 }
             }
-        } while ( $this->amountProcessed < $this->totalNumberToProcess );
+        } while ($this->amountProcessed < $this->totalNumberToProcess);
 
         $this->info('CreateVimeoVideoContentRecords complete.');
     }
@@ -198,12 +211,16 @@ class CreateVimeoVideoContentRecords extends Command
     private function getVideos()
     {
         $response = null;
-        do{
-            try{
+        do {
+            try {
                 $totalNumberRemainingToProcess = $this->totalNumberToProcess - $this->amountProcessed;
                 $lastPage = $totalNumberRemainingToProcess < $this->perPage;
                 $this->info(
-                    'Requesting page ' . $this->pageToGet() . ' of ' . $this->totalNumberOfPagesToProcess . '.'
+                    'Requesting page ' .
+                    $this->pageToGet() .
+                    ' of ' .
+                    $this->totalNumberOfPagesToProcess .
+                    '.'
                 );
                 $response = $this->lib->request( // developer.vimeo.com/api/endpoints/videos#GET/users/{user_id}/videos
                     '/me/videos',
@@ -215,17 +232,19 @@ class CreateVimeoVideoContentRecords extends Command
                     ],
                     'GET'
                 );
-                if($lastPage){
+                if ($lastPage) {
                     $response['body']['data'] = array_slice(
-                        $response['body']['data'], 0, $totalNumberRemainingToProcess
+                        $response['body']['data'],
+                        0,
+                        $totalNumberRemainingToProcess
                     ); // Note that we're getting the videos by date in descending order.
                 }
                 $success = true;
-            } catch (VimeoRequestException $e){
+            } catch (VimeoRequestException $e) {
                 $success = false;
                 $this->info('Oops, timed-out. Trying page ' . $this->totalNumberToProcess . ' again.');
             }
-            if($success){
+            if ($success) {
                 $this->info(
                     'Success. Now processing ' . count($response['body']['data']) . ' videos in this batch.'
                 );

@@ -5,13 +5,28 @@ namespace Railroad\Railcontent\Repositories;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Railroad\Railcontent\Helpers\ContentHelper;
+use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Repositories\QueryBuilders\FullTextSearchQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 
 class FullTextSearchRepository extends RepositoryBase
 {
     use RefreshDatabase;
+
+    /**
+     * @var ContentRepository
+     */
     private $contentRepository;
+
+    /**
+     * @var ContentFieldRepository
+     */
+    private $fieldRepository;
+
+    /**
+     * @var ContentDatumRepository
+     */
+    private $datumRepository;
 
     /**
      * ContentRepository constructor.
@@ -20,11 +35,15 @@ class FullTextSearchRepository extends RepositoryBase
      * @param DatabaseManager $databaseManager
      */
     public function __construct(
-        ContentRepository $contentRepository
+        ContentRepository $contentRepository,
+        ContentFieldRepository $fieldRepository,
+        ContentDatumRepository $datumRepository
     ) {
         parent::__construct();
 
         $this->contentRepository = $contentRepository;
+        $this->fieldRepository = $fieldRepository;
+        $this->datumRepository = $datumRepository;
     }
 
     /**
@@ -40,32 +59,63 @@ class FullTextSearchRepository extends RepositoryBase
             ->from(ConfigService::$tableSearchIndexes);
     }
 
-    public function createSearchIndexes($contents)
+    /**
+     * @return ContentQueryBuilder
+     */
+    protected function contentQuery()
     {
-        $searchInsertData = [];
+        return (new ContentQueryBuilder(
+            $this->connection(),
+            $this->connection()->getQueryGrammar(),
+            $this->connection()->getPostProcessor()
+        ))
+            ->from(ConfigService::$tableContent);
+    }
 
+    public function createSearchIndexes()
+    {
         //delete old indexes
         $this->deleteOldIndexes();
 
-        $searchIndexValues = ConfigService::$searchIndexValues;
+        $query = $this->contentQuery()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->restrictByTypes(ConfigService::$searchableContentTypes)
+            ->orderBy('id');
 
-        //insert new indexes in the DB
-        foreach ($contents as $content) {
-            $searchInsertData = [
-                'content_id' => $content['id'],
-                'high_value' => $this->prepareIndexesValues($searchIndexValues['high_value'], $content),
-                'medium_value' => $this->prepareIndexesValues($searchIndexValues['medium_value'], $content),
-                'low_value' => $this->prepareIndexesValues($searchIndexValues['low_value'], $content),
-                'brand' => ConfigService::$brand,
-                'content_type' => $content['type'],
-                'content_status' => $content['status'],
-                'content_published_on' => $content['published_on'],
-                'created_at' => Carbon::now()->toDateTimeString()
-            ];
+        $query->chunk(
+            100,
+            function ($query) {
+                $contentFieldRows = $this->fieldRepository->getByContentIds($query->pluck('id')->toArray());
+                $contentDatumRows = $this->datumRepository->getByContentIds($query->pluck('id')->toArray());
 
-            $this->create($searchInsertData);
-        }
+                $fieldRowsGrouped = ContentHelper::groupArrayBy($contentFieldRows, 'content_id');
+                $datumRowsGrouped = ContentHelper::groupArrayBy($contentDatumRows, 'content_id');
 
+                //insert new indexes in the DB
+                foreach ($query as $content) {
+                    $content['fields'] = $fieldRowsGrouped[$content['id']] ?? [];
+                    $content['data'] = $datumRowsGrouped[$content['id']] ?? [];
+
+                    $searchInsertData = [
+                        'high_value' => $this->prepareIndexesValues('high_value', $content),
+                        'medium_value' => $this->prepareIndexesValues('medium_value', $content),
+                        'low_value' => $this->prepareIndexesValues('low_value', $content),
+                        'brand' => $content['brand'],
+                        'content_type' => $content['type'],
+                        'content_status' => $content['status'],
+                        'content_published_on' => $content['published_on'],
+                        'created_at' => Carbon::now()->toDateTimeString()
+                    ];
+
+                    $this->updateOrCreate(
+                        ['content_id' => $content['id'],],
+                        $searchInsertData,
+                        'content_id'
+                    );
+                }
+            }
+        );
     }
 
     /** Delete old indexes for the brand
@@ -79,12 +129,14 @@ class FullTextSearchRepository extends RepositoryBase
 
     /** Prepare search indexes based on config settings
      *
-     * @param array $configSearchIndexValues
+     * @param string $type
      * @param array $content
      * @return string
      */
-    private function prepareIndexesValues($configSearchIndexValues, $content)
+    private function prepareIndexesValues($type, $content)
     {
+        $searchIndexValues = ConfigService::$searchIndexValues;
+        $configSearchIndexValues = $searchIndexValues[$type];
         $values = [];
 
         foreach ($configSearchIndexValues['content_attributes'] as $contentAttribute) {
@@ -185,8 +237,12 @@ class FullTextSearchRepository extends RepositoryBase
      * @param null $contentType
      * @return int
      */
-    public function countTotalResults($term, $contentType = null, $contentStatus = null, $dateTimeCutoff = null)
-    {
+    public function countTotalResults(
+        $term,
+        $contentType = null,
+        $contentStatus = null,
+        $dateTimeCutoff = null
+    ) {
         $query = $this->query()
             ->selectColumns($term)
             ->restrictByTerm($term)

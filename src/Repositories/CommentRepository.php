@@ -279,4 +279,24 @@ class CommentRepository extends RepositoryBase
     {
         return $this::$softDelete;
     }
+
+    /** Count the comments created after the createdOn date
+     * @param string $createdOn
+     * @return int
+     */
+    public function countLatestComments($createdOn)
+    {
+        $query = $this->query()
+            ->selectColumns()
+            ->restrictByBrand()
+            ->restrictByType()
+            ->restrictByContentId()
+            ->restrictByUser()
+            ->restrictByVisibility()
+            ->restrictByAssignedUserId()
+            ->restrictByCreationDate($createdOn)
+            ->onlyComments();
+
+        return $query->count();
+    }
 }

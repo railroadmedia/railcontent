@@ -94,8 +94,8 @@ class CommentQueryBuilder extends QueryBuilder
     public function restrictByBrand()
     {
         $this->leftJoin(
-            ConfigService::$tableContent .' as content',
-             'content.id',
+            ConfigService::$tableContent . ' as content',
+            'content.id',
             '=',
             ConfigService::$tableComments . '.content_id'
         )
@@ -165,6 +165,18 @@ class CommentQueryBuilder extends QueryBuilder
         if ($commentId) {
             $this->where(ConfigService::$tableCommentsAssignment . '.comment_id', $commentId);
         }
+
+        return $this;
+    }
+
+    /** Restrict comments by creation date, will return the comments created after the param creationDate
+     *
+     * @param string $creationDate
+     * @return $this
+     */
+    public function restrictByCreationDate($creationDate)
+    {
+        $this->where(ConfigService::$tableComments . '.created_on', '>=', $creationDate);
 
         return $this;
     }
