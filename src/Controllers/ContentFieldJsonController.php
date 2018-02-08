@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentFieldCreateRequest;
+use Railroad\Railcontent\Requests\ContentFieldDeleteRequest;
 use Railroad\Railcontent\Requests\ContentFieldUpdateRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ContentFieldService;
@@ -97,8 +98,13 @@ class ContentFieldJsonController extends Controller
      * @param integer $fieldId
      * @param Request $request
      * @return \Railroad\Railcontent\Responses\JsonResponse
+     *
+     * Hmm... we're not actually using that request in here, but including it triggers the prepending validation, so
+     * maybe it needs to be there for that?
+     *
+     * Jonathan, February 2018
      */
-    public function delete(Request $request, $fieldId)
+    public function delete(ContentFieldDeleteRequest $request, $fieldId)
     {
         $deleted = $this->fieldService->delete($fieldId);
 
