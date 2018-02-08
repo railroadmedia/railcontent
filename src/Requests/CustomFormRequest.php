@@ -199,14 +199,13 @@ class CustomFormRequest extends FormRequest
         $contentValidationRequired = null; $rulesForBrand = null; $content = null; $counts = []; $cannotHaveMultiple = [];
         $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
         if ($contentValidationRequired) {
-            $rulesForContentType = $rulesForBrand[$content['type']];
-            if (isset($rulesForContentType['number_of_children'])) {
+            if (isset($rulesForBrand[$content['type']]['number_of_children'])) {
                 $value = $this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']] ?? 0;
-                $rule = $rulesForContentType['number_of_children'];
-                $this->validateRule( $value, $rule, 'number_of_children', 1);
+                $rule = $rulesForBrand[$content['type']]['number_of_children'];
+                $this->validateRule($value, $rule, 'number_of_children', 1);
             }
             foreach ($content as $propertyName => $contentPropertySet) {
-                foreach ($rulesForContentType as $rulesPropertyKey => $rules) {
+                foreach ($rulesForBrand[$content['type']] as $rulesPropertyKey => $rules) {
                     if ($rulesPropertyKey !== 'number_of_children') {
                         foreach ($rules as $criteriaKey => $criteria) {
                             if ($propertyName === $rulesPropertyKey && !empty($criteria)) { // matches field & datum segments
