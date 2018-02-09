@@ -222,9 +222,11 @@ class CustomFormRequest extends FormRequest
                                     if ($key === $criteriaKey) {
                                         $position = $contentProperty['position'] ?? null;
                                         $this->validateRule( $value, $criteria['rules'], $key, $position );
-                                        if(!$criteria['can_have_multiple']){
-                                            $cannotHaveMultiple[] = $key;
-                                            $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
+                                        if(array_key_exists('can_have_multiple', $criteria)){
+                                            if($criteria['can_have_multiple']){
+                                                $cannotHaveMultiple[] = $key;
+                                                $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
+                                            }
                                         }
                                     }
                                 }
