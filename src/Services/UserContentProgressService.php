@@ -241,7 +241,21 @@ class UserContentProgressService
      */
     public function bubbleProgress($userId, $contentId)
     {
-        $content = $this->attachProgressToContents($userId, $this->contentRepository->getById($contentId));
+        if(empty($contentId)){ // TEMPORARY - REMOVE AT ANY POINT PAST MARCH 2018
+            error_log('bubbleProgress has empty contentId. Value: ' . print_r(
+                    $contentId, true
+                ) . '... for userId: ' . $userId);
+        }
+
+        $content = $this->contentRepository->getById($contentId);
+
+        if(empty($content)){ // TEMPORARY - REMOVE AT ANY POINT PAST MARCH 2018
+            error_log('bubbleProgress has empty content. Value: ' . print_r(
+                    $content, true
+                ) . '... for userId: ' . $userId);
+        }
+
+        $content = $this->attachProgressToContents($userId, $content);
 
         $allowedTypesForStarted = config('railcontent.allowed_types_for_bubble_progress')['started'];
         $allowedTypesForCompleted = config('railcontent.allowed_types_for_bubble_progress')['completed'];
