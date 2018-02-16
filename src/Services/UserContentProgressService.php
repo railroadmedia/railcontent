@@ -241,18 +241,12 @@ class UserContentProgressService
      */
     public function bubbleProgress($userId, $contentId)
     {
-        if(empty($contentId)){ // TEMPORARY - REMOVE AT ANY POINT PAST MARCH 2018
-            error_log('bubbleProgress has empty contentId. Value: ' . print_r(
-                    $contentId, true
-                ) . '... for userId: ' . $userId);
-        }
-
         $content = $this->contentRepository->getById($contentId);
 
         if(empty($content)){ // TEMPORARY - REMOVE AT ANY POINT PAST MARCH 2018
-            error_log('bubbleProgress has empty content. Value: ' . print_r(
-                    $content, true
-                ) . '... for userId: ' . $userId);
+            error_log('bubbleProgress failed to retrieve content for contentId: ' . $contentId .
+                ' for userId: ' . $userId . '. fin.');
+            return true;
         }
 
         $content = $this->attachProgressToContents($userId, $content);
