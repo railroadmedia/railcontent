@@ -355,7 +355,9 @@ class ContentRepository extends RepositoryBase
      * @param $userId
      * @param $state
      */
-    public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit, $skip)
+    public function getPaginatedByTypeUserProgressState(
+        $type, $userId, $state, $limit, $skip, $orderCol = null, $direction = null, $orderTable = null
+    )
     {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
@@ -369,7 +371,7 @@ class ContentRepository extends RepositoryBase
             ->where(ConfigService::$tableContent . '.type', $type)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
-            ->orderBy('published_on', 'desc')
+            ->orderBy($orderCol ?? 'published_on', $direction ?? 'desc', $orderTable)
             ->limit($limit)
             ->skip($skip)
             ->getToArray();

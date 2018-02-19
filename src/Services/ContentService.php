@@ -284,16 +284,23 @@ class ContentService
      * @param $state
      * @param int $limit
      * @param int $skip
+     * @param string $orderByCol
+     * @param string $orderByDir
      * @return array
      */
-    public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit = 25, $skip = 0)
+    public function getPaginatedByTypeUserProgressState(
+        $type, $userId, $state, $limit = 25, $skip = 0, $orderCol = null, $direction = null, $orderTable = null
+    )
     {
         return $this->contentRepository->getPaginatedByTypeUserProgressState(
             $type,
             $userId,
             $state,
             $limit,
-            $skip
+            $skip,
+            $orderCol,
+            $direction,
+            $orderTable
         );
     }
 
