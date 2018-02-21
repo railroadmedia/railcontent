@@ -59,49 +59,14 @@ class CreateYoutubeVideoContentRecords extends Command
      */
     public function handle()
     {
-        putenv('GOOGLE_APPLICATION_CREDENTIALS='.ConfigService::$videoSync['youtube']['google_credentials_json_path']);
-
         $client = new Google_Client();
         $client->setDeveloperKey(ConfigService::$videoSync['youtube']['key']);
         $client->setScopes($this->scope);
 
-        $client->useApplicationDefaultCredentials();
-
         $youtube = new \Google_Service_YouTube($client);
 
-        $broadcastNextPageToken = '';
         $shouldEnd = 0;
         $items = [];
-
-            do {
-            $liveBroadcasts = ($youtube->liveBroadcasts->listLiveBroadcasts('id, snippet, contentDetails', [
-                'broadcastStatus' => 'completed',
-                    'maxResults' => 50,
-                'pageToken' => $broadcastNextPageToken
-            ]));
-
-            foreach ($liveBroadcasts['items'] as $broadcastItem) {
-                //get live broadcast details
-                    $videoParams = array(
-                    'id' => $broadcastItem['snippet']['resourceId']['videoId'],
-                        'fields' => "items(contentDetails(duration))"
-                    );
-                    $videoDetails = $youtube->videos->listVideos("contentDetails", $videoParams);
-
-                    $videoDetail = $videoDetails->getItems();
-                    $video = [
-                    'videoId' => $broadcastItem['snippet']['resourceId']['videoId'],
-                        'duration' => $this->covtime($videoDetail[0]->getContentDetails()->getDuration())
-                    ];
-                    array_push($items, $video);
-                }
-
-            $nextPageToken = $liveBroadcasts->getNextPageToken();
-
-                if (is_null($nextPageToken)) {
-                    $shouldEnd = 1;
-                }
-            } while ($shouldEnd == 0);
 
         //get the channels list for youtube user
         $channelsResponse = $youtube->channels->listChannels('contentDetails', array(
