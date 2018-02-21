@@ -20,7 +20,7 @@ class AddCreatedOnToContentHierarchy extends Migration
                  * @var $table \Illuminate\Database\Schema\Blueprint
                  */
 
-                $table->dateTime('created_on')->after('child_position')->index();
+                $table->dateTime('created_on')->nullable()->after('child_position')->index();
             }
         );
     }
