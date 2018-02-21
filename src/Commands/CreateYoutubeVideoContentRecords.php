@@ -65,26 +65,35 @@ class CreateYoutubeVideoContentRecords extends Command
 
         $youtube = new \Google_Service_YouTube($client);
 
+        $shouldEnd = 0;
+        $maxPages = 5;
         $items = [];
 
         //get the channels list for youtube user
-        $channelsResponse = $youtube->channels->listChannels('contentDetails', array(
-            'forUsername' => ConfigService::$videoSync['youtube'][ConfigService::$brand]['user'],
-            'maxResults' => 50
-        ));
+        $channelsResponse = $youtube->channels->listChannels(
+            'contentDetails',
+            array(
+                'forUsername' => ConfigService::$videoSync['youtube'][ConfigService::$brand]['user'],
+                'maxResults' => 50
+            )
+        );
 
         //for each channel get the videos from the channel playlists
         foreach ($channelsResponse['items'] as $channel) {
             $uploadsListId = $channel['contentDetails']['relatedPlaylists']['uploads'];
             $nextPageToken = '';
             $shouldEnd = 0;
+            $page = 1;
             //only 50 video can be received in a call to Youtube API, so we make calls until complete
             do {
-                $playlistItemsResponse = $youtube->playlistItems->listPlaylistItems('id,snippet,contentDetails', array(
-                    'playlistId' => $uploadsListId,
-                    'maxResults' => 50,
-                    'pageToken' => $nextPageToken
-                ));
+                $playlistItemsResponse = $youtube->playlistItems->listPlaylistItems(
+                    'id,snippet,contentDetails',
+                    array(
+                        'playlistId' => $uploadsListId,
+                        'maxResults' => 50,
+                        'pageToken' => $nextPageToken
+                    )
+                );
 
                 foreach ($playlistItemsResponse['items'] as $playlistItem) {
                     //get video details
@@ -103,8 +112,9 @@ class CreateYoutubeVideoContentRecords extends Command
                 }
                 $nextPageToken = $playlistItemsResponse->getNextPageToken();
 
-                if (is_null($nextPageToken)) {
+                if (is_null($nextPageToken) || $page == $maxPages) {
                     $shouldEnd = 1;
+                    $page++;
                 }
             } while ($shouldEnd == 0);
         }
@@ -112,11 +122,15 @@ class CreateYoutubeVideoContentRecords extends Command
         $contentCreatedCount = 0;
         $contentFieldsInsertData = [];
         $contentCreationFailed = [];
+
         foreach ($items as $video) {
             // create if needed
-            $noRecordOfVideoInCMS = empty($this->contentService->getBySlugAndType(
-                'youtube-video-' . $video['videoId'], 'youtube-video'
-            ));
+            $noRecordOfVideoInCMS = empty(
+            $this->contentService->getBySlugAndType(
+                'youtube-video-' . $video['videoId'],
+                'youtube-video'
+            )
+            );
 
             if ($noRecordOfVideoInCMS && $video['duration'] !== 0 && is_numeric($video['duration'])) {
                 // store a new content
@@ -168,11 +182,11 @@ class CreateYoutubeVideoContentRecords extends Command
             (count($contentFieldsInsertData) + $contentCreatedCount) . ' DB rows created.'
         );
 
-        if(!empty($contentCreationFailed)){
+        if (!empty($contentCreationFailed)) {
             $this->info(
                 'There was|were ' . count($contentCreationFailed) . ' content creation failure(s):'
             );
-            $this->info(print_r($contentCreationFailed,true));
+            $this->info(print_r($contentCreationFailed, true));
         }
 
         $this->info('CreateYoutubeVideoContentRecords complete.');
