@@ -18,11 +18,37 @@ class ContentFieldRepository extends RepositoryBase
         return $this->connection()->table(ConfigService::$tableContentFields);
     }
 
+    /**
+     * @param integer $contentId
+     * @return array
+     */
+    public function getByContentId($contentId)
+    {
+        return $this->query()
+            ->where('content_id', $contentId)
+            ->orderBy('position', 'asc')
+            ->get()
+            ->toArray();
+    }
+
+    /**
+     * @param array $contentIds
+     * @return array
+     */
+    public function getByContentIds(array $contentIds)
+    {
+        return $this->query()
+            ->whereIn('content_id', $contentIds)
+            ->orderBy('position', 'asc')
+            ->get()
+            ->toArray();
+    }
+
     public function attachLinkedContents(array $fieldRows)
     {
         $contentIdsToGrab = [];
 
-        foreach($fieldRows as $fieldRow) {
+        foreach ($fieldRows as $fieldRow) {
             if ($fieldRow['type'] === 'content_id') {
                 $contentIdsToGrab[] = $fieldRow['valye'];
             }
@@ -45,7 +71,9 @@ class ContentFieldRepository extends RepositoryBase
                 ConfigService::$tableContentFields . '.content_id'
             )
             ->where([ConfigService::$tableContentFields . '.type' => 'content_id'])
-            ->whereIn(ConfigService::$tableContent . '.id', array_column($fieldRows, 'value'))
+            ->whereIn(ConfigService::$tableContent . '.id',
+                array_column($fieldRows,
+                    'value'))
             ->get()
             ->keyBy('content_id')
             ->toArray();

@@ -17,4 +17,30 @@ class ContentDatumRepository extends RepositoryBase
     {
         return $this->connection()->table(ConfigService::$tableContentData);
     }
+
+    /**
+     * @param integer $contentId
+     * @return array
+     */
+    public function getByContentId($contentId)
+    {
+        return $this->query()
+            ->where('content_id', $contentId)
+            ->orderBy('position', 'asc')
+            ->get()
+            ->toArray();
+    }
+
+    /**
+     * @param array $contentIds
+     * @return array
+     */
+    public function getByContentIds(array $contentIds)
+    {
+        return $this->query()
+            ->whereIn('content_id', $contentIds)
+            ->orderBy('position', 'asc')
+            ->get()
+            ->toArray();
+    }
 }
