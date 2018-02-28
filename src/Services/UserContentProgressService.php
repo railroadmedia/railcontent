@@ -193,6 +193,14 @@ class UserContentProgressService
      */
     public function attachProgressToContents($userId, $contentOrContents)
     {
+        if(empty($userId)){
+            error_log('$userId is empty in UserContentProgressService::attachProgressToContents. fin.');
+        }
+
+        if(empty($contentOrContents)){
+            error_log('$contentOrContents is empty in UserContentProgressService::attachProgressToContents. fin.');
+        }
+
         $isArray = !isset($contentOrContents['id']);
 
         if (!$isArray) {
