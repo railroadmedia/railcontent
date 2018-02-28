@@ -58,6 +58,7 @@ class UserContentProgressRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableUserContentProgress . '.content_id'
             )
+            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
             ->where(ConfigService::$tableContent . '.type', $contentType)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
