@@ -86,6 +86,7 @@ class UserContentProgressRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableUserContentProgress . '.content_id'
             )
+            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
             ->where(ConfigService::$tableContent . '.type', $contentType)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
@@ -158,6 +159,7 @@ class UserContentProgressRepository extends RepositoryBase
                         ->where(ConfigService::$tableContent. '.type', '=', $type);
                 }
             )
+            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', '=', $id);
 
         if(!is_null($state)){
