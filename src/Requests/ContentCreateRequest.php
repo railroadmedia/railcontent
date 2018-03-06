@@ -31,6 +31,7 @@ class ContentCreateRequest extends CustomFormRequest
                         ]
                     ),
                 'type' => 'required|max:64',
+                'sort' => 'nullable|numeric',
                 'position' => 'nullable|numeric|min:0',
                 'parent_id' => 'nullable|numeric|exists:' . ConfigService::$tableContent . ',id',
                 'published_on' => 'nullable|date'

@@ -615,6 +615,7 @@ class ContentService
      * @param int|null $userId
      * @param string|null $publishedOn
      * @param int|null $parentId
+     * @param int $sort
      * @return array
      */
     public function create(
@@ -625,13 +626,15 @@ class ContentService
         $brand,
         $userId,
         $publishedOn,
-        $parentId = null
+        $parentId = null,
+        $sort = 0
     ) {
         $id =
             $this->contentRepository->create(
                 [
                     'slug' => $slug,
                     'type' => $type,
+                    'sort' => $sort,
                     'status' => $status ?? self::STATUS_DRAFT,
                     'language' => $language ?? ConfigService::$defaultLanguage,
                     'brand' => $brand ?? ConfigService::$brand,
