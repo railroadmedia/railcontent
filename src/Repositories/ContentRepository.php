@@ -893,10 +893,17 @@ class ContentRepository extends RepositoryBase
     public function retrieveFilter()
     {
         $orderByExploded = explode(' ', $this->orderBy);
+
         $orderByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
+        $groupByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
 
         foreach ($orderByExploded as $orderByColumn) {
-            array_unshift($orderByColumns, ConfigService::$tableContent . '.' . $orderByColumn);
+            array_unshift(
+                $orderByColumns,
+                ConfigService::$tableContent . '.' . $orderByColumn . ' ' . $this->orderDirection
+            );
+
+            array_unshift($groupByColumns, ConfigService::$tableContent . '.' . $orderByColumn);
         }
 
         $subQuery = $this->query()
@@ -921,17 +928,13 @@ class ContentRepository extends RepositoryBase
                         ConfigService::$tableContent . '.id',
                         ConfigService::$tableContent . '.' . 'created_on'
                     ],
-                    $orderByColumns
+                    $groupByColumns
                 )
             );
 
 
         $query = $this->query()
-            ->orderByRaw(
-                $this->databaseManager->raw(
-                    implode(', ', $orderByColumns) . ' ' . $this->orderDirection
-                )
-            )
+            ->orderByRaw($this->databaseManager->raw(implode(', ', $orderByColumns) . ' ' . $this->orderDirection))
             ->addSubJoinToQuery($subQuery);
 
         $contentRows = $query->getToArray();
