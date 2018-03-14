@@ -196,6 +196,15 @@ class CustomFormRequest extends FormRequest
         //      - if the value we want to set is in "the states to guard", validate content (return 422 if fails)
         //  - if we *not* are writing|updating status, get the current status
         //      - if the current status is in "the states to guard", validate content (return 422 if fails)
+
+        /*
+         * Note that laravel 5.6 has a change to the `ValidatesWhenResolved` and `ValidatesWhenResolvedTrait`.
+         * This may or may not affect this functionality of this method and related functionality. Thus, be aware of
+         * this change in laravel and address if needed.
+         *
+         * Jonathan, March 2018
+         */
+
         $contentValidationRequired = null; $rulesForBrand = null; $content = null; $counts = []; $cannotHaveMultiple = [];
         $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
         if ($contentValidationRequired) {
