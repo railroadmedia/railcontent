@@ -247,9 +247,7 @@ class UserContentProgressService
     {
         $content = $this->contentRepository->getById($contentId);
 
-        if(empty($content)){ // TEMPORARY - REMOVE AT ANY POINT PAST MARCH 2018
-            error_log('bubbleProgress failed to retrieve content for contentId: ' . $contentId .
-                ' for userId: ' . $userId . '. fin.');
+        if(empty($content)){
             return true;
         }
 
