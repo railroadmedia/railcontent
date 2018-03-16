@@ -45,7 +45,8 @@ class UserContentProgressService
         ContentHierarchyService $contentHierarchyService,
         ContentRepository $contentRepository,
         ContentService $contentService
-    ) {
+    )
+    {
         $this->userContentRepository = $userContentRepository;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentRepository = $contentRepository;
@@ -95,7 +96,7 @@ class UserContentProgressService
 
         $children = $this->contentService->getByParentId($contentId);
 
-        if(!empty($children)){
+        if (!empty($children)) {
 
             /*
              * Check for children with progress_percent values that should be used in calculating the progress_percent
@@ -193,7 +194,7 @@ class UserContentProgressService
      */
     public function attachProgressToContents($userId, $contentOrContents)
     {
-        if(empty($userId) || empty($contentOrContents)){
+        if (empty($userId) || empty($contentOrContents)) {
             return $contentOrContents;
         }
 
@@ -247,9 +248,11 @@ class UserContentProgressService
     {
         $content = $this->contentRepository->getById($contentId);
 
-        if(empty($content)){ // TEMPORARY - REMOVE AT ANY POINT PAST MARCH 2018
-            error_log('bubbleProgress failed to retrieve content for contentId: ' . $contentId .
-                ' for userId: ' . $userId . '. fin.');
+        if (empty($content)) { // TEMPORARY - REMOVE AT ANY POINT PAST MARCH 2018
+            error_log(
+                'bubbleProgress failed to retrieve content for contentId: ' . $contentId .
+                ' for userId: ' . $userId . '. fin.'
+            );
             return true;
         }
 
@@ -306,7 +309,7 @@ class UserContentProgressService
             $alreadyStarted = $parent[self::STATE_STARTED];
             $typeAllows = in_array($parent['type'], $allowedTypesForStarted);
 
-            if($alreadyStarted || $typeAllows){
+            if ($alreadyStarted || $typeAllows) {
                 $this->saveContentProgress(
                     $parent['id'],
                     $this->getProgressPercentage($userId, $siblings),
@@ -325,7 +328,7 @@ class UserContentProgressService
 
         $progressOfSiblings = array_column($siblings, 'user_progress');
 
-        if(empty($progressOfSiblings)){
+        if (empty($progressOfSiblings)) {
             $siblings = $this->attachProgressToContents(
                 $userId,
                 $siblings
@@ -360,11 +363,25 @@ class UserContentProgressService
         return $this->userContentRepository->getForUser($id);
     }
 
-    public function getLessonsForUserByType($id, $type, $state = null){
+    /**
+     * @param $id
+     * @param array $types
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @return array
+     */
+    public function getForUserContentTypes($id, array $types, $orderByColumn = 'updated_on', $orderByDirection = 'desc')
+    {
+        return $this->userContentRepository->getForUserContentTypes($id, $types, $orderByColumn, $orderByDirection);
+    }
+
+    public function getLessonsForUserByType($id, $type, $state = null)
+    {
         return $this->userContentRepository->getLessonsForUserByType($id, $type, $state);
     }
 
-    public function countLessonsForUserByTypeAndProgressState($id, $type, $state){
+    public function countLessonsForUserByTypeAndProgressState($id, $type, $state)
+    {
         return $this->userContentRepository->getLessonsForUserByType($id, $type, $state, true);
     }
 }
