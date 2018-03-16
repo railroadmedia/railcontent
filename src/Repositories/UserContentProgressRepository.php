@@ -137,6 +137,7 @@ class UserContentProgressRepository extends RepositoryBase
             )
             ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $id)
+            ->limit(100)
             ->get()
             ->toArray();
     }
@@ -144,12 +145,20 @@ class UserContentProgressRepository extends RepositoryBase
     /**
      * @param $id
      * @param array $types
+     * @param string $state
      * @param string $orderByColumn
      * @param string $orderByDirection
+     * @param int $limit
      * @return array
      */
-    public function getForUserContentTypes($id, array $types, $orderByColumn = 'updated_on', $orderByDirection = 'desc')
-    {
+    public function getForUserStateContentTypes(
+        $id,
+        array $types,
+        $state,
+        $orderByColumn = 'updated_on',
+        $orderByDirection = 'desc',
+        $limit = 25
+    ) {
         return $this->query()
             ->join(
                 ConfigService::$tableContent,
@@ -164,8 +173,10 @@ class UserContentProgressRepository extends RepositoryBase
                 }
             )
             ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
+            ->where(ConfigService::$tableUserContentProgress . '.state', '=', $state)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $id)
             ->orderBy($orderByColumn, $orderByDirection)
+            ->limit($limit)
             ->get()
             ->toArray();
     }

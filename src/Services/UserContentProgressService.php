@@ -366,13 +366,28 @@ class UserContentProgressService
     /**
      * @param $id
      * @param array $types
+     * @param string $state
      * @param string $orderByColumn
      * @param string $orderByDirection
+     * @param int $limit
      * @return array
      */
-    public function getForUserContentTypes($id, array $types, $orderByColumn = 'updated_on', $orderByDirection = 'desc')
+    public function getForUserStateContentTypes(
+        $id,
+        array $types,
+        $state,
+        $orderByColumn = 'updated_on',
+        $orderByDirection = 'desc',
+        $limit = 25)
     {
-        return $this->userContentRepository->getForUserContentTypes($id, $types, $orderByColumn, $orderByDirection);
+        return $this->userContentRepository->getForUserStateContentTypes(
+            $id,
+            $types,
+            $state,
+            $orderByColumn,
+            $orderByDirection,
+            $limit
+        );
     }
 
     public function getLessonsForUserByType($id, $type, $state = null)
