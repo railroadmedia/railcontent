@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests;
 
 use Carbon\Carbon;
+use Dotenv\Dotenv;
 use Exception;
 use Faker\Generator;
 use Illuminate\Auth\AuthManager;
@@ -264,12 +265,10 @@ class RailcontentTestCase extends BaseTestCase
 
     // -------------------- used by RemoteStorage Service & Controller tests --------------------
 
-    /**
-     * @param string $dir
-     */
-    protected function awsConfigInitForTesting($dir = '/')
+    protected function awsConfigInitForTesting()
     {
-        include __DIR__ . '../../.env.testing';
+        $dotenv = new Dotenv(__DIR__ . '../../', '.env.testing');
+        $dotenv->load();
 
         if (empty(env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'))) {
             $this->fail(

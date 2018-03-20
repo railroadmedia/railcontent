@@ -85,11 +85,13 @@ class CacheHelper
         self::setPrefix();
 
         if (Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore) {
-            $keys = Cache::store(ConfigService::$cacheDriver)->connection()->smembers(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key);
-            return array_map(function ($val) {
-                return Cache::store(ConfigService::$cacheDriver)->getPrefix() . $val;
-            }, $keys);
+            $keys = Cache::store(ConfigService::$cacheDriver)
+                ->connection()
+                ->smembers(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key);
+
+            return $keys;
         }
+
         return null;
     }
 
@@ -101,11 +103,8 @@ class CacheHelper
     public static function deleteCache($key)
     {
         self::setPrefix();
-        $keys = self::getListElement($key);
 
-        if (!$keys) {
-            return Cache::flush();
-        }
+        $keys = self::getListElement($key);
 
         self::deleteCacheKeys($keys);
 
@@ -132,9 +131,8 @@ class CacheHelper
      */
     public static function deleteCacheKeys(array $keys)
     {
-
         foreach ($keys as $key) {
-            Cache::store(ConfigService::$cacheDriver)->flush($key);
+            Cache::store(ConfigService::$cacheDriver)->forget($key);
         }
 
         return true;
