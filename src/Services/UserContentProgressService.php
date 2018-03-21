@@ -46,7 +46,8 @@ class UserContentProgressService
         ContentHierarchyService $contentHierarchyService,
         ContentRepository $contentRepository,
         ContentService $contentService
-    ) {
+    )
+    {
         $this->userContentRepository = $userContentRepository;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentRepository = $contentRepository;
@@ -96,7 +97,7 @@ class UserContentProgressService
 
         $children = $this->contentService->getByParentId($contentId);
 
-        if(!empty($children)){
+        if (!empty($children)) {
 
             /*
              * Check for children with progress_percent values that should be used in calculating the progress_percent
@@ -225,6 +226,10 @@ class UserContentProgressService
      */
     public function attachProgressToContents($userId, $contentOrContents)
     {
+        if (empty($userId) || empty($contentOrContents)) {
+            return $contentOrContents;
+        }
+
         $isArray = !isset($contentOrContents['id']);
 
         if (!$isArray) {
@@ -326,7 +331,7 @@ class UserContentProgressService
             $alreadyStarted = $parent[self::STATE_STARTED];
             $typeAllows = in_array($parent['type'], $allowedTypesForStarted);
 
-            if($alreadyStarted || $typeAllows){
+            if ($alreadyStarted || $typeAllows) {
                 $this->saveContentProgress(
                     $parent['id'],
                     $this->getProgressPercentage($userId, $siblings),
@@ -345,7 +350,7 @@ class UserContentProgressService
 
         $progressOfSiblings = array_column($siblings, 'user_progress');
 
-        if(empty($progressOfSiblings)){
+        if (empty($progressOfSiblings)) {
             $siblings = $this->attachProgressToContents(
                 $userId,
                 $siblings
@@ -380,11 +385,40 @@ class UserContentProgressService
         return $this->userContentRepository->getForUser($id);
     }
 
-    public function getLessonsForUserByType($id, $type, $state = null){
+    /**
+     * @param $id
+     * @param array $types
+     * @param string $state
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @param int $limit
+     * @return array
+     */
+    public function getForUserStateContentTypes(
+        $id,
+        array $types,
+        $state,
+        $orderByColumn = 'updated_on',
+        $orderByDirection = 'desc',
+        $limit = 25)
+    {
+        return $this->userContentRepository->getForUserStateContentTypes(
+            $id,
+            $types,
+            $state,
+            $orderByColumn,
+            $orderByDirection,
+            $limit
+        );
+    }
+
+    public function getLessonsForUserByType($id, $type, $state = null)
+    {
         return $this->userContentRepository->getLessonsForUserByType($id, $type, $state);
     }
 
-    public function countLessonsForUserByTypeAndProgressState($id, $type, $state){
+    public function countLessonsForUserByTypeAndProgressState($id, $type, $state)
+    {
         return $this->userContentRepository->getLessonsForUserByType($id, $type, $state, true);
     }
 }

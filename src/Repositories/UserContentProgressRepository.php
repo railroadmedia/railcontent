@@ -9,6 +9,13 @@ use Railroad\Railcontent\Services\ConfigService;
 class UserContentProgressRepository extends RepositoryBase
 {
     use ByContentIdTrait;
+
+
+    public function query()
+    {
+        return parent::connection()->table(ConfigService::$tableUserContentProgress);
+    }
+
     /**
      * @param $userId
      * @param array $contentIds
@@ -37,16 +44,11 @@ class UserContentProgressRepository extends RepositoryBase
             ->exists();
     }
 
-    public function query()
-    {
-        return parent::connection()->table(ConfigService::$tableUserContentProgress);
-    }
-
     /**
      * @param $contentType
      * @param $userId
      * @param $state
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|null|object
      */
     public function getMostRecentByContentTypeUserState($contentType, $userId, $state)
     {
@@ -58,6 +60,7 @@ class UserContentProgressRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableUserContentProgress . '.content_id'
             )
+            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
             ->where(ConfigService::$tableContent . '.type', $contentType)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
@@ -71,7 +74,7 @@ class UserContentProgressRepository extends RepositoryBase
      * @param $state
      * @param int $limit
      * @param int $skip
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
     public function getPaginatedByContentTypeUserState($contentType, $userId, $state, $limit = 25, $skip = 0)
     {
@@ -83,6 +86,7 @@ class UserContentProgressRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableUserContentProgress . '.content_id'
             )
+            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
             ->where(ConfigService::$tableContent . '.type', $contentType)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
@@ -120,8 +124,59 @@ class UserContentProgressRepository extends RepositoryBase
     public function getForUser($id)
     {
         return $this->query()
-            ->select()
+            ->join(
+                ConfigService::$tableContent,
+                function (JoinClause $join) {
+                    $join
+                        ->on(
+                            ConfigService::$tableContent . '.id',
+                            '=',
+                            ConfigService::$tableUserContentProgress . '.content_id'
+                        );
+                }
+            )
+            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $id)
+            ->limit(100)
+            ->get()
+            ->toArray();
+    }
+
+    /**
+     * @param $id
+     * @param array $types
+     * @param string $state
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @param int $limit
+     * @return array
+     */
+    public function getForUserStateContentTypes(
+        $id,
+        array $types,
+        $state,
+        $orderByColumn = 'updated_on',
+        $orderByDirection = 'desc',
+        $limit = 25
+    ) {
+        return $this->query()
+            ->join(
+                ConfigService::$tableContent,
+                function (JoinClause $join) use ($types) {
+                    $join
+                        ->on(
+                            ConfigService::$tableContent . '.id',
+                            '=',
+                            ConfigService::$tableUserContentProgress . '.content_id'
+                        )
+                        ->whereIn('type', $types);
+                }
+            )
+            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
+            ->where(ConfigService::$tableUserContentProgress . '.state', '=', $state)
+            ->where(ConfigService::$tableUserContentProgress . '.user_id', $id)
+            ->orderBy($orderByColumn, $orderByDirection)
+            ->limit($limit)
             ->get()
             ->toArray();
     }
@@ -137,31 +192,34 @@ class UserContentProgressRepository extends RepositoryBase
     {
         $select = '*';
 
-        if($count){
+        if ($count) {
             $select = $this->databaseManager->raw(
                 'COUNT(' . ConfigService::$tableUserContentProgress . '.id) as count'
             );
         }
 
         $query = $this->query()
-            ->select($select)->join(
+            ->select($select)
+            ->join(
                 ConfigService::$tableContent,
-                function(JoinClause $join) use ($type){
+                function (JoinClause $join) use ($type) {
                     $join
-                        ->on(ConfigService::$tableContent . '.id',
+                        ->on(
+                            ConfigService::$tableContent . '.id',
                             '=',
                             ConfigService::$tableUserContentProgress . '.content_id'
                         )
-                        ->where(ConfigService::$tableContent. '.type', '=', $type);
+                        ->where(ConfigService::$tableContent . '.type', '=', $type);
                 }
             )
+            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', '=', $id);
 
-        if(!is_null($state)){
-            $query = $query->where(ConfigService::$tableUserContentProgress . '.state', '=',  $state);
+        if (!is_null($state)) {
+            $query = $query->where(ConfigService::$tableUserContentProgress . '.state', '=', $state);
         }
 
-        if($count){
+        if ($count) {
             return $query->get()->first()['count'];
         }
 
