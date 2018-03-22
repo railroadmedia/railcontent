@@ -118,7 +118,7 @@ return [
             ],
             'guitareo' => [
                 'user' => env('YOUTUBE_USERNAME_GUITAREO','guitarlessonscom')
-            ],
+            ]
         ]
     ],
 

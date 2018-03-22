@@ -21,6 +21,7 @@ class ContentQueryBuilder extends QueryBuilder
                 ConfigService::$tableContent . '.id as id',
                 ConfigService::$tableContent . '.slug as slug',
                 ConfigService::$tableContent . '.type as type',
+                ConfigService::$tableContent . '.sort as sort',
                 ConfigService::$tableContent . '.status as status',
                 ConfigService::$tableContent . '.language as language',
                 ConfigService::$tableContent . '.brand as brand',

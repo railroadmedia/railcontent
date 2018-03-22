@@ -397,9 +397,7 @@ class ContentRepository extends RepositoryBase
      * @param $userId
      * @param $state
      */
-    public function getPaginatedByTypeUserProgressState(
-        $type, $userId, $state, $limit, $skip, $orderCol = null, $direction = null, $orderTable = null
-    )
+    public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit, $skip)
     {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
@@ -413,7 +411,7 @@ class ContentRepository extends RepositoryBase
             ->where(ConfigService::$tableContent . '.type', $type)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
-            ->orderBy($orderCol ?? 'published_on', $direction ?? 'desc', $orderTable)
+            ->orderBy('published_on', 'desc')
             ->limit($limit)
             ->skip($skip)
             ->getToArray();
@@ -823,6 +821,7 @@ class ContentRepository extends RepositoryBase
             $contents[$contentRow['id']]['id'] = $contentRow['id'];
             $contents[$contentRow['id']]['slug'] = $contentRow['slug'];
             $contents[$contentRow['id']]['type'] = $contentRow['type'];
+            $contents[$contentRow['id']]['sort'] = $contentRow['sort'];
             $contents[$contentRow['id']]['status'] = $contentRow['status'];
             $contents[$contentRow['id']]['language'] = $contentRow['language'];
             $contents[$contentRow['id']]['brand'] = $contentRow['brand'];
@@ -893,18 +892,25 @@ class ContentRepository extends RepositoryBase
      */
     public function retrieveFilter()
     {
+        $orderByExploded = explode(' ', $this->orderBy);
+
+        $orderByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
+        $groupByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
+
+        foreach ($orderByExploded as $orderByColumn) {
+            array_unshift(
+                $orderByColumns,
+                ConfigService::$tableContent . '.' . $orderByColumn . ' ' . $this->orderDirection
+            );
+
+            array_unshift($groupByColumns, ConfigService::$tableContent . '.' . $orderByColumn);
+        }
+
         $subQuery = $this->query()
             ->selectCountColumns()
             ->orderByRaw(
                 $this->databaseManager->raw(
-                    'COALESCE(' .
-                    ConfigService::$tableContent .
-                    '.' .
-                    $this->orderBy .
-                    ', ' .
-                    ConfigService::$tableContent .
-                    '.created_on) ' .
-                    $this->orderDirection
+                    implode(', ', $orderByColumns) . ' ' . $this->orderDirection
                 )
             )
             ->restrictByUserAccess()
@@ -917,24 +923,18 @@ class ContentRepository extends RepositoryBase
             ->restrictBySlugHierarchy($this->slugHierarchy)
             ->restrictByParentIds($this->requiredParentIds)
             ->groupBy(
-                ConfigService::$tableContent . '.id',
-                ConfigService::$tableContent . '.' . $this->orderBy,
-                ConfigService::$tableContent . '.' . 'created_on'
+                array_merge(
+                    [
+                        ConfigService::$tableContent . '.id',
+                        ConfigService::$tableContent . '.' . 'created_on'
+                    ],
+                    $groupByColumns
+                )
             );
 
+
         $query = $this->query()
-            ->orderByRaw(
-                $this->databaseManager->raw(
-                    'COALESCE(' .
-                    ConfigService::$tableContent .
-                    '.' .
-                    $this->orderBy .
-                    ', ' .
-                    ConfigService::$tableContent .
-                    '.created_on) ' .
-                    $this->orderDirection
-                )
-            )
+            ->orderByRaw($this->databaseManager->raw(implode(', ', $orderByColumns) . ' ' . $this->orderDirection))
             ->addSubJoinToQuery($subQuery);
 
         $contentRows = $query->getToArray();
