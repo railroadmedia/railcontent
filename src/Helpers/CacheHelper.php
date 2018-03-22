@@ -68,7 +68,7 @@ class CacheHelper
             foreach ($elements as $element) {
                 Cache::store(ConfigService::$cacheDriver)->connection()->sadd(
                     Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element,
-                    $key
+                    Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key
                 );
             }
         }
@@ -137,7 +137,7 @@ class CacheHelper
     {
         if (!empty($keys) && is_array($keys)) {
             foreach ($keys as $key) {
-                Cache::store(ConfigService::$cacheDriver)->forget($key);
+                Cache::store(ConfigService::$cacheDriver)->connection()->del($key);
             }
         }
 

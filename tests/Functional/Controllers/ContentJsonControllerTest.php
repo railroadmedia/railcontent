@@ -233,7 +233,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     'fields' => [],
                     'data' => [],
                     'permissions' => [],
-                    'child_id' => null
+                    'child_id' => null,
+                    'sort' => 0,
                 ]
         ]);
 
@@ -413,7 +414,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     'slug' => $new_slug,
                     'status' => ContentService::STATUS_PUBLISHED,
                     'type' => $content['type'],
-                    'created_on' => Carbon::now()->toDateTimeString()
+                    'created_on' => Carbon::now()->toDateTimeString(),
+                    'sort' => 0,
                 ]
             ]
         );
