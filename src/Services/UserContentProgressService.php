@@ -127,11 +127,6 @@ class UserContentProgressService
             );
         }
 
-        CacheHelper::deleteCache('content_list_' . $contentId);
-
-        //delete all the search results from cache
-        CacheHelper::deleteAllCachedSearchResults('user_progress_'.$userId.'_');
-
         event(new UserContentProgressSaved($userId, $contentId));
 
         return true;
@@ -155,15 +150,6 @@ class UserContentProgressService
                 'updated_on' => Carbon::now()->toDateTimeString(),
             ]
         );
-
-        if(is_null($contentId)){
-            error_log(print_r([
-                'method' => 'completeContent',
-                '$contentId' => $contentId,
-                '$progress' => '(not present for "completeContent" method. -Jonathan)',
-                '$userId' => $userId
-            ], true));
-        }
 
         event(new UserContentProgressSaved($userId, $contentId));
 
@@ -200,15 +186,6 @@ class UserContentProgressService
             ]
         );
 
-        if(is_null($contentId)){
-            error_log(print_r([
-                'method' => 'saveContentProgress',
-                '$contentId' => $contentId,
-                '$progress' => print_r($progress, true),
-                '$userId' => $userId
-            ], true));
-        }
-
         event(new UserContentProgressSaved($userId, $contentId));
 
         //delete all the search results from cache
@@ -225,6 +202,10 @@ class UserContentProgressService
      */
     public function attachProgressToContents($userId, $contentOrContents)
     {
+        if(empty($userId) || empty($contentOrContents)){
+            return $contentOrContents;
+        }
+
         $isArray = !isset($contentOrContents['id']);
 
         if (!$isArray) {
@@ -273,7 +254,13 @@ class UserContentProgressService
      */
     public function bubbleProgress($userId, $contentId)
     {
-        $content = $this->attachProgressToContents($userId, $this->contentRepository->getById($contentId));
+        $content = $this->contentRepository->getById($contentId);
+
+        if(empty($content)){
+            return true;
+        }
+
+        $content = $this->attachProgressToContents($userId, $content);
 
         $allowedTypesForStarted = config('railcontent.allowed_types_for_bubble_progress')['started'];
         $allowedTypesForCompleted = config('railcontent.allowed_types_for_bubble_progress')['completed'];

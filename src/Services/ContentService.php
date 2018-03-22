@@ -431,24 +431,23 @@ class ContentService
      * @param $state
      * @param int $limit
      * @param int $skip
+     * @param string $orderByCol
+     * @param string $orderByDir
      * @return array
      */
-    public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit = 25, $skip = 0)
-    {
-        $hash = 'contents_paginated_by_type_' . $type . '_and_user_progress_' . $userId . '_' . CacheHelper::getKey($type, $userId, $state, $limit, $skip);
-        $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash, $type, $userId, $state, $limit, $skip) {
-            $results = $this->contentRepository->getPaginatedByTypeUserProgressState(
-                $type,
-                $userId,
-                $state,
-                $limit,
-                $skip
-            );
-            $this->saveCacheResults($hash, array_keys($results));
-            return $results;
-        });
-
-        return $results;
+    public function getPaginatedByTypeUserProgressState(
+        $type, $userId, $state, $limit = 25, $skip = 0, $orderCol = null, $direction = null, $orderTable = null
+    ){
+        return $this->contentRepository->getPaginatedByTypeUserProgressState(
+            $type,
+            $userId,
+            $state,
+            $limit,
+            $skip,
+            $orderCol,
+            $direction,
+            $orderTable
+        );
     }
 
     /**

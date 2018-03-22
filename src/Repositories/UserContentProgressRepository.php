@@ -9,6 +9,13 @@ use Railroad\Railcontent\Services\ConfigService;
 class UserContentProgressRepository extends RepositoryBase
 {
     use ByContentIdTrait;
+
+
+    public function query()
+    {
+        return parent::connection()->table(ConfigService::$tableUserContentProgress);
+    }
+
     /**
      * @param $userId
      * @param array $contentIds
@@ -37,16 +44,11 @@ class UserContentProgressRepository extends RepositoryBase
             ->exists();
     }
 
-    public function query()
-    {
-        return parent::connection()->table(ConfigService::$tableUserContentProgress);
-    }
-
     /**
      * @param $contentType
      * @param $userId
      * @param $state
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|null|object
      */
     public function getMostRecentByContentTypeUserState($contentType, $userId, $state)
     {
@@ -58,6 +60,7 @@ class UserContentProgressRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableUserContentProgress . '.content_id'
             )
+            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
             ->where(ConfigService::$tableContent . '.type', $contentType)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
@@ -71,7 +74,7 @@ class UserContentProgressRepository extends RepositoryBase
      * @param $state
      * @param int $limit
      * @param int $skip
-     * @return array
+     * @return \Illuminate\Support\Collection
      */
     public function getPaginatedByContentTypeUserState($contentType, $userId, $state, $limit = 25, $skip = 0)
     {
@@ -83,6 +86,7 @@ class UserContentProgressRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableUserContentProgress . '.content_id'
             )
+            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
             ->where(ConfigService::$tableContent . '.type', $contentType)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
@@ -155,6 +159,7 @@ class UserContentProgressRepository extends RepositoryBase
                         ->where(ConfigService::$tableContent. '.type', '=', $type);
                 }
             )
+            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', '=', $id);
 
         if(!is_null($state)){
