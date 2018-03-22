@@ -66,7 +66,10 @@ class CacheHelper
         self::setPrefix();
         if (Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore) {
             foreach ($elements as $element) {
-                Cache::store(ConfigService::$cacheDriver)->connection()->sadd(Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element, $key);
+                Cache::store(ConfigService::$cacheDriver)->connection()->sadd(
+                    Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element,
+                    $key
+                );
             }
         }
     }
@@ -128,11 +131,14 @@ class CacheHelper
     /**
      * Delete all the cache with specified keys
      * @param array $keys
+     * @return bool
      */
-    public static function deleteCacheKeys(array $keys)
+    public static function deleteCacheKeys($keys)
     {
-        foreach ($keys as $key) {
-            Cache::store(ConfigService::$cacheDriver)->forget($key);
+        if (!empty($keys) && is_array($keys)) {
+            foreach ($keys as $key) {
+                Cache::store(ConfigService::$cacheDriver)->forget($key);
+            }
         }
 
         return true;
