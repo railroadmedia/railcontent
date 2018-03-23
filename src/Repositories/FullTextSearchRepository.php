@@ -8,6 +8,7 @@ use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Repositories\QueryBuilders\FullTextSearchQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
+use Illuminate\Support\Facades\DB;
 
 class FullTextSearchRepository extends RepositoryBase
 {
@@ -116,6 +117,8 @@ class FullTextSearchRepository extends RepositoryBase
                 }
             }
         );
+
+        DB::statement('OPTIMIZE table '.ConfigService::$tableSearchIndexes);
     }
 
     /** Delete old indexes for the brand
