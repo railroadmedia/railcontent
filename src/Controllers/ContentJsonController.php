@@ -163,7 +163,8 @@ class ContentJsonController extends Controller
             $request->get('brand'),
             $request->get('user_id'),
             $request->get('published_on'),
-            $request->get('parent_id')
+            $request->get('parent_id'),
+            $request->get('sort', 0)
         );
 
         return new JsonResponse([$content], 201);
@@ -185,6 +186,7 @@ class ContentJsonController extends Controller
                 [
                     'slug' => '',
                     'type' => '',
+                    'sort' => '',
                     'status' => '',
                     'brand' => '',
                     'language' => '',

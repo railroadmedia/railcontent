@@ -2,7 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Factories\CommentAssignationFactory;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
@@ -12,6 +12,7 @@ use Railroad\Railcontent\Factories\ContentHierarchyFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\PermissionsFactory;
 use Railroad\Railcontent\Factories\UserContentProgressFactory;
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -290,5 +291,28 @@ class ContentServiceTest extends RailcontentTestCase
 
         $results = $this->classBeingTested->getByChildIdsWhereType([$children['id']], $content['type']);
         $this->assertEquals([$content['id'] => $content], $results);
+    }
+
+    public function test_entireCacheNotFlushed()
+    {
+        $content = $this->contentFactory->create(
+            $this->faker->slug(),
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
+        );
+        $contentResponse = $this->classBeingTested->getById($content['id']);
+
+        CacheHelper::setPrefix();
+        Cache::store(ConfigService::$cacheDriver)->put('do_not_delete', 'a_value', 10);
+
+        $this->classBeingTested->update($contentResponse['id'], ['slug' => 'slug-'. rand()]);
+
+        $this->assertEquals('a_value', Cache::store(ConfigService::$cacheDriver)->get('do_not_delete'));
+        $this->assertEquals(3, count(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys('*')));
+
+        $this->classBeingTested->delete($contentResponse['id']);
+
+        $this->assertEquals('a_value', Cache::store(ConfigService::$cacheDriver)->get('do_not_delete'));
+        $this->assertEquals(2, count(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys('*')));
     }
 }

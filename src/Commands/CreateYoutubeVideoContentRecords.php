@@ -59,68 +59,41 @@ class CreateYoutubeVideoContentRecords extends Command
      */
     public function handle()
     {
-        putenv('GOOGLE_APPLICATION_CREDENTIALS='.ConfigService::$videoSync['youtube']['google_credentials_json_path']);
-
         $client = new Google_Client();
         $client->setDeveloperKey(ConfigService::$videoSync['youtube']['key']);
         $client->setScopes($this->scope);
 
-        $client->useApplicationDefaultCredentials();
-
         $youtube = new \Google_Service_YouTube($client);
 
-        $broadcastNextPageToken = '';
         $shouldEnd = 0;
+        $maxPages = 5;
         $items = [];
 
-            do {
-            $liveBroadcasts = ($youtube->liveBroadcasts->listLiveBroadcasts('id, snippet, contentDetails', [
-                'broadcastStatus' => 'completed',
-                    'maxResults' => 50,
-                'pageToken' => $broadcastNextPageToken
-            ]));
-
-            foreach ($liveBroadcasts['items'] as $broadcastItem) {
-                //get live broadcast details
-                    $videoParams = array(
-                    'id' => $broadcastItem['snippet']['resourceId']['videoId'],
-                        'fields' => "items(contentDetails(duration))"
-                    );
-                    $videoDetails = $youtube->videos->listVideos("contentDetails", $videoParams);
-
-                    $videoDetail = $videoDetails->getItems();
-                    $video = [
-                    'videoId' => $broadcastItem['snippet']['resourceId']['videoId'],
-                        'duration' => $this->covtime($videoDetail[0]->getContentDetails()->getDuration())
-                    ];
-                    array_push($items, $video);
-                }
-
-            $nextPageToken = $liveBroadcasts->getNextPageToken();
-
-                if (is_null($nextPageToken)) {
-                    $shouldEnd = 1;
-                }
-            } while ($shouldEnd == 0);
-
         //get the channels list for youtube user
-        $channelsResponse = $youtube->channels->listChannels('contentDetails', array(
-            'forUsername' => ConfigService::$videoSync['youtube'][ConfigService::$brand]['user'],
-            'maxResults' => 50
-        ));
+        $channelsResponse = $youtube->channels->listChannels(
+            'contentDetails',
+            array(
+                'forUsername' => ConfigService::$videoSync['youtube'][ConfigService::$brand]['user'],
+                'maxResults' => 50
+            )
+        );
 
         //for each channel get the videos from the channel playlists
         foreach ($channelsResponse['items'] as $channel) {
             $uploadsListId = $channel['contentDetails']['relatedPlaylists']['uploads'];
             $nextPageToken = '';
             $shouldEnd = 0;
+            $page = 1;
             //only 50 video can be received in a call to Youtube API, so we make calls until complete
             do {
-                $playlistItemsResponse = $youtube->playlistItems->listPlaylistItems('id,snippet,contentDetails', array(
-                    'playlistId' => $uploadsListId,
-                    'maxResults' => 50,
-                    'pageToken' => $nextPageToken
-                ));
+                $playlistItemsResponse = $youtube->playlistItems->listPlaylistItems(
+                    'id,snippet,contentDetails',
+                    array(
+                        'playlistId' => $uploadsListId,
+                        'maxResults' => 50,
+                        'pageToken' => $nextPageToken
+                    )
+                );
 
                 foreach ($playlistItemsResponse['items'] as $playlistItem) {
                     //get video details
@@ -139,8 +112,9 @@ class CreateYoutubeVideoContentRecords extends Command
                 }
                 $nextPageToken = $playlistItemsResponse->getNextPageToken();
 
-                if (is_null($nextPageToken)) {
+                if (is_null($nextPageToken) || $page == $maxPages) {
                     $shouldEnd = 1;
+                    $page++;
                 }
             } while ($shouldEnd == 0);
         }
@@ -148,11 +122,15 @@ class CreateYoutubeVideoContentRecords extends Command
         $contentCreatedCount = 0;
         $contentFieldsInsertData = [];
         $contentCreationFailed = [];
+
         foreach ($items as $video) {
             // create if needed
-            $noRecordOfVideoInCMS = empty($this->contentService->getBySlugAndType(
-                'youtube-video-' . $video['videoId'], 'youtube-video'
-            ));
+            $noRecordOfVideoInCMS = empty(
+            $this->contentService->getBySlugAndType(
+                'youtube-video-' . $video['videoId'],
+                'youtube-video'
+            )
+            );
 
             if ($noRecordOfVideoInCMS && $video['duration'] !== 0 && is_numeric($video['duration'])) {
                 // store a new content

@@ -233,7 +233,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     'fields' => [],
                     'data' => [],
                     'permissions' => [],
-                    'child_id' => null
+                    'child_id' => null,
+                    'sort' => 0,
                 ]
         ]);
 
@@ -413,7 +414,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     'slug' => $new_slug,
                     'status' => ContentService::STATUS_PUBLISHED,
                     'type' => $content['type'],
-                    'created_on' => Carbon::now()->toDateTimeString()
+                    'created_on' => Carbon::now()->toDateTimeString(),
+                    'sort' => 0,
                 ]
             ]
         );
@@ -856,14 +858,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $time7 = microtime(true) - $start7;
 
         $response->assertStatus(200);
-        print_r('Execution time::');
-        var_dump($time1);
-        var_dump($time2);
-        var_dump($time3);
-        var_dump($time4);
-        var_dump($time5);
-        var_dump($time6);
-        var_dump($time7);
     }
 
     /**

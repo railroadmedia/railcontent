@@ -118,8 +118,7 @@ return [
             ],
             'guitareo' => [
                 'user' => env('YOUTUBE_USERNAME_GUITAREO','guitarlessonscom')
-            ],
-            'google_credentials_json_path' => env('GOOGLE_APPLICATION_CREDENTIALS','youtube.json')
+            ]
         ]
     ],
 

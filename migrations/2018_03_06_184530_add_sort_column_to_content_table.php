@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 use Railroad\Railcontent\Services\ConfigService;
 
-class AddCreatedOnToContentHierarchy extends Migration
+class AddSortColumnToContentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,13 +15,13 @@ class AddCreatedOnToContentHierarchy extends Migration
     public function up()
     {
         Schema::connection(ConfigService::$databaseConnectionName)->table(
-            ConfigService::$tableContentHierarchy,
+            ConfigService::$tableContent,
             function ($table) {
                 /**
                  * @var $table \Illuminate\Database\Schema\Blueprint
                  */
 
-                $table->dateTime('created_on')->nullable()->after('child_position')->index();
+                $table->integer('sort')->default(0)->after('type')->index();
             }
         );
     }
@@ -33,13 +34,13 @@ class AddCreatedOnToContentHierarchy extends Migration
     public function down()
     {
         Schema::connection(ConfigService::$databaseConnectionName)->table(
-            ConfigService::$tableContentHierarchy,
+            ConfigService::$tableContent,
             function ($table) {
                 /**
                  * @var $table \Illuminate\Database\Schema\Blueprint
                  */
 
-                $table->dropColumn('created_on');
+                $table->dropColumn('sort');
             }
         );
     }
