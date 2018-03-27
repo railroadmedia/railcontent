@@ -135,9 +135,11 @@ class CacheHelper
      */
     public static function deleteCacheKeys($keys)
     {
-        if (!empty($keys) && is_array($keys)) {
-            foreach ($keys as $key) {
-                Cache::store(ConfigService::$cacheDriver)->connection()->del($key);
+        if (Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore) {
+            if (!empty($keys) && is_array($keys)) {
+                foreach ($keys as $key) {
+                    Cache::store(ConfigService::$cacheDriver)->connection()->del($key);
+                }
             }
         }
 
