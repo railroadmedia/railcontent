@@ -107,24 +107,23 @@ class CacheHelper
     {
         self::setPrefix();
 
-        //Rename the key to a new key so that the set appears “deleted” to other Redis clients immediately.
-        if(Redis::exists(Cache::store(ConfigService::$cacheDriver)->getPrefix().$key)){
-            Redis::rename(Cache::store(ConfigService::$cacheDriver)->getPrefix().$key, Cache::store(ConfigService::$cacheDriver)->getPrefix().$key.'_deleted');
+        //Rename the key to a new key so that the set appears â€œdeletedâ€ to other Redis clients immediately.
+        if (Redis::exists(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key)) {
+            Redis::rename(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key, Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key . '_deleted');
         }
 
         //Delete members from the set and the cache records in batches of 100
         $cursor = 0;
         do {
-            list($cursor, $keys) = Redis::sscan(Cache::store(ConfigService::$cacheDriver)->getPrefix().$key.'_deleted', $cursor, 'COUNT', 100);
-            if(count($keys)>0)
-            {
-                Redis::srem(Cache::store(ConfigService::$cacheDriver)->getPrefix().$key, $keys);
-        self::deleteCacheKeys($keys);
+            list($cursor, $keys) = Redis::sscan(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key . '_deleted', $cursor, 'COUNT', 100);
+            if (count($keys) > 0) {
+                Redis::srem(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key, $keys);
+                self::deleteCacheKeys($keys);
             }
         } while ($cursor);
 
         //delete set cache record
-        self::deleteCacheKeys([Cache::store(ConfigService::$cacheDriver)->getPrefix().$key.'_deleted']);
+        self::deleteCacheKeys([Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key . '_deleted']);
 
         return true;
     }
@@ -138,8 +137,8 @@ class CacheHelper
     {
         $cursor = 0;
         do {
-            list($cursor, $keys) = Redis::scan($cursor, 'match', "*$key");
-        self::deleteCacheKeys($keys);
+            list($cursor, $keys) = Redis::scan($cursor, 'match', "*$key*");
+            self::deleteCacheKeys($keys);
         } while ($cursor);
 
         return true;
@@ -152,9 +151,11 @@ class CacheHelper
      */
     public static function deleteCacheKeys($keys)
     {
-        if (!empty($keys) && is_array($keys)) {
-            foreach ($keys as $key) {
-                Cache::store(ConfigService::$cacheDriver)->connection()->del($key);
+        if (Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore) {
+            if (!empty($keys) && is_array($keys)) {
+                foreach ($keys as $key) {
+                    Cache::store(ConfigService::$cacheDriver)->connection()->del($key);
+                }
             }
         }
 
