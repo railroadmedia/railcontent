@@ -313,6 +313,6 @@ class ContentServiceTest extends RailcontentTestCase
         $this->classBeingTested->delete($contentResponse['id']);
 
         $this->assertEquals('a_value', Cache::store(ConfigService::$cacheDriver)->get('do_not_delete'));
-        $this->assertEquals(2, count(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys('*')));
+        $this->assertEquals(1, count(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys('*')));
     }
 }
