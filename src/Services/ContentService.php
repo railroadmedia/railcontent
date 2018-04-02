@@ -264,7 +264,7 @@ class ContentService
         $hash = 'contents_by_types_status_published_' . CacheHelper::getKey(
                 implode(' ', $types),
                 $status,
-                $publishedOnValue,
+                Carbon::createFromFormat('Y-m-d H:i:s', $publishedOnValue)->format('Y-m-d H:i'),
                 $publishedOnComparisonOperator,
                 $orderByColumn,
                 $orderByDirection
