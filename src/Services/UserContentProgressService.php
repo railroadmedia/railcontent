@@ -126,12 +126,12 @@ class UserContentProgressService
                     'updated_on' => Carbon::now()->toDateTimeString(),
                 ]
             );
-        }
 
         CacheHelper::deleteCache('content_list_' . $contentId);
 
         //delete all the search results from cache
         CacheHelper::deleteAllCachedSearchResults('user_progress_'.$userId.'_');
+        }
 
         event(new UserContentProgressSaved($userId, $contentId));
 
@@ -211,9 +211,6 @@ class UserContentProgressService
         }
 
         event(new UserContentProgressSaved($userId, $contentId));
-
-        //delete all the search results from cache
-        CacheHelper::deleteAllCachedSearchResults('user_progress_'.$userId.'_');
 
         return true;
     }
