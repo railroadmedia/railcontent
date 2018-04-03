@@ -70,6 +70,15 @@ class CacheHelper
                     Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element,
                     Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key
                 );
+
+                if (Cache::store(ConfigService::$cacheDriver)->connection()->ttl(Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element)
+                    == -1) {
+                    Cache::store(ConfigService::$cacheDriver)->connection()->expire(
+                        Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element,
+                        ConfigService::$cacheTime + 60
+                    );
+                }
+
             }
         }
     }

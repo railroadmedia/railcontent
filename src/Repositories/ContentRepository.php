@@ -478,6 +478,80 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @param int $id
+     * @param string $type
+     * @param string $columnName
+     * @param string $columnValue
+     * @param int $siblingPairLimit
+     * @param string $orderColumn
+     * @param string $orderDirection
+     */
+    public function getTypeNeighbouringSiblings(
+        $type,
+        $columnName,
+        $columnValue,
+        $siblingPairLimit = 1,
+        $orderColumn = 'published_on',
+        $orderDirection = 'desc'
+    ) {
+        $beforeContents = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->where(ConfigService::$tableContent . '.type', $type)
+            ->where(ConfigService::$tableContent . '.' . $columnName, '<', $columnValue)
+            ->orderBy($orderColumn, 'desc')
+            ->limit($siblingPairLimit)
+            ->getToArray();
+
+        $afterContents = $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->where(ConfigService::$tableContent . '.type', $type)
+            ->where(ConfigService::$tableContent . '.' . $columnName, '>', $columnValue)
+            ->orderBy($orderColumn, 'asc')
+            ->limit($siblingPairLimit)
+            ->getToArray();
+
+        $merged = array_merge($beforeContents, $afterContents);
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($merged, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($merged, 'id'));
+
+        $contentPermissionRows =
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                array_column($merged, 'id'),
+                array_column($merged, 'type')
+            );
+
+        $processed = $this->processRows(
+            $merged,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+
+        foreach ($afterContents as $afterContentIndex => $afterContent) {
+            $afterContents[$afterContentIndex] = $processed[$afterContent['id']];
+        }
+
+        foreach ($beforeContents as $beforeContentIndex => $beforeContent) {
+            $beforeContents[$beforeContentIndex] = $processed[$beforeContent['id']];
+        }
+
+        if ($orderDirection == 'desc') {
+            return [
+                'before' => array_reverse($afterContents),
+                'after' => array_reverse($beforeContents),
+            ];
+        }
+
+        return [
+            'before' => $beforeContents,
+            'after' => $afterContents,
+        ];
+    }
+
+    /**
      * @param array $types
      * @param $userId
      * @param $state

@@ -97,8 +97,7 @@ class ContentService
         CommentRepository $commentRepository,
         CommentAssignmentRepository $commentAssignmentRepository,
         UserContentProgressRepository $userContentProgressRepository
-    )
-    {
+    ) {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
         $this->fieldRepository = $fieldRepository;
@@ -206,8 +205,7 @@ class ContentService
         $fieldValue,
         $fieldType,
         $fieldComparisonOperator = '='
-    )
-    {
+    ) {
         $hash = 'contents_by_types_field_and_status_' . CacheHelper::getKey(
                 $types,
                 $status,
@@ -261,44 +259,16 @@ class ContentService
         $publishedOnComparisonOperator = '=',
         $orderByColumn = 'published_on',
         $orderByDirection = 'desc'
-    )
-    {
+    ) {
 
-        $hash = 'contents_by_types_status_published_' . CacheHelper::getKey(
-                implode(' ', $types),
-                $status,
-                $publishedOnValue,
-                $publishedOnComparisonOperator,
-                $orderByColumn,
-                $orderByDirection
-            );
-
-        $results = Cache::store(ConfigService::$cacheDriver)->remember(
-            $hash,
-            ConfigService::$cacheTime,
-            function () use (
-                $hash,
-                $types,
-                $status,
-                $publishedOnValue,
-                $publishedOnComparisonOperator,
-                $orderByColumn,
-                $orderByDirection
-            ) {
-                $res = $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
-                    $types,
-                    $status,
-                    $publishedOnValue,
-                    $publishedOnComparisonOperator,
-                    $orderByColumn,
-                    $orderByDirection
-                );
-                $this->saveCacheResults($hash, array_keys($res));
-                return $res;
-            }
+        return $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            $types,
+            $status,
+            $publishedOnValue,
+            $publishedOnComparisonOperator,
+            $orderByColumn,
+            $orderByDirection
         );
-
-        return $results;
     }
 
     /**
@@ -375,8 +345,7 @@ class ContentService
         $types,
         $orderBy = 'child_position',
         $orderByDirection = 'asc'
-    )
-    {
+    ) {
         $hash = 'contents_by_parent_id_type_' .
             CacheHelper::getKey($parentId, $types, $orderBy, $orderByDirection);
 
@@ -533,8 +502,7 @@ class ContentService
         $state,
         $limit = 25,
         $skip = 0
-    )
-    {
+    ) {
         $hash = 'contents_paginated_by_types_and_user_progress_' . $userId . '_' . CacheHelper::getKey(
                 $types,
                 $userId,
@@ -564,6 +532,70 @@ class ContentService
     }
 
     /**
+     * @param int $id
+     * @param string $type
+     * @param string $columnName
+     * @param string $columnValue
+     * @param int $siblingPairLimit
+     * @param string $orderColumn
+     * @param string $orderDirection
+     */
+    public function getTypeNeighbouringSiblings(
+        $type,
+        $columnName,
+        $columnValue,
+        $siblingPairLimit = 1,
+        $orderColumn = 'published_on',
+        $orderDirection = 'desc'
+    ) {
+        $hash = 'contents_type_neighbouring_siblings_' . CacheHelper::getKey(
+                $type,
+                $columnName,
+                $columnValue,
+                $siblingPairLimit,
+                $orderColumn,
+                $orderDirection
+            );
+
+        $this->contentRepository->getTypeNeighbouringSiblings(
+            $type,
+            $columnName,
+            $columnValue,
+            $siblingPairLimit,
+            $orderColumn,
+            $orderDirection
+        );
+
+        $results = Cache::store(ConfigService::$cacheDriver)->remember(
+            $hash,
+            ConfigService::$cacheTime,
+            function () use (
+                $type,
+                $columnName,
+                $columnValue,
+                $siblingPairLimit,
+                $orderColumn,
+                $orderDirection
+            ) {
+                $results = $this->contentRepository->getTypeNeighbouringSiblings(
+                    $type,
+                    $columnName,
+                    $columnValue,
+                    $siblingPairLimit,
+                    $orderColumn,
+                    $orderDirection
+                );
+
+                $this->saveCacheResults($hash, array_keys($results));
+
+                return $results;
+            }
+        );
+
+        return $results;
+    }
+
+    /**
      * @param array $types
      * @param $userId
      * @param $state
@@ -573,8 +605,7 @@ class ContentService
         array $types,
         $userId,
         $state
-    )
-    {
+    ) {
         $hash = 'contents_count_by_types_and_user_progress_' . $userId . '_' . CacheHelper::getKey(
                 $types,
                 $userId,
@@ -618,8 +649,7 @@ class ContentService
         array $includedFields = [],
         array $requiredUserStates = [],
         array $includedUserStates = []
-    )
-    {
+    ) {
         if ($limit == 'null') {
             $limit = -1;
         }
@@ -687,7 +717,8 @@ class ContentService
                 $res = [
                     'results' => $filter->retrieveFilter(),
                     'total_results' => $filter->countFilter(),
-                    'filter_options' => $filter->getFilterFields()];
+                    'filter_options' => $filter->getFilterFields()
+                ];
                 $this->saveCacheResults($hash, array_keys($res['results']));
                 return $res;
             }
@@ -720,8 +751,7 @@ class ContentService
         $publishedOn,
         $parentId = null,
         $sort = 0
-    )
-    {
+    ) {
         $id =
             $this->contentRepository->create(
                 [
@@ -951,9 +981,10 @@ class ContentService
     }
 
     public function getByContentFieldValuesForTypes(
-        array $contentTypes, $contentFieldKey, array $contentFieldValues = []
-    )
-    {
+        array $contentTypes,
+        $contentFieldKey,
+        array $contentFieldValues = []
+    ) {
         $hash = 'contents_by_types_and_field_value_' . CacheHelper::getKey(
                 $contentTypes,
                 $contentFieldKey,

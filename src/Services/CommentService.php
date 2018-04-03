@@ -221,7 +221,10 @@ class CommentService
 
         $hash = 'get_comments_' . (CommentRepository::$availableContentId ?? '') . CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
 
-        $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash, $page, $limit, $orderByDirection, $orderByColumn) {
+        $results = Cache::store(ConfigService::$cacheDriver)->remember(
+            $hash,
+            ConfigService::$cacheTime,
+            function () use ($hash, $page, $limit, $orderByDirection, $orderByColumn) {
             $this->commentRepository->setData($page, $limit, $orderByDirection, $orderByColumn);
             $results = [
                 'results' => $this->commentRepository->getComments(),
