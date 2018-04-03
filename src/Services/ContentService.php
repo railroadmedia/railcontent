@@ -261,41 +261,14 @@ class ContentService
         $orderByDirection = 'desc'
     ) {
 
-        $hash = 'contents_by_types_status_published_' . CacheHelper::getKey(
-                implode(' ', $types),
-                $status,
-                Carbon::createFromFormat('Y-m-d H:i:s', $publishedOnValue)->format('Y-m-d H:i'),
-                $publishedOnComparisonOperator,
-                $orderByColumn,
-                $orderByDirection
-            );
-
-        $results = Cache::store(ConfigService::$cacheDriver)->remember(
-            $hash,
-            ConfigService::$cacheTime,
-            function () use (
-                $hash,
-                $types,
-                $status,
-                $publishedOnValue,
-                $publishedOnComparisonOperator,
-                $orderByColumn,
-                $orderByDirection
-            ) {
-                $res = $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
-                    $types,
-                    $status,
-                    $publishedOnValue,
-                    $publishedOnComparisonOperator,
-                    $orderByColumn,
-                    $orderByDirection
-                );
-                $this->saveCacheResults($hash, array_keys($res));
-                return $res;
-            }
+        return $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            $types,
+            $status,
+            $publishedOnValue,
+            $publishedOnComparisonOperator,
+            $orderByColumn,
+            $orderByDirection
         );
-
-        return $results;
     }
 
     /**
