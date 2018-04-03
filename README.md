@@ -1,10 +1,13 @@
-# Railcontent
+
+Railcontent
+========================================================================================================================
 
 Data first simple CMS.
 
 
 
-## Progress-Bubbling
+Progress-Bubbling
+------------------------------------------------------------------------------------------------------------------------
 
 When a content has its progress saved, a `UserContentProgressSaved` event is fired. This event triggers the `bubbleProgress` method of `UserContentProgressService`. If the content saved—that triggered the event—has a parent, the type of that parent will be evaluated against config values defined in you're application's copy of */config/railcontent.php*.
 
@@ -36,17 +39,17 @@ If that parent is itself **not yet started**, it will not have progress record w
 
 
 
-## Validation
+Validation
+------------------------------------------------------------------------------------------------------------------------
 
-Oh boy... where to start.
+This is *"business rules"* validation. This does not validate that the content is suitable for the the database. Rather
+ it is used if your application requires content to require information to be set to a state - like "public" or
+ "published", for example.
 
-This is *"business rules"* validation. This does not validate that the content is suitible for the the database - only
-that if your application requires content to meet certain criteria to be published.
-
-In your applications config/ directory, you should have a railcontent.php file. In there under 'validation', you can
+In your application's config/ directory, you should have a railcontent.php file. In there under 'validation', you can
 list the brands for which you want validation. If a brand is not present, validation will not run.
 
-Under each brand, there is an array called "*restrictions*" that defines which content *states* the validation is to
+Under each brand is an array called "*restrictions*" which defines which content *states* the validation is to
 protect. If a request to change a content's state requests to set the state to one of these protected states, then
 the validation will run. If the content is invalid, the protected state will not be set. Similarly, if a content has a
 state that is in this list of protected states, any change to the content (including fields or data) will trigger
@@ -55,12 +58,18 @@ type, thus the change will not be made.
 
 Also under each brand - as a sibling to the "*restrictions*" array - are the rules for each "*content-type*". The key
 for each content-type **must** be the same as the content-type used in the application. Each content-type's rules has
-four components:
+five components:
 
-1. number_of_children
 1. fields
-1. data
-1. can_have_multiple
+2. data
+3. number_of_children (optional)
+
+If a content-type exists in these rules, then validation will run on as described above. If the content-type is not
+represented in the rules, the validation rules will not protect that content type according to the rules.
+
+*(There is not currently a way to provide custom "restrictions" for a select content-type. See the "todo.md" file for
+notes about how to change this package to make that possible.)*
+
 
 
 ### Important Note about the "numeric" rule
@@ -81,12 +90,16 @@ condition is just there as a hack to circumvent failure of the system to act as 
 it works, so fuck.
 ```
 
+(^ Crudely written note copied here from comment in code)
+
+
+
 ### Specifying rules
 
 You can "...specify the validation rules as an array instead of using the | character to delimit them" ([from
 "Specifying A Custom Column Name" section here](https://laravel.com/docs/5.6/validation#rule-exists)).
 
-For example; these do the same thing:
+For example; both `bar` and `bax` here would have the same effect:
 
 ```php
 foo => [
@@ -111,13 +124,9 @@ details about Laravel rules, [see their documentation](
 https://laravel.com/docs/master/validation#available-validation-rules).
 
 
-
-
 #### data
 
 (required)
-
-
 
 
 #### number_of_children
@@ -126,14 +135,9 @@ https://laravel.com/docs/master/validation#available-validation-rules).
 
 See "**Important Note about the "numeric" rule**" note above.
 
-If a content type requires a set number of children before it can be set to a "restricted" state (perhaps "published" or
-"scheduled").
+Provide this in cases where a content type requires a set number of children before it can be set to a 
+"restricted" state (perhaps "published" or "scheduled").
 
-
-
-#### can_have_multiple
-
-(optional)
 
 
 
@@ -144,37 +148,64 @@ If a content type requires a set number of children before it can be set to a "r
     'qux_brand' => [
         'restrictions' => ['published','scheduled'],
         'course' => [
-            'number_of_children' => 'numeric|min:2',
+            'number_of_children' => 'numeric|min:1',
+
             'fields' => [
-                'title' => 'required|min:1|max:180',
-                'difficulty' => 'required|numeric|min:1|max:10',
+                'title' => ['rules' => 'required|min:1|max:180'],
+                'difficulty' => ['rules' => 'required|numeric|min:1|max:10'],
                 'instructor' => [
-                    Rule::exists($connectionMaskPrefix . 'content', 'id')->where(
-                        function ($query) { $query->where('type', 'instructor'); }
-                    ),
-                    'required'
+                    'rules' => [
+                        Rule::exists($connectionMaskPrefix . 'content', 'id')->where(
+                            function ($query) { $query->where('type', 'instructor'); }
+                        ),
+                        'required'
+                    ],
+                    'can_have_multiple' => true,
                 ],
-                'topics' => 'string|min:1|max:64',
-                'tags' => 'string|min:1|max:64'
+                'topics' => [
+                    'rules' => 'string|min:1|max:64',
+                    'can_have_multiple' => true,
+                ],
+                'tags' => [
+                    'rules' => 'string|min:1|max:64',
+                    'can_have_multiple' => true,
+                ],
             ],
-            'data' => [
-                'thumbnail_url' => ['required|url|regex:/^.*\.(jpg|png)$/',
-                'all_resources_zip_url' => 'required|url|regex:/^.*\.(zip)$/',
-                'description' => 'string|min:1|max:1000'
+
+            'data' => [ // "data" not "datum" because the former is what the arrays' key use
+                'thumbnail_url' => [
+                    'rules' => ['required', 'url', 'regex:/^.*\.(jpg|png)$/'], // stackoverflow.com/a/37495, // cannot have more than 1s
+                ],
+                'all_resources_zip_url' => [
+                    'rules' => 'required|url|regex:/^.*\.(zip)$/',
+                ],
+                'description' => [
+                    'rules' => 'string|min:1|max:1000',
+                    'can_have_multiple' => true,
+                ]
             ],
-            'can_have_multiple' => ['fields' => ['instructor', 'topics', 'tags'], 'data' => ['description']]
         ],
-        'foo_content_type' => [
-            'number_of_children' => 'numeric|min:3',
+        'course_part' => [
+            'number_of_children' => 0,
             'fields' => [
-                'bar' => 'string|min:1|max:32',
-                'baz' => 'string|min:5|max:64'
+                'title' => ['rules' => 'required|min:1|max:180'],
+                'video' => ['rules' => [Rule::exists($connectionMaskPrefix . 'content', 'id')->where(
+                        function ($query) { $query->where('type', 'vimeo-video'); }
+                    ),'required']
+                ]
             ],
             'data' => [
-                'thumbnail_url' => ['required|url|regex:/^.*\.(jpg|png)$/'
-            ]
-        ]
+                'card_thumbnail' => ['rules' => 'required|url|regex:/^.*\.(jpg|png)$/',],
+                'mp3_exercises_zip' => ['rules' => 'required|url|regex:/^.*\.(zip)$/',],
+                'sheet_music_pdf' => ['rules' => 'required|url|regex:/^.*\.(pdf)$/',],
+                'sheet_music_png' => [
+                    'rules' => 'required|url|regex:/^.*\.(jpg|png)$/',
+                    'can_have_multiple' => true,
+                ],
+                'description' => ['rules' => 'string|min:1|max:1000',]
+            ],
+        ],
+        
     ]
 ]
-``` 
-
+```
