@@ -224,42 +224,74 @@ class CustomFormRequest extends FormRequest
             $cannotHaveMultiple = [];
 
             if (isset($rulesForBrand[$content['type']]['number_of_children'])) {
-                $value = $this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']] ?? 0;
+                $inputToValidate = $this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']] ?? 0;
                 $rule = $rulesForBrand[$content['type']]['number_of_children'];
-                $this->validateRule($value, $rule, 'number_of_children', 1);
+                $this->validateRule($inputToValidate, $rule, 'number_of_children', 1);
             }
 
+
+            /*
+             * Loop through the components of the content which we're modifying (or modifying a component of) and on
+             * each loop through validation rules for that content's type
+             */
             foreach ($content as $propertyName => $contentPropertySet) {
                 foreach ($rulesForBrand[$content['type']] as $rulesPropertyKey => $rules) {
 
+                    /*
+                     * Ignore this section of the rules at this point - it's used elsewhere.
+                     */
                     if ($rulesPropertyKey !== 'number_of_children') {
-                        foreach ($rules as $criteriaKey => $criteria) {
 
+                        /*
+                         * If there's rule for the content-component we're currently at in our looping, then validate
+                         * that component.
+                         */
+                        foreach ($rules as $criteriaKey => $criteria) {
                             if ($propertyName === $rulesPropertyKey && !empty($criteria)) { // matches field & datum segments
+
+                                /*
+                                 * Loop through the components to validate where needed
+                                 */
                                 foreach ($contentPropertySet as $contentProperty) {
 
-                                    $key = $contentProperty['key']; $value = $contentProperty['value'];
+                                    $key = $contentProperty['key'];
+                                    $inputToValidate = $contentProperty['value'];
 
-                                    if(!empty($contentProperty['id'])){ // will be empty for field & datum creates
+                                    /*
+                                     * Will be empty for field & datum creates - thus indicates when the current
+                                     * operation is one a ContentFieldCreateRequest or ContentDataCreateRequest.
+                                     * Thus, the value requested to set can be accessed directly from the request.
+                                     */
+                                    if(!empty($contentProperty['id'])){
                                         if ($request->get('id') == $contentProperty['id']) {
-                                            $value = $request->get('value');
+                                            $inputToValidate = $request->get('value');
                                         }
                                     }
 
-                                    if (($contentProperty['type'] ?? null) === 'content' && isset($value['id'])) {
-                                        $value = $value['id'];
+                                    /*
+                                     * TODO: Delete this anytime past April 5th 2018
+                                     */
+                                    if (($contentProperty['type'] ?? null) === 'content' && isset($inputToValidate['id'])) {
+//                                        $inputToValidate = $inputToValidate['id'];
+
+                                        if ($key === $criteriaKey) {// todo: delete this comment anytime past April 5th
+                                            dd("Oh, so this IS used! Ok, you can remove the comment to delete it now." .
+                                                " Also maybe add a comment describing it");
+                                        }
                                     }
 
+                                    /*
+                                     * Validate the component
+                                     */
                                     if ($key === $criteriaKey) {
-
                                         $position = $contentProperty['position'] ?? null;
-                                        $this->validateRule( $value, $criteria['rules'], $key, $position );
-                                        $thisOneCanHaveMultiple = false;
 
+                                        $this->validateRule($inputToValidate, $criteria['rules'], $key, $position );
+
+                                        $thisOneCanHaveMultiple = false;
                                         if(array_key_exists('can_have_multiple', $criteria)) {
                                             $thisOneCanHaveMultiple = $criteria['can_have_multiple'];
                                         }
-
                                         if(!$thisOneCanHaveMultiple){
                                             $cannotHaveMultiple[] = $key;
                                             $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
@@ -275,7 +307,6 @@ class CustomFormRequest extends FormRequest
             foreach ($cannotHaveMultiple as $key) {
                 $this->validateRule((int)$counts[$key], 'numeric|max:1', $key . '_count', 1);
             }
-
         }
         return true;
     }
@@ -439,11 +470,11 @@ class CustomFormRequest extends FormRequest
         }
     }
 
-    public function validateRule($value, $rule, $key, $position = 0)
+    public function validateRule($inputToValidate, $rule, $key, $position = 0)
     {
         try {
             $this->validationFactory->make(
-                [$key => $value],
+                [$key => $inputToValidate],
                 [$key => $rule]
             )->validate();
         } catch (ValidationException $exception) {
