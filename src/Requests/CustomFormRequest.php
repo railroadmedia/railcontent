@@ -395,11 +395,19 @@ class CustomFormRequest extends FormRequest
 
 
             if ($request instanceof ContentFieldUpdateRequest) {
-                $content['fields'][] = ['key' => $contentDatumOrField['key'], 'value' => $input['value']];
+                foreach($content['fields'] as $propertyKey => &$field){
+                    if($propertyKey === 'key'){
+                        $field['value'] = $input['value'];
+                    }
+                }
             }
 
             if ($request instanceof ContentDatumUpdateRequest) {
-                $content['data'][] = ['key' => $contentDatumOrField['key'], 'value' => $input['value']];
+                foreach($content['data'] as $propertyKey => &$datum){
+                    if($propertyKey === 'key'){
+                        $datum['value'] = $input['value'];
+                    }
+                }
             }
         }
     }
