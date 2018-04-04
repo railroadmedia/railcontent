@@ -191,7 +191,8 @@ class CustomFormRequest extends FormRequest
      * @return bool
      */
     public function validateContent($request)
-    {   //  - get the status "states to guard"
+    {
+        //  - get the status "states to guard"
         //      - if we *are* writing|updating status, to what value are we wanting to set it to?
         //      - if the value we want to set is in "the states to guard", validate content (return 422 if fails)
         //  - if we *not* are writing|updating status, get the current status
@@ -205,36 +206,60 @@ class CustomFormRequest extends FormRequest
          * Jonathan, March 2018
          */
 
-        $contentValidationRequired = null; $rulesForBrand = null; $content = null; $counts = []; $cannotHaveMultiple = [];
-        $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
+        $contentValidationRequired = null;
+        $rulesForBrand = null;
+        $content = null;
+
+        try{
+            $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
+        }catch(\Exception $exception){
+            throw new HttpResponseException(
+                new JsonResponse(['messages' => $exception->getMessage()], 500)
+            );
+        }
+
         if ($contentValidationRequired) {
+
+            $counts = [];
+            $cannotHaveMultiple = [];
+
             if (isset($rulesForBrand[$content['type']]['number_of_children'])) {
                 $value = $this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']] ?? 0;
                 $rule = $rulesForBrand[$content['type']]['number_of_children'];
                 $this->validateRule($value, $rule, 'number_of_children', 1);
             }
+
             foreach ($content as $propertyName => $contentPropertySet) {
                 foreach ($rulesForBrand[$content['type']] as $rulesPropertyKey => $rules) {
+
                     if ($rulesPropertyKey !== 'number_of_children') {
                         foreach ($rules as $criteriaKey => $criteria) {
+
                             if ($propertyName === $rulesPropertyKey && !empty($criteria)) { // matches field & datum segments
                                 foreach ($contentPropertySet as $contentProperty) {
+
                                     $key = $contentProperty['key']; $value = $contentProperty['value'];
+
                                     if(!empty($contentProperty['id'])){ // will be empty for field & datum creates
                                         if ($request->get('id') == $contentProperty['id']) {
                                             $value = $request->get('value');
                                         }
                                     }
+
                                     if (($contentProperty['type'] ?? null) === 'content' && isset($value['id'])) {
                                         $value = $value['id'];
                                     }
+
                                     if ($key === $criteriaKey) {
+
                                         $position = $contentProperty['position'] ?? null;
                                         $this->validateRule( $value, $criteria['rules'], $key, $position );
                                         $thisOneCanHaveMultiple = false;
+
                                         if(array_key_exists('can_have_multiple', $criteria)) {
                                             $thisOneCanHaveMultiple = $criteria['can_have_multiple'];
                                         }
+
                                         if(!$thisOneCanHaveMultiple){
                                             $cannotHaveMultiple[] = $key;
                                             $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
@@ -246,9 +271,11 @@ class CustomFormRequest extends FormRequest
                     }
                 }
             }
+
             foreach ($cannotHaveMultiple as $key) {
                 $this->validateRule((int)$counts[$key], 'numeric|max:1', $key . '_count', 1);
             }
+
         }
         return true;
     }
