@@ -269,7 +269,8 @@ class CustomFormRequest extends FormRequest
                                     }
 
                                     /*
-                                     * TODO: Delete this anytime past April 5th 2018
+                                     * If the field|datum item is itself a piece of content, get the id so that can be
+                                     * passed to the closure that evaluates the presence of that content in the database
                                      */
                                     if (($contentProperty['type'] ?? null) === 'content' && isset($inputToValidate['id'])) {
 //                                        $inputToValidate = $inputToValidate['id'];

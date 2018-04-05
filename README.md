@@ -71,6 +71,38 @@ represented in the rules, the validation rules will not protect that content typ
 notes about how to change this package to make that possible.)*
 
 
+### Note about field or datum that reference another piece of content
+
+When a content has a field or datum that is itself a reference to another piece of content, the id of that referenced
+content is what is evaluated.
+
+Thus, your rule must accommodate|use this.
+
+For example: A video has a field with the id of a video... and that video is a piece of content itself. The rule might
+look like this:
+
+```php
+'video' => [
+    'rules' => [
+        Rule::exists($connectionMaskPrefix . 'content', 'id')->where(
+            function ($query) { $query->where('type', 'vimeo-video'); }
+        ),
+        'required'
+    ]
+],
+``` 
+
+This is done using the following logic within the "validateContent" method of the 
+"\Railroad\Railcontent\Requests\\**CustomFormRequest**" class:
+
+```php
+if (($contentProperty['type'] ?? null) === 'content' && isset($inputToValidate['id'])) {
+    $inputToValidate = $inputToValidate['id'];
+}
+```
+
+You can see that if the `($contentProperty['type']` is "content" and the
+
 
 ### Important Note about the "numeric" rule
 
