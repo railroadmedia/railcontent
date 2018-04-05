@@ -273,12 +273,7 @@ class CustomFormRequest extends FormRequest
                                      * passed to the closure that evaluates the presence of that content in the database
                                      */
                                     if (($contentProperty['type'] ?? null) === 'content' && isset($inputToValidate['id'])) {
-//                                        $inputToValidate = $inputToValidate['id'];
-
-                                        if ($key === $criteriaKey) {// todo: delete this comment anytime past April 5th
-                                            dd("Oh, so this IS used! Ok, you can remove the comment to delete it now." .
-                                                " Also maybe add a comment describing it");
-                                        }
+                                        $inputToValidate = $inputToValidate['id'];
                                     }
 
                                     /*
