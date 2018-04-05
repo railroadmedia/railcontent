@@ -231,22 +231,62 @@ class CustomFormRequest extends FormRequest
 
 
             /*
+             * Determine "required" elements, and validate that they're present in the content.
+             * The main validation section below fails to do this, thus its handled here by itself.
+             * Maybe one day refactor it so it's all tidy and together, for now this works.
+             */
+
+            $required = [];
+
+            foreach ($rulesForBrand[$content['type']] as $rulesPropertyKey => $rules) {
+                foreach ($rules as $criteriaKey => $criteria) {
+                    if(is_array($criteria['rules'])){
+                        if(in_array('required', $criteria['rules'])){
+                            $required[$rulesPropertyKey][] = $criteriaKey;
+                        }
+                    }else{
+                        if(strpos($criteria['rules'], 'required') !== false){
+                            $required[$rulesPropertyKey][] = $criteriaKey;
+                        }
+                    }
+                }
+            }
+
+            foreach($required as $propertyKey => $list){
+                foreach($list as $requiredElement){
+                    $pass = false;
+                    foreach ($content[$propertyKey] as $contentPropertySet) {
+                        if($contentPropertySet['key'] === $requiredElement){
+                            $pass = true;
+                        }
+                    }
+                    if(!$pass){
+                        $this->validateRule(null, 'required', $requiredElement); // just make it fail
+                    }
+                }
+            }
+
+            /*
              * Loop through the components of the content which we're modifying (or modifying a component of) and on
              * each loop through validation rules for that content's type
              */
             foreach ($content as $propertyName => $contentPropertySet) {
+
                 foreach ($rulesForBrand[$content['type']] as $rulesPropertyKey => $rules) {
 
                     /*
-                     * Ignore this section of the rules at this point - it's used elsewhere.
+                     * "number_of_children" rules are handled elsewhere.
                      */
                     if ($rulesPropertyKey !== 'number_of_children') {
+
+                        // $rulesPropertyKey will be "data" or "fields"
 
                         /*
                          * If there's rule for the content-component we're currently at in our looping, then validate
                          * that component.
                          */
                         foreach ($rules as $criteriaKey => $criteria) {
+
                             if ($propertyName === $rulesPropertyKey && !empty($criteria)) { // matches field & datum segments
 
                                 /*
@@ -280,14 +320,16 @@ class CustomFormRequest extends FormRequest
                                      * Validate the component
                                      */
                                     if ($key === $criteriaKey) {
+
                                         $position = $contentProperty['position'] ?? null;
 
-                                        $this->validateRule($inputToValidate, $criteria['rules'], $key, $position );
+                                        $this->validateRule($inputToValidate, $criteria['rules'], $key, $position);
 
                                         $thisOneCanHaveMultiple = false;
                                         if(array_key_exists('can_have_multiple', $criteria)) {
                                             $thisOneCanHaveMultiple = $criteria['can_have_multiple'];
                                         }
+
                                         if(!$thisOneCanHaveMultiple){
                                             $cannotHaveMultiple[] = $key;
                                             $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
