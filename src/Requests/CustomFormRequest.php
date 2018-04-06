@@ -239,13 +239,13 @@ class CustomFormRequest extends FormRequest
             $required = [];
 
             foreach ($rulesForBrand[$content['type']] as $rulesPropertyKey => $rules) {
-                foreach ($rules as $criteriaKey => $criteria) {
-                    if(is_array($criteria['rules'])){
-                        if(in_array('required', $criteria['rules'])){
-                            $required[$rulesPropertyKey][] = $criteriaKey;
-                        }
-                    }else{
-                        if(strpos($criteria['rules'], 'required') !== false){
+                if(is_array($rules)){
+                    foreach ($rules as $criteriaKey => $criteria) {
+                        if(is_array($criteria['rules'])){
+                            if(in_array('required', $criteria['rules'])){
+                                $required[$rulesPropertyKey][] = $criteriaKey;
+                            }
+                        }elseif(strpos($criteria['rules'], 'required') !== false){
                             $required[$rulesPropertyKey][] = $criteriaKey;
                         }
                     }
