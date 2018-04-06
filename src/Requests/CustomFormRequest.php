@@ -440,7 +440,12 @@ class CustomFormRequest extends FormRequest
             }
         }
 
-        // get content status, if content status is restricted, then validation is required
+        /*
+         * If the request is to create, update, or delete a field or datum, we need the content that will validated to
+         * reflect the "proposed whole" of the content. The many cases below accomplish that by preparing the content
+         * for evaluation *with the proposed change applied to the data returned*. This is a kind of preview of the
+         * entire content to determine if we can change a content-field or content-datum.
+         */
 
         if ($request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest) {
             $contentId = $request->request->get('content_id');
@@ -503,6 +508,60 @@ class CustomFormRequest extends FormRequest
                     if($propertyKey === 'key'){
                         $datum['value'] = $input['value'];
                     }
+                }
+            }
+        }
+
+        if ($request instanceof ContentDatumDeleteRequest || $request instanceof ContentFieldDeleteRequest) {
+
+            $contentDatumOrField = [];
+
+            $idInParam = array_values($request->route()->parameters())[0];
+
+            if ($request instanceof ContentFieldDeleteRequest) {
+                $contentDatumOrField = $this->contentFieldService->get($idInParam);
+            }
+
+            if ($request instanceof ContentDatumDeleteRequest) {
+                $contentDatumOrField = $this->contentDatumService->get($idInParam);
+            }
+
+            throw_if(
+                empty($contentDatumOrField),
+                new \Exception(
+                    '$contentDatumOrField not filled in ' .
+                    '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent'
+                )
+            );
+            $contentId = $contentDatumOrField['content_id'];
+            $content = $this->contentService->getById($contentId);
+            $contentValidationRequired = in_array($content['status'], $restrictions);
+
+            if ($request instanceof ContentFieldDeleteRequest) {
+
+                $unset = null;
+                foreach($content['fields'] as $propertyKey => $field){
+                    if($field['id'] === (integer) $idInParam){
+                        $unset = $propertyKey;
+                    }
+                }
+
+                if(notNullValue($unset)){
+                    unset($content['fields'][$unset]);
+                }
+            }
+
+            if ($request instanceof ContentDatumDeleteRequest) {
+
+                $unset = null;
+                foreach($content['data'] as $propertyKey => $field){
+                    if($field['id'] === (integer) $idInParam){
+                        $unset = $propertyKey;
+                    }
+                }
+
+                if(notNullValue($unset)){
+                    unset($content['data'][$unset]);
                 }
             }
         }
