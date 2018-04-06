@@ -82,7 +82,8 @@ class ContentRepository extends RepositoryBase
         ContentFieldRepository $fieldRepository,
         ContentDatumRepository $datumRepository,
         ContentHierarchyRepository $contentHierarchyRepository
-    ) {
+    )
+    {
         parent::__construct();
 
         $this->contentPermissionRepository = $contentPermissionRepository;
@@ -210,7 +211,8 @@ class ContentRepository extends RepositoryBase
         array $types,
         $orderBy = 'child_position',
         $orderByDirection = 'asc'
-    ) {
+    )
+    {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
@@ -493,7 +495,8 @@ class ContentRepository extends RepositoryBase
         $siblingPairLimit = 1,
         $orderColumn = 'published_on',
         $orderDirection = 'desc'
-    ) {
+    )
+    {
         $beforeContents = $this->query()
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
@@ -741,7 +744,8 @@ class ContentRepository extends RepositoryBase
         $fieldValue,
         $fieldType,
         $fieldComparisonOperator = '='
-    ) {
+    )
+    {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
@@ -805,7 +809,8 @@ class ContentRepository extends RepositoryBase
         $publishedOnComparisonOperator = '=',
         $orderByColumn = 'published_on',
         $orderByDirection = 'desc'
-    ) {
+    )
+    {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
@@ -883,7 +888,8 @@ class ContentRepository extends RepositoryBase
         array $fieldRows,
         array $datumRows,
         array $permissionRows
-    ) {
+    )
+    {
         $contents = [];
 
         $fieldRowsGrouped = ContentHelper::groupArrayBy($fieldRows, 'content_id');
@@ -943,7 +949,8 @@ class ContentRepository extends RepositoryBase
         array $typesToInclude,
         array $slugHierarchy,
         array $requiredParentIds
-    ) {
+    )
+    {
         $this->page = $page;
         $this->limit = $limit;
         $this->orderBy = $orderBy;
@@ -1179,7 +1186,18 @@ class ContentRepository extends RepositoryBase
 
         if (!empty($contentIdsToPull)) {
 
-            $linkedContents = $this->getByIds($contentIdsToPull);
+            // We always want to pull published linked contents regardless of parent content status
+            if (!in_array(ContentService::STATUS_PUBLISHED, ContentRepository::$availableContentStatues)) {
+
+                ContentRepository::$availableContentStatues[ContentService::STATUS_PUBLISHED] =
+                    ContentService::STATUS_PUBLISHED;
+
+                $linkedContents = $this->getByIds($contentIdsToPull);
+
+                unset(ContentRepository::$availableContentStatues[ContentService::STATUS_PUBLISHED]);
+            } else {
+                $linkedContents = $this->getByIds($contentIdsToPull);
+            }
 
             foreach ($parsedContents as $contentId => $parsedContent) {
                 if (!empty($parsedContent['fields'])) {
