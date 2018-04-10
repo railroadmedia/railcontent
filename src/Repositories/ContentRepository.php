@@ -1187,8 +1187,9 @@ class ContentRepository extends RepositoryBase
         if (!empty($contentIdsToPull)) {
 
             // We always want to pull published linked contents regardless of parent content status
-            if (!in_array(ContentService::STATUS_PUBLISHED, ContentRepository::$availableContentStatues)) {
-
+            if (is_array(ContentRepository::$availableContentStatues) &&
+                !in_array(ContentService::STATUS_PUBLISHED, ContentRepository::$availableContentStatues)
+            ) {
                 ContentRepository::$availableContentStatues[ContentService::STATUS_PUBLISHED] =
                     ContentService::STATUS_PUBLISHED;
 
