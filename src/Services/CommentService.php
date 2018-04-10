@@ -219,7 +219,12 @@ class CommentService
 
         $orderByColumn = trim($orderByAndDirection, '-');
 
-        $hash = 'get_comments_' . (CommentRepository::$availableContentId ?? '') . CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
+        $hash = 'get_comments_'
+            . (CommentRepository::$availableContentId ?? '')
+            .'_'.(CommentRepository::$assignedToUserId ??'')
+            .'_'.(CommentRepository::$availableContentType ??'')
+            .'_'.(CommentRepository::$availableUserId ??'')
+            .'_'. CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
 
         $results = Cache::store(ConfigService::$cacheDriver)->remember(
             $hash,
