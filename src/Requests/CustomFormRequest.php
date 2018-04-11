@@ -253,6 +253,18 @@ class CustomFormRequest extends FormRequest
             }
 
             foreach($required as $propertyKey => $list){
+
+                if(!is_string($propertyKey)){
+                    $message = 'You are likely missing a key in the config validation rules for this content-type: "' .
+                        print_r(json_encode($required), true) . '"';
+                    if(!array_key_exists('fields', $required)) {
+                        $message = $message . ' Perhaps the "' . $propertyKey . '" key should instead be "fields"?';
+                    }elseif(!array_key_exists('data', $required)){
+                        $message = $message . ' Perhaps the "' . $propertyKey . '" key should instead be "data"?';
+                    }
+                    throw new HttpResponseException(new JsonResponse(['messages' => $message], 500));
+                }
+
                 foreach($list as $requiredElement){
                     $pass = false;
                     foreach ($content[$propertyKey] as $contentPropertySet) {
