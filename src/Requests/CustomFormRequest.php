@@ -308,18 +308,7 @@ class CustomFormRequest extends FormRequest
 
                                     $key = $contentProperty['key'];
                                     $inputToValidate = $contentProperty['value'];
-
-                                    /*
-                                     * Will be empty for field & datum creates - thus indicates when the current
-                                     * operation is one a ContentFieldCreateRequest or ContentDataCreateRequest.
-                                     * Thus, the value requested to set can be accessed directly from the request.
-                                     */
-                                    if(!empty($contentProperty['id'])){
-                                        if ($request->get('id') == $contentProperty['id']) {
-                                            $inputToValidate = $request->get('value');
-                                        }
-                                    }
-
+                                    
                                     /*
                                      * If the field|datum item is itself a piece of content, get the id so that can be
                                      * passed to the closure that evaluates the presence of that content in the database
