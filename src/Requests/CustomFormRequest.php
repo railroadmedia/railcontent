@@ -218,7 +218,7 @@ class CustomFormRequest extends FormRequest
             );
         }
 
-        if ($contentValidationRequired) {
+        if ($contentValidationRequired && isset($rulesForBrand[$content['type']])) {
 
             $counts = [];
             $cannotHaveMultiple = [];
