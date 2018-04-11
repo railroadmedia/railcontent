@@ -280,7 +280,7 @@ class CustomFormRequest extends FormRequest
 
             /*
              * Loop through the components of the content which we're modifying (or modifying a component of) and on
-             * each loop through validation rules for that content's type
+             * each of those loops, then loop through validation rules for that content's type
              */
             foreach ($content as $propertyName => $contentPropertySet) {
 
