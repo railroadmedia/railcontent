@@ -308,7 +308,7 @@ class CustomFormRequest extends FormRequest
 
                                     $key = $contentProperty['key'];
                                     $inputToValidate = $contentProperty['value'];
-                                    
+
                                     /*
                                      * If the field|datum item is itself a piece of content, get the id so that can be
                                      * passed to the closure that evaluates the presence of that content in the database
@@ -495,18 +495,17 @@ class CustomFormRequest extends FormRequest
             $content = $this->contentService->getById($contentId);
             $contentValidationRequired = in_array($content['status'], $restrictions);
 
-
             if ($request instanceof ContentFieldUpdateRequest) {
-                foreach($content['fields'] as $propertyKey => &$field){
-                    if($propertyKey === 'key'){
+                foreach($content['fields'] as &$field){
+                    if($field['id'] == $input['id']){
                         $field['value'] = $input['value'];
                     }
                 }
             }
 
             if ($request instanceof ContentDatumUpdateRequest) {
-                foreach($content['data'] as $propertyKey => &$datum){
-                    if($propertyKey === 'key'){
+                foreach($content['data'] as &$datum){
+                    if($datum['id'] == $input['id']){
                         $datum['value'] = $input['value'];
                     }
                 }
