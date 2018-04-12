@@ -47,34 +47,15 @@ class ContentCreateRequest extends CustomFormRequest
         return parent::rules();
     }
 
-    protected function setContentToValidate(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
-        $content['type'] = $input['type'];
-    }
-
     protected function contentValidationRequired(){
-
-    }
-
-    protected function prepareForContentValidation(&$content, &$keysOfValuesRequestedToSet, &$restricted, &$input){
-        foreach($input as $inputKey => $inputValue){
-            if(in_array($inputKey, $restricted)){
-                throw new \Exception(
-                    'Trying to create new content and passing a value that is protected by the ' .
-                    'content validation system ("' . $inputKey . '" is restricted and thus cannot be set on ' .
-                    'create). This value should not be sent in create requests such as this. It happening is ' .
-                    'likely due to an incorrectly configured form.'
-                );
-            }
-            $keysOfValuesRequestedToSet[] = $inputKey;
-        }
         /*
-         * No need to validate - the user is just creating the content and thus of course it won't pass, and
-         * we know they're not setting a value that would set it live.
+         * Can this be deleted? If the method this will override - CustomFormRequest::contentValidationRequired - needs
+         * to not run in this case, then at least a comment should be added here saying as much... lest this just get
+         * deleted and break something.
          *
-         * Jonathan, January 2018
+         * Or maybe it *can* just be deleted - and not break anything?
+         *
+         * Jonathan, April 12
          */
-
-        // todo: adjust so that this triggers exiting the content-validation. If we get here it means we don't need to validate
-        return true;
     }
 }
