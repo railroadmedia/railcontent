@@ -247,7 +247,8 @@ class CustomFormRequest extends FormRequest
                     foreach ($rules as $criteriaKey => &$criteria) {
 
                         if(!isset($criteria['rules'])){
-                            $criteria = ['rules' => $criteria];
+                            error_log($content['type'] . '.' . $criteriaKey . ' for one of the brands is missing the ' .
+                                '"rules" key in the validation config');
                         }
                         if(is_array($criteria['rules'])){
                             if(in_array('required', $criteria['rules'])){
