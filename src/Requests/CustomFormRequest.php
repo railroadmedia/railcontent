@@ -209,6 +209,7 @@ class CustomFormRequest extends FormRequest
         $contentValidationRequired = null;
         $rulesForBrand = null;
         $content = null;
+        $messages = [];
 
         try{
             $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
@@ -226,7 +227,10 @@ class CustomFormRequest extends FormRequest
             if (isset($rulesForBrand[$content['type']]['number_of_children'])) {
                 $inputToValidate = $this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']] ?? 0;
                 $rule = $rulesForBrand[$content['type']]['number_of_children'];
-                $this->validateRule($inputToValidate, $rule, 'number_of_children', 1);
+                $messages = array_merge(
+                    $messages,
+                    $this->validateRuleAndGetErrors($inputToValidate, $rule, 'number_of_children', 1)
+                );
             }
 
 
@@ -273,7 +277,10 @@ class CustomFormRequest extends FormRequest
                         }
                     }
                     if(!$pass){
-                        $this->validateRule(null, 'required', $requiredElement); // just make it fail
+                        $messages = array_merge(
+                            $messages,
+                            $this->validateRuleAndGetErrors(null, 'required', $requiredElement)
+                        ); // just make it fail
                     }
                 }
             }
@@ -324,7 +331,15 @@ class CustomFormRequest extends FormRequest
 
                                         $position = $contentProperty['position'] ?? null;
 
-                                        $this->validateRule($inputToValidate, $criteria['rules'], $key, $position);
+                                        $messages = array_merge(
+                                            $messages,
+                                            $this->validateRuleAndGetErrors(
+                                                $inputToValidate,
+                                                $criteria['rules'],
+                                                $key,
+                                                $position
+                                            )
+                                        );
 
                                         $thisOneCanHaveMultiple = false;
                                         if(array_key_exists('can_have_multiple', $criteria)) {
@@ -344,10 +359,18 @@ class CustomFormRequest extends FormRequest
             }
 
             foreach ($cannotHaveMultiple as $key) {
-                $this->validateRule((int)$counts[$key], 'numeric|max:1', $key . '_count', 1);
+                $messages = array_merge(
+                    $messages,
+                    $this->validateRuleAndGetErrors((int)$counts[$key], 'numeric|max:1', $key . '_count', 1)
+                );
             }
         }
-        return true;
+
+        if (!empty($messages)) {
+            throw new HttpResponseException(
+                new JsonResponse(['messages' => $messages], 422)
+            );
+        }
     }
 
     /**
@@ -590,5 +613,16 @@ class CustomFormRequest extends FormRequest
                 new JsonResponse(['messages' => $formattedValidationMessages], 422)
             );
         }
+    }
+
+    public function validateRuleAndGetErrors($inputToValidate, $rule, $key, $position = 0)
+    {
+        try {
+            $this->validateRule($inputToValidate, $rule, $key, $position);
+        } catch (HttpResponseException $exception) {
+            return $exception->getResponse()->getData(true)['messages'];
+        }
+
+        return [];
     }
 }
