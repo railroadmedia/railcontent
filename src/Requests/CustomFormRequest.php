@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Requests;
 
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Factory as ValidationFactory;
 use Illuminate\Validation\ValidationException;
 use Railroad\Railcontent\Services\ConfigService;
@@ -192,12 +193,6 @@ class CustomFormRequest extends FormRequest
      */
     public function validateContent($request)
     {
-        //  - get the status "states to guard"
-        //      - if we *are* writing|updating status, to what value are we wanting to set it to?
-        //      - if the value we want to set is in "the states to guard", validate content (return 422 if fails)
-        //  - if we *not* are writing|updating status, get the current status
-        //      - if the current status is in "the states to guard", validate content (return 422 if fails)
-
         /*
          * Note that laravel 5.6 has a change to the `ValidatesWhenResolved` and `ValidatesWhenResolvedTrait`.
          * This may or may not affect this functionality of this method and related functionality. Thus, be aware of
@@ -211,164 +206,193 @@ class CustomFormRequest extends FormRequest
         $content = null;
         $messages = [];
 
-        try{
+        try {
             $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
-        }catch(\Exception $exception){
+        } catch (\Exception $exception) {
             throw new HttpResponseException(
                 new JsonResponse(['messages' => $exception->getMessage()], 500)
             );
         }
 
-        if ($contentValidationRequired && isset($rulesForBrand[$content['type']])) {
+        if (!$contentValidationRequired) {
+            return true;
+        }
 
-            $counts = [];
-            $cannotHaveMultiple = [];
+        $counts = [];
+        $cannotHaveMultiple = [];
 
-            if (isset($rulesForBrand[$content['type']]['number_of_children'])) {
-                $inputToValidate = $this->contentHierarchyService->countParentsChildren([$content['id']])[$content['id']] ?? 0;
-                $rule = $rulesForBrand[$content['type']]['number_of_children'];
-                $messages = array_merge(
-                    $messages,
-                    $this->validateRuleAndGetErrors($inputToValidate, $rule, 'number_of_children', 1)
-                );
+        if (isset($rulesForBrand[$content['type']]['number_of_children'])) {
+            $inputToValidate = $this->contentHierarchyService->countParentsChildren(
+                    [$content['id']]
+                )[$content['id']] ?? 0;
+            $rule = $rulesForBrand[$content['type']]['number_of_children'];
+            $messages = array_merge(
+                $messages,
+                $this->validateRuleAndGetErrors($inputToValidate, $rule, 'number_of_children', 1)
+            );
+        }
+
+
+        /*
+         * Determine "required" elements, and validate that they're present in the content.
+         * The main validation section below fails to do this, thus its handled here by itself.
+         * Maybe one day refactor it so it's all tidy and together, for now this works.
+         */
+
+        $required = [];
+
+        foreach ($rulesForBrand[$content['type']] as $setOfContentTypes => $rulesForContentType) {
+
+            $setOfContentTypes = explode('|', $setOfContentTypes);
+
+            if (!in_array($content['status'], $setOfContentTypes)) {
+                break;
             }
 
+            foreach ($rulesForContentType as $rulesPropertyKey => $rules) {
 
-            /*
-             * Determine "required" elements, and validate that they're present in the content.
-             * The main validation section below fails to do this, thus its handled here by itself.
-             * Maybe one day refactor it so it's all tidy and together, for now this works.
-             */
+                if (!is_array($rules)) {
+                    break;
+                }
 
-            $required = [];
+                foreach ($rules as $criteriaKey => &$criteria) {
 
-            foreach ($rulesForBrand[$content['type']] as $rulesPropertyKey => &$rules) {
-                if(is_array($rules)){
-                    foreach ($rules as $criteriaKey => &$criteria) {
-
-                        if(!isset($criteria['rules'])){
-                            error_log($content['type'] . '.' . $criteriaKey . ' for one of the brands is missing the ' .
-                                '"rules" key in the validation config');
-                        }
-                        if(is_array($criteria['rules'])){
-                            if(in_array('required', $criteria['rules'])){
-                                $required[$rulesPropertyKey][] = $criteriaKey;
-                            }
-                        }elseif(strpos($criteria['rules'], 'required') !== false){
+                    if (!isset($criteria['rules'])) {
+                        error_log(
+                            $content['type'] . '.' . $criteriaKey . ' for one of the brands is missing the ' .
+                            '"rules" key in the validation config'
+                        );
+                    }
+                    if (is_array($criteria['rules'])) {
+                        if (in_array('required', $criteria['rules'])) {
                             $required[$rulesPropertyKey][] = $criteriaKey;
                         }
+                    } elseif (strpos($criteria['rules'], 'required') !== false) {
+                        $required[$rulesPropertyKey][] = $criteriaKey;
                     }
                 }
             }
+        }
 
-            foreach($required as $propertyKey => $list){
+        foreach ($required as $propertyKey => $list) {
 
-                if(!is_string($propertyKey)){
-                    $message = 'You are likely missing a key in the config validation rules for this content-type: "' .
-                        print_r(json_encode($required), true) . '"';
-                    if(!array_key_exists('fields', $required)) {
-                        $message = $message . ' Perhaps the "' . $propertyKey . '" key should instead be "fields"?';
-                    }elseif(!array_key_exists('data', $required)){
-                        $message = $message . ' Perhaps the "' . $propertyKey . '" key should instead be "data"?';
-                    }
-                    throw new HttpResponseException(new JsonResponse(['messages' => $message], 500));
+            if (!is_string($propertyKey)) {
+                $message = 'You are likely missing a key in the config validation rules for this content-type: "' .
+                    print_r(json_encode($required), true) . '"';
+                if (!array_key_exists('fields', $required)) {
+                    $message = $message . ' Perhaps the "' . $propertyKey . '" key should instead be "fields"?';
+                } elseif (!array_key_exists('data', $required)) {
+                    $message = $message . ' Perhaps the "' . $propertyKey . '" key should instead be "data"?';
                 }
-
-                foreach($list as $requiredElement){
-                    $pass = false;
-                    foreach ($content[$propertyKey] as $contentPropertySet) {
-                        if($contentPropertySet['key'] === $requiredElement){
-                            $pass = true;
-                        }
-                    }
-                    if(!$pass){
-                        $messages = array_merge(
-                            $messages,
-                            $this->validateRuleAndGetErrors(null, 'required', $requiredElement)
-                        ); // just make it fail
-                    }
-                }
+                throw new HttpResponseException(new JsonResponse(['messages' => $message], 500));
             }
 
-            /*
-             * Loop through the components of the content which we're modifying (or modifying a component of) and on
-             * each of those loops, then loop through validation rules for that content's type
-             */
-            foreach ($content as $propertyName => $contentPropertySet) {
+            foreach ($list as $requiredElement) {
+                $pass = false;
+                foreach ($content[$propertyKey] as $contentPropertySet) {
+                    if ($contentPropertySet['key'] === $requiredElement) {
+                        $pass = true;
+                    }
+                }
+                if (!$pass) {
+                    $messages = array_merge(
+                        $messages,
+                        $this->validateRuleAndGetErrors(null, 'required', $requiredElement)
+                    );
+                }
+            }
+        }
 
-                foreach ($rulesForBrand[$content['type']] as $rulesPropertyKey => $rules) {
+        /*
+         * Loop through the components of the content which we're modifying (or modifying a component of) and on
+         * each of those loops, then loop through validation rules for that content's type
+         */
+        foreach ($content as $propertyName => $contentPropertySet) {
+
+            foreach ($rulesForBrand[$content['type']] as $setOfContentTypes => $rulesForContentType) {
+
+                $setOfContentTypes = explode('|', $setOfContentTypes);
+
+                if (!in_array($content['status'], $setOfContentTypes)) {
+                    break;
+                }
+
+                foreach ($rulesForContentType as $rulesPropertyKey => $rules) {
 
                     /*
                      * "number_of_children" rules are handled elsewhere.
                      */
-                    if ($rulesPropertyKey !== 'number_of_children') {
+                    if ($rulesPropertyKey === 'number_of_children') {
+                        break;
+                    }
 
-                        // $rulesPropertyKey will be "data" or "fields"
+                    // $rulesPropertyKey will be "data" or "fields"
+
+                    /*
+                     * If there's rule for the content-component we're currently at in our looping, then validate
+                     * that component.
+                     */
+                    foreach ($rules as $criteriaKey => $criteria) {
+
+                        if (!($propertyName === $rulesPropertyKey && !empty($criteria))) {
+                            break; // if does not match field & datum segments
+                        }
 
                         /*
-                         * If there's rule for the content-component we're currently at in our looping, then validate
-                         * that component.
+                         * Loop through the components to validate where needed
                          */
-                        foreach ($rules as $criteriaKey => $criteria) {
+                        foreach ($contentPropertySet as $contentProperty) {
 
-                            if ($propertyName === $rulesPropertyKey && !empty($criteria)) { // matches field & datum segments
+                            $key = $contentProperty['key'];
+                            $inputToValidate = $contentProperty['value'];
 
-                                /*
-                                 * Loop through the components to validate where needed
-                                 */
-                                foreach ($contentPropertySet as $contentProperty) {
+                            /*
+                             * If the field|datum item is itself a piece of content, get the id so that can be
+                             * passed to the closure that evaluates the presence of that content in the database
+                             */
+                            if (($contentProperty['type'] ?? null) === 'content' && isset($inputToValidate['id'])) {
+                                $inputToValidate = $inputToValidate['id'];
+                            }
 
-                                    $key = $contentProperty['key'];
-                                    $inputToValidate = $contentProperty['value'];
+                            if ($key !== $criteriaKey) {
+                                break;
+                            }
 
-                                    /*
-                                     * If the field|datum item is itself a piece of content, get the id so that can be
-                                     * passed to the closure that evaluates the presence of that content in the database
-                                     */
-                                    if (($contentProperty['type'] ?? null) === 'content' && isset($inputToValidate['id'])) {
-                                        $inputToValidate = $inputToValidate['id'];
-                                    }
+                            // Validate the component
 
-                                    /*
-                                     * Validate the component
-                                     */
-                                    if ($key === $criteriaKey) {
+                            $position = $contentProperty['position'] ?? null;
 
-                                        $position = $contentProperty['position'] ?? null;
+                            $messages = array_merge(
+                                $messages,
+                                $this->validateRuleAndGetErrors(
+                                    $inputToValidate,
+                                    $criteria['rules'],
+                                    $key,
+                                    $position
+                                )
+                            );
 
-                                        $messages = array_merge(
-                                            $messages,
-                                            $this->validateRuleAndGetErrors(
-                                                $inputToValidate,
-                                                $criteria['rules'],
-                                                $key,
-                                                $position
-                                            )
-                                        );
+                            $thisOneCanHaveMultiple = false;
 
-                                        $thisOneCanHaveMultiple = false;
-                                        if(array_key_exists('can_have_multiple', $criteria)) {
-                                            $thisOneCanHaveMultiple = $criteria['can_have_multiple'];
-                                        }
+                            if (array_key_exists('can_have_multiple', $criteria)) {
+                                $thisOneCanHaveMultiple = $criteria['can_have_multiple'];
+                            }
 
-                                        if(!$thisOneCanHaveMultiple){
-                                            $cannotHaveMultiple[] = $key;
-                                            $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
-                                        }
-                                    }
-                                }
+                            if (!$thisOneCanHaveMultiple) {
+                                $cannotHaveMultiple[] = $key;
+                                $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
                             }
                         }
                     }
                 }
             }
+        }
 
-            foreach ($cannotHaveMultiple as $key) {
-                $messages = array_merge(
-                    $messages,
-                    $this->validateRuleAndGetErrors((int)$counts[$key], 'numeric|max:1', $key . '_count', 1)
-                );
-            }
+        foreach ($cannotHaveMultiple as $key) {
+            $messages = array_merge(
+                $messages,
+                $this->validateRuleAndGetErrors((int)$counts[$key], 'numeric|max:1', $key . '_count', 1)
+            );
         }
 
         if (!empty($messages)) {
@@ -376,6 +400,8 @@ class CustomFormRequest extends FormRequest
                 new JsonResponse(['messages' => $messages], 422)
             );
         }
+
+        return true;
     }
 
     /**
@@ -390,33 +416,16 @@ class CustomFormRequest extends FormRequest
         &$contentValidationRequired,
         &$rulesForBrand,
         &$content
-    ){
-        $content = null;
+    ) {
         $minimumRequiredChildren = null;
-
-        $rulesForBrand = [];
-
         $contentValidationRequired = false;
-
         $input = $request->request->all();
 
-        $rulesExistForBrand = isset(ConfigService::$validationRules[ConfigService::$brand]);
+        $brand = null;
+        $content = $this->getContentFromRequest($request);
 
-        if ($rulesExistForBrand) {
-            $rulesForBrand = ConfigService::$validationRules[ConfigService::$brand];
-        }
-
-        if (!is_array($rulesForBrand)) {
-            throw_unless(
-                is_string($rulesForBrand),
-                new \Exception(
-                    '"$rulesForBrand" is neither string nor array. wtf.'
-                )
-            );
-            $rulesForBrand = [$rulesForBrand];
-        }
-
-        $restrictions = $rulesForBrand['restrictions'];
+        $rulesForBrand = ConfigService::$validationRules[$content['brand']] ?? [];
+        $restrictions = $this->getStatusRestrictionsForType($content['type'], $rulesForBrand);
 
         if ($request instanceof ContentCreateRequest) {
             if (isset($input['status'])) {
@@ -426,172 +435,136 @@ class CustomFormRequest extends FormRequest
             }
         }
 
+        /*
+         * part 1 - Validation required?
+         *
+         * part 2 - If request to create, update, or delete **A FIELD OR DATUM**, need content prepared for validation
+         * to reflect the "requested whole" of the content - fields, data and all. The many cases below accomplish that
+         * by preparing the content
+         */
+
         if ($request instanceof ContentUpdateRequest) {
+
+            // part 1
+            $requestedStatusRequiresValidation = false;
             if (isset($input['status'])) {
                 if (in_array($input['status'], $restrictions)) {
-                    $contentValidationRequired = true;
+                    $requestedStatusRequiresValidation = true;
                 }
             }
-
-            // get content
-
-            $urlPath = parse_url($_SERVER['HTTP_REFERER'])['path'];
-            $urlPath = explode('/', $urlPath);
-
-            // if this is equal to content-type continue, else error
-            $urlPathThirdLastElement = array_values(array_slice($urlPath, -3))[0];
-
-            // if this is edit continue, else error
-            $urlPathSecondLastElement = array_values(array_slice($urlPath, -2))[0];
-
-            if ($urlPathSecondLastElement !== 'edit') {
-                error_log(
-                    'Attempting to validate content-update, but url path\'s second-last element does not ' .
-                    'match expectations. (expected "edit", got "' . $urlPathSecondLastElement . '")'
+            $contentValidationRequired = $requestedStatusRequiresValidation || in_array(
+                    $content['status'],
+                    $restrictions
                 );
-            }
 
-            // content_id
-            $urlPathLastElement = array_values(array_slice($urlPath, -1))[0];
-
-            $contentId = (integer)$urlPathLastElement;
-            $content = $this->contentService->getById($contentId);
-
-            if ($urlPathThirdLastElement !== $content['type']) {
-                error_log(
-                    'Attempting to validate content-update, but url path\'s third-last element does not ' .
-                    'match expectations. (expected "' .
-                    $content['type'] .
-                    '", got "' .
-                    $urlPathSecondLastElement .
-                    '")'
-                );
+            // part 2
+            foreach ($input as $key => $value) {
+                $content[$key] = $value;
             }
         }
 
-        /*
-         * If the request is to create, update, or delete a field or datum, we need the content that will validated to
-         * reflect the "proposed whole" of the content. The many cases below accomplish that by preparing the content
-         * for evaluation *with the proposed change applied to the data returned*. This is a kind of preview of the
-         * entire content to determine if we can change a content-field or content-datum.
-         */
-
         if ($request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest) {
-            $contentId = $request->request->get('content_id');
-            if (empty($contentId)) {
-                error_log(
-                    'Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
-                    'content_id passed. This is at odds with what we\'re expecting and might be cause for concern'
-                );
-            }
-            $content = $this->contentService->getById($contentId);
+
+            // part 1
             $contentValidationRequired = in_array($content['status'], $restrictions);
 
-
-            if ($request instanceof ContentFieldCreateRequest) {
-                $content['fields'][] = ['key' => $input['key'], 'value' => $input['value']];
-            }
-
-            if ($request instanceof ContentDatumCreateRequest) {
-                $content['data'][] = ['key' => $input['key'], 'value' => $input['value']];
-            }
+            // part 2
+            $content[$request instanceof ContentFieldCreateRequest ? 'fields' : 'data'][] = [
+                'key' => $input['key'],
+                'value' => $input['value']
+            ];
         }
 
         if ($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest) {
-            $contentDatumOrField = [];
 
-            if ($request instanceof ContentFieldUpdateRequest) {
-                $contentDatumOrField = $this->contentFieldService->get(
-                    array_values($request->route()->parameters())[0]
-                );
-            }
-
-            if ($request instanceof ContentDatumUpdateRequest) {
-                $contentDatumOrField = $this->contentDatumService->get(
-                    array_values($request->route()->parameters())[0]
-                );
-            }
-
-            throw_if(
-                empty($contentDatumOrField),
-                new \Exception(
-                    '$contentDatumOrField not filled in ' .
-                    '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent'
-                )
-            );
-            $contentId = $contentDatumOrField['content_id'];
-            $content = $this->contentService->getById($contentId);
+            // part 1
             $contentValidationRequired = in_array($content['status'], $restrictions);
 
-            if ($request instanceof ContentFieldUpdateRequest) {
-                foreach($content['fields'] as &$field){
-                    if($field['id'] == $input['id']){
-                        $field['value'] = $input['value'];
-                    }
-                }
-            }
-            if ($request instanceof ContentDatumUpdateRequest) {
-                foreach($content['data'] as &$datum){
-                    if($datum['id'] == $input['id']){
-                        $datum['value'] = $input['value'];
-                    }
+            // part 2
+            $fieldsOrData = $request instanceof ContentFieldUpdateRequest ? 'fields' : 'data';
+            foreach ($content[$fieldsOrData] as &$item) {
+                if ($item['id'] == $input['id']) {
+                    $item['value'] = $input['value'];
                 }
             }
         }
 
         if ($request instanceof ContentDatumDeleteRequest || $request instanceof ContentFieldDeleteRequest) {
 
-            $contentDatumOrField = [];
-
-            $idInParam = array_values($request->route()->parameters())[0];
-
-            if ($request instanceof ContentFieldDeleteRequest) {
-                $contentDatumOrField = $this->contentFieldService->get($idInParam);
-            }
-
-            if ($request instanceof ContentDatumDeleteRequest) {
-                $contentDatumOrField = $this->contentDatumService->get($idInParam);
-            }
-
-            throw_if(
-                empty($contentDatumOrField),
-                new \Exception(
-                    '$contentDatumOrField not filled in ' .
-                    '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent'
-                )
-            );
-            $contentId = $contentDatumOrField['content_id'];
-            $content = $this->contentService->getById($contentId);
+            // part 1
             $contentValidationRequired = in_array($content['status'], $restrictions);
 
-            if ($request instanceof ContentFieldDeleteRequest) {
-
+            // part 2
+            if ($contentValidationRequired) {
                 $unset = null;
-                foreach($content['fields'] as $propertyKey => $field){
-                    if($field['id'] === (integer) $idInParam){
+                $idInParam = array_values($request->route()->parameters())[0];
+                $fieldsOrData = $request instanceof ContentFieldDeleteRequest ? 'fields' : 'data';
+                foreach ($content[$fieldsOrData] as $propertyKey => $field) {
+                    if ($field['id'] === (integer)$idInParam) {
                         $unset = $propertyKey;
                     }
                 }
-
-                if(notNullValue($unset)){
+                if (notNullValue($unset)) {
                     unset($content['fields'][$unset]);
                 }
             }
-
-            if ($request instanceof ContentDatumDeleteRequest) {
-
-                $unset = null;
-                foreach($content['data'] as $propertyKey => $field){
-                    if($field['id'] === (integer) $idInParam){
-                        $unset = $propertyKey;
-                    }
-                }
-
-                if(notNullValue($unset)){
-                    unset($content['data'][$unset]);
-                }
-            }
         }
+
+        $contentValidationRequired = $contentValidationRequired || isset($rulesForBrand[$content['type']]);
+    }
+
+    private function getContentFromRequest(Request $request)
+    {
+        if ($request instanceof ContentUpdateRequest) {
+
+            $urlPath = explode('/', parse_url($_SERVER['HTTP_REFERER'])['path']);
+
+            //$brand = array_values(array_slice($urlPath, -4))[0];
+
+            return $this->contentService->getById((integer)array_values(array_slice($urlPath, -1))[0]);
+        }
+
+        if ($request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest) {
+
+            $contentId = $request->request->get('content_id');
+
+            if (empty($contentId)) {
+                error_log(
+                    'Somehow we have a ContentDatumCreateRequest or ContentFieldCreateRequest without a' .
+                    'content_id passed. This is at odds with what we\'re expecting and might be cause for concern'
+                );
+            }
+
+            return $this->contentService->getById($contentId);
+        }
+
+        $idInParam = array_values($request->route()->parameters())[0];
+
+        if ($request instanceof ContentFieldDeleteRequest || $request instanceof ContentFieldUpdateRequest) {
+            $contentDatumOrField = $this->contentFieldService->get($idInParam);
+        } else {
+            $contentDatumOrField = $this->contentDatumService->get($idInParam);
+        }
+
+        throw_if(
+            empty($contentDatumOrField),
+            new \Exception(
+                '$contentDatumOrField not filled in ' .
+                '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent'
+            )
+        );
+
+        return $this->contentService->getById($contentDatumOrField['content_id']);
+    }
+
+    private function getStatusRestrictionsForType($contentType, $rulesForBrand)
+    {
+        $restrictions = [];
+        foreach ($rulesForBrand[$contentType] as $setOfRestrictedStatuses => $rulesForContentType) {
+            $setOfRestrictedStatuses = explode('|', $setOfRestrictedStatuses);
+            $restrictions = array_merge($restrictions, $setOfRestrictedStatuses);
+        }
+        return $restrictions;
     }
 
     public function validateRule($inputToValidate, $rule, $key, $position = 0)
