@@ -160,6 +160,8 @@ https://laravel.com/docs/master/validation#available-validation-rules).
 
 (required)
 
+Same as fields, except data.
+
 
 #### number_of_children
 
@@ -170,74 +172,47 @@ See "**Important Note about the "numeric" rule**" note above.
 Provide this in cases where a content type requires a set number of children before it can be set to a 
 "restricted" state (perhaps "published" or "scheduled").
 
+Can be defined either of the two ways:
 
+```php
+'number_of_children' => 'min:3', 
+'number_of_children' => ['rules' => 'min:3'],
+```
+
+Unlike the rest of the rules, this doesn't *need* to be an item called "rules" in an array. It can be, or not. Either
+ way will work.
 
 
 ### Configuration Example
 
 ```php
 'validation' => [
-    'qux_brand' => [
-        'restrictions' => ['published','scheduled'],
-        'course' => [
-            'number_of_children' => 'numeric|min:1',
-
-            'fields' => [
-                'title' => ['rules' => 'required|min:1|max:180'],
-                'difficulty' => ['rules' => 'required|numeric|min:1|max:10'],
-                'instructor' => [
-                    'rules' => [
-                        Rule::exists($connectionMaskPrefix . 'content', 'id')->where(
-                            function ($query) { $query->where('type', 'instructor'); }
-                        ),
-                        'required'
+    'brand' => [
+        'content-type' => [
+            'content-status|content-status|...' => [
+                'number_of_children' => 'min:3',
+                'fields' => [
+                    'key' => [
+                        rules => ['validation-rule', 'validation-rule', ...],
+                        'can_have_multiple' => true/false],
                     ],
-                    'can_have_multiple' => true,
+                    'key' => [
+                        rules => 'validation-rule|validation-rule|...',
+                        'can_have_multiple' => true/false],
+                    ],
                 ],
-                'topics' => [
-                    'rules' => 'string|min:1|max:64',
-                    'can_have_multiple' => true,
-                ],
-                'tags' => [
-                    'rules' => 'string|min:1|max:64',
-                    'can_have_multiple' => true,
-                ],
-            ],
-
-            'data' => [ // "data" not "datum" because the former is what the arrays' key use
-                'thumbnail_url' => [
-                    'rules' => ['required', 'url', 'regex:/^.*\.(jpg|png)$/'], // stackoverflow.com/a/37495, // cannot have more than 1s
-                ],
-                'all_resources_zip_url' => [
-                    'rules' => 'required|url|regex:/^.*\.(zip)$/',
-                ],
-                'description' => [
-                    'rules' => 'string|min:1|max:1000',
-                    'can_have_multiple' => true,
+                'data' => [
+                    'key' => [
+                        rules => ['validation-rule', 'validation-rule', ...],
+                        'can_have_multiple' => true/false],
+                    ],
+                    'key' => [
+                        rules => 'validation-rule|validation-rule|...',
+                        'can_have_multiple' => true/false],
+                    ],
                 ]
-            ],
+            ]
         ],
-        'course_part' => [
-            'number_of_children' => 0,
-            'fields' => [
-                'title' => ['rules' => 'required|min:1|max:180'],
-                'video' => ['rules' => [Rule::exists($connectionMaskPrefix . 'content', 'id')->where(
-                        function ($query) { $query->where('type', 'vimeo-video'); }
-                    ),'required']
-                ]
-            ],
-            'data' => [
-                'card_thumbnail' => ['rules' => 'required|url|regex:/^.*\.(jpg|png)$/',],
-                'mp3_exercises_zip' => ['rules' => 'required|url|regex:/^.*\.(zip)$/',],
-                'sheet_music_pdf' => ['rules' => 'required|url|regex:/^.*\.(pdf)$/',],
-                'sheet_music_png' => [
-                    'rules' => 'required|url|regex:/^.*\.(jpg|png)$/',
-                    'can_have_multiple' => true,
-                ],
-                'description' => ['rules' => 'string|min:1|max:1000',]
-            ],
-        ],
-        
     ]
 ]
 ```

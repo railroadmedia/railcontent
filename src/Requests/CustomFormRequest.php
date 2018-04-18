@@ -221,17 +221,32 @@ class CustomFormRequest extends FormRequest
         $counts = [];
         $cannotHaveMultiple = [];
 
-        if (isset($rulesForBrand[$content['type']]['number_of_children'])) {
-            $inputToValidate = $this->contentHierarchyService->countParentsChildren(
+        foreach ($rulesForBrand[$content['type']] as $setOfContentTypes => $rulesForContentType) {
+
+            $setOfContentTypes = explode('|', $setOfContentTypes);
+
+            if (!in_array($content['status'], $setOfContentTypes)) {
+                break;
+            }
+
+            if (isset($rulesForContentType['number_of_children'])) {
+
+                $numberOfChildren = $this->contentHierarchyService->countParentsChildren(
                     [$content['id']]
                 )[$content['id']] ?? 0;
-            $rule = $rulesForBrand[$content['type']]['number_of_children'];
-            $messages = array_merge(
-                $messages,
-                $this->validateRuleAndGetErrors($inputToValidate, $rule, 'number_of_children', 1)
-            );
-        }
 
+                $rule = $rulesForContentType['number_of_children'];
+
+                if(is_array($rule) && key_exists('rules', $rule)){
+                    $rule = $rule['rules'];
+                }
+
+                $messages = array_merge(
+                    $messages,
+                    $this->validateRuleAndGetErrors($numberOfChildren, $rule, 'number_of_children', 1)
+                );
+            }
+        }
 
         /*
          * Determine "required" elements, and validate that they're present in the content.
@@ -255,6 +270,10 @@ class CustomFormRequest extends FormRequest
                     break;
                 }
 
+                if ($rulesPropertyKey === 'number_of_children') {
+                    break;
+                }
+
                 foreach ($rules as $criteriaKey => &$criteria) {
 
                     if (!isset($criteria['rules'])) {
@@ -263,6 +282,7 @@ class CustomFormRequest extends FormRequest
                             '"rules" key in the validation config'
                         );
                     }
+
                     if (is_array($criteria['rules'])) {
                         if (in_array('required', $criteria['rules'])) {
                             $required[$rulesPropertyKey][] = $criteriaKey;
@@ -425,6 +445,7 @@ class CustomFormRequest extends FormRequest
         $content = $this->getContentFromRequest($request);
 
         $rulesForBrand = ConfigService::$validationRules[$content['brand']] ?? [];
+
         $restrictions = $this->getStatusRestrictionsForType($content['type'], $rulesForBrand);
 
         if ($request instanceof ContentCreateRequest) {
