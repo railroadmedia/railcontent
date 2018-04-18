@@ -364,14 +364,14 @@ class CustomFormRequest extends FormRequest
                         foreach ($contentPropertySet as $contentProperty) {
 
                             $key = $contentProperty['key'];
-                            $inputToValidate = $contentProperty['value'];
+                            $fieldOrDatumValue = $contentProperty['value'];
 
                             /*
                              * If the field|datum item is itself a piece of content, get the id so that can be
                              * passed to the closure that evaluates the presence of that content in the database
                              */
-                            if (($contentProperty['type'] ?? null) === 'content' && isset($inputToValidate['id'])) {
-                                $inputToValidate = $inputToValidate['id'];
+                            if (($contentProperty['type'] ?? null) === 'content' && isset($fieldOrDatumValue['id'])) {
+                                $fieldOrDatumValue = $fieldOrDatumValue['id'];
                             }
 
                             if ($key !== $criteriaKey) {
@@ -385,7 +385,7 @@ class CustomFormRequest extends FormRequest
                             $messages = array_merge(
                                 $messages,
                                 $this->validateRuleAndGetErrors(
-                                    $inputToValidate,
+                                    $fieldOrDatumValue,
                                     $criteria['rules'],
                                     $key,
                                     $position
@@ -588,11 +588,11 @@ class CustomFormRequest extends FormRequest
         return $restrictions;
     }
 
-    public function validateRule($inputToValidate, $rule, $key, $position = 0)
+    public function validateRule($fieldOrDatumValue, $rule, $key, $position = 0)
     {
         try {
             $this->validationFactory->make(
-                [$key => $inputToValidate],
+                [$key => $fieldOrDatumValue],
                 [$key => $rule]
             )->validate();
         } catch (ValidationException $exception) {
@@ -613,10 +613,10 @@ class CustomFormRequest extends FormRequest
         }
     }
 
-    public function validateRuleAndGetErrors($inputToValidate, $rule, $key, $position = 0)
+    public function validateRuleAndGetErrors($fieldOrDatumValue, $rule, $key, $position = 0)
     {
         try {
-            $this->validateRule($inputToValidate, $rule, $key, $position);
+            $this->validateRule($fieldOrDatumValue, $rule, $key, $position);
         } catch (HttpResponseException $exception) {
             return $exception->getResponse()->getData(true)['messages'];
         }
