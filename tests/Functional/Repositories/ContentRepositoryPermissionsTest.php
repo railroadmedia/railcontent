@@ -114,7 +114,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
         $response = $this->classBeingTested->getById($content['id']);
 
-        $this->assertEquals($content, $response);
+        $this->assertEquals($content->getArrayCopy(), $response);
     }
 
     public function test_get_by_id_is_satisfiable_by_multiple()
@@ -141,7 +141,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
         $response = $this->classBeingTested->getById($content['id']);
 
-        $this->assertEquals($content, $response);
+        $this->assertEquals($content->getArrayCopy(), $response);
     }
 
     public function test_get_by_id_is_protected_by_single_type()
@@ -207,7 +207,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
         $response = $this->classBeingTested->getById($content['id']);
 
-        $this->assertEquals($content, $response);
+        $this->assertEquals($content->getArrayCopy(), $response);
     }
 
     public function test_get_by_id_is_satisfiable_by_multiple_type()
@@ -234,7 +234,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
         $response = $this->classBeingTested->getById($content['id']);
 
-        $this->assertEquals($content, $response);
+        $this->assertEquals($content->getArrayCopy(), $response);
     }
 
 }

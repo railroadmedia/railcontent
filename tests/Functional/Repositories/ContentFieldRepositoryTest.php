@@ -73,7 +73,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'content_id' => $contentId,
                 'key' => $this->faker->word,
                 'value' => $this->faker->word,
-                'position' => rand(),
+                'position' => $i,
                 'type' => $this->faker->word,
             ];
 
@@ -88,7 +88,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'content_id' => rand(),
                 'key' => $this->faker->word,
                 'value' => $this->faker->word,
-                'position' => rand(),
+                'position' => $i,
                 'type' => $this->faker->word,
             ];
 
@@ -112,7 +112,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'content_id' => $i + 1,
                 'key' => $this->faker->word,
                 'value' => $this->faker->word,
-                'position' => rand(),
+                'position' => $i,
                 'type' => $this->faker->word,
             ];
 
@@ -127,7 +127,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'content_id' => rand(),
                 'key' => $this->faker->word,
                 'value' => $this->faker->word,
-                'position' => rand(),
+                'position' => $i,
                 'type' => $this->faker->word,
             ];
 

@@ -80,6 +80,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             'published_on' => Carbon::now()->toDateTimeString(),
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => Carbon::now()->toDateTimeString(),
+            'sort' => 0,
         ];
 
         $contentId = $this->classBeingTested->create($content);
@@ -119,7 +120,7 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $this->assertEquals(
             array_merge(
-                $content,
+                $content->getArrayCopy(),
                 [
                     'id' => $contentId,
                     'fields' => $expectedFields,
@@ -374,12 +375,5 @@ class ContentRepositoryTest extends RailcontentTestCase
             ConfigService::$tableContent,
             ['id' => 4]
         );
-    }
-
-    public function test_get_by_slug_not_exist()
-    {
-        $results = $this->classBeingTested->getBySlugHierarchy($this->faker->word);
-
-        $this->assertNull($results);
     }
 }

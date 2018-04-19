@@ -145,7 +145,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
                 $content['id']
             );
 
-            $expectedContents[] = $content;
+            $expectedContents[] = $content->getArrayCopy();
         }
 
         for ($i = 0; $i < 5; $i++) {
@@ -308,6 +308,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
             $childContent['permissions'] = [];
             $childContent['parent_id'] = null;
             $childContent['child_id'] = null;
+            $childContent['sort'] = 0;
 
             $this->contentHierarchyFactory->create(
                 $parentContentId,

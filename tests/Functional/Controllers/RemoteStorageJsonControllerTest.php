@@ -15,6 +15,8 @@ class RemoteStorageJsonControllerTest extends RailcontentTestCase
     
     public function test_put()
     {
+        $this->markAsRisky();
+
         $useThisFilenameWithoutExtension = $this->faker->word;
 
         $filenameAbsolute = $this->changeImageNameLocally(

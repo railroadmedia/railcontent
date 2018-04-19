@@ -62,7 +62,7 @@ class ContentRepositoryFieldSubContents extends RailcontentTestCase
         $result = $this->classBeingTested->getById($content['id']);
 
         $this->assertEquals('content', $result['fields'][0]['type']);
-        $this->assertEquals($subContent, $result['fields'][0]['value']);
+        $this->assertEquals($subContent->getArrayCopy(), $result['fields'][0]['value']);
     }
 
     public function test_sub_content_id_field_is_replace_by_content_multiple()
@@ -98,12 +98,12 @@ class ContentRepositoryFieldSubContents extends RailcontentTestCase
         $result = $this->classBeingTested->getById($content['id']);
 
         $this->assertEquals('content', $result['fields'][0]['type']);
-        $this->assertEquals($subContents[0], $result['fields'][0]['value']);
+        $this->assertEquals($subContents[0]->getArrayCopy(), $result['fields'][0]['value']);
 
         $this->assertEquals('content', $result['fields'][1]['type']);
-        $this->assertEquals($subContents[1], $result['fields'][1]['value']);
+        $this->assertEquals($subContents[1]->getArrayCopy(), $result['fields'][1]['value']);
 
         $this->assertEquals('content', $result['fields'][2]['type']);
-        $this->assertEquals($subContents[2], $result['fields'][2]['value']);
+        $this->assertEquals($subContents[2]->getArrayCopy(), $result['fields'][2]['value']);
     }
 }
