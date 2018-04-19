@@ -10,16 +10,24 @@ class FullTextSearchService
      * @var FullTextSearchRepository
      */
     protected $fullTextSearchRepository;
+    /**
+     * @var ContentService
+     */
+    private $contentService;
 
     /**
      * FullTextSearchService constructor.
      *
      * @param FullTextSearchRepository $fullTextSearchRepository
+     * @param ContentService $contentService
      */
     public function __construct(
-        FullTextSearchRepository $fullTextSearchRepository
-    ) {
+        FullTextSearchRepository $fullTextSearchRepository,
+        ContentService $contentService
+    )
+    {
         $this->fullTextSearchRepository = $fullTextSearchRepository;
+        $this->contentService = $contentService;
     }
 
     /** Full text search by term
@@ -44,7 +52,8 @@ class FullTextSearchService
         $sort = '-score',
         $dateTimeCutoff = null,
         $brands = null
-    ) {
+    )
+    {
         $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($sort, '-');
 
@@ -55,15 +64,17 @@ class FullTextSearchService
         }
 
         $return = [
-            'results' => $this->fullTextSearchRepository->search(
-                $term,
-                $page,
-                $limit,
-                $contentTypes,
-                $contentStatuses,
-                $orderByColumn,
-                $orderByDirection,
-                $dateTimeCutoff
+            'results' => $this->contentService->getByIds(
+                $this->fullTextSearchRepository->search(
+                    $term,
+                    $page,
+                    $limit,
+                    $contentTypes,
+                    $contentStatuses,
+                    $orderByColumn,
+                    $orderByDirection,
+                    $dateTimeCutoff
+                )
             ),
             'total_results' => $this->fullTextSearchRepository->countTotalResults(
                 $term,

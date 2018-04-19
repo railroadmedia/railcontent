@@ -1,6 +1,6 @@
 <?php
 
-namespace Railroad\Railcontent\Tests\Functional\Controllers;
+namespace Railroad\Railcontent\Tests\Functional\Entities;
 
 use Illuminate\Support\Debug\Dumper;
 use Railroad\Railcontent\Entities\ContentEntity;
@@ -102,7 +102,6 @@ class ContentEntityTest extends RailcontentTestCase
         }
 
         $results = $this->serviceBeingTested->getById($content['id']);
-        (new Dumper)->dump($results->dot());
 
         $this->assertInstanceOf(ContentEntity::class, $results);
 

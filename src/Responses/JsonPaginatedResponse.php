@@ -48,6 +48,10 @@ class JsonPaginatedResponse implements Responsable
                     $this->results[$resultIndex]['pluck'] = $result->dot();
                 }
             }
+        } else {
+            if (method_exists($this->results, 'dot')) {
+                $this->results['pluck'] = $this->results->dot();
+            }
         }
 
         return [

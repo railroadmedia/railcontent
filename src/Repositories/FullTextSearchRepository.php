@@ -230,7 +230,7 @@ class FullTextSearchRepository extends RepositoryBase
 
         $contentRows = $query->getToArray();
 
-        return $this->contentRepository->getByIds(array_column($contentRows, 'content_id'));
+        return array_column($contentRows, 'content_id');
 
     }
 
