@@ -233,6 +233,8 @@ class UserContentProgressService
             $contentOrContents = [$contentOrContents];
         }
 
+        $contentOrContents = array_map(function($x){ return (array) $x;}, $contentOrContents);
+
         $contentIds = array_column($contentOrContents, 'id');
 
         if (!empty($contentIds)) {

@@ -184,7 +184,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
         $content['user_progress'][$userId] = [];
 
-        $this->assertEquals([$content], $results);
+        $this->assertEquals([$content->getArrayCopy()], $results);
     }
 
     public function test_attach_user_progress_to_contents_with_progress()
@@ -205,7 +205,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
                 'progress_percent' => '0',
                 'updated_on' => Carbon::now()->toDateTimeString()
             ];
-            $expectedContents[] = $content;
+            $expectedContents[] = $content->getArrayCopy();
 
             $this->classBeingTested->startContent($content['id'], $userId);
         }
