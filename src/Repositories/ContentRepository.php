@@ -487,6 +487,7 @@ class ContentRepository extends RepositoryBase
      * @param int $siblingPairLimit
      * @param string $orderColumn
      * @param string $orderDirection
+     * @return array
      */
     public function getTypeNeighbouringSiblings(
         $type,
@@ -576,15 +577,6 @@ class ContentRepository extends RepositoryBase
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
             ->orderBy('published_on', 'desc')
             ->count();
-    }
-
-    /**
-     * @param array $slugs
-     * @return array|null
-     */
-    public function getBySlugHierarchy(...$slugs)
-    {
-        // todo: write function
     }
 
     /**

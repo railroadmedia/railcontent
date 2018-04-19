@@ -109,7 +109,7 @@ class CustomFormRequest extends FormRequest
             $contentId = $request->request->get('content_id');
             $content = $this->contentService->getById($contentId);
 
-            return $content['type'];
+            return $content['type'] ?? '';
         }
 
         return $type;

@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -217,26 +218,30 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $expectedResults = $this->createExpectedResult('ok', 201, [
-            0 =>
-                [
-                    'id' => '1',
-                    'slug' => $slug,
-                    'brand' => ConfigService::$brand,
-                    'language' => ConfigService::$defaultLanguage,
-                    'status' => $status,
-                    'type' => $type,
-                    'created_on' => Carbon::now()->toDateTimeString(),
-                    'published_on' => $publishedOn,
-                    'archived_on' => null,
-                    'parent_id' => null,
-                    'fields' => [],
-                    'data' => [],
-                    'permissions' => [],
-                    'child_id' => null,
-                    'sort' => 0,
-                ]
-        ]);
+        $expectedResults = $this->createExpectedResult(
+            'ok',
+            201,
+            [
+                0 =>
+                    [
+                        'id' => '1',
+                        'slug' => $slug,
+                        'brand' => ConfigService::$brand,
+                        'language' => ConfigService::$defaultLanguage,
+                        'status' => $status,
+                        'type' => $type,
+                        'created_on' => Carbon::now()->toDateTimeString(),
+                        'published_on' => $publishedOn,
+                        'archived_on' => null,
+                        'parent_id' => null,
+                        'fields' => [],
+                        'data' => [],
+                        'permissions' => [],
+                        'child_id' => null,
+                        'sort' => 0,
+                    ]
+            ]
+        );
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson());
 
@@ -254,7 +259,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 "status" => "ok",
                 "code" => 200,
-                "results" => [0 => $content]
+                "results" => [0 => $content->getArrayCopy()]
             ],
             $response->json()
         );
@@ -342,9 +347,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $response = $this->call('PATCH', 'railcontent/content/' . $content['id'], [
-            'status' => $this->faker->word
-        ]);
+        $response = $this->call(
+            'PATCH',
+            'railcontent/content/' . $content['id'],
+            [
+                'status' => $this->faker->word
+            ]
+        );
 
         //expecting a response with 422 status
         $this->assertEquals(422, $response->status());
@@ -482,7 +491,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(404, $response->status());
         $this->assertEquals('Entity not found.', json_decode($response->getContent())->error->title, true);
-        $this->assertEquals('Delete failed, content not found with id: ' . $randomId, json_decode($response->getContent())->error->detail, true);
+        $this->assertEquals(
+            'Delete failed, content not found with id: ' . $randomId,
+            json_decode($response->getContent())->error->detail,
+            true
+        );
     }
 
     public function test_index_response_no_results()
@@ -531,8 +544,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 $this->faker->word,
                 $types[0],
-                $this->faker->randomElement($statues));
-            $contents[$i] = $content;
+                $this->faker->randomElement($statues)
+            );
+            $contents[$i] = array_merge($content->getArrayCopy(), ['pluck' => $content->dot()]);
         }
 
         //create library lessons
@@ -598,7 +612,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 $this->faker->word,
                 $types[0],
-                $this->faker->randomElement($statues));
+                $this->faker->randomElement($statues)
+            );
             $contents[$i] = $content;
         }
 
@@ -615,6 +630,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
             $expectedResults[$i - 1] = $contents[$i];
             $expectedResults[$i - 1]['fields'][] = array_merge($field, ['id' => $field['id']]);
+            $expectedResults[$i - 1] = array_merge($contents[$i]->getArrayCopy(), ['pluck' => $contents[$i]->dot()]);
         }
         $expectedContent['results'] = $expectedResults;
         $expectedContent['total_results'] = $contentWithFieldsNr - 1;
@@ -666,13 +682,23 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         //only first 5 courses have the required field associated
         for ($i = 1; $i < 6; $i++) {
-            $field = $this->fieldFactory->create($contents[$i]['id'], $requiredField['key'], $requiredField['value'], null, $requiredField['type']);
+            $field = $this->fieldFactory->create(
+                $contents[$i]['id'],
+                $requiredField['key'],
+                $requiredField['value'],
+                null,
+                $requiredField['type']
+            );
 
-            $expectedResults[$i - 1] = $contents[$i];
+            $expectedResults[$i - 1] = $contents[$i]->getArrayCopy();
             $expectedResults[$i - 1]['fields'][] = $field;
         }
 
-        $instructor = $this->contentFactory->create($this->faker->word, 'instructor', $this->faker->randomElement($statues));
+        $instructor = $this->contentFactory->create(
+            $this->faker->word,
+            'instructor',
+            $this->faker->randomElement($statues)
+        );
 
         $fieldInstructor = [
             'key' => 'instructor',
@@ -681,9 +707,15 @@ class ContentJsonControllerTest extends RailcontentTestCase
         ];
 
         for ($i = 1; $i < 7; $i++) {
-            $contentField = $this->fieldFactory->create($contents[$i]['id'], $fieldInstructor['key'], $fieldInstructor['value'], null, $fieldInstructor['type']);
+            $contentField = $this->fieldFactory->create(
+                $contents[$i]['id'],
+                $fieldInstructor['key'],
+                $fieldInstructor['value'],
+                null,
+                $fieldInstructor['type']
+            );
             $contentField['type'] = 'content';
-            $contentField['value'] = $instructor;
+            $contentField['value'] = $instructor->getArrayCopy();
             if (array_key_exists(($i - 1), $expectedResults)) {
                 $expectedResults[$i - 1]['fields'][] = $contentField;
 
@@ -698,9 +730,16 @@ class ContentJsonControllerTest extends RailcontentTestCase
             }
         }
 
+        foreach ($expectedResults as $expectedResultIndex => $expectedResult) {
+            $expectedResults[$expectedResultIndex] = array_merge(
+                $expectedResult,
+                ['pluck' => (new ContentEntity($expectedResult))->dot()]
+            );
+        }
+
         $expectedContent['results'] = $expectedResults;
         $expectedContent['total_results'] = count($expectedContent['results']);
-        $expectedContent['filter_options'] = [$fieldInstructor['key'] => [$instructor]];
+        $expectedContent['filter_options'] = [$fieldInstructor['key'] => [$instructor->getArrayCopy()]];
 
         $response = $this->call(
             'GET',
@@ -775,8 +814,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(2, count($response->decodeResponseJson()['results']));
 
-        $expectedResults = [$firstChild['id'] => $firstChild,
-            $secondChild['id'] => $secondChild];
+        $expectedResults = [$firstChild['id'] => $firstChild->getArrayCopy(),
+            $secondChild['id'] => $secondChild->getArrayCopy()];
         $this->assertEquals($expectedResults, $response->decodeResponseJson()['results']);
     }
 
@@ -784,7 +823,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
     {
         $response = $this->call(
             'GET',
-            'railcontent/content/get-by-ids', [rand(), rand()]
+            'railcontent/content/get-by-ids',
+            [rand(), rand()]
         );
 
         $this->assertEquals([], $response->decodeResponseJson()['results']);
@@ -806,11 +846,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call(
             'GET',
-            'railcontent/content/get-by-ids', ['ids' => $content2['id'] . ',' . $content1['id']]
+            'railcontent/content/get-by-ids',
+            ['ids' => $content2['id'] . ',' . $content1['id']]
         );
         $expectedResults = [
-            $content2['id'] => $content2,
-            $content1['id'] => $content1
+            $content2['id'] => $content2->getArrayCopy(),
+            $content1['id'] => $content1->getArrayCopy()
         ];
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson()['results']);
@@ -846,14 +887,16 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $start6 = microtime(true);
         $response = $this->call(
             'GET',
-            'railcontent/content/get-by-ids', [$content1['id']]
+            'railcontent/content/get-by-ids',
+            [$content1['id']]
         );
         $time6 = microtime(true) - $start6;
 
         $start7 = microtime(true);
         $response = $this->call(
             'GET',
-            'railcontent/content/get-by-ids', [$content1['id']]
+            'railcontent/content/get-by-ids',
+            [$content1['id']]
         );
         $time7 = microtime(true) - $start7;
 

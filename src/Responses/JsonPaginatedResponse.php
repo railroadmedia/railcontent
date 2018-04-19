@@ -42,6 +42,14 @@ class JsonPaginatedResponse implements Responsable
 
     public function transformResult($request)
     {
+        if (!isset($this->results['id'])) {
+            foreach ($this->results as $resultIndex => $result) {
+                if (method_exists($result, 'dot')) {
+                    $this->results[$resultIndex]['pluck'] = $result->dot();
+                }
+            }
+        }
+
         return [
             'status' => 'ok',
             'code' => $this->code,

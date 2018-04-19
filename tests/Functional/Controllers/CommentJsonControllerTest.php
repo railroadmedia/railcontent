@@ -466,6 +466,9 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $limit = 3;
         $totalNumber = $this->faker->numberBetween($limit, ($limit + 25));
         $otherBrand = $this->faker->word;
+        $brands = ConfigService::$availableBrands;
+
+        ConfigService::$availableBrands[] = $otherBrand;
 
         $content = $this->contentFactory->create(
             $this->faker->word,
@@ -488,6 +491,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
         for ($i = 1; $i <= $totalNumber; $i++) {
             $otherBrandComments[$i] = $this->commentFactory->create($this->faker->text, $contentForOtherBrand['id'], null, rand());
         }
+
+        ConfigService::$availableBrands = $brands;
 
         $response = $this->call('GET', 'railcontent/comment',
             [
