@@ -59,9 +59,18 @@ class ExpireCache extends Command
 
         $contents = $this->contentRepository->getRecentPublishedContents($lastExecutionTime);
 
-        if(!empty($contents)){
+        if (!empty($contents)) {
             CacheHelper::deleteAllCachedSearchResults('contents');
         }
+
+        //update last execution time to current time
+        Cache::store(ConfigService::$cacheDriver)->delete('expireCacheCommand');
+
+        Cache::store(ConfigService::$cacheDriver)->rememberForever(
+            'expireCacheCommand',
+            function ()  {
+                return Carbon::now()->toDateTimeString();
+            });
 
         return true;
     }
