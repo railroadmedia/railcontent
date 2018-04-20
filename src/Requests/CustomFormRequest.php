@@ -517,16 +517,17 @@ class CustomFormRequest extends FormRequest
 
             // part 2
             if ($contentValidationRequired) {
-                $unset = null;
+
                 $idInParam = array_values($request->route()->parameters())[0];
+
                 $fieldsOrData = $request instanceof ContentFieldDeleteRequest ? 'fields' : 'data';
-                foreach ($content[$fieldsOrData] as $propertyKey => $field) {
-                    if ($field['id'] === (integer)$idInParam) {
-                        $unset = $propertyKey;
+
+                foreach ($content[$fieldsOrData] as $index => $fieldOrData) {
+
+                    if ($fieldOrData['id'] == $idInParam) {
+                        unset($content[$fieldsOrData][$index]);
                     }
-                }
-                if (notNullValue($unset)) {
-                    unset($content['fields'][$unset]);
+
                 }
             }
         }
