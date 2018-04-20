@@ -261,17 +261,17 @@ class CustomFormRequest extends FormRequest
             $setOfContentTypes = explode('|', $setOfContentTypes);
 
             if (!in_array($content['status'], $setOfContentTypes)) {
-                break;
+                continue;
             }
 
             foreach ($rulesForContentType as $rulesPropertyKey => $rules) {
 
                 if (!is_array($rules)) {
-                    break;
+                    continue;
                 }
 
-                if ($rulesPropertyKey === 'number_of_children') {
-                    break;
+                if($rulesPropertyKey === 'number_of_children'){
+                    continue;
                 }
 
                 foreach ($rules as $criteriaKey => &$criteria) {
@@ -334,7 +334,7 @@ class CustomFormRequest extends FormRequest
                 $setOfContentTypes = explode('|', $setOfContentTypes);
 
                 if (!in_array($content['status'], $setOfContentTypes)) {
-                    break;
+                    continue;
                 }
 
                 foreach ($rulesForContentType as $rulesPropertyKey => $rules) {
@@ -343,7 +343,7 @@ class CustomFormRequest extends FormRequest
                      * "number_of_children" rules are handled elsewhere.
                      */
                     if ($rulesPropertyKey === 'number_of_children') {
-                        break;
+                        continue;
                     }
 
                     // $rulesPropertyKey will be "data" or "fields"
@@ -355,7 +355,7 @@ class CustomFormRequest extends FormRequest
                     foreach ($rules as $criteriaKey => $criteria) {
 
                         if (!($propertyName === $rulesPropertyKey && !empty($criteria))) {
-                            break; // if does not match field & datum segments
+                            continue; // if does not match field & datum segments
                         }
 
                         /*
@@ -375,7 +375,7 @@ class CustomFormRequest extends FormRequest
                             }
 
                             if ($key !== $criteriaKey) {
-                                break;
+                                continue;
                             }
 
                             // Validate the component
