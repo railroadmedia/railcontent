@@ -226,7 +226,7 @@ class CustomFormRequest extends FormRequest
             $setOfContentTypes = explode('|', $setOfContentTypes);
 
             if (!in_array($content['status'], $setOfContentTypes)) {
-                break;
+                continue;
             }
 
             if (isset($rulesForContentType['number_of_children'])) {
