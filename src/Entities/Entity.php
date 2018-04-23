@@ -6,9 +6,9 @@ use ArrayObject;
 
 class Entity extends ArrayObject
 {
-    public function fetch($dotNotationString)
+    public function fetch($dotNotationString, $default = '')
     {
-        return $this->dot()[$dotNotationString] ?? null;
+        return $this->dot()[$dotNotationString] ?? $default;
     }
 
     public function dot()
