@@ -16,6 +16,8 @@ class ContentCreateRequest extends CustomFormRequest
      */
     public function rules()
     {
+        $this->validateContent($this);
+
         //set the general validation rules
         $this->setGeneralRules(
             [
@@ -43,5 +45,17 @@ class ContentCreateRequest extends CustomFormRequest
 
         //get the validation rules
         return parent::rules();
+    }
+
+    protected function contentValidationRequired(){
+        /*
+         * Can this be deleted? If the method this will override - CustomFormRequest::contentValidationRequired - needs
+         * to not run in this case, then at least a comment should be added here saying as much... lest this just get
+         * deleted and break something.
+         *
+         * Or maybe it *can* just be deleted - and not break anything?
+         *
+         * Jonathan, April 12
+         */
     }
 }

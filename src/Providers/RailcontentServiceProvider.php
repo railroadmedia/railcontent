@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Providers;
 
+use Illuminate\Support\Facades\Validator;
+use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use PDO;
@@ -96,6 +98,8 @@ class RailcontentServiceProvider extends ServiceProvider
             CreateYoutubeVideoContentRecords::class,
             ExpireCache::class
         ]);
+
+        Validator::extend('exists_multiple_columns', MultipleColumnExistsValidator::class . '@validate');
     }
 
     private function setupConfig()

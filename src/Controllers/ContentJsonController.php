@@ -4,6 +4,8 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Factory as ValidationFactory;
 use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
@@ -23,13 +25,22 @@ class ContentJsonController extends Controller
     private $contentService;
 
     /**
+     * @var ValidationFactory
+     */
+    private $validationFactory;
+
+    /**
      * ContentController constructor.
      *
      * @param ContentService $contentService
      */
-    public function __construct(ContentService $contentService)
+    public function __construct(
+        ContentService $contentService,
+        ValidationFactory $validationFactory
+    )
     {
         $this->contentService = $contentService;
+        $this->validationFactory = $validationFactory;
     }
 
     /**
@@ -101,20 +112,35 @@ class ContentJsonController extends Controller
     }
 
     /**
-     * @param Request $request
      * @param $id
      * @return JsonResponse
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
         $content = $this->contentService->getById($id);
-
-        //check if content exist; if not throw exception
         throw_unless($content, new NotFoundException('No content with id ' . $id . ' exists.'));
 
-        $results = [$id => $content];
+//        $rules = $this->contentService->getValidationRules($content);
+//        if($rules === false){
+//            return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503);
+//        }
+//
+//        $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation($content, $rules);
+//
+//        $validator = $this->validationFactory->make($contentPropertiesForValidation, $rules);
+//
+//        $validation = [ 'status' => 200, 'messages' => [] ];
+//
+//        try{
+//            $validator->validate();
+//        }catch(ValidationException $exception){
+//            $messages = $exception->validator->messages()->messages();
+//            $validation = ['status' => 422, 'messages' => $messages];
+//        }
+//
+//        $content = array_merge($content, ['validation' => $validation]);
 
-        return new JsonResponse(array_values($results), 200);
+        return new JsonResponse(array_values([$id => $content]), 200);
     }
 
     public function slugs(Request $request, ...$slugs)
