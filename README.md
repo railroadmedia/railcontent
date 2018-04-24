@@ -4,6 +4,25 @@ Railcontent
 
 Data first simple CMS.
 
+- [Railcontent](#railcontent)
+  * [Progress-Bubbling](#progress-bubbling)
+    + [Example](#example)
+  * [Validation](#validation)
+    + [Note about field or datum that reference another piece of content](#note-about-field-or-datum-that-reference-another-piece-of-content)
+    + [Important Note about the "numeric" rule](#important-note-about-the--numeric--rule)
+    + [Specifying rules](#specifying-rules)
+    + [Details of options available for each brand](#details-of-options-available-for-each-brand)
+      - [fields](#fields)
+      - [data](#data)
+      - [number_of_children](#number-of-children)
+    + [Configuration Example](#configuration-example)
+    + [MultipleColumnExistsValidator](#multiplecolumnexistsvalidator)
+      - [WHERE *AND*](#where--and-)
+      - [WHERE *OR*](#where--or-)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 
 
 Progress-Bubbling
@@ -215,4 +234,160 @@ Unlike the rest of the rules, this doesn't *need* to be an item called "rules" i
         ],
     ]
 ]
+```
+
+
+### MultipleColumnExistsValidator
+
+***NOTE**: This actually doesn't work properly right now, so if the above may not quuuuite be accurate.*
+
+You may not be able to use the `Rule::Exists()` feature of the Laravel's validator where you specify your validation 
+rules. Perhaps you specify your rules in configuration files that are cache calling a method statically like that breaks
+them for some reason. 
+
+To overcome this, there exists a custom rule in this package called (Railroad\Railcontent\Validators) 
+"MultipleColumnExistsValidator". Also, there is a test for it: (Tests\Feature) "MultipleColumnExistsRuleTest".
+
+Look at the class to understand fully how it works, if need be. If you only need a quick look, this is what it does:
+
+```php
+$exists = $this->databaseManager->connection($connection)
+    ->table($table)
+    ->where($row, $value)
+    ->exists();
+```
+
+You pass these arguments via your rules:
+
+```php
+$connection = $parameterParts[0];
+$table = $parameterParts[1];
+$row = $parameterParts[2];
+$value = isset($parameterParts[3]) ? $parameterParts[3] : $value;
+```
+
+A configured rule looks like this:
+
+
+```
+'video' => 'exists_multiple_columns:mysql,railcontent_content,id&mysql,railcontent_content,type,vimeo-video'
+```
+
+unpacked we get this:
+
+```
+exists_multiple_columns:
+    mysql,railcontent_content,id
+    &
+    mysql,railcontent_content,type,vimeo-video
+```
+
+Breaking down each line:
+
+`exists_multiple_columns` is the name of the custom rule
+
+`mysql,railcontent_content,id` is a set or rules for a single "where exists" clause to the database validation that will 
+run.
+
+`&` (ampersand) is our delimiter - since the pipe, or vertical bar (`|`) is already used by laravel to delimit
+rules.
+
+`mysql,railcontent_content,type,vimeo-video` is another *"where exists" clause added to the database validation that
+will run when all clauses are compiled.
+
+For the validation to pass in this case, both *"where exists" validations* must pass.
+
+Within each *"where exists" validation*, values are delimited by commas (`,`).
+
+So, the first set has THREE (3) values
+
+```
+mysql
+railcontent_content
+id
+```
+
+And the second set has FOUR (4) values:
+
+```
+mysql
+railcontent_content
+type
+vimeo-video
+```
+
+The first THREE (3) parameters are required, the FOURTH (4th)) is optional.
+
+As you may have guessed by the code snippet above, the parameters are as such:
+
+1. connection (required)
+2. table (required) 
+3. $row (required)
+4. $value (optional)
+
+If the FOURTH (4th) parameter is not passed, the value used for the "where exists" evaluation will be the value which
+the whole rule is validating.
+
+Reviewing the example, we see that we're validating the value submitted to the `video` input against the rule 
+`'exists_multiple_columns:mysql,railcontent_content,id&mysql,railcontent_content,type,vimeo-video'` to ensure that
+the value matches the two clauses `mysql,railcontent_content,id` and `mysql,railcontent_content,type,vimeo-video`.
+The first ensures that by the connection "mysql", in the table "railcontent_content", the value under validation matches
+a value in the "id" column. The second does the same, but the value isn't the values passed in, but rather the value
+hard-coded in rule as the FOURTH parameter - "vimeo-video". Thus, it ensures that there exists a record where the value
+passes in matches something in the "id" column **and** at least one records matching that also has value or "vimeo-video"
+in it's "type" column.
+
+
+#### WHERE *AND*
+
+The above example describes a "WHERE ... AND ... " query. This is standard behaviour - everything must be present in at
+least one row for the validation to pass.
+
+
+#### WHERE *OR*
+
+This describes a "WHERE ... **OR** ... " query.
+
+You can prepend your "clause rule string" (remember these are demarcated from each other with ampersands(&)) with `or:`, 
+so that for the examples above, the second one instead of looking like this:
+
+```
+mysql,railcontent_content,type,vimeo-video
+```
+
+would look like this
+
+```
+or:mysql,railcontent_content,type,vimeo-video
+```
+
+This works with the preceding rule and when there exists an `or:` "between" them, they're connected is an or statement.
+
+Note that because you can have more than two "clause rule strings" in a rule, you can combine ORs and ANDs thusly:
+
+```
+exists_multiple_columns:
+    mysql,railcontent_content,id
+    &
+    or:mysql,railcontent_content,foo_id
+    &
+    mysql,railcontent_content,type,vimeo-video
+    &
+    or:mysql,railcontent_content,slug,'bar baz'
+```
+
+Means that one of the first two "clause rule strings" must match with one of the two last "clause rule strings".
+
+```
+(
+    mysql,railcontent_content,id
+    OR
+    mysql,railcontent_content,foo_id
+)
+AND
+(
+    mysql,railcontent_content,type,vimeo-video
+    OR
+    mysql,railcontent_content,slug,'bar baz'
+)
 ```
