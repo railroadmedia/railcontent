@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Helpers\ContentHelper;
@@ -1309,5 +1310,23 @@ class ContentRepository extends RepositoryBase
         }
 
         return $rows;
+    }
+
+    /** Get from the database the contents that have been published starting with a date.
+     * @param string $startDate
+     * @return array
+     */
+    public function getRecentPublishedContents($startDate)
+    {
+        $contentRows = $this->query()
+            ->selectPrimaryColumns()
+            ->whereBetween(
+                ConfigService::$tableContent . '.published_on',
+                [$startDate, Carbon::now()->toDateTimeString()]
+            )
+            ->getToArray();
+
+        return $contentRows;
+
     }
 }

@@ -2,12 +2,15 @@
 
 namespace Railroad\Railcontent\Providers;
 
+use Illuminate\Support\Facades\Validator;
+use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use PDO;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
+use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
@@ -92,8 +95,11 @@ class RailcontentServiceProvider extends ServiceProvider
             CreateSearchIndexes::class,
             CreateVimeoVideoContentRecords::class,
             RepairMissingDurations::class,
-            CreateYoutubeVideoContentRecords::class
+            CreateYoutubeVideoContentRecords::class,
+            ExpireCache::class
         ]);
+
+        Validator::extend('exists_multiple_columns', MultipleColumnExistsValidator::class . '@validate');
     }
 
     private function setupConfig()

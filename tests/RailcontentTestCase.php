@@ -114,7 +114,7 @@ class RailcontentTestCase extends BaseTestCase
                 'driver' => 'mysql',
                 'host' => 'mysql',
                 'port' => env('MYSQL_PORT', '3306'),
-                'database' => env('MYSQL_DB','railcontent2'),
+                'database' => env('MYSQL_DB','railcontent'),
                 'username' => 'root',
                 'password' => 'root',
                 'charset' => 'utf8',
@@ -171,14 +171,15 @@ class RailcontentTestCase extends BaseTestCase
 
         if (!$app['db']->connection()->getSchemaBuilder()->hasTable('users')) {
 
-        $app['db']->connection()->getSchemaBuilder()->create(
-            'users',
-            function (Blueprint $table) {
-                $table->increments('id');
-                $table->string('email');
-            }
-        );
-    }
+            $app['db']->connection()->getSchemaBuilder()->create(
+                'users',
+                function (Blueprint $table) {
+                    $table->increments('id');
+                    $table->string('email');
+                }
+            );
+
+        }
 
         // register provider
         $app->register(RailcontentServiceProvider::class);

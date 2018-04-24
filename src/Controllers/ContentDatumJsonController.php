@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentDatumCreateRequest;
+use Railroad\Railcontent\Requests\ContentDatumDeleteRequest;
 use Railroad\Railcontent\Requests\ContentDatumUpdateRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ContentDatumService;
@@ -76,8 +77,13 @@ class ContentDatumJsonController extends Controller
      *
      * @param integer $dataId
      * @return \Railroad\Railcontent\Responses\JsonResponse
+     *
+     * Hmm... we're not actually using that request in here, but including it triggers the prepending validation, so
+     * maybe it needs to be there for that?
+     *
+     * Jonathan, February 2018
      */
-    public function delete($dataId)
+    public function delete(ContentDatumDeleteRequest $request, $dataId)
     {
         $deleted = $this->datumService->delete($dataId);
 

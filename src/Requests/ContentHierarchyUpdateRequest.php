@@ -21,6 +21,8 @@ class ContentHierarchyUpdateRequest extends CustomFormRequest
 
         $this->setCustomRules($this, 'fields');
 
+        $this->validateContent($this);
+
         return parent::rules();
     }
 }
