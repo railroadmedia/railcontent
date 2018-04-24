@@ -28,59 +28,54 @@ class MultipleColumnExistsValidator
      */
     public function validate($attribute, $value, $parameters, $validator)
     {
-        $parameters = implode(',', $parameters);
-        $parameters = explode('&', $parameters);
-
-        $queryParams = [];
         $queries = [];
 
-        foreach ($parameters as $parameter) {
+        $parameters = implode(',', $parameters);
+        $setsOfParamsForClauses = explode('&', $parameters);
 
-            $parameterParts = explode(',', $parameter);
+        foreach ($setsOfParamsForClauses as $paramsForClause) {
+
+            $parameterParts = explode(',', $paramsForClause);
 
             $connection = $parameterParts[0];
             $table = $parameterParts[1];
 
-            if(!isset($queryParams[$connection])){
-                $queryParams[$connection] = [];
+            if(!isset($queries[$connection])){
+                $queries[$connection] = [];
             }
 
-            if(!isset($queryParams[$connection][$table])){
-                $queryParams[$connection][$table] = [];
+            if(empty($queries[$connection][$table])){
+                $queries[$connection][$table] = $this->databaseManager->connection($connection)->table($table);
             }
-
-            $queryParams[$connection][$table][] = $this->databaseManager->connection($connection)->table($table);
         }
 
-        foreach ($parameters as $key => &$parameter) {
+        foreach ($setsOfParamsForClauses as $key => &$paramsForClause) {
 
-            $parameterParts = explode(',', $parameter);
+            $parameterParts = explode(',', $paramsForClause);
 
             $connection = $parameterParts[0];
             $table = $parameterParts[1];
             $row = $parameterParts[2];
             $value = isset($parameterParts[3]) ? $parameterParts[3] : $value;
 
-            $or = false;
+            /** @var \Illuminate\Database\Query\Builder $query */
+            $query = &$queries[$connection][$table];
+
             if(isset($parameterParts[3])){
                 if(strpos($parameterParts[3], 'or:') !== false){
-                    $or = true;
+                    $query = $query->orWhere($row, $value);
+                    continue;
                 }
             }
 
-            /** @var \Illuminate\Database\Query\Builder $query */
-            foreach($queryParams[$connection][$table] as &$query){
-                if($or){
-                    $queries[] = $query->orWhere($row, $value);
-                }else{
-                    $queries[] = $query->where($row, $value);
-                }
-            }
+            $query = $query->where($row, $value);
         }
 
-        foreach ($queries as $query) {
-            if(!$query->exists()){
-                return '0';
+        foreach ($queries as $queriesForConnection) {
+            foreach ($queriesForConnection as $queryForTable) {
+                if(!$queryForTable->exists()){
+                    return '0';
+                }
             }
         }
 

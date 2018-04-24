@@ -33,25 +33,11 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
 
 
     /**
-     * A basic test example.
+     * Put a description here maybe?
      *
      * @return void
      */
-    public function test_refactor_helper_one()
-    {
-
-
-
-
-
-    }
-
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test()
+    public function test_pass_and_fail()
     {
         $typeOne = $this->faker->word;
         $contentOne = $this->contentFactory->create($this->faker->word, $typeOne);
@@ -103,13 +89,13 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             ['id' => $ruleAgain]
         );
 
-        $result = $validatorAgain->validate()['id'];
+        $this->expectException('Illuminate\Validation\ValidationException');
 
-        $this->assertNotEquals('1', $result);
+        $validatorAgain->validate()['id'];
     }
 
     /**
-     * A basic test example.
+     * Put a description here maybe?
      *
      * @return void
      */
@@ -152,7 +138,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
     }
 
     /**
-     * A basic test example.
+     * Put a description here maybe?
      *
      * @return void
      */
@@ -194,5 +180,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         );
 
         $this->expectException('Illuminate\Validation\ValidationException');
+
+        $validator->validate()['id'];
     }
 }
