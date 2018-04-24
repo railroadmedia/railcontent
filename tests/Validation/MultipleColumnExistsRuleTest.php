@@ -31,6 +31,21 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         $this->contentFactory = app()->make(ContentFactory::class);
     }
 
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function test_refactor_helper_one()
+    {
+
+
+
+
+
+    }
+
     /**
      * A basic test example.
      *
@@ -38,10 +53,11 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
      */
     public function test()
     {
-        //dd($this->app['config']['railcontent.validation'][ConfigService::$brand]);
+        $typeOne = $this->faker->word;
+        $contentOne = $this->contentFactory->create($this->faker->word, $typeOne);
 
-        $type = 'test-type';
-        $content = $this->contentFactory->create('testslug', $type);
+        $typeTwo = $this->faker->word;
+        $this->contentFactory->create($this->faker->word, $typeTwo);
 
         $connectionName = RailcontentTestCase::getConnectionType();
 
@@ -55,17 +71,41 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            $type;
+            $typeOne;
 
         /**
          * @var $validator Validator
          */
         $validator = Validator::make(
-            ['id' => $content['id']],
+            ['id' => $contentOne['id']],
             ['id' => $rule]
         );
 
         $this->assertEquals('1', $validator->validate()['id']);
+
+        $ruleAgain = 'exists_multiple_columns:' .
+
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'id' .
+
+            '&' .
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'type,' .
+            $typeTwo;
+
+        /**
+         * @var $validator Validator
+         */
+        $validatorAgain = Validator::make(
+            ['id' => $contentOne['id']],
+            ['id' => $ruleAgain]
+        );
+
+        $result = $validatorAgain->validate()['id'];
+
+        $this->assertNotEquals('1', $result);
     }
 
     /**

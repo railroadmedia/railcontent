@@ -31,6 +31,27 @@ class MultipleColumnExistsValidator
         $parameters = implode(',', $parameters);
         $parameters = explode('&', $parameters);
 
+        $queryParams = [];
+        $queries = [];
+
+        foreach ($parameters as $parameter) {
+
+            $parameterParts = explode(',', $parameter);
+
+            $connection = $parameterParts[0];
+            $table = $parameterParts[1];
+
+            if(!isset($queryParams[$connection])){
+                $queryParams[$connection] = [];
+            }
+
+            if(!isset($queryParams[$connection][$table])){
+                $queryParams[$connection][$table] = [];
+            }
+
+            $queryParams[$connection][$table][] = $this->databaseManager->connection($connection)->table($table);
+        }
+
         foreach ($parameters as $key => &$parameter) {
 
             $parameterParts = explode(',', $parameter);
@@ -47,45 +68,20 @@ class MultipleColumnExistsValidator
                 }
             }
 
-            $exists = $this->databaseManager->connection($connection)
-                ->table($table)
-                ->where($row, $value)
-                ->exists();
-
-            if($exists || $or){
-
-                if(isset($parameters[$key - 1])){
-
-                    /*
-                     * If we're currently on the first (or only) item in this looping through the "$parameters" then
-                     * we can operate on the previous item.
-                     */
-                    $previousParameter = &$parameters[$key - 1];
-
-                    if(!$previousParameter['pass'] && $exists){
-                        /*
-                         * If the previous is false, and this one is true, then we want to set the previous to true so
-                         * that the false is not returned below.
-                         */
-                        $previousParameter['pass'] = true;
-                    }
-                    if($previousParameter['pass'] && !$exists) {
-                        /*
-                         * If the previous is true, but the current one is false, then set the current one to true
-                         * because it's allowed to pass because one of the "or" conditions was passed.
-                         */
-                        $exists = true;
-                    }
+            /** @var \Illuminate\Database\Query\Builder $query */
+            foreach($queryParams[$connection][$table] as &$query){
+                if($or){
+                    $queries[] = $query->orWhere($row, $value);
+                }else{
+                    $queries[] = $query->where($row, $value);
                 }
             }
-
-            $parameter = ['pass' => $exists];
         }
 
-        foreach ($parameters as &$parameter) {
-            if(!$parameter['pass']){
+        foreach ($queries as $query) {
+            if(!$query->exists()){
                 return '0';
-            };
+            }
         }
 
         return true;
