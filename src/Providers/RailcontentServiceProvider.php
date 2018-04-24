@@ -2,10 +2,9 @@
 
 namespace Railroad\Railcontent\Providers;
 
-use Illuminate\Support\Facades\Validator;
-use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
 use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 use PDO;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
@@ -25,12 +24,13 @@ use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
+use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\ContentEventListener;
 use Railroad\Railcontent\Listeners\UnassignCommentEventListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
-use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\VersionContentEventListener;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
 
 class RailcontentServiceProvider extends ServiceProvider
 {
@@ -65,7 +65,7 @@ class RailcontentServiceProvider extends ServiceProvider
             ContentDatumUpdated::class => [VersionContentEventListener::class . '@handle'],
             ContentDatumDeleted::class => [VersionContentEventListener::class . '@handle'],
             CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
-            CommentDeleted::class =>[UnassignCommentEventListener::class . '@handle'],
+            CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
             UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle']
         ];
 
@@ -91,13 +91,15 @@ class RailcontentServiceProvider extends ServiceProvider
 //            'Railroad\Railcontent\Exceptions\RailcontentException'
 //        );
 
-        $this->commands([
-            CreateSearchIndexes::class,
-            CreateVimeoVideoContentRecords::class,
-            RepairMissingDurations::class,
-            CreateYoutubeVideoContentRecords::class,
-            ExpireCache::class
-        ]);
+        $this->commands(
+            [
+                CreateSearchIndexes::class,
+                CreateVimeoVideoContentRecords::class,
+                RepairMissingDurations::class,
+                CreateYoutubeVideoContentRecords::class,
+                ExpireCache::class
+            ]
+        );
 
         Validator::extend('exists_multiple_columns', MultipleColumnExistsValidator::class . '@validate');
     }
@@ -159,6 +161,12 @@ class RailcontentServiceProvider extends ServiceProvider
 
         // decorators
         ConfigService::$decorators = config('railcontent.decorators');
+
+        ConfigService::$contentHierarchyMaxDepth = config('railcontent.content_hierarchy_max_depth');
+        ConfigService::$contentHierarchyDecoratorAllowedTypes = config(
+            'railcontent.content_hierarchy_decorator_allowed_types' .
+            ''
+        );
     }
 
     /**

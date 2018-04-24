@@ -31,14 +31,23 @@ class Decorator implements DecoratorInterface
                 }
 
                 if (isset($data['id'])) {
-                    $data = $decorator->decorate($data);
 
-                    continue;
-                }
+                    // singular content
+                    $data = $decorator->decorate([0 => $data])[0];
+                } elseif (!empty($data['results'])) {
 
-                if (!empty($data['results'])) {
-                    $data['results'] = $decorator->decorate($data['results']);
+                    // content is nested in results
+                    if (isset($data['results']['id'])) {
+
+                        // singular content
+                        $data['results'] = $decorator->decorate([0 => $data['results']])[0];
+                    } else {
+
+                        // multiple contents
+                        $data['results'] = $decorator->decorate($data['results']);
+                    }
                 } else {
+                    // multiple contents
                     $data = $decorator->decorate($data);
                 }
             }

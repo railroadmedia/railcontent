@@ -163,4 +163,14 @@ class ConfigService
      * @var array
      */
     public static $decorators;
+
+    /**
+     * @var integer
+     */
+    public static $contentHierarchyMaxDepth;
+
+    /**
+     * @var array
+     */
+    public static $contentHierarchyDecoratorAllowedTypes;
 }

@@ -122,4 +122,13 @@ return [
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
         ],
     ],
+
+    // specific decorator configs
+
+    // content hierarchy
+    'content_hierarchy_max_depth' => 3,
+    'content_hierarchy_decorator_allowed_types' => [
+        'content-type',
+        'content-type',
+    ],
 ];

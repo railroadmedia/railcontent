@@ -83,8 +83,7 @@ class ContentRepository extends RepositoryBase
         ContentFieldRepository $fieldRepository,
         ContentDatumRepository $datumRepository,
         ContentHierarchyRepository $contentHierarchyRepository
-    )
-    {
+    ) {
         parent::__construct();
 
         $this->contentPermissionRepository = $contentPermissionRepository;
@@ -212,8 +211,7 @@ class ContentRepository extends RepositoryBase
         array $types,
         $orderBy = 'child_position',
         $orderByDirection = 'asc'
-    )
-    {
+    ) {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
@@ -497,8 +495,7 @@ class ContentRepository extends RepositoryBase
         $siblingPairLimit = 1,
         $orderColumn = 'published_on',
         $orderDirection = 'desc'
-    )
-    {
+    ) {
         $beforeContents = $this->query()
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
@@ -737,8 +734,7 @@ class ContentRepository extends RepositoryBase
         $fieldValue,
         $fieldType,
         $fieldComparisonOperator = '='
-    )
-    {
+    ) {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
@@ -802,8 +798,7 @@ class ContentRepository extends RepositoryBase
         $publishedOnComparisonOperator = '=',
         $orderByColumn = 'published_on',
         $orderByDirection = 'desc'
-    )
-    {
+    ) {
         $contentRows = $this->query()
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
@@ -881,8 +876,7 @@ class ContentRepository extends RepositoryBase
         array $fieldRows,
         array $datumRows,
         array $permissionRows
-    )
-    {
+    ) {
         $contents = [];
 
         $fieldRowsGrouped = ContentHelper::groupArrayBy($fieldRows, 'content_id');
@@ -942,8 +936,7 @@ class ContentRepository extends RepositoryBase
         array $typesToInclude,
         array $slugHierarchy,
         array $requiredParentIds
-    )
-    {
+    ) {
         $this->page = $page;
         $this->limit = $limit;
         $this->orderBy = $orderBy;
@@ -1000,12 +993,11 @@ class ContentRepository extends RepositoryBase
                 array_merge(
                     [
                         ConfigService::$tableContent . '.id',
-                        ConfigService::$tableContent . '.' . 'created_on'
+                        ConfigService::$tableContent . '.' . 'created_on',
                     ],
                     $groupByColumns
                 )
             );
-
 
         $query = $this->query()
             ->orderByRaw($this->databaseManager->raw(implode(', ', $orderByColumns) . ' ' . $this->orderDirection))
@@ -1211,7 +1203,7 @@ class ContentRepository extends RepositoryBase
                                 'key' => $field['key'],
                                 'value' => $linkedContent,
                                 'type' => 'content',
-                                'position' => $field['position']
+                                'position' => $field['position'],
                             ];
 
                         }
@@ -1313,6 +1305,7 @@ class ContentRepository extends RepositoryBase
     }
 
     /** Get from the database the contents that have been published starting with a date.
+     *
      * @param string $startDate
      * @return array
      */
