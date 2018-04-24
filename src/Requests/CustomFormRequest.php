@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use App\Http\Requests\Scalecenter\ContentCreate;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -200,6 +201,8 @@ class CustomFormRequest extends FormRequest
          *
          * Jonathan, March 2018
          */
+
+
 
         $contentValidationRequired = null;
         $rulesForBrand = null;
@@ -456,6 +459,7 @@ class CustomFormRequest extends FormRequest
             }
         }
 
+
         /*
          * part 1 - Validation required?
          *
@@ -532,11 +536,15 @@ class CustomFormRequest extends FormRequest
             }
         }
 
-        $contentValidationRequired = $contentValidationRequired || isset($rulesForBrand[$content['type']]);
+        $contentValidationRequired = $contentValidationRequired && isset($rulesForBrand[$content['type']]);
     }
 
     private function getContentFromRequest(Request $request)
     {
+        if ($request instanceof ContentCreateRequest) {
+            return $request->all();
+        }
+
         if ($request instanceof ContentUpdateRequest) {
 
             $urlPath = explode('/', parse_url($_SERVER['HTTP_REFERER'])['path']);
