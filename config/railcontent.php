@@ -43,19 +43,6 @@ return [
         7776,
     ],
     'validation' => [
-        'drumeo' => [
-            'library-lesson' => [
-                'slug' => 'required|max:64',
-                'fields' => [
-                    'title|string' => 'required|string|min:3|max:64',
-                    'instructor|multiple' => 'required|exists:content,id'
-
-                ],
-                'datum' => [
-                    'description|string' => 'required|max:1024'
-                ]
-            ]
-        ]
     ],
     'awsS3_remote_storage' => [
         'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
@@ -132,7 +119,7 @@ return [
 
     'decorators' => [
         'content' => [
-
+            \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
         ],
     ],
 ];

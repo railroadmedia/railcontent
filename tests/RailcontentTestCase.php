@@ -12,7 +12,6 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
@@ -73,7 +72,11 @@ class RailcontentTestCase extends BaseTestCase
 
         //call the ContentPermissionsMiddleware
         $middleware = $this->app->make(ContentPermissionsMiddleware::class);
-        $middleware->handle(request(), function(){});
+        $middleware->handle(
+            request(),
+            function () {
+            }
+        );
     }
 
     /**
@@ -98,13 +101,22 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.field_option_list', $defaultConfig['field_option_list']);
         $app['config']->set('railcontent.commentable_content_types', $defaultConfig['commentable_content_types']);
         $app['config']->set('railcontent.validation', $defaultConfig['validation']);
-        $app['config']->set('railcontent.comment_assignation_owner_ids', $defaultConfig['comment_assignation_owner_ids']);
+        $app['config']->set(
+            'railcontent.comment_assignation_owner_ids',
+            $defaultConfig['comment_assignation_owner_ids']
+        );
         $app['config']->set('railcontent.searchable_content_types', $defaultConfig['searchable_content_types']);
         $app['config']->set('railcontent.search_index_values', $defaultConfig['search_index_values']);
-        $app['config']->set('railcontent.allowed_types_for_bubble_progress', $defaultConfig['allowed_types_for_bubble_progress']);
+        $app['config']->set(
+            'railcontent.allowed_types_for_bubble_progress',
+            $defaultConfig['allowed_types_for_bubble_progress']
+        );
         $app['config']->set('railcontent.all_routes_middleware', $defaultConfig['all_routes_middleware']);
         $app['config']->set('railcontent.user_routes_middleware', $defaultConfig['user_routes_middleware']);
-        $app['config']->set('railcontent.administrator_routes_middleware', $defaultConfig['administrator_routes_middleware']);
+        $app['config']->set(
+            'railcontent.administrator_routes_middleware',
+            $defaultConfig['administrator_routes_middleware']
+        );
 
         // setup default database to use sqlite :memory:
         $app['config']->set('database.default', $this->getConnectionType());
@@ -114,7 +126,7 @@ class RailcontentTestCase extends BaseTestCase
                 'driver' => 'mysql',
                 'host' => 'mysql',
                 'port' => env('MYSQL_PORT', '3306'),
-                'database' => env('MYSQL_DB','railcontent'),
+                'database' => env('MYSQL_DB', 'railcontent'),
                 'username' => 'root',
                 'password' => 'root',
                 'charset' => 'utf8',
@@ -164,7 +176,9 @@ class RailcontentTestCase extends BaseTestCase
         );
         $app['config']->set('cache.default', env('CACHE_DRIVER', 'redis'));
         $app['config']->set('railcontent.cache_prefix', $defaultConfig['cache_prefix']);
-        $app['config']->set('railcontent.cache_driver',$defaultConfig['cache_driver']);
+        $app['config']->set('railcontent.cache_driver', $defaultConfig['cache_driver']);
+
+        $app['config']->set('railcontent.decorators', $defaultConfig['decorators']);
 
         $app['config']->set('railcontent.video_sync.youtube.key', $defaultConfig['video_sync']['youtube']['key']);
         $app['config']->set('railcontent.video_sync.youtube.drumeo', $defaultConfig['video_sync']['youtube']['drumeo']);

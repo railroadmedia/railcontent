@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
@@ -58,7 +59,7 @@ class ContentService
     private $commentAssignationRepository;
 
     /**
-     * @var ContentPermissionsRepository
+     * @var ContentPermissionRepository
      */
     private $contentPermissionRepository;
 
@@ -66,6 +67,11 @@ class ContentService
      * @var UserContentProgressRepository
      */
     private $userContentProgressRepository;
+
+    /**
+     * @var Decorator
+     */
+    private $decorator;
 
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
@@ -84,9 +90,9 @@ class ContentService
      * @param ContentHierarchyRepository $contentHierarchyRepository
      * @param ContentPermissionRepository $contentPermissionRepository
      * @param CommentRepository $commentRepository
-     * @param CommentAssignmentRepository $commentAssignationRepository
-     * @param UserContentProgressRepository
-     *
+     * @param CommentAssignmentRepository $commentAssignmentRepository
+     * @param UserContentProgressRepository $userContentProgressRepository
+     * @param Decorator $decorator
      */
     public function __construct(
         ContentRepository $contentRepository,
@@ -97,7 +103,8 @@ class ContentService
         ContentPermissionRepository $contentPermissionRepository,
         CommentRepository $commentRepository,
         CommentAssignmentRepository $commentAssignmentRepository,
-        UserContentProgressRepository $userContentProgressRepository
+        UserContentProgressRepository $userContentProgressRepository,
+        Decorator $decorator
     )
     {
         $this->contentRepository = $contentRepository;
@@ -109,6 +116,8 @@ class ContentService
         $this->commentRepository = $commentRepository;
         $this->commentAssignationRepository = $commentAssignmentRepository;
         $this->userContentProgressRepository = $userContentProgressRepository;
+
+        $this->decorator = $decorator->setType('content');
     }
 
     /**
@@ -133,7 +142,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /**
@@ -156,7 +165,7 @@ class ContentService
         );
         $this->saveCacheResults($hash, $ids);
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /**
@@ -178,7 +187,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /**
@@ -234,7 +243,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /**
@@ -255,7 +264,7 @@ class ContentService
         $orderByDirection = 'desc'
     )
     {
-        return $this->mapToEntities(
+        return $this->decorator->decorate(
             $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
                 $types,
                 $status,
@@ -287,7 +296,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /**
@@ -311,7 +320,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /**
@@ -335,7 +344,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
 
     }
 
@@ -372,7 +381,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
 
     }
 
@@ -397,7 +406,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /**
@@ -420,7 +429,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
 
@@ -444,7 +453,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /**
@@ -467,7 +476,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /**
@@ -505,7 +514,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /**
@@ -549,7 +558,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /**
@@ -615,7 +624,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /**
@@ -744,7 +753,7 @@ class ContentService
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /**
@@ -1024,11 +1033,11 @@ class ContentService
                 );
                 $this->saveCacheResults($hash, array_keys($results));
 
-                return $this->mapToEntities($results);
+                return $this->decorator->decorate($results);
             }
         );
 
-        return $this->mapToEntities($results);
+        return $this->decorator->decorate($results);
     }
 
     /** Call the method that save in a redis set the mapping between content ids and the method cache key

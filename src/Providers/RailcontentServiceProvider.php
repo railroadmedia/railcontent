@@ -156,6 +156,9 @@ class RailcontentServiceProvider extends ServiceProvider
 
         ConfigService::$redisPrefix = config('railcontent.cache_prefix');
         ConfigService::$cacheDriver = config('railcontent.cache_driver');
+
+        // decorators
+        ConfigService::$decorators = config('railcontent.decorators');
     }
 
     /**

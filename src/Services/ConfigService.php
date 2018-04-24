@@ -158,4 +158,9 @@ class ConfigService
      * @var array
      */
     public static $availableBrands;
+
+    /**
+     * @var array
+     */
+    public static $decorators;
 }
