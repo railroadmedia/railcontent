@@ -31,6 +31,22 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         $this->contentFactory = app()->make(ContentFactory::class);
     }
 
+    /**
+     * Put a description here maybe?
+     *
+     * @return void
+     */
+    public function test_pass()
+    {
+        $typeOne = $this->faker->word;
+        $contentOne = $this->contentFactory->create($this->faker->word, $typeOne);
+        $connectionName = RailcontentTestCase::getConnectionType();
+        $rule = 'exists_multiple_columns:' . $connectionName . ',' . 'railcontent_content,' . 'id' . '&' .
+            $connectionName . ',' . 'railcontent_content,' . 'type,' . $typeOne;
+        /** @var $validator Validator */
+        $validator = Validator::make(['id' => $contentOne['id']],['id' => $rule]);
+        $this->assertEquals('1', $validator->validate()['id']);
+    }
 
     /**
      * Put a description here maybe?
@@ -166,10 +182,11 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $type.
 
             '&' .
+            'or:' . // ============= <--- OR (!!!) =============
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            'or:' . $this->faker->word;
+            $this->faker->word;
 
         /**
          * @var $validator Validator

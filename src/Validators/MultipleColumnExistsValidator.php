@@ -33,49 +33,99 @@ class MultipleColumnExistsValidator
         $parameters = implode(',', $parameters);
         $setsOfParamsForClauses = explode('&', $parameters);
 
-        foreach ($setsOfParamsForClauses as $paramsForClause) {
+        /* -------------------------------------------------------------------------------------------------------------
+         * Prepare data
+        ------------------------------------------------------------------------------------------------------------- */
 
-            $parameterParts = explode(',', $paramsForClause);
+        foreach ($setsOfParamsForClauses as &$paramsForClause) {
 
-            $connection = $parameterParts[0];
-            $table = $parameterParts[1];
+            /* -------------------------------------------------------------------------------
+             * If there's any "OR" clauses, separate them now.
+            ------------------------------------------------------------------------------- */
 
-            if(!isset($queries[$connection])){
-                $queries[$connection] = [];
+            $paramsForClause = explode(',', $paramsForClause);
+
+            if (!isset($paramsForClause[3]) && (count($paramsForClause) === 3)) {
+                $paramsForClause[] = $value;
             }
 
-            if(empty($queries[$connection][$table])){
-                $queries[$connection][$table] = $this->databaseManager->connection($connection)->table($table);
+            if (substr($paramsForClause[0], 0, strlen('or:')) == 'or:') {
+                $paramsForClause[0] = substr($paramsForClause[0], strlen('or:'));
+                $paramsForClause[] = 'or';
             }
         }
 
+        /* -------------------------------------------------------------------------------------------------------------
+         * Prepare sets that will be used to create QueryBuilders objects
+        ------------------------------------------------------------------------------------------------------------- */
+
         foreach ($setsOfParamsForClauses as $key => &$paramsForClause) {
 
-            $parameterParts = explode(',', $paramsForClause);
-
-            $connection = $parameterParts[0];
-            $table = $parameterParts[1];
-            $row = $parameterParts[2];
-            $value = isset($parameterParts[3]) ? $parameterParts[3] : $value;
+            $connection = $paramsForClause[0];
+            $table = $paramsForClause[1];
+            $row = $paramsForClause[2];
+            $value = $paramsForClause[3];
+            $or = isset($paramsForClause[4]) && ($paramsForClause[4] === 'or' );
 
             /** @var \Illuminate\Database\Query\Builder $query */
             $query = &$queries[$connection][$table];
 
-            if(isset($parameterParts[3])){
-                if(strpos($parameterParts[3], 'or:') !== false){
-                    $query = $query->orWhere($row, $value);
-                    continue;
+            if($or){
+
+                if($key > 0){
+                    /*
+                     * If there is a previous $paramsForClause item in the array we're currently looping through,
+                     * that means the one before this one should be part of the "whereOr" condition. Thus, remove it
+                     * from the "where" set, and place together with the current "orWhere"-applicable item.
+                     */
+                    $toKeep = $query['where'][(string) ($key - 1)];
+
+                    if(isset($query['where'][(string) ($key - 1)])){
+                        unset($query['where'][(string) ($key - 1)]);
+                    }
+
+                    /*
+                     * Yes, we want this in the same item because the orWhere is for the current and previous together.
+                     */
+                    $query['orWhere'][(string) $key][] = $toKeep;
                 }
+
+                $query['orWhere'][(string) $key][] = [$row, '=', $value];
+                continue;
             }
 
-            $query = $query->where($row, $value);
+            $query['where'][(string) $key] = [$row, '=', $value];
         }
 
-        foreach ($queries as $queriesForConnection) {
-            foreach ($queriesForConnection as $queryForTable) {
-                if(!$queryForTable->exists()){
-                    return '0';
+        /* -------------------------------------------------------------------------------------------------------------
+         * Group clauses by connection-table
+        ------------------------------------------------------------------------------------------------------------- */
+
+        $queriesToRun = [];
+
+        foreach($queries as $connectionName => $connections){
+            foreach($connections as $tableName => $tables){
+                $query = $this->databaseManager->connection($connectionName)->table($tableName);
+
+                foreach($tables['where'] as $where){
+                    $query = $query->where([$where]);
                 }
+
+                foreach($tables['orWhere'] as $orWhere){
+                    $query = $query->orWhere($orWhere);
+                }
+
+                $queriesToRun[] = $query;
+            }
+        }
+
+        /* -------------------------------------------------------------------------------------------------------------
+         * Run queries to validate input
+        ------------------------------------------------------------------------------------------------------------- */
+
+        foreach ($queriesToRun as $query) {
+            if(!$query->exists()){
+                return '0';
             }
         }
 
