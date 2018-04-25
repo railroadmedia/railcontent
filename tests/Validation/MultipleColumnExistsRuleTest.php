@@ -137,10 +137,11 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $type.
 
             '&' .
+            'or:' . // <-- note this here... it makes all the difference
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            'or:' . $this->faker->word;
+            $this->faker->word;
 
         /**
          * @var $validator Validator
@@ -150,7 +151,9 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             ['id' => $rule]
         );
 
-        $this->assertEquals('1', $validator->validate()['id']);
+        $validationResult = $validator->validate()['id'];
+
+        $this->assertEquals('1', $validationResult);
     }
 
     /**
@@ -163,9 +166,10 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         //dd($this->app['config']['railcontent.validation'][ConfigService::$brand]);
 
         $type = $this->faker->word;
-        $content = $this->contentFactory->create('testslug', $type);
+        $typeForFailOne = $this->faker->word;
+        $typeForFailTwo = $this->faker->word;
 
-        $type = $this->faker->word; // below will eval with different than was used in create above, ergo will fail
+        $content = $this->contentFactory->create('testslug', $type);
 
         $connectionName = RailcontentTestCase::getConnectionType();
 
@@ -179,14 +183,14 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            $type.
+            $typeForFailOne .
 
             '&' .
-            'or:' . // ============= <--- OR (!!!) =============
+            'or:' . // <-- note this here... it makes all the difference
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            $this->faker->word;
+            $typeForFailTwo;
 
         /**
          * @var $validator Validator

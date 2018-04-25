@@ -35,13 +35,13 @@ class MultipleColumnExistsValidator
 
         /* -------------------------------------------------------------------------------------------------------------
          * Prepare data
-        ------------------------------------------------------------------------------------------------------------- */
+         * ---------------------------------------------------------------------------------------------------------- */
 
         foreach ($setsOfParamsForClauses as &$paramsForClause) {
 
             /* -------------------------------------------------------------------------------
              * If there's any "OR" clauses, separate them now.
-            ------------------------------------------------------------------------------- */
+             * ---------------------------------------------------------------------------- */
 
             $paramsForClause = explode(',', $paramsForClause);
 
@@ -57,7 +57,7 @@ class MultipleColumnExistsValidator
 
         /* -------------------------------------------------------------------------------------------------------------
          * Prepare sets that will be used to create QueryBuilders objects
-        ------------------------------------------------------------------------------------------------------------- */
+         * ---------------------------------------------------------------------------------------------------------- */
 
         foreach ($setsOfParamsForClauses as $key => &$paramsForClause) {
 
@@ -99,7 +99,7 @@ class MultipleColumnExistsValidator
 
         /* -------------------------------------------------------------------------------------------------------------
          * Group clauses by connection-table
-        ------------------------------------------------------------------------------------------------------------- */
+         * ---------------------------------------------------------------------------------------------------------- */
 
         $queriesToRun = [];
 
@@ -107,12 +107,23 @@ class MultipleColumnExistsValidator
             foreach($connections as $tableName => $tables){
                 $query = $this->databaseManager->connection($connectionName)->table($tableName);
 
-                foreach($tables['where'] as $where){
-                    $query = $query->where([$where]);
+                if(isset($tables['where'])){
+                    foreach($tables['where'] as $where){
+                        $query = $query->where([$where]);
+                    }
                 }
 
-                foreach($tables['orWhere'] as $orWhere){
-                    $query = $query->orWhere($orWhere);
+                if(isset($tables['orWhere'])){
+                    foreach($tables['orWhere'] as $orWhere){
+
+                        foreach($orWhere as $index => $orWhereItem){
+                            if($index === 0){
+                                $query->where([$orWhereItem]);
+                            }else{
+                                $query->orWhere([$orWhereItem]);
+                            }
+                        }
+                    }
                 }
 
                 $queriesToRun[] = $query;
@@ -121,13 +132,18 @@ class MultipleColumnExistsValidator
 
         /* -------------------------------------------------------------------------------------------------------------
          * Run queries to validate input
-        ------------------------------------------------------------------------------------------------------------- */
+         * ---------------------------------------------------------------------------------------------------------- */
 
         foreach ($queriesToRun as $query) {
             if(!$query->exists()){
+
+                // \Illuminate\Support\Facades\DB::enableQueryLog(); dd(\Illuminate\Support\Facades\DB::getQueryLog());
+
                 return '0';
             }
         }
+
+        // \Illuminate\Support\Facades\DB::enableQueryLog(); dd(\Illuminate\Support\Facades\DB::getQueryLog());
 
         return true;
     }
