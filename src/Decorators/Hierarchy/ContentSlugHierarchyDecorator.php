@@ -33,7 +33,7 @@ class ContentSlugHierarchyDecorator implements DecoratorInterface
                         )
                             ->whereIn(
                                 'parent_content_' . ($i + 1) . '.type',
-                                [ConfigService::$contentHierarchyDecoratorAllowedTypes]
+                                ConfigService::$contentHierarchyDecoratorAllowedTypes
                             );
                     }
                 )
@@ -56,7 +56,8 @@ class ContentSlugHierarchyDecorator implements DecoratorInterface
                         $contentResults
                         [$contentIndex]
                         ['parent_slug_hierarchy']
-                        [$slugHierarchy['parent_content_' . ($i) . '.type']][] =
+                        [$slugHierarchy['parent_content_' . ($i) . '.type']]
+                        [$slugHierarchy['parent_content_1.id']] =
                             $slugHierarchy['parent_content_' . ($i) . '.slug'];
                     }
                 }

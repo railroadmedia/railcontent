@@ -88,6 +88,9 @@ class RailcontentTestCase extends BaseTestCase
     protected function getEnvironmentSetUp($app)
     {
         // setup package config for testing
+        $dotenv = new Dotenv(__DIR__ . '/../', '.env.testing');
+        $dotenv->load();
+
         $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
 
         $app['config']->set('railcontent.database_connection_name', $this->getConnectionType());
@@ -180,8 +183,8 @@ class RailcontentTestCase extends BaseTestCase
 
         $app['config']->set('railcontent.decorators', $defaultConfig['decorators']);
 
-        $app['config']->set('railcontent.video_sync.youtube.key', $defaultConfig['video_sync']['youtube']['key']);
-        $app['config']->set('railcontent.video_sync.youtube.drumeo', $defaultConfig['video_sync']['youtube']['drumeo']);
+        // vimeo
+        $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);
 
         if (!$app['db']->connection()->getSchemaBuilder()->hasTable('users')) {
 
@@ -194,6 +197,7 @@ class RailcontentTestCase extends BaseTestCase
             );
 
         }
+
 
         // register provider
         $app->register(RailcontentServiceProvider::class);
@@ -282,9 +286,6 @@ class RailcontentTestCase extends BaseTestCase
 
     protected function awsConfigInitForTesting()
     {
-        $dotenv = new Dotenv(__DIR__ . '../../', '.env.testing');
-        $dotenv->load();
-
         if (empty(env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'))) {
             $this->fail(
                 "You must provide a value for the AWS_S3_REMOTE_STORAGE_ACCESS_KEY \'putenv' (" .

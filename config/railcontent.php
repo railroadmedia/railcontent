@@ -8,9 +8,9 @@ return [
 
     'table_prefix' => 'railcontent_',
 
-    'brand' => 'drumeo',
+    'brand' => 'brand',
 
-    'available_brands' => ['drumeo'],
+    'available_brands' => ['brand'],
 
     'default_language' => 'en-US',
     'available_languages' => [
@@ -79,33 +79,17 @@ return [
 
     'video_sync' => [
         'vimeo' => [
-            'drumeo' => [
-                'client_id' => env('VIMEO_CLIENT_ID_DRUMEO'),
-                'client_secret' => env('VIMEO_CLIENT_SECRET_DRUMEO'),
-                'access_token' => env('VIMEO_ACCESS_TOKEN_DRUMEO')
+            'brand' => [
+                'client_id' => env('VIMEO_CLIENT_ID'),
+                'client_secret' => env('VIMEO_CLIENT_SECRET'),
+                'access_token' => env('VIMEO_ACCESS_TOKEN')
             ],
-            'pianote' => [
-                'client_id' => env('VIMEO_CLIENT_ID_PIANOTE'),
-                'client_secret' => env('VIMEO_CLIENT_SECRET_PIANOTE'),
-                'access_token' => env('VIMEO_ACCESS_TOKEN_PIANOTE')
-            ],
-            'guitareo' => [
-                'client_id' => env('VIMEO_CLIENT_ID_GUITAREO'),
-                'client_secret' => env('VIMEO_CLIENT_SECRET_GUITAREO'),
-                'access_token' => env('VIMEO_ACCESS_TOKEN_GUITAREO')
-            ]
         ],
         'youtube' => [
-            'key' => 'AIzaSyA2Q0B77vr9FrThobCKt6cb1Mnj-QGZxUk',
-            'drumeo' => [
-                'user' => env('YOUTUBE_USERNAME_DRUMEO','drumlessonscom')
+            'key' => env('YOUTUBE_API_KEY'),
+            'brand' => [
+                'user' => env('YOUTUBE_USERNAME')
             ],
-            'pianote' => [
-                'user' => env('YOUTUBE_USERNAME_PIANOTE','PianoLessonscom')
-            ],
-            'guitareo' => [
-                'user' => env('YOUTUBE_USERNAME_GUITAREO','guitarlessonscom')
-            ]
         ]
     ],
 

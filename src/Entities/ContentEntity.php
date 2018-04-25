@@ -21,13 +21,13 @@ class ContentEntity extends Entity
 
                 foreach ($linkedContentDots as $linkedContentDotKey => $linkedContentDotValue) {
                     if ($field['position'] == 1) {
-                        $fieldDots['fields.' . $field['key'] . '.value.' . $linkedContentDotKey] = $linkedContentDotValue;
+                        $fieldDots['fields.' . $field['key'] . '.' . $linkedContentDotKey] = $linkedContentDotValue;
                     }
 
-                    $fieldDots['fields.' . $field['key'] . '.value.' . $field['position'] . '.' . $linkedContentDotKey] =
+                    $fieldDots['fields.' . $field['key'] . '.' . $field['position'] . '.' . $linkedContentDotKey] =
                         $linkedContentDotValue;
 
-                    $fieldDots['fields.' . $field['key'] . '.value.' . $field['type'] . '.' .
+                    $fieldDots['fields.' . $field['key'] . '.' . $field['type'] . '.' .
                     $field['position'] . '.' . $linkedContentDotKey] = $linkedContentDotValue;
                 }
             } else {
