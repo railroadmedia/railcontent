@@ -3,10 +3,8 @@
 namespace Railroad\Railcontent\Tests\Feature;
 
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Support\Facades\Validator;
 use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class MultipleColumnExistsRuleTest extends RailcontentTestCase
@@ -117,8 +115,6 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
      */
     public function test_or_case()
     {
-        //dd($this->app['config']['railcontent.validation'][ConfigService::$brand]);
-
         $type = $this->faker->word;
         $content = $this->contentFactory->create('testslug', $type);
 
@@ -163,8 +159,6 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
      */
     public function test_or_case_fail()
     {
-        //dd($this->app['config']['railcontent.validation'][ConfigService::$brand]);
-
         $type = $this->faker->word;
         $typeForFailOne = $this->faker->word;
         $typeForFailTwo = $this->faker->word;
