@@ -134,16 +134,20 @@ class MultipleColumnExistsValidator
          * Run queries to validate input
          * ---------------------------------------------------------------------------------------------------------- */
 
+//        \Illuminate\Support\Facades\DB::enableQueryLog();
+
         foreach ($queriesToRun as $query) {
+
             if(!$query->exists()){
 
-                // \Illuminate\Support\Facades\DB::enableQueryLog(); dd(\Illuminate\Support\Facades\DB::getQueryLog());
+//                dd(['one' => \Illuminate\Support\Facades\DB::getQueryLog()]);
 
-                return '0';
+                return false;
             }
+
         }
 
-        // \Illuminate\Support\Facades\DB::enableQueryLog(); dd(\Illuminate\Support\Facades\DB::getQueryLog());
+//        dd(['two' => \Illuminate\Support\Facades\DB::getQueryLog()]);
 
         return true;
     }
