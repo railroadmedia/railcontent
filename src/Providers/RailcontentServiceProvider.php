@@ -86,11 +86,6 @@ class RailcontentServiceProvider extends ServiceProvider
         //load package routes file
         $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
 
-//        $this->app->singleton(
-//            'Illuminate\Contracts\Debug\ExceptionHandler',
-//            'Railroad\Railcontent\Exceptions\RailcontentException'
-//        );
-
         $this->commands([
             CreateSearchIndexes::class,
             CreateVimeoVideoContentRecords::class,
@@ -99,7 +94,11 @@ class RailcontentServiceProvider extends ServiceProvider
             ExpireCache::class
         ]);
 
-        Validator::extend('exists_multiple_columns', MultipleColumnExistsValidator::class . '@validate');
+        Validator::extend('exists_multiple_columns', MultipleColumnExistsValidator::class . '@validate',
+            'The value entered does not exist in the database, or does not match the requirements to be ' .
+            'set as the :attribute for this content-type with the current or requested content-status. Please ' .
+            'double-check the input value and try again.'
+        );
     }
 
     private function setupConfig()
