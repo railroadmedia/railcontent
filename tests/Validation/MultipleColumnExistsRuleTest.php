@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Tests\Feature;
 
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -216,7 +217,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
      *
      * @return void
      */
-    public function test_extreme()
+    public function test_multiple_or_clauses()
     {
         $slug = $this->faker->word;
         $type = $this->faker->word;
@@ -237,6 +238,13 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         $this->createContent($this->faker->word, $this->faker->word);
         $this->createContent($this->faker->word, $this->faker->word);
         $this->createContent($this->faker->word, $this->faker->word);
+
+        do {
+            $slugToNotFind = $this->faker->word;
+        } while ($slugToNotFind === $slug || $slugToNotFind === $slug);
+        do {
+            $typeToNotFind = $this->faker->word;
+        } while ($typeToNotFind === $type || $typeToNotFind === $type);
 
         $connectionName = RailcontentTestCase::getConnectionType();
 
@@ -259,7 +267,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            $this->faker->word .
+            $typeToNotFind .
 
             // ------------------------------------------------------------------------
 
@@ -274,7 +282,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'slug,' .
-            $this->faker->word;
+            $slugToNotFind;
 
         /**
          * @var $validator Validator
@@ -294,7 +302,21 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
      *
      * @return void
      */
-    public function test_extreme_fail()
+    public function test_multiple_or_clauses_fail(){
+        /*
+         * I was having issue with this test failing - inconsistantly - because of collisions from $this->faker-word
+         * products. So, there's some stringent checking before calling the system under test, and we run it bunch
+         * of times to increase the odds of triggering an edge case. 25 runs takes about 25s.
+         *
+         * * Jonathan, April 2018
+         */
+        for ($i = 1; $i <= 25; $i++) {
+            $this->run_multiple_or_clauses_fail();
+        }
+    }
+
+
+    public function run_multiple_or_clauses_fail()
     {
         $slug = $this->faker->word;
         $type = $this->faker->word;
@@ -316,6 +338,9 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         $this->createContent($this->faker->word, $this->faker->word);
         $this->createContent($this->faker->word, $this->faker->word);
 
+        $oldSlug = $slug;
+        $oldType = $type;
+
         if(rand(0,1)){ // randomly pick one to not match
             do {
                 $slugForFail = $this->faker->word;
@@ -328,6 +353,13 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             } while ($typeForFail === $type);
             $type = $typeForFail;
         }
+
+        do {
+            $slugToNotFind = $this->faker->word;
+        } while ($slugToNotFind === $oldSlug || $slugToNotFind === $slug);
+        do {
+            $typeToNotFind = $this->faker->word;
+        } while ($typeToNotFind === $oldType || $typeToNotFind === $type);
 
         $connectionName = RailcontentTestCase::getConnectionType();
 
@@ -350,7 +382,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            $this->faker->word .
+            $typeToNotFind .
 
             // ------------------------------------------------------------------------
 
@@ -365,7 +397,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'slug,' .
-            $this->faker->word;
+            $slugToNotFind;
 
         /**
          * @var $validator Validator
@@ -375,8 +407,21 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             ['id' => $rule]
         );
 
-        $this->expectException('Illuminate\Validation\ValidationException');
+        /*
+         * This was fine except when calling this test a bunch of times in a loop, it would fail on the last call.
+         * Was very weird, so I just commented it out and replaced it with the try-catch below.
+         *
+         * Jonathan, April 2018
+         */
+        //$this->expectException('Illuminate\Validation\ValidationException');
 
-        $validator->validate()['id'];
+        try{
+            $validator->validate()['id'];
+        }catch(ValidationException $exception){
+            $this->assertTrue(true);
+            return true;
+        }
+
+        $this->fail('yup, failed');
     }
 }

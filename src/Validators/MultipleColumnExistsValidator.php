@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Validators;
 
 use Illuminate\Database\DatabaseManager;
+use Railroad\Railcontent\Repositories\QueryBuilders\QueryBuilder;
 
 class MultipleColumnExistsValidator
 {
@@ -105,6 +106,8 @@ class MultipleColumnExistsValidator
 
         foreach($queries as $connectionName => $connections){
             foreach($connections as $tableName => $tables){
+
+                // why does this set $connections[$tableName] to a query?
                 $query = $this->databaseManager->connection($connectionName)->table($tableName);
 
                 if(isset($tables['where'])){
@@ -115,17 +118,17 @@ class MultipleColumnExistsValidator
 
                 if(isset($tables['orWhere'])){
                     foreach($tables['orWhere'] as $orWhere){
-
-                        foreach($orWhere as $index => $orWhereItem){
-                            if($index === 0){
-                                $query->where([$orWhereItem]);
-                            }else{
-                                $query->orWhere([$orWhereItem]);
+                        $query->where(function($query) use ($orWhere){ /**  @var $query QueryBuilder */
+                            foreach($orWhere as $index => $orWhereItem){
+                                if($index === 0){
+                                    $query->where([$orWhereItem]);
+                                }else{
+                                    $query->orWhere([$orWhereItem]);
+                                }
                             }
-                        }
+                        });
                     }
                 }
-
                 $queriesToRun[] = $query;
             }
         }
@@ -135,20 +138,15 @@ class MultipleColumnExistsValidator
          * ---------------------------------------------------------------------------------------------------------- */
 
 //        \Illuminate\Support\Facades\DB::enableQueryLog();
-
         foreach ($queriesToRun as $query) {
 
             if(!$query->exists()){
-
 //                dd(['one' => \Illuminate\Support\Facades\DB::getQueryLog()]);
-
                 return false;
             }
 
         }
-
 //        dd(['two' => \Illuminate\Support\Facades\DB::getQueryLog()]);
-
         return true;
     }
 }
