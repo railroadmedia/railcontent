@@ -125,8 +125,10 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
      */
     public function test_or_case()
     {
+        $slug = $this->faker->word;
         $type = $this->faker->word;
-        $content = $this->createContent('testslug', $type);
+
+        $content = $this->createContent($slug, $type);
 
         $connectionName = RailcontentTestCase::getConnectionType();
 
@@ -216,28 +218,25 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
      */
     public function test_extreme()
     {
-        $type = $this->faker->word;
         $slug = $this->faker->word;
-        $status = $this->faker->word;
+        $type = $this->faker->word;
 
-        $content = $this->createContent($slug, $type, $status);
+        $content = $this->createContent($slug, $type);
 
-        $this->createContent($type, $this->faker->word, $this->faker->word);
-        $this->createContent($type, $this->faker->word, $this->faker->word);
-        $this->createContent($type, $this->faker->word, $this->faker->word);
-        $this->createContent($type, $this->faker->word, $this->faker->word);
-        $this->createContent($this->faker->word, $slug, $this->faker->word);
-        $this->createContent($this->faker->word, $slug, $this->faker->word);
-        $this->createContent($this->faker->word, $slug, $this->faker->word);
-        $this->createContent($this->faker->word, $slug, $this->faker->word);
-        $this->createContent($this->faker->word, $this->faker->word, $status);
-        $this->createContent($this->faker->word, $this->faker->word, $status);
-        $this->createContent($this->faker->word, $this->faker->word, $status);
-        $this->createContent($this->faker->word, $this->faker->word, $status);
-        $this->createContent($this->faker->word, $this->faker->word, $this->faker->word);
-        $this->createContent($this->faker->word, $this->faker->word, $this->faker->word);
-        $this->createContent($this->faker->word, $this->faker->word, $this->faker->word);
-        $this->createContent($this->faker->word, $this->faker->word, $this->faker->word);
+        $this->createContent($type, $this->faker->word);
+        $this->createContent($type, $this->faker->word);
+        $this->createContent($type, $this->faker->word);
+        $this->createContent($type, $this->faker->word);
+
+        $this->createContent($this->faker->word, $slug);
+        $this->createContent($this->faker->word, $slug);
+        $this->createContent($this->faker->word, $slug);
+        $this->createContent($this->faker->word, $slug);
+
+        $this->createContent($this->faker->word, $this->faker->word);
+        $this->createContent($this->faker->word, $this->faker->word);
+        $this->createContent($this->faker->word, $this->faker->word);
+        $this->createContent($this->faker->word, $this->faker->word);
 
         $connectionName = RailcontentTestCase::getConnectionType();
 
@@ -275,24 +274,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'slug,' .
-            $this->faker->word .
-
-            // ------------------------------------------------------------------------
-
-            '&' .
-            $connectionName . ',' .
-            'railcontent_content,' .
-            'status,' .
-            $status.
-
-            '&' .
-            'or:' . // <-- note this here... it makes all the difference
-            $connectionName . ',' .
-            'railcontent_content,' .
-            'status,' .
             $this->faker->word;
-
-
 
         /**
          * @var $validator Validator
@@ -305,5 +287,96 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         $validationResult = $validator->validate()['id'];
 
         $this->assertEquals('1', $validationResult);
+    }
+
+    /**
+     * Put a description here maybe?
+     *
+     * @return void
+     */
+    public function test_extreme_fail()
+    {
+        $slug = $this->faker->word;
+        $type = $this->faker->word;
+
+        $content = $this->createContent($slug, $type);
+
+        $this->createContent($type, $this->faker->word);
+        $this->createContent($type, $this->faker->word);
+        $this->createContent($type, $this->faker->word);
+        $this->createContent($type, $this->faker->word);
+
+        $this->createContent($this->faker->word, $slug);
+        $this->createContent($this->faker->word, $slug);
+        $this->createContent($this->faker->word, $slug);
+        $this->createContent($this->faker->word, $slug);
+
+        $this->createContent($this->faker->word, $this->faker->word);
+        $this->createContent($this->faker->word, $this->faker->word);
+        $this->createContent($this->faker->word, $this->faker->word);
+        $this->createContent($this->faker->word, $this->faker->word);
+
+        if(rand(0,1)){ // randomly pick one to not match
+            do {
+                $slugForFail = $this->faker->word;
+                // $slugForFail = rand(0,10) < 1 ? $this->faker->word : $slug; // confirm works has expected
+            } while ($slugForFail === $slug);
+            $slug = $slugForFail;
+        }else{
+            do {
+                $typeForFail = $this->faker->word;
+            } while ($typeForFail === $type);
+            $type = $typeForFail;
+        }
+
+        $connectionName = RailcontentTestCase::getConnectionType();
+
+        $rule = 'exists_multiple_columns:' .
+
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'id' .
+
+            // ------------------------------------------------------------------------
+
+            '&' .
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'type,' .
+            $type.
+
+            '&' .
+            'or:' . // <-- note this here... it makes all the difference
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'type,' .
+            $this->faker->word .
+
+            // ------------------------------------------------------------------------
+
+            '&' .
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'slug,' .
+            $slug.
+
+            '&' .
+            'or:' . // <-- note this here... it makes all the difference
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'slug,' .
+            $this->faker->word;
+
+        /**
+         * @var $validator Validator
+         */
+        $validator = Validator::make(
+            ['id' => $content['id']],
+            ['id' => $rule]
+        );
+
+        $this->expectException('Illuminate\Validation\ValidationException');
+
+        $validator->validate()['id'];
     }
 }
