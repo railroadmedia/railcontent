@@ -15,11 +15,11 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
 
     /**
      * ContentVimeoVideoDecorator constructor.
+     *
      * @param Vimeo $vimeo
      */
     public function __construct()
     {
-        var_dump(ConfigService::$videoSync);
         $clientId = ConfigService::$videoSync['vimeo'][ConfigService::$brand]['client_id'];
         $clientSecret = ConfigService::$videoSync['vimeo'][ConfigService::$brand]['client_secret'];
         $accessToken = ConfigService::$videoSync['vimeo'][ConfigService::$brand]['access_token'];
@@ -50,12 +50,16 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
                                 foreach ($response['body']['files'] as $fileData) {
                                     if (isset($fileData['height'])) {
                                         $contentResults[$contentIndex]
-                                        ['vimeo_video_playback_endpoints'][$fileData['height']] =
-                                            $fileData['link_secure'];
+                                        ['video_playback_endpoints'][] =
+                                            [
+                                                'file' => $fileData['link_secure'],
+                                                'width' => $fileData['width'],
+                                                'height' => $fileData['height'],
+                                            ];
 
                                         ksort(
                                             $contentResults[$contentIndex]
-                                            ['vimeo_video_playback_endpoints']
+                                            ['video_playback_endpoints']
                                         );
                                     }
                                 }

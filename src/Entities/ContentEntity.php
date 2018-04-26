@@ -13,11 +13,13 @@ class ContentEntity extends Entity
 
         // fields
         foreach ($data['fields'] as $fieldIndex => $field) {
+            $fieldDots['*fields'] = $data['fields'];
 
             if (isset($field['value']['id'])) {
 
                 // linked contents
                 $linkedContentDots = (new ContentEntity($field['value']))->dot();
+                $fieldDots['*fields.' . $field['key']][] = $field['value'];
 
                 foreach ($linkedContentDots as $linkedContentDotKey => $linkedContentDotValue) {
                     if ($field['position'] == 1) {
@@ -26,6 +28,8 @@ class ContentEntity extends Entity
 
                     $fieldDots['fields.' . $field['key'] . '.' . $field['position'] . '.' . $linkedContentDotKey] =
                         $linkedContentDotValue;
+                    $fieldDots['fields.' . $field['key'] . '.' . $field['position']] =
+                        $field['value'];
 
                     $fieldDots['fields.' . $field['key'] . '.' . $field['type'] . '.' .
                     $field['position'] . '.' . $linkedContentDotKey] = $linkedContentDotValue;
@@ -36,6 +40,10 @@ class ContentEntity extends Entity
                 if ($field['position'] == 1) {
                     $fieldDots['fields.' . $field['key']] = $field['value'];
                 }
+
+                $fieldDots['*fields.' . $field['key']][] = $field;
+                $fieldDots['*fields.' . $field['key'] . '.' . $field['position']] = $field;
+                $fieldDots['*fields.' . $field['key'] . '.' . 'value'][] = $field['value'];
 
                 $fieldDots['fields.' . $field['key'] . '.' . $field['position']] = $field['value'];
                 $fieldDots['fields.' . $field['key'] . '.' . $field['type'] . '.' . $field['position']] = $field['value'];
@@ -60,11 +68,16 @@ class ContentEntity extends Entity
 
         // data
         foreach ($data['data'] as $dataIndex => $datum) {
+            $fieldDots['*data'] = $data['data'];
+
             if ($datum['position'] == 1) {
                 $datumDots['data.' . $datum['key']] = $datum['value'];
+                $datumDots['*data.' . $datum['key']] = $datum;
             }
 
             $datumDots['data.' . $datum['key'] . '.' . $datum['position']] = $datum['value'];
+            $datumDots['*data.' . $datum['key'] . '.' . $datum['position']] = $datum;
+            $fieldDots['*data.' . $datum['key'] . '.' . 'value'][] = $datum['value'];
 
             foreach ($datum as $datumColumnName => $datumColumnValue) {
                 if ($datum['position'] == 1) {
@@ -87,6 +100,33 @@ class ContentEntity extends Entity
         unset($data['data']);
         unset($data['permissions']);
 
-        return array_merge(array_dot($data), $fieldDots, $datumDots);
+        return array_merge($this->dotKeepFullArrays($data, '', '*'), $fieldDots, $datumDots);
+    }
+
+    /**
+     * Flatten a multi-dimensional associative array with dots.
+     *
+     * @param  array $array
+     * @param  string $prepend
+     * @param $arrayPrepend
+     * @return array
+     */
+    private function dotKeepFullArrays($array, $prepend = '', $arrayPrepend)
+    {
+        $results = [];
+
+        foreach ($array as $key => $value) {
+            if (is_array($value) && !empty($value)) {
+                $results = array_merge(
+                    $results,
+                    $this->dotKeepFullArrays($value, $prepend . $key . '.', $arrayPrepend . $key . '.')
+                );
+                $results[$arrayPrepend . $key] = $value;
+            } else {
+                $results[$prepend . $key] = $value;
+            }
+        }
+
+        return $results;
     }
 }

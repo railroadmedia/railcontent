@@ -68,11 +68,6 @@ class ContentService
      */
     private $userContentProgressRepository;
 
-    /**
-     * @var Decorator
-     */
-    private $decorator;
-
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
@@ -92,7 +87,6 @@ class ContentService
      * @param CommentRepository $commentRepository
      * @param CommentAssignmentRepository $commentAssignmentRepository
      * @param UserContentProgressRepository $userContentProgressRepository
-     * @param Decorator $decorator
      */
     public function __construct(
         ContentRepository $contentRepository,
@@ -103,8 +97,7 @@ class ContentService
         ContentPermissionRepository $contentPermissionRepository,
         CommentRepository $commentRepository,
         CommentAssignmentRepository $commentAssignmentRepository,
-        UserContentProgressRepository $userContentProgressRepository,
-        Decorator $decorator
+        UserContentProgressRepository $userContentProgressRepository
     )
     {
         $this->contentRepository = $contentRepository;
@@ -116,8 +109,6 @@ class ContentService
         $this->commentRepository = $commentRepository;
         $this->commentAssignationRepository = $commentAssignmentRepository;
         $this->userContentProgressRepository = $userContentProgressRepository;
-
-        $this->decorator = $decorator->setType('content');
     }
 
     /**
@@ -142,7 +133,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -165,7 +156,7 @@ class ContentService
         );
         $this->saveCacheResults($hash, $ids);
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -187,7 +178,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -243,7 +234,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -264,7 +255,7 @@ class ContentService
         $orderByDirection = 'desc'
     )
     {
-        return $this->decorator->decorate(
+        return Decorator::decorate(
             $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
                 $types,
                 $status,
@@ -272,7 +263,8 @@ class ContentService
                 $publishedOnComparisonOperator,
                 $orderByColumn,
                 $orderByDirection
-            )
+            ),
+            'content'
         );
     }
 
@@ -296,7 +288,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -320,7 +312,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -344,7 +336,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
 
     }
 
@@ -381,7 +373,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
 
     }
 
@@ -406,7 +398,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -429,7 +421,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
 
@@ -453,7 +445,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -476,7 +468,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -514,7 +506,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -558,7 +550,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -624,7 +616,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -753,7 +745,7 @@ class ContentService
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -1033,11 +1025,11 @@ class ContentService
                 );
                 $this->saveCacheResults($hash, array_keys($results));
 
-                return $this->decorator->decorate($results);
+                return Decorator::decorate($results, 'content');
             }
         );
 
-        return $this->decorator->decorate($results);
+        return Decorator::decorate($results, 'content');
     }
 
     /** Call the method that save in a redis set the mapping between content ids and the method cache key

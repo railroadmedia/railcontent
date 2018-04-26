@@ -5,26 +5,30 @@ namespace Railroad\Railcontent\Decorators;
 
 use Railroad\Railcontent\Services\ConfigService;
 
-class Decorator implements DecoratorInterface
+class Decorator
 {
     /**
-     * @var string
-     */
-    public $type;
-
-    /**
      * @param $data
+     * @param $type
+     * @param null $decoratorClass
      * @return mixed
      */
-    public function decorate($data)
+    public static function decorate($data, $type, $decoratorClass = null)
     {
-        if (!empty(ConfigService::$decorators[$this->type])) {
-            foreach (ConfigService::$decorators[$this->type] as $decoratorClass) {
+        if (!empty(ConfigService::$decorators[$type]) || !empty($decoratorClass)) {
+
+            if (empty($decoratorClass)) {
+                $decoratorClassNames = ConfigService::$decorators[$type];
+            } else {
+                $decoratorClassNames = [$decoratorClass];
+            }
+
+            foreach ($decoratorClassNames as $decoratorClassName) {
 
                 /**
                  * @var $decorator DecoratorInterface
                  */
-                $decorator = app()->make($decoratorClass);
+                $decorator = app()->make($decoratorClassName);
 
                 if (empty($data)) {
                     return $data;
@@ -54,16 +58,5 @@ class Decorator implements DecoratorInterface
         }
 
         return $data;
-    }
-
-    /**
-     * @param $type
-     * @return $this
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
     }
 }
