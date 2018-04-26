@@ -96,9 +96,36 @@ class ContentEntity extends Entity
             }
         }
 
+        // comments
+        if (isset($data['comments'])) {
+            $datumDots['*comments'] = $data['comments'];
+
+            foreach ($data['comments'] as $commentIndex => $comment) {
+                $datumDots['*comments.' . $commentIndex] = $comment;
+
+                foreach ($comment as $commentColumnName => $commentColumnValue) {
+
+                    if ($commentColumnName === 'replies') {
+                        $datumDots['*comments.' . $commentIndex . '.replies'] = $commentColumnValue;
+
+                        foreach ($commentColumnValue as $replyIndex => $reply) {
+                            foreach ($reply as $replyColumnName => $replyColumnValue) {
+                                $datumDots['comments.' . $commentIndex . '.replies.' . $replyIndex . '.' . $replyColumnName]
+                                    = $replyColumnValue;
+
+                            }
+                        }
+                    } else {
+                        $datumDots['comments.' . $commentIndex . '.' . $commentColumnName] = $commentColumnValue;
+                    }
+                }
+            }
+        }
+
         unset($data['fields']);
         unset($data['data']);
         unset($data['permissions']);
+        unset($data['comments']);
 
         return array_merge($this->dotKeepFullArrays($data, '', '*'), $fieldDots, $datumDots);
     }

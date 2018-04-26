@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Helpers\CacheHelper;
@@ -51,7 +52,7 @@ class CommentService
      */
     public function get($id)
     {
-        return $this->commentRepository->getById($id);
+        return Decorator::decorate($this->commentRepository->getById($id), 'comment');
     }
 
     /** Call the create method from repository that save a comment or a comment reply (based on the parent_id: if the parent_id it's null the method save a comment;
@@ -239,7 +240,7 @@ class CommentService
             return $results;
         });
 
-        return $results;
+        return Decorator::decorate($results, 'comment');
 
 
     }

@@ -45,12 +45,12 @@ class JsonPaginatedResponse implements Responsable
         if (!isset($this->results['id'])) {
             foreach ($this->results as $resultIndex => $result) {
                 if (method_exists($result, 'dot')) {
-                    $this->results[$resultIndex]['pluck'] = $result->dot();
+                    $this->results[$resultIndex]['fetch'] = $result->dot();
                 }
             }
         } else {
             if (method_exists($this->results, 'dot')) {
-                $this->results['pluck'] = $this->results->dot();
+                $this->results['fetch'] = $this->results->dot();
             }
         }
 
