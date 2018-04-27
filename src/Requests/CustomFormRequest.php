@@ -439,6 +439,11 @@ class CustomFormRequest extends FormRequest
         $brand = null;
         $content = $this->getContentFromRequest($request);
 
+        if(empty($content)){
+            $contentValidationRequired = false;
+            return;
+        }
+
         $rulesForBrand = ConfigService::$validationRules[$content['brand']] ?? [];
 
         if(empty($rulesForBrand[$content['type']])){
@@ -565,23 +570,16 @@ class CustomFormRequest extends FormRequest
             return $this->contentService->getById($contentId);
         }
 
-        $idInParam = array_values($request->route()->parameters())[0];
-
         if ($request instanceof ContentFieldDeleteRequest || $request instanceof ContentFieldUpdateRequest) {
+            $idInParam = array_values($request->route()->parameters())[0];
             $contentDatumOrField = $this->contentFieldService->get($idInParam);
-        } else {
-            $contentDatumOrField = $this->contentDatumService->get($idInParam);
         }
 
-        throw_if(
-            empty($contentDatumOrField),
-            new \Exception(
-                '$contentDatumOrField not filled in ' .
-                '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent'
-            )
-        );
+        if(!empty($contentDatumOrField)){
+            return $this->contentService->getById($contentDatumOrField['content_id']);
+        }
 
-        return $this->contentService->getById($contentDatumOrField['content_id']);
+        return [];
     }
 
     private function getStatusRestrictionsForType($contentType, $rulesForBrand)
