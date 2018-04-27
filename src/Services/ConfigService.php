@@ -87,6 +87,11 @@ class ConfigService
     /**
      * @var string
      */
+    public static $tableCommentLikes;
+
+    /**
+     * @var string
+     */
     public static $tableCommentsAssignment;
 
     /**
