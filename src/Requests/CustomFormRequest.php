@@ -441,6 +441,11 @@ class CustomFormRequest extends FormRequest
 
         $rulesForBrand = ConfigService::$validationRules[$content['brand']] ?? [];
 
+        if(empty($rulesForBrand[$content['type']])){
+            $contentValidationRequired = false;
+            return;
+        }
+
         $restrictions = $this->getStatusRestrictionsForType($content['type'], $rulesForBrand);
 
         if ($request instanceof ContentCreateRequest) {
