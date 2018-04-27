@@ -73,6 +73,8 @@ class CustomFormRequest extends FormRequest
         $this->contentFieldService = $contentFieldService;
         $this->validationFactory = $validationFactory;
         $this->contentHierarchyService = $contentHierarchyService;
+
+        ConfigService::$cacheTime = -1;
     }
 
     /**
