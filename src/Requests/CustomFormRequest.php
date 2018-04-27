@@ -196,16 +196,6 @@ class CustomFormRequest extends FormRequest
      */
     public function validateContent($request)
     {
-        /*
-         * Note that laravel 5.6 has a change to the `ValidatesWhenResolved` and `ValidatesWhenResolvedTrait`.
-         * This may or may not affect this functionality of this method and related functionality. Thus, be aware of
-         * this change in laravel and address if needed.
-         *
-         * Jonathan, March 2018
-         */
-
-
-
         $contentValidationRequired = null;
         $rulesForBrand = null;
         $content = null;
