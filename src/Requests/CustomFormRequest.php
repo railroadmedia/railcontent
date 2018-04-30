@@ -578,7 +578,7 @@ class CustomFormRequest extends FormRequest
 
         if ($request instanceof ContentUpdateRequest) {
 
-            $urlPath = explode('/', parse_url($_SERVER['HTTP_REFERER'])['path']);
+            $urlPath = explode('/', parse_url($_SERVER['REQUEST_URI'])['path']);
 
             //$brand = array_values(array_slice($urlPath, -4))[0];
 
