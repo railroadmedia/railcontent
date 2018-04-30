@@ -97,17 +97,23 @@ return [
 
     'user_routes_middleware' => [],
     'administrator_routes_middleware' => [],
-    
-    'cache_prefix' =>'railcontent',
+
+    'cache_prefix' => 'railcontent',
     'cache_driver' => 'redis',
 
     'decorators' => [
         'content' => [
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
         ],
+        'comments' => [
+            \Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator::class,
+        ],
     ],
 
     // specific decorator configs
+
+    // comments
+    'comment_likes_amount_of_users' => 3,
 
     // content hierarchy
     'content_hierarchy_max_depth' => 3,

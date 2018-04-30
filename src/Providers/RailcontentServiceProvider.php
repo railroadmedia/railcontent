@@ -160,6 +160,8 @@ class RailcontentServiceProvider extends ServiceProvider
         // decorators
         ConfigService::$decorators = config('railcontent.decorators');
 
+        ConfigService::$commentLikesDecoratorAmountOfUsers = config('railcontent.comment_likes_amount_of_users');
+
         ConfigService::$contentHierarchyMaxDepth = config('railcontent.content_hierarchy_max_depth');
         ConfigService::$contentHierarchyDecoratorAllowedTypes = config(
             'railcontent.content_hierarchy_decorator_allowed_types' .

@@ -67,7 +67,7 @@ class CommentLikeService
             [
                 'comment_id' => $commentId,
                 'user_id' => $userId,
-                'created_on' => Carbon::now()->toDateTimeString()
+                'created_on' => Carbon::now()->toDateTimeString(),
             ]
         );
 
@@ -77,7 +77,6 @@ class CommentLikeService
 
         return true;
     }
-
 
     /**
      * @param $commentId
@@ -93,38 +92,5 @@ class CommentLikeService
         event(new CommentUnLiked($commentId, $userId));
 
         return true;
-    }
-
-    /**
-     * @param array $commentOrComments
-     * @return array
-     */
-    public function attachLikesToComments($commentOrComments, $amountOfUserIdsToPull = 3)
-    {
-        $arrayOfCommentsPassedIn = !isset($commentOrComments['id']);
-
-        if (!$arrayOfCommentsPassedIn) {
-            $commentOrComments = [$commentOrComments];
-        }
-
-        $commentAndReplyIds = [];
-
-        foreach ($commentOrComments as $index => $comment) {
-            $commentAndReplyIds[] = $comment['id'];
-
-            foreach ($comment['replies'] ?? [] as $replyIndex => $reply) {
-                $commentAndReplyIds[] = $reply['id'];
-            }
-        }
-
-        $likeCounts = $this->countForCommentIds($commentAndReplyIds);
-        $likeCounts = $this->getUserIdsForEachCommentId($commentAndReplyIds, $amountOfUserIdsToPull);
-        var_dump($likeCounts);
-
-        if ($arrayOfCommentsPassedIn) {
-            return $commentOrComments;
-        } else {
-            return reset($commentOrComments);
-        }
     }
 }

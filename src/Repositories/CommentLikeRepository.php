@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Services\ConfigService;
 
 class CommentLikeRepository extends RepositoryBase
@@ -24,12 +23,14 @@ class CommentLikeRepository extends RepositoryBase
      */
     public function countForCommentIds($commentIds)
     {
-        return $this->query()
+        $results = $this->query()
             ->selectRaw($this->connection()->raw('comment_id, COUNT(*) as count'))
             ->whereIn('comment_id', $commentIds)
             ->groupBy('comment_id')
             ->get()
             ->toArray();
+
+        return array_combine(array_column($results, 'comment_id'), array_column($results, 'count'));
     }
 
     /**
@@ -38,26 +39,39 @@ class CommentLikeRepository extends RepositoryBase
      */
     public function getUserIdsForEachCommentId($commentIds, $amountOfUserIdsToPull)
     {
-        return $this->query()
-            ->selectRaw($this->connection()->raw(ConfigService::$tableCommentLikes . '.*'))
-            ->leftJoin(
-                ConfigService::$tableCommentLikes . ' as comment_likes_2',
-                function (JoinClause $joinClause) {
-                    return $joinClause
-                        ->on(
-                            ConfigService::$tableCommentLikes . '.comment_id',
-                            '=',
-                            'comment_likes_2.comment_id'
-                        )
-                        ->on(ConfigService::$tableCommentLikes . '.id', '<', 'comment_likes_2.id');
+        $commentIds = array_unique(array_values($commentIds));
+
+        $query = $this->query()->select(['comment_id', 'user_id'])
+            ->where('comment_id', $commentIds[0])
+            ->orderBy('created_on', 'desc')
+            ->groupBy('user_id', 'created_on', 'comment_id')
+            ->limit($amountOfUserIdsToPull);
+
+        foreach ($commentIds as $commentIdIndex => $commentId) {
+            if ($commentIdIndex > 0) {
+                $query->unionAll(
+                    $this->query()
+                        ->select(['comment_id', 'user_id'])
+                        ->where('comment_id', $commentId)
+                        ->orderBy('created_on', 'desc')
+                        ->groupBy('user_id', 'created_on', 'comment_id')
+                        ->limit($amountOfUserIdsToPull)
+                );
+            }
+        }
+
+        $results = $query->get();
+        $commentUserIds = [];
+
+        foreach ($commentIds as $commentIdIndex => $commentId) {
+            foreach ($results as $result) {
+                if ($result['comment_id'] == $commentId) {
+                    $commentUserIds[$commentId][] = $result['user_id'];
                 }
-            )
-            ->whereIn(ConfigService::$tableCommentLikes . '.comment_id', $commentIds)
-            ->groupBy(ConfigService::$tableCommentLikes . '.id')
-            ->havingRaw($this->connection()->raw('COUNT(*) < 3'))
-            ->orderByRaw($this->connection()->raw(ConfigService::$tableCommentLikes . '.created_on, ' . ConfigService::$tableCommentLikes . '.id, ' . ConfigService::$tableCommentLikes . '.comment_id DESC'))
-            ->get()
-            ->toArray();
+            }
+        }
+
+        return $commentUserIds;
     }
 
     /**

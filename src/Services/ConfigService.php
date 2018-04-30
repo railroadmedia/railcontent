@@ -178,4 +178,9 @@ class ConfigService
      * @var array
      */
     public static $contentHierarchyDecoratorAllowedTypes;
+
+    /**
+     * @var integer
+     */
+    public static $commentLikesDecoratorAmountOfUsers;
 }
