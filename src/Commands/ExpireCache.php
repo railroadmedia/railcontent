@@ -54,7 +54,7 @@ class ExpireCache extends Command
         $lastExecutionTime = Cache::store(ConfigService::$cacheDriver)->rememberForever(
             'expireCacheCommand',
             function ()  {
-                return Carbon::now()->toDateTimeString();
+                return Carbon::now()->subHour()->toDateTimeString();
             });
 
         $contents = $this->contentRepository->getRecentPublishedContents($lastExecutionTime);
