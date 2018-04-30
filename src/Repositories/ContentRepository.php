@@ -1317,6 +1317,7 @@ class ContentRepository extends RepositoryBase
                 ConfigService::$tableContent . '.published_on',
                 [$startDate, Carbon::now()->toDateTimeString()]
             )
+            ->whereNull('user_id')
             ->getToArray();
 
         return $contentRows;

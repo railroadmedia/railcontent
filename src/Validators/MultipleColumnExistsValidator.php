@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Validators;
 
 use Illuminate\Database\DatabaseManager;
+use Railroad\Railcontent\Repositories\QueryBuilders\QueryBuilder;
 
 class MultipleColumnExistsValidator
 {
@@ -28,66 +29,124 @@ class MultipleColumnExistsValidator
      */
     public function validate($attribute, $value, $parameters, $validator)
     {
+        $queries = [];
+
         $parameters = implode(',', $parameters);
-        $parameters = explode('&', $parameters);
+        $setsOfParamsForClauses = explode('&', $parameters);
 
-        foreach ($parameters as $key => &$parameter) {
+        /* -------------------------------------------------------------------------------------------------------------
+         * Prepare data
+         * ---------------------------------------------------------------------------------------------------------- */
 
-            $parameterParts = explode(',', $parameter);
+        foreach ($setsOfParamsForClauses as &$paramsForClause) {
 
-            $connection = $parameterParts[0];
-            $table = $parameterParts[1];
-            $row = $parameterParts[2];
-            $value = isset($parameterParts[3]) ? $parameterParts[3] : $value;
+            /* -------------------------------------------------------------------------------
+             * If there's any "OR" clauses, separate them now.
+             * ---------------------------------------------------------------------------- */
 
-            $or = false;
-            if(isset($parameterParts[3])){
-                if(strpos($parameterParts[3], 'or:') !== false){
-                    $or = true;
-                }
+            $paramsForClause = explode(',', $paramsForClause);
+
+            if (!isset($paramsForClause[3]) && (count($paramsForClause) === 3)) {
+                $paramsForClause[] = $value;
             }
 
-            $exists = $this->databaseManager->connection($connection)
-                ->table($table)
-                ->where($row, $value)
-                ->exists();
+            if (substr($paramsForClause[0], 0, strlen('or:')) == 'or:') {
+                $paramsForClause[0] = substr($paramsForClause[0], strlen('or:'));
+                $paramsForClause[] = 'or';
+            }
+        }
 
-            if($exists || $or){
+        /* -------------------------------------------------------------------------------------------------------------
+         * Prepare sets that will be used to create QueryBuilders objects
+         * ---------------------------------------------------------------------------------------------------------- */
 
-                if(isset($parameters[$key - 1])){
+        foreach ($setsOfParamsForClauses as $key => &$paramsForClause) {
+
+            $connection = $paramsForClause[0];
+            $table = $paramsForClause[1];
+            $row = $paramsForClause[2];
+            $value = $paramsForClause[3];
+            $or = isset($paramsForClause[4]) && ($paramsForClause[4] === 'or' );
+
+            /** @var \Illuminate\Database\Query\Builder $query */
+            $query = &$queries[$connection][$table];
+
+            if($or){
+
+                if($key > 0){
+                    /*
+                     * If there is a previous $paramsForClause item in the array we're currently looping through,
+                     * that means the one before this one should be part of the "whereOr" condition. Thus, remove it
+                     * from the "where" set, and place together with the current "orWhere"-applicable item.
+                     */
+                    $toKeep = $query['where'][(string) ($key - 1)];
+
+                    if(isset($query['where'][(string) ($key - 1)])){
+                        unset($query['where'][(string) ($key - 1)]);
+                    }
 
                     /*
-                     * If we're currently on the first (or only) item in this looping through the "$parameters" then
-                     * we can operate on the previous item.
+                     * Yes, we want this in the same item because the orWhere is for the current and previous together.
                      */
-                    $previousParameter = &$parameters[$key - 1];
-
-                    if(!$previousParameter['pass'] && $exists){
-                        /*
-                         * If the previous is false, and this one is true, then we want to set the previous to true so
-                         * that the false is not returned below.
-                         */
-                        $previousParameter['pass'] = true;
-                    }
-                    if($previousParameter['pass'] && !$exists) {
-                        /*
-                         * If the previous is true, but the current one is false, then set the current one to true
-                         * because it's allowed to pass because one of the "or" conditions was passed.
-                         */
-                        $exists = true;
-                    }
+                    $query['orWhere'][(string) $key][] = $toKeep;
                 }
+
+                $query['orWhere'][(string) $key][] = [$row, '=', $value];
+                continue;
             }
 
-            $parameter = ['pass' => $exists];
+            $query['where'][(string) $key] = [$row, '=', $value];
         }
 
-        foreach ($parameters as &$parameter) {
-            if(!$parameter['pass']){
-                return '0';
-            };
+        /* -------------------------------------------------------------------------------------------------------------
+         * Group clauses by connection-table
+         * ---------------------------------------------------------------------------------------------------------- */
+
+        $queriesToRun = [];
+
+        foreach($queries as $connectionName => $connections){
+            foreach($connections as $tableName => $tables){
+
+                // why does this set $connections[$tableName] to a query?
+                $query = $this->databaseManager->connection($connectionName)->table($tableName);
+
+                if(isset($tables['where'])){
+                    foreach($tables['where'] as $where){
+                        $query = $query->where([$where]);
+                    }
+                }
+
+                if(isset($tables['orWhere'])){
+                    foreach($tables['orWhere'] as $orWhere){
+                        $query->where(function($query) use ($orWhere){ /**  @var $query QueryBuilder */
+                            foreach($orWhere as $index => $orWhereItem){
+                                if($index === 0){
+                                    $query->where([$orWhereItem]);
+                                }else{
+                                    $query->orWhere([$orWhereItem]);
+                                }
+                            }
+                        });
+                    }
+                }
+                $queriesToRun[] = $query;
+            }
         }
 
+        /* -------------------------------------------------------------------------------------------------------------
+         * Run queries to validate input
+         * ---------------------------------------------------------------------------------------------------------- */
+
+//        \Illuminate\Support\Facades\DB::enableQueryLog();
+        foreach ($queriesToRun as $query) {
+
+            if(!$query->exists()){
+//                dd(['one' => \Illuminate\Support\Facades\DB::getQueryLog()]);
+                return false;
+            }
+
+        }
+//        dd(['two' => \Illuminate\Support\Facades\DB::getQueryLog()]);
         return true;
     }
 }

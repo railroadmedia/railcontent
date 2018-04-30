@@ -3,10 +3,9 @@
 namespace Railroad\Railcontent\Tests\Feature;
 
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class MultipleColumnExistsRuleTest extends RailcontentTestCase
@@ -31,17 +30,45 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         $this->contentFactory = app()->make(ContentFactory::class);
     }
 
+    private function createContent(...$arg){
+        $content = $this->contentFactory->create(...$arg);
+
+        if(is_null($content)){
+            $this->fail('Failed to generate mock content.');
+        }
+
+        return $content;
+    }
+
     /**
-     * A basic test example.
+     * Put a description here maybe?
      *
      * @return void
      */
-    public function test()
+    public function test_pass()
     {
-        //dd($this->app['config']['railcontent.validation'][ConfigService::$brand]);
+        $typeOne = $this->faker->word;
+        $contentOne = $this->createContent($this->faker->word, $typeOne);
+        $connectionName = RailcontentTestCase::getConnectionType();
+        $rule = 'exists_multiple_columns:' . $connectionName . ',' . 'railcontent_content,' . 'id' . '&' .
+            $connectionName . ',' . 'railcontent_content,' . 'type,' . $typeOne;
+        /** @var $validator Validator */
+        $validator = Validator::make(['id' => $contentOne['id']],['id' => $rule]);
+        $this->assertEquals('1', $validator->validate()['id']);
+    }
 
-        $type = 'test-type';
-        $content = $this->contentFactory->create('testslug', $type);
+    /**
+     * Put a description here maybe?
+     *
+     * @return void
+     */
+    public function test_pass_and_fail()
+    {
+        $typeOne = $this->faker->word;
+        $contentOne = $this->createContent($this->faker->word, $typeOne);
+
+        $typeTwo = $this->faker->word;
+        $this->createContent($this->faker->word, $typeTwo);
 
         $connectionName = RailcontentTestCase::getConnectionType();
 
@@ -55,30 +82,54 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            $type;
+            $typeOne;
 
         /**
          * @var $validator Validator
          */
         $validator = Validator::make(
-            ['id' => $content['id']],
+            ['id' => $contentOne['id']],
             ['id' => $rule]
         );
 
         $this->assertEquals('1', $validator->validate()['id']);
+
+        $ruleAgain = 'exists_multiple_columns:' .
+
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'id' .
+
+            '&' .
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'type,' .
+            $typeTwo;
+
+        /**
+         * @var $validator Validator
+         */
+        $validatorAgain = Validator::make(
+            ['id' => $contentOne['id']],
+            ['id' => $ruleAgain]
+        );
+
+        $this->expectException('Illuminate\Validation\ValidationException');
+
+        $validatorAgain->validate()['id'];
     }
 
     /**
-     * A basic test example.
+     * Put a description here maybe?
      *
      * @return void
      */
     public function test_or_case()
     {
-        //dd($this->app['config']['railcontent.validation'][ConfigService::$brand]);
-
+        $slug = $this->faker->word;
         $type = $this->faker->word;
-        $content = $this->contentFactory->create('testslug', $type);
+
+        $content = $this->createContent($slug, $type);
 
         $connectionName = RailcontentTestCase::getConnectionType();
 
@@ -95,10 +146,11 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $type.
 
             '&' .
+            'or:' . // <-- note this here... it makes all the difference
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            'or:' . $this->faker->word;
+            $this->faker->word;
 
         /**
          * @var $validator Validator
@@ -108,22 +160,23 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             ['id' => $rule]
         );
 
-        $this->assertEquals('1', $validator->validate()['id']);
+        $validationResult = $validator->validate()['id'];
+
+        $this->assertEquals('1', $validationResult);
     }
 
     /**
-     * A basic test example.
+     * Put a description here maybe?
      *
      * @return void
      */
     public function test_or_case_fail()
     {
-        //dd($this->app['config']['railcontent.validation'][ConfigService::$brand]);
-
         $type = $this->faker->word;
-        $content = $this->contentFactory->create('testslug', $type);
+        $typeForFailOne = $this->faker->word;
+        $typeForFailTwo = $this->faker->word;
 
-        $type = $this->faker->word; // below will eval with different than was used in create above, ergo will fail
+        $content = $this->createContent('testslug', $type);
 
         $connectionName = RailcontentTestCase::getConnectionType();
 
@@ -137,13 +190,14 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            $type.
+            $typeForFailOne .
 
             '&' .
+            'or:' . // <-- note this here... it makes all the difference
             $connectionName . ',' .
             'railcontent_content,' .
             'type,' .
-            'or:' . $this->faker->word;
+            $typeForFailTwo;
 
         /**
          * @var $validator Validator
@@ -154,5 +208,220 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         );
 
         $this->expectException('Illuminate\Validation\ValidationException');
+
+        $validator->validate()['id'];
+    }
+
+    /**
+     * Put a description here maybe?
+     *
+     * @return void
+     */
+    public function test_multiple_or_clauses()
+    {
+        $slug = $this->faker->word;
+        $type = $this->faker->word;
+
+        $content = $this->createContent($slug, $type);
+
+        $this->createContent($type, $this->faker->word);
+        $this->createContent($type, $this->faker->word);
+        $this->createContent($type, $this->faker->word);
+        $this->createContent($type, $this->faker->word);
+
+        $this->createContent($this->faker->word, $slug);
+        $this->createContent($this->faker->word, $slug);
+        $this->createContent($this->faker->word, $slug);
+        $this->createContent($this->faker->word, $slug);
+
+        $this->createContent($this->faker->word, $this->faker->word);
+        $this->createContent($this->faker->word, $this->faker->word);
+        $this->createContent($this->faker->word, $this->faker->word);
+        $this->createContent($this->faker->word, $this->faker->word);
+
+        do {
+            $slugToNotFind = $this->faker->word;
+        } while ($slugToNotFind === $slug || $slugToNotFind === $slug);
+        do {
+            $typeToNotFind = $this->faker->word;
+        } while ($typeToNotFind === $type || $typeToNotFind === $type);
+
+        $connectionName = RailcontentTestCase::getConnectionType();
+
+        $rule = 'exists_multiple_columns:' .
+
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'id' .
+
+            // ------------------------------------------------------------------------
+
+            '&' .
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'type,' .
+            $type.
+
+            '&' .
+            'or:' . // <-- note this here... it makes all the difference
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'type,' .
+            $typeToNotFind .
+
+            // ------------------------------------------------------------------------
+
+            '&' .
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'slug,' .
+            $slug.
+
+            '&' .
+            'or:' . // <-- note this here... it makes all the difference
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'slug,' .
+            $slugToNotFind;
+
+        /**
+         * @var $validator Validator
+         */
+        $validator = Validator::make(
+            ['id' => $content['id']],
+            ['id' => $rule]
+        );
+
+        $validationResult = $validator->validate()['id'];
+
+        $this->assertEquals('1', $validationResult);
+    }
+
+    /**
+     * Put a description here maybe?
+     *
+     * @return void
+     */
+    public function test_multiple_or_clauses_fail(){
+        /*
+         * I was having issue with this test failing - inconsistantly - because of collisions from $this->faker-word
+         * products. So, there's some stringent checking before calling the system under test, and we run it bunch
+         * of times to increase the odds of triggering an edge case. 25 runs takes about 25s.
+         *
+         * * Jonathan, April 2018
+         */
+        for ($i = 1; $i <= 25; $i++) {
+            $this->run_multiple_or_clauses_fail();
+        }
+    }
+
+
+    public function run_multiple_or_clauses_fail()
+    {
+        $slug = $this->faker->word;
+        $type = $this->faker->word;
+
+        $content = $this->createContent($slug, $type);
+
+        $this->createContent($type, $this->faker->word);
+        $this->createContent($type, $this->faker->word);
+        $this->createContent($type, $this->faker->word);
+        $this->createContent($type, $this->faker->word);
+
+        $this->createContent($this->faker->word, $slug);
+        $this->createContent($this->faker->word, $slug);
+        $this->createContent($this->faker->word, $slug);
+        $this->createContent($this->faker->word, $slug);
+
+        $this->createContent($this->faker->word, $this->faker->word);
+        $this->createContent($this->faker->word, $this->faker->word);
+        $this->createContent($this->faker->word, $this->faker->word);
+        $this->createContent($this->faker->word, $this->faker->word);
+
+        $oldSlug = $slug;
+        $oldType = $type;
+
+        if(rand(0,1)){ // randomly pick one to not match
+            do {
+                $slugForFail = $this->faker->word;
+                // $slugForFail = rand(0,10) < 1 ? $this->faker->word : $slug; // confirm works has expected
+            } while ($slugForFail === $slug);
+            $slug = $slugForFail;
+        }else{
+            do {
+                $typeForFail = $this->faker->word;
+            } while ($typeForFail === $type);
+            $type = $typeForFail;
+        }
+
+        do {
+            $slugToNotFind = $this->faker->word;
+        } while ($slugToNotFind === $oldSlug || $slugToNotFind === $slug);
+        do {
+            $typeToNotFind = $this->faker->word;
+        } while ($typeToNotFind === $oldType || $typeToNotFind === $type);
+
+        $connectionName = RailcontentTestCase::getConnectionType();
+
+        $rule = 'exists_multiple_columns:' .
+
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'id' .
+
+            // ------------------------------------------------------------------------
+
+            '&' .
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'type,' .
+            $type.
+
+            '&' .
+            'or:' . // <-- note this here... it makes all the difference
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'type,' .
+            $typeToNotFind .
+
+            // ------------------------------------------------------------------------
+
+            '&' .
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'slug,' .
+            $slug.
+
+            '&' .
+            'or:' . // <-- note this here... it makes all the difference
+            $connectionName . ',' .
+            'railcontent_content,' .
+            'slug,' .
+            $slugToNotFind;
+
+        /**
+         * @var $validator Validator
+         */
+        $validator = Validator::make(
+            ['id' => $content['id']],
+            ['id' => $rule]
+        );
+
+        /*
+         * This was fine except when calling this test a bunch of times in a loop, it would fail on the last call.
+         * Was very weird, so I just commented it out and replaced it with the try-catch below.
+         *
+         * Jonathan, April 2018
+         */
+        //$this->expectException('Illuminate\Validation\ValidationException');
+
+        try{
+            $validator->validate()['id'];
+        }catch(ValidationException $exception){
+            $this->assertTrue(true);
+            return true;
+        }
+
+        $this->fail('yup, failed');
     }
 }

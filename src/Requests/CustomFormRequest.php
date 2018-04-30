@@ -73,6 +73,8 @@ class CustomFormRequest extends FormRequest
         $this->contentFieldService = $contentFieldService;
         $this->validationFactory = $validationFactory;
         $this->contentHierarchyService = $contentHierarchyService;
+
+        ConfigService::$cacheTime = -1;
     }
 
     /**
@@ -194,16 +196,6 @@ class CustomFormRequest extends FormRequest
      */
     public function validateContent($request)
     {
-        /*
-         * Note that laravel 5.6 has a change to the `ValidatesWhenResolved` and `ValidatesWhenResolvedTrait`.
-         * This may or may not affect this functionality of this method and related functionality. Thus, be aware of
-         * this change in laravel and address if needed.
-         *
-         * Jonathan, March 2018
-         */
-
-
-
         $contentValidationRequired = null;
         $rulesForBrand = null;
         $content = null;
@@ -447,17 +439,56 @@ class CustomFormRequest extends FormRequest
         $brand = null;
         $content = $this->getContentFromRequest($request);
 
+        if(empty($content)){
+            $contentValidationRequired = false;
+            return;
+        }
+
         $rulesForBrand = ConfigService::$validationRules[$content['brand']] ?? [];
+
+        if(empty($rulesForBrand[$content['type']])){
+            $contentValidationRequired = false;
+            return;
+        }
 
         $restrictions = $this->getStatusRestrictionsForType($content['type'], $rulesForBrand);
 
-        if ($request instanceof ContentCreateRequest) {
-            if (isset($input['status'])) {
-                if (in_array($input['status'], $restrictions)) {
-                    throw new \Exception('Status cannot be set to: "' . $input['status'] . '" on content-create.');
+
+
+        /*
+         * ================== TEMPORARILY DISABLED SO JANADO CAN DO HIS THING. WAITING ON FRONT-END ==================
+         *
+         * The containing if ($timeIsUp || $appEnvIsDev) statement can be removed after Curtis fixes the thing where
+         * course-parts (and probably other similar content) is created with requested "status" set to "published".
+         * This is happening regardless of what the parent is set.
+         *
+         * Jonathan, 27th April 2018
+         */
+
+        // =============================================================================================================
+        // =============================================================================================================
+        $appEnv = env('APP_ENV'); $appEnvIsDev = $appEnv === 'development'; // delete this after F.E. fixed
+        $timeIsUp = \Carbon\Carbon::now()->gt(\Carbon\Carbon::createFromDate(2018, 5, 8)); // delete this after F.E. fixed
+        if($timeIsUp || $appEnvIsDev){ // delete this after F.E. fixed
+        // =============================================================================================================
+        // =============================================================================================================
+
+
+            /* leave **this** if-statement after the F.E. is fixed */
+            
+            if ($request instanceof ContentCreateRequest) {
+                if (isset($input['status'])) {
+                    if (in_array($input['status'], $restrictions)) {
+                        throw new \Exception('Status cannot be set to: "' . $input['status'] . '" on content-create.');
+                    }
                 }
             }
-        }
+
+        // =============================================================================================================
+        // =============================================================================================================
+        } // delete this after F.E. fixed
+        // =============================================================================================================
+        // =============================================================================================================
 
 
         /*
@@ -547,7 +578,7 @@ class CustomFormRequest extends FormRequest
 
         if ($request instanceof ContentUpdateRequest) {
 
-            $urlPath = explode('/', parse_url($_SERVER['HTTP_REFERER'])['path']);
+            $urlPath = explode('/', parse_url($_SERVER['REQUEST_URI'])['path']);
 
             //$brand = array_values(array_slice($urlPath, -4))[0];
 
@@ -568,23 +599,16 @@ class CustomFormRequest extends FormRequest
             return $this->contentService->getById($contentId);
         }
 
-        $idInParam = array_values($request->route()->parameters())[0];
-
         if ($request instanceof ContentFieldDeleteRequest || $request instanceof ContentFieldUpdateRequest) {
+            $idInParam = array_values($request->route()->parameters())[0];
             $contentDatumOrField = $this->contentFieldService->get($idInParam);
-        } else {
-            $contentDatumOrField = $this->contentDatumService->get($idInParam);
         }
 
-        throw_if(
-            empty($contentDatumOrField),
-            new \Exception(
-                '$contentDatumOrField not filled in ' .
-                '\Railroad\Railcontent\Requests\CustomFormRequest::validateContent'
-            )
-        );
+        if(!empty($contentDatumOrField)){
+            return $this->contentService->getById($contentDatumOrField['content_id']);
+        }
 
-        return $this->contentService->getById($contentDatumOrField['content_id']);
+        return [];
     }
 
     private function getStatusRestrictionsForType($contentType, $rulesForBrand)
