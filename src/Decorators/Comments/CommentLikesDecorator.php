@@ -46,13 +46,13 @@ class CommentLikesDecorator implements DecoratorInterface
 
         foreach ($comments as $commentIndex => $comment) {
             $comments[$commentIndex]['like_count'] = $likeCounts[$comment['id']] ?? 0;
-            $comments[$commentIndex]['like_users'] = $likeUsers[$comment['id']] ?? 0;
+            $comments[$commentIndex]['like_users'] = $likeUsers[$comment['id']] ?? [];
 
             foreach ($comment['replies'] ?? [] as $replyIndex => $reply) {
                 $comments[$commentIndex]['replies'][$replyIndex]['like_count'] =
                     $likeCounts[$reply['id']] ?? 0;
                 $comments[$commentIndex]['replies'][$replyIndex]['like_users'] =
-                    $likeUsers[$reply['id']] ?? 0;
+                    $likeUsers[$reply['id']] ?? [];
             }
         }
 
