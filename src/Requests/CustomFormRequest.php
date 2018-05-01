@@ -589,11 +589,7 @@ class CustomFormRequest extends FormRequest
         }
 
         if ($request instanceof ContentUpdateRequest) {
-
-            $urlPath = explode('/', parse_url($_SERVER['REQUEST_URI'])['path']);
-
-            //$brand = array_values(array_slice($urlPath, -4))[0];
-
+            $urlPath = explode('/', parse_url($request->fullUrl())['path']);
             return $this->contentService->getById((integer)array_values(array_slice($urlPath, -1))[0]);
         }
 
