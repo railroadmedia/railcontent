@@ -112,6 +112,9 @@ return [
 
     // specific decorator configs
 
+    // use collections
+    'use_collections' => true,
+
     // comments
     'comment_likes_amount_of_users' => 3,
 

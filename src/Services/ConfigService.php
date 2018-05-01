@@ -170,6 +170,11 @@ class ConfigService
     public static $decorators;
 
     /**
+     * @var boolean
+     */
+    public static $useCollections;
+
+    /**
      * @var integer
      */
     public static $contentHierarchyMaxDepth;

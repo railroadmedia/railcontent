@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
@@ -140,7 +141,7 @@ class ContentService
      * Call the get by ids method from repository
      *
      * @param integer[] $ids
-     * @return array|null
+     * @return array|null|Collection
      */
     public function getByIds($ids)
     {
@@ -161,7 +162,7 @@ class ContentService
 
     /**
      * @param string $type
-     * @return array
+     * @return array|Collection
      */
     public function getAllByType($type)
     {
@@ -188,7 +189,7 @@ class ContentService
      * @param $fieldValue
      * @param $fieldType
      * @param string $fieldComparisonOperator
-     * @return array
+     * @return array|Collection
      */
     public function getWhereTypeInAndStatusAndField(
         array $types,
@@ -244,7 +245,7 @@ class ContentService
      * @param string $publishedOnComparisonOperator
      * @param string $orderByColumn
      * @param string $orderByDirection
-     * @return array
+     * @return array|Collection
      */
     public function getWhereTypeInAndStatusAndPublishedOnOrdered(
         array $types,
@@ -271,7 +272,7 @@ class ContentService
     /**
      * @param string $slug
      * @param string $type
-     * @return array
+     * @return array|Collection
      */
     public function getBySlugAndType($slug, $type)
     {
@@ -295,7 +296,7 @@ class ContentService
      * @param $userId
      * @param $type
      * @param $slug
-     * @return array
+     * @return array|Collection
      */
     public function getByUserIdTypeSlug($userId, $type, $slug)
     {
@@ -319,7 +320,7 @@ class ContentService
      * @param integer $parentId
      * @param string $orderBy
      * @param string $orderByDirection
-     * @return array
+     * @return array|Collection
      */
     public function getByParentId($parentId, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
@@ -345,7 +346,7 @@ class ContentService
      * @param $types
      * @param string $orderBy
      * @param string $orderByDirection
-     * @return array
+     * @return array|Collection
      */
     public function getByParentIdWhereTypeIn(
         $parentId,
@@ -381,7 +382,7 @@ class ContentService
      * @param array $parentIds
      * @param string $orderBy
      * @param string $orderByDirection
-     * @return array
+     * @return array|Collection
      */
     public function getByParentIds(array $parentIds, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
@@ -404,7 +405,7 @@ class ContentService
     /**
      * @param $childId
      * @param $type
-     * @return array
+     * @return array|Collection
      */
     public function getByChildIdWhereType($childId, $type)
     {
@@ -428,7 +429,7 @@ class ContentService
     /**
      * @param array $childIds
      * @param $type
-     * @return array
+     * @return array|Collection
      */
     public function getByChildIdsWhereType(array $childIds, $type)
     {
@@ -451,7 +452,7 @@ class ContentService
     /**
      * @param $childId
      * @param array $types
-     * @return array
+     * @return array|Collection
      */
     public function getByChildIdWhereParentTypeIn($childId, array $types)
     {
@@ -477,7 +478,7 @@ class ContentService
      * @param $state
      * @param int $limit
      * @param int $skip
-     * @return array
+     * @return array|Collection
      */
     public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit = 25, $skip = 0)
     {
@@ -515,7 +516,7 @@ class ContentService
      * @param $state
      * @param int $limit
      * @param int $skip
-     * @return array
+     * @return array|Collection
      */
     public function getPaginatedByTypesUserProgressState(
         array $types,
@@ -560,7 +561,7 @@ class ContentService
      * @param int $siblingPairLimit
      * @param string $orderColumn
      * @param string $orderDirection
-     * @return array|ContentEntity
+     * @return array|ContentEntity|Collection
      */
     public function getTypeNeighbouringSiblings(
         $type,
@@ -655,7 +656,7 @@ class ContentService
      * @param array $includedFields
      * @param array $requiredUserStates
      * @param array $includedUserStates
-     * @return array|ContentEntity
+     * @return array|ContentEntity|Collection
      */
     public function getFiltered(
         $page,
@@ -760,7 +761,7 @@ class ContentService
      * @param string|null $publishedOn
      * @param int|null $parentId
      * @param int $sort
-     * @return array|ContentEntity
+     * @return array|ContentEntity|Collection
      */
     public function create(
         $slug,
@@ -818,7 +819,7 @@ class ContentService
      *
      * @param integer $id
      * @param array $data
-     * @return array|ContentEntity
+     * @return array|ContentEntity|Collection
      */
     public function update($id, array $data)
     {
@@ -894,7 +895,7 @@ class ContentService
      * @param $userId
      * @param $contentOrContents
      * @param null $singlePlaylistSlug
-     * @return array
+     * @return array|Collection
      */
     public function attachPlaylistsToContents($userId, $contentOrContents, $singlePlaylistSlug = null)
     {
@@ -939,7 +940,7 @@ class ContentService
      * @param $userId
      * @param array $contents
      * @param null $singlePlaylistSlug
-     * @return array
+     * @return array|Collection
      */
     public function attachChildrenToContents($userId, $contents, $singlePlaylistSlug = null)
     {

@@ -159,6 +159,7 @@ class RailcontentServiceProvider extends ServiceProvider
 
         // decorators
         ConfigService::$decorators = config('railcontent.decorators');
+        ConfigService::$useCollections = config('railcontent.use_collections');
 
         ConfigService::$commentLikesDecoratorAmountOfUsers = config('railcontent.comment_likes_amount_of_users');
 

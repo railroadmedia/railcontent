@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Decorators;
 
 
+use Illuminate\Support\Collection;
 use Railroad\Railcontent\Services\ConfigService;
 
 class Decorator
@@ -31,7 +32,11 @@ class Decorator
                 $decorator = app()->make($decoratorClassName);
 
                 if (empty($data)) {
-                    return $data;
+                    if (ConfigService::$useCollections) {
+                        return new Collection($data);
+                    } else {
+                        return $data;
+                    }
                 }
 
                 if (isset($data['id'])) {
@@ -54,6 +59,21 @@ class Decorator
                     // multiple contents
                     $data = $decorator->decorate($data);
                 }
+            }
+        }
+
+        if (ConfigService::$useCollections) {
+            if (!empty($data['results'])) {
+
+                // content is nested in results
+                if (!isset($data['results']['id'])) {
+
+                    // multiple contents
+                    $data['results'] = new Collection($data['results']);
+                }
+            } else {
+                // multiple contents
+                $data = new Collection($data);
             }
         }
 

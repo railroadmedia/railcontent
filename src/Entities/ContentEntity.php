@@ -110,7 +110,8 @@ class ContentEntity extends Entity
 
                         foreach ($commentColumnValue as $replyIndex => $reply) {
                             foreach ($reply as $replyColumnName => $replyColumnValue) {
-                                $datumDots['comments.' . $commentIndex . '.replies.' . $replyIndex . '.' . $replyColumnName]
+                                $datumDots['comments.' . $commentIndex . '.replies.' .
+                                $replyIndex . '.' . $replyColumnName]
                                     = $replyColumnValue;
 
                             }
@@ -119,6 +120,17 @@ class ContentEntity extends Entity
                         $datumDots['comments.' . $commentIndex . '.' . $commentColumnName] = $commentColumnValue;
                     }
                 }
+            }
+        }
+
+        // user progress
+        if (isset($data['user_progress'])) {
+            if (isset($data['user_progress'][auth()->id()]['progress_percent'])) {
+                $data['progress_percent'] = $data['user_progress'][auth()->id()]['progress_percent'];
+            }
+
+            if (isset($data['user_progress'][auth()->id()]['state'])) {
+                $data['progress_state'] = $data['user_progress'][auth()->id()]['state'];
             }
         }
 
