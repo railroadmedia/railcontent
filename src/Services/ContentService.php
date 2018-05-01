@@ -99,8 +99,7 @@ class ContentService
         CommentRepository $commentRepository,
         CommentAssignmentRepository $commentAssignmentRepository,
         UserContentProgressRepository $userContentProgressRepository
-    )
-    {
+    ) {
         $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
         $this->fieldRepository = $fieldRepository;
@@ -141,7 +140,7 @@ class ContentService
      * Call the get by ids method from repository
      *
      * @param integer[] $ids
-     * @return array|null|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getByIds($ids)
     {
@@ -162,7 +161,7 @@ class ContentService
 
     /**
      * @param string $type
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getAllByType($type)
     {
@@ -189,7 +188,7 @@ class ContentService
      * @param $fieldValue
      * @param $fieldType
      * @param string $fieldComparisonOperator
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getWhereTypeInAndStatusAndField(
         array $types,
@@ -198,8 +197,7 @@ class ContentService
         $fieldValue,
         $fieldType,
         $fieldComparisonOperator = '='
-    )
-    {
+    ) {
         $hash = 'contents_by_types_field_and_status_' . CacheHelper::getKey(
                 $types,
                 $status,
@@ -245,7 +243,7 @@ class ContentService
      * @param string $publishedOnComparisonOperator
      * @param string $orderByColumn
      * @param string $orderByDirection
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getWhereTypeInAndStatusAndPublishedOnOrdered(
         array $types,
@@ -254,8 +252,7 @@ class ContentService
         $publishedOnComparisonOperator = '=',
         $orderByColumn = 'published_on',
         $orderByDirection = 'desc'
-    )
-    {
+    ) {
         return Decorator::decorate(
             $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
                 $types,
@@ -272,7 +269,7 @@ class ContentService
     /**
      * @param string $slug
      * @param string $type
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getBySlugAndType($slug, $type)
     {
@@ -296,7 +293,7 @@ class ContentService
      * @param $userId
      * @param $type
      * @param $slug
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getByUserIdTypeSlug($userId, $type, $slug)
     {
@@ -320,7 +317,7 @@ class ContentService
      * @param integer $parentId
      * @param string $orderBy
      * @param string $orderByDirection
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getByParentId($parentId, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
@@ -346,15 +343,14 @@ class ContentService
      * @param $types
      * @param string $orderBy
      * @param string $orderByDirection
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getByParentIdWhereTypeIn(
         $parentId,
         $types,
         $orderBy = 'child_position',
         $orderByDirection = 'asc'
-    )
-    {
+    ) {
         $hash = 'contents_by_parent_id_type_' .
             CacheHelper::getKey($parentId, $types, $orderBy, $orderByDirection);
 
@@ -382,7 +378,7 @@ class ContentService
      * @param array $parentIds
      * @param string $orderBy
      * @param string $orderByDirection
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getByParentIds(array $parentIds, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
@@ -405,7 +401,7 @@ class ContentService
     /**
      * @param $childId
      * @param $type
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getByChildIdWhereType($childId, $type)
     {
@@ -425,11 +421,10 @@ class ContentService
         return Decorator::decorate($results, 'content');
     }
 
-
     /**
      * @param array $childIds
      * @param $type
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getByChildIdsWhereType(array $childIds, $type)
     {
@@ -452,7 +447,7 @@ class ContentService
     /**
      * @param $childId
      * @param array $types
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getByChildIdWhereParentTypeIn($childId, array $types)
     {
@@ -478,7 +473,7 @@ class ContentService
      * @param $state
      * @param int $limit
      * @param int $skip
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit = 25, $skip = 0)
     {
@@ -516,7 +511,7 @@ class ContentService
      * @param $state
      * @param int $limit
      * @param int $skip
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getPaginatedByTypesUserProgressState(
         array $types,
@@ -524,8 +519,7 @@ class ContentService
         $state,
         $limit = 25,
         $skip = 0
-    )
-    {
+    ) {
         $hash = 'contents_paginated_by_types_and_user_progress_' . $userId . '_' . CacheHelper::getKey(
                 $types,
                 $userId,
@@ -570,8 +564,7 @@ class ContentService
         $siblingPairLimit = 1,
         $orderColumn = 'published_on',
         $orderDirection = 'desc'
-    )
-    {
+    ) {
         $hash = 'contents_type_neighbouring_siblings_' . CacheHelper::getKey(
                 $type,
                 $columnName,
@@ -626,11 +619,7 @@ class ContentService
      * @param $state
      * @return integer
      */
-    public function countByTypesUserProgressState(
-        array $types,
-        $userId,
-        $state
-    )
+    public function countByTypesUserProgressState(array $types, $userId, $state)
     {
         $results = $this->contentRepository->countByTypesUserProgressState(
             $types,
@@ -656,7 +645,7 @@ class ContentService
      * @param array $includedFields
      * @param array $requiredUserStates
      * @param array $includedUserStates
-     * @return array|ContentEntity|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function getFiltered(
         $page,
@@ -669,8 +658,7 @@ class ContentService
         array $includedFields = [],
         array $requiredUserStates = [],
         array $includedUserStates = []
-    )
-    {
+    ) {
         if ($limit == 'null') {
             $limit = -1;
         }
@@ -738,7 +726,7 @@ class ContentService
                 $results = [
                     'results' => $filter->retrieveFilter(),
                     'total_results' => $filter->countFilter(),
-                    'filter_options' => $filter->getFilterFields()
+                    'filter_options' => $filter->getFilterFields(),
                 ];
                 $this->saveCacheResults($hash, array_keys($results['results']));
 
@@ -761,7 +749,7 @@ class ContentService
      * @param string|null $publishedOn
      * @param int|null $parentId
      * @param int $sort
-     * @return array|ContentEntity|Collection
+     * @return array|ContentEntity
      */
     public function create(
         $slug,
@@ -773,8 +761,7 @@ class ContentService
         $publishedOn,
         $parentId = null,
         $sort = 0
-    )
-    {
+    ) {
         $id =
             $this->contentRepository->create(
                 [
@@ -786,7 +773,7 @@ class ContentService
                     'brand' => $brand ?? ConfigService::$brand,
                     'user_id' => $userId,
                     'published_on' => $publishedOn,
-                    'created_on' => Carbon::now()->toDateTimeString()
+                    'created_on' => Carbon::now()->toDateTimeString(),
                 ]
             );
 
@@ -819,7 +806,7 @@ class ContentService
      *
      * @param integer $id
      * @param array $data
-     * @return array|ContentEntity|Collection
+     * @return array|ContentEntity
      */
     public function update($id, array $data)
     {
@@ -895,7 +882,7 @@ class ContentService
      * @param $userId
      * @param $contentOrContents
      * @param null $singlePlaylistSlug
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function attachPlaylistsToContents($userId, $contentOrContents, $singlePlaylistSlug = null)
     {
@@ -940,7 +927,7 @@ class ContentService
      * @param $userId
      * @param array $contents
      * @param null $singlePlaylistSlug
-     * @return array|Collection
+     * @return array|Collection|ContentEntity[]
      */
     public function attachChildrenToContents($userId, $contents, $singlePlaylistSlug = null)
     {
@@ -1007,8 +994,7 @@ class ContentService
         array $contentTypes,
         $contentFieldKey,
         array $contentFieldValues = []
-    )
-    {
+    ) {
         $hash = 'contents_by_types_and_field_value_' . CacheHelper::getKey(
                 $contentTypes,
                 $contentFieldKey,
@@ -1034,6 +1020,7 @@ class ContentService
     }
 
     /** Call the method that save in a redis set the mapping between content ids and the method cache key
+     *
      * @param string $hash
      * @param array $contentIds
      * @return bool
@@ -1043,30 +1030,5 @@ class ContentService
         CacheHelper::addLists($hash, $contentIds);
 
         return true;
-    }
-
-    private function mapToEntities($results)
-    {
-        if (empty($results)) {
-            return $results;
-        }
-
-        if (isset($results['id'])) {
-            return new ContentEntity($results);
-        }
-
-        $entities = [];
-
-        foreach (($results['results'] ?? $results) as $resultsIndex => $result) {
-            $entities[$resultsIndex] = new ContentEntity($result);
-        }
-
-        if (isset($results['results'])) {
-            $results['results'] = $entities;
-
-            return $results;
-        }
-
-        return $entities;
     }
 }
