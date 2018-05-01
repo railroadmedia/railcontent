@@ -3,7 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
+use Railroad\Railcontent\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;

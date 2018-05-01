@@ -3,8 +3,8 @@
 namespace Railroad\Railcontent\Decorators;
 
 
-use Illuminate\Support\Collection;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Support\Collection;
 
 class Decorator
 {
