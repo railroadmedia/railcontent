@@ -205,7 +205,7 @@ class CustomFormRequest extends FormRequest
             $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
         } catch (\Exception $exception) {
             throw new HttpResponseException(
-                new JsonResponse(['messages' => $exception->getMessage()], 500)
+                new JsonResponse($exception, 500)
             );
         }
 
