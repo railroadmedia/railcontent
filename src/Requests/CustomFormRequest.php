@@ -444,7 +444,19 @@ class CustomFormRequest extends FormRequest
             return;
         }
 
-        $rulesForBrand = ConfigService::$validationRules[$content['brand']] ?? [];
+        $allValidationRules = ConfigService::$validationRules;
+
+        if(empty($allValidationRules)){
+            $contentValidationRequired = false;
+            return;
+        }
+
+        if(empty($content['brand'])){
+            $contentValidationRequired = false;
+            return;
+        }
+
+        $rulesForBrand = $allValidationRules[$content['brand']] ?? [];
 
         if(empty($rulesForBrand[$content['type']])){
             $contentValidationRequired = false;
