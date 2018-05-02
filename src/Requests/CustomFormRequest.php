@@ -205,7 +205,7 @@ class CustomFormRequest extends FormRequest
             $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
         } catch (\Exception $exception) {
             throw new HttpResponseException(
-                new JsonResponse(['messages' => $exception->getMessage()], 500)
+                new JsonResponse($exception, 500)
             );
         }
 
@@ -444,7 +444,19 @@ class CustomFormRequest extends FormRequest
             return;
         }
 
-        $rulesForBrand = ConfigService::$validationRules[$content['brand']] ?? [];
+        $allValidationRules = ConfigService::$validationRules;
+
+        if(empty($allValidationRules)){
+            $contentValidationRequired = false;
+            return;
+        }
+
+        if(empty($content['brand'])){
+            $contentValidationRequired = false;
+            return;
+        }
+
+        $rulesForBrand = $allValidationRules[$content['brand']] ?? [];
 
         if(empty($rulesForBrand[$content['type']])){
             $contentValidationRequired = false;
@@ -577,11 +589,7 @@ class CustomFormRequest extends FormRequest
         }
 
         if ($request instanceof ContentUpdateRequest) {
-
-            $urlPath = explode('/', parse_url($_SERVER['REQUEST_URI'])['path']);
-
-            //$brand = array_values(array_slice($urlPath, -4))[0];
-
+            $urlPath = explode('/', parse_url($request->fullUrl())['path']);
             return $this->contentService->getById((integer)array_values(array_slice($urlPath, -1))[0]);
         }
 
