@@ -43,7 +43,7 @@ class Decorator
 
                     // singular content
                     $data = $decorator->decorate([0 => $data])[0];
-                } elseif (!empty($data['results'])) {
+                } elseif (isset($data['results'])) {
 
                     // content is nested in results
                     if (isset($data['results']['id'])) {

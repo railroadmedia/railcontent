@@ -27,7 +27,7 @@ class ContentEntityDecorator implements DecoratorInterface
             $entities[$resultsIndex] = new ContentEntity($result);
 
             // convert field linked contents to entities as well
-            foreach ($result['fields'] as $fieldIndex => $field) {
+            foreach ($result['fields'] ?? [] as $fieldIndex => $field) {
                 if (isset($field['value']['slug'])) {
                     $entities[$resultsIndex]['fields'][$fieldIndex]['value'] = new ContentEntity($field['value']);
                 }

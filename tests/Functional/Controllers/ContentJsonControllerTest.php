@@ -146,35 +146,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
     }
 
-    public function test_store_with_custom_validation_and_slug_huge()
-    {
-        $slug = $this->faker->text(500);
-        $type = array_keys(ConfigService::$validationRules[ConfigService::$brand]);
-        $status = ContentService::STATUS_DRAFT;
-
-        $response = $this->call(
-            'PUT',
-            'railcontent/content',
-            [
-                'slug' => $slug,
-                'status' => $status,
-                'type' => $this->faker->randomElement($type),
-                'position' => 1
-            ]
-        );
-
-        $this->assertEquals(422, $response->status());
-
-        $errors = [
-            [
-                'source' => "slug",
-                "detail" => "The slug may not be greater than 64 characters."
-            ]
-
-        ];
-        $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
-    }
-
     public function test_store_published_on_not_required()
     {
         $slug = $this->faker->word;
@@ -546,7 +517,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 $types[0],
                 $this->faker->randomElement($statues)
             );
-            $contents[$i] = array_merge($content->getArrayCopy(), ['pluck' => $content->dot()]);
+            $contents[$i] = array_merge($content->getArrayCopy(), ['fetch' => $content->dot()]);
         }
 
         //create library lessons
@@ -630,7 +601,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
             $expectedResults[$i - 1] = $contents[$i];
             $expectedResults[$i - 1]['fields'][] = array_merge($field, ['id' => $field['id']]);
-            $expectedResults[$i - 1] = array_merge($contents[$i]->getArrayCopy(), ['pluck' => $contents[$i]->dot()]);
+            $expectedResults[$i - 1] = array_merge($contents[$i]->getArrayCopy(), ['fetch' => $contents[$i]->dot()]);
         }
         $expectedContent['results'] = $expectedResults;
         $expectedContent['total_results'] = $contentWithFieldsNr - 1;
@@ -733,7 +704,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         foreach ($expectedResults as $expectedResultIndex => $expectedResult) {
             $expectedResults[$expectedResultIndex] = array_merge(
                 $expectedResult,
-                ['pluck' => (new ContentEntity($expectedResult))->dot()]
+                ['fetch' => (new ContentEntity($expectedResult))->dot()]
             );
         }
 
