@@ -7,6 +7,7 @@ use Railroad\Railcontent\Events\ContentDatumDeleted;
 use Railroad\Railcontent\Events\ContentDatumUpdated;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
+use Railroad\Railcontent\Repositories\ContentFieldRepository;
 
 class ContentDatumService
 {
@@ -14,15 +15,20 @@ class ContentDatumService
      * @var ContentDatumRepository
      */
     private $datumRepository;
+    /**
+     * @var ContentFieldRepository
+     */
+    private $fieldRepository;
 
     /**
      * DatumService constructor.
      *
      * @param ContentDatumRepository $datumRepository
      */
-    public function __construct(ContentDatumRepository $datumRepository)
+    public function __construct(ContentDatumRepository $datumRepository, ContentFieldRepository $fieldRepository)
     {
         $this->datumRepository = $datumRepository;
+        $this->fieldRepository = $fieldRepository;
     }
 
     /**
@@ -65,6 +71,12 @@ class ContentDatumService
         //call the event that save a new content version in the database
         event(new ContentDatumCreated($contentId));
 
+        $parentContentLinkFields = $this->fieldRepository->getByValueType($contentId, 'content_id');
+
+        foreach ($parentContentLinkFields as $parentContentLinkField) {
+            CacheHelper::deleteCache('content_list_' . $parentContentLinkField['content_id']);
+        }
+
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_list_' . $contentId);
 
@@ -95,6 +107,12 @@ class ContentDatumService
         //save a content version
         event(new ContentDatumUpdated($datum['content_id']));
 
+        $parentContentLinkFields = $this->fieldRepository->getByValueType($datum['content_id'], 'content_id');
+
+        foreach ($parentContentLinkFields as $parentContentLinkField) {
+            CacheHelper::deleteCache('content_list_' . $parentContentLinkField['content_id']);
+        }
+
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_list_' . $datum['content_id']);
 
@@ -118,6 +136,12 @@ class ContentDatumService
 
         //save a content version 
         event(new ContentDatumDeleted($datum['content_id']));
+
+        $parentContentLinkFields = $this->fieldRepository->getByValueType($datum['content_id'], 'content_id');
+
+        foreach ($parentContentLinkFields as $parentContentLinkField) {
+            CacheHelper::deleteCache('content_list_' . $parentContentLinkField['content_id']);
+        }
 
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_list_' . $datum['content_id']);

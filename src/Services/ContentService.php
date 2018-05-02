@@ -817,6 +817,13 @@ class ContentService
         CacheHelper::deleteAllCachedSearchResults('_type_' . $content['type']);
         CacheHelper::deleteAllCachedSearchResults('types_');
 
+        // also delete cache for any contents that link to this content via field
+        $parentContentLinkFields = $this->fieldRepository->getByValueType($id, 'content_id');
+
+        foreach ($parentContentLinkFields as $parentContentLinkField) {
+            CacheHelper::deleteCache('content_list_' . $parentContentLinkField['content_id']);
+        }
+
         return $this->getById($id);
     }
 

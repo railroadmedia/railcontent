@@ -140,6 +140,12 @@ class ContentFieldService
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_list_' . $contentId);
 
+        $parentContentLinkFields = $this->fieldRepository->getByValueType($contentId, 'content_id');
+
+        foreach ($parentContentLinkFields as $parentContentLinkField) {
+            CacheHelper::deleteCache('content_list_' . $parentContentLinkField['content_id']);
+        }
+
         //delete search cache for pull methods that use type as parameter
         CacheHelper::deleteAllCachedSearchResults('types');
 
@@ -169,6 +175,12 @@ class ContentFieldService
         //Save a new content version
         event(new ContentFieldUpdated($field['content_id']));
 
+        $parentContentLinkFields = $this->fieldRepository->getByValueType($field['content_id'], 'content_id');
+
+        foreach ($parentContentLinkFields as $parentContentLinkField) {
+            CacheHelper::deleteCache('content_list_' . $parentContentLinkField['content_id']);
+        }
+
         //delete cache for associated content id
         CacheHelper::deleteCache('content_list_' . $field['content_id']);
 
@@ -194,6 +206,12 @@ class ContentFieldService
 
         //Save a new content version
         event(new ContentFieldDeleted($field['content_id']));
+
+        $parentContentLinkFields = $this->fieldRepository->getByValueType($field['content_id'], 'content_id');
+
+        foreach ($parentContentLinkFields as $parentContentLinkField) {
+            CacheHelper::deleteCache('content_list_' . $parentContentLinkField['content_id']);
+        }
 
         //delete cache for associated content id
         CacheHelper::deleteCache('content_list_' . $field['content_id']);
