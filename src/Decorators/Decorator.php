@@ -71,7 +71,7 @@ class Decorator
                     // multiple contents
                     $data['results'] = new Collection($data['results']);
                 }
-            } else {
+            } elseif (!empty($data['id'])) {
                 // multiple contents
                 $data = new Collection($data);
             }
