@@ -271,6 +271,10 @@ class CustomFormRequest extends FormRequest
 
                 foreach ($rules as $criteriaKey => &$criteria) {
 
+                    if(empty($criteria)){
+                        continue;
+                    }
+
                     if (!isset($criteria['rules'])) {
                         error_log(
                             $content['type'] . '.' . $criteriaKey . ' for one of the brands is missing the ' .
