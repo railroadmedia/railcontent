@@ -133,20 +133,67 @@ class MultipleColumnExistsValidator
             }
         }
 
+
+
+        /* -------------------------------------------------------------------------------------------------------------
+         * (uncomment for debugging enlightment!)
+         * ---------------------------------------------------------------------------------------------------------- */
+
+        // $humanReadableSummaryOfQueryToAidDebugging = $this->debuggingAid($queriesToRun);
+        // $putYourBreakPointHereAndLookAtTheValueAbove = true;
+
+
+        /* -------------------------------------------------------------------------------------------------------------
+         * "Run queries to validate input" - DEBUGGING VERSION (uncomment for debugging enlightment!)
+         * ---------------------------------------------------------------------------------------------------------- */
+
+        // \Illuminate\Support\Facades\DB::enableQueryLog();
+        // foreach ($queriesToRun as $query) {
+        //     if(!$query->exists()){
+        //         dd(['one' => \Illuminate\Support\Facades\DB::getQueryLog()]);
+        //         return false;
+        //     }
+        // }
+        // dd(['two' => \Illuminate\Support\Facades\DB::getQueryLog()]);
+
+
+
+
         /* -------------------------------------------------------------------------------------------------------------
          * Run queries to validate input
          * ---------------------------------------------------------------------------------------------------------- */
 
-//        \Illuminate\Support\Facades\DB::enableQueryLog();
         foreach ($queriesToRun as $query) {
-
             if(!$query->exists()){
-//                dd(['one' => \Illuminate\Support\Facades\DB::getQueryLog()]);
                 return false;
             }
-
         }
-//        dd(['two' => \Illuminate\Support\Facades\DB::getQueryLog()]);
+
         return true;
+    }
+
+    private function debuggingAid($queriesToRun){
+        $goodStuff = [];
+        foreach ($queriesToRun as $query) {
+            foreach($query->wheres as $item){
+                if(isset($item['query']->wheres)){
+                    foreach($item['query']->wheres as $subItem){
+                        if(isset($subItem['query']->wheres)){
+                            foreach($subItem['query']->wheres as $subSubItem){
+                                $goodStuff[2][$subItem['boolean']][] = $subSubItem['boolean'] . ' ' .
+                                    $subSubItem['column'] . ' ' . $subSubItem['operator'] . ' ' . $subSubItem['value'];
+                            }
+                        }else{
+                            $goodStuff[1][$item['boolean']][] = $subItem['boolean'] . ' ' .
+                                $subItem['column'] . ' ' . $subItem['operator'] . ' ' . $subItem['value'];
+                        }
+                    }
+                }else{
+                    $goodStuff['there shouldn\'t be anything here'][] = $item['boolean'] . ' ' .
+                        $item['column'] . ' ' . $item['operator'] . ' ' . $item['value'];
+                }
+            }
+        }
+        return $goodStuff;
     }
 }
