@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Responses\JsonPaginatedResponse;
 use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\CommentAssignmentService;
@@ -54,6 +55,8 @@ class CommentAssignationJsonController extends Controller
         $deleted = $this->commentAssignationService->deleteCommentAssignations(
             $commentId
         );
+
+        CacheHelper::deleteAllCachedSearchResults('get_comments_');
 
         return new JsonResponse(null, 204);
     }
