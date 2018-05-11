@@ -159,6 +159,7 @@ class CreateVimeoVideoContentRecords extends Command
         do { // Make calls until complete
             $contentCreatedCount = 0;
             $contentFieldsInsertData = [];
+            $contentCreationFailed = [];
 
             // Get and parse videos
             $response = $this->getVideos();
