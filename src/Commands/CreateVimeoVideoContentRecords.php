@@ -14,10 +14,12 @@ use Vimeo\Vimeo;
 class CreateVimeoVideoContentRecords extends Command
 {
     protected $signature = 'CreateVimeoVideoContentRecords ' .
-        '{totalNumberToProcess?} ' .    // required - will prompt if not entered
-        '{writeToDb?} ' .               // optional - defaults to true
-        '{outputToLogFile?} ' .         // optional - defaults to false
-        '{numberPerPage?}';             // optional - defaults to self::MAX_PER_PAGE_API_LIMIT
+        '{totalNumberToProcess?} ' .                // required - will prompt if not entered
+        '{writeToDb?} ' .                           // optional - defaults to true
+        '{outputToLogFile?} ' .                     // optional - defaults to false
+        '{numberPerPage?} ' .                       // optional - defaults to self::MAX_PER_PAGE_API_LIMIT
+        '{justGimmeFuckingInfoAboutTheVideos?}' .   // optional - defaults to false
+        '{vimeoIdsToLookFor?}';                     // optional - string containing text specifying a php array
 
     protected $description = 'Content from external resources.';
 
@@ -145,6 +147,21 @@ class CreateVimeoVideoContentRecords extends Command
 
         // -------------------------------------------------------------------------------------------------------------
 
+        $justGimmeFuckingInfoAboutTheVideos = false;
+        if(
+            $this->argument('justGimmeFuckingInfoAboutTheVideos') == 1 ||
+            $this->argument('justGimmeFuckingInfoAboutTheVideos') === 'true' ||
+            strtolower($this->argument('justGimmeFuckingInfoAboutTheVideos')) === 'justgimmefuckinginfoaboutthevideos'
+        ){
+            $justGimmeFuckingInfoAboutTheVideos = true;
+            $writeToDb = false;
+            $outputToLogFile = true;
+            $this->info('"justGimmeFuckingInfoAboutTheVideos" option requested, thus will *not* write to DB.');
+            $justTheInfo = [];
+        }
+
+        // -------------------------------------------------------------------------------------------------------------
+
         $numberPerPageArg = $this->argument('numberPerPage');
 
         $numPerPageNotEmpty = !empty($numberPerPageArg);
@@ -153,6 +170,10 @@ class CreateVimeoVideoContentRecords extends Command
         if($numPerPageNotEmpty && $numIsNotTooMuch){
             $this->perPage = $numberPerPageArg;
         }
+
+        // -------------------------------------------------------------------------------------------------------------
+
+        $vimeoIdsToLookFor = $this->argument('vimeoIdsToLookFor');
 
         // -------------------------------------------------------------------------------------------------------------
 
@@ -184,6 +205,24 @@ class CreateVimeoVideoContentRecords extends Command
 
             if (!empty($videos)) {
                 foreach ($videos as $video) {
+
+                    if($justGimmeFuckingInfoAboutTheVideos){
+
+                        if(isset($vimeoIdsToLookFor) && !empty($vimeoIdsToLookFor)){
+                            $uri = $video['uri'];
+                            $id = (int) str_replace('/videos/', '', $uri);
+                            if(in_array($id, $vimeoIdsToLookFor)){
+                                $justTheInfo[$this->amountProcessed] = [$video['name'] => $video['uri']];
+                                $this->info(PHP_EOL. '        GOT ONE !!!        ' . PHP_EOL);
+                            }
+                        }else{
+                            $justTheInfo[$video['name']] = $video['uri'];
+                        }
+
+                        $this->amountProcessed++;
+                        continue;
+                    }
+
                     $uri = $video['uri'];
                     $id = str_replace('/videos/', '', $uri);
                     $duration = $video['duration'];
@@ -375,7 +414,7 @@ class CreateVimeoVideoContentRecords extends Command
                     ->insert($contentFieldsInsertData);
                 if ($contentFieldsWriteSuccess && empty($contentCreationFailed)) {
 
-                    $this->pageToGet = floor($this->amountProcessed / $this->perPage) + 1;
+                    $this->incrementPageToGet();
 
                     $this->info(
                         'Processed ' . count($videos) . ' videos. ' .
@@ -393,7 +432,7 @@ class CreateVimeoVideoContentRecords extends Command
                     }
                 }
             }else{
-                $this->pageToGet = floor($this->amountProcessed / $this->perPage) + 1;
+                $this->incrementPageToGet();
             }
 
         } while ($this->amountProcessed < $this->totalNumberToProcess);
@@ -404,12 +443,17 @@ class CreateVimeoVideoContentRecords extends Command
         // =============================================================================================================
 
         if($outputToLogFile){
-            Storage::put($this->logFileName, json_encode(
-                [
-                    'vimeo Ids Of Videos Not In CMS (search "NOT IN CMS")' => $vimeoIdsOfVideosNotInCMS,
-                    'motherfucking data pile' => $mfDatePile
-                ]
-            ));
+
+            $payload = [
+                'vimeo Ids Of Videos Not In CMS (search "NOT IN CMS")' => $vimeoIdsOfVideosNotInCMS,
+                'motherfucking data pile' => $mfDatePile
+            ];
+
+            if($justGimmeFuckingInfoAboutTheVideos){
+                $payload = $justTheInfo;
+            }
+
+            Storage::put($this->logFileName, json_encode($payload));
 
             $commandToRun = 'chmod 777 -R /app/pianote/storage/app/' . $dir;
             $chmodOutput = exec($commandToRun);
@@ -426,6 +470,10 @@ class CreateVimeoVideoContentRecords extends Command
         $this->info('CreateVimeoVideoContentRecords complete.');
     }
 
+    private function incrementPageToGet(){
+        $this->pageToGet = floor($this->amountProcessed / $this->perPage) + 1;
+    }
+
     private function getVideos()
     {
         $response = null;
@@ -434,21 +482,21 @@ class CreateVimeoVideoContentRecords extends Command
                 $totalNumberRemainingToProcess = $this->totalNumberToProcess - $this->amountProcessed;
                 $lastPage = $totalNumberRemainingToProcess < $this->perPage;
 
+                if (empty($this->total)) {
+                    //If the total number available to get is not yet set here, it is
+                    // because we have not yet made a request, thus start at the beginning.
+                    $this->pageToGet = 1;
+                }
+
                 if(is_null($this->totalNumberToProcess)){
                     $this->info(
-                        'Requesting page ' . $this->pageToGet .
-                        ' of ? (we have to make the first request to find out how many there are).'
+                        'Requesting first of many pages. We don\'t yet know how many because we need the result ' .
+                        'of the first request to find out how many there are.'
                     );
                 }else{
                     $this->info(
                         'Requesting page ' . $this->pageToGet . ' of ' . $this->totalNumberOfPagesToProcess . '.'
                     );
-                }
-
-                if (empty($this->total)) {
-                    //If the total number available to get is not yet set here, it is
-                    // because we have not yet made a request, thus start at the beginning.
-                    $this->pageToGet = 1;
                 }
 
                 $response = $this->lib->request( // developer.vimeo.com/api/endpoints/videos#GET/users/{user_id}/videos
