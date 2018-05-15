@@ -135,6 +135,12 @@ class CreateVimeoVideoContentRecords extends Command
                     $id = str_replace('/videos/', '', $uri);
                     $duration = $video['duration'];
 
+                    if($duration === 0 || !is_numeric($duration)){
+                        $this->info('Duration for video ' . $id . ' is zero or invalid. Skipped.');
+                        $this->amountProcessed++;
+                        continue;
+                    }
+
                     if ($this->argument('debug')) {
                         $this->info(print_r('vimeo id: ' . $id, true));
                     }
@@ -149,11 +155,6 @@ class CreateVimeoVideoContentRecords extends Command
                     $content = $this->contentService->getBySlugAndType('vimeo-video-' . $id, 'vimeo-video');
 
                     if (empty($content)) {
-
-                        if ($duration === 0 || !is_numeric($duration)) {
-                            $this->info('Duration for video ' . $id . ' is zero or invalid. Video not added.');
-                            break(2);
-                        }
 
                         $content = $this->contentService->create(
                             'vimeo-video-' . $id,
