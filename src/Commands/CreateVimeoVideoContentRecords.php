@@ -45,7 +45,6 @@ class CreateVimeoVideoContentRecords extends Command
         $this->numToDo = null;
         $this->totalNumberOfPagesToProcess = null;
         $this->amountProcessed = 0;
-        $this->perPage = self::MAX_PER_PAGE_API_LIMIT;
 
         $client_id = ConfigService::$videoSync['vimeo'][ConfigService::$brand]['client_id'];
         $client_secret = ConfigService::$videoSync['vimeo'][ConfigService::$brand]['client_secret'];
@@ -61,21 +60,19 @@ class CreateVimeoVideoContentRecords extends Command
             exit;
         }
 
-        $numToDo = (int)$numToDo;
-        $perPage = (int)$perPage;
-        $skipPages = (int)$this->argument('skipPages');
+        $this->numToDo = (int)$numToDo === 0 ? self::MAX_PER_PAGE_API_LIMIT : (int)$numToDo;
 
-        $this->numToDo = (int)($numToDo ?? $this->perPage * 3);
-
-        $this->perPage = (int)($perPage ?? self::MAX_PER_PAGE_API_LIMIT);
+        $this->perPage = (int)$perPage === 0 ? self::MAX_PER_PAGE_API_LIMIT : (int)$perPage;
         $this->perPage = $this->perPage > self::MAX_PER_PAGE_API_LIMIT ? self::MAX_PER_PAGE_API_LIMIT : $this->perPage;
         $this->perPage = ($this->numToDo <= $this->perPage) ? $this->numToDo : $this->perPage; // no more than needed
+
+        $skipPages = (int)$this->argument('skipPages');
 
         if ($skipPages) {
             $this->pageToGet = $skipPages + 1;
             $this->amountProcessed = $skipPages * $this->perPage;
 
-            if ((($this->numToDo / $perPage) - $skipPages) <= 0) {
+            if ((($this->numToDo / $this->perPage) - $skipPages) <= 0) {
                 $this->info("\"pagesToSkip\" is too high a value. Exiting Now. Try Again");
                 exit;
             }
