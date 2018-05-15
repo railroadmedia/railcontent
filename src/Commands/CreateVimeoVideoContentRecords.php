@@ -13,7 +13,7 @@ use Vimeo\Vimeo;
 
 class CreateVimeoVideoContentRecords extends Command
 {
-    protected $signature = 'CreateVimeoVideoContentRecords {numToDo?} {perPage?} {skipPages?} {debug?}';
+    protected $signature = 'CreateVimeoVideoContentRecords {howFarBack?} {perPage?} {skipPages?} {debug?}';
 
     protected $description = 'Content from external resources.';
 
@@ -22,7 +22,7 @@ class CreateVimeoVideoContentRecords extends Command
     private $lib;
 
     private $perPage;
-    private $numToDo;
+    private $howFarBack;
     private $total;
     private $amountProcessed;
     private $totalNumberOfPagesToProcess;
@@ -42,7 +42,7 @@ class CreateVimeoVideoContentRecords extends Command
     public function handle()
     {
         $this->total = null;
-        $this->numToDo = null;
+        $this->howFarBack = null;
         $this->totalNumberOfPagesToProcess = null;
         $this->amountProcessed = 0;
 
@@ -52,19 +52,19 @@ class CreateVimeoVideoContentRecords extends Command
         $this->lib = new Vimeo($client_id, $client_secret);
         $this->lib->setToken($access_token);
 
-        $numToDo = $this->argument('numToDo');
+        $howFarBack = $this->argument('howFarBack');
         $perPage = $this->argument('perPage');
 
-        if ($numToDo === '0' || $perPage === '0') {
-            $this->info("No. You cannot pass \"0\" to \"perPage\" or \"numToDo\". Exiting now. Try again.");
+        if ($howFarBack === '0' || $perPage === '0') {
+            $this->info("No. You cannot pass \"0\" to \"perPage\" or \"howFarBack\". Exiting now. Try again.");
             exit;
         }
 
-        $this->numToDo = (int)$numToDo === 0 ? self::MAX_PER_PAGE_API_LIMIT : (int)$numToDo;
+        $this->howFarBack = (int)$howFarBack === 0 ? self::MAX_PER_PAGE_API_LIMIT : (int)$howFarBack;
 
         $this->perPage = (int)$perPage === 0 ? self::MAX_PER_PAGE_API_LIMIT : (int)$perPage;
         $this->perPage = $this->perPage > self::MAX_PER_PAGE_API_LIMIT ? self::MAX_PER_PAGE_API_LIMIT : $this->perPage;
-        $this->perPage = ($this->numToDo <= $this->perPage) ? $this->numToDo : $this->perPage; // no more than needed
+        $this->perPage = ($this->howFarBack <= $this->perPage) ? $this->howFarBack : $this->perPage; // no more than needed
 
         $skipPages = (int)$this->argument('skipPages');
 
@@ -72,7 +72,7 @@ class CreateVimeoVideoContentRecords extends Command
             $this->pageToGet = $skipPages + 1;
             $this->amountProcessed = $skipPages * $this->perPage;
 
-            if ((($this->numToDo / $this->perPage) - $skipPages) <= 0) {
+            if ((($this->howFarBack / $this->perPage) - $skipPages) <= 0) {
                 $this->info("\"pagesToSkip\" is too high a value. Exiting Now. Try Again");
                 exit;
             }
@@ -88,7 +88,7 @@ class CreateVimeoVideoContentRecords extends Command
             do {
                 try {
                     $this->pageToGet = $this->pageToGet ?? 1; // if not set, is 1st iteration
-                    $this->info('Page ' . $this->pageToGet . '/' . ceil($this->numToDo / $this->perPage) . '.');
+                    $this->info('Page ' . $this->pageToGet . '/' . ceil($this->howFarBack / $this->perPage) . '.');
                     $response = $this->lib->request( // developer.vimeo.com/api/endpoints/videos#GET/users/{user_id}/videos
                         '/me/videos',
                         [
@@ -103,11 +103,11 @@ class CreateVimeoVideoContentRecords extends Command
                      * Can't alter last request amount w/o convoluted calculations involving adjusting perPage. Instead
                      * truncate the results of last request so DB processes only required amount.
                      */
-                    if (($this->numToDo - $this->amountProcessed) < $this->perPage) {
+                    if (($this->howFarBack - $this->amountProcessed) < $this->perPage) {
                         $response['body']['data'] = array_slice(
                             $response['body']['data'],
                             0,
-                            $this->numToDo - $this->amountProcessed
+                            $this->howFarBack - $this->amountProcessed
                         );
                     }
                     $success = true;
@@ -197,9 +197,9 @@ class CreateVimeoVideoContentRecords extends Command
 
             if (is_null($this->total)) { // if not set, is 1st iteration - thus set now that we have them
                 $this->total = $response['body']['total'];
-                if ($this->numToDo > $this->total) {
-                    $this->info('Only ' . $this->total . ' available (not ' . $this->numToDo . ').');
-                    $this->numToDo = $this->total;
+                if ($this->howFarBack > $this->total) {
+                    $this->info('Only ' . $this->total . ' available (not ' . $this->howFarBack . ').');
+                    $this->howFarBack = $this->total;
                 }
             }
 
@@ -217,7 +217,7 @@ class CreateVimeoVideoContentRecords extends Command
                 );
             }
 
-        } while ($this->amountProcessed < $this->numToDo);
+        } while ($this->amountProcessed < $this->howFarBack);
 
         $this->info('CreateVimeoVideoContentRecords complete.');
     }
