@@ -4,9 +4,8 @@ namespace Railroad\Railcontent\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Database\DatabaseManager;
-use Illuminate\Support\Facades\Storage;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentFieldService;
 use Railroad\Railcontent\Services\ContentService;
 use Vimeo\Exceptions\VimeoRequestException;
 use Vimeo\Vimeo;
@@ -18,7 +17,7 @@ class CreateVimeoVideoContentRecords extends Command
     protected $description = 'Content from external resources.';
 
     private $contentService;
-    private $databaseManager;
+    private $contentFieldService;
     private $lib;
 
     private $perPage;
@@ -32,11 +31,11 @@ class CreateVimeoVideoContentRecords extends Command
 
     public function __construct(
         ContentService $contentService,
-        DatabaseManager $databaseManager
+        ContentFieldService $contentFieldService
     ) {
         parent::__construct();
         $this->contentService = $contentService;
-        $this->databaseManager = $databaseManager;
+        $this->contentFieldService = $contentFieldService;
     }
 
     public function handle()
@@ -80,7 +79,8 @@ class CreateVimeoVideoContentRecords extends Command
 
         do {
             $contentCreatedCount = 0;
-            $contentFieldsInsertData = [];
+            $contentFieldVideoIdCreatedCount = 0;
+            $contentFieldDurationCreatedCount = 0;
             $response = null;
 
             // get a bunch of videos
@@ -135,14 +135,14 @@ class CreateVimeoVideoContentRecords extends Command
                     $id = str_replace('/videos/', '', $uri);
                     $duration = $video['duration'];
 
-                    if($duration === 0 || !is_numeric($duration)){
+                    if ($duration === 0 || !is_numeric($duration)) {
                         $this->info('Duration for video ' . $id . ' is zero or invalid. Skipped.');
                         $this->amountProcessed++;
                         continue;
                     }
 
                     if ($this->argument('debug')) {
-                        $this->info(print_r('vimeo id: ' . $id, true));
+                        $this->info('vimeo id: ' . $id);
                     }
 
                     if (!is_numeric($id)) {
@@ -154,8 +154,9 @@ class CreateVimeoVideoContentRecords extends Command
 
                     $content = $this->contentService->getBySlugAndType('vimeo-video-' . $id, 'vimeo-video');
 
-                    if (empty($content)) {
-
+                    if (!empty($content)) {
+                        $content = $content[key($content)];
+                    }else{
                         $content = $this->contentService->create(
                             'vimeo-video-' . $id,
                             'vimeo-video',
@@ -168,20 +169,41 @@ class CreateVimeoVideoContentRecords extends Command
 
                         if ($content) {
                             $contentCreatedCount++;
-                            $contentFieldsInsertData[] = [
-                                'content_id' => $content['id'],
-                                'key' => 'vimeo_video_id',
-                                'value' => $id,
-                                'type' => 'string',
-                                'position' => 1
+                        }else{
+                            $contentWriteDataSummary = [
+                                'slug' => 'vimeo-video-' . $id,
+                                'type' => 'vimeo-video',
+                                'status' => ContentService::STATUS_PUBLISHED,
+                                'publishedOn' => Carbon::now()->toDateTimeString(),
+                                'brand' => ConfigService::$brand
                             ];
-                            $contentFieldsInsertData[] = [
-                                'content_id' => $content['id'],
-                                'key' => 'length_in_seconds',
-                                'value' => $duration,
-                                'type' => 'integer',
-                                'position' => 1
-                            ];
+                            $this->info('Content create failed. Data: ' . json_encode($contentWriteDataSummary));
+                        }
+                    }
+
+                    if(empty($content['fields'])){
+                        $this->fieldWriteVideoId($content['id'], $id, $contentFieldVideoIdCreatedCount);
+                        $this->fieldWriteDuration($content['id'], $duration, $contentFieldDurationCreatedCount);
+                    }else{
+
+                        $videoIdSet = false;
+                        $durationSet = false;
+
+                        foreach($content['fields'] as $field){
+                            if($field['key'] === 'vimeo_video_id'){
+                                $videoIdSet = true;
+                            }
+                            if($field['key'] === 'length_in_seconds'){
+                                $durationSet = true;
+                            }
+                        }
+
+                        if(!$videoIdSet){
+                            $this->fieldWriteVideoId($content['id'], $id, $contentFieldVideoIdCreatedCount);
+                        }
+
+                        if(!$durationSet){
+                            $this->fieldWriteDuration($content['id'], $duration, $contentFieldDurationCreatedCount);
                         }
                     }
 
@@ -189,7 +211,33 @@ class CreateVimeoVideoContentRecords extends Command
                 }
             }
 
-            $this->info($contentCreatedCount . ' videos added.' . PHP_EOL);
+            $msg = '';
+
+            if($contentCreatedCount){
+                $msg = $msg .
+                    $contentCreatedCount . ' content write' .
+                    ($contentCreatedCount > 1 ? 's. ' : '. ');
+            }
+            if($contentFieldVideoIdCreatedCount){
+                $msg = $msg .
+                    $contentFieldVideoIdCreatedCount . ' content field video id write' .
+                    ($contentFieldVideoIdCreatedCount > 1 ? 's. ' : '. ');
+            }
+            if($contentFieldDurationCreatedCount){
+                $msg = $msg .
+                    $contentFieldDurationCreatedCount . ' content field duration write' .
+                    ($contentFieldDurationCreatedCount > 1 ? 's. ' : '. ');
+            }
+
+            if(
+                $contentCreatedCount === 0 &&
+                $contentFieldVideoIdCreatedCount === 0 &&
+                $contentFieldDurationCreatedCount === 0
+            ){
+                $msg = 'No database writes required.';
+            }
+
+            $this->info($msg);
 
             $this->pageToGet = floor($this->amountProcessed / $this->perPage) + 1;
 
@@ -204,22 +252,52 @@ class CreateVimeoVideoContentRecords extends Command
                 }
             }
 
-
-            // Create content fields and data as needed. Return helpful information
-
-            if (
-            !$this->databaseManager->connection(ConfigService::$databaseConnectionName)
-                ->table(ConfigService::$tableContentFields)
-                ->insert($contentFieldsInsertData)
-            ) {
-                $this->info(
-                    'ContentFields write failed. Data: ' .
-                    json_encode(print_r($contentFieldsInsertData, true)) . PHP_EOL
-                );
-            }
-
         } while ($this->amountProcessed < $this->howFarBack);
 
         $this->info('CreateVimeoVideoContentRecords complete.');
+    }
+
+    private function fieldWriteVideoId($contentId, $id, &$contentFieldVideoIdCreatedCount){
+        $idWrite = $this->contentFieldService->create(
+            $contentId,
+            'vimeo_video_id',
+            $id,
+            1,
+            'string'
+        );
+        if ($idWrite) {
+            $contentFieldVideoIdCreatedCount++;
+        }else{
+            $idWriteDataSummary = [
+                'contentId' => $contentId,
+                'key' => 'vimeo_video_id',
+                'value' => $id,
+                'position' => 1,
+                'type' => 'string'
+            ];
+            $this->info('ContentFields write failed. Data: ' . json_encode($idWriteDataSummary));
+        }
+    }
+
+    private function fieldWriteDuration($contentId, $duration, &$contentFieldDurationCreatedCount){
+        $durationWrite = $this->contentFieldService->create(
+            $contentId,
+            'length_in_seconds',
+            $duration,
+            1,
+            'integer'
+        );
+        if ($durationWrite) {
+            $contentFieldDurationCreatedCount++;
+        }else{
+            $durationWriteDataSummary = [
+                'contentId' => $contentId,
+                'key' => 'length_in_seconds',
+                'value' => $duration,
+                'position' => 1,
+                'type' => 'integer'
+            ];
+            $this->info('ContentFields write failed. Data: ' . json_encode($durationWriteDataSummary));
+        }
     }
 }
