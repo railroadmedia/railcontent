@@ -9,6 +9,7 @@ use Railroad\Railcontent\Requests\ContentFieldCreateRequest;
 use Railroad\Railcontent\Requests\ContentFieldDeleteRequest;
 use Railroad\Railcontent\Requests\ContentFieldUpdateRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFieldService;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
@@ -26,6 +27,8 @@ class ContentFieldJsonController extends Controller
     public function __construct(ContentFieldService $fieldService)
     {
         $this->fieldService = $fieldService;
+
+        $this->middleware(ConfigService::$controllerMiddleware);
     }
 
     /**

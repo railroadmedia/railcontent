@@ -8,6 +8,7 @@ use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentHierarchyCreateRequest;
 use Railroad\Railcontent\Requests\ContentHierarchyUpdateRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 
 class ContentHierarchyJsonController extends Controller
@@ -25,6 +26,8 @@ class ContentHierarchyJsonController extends Controller
     public function __construct(ContentHierarchyService $contentHierarchyService)
     {
         $this->contentHierarchyService = $contentHierarchyService;
+
+        $this->middleware(ConfigService::$controllerMiddleware);
     }
 
     /**

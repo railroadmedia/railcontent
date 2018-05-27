@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\UserContentRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 
 class ContentProgressJsonController extends Controller
@@ -23,6 +24,8 @@ class ContentProgressJsonController extends Controller
     public function __construct(UserContentProgressService $userContentService)
     {
         $this->userContentService = $userContentService;
+
+        $this->middleware(ConfigService::$controllerMiddleware);
     }
 
     /** Start a content for the authenticated user

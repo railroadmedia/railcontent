@@ -137,6 +137,9 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$defaultLanguage = config('railcontent.default_language');
         ConfigService::$availableLanguages = config('railcontent.available_languages');
 
+        // middlware
+        ConfigService::$controllerMiddleware = config('railcontent.controller_middleware');
+
         // validation rules defined for each brand and content type
         ConfigService::$validationRules = config('railcontent.validation');
 

@@ -8,6 +8,7 @@ use Railroad\Railcontent\Requests\ContentDatumCreateRequest;
 use Railroad\Railcontent\Requests\ContentDatumDeleteRequest;
 use Railroad\Railcontent\Requests\ContentDatumUpdateRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
 
 class ContentDatumJsonController extends Controller
@@ -22,6 +23,8 @@ class ContentDatumJsonController extends Controller
     public function __construct(ContentDatumService $datumService)
     {
         $this->datumService = $datumService;
+
+        $this->middleware(ConfigService::$controllerMiddleware);
     }
 
     /**

@@ -8,6 +8,7 @@ use Railroad\Railcontent\Requests\PermissionAssignRequest;
 use Railroad\Railcontent\Requests\PermissionDissociateRequest;
 use Railroad\Railcontent\Requests\PermissionRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\PermissionService;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,6 +41,8 @@ class PermissionJsonController extends Controller
     ) {
         $this->permissionService = $permissionService;
         $this->contentPermissionService = $contentPermissionService;
+
+        $this->middleware(ConfigService::$controllerMiddleware);
     }
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Responses\JsonPaginatedResponse;
 use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\CommentAssignmentService;
+use Railroad\Railcontent\Services\ConfigService;
 
 class CommentAssignationJsonController extends Controller
 {
@@ -20,6 +21,8 @@ class CommentAssignationJsonController extends Controller
     public function __construct(CommentAssignmentService $commentAssignationService)
     {
         $this->commentAssignationService = $commentAssignationService;
+
+        $this->middleware(ConfigService::$controllerMiddleware);
     }
 
     /**

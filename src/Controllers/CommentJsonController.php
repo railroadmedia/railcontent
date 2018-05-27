@@ -14,6 +14,7 @@ use Railroad\Railcontent\Requests\ReplyRequest;
 use Railroad\Railcontent\Responses\JsonPaginatedResponse;
 use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\CommentService;
+use Railroad\Railcontent\Services\ConfigService;
 
 class CommentJsonController extends Controller
 {
@@ -29,6 +30,8 @@ class CommentJsonController extends Controller
     public function __construct(CommentService $commentService)
     {
         $this->commentService = $commentService;
+
+        $this->middleware(ConfigService::$controllerMiddleware);
     }
 
     /** Call the method from the service to pull the comments based on the criteria passed in request:

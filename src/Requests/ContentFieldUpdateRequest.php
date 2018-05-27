@@ -21,7 +21,8 @@ class ContentFieldUpdateRequest extends CustomFormRequest
                 'key' => 'max:255',
                 'type' => 'max:255',
                 'position' => 'nullable|numeric|min:0',
-                'content_id' => 'numeric|exists:' . ConfigService::$tableContent . ',id'
+                'content_id' => 'numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
+                    ConfigService::$tableContent . ',id'
             ]
         );
 

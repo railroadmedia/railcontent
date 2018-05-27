@@ -7,6 +7,7 @@ use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
+use Railroad\Railcontent\Support\Collection;
 
 class UserContentProgressService
 {
@@ -46,8 +47,7 @@ class UserContentProgressService
         ContentHierarchyService $contentHierarchyService,
         ContentRepository $contentRepository,
         ContentService $contentService
-    )
-    {
+    ) {
         $this->userContentRepository = $userContentRepository;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentRepository = $contentRepository;
@@ -127,10 +127,10 @@ class UserContentProgressService
                 ]
             );
 
-        CacheHelper::deleteCache('content_list_' . $contentId);
+            CacheHelper::deleteCache('content_list_' . $contentId);
 
-        //delete all the search results from cache
-        CacheHelper::deleteAllCachedSearchResults('user_progress_'.$userId.'_');
+            //delete all the search results from cache
+            CacheHelper::deleteAllCachedSearchResults('user_progress_' . $userId . '_');
         }
 
         event(new UserContentProgressSaved($userId, $contentId));
@@ -157,13 +157,18 @@ class UserContentProgressService
             ]
         );
 
-        if(is_null($contentId)){
-            error_log(print_r([
-                'method' => 'completeContent',
-                '$contentId' => $contentId,
-                '$progress' => '(not present for "completeContent" method. -Jonathan)',
-                '$userId' => $userId
-            ], true));
+        if (is_null($contentId)) {
+            error_log(
+                print_r(
+                    [
+                        'method' => 'completeContent',
+                        '$contentId' => $contentId,
+                        '$progress' => '(not present for "completeContent" method. -Jonathan)',
+                        '$userId' => $userId
+                    ],
+                    true
+                )
+            );
         }
 
         event(new UserContentProgressSaved($userId, $contentId));
@@ -171,7 +176,7 @@ class UserContentProgressService
         CacheHelper::deleteCache('content_list_' . $contentId);
 
         //delete all the search results from cache
-        CacheHelper::deleteAllCachedSearchResults('user_progress_'.$userId.'_');
+        CacheHelper::deleteAllCachedSearchResults('user_progress_' . $userId . '_');
 
         return true;
     }
@@ -201,13 +206,18 @@ class UserContentProgressService
             ]
         );
 
-        if(is_null($contentId)){
-            error_log(print_r([
-                'method' => 'saveContentProgress',
-                '$contentId' => $contentId,
-                '$progress' => print_r($progress, true),
-                '$userId' => $userId
-            ], true));
+        if (is_null($contentId)) {
+            error_log(
+                print_r(
+                    [
+                        'method' => 'saveContentProgress',
+                        '$contentId' => $contentId,
+                        '$progress' => print_r($progress, true),
+                        '$userId' => $userId
+                    ],
+                    true
+                )
+            );
         }
 
         event(new UserContentProgressSaved($userId, $contentId));
@@ -233,9 +243,12 @@ class UserContentProgressService
             $contentOrContents = [$contentOrContents];
         }
 
-        $contentOrContents = array_map(function($x){ return (array) $x;}, $contentOrContents);
+        if ($contentOrContents instanceof Collection) {
+            $contentIds = $contentOrContents->pluck('id')->toArray();
 
-        $contentIds = array_column($contentOrContents, 'id');
+        } else {
+            $contentIds = array_column($contentOrContents, 'id');
+        }
 
         if (!empty($contentIds)) {
             $contentProgressions =
@@ -347,14 +360,23 @@ class UserContentProgressService
         $progressOfSiblingsDeNested = [];
         $percentages = [];
 
-        $progressOfSiblings = array_column($siblings, 'user_progress');
+        if ($siblings instanceof Collection) {
+            $progressOfSiblings = $siblings->pluck('user_progress')->toArray();
+        } else {
+            $progressOfSiblings = array_column($siblings, 'user_progress');
+        }
 
         if (empty($progressOfSiblings)) {
             $siblings = $this->attachProgressToContents(
                 $userId,
                 $siblings
             );
-            $progressOfSiblings = array_column($siblings, 'user_progress');
+
+            if ($siblings instanceof Collection) {
+                $progressOfSiblings = $siblings->pluck('user_progress')->toArray();
+            } else {
+                $progressOfSiblings = array_column($siblings, 'user_progress');
+            }
         }
 
         foreach ($progressOfSiblings as $progressOfSingleSibling) {
@@ -399,8 +421,8 @@ class UserContentProgressService
         $state,
         $orderByColumn = 'updated_on',
         $orderByDirection = 'desc',
-        $limit = 25)
-    {
+        $limit = 25
+    ) {
         return $this->userContentRepository->getForUserStateContentTypes(
             $id,
             $types,

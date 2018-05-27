@@ -15,6 +15,7 @@ use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
 use Railroad\Railcontent\Responses\JsonPaginatedResponse;
 use Railroad\Railcontent\Responses\JsonResponse;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 
 class ContentJsonController extends Controller
@@ -41,6 +42,8 @@ class ContentJsonController extends Controller
     {
         $this->contentService = $contentService;
         $this->validationFactory = $validationFactory;
+
+        $this->middleware(ConfigService::$controllerMiddleware);
     }
 
     /**

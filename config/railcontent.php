@@ -17,6 +17,14 @@ return [
         'en-US',
     ],
 
+    // if you have any of these middleware classes in your global http kernel, they must be removed from this array
+    'controller_middleware' => [
+        \Illuminate\Cookie\Middleware\EncryptCookies::class,
+        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+        \Illuminate\Session\Middleware\StartSession::class,
+        \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
+    ],
+
     'field_option_list' => [
         'instructor',
         'topic',

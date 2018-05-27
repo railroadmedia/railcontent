@@ -30,13 +30,20 @@ class CommentUpdateRequest extends FormRequest
             'comment' => 'nullable|max:1024',
             'content_id' =>
                 ['numeric',
-                    Rule::exists(ConfigService::$tableContent, 'id')->where(function ($query) {
-                        if (is_array(ContentRepository::$availableContentStatues)) {
-                            $query->whereIn('status', ContentRepository::$availableContentStatues);
+                    Rule::exists(
+                        ConfigService::$databaseConnectionName . '.' .
+                        ConfigService::$tableContent,
+                        'id'
+                    )->where(
+                        function ($query) {
+                            if (is_array(ContentRepository::$availableContentStatues)) {
+                                $query->whereIn('status', ContentRepository::$availableContentStatues);
+                            }
                         }
-                    })
+                    )
                 ],
-            'parent_id' => 'numeric|exists:' . ConfigService::$tableComments . ',id',
+            'parent_id' => 'numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
+                ConfigService::$tableComments . ',id',
             'display_name' => 'filled'
         ];
     }

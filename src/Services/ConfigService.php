@@ -188,4 +188,9 @@ class ConfigService
      * @var integer
      */
     public static $commentLikesDecoratorAmountOfUsers;
+
+    /**
+     * @var array
+     */
+    public static $controllerMiddleware;
 }

@@ -35,7 +35,8 @@ class ContentCreateRequest extends CustomFormRequest
                 'type' => 'required|max:64',
                 'sort' => 'nullable|numeric',
                 'position' => 'nullable|numeric|min:0',
-                'parent_id' => 'nullable|numeric|exists:' . ConfigService::$tableContent . ',id',
+                'parent_id' => 'nullable|numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
+                    ConfigService::$tableContent . ',id',
                 'published_on' => 'nullable|date'
             ]
         );
@@ -47,7 +48,8 @@ class ContentCreateRequest extends CustomFormRequest
         return parent::rules();
     }
 
-    protected function contentValidationRequired(){
+    protected function contentValidationRequired()
+    {
         /*
          * Can this be deleted? If the method this will override - CustomFormRequest::contentValidationRequired - needs
          * to not run in this case, then at least a comment should be added here saying as much... lest this just get
