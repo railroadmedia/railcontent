@@ -57,6 +57,15 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
                                                 'height' => $fileData['height'],
                                             ];
 
+                                        $response['body']['pictures']['sizes'] = array_combine(
+                                            array_column($response['body']['pictures']['sizes'], 'height'),
+                                            $response['body']['pictures']['sizes']
+                                        );
+
+                                        $contentResults[$contentIndex]
+                                        ['video_poster_image_url'] = $response['body']['pictures']
+                                            ['sizes']['720']['link'] ?? '';
+
                                         ksort(
                                             $contentResults[$contentIndex]
                                             ['video_playback_endpoints']
