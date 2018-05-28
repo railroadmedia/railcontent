@@ -88,7 +88,9 @@ class CreateVimeoVideoContentRecords extends Command
             do {
                 try {
                     $this->pageToGet = $this->pageToGet ?? 1; // if not set, is 1st iteration
-                    $this->info('Page ' . $this->pageToGet . '/' . ceil($this->howFarBack / $this->perPage) . '.');
+                    $this->info(
+                        PHP_EOL . 'Page ' . $this->pageToGet . '/' . ceil($this->howFarBack / $this->perPage) . '.'
+                    );
                     $response = $this->lib->request( // developer.vimeo.com/api/endpoints/videos#GET/users/{user_id}/videos
                         '/me/videos',
                         [
@@ -114,11 +116,6 @@ class CreateVimeoVideoContentRecords extends Command
                 } catch (VimeoRequestException $e) {
                     $success = false;
                     $this->info('Oops, timed-out. Trying page again.');
-                }
-                if ($success) {
-                    $this->info(
-                        'Success. Now processing ' . count($response['body']['data']) . ' videos in this batch.'
-                    );
                 }
             } while (!$success);
 
@@ -254,7 +251,7 @@ class CreateVimeoVideoContentRecords extends Command
 
         } while ($this->amountProcessed < $this->howFarBack);
 
-        $this->info('CreateVimeoVideoContentRecords complete.');
+        $this->info(PHP_EOL . 'CreateVimeoVideoContentRecords complete.');
     }
 
     private function fieldWriteVideoId($contentId, $id, &$contentFieldVideoIdCreatedCount){
