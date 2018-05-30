@@ -64,7 +64,7 @@ Route::group(
                     Railroad\Railcontent\Controllers\ContentProgressJsonController::class . '@completeContent'
                 )->name('content.progress.complete');
 
-                Route::get(
+                Route::put(
                     '/reset',
                     Railroad\Railcontent\Controllers\ContentProgressJsonController::class . '@resetContent'
                 )->name('content.progress.reset');
