@@ -79,7 +79,7 @@ class ContentJsonController extends Controller
         );
 
         return new JsonPaginatedResponse(
-            array_values($contentData['results']),
+            $contentData['results'],
             $contentData['total_results'],
             $contentData['filter_options'],
             200
