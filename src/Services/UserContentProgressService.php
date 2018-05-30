@@ -183,6 +183,50 @@ class UserContentProgressService
 
     /**
      * @param integer $contentId
+     * @param integer $userId
+     * @return bool
+     */
+    public function resetContent($contentId, $userId)
+    {
+        $this->userContentRepository->query()
+            ->where(
+                [
+                    'content_id' => $contentId,
+                    'user_id' => $userId,
+                ]
+            )
+            ->delete();
+
+        $this->resetChildren($contentId, $userId);
+
+        event(new UserContentProgressSaved($userId, $contentId));
+
+        CacheHelper::deleteCache('content_list_' . $contentId);
+
+        //delete all the search results from cache
+        CacheHelper::deleteAllCachedSearchResults('user_progress_' . $userId . '_');
+
+        return true;
+    }
+
+    /**
+     * @param $contentId
+     * @param $userId
+     * @return bool
+     */
+    public function resetChildren($contentId, $userId)
+    {
+        $children = $this->contentService->getByParentId($contentId);
+
+        foreach ($children as $child) {
+            $this->resetContent($child['id'], $userId);
+        }
+
+        return true;
+    }
+
+    /**
+     * @param integer $contentId
      * @param integer $progress
      * @param integer $userId
      * @param null|string $state
@@ -393,6 +437,10 @@ class UserContentProgressService
 
         $arraySum = array_sum($percentages);
         $siblingCount = count($siblings);
+
+        if ($siblingCount == 0) {
+            return 0;
+        }
 
         return $arraySum / $siblingCount;
     }

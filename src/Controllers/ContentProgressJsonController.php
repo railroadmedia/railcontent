@@ -52,6 +52,18 @@ class ContentProgressJsonController extends Controller
         return new JsonResponse($response, 201);
     }
 
+    /** Set content as complete for the authenticated user
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function resetContent(UserContentRequest $request)
+    {
+        $response = $this->userContentService->resetContent($request->input('content_id'), $request->user()->id);
+
+        return new JsonResponse($response, 201);
+    }
+
     /** Save the progress on a content for the authenticated user
      *
      * @param Request $request
