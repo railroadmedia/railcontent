@@ -219,7 +219,9 @@ class UserContentProgressService
         $children = $this->contentService->getByParentId($contentId);
 
         foreach ($children as $child) {
-            $this->resetContent($child['id'], $userId);
+            if (!empty($child['user_progress'])) {
+                $this->resetContent($child['id'], $userId);
+            }
         }
 
         return true;

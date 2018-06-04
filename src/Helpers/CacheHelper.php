@@ -115,7 +115,7 @@ class CacheHelper
         //Delete members from the set and the cache records in batches of 100
         $cursor = 0;
         do {
-            list($cursor, $keys) = Redis::sscan(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key . '_deleted', $cursor, 'COUNT', 100);
+            list($cursor, $keys) = Redis::sscan(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key . '_deleted', $cursor, 'COUNT', 500);
             if (count($keys) > 0) {
                 Redis::srem(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key, $keys);
                 self::deleteCacheKeys($keys);
