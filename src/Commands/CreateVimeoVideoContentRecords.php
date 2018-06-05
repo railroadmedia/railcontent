@@ -89,11 +89,13 @@ class CreateVimeoVideoContentRecords extends Command
             // Get and parse videos
             $response = $this->getVideos();
             $videos = $response['body']['data'];
+
             if (!empty($videos)) {
                 foreach ($videos as $video) {
                     $uri = $video['uri'];
                     $id = str_replace('/videos/', '', $uri);
                     $duration = $video['duration'];
+
                     // validate
                     if (!is_numeric($id)) {
                         $this->info(
@@ -102,12 +104,12 @@ class CreateVimeoVideoContentRecords extends Command
                         );
                     }
                     // create if needed
-                    $noRecordOfVideoInCMS = empty(
-                    $this->contentService->getBySlugAndType(
-                        'vimeo-video-' . $id,
-                        'vimeo-video'
-                    )
-                    );
+                    $noRecordOfVideoInCMS = count(
+                            $this->contentService->getBySlugAndType(
+                                'vimeo-video-' . $id,
+                                'vimeo-video'
+                            )
+                        ) == 0;
 
                     if ($noRecordOfVideoInCMS && $duration !== 0 && is_numeric($duration)) {
                         // store and add to array for mass insert
@@ -129,14 +131,14 @@ class CreateVimeoVideoContentRecords extends Command
                                 'key' => 'vimeo_video_id',
                                 'value' => $id,
                                 'type' => 'string',
-                                'position' => 1
+                                'position' => 1,
                             ];
                             $contentFieldsInsertData[] = [
                                 'content_id' => $content['id'],
                                 'key' => 'length_in_seconds',
                                 'value' => $duration,
                                 'type' => 'integer',
-                                'position' => 1
+                                'position' => 1,
                             ];
                         }
                     } else {
@@ -228,7 +230,7 @@ class CreateVimeoVideoContentRecords extends Command
                         'per_page' => $this->perPage,
                         'page' => $this->pageToGet(),
                         'sort' => 'date',
-                        'direction' => 'desc'
+                        'direction' => 'desc',
                     ],
                     'GET'
                 );
@@ -250,6 +252,7 @@ class CreateVimeoVideoContentRecords extends Command
                 );
             }
         } while (!$success);
+
         return $response;
     }
 
@@ -261,6 +264,7 @@ class CreateVimeoVideoContentRecords extends Command
             return 1;
         }
         $this->pagesProcessed = floor($this->amountProcessed / $this->perPage);
+
         return $this->pagesProcessed + 1;
     }
 }
