@@ -105,6 +105,18 @@ Route::group(
                     \Railroad\Railcontent\Controllers\CommentJsonController::class . '@getLinkedComment'
                 )->name('comment.linked');
 
+                //comment-likes
+                Route::put(
+                    '/comment-like',
+                    \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@store'
+                )->name('comment-like.store');
+
+                Route::delete(
+                    '/comment-like',
+                    \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@delete'
+                )->name('comment-like.delete');
+
+
                 //full text search
                 Route::get(
                     '/search',

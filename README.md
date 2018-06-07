@@ -4,25 +4,27 @@ Railcontent
 
 Data first simple CMS.
 
-- [Railcontent](#railcontent)
-  * [Progress-Bubbling](#progress-bubbling)
-    + [Example](#example)
-  * [Validation](#validation)
-    + [Note about field or datum that reference another piece of content](#note-about-field-or-datum-that-reference-another-piece-of-content)
-    + [Important Note about the "numeric" rule](#important-note-about-the--numeric--rule)
-    + [Specifying rules](#specifying-rules)
-    + [Details of options available for each brand](#details-of-options-available-for-each-brand)
-      - [fields](#fields)
-      - [data](#data)
-      - [number_of_children](#number-of-children)
-    + [Configuration Example](#configuration-example)
-    + [MultipleColumnExistsValidator](#multiplecolumnexistsvalidator)
-      - [WHERE *AND*](#where--and-)
-      - [WHERE *OR*](#where--or-)
+* [Progress-Bubbling](#progress-bubbling)
+  + [Example](#example)
+* [Validation](#validation)
+  + [Note about field or datum that reference another piece of content](#note-about-field-or-datum-that-reference-another-piece-of-content)
+  + [Important Note about the "numeric" rule](#important-note-about-the--numeric--rule)
+  + [Specifying rules](#specifying-rules)
+  + [Details of options available for each brand](#details-of-options-available-for-each-brand)
+    - [fields](#fields)
+    - [data](#data)
+    - [number_of_children](#number-of-children)
+  + [Configuration Example](#configuration-example)
+  + [MultipleColumnExistsValidator](#multiplecolumnexistsvalidator)
+    - [WHERE *AND*](#where--and-)
+    - [WHERE *OR*](#where--or-)
+* [Comment-Likes](#comment-likes)
+  + [Endpoints](#endpoints)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
+<!-- ecotrust-canada.github.io/markdown-toc -->
 
 
 Progress-Bubbling
@@ -391,3 +393,23 @@ AND
     mysql,railcontent_content,slug,'bar baz'
 )
 ```
+
+
+Comment-Likes
+------------------------------------------------------------------------------------------------------------------------
+
+### Endpoints
+
+| description |  url                      |  type   |  params     |  success code |  returns         | 
+|-------------|---------------------------|---------|-------------|---------------|------------------| 
+| like        |  railcontent/comment-like |  put    |  comment-id |  200          |  boolean `true`  | 
+| unlike      |  railcontent/comment-like |  delete |  comment-id |  200          |  boolean `true`  | 
+ 
+
+<!--
+description, url, type, params, success code, returns
+like, railcontent/comment-like, put, comment-id, 200, boolean `true` 
+unlike, railcontent/comment-like, delete, comment-id, 200, boolean `true`
+-->
+
+
