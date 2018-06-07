@@ -19,8 +19,10 @@ Data first simple CMS.
     - [WHERE *AND*](#where--and-)
     - [WHERE *OR*](#where--or-)
 * [Comment-Likes](#comment-likes)
-  + [Endpoints](#endpoints)
-
+  + [TL;DR:](#tl-dr-)
+  + [Wordy explaination](#wordy-explaination)
+    - [Like](#like)
+    - [Unlike](#unlike)
 
 <!-- ecotrust-canada.github.io/markdown-toc -->
 
@@ -396,12 +398,12 @@ AND
 Comment-Likes
 ------------------------------------------------------------------------------------------------------------------------
 
-### Endpoints
+### TL;DR: 
 
-| description |  url                      |  type   |  params     |  success code |  returns         | 
-|-------------|---------------------------|---------|-------------|---------------|------------------| 
-| like        |  railcontent/comment-like |  put    |  comment-id |  200          |  boolean `true`  | 
-| unlike      |  railcontent/comment-like |  delete |  comment-id |  200          |  boolean `true`  | 
+| description |  URL                      |    type     |  params     |  success code |  returns         | 
+|-------------|---------------------------|-------------|-------------|---------------|------------------| 
+| like        |  railcontent/comment-like |  **put**    |  comment-id |  200          |  boolean `true`  | 
+| unlike      |  railcontent/comment-like |  **delete** |  comment-id |  200          |  boolean `true`  | 
  
 
 <!--
@@ -411,3 +413,73 @@ unlike, railcontent/comment-like, delete, comment-id, 200, boolean `true`
 -->
 
 
+### Wordy explaination
+
+There are currently two functions here. *Like* and *Unlike*. Both requests will be *same in all manners except for the request method*. One is `PUT`, the other is `DELETE`. 
+
+They both...
+
+* call the same URL ("*railcontent/comment-like*")
+* pass only one parameter ("*comment-id*")
+* on success they both return a `200` status-code and a simple boolean `true` value
+
+Note the similarities in the following examples:
+
+
+#### Like
+
+```javascrip
+$.ajax({
+    url: 'https://www.foo.com' +
+        '/railcontent/comment-like',
+    type: 'put',
+    data: {'comment-id': 123 },
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+```
+
+returns:
+
+```json
+{
+    "status":"ok",
+    "code":200,
+    "results":true
+}
+```
+
+#### Unlike
+
+```javascript
+$.ajax({
+    url: 'https://www.foo.com' +
+        '/railcontent/comment-like',
+    type: 'delete',
+    data: {'comment-id': 123 },
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+```
+
+returns:
+
+```json
+{
+    "status":"ok",
+    "code":200,
+    "results":true
+}
+```
+
+See? They're both the same except for the 'type' value defined in the request.
