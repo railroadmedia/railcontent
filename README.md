@@ -21,8 +21,6 @@ Data first simple CMS.
 * [Comment-Likes](#comment-likes)
   + [Endpoints](#endpoints)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 
 <!-- ecotrust-canada.github.io/markdown-toc -->
 
