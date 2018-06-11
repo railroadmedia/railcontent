@@ -402,14 +402,14 @@ Comment-Likes
 
 | description |  URL                      |    type     |  params     |  success code |  returns         | 
 |-------------|---------------------------|-------------|-------------|---------------|------------------| 
-| like        |  railcontent/comment-like |  **put**    |  comment-id |  200          |  boolean `true`  | 
-| unlike      |  railcontent/comment-like |  **delete** |  comment-id |  200          |  boolean `true`  | 
+| like        |  railcontent/comment-like |  **put**    |  comment_id |  200          |  boolean `true`  | 
+| unlike      |  railcontent/comment-like |  **delete** |  comment_id |  200          |  boolean `true`  | 
  
 
 <!--
 description, url, type, params, success code, returns
-like, railcontent/comment-like, put, comment-id, 200, boolean `true` 
-unlike, railcontent/comment-like, delete, comment-id, 200, boolean `true`
+like, railcontent/comment-like, put, comment_id, 200, boolean `true` 
+unlike, railcontent/comment-like, delete, comment_id, 200, boolean `true`
 -->
 
 
@@ -420,7 +420,7 @@ There are currently two functions here. *Like* and *Unlike*. Both requests will 
 They both...
 
 * call the same URL ("*railcontent/comment-like*")
-* pass only one parameter ("*comment-id*")
+* pass only one parameter ("*comment_id*")
 * on success they both return a `200` status-code and a simple boolean `true` value
 
 Note the similarities in the following examples:
@@ -428,12 +428,12 @@ Note the similarities in the following examples:
 
 #### Like
 
-```javascrip
+```javascript
 $.ajax({
     url: 'https://www.foo.com' +
         '/railcontent/comment-like',
     type: 'put',
-    data: {'comment-id': 123 },
+    data: {'comment_id': 123 },
     dataType: 'json',
     success: function(response) {
         // handle success
@@ -461,7 +461,7 @@ $.ajax({
     url: 'https://www.foo.com' +
         '/railcontent/comment-like',
     type: 'delete',
-    data: {'comment-id': 123 },
+    data: {'comment_id': 123 },
     dataType: 'json',
     success: function(response) {
         // handle success
