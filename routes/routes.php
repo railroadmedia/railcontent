@@ -107,12 +107,12 @@ Route::group(
 
                 //comment-likes
                 Route::put(
-                    '/comment-like',
+                    '/comment-like/{id}',
                     \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@store'
                 )->name('comment-like.store');
 
                 Route::delete(
-                    '/comment-like',
+                    '/comment-like/{id}',
                     \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@delete'
                 )->name('comment-like.delete');
 

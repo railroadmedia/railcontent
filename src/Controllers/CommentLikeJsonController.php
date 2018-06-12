@@ -24,16 +24,16 @@ class CommentLikeJsonController extends Controller
         $this->middleware(ConfigService::$controllerMiddleware);
     }
 
-    public function store(CommentLikeRequest $request)
+    public function store(CommentLikeRequest $request, $id)
     {
-        $store = $this->commentLikeService->create($request->get('comment_id'), auth()->id());
+        $store = $this->commentLikeService->create($id, auth()->id());
 
         return new JsonResponse($store, $store ? 200 : 500);
     }
 
-    public function delete(CommentUnLikeRequest $request)
+    public function delete(CommentUnLikeRequest $request, $id)
     {
-        $delete = $this->commentLikeService->delete($request->get('comment_id'), auth()->id());
+        $delete = $this->commentLikeService->delete($id, auth()->id());
 
         return new JsonResponse($delete, $delete ? 200 : 500);
     }
