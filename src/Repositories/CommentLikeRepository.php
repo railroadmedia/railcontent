@@ -62,7 +62,6 @@ class CommentLikeRepository extends RepositoryBase
 
         $query = $this->query()->select(['comment_id', 'user_id'])
             ->where('comment_id', $commentIds[0])
-            ->where('user_id', '!=', auth()->id())
             ->orderBy('created_on', 'desc')
             ->groupBy('user_id', 'created_on', 'comment_id')
             ->limit($amountOfUserIdsToPull);
@@ -73,7 +72,6 @@ class CommentLikeRepository extends RepositoryBase
                     $this->query()
                         ->select(['comment_id', 'user_id'])
                         ->where('comment_id', $commentId)
-                        ->where('user_id', '!=', auth()->id())
                         ->orderBy('created_on', 'desc')
                         ->groupBy('user_id', 'created_on', 'comment_id')
                         ->limit($amountOfUserIdsToPull)
