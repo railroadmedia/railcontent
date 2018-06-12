@@ -63,7 +63,7 @@ class CommentLikeService
      */
     public function create($commentId, $userId)
     {
-        $commentId = $this->commentLikeRepository->create(
+        $commentLikeId = $this->commentLikeRepository->create(
             [
                 'comment_id' => $commentId,
                 'user_id' => $userId,

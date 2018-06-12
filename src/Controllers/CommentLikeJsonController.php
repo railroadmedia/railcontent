@@ -7,6 +7,7 @@ use Railroad\Railcontent\Requests\CommentLikeRequest;
 use Railroad\Railcontent\Requests\CommentUnLikeRequest;
 use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\CommentLikeService;
+use Railroad\Railcontent\Services\ConfigService;
 
 class CommentLikeJsonController extends Controller
 {
@@ -19,6 +20,8 @@ class CommentLikeJsonController extends Controller
         CommentLikeService $commentLikeService
     ) {
         $this->commentLikeService = $commentLikeService;
+
+        $this->middleware(ConfigService::$controllerMiddleware);
     }
 
     public function store(CommentLikeRequest $request)
