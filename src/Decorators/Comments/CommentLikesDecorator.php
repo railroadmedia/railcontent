@@ -48,7 +48,7 @@ class CommentLikesDecorator implements DecoratorInterface
         foreach ($comments as $commentIndex => $comment) {
             $comments[$commentIndex]['like_count'] = $likeCounts[$comment['id']] ?? 0;
             $comments[$commentIndex]['like_users'] = $likeUsers[$comment['id']] ?? [];
-            $comments[$commentIndex]['is_liked'] = $isLikedByCurrentUser[$comment['id']] ?? false;
+            $comments[$commentIndex]['is_liked'] = (boolean)($isLikedByCurrentUser[$comment['id']] ?? false);
 
             foreach ($comment['replies'] ?? [] as $replyIndex => $reply) {
                 $comments[$commentIndex]['replies'][$replyIndex]['like_count'] =
@@ -56,7 +56,7 @@ class CommentLikesDecorator implements DecoratorInterface
                 $comments[$commentIndex]['replies'][$replyIndex]['like_users'] =
                     $likeUsers[$reply['id']] ?? [];
                 $comments[$commentIndex]['replies'][$replyIndex]['is_liked'] =
-                    $isLikedByCurrentUser[$reply['id']] ?? false;
+                    (boolean)($isLikedByCurrentUser[$reply['id']] ?? false);
             }
         }
 
