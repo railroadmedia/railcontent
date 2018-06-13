@@ -60,7 +60,9 @@ class JsonPaginatedResponse implements Responsable
             'page' => $request->get('page', 1),
             'limit' => $request->get('limit', 10),
             'total_results' => $this->totalResults,
-            'results' => $this->results,
+
+            // json encoding ruins the ordering of arrays if the keys are random numbers
+            'results' => array_values($this->results->toArray()),
             'filter_options' => $this->filterOptions,
         ];
     }
