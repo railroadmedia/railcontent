@@ -32,7 +32,7 @@ class Decorator
                 $decorator = app()->make($decoratorClassName);
 
                 if (empty($data)) {
-                    if (ConfigService::$useCollections) {
+                    if (ConfigService::$useCollections && is_array($data)) {
                         return new Collection($data);
                     } else {
                         return $data;
@@ -45,13 +45,13 @@ class Decorator
                     $data = $decorator->decorate([0 => $data])[0];
                 } elseif (isset($data['results'])) {
 
+
                     // content is nested in results
                     if (isset($data['results']['id'])) {
 
                         // singular content
                         $data['results'] = $decorator->decorate([0 => $data['results']])[0];
                     } else {
-
                         // multiple contents
                         $data['results'] = $decorator->decorate($data['results']);
                     }
@@ -63,7 +63,7 @@ class Decorator
         }
 
         if (ConfigService::$useCollections) {
-            if (!empty($data['results'])) {
+            if (isset($data['results'])) {
 
                 // content is nested in results
                 if (!isset($data['results']['id'])) {
@@ -72,6 +72,7 @@ class Decorator
                     $data['results'] = new Collection($data['results']);
                 }
             } elseif (empty($data['id'])) {
+
                 // multiple contents
                 $data = new Collection($data);
             }
