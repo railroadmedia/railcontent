@@ -106,6 +106,7 @@ class CommentJsonController extends Controller
                 ]
             )
         );
+
         //if the user it's not logged in into the application
         throw_if(($comment === 0), new NotAllowedException('Only registered user can modify own comments. Please sign in.'));
 

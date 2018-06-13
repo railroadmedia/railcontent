@@ -197,7 +197,7 @@ class CommentService
             return false;
         }
 
-        return self::$canManageOtherComments || ($comment['user_id'] == request()->get('user_id'));
+        return self::$canManageOtherComments || ($comment['user_id'] == auth()->id());
     }
 
     /**
