@@ -63,10 +63,12 @@ class CommentLikeService
      */
     public function create($commentId, $userId)
     {
-        $commentLikeId = $this->commentLikeRepository->create(
+        $commentLikeId = $this->commentLikeRepository->updateOrCreate(
             [
                 'comment_id' => $commentId,
                 'user_id' => $userId,
+            ],
+            [
                 'created_on' => Carbon::now()->toDateTimeString(),
             ]
         );
@@ -85,7 +87,7 @@ class CommentLikeService
      */
     public function delete($commentId, $userId)
     {
-        $deleted = $this->commentLikeRepository->deleteForUserComment($commentId, $userId);
+        $deleted = $this->commentLikeRepository->deleteForUserComment($userId, $commentId);
 
         CacheHelper::deleteAllCachedSearchResults('get_comments_');
 
