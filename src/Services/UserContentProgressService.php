@@ -197,7 +197,27 @@ class UserContentProgressService
             )
             ->delete();
 
-        $this->resetChildren($contentId, $userId);
+        $idsToDelete = [];
+        $childIds = [$contentId];
+
+        do {
+            $children = $this->contentHierarchyService->getByParentIds($childIds);
+
+            foreach ($children as $child) {
+                $idsToDelete[] = $child['child_id'];
+            }
+
+            $childIds = array_column($children, 'child_id');
+        } while (count($children) > 0);
+
+        $this->userContentRepository->query()
+            ->where(
+                [
+                    'user_id' => $userId,
+                ]
+            )
+            ->whereIn('content_id', $idsToDelete)
+            ->delete();
 
         event(new UserContentProgressSaved($userId, $contentId));
 
@@ -205,24 +225,6 @@ class UserContentProgressService
 
         //delete all the search results from cache
         CacheHelper::deleteAllCachedSearchResults('user_progress_' . $userId . '_');
-
-        return true;
-    }
-
-    /**
-     * @param $contentId
-     * @param $userId
-     * @return bool
-     */
-    public function resetChildren($contentId, $userId)
-    {
-        $children = $this->contentService->getByParentId($contentId);
-
-        foreach ($children as $child) {
-            if (!empty($child['user_progress'])) {
-                $this->resetContent($child['id'], $userId);
-            }
-        }
 
         return true;
     }
