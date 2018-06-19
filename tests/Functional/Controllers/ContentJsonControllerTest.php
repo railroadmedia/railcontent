@@ -3,7 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Entities\ContentEntity;
+use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -146,6 +146,35 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
     }
 
+    public function test_store_with_custom_validation_and_slug_huge()
+    {
+        $slug = $this->faker->text(500);
+        $type = array_keys(ConfigService::$validationRules[ConfigService::$brand]);
+        $status = ContentService::STATUS_DRAFT;
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/content',
+            [
+                'slug' => $slug,
+                'status' => $status,
+                'type' => $this->faker->randomElement($type),
+                'position' => 1
+            ]
+        );
+
+        $this->assertEquals(422, $response->status());
+
+        $errors = [
+            [
+                'source' => "slug",
+                "detail" => "The slug may not be greater than 64 characters."
+            ]
+
+        ];
+        $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
+    }
+
     public function test_store_published_on_not_required()
     {
         $slug = $this->faker->word;
@@ -189,30 +218,26 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $expectedResults = $this->createExpectedResult(
-            'ok',
-            201,
-            [
-                0 =>
-                    [
-                        'id' => '1',
-                        'slug' => $slug,
-                        'brand' => ConfigService::$brand,
-                        'language' => ConfigService::$defaultLanguage,
-                        'status' => $status,
-                        'type' => $type,
-                        'created_on' => Carbon::now()->toDateTimeString(),
-                        'published_on' => $publishedOn,
-                        'archived_on' => null,
-                        'parent_id' => null,
-                        'fields' => [],
-                        'data' => [],
-                        'permissions' => [],
-                        'child_id' => null,
-                        'sort' => 0,
-                    ]
-            ]
-        );
+        $expectedResults = $this->createExpectedResult('ok', 201, [
+            0 =>
+                [
+                    'id' => '1',
+                    'slug' => $slug,
+                    'brand' => ConfigService::$brand,
+                    'language' => ConfigService::$defaultLanguage,
+                    'status' => $status,
+                    'type' => $type,
+                    'created_on' => Carbon::now()->toDateTimeString(),
+                    'published_on' => $publishedOn,
+                    'archived_on' => null,
+                    'parent_id' => null,
+                    'fields' => [],
+                    'data' => [],
+                    'permissions' => [],
+                    'child_id' => null,
+                    'sort' => 0,
+                ]
+        ]);
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson());
 
@@ -230,7 +255,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 "status" => "ok",
                 "code" => 200,
-                "results" => [0 => $content->getArrayCopy()]
+                "results" => [0 => $content]
             ],
             $response->json()
         );
@@ -318,13 +343,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $response = $this->call(
-            'PATCH',
-            'railcontent/content/' . $content['id'],
-            [
-                'status' => $this->faker->word
-            ]
-        );
+        $response = $this->call('PATCH', 'railcontent/content/' . $content['id'], [
+            'status' => $this->faker->word
+        ]);
 
         //expecting a response with 422 status
         $this->assertEquals(422, $response->status());
@@ -462,11 +483,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(404, $response->status());
         $this->assertEquals('Entity not found.', json_decode($response->getContent())->error->title, true);
-        $this->assertEquals(
-            'Delete failed, content not found with id: ' . $randomId,
-            json_decode($response->getContent())->error->detail,
-            true
-        );
+        $this->assertEquals('Delete failed, content not found with id: ' . $randomId, json_decode($response->getContent())->error->detail, true);
     }
 
     public function test_index_response_no_results()
@@ -515,9 +532,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 $this->faker->word,
                 $types[0],
-                $this->faker->randomElement($statues)
-            );
-            $contents[$i] = array_merge($content->getArrayCopy(), ['fetch' => $content->dot()]);
+                $this->faker->randomElement($statues));
+            $contents[$i] = $content;
         }
 
         //create library lessons
@@ -583,8 +599,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $content = $this->contentFactory->create(
                 $this->faker->word,
                 $types[0],
-                $this->faker->randomElement($statues)
-            );
+                $this->faker->randomElement($statues));
             $contents[$i] = $content;
         }
 
@@ -601,7 +616,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
             $expectedResults[$i - 1] = $contents[$i];
             $expectedResults[$i - 1]['fields'][] = array_merge($field, ['id' => $field['id']]);
-            $expectedResults[$i - 1] = array_merge($contents[$i]->getArrayCopy(), ['fetch' => $contents[$i]->dot()]);
         }
         $expectedContent['results'] = $expectedResults;
         $expectedContent['total_results'] = $contentWithFieldsNr - 1;
@@ -653,23 +667,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         //only first 5 courses have the required field associated
         for ($i = 1; $i < 6; $i++) {
-            $field = $this->fieldFactory->create(
-                $contents[$i]['id'],
-                $requiredField['key'],
-                $requiredField['value'],
-                null,
-                $requiredField['type']
-            );
+            $field = $this->fieldFactory->create($contents[$i]['id'], $requiredField['key'], $requiredField['value'], null, $requiredField['type']);
 
-            $expectedResults[$i - 1] = $contents[$i]->getArrayCopy();
+            $expectedResults[$i - 1] = $contents[$i];
             $expectedResults[$i - 1]['fields'][] = $field;
         }
 
-        $instructor = $this->contentFactory->create(
-            $this->faker->word,
-            'instructor',
-            $this->faker->randomElement($statues)
-        );
+        $instructor = $this->contentFactory->create($this->faker->word, 'instructor', $this->faker->randomElement($statues));
 
         $fieldInstructor = [
             'key' => 'instructor',
@@ -678,15 +682,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
         ];
 
         for ($i = 1; $i < 7; $i++) {
-            $contentField = $this->fieldFactory->create(
-                $contents[$i]['id'],
-                $fieldInstructor['key'],
-                $fieldInstructor['value'],
-                null,
-                $fieldInstructor['type']
-            );
+            $contentField = $this->fieldFactory->create($contents[$i]['id'], $fieldInstructor['key'], $fieldInstructor['value'], null, $fieldInstructor['type']);
             $contentField['type'] = 'content';
-            $contentField['value'] = $instructor->getArrayCopy();
+            $contentField['value'] = $instructor;
             if (array_key_exists(($i - 1), $expectedResults)) {
                 $expectedResults[$i - 1]['fields'][] = $contentField;
 
@@ -701,16 +699,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
             }
         }
 
-        foreach ($expectedResults as $expectedResultIndex => $expectedResult) {
-            $expectedResults[$expectedResultIndex] = array_merge(
-                $expectedResult,
-                ['fetch' => (new ContentEntity($expectedResult))->dot()]
-            );
-        }
-
         $expectedContent['results'] = $expectedResults;
         $expectedContent['total_results'] = count($expectedContent['results']);
-        $expectedContent['filter_options'] = [$fieldInstructor['key'] => [$instructor->getArrayCopy()]];
+        $expectedContent['filter_options'] = [$fieldInstructor['key'] => [$instructor]];
 
         $response = $this->call(
             'GET',
@@ -785,8 +776,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(2, count($response->decodeResponseJson()['results']));
 
-        $expectedResults = [$firstChild['id'] => $firstChild->getArrayCopy(),
-            $secondChild['id'] => $secondChild->getArrayCopy()];
+        $expectedResults = [$firstChild['id'] => $firstChild,
+            $secondChild['id'] => $secondChild];
         $this->assertEquals($expectedResults, $response->decodeResponseJson()['results']);
     }
 
@@ -794,8 +785,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
     {
         $response = $this->call(
             'GET',
-            'railcontent/content/get-by-ids',
-            [rand(), rand()]
+            'railcontent/content/get-by-ids', [rand(), rand()]
         );
 
         $this->assertEquals([], $response->decodeResponseJson()['results']);
@@ -817,12 +807,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call(
             'GET',
-            'railcontent/content/get-by-ids',
-            ['ids' => $content2['id'] . ',' . $content1['id']]
+            'railcontent/content/get-by-ids', ['ids' => $content2['id'] . ',' . $content1['id']]
         );
         $expectedResults = [
-            $content2['id'] => $content2->getArrayCopy(),
-            $content1['id'] => $content1->getArrayCopy()
+            $content2['id'] => $content2,
+            $content1['id'] => $content1
         ];
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson()['results']);
@@ -858,20 +847,56 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $start6 = microtime(true);
         $response = $this->call(
             'GET',
-            'railcontent/content/get-by-ids',
-            [$content1['id']]
+            'railcontent/content/get-by-ids', [$content1['id']]
         );
         $time6 = microtime(true) - $start6;
 
         $start7 = microtime(true);
         $response = $this->call(
             'GET',
-            'railcontent/content/get-by-ids',
-            [$content1['id']]
+            'railcontent/content/get-by-ids', [$content1['id']]
         );
         $time7 = microtime(true) - $start7;
 
         $response->assertStatus(200);
+    }
+
+    public function test_store_content_execution_time()
+    {
+        $slug = $this->faker->word;
+        $type = $this->faker->word;
+        $status = ContentService::STATUS_DRAFT;
+
+        //prepare Redis cache with 300.000 keys that will be deleted when a new content it's created
+        for($i = 0; $i< 100000; $i++)
+        {
+            Redis::set('contents_results_'.$i,$i);
+            Redis::set('_type_'.$type.$i,$i);
+            Redis::set('types'.$i, $i);
+        }
+
+        $executionStartTime = microtime(true);
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/content',
+            [
+                'slug' => $slug,
+                'position' => null,
+                'status' => $status,
+                'parent_id' => null,
+                'type' => $type
+            ]
+        );
+        $executionEndTime = microtime(true);
+
+        //The result will be in seconds and milliseconds.
+        $seconds = $executionEndTime - $executionStartTime;
+
+        //Print it out
+        echo "Create content method(inclusive clear Redis cache) took $seconds seconds to execute when in Redis cache exists 300.000 keys that should be deleted.";
+
+        $this->assertEquals(201, $response->status());
     }
 
     /**
