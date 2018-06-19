@@ -136,8 +136,9 @@ class CacheHelper
     public static function deleteAllCachedSearchResults($key)
     {
         $cursor = 0;
-        do {
-            list($cursor, $keys) = Redis::scan($cursor, 'match', "*$key*");
+        do
+        {
+            list($cursor, $keys) = Redis::scan($cursor, 'match', "*$key*", 'count', 1000);
             self::deleteCacheKeys($keys);
         } while ($cursor);
 
@@ -151,11 +152,11 @@ class CacheHelper
      */
     public static function deleteCacheKeys($keys)
     {
-        if (Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore) {
-            if (!empty($keys) && is_array($keys)) {
-                foreach ($keys as $key) {
-                    Cache::store(ConfigService::$cacheDriver)->connection()->del($key);
-                }
+        if(Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore)
+        {
+            if(!empty($keys) && is_array($keys))
+            {
+                Cache::store(ConfigService::$cacheDriver)->connection()->executeRaw(array_merge(['UNLINK'], $keys));
             }
         }
 

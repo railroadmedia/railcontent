@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -858,6 +859,44 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $time7 = microtime(true) - $start7;
 
         $response->assertStatus(200);
+    }
+
+    public function test_store_content_execution_time()
+    {
+        $slug = $this->faker->word;
+        $type = $this->faker->word;
+        $status = ContentService::STATUS_DRAFT;
+
+        //prepare Redis cache with 300.000 keys that will be deleted when a new content it's created
+        for($i = 0; $i< 100000; $i++)
+        {
+            Redis::set('contents_results_'.$i,$i);
+            Redis::set('_type_'.$type.$i,$i);
+            Redis::set('types'.$i, $i);
+        }
+
+        $executionStartTime = microtime(true);
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/content',
+            [
+                'slug' => $slug,
+                'position' => null,
+                'status' => $status,
+                'parent_id' => null,
+                'type' => $type
+            ]
+        );
+        $executionEndTime = microtime(true);
+
+        //The result will be in seconds and milliseconds.
+        $seconds = $executionEndTime - $executionStartTime;
+
+        //Print it out
+        echo "Create content method(inclusive clear Redis cache) took $seconds seconds to execute when in Redis cache exists 300.000 keys that should be deleted.";
+
+        $this->assertEquals(201, $response->status());
     }
 
     /**
