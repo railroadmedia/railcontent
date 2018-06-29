@@ -246,6 +246,27 @@ Route::group(
                     '/assigned-comment/{commentId}',
                     \Railroad\Railcontent\Controllers\CommentAssignationJsonController::class . '@delete'
                 )->name('comment.assignation-delete');
+
+                //user permission
+                Route::put(
+                    '/user-permission',
+                    \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@store'
+                )->name('user.permissions.store');
+
+                Route::patch(
+                    '/user-permission/{userPermissionId}',
+                    \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@update'
+                )->name('user.permissions.update');
+
+                Route::delete(
+                    '/user-permission/{userPermissionId}',
+                    \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@delete'
+                )->name('user.permissions.delete');
+
+                Route::get(
+                    '/user-permission',
+                    \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@index'
+                )->name('user.permissions.index');
             }
         );
     }
