@@ -67,6 +67,11 @@ class ConfigService
     /**
      * @var string
      */
+    public static $tableUserPermissions;
+
+    /**
+     * @var string
+     */
     public static $tableUserContentProgress;
 
     /**

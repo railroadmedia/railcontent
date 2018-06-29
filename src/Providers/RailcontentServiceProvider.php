@@ -121,6 +121,7 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableContentData = ConfigService::$tablePrefix . 'content_data';
         ConfigService::$tablePermissions = ConfigService::$tablePrefix . 'permissions';
         ConfigService::$tableContentPermissions = ConfigService::$tablePrefix . 'content_permissions';
+        ConfigService::$tableUserPermissions = ConfigService::$tablePrefix . 'user_permissions';
         ConfigService::$tableUserContentProgress = ConfigService::$tablePrefix . 'user_content_progress';
         ConfigService::$tablePlaylists = ConfigService::$tablePrefix . 'playlists';
         ConfigService::$tablePlaylistContents = ConfigService::$tablePrefix . 'playlist_contents';
