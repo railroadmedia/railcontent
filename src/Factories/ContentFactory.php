@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Factories;
 
+use Carbon\Carbon;
 use Faker\Generator;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Services\ConfigService;
@@ -52,7 +53,7 @@ class ContentFactory extends ContentService
                 ConfigService::$brand,
                 rand(),
                 $this->faker->dateTimeThisCentury(),
-                null
+                Carbon::now()->toDateTimeString()
             ];
 
         return parent::create(...$parameters);

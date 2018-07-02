@@ -107,10 +107,11 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function addSlugInheritance(array $slugHierarchy)
     {
-        $previousTableName = ConfigService::$tableContent;
+        $previousTableName       = ConfigService::$tableContent;
         $previousTableJoinColumn = '.id';
 
-        foreach ($slugHierarchy as $i => $slug) {
+        foreach($slugHierarchy as $i => $slug)
+        {
             $tableName = 'inheritance_' . $i;
 
             $this->leftJoin(
@@ -133,7 +134,7 @@ class ContentQueryBuilder extends QueryBuilder
             $this->addSelect([$tableName . '.parent_id as parent_id_' . $i]);
             $this->addSelect([$inheritedContentTableName . '.slug as parent_slug_' . $i]);
 
-            $previousTableName = $tableName;
+            $previousTableName       = $tableName;
             $previousTableJoinColumn = '.parent_id';
         }
 
@@ -146,7 +147,8 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictBySlugHierarchy(array $slugHierarchy)
     {
-        if (empty($slugHierarchy)) {
+        if(empty($slugHierarchy))
+        {
             return $this;
         }
 
@@ -157,10 +159,11 @@ class ContentQueryBuilder extends QueryBuilder
                     ->select([ConfigService::$tableContent . '.id'])
                     ->from(ConfigService::$tableContent);
 
-                $previousTableName = ConfigService::$tableContent;
+                $previousTableName       = ConfigService::$tableContent;
                 $previousTableJoinColumn = '.id';
 
-                foreach (array_reverse($slugHierarchy) as $i => $slug) {
+                foreach(array_reverse($slugHierarchy) as $i => $slug)
+                {
                     $tableName = 'inheritance_' . $i;
 
                     $builder->leftJoin(
@@ -181,7 +184,7 @@ class ContentQueryBuilder extends QueryBuilder
 
                     $builder->where($inheritedContentTableName . '.slug', $slug);
 
-                    $previousTableName = $tableName;
+                    $previousTableName       = $tableName;
                     $previousTableJoinColumn = '.parent_id';
                 }
             }
@@ -195,7 +198,8 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictStatuses()
     {
-        if (is_array(ContentRepository::$availableContentStatues)) {
+        if(is_array(ContentRepository::$availableContentStatues))
+        {
             $this->whereIn('status', ContentRepository::$availableContentStatues);
         }
 
@@ -207,7 +211,8 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictPublishedOnDate()
     {
-        if (!ContentRepository::$pullFutureContent) {
+        if(!ContentRepository::$pullFutureContent)
+        {
             $this->where('published_on', '<=', Carbon::now()->toDateTimeString());
         }
 
@@ -220,6 +225,7 @@ class ContentQueryBuilder extends QueryBuilder
     public function restrictBrand()
     {
         $this->whereIn(ConfigService::$tableContent . '.brand', array_values(array_wrap(ConfigService::$availableBrands)));
+
         return $this;
     }
 
@@ -229,7 +235,8 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictByTypes(array $typesToInclude)
     {
-        if (!empty($typesToInclude)) {
+        if(!empty($typesToInclude))
+        {
             $this->whereIn(ConfigService::$tableContent . '.type', $typesToInclude);
         }
 
@@ -242,7 +249,8 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictByParentIds(array $parentIds)
     {
-        if (empty($parentIds)) {
+        if(empty($parentIds))
+        {
             return $this;
         }
 
@@ -265,11 +273,13 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictByUserStates(array $requiredUserStates)
     {
-        if (empty($requiredUserStates)) {
+        if(empty($requiredUserStates))
+        {
             return $this;
         }
 
-        foreach ($requiredUserStates as $index => $requiredUserState) {
+        foreach($requiredUserStates as $index => $requiredUserState)
+        {
             $tableName = 'ucp_' . $index;
 
             $this->join(
@@ -290,7 +300,6 @@ class ContentQueryBuilder extends QueryBuilder
                         '=',
                         $joinClause->raw("'" . $requiredUserState['state'] . "'")
                     );
-
                 }
             );
         }
@@ -304,7 +313,8 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function includeByUserStates(array $includedUserStates)
     {
-        if (empty($includedUserStates)) {
+        if(empty($includedUserStates))
+        {
             return $this;
         }
 
@@ -319,7 +329,8 @@ class ContentQueryBuilder extends QueryBuilder
 
                 $joinClause->on(
                     function (JoinClause $joinClause) use ($includedUserStates) {
-                        foreach ($includedUserStates as $index => $includedUserState) {
+                        foreach($includedUserStates as $index => $includedUserState)
+                        {
                             $joinClause->orOn(
                                 function (JoinClause $joinClause) use ($includedUserState) {
                                     $joinClause->on(
@@ -333,7 +344,6 @@ class ContentQueryBuilder extends QueryBuilder
                                         '=',
                                         $joinClause->raw("'" . $includedUserState['state'] . "'")
                                     );
-
                                 }
                             );
                         }
@@ -352,11 +362,13 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictByFields(array $requiredFields)
     {
-        if (empty($requiredFields)) {
+        if(empty($requiredFields))
+        {
             return $this;
         }
 
-        foreach ($requiredFields as $index => $requiredFieldData) {
+        foreach($requiredFields as $index => $requiredFieldData)
+        {
             $tableName = 'cf_' . $index;
 
             $this->join(
@@ -377,7 +389,6 @@ class ContentQueryBuilder extends QueryBuilder
                         '=',
                         $joinClause->raw("'" . $requiredFieldData['value'] . "'")
                     );
-
                 }
             );
         }
@@ -391,7 +402,8 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function includeByFields(array $includedFields)
     {
-        if (empty($includedFields)) {
+        if(empty($includedFields))
+        {
             return $this;
         }
 
@@ -408,7 +420,8 @@ class ContentQueryBuilder extends QueryBuilder
 
                 $joinClause->on(
                     function (JoinClause $joinClause) use ($tableName, $includedFields) {
-                        foreach ($includedFields as $index => $includedFieldData) {
+                        foreach($includedFields as $index => $includedFieldData)
+                        {
                             $joinClause->orOn(
                                 function (JoinClause $joinClause) use ($tableName, $includedFieldData) {
                                     $joinClause->on(
@@ -422,7 +435,6 @@ class ContentQueryBuilder extends QueryBuilder
                                         '=',
                                         $joinClause->raw("'" . $includedFieldData['value'] . "'")
                                     );
-
                                 }
                             );
                         }
@@ -440,10 +452,6 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictByPermissions()
     {
-        if (PermissionRepository::$availableContentPermissionIds === false) {
-            return $this;
-        }
-
         $this
             ->leftJoin(
                 ConfigService::$tableContentPermissions . ' as id_content_permissions',
@@ -485,40 +493,60 @@ class ContentQueryBuilder extends QueryBuilder
                         );
                 }
             )
+            ->leftJoin(
+                ConfigService::$tableUserPermissions . ' as id_user_permissions',
+                function (JoinClause $join) {
+                    $join
+                        ->on('id_permissions' . '.id',
+                            'id_user_permissions' . '.permissions_id')
+                        ->where('id_user_permissions.user_id', auth()->user()->id ?? null);
+                }
+            )
+            ->leftJoin(
+                ConfigService::$tableUserPermissions . ' as type_user_permissions',
+                function (JoinClause $join) {
+                    $join
+                        ->on('type_permissions' . '.id',
+                            'type_user_permissions' . '.permissions_id')
+                        ->where('type_user_permissions.user_id', auth()->user()->id ?? null);
+                }
+            )
             ->where(
                 function (Builder $builder) {
                     return $builder
+                        ->where('id_permissions' . '.brand', ConfigService::$brand)
+                        ->whereNotNull('id_user_permissions.id')
                         ->where(
                             function (Builder $builder) {
                                 return $builder
-                                    ->whereIn(
-                                        'id_content_permissions' . '.permission_id',
-                                        PermissionRepository::$availableContentPermissionIds
-                                    )
-                                    ->where('id_permissions' . '.brand', ConfigService::$brand);
+                                    ->where('id_user_permissions.expiration_date', '>=', Carbon::now()->toDateTimeString())
+                                    ->orWhereNull('id_user_permissions.expiration_date');
                             }
-                        )
-                        ->orWhere(
+                        );
+                }
+            )
+            ->orWhere(
+                function (Builder $builder) {
+                    return $builder
+                        ->where('type_permissions' . '.brand', ConfigService::$brand)
+                        ->whereNotNull('type_user_permissions.id')
+                        ->where(
                             function (Builder $builder) {
                                 return $builder
-                                    ->whereIn(
-                                        'type_content_permissions' . '.permission_id',
-                                        PermissionRepository::$availableContentPermissionIds
-                                    )
-                                    ->where('type_permissions' . '.brand', ConfigService::$brand);
-
+                                    ->where('type_user_permissions.expiration_date', '>=', Carbon::now()->toDateTimeString())
+                                    ->orWhereNull('type_user_permissions.expiration_date');
                             }
+                        );
+                }
+            )
+            ->orWhere(
+                function (Builder $builder) {
+                    return $builder
+                        ->whereNull(
+                            'id_content_permissions' . '.permission_id'
                         )
-                        ->orWhere(
-                            function (Builder $builder) {
-                                return $builder
-                                    ->whereNull(
-                                        'id_content_permissions' . '.permission_id'
-                                    )
-                                    ->whereNull(
-                                        'type_content_permissions' . '.permission_id'
-                                    );
-                            }
+                        ->whereNull(
+                            'type_content_permissions' . '.permission_id'
                         );
                 }
             );

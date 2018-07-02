@@ -62,7 +62,7 @@ class JsonPaginatedResponse implements Responsable
             'total_results' => $this->totalResults,
 
             // json encoding ruins the ordering of arrays if the keys are random numbers
-            'results' => array_values($this->results->toArray()),
+            'results' => array_values((array)$this->results),
             'filter_options' => $this->filterOptions,
         ];
     }
