@@ -514,42 +514,46 @@ class ContentQueryBuilder extends QueryBuilder
             ->where(
                 function (Builder $builder) {
                     return $builder
-                        ->where('id_permissions' . '.brand', ConfigService::$brand)
-                        ->whereNotNull('id_user_permissions.id')
                         ->where(
                             function (Builder $builder) {
                                 return $builder
-                                    ->where('id_user_permissions.expiration_date', '>=', Carbon::now()->toDateTimeString())
-                                    ->orWhereNull('id_user_permissions.expiration_date');
+                                    ->where('id_permissions' . '.brand', ConfigService::$brand)
+                                    ->whereNotNull('id_user_permissions.id')
+                                    ->where(
+                                        function (Builder $builder) {
+                                            return $builder
+                                                ->where('id_user_permissions.expiration_date', '>=', Carbon::now()->toDateTimeString())
+                                                ->orWhereNull('id_user_permissions.expiration_date');
+                                        }
+                                    );
                             }
-                        );
-                }
-            )
-            ->orWhere(
-                function (Builder $builder) {
-                    return $builder
-                        ->where('type_permissions' . '.brand', ConfigService::$brand)
-                        ->whereNotNull('type_user_permissions.id')
-                        ->where(
-                            function (Builder $builder) {
-                                return $builder
-                                    ->where('type_user_permissions.expiration_date', '>=', Carbon::now()->toDateTimeString())
-                                    ->orWhereNull('type_user_permissions.expiration_date');
-                            }
-                        );
-                }
-            )
-            ->orWhere(
-                function (Builder $builder) {
-                    return $builder
-                        ->whereNull(
-                            'id_content_permissions' . '.permission_id'
                         )
-                        ->whereNull(
-                            'type_content_permissions' . '.permission_id'
-                        );
-                }
-            );
+                        ->orWhere(
+                            function (Builder $builder) {
+                                return $builder
+                                    ->where('type_permissions' . '.brand', ConfigService::$brand)
+                                    ->whereNotNull('type_user_permissions.id')
+                                    ->where(
+                                        function (Builder $builder) {
+                                            return $builder
+                                                ->where('type_user_permissions.expiration_date', '>=', Carbon::now()->toDateTimeString())
+                                                ->orWhereNull('type_user_permissions.expiration_date');
+                                        }
+                                    );
+                            }
+                        )
+                        ->orWhere(
+                            function (Builder $builder) {
+                                return $builder
+                                    ->whereNull(
+                                        'id_content_permissions' . '.permission_id'
+                                    )
+                                    ->whereNull(
+                                        'type_content_permissions' . '.permission_id'
+                                    );
+                            });
+                });
+    //);
 
         return $this;
     }

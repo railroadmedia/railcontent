@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Helpers;
 
-
 use Illuminate\Cache\RedisStore;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
@@ -12,18 +11,19 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class CacheHelper
 {
-
     public static function setPrefix()
     {
-        if (method_exists(Cache::store(ConfigService::$cacheDriver)->getStore(), 'setPrefix')) {
+        if(method_exists(Cache::store(ConfigService::$cacheDriver)->getStore(), 'setPrefix'))
+        {
             return Cache::store(ConfigService::$cacheDriver)->setPrefix(ConfigService::$redisPrefix);
         }
-        return Cache::store(ConfigService::$cacheDriver)->getPrefix();
 
+        return Cache::store(ConfigService::$cacheDriver)->getPrefix();
     }
 
     /**
      * Return a string with the user's settings, that it's used when we calculate the cache key
+     *
      * @return string
      */
     public static function getSettings()
@@ -32,22 +32,27 @@ class CacheHelper
         $settings = ' ' . ContentRepository::$pullFutureContent
             . ' ' . ConfigService::$brand
             . ' ' . implode(' ', array_values(array_wrap(ConfigService::$availableBrands)))
-            . ' ' . implode(' ', array_values(array_wrap(ContentRepository::$availableContentStatues)))
-            . ' ' . implode(' ', array_values(array_wrap(PermissionRepository::$availableContentPermissionIds)));
+            . ' ' . implode(' ', array_values(array_wrap(ContentRepository::$availableContentStatues)));
 
         return $settings;
     }
 
     /**
      * Generate a md5 key based on function arguments and user settings
+     *
      * @return string
      */
     public static function getKey()
     {
         $args = func_get_args();
-        $key = '';
-        foreach ($args as $arg) {
+        $key  = '';
+        foreach($args as $arg)
+        {
             $key .= implode(' ', array_values(array_wrap($arg)));
+        }
+        if(auth()->check())
+        {
+            $key .= auth()->user()->id;
         }
 
         return md5($key . self::getSettings());
@@ -59,13 +64,15 @@ class CacheHelper
      * e.g.: musora:content_list_contentId => "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
      *
      * @param string $key
-     * @param array $elements
+     * @param array  $elements
      */
     public static function addLists($key, array $elements)
     {
         self::setPrefix();
-        if (Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore) {
-            foreach ($elements as $element) {
+        if(Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore)
+        {
+            foreach($elements as $element)
+            {
                 Cache::store(ConfigService::$cacheDriver)->connection()->sadd(
                     Cache::store(ConfigService::$cacheDriver)->getPrefix() . 'content_list_' . $element,
                     Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key
@@ -80,6 +87,7 @@ class CacheHelper
      * 1) "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
      * 2) "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
      * 3) "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
+     *
      * @param string $key
      * @return mixed
      */
@@ -87,7 +95,8 @@ class CacheHelper
     {
         self::setPrefix();
 
-        if (Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore) {
+        if(Cache::store(ConfigService::$cacheDriver)->getStore() instanceof RedisStore)
+        {
             $keys = Cache::store(ConfigService::$cacheDriver)
                 ->connection()
                 ->smembers(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key);
@@ -100,6 +109,7 @@ class CacheHelper
 
     /**
      * Delete the cache for the key and the related cached results saved in the list
+     *
      * @param string $key
      * @return bool
      */
@@ -108,19 +118,23 @@ class CacheHelper
         self::setPrefix();
 
         //Rename the key to a new key so that the set appears “deleted” to other Redis clients immediately.
-        if (Redis::exists(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key)) {
+        if(Redis::exists(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key))
+        {
             Redis::rename(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key, Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key . '_deleted');
         }
 
         //Delete members from the set and the cache records in batches of 100
         $cursor = 0;
-        do {
+        do
+        {
             list($cursor, $keys) = Redis::sscan(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key . '_deleted', $cursor, 'COUNT', 100);
-            if (count($keys) > 0) {
+            if(count($keys) > 0)
+            {
                 Redis::srem(Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key, $keys);
                 self::deleteCacheKeys($keys);
             }
-        } while ($cursor);
+        }
+        while($cursor);
 
         //delete set cache record
         self::deleteCacheKeys([Cache::store(ConfigService::$cacheDriver)->getPrefix() . $key . '_deleted']);
@@ -130,6 +144,7 @@ class CacheHelper
 
     /**
      * Delete all the cache with key like specified key
+     *
      * @param string $key
      * @return bool
      */
@@ -140,13 +155,15 @@ class CacheHelper
         {
             list($cursor, $keys) = Redis::scan($cursor, 'match', "*$key*", 'count', 1000);
             self::deleteCacheKeys($keys);
-        } while ($cursor);
+        }
+        while($cursor);
 
         return true;
     }
 
     /**
      * Delete all the cache with specified keys
+     *
      * @param array $keys
      * @return bool
      */

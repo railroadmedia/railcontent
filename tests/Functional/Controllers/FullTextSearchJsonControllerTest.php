@@ -107,7 +107,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             $descriptionData = $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
             $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
             $content[$i]['data'] = [$descriptionData, $otherData];
-            $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
+            $content[$i] = array_merge($content[$i]->getArrayCopy(), ['fetch' => $content[$i]->dot()]);
         }
 
         $this->artisan('command:createSearchIndexes');

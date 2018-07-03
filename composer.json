@@ -36,6 +36,9 @@
     "filp/whoops":"~2.1"
   },
   "autoload": {
+    "classmap": [
+      "database/seeds"
+    ],
     "psr-4": {
       "Railroad\\Railcontent\\": "src"
     }

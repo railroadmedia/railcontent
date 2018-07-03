@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Entities;
 
+use Carbon\Carbon;
 use Illuminate\Support\Debug\Dumper;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
@@ -10,6 +11,7 @@ use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\PermissionsFactory;
 use Railroad\Railcontent\Repositories\PermissionRepository;
+use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -45,6 +47,11 @@ class ContentEntityTest extends RailcontentTestCase
      */
     protected $serviceBeingTested;
 
+    /**
+     * @var \Railroad\Railcontent\Repositories\UserPermissionsRepository
+     */
+    protected $userPermissionsRepository;
+
     protected function setUp()
     {
         parent::setUp();
@@ -54,6 +61,7 @@ class ContentEntityTest extends RailcontentTestCase
         $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
         $this->permissionFactory = $this->app->make(PermissionsFactory::class);
         $this->contentPermissionsFactory = $this->app->make(ContentPermissionsFactory::class);
+        $this->userPermissionsRepository = $this->app->make(UserPermissionsRepository::class);
 
         $this->serviceBeingTested = $this->app->make(ContentService::class);
 
@@ -61,8 +69,8 @@ class ContentEntityTest extends RailcontentTestCase
 
     public function test_get_by_entity_mapping()
     {
-        PermissionRepository::$availableContentPermissionIds = false;
 
+$userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create();
         $linkedContent = $this->contentFactory->create();
 
@@ -99,7 +107,17 @@ class ContentEntityTest extends RailcontentTestCase
             $permission = $this->permissionFactory->create();
             $this->contentPermissionsFactory->create(null, $content['type'], $permission['id']);
             $randomPermissions[] = $permission;
+
+            //assign user permission
+            $this->userPermissionsRepository->create([
+                'user_id' => $userId,
+                'permissions_id' => $permission['id'],
+                'start_date' => Carbon::now()->toDateTimeString(),
+                'created_on' => Carbon::now()->toDateTimeString()
+            ]);
         }
+
+
 
         $results = $this->serviceBeingTested->getById($content['id']);
 

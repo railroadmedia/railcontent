@@ -184,7 +184,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
 
         $content['user_progress'][$userId] = [];
 
-        $this->assertEquals([$content->getArrayCopy()], $results);
+        $this->assertEquals([$content], $results);
     }
 
     public function test_attach_user_progress_to_contents_with_progress()
@@ -268,7 +268,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
             $this->contentService->getById($parent['id'])
         );
 
-        $this->assertTrue($parentWithProgressAttached[UserContentProgressService::STATE_STARTED]);
+        $this->assertTrue($parentWithProgressAttached[0][UserContentProgressService::STATE_STARTED]);
     }
 
     public function test_progress_bubble_completed()

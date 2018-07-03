@@ -74,7 +74,7 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call(
             'PUT',
-            'railcontent/comment-like',
+            'railcontent/comment-like/'.$commentId,
             [
                 'comment_id' => $commentId,
                 'user_id' => $userIdOfLiker,
@@ -113,7 +113,7 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call(
             'DELETE',
-            'railcontent/comment-like',
+            'railcontent/comment-like/'.$commentId,
             [
                 'comment_id' => $commentId,
                 'user_id' => $userIdOfLiker,

@@ -65,7 +65,7 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
     public function test_search()
     {
         for ($i = 1; $i < 10; $i++) {
-            $content[$i] = $this->contentFactory->create( $this->faker->word,
+            $content[$i] = (array)$this->contentFactory->create( $this->faker->word,
                 $this->faker->randomElement(ConfigService::$searchableContentTypes),
                 ContentService::STATUS_PUBLISHED);
 

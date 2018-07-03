@@ -62,12 +62,11 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->status());
 
-        $this->assertEquals(
+        $this->assertArraySubset(
             [
                 'status' => 'ok',
                 'code' => 200,
                 'results' => [
-                    'id' => 1,
                     'parent_id' => $parentContent['id'],
                     'child_id' => $childContent['id'],
                     'child_position' => 1,
@@ -96,12 +95,11 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->status());
 
-        $this->assertEquals(
+        $this->assertArraySubset(
             [
                 'status' => 'ok',
                 'code' => 200,
                 'results' => [
-                    'id' => 1,
                     'parent_id' => $parentContent['id'],
                     'child_id' => $childContent['id'],
                     'child_position' => 1,
@@ -162,7 +160,6 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
         $this->assertDatabaseHas(
             ConfigService::$tableContentHierarchy,
             [
-                'id' => 2,
                 'child_id' => $childContent['id'],
                 'parent_id' => $parentContent['id'],
                 'child_position' => $newChildPosition,

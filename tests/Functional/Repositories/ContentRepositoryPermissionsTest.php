@@ -9,6 +9,7 @@ use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\PermissionsFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
+use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -35,6 +36,11 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
      */
     protected $contentPermissionFactory;
 
+    /**
+     * @var \Railroad\Railcontent\Repositories\UserPermissionsRepository
+     */
+    protected $userPermissionsRepository;
+
     protected function setUp()
     {
         parent::setUp();
@@ -43,11 +49,12 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
         $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->permissionFactory = $this->app->make(PermissionsFactory::class);
         $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
+        $this->userPermissionsRepository = $this->app->make(UserPermissionsRepository::class);
+
     }
 
     protected function tearDown()
     {
-        PermissionRepository::$availableContentPermissionIds = false;
         Cache::store('redis')->flush();
     }
 
@@ -61,8 +68,6 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
             $permission['id']
         );
 
-        PermissionRepository::$availableContentPermissionIds = [];
-        
         $response = $this->classBeingTested->getById($content['id']);
 
         $this->assertNull($response);
@@ -87,8 +92,6 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
                 $permission['id']
             );
 
-        PermissionRepository::$availableContentPermissionIds = [];
-
         $response = $this->classBeingTested->getById($content['id']);
 
         $this->assertNull($response);
@@ -96,6 +99,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
     public function test_get_by_id_is_satisfiable_by_single()
     {
+        $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->word,
@@ -110,7 +114,12 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
         $content['permissions'][] = $contentPermission;
 
-        PermissionRepository::$availableContentPermissionIds = [$permission['id']];
+        $userPermission = $this->userPermissionsRepository->create([
+            'user_id' => $userId,
+            'permissions_id' => $permission['id'],
+            'start_date' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString()
+        ]);
 
         $response = $this->classBeingTested->getById($content['id']);
 
@@ -119,6 +128,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
     public function test_get_by_id_is_satisfiable_by_multiple()
     {
+        $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->word,
@@ -137,7 +147,12 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
             $this->contentPermissionFactory->create($content['id'], null, $otherPermission['id']);
         $content['permissions'][] = $otherContentPermission;
 
-        PermissionRepository::$availableContentPermissionIds = [$otherPermission['id']];
+        $userPermission = $this->userPermissionsRepository->create([
+            'user_id' => $userId,
+            'permissions_id' => $otherPermission['id'],
+            'start_date' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString()
+        ]);
 
         $response = $this->classBeingTested->getById($content['id']);
 
@@ -154,8 +169,6 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
             $content['type'],
             $permission['id']
         );
-
-        PermissionRepository::$availableContentPermissionIds = [];
 
         $response = $this->classBeingTested->getById($content['id']);
 
@@ -177,8 +190,6 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
         $otherContentPermission =
             $this->contentPermissionFactory->create(null, $content['type'], $permission['id']);
 
-        PermissionRepository::$availableContentPermissionIds = [];
-
         $response = $this->classBeingTested->getById($content['id']);
 
         $this->assertNull($response);
@@ -186,6 +197,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
     public function test_get_by_id_is_satisfiable_by_single_type()
     {
+        $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
             'course',
@@ -202,8 +214,12 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
             $permission['id']
         );
         $content['permissions'][] = $contentPermission;
-
-        PermissionRepository::$availableContentPermissionIds = [$permission['id']];
+        $userPermission = $this->userPermissionsRepository->create([
+            'user_id' => $userId,
+            'permissions_id' => $permission['id'],
+            'start_date' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString()
+        ]);
 
         $response = $this->classBeingTested->getById($content['id']);
 
@@ -212,6 +228,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
     public function test_get_by_id_is_satisfiable_by_multiple_type()
     {
+        $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->word,
@@ -229,8 +246,12 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
         $otherContentPermission =
             $this->contentPermissionFactory->create(null, $content['type'], $otherPermission['id']);
         $content['permissions'][] = $otherContentPermission;
-
-        PermissionRepository::$availableContentPermissionIds = [$otherPermission['id']];
+        $userPermission = $this->userPermissionsRepository->create([
+            'user_id' => $userId,
+            'permissions_id' => $otherPermission['id'],
+            'start_date' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()->toDateTimeString()
+        ]);
 
         $response = $this->classBeingTested->getById($content['id']);
 

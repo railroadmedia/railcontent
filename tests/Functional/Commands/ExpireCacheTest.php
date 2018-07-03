@@ -39,10 +39,10 @@ class ExpireCacheTest extends RailcontentTestCase
             ContentService::STATUS_PUBLISHED,
             'en-US',
             ConfigService::$brand,
-            rand(),
+            null,
             Carbon::now()->addSeconds(30)->toDateTimeString());
 
-        $this->contentService->getAllByType($type);
+        $results =  $this->contentService->getAllByType($type);
 
         $this->assertEquals(2, count(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys('*contents*')));
 
@@ -52,7 +52,7 @@ class ExpireCacheTest extends RailcontentTestCase
             ContentService::STATUS_PUBLISHED,
             'en-US',
             ConfigService::$brand,
-            rand(),
+            null,
             Carbon::now()->toDateTimeString());
 
         $this->artisan('command:expireCache');

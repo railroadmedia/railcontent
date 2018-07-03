@@ -53,8 +53,6 @@ class ContentPermissionsMiddleware
                 true
             );
 
-            PermissionRepository::$availableContentPermissionIds = false;
-
             CommentService::$canManageOtherComments = true;
         } else {
 
@@ -66,9 +64,6 @@ class ContentPermissionsMiddleware
             ];
 
             ContentRepository::$pullFutureContent = false;
-
-            PermissionRepository::$availableContentPermissionIds =
-                $request->get('user_content_permission_ids', []);
         }
 
         return $next($request);
