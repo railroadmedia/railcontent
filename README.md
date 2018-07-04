@@ -4,6 +4,10 @@ Railcontent
 
 Data first simple CMS.
 
+* [Installation, Configuration, Use](#installation-configuration-use)
+   + [Installation](#installation)
+   + [Configuration](#configuration)
+   + [Use](#use)
 * [Progress-Bubbling](#progress-bubbling)
   + [Example](#example)
 * [Validation](#validation)
@@ -25,6 +29,96 @@ Data first simple CMS.
     - [Unlike](#unlike)
 
 <!-- ecotrust-canada.github.io/markdown-toc -->
+
+Installation, Configuration, Use
+------------------------------------------------------------------------------------------------------------------------
+
+### Installation
+
+
+1. setup [railenv](https://github.com/railroadmedia/railenvironment)
+2. run $ r setup, select railcontent
+3. follow instructions at end
+
+Run `$ composer vendor:publish` to copy the package's configuration file "*/config/railcontent.php*" to your application's "*/config*" directory.
+
+*(assuming you're using Composer and Laravel)*
+
+
+
+
+
+### Configuration
+
+Define the following environmental variables with appropriate values:
+
+* *AWS_S3_REMOTE_STORAGE_ACCESS_KEY*
+* *AWS_S3_REMOTE_STORAGE_ACCESS_SECRET*
+* *AWS_S3_REMOTE_STORAGE_REGION*
+* *AWS_S3_REMOTE_STORAGE_BUCKET*
+
+
+* *VIMEO_CLIENT_ID*
+* *VIMEO_CLIENT_SECRET*
+* *VIMEO_ACCESS_TOKEN*
+
+
+* *YOUTUBE_API_KEY*
+* *YOUTUBE_USERNAME*
+
+Add the service provider (`\Railroad\Railcontent\Providers\RailcontentServiceProvider`) to the `'providers` array in you application's */config/app.php*:
+
+```php
+'providers' => [
+    # ...
+    \Railroad\Railcontent\Providers\RailcontentServiceProvider::class,
+]
+```
+
+Run `$ php artisan vendor:publish` to copy the config file and create a *railcontent.php* file in your application's */config* directory. This will take the values you supplied in the *.env* file and pass them needed.
+
+
+
+
+
+### Use
+
+Inject the `Railroad\Railcontent\Services\RailcontentService` class where needed
+
+```php
+/** @var Railroad\Railcontent\Services\RailcontentService $railcontentService */
+protected $railcontentService;
+
+public function __constructor(Railroad\Railcontent\Services\RailcontentService $railcontentService){
+    $this->railcontentService = $railcontentService;
+}
+```
+
+Include namespace at top of file:
+
+```php
+use Railroad\Railcontent\Services;
+```
+
+... to save yourself having to specify the namespace everywhere:
+
+```php
+/** @var RailcontentService $railcontentService */
+protected $railcontentService;
+
+public function __constructor(RailcontentService $railcontentService){
+    $this->railcontentService = $railcontentService;
+}
+```
+
+
+
+
+
+
+
+
+
 
 
 Progress-Bubbling
