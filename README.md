@@ -7,7 +7,6 @@ Data first simple CMS.
 - [Installation, Configuration, Use](#installation--configuration--use)
   * [Installation](#installation)
   * [Configuration](#configuration)
-  * [Use](#use)
 - [ContentService](#contentservice)
   * [getById](#getbyid)
     + [Usage Example(s)](#usage-example-s-)
@@ -144,7 +143,6 @@ Data first simple CMS.
     + [Like](#like)
     + [Unlike](#unlike)
 
-
 <!-- ecotrust-canada.github.io/markdown-toc -->
 
 Installation, Configuration, Use
@@ -197,8 +195,10 @@ Run `$ php artisan vendor:publish` to copy the config file and create a *railcon
 
 
 
+ContentService
+--------------------
 
-### Use
+All methods below are *public*.
 
 Inject the `Railroad\Railcontent\Services\ContentService` class where needed
 
@@ -227,13 +227,6 @@ public function __constructor(ContentService $contentService){
     $this->contentService = $contentService;
 }
 ```
-
-
-
-ContentService
---------------------
-
-All methods below are *public*.
 
 
 ### getById
