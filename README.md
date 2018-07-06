@@ -464,8 +464,32 @@ succeded, ContentEntity, [1 => Railroad\Railcontent\Entities\ContentEntity{stora
 ### getBySlugAndType
 
 #### Usage Example(s)
+
+```php
+$contents = $this->contentService->getBySlugAndType($slug, $type);
+```
 #### Parameters
+
+| #  |  name |  required |  type   |  description                           | 
+|----|-------|-----------|---------|----------------------------------------| 
+| 1  |  slug |  yes      |  string |  Slug of the contents you want to pull | 
+| 2  |  type |  yes      |  string |  Type of the contents                  | 
+
+
+<!--
+#, name, required, type, description
+1 , slug, yes, string, Slug of the contents you want to pull
+2 , type, yes, string, Type of the contents
+-->
+
+
 #### Responses
+
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |  notes about return data                                                      | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |  empty array if not exists content                                            | 
+| succeded |  ContentEntity    |[1 =><br/>Railroad\Railcontent\Entities\ContentEntity{<br/>storage : [<br/>&emsp;"id" => "1"<br/>&emsp;"slug" => "amet-enim-quae-laborum-ut-ut-et"<br/>&emsp;"type" => "course"<br/>&emsp;"sort" => "0"<br/>&emsp;"status" => "published"<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "brand"<br/>&emsp;"published_on" => "1945-05-14 19:19:38"<br/>&emsp;"created_on" => "2018-07-06 14:24:52"<br/>&emsp;"archived_on" => null<br/>&emsp;"parent_id" => null<br/>&emsp;"child_id" => null<br/>&emsp;"fields" => []<br/>&emsp;"data" => []<br/>&emsp;"permissions" => []<br/>&emsp;]<br/>}] |  array of ContentEntity with the specified slug and type | 
 
 
 ### getByUserIdTypeSlug
