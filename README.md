@@ -260,8 +260,7 @@ $content = $this->contentService->getById($id);
 | outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                |  notes about return data | 
 |----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------| 
 | failed   |  null             |  null                                                                                                                                                                                                                                                                                                       |                          | 
-| succeded |  ContentEntity    |  { Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"1"            "slug":"quis"            "status":"draft"            "type":"nihil"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-26 16:00:03"]} |  ContentEntity with the content data            | 
-
+| succeded |  ContentEntity    | Railroad\Railcontent\Entities\ContentEntity{<br/>storage:<br/> [ <br/>&emsp; "id":"1"<br/>&emsp; "slug":"quis"<br/>&emsp;"status":"draft"<br/>&emsp;"type":"nihil"<br/>&emsp;"parent_id":null<br/>&emsp;"language":"en-US"<br/>&emsp;"brand":"drumeo"<br/>&emsp;"created_on":"2017-10-26 16:00:03"<br/>]|  ContentEntity with the content data            | 
 
 
 <!--
