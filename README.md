@@ -4,29 +4,146 @@ Railcontent
 
 Data first simple CMS.
 
-* [Installation, Configuration, Use](#installation-configuration-use)
-   + [Installation](#installation)
-   + [Configuration](#configuration)
-   + [Use](#use)
-* [Progress-Bubbling](#progress-bubbling)
-  + [Example](#example)
-* [Validation](#validation)
-  + [Note about field or datum that reference another piece of content](#note-about-field-or-datum-that-reference-another-piece-of-content)
-  + [Important Note about the "numeric" rule](#important-note-about-the--numeric--rule)
-  + [Specifying rules](#specifying-rules)
-  + [Details of options available for each brand](#details-of-options-available-for-each-brand)
-    - [fields](#fields)
-    - [data](#data)
-    - [number_of_children](#number-of-children)
-  + [Configuration Example](#configuration-example)
-  + [MultipleColumnExistsValidator](#multiplecolumnexistsvalidator)
-    - [WHERE *AND*](#where--and-)
-    - [WHERE *OR*](#where--or-)
-* [Comment-Likes](#comment-likes)
-  + [TL;DR:](#tl-dr-)
-  + [Wordy explaination](#wordy-explaination)
-    - [Like](#like)
-    - [Unlike](#unlike)
+- [Installation, Configuration, Use](#installation--configuration--use)
+  * [Installation](#installation)
+  * [Configuration](#configuration)
+  * [Use](#use)
+- [ContentService](#contentservice)
+  * [getById](#getbyid)
+    + [Usage Example(s)](#usage-example-s-)
+    + [Parameters](#parameters)
+    + [Responses](#responses)
+  * [getByIds](#getbyids)
+    + [Usage Example(s)](#usage-example-s--1)
+    + [Parameters](#parameters-1)
+    + [Responses](#responses-1)
+  * [getAllByType](#getallbytype)
+    + [Usage Example(s)](#usage-example-s--2)
+    + [Parameters](#parameters-2)
+    + [Responses](#responses-2)
+  * [getWhereTypeInAndStatusAndField](#getwheretypeinandstatusandfield)
+    + [Usage Example(s)](#usage-example-s--3)
+    + [Parameters](#parameters-3)
+    + [Responses](#responses-3)
+  * [getWhereTypeInAndStatusAndPublishedOnOrdered](#getwheretypeinandstatusandpublishedonordered)
+    + [Usage Example(s)](#usage-example-s--4)
+    + [Parameters](#parameters-4)
+    + [Responses](#responses-4)
+  * [getBySlugAndType](#getbyslugandtype)
+    + [Usage Example(s)](#usage-example-s--5)
+    + [Parameters](#parameters-5)
+    + [Responses](#responses-5)
+  * [getByUserIdTypeSlug](#getbyuseridtypeslug)
+    + [Usage Example(s)](#usage-example-s--6)
+    + [Parameters](#parameters-6)
+    + [Responses](#responses-6)
+  * [getByParentId](#getbyparentid)
+    + [Usage Example(s)](#usage-example-s--7)
+    + [Parameters](#parameters-7)
+    + [Responses](#responses-7)
+  * [getByParentIdWhereTypeIn](#getbyparentidwheretypein)
+    + [Usage Example(s)](#usage-example-s--8)
+    + [Parameters](#parameters-8)
+    + [Responses](#responses-8)
+  * [getByParentIds](#getbyparentids)
+    + [Usage Example(s)](#usage-example-s--9)
+    + [Parameters](#parameters-9)
+    + [Responses](#responses-9)
+  * [getByChildIdWhereType](#getbychildidwheretype)
+    + [Usage Example(s)](#usage-example-s--10)
+    + [Parameters](#parameters-10)
+    + [Responses](#responses-10)
+  * [getByChildIdsWhereType](#getbychildidswheretype)
+    + [Usage Example(s)](#usage-example-s--11)
+    + [Parameters](#parameters-11)
+    + [Responses](#responses-11)
+  * [getByChildIdWhereParentTypeIn](#getbychildidwhereparenttypein)
+    + [Usage Example(s)](#usage-example-s--12)
+    + [Parameters](#parameters-12)
+    + [Responses](#responses-12)
+  * [getPaginatedByTypeUserProgressState](#getpaginatedbytypeuserprogressstate)
+    + [Usage Example(s)](#usage-example-s--13)
+    + [Parameters](#parameters-13)
+    + [Responses](#responses-13)
+  * [getPaginatedByTypesUserProgressState](#getpaginatedbytypesuserprogressstate)
+    + [Usage Example(s)](#usage-example-s--14)
+    + [Parameters](#parameters-14)
+    + [Responses](#responses-14)
+  * [getTypeNeighbouringSiblings](#gettypeneighbouringsiblings)
+    + [Usage Example(s)](#usage-example-s--15)
+    + [Parameters](#parameters-15)
+    + [Responses](#responses-15)
+  * [getByContentFieldValuesForTypes](#getbycontentfieldvaluesfortypes)
+    + [Usage Example(s)](#usage-example-s--16)
+    + [Parameters](#parameters-16)
+    + [Responses](#responses-16)
+  * [countByTypesUserProgressState](#countbytypesuserprogressstate)
+    + [Usage Example(s)](#usage-example-s--17)
+    + [Parameters](#parameters-17)
+    + [Responses](#responses-17)
+  * [getFiltered](#getfiltered)
+    + [Usage Example(s)](#usage-example-s--18)
+    + [Parameters](#parameters-18)
+    + [Responses](#responses-18)
+  * [create](#create)
+    + [Usage Example(s)](#usage-example-s--19)
+    + [Parameters](#parameters-19)
+    + [Responses](#responses-19)
+  * [update](#update)
+    + [Usage Example(s)](#usage-example-s--20)
+    + [Parameters](#parameters-20)
+    + [Responses](#responses-20)
+  * [delete](#delete)
+    + [Usage Example(s)](#usage-example-s--21)
+    + [Parameters](#parameters-21)
+    + [Responses](#responses-21)
+  * [softDelete](#softdelete)
+    + [Usage Example(s)](#usage-example-s--22)
+    + [Parameters](#parameters-22)
+    + [Responses](#responses-22)
+  * [softDeleteContentChildren](#softdeletecontentchildren)
+    + [Usage Example(s)](#usage-example-s--23)
+    + [Parameters](#parameters-23)
+    + [Responses](#responses-23)
+  * [attachPlaylistsToContents](#attachplayliststocontents)
+    + [Usage Example(s)](#usage-example-s--24)
+    + [Parameters](#parameters-24)
+    + [Responses](#responses-24)
+  * [attachChildrenToContents](#attachchildrentocontents)
+    + [Usage Example(s)](#usage-example-s--25)
+    + [Parameters](#parameters-25)
+    + [Responses](#responses-25)
+- [Get content - JSON controller](#get-content---json-controller)
+  * [Request Example(s)](#request-example-s-)
+  * [Request Parameters](#request-parameters)
+  * [Response Example(s)](#response-example-s-)
+    + [`201 OK`](#-201-ok-)
+    + [`404 Not Found`](#-404-not-found-)
+- [Get contents based on ids - JSON controller](#get-contents-based-on-ids---json-controller)
+  * [Request Example(s)](#request-example-s--1)
+  * [Request Parameters](#request-parameters-1)
+  * [Response Example(s)](#response-example-s--1)
+    + [`200 OK`](#-200-ok-)
+- [Progress-Bubbling](#progress-bubbling)
+  * [Example](#example)
+- [Validation](#validation)
+  * [Note about field or datum that reference another piece of content](#note-about-field-or-datum-that-reference-another-piece-of-content)
+  * [Important Note about the "numeric" rule](#important-note-about-the--numeric--rule)
+  * [Specifying rules](#specifying-rules)
+  * [Details of options available for each brand](#details-of-options-available-for-each-brand)
+    + [fields](#fields)
+    + [data](#data)
+    + [number_of_children](#number-of-children)
+  * [Configuration Example](#configuration-example)
+  * [MultipleColumnExistsValidator](#multiplecolumnexistsvalidator)
+    + [WHERE *AND*](#where--and-)
+    + [WHERE *OR*](#where--or-)
+- [Comment-Likes](#comment-likes)
+  * [TL;DR:](#tl-dr-)
+  * [Wordy explaination](#wordy-explaination)
+    + [Like](#like)
+    + [Unlike](#unlike)
+
 
 <!-- ecotrust-canada.github.io/markdown-toc -->
 
@@ -83,14 +200,14 @@ Run `$ php artisan vendor:publish` to copy the config file and create a *railcon
 
 ### Use
 
-Inject the `Railroad\Railcontent\Services\RailcontentService` class where needed
+Inject the `Railroad\Railcontent\Services\ContentService` class where needed
 
 ```php
-/** @var Railroad\Railcontent\Services\RailcontentService $railcontentService */
-protected $railcontentService;
+/** @var Railroad\Railcontent\Services\ContentService $contentService */
+protected $contentService;
 
-public function __constructor(Railroad\Railcontent\Services\RailcontentService $railcontentService){
-    $this->railcontentService = $railcontentService;
+public function __constructor(Railroad\Railcontent\Services\ContentService $contentService){
+    $this->contentService = $contentService;
 }
 ```
 
@@ -103,22 +220,499 @@ use Railroad\Railcontent\Services;
 ... to save yourself having to specify the namespace everywhere:
 
 ```php
-/** @var RailcontentService $railcontentService */
-protected $railcontentService;
+/** @var RailcontentService $contentService */
+protected $contentService;
 
-public function __constructor(RailcontentService $railcontentService){
-    $this->railcontentService = $railcontentService;
+public function __constructor(ContentService $contentService){
+    $this->contentService = $contentService;
 }
 ```
 
 
 
+ContentService
+--------------------
+
+All methods below are *public*.
+
+
+### getById
+
+#### Usage Example(s)
+
+```php
+$content = $this->contentService->getById($id);
+```
+
+#### Parameters
+
+| #  |  name             |  required |  type    |  description                        | 
+|----|-------------------|-----------|----------|-------------------------------------| 
+| 1  |  id |  yes      |  integer  |  id of content you want to pull | 
+ 
+<!--
+#, name, required, type, description
+1 , id, yes, integer , id of content you want to pull  
+-->
+
+#### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                |  notes about return data | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------| 
+| failed   |  null             |  null                                                                                                                                                                                                                                                                                                       |                          | 
+| succeded |  ContentEntity    |  { Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"1"            "slug":"quis"            "status":"draft"            "type":"nihil"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-26 16:00:03"]} |  ContentEntity with the content data            | 
+
+
+
+<!--
+outcome, return data type, return data value (example), notes about return data
+failed, null, null,
+succeded, ContentEntity, { Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"1"            "slug":"quis"            "status":"draft"            "type":"nihil"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-26 16:00:03"]}, ContentEntity with the content data
+-->
+
+
+
+### getByIds
+
+#### Usage Example(s)
+
+```php
+$contents = $this->contentService->getByIds([$id1, $id2]);
+```
+
+#### Parameters
+
+| #  |  name             |  required |  type    |  description                        | 
+|----|-------------------|-----------|----------|-------------------------------------| 
+| 1  |  ids |  yes      |  array  |  an array of the ids you want to pull | 
+ 
+<!--
+#, name, required, type, description
+1 , id, yes, integer , id of content you want to pull  
+-->
+
+#### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |  notes about return data       | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |  empty array if ids not exists | 
+| succeded |  ContentEntity    |  [1 => Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"1"            "slug":"quis"            "status":"draft"            "type":"nihil"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-26 16:00:03"} 2 => Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"2"            "slug":"deret"            "status":"draft"            "type":"gytre"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-23 10:50:47"}] |  array of ContentEntity        | 
+
+
+
+
+<!--
+outcome, return data type, return data value (example), notes about return data
+failed, array, [], empty array if ids not exists
+succeded, ContentEntity, [1 => Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"1"            "slug":"quis"            "status":"draft"            "type":"nihil"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-26 16:00:03"} 2 => Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"2"            "slug":"deret"            "status":"draft"            "type":"gytre"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-23 10:50:47"}], array of ContentEntity
+-->
+
+
+
+
+### getAllByType
+
+#### Usage Example(s)
+
+```php
+$learningPaths = $this->contentService->getAllByType('learning-path');
+```
+
+#### Parameters
+
+| #  |  name |  required |  type    |  description                           | 
+|----|-------|-----------|----------|----------------------------------------| 
+| 1  |  type |  yes      |  string  |  type of the contents you want to pull | 
+ 
+<!--
+#, name, required, type, description
+1 , type, yes, string , type of the contents you want to pull
+-->
+
+#### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |  notes about return data                        | 
+|----------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |  empty array if not exists content with type    | 
+| succeded |  ContentEntity    |  [1 => Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"1"            "slug":"quis"            "status":"draft"            "type":"'learning-path'"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-26 16:00:03"} 2 => Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"2"            "slug":"deret"            "status":"draft"            "type":"'learning-path'"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-23 10:50:47"}] |  array of ContentEntity with the specified type | 
 
 
 
 
 
 
+
+<!--
+outcome, return data type, return data value (example), notes about return data
+failed, array, [], empty array if not exists content with type
+succeded, ContentEntity, [1 => Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"1"            "slug":"quis"            "status":"draft"            "type":"'learning-path'"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-26 16:00:03"} 2 => Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"2"            "slug":"deret"            "status":"draft"            "type":"'learning-path'"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-23 10:50:47"}], array of ContentEntity with the specified type
+-->
+
+### getWhereTypeInAndStatusAndField
+
+#### Usage Example(s)
+
+```php
+$publishedCoursesWithDifficulty = $this->contentService->getWhereTypeInAndStatusAndField(['course'],'published','difficulty', 2, 'string');
+```
+
+#### Parameters
+
+| #  |  name                    |  required |  default |  type   |  description                                                     | 
+|----|--------------------------|-----------|----------|---------|------------------------------------------------------------------| 
+| 1  |  types                   |  yes      |          |  array  |  Type of the contents you want to pull                           | 
+| 2  |  status                  |  yes      |          |  string |  Status of the contents                                          | 
+| 3  |  fieldKey                |  yes      |          |  string |  The key of the content field                                    | 
+| 4  |  fieldValue              |  yes      |          |  string |  The value of the content field                                  | 
+| 5  |  fieldType               |  yes      |          |  string |  The field type; possible value: string multiple or content_id   | 
+| 6  |  fieldComparisonOperator |  no       |  '='     |         | The comparison operator                                          | 
+
+
+ 
+<!--
+#, name, required, default, type, description
+1 , types, yes, , array, Type of the contents you want to pull
+2 , status, yes, , string, Status of the contents
+3 , fieldKey, yes, , string, The key of the content field
+4 , fieldValue, yes, , string, The value of the content field
+5 , fieldType, yes, , string, The field type; possible value: string multiple or content_id  
+6 , fieldComparisonOperator, no, '=', ,The comparison operator 
+-->
+
+#### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |  notes about return data                        |                         | 
+|----------|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------|-------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |  empty array if not exists content              |                         | 
+| succeded |  ContentEntity    |  [1 => Railroad\Railcontent\Entities\ContentEntity{storage:["id" => "1"      "slug" => "dolorum-corporis-adipisci-sit-soluta-recusandae-corporis"      "type" => "course"      "sort" => "0"      "status" => "published"      "language" => "en-US"      "brand" => "brand"      "published_on" => "1926-10-06 02:12:49"      "created_on" => "2018-07-06 11:14:22"      "archived_on" => null      "parent_id" => null      "child_id" => null      "fields" => [        0 => [          "id" => "1"          "content_id" => "1"          "key" => "difficulty"          "value" => "2"          "type" => "string"          "position" => "1"        ]      ]      "data" => []      "permissions" => []    ]]            }] |  array of ContentEntity with the specified type |  field value and status | 
+
+
+
+<!--
+outcome, return data type, return data value (example), notes about return data
+failed, array, [], empty array if not exists content 
+succeded, ContentEntity, [1 => Railroad\Railcontent\Entities\ContentEntity{storage:["id" => "1"      "slug" => "dolorum-corporis-adipisci-sit-soluta-recusandae-corporis"      "type" => "course"      "sort" => "0"      "status" => "published"      "language" => "en-US"      "brand" => "brand"      "published_on" => "1926-10-06 02:12:49"      "created_on" => "2018-07-06 11:14:22"      "archived_on" => null      "parent_id" => null      "child_id" => null      "fields" => [        0 => [          "id" => "1"          "content_id" => "1"          "key" => "difficulty"          "value" => "2"          "type" => "string"          "position" => "1"        ]      ]      "data" => []      "permissions" => []    ]]            }], array of ContentEntity with the specified type, field value and status
+-->
+
+
+
+### getWhereTypeInAndStatusAndPublishedOnOrdered
+
+#### Usage Example(s)
+
+```php
+$liveEvents = $this->contentService->getWhereTypeInAndStatusAndPublishedOnOrdered(
+    array_merge(
+        [
+            'student-focus',
+            'song',
+        ],
+        ContentTypes::$shows
+    ),
+    ContentService::STATUS_SCHEDULED,
+    Carbon::now()->subHours(2)->toDateTimeString(),
+    '>'
+);
+```
+
+#### Parameters
+
+| #  |  name                          |  required |  default        |  type    |  description                           | 
+|----|--------------------------------|-----------|-----------------|----------|----------------------------------------| 
+| 1  |  types                         |  yes      |                 |  array   |  Type of the contents you want to pull | 
+| 2  |  status                        |  yes      |                 |  string  |  Status of the contents                | 
+| 3  |  publishedOnValue              |  yes      |                 |  string  |  Content published on date             | 
+| 4  |  publishedOnComparisonOperator |  no       |  '='            |  string  |  The comparison operator               | 
+| 5  |  orderByColumn                 |  no       |  'published_on' |  string  |  The order by column value             | 
+| 6  |  orderByDirection              |  no       |  'desc'         |  string  | The order by direction value           | 
+
+
+
+ 
+<!--
+#, name, required, default, type, description
+1 , types, yes, , array, Type of the contents you want to pull
+2 , status, yes, , string, Status of the contents
+3 , publishedOnValue, yes, , string, Content published on date
+4 , publishedOnComparisonOperator, no, '=' , string, The comparison operator 
+5 , orderByColumn, no, 'published_on', string, The order by column value
+6 , orderByDirection, no, 'desc', string ,The order by direction value
+-->
+
+#### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |  notes about return data                                                      | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |  empty array if not exists content                                            | 
+| succeded |  ContentEntity    |  [1 => Railroad\Railcontent\Entities\ContentEntity{storage:["id" => "1"      "slug" => "dolorum-corporis-adipisci-sit-soluta-recusandae-corporis"      "type" => "song"      "sort" => "0"      "status" => "sheduled"      "language" => "en-US"      "brand" => "brand"      "published_on" => "2018-07-06 15:12:49"      "created_on" => "2018-07-06 11:14:22"      "archived_on" => null      "parent_id" => null      "child_id" => null      "fields" => [        0 => [          "id" => "1"          "content_id" => "1"          "key" => "difficulty"          "value" => "2"          "type" => "string"          "position" => "1"        ]      ]      "data" => []      "permissions" => []    ]]            }] |  array of ContentEntity with the specified type; published on date and status | 
+
+
+
+<!--
+outcome, return data type, return data value (example), notes about return data
+failed, array, [], empty array if not exists content 
+succeded, ContentEntity, [1 => Railroad\Railcontent\Entities\ContentEntity{storage:["id" => "1"      "slug" => "dolorum-corporis-adipisci-sit-soluta-recusandae-corporis"      "type" => "song"      "sort" => "0"      "status" => "sheduled"      "language" => "en-US"      "brand" => "brand"      "published_on" => "2018-07-06 15:12:49"      "created_on" => "2018-07-06 11:14:22"      "archived_on" => null      "parent_id" => null      "child_id" => null      "fields" => [        0 => [          "id" => "1"          "content_id" => "1"          "key" => "difficulty"          "value" => "2"          "type" => "string"          "position" => "1"        ]      ]      "data" => []      "permissions" => []    ]]            }], array of ContentEntity with the specified type; published on date and status
+-->
+
+
+
+### getBySlugAndType
+
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+
+### getByUserIdTypeSlug
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### getByParentId
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### getByParentIdWhereTypeIn
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### getByParentIds
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### getByChildIdWhereType
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### getByChildIdsWhereType
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### getByChildIdWhereParentTypeIn
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### getPaginatedByTypeUserProgressState
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### getPaginatedByTypesUserProgressState
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### getTypeNeighbouringSiblings
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### getByContentFieldValuesForTypes
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### countByTypesUserProgressState
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### getFiltered
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### create
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### update
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### delete
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### softDelete
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### softDeleteContentChildren
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### attachPlaylistsToContents
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+### attachChildrenToContents
+#### Usage Example(s)
+#### Parameters
+#### Responses
+
+
+
+
+Get content - JSON controller
+--------------------------------------
+
+`{ GET /content/{id} }`
+
+Get content data based on content id.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/1',
+    type: 'get',
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body | key                | required | description\|notes             |
+| ----------------- | ------------------ | -------- | ------------------------------ |
+| path              | id                 | yes      | Id of the content you want to pull  |
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes ,  , Id of the content you want to pull
+-->
+
+
+### Response Example(s)
+
+#### `201 OK`
+
+```json
+
+{
+    "status":"ok",
+    "code":201,
+    "results":{
+        "results":{
+            "id":"1",
+            "slug":"quis",
+            "status":"draft",
+            "type":"nihil",
+            "parent_id":null,
+            "language":"en-US",
+            "brand":"drumeo",
+            "created_on":"2017-10-26 16:00:03"
+        }
+    }
+}
+
+```
+
+#### `404 Not Found`
+```json
+
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"No content with id 2 exists."
+      }
+}
+```
+
+
+Get contents based on ids - JSON controller
+--------------------------------------
+
+`{ GET /content/get-by-ids }`
+
+Get an array with contents data based on content ids.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/get-by-ids?ids=234,22,1663,2,9',
+    type: 'get',
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body | key                | required | description\|notes             |
+| ----------------- | ------------------ | -------- | ------------------------------ |
+| query              | ids                 | yes      | A comma separated string of the ids you want to pull.  |
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+query , ids , yes ,  , A comma separated string of the ids you want to pull.
+-->
+
+
+### Response Example(s)
+
+#### `200 OK`
+
+```json
+
+{
+    "status":"ok",
+    "code":201,
+    "results":{
+        "results":[
+          {
+            "id":"243",
+            "slug":"quis",
+            "status":"draft",
+            "type":"nihil",
+            "parent_id":null,
+            "language":"en-US",
+            "brand":"drumeo",
+            "created_on":"2017-10-26 16:00:03"
+        		}, ...
+          ]
+    }
+}
+
+```
 
 
 Progress-Bubbling
