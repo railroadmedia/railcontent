@@ -123,6 +123,16 @@ Data first simple CMS.
   * [Request Parameters](#request-parameters-1)
   * [Response Example(s)](#response-example-s--1)
     + [`200 OK`](#-200-ok-)
+- [Get contents that are childrens of the content id - JSON controller](#get-contents-that-are-childrens-of-the-content-id---json-controller)
+  * [Request Example(s)](#request-example-s--2)
+  * [Request Parameters](#request-parameters-2)
+  * [Response Example(s)](#response-example-s--2)
+    + [`200 OK`](#-200-ok--1)
+- [Filter contents  - JSON controller](#filter-contents----json-controller)
+  * [Request Example(s)](#request-example-s--3)
+  * [Request Parameters](#request-parameters-3)
+  * [Response Example(s)](#response-example-s--3)
+    + [`200 OK`](#-200-ok--2)
 - [Progress-Bubbling](#progress-bubbling)
   * [Example](#example)
 - [Validation](#validation)
@@ -486,39 +496,240 @@ $contents = $this->contentService->getBySlugAndType($slug, $type);
 
 
 ### getByUserIdTypeSlug
+
 #### Usage Example(s)
+
+```php
+$usersPrimaryPlaylists = $this->contentService->getByUserIdTypeSlug(
+                $userId,
+                'user-playlist',
+                'primary-playlist'
+            );
+```
+
+
 #### Parameters
+
+| #  |  name   |  required |  type    |  description                                         | 
+|----|---------|-----------|----------|------------------------------------------------------| 
+| 1  |  userId |  yes      |  integer |  The user id for which we want to pull the content   | 
+| 2  |  type   |  yes      |  string  |  The content type we want to pull                    | 
+| 3  |  slug   |  yes      |  string  |  Slug of the contents you want to pull               | 
+
+
+<!--
+#, name, required, type, description
+1 , userId, yes, integer, The user id for which we want to pull the content  
+2 , type, yes, string, The content type we want to pull
+3 , slug, yes, string, Slug of the contents you want to pull
+-->
+
 #### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |  notes about return data                                                      | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |  empty array if not exists content                                            | 
+| succeded |  ContentEntity    |[1 =><br/>Railroad\Railcontent\Entities\ContentEntity{<br/>storage : [<br/>&emsp;"id" => "1"<br/>&emsp;"slug" => "primary-playlist"<br/>&emsp;"type" => "user-playlist"<br/>&emsp;"sort" => "0"<br/>&emsp;"status" => "published"<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "brand"<br/>&emsp;"published_on" => "2018-07-06 19:19:38"<br/>&emsp;"created_on" => "2018-07-06 14:24:52"<br/>&emsp;"archived_on" => null<br/>&emsp;"parent_id" => null<br/>&emsp;"child_id" => null<br/>&emsp;"fields" => []<br/>&emsp;"data" => []<br/>&emsp;"permissions" => []<br/>&emsp;]<br/>}] |  array of ContentEntity with the specified slug and type that are created by the user with specified userId | 
 
 ### getByParentId
+
 #### Usage Example(s)
+
+```php
+$learningPathLessons = $this->contentService->getByParentId($learningPathId);
+
+```
+
 #### Parameters
+
+| #  |  name             |  required |  default          |  type   |  description                                    | 
+|----|-------------------|-----------|-------------------|---------|-------------------------------------------------| 
+| 1  |  parentId         |  yes      |                   | integer |  The content parent id                          | 
+| 2  |  orderBy          |  no       |  'child_position' | string  |  The column after which the results are ordered | 
+| 3  |  orderByDirection |  no       |  'asc'            |  string |  The sort order. Values: asc or desc            | 
+
+
+
+<!--
+#, name, required, default, type, description
+1 , parentId, yes,  ,integer, The content parent id   
+2 , orderBy, no, 'child_position',string, The column after which the results are ordered
+3 , orderByDirection, no, 'asc', string, The sort order. Values: asc or desc
+-->
+
 #### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |  notes about return data                                                      | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |  empty array if not exists content                                            | 
+| succeded |  ContentEntity    |[1 =><br/>Railroad\Railcontent\Entities\ContentEntity{<br/>storage : [<br/>&emsp;"id" => "1"<br/>&emsp;"slug" => "iusto<br/>&emsp;"type" => "lesson"<br/>&emsp;"sort" => "0"<br/>&emsp;"status" => "published"<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "brand"<br/>&emsp;"published_on" => "2018-07-06 19:19:38"<br/>&emsp;"created_on" => "2018-07-06 14:24:52"<br/>&emsp;"archived_on" => null<br/>&emsp;"parent_id" => 2<br/>&emsp;"child_id" => 1<br/>&emsp;"fields" => []<br/>&emsp;"data" => []<br/>&emsp;"permissions" => []<br/>&emsp;"position" => 1<br/>&emsp;]<br/>}] |  array of ContentEntity with the specified parent | 
 
 ### getByParentIdWhereTypeIn
+
 #### Usage Example(s)
+
+```php
+$addedPlans = $this->contentService->getByParentIdWhereTypeIn(
+                $usersPrimaryPlaylistId,
+                ['learning-path']
+            );
+
+```
+
 #### Parameters
+
+
+| #  |  name             |  required |  default          |  type   |  description                                        | 
+|----|-------------------|-----------|-------------------|---------|-----------------------------------------------------| 
+| 1  |  parentId         |  yes      |                   | integer |  The content parent id                              | 
+| 2  |  types            |  yes      |                   |  array  |  Array with the content types that should be pulled | 
+| 3  |  orderBy          |  no       |  'child_position' | string  |  The column after which the results are ordered     | 
+| 4  |  orderByDirection |  no       |  'asc'            |  string |  The sort order. Values: asc or desc                | 
+
+
+
+<!--
+#, name, required, default, type, description
+1 , parentId, yes,  ,integer, The content parent id   
+2 , types, yes,  , array, Array with the content types that should be pulled
+3 , orderBy, no, 'child_position',string, The column after which the results are ordered
+4 , orderByDirection, no, 'asc', string, The sort order. Values: asc or desc
+-->
+
 #### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |  notes about return data                                                      | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |  empty array if not exists content                                            | 
+| succeded |  ContentEntity    |[1 =><br/>Railroad\Railcontent\Entities\ContentEntity{<br/>storage : [<br/>&emsp;"id" => "1"<br/>&emsp;"slug" => "shdsedshdsd<br/>&emsp;"type" => "learning-path"<br/>&emsp;"sort" => "0"<br/>&emsp;"status" => "published"<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "brand"<br/>&emsp;"published_on" => "2018-07-06 19:19:38"<br/>&emsp;"created_on" => "2018-07-06 14:24:52"<br/>&emsp;"archived_on" => null<br/>&emsp;"parent_id" => 2<br/>&emsp;"child_id" => 1<br/>&emsp;"fields" => []<br/>&emsp;"data" => []<br/>&emsp;"permissions" => []<br/>&emsp;"position" => 1<br/>&emsp;]<br/>}] |  array of ContentEntity with the specified parent and type | 
 
 ### getByParentIds
+
 #### Usage Example(s)
+
+```php
+$courseLessons = $this->contentService->getByParentIds([$courseId1, $courseId2]);
+
+```
 #### Parameters
+
+
+| #  |  name             |  required |  default          |  type   |  description                                    | 
+|----|-------------------|-----------|-------------------|---------|-------------------------------------------------| 
+| 1  |  parentIds        |  yes      |                   | array   |  The content parent ids                         | 
+| 2  |  orderBy          |  no       |  'child_position' | string  |  The column after which the results are ordered | 
+| 3  |  orderByDirection |  no       |  'asc'            |  string |  The sort order. Values: asc or desc            | 
+
+
+
+<!--
+#, name, required, default, type, description
+1 , parentIds, yes,  ,array, The content parent ids   
+2 , orderBy, no, 'child_position',string, The column after which the results are ordered
+3 , orderByDirection, no, 'asc', string, The sort order. Values: asc or desc
+-->
+
 #### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |  notes about return data                                                      | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |  empty array if not exists content                                            | 
+| succeded |  ContentEntity    |[1 =><br/>Railroad\Railcontent\Entities\ContentEntity{<br/>storage : [<br/>&emsp;"id" => "1"<br/>&emsp;"slug" => "shdsedshdsd<br/>&emsp;"type" => "learning-path"<br/>&emsp;"sort" => "0"<br/>&emsp;"status" => "published"<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "brand"<br/>&emsp;"published_on" => "2018-07-06 19:19:38"<br/>&emsp;"created_on" => "2018-07-06 14:24:52"<br/>&emsp;"archived_on" => null<br/>&emsp;"parent_id" => 2<br/>&emsp;"child_id" => 1<br/>&emsp;"fields" => []<br/>&emsp;"data" => []<br/>&emsp;"permissions" => []<br/>&emsp;"position" => 1<br/>&emsp;]<br/>}] |  array of ContentEntity with the specified parent| 
+
 
 ### getByChildIdWhereType
+
 #### Usage Example(s)
+
+
+```php
+
+$packs = $this->contentService->getByChildIdWhereType($packBundleId, 'pack');
+
+```
+
 #### Parameters
+
+| #  |  name    |  required |  type    |  description                                          | 
+|----|----------|-----------|----------|-------------------------------------------------------| 
+| 1  |  childId |  yes      |  integer |  The returned content should be parent of child id    | 
+| 2  |  type    |  yes      |  string  |  The content type that should be pulled               | 
+
+
+<!--
+#, name, required, type, description
+1 , childId, yes, integer, The returned content should be parent of child id   
+2 , type, yes, string, The content type that should be pulled
+-->
+
 #### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |  notes about return data                                                      | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |  empty array if not exists content                                            | 
+| succeded |  ContentEntity    |[1 =><br/>Railroad\Railcontent\Entities\ContentEntity{<br/>storage : [<br/>&emsp;"id" => "1"<br/>&emsp;"slug" => "shdsedshdsd<br/>&emsp;"type" => "pack"<br/>&emsp;"sort" => "0"<br/>&emsp;"status" => "published"<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "brand"<br/>&emsp;"published_on" => "2018-07-06 19:19:38"<br/>&emsp;"created_on" => "2018-07-06 14:24:52"<br/>&emsp;"archived_on" => null<br/>&emsp;"parent_id" => 2<br/>&emsp;"child_id" => 1<br/>&emsp;"fields" => []<br/>&emsp;"data" => []<br/>&emsp;"permissions" => []<br/>&emsp;"position" => 1<br/>&emsp;]<br/>}] |  array of ContentEntity - parent for the child id with the specified type| 
 
 ### getByChildIdsWhereType
+
 #### Usage Example(s)
+
+```php
+
+$courses = $this->contentService->getByChildIdsWhereType([$coursePartId1, $coursePartId2], 'course');
+
+```
+
 #### Parameters
+
+| #  |  name     |  required |  type   |  description                                                    | 
+|----|-----------|-----------|---------|-----------------------------------------------------------------| 
+| 1  |  childIds |  yes      |  array  |  An array with the content ids whose parents should be pulled   | 
+| 2  |  type     |  yes      |  string |  The content type that should be pulled                         | 
+
+<!--
+#, name, required, type, description
+1 , childIds, yes, array, An array with the content ids whose parents should be pulled  
+2 , type, yes, string, The content type that should be pulled
+-->
+
+
 #### Responses
 
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |  notes about return data                                                      | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |  empty array if not exists content                                            | 
+| succeded |  ContentEntity    |[1 =><br/>Railroad\Railcontent\Entities\ContentEntity{<br/>storage : [<br/>&emsp;"id" => "1"<br/>&emsp;"slug" => "shdsedshdsd<br/>&emsp;"type" => "course"<br/>&emsp;"sort" => "0"<br/>&emsp;"status" => "published"<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "brand"<br/>&emsp;"published_on" => "2018-07-06 19:19:38"<br/>&emsp;"created_on" => "2018-07-06 14:24:52"<br/>&emsp;"archived_on" => null<br/>&emsp;"parent_id" => 2<br/>&emsp;"child_id" => 1<br/>&emsp;"fields" => []<br/>&emsp;"data" => []<br/>&emsp;"permissions" => []<br/>&emsp;"position" => 1<br/>&emsp;]<br/>}] |  array of ContentEntity - parent for the child id with the specified type| 
+
+
 ### getByChildIdWhereParentTypeIn
+
 #### Usage Example(s)
+
+```php
+
+$packBundles = $this->contentService->getByChildIdWhereParentTypeIn($contentId, ['pack-bundle']);
+
+```
+
 #### Parameters
+
+| #  |  name    |  required |  type  |  description                                     | 
+|----|----------|-----------|--------|--------------------------------------------------| 
+| 1  |  childId |  yes      |  array |  The content id whose parents should be pulled   | 
+| 2  |  types   |  yes      |  array |  The content types that should be pulled         | 
+
+<!--
+#, name, required, type, description
+1 , childId, yes, array, The content id whose parents should be pulled  
+2 , types, yes, array, The content types that should be pulled
+-->
+
 #### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |  notes about return data                                                      | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |  empty array if not exists content                                            | 
+| succeded |  ContentEntity    |[1 =><br/>Railroad\Railcontent\Entities\ContentEntity{<br/>storage : [<br/>&emsp;"id" => "1"<br/>&emsp;"slug" => "shdsedshdsd<br/>&emsp;"type" => "pack-bundle"<br/>&emsp;"sort" => "0"<br/>&emsp;"status" => "published"<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "brand"<br/>&emsp;"published_on" => "2018-07-06 19:19:38"<br/>&emsp;"created_on" => "2018-07-06 14:24:52"<br/>&emsp;"archived_on" => null<br/>&emsp;"parent_id" => 2<br/>&emsp;"child_id" => 1<br/>&emsp;"fields" => []<br/>&emsp;"data" => []<br/>&emsp;"permissions" => []<br/>&emsp;"position" => 1<br/>&emsp;]<br/>}] |  array of ContentEntity - parent for the child id with the specified type| 
 
 ### getPaginatedByTypeUserProgressState
 #### Usage Example(s)
@@ -736,6 +947,379 @@ query , ids , yes ,  , A comma separated string of the ids you want to pull.
 
 ```
 
+Get contents that are childrens of the content id - JSON controller
+--------------------------------------
+
+`{ GET /content/parent/{parentId} }`
+
+Get an array with contents data that are childrens of the specified content id.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/parent/1',
+    type: 'get',
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path|query|body |  key |  required |  default |  description\|notes                                  | 
+|-----------------|------|-----------|----------|------------------------------------------------------| 
+| query           |  id  |  yes      |          |  The parent content id you want to pull content for. | 
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+query , id , yes ,  , The parent content id you want to pull content for.
+-->
+
+
+### Response Example(s)
+
+#### `200 OK`
+
+```json
+
+{
+    "status":"ok",
+    "code":200,
+    "results":{
+      "2":{
+            "id":"2",
+            "slug":"asperiores",
+            "type":"course",
+            "status":"published",
+            "language":"en-US",
+            "brand":"drumeo",
+            "published_on":"2008-09-01 01:44:13",
+            "created_on":"2017-12-21 13:02:52",
+            "archived_on":null,
+            "parent_id":"1",
+            "child_id":"2",
+            "fields":[],
+            "data":[],
+            "permissions":[],
+            "child_ids":["2"],
+            "position":"1"
+      },
+      "3":{
+        		"id":"3",
+        		"slug":"magnam",
+        		"type":"course",
+        		"status":"published",
+        		"language":"en-US",
+        		"brand":"drumeo",
+        		"published_on":"2017-10-19 21:40:53",
+        		"created_on":"2017-12-21 13:02:52",
+        		"archived_on":null,
+        		"parent_id":"1",
+        		"child_id":"3",
+        		"fields":[],
+        		"data":[],
+        		"permissions":[],
+        		"child_ids":["3"],
+        		"position":"2"
+      }
+    }
+}  
+
+
+```
+
+Filter contents  - JSON controller
+--------------------------------------
+
+`{ GET /content }`
+
+Get an array with contents data that respect filters criteria. The results are paginated.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content?' +
+        'page=1' + '&' +
+        'limit=1' + '&' +
+        'included_types[]=course' + '&' +
+        'statuses[]=published' + '&' +
+        'required_parent_ids[]=6' + '&' +
+        'filter[required_fields][]=topic,rock,string' + '&' +
+        'filter[included_fields][]=topic,jazz,string' + '&' +
+        'filter[included_fields][]=difficulty,3,integer' + '&' +
+        'filter[included_fields][]=difficulty,9' + '&' +
+        'filter[required_user_states][]=completed' + '&' +
+        'filter[included_user_states][]=started' + '&' +
+        'filter[required_user_playlists][]=my_fun_list' + '&' +
+        'filter[included_user_playlists][]=my_other_fun_list',
+    type: 'get',
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path|query|body |  key                              |  required |  default         |  description\|notes                                                                                                                                       |                                                                                   |                                                                                |                                                  |                                                  |        |           |           |            |               |             |              | 
+|-----------------|-----------------------------------|-----------|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------|-----------|-----------|------------|---------------|-------------|--------------| 
+| query           |  page                             |  no       |  10              |  Which page in the result set to return. The amount of contents skipped is ((limit - 1) * page).                                                          |                                                                                   |                                                                                |                                                  |                                                  |        |           |           |            |               |             |              | 
+| query           |  limit                            |  no       |  1               |  The max amount of contents that can be returned. Can be 'null' for no limit.                                                                             |                                                                                   |                                                                                |                                                  |                                                  |        |           |           |            |               |             |              | 
+| query           |  sort                             |  no       |  'published_on'  |  Defaults to ascending order                                                                                                                              |  to switch to descending order                                                    |  put a minus sign (-) in front of the value. Can be any of the following: slug |  status                                          |  type                                            |  brand |  language |  position |  parent_id |  published_on |  created_on |  archived_on | 
+| query           |  included_types                   |  no       |  []              |  Contents with these types will be returned.                                                                                                              |                                                                                   |                                                                                |                                                  |                                                  |        |           |           |            |               |             |              | 
+| query           |  slug_hierarchy                   |  no       |  []              |  Contents with these types will be returned.                                                                                                              |                                                                                   |                                                                                |                                                  |                                                  |        |           |           |            |               |             |              | 
+| query           |  statuses                         |  no       |  'published'     |  All content must have one of these statuses.                                                                                                             |                                                                                   |                                                                                |                                                  |                                                  |        |           |           |            |               |             |              | 
+| query           |  required_parent_ids              |  no       |  []              |  All contents must be a child of any of the passed in parent ids.                                                                                         |                                                                                   |                                                                                |                                                  |                                                  |        |           |           |            |               |             |              | 
+| query           |  filter[required_fields]          |  no       |  []              |  All returned contents are required to have this field. Value format is: key                                                                              | value                                                                             | type (type is optional                                                         |  if its not declared all types will be included) |                                                  |        |           |           |            |               |             |              | 
+| query           |  filter[included_fields]          |  no       |  []              |  Contents that have any of these fields will be returned. The first included field is the same as a required field                                        |  but all included fields after the first act inclusively. Value format is: key    | value                                                                          | type (type is optional                           |  if its not declared all types will be included) |        |           |           |            |               |             |              | 
+| query           |  filter[required_user_states]     |  no       |  []              |  All returned contents are required to have these states for the authenticated user. Value format is: state                                               |                                                                                   |                                                                                |                                                  |                                                  |        |           |           |            |               |             |              | 
+| query           |  filter[included_user_states]     |  no       |  []              |  Contents that have any of these states for the authenticated user will be returned. The first included user state is the same as a required user state   |  but all included states after the first act inclusively. Value format is: state. |                                                                                |                                                  |                                                  |        |           |           |            |               |             |              | 
+| query           |  filter[required_user_playlists]  |  no       |  []              |  All returned contents are required to be inside these authenticated users playlists. Value format is: name.                                              |                                                                                   |                                                                                |                                                  |                                                  |        |           |           |            |               |             |              | 
+| query           |  filter[included_user_playlists]  |  no       |  []              |  Contents that are in any of the authenticated users playlists will be returned. The first included user playlist is the same as a required user playlist |  but all included playlist after the first act inclusively. Value format is: name |                                                                                |                                                  |                                                  |        |           |           |            |               |             |              | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+query , page , no , 10 , Which page in the result set to return. The amount of contents skipped is ((limit - 1) * page).
+query , limit , no , 1 , The max amount of contents that can be returned. Can be 'null' for no limit.
+query , sort , no , 'published_on' , Defaults to ascending order, to switch to descending order, put a minus sign (-) in front of the value. Can be any of the following: slug, status, type, brand, language, position, parent_id, published_on, created_on, archived_on
+query , included_types , no , [] , Contents with these types will be returned.
+query , slug_hierarchy , no , [] , Contents with these types will be returned.
+query , statuses , no , 'published' , All content must have one of these statuses.
+query , required_parent_ids , no , [] , All contents must be a child of any of the passed in parent ids.
+query , filter[required_fields] , no , [] , All returned contents are required to have this field. Value format is: key,value,type (type is optional, if its not declared all types will be included)
+query , filter[included_fields] , no , [] , Contents that have any of these fields will be returned. The first included field is the same as a required field, but all included fields after the first act inclusively. Value format is: key,value,type (type is optional, if its not declared all types will be included)
+query , filter[required_user_states] , no , [] , All returned contents are required to have these states for the authenticated user. Value format is: state
+query , filter[included_user_states] , no , [] , Contents that have any of these states for the authenticated user will be returned. The first included user state is the same as a required user state, but all included states after the first act inclusively. Value format is: state.
+query , filter[required_user_playlists] , no , [] , All returned contents are required to be inside these authenticated users playlists. Value format is: name.
+query , filter[included_user_playlists] , no , [] , Contents that are in any of the authenticated users playlists will be returned. The first included user playlist is the same as a required user playlist, but all included playlist after the first act inclusively. Value format is: name
+-->
+
+
+### Response Example(s)
+
+#### `200 OK`
+
+```json
+
+{
+    "status":"ok",
+    "code":200,
+    "page":1,
+    "limit":1,
+    "total_results":97,
+    "results":{
+        "3353":{
+            "id":3353,
+            "slug":"accusamus-rerum-occaecati",
+            "status":"published",
+            "type":"recording",
+            "position":144,
+            "parent_id":null,
+            "language":"en-US",
+            "published_on":"1975-02-09 09:44:58",
+            "created_on":"2017-10-24 20:18:42",
+            "brand":"drumeo",
+            "fields":[
+                {
+                    "id":6416,
+                    "key":"difficulty",
+                    "value":"3",
+                    "type":"integer",
+                    "position":null
+                },
+                {
+                    "id":2134,
+                    "key":"topic",
+                    "value":"rock",
+                    "type":"string",
+                    "position":null
+                },
+                {
+                    "id":7,
+                    "key":"topic",
+                    "value":"jazz",
+                    "type":"string",
+                    "position":null
+                },
+                {
+                    "id":144,
+                    "key":"instructor",
+                    "value":{
+                        "id":57,
+                        "slug":"reuben-spyker",
+                        "type":"instructor",
+                        "status":"published",
+                        "language":"en-US",
+                        "brand":"drumeo",
+                        "published_on":"2017-10-31 18:14:07",
+                        "archived_on":null,
+                        "fields":[
+                            {
+                                "id":143,
+                                "key":"name",
+                                "value":"Reuben Spyker",
+                                "type":"string",
+                                "position":1
+                            }
+                        ],
+                        "data":[
+                            {
+                                "id":115,
+                                "key":"head_shot_picture_url",
+                                "value":"http:\/\/dev.drumeo.com\/laravel\/assets\/images\/instructors\/reuben-spyker.png?v=1504720892",
+                                "position":1
+                            },
+                            {
+                                "id":116,
+                                "key":"biography",
+                                "value":"Reuben Spyker, a technique freak but also a player of many types of music, filmed his first lesson for Drumeo in 2015! He just recently joined the Drumeo team and will be working here full time. Attended Cap University for two years, recent projects include an electronic\/hip hop duo group (will be releasing music soon) and also manages a youtube channel. I like all styles of music (probably listen to Jazz, hip hop, neo soul and electronic the most) I also love espresso, free line skating, fashion, dancing and drawing\/painting. In my spare time I am currently learning bass guitar, latte art and juggling.",
+                                "position":1
+                            }
+                        ]
+                    },
+                    "type":"content",
+                    "position":1
+                }
+            ],
+            "data":[
+                {
+                    "id":16471,
+                    "key":"some-data",
+                    "value":"large peice of data"
+                }
+            ]
+        }
+    },
+    "filter_options":{
+        "topic":[
+            "rock",
+            "jazz",
+            "inventore",
+            "tenetur",
+            "voluptate",
+            "repudiandae"
+        ],
+        "instructor":[
+            {
+                "id":39,
+                "slug":"gavin-harrison",
+                "type":"instructor",
+                "status":"published",
+                "language":"en-US",
+                "brand":"drumeo",
+                "published_on":"2017-10-31 18:14:06",
+                "archived_on":null,
+                "fields":[
+                    {
+                        "id":98,
+                        "key":"name",
+                        "value":"Gavin Harrison",
+                        "type":"string",
+                        "position":1
+                    }
+                ],
+                "data":[
+                    {
+                        "id":75,
+                        "key":"head_shot_picture_url",
+                        "value":"http:\/\/dev.drumeo.com\/laravel\/assets\/images\/instructors\/gavin-harrison.png?v=1504720892",
+                        "position":1
+                    },
+                    {
+                        "id":76,
+                        "key":"biography",
+                        "value":"",
+                        "position":1
+                    },
+                    {
+                        "id":79,
+                        "key":"head_shot_picture_url",
+                        "value":"http:\/\/dev.drumeo.com\/laravel\/assets\/images\/instructors\/gavin-harrison.png?v=1504720892",
+                        "position":1
+                    },
+                    {
+                        "id":80,
+                        "key":"biography",
+                        "value":"",
+                        "position":1
+                    }
+                ]
+            },
+            {
+                "id":48,
+                "slug":"kyle-radomsky",
+                "type":"instructor",
+                "status":"published",
+                "language":"en-US",
+                "brand":"drumeo",
+                "published_on":"2017-10-31 18:14:06",
+                "archived_on":null,
+                "fields":[
+                    {
+                        "id":121,
+                        "key":"name",
+                        "value":"Kyle Radomsky",
+                        "type":"string",
+                        "position":1
+                    }
+                ],
+                "data":[
+                    {
+                        "id":95,
+                        "key":"head_shot_picture_url",
+                        "value":"http:\/\/dev.drumeo.com\/laravel\/assets\/images\/instructors\/kyle-radomsky.png?v=1504720892",
+                        "position":1
+                    },
+                    {
+                        "id":96,
+                        "key":"biography",
+                        "value":"Kyle Radomsky is a versatile drummer with an assortment of experiences to draw from as an instructor, having toured internationally with a variety of bands including performances in Canada, the United States, United Arab Emirates, Taiwan, the Philippines, Indonesia, Bosnia, New Zealand, and Poland. He loves teaching, and is excited about the emergence of online lessons and the ability to connect with students around the world in real-time!",
+                        "position":1
+                    }
+                ]
+            }
+        ],
+        "difficulty":[
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"
+        ]
+    }
+}
+
+
+```
 
 Progress-Bubbling
 ------------------------------------------------------------------------------------------------------------------------
