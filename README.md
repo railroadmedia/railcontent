@@ -100,18 +100,10 @@ Data first simple CMS.
     + [Usage Example(s)](#usage-example-s--22)
     + [Parameters](#parameters-22)
     + [Responses](#responses-22)
-  * [softDeleteContentChildren](#softdeletecontentchildren)
+  * [attachPlaylistsToContents](#attachplayliststocontents)
     + [Usage Example(s)](#usage-example-s--23)
     + [Parameters](#parameters-23)
     + [Responses](#responses-23)
-  * [attachPlaylistsToContents](#attachplayliststocontents)
-    + [Usage Example(s)](#usage-example-s--24)
-    + [Parameters](#parameters-24)
-    + [Responses](#responses-24)
-  * [attachChildrenToContents](#attachchildrentocontents)
-    + [Usage Example(s)](#usage-example-s--25)
-    + [Parameters](#parameters-25)
-    + [Responses](#responses-25)
 - [Get content - JSON controller](#get-content---json-controller)
   * [Request Example(s)](#request-example-s-)
   * [Request Parameters](#request-parameters)
@@ -857,54 +849,327 @@ $lessons = $this->contentService->getPaginatedByTypeUserProgressState(['song', '
 #### Responses
 
 ### getByContentFieldValuesForTypes
+
 #### Usage Example(s)
+```php
+
+ $idsOfContentMissingDuration = $this->contentService->getByContentFieldValuesForTypes(
+            ['vimeo-video'], 'length_in_seconds',  [0]
+        );
+
+```
 #### Parameters
+
+| #  |  name               |  required |  type   |  description                                                | 
+|----|---------------------|-----------|---------|-------------------------------------------------------------| 
+| 1  |  contentTypes       |  yes      |  array  |  The content types that can be pulled                       | 
+| 2  |  contentFieldKey    |  yes      |  string |  The content field key that should have the specified value | 
+| 3  |  contentFieldValues |  yes      |  array  |  Array with the allowed field value                         | 
+
+
+<!--
+#, name, required, type, description
+1 , contentTypes, yes, array, The content types that can be pulled  
+2 , contentFieldKey, yes, string, The content field key that should have the specified value
+3 , contentFieldValues, yes, array, Array with the allowed field value 
+-->
+
 #### Responses
 
+| outcome  |  return data type |  return data value (example)                                                   |  notes about return data            | 
+|----------|-------------------|--------------------------------------------------------------------------------|-------------------------------------| 
+| failed   |  array            |  []                                                                            |  empty array if not exists content  | 
+| succeded |  array            |  [0 => Railroad\Railcontent\Entities\ContentEntity{<br/>&emsp;"id" => 1<br/>}] |                                     | 
+<!--
+outcome, return data type, return data value (example), notes about return data
+failed, array, [], empty array if not exists content 
+succeded, array, [0 => Railroad\Railcontent\Entities\ContentEntity{<br/>&emsp;"id" => 1<br/>}]
+-->
+
 ### countByTypesUserProgressState
+
 #### Usage Example(s)
+```php
+
+  $completedLessonCount = $this->contentService->countByTypesUserProgressState(
+            ['course-part', 'song-part', 'play-along-part'],
+            $userId,
+            'completed'
+        );
+
+```
 #### Parameters
+
+| #  |  name   |  required |  type    |  description                                                      | 
+|----|---------|-----------|----------|-------------------------------------------------------------------| 
+| 1  |  types  |  yes      |  array   |  The content types that can be counted                            | 
+| 2  |  userId |  yes      |  integer |  The content should have the required state for specified user id | 
+| 3  |  state  |  yes      |  string  |  The content should have the specified state                      | 
+
+<!--
+#, name, required, type, description
+1 , types, yes, array, The content types that can be counted  
+2 , userId, yes, integer, The content should have the required state for specified user id
+3 , state, yes, string, The content should have the specified state 
+-->
+
 #### Responses
+
+| outcome   |  return data type |  return data value (example) |  notes about return data  | 
+|-----------|-------------------|------------------------------|---------------------------| 
+| not exist |  integer          |  0                           |  0 if not exists content  | 
+| succeded  |  integer          |                              |  number of results        | 
+
+
+<!--
+outcome, return data type, return data value (example), notes about return data
+not exist, integer, 0, 0 if not exists content 
+succeded, integer, , number of results
+-->
+
 
 ### getFiltered
 #### Usage Example(s)
+```php 
+  $contentData = $this->contentService->getFiltered(
+            $request->get('page', 1),
+            $request->get('limit', 10),
+            $request->get('sort', 'published_on'),
+            $request->get('included_types', []),
+            $request->get('slug_hierarchy', []),
+            $request->get('required_parent_ids', []),
+            $parsedFilters['required_fields'] ?? [],
+            $parsedFilters['included_fields'] ?? [],
+            $parsedFilters['required_user_states'] ?? [],
+            $parsedFilters['included_user_states'] ?? []
+        );
+```
 #### Parameters
+| #   |  name                |  required |  default         |  type    |  description                                                                                                                                                                                                                                                                    | 
+|-----|----------------------|-----------|------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
+| 1   |  page                |  yes      |                  |  integer |  Which page in the result set to return. The amount of contents skipped is ((limit - 1) * page).                                                                                                                                                                                | 
+| 2   |  limit               |  no       |                  |  integer |  The max amount of contents that can be returned. Can be 'null' for no limit.                                                                                                                                                                                                   | 
+| 3   |  orderByAndDirection |  no       |  '-published_on' |  string  |  Defaults to ascending order; to switch to descending order put a minus sign (-) in front of the value. Can be any of the following: slug status type brand language position parent_id published_on created_on archived_on                                                     | 
+| 4   |  includedTypes       |  no       |   []             |  array   |  Contents with these types will be returned.                                                                                                                                                                                                                                    | 
+| 5   |  slugHierarchy       |  no       |  []              |  array   |                                                                                                                                                                                                                                                                                 | 
+| 6   |  requiredParentIds   |  no       |  []              |  array   |  All contents must be a child of any of the passed in parent ids.                                                                                                                                                                                                               | 
+| 7   |  requiredFields      |  no       |  []              |  array   |  All returned contents are required to have this field. Value format is: key value type (type is optional; if its not declared all types will be included)                                                                                                                      | 
+| 8   |  includedFields      |  no       |  []              |  array   |  Contents that have any of these fields will be returned. The first included field is the same as a required field; but all included fields after the first act inclusively. Value format is: key value type (type is optional; if its not declared all types will be included) | 
+| 9   |  requiredUserStates  |  no       |  []              |  array   |  All returned contents are required to have these states for the authenticated user. Value format is: state                                                                                                                                                                     | 
+| 10  |  includedUserStates  |  no       |  []              |  array   |  Contents that have any of these states for the authenticated user will be returned. The first included user state is the same as a required user state; but all included states after the first act inclusively. Value format is: state                                        | 
+
+
 #### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |  notes about return data                        | 
+|----------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |  empty array if not exists content for specified criteria    | 
+| succeded |  array    |  [1 => Railroad\Railcontent\Entities\ContentEntity{<br/>&emsp;storage: [<br/>&emsp;    "id" => "1"<br/>&emsp;"slug" => "quis"<br/>&emsp;"status" => "draft"<br/>&emsp;"type" => "learning-path"<br/>&emsp;"parent_id" => null<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "drumeo"<br/>&emsp;"created_on" => "2017-10-26 16:00:03"<br/>&emsp;...}<br/> 2 => Railroad\Railcontent\Entities\ContentEntity{<br/>&emsp;storage: [<br/>&emsp;"id" => "2"<br/>&emsp;"slug" => "deret"<br/>&emsp;"status" => "draft"<br/>&emsp;"type" => "learning-path"<br/>&emsp;"parent_id" => null<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "drumeo"<br/>&emsp;"created_on" => "2017-10-23 10:50:47"<br/>&emsp;...}<br/>] |  array of ContentEntity| 
+
+
+
+
+
+
+
+<!--
+outcome, return data type, return data value (example), notes about return data
+failed, array, [], empty array if not exists content with type
+succeded, ContentEntity, [1 => Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"1"            "slug":"quis"            "status":"draft"            "type":"'learning-path'"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-26 16:00:03"} 2 => Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"2"            "slug":"deret"            "status":"draft"            "type":"'learning-path'"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-23 10:50:47"}], array of ContentEntity with the specified type
+-->
+
 
 ### create
 #### Usage Example(s)
+```php
+$content = $this->contentService->create(
+            $request->get('slug'),
+            $request->get('type'),
+            $request->get('status'),
+            $request->get('language'),
+            $request->get('brand'),
+            $request->get('user_id'),
+            $request->get('published_on'),
+            $request->get('parent_id'),
+            $request->get('sort', 0)
+        );
+        
+```
 #### Parameters
+
+| #  |  name         |  required |  default  |  type      |  description                                                        | 
+|----|---------------|-----------|-----------|------------|---------------------------------------------------------------------| 
+| 1  |  slug         |  yes      |  array    |            |  The content slug                                                   | 
+| 2  |  type         |  yes      |           |  string    |  Type of content. Examples: 'recording' 'course' 'course-lesson'    | 
+| 3  |  status       |  no       |  'draft'  |  string    |  Can be 'draft' 'published' 'archived'.                             | 
+| 4  |  language     |  no       |  'en-US'  |  string    |  Language locale.                                                   | 
+| 5  |  brand        |  no       |           |  string    |  'drumeo' 'pianote' etc                                             | 
+| 6  |  user_id      |  no       |  null     |  integer   |                                                                     | 
+| 7  |  published_on |  no       |  now      |  datetime  |                                                                     | 
+| 8  |  parentId     |  no       |  null     |  integer   |  Id of the parent content you want to make this content a child of. | 
+| 9  |  sort         |  no       |  0        |  integer   |                                                                     | 
+
+<!--
+#, name, required, default, type, description
+1 , slug, yes, array, , The content slug 
+2 , type, yes, , string, Type of content. Examples: 'recording' 'course' 'course-lesson'
+3 , status, no, 'draft', string, Can be 'draft' 'published' 'archived'.
+4 , language, no, 'en-US' , string, Language locale.
+5 , brand, no, , string, 'drumeo' 'pianote' etc
+6 , user_id, no, null, integer
+7 , published_on, no, now, datetime 
+8 , parentId, no, null, integer, Id of the parent content you want to make this content a child of.
+9 , sort, no, 0, integer,
+-->
+
 #### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                |  notes about return data | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------| 
+| failed   |  null             |  null                                                                                                                                                                                                                                                                                                       |                          | 
+| succeded |  ContentEntity    | Railroad\Railcontent\Entities\ContentEntity{<br/>storage: [<br/>&emsp; "id" => "1"<br/>&emsp;"slug" => "quis"<br/>&emsp;"status" => "draft"<br/>&emsp;"type" => "nihil"<br/>&emsp;"sort" => "0"<br/>&emsp;"parent_id" => null<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "drumeo"<br/>&emsp;"published_on" => "2017-10-26 16:00:03"<br/>&emsp;"created_on" => "2017-10-26 16:00:03"<br/>&emsp;"archived_on" => null<br/>&emsp;"parent_id" => null<br/>&emsp;"child_id" => null<br/>&emsp;"fields" => []<br/>&emsp;"data" => []<br/>&emsp;"permissions" => []<br/>&emsp;]<br/>}|  ContentEntity with the content data            | 
+
+
+<!--
+outcome, return data type, return data value (example), notes about return data
+failed, null, null,
+succeded, ContentEntity, { Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"1"            "slug":"quis"            "status":"draft"            "type":"nihil"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-26 16:00:03"]}, ContentEntity with the content data
+-->
+
 
 ### update
 #### Usage Example(s)
+```php
+ $this->contentService->update(
+                    $contentId,
+                    [
+                        'type' => $contentTypeSlug,
+                        'status' => ContentService::STATUS_PUBLISHED,
+                        'published_on' => Carbon::now()->toDateTimeString()
+                    ]
+                );
+```
+
+
 #### Parameters
+
+| #  |  name |  required |  type    |  description                                                                                                                     | 
+|----|-------|-----------|----------|----------------------------------------------------------------------------------------------------------------------------------| 
+| 1  |  id   |  yes      |  integer |  Id of the content you want to edit.                                                                                             | 
+| 2  |  data |  yes      |  array   |  An array with the content data that should be updated. The key should be the content column name and the value the desired data | 
+
+<!--
+#, name, required, type, description
+1 , id, yes, integer, Id of the content you want to edit.
+2 , data, yes, array, An array with the content data that should be updated. The key should be the content column name and the value the desired data  
+-->
+
 #### Responses
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                |  notes about return data | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------| 
+| failed   |  null             |  null                                                                                                                                                                                                                                                                                                       |                          | 
+| succeded |  ContentEntity    | Railroad\Railcontent\Entities\ContentEntity{<br/>storage: [<br/>&emsp; "id" => "1"<br/>&emsp;"slug" => "quis"<br/>&emsp;"status" => "published"<br/>&emsp;"type" => "nihil"<br/>&emsp;"sort" => "0"<br/>&emsp;"parent_id" => null<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "drumeo"<br/>&emsp;"published_on" => "2017-10-26 16:00:03"<br/>&emsp;"created_on" => "2018-07-09 16:00:03"<br/>&emsp;"archived_on" => null<br/>&emsp;"parent_id" => null<br/>&emsp;"child_id" => null<br/>&emsp;"fields" => []<br/>&emsp;"data" => []<br/>&emsp;"permissions" => []<br/>&emsp;]<br/>}|  ContentEntity with the content data            | 
+
+
+<!--
+outcome, return data type, return data value (example), notes about return data
+failed, null, null,
+succeded, ContentEntity, { Railroad\Railcontent\Entities\ContentEntity{storage: array:15 [            "id":"1"            "slug":"quis"            "status":"draft"            "type":"nihil"            "parent_id":null            "language":"en-US"            "brand":"drumeo"            "created_on":"2017-10-26 16:00:03"]}, ContentEntity with the content data
+-->
+
 
 ### delete
 #### Usage Example(s)
+
+```php
+$this->contentService->delete($contentId);
+```
+
 #### Parameters
+
+| #  |  name |  required |  type    |  description                           | 
+|----|-------|-----------|----------|----------------------------------------| 
+| 1  |  id   |  yes      |  integer |  Id of the content you want to delete. | 
+
+
+<!--
+#, name, required, type, description
+1 , id, yes, integer, Id of the content you want to delete.
+-->
+
 #### Responses
+
+| outcome  |  return data type |  return data value (example) |  notes about return data | 
+|----------|-------------------|------------------------------|--------------------------| 
+| failed   |  null             |  null                        |                          | 
+| succeded |  boolean          |  1                           |                          | 
+
+<!--
+outcome, return data type, return data value (example), notes about return data
+failed, null, null,
+succeded, boolean, 1
+-->
 
 ### softDelete
 #### Usage Example(s)
+
+```php
+$this->contentService->softDelete($contentId);
+```
+
 #### Parameters
+
+| #  |  name |  required |  type    |  description                                    | 
+|----|-------|-----------|----------|-------------------------------------------------| 
+| 1  |  id   |  yes      |  integer |  Id of the content you want to mark as deleted. | 
+
+<!--
+#, name, required, type, description
+1 , id, yes, integer, Id of the content you want to mark as deleted.
+-->
+
 #### Responses
 
-### softDeleteContentChildren
-#### Usage Example(s)
-#### Parameters
-#### Responses
+| outcome  |  return data type |  return data value (example) |  notes about return data | 
+|----------|-------------------|------------------------------|--------------------------| 
+| failed   |  null             |  null                        |                          | 
+| succeded |  boolean          |  1                           |                          | 
+
+<!--
+outcome, return data type, return data value (example), notes about return data
+failed, null, null,
+succeded, boolean, 1
+-->
+
 
 ### attachPlaylistsToContents
 #### Usage Example(s)
+
+```php
+$this->contentService->attachPlaylistsToContents($userId, $lessons);
+```
 #### Parameters
+
+| #  |  name               |  required |  default |  type           |  description                                              | 
+|----|---------------------|-----------|----------|-----------------|-----------------------------------------------------------| 
+| 1  |  userId             |  yes      |          |  integer        |  Id of the user you want to attach contents to playlists. | 
+| 2  |  contentOrContents  |  yes      |          |  integer\|array |  Id of the content you want to attach playlists.          | 
+| 3  |  singlePlaylistSlug |  no       |  null    |  string         |  The content playlist slug                                | 
+<!--
+#, name, required, default, type, description
+1 , userId, yes, , integer, Id of the user you want to attach contents to playlists.
+2 , contentOrContents, yes, , integer\|array, Id of the content you want to attach playlists.
+3 , singlePlaylistSlug, no, null, string, The content playlist slug
+-->
+
 #### Responses
 
-### attachChildrenToContents
-#### Usage Example(s)
-#### Parameters
-#### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |  notes about return data                        | 
+|----------|-------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------| 
+| failed   |  array            |  []                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |   | 
+| succeded |  array    |  [1 => Railroad\Railcontent\Entities\ContentEntity{<br/>&emsp;storage: [<br/>&emsp;    "id" => "1"<br/>&emsp;"slug" => "quis"<br/>&emsp;"status" => "draft"<br/>&emsp;"type" => "learning-path"<br/>&emsp;"parent_id" => null<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "drumeo"<br/>&emsp;"created_on" => "2017-10-26 16:00:03"<br/>&emsp;...}<br/> 2 => Railroad\Railcontent\Entities\ContentEntity{<br/>&emsp;storage: [<br/>&emsp;"id" => "2"<br/>&emsp;"slug" => "deret"<br/>&emsp;"status" => "draft"<br/>&emsp;"type" => "learning-path"<br/>&emsp;"parent_id" => null<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "drumeo"<br/>&emsp;"created_on" => "2017-10-23 10:50:47"<br/>&emsp;...}<br/>] |  array of ContentEntity| 
+
 
 
 
