@@ -104,6 +104,23 @@ Data first simple CMS.
     + [Usage Example(s)](#usage-example-s--23)
     + [Parameters](#parameters-23)
     + [Responses](#responses-23)
+- [ContentFieldService](#contentfieldservice)
+  * [get](#get)
+    + [Usage Example(s)](#usage-example-s--24)
+    + [Parameters](#parameters-24)
+    + [Responses](#responses-24)
+  * [getByKeyValueTypePosition](#getbykeyvaluetypeposition)
+  * [getByKeyValueType](#getbykeyvaluetype)
+  * [create](#create-1)
+  * [update](#update-1)
+  * [delete](#delete-1)
+- [ContentDatumService](#contentdatumservice)
+  * [get](#get-1)
+    + [Usage Example(s)](#usage-example-s--25)
+  * [getByContentIds](#getbycontentids)
+  * [create](#create-2)
+  * [update](#update-2)
+  * [delete](#delete-2)
 - [Get content - JSON controller](#get-content---json-controller)
   * [Request Example(s)](#request-example-s-)
   * [Request Parameters](#request-parameters)
@@ -1171,6 +1188,145 @@ $this->contentService->attachPlaylistsToContents($userId, $lessons);
 | succeded |  array    |  [1 => Railroad\Railcontent\Entities\ContentEntity{<br/>&emsp;storage: [<br/>&emsp;    "id" => "1"<br/>&emsp;"slug" => "quis"<br/>&emsp;"status" => "draft"<br/>&emsp;"type" => "learning-path"<br/>&emsp;"parent_id" => null<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "drumeo"<br/>&emsp;"created_on" => "2017-10-26 16:00:03"<br/>&emsp;...}<br/> 2 => Railroad\Railcontent\Entities\ContentEntity{<br/>&emsp;storage: [<br/>&emsp;"id" => "2"<br/>&emsp;"slug" => "deret"<br/>&emsp;"status" => "draft"<br/>&emsp;"type" => "learning-path"<br/>&emsp;"parent_id" => null<br/>&emsp;"language" => "en-US"<br/>&emsp;"brand" => "drumeo"<br/>&emsp;"created_on" => "2017-10-23 10:50:47"<br/>&emsp;...}<br/>] |  array of ContentEntity| 
 
 
+ContentFieldService
+--------------------
+
+All methods below are *public*.
+
+Inject the `Railroad\Railcontent\Services\ContentFieldService` class where needed
+
+```php
+/** @var Railroad\Railcontent\Services\ContentFieldService $contentFieldService */
+protected $contentFieldService;
+
+public function __constructor(Railroad\Railcontent\Services\ContentFieldService $contentFieldService){
+    $this->contentFieldService = $contentFieldService;
+}
+```
+
+Include namespace at top of file:
+
+```php
+use Railroad\Railcontent\Services\ContentFieldService;
+```
+
+... to save yourself having to specify the namespace everywhere:
+
+```php
+/** @var ContentFieldService $contentFieldService */
+protected $contentFieldService;
+
+public function __constructor(ContentFieldService $contentFieldService){
+    $this->contentFieldService = $contentFieldService;
+}
+```
+
+
+### get
+
+#### Usage Example(s)
+
+```php
+$contentField = $this->contentFieldService->get($id);
+```
+
+#### Parameters
+
+| #  |  name             |  required |  type    |  description                        | 
+|----|-------------------|-----------|----------|-------------------------------------| 
+| 1  |  id |  yes      |  integer  |  id of content field you want to pull | 
+ 
+<!--
+#, name, required, type, description
+1 , id, yes, integer , id of content field you want to pull  
+-->
+
+#### Responses
+
+| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                |  notes about return data | 
+|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------| 
+| failed   |  null             |  null                                                                                                                                                                                                                                                                                                       |                          | 
+| succeded |  array    | [<br/>&emsp; "id" => "1"<br/>&emsp;"content_id" => "1"<br/>&emsp;"key" => "fuga"<br/>&emsp;"value" => "suscipit"<br/>&emsp;"type" => "string"<br/>&emsp;"position" => "1"<br/>]|  Field details          | 
+
+### getByKeyValueTypePosition
+
+[TODO]
+
+### getByKeyValueType
+
+[TODO]
+
+### create
+
+[TODO]
+
+### update
+
+[TODO]
+
+### delete
+
+[TODO]
+
+
+ContentDatumService
+--------------------
+
+All methods below are *public*.
+
+Inject the `Railroad\Railcontent\Services\ContentDatumService` class where needed
+
+```php
+/** @var Railroad\Railcontent\Services\ContentDatumService $contentDatumService */
+protected $contentDatumService;
+
+public function __constructor(Railroad\Railcontent\Services\ContentDatumService $contentDatumService){
+    $this->contentDatumService = $contentDatumService;
+}
+```
+
+Include namespace at top of file:
+
+```php
+use Railroad\Railcontent\Services\ContentDatumService;
+```
+
+... to save yourself having to specify the namespace everywhere:
+
+```php
+/** @var ContentDatumService $contentDatumService */
+protected $contentDatumService;
+
+public function __constructor(ContentDatumService $contentDatumService){
+    $this->contentDatumService = $contentDatumService;
+}
+```
+
+
+### get
+
+#### Usage Example(s)
+
+```php
+$contentDatum = $this->contentDatumService->get($id);
+```
+
+### getByContentIds
+
+[TODO]
+
+
+### create
+
+[TODO]
+
+### update
+
+[TODO]
+
+### delete
+
+[TODO]
 
 
 
