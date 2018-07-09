@@ -976,7 +976,7 @@ $.ajax({
 
 ### Request Parameters
 
-| path|query|body |  key |  required |  default |  description\|notes                                  | 
+| path\|query\|body |  key |  required |  default |  description\|notes                                  | 
 |-----------------|------|-----------|----------|------------------------------------------------------| 
 | query           |  id  |  yes      |          |  The parent content id you want to pull content for. | 
 
