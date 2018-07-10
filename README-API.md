@@ -1,134 +1,11 @@
 
-Railcontent
-========================================================================================================================
-
-Data first simple CMS.
-
-  * [Installation, Configuration, Use](#installation--configuration--use)
-    + [Installation](#installation)
-    + [Configuration](#configuration)
-- [Services](#services)
-  * [ContentService](#contentservice)
-    + [getById](#getbyid)
-      - [Usage Example(s)](#usage-example-s-)
-      - [Parameters](#parameters)
-      - [Responses](#responses)
-    + [getByIds](#getbyids)
-      - [Usage Example(s)](#usage-example-s--1)
-      - [Parameters](#parameters-1)
-      - [Responses](#responses-1)
-    + [getAllByType](#getallbytype)
-      - [Usage Example(s)](#usage-example-s--2)
-      - [Parameters](#parameters-2)
-      - [Responses](#responses-2)
-    + [getWhereTypeInAndStatusAndField](#getwheretypeinandstatusandfield)
-      - [Usage Example(s)](#usage-example-s--3)
-      - [Parameters](#parameters-3)
-      - [Responses](#responses-3)
-    + [getWhereTypeInAndStatusAndPublishedOnOrdered](#getwheretypeinandstatusandpublishedonordered)
-      - [Usage Example(s)](#usage-example-s--4)
-      - [Parameters](#parameters-4)
-      - [Responses](#responses-4)
-    + [getBySlugAndType](#getbyslugandtype)
-      - [Usage Example(s)](#usage-example-s--5)
-      - [Parameters](#parameters-5)
-      - [Responses](#responses-5)
-    + [getByUserIdTypeSlug](#getbyuseridtypeslug)
-      - [Usage Example(s)](#usage-example-s--6)
-      - [Parameters](#parameters-6)
-      - [Responses](#responses-6)
-    + [getByParentId](#getbyparentid)
-      - [Usage Example(s)](#usage-example-s--7)
-      - [Parameters](#parameters-7)
-      - [Responses](#responses-7)
-    + [getByParentIdWhereTypeIn](#getbyparentidwheretypein)
-      - [Usage Example(s)](#usage-example-s--8)
-      - [Parameters](#parameters-8)
-      - [Responses](#responses-8)
-    + [getByParentIds](#getbyparentids)
-      - [Usage Example(s)](#usage-example-s--9)
-      - [Parameters](#parameters-9)
-      - [Responses](#responses-9)
-    + [getByChildIdWhereType](#getbychildidwheretype)
-      - [Usage Example(s)](#usage-example-s--10)
-      - [Parameters](#parameters-10)
-      - [Responses](#responses-10)
-    + [getByChildIdsWhereType](#getbychildidswheretype)
-      - [Usage Example(s)](#usage-example-s--11)
-      - [Parameters](#parameters-11)
-      - [Responses](#responses-11)
-    + [getByChildIdWhereParentTypeIn](#getbychildidwhereparenttypein)
-      - [Usage Example(s)](#usage-example-s--12)
-      - [Parameters](#parameters-12)
-      - [Responses](#responses-12)
-    + [getPaginatedByTypeUserProgressState](#getpaginatedbytypeuserprogressstate)
-      - [Usage Example(s)](#usage-example-s--13)
-      - [Parameters](#parameters-13)
-      - [Responses](#responses-13)
-    + [getPaginatedByTypesUserProgressState](#getpaginatedbytypesuserprogressstate)
-      - [Usage Example(s)](#usage-example-s--14)
-      - [Parameters](#parameters-14)
-      - [Responses](#responses-14)
-    + [getTypeNeighbouringSiblings](#gettypeneighbouringsiblings)
-      - [Usage Example(s)](#usage-example-s--15)
-      - [Parameters](#parameters-15)
-      - [Responses](#responses-15)
-    + [getByContentFieldValuesForTypes](#getbycontentfieldvaluesfortypes)
-      - [Usage Example(s)](#usage-example-s--16)
-      - [Parameters](#parameters-16)
-      - [Responses](#responses-16)
-    + [countByTypesUserProgressState](#countbytypesuserprogressstate)
-      - [Usage Example(s)](#usage-example-s--17)
-      - [Parameters](#parameters-17)
-      - [Responses](#responses-17)
-    + [getFiltered](#getfiltered)
-      - [Usage Example(s)](#usage-example-s--18)
-      - [Parameters](#parameters-18)
-      - [Responses](#responses-18)
-    + [create](#create)
-      - [Usage Example(s)](#usage-example-s--19)
-      - [Parameters](#parameters-19)
-      - [Responses](#responses-19)
-    + [update](#update)
-      - [Usage Example(s)](#usage-example-s--20)
-      - [Parameters](#parameters-20)
-      - [Responses](#responses-20)
-    + [delete](#delete)
-      - [Usage Example(s)](#usage-example-s--21)
-      - [Parameters](#parameters-21)
-      - [Responses](#responses-21)
-    + [softDelete](#softdelete)
-      - [Usage Example(s)](#usage-example-s--22)
-      - [Parameters](#parameters-22)
-      - [Responses](#responses-22)
-    + [attachPlaylistsToContents](#attachplayliststocontents)
-      - [Usage Example(s)](#usage-example-s--23)
-      - [Parameters](#parameters-23)
-      - [Responses](#responses-23)
-  * [ContentFieldService](#contentfieldservice)
-    + [get](#get)
-      - [Usage Example(s)](#usage-example-s--24)
-      - [Parameters](#parameters-24)
-      - [Responses](#responses-24)
-    + [getByKeyValueTypePosition](#getbykeyvaluetypeposition)
-    + [getByKeyValueType](#getbykeyvaluetype)
-    + [create](#create-1)
-    + [update](#update-1)
-    + [delete](#delete-1)
-  * [ContentDatumService](#contentdatumservice)
-    + [get](#get-1)
-      - [Usage Example(s)](#usage-example-s--25)
-    + [getByContentIds](#getbycontentids)
-    + [create](#create-2)
-    + [update](#update-2)
-    + [delete](#delete-2)
+- [API endpoints](#api-endpoints)
   * [Get content - JSON controller](#get-content---json-controller)
     + [Request Example(s)](#request-example-s-)
     + [Request Parameters](#request-parameters)
     + [Response Example(s)](#response-example-s-)
       - [`201 OK`](#-201-ok-)
       - [`404 Not Found`](#-404-not-found-)
-- [API endpoints](#api-endpoints)
   * [Get contents based on ids - JSON controller](#get-contents-based-on-ids---json-controller)
     + [Request Example(s)](#request-example-s--1)
     + [Request Parameters](#request-parameters-1)
@@ -190,26 +67,23 @@ Data first simple CMS.
     + [Request Parameters](#request-parameters-11)
     + [Response Example(s)](#response-example-s--11)
       - [`200 OK`](#-200-ok--5)
-  * [Progress-Bubbling](#progress-bubbling)
-    + [Example](#example)
-  * [Validation](#validation)
-    + [Note about field or datum that reference another piece of content](#note-about-field-or-datum-that-reference-another-piece-of-content)
-    + [Important Note about the "numeric" rule](#important-note-about-the--numeric--rule)
-    + [Specifying rules](#specifying-rules)
-    + [Details of options available for each brand](#details-of-options-available-for-each-brand)
-      - [fields](#fields)
-      - [data](#data)
-      - [number_of_children](#number-of-children)
-    + [Configuration Example](#configuration-example)
-    + [MultipleColumnExistsValidator](#multiplecolumnexistsvalidator)
-      - [WHERE *AND*](#where--and-)
-      - [WHERE *OR*](#where--or-)
-  * [Comment-Likes](#comment-likes)
-    + [TL;DR:](#tl-dr-)
-    + [Wordy explaination](#wordy-explaination)
-      - [Like](#like)
-      - [Unlike](#unlike)
-
+  * [Store content datum - JSON controller](#store-content-datum---json-controller)
+    + [Request Example(s)](#request-example-s--12)
+    + [Request Parameters](#request-parameters-12)
+    + [Response Example(s)](#response-example-s--12)
+      - [`200 OK`](#-200-ok--6)
+  * [Update content datum - JSON controller](#update-content-datum---json-controller)
+    + [Request Example(s)](#request-example-s--13)
+    + [Request Parameters](#request-parameters-13)
+    + [Response Example(s)](#response-example-s--13)
+      - [`201 OK`](#-201-ok--3)
+      - [`404 Not Found`](#-404-not-found--6)
+  * [Delete content datum - JSON controller](#delete-content-datum---json-controller)
+    + [Request Example(s)](#request-example-s--14)
+    + [Request Parameters](#request-parameters-14)
+    + [Response Example(s)](#response-example-s--14)
+      - [`204 No Content`](#-204-no-content--3)
+      - [`404 Not Found`](#-404-not-found--7)
 
 <!-- ecotrust-canada.github.io/markdown-toc -->
 
@@ -296,7 +170,7 @@ path , id , yes ,  , Id of the content you want to pull
       }
 }
 ```
-# API endpoints
+
 
 Get contents based on ids - JSON controller
 --------------------------------------
@@ -1320,6 +1194,212 @@ path , id , yes ,  , Id of the content field you want to pull
     }
 }
 
+```
+
+
+Store content datum - JSON controller
+--------------------------------------
+
+`{ PUT /content/datum }`
+
+Create a new content datum record based on request data and return the new created datum data in JSON format.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/datum',
+    type: 'put'
+  	data: {content_id: 3, key: 'description' value: 'very long description here'} 
+		// position will automatically be set to the end of the stack if you dont pass one in
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key         |  required |  default |  description\|notes                                                                               | 
+|-----------------|--------------|-----------|----------|---------------------------------------------------------------------------------------------------| 
+| body            |  content_id  |  yes      |          |  The content id this datum belongs to.                                                            | 
+| body            |  key         |  yes      |          |  The key of this datum; also know as the name.                                                    | 
+| body            |  value       |  yes      |          |  The value of the datum.                                                                          | 
+| body            |  position    |  no       |  1       |  The position of this datum relative to other datum with the same key under the same content id. | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+body , content_id , yes ,  , The content id this datum belongs to.
+body , key , yes ,  , The key of this datum; also know as the name.
+body , value , yes ,  , The value of the datum.
+body , position , no , 1 , The position of this datum relative to other datum with the same key under the same content id.
+-->
+
+
+### Response Example(s)
+
+#### `200 OK`
+
+```json
+
+{
+	"id":12,
+	"key":"description",
+	"value":"very long description here",
+	"position":1
+}
+
+```
+
+Update content datum - JSON controller
+--------------------------------------
+
+`{ PATCH /content/datum/{id} }`
+
+Update the content datum with the request data and return the updated datum in JSON format. 
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/datum/73',
+    type: 'patch'
+  	data: {value: 'another long description here'}
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key         |  required |  default |  description\|notes                                                                              | 
+|-----------------|--------------|-----------|----------|--------------------------------------------------------------------------------------------------| 
+| path            |  id          |  yes      |          |  Id of the datum you want to edit.                                                               | 
+| body            |  content_id  |  no       |          |  The content id this datum belongs to.                                                           | 
+| body            |  key         |  no       |          |  The key of this datum; also know as the name.                                                   | 
+| body            |  value       |  no       |          |  The value of the datum.                                                                         | 
+| body            |  position    |  no       |  1       |  The position of this datum relative to other datum with the same key under the same content id. | 
+                     | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes , , Id of the datum you want to edit.
+body , content_id , no ,  , The content id this datum belongs to.
+body , key , no ,  , The key of this datum; also know as the name.
+body , value , no ,  , The value of the datum.
+body , position , no , 1 , The position of this datum relative to other datum with the same key under the same content id.
+-->
+
+
+### Response Example(s)
+
+#### `201 OK`
+
+```json
+{
+	"id":73,
+	"key":"description",
+	"value":"another long description here",
+	"position":1
+}
+
+```
+#### `404 Not Found`
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Update failed, datum not found with id: 513"
+      }
+}
+```
+Delete content datum - JSON controller
+--------------------------------------
+
+`{ DELETE /content/datum/{id} }`
+
+Delete content datum if exists in the database. 
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/datum/2',
+    type: 'delete'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key |  required |  default |  description\|notes                    | 
+|-----------------|------|-----------|----------|----------------------------------------| 
+| path            |  id  |  yes      |          |  Id of the content datum you want to delete. | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes,  , Id of the content datum you want to delete.
+-->
+
+
+### Response Example(s)
+
+#### `204 No Content`  
+
+#### `404 Not Found`
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Delete failed, datum not found with id: 2"
+      }
+}
 ```
 
 
