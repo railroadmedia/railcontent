@@ -1,125 +1,93 @@
-
-- [API endpoints](#api-endpoints)
-  * [Get content - JSON controller](#get-content---json-controller)
-    + [Request Example(s)](#request-example-s-)
-    + [Request Parameters](#request-parameters)
-    + [Response Example(s)](#response-example-s-)
-      - [`201 OK`](#-201-ok-)
-      - [`404 Not Found`](#-404-not-found-)
-  * [Get contents based on ids - JSON controller](#get-contents-based-on-ids---json-controller)
-    + [Request Example(s)](#request-example-s--1)
-    + [Request Parameters](#request-parameters-1)
-    + [Response Example(s)](#response-example-s--1)
-      - [`200 OK`](#-200-ok-)
-  * [Get contents that are childrens of the content id - JSON controller](#get-contents-that-are-childrens-of-the-content-id---json-controller)
-    + [Request Example(s)](#request-example-s--2)
-    + [Request Parameters](#request-parameters-2)
-    + [Response Example(s)](#response-example-s--2)
-      - [`200 OK`](#-200-ok--1)
-  * [Filter contents  - JSON controller](#filter-contents----json-controller)
-    + [Request Example(s)](#request-example-s--3)
-    + [Request Parameters](#request-parameters-3)
-    + [Response Example(s)](#response-example-s--3)
-      - [`200 OK`](#-200-ok--2)
-  * [Store content - JSON controller](#store-content---json-controller)
-    + [Request Example(s)](#request-example-s--4)
-    + [Request Parameters](#request-parameters-4)
-    + [Response Example(s)](#response-example-s--4)
-      - [`200 OK`](#-200-ok--3)
-  * [Update content - JSON controller](#update-content---json-controller)
-    + [Request Example(s)](#request-example-s--5)
-    + [Request Parameters](#request-parameters-5)
-    + [Response Example(s)](#response-example-s--5)
-      - [`201 OK`](#-201-ok--1)
-      - [`404 Not Found`](#-404-not-found--1)
-  * [Delete content - JSON controller](#delete-content---json-controller)
-    + [Request Example(s)](#request-example-s--6)
-    + [Request Parameters](#request-parameters-6)
-    + [Response Example(s)](#response-example-s--6)
-      - [`204 No Content`](#-204-no-content-)
-      - [`404 Not Found`](#-404-not-found--2)
-  * [Soft delete content - JSON controller](#soft-delete-content---json-controller)
-    + [Request Example(s)](#request-example-s--7)
-    + [Request Parameters](#request-parameters-7)
-    + [Response Example(s)](#response-example-s--7)
-      - [`204 No Content`](#-204-no-content--1)
-      - [`404 Not Found`](#-404-not-found--3)
-  * [Configure Route Options - JSON controller](#configure-route-options---json-controller)
-  * [Store content field - JSON controller](#store-content-field---json-controller)
-    + [Request Example(s)](#request-example-s--8)
-    + [Request Parameters](#request-parameters-8)
-    + [Response Example(s)](#response-example-s--8)
-      - [`200 OK`](#-200-ok--4)
-  * [Update content field - JSON controller](#update-content-field---json-controller)
-    + [Request Example(s)](#request-example-s--9)
-    + [Request Parameters](#request-parameters-9)
-    + [Response Example(s)](#response-example-s--9)
-      - [`201 OK`](#-201-ok--2)
-      - [`404 Not Found`](#-404-not-found--4)
-  * [Delete content field - JSON controller](#delete-content-field---json-controller)
-    + [Request Example(s)](#request-example-s--10)
-    + [Request Parameters](#request-parameters-10)
-    + [Response Example(s)](#response-example-s--10)
-      - [`204 No Content`](#-204-no-content--2)
-      - [`404 Not Found`](#-404-not-found--5)
-  * [Get content field - JSON controller](#get-content-field---json-controller)
-    + [Request Example(s)](#request-example-s--11)
-    + [Request Parameters](#request-parameters-11)
-    + [Response Example(s)](#response-example-s--11)
-      - [`200 OK`](#-200-ok--5)
-  * [Store content datum - JSON controller](#store-content-datum---json-controller)
-    + [Request Example(s)](#request-example-s--12)
-    + [Request Parameters](#request-parameters-12)
-    + [Response Example(s)](#response-example-s--12)
-      - [`200 OK`](#-200-ok--6)
-  * [Update content datum - JSON controller](#update-content-datum---json-controller)
-    + [Request Example(s)](#request-example-s--13)
-    + [Request Parameters](#request-parameters-13)
-    + [Response Example(s)](#response-example-s--13)
-      - [`201 OK`](#-201-ok--3)
-      - [`404 Not Found`](#-404-not-found--6)
-  * [Delete content datum - JSON controller](#delete-content-datum---json-controller)
-    + [Request Example(s)](#request-example-s--14)
-    + [Request Parameters](#request-parameters-14)
-    + [Response Example(s)](#response-example-s--14)
-      - [`204 No Content`](#-204-no-content--3)
-      - [`404 Not Found`](#-404-not-found--7)
-  * [Store content hierarchy - JSON controller](#store-content-hierarchy---json-controller)
-    + [Request Example(s)](#request-example-s--15)
-    + [Request Parameters](#request-parameters-15)
-    + [Response Example(s)](#response-example-s--15)
-      - [`200 OK`](#-200-ok--7)
-  * [Change child position in content hierarchy - JSON controller](#change-child-position-in-content-hierarchy---json-controller)
-    + [Request Example(s)](#request-example-s--16)
-    + [Request Parameters](#request-parameters-16)
-    + [Response Example(s)](#response-example-s--16)
-      - [`201 OK`](#-201-ok--4)
-      - [`404 Not Found`](#-404-not-found--8)
-  * [Delete child from content hierarchy - JSON controller](#delete-child-from-content-hierarchy---json-controller)
-    + [Request Example(s)](#request-example-s--17)
-    + [Request Parameters](#request-parameters-17)
-    + [Response Example(s)](#response-example-s--17)
-      - [`204 No Content`](#-204-no-content--4)
-  * [Start authenticated user progress on content - JSON controller](#start-authenticated-user-progress-on-content---json-controller)
-    + [Request Example(s)](#request-example-s--18)
-    + [Request Parameters](#request-parameters-18)
-    + [Response Example(s)](#response-example-s--18)
-      - [`200 OK`](#-200-ok--8)
-  * [Save authenticated user progress on content - JSON controller](#save-authenticated-user-progress-on-content---json-controller)
-    + [Request Example(s)](#request-example-s--19)
-    + [Request Parameters](#request-parameters-19)
-    + [Response Example(s)](#response-example-s--19)
-      - [`201 OK`](#-201-ok--5)
-  * [Reset authenticated user progress on content - JSON controller](#reset-authenticated-user-progress-on-content---json-controller)
-    + [Request Example(s)](#request-example-s--20)
-    + [Request Parameters](#request-parameters-20)
-    + [Response Example(s)](#response-example-s--20)
-      - [`201 OK`](#-201-ok--6)
-  * [Complete authenticated user progress on content - JSON controller](#complete-authenticated-user-progress-on-content---json-controller)
-    + [Request Example(s)](#request-example-s--21)
-    + [Request Parameters](#request-parameters-21)
-    + [Response Example(s)](#response-example-s--21)
-      - [`201 OK`](#-201-ok--7)
+- [API endpoints](README-API.md#api-endpoints)
+  * [Get content - JSON controller](README-API.md#get-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s-)
+    + [Request Parameters](README-API.md#request-parameters)
+    + [Response Example(s)](README-API.md#response-example-s-)
+  * [Get contents based on ids - JSON controller](README-API.md#get-contents-based-on-ids---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--1)
+    + [Request Parameters](README-API.md#request-parameters-1)
+    + [Response Example(s)](README-API.md#response-example-s--1)
+  * [Get contents that are childrens of the content id - JSON controller](README-API.md#get-contents-that-are-childrens-of-the-content-id---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--2)
+    + [Request Parameters](README-API.md#request-parameters-2)
+    + [Response Example(s)](README-API.md#response-example-s--2)
+  * [Filter contents  - JSON controller](README-API.md#filter-contents----json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--3)
+    + [Request Parameters](README-API.md#request-parameters-3)
+    + [Response Example(s)](README-API.md#response-example-s--3)
+  * [Store content - JSON controller](README-API.md#store-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--4)
+    + [Request Parameters](README-API.md#request-parameters-4)
+    + [Response Example(s)](README-API.md#response-example-s--4)
+  * [Update content - JSON controller](README-API.md#update-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--5)
+    + [Request Parameters](README-API.md#request-parameters-5)
+    + [Response Example(s)](README-API.md#response-example-s--5)
+  * [Delete content - JSON controller](README-API.md#delete-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--6)
+    + [Request Parameters](README-API.md#request-parameters-6)
+    + [Response Example(s)](README-API.md#response-example-s--6)
+  * [Soft delete content - JSON controller](README-API.md#soft-delete-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--7)
+    + [Request Parameters](README-API.md#request-parameters-7)
+    + [Response Example(s)](README-API.md#response-example-s--7)
+  * [Configure Route Options - JSON controller](README-API.md#configure-route-options---json-controller)
+  * [Store content field - JSON controller](README-API.md#store-content-field---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--8)
+    + [Request Parameters](README-API.md#request-parameters-8)
+    + [Response Example(s)](README-API.md#response-example-s--8)
+  * [Update content field - JSON controller](README-API.md#update-content-field---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--9)
+    + [Request Parameters](README-API.md#request-parameters-9)
+    + [Response Example(s)](README-API.md#response-example-s--9)
+  * [Delete content field - JSON controller](README-API.md#delete-content-field---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--10)
+    + [Request Parameters](README-API.md#request-parameters-10)
+    + [Response Example(s)](README-API.md#response-example-s--10)
+  * [Get content field - JSON controller](README-API.md#get-content-field---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--11)
+    + [Request Parameters](README-API.md#request-parameters-11)
+    + [Response Example(s)](README-API.md#response-example-s--11)
+  * [Store content datum - JSON controller](README-API.md#store-content-datum---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--12)
+    + [Request Parameters](README-API.md#request-parameters-12)
+    + [Response Example(s)](README-API.md#response-example-s--12)
+  * [Update content datum - JSON controller](README-API.md#update-content-datum---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--13)
+    + [Request Parameters](README-API.md#request-parameters-13)
+    + [Response Example(s)](README-API.md#response-example-s--13)
+  * [Delete content datum - JSON controller](README-API.md#delete-content-datum---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--14)
+    + [Request Parameters](README-API.md#request-parameters-14)
+    + [Response Example(s)](README-API.md#response-example-s--14)
+  * [Store content hierarchy - JSON controller](README-API.md#store-content-hierarchy---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--15)
+    + [Request Parameters](README-API.md#request-parameters-15)
+    + [Response Example(s)](README-API.md#response-example-s--15)
+  * [Change child position in content hierarchy - JSON controller](README-API.md#change-child-position-in-content-hierarchy---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--16)
+    + [Request Parameters](README-API.md#request-parameters-16)
+    + [Response Example(s)](README-API.md#response-example-s--16)
+  * [Delete child from content hierarchy - JSON controller](README-API.md#delete-child-from-content-hierarchy---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--17)
+    + [Request Parameters](README-API.md#request-parameters-17)
+    + [Response Example(s)](README-API.md#response-example-s--17)
+  * [Start authenticated user progress on content - JSON controller](README-API.md#start-authenticated-user-progress-on-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--18)
+    + [Request Parameters](README-API.md#request-parameters-18)
+    + [Response Example(s)](README-API.md#response-example-s--18)
+  * [Save authenticated user progress on content - JSON controller](README-API.md#save-authenticated-user-progress-on-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--19)
+    + [Request Parameters](README-API.md#request-parameters-19)
+    + [Response Example(s)](README-API.md#response-example-s--19)
+  * [Reset authenticated user progress on content - JSON controller](README-API.md#reset-authenticated-user-progress-on-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--20)
+    + [Request Parameters](README-API.md#request-parameters-20)
+    + [Response Example(s)](README-API.md#response-example-s--20)
+  * [Complete authenticated user progress on content - JSON controller](README-API.md#complete-authenticated-user-progress-on-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--21)
+    + [Request Parameters](README-API.md#request-parameters-21)
+    + [Response Example(s)](README-API.md#response-example-s--21)
 
 <!-- ecotrust-canada.github.io/markdown-toc -->
 
@@ -169,7 +137,7 @@ path , id , yes ,  , Id of the content you want to pull
 
 ### Response Example(s)
 
-#### `201 OK`
+`201 OK`
 
 ```json
 
@@ -192,7 +160,7 @@ path , id , yes ,  , Id of the content you want to pull
 
 ```
 
-#### `404 Not Found`
+`404 Not Found`
 ```json
 
 {
@@ -250,7 +218,7 @@ query , ids , yes ,  , A comma separated string of the ids you want to pull.
 
 ### Response Example(s)
 
-#### `200 OK`
+`200 OK`
 
 ```json
 
@@ -318,7 +286,7 @@ query , id , yes ,  , The parent content id you want to pull content for.
 
 ### Response Example(s)
 
-#### `200 OK`
+`200 OK`
 
 ```json
 
@@ -451,7 +419,7 @@ query , filter[included_user_playlists] , no , [] , Contents that are in any of 
 
 ### Response Example(s)
 
-#### `200 OK`
+`200 OK`
 
 ```json
 
@@ -710,7 +678,7 @@ body , parent_id , no,  , Id of the parent content you want to make this content
 
 ### Response Example(s)
 
-#### `200 OK`
+`200 OK`
 
 ```json
 
@@ -791,7 +759,7 @@ body , parent_id , no,  , Id of the parent content you want to make this content
 
 ### Response Example(s)
 
-#### `201 OK`
+`201 OK`
 
 ```json
 
@@ -809,7 +777,7 @@ body , parent_id , no,  , Id of the parent content you want to make this content
 }
 
 ```
-#### `404 Not Found`
+`404 Not Found`
 
 ```json
 {
@@ -871,9 +839,9 @@ path , id , yes,  , Id of the content you want to delete.
 
 ### Response Example(s)
 
-#### `204 No Content`  
+`204 No Content`  
 
-#### `404 Not Found`
+`404 Not Found`
 
 ```json
 {
@@ -933,9 +901,9 @@ path , id , yes,  , Id of the content you want to mark as deleted.
 
 ### Response Example(s)
 
-#### `204 No Content`  
+`204 No Content`  
 
-#### `404 Not Found`
+`404 Not Found`
 
 ```json
 {
@@ -1012,7 +980,7 @@ body , type , no , string , The type of field this is. Options are 'string' 'int
 
 ### Response Example(s)
 
-#### `200 OK`
+`200 OK`
 
 ```json
 
@@ -1082,7 +1050,7 @@ body , type , no , string , The type of field this is. Options are 'string' 'int
 
 ### Response Example(s)
 
-#### `201 OK`
+`201 OK`
 
 ```json
 
@@ -1095,7 +1063,7 @@ body , type , no , string , The type of field this is. Options are 'string' 'int
 }
 
 ```
-#### `404 Not Found`
+`404 Not Found`
 
 ```json
 {
@@ -1153,9 +1121,9 @@ path , id , yes,  , Id of the content field you want to delete.
 
 ### Response Example(s)
 
-#### `204 No Content`  
+`204 No Content`  
 
-#### `404 Not Found`
+`404 Not Found`
 
 ```json
 {
@@ -1212,7 +1180,7 @@ path , id , yes ,  , Id of the content field you want to pull
 
 ### Response Example(s)
 
-#### `200 OK`
+`200 OK`
 
 ```json
 {
@@ -1285,7 +1253,7 @@ body , position , no , 1 , The position of this datum relative to other datum wi
 
 ### Response Example(s)
 
-#### `200 OK`
+`200 OK`
 
 ```json
 
@@ -1352,7 +1320,7 @@ body , position , no , 1 , The position of this datum relative to other datum wi
 
 ### Response Example(s)
 
-#### `201 OK`
+`201 OK`
 
 ```json
 {
@@ -1363,7 +1331,7 @@ body , position , no , 1 , The position of this datum relative to other datum wi
 }
 
 ```
-#### `404 Not Found`
+`404 Not Found`
 
 ```json
 {
@@ -1421,9 +1389,9 @@ path , id , yes,  , Id of the content datum you want to delete.
 
 ### Response Example(s)
 
-#### `204 No Content`  
+`204 No Content`  
 
-#### `404 Not Found`
+`404 Not Found`
 
 ```json
 {
@@ -1488,7 +1456,7 @@ body , child_position , no , null , The position relative to the other children 
 
 ### Response Example(s)
 
-#### `200 OK`
+`200 OK`
 
 ```json
 
@@ -1553,7 +1521,7 @@ body , child_position , yes , null , The position relative to the other children
 
 ### Response Example(s)
 
-#### `201 OK`
+`201 OK`
 
 ```json
 {
@@ -1568,7 +1536,7 @@ body , child_position , yes , null , The position relative to the other children
 }
 
 ```
-#### `404 Not Found`
+`404 Not Found`
 
 ```json
 {
@@ -1628,7 +1596,7 @@ path , child_id , yes, Id of the child that should be removed from the hierarchy
 
 ### Response Example(s)
 
-#### `204 No Content`  
+`204 No Content`  
 
 
 Start authenticated user progress on content - JSON controller
@@ -1675,7 +1643,7 @@ body , content_id , yes , The content id you want to start.
 
 ### Response Example(s)
 
-#### `200 OK`
+`200 OK`
 
 ```json
 
@@ -1736,7 +1704,7 @@ body , progress_percent , yes , The progress percent.
 
 ### Response Example(s)
 
-#### `201 OK`
+`201 OK`
 
 ```json
 
@@ -1794,7 +1762,7 @@ body , content_id , yes , The content id on which we reset the user progress.
 
 ### Response Example(s)
 
-#### `201 OK`
+`201 OK`
 
 ```json
 
@@ -1852,7 +1820,7 @@ body , content_id , yes , The content id on which we complete the user progress.
 
 ### Response Example(s)
 
-#### `201 OK`
+`201 OK`
 
 ```json
 
