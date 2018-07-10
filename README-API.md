@@ -138,7 +138,7 @@ path , id , yes ,  , Id of the content you want to pull
 ### Response Example(s)
 
 
-`201 OK`
+```201 OK```
 
 ```json
 
@@ -161,7 +161,7 @@ path , id , yes ,  , Id of the content you want to pull
 
 ```
 
-`404 Not Found`
+```404 Not Found```
 ```json
 
 {
@@ -219,7 +219,7 @@ query , ids , yes ,  , A comma separated string of the ids you want to pull.
 
 ### Response Example(s)
 
-`200 OK`
+```200 OK```
 
 ```json
 
@@ -287,7 +287,7 @@ query , id , yes ,  , The parent content id you want to pull content for.
 
 ### Response Example(s)
 
-`200 OK`
+```200 OK```
 
 ```json
 
@@ -420,7 +420,7 @@ query , filter[included_user_playlists] , no , [] , Contents that are in any of 
 
 ### Response Example(s)
 
-`200 OK`
+```200 OK```
 
 ```json
 
@@ -679,7 +679,7 @@ body , parent_id , no,  , Id of the parent content you want to make this content
 
 ### Response Example(s)
 
-`200 OK`
+```200 OK```
 
 ```json
 
@@ -760,7 +760,7 @@ body , parent_id , no,  , Id of the parent content you want to make this content
 
 ### Response Example(s)
 
-`201 OK`
+```201 OK```
 
 ```json
 
@@ -778,7 +778,7 @@ body , parent_id , no,  , Id of the parent content you want to make this content
 }
 
 ```
-`404 Not Found`
+```404 Not Found```
 
 ```json
 {
@@ -840,9 +840,9 @@ path , id , yes,  , Id of the content you want to delete.
 
 ### Response Example(s)
 
-`204 No Content`  
+```204 No Content```  
 
-`404 Not Found`
+```404 Not Found```
 
 ```json
 {
@@ -902,9 +902,9 @@ path , id , yes,  , Id of the content you want to mark as deleted.
 
 ### Response Example(s)
 
-`204 No Content`  
+```204 No Content``` 
 
-`404 Not Found`
+```404 Not Found```
 
 ```json
 {
@@ -981,7 +981,7 @@ body , type , no , string , The type of field this is. Options are 'string' 'int
 
 ### Response Example(s)
 
-`200 OK`
+```200 OK```
 
 ```json
 
@@ -1051,7 +1051,7 @@ body , type , no , string , The type of field this is. Options are 'string' 'int
 
 ### Response Example(s)
 
-`201 OK`
+```201 OK```
 
 ```json
 
@@ -1122,9 +1122,9 @@ path , id , yes,  , Id of the content field you want to delete.
 
 ### Response Example(s)
 
-`204 No Content`  
+```204 No Content```  
 
-`404 Not Found`
+```404 Not Found```
 
 ```json
 {
@@ -1181,7 +1181,7 @@ path , id , yes ,  , Id of the content field you want to pull
 
 ### Response Example(s)
 
-`200 OK`
+```200 OK```
 
 ```json
 {
@@ -1254,7 +1254,7 @@ body , position , no , 1 , The position of this datum relative to other datum wi
 
 ### Response Example(s)
 
-`200 OK`
+```200 OK```
 
 ```json
 
@@ -1321,7 +1321,7 @@ body , position , no , 1 , The position of this datum relative to other datum wi
 
 ### Response Example(s)
 
-`201 OK`
+```201 OK```
 
 ```json
 {
@@ -1332,7 +1332,7 @@ body , position , no , 1 , The position of this datum relative to other datum wi
 }
 
 ```
-`404 Not Found`
+```404 Not Found```
 
 ```json
 {
@@ -1390,9 +1390,9 @@ path , id , yes,  , Id of the content datum you want to delete.
 
 ### Response Example(s)
 
-`204 No Content`  
+```204 No Content```  
 
-`404 Not Found`
+```404 Not Found```
 
 ```json
 {
@@ -1457,7 +1457,7 @@ body , child_position , no , null , The position relative to the other children 
 
 ### Response Example(s)
 
-`200 OK`
+```200 OK```
 
 ```json
 
@@ -1522,7 +1522,7 @@ body , child_position , yes , null , The position relative to the other children
 
 ### Response Example(s)
 
-`201 OK`
+```201 OK```
 
 ```json
 {
@@ -1537,7 +1537,7 @@ body , child_position , yes , null , The position relative to the other children
 }
 
 ```
-`404 Not Found`
+```404 Not Found```
 
 ```json
 {
@@ -1597,7 +1597,7 @@ path , child_id , yes, Id of the child that should be removed from the hierarchy
 
 ### Response Example(s)
 
-`204 No Content`  
+```204 No Content```  
 
 
 Start authenticated user progress on content - JSON controller
@@ -1644,7 +1644,7 @@ body , content_id , yes , The content id you want to start.
 
 ### Response Example(s)
 
-`200 OK`
+```200 OK```
 
 ```json
 
@@ -1705,7 +1705,7 @@ body , progress_percent , yes , The progress percent.
 
 ### Response Example(s)
 
-`201 OK`
+```201 OK```
 
 ```json
 
@@ -1763,7 +1763,7 @@ body , content_id , yes , The content id on which we reset the user progress.
 
 ### Response Example(s)
 
-`201 OK`
+```201 OK```
 
 ```json
 
@@ -1821,7 +1821,7 @@ body , content_id , yes , The content id on which we complete the user progress.
 
 ### Response Example(s)
 
-`201 OK`
+```201 OK```
 
 ```json
 
