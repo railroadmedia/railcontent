@@ -100,6 +100,26 @@
     + [Request Parameters](#request-parameters-17)
     + [Response Example(s)](#response-example-s--17)
       - [`204 No Content`](#-204-no-content--4)
+  * [Start authenticated user progress on content - JSON controller](#start-authenticated-user-progress-on-content---json-controller)
+    + [Request Example(s)](#request-example-s--18)
+    + [Request Parameters](#request-parameters-18)
+    + [Response Example(s)](#response-example-s--18)
+      - [`200 OK`](#-200-ok--8)
+  * [Save authenticated user progress on content - JSON controller](#save-authenticated-user-progress-on-content---json-controller)
+    + [Request Example(s)](#request-example-s--19)
+    + [Request Parameters](#request-parameters-19)
+    + [Response Example(s)](#response-example-s--19)
+      - [`201 OK`](#-201-ok--5)
+  * [Reset authenticated user progress on content - JSON controller](#reset-authenticated-user-progress-on-content---json-controller)
+    + [Request Example(s)](#request-example-s--20)
+    + [Request Parameters](#request-parameters-20)
+    + [Response Example(s)](#response-example-s--20)
+      - [`201 OK`](#-201-ok--6)
+  * [Complete authenticated user progress on content - JSON controller](#complete-authenticated-user-progress-on-content---json-controller)
+    + [Request Example(s)](#request-example-s--21)
+    + [Request Parameters](#request-parameters-21)
+    + [Response Example(s)](#response-example-s--21)
+      - [`201 OK`](#-201-ok--7)
 
 <!-- ecotrust-canada.github.io/markdown-toc -->
 
@@ -1609,5 +1629,237 @@ path , child_id , yes, Id of the child that should be removed from the hierarchy
 ### Response Example(s)
 
 #### `204 No Content`  
+
+
+Start authenticated user progress on content - JSON controller
+--------------------------------------
+
+`{ PUT /start }`
+
+Start authenticated user progress on content. Please see more details about content progress in [Progress-Bubbling](https://github.com/railroadmedia/railcontent/tree/user-permission#progress-bubbling) section.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/start',
+    type: 'put'
+  	data: {content_id: 2} 
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key         |  required |  description\|notes                | 
+|-----------------|--------------|-----------|------------------------------------| 
+| body            |  content_id  |  yes      |  The content id you want to start. | 
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, description\|notes
+body , content_id , yes , The content id you want to start.
+-->
+
+
+### Response Example(s)
+
+#### `200 OK`
+
+```json
+
+{
+  "status":"ok",
+  "code":200,
+  "results":true
+}
+
+```
+
+
+
+Save authenticated user progress on content - JSON controller
+--------------------------------------
+
+`{ PUT /progress }`
+
+Save the progress on a content for the authenticated user.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/progress',
+    type: 'put'
+  	data: {content_id: 2, progress_percent: 30} 
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key               |  required |  description\|notes                                 | 
+|-----------------|--------------------|-----------|-----------------------------------------------------| 
+| body            |  content_id        |  yes      |  The content id on which we save the user progress. | 
+| body            |  progress_percent  |  yes      |  The progress percent.                              | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, description\|notes
+body , content_id , yes , The content id on which we save the user progress.
+body , progress_percent , yes , The progress percent.  
+-->
+
+
+### Response Example(s)
+
+#### `201 OK`
+
+```json
+
+{
+  "status":"ok",
+  "code":201,
+  "results":true
+}
+
+```
+
+Reset authenticated user progress on content - JSON controller
+--------------------------------------
+
+`{ PUT /reset }`
+
+Delete the content progress for the authenticated user.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/reset',
+    type: 'put'
+  	data: {content_id: 2} 
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key         |  required |  description\|notes                                  | 
+|-----------------|--------------|-----------|------------------------------------------------------| 
+| body            |  content_id  |  yes      |  The content id on which we reset the user progress. | 
+
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, description\|notes
+body , content_id , yes , The content id on which we reset the user progress. 
+-->
+
+
+### Response Example(s)
+
+#### `201 OK`
+
+```json
+
+{
+  "status":"ok",
+  "code":201,
+  "results":true
+}
+
+```
+
+Complete authenticated user progress on content - JSON controller
+--------------------------------------
+
+`{ PUT /complete }`
+
+Set content as complete for the authenticated user.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/complete',
+    type: 'put'
+  	data: {content_id: 2} 
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key         |  required |  description\|notes                                  | 
+|-----------------|--------------|-----------|------------------------------------------------------| 
+| body            |  content_id  |  yes      |  The content id on which we complete the user progress. | 
+
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, description\|notes
+body , content_id , yes , The content id on which we complete the user progress. 
+-->
+
+
+### Response Example(s)
+
+#### `201 OK`
+
+```json
+
+{
+  "status":"ok",
+  "code":201,
+  "results":true
+}
 
 ```
