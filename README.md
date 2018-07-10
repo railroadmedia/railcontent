@@ -2,9 +2,6 @@
 Railcontent
 ========================================================================================================================
 
-[API]: https://github.com/railroadmedia/railcontent/blob/user-permission/README-API.md
-
-
 Data first simple CMS.
 
   * [Installation, Configuration, Use](#installation--configuration--use)
@@ -125,74 +122,91 @@ Data first simple CMS.
     + [create](#create-2)
     + [update](#update-2)
     + [delete](#delete-2)
-  * [Get content - JSON controller](#get-content---json-controller)
-    + [Request Example(s)](#request-example-s-)
-    + [Request Parameters](#request-parameters)
-    + [Response Example(s)](#response-example-s-)
-      - [`201 OK`](#-201-ok-)
-      - [`404 Not Found`](#-404-not-found-)
 - [API endpoints](README-API.md#api-endpoints)
+  * [Get content - JSON controller](README-API.md#get-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s-)
+    + [Request Parameters](README-API.md#request-parameters)
+    + [Response Example(s)](README-API.md#response-example-s-)
+      - [`201 OK`](README-API.md#-201-ok-)
+      - [`404 Not Found`](README-API.md#-404-not-found-)
   * [Get contents based on ids - JSON controller](README-API.md#get-contents-based-on-ids---json-controller)
     + [Request Example(s)](README-API.md#request-example-s--1)
     + [Request Parameters](README-API.md#request-parameters-1)
     + [Response Example(s)](README-API.md#response-example-s--1)
       - [`200 OK`](README-API.md#-200-ok-)
-  * [Get contents that are childrens of the content id - JSON controller](#get-contents-that-are-childrens-of-the-content-id---json-controller)
-    + [Request Example(s)](#request-example-s--2)
-    + [Request Parameters](#request-parameters-2)
-    + [Response Example(s)](#response-example-s--2)
-      - [`200 OK`](#-200-ok--1)
-  * [Filter contents  - JSON controller](#filter-contents----json-controller)
-    + [Request Example(s)](#request-example-s--3)
-    + [Request Parameters](#request-parameters-3)
-    + [Response Example(s)](#response-example-s--3)
-      - [`200 OK`](#-200-ok--2)
-  * [Store content - JSON controller](#store-content---json-controller)
-    + [Request Example(s)](#request-example-s--4)
-    + [Request Parameters](#request-parameters-4)
-    + [Response Example(s)](#response-example-s--4)
-      - [`200 OK`](#-200-ok--3)
-  * [Update content - JSON controller](#update-content---json-controller)
-    + [Request Example(s)](#request-example-s--5)
-    + [Request Parameters](#request-parameters-5)
-    + [Response Example(s)](#response-example-s--5)
-      - [`201 OK`](#-201-ok--1)
-      - [`404 Not Found`](#-404-not-found--1)
-  * [Delete content - JSON controller](#delete-content---json-controller)
-    + [Request Example(s)](#request-example-s--6)
-    + [Request Parameters](#request-parameters-6)
-    + [Response Example(s)](#response-example-s--6)
-      - [`204 No Content`](#-204-no-content-)
-      - [`404 Not Found`](#-404-not-found--2)
-  * [Soft delete content - JSON controller](#soft-delete-content---json-controller)
-    + [Request Example(s)](#request-example-s--7)
-    + [Request Parameters](#request-parameters-7)
-    + [Response Example(s)](#response-example-s--7)
-      - [`204 No Content`](#-204-no-content--1)
-      - [`404 Not Found`](#-404-not-found--3)
-  * [Configure Route Options - JSON controller](#configure-route-options---json-controller)
-  * [Store content field - JSON controller](#store-content-field---json-controller)
-    + [Request Example(s)](#request-example-s--8)
-    + [Request Parameters](#request-parameters-8)
-    + [Response Example(s)](#response-example-s--8)
-      - [`200 OK`](#-200-ok--4)
-  * [Update content field - JSON controller](#update-content-field---json-controller)
-    + [Request Example(s)](#request-example-s--9)
-    + [Request Parameters](#request-parameters-9)
-    + [Response Example(s)](#response-example-s--9)
-      - [`201 OK`](#-201-ok--2)
-      - [`404 Not Found`](#-404-not-found--4)
-  * [Delete content field - JSON controller](#delete-content-field---json-controller)
-    + [Request Example(s)](#request-example-s--10)
-    + [Request Parameters](#request-parameters-10)
-    + [Response Example(s)](#response-example-s--10)
-      - [`204 No Content`](#-204-no-content--2)
-      - [`404 Not Found`](#-404-not-found--5)
-  * [Get content field - JSON controller](#get-content-field---json-controller)
-    + [Request Example(s)](#request-example-s--11)
-    + [Request Parameters](#request-parameters-11)
-    + [Response Example(s)](#response-example-s--11)
-      - [`200 OK`](#-200-ok--5)
+  * [Get contents that are childrens of the content id - JSON controller](README-API.md#get-contents-that-are-childrens-of-the-content-id---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--2)
+    + [Request Parameters](README-API.md#request-parameters-2)
+    + [Response Example(s)](README-API.md#response-example-s--2)
+      - [`200 OK`](README-API.md#-200-ok--1)
+  * [Filter contents  - JSON controller](README-API.md#filter-contents----json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--3)
+    + [Request Parameters](README-API.md#request-parameters-3)
+    + [Response Example(s)](README-API.md#response-example-s--3)
+      - [`200 OK`](README-API.md#-200-ok--2)
+  * [Store content - JSON controller](README-API.md#store-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--4)
+    + [Request Parameters](README-API.md#request-parameters-4)
+    + [Response Example(s)](README-API.md#response-example-s--4)
+      - [`200 OK`](README-API.md#-200-ok--3)
+  * [Update content - JSON controller](README-API.md#update-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--5)
+    + [Request Parameters](README-API.md#request-parameters-5)
+    + [Response Example(s)](README-API.md#response-example-s--5)
+      - [`201 OK`](README-API.md#-201-ok--1)
+      - [`404 Not Found`](README-API.md#-404-not-found--1)
+  * [Delete content - JSON controller](README-API.md#delete-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--6)
+    + [Request Parameters](README-API.md#request-parameters-6)
+    + [Response Example(s)](README-API.md#response-example-s--6)
+      - [`204 No Content`](README-API.md#-204-no-content-)
+      - [`404 Not Found`](README-API.md#-404-not-found--2)
+  * [Soft delete content - JSON controller](README-API.md#soft-delete-content---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--7)
+    + [Request Parameters](README-API.md#request-parameters-7)
+    + [Response Example(s)](README-API.md#response-example-s--7)
+      - [`204 No Content`](README-API.md#-204-no-content--1)
+      - [`404 Not Found`](README-API.md#-404-not-found--3)
+  * [Configure Route Options - JSON controller](README-API.md#configure-route-options---json-controller)
+  * [Store content field - JSON controller](README-API.md#store-content-field---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--8)
+    + [Request Parameters](README-API.md#request-parameters-8)
+    + [Response Example(s)](README-API.md#response-example-s--8)
+      - [`200 OK`](README-API.md#-200-ok--4)
+  * [Update content field - JSON controller](README-API.md#update-content-field---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--9)
+    + [Request Parameters](README-API.md#request-parameters-9)
+    + [Response Example(s)](README-API.md#response-example-s--9)
+      - [`201 OK`](README-API.md#-201-ok--2)
+      - [`404 Not Found`](README-API.md#-404-not-found--4)
+  * [Delete content field - JSON controller](README-API.md#delete-content-field---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--10)
+    + [Request Parameters](README-API.md#request-parameters-10)
+    + [Response Example(s)](README-API.md#response-example-s--10)
+      - [`204 No Content`](README-API.md#-204-no-content--2)
+      - [`404 Not Found`](README-API.md#-404-not-found--5)
+  * [Get content field - JSON controller](README-API.md#get-content-field---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--11)
+    + [Request Parameters](README-API.md#request-parameters-11)
+    + [Response Example(s)](README-API.md#response-example-s--11)
+      - [`200 OK`](README-API.md#-200-ok--5)
+  * [Store content datum - JSON controller](README-API.md#store-content-datum---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--12)
+    + [Request Parameters](README-API.md#request-parameters-12)
+    + [Response Example(s)](README-API.md#response-example-s--12)
+      - [`200 OK`](README-API.md#-200-ok--6)
+  * [Update content datum - JSON controller](README-API.md#update-content-datum---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--13)
+    + [Request Parameters](README-API.md#request-parameters-13)
+    + [Response Example(s)](README-API.md#response-example-s--13)
+      - [`201 OK`](README-API.md#-201-ok--3)
+      - [`404 Not Found`](README-API.md#-404-not-found--6)
+  * [Delete content datum - JSON controller](README-API.md#delete-content-datum---json-controller)
+    + [Request Example(s)](README-API.md#request-example-s--14)
+    + [Request Parameters](README-API.md#request-parameters-14)
+    + [Response Example(s)](README-API.md#response-example-s--14)
+      - [`204 No Content`](README-API.md#-204-no-content--3)
+      - [`404 Not Found`](README-API.md#-404-not-found--7)
   * [Progress-Bubbling](#progress-bubbling)
     + [Example](#example)
   * [Validation](#validation)
@@ -213,7 +227,6 @@ Data first simple CMS.
       - [Like](#like)
       - [Unlike](#unlike)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
 <!-- ecotrust-canada.github.io/markdown-toc -->
@@ -1385,6 +1398,12 @@ $contentDatum = $this->contentDatumService->get($id);
 
 
 
+
+# API endpoints
+
+
+
+
 Get content - JSON controller
 --------------------------------------
 
@@ -1464,7 +1483,7 @@ path , id , yes ,  , Id of the content you want to pull
       }
 }
 ```
-# API endpoints
+
 
 Get contents based on ids - JSON controller
 --------------------------------------
@@ -2489,6 +2508,215 @@ path , id , yes ,  , Id of the content field you want to pull
 }
 
 ```
+
+
+
+
+Store content datum - JSON controller
+--------------------------------------
+
+`{ PUT /content/datum }`
+
+Create a new content datum record based on request data and return the new created datum data in JSON format.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/datum',
+    type: 'put'
+  	data: {content_id: 3, key: 'description' value: 'very long description here'} 
+		// position will automatically be set to the end of the stack if you dont pass one in
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key         |  required |  default |  description\|notes                                                                               | 
+|-----------------|--------------|-----------|----------|---------------------------------------------------------------------------------------------------| 
+| body            |  content_id  |  yes      |          |  The content id this datum belongs to.                                                            | 
+| body            |  key         |  yes      |          |  The key of this datum; also know as the name.                                                    | 
+| body            |  value       |  yes      |          |  The value of the datum.                                                                          | 
+| body            |  position    |  no       |  1       |  The position of this datum relative to other datum with the same key under the same content id. | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+body , content_id , yes ,  , The content id this datum belongs to.
+body , key , yes ,  , The key of this datum; also know as the name.
+body , value , yes ,  , The value of the datum.
+body , position , no , 1 , The position of this datum relative to other datum with the same key under the same content id.
+-->
+
+
+### Response Example(s)
+
+#### `200 OK`
+
+```json
+
+{
+	"id":12,
+	"key":"description",
+	"value":"very long description here",
+	"position":1
+}
+
+```
+
+Update content datum - JSON controller
+--------------------------------------
+
+`{ PATCH /content/datum/{id} }`
+
+Update the content datum with the request data and return the updated datum in JSON format. 
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/datum/73',
+    type: 'patch'
+  	data: {value: 'another long description here'}
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key         |  required |  default |  description\|notes                                                                              | 
+|-----------------|--------------|-----------|----------|--------------------------------------------------------------------------------------------------| 
+| path            |  id          |  yes      |          |  Id of the datum you want to edit.                                                               | 
+| body            |  content_id  |  no       |          |  The content id this datum belongs to.                                                           | 
+| body            |  key         |  no       |          |  The key of this datum; also know as the name.                                                   | 
+| body            |  value       |  no       |          |  The value of the datum.                                                                         | 
+| body            |  position    |  no       |  1       |  The position of this datum relative to other datum with the same key under the same content id. | 
+                     | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes , , Id of the datum you want to edit.
+body , content_id , no ,  , The content id this datum belongs to.
+body , key , no ,  , The key of this datum; also know as the name.
+body , value , no ,  , The value of the datum.
+body , position , no , 1 , The position of this datum relative to other datum with the same key under the same content id.
+-->
+
+
+### Response Example(s)
+
+#### `201 OK`
+
+```json
+{
+	"id":73,
+	"key":"description",
+	"value":"another long description here",
+	"position":1
+}
+
+```
+#### `404 Not Found`
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Update failed, datum not found with id: 513"
+      }
+}
+```
+Delete content datum - JSON controller
+--------------------------------------
+
+`{ DELETE /content/datum/{id} }`
+
+Delete content datum if exists in the database. 
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/datum/2',
+    type: 'delete'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key |  required |  default |  description\|notes                    | 
+|-----------------|------|-----------|----------|----------------------------------------| 
+| path            |  id  |  yes      |          |  Id of the content datum you want to delete. | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes,  , Id of the content datum you want to delete.
+-->
+
+
+### Response Example(s)
+
+#### `204 No Content`  
+
+#### `404 Not Found`
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Delete failed, datum not found with id: 2"
+      }
+}
+```
+
 
 
 Progress-Bubbling
