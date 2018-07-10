@@ -142,6 +142,30 @@ Data first simple CMS.
   * [Request Parameters](#request-parameters-3)
   * [Response Example(s)](#response-example-s--3)
     + [`200 OK`](#-200-ok--2)
+- [Store content - JSON controller](#store-content---json-controller)
+  * [Request Example(s)](#request-example-s--4)
+  * [Request Parameters](#request-parameters-4)
+  * [Response Example(s)](#response-example-s--4)
+    + [`200 OK`](#-200-ok--3)
+- [Update content - JSON controller](#update-content---json-controller)
+  * [Request Example(s)](#request-example-s--5)
+  * [Request Parameters](#request-parameters-5)
+  * [Response Example(s)](#response-example-s--5)
+    + [`201 OK`](#-201-ok--1)
+    + [`404 Not Found`](#-404-not-found--1)
+- [Delete content - JSON controller](#delete-content---json-controller)
+  * [Request Example(s)](#request-example-s--6)
+  * [Request Parameters](#request-parameters-6)
+  * [Response Example(s)](#response-example-s--6)
+    + [`204 No Content`](#-204-no-content-)
+    + [`404 Not Found`](#-404-not-found--2)
+- [Soft delete content - JSON controller](#soft-delete-content---json-controller)
+  * [Request Example(s)](#request-example-s--7)
+  * [Request Parameters](#request-parameters-7)
+  * [Response Example(s)](#response-example-s--7)
+    + [`204 No Content`](#-204-no-content--1)
+    + [`404 Not Found`](#-404-not-found--3)
+- [Configure Route Options - JSON controller](#configure-route-options---json-controller)
 - [Progress-Bubbling](#progress-bubbling)
   * [Example](#example)
 - [Validation](#validation)
@@ -1850,9 +1874,318 @@ query , filter[included_user_playlists] , no , [] , Contents that are in any of 
         ]
     }
 }
+```
 
+Store content - JSON controller
+--------------------------------------
+
+`{ PUT /content }`
+
+Create a new content based on request data and return the new created content in JSON format.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content',
+    type: 'put'
+  	data: {slug: 'test-slug', type: 'course-lesson' status: 'draft'} 
+		// language, brand, will be set to internal defaults
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
 
 ```
+
+### Request Parameters
+
+| path\|query\|body |  key           |  required |  default                |  description\|notes                                                 | 
+|-----------------|----------------|-----------|-------------------------|---------------------------------------------------------------------| 
+| body            |  slug          |  yes      |                         |  Slug of the content                                                | 
+| body            |  type          |  yes      |                         |  Type of content. Examples: 'recording' 'course' 'course-lesson'    | 
+| body            |  status        |  yes      |                         |  Can be 'draft' 'published' 'archived'                              | 
+| body            |  language      |  no       |  en-US                  |  Language locale                                                    | 
+| body            |  brand         |  no       |  brand from config file |  'drumeo' 'pianote' etc                                             | 
+| body            |  user_id       |  no       |  null                   |                                                                     | 
+| body            |  published_on  |  no       |  now                    |  The published on date                                              | 
+| body            |  created_on    |  no       |  now                    |  The creation date                                                  | 
+| body            |  parent_id     |  no       |                         |  Id of the parent content you want to make this content a child of. | 
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+body , slug , yes ,  , Slug of the content
+body , type , yes ,  , Type of content. Examples: 'recording' 'course' 'course-lesson'
+body , status , yes ,  , Can be 'draft' 'published' 'archived'
+body , language , no , en-US , Language locale
+body , brand , no , brand from config file, 'drumeo' 'pianote' etc
+body , user_id , no , null ,
+body , published_on , no , now , The published on date
+body , created_on , no , now , The creation date
+body , parent_id , no,  , Id of the parent content you want to make this content a child of.
+-->
+
+
+### Response Example(s)
+
+#### `200 OK`
+
+```json
+
+{
+	"id":1075,
+	"slug":"test-slug",
+	"type":"course-lesson",
+	"status":"draft",
+	"language":"en-US",
+	"brand":"drumeo",
+	"user_id:null,
+	"published_on":null,
+	"created_on":"2015-09-28 16:25:05"
+	"archived_on":null
+}
+
+```
+
+Update content - JSON controller
+--------------------------------------
+
+`{ PATCH /content/{id} }`
+
+Update a content with the request data and return the updated content in JSON format. 
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/17',
+    type: 'patch'
+  	data: {slug: 'my-new-slug', status: 'published'}
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key           |  required |  default                |  description\|notes                                                  | 
+|-----------------|----------------|-----------|-------------------------|----------------------------------------------------------------------| 
+| path            |  id            |  yes      |                         |  Id of the content you want to edit.                                 | 
+| body            |  slug          |  yes      |                         |  New slug of the content                                             | 
+| body            |  type          |  yes      |                         |  New type of content. Examples: 'recording' 'course' 'course-lesson' | 
+| body            |  status        |  yes      |                         |  New status. Can be 'draft' 'published' 'archived'                   | 
+| body            |  language      |  no       |  en-US                  |  New language locale                                                 | 
+| body            |  brand         |  no       |  brand from config file |  New brand. Can be: 'drumeo' 'pianote' etc                           | 
+| body            |  user_id       |  no       |  null                   |                                                                      | 
+| body            |  published_on  |  no       |  now                    |  New published on date                                               | 
+| body            |  created_on    |  no       |  now                    |  New creation date                                                   | 
+| body            |  parent_id     |  no       |                         |  Id of the parent content you want to make this content a child of.  | 
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes,  , Id of the content you want to edit.
+body , slug , yes ,  , New slug of the content
+body , type , yes ,  , New type of content. Examples: 'recording' 'course' 'course-lesson'
+body , status , yes ,  , New status. Can be 'draft' 'published' 'archived'
+body , language , no , en-US , New language locale
+body , brand , no , brand from config file, New brand. Can be: 'drumeo' 'pianote' etc
+body , user_id , no , null ,
+body , published_on , no , now , New published on date
+body , created_on , no , now , New creation date
+body , parent_id , no,  , Id of the parent content you want to make this content a child of.
+-->
+
+
+### Response Example(s)
+
+#### `201 OK`
+
+```json
+
+{
+	"id":17,
+	"slug":"my-new-slug",
+	"type":"course-lesson",
+	"status":"published",
+	"language":"en-US",
+	"brand":"drumeo",
+	"user_id:null,
+	"published_on":"2015-09-28 16:25:05",
+	"created_on":"2015-09-28 16:25:05",
+	"archived_on":null
+}
+
+```
+#### `404 Not Found`
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Update failed, content not found with id: 17"
+      }
+}
+```
+
+
+Delete content - JSON controller
+--------------------------------------
+
+`{ DELETE /content/{id} }`
+
+Delete content and content related links if exists in the database. 
+
+The content related links are: links with the parent, content childrens, content fields, content datum, links with the permissions, content comments, replies and assignation and links with the playlists.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/2',
+    type: 'delete'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key |  required |  default |  description\|notes                    | 
+|-----------------|------|-----------|----------|----------------------------------------| 
+| path            |  id  |  yes      |          |  Id of the content you want to delete. | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes,  , Id of the content you want to delete.
+-->
+
+
+### Response Example(s)
+
+#### `204 No Content`  
+
+#### `404 Not Found`
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Delete failed, content not found with id: 2"
+      }
+}
+```
+
+Soft delete content - JSON controller
+--------------------------------------
+
+`{ DELETE /soft/content/{id} }`
+
+The contents are  never actually deleted out of the database, it's only mark as deleted: the status it's set as `deleted`. 
+
+If a content it's `soft deleted` the API will automatically filter it out from the pull request unless the status set on the pull requests explicitly state otherwise.  
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/soft/content/2',
+    type: 'delete'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key |  required |  default |  description\|notes                             | 
+|-----------------|------|-----------|----------|-------------------------------------------------| 
+| path            |  id  |  yes      |          |  Id of the content you want to mark as deleted. | 
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes,  , Id of the content you want to mark as deleted.
+-->
+
+
+### Response Example(s)
+
+#### `204 No Content`  
+
+#### `404 Not Found`
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Delete failed, content not found with id: 2"
+      }
+}
+```
+
+Configure Route Options - JSON controller
+--------------------------------------
+
+`{ OPTIONS /content }`
+
+There are a number of route options that can be set on each route: allow `POST, PATCH, GET, OPTIONS, PUT, DELETE` methods, allow `X-Requested-With, content-type` headers.
+
+
+
 
 Progress-Bubbling
 ------------------------------------------------------------------------------------------------------------------------
