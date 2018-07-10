@@ -2,189 +2,219 @@
 Railcontent
 ========================================================================================================================
 
+[API]: https://github.com/railroadmedia/railcontent/blob/user-permission/README-API.md
+
+
 Data first simple CMS.
 
-- [Installation, Configuration, Use](#installation--configuration--use)
-  * [Installation](#installation)
-  * [Configuration](#configuration)
-- [ContentService](#contentservice)
-  * [getById](#getbyid)
-    + [Usage Example(s)](#usage-example-s-)
-    + [Parameters](#parameters)
-    + [Responses](#responses)
-  * [getByIds](#getbyids)
-    + [Usage Example(s)](#usage-example-s--1)
-    + [Parameters](#parameters-1)
-    + [Responses](#responses-1)
-  * [getAllByType](#getallbytype)
-    + [Usage Example(s)](#usage-example-s--2)
-    + [Parameters](#parameters-2)
-    + [Responses](#responses-2)
-  * [getWhereTypeInAndStatusAndField](#getwheretypeinandstatusandfield)
-    + [Usage Example(s)](#usage-example-s--3)
-    + [Parameters](#parameters-3)
-    + [Responses](#responses-3)
-  * [getWhereTypeInAndStatusAndPublishedOnOrdered](#getwheretypeinandstatusandpublishedonordered)
-    + [Usage Example(s)](#usage-example-s--4)
-    + [Parameters](#parameters-4)
-    + [Responses](#responses-4)
-  * [getBySlugAndType](#getbyslugandtype)
-    + [Usage Example(s)](#usage-example-s--5)
-    + [Parameters](#parameters-5)
-    + [Responses](#responses-5)
-  * [getByUserIdTypeSlug](#getbyuseridtypeslug)
-    + [Usage Example(s)](#usage-example-s--6)
-    + [Parameters](#parameters-6)
-    + [Responses](#responses-6)
-  * [getByParentId](#getbyparentid)
-    + [Usage Example(s)](#usage-example-s--7)
-    + [Parameters](#parameters-7)
-    + [Responses](#responses-7)
-  * [getByParentIdWhereTypeIn](#getbyparentidwheretypein)
-    + [Usage Example(s)](#usage-example-s--8)
-    + [Parameters](#parameters-8)
-    + [Responses](#responses-8)
-  * [getByParentIds](#getbyparentids)
-    + [Usage Example(s)](#usage-example-s--9)
-    + [Parameters](#parameters-9)
-    + [Responses](#responses-9)
-  * [getByChildIdWhereType](#getbychildidwheretype)
-    + [Usage Example(s)](#usage-example-s--10)
-    + [Parameters](#parameters-10)
-    + [Responses](#responses-10)
-  * [getByChildIdsWhereType](#getbychildidswheretype)
-    + [Usage Example(s)](#usage-example-s--11)
-    + [Parameters](#parameters-11)
-    + [Responses](#responses-11)
-  * [getByChildIdWhereParentTypeIn](#getbychildidwhereparenttypein)
-    + [Usage Example(s)](#usage-example-s--12)
-    + [Parameters](#parameters-12)
-    + [Responses](#responses-12)
-  * [getPaginatedByTypeUserProgressState](#getpaginatedbytypeuserprogressstate)
-    + [Usage Example(s)](#usage-example-s--13)
-    + [Parameters](#parameters-13)
-    + [Responses](#responses-13)
-  * [getPaginatedByTypesUserProgressState](#getpaginatedbytypesuserprogressstate)
-    + [Usage Example(s)](#usage-example-s--14)
-    + [Parameters](#parameters-14)
-    + [Responses](#responses-14)
-  * [getTypeNeighbouringSiblings](#gettypeneighbouringsiblings)
-    + [Usage Example(s)](#usage-example-s--15)
-    + [Parameters](#parameters-15)
-    + [Responses](#responses-15)
-  * [getByContentFieldValuesForTypes](#getbycontentfieldvaluesfortypes)
-    + [Usage Example(s)](#usage-example-s--16)
-    + [Parameters](#parameters-16)
-    + [Responses](#responses-16)
-  * [countByTypesUserProgressState](#countbytypesuserprogressstate)
-    + [Usage Example(s)](#usage-example-s--17)
-    + [Parameters](#parameters-17)
-    + [Responses](#responses-17)
-  * [getFiltered](#getfiltered)
-    + [Usage Example(s)](#usage-example-s--18)
-    + [Parameters](#parameters-18)
-    + [Responses](#responses-18)
-  * [create](#create)
-    + [Usage Example(s)](#usage-example-s--19)
-    + [Parameters](#parameters-19)
-    + [Responses](#responses-19)
-  * [update](#update)
-    + [Usage Example(s)](#usage-example-s--20)
-    + [Parameters](#parameters-20)
-    + [Responses](#responses-20)
-  * [delete](#delete)
-    + [Usage Example(s)](#usage-example-s--21)
-    + [Parameters](#parameters-21)
-    + [Responses](#responses-21)
-  * [softDelete](#softdelete)
-    + [Usage Example(s)](#usage-example-s--22)
-    + [Parameters](#parameters-22)
-    + [Responses](#responses-22)
-  * [attachPlaylistsToContents](#attachplayliststocontents)
-    + [Usage Example(s)](#usage-example-s--23)
-    + [Parameters](#parameters-23)
-    + [Responses](#responses-23)
-- [ContentFieldService](#contentfieldservice)
-  * [get](#get)
-    + [Usage Example(s)](#usage-example-s--24)
-    + [Parameters](#parameters-24)
-    + [Responses](#responses-24)
-  * [getByKeyValueTypePosition](#getbykeyvaluetypeposition)
-  * [getByKeyValueType](#getbykeyvaluetype)
-  * [create](#create-1)
-  * [update](#update-1)
-  * [delete](#delete-1)
-- [ContentDatumService](#contentdatumservice)
-  * [get](#get-1)
-    + [Usage Example(s)](#usage-example-s--25)
-  * [getByContentIds](#getbycontentids)
-  * [create](#create-2)
-  * [update](#update-2)
-  * [delete](#delete-2)
-- [Get content - JSON controller](#get-content---json-controller)
-  * [Request Example(s)](#request-example-s-)
-  * [Request Parameters](#request-parameters)
-  * [Response Example(s)](#response-example-s-)
-    + [`201 OK`](#-201-ok-)
-    + [`404 Not Found`](#-404-not-found-)
-- [Get contents based on ids - JSON controller](#get-contents-based-on-ids---json-controller)
-  * [Request Example(s)](#request-example-s--1)
-  * [Request Parameters](#request-parameters-1)
-  * [Response Example(s)](#response-example-s--1)
-    + [`200 OK`](#-200-ok-)
-- [Get contents that are childrens of the content id - JSON controller](#get-contents-that-are-childrens-of-the-content-id---json-controller)
-  * [Request Example(s)](#request-example-s--2)
-  * [Request Parameters](#request-parameters-2)
-  * [Response Example(s)](#response-example-s--2)
-    + [`200 OK`](#-200-ok--1)
-- [Filter contents  - JSON controller](#filter-contents----json-controller)
-  * [Request Example(s)](#request-example-s--3)
-  * [Request Parameters](#request-parameters-3)
-  * [Response Example(s)](#response-example-s--3)
-    + [`200 OK`](#-200-ok--2)
-- [Store content - JSON controller](#store-content---json-controller)
-  * [Request Example(s)](#request-example-s--4)
-  * [Request Parameters](#request-parameters-4)
-  * [Response Example(s)](#response-example-s--4)
-    + [`200 OK`](#-200-ok--3)
-- [Update content - JSON controller](#update-content---json-controller)
-  * [Request Example(s)](#request-example-s--5)
-  * [Request Parameters](#request-parameters-5)
-  * [Response Example(s)](#response-example-s--5)
-    + [`201 OK`](#-201-ok--1)
-    + [`404 Not Found`](#-404-not-found--1)
-- [Delete content - JSON controller](#delete-content---json-controller)
-  * [Request Example(s)](#request-example-s--6)
-  * [Request Parameters](#request-parameters-6)
-  * [Response Example(s)](#response-example-s--6)
-    + [`204 No Content`](#-204-no-content-)
-    + [`404 Not Found`](#-404-not-found--2)
-- [Soft delete content - JSON controller](#soft-delete-content---json-controller)
-  * [Request Example(s)](#request-example-s--7)
-  * [Request Parameters](#request-parameters-7)
-  * [Response Example(s)](#response-example-s--7)
-    + [`204 No Content`](#-204-no-content--1)
-    + [`404 Not Found`](#-404-not-found--3)
-- [Configure Route Options - JSON controller](#configure-route-options---json-controller)
-- [Progress-Bubbling](#progress-bubbling)
-  * [Example](#example)
-- [Validation](#validation)
-  * [Note about field or datum that reference another piece of content](#note-about-field-or-datum-that-reference-another-piece-of-content)
-  * [Important Note about the "numeric" rule](#important-note-about-the--numeric--rule)
-  * [Specifying rules](#specifying-rules)
-  * [Details of options available for each brand](#details-of-options-available-for-each-brand)
-    + [fields](#fields)
-    + [data](#data)
-    + [number_of_children](#number-of-children)
-  * [Configuration Example](#configuration-example)
-  * [MultipleColumnExistsValidator](#multiplecolumnexistsvalidator)
-    + [WHERE *AND*](#where--and-)
-    + [WHERE *OR*](#where--or-)
-- [Comment-Likes](#comment-likes)
-  * [TL;DR:](#tl-dr-)
-  * [Wordy explaination](#wordy-explaination)
-    + [Like](#like)
-    + [Unlike](#unlike)
+  * [Installation, Configuration, Use](#installation--configuration--use)
+    + [Installation](#installation)
+    + [Configuration](#configuration)
+- [Services](#services)
+  * [ContentService](#contentservice)
+    + [getById](#getbyid)
+      - [Usage Example(s)](#usage-example-s-)
+      - [Parameters](#parameters)
+      - [Responses](#responses)
+    + [getByIds](#getbyids)
+      - [Usage Example(s)](#usage-example-s--1)
+      - [Parameters](#parameters-1)
+      - [Responses](#responses-1)
+    + [getAllByType](#getallbytype)
+      - [Usage Example(s)](#usage-example-s--2)
+      - [Parameters](#parameters-2)
+      - [Responses](#responses-2)
+    + [getWhereTypeInAndStatusAndField](#getwheretypeinandstatusandfield)
+      - [Usage Example(s)](#usage-example-s--3)
+      - [Parameters](#parameters-3)
+      - [Responses](#responses-3)
+    + [getWhereTypeInAndStatusAndPublishedOnOrdered](#getwheretypeinandstatusandpublishedonordered)
+      - [Usage Example(s)](#usage-example-s--4)
+      - [Parameters](#parameters-4)
+      - [Responses](#responses-4)
+    + [getBySlugAndType](#getbyslugandtype)
+      - [Usage Example(s)](#usage-example-s--5)
+      - [Parameters](#parameters-5)
+      - [Responses](#responses-5)
+    + [getByUserIdTypeSlug](#getbyuseridtypeslug)
+      - [Usage Example(s)](#usage-example-s--6)
+      - [Parameters](#parameters-6)
+      - [Responses](#responses-6)
+    + [getByParentId](#getbyparentid)
+      - [Usage Example(s)](#usage-example-s--7)
+      - [Parameters](#parameters-7)
+      - [Responses](#responses-7)
+    + [getByParentIdWhereTypeIn](#getbyparentidwheretypein)
+      - [Usage Example(s)](#usage-example-s--8)
+      - [Parameters](#parameters-8)
+      - [Responses](#responses-8)
+    + [getByParentIds](#getbyparentids)
+      - [Usage Example(s)](#usage-example-s--9)
+      - [Parameters](#parameters-9)
+      - [Responses](#responses-9)
+    + [getByChildIdWhereType](#getbychildidwheretype)
+      - [Usage Example(s)](#usage-example-s--10)
+      - [Parameters](#parameters-10)
+      - [Responses](#responses-10)
+    + [getByChildIdsWhereType](#getbychildidswheretype)
+      - [Usage Example(s)](#usage-example-s--11)
+      - [Parameters](#parameters-11)
+      - [Responses](#responses-11)
+    + [getByChildIdWhereParentTypeIn](#getbychildidwhereparenttypein)
+      - [Usage Example(s)](#usage-example-s--12)
+      - [Parameters](#parameters-12)
+      - [Responses](#responses-12)
+    + [getPaginatedByTypeUserProgressState](#getpaginatedbytypeuserprogressstate)
+      - [Usage Example(s)](#usage-example-s--13)
+      - [Parameters](#parameters-13)
+      - [Responses](#responses-13)
+    + [getPaginatedByTypesUserProgressState](#getpaginatedbytypesuserprogressstate)
+      - [Usage Example(s)](#usage-example-s--14)
+      - [Parameters](#parameters-14)
+      - [Responses](#responses-14)
+    + [getTypeNeighbouringSiblings](#gettypeneighbouringsiblings)
+      - [Usage Example(s)](#usage-example-s--15)
+      - [Parameters](#parameters-15)
+      - [Responses](#responses-15)
+    + [getByContentFieldValuesForTypes](#getbycontentfieldvaluesfortypes)
+      - [Usage Example(s)](#usage-example-s--16)
+      - [Parameters](#parameters-16)
+      - [Responses](#responses-16)
+    + [countByTypesUserProgressState](#countbytypesuserprogressstate)
+      - [Usage Example(s)](#usage-example-s--17)
+      - [Parameters](#parameters-17)
+      - [Responses](#responses-17)
+    + [getFiltered](#getfiltered)
+      - [Usage Example(s)](#usage-example-s--18)
+      - [Parameters](#parameters-18)
+      - [Responses](#responses-18)
+    + [create](#create)
+      - [Usage Example(s)](#usage-example-s--19)
+      - [Parameters](#parameters-19)
+      - [Responses](#responses-19)
+    + [update](#update)
+      - [Usage Example(s)](#usage-example-s--20)
+      - [Parameters](#parameters-20)
+      - [Responses](#responses-20)
+    + [delete](#delete)
+      - [Usage Example(s)](#usage-example-s--21)
+      - [Parameters](#parameters-21)
+      - [Responses](#responses-21)
+    + [softDelete](#softdelete)
+      - [Usage Example(s)](#usage-example-s--22)
+      - [Parameters](#parameters-22)
+      - [Responses](#responses-22)
+    + [attachPlaylistsToContents](#attachplayliststocontents)
+      - [Usage Example(s)](#usage-example-s--23)
+      - [Parameters](#parameters-23)
+      - [Responses](#responses-23)
+  * [ContentFieldService](#contentfieldservice)
+    + [get](#get)
+      - [Usage Example(s)](#usage-example-s--24)
+      - [Parameters](#parameters-24)
+      - [Responses](#responses-24)
+    + [getByKeyValueTypePosition](#getbykeyvaluetypeposition)
+    + [getByKeyValueType](#getbykeyvaluetype)
+    + [create](#create-1)
+    + [update](#update-1)
+    + [delete](#delete-1)
+  * [ContentDatumService](#contentdatumservice)
+    + [get](#get-1)
+      - [Usage Example(s)](#usage-example-s--25)
+    + [getByContentIds](#getbycontentids)
+    + [create](#create-2)
+    + [update](#update-2)
+    + [delete](#delete-2)
+  * [Get content - JSON controller](#get-content---json-controller)
+    + [Request Example(s)](#request-example-s-)
+    + [Request Parameters](#request-parameters)
+    + [Response Example(s)](#response-example-s-)
+      - [`201 OK`](#-201-ok-)
+      - [`404 Not Found`](#-404-not-found-)
+- [API endpoints]([API]#api-endpoints)
+  * [Get contents based on ids - JSON controller]([API]#get-contents-based-on-ids---json-controller)
+    + [Request Example(s)]([API]#request-example-s--1)
+    + [Request Parameters]([API]#request-parameters-1)
+    + [Response Example(s)]([API]#response-example-s--1)
+      - [`200 OK`]([API]#-200-ok-)
+  * [Get contents that are childrens of the content id - JSON controller](#get-contents-that-are-childrens-of-the-content-id---json-controller)
+    + [Request Example(s)](#request-example-s--2)
+    + [Request Parameters](#request-parameters-2)
+    + [Response Example(s)](#response-example-s--2)
+      - [`200 OK`](#-200-ok--1)
+  * [Filter contents  - JSON controller](#filter-contents----json-controller)
+    + [Request Example(s)](#request-example-s--3)
+    + [Request Parameters](#request-parameters-3)
+    + [Response Example(s)](#response-example-s--3)
+      - [`200 OK`](#-200-ok--2)
+  * [Store content - JSON controller](#store-content---json-controller)
+    + [Request Example(s)](#request-example-s--4)
+    + [Request Parameters](#request-parameters-4)
+    + [Response Example(s)](#response-example-s--4)
+      - [`200 OK`](#-200-ok--3)
+  * [Update content - JSON controller](#update-content---json-controller)
+    + [Request Example(s)](#request-example-s--5)
+    + [Request Parameters](#request-parameters-5)
+    + [Response Example(s)](#response-example-s--5)
+      - [`201 OK`](#-201-ok--1)
+      - [`404 Not Found`](#-404-not-found--1)
+  * [Delete content - JSON controller](#delete-content---json-controller)
+    + [Request Example(s)](#request-example-s--6)
+    + [Request Parameters](#request-parameters-6)
+    + [Response Example(s)](#response-example-s--6)
+      - [`204 No Content`](#-204-no-content-)
+      - [`404 Not Found`](#-404-not-found--2)
+  * [Soft delete content - JSON controller](#soft-delete-content---json-controller)
+    + [Request Example(s)](#request-example-s--7)
+    + [Request Parameters](#request-parameters-7)
+    + [Response Example(s)](#response-example-s--7)
+      - [`204 No Content`](#-204-no-content--1)
+      - [`404 Not Found`](#-404-not-found--3)
+  * [Configure Route Options - JSON controller](#configure-route-options---json-controller)
+  * [Store content field - JSON controller](#store-content-field---json-controller)
+    + [Request Example(s)](#request-example-s--8)
+    + [Request Parameters](#request-parameters-8)
+    + [Response Example(s)](#response-example-s--8)
+      - [`200 OK`](#-200-ok--4)
+  * [Update content field - JSON controller](#update-content-field---json-controller)
+    + [Request Example(s)](#request-example-s--9)
+    + [Request Parameters](#request-parameters-9)
+    + [Response Example(s)](#response-example-s--9)
+      - [`201 OK`](#-201-ok--2)
+      - [`404 Not Found`](#-404-not-found--4)
+  * [Delete content field - JSON controller](#delete-content-field---json-controller)
+    + [Request Example(s)](#request-example-s--10)
+    + [Request Parameters](#request-parameters-10)
+    + [Response Example(s)](#response-example-s--10)
+      - [`204 No Content`](#-204-no-content--2)
+      - [`404 Not Found`](#-404-not-found--5)
+  * [Get content field - JSON controller](#get-content-field---json-controller)
+    + [Request Example(s)](#request-example-s--11)
+    + [Request Parameters](#request-parameters-11)
+    + [Response Example(s)](#response-example-s--11)
+      - [`200 OK`](#-200-ok--5)
+  * [Progress-Bubbling](#progress-bubbling)
+    + [Example](#example)
+  * [Validation](#validation)
+    + [Note about field or datum that reference another piece of content](#note-about-field-or-datum-that-reference-another-piece-of-content)
+    + [Important Note about the "numeric" rule](#important-note-about-the--numeric--rule)
+    + [Specifying rules](#specifying-rules)
+    + [Details of options available for each brand](#details-of-options-available-for-each-brand)
+      - [fields](#fields)
+      - [data](#data)
+      - [number_of_children](#number-of-children)
+    + [Configuration Example](#configuration-example)
+    + [MultipleColumnExistsValidator](#multiplecolumnexistsvalidator)
+      - [WHERE *AND*](#where--and-)
+      - [WHERE *OR*](#where--or-)
+  * [Comment-Likes](#comment-likes)
+    + [TL;DR:](#tl-dr-)
+    + [Wordy explaination](#wordy-explaination)
+      - [Like](#like)
+      - [Unlike](#unlike)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 <!-- ecotrust-canada.github.io/markdown-toc -->
 
@@ -236,6 +266,7 @@ Add the service provider (`\Railroad\Railcontent\Providers\RailcontentServicePro
 Run `$ php artisan vendor:publish` to copy the config file and create a *railcontent.php* file in your application's */config* directory. This will take the values you supplied in the *.env* file and pass them needed.
 
 
+# Services
 
 
 ContentService
@@ -1433,7 +1464,7 @@ path , id , yes ,  , Id of the content you want to pull
       }
 }
 ```
-
+# API endpoints
 
 Get contents based on ids - JSON controller
 --------------------------------------
@@ -2185,6 +2216,279 @@ Configure Route Options - JSON controller
 There are a number of route options that can be set on each route: allow `POST, PATCH, GET, OPTIONS, PUT, DELETE` methods, allow `X-Requested-With, content-type` headers.
 
 
+Store content field - JSON controller
+--------------------------------------
+
+`{ PUT /content/field }`
+
+Create a new content field based on request data and return the new created field data in JSON format.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/field',
+    type: 'put'
+  	data: {content_id: 3, key: 'topic' value: 'rock', type: 'string'} 
+		// position will automatically be set to the end of the stack if you dont pass one in
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key         |  required |  default |  description\|notes                                                                               | 
+|-----------------|--------------|-----------|----------|---------------------------------------------------------------------------------------------------| 
+| body            |  content_id  |  yes      |          |  The content id this field belongs to.                                                            | 
+| body            |  key         |  yes      |          |  The key of this field; also know as the name.                                                    | 
+| body            |  value       |  yes      |          |  The value of the field.                                                                          | 
+| body            |  position    |  no       |  1       |  The position of this field relative to other fields with the same key under the same content id. | 
+| body            |  type        |  no       |  string  |  The type of field this is. Options are 'string' 'integer' 'content_id'                         | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+body , content_id , yes ,  , The content id this field belongs to.
+body , key , yes ,  , The key of this field; also know as the name.
+body , value , yes ,  , The value of the field.
+body , position , no , 1 , The position of this field relative to other fields with the same key under the same content id.
+body , type , no , string , The type of field this is. Options are 'string' 'integer' 'content_id'.
+-->
+
+
+### Response Example(s)
+
+#### `200 OK`
+
+```json
+
+{
+	"id":162,
+	"key":"topic",
+	"value":"rock",
+	"position":1,
+	"type":"string"
+}
+
+```
+
+Update content field - JSON controller
+--------------------------------------
+
+`{ PATCH /content/field/{fieldId} }`
+
+Update a content with the request data and return the updated content in JSON format. 
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/field/513',
+    type: 'patch'
+  	data: {value: 'punk'} 
+		// position will automatically be set to the end of the stack if you dont pass one in
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key         |  required |  default |  description\|notes                                                                               | 
+|-----------------|--------------|-----------|----------|---------------------------------------------------------------------------------------------------| 
+| path            |  id          |  yes      |          |  Id of the field you want to edit.                                                                | 
+| body            |  content_id  |  yes      |          |  The content id this field belongs to.                                                            | 
+| body            |  key         |  yes      |          |  The key of this field; also know as the name.                                                    | 
+| body            |  value       |  yes      |          |  The value of the field.                                                                          | 
+| body            |  position    |  no       |  1       |  The position of this field relative to other fields with the same key under the same content id. | 
+| body            |  type        |  no       |  string  |  The type of field this is. Options are 'string' 'integer' 'content_id'.                          | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes , , Id of the field you want to edit.
+body , content_id , yes ,  , The content id this field belongs to.
+body , key , yes ,  , The key of this field; also know as the name.
+body , value , yes ,  , The value of the field.
+body , position , no , 1 , The position of this field relative to other fields with the same key under the same content id.
+body , type , no , string , The type of field this is. Options are 'string' 'integer' 'content_id'.
+-->
+
+
+### Response Example(s)
+
+#### `201 OK`
+
+```json
+
+{
+	"id":513,
+	"key":"topic",
+	"value":"punk",
+	"position":1,
+	"type":"string"
+}
+
+```
+#### `404 Not Found`
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Update failed, content field not found with id: 513"
+      }
+}
+```
+Delete content field - JSON controller
+--------------------------------------
+
+`{ DELETE /content/field/{fieldId} }`
+
+Delete content field if exists in the database. 
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/field/2',
+    type: 'delete'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key |  required |  default |  description\|notes                    | 
+|-----------------|------|-----------|----------|----------------------------------------| 
+| path            |  id  |  yes      |          |  Id of the content field you want to delete. | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes,  , Id of the content field you want to delete.
+-->
+
+
+### Response Example(s)
+
+#### `204 No Content`  
+
+#### `404 Not Found`
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Delete failed, content field not found with id: 2"
+      }
+}
+```
+
+Get content field - JSON controller
+--------------------------------------
+
+`{ GET /content/field/{id} }`
+
+Get content field data based on content field id.
+
+
+### Request Example(s)
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/field/1',
+    type: 'get',
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body | key                | required | description\|notes             |
+| ----------------- | ------------------ | -------- | ------------------------------ |
+| path              | id                 | yes      | Id of the content field you want to pull  |
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes ,  , Id of the content field you want to pull
+-->
+
+
+### Response Example(s)
+
+#### `200 OK`
+
+```json
+{
+    "status":"ok",
+    "code":200,
+    "results":{
+        "results":{
+            "id":"1",
+            "content_id":"1",
+            "key":"dolorem",
+            "value":"nihil",
+            "type":"atque",
+            "position":"1"
+        }
+    }
+}
+
+```
 
 
 Progress-Bubbling
