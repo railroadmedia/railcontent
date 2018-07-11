@@ -650,7 +650,7 @@ class ContentRepository extends RepositoryBase
             ->restrictByUserAccess()
             ->where('slug', $slug)
             ->where('type', $type)
-            ->where('user_id', $userId)
+            ->where(ConfigService::$tableContent . '.user_id', $userId)
             ->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
