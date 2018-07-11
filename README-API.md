@@ -689,6 +689,169 @@ query , filter[included_user_playlists] , no , [] , Contents that are in any of 
 }
 ```
 
+
+
+
+Full text search  - JSON controller
+--------------------------------------
+
+`{ GET /search }`
+
+Full text search in contents.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/search?' +
+        'page=1' + '&' +
+        'limit=10' + '&' +
+        'term=practice along',
+    type: 'get',
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key             |  required |  default      |  description\|notes                                                                                                                               | 
+|-------------------|------------------|-----------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------| 
+| query             |  page            |  no       |  1            |  Which page in the result set to return. The amount of contents skipped is ((limit - 1) * page).                                                  | 
+| query             |  limit           |  no       |  10           |  The max amount of contents that can be returned. Can be 'null' for no limit.                                                                     | 
+| query             |  term            |  yes      |               |  Search criteria                                                                                                                                  | 
+| query             |  included_types  |  no       |  []           |  Contents with these types will be returned.                                                                                                      | 
+| query             |  statuses        |  no       |  'published'  |  All content must have one of these statuses.                                                                                                     | 
+| query             |  sort            |  no       |  '-score'     |  Defaults to descending order; to switch to ascending order remove the minus sign (-). Can be any of the following: score or content_published_on | 
+| query             |  brand           |  no       |               |  Contents from the brand will be returned.                                                                                                        | 
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path\|query\|body, key, required, default, description\|notes
+query , page , no , 1 , Which page in the result set to return. The amount of contents skipped is ((limit - 1) * page).
+query , limit , no , 10 , The max amount of contents that can be returned. Can be 'null' for no limit.
+query , term , yes ,  , Search criteria
+query , included_types , no , [] , Contents with these types will be returned.
+query , statuses , no , 'published' , All content must have one of these statuses.
+query , sort , no , '-score' , Defaults to descending order; to switch to ascending order remove the minus sign (-). Can be any of the following: score or content_published_on
+query , brand , no ,  , Contents from the brand will be returned.
+-->
+
+
+### Response Example
+
+```200 OK```
+
+```json
+
+{
+    "status": "ok",
+    "code": 200,
+    "page": "1",
+    "limit": "10",
+    "total_results": 2,
+    "results": {
+        "2": {
+            "id": 2,
+            "slug": "course 2",
+            "type": "courses",
+            "status": "published",
+            "language": "en-US",
+            "brand": "drumeo",
+            "published_on": "2017-11-01 00:00:00",
+            "created_on": "2017-11-27 00:00:00",
+            "archived_on": null,
+            "parent_id": null,
+            "fields": [
+                {
+                    "id": 2,
+                    "content_id": 2,
+                    "key": "title",
+                    "value": "Double-Bass Triplet Practice-Along",
+                    "type": "string",
+                    "position": 1
+                },
+                {
+                    "id": 6,
+                    "content_id": 2,
+                    "key": "instructor",
+                    "value": {
+                        "id": 6,
+                        "slug": "Reuben-Spyker",
+                        "type": "instructor",
+                        "status": "published",
+                        "language": "en-US",
+                        "brand": "drumeo",
+                        "published_on": "2017-11-10 00:00:00",
+                        "created_on": "2017-11-27 00:00:00",
+                        "archived_on": null,
+                        "parent_id": null,
+                        "fields": [
+                            {
+                                "id": 7,
+                                "content_id": 6,
+                                "key": "name",
+                                "value": "Reuben Spyker",
+                                "type": "string",
+                                "position": 1
+                            }
+                        ],
+                        "data": [
+                            {
+                                "id": 2,
+                                "content_id": 6,
+                                "key": "description",
+                                "value": "Reuben Spyker, a technique freak but also a player of many types of music, filmed his first lesson for Drumeo in 2015! He just recently joined the Drumeo team and will be working here full time. Attended Cap University for two years, recent projects include an electronic/hip hop duo group (will be releasing music soon) and also manages a youtube channel. I like all styles of music (probably listen to Jazz, hip hop, neo soul and electronic the most) I also love espresso, free line skating, fashion, dancing and drawing/painting. In my spare time I am currently learning bass guitar, latte art and juggling.",
+                                "position": 1
+                            }
+                        ],
+                        "permissions": []
+                    },
+                    "type": "content",
+                    "position": 1
+                }
+            ],
+            "data": [],
+            "permissions": []
+        },
+        "3": {
+            "id": 3,
+            "slug": "course 3",
+            "type": "courses",
+            "status": "published",
+            "language": "en-US",
+            "brand": "drumeo",
+            "published_on": "2017-11-16 00:00:00",
+            "created_on": "2017-11-27 00:00:00",
+            "archived_on": null,
+            "parent_id": null,
+            "fields": [
+                {
+                    "id": 3,
+                    "content_id": 3,
+                    "key": "title",
+                    "value": "Double Bass Practice-Along ",
+                    "type": "string",
+                    "position": 1
+                }
+            ],
+            "data": [],
+            "permissions": []
+        }
+    },
+    "filter_options": null
+}
+```
+
 Store content - JSON controller
 --------------------------------------
 
