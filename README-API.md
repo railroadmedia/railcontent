@@ -1,93 +1,168 @@
-- [API endpoints](README-API.md#api-endpoints)
-  * [Get content - JSON controller](README-API.md#get-content---json-controller)
-    + [Request Example](README-API.md#request-example)
-    + [Request Parameters](README-API.md#request-parameters)
-    + [Response Example](README-API.md#response-example)
-  * [Get contents based on ids - JSON controller](README-API.md#get-contents-based-on-ids---json-controller)
-    + [Request Example](README-API.md#request-example-1)
-    + [Request Parameters](README-API.md#request-parameters-1)
-    + [Response Example](README-API.md#response-example-1)
-  * [Get contents that are childrens of the content id - JSON controller](README-API.md#get-contents-that-are-childrens-of-the-content-id---json-controller)
-    + [Request Example](README-API.md#request-example-2)
-    + [Request Parameters](README-API.md#request-parameters-2)
-    + [Response Example](README-API.md#response-example-2)
-  * [Filter contents  - JSON controller](README-API.md#filter-contents----json-controller)
-    + [Request Example](README-API.md#request-example-3)
-    + [Request Parameters](README-API.md#request-parameters-3)
-    + [Response Example](README-API.md#response-example-3)
-  * [Store content - JSON controller](README-API.md#store-content---json-controller)
-    + [Request Example](README-API.md#request-example-4)
-    + [Request Parameters](README-API.md#request-parameters-4)
-    + [Response Example](README-API.md#response-example-4)
-  * [Update content - JSON controller](README-API.md#update-content---json-controller)
-    + [Request Example](README-API.md#request-example-5)
-    + [Request Parameters](README-API.md#request-parameters-5)
-    + [Response Example](README-API.md#response-example-5)
-  * [Delete content - JSON controller](README-API.md#delete-content---json-controller)
-    + [Request Example](README-API.md#request-example-6)
-    + [Request Parameters](README-API.md#request-parameters-6)
-    + [Response Example](README-API.md#response-example-6)
-  * [Soft delete content - JSON controller](README-API.md#soft-delete-content---json-controller)
-    + [Request Example](README-API.md#request-example-7)
-    + [Request Parameters](README-API.md#request-parameters-7)
-    + [Response Example](README-API.md#response-example-7)
-  * [Configure Route Options - JSON controller](README-API.md#configure-route-options---json-controller)
-  * [Store content field - JSON controller](README-API.md#store-content-field---json-controller)
-    + [Request Example](README-API.md#request-example-8)
-    + [Request Parameters](README-API.md#request-parameters-8)
-    + [Response Example](README-API.md#response-example-8)
-  * [Update content field - JSON controller](README-API.md#update-content-field---json-controller)
-    + [Request Example](README-API.md#request-example-9)
-    + [Request Parameters](README-API.md#request-parameters-9)
-    + [Response Example](README-API.md#response-example-9)
-  * [Delete content field - JSON controller](README-API.md#delete-content-field---json-controller)
-    + [Request Example](README-API.md#request-example-10)
-    + [Request Parameters](README-API.md#request-parameters-10)
-    + [Response Example](README-API.md#response-example-10)
-  * [Get content field - JSON controller](README-API.md#get-content-field---json-controller)
-    + [Request Example](README-API.md#request-example-11)
-    + [Request Parameters](README-API.md#request-parameters-11)
-    + [Response Example](README-API.md#response-example-11)
-  * [Store content datum - JSON controller](README-API.md#store-content-datum---json-controller)
-    + [Request Example](README-API.md#request-example-12)
-    + [Request Parameters](README-API.md#request-parameters-12)
-    + [Response Example](README-API.md#response-example-12)
-  * [Update content datum - JSON controller](README-API.md#update-content-datum---json-controller)
-    + [Request Example](README-API.md#request-example-13)
-    + [Request Parameters](README-API.md#request-parameters-13)
-    + [Response Example](README-API.md#response-example-13)
-  * [Delete content datum - JSON controller](README-API.md#delete-content-datum---json-controller)
-    + [Request Example](README-API.md#request-example-14)
-    + [Request Parameters](README-API.md#request-parameters-14)
-    + [Response Example](README-API.md#response-example-14)
-  * [Store content hierarchy - JSON controller](README-API.md#store-content-hierarchy---json-controller)
-    + [Request Example](README-API.md#request-example-15)
-    + [Request Parameters](README-API.md#request-parameters-15)
-    + [Response Example](README-API.md#response-example-15)
-  * [Change child position in content hierarchy - JSON controller](README-API.md#change-child-position-in-content-hierarchy---json-controller)
-    + [Request Example](README-API.md#request-example-16)
-    + [Request Parameters](README-API.md#request-parameters-16)
-    + [Response Example](README-API.md#response-example-16)
-  * [Delete child from content hierarchy - JSON controller](README-API.md#delete-child-from-content-hierarchy---json-controller)
-    + [Request Example](README-API.md#request-example-17)
-    + [Request Parameters](README-API.md#request-parameters-17)
-    + [Response Example](README-API.md#response-example-17)
-  * [Start authenticated user progress on content - JSON controller](README-API.md#start-authenticated-user-progress-on-content---json-controller)
-    + [Request Example](README-API.md#request-example-18)
-    + [Request Parameters](README-API.md#request-parameters-18)
-    + [Response Example](README-API.md#response-example-18)
-  * [Save authenticated user progress on content - JSON controller](README-API.md#save-authenticated-user-progress-on-content---json-controller)
-    + [Request Example](README-API.md#request-example-19)
-    + [Request Parameters](README-API.md#request-parameters-19)
-    + [Response Example](README-API.md#response-example-19)
-  * [Reset authenticated user progress on content - JSON controller](README-API.md#reset-authenticated-user-progress-on-content---json-controller)
-    + [Request Example](README-API.md#request-example-20)
-    + [Request Parameters](README-API.md#request-parameters-20)
-    + [Response Example](README-API.md#response-example-20)
-  * [Complete authenticated user progress on content - JSON controller](README-API.md#complete-authenticated-user-progress-on-content---json-controller)
-    + [Request Example](README-API.md#request-example-21)
-    + [Request Parameters](README-API.md#request-parameters-21)
-    + [Response Example](README-API.md#response-example-21)
+- [API endpoints](#api-endpoints)
+  * [Get content - JSON controller](#get-content---json-controller)
+    + [Request Example](#request-example)
+    + [Request Parameters](#request-parameters)
+    + [Response Example](#response-example)
+  * [Get contents based on ids - JSON controller](#get-contents-based-on-ids---json-controller)
+    + [Request Example](#request-example-1)
+    + [Request Parameters](#request-parameters-1)
+    + [Response Example](#response-example-1)
+  * [Get contents that are childrens of the content id - JSON controller](#get-contents-that-are-childrens-of-the-content-id---json-controller)
+    + [Request Example](#request-example-2)
+    + [Request Parameters](#request-parameters-2)
+    + [Response Example](#response-example-2)
+  * [Filter contents  - JSON controller](#filter-contents----json-controller)
+    + [Request Example](#request-example-3)
+    + [Request Parameters](#request-parameters-3)
+    + [Response Example](#response-example-3)
+  * [Store content - JSON controller](#store-content---json-controller)
+    + [Request Example](#request-example-4)
+    + [Request Parameters](#request-parameters-4)
+    + [Response Example](#response-example-4)
+  * [Update content - JSON controller](#update-content---json-controller)
+    + [Request Example](#request-example-5)
+    + [Request Parameters](#request-parameters-5)
+    + [Response Example](#response-example-5)
+  * [Delete content - JSON controller](#delete-content---json-controller)
+    + [Request Example](#request-example-6)
+    + [Request Parameters](#request-parameters-6)
+    + [Response Example](#response-example-6)
+  * [Soft delete content - JSON controller](#soft-delete-content---json-controller)
+    + [Request Example](#request-example-7)
+    + [Request Parameters](#request-parameters-7)
+    + [Response Example](#response-example-7)
+  * [Configure Route Options - JSON controller](#configure-route-options---json-controller)
+  * [Store content field - JSON controller](#store-content-field---json-controller)
+    + [Request Example](#request-example-8)
+    + [Request Parameters](#request-parameters-8)
+    + [Response Example](#response-example-8)
+  * [Update content field - JSON controller](#update-content-field---json-controller)
+    + [Request Example](#request-example-9)
+    + [Request Parameters](#request-parameters-9)
+    + [Response Example](#response-example-9)
+  * [Delete content field - JSON controller](#delete-content-field---json-controller)
+    + [Request Example](#request-example-10)
+    + [Request Parameters](#request-parameters-10)
+    + [Response Example](#response-example-10)
+  * [Get content field - JSON controller](#get-content-field---json-controller)
+    + [Request Example](#request-example-11)
+    + [Request Parameters](#request-parameters-11)
+    + [Response Example](#response-example-11)
+  * [Store content datum - JSON controller](#store-content-datum---json-controller)
+    + [Request Example](#request-example-12)
+    + [Request Parameters](#request-parameters-12)
+    + [Response Example](#response-example-12)
+  * [Update content datum - JSON controller](#update-content-datum---json-controller)
+    + [Request Example](#request-example-13)
+    + [Request Parameters](#request-parameters-13)
+    + [Response Example](#response-example-13)
+  * [Delete content datum - JSON controller](#delete-content-datum---json-controller)
+    + [Request Example](#request-example-14)
+    + [Request Parameters](#request-parameters-14)
+    + [Response Example](#response-example-14)
+  * [Store content hierarchy - JSON controller](#store-content-hierarchy---json-controller)
+    + [Request Example](#request-example-15)
+    + [Request Parameters](#request-parameters-15)
+    + [Response Example](#response-example-15)
+  * [Change child position in content hierarchy - JSON controller](#change-child-position-in-content-hierarchy---json-controller)
+    + [Request Example](#request-example-16)
+    + [Request Parameters](#request-parameters-16)
+    + [Response Example](#response-example-16)
+  * [Delete child from content hierarchy - JSON controller](#delete-child-from-content-hierarchy---json-controller)
+    + [Request Example](#request-example-17)
+    + [Request Parameters](#request-parameters-17)
+    + [Response Example](#response-example-17)
+  * [Start authenticated user progress on content - JSON controller](#start-authenticated-user-progress-on-content---json-controller)
+    + [Request Example](#request-example-18)
+    + [Request Parameters](#request-parameters-18)
+    + [Response Example](#response-example-18)
+  * [Save authenticated user progress on content - JSON controller](#save-authenticated-user-progress-on-content---json-controller)
+    + [Request Example](#request-example-19)
+    + [Request Parameters](#request-parameters-19)
+    + [Response Example](#response-example-19)
+  * [Reset authenticated user progress on content - JSON controller](#reset-authenticated-user-progress-on-content---json-controller)
+    + [Request Example](#request-example-20)
+    + [Request Parameters](#request-parameters-20)
+    + [Response Example](#response-example-20)
+  * [Complete authenticated user progress on content - JSON controller](#complete-authenticated-user-progress-on-content---json-controller)
+    + [Request Example](#request-example-21)
+    + [Request Parameters](#request-parameters-21)
+    + [Response Example](#response-example-21)
+  * [Store permission - JSON controller](#store-permission---json-controller)
+    + [Request Example](#request-example-22)
+    + [Request Parameters](#request-parameters-22)
+    + [Response Example](#response-example-22)
+  * [Change permission - JSON controller](#change-permission---json-controller)
+    + [Request Example](#request-example-23)
+    + [Request Parameters](#request-parameters-23)
+    + [Response Example](#response-example-23)
+  * [Delete permission - JSON controller](#delete-permission---json-controller)
+    + [Request Example](#request-example-24)
+    + [Request Parameters](#request-parameters-24)
+    + [Response Example](#response-example-24)
+  * [Assign permission - JSON controller](#assign-permission---json-controller)
+    + [Request Example](#request-example-25)
+    + [Request Parameters](#request-parameters-25)
+    + [Response Example](#response-example-25)
+  * [Dissociate permission - JSON controller](#dissociate-permission---json-controller)
+    + [Request Example](#request-example-26)
+    + [Request Parameters](#request-parameters-26)
+    + [Response Example](#response-example-26)
+  * [Get permissions - JSON controller](#get-permissions---json-controller)
+    + [Request Example](#request-example-27)
+    + [Response Example](#response-example-27)
+  * [Give user access - JSON controller](#give-user-access---json-controller)
+    + [Request Example](#request-example-28)
+    + [Request Parameters](#request-parameters-27)
+    + [Response Example](#response-example-28)
+  * [Change user access - JSON controller](#change-user-access---json-controller)
+    + [Request Example](#request-example-29)
+    + [Request Parameters](#request-parameters-28)
+    + [Response Example](#response-example-29)
+  * [Delete user access - JSON controller](#delete-user-access---json-controller)
+    + [Request Example](#request-example-30)
+    + [Request Parameters](#request-parameters-29)
+    + [Response Example](#response-example-30)
+  * [Pull users permissions - JSON controller](#pull-users-permissions---json-controller)
+    + [Request Example](#request-example-31)
+    + [Request Parameters](#request-parameters-30)
+    + [Response Example](#response-example-31)
+    + [Request Parameters](#request-parameters-31)
+    + [Response Example](#response-example-32)
+  * [Change comment - JSON controller](#change-comment---json-controller)
+    + [Request Example](#request-example-32)
+    + [Request Parameters](#request-parameters-32)
+    + [Response Example](#response-example-33)
+  * [Delete comment - JSON controller](#delete-comment---json-controller)
+    + [Request Example](#request-example-33)
+    + [Request Parameters](#request-parameters-33)
+    + [Response Example](#response-example-34)
+  * [Reply to a comment - JSON controller](#reply-to-a-comment---json-controller)
+    + [Request Example](#request-example-34)
+    + [Request Parameters](#request-parameters-34)
+    + [Response Example](#response-example-35)
+  * [Pull comments - JSON controller](#pull-comments---json-controller)
+    + [Request Example](#request-example-35)
+    + [Request Parameters](#request-parameters-35)
+    + [Response Example](#response-example-36)
+  * [Get linked comments - JSON controller](#get-linked-comments---json-controller)
+    + [Request Example](#request-example-36)
+    + [Request Parameters](#request-parameters-36)
+    + [Response Example](#response-example-37)
+  * [Like a comment - JSON controller](#like-a-comment---json-controller)
+    + [Request Example](#request-example-37)
+    + [Response Example](#response-example-38)
+  * [Unlike a comment - JSON controller](#unlike-a-comment---json-controller)
+    + [Request Example](#request-example-38)
+    + [Response Example](#response-example-39)
+  * [Pull assigned to me comments - JSON controller](#pull-assigned-to-me-comments---json-controller)
+    + [Request Example](#request-example-39)
+    + [Request Parameters](#request-parameters-37)
+    + [Response Example](#response-example-40)
+  * [Delete comment assignation - JSON controller](#delete-comment-assignation---json-controller)
+    + [Request Example](#request-example-40)
+    + [Request Parameters](#request-parameters-38)
+    + [Response Example](#response-example-41)
 
 
 <!-- ecotrust-canada.github.io/markdown-toc -->
@@ -147,7 +222,6 @@ path , id , yes ,  , Id of the content you want to pull
     "status":"ok",
     "code":201,
     "results":{
-        "results":{
             "id":"1",
             "slug":"quis",
             "status":"draft",
@@ -156,7 +230,6 @@ path , id , yes ,  , Id of the content you want to pull
             "language":"en-US",
             "brand":"drumeo",
             "created_on":"2017-10-26 16:00:03"
-        }
     }
 }
 
@@ -228,8 +301,7 @@ query , ids , yes ,  , A comma separated string of the ids you want to pull.
     "status":"ok",
     "code":201,
     "results":{
-        "results":[
-          {
+       
             "id":"243",
             "slug":"quis",
             "status":"draft",
@@ -239,8 +311,6 @@ query , ids , yes ,  , A comma separated string of the ids you want to pull.
             "brand":"drumeo",
             "created_on":"2017-10-26 16:00:03"
         		}, ...
-          ]
-    }
 }
 
 ```
@@ -691,9 +761,9 @@ body , parent_id , no,  , Id of the parent content you want to make this content
 	"status":"draft",
 	"language":"en-US",
 	"brand":"drumeo",
-	"user_id:null,
+	"user_id":null,
 	"published_on":null,
-	"created_on":"2015-09-28 16:25:05"
+	"created_on":"2015-09-28 16:25:05",
 	"archived_on":null
 }
 
@@ -772,7 +842,7 @@ body , parent_id , no,  , Id of the parent content you want to make this content
 	"status":"published",
 	"language":"en-US",
 	"brand":"drumeo",
-	"user_id:null,
+	"user_id":null,
 	"published_on":"2015-09-28 16:25:05",
 	"created_on":"2015-09-28 16:25:05",
 	"archived_on":null
@@ -1189,7 +1259,6 @@ path , id , yes ,  , Id of the content field you want to pull
     "status":"ok",
     "code":200,
     "results":{
-        "results":{
             "id":"1",
             "content_id":"1",
             "key":"dolorem",
@@ -1197,7 +1266,6 @@ path , id , yes ,  , Id of the content field you want to pull
             "type":"atque",
             "position":"1"
         }
-    }
 }
 
 ```
@@ -1833,3 +1901,1424 @@ body , content_id , yes , The content id on which we complete the user progress.
 }
 
 ```
+
+Store permission - JSON controller
+--------------------------------------
+
+`{ PUT /permission }`
+
+Store a new permission in the CMS.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/permission',
+    type: 'put'
+  	data: {name: 'drumeo edge'} 
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key    |  required |  default                                    |  description\|notes                                       | 
+|-----------------|---------|-----------|---------------------------------------------|-----------------------------------------------------------| 
+| body            |  name   |  yes      |                                             |  The name of this permission - for example: 'drumeo edge' | 
+| body            |  brand  |  no       |  The default brand from configuration file  |  The brand where the permission it's available            | 
+
+
+
+
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+body , name , yes , , The name of this permission - for example: 'drumeo edge'
+body , brand , no , The default brand from configuration file , The brand where the permission it's available
+-->
+
+
+### Response Example
+
+```200 OK```
+
+```json
+
+{
+	"id":24,
+	"name":"drumeo edge",
+    "brand":"brand"
+}
+
+```
+
+Change permission - JSON controller
+--------------------------------------
+
+`{ PATCH /permission/{id} }`
+
+Change permission name or the brand where the permission it's available.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/permission/73',
+    type: 'patch'
+  	data: {name: 'bass drum system',} 
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key   |  required |  default |  description\|notes                            | 
+|-----------------|--------|-----------|----------|------------------------------------------------| 
+| path            |  id    |  yes      |          |  Id of the permission you want to change.      | 
+| body            |  name  |  yes      |          |  The new name of this permission               | 
+| body            |  brand |  no       |          |  The brand where the permission it's available | 
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes, , Id of the permission you want to change.
+body , name , yes , , The new name of this permission 
+body , brand, no , , The brand where the permission it's available
+-->
+
+
+### Response Example
+
+```201 OK```
+
+```json
+{
+	"id":73,
+	"name":"bass drum system",
+    "brand":"brand"
+}
+
+```
+```404 Not Found```
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Update failed, permission not found with id: 73"
+      }
+}
+```
+
+Delete permission - JSON controller
+--------------------------------------
+
+`{ DELETE /permission/{id} }`
+
+Delete the permission and all the links with contents.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/permission/23',
+    type: 'delete',
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key |  required |  description\|notes    | 
+|-----------------|------|-----------|------------------------| 
+| path            |  id  |  yes      |  Id of the permission. | 
+
+
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, description\|notes
+path , id , yes, Id of the permission.   
+-->
+
+
+### Response Example
+
+```204 No Content```  
+
+```404 Not Found```
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Delete failed, permission not found with id: 23"
+      }
+}
+```
+
+Assign permission - JSON controller
+--------------------------------------
+
+`{ PUT /permission/assign }`
+
+Assign permission to a specific content or to all content of certain type.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/permission/assign',
+    type: 'put'
+  	data: {content_type: 'course', permission_id: 24} 
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key            |  required |  default |  description\|notes                                         | 
+|-----------------|-----------------|-----------|----------|-------------------------------------------------------------| 
+| body            |  permission_id  |  yes      |          |  The permission id you want to assign to the content.       | 
+| body            |  content_id     |  no       |  null    |  The content id you want to assign the permission to.       | 
+| body            |  content_type   |  no       |  null    |  The type of contents you want to assign the permission to. | 
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+body , permission_id , yes , , The permission id you want to assign to the content.
+body , content_id , no , null , The content id you want to assign the permission to.
+body , content_type , no , null , The type of contents you want to assign the permission to.
+-->
+
+
+### Response Example
+
+```200 OK```
+
+```json
+
+{ 
+  "id": 2,
+  "content_id": null,
+  "content_type": "course",
+  "permission_id": 24,
+  "name": "drumeo edge",
+  "brand":"brand"
+}
+
+```
+
+Dissociate permission - JSON controller
+--------------------------------------
+
+`{ PATCH /permission/dissociate }`
+
+Dissociate permissions from a specific content or all content of a certain type
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/permission/dissociate',
+    type: 'patch',
+  	// Let's say there are 42 courses that have had permission id 23 assigned to them
+    // ... there should then be 42 successful contentPermission table rows deleted.
+    data: {content_type: 'course', permission_id: 23} ,
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key            |  required |  default |  description\|notes                                        | 
+|-----------------|-----------------|-----------|----------|------------------------------------------------------------| 
+| body            |  permission_id  |  yes      |          |  The permission id you want to dissociate to the content.  | 
+| body            |  content_id     |  no       |  null    |  The content id with which permission is associated.       | 
+| body            |  content_type   |  no       |  null    |  The type of contents with which permission is associated. | 
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+body , permission_id , yes , , The permission id you want to dissociate to the content.
+body , content_id , no , null , The content id with which permission is associated.
+body , content_type , no , null , The type of contents with which permission is associated.
+-->
+
+
+### Response Example
+
+```200 OK```
+
+```json
+
+42
+
+```
+
+Get permissions - JSON controller
+--------------------------------------
+
+`{ GET /permission }`
+
+Get all the permissions from the database.
+
+
+### Request Example
+
+```js   
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/permission',
+    type: 'get'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+
+### Response Example
+
+```200 OK```
+
+```json
+{
+    "status":"ok",
+    "code":200,
+    "results":[
+        {
+            "id":1,
+            "name":"drumeo_membership"
+        },
+        {
+            "id":2,
+            "name":"drumming_system"
+        }
+    ]
+}
+
+```
+Give user access - JSON controller
+--------------------------------------
+
+`{ PUT /user-permission }`
+
+Give users access to specific content for a specific amount of time.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/user-permission',
+    type: 'put'
+  	data: {user_id: '1', permission_id: 24, start_date: '2018-07-11 05:21:23', expiration_date: '2018-12-11 05:21:23'} 
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+| path\|query\|body |  key              |  required |  default |  description\|notes                                                                                             | 
+|-----------------|-------------------|-----------|----------|-----------------------------------------------------------------------------------------------------------------| 
+| body            |  user_id          |  yes      |          |  The user id.                                                                                                   | 
+| body            |  permission_id    |  yes      |          |  The permission id.                                                                                             | 
+| body            |  start_date       |  yes      |          |  The date when the user has access.                                                                             | 
+| body            |  expiration_date  |  no       |  null    |  If expiration date is null they have access forever; otherwise the user have access until the expiration date. | 
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+body , user_id , yes , , The user id.
+body , permission_id , yes , , The permission id.
+body , start_date , yes ,  , The date when the user has access.
+body , expiration_date , no , null , If expiration date is null they have access forever; otherwise the user have access until the expiration date.
+-->
+
+
+### Response Example
+
+```200 OK```
+
+```json
+
+{ 
+		"id":"1",
+        "user_id":"1",
+        "permissions_id":"1",
+        "start_date":"2018-07-11 05:21:23",
+        "expiration_date":null,
+        "created_on":"2018-07-11 05:21:23",
+        "updated_on":null
+}
+
+```
+Change user access - JSON controller
+--------------------------------------
+
+`{ PATCH /user-permission/{userPermissionId} }`
+
+Change user access.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/user-permission/1',
+    type: 'patch'
+  	data: {expiration_date: '2018-09-11 05:21:23',} 
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key              |  required |  default |  description\|notes                                                                                             | 
+|-----------------|-------------------|-----------|----------|-----------------------------------------------------------------------------------------------------------------| 
+| path            |  id               |  yes      |          |  The user permission id.                                                                                        | 
+| body            |  user_id          |  no       |          |  The user id.                                                                                                   | 
+| body            |  permission_id    |  no       |          |  The permission id.                                                                                             | 
+| body            |  start_date       |  no       |          |  The date when the user has access.                                                                             | 
+| body            |  expiration_date  |  no       |          |  If expiration date is null they have access forever; otherwise the user have access until the expiration date. | 
+
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes , , The user permission id.
+body , user_id , no , , The user id.
+body , permission_id , no , , The permission id.
+body , start_date , no ,  , The date when the user has access.
+body , expiration_date , no ,  , If expiration date is null they have access forever; otherwise the user have access until the expiration date.
+-->
+
+
+### Response Example
+
+```201 OK```
+
+```json
+{
+ 		"id":"1",
+        "user_id":"1",
+        "permissions_id":"1",
+        "start_date":"2018-07-11 05:56:13",
+        "expiration_date":"2018-09-11 05:21:23",
+        "created_on":"2018-07-11 05:56:13",
+        "updated_on":"2018-07-11 05:56:13"
+}
+
+```
+```404 Not Found```
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Update failed, user permission not found with id: 1"
+      }
+}
+```
+
+Delete user access - JSON controller
+--------------------------------------
+
+`{ DELETE /user-permission/{id} }`
+
+Delete user access to content.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/user-permission/1',
+    type: 'delete',
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key |  required |  description\|notes    | 
+|-----------------|------|-----------|------------------------| 
+| path            |  id  |  yes      |  Id of the user permission. | 
+
+
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, description\|notes
+path , id , yes, Id of the user permission.   
+-->
+
+
+### Response Example
+
+```204 No Content```  
+
+```404 Not Found```
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Delete failed, user permission not found with id: 1"
+      }
+}
+```
+
+Pull users permissions - JSON controller
+--------------------------------------
+
+`{ GET /user-permission }`
+
+Get active users permissions. 
+
+IF `only_active` it's set false on the request the expired permissions are returned also.
+
+IF `user_id` it's set on the request only the permissions for the specified user are returned
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/user-permission',
+    type: 'get',
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key          |  required |  default |  description\|notes                                                   |                                                       | 
+|-----------------|---------------|-----------|----------|-----------------------------------------------------------------------|-------------------------------------------------------| 
+| body            |  user_id      |  no       |  null    |  If it's set only the permissions for the specified user are returned |  otherwise all the user permissions are returned.     | 
+| body            |  only_active  |  no       |  true    |  If it's false the expired permissions are returned also              |  otherwise only active user permissions are returned. | 
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+body , user_id , no , null , If it's set only the permissions for the specified user are returned, otherwise all the user permissions are returned.
+body , only_active , no , true , If it's false the expired permissions are returned also, otherwise only active user permissions are returned.
+-->
+
+
+### Response Example
+
+```200 OK```
+
+```json
+{
+    "status":"ok",
+    "code":200,
+    "results":[
+           {
+            "id":"1",
+            "user_id":"1",
+            "permissions_id":"1",
+            "start_date":"2018-07-11 06:34:45",
+            "expiration_date":null,
+            "created_on":"2018-07-11 06:34:45",
+            "updated_on":null,
+            "name":"nobis",
+            "brand":"brand"
+          },
+          {
+            "id":"1",
+            "user_id":"2",
+            "permissions_id":"1",
+            "start_date":"2018-07-11 06:34:45",
+            "expiration_date":null,
+            "created_on":"2018-07-11 06:34:45",
+            "updated_on":null,
+            "name":"nobis",
+            "brand":"brand"
+          }
+        ]
+}
+
+```
+
+```
+Comment a content - JSON controller
+--------------------------------------
+
+`{ PUT /user-permission }`
+
+Add a comment to a content if the request data pass the validation. Only authenticated users can add comments and the content type should allow comments.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/comment',
+    type: 'put'
+   	data: {comment: 'my comment', content_id: 1} 
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+| path\|query\|body |  key           |  required |  default |  description\|notes                                                 | 
+|-----------------|----------------|-----------|----------|---------------------------------------------------------------------| 
+| body            |  comment       |  yes      |          |  The comment description.                                           | 
+| body            |  content_id    |  yes      |          |  The content id you want to assign the comment to.                  | 
+| body            |  display_name  |  yes      |          |  The display name that should be displayed; by default empty string | 
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+body , comment , yes , , The comment description.
+body , content_id , yes , , The content id you want to assign the comment to.
+body , display_name , yes ,  , The display name that should be displayed; by default empty string
+-->
+
+
+### Response Example
+
+```200 OK```
+
+```json
+
+{
+    "status": "ok",
+    "code": 200,
+    "results": {
+        "id": 5,
+        "content_id": 1,
+        "parent_id": null,
+        "user_id": 1,
+        "comment": "my comment",
+        "created_on": "2017-11-15 07:53:48",
+        "deleted_at": null
+    }
+}
+
+```
+```403 Not allowed``` Content type not allow comments
+
+```json
+{
+      "status":"error",
+      "code":403,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Not allowed.",
+        "detail":"The content type does not allow comments."
+      }
+}
+```
+
+```403 Not allowed``` Guest
+
+```json
+{
+      "status":"error",
+      "code":403,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Not allowed.",
+        "detail":"Only registered user can add comment. Please sign in."
+      }
+}
+```
+
+Change comment - JSON controller
+--------------------------------------
+
+`{ PATCH /comment/{id} }`
+
+Change comment. Administrator can edit any comment; other users can edit only their comments. 
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/comment/3',
+    type: 'patch'
+   	data: {comment: 'my comment modified'} 
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+| path\|query\|body |  key           |  required |  default |  description\|notes                                 | 
+|-----------------|----------------|-----------|----------|-----------------------------------------------------| 
+| path            |  id            |  yes      |          |  Id of the comment you want to edit.                | 
+| body            |  comment       |  no       |          |  The description of the comment.                    | 
+| body            |  content_id    |  no       |          |  The content id this comment belongs to.            | 
+| body            |  parent_id     |  no       |          |  The parent comment id if the comment it's a reply. | 
+| body            |  user_id       |  no       |          |  User id.                                           | 
+| body            |  display_name  |  no       |          |  The display name.                                  | 
+
+
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes , , The user permission id.
+body , user_id , no , , The user id.
+body , permission_id , no , , The permission id.
+body , start_date , no ,  , The date when the user has access.
+body , expiration_date , no ,  , If expiration date is null they have access forever; otherwise the user have access until the expiration date.
+-->
+
+
+### Response Example
+
+```201 OK```
+
+```json
+{
+    "status": "ok",
+    "code": 201,
+    "results": {
+        "id": 3,
+        "content_id": 1,
+        "parent_id": null,
+        "user_id": 1,
+        "comment": "my comment modified",
+        "created_on": "2017-11-15 07:31:54",
+        "deleted_at": null
+    }
+}
+
+```
+```404 Not Found```
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Update failed, comment not found with id: 3"
+      }
+}
+```
+```403 Not allowed``` 
+
+```json
+{
+      "status":"error",
+      "code":403,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Not allowed.",
+        "detail":"Update failed, you can update only your comments."
+      }
+}
+```
+
+```403 Not allowed``` Guest
+
+```json
+{
+      "status":"error",
+      "code":403,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Not allowed.",
+        "detail":"Only registered user can modify own comments. Please sign in."
+      }
+}
+```
+
+Delete comment - JSON controller
+--------------------------------------
+
+`{ DELETE /comment/{id} }`
+
+Delete content comment or mark comment as deleted: if the user it's admin the comment with all his replies will be deleted, otherwise the comment with the replies are only soft deleted (marked as deleted).
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/comment/2',
+    type: 'delete'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key |  required |  description\|notes    | 
+|-----------------|------|-----------|------------------------| 
+| path            |  id  |  yes      |  Id of the comment. | 
+
+
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, description\|notes
+path , id , yes, Id of the comment.   
+-->
+
+
+### Response Example
+
+```204 No Content```  
+
+```404 Not Found```
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Delete failed, comment not found with id: 1"
+      }
+}
+```
+```403 Not allowed``` 
+
+```json
+{
+      "status":"error",
+      "code":403,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Not allowed.",
+        "detail":"Delete failed, you can delete only your comments."
+      }
+}
+```
+
+
+Reply to a comment - JSON controller
+--------------------------------------
+
+`{ PUT /user-permission }`
+
+Add a reply to a comment if the request data pass the validation. Only authenticated users can add replies and the content type should allow comments.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/comment/reply',
+    type: 'put'
+   	data: {comment: 'my reply', parent_id: 3} 
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+| path\|query\|body |  key        |  required |  default |  description\|notes                              | 
+|-----------------|-------------|-----------|----------|--------------------------------------------------| 
+| body            |  comment    |  no       |          |  The comment description.                        | 
+| body            |  parent_id  |  no       |          |  The comment id you want to assign the reply to. | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+body , comment , no , , The comment description.
+body , parent_id , no , , The comment id you want to assign the reply to.
+-->
+
+
+### Response Example
+
+```200 OK```
+
+
+```json
+{
+    "status": "ok",
+    "code": 200,
+    "results": {
+        "id": 6,
+        "content_id": 1,
+        "parent_id": 3,
+        "user_id": 1,
+        "comment": "my reply",
+        "created_on": "2017-11-15 08:36:38",
+        "deleted_at": null
+    }
+}
+```
+
+```403 Not allowed``` Content type not allow comments
+
+```json
+{
+      "status":"error",
+      "code":403,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Not allowed.",
+        "detail":"The content type does not allow comments."
+      }
+}
+```
+
+```403 Not allowed``` Guest
+
+```json
+{
+      "status":"error",
+      "code":403,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Not allowed.",
+        "detail":"Only registered user can reply to comment. Please sign in."
+      }
+}
+```
+
+Pull comments - JSON controller
+--------------------------------------
+
+`{ GET /comment }`
+
+Pull the comments based on the criteria passed in request:
+
+`content_id`   => pull the comments for given content id
+
+ `user_id`      => pull user's comments
+ 
+`content_type` => pull the comments for the contents with given type
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/comment?page=3&limit=25&content_id=3&user_id=9923',
+    type: 'get'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key                  |  required |  default        |  description\|notes                                                               | 
+|-------------------|-----------------------|-----------|-----------------|-----------------------------------------------------------------------------------| 
+| query             |  page                 |  no       |  1              |  Pagination page.                                                                 | 
+| query             |  limit                |  no       |  10             |  Amount of comments to pull per page.                                             | 
+| query             |  sort                 |  no       |  '-created_on'  |  Sort column name and direction. If it starts with - it will be descending order. | 
+| query             |  content_id           |  no       |                 |  Only comments for this content id will be returned.                              | 
+| query             |  user_id              |  no       |                 |  Only comments by this user id will be pulled.                                    | 
+| query             |  content_type         |  no       |                 |  Only comments on content with this type will be pulled.                          | 
+| query             |  assigned_to_user_id  |  no       |                 |  Only comments assigned to this user will be pulled.                              | 
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path\|query\|body, key, required, default, description\|notes
+query , page , no , 1 , Pagination page.
+query , limit , no , 10 , Amount of comments to pull per page.
+query , sort , no , '-created_on' , Sort column name and direction. If it starts with - it will be descending order.
+query , content_id , no , , Only comments for this content id will be returned.
+query , user_id , no ,  , Only comments by this user id will be pulled.
+query , content_type , no ,  , Only comments on content with this type will be pulled.
+query , assigned_to_user_id , no ,  , Only comments assigned to this user will be pulled.
+-->
+
+
+### Response Example
+
+```200 OK```
+
+```json
+{
+    "status": "ok",
+    "code": 200,
+    "page": 1,
+    "limit": 10,
+    "total_results": 3,
+    "results": {
+        "2": {
+            "id": 2,
+            "content_id": 1,
+            "comment": "comment text",
+            "parent_id": null,
+            "user_id": 1,
+            "created_on": "2017-11-15 07:28:44",
+            "deleted_at": null,
+            "replies": []
+        },
+        "3": {
+            "id": 3,
+            "content_id": 1,
+            "comment": "comment text 2",
+            "parent_id": null,
+            "user_id": 1,
+            "created_on": "2017-11-15 07:31:54",
+            "deleted_at": null,
+            "replies": {
+                0: {
+                    "id": 4,
+                    "content_id": 1,
+                    "comment": "my reply to your comment",
+                    "parent_id": 3,
+                    "user_id": 1,
+                    "created_on": "2017-11-15 07:34:48",
+                    "deleted_at": null
+                }
+            }
+        }
+    },
+    "filter_options": null
+}
+
+```
+
+Get linked comments - JSON controller
+--------------------------------------
+
+`{ GET /comment/{id} }`
+
+Get the linked comments.
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/comment/3,
+    type: 'get'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key    |  required |  default |  description\|notes                   | 
+|-------------------|---------|-----------|----------|---------------------------------------| 
+| path              |  id     |  yes      |          |  The comment id                       | 
+| query             |  limit  |  no       |  10      |  Amount of comments to pull per page. | 
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path\|query\|body, key, required, default, description\|notes
+path , id, yes, , The comment id
+query , limit , no , 10 , Amount of comments to pull per page.
+-->
+
+
+### Response Example
+
+```200 OK```
+
+```json
+{
+    "status": "ok",
+    "code": 200,
+    "page": 1,
+    "limit": 10,
+    "total_results": 3,
+    "results": {
+        "0": {
+           "id": 4,
+           "content_id": 1,
+           "comment": "Doloribus ad vitae possimus libero aperiam doloremque est molestiae. Nihil eum.",
+           "parent_id": 3,
+           "user_id": 1,
+           "created_on": "2017-11-15 07:34:48",
+           "deleted_at": null,
+           "replies":[]
+        }
+    },
+    "filter_options": null
+}
+
+```
+
+Like a comment - JSON controller
+--------------------------------------
+
+`{ PUT /comment-like/{id} }`
+
+Authenticated user like a comment.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/comment-like/1',
+    type: 'put'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Response Example
+
+```200 OK```
+
+
+```json
+{
+    "status": "ok",
+    "code": 200,
+    "results": true
+}
+```
+
+Unlike a comment - JSON controller
+--------------------------------------
+
+`{ DELETE /comment-like/{id} }`
+
+Authenticated user unlike a comment.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/comment-like/1',
+    type: 'delete'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Response Example
+
+```200 OK```
+
+
+```json
+{
+    "status": "ok",
+    "code": 200,
+    "results": true
+}
+```
+
+Pull assigned to me comments - JSON controller
+--------------------------------------
+
+`{ GET /assigned-comments }`
+
+The managers have the ability to get comment assignments for.
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/assigned-comments?user_id=232',
+    type: 'get'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key      |  required |  default |  description\|notes                                                                                                         | 
+|-------------------|-----------|-----------|----------|-----------------------------------------------------------------------------------------------------------------------------| 
+| query             |  user_id  |  no       |          |  The user ID to get comment assignments for. Leave out this parameter to get the comments for the currently logged in user. | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path\|query\|body, key, required, default, description\|notes
+query , user_id , no ,  , The user ID to get comment assignments for. Leave out this parameter to get the comments for the currently logged in user.
+-->
+
+
+### Response Example
+
+```200 OK```
+
+```json
+{
+    "status": "ok",
+    "code": 200,
+    "results": {
+        "2": {
+            "id": 2,
+            "content_id": 1,
+            "comment": "comment text",
+            "parent_id": null,
+            "user_id": 145,
+            "created_on": "2017-11-15 07:28:44",
+            "deleted_at": null
+        },
+        "3": {
+            "id": 3,
+            "content_id": 1,
+            "comment": "comment text 2",
+            "parent_id": null,
+            "user_id": 14,
+            "created_on": "2017-11-15 07:31:54",
+            "deleted_at": null
+        }
+    }
+}
+
+```
+
+
+Delete comment assignation - JSON controller
+--------------------------------------
+
+`{ DELETE /assigned-comments/{id} }`
+
+Delete comment assignations.
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/assigned-comment/1',
+    type: 'delete'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key |  required |  description\|notes | 
+|-------------------|------|-----------|---------------------| 
+| path              |  id  |  yes      |  Id of the comment  | 
+
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path\|query\|body, key, required, description\|notes
+path , id , yes, Id of the comment
+-->
+
+
+### Response Example
+
+```204 No Content```
