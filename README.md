@@ -104,16 +104,30 @@ Data first simple CMS.
     * [Usage Example](docs/README-ContentService.md#usage-example-23)
     * [Parameters](docs/README-ContentService.md#parameters-23)
     * [Responses](docs/README-ContentService.md#responses-23)
-  * [ContentFieldService](#contentfieldservice)
-    + [get](#get)
-      - [Usage Example(s)](#usage-example-s--24)
-      - [Parameters](#parameters-24)
-      - [Responses](#responses-24)
-    + [getByKeyValueTypePosition](#getbykeyvaluetypeposition)
-    + [getByKeyValueType](#getbykeyvaluetype)
-    + [create](#create-1)
-    + [update](#update-1)
-    + [delete](#delete-1)
+ * [Content Field Service](docs\README-ContentFieldService.md#content-field-service)
+     + [get](docs\README-ContentFieldService.md#get)
+       - [Usage Example](docs\README-ContentFieldService.md#usage-example)
+       - [Parameters](docs\README-ContentFieldService.md#parameters)
+       - [Responses](docs\README-ContentFieldService.md#responses)
+     + [getByKeyValueTypePosition](docs\README-ContentFieldService.md#getbykeyvaluetypeposition)
+       - [Parameters](docs\README-ContentFieldService.md#parameters-1)
+       - [Responses](docs\README-ContentFieldService.md#responses-1)
+     + [getByKeyValueType](docs\README-ContentFieldService.md#getbykeyvaluetype)
+       - [Usage Example](docs\README-ContentFieldService.md#usage-example-1)
+       - [Parameters](docs\README-ContentFieldService.md#parameters-2)
+       - [Responses](docs\README-ContentFieldService.md#responses-2)
+     + [create](docs\README-ContentFieldService.md#create)
+       - [Usage Example](docs\README-ContentFieldService.md#usage-example-2)
+       - [Parameters](docs\README-ContentFieldService.md#parameters-3)
+       - [Responses](docs\README-ContentFieldService.md#responses-3)
+     + [update](docs\README-ContentFieldService.md#update)
+       - [Usage Example](docs\README-ContentFieldService.md#usage-example-3)
+       - [Parameters](docs\README-ContentFieldService.md#parameters-4)
+       - [Responses](docs\README-ContentFieldService.md#responses-4)
+     + [delete](docs\README-ContentFieldService.md#delete)
+       - [Usage Example](docs\README-ContentFieldService.md#usage-example-4)
+       - [Parameters](docs\README-ContentFieldService.md#parameters-5)
+       - [Responses](docs\README-ContentFieldService.md#responses-5)
   * [ContentDatumService](#contentdatumservice)
     + [get](#get-1)
       - [Usage Example(s)](#usage-example-s--25)
@@ -364,87 +378,6 @@ Run `$ php artisan vendor:publish` to copy the config file and create a *railcon
 
 # Services
 
-
-
-ContentFieldService
---------------------
-
-All methods below are *public*.
-
-Inject the `Railroad\Railcontent\Services\ContentFieldService` class where needed
-
-```php
-/** @var Railroad\Railcontent\Services\ContentFieldService $contentFieldService */
-protected $contentFieldService;
-
-public function __constructor(Railroad\Railcontent\Services\ContentFieldService $contentFieldService){
-    $this->contentFieldService = $contentFieldService;
-}
-```
-
-Include namespace at top of file:
-
-```php
-use Railroad\Railcontent\Services\ContentFieldService;
-```
-
-... to save yourself having to specify the namespace everywhere:
-
-```php
-/** @var ContentFieldService $contentFieldService */
-protected $contentFieldService;
-
-public function __constructor(ContentFieldService $contentFieldService){
-    $this->contentFieldService = $contentFieldService;
-}
-```
-
-
-### get
-
-#### Usage Example(s)
-
-```php
-$contentField = $this->contentFieldService->get($id);
-```
-
-#### Parameters
-
-| #  |  name             |  required |  type    |  description                        | 
-|----|-------------------|-----------|----------|-------------------------------------| 
-| 1  |  id |  yes      |  integer  |  id of content field you want to pull | 
- 
-<!--
-#, name, required, type, description
-1 , id, yes, integer , id of content field you want to pull  
--->
-
-#### Responses
-
-| outcome  |  return data type |  return data value (example)                                                                                                                                                                                                                                                                                |  notes about return data | 
-|----------|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------| 
-| failed   |  null             |  null                                                                                                                                                                                                                                                                                                       |                          | 
-| succeded |  array    | [<br/>&emsp; "id" => "1"<br/>&emsp;"content_id" => "1"<br/>&emsp;"key" => "fuga"<br/>&emsp;"value" => "suscipit"<br/>&emsp;"type" => "string"<br/>&emsp;"position" => "1"<br/>]|  Field details          | 
-
-### getByKeyValueTypePosition
-
-[TODO]
-
-### getByKeyValueType
-
-[TODO]
-
-### create
-
-[TODO]
-
-### update
-
-[TODO]
-
-### delete
-
-[TODO]
 
 
 ContentDatumService
