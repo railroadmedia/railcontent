@@ -276,6 +276,7 @@ class ContentServiceTest extends RailcontentTestCase
         $content2 = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$commentableContentTypes), ContentService::STATUS_ARCHIVED);
 
         $results = $this->classBeingTested->getWhereTypeInAndStatusAndPublishedOnOrdered([$content1['type']], $content1['status'], $content1['published_on']);
+
         $this->assertEquals([$content1['id'] => $content1], $results);
     }
 
@@ -290,6 +291,7 @@ class ContentServiceTest extends RailcontentTestCase
         $content['child_id'] = $children['id'];
 
         $results = $this->classBeingTested->getByChildIdsWhereType([$children['id']], $content['type']);
+
         $this->assertEquals([$content['id'] => $content], $results);
     }
 
@@ -314,5 +316,96 @@ class ContentServiceTest extends RailcontentTestCase
 
         $this->assertEquals('a_value', Cache::store(ConfigService::$cacheDriver)->get('do_not_delete'));
         $this->assertEquals(1, count(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys('*')));
+    }
+
+    public function test_getAllByType()
+    {
+        $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
+        $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
+        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
+
+        $results = $this->classBeingTested->getAllByType($type);
+
+        $this->assertEquals([$content1['id']=>$content1,$content2['id']=> $content2], $results);
+    }
+
+    public function test_getWhereTypeInAndStatusAndField()
+    {
+        $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
+        $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
+        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
+        $fields = $this->fieldFactory->create($content1['id'],'difficulty',2,1,'string');
+        $results = $this->classBeingTested->getWhereTypeInAndStatusAndField([$type], ContentService::STATUS_PUBLISHED, 'difficulty',2, 'string');
+
+        $this->assertEquals(1, count($results));
+    }
+
+    public function test_getBySlugAndType()
+    {
+        $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
+        $slug = $this->faker->slug();
+        $content1 = $this->contentFactory->create($slug, $type, ContentService::STATUS_PUBLISHED);
+        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
+
+        $results = $this->classBeingTested->getBySlugAndType($slug, $type);
+
+        $this->assertEquals(1, count($results));
+    }
+
+    public function test_getByUserIdTypeSlug()
+    {
+        $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
+        $slug = $this->faker->slug();
+        $userId = $this->faker->numberBetween();
+        $content1 = $this->contentFactory->create($slug, $type, ContentService::STATUS_PUBLISHED, null, null, $userId);
+        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED, null, null, $userId);
+
+        $results = $this->classBeingTested->getByUserIdTypeSlug($userId, $type, $slug);
+
+        $this->assertEquals(1, count($results));
+    }
+
+    public function test_getPaginatedByTypeUserProgressState()
+    {
+        $type = 'song';
+        $userId = $this->faker->numberBetween();
+
+        $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED, null, null, $userId);
+        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED, null, null, $userId);
+
+        $playlist = $this->userContentProgressFactory->startContent($content1['id'], $userId);
+        $playlist = $this->userContentProgressFactory->startContent($content2['id'], $userId);
+
+        $results = $this->classBeingTested->getPaginatedByTypeUserProgressState($type, $userId, 'started');
+
+        $this->assertEquals(2, count($results));
+    }
+
+    public function test_getByContentFieldValuesForTypes()
+    {
+        $type = 'vimeo-video';
+        $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
+        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
+        $fields = $this->fieldFactory->create($content1['id'],'length_in_seconds',0,1,'string');
+       // $fields = $this->fieldFactory->create($content2['id'],'length_in_seconds',0,1,'string');
+        $results = $this->classBeingTested->getByContentFieldValuesForTypes(['vimeo-video'], 'length_in_seconds',  [0]);
+
+        $this->assertEquals(1, count($results));
+    }
+
+    public function test_countByTypesUserProgressState()
+    {
+        $type = 'song';
+        $userId = $this->faker->numberBetween();
+
+        $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED, null, null, $userId);
+        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED, null, null, $userId);
+
+        $playlist = $this->userContentProgressFactory->startContent($content1['id'], $userId);
+        $playlist = $this->userContentProgressFactory->startContent($content2['id'], $userId);
+
+        $results = $this->classBeingTested->countByTypesUserProgressState([$type], $userId, 'started');
+
+        $this->assertEquals(2, $results);
     }
 }

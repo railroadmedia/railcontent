@@ -118,4 +118,36 @@ class ContentServiceTest extends RailcontentTestCase
         );
     }
 
+    public function test_get_by_ids()
+    {
+        $content = $this->contentFactory->create();
+        $content2 = $this->contentFactory->create();
+
+
+
+        $results = $this->serviceBeingTested->getByIds([$content['id'], $content2['id']]);
+
+        $this->assertEquals(
+            array_merge(
+                $content->getArrayCopy(),
+                [
+                    'id' => $content['id']
+                ]
+            ),
+            $results->getArrayCopy()
+        );
+    }
+
+    public function test_get_by_ids_not_exists()
+    {
+
+        $results = $this->serviceBeingTested->getByIds([3, 4]);
+
+        $this->assertEquals(
+            [],
+            $results->getArrayCopy()
+        );
+    }
+
+
 }
