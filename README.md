@@ -6,8 +6,7 @@ Data first simple CMS.
   * [Installation, Configuration, Use](#installation--configuration--use)
     + [Installation](#installation)
     + [Configuration](#configuration)
-- [Services](#services)
-* [ContentService](docs/README-ContentService.md#contentservice)
+* [Content Service](docs/README-ContentService.md#contentservice)
   - [getById](docs/README-ContentService.md#getbyid)
     * [Usage Example](docs/README-ContentService.md#usage-example)
     * [Parameters](docs/README-ContentService.md#parameters)
@@ -128,13 +127,27 @@ Data first simple CMS.
        - [Usage Example](docs/README-ContentFieldService.md#usage-example-4)
        - [Parameters](docs/README-ContentFieldService.md#parameters-5)
        - [Responses](docs/README-ContentFieldService.md#responses-5)
-  * [ContentDatumService](#contentdatumservice)
-    + [get](#get-1)
-      - [Usage Example(s)](#usage-example-s--25)
-    + [getByContentIds](#getbycontentids)
-    + [create](#create-2)
-    + [update](#update-2)
-    + [delete](#delete-2)
+* [Content Datum Service](docs/README-ContentDatumService.md#content-datum-service)
+    + [get](docs/README-ContentDatumService.md#get)
+      - [Usage Example](docs/README-ContentDatumService.md#usage-example)
+      - [Parameters](docs/README-ContentDatumService.md#parameters)
+      - [Responses](docs/README-ContentDatumService.md#responses)
+    + [getByContentIds](docs/README-ContentDatumService.md#getbycontentids)
+      - [Usage Example](docs/README-ContentDatumService.md#usage-example-1)
+      - [Parameters](docs/README-ContentDatumService.md#parameters-1)
+      - [Responses](docs/README-ContentDatumService.md#responses-1)
+    + [create](docs/README-ContentDatumService.md#create)
+      - [Usage Example](docs/README-ContentDatumService.md#usage-example-2)
+      - [Parameters](docs/README-ContentDatumService.md#parameters-2)
+      - [Responses](docs/README-ContentDatumService.md#responses-2)
+    + [update](docs/README-ContentDatumService.md#update)
+      - [Usage Example](docs/README-ContentDatumService.md#usage-example-3)
+      - [Parameters](docs/README-ContentDatumService.md#parameters-3)
+      - [Responses](docs/README-ContentDatumService.md#responses-3)
+    + [delete](docs/README-ContentDatumService.md#delete)
+      - [Usage Example](docs/README-ContentDatumService.md#usage-example-4)
+      - [Parameters](docs/README-ContentDatumService.md#parameters-4)
+      - [Responses](docs/README-ContentDatumService.md#responses-4)
 - [API endpoints](docs/README-API.md#api-endpoints)
   * [Get content - JSON controller](docs/README-API.md#get-content---json-controller)
     + [Request Example](docs/README-API.md#request-example)
@@ -374,70 +387,6 @@ Add the service provider (`\Railroad\Railcontent\Providers\RailcontentServicePro
 ```
 
 Run `$ php artisan vendor:publish` to copy the config file and create a *railcontent.php* file in your application's */config* directory. This will take the values you supplied in the *.env* file and pass them needed.
-
-
-# Services
-
-
-
-ContentDatumService
---------------------
-
-All methods below are *public*.
-
-Inject the `Railroad\Railcontent\Services\ContentDatumService` class where needed
-
-```php
-/** @var Railroad\Railcontent\Services\ContentDatumService $contentDatumService */
-protected $contentDatumService;
-
-public function __constructor(Railroad\Railcontent\Services\ContentDatumService $contentDatumService){
-    $this->contentDatumService = $contentDatumService;
-}
-```
-
-Include namespace at top of file:
-
-```php
-use Railroad\Railcontent\Services\ContentDatumService;
-```
-
-... to save yourself having to specify the namespace everywhere:
-
-```php
-/** @var ContentDatumService $contentDatumService */
-protected $contentDatumService;
-
-public function __constructor(ContentDatumService $contentDatumService){
-    $this->contentDatumService = $contentDatumService;
-}
-```
-
-
-### get
-
-#### Usage Example(s)
-
-```php
-$contentDatum = $this->contentDatumService->get($id);
-```
-
-### getByContentIds
-
-[TODO]
-
-
-### create
-
-[TODO]
-
-### update
-
-[TODO]
-
-### delete
-
-[TODO]
 
 
 
