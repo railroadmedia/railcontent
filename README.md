@@ -7,7 +7,7 @@ Data first simple CMS.
     + [Installation](#installation)
     + [Configuration](#configuration)
 - [Services](#services)
-- [ContentService](docs/README-ContentService.md#contentservice)
+* [ContentService](docs/README-ContentService.md#contentservice)
   - [getById](docs/README-ContentService.md#getbyid)
     * [Usage Example](docs/README-ContentService.md#usage-example)
     * [Parameters](docs/README-ContentService.md#parameters)
