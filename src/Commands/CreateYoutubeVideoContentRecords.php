@@ -17,7 +17,7 @@ class CreateYoutubeVideoContentRecords extends Command
      *
      * @var string
      */
-    protected $signature = 'command:CreateYoutubeVideoContentRecords';
+    protected $signature = 'command:CreateYoutubeVideoContentRecords {maxPages?}';
 
     /**
      * The console command description.
@@ -66,8 +66,15 @@ class CreateYoutubeVideoContentRecords extends Command
         $youtube = new \Google_Service_YouTube($client);
 
         $shouldEnd = 0;
-        $maxPages = 5;
         $items = [];
+
+        if(is_numeric($this->argument('maxPages'))){
+            $maxPages = (int) $this->argument('maxPages');
+        }
+
+        if (empty($maxPages) || $maxPages > 5) {
+            $maxPages = 5;
+        }
 
         //get the channels list for youtube user
         $channelsResponse = $youtube->channels->listChannels(
@@ -80,6 +87,7 @@ class CreateYoutubeVideoContentRecords extends Command
 
         //for each channel get the videos from the channel playlists
         foreach ($channelsResponse['items'] as $channel) {
+            $this->info('Processing a set of videos');
             $uploadsListId = $channel['contentDetails']['relatedPlaylists']['uploads'];
             $nextPageToken = '';
             $shouldEnd = 0;
