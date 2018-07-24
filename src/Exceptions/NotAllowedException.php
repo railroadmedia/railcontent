@@ -1,4 +1,5 @@
 <?php
+
 namespace Railroad\Railcontent\Exceptions;
 
 class NotAllowedException extends \Exception
@@ -7,6 +8,7 @@ class NotAllowedException extends \Exception
 
     /**
      * NotFoundException constructor.
+     *
      * @param string $message
      */
     public function __construct($message)
@@ -14,20 +16,17 @@ class NotAllowedException extends \Exception
         $this->message = $message;
     }
 
-    public function render($request){
-
-        return response()->json(
+    public function render($request)
+    {
+        return reply()->json(
+            [],
             [
-                'status' => 'error',
                 'code' => 403,
-                'total_results' => 0,
-                'results' => [],
-                'error' => [
+                'errors' => [
                     'title' => 'Not allowed.',
                     'detail' => $this->message,
-                ]
-            ],
-            403
+                ],
+            ]
         );
     }
 

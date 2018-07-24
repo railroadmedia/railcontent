@@ -13,10 +13,9 @@ use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
-use Railroad\Railcontent\Responses\JsonPaginatedResponse;
-use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentJsonController extends Controller
 {
@@ -78,11 +77,13 @@ class ContentJsonController extends Controller
             $parsedFilters['included_user_states'] ?? []
         );
 
-        return new JsonPaginatedResponse(
+        return reply()->json(
             $contentData['results'],
-            $contentData['total_results'],
-            $contentData['filter_options'],
-            200
+            [
+                'transformer' => DataTransformer::class,
+                'totalResults' => $contentData['total_results'],
+                'filterOptions' => $contentData['filter_options']
+            ]
         );
     }
 
@@ -94,9 +95,11 @@ class ContentJsonController extends Controller
     {
         $contentData = $this->contentService->getByParentId($parentId);
 
-        return new JsonResponse(
+        return reply()->json(
             $contentData,
-            200
+            [
+                'transformer' => DataTransformer::class,
+            ]
         );
     }
 
@@ -108,9 +111,11 @@ class ContentJsonController extends Controller
     {
         $contentData = $this->contentService->getByIds(explode(',', $request->get('ids', '')));
 
-        return new JsonResponse(
+        return reply()->json(
             $contentData,
-            200
+            [
+                'transformer' => DataTransformer::class,
+            ]
         );
     }
 
@@ -143,7 +148,12 @@ class ContentJsonController extends Controller
 //
 //        $content = array_merge($content, ['validation' => $validation]);
 
-        return new JsonResponse(array_values([$id => $content]), 200);
+        return reply()->json(
+            array_values([$id => $content]),
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 
     public function slugs(Request $request, ...$slugs)
@@ -151,7 +161,8 @@ class ContentJsonController extends Controller
 
     }
 
-    /** Create a new content and return it in JSON format
+    /**
+     * Create a new content and return it in JSON format
      *
      * @param ContentUpdateRequest $request
      * @return JsonResponse
@@ -170,7 +181,13 @@ class ContentJsonController extends Controller
             $request->get('sort', 0)
         );
 
-        return new JsonResponse([$content], 201);
+        return reply()->json(
+            [$content],
+            [
+                'transformer' => DataTransformer::class,
+                'code' =>201
+            ]
+        );
     }
 
     /** Update a content based on content id and return it in JSON format
@@ -178,6 +195,7 @@ class ContentJsonController extends Controller
      * @param integer $contentId
      * @param ContentUpdateRequest $request
      * @return JsonResponse
+     * @throws \Throwable
      */
     public function update(ContentUpdateRequest $request, $contentId)
     {
@@ -206,7 +224,13 @@ class ContentJsonController extends Controller
             new NotFoundException('Update failed, content not found with id: ' . $contentId)
         );
 
-        return new JsonResponse($content, 201);
+        return reply()->json(
+            [$content],
+            [
+                'transformer' => DataTransformer::class,
+                'code' =>201
+            ]
+        );
     }
 
     /**
@@ -214,6 +238,7 @@ class ContentJsonController extends Controller
      *
      * @param integer $contentId
      * @return JsonResponse
+     * @throws \Throwable
      */
     public function delete($contentId)
     {
@@ -227,9 +252,12 @@ class ContentJsonController extends Controller
         );
 
         //if the delete method response it's false the mysql delete method was failed; we throw the proper exception
-        throw_if(!($delete), DeleteFailedException::class);
+        throw_if(
+            !($delete),
+            DeleteFailedException::class
+        );
 
-        return new JsonResponse(null, 204);
+        return reply()->json(null, ['code' => 204]);
     }
 
     /**
@@ -268,8 +296,11 @@ class ContentJsonController extends Controller
         );
 
         //if the delete method response it's false the mysql delete method was failed; we throw the proper exception
-        throw_if(!($delete), DeleteFailedException::class);
+        throw_if(
+            !($delete),
+            DeleteFailedException::class
+        );
 
-        return new JsonResponse(null, 204);
+        return reply()->json(null, ['code' => 204]);
     }
 }

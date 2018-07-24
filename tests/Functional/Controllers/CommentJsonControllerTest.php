@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
-
 use Carbon\Carbon;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -42,8 +41,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
         );
 
         $response = $this->call('PUT', 'railcontent/comment', [
-            'comment' => $this->faker->text(),
-            'content_id' => $content['id'],
+            'comment'      => $this->faker->text(),
+            'content_id'   => $content['id'],
             'display_name' => $this->faker->word()
         ]);
 
@@ -58,8 +57,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
             ContentService::STATUS_PUBLISHED);
 
         $response = $this->call('PUT', 'railcontent/comment', [
-            'comment' => $this->faker->text(),
-            'content_id' => $content['id'],
+            'comment'      => $this->faker->text(),
+            'content_id'   => $content['id'],
             'display_name' => $this->faker->word()
         ]);
 
@@ -85,7 +84,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
     public function test_update_my_comment_response()
     {
-        $userId = $this->createAndLogInNewUser();
+        $userId  = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->randomElement(ConfigService::$commentableContentTypes)
@@ -93,30 +92,30 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
 
         $updatedComment = $this->faker->text();
-        $response = $this->call('PATCH', 'railcontent/comment/' . $comment['id'], [
+        $response       = $this->call('PATCH', 'railcontent/comment/' . $comment['id'], [
             'comment' => $updatedComment
         ]);
 
         $this->assertEquals(201, $response->getStatusCode());
 
-        $expectedResults = $this->createExpectedResult('ok', 201, [
-            'id' => $comment['id'],
-            'comment' => $updatedComment,
-            'content_id' => $content['id'],
-            'parent_id' => null,
-            'user_id' => $userId,
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'deleted_at' => null,
+        $expectedResults = [
+            'id'           => $comment['id'],
+            'comment'      => $updatedComment,
+            'content_id'   => $content['id'],
+            'parent_id'    => null,
+            'user_id'      => $userId,
+            'created_on'   => Carbon::now()->toDateTimeString(),
+            'deleted_at'   => null,
             'display_name' => $comment['display_name'],
-            'replies' => []
-        ]);
+            'replies'      => []
+        ];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
     }
 
     public function test_update_other_comment_response()
     {
-        $userId = $this->createAndLogInNewUser();
+        $userId  = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
@@ -125,7 +124,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
 
         $updatedComment = $this->faker->text();
-        $response = $this->call('PATCH', 'railcontent/comment/' . $comment['id'], [
+        $response       = $this->call('PATCH', 'railcontent/comment/' . $comment['id'], [
             'comment' => $updatedComment
         ]);
 
@@ -136,7 +135,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
     public function test_update_comment_validation_errors()
     {
-        $userId = $this->createAndLogInNewUser();
+        $userId  = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
@@ -145,8 +144,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
 
         $response = $this->call('PATCH', 'railcontent/comment/' . $comment['id'], [
-            'content_id' => rand(),
-            'parent_id' => rand(),
+            'content_id'   => rand(),
+            'parent_id'    => rand(),
             'display_name' => ''
         ]);
 
@@ -169,7 +168,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
     public function test_admin_can_update_other_comment_response()
     {
-        $userId = $this->createAndLogInNewUser();
+        $userId  = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
@@ -178,32 +177,31 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
 
         CommentService::$canManageOtherComments = true;
-        $updatedComment = $this->faker->text();
-        $response = $this->call('PATCH', 'railcontent/comment/' . $comment['id'], [
+        $updatedComment                         = $this->faker->text();
+        $response                               = $this->call('PATCH', 'railcontent/comment/' . $comment['id'], [
             'comment' => $updatedComment
         ]);
 
         $this->assertEquals(201, $response->getStatusCode());
 
-        $expectedResults = $this->createExpectedResult('ok', 201, [
-            'id' => $comment['id'],
-            'comment' => $updatedComment,
+        $expectedResults = [
+            'id'         => $comment['id'],
+            'comment'    => $updatedComment,
             'content_id' => $content['id'],
-            'parent_id' => null
-        ]);
-
-        $response->assertJson($expectedResults);
+            'parent_id'  => null
+        ];
+        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data')[0]);
     }
 
     public function test_delete_my_comment_response()
     {
-        $userId = $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create(
+        $userId   = $this->createAndLogInNewUser();
+        $content  = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
             ContentService::STATUS_PUBLISHED
         );
-        $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
+        $comment  = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
         $response = $this->call('DELETE', 'railcontent/comment/' . $comment['id']);
 
         $this->assertEquals(204, $response->getStatusCode());
@@ -211,14 +209,14 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
     public function test_user_can_not_delete_others_comment()
     {
-        $userId = $this->createAndLogInNewUser();
+        $userId  = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
             ContentService::STATUS_PUBLISHED
         );
 
-        $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $this->faker->randomNumber());
+        $comment                                = $this->commentFactory->create($this->faker->text, $content['id'], null, $this->faker->randomNumber());
         CommentService::$canManageOtherComments = false;
 
         $response = $this->call('DELETE', 'railcontent/comment/' . $comment['id']);
@@ -239,7 +237,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
     public function test_admin_can_delete_other_comment_response()
     {
-        $userId = $this->createAndLogInNewUser();
+        $userId  = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
@@ -248,7 +246,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
 
         CommentService::$canManageOtherComments = true;
-        $response = $this->call('DELETE', 'railcontent/comment/' . $comment['id'], ['auth_level' => 'administrator']);
+        $response                               = $this->call('DELETE', 'railcontent/comment/' . $comment['id'], ['auth_level' => 'administrator']);
 
         $this->assertEquals(204, $response->getStatusCode());
     }
@@ -264,7 +262,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
 
         $response = $this->call('PUT', 'railcontent/comment/reply', [
-            'comment' => $this->faker->text(),
+            'comment'   => $this->faker->text(),
             'parent_id' => $comment['id']
         ]);
 
@@ -294,14 +292,13 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $expectedResults = $this->createPaginatedExpectedResult('ok', 200, 1, 10, 0, [], null);
-        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+        $this->assertEquals([], $response->decodeResponseJson('data'));
     }
 
     public function test_pull_comments_paginated()
     {
-        $page = 2;
-        $limit = 10;
+        $page        = 2;
+        $limit       = 10;
         $totalNumber = $this->faker->numberBetween($limit, ($limit + 25));
 
         $content = $this->contentFactory->create(
@@ -310,35 +307,30 @@ class CommentJsonControllerTest extends RailcontentTestCase
             ContentService::STATUS_PUBLISHED
         );
 
-        for ($i = 1; $i <= $totalNumber; $i++) {
-            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        for($i = 1; $i <= $totalNumber; $i++)
+        {
+            $comments[$i]            = $this->commentFactory->create($this->faker->text, $content['id'], null, rand())->getArrayCopy();
             $comments[$i]['replies'] = [];
         }
 
         $response = $this->call('GET', 'railcontent/comment',
             [
-                'page' => $page,
+                'page'  => $page,
                 'limit' => $limit
             ]);
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $expectedResults = $this->createPaginatedExpectedResult(
-            'ok',
-            200,
-            $page,
-            $limit,
-            $totalNumber,
+        $this->assertEquals(
             array_slice($comments, ($limit * ($page - 1)), $limit, false),
-            null);
-
-        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+            $response->decodeResponseJson('data')
+        );
     }
 
     public function test_pull_content_comments_paginated()
     {
-        $page = 2;
-        $limit = 3;
+        $page        = 2;
+        $limit       = 3;
         $totalNumber = $this->faker->numberBetween($limit, ($limit + 25));
 
         $content = $this->contentFactory->create(
@@ -352,41 +344,37 @@ class CommentJsonControllerTest extends RailcontentTestCase
             $this->faker->randomElement(ConfigService::$commentableContentTypes)
         );
 
-        for ($i = 1; $i <= $totalNumber; $i++) {
-            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        for($i = 1; $i <= $totalNumber; $i++)
+        {
+            $comments[$i]            = $this->commentFactory->create($this->faker->text, $content['id'], null, rand())->getArrayCopy();
             $comments[$i]['replies'] = [];
         }
 
-        for ($i = 1; $i <= $totalNumber; $i++) {
+        for($i = 1; $i <= $totalNumber; $i++)
+        {
             $otherContentcomments[$i] = $this->commentFactory->create($this->faker->text, $otherContent['id'], null, rand());
         }
 
         $response = $this->call('GET', 'railcontent/comment',
             [
-                'page' => $page,
-                'limit' => $limit,
+                'page'       => $page,
+                'limit'      => $limit,
                 'content_id' => $content['id']
             ]);
         $this->assertEquals(200, $response->getStatusCode());
 
-        $expectedResults = $this->createPaginatedExpectedResult(
-            'ok',
-            200,
-            $page,
-            $limit,
-            $totalNumber,
+        $this->assertEquals(
             array_slice($comments, ($limit * ($page - 1)), $limit, false),
-            null);
-
-        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+            $response->decodeResponseJson('data')
+        );
     }
 
     public function test_pull_user_comments_paginated()
     {
-        $page = 2;
-        $limit = 3;
+        $page        = 2;
+        $limit       = 3;
         $totalNumber = $this->faker->numberBetween($limit, ($limit + 25));
-        $userId = 1;
+        $userId      = 1;
 
         $content = $this->contentFactory->create(
             $this->faker->word,
@@ -394,39 +382,35 @@ class CommentJsonControllerTest extends RailcontentTestCase
             ContentService::STATUS_PUBLISHED
         );
 
-        for ($i = 1; $i <= $totalNumber; $i++) {
-            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
+        for($i = 1; $i <= $totalNumber; $i++)
+        {
+            $comments[$i]            = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId)->getArrayCopy();
             $comments[$i]['replies'] = [];
         }
 
-        for ($i = 1; $i <= 5; $i++) {
+        for($i = 1; $i <= 5; $i++)
+        {
             $otherUsercomments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
         }
 
         $response = $this->call('GET', 'railcontent/comment',
             [
-                'page' => $page,
-                'limit' => $limit,
+                'page'    => $page,
+                'limit'   => $limit,
                 'user_id' => $userId
             ]);
         $this->assertEquals(200, $response->getStatusCode());
 
-        $expectedResults = $this->createPaginatedExpectedResult(
-            'ok',
-            200,
-            $page,
-            $limit,
-            $totalNumber,
+        $this->assertEquals(
             array_slice($comments, ($limit * ($page - 1)), $limit, false),
-            null);
-
-        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+            $response->decodeResponseJson('data')
+        );
     }
 
     public function test_pull_comments_filtered_by_content_type()
     {
-        $page = 2;
-        $limit = 3;
+        $page        = 2;
+        $limit       = 3;
         $totalNumber = $this->faker->numberBetween($limit, ($limit + 25));
 
         $content = $this->contentFactory->create(
@@ -434,15 +418,16 @@ class CommentJsonControllerTest extends RailcontentTestCase
             ConfigService::$commentableContentTypes[0]
         );
 
-        for ($i = 1; $i <= $totalNumber; $i++) {
-            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        for($i = 1; $i <= $totalNumber; $i++)
+        {
+            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand())->getArrayCopy();
             $comments[$i]['replies'] = [];
         }
 
         $response = $this->call('GET', 'railcontent/comment',
             [
-                'page' => $page,
-                'limit' => $limit,
+                'page'         => $page,
+                'limit'        => $limit,
                 'content_type' => $content['type']
             ]);
 
@@ -457,16 +442,19 @@ class CommentJsonControllerTest extends RailcontentTestCase
             array_slice($comments, ($limit * ($page - 1)), $limit, false),
             null);
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+        $this->assertEquals(
+            array_slice($comments, ($limit * ($page - 1)), $limit, false),
+            $response->decodeResponseJson('data')
+        );
     }
 
     public function test_pull_comments_filtered_by_brand()
     {
-        $page = 1;
-        $limit = 3;
+        $page        = 1;
+        $limit       = 3;
         $totalNumber = $this->faker->numberBetween($limit, ($limit + 25));
-        $otherBrand = $this->faker->word;
-        $brands = ConfigService::$availableBrands;
+        $otherBrand  = $this->faker->word;
+        $brands      = ConfigService::$availableBrands;
 
         ConfigService::$availableBrands[] = $otherBrand;
 
@@ -483,12 +471,14 @@ class CommentJsonControllerTest extends RailcontentTestCase
             $otherBrand
         );
 
-        for ($i = 1; $i <= $totalNumber; $i++) {
-            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        for($i = 1; $i <= $totalNumber; $i++)
+        {
+            $comments[$i]            = $this->commentFactory->create($this->faker->text, $content['id'], null, rand())->getArrayCopy();
             $comments[$i]['replies'] = [];
         }
 
-        for ($i = 1; $i <= $totalNumber; $i++) {
+        for($i = 1; $i <= $totalNumber; $i++)
+        {
             $otherBrandComments[$i] = $this->commentFactory->create($this->faker->text, $contentForOtherBrand['id'], null, rand());
         }
 
@@ -496,41 +486,36 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call('GET', 'railcontent/comment',
             [
-                'page' => $page,
-                'limit' => $limit]
-                );
+                'page'  => $page,
+                'limit' => $limit
+            ]
+        );
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $expectedResults = $this->createPaginatedExpectedResult(
-            'ok',
-            200,
-            $page,
-            $limit,
-            $totalNumber,
+        $this->assertEquals(
             array_slice($comments, ($limit * ($page - 1)), $limit, false),
-            null);
-
-        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+            $response->decodeResponseJson('data')
+        );
     }
 
     public function test_get_linked_comment()
     {
         $commentsNr = 12;
-        $content = $this->contentFactory->create(
+        $content    = $this->contentFactory->create(
             $this->faker->word,
             ConfigService::$commentableContentTypes[0]
         );
-        $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        $comment    = $this->commentFactory->create($this->faker->text, $content['id'], null, rand())->getArrayCopy();
 
-        for ($i = 1; $i <= $commentsNr; $i++) {
-            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        for($i = 1; $i <= $commentsNr; $i++)
+        {
+            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand())->getArrayCopy();
         }
 
-        $response = $this->call('GET', 'railcontent/comment/'.$comment['id']);
+        $response = $this->call('GET', 'railcontent/comment/' . $comment['id']);
 
-        $this->assertEquals([$comments[2], $comments[1],$comment],$response->decodeResponseJson()['results']);
-        $this->assertEquals(($commentsNr + 1),$response->decodeResponseJson()['total_results']);
-
+        $this->assertEquals([$comments[2], $comments[1], $comment], $response->decodeResponseJson('data'));
+        $this->assertEquals(($commentsNr + 1), $response->decodeResponseJson('meta')['totalResults']);
     }
 }

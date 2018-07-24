@@ -11,6 +11,7 @@ use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\PermissionService;
+use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -55,7 +56,12 @@ class PermissionJsonController extends Controller
     {
         $permissions = $this->permissionService->getAll();
 
-        return new JsonResponse($permissions, 200);
+        return reply()->json(
+            $permissions,
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 
     /**
@@ -66,9 +72,17 @@ class PermissionJsonController extends Controller
      */
     public function store(PermissionRequest $request)
     {
-        $permission = $this->permissionService->create($request->input('name'), $request->input('brand'));
+        $permission = $this->permissionService->create(
+            $request->input('name'),
+            $request->input('brand')
+        );
 
-        return new JsonResponse($permission, 200);
+        return reply()->json(
+            [$permission],
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 
     /**
@@ -80,15 +94,24 @@ class PermissionJsonController extends Controller
      */
     public function update($id, PermissionRequest $request)
     {
-        $permission =
-            $this->permissionService->update($id, $request->input('name'), $request->input('brand'));
+        $permission = $this->permissionService->update(
+            $id,
+            $request->input('name'),
+            $request->input('brand')
+        );
 
         throw_unless(
             $permission,
             new NotFoundException('Update failed, permission not found with id: ' . $id)
         );
 
-        return new JsonResponse($permission, 201);
+        return reply()->json(
+            [$permission],
+            [
+                'transformer' => DataTransformer::class,
+                'code' => 201,
+            ]
+        );
     }
 
     /**
@@ -101,9 +124,12 @@ class PermissionJsonController extends Controller
     {
         $deleted = $this->permissionService->delete($id);
 
-        throw_unless($deleted, new NotFoundException('Delete failed, permission not found with id: ' . $id));
+        throw_unless(
+            $deleted,
+            new NotFoundException('Delete failed, permission not found with id: ' . $id)
+        );
 
-        return new JsonResponse(null, 204);
+        return reply()->json(null, ['code' => 204]);
     }
 
     /**
@@ -120,7 +146,12 @@ class PermissionJsonController extends Controller
             $request->input('permission_id')
         );
 
-        return new JsonResponse($assignedPermission, 200);
+        return reply()->json(
+            [$assignedPermission],
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 
     /**
@@ -131,10 +162,17 @@ class PermissionJsonController extends Controller
      */
     public function dissociate(PermissionDissociateRequest $request)
     {
-        return new JsonResponse($this->contentPermissionService->dissociate(
+        $dissociate = $this->contentPermissionService->dissociate(
             $request->input('content_id'),
             $request->input('content_type'),
             $request->input('permission_id')
-        ), 200);
+        );
+
+        return reply()->json(
+            [[$dissociate]],
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 }

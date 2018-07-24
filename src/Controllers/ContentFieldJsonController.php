@@ -8,10 +8,10 @@ use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentFieldCreateRequest;
 use Railroad\Railcontent\Requests\ContentFieldDeleteRequest;
 use Railroad\Railcontent\Requests\ContentFieldUpdateRequest;
-use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFieldService;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentFieldJsonController extends Controller
 {
@@ -42,7 +42,12 @@ class ContentFieldJsonController extends Controller
     {
         $contentField = $this->fieldService->get($id);
 
-        return new JsonResponse($contentField, 200);
+        return reply()->json(
+            [$contentField],
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 
     /**
@@ -61,7 +66,12 @@ class ContentFieldJsonController extends Controller
             $request->input('type')
         );
 
-        return new JsonResponse($contentField, 200);
+        return reply()->json(
+            [$contentField],
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 
     /**
@@ -92,7 +102,13 @@ class ContentFieldJsonController extends Controller
             new NotFoundException('Update failed, field not found with id: ' . $fieldId)
         );
 
-        return new JsonResponse($contentField, 201);
+        return reply()->json(
+            [$contentField],
+            [
+                'transformer' => DataTransformer::class,
+                'code' => 201,
+            ]
+        );
     }
 
     /**
@@ -117,6 +133,6 @@ class ContentFieldJsonController extends Controller
             new NotFoundException('Delete failed, field not found with id: ' . $fieldId)
         );
 
-        return new JsonResponse(null, 204);
+        return reply()->json(null, ['code' => 204]);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Controllers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Exceptions\NotAllowedException;
@@ -11,10 +10,9 @@ use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Requests\CommentCreateRequest;
 use Railroad\Railcontent\Requests\CommentUpdateRequest;
 use Railroad\Railcontent\Requests\ReplyRequest;
-use Railroad\Railcontent\Responses\JsonPaginatedResponse;
-use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Transformers\DataTransformer;
 
 class CommentJsonController extends Controller
 {
@@ -25,6 +23,7 @@ class CommentJsonController extends Controller
 
     /**
      * CommentJsonController constructor.
+     *
      * @param CommentService $commentService
      */
     public function __construct(CommentService $commentService)
@@ -34,7 +33,8 @@ class CommentJsonController extends Controller
         $this->middleware(ConfigService::$controllerMiddleware);
     }
 
-    /** Call the method from the service to pull the comments based on the criteria passed in request:
+    /**
+     * Call the method from the service to pull the comments based on the criteria passed in request:
      *      - content_id   => pull the comments for given content id
      *      - user_id      => pull user's comments
      *      - content_type => pull the comments for the contents with given type
@@ -56,17 +56,21 @@ class CommentJsonController extends Controller
             $request->get('sort', $request->get('sort', '-created_on'))
         );
 
-        return new JsonPaginatedResponse(
+        return reply()->json(
             $commentData['results'],
-            $commentData['total_results'],
-            null,
-            200
+            [
+                'totalResults' => $commentData['total_results'],
+                'transformer' => DataTransformer::class,
+            ]
         );
     }
 
-    /** Call the method from service that create a new comment if the request data pass the validation
+    /**
+     * Call the method from service that create a new comment if the request data pass the validation
+     *
      * @param CommentCreateRequest $request
      * @return JsonResponse|NotAllowedException
+     * @throws \Throwable
      */
     public function store(CommentCreateRequest $request)
     {
@@ -78,17 +82,31 @@ class CommentJsonController extends Controller
             $request->get('display_name') ?? ''
         );
 
-        throw_if(is_null($comment), new NotAllowedException('The content type does not allow comments.'));
+        throw_if(
+            is_null($comment),
+            new NotAllowedException('The content type does not allow comments.')
+        );
 
-        throw_if(($comment === -1), new NotAllowedException('Only registered user can add comment. Please sign in.'));
+        throw_if(
+            ($comment === -1),
+            new NotAllowedException('Only registered user can add comment. Please sign in.')
+        );
 
-        return new JsonResponse($comment, 200);
+        return reply()->json(
+            [$comment],
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 
-    /** Update a comment based on id and return it in JSON format
+    /**
+     * Update a comment based on id and return it in JSON format
+     *
      * @param integer $commentId
      * @param CommentCreateRequest $request
      * @return JsonResponse|NotAllowedException|NotFoundException
+     * @throws \Throwable
      */
     public function update(CommentUpdateRequest $request, $commentId)
     {
@@ -102,26 +120,44 @@ class CommentJsonController extends Controller
                     'content_id' => '',
                     'parent_id' => '',
                     'user_id' => '',
-                    'display_name' => ''
+                    'display_name' => '',
                 ]
             )
         );
 
         //if the user it's not logged in into the application
-        throw_if(($comment === 0), new NotAllowedException('Only registered user can modify own comments. Please sign in.'));
+        throw_if(
+            ($comment === 0),
+            new NotAllowedException('Only registered user can modify own comments. Please sign in.')
+        );
 
         //if the update response method = -1 => the user have not rights to update other user comment; we throw the exception
-        throw_if(($comment === -1), new NotAllowedException('Update failed, you can update only your comments.'));
+        throw_if(
+            ($comment === -1),
+            new NotAllowedException('Update failed, you can update only your comments.')
+        );
 
         //if the update method response it's null the comment not exist; we throw the proper exception
-        throw_if(is_null($comment), new NotFoundException('Update failed, comment not found with id: ' . $commentId));
+        throw_if(
+            is_null($comment),
+            new NotFoundException('Update failed, comment not found with id: ' . $commentId)
+        );
 
-        return new JsonResponse($comment, 201);
+        return reply()->json(
+            [$comment],
+            [
+                'transformer' => DataTransformer::class,
+                'code' => 201,
+            ]
+        );
     }
 
-    /** Call the delete method if the comment exist and the user have rights to delete the comment
+    /**
+     * Call the delete method if the comment exist and the user have rights to delete the comment
+     *
      * @param integer $contentId
      * @return JsonResponse|NotFoundException|NotAllowedException
+     * @throws \Throwable
      */
     public function delete($commentId)
     {
@@ -129,17 +165,26 @@ class CommentJsonController extends Controller
         $deleted = $this->commentService->delete($commentId);
 
         //if the delete method response it's null the comment not exist; we throw the proper exception
-        throw_if(is_null($deleted), new NotFoundException('Delete failed, comment not found with id: ' . $commentId));
+        throw_if(
+            is_null($deleted),
+            new NotFoundException('Delete failed, comment not found with id: ' . $commentId)
+        );
 
         //if the delete method response it's false the mysql delete method was failed; we throw the proper exception
-        throw_if(($deleted === -1), new NotAllowedException('Delete failed, you can delete only your comments.'));
+        throw_if(
+            ($deleted === -1),
+            new NotAllowedException('Delete failed, you can delete only your comments.')
+        );
 
-        return new JsonResponse(null, 204);
+        return reply()->json(null, ['code' => 204]);
     }
 
-    /** Call the method from service that create a new comment if the request data pass the validation
+    /**
+     * Call the method from service that create a new comment if the request data pass the validation
+     *
      * @param ReplyRequest $request
      * @return JsonResponse|NotAllowedException
+     * @throws \Throwable
      */
     public function reply(ReplyRequest $request)
     {
@@ -150,14 +195,27 @@ class CommentJsonController extends Controller
             $request->user()->id ?? null
         );
 
-        throw_if(is_null($request), new NotAllowedException('The content type does not allow comments.'));
+        throw_if(
+            is_null($request),
+            new NotAllowedException('The content type does not allow comments.')
+        );
 
-        throw_if(($reply === -1), new NotAllowedException('Only registered user can reply to comment. Please sign in.'));
+        throw_if(
+            ($reply === -1),
+            new NotAllowedException('Only registered user can reply to comment. Please sign in.')
+        );
 
-        return new JsonResponse($reply, 200);
+        return reply()->json(
+            [$reply],
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 
-    /** Return the comments, the current page it's the page with the comment
+    /**
+     * Return the comments, the current page it's the page with the comment
+     *
      * @param int $commentId
      * @param Request $request
      * @return JsonPaginatedResponse
@@ -177,11 +235,12 @@ class CommentJsonController extends Controller
             '-id'
         );
 
-        return new JsonPaginatedResponse(
+        return reply()->json(
             $commentData['results'],
-            $commentData['total_results'],
-            null,
-            200
+            [
+                'totalResults' => $commentData['total_results'],
+                'transformer' => DataTransformer::class,
+            ]
         );
     }
 }

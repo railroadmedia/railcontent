@@ -27,7 +27,8 @@
     "league/flysystem-aws-s3-v3": "~1.0",
     "vimeo/vimeo-api": "^1.2",
     "predis/predis": "^1.1",
-    "google/apiclient":"^2.2"
+    "google/apiclient":"^2.2",
+    "railroad/response": "0.0.09"
   },
   "require-dev": {
     "phpunit/phpunit": "~7.0",

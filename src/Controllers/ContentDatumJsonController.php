@@ -7,9 +7,9 @@ use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentDatumCreateRequest;
 use Railroad\Railcontent\Requests\ContentDatumDeleteRequest;
 use Railroad\Railcontent\Requests\ContentDatumUpdateRequest;
-use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
+use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentDatumJsonController extends Controller
 {
@@ -42,7 +42,12 @@ class ContentDatumJsonController extends Controller
             $request->input('position')
         );
 
-        return new JsonResponse($contentData, 200);
+        return reply()->json(
+            [$contentData],
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 
     /**
@@ -51,6 +56,7 @@ class ContentDatumJsonController extends Controller
      * @param integer $dataId
      * @param ContentDatumUpdateRequest $request
      * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @throws \Throwable
      */
     public function update($dataId, ContentDatumUpdateRequest $request)
     {
@@ -72,7 +78,13 @@ class ContentDatumJsonController extends Controller
             new NotFoundException('Update failed, datum not found with id: ' . $dataId)
         );
 
-        return new JsonResponse($contentData, 201);
+        return reply()->json(
+            [$contentData],
+            [
+                'transformer' => DataTransformer::class,
+                'code' => 201,
+            ]
+        );
     }
 
     /**
@@ -96,6 +108,6 @@ class ContentDatumJsonController extends Controller
             new NotFoundException('Delete failed, datum not found with id: ' . $dataId)
         );
 
-        return new JsonResponse(null, 204);
+        return reply()->json(null, ['code' => 204]);
     }
 }

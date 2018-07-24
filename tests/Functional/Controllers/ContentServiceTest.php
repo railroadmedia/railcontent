@@ -66,7 +66,7 @@ class ContentServiceTest extends RailcontentTestCase
             array_merge(
                 $content->getArrayCopy(),
                 [
-                    'id' => $content['id']
+                    'id' => $content['id'],
                 ]
             ),
             $results->getArrayCopy()
@@ -78,8 +78,7 @@ class ContentServiceTest extends RailcontentTestCase
         $results = $this->serviceBeingTested->getById($this->faker->numberBetween());
 
         $this->assertEquals(
-            null
-            ,
+            null,
             $results
         );
     }
@@ -101,8 +100,7 @@ class ContentServiceTest extends RailcontentTestCase
         $results = $this->serviceBeingTested->getById($content['id']);
 
         unset(
-            $randomField['field_id'],
-            $randomDatum['datum_id']
+            $randomField['field_id'], $randomDatum['datum_id']
         );
 
         $this->assertEquals(
@@ -111,7 +109,7 @@ class ContentServiceTest extends RailcontentTestCase
                 [
                     'id' => $content['id'],
                     'fields' => [$randomField],
-                    'data' => [$randomDatum]
+                    'data' => [$randomDatum],
                 ]
             ),
             $results->getArrayCopy()
@@ -123,18 +121,11 @@ class ContentServiceTest extends RailcontentTestCase
         $content = $this->contentFactory->create();
         $content2 = $this->contentFactory->create();
 
-
-
         $results = $this->serviceBeingTested->getByIds([$content['id'], $content2['id']]);
 
         $this->assertEquals(
-            array_merge(
-                $content->getArrayCopy(),
-                [
-                    'id' => $content['id']
-                ]
-            ),
-            $results->getArrayCopy()
+            [$content['id'] => $content, $content2['id'] => $content2],
+            $results->toArray()
         );
     }
 
@@ -145,9 +136,8 @@ class ContentServiceTest extends RailcontentTestCase
 
         $this->assertEquals(
             [],
-            $results->getArrayCopy()
+            $results->toArray()
         );
     }
-
 
 }

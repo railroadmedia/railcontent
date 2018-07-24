@@ -44,8 +44,7 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $expectedResults = $this->createPaginatedExpectedResult('ok', 200, 1, 10, 0, [], []);
-        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+        $this->assertEquals([], $response->decodeResponseJson('data'));
     }
 
     public function test_pull_my_assigned_comments()
@@ -76,8 +75,7 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $expectedResults = $this->createPaginatedExpectedResult('ok', 200, 1,10, 5, $assignedComments, []);
-        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+        $this->assertArraySubset($assignedComments, $response->decodeResponseJson('data'));
     }
 
     public function test_delete_assigned_comment()

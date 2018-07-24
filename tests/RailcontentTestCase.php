@@ -19,6 +19,7 @@ use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Services\RemoteStorageService;
 use Railroad\Railcontent\Tests\Resources\Models\User;
+use Railroad\Response\Providers\ResponseServiceProvider;
 
 class RailcontentTestCase extends BaseTestCase
 {
@@ -182,6 +183,7 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.cache_driver', $defaultConfig['cache_driver']);
 
         $app['config']->set('railcontent.decorators', $defaultConfig['decorators']);
+        $app['config']->set('railcontent.use_collections', $defaultConfig['use_collections']);
 
         // vimeo
         $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);
@@ -201,6 +203,7 @@ class RailcontentTestCase extends BaseTestCase
 
         // register provider
         $app->register(RailcontentServiceProvider::class);
+        $app->register(ResponseServiceProvider::class);
     }
 
     /**

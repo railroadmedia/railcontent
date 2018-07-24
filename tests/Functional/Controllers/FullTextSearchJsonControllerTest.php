@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
-
 use Carbon\Carbon;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
@@ -44,9 +43,8 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $response = $this->call('GET', 'railcontent/search');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $response = $response->decodeResponseJson();
-        $this->assertEquals([], $response['results']);
-        $this->assertEquals(0, $response['total_results']);
+        $this->assertEquals([], $response->decodeResponseJson('data'));
+        $this->assertEquals(0, $response->decodeResponseJson('meta')['totalResults']);
     }
 
     public function test_search_results_paginated()
@@ -54,40 +52,46 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $page = 1;
         $limit = 3;
         for ($i = 0; $i < 6; $i++) {
-            $content[$i] = $this->contentFactory->create('slug',
+            $content[$i] = $this->contentFactory->create(
+                'slug',
                 $this->faker->randomElement(ConfigService::$searchableContentTypes),
-                $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]), ConfigService::$defaultLanguage,
-                ConfigService::$brand, rand(), Carbon::yesterday()->hour($i)->toDateTimeString());
+                $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
+                ConfigService::$defaultLanguage,
+                ConfigService::$brand,
+                rand(),
+                Carbon::yesterday()
+                    ->hour($i)
+                    ->toDateTimeString()
+            );
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', 'field ' . $i);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field ' . $i);
             $content[$i]['fields'] = [$titleField[$i], $otherField[$i]];
 
-            $descriptionData = $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
+            $descriptionData =
+                $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
             $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
             $content[$i]['data'] = [$descriptionData, $otherData];
-            $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
+            $content[$i] = $content[$i]->getArrayCopy();
         }
 
         $this->artisan('command:createSearchIndexes');
 
-        $response = $this->call('GET', 'railcontent/search', [
-            'page' => $page,
-            'limit' => $limit
-        ]);
-
-        $results = $response->decodeResponseJson();
-        $contents = $results['results'];
-
-        $expectedContents = array_splice($content, 0, $limit);
-        $espectedResults = array_combine(
-            array_column($expectedContents, 'id'),
-            $expectedContents
+        $response = $this->call(
+            'GET',
+            'railcontent/search',
+            [
+                'page' => $page,
+                'limit' => $limit,
+            ]
         );
 
+        $results = $response->decodeResponseJson();
+        $espectedResults = array_splice($content, 0, $limit);
+
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals($espectedResults, $results['results']);
-        $this->assertEquals(6, $results['total_results']);
+        $this->assertArraySubset($espectedResults, $results['data']);
+        $this->assertEquals(6, $results['meta']['totalResults']);
     }
 
     public function test_search_sort_by_relevance()
@@ -95,32 +99,44 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $page = 1;
         $limit = 3;
         for ($i = 0; $i < 5; $i++) {
-            $content[$i] = $this->contentFactory->create('slug',
+            $content[$i] = $this->contentFactory->create(
+                'slug',
                 $this->faker->randomElement(ConfigService::$searchableContentTypes),
-                ContentService::STATUS_PUBLISHED, ConfigService::$defaultLanguage,
-                ConfigService::$brand, 1, Carbon::yesterday()->hour($i+1)->toDateTimeString());
+                ContentService::STATUS_PUBLISHED,
+                ConfigService::$defaultLanguage,
+                ConfigService::$brand,
+                1,
+                Carbon::yesterday()
+                    ->hour($i + 1)
+                    ->toDateTimeString()
+            );
 
-            $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title',  $this->faker->text(10) . $i);
+            $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', $this->faker->text(10) . $i);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], $this->faker->word . $i);
             $content[$i]['fields'] = [$titleField[$i], $otherField[$i]];
 
-            $descriptionData = $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
+            $descriptionData =
+                $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
             $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
             $content[$i]['data'] = [$descriptionData, $otherData];
-            $content[$i] = array_merge($content[$i]->getArrayCopy(), ['fetch' => $content[$i]->dot()]);
+            $content[$i] = $content[$i]->getArrayCopy();
         }
 
         $this->artisan('command:createSearchIndexes');
 
-        $response = $this->call('GET', 'railcontent/search', [
-            'page' => $page,
-            'limit' => $limit,
-            'term' =>  $titleField[2]['value'].' '.$otherField[2]['value']
-        ]);
+        $response = $this->call(
+            'GET',
+            'railcontent/search',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'term' => $titleField[2]['value'] . ' ' . $otherField[2]['value'],
+            ]
+        );
 
         //check that first result it's the most relevant
-        $this->assertEquals([$content[2]], array_slice($response->decodeResponseJson()['results'],0,1));
-        $this->assertGreaterThanOrEqual(1, $response->decodeResponseJson()['total_results']);
+        $this->assertArraySubset([$content[2]], array_slice($response->decodeResponseJson('data'), 0, 1));
+        $this->assertGreaterThanOrEqual(1, $response->decodeResponseJson('meta')['totalResults']);
     }
 
     public function test_search_with_sort_and_content_type_criteria()
@@ -128,16 +144,24 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $page = 1;
         $limit = 3;
         for ($i = 0; $i < 6; $i++) {
-            $content[$i] = $this->contentFactory->create('slug',
+            $content[$i] = $this->contentFactory->create(
+                'slug',
                 $this->faker->randomElement(ConfigService::$searchableContentTypes),
-                $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]), ConfigService::$defaultLanguage,
-                ConfigService::$brand, rand(), Carbon::yesterday()->hour($i)->toDateTimeString());
+                $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
+                ConfigService::$defaultLanguage,
+                ConfigService::$brand,
+                rand(),
+                Carbon::yesterday()
+                    ->hour($i)
+                    ->toDateTimeString()
+            );
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', 'field ' . $i);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field ' . $i);
             $content[$i]['fields'] = [$titleField[$i], $otherField[$i]];
 
-            $descriptionData = $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
+            $descriptionData =
+                $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
             $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
             $content[$i]['data'] = [$descriptionData, $otherData];
             $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
@@ -146,14 +170,18 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $this->artisan('command:createSearchIndexes');
 
         $contentType = $this->faker->randomElement(ConfigService::$searchableContentTypes);
-        $response = $this->call('GET', 'railcontent/search', [
-            'page' => $page,
-            'limit' => $limit,
-            'sort' => '-content_published_on',
-            'included_types' => [$contentType]
-        ]);
+        $response = $this->call(
+            'GET',
+            'railcontent/search',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => '-content_published_on',
+                'included_types' => [$contentType],
+            ]
+        );
 
-        $results = $response->decodeResponseJson();
+        $results = $response->decodeResponseJson('data');
 
         $expectedResults = $this->call(
             'GET',
@@ -162,11 +190,11 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'page' => $page,
                 'limit' => $limit,
                 'sort' => '-published_on',
-                'included_types' => [$contentType]
+                'included_types' => [$contentType],
             ]
         );
 
-        $this->assertEquals($expectedResults->decodeResponseJson()['results'], array_values($results['results']));
+        $this->assertEquals($expectedResults->decodeResponseJson('data'), array_values($results));
     }
 
     public function test_search_with_status()
@@ -174,24 +202,36 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $page = 1;
         $limit = 3;
         for ($i = 0; $i < 6; $i++) {
-            $content[$i] = $this->contentFactory->create('slug',
+            $content[$i] = $this->contentFactory->create(
+                'slug',
                 $this->faker->randomElement(ConfigService::$searchableContentTypes),
-                $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]), ConfigService::$defaultLanguage,
-                ConfigService::$brand, rand(), Carbon::yesterday()->hour($i)->toDateTimeString());
+                $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
+                ConfigService::$defaultLanguage,
+                ConfigService::$brand,
+                rand(),
+                Carbon::yesterday()
+                    ->hour($i)
+                    ->toDateTimeString()
+            );
             $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
         }
 
         $this->artisan('command:createSearchIndexes');
 
-        $contentStatus = $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]);
-        $response = $this->call('GET', 'railcontent/search', [
-            'page' => $page,
-            'limit' => $limit,
-            'sort' => '-content_published_on',
-            'statuses' => [$contentStatus]
-        ]);
+        $contentStatus =
+            $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]);
+        $response = $this->call(
+            'GET',
+            'railcontent/search',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => '-content_published_on',
+                'statuses' => [$contentStatus],
+            ]
+        );
 
-        $results = $response->decodeResponseJson();
+        $results = $response->decodeResponseJson('data');
 
         $expectedResults = $this->call(
             'GET',
@@ -201,10 +241,10 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'limit' => $limit,
                 'sort' => '-published_on',
                 'statuses' => [$contentStatus],
-                'auth_level' => 'administrator'
+                'auth_level' => 'administrator',
             ]
         );
 
-        $this->assertEquals($expectedResults->decodeResponseJson()['results'], array_values($results['results']));
+        $this->assertEquals($expectedResults->decodeResponseJson('data'), array_values($results));
     }
 }

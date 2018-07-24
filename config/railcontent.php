@@ -116,6 +116,9 @@ return [
         'comments' => [
             \Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator::class,
         ],
+        'comment' => [
+            \Railroad\Railcontent\Decorators\Entity\CommentEntityDecorator::class,
+        ]
     ],
 
     // specific decorator configs

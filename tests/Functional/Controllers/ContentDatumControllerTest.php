@@ -41,25 +41,31 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $key = $this->faker->word;
         $value = $this->faker->text(500);
 
-        $response = $this->call('PUT', 'railcontent/content/datum', [
-            'content_id' => $content['id'],
-            'key' => $key,
-            'value' => $value,
-            'position' => 1
-        ]);
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/datum',
+            [
+                'content_id' => $content['id'],
+                'key' => $key,
+                'value' => $value,
+                'position' => 1,
+            ]
+        );
 
         $this->assertEquals(200, $response->status());
 
         $response->assertJson(
             [
-                'results' => [
-                    'id' => '1',
-                    'content_id' => $content['id'],
-                    'key' => $key,
-                    'value' => $value,
-                    'position' => 1
+                'data' => [
+                    0 => [
+                        'id' => '1',
+                        'content_id' => $content['id'],
+                        'key' => $key,
+                        'value' => $value,
+                        'position' => 1,
+                    ],
 
-                ]
+                ],
             ]
         );
     }
@@ -78,7 +84,8 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $key = $this->faker->text(600);
         $value = $this->faker->text(500);
 
-        $response = $this->call('PUT', 'railcontent/content/datum', ['content_id' => 1, 'key' => $key, 'value' => $value]);
+        $response =
+            $this->call('PUT', 'railcontent/content/datum', ['content_id' => 1, 'key' => $key, 'value' => $value]);
 
         $this->assertEquals(422, $response->status());
         $this->assertContains('key', array_column(json_decode($response->getContent())->errors, 'source'));
@@ -93,31 +100,39 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'content_id' => $content['id'],
             'key' => $this->faker->word,
             'value' => $this->faker->text(),
-            'position' => $this->faker->numberBetween()
+            'position' => $this->faker->numberBetween(),
         ];
-        $dataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($data);
+        $dataId =
+            $this->query()
+                ->table(ConfigService::$tableContentData)
+                ->insertGetId($data);
 
         $new_value = $this->faker->text();
 
-        $response = $this->call('PATCH', 'railcontent/content/datum/' . $dataId, [
-            'content_id' => $content['id'],
-            'key' => $data['key'],
-            'value' => $new_value,
-            'position' => $data['position']
-        ]);
+        $response = $this->call(
+            'PATCH',
+            'railcontent/content/datum/' . $dataId,
+            [
+                'content_id' => $content['id'],
+                'key' => $data['key'],
+                'value' => $new_value,
+                'position' => $data['position'],
+            ]
+        );
 
         $this->assertEquals(201, $response->status());
 
         $response->assertJson(
             [
-                'results' =>
-                    [
+                'data' => [
+                    0 => [
                         'id' => 1,
                         'content_id' => $content['id'],
                         'key' => $data['key'],
                         'value' => $new_value,
-                        'position' => 1
-                    ]
+                        'position' => 1,
+                    ],
+                ],
             ]
         );
     }
@@ -132,11 +147,18 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'position' => $this->faker->numberBetween(),
             'content_id' => $content['id'],
         ];
-        $dataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($data);
+        $dataId =
+            $this->query()
+                ->table(ConfigService::$tableContentData)
+                ->insertGetId($data);
 
-        $response = $this->call('PATCH', 'railcontent/content/datum/' . $dataId, [
-            'key' => $this->faker->text(500)
-        ]);
+        $response = $this->call(
+            'PATCH',
+            'railcontent/content/datum/' . $dataId,
+            [
+                'key' => $this->faker->text(500),
+            ]
+        );
 
         $this->assertEquals(422, $response->status());
         $this->assertContains('key', array_column(json_decode($response->getContent())->errors, 'source'));
@@ -145,7 +167,6 @@ class ContentDatumControllerTest extends RailcontentTestCase
     public function test_delete_content_datum_controller()
     {
         $content = $this->contentFactory->create();
-
 
         $data = $this->contentDatumFactory->create($content['id']);
 
@@ -164,17 +185,21 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $newData = [
             'key' => $data['key'],
             'value' => $this->faker->text(500),
-            'position' =>1,
-            'content_id' => $content['id']
+            'position' => 1,
+            'content_id' => $content['id'],
         ];
         $updatedData = $this->serviceBeingTested->update($data['id'], $newData);
 
-        $this->assertEquals(array_merge(
-            [
-                'id' => $data['id'],
-                'content_id' => $content['id']
-            ],
-            $newData), $updatedData);
+        $this->assertEquals(
+            array_merge(
+                [
+                    'id' => $data['id'],
+                    'content_id' => $content['id'],
+                ],
+                $newData
+            ),
+            $updatedData
+        );
     }
 
     public function test_get_content_datum_method_from_service_response()
@@ -208,12 +233,16 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $key = $this->faker->word;
         $value = $this->faker->text(500);
 
-        $response = $this->call('PATCH', 'railcontent/content/datum', [
-            'content_id' => $content['id'],
-            'key' => $key,
-            'value' => $value,
-            'position' => 1
-        ]);
+        $response = $this->call(
+            'PATCH',
+            'railcontent/content/datum',
+            [
+                'content_id' => $content['id'],
+                'key' => $key,
+                'value' => $value,
+                'position' => 1,
+            ]
+        );
 
         $this->expectsEvents(\Railroad\Railcontent\Events\ContentUpdated::class);
         //check that the ContentUpdated event was dispatched with the correct content id
@@ -230,23 +259,36 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
         $data = [
             'key' => $this->faker->word,
-            'position' => $this->faker->numberBetween()
+            'position' => $this->faker->numberBetween(),
         ];
-        $dataId = $this->query()->table(ConfigService::$tableData)->insertGetId($data);
+        $dataId =
+            $this->query()
+                ->table(ConfigService::$tableData)
+                ->insertGetId($data);
 
         $contentData = [
             'content_id' => $contentId,
-            'datum_id' => $dataId
+            'datum_id' => $dataId,
         ];
-        $contentDataId = $this->query()->table(ConfigService::$tableContentData)->insertGetId($contentData);
+        $contentDataId =
+            $this->query()
+                ->table(ConfigService::$tableContentData)
+                ->insertGetId($contentData);
 
-        $response = $this->call('DELETE', 'railcontent/content/datum/' . $dataId, [
-            'content_id' => $contentId
-        ]);
+        $response = $this->call(
+            'DELETE',
+            'railcontent/content/datum/' . $dataId,
+            [
+                'content_id' => $contentId,
+            ]
+        );
 
         //check that the ContentUpdated event was dispatched with the correct content id
-        Event::assertDispatched(ContentUpdated::class, function ($event) use ($contentId) {
-            return $event->contentId == $contentId;
-        });
+        Event::assertDispatched(
+            ContentUpdated::class,
+            function ($event) use ($contentId) {
+                return $event->contentId == $contentId;
+            }
+        );
     }
 }

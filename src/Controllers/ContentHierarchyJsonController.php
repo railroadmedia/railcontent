@@ -7,9 +7,9 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentHierarchyCreateRequest;
 use Railroad\Railcontent\Requests\ContentHierarchyUpdateRequest;
-use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
+use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentHierarchyJsonController extends Controller
 {
@@ -42,7 +42,12 @@ class ContentHierarchyJsonController extends Controller
             $request->input('child_position')
         );
 
-        return new JsonResponse($contentField, 200);
+        return reply()->json(
+            [$contentField],
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 
     /**
@@ -55,7 +60,10 @@ class ContentHierarchyJsonController extends Controller
     {
         $contentHierarchy = $this->contentHierarchyService->get($parentId, $childId);
 
-        throw_if(empty($contentHierarchy), new NotFoundException('Update hierarchy failed.'));
+        throw_if(
+            empty($contentHierarchy),
+            new NotFoundException('Update hierarchy failed.')
+        );
 
         $contentField = $this->contentHierarchyService->update(
             $parentId,
@@ -63,7 +71,13 @@ class ContentHierarchyJsonController extends Controller
             $request->input('child_position')
         );
 
-        return new JsonResponse($contentField, 201);
+        return reply()->json(
+            [$contentField],
+            [
+                'transformer' => DataTransformer::class,
+                'code' => 201,
+            ]
+        );
     }
 
     /**
@@ -76,6 +90,6 @@ class ContentHierarchyJsonController extends Controller
     {
         $this->contentHierarchyService->delete($parentId, $childId);
 
-        return new JsonResponse(null, 204);
+        return reply()->json(null, ['code' => 204]);
     }
 }

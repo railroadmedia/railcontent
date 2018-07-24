@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Responses\JsonPaginatedResponse;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\FullTextSearchService;
+use Railroad\Railcontent\Transformers\DataTransformer;
 
 class FullTextSearchJsonController extends Controller
 {
@@ -46,11 +47,12 @@ class FullTextSearchJsonController extends Controller
             $request->get('brands', null)
         );
 
-        return new JsonPaginatedResponse(
+        return reply()->json(
             $contentsData['results'],
-            $contentsData['total_results'],
-            null,
-            200
+            [
+                'transformer' => DataTransformer::class,
+                'totalResults' => $contentsData['total_results']
+            ]
         );
     }
 }

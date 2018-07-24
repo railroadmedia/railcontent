@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\UserPermissionCreateRequest;
 use Railroad\Railcontent\Requests\UserPermissionUpdateRequest;
-use Railroad\Railcontent\Responses\JsonResponse;
+use Railroad\Railcontent\Transformers\DataTransformer;
 
 class UserPermissionsJsonController extends Controller
 {
@@ -26,7 +26,8 @@ class UserPermissionsJsonController extends Controller
         $this->userPermissionsService = $userPermissionsService;
     }
 
-    /** Create user permission record and return data in JSON format.
+    /**
+     * Create user permission record and return data in JSON format.
      *
      * @param \Railroad\Railcontent\Requests\UserPermissionCreateRequest $request
      * @return \Railroad\Railcontent\Responses\JsonResponse
@@ -40,13 +41,20 @@ class UserPermissionsJsonController extends Controller
             $request->input('expiration_date')
         );
 
-        return new JsonResponse($userPermission, 200);
+        return reply()->json(
+            [$userPermission],
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 
     /** Update user permission and return data in JSON format
-     * @param   int                                                      $userPermissionId
+     *
+     * @param   int $userPermissionId
      * @param \Railroad\Railcontent\Requests\UserPermissionUpdateRequest $request
      * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @throws \Throwable
      */
     public function update($userPermissionId, UserPermissionUpdateRequest $request)
     {
@@ -56,10 +64,10 @@ class UserPermissionsJsonController extends Controller
             array_intersect_key(
                 $request->all(),
                 [
-                    'user_id'         => '',
-                    'permission_id'   => '',
-                    'start_date'      => '',
-                    'expiration_date' => ''
+                    'user_id' => '',
+                    'permission_id' => '',
+                    'start_date' => '',
+                    'expiration_date' => '',
                 ]
             )
         );
@@ -70,12 +78,21 @@ class UserPermissionsJsonController extends Controller
             new NotFoundException('Update failed, user permission not found with id: ' . $userPermissionId)
         );
 
-        return new JsonResponse($userPermission, 201);
+        return reply()->json(
+            [$userPermission],
+            [
+                'transformer' => DataTransformer::class,
+                'code' => 201,
+            ]
+        );
     }
 
-    /** Delete user permission if exists in database
+    /**
+     * Delete user permission if exists in database
+     *
      * @param int $userPermissionId
      * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @throws \Throwable
      */
     public function delete($userPermissionId)
     {
@@ -88,19 +105,29 @@ class UserPermissionsJsonController extends Controller
             new NotFoundException('Delete failed, user permission not found with id: ' . $userPermissionId)
         );
 
-        return new JsonResponse(null, 204);
+        return reply()->json(null, ['code' => 204]);
     }
 
-    /** Pull active user permissions.
+    /**
+     * Pull active user permissions.
      *  IF "only_active" it's set false on the request the expired permissions are returned also
      *  IF "user_id" it's set on the request only the permissions for the specified user are returned
+     *
      * @param \Illuminate\Http\Request $request
      * @return \Railroad\Railcontent\Responses\JsonResponse
      */
     public function index(Request $request)
     {
-        $userPermissions = $this->userPermissionsService->getUserPermissions($request->get('user_id'), $request->get('only_active', true));
+        $userPermissions = $this->userPermissionsService->getUserPermissions(
+            $request->get('user_id'),
+            $request->get('only_active', true)
+        );
 
-        return new JsonResponse($userPermissions, 200);
+        return reply()->json(
+            $userPermissions,
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 }

@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 
 class CommentAssignmentService
@@ -35,7 +36,8 @@ class CommentAssignmentService
                 'user_id' => $userId,
             ],
             [
-                'assigned_on' => Carbon::now()->toDateTimeString(),
+                'assigned_on' => Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
 
@@ -62,13 +64,15 @@ class CommentAssignmentService
         $orderByDirection = substr($orderByColumnAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($orderByColumnAndDirection, '-');
 
-        return $this->commentAssignmentRepository->getAssignedCommentsForUser(
+        $assignedComments = $this->commentAssignmentRepository->getAssignedCommentsForUser(
             $userId,
             $page,
             $limit,
             $orderByColumn,
             $orderByDirection
         );
+
+        return Decorator::decorate($assignedComments, 'comments');
     }
 
     /**

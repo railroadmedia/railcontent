@@ -58,6 +58,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'permission_id' => $permission,
                 'start_date'    => Carbon::now()->toDateTimeString()
             ]);
+
         $this->assertEquals(200, $results->getStatusCode());
         $this->assertArraySubset([
             'user_id'         => $userId,
@@ -66,7 +67,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'expiration_date' => null,
             'created_on'      => Carbon::now()->toDateTimeString(),
             'updated_on'      => null
-        ], $results->decodeResponseJson('results'));
+        ], $results->decodeResponseJson('data')[0]);
         $this->assertDatabaseHas(
             ConfigService::$tableUserPermissions,
             [
@@ -105,7 +106,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'expiration_date' => Carbon::now()->addMonth(1)->toDateTimeString(),
             'created_on'      => Carbon::now()->toDateTimeString(),
             'updated_on'      => Carbon::now()->toDateTimeString()
-        ], $results->decodeResponseJson('results'));
+        ], $results->decodeResponseJson('data')[0]);
         $this->assertDatabaseHas(
             ConfigService::$tableUserPermissions,
             [
@@ -126,7 +127,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->assertEquals([
             'title'  => 'Entity not found.',
             'detail' => 'Update failed, user permission not found with id: ' . $randomId
-        ], $results->decodeResponseJson('error'));
+        ], $results->decodeResponseJson('meta')['errors']);
     }
 
     public function test_update_validation()
@@ -169,7 +170,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->assertEquals([
             'title'  => 'Entity not found.',
             'detail' => 'Delete failed, user permission not found with id: ' . $randomId
-        ], $results->decodeResponseJson('error'));
+        ], $results->decodeResponseJson('meta')['errors']);
     }
 
     public function test_delete_user_permission()
@@ -239,7 +240,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $results = ($this->call('GET', '/railcontent/user-permission'));
 
         $this->assertEquals(200, $results->getStatusCode());
-        $this->assertEquals(2 , count($results->decodeResponseJson('results')));
+        $this->assertEquals(2 , count($results->decodeResponseJson('data')));
     }
 
     public function test_index_specific_user_active_permissions()
@@ -281,7 +282,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
     ]);
 
         $this->assertEquals(200, $results->getStatusCode());
-        $this->assertEquals(1 , count($results->decodeResponseJson('results')));
+        $this->assertEquals(1 , count($results->decodeResponseJson('data')));
     }
 
     public function test_index_pull_active_and_expired_user_permissions()
@@ -323,6 +324,6 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         ]);
 
         $this->assertEquals(200, $results->getStatusCode());
-        $this->assertEquals(3 , count($results->decodeResponseJson('results')));
+        $this->assertEquals(3 , count($results->decodeResponseJson('data')));
     }
 }
