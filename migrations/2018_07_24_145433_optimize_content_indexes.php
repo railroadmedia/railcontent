@@ -48,7 +48,7 @@ class OptimizeContentIndexes extends Migration
                  */
 
                 $table->dropIndex('t_s_b');
-                $table->dropIndex('co_po_s');
+                $table->dropIndex('co_po');
 
                 $table->index('type', 'railcontent_content_type_index');
                 $table->index('status', 'railcontent_content_status_index');
