@@ -19,7 +19,7 @@ class CreateUserPermissionsTable extends Migration
             function(Blueprint $table) {
                 $table->increments('id');
                 $table->integer('user_id')->index();
-                $table->integer('permissions_id')->index();
+                $table->integer('permission_id')->index();
                 $table->dateTime('start_date')->index();
                 $table->dateTime('expiration_date')->index()->nullable();
 
