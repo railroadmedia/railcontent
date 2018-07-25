@@ -30,7 +30,7 @@ class UserPermissionsJsonController extends Controller
      * Create user permission record and return data in JSON format.
      *
      * @param \Railroad\Railcontent\Requests\UserPermissionCreateRequest $request
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
      */
     public function store(UserPermissionCreateRequest $request)
     {
@@ -53,7 +53,7 @@ class UserPermissionsJsonController extends Controller
      *
      * @param   int $userPermissionId
      * @param \Railroad\Railcontent\Requests\UserPermissionUpdateRequest $request
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
      * @throws \Throwable
      */
     public function update($userPermissionId, UserPermissionUpdateRequest $request)
@@ -91,7 +91,7 @@ class UserPermissionsJsonController extends Controller
      * Delete user permission if exists in database
      *
      * @param int $userPermissionId
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
      * @throws \Throwable
      */
     public function delete($userPermissionId)
@@ -114,7 +114,7 @@ class UserPermissionsJsonController extends Controller
      *  IF "user_id" it's set on the request only the permissions for the specified user are returned
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
      */
     public function index(Request $request)
     {

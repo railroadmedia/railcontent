@@ -81,7 +81,12 @@ class PermissionControllerTest extends RailcontentTestCase
         $response = $this->call('PUT', 'railcontent/permission');
 
         $this->assertEquals(422, $response->status());
-        $this->assertContains('name', array_column(json_decode($response->getContent())->errors, 'source'));
+        $this->assertEquals([
+            [
+                "source" => "name",
+                "detail" => "The name field is required.",
+            ]
+        ], $response->decodeResponseJson('meta')['errors']);
     }
 
     public function test_new_permission_returned_after_store_service()
@@ -160,7 +165,7 @@ class PermissionControllerTest extends RailcontentTestCase
             "detail" => "The name field is required.",
         ];
 
-        $this->assertEquals([$expectedErrors], json_decode($response->getContent(), true)['errors']);
+        $this->assertEquals([$expectedErrors], $response->decodeResponseJson('meta')['errors']);
     }
 
     public function test_updated_permission_returned_after_update_service()
@@ -293,7 +298,7 @@ class PermissionControllerTest extends RailcontentTestCase
             ]
         );
 
-        $decodedResponse = $response->decodeResponseJson();
+        $decodedResponse = $response->decodeResponseJson('meta');
 
         $this->assertEquals(422, $response->status());
         $this->assertArrayHasKey('errors', $decodedResponse);
@@ -327,7 +332,7 @@ class PermissionControllerTest extends RailcontentTestCase
             ]
         );
 
-        $decodedResponse = $response->decodeResponseJson();
+        $decodedResponse = $response->decodeResponseJson('meta');
 
         $this->assertEquals(422, $response->status());
         $this->assertArrayHasKey('errors', $decodedResponse);
@@ -354,7 +359,7 @@ class PermissionControllerTest extends RailcontentTestCase
             ]
         );
 
-        $decodedResponse = $response->decodeResponseJson();
+        $decodedResponse = $response->decodeResponseJson('meta');
 
         $this->assertEquals(422, $response->status());
         $this->assertArrayHasKey('errors', $decodedResponse);

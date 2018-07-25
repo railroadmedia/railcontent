@@ -91,6 +91,11 @@ class ContentHierarchyService
      */
     public function update($parentId, $childId, $childPosition = null)
     {
+        $contentHierarchy = $this->get($parentId, $childId);
+        if (is_null($contentHierarchy)) {
+            return $contentHierarchy;
+        }
+
         $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
             $parentId,
             $childId,
@@ -126,7 +131,8 @@ class ContentHierarchyService
     public function repositionSiblings($childId)
     {
         $parentHierarchy = $this->contentHierarchyRepository->getParentByChildId($childId);
-        if(!$parentHierarchy){
+
+        if (!$parentHierarchy) {
             return true;
         }
         //delete the cached results for parent id
@@ -134,7 +140,10 @@ class ContentHierarchyService
 
         CacheHelper::deleteCache('content_list_' . $childId);
 
-        return $this->contentHierarchyRepository->decrementSiblings($parentHierarchy['parent_id'], $parentHierarchy['child_position']);
+        return $this->contentHierarchyRepository->decrementSiblings(
+            $parentHierarchy['parent_id'],
+            $parentHierarchy['child_position']
+        );
 
     }
 }

@@ -123,7 +123,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 "detail" => "The type field is required.",
             ],
         ];
-        $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
     }
 
     public function test_store_with_negative_position()
@@ -154,7 +154,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ],
 
         ];
-        $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
     }
 
     public function _test_store_with_custom_validation_and_slug_huge()
@@ -344,7 +344,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 "detail" => "The position must be at least 0.",
             ],
         ];
-        $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
     }
 
     public function test_update_not_pass_the_validation()
@@ -369,7 +369,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 "detail" => "The selected status is invalid.",
             ],
         ];
-        $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
     }
 
     public function test_after_update_content_is_returned_in_json_format()

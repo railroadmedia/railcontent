@@ -63,7 +63,7 @@ class CommentAssignmentRepositoryTest extends RailcontentTestCase
         $otherContent = $this->contentFactory->create($this->faker->word, 'course lesson', ContentService::STATUS_PUBLISHED);
         $userId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
         for ($i = 0; $i <= 4; $i++) {
-            $comments[$i] = $this->commentFactory->create($this->faker->text, $oneContent['id'], null, rand());
+            $comments[$i] = $this->commentFactory->create($this->faker->text, $oneContent['id'], null, rand())->getArrayCopy();
             $assignedComments[$i] = $this->commentAssignationFactory->create($comments[$i]['id'], $userId);
             unset($comments[$i]['replies']);
         }

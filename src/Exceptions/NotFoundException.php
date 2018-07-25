@@ -19,9 +19,10 @@ class NotFoundException extends \Exception
     public function render($request)
     {
         return reply()->json(
-            [],
+            null,
             [
                 'code' => 404,
+                'totalResults' => 0,
                 'errors' => [
                     'title' => 'Entity not found.',
                     'detail' => $this->message,

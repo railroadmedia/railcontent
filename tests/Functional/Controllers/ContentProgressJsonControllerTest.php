@@ -42,8 +42,9 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/start',
             [
-                'content_id' => $content['id']
-            ]);
+                'content_id' => $content['id'],
+            ]
+        );
 
         $this->assertEquals(200, $response->status());
         $this->assertTrue($response->decodeResponseJson('data')[0][0]);
@@ -54,16 +55,17 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/start',
             [
-                'content_id' => 1
-            ]);
+                'content_id' => 1,
+            ]
+        );
 
         $this->assertEquals(422, $response->status());
-        $responseContent = json_decode($response->content(), true);
+        $responseContent = $response->decodeResponseJson('meta');
         $responseErrors = $responseContent['errors'];
 
         $expectedErrors = [
             "source" => "content_id",
-            "detail" => "The selected content id is invalid."
+            "detail" => "The selected content id is invalid.",
         ];
 
         $this->assertEquals([$expectedErrors], $responseErrors);
@@ -79,38 +81,52 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             'user_id' => $this->userId,
             'state' => UserContentProgressService::STATE_STARTED,
             'progress_percent' => $this->faker->numberBetween(0, 99),
-            'updated_on' => Carbon::now()->toDateTimeString()
+            'updated_on' => Carbon::now()
+                ->toDateTimeString(),
         ];
 
-        $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
+        $this->query()
+            ->table(ConfigService::$tableUserContentProgress)
+            ->insertGetId($userContent);
 
         $response = $this->put(
             'railcontent/complete',
             [
-                'content_id' => $content['id']
+                'content_id' => $content['id'],
             ]
         );
 
         $this->assertEquals(201, $response->status());
         $this->assertTrue($response->decodeResponseJson('data')[0][0]);
+        $this->assertDatabaseHas(
+            ConfigService::$tableUserContentProgress,
+            [
+                'content_id' => $content['id'],
+                'user_id' => $this->userId,
+                'state' => UserContentProgressService::STATE_COMPLETED,
+                'progress_percent' => 100,
+                'updated_on' => Carbon::now()
+                    ->toDateTimeString(),
+            ]
+        );
     }
 
     public function test_complete_content_invalid_content_id()
     {
-        $response = $this->put('railcontent/complete',
+        $response = $this->put(
+            'railcontent/complete',
             [
-                'content_id' => 1
+                'content_id' => 1,
             ]
         );
 
         $this->assertEquals(422, $response->status());
-
-        $responseContent = json_decode($response->content(), true);
+        $responseContent = $response->decodeResponseJson('meta');
         $responseErrors = $responseContent['errors'];
 
         $expectedErrors = [
             "source" => "content_id",
-            "detail" => "The selected content id is invalid."
+            "detail" => "The selected content id is invalid.",
         ];
 
         $this->assertEquals([$expectedErrors], $responseErrors);
@@ -125,15 +141,19 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             'user_id' => $this->userId,
             'state' => UserContentProgressService::STATE_STARTED,
             'progress_percent' => $this->faker->numberBetween(0, 10),
-            'updated_on' => Carbon::now()->toDateTimeString()
+            'updated_on' => Carbon::now()
+                ->toDateTimeString(),
         ];
 
-        $this->query()->table(ConfigService::$tableUserContentProgress)->insertGetId($userContent);
+        $this->query()
+            ->table(ConfigService::$tableUserContentProgress)
+            ->insertGetId($userContent);
 
-        $response = $this->put('railcontent/progress',
+        $response = $this->put(
+            'railcontent/progress',
             [
                 'content_id' => $content['id'],
-                'progress_percent' => $this->faker->numberBetween(10, 99)
+                'progress_percent' => $this->faker->numberBetween(10, 99),
             ]
         );
 
@@ -145,20 +165,22 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
     {
         $contentId = $this->faker->numberBetween();
 
-        $response = $this->put('railcontent/progress',
+        $response = $this->put(
+            'railcontent/progress',
             [
                 'content_id' => $contentId,
-                'progress_percent' => $this->faker->numberBetween(10, 99)
-            ]);
+                'progress_percent' => $this->faker->numberBetween(10, 99),
+            ]
+        );
 
         $this->assertEquals(422, $response->status());
 
-        $responseContent = json_decode($response->content(), true);
+        $responseContent = $response->decodeResponseJson('meta');
         $responseErrors = $responseContent['errors'];
 
         $expectedErrors = [
             "source" => "content_id",
-            "detail" => "The selected content id is invalid."
+            "detail" => "The selected content id is invalid.",
         ];
 
         $this->assertEquals([$expectedErrors], $responseErrors);

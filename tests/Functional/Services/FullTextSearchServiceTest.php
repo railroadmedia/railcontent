@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
-
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -35,7 +34,6 @@ class FullTextSearchServiceTest extends RailcontentTestCase
      */
     protected $fullSearchRepository;
 
-
     protected function setUp()
     {
         $this->setConnectionType('mysql');
@@ -54,13 +52,7 @@ class FullTextSearchServiceTest extends RailcontentTestCase
         $this->fullSearchRepository->createSearchIndexes([]);
         $result = $this->classBeingTested->search($this->faker->word);
 
-        $this->assertEquals(
-            [
-                'results' => [],
-                'total_results' => 0
-            ],
-            $result
-        );
+        $this->assertEquals(0, $result['total_results']);
     }
 
     public function test_search_paginated()
@@ -90,7 +82,7 @@ class FullTextSearchServiceTest extends RailcontentTestCase
 
         $results = $this->classBeingTested->search('slug field description', $page, $limit);
 
-        $contents = $results['results'];
+        $contents = $results['results']->toArray();
         $expectedContents = array_splice($contents, 0, $limit);
         $espectedResults = array_combine(
             array_column(
@@ -105,13 +97,8 @@ class FullTextSearchServiceTest extends RailcontentTestCase
             $expectedContents
         );
 
-        $this->assertArraySubset(
-            [
-                'results' => $espectedResults,
-                'total_results' => count($content)
-            ],
-            $results
-        );
+        $this->assertArraySubset($espectedResults, $results['results']->toArray());
+        $this->assertEquals(count($content), $results['total_results']);
     }
 
 }

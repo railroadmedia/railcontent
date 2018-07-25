@@ -31,6 +31,8 @@ class ContentHierarchyJsonController extends Controller
     }
 
     /**
+     * Create a new content hierarchy.
+     *
      * @param ContentHierarchyCreateRequest $request
      * @return JsonResponse
      */
@@ -51,28 +53,29 @@ class ContentHierarchyJsonController extends Controller
     }
 
     /**
+     * Update content hierarchy.
+     *
      * @param ContentHierarchyUpdateRequest $request
-     * @param $childId
-     * @param $parentId
+     * @param int $childId
+     * @param int $parentId
      * @return JsonResponse
      */
     public function update(ContentHierarchyUpdateRequest $request, $parentId, $childId)
     {
-        $contentHierarchy = $this->contentHierarchyService->get($parentId, $childId);
-
-        throw_if(
-            empty($contentHierarchy),
-            new NotFoundException('Update hierarchy failed.')
-        );
-
-        $contentField = $this->contentHierarchyService->update(
+        $contentHierarchy = $this->contentHierarchyService->update(
             $parentId,
             $childId,
             $request->input('child_position')
         );
 
+        throw_if(
+            is_null($contentHierarchy),
+            new NotFoundException('Update hierarchy failed.')
+        );
+
+
         return reply()->json(
-            [$contentField],
+            [$contentHierarchy],
             [
                 'transformer' => DataTransformer::class,
                 'code' => 201,

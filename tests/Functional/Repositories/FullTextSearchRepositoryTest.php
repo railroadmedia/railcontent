@@ -83,7 +83,7 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
         $results = $this->classBeingTested->search($content[1]['slug'] . ' ' . $titleField[1]['value']);
 
         //check that first result it's the content with given slug and title
-        $this->assertArrayHasKey($content[1]['id'], $results);
+        $this->assertArraySubset([0 => $content[1]['id']], $results);
     }
 
     public function test_search_no_results()

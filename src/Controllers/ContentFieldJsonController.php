@@ -54,7 +54,7 @@ class ContentFieldJsonController extends Controller
      * Call the method from service that create a new field and link the content with the field.
      *
      * @param ContentFieldCreateRequest $request
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
      */
     public function store(ContentFieldCreateRequest $request)
     {
@@ -79,7 +79,7 @@ class ContentFieldJsonController extends Controller
      *
      * @param ContentFieldUpdateRequest $request
      * @param integer $fieldId
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
      */
     public function update(ContentFieldUpdateRequest $request, $fieldId)
     {
@@ -116,7 +116,7 @@ class ContentFieldJsonController extends Controller
      *
      * @param integer $fieldId
      * @param Request $request
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
      *
      * Hmm... we're not actually using that request in here, but including it triggers the prepending validation, so
      * maybe it needs to be there for that?

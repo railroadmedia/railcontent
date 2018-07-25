@@ -4,10 +4,10 @@ namespace Railroad\Railcontent\Requests;
 
 use App\Http\Requests\Scalecenter\ContentCreate;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Factory as ValidationFactory;
 use Illuminate\Validation\ValidationException;
+use Railroad\Railcontent\Entities\Entity;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Services\ContentFieldService;
@@ -17,7 +17,8 @@ use Railroad\Railcontent\Services\ContentService;
 /** Custom Form Request that contain the validation logic for the CMS.
  * There are:
  *      general rules - are the same for all the brands and content types
- *      custom rules - are defined by the developers in the configuration file and are defined per brand and content type
+ *      custom rules - are defined by the developers in the configuration file and are defined per brand and content
+ * type
  *
  * Class FormRequest
  *
@@ -205,7 +206,13 @@ class CustomFormRequest extends FormRequest
             $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
         } catch (\Exception $exception) {
             throw new HttpResponseException(
-                new JsonResponse($exception, 500)
+                reply()->json(
+                    null,
+                    [
+                        'code' => 500,
+                        'errors' => $exception,
+                    ]
+                )
             );
         }
 
@@ -227,12 +234,12 @@ class CustomFormRequest extends FormRequest
             if (isset($rulesForContentType['number_of_children'])) {
 
                 $numberOfChildren = $this->contentHierarchyService->countParentsChildren(
-                    [$content['id']]
-                )[$content['id']] ?? 0;
+                        [$content['id']]
+                    )[$content['id']] ?? 0;
 
                 $rule = $rulesForContentType['number_of_children'];
 
-                if(is_array($rule) && key_exists('rules', $rule)){
+                if (is_array($rule) && key_exists('rules', $rule)) {
                     $rule = $rule['rules'];
                 }
 
@@ -265,7 +272,7 @@ class CustomFormRequest extends FormRequest
                     continue;
                 }
 
-                if($rulesPropertyKey === 'number_of_children'){
+                if ($rulesPropertyKey === 'number_of_children') {
                     continue;
                 }
 
@@ -273,7 +280,10 @@ class CustomFormRequest extends FormRequest
 
                     if (!isset($criteria['rules'])) {
                         error_log(
-                            $content['type'] . '.' . $criteriaKey . ' for one of the brands is missing the ' .
+                            $content['type'] .
+                            '.' .
+                            $criteriaKey .
+                            ' for one of the brands is missing the ' .
                             '"rules" key in the validation config'
                         );
                     }
@@ -292,14 +302,24 @@ class CustomFormRequest extends FormRequest
         foreach ($required as $propertyKey => $list) {
 
             if (!is_string($propertyKey)) {
-                $message = 'You are likely missing a key in the config validation rules for this content-type: "' .
-                    print_r(json_encode($required), true) . '"';
+                $message =
+                    'You are likely missing a key in the config validation rules for this content-type: "' .
+                    print_r(json_encode($required), true) .
+                    '"';
                 if (!array_key_exists('fields', $required)) {
                     $message = $message . ' Perhaps the "' . $propertyKey . '" key should instead be "fields"?';
                 } elseif (!array_key_exists('data', $required)) {
                     $message = $message . ' Perhaps the "' . $propertyKey . '" key should instead be "data"?';
                 }
-                throw new HttpResponseException(new JsonResponse(['messages' => $message], 500));
+                throw new HttpResponseException(
+                    reply()->json(
+                        new Entity(['messages' => $message]),
+                        [
+                            'code' => 500,
+                            'errors' => $message,
+                        ]
+                    )
+                );
             }
 
             foreach ($list as $requiredElement) {
@@ -412,7 +432,13 @@ class CustomFormRequest extends FormRequest
 
         if (!empty($messages)) {
             throw new HttpResponseException(
-                new JsonResponse(['messages' => $messages], 422)
+                reply()->json(
+                    new Entity(['messages' => $messages]),
+                    [
+                        'code' => 422,
+                        'errors' => $messages,
+                    ]
+                )
             );
         }
 
@@ -439,33 +465,31 @@ class CustomFormRequest extends FormRequest
         $brand = null;
         $content = $this->getContentFromRequest($request);
 
-        if(empty($content)){
+        if (empty($content)) {
             $contentValidationRequired = false;
             return;
         }
 
         $allValidationRules = ConfigService::$validationRules;
 
-        if(empty($allValidationRules)){
+        if (empty($allValidationRules)) {
             $contentValidationRequired = false;
             return;
         }
 
-        if(empty($content['brand'])){
+        if (empty($content['brand'])) {
             $contentValidationRequired = false;
             return;
         }
 
         $rulesForBrand = $allValidationRules[$content['brand']] ?? [];
 
-        if(empty($rulesForBrand[$content['type']])){
+        if (empty($rulesForBrand[$content['type']])) {
             $contentValidationRequired = false;
             return;
         }
 
         $restrictions = $this->getStatusRestrictionsForType($content['type'], $rulesForBrand);
-
-
 
         /*
          * ================== TEMPORARILY DISABLED SO JANADO CAN DO HIS THING. WAITING ON FRONT-END ==================
@@ -479,15 +503,17 @@ class CustomFormRequest extends FormRequest
 
         // =============================================================================================================
         // =============================================================================================================
-        $appEnv = env('APP_ENV'); $appEnvIsDev = $appEnv === 'development'; // delete this after F.E. fixed
-        $timeIsUp = \Carbon\Carbon::now()->gt(\Carbon\Carbon::createFromDate(2018, 5, 8)); // delete this after F.E. fixed
-        if($timeIsUp || $appEnvIsDev){ // delete this after F.E. fixed
-        // =============================================================================================================
-        // =============================================================================================================
-
+        $appEnv = env('APP_ENV');
+        $appEnvIsDev = $appEnv === 'development'; // delete this after F.E. fixed
+        $timeIsUp =
+            \Carbon\Carbon::now()
+                ->gt(\Carbon\Carbon::createFromDate(2018, 5, 8)); // delete this after F.E. fixed
+        if ($timeIsUp || $appEnvIsDev) { // delete this after F.E. fixed
+            // =============================================================================================================
+            // =============================================================================================================
 
             /* leave **this** if-statement after the F.E. is fixed */
-            
+
             if ($request instanceof ContentCreateRequest) {
                 if (isset($input['status'])) {
                     if (in_array($input['status'], $restrictions)) {
@@ -496,12 +522,11 @@ class CustomFormRequest extends FormRequest
                 }
             }
 
-        // =============================================================================================================
-        // =============================================================================================================
+            // =============================================================================================================
+            // =============================================================================================================
         } // delete this after F.E. fixed
         // =============================================================================================================
         // =============================================================================================================
-
 
         /*
          * part 1 - Validation required?
@@ -539,7 +564,7 @@ class CustomFormRequest extends FormRequest
             // part 2
             $content[$request instanceof ContentFieldCreateRequest ? 'fields' : 'data'][] = [
                 'key' => $input['key'],
-                'value' => $input['value']
+                'value' => $input['value'],
             ];
         }
 
@@ -565,7 +590,11 @@ class CustomFormRequest extends FormRequest
             // part 2
             if ($contentValidationRequired) {
 
-                $idInParam = array_values($request->route()->parameters())[0];
+                $idInParam =
+                    array_values(
+                        $request->route()
+                            ->parameters()
+                    )[0];
 
                 $fieldsOrData = $request instanceof ContentFieldDeleteRequest ? 'fields' : 'data';
 
@@ -608,11 +637,15 @@ class CustomFormRequest extends FormRequest
         }
 
         if ($request instanceof ContentFieldDeleteRequest || $request instanceof ContentFieldUpdateRequest) {
-            $idInParam = array_values($request->route()->parameters())[0];
+            $idInParam =
+                array_values(
+                    $request->route()
+                        ->parameters()
+                )[0];
             $contentDatumOrField = $this->contentFieldService->get($idInParam);
         }
 
-        if(!empty($contentDatumOrField)){
+        if (!empty($contentDatumOrField)) {
             return $this->contentService->getById($contentDatumOrField['content_id']);
         }
 
@@ -635,9 +668,12 @@ class CustomFormRequest extends FormRequest
             $this->validationFactory->make(
                 [$key => $fieldOrDatumValue],
                 [$key => $rule]
-            )->validate();
+            )
+                ->validate();
         } catch (ValidationException $exception) {
-            $messages = $exception->validator->messages()->messages();
+            $messages =
+                $exception->validator->messages()
+                    ->messages();
             $formattedValidationMessages = [];
 
             foreach ($messages as $messageKey => $errors) {
@@ -649,7 +685,13 @@ class CustomFormRequest extends FormRequest
             }
 
             throw new HttpResponseException(
-                new JsonResponse(['messages' => $formattedValidationMessages], 422)
+                reply()->json(
+                    new Entity(['messages' => $formattedValidationMessages]),
+                    [
+                        'code' => 422,
+                        'errors' => $formattedValidationMessages,
+                    ]
+                )
             );
         }
     }
@@ -659,7 +701,8 @@ class CustomFormRequest extends FormRequest
         try {
             $this->validateRule($fieldOrDatumValue, $rule, $key, $position);
         } catch (HttpResponseException $exception) {
-            return $exception->getResponse()->getData(true)['messages'];
+            return $exception->getResponse()
+                ->getData(true)['messages'];
         }
 
         return [];

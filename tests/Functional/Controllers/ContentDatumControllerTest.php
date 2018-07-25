@@ -75,8 +75,16 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $response = $this->call('PUT', 'railcontent/content/datum');
 
         $this->assertEquals(422, $response->status());
-        $this->assertContains('key', array_column(json_decode($response->getContent())->errors, 'source'));
-        $this->assertContains('content_id', array_column(json_decode($response->getContent())->errors, 'source'));
+        $this->assertEquals([
+            [
+                "source" => "key",
+                "detail" => "The key field is required.",
+            ],
+            [
+                "source" => "content_id",
+                "detail" => "The content id field is required.",
+            ]
+        ], $response->decodeResponseJson('meta')['errors']);
     }
 
     public function test_add_content_datum_key_not_pass_the_validation()
@@ -88,8 +96,16 @@ class ContentDatumControllerTest extends RailcontentTestCase
             $this->call('PUT', 'railcontent/content/datum', ['content_id' => 1, 'key' => $key, 'value' => $value]);
 
         $this->assertEquals(422, $response->status());
-        $this->assertContains('key', array_column(json_decode($response->getContent())->errors, 'source'));
-        $this->assertContains('content_id', array_column(json_decode($response->getContent())->errors, 'source'));
+        $this->assertEquals([
+            [
+                "source" => "key",
+                "detail" => "The key may not be greater than 255 characters.",
+            ],
+            [
+                "source" => "content_id",
+                "detail" => "The selected content id is invalid.",
+            ]
+        ], $response->decodeResponseJson('meta')['errors']);
     }
 
     public function test_update_content_datum_controller_method_response()
@@ -161,7 +177,12 @@ class ContentDatumControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(422, $response->status());
-        $this->assertContains('key', array_column(json_decode($response->getContent())->errors, 'source'));
+        $this->assertEquals([
+            [
+                "source" => "key",
+                "detail" => "The key may not be greater than 255 characters.",
+            ]
+        ], $response->decodeResponseJson('meta')['errors']);
     }
 
     public function test_delete_content_datum_controller()

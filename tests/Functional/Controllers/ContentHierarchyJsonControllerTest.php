@@ -45,7 +45,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             ],
         ];
 
-        $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
     }
 
     public function test_create_without_position()
@@ -115,7 +115,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             ],
         ];
 
-        $this->assertEquals($errors, json_decode($response->content(), true)['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
     }
 
     public function test_update_not_found()

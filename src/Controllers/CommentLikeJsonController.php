@@ -24,6 +24,13 @@ class CommentLikeJsonController extends Controller
         $this->middleware(ConfigService::$controllerMiddleware);
     }
 
+    /**
+     * Authenticated user like a comment.
+     *
+     * @param CommentLikeRequest $request
+     * @param integer $id - comment id
+     * @return mixed
+     */
     public function store(CommentLikeRequest $request, $id)
     {
         $store = $this->commentLikeService->create($id, auth()->id());
@@ -37,6 +44,13 @@ class CommentLikeJsonController extends Controller
         );
     }
 
+    /**
+     * Authenticated user unlike a comment.
+     *
+     * @param CommentUnLikeRequest $request
+     * @param integer $id
+     * @return mixed
+     */
     public function delete(CommentUnLikeRequest $request, $id)
     {
         $delete = $this->commentLikeService->delete($id, auth()->id());

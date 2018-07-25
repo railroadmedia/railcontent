@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
-
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\CommentCreated;
@@ -73,13 +72,21 @@ class CommentServiceTest extends RailcontentTestCase
             'parent_id' => null,
             'user_id' => rand(),
             'comment' => $this->faker->text,
-            'created_on' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()
+                ->toDateTimeString(),
             'deleted_at' => null,
-            'display_name' => $this->faker->word
+            'display_name' => $this->faker->word,
         ];
-        $result = $this->classBeingTested->create($comment['comment'], $content['id'], $comment['parent_id'], $comment['user_id'], $comment['display_name']);
+        $result = $this->classBeingTested->create(
+            $comment['comment'],
+            $content['id'],
+            $comment['parent_id'],
+            $comment['user_id'],
+            $comment['display_name']
+        )
+            ->getArrayCopy();
 
-        $this->assertEquals(array_add($comment, 'replies',[]), $result);
+        $this->assertEquals(array_add($comment, 'replies', []), $result);
     }
 
     public function test_comment_assignation()
@@ -95,21 +102,31 @@ class CommentServiceTest extends RailcontentTestCase
         $comment = [
             'comment' => $this->faker->text,
             'content_id' => $content['id'],
-            'created_on' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()
+                ->toDateTimeString(),
             'deleted_at' => null,
             'id' => 1,
             'parent_id' => null,
             'user_id' => $userId,
             'display_name' => $this->faker->word,
-            'replies' => null
+            'replies' => null,
         ];
 
-        $result = $this->classBeingTested->create($comment['comment'], $content['id'], $comment['parent_id'], $userId, $comment['display_name']);
+        $result = $this->classBeingTested->create(
+            $comment['comment'],
+            $content['id'],
+            $comment['parent_id'],
+            $userId,
+            $comment['display_name']
+        );
 
         //check that the ContentCreated event was dispatched with the correct content id
-        Event::assertDispatched(CommentCreated::class, function($event) use ($comment, $content) {
-            return (($event->commentId == $comment['id']));
-        });
+        Event::assertDispatched(
+            CommentCreated::class,
+            function ($event) use ($comment, $content) {
+                return (($event->commentId == $comment['id']));
+            }
+        );
     }
 
     public function test_create_comment_on_not_commentable_content_type()
@@ -133,14 +150,17 @@ class CommentServiceTest extends RailcontentTestCase
             'parent_id' => $comment['id'],
             'user_id' => $userId,
             'comment' => $this->faker->text,
-            'created_on' => Carbon::now()->toDateTimeString(),
+            'created_on' => Carbon::now()
+                ->toDateTimeString(),
             'deleted_at' => null,
-            'display_name' => $this->faker->word
+            'display_name' => $this->faker->word,
         ];
 
-        $result = $this->classBeingTested->create($reply['comment'], null, $comment['id'], $userId, $reply['display_name']);
+        $result =
+            $this->classBeingTested->create($reply['comment'], null, $comment['id'], $userId, $reply['display_name'])
+                ->getArrayCopy();
 
-        $this->assertEquals(array_add($reply,'replies',[]), $result);
+        $this->assertEquals(array_add($reply, 'replies', []), $result);
     }
 
     public function test_update_my_comment()
@@ -150,12 +170,16 @@ class CommentServiceTest extends RailcontentTestCase
             $this->faker->word,
             $this->faker->randomElement(ConfigService::$commentableContentTypes)
         );
-        $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
+        $comment =
+            $this->commentFactory->create($this->faker->text, $content['id'], null, $userId)
+                ->getArrayCopy();
 
         $newCommentValues = [
-            'comment' => $this->faker->text
+            'comment' => $this->faker->text,
         ];
-        $result = $this->classBeingTested->update($comment['id'], $newCommentValues);
+        $result =
+            $this->classBeingTested->update($comment['id'], $newCommentValues)
+                ->getArrayCopy();
 
         $this->assertEquals(array_merge($comment, $newCommentValues), $result);
     }
@@ -176,9 +200,9 @@ class CommentServiceTest extends RailcontentTestCase
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
         CommentService::$canManageOtherComments = false;
-        
+
         $newCommentValues = [
-            'comment' => $this->faker->text
+            'comment' => $this->faker->text,
         ];
         $result = $this->classBeingTested->update($comment['id'], $newCommentValues);
 
@@ -193,7 +217,7 @@ class CommentServiceTest extends RailcontentTestCase
             $this->faker->randomElement(ConfigService::$commentableContentTypes)
         );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
-        request()->attributes->set('user_id',$userId);
+        request()->attributes->set('user_id', $userId);
         $result = $this->classBeingTested->delete($comment['id']);
 
         $this->assertEquals(1, $result);
@@ -223,11 +247,12 @@ class CommentServiceTest extends RailcontentTestCase
     public function test_get_comment_when_not_exist()
     {
         $results = $this->classBeingTested->getComments(1, 10, 'id');
-        $this->assertArrayHasKey('results',$results);
-        $this->assertArrayHasKey('total_results',$results);
+
+        $this->assertArrayHasKey('results', $results);
+        $this->assertArrayHasKey('total_results', $results);
 
         $this->assertEquals(0, $results['total_results']);
-        $this->assertEquals([], $results['results']);
+        $this->assertEquals([], $results['results']->toArray());
     }
 
     public function test_get_comments_paginated()
@@ -239,24 +264,27 @@ class CommentServiceTest extends RailcontentTestCase
         );
         $limit = 3;
 
-        $totalNumber = $this->faker->numberBetween($limit, ($limit+5));
-        for($i = 0; $i<=$totalNumber; $i++) {
+        $totalNumber = $this->faker->numberBetween($limit, ($limit + 5));
+        for ($i = 0; $i <= $totalNumber; $i++) {
             $comment[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
             $comment[$i]['replies'] = [];
         }
 
         $results = $this->classBeingTested->getComments(1, $limit, 'created_on');
 
-        $this->assertEquals(($totalNumber+1), $results['total_results']);
-        $this->assertEquals(array_slice($comment, 0, $limit, true), $results['results']);
+        $this->assertEquals(($totalNumber + 1), $results['total_results']);
+        $this->assertEquals(array_slice($comment, 0, $limit, true), $results['results']->toArray());
     }
 
     public function test_soft_delete_comment()
     {
         $userId = $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes));
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+        );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
-        request()->attributes->set('user_id',$userId);
+        request()->attributes->set('user_id', $userId);
 
         $this->classBeingTested->delete($comment['id']);
 
@@ -272,11 +300,14 @@ class CommentServiceTest extends RailcontentTestCase
     {
 
         $userId = $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create($this->faker->word, $this->faker->randomElement(ConfigService::$commentableContentTypes));
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+        );
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
 
         $reply = $this->commentFactory->create($this->faker->word, $comment['content_id'], $comment['id']);
-        request()->attributes->set('user_id',$userId);
+        request()->attributes->set('user_id', $userId);
 
         $this->classBeingTested->delete($comment['id']);
 
@@ -284,7 +315,8 @@ class CommentServiceTest extends RailcontentTestCase
             ConfigService::$tableComments,
             [
                 'id' => $comment['id'],
-                'deleted_at' => Carbon::now()->toDateTimeString()
+                'deleted_at' => Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
 
@@ -292,7 +324,8 @@ class CommentServiceTest extends RailcontentTestCase
             ConfigService::$tableComments,
             [
                 'id' => $reply['id'],
-                'deleted_at' => Carbon::now()->toDateTimeString()
+                'deleted_at' => Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
     }
@@ -308,7 +341,7 @@ class CommentServiceTest extends RailcontentTestCase
         $this->assertDatabaseMissing(
             ConfigService::$tableComments,
             [
-                'id' => $comment['id']
+                'id' => $comment['id'],
             ]
         );
     }
@@ -325,14 +358,14 @@ class CommentServiceTest extends RailcontentTestCase
         $this->assertDatabaseMissing(
             ConfigService::$tableComments,
             [
-                'id' => $comment['id']
+                'id' => $comment['id'],
             ]
         );
 
         $this->assertDatabaseMissing(
             ConfigService::$tableComments,
             [
-                'id' => $reply['id']
+                'id' => $reply['id'],
             ]
         );
     }

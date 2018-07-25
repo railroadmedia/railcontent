@@ -31,7 +31,7 @@ class ContentDatumJsonController extends Controller
      * Call the method from service that create new data and link the content with the data.
      *
      * @param ContentDatumCreateRequest $request
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
      */
     public function store(ContentDatumCreateRequest $request)
     {
@@ -55,7 +55,7 @@ class ContentDatumJsonController extends Controller
      *
      * @param integer $dataId
      * @param ContentDatumUpdateRequest $request
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
      * @throws \Throwable
      */
     public function update($dataId, ContentDatumUpdateRequest $request)
@@ -91,7 +91,7 @@ class ContentDatumJsonController extends Controller
      * Call the method from service to delete the content data
      *
      * @param integer $dataId
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
      *
      * Hmm... we're not actually using that request in here, but including it triggers the prepending validation, so
      * maybe it needs to be there for that?

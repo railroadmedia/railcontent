@@ -42,7 +42,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'source' => 'permission_id',
                 'detail' => 'The selected permission id is invalid.'
             ]
-        ], $results->decodeResponseJson('errors'));
+        ], $results->decodeResponseJson('meta')['errors']);
     }
 
     public function test_store()
@@ -159,7 +159,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 "source" => "start_date",
                 "detail" => "The start date is not a valid date."
             ]
-        ], $results->decodeResponseJson('errors'));
+        ], $results->decodeResponseJson('meta')['errors']);
     }
 
     public function test_delete_user_permission_not_exist()

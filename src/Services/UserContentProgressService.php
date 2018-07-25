@@ -111,7 +111,6 @@ class UserContentProgressService
             $progressPercent = $this->getProgressPercentage($userId, $children);
         }
 
-
         $isCompleted = $this->userContentRepository->isContentAlreadyCompleteForUser($contentId, $userId);
 
         if (!$isCompleted || $forceEvenIfComplete) {
@@ -123,7 +122,8 @@ class UserContentProgressService
                 [
                     'state' => self::STATE_STARTED,
                     'progress_percent' => $progressPercent,
-                    'updated_on' => Carbon::now()->toDateTimeString(),
+                    'updated_on' => Carbon::now()
+                        ->toDateTimeString(),
                 ]
             );
 
@@ -153,7 +153,8 @@ class UserContentProgressService
             [
                 'state' => self::STATE_COMPLETED,
                 'progress_percent' => 100,
-                'updated_on' => Carbon::now()->toDateTimeString(),
+                'updated_on' => Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
 
@@ -164,7 +165,7 @@ class UserContentProgressService
                         'method' => 'completeContent',
                         '$contentId' => $contentId,
                         '$progress' => '(not present for "completeContent" method. -Jonathan)',
-                        '$userId' => $userId
+                        '$userId' => $userId,
                     ],
                     true
                 )
@@ -245,12 +246,13 @@ class UserContentProgressService
         $this->userContentRepository->updateOrCreate(
             [
                 'content_id' => $contentId,
-                'user_id' => $userId
+                'user_id' => $userId,
             ],
             [
                 'state' => self::STATE_STARTED,
                 'progress_percent' => $progress,
-                'updated_on' => Carbon::now()->toDateTimeString()
+                'updated_on' => Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
 
@@ -261,7 +263,7 @@ class UserContentProgressService
                         'method' => 'saveContentProgress',
                         '$contentId' => $contentId,
                         '$progress' => print_r($progress, true),
-                        '$userId' => $userId
+                        '$userId' => $userId,
                     ],
                     true
                 )
@@ -292,15 +294,16 @@ class UserContentProgressService
         }
 
         if ($contentOrContents instanceof Collection) {
-            $contentIds = $contentOrContents->pluck('id')->toArray();
+            $contentIds =
+                $contentOrContents->pluck('id')
+                    ->toArray();
 
         } else {
             $contentIds = array_column($contentOrContents, 'id');
         }
 
         if (!empty($contentIds)) {
-            $contentProgressions =
-                $this->userContentRepository->getByUserIdAndWhereContentIdIn($userId, $contentIds);
+            $contentProgressions = $this->userContentRepository->getByUserIdAndWhereContentIdIn($userId, $contentIds);
 
             $contentProgressionsByContentId =
                 array_combine(array_column($contentProgressions, 'content_id'), $contentProgressions);
@@ -310,11 +313,11 @@ class UserContentProgressService
                     $contentOrContents[$index]['user_progress'][$userId] =
                         $contentProgressionsByContentId[$content['id']];
 
-                    $contentOrContents[$index][self::STATE_COMPLETED] = $contentProgressionsByContentId[$content['id']]['state'] ==
-                        self::STATE_COMPLETED;
+                    $contentOrContents[$index][self::STATE_COMPLETED] =
+                        $contentProgressionsByContentId[$content['id']]['state'] == self::STATE_COMPLETED;
 
-                    $contentOrContents[$index][self::STATE_STARTED] = $contentProgressionsByContentId[$content['id']]['state'] ==
-                        self::STATE_STARTED;
+                    $contentOrContents[$index][self::STATE_STARTED] =
+                        $contentProgressionsByContentId[$content['id']]['state'] == self::STATE_STARTED;
                 } else {
                     $contentOrContents[$index]['user_progress'][$userId] = [];
 
@@ -355,11 +358,9 @@ class UserContentProgressService
         foreach ($parents as $parent) {
 
             // start parent if necessary
-            if (
-                $content[self::STATE_STARTED] &&
+            if ($content[self::STATE_STARTED] &&
                 !$parent[self::STATE_STARTED] &&
-                in_array($parent['type'], $allowedTypesForStarted)
-            ) {
+                in_array($parent['type'], $allowedTypesForStarted)) {
                 $this->startContent($parent['id'], $userId);
             }
 
@@ -377,11 +378,9 @@ class UserContentProgressService
                         $complete = false;
                     }
                 }
-                if (
-                    $complete &&
+                if ($complete &&
                     !$parent[self::STATE_COMPLETED] &&
-                    in_array($parent['type'], $allowedTypesForCompleted)
-                ) {
+                    in_array($parent['type'], $allowedTypesForCompleted)) {
                     $this->completeContent($parent['id'], $userId);
                 }
             }
@@ -409,7 +408,7 @@ class UserContentProgressService
         $percentages = [];
 
         if ($siblings instanceof Collection) {
-            $progressOfSiblings = $siblings->pluck('user_progress')->toArray();
+            $progressOfSiblings = ($siblings->has('user_progress')) ? $siblings->pluck('user_progress')->toArray() : [];
         } else {
             $progressOfSiblings = array_column($siblings, 'user_progress');
         }
@@ -421,7 +420,9 @@ class UserContentProgressService
             );
 
             if ($siblings instanceof Collection) {
-                $progressOfSiblings = $siblings->pluck('user_progress')->toArray();
+                $progressOfSiblings =
+                    $siblings->pluck('user_progress')
+                        ->toArray();
             } else {
                 $progressOfSiblings = array_column($siblings, 'user_progress');
             }

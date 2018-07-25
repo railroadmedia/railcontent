@@ -82,7 +82,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(422, $response->status());
-        $this->assertEquals(2, count(json_decode($response->content(), true)['errors']));
+        $this->assertEquals(2, count($response->decodeResponseJson('meta')['errors']));
     }
 
     public function test_add_content_field_incorrect_fields()
@@ -104,10 +104,8 @@ class ContentFieldControllerTest extends RailcontentTestCase
             ]
         );
 
-        $decodedResponse = $response->decodeResponseJson();
-
         $this->assertEquals(422, $response->status());
-        $this->assertArrayHasKey('errors', $decodedResponse);
+        $this->assertArrayHasKey('errors', $response->decodeResponseJson('meta'));
 
         $expectedErrors = [
             [
@@ -127,7 +125,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
                 "detail" => "The selected content id is invalid.",
             ],
         ];
-        $this->assertEquals($expectedErrors, $decodedResponse['errors']);
+        $this->assertEquals($expectedErrors, $response->decodeResponseJson('meta')['errors']);
     }
 
     public function test_update_content_field_controller_method_response()
@@ -177,7 +175,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
                 'content_id' => $this->faker->numberBetween(),
             ]
         );
-        $decodedResponse = $response->decodeResponseJson();
+        $decodedResponse = $response->decodeResponseJson('meta');
 
         $this->assertEquals(422, $response->status());
         $this->assertArrayHasKey('errors', $decodedResponse);

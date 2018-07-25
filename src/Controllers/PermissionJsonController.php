@@ -7,7 +7,6 @@ use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\PermissionAssignRequest;
 use Railroad\Railcontent\Requests\PermissionDissociateRequest;
 use Railroad\Railcontent\Requests\PermissionRequest;
-use Railroad\Railcontent\Responses\JsonResponse;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\PermissionService;
@@ -68,7 +67,7 @@ class PermissionJsonController extends Controller
      * Create a new permission and return it in JSON format
      *
      * @param PermissionRequest $request
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
      */
     public function store(PermissionRequest $request)
     {
@@ -90,7 +89,8 @@ class PermissionJsonController extends Controller
      *
      * @param integer $id
      * @param PermissionRequest $request
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
+     * @throws \Throwable
      */
     public function update($id, PermissionRequest $request)
     {
@@ -118,7 +118,8 @@ class PermissionJsonController extends Controller
      * Delete a permission if exist and it's not linked with content id or content type
      *
      * @param integer $id
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
+     * @throws \Throwable
      */
     public function delete($id)
     {
@@ -136,7 +137,7 @@ class PermissionJsonController extends Controller
      * Attach permission to a specific content or to all content of a certain type
      *
      * @param PermissionAssignRequest $request
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
      */
     public function assign(PermissionAssignRequest $request)
     {
@@ -158,7 +159,7 @@ class PermissionJsonController extends Controller
      * Dissociate ("unattach") permissions from a specific content or all content of a certain type
      *
      * @param PermissionDissociateRequest $request
-     * @return \Railroad\Railcontent\Responses\JsonResponse
+     * @return JsonResponse
      */
     public function dissociate(PermissionDissociateRequest $request)
     {

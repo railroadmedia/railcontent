@@ -4,12 +4,9 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Factory as ValidationFactory;
-use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
-use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
@@ -37,8 +34,7 @@ class ContentJsonController extends Controller
     public function __construct(
         ContentService $contentService,
         ValidationFactory $validationFactory
-    )
-    {
+    ) {
         $this->contentService = $contentService;
         $this->validationFactory = $validationFactory;
 
@@ -82,12 +78,13 @@ class ContentJsonController extends Controller
             [
                 'transformer' => DataTransformer::class,
                 'totalResults' => $contentData['total_results'],
-                'filterOptions' => $contentData['filter_options']
+                'filterOptions' => $contentData['filter_options'],
             ]
         );
     }
 
     /** Pull the children contents for the parent id
+     *
      * @param integer $parentId
      * @return JsonResponse
      */
@@ -128,25 +125,25 @@ class ContentJsonController extends Controller
         $content = $this->contentService->getById($id);
         throw_unless($content, new NotFoundException('No content with id ' . $id . ' exists.'));
 
-//        $rules = $this->contentService->getValidationRules($content);
-//        if($rules === false){
-//            return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503);
-//        }
-//
-//        $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation($content, $rules);
-//
-//        $validator = $this->validationFactory->make($contentPropertiesForValidation, $rules);
-//
-//        $validation = [ 'status' => 200, 'messages' => [] ];
-//
-//        try{
-//            $validator->validate();
-//        }catch(ValidationException $exception){
-//            $messages = $exception->validator->messages()->messages();
-//            $validation = ['status' => 422, 'messages' => $messages];
-//        }
-//
-//        $content = array_merge($content, ['validation' => $validation]);
+        //        $rules = $this->contentService->getValidationRules($content);
+        //        if($rules === false){
+        //            return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503);
+        //        }
+        //
+        //        $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation($content, $rules);
+        //
+        //        $validator = $this->validationFactory->make($contentPropertiesForValidation, $rules);
+        //
+        //        $validation = [ 'status' => 200, 'messages' => [] ];
+        //
+        //        try{
+        //            $validator->validate();
+        //        }catch(ValidationException $exception){
+        //            $messages = $exception->validator->messages()->messages();
+        //            $validation = ['status' => 422, 'messages' => $messages];
+        //        }
+        //
+        //        $content = array_merge($content, ['validation' => $validation]);
 
         return reply()->json(
             array_values([$id => $content]),
@@ -185,7 +182,7 @@ class ContentJsonController extends Controller
             [$content],
             [
                 'transformer' => DataTransformer::class,
-                'code' =>201
+                'code' => 201,
             ]
         );
     }
@@ -213,7 +210,7 @@ class ContentJsonController extends Controller
                     'language' => '',
                     'user_id' => '',
                     'published_on' => '',
-                    'archived_on' => ''
+                    'archived_on' => '',
                 ]
             )
         );
@@ -228,7 +225,7 @@ class ContentJsonController extends Controller
             [$content],
             [
                 'transformer' => DataTransformer::class,
-                'code' =>201
+                'code' => 201,
             ]
         );
     }
@@ -266,13 +263,13 @@ class ContentJsonController extends Controller
      */
     public function options(Request $request)
     {
-        return response()->make(
-            '',
-            200,
+        return reply()->json(
+            null,
             [
+                'code' => 200,
                 'Access-Control-Allow-Origin' => '*',
                 'Access-Control-Allow-Methods' => 'POST, PATCH, GET, OPTIONS, PUT, DELETE',
-                'Access-Control-Allow-Headers' => 'X-Requested-With, content-type'
+                'Access-Control-Allow-Headers' => 'X-Requested-With, content-type',
             ]
         );
     }
