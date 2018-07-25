@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Decorators\Entity;
 
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Entities\ContentEntity;
+use Railroad\Railcontent\Support\Collection;
 
 class ContentEntityDecorator implements DecoratorInterface
 {
@@ -34,6 +35,6 @@ class ContentEntityDecorator implements DecoratorInterface
             }
         }
 
-        return $entities;
+        return new Collection($entities);
     }
 }

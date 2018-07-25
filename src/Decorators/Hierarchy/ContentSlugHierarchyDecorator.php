@@ -12,7 +12,7 @@ class ContentSlugHierarchyDecorator implements DecoratorInterface
     public function decorate($contentResults)
     {
         $query = RepositoryBase::$connectionMask->table(ConfigService::$tableContent . ' as parent_content_0')
-            ->whereIn('parent_content_0.id', array_column($contentResults, 'id'));
+            ->whereIn('parent_content_0.id', $contentResults->pluck('id'));
 
         for ($i = 0; $i < ConfigService::$contentHierarchyMaxDepth; $i++) {
 

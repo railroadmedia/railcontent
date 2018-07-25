@@ -880,51 +880,6 @@ class ContentService
 
     /**
      * @param $userId
-     * @param $contentOrContents
-     * @param null $singlePlaylistSlug
-     * @return array|Collection|ContentEntity[]
-     */
-    public function attachPlaylistsToContents($userId, $contentOrContents, $singlePlaylistSlug = null)
-    {
-        $isArray = !isset($contentOrContents['id']);
-
-        if (!$isArray) {
-            $contentOrContents = [$contentOrContents];
-        }
-
-        $userPlaylistContents = $this->contentRepository->getByUserIdWhereChildIdIn(
-            $userId,
-            array_column($contentOrContents, 'id'),
-            $singlePlaylistSlug
-        );
-
-        $contentsHierarchy = $this->contentHierarchyRepository->getByParentIds(
-            array_column($userPlaylistContents, 'parent_id')
-        );
-
-        foreach ($contentOrContents as $index => $content) {
-            $contentOrContents[$index]['user_playlists'][$userId] = [];
-
-            foreach ($userPlaylistContents as $userPlaylistContent) {
-                foreach ($contentsHierarchy as $contentHierarchy) {
-
-                    if ($contentHierarchy['parent_id'] == $userPlaylistContent['id'] &&
-                        $contentHierarchy['child_id'] == $content['id']) {
-                        $contentOrContents[$index]['user_playlists'][$userId][] = $userPlaylistContent;
-                    }
-                }
-            }
-        }
-
-        if ($isArray) {
-            return $contentOrContents;
-        } else {
-            return reset($contentOrContents);
-        }
-    }
-
-    /**
-     * @param $userId
      * @param array $contents
      * @param null $singlePlaylistSlug
      * @return array|Collection|ContentEntity[]

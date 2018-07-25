@@ -16,6 +16,22 @@ class Decorator
      */
     public static function decorate($data, $type, $decoratorClass = null)
     {
+        if (ConfigService::$useCollections) {
+            if (isset($data['results'])) {
+
+                // content is nested in results
+                if (!isset($data['results']['id'])) {
+
+                    // multiple contents
+                    $data['results'] = new Collection($data['results']);
+                }
+            } elseif (empty($data['id'])) {
+
+                // multiple contents
+                $data = new Collection($data);
+            }
+        }
+
         if (!empty(ConfigService::$decorators[$type]) || !empty($decoratorClass)) {
 
             if (empty($decoratorClass)) {
@@ -45,7 +61,6 @@ class Decorator
                     $data = $decorator->decorate([0 => $data])[0];
                 } elseif (isset($data['results'])) {
 
-
                     // content is nested in results
                     if (isset($data['results']['id'])) {
 
@@ -59,22 +74,6 @@ class Decorator
                     // multiple contents
                     $data = $decorator->decorate($data);
                 }
-            }
-        }
-
-        if (ConfigService::$useCollections) {
-            if (isset($data['results'])) {
-
-                // content is nested in results
-                if (!isset($data['results']['id'])) {
-
-                    // multiple contents
-                    $data['results'] = new Collection($data['results']);
-                }
-            } elseif (empty($data['id'])) {
-
-                // multiple contents
-                $data = new Collection($data);
             }
         }
 
