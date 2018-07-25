@@ -2,12 +2,10 @@
 
 namespace Railroad\Railcontent\Decorators\UserProgress;
 
-use Illuminate\Support\Debug\Dumper;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
-use Symfony\Component\VarDumper\VarDumper;
 
 class ContentUserProgressDecorator implements DecoratorInterface
 {
@@ -49,8 +47,7 @@ class ContentUserProgressDecorator implements DecoratorInterface
 
             foreach ($contents as $index => $content) {
                 if (!empty($contentProgressionsByContentId[$content['id']])) {
-                    $contents[$index]['user_progress'][$userId] =
-                        $contentProgressionsByContentId[$content['id']];
+                    $contents[$index]['user_progress'][$userId] = $contentProgressionsByContentId[$content['id']];
 
                     $contents[$index][UserContentProgressService::STATE_COMPLETED] =
                         $contentProgressionsByContentId[$content['id']]['state'] ==
