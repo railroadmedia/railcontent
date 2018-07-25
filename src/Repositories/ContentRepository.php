@@ -920,7 +920,7 @@ class ContentRepository extends RepositoryBase
             }
         }
 
-        return $this->attachContentsLinkedByField($contents);
+        return $this->attachContentsLinkedByField(array_values($contents));
     }
 
     /**
