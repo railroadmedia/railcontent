@@ -8,7 +8,7 @@ use Railroad\Railcontent\Support\Collection;
 
 class CommentEntityDecorator implements DecoratorInterface
 {
-    public function decorate($commentResults)
+    public function decorate(Collection $commentResults)
     {
         $entities = [];
 

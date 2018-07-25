@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Decorators\Comments;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Repositories\CommentLikeRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Support\Collection;
 
 class CommentLikesDecorator implements DecoratorInterface
 {
@@ -22,7 +23,7 @@ class CommentLikesDecorator implements DecoratorInterface
         $this->commentLikeRepository = $commentLikeRepository;
     }
 
-    public function decorate($comments)
+    public function decorate(Collection $comments)
     {
         $commentAndReplyIds = [];
 

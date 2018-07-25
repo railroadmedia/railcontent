@@ -6,6 +6,7 @@ use Illuminate\Support\Debug\Dumper;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Services\UserContentProgressService;
+use Railroad\Railcontent\Support\Collection;
 use Symfony\Component\VarDumper\VarDumper;
 
 class ContentUserProgressDecorator implements DecoratorInterface
@@ -23,7 +24,7 @@ class ContentUserProgressDecorator implements DecoratorInterface
         $this->userContentProgressRepository = $userContentProgressRepository;
     }
 
-    public function decorate($contents, $userId = null)
+    public function decorate(Collection $contents, $userId = null)
     {
         if (empty($userId) && !empty(auth()->id())) {
             $userId = auth()->id();

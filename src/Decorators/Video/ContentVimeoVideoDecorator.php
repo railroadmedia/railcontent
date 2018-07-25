@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Decorators\Video;
 
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Support\Collection;
 use Vimeo\Vimeo;
 
 class ContentVimeoVideoDecorator implements DecoratorInterface
@@ -30,7 +31,7 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
         $this->vimeo = $vimeo;
     }
 
-    public function decorate($contentResults)
+    public function decorate(Collection $contentResults)
     {
         foreach ($contentResults as $contentIndex => $content) {
             foreach ($content['fields'] as $field) {

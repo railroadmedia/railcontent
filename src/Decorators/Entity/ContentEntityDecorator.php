@@ -8,7 +8,7 @@ use Railroad\Railcontent\Support\Collection;
 
 class ContentEntityDecorator implements DecoratorInterface
 {
-    public function decorate($contentResults)
+    public function decorate(Collection $contentResults)
     {
         if (isset($contentResults['id'])) {
 
