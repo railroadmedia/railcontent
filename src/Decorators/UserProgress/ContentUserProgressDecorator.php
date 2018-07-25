@@ -2,9 +2,11 @@
 
 namespace Railroad\Railcontent\Decorators\UserProgress;
 
+use Illuminate\Support\Debug\Dumper;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Services\UserContentProgressService;
+use Symfony\Component\VarDumper\VarDumper;
 
 class ContentUserProgressDecorator implements DecoratorInterface
 {

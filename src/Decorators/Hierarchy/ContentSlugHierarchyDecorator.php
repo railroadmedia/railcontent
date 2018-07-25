@@ -6,11 +6,19 @@ use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Support\Collection;
 
 class ContentSlugHierarchyDecorator implements DecoratorInterface
 {
     public function decorate($contentResults)
     {
+        $singular = false;
+
+        if (isset($contentResults['id'])) {
+            $singular = true;
+            $contentResults = new Collection([$contentResults]);
+        }
+
         $query = RepositoryBase::$connectionMask->table(ConfigService::$tableContent . ' as parent_content_0')
             ->whereIn('parent_content_0.id', $contentResults->pluck('id'));
 
@@ -62,6 +70,10 @@ class ContentSlugHierarchyDecorator implements DecoratorInterface
                     }
                 }
             }
+        }
+
+        if ($singular) {
+            return $contentResults->first();
         }
 
         return $contentResults;

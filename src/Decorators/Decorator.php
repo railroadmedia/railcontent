@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Decorators;
 
-
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Support\Collection;
 
@@ -16,20 +15,18 @@ class Decorator
      */
     public static function decorate($data, $type, $decoratorClass = null)
     {
-        if (ConfigService::$useCollections) {
-            if (isset($data['results'])) {
+        if (isset($data['results'])) {
 
-                // content is nested in results
-                if (!isset($data['results']['id'])) {
-
-                    // multiple contents
-                    $data['results'] = new Collection($data['results']);
-                }
-            } elseif (empty($data['id'])) {
+            // content is nested in results
+            if (!isset($data['results']['id'])) {
 
                 // multiple contents
-                $data = new Collection($data);
+                $data['results'] = new Collection($data['results']);
             }
+        } elseif (empty($data['id'])) {
+
+            // multiple contents
+            $data = new Collection($data);
         }
 
         if (!empty(ConfigService::$decorators[$type]) || !empty($decoratorClass)) {
@@ -48,24 +45,25 @@ class Decorator
                 $decorator = app()->make($decoratorClassName);
 
                 if (empty($data)) {
-                    if (ConfigService::$useCollections && is_array($data)) {
-                        return new Collection($data);
-                    } else {
-                        return $data;
-                    }
+                    return new Collection($data);
                 }
 
                 if (isset($data['id'])) {
 
                     // singular content
-                    $data = $decorator->decorate([0 => $data])[0];
+                    $data =
+                        $decorator->decorate(new Collection([$data]))
+                            ->first();
+
                 } elseif (isset($data['results'])) {
 
                     // content is nested in results
                     if (isset($data['results']['id'])) {
 
                         // singular content
-                        $data['results'] = $decorator->decorate([0 => $data['results']])[0];
+                        $data['results'] =
+                            $decorator->decorate(new Collection([$data]))
+                                ->first();
                     } else {
                         // multiple contents
                         $data['results'] = $decorator->decorate($data['results']);

@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Decorators\Entity;
 
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Entities\CommentEntity;
+use Railroad\Railcontent\Support\Collection;
 
 class CommentEntityDecorator implements DecoratorInterface
 {
@@ -15,6 +16,6 @@ class CommentEntityDecorator implements DecoratorInterface
             $entities[$resultsIndex] = new CommentEntity($result);
         }
 
-        return $entities;
+        return new Collection($entities);
     }
 }
