@@ -1201,6 +1201,8 @@ class ContentRepository extends RepositoryBase
                         if ($field['type'] === 'content_id') {
                             unset($parsedContents[$contentId]['fields'][$fieldIndex]);
 
+                            $linkedContents = array_combine(array_column($linkedContents, 'id'), $linkedContents);
+
                             if (empty($linkedContents[$field['value']])) {
                                 continue;
                             }
@@ -1240,11 +1242,12 @@ class ContentRepository extends RepositoryBase
                 $availableFields[$row['key']][] = $row['value'];
 
                 // only uniques
-                $availableFields[$row['key']] = array_unique($availableFields[$row['key']]);
+                $availableFields[$row['key']] = array_values(array_unique($availableFields[$row['key']]));
             }
         }
 
         $subContents = $this->getByIds($subContentIds);
+        $subContents = array_combine(array_column($subContents, 'id'), $subContents);
 
         foreach ($rows as $row) {
             if ($row['type'] == 'content_id' && !empty($subContents[$row['value']])) {
@@ -1253,6 +1256,15 @@ class ContentRepository extends RepositoryBase
                 // only uniques (this is a multidimensional array_unique equivalent)
                 $availableFields[$row['key']] =
                     array_map("unserialize", array_unique(array_map("serialize", $availableFields[$row['key']])));
+
+                usort(
+                    $availableFields[$row['key']],
+                    function ($a, $b) {
+                        return strcmp($a['slug'], $b['slug']);
+                    }
+                );
+
+                $availableFields[$row['key']] = array_values($availableFields[$row['key']]);
             }
         }
 
@@ -1337,7 +1349,8 @@ class ContentRepository extends RepositoryBase
                 ->selectPrimaryColumns()
                 ->whereBetween(
                     ConfigService::$tableContent . '.published_on',
-                    [$startDate,
+                    [
+                        $startDate,
                         Carbon::now()
                             ->toDateTimeString(),
                     ]
