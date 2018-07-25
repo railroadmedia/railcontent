@@ -498,7 +498,7 @@ class ContentQueryBuilder extends QueryBuilder
                 function (JoinClause $join) {
                     $join
                         ->on('id_permissions' . '.id',
-                            'id_user_permissions' . '.permissions_id')
+                            'id_user_permissions' . '.permission_id')
                         ->where('id_user_permissions.user_id', auth()->user()->id ?? null);
                 }
             )
@@ -507,7 +507,7 @@ class ContentQueryBuilder extends QueryBuilder
                 function (JoinClause $join) {
                     $join
                         ->on('type_permissions' . '.id',
-                            'type_user_permissions' . '.permissions_id')
+                            'type_user_permissions' . '.permission_id')
                         ->where('type_user_permissions.user_id', auth()->user()->id ?? null);
                 }
             )
