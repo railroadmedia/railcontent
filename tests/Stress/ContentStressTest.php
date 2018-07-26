@@ -8,9 +8,12 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
+use Railroad\Railcontent\Tests\SeedDatabase;
 
 class ContentStressTest extends RailcontentTestCase
 {
+    use SeedDatabase;
+
     /**
      * @var UserPermissionsRepository
      */
@@ -36,7 +39,7 @@ class ContentStressTest extends RailcontentTestCase
         $this->contentRepository          = $this->app->make(ContentRepository::class);
         $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
 
-        $this->artisan('db:seed', ['--class' => 'ContentSeeder']);
+        $this->seedDatabase();
     }
 
     public function test_get_contents()
@@ -44,7 +47,7 @@ class ContentStressTest extends RailcontentTestCase
         $userId         = $this->createAndLogInNewUser();
         $userPermission = $this->userPermissionRepository->create([
             'user_id'        => $userId,
-            'permissions_id' => 1,
+            'permission_id' => 1,
             'start_date'     => Carbon::now()->toDateTimeString(),
             'created_on'     => Carbon::now()->toDateTimeString()
         ]);
@@ -53,7 +56,7 @@ class ContentStressTest extends RailcontentTestCase
         $results = $this->call('GET', 'railcontent/content');
 
         $tEnd = microtime(true) - $tStart;
-        $this->assertLessThan(0.5, $tEnd);
+        $this->assertLessThan(0.3, $tEnd);
     }
 
     public function test_get_contents_no_permissions()
@@ -63,7 +66,7 @@ class ContentStressTest extends RailcontentTestCase
         $this->call('GET', 'railcontent/content');
 
         $tEnd = microtime(true) - $tStart;
-        $this->assertLessThan(0.2, $tEnd);
+        $this->assertLessThan(0.1, $tEnd);
     }
 
     public function test_show_content()
@@ -71,7 +74,7 @@ class ContentStressTest extends RailcontentTestCase
         $userId         = $this->createAndLogInNewUser();
         $userPermission = $this->userPermissionRepository->create([
             'user_id'        => $userId,
-            'permissions_id' => 1,
+            'permission_id' => 1,
             'start_date'     => Carbon::now()->toDateTimeString(),
             'created_on'     => Carbon::now()->toDateTimeString()
         ]);
@@ -88,7 +91,7 @@ class ContentStressTest extends RailcontentTestCase
         $userId         = $this->createAndLogInNewUser();
         $userPermission = $this->userPermissionRepository->create([
             'user_id'        => $userId,
-            'permissions_id' => 1,
+            'permission_id' => 1,
             'start_date'     => Carbon::now()->toDateTimeString(),
             'created_on'     => Carbon::now()->toDateTimeString()
         ]);
@@ -129,7 +132,7 @@ class ContentStressTest extends RailcontentTestCase
         $userId         = $this->createAndLogInNewUser();
         $userPermission = $this->userPermissionRepository->create([
             'user_id'        => $userId,
-            'permissions_id' => 1,
+            'permission_id' => 1,
             'start_date'     => Carbon::now()->toDateTimeString(),
             'created_on'     => Carbon::now()->toDateTimeString()
         ]);
@@ -148,7 +151,7 @@ class ContentStressTest extends RailcontentTestCase
         $userId         = $this->createAndLogInNewUser();
         $userPermission = $this->userPermissionRepository->create([
             'user_id'        => $userId,
-            'permissions_id' => 1,
+            'permission_id' => 1,
             'start_date'     => Carbon::now()->toDateTimeString(),
             'created_on'     => Carbon::now()->toDateTimeString()
         ]);
@@ -165,7 +168,7 @@ class ContentStressTest extends RailcontentTestCase
         $userId         = $this->createAndLogInNewUser();
         $userPermission = $this->userPermissionRepository->create([
             'user_id'        => $userId,
-            'permissions_id' => 1,
+            'permission_id' => 1,
             'start_date'     => Carbon::now()->toDateTimeString(),
             'created_on'     => Carbon::now()->toDateTimeString()
         ]);
@@ -184,7 +187,7 @@ class ContentStressTest extends RailcontentTestCase
         $userId         = $this->createAndLogInNewUser();
         $userPermission = $this->userPermissionRepository->create([
             'user_id'        => $userId,
-            'permissions_id' => 1,
+            'permission_id' => 1,
             'start_date'     => Carbon::now()->toDateTimeString(),
             'created_on'     => Carbon::now()->toDateTimeString()
         ]);
@@ -203,7 +206,7 @@ class ContentStressTest extends RailcontentTestCase
         $userId         = $this->createAndLogInNewUser();
         $userPermission = $this->userPermissionRepository->create([
             'user_id'        => $userId,
-            'permissions_id' => 1,
+            'permission_id' => 1,
             'start_date'     => Carbon::now()->toDateTimeString(),
             'created_on'     => Carbon::now()->toDateTimeString()
         ]);
@@ -222,7 +225,7 @@ class ContentStressTest extends RailcontentTestCase
         $userId         = $this->createAndLogInNewUser();
         $userPermission = $this->userPermissionRepository->create([
             'user_id'        => $userId,
-            'permissions_id' => 1,
+            'permission_id' => 1,
             'start_date'     => Carbon::now()->toDateTimeString(),
             'created_on'     => Carbon::now()->toDateTimeString()
         ]);

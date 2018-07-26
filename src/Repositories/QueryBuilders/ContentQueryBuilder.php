@@ -89,11 +89,11 @@ class ContentQueryBuilder extends QueryBuilder
     public function addSubJoinToQuery(Builder $subQuery)
     {
         $this->join(
-                $this->connection->raw('(' . $subQuery->toSql() . ') inner_content'),
-                function (JoinClause $joinClause) {
-                    $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
-                }
-            )
+            $this->connection->raw('(' . $subQuery->toSql() . ') inner_content'),
+            function (JoinClause $joinClause) {
+                $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
+            }
+        )
             ->addBinding($subQuery->getBindings());
 
         return $this;
@@ -440,104 +440,64 @@ class ContentQueryBuilder extends QueryBuilder
     public function restrictByPermissions()
     {
         $this->leftJoin(
-                ConfigService::$tableContentPermissions . ' as id_content_permissions',
-                function (JoinClause $join) {
-                    $join->on(
-                            'id_content_permissions' . '.content_id',
-                            ConfigService::$tableContent . '.id'
-                        );
-                }
-            )
-            ->leftJoin(
-                ConfigService::$tablePermissions . ' as id_permissions',
-                function (JoinClause $join) {
-                    $join->on(
-                            'id_permissions' . '.id',
-                            'id_content_permissions' . '.permission_id'
-                        );
-                }
-            )
+            ConfigService::$tableContentPermissions . ' as id_content_permissions',
+            function (JoinClause $join) {
+                $join->on(
+                    'id_content_permissions' . '.content_id',
+                    ConfigService::$tableContent . '.id'
+                );
+            }
+        )
             ->leftJoin(
                 ConfigService::$tableContentPermissions . ' as type_content_permissions',
                 function (JoinClause $join) {
                     $join->on(
-                            'type_content_permissions' . '.content_type',
-                            ConfigService::$tableContent . '.type'
-                        );
-                }
-            )
-            ->leftJoin(
-                ConfigService::$tablePermissions . ' as type_permissions',
-                function (JoinClause $join) {
-                    $join->on(
-                            'type_permissions' . '.id',
-                            'type_content_permissions' . '.permission_id'
-                        );
-                }
-            )
-            ->leftJoin(
-                ConfigService::$tableUserPermissions . ' as id_user_permissions',
-                function (JoinClause $join) {
-                    $join->on(
-                            'id_permissions' . '.id',
-                            'id_user_permissions' . '.permission_id'
-                        )
-                        ->where('id_user_permissions.user_id', auth()->user()->id ?? null);
-                }
-            )
-            ->leftJoin(
-                ConfigService::$tableUserPermissions . ' as type_user_permissions',
-                function (JoinClause $join) {
-                    $join->on(
-                            'type_permissions' . '.id',
-                            'type_user_permissions' . '.permission_id'
-                        )
-                        ->where('type_user_permissions.user_id', auth()->user()->id ?? null);
+                        'type_content_permissions' . '.content_type',
+                        ConfigService::$tableContent . '.type'
+                    );
                 }
             )
             ->where(
                 function (Builder $builder) {
                     return $builder->where(
+                        function (Builder $builder) {
+                            return $builder->whereNull(
+                                'id_content_permissions' . '.permission_id'
+                            )
+                                ->whereNull(
+                                    'type_content_permissions' . '.permission_id'
+                                );
+                        }
+                    )
+                        ->orWhereExists(
                             function (Builder $builder) {
-                                return $builder->where('id_permissions' . '.brand', ConfigService::$brand)
-                                    ->whereNotNull('id_user_permissions.id')
+                                return $builder->select('id')
+                                    ->from(ConfigService::$tableUserPermissions)
+                                    ->where('user_id', auth()->user()->id ?? null)
                                     ->where(
                                         function (Builder $builder) {
                                             return $builder->where(
-                                                    'id_user_permissions.expiration_date',
-                                                    '>=',
-                                                    Carbon::now()
-                                                        ->toDateTimeString()
-                                                )
-                                                ->orWhereNull('id_user_permissions.expiration_date');
+                                                'permission_id',
+                                                '=',
+                                                'id_content_permissions.permission_id'
+                                            )
+                                                ->orWhere(
+                                                    'permission_id',
+                                                    '=',
+                                                    'type_content_permissions.permission_id'
+                                                );
                                         }
-                                    );
-                            }
-                        )
-                        ->orWhere(
-                            function (Builder $builder) {
-                                return $builder->where('type_permissions' . '.brand', ConfigService::$brand)
-                                    ->whereNotNull('type_user_permissions.id')
-                                    ->where(
-                                        function (Builder $builder) {
-                                            return $builder->where(
-                                                    'type_user_permissions.expiration_date',
-                                                    '>=',
-                                                    Carbon::now()
-                                                        ->toDateTimeString()
-                                                )
-                                                ->orWhereNull('type_user_permissions.expiration_date');
-                                        }
-                                    );
-                            }
-                        )
-                        ->orWhere(
-                            function (Builder $builder) {
-                                return $builder->whereNull(
-                                        'id_content_permissions' . '.permission_id'
                                     )
-                                    ->whereNull(
-                                        'type_content_permissions' . '.permission_id'
+                                    ->where(
+                                        function (Builder $builder) {
+                                            return $builder->where(
+                                                'expiration_date',
+                                                '>=',
+                                                Carbon::now()
+                                                    ->toDateTimeString()
+                                            )
+                                                ->orWhereNull('expiration_date');
+                                        }
                                     );
                             }
                         );
