@@ -3,10 +3,10 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
+use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
@@ -21,6 +21,7 @@ use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\ContentVersionRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
+use Railroad\Railcontent\Support\Collection;
 
 class ContentService
 {
@@ -645,7 +646,7 @@ class ContentService
      * @param array $includedFields
      * @param array $requiredUserStates
      * @param array $includedUserStates
-     * @return array|Collection|ContentEntity[]
+     * @return ContentFilterResultsEntity
      */
     public function getFiltered(
         $page,
@@ -680,59 +681,63 @@ class ContentService
                 implode(' ', array_values(array_collapse($includedUserStates)) ?? '')
             );
 
-        $results = Cache::store(ConfigService::$cacheDriver)->remember(
-            $hash,
-            ConfigService::$cacheTime,
-            function () use (
-                $hash,
-                $page,
-                $limit,
-                $orderByColumn,
-                $orderByDirection,
-                $includedTypes,
-                $slugHierarchy,
-                $requiredParentIds,
-                $requiredFields,
-                $includedFields,
-                $requiredUserStates,
-                $includedUserStates
-            ) {
-                $filter = $this->contentRepository->startFilter(
-                    $page,
-                    $limit,
-                    $orderByColumn,
-                    $orderByDirection,
-                    $includedTypes,
-                    $slugHierarchy,
-                    $requiredParentIds
+        $results =
+            Cache::store(ConfigService::$cacheDriver)
+                ->remember(
+                    $hash,
+                    ConfigService::$cacheTime,
+                    function () use (
+                        $hash,
+                        $page,
+                        $limit,
+                        $orderByColumn,
+                        $orderByDirection,
+                        $includedTypes,
+                        $slugHierarchy,
+                        $requiredParentIds,
+                        $requiredFields,
+                        $includedFields,
+                        $requiredUserStates,
+                        $includedUserStates
+                    ) {
+                        $filter = $this->contentRepository->startFilter(
+                            $page,
+                            $limit,
+                            $orderByColumn,
+                            $orderByDirection,
+                            $includedTypes,
+                            $slugHierarchy,
+                            $requiredParentIds
+                        );
+
+                        foreach ($requiredFields as $requiredField) {
+                            $filter->requireField(...$requiredField);
+                        }
+
+                        foreach ($includedFields as $includedField) {
+                            $filter->includeField(...$includedField);
+                        }
+
+                        foreach ($requiredUserStates as $requiredUserState) {
+                            $filter->requireUserStates(...$requiredUserState);
+                        }
+
+                        foreach ($includedUserStates as $includedUserState) {
+                            $filter->includeUserStates(...$includedUserState);
+                        }
+
+                        $results = new ContentFilterResultsEntity(
+                            [
+                                'results' => $filter->retrieveFilter(),
+                                'total_results' => $filter->countFilter(),
+                                'filter_options' => $filter->getFilterFields(),
+                            ]
+                        );
+                        $this->saveCacheResults($hash, array_keys($results['results']));
+
+                        return $results;
+                    }
                 );
-
-                foreach ($requiredFields as $requiredField) {
-                    $filter->requireField(...$requiredField);
-                }
-
-                foreach ($includedFields as $includedField) {
-                    $filter->includeField(...$includedField);
-                }
-
-                foreach ($requiredUserStates as $requiredUserState) {
-                    $filter->requireUserStates(...$requiredUserState);
-                }
-
-                foreach ($includedUserStates as $includedUserState) {
-                    $filter->includeUserStates(...$includedUserState);
-                }
-
-                $results = [
-                    'results' => $filter->retrieveFilter(),
-                    'total_results' => $filter->countFilter(),
-                    'filter_options' => $filter->getFilterFields(),
-                ];
-                $this->saveCacheResults($hash, array_keys($results['results']));
-
-                return $results;
-            }
-        );
 
         return Decorator::decorate($results, 'content');
     }

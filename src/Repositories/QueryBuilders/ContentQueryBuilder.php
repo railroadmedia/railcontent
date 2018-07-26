@@ -510,8 +510,7 @@ class ContentQueryBuilder extends QueryBuilder
     {
         $this->restrictStatuses()
             ->restrictPublishedOnDate()
-            ->restrictBrand()
-            ->restrictByPermissions();
+            ->restrictBrand();
 
         return $this;
     }
