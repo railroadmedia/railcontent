@@ -60,6 +60,8 @@ class CommentRepository extends RepositoryBase
     protected $limit;
     protected $orderBy;
     protected $orderDirection;
+    protected $orderTableName;
+    protected $orderTable;
 
     /**
      * @param integer $id
@@ -90,6 +92,8 @@ class CommentRepository extends RepositoryBase
         $this->limit = $limit;
         $this->orderBy = $orderByColumn;
         $this->orderDirection = $orderByDirection;
+        $this->orderTableName = ($orderByColumn == 'like_count' ? ConfigService::$tableCommentLikes : ConfigService::$tableComments);
+        $this->orderTable = ($orderByColumn == 'like_count' ? '' : ConfigService::$tableComments);
 
         return $this;
     }
@@ -101,6 +105,7 @@ class CommentRepository extends RepositoryBase
     {
         $query = $this->query()
             ->selectColumns()
+            ->aggregateOrderTable($this->orderTableName)
             ->restrictByBrand()
             ->restrictByType()
             ->restrictByContentId()
@@ -108,7 +113,7 @@ class CommentRepository extends RepositoryBase
             ->restrictByVisibility()
             ->restrictByAssignedUserId()
             ->onlyComments()
-            ->orderBy($this->orderBy, $this->orderDirection, ConfigService::$tableComments)
+            ->orderBy($this->orderBy, $this->orderDirection, $this->orderTable)
             ->directPaginate($this->page, $this->limit);
 
         $rows = $query->getToArray();

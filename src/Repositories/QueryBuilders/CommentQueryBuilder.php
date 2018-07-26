@@ -8,24 +8,69 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class CommentQueryBuilder extends QueryBuilder
 {
+    protected function getSelectColumns()
+    {
+        return [
+            ConfigService::$tableComments . '.id' => 'id',
+            ConfigService::$tableComments . '.content_id' => 'content_id',
+            ConfigService::$tableComments . '.comment' => 'comment',
+            ConfigService::$tableComments . '.parent_id' => 'parent_id',
+            ConfigService::$tableComments . '.user_id' => 'user_id',
+            ConfigService::$tableComments . '.temporary_display_name' => 'display_name',
+            ConfigService::$tableComments . '.created_on' => 'created_on',
+            ConfigService::$tableComments . '.deleted_at' => 'deleted_at'
+        ];
+    }
+
     /** Select the comments columns
      *
      * @return $this
      */
     public function selectColumns()
     {
+        $columns = [];
+
+        foreach ($this->getSelectColumns() as $field => $alias) {
+            $columns[] = $field . ' as ' . $alias;
+        }
+
         $this->select(
-            [
-                ConfigService::$tableComments . '.id as id',
-                ConfigService::$tableComments . '.content_id as content_id',
-                ConfigService::$tableComments . '.comment as comment',
-                ConfigService::$tableComments . '.parent_id as parent_id',
-                ConfigService::$tableComments . '.user_id as user_id',
-                ConfigService::$tableComments . '.temporary_display_name as display_name',
-                ConfigService::$tableComments . '.created_on as created_on',
-                ConfigService::$tableComments . '.deleted_at as deleted_at'
-            ]
+            $columns
         );
+
+        return $this;
+    }
+
+    public function aggregateOrderTable($table)
+    {
+        if ($table != ConfigService::$tableComments) {
+            // $config = ConfigService::$tableCommentsAggregates[$table];
+
+            // this will be refactored in package config
+            $config = [
+                'selectColumn' => 'COUNT(`' . ConfigService::$tableCommentLikes . '`.`id`) as `like_count`',
+                'foreignField' => 'comment_id',
+                'localField' => 'id',
+                'groupBy' => ConfigService::$tableComments . '.id'
+            ];
+
+            if (isset($config['selectColumn'])) {
+                $this->selectRaw($config['selectColumn']);
+            }
+
+            $this
+                ->leftJoin(
+                    $table,
+                    $table .'.'. $config['foreignField'],
+                    '=',
+                    ConfigService::$tableComments .'.'. $config['localField']
+                );
+
+            if (isset($config['groupBy'])) {
+
+                $this->groupBy($config['groupBy'], ...array_keys($this->getSelectColumns()));
+            }
+        }
 
         return $this;
     }
