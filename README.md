@@ -61,9 +61,8 @@ If that parent is itself **not yet started**, it will not have progress record w
 Validation
 ------------------------------------------------------------------------------------------------------------------------
 
-This is *"business rules"* validation. This does not validate that the content is suitable for the the database. Rather
- it is used if your application requires content to require information to be set to a state - like "public" or
- "published", for example.
+This is *"business rules"* validation. This does not validate that the content is suitable for the the database. That is handled by rules hard-coded into a "rules" method in entity-and-action-specific `Request` classes (extension of `Railroad\Railcontent\Requests\FormRequest`, all in */src/Requests*). Rather, this "business rules" validation
+ is used when content unique to your application requires specific infomation according to it's intended use within your domain. For example, for consumable consumer education and entertainment, you may have states like "public" or "published", which you want only assigned to content that has all components required to meet your requirements for quality and completeness. 
 
 In your application's config/ directory, you should have a railcontent.php file. In there under 'validation', you can
 list the brands for which you want validation. If a brand is not present, validation will not run.
@@ -77,13 +76,13 @@ type, thus the change will not be made.
 
 Also under each brand - as a sibling to the "*restrictions*" array - are the rules for each "*content-type*". The key
 for each content-type **must** be the same as the content-type used in the application. Each content-type's rules has
-five components:
+two required components, and can have an additional optional component:
 
 1. fields
 2. data
 3. number_of_children (optional)
 
-If a content-type exists in these rules, then validation will run on as described above. If the content-type is not
+If a content-type exists in these rules, then validation will run as described above. If the content-type is not
 represented in the rules, the validation rules will not protect that content type according to the rules.
 
 *(There is not currently a way to provide custom "restrictions" for a select content-type. See the "todo.md" file for
@@ -240,6 +239,8 @@ Unlike the rest of the rules, this doesn't *need* to be an item called "rules" i
 ### MultipleColumnExistsValidator
 
 ***NOTE**: This actually doesn't work properly right now, so if the above may not quuuuite be accurate.*
+
+*Is ^ this still accurate? (Jonathan, July 2018)*
 
 You may not be able to use the `Rule::Exists()` feature of the Laravel's validator where you specify your validation 
 rules. Perhaps you specify your rules in configuration files that are cache calling a method statically like that breaks
