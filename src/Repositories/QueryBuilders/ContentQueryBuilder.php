@@ -476,15 +476,11 @@ class ContentQueryBuilder extends QueryBuilder
                                     ->where('user_id', auth()->user()->id ?? null)
                                     ->where(
                                         function (Builder $builder) {
-                                            return $builder->where(
-                                                'permission_id',
-                                                '=',
-                                                'id_content_permissions.permission_id'
+                                            return $builder->whereRaw(
+                                                'permission_id = id_content_permissions.permission_id'
                                             )
-                                                ->orWhere(
-                                                    'permission_id',
-                                                    '=',
-                                                    'type_content_permissions.permission_id'
+                                                ->orWhereRaw(
+                                                    'permission_id = type_content_permissions.permission_id'
                                                 );
                                         }
                                     )
