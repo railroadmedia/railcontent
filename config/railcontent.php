@@ -35,7 +35,7 @@ return [
     ],
     'commentable_content_types' => [
         'course',
-        'course lesson'
+        'course lesson',
     ],
     'comment_assignation_owner_ids' => [
         102905,
@@ -50,13 +50,12 @@ return [
         136145,
         7776,
     ],
-    'validation' => [
-    ],
+    'validation' => [],
     'awsS3_remote_storage' => [
         'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
         'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
         'region' => env('AWS_S3_REMOTE_STORAGE_REGION'),
-        'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET')
+        'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET'),
     ],
     'awsCloudFront' => 'd1923uyy6spedc.cloudfront.net',
 
@@ -90,15 +89,15 @@ return [
             'brand' => [
                 'client_id' => env('VIMEO_CLIENT_ID'),
                 'client_secret' => env('VIMEO_CLIENT_SECRET'),
-                'access_token' => env('VIMEO_ACCESS_TOKEN')
+                'access_token' => env('VIMEO_ACCESS_TOKEN'),
             ],
         ],
         'youtube' => [
             'key' => env('YOUTUBE_API_KEY'),
             'brand' => [
-                'user' => env('YOUTUBE_USERNAME')
+                'user' => env('YOUTUBE_USERNAME'),
             ],
-        ]
+        ],
     ],
 
     'all_routes_middleware' => [],
@@ -111,6 +110,7 @@ return [
 
     'decorators' => [
         'content' => [
+            \Railroad\Railcontent\Decorators\Hierarchy\ContentSlugHierarchyDecorator::class,
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
         ],
         'comments' => [
@@ -118,7 +118,7 @@ return [
         ],
         'comment' => [
             \Railroad\Railcontent\Decorators\Entity\CommentEntityDecorator::class,
-        ]
+        ],
     ],
 
     // specific decorator configs

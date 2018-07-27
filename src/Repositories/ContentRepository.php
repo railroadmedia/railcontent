@@ -1036,8 +1036,6 @@ class ContentRepository extends RepositoryBase
         $subQuery =
             $this->query()
                 ->selectCountColumns()
-                ->restrictStatuses()
-                ->restrictPublishedOnDate()
                 ->restrictByUserAccess()
                 ->restrictByFields($this->requiredFields)
                 ->includeByFields($this->includedFields)
@@ -1069,10 +1067,8 @@ class ContentRepository extends RepositoryBase
                 ->includeByFields($this->includedFields)
                 ->restrictByUserStates($this->requiredUserStates)
                 ->includeByUserStates($this->includedUserStates)
-                ->restrictStatuses()
-                ->restrictPublishedOnDate()
+                ->restrictByPermissions()
                 ->restrictByTypes($this->typesToInclude)
-                ->restrictBrand()
                 ->restrictByParentIds($this->requiredParentIds)
                 ->leftJoin(
                     ConfigService::$tableContentFields,

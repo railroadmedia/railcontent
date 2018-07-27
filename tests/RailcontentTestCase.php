@@ -184,6 +184,8 @@ class RailcontentTestCase extends BaseTestCase
 
         $app['config']->set('railcontent.decorators', $defaultConfig['decorators']);
         $app['config']->set('railcontent.use_collections', $defaultConfig['use_collections']);
+        $app['config']->set('railcontent.content_hierarchy_max_depth', $defaultConfig['content_hierarchy_max_depth']);
+        $app['config']->set('railcontent.content_hierarchy_decorator_allowed_types', $defaultConfig['content_hierarchy_decorator_allowed_types']);
 
         // vimeo
         $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);

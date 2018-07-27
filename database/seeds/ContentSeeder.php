@@ -35,8 +35,8 @@ class ContentSeeder extends Seeder
     /**
      * ContentSeeder constructor.
      *
-     * @param \Railroad\Railcontent\Repositories\ContentRepository           $contentRepository
-     * @param \Railroad\Railcontent\Repositories\PermissionRepository        $permissionRepository
+     * @param \Railroad\Railcontent\Repositories\ContentRepository $contentRepository
+     * @param \Railroad\Railcontent\Repositories\PermissionRepository $permissionRepository
      * @param \Railroad\Railcontent\Repositories\ContentPermissionRepository $contentPermissionRepository
      */
     public function __construct(
@@ -46,51 +46,60 @@ class ContentSeeder extends Seeder
         ContentFieldRepository $contentFieldRepository,
         Generator $generator
     ) {
-        $this->contentRepository           = $contentRepository;
-        $this->permissionRepository        = $permissionRepository;
+        $this->contentRepository = $contentRepository;
+        $this->permissionRepository = $permissionRepository;
         $this->contentPermissionRepository = $contentPermissionRepository;
-        $this->contentFieldRepository      = $contentFieldRepository;
-        $this->faker                       = $generator;
+        $this->contentFieldRepository = $contentFieldRepository;
+        $this->faker = $generator;
     }
 
     public function run()
     {
-        $permissionId = $this->permissionRepository->create([
-            'name'  => $this->faker->word,
-            'brand' => 'brand'
-        ]);
+        $permissionId = $this->permissionRepository->create(
+            [
+                'name' => $this->faker->word,
+                'brand' => 'brand',
+            ]
+        );
 
         $no_of_rows = 100000;
-        $range      = range(1, $no_of_rows);
-        $chunksize  = 1000;
+        $range = range(1, $no_of_rows);
+        $chunksize = 1000;
 
-        foreach(array_chunk($range, $chunksize) as $chunk)
-        {
-            foreach($chunk as $i)
-            {
+        foreach (array_chunk($range, $chunksize) as $chunk) {
+            foreach ($chunk as $i) {
                 $user_data = [
-                    'slug'         => $this->faker->word,
-                    'type'         => $this->faker->word,
-                    'status'       => 'published',
-                    'user_id'      => null,
-                    'brand'        => 'brand',
-                    'language'     => $this->faker->languageCode,
-                    'published_on' => Carbon::now()->toDateTimeString(),
-                    'created_on'   => Carbon::now()->toDateTimeString()
+                    'slug' => $this->faker->word,
+                    'type' => $this->faker->randomElement(
+                        \Railroad\Railcontent\Services\ConfigService::$contentHierarchyDecoratorAllowedTypes
+                    ),
+                    'status' => 'published',
+                    'user_id' => null,
+                    'brand' => 'brand',
+                    'language' => $this->faker->languageCode,
+                    'published_on' => Carbon::now()
+                        ->toDateTimeString(),
+                    'created_on' => Carbon::now()
+                        ->toDateTimeString(),
                 ];
                 $contentId = $this->contentRepository->create($user_data);
 
-                $contentPermission = $this->contentPermissionRepository->create([
-                    'content_id'    => $contentId,
-                    'permission_id' => $permissionId
-                ]);
+                $contentPermission = $this->contentPermissionRepository->create(
+                    [
+                        'content_id' => $contentId,
+                        'permission_id' => $permissionId,
+                    ]
+                );
 
-                $contentField = $this->contentFieldRepository->create([
-                    'content_id' => $contentId,
-                    'key'        => $this->faker->word,
-                    'value'      => $this->faker->word,
-                    'type'       => 'string'
-                ]);
+                $contentField = $this->contentFieldRepository->create(
+                    [
+                        'content_id' => $contentId,
+                        'key' => $this->faker->word,
+                        'value' => $this->faker->word,
+                        'type' => 'string',
+                    ]
+                );
+
             }
         }
     }
