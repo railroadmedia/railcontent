@@ -193,4 +193,9 @@ class ConfigService
      * @var array
      */
     public static $controllerMiddleware;
+
+    /**
+     * @var array
+     */
+    public static $tableCommentsAggregates;
 }

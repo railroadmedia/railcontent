@@ -171,6 +171,16 @@ class RailcontentServiceProvider extends ServiceProvider
             'railcontent.content_hierarchy_decorator_allowed_types' .
             ''
         );
+
+        // aggregates
+        ConfigService::$tableCommentsAggregates = [
+            ConfigService::$tableCommentLikes => [
+                'selectColumn' => 'COUNT(`' . ConfigService::$tableCommentLikes . '`.`id`) as `like_count`',
+                'foreignField' => 'comment_id',
+                'localField' => 'id',
+                'groupBy' => ConfigService::$tableComments . '.id'
+            ]
+        ];
     }
 
     /**

@@ -182,6 +182,7 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.cache_driver', $defaultConfig['cache_driver']);
 
         $app['config']->set('railcontent.decorators', $defaultConfig['decorators']);
+        $app['config']->set('railcontent.use_collections', $defaultConfig['use_collections']);
 
         // vimeo
         $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);

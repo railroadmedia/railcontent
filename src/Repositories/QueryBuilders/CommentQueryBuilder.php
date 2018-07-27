@@ -43,16 +43,11 @@ class CommentQueryBuilder extends QueryBuilder
 
     public function aggregateOrderTable($table)
     {
-        if ($table != ConfigService::$tableComments) {
-            // $config = ConfigService::$tableCommentsAggregates[$table];
-
-            // this will be refactored in package config
-            $config = [
-                'selectColumn' => 'COUNT(`' . ConfigService::$tableCommentLikes . '`.`id`) as `like_count`',
-                'foreignField' => 'comment_id',
-                'localField' => 'id',
-                'groupBy' => ConfigService::$tableComments . '.id'
-            ];
+        if (
+            $table != ConfigService::$tableComments &&
+            isset(ConfigService::$tableCommentsAggregates[$table])
+        ) {
+            $config = ConfigService::$tableCommentsAggregates[$table];
 
             if (isset($config['selectColumn'])) {
                 $this->selectRaw($config['selectColumn']);

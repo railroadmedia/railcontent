@@ -104,11 +104,14 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'comment' => $updatedComment,
             'content_id' => $content['id'],
             'parent_id' => null,
-            'user_id' => $userId,
+            'user_id' => (string) $userId,
             'created_on' => Carbon::now()->toDateTimeString(),
             'deleted_at' => null,
             'display_name' => $comment['display_name'],
-            'replies' => []
+            'replies' => [],
+            'like_count' => 0,
+            'like_users' => [],
+            'is_liked' => false
         ]);
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson());
@@ -421,6 +424,77 @@ class CommentJsonControllerTest extends RailcontentTestCase
             null);
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson());
+    }
+
+    public function test_pull_comments_ordered_by_like_count()
+    {
+        // create content
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
+        );
+
+        // create content comments
+        $comments = [];
+
+        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+
+        // select two comment ids
+        $firstOrderedCommentId = $comments[2]['id'];
+        $secondOrderedCommentId = $comments[4]['id'];
+
+        // add a known number of likes to selected comments
+        $commentThreeLikeOne = [
+            'comment_id' => $firstOrderedCommentId,
+            'user_id' => $this->faker->randomNumber(),
+            'created_on' => Carbon::instance($this->faker->dateTime)->toDateTimeString(),
+        ];
+
+        $threadId = $this->databaseManager
+            ->table(ConfigService::$tableCommentLikes)
+            ->insertGetId($commentThreeLikeOne);
+
+        $commentThreeLikeTwo = [
+            'comment_id' => $firstOrderedCommentId,
+            'user_id' => $this->faker->randomNumber(),
+            'created_on' => Carbon::instance($this->faker->dateTime)->toDateTimeString(),
+        ];
+
+        $threadId = $this->databaseManager
+            ->table(ConfigService::$tableCommentLikes)
+            ->insertGetId($commentThreeLikeTwo);
+
+        $commentFourLike = [
+            'comment_id' => $secondOrderedCommentId,
+            'user_id' => $this->faker->randomNumber(),
+            'created_on' => Carbon::instance($this->faker->dateTime)->toDateTimeString(),
+        ];
+
+        $threadId = $this->databaseManager
+            ->table(ConfigService::$tableCommentLikes)
+            ->insertGetId($commentFourLike);
+
+        $response = $this->call(
+            'GET',
+            'railcontent/comment',
+            [
+                'page' => 1,
+                'limit' => 25,
+                'content_id' => $content['id'],
+                'sort' => '-like_count'
+            ]
+        );
+
+        $decodedResponse = $response->decodeResponseJson();
+
+        // assert the order of results
+        $this->assertEquals($decodedResponse['results'][0]['id'], $firstOrderedCommentId);
+        $this->assertEquals($decodedResponse['results'][1]['id'], $secondOrderedCommentId);
     }
 
     public function test_pull_comments_filtered_by_content_type()

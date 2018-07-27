@@ -92,8 +92,13 @@ class CommentRepository extends RepositoryBase
         $this->limit = $limit;
         $this->orderBy = $orderByColumn;
         $this->orderDirection = $orderByDirection;
-        $this->orderTableName = ($orderByColumn == 'like_count' ? ConfigService::$tableCommentLikes : ConfigService::$tableComments);
-        $this->orderTable = ($orderByColumn == 'like_count' ? '' : ConfigService::$tableComments);
+
+        $this->orderTableName = ($orderByColumn == 'like_count' ?
+            ConfigService::$tableCommentLikes:
+            ConfigService::$tableComments);
+
+        $this->orderTable = ($orderByColumn == 'like_count' ? '':
+            ConfigService::$tableComments);
 
         return $this;
     }
