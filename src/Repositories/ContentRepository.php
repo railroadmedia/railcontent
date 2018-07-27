@@ -1080,11 +1080,6 @@ class ContentRepository extends RepositoryBase
                     ConfigService::$tableContentFields . '.key',
                     ConfigService::$fieldOptionList
                 )
-                ->groupBy(
-                    ConfigService::$tableContentFields . '.key',
-                    ConfigService::$tableContentFields . '.value',
-                    ConfigService::$tableContentFields . '.type'
-                )
                 ->get()
                 ->toArray();
 
@@ -1228,6 +1223,8 @@ class ContentRepository extends RepositoryBase
 
     private function parseAvailableFields($rows)
     {
+        $rows = array_map("unserialize", array_unique(array_map("serialize", $rows)));
+
         $availableFields = [];
         $subContentIds = [];
 
