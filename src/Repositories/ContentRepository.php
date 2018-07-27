@@ -122,7 +122,7 @@ class ContentRepository extends RepositoryBase
                 $contentFieldRows,
                 $contentDatumRows,
                 $contentPermissionRows
-            )[$id] ?? null;
+            )[0] ?? null;
     }
 
     /**
