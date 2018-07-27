@@ -729,7 +729,8 @@ class ContentService
                         $requiredFields,
                         $includedFields,
                         $requiredUserStates,
-                        $includedUserStates
+                        $includedUserStates,
+                        $pullFilterFields
                     ) {
                         $filter = $this->contentRepository->startFilter(
                             $page,
@@ -764,6 +765,7 @@ class ContentService
                                 'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
                             ]
                         );
+
                         $this->saveCacheResults($hash, array_keys($results['results']));
 
                         return $results;
