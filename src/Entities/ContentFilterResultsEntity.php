@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Entities;
 
 use Illuminate\Http\JsonResponse;
+use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentFilterResultsEntity extends Entity
@@ -40,7 +41,7 @@ class ContentFilterResultsEntity extends Entity
     }
 
     /**
-     * @return array
+     * @return array|Collection
      */
     public function results()
     {
