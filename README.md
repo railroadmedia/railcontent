@@ -61,22 +61,42 @@ If that parent is itself **not yet started**, it will not have progress record w
 Validation
 ------------------------------------------------------------------------------------------------------------------------
 
+### Non-technical Introduction
+
+This is business rules validation that helps ensure content requiring specific information|components is protected from *not* meeting said requirements. For example, you may have a state like "published", which you want only assigned to content this is ready for viewing by your customers. You don't want to accidentally launch content that is missing significant components and would reflect poorly on the brand. Thus, rules can be set within the Content Management System (CMS) to help ensure content meets set criteria. 
+
+Without validation, all edits are persisted "unchecked" - even if nonsensical\*. This can produce a site with incomplete content, and thus a poor user experience. To prevent this, rules can be configured by technical administrators. Edits to content will - as they're submitted - be "checked" against these set rules. That is, they will be "validated". 
+
+When initially creating a piece of content, we need to assume a period where it will fail all validation - as all the fields will empty! Thus, "states" such as "draft", "scheduled", and "published" can be set on content. The Validation rules are then set to only apply to certain "protected" states - typically "scheduled", and "published".
+
+Knowing this, we can now look at the two situations which trigger validation: 
+1. Request to change a content's state to a "protected" state. 
+2. A content has a "protected" state, any details changes will trigger validation.
+   
+In each of the above cases, a validation *failure* will result (respectively) in: 
+1. the requested change to a protected state will not be executed - the state will remain unchanged. Note that if the current|previous state was a protected or unprotected state is irrelevant. All that happens is the requested state change is not persisted.
+2. the requested change will not be made. To do so would result in having content that breaks the business rules for its type.
+
+\* except for Musora CMS, for Musora Media, 2018, where currently video IDs, and exercise IDs are first validated by another system that will not enable setting a nonsensical value, regardless of content state.
+
+### Technical Introduction
+
 This is *"business rules"* validation. This does not validate that the content is suitable for the the database. That is handled by rules hard-coded into a "rules" method in entity-and-action-specific `Request` classes (extension of `Railroad\Railcontent\Requests\FormRequest`, all in */src/Requests*). Rather, this "business rules" validation
  is used when content unique to your application requires specific infomation according to it's intended use within your domain. For example, for consumable consumer education and entertainment, you may have states like "public" or "published", which you want only assigned to content that has all components required to meet your requirements for quality and completeness. 
 
 In your application's config/ directory, you should have a railcontent.php file. In there under 'validation', you can
 list the brands for which you want validation. If a brand is not present, validation will not run.
 
-Under each brand is an array called "*restrictions*" which defines which content *states* the validation is to
-protect. If a request to change a content's state requests to set the state to one of these protected states, then
-the validation will run. If the content is invalid, the protected state will not be set. Similarly, if a content has a
-state that is in this list of protected states, any change to the content (including fields or data) will trigger
-validation. If the validation fails, it is because the requested change would break the business rules for that content
-type, thus the change will not be made.
+The rules are organized thusly:
 
-Also under each brand - as a sibling to the "*restrictions*" array - are the rules for each "*content-type*". The key
-for each content-type **must** be the same as the content-type used in the application. Each content-type's rules has
-two required components, and can have an additional optional component:
+brand -> content type -> protected states -> rules\*
+
+\* see "About Defining Rules" section below
+
+
+### About Defining Rules
+
+The key for each content-type **must** be the same as the string representing content-type used in the application. Each content-type's rules has two required components, and can have an additional optional component:
 
 1. fields
 2. data
