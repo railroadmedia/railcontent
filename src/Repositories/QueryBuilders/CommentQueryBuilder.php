@@ -70,6 +70,19 @@ class CommentQueryBuilder extends QueryBuilder
         return $this;
     }
 
+    /** Exclude the comments by user id
+     *
+     * @return $this
+     */
+    public function excludeByUser()
+    {
+        if (CommentRepository::$availableUserId) {
+            $this->where(ConfigService::$tableComments . '.user_id', '<>', CommentRepository::$availableUserId);
+        }
+
+        return $this;
+    }
+
     /** Restrict the comments by content type
      *
      * @return $this

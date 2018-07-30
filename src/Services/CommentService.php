@@ -210,7 +210,7 @@ class CommentService
      * @param string $orderByAndDirection
      * @return array
      */
-    public function getComments($page = 1, $limit = 25, $orderByAndDirection = '-created_on')
+    public function getComments($page = 1, $limit = 25, $orderByAndDirection = '-created_on', $currentUserId = null)
     {
         if ($limit == 'null') {
             $limit = -1;
@@ -230,15 +230,39 @@ class CommentService
         $results = Cache::store(ConfigService::$cacheDriver)->remember(
             $hash,
             ConfigService::$cacheTime,
-            function () use ($hash, $page, $limit, $orderByDirection, $orderByColumn) {
-            $this->commentRepository->setData($page, $limit, $orderByDirection, $orderByColumn);
-            $results = [
-                'results' => $this->commentRepository->getComments(),
-                'total_results' => $this->commentRepository->countComments()
-            ];
-            CacheHelper::addLists($hash, array_pluck(array_values($results['results']), 'content_id'));
-            return $results;
-        });
+            function () use ($hash, $page, $limit, $orderByDirection, $orderByColumn, $currentUserId) {
+                if ($orderByColumn == 'mine') {
+                    $this->commentRepository->setData(
+                        $page,
+                        $limit,
+                        $orderByDirection,
+                        'created_on'
+                    );
+                    CommentRepository::$availableUserId = $currentUserId;
+                    $orderByColumn = 'created_on';
+                    $results = [
+                        'results' => $this->commentRepository
+                            ->getCurrentUserComments(),
+                        'total_results' => $this->commentRepository
+                            ->countCurrentUserComments()
+                    ];
+                } else {
+                    $this->commentRepository->setData(
+                        $page,
+                        $limit,
+                        $orderByDirection,
+                        $orderByColumn
+                    );
+                    $results = [
+                        'results' => $this->commentRepository->getComments(),
+                        'total_results' => $this->commentRepository->countComments()
+                    ];
+                }
+
+                CacheHelper::addLists($hash, array_pluck(array_values($results['results']), 'content_id'));
+                return $results;
+            }
+        );
 
         return Decorator::decorate($results, 'comment');
 
