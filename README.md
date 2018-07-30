@@ -8,6 +8,9 @@ Data first simple CMS.
   * [Progress-Bubbling](#progress-bubbling)
     + [Example](#example)
   * [Validation](#validation)
+    + [Non-technical Introduction](#non-technical-introduction)
+    + [Technical Introduction](#technical-introduction)
+    + [About Defining Rules](#about-defining-rules)
     + [Note about field or datum that reference another piece of content](#note-about-field-or-datum-that-reference-another-piece-of-content)
     + [Important Note about the "numeric" rule](#important-note-about-the--numeric--rule)
     + [Specifying rules](#specifying-rules)
@@ -20,8 +23,7 @@ Data first simple CMS.
       - [WHERE *AND*](#where--and-)
       - [WHERE *OR*](#where--or-)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
+<!-- http://ecotrust-canada.github.io/markdown-toc/ -->
 
 
 
