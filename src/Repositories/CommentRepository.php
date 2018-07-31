@@ -152,17 +152,20 @@ class CommentRepository extends RepositoryBase
 
         $rows = $query->getToArray();
 
-        $rowsCollction = collect($rows);
+        $commentsIds = [];
+        $threadsIds = [];
 
-        $repliesRows = $this->getRepliesByCommentIds($rowsCollction->filter(
-            function ($value, $key) {
-                return $value['parent_id'] === null;
+        foreach ($rows as $item) {
+            if ($item['parent_id']) {
+                $threadsIds[] = $item['parent_id'];
+            } else {
+                $commentsIds[] = $item['id'];
             }
-        )->all());
+        }
 
-        $threadRows = $this->getThreadByCommentIds(
-            $rowsCollction->pluck('parent_id')->filter()->all()
-        );
+        $repliesRows = $this->getRepliesByCommentIds($commentsIds);
+
+        $threadRows = $this->getThreadByCommentIds($threadsIds);
 
         return $this->parseCurrentUserRows($rows, $repliesRows, $threadRows);
     }
