@@ -58,11 +58,14 @@ class ContentUserProgressDecorator implements DecoratorInterface
                     $contents[$index][UserContentProgressService::STATE_STARTED] =
                         $contentProgressionsByContentId[$content['id']]['state'] ==
                         UserContentProgressService::STATE_STARTED;
+
+                    $contents[$index]['progress_percent'] = $contentProgressionsByContentId[$content['id']]['progress_percent'];
                 } else {
                     $contents[$index]['user_progress'][$userId] = [];
 
                     $contents[$index][UserContentProgressService::STATE_COMPLETED] = false;
                     $contents[$index][UserContentProgressService::STATE_STARTED] = false;
+                    $contents[$index]['progress_percent'] = 0;
                 }
             }
         }
