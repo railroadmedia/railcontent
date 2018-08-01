@@ -136,7 +136,7 @@ class ContentService
                     }
                 );
 
-        return Decorator::decorate($results, 'content')->first();
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -743,19 +743,31 @@ class ContentService
                         );
 
                         foreach ($requiredFields as $requiredField) {
-                            $filter->requireField(...$requiredField);
+                            $filter->requireField(
+                                ...
+                                (is_array($requiredField) ? $requiredField : explode(',', $requiredField))
+                            );
                         }
 
                         foreach ($includedFields as $includedField) {
-                            $filter->includeField(...$includedField);
+                            $filter->includeField(
+                                ...
+                                (is_array($includedField) ? $includedField : explode(',', $includedField))
+                            );
                         }
 
                         foreach ($requiredUserStates as $requiredUserState) {
-                            $filter->requireUserStates(...$requiredUserState);
+                            $filter->requireUserStates(
+                                ...
+                                is_array($requiredUserState) ? $requiredUserState : explode(',', $requiredUserState)
+                            );
                         }
 
                         foreach ($includedUserStates as $includedUserState) {
-                            $filter->includeUserStates(...$includedUserState);
+                            $filter->includeUserStates(
+                                ...
+                                is_array($includedUserState) ? $includedUserState : explode(',', $includedUserState)
+                            );
                         }
 
                         $results = new ContentFilterResultsEntity(

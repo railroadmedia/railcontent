@@ -48,13 +48,6 @@ class ContentJsonController extends Controller
     public function index(Request $request)
     {
         $filters = $request->get('filter', []);
-        $parsedFilters = [];
-
-        foreach ($filters as $filterName => $filterValues) {
-            foreach ($filterValues as $filterString) {
-                $parsedFilters[$filterName][] = explode(',', $filterString);
-            }
-        }
 
         if ($request->has('statuses') && $request->get('auth_level') == 'administrator') {
             ContentRepository::$availableContentStatues = $request->get('statuses');
@@ -67,10 +60,10 @@ class ContentJsonController extends Controller
             $request->get('included_types', []),
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            $parsedFilters['required_fields'] ?? [],
-            $parsedFilters['included_fields'] ?? [],
-            $parsedFilters['required_user_states'] ?? [],
-            $parsedFilters['included_user_states'] ?? []
+            $request->get('required_fields', []),
+            $request->get('included_fields', []),
+            $request->get('required_user_states', []),
+            $request->get('included_user_states', [])
         );
 
         return reply()->json(
