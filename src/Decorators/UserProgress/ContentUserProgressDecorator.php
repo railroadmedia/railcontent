@@ -38,6 +38,8 @@ class ContentUserProgressDecorator implements DecoratorInterface
             $contentIds[] = $content['id'];
         }
 
+        $contents = $contents->toArray();
+
         if (!empty($contentIds)) {
             $contentProgressions =
                 $this->userContentProgressRepository->getByUserIdAndWhereContentIdIn($userId, $contentIds);
@@ -65,6 +67,6 @@ class ContentUserProgressDecorator implements DecoratorInterface
             }
         }
 
-        return $contents;
+        return new Collection($contents);
     }
 }

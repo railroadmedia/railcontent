@@ -136,7 +136,7 @@ class ContentService
                     }
                 );
 
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate($results, 'content')->first();
     }
 
     /**

@@ -1116,13 +1116,13 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
-     * @param $userId
      * @param $state
+     * @param $userId null
      * @return $this
      */
-    public function requireUserStates($userId, $state)
+    public function requireUserStates($state, $userId = null)
     {
-        $this->requiredUserStates[] = ['user_id' => $userId, 'state' => $state];
+        $this->requiredUserStates[] = ['state' => $state, 'user_id' => $userId ?? auth()->id()];
 
         return $this;
     }
@@ -1132,9 +1132,9 @@ class ContentRepository extends RepositoryBase
      * @param $state
      * @return $this
      */
-    public function includeUserStates($userId, $state)
+    public function includeUserStates($state, $userId = null)
     {
-        $this->includedUserStates[] = ['user_id' => $userId, 'state' => $state];
+        $this->includedUserStates[] = ['state' => $state, 'user_id' => $userId ?? auth()->id()];
 
         return $this;
     }
