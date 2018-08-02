@@ -577,6 +577,51 @@ class ContentService
     }
 
     /**
+     * @param array $types
+     * @param $userId
+     * @param $state
+     * @param int $limit
+     * @param int $skip
+     * @return array|Collection|ContentEntity[]
+     */
+    public function getPaginatedByTypesRecentUserProgressState(
+        array $types,
+        $userId,
+        $state,
+        $limit = 25,
+        $skip = 0
+    ) {
+        $hash = 'contents_paginated_by_types_and_user_progress_' . $userId . '_' . CacheHelper::getKey(
+                $types,
+                $userId,
+                $state,
+                $limit,
+                $skip
+            );
+
+        $results =
+            Cache::store(ConfigService::$cacheDriver)
+                ->remember(
+                    $hash,
+                    ConfigService::$cacheTime,
+                    function () use ($hash, $types, $userId, $state, $limit, $skip) {
+                        $results = $this->contentRepository->getPaginatedByTypesUserProgressState(
+                            $types,
+                            $userId,
+                            $state,
+                            $limit,
+                            $skip
+                        );
+                        $this->saveCacheResults($hash, array_keys($results));
+
+                        return $results;
+                    }
+                );
+
+        return Decorator::decorate($results, 'content');
+    }
+
+    /**
      * @param string $type
      * @param string $columnName
      * @param string $columnValue
