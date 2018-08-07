@@ -120,6 +120,11 @@ class ConfigService
     public static $validationRules;
 
     /**
+     * @var string
+     */
+    public static $validationExemptionDate;
+
+    /**
      * @var @array
      */
     public static $fieldOptionList;

@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Requests;
 
 use App\Http\Requests\Scalecenter\ContentCreate;
+use Carbon\Carbon;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -410,13 +411,72 @@ class CustomFormRequest extends FormRequest
             );
         }
 
-        if (!empty($messages)) {
-            throw new HttpResponseException(
-                new JsonResponse(['messages' => $messages], 422)
-            );
+        // -------------------------------------------------------------------------------------------------------------
+
+        /*
+         * Make a request exempt from validation if the content was created before the validation was implemented
+         * (defined by the "validation_exemption_date" in config"), AND the content property edited (when applicable)
+         * does not fail validation.
+         *
+         * Otherwise users can't edit old content that was created before the validation was implemented and may not pass
+         * validation. This means that while it's state is a protected one, nothing could be edited because the content
+         * would always fail validation.
+         */
+
+        if ($request instanceof ContentDatumDeleteRequest || $request instanceof ContentFieldDeleteRequest) {
+            $idInParam = array_values($request->route()->parameters())[0];
+            if($request instanceof ContentFieldDeleteRequest){
+                $keyToCheckForExemption = $this->contentFieldService->get($idInParam)['key'];
+            }else{
+                $keyToCheckForExemption = $this->contentDatumService->get($idInParam)['key'];
+            }
         }
 
-        return true;
+        if ($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest) {
+            $idInParam = array_values($request->route()->parameters())[0];
+            if($request instanceof ContentFieldUpdateRequest){
+                $keyToCheckForExemption = $this->contentFieldService->get($idInParam)['key'];
+            }else{
+                $keyToCheckForExemption = $this->contentDatumService->get($idInParam)['key'];
+            }
+        }
+
+        $contentCreatedOn = new Carbon($content['created_on']);
+        $exemptionDate = new Carbon('1970-01-01 00:00');
+        if(!empty(ConfigService::$validationExemptionDate)){
+            $exemptionDate = new Carbon(ConfigService::$validationExemptionDate);
+        }
+        $exempt = $exemptionDate->gt($contentCreatedOn);
+
+        foreach($messages as $message){
+            if(empty($keyToCheckForExemption)){
+                $keyToCheckForExemption = $request->request->all()['key'];
+            }
+            if($keyToCheckForExemption === $message['key']){
+                $exempt = false;
+                $alternativeMessages = [$message];
+            }
+        }
+
+        if(isset($alternativeMessages)){
+            $messages = $alternativeMessages;
+        }
+
+        // -------------------------------------------------------------------------------------------------------------
+
+        /*
+         * Passes Validation
+         */
+        if(empty($messages) || $exempt){
+            return true;
+        }
+
+        /*
+         * Fails Validation
+         */
+        throw new HttpResponseException(
+            new JsonResponse(['messages' => $messages], 422)
+        );
     }
 
     /**
