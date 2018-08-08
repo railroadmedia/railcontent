@@ -450,7 +450,10 @@ class CustomFormRequest extends FormRequest
 
         foreach($messages as $message){
             if(empty($keyToCheckForExemption)){
-                $keyToCheckForExemption = $request->request->all()['key'];
+                $keyToCheckForExemption = null;
+                if(!empty($request->request->all()['key'])){
+                    $keyToCheckForExemption = $request->request->all()['key'];
+                }
             }
             if($keyToCheckForExemption === $message['key']){
                 $exempt = false;
@@ -535,7 +538,7 @@ class CustomFormRequest extends FormRequest
 
         /*
          * For each of the following "if request is instance of x" sections:
-         * 
+         *
          * part 1 - Validation required?
          *
          * part 2 - If request to create, update, or delete **A FIELD OR DATUM**, need content prepared for validation
