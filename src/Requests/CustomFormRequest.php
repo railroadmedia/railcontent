@@ -642,6 +642,15 @@ class CustomFormRequest extends FormRequest
             return $this->contentService->getById($contentId);
         }
 
+        if ($request instanceof ContentFieldUpdateRequest || $request instanceof ContentDatumUpdateRequest) {
+            $idInParam = array_values($request->route()->parameters())[0];
+            if($request instanceof ContentFieldUpdateRequest){
+                $contentDatumOrField = $this->contentFieldService->get($idInParam);
+            }else{
+                $contentDatumOrField = $this->contentDatumService->get($idInParam);
+            }
+        }
+
         if ($request instanceof ContentFieldDeleteRequest || $request instanceof ContentDatumDeleteRequest) {
             $idInParam = array_values($request->route()->parameters())[0];
             if($request instanceof ContentFieldDeleteRequest){
