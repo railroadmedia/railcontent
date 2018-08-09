@@ -605,7 +605,7 @@ class ContentService
                     $hash,
                     ConfigService::$cacheTime,
                     function () use ($hash, $types, $userId, $state, $limit, $skip) {
-                        $results = $this->contentRepository->getPaginatedByTypesUserProgressState(
+                        $results = $this->contentRepository->getPaginatedByTypesRecentUserProgressState(
                             $types,
                             $userId,
                             $state,
