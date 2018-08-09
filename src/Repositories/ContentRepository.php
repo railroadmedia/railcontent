@@ -206,6 +206,50 @@ class ContentRepository extends RepositoryBase
      * @param $parentId
      * @return array
      */
+    public function getByParentIdPaginated(
+        $parentId,
+        $limit = 10,
+        $skip = 0,
+        $orderBy = 'child_position',
+        $orderByDirection = 'asc'
+    ) {
+        $contentRows =
+            $this->query()
+                ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->leftJoin(
+                    ConfigService::$tableContentHierarchy,
+                    ConfigService::$tableContentHierarchy . '.child_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
+                ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
+                ->selectInheritenceColumns()
+                ->limit($limit)
+                ->skip($skip)
+                ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
+            array_column($contentRows, 'id'),
+            array_column($contentRows, 'type')
+        );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
+    /**
+     * @param $parentId
+     * @return array
+     */
     public function getByParentIdWhereTypeIn(
         $parentId,
         array $types,
@@ -225,6 +269,52 @@ class ContentRepository extends RepositoryBase
                 ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
                 ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
                 ->whereIn(ConfigService::$tableContent . '.type', $types)
+                ->selectInheritenceColumns()
+                ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
+            array_column($contentRows, 'id'),
+            array_column($contentRows, 'type')
+        );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
+    }
+
+    /**
+     * @param $parentId
+     * @return array
+     */
+    public function getByParentIdWhereTypeInPaginated(
+        $parentId,
+        array $types,
+        $limit = 10,
+        $skip = 0,
+        $orderBy = 'child_position',
+        $orderByDirection = 'asc'
+    ) {
+        $contentRows =
+            $this->query()
+                ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->leftJoin(
+                    ConfigService::$tableContentHierarchy,
+                    ConfigService::$tableContentHierarchy . '.child_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
+                ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
+                ->whereIn(ConfigService::$tableContent . '.type', $types)
+                ->limit($limit)
+                ->skip($skip)
                 ->selectInheritenceColumns()
                 ->getToArray();
 
@@ -501,7 +591,7 @@ class ContentRepository extends RepositoryBase
                 ->whereIn(ConfigService::$tableContent . '.type', $types)
                 ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
                 ->where(ConfigService::$tableUserContentProgress . '.state', $state)
-                ->orderBy('updated_on', 'desc')
+                ->orderBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
                 ->limit($limit)
                 ->skip($skip)
                 ->getToArray();

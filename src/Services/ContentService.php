@@ -355,6 +355,47 @@ class ContentService
 
     /**
      * @param integer $parentId
+     * @param string $orderBy
+     * @param string $orderByDirection
+     * @return array|Collection|ContentEntity[]
+     */
+    public function getByParentIdPaginated(
+        $parentId,
+        $limit = 10,
+        $skip = 0,
+        $orderBy = 'child_position',
+        $orderByDirection = 'asc'
+    ) {
+        $hash =
+            'contents_by_parent_id_paginated_' .
+            CacheHelper::getKey($parentId, $limit, $skip, $orderBy, $orderByDirection);
+
+        $results =
+            Cache::store(ConfigService::$cacheDriver)
+                ->remember(
+                    $hash,
+                    ConfigService::$cacheTime,
+                    function () use ($hash, $parentId, $limit, $skip, $orderBy, $orderByDirection) {
+                        $results = $this->contentRepository->getByParentIdPaginated(
+                            $parentId,
+                            $limit,
+                            $skip,
+                            $orderBy,
+                            $orderByDirection
+                        );
+
+                        $this->saveCacheResults($hash, array_merge(array_keys($results), [$parentId]));
+
+                        return $results;
+                    }
+                );
+
+        return Decorator::decorate($results, 'content');
+
+    }
+
+    /**
+     * @param integer $parentId
      * @param $types
      * @param string $orderBy
      * @param string $orderByDirection
@@ -380,6 +421,7 @@ class ContentService
                             $orderBy,
                             $orderByDirection
                         );
+
                         $this->saveCacheResults($hash, array_merge(array_keys($results), [$parentId]));
 
                         return $results;
@@ -387,7 +429,62 @@ class ContentService
                 );
 
         return Decorator::decorate($results, 'content');
+    }
 
+    /**
+     * @param integer $parentId
+     * @param $types
+     * @param string $orderBy
+     * @param string $orderByDirection
+     * @return array|Collection|ContentEntity[]
+     */
+    public function getByParentIdWhereTypeInPaginated(
+        $parentId,
+        $types,
+        $limit = 10,
+        $skip = 0,
+        $orderBy = 'child_position',
+        $orderByDirection = 'asc'
+    ) {
+        $hash = 'contents_by_parent_id_type_' . CacheHelper::getKey(
+                $parentId,
+                $types,
+                $limit,
+                $skip,
+                $orderBy,
+                $orderByDirection
+            );
+
+        $results =
+            Cache::store(ConfigService::$cacheDriver)
+                ->remember(
+                    $hash,
+                    ConfigService::$cacheTime,
+                    function () use (
+                        $hash,
+                        $parentId,
+                        $types,
+                        $limit,
+                        $skip,
+                        $orderBy,
+                        $orderByDirection
+                    ) {
+                        $results = $this->contentRepository->getByParentIdWhereTypeInPaginated(
+                            $parentId,
+                            $types,
+                            $limit,
+                            $skip,
+                            $orderBy,
+                            $orderByDirection
+                        );
+
+                        $this->saveCacheResults($hash, array_merge(array_keys($results), [$parentId]));
+
+                        return $results;
+                    }
+                );
+
+        return Decorator::decorate($results, 'content');
     }
 
     /**
