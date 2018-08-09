@@ -338,6 +338,28 @@ class ContentRepository extends RepositoryBase
      * @param $parentId
      * @return array
      */
+    public function countByParentIdWhereTypeIn($parentId, array $types)
+    {
+        return $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->leftJoin(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.child_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
+            ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->selectInheritenceColumns()
+            ->count();
+    }
+
+    /**
+     * @param $parentId
+     * @return array
+     */
     public function getByParentIds(array $parentIds, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
         $contentRows =
@@ -610,6 +632,30 @@ class ContentRepository extends RepositoryBase
             $contentDatumRows,
             $contentPermissionRows
         );
+    }
+
+    /**
+     * @param array $types
+     * @param $userId
+     * @param $state
+     * @return integer
+     */
+    public function countByTypesRecentUserProgressState(array $types, $userId, $state)
+    {
+        return $this->query()
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->leftJoin(
+                ConfigService::$tableUserContentProgress,
+                ConfigService::$tableUserContentProgress . '.content_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
+            ->where(ConfigService::$tableUserContentProgress . '.state', $state)
+            ->orderBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
+            ->count();
     }
 
     /**

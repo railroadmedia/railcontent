@@ -446,7 +446,7 @@ class ContentService
         $orderBy = 'child_position',
         $orderByDirection = 'asc'
     ) {
-        $hash = 'contents_by_parent_id_type_' . CacheHelper::getKey(
+        $hash = 'contents_by_parent_id_type_in_' . CacheHelper::getKey(
                 $parentId,
                 $types,
                 $limit,
@@ -485,6 +485,21 @@ class ContentService
                 );
 
         return Decorator::decorate($results, 'content');
+    }
+
+    /**
+     * @param integer $parentId
+     * @param $types
+     * @return integer
+     */
+    public function countByParentIdWhereTypeIn(
+        $parentId,
+        $types
+    ) {
+        return $this->contentRepository->countByParentIdWhereTypeIn(
+            $parentId,
+            $types
+        );
     }
 
     /**
@@ -716,6 +731,26 @@ class ContentService
                 );
 
         return Decorator::decorate($results, 'content');
+    }
+
+    /**
+     * @param array $types
+     * @param $userId
+     * @param $state
+     * @param int $limit
+     * @param int $skip
+     * @return array|Collection|ContentEntity[]
+     */
+    public function countByTypesRecentUserProgressState(
+        array $types,
+        $userId,
+        $state
+    ) {
+        return $this->contentRepository->countByTypesUserProgressState(
+            $types,
+            $userId,
+            $state
+        );
     }
 
     /**
