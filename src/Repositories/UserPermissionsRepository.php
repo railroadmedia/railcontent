@@ -29,7 +29,7 @@ class UserPermissionsRepository extends RepositoryBase
                         ->on(
                             ConfigService::$tablePermissions . '.id',
                             '=',
-                            ConfigService::$tableUserPermissions . '.permissions_id'
+                            ConfigService::$tableUserPermissions . '.permission_id'
                         );
                 });
         if($onlyActive)
@@ -54,6 +54,6 @@ class UserPermissionsRepository extends RepositoryBase
      */
     public function getIdByPermissionAndUser($userId, $permissionId)
     {
-        return $this->query()->where('user_id', $userId)->where('permissions_id', $permissionId)->get()->toArray();
+        return $this->query()->where('user_id', $userId)->where('permission_id', $permissionId)->get()->toArray();
     }
 }

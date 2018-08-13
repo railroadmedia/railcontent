@@ -43,6 +43,21 @@ class UserPermissionsService
         return $this->userPermissionsRepository->getById($userPermission);
     }
 
+    /** Save user permission record in database
+     *
+     * @param integer   $userId
+     * @param integer   $permissionId
+     * @param date      $startDate
+     * @param date|null $expirationDate
+     * @return array
+     */
+    public function updateOrCeate($attributes, $values)
+    {
+        $userPermission = $this->userPermissionsRepository->updateOrCreate($attributes, $values);
+
+        return $this->userPermissionsRepository->getById($userPermission);
+    }
+
     /** Call the method that update the user permissions and return an array with the updated data
      *
      * @param  int  $id

@@ -73,6 +73,22 @@ class PermissionService
     }
 
     /**
+     * @param string $name
+     * @return array
+     */
+    public function getByName($name)
+    {
+        $hash = 'permissions_name' . CacheHelper::getKey($name);
+
+        $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash, $name) {
+            $results = $this->permissionRepository->query()->where('name', $name)->get()->toArray();
+            return $results;
+        });
+
+        return $results;
+    }
+
+    /**
      * Call the create method from PermissionRepository and return the new permission
      *
      * @param string $name
