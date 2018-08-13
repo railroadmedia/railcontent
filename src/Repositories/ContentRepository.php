@@ -35,6 +35,13 @@ class ContentRepository extends RepositoryBase
      */
     public static $pullFutureContent = true;
 
+    /**
+     * If true all content will be returned regarless of user permissions.
+     *
+     * @var array|bool
+     */
+    public static $bypassPermissions = false;
+
     private $requiredFields = [];
     private $includedFields = [];
 

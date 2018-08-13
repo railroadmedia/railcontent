@@ -439,6 +439,10 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictByPermissions()
     {
+        if (ContentRepository::$bypassPermissions === true) {
+            return $this;
+        }
+
         $this->leftJoin(
             ConfigService::$tableContentPermissions . ' as id_content_permissions',
             function (JoinClause $join) {
