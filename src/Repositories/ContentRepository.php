@@ -1247,7 +1247,6 @@ class ContentRepository extends RepositoryBase
                 ->includeByFields($this->includedFields)
                 ->restrictByUserStates($this->requiredUserStates)
                 ->includeByUserStates($this->includedUserStates)
-                ->restrictByPermissions()
                 ->restrictByTypes($this->typesToInclude)
                 ->restrictByParentIds($this->requiredParentIds)
                 ->leftJoin(
