@@ -49,10 +49,7 @@ class CreateSearchIndexes extends Command
      */
     public function handle()
     {
-        ContentRepository::$availableContentStatues = [
-            ContentService::STATUS_PUBLISHED,
-            ContentService::STATUS_SCHEDULED,
-        ];
+        ContentRepository::$availableContentStatues = ConfigService::$indexableContentStatuses;
         ContentRepository::$pullFutureContent = false;
 
         $this->searchRepository->createSearchIndexes();

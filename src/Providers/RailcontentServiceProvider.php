@@ -155,6 +155,7 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$searchableContentTypes = config('railcontent.searchable_content_types');
 
         ConfigService::$searchIndexValues = config('railcontent.search_index_values');
+        ConfigService::$indexableContentStatuses = config('railcontent.indexable_content_statuses');
 
         ConfigService::$videoSync = config('railcontent.video_sync');
 

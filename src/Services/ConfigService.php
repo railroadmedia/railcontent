@@ -147,6 +147,11 @@ class ConfigService
     /**
      * @var array
      */
+    public static $indexableContentStatuses;
+
+    /**
+     * @var array
+     */
     public static $searchIndexValues;
 
     /**
