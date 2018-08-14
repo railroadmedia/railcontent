@@ -158,7 +158,7 @@ class CommentService
             return $comment;
         }
 
-        request()->attributes->set('user_id', request()->get('user_id') ?? null);
+        request()->attributes->set('user_id', request()->get('user_id') ?? (request()->user()->id ?? null));
 
         //check if user can delete the comment
         if (!$this->userCanManageComment($comment)) {
