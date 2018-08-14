@@ -54,6 +54,15 @@ class FullTextSearchService
         $brands = null
     )
     {
+        $term = $output = preg_replace(
+            '!\s+!',
+            ' ',
+            trim(
+                preg_replace("/[^a-zA-Z0-9\\s\/]+/", "", $term)
+            )
+        );
+        $term = str_replace('/', '_', $term);
+
         $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($sort, '-');
 
