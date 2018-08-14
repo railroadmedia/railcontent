@@ -37,7 +37,7 @@ class FullTextSearchQueryBuilder extends QueryBuilder
      */
     public function restrictByTerm($term)
     {
-        if ($term) {
+        if (!empty($term)) {
             $this->whereRaw(" (MATCH (high_value) AGAINST ('+\"" . implode(' +', explode(' ', $term)) . "\"' IN BOOLEAN
             MODE) OR
             MATCH (medium_value) AGAINST (\"'$term'\") OR

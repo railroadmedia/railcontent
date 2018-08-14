@@ -80,7 +80,6 @@ class FullTextSearchRepository extends RepositoryBase
 
         $query = $this->contentQuery()
             ->selectPrimaryColumns()
-            ->restrictByUserAccess()
             ->restrictByTypes(ConfigService::$searchableContentTypes)
             ->orderBy('id');
 
@@ -93,7 +92,7 @@ class FullTextSearchRepository extends RepositoryBase
                 $fieldRowsGrouped = ContentHelper::groupArrayBy($contentFieldRows, 'content_id');
                 $datumRowsGrouped = ContentHelper::groupArrayBy($contentDatumRows, 'content_id');
 
-                //insert new indexes in the DB
+                // insert new indexes in the DB
                 foreach ($query as $content) {
                     $content['fields'] = $fieldRowsGrouped[$content['id']] ?? [];
                     $content['data'] = $datumRowsGrouped[$content['id']] ?? [];
@@ -105,7 +104,7 @@ class FullTextSearchRepository extends RepositoryBase
                         'brand' => $content['brand'],
                         'content_type' => $content['type'],
                         'content_status' => $content['status'],
-                        'content_published_on' => $content['published_on'],
+                        'content_published_on' => $content['published_on'] ?? Carbon::now(),
                         'created_at' => Carbon::now()->toDateTimeString()
                     ];
 
