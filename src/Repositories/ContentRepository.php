@@ -1443,7 +1443,7 @@ class ContentRepository extends RepositoryBase
                     }
                 );
 
-                $availableFields[$row['key']] = array_values(array_unique($availableFields[$row['key']]));
+                $availableFields[$row['key']] = array_values($availableFields[$row['key']]);
             }
         }
 
