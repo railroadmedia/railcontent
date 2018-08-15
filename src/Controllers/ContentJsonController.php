@@ -47,9 +47,7 @@ class ContentJsonController extends Controller
      */
     public function index(Request $request)
     {
-        $filters = $request->get('filter', []);
-
-        if ($request->has('statuses') && $request->get('auth_level') == 'administrator') {
+        if ($request->has('statuses')) {
             ContentRepository::$availableContentStatues = $request->get('statuses');
         }
 
