@@ -2,9 +2,9 @@
 
 namespace Railroad\Railcontent\Controllers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Responses\JsonPaginatedResponse;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\FullTextSearchService;
@@ -19,6 +19,7 @@ class FullTextSearchJsonController extends Controller
 
     /**
      * FullTextSearchJsonController constructor.
+     *
      * @param FullTextSearchService $fullTextSearchService
      */
     public function __construct(FullTextSearchService $fullTextSearchService)
@@ -36,6 +37,9 @@ class FullTextSearchJsonController extends Controller
      */
     public function index(Request $request)
     {
+        ContentRepository::$availableContentStatues =
+            $request->get('statuses', ContentRepository::$availableContentStatues);
+
         $contentsData = $this->fullTextSearchService->search(
             $request->get('term', null),
             $request->get('page', 1),
@@ -51,7 +55,7 @@ class FullTextSearchJsonController extends Controller
             $contentsData['results'],
             [
                 'transformer' => DataTransformer::class,
-                'totalResults' => $contentsData['total_results']
+                'totalResults' => $contentsData['total_results'],
             ]
         );
     }
