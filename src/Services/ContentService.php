@@ -882,11 +882,11 @@ class ContentService
                 $orderByDirection,
                 implode(' ', array_values($includedTypes) ?? ''),
                 implode(' ', array_values($slugHierarchy) ?? ''),
-                implode(' ', array_values(array_collapse($requiredParentIds)) ?? ''),
-                implode(' ', array_values(array_collapse($requiredFields)) ?? ''),
-                implode(' ', array_values(array_collapse($includedFields)) ?? ''),
-                implode(' ', array_values(array_collapse($requiredUserStates)) ?? ''),
-                implode(' ', array_values(array_collapse($includedUserStates)) ?? '')
+                implode(' ', array_values($requiredParentIds) ?? ''),
+                implode(' ', array_values($requiredFields) ?? ''),
+                implode(' ', array_values($includedFields) ?? ''),
+                implode(' ', array_values($requiredUserStates) ?? ''),
+                implode(' ', array_values($includedUserStates) ?? '')
             );
 
         $results =
