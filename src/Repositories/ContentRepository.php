@@ -1418,7 +1418,7 @@ class ContentRepository extends RepositoryBase
             if ($row['type'] == 'content_id') {
                 $subContentIds[] = $row['value'];
             } else {
-                $availableFields[$row['key']][] = $row['value'];
+                $availableFields[$row['key']][] = trim($row['value']);
 
                 // only uniques
                 $availableFields[$row['key']] = array_values(array_unique($availableFields[$row['key']]));
@@ -1443,7 +1443,7 @@ class ContentRepository extends RepositoryBase
                     }
                 );
 
-                $availableFields[$row['key']] = array_values($availableFields[$row['key']]);
+                $availableFields[$row['key']] = array_values(array_unique($availableFields[$row['key']]));
             }
         }
 
