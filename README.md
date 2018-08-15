@@ -819,6 +819,26 @@ AND
 )
 ```
 
+### Exemption
+
+Are you implementing validation but have content with a protected state (say, "published" for example) that maybe be imcomplete according to the rules you're creating? There's no issue with that - the content will not be affected. The only problem is that users will not be able to edit the content - any attempt to edit content with a protected state that fails validation will be be rejected. So, how to make a small change to pre-existing content if you don't want to go and fill in previously left-blank parts of it?
+
+Just set a date in your railroad config that specifies a before which all content is exempt from validation. Exempt, except for validation failures on any part edited and failing in a request.
+
+Do this an any content with a protected state and a "created_on" date before your date specified in the config will not fail validation so long as what single field|datum|info you're changing doesn't fail it's specific validation rules. But the rest of the content-parts? Can fail and won't prevent from saving edits to other non-failing parts. 
+
+Set the following value in "config/railcontent.php": 
+
+```
+'validation_exemption_date' => '2018-08-01 00:00:00',
+```
+
+Where the key is "validation_exemption_date", and the value is a datetime stamp - or any other single string that can passed to Carbon's `new Carbon()` instantiation.
+
+(see docs: https://carbon.nesbot.com/docs/#api-instantiation)
+
+(note, could easily enough be modified to take timezone if needed)
+
 
 Comment-Likes
 ------------------------------------------------------------------------------------------------------------------------

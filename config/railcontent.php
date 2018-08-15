@@ -113,7 +113,7 @@ return [
             \Railroad\Railcontent\Decorators\Hierarchy\ContentSlugHierarchyDecorator::class,
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
         ],
-        'comments' => [
+        'comment' => [
             \Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator::class,
         ],
         'comment' => [

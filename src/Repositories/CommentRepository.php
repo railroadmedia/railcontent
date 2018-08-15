@@ -60,6 +60,8 @@ class CommentRepository extends RepositoryBase
     protected $limit;
     protected $orderBy;
     protected $orderDirection;
+    protected $orderTableName;
+    protected $orderTable;
 
     /**
      * @param integer $id
@@ -91,6 +93,13 @@ class CommentRepository extends RepositoryBase
         $this->orderBy = $orderByColumn;
         $this->orderDirection = $orderByDirection;
 
+        $this->orderTableName = ($orderByColumn == 'like_count' ?
+            ConfigService::$tableCommentLikes:
+            ConfigService::$tableComments);
+
+        $this->orderTable = ($orderByColumn == 'like_count' ? '':
+            ConfigService::$tableComments);
+
         return $this;
     }
 
@@ -101,6 +110,7 @@ class CommentRepository extends RepositoryBase
     {
         $query = $this->query()
             ->selectColumns()
+            ->aggregateOrderTable($this->orderTableName)
             ->restrictByBrand()
             ->restrictByType()
             ->restrictByContentId()
@@ -108,7 +118,7 @@ class CommentRepository extends RepositoryBase
             ->restrictByVisibility()
             ->restrictByAssignedUserId()
             ->onlyComments()
-            ->orderBy($this->orderBy, $this->orderDirection, ConfigService::$tableComments)
+            ->orderBy($this->orderBy, $this->orderDirection, $this->orderTable)
             ->directPaginate($this->page, $this->limit);
 
         $rows = $query->getToArray();
@@ -116,6 +126,48 @@ class CommentRepository extends RepositoryBase
         $repliesRows =  $this->getRepliesByCommentIds(array_column($rows, 'id'));
 
         return $this->parseRows($rows, $repliesRows);
+    }
+
+    /**
+     * Get current user comments that meet the search criteria, paginated
+     *
+     * @return array
+     */
+    public function getCurrentUserComments()
+    {
+        $query = $this->query()
+            ->selectColumns()
+            ->restrictByBrand()
+            ->restrictByType()
+            ->restrictByContentId()
+            ->restrictByUser()
+            ->restrictByVisibility()
+            ->restrictByAssignedUserId()
+            ->orderBy(
+                $this->orderBy,
+                $this->orderDirection,
+                ConfigService::$tableComments
+            )
+            ->directPaginate($this->page, $this->limit);
+
+        $rows = $query->getToArray();
+
+        $commentsIds = [];
+        $threadsIds = [];
+
+        foreach ($rows as $item) {
+            if ($item['parent_id']) {
+                $threadsIds[] = $item['parent_id'];
+            } else {
+                $commentsIds[] = $item['id'];
+            }
+        }
+
+        $repliesRows = $this->getRepliesByCommentIds($commentsIds);
+
+        $threadRows = $this->getThreadByCommentIds($threadsIds);
+
+        return $this->parseCurrentUserRows($rows, $repliesRows, $threadRows);
     }
 
     /** Count all the comments
@@ -132,6 +184,24 @@ class CommentRepository extends RepositoryBase
             ->restrictByVisibility()
             ->restrictByAssignedUserId()
             ->onlyComments();
+
+        return $query->count();
+    }
+
+    /**
+     * Count current user comments
+     * @return int
+     */
+    public function countCurrentUserComments()
+    {
+        $query = $this->query()
+            ->selectColumns()
+            ->restrictByBrand()
+            ->restrictByType()
+            ->restrictByContentId()
+            ->restrictByUser()
+            ->restrictByVisibility()
+            ->restrictByAssignedUserId();
 
         return $query->count();
     }
@@ -190,6 +260,88 @@ class CommentRepository extends RepositoryBase
             ->delete();
 
         return $deleted;
+    }
+
+    /**
+     * Parse the rows to return the results in the following format:
+     * [
+     *      comment_id => [
+     *              'id' => comment id,
+     *              'content_id' => content id,
+     *              'comment' => comment text,
+     *              'parent_id' => null for the comments
+     *              'user_id' => the user id that create the comment,
+     *              'created_on' => creation date,
+     *              'deleted_at' => null|date when the comment was marked deleted
+     *              'replies' => [
+     *                  0 => [
+     *                      'id' => reply id,
+     *                      'content_id' => content id,
+     *                      'comment' => reply text,
+     *                      'parent_id' => the comment id
+     *                      'user_id' => the user id that create the reply,
+     *                      'created_on' => creation date,
+     *                      'deleted_at' => null|date when the comment was marked deleted
+     *                  ]
+     *              ]
+     *       ]
+     * ]
+     *
+     * @param $rows - comment or replies having current user as author
+     * @param $repliesRows - replies to current user comments
+     * @param $threadRows - if any of the current user comments are replies, the threads (parent comment and other replies to it)
+     *
+     * @return array
+     */
+    private function parseCurrentUserRows($rows, $repliesRows, $threadRows)
+    {
+        $results = [];
+
+        // get threads from $rows
+        foreach ($rows as $item) {
+            if ($item['parent_id'] === null) {
+                $results[$item['id']] = $item;
+            }
+        }
+
+        // get threads from $threadRows
+        foreach ($threadRows as $item) {
+            if ($item['parent_id'] === null) {
+                $results[$item['id']] = $item;
+            }
+        }
+
+        // add replies from $rows
+        foreach ($rows as $item) {
+            if ($item['parent_id'] !== null && isset($results[$item['parent_id']])) {
+                if (!isset($results[$item['parent_id']]['replies'])) {
+                    $results[$item['parent_id']]['replies'] = [];
+                }
+                $results[$item['parent_id']]['replies'][] = $item;
+            }
+        }
+
+        // add replies from $repliesRows
+        foreach ($repliesRows as $item) {
+            if (isset($results[$item['parent_id']])) {
+                if (!isset($results[$item['parent_id']]['replies'])) {
+                    $results[$item['parent_id']]['replies'] = [];
+                }
+                $results[$item['parent_id']]['replies'][] = $item;
+            }
+        }
+
+        // add replies from $threadRows
+        foreach ($threadRows as $item) {
+            if ($item['parent_id'] !== null && isset($results[$item['parent_id']])) {
+                if (!isset($results[$item['parent_id']]['replies'])) {
+                    $results[$item['parent_id']]['replies'] = [];
+                }
+                $results[$item['parent_id']]['replies'][] = $item;
+            }
+        }
+
+        return $results;
     }
 
     /** Parse the rows to return the results in the following format:
@@ -257,6 +409,27 @@ class CommentRepository extends RepositoryBase
             ->selectColumns()
             ->whereIn('parent_id', $commentIds)
             ->restrictByVisibility()
+            ->get()
+            ->toArray();
+    }
+
+    /**
+     * Pull all the comments, main and replies, having id or parent id in $threadIds
+     *
+     * @param array $threadIds
+     * @return array
+     */
+    private function getThreadByCommentIds(array $threadIds)
+    {
+        return $this->query()
+            ->selectColumns()
+            ->where(function ($query) use ($threadIds) {
+                $query
+                    ->whereIn('parent_id', $threadIds)
+                    ->orWhereIn('id', $threadIds);
+            })
+            ->restrictByVisibility()
+            ->excludeByUser()
             ->get()
             ->toArray();
     }

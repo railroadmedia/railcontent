@@ -125,6 +125,11 @@ class ConfigService
     public static $validationRules;
 
     /**
+     * @var string
+     */
+    public static $validationExemptionDate;
+
+    /**
      * @var @array
      */
     public static $fieldOptionList;
@@ -203,4 +208,9 @@ class ConfigService
      * @var array
      */
     public static $controllerMiddleware;
+
+    /**
+     * @var array
+     */
+    public static $tableCommentsAggregates;
 }

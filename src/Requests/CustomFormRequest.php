@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Requests;
 
 use App\Http\Requests\Scalecenter\ContentCreate;
+use Carbon\Carbon;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Factory as ValidationFactory;
@@ -430,7 +431,72 @@ class CustomFormRequest extends FormRequest
             );
         }
 
-        if (!empty($messages)) {
+        // -------------------------------------------------------------------------------------------------------------
+
+        /*
+         * Make a request exempt from validation if the content was created before the validation was implemented
+         * (defined by the "validation_exemption_date" in config"), AND the content property edited (when applicable)
+         * does not fail validation.
+         *
+         * Otherwise users can't edit old content that was created before the validation was implemented and may not pass
+         * validation. This means that while it's state is a protected one, nothing could be edited because the content
+         * would always fail validation.
+         */
+
+        if ($request instanceof ContentDatumDeleteRequest || $request instanceof ContentFieldDeleteRequest) {
+            $idInParam = array_values($request->route()->parameters())[0];
+            if($request instanceof ContentFieldDeleteRequest){
+                $keyToCheckForExemption = $this->contentFieldService->get($idInParam)['key'];
+            }else{
+                $keyToCheckForExemption = $this->contentDatumService->get($idInParam)['key'];
+            }
+        }
+
+        if ($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest) {
+            $idInParam = array_values($request->route()->parameters())[0];
+            if($request instanceof ContentFieldUpdateRequest){
+                $keyToCheckForExemption = $this->contentFieldService->get($idInParam)['key'];
+            }else{
+                $keyToCheckForExemption = $this->contentDatumService->get($idInParam)['key'];
+            }
+        }
+
+        $contentCreatedOn = new Carbon($content['created_on']);
+        $exemptionDate = new Carbon('1970-01-01 00:00');
+        if(!empty(ConfigService::$validationExemptionDate)){
+            $exemptionDate = new Carbon(ConfigService::$validationExemptionDate);
+        }
+        $exempt = $exemptionDate->gt($contentCreatedOn);
+
+        foreach($messages as $message){
+            if(empty($keyToCheckForExemption)){
+                $keyToCheckForExemption = null;
+                if(!empty($request->request->all()['key'])){
+                    $keyToCheckForExemption = $request->request->all()['key'];
+                }
+            }
+            if($keyToCheckForExemption === $message['key']){
+                $exempt = false;
+                $alternativeMessages = [$message];
+            }
+        }
+
+        if(isset($alternativeMessages)){
+            $messages = $alternativeMessages;
+        }
+
+        // -------------------------------------------------------------------------------------------------------------
+
+        /*
+         * Passes Validation
+         */
+        if(empty($messages) || $exempt){
+            return true;
+        }
+
+        /*
+         * Fails Validation
+         */
             throw new HttpResponseException(
                 reply()->json(
                     new Entity(['messages' => $messages]),
@@ -440,9 +506,6 @@ class CustomFormRequest extends FormRequest
                     ]
                 )
             );
-        }
-
-        return true;
     }
 
     /**
@@ -491,44 +554,17 @@ class CustomFormRequest extends FormRequest
 
         $restrictions = $this->getStatusRestrictionsForType($content['type'], $rulesForBrand);
 
-        /*
-         * ================== TEMPORARILY DISABLED SO JANADO CAN DO HIS THING. WAITING ON FRONT-END ==================
-         *
-         * The containing if ($timeIsUp || $appEnvIsDev) statement can be removed after Curtis fixes the thing where
-         * course-parts (and probably other similar content) is created with requested "status" set to "published".
-         * This is happening regardless of what the parent is set.
-         *
-         * Jonathan, 27th April 2018
-         */
-
-        // =============================================================================================================
-        // =============================================================================================================
-        $appEnv = env('APP_ENV');
-        $appEnvIsDev = $appEnv === 'development'; // delete this after F.E. fixed
-        $timeIsUp =
-            \Carbon\Carbon::now()
-                ->gt(\Carbon\Carbon::createFromDate(2018, 5, 8)); // delete this after F.E. fixed
-        if ($timeIsUp || $appEnvIsDev) { // delete this after F.E. fixed
-            // =============================================================================================================
-            // =============================================================================================================
-
-            /* leave **this** if-statement after the F.E. is fixed */
-
-            if ($request instanceof ContentCreateRequest) {
-                if (isset($input['status'])) {
-                    if (in_array($input['status'], $restrictions)) {
-                        throw new \Exception('Status cannot be set to: "' . $input['status'] . '" on content-create.');
-                    }
+        if ($request instanceof ContentCreateRequest) {
+            if (isset($input['status'])) {
+                if (in_array($input['status'], $restrictions)) {
+                    throw new \Exception('Status cannot be set to: "' . $input['status'] . '" on content-create.');
                 }
             }
-
-            // =============================================================================================================
-            // =============================================================================================================
-        } // delete this after F.E. fixed
-        // =============================================================================================================
-        // =============================================================================================================
+        }
 
         /*
+         * For each of the following "if request is instance of x" sections:
+         *
          * part 1 - Validation required?
          *
          * part 2 - If request to create, update, or delete **A FIELD OR DATUM**, need content prepared for validation
@@ -636,13 +672,22 @@ class CustomFormRequest extends FormRequest
             return $this->contentService->getById($contentId);
         }
 
-        if ($request instanceof ContentFieldDeleteRequest || $request instanceof ContentFieldUpdateRequest) {
-            $idInParam =
-                array_values(
-                    $request->route()
-                        ->parameters()
-                )[0];
-            $contentDatumOrField = $this->contentFieldService->get($idInParam);
+        if ($request instanceof ContentFieldUpdateRequest || $request instanceof ContentDatumUpdateRequest) {
+            $idInParam = array_values($request->route()->parameters())[0];
+            if($request instanceof ContentFieldUpdateRequest){
+                $contentDatumOrField = $this->contentFieldService->get($idInParam);
+            }else{
+                $contentDatumOrField = $this->contentDatumService->get($idInParam);
+            }
+        }
+
+        if ($request instanceof ContentFieldDeleteRequest || $request instanceof ContentDatumDeleteRequest) {
+            $idInParam = array_values($request->route()->parameters())[0];
+            if($request instanceof ContentFieldDeleteRequest){
+                $contentDatumOrField = $this->contentFieldService->get($idInParam);
+            }else{
+                $contentDatumOrField = $this->contentDatumService->get($idInParam);
+            }
         }
 
         if (!empty($contentDatumOrField)) {

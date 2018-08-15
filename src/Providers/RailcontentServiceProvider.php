@@ -144,6 +144,9 @@ class RailcontentServiceProvider extends ServiceProvider
         // validation rules defined for each brand and content type
         ConfigService::$validationRules = config('railcontent.validation');
 
+        // validation rules defined for each brand and content type
+        ConfigService::$validationExemptionDate = config('railcontent.validation_exemption_date');
+
         // restrict which fields can be listed to avoid massive queries
         ConfigService::$fieldOptionList = config('railcontent.field_option_list', []);
 
@@ -173,6 +176,16 @@ class RailcontentServiceProvider extends ServiceProvider
             'railcontent.content_hierarchy_decorator_allowed_types' .
             ''
         );
+
+        // aggregates
+        ConfigService::$tableCommentsAggregates = [
+            ConfigService::$tableCommentLikes => [
+                'selectColumn' => 'COUNT(`' . ConfigService::$tableCommentLikes . '`.`id`) as `like_count`',
+                'foreignField' => 'comment_id',
+                'localField' => 'id',
+                'groupBy' => ConfigService::$tableComments . '.id'
+            ]
+        ];
     }
 
     /**

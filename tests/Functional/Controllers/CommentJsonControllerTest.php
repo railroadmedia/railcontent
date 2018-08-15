@@ -407,6 +407,138 @@ class CommentJsonControllerTest extends RailcontentTestCase
         );
     }
 
+    public function test_pull_comments_ordered_by_like_count()
+    {
+        // create content
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
+        );
+
+        // create content comments
+        $comments = [];
+
+        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+
+        // select two comment ids
+        $firstOrderedCommentId = $comments[2]['id'];
+        $secondOrderedCommentId = $comments[4]['id'];
+
+        // add a known number of likes to selected comments
+        $commentThreeLikeOne = [
+            'comment_id' => $firstOrderedCommentId,
+            'user_id' => $this->faker->randomNumber(),
+            'created_on' => Carbon::instance($this->faker->dateTime)->toDateTimeString(),
+        ];
+
+        $this->databaseManager
+            ->table(ConfigService::$tableCommentLikes)
+            ->insertGetId($commentThreeLikeOne);
+
+        $commentThreeLikeTwo = [
+            'comment_id' => $firstOrderedCommentId,
+            'user_id' => $this->faker->randomNumber(),
+            'created_on' => Carbon::instance($this->faker->dateTime)->toDateTimeString(),
+        ];
+
+        $this->databaseManager
+            ->table(ConfigService::$tableCommentLikes)
+            ->insertGetId($commentThreeLikeTwo);
+
+        $commentFourLike = [
+            'comment_id' => $secondOrderedCommentId,
+            'user_id' => $this->faker->randomNumber(),
+            'created_on' => Carbon::instance($this->faker->dateTime)->toDateTimeString(),
+        ];
+
+        $this->databaseManager
+            ->table(ConfigService::$tableCommentLikes)
+            ->insertGetId($commentFourLike);
+
+        $response = $this->call(
+            'GET',
+            'railcontent/comment',
+            [
+                'page' => 1,
+                'limit' => 25,
+                'content_id' => $content['id'],
+                'sort' => '-like_count'
+            ]
+        );
+
+        $decodedResponse = $response->decodeResponseJson();
+
+        // assert the order of results
+        $this->assertEquals($decodedResponse['results'][0]['id'], $firstOrderedCommentId);
+        $this->assertEquals($decodedResponse['results'][1]['id'], $secondOrderedCommentId);
+    }
+
+    public function test_pull_comments_filtered_by_my_comments()
+    {
+        // create content
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
+        );
+
+        $currentUserId = $this->createAndLogInNewUser();
+
+        // create content comments
+
+        // 1st comment, no parent, should be returned
+        $firstComment = $this->commentFactory->create($this->faker->text, $content['id'], null, $currentUserId);
+
+        // 2nd comment, parent is 1st comment, should be returned as nested
+        $secondComment = $this->commentFactory->create($this->faker->text, $content['id'], $firstComment['id'], rand(5, 50));
+
+        // 3rd comment, no parent, should not be returned
+        $thirdComment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand(5, 50));
+
+        // 4th comment, parent is 3rd comment, should not be returned
+        $this->commentFactory->create($this->faker->text, $content['id'], $thirdComment['id'], rand(5, 50));
+
+        // 5th comment, no parent, should not be returned
+        $this->commentFactory->create($this->faker->text, $content['id'], null, rand(5, 50));
+
+        // 6th comment, no parent, should be returned
+        $sixthComment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand(5, 50));
+
+        // 7th comment, parent is 6th comment, should be returned as nested
+        $seventhComment = $this->commentFactory->create($this->faker->text, $content['id'], $sixthComment['id'], $currentUserId);
+
+        // 8th comment, parent is 6th comment, should be returned as nested
+        $eighthComment = $this->commentFactory->create($this->faker->text, $content['id'], $sixthComment['id'], rand(5, 50));
+
+        $response = $this->call(
+            'GET',
+            'railcontent/comment',
+            [
+                'page' => 1,
+                'limit' => 25,
+                'content_id' => $content['id'],
+                'sort' => '-mine'
+            ]
+        );
+
+        $decodedResponse = $response->decodeResponseJson();
+
+        // assert results count
+        $this->assertEquals($decodedResponse['total_results'], 2);
+
+        // assert results
+        $this->assertEquals($decodedResponse['results'][0]['id'], $firstComment['id']);
+        $this->assertEquals($decodedResponse['results'][0]['replies'][0]['id'], $secondComment['id']);
+        $this->assertEquals($decodedResponse['results'][1]['id'], $sixthComment['id']);
+        $this->assertEquals($decodedResponse['results'][1]['replies'][0]['id'], $seventhComment['id']);
+        $this->assertEquals($decodedResponse['results'][1]['replies'][1]['id'], $eighthComment['id']);
+    }
+
     public function test_pull_comments_filtered_by_content_type()
     {
         $page        = 2;

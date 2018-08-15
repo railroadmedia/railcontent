@@ -31,7 +31,11 @@ class QueryBuilder extends Builder
     public function orderBy($column = null, $direction = 'asc', $table = null)
     {
         if ($column) {
-            parent::orderBy(($table ?? ConfigService::$tableContent) . '.' . $column, $direction);
+            // this properly formats orderBy table names
+            // including the case with '' table name used for non-mapped generated columns such as counts
+            $tableName = $table ?? ConfigService::$tableContent;
+            $orderByTable = $tableName ? $tableName . '.' : '';
+            parent::orderBy($orderByTable . $column, $direction);
         }
 
         return $this;
