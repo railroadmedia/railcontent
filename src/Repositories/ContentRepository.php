@@ -1448,7 +1448,7 @@ class ContentRepository extends RepositoryBase
         }
 
         // random use case, should be refactored at some point
-        if (count(
+        if (!empty($availableFields['difficulty']) && count(
                 array_diff(
                     $availableFields['difficulty'],
                     [
