@@ -1447,6 +1447,27 @@ class ContentRepository extends RepositoryBase
             }
         }
 
+        // random use case, should be refactored at some point
+        if (count(
+                array_diff(
+                    $availableFields['difficulty'],
+                    [
+                        'beginner',
+                        'intermediate',
+                        'advanced',
+                        'all',
+                    ]
+                )
+            ) == 0) {
+
+            $availableFields['difficulty'] = [
+                'beginner',
+                'intermediate',
+                'advanced',
+                'all',
+            ];
+        }
+
         return $availableFields;
     }
 
