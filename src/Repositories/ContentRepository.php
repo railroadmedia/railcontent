@@ -1418,10 +1418,17 @@ class ContentRepository extends RepositoryBase
             if ($row['type'] == 'content_id') {
                 $subContentIds[] = $row['value'];
             } else {
-                $availableFields[$row['key']][] = trim($row['value']);
+                $availableFields[$row['key']][] = trim(strtolower($row['value']));
 
                 // only uniques
                 $availableFields[$row['key']] = array_values(array_unique($availableFields[$row['key']]));
+
+                usort(
+                    $availableFields[$row['key']],
+                    function ($a, $b) {
+                        return strcmp($a, $b);
+                    }
+                );
             }
         }
 
@@ -1430,7 +1437,7 @@ class ContentRepository extends RepositoryBase
 
         foreach ($rows as $row) {
             if ($row['type'] == 'content_id' && !empty($subContents[$row['value']])) {
-                $availableFields[$row['key']][] = $subContents[$row['value']];
+                $availableFields[$row['key']][] = $subContents[strtolower($row['value'])];
 
                 // only uniques (this is a multidimensional array_unique equivalent)
                 $availableFields[$row['key']] =
