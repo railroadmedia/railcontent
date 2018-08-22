@@ -713,7 +713,7 @@ class ContentRepository extends RepositoryBase
             array_column($merged, 'type')
         );
 
-        $processed = $this->processRows(
+        $processedContents = $this->processRows(
             $merged,
             $contentFieldRows,
             $contentDatumRows,
@@ -721,11 +721,19 @@ class ContentRepository extends RepositoryBase
         );
 
         foreach ($afterContents as $afterContentIndex => $afterContent) {
-            $afterContents[$afterContentIndex] = $processed[$afterContent['id']];
+            foreach ($processedContents as $processedContentIndex => $processedContent) {
+                if ($processedContent['id'] == $afterContent['id']) {
+                    $afterContents[$afterContentIndex] = $processedContents[$processedContentIndex];
+                }
+            }
         }
 
         foreach ($beforeContents as $beforeContentIndex => $beforeContent) {
-            $beforeContents[$beforeContentIndex] = $processed[$beforeContent['id']];
+            foreach ($processedContents as $processedContentIndex => $processedContent) {
+                if ($processedContent['id'] == $beforeContent['id']) {
+                    $beforeContents[$beforeContentIndex] = $processedContents[$processedContentIndex];
+                }
+            }
         }
 
         if ($orderDirection == 'desc') {

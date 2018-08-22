@@ -817,7 +817,10 @@ class ContentService
                     }
                 );
 
-        return Decorator::decorate($results, 'content');
+        $results['before'] = Decorator::decorate($results['before'], 'content');
+        $results['after'] = Decorator::decorate($results['after'], 'content');
+
+        return $results;
     }
 
     /**
