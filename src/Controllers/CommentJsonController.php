@@ -58,10 +58,12 @@ class CommentJsonController extends Controller
         );
 
         return reply()->json(
-            $commentData['results'],
-            [
+            $commentData['results'], [
                 'totalResults' => $commentData['total_results'],
                 'transformer' => DataTransformer::class,
+                'meta' => [
+                    'totalCommentsAndReplies' => $commentData['total_comments_and_results'],
+                ],
             ]
         );
     }

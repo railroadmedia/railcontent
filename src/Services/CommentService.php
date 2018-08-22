@@ -244,7 +244,9 @@ class CommentService
                         'results' => $this->commentRepository
                             ->getCurrentUserComments(),
                         'total_results' => $this->commentRepository
-                            ->countCurrentUserComments()
+                            ->countCurrentUserComments(),
+                        'total_comments_and_results' => $this->commentRepository
+                            ->countCommentsAndReplies()
                     ];
                 } else {
                     $this->commentRepository->setData(
@@ -255,7 +257,9 @@ class CommentService
                     );
                     $results = [
                         'results' => $this->commentRepository->getComments(),
-                        'total_results' => $this->commentRepository->countComments()
+                        'total_results' => $this->commentRepository->countComments(),
+                        'total_comments_and_results' => $this->commentRepository
+                            ->countCommentsAndReplies()
                     ];
                 }
 

@@ -188,6 +188,23 @@ class CommentRepository extends RepositoryBase
         return $query->count();
     }
 
+    /** Count all the comments
+     * @return int
+     */
+    public function countCommentsAndReplies()
+    {
+        $query = $this->query()
+            ->selectColumns()
+            ->restrictByBrand()
+            ->restrictByType()
+            ->restrictByContentId()
+            ->restrictByUser()
+            ->restrictByVisibility()
+            ->restrictByAssignedUserId();
+
+        return $query->count();
+    }
+
     /**
      * Count current user comments
      * @return int
