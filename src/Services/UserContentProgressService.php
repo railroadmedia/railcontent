@@ -270,6 +270,11 @@ class UserContentProgressService
             );
         }
 
+        CacheHelper::deleteCache('content_list_' . $contentId);
+
+        //delete all the search results from cache
+        CacheHelper::deleteAllCachedSearchResults('user_progress_' . $userId . '_');
+
         event(new UserContentProgressSaved($userId, $contentId));
 
         return true;
