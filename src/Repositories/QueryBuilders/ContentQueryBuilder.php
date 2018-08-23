@@ -377,7 +377,8 @@ class ContentQueryBuilder extends QueryBuilder
                         ->on(
                             $tableName . '.value',
                             $requiredFieldData['operator'],
-                            $joinClause->raw("'" . $requiredFieldData['value'] . "'")
+                            is_numeric($requiredFieldData['value']) ? $joinClause->raw($requiredFieldData['value']) :
+                                $joinClause->raw("'" . $requiredFieldData['value'] . "'")
                         );
                 }
             );
