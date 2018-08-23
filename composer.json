@@ -28,7 +28,7 @@
     "vimeo/vimeo-api": "^1.2",
     "predis/predis": "^1.1",
     "google/apiclient":"^2.2",
-    "railroad/response": "0.0.09"
+    "railroad/response": "^1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~7.0",
