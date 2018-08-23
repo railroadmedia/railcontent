@@ -1284,11 +1284,12 @@ class ContentRepository extends RepositoryBase
      * @param $name
      * @param $value
      * @param $type
+     * @param $operator
      * @return $this
      */
-    public function requireField($name, $value, $type = '')
+    public function requireField($name, $value, $type = '', $operator = '=')
     {
-        $this->requiredFields[] = ['name' => $name, 'value' => $value, 'type' => $type];
+        $this->requiredFields[] = ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator];
 
         return $this;
     }
@@ -1300,11 +1301,12 @@ class ContentRepository extends RepositoryBase
      * @param $name
      * @param $value
      * @param $type
+     * @param $operator
      * @return $this
      */
-    public function includeField($name, $value, $type = '')
+    public function includeField($name, $value, $type = '', $operator = '=')
     {
-        $this->includedFields[] = ['name' => $name, 'value' => $value, 'type' => $type];
+        $this->includedFields[] = ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator];
 
         return $this;
     }

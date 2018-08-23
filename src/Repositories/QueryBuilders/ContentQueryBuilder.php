@@ -376,7 +376,7 @@ class ContentQueryBuilder extends QueryBuilder
                         )
                         ->on(
                             $tableName . '.value',
-                            '=',
+                            $requiredFieldData['operator'],
                             $joinClause->raw("'" . $requiredFieldData['value'] . "'")
                         );
                 }
@@ -419,7 +419,7 @@ class ContentQueryBuilder extends QueryBuilder
                                     )
                                         ->on(
                                             $tableName . '.value',
-                                            '=',
+                                            $includedFieldData['operator'],
                                             $joinClause->raw("'" . $includedFieldData['value'] . "'")
                                         );
                                 }
