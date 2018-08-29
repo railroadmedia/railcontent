@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\UserPermissionsService;
 
 class CacheHelper
 {
@@ -33,6 +34,18 @@ class CacheHelper
             . ' ' . ConfigService::$brand
             . ' ' . implode(' ', array_values(array_wrap(ConfigService::$availableBrands)))
             . ' ' . implode(' ', array_values(array_wrap(ContentRepository::$availableContentStatues)));
+
+        /**
+         * @var $service UserPermissionsService
+         */
+        if (auth()->check()) {
+            $service = app()->make(UserPermissionsService::class);
+            $permissions = $service->getUserPermissions(auth()->id());
+
+            if (!empty($permissions)) {
+                $settings .= implode(' ', array_column($permissions, 'permission_id'));
+            }
+        }
 
         return $settings;
     }
