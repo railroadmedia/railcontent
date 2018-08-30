@@ -126,7 +126,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($id, $hash) {
 
                         $results = $this->contentRepository->getById($id);
@@ -153,7 +153,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($ids, $hash) {
 
                         return $this->contentRepository->getByIds($ids);
@@ -176,7 +176,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($type, $hash) {
                         $results = $this->contentRepository->getByType($type);
                         $this->saveCacheResults($hash, array_keys($results));
@@ -218,7 +218,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use (
                         $hash,
                         $types,
@@ -288,7 +288,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($hash, $slug, $type) {
                         $results = $this->contentRepository->getBySlugAndType($slug, $type);
                         $this->saveCacheResults($hash, array_keys($results));
@@ -314,7 +314,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($hash, $userId, $slug, $type) {
                         $results = $this->contentRepository->getByUserIdTypeSlug($userId, $type, $slug);
                         $this->saveCacheResults($hash, array_keys($results));
@@ -340,7 +340,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($hash, $parentId, $orderBy, $orderByDirection) {
                         $results = $this->contentRepository->getByParentId($parentId, $orderBy, $orderByDirection);
                         $this->saveCacheResults($hash, array_merge(array_keys($results), [$parentId]));
@@ -374,7 +374,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($hash, $parentId, $limit, $skip, $orderBy, $orderByDirection) {
                         $results = $this->contentRepository->getByParentIdPaginated(
                             $parentId,
@@ -413,7 +413,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($hash, $parentId, $types, $orderBy, $orderByDirection) {
                         $results = $this->contentRepository->getByParentIdWhereTypeIn(
                             $parentId,
@@ -459,7 +459,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use (
                         $hash,
                         $parentId,
@@ -516,7 +516,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($hash, $parentIds, $orderBy, $orderByDirection) {
                         $results = $this->contentRepository->getByParentIds($parentIds, $orderBy, $orderByDirection);
                         $this->saveCacheResults($hash, array_merge(array_keys($results), $parentIds));
@@ -541,7 +541,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($hash, $childId, $type) {
                         $results = $this->contentRepository->getByChildIdWhereType($childId, $type);
                         $this->saveCacheResults($hash, array_merge(array_keys($results), [$childId]));
@@ -566,7 +566,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($hash, $childIds, $type) {
                         $results = $this->contentRepository->getByChildIdsWhereType($childIds, $type);
                         $this->saveCacheResults($hash, array_merge(array_keys($results), $childIds));
@@ -591,7 +591,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($hash, $childId, $types) {
                         $results = $this->contentRepository->getByChildIdWhereParentTypeIn($childId, $types);
                         $this->saveCacheResults($hash, array_merge(array_keys($results), [$childId]));
@@ -625,7 +625,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($hash, $type, $userId, $state, $limit, $skip) {
                         $results = $this->contentRepository->getPaginatedByTypeUserProgressState(
                             $type,
@@ -670,7 +670,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($hash, $types, $userId, $state, $limit, $skip) {
                         $results = $this->contentRepository->getPaginatedByTypesUserProgressState(
                             $types,
@@ -715,7 +715,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($hash, $types, $userId, $state, $limit, $skip) {
                         $results = $this->contentRepository->getPaginatedByTypesRecentUserProgressState(
                             $types,
@@ -792,7 +792,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use (
                         $hash,
                         $type,
@@ -896,7 +896,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use (
                         $hash,
                         $page,
@@ -1190,7 +1190,7 @@ class ContentService
             Cache::store(ConfigService::$cacheDriver)
                 ->remember(
                     $hash,
-                    ConfigService::$cacheTime,
+                    CacheHelper::getExpirationCacheTime(),
                     function () use ($hash, $contentTypes, $contentFieldKey, $contentFieldValues) {
                         $results = $this->contentRepository->getByContentFieldValuesForTypes(
                             $contentTypes,
@@ -1218,4 +1218,5 @@ class ContentService
 
         return true;
     }
+
 }
