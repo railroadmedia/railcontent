@@ -13,6 +13,8 @@ use Railroad\Railcontent\Services\UserPermissionsService;
 
 class CacheHelper
 {
+    public static $currentUserPermissions;
+
     public static function setPrefix()
     {
         if (method_exists(
@@ -36,6 +38,7 @@ class CacheHelper
     public static function getSettings()
     {
         self::setPrefix();
+        
         $settings =
             ' ' .
             ContentRepository::$pullFutureContent .
@@ -45,6 +48,21 @@ class CacheHelper
             implode(' ', array_values(array_wrap(ConfigService::$availableBrands))) .
             ' ' .
             implode(' ', array_values(array_wrap(ContentRepository::$availableContentStatues)));
+
+        /**
+         * @var $service UserPermissionsService
+         */
+        if (auth()->check()) {
+
+            if(empty(self::$currentUserPermissions)){
+                $service = app()->make(UserPermissionsService::class);
+                self::$currentUserPermissions = $service->getUserPermissions(auth()->id());
+            }
+
+            if (!empty(self::$currentUserPermissions)) {
+                $settings .= implode(' ', array_column(self::$currentUserPermissions, 'permission_id'));
+            }
+        }
 
         return $settings;
     }
