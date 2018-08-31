@@ -7,7 +7,6 @@ use Illuminate\Cache\RedisStore;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\UserPermissionsService;
 
@@ -38,7 +37,7 @@ class CacheHelper
     public static function getSettings()
     {
         self::setPrefix();
-        
+
         $settings =
             ' ' .
             ContentRepository::$pullFutureContent .
@@ -52,17 +51,18 @@ class CacheHelper
         /**
          * @var $service UserPermissionsService
          */
-        if (auth()->check()) {
 
-            if(empty(self::$currentUserPermissions)){
-                $service = app()->make(UserPermissionsService::class);
-                self::$currentUserPermissions = $service->getUserPermissions(auth()->id());
-            }
-
-            if (!empty(self::$currentUserPermissions)) {
-                $settings .= implode(' ', array_column(self::$currentUserPermissions, 'permission_id'));
-            }
-        }
+//        if (auth()->check()) {
+//
+//            if (empty(self::$currentUserPermissions)) {
+//                $service = app()->make(UserPermissionsService::class);
+//                self::$currentUserPermissions = $service->getUserPermissions(auth()->id());
+//            }
+//
+//            if (!empty(self::$currentUserPermissions)) {
+//                $settings .= implode(' ', array_column(self::$currentUserPermissions, 'permission_id'));
+//            }
+//        }
 
         return $settings;
     }
@@ -90,6 +90,8 @@ class CacheHelper
      * Insert all the specified value (content search key) at the tail of the set stored at key(content id).
      * If not exist a set for content id, it is created as empty set before performing the push operation.
      * e.g.: musora:content_list_contentId => "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
+     * If we have a authenticated user we save a set with the user cached keys. This set will be used when the user's
+     * permission change.
      *
      * @param string $key
      * @param array $elements
@@ -245,8 +247,12 @@ class CacheHelper
         return true;
     }
 
-    //should verify user permission expiration date and return first expiration date from the future
-    // if the expiration time it's null => return default cache time
+    /** Check user permission expiration date and return first expiration date from the future.
+     *  If the expiration time it's null(user have not permissions or the user's permissions never expire) => return
+     * default cache time
+     *
+     * @return Carbon|int
+     */
     public static function getExpirationCacheTime()
     {
         if (auth()->check()) {
@@ -260,6 +266,12 @@ class CacheHelper
         return ConfigService::$cacheTime;
     }
 
+    /** Set time to live to the specified cache keys. The keys will expire at the given time.
+     *
+     * @param array $keys
+     * @param timestamp $timeToLive
+     * @return bool
+     */
     public static function setTimeToLiveForKeys(array $keys, $timeToLive)
     {
         if (Cache::store(ConfigService::$cacheDriver)

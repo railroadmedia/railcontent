@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 
@@ -24,7 +25,9 @@ class UserPermissionsService
         $this->userPermissionsRepository = $userPermissionsRepository;
     }
 
-    /** Save user permission record in database
+    /** Save user permission record in database.
+     * Based on the permission activation start date we delete the user cache keys or set ttl for the cache keys to the
+     * activation date.
      *
      * @param integer $userId
      * @param integer $permissionId
@@ -44,19 +47,7 @@ class UserPermissionsService
                     ->toDateTimeString(),
             ]
         );
-        if ($startDate ==
-            Carbon::now()
-                ->toDateTimeString()) {
-            //should delete the cache for user
-            CacheHelper::deleteCache('keys_for_userId_' . $userId);
-        } else {
-
-            //should set expiration date for user cache key to user permission start date
-            CacheHelper::setTimeToLiveForKeys(
-                CacheHelper::getListElement('keys_for_userId_' . $userId),
-                Carbon::parse($startDate)->timestamp
-            );
-        }
+        $this->setTTLOrDeleteUserCache($userId, $startDate);
 
         return $this->userPermissionsRepository->getById($userPermission);
     }
@@ -71,6 +62,10 @@ class UserPermissionsService
      */
     public function updateOrCeate($attributes, $values)
     {
+        if (array_key_exists('start_date', $values)) {
+            $this->setTTLOrDeleteUserCache($attributes['user_id'], $values['start_date']);
+        }
+
         $userPermission = $this->userPermissionsRepository->updateOrCreate($attributes, $values);
 
         return $this->userPermissionsRepository->getById($userPermission);
@@ -84,6 +79,10 @@ class UserPermissionsService
      */
     public function update($id, array $data)
     {
+        if (array_key_exists('start_date', $data)) {
+            $this->setTTLOrDeleteUserCache($data['user_id'], $data['start_date']);
+        }
+
         $this->userPermissionsRepository->update(
             $id,
             array_merge(
@@ -110,7 +109,7 @@ class UserPermissionsService
             return $userPermission;
         }
 
-        //should delete the cache for user
+        //delete the cache for user
         CacheHelper::deleteCache('keys_for_userId_' . $userPermission['user_id']);
 
         return $this->userPermissionsRepository->delete($id);
@@ -135,5 +134,37 @@ class UserPermissionsService
     public function getUserPermissionIdByPermissionAndUser($userId, $permissionId)
     {
         return $this->userPermissionsRepository->getIdByPermissionAndUser($userId, $permissionId);
+    }
+
+    /** Delete user cache or set time to live based on user permission start date.
+     * If the user permission should be active from current datetime we delete user cache keys
+     * If the user permission should be active from a future datetime we set time to live for all user cache keys to
+     * the activation datetime
+     *
+     * @param int $userId
+     * @param string $startDate
+     */
+    private function setTTLOrDeleteUserCache($userId, $startDate)
+    {
+        if ($startDate ==
+            Carbon::now()
+                ->toDateTimeString()) {
+            //should delete the cache for user
+            CacheHelper::deleteCache('keys_for_userId_' . $userId);
+        } else {
+            $userCacheKeys = CacheHelper::getListElement('keys_for_userId_' . $userId);
+            if (!empty($userCacheKeys)) {
+                $existingTTL =
+                    Carbon::now()
+                        ->addSeconds(Redis::ttl($userCacheKeys[0]));
+                if ($existingTTL->gt(Carbon::parse($startDate))) {
+                    CacheHelper::setTimeToLiveForKeys(
+                        CacheHelper::getListElement('keys_for_userId_' . $userId),
+                        Carbon::parse($startDate)->timestamp
+                    );
+                }
+            }
+
+        }
     }
 }

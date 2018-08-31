@@ -601,4 +601,127 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             $this->assertNotEquals(-1, Redis::ttl($key));
         }
     }
+
+    public function test_user_cache_deleted_when_user_permission_deleted()
+    {
+        $userId = $this->createAndLogInNewUser();
+        $content = $this->contentFactory->create();
+        $permission = $this->permissionRepository->create(
+            [
+                'name' => $this->faker->word,
+                'brand' => ConfigService::$brand,
+            ]
+        );
+        $contentPermission = $this->contentPermissionRepository->create(
+            [
+                'content_id' => $content['id'],
+                'permission_id' => $permission,
+            ]
+        );
+        $userPermission = $this->userPermissionRepository->create(
+            [
+                'user_id' => $userId,
+                'permission_id' => $permission,
+                'start_date' => Carbon::now()
+                    ->toDateTimeString(),
+                'created_on' => Carbon::now()
+                    ->toDateTimeString(),
+            ]
+        );
+
+        $response = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'sort' => 'id',
+            ]
+        );
+        $this->assertArraySubset([(array)$content], $response->decodeResponseJson('data'));
+
+        $userCacheKeys = CacheHelper::getListElement('keys_for_userId_' . $userId);
+        $this->assertNotEmpty(CacheHelper::getListElement('keys_for_userId_' . $userId));
+
+        $this->call(
+            'DELETE',
+            'railcontent/user-permission/' . $userPermission
+        );
+
+        $this->assertEmpty(CacheHelper::getListElement('keys_for_userId_' . $userId));
+
+        //assert that the user cache was deleted
+        foreach ($userCacheKeys as $key) {
+            $this->assertNull(Redis::get($key));
+        }
+    }
+
+    public function test_user_multiple_permissions()
+    {
+        $userId = $this->createAndLogInNewUser();
+        $content = $this->contentFactory->create();
+        $permission = $this->permissionRepository->create(
+            [
+                'name' => $this->faker->word,
+                'brand' => ConfigService::$brand,
+            ]
+        );
+        $permission2 = $this->permissionRepository->create(
+            [
+                'name' => $this->faker->word,
+                'brand' => ConfigService::$brand,
+            ]
+        );
+        $contentPermission = $this->contentPermissionRepository->create(
+            [
+                'content_id' => $content['id'],
+                'permission_id' => $permission,
+            ]
+        );
+
+        $this->call(
+            'PUT',
+            'railcontent/user-permission',
+            [
+                'user_id' => $userId,
+                'permission_id' => $permission,
+                'start_date' => Carbon::now()
+                    ->subDay(1)
+                    ->toDateTimeString(),
+                'expiration_date' => Carbon::now()
+                    ->addDays(3)
+                    ->toDateTimeString(),
+            ]
+        );
+
+        $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'sort' => 'id',
+            ]
+        );
+
+        $this->call(
+            'PUT',
+            'railcontent/user-permission',
+            [
+                'user_id' => $userId,
+                'permission_id' => $permission2,
+                'start_date' => Carbon::now()
+                    ->addDays(5)
+                    ->toDateTimeString(),
+            ]
+        );
+        $userCacheKeys = CacheHelper::getListElement('keys_for_userId_' . $userId);
+
+        $recentExpirationDate = Carbon::now()
+            ->addDays(3)
+            ->toDateTimeString();
+        $redisTTL =
+            Carbon::now()
+                ->addSeconds(Redis::ttl($userCacheKeys[0]))
+                ->toDateTimeString();
+
+        $this->assertEquals($recentExpirationDate, $redisTTL);
+
+    }
 }
