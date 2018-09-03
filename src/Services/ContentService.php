@@ -1040,8 +1040,7 @@ class ContentService
      */
     public function update($id, array $data)
     {
-        $content = $this->getById($id);
-
+        $content = $this->contentRepository->getById($id);
         if (empty($content)) {
             return null;
         }
@@ -1068,7 +1067,7 @@ class ContentService
      */
     public function delete($id)
     {
-        $content = $this->getById($id);
+        $content = $this->contentRepository->getById($id);
 
         if (empty($content)) {
             return null;

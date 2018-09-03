@@ -601,7 +601,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $nrCourses = 30;
 
         //create courses
-        for ($i = 0; $i < $nrCourses; $i++) {
+        for ($i = 1; $i < $nrCourses; $i++) {
             $content = $this->contentFactory->create(
                 $this->faker->word,
                 $types[0],
@@ -947,7 +947,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => $user,
-                'permissions_id' => $permission,
+                'permission_id' => $permission,
                 'start_date' => Carbon::now()
                     ->subMonth(2)
                     ->toDateTimeString(),
@@ -1007,7 +1007,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => $user,
-                'permissions_id' => $permission,
+                'permission_id' => $permission,
                 'start_date' => Carbon::now()
                     ->subMonth(2)
                     ->toDateTimeString(),

@@ -119,9 +119,10 @@ class CommentService
     public function update($id, array $data)
     {
         //check if comment exist
-        $comment = $this->get($id);
-        if (is_null($comment)) {
-            return $comment;
+        $comment = $this->commentRepository->getById($id);
+
+        if (empty($comment)) {
+            return null;
         }
 
         if (!(request()->user()->id)) {
@@ -153,10 +154,10 @@ class CommentService
     {
 
         //check if comment exist
-        $comment = $this->get($id);
+        $comment = $this->commentRepository->getById($id);
 
-        if (is_null($comment)) {
-            return $comment;
+        if (empty($comment)) {
+            return null;
         }
 
         request()->attributes->set('user_id', request()->get('user_id') ?? null);

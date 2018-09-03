@@ -78,8 +78,8 @@ class ContentServiceTest extends RailcontentTestCase
         $results = $this->serviceBeingTested->getById($this->faker->numberBetween());
 
         $this->assertEquals(
-            null,
-            $results
+            [],
+            $results->toArray()
         );
     }
 
@@ -124,7 +124,7 @@ class ContentServiceTest extends RailcontentTestCase
         $results = $this->serviceBeingTested->getByIds([$content['id'], $content2['id']]);
 
         $this->assertEquals(
-            [$content['id'] => $content, $content2['id'] => $content2],
+            [$content, $content2],
             $results->toArray()
         );
     }

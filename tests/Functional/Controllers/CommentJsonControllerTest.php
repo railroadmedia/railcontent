@@ -158,6 +158,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
     public function test_update_inexistent_comment_response()
     {
+        $userId = $this->createAndLogInNewUser();
         $randomId = rand();
         $response = $this->call('PATCH', 'railcontent/comment/' . $randomId);
 
@@ -474,8 +475,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $decodedResponse = $response->decodeResponseJson();
 
         // assert the order of results
-        $this->assertEquals($decodedResponse['results'][0]['id'], $firstOrderedCommentId);
-        $this->assertEquals($decodedResponse['results'][1]['id'], $secondOrderedCommentId);
+        $this->assertEquals($decodedResponse['data'][0]['id'], $firstOrderedCommentId);
+        $this->assertEquals($decodedResponse['data'][1]['id'], $secondOrderedCommentId);
     }
 
     public function test_pull_comments_filtered_by_my_comments()
@@ -529,14 +530,14 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $decodedResponse = $response->decodeResponseJson();
 
         // assert results count
-        $this->assertEquals($decodedResponse['total_results'], 2);
+        $this->assertEquals($decodedResponse['meta']['totalResults'], 2);
 
         // assert results
-        $this->assertEquals($decodedResponse['results'][0]['id'], $firstComment['id']);
-        $this->assertEquals($decodedResponse['results'][0]['replies'][0]['id'], $secondComment['id']);
-        $this->assertEquals($decodedResponse['results'][1]['id'], $sixthComment['id']);
-        $this->assertEquals($decodedResponse['results'][1]['replies'][0]['id'], $seventhComment['id']);
-        $this->assertEquals($decodedResponse['results'][1]['replies'][1]['id'], $eighthComment['id']);
+        $this->assertEquals($decodedResponse['data'][0]['id'], $firstComment['id']);
+        $this->assertEquals($decodedResponse['data'][0]['replies'][0]['id'], $secondComment['id']);
+        $this->assertEquals($decodedResponse['data'][1]['id'], $sixthComment['id']);
+        $this->assertEquals($decodedResponse['data'][1]['replies'][0]['id'], $seventhComment['id']);
+        $this->assertEquals($decodedResponse['data'][1]['replies'][1]['id'], $eighthComment['id']);
     }
 
     public function test_pull_comments_filtered_by_content_type()
