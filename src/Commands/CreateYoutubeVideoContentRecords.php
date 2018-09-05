@@ -91,7 +91,7 @@ class CreateYoutubeVideoContentRecords extends Command
             $uploadsListId = $channel['contentDetails']['relatedPlaylists']['uploads'];
             $nextPageToken = '';
             $shouldEnd = 0;
-            $page = 1;
+            $page = 0;
             //only 50 video can be received in a call to Youtube API, so we make calls until complete
             do {
                 $playlistItemsResponse = $youtube->playlistItems->listPlaylistItems(
@@ -120,9 +120,10 @@ class CreateYoutubeVideoContentRecords extends Command
                 }
                 $nextPageToken = $playlistItemsResponse->getNextPageToken();
 
+                $page++;
+
                 if (is_null($nextPageToken) || $page == $maxPages) {
                     $shouldEnd = 1;
-                    $page++;
                 }
             } while ($shouldEnd == 0);
         }
