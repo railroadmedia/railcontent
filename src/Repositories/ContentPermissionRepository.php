@@ -50,6 +50,10 @@ class ContentPermissionRepository extends RepositoryBase
      */
     public function getByContentIdsOrTypes(array $contentIds, array $contentTypes)
     {
+        if (empty($contentIds) && empty($contentTypes)) {
+            return [];
+        }
+
         return $this->query()
             ->join(
                 ConfigService::$tablePermissions,

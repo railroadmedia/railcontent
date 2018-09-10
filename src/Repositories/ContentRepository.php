@@ -1338,7 +1338,7 @@ class ContentRepository extends RepositoryBase
     /**
      * @return ContentQueryBuilder
      */
-    protected function query()
+    public function query()
     {
         return (new ContentQueryBuilder(
             $this->connection(),

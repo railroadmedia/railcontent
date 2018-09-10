@@ -24,6 +24,10 @@ class ContentDatumRepository extends RepositoryBase
      */
     public function getByContentId($contentId)
     {
+        if (empty($contentId)) {
+            return [];
+        }
+        
         return $this->query()
             ->where('content_id', $contentId)
             ->orderBy('position', 'asc')
@@ -37,6 +41,10 @@ class ContentDatumRepository extends RepositoryBase
      */
     public function getByContentIds(array $contentIds)
     {
+        if (empty($contentIds)) {
+            return [];
+        }
+        
         return $this->query()
             ->whereIn('content_id', $contentIds)
             ->orderBy('position', 'asc')

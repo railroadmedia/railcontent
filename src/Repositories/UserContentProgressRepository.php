@@ -10,10 +10,12 @@ class UserContentProgressRepository extends RepositoryBase
 {
     use ByContentIdTrait;
 
+    public static $cache = [];
 
     public function query()
     {
-        return parent::connection()->table(ConfigService::$tableUserContentProgress);
+        return parent::connection()
+            ->table(ConfigService::$tableUserContentProgress);
     }
 
     /**
@@ -23,11 +25,20 @@ class UserContentProgressRepository extends RepositoryBase
      */
     public function getByUserIdAndWhereContentIdIn($userId, array $contentIds)
     {
-        return $this->query()
-            ->where('user_id', $userId)
-            ->whereIn('content_id', $contentIds)
-            ->get()
-            ->toArray();
+        $key = $userId . '+' . implode('_', $contentIds);
+
+        if (!key_exists($key, self::$cache)) {
+            self::$cache[$key] =
+                $this->query()
+                    ->where('user_id', $userId)
+                    ->whereIn('content_id', $contentIds)
+                    ->get()
+                    ->toArray();
+
+            return self::$cache[$key];
+        }
+
+        return self::$cache[$key];
     }
 
     /**
@@ -107,7 +118,7 @@ class UserContentProgressRepository extends RepositoryBase
                     $this->databaseManager->raw(
                         'COUNT(' . ConfigService::$tableUserContentProgress . '.id) as count'
                     ),
-                    'content_id'
+                    'content_id',
                 ]
             )
             ->whereIn(ConfigService::$tableUserContentProgress . '.content_id', $contentIds)
@@ -127,8 +138,7 @@ class UserContentProgressRepository extends RepositoryBase
             ->join(
                 ConfigService::$tableContent,
                 function (JoinClause $join) {
-                    $join
-                        ->on(
+                    $join->on(
                             ConfigService::$tableContent . '.id',
                             '=',
                             ConfigService::$tableUserContentProgress . '.content_id'
@@ -163,8 +173,7 @@ class UserContentProgressRepository extends RepositoryBase
             ->join(
                 ConfigService::$tableContent,
                 function (JoinClause $join) use ($types) {
-                    $join
-                        ->on(
+                    $join->on(
                             ConfigService::$tableContent . '.id',
                             '=',
                             ConfigService::$tableUserContentProgress . '.content_id'
@@ -198,31 +207,33 @@ class UserContentProgressRepository extends RepositoryBase
             );
         }
 
-        $query = $this->query()
-            ->select($select)
-            ->join(
-                ConfigService::$tableContent,
-                function (JoinClause $join) use ($type) {
-                    $join
-                        ->on(
-                            ConfigService::$tableContent . '.id',
-                            '=',
-                            ConfigService::$tableUserContentProgress . '.content_id'
-                        )
-                        ->where(ConfigService::$tableContent . '.type', '=', $type);
-                }
-            )
-            ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
-            ->where(ConfigService::$tableUserContentProgress . '.user_id', '=', $id);
+        $query =
+            $this->query()
+                ->select($select)
+                ->join(
+                    ConfigService::$tableContent,
+                    function (JoinClause $join) use ($type) {
+                        $join->on(
+                                ConfigService::$tableContent . '.id',
+                                '=',
+                                ConfigService::$tableUserContentProgress . '.content_id'
+                            )
+                            ->where(ConfigService::$tableContent . '.type', '=', $type);
+                    }
+                )
+                ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
+                ->where(ConfigService::$tableUserContentProgress . '.user_id', '=', $id);
 
         if (!is_null($state)) {
             $query = $query->where(ConfigService::$tableUserContentProgress . '.state', '=', $state);
         }
 
         if ($count) {
-            return $query->get()->first()['count'];
+            return $query->get()
+                ->first()['count'];
         }
 
-        return $query->get()->toArray();
+        return $query->get()
+            ->toArray();
     }
 }

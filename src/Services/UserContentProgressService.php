@@ -346,7 +346,7 @@ class UserContentProgressService
      */
     public function bubbleProgress($userId, $contentId)
     {
-        $content = $this->attachProgressToContents($userId, $this->contentRepository->getById($contentId));
+        $content = $this->attachProgressToContents($userId, ['id' => $contentId]);
 
         $allowedTypesForStarted = config('railcontent.allowed_types_for_bubble_progress')['started'];
         $allowedTypesForCompleted = config('railcontent.allowed_types_for_bubble_progress')['completed'];
@@ -370,10 +370,14 @@ class UserContentProgressService
             }
 
             // get siblings
-            $siblings = $this->attachProgressToContents(
+            $siblings = $parent['lessons'] ?? $this->attachProgressToContents(
                 $userId,
                 $this->contentService->getByParentId($parent['id'])
             );
+
+            if (is_array($siblings)) {
+                $siblings = new Collection($siblings);
+            }
 
             // complete parent content if necessary
             if ($content[self::STATE_COMPLETED]) {
@@ -418,12 +422,13 @@ class UserContentProgressService
             $progressOfSiblings = array_column($siblings, 'user_progress');
         }
 
-        if (empty($progressOfSiblings)) {
-            $siblings = $this->attachProgressToContents(
-                $userId,
-                $siblings
-            );
+        foreach ($siblings as $sibling) {
+            if (!empty($sibling['user_progress'])) {
+                $progressOfSiblings[] = $sibling['user_progress'];
+            }
+        }
 
+        if (empty($progressOfSiblings)) {
             if ($siblings instanceof Collection) {
                 $progressOfSiblings =
                     $siblings->pluck('user_progress')
