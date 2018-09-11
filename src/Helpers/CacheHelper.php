@@ -259,7 +259,11 @@ class CacheHelper
             $service = app()->make(UserPermissionsService::class);
             $permissions = $service->getUserPermissions(auth()->id(), true);
             if (!empty(array_filter(array_column($permissions, 'expiration_date'), 'strlen'))) {
-                return Carbon::parse(min(array_filter(array_column($permissions, 'expiration_date'), 'strlen')));
+                $date = Carbon::parse(min(array_filter(array_column($permissions, 'expiration_date'), 'strlen')));
+
+                if ($date->diffInMinutes() < ConfigService::$cacheTime) {
+                    return $date;
+                }
             }
         }
 
