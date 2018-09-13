@@ -297,13 +297,14 @@ class ContentServiceTest extends RailcontentTestCase
 
     }
 
-    public function _test_getWhereTypeInAndStatusAndPublishedOnOrdered()
+    public function test_getWhereTypeInAndStatusAndPublishedOnOrdered()
     {
         $content1 = $this->contentFactory->create(
             $this->faker->slug(),
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
             ContentService::STATUS_PUBLISHED
         );
+
         $content2 = $this->contentFactory->create(
             $this->faker->slug(),
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
@@ -317,10 +318,10 @@ class ContentServiceTest extends RailcontentTestCase
         )
             ->toArray();
 
-        $this->assertEquals([$content1['id'] => $content1], $results);
+        $this->assertEquals([$content1], $results);
     }
 
-    public function _test_getByChildIdWhereType()
+    public function test_getByChildIdWhereType()
     {
         $content = $this->contentFactory->create(
             $this->faker->slug(),
@@ -338,10 +339,10 @@ class ContentServiceTest extends RailcontentTestCase
             $this->classBeingTested->getByChildIdsWhereType([$children['id']], $content['type'])
                 ->toArray();
 
-        $this->assertEquals([$content['id'] => $content], $results);
+        $this->assertEquals([$content], $results);
     }
 
-    public function _test_entireCacheNotFlushed()
+    public function test_entireCacheNotFlushed()
     {
         $user = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
@@ -364,7 +365,7 @@ class ContentServiceTest extends RailcontentTestCase
                 ->get('do_not_delete')
         );
         $this->assertEquals(
-            3,
+            2,
             count(
                 Cache::store(ConfigService::$cacheDriver)
                     ->getRedis()
@@ -380,7 +381,7 @@ class ContentServiceTest extends RailcontentTestCase
                 ->get('do_not_delete')
         );
         $this->assertEquals(
-            1,
+            2,
             count(
                 Cache::store(ConfigService::$cacheDriver)
                     ->getRedis()
@@ -417,7 +418,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals(1, count($results));
     }
 
-    public function _test_getBySlugAndType()
+    public function test_getBySlugAndType()
     {
         $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
         $slug = $this->faker->slug();
@@ -429,7 +430,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals(1, count($results));
     }
 
-    public function _test_getByUserIdTypeSlug()
+    public function test_getByUserIdTypeSlug()
     {
         $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
         $slug = $this->faker->slug();
@@ -449,7 +450,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals(1, count($results));
     }
 
-    public function _test_getPaginatedByTypeUserProgressState()
+    public function test_getPaginatedByTypeUserProgressState()
     {
         $type = 'song';
         $userId = $this->faker->numberBetween();
@@ -479,7 +480,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals(2, count($results));
     }
 
-    public function _test_getByContentFieldValuesForTypes()
+    public function test_getByContentFieldValuesForTypes()
     {
         $type = 'vimeo-video';
         $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
@@ -491,7 +492,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals(1, count($results));
     }
 
-    public function _test_countByTypesUserProgressState()
+    public function test_countByTypesUserProgressState()
     {
         $type = 'song';
         $userId = $this->faker->numberBetween();

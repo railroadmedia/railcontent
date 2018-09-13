@@ -3,9 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
-use Illuminate\Cache\RedisStore;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -124,30 +122,13 @@ class ContentService
     {
         $hash = 'contents_by_id_' . CacheHelper::getKey($id);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->connection()
-                ->hget(CacheHelper::getUserSpecificHashedKey(), $hash);
-        if (!$results) {
-            Cache::store(ConfigService::$cacheDriver)
-                ->connection()
-                ->hmset(
-                    CacheHelper::getUserSpecificHashedKey(),
-                    $hash,
-                    \GuzzleHttp\json_encode($this->contentRepository->getById($id))
-                );
-            $this->saveCacheResults(
-                CacheHelper::getUserSpecificHashedKey() . ' ' . $hash,
-                [$id]
-            );
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-            $results =
-                Cache::store(ConfigService::$cacheDriver)
-                    ->connection()
-                    ->hget(CacheHelper::getUserSpecificHashedKey(), $hash);
+        if (!$results) {
+            $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getById($id), [$id]);
         }
 
-        return Decorator::decorate(\GuzzleHttp\json_decode($results, true), 'content');
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -159,40 +140,14 @@ class ContentService
     public function getByIds($ids)
     {
         $hash = 'contents_by_ids_' . CacheHelper::getKey(...$ids);
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->connection()
-                ->hget(CacheHelper::getUserSpecificHashedKey(), $hash);
-        if (!$results) {
-            Cache::store(ConfigService::$cacheDriver)
-                ->connection()
-                ->hmset(
-                    CacheHelper::getUserSpecificHashedKey(),
-                    $hash,
-                    \GuzzleHttp\json_encode($this->contentRepository->getByIds($ids))
-                );
-            $this->saveCacheResults(
-                CacheHelper::getUserSpecificHashedKey() . ' ' . $hash,
-                $ids
-            );
-            $results =
-                Cache::store(ConfigService::$cacheDriver)
-                    ->connection()
-                    ->hget(CacheHelper::getUserSpecificHashedKey(), $hash);
-        }
-        //        $results =
-        //            Cache::store(ConfigService::$cacheDriver)
-        //                ->remember(
-        //                    $hash,
-        //                    CacheHelper::getExpirationCacheTime(),
-        //                    function () use ($ids, $hash) {
-        //
-        //                        return $this->contentRepository->getByIds($ids);
-        //                    }
-        //                );
-        //        $this->saveCacheResults($hash, $ids);
 
-        return Decorator::decorate(\GuzzleHttp\json_decode($results, true), 'content');
+        $results = CacheHelper::getCachedResultsForKey($hash);
+
+        if (!$results) {
+            $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getByIds($ids));
+        }
+
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -202,42 +157,14 @@ class ContentService
     public function getAllByType($type)
     {
         $hash = 'contents_by_type_' . $type . '_' . CacheHelper::getKey($type);
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->connection()
-                ->hget(CacheHelper::getUserSpecificHashedKey(), $hash);
-        if (!$results) {
-            $dbResults = $this->contentRepository->getByType($type);
-            Cache::store(ConfigService::$cacheDriver)
-                ->connection()
-                ->hmset(
-                    CacheHelper::getUserSpecificHashedKey(),
-                    $hash,
-                    \GuzzleHttp\json_encode($dbResults)
-                );
-            $this->saveCacheResults(
-                CacheHelper::getUserSpecificHashedKey() . ' ' . $hash,
-                array_pluck($dbResults, 'id')
-            );
-            $results =
-                Cache::store(ConfigService::$cacheDriver)
-                    ->connection()
-                    ->hget(CacheHelper::getUserSpecificHashedKey(), $hash);
-        }
-        //        $results =
-        //            Cache::store(ConfigService::$cacheDriver)
-        //                ->remember(
-        //                    $hash,
-        //                    CacheHelper::getExpirationCacheTime(),
-        //                    function () use ($type, $hash) {
-        //                        $results = $this->contentRepository->getByType($type);
-        //                        $this->saveCacheResults($hash, array_keys($results));
-        //
-        //                        return $results;
-        //                    }
-        //                );
 
-        return Decorator::decorate(\GuzzleHttp\json_decode($results, true), 'content');
+        $results = CacheHelper::getCachedResultsForKey($hash);
+
+        if (!$results) {
+            $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getByType($type));
+        }
+
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -269,58 +196,20 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $dbResults = $this->contentRepository->getWhereTypeInAndStatusAndField(
-                $types,
-                $status,
-                $fieldKey,
-                $fieldValue,
-                $fieldType,
-                $fieldComparisonOperator
+            $results = CacheHelper::saveUserCache(
+                $hash,
+                $this->contentRepository->getWhereTypeInAndStatusAndField(
+                    $types,
+                    $status,
+                    $fieldKey,
+                    $fieldValue,
+                    $fieldType,
+                    $fieldComparisonOperator
+                )
             );
-            Cache::store(ConfigService::$cacheDriver)
-                ->connection()
-                ->hmset(
-                    CacheHelper::getUserSpecificHashedKey(),
-                    $hash,
-                    \GuzzleHttp\json_encode($dbResults)
-                );
-            $this->saveCacheResults(
-                CacheHelper::getUserSpecificHashedKey() . ' ' . $hash,
-                array_pluck($dbResults, 'id')
-            );
-
-            $results = CacheHelper::getCachedResultsForKey($hash);
         }
 
-        //        $results =
-        //            Cache::store(ConfigService::$cacheDriver)
-        //                ->remember(
-        //                    $hash,
-        //                    CacheHelper::getExpirationCacheTime(),
-        //                    function () use (
-        //                        $hash,
-        //                        $types,
-        //                        $status,
-        //                        $fieldKey,
-        //                        $fieldValue,
-        //                        $fieldType,
-        //                        $fieldComparisonOperator
-        //                    ) {
-        //                        $results = $this->contentRepository->getWhereTypeInAndStatusAndField(
-        //                            $types,
-        //                            $status,
-        //                            $fieldKey,
-        //                            $fieldValue,
-        //                            $fieldType,
-        //                            $fieldComparisonOperator
-        //                        );
-        //                        $this->saveCacheResults($hash, array_keys($results));
-        //
-        //                        return $results;
-        //                    }
-        //                );
-
-        return Decorator::decorate(\GuzzleHttp\json_decode($results, true), 'content');
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -361,21 +250,13 @@ class ContentService
     public function getBySlugAndType($slug, $type)
     {
         $hash = 'contents_by_slug_type_' . $type . '_' . CacheHelper::getKey($slug, $type);
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($hash, $slug, $type) {
-                        $results = $this->contentRepository->getBySlugAndType($slug, $type);
-                        $this->saveCacheResults($hash, array_keys($results));
+        if (!$results) {
+            $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getBySlugAndType($slug, $type));
+        }
 
-                        return $results;
-                    }
-                );
-
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -387,21 +268,14 @@ class ContentService
     public function getByUserIdTypeSlug($userId, $type, $slug)
     {
         $hash = 'contents_by_user_slug_type_' . $type . '_' . CacheHelper::getKey($userId, $type, $slug);
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($hash, $userId, $slug, $type) {
-                        $results = $this->contentRepository->getByUserIdTypeSlug($userId, $type, $slug);
-                        $this->saveCacheResults($hash, array_keys($results));
+        if (!$results) {
+            $results =
+                CacheHelper::saveUserCache($hash, $this->contentRepository->getByUserIdTypeSlug($userId, $type, $slug));
+        }
 
-                        return $results;
-                    }
-                );
-
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -413,22 +287,14 @@ class ContentService
     public function getByParentId($parentId, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
         $hash = 'contents_by_parent_id_' . CacheHelper::getKey($parentId, $orderBy, $orderByDirection);
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($hash, $parentId, $orderBy, $orderByDirection) {
-                        $results = $this->contentRepository->getByParentId($parentId, $orderBy, $orderByDirection);
-                        $this->saveCacheResults($hash, array_merge(array_keys($results), [$parentId]));
+        if (!$results) {
+            $resultsDB = $this->contentRepository->getByParentId($parentId, $orderBy, $orderByDirection);
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$parentId]));
+        }
 
-                        return $results;
-                    }
-                );
-
-        return Decorator::decorate($results, 'content');
-
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -448,28 +314,20 @@ class ContentService
             'contents_by_parent_id_paginated_' .
             CacheHelper::getKey($parentId, $limit, $skip, $orderBy, $orderByDirection);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($hash, $parentId, $limit, $skip, $orderBy, $orderByDirection) {
-                        $results = $this->contentRepository->getByParentIdPaginated(
-                            $parentId,
-                            $limit,
-                            $skip,
-                            $orderBy,
-                            $orderByDirection
-                        );
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-                        $this->saveCacheResults($hash, array_merge(array_keys($results), [$parentId]));
+        if (!$results) {
+            $resultsDB = $this->contentRepository->getByParentIdPaginated(
+                $parentId,
+                $limit,
+                $skip,
+                $orderBy,
+                $orderByDirection
+            );
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$parentId]));
+        }
 
-                        return $results;
-                    }
-                );
-
-        return Decorator::decorate($results, 'content');
-
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -486,27 +344,19 @@ class ContentService
         $orderByDirection = 'asc'
     ) {
         $hash = 'contents_by_parent_id_type_' . CacheHelper::getKey($parentId, $types, $orderBy, $orderByDirection);
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($hash, $parentId, $types, $orderBy, $orderByDirection) {
-                        $results = $this->contentRepository->getByParentIdWhereTypeIn(
-                            $parentId,
-                            $types,
-                            $orderBy,
-                            $orderByDirection
-                        );
+        if (!$results) {
+            $resultsDB = $this->contentRepository->getByParentIdWhereTypeIn(
+                $parentId,
+                $types,
+                $orderBy,
+                $orderByDirection
+            );
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$parentId]));
+        }
 
-                        $this->saveCacheResults($hash, array_merge(array_keys($results), [$parentId]));
-
-                        return $results;
-                    }
-                );
-
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -532,37 +382,21 @@ class ContentService
                 $orderBy,
                 $orderByDirection
             );
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use (
-                        $hash,
-                        $parentId,
-                        $types,
-                        $limit,
-                        $skip,
-                        $orderBy,
-                        $orderByDirection
-                    ) {
-                        $results = $this->contentRepository->getByParentIdWhereTypeInPaginated(
-                            $parentId,
-                            $types,
-                            $limit,
-                            $skip,
-                            $orderBy,
-                            $orderByDirection
-                        );
+        if (!$results) {
+            $resultsDB = $this->contentRepository->getByParentIdWhereTypeInPaginated(
+                $parentId,
+                $types,
+                $limit,
+                $skip,
+                $orderBy,
+                $orderByDirection
+            );
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$parentId]));
+        }
 
-                        $this->saveCacheResults($hash, array_merge(array_keys($results), [$parentId]));
-
-                        return $results;
-                    }
-                );
-
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -589,21 +423,14 @@ class ContentService
     public function getByParentIds(array $parentIds, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
         $hash = 'contents_by_parent_ids_' . CacheHelper::getKey($parentIds, $orderBy, $orderByDirection);
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($hash, $parentIds, $orderBy, $orderByDirection) {
-                        $results = $this->contentRepository->getByParentIds($parentIds, $orderBy, $orderByDirection);
-                        $this->saveCacheResults($hash, array_merge(array_keys($results), $parentIds));
+        if (!$results) {
+            $resultsDB = $this->contentRepository->getByParentIds($parentIds, $orderBy, $orderByDirection);
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), $parentIds));
+        }
 
-                        return $results;
-                    }
-                );
-
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -614,21 +441,14 @@ class ContentService
     public function getByChildIdWhereType($childId, $type)
     {
         $hash = 'contents_by_child_id_and_type_' . $type . '_' . CacheHelper::getKey($childId, $type);
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($hash, $childId, $type) {
-                        $results = $this->contentRepository->getByChildIdWhereType($childId, $type);
-                        $this->saveCacheResults($hash, array_merge(array_keys($results), [$childId]));
+        if (!$results) {
+            $resultsDB = $this->contentRepository->getByChildIdWhereType($childId, $type);
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$childId]));
+        }
 
-                        return $results;
-                    }
-                );
-
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -639,21 +459,14 @@ class ContentService
     public function getByChildIdsWhereType(array $childIds, $type)
     {
         $hash = 'contents_by_child_ids_and_type_' . $type . '_' . CacheHelper::getKey($childIds, $type);
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($hash, $childIds, $type) {
-                        $results = $this->contentRepository->getByChildIdsWhereType($childIds, $type);
-                        $this->saveCacheResults($hash, array_merge(array_keys($results), $childIds));
+        if (!$results) {
+            $resultsDB = $this->contentRepository->getByChildIdsWhereType($childIds, $type);
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), $childIds));
+        }
 
-                        return $results;
-                    }
-                );
-
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -664,21 +477,14 @@ class ContentService
     public function getByChildIdWhereParentTypeIn($childId, array $types)
     {
         $hash = 'contents_by_child_ids_and_parent_types_' . CacheHelper::getKey($childId, $types);
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($hash, $childId, $types) {
-                        $results = $this->contentRepository->getByChildIdWhereParentTypeIn($childId, $types);
-                        $this->saveCacheResults($hash, array_merge(array_keys($results), [$childId]));
+        if (!$results) {
+            $resultsDB = $this->contentRepository->getByChildIdWhereParentTypeIn($childId, $types);
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$childId]));
+        }
 
-                        return $results;
-                    }
-                );
-
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -698,27 +504,22 @@ class ContentService
                 $limit,
                 $skip
             );
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($hash, $type, $userId, $state, $limit, $skip) {
-                        $results = $this->contentRepository->getPaginatedByTypeUserProgressState(
-                            $type,
-                            $userId,
-                            $state,
-                            $limit,
-                            $skip
-                        );
-                        $this->saveCacheResults($hash, array_keys($results));
+        if (!$results) {
+            $results = CacheHelper::saveUserCache(
+                $hash,
+                $this->contentRepository->getPaginatedByTypeUserProgressState(
+                    $type,
+                    $userId,
+                    $state,
+                    $limit,
+                    $skip
+                )
+            );
+        }
 
-                        return $results;
-                    }
-                );
-
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -743,27 +544,22 @@ class ContentService
                 $limit,
                 $skip
             );
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($hash, $types, $userId, $state, $limit, $skip) {
-                        $results = $this->contentRepository->getPaginatedByTypesUserProgressState(
-                            $types,
-                            $userId,
-                            $state,
-                            $limit,
-                            $skip
-                        );
-                        $this->saveCacheResults($hash, array_keys($results));
+        if (!$results) {
+            $results = CacheHelper::saveUserCache(
+                $hash,
+                $this->contentRepository->getPaginatedByTypesUserProgressState(
+                    $types,
+                    $userId,
+                    $state,
+                    $limit,
+                    $skip
+                )
+            );
+        }
 
-                        return $results;
-                    }
-                );
-
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -788,27 +584,22 @@ class ContentService
                 $limit,
                 $skip
             );
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($hash, $types, $userId, $state, $limit, $skip) {
-                        $results = $this->contentRepository->getPaginatedByTypesRecentUserProgressState(
-                            $types,
-                            $userId,
-                            $state,
-                            $limit,
-                            $skip
-                        );
-                        $this->saveCacheResults($hash, array_keys($results));
+        if (!$results) {
+            $results = CacheHelper::saveUserCache(
+                $hash,
+                $this->contentRepository->getPaginatedByTypesRecentUserProgressState(
+                    $types,
+                    $userId,
+                    $state,
+                    $limit,
+                    $skip
+                )
+            );
+        }
 
-                        return $results;
-                    }
-                );
-
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate(json_decode($results, true), 'content');
     }
 
     /**
@@ -865,40 +656,27 @@ class ContentService
             $orderColumn,
             $orderDirection
         );
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use (
-                        $hash,
-                        $type,
-                        $columnName,
-                        $columnValue,
-                        $siblingPairLimit,
-                        $orderColumn,
-                        $orderDirection
-                    ) {
-                        $results = $this->contentRepository->getTypeNeighbouringSiblings(
-                            $type,
-                            $columnName,
-                            $columnValue,
-                            $siblingPairLimit,
-                            $orderColumn,
-                            $orderDirection
-                        );
+        if (!$results) {
+            $results = CacheHelper::saveUserCache(
+                $hash,
+                $this->contentRepository->getTypeNeighbouringSiblings(
+                    $type,
+                    $columnName,
+                    $columnValue,
+                    $siblingPairLimit,
+                    $orderColumn,
+                    $orderDirection
+                )
+            );
+        }
 
-                        $this->saveCacheResults($hash, array_keys($results));
+        $return = json_decode($results);
+        $return['before'] = Decorator::decorate($return['before'], 'content');
+        $return['after'] = Decorator::decorate($return['after'], 'content');
 
-                        return $results;
-                    }
-                );
-
-        $results['before'] = Decorator::decorate($results['before'], 'content');
-        $results['after'] = Decorator::decorate($results['after'], 'content');
-
-        return $results;
+        return $return;
     }
 
     /**
@@ -1127,7 +905,7 @@ class ContentService
 
         event(new ContentUpdated($id));
 
-        CacheHelper::deleteCache('content_list_' . $id);
+        CacheHelper::deleteCache('content_' . $id);
 
         //delete all the search results from cache
         CacheHelper::deleteAllCachedSearchResults('contents_results_');
@@ -1152,7 +930,7 @@ class ContentService
         }
         event(new ContentDeleted($id));
 
-        CacheHelper::deleteCache('content_list_' . $id);
+        CacheHelper::deleteCache('content_' . $id);
 
         return $this->contentRepository->delete($id);
     }

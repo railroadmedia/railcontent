@@ -110,17 +110,6 @@ class CacheHelper
                         $key
                     );
             }
-//            if (auth()->check()) {
-//                Cache::store(ConfigService::$cacheDriver)
-//                    ->connection()
-//                    ->hmset(
-//                        Cache::store(ConfigService::$cacheDriver)
-//                            ->getPrefix() . 'keys_for_userId_77' . auth()->id(),
-//                        Cache::store(ConfigService::$cacheDriver)
-//                            ->getPrefix() . $key,
-//                        'cache content pentru key'
-//                    );
-//            }
         }
     }
 
@@ -190,11 +179,6 @@ class CacheHelper
                 100
             );
             if (count($keys) > 0) {
-                Redis::srem(
-                    Cache::store(ConfigService::$cacheDriver)
-                        ->getPrefix() . $key,
-                    $keys
-                );
                 self::deleteCacheKeys($keys);
             }
         } while ($cursor);
@@ -309,6 +293,27 @@ class CacheHelper
        return  Cache::store(ConfigService::$cacheDriver)
            ->connection()
            ->hget(self::getUserSpecificHashedKey(), $hash);
+    }
+
+    public static function saveUserCache($hash, $data, $contentIds = [])
+    {
+        $userKey = self::getUserSpecificHashedKey();
+        Cache::store(ConfigService::$cacheDriver)
+            ->connection()
+            ->hset(
+                $userKey,
+                $hash,
+                json_encode($data)
+            );
+        Cache::store(ConfigService::$cacheDriver)
+            ->connection()->expire($userKey, self::getExpirationCacheTime());
+        if(empty($contentIds)){
+            $contentIds = (array_pluck($data,'id'));
+        }
+
+        self::addLists($userKey . ' ' . $hash, $contentIds);
+
+        return self::getCachedResultsForKey($hash);
     }
 
 }
