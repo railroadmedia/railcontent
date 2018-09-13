@@ -106,21 +106,21 @@ class CacheHelper
                     ->connection()
                     ->sadd(
                         Cache::store(ConfigService::$cacheDriver)
-                            ->getPrefix() . 'content_list_' . $element,
-                        Cache::store(ConfigService::$cacheDriver)
-                            ->getPrefix() . $key
+                            ->getPrefix() . 'content_' . $element,
+                        $key
                     );
             }
-            if (auth()->check()) {
-                Cache::store(ConfigService::$cacheDriver)
-                    ->connection()
-                    ->sadd(
-                        Cache::store(ConfigService::$cacheDriver)
-                            ->getPrefix() . 'keys_for_userId_' . auth()->id(),
-                        Cache::store(ConfigService::$cacheDriver)
-                            ->getPrefix() . $key
-                    );
-            }
+//            if (auth()->check()) {
+//                Cache::store(ConfigService::$cacheDriver)
+//                    ->connection()
+//                    ->hmset(
+//                        Cache::store(ConfigService::$cacheDriver)
+//                            ->getPrefix() . 'keys_for_userId_77' . auth()->id(),
+//                        Cache::store(ConfigService::$cacheDriver)
+//                            ->getPrefix() . $key,
+//                        'cache content pentru key'
+//                    );
+//            }
         }
     }
 
@@ -290,4 +290,25 @@ class CacheHelper
 
         return true;
     }
+
+    public static function getUserSpecificHashedKey()
+    {
+        $key = Cache::store(ConfigService::$cacheDriver)
+                ->getPrefix() .'user_';
+
+
+        if (auth()->check()) {
+            $key .= auth()->user()->id;
+        }
+
+        return $key;
+    }
+
+    public static function getCachedResultsForKey($hash)
+    {
+       return  Cache::store(ConfigService::$cacheDriver)
+           ->connection()
+           ->hget(self::getUserSpecificHashedKey(), $hash);
+    }
+
 }

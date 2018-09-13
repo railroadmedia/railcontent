@@ -3,7 +3,9 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Cache\RedisStore;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -124,19 +126,28 @@ class ContentService
 
         $results =
             Cache::store(ConfigService::$cacheDriver)
-                ->remember(
+                ->connection()
+                ->hget(CacheHelper::getUserSpecificHashedKey(), $hash);
+        if (!$results) {
+            Cache::store(ConfigService::$cacheDriver)
+                ->connection()
+                ->hmset(
+                    CacheHelper::getUserSpecificHashedKey(),
                     $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($id, $hash) {
-
-                        $results = $this->contentRepository->getById($id);
-                        $this->saveCacheResults($hash, [$id]);
-
-                        return $results;
-                    }
+                    \GuzzleHttp\json_encode($this->contentRepository->getById($id))
                 );
+            $this->saveCacheResults(
+                CacheHelper::getUserSpecificHashedKey() . ' ' . $hash,
+                [$id]
+            );
 
-        return Decorator::decorate($results, 'content');
+            $results =
+                Cache::store(ConfigService::$cacheDriver)
+                    ->connection()
+                    ->hget(CacheHelper::getUserSpecificHashedKey(), $hash);
+        }
+
+        return Decorator::decorate(\GuzzleHttp\json_decode($results, true), 'content');
     }
 
     /**
@@ -148,20 +159,40 @@ class ContentService
     public function getByIds($ids)
     {
         $hash = 'contents_by_ids_' . CacheHelper::getKey(...$ids);
-
         $results =
             Cache::store(ConfigService::$cacheDriver)
-                ->remember(
+                ->connection()
+                ->hget(CacheHelper::getUserSpecificHashedKey(), $hash);
+        if (!$results) {
+            Cache::store(ConfigService::$cacheDriver)
+                ->connection()
+                ->hmset(
+                    CacheHelper::getUserSpecificHashedKey(),
                     $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($ids, $hash) {
-
-                        return $this->contentRepository->getByIds($ids);
-                    }
+                    \GuzzleHttp\json_encode($this->contentRepository->getByIds($ids))
                 );
-        $this->saveCacheResults($hash, $ids);
+            $this->saveCacheResults(
+                CacheHelper::getUserSpecificHashedKey() . ' ' . $hash,
+                $ids
+            );
+            $results =
+                Cache::store(ConfigService::$cacheDriver)
+                    ->connection()
+                    ->hget(CacheHelper::getUserSpecificHashedKey(), $hash);
+        }
+        //        $results =
+        //            Cache::store(ConfigService::$cacheDriver)
+        //                ->remember(
+        //                    $hash,
+        //                    CacheHelper::getExpirationCacheTime(),
+        //                    function () use ($ids, $hash) {
+        //
+        //                        return $this->contentRepository->getByIds($ids);
+        //                    }
+        //                );
+        //        $this->saveCacheResults($hash, $ids);
 
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate(\GuzzleHttp\json_decode($results, true), 'content');
     }
 
     /**
@@ -171,21 +202,42 @@ class ContentService
     public function getAllByType($type)
     {
         $hash = 'contents_by_type_' . $type . '_' . CacheHelper::getKey($type);
-
         $results =
             Cache::store(ConfigService::$cacheDriver)
-                ->remember(
+                ->connection()
+                ->hget(CacheHelper::getUserSpecificHashedKey(), $hash);
+        if (!$results) {
+            $dbResults = $this->contentRepository->getByType($type);
+            Cache::store(ConfigService::$cacheDriver)
+                ->connection()
+                ->hmset(
+                    CacheHelper::getUserSpecificHashedKey(),
                     $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($type, $hash) {
-                        $results = $this->contentRepository->getByType($type);
-                        $this->saveCacheResults($hash, array_keys($results));
-
-                        return $results;
-                    }
+                    \GuzzleHttp\json_encode($dbResults)
                 );
+            $this->saveCacheResults(
+                CacheHelper::getUserSpecificHashedKey() . ' ' . $hash,
+                array_pluck($dbResults, 'id')
+            );
+            $results =
+                Cache::store(ConfigService::$cacheDriver)
+                    ->connection()
+                    ->hget(CacheHelper::getUserSpecificHashedKey(), $hash);
+        }
+        //        $results =
+        //            Cache::store(ConfigService::$cacheDriver)
+        //                ->remember(
+        //                    $hash,
+        //                    CacheHelper::getExpirationCacheTime(),
+        //                    function () use ($type, $hash) {
+        //                        $results = $this->contentRepository->getByType($type);
+        //                        $this->saveCacheResults($hash, array_keys($results));
+        //
+        //                        return $results;
+        //                    }
+        //                );
 
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate(\GuzzleHttp\json_decode($results, true), 'content');
     }
 
     /**
@@ -214,35 +266,61 @@ class ContentService
                 $fieldComparisonOperator
             );
 
-        $results =
+        $results = CacheHelper::getCachedResultsForKey($hash);
+
+        if (!$results) {
+            $dbResults = $this->contentRepository->getWhereTypeInAndStatusAndField(
+                $types,
+                $status,
+                $fieldKey,
+                $fieldValue,
+                $fieldType,
+                $fieldComparisonOperator
+            );
             Cache::store(ConfigService::$cacheDriver)
-                ->remember(
+                ->connection()
+                ->hmset(
+                    CacheHelper::getUserSpecificHashedKey(),
                     $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use (
-                        $hash,
-                        $types,
-                        $status,
-                        $fieldKey,
-                        $fieldValue,
-                        $fieldType,
-                        $fieldComparisonOperator
-                    ) {
-                        $results = $this->contentRepository->getWhereTypeInAndStatusAndField(
-                            $types,
-                            $status,
-                            $fieldKey,
-                            $fieldValue,
-                            $fieldType,
-                            $fieldComparisonOperator
-                        );
-                        $this->saveCacheResults($hash, array_keys($results));
-
-                        return $results;
-                    }
+                    \GuzzleHttp\json_encode($dbResults)
                 );
+            $this->saveCacheResults(
+                CacheHelper::getUserSpecificHashedKey() . ' ' . $hash,
+                array_pluck($dbResults, 'id')
+            );
 
-        return Decorator::decorate($results, 'content');
+            $results = CacheHelper::getCachedResultsForKey($hash);
+        }
+
+        //        $results =
+        //            Cache::store(ConfigService::$cacheDriver)
+        //                ->remember(
+        //                    $hash,
+        //                    CacheHelper::getExpirationCacheTime(),
+        //                    function () use (
+        //                        $hash,
+        //                        $types,
+        //                        $status,
+        //                        $fieldKey,
+        //                        $fieldValue,
+        //                        $fieldType,
+        //                        $fieldComparisonOperator
+        //                    ) {
+        //                        $results = $this->contentRepository->getWhereTypeInAndStatusAndField(
+        //                            $types,
+        //                            $status,
+        //                            $fieldKey,
+        //                            $fieldValue,
+        //                            $fieldType,
+        //                            $fieldComparisonOperator
+        //                        );
+        //                        $this->saveCacheResults($hash, array_keys($results));
+        //
+        //                        return $results;
+        //                    }
+        //                );
+
+        return Decorator::decorate(\GuzzleHttp\json_decode($results, true), 'content');
     }
 
     /**
@@ -1016,17 +1094,17 @@ class ContentService
             );
 
             //delete all the results related to the user's progress
-            CacheHelper::deleteAllCachedSearchResults('user_');
+            //  CacheHelper::deleteAllCachedSearchResults('user_');
 
         }
         event(new ContentCreated($id));
 
         //delete all the search results from cache
-        CacheHelper::deleteAllCachedSearchResults('contents_results_');
+        // CacheHelper::deleteAllCachedSearchResults('contents_results_');
 
-        CacheHelper::deleteAllCachedSearchResults('_type_' . $type);
+        // CacheHelper::deleteAllCachedSearchResults('_type_' . $type);
 
-        CacheHelper::deleteAllCachedSearchResults('types');
+        // CacheHelper::deleteAllCachedSearchResults('types');
 
         return $this->getById($id);
     }

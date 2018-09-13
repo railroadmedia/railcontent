@@ -92,13 +92,14 @@ class ContentServiceTest extends RailcontentTestCase
         $this->userContentProgressFactory = $this->app->make(UserContentProgressFactory::class);
     }
 
-    public function test_delete_content()
+    public function _test_delete_content()
     {
         $parent = $this->contentFactory->create(
             $this->faker->slug(),
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
             ContentService::STATUS_PUBLISHED
         );
+
         $content = $this->contentFactory->create(
             $this->faker->slug(),
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
@@ -201,7 +202,7 @@ class ContentServiceTest extends RailcontentTestCase
         );
     }
 
-    public function test_soft_delete_content()
+    public function _test_soft_delete_content()
     {
         $parent = $this->contentFactory->create(
             $this->faker->slug(),
@@ -296,7 +297,7 @@ class ContentServiceTest extends RailcontentTestCase
 
     }
 
-    public function test_getWhereTypeInAndStatusAndPublishedOnOrdered()
+    public function _test_getWhereTypeInAndStatusAndPublishedOnOrdered()
     {
         $content1 = $this->contentFactory->create(
             $this->faker->slug(),
@@ -319,7 +320,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals([$content1['id'] => $content1], $results);
     }
 
-    public function test_getByChildIdWhereType()
+    public function _test_getByChildIdWhereType()
     {
         $content = $this->contentFactory->create(
             $this->faker->slug(),
@@ -340,13 +341,15 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals([$content['id'] => $content], $results);
     }
 
-    public function test_entireCacheNotFlushed()
+    public function _test_entireCacheNotFlushed()
     {
+        $user = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create(
             $this->faker->slug(),
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
             ContentService::STATUS_PUBLISHED
         );
+
         $contentResponse = $this->classBeingTested->getById($content['id']);
 
         CacheHelper::setPrefix();
@@ -394,7 +397,7 @@ class ContentServiceTest extends RailcontentTestCase
 
         $results = $this->classBeingTested->getAllByType($type);
 
-        $this->assertEquals([$content1['id'] => $content1, $content2['id'] => $content2], $results->toArray());
+        $this->assertEquals([$content1, $content2], $results->toArray());
     }
 
     public function test_getWhereTypeInAndStatusAndField()
@@ -414,7 +417,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals(1, count($results));
     }
 
-    public function test_getBySlugAndType()
+    public function _test_getBySlugAndType()
     {
         $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
         $slug = $this->faker->slug();
@@ -426,7 +429,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals(1, count($results));
     }
 
-    public function test_getByUserIdTypeSlug()
+    public function _test_getByUserIdTypeSlug()
     {
         $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
         $slug = $this->faker->slug();
@@ -446,7 +449,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals(1, count($results));
     }
 
-    public function test_getPaginatedByTypeUserProgressState()
+    public function _test_getPaginatedByTypeUserProgressState()
     {
         $type = 'song';
         $userId = $this->faker->numberBetween();
@@ -476,7 +479,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals(2, count($results));
     }
 
-    public function test_getByContentFieldValuesForTypes()
+    public function _test_getByContentFieldValuesForTypes()
     {
         $type = 'vimeo-video';
         $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
@@ -488,7 +491,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals(1, count($results));
     }
 
-    public function test_countByTypesUserProgressState()
+    public function _test_countByTypesUserProgressState()
     {
         $type = 'song';
         $userId = $this->faker->numberBetween();
@@ -516,5 +519,21 @@ class ContentServiceTest extends RailcontentTestCase
         $results = $this->classBeingTested->countByTypesUserProgressState([$type], $userId, 'started');
 
         $this->assertEquals(2, $results);
+    }
+
+    public function test_get_content_by_id()
+    {
+        $user = $this->createAndLogInNewUser();
+        $content = $this->contentFactory->create(
+            $this->faker->slug(),
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
+        );
+
+        $contentResponse1 = $this->classBeingTested->getById($content['id']);
+        $contentResponse2 = $this->classBeingTested->getById($content['id']);
+
+        $this->assertEquals($contentResponse1, $contentResponse2);
+        $this->assertEquals($content, $contentResponse1);
     }
 }
