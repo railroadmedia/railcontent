@@ -364,8 +364,9 @@ class ContentServiceTest extends RailcontentTestCase
             Cache::store(ConfigService::$cacheDriver)
                 ->get('do_not_delete')
         );
+
         $this->assertEquals(
-            2,
+            4,
             count(
                 Cache::store(ConfigService::$cacheDriver)
                     ->getRedis()

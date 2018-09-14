@@ -138,12 +138,12 @@ class ContentFieldService
         event(new ContentFieldCreated($contentId));
 
         //delete cache associated with the content id
-        CacheHelper::deleteCache('content_list_' . $contentId);
+        CacheHelper::deleteCache('content_' . $contentId);
 
         //delete search cache for pull methods that use type as parameter
-        CacheHelper::deleteAllCachedSearchResults('types');
+        //CacheHelper::deleteCache('content_type_' . $content['type']);
 
-        CacheHelper::deleteAllCachedSearchResults('contents_results_');
+       // CacheHelper::deleteAllCachedSearchResults('contents_results_');
 
         return $this->get($id);
     }
@@ -172,12 +172,12 @@ class ContentFieldService
         event(new ContentFieldUpdated($field['content_id']));
 
         //delete cache for associated content id
-        CacheHelper::deleteCache('content_list_' . $field['content_id']);
+        CacheHelper::deleteCache('content_' . $field['content_id']);
 
         //delete search cache for pull methods that use type as parameter
-        CacheHelper::deleteAllCachedSearchResults('types');
+        //CacheHelper::deleteAllCachedSearchResults('types');
 
-        CacheHelper::deleteAllCachedSearchResults('contents_results_');
+        //CacheHelper::deleteAllCachedSearchResults('contents_results_');
 
         return $this->get($id);
     }
@@ -203,12 +203,12 @@ class ContentFieldService
         event(new ContentFieldDeleted($field['content_id']));
 
         //delete cache for associated content id
-        CacheHelper::deleteCache('content_list_' . $field['content_id']);
+        CacheHelper::deleteCache('content_' . $field['content_id']);
 
         //delete search cache for pull methods that use type as parameter
-        CacheHelper::deleteAllCachedSearchResults('types');
+        //CacheHelper::deleteAllCachedSearchResults('types');
 
-        CacheHelper::deleteAllCachedSearchResults('contents_results_');
+       // CacheHelper::deleteAllCachedSearchResults('contents_results_');
 
         return $deleted;
     }

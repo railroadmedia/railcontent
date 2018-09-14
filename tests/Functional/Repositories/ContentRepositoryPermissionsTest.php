@@ -55,7 +55,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
     protected function tearDown()
     {
-        Cache::store('redis')->flush();
+       // Cache::store('redis')->flush();
     }
 
     public function test_get_by_id_is_protected_by_single()
@@ -116,7 +116,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
         $userPermission = $this->userPermissionsRepository->create([
             'user_id' => $userId,
-            'permissions_id' => $permission['id'],
+            'permission_id' => $permission['id'],
             'start_date' => Carbon::now()->toDateTimeString(),
             'created_on' => Carbon::now()->toDateTimeString()
         ]);
@@ -149,7 +149,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
 
         $userPermission = $this->userPermissionsRepository->create([
             'user_id' => $userId,
-            'permissions_id' => $otherPermission['id'],
+            'permission_id' => $otherPermission['id'],
             'start_date' => Carbon::now()->toDateTimeString(),
             'created_on' => Carbon::now()->toDateTimeString()
         ]);
@@ -189,7 +189,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
         $otherPermission = $this->permissionFactory->create($this->faker->word);
         $otherContentPermission =
             $this->contentPermissionFactory->create(null, $content['type'], $permission['id']);
-
+$user = $this->createAndLogInNewUser();
         $response = $this->classBeingTested->getById($content['id']);
 
         $this->assertNull($response);
@@ -216,7 +216,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
         $content['permissions'][] = $contentPermission;
         $userPermission = $this->userPermissionsRepository->create([
             'user_id' => $userId,
-            'permissions_id' => $permission['id'],
+            'permission_id' => $permission['id'],
             'start_date' => Carbon::now()->toDateTimeString(),
             'created_on' => Carbon::now()->toDateTimeString()
         ]);
@@ -248,7 +248,7 @@ class ContentRepositoryPermissionsTest extends RailcontentTestCase
         $content['permissions'][] = $otherContentPermission;
         $userPermission = $this->userPermissionsRepository->create([
             'user_id' => $userId,
-            'permissions_id' => $otherPermission['id'],
+            'permission_id' => $otherPermission['id'],
             'start_date' => Carbon::now()->toDateTimeString(),
             'created_on' => Carbon::now()->toDateTimeString()
         ]);

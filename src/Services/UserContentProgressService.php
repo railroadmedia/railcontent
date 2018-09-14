@@ -127,10 +127,10 @@ class UserContentProgressService
                 ]
             );
 
-            CacheHelper::deleteCache('content_list_' . $contentId);
+            //CacheHelper::deleteCache('content_' . $contentId);
 
             //delete all the search results from cache
-            CacheHelper::deleteAllCachedSearchResults('user_progress_' . $userId . '_');
+            CacheHelper::deleteCacheKeys(['user_' . $userId]);
         }
 
         event(new UserContentProgressSaved($userId, $contentId));
@@ -174,10 +174,10 @@ class UserContentProgressService
 
         event(new UserContentProgressSaved($userId, $contentId));
 
-        CacheHelper::deleteCache('content_list_' . $contentId);
+      //  CacheHelper::deleteCache('content_' . $contentId);
 
         //delete all the search results from cache
-        CacheHelper::deleteAllCachedSearchResults('user_progress_' . $userId . '_');
+        CacheHelper::deleteCacheKeys(['user_' . $userId]);
 
         return true;
     }
@@ -222,10 +222,10 @@ class UserContentProgressService
 
         event(new UserContentProgressSaved($userId, $contentId));
 
-        CacheHelper::deleteCache('content_list_' . $contentId);
+       // CacheHelper::deleteCache('content_list_' . $contentId);
 
         //delete all the search results from cache
-        CacheHelper::deleteAllCachedSearchResults('user_progress_' . $userId . '_');
+        CacheHelper::deleteCacheKeys(['user_' . $userId]);
 
         return true;
     }
@@ -269,7 +269,7 @@ class UserContentProgressService
                 )
             );
         }
-
+        CacheHelper::deleteCacheKeys(['user_' . $userId]);
         event(new UserContentProgressSaved($userId, $contentId));
 
         return true;

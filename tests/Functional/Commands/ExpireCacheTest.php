@@ -44,7 +44,7 @@ class ExpireCacheTest extends RailcontentTestCase
 
         $results =  $this->contentService->getAllByType($type);
 
-        $this->assertEquals(2, count(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys('*contents*')));
+        $this->assertEquals(2, count(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys('*content*')));
 
         $content2 = $this->contentFactory->create(
             ContentHelper::slugify($this->faker->words(rand(2, 6), true)),

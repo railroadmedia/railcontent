@@ -55,7 +55,7 @@ class CommentServiceTest extends RailcontentTestCase
     {
         $result = $this->classBeingTested->get(rand());
 
-        $this->assertNull($result);
+        $this->assertTrue($result->isEmpty());
     }
 
     public function test_create_comment()

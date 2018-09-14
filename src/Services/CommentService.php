@@ -98,7 +98,7 @@ class CommentService
             ]
         );
 
-        CacheHelper::deleteCache('content_list_' . $contentId);
+        CacheHelper::deleteCache('content_' . $contentId);
 
         CacheHelper::deleteAllCachedSearchResults('get_comments_');
 
@@ -137,7 +137,7 @@ class CommentService
         if (count($data) == 0) {
             return $comment;
         }
-        CacheHelper::deleteCache('content_list_' . $comment['content_id']);
+        CacheHelper::deleteCache('content_' . $comment['content_id']);
 
         $this->commentRepository->update($id, $data);
 
@@ -177,7 +177,7 @@ class CommentService
         } else {
             $this->commentRepository->delete($id);
         }
-        CacheHelper::deleteCache('content_list_' . $comment['content_id']);
+        CacheHelper::deleteCache('content_' . $comment['content_id']);
 
         return true;
     }

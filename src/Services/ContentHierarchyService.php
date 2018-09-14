@@ -69,14 +69,14 @@ class ContentHierarchyService
         );
 
         //delete the cached results for parent id
-        CacheHelper::deleteCache('content_list_' . $parentId);
+        CacheHelper::deleteCache('content_' . $parentId);
 
         //delete the cached results for child id
-        CacheHelper::deleteCache('content_list_' . $childId);
+        CacheHelper::deleteCache('content_' . $childId);
 
         $results = $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
 
-        CacheHelper::deleteAllCachedSearchResults('_type_');
+        //CacheHelper::deleteAllCachedSearchResults('_type_');
 
         return $results;
     }
@@ -103,9 +103,9 @@ class ContentHierarchyService
         );
 
         //delete the cached results for parent id and child id
-        CacheHelper::deleteCache('content_list_' . $parentId);
+        CacheHelper::deleteCache('content_' . $parentId);
 
-        CacheHelper::deleteCache('content_list_' . $childId);
+        CacheHelper::deleteCache('content_' . $childId);
 
         return $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
     }
@@ -118,12 +118,12 @@ class ContentHierarchyService
     public function delete($parentId, $childId)
     {
         //delete the cached results for parent id
-        CacheHelper::deleteCache('content_list_' . $parentId);
+        CacheHelper::deleteCache('content_' . $parentId);
 
-        CacheHelper::deleteCache('content_list_' . $childId);
+        CacheHelper::deleteCache('content_' . $childId);
 
         //delete all the results related to the user's progress
-        CacheHelper::deleteAllCachedSearchResults('user_progress_');
+       // CacheHelper::deleteAllCachedSearchResults('user_progress_');
 
         return $this->contentHierarchyRepository->deleteParentChildLink($parentId, $childId);
     }
@@ -136,9 +136,9 @@ class ContentHierarchyService
             return true;
         }
         //delete the cached results for parent id
-        CacheHelper::deleteCache('content_list_' . $parentHierarchy['parent_id']);
+        CacheHelper::deleteCache('content_' . $parentHierarchy['parent_id']);
 
-        CacheHelper::deleteCache('content_list_' . $childId);
+        CacheHelper::deleteCache('content_' . $childId);
 
         return $this->contentHierarchyRepository->decrementSiblings(
             $parentHierarchy['parent_id'],

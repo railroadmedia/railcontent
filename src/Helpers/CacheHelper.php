@@ -96,9 +96,12 @@ class CacheHelper
      * @param string $key
      * @param array $elements
      */
-    public static function addLists($key, array $elements)
+    public static function addLists($key, $elements)
     {
         self::setPrefix();
+        if (!is_array($elements)) {
+            $elements = [$elements];
+        }
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
             foreach ($elements as $element) {
@@ -154,17 +157,17 @@ class CacheHelper
         self::setPrefix();
 
         //Rename the key to a new key so that the set appears “deleted” to other Redis clients immediately.
-        if (Redis::exists(
-            Cache::store(ConfigService::$cacheDriver)
-                ->getPrefix() . $key
-        )) {
-            Redis::rename(
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . $key,
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . $key . '_deleted'
-            );
-        }
+        //        if (Redis::exists(
+        //            Cache::store(ConfigService::$cacheDriver)
+        //                ->getPrefix() . $key
+        //        )) {
+        //            Redis::rename(
+        //                Cache::store(ConfigService::$cacheDriver)
+        //                    ->getPrefix() . $key,
+        //                Cache::store(ConfigService::$cacheDriver)
+        //                    ->getPrefix() . $key . '_deleted'
+        //            );
+        //        }
 
         //Delete members from the set and the cache records in batches of 100
         $cursor = 0;
@@ -173,10 +176,10 @@ class CacheHelper
                 $cursor, $keys
                 ) = Redis::sscan(
                 Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . $key . '_deleted',
+                    ->getPrefix() . $key,
                 $cursor,
                 'COUNT',
-                100
+                1000
             );
             if (count($keys) > 0) {
                 self::deleteCacheKeys($keys);
@@ -187,7 +190,7 @@ class CacheHelper
         self::deleteCacheKeys(
             [
                 Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . $key . '_deleted',
+                    ->getPrefix() . $key,
             ]
         );
 
@@ -222,9 +225,11 @@ class CacheHelper
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
             if (!empty($keys) && is_array($keys)) {
-                Cache::store(ConfigService::$cacheDriver)
-                    ->connection()
-                    ->executeRaw(array_merge(['UNLINK'], $keys));
+                foreach ($keys as $key) {
+                    Cache::store(ConfigService::$cacheDriver)
+                        ->connection()
+                        ->executeRaw(array_merge(['UNLINK'], explode(' ', $key)));
+                }
             }
         }
 
@@ -277,9 +282,9 @@ class CacheHelper
 
     public static function getUserSpecificHashedKey()
     {
-        $key = Cache::store(ConfigService::$cacheDriver)
-                ->getPrefix() .'user_';
-
+        $key =
+            Cache::store(ConfigService::$cacheDriver)
+                ->getPrefix() . 'user_';
 
         if (auth()->check()) {
             $key .= auth()->user()->id;
@@ -290,30 +295,65 @@ class CacheHelper
 
     public static function getCachedResultsForKey($hash)
     {
-       return  Cache::store(ConfigService::$cacheDriver)
-           ->connection()
-           ->hget(self::getUserSpecificHashedKey(), $hash);
+        $results = null;
+        if (Cache::store(ConfigService::$cacheDriver)
+                ->getStore() instanceof RedisStore) {
+            $results = json_decode(
+                Cache::store(ConfigService::$cacheDriver)
+                    ->connection()
+                    ->hget(self::getUserSpecificHashedKey(), $hash),
+                true
+            );
+        }
+
+        return $results;
     }
 
     public static function saveUserCache($hash, $data, $contentIds = [])
     {
-        $userKey = self::getUserSpecificHashedKey();
-        Cache::store(ConfigService::$cacheDriver)
-            ->connection()
-            ->hset(
-                $userKey,
-                $hash,
-                json_encode($data)
-            );
-        Cache::store(ConfigService::$cacheDriver)
-            ->connection()->expire($userKey, self::getExpirationCacheTime());
-        if(empty($contentIds)){
-            $contentIds = (array_pluck($data,'id'));
+        if (Cache::store(ConfigService::$cacheDriver)
+                ->getStore() instanceof RedisStore) {
+            $userKey = self::getUserSpecificHashedKey();
+
+            if (empty($contentIds)) {
+                $contentIds = array_pluck($data, 'id');
+            }
+            self::addLists($userKey . ' ' . $hash, $contentIds);
+
+            $results =
+                Cache::store(ConfigService::$cacheDriver)
+                    ->connection()
+                    ->transaction(
+                        ['watch' => $userKey],
+                        function ($t) use ($userKey, $hash, $data) {
+                            $t->hset(
+                                $userKey,
+                                $hash,
+                                json_encode($data)
+                            );
+                            $t->multi();
+                            $t->hget(self::getUserSpecificHashedKey(), $hash);
+                        }
+                    );
+            return (json_decode($results[1], true));
+            //                ->hset(
+            //                    $userKey,
+            //                    $hash,
+            //                    json_encode($data)
+            //                );
+            //            Cache::store(ConfigService::$cacheDriver)
+            //                ->connection()
+            //                ->expire($userKey, self::getExpirationCacheTime());
+
+            // return self::getCachedResultsForKey($hash);
         }
+        return $data;
+    }
 
-        self::addLists($userKey . ' ' . $hash, $contentIds);
+    public static function saveContentTag($tagName = 'type', $tagValue)
+    {
+        self::addLists('content_' . $tagValue, $tagName);
 
-        return self::getCachedResultsForKey($hash);
     }
 
 }

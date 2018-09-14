@@ -47,8 +47,8 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
 
     protected function tearDown()
     {
-        Cache::store('redis')
-            ->flush();
+//        Cache::store('redis')
+//            ->flush();
     }
 
     public function test_store_validation()

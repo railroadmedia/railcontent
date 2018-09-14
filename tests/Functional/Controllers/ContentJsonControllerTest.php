@@ -892,11 +892,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_PUBLISHED;
 
         //prepare Redis cache with 300.000 keys that will be deleted when a new content it's created
-        for ($i = 0; $i < 100000; $i++) {
-            Redis::set('contents_results_' . $i, $i);
-            Redis::set('_type_' . $type . $i, $i);
-            Redis::set('types' . $i, $i);
-        }
+//        for ($i = 0; $i < 100000; $i++) {
+//            Redis::set('contents_results_' . $i, $i);
+//            Redis::set('_type_' . $type . $i, $i);
+//            Redis::set('types' . $i, $i);
+//        }
 
         $executionStartTime = microtime(true);
 

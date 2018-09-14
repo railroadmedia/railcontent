@@ -4,6 +4,10 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
+use Predis\Client;
+use Predis\Collection\Iterator\HashKey;
+use Predis\Collection\Iterator\Keyspace;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -128,7 +132,7 @@ class ContentService
             $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getById($id), [$id]);
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -147,7 +151,7 @@ class ContentService
             $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getByIds($ids));
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -164,7 +168,7 @@ class ContentService
             $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getByType($type));
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -209,7 +213,7 @@ class ContentService
             );
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -256,7 +260,7 @@ class ContentService
             $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getBySlugAndType($slug, $type));
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -275,7 +279,7 @@ class ContentService
                 CacheHelper::saveUserCache($hash, $this->contentRepository->getByUserIdTypeSlug($userId, $type, $slug));
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -294,7 +298,7 @@ class ContentService
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$parentId]));
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -327,7 +331,7 @@ class ContentService
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$parentId]));
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -356,7 +360,7 @@ class ContentService
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$parentId]));
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -396,7 +400,7 @@ class ContentService
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$parentId]));
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -430,7 +434,7 @@ class ContentService
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), $parentIds));
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -448,7 +452,7 @@ class ContentService
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$childId]));
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -466,7 +470,7 @@ class ContentService
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), $childIds));
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -484,7 +488,7 @@ class ContentService
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$childId]));
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -519,7 +523,7 @@ class ContentService
             );
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -559,7 +563,7 @@ class ContentService
             );
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -599,7 +603,7 @@ class ContentService
             );
         }
 
-        return Decorator::decorate(json_decode($results, true), 'content');
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -672,11 +676,10 @@ class ContentService
             );
         }
 
-        $return = json_decode($results);
-        $return['before'] = Decorator::decorate($return['before'], 'content');
-        $return['after'] = Decorator::decorate($return['after'], 'content');
+        $results['before'] = Decorator::decorate($results['before'], 'content');
+        $results['after'] = Decorator::decorate($results['after'], 'content');
 
-        return $return;
+        return $results;
     }
 
     /**
@@ -747,78 +750,62 @@ class ContentService
                 implode(' ', array_values($requiredUserStates) ?? ''),
                 implode(' ', array_values($includedUserStates) ?? '')
             );
+        $cache = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use (
-                        $hash,
-                        $page,
-                        $limit,
-                        $orderByColumn,
-                        $orderByDirection,
-                        $includedTypes,
-                        $slugHierarchy,
-                        $requiredParentIds,
-                        $requiredFields,
-                        $includedFields,
-                        $requiredUserStates,
-                        $includedUserStates,
-                        $pullFilterFields
-                    ) {
-                        $filter = $this->contentRepository->startFilter(
-                            $page,
-                            $limit,
-                            $orderByColumn,
-                            $orderByDirection,
-                            $includedTypes,
-                            $slugHierarchy,
-                            $requiredParentIds
-                        );
+        if($cache) {
+            $results = new ContentFilterResultsEntity($cache);
+        }
 
-                        foreach ($requiredFields as $requiredField) {
-                            $filter->requireField(
-                                ...
-                                (is_array($requiredField) ? $requiredField : explode(',', $requiredField))
-                            );
-                        }
+        if (!$results) {
+            $filter = $this->contentRepository->startFilter(
+                $page,
+                $limit,
+                $orderByColumn,
+                $orderByDirection,
+                $includedTypes,
+                $slugHierarchy,
+                $requiredParentIds
+            );
 
-                        foreach ($includedFields as $includedField) {
-                            $filter->includeField(
-                                ...
-                                (is_array($includedField) ? $includedField : explode(',', $includedField))
-                            );
-                        }
-
-                        foreach ($requiredUserStates as $requiredUserState) {
-                            $filter->requireUserStates(
-                                ...
-                                is_array($requiredUserState) ? $requiredUserState : explode(',', $requiredUserState)
-                            );
-                        }
-
-                        foreach ($includedUserStates as $includedUserState) {
-                            $filter->includeUserStates(
-                                ...
-                                is_array($includedUserState) ? $includedUserState : explode(',', $includedUserState)
-                            );
-                        }
-
-                        $results = new ContentFilterResultsEntity(
-                            [
-                                'results' => $filter->retrieveFilter(),
-                                'total_results' => $filter->countFilter(),
-                                'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
-                            ]
-                        );
-
-                        $this->saveCacheResults($hash, array_keys($results['results']));
-
-                        return $results;
-                    }
+            foreach ($requiredFields as $requiredField) {
+                $filter->requireField(
+                    ...
+                    (is_array($requiredField) ? $requiredField : explode(',', $requiredField))
                 );
+            }
+
+            foreach ($includedFields as $includedField) {
+                $filter->includeField(
+                    ...
+                    (is_array($includedField) ? $includedField : explode(',', $includedField))
+                );
+            }
+
+            foreach ($requiredUserStates as $requiredUserState) {
+                $filter->requireUserStates(
+                    ...
+                    is_array($requiredUserState) ? $requiredUserState : explode(',', $requiredUserState)
+                );
+            }
+
+            foreach ($includedUserStates as $includedUserState) {
+                $filter->includeUserStates(
+                    ...
+                    is_array($includedUserState) ? $includedUserState : explode(',', $includedUserState)
+                );
+            }
+
+            $resultsDB = new ContentFilterResultsEntity(
+                [
+                    'results' => $filter->retrieveFilter(),
+                    'total_results' => $filter->countFilter(),
+                    'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
+                ]
+            );
+
+            $results = CacheHelper::saveUserCache($hash, $resultsDB);
+            $results = new ContentFilterResultsEntity($results);
+        }
 
         return Decorator::decorate($results, 'content');
     }
@@ -877,6 +864,10 @@ class ContentService
         }
         event(new ContentCreated($id));
 
+        CacheHelper::deleteCache('content_type_' . $type);
+
+        CacheHelper::saveContentTag('type_' . $type, $id);
+
         //delete all the search results from cache
         // CacheHelper::deleteAllCachedSearchResults('contents_results_');
 
@@ -907,10 +898,11 @@ class ContentService
 
         CacheHelper::deleteCache('content_' . $id);
 
-        //delete all the search results from cache
-        CacheHelper::deleteAllCachedSearchResults('contents_results_');
-        CacheHelper::deleteAllCachedSearchResults('_type_' . $content['type']);
-        CacheHelper::deleteAllCachedSearchResults('types_');
+        if (array_key_exists('type', $data)) {
+            //var_dump('-----update-------'.$data['type']);
+            CacheHelper::deleteCache('content_type_' . $content['type']);
+            CacheHelper::saveContentTag('type_' . $data['type'], $id);
+        }
 
         return $this->getById($id);
     }
@@ -1015,7 +1007,7 @@ class ContentService
 
         event(new ContentSoftDeleted($id));
 
-        CacheHelper::deleteCache('content_list_' . $id);
+        CacheHelper::deleteCache('content_' . $id);
 
         return $this->contentRepository->softDelete([$id]);
     }
@@ -1025,7 +1017,7 @@ class ContentService
         $children = $this->contentHierarchyRepository->getByParentIds([$id]);
 
         //delete parent content cache
-        CacheHelper::deleteCache('content_list_' . $id);
+        CacheHelper::deleteCache('content_' . $id);
 
         return $this->contentRepository->softDelete(array_pluck($children, 'child_id'));
     }
@@ -1040,24 +1032,35 @@ class ContentService
                 $contentFieldKey,
                 $contentFieldValues
             );
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->remember(
-                    $hash,
-                    CacheHelper::getExpirationCacheTime(),
-                    function () use ($hash, $contentTypes, $contentFieldKey, $contentFieldValues) {
-                        $results = $this->contentRepository->getByContentFieldValuesForTypes(
-                            $contentTypes,
-                            $contentFieldKey,
-                            $contentFieldValues
-                        );
-                        $this->saveCacheResults($hash, array_keys($results));
-
-                        return Decorator::decorate($results, 'content');
-                    }
-                );
-
+        if (!$results) {
+            $results = CacheHelper::saveUserCache(
+                $hash,
+                $this->contentRepository->getByContentFieldValuesForTypes(
+                    $contentTypes,
+                    $contentFieldKey,
+                    $contentFieldValues
+                )
+            );
+        }
+        //        $results =
+        //            Cache::store(ConfigService::$cacheDriver)
+        //                ->remember(
+        //                    $hash,
+        //                    CacheHelper::getExpirationCacheTime(),
+        //                    function () use ($hash, $contentTypes, $contentFieldKey, $contentFieldValues) {
+        //                        $results = $this->contentRepository->getByContentFieldValuesForTypes(
+        //                            $contentTypes,
+        //                            $contentFieldKey,
+        //                            $contentFieldValues
+        //                        );
+        //                        $this->saveCacheResults($hash, array_keys($results));
+        //
+        //                        return Decorator::decorate($results, 'content');
+        //                    }
+        //                );
+        //
         return Decorator::decorate($results, 'content');
     }
 
@@ -1067,11 +1070,11 @@ class ContentService
      * @param array $contentIds
      * @return bool
      */
-    private function saveCacheResults($hash, $contentIds)
-    {
-        CacheHelper::addLists($hash, $contentIds);
-
-        return true;
-    }
+    //    private function saveCacheResults($hash, $contentIds)
+    //    {
+    //        CacheHelper::addLists($hash, $contentIds);
+    //
+    //        return true;
+    //    }
 
 }

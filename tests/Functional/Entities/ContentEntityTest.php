@@ -111,7 +111,7 @@ $userId = $this->createAndLogInNewUser();
             //assign user permission
             $this->userPermissionsRepository->create([
                 'user_id' => $userId,
-                'permissions_id' => $permission['id'],
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()->toDateTimeString(),
                 'created_on' => Carbon::now()->toDateTimeString()
             ]);

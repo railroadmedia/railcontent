@@ -129,12 +129,12 @@ class ContentPermissionService
     private function clearAssociatedContentCache(array $contentIds, array $contentTypes)
     {
         foreach ($contentIds as $contentId) {
-            CacheHelper::deleteCache('content_list_' . $contentId);
+            CacheHelper::deleteCache('content_' . $contentId);
         }
         foreach ($contentTypes as $contentType) {
             $contents = $this->contentRepository->getByType($contentType);
             foreach ($contents as $content) {
-                CacheHelper::deleteCache('content_list_' . $content['id']);
+                CacheHelper::deleteCache('content_' . $content['id']);
             }
         }
     }

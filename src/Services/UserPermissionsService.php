@@ -63,6 +63,9 @@ class UserPermissionsService
     public function updateOrCeate($attributes, $values)
     {
         if (array_key_exists('start_date', $values)) {
+            var_dump($attributes['user_id']);
+            var_dump($values['start_date']);
+            dd('oo');
             $this->setTTLOrDeleteUserCache($attributes['user_id'], $values['start_date']);
         }
 
@@ -110,7 +113,7 @@ class UserPermissionsService
         }
 
         //delete the cache for user
-        CacheHelper::deleteCache('keys_for_userId_' . $userPermission['user_id']);
+        CacheHelper::deleteCache('user_' . $userPermission['user_id']);
 
         return $this->userPermissionsRepository->delete($id);
     }
@@ -150,9 +153,10 @@ class UserPermissionsService
             Carbon::now()
                 ->toDateTimeString()) {
             //should delete the cache for user
-            CacheHelper::deleteCache('keys_for_userId_' . $userId);
+            CacheHelper::deleteCache('user_' . $userId);
         } else {
-            $userCacheKeys = CacheHelper::getListElement('keys_for_userId_' . $userId);
+            $userCacheKeys = CacheHelper::getListElement('user_' . $userId);
+            dd($userCacheKeys);
             if (!empty($userCacheKeys)) {
                 $existingTTL =
                     Carbon::now()
