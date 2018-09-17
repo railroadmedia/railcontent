@@ -555,10 +555,11 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'brand' => ConfigService::$brand,
             ]
         );
-        $contentPermission = $this->contentPermissionRepository->create(
-            [
+        $contentPermission = $this->call(
+            'PUT',
+            'railcontent/permission/assign',[
                 'content_id' => $content1['id'],
-                'permission_id' => $permission1,
+                'permission_id' => $permission1
             ]
         );
 
@@ -597,9 +598,13 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->assertArraySubset([(array)$content2], $response2->decodeResponseJson('data'));
 
         //assert that the time to live was set for user cached keys
-        foreach (CacheHelper::getListElement('keys_for_userId_' . $userId) as $key) {
-            $this->assertNotEquals(-1, Redis::ttl($key));
-        }
+        $this->assertNotEquals(
+            -1,
+            Redis::ttl(
+                Cache::store(ConfigService::$cacheDriver)
+                    ->getPrefix() . 'userId_' . $userId
+            )
+        );
     }
 
     public function test_user_cache_deleted_when_user_permission_deleted()
@@ -612,12 +617,14 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'brand' => ConfigService::$brand,
             ]
         );
-        $contentPermission = $this->contentPermissionRepository->create(
-            [
+        $contentPermission = $this->call(
+            'PUT',
+            'railcontent/permission/assign',[
                 'content_id' => $content['id'],
-                'permission_id' => $permission,
+                'permission_id' => $permission
             ]
         );
+
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => $userId,
@@ -638,20 +645,19 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         );
         $this->assertArraySubset([(array)$content], $response->decodeResponseJson('data'));
 
-        $userCacheKeys = CacheHelper::getListElement('keys_for_userId_' . $userId);
-        $this->assertNotEmpty(CacheHelper::getListElement('keys_for_userId_' . $userId));
 
         $this->call(
             'DELETE',
             'railcontent/user-permission/' . $userPermission
         );
 
-        $this->assertEmpty(CacheHelper::getListElement('keys_for_userId_' . $userId));
-
-        //assert that the user cache was deleted
-        foreach ($userCacheKeys as $key) {
-            $this->assertNull(Redis::get($key));
-        }
+        $this->assertEquals(
+            [],
+            Redis::hgetall(
+                Cache::store(ConfigService::$cacheDriver)
+                    ->getPrefix() . 'user_' . $userId
+            )
+        );
     }
 
     public function test_user_multiple_permissions()
@@ -711,14 +717,17 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                     ->toDateTimeString(),
             ]
         );
-        $userCacheKeys = CacheHelper::getListElement('keys_for_userId_' . $userId);
 
-        $recentExpirationDate = Carbon::now()
-            ->addDays(3)
-            ->toDateTimeString();
-        $redisTTL =
+        $userCacheKeys = Cache::store(ConfigService::$cacheDriver)
+                ->getPrefix() . 'user_' . $userId;
+
+        $recentExpirationDate =
             Carbon::now()
-                ->addSeconds(Redis::ttl($userCacheKeys[0]))
+                ->addMinutes(ConfigService::$cacheTime)
+                ->toDateTimeString();
+
+        $redisTTL =
+            Carbon::createFromTimestamp(Redis::ttl($userCacheKeys))
                 ->toDateTimeString();
 
         $this->assertEquals($recentExpirationDate, $redisTTL);

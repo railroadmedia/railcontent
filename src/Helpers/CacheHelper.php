@@ -156,19 +156,6 @@ class CacheHelper
     {
         self::setPrefix();
 
-        //Rename the key to a new key so that the set appears “deleted” to other Redis clients immediately.
-        //        if (Redis::exists(
-        //            Cache::store(ConfigService::$cacheDriver)
-        //                ->getPrefix() . $key
-        //        )) {
-        //            Redis::rename(
-        //                Cache::store(ConfigService::$cacheDriver)
-        //                    ->getPrefix() . $key,
-        //                Cache::store(ConfigService::$cacheDriver)
-        //                    ->getPrefix() . $key . '_deleted'
-        //            );
-        //        }
-
         //Delete members from the set and the cache records in batches of 100
         $cursor = 0;
         do {
@@ -249,7 +236,6 @@ class CacheHelper
             $permissions = $service->getUserPermissions(auth()->id(), true);
             if (!empty(array_filter(array_column($permissions, 'expiration_date'), 'strlen'))) {
                 $date = Carbon::parse(min(array_filter(array_column($permissions, 'expiration_date'), 'strlen')));
-
                 if ($date->diffInMinutes() < ConfigService::$cacheTime) {
                     return $date;
                 }
@@ -269,12 +255,20 @@ class CacheHelper
     {
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
-            foreach ($keys as $key) {
-                Redis::expireat(
-                    $key,
-                    $timeToLive
-                );
+            $cacheTime =
+                Carbon::now()
+                    ->addMinutes(self::getExpirationCacheTime())
+                    ->getTimestamp();
+
+            $existingTTl = Redis::ttl($keys);
+
+            if (($existingTTl > 0) && ($existingTTl < $cacheTime)) {
+                $cacheTime = $existingTTl;
             }
+            Redis::expire(
+                $cacheTime,
+                $timeToLive
+            );
         }
 
         return true;
@@ -320,32 +314,32 @@ class CacheHelper
             }
             self::addLists($userKey . ' ' . $hash, $contentIds);
 
+            $cacheTime =
+                Carbon::now()
+                    ->addMinutes(self::getExpirationCacheTime())
+                    ->getTimestamp();
+            $existingTTl = Redis::ttl($userKey);
+
+            if (($existingTTl > 0) && ($existingTTl < $cacheTime)) {
+                $cacheTime = $existingTTl;
+            }
             $results =
                 Cache::store(ConfigService::$cacheDriver)
                     ->connection()
                     ->transaction(
                         ['watch' => $userKey],
-                        function ($t) use ($userKey, $hash, $data) {
+                        function ($t) use ($userKey, $hash, $data, $cacheTime) {
                             $t->hset(
                                 $userKey,
                                 $hash,
                                 json_encode($data)
                             );
                             $t->multi();
+                            $t->expire(self::getUserSpecificHashedKey(), $cacheTime);
                             $t->hget(self::getUserSpecificHashedKey(), $hash);
                         }
                     );
-            return (json_decode($results[1], true));
-            //                ->hset(
-            //                    $userKey,
-            //                    $hash,
-            //                    json_encode($data)
-            //                );
-            //            Cache::store(ConfigService::$cacheDriver)
-            //                ->connection()
-            //                ->expire($userKey, self::getExpirationCacheTime());
-
-            // return self::getCachedResultsForKey($hash);
+            return (json_decode($results[2], true));
         }
         return $data;
     }

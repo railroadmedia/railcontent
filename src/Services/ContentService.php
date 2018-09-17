@@ -483,7 +483,7 @@ class ContentService
         $hash = 'contents_by_child_ids_and_parent_types_' . CacheHelper::getKey($childId, $types);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
-        if (!$results) {
+        if (is_null($results)) {
             $resultsDB = $this->contentRepository->getByChildIdWhereParentTypeIn($childId, $types);
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$childId]));
         }
@@ -730,6 +730,7 @@ class ContentService
         array $includedUserStates = [],
         $pullFilterFields = true
     ) {
+        $results = null;
         if ($limit == 'null') {
             $limit = -1;
         }
@@ -750,6 +751,7 @@ class ContentService
                 implode(' ', array_values($requiredUserStates) ?? ''),
                 implode(' ', array_values($includedUserStates) ?? '')
             );
+
         $cache = CacheHelper::getCachedResultsForKey($hash);
 
         if($cache) {
