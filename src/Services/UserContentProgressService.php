@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -127,10 +128,14 @@ class UserContentProgressService
                 ]
             );
 
-            //CacheHelper::deleteCache('content_' . $contentId);
-
-            //delete all the search results from cache
-            CacheHelper::deleteCacheKeys(['user_' . $userId]);
+            //delete user progress from cache
+            CacheHelper::deleteUserFields(
+                [
+                    Cache::store(ConfigService::$cacheDriver)
+                        ->getPrefix() . 'user_' . $userId,
+                ],
+                'user_progress'
+            );
         }
 
         event(new UserContentProgressSaved($userId, $contentId));
@@ -174,10 +179,13 @@ class UserContentProgressService
 
         event(new UserContentProgressSaved($userId, $contentId));
 
-      //  CacheHelper::deleteCache('content_' . $contentId);
-
-        //delete all the search results from cache
-        CacheHelper::deleteCacheKeys(['user_' . $userId]);
+        CacheHelper::deleteUserFields(
+            [
+                Cache::store(ConfigService::$cacheDriver)
+                    ->getPrefix() . 'user_' . $userId,
+            ],
+            'user_progress'
+        );
 
         return true;
     }
@@ -222,10 +230,14 @@ class UserContentProgressService
 
         event(new UserContentProgressSaved($userId, $contentId));
 
-       // CacheHelper::deleteCache('content_list_' . $contentId);
-
-        //delete all the search results from cache
-        CacheHelper::deleteCacheKeys(['user_' . $userId]);
+        //delete user progress from cache
+        CacheHelper::deleteUserFields(
+            [
+                Cache::store(ConfigService::$cacheDriver)
+                    ->getPrefix() . 'user_' . $userId,
+            ],
+            'user_progress'
+        );
 
         return true;
     }
@@ -269,7 +281,15 @@ class UserContentProgressService
                 )
             );
         }
-        CacheHelper::deleteCacheKeys(['user_' . $userId]);
+
+        CacheHelper::deleteUserFields(
+            [
+                Cache::store(ConfigService::$cacheDriver)
+                    ->getPrefix() . 'user_' . $userId,
+            ],
+            'user_progress'
+        );
+
         event(new UserContentProgressSaved($userId, $contentId));
 
         return true;
@@ -366,9 +386,9 @@ class UserContentProgressService
 
             // get siblings
             $siblings = $parent['lessons'] ?? $this->attachProgressToContents(
-                $userId,
-                $this->contentService->getByParentId($parent['id'])
-            );
+                    $userId,
+                    $this->contentService->getByParentId($parent['id'])
+                );
 
             if (is_array($siblings)) {
                 $siblings = new Collection($siblings);
@@ -412,7 +432,10 @@ class UserContentProgressService
         $percentages = [];
 
         if ($siblings instanceof Collection) {
-            $progressOfSiblings = ($siblings->has('user_progress')) ? $siblings->pluck('user_progress')->toArray() : [];
+            $progressOfSiblings =
+                ($siblings->has('user_progress')) ?
+                    $siblings->pluck('user_progress')
+                        ->toArray() : [];
         } else {
             $progressOfSiblings = array_column($siblings, 'user_progress');
         }

@@ -805,7 +805,7 @@ class ContentService
                 ]
             );
 
-            $results = CacheHelper::saveUserCache($hash, $resultsDB);
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
             $results = new ContentFilterResultsEntity($results);
         }
 

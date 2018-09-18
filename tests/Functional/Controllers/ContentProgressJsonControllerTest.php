@@ -75,19 +75,14 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
     public function test_complete_content()
     {
         $content = $this->contentFactory->create();
+        $response = $this->put(
+            'railcontent/start',
+            [
+                'content_id' => $content['id'],
+            ]
+        );
 
-        $userContent = [
-            'content_id' => $content['id'],
-            'user_id' => $this->userId,
-            'state' => UserContentProgressService::STATE_STARTED,
-            'progress_percent' => $this->faker->numberBetween(0, 99),
-            'updated_on' => Carbon::now()
-                ->toDateTimeString(),
-        ];
 
-        $this->query()
-            ->table(ConfigService::$tableUserContentProgress)
-            ->insertGetId($userContent);
 
         $response = $this->put(
             'railcontent/complete',

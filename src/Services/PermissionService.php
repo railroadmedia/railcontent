@@ -63,11 +63,11 @@ class PermissionService
     public function getAll()
     {
         $hash = 'permissions_' . CacheHelper::getKey();
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash) {
-            $results = $this->permissionRepository->getAll();
-            return $results;
-        });
+        if (!$results) {
+            $results = CacheHelper::saveUserCache($hash, $this->permissionRepository->getAll());
+        }
 
         return $results;
     }
@@ -79,11 +79,11 @@ class PermissionService
     public function getByName($name)
     {
         $hash = 'permissions_name' . CacheHelper::getKey($name);
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash, $name) {
-            $results = $this->permissionRepository->query()->where('name', $name)->get()->toArray();
-            return $results;
-        });
+        if (!$results) {
+            $results = CacheHelper::saveUserCache($hash, $this->permissionRepository->query()->where('name', $name)->get()->toArray());
+        }
 
         return $results;
     }

@@ -100,8 +100,6 @@ class CommentService
 
         CacheHelper::deleteCache('content_' . $contentId);
 
-        CacheHelper::deleteAllCachedSearchResults('get_comments_');
-
         $createdComment = $this->get($commentId);
 
         event(new CommentCreated($commentId, $userId, $parentId, $comment));
@@ -227,51 +225,44 @@ class CommentService
             .'_'.(CommentRepository::$availableContentType ??'')
             .'_'.(CommentRepository::$availableUserId ??'')
             .'_'. CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
+        $results = CacheHelper::getCachedResultsForKey($hash);
 
-        $results = Cache::store(ConfigService::$cacheDriver)->remember(
-            $hash,
-            ConfigService::$cacheTime,
-            function () use ($hash, $page, $limit, $orderByDirection, $orderByColumn, $currentUserId) {
-                if ($orderByColumn == 'mine') {
-                    $this->commentRepository->setData(
-                        $page,
-                        $limit,
-                        $orderByDirection,
-                        'created_on'
-                    );
-                    CommentRepository::$availableUserId = $currentUserId;
-                    $orderByColumn = 'created_on';
-                    $results = [
-                        'results' => $this->commentRepository
-                            ->getCurrentUserComments(),
-                        'total_results' => $this->commentRepository
-                            ->countCurrentUserComments(),
-                        'total_comments_and_results' => $this->commentRepository
-                            ->countCommentsAndReplies()
-                    ];
-                } else {
-                    $this->commentRepository->setData(
-                        $page,
-                        $limit,
-                        $orderByDirection,
-                        $orderByColumn
-                    );
-                    $results = [
-                        'results' => $this->commentRepository->getComments(),
-                        'total_results' => $this->commentRepository->countComments(),
-                        'total_comments_and_results' => $this->commentRepository
-                            ->countCommentsAndReplies()
-                    ];
-                }
-
-                CacheHelper::addLists($hash, array_pluck(array_values($results['results']), 'content_id'));
-                return $results;
+        if (!$results) {
+            if ($orderByColumn == 'mine') {
+                $this->commentRepository->setData(
+                    $page,
+                    $limit,
+                    $orderByDirection,
+                    'created_on'
+                );
+                CommentRepository::$availableUserId = $currentUserId;
+                $orderByColumn = 'created_on';
+                $results = [
+                    'results' => $this->commentRepository
+                        ->getCurrentUserComments(),
+                    'total_results' => $this->commentRepository
+                        ->countCurrentUserComments(),
+                    'total_comments_and_results' => $this->commentRepository
+                        ->countCommentsAndReplies()
+                ];
+            } else {
+                $this->commentRepository->setData(
+                    $page,
+                    $limit,
+                    $orderByDirection,
+                    $orderByColumn
+                );
+                $results = [
+                    'results' => $this->commentRepository->getComments(),
+                    'total_results' => $this->commentRepository->countComments(),
+                    'total_comments_and_results' => $this->commentRepository
+                        ->countCommentsAndReplies()
+                ];
             }
-        );
+            $results = CacheHelper::saveUserCache($hash, $results, array_pluck(array_values($results['results']), 'content_id'));
+        }
 
         return Decorator::decorate($results, 'comment');
-
-
     }
 
     /**

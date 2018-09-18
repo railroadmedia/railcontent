@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Cache\RedisStore;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
+use Predis\Collection\Iterator\Keyspace;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\UserPermissionsService;
@@ -52,17 +53,17 @@ class CacheHelper
          * @var $service UserPermissionsService
          */
 
-//        if (auth()->check()) {
-//
-//            if (empty(self::$currentUserPermissions)) {
-//                $service = app()->make(UserPermissionsService::class);
-//                self::$currentUserPermissions = $service->getUserPermissions(auth()->id());
-//            }
-//
-//            if (!empty(self::$currentUserPermissions)) {
-//                $settings .= implode(' ', array_column(self::$currentUserPermissions, 'permission_id'));
-//            }
-//        }
+        //        if (auth()->check()) {
+        //
+        //            if (empty(self::$currentUserPermissions)) {
+        //                $service = app()->make(UserPermissionsService::class);
+        //                self::$currentUserPermissions = $service->getUserPermissions(auth()->id());
+        //            }
+        //
+        //            if (!empty(self::$currentUserPermissions)) {
+        //                $settings .= implode(' ', array_column(self::$currentUserPermissions, 'permission_id'));
+        //            }
+        //        }
 
         return $settings;
     }
@@ -102,6 +103,7 @@ class CacheHelper
         if (!is_array($elements)) {
             $elements = [$elements];
         }
+
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
             foreach ($elements as $element) {
@@ -344,10 +346,54 @@ class CacheHelper
         return $data;
     }
 
+    /**
+     * @param string $tagName
+     * @param $tagValue
+     */
     public static function saveContentTag($tagName = 'type', $tagValue)
     {
         self::addLists('content_' . $tagValue, $tagName);
 
+    }
+
+    /**
+     * @param null|array $userKeys
+     * @param string $fieldKey
+     */
+    public static function deleteUserFields($userKeys = null, $fieldKey = 'content')
+    {
+        if (!$userKeys) {
+            $userKeys = iterator_to_array(
+                new \Predis\Collection\Iterator\Keyspace(
+                    Cache::store(ConfigService::$cacheDriver)
+                        ->connection()
+                        ->client(), '*user*'
+                )
+            );
+        }
+        foreach ($userKeys as $userKey) {
+            $fields = iterator_to_array(
+                new \Predis\Collection\Iterator\HashKey(
+                    Cache::store(ConfigService::$cacheDriver)
+                        ->connection()
+                        ->client(), $userKey, '*' . $fieldKey . '*'
+                )
+            );
+            $myNewArray = array_combine(
+                array_map(
+                    function ($key) use ($userKey) {
+                        return ' ' . $userKey . ' ' . $key;
+                    },
+                    array_keys($fields)
+                ),
+                $fields
+            );
+            if (!empty($myNewArray)) {
+                Cache::store(ConfigService::$cacheDriver)
+                    ->connection()
+                    ->executeRaw(array_merge(['UNLINK'], explode(' ', implode(array_keys($myNewArray)))));
+            }
+        }
     }
 
 }
