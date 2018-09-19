@@ -113,7 +113,7 @@ class CacheHelper
                         Cache::store(ConfigService::$cacheDriver)
                             ->getPrefix() . 'content_' . $element,
                         Cache::store(ConfigService::$cacheDriver)
-                            ->getPrefix() .$key
+                            ->getPrefix() . $key
                     );
             }
         }
@@ -311,12 +311,12 @@ class CacheHelper
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
             $userKey = self::getUserSpecificHashedKey();
-
-            if (empty($contentIds)) {
-                $contentIds = array_pluck($data, 'id');
+            if (!is_null($contentIds)) {
+                if (empty($contentIds)) {
+                    $contentIds = array_pluck($data, 'id');
+                }
+                self::addLists($userKey . ' ' . $hash, $contentIds);
             }
-            self::addLists($userKey . ' ' . $hash, $contentIds);
-
             $cacheTime =
                 Carbon::now()
                     ->addMinutes(self::getExpirationCacheTime())

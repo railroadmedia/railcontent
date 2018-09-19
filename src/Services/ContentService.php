@@ -295,7 +295,7 @@ class ContentService
 
         if (!$results) {
             $resultsDB = $this->contentRepository->getByParentId($parentId, $orderBy, $orderByDirection);
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$parentId]));
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');

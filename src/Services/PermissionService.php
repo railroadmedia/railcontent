@@ -66,7 +66,7 @@ class PermissionService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $results = CacheHelper::saveUserCache($hash, $this->permissionRepository->getAll());
+            $results = CacheHelper::saveUserCache($hash, $this->permissionRepository->getAll(), null);
         }
 
         return $results;
@@ -82,7 +82,7 @@ class PermissionService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $results = CacheHelper::saveUserCache($hash, $this->permissionRepository->query()->where('name', $name)->get()->toArray());
+            $results = CacheHelper::saveUserCache($hash, $this->permissionRepository->query()->where('name', $name)->get()->toArray(), null);
         }
 
         return $results;
