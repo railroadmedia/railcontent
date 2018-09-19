@@ -132,7 +132,7 @@ class UserContentProgressService
             CacheHelper::deleteUserFields(
                 [
                     Cache::store(ConfigService::$cacheDriver)
-                        ->getPrefix() . 'user_' . $userId,
+                        ->getPrefix() . 'userId_' . $userId,
                 ],
                 'user_progress'
             );
@@ -182,7 +182,7 @@ class UserContentProgressService
         CacheHelper::deleteUserFields(
             [
                 Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'user_' . $userId,
+                    ->getPrefix() . 'userId_' . $userId,
             ],
             'user_progress'
         );
@@ -234,7 +234,7 @@ class UserContentProgressService
         CacheHelper::deleteUserFields(
             [
                 Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'user_' . $userId,
+                    ->getPrefix() . 'userId_' . $userId,
             ],
             'user_progress'
         );
@@ -285,7 +285,7 @@ class UserContentProgressService
         CacheHelper::deleteUserFields(
             [
                 Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'user_' . $userId,
+                    ->getPrefix() . 'userId_' . $userId,
             ],
             'user_progress'
         );

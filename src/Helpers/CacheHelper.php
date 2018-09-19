@@ -281,7 +281,7 @@ class CacheHelper
     {
         $key =
             Cache::store(ConfigService::$cacheDriver)
-                ->getPrefix() . 'user_';
+                ->getPrefix() . 'userId_';
 
         if (auth()->check()) {
             $key .= auth()->user()->id;
@@ -368,8 +368,7 @@ class CacheHelper
                 new \Predis\Collection\Iterator\Keyspace(
                     Cache::store(ConfigService::$cacheDriver)
                         ->connection()
-                        ->client(), Cache::store(ConfigService::$cacheDriver)
-                        ->getPrefix() .'user*'
+                        ->client(), '*userId*'
                 )
             );
         }
