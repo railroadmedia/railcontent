@@ -754,7 +754,7 @@ class ContentService
 
         $cache = CacheHelper::getCachedResultsForKey($hash);
 
-        if($cache) {
+        if ($cache) {
             $results = new ContentFilterResultsEntity($cache);
         }
 
@@ -859,23 +859,11 @@ class ContentService
                 $id,
                 null
             );
-
-            //delete all the results related to the user's progress
-            //  CacheHelper::deleteAllCachedSearchResults('user_');
-
         }
+
+        CacheHelper::deleteUserFields(null, 'contents');
+
         event(new ContentCreated($id));
-
-        CacheHelper::deleteCache('content_type_' . $type);
-
-        CacheHelper::saveContentTag('type_' . $type, $id);
-
-        //delete all the search results from cache
-        // CacheHelper::deleteAllCachedSearchResults('contents_results_');
-
-        // CacheHelper::deleteAllCachedSearchResults('_type_' . $type);
-
-        // CacheHelper::deleteAllCachedSearchResults('types');
 
         return $this->getById($id);
     }
@@ -900,10 +888,8 @@ class ContentService
 
         CacheHelper::deleteCache('content_' . $id);
 
-        if (array_key_exists('type', $data)) {
-            //var_dump('-----update-------'.$data['type']);
-            CacheHelper::deleteCache('content_type_' . $content['type']);
-            CacheHelper::saveContentTag('type_' . $data['type'], $id);
+        if (array_key_exists('status', $data)) {
+            CacheHelper::deleteUserFields(null, 'contents');
         }
 
         return $this->getById($id);

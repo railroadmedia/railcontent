@@ -112,7 +112,8 @@ class CacheHelper
                     ->sadd(
                         Cache::store(ConfigService::$cacheDriver)
                             ->getPrefix() . 'content_' . $element,
-                        $key
+                        Cache::store(ConfigService::$cacheDriver)
+                            ->getPrefix() .$key
                     );
             }
         }
@@ -367,7 +368,8 @@ class CacheHelper
                 new \Predis\Collection\Iterator\Keyspace(
                     Cache::store(ConfigService::$cacheDriver)
                         ->connection()
-                        ->client(), '*user*'
+                        ->client(), Cache::store(ConfigService::$cacheDriver)
+                        ->getPrefix() .'user*'
                 )
             );
         }

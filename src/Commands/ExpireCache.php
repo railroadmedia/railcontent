@@ -60,7 +60,7 @@ class ExpireCache extends Command
         $contents = $this->contentRepository->getRecentPublishedContents($lastExecutionTime);
 
         if (!empty($contents)) {
-            CacheHelper::deleteAllCachedSearchResults('contents');
+            CacheHelper::deleteUserFields(null, 'contents');
         }
 
         //update last execution time to current time
