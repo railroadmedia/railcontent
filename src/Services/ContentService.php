@@ -652,6 +652,7 @@ class ContentService
                 $orderDirection
             );
 
+        // $5 sez we can remove this
         $this->contentRepository->getTypeNeighbouringSiblings(
             $type,
             $columnName,
