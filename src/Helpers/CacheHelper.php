@@ -112,8 +112,7 @@ class CacheHelper
                     ->sadd(
                         Cache::store(ConfigService::$cacheDriver)
                             ->getPrefix() . 'content_' . $element,
-                        Cache::store(ConfigService::$cacheDriver)
-                            ->getPrefix() . $key
+                        $key
                     );
             }
         }
@@ -176,13 +175,6 @@ class CacheHelper
             }
         } while ($cursor);
 
-        //delete set cache record
-        self::deleteCacheKeys(
-            [
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . $key,
-            ]
-        );
 
         return true;
     }

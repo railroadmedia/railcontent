@@ -136,6 +136,14 @@ class UserContentProgressService
                 ],
                 'user_progress'
             );
+
+            CacheHelper::deleteUserFields(
+                [
+                    Cache::store(ConfigService::$cacheDriver)
+                        ->getPrefix() . 'userId_' . $userId,
+                ],
+                'content'
+            );
         }
 
         event(new UserContentProgressSaved($userId, $contentId));
@@ -185,6 +193,14 @@ class UserContentProgressService
                     ->getPrefix() . 'userId_' . $userId,
             ],
             'user_progress'
+        );
+
+        CacheHelper::deleteUserFields(
+            [
+                Cache::store(ConfigService::$cacheDriver)
+                    ->getPrefix() . 'userId_' . $userId,
+            ],
+            'content'
         );
 
         return true;
@@ -239,6 +255,14 @@ class UserContentProgressService
             'user_progress'
         );
 
+        CacheHelper::deleteUserFields(
+            [
+                Cache::store(ConfigService::$cacheDriver)
+                    ->getPrefix() . 'userId_' . $userId,
+            ],
+            'content'
+        );
+
         return true;
     }
 
@@ -289,6 +313,7 @@ class UserContentProgressService
             ],
             'user_progress'
         );
+
 
         event(new UserContentProgressSaved($userId, $contentId));
 

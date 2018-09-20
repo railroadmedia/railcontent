@@ -259,7 +259,13 @@ class CommentService
                         ->countCommentsAndReplies()
                 ];
             }
-            $results = CacheHelper::saveUserCache($hash, $results, array_pluck(array_values($results['results']), 'content_id'));
+
+            if($results['total_results'] > 0){
+                $contentIds = array_pluck(array_values($results['results']), 'content_id');
+            } else {
+                $contentIds = null;
+            }
+            $results = CacheHelper::saveUserCache($hash, $results, $contentIds);
         }
 
         return Decorator::decorate($results, 'comment');

@@ -328,7 +328,7 @@ class ContentService
                 $orderBy,
                 $orderByDirection
             );
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$parentId]));
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -357,7 +357,7 @@ class ContentService
                 $orderBy,
                 $orderByDirection
             );
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$parentId]));
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -397,7 +397,7 @@ class ContentService
                 $orderBy,
                 $orderByDirection
             );
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$parentId]));
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -431,7 +431,7 @@ class ContentService
 
         if (!$results) {
             $resultsDB = $this->contentRepository->getByParentIds($parentIds, $orderBy, $orderByDirection);
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), $parentIds));
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), $parentIds));
         }
 
         return Decorator::decorate($results, 'content');
@@ -449,7 +449,7 @@ class ContentService
 
         if (!$results) {
             $resultsDB = $this->contentRepository->getByChildIdWhereType($childId, $type);
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$childId]));
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), [$childId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -467,7 +467,7 @@ class ContentService
 
         if (!$results) {
             $resultsDB = $this->contentRepository->getByChildIdsWhereType($childIds, $type);
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), $childIds));
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), $childIds));
         }
 
         return Decorator::decorate($results, 'content');
@@ -485,7 +485,7 @@ class ContentService
 
         if (is_null($results)) {
             $resultsDB = $this->contentRepository->getByChildIdWhereParentTypeIn($childId, $types);
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_keys($resultsDB), [$childId]));
+            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), [$childId]));
         }
 
         return Decorator::decorate($results, 'content');
@@ -1033,37 +1033,7 @@ class ContentService
                 )
             );
         }
-        //        $results =
-        //            Cache::store(ConfigService::$cacheDriver)
-        //                ->remember(
-        //                    $hash,
-        //                    CacheHelper::getExpirationCacheTime(),
-        //                    function () use ($hash, $contentTypes, $contentFieldKey, $contentFieldValues) {
-        //                        $results = $this->contentRepository->getByContentFieldValuesForTypes(
-        //                            $contentTypes,
-        //                            $contentFieldKey,
-        //                            $contentFieldValues
-        //                        );
-        //                        $this->saveCacheResults($hash, array_keys($results));
-        //
-        //                        return Decorator::decorate($results, 'content');
-        //                    }
-        //                );
-        //
+
         return Decorator::decorate($results, 'content');
     }
-
-    /** Call the method that save in a redis set the mapping between content ids and the method cache key
-     *
-     * @param string $hash
-     * @param array $contentIds
-     * @return bool
-     */
-    //    private function saveCacheResults($hash, $contentIds)
-    //    {
-    //        CacheHelper::addLists($hash, $contentIds);
-    //
-    //        return true;
-    //    }
-
 }

@@ -772,6 +772,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $firstChild['child_id'] = $firstChild['id'];
         $firstChild['position'] = 1;
         $firstChild['child_ids'] = [$firstChild['id']];
+        $fieldFirstChild = $this->fieldFactory->create($firstChild['id']);
 
         $this->contentHierarchyFactory->create($parent['id'], $firstChild['id']);
 
