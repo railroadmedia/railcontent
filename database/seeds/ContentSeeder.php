@@ -58,7 +58,7 @@ class ContentSeeder extends Seeder
         $permissionId = $this->permissionRepository->create(
             [
                 'name' => $this->faker->word,
-                'brand' => 'brand',
+                'brand' => \Railroad\Railcontent\Services\ConfigService::$brand,
             ]
         );
 
