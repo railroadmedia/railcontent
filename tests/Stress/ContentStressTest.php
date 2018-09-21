@@ -66,8 +66,14 @@ class ContentStressTest extends RailcontentTestCase
 
         $results = $this->call('GET', 'railcontent/content');
 
-        $tEnd = microtime(true) - $tStart;
-        $this->assertLessThan(0.3, $tEnd);
+        $tEnd1 = microtime(true) - $tStart;
+        $tStart2 = microtime(true);
+
+        $results = $this->call('GET', 'railcontent/content');
+
+        $tEnd2 = microtime(true) - $tStart2;
+        $this->assertLessThan(1.2, $tEnd1);
+        $this->assertLessThan(0.1, $tEnd2);
     }
 
     public function test_get_contents_no_permissions()

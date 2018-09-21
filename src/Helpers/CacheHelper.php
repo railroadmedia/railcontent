@@ -5,8 +5,10 @@ namespace Railroad\Railcontent\Helpers;
 use Carbon\Carbon;
 use Illuminate\Cache\RedisStore;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Predis\Collection\Iterator\Keyspace;
+use Predis\Transaction\AbortedMultiExecException;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\UserPermissionsService;
@@ -103,7 +105,7 @@ class CacheHelper
         if (!is_array($elements)) {
             $elements = [$elements];
         }
-
+        $start = microtime(true);
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
             foreach ($elements as $element) {
@@ -116,36 +118,8 @@ class CacheHelper
                     );
             }
         }
-    }
-
-    /**
-     * Return all the elements of the set stored at key(content id).
-     * e.g.:
-     * 1) "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
-     * 2) "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
-     * 3) "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
-     *
-     * @param string $key
-     * @return mixed
-     */
-    public static function getListElement($key)
-    {
-        self::setPrefix();
-
-        if (Cache::store(ConfigService::$cacheDriver)
-                ->getStore() instanceof RedisStore) {
-            $keys =
-                Cache::store(ConfigService::$cacheDriver)
-                    ->connection()
-                    ->smembers(
-                        Cache::store(ConfigService::$cacheDriver)
-                            ->getPrefix() . $key
-                    );
-
-            return $keys;
-        }
-
-        return null;
+        $tEnd = microtime(true) - $start;
+        Log::info('for key::' . $key . ' add members to content set in ' . $tEnd);
     }
 
     /**
@@ -174,7 +148,6 @@ class CacheHelper
                 self::deleteCacheKeys($keys);
             }
         } while ($cursor);
-
 
         return true;
     }
@@ -206,6 +179,7 @@ class CacheHelper
     {
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
+            $start = microtime(true);
             if (!empty($keys) && is_array($keys)) {
                 foreach ($keys as $key) {
                     Cache::store(ConfigService::$cacheDriver)
@@ -213,6 +187,8 @@ class CacheHelper
                         ->executeRaw(array_merge(['UNLINK'], explode(' ', $key)));
                 }
             }
+            $tEnd = microtime(true) - $start;
+            Log::info('delete cache keys ' . $tEnd);
         }
 
         return true;
@@ -300,6 +276,7 @@ class CacheHelper
 
     public static function saveUserCache($hash, $data, $contentIds = [])
     {
+        $start = microtime(true);
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
             $userKey = self::getUserSpecificHashedKey();
@@ -318,35 +295,31 @@ class CacheHelper
             if (($existingTTl > 0) && ($existingTTl < $cacheTime)) {
                 $cacheTime = $existingTTl;
             }
-            $results =
-                Cache::store(ConfigService::$cacheDriver)
-                    ->connection()
-                    ->transaction(
-                        ['watch' => $userKey],
-                        function ($t) use ($userKey, $hash, $data, $cacheTime) {
-                            $t->hset(
-                                $userKey,
-                                $hash,
-                                json_encode($data)
-                            );
-                            $t->multi();
-                            $t->expire(self::getUserSpecificHashedKey(), $cacheTime);
-                            $t->hget(self::getUserSpecificHashedKey(), $hash);
-                        }
-                    );
-            return (json_decode($results[2], true));
+            try {
+                $results =
+                    Cache::store(ConfigService::$cacheDriver)
+                        ->connection()
+                        ->transaction(
+                            ['watch' => $userKey],
+                            function ($t) use ($userKey, $hash, $data, $cacheTime) {
+                                $t->hset(
+                                    $userKey,
+                                    $hash,
+                                    json_encode($data)
+                                );
+                                $t->multi();
+                                $t->expire(self::getUserSpecificHashedKey(), $cacheTime);
+                                $t->hget(self::getUserSpecificHashedKey(), $hash);
+                            }
+                        );
+                return (json_decode($results[2], true));
+            } catch (AbortedMultiExecException $e) {
+
+            }
         }
+        $tEnd = microtime(true) - $start;
+        Log::info(' save  user cache with content sets in ' . $tEnd);
         return $data;
-    }
-
-    /**
-     * @param string $tagName
-     * @param $tagValue
-     */
-    public static function saveContentTag($tagName = 'type', $tagValue)
-    {
-        self::addLists('content_' . $tagValue, $tagName);
-
     }
 
     /**
@@ -355,37 +328,44 @@ class CacheHelper
      */
     public static function deleteUserFields($userKeys = null, $fieldKey = 'content')
     {
-        if (!$userKeys) {
-            $userKeys = iterator_to_array(
-                new \Predis\Collection\Iterator\Keyspace(
-                    Cache::store(ConfigService::$cacheDriver)
-                        ->connection()
-                        ->client(), '*userId*'
-                )
-            );
-        }
-        foreach ($userKeys as $userKey) {
-            $fields = iterator_to_array(
-                new \Predis\Collection\Iterator\HashKey(
-                    Cache::store(ConfigService::$cacheDriver)
-                        ->connection()
-                        ->client(), $userKey, '*' . $fieldKey . '*'
-                )
-            );
-            $myNewArray = array_combine(
-                array_map(
-                    function ($key) use ($userKey) {
-                        return ' ' . $userKey . ' ' . $key;
-                    },
-                    array_keys($fields)
-                ),
-                $fields
-            );
-            if (!empty($myNewArray)) {
-                Cache::store(ConfigService::$cacheDriver)
-                    ->connection()
-                    ->executeRaw(array_merge(['UNLINK'], explode(' ', implode(array_keys($myNewArray)))));
+        if (Cache::store(ConfigService::$cacheDriver)
+                ->getStore() instanceof RedisStore) {
+            $start = microtime(true);
+            if (!$userKeys) {
+                $userKeys = iterator_to_array(
+                    new \Predis\Collection\Iterator\Keyspace(
+                        Cache::store(ConfigService::$cacheDriver)
+                            ->connection()
+                            ->client(), '*userId*'
+                    )
+                );
             }
+            foreach ($userKeys as $userKey) {
+                $fields = iterator_to_array(
+                    new \Predis\Collection\Iterator\HashKey(
+                        Cache::store(ConfigService::$cacheDriver)
+                            ->connection()
+                            ->client(), $userKey, '*' . $fieldKey . '*'
+                    )
+                );
+                $myNewArray = array_combine(
+                    array_map(
+                        function ($key) use ($userKey) {
+                            return ' ' . $userKey . ' ' . $key;
+                        },
+                        array_keys($fields)
+                    ),
+                    $fields
+                );
+                if (!empty($myNewArray)) {
+                    Cache::store(ConfigService::$cacheDriver)
+                        ->connection()
+                        ->executeRaw(array_merge(['UNLINK'], explode(' ', implode(array_keys($myNewArray)))));
+                }
+            }
+            $tEnd = microtime(true) - $start;
+            Log::info(' delete cache specific user fields in ' . $tEnd);
+            Log::info($userKeys);
         }
     }
 
