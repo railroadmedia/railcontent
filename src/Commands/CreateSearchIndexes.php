@@ -15,7 +15,7 @@ class CreateSearchIndexes extends Command
      *
      * @var string
      */
-    protected $signature = 'command:createSearchIndexes';
+    protected $signature = 'command:createSearchIndexesForContents';
 
     /**
      * The console command description.
