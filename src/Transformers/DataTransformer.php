@@ -9,6 +9,9 @@ class DataTransformer extends TransformerAbstract
 {
     public function transform($data)
     {
+        if(is_null($data)){
+            return [];
+        }
         if (is_array($data)) {
             return $data;
         }
