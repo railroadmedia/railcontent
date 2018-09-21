@@ -75,7 +75,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             $content[$i] = $content[$i]->getArrayCopy();
         }
 
-        $this->artisan('command:createSearchIndexes');
+        $this->artisan('command:createSearchIndexesForContents');
 
         $response = $this->call(
             'GET',
@@ -122,7 +122,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             $content[$i] = $content[$i]->getArrayCopy();
         }
 
-        $this->artisan('command:createSearchIndexes');
+        $this->artisan('command:createSearchIndexesForContents');
 
         $response = $this->call(
             'GET',
@@ -167,7 +167,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
         }
 
-        $this->artisan('command:createSearchIndexes');
+        $this->artisan('command:createSearchIndexesForContents');
 
         $contentType = $this->faker->randomElement(ConfigService::$searchableContentTypes);
         $response = $this->call(
@@ -216,7 +216,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
         }
 
-        $this->artisan('command:createSearchIndexes');
+        $this->artisan('command:createSearchIndexesForContents');
 
         $contentStatus =
             $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]);
