@@ -9,6 +9,7 @@ use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -38,6 +39,11 @@ class ContentStressTest extends RailcontentTestCase
      */
     private $contentFieldRepository;
 
+    /**
+     * @var PermissionRepository
+     */
+    private $permissionRepository;
+
     protected static $migrationsRun = false;
 
     public function setUp()
@@ -48,6 +54,7 @@ class ContentStressTest extends RailcontentTestCase
         $this->contentRepository = $this->app->make(ContentRepository::class);
         $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
         $this->contentFieldRepository = $this->app->make(ContentFieldRepository::class);
+        $this->permissionRepository = $this->app->make(PermissionRepository::class);
 
         $this->seedDatabase();
     }
@@ -215,17 +222,27 @@ class ContentStressTest extends RailcontentTestCase
     public function test_start_content()
     {
         $userId = $this->createAndLogInNewUser();
-        $userPermission = $this->userPermissionRepository->create(
+        $this->call('GET', 'railcontent/content');
+
+        $permission = $this->permissionRepository->create(
             [
-                'user_id' => $userId,
-                'permission_id' => 1,
-                'start_date' => Carbon::now()
-                    ->toDateTimeString(),
-                'created_on' => Carbon::now()
-                    ->toDateTimeString(),
+                'name' => $this->faker->word,
+                'brand' => ConfigService::$brand,
             ]
         );
         $this->assertGreaterThan(0, count(Redis::hgetall(CacheHelper::getUserSpecificHashedKey())));
+
+        $userPermission = $this->call(
+            'PUT',
+            'railcontent/user-permission',
+            [
+                'user_id' => $userId,
+                'permission_id' => $permission,
+                'start_date' => Carbon::now()
+                    ->toDateTimeString(),
+            ]
+        );
+
         $tStart = microtime(true);
 
         $results = $this->call(
