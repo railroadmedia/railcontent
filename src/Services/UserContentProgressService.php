@@ -127,24 +127,25 @@ class UserContentProgressService
                         ->toDateTimeString(),
                 ]
             );
-
-            //delete user progress from cache
-            CacheHelper::deleteUserFields(
-                [
-                    Cache::store(ConfigService::$cacheDriver)
-                        ->getPrefix() . 'userId_' . $userId,
-                ],
-                'user_progress'
-            );
-
-            CacheHelper::deleteUserFields(
-                [
-                    Cache::store(ConfigService::$cacheDriver)
-                        ->getPrefix() . 'userId_' . $userId,
-                ],
-                'content'
-            );
         }
+        //delete user progress from cache
+        CacheHelper::deleteUserFields(
+            [
+                Cache::store(ConfigService::$cacheDriver)
+                    ->getPrefix() . 'userId_' . $userId,
+            ],
+            'user_progress'
+        );
+
+        CacheHelper::deleteUserFields(
+            [
+                Cache::store(ConfigService::$cacheDriver)
+                    ->getPrefix() . 'userId_' . $userId,
+            ],
+            'content'
+        );
+
+        UserContentProgressRepository::$cache = [];
 
         event(new UserContentProgressSaved($userId, $contentId));
 
@@ -202,6 +203,7 @@ class UserContentProgressService
             ],
             'content'
         );
+        UserContentProgressRepository::$cache = [];
 
         return true;
     }
@@ -243,6 +245,9 @@ class UserContentProgressService
             )
             ->whereIn('content_id', $idsToDelete)
             ->delete();
+
+        //delete user content progress cache
+        UserContentProgressRepository::$cache = [];
 
         event(new UserContentProgressSaved($userId, $contentId));
 
@@ -314,6 +319,7 @@ class UserContentProgressService
             'user_progress'
         );
 
+        UserContentProgressRepository::$cache = [];
 
         event(new UserContentProgressSaved($userId, $contentId));
 
@@ -335,7 +341,7 @@ class UserContentProgressService
         $isArray = !isset($contentOrContents['id']);
 
         if (!$isArray) {
-            $contentOrContents = [$contentOrContents];
+            $contentOrContents = [(array)$contentOrContents];
         }
 
         if ($contentOrContents instanceof Collection) {
@@ -471,11 +477,12 @@ class UserContentProgressService
             }
         }
 
-        if (empty($progressOfSiblings)) {
+           if (empty($progressOfSiblings)) {
             if ($siblings instanceof Collection) {
                 $progressOfSiblings =
-                    $siblings->pluck('user_progress')
-                        ->toArray();
+                    ($siblings->has('user_progress')) ?
+                        $siblings->pluck('user_progress')
+                            ->toArray() : [];
             } else {
                 $progressOfSiblings = array_column($siblings, 'user_progress');
             }
