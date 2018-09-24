@@ -655,7 +655,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             [],
             Redis::hgetall(
                 Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'user_' . $userId
+                    ->getPrefix() . 'userId_' . $userId
             )
         );
     }
@@ -719,7 +719,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         );
 
         $userCacheKeys = Cache::store(ConfigService::$cacheDriver)
-                ->getPrefix() . 'user_' . $userId;
+                ->getPrefix() . 'userId_' . $userId;
 
         $recentExpirationDate =
             Carbon::now()

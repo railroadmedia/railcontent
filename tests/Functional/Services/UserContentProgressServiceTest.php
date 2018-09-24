@@ -220,7 +220,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         // One ---------------------------------------------------------------------------------------------------------
         // Set up some basic variables ---------------------------------------------------------------------------------
 
-        $userId = rand();
+        $userId = $this->faker->numberBetween();
         $type = $this->faker->randomElement($this->allowedTypes['started']);
         $numberOfChildren = 5;
         $content = [];
@@ -268,7 +268,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
             $this->contentService->getById($parent['id'])
         );
 
-        $this->assertTrue($parentWithProgressAttached[0][UserContentProgressService::STATE_STARTED]);
+        $this->assertTrue($parentWithProgressAttached[UserContentProgressService::STATE_STARTED]);
     }
 
     public function test_progress_bubble_completed()

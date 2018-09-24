@@ -316,7 +316,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
                 1
             );
 
-            $expectedChildContents[$childContent['id']] = $childContent;
+            $expectedChildContents[] = $childContent;
         }
 
         $results = $this->classBeingTested->startFilter(

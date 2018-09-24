@@ -3,6 +3,9 @@
 namespace Railroad\Railcontent\Tests\Stress;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -222,6 +225,7 @@ class ContentStressTest extends RailcontentTestCase
                     ->toDateTimeString(),
             ]
         );
+        $this->assertGreaterThan(0, count(Redis::hgetall(CacheHelper::getUserSpecificHashedKey())));
         $tStart = microtime(true);
 
         $results = $this->call(
@@ -231,7 +235,7 @@ class ContentStressTest extends RailcontentTestCase
                 'content_id' => $this->faker->numberBetween(1, 100000),
             ]
         );
-
+        $this->assertEquals([], Redis::hgetall(CacheHelper::getUserSpecificHashedKey()));
         $tEnd = microtime(true) - $tStart;
         $this->assertLessThan(0.1, $tEnd);
     }

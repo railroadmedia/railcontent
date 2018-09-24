@@ -84,20 +84,8 @@ class FullTextSearchServiceTest extends RailcontentTestCase
 
         $contents = $results['results']->toArray();
         $expectedContents = array_splice($contents, 0, $limit);
-        $espectedResults = array_combine(
-            array_column(
-                array_map(
-                    function ($x) {
-                        return (array)$x;
-                    },
-                    $expectedContents
-                ),
-                'id'
-            ),
-            $expectedContents
-        );
 
-        $this->assertArraySubset($espectedResults, $results['results']->toArray());
+        $this->assertArraySubset($expectedContents, $results['results']->toArray());
         $this->assertEquals(count($content), $results['total_results']);
     }
 

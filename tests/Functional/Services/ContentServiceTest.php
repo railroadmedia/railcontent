@@ -366,7 +366,7 @@ class ContentServiceTest extends RailcontentTestCase
         );
 
         $this->assertEquals(
-            4,
+            3,
             count(
                 Cache::store(ConfigService::$cacheDriver)
                     ->getRedis()

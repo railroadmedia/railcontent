@@ -81,8 +81,8 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
 
         $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [], [])
             ->requireUserStates(
-                $userId,
-                $startedState
+                $startedState,
+                $userId
             )
             ->retrieveFilter();
 
@@ -142,12 +142,12 @@ class ContentRepositoryUserStateFilteringTest extends RailcontentTestCase
 
         $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [], [])
             ->includeUserStates(
-                $userId,
-                $startedState
+                $startedState,
+                $userId
             )
             ->includeUserStates(
-                $userId,
-                $completedState
+                $completedState,
+                $userId
             )
             ->retrieveFilter();
 
