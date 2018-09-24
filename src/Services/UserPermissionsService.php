@@ -114,7 +114,7 @@ class UserPermissionsService
         CacheHelper::deleteCacheKeys(
             [
                 Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'user_' . $userPermission['user_id'],
+                    ->getPrefix() . 'userId_' . $userPermission['user_id'],
             ]
         );
 
@@ -160,13 +160,13 @@ class UserPermissionsService
             CacheHelper::deleteCacheKeys(
                 [
                     Cache::store(ConfigService::$cacheDriver)
-                        ->getPrefix() . 'user_' . $userId,
+                        ->getPrefix() . 'userId_' . $userId,
                 ]
             );
         } else {
             $existingTTL = Redis::ttl(
                 Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'user_' . $userId
+                    ->getPrefix() . 'userId_' . $userId
             );
             if (Carbon::createFromTimestamp($existingTTL)
                     ->gt(Carbon::parse($startDate)) &&
@@ -175,7 +175,7 @@ class UserPermissionsService
                 CacheHelper::setTimeToLiveForKeys(
                     [
                         Cache::store(ConfigService::$cacheDriver)
-                            ->getPrefix() . 'user_' . $userId,
+                            ->getPrefix() . 'userId_' . $userId,
                     ],
                     Carbon::parse($startDate)
                         ->getTimestamp()
