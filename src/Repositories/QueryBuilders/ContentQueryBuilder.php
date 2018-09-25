@@ -459,7 +459,8 @@ class ContentQueryBuilder extends QueryBuilder
                     $join->on(
                         'type_content_permissions' . '.content_type',
                         ConfigService::$tableContent . '.type'
-                    );
+                    )
+                        ->whereIn('type_content_permissions' . '.brand', ConfigService::$availableBrands);
                 }
             )
             ->where(

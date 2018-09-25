@@ -12,13 +12,6 @@ class ContentSlugHierarchyDecorator implements DecoratorInterface
 {
     public function decorate(Collection $contentResults)
     {
-        $singular = false;
-
-        if (isset($contentResults['id'])) {
-            $singular = true;
-            $contentResults = new Collection([$contentResults]);
-        }
-
         $query = RepositoryBase::$connectionMask->table(ConfigService::$tableContent . ' as parent_content_0')
             ->whereIn('parent_content_0.id', $contentResults->pluck('id'));
 
@@ -70,10 +63,6 @@ class ContentSlugHierarchyDecorator implements DecoratorInterface
                     }
                 }
             }
-        }
-
-        if ($singular) {
-            return $contentResults->first();
         }
 
         return $contentResults;
