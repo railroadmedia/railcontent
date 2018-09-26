@@ -208,7 +208,7 @@ class CacheHelper
             if (!empty(array_filter(array_column($permissions, 'expiration_date'), 'strlen'))) {
                 $date = Carbon::parse(min(array_filter(array_column($permissions, 'expiration_date'), 'strlen')));
                 if ($date->diffInMinutes() < ConfigService::$cacheTime) {
-                    return $date;
+                    return $date->diffInMinutes();
                 }
             }
         }
