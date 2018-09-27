@@ -280,6 +280,21 @@ class UserContentProgressService
      */
     public function saveContentProgress($contentId, $progress, $userId)
     {
+        $currentProgress =
+            $this->userContentRepository->query()
+                ->where(
+                    [
+                        'content_id' => $contentId,
+                        'user_id' => $userId,
+                    ]
+                )
+                ->orderBy('updated_on', 'desc')
+                ->first();
+
+        if ($currentProgress['state'] == 'completed' || $currentProgress['progress_percent'] == 100) {
+            return true;
+        }
+
         if ($progress == 100) {
             return $this->completeContent($contentId, $userId);
         }
@@ -477,7 +492,7 @@ class UserContentProgressService
             }
         }
 
-           if (empty($progressOfSiblings)) {
+        if (empty($progressOfSiblings)) {
             if ($siblings instanceof Collection) {
                 $progressOfSiblings =
                     ($siblings->has('user_progress')) ?
