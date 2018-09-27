@@ -70,7 +70,7 @@ class ContentEntityTest extends RailcontentTestCase
     public function test_get_by_entity_mapping()
     {
 
-$userId = $this->createAndLogInNewUser();
+        $userId = $this->createAndLogInNewUser();
         $content = $this->contentFactory->create();
         $linkedContent = $this->contentFactory->create();
 
@@ -109,15 +109,17 @@ $userId = $this->createAndLogInNewUser();
             $randomPermissions[] = $permission;
 
             //assign user permission
-            $this->userPermissionsRepository->create([
-                'user_id' => $userId,
-                'permission_id' => $permission['id'],
-                'start_date' => Carbon::now()->toDateTimeString(),
-                'created_on' => Carbon::now()->toDateTimeString()
-            ]);
+            $this->userPermissionsRepository->create(
+                [
+                    'user_id' => $userId,
+                    'permission_id' => $permission['id'],
+                    'start_date' => Carbon::now()
+                        ->toDateTimeString(),
+                    'created_on' => Carbon::now()
+                        ->toDateTimeString(),
+                ]
+            );
         }
-
-
 
         $results = $this->serviceBeingTested->getById($content['id']);
 
@@ -161,7 +163,14 @@ $userId = $this->createAndLogInNewUser();
                 $this->assertEquals(
                     $randomField[$randomFieldColumnName],
                     $results->fetch(
-                        'fields.' . $randomField['key'] . '.' . $randomField['type'] . '.' . $randomField['position'] . '.' . $randomFieldColumnName
+                        'fields.' .
+                        $randomField['key'] .
+                        '.' .
+                        $randomField['type'] .
+                        '.' .
+                        $randomField['position'] .
+                        '.' .
+                        $randomFieldColumnName
                     )
                 );
             }

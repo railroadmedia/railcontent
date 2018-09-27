@@ -76,8 +76,6 @@ class ContentHierarchyService
 
         $results = $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
 
-        //CacheHelper::deleteAllCachedSearchResults('_type_');
-
         return $results;
     }
 
@@ -121,9 +119,6 @@ class ContentHierarchyService
         CacheHelper::deleteCache('content_' . $parentId);
 
         CacheHelper::deleteCache('content_' . $childId);
-
-        //delete all the results related to the user's progress
-       // CacheHelper::deleteAllCachedSearchResults('user_progress_');
 
         return $this->contentHierarchyRepository->deleteParentChildLink($parentId, $childId);
     }

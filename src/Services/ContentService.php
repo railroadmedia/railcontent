@@ -3,11 +3,6 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redis;
-use Predis\Client;
-use Predis\Collection\Iterator\HashKey;
-use Predis\Collection\Iterator\Keyspace;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -155,6 +150,8 @@ class ContentService
     }
 
     /**
+     * Get all contents with specified type.
+     *
      * @param string $type
      * @return array|Collection|ContentEntity[]
      */
@@ -172,11 +169,13 @@ class ContentService
     }
 
     /**
+     * Get all contents with specified status, field and type.
+     *
      * @param array $types
-     * @param $status
-     * @param $fieldKey
-     * @param $fieldValue
-     * @param $fieldType
+     * @param string $status
+     * @param string $fieldKey
+     * @param string $fieldValue
+     * @param string $fieldType
      * @param string $fieldComparisonOperator
      * @return array|Collection|ContentEntity[]
      */
@@ -217,9 +216,11 @@ class ContentService
     }
 
     /**
+     * Get ordered contents by type, status and published_on date.
+     *
      * @param array $types
-     * @param $status
-     * @param $publishedOnValue
+     * @param string $status
+     * @param string $publishedOnValue
      * @param string $publishedOnComparisonOperator
      * @param string $orderByColumn
      * @param string $orderByDirection
@@ -247,6 +248,8 @@ class ContentService
     }
 
     /**
+     * Get contents by slug and title.
+     *
      * @param string $slug
      * @param string $type
      * @return array|Collection|ContentEntity[]
@@ -264,9 +267,11 @@ class ContentService
     }
 
     /**
-     * @param $userId
-     * @param $type
-     * @param $slug
+     * Get contents by userId, type and slug.
+     *
+     * @param integer $userId
+     * @param string $type
+     * @param string $slug
      * @return array|Collection|ContentEntity[]
      */
     public function getByUserIdTypeSlug($userId, $type, $slug)
@@ -283,6 +288,8 @@ class ContentService
     }
 
     /**
+     * Get contents based on parent id.
+     *
      * @param integer $parentId
      * @param string $orderBy
      * @param string $orderByDirection
@@ -295,13 +302,16 @@ class ContentService
 
         if (!$results) {
             $resultsDB = $this->contentRepository->getByParentId($parentId, $orderBy, $orderByDirection);
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), [$parentId]));
+            $results =
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
     }
 
     /**
+     * Get paginated contents by parent id.
+     *
      * @param integer $parentId
      * @param string $orderBy
      * @param string $orderByDirection
@@ -328,15 +338,18 @@ class ContentService
                 $orderBy,
                 $orderByDirection
             );
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), [$parentId]));
+            $results =
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
     }
 
     /**
+     * Get ordered contents by parent id with specified type.
+     *
      * @param integer $parentId
-     * @param $types
+     * @param array $types
      * @param string $orderBy
      * @param string $orderByDirection
      * @return array|Collection|ContentEntity[]
@@ -357,15 +370,18 @@ class ContentService
                 $orderBy,
                 $orderByDirection
             );
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), [$parentId]));
+            $results =
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
     }
 
     /**
+     * Get ordered contents by parent id and type.
+     *
      * @param integer $parentId
-     * @param $types
+     * @param array $types
      * @param string $orderBy
      * @param string $orderByDirection
      * @return array|Collection|ContentEntity[]
@@ -397,15 +413,18 @@ class ContentService
                 $orderBy,
                 $orderByDirection
             );
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), [$parentId]));
+            $results =
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
         }
 
         return Decorator::decorate($results, 'content');
     }
 
     /**
+     * Count contents with specified type and parent id.
+     *
      * @param integer $parentId
-     * @param $types
+     * @param array $types
      * @return integer
      */
     public function countByParentIdWhereTypeIn(
@@ -419,6 +438,8 @@ class ContentService
     }
 
     /**
+     * Get ordered contents based on parent ids.
+     *
      * @param array $parentIds
      * @param string $orderBy
      * @param string $orderByDirection
@@ -431,15 +452,18 @@ class ContentService
 
         if (!$results) {
             $resultsDB = $this->contentRepository->getByParentIds($parentIds, $orderBy, $orderByDirection);
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), $parentIds));
+            $results =
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), $parentIds));
         }
 
         return Decorator::decorate($results, 'content');
     }
 
     /**
-     * @param $childId
-     * @param $type
+     * Get contents by child and type.
+     *
+     * @param integer $childId
+     * @param string $type
      * @return array|Collection|ContentEntity[]
      */
     public function getByChildIdWhereType($childId, $type)
@@ -449,15 +473,18 @@ class ContentService
 
         if (!$results) {
             $resultsDB = $this->contentRepository->getByChildIdWhereType($childId, $type);
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), [$childId]));
+            $results =
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$childId]));
         }
 
         return Decorator::decorate($results, 'content');
     }
 
     /**
+     * Get contents by child ids with specified type.
+     *
      * @param array $childIds
-     * @param $type
+     * @param string $type
      * @return array|Collection|ContentEntity[]
      */
     public function getByChildIdsWhereType(array $childIds, $type)
@@ -467,14 +494,17 @@ class ContentService
 
         if (!$results) {
             $resultsDB = $this->contentRepository->getByChildIdsWhereType($childIds, $type);
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), $childIds));
+            $results =
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), $childIds));
         }
 
         return Decorator::decorate($results, 'content');
     }
 
     /**
-     * @param $childId
+     * Get contents by child id where parent type met the criteria.
+     *
+     * @param integer $childId
      * @param array $types
      * @return array|Collection|ContentEntity[]
      */
@@ -485,16 +515,19 @@ class ContentService
 
         if (is_null($results)) {
             $resultsDB = $this->contentRepository->getByChildIdWhereParentTypeIn($childId, $types);
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB,'id'), [$childId]));
+            $results =
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$childId]));
         }
 
         return Decorator::decorate($results, 'content');
     }
 
     /**
-     * @param $type
-     * @param $userId
-     * @param $state
+     * Get paginated contents by type and user progress state.
+     *
+     * @param string $type
+     * @param integer $userId
+     * @param string $state
      * @param int $limit
      * @param int $skip
      * @return array|Collection|ContentEntity[]
@@ -527,9 +560,11 @@ class ContentService
     }
 
     /**
+     * Get paginated contents by types and user progress state.
+     *
      * @param array $types
-     * @param $userId
-     * @param $state
+     * @param integer $userId
+     * @param string $state
      * @param int $limit
      * @param int $skip
      * @return array|Collection|ContentEntity[]
@@ -567,9 +602,11 @@ class ContentService
     }
 
     /**
+     * Get recent paginated contents by types and user progress state.
+     *
      * @param array $types
-     * @param $userId
-     * @param $state
+     * @param integer $userId
+     * @param string $state
      * @param int $limit
      * @param int $skip
      * @return array|Collection|ContentEntity[]
@@ -607,9 +644,11 @@ class ContentService
     }
 
     /**
+     * Count recent contents with user progress state and type.
+     *
      * @param array $types
-     * @param $userId
-     * @param $state
+     * @param integer $userId
+     * @param string $state
      * @param int $limit
      * @param int $skip
      * @return array|Collection|ContentEntity[]
@@ -627,6 +666,8 @@ class ContentService
     }
 
     /**
+     * Get neighbouring siblings by type.
+     *
      * @param string $type
      * @param string $columnName
      * @param string $columnValue
@@ -684,9 +725,11 @@ class ContentService
     }
 
     /**
+     * Count contents by type and user progress state.
+     *
      * @param array $types
-     * @param $userId
-     * @param $state
+     * @param integer $userId
+     * @param string $state
      * @return integer
      */
     public function countByTypesUserProgressState(array $types, $userId, $state)
@@ -701,7 +744,7 @@ class ContentService
     }
 
     /**
-     *
+     * Get filtered contents.
      * Returns:
      * ['results' => $lessons, 'total_results' => $totalLessonsAfterFiltering]
      *
@@ -916,6 +959,11 @@ class ContentService
         return $this->contentRepository->delete($id);
     }
 
+    /**
+     * Delete data related with the specified content id.
+     *
+     * @param integer $contentId
+     */
     public function deleteContentRelated($contentId)
     {
         //delete the link with the parent and reposition other siblings
@@ -1001,6 +1049,12 @@ class ContentService
         return $this->contentRepository->softDelete([$id]);
     }
 
+    /**
+     * Soft delete the children for specified content id.
+     *
+     * @param int $id
+     * @return int
+     */
     public function softDeleteContentChildren($id)
     {
         $children = $this->contentHierarchyRepository->getByParentIds([$id]);
@@ -1011,6 +1065,14 @@ class ContentService
         return $this->contentRepository->softDelete(array_pluck($children, 'child_id'));
     }
 
+    /**
+     * Get contents by field value and types.
+     *
+     * @param array $contentTypes
+     * @param string $contentFieldKey
+     * @param array $contentFieldValues
+     * @return mixed
+     */
     public function getByContentFieldValuesForTypes(
         array $contentTypes,
         $contentFieldKey,

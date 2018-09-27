@@ -5,9 +5,7 @@ namespace Railroad\Railcontent\Helpers;
 use Carbon\Carbon;
 use Illuminate\Cache\RedisStore;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
-use Predis\Collection\Iterator\Keyspace;
 use Predis\Transaction\AbortedMultiExecException;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -15,8 +13,11 @@ use Railroad\Railcontent\Services\UserPermissionsService;
 
 class CacheHelper
 {
-    public static $currentUserPermissions;
-
+    /**
+     * Set redis cache prefix.
+     *
+     * @return mixed
+     */
     public static function setPrefix()
     {
         if (method_exists(
@@ -33,7 +34,7 @@ class CacheHelper
     }
 
     /**
-     * Return a string with the user's settings, that it's used when we calculate the cache key
+     * Return a string with the user's settings, that it's used when we calculate the cache key.
      *
      * @return string
      */
@@ -51,27 +52,11 @@ class CacheHelper
             ' ' .
             implode(' ', array_values(array_wrap(ContentRepository::$availableContentStatues)));
 
-        /**
-         * @var $service UserPermissionsService
-         */
-
-        //        if (auth()->check()) {
-        //
-        //            if (empty(self::$currentUserPermissions)) {
-        //                $service = app()->make(UserPermissionsService::class);
-        //                self::$currentUserPermissions = $service->getUserPermissions(auth()->id());
-        //            }
-        //
-        //            if (!empty(self::$currentUserPermissions)) {
-        //                $settings .= implode(' ', array_column(self::$currentUserPermissions, 'permission_id'));
-        //            }
-        //        }
-
         return $settings;
     }
 
     /**
-     * Generate a md5 key based on function arguments and user settings
+     * Generate a md5 key based on function arguments and user settings.
      *
      * @return string
      */
@@ -92,9 +77,8 @@ class CacheHelper
     /**
      * Insert all the specified value (content search key) at the tail of the set stored at key(content id).
      * If not exist a set for content id, it is created as empty set before performing the push operation.
-     * e.g.: musora:content_list_contentId => "contents_results_4a3d0072f14c76449c5acb13a04b4bfe"
-     * If we have a authenticated user we save a set with the user cached keys. This set will be used when the user's
-     * permission change.
+     * e.g.: musora_railcontent_:content_contentId => "musora_railcontent_:userId_149628
+     * contents_by_parent_ids_83fdfbb67340550446c69c6a05184c02"
      *
      * @param string $key
      * @param array $elements
@@ -105,7 +89,6 @@ class CacheHelper
         if (!is_array($elements)) {
             $elements = [$elements];
         }
-        $start = microtime(true);
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
             foreach ($elements as $element) {
@@ -118,8 +101,6 @@ class CacheHelper
                     );
             }
         }
-        $tEnd = microtime(true) - $start;
-        Log::info('for key::' . $key . ' add members to content set in ' . $tEnd);
     }
 
     /**
@@ -170,7 +151,7 @@ class CacheHelper
     }
 
     /**
-     * Delete all the cache with specified keys
+     * Delete all the cache with specified keys.
      *
      * @param array $keys
      * @return bool
@@ -179,7 +160,6 @@ class CacheHelper
     {
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
-            $start = microtime(true);
             if (!empty($keys) && is_array($keys)) {
                 foreach ($keys as $key) {
                     Cache::store(ConfigService::$cacheDriver)
@@ -187,15 +167,14 @@ class CacheHelper
                         ->executeRaw(array_merge(['UNLINK'], explode(' ', $key)));
                 }
             }
-            $tEnd = microtime(true) - $start;
-            Log::info('delete cache keys ' . $tEnd);
         }
 
         return true;
     }
 
-    /** Check user permission expiration date and return first expiration date from the future.
-     *  If the expiration time it's null(user have not permissions or the user's permissions never expire) => return
+    /**
+     * Check user permission expiration date and return first expiration date from the future.
+     * If the expiration time it's null(user have not permissions or the user's permissions never expire) => return
      * default cache time
      *
      * @return Carbon|int
@@ -216,7 +195,8 @@ class CacheHelper
         return ConfigService::$cacheTime;
     }
 
-    /** Set time to live to the specified cache keys. The keys will expire at the given time.
+    /**
+     * Set time to live to the specified cache keys. The keys will expire at the given time.
      *
      * @param array $keys
      * @param timestamp $timeToLive
@@ -245,8 +225,15 @@ class CacheHelper
         return true;
     }
 
+    /**
+     * Get user specific hash key created with cache prefix, userId string and user id value if the user it's
+     * authenticated.
+     *
+     * @return string
+     */
     public static function getUserSpecificHashedKey()
     {
+        self::setPrefix();
         $key =
             Cache::store(ConfigService::$cacheDriver)
                 ->getPrefix() . 'userId_';
@@ -258,6 +245,12 @@ class CacheHelper
         return $key;
     }
 
+    /**
+     * Get hash key fields for selected user key.
+     *
+     * @param string $hash
+     * @return array|mixed|null|object
+     */
     public static function getCachedResultsForKey($hash)
     {
         $results = null;
@@ -274,9 +267,16 @@ class CacheHelper
         return $results;
     }
 
+    /**
+     * Save hash key for user and return user cache
+     *
+     * @param string $hash
+     * @param string $data
+     * @param array $contentIds
+     * @return array|mixed|object
+     */
     public static function saveUserCache($hash, $data, $contentIds = [])
     {
-        $start = microtime(true);
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
             $userKey = self::getUserSpecificHashedKey();
@@ -317,12 +317,13 @@ class CacheHelper
 
             }
         }
-        $tEnd = microtime(true) - $start;
-        Log::info(' save  user cache with content sets in ' . $tEnd);
+
         return $data;
     }
 
     /**
+     * Delete user field from cache.
+     *
      * @param null|array $userKeys
      * @param string $fieldKey
      */
@@ -330,7 +331,6 @@ class CacheHelper
     {
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
-            $start = microtime(true);
             if (!$userKeys) {
                 $userKeys = iterator_to_array(
                     new \Predis\Collection\Iterator\Keyspace(
@@ -363,10 +363,6 @@ class CacheHelper
                         ->executeRaw(array_merge(['UNLINK'], explode(' ', implode(array_keys($myNewArray)))));
                 }
             }
-            $tEnd = microtime(true) - $start;
-            Log::info(' delete cache specific user fields in ' . $tEnd);
-            Log::info($userKeys);
         }
     }
-
 }

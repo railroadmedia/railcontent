@@ -26,7 +26,8 @@ class UserPermissionsService
         $this->userPermissionsRepository = $userPermissionsRepository;
     }
 
-    /** Save user permission record in database.
+    /**
+     * Save user permission record in database.
      * Based on the permission activation start date we delete the user cache keys or set ttl for the cache keys to the
      * activation date.
      *
@@ -53,7 +54,8 @@ class UserPermissionsService
         return $this->userPermissionsRepository->getById($userPermission);
     }
 
-    /** Save user permission record in database
+    /**
+     * Save user permission record in database
      *
      * @param integer $userId
      * @param integer $permissionId
@@ -72,7 +74,8 @@ class UserPermissionsService
         return $this->userPermissionsRepository->getById($userPermission);
     }
 
-    /** Call the method that update the user permissions and return an array with the updated data
+    /**
+     * Call the method that update the user permissions and return an array with the updated data
      *
      * @param  int $id
      * @param array $data
@@ -98,7 +101,8 @@ class UserPermissionsService
         return $this->userPermissionsRepository->getById($id);
     }
 
-    /** Call the method that delete the user permission, if the user permission exists in the database
+    /**
+     * Call the method that delete the user permission, if the user permission exists in the database
      *
      * @param int $id
      * @return array|bool
@@ -121,7 +125,8 @@ class UserPermissionsService
         return $this->userPermissionsRepository->delete($id);
     }
 
-    /** Call the method from repository that pull user permissions and return an array with the results
+    /**
+     * Call the method from repository that pull user permissions and return an array with the results
      *
      * @param null|int $userId
      * @param bool $onlyActive
@@ -142,7 +147,8 @@ class UserPermissionsService
         return $this->userPermissionsRepository->getIdByPermissionAndUser($userId, $permissionId);
     }
 
-    /** Delete user cache or set time to live based on user permission start date.
+    /**
+     * Delete user cache or set time to live based on user permission start date.
      * If the user permission should be active from current datetime we delete user cache keys
      * If the user permission should be active from a future datetime we set time to live for all user cache keys to
      * the activation datetime

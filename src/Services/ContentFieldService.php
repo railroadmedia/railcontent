@@ -140,11 +140,6 @@ class ContentFieldService
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $contentId);
 
-        //delete search cache for pull methods that use type as parameter
-        //CacheHelper::deleteCache('content_type_' . $content['type']);
-
-       // CacheHelper::deleteAllCachedSearchResults('contents_results_');
-
         return $this->get($id);
     }
 
@@ -174,11 +169,6 @@ class ContentFieldService
         //delete cache for associated content id
         CacheHelper::deleteCache('content_' . $field['content_id']);
 
-        //delete search cache for pull methods that use type as parameter
-        //CacheHelper::deleteAllCachedSearchResults('types');
-
-        //CacheHelper::deleteAllCachedSearchResults('contents_results_');
-
         return $this->get($id);
     }
 
@@ -204,11 +194,6 @@ class ContentFieldService
 
         //delete cache for associated content id
         CacheHelper::deleteCache('content_' . $field['content_id']);
-
-        //delete search cache for pull methods that use type as parameter
-        //CacheHelper::deleteAllCachedSearchResults('types');
-
-       // CacheHelper::deleteAllCachedSearchResults('contents_results_');
 
         return $deleted;
     }

@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
@@ -55,7 +54,8 @@ class CommentService
         return Decorator::decorate($this->commentRepository->getById($id), 'comment');
     }
 
-    /** Call the create method from repository that save a comment or a comment reply (based on the parent_id: if the parent_id it's null the method save a comment;
+    /**
+     * Call the create method from repository that save a comment or a comment reply (based on the parent_id: if the parent_id it's null the method save a comment;
      * otherwise save a reply for the comment with given id)
      * Return the comment or null if the content it's not commentable
      *
@@ -107,7 +107,8 @@ class CommentService
         return $createdComment;
     }
 
-    /** Call the update method from repository if the comment exist and the user have rights to update the comment
+    /**
+     * Call the update method from repository if the comment exist and the user have rights to update the comment
      * Return the updated comment; null if the comment it's inexistent or -1 if the user have not rights to update the comment
      *
      * @param integer $id
@@ -142,7 +143,8 @@ class CommentService
         return $this->get($id);
     }
 
-    /** Call the delete method from repository if the comment exist and the user have rights to delete the comment
+    /**
+     * Call the delete method from repository if the comment exist and the user have rights to delete the comment
      * Return null if the comment not exist in database, -1 if the user have not rights to delete the comment or bool
      *
      * @param integer $id
@@ -180,7 +182,8 @@ class CommentService
         return true;
     }
 
-    /** Administrator can edit/delete any comment; other users can edit/delete only their comments
+    /**
+     * Administrator can edit/delete any comment; other users can edit/delete only their comments
      * Return true if the user have rights to edit/update the comment and false otherwise
      *
      * You **may** have to set a 'user_id' attribute in the Request before you can call this method.
@@ -306,7 +309,8 @@ class CommentService
         }
     }
 
-    /** Count the comments that have been created after the comment
+    /**
+     * Count the comments that have been created after the comment
      * @param $commentId
      * @return int
      */
@@ -318,7 +322,8 @@ class CommentService
         return $this->commentRepository->countLatestComments($comment['created_on']);
     }
 
-    /** Calculate the page that should be current page to display the comment
+    /**
+     * Calculate the page that should be current page to display the comment
      * @param int $commentId
      * @param int $limit
      * @return float|int
