@@ -18,7 +18,7 @@ class ContentPermissionsFactory extends ContentPermissionService
      * @param int $permissionId
      * @return array
      */
-    public function create($contentId = null, $contentType = null, $permissionId = null)
+    public function create($contentId = null, $contentType = null, $permissionId = null, $brand = null)
     {
         $this->faker = app(Generator::class);
 

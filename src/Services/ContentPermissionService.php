@@ -28,8 +28,10 @@ class ContentPermissionService
      *
      * @param ContentPermissionRepository $contentPermissionRepository
      */
-    public function __construct(ContentPermissionRepository $contentPermissionRepository, ContentRepository $contentRepository)
-    {
+    public function __construct(
+        ContentPermissionRepository $contentPermissionRepository,
+        ContentRepository $contentRepository
+    ) {
         $this->contentPermissionRepository = $contentPermissionRepository;
         $this->contentRepository = $contentRepository;
     }
@@ -64,7 +66,6 @@ class ContentPermissionService
         return $contentPermissionsMatchingPermissionId;
     }
 
-
     /**
      * @param null $contentId
      * @param null $contentType
@@ -86,12 +87,13 @@ class ContentPermissionService
      * @param int $permissionId
      * @return mixed
      */
-    public function create($contentId = null, $contentType = null, $permissionId)
+    public function create($contentId = null, $contentType = null, $permissionId, $brand = null)
     {
         $id = $this->contentPermissionRepository->create(
             [
                 'content_id' => $contentId,
                 'content_type' => $contentType,
+                'brand' => $brand ?? ConfigService::$brand,
                 'permission_id' => $permissionId,
             ]
         );
@@ -123,6 +125,7 @@ class ContentPermissionService
     }
 
     /** Clear the cache records associated with the content or the cache records associated with the contents that have the specified content type
+     *
      * @param int $contentId
      * @param string $contentType
      */
