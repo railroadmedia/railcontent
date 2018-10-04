@@ -275,10 +275,10 @@ class UserContentProgressService
      * @param integer $contentId
      * @param integer $progress
      * @param integer $userId
-     * @param null|string $state
+     * @param bool $overwriteComplete
      * @return bool
      */
-    public function saveContentProgress($contentId, $progress, $userId)
+    public function saveContentProgress($contentId, $progress, $userId, $overwriteComplete = false)
     {
         $currentProgress =
             $this->userContentRepository->query()
@@ -291,7 +291,8 @@ class UserContentProgressService
                 ->orderBy('updated_on', 'desc')
                 ->first();
 
-        if ($currentProgress['state'] == 'completed' || $currentProgress['progress_percent'] == 100) {
+        if (!$overwriteComplete &&
+            ($currentProgress['state'] == 'completed' || $currentProgress['progress_percent'] == 100)) {
             return true;
         }
 
@@ -464,7 +465,8 @@ class UserContentProgressService
                 $this->saveContentProgress(
                     $parent['id'],
                     $this->getProgressPercentage($userId, $siblings),
-                    $userId
+                    $userId,
+                    true
                 );
             }
         }

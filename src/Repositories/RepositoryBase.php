@@ -112,7 +112,7 @@ abstract class RepositoryBase
      */
     public function updateOrCreate(array $attributes, array $values = [], $getterColumn = 'id')
     {
-        $this->query()->updateOrInsert($attributes, $values);
+        $this->query()->updateOrInsert($attributes, !empty($values) ? $values : array_merge($attributes, $values));
 
         return $this->query()->where($attributes)->get([$getterColumn])->first()[$getterColumn] ?? null;
     }
