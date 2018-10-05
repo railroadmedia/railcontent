@@ -177,7 +177,7 @@ class CacheHelper
      * If the expiration time it's null(user have not permissions or the user's permissions never expire) => return
      * default cache time
      *
-     * @return Carbon|int
+     * @return int - ttl in minutes
      */
     public static function getExpirationCacheTime()
     {
@@ -196,32 +196,26 @@ class CacheHelper
     }
 
     /**
-     * Set time to live to the specified cache keys. The keys will expire at the given time.
+     * Set time to live to the specified cache key. The key will expire at the given time.
      *
-     * @param array $keys
-     * @param timestamp $timeToLive
+     * @param $keys
+     * @param ttl in seconds $timeToLive
      * @return bool
      */
-    public static function setTimeToLiveForKeys(array $keys, $timeToLive)
+    public static function setTimeToLiveForKey($key, $timeToLive)
     {
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
-            $cacheTime =
-                Carbon::now()
-                    ->addMinutes(self::getExpirationCacheTime())
-                    ->getTimestamp();
-
-            $existingTTl = Redis::ttl($keys);
-
+            $cacheTime = $timeToLive;
+            $existingTTl = Redis::ttl($key);
             if (($existingTTl > 0) && ($existingTTl < $cacheTime)) {
                 $cacheTime = $existingTTl;
             }
             Redis::expire(
-                $cacheTime,
-                $timeToLive
+                $key,
+                $cacheTime
             );
         }
-
         return true;
     }
 
@@ -286,15 +280,17 @@ class CacheHelper
                 }
                 self::addLists($userKey . ' ' . $hash, $contentIds);
             }
-            $cacheTime =
-                Carbon::now()
-                    ->addMinutes(self::getExpirationCacheTime())
-                    ->getTimestamp();
+
+            //cache time in seconds
+            $cacheTime = self::getExpirationCacheTime() * 60;
+
+            //get key ttl in seconds
             $existingTTl = Redis::ttl($userKey);
 
             if (($existingTTl > 0) && ($existingTTl < $cacheTime)) {
                 $cacheTime = $existingTTl;
             }
+
             try {
                 $results =
                     Cache::store(ConfigService::$cacheDriver)
@@ -308,11 +304,11 @@ class CacheHelper
                                     json_encode($data)
                                 );
                                 $t->multi();
-                                $t->expire(self::getUserSpecificHashedKey(), $cacheTime);
                                 $t->hget(self::getUserSpecificHashedKey(), $hash);
+                                $t->expire(self::getUserSpecificHashedKey(), $cacheTime);
                             }
                         );
-                return (json_decode($results[2], true));
+                return (json_decode($results[1], true));
             } catch (AbortedMultiExecException $e) {
 
             }

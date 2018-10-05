@@ -174,18 +174,19 @@ class UserPermissionsService
                 Cache::store(ConfigService::$cacheDriver)
                     ->getPrefix() . 'userId_' . $userId
             );
-            if (Carbon::createFromTimestamp($existingTTL)
-                    ->gt(Carbon::parse($startDate)) &&
-                (Carbon::parse($startDate)
-                    ->gt(Carbon::now()))) {
-                CacheHelper::setTimeToLiveForKeys(
-                    [
-                        Cache::store(ConfigService::$cacheDriver)
-                            ->getPrefix() . 'userId_' . $userId,
-                    ],
+            if ((Carbon::parse($startDate)
+                    ->gt(Carbon::now())) &&
+                (($existingTTL == -2) ||
+                    ($existingTTL >
+                        Carbon::parse($startDate)
+                            ->diffInSeconds(Carbon::now())))) {
+                CacheHelper::setTimeToLiveForKey(
+                    Cache::store(ConfigService::$cacheDriver)
+                        ->getPrefix() . 'userId_' . $userId,
                     Carbon::parse($startDate)
-                        ->getTimestamp()
+                        ->diffInSeconds(Carbon::now())
                 );
+
             }
         }
     }

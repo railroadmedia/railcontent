@@ -59,7 +59,7 @@ class UserContentProgressFactory extends UserContentProgressService
      * @param int|null $userId
      * @return bool
      */
-    public function saveContentProgress($contentId = null, $progress = null, $userId = null)
+    public function saveContentProgress($contentId = null, $progress = null, $userId = null, $overwriteComplete = false)
     {
         $this->faker = app(Generator::class);
 

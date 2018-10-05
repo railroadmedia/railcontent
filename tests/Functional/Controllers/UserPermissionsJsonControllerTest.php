@@ -36,6 +36,11 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
      */
     private $contentFactory;
 
+    /**
+     * @var ContentRepository
+     */
+    private $contentRepository;
+
     public function setUp()
     {
         parent::setUp();
@@ -43,12 +48,13 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->userPermissionRepository = $this->app->make(UserPermissionsRepository::class);
         $this->contentPermissionRepository = $this->app->make(ContentPermissionRepository::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentRepository = $this->app->make(ContentRepository::class);
     }
 
     protected function tearDown()
     {
-//        Cache::store('redis')
-//            ->flush();
+        Cache::store('redis')
+            ->flush();
     }
 
     public function test_store_validation()
@@ -547,6 +553,9 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
     public function test_ttl_to_user_permission_start_date()
     {
         $userId = $this->createAndLogInNewUser();
+
+        $userCacheKeys = CacheHelper::getUserSpecificHashedKey();
+
         $content1 = $this->contentFactory->create();
         $content2 = $this->contentFactory->create();
         $permission1 = $this->permissionRepository->create(
@@ -557,9 +566,10 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         );
         $contentPermission = $this->call(
             'PUT',
-            'railcontent/permission/assign',[
+            'railcontent/permission/assign',
+            [
                 'content_id' => $content1['id'],
-                'permission_id' => $permission1
+                'permission_id' => $permission1,
             ]
         );
 
@@ -601,8 +611,15 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->assertNotEquals(
             -1,
             Redis::ttl(
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userId
+                $userCacheKeys
+            )
+        );
+
+        //assert ttl it's the seconds until permission activation date
+        $this->assertEquals(
+            60 * 60,
+            Redis::ttl(
+                $userCacheKeys
             )
         );
     }
@@ -619,9 +636,10 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         );
         $contentPermission = $this->call(
             'PUT',
-            'railcontent/permission/assign',[
+            'railcontent/permission/assign',
+            [
                 'content_id' => $content['id'],
-                'permission_id' => $permission
+                'permission_id' => $permission,
             ]
         );
 
@@ -645,7 +663,6 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         );
         $this->assertArraySubset([(array)$content], $response->decodeResponseJson('data'));
 
-
         $this->call(
             'DELETE',
             'railcontent/user-permission/' . $userPermission
@@ -663,19 +680,35 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
     public function test_user_multiple_permissions()
     {
         $userId = $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create();
+
+        $userCacheKeys = CacheHelper::getUserSpecificHashedKey();
+
+        $content = $this->contentRepository->create(
+            [
+                'slug' => $this->faker->word,
+                'type' => $this->faker->word,
+                'status' => 'published',
+                'brand' => ConfigService::$brand,
+                'language' => 'en',
+                'created_on' => Carbon::now()
+                    ->toDateTimeString(),
+            ]
+        );
+
         $permission = $this->permissionRepository->create(
             [
                 'name' => $this->faker->word,
                 'brand' => ConfigService::$brand,
             ]
         );
+
         $permission2 = $this->permissionRepository->create(
             [
                 'name' => $this->faker->word,
                 'brand' => ConfigService::$brand,
             ]
         );
+
         $contentPermission = $this->contentPermissionRepository->create(
             [
                 'content_id' => $content['id'],
@@ -718,19 +751,11 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $userCacheKeys = Cache::store(ConfigService::$cacheDriver)
-                ->getPrefix() . 'userId_' . $userId;
+        //expected 3 days in seconds (the expiration date for user's permission 1)
+        $recentExpirationSeconds = 3 * 24 * 60 * 60;
 
-        $recentExpirationDate =
-            Carbon::now()
-                ->addMinutes(ConfigService::$cacheTime)
-                ->toDateTimeString();
+        $redisTTL = Redis::ttl($userCacheKeys);
 
-        $redisTTL =
-            Carbon::createFromTimestamp(Redis::ttl($userCacheKeys))
-                ->toDateTimeString();
-
-        $this->assertEquals($recentExpirationDate, $redisTTL);
-
+        $this->assertEquals($recentExpirationSeconds, $redisTTL);
     }
 }
