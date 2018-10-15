@@ -148,6 +148,16 @@ class UserPermissionsService
     }
 
     /**
+     * @param int $userId
+     * @param int $permissionName
+     * @return array
+     */
+    public function userHasPermissionName($userId, $permissionName)
+    {
+        return $this->userPermissionsRepository->userHasPermissionName($userId, $permissionName);
+    }
+
+    /**
      * Delete user cache or set time to live based on user permission start date.
      * If the user permission should be active from current datetime we delete user cache keys
      * If the user permission should be active from a future datetime we set time to live for all user cache keys to

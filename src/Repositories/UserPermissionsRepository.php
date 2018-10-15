@@ -10,41 +10,49 @@ class UserPermissionsRepository extends RepositoryBase
 {
     protected function query()
     {
-        return parent::connection()->table(ConfigService::$tableUserPermissions);
+        return parent::connection()
+            ->table(ConfigService::$tableUserPermissions);
     }
 
     /** Pull the user permissions record
      *
      * @param integer|null $userId
-     * @param boolean      $onlyActive
+     * @param boolean $onlyActive
      * @return array
      */
     public function getUserPermissions($userId, $onlyActive)
     {
-        $query = $this->query()
-            ->join(
-                ConfigService::$tablePermissions,
-                function (JoinClause $join) {
-                    $join
-                        ->on(
+        $query =
+            $this->query()
+                ->join(
+                    ConfigService::$tablePermissions,
+                    function (JoinClause $join) {
+                        $join->on(
                             ConfigService::$tablePermissions . '.id',
                             '=',
                             ConfigService::$tableUserPermissions . '.permission_id'
                         );
-                });
-        if($onlyActive)
-        {
-            $query = $query->where(function ($query) {
-                $query->whereDate('expiration_date', '>=', Carbon::now()->toDateTimeString())
-                    ->orWhereNull('expiration_date');
-            });
+                    }
+                );
+        if ($onlyActive) {
+            $query = $query->where(
+                function ($query) {
+                    $query->whereDate(
+                        'expiration_date',
+                        '>=',
+                        Carbon::now()
+                            ->toDateTimeString()
+                    )
+                        ->orWhereNull('expiration_date');
+                }
+            );
         }
-        if($userId)
-        {
+        if ($userId) {
             $query = $query->where(ConfigService::$tableUserPermissions . '.user_id', $userId);
         }
 
-        return $query->get()->toArray();
+        return $query->get()
+            ->toArray();
     }
 
     /**
@@ -54,6 +62,40 @@ class UserPermissionsRepository extends RepositoryBase
      */
     public function getIdByPermissionAndUser($userId, $permissionId)
     {
-        return $this->query()->where('user_id', $userId)->where('permission_id', $permissionId)->get()->toArray();
+        return $this->query()
+            ->where('user_id', $userId)
+            ->where('permission_id', $permissionId)
+            ->get()
+            ->toArray();
+    }
+
+    /**
+     * @param int $userId
+     * @param int $permissionName
+     * @return boolean
+     */
+    public function userHasPermissionName($userId, $permissionName)
+    {
+        return $this->query()
+            ->join(
+                ConfigService::$tablePermissions,
+                ConfigService::$tablePermissions . '.id',
+                '=',
+                ConfigService::$tableUserPermissions . '.permission_id'
+            )
+            ->where(
+                function ($query) {
+                    $query->whereDate(
+                        'expiration_date',
+                        '>=',
+                        Carbon::now()
+                            ->toDateTimeString()
+                    )
+                        ->orWhereNull('expiration_date');
+                }
+            )
+            ->where('user_id', $userId)
+            ->where('name', $permissionName)
+            ->exists();
     }
 }
