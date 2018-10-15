@@ -1,18 +1,23 @@
 <?php
 
 return [
-    //ttl value in minutes
+    // brands
+    'brand' => 'brand',
+    'available_brands' => ['brand'],
+
+    // cache
+    // ttl value in minutes
     'cache_duration' => 60 * 24 * 30,
+    'cache_prefix' => 'railcontent',
+    'cache_driver' => 'redis',
+
+    // database
     'database_connection_name' => 'mysql',
     'connection_mask_prefix' => 'railcontent_',
     'data_mode' => 'host',
-
     'table_prefix' => 'railcontent_',
 
-    'brand' => 'brand',
-
-    'available_brands' => ['brand'],
-
+    // languages
     'default_language' => 'en-US',
     'available_languages' => [
         'en-US',
@@ -26,6 +31,7 @@ return [
         \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
     ],
 
+    // filter options limitation
     'field_option_list' => [
         'instructor',
         'topic',
@@ -34,6 +40,9 @@ return [
         'style',
         'artist',
     ],
+
+    // comments
+    'comment_likes_amount_of_users' => 3,
     'commentable_content_types' => [
         'course',
         'course lesson',
@@ -51,7 +60,12 @@ return [
         136145,
         7776,
     ],
+
+
+    // validation
     'validation' => [],
+
+    // aws integration
     'awsS3_remote_storage' => [
         'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
         'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
@@ -60,8 +74,8 @@ return [
     ],
     'awsCloudFront' => 'd1923uyy6spedc.cloudfront.net',
 
+    // search
     'searchable_content_types' => ['recordings', 'courses'],
-
     'search_index_values' => [
         'high_value' => [
             'content_attributes' => ['slug'],
@@ -80,11 +94,13 @@ return [
         ],
     ],
 
+    // progress bubbling
     'allowed_types_for_bubble_progress' => [
         'started' => [],
         'completed' => [],
     ],
 
+    // video content sync
     'video_sync' => [
         'vimeo' => [
             'brand' => [
@@ -101,14 +117,12 @@ return [
         ],
     ],
 
+    // middleware
     'all_routes_middleware' => [],
-
     'user_routes_middleware' => [],
     'administrator_routes_middleware' => [],
 
-    'cache_prefix' => 'railcontent',
-    'cache_driver' => 'redis',
-
+    // decorators
     'decorators' => [
         'content' => [
             \Railroad\Railcontent\Decorators\Hierarchy\ContentSlugHierarchyDecorator::class,
@@ -116,19 +130,12 @@ return [
         ],
         'comment' => [
             \Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator::class,
-        ],
-        'comment' => [
             \Railroad\Railcontent\Decorators\Entity\CommentEntityDecorator::class,
         ],
     ],
 
-    // specific decorator configs
-
     // use collections
     'use_collections' => true,
-
-    // comments
-    'comment_likes_amount_of_users' => 3,
 
     // content hierarchy
     'content_hierarchy_max_depth' => 3,
@@ -136,4 +143,15 @@ return [
         'content-type',
         'content-type',
     ],
+
+    // ecommerce integration
+    'enable_ecommerce_integration' => true,
+    'ecommerce_product_sku_to_content_permission_name_map' => [
+        'SKU' => 'name',
+    ],
+
+    // event to job listeners/map
+    'event_to_job_map' => [
+
+    ]
 ];
