@@ -284,12 +284,12 @@ abstract class RepositoryBase
     /**
      * @return Builder
      */
-    protected abstract function query();
+    public abstract function query();
 
     /**
      * @return Connection
      */
-    protected function connection()
+    public function connection()
     {
         return $this->connection;
     }

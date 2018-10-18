@@ -10,7 +10,7 @@ class CommentAssignmentRepository extends RepositoryBase
     /**
      * @return CommentQueryBuilder
      */
-    protected function query()
+    public function query()
     {
         return (new CommentQueryBuilder(
             $this->connection(),

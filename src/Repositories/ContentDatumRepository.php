@@ -13,7 +13,7 @@ class ContentDatumRepository extends RepositoryBase
     /**
      * @return Builder
      */
-    protected function query()
+    public function query()
     {
         return $this->connection()->table(ConfigService::$tableContentData);
     }

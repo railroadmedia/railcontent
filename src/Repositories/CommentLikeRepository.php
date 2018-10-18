@@ -107,7 +107,7 @@ class CommentLikeRepository extends RepositoryBase
     /**
      * @return \Illuminate\Database\Query\Builder
      */
-    protected function query()
+    public function query()
     {
         return $this->connection()->table(ConfigService::$tableCommentLikes);
     }

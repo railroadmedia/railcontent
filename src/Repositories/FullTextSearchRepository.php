@@ -50,7 +50,7 @@ class FullTextSearchRepository extends RepositoryBase
     /**
      * @return FullTextSearchQueryBuilder
      */
-    protected function query()
+    public function query()
     {
         return (new FullTextSearchQueryBuilder(
             $this->connection(),

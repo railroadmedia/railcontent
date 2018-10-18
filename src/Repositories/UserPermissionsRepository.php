@@ -8,7 +8,7 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class UserPermissionsRepository extends RepositoryBase
 {
-    protected function query()
+    public function query()
     {
         return parent::connection()
             ->table(ConfigService::$tableUserPermissions);
