@@ -27,34 +27,6 @@ class UserPermissionsService
     }
 
     /**
-     * Save user permission record in database.
-     * Based on the permission activation start date we delete the user cache keys or set ttl for the cache keys to the
-     * activation date.
-     *
-     * @param integer $userId
-     * @param integer $permissionId
-     * @param date $startDate
-     * @param date|null $expirationDate
-     * @return array
-     */
-    public function create($userId, $permissionId, $startDate, $expirationDate = null)
-    {
-        $userPermission = $this->userPermissionsRepository->create(
-            [
-                'user_id' => $userId,
-                'permission_id' => $permissionId,
-                'start_date' => $startDate,
-                'expiration_date' => $expirationDate,
-                'created_on' => Carbon::now()
-                    ->toDateTimeString(),
-            ]
-        );
-        $this->setTTLOrDeleteUserCache($userId, $startDate);
-
-        return $this->userPermissionsRepository->getById($userPermission);
-    }
-
-    /**
      * Save user permission record in database
      *
      * @param integer $userId
@@ -72,33 +44,6 @@ class UserPermissionsService
         $userPermission = $this->userPermissionsRepository->updateOrCreate($attributes, $values);
 
         return $this->userPermissionsRepository->getById($userPermission);
-    }
-
-    /**
-     * Call the method that update the user permissions and return an array with the updated data
-     *
-     * @param  int $id
-     * @param array $data
-     * @return array
-     */
-    public function update($id, array $data)
-    {
-        if (array_key_exists('start_date', $data)) {
-            $this->setTTLOrDeleteUserCache($data['user_id'], $data['start_date']);
-        }
-
-        $this->userPermissionsRepository->update(
-            $id,
-            array_merge(
-                $data,
-                [
-                    'updated_on' => Carbon::now()
-                        ->toDateTimeString(),
-                ]
-            )
-        );
-
-        return $this->userPermissionsRepository->getById($id);
     }
 
     /**

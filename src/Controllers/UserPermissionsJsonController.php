@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Exceptions\NotFoundException;
@@ -27,62 +28,32 @@ class UserPermissionsJsonController extends Controller
     }
 
     /**
-     * Create user permission record and return data in JSON format.
+     * Create/update user permission record and return data in JSON format.
      *
      * @param \Railroad\Railcontent\Requests\UserPermissionCreateRequest $request
      * @return JsonResponse
      */
     public function store(UserPermissionCreateRequest $request)
     {
-        $userPermission = $this->userPermissionsService->create(
-            $request->input('user_id'),
-            $request->input('permission_id'),
-            $request->input('start_date'),
-            $request->input('expiration_date')
-        );
-
-        return reply()->json(
-            [$userPermission],
+        $userPermission = $this->userPermissionsService->updateOrCeate(
             [
-                'transformer' => DataTransformer::class,
+                'user_id' => $request->input('user_id'),
+                'permission_id' => $request->input('permission_id'),
+            ],
+            [
+                'start_date' => $request->input('start_date'),
+                'expiration_date' => $request->input('expiration_date'),
+                'created_on' => Carbon::now()
+                    ->toDateTimeString(),
+                'updated_on' => Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
-    }
-
-    /** Update user permission and return data in JSON format
-     *
-     * @param   int $userPermissionId
-     * @param \Railroad\Railcontent\Requests\UserPermissionUpdateRequest $request
-     * @return JsonResponse
-     * @throws \Throwable
-     */
-    public function update($userPermissionId, UserPermissionUpdateRequest $request)
-    {
-        //update user permission with the data sent on the request
-        $userPermission = $this->userPermissionsService->update(
-            $userPermissionId,
-            array_intersect_key(
-                $request->all(),
-                [
-                    'user_id' => '',
-                    'permission_id' => '',
-                    'start_date' => '',
-                    'expiration_date' => '',
-                ]
-            )
-        );
-
-        //if the update method response it's null the content not exist; we throw the proper exception
-        throw_if(
-            is_null($userPermission),
-            new NotFoundException('Update failed, user permission not found with id: ' . $userPermissionId)
-        );
 
         return reply()->json(
             [$userPermission],
             [
                 'transformer' => DataTransformer::class,
-                'code' => 201,
             ]
         );
     }

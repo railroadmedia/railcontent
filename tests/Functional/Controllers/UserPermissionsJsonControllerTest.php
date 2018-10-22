@@ -118,7 +118,8 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'expiration_date' => null,
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
-                'updated_on' => null,
+                'updated_on' => Carbon::now()
+                    ->toDateTimeString(),
             ],
             $results->decodeResponseJson('data')[0]
         );
@@ -132,7 +133,8 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'expiration_date' => null,
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
-                'updated_on' => null,
+                'updated_on' => Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
     }
@@ -157,16 +159,22 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                     ->toDateTimeString(),
             ]
         );
+
         $results = $this->call(
-            'PATCH',
-            'railcontent/user-permission/' . $userPermission,
+            'PUT',
+            'railcontent/user-permission',
             [
+                'user_id' => $userId,
+                'permission_id' => $permission,
+                'start_date' => Carbon::now()
+                    ->toDateTimeString(),
                 'expiration_date' => Carbon::now()
                     ->addMonth(1)
                     ->toDateTimeString(),
             ]
         );
-        $this->assertEquals(201, $results->getStatusCode());
+
+        $this->assertEquals(200, $results->getStatusCode());
         $this->assertArraySubset(
             [
                 'user_id' => $userId,
@@ -177,8 +185,6 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                     ->addMonth(1)
                     ->toDateTimeString(),
                 'created_on' => Carbon::now()
-                    ->toDateTimeString(),
-                'updated_on' => Carbon::now()
                     ->toDateTimeString(),
             ],
             $results->decodeResponseJson('data')[0]
@@ -195,23 +201,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                     ->toDateTimeString(),
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
-                'updated_on' => Carbon::now()
-                    ->toDateTimeString(),
             ]
-        );
-    }
-
-    public function test_update_user_permission_not_exists()
-    {
-        $randomId = rand();
-        $results = $this->call('PATCH', '/railcontent/user-permission/' . $randomId);
-        $this->assertEquals(404, $results->getStatusCode());
-        $this->assertEquals(
-            [
-                'title' => 'Entity not found.',
-                'detail' => 'Update failed, user permission not found with id: ' . $randomId,
-            ],
-            $results->decodeResponseJson('meta')['errors']
         );
     }
 
@@ -236,9 +226,10 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             ]
         );
         $results = $this->call(
-            'PATCH',
-            'railcontent/user-permission/' . $userPermission,
+            'PUT',
+            'railcontent/user-permission' ,
             [
+                'user_id' => $userId,
                 'permission_id' => rand(),
                 'start_date' => $this->faker->word,
             ]
