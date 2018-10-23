@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Services;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
+use Railroad\Railcontent\Events\UserContentsProgressReset;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
@@ -245,6 +246,8 @@ class UserContentProgressService
             )
             ->whereIn('content_id', $idsToDelete)
             ->delete();
+
+        event(new UserContentsProgressReset($userId, $idsToDelete));
 
         //delete user content progress cache
         UserContentProgressRepository::$cache = [];
