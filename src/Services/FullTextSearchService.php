@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\FullTextSearchRepository;
 
 class FullTextSearchService
@@ -67,6 +68,10 @@ class FullTextSearchService
         $orderByColumn = trim($sort, '-');
 
         $oldBrands = ConfigService::$availableBrands;
+
+        if(empty($contentStatuses)){
+            $contentStatuses = ContentRepository::$availableContentStatues;
+        }
 
         if (!empty($brands)) {
             ConfigService::$availableBrands = $brands;
