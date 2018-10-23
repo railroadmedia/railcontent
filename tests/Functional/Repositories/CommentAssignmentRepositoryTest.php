@@ -66,6 +66,9 @@ class CommentAssignmentRepositoryTest extends RailcontentTestCase
             $comments[$i] = $this->commentFactory->create($this->faker->text, $oneContent['id'], null, rand())->getArrayCopy();
             $assignedComments[$i] = $this->commentAssignationFactory->create($comments[$i]['id'], $userId);
             unset($comments[$i]['replies']);
+            unset($comments[$i]['like_count']);
+            unset($comments[$i]['like_users']);
+            unset($comments[$i]['is_liked']);
         }
 
         $response = $this->classBeingTested->getAssignedCommentsForUser($userId, 1,25,'comment_id','asc');

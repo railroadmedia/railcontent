@@ -97,6 +97,9 @@ class CommentRepositoryTest extends RailcontentTestCase
         for ($i = 0; $i < 12; $i++) {
             $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $content['id'], null, $userId)->getArrayCopy();
             $expectedComments[$i]['replies'] = [];
+            unset($expectedComments[$i]['like_count']);
+            unset($expectedComments[$i]['like_users']);
+            unset($expectedComments[$i]['is_liked']);
         }
 
         // create random comments
@@ -120,6 +123,9 @@ class CommentRepositoryTest extends RailcontentTestCase
         {
             $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $secondContent['id'])->getArrayCopy();
             $expectedComments[$i]['replies'] = [];
+            unset($expectedComments[$i]['like_count']);
+            unset($expectedComments[$i]['like_users']);
+            unset($expectedComments[$i]['is_liked']);
         }
 
         //create comments for first content
@@ -149,6 +155,9 @@ class CommentRepositoryTest extends RailcontentTestCase
         {
             $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $firstContent['id'], null, $userId)->getArrayCopy();
             $expectedComments[$i]['replies'] = [];
+            unset($expectedComments[$i]['like_count']);
+            unset($expectedComments[$i]['like_users']);
+            unset($expectedComments[$i]['is_liked']);
 
         }
 
@@ -176,11 +185,17 @@ class CommentRepositoryTest extends RailcontentTestCase
         for ($i = 0; $i <= $numberOfComments; $i++) {
             $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $content['id'], null, $userId)->getArrayCopy();
             $expectedComments[$i]['replies'] = [];
+            unset($expectedComments[$i]['like_count']);
+            unset($expectedComments[$i]['like_users']);
+            unset($expectedComments[$i]['is_liked']);
         }
 
         for($i = 0; $i<=3; $i++){
             $expectedComments[$i]['replies'][] = $this->commentFactory->create($this->faker->text(), null,  $expectedComments[$i]['id'], rand())->getArrayCopy();
             unset($expectedComments[$i]['replies'][0]['replies']);
+            unset($expectedComments[$i]['replies'][0]['like_count']);
+            unset($expectedComments[$i]['replies'][0]['like_users']);
+            unset($expectedComments[$i]['replies'][0]['is_liked']);
         }
 
         $results = $this->classBeingTested->getComments();

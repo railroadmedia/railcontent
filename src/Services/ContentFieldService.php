@@ -198,4 +198,24 @@ class ContentFieldService
         return $deleted;
     }
 
+    public function createOrUpdate($data)
+    {
+        $id = $this->fieldRepository->createOrUpdateAndReposition(
+            ['id' => $data['id'] ?? null],
+            $data
+        );
+
+        //Fire an event that the content was modified
+        if(array_key_exists('id',$data)) {
+            event(new ContentFieldUpdated($data['content_id']));
+        } else {
+            event(new ContentFieldCreated($data['content_id']));
+        }
+
+        //delete cache associated with the content id
+        CacheHelper::deleteCache('content_' . $data['content_id']);
+
+        return $this->get($id);
+    }
+
 }

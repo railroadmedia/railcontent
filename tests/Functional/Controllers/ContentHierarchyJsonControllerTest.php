@@ -92,42 +92,16 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
 
         $this->assertArraySubset(
             [
-                    'parent_id' => $parentContent['id'],
-                    'child_id' => $childContent['id'],
-                    'child_position' => 1,
-                    'created_on' => Carbon::now()
-                        ->toDateTimeString(),
+                'parent_id' => $parentContent['id'],
+                'child_id' => $childContent['id'],
+                'child_position' => 1,
+                'created_on' => Carbon::now()
+                    ->toDateTimeString(),
             ],
             $response->decodeResponseJson('data')[0]
         );
     }
 
-    public function test_update_validation_fails()
-    {
-        $response = $this->call('PATCH', 'railcontent/content/hierarchy/' . rand() . '/' . rand());
-
-        $this->assertEquals(422, $response->status());
-
-        $errors = [
-            [
-                'source' => 'child_position',
-                'detail' => 'The child position field is required.',
-            ],
-        ];
-
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
-    }
-
-    public function test_update_not_found()
-    {
-        $response = $this->call(
-            'PATCH',
-            'railcontent/content/hierarchy/' . rand() . '/' . rand(),
-            ['child_position' => rand()]
-        );
-
-        $this->assertEquals(404, $response->status());
-    }
 
     public function test_update()
     {
@@ -142,9 +116,13 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
         $oldHierarchy = $this->contentHierarchyFactory->create($parentContent['id'], $childContent['id']);
 
         $response = $this->call(
-            'PATCH',
-            'railcontent/content/hierarchy/' . $parentContent['id'] . '/' . $childContent['id'],
-            ['child_position' => $newChildPosition]
+            'PUT',
+            'railcontent/content/hierarchy',
+            [
+                'parent_id' => $parentContent['id'],
+                'child_id' => $childContent['id'],
+                'child_position' => $newChildPosition,
+            ]
         );
 
         $this->assertDatabaseHas(
@@ -156,7 +134,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(201, $response->status());
+        $this->assertEquals(200, $response->status());
     }
 
     public function test_delete()

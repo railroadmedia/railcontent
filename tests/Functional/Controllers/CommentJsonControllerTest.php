@@ -110,7 +110,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'replies'      => []
         ];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data')[0]);
     }
 
     public function test_update_other_comment_response()

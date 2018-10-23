@@ -316,4 +316,42 @@ class ContentFieldControllerTest extends RailcontentTestCase
             }
         );
     }
+
+    public function test_update_content_field_()
+    {
+        $content = $this->contentFactory->create();
+
+        $field = $this->contentFieldFactory->create($content['id']);
+
+        $content = $this->contentFactory->create();
+        $key = $this->faker->text(255);
+        $value = $this->faker->text(255);
+        $type = $this->faker->word;
+        $position = $this->faker->numberBetween();
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/field',
+            [
+                'id' => $field['id'],
+                'content_id' => $content['id'],
+                'key' => $key,
+                'value' => $value,
+                'type' => $type,
+                'position' => $position,
+            ]
+        );
+        $expectedResults = [
+            "id" => $field['id'],
+            "content_id" => $content['id'],
+            "key" => $key,
+            "value" => $value,
+            "type" => $type,
+            "position" => 1,
+        ];
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+
+    }
 }

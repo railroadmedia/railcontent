@@ -86,7 +86,7 @@ class CommentServiceTest extends RailcontentTestCase
         )
             ->getArrayCopy();
 
-        $this->assertEquals(array_add($comment, 'replies', []), $result);
+        $this->assertArraySubset(array_add($comment, 'replies', []), $result);
     }
 
     public function test_comment_assignation()
@@ -160,7 +160,7 @@ class CommentServiceTest extends RailcontentTestCase
             $this->classBeingTested->create($reply['comment'], null, $comment['id'], $userId, $reply['display_name'])
                 ->getArrayCopy();
 
-        $this->assertEquals(array_add($reply, 'replies', []), $result);
+        $this->assertArraySubset(array_add($reply, 'replies', []), $result);
     }
 
     public function test_update_my_comment()

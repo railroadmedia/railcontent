@@ -58,12 +58,17 @@ class ContentFieldJsonController extends Controller
      */
     public function store(ContentFieldCreateRequest $request)
     {
-        $contentField = $this->fieldService->create(
-            $request->input('content_id'),
-            $request->input('key'),
-            $request->input('value'),
-            $request->input('position'),
-            $request->input('type')
+        $contentField = $this->fieldService->createOrUpdate(
+            $request->only(
+                [
+                    'id',
+                    'content_id',
+                    'key',
+                    'value',
+                    'position',
+                    'type',
+                ]
+            )
         );
 
         return reply()->json(

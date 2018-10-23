@@ -45,7 +45,7 @@ class CommentLikesDecorator implements DecoratorInterface
             ConfigService::$commentLikesDecoratorAmountOfUsers
         );
         $isLikedByCurrentUser = $this->commentLikeRepository->isLikedByUserId($commentAndReplyIds, auth()->id());
-
+        $comments = $comments->toArray();
         foreach ($comments as $commentIndex => $comment) {
             $comments[$commentIndex]['like_count'] = $likeCounts[$comment['id']] ?? 0;
             $comments[$commentIndex]['like_users'] = $likeUsers[$comment['id']] ?? [];
@@ -61,6 +61,6 @@ class CommentLikesDecorator implements DecoratorInterface
             }
         }
 
-        return $comments;
+        return new Collection($comments);
     }
 }
