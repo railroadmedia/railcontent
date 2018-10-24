@@ -129,12 +129,15 @@ class ContentEntity extends Entity
 
         // user progress
         if (isset($data['user_progress'])) {
-            if (isset($data['user_progress'][auth()->id()]['progress_percent'])) {
-                $data['progress_percent'] = $data['user_progress'][auth()->id()]['progress_percent'];
+            reset($data['user_progress']);
+            $userId = key($data['user_progress']);
+
+            if (isset($data['user_progress'][$userId]['progress_percent'])) {
+                $data['progress_percent'] = $data['user_progress'][$userId]['progress_percent'];
             }
 
-            if (isset($data['user_progress'][auth()->id()]['state'])) {
-                $data['progress_state'] = $data['user_progress'][auth()->id()]['state'];
+            if (isset($data['user_progress'][$userId]['state'])) {
+                $data['progress_state'] = $data['user_progress'][$userId]['state'];
             }
         }
 

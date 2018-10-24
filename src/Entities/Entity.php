@@ -27,6 +27,8 @@ class Entity extends ArrayObject
     public function replace(array $data)
     {
         $this->exchangeArray($data);
+
+        $this->dotCache = null;
     }
 
     public function offsetSet($index, $newval)
