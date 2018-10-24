@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\UserPermissionCreateRequest;
-use Railroad\Railcontent\Requests\UserPermissionUpdateRequest;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class UserPermissionsJsonController extends Controller

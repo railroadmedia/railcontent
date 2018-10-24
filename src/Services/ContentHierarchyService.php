@@ -53,7 +53,7 @@ class ContentHierarchyService
     }
 
     /**
-     * Create a new field and return it.
+     * Create/update a new field and return it.
      *
      * @param int $parentId
      * @param int $childId
@@ -77,35 +77,6 @@ class ContentHierarchyService
         $results = $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
 
         return $results;
-    }
-
-    /**
-     * Create a new field and return it.
-     *
-     * @param int $parentId
-     * @param int $childId
-     * @param int|null $childPosition
-     * @return array
-     */
-    public function update($parentId, $childId, $childPosition = null)
-    {
-        $contentHierarchy = $this->get($parentId, $childId);
-        if (is_null($contentHierarchy)) {
-            return $contentHierarchy;
-        }
-
-        $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
-            $parentId,
-            $childId,
-            $childPosition
-        );
-
-        //delete the cached results for parent id and child id
-        CacheHelper::deleteCache('content_' . $parentId);
-
-        CacheHelper::deleteCache('content_' . $childId);
-
-        return $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
     }
 
     /**

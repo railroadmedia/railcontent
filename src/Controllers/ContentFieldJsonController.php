@@ -7,7 +7,6 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentFieldCreateRequest;
 use Railroad\Railcontent\Requests\ContentFieldDeleteRequest;
-use Railroad\Railcontent\Requests\ContentFieldUpdateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFieldService;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -75,43 +74,6 @@ class ContentFieldJsonController extends Controller
             [$contentField],
             [
                 'transformer' => DataTransformer::class,
-            ]
-        );
-    }
-
-    /**
-     * Call the method from service to update a content field
-     *
-     * @param ContentFieldUpdateRequest $request
-     * @param integer $fieldId
-     * @return JsonResponse
-     */
-    public function update(ContentFieldUpdateRequest $request, $fieldId)
-    {
-        $contentField = $this->fieldService->update(
-            $fieldId,
-            $request->only(
-                [
-                    'content_id',
-                    'key',
-                    'value',
-                    'position',
-                    'type',
-                ]
-            )
-        );
-
-        //if the update method response it's null the field not exist; we throw the proper exception
-        throw_if(
-            is_null($contentField),
-            new NotFoundException('Update failed, field not found with id: ' . $fieldId)
-        );
-
-        return reply()->json(
-            [$contentField],
-            [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
             ]
         );
     }

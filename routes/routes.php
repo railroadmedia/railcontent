@@ -136,11 +136,6 @@ Route::group(
                     \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@store'
                 )->name('content.field.store');
 
-                Route::patch(
-                    '/content/field/{fieldId}',
-                    \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@update'
-                )->name('content.field.update');
-
                 Route::delete(
                     '/content/field/{fieldId}',
                     \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@delete'
@@ -193,11 +188,6 @@ Route::group(
                     '/content/hierarchy',
                     \Railroad\Railcontent\Controllers\ContentHierarchyJsonController::class . '@store'
                 )->name('content.hierarchy.store');
-
-                Route::patch(
-                    '/content/hierarchy/{parentId}/{childId}',
-                    \Railroad\Railcontent\Controllers\ContentHierarchyJsonController::class . '@update'
-                )->name('content.hierarchy.update');
 
                 Route::delete(
                     '/content/hierarchy/{parentId}/{childId}',

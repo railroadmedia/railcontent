@@ -166,8 +166,9 @@ class ContentVersionEventsTest extends RailcontentTestCase
 
         $field = $this->contentFieldFactory->create($content['id']);
 
-        $this->call('PATCH', 'railcontent/content/field/'.$field['id'],
+        $this->call('PUT', 'railcontent/content/field/',
             [
+                'id' => $field['id'],
                 'content_id' => $content['id'],
                 'value' => $this->faker->word
             ]);

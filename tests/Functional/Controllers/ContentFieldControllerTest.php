@@ -137,9 +137,10 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $new_value = $this->faker->text(255);
 
         $response = $this->call(
-            'PATCH',
-            'railcontent/content/field/' . $field['id'],
+            'PUT',
+            'railcontent/content/field/' ,
             [
+                'id' => $field['id'],
                 'content_id' => $content['id'],
                 'key' => $field['key'],
                 'value' => $new_value,
@@ -148,7 +149,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(201, $response->status());
+        $this->assertEquals(200, $response->status());
 
         $expectedResults = [
             "id" => "1",
@@ -169,9 +170,10 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $field = $this->contentFieldFactory->create($content['id']);
 
         $response = $this->call(
-            'PATCH',
-            'railcontent/content/field/' . $field['id'],
+            'PUT',
+            'railcontent/content/field/',
             [
+                'id' =>  $field['id'],
                 'content_id' => $this->faker->numberBetween(),
             ]
         );
