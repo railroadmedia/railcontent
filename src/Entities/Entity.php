@@ -6,6 +6,8 @@ use ArrayObject;
 
 class Entity extends ArrayObject
 {
+    protected $dotCache = null;
+
     public function fetch($dotNotationString, $default = '')
     {
         return $this->dot()[$dotNotationString] ?? $default;
@@ -13,11 +15,36 @@ class Entity extends ArrayObject
 
     public function dot()
     {
-        return array_dot($this->getArrayCopy());
+        if (!is_null($this->dotCache)) {
+            return $this->dotCache;
+        }
+
+        $this->dotCache = array_dot($this->getArrayCopy());
+
+        return $this->dotCache;
     }
 
     public function replace(array $data)
     {
         $this->exchangeArray($data);
+    }
+
+    public function offsetSet($index, $newval)
+    {
+        parent::offsetSet($index, $newval);
+
+        $this->dotCache = null;
+    }
+
+    public function offsetUnset($index)
+    {
+        parent::offsetUnset($index);
+
+        $this->dotCache = null;
+    }
+
+    public function __set($name, $value)
+    {
+        $this->dotCache = null;
     }
 }

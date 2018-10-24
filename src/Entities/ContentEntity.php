@@ -6,6 +6,10 @@ class ContentEntity extends Entity
 {
     public function dot()
     {
+        if (!is_null($this->dotCache)) {
+            return $this->dotCache;
+        }
+
         $data = $this->getArrayCopy();
 
         $fieldDots = [];
@@ -139,7 +143,9 @@ class ContentEntity extends Entity
         unset($data['permissions']);
         unset($data['comments']);
 
-        return array_merge($this->dotKeepFullArrays($data, '', '*'), $fieldDots, $datumDots);
+        $this->dotCache = array_merge($this->dotKeepFullArrays($data, '', '*'), $fieldDots, $datumDots);
+
+        return $this->dotCache;
     }
 
     /**
