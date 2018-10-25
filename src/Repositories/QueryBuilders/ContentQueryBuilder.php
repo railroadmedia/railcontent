@@ -7,8 +7,9 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Resora\Queries\CachedQuery;
 
-class ContentQueryBuilder extends QueryBuilder
+class ContentQueryBuilder extends CachedQuery
 {
     /**
      * @return $this

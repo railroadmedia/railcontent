@@ -31,7 +31,7 @@ class ContentDatumService
      */
     public function get($id)
     {
-        return $this->datumRepository->getById($id);
+        return $this->datumRepository->read($id);
     }
 
     /**
@@ -52,7 +52,7 @@ class ContentDatumService
      */
     public function create($contentId, $key, $value, $position)
     {
-        $id = $this->datumRepository->createOrUpdateAndReposition(
+        $contentDatum = $this->datumRepository->createOrUpdateAndReposition(
             null,
             [
                 'content_id' => $contentId,
@@ -68,7 +68,7 @@ class ContentDatumService
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $contentId);
 
-        return $this->get($id);
+        return $this->get($contentDatum['id']);
     }
 
     /**

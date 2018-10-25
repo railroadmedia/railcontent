@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Tests\Functional\Repositories;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
+use Railroad\Resora\Entities\Entity;
 
 class ContentFieldRepositoryTest extends RailcontentTestCase
 {
@@ -27,18 +28,16 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
         $value = $this->faker->text();
         $position = rand();
         $type = $this->faker->text();
-
-        $result = $this->classBeingTested->getById(
-            $this->classBeingTested->create(
-                [
-                    'content_id' => $contentId,
-                    'key' => $key,
-                    'value' => $value,
-                    'position' => $position,
-                    'type' => $type
-                ]
-            )
+        $contentField = $this->classBeingTested->create(
+            [
+                'content_id' => $contentId,
+                'key' => $key,
+                'value' => $value,
+                'position' => $position,
+                'type' => $type,
+            ]
         );
+        $result = $this->classBeingTested->read($contentField['id']);
 
         $this->assertEquals(
             [
@@ -47,9 +46,9 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'key' => $key,
                 'value' => $value,
                 'position' => $position,
-                'type' => $type
+                'type' => $type,
             ],
-            $result
+            $result->getArrayCopy()
         );
     }
 
@@ -77,9 +76,9 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'type' => $this->faker->word,
             ];
 
-            $data['id'] = $this->classBeingTested->create($data);
+            $data= $this->classBeingTested->create($data);
 
-            $expectedData[] = $data;
+            $expectedData[] = new Entity($data);
         }
 
         // random data that shouldn't be returned
@@ -116,9 +115,9 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'type' => $this->faker->word,
             ];
 
-            $data['id'] = $this->classBeingTested->create($data);
+            $data = $this->classBeingTested->create($data);
 
-            $expectedData[] = $data;
+            $expectedData[] = new Entity($data);
         }
 
         // random data that shouldn't be returned
@@ -155,11 +154,11 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'key' => $key,
                 'value' => $value,
                 'position' => $position,
-                'type' => $type
+                'type' => $type,
             ]
         );
 
-        $this->assertEquals(1, $result);
+        $this->assertEquals(1, $result['id']);
 
         $this->assertDatabaseHas(
             ConfigService::$tableContentFields,
@@ -168,7 +167,7 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'key' => $key,
                 'value' => $value,
                 'position' => $position,
-                'type' => $type
+                'type' => $type,
             ]
         );
     }
@@ -191,15 +190,17 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
             'type' => $this->faker->word,
         ];
 
-        $dataId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId($oldData);
+        $dataId =
+            $this->query()
+                ->table(ConfigService::$tableContentFields)
+                ->insertGetId($oldData);
 
-        $result =
-            $this->classBeingTested->update(
-                $dataId,
-                $newData
-            );
+        $result = $this->classBeingTested->update(
+            $dataId,
+            $newData
+        );
 
-        $this->assertEquals(1, $result);
+        $this->assertEquals(1, $result['id']);
 
         $this->assertDatabaseHas(
             ConfigService::$tableContentFields,
@@ -224,14 +225,14 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
             'type' => $this->faker->word,
         ];
 
-        $dataId = $this->query()->table(ConfigService::$tableContentFields)->insertGetId($data);
+        $dataId = $this->classBeingTested->create($data);
 
-        $this->classBeingTested->delete($dataId);
+        $this->classBeingTested->destroy($dataId['id']);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContentFields,
             [
-                'id' => $dataId,
+                'id' => $dataId['id'],
             ]
         );
     }
@@ -276,13 +277,13 @@ class ContentFieldRepositoryTest extends RailcontentTestCase
                 'key' => $key,
                 'value' => $this->faker->word,
                 'type' => $this->faker->word,
-                'position' => rand()
+                'position' => rand(),
             ];
 
-            $field['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $field);
+            $field = $this->classBeingTested->createOrUpdateAndReposition(null, $field);
             $field['position'] = $i + 1;
 
-            $expectedData[] = $field;
+            $expectedData[] = $field->getArrayCopy();
         }
 
         $this->classBeingTested->deleteAndReposition($expectedData[2]);

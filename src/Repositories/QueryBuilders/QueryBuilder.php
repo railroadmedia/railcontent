@@ -3,10 +3,11 @@
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
 
-use Illuminate\Database\Query\Builder;
-use Railroad\Railcontent\Services\ConfigService;
 
-class QueryBuilder extends Builder
+use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Resora\Queries\CachedQuery;
+
+class QueryBuilder extends CachedQuery
 {
     /**
      * @param integer $page

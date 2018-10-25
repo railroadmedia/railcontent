@@ -38,7 +38,7 @@ class ContentFieldService
      */
     public function get($id)
     {
-        $contentField = $this->fieldRepository->getById($id);
+        $contentField = $this->fieldRepository->read($id);
 
         if (!empty($contentField) && $contentField['type'] == 'content_id') {
             $contentField['value'] = $this->contentService->getById($contentField['value']);
@@ -53,7 +53,11 @@ class ContentFieldService
      */
     public function getByKeyValueTypePosition($key, $value, $type, $position)
     {
-        $contentFields = $this->fieldRepository->getByKeyValueTypePosition($key, $value, $type, $position);
+        $contentFields = $this->fieldRepository->where(
+            ['key' => $key, 'value' => $value, 'type' => $type, 'position' => $position]
+        )
+            ->get();
+        //->getByKeyValueTypePosition($key, $value, $type, $position);
 
         $contentIds = [];
         $contents = [];
@@ -123,7 +127,7 @@ class ContentFieldService
      */
     public function create($contentId, $key, $value, $position, $type)
     {
-        $id = $this->fieldRepository->createOrUpdateAndReposition(
+        $field = $this->fieldRepository->createOrUpdateAndReposition(
             null,
             [
                 'content_id' => $contentId,
@@ -140,7 +144,7 @@ class ContentFieldService
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $contentId);
 
-        return $this->get($id);
+        return $this->get($field['id']);
     }
 
     /**

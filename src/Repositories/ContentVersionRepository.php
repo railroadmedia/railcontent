@@ -4,14 +4,15 @@ namespace Railroad\Railcontent\Repositories;
 
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Resora\Queries\CachedQuery;
 
-class ContentVersionRepository extends RepositoryBase
+class ContentVersionRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
     /**
-     * @return Builder
+     * @return CachedQuery|$this
      */
-    public function query()
+    protected function newQuery()
     {
-        return $this->connection()->table(ConfigService::$tableContentVersions);
+        return (new CachedQuery($this->connection()))->from(ConfigService::$tableContentVersions);
     }
 }

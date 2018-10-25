@@ -11,6 +11,10 @@ use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
+use Railroad\Railcontent\Decorators\Content\ContentDataDecorator;
+use Railroad\Railcontent\Decorators\Content\ContentFielsDecorator;
+use Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator;
+use Railroad\Railcontent\Decorators\Hierarchy\ContentSlugHierarchyDecorator;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Events\ContentCreated;
@@ -42,18 +46,18 @@ class RailcontentServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->listen = [
-            StatementPrepared::class => [
-                function (StatementPrepared $event) {
-
-                    // we only want to use assoc fetching for this packages database calls
-                    // so we need to use a separate 'mask' connection
-
-                    if ($event->connection->getName() ==
-                        ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {
-                        $event->statement->setFetchMode(PDO::FETCH_ASSOC);
-                    }
-                }
-            ],
+//            StatementPrepared::class => [
+//                function (StatementPrepared $event) {
+//
+//                    // we only want to use assoc fetching for this packages database calls
+//                    // so we need to use a separate 'mask' connection
+//
+//                    if ($event->connection->getName() ==
+//                        ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {
+//                        $event->statement->setFetchMode(PDO::FETCH_ASSOC);
+//                    }
+//                }
+//            ],
             ContentCreated::class => [VersionContentEventListener::class . '@handle'],
             ContentUpdated::class => [VersionContentEventListener::class . '@handle'],
             ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
@@ -98,6 +102,19 @@ class RailcontentServiceProvider extends ServiceProvider
             'The value entered does not exist in the database, or does not match the requirements to be ' .
             'set as the :attribute for this content-type with the current or requested content-status. Please ' .
             'double-check the input value and try again.'
+        );
+
+        config()->set(
+            'resora.decorators.content',
+            array_merge(
+                config()->get('resora.decorators.content', []),
+                [
+                    ContentFielsDecorator::class,
+                    ContentDataDecorator::class,
+                   // ContentSlugHierarchyDecorator::class,
+                    //ContentEntityDecorator::class
+                ]
+            )
         );
     }
 

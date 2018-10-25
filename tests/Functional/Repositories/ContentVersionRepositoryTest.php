@@ -43,12 +43,12 @@ class ContentVersionRepositoryTest extends RailcontentTestCase
             'saved_on' => Carbon::now()->toDateTimeString()
         ];
 
-        $id = $this->classBeingTested->create($version);
+        $contentVersion = $this->classBeingTested->create($version);
 
         $this->assertDatabaseHas(
             ConfigService::$tableContentVersions,
             array_merge(
-                ['id' => $id],
+                ['id' => $contentVersion['id']],
                 $version
             )
         );
@@ -79,12 +79,12 @@ class ContentVersionRepositoryTest extends RailcontentTestCase
             'saved_on' => Carbon::now()->toDateTimeString()
         ];
 
-        $id = $this->classBeingTested->create($version);
+        $contentVersion = $this->classBeingTested->create($version);
 
         $this->assertDatabaseHas(
             ConfigService::$tableContentVersions,
             array_merge(
-                ['id' => $id],
+                ['id' => $contentVersion['id']],
                 $version
             )
         );
@@ -115,7 +115,7 @@ class ContentVersionRepositoryTest extends RailcontentTestCase
             'saved_on' => Carbon::now()->toDateTimeString()
         ];
 
-        $oldId = $this->classBeingTested->create($oldVersion);
+        $oldVersion = $this->classBeingTested->create($oldVersion)->getArrayCopy();
 
         $newContent = array_merge($oldContent, ['slug' => $this->faker->word]);
 
@@ -129,8 +129,8 @@ class ContentVersionRepositoryTest extends RailcontentTestCase
 
         $newId = $this->classBeingTested->create($newVersion);
 
-        $oldContentVersion = $this->classBeingTested->getById($oldId);
+        $oldContentVersion = $this->classBeingTested->read($oldVersion['id']);
 
-        $this->assertEquals(array_merge(['id' => $oldId], $oldVersion), $oldContentVersion);
+        $this->assertEquals(array_merge(['id' => $oldVersion['id']], $oldVersion), $oldContentVersion);
     }
 }

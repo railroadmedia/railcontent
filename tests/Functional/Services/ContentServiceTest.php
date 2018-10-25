@@ -17,6 +17,7 @@ use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
+use Railroad\Resora\Entities\Entity;
 
 class ContentServiceTest extends RailcontentTestCase
 {
@@ -315,10 +316,9 @@ class ContentServiceTest extends RailcontentTestCase
             [$content1['type']],
             $content1['status'],
             $content1['published_on']
-        )
-            ->toArray();
+        );
 
-        $this->assertEquals([$content1], $results);
+        $this->assertEquals([new Entity($content1)], $results);
     }
 
     public function test_getByChildIdWhereType()
@@ -330,14 +330,11 @@ class ContentServiceTest extends RailcontentTestCase
         );
         $children = $this->contentFactory->create();
         $childrenHierarchy = $this->contentHierarchyFactory->create($content['id'], $children['id']);
-        $content['child_ids'] = [$children['id']];
-        $content['position'] = 1;
+        $content['child_position'] = 1;
         $content['parent_id'] = $content['id'];
         $content['child_id'] = $children['id'];
-
-        $results =
-            $this->classBeingTested->getByChildIdsWhereType([$children['id']], $content['type'])
-                ->toArray();
+        unset($content['user_id']);
+        $results = $this->classBeingTested->getByChildIdsWhereType([$children['id']], $content['type']);
 
         $this->assertEquals([$content], $results);
     }
@@ -399,7 +396,7 @@ class ContentServiceTest extends RailcontentTestCase
 
         $results = $this->classBeingTested->getAllByType($type);
 
-        $this->assertEquals([$content1, $content2], $results->toArray());
+        $this->assertEquals([$content1, $content2], $results);
     }
 
     public function test_getWhereTypeInAndStatusAndField()
@@ -537,5 +534,24 @@ class ContentServiceTest extends RailcontentTestCase
 
         $this->assertEquals($contentResponse1, $contentResponse2);
         $this->assertEquals($content, $contentResponse1);
+    }
+
+    public function test_get_content_by_ids()
+    {
+        $user = $this->createAndLogInNewUser();
+        $content = $this->contentFactory->create(
+            $this->faker->slug(),
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
+        );
+        $content2 = $this->contentFactory->create(
+            $this->faker->slug(),
+            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            ContentService::STATUS_PUBLISHED
+        );
+
+        $response = $this->classBeingTested->getByIds([$content['id'], $content2['id']]);
+
+        $this->assertEquals([$content, $content2], $response);
     }
 }

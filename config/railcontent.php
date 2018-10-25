@@ -125,6 +125,7 @@ return [
     // decorators
     'decorators' => [
         'content' => [
+            \Railroad\Railcontent\Decorators\Content\ContentFielsDecorator::class,
             \Railroad\Railcontent\Decorators\Hierarchy\ContentSlugHierarchyDecorator::class,
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
         ],

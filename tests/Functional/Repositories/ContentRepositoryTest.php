@@ -13,6 +13,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
+use Railroad\Resora\Entities\Entity;
 
 class ContentRepositoryTest extends RailcontentTestCase
 {
@@ -71,7 +72,7 @@ class ContentRepositoryTest extends RailcontentTestCase
 
     public function test_get_by_id()
     {
-        $content = [
+        $contentData = [
             'slug' => $this->faker->word,
             'type' => $this->faker->word,
             'status' => $this->faker->word,
@@ -81,30 +82,32 @@ class ContentRepositoryTest extends RailcontentTestCase
             'created_on' => Carbon::now()->toDateTimeString(),
             'archived_on' => Carbon::now()->toDateTimeString(),
             'sort' => 0,
+            'user_id' => null
         ];
 
-        $contentId = $this->classBeingTested->create($content);
+        $content = $this->classBeingTested->create($contentData);
 
-        $results = $this->classBeingTested->getById($contentId);
+        $results = $this->classBeingTested->read($content['id']);
 
         $this->assertEquals(
-            array_merge($content, [
-                'id' => $contentId,
+            array_merge($contentData, [
+                'id' => $content['id'],
                 'fields' => [],
-                'data' => [],
-                'permissions' => [],
-                'parent_id' => null,
-                'child_id' => null
+                'data' => []
             ]),
-            $results
+            $results->getArrayCopy()
         );
     }
 
     public function test_get_by_id_with_fields_datum()
     {
-        $content = $this->contentFactory->create($this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED);
+        $content = $this->classBeingTested->create(['slug' => $this->faker->word,
+            'type'=>$this->faker->randomElement(ConfigService::$commentableContentTypes),
+            'status'=>ContentService::STATUS_PUBLISHED,
+            'brand' => ConfigService::$brand,
+            'language' => 'en',
+            'created_on' => Carbon::now()->toDateTimeString()]);
+
         $contentId = $content['id'];
 
         $expectedFields = [];
@@ -112,8 +115,8 @@ class ContentRepositoryTest extends RailcontentTestCase
         $expectedPermissions = [];
 
        for ($i = 0; $i < 3; $i++) {
-            $expectedFields[] = $this->contentFieldFactory->create($contentId);
-            $expectedData[] = $this->contentDatumFactory->create($contentId);
+            $expectedFields[] = $this->contentFieldFactory->create($contentId)->getArrayCopy();
+            $expectedData[] = $this->contentDatumFactory->create($contentId)->getArrayCopy();
         }
 
         $results = $this->classBeingTested->getById($contentId);
@@ -125,12 +128,12 @@ class ContentRepositoryTest extends RailcontentTestCase
                     'id' => $contentId,
                     'fields' => $expectedFields,
                     'data' => $expectedData,
-                    'permissions' => [],
-                    'parent_id' => null,
-                    'child_id' => null
+//                    'permissions' => [],
+//                    'parent_id' => null,
+//                    'child_id' => null
                 ]
             ),
-            $results
+            $results->getArrayCopy()
         );
     }
 
@@ -149,13 +152,13 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $contentId = $this->classBeingTested->create($content);
 
-        $results = $this->classBeingTested->getById($contentId);
+        $results = $this->classBeingTested->getById($contentId['id']);
 
         $this->assertNotEmpty($results);
 
         ContentRepository::$availableContentStatues = [rand()];
 
-        $results = $this->classBeingTested->getById($contentId);
+        $results = $this->classBeingTested->getById($contentId['id']);
 
         $this->assertEmpty($results);
     }
@@ -177,7 +180,7 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         ContentRepository::$availableContentStatues = [$content['status']];
 
-        $results = $this->classBeingTested->getById($contentId);
+        $results = $this->classBeingTested->getById($contentId['id']);
 
         $this->assertNotEmpty($results);
     }
@@ -197,13 +200,13 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $contentId = $this->classBeingTested->create($content);
 
-        $results = $this->classBeingTested->getById($contentId);
+        $results = $this->classBeingTested->getById($contentId['id']);
 
         $this->assertNotEmpty($results);
 
         ContentRepository::$pullFutureContent = false;
 
-        $results = $this->classBeingTested->getById($contentId);
+        $results = $this->classBeingTested->getById($contentId['id']);
 
         $this->assertEmpty($results);
     }
@@ -225,7 +228,7 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         ContentRepository::$pullFutureContent = false;
 
-        $results = $this->classBeingTested->getById($contentId);
+        $results = $this->classBeingTested->getById($contentId['id']);
 
         $this->assertNotEmpty($results);
     }
@@ -245,7 +248,7 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $contentId = $this->classBeingTested->create($content);
 
-        $results = $this->classBeingTested->getById($contentId);
+        $results = $this->classBeingTested->getById($contentId['id']);
 
         $this->assertEmpty($results);
     }
@@ -263,9 +266,9 @@ class ContentRepositoryTest extends RailcontentTestCase
             'archived_on' => null,
         ];
 
-        $contentId = $this->classBeingTested->create($content);
+        $contentRow = $this->classBeingTested->create($content);
 
-        $results = $this->classBeingTested->getById($contentId);
+        $results = $this->classBeingTested->getById($contentRow['id']);
 
         $this->assertNotEmpty($results);
     }
@@ -283,13 +286,13 @@ class ContentRepositoryTest extends RailcontentTestCase
             'archived_on' => Carbon::now()->toDateTimeString()
         ];
 
-        $contentId = $this->classBeingTested->create($data);
+        $content = $this->classBeingTested->create($data);
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
             array_merge(
                 [
-                    'id' => $contentId,
+                    'id' => $content['id'],
                 ],
                 $data
             )
@@ -322,14 +325,14 @@ class ContentRepositoryTest extends RailcontentTestCase
             'archived_on' => Carbon::now()->toDateTimeString()
         ];
 
-        $this->classBeingTested->update($contentId, $newContent);
+        $this->classBeingTested->update($contentId['id'], $newContent);
 
         $this->assertDatabaseHas(
             ConfigService::$tableContent,
             array_merge(
                 $newContent,
                 [
-                    'id' => $contentId,
+                    'id' => $contentId['id'],
                 ]
             )
         );
@@ -354,7 +357,7 @@ class ContentRepositoryTest extends RailcontentTestCase
             $contentId = $this->classBeingTested->create($contents[$i + 1]);
         }
 
-        $this->classBeingTested->delete(2);
+        $this->classBeingTested->destroy(2);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContent,

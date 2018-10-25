@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Tests\Functional\Repositories;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
+use Railroad\Resora\Entities\Entity;
 
 class ContentDatumRepositoryTest extends RailcontentTestCase
 {
@@ -25,18 +26,14 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
         $contentId = rand();
         $key = $this->faker->word;
         $value = $this->faker->text();
-        $position = rand();
-
-        $result = $this->classBeingTested->getById(
-            $this->classBeingTested->createOrUpdateAndReposition(null,
-                [
-                    'content_id' => $contentId,
-                    'key' => $key,
-                    'value' => $value,
-                    'position' => $position
-                ]
-            )
-        );
+        $position = 1;
+        $datum = $this->classBeingTested->create([
+            'content_id' => $contentId,
+                                'key' => $key,
+                                'value' => $value,
+                                'position' => $position
+        ]);
+        $results = $this->classBeingTested->read($datum['id']);
 
         $this->assertEquals(
             [
@@ -46,7 +43,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'value' => $value,
                 'position' => 1
             ],
-            $result
+            $results->getArrayCopy()
         );
     }
 
@@ -73,9 +70,8 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
-            $data['position'] = 1;
-            $expectedData[] = $data;
+            $data = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
+            $expectedData[] = new Entity($data);
         }
 
         // random data that shouldn't be returned
@@ -110,9 +106,9 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
+            $data = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
             $data['position'] = 1;
-            $expectedData[] = $data;
+            $expectedData[] = new Entity($data);
         }
 
         // random data that shouldn't be returned
@@ -151,7 +147,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(1, $result);
+        $this->assertEquals(1, $result['id']);
 
         $this->assertDatabaseHas(
             ConfigService::$tableContentData,
@@ -204,19 +200,19 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
             'content_id' => rand(),
             'key' => $this->faker->word,
             'value' => $this->faker->word,
-            'position' => rand(),
+            'position' => 1,
         ];
 
-        $id = $this->query()->table(ConfigService::$tableContentData)->insertGetId($data);
+        $id = $this->classBeingTested->create($data);
 
-        $deleted = $this->classBeingTested->delete($id);
+        $deleted = $this->classBeingTested->destroy($id['id']);
 
         $this->assertTrue($deleted);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContentData,
             [
-                'id' => $id,
+                'id' => $id['id'],
             ]
         );
     }
@@ -234,7 +230,7 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
+            $data = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
 
             $expectedData[] = $data;
         }
@@ -263,9 +259,9 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
             $data['position'] = $i + 1;
-            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
+            $data = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
 
-            $expectedData[] = $data;
+            $expectedData[] = $data->getArrayCopy();
         }
 
         foreach ($expectedData as $expectedDatum) {
@@ -291,9 +287,9 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
             $data['position'] = $i + 1;
-            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
+            $data = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
 
-            $expectedData[] = $data;
+            $expectedData[] = $data->getArrayCopy();
         }
 
         $newData = [
@@ -328,9 +324,9 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
             $data['position'] = $i + 1;
-            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
+            $data = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
 
-            $expectedData[] = $data;
+            $expectedData[] = $data->getArrayCopy();
         }
 
         $newData = [
@@ -366,9 +362,9 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
             $data['position'] = $i + 1;
-            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
+            $data = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
 
-            $expectedData[] = $data;
+            $expectedData[] = $data->getArrayCopy();
         }
 
         $newData = [
@@ -402,10 +398,10 @@ class ContentDatumRepositoryTest extends RailcontentTestCase
                 'position' => rand()
             ];
 
-            $data['id'] = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
+            $data = $this->classBeingTested->createOrUpdateAndReposition(null, $data);
             $data['position'] = $i + 1;
 
-            $expectedData[] = $data;
+            $expectedData[] = $data->getArrayCopy();
         }
 
         $this->classBeingTested->deleteAndReposition($expectedData[2]);

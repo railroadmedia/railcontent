@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -124,10 +125,10 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getById($id), [$id]);
+            $results = CacheHelper::saveUserCache($hash, $this->contentRepository->read($id), [$id]);
         }
-
-        return Decorator::decorate($results, 'content');
+        return $results;
+        //return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -143,10 +144,15 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getByIds($ids));
+            $results = CacheHelper::saveUserCache(
+                $hash,
+                $this->contentRepository->query()
+                    ->whereIn('id', $ids)
+                    ->get()
+            );
         }
 
-        return Decorator::decorate($results, 'content');
+        return $results;
     }
 
     /**
@@ -162,10 +168,15 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getByType($type));
+            $results = CacheHelper::saveUserCache(
+                $hash,
+                $this->contentRepository->query()
+                    ->where('type', $type)
+                    ->get()
+            );
         }
 
-        return Decorator::decorate($results, 'content');
+        return $results;
     }
 
     /**
@@ -201,18 +212,44 @@ class ContentService
         if (!$results) {
             $results = CacheHelper::saveUserCache(
                 $hash,
-                $this->contentRepository->getWhereTypeInAndStatusAndField(
-                    $types,
-                    $status,
-                    $fieldKey,
-                    $fieldValue,
-                    $fieldType,
-                    $fieldComparisonOperator
-                )
+                $this->contentRepository->query()
+                    ->join(
+                        ConfigService::$tableContentFields,
+                        function (JoinClause $joinClause) use (
+                            $fieldKey,
+                            $fieldValue,
+                            $fieldType,
+                            $fieldComparisonOperator
+                        ) {
+                            $joinClause->on(
+                                ConfigService::$tableContentFields . '.content_id',
+                                '=',
+                                ConfigService::$tableContent . '.id'
+                            )
+                                ->where(
+                                    ConfigService::$tableContentFields . '.key',
+                                    '=',
+                                    $fieldKey
+                                )
+                                ->where(
+                                    ConfigService::$tableContentFields . '.type',
+                                    '=',
+                                    $fieldType
+                                )
+                                ->where(
+                                    ConfigService::$tableContentFields . '.value',
+                                    $fieldComparisonOperator,
+                                    $fieldValue
+                                );
+                        }
+                    )
+                    ->whereIn(ConfigService::$tableContent . '.type', $types)
+                    ->where(ConfigService::$tableContent . '.status', $status)
+                    ->get()
             );
         }
 
-        return Decorator::decorate($results, 'content');
+        return $results;
     }
 
     /**
@@ -234,17 +271,16 @@ class ContentService
         $orderByColumn = 'published_on',
         $orderByDirection = 'desc'
     ) {
-        return Decorator::decorate(
-            $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
-                $types,
-                $status,
-                $publishedOnValue,
+        return $this->contentRepository->query()
+            ->whereIn('type', $types)
+            ->where('status', $status)
+            ->where(
+                'published_on',
                 $publishedOnComparisonOperator,
-                $orderByColumn,
-                $orderByDirection
-            ),
-            'content'
-        );
+                $publishedOnValue
+            )
+            ->orderBy($orderByColumn, $orderByDirection)
+            ->get();
     }
 
     /**
@@ -260,10 +296,16 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getBySlugAndType($slug, $type));
+            $results = CacheHelper::saveUserCache(
+                $hash,
+                $this->contentRepository->query()
+                    ->where('slug', $slug)
+                    ->where('type', $type)
+                    ->get()
+            );
         }
 
-        return Decorator::decorate($results, 'content');
+        return $results;
     }
 
     /**
@@ -280,11 +322,17 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $results =
-                CacheHelper::saveUserCache($hash, $this->contentRepository->getByUserIdTypeSlug($userId, $type, $slug));
+            $results = CacheHelper::saveUserCache(
+                $hash,
+                $this->contentRepository->query()
+                    ->where('slug', $slug)
+                    ->where('type', $type)
+                    ->where(ConfigService::$tableContent . '.user_id', $userId)
+                    ->get()
+            );
         }
 
-        return Decorator::decorate($results, 'content');
+        return $results;
     }
 
     /**
@@ -301,12 +349,20 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $resultsDB = $this->contentRepository->getByParentId($parentId, $orderBy, $orderByDirection);
+            $resultsDB = $this->contentRepository->query()
+                ->leftJoin(
+                    ConfigService::$tableContentHierarchy,
+                    ConfigService::$tableContentHierarchy . '.child_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
+                ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId);
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
         }
 
-        return Decorator::decorate($results, 'content');
+        return $results;
     }
 
     /**
@@ -331,18 +387,24 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $resultsDB = $this->contentRepository->getByParentIdPaginated(
-                $parentId,
-                $limit,
-                $skip,
-                $orderBy,
-                $orderByDirection
-            );
+            $resultsDB = $this->contentRepository->query() ->leftJoin(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.child_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+                ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
+                ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
+                ->selectInheritenceColumns()
+                ->limit($limit)
+                ->skip($skip)
+            ->get();
+
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
         }
 
-        return Decorator::decorate($results, 'content');
+        return $results;
     }
 
     /**
@@ -405,19 +467,24 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $resultsDB = $this->contentRepository->getByParentIdWhereTypeInPaginated(
-                $parentId,
-                $types,
-                $limit,
-                $skip,
-                $orderBy,
-                $orderByDirection
-            );
+            $resultsDB = $this->contentRepository->query()
+                ->leftJoin(
+                    ConfigService::$tableContentHierarchy,
+                    ConfigService::$tableContentHierarchy . '.child_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
+                ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
+                ->whereIn(ConfigService::$tableContent . '.type', $types)
+                ->limit($limit)
+                ->skip($skip)
+                ->get();
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
         }
 
-        return Decorator::decorate($results, 'content');
+        return $results;
     }
 
     /**
@@ -431,10 +498,16 @@ class ContentService
         $parentId,
         $types
     ) {
-        return $this->contentRepository->countByParentIdWhereTypeIn(
-            $parentId,
-            $types
-        );
+        return $this->contentRepository->query()
+            ->leftJoin(
+                ConfigService::$tableContentHierarchy,
+                ConfigService::$tableContentHierarchy . '.child_id',
+                '=',
+                ConfigService::$tableContent . '.id'
+            )
+            ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->count();
     }
 
     /**
@@ -451,12 +524,22 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $resultsDB = $this->contentRepository->getByParentIds($parentIds, $orderBy, $orderByDirection);
+            $resultsDB = $this->contentRepository->query()
+                ->leftJoin(
+                    ConfigService::$tableContentHierarchy,
+                    ConfigService::$tableContentHierarchy . '.child_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
+                ->whereIn(ConfigService::$tableContentHierarchy . '.parent_id', $parentIds)
+                ->selectInheritenceColumns()
+                ->get();
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), $parentIds));
         }
 
-        return Decorator::decorate($results, 'content');
+        return $results;
     }
 
     /**
@@ -472,12 +555,22 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $resultsDB = $this->contentRepository->getByChildIdWhereType($childId, $type);
+            $resultsDB = $this->contentRepository->query()
+                >leftJoin(
+                    ConfigService::$tableContentHierarchy,
+                    ConfigService::$tableContentHierarchy . '.parent_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                    ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
+                    ->where(ConfigService::$tableContent . '.type', $type)
+                    ->selectInheritenceColumns()
+                ->get();
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$childId]));
         }
 
-        return Decorator::decorate($results, 'content');
+        return $results;
     }
 
     /**
@@ -493,12 +586,23 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $resultsDB = $this->contentRepository->getByChildIdsWhereType($childIds, $type);
+            $resultsDB = $this->contentRepository->query()
+                ->selectPrimaryColumns()
+                ->leftJoin(
+                    ConfigService::$tableContentHierarchy,
+                    ConfigService::$tableContentHierarchy . '.parent_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                ->whereIn(ConfigService::$tableContentHierarchy . '.child_id', $childIds)
+                ->where(ConfigService::$tableContent . '.type', $type)
+                ->selectInheritenceColumns()
+                ->get();
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), $childIds));
         }
 
-        return Decorator::decorate($results, 'content');
+        return $results;
     }
 
     /**
@@ -881,7 +985,7 @@ class ContentService
         $parentId = null,
         $sort = 0
     ) {
-        $id = $this->contentRepository->create(
+        $content = $this->contentRepository->create(
             [
                 'slug' => $slug,
                 'type' => $type,
@@ -900,16 +1004,16 @@ class ContentService
         if ($parentId) {
             $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
                 $parentId,
-                $id,
+                $content['id'],
                 null
             );
         }
 
         CacheHelper::deleteUserFields(null, 'contents');
 
-        event(new ContentCreated($id));
+        event(new ContentCreated($content['id']));
 
-        return $this->getById($id);
+        return $this->getById($content['id']);
     }
 
     /**
@@ -921,7 +1025,7 @@ class ContentService
      */
     public function update($id, array $data)
     {
-        $content = $this->contentRepository->getById($id);
+        $content = $this->contentRepository->read($id);
         if (empty($content)) {
             return null;
         }
@@ -947,7 +1051,7 @@ class ContentService
      */
     public function delete($id)
     {
-        $content = $this->contentRepository->getById($id);
+        $content = $this->contentRepository->read($id);
 
         if (empty($content)) {
             return null;

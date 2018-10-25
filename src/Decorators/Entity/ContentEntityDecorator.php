@@ -2,13 +2,13 @@
 
 namespace Railroad\Railcontent\Decorators\Entity;
 
-use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Support\Collection;
+use Railroad\Resora\Decorators\DecoratorInterface;
 
 class ContentEntityDecorator implements DecoratorInterface
 {
-    public function decorate(Collection $contentResults)
+    public function decorate($contentResults)
     {
         if (isset($contentResults['id'])) {
 

@@ -9,8 +9,10 @@ use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Resora\Decorators\Decorator;
+use Railroad\Resora\Queries\CachedQuery;
 
-class ContentRepository extends RepositoryBase
+class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
     /**
      * If this is false content with any status will be pulled. If its an array, only content with those
@@ -85,18 +87,43 @@ class ContentRepository extends RepositoryBase
      * @param ContentHierarchyRepository $contentHierarchyRepository
      * @param DatabaseManager $databaseManager
      */
-    public function __construct(
-        ContentPermissionRepository $contentPermissionRepository,
-        ContentFieldRepository $fieldRepository,
-        ContentDatumRepository $datumRepository,
-        ContentHierarchyRepository $contentHierarchyRepository
-    ) {
-        parent::__construct();
+//    public function __construct(
+//        ContentPermissionRepository $contentPermissionRepository,
+//        ContentFieldRepository $fieldRepository,
+//        ContentDatumRepository $datumRepository,
+//        ContentHierarchyRepository $contentHierarchyRepository
+//    ) {
+//        parent::__construct();
+//
+//        $this->contentPermissionRepository = $contentPermissionRepository;
+//        $this->fieldRepository = $fieldRepository;
+//        $this->datumRepository = $datumRepository;
+//        $this->contentHierarchyRepository = $contentHierarchyRepository;
+//    }
+    /**
+     * @return CachedQuery|$this
+     */
+    protected function newQuery()
+    {
+        return (new ContentQueryBuilder(
+                    $this->connection(),
+                    $this->connection()
+                        ->getQueryGrammar(),
+                    $this->connection()
+                        ->getPostProcessor()
+                ))->from(ConfigService::$tableContent);
+       // return (new CachedQuery($this->connection()))->from(ConfigService::$tableContent);
+    }
 
-        $this->contentPermissionRepository = $contentPermissionRepository;
-        $this->fieldRepository = $fieldRepository;
-        $this->datumRepository = $datumRepository;
-        $this->contentHierarchyRepository = $contentHierarchyRepository;
+    protected function decorate($results)
+    {
+//         if(!($results instanceof Entity))
+//         {
+//             var_dump($results);
+//             $results = new Entity($results);
+//         }
+
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -105,31 +132,33 @@ class ContentRepository extends RepositoryBase
      */
     public function getById($id)
     {
-        $contentRows =
-            $this->query()
-                ->selectPrimaryColumns()
-                ->restrictByUserAccess()
-                ->where([ConfigService::$tableContent . '.id' => $id])
-                ->getToArray();
+        return $this->read($id);
 
-        if (empty($contentRows)) {
-            return null;
-        }
-
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
-
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
-
-        return $this->processRows(
-                $contentRows,
-                $contentFieldRows,
-                $contentDatumRows,
-                $contentPermissionRows
-            )[0] ?? null;
+//        $contentRows =
+//            $this->query()
+//                ->selectPrimaryColumns()
+//                ->restrictByUserAccess()
+//                ->where([ConfigService::$tableContent . '.id' => $id])
+//                ->getToArray();
+//
+//        if (empty($contentRows)) {
+//            return null;
+//        }
+//
+//        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+//        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+//
+//        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
+//            array_column($contentRows, 'id'),
+//            array_column($contentRows, 'type')
+//        );
+//
+//        return $this->processRows(
+//                $contentRows,
+//                $contentFieldRows,
+//                $contentDatumRows,
+//                $contentPermissionRows
+//            )[0] ?? null;
     }
 
     /**
@@ -1035,18 +1064,18 @@ class ContentRepository extends RepositoryBase
      * @param array $newData
      * @return bool
      */
-    public function update($id, array $newData)
-    {
-        if (count($newData) == 0) {
-            return true;
-        };
-        $amountOfUpdatedRows =
-            $this->query()
-                ->where('id', $id)
-                ->update($newData);
-
-        return $amountOfUpdatedRows > 0;
-    }
+//    public function update($id, array $newData)
+//    {
+//        if (count($newData) == 0) {
+//            return true;
+//        };
+//        $amountOfUpdatedRows =
+//            $this->query()
+//                ->where('id', $id)
+//                ->update($newData);
+//
+//        return $amountOfUpdatedRows > 0;
+//    }
 
     /**
      * Unlink content's fields, content's datum and content's children,
@@ -1055,15 +1084,15 @@ class ContentRepository extends RepositoryBase
      * @param int $id
      * @return bool
      */
-    public function delete($id)
-    {
-        $amountOfDeletedRows =
-            $this->query()
-                ->where('id', $id)
-                ->delete();
-
-        return $amountOfDeletedRows > 0;
-    }
+//    public function delete($id)
+//    {
+//        $amountOfDeletedRows =
+//            $this->query()
+//                ->where('id', $id)
+//                ->delete();
+//
+//        return $amountOfDeletedRows > 0;
+//    }
 
     /**
      * @param array $contentRows
@@ -1338,16 +1367,16 @@ class ContentRepository extends RepositoryBase
     /**
      * @return ContentQueryBuilder
      */
-    public function query()
-    {
-        return (new ContentQueryBuilder(
-            $this->connection(),
-            $this->connection()
-                ->getQueryGrammar(),
-            $this->connection()
-                ->getPostProcessor()
-        ))->from(ConfigService::$tableContent);
-    }
+//    public function query()
+//    {
+//        return (new ContentQueryBuilder(
+//            $this->connection(),
+//            $this->connection()
+//                ->getQueryGrammar(),
+//            $this->connection()
+//                ->getPostProcessor()
+//        ))->from(ConfigService::$tableContent);
+//    }
 
     /**
      * @param array $parsedContents
@@ -1576,6 +1605,5 @@ class ContentRepository extends RepositoryBase
                 ->getToArray();
 
         return $contentRows;
-
     }
 }
