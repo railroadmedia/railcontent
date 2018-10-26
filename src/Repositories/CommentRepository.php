@@ -8,7 +8,7 @@ use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 
-class CommentRepository extends RepositoryBase
+class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
     use ByContentIdTrait;
     /** The value it's set in ContentPermissionMiddleware: if the user it's admin the value it's false, otherwise it's true.

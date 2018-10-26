@@ -3,9 +3,17 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Resora\Queries\CachedQuery;
 
-class CommentLikeRepository extends RepositoryBase
+class CommentLikeRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
+    /**
+     * @return CachedQuery|$this
+     */
+    protected function newQuery()
+    {
+        return (new CachedQuery($this->connection()))->from(ConfigService::$tableCommentLikes);
+    }
     /**
      * @param $commentIds
      * @return array|null
@@ -107,8 +115,8 @@ class CommentLikeRepository extends RepositoryBase
     /**
      * @return \Illuminate\Database\Query\Builder
      */
-    public function query()
-    {
-        return $this->connection()->table(ConfigService::$tableCommentLikes);
-    }
+//    public function query()
+//    {
+//        return $this->connection()->table(ConfigService::$tableCommentLikes);
+//    }
 }

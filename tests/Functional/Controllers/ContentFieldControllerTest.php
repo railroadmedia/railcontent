@@ -56,6 +56,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
                 'position' => $position,
             ]
         );
+
         $expectedResults = [
             "id" => "1",
             "content_id" => $content['id'],
@@ -234,7 +235,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $results = $this->contentFieldService->update($field['id'], $updatedField);
 
-        $this->assertEquals($updatedField, $results);
+        $this->assertEquals($updatedField, $results->getArrayCopy());
     }
 
     public function test_delete_content_field_method_from_service_response()

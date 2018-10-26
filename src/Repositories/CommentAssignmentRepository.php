@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 
-class CommentAssignmentRepository extends RepositoryBase
+class CommentAssignmentRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
     /**
      * @return CommentQueryBuilder

@@ -205,7 +205,7 @@ class ContentFieldService
     public function createOrUpdate($data)
     {
         $id = $this->fieldRepository->createOrUpdateAndReposition(
-            ['id' => $data['id'] ?? null],
+            $data['id'] ?? null,
             $data
         );
 
@@ -219,7 +219,7 @@ class ContentFieldService
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $data['content_id']);
 
-        return $this->get($id);
+        return $this->get($id['id']);
     }
 
 }

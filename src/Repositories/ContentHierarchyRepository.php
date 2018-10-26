@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
 
-class ContentHierarchyRepository extends RepositoryBase
+class ContentHierarchyRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
     /**
      * @param $parentId

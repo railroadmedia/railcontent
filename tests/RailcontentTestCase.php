@@ -67,7 +67,7 @@ class RailcontentTestCase extends BaseTestCase
         $this->authManager = $this->app->make(AuthManager::class);
         $this->router = $this->app->make(Router::class);
 
-        RepositoryBase::$connectionMask = null;
+//        RepositoryBase::$connectionMask = null;
 
         Carbon::setTestNow(Carbon::now());
 

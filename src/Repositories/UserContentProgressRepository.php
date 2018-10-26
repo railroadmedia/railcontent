@@ -5,18 +5,36 @@ namespace Railroad\Railcontent\Repositories;
 use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Resora\Queries\CachedQuery;
 
-class UserContentProgressRepository extends RepositoryBase
+class UserContentProgressRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
     use ByContentIdTrait;
 
     public static $cache = [];
-
-    public function query()
+    /**
+     * @return CachedQuery|$this
+     */
+    protected function newQuery()
     {
-        return parent::connection()
-            ->table(ConfigService::$tableUserContentProgress);
+        return (new CachedQuery($this->connection()))->from(ConfigService::$tableUserContentProgress);
     }
+
+//    protected function decorate($results)
+//    {
+//        /* if(!($results instanceof Product))
+//         {
+//             $results = new Product($results);
+//         } */
+//
+//        return Decorator::decorate($results, 'content-data');
+//    }
+
+//    public function query()
+//    {
+//        return parent::connection()
+//            ->table(ConfigService::$tableUserContentProgress);
+//    }
 
     /**
      * @param $userId
@@ -33,7 +51,7 @@ class UserContentProgressRepository extends RepositoryBase
                     ->where('user_id', $userId)
                     ->whereIn('content_id', $contentIds)
                     ->get()
-                    ->toArray();
+            ->toArray();
 
             return self::$cache[$key];
         }

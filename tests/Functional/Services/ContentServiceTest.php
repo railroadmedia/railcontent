@@ -552,6 +552,6 @@ class ContentServiceTest extends RailcontentTestCase
 
         $response = $this->classBeingTested->getByIds([$content['id'], $content2['id']]);
 
-        $this->assertEquals([$content, $content2], $response);
+        $this->assertArraySubset([$content, $content2], $response);
     }
 }

@@ -11,7 +11,7 @@ use Railroad\Railcontent\Services\ConfigService;
  *
  * @package Railroad\Railcontent\Repositories
  */
-class ContentPermissionRepository extends RepositoryBase
+class ContentPermissionRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
     use ByContentIdTrait;
 

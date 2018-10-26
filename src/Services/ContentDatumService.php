@@ -114,7 +114,7 @@ class ContentDatumService
             return $datum;
         }
 
-        $delete = $this->datumRepository->deleteAndReposition($datum);
+        $delete = $this->datumRepository->deleteAndReposition(['id' => $id]);
 
         //save a content version 
         event(new ContentDatumDeleted($datum['content_id']));

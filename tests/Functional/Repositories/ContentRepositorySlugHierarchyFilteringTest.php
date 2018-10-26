@@ -116,7 +116,7 @@ class ContentRepositorySlugHierarchyFilteringTest extends RailcontentTestCase
                 $content['id']
             );
 
-            $expectedContents[] = $content->getArrayCopy();
+            $expectedContents[] = $content;
         }
 
         for ($i = 0; $i < 10; $i++) {

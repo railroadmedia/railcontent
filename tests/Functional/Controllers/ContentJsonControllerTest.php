@@ -264,7 +264,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call('GET', 'railcontent/content/' . $content['id']);
 
         $this->assertEquals(
-            $content->getArrayCopy(),
+            $content,
             $response->decodeResponseJson('data')[0]
         );
     }
@@ -580,6 +580,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
         $responseContent = $response->decodeResponseJson('data');
+
         $this->assertArraySubset($expectedContent['results'], $responseContent);
     }
 

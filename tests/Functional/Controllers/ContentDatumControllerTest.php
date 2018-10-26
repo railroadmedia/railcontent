@@ -219,7 +219,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
                 ],
                 $newData
             ),
-            $updatedData
+            $updatedData->getArrayCopy()
         );
     }
 

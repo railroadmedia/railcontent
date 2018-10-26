@@ -6,7 +6,7 @@ use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 
-class PermissionRepository extends RepositoryBase
+class PermissionRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
     use ByContentIdTrait;
 

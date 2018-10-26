@@ -72,7 +72,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
             $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
             $content[$i]['data'] = [$descriptionData, $otherData];
-            $content[$i] = $content[$i]->getArrayCopy();
+            $content[$i] = $content[$i];
         }
 
         $this->artisan('command:createSearchIndexesForContents');
@@ -119,7 +119,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
             $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
             $content[$i]['data'] = [$descriptionData, $otherData];
-            $content[$i] = $content[$i]->getArrayCopy();
+            $content[$i] = $content[$i];
         }
 
         $this->artisan('command:createSearchIndexesForContents');
@@ -164,7 +164,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
             $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
             $content[$i]['data'] = [$descriptionData, $otherData];
-            $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
+            $content[$i] = array_merge($content[$i], ['pluck' => $content[$i]->dot()]);
         }
 
         $this->artisan('command:createSearchIndexesForContents');
@@ -213,7 +213,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                     ->hour($i)
                     ->toDateTimeString()
             );
-            $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
+            $content[$i] = array_merge($content[$i], ['pluck' => $content[$i]->dot()]);
         }
 
         $this->artisan('command:createSearchIndexesForContents');

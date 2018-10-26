@@ -376,7 +376,7 @@ class UserContentProgressService
             $contentProgressions = $this->userContentRepository->getByUserIdAndWhereContentIdIn($userId, $contentIds);
 
             $contentProgressionsByContentId =
-                array_combine(array_column($contentProgressions, 'content_id'), $contentProgressions);
+                array_combine(array_pluck($contentProgressions,'content_id'), $contentProgressions);
 
             foreach ($contentOrContents as $index => $content) {
                 if (!empty($contentProgressionsByContentId[$content['id']])) {

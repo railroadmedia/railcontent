@@ -172,7 +172,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
                 ->whereIn(ConfigService::$tableContent . '.id', $ids)
-                ->getToArray();
+                ->get();
 
         // restore order of ids passed in
         $contentRows = [];
@@ -1207,12 +1207,14 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
             $this->query()
                 ->selectCountColumns()
                 ->orderByRaw(
-                    $this->databaseManager->raw(
+                    $this->connection()->raw(
                         implode(', ', $orderByColumns) . ' ' . $this->orderDirection
                     )
                 )
                 ->restrictByUserAccess()
-                ->directPaginate($this->page, $this->limit)
+                ->limit($this->limit)
+                ->skip($this->page)
+//                ->directPaginate($this->page, $this->limit)
                 ->restrictByFields($this->requiredFields)
                 ->includeByFields($this->includedFields)
                 ->restrictByUserStates($this->requiredUserStates)
@@ -1232,7 +1234,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
 
         $query =
             $this->query()
-                ->orderByRaw($this->databaseManager->raw(implode(', ', $orderByColumns) . ' ' . $this->orderDirection))
+                ->orderByRaw($this->connection()->raw(implode(', ', $orderByColumns) . ' ' . $this->orderDirection))
                 ->addSubJoinToQuery($subQuery);
 
         $contentRows = $query->getToArray();
@@ -1272,7 +1274,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
 
         return $this->connection()
             ->table(
-                $this->databaseManager->raw('(' . $subQuery->toSql() . ') as rows')
+                $this->connection()->raw('(' . $subQuery->toSql() . ') as rows')
             )
             ->addBinding($subQuery->getBindings())
             ->count();
@@ -1303,8 +1305,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
                     ConfigService::$tableContentFields . '.key',
                     ConfigService::$fieldOptionList
                 )
-                ->get()
-                ->toArray();
+                ->get();
 
         return $this->parseAvailableFields($possibleContentFields);
     }

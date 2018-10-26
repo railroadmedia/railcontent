@@ -40,12 +40,7 @@ trait ByContentIdTrait
      */
     public function createOrUpdateAndReposition($dataId = null, $data)
     {
-
         $existingData = $this->query()->read($dataId);
-//            ->where('id', $dataId)
-//            ->get()
-//            ->first();
-        //dd($existingData);
         $contentId = $existingData['content_id'] ?? $data['content_id'];
         $key = $existingData['key'] ?? $data['key'];
 
@@ -64,7 +59,7 @@ trait ByContentIdTrait
             $existingData
         );
 
-        if (empty($existingData)) {
+        if (!($existingData)) {
             $this->incrementOtherEntitiesPosition(
                 null,
                 $contentId,
@@ -76,18 +71,18 @@ trait ByContentIdTrait
             return $this->query()->create($data);
 
         } elseif ($data['position'] > $existingData['position']) {
-
-            $this->query()
+            $updated = $this->query()
                 ->where('id', $dataId)
                 ->update($data);
 
-            return $this->decrementOtherEntitiesPosition(
+            $this->decrementOtherEntitiesPosition(
                 $dataId,
                 $contentId,
                 $key,
                 $existingData['position'],
                 $data['position']
             );
+            return $updated;
 
         } elseif ($data['position'] < $existingData['position']) {
             $updated = $this->query()
@@ -105,9 +100,8 @@ trait ByContentIdTrait
             return $updated;
 
         } else {
-            return $this->query()
-                ->where('id', $dataId)
-                ->update($data);
+            $this->query()->update($dataId, $data);
+            return $this->read($dataId);
         }
     }
 
@@ -203,7 +197,7 @@ trait ByContentIdTrait
         )
             ->decrement($positionColumnPrefix . 'position');
 
-        $deleted = $this->query()->delete($existingLink['id']);
+        $deleted = $this->query()->destroy($existingLink['id']);
 
         return $deleted > 0;
     }

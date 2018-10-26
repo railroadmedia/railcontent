@@ -10,7 +10,7 @@ use Railroad\Railcontent\Repositories\QueryBuilders\FullTextSearchQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 use Illuminate\Support\Facades\DB;
 
-class FullTextSearchRepository extends RepositoryBase
+class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
     use RefreshDatabase;
 
@@ -29,23 +29,23 @@ class FullTextSearchRepository extends RepositoryBase
      */
     private $datumRepository;
 
-    /**
-     * ContentRepository constructor.
-     *
-     * @param ContentRepository $contentRepository
-     * @param DatabaseManager $databaseManager
-     */
-    public function __construct(
-        ContentRepository $contentRepository,
-        ContentFieldRepository $fieldRepository,
-        ContentDatumRepository $datumRepository
-    ) {
-        parent::__construct();
-
-        $this->contentRepository = $contentRepository;
-        $this->fieldRepository = $fieldRepository;
-        $this->datumRepository = $datumRepository;
-    }
+//    /**
+//     * ContentRepository constructor.
+//     *
+//     * @param ContentRepository $contentRepository
+//     * @param DatabaseManager $databaseManager
+//     */
+//    public function __construct(
+//        ContentRepository $contentRepository,
+//        ContentFieldRepository $fieldRepository,
+//        ContentDatumRepository $datumRepository
+//    ) {
+//        parent::__construct();
+//
+//        $this->contentRepository = $contentRepository;
+//        $this->fieldRepository = $fieldRepository;
+//        $this->datumRepository = $datumRepository;
+//    }
 
     /**
      * @return FullTextSearchQueryBuilder
