@@ -75,12 +75,13 @@ class CommentLikeService
         $likesQuery =
             $this->commentLikeRepository->query()
                 ->where('comment_id', $commentId)
-                ->orderBy($orderByColumn, $orderByDirection)
-                ->limit($limit)
-                ->skip(($page - 1) * $limit);
-
+                ->orderBy($orderByColumn, $orderByDirection);
         $likesCount = $likesQuery->count();
-        $likesData = $likesQuery->get();
+
+        $likesData =
+            $likesQuery->limit($limit)
+                ->skip(($page - 1) * $limit)
+                ->get();
 
         $results = [
             'results' => $likesData,

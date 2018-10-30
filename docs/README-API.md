@@ -159,14 +159,17 @@
   * [Unlike a comment - JSON controller](#unlike-a-comment---json-controller)
     + [Request Example](#request-example-39)
     + [Response Example](#response-example-40)
-  * [Pull assigned to me comments - JSON controller](#pull-assigned-to-me-comments---json-controller)
+  * [Get comment likes- JSON controller](#get-comment-likes--json-controller)
     + [Request Example](#request-example-40)
-    + [Request Parameters](#request-parameters-38)
     + [Response Example](#response-example-41)
-  * [Delete comment assignation - JSON controller](#delete-comment-assignation---json-controller)
+  * [Pull assigned to me comments - JSON controller](#pull-assigned-to-me-comments---json-controller)
     + [Request Example](#request-example-41)
-    + [Request Parameters](#request-parameters-39)
+    + [Request Parameters](#request-parameters-38)
     + [Response Example](#response-example-42)
+  * [Delete comment assignation - JSON controller](#delete-comment-assignation---json-controller)
+    + [Request Example](#request-example-42)
+    + [Request Parameters](#request-parameters-39)
+    + [Response Example](#response-example-43)
 
 <!-- ecotrust-canada.github.io/markdown-toc -->
 
@@ -3367,6 +3370,70 @@ $.ajax({
     "code": 200,
     "results": true
 }
+```
+
+Get comment likes- JSON controller
+--------------------------------------
+
+`{ GET /comment-likes/{commentId} }`
+
+Get likes for the given comment id - paginated.
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/comment-likes/12345?page=2&limi=10',
+    type: 'get'
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key    |  required |  default |  description\|notes                   | 
+|-------------------|---------|-----------|----------|---------------------------------------| 
+| path              |  id     |  yes      |          |  The comment id                       | 
+| query             |  page   |  no       |  1       |  Pagination page.                     |
+| query             |  limit  |  no       |  10      |  Amount of comments to pull per page. | 
+
+
+### Response Example
+
+```200 OK```
+
+```json
+{
+   "data":[
+      {
+         "display_name":"Keef",
+         "avatar_url":"https:\/\/drumeo-user-avatars.s3-us-west-2.amazonaws.com\/77750_avatar_url_1464798831.gif",
+         "xp":0,
+         "access_level":"pack"
+      },
+      {
+         "display_name":"EmmaSB",
+         "avatar_url":"https:\/\/drumeo-user-avatars.s3-us-west-2.amazonaws.com\/97451_avatar_url_1473355968.jpg",
+         "xp":0,
+         "access_level":"pack"
+      }
+   ],
+   "meta":{
+      "totalResults":9,
+      "page":"3",
+      "limit":"2"
+   }
+}
+
 ```
 
 Pull assigned to me comments - JSON controller
