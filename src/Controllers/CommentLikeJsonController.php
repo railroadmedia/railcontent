@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\CommentLikeRequest;
 use Railroad\Railcontent\Requests\CommentUnLikeRequest;
@@ -22,6 +23,30 @@ class CommentLikeJsonController extends Controller
         $this->commentLikeService = $commentLikeService;
 
         $this->middleware(ConfigService::$controllerMiddleware);
+    }
+
+    /**
+     * Fetch likes for comment with pagination.
+     *
+     * @param Request $request
+     * @param integer $id - comment id
+     * @return mixed
+     */
+    public function index(Request $request, $id)
+    {
+        $data = $this->commentLikeService->getCommentLikesPaginated(
+            $id,
+            $request->get('limit', 10),
+            $request->get('page', 1)
+        );
+
+        return reply()->json(
+            $data['results'],
+            [
+                'totalResults' => $data['total_results'],
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 
     /**

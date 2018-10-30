@@ -106,6 +106,11 @@ Route::group(
                 )->name('comment.linked');
 
                 //comment-likes
+                Route::get(
+                    '/comment-likes/{commentId}',
+                    \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@index'
+                )->name('comment-likes.index');
+
                 Route::put(
                     '/comment-like/{id}',
                     \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@store'
