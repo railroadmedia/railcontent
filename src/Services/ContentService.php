@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use App\Services\ContentTypes;
 use Carbon\Carbon;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
@@ -928,7 +929,7 @@ class ContentService
 
         $this->contentRepository->update($id, $data);
 
-        event(new ContentUpdated($id));
+        event(new ContentUpdated($id, $content, $data));
 
         CacheHelper::deleteCache('content_' . $id);
 
@@ -1097,5 +1098,60 @@ class ContentService
         }
 
         return Decorator::decorate($results, 'content');
+    }
+
+    /**
+     * @return Collection|ContentEntity[]
+     */
+    public function getContentForCalendar()
+    {
+        ContentRepository::$availableContentStatues = [
+            ContentService::STATUS_PUBLISHED,
+            ContentService::STATUS_SCHEDULED,
+        ];
+
+        ContentRepository::$pullFutureContent = true;
+
+        $shows = [
+            'recording',
+            'live',
+            'gear-guides',
+            'challenges',
+            'boot-camps',
+            'quick-tips',
+            'podcasts',
+            'on-the-road',
+            'behind-the-scenes',
+            'study-the-greats',
+            'solos',
+            'performances',
+        ];
+
+        $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            array_merge(['student-focus', 'song'], $shows),
+            ContentService::STATUS_SCHEDULED,
+            Carbon::now()
+                ->toDateTimeString(),
+            '>'
+        );
+
+        $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            array_merge(['course', 'play-along', 'student-focus', 'song'], $shows),
+            ContentService::STATUS_PUBLISHED,
+            Carbon::now()
+                ->toDateTimeString(),
+            '>'
+        );
+
+        $scheduleEvents =
+            $liveEvents->merge($contentReleases)
+                ->sort(
+                    function ($a, $b) {
+                        return Carbon::parse($a['published_on']) >= Carbon::parse($b['published_on']);
+                    }
+                )
+                ->values();
+
+        return $scheduleEvents;
     }
 }

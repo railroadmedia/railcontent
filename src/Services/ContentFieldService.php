@@ -48,7 +48,10 @@ class ContentFieldService
     }
 
     /**
-     * @param integer $id
+     * @param $key
+     * @param $value
+     * @param $type
+     * @param $position
      * @return array
      */
     public function getByKeyValueTypePosition($key, $value, $type, $position)
@@ -80,7 +83,9 @@ class ContentFieldService
     }
 
     /**
-     * @param integer $id
+     * @param $key
+     * @param $value
+     * @param $type
      * @return array
      */
     public function getByKeyValueType($key, $value, $type)
@@ -123,24 +128,22 @@ class ContentFieldService
      */
     public function create($contentId, $key, $value, $position, $type)
     {
-        $id = $this->fieldRepository->createOrUpdateAndReposition(
-            null,
-            [
-                'content_id' => $contentId,
-                'key' => $key,
-                'value' => $value,
-                'position' => $position,
-                'type' => $type,
-            ]
-        );
+        $input = [
+            'content_id' => $contentId,
+            'key' => $key,
+            'value' => $value,
+            'position' => $position,
+            'type' => $type,
+        ];
+
+        $id = $this->fieldRepository->createOrUpdateAndReposition(null, $input);
 
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $contentId);
 
         $newField = $this->get($id);
 
-        //Fire an event that the content was modified
-        event(new ContentFieldCreated($newField));
+        event(new ContentFieldCreated($newField, $input));
 
         return $newField;
     }
@@ -192,7 +195,6 @@ class ContentFieldService
 
         $deleted = $this->fieldRepository->deleteAndReposition(['id' => $id]);
 
-        //Save a new content version
         event(new ContentFieldDeleted($field));
 
         //delete cache for associated content id
@@ -217,11 +219,10 @@ class ContentFieldService
 
         $newField = $this->get($id);
 
-        //Fire an event that the content was modified
         if(array_key_exists('id',$data)) {
             event(new ContentFieldUpdated($newField, $data));
         } else {
-            event(new ContentFieldCreated($newField));
+            event(new ContentFieldCreated($newField, $data));
         }
 
         return $newField;

@@ -6,13 +6,15 @@ use Illuminate\Support\Facades\Event;
 
 class ContentFieldCreated extends Event
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     public $newField;
 
-    public function __construct(array $newField)
+    /** @var array */
+    public $input;
+
+    public function __construct(array $newField, array $input)
     {
         $this->newField = $newField;
+        $this->input = $input;
     }
 }

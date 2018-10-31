@@ -52,18 +52,17 @@ class ContentDatumService
      */
     public function create($contentId, $key, $value, $position)
     {
-        $id = $this->datumRepository->createOrUpdateAndReposition(
-            null,
-            [
-                'content_id' => $contentId,
-                'key' => $key,
-                'value' => $value,
-                'position' => $position
-            ]
-        );
+        $input = [
+            'content_id' => $contentId,
+            'key' => $key,
+            'value' => $value,
+            'position' => $position
+        ];
+
+        $id = $this->datumRepository->createOrUpdateAndReposition(null, $input);
 
         //call the event that save a new content version in the database
-        event(new ContentDatumCreated($contentId));
+        event(new ContentDatumCreated($contentId, $input));
 
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $contentId);
@@ -93,7 +92,7 @@ class ContentDatumService
         $this->datumRepository->createOrUpdateAndReposition($id, $data);
 
         //save a content version
-        event(new ContentDatumUpdated($datum['content_id']));
+        event(new ContentDatumUpdated($datum['content_id'], $datum, $data));
 
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $datum['content_id']);
@@ -117,7 +116,7 @@ class ContentDatumService
         $delete = $this->datumRepository->deleteAndReposition($datum);
 
         //save a content version 
-        event(new ContentDatumDeleted($datum['content_id']));
+        event(new ContentDatumDeleted($datum['content_id'], $datum));
 
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $datum['content_id']);
