@@ -6,10 +6,13 @@ use Illuminate\Support\Facades\Event;
 
 class ContentFieldDeleted extends Event
 {
-    public $contentId;
+    /**
+     * @var array
+     */
+    public $deletedField;
 
-    public function __construct($contentId)
+    public function __construct(array $deletedField)
     {
-        $this->contentId = $contentId;
+        $this->deletedField = $deletedField;
     }
 }

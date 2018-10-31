@@ -134,13 +134,15 @@ class ContentFieldService
             ]
         );
 
-        //Fire an event that the content was modified
-        event(new ContentFieldCreated($contentId));
-
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $contentId);
 
-        return $this->get($id);
+        $newField = $this->get($id);
+
+        //Fire an event that the content was modified
+        event(new ContentFieldCreated($newField));
+
+        return $newField;
     }
 
     /**
@@ -163,13 +165,14 @@ class ContentFieldService
 
         $this->fieldRepository->createOrUpdateAndReposition($id, $data);
 
-        //Save a new content version
-        event(new ContentFieldUpdated($field['content_id']));
-
         //delete cache for associated content id
         CacheHelper::deleteCache('content_' . $field['content_id']);
 
-        return $this->get($id);
+        $newField = $this->get($id);
+
+        event(new ContentFieldUpdated($newField, $data));
+
+        return $newField;
     }
 
     /**
@@ -190,7 +193,7 @@ class ContentFieldService
         $deleted = $this->fieldRepository->deleteAndReposition(['id' => $id]);
 
         //Save a new content version
-        event(new ContentFieldDeleted($field['content_id']));
+        event(new ContentFieldDeleted($field));
 
         //delete cache for associated content id
         CacheHelper::deleteCache('content_' . $field['content_id']);
@@ -198,6 +201,10 @@ class ContentFieldService
         return $deleted;
     }
 
+    /**
+     * @param $data
+     * @return array
+     */
     public function createOrUpdate($data)
     {
         $id = $this->fieldRepository->createOrUpdateAndReposition(
@@ -205,17 +212,19 @@ class ContentFieldService
             $data
         );
 
-        //Fire an event that the content was modified
-        if(array_key_exists('id',$data)) {
-            event(new ContentFieldUpdated($data['content_id']));
-        } else {
-            event(new ContentFieldCreated($data['content_id']));
-        }
-
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $data['content_id']);
 
-        return $this->get($id);
+        $newField = $this->get($id);
+
+        //Fire an event that the content was modified
+        if(array_key_exists('id',$data)) {
+            event(new ContentFieldUpdated($newField, $data));
+        } else {
+            event(new ContentFieldCreated($newField));
+        }
+
+        return $newField;
     }
 
 }
