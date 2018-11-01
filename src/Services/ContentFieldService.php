@@ -156,24 +156,24 @@ class ContentFieldService
     public function update($id, array $data)
     {
         //Check if field exist in the database
-        $field = $this->get($id);
+        $oldField = $this->get($id);
 
-        if (is_null($field)) {
-            return $field;
+        if (is_null($oldField)) {
+            return $oldField;
         }
 
         if (count($data) == 0) {
-            return $field;
+            return $oldField;
         }
 
         $this->fieldRepository->createOrUpdateAndReposition($id, $data);
 
         //delete cache for associated content id
-        CacheHelper::deleteCache('content_' . $field['content_id']);
+        CacheHelper::deleteCache('content_' . $oldField['content_id']);
 
         $newField = $this->get($id);
 
-        event(new ContentFieldUpdated($newField, $data));
+        event(new ContentFieldUpdated($newField, $oldField));
 
         return $newField;
     }
@@ -190,7 +190,7 @@ class ContentFieldService
         $field = $this->get($id);
 
         if (is_null($field)) {
-            return $field;
+            return false;
         }
 
         $deleted = $this->fieldRepository->deleteAndReposition(['id' => $id]);
@@ -209,6 +209,8 @@ class ContentFieldService
      */
     public function createOrUpdate($data)
     {
+        $oldField = $this->get($data['content_id']);
+
         $id = $this->fieldRepository->createOrUpdateAndReposition(
             ['id' => $data['id'] ?? null],
             $data
@@ -220,7 +222,7 @@ class ContentFieldService
         $newField = $this->get($id);
 
         if(array_key_exists('id',$data)) {
-            event(new ContentFieldUpdated($newField, $data));
+            event(new ContentFieldUpdated($newField, $oldField));
         } else {
             event(new ContentFieldCreated($newField, $data));
         }
