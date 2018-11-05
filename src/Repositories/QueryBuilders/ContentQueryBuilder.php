@@ -9,7 +9,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Queries\CachedQuery;
 
-class ContentQueryBuilder extends CachedQuery
+class ContentQueryBuilder extends QueryBuilder
 {
     /**
      * @return $this

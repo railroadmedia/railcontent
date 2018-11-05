@@ -7,10 +7,7 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class CommentAssignmentRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
-    /**
-     * @return CommentQueryBuilder
-     */
-    public function query()
+    protected function newQuery()
     {
         return (new CommentQueryBuilder(
             $this->connection(),
@@ -28,7 +25,7 @@ class CommentAssignmentRepository extends \Railroad\Resora\Repositories\Reposito
      * @param string $orderByDirection
      * @return array
      */
-    public function getAssignedCommentsForUser(
+    public function getAssignedCommentsForUser_old(
         $userId,
         $page = 1,
         $limit = 25,
@@ -60,7 +57,7 @@ class CommentAssignmentRepository extends \Railroad\Resora\Repositories\Reposito
      * @param int $userId
      * @return integer
      */
-    public function countAssignedCommentsForUser($userId)
+    public function countAssignedCommentsForUser_old($userId)
     {
         return $this->query()
             ->selectColumns()
@@ -78,7 +75,7 @@ class CommentAssignmentRepository extends \Railroad\Resora\Repositories\Reposito
      * @param $commentId
      * @return bool
      */
-    public function deleteCommentAssignations($commentId)
+    public function deleteCommentAssignations_old($commentId)
     {
         return $this->query()->whereIn('comment_id', $commentId)->delete() > 0;
     }

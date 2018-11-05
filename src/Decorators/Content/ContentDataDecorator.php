@@ -29,10 +29,9 @@ class ContentDataDecorator implements DecoratorInterface
         $contents = $contents->toArray();
 
         foreach ($contents as $index => $content) {
-            //$contents[$index]['data'] = [];
+            $contents[$index]['data'] = [];
             foreach ($contentDatum as $contentDataIndex => $contentData) {
                 $contentData = (array)$contentData;
-                // dd($contentDatum);
                 if ($contentData['content_id'] == $content['id']) {
                     $contents[$index]['data'][] = $contentData;
                 }

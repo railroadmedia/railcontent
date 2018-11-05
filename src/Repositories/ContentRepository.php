@@ -58,48 +58,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
     private $slugHierarchy = [];
     private $requiredParentIds = [];
 
-    /**
-     * @var ContentPermissionRepository
-     */
-    private $contentPermissionRepository;
 
-    /**
-     * @var ContentFieldRepository
-     */
-    private $fieldRepository;
-
-    /**
-     * @var ContentDatumRepository
-     */
-    private $datumRepository;
-
-    /**
-     * @var ContentHierarchyRepository
-     */
-    private $contentHierarchyRepository;
-
-    /**
-     * ContentRepository constructor.
-     *
-     * @param ContentPermissionRepository $contentPermissionRepository
-     * @param ContentFieldRepository $fieldRepository
-     * @param ContentDatumRepository $datumRepository
-     * @param ContentHierarchyRepository $contentHierarchyRepository
-     * @param DatabaseManager $databaseManager
-     */
-//    public function __construct(
-//        ContentPermissionRepository $contentPermissionRepository,
-//        ContentFieldRepository $fieldRepository,
-//        ContentDatumRepository $datumRepository,
-//        ContentHierarchyRepository $contentHierarchyRepository
-//    ) {
-//        parent::__construct();
-//
-//        $this->contentPermissionRepository = $contentPermissionRepository;
-//        $this->fieldRepository = $fieldRepository;
-//        $this->datumRepository = $datumRepository;
-//        $this->contentHierarchyRepository = $contentHierarchyRepository;
-//    }
     /**
      * @return CachedQuery|$this
      */
@@ -112,17 +71,10 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
                     $this->connection()
                         ->getPostProcessor()
                 ))->from(ConfigService::$tableContent);
-       // return (new CachedQuery($this->connection()))->from(ConfigService::$tableContent);
     }
 
     protected function decorate($results)
     {
-//         if(!($results instanceof Entity))
-//         {
-//             var_dump($results);
-//             $results = new Entity($results);
-//         }
-
         return Decorator::decorate($results, 'content');
     }
 
@@ -1204,7 +1156,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
         }
 
         $subQuery =
-            $this->query()
+            $this->newQuery()
                 ->selectCountColumns()
                 ->orderByRaw(
                     $this->connection()->raw(
@@ -1237,21 +1189,23 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
                 ->orderByRaw($this->connection()->raw(implode(', ', $orderByColumns) . ' ' . $this->orderDirection))
                 ->addSubJoinToQuery($subQuery);
 
-        $contentRows = $query->getToArray();
+        $contentRows = $query->get();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
-
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+return $contentRows;
+//dd($this->fieldRepository->query());
+//        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+//        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+//        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
+//            array_column($contentRows, 'id'),
+//            array_column($contentRows, 'type')
+//        );
+//
+//        return $this->processRows(
+//            $contentRows,
+//            $contentFieldRows,
+//            $contentDatumRows,
+//            $contentPermissionRows
+//        );
     }
 
     /**
@@ -1276,7 +1230,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
             ->table(
                 $this->connection()->raw('(' . $subQuery->toSql() . ') as rows')
             )
-            ->addBinding($subQuery->getBindings())
+            ->addBinding($subQuery->query()->getBindings())
             ->count();
     }
 

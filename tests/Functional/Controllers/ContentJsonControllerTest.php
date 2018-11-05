@@ -704,10 +704,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 null,
                 $fieldInstructor['type']
             );
+            //dd($contentField);
             $contentField['type'] = 'content';
             $contentField['value'] = (array)$instructor;
             if (array_key_exists(($i - 1), $expectedResults)) {
-                $expectedResults[$i - 1]['fields'][] = (array)$contentField;
+                $expectedResults[$i - 1]['fields'][] = $contentField;
             }
         }
 
@@ -741,6 +742,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'parent_slug' => '',
             ]
         );
+
         $responseContent = $response->decodeResponseJson('data');
 
         $this->assertArraySubset($expectedContent['results'], $responseContent);
@@ -835,8 +837,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ['ids' => $content2['id'] . ',' . $content1['id']]
         );
         $expectedResults = [
-            (array)$content2,
             (array)$content1,
+            (array)$content2,
         ];
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));

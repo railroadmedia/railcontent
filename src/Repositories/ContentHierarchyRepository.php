@@ -4,69 +4,85 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
+use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Resora\Queries\CachedQuery;
 
 class ContentHierarchyRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
+    use ByContentIdTrait;
+    /**
+     * @return CachedQuery|$this
+     */
+    protected function newQuery()
+    {
+        return (new CachedQuery($this->connection()))->from(ConfigService::$tableContentHierarchy);
+    }
+
+//    protected function decorate($results)
+//    {
+////        return Decorator::decorate($results, 'content-data');
+//    }
+
     /**
      * @param $parentId
      * @param $childId
      * @return array|null
-     */
-    public function getByChildIdParentId($parentId, $childId)
-    {
-        return $this->query()
-            ->where(['parent_id' => $parentId, 'child_id' => $childId])
-            ->first();
-    }
+//     */
+//    public function getByChildIdParentId($parentId, $childId)
+//    {
+//        return $this->query()
+//            ->where(['parent_id' => $parentId, 'child_id' => $childId])
+//            ->first();
+//    }
 
     /**
      * @param array $parentIds
      * @param $childId
      * @return array|null
      */
-    public function getByParentIds(array $parentIds)
-    {
-        return $this->query()
-            ->whereIn('parent_id', $parentIds)
-            ->get()
-            ->toArray();
-    }
+//    public function getByParentIds(array $parentIds)
+//    {
+//        return $this->query()
+//            ->whereIn('parent_id', $parentIds)
+//            ->get()
+//            ->toArray();
+//    }
 
     /**
      * @param integer $parentId
      * @param array $childIds
      * @return array|null
      */
-    public function getByParentIdWhereChildIdIn($parentId, $childIds)
-    {
-        return $this->query()
-            ->where('parent_id', $parentId)
-            ->whereIn('child_id', $childIds)
-            ->get()
-            ->toArray();
-    }
+//    public function getByParentIdWhereChildIdIn($parentId, $childIds)
+//    {
+//        return $this->query()
+//            ->where('parent_id', $parentId)
+//            ->whereIn('child_id', $childIds)
+//            ->get()
+//            ->toArray();
+//    }
 
     /**
      * @param array $parentIds
      * @return array
      */
-    public function countParentsChildren(array $parentIds)
-    {
-        return $this->query()
-            ->select(
-                [
-                    $this->databaseManager->raw(
-                        'COUNT(' . ConfigService::$tableContentHierarchy . '.child_id) as count'
-                    ),
-                    'parent_id',
-                ]
-            )
-            ->whereIn(ConfigService::$tableContentHierarchy . '.parent_id', $parentIds)
-            ->groupBy(ConfigService::$tableContentHierarchy . '.parent_id')
-            ->get()
-            ->toArray();
-    }
+//    public function countParentsChildren(array $parentIds)
+//    {
+//        return $this->query()
+//            ->select(
+//                [
+//                    $this->databaseManager->raw(
+//                        'COUNT(' . ConfigService::$tableContentHierarchy . '.child_id) as count'
+//                    ),
+//                    'parent_id',
+//                ]
+//            )
+//            ->whereIn(ConfigService::$tableContentHierarchy . '.parent_id', $parentIds)
+//            ->groupBy(ConfigService::$tableContentHierarchy . '.parent_id')
+//            ->get()
+//            ->toArray();
+//    }
 
     /**
      * @param int $parentId
@@ -105,7 +121,8 @@ class ContentHierarchyRepository extends \Railroad\Resora\Repositories\Repositor
                 ->where('child_position', '>=', $position)
                 ->increment('child_position');
 
-            return $this->query()
+            return $this
+                ->query()
                 ->insert(
                     [
                         'parent_id' => $parentId,
@@ -190,17 +207,17 @@ class ContentHierarchyRepository extends \Railroad\Resora\Repositories\Repositor
      * @param $childId
      * @return bool
      */
-    public function deleteParentChildLink($parentId, $childId)
-    {
-        // delete parent child link and reposition other children
-        return $this->deleteAndReposition(
-            [
-                'parent_id' => $parentId,
-                'child_id' => $childId,
-            ],
-            'child_'
-        );
-    }
+//    public function deleteParentChildLink($parentId, $childId)
+//    {
+//        // delete parent child link and reposition other children
+//        return $this->deleteAndReposition(
+//            [
+//                'parent_id' => $parentId,
+//                'child_id' => $childId,
+//            ],
+//            'child_'
+//        );
+//    }
 
     /**
      * @param int $parentId
@@ -216,30 +233,30 @@ class ContentHierarchyRepository extends \Railroad\Resora\Repositories\Repositor
     /**
      * @return Builder
      */
-    public function query()
-    {
-        return $this->connection()
-            ->table(ConfigService::$tableContentHierarchy);
-    }
+//    public function query()
+//    {
+//        return $this->connection()
+//            ->table(ConfigService::$tableContentHierarchy);
+//    }
 
     /** Get parent Id based on child Id
      *
      * @param integer $childId
      * @return array|null
      */
-    public function getParentByChildId($childId)
-    {
-        return $this->query()
-            ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
-            ->first();
-    }
+//    public function getParentByChildId($childId)
+//    {
+//        return $this->query()
+//            ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
+//            ->first();
+//    }
 
-    public function decrementSiblings($parentId, $position)
-    {
-        return $this->query()
-            ->where('parent_id', $parentId)
-            ->where('child_position', '>', $position)
-            ->decrement('child_position');
-    }
+//    public function decrementSiblings_old($parentId, $position)
+//    {
+//        return $this->query()
+//            ->where('parent_id', $parentId)
+//            ->where('child_position', '>', $position)
+//            ->decrement('child_position');
+//    }
 
 }

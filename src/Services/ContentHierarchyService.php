@@ -29,7 +29,9 @@ class ContentHierarchyService
      */
     public function get($parentId, $childId)
     {
-        return $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
+        return $this->contentHierarchyRepository->query()
+            ->where(['parent_id' => $parentId, 'child_id' => $childId])
+            ->first();
     }
 
     /**
@@ -39,7 +41,9 @@ class ContentHierarchyService
      */
     public function getByParentIds(array $parentIds)
     {
-        return $this->contentHierarchyRepository->getByParentIds($parentIds);
+        return $this->contentHierarchyRepository->query()
+            ->whereIn('parent_id', $parentIds)
+            ->get();
     }
 
     /**
@@ -47,7 +51,18 @@ class ContentHierarchyService
      */
     public function countParentsChildren(array $parentIds)
     {
-        $results = $this->contentHierarchyRepository->countParentsChildren($parentIds);
+        $results = $this->contentHierarchyRepository->query()
+            ->select(
+                [
+                    DB::raw(
+                        'COUNT(' . ConfigService::$tableContentHierarchy . '.child_id) as count'
+                    ),
+                    'parent_id',
+                ]
+            )
+            ->whereIn(ConfigService::$tableContentHierarchy . '.parent_id', $parentIds)
+            ->groupBy(ConfigService::$tableContentHierarchy . '.parent_id')
+            ->get();
 
         return array_combine(array_column($results, 'parent_id'), array_column($results, 'count'));
     }
@@ -74,7 +89,10 @@ class ContentHierarchyService
         //delete the cached results for child id
         CacheHelper::deleteCache('content_' . $childId);
 
-        $results = $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
+        $results = $this->contentHierarchyRepository
+            ->query()
+            ->where(['parent_id' => $parentId, 'child_id' => $childId])
+            ->first();
 
         return $results;
     }
@@ -91,12 +109,24 @@ class ContentHierarchyService
 
         CacheHelper::deleteCache('content_' . $childId);
 
-        return $this->contentHierarchyRepository->deleteParentChildLink($parentId, $childId);
+        return $this->contentHierarchyRepository
+            ->query()
+            ->deleteAndReposition(
+            [
+                'parent_id' => $parentId,
+                'child_id' => $childId,
+            ],
+            'child_'
+        );
+            //->deleteParentChildLink($parentId, $childId);
     }
 
     public function repositionSiblings($childId)
     {
-        $parentHierarchy = $this->contentHierarchyRepository->getParentByChildId($childId);
+        $parentHierarchy = $this->contentHierarchyRepository
+            ->query()
+            ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
+            ->first();
 
         if (!$parentHierarchy) {
             return true;
@@ -106,10 +136,10 @@ class ContentHierarchyService
 
         CacheHelper::deleteCache('content_' . $childId);
 
-        return $this->contentHierarchyRepository->decrementSiblings(
-            $parentHierarchy['parent_id'],
-            $parentHierarchy['child_position']
-        );
-
+        return $this->contentHierarchyRepository
+            ->query()
+            ->where('parent_id', $parentHierarchy['parent_id'])
+            ->where('child_position', '>', $parentHierarchy['child_position'])
+            ->decrement('child_position');
     }
 }

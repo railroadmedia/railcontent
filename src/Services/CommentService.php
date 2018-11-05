@@ -51,7 +51,7 @@ class CommentService
      */
     public function get($id)
     {
-        return Decorator::decorate($this->commentRepository->getById($id), 'comment');
+        return $this->commentRepository->getById($id);
     }
 
     /**
@@ -76,7 +76,7 @@ class CommentService
         }
 
         //check if the content type allow comments
-        $content = $this->contentRepository->getById($contentId);
+        $content = $this->contentRepository->read($contentId);
 
         //return null if the content type it's not predefined in config file
         if (!in_array($content['type'], ConfigService::$commentableContentTypes)) {
@@ -87,7 +87,7 @@ class CommentService
             return -1;
         }
 
-        $commentId = $this->commentRepository->create(
+        $comment = $this->commentRepository->create(
             [
                 'comment' => $comment,
                 'content_id' => $contentId,
@@ -100,11 +100,9 @@ class CommentService
 
         CacheHelper::deleteCache('content_' . $contentId);
 
-        $createdComment = $this->get($commentId);
+        event(new CommentCreated($comment['id'], $userId, $parentId, $comment));
 
-        event(new CommentCreated($commentId, $userId, $parentId, $comment));
-
-        return $createdComment;
+        return $this->commentRepository->getById($comment['id']);
     }
 
     /**
@@ -271,7 +269,7 @@ class CommentService
             $results = CacheHelper::saveUserCache($hash, $results, $contentIds);
         }
 
-        return Decorator::decorate($results, 'comment');
+        return $results;
     }
 
     /**

@@ -11,8 +11,10 @@ use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
+use Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator;
 use Railroad\Railcontent\Decorators\Content\ContentDataDecorator;
 use Railroad\Railcontent\Decorators\Content\ContentFielsDecorator;
+use Railroad\Railcontent\Decorators\Entity\CommentEntityDecorator;
 use Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator;
 use Railroad\Railcontent\Decorators\Hierarchy\ContentSlugHierarchyDecorator;
 use Railroad\Railcontent\Events\CommentCreated;
@@ -111,8 +113,18 @@ class RailcontentServiceProvider extends ServiceProvider
                 [
                     ContentFielsDecorator::class,
                     ContentDataDecorator::class,
-                   // ContentSlugHierarchyDecorator::class,
-                    //ContentEntityDecorator::class
+                    ContentSlugHierarchyDecorator::class,
+                ]
+            )
+        );
+
+        config()->set(
+            'resora.decorators.comment',
+            array_merge(
+                config()->get('resora.decorators.comment', []),
+                [
+                    CommentLikesDecorator::class,
+                    CommentEntityDecorator::class
                 ]
             )
         );

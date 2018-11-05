@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Resora\Queries\CachedQuery;
 
 class PermissionRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
@@ -18,11 +19,16 @@ class PermissionRepository extends \Railroad\Resora\Repositories\RepositoryBase
         return $this->query()->get()->toArray();
     }
 
+    protected function newQuery()
+    {
+        return (new CachedQuery($this->connection()))->from(ConfigService::$tablePermissions);
+    }
+
     /**
      * @return Builder
      */
-    public function query()
-    {
-        return parent::connection()->table(ConfigService::$tablePermissions);
-    }
+//    public function query()
+//    {
+//        return parent::connection()->table(ConfigService::$tablePermissions);
+//    }
 }

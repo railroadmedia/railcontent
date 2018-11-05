@@ -7,6 +7,7 @@ use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Resora\Decorators\Decorator;
 
 class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
@@ -150,7 +151,7 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
             )
             ->directPaginate($this->page, $this->limit);
 
-        $rows = $query->getToArray();
+        $rows = $query->get();
 
         $commentsIds = [];
         $threadsIds = [];
@@ -239,7 +240,7 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
     /**
      * @return CommentQueryBuilder
      */
-    public function query()
+    public function newQuery()
     {
         return (new CommentQueryBuilder(
             $this->connection(),
@@ -395,19 +396,20 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
 
         foreach($rows as $row){
             $comment = [
-                'id' => $row['id'],
-                'comment' => $row['comment'],
-                'content_id' => $row['content_id'],
-                'parent_id' => $row['parent_id'],
-                'user_id' => $row['user_id'],
-                'display_name' => $row['display_name'],
-                'created_on' => $row['created_on'],
-                'deleted_at' => $row['deleted_at'],
-                'replies' => $repliesRowsGrouped[$row['id']] ?? []
+                'id' => $row->id,
+                'comment' => $row->comment,
+                'content_id' => $row->content_id,
+
+                'parent_id' => $row->parent_id,
+                'user_id' => $row->user_id,
+                'display_name' => $row->display_name,
+                'created_on' => $row->created_on,
+                'deleted_at' => $row->deleted_at,
+                'replies' => $repliesRowsGrouped[$row->id] ?? []
             ];
 
-            if (!empty($comment['assigned_on'])) {
-                $comment['assigned_on'] = $row['assigned_on'];
+            if (!empty($comment->assigned_on)) {
+                $comment['assigned_on'] = $row->assigned_on;
             }
 
             $results[] = $comment;

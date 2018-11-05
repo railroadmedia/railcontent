@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Resora\Queries\CachedQuery;
 
 /**
  * Class ContentPermissionRepository
@@ -18,11 +19,17 @@ class ContentPermissionRepository extends \Railroad\Resora\Repositories\Reposito
     /**
      * @return Builder
      */
-    public function query()
+//    public function query()
+//    {
+//        return parent::connection()->table(ConfigService::$tableContentPermissions);
+//    }
+    /**
+     * @return CachedQuery|$this
+     */
+    protected function newQuery()
     {
-        return parent::connection()->table(ConfigService::$tableContentPermissions);
+        return (new CachedQuery($this->connection()))->from(ConfigService::$tableContentPermissions);
     }
-
     /**
      * Return a permission based on it's id
      *

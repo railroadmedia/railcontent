@@ -3,16 +3,30 @@
 namespace Railroad\Railcontent\Decorators\Hierarchy;
 
 use Illuminate\Database\Query\JoinClause;
-use Railroad\Railcontent\Decorators\DecoratorInterface;
-use Railroad\Railcontent\Repositories\RepositoryBase;
+use Illuminate\Support\Facades\DB;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Support\Collection;
+use Railroad\Resora\Decorators\DecoratorInterface;
+use Railroad\Resora\Queries\CachedQuery;
 
 class ContentSlugHierarchyDecorator implements DecoratorInterface
 {
-    public function decorate(Collection $contentResults)
+    private $contentRepository;
+
+    /**
+     * ContentSlugHierarchyDecorator constructor.
+     *
+     * @param $contentRepository
+     */
+    public function __construct(ContentRepository $contentRepository)
     {
-        $query = RepositoryBase::$connectionMask->table(ConfigService::$tableContent . ' as parent_content_0')
+        $this->contentRepository = $contentRepository;
+    }
+
+    public function decorate($contentResults)
+    {
+        $query = DB::table(ConfigService::$tableContent . ' as parent_content_0')
             ->whereIn('parent_content_0.id', $contentResults->pluck('id'));
 
         for ($i = 0; $i < ConfigService::$contentHierarchyMaxDepth; $i++) {
@@ -44,13 +58,12 @@ class ContentSlugHierarchyDecorator implements DecoratorInterface
                 ->addSelect('parent_content_' . ($i + 1) . '.type as parent_content_' . ($i + 1) . '.type');
         }
 
-        $slugHierarchies = $query->get();
+        $slugHierarchies = $query->get()->toArray();
 
         foreach ($contentResults as $contentIndex => $content) {
             foreach ($slugHierarchies as $slugHierarchy) {
-
+                $slugHierarchy = (array)$slugHierarchy;
                 for ($i = 1; $i < ConfigService::$contentHierarchyMaxDepth; $i++) {
-
                     if ($slugHierarchy['id'] == $content['id'] &&
                         !empty($slugHierarchy['parent_content_' . ($i) . '.slug'])) {
 

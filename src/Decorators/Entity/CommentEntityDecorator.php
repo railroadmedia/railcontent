@@ -2,13 +2,13 @@
 
 namespace Railroad\Railcontent\Decorators\Entity;
 
-use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Entities\CommentEntity;
 use Railroad\Railcontent\Support\Collection;
+use Railroad\Resora\Decorators\DecoratorInterface;
 
 class CommentEntityDecorator implements DecoratorInterface
 {
-    public function decorate(Collection $commentResults)
+    public function decorate($commentResults)
     {
         $entities = [];
 

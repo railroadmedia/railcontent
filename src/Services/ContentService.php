@@ -1080,15 +1080,17 @@ class ContentService
             }
             $resultsDB = new ContentFilterResultsEntity(
                 [
-                    'results' => $filter->retrieveFilter(),
+                    'results' => $this->contentRepository->retrieveFilter(),
                     'total_results' => $filter->countFilter(),
-                    'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
+//                    'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
                 ]
             );
+           // dd($this->contentRepository->retrieveFilter());
+
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
             $results = new ContentFilterResultsEntity($results);
         }
-        return Decorator::decorate($results, 'content');
+        return $results;
     }
 
     /**

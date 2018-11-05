@@ -30,7 +30,7 @@ class CommentAssignmentService
      */
     public function store($commentId, $userId)
     {
-        $id = $this->commentAssignmentRepository->updateOrCreate(
+        return $this->commentAssignmentRepository->updateOrCreate(
             [
                 'comment_id' => $commentId,
                 'user_id' => $userId,
@@ -40,8 +40,6 @@ class CommentAssignmentService
                     ->toDateTimeString(),
             ]
         );
-
-        return $this->commentAssignmentRepository->getById($id);
     }
 
     /**
@@ -64,15 +62,32 @@ class CommentAssignmentService
         $orderByDirection = substr($orderByColumnAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($orderByColumnAndDirection, '-');
 
-        $assignedComments = $this->commentAssignmentRepository->getAssignedCommentsForUser(
-            $userId,
-            $page,
-            $limit,
-            $orderByColumn,
-            $orderByDirection
-        );
+        $assignedComments = $this->commentAssignmentRepository->query()
+            ->selectColumns()
+            ->leftJoin(
+                ConfigService::$tableComments,
+                'comment_id',
+                '=',
+                ConfigService::$tableComments . '.id'
+            )
+            ->where(ConfigService::$tableCommentsAssignment . '.user_id', $userId)
+            ->orderBy(
+                $orderByColumn,
+                $orderByDirection,
+                ConfigService::$tableCommentsAssignment
+            )
+            ->skip(($page - 1) * $limit)
+            ->limit($limit)
+        ->get();
+//            ->getAssignedCommentsForUser(
+//            $userId,
+//            $page,
+//            $limit,
+//            $orderByColumn,
+//            $orderByDirection
+//        );
 
-        return Decorator::decorate($assignedComments, 'comments');
+        return $assignedComments;
     }
 
     /**
@@ -83,7 +98,16 @@ class CommentAssignmentService
      */
     public function countAssignedCommentsForUser($userId)
     {
-        return $this->commentAssignmentRepository->countAssignedCommentsForUser($userId);
+        return $this->commentAssignmentRepository->query()
+            ->selectColumns()
+            ->leftJoin(
+                ConfigService::$tableComments,
+                'comment_id',
+                '=',
+                ConfigService::$tableComments . '.id'
+            )
+            ->where(ConfigService::$tableCommentsAssignment . '.user_id', $userId)
+            ->count();
     }
 
     /**
@@ -94,6 +118,6 @@ class CommentAssignmentService
      */
     public function deleteCommentAssignations($commentId)
     {
-        return $this->commentAssignmentRepository->deleteCommentAssignations([$commentId]);
+        return $this->commentAssignmentRepository->query()->whereIn('comment_id', [$commentId])->delete() > 0;
     }
 }

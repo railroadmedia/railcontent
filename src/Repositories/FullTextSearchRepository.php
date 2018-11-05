@@ -50,7 +50,7 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
     /**
      * @return FullTextSearchQueryBuilder
      */
-    public function query()
+    public function newQuery()
     {
         return (new FullTextSearchQueryBuilder(
             $this->connection(),

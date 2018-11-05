@@ -106,7 +106,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'user_id'      => $userId,
             'created_on'   => Carbon::now()->toDateTimeString(),
             'deleted_at'   => null,
-            'display_name' => $comment['display_name'],
+            //'display_name' => $comment['display_name'],
             'replies'      => []
         ];
 
@@ -310,7 +310,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         for($i = 1; $i <= $totalNumber; $i++)
         {
-            $comments[$i]            = $this->commentFactory->create($this->faker->text, $content['id'], null, rand())->getArrayCopy();
+            $comments[$i]            = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
             $comments[$i]['replies'] = [];
         }
 
@@ -347,7 +347,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         for($i = 1; $i <= $totalNumber; $i++)
         {
-            $comments[$i]            = $this->commentFactory->create($this->faker->text, $content['id'], null, rand())->getArrayCopy();
+            $comments[$i]            = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
             $comments[$i]['replies'] = [];
         }
 
@@ -385,7 +385,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         for($i = 1; $i <= $totalNumber; $i++)
         {
-            $comments[$i]            = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId)->getArrayCopy();
+            $comments[$i]            = $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
             $comments[$i]['replies'] = [];
         }
 
@@ -553,7 +553,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         for($i = 1; $i <= $totalNumber; $i++)
         {
-            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand())->getArrayCopy();
+            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
             $comments[$i]['replies'] = [];
         }
 
@@ -606,7 +606,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         for($i = 1; $i <= $totalNumber; $i++)
         {
-            $comments[$i]            = $this->commentFactory->create($this->faker->text, $content['id'], null, rand())->getArrayCopy();
+            $comments[$i]            = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
             $comments[$i]['replies'] = [];
         }
 
@@ -639,11 +639,11 @@ class CommentJsonControllerTest extends RailcontentTestCase
             $this->faker->word,
             ConfigService::$commentableContentTypes[0]
         );
-        $comment    = $this->commentFactory->create($this->faker->text, $content['id'], null, rand())->getArrayCopy();
+        $comment    = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
 
         for($i = 1; $i <= $commentsNr; $i++)
         {
-            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand())->getArrayCopy();
+            $comments[$i] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
         }
 
         $response = $this->call('GET', 'railcontent/comment/' . $comment['id']);

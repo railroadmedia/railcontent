@@ -59,13 +59,12 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
 
         for ($i = 0; $i < 5; $i++) {
             $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-            $assignedComments[$i] = $this->commentAssignationFactory->create($comment['id'], $userId);
+            $assignedComments[$i] = $this->commentAssignationFactory->create($comment['id'], $userId)->getArrayCopy();
             $assignedComments[$i]['deleted_at'] = null;
             $assignedComments[$i]['content_id'] = $comment['content_id'];
             $assignedComments[$i]['comment'] = $comment['comment'];
             $assignedComments[$i]['user_id'] = $comment['user_id'];
             $assignedComments[$i]['parent_id'] = $comment['parent_id'];
-            $assignedComments[$i]['display_name'] = $comment['display_name'];
             $assignedComments[$i]['created_on'] = $comment['created_on'];
             unset($assignedComments[$i]['comment_id']);
             unset($assignedComments[$i]['assigned_on']);
@@ -87,7 +86,9 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
             ContentService::STATUS_PUBLISHED
         );
+
         $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+
         $assignedComments = $this->commentAssignationFactory->create($comment['id'], rand());
 
         $response = $this->call('DELETE', 'railcontent/assigned-comment/'.$comment['id']);
