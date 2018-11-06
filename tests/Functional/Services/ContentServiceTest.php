@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Illuminate\Support\Facades\Cache;
+use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Factories\CommentAssignationFactory;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
@@ -318,7 +319,7 @@ class ContentServiceTest extends RailcontentTestCase
             $content1['published_on']
         );
 
-        $this->assertEquals([new Entity($content1)], $results);
+        $this->assertArraySubset([new ContentEntity($content1)], $results);
     }
 
     public function test_getByChildIdWhereType()
@@ -330,9 +331,10 @@ class ContentServiceTest extends RailcontentTestCase
         );
         $children = $this->contentFactory->create();
         $childrenHierarchy = $this->contentHierarchyFactory->create($content['id'], $children['id']);
-        $content['child_position'] = 1;
+        $content['position'] = 1;
         $content['parent_id'] = $content['id'];
         $content['child_id'] = $children['id'];
+        $content['child_ids'] = [$children['id']];
         unset($content['user_id']);
         $results = $this->classBeingTested->getByChildIdsWhereType([$children['id']], $content['type']);
 
@@ -483,8 +485,8 @@ class ContentServiceTest extends RailcontentTestCase
         $type = 'vimeo-video';
         $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
         $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
-        $fields = $this->fieldFactory->create($content1['id'], 'length_in_seconds', 0, 1, 'string');
-        // $fields = $this->fieldFactory->create($content2['id'],'length_in_seconds',0,1,'string');
+//        $fields = $this->fieldFactory->create($content1['id'], 'length_in_seconds', 0, 1, 'string');
+         $fields = $this->fieldFactory->create($content2['id'],'length_in_seconds',0,1,'string');
         $results = $this->classBeingTested->getByContentFieldValuesForTypes(['vimeo-video'], 'length_in_seconds', [0]);
 
         $this->assertEquals(1, count($results));

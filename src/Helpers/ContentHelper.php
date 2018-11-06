@@ -65,7 +65,7 @@ class ContentHelper
      * @param string|null $type
      * @return array
      */
-    public static function getFieldValues(array $content, $key, $type = null)
+    public static function getFieldValues($content, $key, $type = null)
     {
         if (empty($content['fields']) || !is_array($content['fields'])) {
             return [];
@@ -96,7 +96,7 @@ class ContentHelper
      * @return string|null
      */
     public static function getFieldSubContentValue(
-        array $content,
+        $content,
         $key,
         $position = 1,
         $subKey,
@@ -118,7 +118,7 @@ class ContentHelper
      * @param integer $position
      * @return string|array|null
      */
-    public static function getDatumValue(array $content, $key, $position = 1)
+    public static function getDatumValue($content, $key, $position = 1)
     {
         if (empty($content['data']) || !is_array($content['data'])) {
             return null;
@@ -141,7 +141,7 @@ class ContentHelper
      * @param integer $position
      * @return array
      */
-    public static function getDatumValues(array $content, $key)
+    public static function getDatumValues($content, $key)
     {
         if (empty($content['data']) || !is_array($content['data'])) {
             return [];
@@ -167,7 +167,7 @@ class ContentHelper
      * @return string|null
      */
     public static function getDatumSubContentValue(
-        array $content,
+        $content,
         $key,
         $position = 1,
         $subKey,
@@ -304,7 +304,7 @@ class ContentHelper
      * @return string|null
      */
     public static function getFieldSubContentValues(
-        array $content,
+        $content,
         $key,
         $subKey,
         $subType = null

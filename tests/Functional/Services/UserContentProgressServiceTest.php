@@ -10,6 +10,7 @@ use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
+use Railroad\Resora\Entities\Entity;
 
 class UserContentProgressServiceTest extends RailcontentTestCase
 {
@@ -197,14 +198,14 @@ class UserContentProgressServiceTest extends RailcontentTestCase
             $content = $this->contentFactory->create();
             $content['completed'] = false;
             $content['started'] = true;
-            $content['user_progress'][$userId] = [
+            $content['user_progress'][$userId] = new Entity([
                 'id' => $i + 1,
                 'content_id' => $i + 1,
                 'user_id' => $userId,
                 'state' => UserContentProgressService::STATE_STARTED,
                 'progress_percent' => '0',
                 'updated_on' => Carbon::now()->toDateTimeString()
-            ];
+            ]);
             $expectedContents[] = $content;
 
             $this->classBeingTested->startContent($content['id'], $userId);

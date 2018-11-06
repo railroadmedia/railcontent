@@ -244,11 +244,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     ->toDateTimeString(),
                 'published_on' => $publishedOn,
                 'archived_on' => null,
-                'parent_id' => null,
+//                'parent_id' => null,
                 'fields' => [],
                 'data' => [],
                 'permissions' => [],
-                'child_id' => null,
+//                'child_id' => null,
                 'sort' => 0,
             ],
         ];
@@ -620,7 +620,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $expectedContent['filter_options'] = [];
 
         for ($i = 1; $i < $contentWithFieldsNr; $i++) {
-            $field = $this->fieldFactory->create($contents[$i]['id'], $fieldKey, $fieldValue, null, $fieldType);
+            $field = $this->fieldFactory->create($contents[$i]['id'], $fieldKey, $fieldValue, null, $fieldType)->getArrayCopy();
 
             $expectedResults[$i - 1] = $contents[$i];
             $expectedResults[$i - 1]['fields'][] = array_merge($field, ['id' => $field['id']]);
@@ -684,7 +684,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             );
 
             $expectedResults[$i - 1] = $contents[$i];
-            $expectedResults[$i - 1]['fields'][] = $field;
+            $expectedResults[$i - 1]['fields'][] = $field->getArrayCopy();
         }
 
         $instructor =
@@ -704,19 +704,18 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 null,
                 $fieldInstructor['type']
             );
-            //dd($contentField);
+
             $contentField['type'] = 'content';
             $contentField['value'] = (array)$instructor;
             if (array_key_exists(($i - 1), $expectedResults)) {
-                $expectedResults[$i - 1]['fields'][] = $contentField;
+                $expectedResults[$i - 1]['fields'][] = $contentField->getArrayCopy();
             }
         }
 
         for ($i = 1; $i < 25; $i++) {
             $datum = $this->contentDatumFactory->create($contents[$i]['id']);
-
             if (array_key_exists(($i - 1), $expectedResults)) {
-                $expectedResults[$i - 1]['data'][] = $datum;
+                $expectedResults[$i - 1]['data'][] = $datum->getArrayCopy();
             }
         }
 
@@ -776,7 +775,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $firstChild['position'] = 1;
         $firstChild['child_ids'] = [$firstChild['id']];
         $fieldFirstChild = $this->fieldFactory->create($firstChild['id']);
-        $firstChild['fields'][] = $fieldFirstChild;
+        $firstChild['fields'][] = $fieldFirstChild->getArrayCopy();
 
         $this->contentHierarchyFactory->create($parent['id'], $firstChild['id']);
 
@@ -943,16 +942,17 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'brand' => ConfigService::$brand,
             ]
         );
+
         $contentPermission = $this->contentPermissionRepository->create(
             [
                 'content_id' => $content1['id'],
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
             ]
         );
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => $user,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->subMonth(2)
                     ->toDateTimeString(),
@@ -1005,14 +1005,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $contentPermission = $this->contentPermissionRepository->create(
             [
                 'content_id' => $content1['id'],
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
             ]
         );
 
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => $user,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->subMonth(2)
                     ->toDateTimeString(),

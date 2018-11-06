@@ -81,7 +81,7 @@ class ContentJsonController extends Controller
      */
     public function getByParentId($parentId)
     {
-        $contentData = $this->contentService->getByParentId($parentId);
+          $contentData = $this->contentService->getByParentId($parentId);
 
         return reply()->json(
             $contentData,

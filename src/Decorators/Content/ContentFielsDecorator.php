@@ -31,7 +31,6 @@ class ContentFielsDecorator implements DecoratorInterface
             $this->contentFieldsRepository->query()
                 ->whereIn('content_id', $contentIds)
                 ->get();
-        $contents = $contents->toArray();
 
         foreach ($contents as $index => $content) {
             $contents[$index]['fields'] = [];
@@ -42,7 +41,6 @@ class ContentFielsDecorator implements DecoratorInterface
                 }
             }
         }
-
-         return new Collection($contents);
+        return $contents;
     }
 }

@@ -19,15 +19,15 @@ class ContentDatumRepository extends \Railroad\Resora\Repositories\RepositoryBas
         return (new CachedQuery($this->connection()))->from(ConfigService::$tableContentData);
     }
 
-    protected function decorate($results)
-    {
-        /* if(!($results instanceof Product))
-         {
-             $results = new Product($results);
-         } */
-
-        return Decorator::decorate($results, 'content-data');
-    }
+//    protected function decorate($results)
+//    {
+//        /* if(!($results instanceof Product))
+//         {
+//             $results = new Product($results);
+//         } */
+//
+//        return Decorator::decorate($results, 'content-data');
+//    }
 //    use ByContentIdTrait;
 //
 //    /**

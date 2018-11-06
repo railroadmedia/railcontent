@@ -61,7 +61,7 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
             'comment_id' => $comment['id'],
             'user_id' => $managerId,
             'assigned_on' => Carbon::now()->toDateTimeString()
-        ], $store);
+        ], $store->getArrayCopy());
     }
 
     public function test_delete_comment_assignation_when_not_exist()

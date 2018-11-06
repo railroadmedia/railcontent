@@ -100,7 +100,7 @@ class PermissionControllerTest extends RailcontentTestCase
             'name' => $name,
         ];
 
-        $this->assertEquals(array_add($expectedResult, 'brand', ConfigService::$brand), $permission);
+        $this->assertEquals(array_add($expectedResult, 'brand', ConfigService::$brand), $permission->getArrayCopy());
     }
 
     public function test_update_response()
@@ -388,7 +388,7 @@ class PermissionControllerTest extends RailcontentTestCase
                 'name' => $permission['name'],
                 'brand' => ConfigService::$brand,
             ],
-            $assigned
+            $assigned->getArrayCopy()
         );
     }
 
@@ -407,7 +407,7 @@ class PermissionControllerTest extends RailcontentTestCase
                 'name' => $permission['name'],
                 'brand' => $permission['brand'],
             ],
-            $assigned
+            $assigned->getArrayCopy()
         );
     }
 

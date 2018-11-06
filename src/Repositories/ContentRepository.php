@@ -1165,7 +1165,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
                 )
                 ->restrictByUserAccess()
                 ->limit($this->limit)
-                ->skip($this->page)
+                ->skip(($this->page - 1) * $this->limit)
 //                ->directPaginate($this->page, $this->limit)
                 ->restrictByFields($this->requiredFields)
                 ->includeByFields($this->includedFields)
@@ -1187,11 +1187,12 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
         $query =
             $this->query()
                 ->orderByRaw($this->connection()->raw(implode(', ', $orderByColumns) . ' ' . $this->orderDirection))
-                ->addSubJoinToQuery($subQuery);
+                ->addSubJoinToQuery($subQuery)
+        ->get();
 
-        $contentRows = $query->get();
+      // $contentRows = $query->get();
 
-return $contentRows;
+return $query;
 //dd($this->fieldRepository->query());
 //        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
 //        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));

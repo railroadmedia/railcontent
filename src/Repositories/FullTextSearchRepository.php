@@ -7,12 +7,16 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Repositories\QueryBuilders\FullTextSearchQueryBuilder;
+use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 use Illuminate\Support\Facades\DB;
+use Railroad\Resora\Decorators\Decorator;
 
 class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
     use RefreshDatabase;
+
+    use ByContentIdTrait;
 
     /**
      * @var ContentRepository
@@ -29,12 +33,12 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
      */
     private $datumRepository;
 
-//    /**
-//     * ContentRepository constructor.
-//     *
-//     * @param ContentRepository $contentRepository
-//     * @param DatabaseManager $databaseManager
-//     */
+    /**
+     * ContentRepository constructor.
+     *
+     * @param ContentRepository $contentRepository
+     * @param DatabaseManager $databaseManager
+     */
 //    public function __construct(
 //        ContentRepository $contentRepository,
 //        ContentFieldRepository $fieldRepository,
@@ -73,11 +77,16 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
             ->from(ConfigService::$tableContent);
     }
 
+    protected function decorate($results)
+    {
+        return Decorator::decorate($results, 'content');
+    }
+
     public function createSearchIndexes()
     {
         //delete old indexes
         $this->deleteOldIndexes();
-
+dd($this->contentQuery()->getConnection());
         $query = $this->contentQuery()
             ->selectPrimaryColumns()
             ->restrictByTypes(ConfigService::$searchableContentTypes)
@@ -86,9 +95,10 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
         $query->chunk(
             100,
             function ($query) {
-                $contentFieldRows = $this->fieldRepository->getByContentIds($query->pluck('id')->toArray());
-                $contentDatumRows = $this->datumRepository->getByContentIds($query->pluck('id')->toArray());
 
+                $contentFieldRows = $this->fieldRepository->query()->getByContentIds($query->pluck('id')->toArray());
+                $contentDatumRows = $this->datumRepository->query()->getByContentIds($query->pluck('id')->toArray());
+                dd($query);
                 $fieldRowsGrouped = ContentHelper::groupArrayBy($contentFieldRows, 'content_id');
                 $datumRowsGrouped = ContentHelper::groupArrayBy($contentDatumRows, 'content_id');
 
@@ -108,7 +118,7 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
                         'created_at' => Carbon::now()->toDateTimeString()
                     ];
 
-                    $this->updateOrCreate(
+                    $this->query()->updateOrCreate(
                         ['content_id' => $content['id'],],
                         $searchInsertData,
                         'content_id'
@@ -124,7 +134,7 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
      *
      * @return mixed
      */
-    private function deleteOldIndexes()
+    public function deleteOldIndexes()
     {
         return $this->query()->where('brand', ConfigService::$brand)->delete();
     }
@@ -135,7 +145,7 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
      * @param array $content
      * @return string
      */
-    private function prepareIndexesValues($type, $content)
+    public function prepareIndexesValues($type, $content)
     {
         $searchIndexValues = ConfigService::$searchIndexValues;
         $configSearchIndexValues = $searchIndexValues[$type];

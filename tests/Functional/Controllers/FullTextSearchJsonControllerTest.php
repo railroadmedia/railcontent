@@ -75,7 +75,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             $content[$i] = $content[$i];
         }
 
-        $this->artisan('command:createSearchIndexesForContents');
+        dd($this->artisan('command:createSearchIndexesForContents'));
 
         $response = $this->call(
             'GET',

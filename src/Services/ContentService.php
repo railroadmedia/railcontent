@@ -368,7 +368,12 @@ class ContentService
     {
         $hash = 'contents_by_parent_id_' . CacheHelper::getKey($parentId, $orderBy, $orderByDirection);
         $results = CacheHelper::getCachedResultsForKey($hash);
-
+//dd($this->contentRepository->query()->selectPrimaryColumns()  ->selectInheritenceColumns()->leftJoin(
+//    ConfigService::$tableContentHierarchy,
+//    ConfigService::$tableContentHierarchy . '.child_id',
+//    '=',
+//    ConfigService::$tableContent . '.id'
+//)->get());
         if (!$results) {
             $resultsDB =
                 $this->contentRepository->query()
@@ -382,7 +387,8 @@ class ContentService
                         ConfigService::$tableContent . '.id'
                     )
                     ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
-                    ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId);
+                    ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
+            ->get();
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
         }
@@ -1080,7 +1086,7 @@ class ContentService
             }
             $resultsDB = new ContentFilterResultsEntity(
                 [
-                    'results' => $this->contentRepository->retrieveFilter(),
+                    'results' => $this->contentRepository->query()->retrieveFilter(),
                     'total_results' => $filter->countFilter(),
 //                    'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
                 ]
@@ -1221,7 +1227,8 @@ class ContentService
         //delete the content comments, replies and assignation
         $comments = $this->commentRepository->getByContentId($contentId);
 
-        $this->commentAssignationRepository->deleteCommentAssignations(array_pluck($comments, 'id'));
+        $this->commentAssignationRepository->query()->whereIn('comment_id', array_pluck($comments, 'id'))->delete() ;
+            //->deleteCommentAssignations(array_pluck($comments, 'id'));
 
         $this->commentRepository->deleteByContentId($contentId);
 

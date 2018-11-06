@@ -55,7 +55,7 @@ class CommentServiceTest extends RailcontentTestCase
     {
         $result = $this->classBeingTested->get(rand());
 
-        $this->assertTrue($result->isEmpty());
+        $this->assertNull($result);
     }
 
     public function test_create_comment()
@@ -83,8 +83,7 @@ class CommentServiceTest extends RailcontentTestCase
             $comment['parent_id'],
             $comment['user_id'],
             $comment['display_name']
-        )
-            ->getArrayCopy();
+        );
 
         $this->assertArraySubset(array_add($comment, 'replies', []), $result);
     }
@@ -157,8 +156,7 @@ class CommentServiceTest extends RailcontentTestCase
         ];
 
         $result =
-            $this->classBeingTested->create($reply['comment'], null, $comment['id'], $userId, $reply['display_name'])
-                ->getArrayCopy();
+            $this->classBeingTested->create($reply['comment'], null, $comment['id'], $userId, $reply['display_name']);
 
         $this->assertArraySubset(array_add($reply, 'replies', []), $result);
     }
@@ -171,15 +169,13 @@ class CommentServiceTest extends RailcontentTestCase
             $this->faker->randomElement(ConfigService::$commentableContentTypes)
         );
         $comment =
-            $this->commentFactory->create($this->faker->text, $content['id'], null, $userId)
-                ->getArrayCopy();
+            $this->commentFactory->create($this->faker->text, $content['id'], null, $userId);
 
         $newCommentValues = [
             'comment' => $this->faker->text,
         ];
         $result =
-            $this->classBeingTested->update($comment['id'], $newCommentValues)
-                ->getArrayCopy();
+            $this->classBeingTested->update($comment['id'], $newCommentValues);
 
         $this->assertEquals(array_merge($comment, $newCommentValues), $result);
     }
@@ -252,7 +248,7 @@ class CommentServiceTest extends RailcontentTestCase
         $this->assertArrayHasKey('total_results', $results);
 
         $this->assertEquals(0, $results['total_results']);
-        $this->assertEquals([], $results['results']->toArray());
+        $this->assertEquals([], $results['results']);
     }
 
     public function test_get_comments_paginated()
@@ -273,7 +269,7 @@ class CommentServiceTest extends RailcontentTestCase
         $results = $this->classBeingTested->getComments(1, $limit, 'created_on');
 
         $this->assertEquals(($totalNumber + 1), $results['total_results']);
-        $this->assertEquals(array_slice($comment, 0, $limit, true), $results['results']->toArray());
+        $this->assertEquals(array_slice($comment, 0, $limit, true), $results['results']);
     }
 
     public function test_soft_delete_comment()

@@ -12,8 +12,11 @@ use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
 use Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator;
+use Railroad\Railcontent\Decorators\Content\ContentChildsAndParentsDecorator;
 use Railroad\Railcontent\Decorators\Content\ContentDataDecorator;
+use Railroad\Railcontent\Decorators\Content\ContentDecorator;
 use Railroad\Railcontent\Decorators\Content\ContentFielsDecorator;
+use Railroad\Railcontent\Decorators\Content\ContentPermissionsDecorator;
 use Railroad\Railcontent\Decorators\Entity\CommentEntityDecorator;
 use Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator;
 use Railroad\Railcontent\Decorators\Hierarchy\ContentSlugHierarchyDecorator;
@@ -111,23 +114,37 @@ class RailcontentServiceProvider extends ServiceProvider
             array_merge(
                 config()->get('resora.decorators.content', []),
                 [
-                    ContentFielsDecorator::class,
+                    ContentPermissionsDecorator::class,
                     ContentDataDecorator::class,
-                    ContentSlugHierarchyDecorator::class,
-                ]
-            )
-        );
+                    ContentFielsDecorator::class,
 
-        config()->set(
-            'resora.decorators.comment',
-            array_merge(
-                config()->get('resora.decorators.comment', []),
-                [
-                    CommentLikesDecorator::class,
-                    CommentEntityDecorator::class
+                    ContentSlugHierarchyDecorator::class,
+
+                    ContentChildsAndParentsDecorator::class,
+                    ContentEntityDecorator::class
                 ]
             )
         );
+        config()->set(
+            'resora.decorators.content-field',
+            array_merge(
+                config()->get('resora.decorators.content-field', []),
+                [
+ContentDecorator::class
+                ]
+            )
+        );
+       // dd(config()->get('resora.decorators.content', []));
+//        config()->set(
+//            'resora.decorators.comment',
+//            array_merge(
+//                config()->get('resora.decorators.comment', []),
+//                [
+//                    CommentLikesDecorator::class,
+//                    CommentEntityDecorator::class
+//                ]
+//            )
+//        );
     }
 
     private function setupConfig()

@@ -93,7 +93,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $contentPermission = $this->contentPermissionRepository->create(
             [
                 'content_id' => 1,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
             ]
         );
         $userId = $this->createAndLogInNewUser();
@@ -102,7 +102,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'railcontent/user-permission',
             [
                 'user_id' => $userId,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
             ]
@@ -112,7 +112,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->assertArraySubset(
             [
                 'user_id' => $userId,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'expiration_date' => null,
@@ -127,7 +127,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             ConfigService::$tableUserPermissions,
             [
                 'user_id' => $userId,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'expiration_date' => null,
@@ -152,7 +152,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => $userId,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'created_on' => Carbon::now()
@@ -165,7 +165,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'railcontent/user-permission',
             [
                 'user_id' => $userId,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'expiration_date' => Carbon::now()
@@ -178,7 +178,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->assertArraySubset(
             [
                 'user_id' => $userId,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'expiration_date' => Carbon::now()
@@ -193,7 +193,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             ConfigService::$tableUserPermissions,
             [
                 'user_id' => $userId,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'expiration_date' => Carbon::now()
@@ -218,7 +218,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => $userId,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'created_on' => Carbon::now()
@@ -277,22 +277,22 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => $userId,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
             ]
         );
-        $results = $this->call('DELETE', '/railcontent/user-permission/' . $permission);
+        $results = $this->call('DELETE', '/railcontent/user-permission/' . $permission['id']);
         $this->assertEquals(204, $results->getStatusCode());
 
         $this->assertDatabaseMissing(
             ConfigService::$tableUserPermissions,
             [
-                'id' => $userPermission,
+                'id' => $userPermission['id'],
                 'user_id' => $userId,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'expiration_date' => null,
@@ -322,7 +322,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => 1,
-                'permission_id' => $permission1,
+                'permission_id' => $permission1['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'created_on' => Carbon::now()
@@ -332,7 +332,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => 2,
-                'permission_id' => $permission1,
+                'permission_id' => $permission1['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'created_on' => Carbon::now()
@@ -343,7 +343,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => 1,
-                'permission_id' => $permission2,
+                'permission_id' => $permission2['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'expiration_date' => Carbon::now()
@@ -380,7 +380,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => 1,
-                'permission_id' => $permission1,
+                'permission_id' => $permission1['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'created_on' => Carbon::now()
@@ -390,7 +390,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => 2,
-                'permission_id' => $permission1,
+                'permission_id' => $permission1['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'created_on' => Carbon::now()
@@ -401,7 +401,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => 1,
-                'permission_id' => $permission2,
+                'permission_id' => $permission2['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'expiration_date' => Carbon::now()
@@ -444,7 +444,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => 1,
-                'permission_id' => $permission1,
+                'permission_id' => $permission1['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'created_on' => Carbon::now()
@@ -454,7 +454,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => 2,
-                'permission_id' => $permission1,
+                'permission_id' => $permission1['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'created_on' => Carbon::now()
@@ -465,7 +465,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => 1,
-                'permission_id' => $permission2,
+                'permission_id' => $permission2['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'expiration_date' => Carbon::now()
@@ -503,7 +503,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $contentPermission = $this->contentPermissionRepository->create(
             [
                 'content_id' => $content1['id'],
-                'permission_id' => $permission1,
+                'permission_id' => $permission1['id'],
             ]
         );
 
@@ -524,7 +524,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'railcontent/user-permission',
             [
                 'user_id' => $userId,
-                'permission_id' => $permission1,
+                'permission_id' => $permission1['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
             ]
@@ -560,7 +560,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'railcontent/permission/assign',
             [
                 'content_id' => $content1['id'],
-                'permission_id' => $permission1,
+                'permission_id' => $permission1['id'],
             ]
         );
 
@@ -580,7 +580,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'railcontent/user-permission',
             [
                 'user_id' => $userId,
-                'permission_id' => $permission1,
+                'permission_id' => $permission1['id'],
                 'start_date' => Carbon::now()
                     ->addMinutes(60)
                     ->toDateTimeString(),
@@ -630,14 +630,14 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'railcontent/permission/assign',
             [
                 'content_id' => $content['id'],
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
             ]
         );
 
         $userPermission = $this->userPermissionRepository->create(
             [
                 'user_id' => $userId,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'created_on' => Carbon::now()
@@ -656,7 +656,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
 
         $this->call(
             'DELETE',
-            'railcontent/user-permission/' . $userPermission
+            'railcontent/user-permission/' . $userPermission['id']
         );
 
         $this->assertEquals(
@@ -703,7 +703,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $contentPermission = $this->contentPermissionRepository->create(
             [
                 'content_id' => $content['id'],
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
             ]
         );
 
@@ -712,7 +712,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'railcontent/user-permission',
             [
                 'user_id' => $userId,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->subDay(1)
                     ->toDateTimeString(),
@@ -735,15 +735,15 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'railcontent/user-permission',
             [
                 'user_id' => $userId,
-                'permission_id' => $permission2,
+                'permission_id' => $permission2['id'],
                 'start_date' => Carbon::now()
                     ->addDays(5)
                     ->toDateTimeString(),
             ]
         );
 
-        //expected 3 days in seconds (the expiration date for user's permission 1)
-        $recentExpirationSeconds = 3 * 24 * 60 * 60;
+        //expected 5 days in seconds (the expiration date for user's permission 1)
+        $recentExpirationSeconds = 5 * 24 * 60 * 60;
 
         $redisTTL = Redis::ttl($userCacheKeys);
 

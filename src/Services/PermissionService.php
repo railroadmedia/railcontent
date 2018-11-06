@@ -54,7 +54,7 @@ class PermissionService
      */
     public function get($id)
     {
-        return $this->permissionRepository->getById($id);
+        return $this->permissionRepository->read($id);
     }
 
     /**
@@ -66,7 +66,7 @@ class PermissionService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $results = CacheHelper::saveUserCache($hash, $this->permissionRepository->getAll(), null);
+            $results = CacheHelper::saveUserCache($hash, $this->permissionRepository->query()->get(), null);
         }
 
         return $results;
@@ -97,7 +97,7 @@ class PermissionService
      */
     public function create($name, $brand = null)
     {
-        $permissionId = $this->permissionRepository->create(
+        $permission = $this->permissionRepository->create(
             [
                 'name' => $name,
                 'brand' => $brand ?? ConfigService::$brand
@@ -105,7 +105,7 @@ class PermissionService
         );
         CacheHelper::deleteAllCachedSearchResults('permissions_');
 
-        return $this->get($permissionId);
+        return $this->get($permission['id']);
     }
 
     /**
@@ -160,6 +160,6 @@ class PermissionService
 
         $this->contentPermissionRepository->unlinkPermissionFromAllContent($id);
 
-        return $this->permissionRepository->delete($id) > 0;
+        return $this->permissionRepository->destroy($id) > 0;
     }
 }

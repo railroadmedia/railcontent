@@ -145,7 +145,7 @@ class ContentStressTest extends RailcontentTestCase
 
         $this->contentHierarchyRepository->create(
             [
-                'parent_id' => $parent,
+                'parent_id' => $parent['id'],
                 'child_id' => 1,
                 'child_position' => 1,
                 'created_on' => Carbon::now()
@@ -155,7 +155,7 @@ class ContentStressTest extends RailcontentTestCase
 
         $this->contentHierarchyRepository->create(
             [
-                'parent_id' => $parent,
+                'parent_id' => $parent['id'],
                 'child_id' => 2,
                 'child_position' => 2,
                 'created_on' => Carbon::now()
@@ -165,7 +165,7 @@ class ContentStressTest extends RailcontentTestCase
 
         $tStart = microtime(true);
 
-        $results = $this->call('GET', 'railcontent/content/parent/' . $parent);
+        $results = $this->call('GET', 'railcontent/content/parent/' . $parent['id']);
 
         $tEnd = microtime(true) - $tStart;
         $this->assertLessThan(0.1, $tEnd);
@@ -237,7 +237,7 @@ class ContentStressTest extends RailcontentTestCase
             'railcontent/user-permission',
             [
                 'user_id' => $userId,
-                'permission_id' => $permission,
+                'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
             ]
@@ -390,8 +390,8 @@ class ContentStressTest extends RailcontentTestCase
         );
         $this->contentHierarchyRepository->create(
             [
-                'parent_id' => $parent3,
-                'child_id' => $parent2,
+                'parent_id' => $parent3['id'],
+                'child_id' => $parent2['id'],
                 'child_position' => 1,
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
@@ -399,8 +399,8 @@ class ContentStressTest extends RailcontentTestCase
         );
         $this->contentHierarchyRepository->create(
             [
-                'parent_id' => $parent2,
-                'child_id' => $parent,
+                'parent_id' => $parent2['id'],
+                'child_id' => $parent['id'],
                 'child_position' => 1,
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
@@ -408,7 +408,7 @@ class ContentStressTest extends RailcontentTestCase
         );
         $this->contentHierarchyRepository->create(
             [
-                'parent_id' => $parent,
+                'parent_id' => $parent['id'],
                 'child_id' => 1,
                 'child_position' => 1,
                 'created_on' => Carbon::now()
@@ -418,7 +418,7 @@ class ContentStressTest extends RailcontentTestCase
 
         $this->contentHierarchyRepository->create(
             [
-                'parent_id' => $parent,
+                'parent_id' => $parent['id'],
                 'child_id' => 2,
                 'child_position' => 2,
                 'created_on' => Carbon::now()
@@ -428,7 +428,7 @@ class ContentStressTest extends RailcontentTestCase
 
         $tStart = microtime(true);
 
-        $results = $this->call('GET', 'railcontent/content/parent/' . $parent);
+        $results = $this->call('GET', 'railcontent/content/parent/' . $parent['id']);
 
         $tEnd = microtime(true) - $tStart;
         $this->assertLessThan(0.1, $tEnd);

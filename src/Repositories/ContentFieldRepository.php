@@ -26,7 +26,7 @@ class ContentFieldRepository extends \Railroad\Resora\Repositories\RepositoryBas
              $results = new Product($results);
          } */
 
-        return Decorator::decorate($results, 'content-fields');
+        return Decorator::decorate($results, 'content-field');
     }
 //    /**
 //     * @return Builder

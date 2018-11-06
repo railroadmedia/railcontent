@@ -38,12 +38,18 @@ class UserPermissionsService
     public function updateOrCeate($attributes, $values)
     {
         if (array_key_exists('start_date', $values)) {
-            $this->setTTLOrDeleteUserCache($attributes['user_id'], $values['start_date']);
+            $ttlEndDate = $values['start_date'];
+            if (Carbon::parse($values['start_date'])
+                ->lt(Carbon::now())
+
+            ) {
+                $ttlEndDate = $values['expiration_date'] ?? Carbon::now();
+            }
+            $this->setTTLOrDeleteUserCache($attributes['user_id'], $ttlEndDate);
         }
 
-        $userPermission = $this->userPermissionsRepository->updateOrCreate($attributes, $values);
-
-        return $this->userPermissionsRepository->getById($userPermission);
+        return $this->userPermissionsRepository->query()
+            ->updateOrCreate($attributes, $values);
     }
 
     /**
@@ -54,7 +60,7 @@ class UserPermissionsService
      */
     public function delete($id)
     {
-        $userPermission = $this->userPermissionsRepository->getById($id);
+        $userPermission = $this->userPermissionsRepository->read($id);
         if (is_null($userPermission)) {
             return $userPermission;
         }
@@ -67,7 +73,7 @@ class UserPermissionsService
             ]
         );
 
-        return $this->userPermissionsRepository->delete($id);
+        return $this->userPermissionsRepository->destroy($id);
     }
 
     /**
@@ -79,7 +85,8 @@ class UserPermissionsService
      */
     public function getUserPermissions($userId = null, $onlyActive = true)
     {
-        return $this->userPermissionsRepository->getUserPermissions($userId, $onlyActive);
+        return $this->userPermissionsRepository->query()
+            ->getUserPermissions($userId, $onlyActive);
     }
 
     /**
@@ -89,7 +96,8 @@ class UserPermissionsService
      */
     public function getUserPermissionIdByPermissionAndUser($userId, $permissionId)
     {
-        return $this->userPermissionsRepository->getIdByPermissionAndUser($userId, $permissionId);
+        return $this->userPermissionsRepository->query()
+            ->getIdByPermissionAndUser($userId, $permissionId);
     }
 
     /**
@@ -99,7 +107,8 @@ class UserPermissionsService
      */
     public function userHasPermissionName($userId, $permissionName)
     {
-        return $this->userPermissionsRepository->userHasPermissionName($userId, $permissionName);
+        return $this->userPermissionsRepository->query()
+            ->userHasPermissionName($userId, $permissionName);
     }
 
     /**
@@ -129,6 +138,7 @@ class UserPermissionsService
                 Cache::store(ConfigService::$cacheDriver)
                     ->getPrefix() . 'userId_' . $userId
             );
+
             if ((Carbon::parse($startDate)
                     ->gt(Carbon::now())) &&
                 (($existingTTL == -2) ||
@@ -141,7 +151,6 @@ class UserPermissionsService
                     Carbon::parse($startDate)
                         ->diffInSeconds(Carbon::now())
                 );
-
             }
         }
     }

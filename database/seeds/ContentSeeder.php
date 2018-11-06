@@ -86,14 +86,14 @@ class ContentSeeder extends Seeder
 
                 $contentPermission = $this->contentPermissionRepository->create(
                     [
-                        'content_id' => $contentId,
-                        'permission_id' => $permissionId,
+                        'content_id' => $contentId['id'],
+                        'permission_id' => $permissionId['id'],
                     ]
                 );
 
                 $contentField = $this->contentFieldRepository->create(
                     [
-                        'content_id' => $contentId,
+                        'content_id' => $contentId['id'],
                         'key' => $this->faker->word,
                         'value' => $this->faker->word,
                         'type' => 'string',

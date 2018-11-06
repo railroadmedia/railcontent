@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Decorators\Content;
 
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
-use Railroad\Railcontent\Support\Collection;
 use Railroad\Resora\Decorators\DecoratorInterface;
 
 class ContentDataDecorator implements DecoratorInterface
@@ -22,21 +21,21 @@ class ContentDataDecorator implements DecoratorInterface
     {
         $contentIds = $contents->pluck('id');
 
-        $contentDatum =
+        $contentData =
             $this->contentDatumRepository->query()
                 ->whereIn('content_id', $contentIds)
                 ->get();
-        $contents = $contents->toArray();
 
         foreach ($contents as $index => $content) {
             $contents[$index]['data'] = [];
-            foreach ($contentDatum as $contentDataIndex => $contentData) {
-                $contentData = (array)$contentData;
-                if ($contentData['content_id'] == $content['id']) {
-                    $contents[$index]['data'][] = $contentData;
+            foreach ($contentData as $contentDataIndex => $data) {
+               // $contentField = (array)$contentField;
+                if ($data['content_id'] == $content['id']) {
+                     $contents[$index]['data'][] = $data;
                 }
             }
         }
-        return new Collection($contents);
+        //print_r($contents);
+        return $contents;
     }
 }

@@ -89,7 +89,7 @@ class ContentPermissionService
      */
     public function create($contentId = null, $contentType = null, $permissionId, $brand = null)
     {
-        $id = $this->contentPermissionRepository->create(
+        $contentPermission = $this->contentPermissionRepository->create(
             [
                 'content_id' => $contentId,
                 'content_type' => $contentType,
@@ -100,7 +100,7 @@ class ContentPermissionService
 
         $this->clearAssociatedContentCache([$contentId], [$contentType]);
 
-        return $this->get($id);
+        return $this->get($contentPermission['id']);
     }
 
     /**
@@ -121,7 +121,7 @@ class ContentPermissionService
      */
     public function delete($id)
     {
-        return $this->contentPermissionRepository->delete($id) > 0;
+        return $this->contentPermissionRepository->destroy($id) > 0;
     }
 
     /** Clear the cache records associated with the content or the cache records associated with the contents that have the specified content type
@@ -135,7 +135,10 @@ class ContentPermissionService
             CacheHelper::deleteCache('content_' . $contentId);
         }
         foreach ($contentTypes as $contentType) {
-            $contents = $this->contentRepository->getByType($contentType);
+            $contents = $this->contentRepository->query()->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->where('type', $contentType)
+                ->get();
             foreach ($contents as $content) {
                 CacheHelper::deleteCache('content_' . $content['id']);
             }
