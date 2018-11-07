@@ -117,9 +117,7 @@ class RailcontentServiceProvider extends ServiceProvider
                     ContentPermissionsDecorator::class,
                     ContentDataDecorator::class,
                     ContentFielsDecorator::class,
-
                     ContentSlugHierarchyDecorator::class,
-
                     ContentChildsAndParentsDecorator::class,
                     ContentEntityDecorator::class
                 ]

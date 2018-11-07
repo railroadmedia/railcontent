@@ -66,16 +66,16 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', 'field ' . $i);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field ' . $i);
-            $content[$i]['fields'] = [$titleField[$i], $otherField[$i]];
+            $content[$i]['fields'] = [$titleField[$i]->getArrayCopy(), $otherField[$i]->getArrayCopy()];
 
             $descriptionData =
                 $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
             $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
-            $content[$i]['data'] = [$descriptionData, $otherData];
+            $content[$i]['data'] = [$descriptionData->getArrayCopy(), $otherData->getArrayCopy()];
             $content[$i] = $content[$i];
         }
 
-        dd($this->artisan('command:createSearchIndexesForContents'));
+        $this->artisan('command:createSearchIndexesForContents');
 
         $response = $this->call(
             'GET',
@@ -113,12 +113,12 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', $this->faker->text(10) . $i);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], $this->faker->word . $i);
-            $content[$i]['fields'] = [$titleField[$i], $otherField[$i]];
+            $content[$i]['fields'] = [$titleField[$i]->getArrayCopy(), $otherField[$i]->getArrayCopy()];
 
             $descriptionData =
                 $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
             $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
-            $content[$i]['data'] = [$descriptionData, $otherData];
+            $content[$i]['data'] = [$descriptionData->getArrayCopy(), $otherData->getArrayCopy()];
             $content[$i] = $content[$i];
         }
 
@@ -150,7 +150,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
                 ConfigService::$defaultLanguage,
                 ConfigService::$brand,
-                rand(),
+                null,
                 Carbon::yesterday()
                     ->hour($i)
                     ->toDateTimeString()
@@ -158,13 +158,13 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', 'field ' . $i);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field ' . $i);
-            $content[$i]['fields'] = [$titleField[$i], $otherField[$i]];
+            $content[$i]['fields'] = [$titleField[$i]->getArrayCopy(), $otherField[$i]->getArrayCopy()];
 
             $descriptionData =
                 $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
             $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
-            $content[$i]['data'] = [$descriptionData, $otherData];
-            $content[$i] = array_merge($content[$i], ['pluck' => $content[$i]->dot()]);
+            $content[$i]['data'] = [$descriptionData->getArrayCopy(), $otherData->getArrayCopy()];
+            $content[$i] = array_merge($content[$i], ['pluck' => $content[$i]]);
         }
 
         $this->artisan('command:createSearchIndexesForContents');
@@ -194,7 +194,8 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals($expectedResults->decodeResponseJson('data'), array_values($results));
+
+        $this->assertEquals(array_pluck($expectedResults->decodeResponseJson('data'),'id'), array_pluck($results,'id'));
     }
 
     public function test_search_with_status()
@@ -213,7 +214,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                     ->hour($i)
                     ->toDateTimeString()
             );
-            $content[$i] = array_merge($content[$i], ['pluck' => $content[$i]->dot()]);
+            $content[$i] = array_merge($content[$i], ['pluck' => $content[$i]]);
         }
 
         $this->artisan('command:createSearchIndexesForContents');
@@ -245,6 +246,6 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals($expectedResults->decodeResponseJson('data'), array_values($results));
+        $this->assertEquals(array_pluck($expectedResults->decodeResponseJson('data'),'id'), array_pluck($results,'id'));
     }
 }

@@ -137,7 +137,6 @@ class ContentService
             );
         }
         return $results;
-        //return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -153,13 +152,24 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
+            $unorderedContentRows = $this->contentRepository->query()
+                ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->whereIn(ConfigService::$tableContent . '.id', $ids)
+                ->get();
+
+            // restore order of ids passed in
+            $contentRows = [];
+            foreach ($ids as $id) {
+                foreach ($unorderedContentRows as $index => $unorderedContentRow) {
+                    if ($id == $unorderedContentRow['id']) {
+                        $contentRows[] = $unorderedContentRow;
+                    }
+                }
+            }
             $results = CacheHelper::saveUserCache(
                 $hash,
-                $this->contentRepository->query()
-                    ->selectPrimaryColumns()
-                    ->restrictByUserAccess()
-                    ->whereIn(ConfigService::$tableContent . '.id', $ids)
-                    ->get()
+                $contentRows
             );
         }
 
@@ -368,12 +378,6 @@ class ContentService
     {
         $hash = 'contents_by_parent_id_' . CacheHelper::getKey($parentId, $orderBy, $orderByDirection);
         $results = CacheHelper::getCachedResultsForKey($hash);
-//dd($this->contentRepository->query()->selectPrimaryColumns()  ->selectInheritenceColumns()->leftJoin(
-//    ConfigService::$tableContentHierarchy,
-//    ConfigService::$tableContentHierarchy . '.child_id',
-//    '=',
-//    ConfigService::$tableContent . '.id'
-//)->get());
         if (!$results) {
             $resultsDB =
                 $this->contentRepository->query()
@@ -476,12 +480,6 @@ class ContentService
                     ->whereIn(ConfigService::$tableContent . '.type', $types)
                     ->selectInheritenceColumns()
                     ->get();
-            //                ->getByParentIdWhereTypeIn(
-            //                $parentId,
-            //                $types,
-            //                $orderBy,
-            //                $orderByDirection
-            //            );
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
         }
@@ -743,13 +741,6 @@ class ContentService
                     ->limit($limit)
                     ->skip($skip)
                     ->get()
-            //                    ->getPaginatedByTypeUserProgressState(
-            //                    $type,
-            //                    $userId,
-            //                    $state,
-            //                    $limit,
-            //                    $skip
-            //                )
             );
         }
 
@@ -801,13 +792,6 @@ class ContentService
                     ->limit($limit)
                     ->skip($skip)
                     ->get()
-            //                    ->getPaginatedByTypesUserProgressState(
-            //                    $types,
-            //                    $userId,
-            //                    $state,
-            //                    $limit,
-            //                    $skip
-            //                )
             );
         }
 
@@ -859,13 +843,6 @@ class ContentService
                     ->limit($limit)
                     ->skip($skip)
                     ->get()
-            //                    ->getPaginatedByTypesRecentUserProgressState(
-            //                    $types,
-            //                    $userId,
-            //                    $state,
-            //                    $limit,
-            //                    $skip
-            //                )
             );
         }
 
@@ -901,11 +878,6 @@ class ContentService
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
             ->orderBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
             ->count();
-        //            ->countByTypesUserProgressState(
-        //            $types,
-        //            $userId,
-        //            $state
-        //        );
     }
 
     /**
@@ -1087,12 +1059,10 @@ class ContentService
             $resultsDB = new ContentFilterResultsEntity(
                 [
                     'results' => $this->contentRepository->query()->retrieveFilter(),
-                    'total_results' => $filter->countFilter(),
-//                    'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
+                    'total_results' => $this->contentRepository->query()->countFilter(),
+                    'filter_options' => $pullFilterFields ? $this->contentRepository->query()->getFilterFields() : [],
                 ]
             );
-           // dd($this->contentRepository->retrieveFilter());
-
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
             $results = new ContentFilterResultsEntity($results);
         }
@@ -1374,164 +1344,6 @@ class ContentService
                     ->whereIn(ConfigService::$tableContent . '.type', $contentTypes)
                     ->get()
             );
-        }
-
-        return $results;
-    }
-
-    /**
-     * Get filtered contents.
-     * Returns:
-     * ['results' => $lessons, 'total_results' => $totalLessonsAfterFiltering]
-     *
-     * @param int $page
-     * @param int $limit
-     * @param string $orderByAndDirection
-     * @param array $includedTypes
-     * @param array $slugHierarchy
-     * @param array $requiredParentIds
-     * @param array $requiredFields
-     * @param array $includedFields
-     * @param array $requiredUserStates
-     * @param array $includedUserStates
-     * @param boolean $pullFilterFields
-     * @return ContentFilterResultsEntity
-     */
-    public function getFiltered_WIP(
-        $page,
-        $limit,
-        $orderByAndDirection = '-published_on',
-        array $includedTypes = [],
-        array $slugHierarchy = [],
-        array $requiredParentIds = [],
-        array $requiredFields = [],
-        array $includedFields = [],
-        array $requiredUserStates = [],
-        array $includedUserStates = [],
-        $pullFilterFields = true
-    ) {
-        $results = null;
-        if ($limit == 'null') {
-            $limit = -1;
-        }
-
-        $orderByDirection = substr($orderByAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
-        $orderByColumn = trim($orderByAndDirection, '-');
-
-        $hash = 'contents_results_' . CacheHelper::getKey(
-                $page,
-                $limit,
-                $orderByColumn,
-                $orderByDirection,
-                implode(' ', array_values($includedTypes) ?? ''),
-                implode(' ', array_values($slugHierarchy) ?? ''),
-                implode(' ', array_values($requiredParentIds) ?? ''),
-                implode(' ', array_values($requiredFields) ?? ''),
-                implode(' ', array_values($includedFields) ?? ''),
-                implode(' ', array_values($requiredUserStates) ?? ''),
-                implode(' ', array_values($includedUserStates) ?? '')
-            );
-
-        $cache = CacheHelper::getCachedResultsForKey($hash);
-
-        if ($cache) {
-            $results = new ContentFilterResultsEntity($cache);
-        }
-
-        if (!$results) {
-            $filter = $this->contentRepository->startFilter(
-                $page,
-                $limit,
-                $orderByColumn,
-                $orderByDirection,
-                $includedTypes,
-                $slugHierarchy,
-                $requiredParentIds
-            );
-            $rF = [];
-            $iF = [];
-            $iUS = [];
-            $rUS = [];
-
-            foreach ($requiredFields as $requiredField) {
-                $rF[] = $filter->requireField(
-                    ...
-                    (is_array($requiredField) ? $requiredField : explode(',', $requiredField))
-                );
-            }
-
-            foreach ($includedFields as $includedField) {
-                $iF[] = $filter->includeField(
-                    ...
-                    (is_array($includedField) ? $includedField : explode(',', $includedField))
-                );
-            }
-
-            foreach ($requiredUserStates as $requiredUserState) {
-                $rUS[] = $filter->requireUserStates(
-                    ...
-                    is_array($requiredUserState) ? $requiredUserState : explode(',', $requiredUserState)
-                );
-            }
-
-            foreach ($includedUserStates as $includedUserState) {
-                $iUS[] = $filter->includeUserStates(
-                    ...
-                    is_array($includedUserState) ? $includedUserState : explode(',', $includedUserState)
-                );
-            }
-
-            $orderByExploded = explode(' ', $orderByColumn);
-
-            $orderByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
-            $groupByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
-
-            $res =
-                $this->contentRepository->continueOrNewQuery()
-                    ->selectCountColumns()
-                    ->orderByRaw(
-                        DB::raw(
-                            implode(', ', $orderByColumns) . ' ' . $orderByDirection
-                        )
-                    )
-                    ->restrictByUserAccess()
-                    ->limit($limit)
-                    ->skip(($page - 1) * $limit)
-                    ->restrictByFields($rF)
-                    ->includeByFields($iF)
-                    ->restrictByUserStates($rUS)
-                    ->includeByUserStates($iUS)
-                    ->restrictByTypes($includedTypes)
-                    ->restrictBySlugHierarchy($slugHierarchy)
-                    ->restrictByParentIds($requiredParentIds)
-                    ->groupBy(
-                        array_merge(
-                            [
-                                ConfigService::$tableContent . '.id',
-                                ConfigService::$tableContent . '.' . 'created_on',
-                            ],
-                            $groupByColumns
-                        )
-                    );
-
-            $query =
-                $this->contentRepository->query()
-                    ->orderByRaw(DB::raw(implode(', ', $orderByColumns) . ' ' . $orderByDirection))
-                    ->addSubJoinToQuery($res)
-                    ->get();
-
-            $resultsDB = new ContentFilterResultsEntity(
-                [
-                    'results' => $query,
-                    //$filter->retrieveFilter(),
-                    'total_results' => count($query),
-                    //$filter->countFilter(),
-                    //'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
-                ]
-            );
-
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
-             $results = new ContentFilterResultsEntity($results);
         }
 
         return $results;

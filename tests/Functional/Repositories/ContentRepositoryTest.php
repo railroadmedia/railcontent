@@ -93,7 +93,8 @@ class ContentRepositoryTest extends RailcontentTestCase
             array_merge($contentData, [
                 'id' => $content['id'],
                 'fields' => [],
-                'data' => []
+                'data' => [],
+                'permissions' => []
             ]),
             $results->getArrayCopy()
         );
@@ -116,7 +117,7 @@ class ContentRepositoryTest extends RailcontentTestCase
 
        for ($i = 0; $i < 3; $i++) {
             $expectedFields[] = $this->contentFieldFactory->create($contentId)->getArrayCopy();
-            $expectedData[] = $this->contentDatumFactory->create($contentId)->getArrayCopy();
+            $expectedData[] = $this->contentDatumFactory->create($contentId);
         }
 
         $results = $this->classBeingTested->getById($contentId);

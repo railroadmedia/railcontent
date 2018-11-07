@@ -33,23 +33,7 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
      */
     private $datumRepository;
 
-    /**
-     * ContentRepository constructor.
-     *
-     * @param ContentRepository $contentRepository
-     * @param DatabaseManager $databaseManager
-     */
-//    public function __construct(
-//        ContentRepository $contentRepository,
-//        ContentFieldRepository $fieldRepository,
-//        ContentDatumRepository $datumRepository
-//    ) {
-//        parent::__construct();
-//
-//        $this->contentRepository = $contentRepository;
-//        $this->fieldRepository = $fieldRepository;
-//        $this->datumRepository = $datumRepository;
-//    }
+
 
     /**
      * @return FullTextSearchQueryBuilder
@@ -86,7 +70,7 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
     {
         //delete old indexes
         $this->deleteOldIndexes();
-dd($this->contentQuery()->getConnection());
+
         $query = $this->contentQuery()
             ->selectPrimaryColumns()
             ->restrictByTypes(ConfigService::$searchableContentTypes)
@@ -218,12 +202,18 @@ dd($this->contentQuery()->getConnection());
         $orderByDirection = 'desc',
         $dateTimeCutoff = null
     ) {
+
         $query = $this->query()
             ->selectColumns($term)
             ->restrictBrand()
             ->restrictByTerm($term)
-            ->order($orderByColumn, $orderByDirection)
-            ->directPaginate($page, $limit);
+            ->orderByRaw(
+                $this->connection()->raw(
+                     $orderByColumn . ' ' . $orderByDirection
+                )
+            )
+            ->limit($limit)
+            ->skip(($page - 1) * $limit);
 
         if (!empty($contentTypes)) {
             $query->whereIn('content_type', $contentTypes);
@@ -238,7 +228,6 @@ dd($this->contentQuery()->getConnection());
         }
 
         $contentRows = $query->getToArray();
-
         return array_column($contentRows, 'content_id');
 
     }

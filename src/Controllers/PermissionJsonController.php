@@ -30,6 +30,11 @@ class PermissionJsonController extends Controller
     private $contentPermissionService;
 
     /**
+     * @var \Railroad\Permissions\Services\PermissionService
+     */
+    private $permissionPackageService;
+
+    /**
      * PermissionController constructor.
      *
      * @param PermissionService $permissionService
@@ -37,10 +42,12 @@ class PermissionJsonController extends Controller
      */
     public function __construct(
         PermissionService $permissionService,
-        ContentPermissionService $contentPermissionService
+        ContentPermissionService $contentPermissionService,
+        \Railroad\Permissions\Services\PermissionService $permissionPackageService
     ) {
         $this->permissionService = $permissionService;
         $this->contentPermissionService = $contentPermissionService;
+        $this->permissionPackageService = $permissionPackageService;
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -53,6 +60,8 @@ class PermissionJsonController extends Controller
      */
     public function index(Request $request)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'pull.permissions');
+
         $permissions = $this->permissionService->getAll();
 
         return reply()->json(
@@ -71,6 +80,8 @@ class PermissionJsonController extends Controller
      */
     public function store(PermissionRequest $request)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'create.permission');
+
         $permission = $this->permissionService->create(
             $request->input('name'),
             $request->input('brand')
@@ -94,6 +105,8 @@ class PermissionJsonController extends Controller
      */
     public function update($id, PermissionRequest $request)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'update.permission');
+
         $permission = $this->permissionService->update(
             $id,
             $request->input('name'),
@@ -123,6 +136,8 @@ class PermissionJsonController extends Controller
      */
     public function delete($id)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'delete.permission');
+
         $deleted = $this->permissionService->delete($id);
 
         throw_unless(
@@ -141,6 +156,7 @@ class PermissionJsonController extends Controller
      */
     public function assign(PermissionAssignRequest $request)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'assign.permission');
         $assignedPermission = $this->contentPermissionService->create(
             $request->input('content_id'),
             $request->input('content_type'),
@@ -163,6 +179,8 @@ class PermissionJsonController extends Controller
      */
     public function dissociate(PermissionDissociateRequest $request)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'disociate.permissions');
+
         $dissociate = $this->contentPermissionService->dissociate(
             $request->input('content_id'),
             $request->input('content_type'),

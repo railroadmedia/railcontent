@@ -58,19 +58,18 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
     private $slugHierarchy = [];
     private $requiredParentIds = [];
 
-
     /**
      * @return CachedQuery|$this
      */
     protected function newQuery()
     {
         return (new ContentQueryBuilder(
-                    $this->connection(),
-                    $this->connection()
-                        ->getQueryGrammar(),
-                    $this->connection()
-                        ->getPostProcessor()
-                ))->from(ConfigService::$tableContent);
+            $this->connection(),
+            $this->connection()
+                ->getQueryGrammar(),
+            $this->connection()
+                ->getPostProcessor()
+        ))->from(ConfigService::$tableContent);
     }
 
     protected function decorate($results)
@@ -85,32 +84,6 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
     public function getById($id)
     {
         return $this->read($id);
-
-//        $contentRows =
-//            $this->query()
-//                ->selectPrimaryColumns()
-//                ->restrictByUserAccess()
-//                ->where([ConfigService::$tableContent . '.id' => $id])
-//                ->getToArray();
-//
-//        if (empty($contentRows)) {
-//            return null;
-//        }
-//
-//        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
-//        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
-//
-//        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-//            array_column($contentRows, 'id'),
-//            array_column($contentRows, 'type')
-//        );
-//
-//        return $this->processRows(
-//                $contentRows,
-//                $contentFieldRows,
-//                $contentDatumRows,
-//                $contentPermissionRows
-//            )[0] ?? null;
     }
 
     /**
@@ -137,27 +110,15 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
             }
         }
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+        return $contentRows;
 
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($contentRows, 'id'),
-            array_column($contentRows, 'type')
-        );
-
-        return $this->processRows(
-            $contentRows,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
     }
 
     /**
      * @param $parentId
      * @return array
      */
-    public function getByParentId($parentId, $orderBy = 'child_position', $orderByDirection = 'asc')
+    public function getByParentId_old($parentId, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
         $contentRows =
             $this->query()
@@ -194,7 +155,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $parentId
      * @return array
      */
-    public function getByParentIdPaginated(
+    public function getByParentIdPaginated_old(
         $parentId,
         $limit = 10,
         $skip = 0,
@@ -238,7 +199,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $parentId
      * @return array
      */
-    public function getByParentIdWhereTypeIn(
+    public function getByParentIdWhereTypeIn_old(
         $parentId,
         array $types,
         $orderBy = 'child_position',
@@ -280,7 +241,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $parentId
      * @return array
      */
-    public function getByParentIdWhereTypeInPaginated(
+    public function getByParentIdWhereTypeInPaginated_old(
         $parentId,
         array $types,
         $limit = 10,
@@ -326,7 +287,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $parentId
      * @return array
      */
-    public function countByParentIdWhereTypeIn($parentId, array $types)
+    public function countByParentIdWhereTypeIn_old($parentId, array $types)
     {
         return $this->query()
             ->selectPrimaryColumns()
@@ -348,7 +309,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $parentId
      * @return array
      */
-    public function getByParentIds(array $parentIds, $orderBy = 'child_position', $orderByDirection = 'asc')
+    public function getByParentIds_old(array $parentIds, $orderBy = 'child_position', $orderByDirection = 'asc')
     {
         $contentRows =
             $this->query()
@@ -385,7 +346,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $parentId
      * @return array
      */
-    public function getByChildIdWhereType($childId, $type)
+    public function getByChildIdWhereType_old($childId, $type)
     {
         $contentRows =
             $this->query()
@@ -422,7 +383,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $parentId
      * @return array
      */
-    public function getByChildIdsWhereType(array $childIds, $type)
+    public function getByChildIdsWhereType_old(array $childIds, $type)
     {
         $contentRows =
             $this->query()
@@ -460,7 +421,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param array $types
      * @return array
      */
-    public function getByChildIdWhereParentTypeIn($childId, array $types)
+    public function getByChildIdWhereParentTypeIn_old($childId, array $types)
     {
         $contentRows =
             $this->query()
@@ -498,7 +459,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $userId
      * @param $state
      */
-    public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit, $skip)
+    public function getPaginatedByTypeUserProgressState_old($type, $userId, $state, $limit, $skip)
     {
         $contentRows =
             $this->query()
@@ -542,7 +503,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $skip
      * @return array
      */
-    public function getPaginatedByTypesUserProgressState(array $types, $userId, $state, $limit, $skip)
+    public function getPaginatedByTypesUserProgressState_old(array $types, $userId, $state, $limit, $skip)
     {
         $contentRows =
             $this->query()
@@ -586,7 +547,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $skip
      * @return array
      */
-    public function getPaginatedByTypesRecentUserProgressState(array $types, $userId, $state, $limit, $skip)
+    public function getPaginatedByTypesRecentUserProgressState_old(array $types, $userId, $state, $limit, $skip)
     {
         $contentRows =
             $this->query()
@@ -628,7 +589,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $state
      * @return integer
      */
-    public function countByTypesRecentUserProgressState(array $types, $userId, $state)
+    public function countByTypesRecentUserProgressState_old(array $types, $userId, $state)
     {
         return $this->query()
             ->selectPrimaryColumns()
@@ -758,7 +719,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param string $type
      * @return array|null
      */
-    public function getByType($type)
+    public function getByType_old($type)
     {
         $contentRows =
             $this->query()
@@ -788,7 +749,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param string $type
      * @return array|null
      */
-    public function getBySlugAndType($slug, $type)
+    public function getBySlugAndType_old($slug, $type)
     {
         $contentRows =
             $this->query()
@@ -820,7 +781,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param string $slug
      * @return array|null
      */
-    public function getByUserIdTypeSlug($userId, $type, $slug)
+    public function getByUserIdTypeSlug_old($userId, $type, $slug)
     {
         $contentRows =
             $this->query()
@@ -853,7 +814,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param null $slug
      * @return array
      */
-    public function getByUserIdWhereChildIdIn($userId, $childContentIds, $slug = null)
+    public function getByUserIdWhereChildIdIn_old($userId, $childContentIds, $slug = null)
     {
         $query =
             $this->query()
@@ -904,7 +865,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param string $fieldComparisonOperator
      * @return array
      */
-    public function getWhereTypeInAndStatusAndField(
+    public function getWhereTypeInAndStatusAndField_old(
         array $types,
         $status,
         $fieldKey,
@@ -971,7 +932,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $status
      * @return array
      */
-    public function getWhereTypeInAndStatusAndPublishedOnOrdered(
+    public function getWhereTypeInAndStatusAndPublishedOnOrdered_old(
         array $types,
         $status,
         $publishedOnValue,
@@ -1016,18 +977,18 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param array $newData
      * @return bool
      */
-//    public function update($id, array $newData)
-//    {
-//        if (count($newData) == 0) {
-//            return true;
-//        };
-//        $amountOfUpdatedRows =
-//            $this->query()
-//                ->where('id', $id)
-//                ->update($newData);
-//
-//        return $amountOfUpdatedRows > 0;
-//    }
+    //    public function update($id, array $newData)
+    //    {
+    //        if (count($newData) == 0) {
+    //            return true;
+    //        };
+    //        $amountOfUpdatedRows =
+    //            $this->query()
+    //                ->where('id', $id)
+    //                ->update($newData);
+    //
+    //        return $amountOfUpdatedRows > 0;
+    //    }
 
     /**
      * Unlink content's fields, content's datum and content's children,
@@ -1036,15 +997,15 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param int $id
      * @return bool
      */
-//    public function delete($id)
-//    {
-//        $amountOfDeletedRows =
-//            $this->query()
-//                ->where('id', $id)
-//                ->delete();
-//
-//        return $amountOfDeletedRows > 0;
-//    }
+    //    public function delete($id)
+    //    {
+    //        $amountOfDeletedRows =
+    //            $this->query()
+    //                ->where('id', $id)
+    //                ->delete();
+    //
+    //        return $amountOfDeletedRows > 0;
+    //    }
 
     /**
      * @param array $contentRows
@@ -1053,7 +1014,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param array $permissionRows
      * @return array
      */
-    private function processRows(
+    private function processRows_old(
         array $contentRows,
         array $fieldRows,
         array $datumRows,
@@ -1159,14 +1120,14 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
             $this->newQuery()
                 ->selectCountColumns()
                 ->orderByRaw(
-                    $this->connection()->raw(
-                        implode(', ', $orderByColumns) . ' ' . $this->orderDirection
-                    )
+                    $this->connection()
+                        ->raw(
+                            implode(', ', $orderByColumns) . ' ' . $this->orderDirection
+                        )
                 )
                 ->restrictByUserAccess()
                 ->limit($this->limit)
-                ->skip(($this->page - 1) * $this->limit)
-//                ->directPaginate($this->page, $this->limit)
+                ->skip(($this->page - 1) * $this->limit)//                ->directPaginate($this->page, $this->limit)
                 ->restrictByFields($this->requiredFields)
                 ->includeByFields($this->includedFields)
                 ->restrictByUserStates($this->requiredUserStates)
@@ -1186,27 +1147,14 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
 
         $query =
             $this->query()
-                ->orderByRaw($this->connection()->raw(implode(', ', $orderByColumns) . ' ' . $this->orderDirection))
+                ->orderByRaw(
+                    $this->connection()
+                        ->raw(implode(', ', $orderByColumns) . ' ' . $this->orderDirection)
+                )
                 ->addSubJoinToQuery($subQuery)
-        ->get();
+                ->get();
 
-      // $contentRows = $query->get();
-
-return $query;
-//dd($this->fieldRepository->query());
-//        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
-//        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
-//        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-//            array_column($contentRows, 'id'),
-//            array_column($contentRows, 'type')
-//        );
-//
-//        return $this->processRows(
-//            $contentRows,
-//            $contentFieldRows,
-//            $contentDatumRows,
-//            $contentPermissionRows
-//        );
+        return $query;
     }
 
     /**
@@ -1215,7 +1163,7 @@ return $query;
     public function countFilter()
     {
         $subQuery =
-            $this->query()
+            $this->newQuery()
                 ->selectCountColumns()
                 ->restrictByUserAccess()
                 ->restrictByFields($this->requiredFields)
@@ -1229,9 +1177,10 @@ return $query;
 
         return $this->connection()
             ->table(
-                $this->connection()->raw('(' . $subQuery->toSql() . ') as rows')
+                $this->connection()
+                    ->raw('(' . $subQuery->toSql() . ') as rows')
             )
-            ->addBinding($subQuery->query()->getBindings())
+            ->addBinding($subQuery->getBindings())
             ->count();
     }
 
@@ -1320,25 +1269,12 @@ return $query;
         return $this;
     }
 
-    /**
-     * @return ContentQueryBuilder
-     */
-//    public function query()
-//    {
-//        return (new ContentQueryBuilder(
-//            $this->connection(),
-//            $this->connection()
-//                ->getQueryGrammar(),
-//            $this->connection()
-//                ->getPostProcessor()
-//        ))->from(ConfigService::$tableContent);
-//    }
 
     /**
      * @param array $parsedContents
      * @return array
      */
-    public function attachContentsLinkedByField(array $parsedContents)
+    public function attachContentsLinkedByField_old(array $parsedContents)
     {
         $contentIdsToPull = [];
 
@@ -1404,7 +1340,7 @@ return $query;
 
     private function parseAvailableFields($rows)
     {
-        $rows = array_map("unserialize", array_unique(array_map("serialize", $rows)));
+        $rows = array_map("unserialize", array_unique(array_map("serialize", $rows->toArray())));
 
         $availableFields = [];
         $subContentIds = [];
@@ -1428,7 +1364,8 @@ return $query;
         }
 
         $subContents = $this->getByIds($subContentIds);
-        $subContents = array_combine(array_column($subContents, 'id'), $subContents);
+
+        $subContents = array_combine(array_pluck($subContents,'id'), $subContents);
 
         foreach ($rows as $row) {
             if ($row['type'] == 'content_id' && !empty($subContents[$row['value']])) {

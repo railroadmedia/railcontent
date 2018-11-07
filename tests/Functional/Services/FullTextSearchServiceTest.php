@@ -49,7 +49,7 @@ class FullTextSearchServiceTest extends RailcontentTestCase
 
     public function test_search_no_results()
     {
-        $this->fullSearchRepository->createSearchIndexes([]);
+        $this->artisan('command:createSearchIndexesForContents');
         $result = $this->classBeingTested->search($this->faker->word);
 
         $this->assertEquals(0, $result['total_results']);
@@ -78,14 +78,14 @@ class FullTextSearchServiceTest extends RailcontentTestCase
             $content[$i]['data'] = [$descriptionData, $otherData];
         }
 
-        $this->fullSearchRepository->createSearchIndexes($content);
+        $this->artisan('command:createSearchIndexesForContents');
 
         $results = $this->classBeingTested->search('slug field description', $page, $limit);
 
-        $contents = $results['results']->toArray();
+        $contents = $results['results'];
         $expectedContents = array_splice($contents, 0, $limit);
 
-        $this->assertArraySubset($expectedContents, $results['results']->toArray());
+        $this->assertArraySubset($expectedContents, $results['results']);
         $this->assertEquals(count($content), $results['total_results']);
     }
 

@@ -11,6 +11,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
+use Railroad\Resora\Entities\Entity;
 
 class CommentRepositoryTest extends RailcontentTestCase
 {
@@ -95,7 +96,7 @@ class CommentRepositoryTest extends RailcontentTestCase
         $content = $this->contentFactory->create($this->faker->word, 'course', ContentService::STATUS_PUBLISHED);
 
         for ($i = 0; $i < 12; $i++) {
-            $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $content['id'], null, $userId)->getArrayCopy();
+            $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $content['id'], null, $userId);
             $expectedComments[$i]['replies'] = [];
             unset($expectedComments[$i]['like_count']);
             unset($expectedComments[$i]['like_users']);
@@ -121,7 +122,7 @@ class CommentRepositoryTest extends RailcontentTestCase
         //create comments for second content
         for($i = 0; $i<5; $i++)
         {
-            $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $secondContent['id'])->getArrayCopy();
+            $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $secondContent['id']);
             $expectedComments[$i]['replies'] = [];
             unset($expectedComments[$i]['like_count']);
             unset($expectedComments[$i]['like_users']);
@@ -153,7 +154,7 @@ class CommentRepositoryTest extends RailcontentTestCase
         //create comments for first content
         for($i = 0; $i<5; $i++)
         {
-            $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $firstContent['id'], null, $userId)->getArrayCopy();
+            $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $firstContent['id'], null, $userId);
             $expectedComments[$i]['replies'] = [];
             unset($expectedComments[$i]['like_count']);
             unset($expectedComments[$i]['like_users']);
@@ -183,7 +184,7 @@ class CommentRepositoryTest extends RailcontentTestCase
         $numberOfComments = 12;
 
         for ($i = 0; $i <= $numberOfComments; $i++) {
-            $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $content['id'], null, $userId)->getArrayCopy();
+            $expectedComments[$i] = $this->commentFactory->create($this->faker->text(), $content['id'], null, $userId);
             $expectedComments[$i]['replies'] = [];
             unset($expectedComments[$i]['like_count']);
             unset($expectedComments[$i]['like_users']);
@@ -191,7 +192,7 @@ class CommentRepositoryTest extends RailcontentTestCase
         }
 
         for($i = 0; $i<=3; $i++){
-            $expectedComments[$i]['replies'][] = $this->commentFactory->create($this->faker->text(), null,  $expectedComments[$i]['id'], rand())->getArrayCopy();
+            $expectedComments[$i]['replies'][] = new Entity($this->commentFactory->create($this->faker->text(), null,  $expectedComments[$i]['id'], rand()));
             unset($expectedComments[$i]['replies'][0]['replies']);
             unset($expectedComments[$i]['replies'][0]['like_count']);
             unset($expectedComments[$i]['replies'][0]['like_users']);

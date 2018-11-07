@@ -69,7 +69,7 @@ class ContentJsonController extends Controller
             [
                 'transformer' => DataTransformer::class,
                 'totalResults' => $contentData['total_results'],
-//                'filterOptions' => $contentData['filter_options'],
+                'filterOptions' => $contentData['filter_options'],
             ]
         );
     }

@@ -55,6 +55,9 @@ class PermissionControllerTest extends RailcontentTestCase
 
     public function test_store_response()
     {
+        $this->permissionServiceMock->method('canOrThrow')
+            ->willReturn(true);
+
         $name = $this->faker->word;
         $permission = [
             'id' => 1,
@@ -81,12 +84,15 @@ class PermissionControllerTest extends RailcontentTestCase
         $response = $this->call('PUT', 'railcontent/permission');
 
         $this->assertEquals(422, $response->status());
-        $this->assertEquals([
+        $this->assertEquals(
             [
-                "source" => "name",
-                "detail" => "The name field is required.",
-            ]
-        ], $response->decodeResponseJson('meta')['errors']);
+                [
+                    "source" => "name",
+                    "detail" => "The name field is required.",
+                ],
+            ],
+            $response->decodeResponseJson('meta')['errors']
+        );
     }
 
     public function test_new_permission_returned_after_store_service()

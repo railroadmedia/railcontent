@@ -14,6 +14,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Redis;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Railroad\Permissions\Providers\PermissionsServiceProvider;
+use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Repositories\RepositoryBase;
@@ -50,6 +52,11 @@ class RailcontentTestCase extends BaseTestCase
     protected $remoteStorageService;
 
     /**
+     * @var \PHPUnit\Framework\MockObject\MockObject
+     */
+    protected $permissionServiceMock;
+
+    /**
      * @var string database connexion type
      * by default it's testbench; for full text search it's mysql
      */
@@ -67,7 +74,11 @@ class RailcontentTestCase extends BaseTestCase
         $this->authManager = $this->app->make(AuthManager::class);
         $this->router = $this->app->make(Router::class);
 
-//        RepositoryBase::$connectionMask = null;
+        $this->permissionServiceMock =
+            $this->getMockBuilder(PermissionService::class)
+                ->disableOriginalConstructor()
+                ->getMock();
+        $this->app->instance(PermissionService::class, $this->permissionServiceMock);
 
         Carbon::setTestNow(Carbon::now());
 
@@ -206,6 +217,7 @@ class RailcontentTestCase extends BaseTestCase
         // register provider
         $app->register(RailcontentServiceProvider::class);
         $app->register(ResponseServiceProvider::class);
+        $app->register(PermissionsServiceProvider::class);
     }
 
     /**

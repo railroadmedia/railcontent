@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\UserPermissionCreateRequest;
 use Railroad\Railcontent\Transformers\DataTransformer;
@@ -17,13 +18,21 @@ class UserPermissionsJsonController extends Controller
     private $userPermissionsService;
 
     /**
+     * @var PermissionService
+     */
+    private $permissionPackageService;
+
+    /**
      * UserPermissionsJsonController constructor.
      *
      * @param \Railroad\Railcontent\Services\UserPermissionsService $userPermissionsService
      */
-    public function __construct(\Railroad\Railcontent\Services\UserPermissionsService $userPermissionsService)
-    {
+    public function __construct(
+        \Railroad\Railcontent\Services\UserPermissionsService $userPermissionsService,
+        PermissionService $permissionPackageService
+    ) {
         $this->userPermissionsService = $userPermissionsService;
+        $this->permissionPackageService = $permissionPackageService;
     }
 
     /**
@@ -34,6 +43,8 @@ class UserPermissionsJsonController extends Controller
      */
     public function store(UserPermissionCreateRequest $request)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'create.user.permissions');
+
         $userPermission = $this->userPermissionsService->updateOrCeate(
             [
                 'user_id' => $request->input('user_id'),
@@ -66,6 +77,8 @@ class UserPermissionsJsonController extends Controller
      */
     public function delete($userPermissionId)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'delete.user.permissions');
+
         //delete user permission
         $delete = $this->userPermissionsService->delete($userPermissionId);
 
@@ -88,6 +101,8 @@ class UserPermissionsJsonController extends Controller
      */
     public function index(Request $request)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'pull.user.permissions');
+
         $userPermissions = $this->userPermissionsService->getUserPermissions(
             $request->get('user_id'),
             $request->get('only_active', true)

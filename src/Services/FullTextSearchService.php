@@ -25,8 +25,7 @@ class FullTextSearchService
     public function __construct(
         FullTextSearchRepository $fullTextSearchRepository,
         ContentService $contentService
-    )
-    {
+    ) {
         $this->fullTextSearchRepository = $fullTextSearchRepository;
         $this->contentService = $contentService;
     }
@@ -53,8 +52,7 @@ class FullTextSearchService
         $sort = '-score',
         $dateTimeCutoff = null,
         $brands = null
-    )
-    {
+    ) {
         $term = $output = preg_replace(
             '!\s+!',
             ' ',
@@ -69,7 +67,7 @@ class FullTextSearchService
 
         $oldBrands = ConfigService::$availableBrands;
 
-        if(empty($contentStatuses)){
+        if (empty($contentStatuses)) {
             $contentStatuses = ContentRepository::$availableContentStatues;
         }
 
@@ -95,7 +93,7 @@ class FullTextSearchService
                 $contentTypes,
                 $contentStatuses,
                 $dateTimeCutoff
-            )
+            ),
         ];
 
         ConfigService::$availableBrands = $oldBrands;

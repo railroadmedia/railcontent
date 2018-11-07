@@ -582,6 +582,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $responseContent = $response->decodeResponseJson('data');
 
         $this->assertArraySubset($expectedContent['results'], $responseContent);
+        $this->assertEquals($nrCourses, $response->decodeResponseJson('meta')['totalResults']);
     }
 
     public function test_index_with_required_fields()
@@ -835,9 +836,10 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content/get-by-ids',
             ['ids' => $content2['id'] . ',' . $content1['id']]
         );
+
         $expectedResults = [
-            (array)$content1,
             (array)$content2,
+            (array)$content1,
         ];
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
