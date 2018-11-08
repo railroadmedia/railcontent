@@ -54,14 +54,13 @@ class ContentHierarchyRepository extends \Railroad\Resora\Repositories\Repositor
      * @param array $childIds
      * @return array|null
      */
-//    public function getByParentIdWhereChildIdIn($parentId, $childIds)
-//    {
-//        return $this->query()
-//            ->where('parent_id', $parentId)
-//            ->whereIn('child_id', $childIds)
-//            ->get()
-//            ->toArray();
-//    }
+    public function getByParentIdWhereChildIdIn($parentId, $childIds)
+    {
+        return $this->query()
+            ->where('parent_id', $parentId)
+            ->whereIn('child_id', $childIds)
+            ->get();
+    }
 
     /**
      * @param array $parentIds

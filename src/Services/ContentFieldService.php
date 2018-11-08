@@ -38,13 +38,7 @@ class ContentFieldService
      */
     public function get($id)
     {
-        $contentField = $this->fieldRepository->read($id);
-
-//        if (!empty($contentField) && $contentField['type'] == 'content_id') {
-//            $contentField['value'] = $this->contentService->getById($contentField['value']);
-//        }
-
-        return $contentField;
+        return $this->fieldRepository->read($id);
     }
 
     /**
@@ -53,11 +47,11 @@ class ContentFieldService
      */
     public function getByKeyValueTypePosition($key, $value, $type, $position)
     {
-        $contentFields = $this->fieldRepository->where(
-            ['key' => $key, 'value' => $value, 'type' => $type, 'position' => $position]
-        )
+        return $this->fieldRepository->query()
+            ->where(
+                ['key' => $key, 'value' => $value, 'type' => $type, 'position' => $position]
+            )
             ->get();
-        //->getByKeyValueTypePosition($key, $value, $type, $position);
 
         $contentIds = [];
         $contents = [];
@@ -89,7 +83,11 @@ class ContentFieldService
      */
     public function getByKeyValueType($key, $value, $type)
     {
-        $contentFields = $this->fieldRepository->getByKeyValueType($key, $value, $type);
+        return $this->fieldRepository->query()
+            ->where(
+                ['key' => $key, 'value' => $value, 'type' => $type]
+            )
+            ->get();
 
         $contentIds = [];
         $contents = [];
@@ -144,7 +142,7 @@ class ContentFieldService
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $contentId);
 
-        return $this->get($field['id']);
+        return $field;
     }
 
     /**
@@ -210,7 +208,7 @@ class ContentFieldService
         );
 
         //Fire an event that the content was modified
-        if(array_key_exists('id',$data)) {
+        if (array_key_exists('id', $data)) {
             event(new ContentFieldUpdated($data['content_id']));
         } else {
             event(new ContentFieldCreated($data['content_id']));

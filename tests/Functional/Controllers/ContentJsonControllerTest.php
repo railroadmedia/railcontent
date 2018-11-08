@@ -1044,4 +1044,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
     {
         return $this->databaseManager->connection();
     }
+
+    public function test_drumeo(){
+        $this->assertTrue(true);
+    }
 }

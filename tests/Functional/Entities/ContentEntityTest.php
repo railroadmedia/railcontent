@@ -122,7 +122,7 @@ class ContentEntityTest extends RailcontentTestCase
         }
 
         $results = $this->serviceBeingTested->getById($content['id']);
-dd($results);
+
         $this->assertInstanceOf(ContentEntity::class, $results);
 
         $this->assertEquals($content['id'], $results->fetch('id'));

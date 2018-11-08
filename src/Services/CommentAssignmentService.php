@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 
 class CommentAssignmentService
@@ -30,7 +29,7 @@ class CommentAssignmentService
      */
     public function store($commentId, $userId)
     {
-        return $this->commentAssignmentRepository->updateOrCreate(
+        return $this->commentAssignmentRepository->query()->updateOrCreate(
             [
                 'comment_id' => $commentId,
                 'user_id' => $userId,
@@ -62,30 +61,24 @@ class CommentAssignmentService
         $orderByDirection = substr($orderByColumnAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($orderByColumnAndDirection, '-');
 
-        $assignedComments = $this->commentAssignmentRepository->query()
-            ->selectColumns()
-            ->leftJoin(
-                ConfigService::$tableComments,
-                'comment_id',
-                '=',
-                ConfigService::$tableComments . '.id'
-            )
-            ->where(ConfigService::$tableCommentsAssignment . '.user_id', $userId)
-            ->orderBy(
-                $orderByColumn,
-                $orderByDirection,
-                ConfigService::$tableCommentsAssignment
-            )
-            ->skip(($page - 1) * $limit)
-            ->limit($limit)
-        ->get();
-//            ->getAssignedCommentsForUser(
-//            $userId,
-//            $page,
-//            $limit,
-//            $orderByColumn,
-//            $orderByDirection
-//        );
+        $assignedComments =
+            $this->commentAssignmentRepository->query()
+                ->selectColumns()
+                ->leftJoin(
+                    ConfigService::$tableComments,
+                    'comment_id',
+                    '=',
+                    ConfigService::$tableComments . '.id'
+                )
+                ->where(ConfigService::$tableCommentsAssignment . '.user_id', $userId)
+                ->orderBy(
+                    $orderByColumn,
+                    $orderByDirection,
+                    ConfigService::$tableCommentsAssignment
+                )
+                ->skip(($page - 1) * $limit)
+                ->limit($limit)
+                ->get();
 
         return $assignedComments;
     }
@@ -118,6 +111,8 @@ class CommentAssignmentService
      */
     public function deleteCommentAssignations($commentId)
     {
-        return $this->commentAssignmentRepository->query()->whereIn('comment_id', [$commentId])->delete() > 0;
+        return $this->commentAssignmentRepository->query()
+                ->whereIn('comment_id', [$commentId])
+                ->delete() > 0;
     }
 }

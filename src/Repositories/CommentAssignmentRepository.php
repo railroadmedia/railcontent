@@ -11,72 +11,10 @@ class CommentAssignmentRepository extends \Railroad\Resora\Repositories\Reposito
     {
         return (new CommentQueryBuilder(
             $this->connection(),
-            $this->connection()->getQueryGrammar(),
-            $this->connection()->getPostProcessor()
-        ))
-            ->from(ConfigService::$tableCommentsAssignment);
-    }
-
-    /**
-     * @param int $userId
-     * @param int $page
-     * @param int $limit
-     * @param string $orderByColumn
-     * @param string $orderByDirection
-     * @return array
-     */
-    public function getAssignedCommentsForUser_old(
-        $userId,
-        $page = 1,
-        $limit = 25,
-        $orderByColumn = 'assigned_on',
-        $orderByDirection = 'desc'
-    ) {
-        $assignments = $this->query()
-            ->selectColumns()
-            ->leftJoin(
-                ConfigService::$tableComments,
-                'comment_id',
-                '=',
-                ConfigService::$tableComments . '.id'
-            )
-            ->where(ConfigService::$tableCommentsAssignment . '.user_id', $userId)
-            ->orderBy(
-                $orderByColumn,
-                $orderByDirection,
-                ConfigService::$tableCommentsAssignment
-            )
-            ->skip(($page - 1) * $limit)
-            ->limit($limit)
-            ->getToArray();
-
-        return $assignments;
-    }
-
-    /**
-     * @param int $userId
-     * @return integer
-     */
-    public function countAssignedCommentsForUser_old($userId)
-    {
-        return $this->query()
-            ->selectColumns()
-            ->leftJoin(
-                ConfigService::$tableComments,
-                'comment_id',
-                '=',
-                ConfigService::$tableComments . '.id'
-            )
-            ->where(ConfigService::$tableCommentsAssignment . '.user_id', $userId)
-            ->count();
-    }
-
-    /**
-     * @param $commentId
-     * @return bool
-     */
-    public function deleteCommentAssignations_old($commentId)
-    {
-        return $this->query()->whereIn('comment_id', $commentId)->delete() > 0;
+            $this->connection()
+                ->getQueryGrammar(),
+            $this->connection()
+                ->getPostProcessor()
+        ))->from(ConfigService::$tableCommentsAssignment);
     }
 }

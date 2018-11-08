@@ -51,18 +51,18 @@ class RailcontentServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->listen = [
-//            StatementPrepared::class => [
-//                function (StatementPrepared $event) {
-//
-//                    // we only want to use assoc fetching for this packages database calls
-//                    // so we need to use a separate 'mask' connection
-//
-//                    if ($event->connection->getName() ==
-//                        ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {
-//                        $event->statement->setFetchMode(PDO::FETCH_ASSOC);
-//                    }
-//                }
-//            ],
+            //            StatementPrepared::class => [
+            //                function (StatementPrepared $event) {
+            //
+            //                    // we only want to use assoc fetching for this packages database calls
+            //                    // so we need to use a separate 'mask' connection
+            //
+            //                    if ($event->connection->getName() ==
+            //                        ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {
+            //                        $event->statement->setFetchMode(PDO::FETCH_ASSOC);
+            //                    }
+            //                }
+            //            ],
             ContentCreated::class => [VersionContentEventListener::class . '@handle'],
             ContentUpdated::class => [VersionContentEventListener::class . '@handle'],
             ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
@@ -75,7 +75,7 @@ class RailcontentServiceProvider extends ServiceProvider
             ContentDatumDeleted::class => [VersionContentEventListener::class . '@handle'],
             CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
             CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
-            UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle']
+            UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
         ];
 
         parent::boot();
@@ -95,15 +95,19 @@ class RailcontentServiceProvider extends ServiceProvider
         //load package routes file
         $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
 
-        $this->commands([
-            CreateSearchIndexes::class,
-            CreateVimeoVideoContentRecords::class,
-            RepairMissingDurations::class,
-            CreateYoutubeVideoContentRecords::class,
-            ExpireCache::class
-        ]);
+        $this->commands(
+            [
+                CreateSearchIndexes::class,
+                CreateVimeoVideoContentRecords::class,
+                RepairMissingDurations::class,
+                CreateYoutubeVideoContentRecords::class,
+                ExpireCache::class,
+            ]
+        );
 
-        Validator::extend('exists_multiple_columns', MultipleColumnExistsValidator::class . '@validate',
+        Validator::extend(
+            'exists_multiple_columns',
+            MultipleColumnExistsValidator::class . '@validate',
             'The value entered does not exist in the database, or does not match the requirements to be ' .
             'set as the :attribute for this content-type with the current or requested content-status. Please ' .
             'double-check the input value and try again.'
@@ -119,7 +123,7 @@ class RailcontentServiceProvider extends ServiceProvider
                     ContentFielsDecorator::class,
                     ContentSlugHierarchyDecorator::class,
                     ContentChildsAndParentsDecorator::class,
-                    ContentEntityDecorator::class
+                    //ContentEntityDecorator::class,
                 ]
             )
         );
@@ -128,21 +132,10 @@ class RailcontentServiceProvider extends ServiceProvider
             array_merge(
                 config()->get('resora.decorators.content-field', []),
                 [
-ContentDecorator::class
+                    ContentDecorator::class,
                 ]
             )
         );
-       // dd(config()->get('resora.decorators.content', []));
-//        config()->set(
-//            'resora.decorators.comment',
-//            array_merge(
-//                config()->get('resora.decorators.comment', []),
-//                [
-//                    CommentLikesDecorator::class,
-//                    CommentEntityDecorator::class
-//                ]
-//            )
-//        );
     }
 
     private function setupConfig()
@@ -217,8 +210,7 @@ ContentDecorator::class
 
         ConfigService::$contentHierarchyMaxDepth = config('railcontent.content_hierarchy_max_depth');
         ConfigService::$contentHierarchyDecoratorAllowedTypes = config(
-            'railcontent.content_hierarchy_decorator_allowed_types' .
-            ''
+            'railcontent.content_hierarchy_decorator_allowed_types' . ''
         );
 
         // aggregates
@@ -227,8 +219,8 @@ ContentDecorator::class
                 'selectColumn' => 'COUNT(`' . ConfigService::$tableCommentLikes . '`.`id`) as `like_count`',
                 'foreignField' => 'comment_id',
                 'localField' => 'id',
-                'groupBy' => ConfigService::$tableComments . '.id'
-            ]
+                'groupBy' => ConfigService::$tableComments . '.id',
+            ],
         ];
     }
 

@@ -7,7 +7,6 @@ use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Resora\Decorators\Decorator;
 
 class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
@@ -77,6 +76,7 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
             $parsedRows = $this->parseRows([$row], $repliesRows);
             $row = reset($parsedRows);
         }
+
         return $row;
     }
     

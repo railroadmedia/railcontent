@@ -31,7 +31,7 @@ class CommentLikeService
      */
     public function getByCommentIds($commentIds)
     {
-        return $this->commentLikeRepository->getByCommentIds($commentIds);
+        return $this->commentLikeRepository->query()->whereIn('comment_id', $commentIds)->get();
     }
 
     /**
@@ -87,7 +87,8 @@ class CommentLikeService
      */
     public function delete($commentId, $userId)
     {
-        $deleted = $this->commentLikeRepository->deleteForUserComment($userId, $commentId);
+        $deleted = $this->commentLikeRepository->query()->where(['user_id' => $userId, 'comment_id' => $commentId])
+            ->delete();
 
         CacheHelper::deleteAllCachedSearchResults('get_comments_');
 

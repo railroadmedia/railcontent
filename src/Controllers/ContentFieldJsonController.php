@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentFieldCreateRequest;
 use Railroad\Railcontent\Requests\ContentFieldDeleteRequest;
@@ -19,13 +20,19 @@ class ContentFieldJsonController extends Controller
     private $fieldService;
 
     /**
+     * @var PermissionService
+     */
+    private $permissionPackageService;
+
+    /**
      * FieldController constructor.
      *
      * @param ContentFieldService $fieldService
      */
-    public function __construct(ContentFieldService $fieldService)
+    public function __construct(ContentFieldService $fieldService, PermissionService $permissionPackageService)
     {
         $this->fieldService = $fieldService;
+        $this->permissionPackageService = $permissionPackageService;
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -57,6 +64,8 @@ class ContentFieldJsonController extends Controller
      */
     public function store(ContentFieldCreateRequest $request)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'create.content.field');
+
         $contentField = $this->fieldService->createOrUpdate(
             $request->only(
                 [
@@ -92,6 +101,8 @@ class ContentFieldJsonController extends Controller
      */
     public function delete(ContentFieldDeleteRequest $request, $fieldId)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'delete.content.field');
+
         $deleted = $this->fieldService->delete($fieldId);
 
         //if the update method response it's null the field not exist; we throw the proper exception

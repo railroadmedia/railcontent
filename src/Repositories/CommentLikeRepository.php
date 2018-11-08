@@ -14,14 +14,6 @@ class CommentLikeRepository extends \Railroad\Resora\Repositories\RepositoryBase
     {
         return (new CachedQuery($this->connection()))->from(ConfigService::$tableCommentLikes);
     }
-    /**
-     * @param $commentIds
-     * @return array|null
-     */
-    public function getByCommentIds($commentIds)
-    {
-        return $this->query()->whereIn('comment_id', $commentIds)->getToArray();
-    }
 
     /**
      * Returns [[id, count], ...]
@@ -100,23 +92,4 @@ class CommentLikeRepository extends \Railroad\Resora\Repositories\RepositoryBase
 
         return $commentUserIds;
     }
-
-    /**
-     * @param $userId
-     * @param $commentId
-     * @return int
-     */
-    public function deleteForUserComment($userId, $commentId)
-    {
-        return $this->query()->where(['user_id' => $userId, 'comment_id' => $commentId])
-            ->delete();
-    }
-
-    /**
-     * @return \Illuminate\Database\Query\Builder
-     */
-//    public function query()
-//    {
-//        return $this->connection()->table(ConfigService::$tableCommentLikes);
-//    }
 }

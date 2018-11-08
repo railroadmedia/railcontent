@@ -40,7 +40,7 @@ class ContentDatumService
      */
     public function getByContentIds(array $contentIds)
     {
-        return $this->datumRepository->getByContentIds($contentIds);
+        return $this->datumRepository->query()->getByContentIds($contentIds);
     }
 
     /**
@@ -52,7 +52,7 @@ class ContentDatumService
      */
     public function create($contentId, $key, $value, $position)
     {
-        $contentDatum = $this->datumRepository->createOrUpdateAndReposition(
+        $contentDatum = $this->datumRepository->query()->createOrUpdateAndReposition(
             null,
             [
                 'content_id' => $contentId,
@@ -90,7 +90,7 @@ class ContentDatumService
             return $datum;
         }
 
-        $this->datumRepository->createOrUpdateAndReposition($id, $data);
+        $this->datumRepository->query()->createOrUpdateAndReposition($id, $data);
 
         //save a content version
         event(new ContentDatumUpdated($datum['content_id']));
@@ -114,7 +114,7 @@ class ContentDatumService
             return $datum;
         }
 
-        $delete = $this->datumRepository->deleteAndReposition(['id' => $id]);
+        $delete = $this->datumRepository->query()->deleteAndReposition(['id' => $id]);
 
         //save a content version 
         event(new ContentDatumDeleted($datum['content_id']));

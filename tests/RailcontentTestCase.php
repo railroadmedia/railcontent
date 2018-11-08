@@ -18,7 +18,6 @@ use Railroad\Permissions\Providers\PermissionsServiceProvider;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
-use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Services\RemoteStorageService;
 use Railroad\Railcontent\Tests\Resources\Models\User;
 use Railroad\Response\Providers\ResponseServiceProvider;

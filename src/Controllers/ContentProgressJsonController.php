@@ -21,8 +21,9 @@ class ContentProgressJsonController extends Controller
      *
      * @param UserContentProgressService $userContentService
      */
-    public function __construct(UserContentProgressService $userContentService)
-    {
+    public function __construct(
+        UserContentProgressService $userContentService
+    ) {
         $this->userContentService = $userContentService;
 
         $this->middleware(ConfigService::$controllerMiddleware);
@@ -35,6 +36,7 @@ class ContentProgressJsonController extends Controller
      */
     public function startContent(UserContentRequest $request)
     {
+
         $response = $this->userContentService->startContent(
             $request->input('content_id'),
             $request->user()->id

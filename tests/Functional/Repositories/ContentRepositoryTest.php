@@ -78,11 +78,14 @@ class ContentRepositoryTest extends RailcontentTestCase
             'status' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'language' => 'en-US',
-            'published_on' => Carbon::now()->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => Carbon::now()->toDateTimeString(),
+            'published_on' => Carbon::now()
+                ->toDateTimeString(),
+            'created_on' => Carbon::now()
+                ->toDateTimeString(),
+            'archived_on' => Carbon::now()
+                ->toDateTimeString(),
             'sort' => 0,
-            'user_id' => null
+            'user_id' => null,
         ];
 
         $content = $this->classBeingTested->create($contentData);
@@ -90,24 +93,33 @@ class ContentRepositoryTest extends RailcontentTestCase
         $results = $this->classBeingTested->read($content['id']);
 
         $this->assertEquals(
-            array_merge($contentData, [
-                'id' => $content['id'],
-                'fields' => [],
-                'data' => [],
-                'permissions' => []
-            ]),
+            array_merge(
+                $contentData,
+                [
+                    'id' => $content['id'],
+                    'fields' => [],
+                    'data' => [],
+                    'permissions' => [],
+                ]
+            ),
             $results->getArrayCopy()
         );
     }
 
     public function test_get_by_id_with_fields_datum()
     {
-        $content = $this->classBeingTested->create(['slug' => $this->faker->word,
-            'type'=>$this->faker->randomElement(ConfigService::$commentableContentTypes),
-            'status'=>ContentService::STATUS_PUBLISHED,
-            'brand' => ConfigService::$brand,
-            'language' => 'en',
-            'created_on' => Carbon::now()->toDateTimeString()]);
+        $content = $this->classBeingTested->create(
+            [
+                'slug' => $this->faker->word,
+                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'status' => ContentService::STATUS_PUBLISHED,
+                'brand' => ConfigService::$brand,
+                'language' => 'en',
+                'created_on' => Carbon::now()
+                    ->toDateTimeString(),
+            ]
+        )
+            ->getArrayCopy();
 
         $contentId = $content['id'];
 
@@ -115,23 +127,22 @@ class ContentRepositoryTest extends RailcontentTestCase
         $expectedData = [];
         $expectedPermissions = [];
 
-       for ($i = 0; $i < 3; $i++) {
-            $expectedFields[] = $this->contentFieldFactory->create($contentId)->getArrayCopy();
+        for ($i = 0; $i < 3; $i++) {
+            $expectedFields[] =
+                $this->contentFieldFactory->create($contentId)
+                    ->getArrayCopy();
             $expectedData[] = $this->contentDatumFactory->create($contentId);
         }
 
         $results = $this->classBeingTested->getById($contentId);
-
+        unset($content['user_id']);
         $this->assertEquals(
             array_merge(
-                $content->getArrayCopy(),
+                $content,
                 [
                     'id' => $contentId,
                     'fields' => $expectedFields,
                     'data' => $expectedData,
-//                    'permissions' => [],
-//                    'parent_id' => null,
-//                    'child_id' => null
                 ]
             ),
             $results->getArrayCopy()
@@ -146,9 +157,12 @@ class ContentRepositoryTest extends RailcontentTestCase
             'status' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'language' => 'en-US',
-            'published_on' => Carbon::now()->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => Carbon::now()->toDateTimeString(),
+            'published_on' => Carbon::now()
+                ->toDateTimeString(),
+            'created_on' => Carbon::now()
+                ->toDateTimeString(),
+            'archived_on' => Carbon::now()
+                ->toDateTimeString(),
         ];
 
         $contentId = $this->classBeingTested->create($content);
@@ -172,9 +186,12 @@ class ContentRepositoryTest extends RailcontentTestCase
             'status' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'language' => 'en-US',
-            'published_on' => Carbon::now()->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => Carbon::now()->toDateTimeString(),
+            'published_on' => Carbon::now()
+                ->toDateTimeString(),
+            'created_on' => Carbon::now()
+                ->toDateTimeString(),
+            'archived_on' => Carbon::now()
+                ->toDateTimeString(),
         ];
 
         $contentId = $this->classBeingTested->create($content);
@@ -194,8 +211,12 @@ class ContentRepositoryTest extends RailcontentTestCase
             'status' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'language' => 'en-US',
-            'published_on' => Carbon::now()->addDay()->toDateTimeString(),
-            'created_on' => Carbon::now()->addDay()->toDateTimeString(),
+            'published_on' => Carbon::now()
+                ->addDay()
+                ->toDateTimeString(),
+            'created_on' => Carbon::now()
+                ->addDay()
+                ->toDateTimeString(),
             'archived_on' => null,
         ];
 
@@ -220,8 +241,12 @@ class ContentRepositoryTest extends RailcontentTestCase
             'status' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'language' => 'en-US',
-            'published_on' => Carbon::now()->subDay()->toDateTimeString(),
-            'created_on' => Carbon::now()->subDay()->toDateTimeString(),
+            'published_on' => Carbon::now()
+                ->subDay()
+                ->toDateTimeString(),
+            'created_on' => Carbon::now()
+                ->subDay()
+                ->toDateTimeString(),
             'archived_on' => null,
         ];
 
@@ -242,8 +267,12 @@ class ContentRepositoryTest extends RailcontentTestCase
             'status' => $this->faker->word,
             'brand' => $this->faker->word,
             'language' => 'en-US',
-            'published_on' => Carbon::now()->addDay()->toDateTimeString(),
-            'created_on' => Carbon::now()->addDay()->toDateTimeString(),
+            'published_on' => Carbon::now()
+                ->addDay()
+                ->toDateTimeString(),
+            'created_on' => Carbon::now()
+                ->addDay()
+                ->toDateTimeString(),
             'archived_on' => null,
         ];
 
@@ -262,8 +291,12 @@ class ContentRepositoryTest extends RailcontentTestCase
             'status' => $this->faker->word,
             'brand' => ConfigService::$brand,
             'language' => 'en-US',
-            'published_on' => Carbon::now()->addDay()->toDateTimeString(),
-            'created_on' => Carbon::now()->addDay()->toDateTimeString(),
+            'published_on' => Carbon::now()
+                ->addDay()
+                ->toDateTimeString(),
+            'created_on' => Carbon::now()
+                ->addDay()
+                ->toDateTimeString(),
             'archived_on' => null,
         ];
 
@@ -282,9 +315,12 @@ class ContentRepositoryTest extends RailcontentTestCase
             'status' => $this->faker->word,
             'language' => 'en-US',
             'brand' => ConfigService::$brand,
-            'published_on' => Carbon::now()->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => Carbon::now()->toDateTimeString()
+            'published_on' => Carbon::now()
+                ->toDateTimeString(),
+            'created_on' => Carbon::now()
+                ->toDateTimeString(),
+            'archived_on' => Carbon::now()
+                ->toDateTimeString(),
         ];
 
         $content = $this->classBeingTested->create($data);
@@ -308,9 +344,12 @@ class ContentRepositoryTest extends RailcontentTestCase
             'status' => $this->faker->word,
             'language' => 'en-US',
             'brand' => ConfigService::$brand,
-            'published_on' => Carbon::now()->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => Carbon::now()->toDateTimeString()
+            'published_on' => Carbon::now()
+                ->toDateTimeString(),
+            'created_on' => Carbon::now()
+                ->toDateTimeString(),
+            'archived_on' => Carbon::now()
+                ->toDateTimeString(),
         ];
 
         $contentId = $this->classBeingTested->create($oldContent);
@@ -321,9 +360,12 @@ class ContentRepositoryTest extends RailcontentTestCase
             'status' => $this->faker->word,
             'language' => 'en-US',
             'brand' => ConfigService::$brand,
-            'published_on' => Carbon::now()->toDateTimeString(),
-            'created_on' => Carbon::now()->toDateTimeString(),
-            'archived_on' => Carbon::now()->toDateTimeString()
+            'published_on' => Carbon::now()
+                ->toDateTimeString(),
+            'created_on' => Carbon::now()
+                ->toDateTimeString(),
+            'archived_on' => Carbon::now()
+                ->toDateTimeString(),
         ];
 
         $this->classBeingTested->update($contentId['id'], $newContent);
@@ -350,9 +392,12 @@ class ContentRepositoryTest extends RailcontentTestCase
                 'status' => $this->faker->word,
                 'language' => 'en-US',
                 'brand' => ConfigService::$brand,
-                'published_on' => Carbon::now()->toDateTimeString(),
-                'created_on' => Carbon::now()->toDateTimeString(),
-                'archived_on' => Carbon::now()->toDateTimeString()
+                'published_on' => Carbon::now()
+                    ->toDateTimeString(),
+                'created_on' => Carbon::now()
+                    ->toDateTimeString(),
+                'archived_on' => Carbon::now()
+                    ->toDateTimeString(),
             ];
 
             $contentId = $this->classBeingTested->create($contents[$i + 1]);

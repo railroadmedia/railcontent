@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Routing\Controller;
+use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentDatumCreateRequest;
 use Railroad\Railcontent\Requests\ContentDatumDeleteRequest;
@@ -13,16 +14,25 @@ use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentDatumJsonController extends Controller
 {
+    /**
+     * @var ContentDatumService
+     */
     private $datumService;
+
+    /**
+     * @var PermissionService
+     */
+    private $permissionPackageService;
 
     /**
      * DatumController constructor.
      *
      * @param ContentDatumService $datumService
      */
-    public function __construct(ContentDatumService $datumService)
+    public function __construct(ContentDatumService $datumService, PermissionService $permissionPackageService)
     {
         $this->datumService = $datumService;
+        $this->permissionPackageService = $permissionPackageService;
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -35,6 +45,8 @@ class ContentDatumJsonController extends Controller
      */
     public function store(ContentDatumCreateRequest $request)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'create.content.data');
+
         $contentData = $this->datumService->create(
             $request->input('content_id'),
             $request->input('key'),
@@ -60,6 +72,8 @@ class ContentDatumJsonController extends Controller
      */
     public function update($dataId, ContentDatumUpdateRequest $request)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'update.content.data');
+
         $contentData = $this->datumService->update(
             $dataId,
             $request->only(
@@ -100,6 +114,8 @@ class ContentDatumJsonController extends Controller
      */
     public function delete(ContentDatumDeleteRequest $request, $dataId)
     {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'delete.content.data');
+
         $deleted = $this->datumService->delete($dataId);
 
         //if the update method response it's null the datum not exist; we throw the proper exception
