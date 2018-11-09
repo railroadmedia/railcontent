@@ -12,6 +12,7 @@ class UserContentProgressRepository extends \Railroad\Resora\Repositories\Reposi
     use ByContentIdTrait;
 
     public static $cache = [];
+
     /**
      * @return CachedQuery|$this
      */
@@ -19,22 +20,6 @@ class UserContentProgressRepository extends \Railroad\Resora\Repositories\Reposi
     {
         return (new CachedQuery($this->connection()))->from(ConfigService::$tableUserContentProgress);
     }
-
-//    protected function decorate($results)
-//    {
-//        /* if(!($results instanceof Product))
-//         {
-//             $results = new Product($results);
-//         } */
-//
-//        return Decorator::decorate($results, 'content-data');
-//    }
-
-//    public function query()
-//    {
-//        return parent::connection()
-//            ->table(ConfigService::$tableUserContentProgress);
-//    }
 
     /**
      * @param $userId
@@ -51,7 +36,7 @@ class UserContentProgressRepository extends \Railroad\Resora\Repositories\Reposi
                     ->where('user_id', $userId)
                     ->whereIn('content_id', $contentIds)
                     ->get()
-            ->toArray();
+                    ->toArray();
 
             return self::$cache[$key];
         }
@@ -131,13 +116,10 @@ class UserContentProgressRepository extends \Railroad\Resora\Repositories\Reposi
     public function countTotalStatesForContentIds($state, array $contentIds)
     {
         return $this->query()
-            ->select(
-                [
-                    $this->databaseManager->raw(
-                        'COUNT(' . ConfigService::$tableUserContentProgress . '.id) as count'
-                    ),
-                    'content_id',
-                ]
+            ->selectRaw(
+
+                'COUNT(' . ConfigService::$tableUserContentProgress . '.id) as count, content_id'
+
             )
             ->whereIn(ConfigService::$tableUserContentProgress . '.content_id', $contentIds)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
@@ -157,10 +139,10 @@ class UserContentProgressRepository extends \Railroad\Resora\Repositories\Reposi
                 ConfigService::$tableContent,
                 function (JoinClause $join) {
                     $join->on(
-                            ConfigService::$tableContent . '.id',
-                            '=',
-                            ConfigService::$tableUserContentProgress . '.content_id'
-                        );
+                        ConfigService::$tableContent . '.id',
+                        '=',
+                        ConfigService::$tableUserContentProgress . '.content_id'
+                    );
                 }
             )
             ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
@@ -192,10 +174,10 @@ class UserContentProgressRepository extends \Railroad\Resora\Repositories\Reposi
                 ConfigService::$tableContent,
                 function (JoinClause $join) use ($types) {
                     $join->on(
-                            ConfigService::$tableContent . '.id',
-                            '=',
-                            ConfigService::$tableUserContentProgress . '.content_id'
-                        )
+                        ConfigService::$tableContent . '.id',
+                        '=',
+                        ConfigService::$tableUserContentProgress . '.content_id'
+                    )
                         ->whereIn('type', $types);
                 }
             )
@@ -220,22 +202,20 @@ class UserContentProgressRepository extends \Railroad\Resora\Repositories\Reposi
         $select = '*';
 
         if ($count) {
-            $select = $this->databaseManager->raw(
-                'COUNT(' . ConfigService::$tableUserContentProgress . '.id) as count'
-            );
+            $select = 'COUNT(' . ConfigService::$tableUserContentProgress . '.id) as count';
         }
 
         $query =
             $this->query()
-                ->select($select)
+                ->selectRaw($select)
                 ->join(
                     ConfigService::$tableContent,
                     function (JoinClause $join) use ($type) {
                         $join->on(
-                                ConfigService::$tableContent . '.id',
-                                '=',
-                                ConfigService::$tableUserContentProgress . '.content_id'
-                            )
+                            ConfigService::$tableContent . '.id',
+                            '=',
+                            ConfigService::$tableUserContentProgress . '.content_id'
+                        )
                             ->where(ConfigService::$tableContent . '.type', '=', $type);
                     }
                 )

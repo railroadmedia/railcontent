@@ -26,6 +26,9 @@ class ContentSlugHierarchyDecorator implements DecoratorInterface
 
     public function decorate($contentResults)
     {
+	//TODO: integrate resora		
+        return $contentResults;
+
         $query = DB::table(ConfigService::$tableContent . ' as parent_content_0')
             ->whereIn('parent_content_0.id', $contentResults->pluck('id'));
 

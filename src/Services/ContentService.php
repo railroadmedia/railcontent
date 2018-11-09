@@ -909,7 +909,7 @@ class ContentService
             );
 
         // $5 sez we can remove this
-        $this->contentRepository->getTypeNeighbouringSiblings(
+        $this->contentRepository->query()->getTypeNeighbouringSiblings(
             $type,
             $columnName,
             $columnValue,

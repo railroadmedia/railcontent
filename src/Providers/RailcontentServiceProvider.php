@@ -123,7 +123,7 @@ class RailcontentServiceProvider extends ServiceProvider
                     ContentFielsDecorator::class,
                     ContentSlugHierarchyDecorator::class,
                     ContentChildsAndParentsDecorator::class,
-                    //ContentEntityDecorator::class,
+                    ContentEntityDecorator::class,
                 ]
             )
         );

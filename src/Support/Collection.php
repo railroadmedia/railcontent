@@ -69,30 +69,31 @@ class Collection extends \Illuminate\Support\Collection
      */
     public function sortByFieldValue($key, $direction = 'asc')
     {
-        return $this->sort(
-            function ($a, $b) use ($key, $direction) {
-                $aValue = null;
-
-                foreach (($a['fields']) as $field) {
-                    if ($field['key'] == $key) {
-                        $aValue = $field['value'];
-                    }
-                }
-
-                $bValue = null;
-
-                foreach (($b['fields'] ?? []) as $field) {
-                    if ($field['key'] == $key) {
-                        $bValue = $field['value'];
-                    }
-                }
-
-                if ($direction == 'asc') {
-                    return $aValue > $bValue;
-                }
-
-                return $aValue < $bValue;
-            }
-        );
+//TODO: fix method
+//        return $this->sort(
+//            function ($a, $b) use ($key, $direction) {
+//                $aValue = null;
+//
+//                foreach (($a['fields']) as $field) {
+//                    if ($field['key'] == $key) {
+//                        $aValue = $field['value'];
+//                    }
+//                }
+//
+//                $bValue = null;
+//
+//                foreach (($b['fields'] ?? []) as $field) {
+//                    if ($field['key'] == $key) {
+//                        $bValue = $field['value'];
+//                    }
+//                }
+//
+//                if ($direction == 'asc') {
+//                    return $aValue > $bValue;
+//                }
+//
+//                return $aValue < $bValue;
+//            }
+//        );
     }
 }

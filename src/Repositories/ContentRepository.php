@@ -144,7 +144,8 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
                 ->where(ConfigService::$tableContent . '.' . $columnName, '<', $columnValue)
                 ->orderBy($orderColumn, 'desc')
                 ->limit($siblingPairLimit)
-                ->getToArray();
+                ->get()
+                ->toArray();
 
         $afterContents =
             $this->query()
@@ -154,24 +155,10 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
                 ->where(ConfigService::$tableContent . '.' . $columnName, '>', $columnValue)
                 ->orderBy($orderColumn, 'asc')
                 ->limit($siblingPairLimit)
-                ->getToArray();
+                ->get()
+                ->toArray();
 
-        $merged = array_merge($beforeContents, $afterContents);
-
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($merged, 'id'));
-        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($merged, 'id'));
-
-        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
-            array_column($merged, 'id'),
-            array_column($merged, 'type')
-        );
-
-        $processedContents = $this->processRows(
-            $merged,
-            $contentFieldRows,
-            $contentDatumRows,
-            $contentPermissionRows
-        );
+        $processedContents = array_merge($beforeContents, $afterContents);
 
         foreach ($afterContents as $afterContentIndex => $afterContent) {
             foreach ($processedContents as $processedContentIndex => $processedContent) {
@@ -319,14 +306,10 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
             $this->newQuery()
                 ->selectCountColumns()
                 ->orderByRaw(
-                    $this->connection()
-                        ->raw(
-                            implode(', ', $orderByColumns) . ' ' . $this->orderDirection
-                        )
+                    implode(', ', $orderByColumns) . ' ' . $this->orderDirection
                 )
                 ->restrictByUserAccess()
-                ->limit($this->limit)
-                ->skip(($this->page - 1) * $this->limit)//                ->directPaginate($this->page, $this->limit)
+                ->directPaginate($this->page, $this->limit)
                 ->restrictByFields($this->requiredFields)
                 ->includeByFields($this->includedFields)
                 ->restrictByUserStates($this->requiredUserStates)
@@ -347,8 +330,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
         $query =
             $this->query()
                 ->orderByRaw(
-                    $this->connection()
-                        ->raw(implode(', ', $orderByColumns) . ' ' . $this->orderDirection)
+                    implode(', ', $orderByColumns) . ' ' . $this->orderDirection
                 )
                 ->addSubJoinToQuery($subQuery)
                 ->get();

@@ -90,7 +90,7 @@ class ContentQueryBuilder extends QueryBuilder
     public function addSubJoinToQuery(Builder $subQuery)
     {
         $this->join(
-            $this->connection->raw('(' . $subQuery->toSql() . ') inner_content'),
+            $this->raw('(' . $subQuery->toSql() . ') inner_content'),
             function (JoinClause $joinClause) {
                 $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
             }

@@ -29,7 +29,7 @@ class ContentDecorator implements DecoratorInterface
         $contentIdsToPull = [];
 
         foreach ($contentFields as $content) {
-            if ($content['type'] == 'content_id') {
+            if ($content['type'] === 'content_id') {
                 $contentIdsToPull[$content['id']] = $content['value'];
             }
         }
@@ -39,13 +39,16 @@ class ContentDecorator implements DecoratorInterface
                 $this->contentRepository->query()
                     ->whereIn('id', $contentIdsToPull)
                     ->get()
-                    ->keyBy('id');
+                    ->keyBy('id')
+                    ->toArray();
         }
 
         foreach ($contentFields as $index => $field) {
             if ($field['type'] === 'content_id') {
-                $contentFields[$index]['value'] = $linkedContents[$field['value']];
-                $contentFields[$index]['type'] = 'content';
+                if (array_key_exists($field['value'], $linkedContents)) {
+                    $contentFields[$index]['value'] = $linkedContents[$field['value']];
+                    $contentFields[$index]['type'] = 'content';
+                }
             }
         }
         return $contentFields;

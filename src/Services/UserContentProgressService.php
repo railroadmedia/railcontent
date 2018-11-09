@@ -64,7 +64,7 @@ class UserContentProgressService
      */
     public function getMostRecentByContentTypeUserState($contentType, $userId, $state)
     {
-        return $this->userContentRepository->getMostRecentByContentTypeUserState(
+        return $this->userContentRepository->query()->getMostRecentByContentTypeUserState(
             $contentType,
             $userId,
             $state
@@ -82,7 +82,7 @@ class UserContentProgressService
      */
     public function countTotalStatesForContentIds($state, $contentIds)
     {
-        $results = $this->userContentRepository->countTotalStatesForContentIds($state, $contentIds);
+        $results = $this->userContentRepository->query()->countTotalStatesForContentIds($state, $contentIds);
 
         return array_combine(array_column($results, 'content_id'), array_column($results, 'count'));
     }
@@ -113,10 +113,10 @@ class UserContentProgressService
             $progressPercent = $this->getProgressPercentage($userId, $children);
         }
 
-        $isCompleted = $this->userContentRepository->isContentAlreadyCompleteForUser($contentId, $userId);
+        $isCompleted = $this->userContentRepository->query()->isContentAlreadyCompleteForUser($contentId, $userId);
 
         if (!$isCompleted || $forceEvenIfComplete) {
-            $this->userContentRepository->updateOrCreate(
+            $this->userContentRepository->query()->updateOrCreate(
                 [
                     'content_id' => $contentId,
                     'user_id' => $userId,
@@ -160,7 +160,7 @@ class UserContentProgressService
      */
     public function completeContent($contentId, $userId)
     {
-        $this->userContentRepository->updateOrCreate(
+        $this->userContentRepository->query()->updateOrCreate(
             [
                 'content_id' => $contentId,
                 'user_id' => $userId,
@@ -229,7 +229,7 @@ class UserContentProgressService
         $childIds = [$contentId];
 
         do {
-            $children = $this->contentHierarchyService->getByParentIds($childIds);
+            $children = $this->contentHierarchyService->query()->getByParentIds($childIds);
 
             foreach ($children as $child) {
                 $idsToDelete[] = $child['child_id'];
@@ -303,7 +303,7 @@ class UserContentProgressService
             return $this->completeContent($contentId, $userId);
         }
 
-        $this->userContentRepository->updateOrCreate(
+        $this->userContentRepository->query()->updateOrCreate(
             [
                 'content_id' => $contentId,
                 'user_id' => $userId,
@@ -373,7 +373,7 @@ class UserContentProgressService
         }
 
         if (!empty($contentIds)) {
-            $contentProgressions = $this->userContentRepository->getByUserIdAndWhereContentIdIn($userId, $contentIds);
+            $contentProgressions = $this->userContentRepository->query()->getByUserIdAndWhereContentIdIn($userId, $contentIds);
 
             $contentProgressionsByContentId =
                 array_combine(array_pluck($contentProgressions,'content_id'), $contentProgressions);
@@ -536,7 +536,7 @@ class UserContentProgressService
      */
     public function getForUser($id)
     {
-        return $this->userContentRepository->getForUser($id);
+        return $this->userContentRepository->query()->getForUser($id);
     }
 
     /**
@@ -556,7 +556,7 @@ class UserContentProgressService
         $orderByDirection = 'desc',
         $limit = 25
     ) {
-        return $this->userContentRepository->getForUserStateContentTypes(
+        return $this->userContentRepository->query()->getForUserStateContentTypes(
             $id,
             $types,
             $state,
@@ -568,11 +568,11 @@ class UserContentProgressService
 
     public function getLessonsForUserByType($id, $type, $state = null)
     {
-        return $this->userContentRepository->getLessonsForUserByType($id, $type, $state);
+        return $this->userContentRepository->query()->getLessonsForUserByType($id, $type, $state);
     }
 
     public function countLessonsForUserByTypeAndProgressState($id, $type, $state)
     {
-        return $this->userContentRepository->getLessonsForUserByType($id, $type, $state, true);
+        return $this->userContentRepository->query()->getLessonsForUserByType($id, $type, $state, true);
     }
 }
