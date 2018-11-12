@@ -52,19 +52,14 @@ class ContentHierarchyService
     public function countParentsChildren(array $parentIds)
     {
         $results = $this->contentHierarchyRepository->query()
-            ->select(
-                [
-                    DB::raw(
-                        'COUNT(' . ConfigService::$tableContentHierarchy . '.child_id) as count'
-                    ),
-                    'parent_id',
-                ]
+            ->selectRaw(
+                'COUNT(' . ConfigService::$tableContentHierarchy . '.child_id) as count, parent_id'
             )
             ->whereIn(ConfigService::$tableContentHierarchy . '.parent_id', $parentIds)
             ->groupBy(ConfigService::$tableContentHierarchy . '.parent_id')
             ->get();
 
-        return array_combine(array_column($results, 'parent_id'), array_column($results, 'count'));
+        return array_combine($results->pluck('parent_id')->toArray(), $results->pluck('count')->toArray());
     }
 
     /**

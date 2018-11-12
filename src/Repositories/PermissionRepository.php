@@ -23,12 +23,4 @@ class PermissionRepository extends \Railroad\Resora\Repositories\RepositoryBase
     {
         return (new CachedQuery($this->connection()))->from(ConfigService::$tablePermissions);
     }
-
-    /**
-     * @return Builder
-     */
-//    public function query()
-//    {
-//        return parent::connection()->table(ConfigService::$tablePermissions);
-//    }
 }

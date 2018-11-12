@@ -2,10 +2,11 @@
 
 namespace Railroad\Railcontent\Decorators\UserProgress;
 
-use Railroad\Railcontent\Decorators\DecoratorInterface;
+
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Support\Collection;
+use Railroad\Resora\Decorators\DecoratorInterface;
 
 class ContentUserProgressDecorator implements DecoratorInterface
 {
@@ -22,7 +23,7 @@ class ContentUserProgressDecorator implements DecoratorInterface
         $this->userContentProgressRepository = $userContentProgressRepository;
     }
 
-    public function decorate(Collection $contents, $userId = null)
+    public function decorate($contents, $userId = null)
     {
         if (empty($userId) && !empty(auth()->id())) {
             $userId = auth()->id();
@@ -45,7 +46,7 @@ class ContentUserProgressDecorator implements DecoratorInterface
                 $this->userContentProgressRepository->getByUserIdAndWhereContentIdIn($userId, $contentIds);
 
             $contentProgressionsByContentId =
-                array_combine(array_column($contentProgressions, 'content_id'), $contentProgressions);
+                array_combine(array_pluck($contentProgressions, 'content_id'), $contentProgressions);
 
             foreach ($contents as $index => $content) {
                 if (!empty($contentProgressionsByContentId[$content['id']])) {

@@ -392,9 +392,6 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
                 )
                 ->get();
 
-        return $possibleContentFields;
-
-        //TODO: investigate parse method
         return $this->parseAvailableFields($possibleContentFields);
     }
 

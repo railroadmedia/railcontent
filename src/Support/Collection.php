@@ -4,8 +4,9 @@ namespace Railroad\Railcontent\Support;
 
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\Entity;
+use Railroad\Resora\Collections\BaseCollection;
 
-class Collection extends \Illuminate\Support\Collection
+class Collection extends BaseCollection
 {
     /**
      * @param string|callable $columnToCheckOrCallback
@@ -69,31 +70,30 @@ class Collection extends \Illuminate\Support\Collection
      */
     public function sortByFieldValue($key, $direction = 'asc')
     {
-//TODO: fix method
-//        return $this->sort(
-//            function ($a, $b) use ($key, $direction) {
-//                $aValue = null;
-//
-//                foreach (($a['fields']) as $field) {
-//                    if ($field['key'] == $key) {
-//                        $aValue = $field['value'];
-//                    }
-//                }
-//
-//                $bValue = null;
-//
-//                foreach (($b['fields'] ?? []) as $field) {
-//                    if ($field['key'] == $key) {
-//                        $bValue = $field['value'];
-//                    }
-//                }
-//
-//                if ($direction == 'asc') {
-//                    return $aValue > $bValue;
-//                }
-//
-//                return $aValue < $bValue;
-//            }
-//        );
+        return $this->sort(
+            function ($a, $b) use ($key, $direction) {
+                $aValue = null;
+
+                foreach (($a['fields']) as $field) {
+                    if ($field['key'] == $key) {
+                        $aValue = $field['value'];
+                    }
+                }
+
+                $bValue = null;
+
+                foreach (($b['fields'] ?? []) as $field) {
+                    if ($field['key'] == $key) {
+                        $bValue = $field['value'];
+                    }
+                }
+
+                if ($direction == 'asc') {
+                    return $aValue > $bValue;
+                }
+
+                return $aValue < $bValue;
+            }
+        );
     }
 }

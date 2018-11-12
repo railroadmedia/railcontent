@@ -17,13 +17,6 @@ class ContentPermissionRepository extends \Railroad\Resora\Repositories\Reposito
     use ByContentIdTrait;
 
     /**
-     * @return Builder
-     */
-//    public function query()
-//    {
-//        return parent::connection()->table(ConfigService::$tableContentPermissions);
-//    }
-    /**
      * @return CachedQuery|$this
      */
     protected function newQuery()

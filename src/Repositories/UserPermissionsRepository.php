@@ -17,21 +17,6 @@ class UserPermissionsRepository extends \Railroad\Resora\Repositories\Repository
         return (new CachedQuery($this->connection()))->from(ConfigService::$tableUserPermissions);
     }
 
-//    protected function decorate($results)
-//    {
-//        /* if(!($results instanceof Product))
-//         {
-//             $results = new Product($results);
-//         } */
-//
-//        return Decorator::decorate($results, 'content-data');
-//    }
-//    public function query()
-//    {
-//        return parent::connection()
-//            ->table(ConfigService::$tableUserPermissions);
-//    }
-
     /** Pull the user permissions record
      *
      * @param integer|null $userId

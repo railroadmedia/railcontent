@@ -117,9 +117,7 @@ class UserContentProgressRepository extends \Railroad\Resora\Repositories\Reposi
     {
         return $this->query()
             ->selectRaw(
-
                 'COUNT(' . ConfigService::$tableUserContentProgress . '.id) as count, content_id'
-
             )
             ->whereIn(ConfigService::$tableUserContentProgress . '.content_id', $contentIds)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)

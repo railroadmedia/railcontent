@@ -116,15 +116,14 @@ class RailcontentServiceProvider extends ServiceProvider
         config()->set(
             'resora.decorators.content',
             array_merge(
-                config()->get('resora.decorators.content', []),
                 [
                     ContentPermissionsDecorator::class,
                     ContentDataDecorator::class,
                     ContentFielsDecorator::class,
                     ContentSlugHierarchyDecorator::class,
                     ContentChildsAndParentsDecorator::class,
-                    ContentEntityDecorator::class,
-                ]
+                ],
+                config()->get('railcontent.decorators.content', [])
             )
         );
         config()->set(
