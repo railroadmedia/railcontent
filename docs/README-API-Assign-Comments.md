@@ -21,6 +21,9 @@ Pull assigned to me comments - JSON controller
 
 The managers have the ability to get comment assignments for.
 
+
+Only users with 'pull.comments.assignation' ability can pull comments.
+
 ### Request Example
 
 ```js   
@@ -94,6 +97,8 @@ Delete comment assignation - JSON controller
 `{ DELETE /assigned-comments/{id} }`
 
 Delete comment assignations.
+
+Only users with 'delete.comment.assignation' ability can delete comments assignation.
 
 ### Request Example
 

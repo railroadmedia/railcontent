@@ -50,6 +50,8 @@ Get content - JSON controller
 
 Get content data based on content id.
 
+Only users with 'pull.contents' ability can pull contents.
+
 
 ### Request Example
 
@@ -131,6 +133,9 @@ Get contents based on ids - JSON controller
 Get an array with contents data based on content ids.
 
 
+Only users with 'pull.contents' ability can pull contents.
+
+
 ### Request Example
 
 ```js   
@@ -193,6 +198,9 @@ Get contents that are childrens of the content id - JSON controller
 `{ GET /content/parent/{parentId} }`
 
 Get an array with contents data that are childrens of the specified content id.
+
+
+Only users with 'pull.contents' ability can pull contents.
 
 
 ### Request Example
@@ -286,6 +294,9 @@ Filter contents  - JSON controller
 `{ GET /content }`
 
 Get an array with contents data that respect filters criteria. The results are paginated.
+
+
+Only users with 'pull.contents' ability can pull contents.
 
 
 ### Request Example
@@ -732,6 +743,9 @@ Store content - JSON controller
 Create a new content based on request data and return the new created content in JSON format.
 
 
+Only users with 'create.content' ability can create content.
+
+
 ### Request Example
 
 ```js   
@@ -810,6 +824,9 @@ Update content - JSON controller
 `{ PATCH /content/{id} }`
 
 Update a content with the request data and return the updated content in JSON format. 
+
+
+Only users with 'update.content' ability can update content.
 
 
 ### Request Example
@@ -909,6 +926,7 @@ Delete content and content related links if exists in the database.
 
 The content related links are: links with the parent, content childrens, content fields, content datum, links with the permissions, content comments, replies and assignation and links with the playlists.
 
+Only users with 'delete.content' ability can delete contents.
 
 ### Request Example
 
@@ -972,6 +990,7 @@ The contents are  never actually deleted out of the database, it's only mark as 
 
 If a content it's `soft deleted` the API will automatically filter it out from the pull request unless the status set on the pull requests explicitly state otherwise.  
 
+Only users with 'delete.content' ability can delete contents.
 
 ### Request Example
 

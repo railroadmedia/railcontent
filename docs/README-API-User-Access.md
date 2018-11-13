@@ -1,20 +1,16 @@
 - [User Access - API endpoints](#user-access---api-endpoints)
-  * [Give user access - JSON controller](#give-user-access---json-controller)
+  * [Give/modify user access - JSON controller](#give-modify-user-access---json-controller)
     + [Request Example](#request-example)
     + [Request Parameters](#request-parameters)
     + [Response Example](#response-example)
-  * [Change user access - JSON controller](#change-user-access---json-controller)
+  * [Delete user access - JSON controller](#delete-user-access---json-controller)
     + [Request Example](#request-example-1)
     + [Request Parameters](#request-parameters-1)
     + [Response Example](#response-example-1)
-  * [Delete user access - JSON controller](#delete-user-access---json-controller)
+  * [Pull users permissions - JSON controller](#pull-users-permissions---json-controller)
     + [Request Example](#request-example-2)
     + [Request Parameters](#request-parameters-2)
     + [Response Example](#response-example-2)
-  * [Pull users permissions - JSON controller](#pull-users-permissions---json-controller)
-    + [Request Example](#request-example-3)
-    + [Request Parameters](#request-parameters-3)
-    + [Response Example](#response-example-3)
 
 <!-- ecotrust-canada.github.io/markdown-toc -->
 
@@ -22,12 +18,14 @@
 # User Access - API endpoints
 
 
-Give user access - JSON controller
+Give/modify user access - JSON controller
 --------------------------------------
 
 `{ PUT /user-permission }`
 
-Give users access to specific content for a specific amount of time.
+Give or modify users access to specific content for a specific amount of time.
+
+Only users with 'create.user.permissions' ability can give user access.
 
 
 ### Request Example
@@ -85,88 +83,6 @@ body , expiration_date , no , null , If expiration date is null they have access
 }
 
 ```
-Change user access - JSON controller
---------------------------------------
-
-`{ PATCH /user-permission/{userPermissionId} }`
-
-Change user access.
-
-
-### Request Example
-
-```js   
-
-$.ajax({
-    url: 'https://www.musora.com' +
-        '/railcontent/user-permission/1',
-    type: 'patch'
-  	data: {expiration_date: '2018-09-11 05:21:23',} 
-    dataType: 'json',
-    success: function(response) {
-        // handle success
-    },
-    error: function(response) {
-        // handle error
-    }
-});
-
-```
-
-### Request Parameters
-
-| path\|query\|body |  key              |  required |  default |  description\|notes                                                                                             | 
-|-----------------|-------------------|-----------|----------|-----------------------------------------------------------------------------------------------------------------| 
-| path            |  id               |  yes      |          |  The user permission id.                                                                                        | 
-| body            |  user_id          |  no       |          |  The user id.                                                                                                   | 
-| body            |  permission_id    |  no       |          |  The permission id.                                                                                             | 
-| body            |  start_date       |  no       |          |  The date when the user has access.                                                                             | 
-| body            |  expiration_date  |  no       |          |  If expiration date is null they have access forever; otherwise the user have access until the expiration date. | 
-
-
-
-
-
-<!-- donatstudios.com/CsvToMarkdownTable
-path|query|body, key, required, default, description\|notes
-path , id , yes , , The user permission id.
-body , user_id , no , , The user id.
-body , permission_id , no , , The permission id.
-body , start_date , no ,  , The date when the user has access.
-body , expiration_date , no ,  , If expiration date is null they have access forever; otherwise the user have access until the expiration date.
--->
-
-
-### Response Example
-
-```201 OK```
-
-```json
-{
- 		"id":"1",
-        "user_id":"1",
-        "permissions_id":"1",
-        "start_date":"2018-07-11 05:56:13",
-        "expiration_date":"2018-09-11 05:21:23",
-        "created_on":"2018-07-11 05:56:13",
-        "updated_on":"2018-07-11 05:56:13"
-}
-
-```
-```404 Not Found```
-
-```json
-{
-      "status":"error",
-      "code":404,
-      "total_results":0,
-      "results":[],
-      "error":{
-        "title":"Entity not found.",
-        "detail":"Update failed, user permission not found with id: 1"
-      }
-}
-```
 
 Delete user access - JSON controller
 --------------------------------------
@@ -174,6 +90,8 @@ Delete user access - JSON controller
 `{ DELETE /user-permission/{id} }`
 
 Delete user access to content.
+
+Only users with 'delete.user.permissions' ability can delete user's access.
 
 
 ### Request Example
@@ -241,6 +159,8 @@ Get active users permissions.
 IF `only_active` it's set false on the request the expired permissions are returned also.
 
 IF `user_id` it's set on the request only the permissions for the specified user are returned
+
+Only users  with 'pull.user.permissions' ability can pull user's permissions.
 
 
 ### Request Example

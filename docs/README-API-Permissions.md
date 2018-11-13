@@ -36,6 +36,8 @@ Store permission - JSON controller
 
 Store a new permission in the CMS.
 
+Only users with 'create.permission' ability can store permission.
+
 
 ### Request Example
 
@@ -98,6 +100,8 @@ Change permission - JSON controller
 `{ PATCH /permission/{id} }`
 
 Change permission name or the brand where the permission it's available.
+
+Only users with 'update.permission' ability can update permission.
 
 
 ### Request Example
@@ -172,6 +176,8 @@ Delete permission - JSON controller
 
 Delete the permission and all the links with contents.
 
+Only users with 'delete.permission' ability can delete permission.
+
 
 ### Request Example
 
@@ -235,6 +241,8 @@ Assign permission - JSON controller
 
 Assign permission to a specific content or to all content of certain type.
 
+Only users with 'assign.permission' ability can assign permission to content/content type.
+
 
 ### Request Example
 
@@ -295,7 +303,9 @@ Dissociate permission - JSON controller
 
 `{ PATCH /permission/dissociate }`
 
-Dissociate permissions from a specific content or all content of a certain type
+Dissociate permissions from a specific content or all content of a certain type.
+
+Only users with 'disociate.permissions' ability can dissociate permission.
 
 
 ### Request Example
@@ -353,6 +363,8 @@ Get permissions - JSON controller
 `{ GET /permission }`
 
 Get all the permissions from the database.
+
+Only users with 'pull.permissions' ability can pull permissions.
 
 
 ### Request Example

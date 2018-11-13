@@ -25,6 +25,8 @@ Store content datum - JSON controller
 
 Create a new content datum record based on request data and return the new created datum data in JSON format.
 
+Only users with 'create.content.data' ability can create content datum.
+
 
 ### Request Example
 
@@ -89,6 +91,8 @@ Update content datum - JSON controller
 `{ PATCH /content/datum/{id} }`
 
 Update the content datum with the request data and return the updated datum in JSON format. 
+
+Only users with 'update.content.data' ability can update content datum.
 
 
 ### Request Example
@@ -168,6 +172,8 @@ Delete content datum - JSON controller
 `{ DELETE /content/datum/{id} }`
 
 Delete content datum if exists in the database. 
+
+Only users with 'delete.content.data' ability can delete content's data.
 
 
 ### Request Example
