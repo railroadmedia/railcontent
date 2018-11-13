@@ -35,8 +35,8 @@ class ContentUserProgressDecorator implements DecoratorInterface
 
         $contentIds = [];
 
-        foreach ($contents->toArray() as $content) {
-            $contentIds[] = $content['id'];
+        foreach ($contents as $content) {
+            $contentIds[] = $content->fetch('id');
         }
 
         $contents = $contents->toArray();
@@ -49,18 +49,18 @@ class ContentUserProgressDecorator implements DecoratorInterface
                 array_combine(array_pluck($contentProgressions, 'content_id'), $contentProgressions);
 
             foreach ($contents as $index => $content) {
-                if (!empty($contentProgressionsByContentId[$content['id']])) {
-                    $contents[$index]['user_progress'][$userId] = $contentProgressionsByContentId[$content['id']];
+                if (!empty($contentProgressionsByContentId[$content->fetch('id')])) {
+                    $contents[$index]['user_progress'][$userId] = $contentProgressionsByContentId[$content->fetch('id')];
 
                     $contents[$index][UserContentProgressService::STATE_COMPLETED] =
-                        $contentProgressionsByContentId[$content['id']]['state'] ==
+                        $contentProgressionsByContentId[$content->fetch('id')]['state'] ==
                         UserContentProgressService::STATE_COMPLETED;
 
                     $contents[$index][UserContentProgressService::STATE_STARTED] =
-                        $contentProgressionsByContentId[$content['id']]['state'] ==
+                        $contentProgressionsByContentId[$content->fetch('id')]['state'] ==
                         UserContentProgressService::STATE_STARTED;
 
-                    $contents[$index]['progress_percent'] = $contentProgressionsByContentId[$content['id']]['progress_percent'];
+                    $contents[$index]['progress_percent'] = $contentProgressionsByContentId[$content->fetch('id')]['progress_percent'];
                 } else {
                     $contents[$index]['user_progress'][$userId] = [];
 
