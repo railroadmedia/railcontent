@@ -1112,23 +1112,34 @@ class ContentService
 
         ContentRepository::$pullFutureContent = true;
 
-        $shows = [
-            'recording',
-            'live',
-            'gear-guides',
-            'challenges',
-            'boot-camps',
-            'quick-tips',
-            'podcasts',
-            'on-the-road',
-            'behind-the-scenes',
-            'study-the-greats',
-            'solos',
-            'performances',
-        ];
+        $shows = [];
+
+        // todo: move to config probably
+        if(ConfigService::$brand = 'drumeo'){
+            $shows = [
+                'live',
+                'gear-guides',
+                'challenges',
+                'boot-camps',
+                'quick-tips',
+                'podcasts',
+                'on-the-road',
+                'behind-the-scenes',
+                'study-the-greats',
+                'solos',
+                'performances',
+                'exploring-beats',
+                'independence-made-easy',
+            ];
+
+            $liveEventsTypes = ['student-focus', 'song'];
+
+            $contentReleasesTypes = ['course', 'play-along', 'student-focus', 'song'];
+        }
+
 
         $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
-            array_merge(['student-focus', 'song'], $shows),
+            array_merge($liveEventsTypes, $shows),
             ContentService::STATUS_SCHEDULED,
             Carbon::now()
                 ->toDateTimeString(),
@@ -1136,7 +1147,7 @@ class ContentService
         );
 
         $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
-            array_merge(['course', 'play-along', 'student-focus', 'song'], $shows),
+            array_merge($contentReleasesTypes, $shows),
             ContentService::STATUS_PUBLISHED,
             Carbon::now()
                 ->toDateTimeString(),
