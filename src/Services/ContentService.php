@@ -1112,57 +1112,41 @@ class ContentService
 
         ContentRepository::$pullFutureContent = true;
 
-        $shows = [];
+        if(ConfigService::$brand === 'drumeo') {
+            $typesForCalendars = config('railcontent.types-for-calendars.drumeo');
 
-        // todo: move to config probably
-        if(ConfigService::$brand = 'drumeo'){
-            $shows = [
-                'live',
-                'gear-guides',
-                'challenges',
-                'boot-camps',
-                'quick-tips',
-                'podcasts',
-                'on-the-road',
-                'behind-the-scenes',
-                'study-the-greats',
-                'solos',
-                'performances',
-                'exploring-beats',
-                'independence-made-easy',
-            ];
+            if($typesForCalendars ){
+                $shows = $typesForCalendars['shows'];
+                $liveEventsTypes = $typesForCalendars['live-events-types'];
+                $contentReleasesTypes = $typesForCalendars['content-releases-types'];
+            }
 
-            $liveEventsTypes = ['student-focus', 'song'];
+            $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+                array_merge($liveEventsTypes, $shows),
+                ContentService::STATUS_SCHEDULED,
+                Carbon::now()
+                    ->toDateTimeString(),
+                '>'
+            );
 
-            $contentReleasesTypes = ['course', 'play-along', 'student-focus', 'song'];
+            $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+                array_merge($contentReleasesTypes, $shows),
+                ContentService::STATUS_PUBLISHED,
+                Carbon::now()
+                    ->toDateTimeString(),
+                '>'
+            );
+
+            $scheduleEvents =
+                $liveEvents->merge($contentReleases)
+                    ->sort(
+                        function ($a, $b) {
+                            return Carbon::parse($a['published_on']) >= Carbon::parse($b['published_on']);
+                        }
+                    )
+                    ->values();
         }
 
-
-        $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
-            array_merge($liveEventsTypes, $shows),
-            ContentService::STATUS_SCHEDULED,
-            Carbon::now()
-                ->toDateTimeString(),
-            '>'
-        );
-
-        $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
-            array_merge($contentReleasesTypes, $shows),
-            ContentService::STATUS_PUBLISHED,
-            Carbon::now()
-                ->toDateTimeString(),
-            '>'
-        );
-
-        $scheduleEvents =
-            $liveEvents->merge($contentReleases)
-                ->sort(
-                    function ($a, $b) {
-                        return Carbon::parse($a['published_on']) >= Carbon::parse($b['published_on']);
-                    }
-                )
-                ->values();
-
-        return $scheduleEvents;
+        return $scheduleEvents ?? [];
     }
 }
