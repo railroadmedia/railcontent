@@ -258,6 +258,11 @@ Route::group(
                     \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@store'
                 )->name('user.permissions.store');
 
+                Route::patch(
+                    '/user-permission/{id}',
+                    \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@store'
+                )->name('user.permissions.update');
+
                 Route::delete(
                     '/user-permission/{userPermissionId}',
                     \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@delete'
