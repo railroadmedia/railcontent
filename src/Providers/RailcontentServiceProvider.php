@@ -135,6 +135,7 @@ class RailcontentServiceProvider extends ServiceProvider
                 ]
             )
         );
+        config()->set('resora.default_connection_name', ConfigService::$databaseConnectionName);
     }
 
     private function setupConfig()
