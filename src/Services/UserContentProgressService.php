@@ -187,6 +187,30 @@ class UserContentProgressService
             );
         }
 
+        // also mark children as complete
+        $childIds = [$contentId];
+
+        do {
+            $children = $this->contentHierarchyService->getByParentIds($childIds);
+
+            foreach ($children as $child) {
+                $this->userContentRepository->updateOrCreate(
+                    [
+                        'content_id' => $child['child_id'],
+                        'user_id' => $userId,
+                    ],
+                    [
+                        'state' => self::STATE_COMPLETED,
+                        'progress_percent' => 100,
+                        'updated_on' => Carbon::now()
+                            ->toDateTimeString(),
+                    ]
+                );
+            }
+
+            $childIds = array_column($children, 'child_id');
+        } while (count($children) > 0);
+
         event(new UserContentProgressSaved($userId, $contentId));
 
         CacheHelper::deleteUserFields(
