@@ -189,11 +189,14 @@ class UserContentProgressService
 
         // also mark children as complete
         $childIds = [$contentId];
+        $idsToDeleteFromCache = [];
 
         do {
             $children = $this->contentHierarchyService->getByParentIds($childIds);
 
             foreach ($children as $child) {
+                $idsToDeleteFromCache[] = $child['child_id'];
+
                 $this->userContentRepository->updateOrCreate(
                     [
                         'content_id' => $child['child_id'],
@@ -210,6 +213,8 @@ class UserContentProgressService
 
             $childIds = array_column($children, 'child_id');
         } while (count($children) > 0);
+
+        event(new UserContentsProgressReset($userId, $idsToDeleteFromCache));
 
         event(new UserContentProgressSaved($userId, $contentId));
 
