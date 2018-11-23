@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Railroad\Railcontent\Services\ConfigService;
 
-class CreateCommentLikesTable extends Migration
+class CreateContentLikesTable extends Migration
 {
     /**
      * Run the migrations.

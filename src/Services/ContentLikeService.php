@@ -37,9 +37,7 @@ class ContentLikeService
      */
     public function index(Builder $query)
     {
-        return $this->contentLikeRepository->query()
-            ->union($query)
-            ->get();
+        return $query->get();
     }
 
     /**
@@ -48,9 +46,7 @@ class ContentLikeService
      */
     public function count(Builder $query)
     {
-        return $this->contentLikeRepository->query()
-            ->union($query)
-            ->count();
+        return $query->count();
     }
 
     /**

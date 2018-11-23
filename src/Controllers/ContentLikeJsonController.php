@@ -42,6 +42,7 @@ class ContentLikeJsonController extends Controller
                 ->where('content_id', $id)
         );
 
+
         $likes = $this->contentLikeService->index(
             $this->contentLikeService->builder()
                 ->where('content_id', $id)
@@ -85,10 +86,9 @@ class ContentLikeJsonController extends Controller
      * Authenticated user unlike content.
      *
      * @param CommentUnLikeRequest $request
-     * @param integer $id
      * @return mixed
      */
-    public function delete(CommentUnLikeRequest $request)
+    public function unlike(CommentUnLikeRequest $request)
     {
         $amountDeleted = $this->contentLikeService->unlike($request->get('content_id'), auth()->id());
 
