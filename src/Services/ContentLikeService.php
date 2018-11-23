@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Repositories\ContentLikeRepository;
 
 class ContentLikeService
@@ -37,7 +38,7 @@ class ContentLikeService
      */
     public function index(Builder $query)
     {
-        return $query->get();
+        return Decorator::decorate($query->get(), 'content_likes');
     }
 
     /**
