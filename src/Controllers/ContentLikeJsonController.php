@@ -2,28 +2,30 @@
 
 namespace Railroad\Railcontent\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Railroad\Railcontent\Repositories\ContentLikeRepository;
-use Railroad\Railcontent\Requests\CommentLikeRequest;
 use Railroad\Railcontent\Requests\CommentUnLikeRequest;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentLikeService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentLikeJsonController extends Controller
 {
     /**
-     * @var ContentLikeRepository
+     * @var ContentLikeService
      */
-    private $contentLikeRepository;
+    private $contentLikeService;
 
-    public function __construct(
-        ContentLikeRepository $contentLikeRepository
-    ) {
-        $this->contentLikeRepository = $contentLikeRepository;
+    /**
+     * ContentLikeJsonController constructor.
+     *
+     * @param ContentLikeService $contentLikeService
+     */
+    public function __construct(ContentLikeService $contentLikeService)
+    {
 
         $this->middleware(ConfigService::$controllerMiddleware);
+        $this->contentLikeService = $contentLikeService;
     }
 
     /**
@@ -35,13 +37,13 @@ class ContentLikeJsonController extends Controller
      */
     public function index(Request $request, $id)
     {
-        $count =
-            $this->contentLikeRepository->query()
+        $count = $this->contentLikeService->count(
+            $this->contentLikeService->builder()
                 ->where('content_id', $id)
-                ->count();
+        );
 
-        $likes =
-            $this->contentLikeRepository->query()
+        $likes = $this->contentLikeService->index(
+            $this->contentLikeService->builder()
                 ->where('content_id', $id)
                 ->limit($request->get('limit', 10))
                 ->skip(($request->get('page', 1) - 1) * $request->get('limit', 10))
@@ -49,7 +51,7 @@ class ContentLikeJsonController extends Controller
                     trim($request->get('sort', '-created_on'), '-'),
                     substr($request->get('sort', '-created_on'), 0, 1) !== '-' ? 'asc' : 'desc'
                 )
-                ->get();
+        );
 
         return reply()->json(
             $likes,
@@ -61,50 +63,39 @@ class ContentLikeJsonController extends Controller
     }
 
     /**
-     * Like content.
+     * Authenticated user like content.
      *
      * @param Request $request
      * @return mixed
      */
     public function like(Request $request)
     {
-        $likeStored =
-            $this->contentLikeRepository->query()
-                ->updateOrInsert(
-                    [
-                        'content_id' => $request->get('content_id'),
-                        'user_id' => $request->get('user_id'),
-                    ],
-                    [
-                        'created_on' => Carbon::now()
-                            ->toDateTimeString(),
-                    ]
-                );
+        $like = $this->contentLikeService->like($request->get('content_id'), auth()->id());
 
         return reply()->json(
-            [[$store]],
+            [$like],
             [
-                'code' => $store ? 200 : 500,
+                'code' => $like ? 200 : 500,
                 'transformer' => DataTransformer::class,
             ]
         );
     }
 
     /**
-     * Authenticated user unlike a comment.
+     * Authenticated user unlike content.
      *
      * @param CommentUnLikeRequest $request
      * @param integer $id
      * @return mixed
      */
-    public function delete(CommentUnLikeRequest $request, $id)
+    public function delete(CommentUnLikeRequest $request)
     {
-        $delete = $this->commentLikeService->delete($id, auth()->id());
+        $amountDeleted = $this->contentLikeService->unlike($request->get('content_id'), auth()->id());
 
         return reply()->json(
-            [[$delete]],
+            [$amountDeleted],
             [
-                'code' => $delete ? 200 : 500,
+                'code' => $amountDeleted ? 200 : 500,
                 'transformer' => DataTransformer::class,
             ]
         );
