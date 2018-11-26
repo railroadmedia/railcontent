@@ -42,7 +42,6 @@ class ContentLikeJsonController extends Controller
                 ->where('content_id', $id)
         );
 
-
         $likes = $this->contentLikeService->index(
             $this->contentLikeService->builder()
                 ->where('content_id', $id)
@@ -93,7 +92,7 @@ class ContentLikeJsonController extends Controller
         $amountDeleted = $this->contentLikeService->unlike($request->get('content_id'), auth()->id());
 
         return reply()->json(
-            [$amountDeleted],
+            [[$amountDeleted > 0]],
             [
                 'code' => $amountDeleted ? 200 : 500,
                 'transformer' => DataTransformer::class,
