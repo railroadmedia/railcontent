@@ -3,9 +3,8 @@
 namespace Railroad\Railcontent\Decorators\Content;
 
 use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
-use Railroad\Railcontent\Support\Collection;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Decorators\DecoratorInterface;
 
 class ContentPermissionsDecorator implements DecoratorInterface
@@ -24,20 +23,30 @@ class ContentPermissionsDecorator implements DecoratorInterface
     {
         $contentPermissions =
             $this->contentPermissionsRepository->query()
+                ->select([ConfigService::$tableContentPermissions . '.*', ConfigService::$tablePermissions . '.name'])
+                ->join(
+                    ConfigService::$tablePermissions,
+                    ConfigService::$tablePermissions . '.id',
+                    '=',
+                    ConfigService::$tableContentPermissions . '.permission_id'
+                )
                 ->whereIn('content_id', $contents->pluck('id'))
                 ->orWhereIn('content_type', $contents->pluck('type'))
-                ->get()->toArray();
+                ->get()
+                ->toArray();
 
         $permissionRowsGroupedById = ContentHelper::groupArrayBy($contentPermissions, 'content_id');
         $permissionRowsGroupedByType = ContentHelper::groupArrayBy($contentPermissions, 'content_type');
 
         foreach ($contents as $index => $content) {
-            if(empty($contentPermissions)){
+            if (empty($contentPermissions)) {
                 $contents[$index]['permissions'] = [];
             } else {
                 $contents[$index]['permissions'] = array_merge(
                     $permissionRowsGroupedById[$content['id']] ?? [],
-                    (array_key_exists('type', $content) && array_key_exists($content['type'], $permissionRowsGroupedByType)) ? $permissionRowsGroupedByType[$content['type']] : []
+                    (array_key_exists('type', $content) &&
+                        array_key_exists($content['type'], $permissionRowsGroupedByType)) ?
+                        $permissionRowsGroupedByType[$content['type']] : []
                 );
             }
         }
