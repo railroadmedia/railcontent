@@ -118,7 +118,9 @@ class CommentRepository extends RepositoryBase
             ->restrictByVisibility()
             ->restrictByAssignedUserId()
             ->onlyComments()
+            ->selectLikeCounts()
             ->orderBy($this->orderBy, $this->orderDirection, $this->orderTable)
+            ->orderBy('created_on', 'desc', ConfigService::$tableComments)
             ->directPaginate($this->page, $this->limit);
 
         $rows = $query->getToArray();
