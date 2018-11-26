@@ -150,6 +150,9 @@ class CommentRepository extends RepositoryBase
                 $this->orderDirection,
                 ConfigService::$tableComments
             )
+            ->selectLikeCounts()
+            ->onlyComments()
+            ->orderBy('created_on', 'desc', ConfigService::$tableComments)
             ->directPaginate($this->page, $this->limit);
 
         $rows = $query->getToArray();
