@@ -17,6 +17,8 @@ class UserContentProgressEventListener extends Event
 
     public function handle(UserContentProgressSaved $event)
     {
-        $this->userContentProgressService->bubbleProgress($event->userId, $event->contentId);
+        if ($event->bubble) {
+            $this->userContentProgressService->bubbleProgress($event->userId, $event->contentId);
+        }
     }
 }

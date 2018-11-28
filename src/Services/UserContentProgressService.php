@@ -209,12 +209,12 @@ class UserContentProgressService
                             ->toDateTimeString(),
                     ]
                 );
+
+                event(new UserContentProgressSaved($userId, $child['child_id'], false));
             }
 
             $childIds = array_column($children, 'child_id');
         } while (count($children) > 0);
-
-        event(new UserContentsProgressReset($userId, $idsToDeleteFromCache));
 
         event(new UserContentProgressSaved($userId, $contentId));
 
