@@ -17,6 +17,7 @@ class ContentHierarchyRepository extends RepositoryBase
     {
         return $this->query()
             ->where(['parent_id' => $parentId, 'child_id' => $childId])
+            ->orderBy('child_position', 'asc')
             ->first();
     }
 
@@ -29,6 +30,7 @@ class ContentHierarchyRepository extends RepositoryBase
     {
         return $this->query()
             ->whereIn('parent_id', $parentIds)
+            ->orderBy('child_position', 'asc')
             ->get()
             ->toArray();
     }
@@ -43,6 +45,7 @@ class ContentHierarchyRepository extends RepositoryBase
         return $this->query()
             ->where('parent_id', $parentId)
             ->whereIn('child_id', $childIds)
+            ->orderBy('child_position', 'asc')
             ->get()
             ->toArray();
     }
