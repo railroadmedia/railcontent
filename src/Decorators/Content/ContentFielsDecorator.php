@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Decorators\Content;
 
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
-use Railroad\Railcontent\Support\Collection;
 use Railroad\Resora\Decorators\DecoratorInterface;
 
 class ContentFielsDecorator implements DecoratorInterface
@@ -30,17 +29,17 @@ class ContentFielsDecorator implements DecoratorInterface
         $contentFields =
             $this->contentFieldsRepository->query()
                 ->whereIn('content_id', $contentIds)
-                ->get();
+                ->get()
+                ->groupBy('content_id');
 
         foreach ($contents as $index => $content) {
-            $contents[$index]['fields'] = [];
-            foreach ($contentFields as $contentFieldIndex => $contentField) {
-                $contentField = (array)$contentField;
-                if ($contentField['content_id'] == $content['id']) {
-                    $contents[$index]['fields'][] = $contentField;
-                }
+            if(!array_key_exists('id', $content)){
+                $contents[$index]['fields'] = [];
+            } else {
+                $contents[$index]['fields'] = $contentFields[$content['id']] ?? [];
             }
         }
+
         return $contents;
     }
 }

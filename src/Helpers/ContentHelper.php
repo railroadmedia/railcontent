@@ -39,7 +39,7 @@ class ContentHelper
      */
     public static function getFieldValue(array $content, $key, $position = 1, $type = null)
     {
-        if (empty($content['fields']) || !is_array($content['fields'])) {
+        if (empty($content['fields'])) {
             return null;
         }
 

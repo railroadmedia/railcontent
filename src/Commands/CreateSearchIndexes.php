@@ -50,38 +50,41 @@ class CreateSearchIndexes extends Command
      */
     public function handle()
     {
+        $this->info('CreateSearchIndexesForContents starting.');
+
         ContentRepository::$availableContentStatues = ConfigService::$indexableContentStatuses;
         ContentRepository::$pullFutureContent = false;
 
         $this->searchRepository->deleteOldIndexes();
-        $contents = $this->contentRepository->query()->selectPrimaryColumns()
-            ->restrictByTypes(ConfigService::$searchableContentTypes)
-            ->orderBy('id')
-        ->get();
-        $contentsChunks = $contents->chunk(100);
 
-                foreach ($contents as $content) {
+        $contents =
+            $this->contentRepository->query()
+                ->selectPrimaryColumns()
+                ->restrictByTypes(ConfigService::$searchableContentTypes)
+                ->restrictBrand()
+                ->orderBy('id')
+                ->get();
 
-                    $searchInsertData = [
-                        'high_value' => $this->searchRepository->query()->prepareIndexesValues('high_value', $content),
-                        'medium_value' => $this->searchRepository->query()->prepareIndexesValues('medium_value', $content),
-                        'low_value' => $this->searchRepository->query()->prepareIndexesValues('low_value', $content),
-                        'brand' => $content['brand'],
-                        'content_type' => $content['type'],
-                        'content_status' => $content['status'],
-                        'content_published_on' => $content['published_on'] ?? Carbon::now(),
-                        'created_at' => Carbon::now()->toDateTimeString()
-                    ];
+        foreach ($contents as $content) {
+            $searchInsertData = [
+                'content_id' => $content['id'],
+                'high_value' => $this->searchRepository->query()
+                    ->prepareIndexesValues('high_value', $content),
+                'medium_value' => $this->searchRepository->query()
+                    ->prepareIndexesValues('medium_value', $content),
+                'low_value' => $this->searchRepository->query()
+                    ->prepareIndexesValues('low_value', $content),
+                'brand' => $content['brand'],
+                'content_type' => $content['type'],
+                'content_status' => $content['status'],
+                'content_published_on' => $content['published_on'] ?? Carbon::now(),
+                'created_at' => Carbon::now()
+                    ->toDateTimeString(),
+            ];
 
-                    $this->searchRepository->updateOrCreate(
-                        ['content_id' => $content['id']],
-                        $searchInsertData,
-                        'content_id'
-                    );
-                }
-
-        //dd($contents);
+            $this->searchRepository->query()
+                ->insert($searchInsertData);
+        }
+        $this->info('CreateSearchIndexesForContents complete.');
     }
-
-
 }

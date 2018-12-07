@@ -11,6 +11,7 @@ use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 use Illuminate\Support\Facades\DB;
 use Railroad\Resora\Decorators\Decorator;
+use Railroad\Resora\Entities\Entity;
 
 class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
@@ -60,60 +61,7 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
         ))
             ->from(ConfigService::$tableContent);
     }
-
-    protected function decorate($results)
-    {
-        return Decorator::decorate($results, 'content');
-    }
-
-    public function createSearchIndexes()
-    {
-        //delete old indexes
-        $this->deleteOldIndexes();
-
-        $query = $this->contentQuery()
-            ->selectPrimaryColumns()
-            ->restrictByTypes(ConfigService::$searchableContentTypes)
-            ->orderBy('id');
-
-        $query->chunk(
-            100,
-            function ($query) {
-
-                $contentFieldRows = $this->fieldRepository->query()->getByContentIds($query->pluck('id')->toArray());
-                $contentDatumRows = $this->datumRepository->query()->getByContentIds($query->pluck('id')->toArray());
-                dd($query);
-                $fieldRowsGrouped = ContentHelper::groupArrayBy($contentFieldRows, 'content_id');
-                $datumRowsGrouped = ContentHelper::groupArrayBy($contentDatumRows, 'content_id');
-
-                // insert new indexes in the DB
-                foreach ($query as $content) {
-                    $content['fields'] = $fieldRowsGrouped[$content['id']] ?? [];
-                    $content['data'] = $datumRowsGrouped[$content['id']] ?? [];
-
-                    $searchInsertData = [
-                        'high_value' => $this->prepareIndexesValues('high_value', $content),
-                        'medium_value' => $this->prepareIndexesValues('medium_value', $content),
-                        'low_value' => $this->prepareIndexesValues('low_value', $content),
-                        'brand' => $content['brand'],
-                        'content_type' => $content['type'],
-                        'content_status' => $content['status'],
-                        'content_published_on' => $content['published_on'] ?? Carbon::now(),
-                        'created_at' => Carbon::now()->toDateTimeString()
-                    ];
-
-                    $this->query()->updateOrCreate(
-                        ['content_id' => $content['id'],],
-                        $searchInsertData,
-                        'content_id'
-                    );
-                }
-            }
-        );
-
-        DB::statement('OPTIMIZE table '.ConfigService::$tableSearchIndexes);
-    }
-
+    
     /** Delete old indexes for the brand
      *
      * @return mixed
@@ -167,7 +115,11 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
 
         if (in_array('*', $configSearchIndexValues['data_keys'])) {
             foreach ($content['data'] as $data) {
-                $values[] = $data['value'];
+                if(($field['value'] instanceof Entity)){
+                    continue;
+                } else {
+                    $values[] = $field['value'];
+                }
             }
         } else {
             foreach ($configSearchIndexValues['data_keys'] as $dataKey) {

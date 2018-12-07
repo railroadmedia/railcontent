@@ -24,18 +24,17 @@ class ContentDataDecorator implements DecoratorInterface
         $contentData =
             $this->contentDatumRepository->query()
                 ->whereIn('content_id', $contentIds)
-                ->get();
+                ->get()
+                ->groupBy('content_id');
 
         foreach ($contents as $index => $content) {
-            $contents[$index]['data'] = [];
-            foreach ($contentData as $contentDataIndex => $data) {
-               // $contentField = (array)$contentField;
-                if ($data['content_id'] == $content['id']) {
-                     $contents[$index]['data'][] = $data;
-                }
+            if(!array_key_exists('id', $content)){
+                $contents[$index]['data'] = [];
+            } else {
+                $contents[$index]['data'] = $contentData[$content['id']] ?? [];
             }
         }
-        //print_r($contents);
+
         return $contents;
     }
 }
