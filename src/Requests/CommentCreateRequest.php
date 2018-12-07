@@ -26,6 +26,11 @@ class CommentCreateRequest extends FormRequest
      */
     public function rules()
     {
+        $availableContentStatues = config('railcontent.commentable-content-types');
+        if($availableContentStatues){
+            ContentRepository::$availableContentStatues = $availableContentStatues;
+        }
+
         return [
             'comment' => 'required|max:10024',
             'content_id' =>

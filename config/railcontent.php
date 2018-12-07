@@ -151,7 +151,7 @@ return [
     ],
 
     // event to job listeners/map
-    'event_to_job_map' => [
+    'event_to_job_map' => [],
 
-    ]
+    #'commentable-content-types' => [],
 ];
