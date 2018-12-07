@@ -89,7 +89,9 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
 
         if (in_array('*', $configSearchIndexValues['field_keys'])) {
             foreach ($content['fields'] as $field) {
-                if (!is_array($field['value'])) {
+                if(($field['value'] instanceof Entity)){
+                    continue;
+                } else {
                     $values[] = $field['value'];
                 }
             }
@@ -115,11 +117,7 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
 
         if (in_array('*', $configSearchIndexValues['data_keys'])) {
             foreach ($content['data'] as $data) {
-                if(($field['value'] instanceof Entity)){
-                    continue;
-                } else {
-                    $values[] = $field['value'];
-                }
+                $values[] = $data['value'];
             }
         } else {
             foreach ($configSearchIndexValues['data_keys'] as $dataKey) {
