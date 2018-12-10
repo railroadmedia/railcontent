@@ -42,7 +42,7 @@ class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      *
      * @var array|bool
      */
-    public static $bypassPermissions = false;
+    public static $bypassPermissions = true;
 
     private $requiredFields = [];
     private $includedFields = [];

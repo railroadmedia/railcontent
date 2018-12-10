@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Repositories\QueryBuilders\FullTextSearchQueryBuilder;
@@ -89,7 +90,7 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
 
         if (in_array('*', $configSearchIndexValues['field_keys'])) {
             foreach ($content['fields'] as $field) {
-                if(($field['value'] instanceof Entity)){
+                if(($field['value'] instanceof Entity) || $field['value'] instanceof ContentEntity){
                     continue;
                 } else {
                     $values[] = $field['value'];
@@ -97,19 +98,19 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
             }
         } else {
             foreach ($configSearchIndexValues['field_keys'] as $fieldKey) {
-                $conff = explode(':', $fieldKey);
-                if (count($conff) == 2) {
+                $conf = explode(':', $fieldKey);
+                if (count($conf) == 2) {
                     $values = array_merge(
                         $values,
                         ContentHelper::getFieldSubContentValues(
                             $content,
-                            $conff[0],
-                            $conff[1]
+                            $conf[0],
+                            $conf[1]
                         )
                     );
                 } else {
-                    if (count($conff) == 1) {
-                        $values = array_merge($values, ContentHelper::getFieldValues($content, $conff[0]));
+                    if (count($conf) == 1) {
+                        $values = array_merge($values, ContentHelper::getFieldValues($content, $conf[0]));
                     }
                 }
             }
@@ -124,7 +125,13 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
                 $values = array_merge($values, ContentHelper::getDatumValues($content, $dataKey));
             }
         }
-        return implode(' ', $values);
+
+        try {
+            return implode(' ', $values);
+
+        } catch (\Exception $e) {
+dd($values);
+        }
     }
 
     /**
