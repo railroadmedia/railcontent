@@ -126,12 +126,7 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
             }
         }
 
-        try {
-            return implode(' ', $values);
-
-        } catch (\Exception $e) {
-dd($values);
-        }
+        return implode(' ', $values);
     }
 
     /**
