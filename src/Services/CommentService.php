@@ -262,7 +262,7 @@ class CommentService
             }
 
             if($results['total_results'] > 0){
-                $contentIds = array_pluck(array_values($results['results']), 'content_id');
+                $contentIds = $results['results']->pluck('content_id');
             } else {
                 $contentIds = null;
             }

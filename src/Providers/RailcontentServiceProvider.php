@@ -2,23 +2,18 @@
 
 namespace Railroad\Railcontent\Providers;
 
-use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Validator;
-use PDO;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
-use Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator;
 use Railroad\Railcontent\Decorators\Content\ContentChildsAndParentsDecorator;
 use Railroad\Railcontent\Decorators\Content\ContentDataDecorator;
 use Railroad\Railcontent\Decorators\Content\ContentDecorator;
 use Railroad\Railcontent\Decorators\Content\ContentFielsDecorator;
 use Railroad\Railcontent\Decorators\Content\ContentPermissionsDecorator;
-use Railroad\Railcontent\Decorators\Entity\CommentEntityDecorator;
-use Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator;
 use Railroad\Railcontent\Decorators\Hierarchy\ContentSlugHierarchyDecorator;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
@@ -126,6 +121,12 @@ class RailcontentServiceProvider extends ServiceProvider
                 config()->get('railcontent.decorators.content', [])
             )
         );
+
+        config()->set(
+            'resora.decorators.comment',
+            config()->get('railcontent.decorators.comment', [])
+        );
+
         config()->set(
             'resora.decorators.content-field',
             array_merge(
@@ -135,6 +136,7 @@ class RailcontentServiceProvider extends ServiceProvider
                 ]
             )
         );
+
         config()->set('resora.default_connection_name', ConfigService::$databaseConnectionName);
     }
 

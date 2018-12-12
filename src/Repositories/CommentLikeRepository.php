@@ -69,7 +69,7 @@ class CommentLikeRepository extends \Railroad\Resora\Repositories\RepositoryBase
         foreach ($commentIds as $commentIdIndex => $commentId) {
             if ($commentIdIndex > 0) {
                 $query->unionAll(
-                    $this->query()
+                    $this->newQuery()
                         ->select(['comment_id', 'user_id'])
                         ->where('comment_id', $commentId)
                         ->orderBy('created_on', 'desc')

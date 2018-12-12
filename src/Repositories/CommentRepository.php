@@ -7,6 +7,8 @@ use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Support\Collection;
+use Railroad\Resora\Decorators\Decorator;
 
 class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
 {
@@ -63,6 +65,11 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
     protected $orderTableName;
     protected $orderTable;
 
+    protected function decorate($results)
+    {
+        return Decorator::decorate($results, 'comment');
+    }
+
     /**
      * @param integer $id
      * @return array|null
@@ -79,7 +86,7 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
 
         return $row;
     }
-    
+
     /** Set the pagination parameters
      * @param int $page
      * @param int $limit
@@ -122,9 +129,9 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
             ->orderBy($this->orderBy, $this->orderDirection, $this->orderTable)
             ->directPaginate($this->page, $this->limit);
 
-        $rows = $query->getToArray();
+        $rows = $query->get();
 
-        $repliesRows =  $this->getRepliesByCommentIds(array_column($rows, 'id'));
+        $repliesRows =  $this->getRepliesByCommentIds($rows->pluck('id')->toArray());
 
         return $this->parseRows($rows, $repliesRows);
     }
@@ -395,27 +402,16 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
         $repliesRowsGrouped = ContentHelper::groupArrayBy($repliesRows, 'parent_id');
 
         foreach($rows as $row){
-            $comment = [
-                'id' => $row->id,
-                'comment' => $row->comment,
-                'content_id' => $row->content_id,
-
-                'parent_id' => $row->parent_id,
-                'user_id' => $row->user_id,
-                'display_name' => $row->display_name,
-                'created_on' => $row->created_on,
-                'deleted_at' => $row->deleted_at,
-                'replies' => $repliesRowsGrouped[$row->id] ?? []
-            ];
+            $row['replies'] = $repliesRowsGrouped[$row['id']] ?? [];
 
             if (!empty($comment->assigned_on)) {
-                $comment['assigned_on'] = $row->assigned_on;
+                $row['assigned_on'] = $row['assigned_on'];
             }
 
-            $results[] = $comment;
+            $results[] = $row;
         }
 
-        return $results;
+        return new Collection($results);
     }
 
     /** Pull all the comment's replies
