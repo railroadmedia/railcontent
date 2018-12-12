@@ -229,13 +229,13 @@ class UserContentProgressService
         $childIds = [$contentId];
 
         do {
-            $children = $this->contentHierarchyService->query()->getByParentIds($childIds);
+            $children = $this->contentHierarchyService->getByParentIds($childIds);
 
             foreach ($children as $child) {
                 $idsToDelete[] = $child['child_id'];
             }
 
-            $childIds = array_column($children, 'child_id');
+            $childIds = $children->pluck('child_id');
         } while (count($children) > 0);
 
         $this->userContentRepository->query()
