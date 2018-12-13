@@ -235,7 +235,7 @@ class UserContentProgressService
                 $idsToDelete[] = $child['child_id'];
             }
 
-            $childIds = $children->pluck('child_id');
+            $childIds = $children->pluck('child_id')->toArray();
         } while (count($children) > 0);
 
         $this->userContentRepository->query()
