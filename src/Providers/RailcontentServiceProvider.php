@@ -89,6 +89,7 @@ class RailcontentServiceProvider extends ServiceProvider
 
         //load package routes file
         $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
+        $this->loadRoutesFrom(__DIR__ . '/../../routes/api.php');
 
         $this->commands(
             [
@@ -179,6 +180,9 @@ class RailcontentServiceProvider extends ServiceProvider
 
         // middlware
         ConfigService::$controllerMiddleware = config('railcontent.controller_middleware');
+
+        // api middleware
+        ConfigService::$apiMiddleware = config('railcontent.api_middleware');
 
         // validation rules defined for each brand and content type
         ConfigService::$validationRules = config('railcontent.validation');
