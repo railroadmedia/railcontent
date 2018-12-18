@@ -81,7 +81,7 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
         if ($row) {
             $repliesRows = $this->getRepliesByCommentIds(array_column([$row], 'id'));
             $parsedRows = $this->parseRows([$row], $repliesRows);
-            $row = reset($parsedRows);
+            $row = $parsedRows->first();
         }
 
         return $row;
