@@ -23,6 +23,20 @@ return [
         'en-US',
     ],
 
+    'development_mode' => true,
+
+    // database
+    'database_name' => 'mydb',
+    'database_user' => 'root',
+    'database_password' => 'root',
+    'database_host' => 'mysql',
+    'database_driver' => 'pdo_mysql',
+    'database_in_memory' => false,
+
+    // cache
+    'redis_host' => 'redis',
+    'redis_port' => 6379,
+
     // if you have any of these middleware classes in your global http kernel, they must be removed from this array
     'controller_middleware' => [
         \Illuminate\Cookie\Middleware\EncryptCookies::class,

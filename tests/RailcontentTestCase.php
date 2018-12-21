@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests;
 
 use Carbon\Carbon;
+use Doctrine\ORM\EntityManager;
 use Dotenv\Dotenv;
 use Exception;
 use Faker\Generator;
@@ -12,6 +13,7 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Permissions\Providers\PermissionsServiceProvider;
@@ -61,9 +63,25 @@ class RailcontentTestCase extends BaseTestCase
      */
     protected $connectionType = 'testbench';
 
+    /**
+     * @var EntityManager
+     */
+    protected $entityManager;
+
     protected function setUp()
     {
         parent::setUp();
+
+        // Run the schema update tool using our entity metadata
+        $this->entityManager = app(EntityManager::class);
+
+        $this->entityManager->getMetadataFactory()
+            ->getCacheDriver()
+            ->deleteAll();
+
+        // make sure laravel is using the same connection
+        DB::connection()->setPdo($this->entityManager->getConnection()->getWrappedConnection());
+        DB::connection()->setReadPdo($this->entityManager->getConnection()->getWrappedConnection());
 
         $this->artisan('migrate:fresh', []);
         $this->artisan('cache:clear', []);
@@ -134,23 +152,28 @@ class RailcontentTestCase extends BaseTestCase
 
         // setup default database to use sqlite :memory:
         $app['config']->set('database.default', $this->getConnectionType());
-        $app['config']->set(
-            'database.connections.mysql',
-            [
-                'driver' => 'mysql',
-                'host' => 'mysql',
-                'port' => env('MYSQL_PORT', '3306'),
-                'database' => env('MYSQL_DB', 'railcontent'),
-                'username' => 'root',
-                'password' => 'root',
-                'charset' => 'utf8',
-                'collation' => 'utf8_general_ci',
-                'prefix' => '',
-                'options' => [
-                    \PDO::ATTR_PERSISTENT => true,
-                ]
-            ]
-        );
+//        $app['config']->set(
+//            'database.connections.mysql',
+//            [
+//                'driver' => 'mysql',
+//                'host' => 'mysql',
+//                'port' => env('MYSQL_PORT', '3306'),
+//                'database' => env('MYSQL_DB', 'railcontent'),
+//                'username' => 'root',
+//                'password' => 'root',
+//                'charset' => 'utf8',
+//                'collation' => 'utf8_general_ci',
+//                'prefix' => '',
+//                'options' => [
+//                    \PDO::ATTR_PERSISTENT => true,
+//                ]
+//            ]
+//        );
+        // database
+        config()->set('railcontent.database_user', 'root');
+        config()->set('railcontent.database_password', 'root');
+        config()->set('railcontent.database_driver', 'pdo_sqlite');
+        config()->set('railcontent.database_in_memory', true);
 
         $app['config']->set(
             'database.connections.testbench',

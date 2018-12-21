@@ -2,6 +2,14 @@
 
 namespace Railroad\Railcontent\Providers;
 
+use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\Common\Annotations\AnnotationRegistry;
+use Doctrine\Common\Annotations\CachedReader;
+use Doctrine\Common\Cache\RedisCache;
+use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
+use Doctrine\ORM\Configuration;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
@@ -237,6 +245,89 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // setup doctrine
+        // this is where proxy class files will be stored
+        $proxyDir = sys_get_temp_dir();
 
+        // redis cache
+        $redis = new \Redis();
+        $redis->connect('redis', 6379);
+
+        $redisCache = new RedisCache();
+        $redisCache->setRedis($redis);
+
+        // annotations
+        // setup default doctrine annotations
+//        \Doctrine\Common\Annotations\AnnotationRegistry::registerFile(
+//            __DIR__ . '/../../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php'
+//        );
+
+        AnnotationRegistry::registerLoader('class_exists');
+
+        // setup annotation reader
+        $annotationReader = new AnnotationReader();
+        $cachedAnnotationReader = new CachedReader(
+            $annotationReader, $redisCache
+        );
+
+        // setup annotation driver chain
+        $driverChain = new MappingDriverChain();
+
+        \Gedmo\DoctrineExtensions::registerAbstractMappingIntoDriverChainORM(
+            $driverChain,
+            $cachedAnnotationReader
+        );
+
+        $annotationDriver = new AnnotationDriver(
+            $cachedAnnotationReader, [__DIR__ . '/../Entities']
+        );
+
+        $driverChain->addDriver($annotationDriver, 'Railroad\Railcontent\Entities');
+
+        // setup event listeners for timestampable trait
+        $timestampableListener = new \Gedmo\Timestampable\TimestampableListener();
+        $timestampableListener->setAnnotationReader($cachedAnnotationReader);
+
+        // setup event manager
+        $eventManager = new \Doctrine\Common\EventManager();
+        $eventManager->addEventSubscriber($timestampableListener);
+
+        // setup config
+        $ormConfiguration = new Configuration();
+        $ormConfiguration->setMetadataCacheImpl($redisCache);
+        $ormConfiguration->setQueryCacheImpl($redisCache);
+        $ormConfiguration->setResultCacheImpl($redisCache);
+        $ormConfiguration->setProxyDir($proxyDir);
+        $ormConfiguration->setProxyNamespace('DoctrineProxies');
+        $ormConfiguration->setAutoGenerateProxyClasses(config('railcontent.development_mode'));
+        $ormConfiguration->setMetadataDriverImpl($driverChain);
+        $ormConfiguration->setNamingStrategy(new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy(CASE_LOWER));
+
+        // create entity manager with proper db details
+        if (config('railcontent.database_in_memory') === true) {
+            $databaseOptions = [
+                'driver' => config('railcontent.database_driver'),
+                'dbname' => config('railcontent.database_name'),
+                'user' => config('railcontent.database_user'),
+                'password' => config('railcontent.database_password'),
+                'host' => config('railcontent.database_host'),
+            ];
+        } else {
+            $databaseOptions = [
+                'driver' => config('railcontent.database_driver'),
+                'user' => config('railcontent.database_user'),
+                'password' => config('railcontent.database_password'),
+                'memory' => true,
+            ];
+        }
+
+        $entityManager = EntityManager::create(
+            $databaseOptions,
+            $ormConfiguration,
+            $eventManager
+        );
+
+        // register the entity manager as a singleton
+        app()->instance(EntityManager::class, $entityManager);
     }
 }
