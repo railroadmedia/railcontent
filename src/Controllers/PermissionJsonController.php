@@ -2,8 +2,12 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Doctrine\ORM\EntityManager;
 use Illuminate\Routing\Controller;
+use JMS\Serializer\SerializerBuilder;
+use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Exceptions\NotFoundException;
+use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Requests\PermissionAssignRequest;
 use Railroad\Railcontent\Requests\PermissionDissociateRequest;
 use Railroad\Railcontent\Requests\PermissionRequest;
@@ -21,6 +25,16 @@ use Symfony\Component\HttpFoundation\Request;
 class PermissionJsonController extends Controller
 {
     /**
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    /**
+     * @var PermissionRepository
+     */
+    private $permissionRepository;
+
+    /**
      * @var PermissionService
      */
     private $permissionService;
@@ -34,6 +48,8 @@ class PermissionJsonController extends Controller
      */
     private $permissionPackageService;
 
+    private $serializer;
+
     /**
      * PermissionController constructor.
      *
@@ -41,13 +57,21 @@ class PermissionJsonController extends Controller
      * @param ContentPermissionService $contentPermissionService
      */
     public function __construct(
-        PermissionService $permissionService,
-        ContentPermissionService $contentPermissionService,
+        EntityManager $entityManager,
+        //        PermissionService $permissionService,
+        //        ContentPermissionService $contentPermissionService,
         \Railroad\Permissions\Services\PermissionService $permissionPackageService
     ) {
-        $this->permissionService = $permissionService;
-        $this->contentPermissionService = $contentPermissionService;
+        //        $this->permissionService = $permissionService;
+        //        $this->contentPermissionService = $contentPermissionService;
         $this->permissionPackageService = $permissionPackageService;
+
+        $this->entityManager = $entityManager;
+        $this->permissionRepository = $this->entityManager->getRepository(Permission::class);
+
+        $this->serializer =
+            SerializerBuilder::create()
+                ->build();
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -60,16 +84,12 @@ class PermissionJsonController extends Controller
      */
     public function index(Request $request)
     {
+
         $this->permissionPackageService->canOrThrow(auth()->id(), 'pull.permissions');
 
-        $permissions = $this->permissionService->getAll();
+        $permissions = $this->permissionRepository->findAll();
 
-        return reply()->json(
-            $permissions,
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return response($this->serializer->serialize($permissions, 'json'));
     }
 
     /**
@@ -82,17 +102,14 @@ class PermissionJsonController extends Controller
     {
         $this->permissionPackageService->canOrThrow(auth()->id(), 'create.permission');
 
-        $permission = $this->permissionService->create(
-            $request->input('name'),
-            $request->input('brand')
-        );
+        $permission = new Permission();
+        $permission->setName($request->get('name'));
+        $permission->setBrand($request->get('brand', ConfigService::$brand));
 
-        return reply()->json(
-            [$permission],
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        $this->entityManager->persist($permission);
+        $this->entityManager->flush();
+
+        return response($this->serializer->serialize($permission, 'json'));
     }
 
     /**
@@ -107,24 +124,20 @@ class PermissionJsonController extends Controller
     {
         $this->permissionPackageService->canOrThrow(auth()->id(), 'update.permission');
 
-        $permission = $this->permissionService->update(
-            $id,
-            $request->input('name'),
-            $request->input('brand')
-        );
-
+        $permission = $this->permissionRepository->find($id);
         throw_unless(
             $permission,
             new NotFoundException('Update failed, permission not found with id: ' . $id)
         );
 
-        return reply()->json(
-            [$permission],
-            [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
-            ]
-        );
+        $permission->setName($request->get('name'), $permission->getName());
+        $permission->setBrand($request->get('brand', $permission->getBrand()));
+
+        $this->entityManager->persist($permission);
+        $this->entityManager->flush();
+
+        return response($this->serializer->serialize($permission, 'json'), 201);
+
     }
 
     /**
@@ -137,15 +150,17 @@ class PermissionJsonController extends Controller
     public function delete($id)
     {
         $this->permissionPackageService->canOrThrow(auth()->id(), 'delete.permission');
-
-        $deleted = $this->permissionService->delete($id);
+        $permission = $this->permissionRepository->find($id);
 
         throw_unless(
-            $deleted,
+            $permission,
             new NotFoundException('Delete failed, permission not found with id: ' . $id)
         );
 
-        return reply()->json(null, ['code' => 204]);
+        $this->entityManager->remove($permission);
+        $this->entityManager->flush();
+
+        return response(null, 204);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Railroad\Railcontent\DataFixtures\PermissionFixtureLoader;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\PermissionsFactory;
@@ -11,6 +12,8 @@ use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PermissionService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
 class PermissionControllerTest extends RailcontentTestCase
 {
@@ -42,15 +45,43 @@ class PermissionControllerTest extends RailcontentTestCase
     {
         parent::setUp();
 
-        $this->serviceBeingTested = $this->app->make(PermissionService::class);
-        $this->classBeingTested = $this->app->make(PermissionRepository::class);
-        $this->contentPermissionService = $this->app->make(ContentPermissionService::class);
+        $purger = new ORMPurger();
 
-        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
-        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
+        $executor = new ORMExecutor($this->entityManager, $purger);
+        // dd($this->entityManager);
+        $executor->execute([app(PermissionFixtureLoader::class)]);
+        //
+        //        $this->serviceBeingTested = $this->app->make(PermissionService::class);
+        //        $this->classBeingTested = $this->app->make(PermissionRepository::class);
+        //        $this->contentPermissionService = $this->app->make(ContentPermissionService::class);
+        //
+        //        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
+        //        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
+        //        $this->contentFactory = $this->app->make(ContentFactory::class);
+        //
+        //        $this->userId = $this->createAndLogInNewUser();
+    }
 
-        $this->userId = $this->createAndLogInNewUser();
+    public function test_index()
+    {
+        $this->permissionServiceMock->method('canOrThrow')
+            ->willReturn(true);
+        $response = $this->call(
+            'GET',
+            'railcontent/permission'
+        );
+
+        $this->assertEquals(
+            [
+                [
+                    'id' => 1,
+                    'name' => 'permission 1',
+                    'brand' => ConfigService::$brand,
+                ],
+            ],
+            $response->decodeResponseJson()
+        );
+
     }
 
     public function test_store_response()
@@ -60,7 +91,7 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $name = $this->faker->word;
         $permission = [
-            'id' => 1,
+            'id' => 2,
             'name' => $name,
         ];
 
@@ -75,7 +106,7 @@ class PermissionControllerTest extends RailcontentTestCase
         $this->assertEquals(200, $response->status());
         $this->assertEquals(
             array_add($permission, 'brand', ConfigService::$brand),
-            $response->decodeResponseJson('data')[0]
+            $response->decodeResponseJson()
         );
     }
 
@@ -95,29 +126,13 @@ class PermissionControllerTest extends RailcontentTestCase
         );
     }
 
-    public function test_new_permission_returned_after_store_service()
-    {
-        $name = $this->faker->word;
-
-        $permission = $this->serviceBeingTested->create($name);
-
-        $expectedResult = [
-            'id' => 1,
-            'name' => $name,
-        ];
-
-        $this->assertEquals(array_add($expectedResult, 'brand', ConfigService::$brand), $permission->getArrayCopy());
-    }
-
     public function test_update_response()
     {
-        $permission = $this->permissionFactory->create();
-
         $name = $this->faker->word;
 
         $response = $this->call(
             'PATCH',
-            'railcontent/permission/' . $permission['id'],
+            'railcontent/permission/' . 1,
             [
                 'name' => $name,
             ]
@@ -127,12 +142,8 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $response->assertJson(
             [
-                'data' => [
-                    [
-                        'id' => '1',
-                        'name' => $name,
-                    ],
-                ],
+                'id' => '1',
+                'name' => $name,
             ]
         );
     }
@@ -141,10 +152,11 @@ class PermissionControllerTest extends RailcontentTestCase
     {
 
         $name = $this->faker->word;
+        $id = rand(2, 10);
 
         $response = $this->call(
             'PATCH',
-            'railcontent/permission/1',
+            'railcontent/permission/' . $id,
             [
                 'name' => $name,
             ]
@@ -153,16 +165,14 @@ class PermissionControllerTest extends RailcontentTestCase
         $this->assertEquals(404, $response->status());
 
         $this->assertEquals(
-            'Update failed, permission not found with id: 1',
+            'Update failed, permission not found with id: ' . $id,
             $response->decodeResponseJson('meta')['errors']['detail']
         );
     }
 
     public function test_update_validation()
     {
-        $permission = $this->permissionFactory->create();
-
-        $response = $this->call('PATCH', 'railcontent/permission/' . $permission['id']);
+        $response = $this->call('PATCH', 'railcontent/permission/1');
 
         $this->assertEquals(422, $response->status());
 
@@ -174,25 +184,9 @@ class PermissionControllerTest extends RailcontentTestCase
         $this->assertEquals([$expectedErrors], $response->decodeResponseJson('meta')['errors']);
     }
 
-    public function test_updated_permission_returned_after_update_service()
+     public function test_delete_permission_response()
     {
-        $permission = $this->permissionFactory->create();
-
-        $newName = $this->faker->word;
-
-        $updatedPermission = $this->serviceBeingTested->update($permission['id'], $newName);
-
-        $permission['name'] = $newName;
-        $permission['brand'] = ConfigService::$brand;
-
-        $this->assertEquals($permission, $updatedPermission);
-    }
-
-    public function test_delete_permission_response()
-    {
-        $permission = $this->permissionFactory->create();
-
-        $response = $this->call('DELETE', 'railcontent/permission/' . $permission['id']);
+        $response = $this->call('DELETE', 'railcontent/permission/1');
 
         $this->assertEquals(204, $response->status());
         $this->assertEquals('', $response->content());
@@ -200,46 +194,16 @@ class PermissionControllerTest extends RailcontentTestCase
 
     public function test_delete_missing_permission_response()
     {
-        $response = $this->call('DELETE', 'railcontent/permission/1');
+        $id = rand(2,10);
+        $response = $this->call('DELETE', 'railcontent/permission/'.$id);
 
         $this->assertEquals(404, $response->status());
         $this->assertEquals(
-            'Delete failed, permission not found with id: 1',
+            'Delete failed, permission not found with id: '.$id,
             $response->decodeResponseJson('meta')['errors']['detail']
         );
     }
 
-    public function test_delete_permission_service_result()
-    {
-        $permission = $this->permissionFactory->create();
-        $assignPemission = $this->contentPermissionFactory->create(rand(), null, $permission['id']);
-        $assignPemission2 = $this->contentPermissionFactory->create(rand(), null, $permission['id']);
-
-        $delete = $this->serviceBeingTested->delete($permission['id']);
-
-        $this->assertDatabaseMissing(
-            ConfigService::$tableContentPermissions,
-            [
-                'id' => $assignPemission['id'],
-            ]
-        );
-
-        $this->assertDatabaseMissing(
-            ConfigService::$tablePermissions,
-            [
-                'name' => $permission['name'],
-            ]
-        );
-
-        $this->assertTrue($delete);
-    }
-
-    public function test_delete_permission_when_permission_not_exist_service_result()
-    {
-        $delete = $this->serviceBeingTested->delete(1);
-
-        $this->assertNull($delete);
-    }
 
     public function test_assign_permission_to_specific_content()
     {
