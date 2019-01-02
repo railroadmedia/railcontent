@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Services;
 
-use App\Services\ContentTypes;
 use Carbon\Carbon;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +20,6 @@ use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\ContentVersionRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Support\Collection;
 
@@ -31,11 +29,6 @@ class ContentService
      * @var ContentRepository
      */
     private $contentRepository;
-
-    /**
-     * @var ContentVersionRepository
-     */
-    private $versionRepository;
 
     /**
      * @var ContentFieldRepository
@@ -83,7 +76,6 @@ class ContentService
      * ContentService constructor.
      *
      * @param ContentRepository $contentRepository
-     * @param ContentVersionRepository $versionRepository
      * @param ContentFieldRepository $fieldRepository
      * @param ContentDatumRepository $datumRepository
      * @param ContentHierarchyRepository $contentHierarchyRepository
@@ -94,7 +86,6 @@ class ContentService
      */
     public function __construct(
         ContentRepository $contentRepository,
-        ContentVersionRepository $versionRepository,
         ContentFieldRepository $fieldRepository,
         ContentDatumRepository $datumRepository,
         ContentHierarchyRepository $contentHierarchyRepository,
@@ -104,7 +95,6 @@ class ContentService
         UserContentProgressRepository $userContentProgressRepository
     ) {
         $this->contentRepository = $contentRepository;
-        $this->versionRepository = $versionRepository;
         $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
         $this->contentHierarchyRepository = $contentHierarchyRepository;

@@ -2,19 +2,15 @@
 
 namespace Railroad\Railcontent\Events;
 
+
 use Illuminate\Support\Facades\Event;
 
 class ContentFieldCreated extends Event
 {
-    /** @var array */
-    public $newField;
+    public $contentId;
 
-    /** @var array */
-    public $input;
-
-    public function __construct(array $newField, array $input)
+    public function __construct($contentId)
     {
-        $this->newField = $newField;
-        $this->input = $input;
+        $this->contentId = $contentId;
     }
 }

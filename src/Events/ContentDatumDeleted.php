@@ -7,11 +7,9 @@ use Illuminate\Support\Facades\Event;
 class ContentDatumDeleted extends Event
 {
     public $contentId;
-    public $datum;
 
-    public function __construct($contentId, $datum)
+    public function __construct($contentId)
     {
         $this->contentId = $contentId;
-        $this->datum = $datum;
     }
 }

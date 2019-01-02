@@ -7,11 +7,9 @@ use Illuminate\Support\Facades\Event;
 class ContentDatumCreated extends Event
 {
     public $contentId;
-    public $input;
 
-    public function __construct($contentId, $input)
+    public function __construct($contentId)
     {
         $this->contentId = $contentId;
-        $this->input = $input;
     }
 }

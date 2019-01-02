@@ -2,23 +2,15 @@
 
 namespace Railroad\Railcontent\Events;
 
+
 use Illuminate\Support\Facades\Event;
 
 class ContentFieldUpdated extends Event
 {
-    /**
-     * @var array
-     */
-    public $newField;
+    public $contentId;
 
-    /**
-     * @var array
-     */
-    public $oldFieldData;
-
-    public function __construct(array $newField, array $oldFieldData)
+    public function __construct($contentId)
     {
-        $this->newField = $newField;
-        $this->oldFieldData = $oldFieldData;
+        $this->contentId = $contentId;
     }
 }

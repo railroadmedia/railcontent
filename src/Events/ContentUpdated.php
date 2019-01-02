@@ -7,13 +7,9 @@ use Illuminate\Support\Facades\Event;
 class ContentUpdated extends Event
 {
     public $contentId;
-    public $contentArray;
-    public $data;
 
-    public function __construct($contentId, $contentArray, $data)
+    public function __construct($contentId)
     {
         $this->contentId = $contentId;
-        $this->contentArray = $contentArray;
-        $this->data = $data;
     }
 }
