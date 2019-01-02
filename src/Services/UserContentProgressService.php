@@ -192,7 +192,7 @@ class UserContentProgressService
         $idsToDeleteFromCache = [];
 
         do {
-            $children = $this->contentHierarchyService->getByParentIds($childIds);
+            $children = $this->contentHierarchyService->getByParentIds($childIds)->toArray();
 
             foreach ($children as $child) {
                 $idsToDeleteFromCache[] = $child['child_id'];
