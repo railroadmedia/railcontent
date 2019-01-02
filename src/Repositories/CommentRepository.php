@@ -321,7 +321,7 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $repliesRows - replies to current user comments
      * @param $threadRows - if any of the current user comments are replies, the threads (parent comment and other replies to it)
      *
-     * @return array
+     * @return Collection
      */
     private function parseCurrentUserRows($rows, $repliesRows, $threadRows)
     {
@@ -371,7 +371,7 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
             }
         }
 
-        return $results;
+        return new Collection($results);
     }
 
     /** Parse the rows to return the results in the following format:
