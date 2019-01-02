@@ -62,9 +62,9 @@ class RailcontentServiceProvider extends ServiceProvider
             ContentUpdated::class => [VersionContentEventListener::class . '@handle'],
             ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
             ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
-            ContentFieldCreated::class => [VersionContentEventListener::class . '@handle'],
-            ContentFieldUpdated::class => [VersionContentEventListener::class . '@handle'],
-            ContentFieldDeleted::class => [VersionContentEventListener::class . '@handle'],
+            ContentFieldCreated::class => [VersionContentEventListener::class . '@handleFieldCreated'],
+            ContentFieldUpdated::class => [VersionContentEventListener::class . '@handleFieldUpdated'],
+            ContentFieldDeleted::class => [VersionContentEventListener::class . '@handleFieldDeleted'],
             ContentDatumCreated::class => [VersionContentEventListener::class . '@handle'],
             ContentDatumUpdated::class => [VersionContentEventListener::class . '@handle'],
             ContentDatumDeleted::class => [VersionContentEventListener::class . '@handle'],
@@ -168,6 +168,7 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableComments = ConfigService::$tablePrefix . 'comments';
         ConfigService::$tableCommentsAssignment = ConfigService::$tablePrefix . 'comment_assignment';
         ConfigService::$tableCommentLikes = ConfigService::$tablePrefix . 'comment_likes';
+        ConfigService::$tableContentLikes = ConfigService::$tablePrefix . 'content_likes';
         ConfigService::$tableSearchIndexes = ConfigService::$tablePrefix . 'search_indexes';
 
         // brand

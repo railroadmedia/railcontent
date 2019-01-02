@@ -106,6 +106,11 @@ Route::group(
                 )->name('comment.linked');
 
                 //comment-likes
+                Route::get(
+                    '/comment-likes/{commentId}',
+                    \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@index'
+                )->name('comment-likes.index');
+
                 Route::put(
                     '/comment-like/{id}',
                     \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@store'
@@ -115,6 +120,22 @@ Route::group(
                     '/comment-like/{id}',
                     \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@delete'
                 )->name('comment-like.delete');
+
+                // content-likes
+                Route::get(
+                    '/content-like/{id}',
+                    \Railroad\Railcontent\Controllers\ContentLikeJsonController::class . '@index'
+                )->name('content-likes.index');
+
+                Route::put(
+                    '/content-like',
+                    \Railroad\Railcontent\Controllers\ContentLikeJsonController::class . '@like'
+                )->name('content-like.store');
+
+                Route::delete(
+                    '/content-like',
+                    \Railroad\Railcontent\Controllers\ContentLikeJsonController::class . '@unlike'
+                )->name('content-like.delete');
 
 
                 //full text search
@@ -242,6 +263,11 @@ Route::group(
                     '/user-permission',
                     \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@store'
                 )->name('user.permissions.store');
+
+                Route::patch(
+                    '/user-permission/{id}',
+                    \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@store'
+                )->name('user.permissions.update');
 
                 Route::delete(
                     '/user-permission/{userPermissionId}',

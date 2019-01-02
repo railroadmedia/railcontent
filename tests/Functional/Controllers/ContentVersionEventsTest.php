@@ -154,7 +154,7 @@ class ContentVersionEventsTest extends RailcontentTestCase
 
         //check that the ContentFieldCreated event was dispatched with the correct content id
         Event::assertDispatched(ContentFieldCreated::class, function($event) use ($content) {
-            return $event->contentId == $content['id'];
+            return $event->newField['content_id'] == $content['id'];
         });
     }
 
@@ -175,7 +175,7 @@ class ContentVersionEventsTest extends RailcontentTestCase
 
         //check that the ContentFieldUpdated event was dispatched with the correct content id
         Event::assertDispatched(ContentFieldUpdated::class, function($event) use ($content) {
-            return $event->contentId == $content['id'];
+            return $event->newField['content_id'] == $content['id'];
         });
     }
 
@@ -191,7 +191,7 @@ class ContentVersionEventsTest extends RailcontentTestCase
 
         //check that the ContentFieldDeleted event was dispatched with the correct content id
         Event::assertDispatched(ContentFieldDeleted::class, function($event) use ($content) {
-            return $event->contentId == $content['id'];
+            return $event->deletedField['content_id'] == $content['id'];
         });
     }
 

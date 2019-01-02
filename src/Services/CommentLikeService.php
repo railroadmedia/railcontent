@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\CommentUnLiked;
 use Railroad\Railcontent\Helpers\CacheHelper;
@@ -58,6 +59,40 @@ class CommentLikeService
 
     /**
      * @param $commentId
+     * @param int $limit
+     * @param int $page
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @return mixed
+     */
+    public function getCommentLikesPaginated(
+        $commentId,
+        $limit = 25,
+        $page = 1,
+        $orderByColumn = 'created_on',
+        $orderByDirection = 'desc'
+    ) {
+        $likesQuery =
+            $this->commentLikeRepository->query()
+                ->where('comment_id', $commentId)
+                ->orderBy($orderByColumn, $orderByDirection);
+        $likesCount = $likesQuery->count();
+
+        $likesData =
+            $likesQuery->limit($limit)
+                ->skip(($page - 1) * $limit)
+                ->get();
+
+        $results = [
+            'results' => $likesData,
+            'total_results' => $likesCount,
+        ];
+
+        return Decorator::decorate($results, 'comment_likes');
+    }
+
+    /**
+     * @param $commentId
      * @param integer $userId
      * @return bool
      */
@@ -69,7 +104,8 @@ class CommentLikeService
                 'user_id' => $userId,
             ],
             [
-                'created_on' => Carbon::now()->toDateTimeString(),
+                'created_on' => Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
 

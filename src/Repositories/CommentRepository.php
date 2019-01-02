@@ -126,7 +126,9 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
             ->restrictByVisibility()
             ->restrictByAssignedUserId()
             ->onlyComments()
+            ->selectLikeCounts()
             ->orderBy($this->orderBy, $this->orderDirection, $this->orderTable)
+            ->orderBy('created_on', 'desc', ConfigService::$tableComments)
             ->directPaginate($this->page, $this->limit);
 
         $rows = $query->get();
@@ -156,6 +158,9 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
                 $this->orderDirection,
                 ConfigService::$tableComments
             )
+            ->selectLikeCounts()
+            ->onlyComments()
+            ->orderBy('created_on', 'desc', ConfigService::$tableComments)
             ->directPaginate($this->page, $this->limit);
 
         $rows = $query->get();
