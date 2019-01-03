@@ -30,7 +30,13 @@ class CommentLikeRepository extends \Railroad\Resora\Repositories\RepositoryBase
             ->get()
             ->toArray();
 
-        return array_combine(array_column($results, 'comment_id'), array_column($results, 'count'));
+        $parsedResults = [];
+
+        foreach ($results as $result) {
+            $parsedResults[$result['comment_id']] = $result['count'];
+        }
+
+        return $parsedResults;
     }
 
     /**
@@ -49,7 +55,13 @@ class CommentLikeRepository extends \Railroad\Resora\Repositories\RepositoryBase
             ->get()
             ->toArray();
 
-        return array_combine(array_column($results, 'comment_id'), array_column($results, 'is_liked'));
+        $parsedResults = [];
+
+        foreach ($results as $result) {
+            $parsedResults[$result['comment_id']] = $result['is_liked'];
+        }
+
+        return $parsedResults;
     }
 
     /**
