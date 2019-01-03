@@ -18,7 +18,7 @@ class CommentQueryBuilder extends QueryBuilder
             ConfigService::$tableComments . '.user_id' => 'user_id',
             ConfigService::$tableComments . '.temporary_display_name' => 'display_name',
             ConfigService::$tableComments . '.created_on' => 'created_on',
-            ConfigService::$tableComments . '.deleted_at' => 'deleted_at'
+            ConfigService::$tableComments . '.deleted_at' => 'deleted_at',
         ];
     }
 
@@ -41,25 +41,40 @@ class CommentQueryBuilder extends QueryBuilder
         return $this;
     }
 
+    /**
+     * @return $this
+     */
+    public function selectLikeCounts()
+    {
+        $this->leftJoin(
+            $this->raw(
+                "(SELECT COUNT(*) AS like_count, content_id as _content_id FROM " .
+                ConfigService::$tableContentLikes .
+                " GROUP BY _content_id) content_likes"
+            ),
+            "content_likes._content_id",
+            "=",
+            ConfigService::$tableComments . '.content_id'
+        );
+
+        return $this;
+    }
+
     public function aggregateOrderTable($table)
     {
-        if (
-            $table != ConfigService::$tableComments &&
-            isset(ConfigService::$tableCommentsAggregates[$table])
-        ) {
+        if ($table != ConfigService::$tableComments && isset(ConfigService::$tableCommentsAggregates[$table])) {
             $config = ConfigService::$tableCommentsAggregates[$table];
 
             if (isset($config['selectColumn'])) {
                 $this->selectRaw($config['selectColumn']);
             }
 
-            $this
-                ->leftJoin(
-                    $table,
-                    $table .'.'. $config['foreignField'],
-                    '=',
-                    ConfigService::$tableComments .'.'. $config['localField']
-                );
+            $this->leftJoin(
+                $table,
+                $table . '.' . $config['foreignField'],
+                '=',
+                ConfigService::$tableComments . '.' . $config['localField']
+            );
 
             if (isset($config['groupBy'])) {
 

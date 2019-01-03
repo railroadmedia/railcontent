@@ -20,7 +20,6 @@ use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\ContentVersionRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Support\Collection;
 
@@ -30,11 +29,6 @@ class ContentService
      * @var ContentRepository
      */
     private $contentRepository;
-
-    /**
-     * @var ContentVersionRepository
-     */
-    private $versionRepository;
 
     /**
      * @var ContentFieldRepository
@@ -82,7 +76,6 @@ class ContentService
      * ContentService constructor.
      *
      * @param ContentRepository $contentRepository
-     * @param ContentVersionRepository $versionRepository
      * @param ContentFieldRepository $fieldRepository
      * @param ContentDatumRepository $datumRepository
      * @param ContentHierarchyRepository $contentHierarchyRepository
@@ -93,7 +86,6 @@ class ContentService
      */
     public function __construct(
         ContentRepository $contentRepository,
-        ContentVersionRepository $versionRepository,
         ContentFieldRepository $fieldRepository,
         ContentDatumRepository $datumRepository,
         ContentHierarchyRepository $contentHierarchyRepository,
@@ -103,7 +95,6 @@ class ContentService
         UserContentProgressRepository $userContentProgressRepository
     ) {
         $this->contentRepository = $contentRepository;
-        $this->versionRepository = $versionRepository;
         $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
         $this->contentHierarchyRepository = $contentHierarchyRepository;
@@ -1141,7 +1132,7 @@ class ContentService
 
         $this->contentRepository->update($id, $data);
 
-        event(new ContentUpdated($id));
+        event(new ContentUpdated($id, $content, $data));
 
         CacheHelper::deleteCache('content_' . $id);
 
@@ -1347,5 +1338,55 @@ class ContentService
         }
 
         return $results;
+    }
+
+    /**
+     * @return Collection|ContentEntity[]
+     */
+    public function getContentForCalendar()
+    {
+        ContentRepository::$availableContentStatues = [
+            ContentService::STATUS_PUBLISHED,
+            ContentService::STATUS_SCHEDULED,
+        ];
+
+        ContentRepository::$pullFutureContent = true;
+
+        if(ConfigService::$brand === 'drumeo') {
+            $typesForCalendars = config('railcontent.types-for-calendars.drumeo');
+
+            if($typesForCalendars ){
+                $shows = $typesForCalendars['shows'];
+                $liveEventsTypes = $typesForCalendars['live-events-types'];
+                $contentReleasesTypes = $typesForCalendars['content-releases-types'];
+            }
+
+            $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+                array_merge($liveEventsTypes, $shows),
+                ContentService::STATUS_SCHEDULED,
+                Carbon::now()
+                    ->toDateTimeString(),
+                '>'
+            );
+
+            $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+                array_merge($contentReleasesTypes, $shows),
+                ContentService::STATUS_PUBLISHED,
+                Carbon::now()
+                    ->toDateTimeString(),
+                '>'
+            );
+
+            $scheduleEvents =
+                $liveEvents->merge($contentReleases)
+                    ->sort(
+                        function ($a, $b) {
+                            return Carbon::parse($a['published_on']) >= Carbon::parse($b['published_on']);
+                        }
+                    )
+                    ->values();
+        }
+
+        return $scheduleEvents ?? [];
     }
 }

@@ -77,6 +77,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->contentPermissionRepository = $this->app->make(ContentPermissionRepository::class);
         $this->permissionRepository = $this->app->make(PermissionRepository::class);
         $this->userPermissionRepository = $this->app->make(UserPermissionsRepository::class);
+
+        ContentRepository::$bypassPermissions = false;
     }
 
     public function test_index_empty()

@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Events;
 
-
 use Illuminate\Support\Facades\Event;
 
 class ContentDatumCreated extends Event

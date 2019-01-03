@@ -126,7 +126,9 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
             ->restrictByVisibility()
             ->restrictByAssignedUserId()
             ->onlyComments()
+            ->selectLikeCounts()
             ->orderBy($this->orderBy, $this->orderDirection, $this->orderTable)
+            ->orderBy('created_on', 'desc', ConfigService::$tableComments)
             ->directPaginate($this->page, $this->limit);
 
         $rows = $query->get();
@@ -156,6 +158,9 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
                 $this->orderDirection,
                 ConfigService::$tableComments
             )
+            ->selectLikeCounts()
+            ->onlyComments()
+            ->orderBy('created_on', 'desc', ConfigService::$tableComments)
             ->directPaginate($this->page, $this->limit);
 
         $rows = $query->get();
@@ -316,7 +321,7 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      * @param $repliesRows - replies to current user comments
      * @param $threadRows - if any of the current user comments are replies, the threads (parent comment and other replies to it)
      *
-     * @return array
+     * @return Collection
      */
     private function parseCurrentUserRows($rows, $repliesRows, $threadRows)
     {
@@ -366,7 +371,7 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
             }
         }
 
-        return $results;
+        return new Collection($results);
     }
 
     /** Parse the rows to return the results in the following format:

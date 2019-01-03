@@ -49,6 +49,8 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->contentPermissionRepository = $this->app->make(ContentPermissionRepository::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->contentRepository = $this->app->make(ContentRepository::class);
+
+        ContentRepository::$bypassPermissions = false;
     }
 
     protected function tearDown()
@@ -358,7 +360,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $results = ($this->call('GET', '/railcontent/user-permission'));
 
         $this->assertEquals(200, $results->getStatusCode());
-        $this->assertEquals(2, count($results->decodeResponseJson('data')));
+        $this->assertEquals(3, count($results->decodeResponseJson('data')));
     }
 
     public function test_index_specific_user_active_permissions()
@@ -422,7 +424,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(200, $results->getStatusCode());
-        $this->assertEquals(1, count($results->decodeResponseJson('data')));
+        $this->assertEquals(2, count($results->decodeResponseJson('data')));
     }
 
     public function test_index_pull_active_and_expired_user_permissions()

@@ -17,22 +17,13 @@ use Railroad\Railcontent\Decorators\Content\ContentPermissionsDecorator;
 use Railroad\Railcontent\Decorators\Hierarchy\ContentSlugHierarchyDecorator;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
-use Railroad\Railcontent\Events\ContentCreated;
-use Railroad\Railcontent\Events\ContentDatumCreated;
-use Railroad\Railcontent\Events\ContentDatumDeleted;
-use Railroad\Railcontent\Events\ContentDatumUpdated;
 use Railroad\Railcontent\Events\ContentDeleted;
-use Railroad\Railcontent\Events\ContentFieldCreated;
-use Railroad\Railcontent\Events\ContentFieldDeleted;
-use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
-use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\ContentEventListener;
 use Railroad\Railcontent\Listeners\UnassignCommentEventListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
-use Railroad\Railcontent\Listeners\VersionContentEventListener;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
 
@@ -46,28 +37,8 @@ class RailcontentServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->listen = [
-            //            StatementPrepared::class => [
-            //                function (StatementPrepared $event) {
-            //
-            //                    // we only want to use assoc fetching for this packages database calls
-            //                    // so we need to use a separate 'mask' connection
-            //
-            //                    if ($event->connection->getName() ==
-            //                        ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {
-            //                        $event->statement->setFetchMode(PDO::FETCH_ASSOC);
-            //                    }
-            //                }
-            //            ],
-            ContentCreated::class => [VersionContentEventListener::class . '@handle'],
-            ContentUpdated::class => [VersionContentEventListener::class . '@handle'],
             ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
             ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
-            ContentFieldCreated::class => [VersionContentEventListener::class . '@handle'],
-            ContentFieldUpdated::class => [VersionContentEventListener::class . '@handle'],
-            ContentFieldDeleted::class => [VersionContentEventListener::class . '@handle'],
-            ContentDatumCreated::class => [VersionContentEventListener::class . '@handle'],
-            ContentDatumUpdated::class => [VersionContentEventListener::class . '@handle'],
-            ContentDatumDeleted::class => [VersionContentEventListener::class . '@handle'],
             CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
             CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
             UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
@@ -168,6 +139,7 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableComments = ConfigService::$tablePrefix . 'comments';
         ConfigService::$tableCommentsAssignment = ConfigService::$tablePrefix . 'comment_assignment';
         ConfigService::$tableCommentLikes = ConfigService::$tablePrefix . 'comment_likes';
+        ConfigService::$tableContentLikes = ConfigService::$tablePrefix . 'content_likes';
         ConfigService::$tableSearchIndexes = ConfigService::$tablePrefix . 'search_indexes';
 
         // brand
