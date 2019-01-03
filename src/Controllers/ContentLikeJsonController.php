@@ -73,7 +73,7 @@ class ContentLikeJsonController extends Controller
         $like = $this->contentLikeService->like($request->get('content_id'), auth()->id());
 
         return reply()->json(
-            [$like],
+            [[$like]],
             [
                 'code' => $like ? 200 : 500,
                 'transformer' => DataTransformer::class,

@@ -36,7 +36,7 @@ class ContentLikeService
      * @param Builder $query
      * @return \Illuminate\Support\Collection
      */
-    public function index(Builder $query)
+    public function index($query)
     {
         return Decorator::decorate($query->get(), 'content_likes');
     }
@@ -70,7 +70,13 @@ class ContentLikeService
                 ->get()
                 ->toArray();
 
-        return array_combine(array_column($results, 'content_id'), array_column($results, 'count'));
+        $parsedResults = [];
+
+        foreach ($results as $result) {
+            $parsedResults[$result['content_id']] = $result['count'];
+        }
+
+        return $parsedResults;
     }
 
     /**
