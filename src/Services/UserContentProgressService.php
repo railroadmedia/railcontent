@@ -464,10 +464,23 @@ class UserContentProgressService
             }
 
             // get siblings
+            $oldBypassPermissions = ContentRepository::$bypassPermissions;
+            $oldPullFutureContent = ContentRepository::$pullFutureContent;
+            $oldContentStatuses = ContentRepository::$availableContentStatues;
+
+            ContentRepository::$bypassPermissions = true;
+            ContentRepository::$pullFutureContent = true;
+            ContentRepository::$availableContentStatues =
+                [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
+
             $siblings = $parent['lessons'] ?? $this->attachProgressToContents(
                     $userId,
                     $this->contentService->getByParentId($parent['id'])
                 );
+
+            ContentRepository::$bypassPermissions = $oldBypassPermissions;
+            ContentRepository::$pullFutureContent = $oldPullFutureContent;
+            ContentRepository::$availableContentStatues = $oldContentStatuses;
 
             if (is_array($siblings)) {
                 $siblings = new Collection($siblings);
