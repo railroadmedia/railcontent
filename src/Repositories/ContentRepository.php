@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Doctrine\ORM\EntityRepository;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Helpers\ContentHelper;
@@ -12,7 +13,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Resora\Decorators\Decorator;
 use Railroad\Resora\Queries\CachedQuery;
 
-class ContentRepository extends \Railroad\Resora\Repositories\RepositoryBase
+class ContentRepository extends EntityRepository
 {
     /**
      * If this is false content with any status will be pulled. If its an array, only content with those

@@ -69,21 +69,21 @@ class ContentJsonControllerTest extends RailcontentTestCase
         parent::setUp();
 
         $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->serviceBeingTested = $this->app->make(ContentService::class);
-        $this->classBeingTested = $this->app->make(ContentRepository::class);
-        $this->contentPermissionRepository = $this->app->make(ContentPermissionRepository::class);
-        $this->permissionRepository = $this->app->make(PermissionRepository::class);
-        $this->userPermissionRepository = $this->app->make(UserPermissionsRepository::class);
+//        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
+//        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
+//        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
+//        $this->serviceBeingTested = $this->app->make(ContentService::class);
+//        $this->classBeingTested = $this->app->make(ContentRepository::class);
+//        $this->contentPermissionRepository = $this->app->make(ContentPermissionRepository::class);
+//        $this->permissionRepository = $this->app->make(PermissionRepository::class);
+//        $this->userPermissionRepository = $this->app->make(UserPermissionsRepository::class);
     }
 
     public function test_index_empty()
     {
         $response = $this->call('GET', 'railcontent/content');
 
-        $this->assertEquals([], $response->decodeResponseJson('data'));
+        $this->assertEquals([], $response->decodeResponseJson());
     }
 
     public function test_store_response_status()
@@ -233,7 +233,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $expectedResults = [
-            0 => [
                 'id' => '1',
                 'slug' => $slug,
                 'brand' => ConfigService::$brand,
@@ -250,10 +249,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'permissions' => [],
 //                'child_id' => null,
                 'sort' => 0,
-            ],
         ];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+        $this->assertEquals($expectedResults, $response->decodeResponseJson());
     }
 
     public function test_content_service_return_new_content_after_create()
@@ -277,24 +275,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ContentService::STATUS_PUBLISHED
         );
 
-        $this->call(
-            'GET',
-            'railcontent/content',
-            [
-                'page' => 1,
-                'limit' => 10,
-                'sort' => 'id',
-                'statuses' => [ContentService::STATUS_PUBLISHED],
-            ]
-        );
-
         $response = $this->call(
             'PATCH',
-            'railcontent/content/' . $content['id'],
+            'railcontent/content/' . $content->getId(),
             [
-                'slug' => $content['slug'],
+                'slug' => $content->getSlug(),
                 'status' => ContentService::STATUS_PUBLISHED,
-                'type' => $this->faker->word,
+                'type' => 'roxana',
             ]
         );
 
@@ -327,11 +314,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call(
             'PATCH',
-            'railcontent/content/' . $content['id'],
+            'railcontent/content/' . $content->getId(),
             [
                 'position' => -1,
-                'status' => $content['status'],
-                'type' => $content['type'],
+                'status' => $content->getStatus(),
+                'type' => $content->getType(),
             ]
         );
 
@@ -353,7 +340,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call(
             'PATCH',
-            'railcontent/content/' . $content['id'],
+            'railcontent/content/' . $content->getId(),
             [
                 'status' => $this->faker->word,
             ]
@@ -397,24 +384,21 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call(
             'PATCH',
-            'railcontent/content/' . $content['id'],
+            'railcontent/content/' . $content->getId(),
             [
                 'slug' => $new_slug,
                 'status' => ContentService::STATUS_PUBLISHED,
-                'type' => $content['type'],
+                'type' => $content->getType(),
             ]
         );
         $this->assertArraySubset(
             [
-                'id' => $content['id'],
+                'id' => $content->getId(),
                 'slug' => $new_slug,
                 'status' => ContentService::STATUS_PUBLISHED,
-                'type' => $content['type'],
-                'created_on' => Carbon::now()
-                    ->toDateTimeString(),
-                'sort' => 0,
+                'type' => $content->getType()
             ],
-            $response->decodeResponseJson('data')[0]
+            $response->decodeResponseJson()
         );
     }
 

@@ -5,7 +5,10 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\Factory as ValidationFactory;
+use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerBuilder;
 use Railroad\Permissions\Services\PermissionService;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -33,6 +36,11 @@ class ContentJsonController extends Controller
     private $permissionPackageService;
 
     /**
+     * @var Serializer
+     */
+    private $serializer;
+
+    /**
      * ContentController constructor.
      *
      * @param ContentService $contentService
@@ -46,6 +54,9 @@ class ContentJsonController extends Controller
         $this->validationFactory = $validationFactory;
         $this->permissionPackageService = $permissionPackageService;
 
+        $this->serializer =
+            SerializerBuilder::create()
+                ->build();
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -75,14 +86,16 @@ class ContentJsonController extends Controller
             $request->get('included_user_states', [])
         );
 
-        return reply()->json(
-            $contentData['results'],
-            [
-                'transformer' => DataTransformer::class,
-                'totalResults' => $contentData['total_results'],
-                'filterOptions' => $contentData['filter_options'],
-            ]
-        );
+        return response($this->serializer->serialize($contentData, 'json'), 201);
+
+//        return reply()->json(
+//            $contentData['results'],
+//            [
+//                'transformer' => DataTransformer::class,
+//                'totalResults' => $contentData['total_results'],
+//                'filterOptions' => $contentData['filter_options'],
+//            ]
+//        );
     }
 
     /** Pull the children contents for the parent id
@@ -186,13 +199,7 @@ class ContentJsonController extends Controller
             $request->get('sort', 0)
         );
 
-        return reply()->json(
-            [$content],
-            [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
-            ]
-        );
+        return response($this->serializer->serialize($content, 'json'), 201);
     }
 
     /** Update a content based on content id and return it in JSON format
@@ -231,13 +238,7 @@ class ContentJsonController extends Controller
             new NotFoundException('Update failed, content not found with id: ' . $contentId)
         );
 
-        return reply()->json(
-            [$content],
-            [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
-            ]
-        );
+        return response($this->serializer->serialize($content, 'json'), 201);
     }
 
     /**

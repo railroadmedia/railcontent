@@ -3,17 +3,31 @@
 namespace Railroad\Railcontent\Factories;
 
 use Carbon\Carbon;
+use Doctrine\ORM\EntityManager;
 use Faker\Generator;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 
-class ContentFactory extends ContentService
+class ContentFactory
 {
     /**
      * @var Generator
      */
     protected $faker;
+
+    protected $entityManager;
+
+    /**
+     * ContentFactory constructor.
+     *
+     * @param $entityManager
+     */
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @param null $slug
@@ -55,6 +69,17 @@ class ContentFactory extends ContentService
                 $this->faker->dateTimeThisCentury()
             ];
 
-        return parent::create(...$parameters);
+        $content = new Content();
+        $content->setSlug($parameters[0]);
+        $content->setType($parameters[1]);
+        $content->setStatus($parameters[2]);
+        $content->setLanguage($parameters[3]);
+        $content->setBrand($parameters[4]);
+        $content->setSort($parameters[5]);
+
+        $this->entityManager->persist($content);
+        $this->entityManager->flush();
+
+        return $content;
     }
 }

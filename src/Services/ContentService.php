@@ -3,9 +3,11 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Doctrine\ORM\EntityManager;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Decorators\Decorator;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Events\ContentCreated;
@@ -26,6 +28,10 @@ use Railroad\Railcontent\Support\Collection;
 
 class ContentService
 {
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
     /**
      * @var ContentRepository
      */
@@ -92,7 +98,8 @@ class ContentService
      * @param UserContentProgressRepository $userContentProgressRepository
      */
     public function __construct(
-        ContentRepository $contentRepository,
+        EntityManager $entityManager,
+//        ContentRepository $contentRepository,
         ContentVersionRepository $versionRepository,
         ContentFieldRepository $fieldRepository,
         ContentDatumRepository $datumRepository,
@@ -102,7 +109,10 @@ class ContentService
         CommentAssignmentRepository $commentAssignmentRepository,
         UserContentProgressRepository $userContentProgressRepository
     ) {
-        $this->contentRepository = $contentRepository;
+        $this->entityManager = $entityManager;
+
+        $this->contentRepository = $this->entityManager->getRepository(Content::class);
+//        $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
         $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
@@ -1022,6 +1032,15 @@ class ContentService
         if ($cache) {
             $results = new ContentFilterResultsEntity($cache);
         }
+
+        $contentsQuery = $this->contentRepository->createQueryBuilder('c');
+
+       return $contentsQuery
+            ->setMaxResults($limit)
+            ->setFirstResult($page)
+            ->getQuery()->getResult();
+
+
         if (!$results) {
             $filter = $this->contentRepository->startFilter(
                 $page,
@@ -1094,35 +1113,48 @@ class ContentService
         $parentId = null,
         $sort = 0
     ) {
-        $content = $this->contentRepository->create(
-            [
-                'slug' => $slug,
-                'type' => $type,
-                'sort' => $sort,
-                'status' => $status ?? self::STATUS_DRAFT,
-                'language' => $language ?? ConfigService::$defaultLanguage,
-                'brand' => $brand ?? ConfigService::$brand,
-                'user_id' => $userId,
-                'published_on' => $publishedOn,
-                'created_on' => Carbon::now()
-                    ->toDateTimeString(),
-            ]
-        );
+        $content = new Content();
+        $content->setSlug($slug);
+        $content->setStatus($status?? self::STATUS_DRAFT);
+        $content->setType($type);
+        $content->setSort($sort);
+        $content->setLanguage($language ?? ConfigService::$defaultLanguage);
+        $content->setBrand($brand ?? ConfigService::$brand);
+        $content->setPublishedOn(Carbon::parse($publishedOn));
 
-        //save the link with parent if the parent id exist on the request
-        if ($parentId) {
-            $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
-                $parentId,
-                $content['id'],
-                null
-            );
-        }
+        $this->entityManager->persist($content);
+        $this->entityManager->flush();
 
-        CacheHelper::deleteUserFields(null, 'contents');
-
-        event(new ContentCreated($content['id']));
-
-        return $this->getById($content['id']);
+        return $content;
+//        $content = $this->contentRepository->create(
+//            [
+//                'slug' => $slug,
+//                'type' => $type,
+//                'sort' => $sort,
+//                'status' => $status ?? self::STATUS_DRAFT,
+//                'language' => $language ?? ConfigService::$defaultLanguage,
+//                'brand' => $brand ?? ConfigService::$brand,
+//                'user_id' => $userId,
+//                'published_on' => $publishedOn,
+//                'created_on' => Carbon::now()
+//                    ->toDateTimeString(),
+//            ]
+//        );
+//
+//        //save the link with parent if the parent id exist on the request
+//        if ($parentId) {
+//            $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
+//                $parentId,
+//                $content['id'],
+//                null
+//            );
+//        }
+//
+//        CacheHelper::deleteUserFields(null, 'contents');
+//
+//        event(new ContentCreated($content['id']));
+//
+//        return $this->getById($content['id']);
     }
 
     /**
@@ -1134,22 +1166,27 @@ class ContentService
      */
     public function update($id, array $data)
     {
-        $content = $this->contentRepository->read($id);
+        $content = $this->contentRepository->find($id);
+
         if (empty($content)) {
             return null;
         }
+        $content = $content->setParameters($data);
 
-        $this->contentRepository->update($id, $data);
+        $this->entityManager->persist($content);
+        $this->entityManager->flush();
 
-        event(new ContentUpdated($id));
+        //TODO: update VersionService
+       // event(new ContentUpdated($id));
 
         CacheHelper::deleteCache('content_' . $id);
 
-        if (array_key_exists('status', $data)) {
-            CacheHelper::deleteUserFields(null, 'contents');
-        }
+        //TODO: check Redis cache
+//        if (array_key_exists('status', $data)) {
+//            CacheHelper::deleteUserFields(null, 'contents');
+//        }
 
-        return $this->getById($id);
+        return $content;
     }
 
     /**

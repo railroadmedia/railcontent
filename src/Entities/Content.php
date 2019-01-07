@@ -3,6 +3,9 @@
 namespace Railroad\Railcontent\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentRepository")
@@ -19,7 +22,7 @@ class Content
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", name="slug")
      * @var string
      */
     protected $slug;
@@ -71,6 +74,14 @@ class Content
      * @var \DateTime
      */
     protected $archivedOn;
+
+    /**
+     * @var \DateTime $createdOn
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    protected $createdOn;
 
     /**
      * @return int
@@ -194,20 +205,22 @@ class Content
     /**
      * @param integer $userId
      */
-    public function setUserId($userId): void
-    {
+    public function setUserId($userId)
+    : void {
         $this->userId = $userId;
     }
 
     /**
      * Sets publishedOn.
      *
-     * @param  string $publishedOn
+     * @param  \DateTime $publishedOn
      * @return $this
      */
     public function setPublishedOn($publishedOn)
     {
         $this->publishedOn = $publishedOn;
+
+        return $this;
     }
 
     /**
@@ -239,5 +252,38 @@ class Content
     public function getArchivedOn()
     {
         return $this->archivedOn;
+    }
+
+    public function setParameters($parameters)
+    {
+        foreach ($parameters as $key => $value) {
+            switch ($key) {
+                case 'slug':
+                    $this->slug = $value;
+                    break;
+                case 'type':
+                    $this->type = $value;
+                    break;
+                case 'sort':
+                    $this->sort = $value;
+                    break;
+                case 'status':
+                    $this->status = $value;
+                    break;
+                case 'brand':
+                    $this->brand = $value;
+                    break;
+                case 'language':
+                    $this->language = $value;
+                    break;
+                case 'published_on':
+                    $this->publishedOn = $value;
+                    break;
+                case 'archived_on':
+                    $this->archivedOn = $value;
+                    break;
+            }
+        }
+        return $this;
     }
 }

@@ -653,10 +653,10 @@ class CustomFormRequest extends FormRequest
             return $request->all();
         }
 
-        if ($request instanceof ContentUpdateRequest) {
-            $urlPath = explode('/', parse_url($request->fullUrl())['path']);
-            return $this->contentService->getById((integer)array_values(array_slice($urlPath, -1))[0]);
-        }
+//        if ($request instanceof ContentUpdateRequest) {
+//            $urlPath = explode('/', parse_url($request->fullUrl())['path']);
+//            return $this->contentService->getById((integer)array_values(array_slice($urlPath, -1))[0]);
+//        }
 
         if ($request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest) {
 
