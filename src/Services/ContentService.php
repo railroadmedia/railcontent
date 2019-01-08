@@ -99,7 +99,6 @@ class ContentService
      */
     public function __construct(
         EntityManager $entityManager,
-//        ContentRepository $contentRepository,
         ContentVersionRepository $versionRepository,
         ContentFieldRepository $fieldRepository,
         ContentDatumRepository $datumRepository,
@@ -112,7 +111,6 @@ class ContentService
         $this->entityManager = $entityManager;
 
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
-//        $this->contentRepository = $contentRepository;
         $this->versionRepository = $versionRepository;
         $this->fieldRepository = $fieldRepository;
         $this->datumRepository = $datumRepository;
@@ -138,11 +136,13 @@ class ContentService
         if (!$results) {
             $results = CacheHelper::saveUserCache(
                 $hash,
-                $this->contentRepository->query()
+                $this->contentRepository->build()
                     ->selectPrimaryColumns()
                     ->restrictByUserAccess()
-                    ->where(ConfigService::$tableContent . '.id', $id)
-                    ->first(),
+                    ->where('id = :id')
+                    ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getOneOrNullResult(),
                 [$id]
             );
         }
@@ -162,17 +162,18 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $unorderedContentRows = $this->contentRepository->query()
-                ->selectPrimaryColumns()
-                ->restrictByUserAccess()
-                ->whereIn(ConfigService::$tableContent . '.id', $ids)
-                ->get();
+            $unorderedContentRows =
+                $this->contentRepository->build()
+                    ->restrictByUserAccess()
+                    ->whereIn(ConfigService::$tableContent . '.id', $ids)
+                    ->getQuery()
+                    ->getResult();
 
             // restore order of ids passed in
             $contentRows = [];
             foreach ($ids as $id) {
                 foreach ($unorderedContentRows as $index => $unorderedContentRow) {
-                    if ($id == $unorderedContentRow['id']) {
+                    if ($id == $unorderedContentRow->getId()) {
                         $contentRows[] = $unorderedContentRow;
                     }
                 }
@@ -1035,11 +1036,10 @@ class ContentService
 
         $contentsQuery = $this->contentRepository->createQueryBuilder('c');
 
-       return $contentsQuery
-            ->setMaxResults($limit)
+        return $contentsQuery->setMaxResults($limit)
             ->setFirstResult($page)
-            ->getQuery()->getResult();
-
+            ->getQuery()
+            ->getResult();
 
         if (!$results) {
             $filter = $this->contentRepository->startFilter(
@@ -1077,9 +1077,13 @@ class ContentService
             }
             $resultsDB = new ContentFilterResultsEntity(
                 [
-                    'results' => $this->contentRepository->query()->retrieveFilter(),
-                    'total_results' => $this->contentRepository->query()->countFilter(),
-                    'filter_options' => $pullFilterFields ? $this->contentRepository->query()->getFilterFields() : [],
+                    'results' => $this->contentRepository->query()
+                        ->retrieveFilter(),
+                    'total_results' => $this->contentRepository->query()
+                        ->countFilter(),
+                    'filter_options' => $pullFilterFields ?
+                        $this->contentRepository->query()
+                            ->getFilterFields() : [],
                 ]
             );
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
@@ -1115,7 +1119,7 @@ class ContentService
     ) {
         $content = new Content();
         $content->setSlug($slug);
-        $content->setStatus($status?? self::STATUS_DRAFT);
+        $content->setStatus($status ?? self::STATUS_DRAFT);
         $content->setType($type);
         $content->setSort($sort);
         $content->setLanguage($language ?? ConfigService::$defaultLanguage);
@@ -1126,35 +1130,35 @@ class ContentService
         $this->entityManager->flush();
 
         return $content;
-//        $content = $this->contentRepository->create(
-//            [
-//                'slug' => $slug,
-//                'type' => $type,
-//                'sort' => $sort,
-//                'status' => $status ?? self::STATUS_DRAFT,
-//                'language' => $language ?? ConfigService::$defaultLanguage,
-//                'brand' => $brand ?? ConfigService::$brand,
-//                'user_id' => $userId,
-//                'published_on' => $publishedOn,
-//                'created_on' => Carbon::now()
-//                    ->toDateTimeString(),
-//            ]
-//        );
-//
-//        //save the link with parent if the parent id exist on the request
-//        if ($parentId) {
-//            $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
-//                $parentId,
-//                $content['id'],
-//                null
-//            );
-//        }
-//
-//        CacheHelper::deleteUserFields(null, 'contents');
-//
-//        event(new ContentCreated($content['id']));
-//
-//        return $this->getById($content['id']);
+        //        $content = $this->contentRepository->create(
+        //            [
+        //                'slug' => $slug,
+        //                'type' => $type,
+        //                'sort' => $sort,
+        //                'status' => $status ?? self::STATUS_DRAFT,
+        //                'language' => $language ?? ConfigService::$defaultLanguage,
+        //                'brand' => $brand ?? ConfigService::$brand,
+        //                'user_id' => $userId,
+        //                'published_on' => $publishedOn,
+        //                'created_on' => Carbon::now()
+        //                    ->toDateTimeString(),
+        //            ]
+        //        );
+        //
+        //        //save the link with parent if the parent id exist on the request
+        //        if ($parentId) {
+        //            $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
+        //                $parentId,
+        //                $content['id'],
+        //                null
+        //            );
+        //        }
+        //
+        //        CacheHelper::deleteUserFields(null, 'contents');
+        //
+        //        event(new ContentCreated($content['id']));
+        //
+        //        return $this->getById($content['id']);
     }
 
     /**
@@ -1177,14 +1181,14 @@ class ContentService
         $this->entityManager->flush();
 
         //TODO: update VersionService
-       // event(new ContentUpdated($id));
+        // event(new ContentUpdated($id));
 
         CacheHelper::deleteCache('content_' . $id);
 
         //TODO: check Redis cache
-//        if (array_key_exists('status', $data)) {
-//            CacheHelper::deleteUserFields(null, 'contents');
-//        }
+        //        if (array_key_exists('status', $data)) {
+        //            CacheHelper::deleteUserFields(null, 'contents');
+        //        }
 
         return $content;
     }
@@ -1197,7 +1201,7 @@ class ContentService
      */
     public function delete($id)
     {
-        $content = $this->contentRepository->read($id);
+        $content = $this->contentRepository->find($id);
 
         if (empty($content)) {
             return null;
@@ -1206,7 +1210,10 @@ class ContentService
 
         CacheHelper::deleteCache('content_' . $id);
 
-        return $this->contentRepository->destroy($id);
+        $this->entityManager->remove($content);
+        $this->entityManager->flush();
+
+        return true;
     }
 
     /**
@@ -1234,8 +1241,10 @@ class ContentService
         //delete the content comments, replies and assignation
         $comments = $this->commentRepository->getByContentId($contentId);
 
-        $this->commentAssignationRepository->query()->whereIn('comment_id', array_pluck($comments, 'id'))->delete() ;
-            //->deleteCommentAssignations(array_pluck($comments, 'id'));
+        $this->commentAssignationRepository->query()
+            ->whereIn('comment_id', array_pluck($comments, 'id'))
+            ->delete();
+        //->deleteCommentAssignations(array_pluck($comments, 'id'));
 
         $this->commentRepository->deleteByContentId($contentId);
 

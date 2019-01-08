@@ -271,6 +271,7 @@ class CacheHelper
      */
     public static function saveUserCache($hash, $data, $contentIds = [])
     {
+        return $data;
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
             $userKey = self::getUserSpecificHashedKey();

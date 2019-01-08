@@ -72,7 +72,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 //        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
 //        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
 //        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
-//        $this->serviceBeingTested = $this->app->make(ContentService::class);
+        $this->serviceBeingTested = $this->app->make(ContentService::class);
 //        $this->classBeingTested = $this->app->make(ContentRepository::class);
 //        $this->contentPermissionRepository = $this->app->make(ContentPermissionRepository::class);
 //        $this->permissionRepository = $this->app->make(PermissionRepository::class);
@@ -259,11 +259,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $content = $this->contentFactory->create();
 
-        $response = $this->call('GET', 'railcontent/content/' . $content['id']);
+        $response = $this->call('GET', 'railcontent/content/' . $content->getId());
 
         $this->assertEquals(
-            $content,
-            $response->decodeResponseJson('data')[0]
+            $this->serializer->toArray($content),
+            $response->decodeResponseJson()
         );
     }
 
@@ -443,15 +443,16 @@ class ContentJsonControllerTest extends RailcontentTestCase
     public function test_controller_delete_method_response_status()
     {
         $content = $this->contentFactory->create();
+        $id = $content->getId();
 
-        $response = $this->call('DELETE', 'railcontent/content/' . $content['id']);
+        $response = $this->call('DELETE', 'railcontent/content/' . $id);
 
         $this->assertEquals(204, $response->status());
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContent,
             [
-                'id' => $content['id'],
+                'id' => $id,
             ]
         );
     }
@@ -798,7 +799,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [rand(), rand()]
         );
 
-        $this->assertEquals([], $response->decodeResponseJson('data'));
+        $this->assertEquals([], $response->decodeResponseJson());
     }
 
     public function test_get_by_ids()
@@ -818,15 +819,15 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call(
             'GET',
             'railcontent/content/get-by-ids',
-            ['ids' => $content2['id'] . ',' . $content1['id']]
+            ['ids' => $content2->getId() . ',' . $content1->getId()]
         );
 
         $expectedResults = [
-            (array)$content2,
-            (array)$content1,
+            $this->serializer->toArray($content2),
+            $this->serializer->toArray($content1),
         ];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+        $this->assertEquals($expectedResults, $response->decodeResponseJson());
     }
 
     public function test_get_id_cached()
@@ -836,31 +837,33 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
             ContentService::STATUS_PUBLISHED
         );
+
+        $id = $content1->getId();
         $start1 = microtime(true);
-        $response = $this->call('GET', 'railcontent/content/' . $content1['id']);
+        $response = $this->call('GET', 'railcontent/content/' . $id);
         $time1 = microtime(true) - $start1;
 
         $start2 = microtime(true);
-        $response = $this->call('GET', 'railcontent/content/' . $content1['id']);
+        $response = $this->call('GET', 'railcontent/content/' . $id);
         $time2 = microtime(true) - $start2;
 
         $start3 = microtime(true);
-        $response = $this->call('GET', 'railcontent/content/' . $content1['id']);
+        $response = $this->call('GET', 'railcontent/content/' . $id);
         $time3 = microtime(true) - $start3;
 
         $start4 = microtime(true);
-        $response = $this->call('GET', 'railcontent/content/' . $content1['id']);
+        $response = $this->call('GET', 'railcontent/content/' . $id);
         $time4 = microtime(true) - $start4;
 
         $start5 = microtime(true);
-        $response = $this->call('GET', 'railcontent/content/' . $content1['id']);
+        $response = $this->call('GET', 'railcontent/content/' . $id);
         $time5 = microtime(true) - $start5;
 
         $start6 = microtime(true);
         $response = $this->call(
             'GET',
             'railcontent/content/get-by-ids',
-            [$content1['id']]
+            ['ids' => $id]
         );
         $time6 = microtime(true) - $start6;
 
@@ -868,7 +871,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call(
             'GET',
             'railcontent/content/get-by-ids',
-            [$content1['id']]
+            ['ids' => $id]
         );
         $time7 = microtime(true) - $start7;
 

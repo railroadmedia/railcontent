@@ -612,4 +612,13 @@ class ContentRepository extends EntityRepository
 
         return $contentRows;
     }
+
+    public function build()
+    {
+        $qb = new ContentQueryBuilder($this->getEntityManager());
+
+        return $qb
+            ->select('railcontent_content')
+            ->from($this->getEntityName(),'railcontent_content');
+    }
 }

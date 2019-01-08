@@ -9,7 +9,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Queries\CachedQuery;
 
-class ContentQueryBuilder extends QueryBuilder
+class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
 {
     /**
      * @return $this
@@ -25,9 +25,9 @@ class ContentQueryBuilder extends QueryBuilder
                 ConfigService::$tableContent . '.status as status',
                 ConfigService::$tableContent . '.language as language',
                 ConfigService::$tableContent . '.brand as brand',
-                ConfigService::$tableContent . '.published_on as published_on',
-                ConfigService::$tableContent . '.created_on as created_on',
-                ConfigService::$tableContent . '.archived_on as archived_on',
+//                ConfigService::$tableContent . '.published_on as published_on',
+//                ConfigService::$tableContent . '.created_on as created_on',
+//                ConfigService::$tableContent . '.archived_on as archived_on',
             ]
         );
 
@@ -194,7 +194,10 @@ class ContentQueryBuilder extends QueryBuilder
     public function restrictStatuses()
     {
         if (is_array(ContentRepository::$availableContentStatues)) {
-            $this->whereIn('status', ContentRepository::$availableContentStatues);
+            $this->add('where',
+                $this->expr()
+                    ->in('status', ContentRepository::$availableContentStatues)
+            );
         }
 
         return $this;
@@ -222,9 +225,13 @@ class ContentQueryBuilder extends QueryBuilder
      */
     public function restrictBrand()
     {
-        $this->whereIn(
-            ConfigService::$tableContent . '.brand',
-            array_values(array_wrap(ConfigService::$availableBrands))
+        $this->add(
+            'where',
+            $this->expr()
+                ->in(
+                    'c.brand',
+                    array_values(array_wrap(ConfigService::$availableBrands))
+                )
         );
 
         return $this;
@@ -517,8 +524,18 @@ class ContentQueryBuilder extends QueryBuilder
     {
         $this->restrictStatuses()
             ->restrictPublishedOnDate()
-            ->restrictBrand()
-            ->restrictByPermissions();
+         ->restrictBrand()
+          ->restrictByPermissions();
+
+        return $this;
+    }
+
+    public function whereIn($param, $values)
+    {
+        $this->add('where',
+            $this->expr()
+                ->in($param, $values)
+        );
 
         return $this;
     }

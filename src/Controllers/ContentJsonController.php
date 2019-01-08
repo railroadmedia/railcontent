@@ -127,12 +127,7 @@ class ContentJsonController extends Controller
 
         $contentData = $this->contentService->getByIds(explode(',', $request->get('ids', '')));
 
-        return reply()->json(
-            $contentData,
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return response($this->serializer->serialize($contentData, 'json'));
     }
 
     /**
@@ -164,12 +159,7 @@ class ContentJsonController extends Controller
         //
         //        $content = array_merge($content, ['validation' => $validation]);
 
-        return reply()->json(
-            array_values([$id => $content]),
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return response($this->serializer->serialize($content, 'json'), 200);
     }
 
     public function slugs(Request $request, ...$slugs)
