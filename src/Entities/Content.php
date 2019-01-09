@@ -64,7 +64,7 @@ class Content
     protected $userId;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", name="published_on", nullable=true)
      * @var \DateTime
      */
     protected $publishedOn;
@@ -82,6 +82,11 @@ class Content
      * @ORM\Column(type="datetime")
      */
     protected $createdOn;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ContentField", mappedBy="content")
+     */
+    protected $fields;
 
     /**
      * @return int
@@ -252,6 +257,16 @@ class Content
     public function getArchivedOn()
     {
         return $this->archivedOn;
+    }
+
+    /**
+     * Returns fields.
+     *
+     * @return array
+     */
+    public function getFields()
+    {
+        return $this->fields->toArray();
     }
 
     public function setParameters($parameters)

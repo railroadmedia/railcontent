@@ -216,20 +216,19 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $position = $this->faker->numberBetween();
         $status = ContentService::STATUS_PUBLISHED;
         $publishedOn =
-            Carbon::now()
-                ->toDateTimeString();
-
+            Carbon::now()->toDateTimeString()
+                ;
+        $contentData = [
+            'slug'=> $slug,
+            'status' => $status,
+            'type' => $type,
+            'position' => $position,
+            'published_on' => $publishedOn,
+        ];
         $response = $this->call(
             'PUT',
             'railcontent/content',
-            [
-                'slug' => $slug,
-                'status' => $status,
-                'type' => $type,
-                'position' => $position,
-                'auth_level' => 'administrator',
-                'published_on' => $publishedOn,
-            ]
+            $contentData
         );
 
         $expectedResults = [
@@ -251,7 +250,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'sort' => 0,
         ];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson());
+        $this->assertArraySubset($contentData, $response->decodeResponseJson());
     }
 
     public function test_content_service_return_new_content_after_create()
