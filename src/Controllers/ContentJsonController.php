@@ -86,7 +86,7 @@ class ContentJsonController extends Controller
             $request->get('included_user_states', [])
         );
 
-        return response($this->serializer->serialize($contentData, 'json'), 201);
+        return response($this->serializer->serialize($contentData, 'json'), 200);
 
 //        return reply()->json(
 //            $contentData['results'],

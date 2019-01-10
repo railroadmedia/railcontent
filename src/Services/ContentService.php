@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentEntity;
+use Railroad\Railcontent\Entities\ContentField;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
@@ -100,7 +101,7 @@ class ContentService
     public function __construct(
         EntityManager $entityManager,
         ContentVersionRepository $versionRepository,
-        ContentFieldRepository $fieldRepository,
+      //  ContentFieldRepository $fieldRepository,
         ContentDatumRepository $datumRepository,
         ContentHierarchyRepository $contentHierarchyRepository,
         ContentPermissionRepository $contentPermissionRepository,
@@ -111,8 +112,10 @@ class ContentService
         $this->entityManager = $entityManager;
 
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
+        $this->fieldRepository = $this->entityManager->getRepository(ContentField::class);
+
         $this->versionRepository = $versionRepository;
-        $this->fieldRepository = $fieldRepository;
+
         $this->datumRepository = $datumRepository;
         $this->contentHierarchyRepository = $contentHierarchyRepository;
         $this->contentPermissionRepository = $contentPermissionRepository;
@@ -137,12 +140,11 @@ class ContentService
             $results = CacheHelper::saveUserCache(
                 $hash,
                 $this->contentRepository->build()
-                    ->selectPrimaryColumns()
                     ->restrictByUserAccess()
-                    ->where('id = :id')
+                    ->where(ConfigService::$tableContent.'.id = :id')
                     ->setParameter('id', $id)
                     ->getQuery()
-                    ->getOneOrNullResult(),
+                    ->getSingleResult(),
                 [$id]
             );
         }
@@ -1223,33 +1225,34 @@ class ContentService
      */
     public function deleteContentRelated($contentId)
     {
+        //TODO
         //delete the link with the parent and reposition other siblings
-        $this->contentHierarchyRepository->deleteChildParentLinks($contentId);
-
-        //delete the content children
-        $this->contentHierarchyRepository->deleteParentChildLinks($contentId);
-
-        //delete the content fields
-        $this->fieldRepository->deleteByContentId($contentId);
-
-        //delete the content datum
-        $this->datumRepository->deleteByContentId($contentId);
-
-        //delete the links with the permissions
-        $this->contentPermissionRepository->deleteByContentId($contentId);
-
-        //delete the content comments, replies and assignation
-        $comments = $this->commentRepository->getByContentId($contentId);
-
-        $this->commentAssignationRepository->query()
-            ->whereIn('comment_id', array_pluck($comments, 'id'))
-            ->delete();
-        //->deleteCommentAssignations(array_pluck($comments, 'id'));
-
-        $this->commentRepository->deleteByContentId($contentId);
-
-        //delete content playlists
-        $this->userContentProgressRepository->deleteByContentId($contentId);
+//        $this->contentHierarchyRepository->deleteChildParentLinks($contentId);
+//
+//        //delete the content children
+//        $this->contentHierarchyRepository->deleteParentChildLinks($contentId);
+//
+//        //delete the content fields
+//        $this->fieldRepository->deleteByContentId($contentId);
+//
+//        //delete the content datum
+//        $this->datumRepository->deleteByContentId($contentId);
+//
+//        //delete the links with the permissions
+//        $this->contentPermissionRepository->deleteByContentId($contentId);
+//
+//        //delete the content comments, replies and assignation
+//        $comments = $this->commentRepository->getByContentId($contentId);
+//
+//        $this->commentAssignationRepository->query()
+//            ->whereIn('comment_id', array_pluck($comments, 'id'))
+//            ->delete();
+//        //->deleteCommentAssignations(array_pluck($comments, 'id'));
+//
+//        $this->commentRepository->deleteByContentId($contentId);
+//
+//        //delete content playlists
+//        $this->userContentProgressRepository->deleteByContentId($contentId);
     }
 
     /**

@@ -62,16 +62,16 @@ class ContentRepository extends EntityRepository
     /**
      * @return CachedQuery|$this
      */
-    protected function newQuery()
-    {
-        return (new ContentQueryBuilder(
-            $this->connection(),
-            $this->connection()
-                ->getQueryGrammar(),
-            $this->connection()
-                ->getPostProcessor()
-        ))->from(ConfigService::$tableContent);
-    }
+//    protected function newQuery()
+//    {
+//        return (new ContentQueryBuilder(
+//            $this->connection(),
+//            $this->connection()
+//                ->getQueryGrammar(),
+//            $this->connection()
+//                ->getPostProcessor()
+//        ))->from(ConfigService::$tableContent);
+//    }
 
     protected function decorate($results)
     {

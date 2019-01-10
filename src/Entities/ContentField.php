@@ -121,7 +121,7 @@ class ContentField
     /**
      * @param integer $position
      */
-    public function setPosition(integer $position)
+    public function setPosition(int $position)
     : void {
         $this->position = $position;
     }

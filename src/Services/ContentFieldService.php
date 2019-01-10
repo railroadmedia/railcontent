@@ -2,14 +2,18 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\ORM\EntityManager;
+use Railroad\Railcontent\Entities\ContentField;
 use Railroad\Railcontent\Events\ContentFieldCreated;
 use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
+use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 
 class ContentFieldService
 {
+    private $entityManager;
     /**
      * @var ContentFieldRepository
      */
@@ -26,9 +30,14 @@ class ContentFieldService
      * @param ContentFieldRepository $fieldRepository
      * @param ContentService $contentService
      */
-    public function __construct(ContentFieldRepository $fieldRepository, ContentService $contentService)
+    public function __construct(EntityManager $entityManager,
+        ContentService $contentService)
     {
-        $this->fieldRepository = $fieldRepository;
+        $this->entityManager = $entityManager;
+
+        $this->fieldRepository = $this->entityManager->getRepository(ContentField::class);
+
+       // $this->fieldRepository = $fieldRepository;
         $this->contentService = $contentService;
     }
 
@@ -202,22 +211,38 @@ class ContentFieldService
 
     public function createOrUpdate($data)
     {
-        $id = $this->fieldRepository->createOrUpdateAndReposition(
-            $data['id'] ?? null,
-            $data
-        );
+        $contentField = new ContentField();
 
-        //Fire an event that the content was modified
-        if (array_key_exists('id', $data)) {
-            event(new ContentFieldUpdated($data['content_id']));
-        } else {
-            event(new ContentFieldCreated($data['content_id']));
+        if(array_key_exists('id',$data)) {
+            $contentField = $this->fieldRepository->find($data['id']);
         }
 
-        //delete cache associated with the content id
-        CacheHelper::deleteCache('content_' . $data['content_id']);
+        $content = $this->contentService->getById($data['content_id']);
 
-        return $this->get($id['id']);
+        $contentField->setKey($data['key']);
+        $contentField->setValue($data['value']);
+        $contentField->setPosition($data['position']);
+        $contentField->setType($data['type']);
+        $contentField->setContent($content);
+        $this->entityManager->persist($contentField);
+        $this->entityManager->flush();
+
+//        $id = $this->fieldRepository->createOrUpdateAndReposition(
+//            $data['id'] ?? null,
+//            $data
+//        );
+
+        //Fire an event that the content was modified
+//        if (array_key_exists('id', $data)) {
+//            event(new ContentFieldUpdated($data['content_id']));
+//        } else {
+//            event(new ContentFieldCreated($data['content_id']));
+//        }
+
+        //delete cache associated with the content id
+        //CacheHelper::deleteCache('content_' . $data['content_id']);
+dd($this->fieldRepository->reposition($contentField));
+        return $contentField;
     }
 
 }

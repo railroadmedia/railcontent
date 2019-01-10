@@ -215,40 +215,18 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $type = $this->faker->word;
         $position = $this->faker->numberBetween();
         $status = ContentService::STATUS_PUBLISHED;
-        $publishedOn =
-            Carbon::now()->toDateTimeString()
-                ;
+
         $contentData = [
             'slug'=> $slug,
             'status' => $status,
             'type' => $type,
-            'position' => $position,
-            'published_on' => $publishedOn,
+            'sort' => $position,
         ];
         $response = $this->call(
             'PUT',
             'railcontent/content',
             $contentData
         );
-
-        $expectedResults = [
-                'id' => '1',
-                'slug' => $slug,
-                'brand' => ConfigService::$brand,
-                'language' => ConfigService::$defaultLanguage,
-                'status' => $status,
-                'type' => $type,
-                'created_on' => Carbon::now()
-                    ->toDateTimeString(),
-                'published_on' => $publishedOn,
-                'archived_on' => null,
-//                'parent_id' => null,
-                'fields' => [],
-                'data' => [],
-                'permissions' => [],
-//                'child_id' => null,
-                'sort' => 0,
-        ];
 
         $this->assertArraySubset($contentData, $response->decodeResponseJson());
     }
@@ -407,17 +385,17 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $new_slug = implode('-', $this->faker->words());
         $updatedContent = $this->serviceBeingTested->update(
-            $content['id'],
+            $content->getId(),
             [
                 "slug" => $new_slug,
-                "status" => $content['status'],
-                "type" => $content['type'],
+                "status" => $content->getStatus(),
+                "type" => $content->getType(),
                 "language" => ConfigService::$defaultLanguage,
-                "published_on" => $content['published_on'],
+                "published_on" => $content->getPublishedOn(),
             ]
         );
 
-        $content['slug'] = $new_slug;
+        $content->setSlug($new_slug);
         //$content['position'] = 1;
 
         $this->assertEquals($content, $updatedContent);
@@ -426,7 +404,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
     public function test_service_delete_method_result()
     {
         $content = $this->contentFactory->create();
-        $delete = $this->serviceBeingTested->delete($content['id']);
+        $delete = $this->serviceBeingTested->delete($content->getId());
 
         $this->assertTrue($delete);
     }
@@ -494,7 +472,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_index_with_results()
     {
-        $userId = $this->createAndLogInNewUser();
         $statues = ['published'];
         $types = ['course'];
         $page = 1;
@@ -563,7 +540,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'included_types' => $types,
             ]
         );
-        $responseContent = $response->decodeResponseJson('data');
+
+        $responseContent = $response->decodeResponseJson();
 
         $this->assertArraySubset($expectedContent['results'], $responseContent);
         $this->assertEquals($nrCourses, $response->decodeResponseJson('meta')['totalResults']);
@@ -918,7 +896,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_pull_content_permission()
     {
-        $user = $this->createAndLogInNewUser();
         $content1 = $this->contentFactory->create(
             $this->faker->word,
             $this->faker->randomElement(ConfigService::$commentableContentTypes),
@@ -939,7 +916,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
         $userPermission = $this->userPermissionRepository->create(
             [
-                'user_id' => $user,
+                'user_id' => 1,
                 'permission_id' => $permission['id'],
                 'start_date' => Carbon::now()
                     ->subMonth(2)

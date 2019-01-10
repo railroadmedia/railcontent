@@ -201,4 +201,11 @@ trait ByContentIdTrait
 
         return $deleted > 0;
     }
+
+    public function reposition($field)
+    {
+dd($this->findBy(
+    ['content' => $field->getContent()->getId()]
+));
+    }
 }

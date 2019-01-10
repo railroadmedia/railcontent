@@ -49,7 +49,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/content/field',
             [
-                'content_id' => $content['id'],
+                'content_id' => $content->getId(),
                 'key' => $key,
                 'value' => $value,
                 'type' => $type,
@@ -59,7 +59,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $expectedResults = [
             "id" => "1",
-            "content_id" => $content['id'],
+            "content_id" => $content->getId(),
             "key" => $key,
             "value" => $value,
             "type" => $type,
