@@ -113,15 +113,15 @@ class ContentField
      * @return integer
      */
     public function getPosition()
-    : integer
+    : int
     {
         return $this->position;
     }
 
     /**
-     * @param integer $position
+     * @param integer|null $position
      */
-    public function setPosition(int $position)
+    public function setPosition($position)
     : void {
         $this->position = $position;
     }

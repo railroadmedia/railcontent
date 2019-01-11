@@ -152,7 +152,7 @@ class CustomFormRequest extends FormRequest
             $contentId = $request->request->get('content_id');
             $content = $this->contentService->getById($contentId);
 
-            return $content['type'] ?? '';
+            return $content->getType() ?? '';
         }
 
         return $type;
@@ -691,7 +691,7 @@ class CustomFormRequest extends FormRequest
         }
 
         if (!empty($contentDatumOrField)) {
-            return $this->contentService->getById($contentDatumOrField['content_id']);
+            return $this->contentService->getById($contentDatumOrField->getContent()->getId());
         }
 
         return [];

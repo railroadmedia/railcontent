@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use JMS\Serializer\SerializerBuilder;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentFieldCreateRequest;
@@ -24,6 +25,8 @@ class ContentFieldJsonController extends Controller
      */
     private $permissionPackageService;
 
+    private $serializer;
+
     /**
      * FieldController constructor.
      *
@@ -33,6 +36,11 @@ class ContentFieldJsonController extends Controller
     {
         $this->fieldService = $fieldService;
         $this->permissionPackageService = $permissionPackageService;
+
+
+        $this->serializer =
+            SerializerBuilder::create()
+                ->build();
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -78,6 +86,8 @@ class ContentFieldJsonController extends Controller
                 ]
             )
         );
+
+        return response($this->serializer->serialize(['data' => [$contentField]], 'json'));
 
         return reply()->json(
             [$contentField],

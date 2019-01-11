@@ -70,7 +70,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $this->contentFactory = $this->app->make(ContentFactory::class);
 //        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
-//        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
 //        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
         $this->serviceBeingTested = $this->app->make(ContentService::class);
 //        $this->classBeingTested = $this->app->make(ContentRepository::class);
@@ -626,7 +626,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         //create 30th courses
         for ($i = 0; $i < 30; $i++) {
             $content = $this->contentFactory->create($this->faker->word, $types[0]);
-            $contents[$content['id']] = (array)$content;
+            $contents[$content->getId()] = $this->serializer->toArray($content);
         }
 
         //create the required field
@@ -647,7 +647,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             );
 
             $expectedResults[$i - 1] = $contents[$i];
-            $expectedResults[$i - 1]['fields'][] = $field->getArrayCopy();
+            $expectedResults[$i - 1]['fields'][] = $this->serializer->toArray($field);
         }
 
         $instructor =
@@ -655,7 +655,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $fieldInstructor = [
             'key' => 'instructor',
-            'value' => $instructor['id'],
+            'value' => $instructor->getId(),
             'type' => 'content_id',
         ];
 
@@ -668,19 +668,19 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 $fieldInstructor['type']
             );
 
-            $contentField['type'] = 'content';
-            $contentField['value'] = (array)$instructor;
+           // $contentField['type'] = 'content';
+           // $contentField['value'] = (array)$instructor;
             if (array_key_exists(($i - 1), $expectedResults)) {
-                $expectedResults[$i - 1]['fields'][] = $contentField->getArrayCopy();
+                $expectedResults[$i - 1]['fields'][] = $this->serializer->toArray($contentField);
             }
         }
 
-        for ($i = 1; $i < 25; $i++) {
-            $datum = $this->contentDatumFactory->create($contents[$i]['id']);
-            if (array_key_exists(($i - 1), $expectedResults)) {
-                $expectedResults[$i - 1]['data'][] = $datum->getArrayCopy();
-            }
-        }
+//        for ($i = 1; $i < 25; $i++) {
+//            $datum = $this->contentDatumFactory->create($contents[$i]['id']);
+//            if (array_key_exists(($i - 1), $expectedResults)) {
+//                $expectedResults[$i - 1]['data'][] = $datum->getArrayCopy();
+//            }
+//        }
 
         $expectedContent['results'] = $expectedResults;
         $expectedContent['total_results'] = count($expectedContent['results']);
@@ -705,7 +705,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $responseContent = $response->decodeResponseJson('data');
+        $responseContent = $response->decodeResponseJson();
 
         $this->assertArraySubset($expectedContent['results'], $responseContent);
     }

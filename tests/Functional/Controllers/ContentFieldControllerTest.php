@@ -40,7 +40,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
     public function test_create_content_field_controller_method_response()
     {
         $content = $this->contentFactory->create();
-        $key = $this->faker->text(255);
+        $key = $this->faker->word();
         $value = $this->faker->text(255);
         $type = $this->faker->word;
         $position = $this->faker->numberBetween();
@@ -59,7 +59,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $expectedResults = [
             "id" => "1",
-            "content_id" => $content->getId(),
+            "content" => $this->serializer->toArray($content),
             "key" => $key,
             "value" => $value,
             "type" => $type,
@@ -67,6 +67,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         ];
 
         $this->assertEquals(200, $response->status());
+
         $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
 
     }
@@ -78,7 +79,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/content/field',
             [
-                'content_id' => $content['id'],
+                'content_id' => $content->getId(),
             ]
         );
 
@@ -133,20 +134,20 @@ class ContentFieldControllerTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $field = $this->contentFieldFactory->create($content['id']);
+        $field = $this->contentFieldFactory->create($content->getId());
 
         $new_value = $this->faker->text(255);
 
         $response = $this->call(
             'PUT',
-            'railcontent/content/field/' ,
+            'railcontent/content/field/',
             [
-                'id' => $field['id'],
-                'content_id' => $content['id'],
-                'key' => $field['key'],
+                'id' => $field->getId(),
+                'content_id' => $content->getId(),
+                'key' => $field->getKey(),
                 'value' => $new_value,
-                'position' => $field['position'],
-                'type' => $field['type'],
+                'position' => $field->getPosition(),
+                'type' => $field->getType(),
             ]
         );
 
@@ -154,11 +155,11 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $expectedResults = [
             "id" => "1",
-            "content_id" => $content['id'],
-            "key" => $field['key'],
+            "content" => $this->serializer->toArray($content),
+            "key" => $field->getKey(),
             "value" => $new_value,
-            "type" => $field['type'],
-            "position" => $field['position'],
+            "type" => $field->getType(),
+            "position" => $field->getPosition(),
         ];
 
         $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
@@ -168,13 +169,13 @@ class ContentFieldControllerTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $field = $this->contentFieldFactory->create($content['id']);
+        $field = $this->contentFieldFactory->create($content->getId());
 
         $response = $this->call(
             'PUT',
             'railcontent/content/field/',
             [
-                'id' =>  $field['id'],
+                'id' => $field->getId(),
                 'content_id' => $this->faker->numberBetween(),
             ]
         );
@@ -196,9 +197,9 @@ class ContentFieldControllerTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $field = $this->contentFieldFactory->create($content['id']);
+        $field = $this->contentFieldFactory->create($content->getId());
 
-        $response = $this->call('DELETE', 'railcontent/content/field/' . $field['id']);
+        $response = $this->call('DELETE', 'railcontent/content/field/' . $field->getId());
 
         $this->assertEquals(null, json_decode($response->getContent()));
         $this->assertEquals(204, $response->status());
@@ -222,29 +223,31 @@ class ContentFieldControllerTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $field = $this->contentFieldFactory->create();
+        $field = $this->contentFieldFactory->create($content->getId());
 
         $updatedField = [
-            'content_id' => $content['id'],
-            'key' => $field['key'],
+            'content_id' => $content->getId(),
+            'key' => $field->getKey(),
             'value' => $this->faker->word,
-            'id' => $field['id'],
-            'type' => $field['type'],
-            'position' => $field['position'],
+            'id' => $field->getId(),
+            'type' => $field->getType(),
+            'position' => 1,
         ];
 
-        $results = $this->contentFieldService->update($field['id'], $updatedField);
+        $results = $this->contentFieldService->update($field->getId(), $updatedField);
 
-        $this->assertEquals($updatedField, $results->getArrayCopy());
+        $updatedField['content'] = $this->serializer->toArray($content);
+        unset($updatedField['content_id']);
+        $this->assertEquals($updatedField, $this->serializer->toArray($results));
     }
 
     public function test_delete_content_field_method_from_service_response()
     {
         $content = $this->contentFactory->create();
 
-        $field = $this->contentFieldFactory->create($content['id']);
+        $field = $this->contentFieldFactory->create($content->getId());
 
-        $results = $this->contentFieldService->delete($field['id']);
+        $results = $this->contentFieldService->delete($field->getId());
 
         $this->assertTrue($results);
     }
@@ -324,9 +327,8 @@ class ContentFieldControllerTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $field = $this->contentFieldFactory->create($content['id']);
+        $field = $this->contentFieldFactory->create($content->getId());
 
-        $content = $this->contentFactory->create();
         $key = $this->faker->text(255);
         $value = $this->faker->text(255);
         $type = $this->faker->word;
@@ -336,8 +338,8 @@ class ContentFieldControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/content/field',
             [
-                'id' => $field['id'],
-                'content_id' => $content['id'],
+                'id' => $field->getId(),
+                'content_id' => $content->getId(),
                 'key' => $key,
                 'value' => $value,
                 'type' => $type,
@@ -345,8 +347,8 @@ class ContentFieldControllerTest extends RailcontentTestCase
             ]
         );
         $expectedResults = [
-            "id" => $field['id'],
-            "content_id" => $content['id'],
+            "id" => $field->getId(),
+            "content" => $this->serializer->toArray($content),
             "key" => $key,
             "value" => $value,
             "type" => $type,
@@ -355,6 +357,66 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->status());
         $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+    }
 
+    public function test_create_new_field_and_reposition_other_fields_increment()
+    {
+        $content = $this->contentFactory->create();
+        $key = $this->faker->word();
+
+        for ($i = 1; $i < 3; $i++) {
+            $fields[] = $this->contentFieldFactory->create($content->getId(), $key, $this->faker->word, $i);
+        }
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/field',
+            [
+                'content_id' => $content->getId(),
+                'key' => $key,
+                'value' => $this->faker->word,
+                'type' => $this->faker->word,
+                'position' => 1,
+            ]
+        );
+        $response = $this->call(
+            'GET',
+            'railcontent/content/' . $content->getId()
+        );
+        $this->assertArraySubset(
+            [['id' => 1, 'position' => 2], ['id' => 2, 'position' => 3], ['id' => 3, 'position' => 1]],
+            $response->decodeResponseJson()['fields']
+        );
+    }
+
+    public function test_update_field_and_reposition_other_fields_decrement()
+    {
+        $content = $this->contentFactory->create();
+        $key = $this->faker->word();
+
+        for ($i = 1; $i <= 4; $i++) {
+            $fields[] = $this->contentFieldFactory->create($content->getId(), $key, $this->faker->word, $i);
+        }
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/field',
+            [
+                'id' => 2,
+                'content_id' => $content->getId(),
+                'key' => $key,
+                'value' => $this->faker->word,
+                'type' => $this->faker->word,
+                'position' => 10,
+            ]
+        );
+
+        $response = $this->call(
+            'GET',
+            'railcontent/content/' . $content->getId()
+        );
+
+        $this->assertArraySubset(
+            [['id' => 1, 'position' => 1], ['id' => 2, 'position' => 4], ['id' => 3, 'position' => 2],['id' => 4, 'position' => 3]],
+            $response->decodeResponseJson()['fields']
+        );
     }
 }

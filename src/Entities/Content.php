@@ -75,6 +75,13 @@ class Content
      */
     protected $archivedOn;
 
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="ContentField", mappedBy="content")
+     */
+    protected $fields;
+
     /**
      * @var \DateTime $createdOn
      *
@@ -82,11 +89,6 @@ class Content
      * @ORM\Column(type="datetime")
      */
     protected $createdOn;
-
-    /**
-     * @ORM\OneToMany(targetEntity="ContentField", mappedBy="content")
-     */
-    protected $fields;
 
     /**
      * @return int
@@ -266,7 +268,7 @@ class Content
      */
     public function getFields()
     {
-        return $this->fields->toArray();
+        return $this->fields;
     }
 
     public function setParameters($parameters)

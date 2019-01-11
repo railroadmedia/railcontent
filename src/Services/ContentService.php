@@ -140,7 +140,9 @@ class ContentService
             $results = CacheHelper::saveUserCache(
                 $hash,
                 $this->contentRepository->build()
-                    ->restrictByUserAccess()
+->restrictByUserAccess()
+                    ->select([ConfigService::$tableContent, ConfigService::$tableContentFields])
+                    ->join(ConfigService::$tableContent.'.fields',ConfigService::$tableContentFields)
                     ->where(ConfigService::$tableContent.'.id = :id')
                     ->setParameter('id', $id)
                     ->getQuery()
@@ -204,11 +206,17 @@ class ContentService
         if (!$results) {
             $results = CacheHelper::saveUserCache(
                 $hash,
-                $this->contentRepository->query()
-                    ->selectPrimaryColumns()
+                $this->contentRepository->build()
                     ->restrictByUserAccess()
-                    ->where('type', $type)
-                    ->get()
+                    ->where(ConfigService::$tableContent . '.type', $type)
+                    ->getQuery()
+                    ->getResult()
+
+//                $this->contentRepository->query()
+//                    ->selectPrimaryColumns()
+//                    ->restrictByUserAccess()
+//                    ->where('type', $type)
+//                    ->get()
             );
         }
 
@@ -1036,12 +1044,7 @@ class ContentService
             $results = new ContentFilterResultsEntity($cache);
         }
 
-        $contentsQuery = $this->contentRepository->createQueryBuilder('c');
 
-        return $contentsQuery->setMaxResults($limit)
-            ->setFirstResult($page)
-            ->getQuery()
-            ->getResult();
 
         if (!$results) {
             $filter = $this->contentRepository->startFilter(
@@ -1077,6 +1080,14 @@ class ContentService
                     is_array($includedUserState) ? $includedUserState : explode(',', $includedUserState)
                 );
             }
+
+            $contentsQuery = $this->contentRepository->createQueryBuilder('c');
+
+            return $contentsQuery->setMaxResults($limit)
+                ->setFirstResult($page)
+                ->getQuery()
+                ->getResult();
+
             $resultsDB = new ContentFilterResultsEntity(
                 [
                     'results' => $this->contentRepository->query()
@@ -1396,5 +1407,10 @@ class ContentService
         }
 
         return $results;
+    }
+
+    public function test($id)
+    {
+        return $this->contentRepository->findAll();
     }
 }

@@ -47,7 +47,7 @@ class ContentFieldService
      */
     public function get($id)
     {
-        return $this->fieldRepository->read($id);
+        return $this->fieldRepository->find($id);
     }
 
     /**
@@ -172,13 +172,13 @@ class ContentFieldService
             return $field;
         }
 
-        $this->fieldRepository->createOrUpdateAndReposition($id, $data);
+        $this->fieldRepository->reposition($id, $data);
 
         //Save a new content version
-        event(new ContentFieldUpdated($field['content_id']));
+//        event(new ContentFieldUpdated($field['content_id']));
 
         //delete cache for associated content id
-        CacheHelper::deleteCache('content_' . $field['content_id']);
+    //    CacheHelper::deleteCache('content_' . $field['content_id']);
 
         return $this->get($id);
     }
@@ -201,16 +201,18 @@ class ContentFieldService
         $deleted = $this->fieldRepository->deleteAndReposition(['id' => $id]);
 
         //Save a new content version
-        event(new ContentFieldDeleted($field['content_id']));
+       // event(new ContentFieldDeleted($field['content_id']));
 
         //delete cache for associated content id
-        CacheHelper::deleteCache('content_' . $field['content_id']);
+       // CacheHelper::deleteCache('content_' . $field['content_id']);
 
         return $deleted;
     }
 
     public function createOrUpdate($data)
     {
+        return $this->fieldRepository->reposition($data['id']??null, $data);
+
         $contentField = new ContentField();
 
         if(array_key_exists('id',$data)) {
@@ -224,6 +226,7 @@ class ContentFieldService
         $contentField->setPosition($data['position']);
         $contentField->setType($data['type']);
         $contentField->setContent($content);
+
         $this->entityManager->persist($contentField);
         $this->entityManager->flush();
 
@@ -241,7 +244,7 @@ class ContentFieldService
 
         //delete cache associated with the content id
         //CacheHelper::deleteCache('content_' . $data['content_id']);
-dd($this->fieldRepository->reposition($contentField));
+
         return $contentField;
     }
 
