@@ -1345,6 +1345,17 @@ class ContentService
      */
     public function getContentForCalendar()
     {
+        $shows = [];
+        $liveEventsTypes = [];
+        $contentReleasesTypes = [];
+        $parents = [];
+        $idsOfChildrenOfSelectSemesterPacks = [];
+        $culledSemesterPackLessons = [];
+
+        $compareFunc = function ($a, $b) {
+            return Carbon::parse($a['published_on']) >= Carbon::parse($b['published_on']);
+        };
+
         ContentRepository::$availableContentStatues = [
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
@@ -1352,41 +1363,86 @@ class ContentService
 
         ContentRepository::$pullFutureContent = true;
 
-        if(ConfigService::$brand === 'drumeo') {
-            $typesForCalendars = config('railcontent.types-for-calendars.drumeo');
+        $typesForCalendars = config('railcontent.types-for-calendars.' . ConfigService::$brand);
+        $semesterPacksToGet = config('railcontent.semester-packs-for-calendars.' . ConfigService::$brand);
 
-            if($typesForCalendars ){
-                $shows = $typesForCalendars['shows'];
-                $liveEventsTypes = $typesForCalendars['live-events-types'];
-                $contentReleasesTypes = $typesForCalendars['content-releases-types'];
-            }
-
-            $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
-                array_merge($liveEventsTypes, $shows),
-                ContentService::STATUS_SCHEDULED,
-                Carbon::now()
-                    ->toDateTimeString(),
-                '>'
-            );
-
-            $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
-                array_merge($contentReleasesTypes, $shows),
-                ContentService::STATUS_PUBLISHED,
-                Carbon::now()
-                    ->toDateTimeString(),
-                '>'
-            );
-
-            $scheduleEvents =
-                $liveEvents->merge($contentReleases)
-                    ->sort(
-                        function ($a, $b) {
-                            return Carbon::parse($a['published_on']) >= Carbon::parse($b['published_on']);
-                        }
-                    )
-                    ->values();
+        if(empty($typesForCalendars) && empty($semesterPacksToGet)){
+            return new Collection();
         }
 
-        return $scheduleEvents ?? [];
+        if($typesForCalendars){
+            $shows = $typesForCalendars['shows'];
+            $liveEventsTypes = $typesForCalendars['live-events-types'];
+            $contentReleasesTypes = $typesForCalendars['content-releases-types'];
+        }
+
+        $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            array_merge($liveEventsTypes, $shows),
+            ContentService::STATUS_SCHEDULED,
+            Carbon::now()
+                ->toDateTimeString(),
+            '>'
+        );
+
+        $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            array_merge($contentReleasesTypes, $shows),
+            ContentService::STATUS_PUBLISHED,
+            Carbon::now()
+                ->toDateTimeString(),
+            '>'
+        );
+
+        foreach($semesterPacksToGet as $semesterPack){
+            $parents[] = $this->getTypesBySlugSpecialStatus($semesterPack);
+        }
+
+        foreach($parents as $parent){
+            foreach($this->getByParentIdWhereTypeIn($parent['id'], ['semester-pack-lesson'])->all() as $lesson){
+                $idsOfChildrenOfSelectSemesterPacks[] = $lesson['id'];
+            }
+        } // Ids of semester pack lessons of semesters configured to be in calendar
+
+        $semesterPackLessons = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            ['semester-pack-lesson'],
+            ContentService::STATUS_PUBLISHED,
+            Carbon::now()->toDateTimeString(),
+            '>'
+        ); // All semester pack lessons eligible for calendar (status 'published' and 'publish_on' date in future)
+
+        // todo: why is this here? Is it required?
+        foreach($semesterPackLessons as $lesson){
+            if(in_array($lesson['id'], $idsOfChildrenOfSelectSemesterPacks)){
+                $culledSemesterPackLessons[] = $lesson;
+            }
+        }
+
+        $liveEventsAndContentReleases = $liveEvents->merge($contentReleases)->sort($compareFunc)->values();
+        $scheduleEvents = $liveEventsAndContentReleases->merge($culledSemesterPackLessons)->sort($compareFunc)->values();
+
+        return $scheduleEvents ?? new Collection();
+    }
+
+    public function getTypesBySlugSpecialStatus($slug, $type = 'semester-pack', $statuses = null, $all = false)
+    {
+        if(!$statuses){
+            $statuses = [ContentService::STATUS_DRAFT];
+        }
+
+        // make a note of what this was set to so it can be re-set after we're done with it here
+        $statusesBefore = ContentRepository::$availableContentStatues;
+
+        // include drafts because packs might not be published, but we still want to get their *lessons*
+        ContentRepository::$availableContentStatues = array_merge($statusesBefore, $statuses);
+
+        $results = $this->getBySlugAndType($slug, $type);
+
+        // set this to what it was before
+        ContentRepository::$availableContentStatues = $statusesBefore;
+
+        if($all){
+            return $results;
+        }
+
+        return $results->first();
     }
 }
