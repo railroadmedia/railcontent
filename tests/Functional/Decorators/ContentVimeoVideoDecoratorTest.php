@@ -9,7 +9,6 @@ use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\PermissionsFactory;
 use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -72,7 +71,10 @@ class ContentVimeoVideoDecoratorTest extends RailcontentTestCase
             'string'
         );
 
-        ConfigService::$decorators['content'] = [ContentVimeoVideoDecorator::class];
+        config()->set(
+            'resora.decorators.content',
+            array_merge(config('resora.decorators.content'), [ContentVimeoVideoDecorator::class])
+        );
 
         $contentResults = $this->serviceBeingTested->getById($content['id']);
 
