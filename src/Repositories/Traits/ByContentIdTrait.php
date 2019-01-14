@@ -33,6 +33,7 @@ trait ByContentIdTrait
         return $this->query()->where('content_id', $contentId)->delete() > 0;
     }
 
+    // todo: this func could use some cleaning/refactoring
     /**
      * @param null $dataId
      * @param $data

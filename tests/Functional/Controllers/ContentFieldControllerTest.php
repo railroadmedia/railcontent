@@ -523,5 +523,88 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $this->assertDatabaseHas(ConfigService::$tableContentFields, $field3->getArrayCopy());
     }
 
+    public function test_update_content_field_middle_position_reposition_other()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = rand();
+        $field1 = $this->contentFieldFactory->create($content['id'], $key);
+        $field2 = $this->contentFieldFactory->create($content['id'], $key);
+        $field3 = $this->contentFieldFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'PATCH',
+            'railcontent/content/field/' . $field1['id'],
+            [
+                'position' => 2,
+            ]
+        );
+
+        $this->assertEquals(201, $response->status());
+
+        $field1['position'] = 2;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field1->getArrayCopy());
+
+        $field2['position'] = 1;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field2->getArrayCopy());
+
+        $field3['position'] = 3;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field3->getArrayCopy());
+    }
+
+    public function test_update_content_field_max_position_reposition_other()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = rand();
+        $field1 = $this->contentFieldFactory->create($content['id'], $key);
+        $field2 = $this->contentFieldFactory->create($content['id'], $key);
+        $field3 = $this->contentFieldFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'PATCH',
+            'railcontent/content/field/' . $field1['id'],
+            [
+                'position' => 100,
+            ]
+        );
+
+        $this->assertEquals(201, $response->status());
+
+        $field1['position'] = 3;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field1->getArrayCopy());
+
+        $field2['position'] = 1;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field2->getArrayCopy());
+
+        $field3['position'] = 2;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field3->getArrayCopy());
+    }
+
+    public function test_delete_content_field_reposition_other()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = rand();
+        $field1 = $this->contentFieldFactory->create($content['id'], $key);
+        $field2 = $this->contentFieldFactory->create($content['id'], $key);
+        $field3 = $this->contentFieldFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'DELETE',
+            'railcontent/content/field/' . $field2['id']
+        );
+
+        $this->assertEquals(204, $response->status());
+
+        $field1['position'] = 1;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field1->getArrayCopy());
+
+        $field3['position'] = 2;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field3->getArrayCopy());
+
+        $this->assertDatabaseMissing(ConfigService::$tableContentFields, ['id' => $field2['id']]);
+    }
+
     // test reposition
 }
