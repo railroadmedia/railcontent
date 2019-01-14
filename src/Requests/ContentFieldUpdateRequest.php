@@ -4,7 +4,7 @@ namespace Railroad\Railcontent\Requests;
 
 use Railroad\Railcontent\Services\ConfigService;
 
-class ContentDatumCreateRequest extends CustomFormRequest
+class ContentFieldUpdateRequest extends CustomFormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -18,9 +18,11 @@ class ContentDatumCreateRequest extends CustomFormRequest
         //set the general validation rules
         $this->setGeneralRules(
             [
-                'key' => 'required|max:255',
-                'position' => 'required|numeric|min:0',
-                'content_id' => 'required|numeric|exists:' .
+                'key' => 'max:255',
+                'value' => 'nullable|max:255',
+                'position' => 'numeric|min:0',
+                'type' => 'max:255',
+                'content_id' => 'numeric|exists:' .
                     ConfigService::$databaseConnectionName .
                     '.' .
                     ConfigService::$tableContent .
@@ -29,7 +31,7 @@ class ContentDatumCreateRequest extends CustomFormRequest
         );
 
         //set the custom validation rules
-        $this->setCustomRules($this, 'datum');
+        $this->setCustomRules($this, 'fields');
 
         //get all the rules for the request
         return parent::rules();

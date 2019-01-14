@@ -7,9 +7,9 @@ use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
-use Railroad\Railcontent\Services\ConfigService;
 
 class ContentDatumControllerTest extends RailcontentTestCase
 {
@@ -75,16 +75,23 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $response = $this->call('PUT', 'railcontent/content/datum');
 
         $this->assertEquals(422, $response->status());
-        $this->assertEquals([
+        $this->assertEquals(
             [
-                "source" => "key",
-                "detail" => "The key field is required.",
+                [
+                    "source" => "key",
+                    "detail" => "The key field is required.",
+                ],
+                [
+                    "source" => "position",
+                    "detail" => "The position field is required.",
+                ],
+                [
+                    "source" => "content_id",
+                    "detail" => "The content id field is required.",
+                ],
             ],
-            [
-                "source" => "content_id",
-                "detail" => "The content id field is required.",
-            ]
-        ], $response->decodeResponseJson('meta')['errors']);
+            $response->decodeResponseJson('meta')['errors']
+        );
     }
 
     public function test_add_content_datum_key_not_pass_the_validation()
@@ -93,19 +100,26 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $value = $this->faker->text(500);
 
         $response =
-            $this->call('PUT', 'railcontent/content/datum', ['content_id' => 1, 'key' => $key, 'value' => $value]);
+            $this->call(
+                'PUT',
+                'railcontent/content/datum',
+                ['content_id' => 1, 'key' => $key, 'position' => 1, 'value' => $value]
+            );
 
         $this->assertEquals(422, $response->status());
-        $this->assertEquals([
+        $this->assertEquals(
             [
-                "source" => "key",
-                "detail" => "The key may not be greater than 255 characters.",
+                [
+                    "source" => "key",
+                    "detail" => "The key may not be greater than 255 characters.",
+                ],
+                [
+                    "source" => "content_id",
+                    "detail" => "The selected content id is invalid.",
+                ],
             ],
-            [
-                "source" => "content_id",
-                "detail" => "The selected content id is invalid.",
-            ]
-        ], $response->decodeResponseJson('meta')['errors']);
+            $response->decodeResponseJson('meta')['errors']
+        );
     }
 
     public function test_update_content_datum_controller_method_response()
@@ -177,12 +191,15 @@ class ContentDatumControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(422, $response->status());
-        $this->assertEquals([
+        $this->assertEquals(
             [
-                "source" => "key",
-                "detail" => "The key may not be greater than 255 characters.",
-            ]
-        ], $response->decodeResponseJson('meta')['errors']);
+                [
+                    "source" => "key",
+                    "detail" => "The key may not be greater than 255 characters.",
+                ],
+            ],
+            $response->decodeResponseJson('meta')['errors']
+        );
     }
 
     public function test_delete_content_datum_controller()

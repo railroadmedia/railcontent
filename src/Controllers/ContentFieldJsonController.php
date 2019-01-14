@@ -2,21 +2,26 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentFieldCreateRequest;
 use Railroad\Railcontent\Requests\ContentFieldDeleteRequest;
+use Railroad\Railcontent\Requests\ContentFieldUpdateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFieldService;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentFieldJsonController extends Controller
 {
     use ValidatesRequests;
 
+    /**
+     * @var ContentFieldService
+     */
     private $fieldService;
 
     /**
@@ -28,6 +33,7 @@ class ContentFieldJsonController extends Controller
      * FieldController constructor.
      *
      * @param ContentFieldService $fieldService
+     * @param PermissionService $permissionPackageService
      */
     public function __construct(ContentFieldService $fieldService, PermissionService $permissionPackageService)
     {
@@ -61,22 +67,18 @@ class ContentFieldJsonController extends Controller
      *
      * @param ContentFieldCreateRequest $request
      * @return JsonResponse
+     * @throws \Railroad\Permissions\Exceptions\NotAllowedException
      */
     public function store(ContentFieldCreateRequest $request)
     {
         $this->permissionPackageService->canOrThrow(auth()->id(), 'create.content.field');
 
-        $contentField = $this->fieldService->createOrUpdate(
-            $request->only(
-                [
-                    'id',
-                    'content_id',
-                    'key',
-                    'value',
-                    'position',
-                    'type',
-                ]
-            )
+        $contentField = $this->fieldService->create(
+            $request->input('content_id'),
+            $request->input('key'),
+            $request->input('value'),
+            $request->input('position'),
+            $request->input('type')
         );
 
         return reply()->json(
@@ -88,16 +90,53 @@ class ContentFieldJsonController extends Controller
     }
 
     /**
+     * Call the method from service to update a content datum
+     *
+     * @param integer $dataId
+     * @param ContentFieldUpdateRequest $request
+     * @return JsonResponse
+     * @throws \Railroad\Permissions\Exceptions\NotAllowedException
+     * @throws \Throwable
+     */
+    public function update($dataId, ContentFieldUpdateRequest $request)
+    {
+        $this->permissionPackageService->canOrThrow(auth()->id(), 'update.content.field');
+
+        $contentField = $this->fieldService->update(
+            $dataId,
+            $request->only(
+                [
+                    'content_id',
+                    'key',
+                    'value',
+                    'position',
+                    'type',
+                ]
+            )
+        );
+
+        throw_if(
+            is_null($contentField),
+            new NotFoundException('Update failed, field not found with id: ' . $dataId)
+        );
+
+        return reply()->json(
+            [$contentField],
+            [
+                'transformer' => DataTransformer::class,
+                'code' => 201,
+            ]
+        );
+    }
+
+    /**
      * Call the method from service to delete the content's field
      *
+     * @param ContentFieldDeleteRequest $request
      * @param integer $fieldId
-     * @param Request $request
      * @return JsonResponse
-     *
-     * Hmm... we're not actually using that request in here, but including it triggers the prepending validation, so
-     * maybe it needs to be there for that?
-     *
-     * Jonathan, February 2018
+     * @throws \Railroad\Permissions\Exceptions\NotAllowedException
+     * @throws \Throwable
      */
     public function delete(ContentFieldDeleteRequest $request, $fieldId)
     {
@@ -105,9 +144,8 @@ class ContentFieldJsonController extends Controller
 
         $deleted = $this->fieldService->delete($fieldId);
 
-        //if the update method response it's null the field not exist; we throw the proper exception
         throw_if(
-            is_null($deleted),
+            !$deleted,
             new NotFoundException('Delete failed, field not found with id: ' . $fieldId)
         );
 

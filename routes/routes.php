@@ -157,6 +157,11 @@ Route::group(
                     \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@store'
                 )->name('content.field.store');
 
+                Route::patch(
+                    '/content/field/{fieldId}',
+                    \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@update'
+                )->name('content.field.update');
+
                 Route::delete(
                     '/content/field/{fieldId}',
                     \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@delete'

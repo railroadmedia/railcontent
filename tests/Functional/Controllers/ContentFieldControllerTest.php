@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFieldService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -83,7 +82,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(422, $response->status());
-        $this->assertEquals(2, count($response->decodeResponseJson('meta')['errors']));
+        $this->assertEquals(4, count($response->decodeResponseJson('meta')['errors']));
     }
 
     public function test_add_content_field_incorrect_fields()
@@ -114,12 +113,16 @@ class ContentFieldControllerTest extends RailcontentTestCase
                 "detail" => "The key may not be greater than 255 characters.",
             ],
             [
-                "source" => "type",
-                "detail" => "The type may not be greater than 255 characters.",
+                "source" => "value",
+                "detail" => "The value may not be greater than 255 characters.",
             ],
             [
                 "source" => "position",
                 "detail" => "The position must be a number.",
+            ],
+            [
+                "source" => "type",
+                "detail" => "The type may not be greater than 255 characters.",
             ],
             [
                 "source" => "content_id",
@@ -138,10 +141,9 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $new_value = $this->faker->text(255);
 
         $response = $this->call(
-            'PUT',
-            'railcontent/content/field/' ,
+            'PATCH',
+            'railcontent/content/field/' . $field['id'],
             [
-                'id' => $field['id'],
                 'content_id' => $content['id'],
                 'key' => $field['key'],
                 'value' => $new_value,
@@ -150,7 +152,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(201, $response->status());
 
         $expectedResults = [
             "id" => "1",
@@ -171,10 +173,10 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $field = $this->contentFieldFactory->create($content['id']);
 
         $response = $this->call(
-            'PUT',
-            'railcontent/content/field/',
+            'PATCH',
+            'railcontent/content/field/' . $field['id'],
             [
-                'id' =>  $field['id'],
+                'id' => $field['id'],
                 'content_id' => $this->faker->numberBetween(),
             ]
         );
@@ -320,7 +322,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         );
     }
 
-    public function test_update_content_field_()
+    public function test_update_content_field()
     {
         $content = $this->contentFactory->create();
 
@@ -333,10 +335,9 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $position = $this->faker->numberBetween();
 
         $response = $this->call(
-            'PUT',
-            'railcontent/content/field',
+            'PATCH',
+            'railcontent/content/field/' . $field['id'],
             [
-                'id' => $field['id'],
                 'content_id' => $content['id'],
                 'key' => $key,
                 'value' => $value,
@@ -353,8 +354,10 @@ class ContentFieldControllerTest extends RailcontentTestCase
             "position" => 1,
         ];
 
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(201, $response->status());
         $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
 
     }
+
+    // test reposition
 }

@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Exceptions\NotFoundException;
@@ -42,6 +43,7 @@ class ContentDatumJsonController extends Controller
      *
      * @param ContentDatumCreateRequest $request
      * @return JsonResponse
+     * @throws \Railroad\Permissions\Exceptions\NotAllowedException
      */
     public function store(ContentDatumCreateRequest $request)
     {
@@ -86,7 +88,6 @@ class ContentDatumJsonController extends Controller
             )
         );
 
-        //if the update method response it's null the datum not exist; we throw the proper exception
         throw_if(
             is_null($contentData),
             new NotFoundException('Update failed, datum not found with id: ' . $dataId)
@@ -104,13 +105,11 @@ class ContentDatumJsonController extends Controller
     /**
      * Call the method from service to delete the content data
      *
+     * @param ContentDatumDeleteRequest $request
      * @param integer $dataId
      * @return JsonResponse
-     *
-     * Hmm... we're not actually using that request in here, but including it triggers the prepending validation, so
-     * maybe it needs to be there for that?
-     *
-     * Jonathan, February 2018
+     * @throws \Railroad\Permissions\Exceptions\NotAllowedException
+     * @throws \Throwable
      */
     public function delete(ContentDatumDeleteRequest $request, $dataId)
     {
@@ -118,9 +117,8 @@ class ContentDatumJsonController extends Controller
 
         $deleted = $this->datumService->delete($dataId);
 
-        //if the update method response it's null the datum not exist; we throw the proper exception
         throw_if(
-            is_null($deleted),
+            !$deleted,
             new NotFoundException('Delete failed, datum not found with id: ' . $dataId)
         );
 

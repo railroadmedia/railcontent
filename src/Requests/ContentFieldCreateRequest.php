@@ -18,11 +18,15 @@ class ContentFieldCreateRequest extends CustomFormRequest
         //set the general validation rules
         $this->setGeneralRules(
             [
-                'key' => 'required_without:id|max:255',
-                'type' => 'required_without:id|max:255',
-                'position' => 'nullable|numeric|min:0',
-                'content_id' => 'required_without:id|numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
-                    ConfigService::$tableContent . ',id'
+                'key' => 'required|max:255',
+                'value' => 'required|nullable|max:255',
+                'position' => 'required|numeric|min:0',
+                'type' => 'required|max:255',
+                'content_id' => 'required|numeric|exists:' .
+                    ConfigService::$databaseConnectionName .
+                    '.' .
+                    ConfigService::$tableContent .
+                    ',id',
             ]
         );
 
