@@ -27,6 +27,8 @@ Create a new content datum record based on request data and return the new creat
 
 Only users with 'create.content.data' ability can create content datum.
 
+Positions of the datum stack (datum with the same key and content id) are always updated automatically to remain incremental.
+
 
 ### Request Example
 
@@ -36,7 +38,7 @@ $.ajax({
     url: 'https://www.musora.com' +
         '/railcontent/content/datum',
     type: 'put'
-  	data: {content_id: 3, key: 'description' value: 'very long description here'} 
+  	data: {content_id: 3, key: 'description' value: 'very long description here', position: 3} 
 		// position will automatically be set to the end of the stack if you dont pass one in
     dataType: 'json',
     success: function(response) {
@@ -94,6 +96,8 @@ Update the content datum with the request data and return the updated datum in J
 
 Only users with 'update.content.data' ability can update content datum.
 
+Positions of the datum stack (datum with the same key and content id) are always updated automatically to remain incremental.
+
 
 ### Request Example
 
@@ -103,7 +107,7 @@ $.ajax({
     url: 'https://www.musora.com' +
         '/railcontent/content/datum/73',
     type: 'patch'
-  	data: {value: 'another long description here'}
+  	data: {value: 'another long description here', position: 18}
     dataType: 'json',
     success: function(response) {
         // handle success
@@ -175,6 +179,7 @@ Delete content datum if exists in the database.
 
 Only users with 'delete.content.data' ability can delete content's data.
 
+Positions of the datum stack (datum with the same key and content id) are always updated automatically to remain incremental.
 
 ### Request Example
 
