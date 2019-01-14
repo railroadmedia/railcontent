@@ -24,8 +24,12 @@ Store/update content field - JSON controller
 
 Create/update a new content field based on request data and return the new created field data in JSON format.
 
-
 Only users with 'create.content.field' ability can create/update contents.
+
+Positions of the field stack (fields with the same key and content id) are always updated automatically to remain incremental.
+
+'type' attribute is not used for anything functional, its purely for organization and clarity purposes. It will probably 
+be removed in future versions.
 
 ### Request Example
 
@@ -35,7 +39,7 @@ $.ajax({
     url: 'https://www.musora.com' +
         '/railcontent/content/field',
     type: 'put'
-  	data: {content_id: 3, key: 'topic' value: 'rock', type: 'string'} 
+  	data: {content_id: 3, key: 'topic' value: 'rock', position: 3, type: 'string'} 
 		// position will automatically be set to the end of the stack if you dont pass one in
     dataType: 'json',
     success: function(response) {
@@ -85,6 +89,94 @@ body , type , no , string , The type of field this is. Options are 'string' 'int
 	"type":"string"
 }
 
+```
+
+Update content field - JSON controller
+--------------------------------------
+
+`{ PATCH /content/field/{id} }`
+
+Update the content field with the request data and return the updated field in JSON format. 
+
+Only users with 'update.content.field' ability can update content field.
+
+Positions of the field stack (fields with the same key and content id) are always updated automatically to remain incremental.
+
+'type' attribute is not used for anything functional, its purely for organization and clarity purposes. It will probably 
+be removed in future versions.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/content/field/73',
+    type: 'patch'
+  	data: {value: 'another long description here', position: 18}
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key         |  required |  default |  description\|notes                                                                              | 
+|-----------------|--------------|-----------|----------|--------------------------------------------------------------------------------------------------| 
+| path            |  id          |  yes      |          |  Id of the field you want to edit.                                                               | 
+| body            |  content_id  |  no       |          |  The content id this field belongs to.                                                           | 
+| body            |  key         |  no       |          |  The key of this field; also know as the name.                                                   | 
+| body            |  value       |  no       |          |  The value of the field.                                                                         | 
+| body            |  position    |  no       |  1       |  The position of this field relative to other field with the same key under the same content id. | 
+| body            |  type        |  no       |  string  |  The type of field this is. Options are 'string' 'integer' 'content_id'                         | 
+
+
+
+
+<!-- donatstudios.com/CsvToMarkdownTable
+path|query|body, key, required, default, description\|notes
+path , id , yes , , Id of the field you want to edit.
+body , content_id , no ,  , The content id this field belongs to.
+body , key , no ,  , The key of this field; also know as the name.
+body , value , no ,  , The value of the field.
+body , position , no , 1 , The position of this field relative to other field with the same key under the same content id.
+-->
+
+
+### Response Example
+
+```201 OK```
+
+```json
+{
+	"id":73,
+	"key":"title",
+	"value":"My Title",
+	"position":1,
+	"type":"string"
+}
+
+```
+```404 Not Found```
+
+```json
+{
+      "status":"error",
+      "code":404,
+      "total_results":0,
+      "results":[],
+      "error":{
+        "title":"Entity not found.",
+        "detail":"Update failed, field not found with id: 513"
+      }
+}
 ```
 
 
