@@ -605,6 +605,4 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $this->assertDatabaseMissing(ConfigService::$tableContentFields, ['id' => $field2['id']]);
     }
-
-    // test reposition
 }

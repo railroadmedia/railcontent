@@ -95,12 +95,11 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $key = $this->faker->text(600);
         $value = $this->faker->text(500);
 
-        $response =
-            $this->call(
-                'PUT',
-                'railcontent/content/datum',
-                ['content_id' => 1, 'key' => $key, 'position' => 1, 'value' => $value]
-            );
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/datum',
+            ['content_id' => 1, 'key' => $key, 'position' => 1, 'value' => $value]
+        );
 
         $this->assertEquals(422, $response->status());
         $this->assertEquals(
@@ -324,5 +323,249 @@ class ContentDatumControllerTest extends RailcontentTestCase
                 return $event->contentId == $contentId;
             }
         );
+    }
+
+    public function test_create_content_field_default_position_end()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = $this->faker->text(255);
+        $value = $this->faker->text(255);
+        $type = $this->faker->word;
+
+        $datum1 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum2 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum3 = $this->contentDatumFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/datum',
+            [
+                'content_id' => $content['id'],
+                'key' => $key,
+                'value' => $value,
+                'type' => $type,
+            ]
+        );
+
+        $expectedResults = [
+            "id" => 4,
+            "content_id" => $content['id'],
+            "key" => $key,
+            "value" => $value,
+            "position" => 4,
+        ];
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+    }
+
+    public function test_create_content_field_position_end_when_to_high()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = $this->faker->text(255);
+        $value = $this->faker->text(255);
+        $type = $this->faker->word;
+
+        $datum1 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum2 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum3 = $this->contentDatumFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/datum',
+            [
+                'content_id' => $content['id'],
+                'key' => $key,
+                'value' => $value,
+                'position' => 10,
+                'type' => $type,
+            ]
+        );
+
+        $expectedResults = [
+            "id" => 4,
+            "content_id" => $content['id'],
+            "key" => $key,
+            "value" => $value,
+            "position" => 4,
+        ];
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+    }
+
+    public function test_create_content_field_beginning_position_reposition_other()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = $this->faker->text(255);
+        $value = $this->faker->text(255);
+        $type = $this->faker->word;
+
+        $datum1 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum2 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum3 = $this->contentDatumFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/datum',
+            [
+                'content_id' => $content['id'],
+                'key' => $key,
+                'value' => $value,
+                'position' => 1,
+                'type' => $type,
+            ]
+        );
+
+        $expectedResults = [
+            "id" => 4,
+            "content_id" => $content['id'],
+            "key" => $key,
+            "value" => $value,
+            "position" => 1,
+        ];
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+
+        $datum1['position'] = 2;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum1->getArrayCopy());
+
+        $datum2['position'] = 3;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum2->getArrayCopy());
+
+        $datum3['position'] = 4;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum3->getArrayCopy());
+    }
+
+    public function test_create_content_field_middle_position_reposition_other()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = $this->faker->text(255);
+        $value = $this->faker->text(255);
+        $type = $this->faker->word;
+
+        $datum1 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum2 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum3 = $this->contentDatumFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/datum',
+            [
+                'content_id' => $content['id'],
+                'key' => $key,
+                'value' => $value,
+                'position' => 2,
+                'type' => $type,
+            ]
+        );
+
+        $expectedResults = [
+            "id" => 4,
+            "content_id" => $content['id'],
+            "key" => $key,
+            "value" => $value,
+            "position" => 2,
+        ];
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+
+        $datum1['position'] = 1;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum1->getArrayCopy());
+
+        $datum2['position'] = 3;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum2->getArrayCopy());
+
+        $datum3['position'] = 4;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum3->getArrayCopy());
+    }
+
+    public function test_update_content_field_middle_position_reposition_other()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = rand();
+        $datum1 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum2 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum3 = $this->contentDatumFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'PATCH',
+            'railcontent/content/datum/' . $datum1['id'],
+            [
+                'position' => 2,
+            ]
+        );
+
+        $this->assertEquals(201, $response->status());
+
+        $datum1['position'] = 2;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum1->getArrayCopy());
+
+        $datum2['position'] = 1;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum2->getArrayCopy());
+
+        $datum3['position'] = 3;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum3->getArrayCopy());
+    }
+
+    public function test_update_content_field_max_position_reposition_other()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = rand();
+        $datum1 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum2 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum3 = $this->contentDatumFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'PATCH',
+            'railcontent/content/datum/' . $datum1['id'],
+            [
+                'position' => 100,
+            ]
+        );
+
+        $this->assertEquals(201, $response->status());
+
+        $datum1['position'] = 3;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum1->getArrayCopy());
+
+        $datum2['position'] = 1;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum2->getArrayCopy());
+
+        $datum3['position'] = 2;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum3->getArrayCopy());
+    }
+
+    public function test_delete_content_field_reposition_other()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = rand();
+        $datum1 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum2 = $this->contentDatumFactory->create($content['id'], $key);
+        $datum3 = $this->contentDatumFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'DELETE',
+            'railcontent/content/datum/' . $datum2['id']
+        );
+
+        $this->assertEquals(204, $response->status());
+
+        $datum1['position'] = 1;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum1->getArrayCopy());
+
+        $datum3['position'] = 2;
+        $this->assertDatabaseHas(ConfigService::$tableContentData, $datum3->getArrayCopy());
+
+        $this->assertDatabaseMissing(ConfigService::$tableContentData, ['id' => $datum2['id']]);
     }
 }
