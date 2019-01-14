@@ -187,8 +187,9 @@ Delete content field - JSON controller
 
 Delete content field if exists in the database. 
 
-
 Only users with 'delete.content.field' ability can delete content's field.
+
+Positions of the field stack (fields with the same key and content id) are always updated automatically to remain incremental.
 
 
 ### Request Example
