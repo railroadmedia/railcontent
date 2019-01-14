@@ -82,10 +82,6 @@ class ContentDatumControllerTest extends RailcontentTestCase
                     "detail" => "The key field is required.",
                 ],
                 [
-                    "source" => "position",
-                    "detail" => "The position field is required.",
-                ],
-                [
                     "source" => "content_id",
                     "detail" => "The content id field is required.",
                 ],

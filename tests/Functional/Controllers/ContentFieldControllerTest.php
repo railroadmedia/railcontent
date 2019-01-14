@@ -82,7 +82,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(422, $response->status());
-        $this->assertEquals(4, count($response->decodeResponseJson('meta')['errors']));
+        $this->assertEquals(3, count($response->decodeResponseJson('meta')['errors']));
     }
 
     public function test_add_content_field_incorrect_fields()
@@ -356,7 +356,171 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $this->assertEquals(201, $response->status());
         $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+    }
 
+    public function test_create_content_field_default_position_end()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = $this->faker->text(255);
+        $value = $this->faker->text(255);
+        $type = $this->faker->word;
+
+        $field1 = $this->contentFieldFactory->create($content['id'], $key);
+        $field2 = $this->contentFieldFactory->create($content['id'], $key);
+        $field3 = $this->contentFieldFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/field',
+            [
+                'content_id' => $content['id'],
+                'key' => $key,
+                'value' => $value,
+                'type' => $type,
+            ]
+        );
+
+        $expectedResults = [
+            "id" => 4,
+            "content_id" => $content['id'],
+            "key" => $key,
+            "value" => $value,
+            "type" => $type,
+            "position" => 4,
+        ];
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+    }
+
+    public function test_create_content_field_position_end_when_to_high()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = $this->faker->text(255);
+        $value = $this->faker->text(255);
+        $type = $this->faker->word;
+
+        $field1 = $this->contentFieldFactory->create($content['id'], $key);
+        $field2 = $this->contentFieldFactory->create($content['id'], $key);
+        $field3 = $this->contentFieldFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/field',
+            [
+                'content_id' => $content['id'],
+                'key' => $key,
+                'value' => $value,
+                'position' => 10,
+                'type' => $type,
+            ]
+        );
+
+        $expectedResults = [
+            "id" => 4,
+            "content_id" => $content['id'],
+            "key" => $key,
+            "value" => $value,
+            "type" => $type,
+            "position" => 4,
+        ];
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+    }
+
+    public function test_create_content_field_beginning_position_reposition_other()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = $this->faker->text(255);
+        $value = $this->faker->text(255);
+        $type = $this->faker->word;
+
+        $field1 = $this->contentFieldFactory->create($content['id'], $key);
+        $field2 = $this->contentFieldFactory->create($content['id'], $key);
+        $field3 = $this->contentFieldFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/field',
+            [
+                'content_id' => $content['id'],
+                'key' => $key,
+                'value' => $value,
+                'position' => 1,
+                'type' => $type,
+            ]
+        );
+
+        $expectedResults = [
+            "id" => 4,
+            "content_id" => $content['id'],
+            "key" => $key,
+            "value" => $value,
+            "type" => $type,
+            "position" => 1,
+        ];
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+
+        $field1['position'] = 2;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field1->getArrayCopy());
+
+        $field2['position'] = 3;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field2->getArrayCopy());
+
+        $field3['position'] = 4;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field3->getArrayCopy());
+    }
+
+    public function test_create_content_field_middle_position_reposition_other()
+    {
+        $content = $this->contentFactory->create();
+
+        $key = $this->faker->text(255);
+        $value = $this->faker->text(255);
+        $type = $this->faker->word;
+
+        $field1 = $this->contentFieldFactory->create($content['id'], $key);
+        $field2 = $this->contentFieldFactory->create($content['id'], $key);
+        $field3 = $this->contentFieldFactory->create($content['id'], $key);
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/field',
+            [
+                'content_id' => $content['id'],
+                'key' => $key,
+                'value' => $value,
+                'position' => 2,
+                'type' => $type,
+            ]
+        );
+
+        $expectedResults = [
+            "id" => 4,
+            "content_id" => $content['id'],
+            "key" => $key,
+            "value" => $value,
+            "type" => $type,
+            "position" => 2,
+        ];
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+
+        $field1['position'] = 1;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field1->getArrayCopy());
+
+        $field2['position'] = 3;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field2->getArrayCopy());
+
+        $field3['position'] = 4;
+        $this->assertDatabaseHas(ConfigService::$tableContentFields, $field3->getArrayCopy());
     }
 
     // test reposition

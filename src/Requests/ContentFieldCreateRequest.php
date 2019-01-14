@@ -20,7 +20,7 @@ class ContentFieldCreateRequest extends CustomFormRequest
             [
                 'key' => 'required|max:255',
                 'value' => 'required|nullable|max:255',
-                'position' => 'required|numeric|min:0',
+                'position' => 'numeric|min:0',
                 'type' => 'required|max:255',
                 'content_id' => 'required|numeric|exists:' .
                     ConfigService::$databaseConnectionName .

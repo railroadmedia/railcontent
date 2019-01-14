@@ -19,7 +19,7 @@ class ContentDatumCreateRequest extends CustomFormRequest
         $this->setGeneralRules(
             [
                 'key' => 'required|max:255',
-                'position' => 'required|numeric|min:0',
+                'position' => 'numeric|min:0',
                 'content_id' => 'required|numeric|exists:' .
                     ConfigService::$databaseConnectionName .
                     '.' .
