@@ -2,9 +2,14 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\ORM\EntityManager;
+use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\ContentPermission;
+use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\PermissionRepository;
 
 /**
  * Class PermissionService
@@ -24,16 +29,28 @@ class ContentPermissionService
     private $contentRepository;
 
     /**
+     * @var PermissionRepository
+     */
+    private $permissionRepository;
+
+    private $entityManager;
+
+    /**
      * PermissionService constructor.
      *
      * @param ContentPermissionRepository $contentPermissionRepository
      */
     public function __construct(
-        ContentPermissionRepository $contentPermissionRepository,
-        ContentRepository $contentRepository
-    ) {
-        $this->contentPermissionRepository = $contentPermissionRepository;
-        $this->contentRepository = $contentRepository;
+        EntityManager $entityManager
+        // ContentPermissionRepository $contentPermissionRepository,
+        // ContentRepository $contentRepository
+    )
+    {
+        $this->entityManager = $entityManager;
+
+        $this->contentPermissionRepository = $this->entityManager->getRepository(ContentPermission::class);
+        $this->contentRepository = $this->entityManager->getRepository(Content::class);
+        $this->permissionRepository = $this->entityManager->getRepository(Permission::class);
     }
 
     /**
@@ -74,11 +91,19 @@ class ContentPermissionService
      */
     public function dissociate($contentId = null, $contentType = null, $permissionId)
     {
-        $results = $this->contentPermissionRepository->dissociate($contentId, $contentType, $permissionId);
+        $q =
+            $this->entityManager->createQuery(
+                'delete from ' . ContentPermission::class . ' cp where cp.permission = :permissionId and (cp.content = :contentId or cp.contentType = :contentType)'
+            )
+                ->setParameters(['permissionId' => $permissionId, 'contentId' => $contentId, 'contentType'=> $contentType]);
 
-        $this->clearAssociatedContentCache([$contentId], [$contentType]);
+        $q->execute();
 
-        return $results;
+        //$results = $this->contentPermissionRepository->dissociate($contentId, $contentType, $permissionId);
+
+        //$this->clearAssociatedContentCache([$contentId], [$contentType]);
+
+        return true;
     }
 
     /**
@@ -89,18 +114,33 @@ class ContentPermissionService
      */
     public function create($contentId = null, $contentType = null, $permissionId, $brand = null)
     {
-        $contentPermission = $this->contentPermissionRepository->create(
-            [
-                'content_id' => $contentId,
-                'content_type' => $contentType,
-                'brand' => $brand ?? ConfigService::$brand,
-                'permission_id' => $permissionId,
-            ]
-        );
+        $content = null;
+        if ($contentId) {
+            $content = $this->contentRepository->find($contentId);
+        }
+        $permission = $this->permissionRepository->find($permissionId);
 
-        $this->clearAssociatedContentCache([$contentId], [$contentType]);
+        $contentPermission = new ContentPermission();
+        $contentPermission->setBrand($brand ?? ConfigService::$brand);
+        $contentPermission->setContentType($contentType);
+        $contentPermission->setContent($content);
+        $contentPermission->setPermission($permission);
 
-        return $this->get($contentPermission['id']);
+        $this->entityManager->persist($contentPermission);
+        $this->entityManager->flush();
+
+        //        $contentPermission = $this->contentPermissionRepository->create(
+        //            [
+        //                'content_id' => $contentId,
+        //                'content_type' => $contentType,
+        //                'brand' => $brand ?? ConfigService::$brand,
+        //                'permission_id' => $permissionId,
+        //            ]
+        //        );
+        //
+        //        $this->clearAssociatedContentCache([$contentId], [$contentType]);
+
+        return $contentPermission;
     }
 
     /**
@@ -135,10 +175,12 @@ class ContentPermissionService
             CacheHelper::deleteCache('content_' . $contentId);
         }
         foreach ($contentTypes as $contentType) {
-            $contents = $this->contentRepository->query()->selectPrimaryColumns()
-                ->restrictByUserAccess()
-                ->where('type', $contentType)
-                ->get();
+            $contents =
+                $this->contentRepository->query()
+                    ->selectPrimaryColumns()
+                    ->restrictByUserAccess()
+                    ->where('type', $contentType)
+                    ->get();
             foreach ($contents as $content) {
                 CacheHelper::deleteCache('content_' . $content['id']);
             }

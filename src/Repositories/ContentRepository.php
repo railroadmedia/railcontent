@@ -45,7 +45,7 @@ class ContentRepository extends EntityRepository
      */
     public static $bypassPermissions = true;
 
-    private $requiredFields = [];
+    public $requiredFields = [];
     private $includedFields = [];
 
     private $requiredUserStates = [];

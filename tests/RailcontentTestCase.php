@@ -15,6 +15,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
+use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Permissions\Providers\PermissionsServiceProvider;
@@ -93,8 +94,9 @@ class RailcontentTestCase extends BaseTestCase
         $this->databaseManager = $this->app->make(DatabaseManager::class);
         $this->authManager = $this->app->make(AuthManager::class);
         $this->router = $this->app->make(Router::class);
-        $this->serializer =  SerializerBuilder::create()
-            ->build();
+        $this->serializer =   SerializerBuilder::create()->setSerializationContextFactory(function(){
+            return SerializationContext::create()->setSerializeNull(true);
+        })            ->build();
 
         $this->permissionServiceMock =
             $this->getMockBuilder(PermissionService::class)

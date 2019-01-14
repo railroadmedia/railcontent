@@ -86,6 +86,7 @@ trait ByContentIdTrait
                 ->create($data);
 
         } elseif ($data['position'] > $existingData['position']) {
+            dd('update');
             $updated =
                 $this->query()
                     ->where('id', $dataId)
@@ -101,6 +102,7 @@ trait ByContentIdTrait
             return $updated;
 
         } elseif ($data['position'] < $existingData['position']) {
+            dd('mai mic');
             $updated =
                 $this->query()
                     ->where('id', $dataId)
@@ -182,33 +184,43 @@ trait ByContentIdTrait
     }
 
     private function decrementOtherEntitiesPosition(
-        $excludedEntityId,
+        $excludedEntityId = null,
         $contentId,
         $key,
         $startPosition,
-        $endPosition
+        $endPosition = null
     ) {
+        $parameters = [];
         $q =
             $this->createQueryBuilder('c')
                 ->where('c.content = :id')
                 ->andWhere('c.key = :key')
-                ->andWhere('c.position > :position')
-                ->andWhere('c.position <= :endPosition')
-                ->andWhere('c.id != :excludedId')
-                //->setParameter('excludedId', $excludedEntityId)
-                ->setParameters(
-                    [
-                        'id' => $contentId,
-                        'key' => $key,
-                        'position' => $startPosition,
-                        'excludedId' => $excludedEntityId,
-                        'endPosition' => $endPosition
-                    ]
-                );
+                ->andWhere('c.position > :position');
+        if ($endPosition) {
+            $q->andWhere('c.position <= :endPosition');
+            $parameters['endPosition'] = $endPosition;
+        }
+        if ($excludedEntityId) {
+            $q->andWhere('c.id != :excludedId');
+            $parameters['excludedId'] = $excludedEntityId;
+        }
+
+        $parameters = array_merge(
+            $parameters,
+            [
+                'id' => $contentId,
+                'key' => $key,
+                'position' => $startPosition,
+            ]
+        );
+        $q->setParameters(
+            $parameters
+        );
 
         $iterableResult =
             $q->getQuery()
                 ->getResult();
+
         foreach ($iterableResult as $row) {
             $row->setPosition($row->getPosition() - 1);
             $this->getEntityManager()
@@ -230,7 +242,16 @@ trait ByContentIdTrait
         if (empty($existingLink)) {
             return true;
         }
+        $this->decrementOtherEntitiesPosition(
+            null,
+            $existingLink[0]->getContent()
+                ->getId(),
+            $existingLink[0]->getKey(),
+            $existingLink[0]->getPosition(),
+            null
+        );
 
+        //dd($existingLink[0]->getContent()->getId());
         //TODO: decrement other fields
         //        $query = $this->query();
         //        if(array_key_exists('content_id', $existingLink)){
@@ -280,11 +301,11 @@ trait ByContentIdTrait
 
         $dataCount = count(
             $this->findBy(
-                    [
-                        'content' => $content->getId(),
-                        'key' => $key,
-                    ]
-                )
+                [
+                    'content' => $content->getId(),
+                    'key' => $key,
+                ]
+            )
         );
 
         $data['position'] = $this->recalculatePosition(
@@ -304,7 +325,7 @@ trait ByContentIdTrait
 
         } elseif ($data['position'] > $existingData->getPosition()) {
             $this->decrementOtherEntitiesPosition(
-                $data['id'],
+                $id,
                 $content->getId(),
                 $key,
                 $existingData->getPosition(),
@@ -312,7 +333,7 @@ trait ByContentIdTrait
             );
         } elseif ($data['position'] < $existingData->getPosition()) {
             $this->incrementOtherEntitiesPosition(
-                $data['id'],
+                $id,
                 $existingData->getContent()
                     ->getId(),
                 $key,
@@ -327,7 +348,9 @@ trait ByContentIdTrait
         $existingData->setKey($data['key']);
         $existingData->setValue($data['value']);
         $existingData->setPosition($data['position']);
-        $existingData->setType($data['type']);
+        if(array_key_exists('type', $data)) {
+            $existingData->setType($data['type']);
+        }
         $existingData->setContent($content);
 
         $this->getEntityManager()

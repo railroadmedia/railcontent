@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Controllers;
 
 use Doctrine\ORM\EntityManager;
 use Illuminate\Routing\Controller;
+use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Exceptions\NotFoundException;
@@ -59,19 +60,19 @@ class PermissionJsonController extends Controller
     public function __construct(
         EntityManager $entityManager,
         //        PermissionService $permissionService,
-        //        ContentPermissionService $contentPermissionService,
+                ContentPermissionService $contentPermissionService,
         \Railroad\Permissions\Services\PermissionService $permissionPackageService
     ) {
         //        $this->permissionService = $permissionService;
-        //        $this->contentPermissionService = $contentPermissionService;
+                $this->contentPermissionService = $contentPermissionService;
         $this->permissionPackageService = $permissionPackageService;
 
         $this->entityManager = $entityManager;
         $this->permissionRepository = $this->entityManager->getRepository(Permission::class);
 
-        $this->serializer =
-            SerializerBuilder::create()
-                ->build();
+        $this->serializer =   SerializerBuilder::create()->setSerializationContextFactory(function(){
+            return SerializationContext::create()->setSerializeNull(true);
+        })            ->build();
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -178,12 +179,14 @@ class PermissionJsonController extends Controller
             $request->input('permission_id')
         );
 
-        return reply()->json(
-            [$assignedPermission],
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return response($this->serializer->serialize(['data' => [$assignedPermission]], 'json'));
+
+//        return reply()->json(
+//            [$assignedPermission],
+//            [
+//                'transformer' => DataTransformer::class,
+//            ]
+//        );
     }
 
     /**
@@ -201,6 +204,7 @@ class PermissionJsonController extends Controller
             $request->input('content_type'),
             $request->input('permission_id')
         );
+        return response($this->serializer->serialize(['data' => [$dissociate]], 'json'));
 
         return reply()->json(
             [[$dissociate]],

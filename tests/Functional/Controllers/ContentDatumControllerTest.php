@@ -27,9 +27,9 @@ class ContentDatumControllerTest extends RailcontentTestCase
     protected function setUp()
     {
         parent::setUp();
-
+        //
         $this->serviceBeingTested = $this->app->make(ContentDatumService::class);
-        $this->classBeingTested = $this->app->make(ContentDatumRepository::class);
+        //        $this->classBeingTested = $this->app->make(ContentDatumRepository::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
     }
@@ -45,7 +45,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/content/datum',
             [
-                'content_id' => $content['id'],
+                'content_id' => $content->getId(),
                 'key' => $key,
                 'value' => $value,
                 'position' => 1,
@@ -59,7 +59,6 @@ class ContentDatumControllerTest extends RailcontentTestCase
                 'data' => [
                     0 => [
                         'id' => '1',
-                        'content_id' => $content['id'],
                         'key' => $key,
                         'value' => $value,
                         'position' => 1,
@@ -75,16 +74,19 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $response = $this->call('PUT', 'railcontent/content/datum');
 
         $this->assertEquals(422, $response->status());
-        $this->assertEquals([
+        $this->assertEquals(
             [
-                "source" => "key",
-                "detail" => "The key field is required.",
+                [
+                    "source" => "key",
+                    "detail" => "The key field is required.",
+                ],
+                [
+                    "source" => "content_id",
+                    "detail" => "The content id field is required.",
+                ],
             ],
-            [
-                "source" => "content_id",
-                "detail" => "The content id field is required.",
-            ]
-        ], $response->decodeResponseJson('meta')['errors']);
+            $response->decodeResponseJson('meta')['errors']
+        );
     }
 
     public function test_add_content_datum_key_not_pass_the_validation()
@@ -96,16 +98,19 @@ class ContentDatumControllerTest extends RailcontentTestCase
             $this->call('PUT', 'railcontent/content/datum', ['content_id' => 1, 'key' => $key, 'value' => $value]);
 
         $this->assertEquals(422, $response->status());
-        $this->assertEquals([
+        $this->assertEquals(
             [
-                "source" => "key",
-                "detail" => "The key may not be greater than 255 characters.",
+                [
+                    "source" => "key",
+                    "detail" => "The key may not be greater than 255 characters.",
+                ],
+                [
+                    "source" => "content_id",
+                    "detail" => "The selected content id is invalid.",
+                ],
             ],
-            [
-                "source" => "content_id",
-                "detail" => "The selected content id is invalid.",
-            ]
-        ], $response->decodeResponseJson('meta')['errors']);
+            $response->decodeResponseJson('meta')['errors']
+        );
     }
 
     public function test_update_content_datum_controller_method_response()
@@ -113,7 +118,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $content = $this->contentFactory->create();
 
         $data = [
-            'content_id' => $content['id'],
+            'content_id' => $content->getId(),
             'key' => $this->faker->word,
             'value' => $this->faker->text(),
             'position' => $this->faker->numberBetween(),
@@ -129,7 +134,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'PATCH',
             'railcontent/content/datum/' . $dataId,
             [
-                'content_id' => $content['id'],
+                'content_id' => $content->getId(),
                 'key' => $data['key'],
                 'value' => $new_value,
                 'position' => $data['position'],
@@ -143,7 +148,6 @@ class ContentDatumControllerTest extends RailcontentTestCase
                 'data' => [
                     0 => [
                         'id' => 1,
-                        'content_id' => $content['id'],
                         'key' => $data['key'],
                         'value' => $new_value,
                         'position' => 1,
@@ -161,7 +165,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'key' => $this->faker->word,
             'value' => $this->faker->word,
             'position' => $this->faker->numberBetween(),
-            'content_id' => $content['id'],
+            'content_id' => $content->getId(),
         ];
         $dataId =
             $this->query()
@@ -177,49 +181,59 @@ class ContentDatumControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(422, $response->status());
-        $this->assertEquals([
+        $this->assertEquals(
             [
-                "source" => "key",
-                "detail" => "The key may not be greater than 255 characters.",
-            ]
-        ], $response->decodeResponseJson('meta')['errors']);
+                [
+                    "source" => "key",
+                    "detail" => "The key may not be greater than 255 characters.",
+                ],
+            ],
+            $response->decodeResponseJson('meta')['errors']
+        );
     }
 
     public function test_delete_content_datum_controller()
     {
         $content = $this->contentFactory->create();
 
-        $data = $this->contentDatumFactory->create($content['id']);
-
-        $response = $this->call('DELETE', 'railcontent/content/datum/' . $data['id']);
+        $data = $this->contentDatumFactory->create($content->getId());
+        $dataId = $data->getId();
+        $response = $this->call('DELETE', 'railcontent/content/datum/' . $dataId);
 
         $this->assertNull(json_decode($response->content()));
         $this->assertEquals(204, $response->status());
+        $this->assertDatabaseMissing(
+            ConfigService::$tableContentData,
+            [
+                'id' => $dataId,
+            ]
+        );
     }
 
     public function test_update_content_datum_method_from_service_response()
     {
         $content = $this->contentFactory->create();
 
-        $data = $this->contentDatumFactory->create($content['id']);
+        $data = $this->contentDatumFactory->create($content->getId());
 
         $newData = [
-            'key' => $data['key'],
+            'key' => $data->getKey(),
             'value' => $this->faker->text(500),
             'position' => 1,
-            'content_id' => $content['id'],
+            'content_id' => $content->getId(),
         ];
-        $updatedData = $this->serviceBeingTested->update($data['id'], $newData);
+        $updatedData = $this->serviceBeingTested->update($data->getId(), $newData);
 
+        unset($newData['content_id']);
         $this->assertEquals(
             array_merge(
                 [
-                    'id' => $data['id'],
-                    'content_id' => $content['id'],
+                    'id' => $data->getId(),
+                    'content' => $this->serializer->toArray($content),
                 ],
                 $newData
             ),
-            $updatedData->getArrayCopy()
+            $this->serializer->toArray($updatedData)
         );
     }
 
@@ -227,9 +241,9 @@ class ContentDatumControllerTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $data = $this->contentDatumFactory->create($content['id']);
+        $data = $this->contentDatumFactory->create($content->getId());
 
-        $results = $this->serviceBeingTested->get($data['id']);
+        $results = $this->serviceBeingTested->get($data->getId());
 
         $this->assertEquals($data, $results);
     }
@@ -238,9 +252,9 @@ class ContentDatumControllerTest extends RailcontentTestCase
     {
         $content = $this->contentFactory->create();
 
-        $data = $this->contentDatumFactory->create($content['id']);
+        $data = $this->contentDatumFactory->create($content->getId());
 
-        $results = $this->serviceBeingTested->delete($data['id']);
+        $results = $this->serviceBeingTested->delete($data->getId());
 
         $this->assertEquals(1, $results);
     }

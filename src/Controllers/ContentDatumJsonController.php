@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Routing\Controller;
+use JMS\Serializer\SerializerBuilder;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentDatumCreateRequest;
@@ -24,6 +25,8 @@ class ContentDatumJsonController extends Controller
      */
     private $permissionPackageService;
 
+    private $serializer;
+
     /**
      * DatumController constructor.
      *
@@ -33,6 +36,10 @@ class ContentDatumJsonController extends Controller
     {
         $this->datumService = $datumService;
         $this->permissionPackageService = $permissionPackageService;
+
+        $this->serializer =
+            SerializerBuilder::create()
+                ->build();
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -53,6 +60,8 @@ class ContentDatumJsonController extends Controller
             $request->input('value'),
             $request->input('position')
         );
+
+        return response($this->serializer->serialize(['data' => [$contentData]], 'json'));
 
         return reply()->json(
             [$contentData],
@@ -91,14 +100,15 @@ class ContentDatumJsonController extends Controller
             is_null($contentData),
             new NotFoundException('Update failed, datum not found with id: ' . $dataId)
         );
+        return response($this->serializer->serialize(['data' => [$contentData]], 'json'), 201);
 
-        return reply()->json(
-            [$contentData],
-            [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
-            ]
-        );
+//        return reply()->json(
+//            [$contentData],
+//            [
+//                'transformer' => DataTransformer::class,
+//                'code' => 201,
+//            ]
+//        );
     }
 
     /**

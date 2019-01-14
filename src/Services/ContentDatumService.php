@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\ORM\EntityManager;
+use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Events\ContentDatumCreated;
 use Railroad\Railcontent\Events\ContentDatumDeleted;
 use Railroad\Railcontent\Events\ContentDatumUpdated;
@@ -10,6 +12,7 @@ use Railroad\Railcontent\Repositories\ContentDatumRepository;
 
 class ContentDatumService
 {
+    private $entityManager;
     /**
      * @var ContentDatumRepository
      */
@@ -20,9 +23,11 @@ class ContentDatumService
      *
      * @param ContentDatumRepository $datumRepository
      */
-    public function __construct(ContentDatumRepository $datumRepository)
+    public function __construct(EntityManager $entityManager)
     {
-        $this->datumRepository = $datumRepository;
+        $this->entityManager = $entityManager;
+
+        $this->datumRepository = $this->entityManager->getRepository(ContentData::class);
     }
 
     /**
@@ -31,7 +36,7 @@ class ContentDatumService
      */
     public function get($id)
     {
-        return $this->datumRepository->read($id);
+        return $this->datumRepository->find($id);
     }
 
     /**
@@ -52,7 +57,7 @@ class ContentDatumService
      */
     public function create($contentId, $key, $value, $position)
     {
-        $contentDatum = $this->datumRepository->query()->createOrUpdateAndReposition(
+        $contentDatum = $this->datumRepository->reposition(
             null,
             [
                 'content_id' => $contentId,
@@ -63,12 +68,12 @@ class ContentDatumService
         );
 
         //call the event that save a new content version in the database
-        event(new ContentDatumCreated($contentId));
+       // event(new ContentDatumCreated($contentId));
 
         //delete cache associated with the content id
-        CacheHelper::deleteCache('content_' . $contentId);
+       // CacheHelper::deleteCache('content_' . $contentId);
 
-        return $this->get($contentDatum['id']);
+        return $this->get($contentDatum->getId());
     }
 
     /**
@@ -90,13 +95,13 @@ class ContentDatumService
             return $datum;
         }
 
-        $this->datumRepository->query()->createOrUpdateAndReposition($id, $data);
+        $this->datumRepository->reposition($id, $data);
 
         //save a content version
-        event(new ContentDatumUpdated($datum['content_id']));
+//        event(new ContentDatumUpdated($datum['content_id']));
 
         //delete cache associated with the content id
-        CacheHelper::deleteCache('content_' . $datum['content_id']);
+     //   CacheHelper::deleteCache('content_' . $datum['content_id']);
 
         return $this->get($id);
     }
@@ -114,13 +119,13 @@ class ContentDatumService
             return $datum;
         }
 
-        $delete = $this->datumRepository->query()->deleteAndReposition(['id' => $id]);
+        $delete = $this->datumRepository->deleteAndReposition(['id' => $id]);
 
         //save a content version 
-        event(new ContentDatumDeleted($datum['content_id']));
+      //  event(new ContentDatumDeleted($datum['content_id']));
 
         //delete cache associated with the content id
-        CacheHelper::deleteCache('content_' . $datum['content_id']);
+      //  CacheHelper::deleteCache('content_' . $datum['content_id']);
 
         return $delete;
     }

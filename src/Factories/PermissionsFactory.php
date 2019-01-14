@@ -2,16 +2,29 @@
 
 namespace Railroad\Railcontent\Factories;
 
+use Doctrine\ORM\EntityManager;
 use Faker\Generator;
+use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\PermissionService;
 
-class PermissionsFactory extends PermissionService
+class PermissionsFactory
 {
     /**
      * @var Generator
      */
     protected $faker;
+
+    protected $entityManager;
+
+    /**
+     * PermissionsFactory constructor.
+     *
+     * @param $entityManager
+     */
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
 
     /**
      * @param null $name
@@ -28,6 +41,13 @@ class PermissionsFactory extends PermissionService
                 ConfigService::$brand,
             ];
 
-        return parent::create(...$parameters);
+        $permission = new Permission();
+        $permission->setName($parameters[0]);
+        $permission->setBrand($parameters[1]);
+
+        $this->entityManager->persist($permission);
+        $this->entityManager->flush();
+
+        return $permission;
     }
 }

@@ -419,4 +419,31 @@ class ContentFieldControllerTest extends RailcontentTestCase
             $response->decodeResponseJson()['fields']
         );
     }
+
+    public function test_delete_content_field_and_reposition()
+    {
+        $content = $this->contentFactory->create();
+        $contentId = $content->getId();
+        $key = $this->faker->word();
+
+        for ($i = 1; $i <= 4; $i++) {
+            $fields[] = $this->contentFieldFactory->create($contentId, $key, $this->faker->word, $i);
+        }
+
+        $response = $this->call('DELETE', 'railcontent/content/field/' . $fields[2]->getId());
+
+        $this->assertEquals(null, json_decode($response->getContent()));
+        $this->assertEquals(204, $response->status());
+
+        $response = $this->call(
+            'GET',
+            'railcontent/content/' . $contentId
+        );
+
+        $this->assertArraySubset(
+             ['id' => 4, 'position' => 3],
+            last($response->decodeResponseJson()['fields'])
+        );
+
+    }
 }

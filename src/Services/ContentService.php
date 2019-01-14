@@ -8,9 +8,11 @@ use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentField;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
@@ -102,9 +104,9 @@ class ContentService
         EntityManager $entityManager,
         ContentVersionRepository $versionRepository,
       //  ContentFieldRepository $fieldRepository,
-        ContentDatumRepository $datumRepository,
+        //ContentDatumRepository $datumRepository,
         ContentHierarchyRepository $contentHierarchyRepository,
-        ContentPermissionRepository $contentPermissionRepository,
+       // ContentPermissionRepository $contentPermissionRepository,
         CommentRepository $commentRepository,
         CommentAssignmentRepository $commentAssignmentRepository,
         UserContentProgressRepository $userContentProgressRepository
@@ -113,12 +115,14 @@ class ContentService
 
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
         $this->fieldRepository = $this->entityManager->getRepository(ContentField::class);
+        $this->datumRepository = $this->entityManager->getRepository(ContentData::class);
+        $this->contentPermissionRepository = $this->entityManager->getRepository(ContentPermission::class);
 
         $this->versionRepository = $versionRepository;
 
-        $this->datumRepository = $datumRepository;
+       // $this->datumRepository = $datumRepository;
         $this->contentHierarchyRepository = $contentHierarchyRepository;
-        $this->contentPermissionRepository = $contentPermissionRepository;
+        //$this->contentPermissionRepository = $contentPermissionRepository;
         $this->commentRepository = $commentRepository;
         $this->commentAssignationRepository = $commentAssignmentRepository;
         $this->userContentProgressRepository = $userContentProgressRepository;
@@ -140,9 +144,9 @@ class ContentService
             $results = CacheHelper::saveUserCache(
                 $hash,
                 $this->contentRepository->build()
-->restrictByUserAccess()
-                    ->select([ConfigService::$tableContent, ConfigService::$tableContentFields])
-                    ->join(ConfigService::$tableContent.'.fields',ConfigService::$tableContentFields)
+                    ->restrictByUserAccess()
+                    ->addSelect(ConfigService::$tableContentFields)
+                    ->leftJoin(ConfigService::$tableContent.'.fields',ConfigService::$tableContentFields)
                     ->where(ConfigService::$tableContent.'.id = :id')
                     ->setParameter('id', $id)
                     ->getQuery()
@@ -1056,12 +1060,14 @@ class ContentService
                 $slugHierarchy,
                 $requiredParentIds
             );
+
             foreach ($requiredFields as $requiredField) {
                 $filter->requireField(
                     ...
                     (is_array($requiredField) ? $requiredField : explode(',', $requiredField))
                 );
             }
+
             foreach ($includedFields as $includedField) {
                 $filter->includeField(
                     ...
@@ -1081,8 +1087,13 @@ class ContentService
                 );
             }
 
-            $contentsQuery = $this->contentRepository->createQueryBuilder('c');
-
+            $contentsQuery = $this->contentRepository->build()//->createQueryBuilder('c')
+                ->restrictByFields($filter->requiredFields)
+               // ->setMaxResults($limit)
+                //->setFirstResult($page)
+                ->getQuery()
+                ->getResult();
+return $contentsQuery;
             return $contentsQuery->setMaxResults($limit)
                 ->setFirstResult($page)
                 ->getQuery()

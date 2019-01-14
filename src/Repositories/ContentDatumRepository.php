@@ -2,18 +2,11 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Doctrine\ORM\EntityRepository;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
-use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Resora\Queries\CachedQuery;
 
-class ContentDatumRepository extends \Railroad\Resora\Repositories\RepositoryBase
+
+class ContentDatumRepository extends EntityRepository
 {
     use ByContentIdTrait;
-    /**
-     * @return CachedQuery|$this
-     */
-    protected function newQuery()
-    {
-        return (new CachedQuery($this->connection()))->from(ConfigService::$tableContentData);
-    }
 }

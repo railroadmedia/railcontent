@@ -695,12 +695,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'statues' => $statues,
                 'sort' => 'id',
                 'included_types' => $types,
-                'filter' => [
+                //'filter' => [
                     'required_fields' => [
                         $requiredField['key'] . ',' . $requiredField['value'] . ',' . $requiredField['type'],
                         $fieldInstructor['key'] . ',' . $fieldInstructor['value'] . ',' . $fieldInstructor['type'],
                     ],
-                ],
+               // ],
                 'parent_slug' => '',
             ]
         );

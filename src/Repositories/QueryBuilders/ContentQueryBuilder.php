@@ -3,8 +3,10 @@
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
 use Carbon\Carbon;
+use Doctrine\ORM\Query\Expr\Join;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
+use Railroad\Railcontent\Entities\ContentField;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Queries\CachedQuery;
@@ -25,9 +27,9 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                 ConfigService::$tableContent . '.status as status',
                 ConfigService::$tableContent . '.language as language',
                 ConfigService::$tableContent . '.brand as brand',
-//                ConfigService::$tableContent . '.published_on as published_on',
-//                ConfigService::$tableContent . '.created_on as created_on',
-//                ConfigService::$tableContent . '.archived_on as archived_on',
+                //                ConfigService::$tableContent . '.published_on as published_on',
+                //                ConfigService::$tableContent . '.created_on as created_on',
+                //                ConfigService::$tableContent . '.archived_on as archived_on',
             ]
         );
 
@@ -194,7 +196,8 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
     public function restrictStatuses()
     {
         if (is_array(ContentRepository::$availableContentStatues)) {
-            $this->add('where',
+            $this->add(
+                'where',
                 $this->expr()
                     ->in('status', ContentRepository::$availableContentStatues)
             );
@@ -365,31 +368,50 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
         if (empty($requiredFields)) {
             return $this;
         }
-
+        //dd($requiredFields);
         foreach ($requiredFields as $index => $requiredFieldData) {
             $tableName = 'cf_' . $index;
 
-            $this->join(
-                ConfigService::$tableContentFields . ' as ' . $tableName,
-                function (JoinClause $joinClause) use ($requiredFieldData, $tableName) {
-                    $joinClause->on(
-                        $tableName . '.content_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                        ->on(
-                            $tableName . '.key',
-                            '=',
-                            $joinClause->raw("'" . $requiredFieldData['name'] . "'")
+            $this->addSelect($tableName)
+                ->leftJoin(
+                    ConfigService::$tableContent . '.fields',
+                    $tableName,
+                    Join::WITH,
+                    $this->expr()
+                        ->andX(
+                            $this->expr()
+                                ->eq($tableName . '.content', 'railcontent_content.id'),
+                            $this->expr()
+                                ->eq($tableName . '.key', ':key' . $index),
+                            $this->expr()
+                                ->eq($tableName . '.value', ':value' . $index)
                         )
-                        ->on(
-                            $tableName . '.value',
-                            $requiredFieldData['operator'],
-                            is_numeric($requiredFieldData['value']) ? $joinClause->raw($requiredFieldData['value']) :
-                                $joinClause->raw("'" . $requiredFieldData['value'] . "'")
-                        );
-                }
-            );
+                // 'railcontent_content.id = '.$tableName.'.content'
+                )
+                ->setParameter('key' . $index, $requiredFieldData['name'])
+                ->setParameter('value' . $index, $requiredFieldData['value']);
+
+            //            $this->join(
+            //                ConfigService::$tableContentFields . ' as ' . $tableName,
+            //                function (JoinClause $joinClause) use ($requiredFieldData, $tableName) {
+            //                    $joinClause->on(
+            //                        $tableName . '.content_id',
+            //                        '=',
+            //                        ConfigService::$tableContent . '.id'
+            //                    )
+            //                        ->on(
+            //                            $tableName . '.key',
+            //                            '=',
+            //                            $joinClause->raw("'" . $requiredFieldData['name'] . "'")
+            //                        )
+            //                        ->on(
+            //                            $tableName . '.value',
+            //                            $requiredFieldData['operator'],
+            //                            is_numeric($requiredFieldData['value']) ? $joinClause->raw($requiredFieldData['value']) :
+            //                                $joinClause->raw("'" . $requiredFieldData['value'] . "'")
+            //                        );
+            //                }
+            //            );
         }
 
         return $this;
@@ -524,15 +546,16 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
     {
         $this->restrictStatuses()
             ->restrictPublishedOnDate()
-         ->restrictBrand()
-          ->restrictByPermissions();
+            ->restrictBrand()
+            ->restrictByPermissions();
 
         return $this;
     }
 
     public function whereIn($param, $values)
     {
-        $this->add('where',
+        $this->add(
+            'where',
             $this->expr()
                 ->in($param, $values)
         );
