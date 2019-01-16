@@ -132,7 +132,7 @@ class ContentHierarchyJsonController extends Controller
 
         return response()->json(
             $data,
-            200,
+            202,
             [
                 'Content-Type' => 'application/vnd.api+json'
             ]
