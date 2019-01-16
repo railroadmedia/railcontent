@@ -217,5 +217,10 @@ class ConfigService
     /**
      * @var array
      */
+    public static $apiMiddleware;
+
+    /**
+     * @var array
+     */
     public static $tableCommentsAggregates;
 }

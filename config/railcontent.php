@@ -31,6 +31,11 @@ return [
         \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
     ],
 
+    //middleware for API requests
+    'api_middleware' => [
+        \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
+    ],
+
     // filter options limitation
     'field_option_list' => [
         'instructor',
