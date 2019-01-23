@@ -262,46 +262,6 @@ class RailcontentServiceProvider extends ServiceProvider
 //            __DIR__ . '/../../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php'
 //        );
 
-        AnnotationRegistry::registerLoader('class_exists');
-
-        // setup annotation reader
-        $annotationReader = new AnnotationReader();
-        $cachedAnnotationReader = new CachedReader(
-            $annotationReader, $redisCache
-        );
-
-        // setup annotation driver chain
-        $driverChain = new MappingDriverChain();
-
-        \Gedmo\DoctrineExtensions::registerAbstractMappingIntoDriverChainORM(
-            $driverChain,
-            $cachedAnnotationReader
-        );
-
-        $annotationDriver = new AnnotationDriver(
-            $cachedAnnotationReader, [__DIR__ . '/../Entities']
-        );
-
-        $driverChain->addDriver($annotationDriver, 'Railroad\Railcontent\Entities');
-
-        // setup event listeners for timestampable trait
-        $timestampableListener = new \Gedmo\Timestampable\TimestampableListener();
-        $timestampableListener->setAnnotationReader($cachedAnnotationReader);
-
-        // setup event manager
-        $eventManager = new \Doctrine\Common\EventManager();
-        $eventManager->addEventSubscriber($timestampableListener);
-
-        // setup config
-        $ormConfiguration = new Configuration();
-        $ormConfiguration->setMetadataCacheImpl($redisCache);
-        $ormConfiguration->setQueryCacheImpl($redisCache);
-        $ormConfiguration->setResultCacheImpl($redisCache);
-        $ormConfiguration->setProxyDir($proxyDir);
-        $ormConfiguration->setProxyNamespace('DoctrineProxies');
-        $ormConfiguration->setAutoGenerateProxyClasses(config('railcontent.development_mode'));
-        $ormConfiguration->setMetadataDriverImpl($driverChain);
-        $ormConfiguration->setNamingStrategy(new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy(CASE_LOWER));
 
         // create entity manager with proper db details
         if (config('railcontent.database_in_memory') === true) {
@@ -321,13 +281,5 @@ class RailcontentServiceProvider extends ServiceProvider
             ];
         }
 
-        $entityManager = EntityManager::create(
-            $databaseOptions,
-            $ormConfiguration,
-            $eventManager
-        );
-
-        // register the entity manager as a singleton
-        app()->instance(EntityManager::class, $entityManager);
     }
 }

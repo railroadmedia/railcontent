@@ -173,5 +173,12 @@ return [
     // event to job listeners/map
     'event_to_job_map' => [
 
-    ]
+    ],
+
+    'entities' => [
+        [
+            'path' => __DIR__ . '/../src/Entities',
+            'namespace' => 'Railroad\Railcontent\Entities'
+        ]
+    ],
 ];
