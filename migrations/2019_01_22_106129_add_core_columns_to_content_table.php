@@ -143,7 +143,7 @@ class AddCoreColumnsToContentTable extends Migration
                         ->after('live_stream_feed_type')
                         ->nullable();
 
-                    $table->year('released')
+                    $table->string('released')
                         ->after('name')
                         ->nullable();
 

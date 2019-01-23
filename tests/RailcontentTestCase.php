@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Redis;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Railroad\Doctrine\Providers\DoctrineServiceProvider;
 use Railroad\Permissions\Providers\PermissionsServiceProvider;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
@@ -177,10 +178,47 @@ class RailcontentTestCase extends BaseTestCase
 //            ]
 //        );
         // database
+        $app['config']->set('doctrine.database_driver', 'pdo_sqlite');
+        $app['config']->set('doctrine.database_user', 'root');
+        $app['config']->set('doctrine.database_password', 'root');
+        $app['config']->set('doctrine.database_in_memory', true);
+
         config()->set('railcontent.database_user', 'root');
         config()->set('railcontent.database_password', 'root');
         config()->set('railcontent.database_driver', 'pdo_sqlite');
         config()->set('railcontent.database_in_memory', true);
+//
+
+//         //mysql
+//         $app['config']->set('doctrine.database_driver', $defaultConfig['database_driver']);
+//         $app['config']->set('doctrine.database_name', $defaultConfig['database_name']);
+//         $app['config']->set('doctrine.database_user', $defaultConfig['database_user']);
+//         $app['config']->set('doctrine.database_password', $defaultConfig['database_password']);
+//         $app['config']->set('doctrine.database_host', $defaultConfig['database_host']);
+//         $app['config']->set('ecommerce.database_connection_name', $defaultConfig['database_connection_name']);
+//         $app['config']->set('database.default', $defaultConfig['database_connection_name']);
+//
+//
+//         $app['config']->set(
+//             'database.connections.' . $defaultConfig['database_connection_name'],
+//             [
+//                 'driver' => 'mysql',
+//                 'database' => $defaultConfig['database_name'],
+//                 'username' => $defaultConfig['database_user'],
+//                 'password' => $defaultConfig['database_password'],
+//                 'host' => $defaultConfig['database_host'],
+//             ]
+//         );
+
+        // if new packages entities are required for testing, their entity directory/namespace config should be merged here
+        $app['config']->set(
+            'doctrine.entities',
+            array_merge(
+                $defaultConfig['entities']
+            )
+        );
+        $app['config']->set('doctrine.redis_host', $defaultConfig['redis_host']);
+        $app['config']->set('doctrine.redis_port', $defaultConfig['redis_port']);
 
         $app['config']->set(
             'database.connections.testbench',
@@ -244,8 +282,8 @@ class RailcontentTestCase extends BaseTestCase
 
 
         // register provider
+        $app->register(DoctrineServiceProvider::class);
         $app->register(RailcontentServiceProvider::class);
-        $app->register(ResponseServiceProvider::class);
         $app->register(PermissionsServiceProvider::class);
     }
 

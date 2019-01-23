@@ -2,11 +2,13 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Doctrine\ORM\EntityManager;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\Factory as ValidationFactory;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
+use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
@@ -16,14 +18,19 @@ use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentJsonController extends Controller
 {
     /**
+     * @var EntityManager
+     */
+    private $entityManager;
+    /**
      * @var ContentService
      */
-    private $contentService;
+   // private $contentService;
 
     /**
      * @var ValidationFactory
@@ -41,24 +48,41 @@ class ContentJsonController extends Controller
     private $serializer;
 
     /**
+     * @var JsonApiHydrator
+     */
+    private $jsonApiHydrator;
+
+    private $contentRepository;
+
+    /**
      * ContentController constructor.
      *
      * @param ContentService $contentService
      */
     public function __construct(
-        ContentService $contentService,
+        EntityManager $entityManager,
+        JsonApiHydrator $jsonApiHydrator,
+
+        //ContentService $contentService,
         ValidationFactory $validationFactory,
         PermissionService $permissionPackageService
+
     ) {
-        $this->contentService = $contentService;
+
+
+        $this->entityManager = $entityManager;
+        $this->jsonApiHydrator = $jsonApiHydrator;
+//        $this->contentService = $contentService;
         $this->validationFactory = $validationFactory;
         $this->permissionPackageService = $permissionPackageService;
 
-        $this->serializer =
-            SerializerBuilder::create()
-                ->build();
+        $this->contentRepository = $this->entityManager->getRepository(Content::class);
 
-        $this->middleware(ConfigService::$controllerMiddleware);
+//        $this->serializer =
+//            SerializerBuilder::create()
+//                ->build();
+
+       // $this->middleware(ConfigService::$controllerMiddleware);
     }
 
     /**
@@ -175,21 +199,40 @@ class ContentJsonController extends Controller
      */
     public function store(ContentCreateRequest $request)
     {
+
         $this->permissionPackageService->canOrThrow(auth()->id(), 'create.content');
 
-        $content = $this->contentService->create(
-            $request->get('slug'),
-            $request->get('type'),
-            $request->get('status'),
-            $request->get('language'),
-            $request->get('brand'),
-            $request->get('user_id'),
-            $request->get('published_on'),
-            $request->get('parent_id'),
-            $request->get('sort', 0)
-        );
+        $content = new Content();
 
-        return response($this->serializer->serialize($content, 'json'), 201);
+        $this->jsonApiHydrator->hydrate($content, $request->onlyAllowed());
+
+        if (!$content->getBrand()) {
+            $content->setBrand(config('railcontent.brand'));
+        }
+
+        if (!$content->getLanguage()) {
+            $content->setLanguage(config('railcontent.default_language'));
+        }
+
+        $this->entityManager->persist($content);
+        $this->entityManager->flush();
+
+
+        return ResponseService::content($content)->respond(201);
+    
+//        $content = $this->contentService->create(
+//            $request->get('slug'),
+//            $request->get('type'),
+//            $request->get('status'),
+//            $request->get('language'),
+//            $request->get('brand'),
+//            $request->get('user_id'),
+//            $request->get('published_on'),
+//            $request->get('parent_id'),
+//            $request->get('sort', 0)
+//        );
+//
+//        return response($this->serializer->serialize($content, 'json'), 201);
     }
 
     /** Update a content based on content id and return it in JSON format
@@ -203,32 +246,43 @@ class ContentJsonController extends Controller
     {
         $this->permissionPackageService->canOrThrow(auth()->id(), 'update.content');
 
-        //update content with the data sent on the request
-        $content = $this->contentService->update(
-            $contentId,
-            array_intersect_key(
-                $request->all(),
-                [
-                    'slug' => '',
-                    'type' => '',
-                    'sort' => '',
-                    'status' => '',
-                    'brand' => '',
-                    'language' => '',
-                    'user_id' => '',
-                    'published_on' => '',
-                    'archived_on' => '',
-                ]
-            )
-        );
+        $content = $this->contentRepository->find($contentId);
 
-        //if the update method response it's null the content not exist; we throw the proper exception
+        //if the content not exist; we throw the proper exception
         throw_if(
             is_null($content),
             new NotFoundException('Update failed, content not found with id: ' . $contentId)
         );
+        $this->jsonApiHydrator->hydrate($content, $request->onlyAllowed());
 
-        return response($this->serializer->serialize($content, 'json'), 201);
+        $this->entityManager->persist($content);
+        $this->entityManager->flush();
+
+        return ResponseService::content($content)
+            ->respond(200);
+
+//        //update content with the data sent on the request
+//        $content = $this->contentService->update(
+//            $contentId,
+//            array_intersect_key(
+//                $request->all(),
+//                [
+//                    'slug' => '',
+//                    'type' => '',
+//                    'sort' => '',
+//                    'status' => '',
+//                    'brand' => '',
+//                    'language' => '',
+//                    'user_id' => '',
+//                    'published_on' => '',
+//                    'archived_on' => '',
+//                ]
+//            )
+//        );
+//
+//
+//
+//        return response($this->serializer->serialize($content, 'json'), 201);
     }
 
     /**

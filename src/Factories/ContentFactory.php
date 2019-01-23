@@ -70,12 +70,12 @@ class ContentFactory
             ];
 
         $content = new Content();
-        $content->setSlug($parameters[0]);
-        $content->setType($parameters[1]);
-        $content->setStatus($parameters[2]);
-        $content->setLanguage($parameters[3]);
-        $content->setBrand($parameters[4]);
-        $content->setSort($parameters[5]);
+        $content->fillWithFakeData($this->faker);
+//        $content->setType($parameters[1]);
+//        $content->setStatus($parameters[2]);
+//        $content->setLanguage($parameters[3]);
+//        $content->setBrand($parameters[4]);
+//        $content->setSort($parameters[5]);
 
         $this->entityManager->persist($content);
         $this->entityManager->flush();

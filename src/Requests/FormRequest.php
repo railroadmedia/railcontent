@@ -37,17 +37,13 @@ class FormRequest extends LaravelFormRequest
                 ->getMessages() as $key => $value
         ) {
             $errors[] = [
+                "title" => 'Validation failed.',
                 "source" => $key,
                 "detail" => $value[0],
             ];
         }
-        throw new HttpResponseException(reply()->json(
-            null,
-            [
-                'code' => 422,
-                'totalResults' => 0,
-                'errors' => $errors
-            ]
-        ));
+        throw new HttpResponseException(
+            response()->json(['errors' => $errors], 422)
+        );
     }
 }

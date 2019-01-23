@@ -3,13 +3,17 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Faker\ORM\Doctrine\Populator;
 use Illuminate\Support\Facades\Redis;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentHierarchyFactory;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
-use Railroad\Railcontent\Repositories\ContentRepository;
+//use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -19,64 +23,77 @@ use Response;
 
 class ContentJsonControllerTest extends RailcontentTestCase
 {
-    /**
-     * @var ContentRepository
-     */
-    protected $classBeingTested;
-
-    /**
-     * @var ContentFactory
-     */
-    protected $contentFactory;
-
-    /**
-     * @var ContentHierarchyFactory
-     */
-    protected $contentHierarchyFactory;
-
-    /**
-     * @var ContentContentFieldFactory
-     */
-    protected $fieldFactory;
-
-    /**
-     * @var ContentDatumFactory
-     */
-    protected $contentDatumFactory;
-
-    /**
-     * @var ContentService
-     */
-    protected $serviceBeingTested;
-
-    /**
-     * @var \Railroad\Railcontent\Repositories\ContentPermissionRepository
-     */
-    protected $contentPermissionRepository;
-
-    /**
-     * @var \Railroad\Railcontent\Repositories\UserPermissionsRepository
-     */
-    protected $userPermissionRepository;
-
-    /**
-     * @var \Railroad\Railcontent\Repositories\PermissionRepository
-     */
-    protected $permissionRepository;
+    //    /**
+    //     * @var ContentRepository
+    //     */
+    //    protected $classBeingTested;
+    //
+    //    /**
+    //     * @var ContentFactory
+    //     */
+    //    protected $contentFactory;
+    //
+    //    /**
+    //     * @var ContentHierarchyFactory
+    //     */
+    //    protected $contentHierarchyFactory;
+    //
+    //    /**
+    //     * @var ContentContentFieldFactory
+    //     */
+    //    protected $fieldFactory;
+    //
+    //    /**
+    //     * @var ContentDatumFactory
+    //     */
+    //    protected $contentDatumFactory;
+    //
+    //    /**
+    //     * @var ContentService
+    //     */
+    //    protected $serviceBeingTested;
+    //
+    //    /**
+    //     * @var \Railroad\Railcontent\Repositories\ContentPermissionRepository
+    //     */
+    //    protected $contentPermissionRepository;
+    //
+    //    /**
+    //     * @var \Railroad\Railcontent\Repositories\UserPermissionsRepository
+    //     */
+    //    protected $userPermissionRepository;
+    //
+    //    /**
+    //     * @var \Railroad\Railcontent\Repositories\PermissionRepository
+    //     */
+    //    protected $permissionRepository;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-//        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-//        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->serviceBeingTested = $this->app->make(ContentService::class);
-//        $this->classBeingTested = $this->app->make(ContentRepository::class);
-//        $this->contentPermissionRepository = $this->app->make(ContentPermissionRepository::class);
-//        $this->permissionRepository = $this->app->make(PermissionRepository::class);
-//        $this->userPermissionRepository = $this->app->make(UserPermissionsRepository::class);
+        $populator = new Populator($this->faker, $this->entityManager);
+        $populator->addEntity(
+            Content::class,
+            1,
+            [
+                'slug' => 'slug1',
+            ]
+        );
+        $populator->execute();
+
+        $purger = new ORMPurger();
+        $executor = new ORMExecutor($this->entityManager, $purger);
+
+        //    $this->contentFactory = $this->app->make(ContentFactory::class);
+        //        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
+        //    $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        //        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
+        //   $this->serviceBeingTested = $this->app->make(ContentService::class);
+        //        $this->classBeingTested = $this->app->make(ContentRepository::class);
+        //        $this->contentPermissionRepository = $this->app->make(ContentPermissionRepository::class);
+        //        $this->permissionRepository = $this->app->make(PermissionRepository::class);
+        //        $this->userPermissionRepository = $this->app->make(UserPermissionsRepository::class);
     }
 
     public function test_index_empty()
@@ -96,13 +113,18 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/content',
             [
-                'slug' => $slug,
-                'position' => null,
-                'status' => $status,
-                'parent_id' => null,
-                'type' => $type,
-                'published_on' => Carbon::now()
-                    ->toDateTimeString(),
+                'data' => [
+                    'type' => 'content',
+                    'attributes' => [
+                        'slug' => $slug,
+                        'position' => null,
+                        'status' => $status,
+                        'parent_id' => null,
+                        'type' => $type,
+                        'published_on' => Carbon::now()
+                            ->toDateTimeString(),
+                    ],
+                ],
             ]
         );
 
@@ -119,11 +141,18 @@ class ContentJsonControllerTest extends RailcontentTestCase
         //check that all the error messages are received
         $errors = [
             [
-                'source' => "type",
-                "detail" => "The type field is required.",
+                'title' => 'Validation failed.',
+                'source' => 'data.attributes.status',
+                'detail' => 'The status field is required.',
+            ],
+            [
+                'title' => 'Validation failed.',
+                'source' => 'data.attributes.type',
+                'detail' => 'The type field is required.',
             ],
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+
+        $this->assertArraySubset($errors, $response->decodeResponseJson('errors'));
     }
 
     public function test_store_with_negative_position()
@@ -136,10 +165,15 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/content',
             [
-                'slug' => $slug,
-                'status' => $status,
-                'type' => $type,
-                'position' => -1,
+                'data' => [
+                    'type' => 'content',
+                    'attributes' => [
+                        'slug' => $slug,
+                        'status' => $status,
+                        'type' => $type,
+                        'position' => -1,
+                    ],
+                ],
             ]
         );
 
@@ -149,12 +183,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
         //check that all the error messages are received
         $errors = [
             [
-                'source' => "position",
-                "detail" => "The position must be at least 0.",
+                'source' => 'data.attributes.position',
+                'detail' => 'The data.attributes.position must be at least 0.',
+                'title' => 'Validation failed.',
             ],
 
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson('errors'));
     }
 
     public function _test_store_with_custom_validation_and_slug_huge()
@@ -217,7 +252,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_PUBLISHED;
 
         $contentData = [
-            'slug'=> $slug,
+            'slug' => $slug,
             'status' => $status,
             'type' => $type,
             'sort' => $position,
@@ -225,10 +260,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call(
             'PUT',
             'railcontent/content',
-            $contentData
+            [
+                'data' => [
+                    'attributes' => $contentData
+                ]
+            ]
         );
 
-        $this->assertArraySubset($contentData, $response->decodeResponseJson());
+        $this->assertArraySubset($contentData, $response->decodeResponseJson('data'));
     }
 
     public function test_content_service_return_new_content_after_create()
@@ -246,23 +285,17 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_update_response_status()
     {
-        $content = $this->contentFactory->create(
-            $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-
         $response = $this->call(
             'PATCH',
-            'railcontent/content/' . $content->getId(),
+            'railcontent/content/' . 1,
             [
-                'slug' => $content->getSlug(),
+                'slug' => 'new slug',
                 'status' => ContentService::STATUS_PUBLISHED,
                 'type' => 'roxana',
             ]
         );
 
-        $this->assertEquals(201, $response->status());
+        $this->assertEquals(200, $response->status());
     }
 
     public function test_update_missing_content_response_status()
@@ -280,22 +313,20 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'type' => $type,
             ]
         );
-
         $this->assertEquals(404, $response->status());
     }
 
     public function test_update_with_negative_position()
     {
-
-        $content = $this->contentFactory->create();
-
         $response = $this->call(
             'PATCH',
-            'railcontent/content/' . $content->getId(),
+            'railcontent/content/' . 1,
             [
-                'position' => -1,
-                'status' => $content->getStatus(),
-                'type' => $content->getType(),
+                'data' => [
+                    'attributes' => [
+                        'position' => -1,
+                    ],
+                ],
             ]
         );
 
@@ -304,22 +335,25 @@ class ContentJsonControllerTest extends RailcontentTestCase
         //check that the error message is received
         $errors = [
             [
-                'source' => "position",
-                "detail" => "The position must be at least 0.",
+                'source' => 'data.attributes.position',
+                'detail' => 'The data.attributes.position must be at least 0.',
+                'title' => 'Validation failed.',
             ],
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson('errors'));
     }
 
     public function test_update_not_pass_the_validation()
     {
-        $content = $this->contentFactory->create();
-
         $response = $this->call(
             'PATCH',
-            'railcontent/content/' . $content->getId(),
+            'railcontent/content/' . 1,
             [
-                'status' => $this->faker->word,
+                'data' => [
+                    'attributes' => [
+                        'status' => $this->faker->word,
+                    ],
+                ],
             ]
         );
 
@@ -329,11 +363,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
         //check that all the error messages are received
         $errors = [
             [
-                'source' => "status",
+                "title" => "Validation failed.",
+                "source" => "data.attributes.status",
                 "detail" => "The selected status is invalid.",
             ],
         ];
-        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals($errors, $response->decodeResponseJson('errors'));
     }
 
     public function test_after_update_content_is_returned_in_json_format()
@@ -368,12 +403,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'type' => $content->getType(),
             ]
         );
+
         $this->assertArraySubset(
             [
                 'id' => $content->getId(),
                 'slug' => $new_slug,
                 'status' => ContentService::STATUS_PUBLISHED,
-                'type' => $content->getType()
+                'type' => $content->getType(),
             ],
             $response->decodeResponseJson()
         );
@@ -583,7 +619,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $expectedContent['filter_options'] = [];
 
         for ($i = 1; $i < $contentWithFieldsNr; $i++) {
-            $field = $this->fieldFactory->create($contents[$i]['id'], $fieldKey, $fieldValue, null, $fieldType)->getArrayCopy();
+            $field =
+                $this->fieldFactory->create($contents[$i]['id'], $fieldKey, $fieldValue, null, $fieldType)
+                    ->getArrayCopy();
 
             $expectedResults[$i - 1] = $contents[$i];
             $expectedResults[$i - 1]['fields'][] = array_merge($field, ['id' => $field['id']]);
@@ -668,19 +706,19 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 $fieldInstructor['type']
             );
 
-           // $contentField['type'] = 'content';
-           // $contentField['value'] = (array)$instructor;
+            // $contentField['type'] = 'content';
+            // $contentField['value'] = (array)$instructor;
             if (array_key_exists(($i - 1), $expectedResults)) {
                 $expectedResults[$i - 1]['fields'][] = $this->serializer->toArray($contentField);
             }
         }
 
-//        for ($i = 1; $i < 25; $i++) {
-//            $datum = $this->contentDatumFactory->create($contents[$i]['id']);
-//            if (array_key_exists(($i - 1), $expectedResults)) {
-//                $expectedResults[$i - 1]['data'][] = $datum->getArrayCopy();
-//            }
-//        }
+        //        for ($i = 1; $i < 25; $i++) {
+        //            $datum = $this->contentDatumFactory->create($contents[$i]['id']);
+        //            if (array_key_exists(($i - 1), $expectedResults)) {
+        //                $expectedResults[$i - 1]['data'][] = $datum->getArrayCopy();
+        //            }
+        //        }
 
         $expectedContent['results'] = $expectedResults;
         $expectedContent['total_results'] = count($expectedContent['results']);
@@ -696,11 +734,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'sort' => 'id',
                 'included_types' => $types,
                 //'filter' => [
-                    'required_fields' => [
-                        $requiredField['key'] . ',' . $requiredField['value'] . ',' . $requiredField['type'],
-                        $fieldInstructor['key'] . ',' . $fieldInstructor['value'] . ',' . $fieldInstructor['type'],
-                    ],
-               // ],
+                'required_fields' => [
+                    $requiredField['key'] . ',' . $requiredField['value'] . ',' . $requiredField['type'],
+                    $fieldInstructor['key'] . ',' . $fieldInstructor['value'] . ',' . $fieldInstructor['type'],
+                ],
+                // ],
                 'parent_slug' => '',
             ]
         );
@@ -862,11 +900,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_PUBLISHED;
 
         //prepare Redis cache with 300.000 keys that will be deleted when a new content it's created
-//        for ($i = 0; $i < 100000; $i++) {
-//            Redis::set('contents_results_' . $i, $i);
-//            Redis::set('_type_' . $type . $i, $i);
-//            Redis::set('types' . $i, $i);
-//        }
+        //        for ($i = 0; $i < 100000; $i++) {
+        //            Redis::set('contents_results_' . $i, $i);
+        //            Redis::set('_type_' . $type . $i, $i);
+        //            Redis::set('types' . $i, $i);
+        //        }
 
         $executionStartTime = microtime(true);
 
@@ -1008,7 +1046,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
         return $this->databaseManager->connection();
     }
 
-    public function test_drumeo(){
+    public function test_drumeo()
+    {
         $this->assertTrue(true);
     }
 }
