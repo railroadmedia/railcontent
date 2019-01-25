@@ -124,13 +124,13 @@ class CustomFormRequest extends FormRequest
         $thereIsEntity = (!$noEntity);
 
         $contentType =
-            $thereIsEntity ? $this->getContentTypeVal($request) : $request->request->get('type');
+            $thereIsEntity ? $this->getContentTypeVal($request) : $request->request->get('data')['attributes']['type'];
 
         if (isset(ConfigService::$validationRules[ConfigService::$brand]) &&
             array_key_exists($contentType, ConfigService::$validationRules[ConfigService::$brand])) {
             if (!$entity) {
-                $customRules = ConfigService::$validationRules[ConfigService::$brand][$contentType];
-            } else {
+                $customRules = ConfigService::$validationRules[ConfigService::$brand][$contentType][$request->request->get('data')['attributes']['status']];
+              } else {
                 $customRules = $this->prepareCustomRules($request, $contentType, $entity);
             }
         }
@@ -523,7 +523,7 @@ class CustomFormRequest extends FormRequest
     ) {
         $minimumRequiredChildren = null;
         $contentValidationRequired = false;
-        $input = $request->request->all();
+        $input = $request->request->get('data')['attributes'];
 
         $brand = null;
         $content = $this->getContentFromRequest($request);
@@ -650,7 +650,7 @@ class CustomFormRequest extends FormRequest
     private function getContentFromRequest(Request $request)
     {
         if ($request instanceof ContentCreateRequest) {
-            return $request->all();
+            return $request->get('data')['attributes'];
         }
 
 //        if ($request instanceof ContentUpdateRequest) {

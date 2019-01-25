@@ -78,11 +78,8 @@ class ContentJsonController extends Controller
 
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
 
-//        $this->serializer =
-//            SerializerBuilder::create()
-//                ->build();
 
-       // $this->middleware(ConfigService::$controllerMiddleware);
+        $this->middleware(ConfigService::$controllerMiddleware);
     }
 
     /**
@@ -160,30 +157,11 @@ class ContentJsonController extends Controller
      */
     public function show($id)
     {
-        $content = $this->contentService->getById($id);
+        $content = $this->contentRepository->find($id);
+
         throw_unless($content, new NotFoundException('No content with id ' . $id . ' exists.'));
 
-        //        $rules = $this->contentService->getValidationRules($content);
-        //        if($rules === false){
-        //            return new JsonResponse('Application misconfiguration. Validation rules missing perhaps.', 503);
-        //        }
-        //
-        //        $contentPropertiesForValidation = $this->contentService->getContentPropertiesForValidation($content, $rules);
-        //
-        //        $validator = $this->validationFactory->make($contentPropertiesForValidation, $rules);
-        //
-        //        $validation = [ 'status' => 200, 'messages' => [] ];
-        //
-        //        try{
-        //            $validator->validate();
-        //        }catch(ValidationException $exception){
-        //            $messages = $exception->validator->messages()->messages();
-        //            $validation = ['status' => 422, 'messages' => $messages];
-        //        }
-        //
-        //        $content = array_merge($content, ['validation' => $validation]);
-
-        return response($this->serializer->serialize($content, 'json'), 200);
+        return ResponseService::content($content);
     }
 
     public function slugs(Request $request, ...$slugs)
@@ -199,7 +177,6 @@ class ContentJsonController extends Controller
      */
     public function store(ContentCreateRequest $request)
     {
-
         $this->permissionPackageService->canOrThrow(auth()->id(), 'create.content');
 
         $content = new Content();
@@ -220,19 +197,6 @@ class ContentJsonController extends Controller
 
         return ResponseService::content($content)->respond(201);
     
-//        $content = $this->contentService->create(
-//            $request->get('slug'),
-//            $request->get('type'),
-//            $request->get('status'),
-//            $request->get('language'),
-//            $request->get('brand'),
-//            $request->get('user_id'),
-//            $request->get('published_on'),
-//            $request->get('parent_id'),
-//            $request->get('sort', 0)
-//        );
-//
-//        return response($this->serializer->serialize($content, 'json'), 201);
     }
 
     /** Update a content based on content id and return it in JSON format
@@ -253,6 +217,7 @@ class ContentJsonController extends Controller
             is_null($content),
             new NotFoundException('Update failed, content not found with id: ' . $contentId)
         );
+
         $this->jsonApiHydrator->hydrate($content, $request->onlyAllowed());
 
         $this->entityManager->persist($content);
@@ -260,29 +225,6 @@ class ContentJsonController extends Controller
 
         return ResponseService::content($content)
             ->respond(200);
-
-//        //update content with the data sent on the request
-//        $content = $this->contentService->update(
-//            $contentId,
-//            array_intersect_key(
-//                $request->all(),
-//                [
-//                    'slug' => '',
-//                    'type' => '',
-//                    'sort' => '',
-//                    'status' => '',
-//                    'brand' => '',
-//                    'language' => '',
-//                    'user_id' => '',
-//                    'published_on' => '',
-//                    'archived_on' => '',
-//                ]
-//            )
-//        );
-//
-//
-//
-//        return response($this->serializer->serialize($content, 'json'), 201);
     }
 
     /**
@@ -296,22 +238,15 @@ class ContentJsonController extends Controller
     {
         $this->permissionPackageService->canOrThrow(auth()->id(), 'delete.content');
 
-        //delete content
-        $delete = $this->contentService->delete($contentId);
+        $content = $this->contentRepository->find($contentId);
 
-        //if the delete method response it's null the content not exist; we throw the proper exception
-        throw_if(
-            is_null($delete),
-            new NotFoundException('Delete failed, content not found with id: ' . $contentId)
-        );
+        if (!is_null($content)) {
+            $this->entityManager->remove($content);
+            $this->entityManager->flush();
+            return ResponseService::empty(204);
+        }
+        return ResponseService::empty(404);
 
-        //if the delete method response it's false the mysql delete method was failed; we throw the proper exception
-        throw_if(
-            !($delete),
-            DeleteFailedException::class
-        );
-
-        return reply()->json(null, ['code' => 204]);
     }
 
     /**

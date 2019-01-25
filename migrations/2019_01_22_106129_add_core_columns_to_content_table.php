@@ -105,7 +105,7 @@ class AddCoreColumnsToContentTable extends Migration
 
                     $table->integer('fast_bpm')
                         ->index()
-                        ->after('exercise-book-pages')
+                        ->after('exercise_book_pages')
                         ->nullable();
 
                     $table->boolean('includes_song')

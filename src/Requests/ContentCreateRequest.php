@@ -5,61 +5,8 @@ namespace Railroad\Railcontent\Requests;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService as ContentService;
 
-class ContentCreateRequest extends FormRequest
+class ContentCreateRequest extends CustomFormRequest
 {
-    /**
-     * Get custom attributes for validator errors.
-     *
-     * @return array
-     */
-    public function attributes()
-    {
-        return [
-            'data.type' => 'json data type',
-            'data.attributes.slug' => 'slug',
-            'data.attributes.type' => 'type',
-            'data.attributes.sort' => 'sort',
-            'data.attributes.status' => 'status',
-            'data.attributes.brand' => 'brand',
-            'data.attributes.language' => 'language',
-
-            'data.attributes.user_id' => 'user id',
-            'data.attributes.difficulty' => 'difficulty',
-            'data.attributes.home_staff_pick_rating' => 'home staff pick rating',
-            'data.attributes.legacy_id' => 'legacy id',
-            'data.attributes.legacy_wordpress_post_is' => 'legacy wordpress post id',
-            'data.attributes.qna_video' => 'qna video',
-            'data.attributes.style' => 'style',
-            'data.attributes.title' => 'title',
-            'data.attributes.video' => 'video',
-            'data.attributes.bpm' => 'bpm',
-            'data.attributes.cd_tracks' => 'cd tracks',
-            'data.attributes.chord_or_scale' => 'chord or scale',
-            'data.attributes.difficulty_range' => 'difficulty range',
-            'data.attributes.episode_number' => 'episode number',
-            'data.attributes.exercise_book_page' => 'exercise book page',
-            'data.attributes.fast_bpm' => 'fast bpm',
-            'data.attributes.includes_song' => 'include song',
-            'data.attributes.instructors' => 'instructors',
-            'data.attributes.live_event_start_time' => 'live event start time',
-            'data.attributes.live_event_end_time' => 'live event end time',
-            'data.attributes.live_event_youtube_id' => 'live event youtube id',
-            'data.attributes.live_stream_feed_type' => 'live stream feed type',
-            'data.attributes.name' => 'name',
-            'data.attributes.released' => 'released',
-            'data.attributes.slow_bpm' => 'slow bpm',
-            'data.attributes.total_xp' => 'total xp',
-
-            'data.attributes.transcriber_name' => 'transcriber name',
-            'data.attributes.week' => 'week',
-            'data.attributes.xp' => 'xp',
-            'data.attributes.album' => 'album',
-            'data.attributes.artist' => 'artist',
-            'data.attributes.published_on' => 'published on',
-            'data.attributes.created_on' => 'created on',
-            'data.attributes.archived_on' => 'archived on',
-        ];
-    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -67,8 +14,11 @@ class ContentCreateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'data.attributes.status' => 'max:64|required|in:' .
+        $this->validateContent($this);
+
+        $this->setGeneralRules(
+            [
+                'data.attributes.status' => 'max:64|required|in:' .
                     implode(
                         ',',
                         [
@@ -82,30 +32,15 @@ class ContentCreateRequest extends FormRequest
                 'data.attributes.type' => 'required|max:64',
                 'data.attributes.sort' => 'nullable|numeric',
                 'data.attributes.position' => 'nullable|numeric|min:0',
-//                'parent_id' => 'nullable|numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
-//                    ConfigService::$tableContent . ',id',
                 'data.attributes.published_on' => 'nullable|date'
-//            'data.type' => 'in:address',
-//            'data.attributes.type' => 'required|max:255|in:' . implode(
-//                    ',',
-//                    [
-//                        ConfigService::$billingAddressType,
-//                        ConfigService::$shippingAddressType,
-//                    ]
-//                ),
-//            'data.attributes.first_name' => 'nullable|max:255',
-//            'data.attributes.last_name' => 'nullable|max:255',
-//            'data.attributes.street_line_1' => 'nullable|max:255',
-//            'data.attributes.street_line_2' => 'nullable|max:255',
-//            'data.attributes.city' => 'nullable|max:255',
-//            'data.attributes.zip' => 'nullable|max:255',
-//            'data.attributes.state' => 'nullable|max:255',
-//            'data.attributes.country' => 'required|max:255|in:' . implode(',', LocationService::countries()),
-            // todo: use proper json API spec structure for changing relationships
-            //            'data.attributes.user_id' => 'integer|nullable',
-            //            'data.attributes.customer_id' => 'integer|nullable|exists:' . ConfigService::$tableCustomer . ',id',
-        ];
+                ]);
+
+        //set the custom validation rules based on content type and brand
+        $this->setCustomRules($this);
+
+        return parent::rules();
     }
+
     /**
      * @return array
      */
@@ -156,20 +91,6 @@ class ContentCreateRequest extends FormRequest
                     'data.attributes.published_on' ,
                     'data.attributes.created_on' ,
                     'data.attributes.archived_on' ,
-//                    'data.attributes.type',
-//                    // todo: use proper json API spec structure for changing relationships
-//                    //                    'data.attributes.user_id',
-//                    //                    'data.attributes.customer_id',
-//                    'data.attributes.first_name',
-//                    'data.attributes.last_name',
-//                    'data.attributes.street_line_1',
-//                    'data.attributes.street_line_2',
-//                    'data.attributes.city',
-//                    'data.attributes.zip',
-//                    'data.attributes.state',
-//                    'data.attributes.country',
-//                    'data.relationships.user',
-//                    'data.relationships.customer',
                 ]
 
         );

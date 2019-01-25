@@ -70,7 +70,7 @@ class ContentFactory
             ];
 
         $content = new Content();
-        $content->fillWithFakeData($this->faker);
+     //   $content->fillWithFakeData($this->faker);
 //        $content->setType($parameters[1]);
 //        $content->setStatus($parameters[2]);
 //        $content->setLanguage($parameters[3]);

@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Faker\Generator;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -255,13 +256,6 @@ class Content
      */
     protected $archivedOn;
 
-
-
-    /**
-     * @ORM\OneToMany(targetEntity="ContentField", mappedBy="content")
-     */
-    protected $fields;
-
     /**
      * @var \DateTime $createdOn
      *
@@ -269,6 +263,21 @@ class Content
      * @ORM\Column(type="datetime")
      */
     protected $createdOn;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ContentExercise", mappedBy="content")
+     */
+    protected $exercises;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ContentInstructor", mappedBy="content")
+     */
+    protected $instructor;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ContentVimeoVideo", mappedBy="content")
+     */
+    protected $vimeoVideo;
 
     /**
      * @return int
@@ -446,7 +455,7 @@ class Content
     /**
      * @return text
      */
-    public function geLegacyWordpressPostId()
+    public function getLegacyWordpressPostId()
     {
         return $this->legacyWordpressPostId;
     }
@@ -918,23 +927,28 @@ class Content
     }
 
     /**
-     * Returns fields.
-     *
-     * @return array
+     * @return Content|null
      */
-    public function getFields()
+    public function getExercise()
     {
-        return $this->fields;
+        return $this->exercise;
     }
 
-    public function fillWithFakeData(Generator $faker, $testDataIdKey = '')
+    /**
+     * @return Content|null
+     */
+    public function getInstructor()
     {
-        $this->setBrand(config('railcontent.brand'));
-        $this->setSlug($faker->slug);
-        $this->setType($faker->word);
-        $this->setStatus($faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]));
-        $this->setLanguage($faker->languageCode);
-        $this->setSort(rand());
+        return $this->instructor;
     }
+
+    /**
+     * @return Content|null
+     */
+    public function getVimeoVideo()
+    {
+        return $this->vimeoVideo;
+    }
+
 
 }

@@ -80,9 +80,34 @@ return [
         7776,
     ],
 
-
     // validation
-    'validation' => [],
+    'validation' => [
+        'brand' => [
+            'course' => [
+                'scheduled' => [
+                   // 'fields' => [
+                        'data.attributes.title' =>                      'required|max:80'
+                    ,
+                  //  ],
+                ],
+                'published' => [
+                    'data.attributes.title' =>                      'required|max:80'
+//                    'number_of_children' => 'numeric|min:1',
+//                    'fields' => [
+//                        'topic' => ['rules' => 'required', 'can_have_multiple' => true],
+//                        //  'instructor' => ['rules' => [$instructor_in_database, 'required'], 'can_have_multiple' => true],
+//                        'difficulty' => ['rules' => 'required|in:beginner,intermediate,advanced,all,1,2,3,4,5,6,7,8,9,10'],
+//                    ],
+//                    'data' => [
+//                        'resource_name' => ['rules' => 'max:40', 'can_have_multiple' => true],
+//                        'resource_url' => ['rules' => 'url', 'can_have_multiple' => true],
+//                        //  'thumbnail_url' => ['rules' => ['required', 'url', $file_extension_must_be_jpg_or_png]],
+//                        'description' => ['rules' => 'required|max:2500'],
+//                    ],
+                ],
+            ],
+        ],
+    ],
 
     // aws integration
     'awsS3_remote_storage' => [
@@ -178,7 +203,7 @@ return [
     'entities' => [
         [
             'path' => __DIR__ . '/../src/Entities',
-            'namespace' => 'Railroad\Railcontent\Entities'
-        ]
+            'namespace' => 'Railroad\Railcontent\Entities',
+        ],
     ],
 ];
