@@ -1156,23 +1156,36 @@ class ContentService
             $parents[] = $this->getTypesBySlugSpecialStatus($semesterPack);
         }
 
+
+        // Ids of semester pack lessons of semesters configured to be in calendar
+        // **here we get just the ids for set semester-pack**
+        // We could also get the lesson objects themselves here, but that's not important. What really matters is
+        // that we know which lessons belong in select semester-packs, which we get here, and then in the section below
+        // we get knowledge about which semester-pack-lessons are eligible to be be shown in the schedule based on
+        // status (published rather than draft or deleted), and their release date (no reason to show already-released
+        // content).
         foreach($parents as $parent){
             foreach($this->getByParentIdWhereTypeIn($parent['id'], ['semester-pack-lesson'])->all() as $lesson){
-                $idsOfChildrenOfSelectSemesterPacks[] = $lesson['id'];
+                $idsOfChildrenOfSelectSemesterPacks[$parent['slug']][] = $lesson['id'];
             }
-        } // Ids of semester pack lessons of semesters configured to be in calendar
+        }
 
+        // All semester pack lessons eligible for calendar (status 'published' and 'publish_on' date in future)
+        // **here we get whether or not the semester-pack-lessons should be included in the schedule**
         $semesterPackLessons = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
             ['semester-pack-lesson'],
             ContentService::STATUS_PUBLISHED,
             Carbon::now()->toDateTimeString(),
             '>'
-        ); // All semester pack lessons eligible for calendar (status 'published' and 'publish_on' date in future)
+        );
 
         // todo: why is this here? Is it required?
-        foreach($semesterPackLessons as $lesson){
-            if(in_array($lesson['id'], $idsOfChildrenOfSelectSemesterPacks)){
-                $culledSemesterPackLessons[] = $lesson;
+        foreach($semesterPackLessons as $lesson) {
+            foreach($idsOfChildrenOfSelectSemesterPacks as $parentSlug => $setOfIds){
+                if (in_array($lesson['id'], $setOfIds)) {
+                    $lesson['type'] = $parentSlug;
+                    $culledSemesterPackLessons[] = $lesson;
+                }
             }
         }
 
