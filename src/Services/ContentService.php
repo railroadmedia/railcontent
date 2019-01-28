@@ -1156,23 +1156,76 @@ class ContentService
             $parents[] = $this->getTypesBySlugSpecialStatus($semesterPack);
         }
 
+        /*
+         * -------------------------------------------------------------------------------------------------------------
+         *
+         * The following sections are fairly (and therefore maybe *overly*) complex (aka messy).
+         * These comment will explain the sections. They are labels as they represent a singluar concern and are thus
+         * best addressed with single explanatory comment-block.
+         *
+         *      Jonathan, January 2019
+         *
+         * -------------------------------------------------------------------------------------------------------------
+         *
+         * Section One:
+         *
+         *      Get just ids of semester-packs-lessons, keyed by their parents' slug.
+         *
+         *      We could also get the lesson objects themselves here, but that's not important. What really matters is
+         *      that we know which lessons belong in select semester-packs, which we get here.
+         *
+         *      We key them by slug, because in Section Three we'll need the slug to set a "user-friendly label".
+         *
+         * Section Two:
+         *
+         *      Get information about which semester-pack-lessons are eligible to be be shown in the schedule based on
+         *      status (published rather than draft or deleted), and release date (no reason to show already-released
+         *      content).
+         *
+         *      We also get the actual lesson objects here, but that's not as important because we could do that
+         *      anywhere really.
+         *
+         * Section Three:
+         *
+         *      Now we combine these two pieces of information to have a set of only the relevant semester-pack-lessons.
+         *
+         *      We set the 'type' to a value determined by the parent-slug (see Section One above) because these are all
+         *      semester-pack-lessons, and the schedule page displays each items' content as a label. If we didn't do
+         *      this here, then the label showing would be "SEMESTER-PACK-LESSON". That wouldn't do at all.
+         */
+
+        /*
+         * Section One
+         */
         foreach($parents as $parent){
             foreach($this->getByParentIdWhereTypeIn($parent['id'], ['semester-pack-lesson'])->all() as $lesson){
-                $idsOfChildrenOfSelectSemesterPacks[] = $lesson['id'];
+                $idsOfChildrenOfSelectSemesterPacks[$parent['slug']][] = $lesson['id'];
             }
-        } // Ids of semester pack lessons of semesters configured to be in calendar
+        }
 
+        /*
+         * Section Two
+         */
         $semesterPackLessons = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
             ['semester-pack-lesson'],
             ContentService::STATUS_PUBLISHED,
             Carbon::now()->toDateTimeString(),
             '>'
-        ); // All semester pack lessons eligible for calendar (status 'published' and 'publish_on' date in future)
+        );
 
-        // todo: why is this here? Is it required?
-        foreach($semesterPackLessons as $lesson){
-            if(in_array($lesson['id'], $idsOfChildrenOfSelectSemesterPacks)){
-                $culledSemesterPackLessons[] = $lesson;
+        /*
+         * Section Three
+         */
+        foreach($semesterPackLessons as $lesson) {
+            foreach($idsOfChildrenOfSelectSemesterPacks as $parentSlug => $setOfIds){
+                if (in_array($lesson['id'], $setOfIds)) {
+                    $labels = config('railcontent.semester-pack-schedule-labels.' . ConfigService::$brand);
+                    if(array_key_exists($parentSlug, $labels)){
+                        $parentSlug = $labels[$parentSlug];
+                    }
+                    $lesson['type'] = $parentSlug;
+                    $culledSemesterPackLessons[] = $lesson;
+                }
             }
         }
 
