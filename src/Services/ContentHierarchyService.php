@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\ORM\EntityManager;
+use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 
@@ -12,14 +14,18 @@ class ContentHierarchyService
      */
     private $contentHierarchyRepository;
 
+    private $entityManager;
+
     /**
      * FieldService constructor.
      *
      * @param ContentHierarchyRepository $contentHierarchyRepository
      */
-    public function __construct(ContentHierarchyRepository $contentHierarchyRepository)
+    public function __construct(EntityManager $entityManager)
     {
-        $this->contentHierarchyRepository = $contentHierarchyRepository;
+        $this->entityManager = $entityManager;
+
+        $this->contentHierarchyRepository = $this->entityManager->getRepository(ContentHierarchy::class);
     }
 
     /**

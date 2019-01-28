@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Redis;
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerBuilder;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Railroad\Doctrine\Hydrators\FakeDataHydrator;
 use Railroad\Doctrine\Providers\DoctrineServiceProvider;
 use Railroad\Permissions\Providers\PermissionsServiceProvider;
 use Railroad\Permissions\Services\PermissionService;
@@ -73,6 +74,8 @@ class RailcontentTestCase extends BaseTestCase
 
     protected $serializer;
 
+    protected $fakeDataHydrator;
+
     protected function setUp()
     {
         parent::setUp();
@@ -92,6 +95,8 @@ class RailcontentTestCase extends BaseTestCase
         $this->artisan('cache:clear', []);
 
         $this->faker = $this->app->make(Generator::class);
+        $this->fakeDataHydrator = new FakeDataHydrator($this->entityManager);
+
         $this->databaseManager = $this->app->make(DatabaseManager::class);
         $this->authManager = $this->app->make(AuthManager::class);
         $this->router = $this->app->make(Router::class);

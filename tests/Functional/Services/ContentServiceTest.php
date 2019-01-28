@@ -2,8 +2,14 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
+use Carbon\Carbon;
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Faker\ORM\Doctrine\Populator;
 use Illuminate\Support\Facades\Cache;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentEntity;
+use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Factories\CommentAssignationFactory;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
@@ -17,7 +23,9 @@ use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Tests\Hydrators\ContentFakeDataHydrator;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
+use Railroad\Railcontent\Transformers\ContentTransformer;
 use Railroad\Resora\Entities\Entity;
 
 class ContentServiceTest extends RailcontentTestCase
@@ -81,17 +89,102 @@ class ContentServiceTest extends RailcontentTestCase
     {
         parent::setUp();
 
+        $this->fakeDataHydrator = new ContentFakeDataHydrator($this->entityManager);
+
+        $populator = new Populator($this->faker, $this->entityManager);
+        $populator->addEntity(
+            Content::class,
+            1,
+            [
+                'slug' => 'slug1',
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        $populator->execute();
+        $populator->addEntity(
+            Content::class,
+            3,
+            [
+                'type' => 'course-part',
+            ]
+        );
+        $populator->execute();
+        $populator->addEntity(
+            Content::class,
+            1,
+            [
+                'type' => 'lesspm',
+            ]
+        );
+        $populator->execute();
+        $populator->addEntity(
+            ContentHierarchy::class,
+           1,
+            [
+                'parent' => $this->entityManager->getRepository(Content::class)
+                    ->find(4),
+                'child' => $this->entityManager->getRepository(Content::class)
+                    ->find(5),
+                'childPosition' => 1,
+            ]
+        );
+        $populator->execute();
+        $populator->addEntity(
+            ContentHierarchy::class,
+            1,
+            [
+                'parent' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'child' => $this->entityManager->getRepository(Content::class)
+                    ->find(2),
+                'childPosition' => 1,
+            ]
+        );
+        $populator->execute();
+        $populator->addEntity(
+            ContentHierarchy::class,
+            1,
+            [
+                'parent' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'child' => $this->entityManager->getRepository(Content::class)
+                    ->find(3),
+                'childPosition' => 2,
+            ]
+        );
+        $populator->execute();
+        $populator->addEntity(
+            ContentHierarchy::class,
+            1,
+            [
+                'parent' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'child' => $this->entityManager->getRepository(Content::class)
+                    ->find(4),
+                'childPosition' => 3,
+            ]
+        );
+        $populator->execute();
+
+        $purger = new ORMPurger();
+        $executor = new ORMExecutor($this->entityManager, $purger);
+
         $this->classBeingTested = $this->app->make(ContentService::class);
+
         $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
         $this->datumFactory = $this->app->make(ContentDatumFactory::class);
         $this->permissionFactory = $this->app->make(PermissionsFactory::class);
         $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
-        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
-        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
-        $this->commentFactory = $this->app->make(CommentFactory::class);
-        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
-        $this->userContentProgressFactory = $this->app->make(UserContentProgressFactory::class);
+        //        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
+        //   $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
+        //        $this->commentFactory = $this->app->make(CommentFactory::class);
+        //   $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
+        //  $this->userContentProgressFactory = $this->app->make(UserContentProgressFactory::class);
     }
 
     public function _test_delete_content()
@@ -301,44 +394,29 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_getWhereTypeInAndStatusAndPublishedOnOrdered()
     {
-        $content1 = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-
-        $content2 = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_ARCHIVED
-        );
 
         $results = $this->classBeingTested->getWhereTypeInAndStatusAndPublishedOnOrdered(
-            [$content1['type']],
-            $content1['status'],
-            $content1['published_on']
+            ['course'],
+            'published',
+            Carbon::now()
+                ->toDateTimeString()
         );
 
-        $this->assertArraySubset([new ContentEntity($content1)], $results);
+        $this->assertEquals('course', $results[0]->getType());
+        $this->assertEquals('published', $results[0]->getStatus());
+        $this->assertEquals(
+            Carbon::now()
+                ->toDateTimeString(),
+            $results[0]->getPublishedOn()
+        );
     }
 
     public function test_getByChildIdWhereType()
     {
-        $content = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-        $children = $this->contentFactory->create();
-        $childrenHierarchy = $this->contentHierarchyFactory->create($content['id'], $children['id']);
-        $content['position'] = 1;
-        $content['parent_id'] = $content['id'];
-        $content['child_id'] = $children['id'];
-        $content['child_ids'] = [$children['id']];
-        unset($content['user_id']);
-        $results = $this->classBeingTested->getByChildIdsWhereType([$children['id']], $content['type']);
+        $results = $this->classBeingTested->getByChildIdsWhereType([2], 'course');
 
-        $this->assertEquals([$content], $results);
+        $this->assertEquals(1, $results[0]->getId());
+        $this->assertEquals('course', $results[0]->getType());
     }
 
     public function test_entireCacheNotFlushed()
@@ -392,21 +470,19 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_getAllByType()
     {
-        $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
-        $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
-        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
+        $results = $this->classBeingTested->getAllByType('course-part');
 
-        $results = $this->classBeingTested->getAllByType($type);
-
-        $this->assertEquals([$content1, $content2], $results);
+        foreach ($results as $content) {
+            $this->assertEquals('course-part', $content->getType());
+        }
     }
 
     public function test_getWhereTypeInAndStatusAndField()
     {
         $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
-        $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
-        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
-        $fields = $this->fieldFactory->create($content1['id'], 'difficulty', 2, 1, 'string');
+        //        $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
+        //        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
+        //        $fields = $this->fieldFactory->create($content1['id'], 'difficulty', 2, 1, 'string');
         $results = $this->classBeingTested->getWhereTypeInAndStatusAndField(
             [$type],
             ContentService::STATUS_PUBLISHED,
@@ -422,10 +498,10 @@ class ContentServiceTest extends RailcontentTestCase
     {
         $type = $this->faker->randomElement(ConfigService::$commentableContentTypes);
         $slug = $this->faker->slug();
-        $content1 = $this->contentFactory->create($slug, $type, ContentService::STATUS_PUBLISHED);
-        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
+        //        $content1 = $this->contentFactory->create($slug, $type, ContentService::STATUS_PUBLISHED);
+        //      $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
 
-        $results = $this->classBeingTested->getBySlugAndType($slug, $type);
+        $results = $this->classBeingTested->getBySlugAndType('slug1', 'course');
 
         $this->assertEquals(1, count($results));
     }
@@ -445,7 +521,7 @@ class ContentServiceTest extends RailcontentTestCase
             $userId
         );
 
-        $results = $this->classBeingTested->getByUserIdTypeSlug($userId, $type, $slug);
+        $results = $this->classBeingTested->getByUserIdTypeSlug(1, 'course', 'slug1');
 
         $this->assertEquals(1, count($results));
     }
@@ -483,11 +559,11 @@ class ContentServiceTest extends RailcontentTestCase
     public function test_getByContentFieldValuesForTypes()
     {
         $type = 'vimeo-video';
-        $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
-        $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
-//        $fields = $this->fieldFactory->create($content1['id'], 'length_in_seconds', 0, 1, 'string');
-         $fields = $this->fieldFactory->create($content2['id'],'length_in_seconds',0,1,'string');
-        $results = $this->classBeingTested->getByContentFieldValuesForTypes(['vimeo-video'], 'length_in_seconds', [0]);
+//        $content1 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
+    //    $content2 = $this->contentFactory->create($this->faker->slug(), $type, ContentService::STATUS_PUBLISHED);
+        //        $fields = $this->fieldFactory->create($content1['id'], 'length_in_seconds', 0, 1, 'string');
+        //$fields = $this->fieldFactory->create($content2['id'], 'length_in_seconds', 0, 1, 'string');
+        $results = $this->classBeingTested->getByContentFieldValuesForTypes(['course'], 'exercises', [1]);
 
         $this->assertEquals(1, count($results));
     }
@@ -524,36 +600,73 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_get_content_by_id()
     {
-        $user = $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-
-        $contentResponse1 = $this->classBeingTested->getById($content['id']);
-        $contentResponse2 = $this->classBeingTested->getById($content['id']);
+        $contentResponse1 = $this->classBeingTested->getById(1);
+        $contentResponse2 = $this->classBeingTested->getById(1);
 
         $this->assertEquals($contentResponse1, $contentResponse2);
-        $this->assertEquals($content, $contentResponse1);
+        $this->assertEquals(1, $contentResponse1->getId());
     }
 
     public function test_get_content_by_ids()
     {
-        $user = $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-        $content2 = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
+        $response = $this->classBeingTested->getByIds([2, 1]);
 
-        $response = $this->classBeingTested->getByIds([$content['id'], $content2['id']]);
+        $this->assertEquals(2, count($response));
+        $this->assertEquals(2, $response[0]->getId());
+        $this->assertEquals(1, $response[1]->getId());
+    }
 
-        $this->assertArraySubset([$content, $content2], $response);
+    public function test_get_by_parent_id()
+    {
+        $response = $this->classBeingTested->getByParentId(1);
+
+        $this->assertEquals(3, count($response));
+        $this->assertEquals(2, $response[0]->getId());
+    }
+
+    public function test_get_by_parent_id_paginated()
+    {
+        //get childrens from page 2
+        $response = $this->classBeingTested->getByParentIdPaginated(1, 2, 1);
+
+        //assert one child it's returned
+        $this->assertEquals(1, count($response));
+
+        $this->assertEquals(4, $response[0]->getId());
+    }
+
+    public function test_get_by_parent_id_and_type()
+    {
+        //get childrens with type 'course-part'
+        $response = $this->classBeingTested->getByParentIdWhereTypeIn(1, ['course-part']);
+
+        $this->assertEquals(3, count($response));
+
+        $this->assertEquals(2, $response[0]->getId());
+    }
+
+    public function test_get_by_parent_id_and_type_in_paginated()
+    {
+        //get childrens with type 'course-part'
+        $response = $this->classBeingTested->getByParentIdWhereTypeInPaginated(1, ['course-part'], 2, 1);
+
+        $this->assertEquals(1, count($response));
+
+        $this->assertEquals(4, $response[0]->getId());
+    }
+
+    public function test_countByParentIdWhereTypeIn()
+    {
+        $response = $this->classBeingTested->countByParentIdWhereTypeIn(1, ['course-part']);
+
+        $this->assertEquals(3, $response);
+    }
+
+    public function test_getByParentIds()
+    {
+        //get childrens by parent ids
+        $response = $this->classBeingTested->getByParentIds([1, 4]);
+
+        $this->assertEquals(4, count($response));
     }
 }

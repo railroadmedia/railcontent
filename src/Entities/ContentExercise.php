@@ -20,7 +20,6 @@ class ContentExercise
 
     /**
      * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
-     * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
      *
      */
     private $content;

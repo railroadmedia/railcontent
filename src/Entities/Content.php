@@ -266,6 +266,10 @@ class Content
 
     /**
      * @ORM\OneToMany(targetEntity="ContentExercise", mappedBy="content")
+     * @ORM\JoinTable(name="railcontent_content_exercise",
+     *      joinColumns={@ORM\JoinColumn(name="content_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="exercise_id", referencedColumnName="id", unique=true)}
+     *      )
      */
     protected $exercises;
 
@@ -278,6 +282,24 @@ class Content
      * @ORM\OneToMany(targetEntity="ContentVimeoVideo", mappedBy="content")
      */
     protected $vimeoVideo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ContentHierarchy", mappedBy="parent")
+     * @ORM\JoinTable(name="railcontent_content_hierarchy",
+     *      joinColumns={@ORM\JoinColumn(name="content_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="child_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    protected $child;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ContentHierarchy", mappedBy="child")
+     * @ORM\JoinTable(name="railcontent_content_hierarchy",
+     *      joinColumns={@ORM\JoinColumn(name="content_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="parent_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    protected $parent;
 
     /**
      * @return int
@@ -883,6 +905,14 @@ class Content
     }
 
     /**
+     * @return \DateTime
+     */
+    public function getPublishedOn()
+    {
+        return $this->publishedOn;
+    }
+
+    /**
      * Sets publishedOn.
      *
      * @param  \DateTime $publishedOn
@@ -896,14 +926,28 @@ class Content
     }
 
     /**
-     * Returns publishedOn.
+     * Returns createdOn.
      *
      * @return string
      */
-    public function getPublishedOn()
+    public function getCreatedOn()
     {
-        return $this->publishedOn;
+        return $this->createdOn;
     }
+
+
+    /**
+     * Sets createdOn.
+     *
+     * @param  string $createdOn
+     * @return $this
+     */
+    public function setCreatedOn($createdOn)
+    {
+        $this->createdOn = $createdOn;
+    }
+
+
 
     /**
      * Sets archivedOn.

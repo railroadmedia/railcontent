@@ -84,12 +84,6 @@ return [
     'validation' => [
         'brand' => [
             'course' => [
-                'scheduled' => [
-                   // 'fields' => [
-                        'data.attributes.title' =>                      'required|max:80'
-                    ,
-                  //  ],
-                ],
                 'published' => [
                     'data.attributes.title' =>                      'required|max:80'
 //                    'number_of_children' => 'numeric|min:1',

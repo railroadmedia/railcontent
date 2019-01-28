@@ -127,7 +127,8 @@ class CustomFormRequest extends FormRequest
             $thereIsEntity ? $this->getContentTypeVal($request) : $request->request->get('data')['attributes']['type'];
 
         if (isset(ConfigService::$validationRules[ConfigService::$brand]) &&
-            array_key_exists($contentType, ConfigService::$validationRules[ConfigService::$brand])) {
+            array_key_exists($contentType, ConfigService::$validationRules[ConfigService::$brand]) &&
+            array_key_exists($request->request->get('data')['attributes']['status'], ConfigService::$validationRules[ConfigService::$brand][$contentType])) {
             if (!$entity) {
                 $customRules = ConfigService::$validationRules[ConfigService::$brand][$contentType][$request->request->get('data')['attributes']['status']];
               } else {
@@ -207,6 +208,7 @@ class CustomFormRequest extends FormRequest
             $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
         } catch (\Exception $exception) {
             throw new HttpResponseException(
+
                 reply()->json(
                     null,
                     [

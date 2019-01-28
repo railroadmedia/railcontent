@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
+use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
@@ -80,6 +81,11 @@ class ContentService
      */
     private $userContentProgressRepository;
 
+    /**
+     * @var JsonApiHydrator
+     */
+    private $jsonApiHydrator;
+
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
@@ -103,25 +109,28 @@ class ContentService
     public function __construct(
         EntityManager $entityManager,
         ContentVersionRepository $versionRepository,
-      //  ContentFieldRepository $fieldRepository,
+        //  ContentFieldRepository $fieldRepository,
         //ContentDatumRepository $datumRepository,
-        ContentHierarchyRepository $contentHierarchyRepository,
-       // ContentPermissionRepository $contentPermissionRepository,
+        //ContentHierarchyRepository $contentHierarchyRepository,
+        // ContentPermissionRepository $contentPermissionRepository,
         CommentRepository $commentRepository,
         CommentAssignmentRepository $commentAssignmentRepository,
-        UserContentProgressRepository $userContentProgressRepository
+        UserContentProgressRepository $userContentProgressRepository,
+        JsonApiHydrator $jsonApiHydrator
     ) {
         $this->entityManager = $entityManager;
 
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
-        $this->fieldRepository = $this->entityManager->getRepository(ContentField::class);
+        //  $this->fieldRepository = $this->entityManager->getRepository(ContentField::class);
         $this->datumRepository = $this->entityManager->getRepository(ContentData::class);
         $this->contentPermissionRepository = $this->entityManager->getRepository(ContentPermission::class);
 
+        $this->jsonApiHydrator = $jsonApiHydrator;
+
         $this->versionRepository = $versionRepository;
 
-       // $this->datumRepository = $datumRepository;
-        $this->contentHierarchyRepository = $contentHierarchyRepository;
+        // $this->datumRepository = $datumRepository;
+        // $this->contentHierarchyRepository = $contentHierarchyRepository;
         //$this->contentPermissionRepository = $contentPermissionRepository;
         $this->commentRepository = $commentRepository;
         $this->commentAssignationRepository = $commentAssignmentRepository;
@@ -145,9 +154,7 @@ class ContentService
                 $hash,
                 $this->contentRepository->build()
                     ->restrictByUserAccess()
-                    ->addSelect(ConfigService::$tableContentFields)
-                    ->leftJoin(ConfigService::$tableContent.'.fields',ConfigService::$tableContentFields)
-                    ->where(ConfigService::$tableContent.'.id = :id')
+                    ->where(ConfigService::$tableContent . '.id = :id')
                     ->setParameter('id', $id)
                     ->getQuery()
                     ->getSingleResult(),
@@ -212,15 +219,10 @@ class ContentService
                 $hash,
                 $this->contentRepository->build()
                     ->restrictByUserAccess()
-                    ->where(ConfigService::$tableContent . '.type', $type)
+                    ->where(ConfigService::$tableContent . '.type = :type')
+                    ->setParameter('type', $type)
                     ->getQuery()
                     ->getResult()
-
-//                $this->contentRepository->query()
-//                    ->selectPrimaryColumns()
-//                    ->restrictByUserAccess()
-//                    ->where('type', $type)
-//                    ->get()
             );
         }
 
@@ -254,7 +256,7 @@ class ContentService
                 $fieldType,
                 $fieldComparisonOperator
             );
-
+        //dd($this->contentRepository->createQueryBuilder('c')->innerJoin('c.exercises', 'e')->addSelect('e')->andWhere('e.slug = :slug')->setParameter('slug','ex1')->getQuery()->getResult());
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -318,21 +320,30 @@ class ContentService
         $status,
         $publishedOnValue,
         $publishedOnComparisonOperator = '=',
-        $orderByColumn = 'published_on',
+        $orderByColumn = 'publishedOn',
         $orderByDirection = 'desc'
     ) {
-        return $this->contentRepository->query()
-            ->selectPrimaryColumns()
+
+        return $this->contentRepository->build()
             ->restrictByUserAccess()
-            ->whereIn('type', $types)
-            ->where('status', $status)
-            ->where(
-                'published_on',
-                $publishedOnComparisonOperator,
-                $publishedOnValue
+            ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types)
+            ->andWhere(config('railcontent.table_prefix') . 'content' . '.status = :status')
+            ->andWhere(
+                config('railcontent.table_prefix') .
+                'content' .
+                '.publishedOn ' .
+                $publishedOnComparisonOperator .
+                ' :publishedOn'
             )
-            ->orderBy($orderByColumn, $orderByDirection)
-            ->get();
+            ->orderBy(config('railcontent.table_prefix') . 'content.' . $orderByColumn, $orderByDirection)
+            ->setParameters(
+                [
+                    'status' => $status,
+                    'publishedOn' => $publishedOnValue,
+                ]
+            )
+            ->getQuery()
+            ->getResult();
     }
 
     /**
@@ -350,12 +361,13 @@ class ContentService
         if (!$results) {
             $results = CacheHelper::saveUserCache(
                 $hash,
-                $this->contentRepository->query()
-                    ->selectPrimaryColumns()
-                    ->restrictByUserAccess()
-                    ->where('slug', $slug)
-                    ->where('type', $type)
-                    ->get()
+                $this->contentRepository->build()//  ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                    ->where(config('railcontent.table_prefix') . 'content' . '.slug = :slug')
+                    ->andWhere(config('railcontent.table_prefix') . 'content' . '.type = :type')
+                    ->setParameters(['slug' => $slug, 'type' => $type])
+                    ->getQuery()
+                    ->getResult()
             );
         }
 
@@ -399,25 +411,21 @@ class ContentService
      * @param string $orderByDirection
      * @return array|Collection|ContentEntity[]
      */
-    public function getByParentId($parentId, $orderBy = 'child_position', $orderByDirection = 'asc')
+    public function getByParentId($parentId, $orderBy = 'childPosition', $orderByDirection = 'asc')
     {
         $hash = 'contents_by_parent_id_' . CacheHelper::getKey($parentId, $orderBy, $orderByDirection);
         $results = CacheHelper::getCachedResultsForKey($hash);
         if (!$results) {
             $resultsDB =
-                $this->contentRepository->query()
-                    ->selectPrimaryColumns()
+                $this->contentRepository->build()
                     ->restrictByUserAccess()
-                    ->selectInheritenceColumns()
-                    ->leftJoin(
-                        ConfigService::$tableContentHierarchy,
-                        ConfigService::$tableContentHierarchy . '.child_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                    ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
-                    ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
-            ->get();
+                    ->join(ConfigService::$tableContent . '.parent', 'p')
+                    ->where('p.parent = :parentId')
+                    ->setParameter('parentId', $parentId)
+                    ->orderBy('p.'.$orderBy, $orderByDirection)
+                    ->getQuery()
+                    ->getResult();
+
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
         }
@@ -436,8 +444,8 @@ class ContentService
     public function getByParentIdPaginated(
         $parentId,
         $limit = 10,
-        $skip = 0,
-        $orderBy = 'child_position',
+        $skip = 1,
+        $orderBy = 'childPosition',
         $orderByDirection = 'asc'
     ) {
         $hash =
@@ -448,21 +456,16 @@ class ContentService
 
         if (!$results) {
             $resultsDB =
-                $this->contentRepository->query()
-                    ->selectPrimaryColumns()
+                $this->contentRepository->build()
                     ->restrictByUserAccess()
-                    ->leftJoin(
-                        ConfigService::$tableContentHierarchy,
-                        ConfigService::$tableContentHierarchy . '.child_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                    ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
-                    ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
-                    ->selectInheritenceColumns()
-                    ->limit($limit)
-                    ->skip($skip)
-                    ->get();
+                    ->join(ConfigService::$tableContent . '.parent', 'p')
+                    ->where('p.parent = :parentId')
+                    ->setParameter('parentId', $parentId)
+                    ->orderBy('p.'.$orderBy, $orderByDirection)
+                    ->setMaxResults($limit)
+                    ->setFirstResult($skip*$limit)
+                    ->getQuery()
+                    ->getResult();
 
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
@@ -483,28 +486,23 @@ class ContentService
     public function getByParentIdWhereTypeIn(
         $parentId,
         $types,
-        $orderBy = 'child_position',
+        $orderBy = 'childPosition',
         $orderByDirection = 'asc'
     ) {
         $hash = 'contents_by_parent_id_type_' . CacheHelper::getKey($parentId, $types, $orderBy, $orderByDirection);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $resultsDB =
-                $this->contentRepository->query()
-                    ->selectPrimaryColumns()
-                    ->restrictByUserAccess()
-                    ->leftJoin(
-                        ConfigService::$tableContentHierarchy,
-                        ConfigService::$tableContentHierarchy . '.child_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                    ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
-                    ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
-                    ->whereIn(ConfigService::$tableContent . '.type', $types)
-                    ->selectInheritenceColumns()
-                    ->get();
+            $resultsDB =  $this->contentRepository->build()
+                ->restrictByUserAccess()
+                ->join(ConfigService::$tableContent . '.parent', 'p')
+                ->whereIn(ConfigService::$tableContent .'.type', $types)
+                ->andWhere('p.parent = :parentId')
+                ->setParameter('parentId', $parentId)
+                ->orderBy('p.'.$orderBy, $orderByDirection)
+                ->getQuery()
+                ->getResult();
+
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
         }
@@ -526,7 +524,7 @@ class ContentService
         $types,
         $limit = 10,
         $skip = 0,
-        $orderBy = 'child_position',
+        $orderBy = 'childPosition',
         $orderByDirection = 'asc'
     ) {
         $hash = 'contents_by_parent_id_type_in_' . CacheHelper::getKey(
@@ -541,22 +539,17 @@ class ContentService
 
         if (!$results) {
             $resultsDB =
-                $this->contentRepository->query()
-                    ->selectPrimaryColumns()
+                $this->contentRepository->build()
                     ->restrictByUserAccess()
-                    ->leftJoin(
-                        ConfigService::$tableContentHierarchy,
-                        ConfigService::$tableContentHierarchy . '.child_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                    ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
-                    ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
-                    ->whereIn(ConfigService::$tableContent . '.type', $types)
-                    ->limit($limit)
-                    ->skip($skip)
-                    ->selectInheritenceColumns()
-                    ->get();
+                    ->join(ConfigService::$tableContent . '.parent', 'p')
+                    ->whereIn(ConfigService::$tableContent .'.type', $types)
+                    ->andWhere('p.parent = :parentId')
+                    ->setParameter('parentId', $parentId)
+                    ->orderBy('p.'.$orderBy, $orderByDirection)
+                    ->setMaxResults($limit)
+                    ->setFirstResult($skip*$limit)
+                    ->getQuery()
+                    ->getResult();
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$parentId]));
         }
@@ -575,17 +568,17 @@ class ContentService
         $parentId,
         $types
     ) {
-        return $this->contentRepository->query()
+        $qb = $this->contentRepository->build();
+
+        return $qb
+            ->select($qb->expr()->count(ConfigService::$tableContent))
             ->restrictByUserAccess()
-            ->leftJoin(
-                ConfigService::$tableContentHierarchy,
-                ConfigService::$tableContentHierarchy . '.child_id',
-                '=',
-                ConfigService::$tableContent . '.id'
-            )
-            ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
-            ->whereIn(ConfigService::$tableContent . '.type', $types)
-            ->count();
+            ->join(ConfigService::$tableContent . '.parent', 'p')
+            ->whereIn(ConfigService::$tableContent .'.type', $types)
+            ->andWhere('p.parent = :parentId')
+            ->setParameter('parentId', $parentId)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     /**
@@ -596,26 +589,20 @@ class ContentService
      * @param string $orderByDirection
      * @return array|Collection|ContentEntity[]
      */
-    public function getByParentIds(array $parentIds, $orderBy = 'child_position', $orderByDirection = 'asc')
+    public function getByParentIds(array $parentIds, $orderBy = 'childPosition', $orderByDirection = 'asc')
     {
         $hash = 'contents_by_parent_ids_' . CacheHelper::getKey($parentIds, $orderBy, $orderByDirection);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $resultsDB =
-                $this->contentRepository->query()
-                    ->selectPrimaryColumns()
-                    ->restrictByUserAccess()
-                    ->leftJoin(
-                        ConfigService::$tableContentHierarchy,
-                        ConfigService::$tableContentHierarchy . '.child_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                    ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
-                    ->whereIn(ConfigService::$tableContentHierarchy . '.parent_id', $parentIds)
-                    ->selectInheritenceColumns()
-                    ->get();
+            $resultsDB =   $this->contentRepository->build()
+                ->restrictByUserAccess()
+                ->join(ConfigService::$tableContent . '.parent', 'p')
+                ->whereIn('p.parent', $parentIds)
+                ->orderBy('p.'.$orderBy, $orderByDirection)
+                ->getQuery()
+                ->getResult();
+
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), $parentIds));
         }
@@ -671,19 +658,16 @@ class ContentService
 
         if (!$results) {
             $resultsDB =
-                $this->contentRepository->query()
-                    ->selectPrimaryColumns()
+
+                $this->contentRepository->build()
                     ->restrictByUserAccess()
-                    ->leftJoin(
-                        ConfigService::$tableContentHierarchy,
-                        ConfigService::$tableContentHierarchy . '.parent_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                    ->whereIn(ConfigService::$tableContentHierarchy . '.child_id', $childIds)
-                    ->where(ConfigService::$tableContent . '.type', $type)
-                    ->selectInheritenceColumns()
-                    ->get();
+                    ->join(ConfigService::$tableContent . '.child', 'c')
+                    ->whereIn('c.child', $childIds)
+                    ->andWhere(ConfigService::$tableContent . '.type = :type')
+                   ->setParameter('type', $type)
+                    ->getQuery()
+                    ->getResult();
+
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), $childIds));
         }
@@ -934,14 +918,15 @@ class ContentService
             );
 
         // $5 sez we can remove this
-        $this->contentRepository->query()->getTypeNeighbouringSiblings(
-            $type,
-            $columnName,
-            $columnValue,
-            $siblingPairLimit,
-            $orderColumn,
-            $orderDirection
-        );
+        $this->contentRepository->query()
+            ->getTypeNeighbouringSiblings(
+                $type,
+                $columnName,
+                $columnValue,
+                $siblingPairLimit,
+                $orderColumn,
+                $orderDirection
+            );
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -1044,11 +1029,10 @@ class ContentService
                 implode(' ', array_values($includedUserStates) ?? '')
             );
         $cache = CacheHelper::getCachedResultsForKey($hash);
+
         if ($cache) {
             $results = new ContentFilterResultsEntity($cache);
         }
-
-
 
         if (!$results) {
             $filter = $this->contentRepository->startFilter(
@@ -1087,13 +1071,22 @@ class ContentService
                 );
             }
 
+            $queryBuilder = $this->contentRepository->createQueryBuilder('c');
+
+            $results =
+                $queryBuilder->setMaxResults($limit)
+                    ->setFirstResult($page)
+                    ->getQuery()
+                    ->getResult();
+            //dd($filter->requiredFields);
+
             $contentsQuery = $this->contentRepository->build()//->createQueryBuilder('c')
-                ->restrictByFields($filter->requiredFields)
-               // ->setMaxResults($limit)
-                //->setFirstResult($page)
-                ->getQuery()
+            ->restrictByFields($filter->requiredFields)// ->setMaxResults($limit)
+            //->setFirstResult($page)
+            ->getQuery()
                 ->getResult();
-return $contentsQuery;
+            return $contentsQuery;
+
             return $contentsQuery->setMaxResults($limit)
                 ->setFirstResult($page)
                 ->getQuery()
@@ -1117,38 +1110,26 @@ return $contentsQuery;
     }
 
     /**
-     * Call the create method from ContentRepository and return the new created content
-     *
-     * @param string $slug
-     * @param string $type
-     * @param string $status
-     * @param string|null $language
-     * @param string|null $brand
-     * @param int|null $userId
-     * @param string|null $publishedOn
-     * @param int|null $parentId
-     * @param int $sort
-     * @return array|ContentEntity
+     * @param $data
+     * @return Content
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \ReflectionException
      */
     public function create(
-        $slug,
-        $type,
-        $status,
-        $language,
-        $brand,
-        $userId,
-        $publishedOn,
-        $parentId = null,
-        $sort = 0
+        $data
     ) {
         $content = new Content();
-        $content->setSlug($slug);
-        $content->setStatus($status ?? self::STATUS_DRAFT);
-        $content->setType($type);
-        $content->setSort($sort);
-        $content->setLanguage($language ?? ConfigService::$defaultLanguage);
-        $content->setBrand($brand ?? ConfigService::$brand);
-        $content->setPublishedOn(Carbon::parse($publishedOn));
+        $this->jsonApiHydrator->hydrate($content, $data);
+
+        if (!$content->getBrand()) {
+            $content->setBrand(config('railcontent.brand'));
+        }
+
+        if (!$content->getLanguage()) {
+            $content->setLanguage(config('railcontent.default_language'));
+        }
 
         $this->entityManager->persist($content);
         $this->entityManager->flush();
@@ -1199,7 +1180,7 @@ return $contentsQuery;
         if (empty($content)) {
             return null;
         }
-        $content = $content->setParameters($data);
+        $this->jsonApiHydrator->hydrate($content, $data);
 
         $this->entityManager->persist($content);
         $this->entityManager->flush();
@@ -1249,32 +1230,32 @@ return $contentsQuery;
     {
         //TODO
         //delete the link with the parent and reposition other siblings
-//        $this->contentHierarchyRepository->deleteChildParentLinks($contentId);
-//
-//        //delete the content children
-//        $this->contentHierarchyRepository->deleteParentChildLinks($contentId);
-//
-//        //delete the content fields
-//        $this->fieldRepository->deleteByContentId($contentId);
-//
-//        //delete the content datum
-//        $this->datumRepository->deleteByContentId($contentId);
-//
-//        //delete the links with the permissions
-//        $this->contentPermissionRepository->deleteByContentId($contentId);
-//
-//        //delete the content comments, replies and assignation
-//        $comments = $this->commentRepository->getByContentId($contentId);
-//
-//        $this->commentAssignationRepository->query()
-//            ->whereIn('comment_id', array_pluck($comments, 'id'))
-//            ->delete();
-//        //->deleteCommentAssignations(array_pluck($comments, 'id'));
-//
-//        $this->commentRepository->deleteByContentId($contentId);
-//
-//        //delete content playlists
-//        $this->userContentProgressRepository->deleteByContentId($contentId);
+        //        $this->contentHierarchyRepository->deleteChildParentLinks($contentId);
+        //
+        //        //delete the content children
+        //        $this->contentHierarchyRepository->deleteParentChildLinks($contentId);
+        //
+        //        //delete the content fields
+        //        $this->fieldRepository->deleteByContentId($contentId);
+        //
+        //        //delete the content datum
+        //        $this->datumRepository->deleteByContentId($contentId);
+        //
+        //        //delete the links with the permissions
+        //        $this->contentPermissionRepository->deleteByContentId($contentId);
+        //
+        //        //delete the content comments, replies and assignation
+        //        $comments = $this->commentRepository->getByContentId($contentId);
+        //
+        //        $this->commentAssignationRepository->query()
+        //            ->whereIn('comment_id', array_pluck($comments, 'id'))
+        //            ->delete();
+        //        //->deleteCommentAssignations(array_pluck($comments, 'id'));
+        //
+        //        $this->commentRepository->deleteByContentId($contentId);
+        //
+        //        //delete content playlists
+        //        $this->userContentProgressRepository->deleteByContentId($contentId);
     }
 
     /**
@@ -1321,21 +1302,22 @@ return $contentsQuery;
      */
     public function softDelete($id)
     {
-        $content = $this->getById($id);
+        $content = $this->contentRepository->find($id);
 
         if (empty($content)) {
             return null;
         }
 
+        $content->setStatus(ContentService::STATUS_DELETED);
+
         event(new ContentSoftDeleted($id));
 
         CacheHelper::deleteCache('content_' . $id);
 
-        return $this->contentRepository->query()
-            ->whereIn('id', [$id])
-            ->update(
-                ['status' => ContentService::STATUS_DELETED]
-            );
+        $this->entityManager->persist($content);
+        $this->entityManager->flush();
+
+        return $content;
     }
 
     /**
@@ -1371,6 +1353,7 @@ return $contentsQuery;
         $contentFieldKey,
         array $contentFieldValues = []
     ) {
+
         $hash = 'contents_by_types_and_field_value_' . CacheHelper::getKey(
                 $contentTypes,
                 $contentFieldKey,
@@ -1379,44 +1362,55 @@ return $contentsQuery;
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
+            $qb =  $this->contentRepository->build()
+                ->restrictByUserAccess()
+                ->addSelect(
+                    [
+                        ConfigService::$tableContent . '.id as id',
+                    ]
+                )->whereIn(ConfigService::$tableContent . '.type', $contentTypes);
+
+            if(in_array($contentFieldKey,$this->entityManager->getClassMetadata(Content::class)->getFieldNames())){
+                $qb->andWhere(ConfigService::$tableContent.'.'.$contentFieldKey .'= :value')
+                ->setParameter('value', $contentFieldValues);
+            }else if(in_array($contentFieldKey,$this->entityManager->getClassMetadata(Content::class)->getAssociationNames())){
+                $qb->join(ConfigService::$tableContent . '.'.$this->entityManager->getClassMetadata(Content::class)->getFieldName($contentFieldKey), 'p')
+                    ->andWhere('p = :value')
+                    ->setParameter('value', $contentFieldValues);
+            }
+
             $results = CacheHelper::saveUserCache(
                 $hash,
-                $this->contentRepository->query()
-                    ->restrictByUserAccess()
-                    ->addSelect(
-                        [
-                            ConfigService::$tableContent . '.id as id',
-                        ]
-                    )
-                    ->join(
-                        ConfigService::$tableContentFields,
-                        function (JoinClause $joinClause) use (
-                            $contentFieldKey,
-                            $contentFieldValues
-                        ) {
-                            $joinClause->on(
-                                ConfigService::$tableContentFields . '.content_id',
-                                '=',
-                                ConfigService::$tableContent . '.id'
-                            )
-                                ->where(
-                                    ConfigService::$tableContentFields . '.key',
-                                    '=',
-                                    $contentFieldKey
-                                );
-                            if (!empty($contentFieldValues)) {
-                                $joinClause->whereIn(
-                                    ConfigService::$tableContentFields . '.value',
-                                    $contentFieldValues
-                                );
-                            }
-                        }
-                    )
-                    ->whereIn(ConfigService::$tableContent . '.type', $contentTypes)
-                    ->get()
+                $qb
+//                    ->join(
+//                        ConfigService::$tableContentFields,
+//                        function (JoinClause $joinClause) use (
+//                            $contentFieldKey,
+//                            $contentFieldValues
+//                        ) {
+//                            $joinClause->on(
+//                                ConfigService::$tableContentFields . '.content_id',
+//                                '=',
+//                                ConfigService::$tableContent . '.id'
+//                            )
+//                                ->where(
+//                                    ConfigService::$tableContentFields . '.key',
+//                                    '=',
+//                                    $contentFieldKey
+//                                );
+//                            if (!empty($contentFieldValues)) {
+//                                $joinClause->whereIn(
+//                                    ConfigService::$tableContentFields . '.value',
+//                                    $contentFieldValues
+//                                );
+//                            }
+//                        }
+//                    )
+
+                    ->getQuery()->getResult()
             );
         }
-
+dd($results);
         return $results;
     }
 
