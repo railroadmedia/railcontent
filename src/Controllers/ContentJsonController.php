@@ -91,6 +91,18 @@ class ContentJsonController extends Controller
         );
     }
 
+    public function getByChildIdWhereType($childId, $type)
+    {
+        $contentData = $this->contentService->getByChildIdWhereType($childId, $type);
+
+        return reply()->json(
+            $contentData,
+            [
+                'transformer' => DataTransformer::class,
+            ]
+        );
+    }
+
     /**
      * @param Request $request
      * @return JsonResponse

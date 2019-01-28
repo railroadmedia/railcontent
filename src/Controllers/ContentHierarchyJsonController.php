@@ -9,6 +9,7 @@ use Railroad\Railcontent\Requests\ContentHierarchyCreateRequest;
 use Railroad\Railcontent\Requests\ContentHierarchyUpdateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
+use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentHierarchyJsonController extends Controller
@@ -17,15 +18,24 @@ class ContentHierarchyJsonController extends Controller
      * @var ContentHierarchyService
      */
     private $contentHierarchyService;
+    /**
+     * @var ContentService
+     */
+    private $contentService;
 
     /**
      * FieldController constructor.
      *
      * @param ContentHierarchyService $contentHierarchyService
+     * @param ContentService $contentService
      */
-    public function __construct(ContentHierarchyService $contentHierarchyService)
+    public function __construct(
+        ContentHierarchyService $contentHierarchyService,
+        ContentService $contentService
+    )
     {
         $this->contentHierarchyService = $contentHierarchyService;
+        $this->contentService = $contentService;
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -44,12 +54,23 @@ class ContentHierarchyJsonController extends Controller
             $request->input('child_position')
         );
 
-        return reply()->json(
-            [$contentField],
+        $content_id = $request->input('parent_id');
+        $currentContent = $this->contentService->getById($content_id);
+        $data = ["post" => $currentContent];
+
+        return response()->json(
+            $data,
+            201,
             [
-                'transformer' => DataTransformer::class,
+                'Content-Type' => 'application/vnd.api+json'
             ]
         );
+//        return reply()->json(
+//            [$contentField],
+//            [
+//                'transformer' => DataTransformer::class,
+//            ]
+//        );
     }
 
     /**
@@ -73,14 +94,26 @@ class ContentHierarchyJsonController extends Controller
             new NotFoundException('Update hierarchy failed.')
         );
 
+        $content_id = $request->input('parent_id');
+        $currentContent = $this->contentService->getById($content_id);
+        $data = ["post" => $currentContent];
 
-        return reply()->json(
-            [$contentHierarchy],
+        return response()->json(
+            $data,
+            200,
             [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
+                'Content-Type' => 'application/vnd.api+json'
             ]
         );
+//
+//
+//        return reply()->json(
+//            [$contentHierarchy],
+//            [
+//                'transformer' => DataTransformer::class,
+//                'code' => 201,
+//            ]
+//        );
     }
 
     /**
@@ -93,6 +126,18 @@ class ContentHierarchyJsonController extends Controller
     {
         $this->contentHierarchyService->delete($parentId, $childId);
 
-        return reply()->json(null, ['code' => 204]);
+        $content_id = $request->input('parent_id');
+        $currentContent = $this->contentService->getById($content_id);
+        $data = ["post" => $currentContent];
+
+        return response()->json(
+            $data,
+            202,
+            [
+                'Content-Type' => 'application/vnd.api+json'
+            ]
+        );
+
+//        return reply()->json(null, ['code' => 204]);
     }
 }

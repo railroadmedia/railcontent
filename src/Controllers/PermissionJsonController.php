@@ -9,6 +9,7 @@ use Railroad\Railcontent\Requests\PermissionDissociateRequest;
 use Railroad\Railcontent\Requests\PermissionRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentPermissionService;
+use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\PermissionService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,19 +29,26 @@ class PermissionJsonController extends Controller
      * @var ContentPermissionService
      */
     private $contentPermissionService;
+    /**
+     * @var ContentService
+     */
+    private $contentService;
 
     /**
      * PermissionController constructor.
      *
      * @param PermissionService $permissionService
      * @param ContentPermissionService $contentPermissionService
+     * @param ContentService $contentService
      */
     public function __construct(
         PermissionService $permissionService,
-        ContentPermissionService $contentPermissionService
+        ContentPermissionService $contentPermissionService,
+        ContentService $contentService
     ) {
         $this->permissionService = $permissionService;
         $this->contentPermissionService = $contentPermissionService;
+        $this->contentService = $contentService;
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -147,12 +155,24 @@ class PermissionJsonController extends Controller
             $request->input('permission_id')
         );
 
-        return reply()->json(
-            [$assignedPermission],
+        $content_id = $request->input('content_id');
+        $currentContent = $this->contentService->getById($content_id);
+        $data = ["post" => $currentContent];
+
+        return response()->json(
+            $data,
+            201,
             [
-                'transformer' => DataTransformer::class,
+                'Content-Type' => 'application/vnd.api+json'
             ]
         );
+
+//        return reply()->json(
+//            [$assignedPermission],
+//            [
+//                'transformer' => DataTransformer::class,
+//            ]
+//        );
     }
 
     /**
@@ -168,12 +188,22 @@ class PermissionJsonController extends Controller
             $request->input('content_type'),
             $request->input('permission_id')
         );
+        $content_id = $request->input('content_id');
+        $currentContent = $this->contentService->getById($content_id);
+        $data = ["post" => $currentContent];
 
-        return reply()->json(
-            [[$dissociate]],
+        return response()->json(
+            $data,
+            200,
             [
-                'transformer' => DataTransformer::class,
+                'Content-Type' => 'application/vnd.api+json'
             ]
         );
+//        return reply()->json(
+//            [[$dissociate]],
+//            [
+//                'transformer' => DataTransformer::class,
+//            ]
+//        );
     }
 }

@@ -9,6 +9,7 @@ use Railroad\Railcontent\Requests\ContentDatumDeleteRequest;
 use Railroad\Railcontent\Requests\ContentDatumUpdateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
+use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentDatumJsonController extends Controller
@@ -16,13 +17,22 @@ class ContentDatumJsonController extends Controller
     private $datumService;
 
     /**
+     * @var ContentService
+     */
+    private $contentService;
+
+    /**
      * DatumController constructor.
      *
      * @param ContentDatumService $datumService
      */
-    public function __construct(ContentDatumService $datumService)
+    public function __construct(
+        ContentDatumService $datumService,
+        ContentService $contentService
+    )
     {
         $this->datumService = $datumService;
+        $this->contentService = $contentService;
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -42,10 +52,15 @@ class ContentDatumJsonController extends Controller
             $request->input('position')
         );
 
-        return reply()->json(
-            [$contentData],
+        $content_id = $request->input('content_id');
+        $currentContent = $this->contentService->getById($content_id);
+        $data = ["datum" => $contentData, "post" => $currentContent];
+
+        return response()->json(
+            $data,
+            201,
             [
-                'transformer' => DataTransformer::class,
+                'Content-Type' => 'application/vnd.api+json'
             ]
         );
     }
@@ -78,11 +93,15 @@ class ContentDatumJsonController extends Controller
             new NotFoundException('Update failed, datum not found with id: ' . $dataId)
         );
 
-        return reply()->json(
-            [$contentData],
+        $content_id = $request->input('content_id');
+        $currentContent = $this->contentService->getById($content_id);
+        $data = ["datum" => $contentData, "post" => $currentContent];
+
+        return response()->json(
+            $data,
+            200,
             [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
+                'Content-Type' => 'application/vnd.api+json'
             ]
         );
     }
@@ -108,6 +127,18 @@ class ContentDatumJsonController extends Controller
             new NotFoundException('Delete failed, datum not found with id: ' . $dataId)
         );
 
-        return reply()->json(null, ['code' => 204]);
+        $content_id = $request->input('content_id');
+        $currentContent = $this->contentService->getById($content_id);
+        $data = ["post" => $currentContent];
+
+        return response()->json(
+            $data,
+            202,
+            [
+                'Content-Type' => 'application/vnd.api+json'
+            ]
+        );
+
+//        return reply()->json($data, ['code' => 202]);
     }
 }

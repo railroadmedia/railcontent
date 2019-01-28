@@ -11,6 +11,7 @@ use Railroad\Railcontent\Requests\ContentFieldUpdateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFieldService;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentFieldJsonController extends Controller
@@ -20,13 +21,23 @@ class ContentFieldJsonController extends Controller
     private $fieldService;
 
     /**
+     * @var ContentService
+     */
+    private $contentService;
+
+    /**
      * FieldController constructor.
      *
      * @param ContentFieldService $fieldService
+     * @param ContentService $contentService
      */
-    public function __construct(ContentFieldService $fieldService)
+    public function __construct(
+        ContentFieldService $fieldService,
+        ContentService $contentService
+    )
     {
         $this->fieldService = $fieldService;
+        $this->contentService = $contentService;
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -70,11 +81,15 @@ class ContentFieldJsonController extends Controller
                 ]
             )
         );
+        $content_id = $request->input('content_id');
+        $currentContent = $this->contentService->getById($content_id);
+        $data = ["field" => $contentField, "post" => $currentContent];
 
-        return reply()->json(
-            [$contentField],
+        return response()->json(
+            $data,
+            201,
             [
-                'transformer' => DataTransformer::class,
+                'Content-Type' => 'application/vnd.api+json'
             ]
         );
     }
@@ -107,11 +122,15 @@ class ContentFieldJsonController extends Controller
             new NotFoundException('Update failed, field not found with id: ' . $fieldId)
         );
 
-        return reply()->json(
-            [$contentField],
+        $content_id = $request->input('content_id');
+        $currentContent = $this->contentService->getById($content_id);
+        $data = ["field" => $contentField, "post" => $currentContent];
+
+        return response()->json(
+            $data,
+            200,
             [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
+                'Content-Type' => 'application/vnd.api+json'
             ]
         );
     }
@@ -132,12 +151,22 @@ class ContentFieldJsonController extends Controller
     {
         $deleted = $this->fieldService->delete($fieldId);
 
+        $content_id = $request->input('content_id');
+        $currentContent = $this->contentService->getById($content_id);
+        $data = ["post" => $currentContent];
+
         //if the update method response it's null the field not exist; we throw the proper exception
         throw_if(
             is_null($deleted),
             new NotFoundException('Delete failed, field not found with id: ' . $fieldId)
         );
 
-        return reply()->json(null, ['code' => 204]);
+        return response()->json(
+            $data,
+            202,
+            [
+                'Content-Type' => 'application/vnd.api+json'
+            ]
+        );
     }
 }

@@ -44,6 +44,11 @@ Route::group(
                 )->name('content.get-by-parent-id');
 
                 Route::get(
+                    '/content/child/{childId}/{type}',
+                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getByChildIdWhereType'
+                )->name('content.get-by-child-id');
+
+                Route::get(
                     '/content/get-by-ids',
                     \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getByIds'
                 )->name('content.get-by-ids');
