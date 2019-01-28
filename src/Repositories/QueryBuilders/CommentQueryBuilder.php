@@ -111,7 +111,12 @@ class CommentQueryBuilder extends QueryBuilder
                 '=',
                 ConfigService::$tableContent . '.id'
             );
-            $this->where(ConfigService::$tableContent . '.type', CommentRepository::$availableContentType);
+            if(is_array(CommentRepository::$availableContentType)){
+                $this->whereIn(ConfigService::$tableContent . '.type', CommentRepository::$availableContentType);
+            }
+            else {
+                $this->where(ConfigService::$tableContent . '.type', CommentRepository::$availableContentType);
+            }
         }
 
         return $this;
