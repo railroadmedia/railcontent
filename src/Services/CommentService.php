@@ -222,10 +222,16 @@ class CommentService
 
         $orderByColumn = trim($orderByAndDirection, '-');
 
+        $contentTypeString = CommentRepository::$availableContentType;
+
+        if(is_array(CommentRepository::$availableContentType)){
+            $contentTypeString = serialize(CommentRepository::$availableContentType);
+        }
+
         $hash = 'get_comments_'
             . (CommentRepository::$availableContentId ?? '')
             .'_'.(CommentRepository::$assignedToUserId ??'')
-            .'_'.(CommentRepository::$availableContentType ??'')
+            .'_'.($contentTypeString ??'')
             .'_'.(CommentRepository::$availableUserId ??'')
             .'_'. CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
         $results = CacheHelper::getCachedResultsForKey($hash);
