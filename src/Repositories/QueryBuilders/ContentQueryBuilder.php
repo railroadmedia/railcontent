@@ -479,7 +479,7 @@ class ContentQueryBuilder extends QueryBuilder
                             function (Builder $builder) {
                                 return $builder->select('id')
                                     ->from(ConfigService::$tableUserPermissions)
-                                    ->where('user_id', auth()->user()->id ?? null)
+                                    ->where('user_id', auth()->id() ?? null)
                                     ->where(
                                         function (Builder $builder) {
                                             return $builder->whereRaw(

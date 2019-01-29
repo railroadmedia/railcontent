@@ -68,7 +68,7 @@ class CacheHelper
             $key .= implode(' ', array_values(array_wrap($arg)));
         }
         if (auth()->check()) {
-            $key .= auth()->user()->id;
+            $key .= auth()->id();
         }
 
         return md5($key . self::getSettings());
@@ -233,7 +233,7 @@ class CacheHelper
                 ->getPrefix() . 'userId_';
 
         if (auth()->check()) {
-            $key .= auth()->user()->id;
+            $key .= auth()->id();
         }
 
         return $key;
