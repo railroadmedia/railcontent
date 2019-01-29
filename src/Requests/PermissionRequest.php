@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use Railroad\Railcontent\Services\ConfigService;
 
 class PermissionRequest extends FormRequest
 {
@@ -23,7 +24,25 @@ class PermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255'
+            'data.attributes.name' => 'required|max:255',
         ];
+    }
+
+    public function onlyAllowed()
+    {
+        return array_merge_recursive(
+            $this->only(
+                [
+                    'data.attributes.name',
+                ]
+            ),
+            [
+                'data' => [
+                    'attributes' => [
+                        'brand' => $this->input('brand', ConfigService::$brand),
+                    ],
+                ],
+            ]
+        );
     }
 }

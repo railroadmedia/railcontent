@@ -5,13 +5,13 @@ namespace Railroad\Railcontent\Repositories;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 //use Illuminate\Database\Query\Builder;
-//use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
+use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 //use Railroad\Railcontent\Services\ConfigService;
 //use Railroad\Resora\Queries\CachedQuery;
 
 class ContentHierarchyRepository extends EntityRepository
 {
-//    use ByContentIdTrait;
+    use ByContentIdTrait;
 //    /**
 //     * @return CachedQuery|$this
 //     */

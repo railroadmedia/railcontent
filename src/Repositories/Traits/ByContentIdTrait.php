@@ -125,7 +125,7 @@ trait ByContentIdTrait
         }
     }
 
-    private function recalculatePosition($position, $dataCount, $existingData)
+    public function recalculatePosition($position, $dataCount, $existingData)
     {
         if ($position === null || $position > $dataCount) {
             if (empty($existingData)) {
@@ -285,7 +285,8 @@ trait ByContentIdTrait
     public function reposition($id = null, $data)
     {
         $existingData = null;
-        $position = $data['position'];
+
+        $position = $data['position'] ??0;
 
         if ($id) {
             $existingData = $this->find($id);

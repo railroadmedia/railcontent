@@ -60,7 +60,6 @@ class Permission
      * @return text
      */
     public function getBrand()
-    : string
     {
         return $this->brand;
     }
@@ -69,7 +68,7 @@ class Permission
      * @param string $key
      */
     public function setBrand(string $brand)
-    : void {
+    {
         $this->brand = $brand;
     }
 

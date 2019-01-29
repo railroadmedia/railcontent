@@ -8,6 +8,7 @@ use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Requests\ContentHierarchyCreateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
+use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentHierarchyJsonController extends Controller
@@ -45,18 +46,13 @@ class ContentHierarchyJsonController extends Controller
     {
         $this->permissionPackageService->canOrThrow(auth()->id(), 'create.content.hierarchy');
 
-        $contentField = $this->contentHierarchyService->create(
-            $request->input('parent_id'),
-            $request->input('child_id'),
-            $request->input('child_position')
+        $hierarchy = $this->contentHierarchyService->create(
+            $request->input('data.relationships.parent.id'),
+            $request->input('data.relationships.child.id'),
+            $request->input('data.attributes.child_position')
         );
 
-        return reply()->json(
-            [$contentField],
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return ResponseService::contentHierarchy($hierarchy);
     }
 
      /**

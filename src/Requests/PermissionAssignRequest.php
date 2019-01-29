@@ -24,17 +24,32 @@ class PermissionAssignRequest extends FormRequest
     public function rules()
     {
         return [
-            'permission_id' => 'required|integer|exists:' . ConfigService::$databaseConnectionName . '.' .
+            'data.relationships.permission.id' => 'required|integer|exists:' . ConfigService::$databaseConnectionName . '.' .
                 ConfigService::$tablePermissions . ',id',
-            'content_id' => 'nullable|numeric|required_without_all:content_type|exists:' .
+            'data.relationships.content.id' => 'nullable|numeric|required_without_all:data.attributes.content_type|exists:' .
                 ConfigService::$databaseConnectionName . '.' .
                 ConfigService::$tableContent .
                 ',id',
-            'content_type' => 'nullable|string|required_without_all:content_id|exists:' .
+            'data.attributes.content_type' => 'nullable|string|required_without_all:data.relationships.content.id|exists:' .
                 ConfigService::$databaseConnectionName . '.' .
                 ConfigService::$tableContent .
                 ',type'
         ];
     }
 
+//    /**
+//     * @return array
+//     */
+//    public function onlyAllowed()
+//    {
+//        return array_merge(
+//            $this->only(
+//                [
+//                    'data.attributes.content_type',
+//                    'data.relationships.content',
+//                    'data.relationships.permission',
+//                ]
+//            )
+//        );
+//    }
 }

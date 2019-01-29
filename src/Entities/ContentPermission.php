@@ -57,7 +57,6 @@ class ContentPermission
      * @return string|null
      */
     public function getContentType()
-    : string
     {
         return $this->contentType;
     }
@@ -66,7 +65,7 @@ class ContentPermission
      * @param string $key
      */
     public function setContentType($contentType)
-    : void {
+    {
         $this->contentType = $contentType;
     }
 
@@ -74,7 +73,6 @@ class ContentPermission
      * @return string
      */
     public function getBrand()
-    : string
     {
         return $this->brand;
     }
@@ -83,7 +81,7 @@ class ContentPermission
      * @param string $value
      */
     public function setBrand(string $brand)
-    : void {
+    {
         $this->brand = $brand;
     }
 
@@ -99,7 +97,7 @@ class ContentPermission
      * @param mixed $content
      */
     public function setContent($content)
-    : void {
+    {
         $this->content = $content;
     }
 
@@ -115,7 +113,7 @@ class ContentPermission
      * @param mixed $content
      */
     public function setPermission($permission)
-    : void {
+    {
         $this->permission = $permission;
     }
 }

@@ -2,40 +2,15 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
-use Railroad\Railcontent\DataFixtures\PermissionFixtureLoader;
-use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Factories\ContentPermissionsFactory;
-use Railroad\Railcontent\Factories\PermissionsFactory;
-use Railroad\Railcontent\Repositories\PermissionRepository;
+use Faker\ORM\Doctrine\Populator;
+use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentPermissionService;
-use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Services\PermissionService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
 class PermissionControllerTest extends RailcontentTestCase
 {
-    /**
-     * @var PermissionService
-     */
-    protected $serviceBeingTested;
-    protected $userId;
-
-    /**
-     * @var PermissionsFactory
-     */
-    protected $permissionFactory;
-
-    /**
-     * @var ContentPermissionsFactory
-     */
-    protected $contentPermissionFactory;
-
-    /** @var  ContentFactory */
-    protected $contentFactory;
-
     /**
      * @var ContentPermissionService
      */
@@ -45,21 +20,27 @@ class PermissionControllerTest extends RailcontentTestCase
     {
         parent::setUp();
 
-        $purger = new ORMPurger();
+        $populator = new Populator($this->faker, $this->entityManager);
 
-        $executor = new ORMExecutor($this->entityManager, $purger);
-        // dd($this->entityManager);
-        $executor->execute([app(PermissionFixtureLoader::class)]);
-        //
-        //        $this->serviceBeingTested = $this->app->make(PermissionService::class);
-        //        $this->classBeingTested = $this->app->make(PermissionRepository::class);
-                $this->contentPermissionService = $this->app->make(ContentPermissionService::class);
-        //
-                $this->permissionFactory = $this->app->make(PermissionsFactory::class);
-        //        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
-                $this->contentFactory = $this->app->make(ContentFactory::class);
-        //
-        //        $this->userId = $this->createAndLogInNewUser();
+        $populator->addEntity(
+            Permission::class,
+            1,
+            [
+                'name' => 'permission 1',
+                'brand' => ConfigService::$brand,
+            ]
+        );
+
+        $populator->addEntity(
+            Content::class,
+            1,
+            [
+                'type' => 'course',
+            ]
+        );
+        $populator->execute();
+
+        $this->contentPermissionService = $this->app->make(ContentPermissionService::class);
     }
 
     public function test_index()
@@ -75,11 +56,14 @@ class PermissionControllerTest extends RailcontentTestCase
             [
                 [
                     'id' => 1,
-                    'name' => 'permission 1',
-                    'brand' => ConfigService::$brand,
+                    'type' => 'permission',
+                    'attributes' => [
+                        'name' => 'permission 1',
+                        'brand' => ConfigService::$brand,
+                    ],
                 ],
             ],
-            $response->decodeResponseJson()
+            $response->decodeResponseJson('data')
         );
 
     }
@@ -91,7 +75,6 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $name = $this->faker->word;
         $permission = [
-            'id' => 2,
             'name' => $name,
         ];
 
@@ -99,13 +82,23 @@ class PermissionControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/permission',
             [
-                'name' => $name,
+                'data' => [
+                    'type' => 'permission',
+                    'attributes' => [
+                        'name' => $name,
+                    ],
+                ],
             ]
         );
-
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals(
-            array_add($permission, 'brand', ConfigService::$brand),
+            [
+                'data' => [
+                    'id' => 2,
+                    'type' => 'permission',
+                    'attributes' => array_add($permission, 'brand', ConfigService::$brand),
+                ],
+            ],
             $response->decodeResponseJson()
         );
     }
@@ -118,33 +111,43 @@ class PermissionControllerTest extends RailcontentTestCase
         $this->assertEquals(
             [
                 [
-                    "source" => "name",
-                    "detail" => "The name field is required.",
+                    'title' => 'Validation failed.',
+                    'source' => 'data.attributes.name',
+                    'detail' => 'The name field is required.',
                 ],
             ],
-            $response->decodeResponseJson('meta')['errors']
+            $response->decodeResponseJson('errors')
         );
     }
 
     public function test_update_response()
     {
         $name = $this->faker->word;
+        $permission['name'] = $name;
 
         $response = $this->call(
             'PATCH',
             'railcontent/permission/' . 1,
             [
-                'name' => $name,
+                'data' => [
+                    'id' => 1,
+                    'type' => 'permission',
+                    'attributes' => $permission,
+                ],
             ]
         );
 
         $this->assertEquals(201, $response->status());
 
-        $response->assertJson(
+        $this->assertEquals(
             [
-                'id' => '1',
-                'name' => $name,
-            ]
+                'data' => [
+                    'id' => 1,
+                    'type' => 'permission',
+                    'attributes' => array_add($permission, 'brand', ConfigService::$brand),
+                ],
+            ],
+            $response->decodeResponseJson()
         );
     }
 
@@ -158,15 +161,21 @@ class PermissionControllerTest extends RailcontentTestCase
             'PATCH',
             'railcontent/permission/' . $id,
             [
-                'name' => $name,
+                'id' => $id,
+                'type' => 'permission',
+                'data' => [
+                    'attributes' => [
+                        'name' => $name,
+                    ],
+                ],
             ]
         );
 
-        $this->assertEquals(404, $response->status());
+        $this->assertEquals(404, $response->getStatusCode());
 
         $this->assertEquals(
             'Update failed, permission not found with id: ' . $id,
-            $response->decodeResponseJson('meta')['errors']['detail']
+            $response->decodeResponseJson('errors')['detail']
         );
     }
 
@@ -177,14 +186,15 @@ class PermissionControllerTest extends RailcontentTestCase
         $this->assertEquals(422, $response->status());
 
         $expectedErrors = [
-            "source" => "name",
-            "detail" => "The name field is required.",
+            'source' => 'data.attributes.name',
+            'detail' => 'The name field is required.',
+            'title' => 'Validation failed.',
         ];
 
-        $this->assertEquals([$expectedErrors], $response->decodeResponseJson('meta')['errors']);
+        $this->assertEquals([$expectedErrors], $response->decodeResponseJson('errors'));
     }
 
-     public function test_delete_permission_response()
+    public function test_delete_permission_response()
     {
         $response = $this->call('DELETE', 'railcontent/permission/1');
 
@@ -194,66 +204,108 @@ class PermissionControllerTest extends RailcontentTestCase
 
     public function test_delete_missing_permission_response()
     {
-        $id = rand(2,10);
-        $response = $this->call('DELETE', 'railcontent/permission/'.$id);
+        $id = rand(2, 10);
+        $response = $this->call('DELETE', 'railcontent/permission/' . $id);
 
         $this->assertEquals(404, $response->status());
         $this->assertEquals(
-            'Delete failed, permission not found with id: '.$id,
-            $response->decodeResponseJson('meta')['errors']['detail']
+            'Delete failed, permission not found with id: ' . $id,
+            $response->decodeResponseJson('errors')['detail']
         );
     }
 
-
     public function test_assign_permission_to_specific_content()
     {
-        $permission = $this->permissionFactory->create();
-        $content = $this->contentFactory->create(
-            $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-
         $response = $this->call(
             'PUT',
             'railcontent/permission/assign',
             [
-                'permission_id' => $permission->getId(),
-                'content_id' => $content->getId(),
+                'data' => [
+                    'type' => 'contentPermission',
+                    'attributes' => [
+                        'brand' => ConfigService::$brand,
+                    ],
+                    'relationships' => [
+                        'permission' => [
+                            'type' => 'permission',
+                            'id' => 1,
+                        ],
+                        'content' => [
+                            'type' => 'content',
+                            'id' => 1,
+                        ],
+                    ],
+                ],
             ]
         );
 
         $expectedResults = [
-            "id" => "1",
-            "content" => $this->serializer->toArray($content),
             "content_type" => null,
-            "permission" => $this->serializer->toArray($permission),
-            "brand" => ConfigService::$brand
+            "brand" => ConfigService::$brand,
         ];
 
-        $this->assertEquals(200, $response->status());
-        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data')[0]);
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data')['attributes']);
+
+        $this->assertEquals(
+            [
+                'data' => [
+                    'type' => 'permission',
+                    'id' => 1,
+                ],
+            ],
+            $response->decodeResponseJson('data')['relationships']['permission']
+        );
+
+        $this->assertEquals(
+            [
+                'data' => [
+                    'type' => 'content',
+                    'id' => 1,
+                ],
+            ],
+            $response->decodeResponseJson('data')['relationships']['content']
+        );
     }
 
     public function test_assign_permission_to_specific_content_type()
     {
-        $permission = $this->permissionFactory->create();
-        $content = $this->contentFactory->create(
-            $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-
         $response = $this->call(
             'PUT',
             'railcontent/permission/assign',
             [
-                'permission_id' => $permission->getId(),
-                'content_type' => $content->getType(),
+                'data' => [
+                    'type' => 'contentPermission',
+                    'attributes' => [
+                        'content_type' => 'course',
+                    ],
+                    'relationships' => [
+                        'permission' => [
+                            'type' => 'permission',
+                            'id' => 1,
+                        ],
+                    ],
+                ],
             ]
         );
 
-        $this->assertEquals(200, $response->status());
+        $expectedResults = [
+            "content_type" => 'course',
+            "brand" => ConfigService::$brand,
+        ];
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data')['attributes']);
+
+        $this->assertEquals(
+            [
+                'data' => [
+                    'type' => 'permission',
+                    'id' => 1,
+                ],
+            ],
+            $response->decodeResponseJson('data')['relationships']['permission']
+        );
     }
 
     public function test_assign_permission_validation()
@@ -263,155 +315,207 @@ class PermissionControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/permission/assign',
             [
-                'permission_id' => $randomPermissionId,
+                'data' => [
+                    'type' => 'contentPermission',
+                    'relationships' => [
+                        'permission' => [
+                            'type' => 'permission',
+                            'id' => $randomPermissionId,
+                        ],
+                    ],
+                ],
+
             ]
         );
 
-        $decodedResponse = $response->decodeResponseJson('meta');
+        $decodedResponse = $response->decodeResponseJson('errors');
 
-        $this->assertEquals(422, $response->status());
-        $this->assertArrayHasKey('errors', $decodedResponse);
+        $this->assertEquals(422, $response->getStatusCode());
 
         $expectedErrors = [
             [
-                'source' => 'permission_id',
-                'detail' => 'The selected permission id is invalid.',
+                'source' => 'data.relationships.permission.id',
+                'detail' => 'The selected permission is invalid.',
+                'title' => 'Validation failed.',
             ],
             [
-                'source' => 'content_id',
-                'detail' => 'The content id field is required when none of content type are present.',
+                'source' => 'data.relationships.content.id',
+                'detail' => 'The content field is required when none of content type are present.',
+                'title' => 'Validation failed.',
             ],
             [
-                'source' => 'content_type',
-                'detail' => 'The content type field is required when none of content id are present.',
+                'source' => 'data.attributes.content_type',
+                'detail' => 'The content type field is required when none of content are present.',
+                'title' => 'Validation failed.',
             ],
         ];
-        $this->assertEquals($expectedErrors, $decodedResponse['errors']);
+        $this->assertEquals($expectedErrors, $decodedResponse);
     }
 
     public function test_assign_permission_incorrect_content_id()
     {
-        $permission = $this->permissionFactory->create();
         $response = $this->call(
             'PUT',
             'railcontent/permission/assign',
             [
-                'permission_id' => $permission->getId(),
-                'content_id' => rand(),
+                'data' => [
+                    'type' => 'contentPermission',
+                    'relationships' => [
+                        'permission' => [
+                            'type' => 'permission',
+                            'id' => 1,
+                        ],
+                        'content' => [
+                            'type' => 'content',
+                            'id' => rand(),
+                        ],
+                    ],
+                ],
             ]
         );
 
-        $decodedResponse = $response->decodeResponseJson('meta');
-
-        $this->assertEquals(422, $response->status());
-        $this->assertArrayHasKey('errors', $decodedResponse);
+        $this->assertEquals(422, $response->getStatusCode());
 
         $expectedErrors = [
             [
-                'source' => 'content_id',
-                'detail' => 'The selected content id is invalid.',
+                "title" => "Validation failed.",
+                "source" => "data.relationships.content.id",
+                "detail" => "The selected content is invalid.",
             ],
         ];
-        $this->assertEquals($expectedErrors, $decodedResponse['errors']);
+        $this->assertEquals($expectedErrors, $response->decodeResponseJson('errors'));
     }
 
     public function test_assign_permission_incorrect_content_type()
     {
-        $permission = $this->permissionFactory->create();
-
         $response = $this->call(
             'PUT',
             'railcontent/permission/assign',
             [
-                'permission_id' => $permission->getId(),
-                'content_type' => $this->faker->word,
+                'data' => [
+                    'type' => 'contentPermission',
+                    'attributes' => [
+                        'content_type' => $this->faker->word,
+                    ],
+                    'relationships' => [
+                        'permission' => [
+                            'type' => 'permission',
+                            'id' => 1,
+                        ],
+                    ],
+                ],
             ]
         );
 
-        $decodedResponse = $response->decodeResponseJson('meta');
-
-        $this->assertEquals(422, $response->status());
-        $this->assertArrayHasKey('errors', $decodedResponse);
+        $this->assertEquals(422, $response->getStatusCode());
 
         $expectedErrors = [
             [
-                'source' => 'content_type',
+                'source' => 'data.attributes.content_type',
                 'detail' => 'The selected content type is invalid.',
+                'title' => 'Validation failed.',
             ],
         ];
-        $this->assertEquals($expectedErrors, $decodedResponse['errors']);
+        $this->assertEquals($expectedErrors, $response->decodeResponseJson('errors'));
     }
 
     public function test_assign_permission_to_content_type_service_result()
     {
-        $permission = $this->permissionFactory->create();
-        $contentType = $this->faker->word;
-        $assigned = $this->contentPermissionService->create(null, $contentType, $permission->getId());
+        $assigned = $this->contentPermissionService->create(null, 'course', 1);
 
+        $this->assertEquals('course', $assigned->getContentType());
         $this->assertEquals(
-            [
-                'id' => 1,
-                'content' => null,
-                'content_type' => $contentType,
-                'permission' => $this->serializer->toArray($permission),
-                'brand' => ConfigService::$brand,
-            ],
-            $this->serializer->toArray($assigned)
+            1,
+            $assigned->getPermission()
+                ->getId()
         );
     }
 
     public function test_assign_permission_to_specific_content_service_result()
     {
-        $permission = $this->permissionFactory->create();
-        $content = $this->contentFactory->create();
-        $assigned = $this->contentPermissionService->create($content->getId(), null, $permission->getId());
+        $assigned = $this->contentPermissionService->create(1, null, 1);
 
+        $this->assertNull($assigned->getContentType());
         $this->assertEquals(
-            [
-                'id' => 1,
-                'content' => $this->serializer->toArray($content),
-                'content_type' => null,
-                'permission' => $this->serializer->toArray($permission),
-                'brand' => $permission->getBrand(),
-            ],
-            $this->serializer->toArray($assigned)
+            1,
+            $assigned->getPermission()
+                ->getId()
+        );
+        $this->assertEquals(
+            1,
+            $assigned->getContent()
+                ->getId()
         );
     }
 
     public function test_dissociation_by_content_id()
     {
-        $permission = $this->permissionFactory->create();
-        $content = $this->contentFactory->create(
-            $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
+        $this->contentPermissionService->create(1, null, 1);
+        $data = [
+            'data' => [
+                'type' => 'contentPermission',
+                'relationships' => [
+                    'permission' => [
+                        'type' => 'permission',
+                        'id' => 1,
+                    ],
+                    'content' => [
+                        'type' => 'content',
+                        'id' => 1,
+                    ],
+                ],
+            ],
+        ];
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentPermissions,
+            [
+                'permission_id' => 1,
+                'content_id' => 1,
+            ]
         );
-
-        $this->contentPermissionService->create($content->getId(), null, $permission->getId());
-        $data = ['content_id' => $content->getId(), 'permission_id' => $permission->getId()];
-        $this->assertDatabaseHas(ConfigService::$tableContentPermissions, $data);
 
         $response = $this->call('PATCH', 'railcontent/permission/dissociate/', $data);
 
         $this->assertEquals(200, $response->status());
-       // $this->assertEquals(1, $response->decodeResponseJson('data')[0][0]);
-        $this->assertDatabaseMissing(ConfigService::$tableContentPermissions, $data);
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableContentPermissions,
+            [
+                'permission_id' => 1,
+                'content_id' => 1,
+            ]
+        );
     }
 
     public function test_dissociation_by_content_type()
     {
-        $permission = $this->permissionFactory->create();
-        $content = $this->contentFactory->create(
-            $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
+        $this->contentPermissionService->create(null, 'course', 1);
+
+        $data = [
+            'data' => [
+                'type' => 'contentPermission',
+                'attributes' => [
+                    'content_type' => 'course',
+                ],
+                'relationships' => [
+                    'permission' => [
+                        'type' => 'permission',
+                        'id' => 1,
+                    ],
+                ],
+            ],
+        ];
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentPermissions,
+            ['content_type' => 'course', 'permission_id' => 1]
         );
-        $this->contentPermissionService->create(null, $content->getType(), $permission->getId());
-        $data = ['content_type' => $content->getType(), 'permission_id' => $permission->getId()];
-        $this->assertDatabaseHas(ConfigService::$tableContentPermissions, $data);
 
         $response = $this->call('PATCH', 'railcontent/permission/dissociate/', $data);
         $this->assertEquals(200, $response->status());
-        $this->assertDatabaseMissing(ConfigService::$tableContentPermissions, $data);
+        $this->assertDatabaseMissing(
+            ConfigService::$tableContentPermissions,
+            ['content_type' => 'course', 'permission_id' => 1]
+        );
     }
 }

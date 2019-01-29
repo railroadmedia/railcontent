@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -66,7 +65,7 @@ class PermissionService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $results = CacheHelper::saveUserCache($hash, $this->permissionRepository->query()->get(), null);
+            $results = CacheHelper::saveUserCache($hash, $this->permissionRepository->findAll(), null);
         }
 
         return $results;

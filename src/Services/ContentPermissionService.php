@@ -118,6 +118,7 @@ class ContentPermissionService
         if ($contentId) {
             $content = $this->contentRepository->find($contentId);
         }
+
         $permission = $this->permissionRepository->find($permissionId);
 
         $contentPermission = new ContentPermission();

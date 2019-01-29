@@ -4,8 +4,8 @@ namespace Railroad\Railcontent\Controllers;
 
 use Doctrine\ORM\EntityManager;
 use Illuminate\Routing\Controller;
-use JMS\Serializer\SerializationContext;
-use JMS\Serializer\SerializerBuilder;
+use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
+use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Repositories\PermissionRepository;
@@ -14,9 +14,7 @@ use Railroad\Railcontent\Requests\PermissionDissociateRequest;
 use Railroad\Railcontent\Requests\PermissionRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentPermissionService;
-use Railroad\Railcontent\Services\PermissionService;
-use Railroad\Railcontent\Transformers\DataTransformer;
-use Symfony\Component\HttpFoundation\Request;
+use Railroad\Railcontent\Services\ResponseService;
 
 /**
  * Class PermissionController
@@ -36,10 +34,6 @@ class PermissionJsonController extends Controller
     private $permissionRepository;
 
     /**
-     * @var PermissionService
-     */
-    private $permissionService;
-    /**
      * @var ContentPermissionService
      */
     private $contentPermissionService;
@@ -49,30 +43,31 @@ class PermissionJsonController extends Controller
      */
     private $permissionPackageService;
 
-    private $serializer;
+    /**
+     * @var JsonApiHydrator
+     */
+    private $jsonApiHydrator;
 
     /**
-     * PermissionController constructor.
+     * PermissionJsonController constructor.
      *
-     * @param PermissionService $permissionService
+     * @param EntityManager $entityManager
      * @param ContentPermissionService $contentPermissionService
+     * @param PermissionService $permissionPackageService
+     * @param JsonApiHydrator $jsonApiHydrator
      */
     public function __construct(
         EntityManager $entityManager,
-        //        PermissionService $permissionService,
-                ContentPermissionService $contentPermissionService,
-        \Railroad\Permissions\Services\PermissionService $permissionPackageService
+        ContentPermissionService $contentPermissionService,
+        PermissionService $permissionPackageService,
+        JsonApiHydrator $jsonApiHydrator
     ) {
-        //        $this->permissionService = $permissionService;
-                $this->contentPermissionService = $contentPermissionService;
+        $this->contentPermissionService = $contentPermissionService;
         $this->permissionPackageService = $permissionPackageService;
+        $this->jsonApiHydrator = $jsonApiHydrator;
 
         $this->entityManager = $entityManager;
         $this->permissionRepository = $this->entityManager->getRepository(Permission::class);
-
-        $this->serializer =   SerializerBuilder::create()->setSerializationContextFactory(function(){
-            return SerializationContext::create()->setSerializeNull(true);
-        })            ->build();
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -83,34 +78,38 @@ class PermissionJsonController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function index(Request $request)
+    public function index()
     {
-
         $this->permissionPackageService->canOrThrow(auth()->id(), 'pull.permissions');
 
         $permissions = $this->permissionRepository->findAll();
 
-        return response($this->serializer->serialize($permissions, 'json'));
+        return ResponseService::permission($permissions);
     }
 
     /**
      * Create a new permission and return it in JSON format
      *
      * @param PermissionRequest $request
-     * @return JsonResponse
+     * @return \Spatie\Fractal\Fractal
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Railroad\Permissions\Exceptions\NotAllowedException
+     * @throws \ReflectionException
      */
     public function store(PermissionRequest $request)
     {
         $this->permissionPackageService->canOrThrow(auth()->id(), 'create.permission');
 
         $permission = new Permission();
-        $permission->setName($request->get('name'));
-        $permission->setBrand($request->get('brand', ConfigService::$brand));
+
+        $this->jsonApiHydrator->hydrate($permission, $request->onlyAllowed());
 
         $this->entityManager->persist($permission);
         $this->entityManager->flush();
 
-        return response($this->serializer->serialize($permission, 'json'));
+        return ResponseService::permission($permission);
     }
 
     /**
@@ -126,19 +125,18 @@ class PermissionJsonController extends Controller
         $this->permissionPackageService->canOrThrow(auth()->id(), 'update.permission');
 
         $permission = $this->permissionRepository->find($id);
+
         throw_unless(
             $permission,
             new NotFoundException('Update failed, permission not found with id: ' . $id)
         );
 
-        $permission->setName($request->get('name'), $permission->getName());
-        $permission->setBrand($request->get('brand', $permission->getBrand()));
+        $this->jsonApiHydrator->hydrate($permission, $request->onlyAllowed());
 
-        $this->entityManager->persist($permission);
         $this->entityManager->flush();
 
-        return response($this->serializer->serialize($permission, 'json'), 201);
-
+        return ResponseService::permission($permission)
+            ->respond(201);
     }
 
     /**
@@ -161,7 +159,7 @@ class PermissionJsonController extends Controller
         $this->entityManager->remove($permission);
         $this->entityManager->flush();
 
-        return response(null, 204);
+        return ResponseService::empty(204);
     }
 
     /**
@@ -173,20 +171,13 @@ class PermissionJsonController extends Controller
     public function assign(PermissionAssignRequest $request)
     {
         $this->permissionPackageService->canOrThrow(auth()->id(), 'assign.permission');
+
         $assignedPermission = $this->contentPermissionService->create(
-            $request->input('content_id'),
-            $request->input('content_type'),
-            $request->input('permission_id')
+            $request->input('data.relationships.content.id'),
+            $request->input('data.attributes.content_type'),
+            $request->input('data.relationships.permission.id')
         );
-
-        return response($this->serializer->serialize(['data' => [$assignedPermission]], 'json'));
-
-//        return reply()->json(
-//            [$assignedPermission],
-//            [
-//                'transformer' => DataTransformer::class,
-//            ]
-//        );
+        return ResponseService::contentPermission($assignedPermission);
     }
 
     /**
@@ -200,17 +191,10 @@ class PermissionJsonController extends Controller
         $this->permissionPackageService->canOrThrow(auth()->id(), 'disociate.permissions');
 
         $dissociate = $this->contentPermissionService->dissociate(
-            $request->input('content_id'),
-            $request->input('content_type'),
-            $request->input('permission_id')
+            $request->input('data.relationships.content.id'),
+            $request->input('data.attributes.content_type'),
+            $request->input('data.relationships.permission.id')
         );
-        return response($this->serializer->serialize(['data' => [$dissociate]], 'json'));
-
-        return reply()->json(
-            [[$dissociate]],
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return ResponseService::empty(200);
     }
 }
