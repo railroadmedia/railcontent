@@ -303,6 +303,12 @@ class ContentRepository extends EntityRepository
             array_unshift($groupByColumns, ConfigService::$tableContent . '.' . $orderByColumn);
         }
 
+        $qb = $this->build()
+            ->restrictByUserAccess()
+            ->restrictByTypes($this->typesToInclude)
+            ->restrictByParentIds($this->requiredParentIds)
+            ->getQuery()->getResult();
+dd($qb);
         $subQuery =
             $this->newQuery()
                 ->selectCountColumns()

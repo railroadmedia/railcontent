@@ -7,6 +7,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Entities\ContentField;
+use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Queries\CachedQuery;
@@ -232,7 +233,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
             'where',
             $this->expr()
                 ->in(
-                    'c.brand',
+                    ConfigService::$tableContent .'.brand',
                     array_values(array_wrap(ConfigService::$availableBrands))
                 )
         );
@@ -262,16 +263,18 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
         if (empty($parentIds)) {
             return $this;
         }
-
-        $this->whereIn(
-            ConfigService::$tableContent . '.id',
-            function (Builder $builder) use ($parentIds) {
-                $builder->select([ConfigService::$tableContentHierarchy . '.child_id'])
-                    ->from(ConfigService::$tableContentHierarchy)
-                    ->whereIn('parent_id', $parentIds);
-            }
-        );
-
+        $this->join(ContentHierarchy::class, 'h');
+        $this->andWhere( 'h.parent IN (:parentIds)')
+        ->setParameter('parentIds', $parentIds);
+//        $this->whereIn(
+//            ConfigService::$tableContent . '.id',
+//            function (Builder $builder) use ($parentIds) {
+//                $builder->select([ConfigService::$tableContentHierarchy . '.child_id'])
+//                    ->from(ConfigService::$tableContentHierarchy)
+//                    ->whereIn('parent_id', $parentIds);
+//            }
+//        );
+//
         return $this;
     }
 
@@ -544,10 +547,12 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
      */
     public function restrictByUserAccess()
     {
-        $this->restrictStatuses()
+        $this
+            ->restrictStatuses()
             ->restrictPublishedOnDate()
             ->restrictBrand()
-            ->restrictByPermissions();
+            ->restrictByPermissions()
+        ;
 
         return $this;
     }

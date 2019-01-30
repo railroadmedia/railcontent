@@ -208,14 +208,17 @@ class CustomFormRequest extends FormRequest
             $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
         } catch (\Exception $exception) {
             throw new HttpResponseException(
-
-                reply()->json(
-                    null,
-                    [
-                        'code' => 500,
-                        'errors' => $exception,
-                    ]
-                )
+response()->json([
+    'code' => 500,
+    'errors' => $exception,
+])
+//                reply()->json(
+//                    null,
+//                    [
+//                        'code' => 500,
+//                        'errors' => $exception,
+//                    ]
+//                )
             );
         }
 
@@ -525,7 +528,9 @@ class CustomFormRequest extends FormRequest
     ) {
         $minimumRequiredChildren = null;
         $contentValidationRequired = false;
-        $input = $request->request->get('data')['attributes'];
+
+        $input = $request->request->all();
+            //$request->request->get('data')['attributes'];
 
         $brand = null;
         $content = $this->getContentFromRequest($request);

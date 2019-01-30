@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Doctrine\ORM\EntityRepository;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
@@ -10,7 +11,7 @@ use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Resora\Decorators\Decorator;
 
-class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
+class CommentRepository extends EntityRepository
 {
     use ByContentIdTrait;
     /** The value it's set in ContentPermissionMiddleware: if the user it's admin the value it's false, otherwise it's true.

@@ -3,8 +3,9 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Factories\ContentHierarchyFactory;
-use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
+use Faker\ORM\Doctrine\Populator;
+use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -13,73 +14,129 @@ class ContentHierarchyServiceTest extends RailcontentTestCase
 {
     protected $classBeingTested;
 
-    /**
-     * @var ContentHierarchyRepository
-     */
-    protected $contentHierarchyRepository;
-
     protected function setUp()
     {
         parent::setUp();
 
+        $populator = new Populator($this->faker, $this->entityManager);
+
+        $populator->addEntity(
+            Content::class,
+            6,
+            [
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        $populator->execute();
+
+        $populator->addEntity(
+            ContentHierarchy::class,
+            1,
+            [
+                'parent' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'child' => $this->entityManager->getRepository(Content::class)
+                    ->find(2),
+                'childPosition' => 1,
+            ]
+        );
+        $populator->execute();
+        $populator->addEntity(
+            ContentHierarchy::class,
+            1,
+            [
+                'parent' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'child' => $this->entityManager->getRepository(Content::class)
+                    ->find(3),
+                'childPosition' => 2,
+            ]
+        );
+        $populator->execute();
+        $populator->addEntity(
+            ContentHierarchy::class,
+            1,
+            [
+                'parent' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'child' => $this->entityManager->getRepository(Content::class)
+                    ->find(4),
+                'childPosition' => 3,
+            ]
+        );
+        $populator->execute();
+        $populator->addEntity(
+            ContentHierarchy::class,
+            1,
+            [
+                'parent' => $this->entityManager->getRepository(Content::class)
+                    ->find(2),
+                'child' => $this->entityManager->getRepository(Content::class)
+                    ->find(5),
+                'childPosition' => 1,
+            ]
+        );
+        $populator->execute();
+
         $this->classBeingTested = $this->app->make(ContentHierarchyService::class);
-        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
     }
 
-    public function _testCountParentsChildren()
+    public function test_count_parents_children()
     {
+        $results = $this->classBeingTested->countParentsChildren([2, 1]);
 
-    }
-
-    public function _testDelete()
-    {
+        $this->assertEquals(1, $results[2]);
+        $this->assertEquals(3, $results[1]);
 
     }
 
     public function test_get()
     {
-        $hierarchy =
-            $this->contentHierarchyRepository->query()
-                ->create(
-                    [
-                        'parent_id' => $this->faker->randomNumber(),
-                        'child_id' => $this->faker->randomNumber(),
-                        'child_position' => $this->faker->randomNumber(),
-                        'created_on' => Carbon::now()
-                            ->toDateTimeString(),
-                    ]
-                );
-
-        $this->assertEquals($hierarchy, $this->classBeingTested->get($hierarchy->parent_id, $hierarchy->child_id));
+        $results = $this->classBeingTested->get(1, 2);
+        $this->assertEquals(1, $results->getChildPosition());
+        $this->assertEquals(
+            1,
+            $results->getParent()
+                ->getId()
+        );
+        $this->assertEquals(
+            2,
+            $results->getChild()
+                ->getId()
+        );
     }
 
     public function test_get_by_parent_ids()
     {
-        $hierarchy =
-            $this->contentHierarchyRepository->query()
-                ->create(
-                    [
-                        'parent_id' => $this->faker->randomNumber(),
-                        'child_id' => $this->faker->randomNumber(),
-                        'child_position' => $this->faker->randomNumber(),
-                        'created_on' => Carbon::now()
-                            ->toDateTimeString(),
-                    ]
-                );
+        $results = $this->classBeingTested->getByParentIds([2, 1]);
 
-        $this->assertEquals([$hierarchy],
-            $this->classBeingTested->getByParentIds([$hierarchy['parent_id']])
-                ->toArray()
+        foreach ($results as $hierarchy) {
+            $this->assertTrue(
+                in_array(
+                    $hierarchy->getParent()
+                        ->getId(),
+                    [2, 1]
+                )
+            );
+        }
+    }
+
+    public function test_reposition_siblings()
+    {
+        $this->classBeingTested->repositionSiblings(3);
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentHierarchy,
+            [
+                'parent_id' => 1,
+                'child_id' => 4,
+                'child_position' => 2,
+            ]
         );
-    }
-
-    public function _testRepositionSiblings()
-    {
-
-    }
-
-    public function _testCreate()
-    {
 
     }
 }

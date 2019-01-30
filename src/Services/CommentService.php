@@ -3,7 +3,9 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Doctrine\ORM\EntityManager;
 use Railroad\Railcontent\Decorators\Decorator;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Helpers\CacheHelper;
@@ -12,7 +14,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 
 class CommentService
 {
-
+    private $entityManager;
     /**
      * @var CommentRepository
      */
@@ -37,11 +39,13 @@ class CommentService
      * @param CommentRepository $commentRepository
      */
     public function __construct(
-        CommentRepository $commentRepository,
-        ContentRepository $contentRepository
+        EntityManager $entityManager
+       // CommentRepository $commentRepository,
+        //ContentRepository $contentRepository
     ) {
-        $this->commentRepository = $commentRepository;
-        $this->contentRepository = $contentRepository;
+        $this->entityManager = $entityManager;
+       // $this->commentRepository = $commentRepository;
+        $this->contentRepository = $this->entityManager->getRepository(Content::class);
     }
 
     /** Call the getById method from repository and return the comment if exist and null otherwise
@@ -76,13 +80,14 @@ class CommentService
         }
 
         //check if the content type allow comments
-        $content = $this->contentRepository->read($contentId);
+        $content = $this->contentRepository->find($contentId);
 
         //return null if the content type it's not predefined in config file
-        if (!in_array($content['type'], ConfigService::$commentableContentTypes)) {
+        if (!in_array($content->getType(), ConfigService::$commentableContentTypes)) {
+            dd('iese');
             return null;
         }
-
+dd($userId);
         if (!$userId) {
             return -1;
         }

@@ -15,12 +15,15 @@ class ContentHierarchyService
      */
     private $contentHierarchyRepository;
 
+    /**
+     * @var EntityManager
+     */
     private $entityManager;
 
     /**
-     * FieldService constructor.
+     * ContentHierarchyService constructor.
      *
-     * @param ContentHierarchyRepository $contentHierarchyRepository
+     * @param EntityManager $entityManager
      */
     public function __construct(EntityManager $entityManager)
     {
@@ -32,38 +35,29 @@ class ContentHierarchyService
     /**
      * @param $parentId
      * @param $childId
-     * @return array|null
+     * @return object|null
      */
     public function get($parentId, $childId)
     {
-        dd(
-            $this->contentHierarchyRepository->findOneBy(
-                [
-                    'parent_id' => $parentId,
-                    'child_id' => $childId,
-                ]
-            )
-        );
         return $this->contentHierarchyRepository->findOneBy(
             [
-                'parent_id' => $parentId,
-                'child_id' => $childId,
+                'parent' => $parentId,
+                'child' => $childId,
             ]
         );
-        //            ->where(['parent_id' => $parentId, 'child_id' => $childId])
-        //            ->first();
     }
 
     /**
      * @param array $parentIds
-     * @param $childId
-     * @return array|null
+     * @return array|object[]
      */
     public function getByParentIds(array $parentIds)
     {
-        return $this->contentHierarchyRepository->query()
-            ->whereIn('parent_id', $parentIds)
-            ->get();
+        return $this->contentHierarchyRepository->findBy(
+            [
+                'parent' => $parentIds,
+            ]
+        );
     }
 
     /**
@@ -71,84 +65,108 @@ class ContentHierarchyService
      */
     public function countParentsChildren(array $parentIds)
     {
-        $results =
-            $this->contentHierarchyRepository->query()
-                ->selectRaw(
-                    'COUNT(' . ConfigService::$tableContentHierarchy . '.child_id) as count, parent_id'
-                )
-                ->whereIn(ConfigService::$tableContentHierarchy . '.parent_id', $parentIds)
-                ->groupBy(ConfigService::$tableContentHierarchy . '.parent_id')
-                ->get();
+        $results = [];
+        $parents =
+            $this->contentHierarchyRepository->createQueryBuilder('ch')
+                ->addSelect('COUNT(ch) as nr')
+                ->where('ch.parent IN (:parentIds)')
+                ->setParameter('parentIds', $parentIds)
+                ->groupBy('ch.parent')
+                ->getQuery()
+                ->getResult();
+        foreach ($parents as $hierarchy) {
+            $parentId =
+                $hierarchy[0]->getParent()
+                    ->getId();
+            $count = $hierarchy['nr'];
+            $results[$parentId] = $count;
+        }
 
-        return array_combine(
-            $results->pluck('parent_id')
-                ->toArray(),
-            $results->pluck('count')
-                ->toArray()
-        );
+        return  $results;
     }
 
     /**
-     * Create/update a new field and return it.
+     * Create/update a new hierarchy and return it.
      *
      * @param int $parentId
      * @param int $childId
      * @param int|null $childPosition
      * @return array
      */
-    public function create($parentId, $childId, $childPosition = null)
+    public function createOrUpdateHierarchy($parentId, $childId, $childPosition = null)
     {
+        $hierarchy = $this->contentHierarchyRepository->findOneBy(
+            [
+                'parent' => $parentId,
+                'child' => $childId,
+            ]
+        );
+
+        $oldPosition = ($hierarchy) ? $hierarchy->getChildPosition() : 0;
+
         $otherChildrenForParent = $this->contentHierarchyRepository->findby(
             [
                 'parent' => $parentId,
             ]
         );
-        $position =
-            $this->contentHierarchyRepository->recalculatePosition(
-                $childPosition,
-                count($otherChildrenForParent),
-                null
-            );
 
-        $hierarchy = new ContentHierarchy();
-        $hierarchy->setChild(
-            $this->entityManager->getRepository(Content::class)
-                ->find($childId)
+        $position = $this->contentHierarchyRepository->recalculatePosition(
+            $childPosition,
+            count($otherChildrenForParent),
+            $hierarchy
         );
-        $hierarchy->setParent(
-            $this->entityManager->getRepository(Content::class)
-                ->find($parentId)
-        );
+
+        if (!$hierarchy) {
+            $hierarchy = new ContentHierarchy();
+            $hierarchy->setChild(
+                $this->entityManager->getRepository(Content::class)
+                    ->find($childId)
+            );
+            $hierarchy->setParent(
+                $this->entityManager->getRepository(Content::class)
+                    ->find($parentId)
+            );
+        }
+
         $hierarchy->setChildPosition($position);
 
         $this->entityManager->persist($hierarchy);
         $this->entityManager->flush();
 
-        if (!empty($otherChildrenForParent)) {
-            if ($position <= count($otherChildrenForParent)) {
-                $q =
-                    $this->contentHierarchyRepository->createQueryBuilder('c')
-                        ->where('c.parent = :id')
-                        ->andWhere('c.childPosition >= :position')
-                        ->andWhere('c.id != :excludedId')
-                        ->setParameters(
-                            [
-                                'excludedId' => $hierarchy->getId(),
-                                'id' => $parentId,
-                                'position' => $position,
-                            ]
-                        );
-                $iterableResult =
-                    $q->getQuery()
-                        ->getResult();
-
-                foreach ($iterableResult as $otherChild) {
-                    $otherChild->setChildPosition($otherChild->getChildPosition() + 1);
-                    $this->entityManager                        ->persist($otherChild);
-                    $this->entityManager                        ->flush();
-                }
-
-            }
+        if ($position <= $oldPosition) {
+            $this->entityManager->createQuery(
+                '   UPDATE Railroad\Railcontent\Entities\ContentHierarchy h
+                SET h.childPosition = h.childPosition + 1 
+                WHERE h.parent = :id 
+                AND h.childPosition < :oldPosition 
+                AND h.childPosition >= :newPosition 
+                AND h.id != :excludedId '
+            )
+                ->execute(
+                    [
+                        'id' => $parentId,
+                        'oldPosition' => $oldPosition,
+                        'newPosition' => $position,
+                        'excludedId' => $hierarchy->getId(),
+                    ]
+                );
+        } else {
+            $this->entityManager->createQuery(
+                '   UPDATE Railroad\Railcontent\Entities\ContentHierarchy h
+                SET h.childPosition = h.childPosition - 1 
+                WHERE h.parent = :id 
+                AND h.childPosition > :oldPosition 
+                AND h.childPosition <= :newPosition 
+                AND h.id != :excludedId '
+            )
+                ->execute(
+                    [
+                        'id' => $parentId,
+                        'oldPosition' => $oldPosition,
+                        'newPosition' => $position,
+                        'excludedId' => $hierarchy->getId(),
+                    ]
+                );
         }
 
         //delete the cached results for parent id
@@ -156,7 +174,6 @@ class ContentHierarchyService
 
         //delete the cached results for child id
         CacheHelper::deleteCache('content_' . $childId);
-
 
         return $hierarchy;
     }
@@ -173,35 +190,67 @@ class ContentHierarchyService
 
         CacheHelper::deleteCache('content_' . $childId);
 
-        return $this->contentHierarchyRepository->query()
-            ->deleteAndReposition(
+        $hierarchy = $this->contentHierarchyRepository->findOneBy(
+            [
+                'parent' => $parentId,
+                'child' => $childId,
+            ]
+        );
+
+        if (!$hierarchy) {
+            return true;
+        }
+
+        $this->entityManager->createQuery(
+            '   UPDATE Railroad\Railcontent\Entities\ContentHierarchy h
+                SET h.childPosition = h.childPosition - 1 
+                WHERE h.parent = :id AND h.childPosition > :oldPosition'
+        )
+            ->execute(
                 [
-                    'parent_id' => $parentId,
-                    'child_id' => $childId,
-                ],
-                'child_'
+                    'id' => $parentId,
+                    'oldPosition' => $hierarchy->getChildPosition(),
+                ]
             );
-        //->deleteParentChildLink($parentId, $childId);
+
+        $this->entityManager->remove($hierarchy);
+        $this->entityManager->flush();
+
+        return true;
     }
 
     public function repositionSiblings($childId)
     {
-        $parentHierarchy =
-            $this->contentHierarchyRepository->query()
-                ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
-                ->first();
+        $parentHierarchy = $this->contentHierarchyRepository->findOneBy(
+            [
+                'child' => $childId,
+            ]
+        );
 
         if (!$parentHierarchy) {
             return true;
         }
+
         //delete the cached results for parent id
-        CacheHelper::deleteCache('content_' . $parentHierarchy['parent_id']);
+        CacheHelper::deleteCache(
+            'content_' .
+            $parentHierarchy->getParent()
+                ->getId()
+        );
 
         CacheHelper::deleteCache('content_' . $childId);
 
-        return $this->contentHierarchyRepository->query()
-            ->where('parent_id', $parentHierarchy['parent_id'])
-            ->where('child_position', '>', $parentHierarchy['child_position'])
-            ->decrement('child_position');
+        return $this->entityManager->createQuery(
+            '   UPDATE Railroad\Railcontent\Entities\ContentHierarchy h
+                SET h.childPosition = h.childPosition - 1 
+                WHERE h.parent = :id AND h.childPosition > :oldPosition'
+        )
+            ->execute(
+                [
+                    'id' => $parentHierarchy->getParent()
+                        ->getId(),
+                    'oldPosition' => $parentHierarchy->getChildPosition(),
+                ]
+            );
     }
 }

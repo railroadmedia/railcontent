@@ -13,6 +13,7 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use JMS\Serializer\SerializationContext;
@@ -342,18 +343,29 @@ class RailcontentTestCase extends BaseTestCase
      */
     public function createAndLogInNewUser()
     {
-        $userId = $this->databaseManager->connection()->query()->from('users')->insertGetId(
-            ['email' => $this->faker->email]
-        );
+        $userId = 1;
+        $email = $this->faker->email;
 
-        $this->authManager->guard()->onceUsingId($userId);
-
+//        Auth::shouldReceive('check')
+//            ->andReturn(true);
+        Auth::shouldReceive('id')
+            ->andReturn($userId);
+//        $userMockResults = ['id' => $userId, 'email' => $email];
+//        Auth::shouldReceive('user')
+//            ->andReturn($userMockResults);
+//        return $userId;
+//        $userId = $this->databaseManager->connection()->query()->from('users')->insertGetId(
+//            ['email' => $this->faker->email]
+//        );
+//
+       // $this->authManager->guard()->onceUsingId($userId);
+//
         request()->setUserResolver(
-            function () use ($userId) {
-                return User::query()->find($userId);
+            function () use ($userId, $email) {
+                return ['id' => $userId, 'email' => $email];
             }
         );
-
+//
         return $userId;
     }
 

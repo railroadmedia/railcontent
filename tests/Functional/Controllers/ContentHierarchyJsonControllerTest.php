@@ -6,23 +6,11 @@ use Carbon\Carbon;
 use Faker\ORM\Doctrine\Populator;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentHierarchy;
-use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Factories\ContentHierarchyFactory;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentHierarchyJsonControllerTest extends RailcontentTestCase
 {
-    /**
-     * @var ContentFactory
-     */
-    protected $contentFactory;
-
-    /**
-     * @var ContentHierarchyFactory
-     */
-    protected $contentHierarchyFactory;
-
     protected function setUp()
     {
         parent::setUp();
@@ -90,9 +78,6 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             ]
         );
         $populator->execute();
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
     }
 
     public function test_create_validation_fails()
@@ -148,25 +133,20 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
                     'attributes' => [
                         'child_position' => 5,
                     ],
-                    'relationships' =>
-                        [
-                            'parent' =>
-                                [
-                                    'data' =>
-                                        [
-                                            'type' => 'content',
-                                            'id' => '1',
-                                        ],
-                                ],
-                            'child' =>
-                                [
-                                    'data' =>
-                                        [
-                                            'type' => 'content',
-                                            'id' => '6',
-                                        ],
-                                ],
+                    'relationships' => [
+                        'parent' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => '1',
+                            ],
                         ],
+                        'child' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => '6',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             $response->decodeResponseJson()
@@ -197,7 +177,6 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-
         $this->assertEquals(200, $response->status());
         $this->assertArraySubset(
             [
@@ -206,25 +185,20 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
                     'attributes' => [
                         'child_position' => 3,
                     ],
-                    'relationships' =>
-                        [
-                            'parent' =>
-                                [
-                                    'data' =>
-                                        [
-                                            'type' => 'content',
-                                            'id' => '1',
-                                        ],
-                                ],
-                            'child' =>
-                                [
-                                    'data' =>
-                                        [
-                                            'type' => 'content',
-                                            'id' => '6',
-                                        ],
-                                ],
+                    'relationships' => [
+                        'parent' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => '1',
+                            ],
                         ],
+                        'child' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => '6',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             $response->decodeResponseJson()
@@ -233,32 +207,86 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
 
     public function test_update()
     {
-        $parentContent = $this->contentFactory->create();
-
-        $randomContent = $this->contentFactory->create();
-        $this->contentHierarchyFactory->create($parentContent['id'], $randomContent['id']);
-
-        $childContent = $this->contentFactory->create();
-        $newChildPosition = 1;
-
-        $oldHierarchy = $this->contentHierarchyFactory->create($parentContent['id'], $childContent['id']);
-
         $response = $this->call(
             'PUT',
             'railcontent/content/hierarchy',
             [
-                'parent_id' => $parentContent['id'],
-                'child_id' => $childContent['id'],
-                'child_position' => $newChildPosition,
+                'data' => [
+                    'attributes' => [
+                        'child_position' => 3,
+                    ],
+                    'relationships' => [
+                        'child' => [
+                            'type' => 'content',
+                            'id' => 2,
+                        ],
+                        'parent' => [
+                            'type' => 'content',
+                            'id' => 1,
+                        ],
+                    ],
+                ],
+            ]
+        );
+        $this->assertEquals(200, $response->status());
+        $this->assertArraySubset(
+            [
+                'data' => [
+                    'type' => 'contentHierarchy',
+                    'attributes' => [
+                        'child_position' => 3,
+                    ],
+                    'relationships' => [
+                        'parent' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => '1',
+                            ],
+                        ],
+                        'child' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => '2',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            $response->decodeResponseJson()
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentHierarchy,
+            [
+                'parent_id' => 1,
+                'child_id' => 3,
+                'child_position' => 1,
             ]
         );
 
         $this->assertDatabaseHas(
             ConfigService::$tableContentHierarchy,
             [
-                'child_id' => $childContent['id'],
-                'parent_id' => $parentContent['id'],
-                'child_position' => $newChildPosition,
+                'parent_id' => 1,
+                'child_id' => 4,
+                'child_position' => 2,
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentHierarchy,
+            [
+                'parent_id' => 1,
+                'child_id' => 2,
+                'child_position' => 3,
+            ]
+        );
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentHierarchy,
+            [
+                'parent_id' => 1,
+                'child_id' => 5,
+                'child_position' => 4,
             ]
         );
 
@@ -267,24 +295,99 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
 
     public function test_delete()
     {
-        $parentContent = $this->contentFactory->create();
-        $childContent = $this->contentFactory->create();
-
-        $oldHierarchy = $this->contentHierarchyFactory->create($parentContent['id'], $childContent['id']);
-
         $response = $this->call(
             'DELETE',
-            'railcontent/content/hierarchy/' . $parentContent['id'] . '/' . $childContent['id']
+            'railcontent/content/hierarchy/' . 1 . '/' . 3
         );
 
         $this->assertDatabaseMissing(
             ConfigService::$tableContentHierarchy,
             [
-                'child_id' => $childContent['id'],
-                'parent_id' => $parentContent['id'],
+                'child_id' => 3,
+                'parent_id' => 1,
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentHierarchy,
+            [
+                'parent_id' => 1,
+                'child_id' => 2,
+                'child_position' => 1,
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentHierarchy,
+            [
+                'parent_id' => 1,
+                'child_id' => 4,
+                'child_position' => 2,
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableContentHierarchy,
+            [
+                'parent_id' => 1,
+                'child_id' => 5,
+                'child_position' => 3,
             ]
         );
 
         $this->assertEquals(204, $response->status());
     }
+
+    public function test_create_hierarchy_one_child()
+    {
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/hierarchy',
+            [
+                'data' => [
+                    'attributes' => [
+                        'child_position' => 14,
+                    ],
+                    'relationships' => [
+                        'child' => [
+                            'type' => 'content',
+                            'id' => 6,
+                        ],
+                        'parent' => [
+                            'type' => 'content',
+                            'id' => 3,
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        $this->assertEquals(200, $response->status());
+        $this->assertArraySubset(
+            [
+                'data' => [
+                    'type' => 'contentHierarchy',
+                    'attributes' => [
+                        'child_position' => 1,
+                    ],
+                    'relationships' => [
+                        'parent' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => '3',
+                            ],
+                        ],
+                        'child' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => '6',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            $response->decodeResponseJson()
+        );
+    }
+
 }

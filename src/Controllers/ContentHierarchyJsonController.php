@@ -9,7 +9,6 @@ use Railroad\Railcontent\Requests\ContentHierarchyCreateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ResponseService;
-use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentHierarchyJsonController extends Controller
 {
@@ -46,7 +45,7 @@ class ContentHierarchyJsonController extends Controller
     {
         $this->permissionPackageService->canOrThrow(auth()->id(), 'create.content.hierarchy');
 
-        $hierarchy = $this->contentHierarchyService->create(
+        $hierarchy = $this->contentHierarchyService->createOrUpdateHierarchy(
             $request->input('data.relationships.parent.id'),
             $request->input('data.relationships.child.id'),
             $request->input('data.attributes.child_position')
@@ -67,6 +66,6 @@ class ContentHierarchyJsonController extends Controller
 
         $this->contentHierarchyService->delete($parentId, $childId);
 
-        return reply()->json(null, ['code' => 204]);
+        return ResponseService::empty(204);
     }
 }

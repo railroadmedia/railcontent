@@ -78,11 +78,11 @@ class CommentJsonController extends Controller
     public function store(CommentCreateRequest $request)
     {
         $comment = $this->commentService->create(
-            $request->get('comment'),
-            $request->get('content_id'),
+            $request->input('data.attributes.comment'),
+            $request->input('data.relationships.content.id'),
             null,
             $request->user()->id ?? null,
-            $request->get('display_name') ?? ''
+                $request->input('data.attributes.display_name')?? ''
         );
 
         throw_if(

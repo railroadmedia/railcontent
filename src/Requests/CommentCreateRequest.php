@@ -27,8 +27,8 @@ class CommentCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => 'required|max:10024',
-            'content_id' =>
+            'data.attributes.comment' => 'required|max:10024',
+            'data.relationships.content.id' =>
                 ['required',
                     'numeric',
                     Rule::exists(
@@ -39,7 +39,21 @@ class CommentCreateRequest extends FormRequest
                         }
                     })
                 ],
-//            'display_name' => 'required|max:255'
         ];
+    }
+
+
+    public function onlyAllowed()
+    {
+        return
+            $this->only(
+                [
+                    'data.attributes.comment',
+                    'data.attributes.user_id',
+                    'data.attributes.temporary_display_name',
+                    'data.relationships.content',
+                    'data.relationships.parent',
+                ]
+        );
     }
 }

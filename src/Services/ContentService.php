@@ -8,6 +8,7 @@ use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Decorators\Decorator;
+use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Entities\ContentEntity;
@@ -109,7 +110,7 @@ class ContentService
     public function __construct(
         EntityManager $entityManager,
         ContentVersionRepository $versionRepository,
-        CommentRepository $commentRepository,
+       // CommentRepository $commentRepository,
         CommentAssignmentRepository $commentAssignmentRepository,
         UserContentProgressRepository $userContentProgressRepository,
         JsonApiHydrator $jsonApiHydrator
@@ -120,6 +121,7 @@ class ContentService
         //  $this->fieldRepository = $this->entityManager->getRepository(ContentField::class);
         $this->datumRepository = $this->entityManager->getRepository(ContentData::class);
         $this->contentPermissionRepository = $this->entityManager->getRepository(ContentPermission::class);
+        $this->commentRepository = $this->entityManager->getRepository(Comment::class);
 
         $this->jsonApiHydrator = $jsonApiHydrator;
 
@@ -128,7 +130,7 @@ class ContentService
         // $this->datumRepository = $datumRepository;
         // $this->contentHierarchyRepository = $contentHierarchyRepository;
         //$this->contentPermissionRepository = $contentPermissionRepository;
-        $this->commentRepository = $commentRepository;
+
         $this->commentAssignationRepository = $commentAssignmentRepository;
         $this->userContentProgressRepository = $userContentProgressRepository;
     }
@@ -1113,7 +1115,8 @@ class ContentService
                     ->setFirstResult($page)
                     ->getQuery()
                     ->getResult();
-            //dd($filter->requiredFields);
+            dd($this->contentRepository
+                ->retrieveFilter());
 
             $contentsQuery = $this->contentRepository->build()//->createQueryBuilder('c')
             ->restrictByFields($filter->requiredFields)// ->setMaxResults($limit)

@@ -25,18 +25,8 @@ class ContentHierarchyCreateRequest extends CustomFormRequest
 
         $this->setCustomRules($this, 'fields');
 
-//        $this->validateContent($this);
+        $this->validateContent($this);
 
         return parent::rules();
     }
-
-//    public function attributes()
-//    {
-//        return [
-//            'child_id' => 'child id',
-//            'child_position' => 'child position',
-//            'parent_id' => 'parent id'
-//        ];
-//
-//    }
 }
