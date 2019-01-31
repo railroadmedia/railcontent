@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Exceptions\NotAllowedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Repositories\CommentRepository;
@@ -12,6 +13,7 @@ use Railroad\Railcontent\Requests\CommentUpdateRequest;
 use Railroad\Railcontent\Requests\ReplyRequest;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class CommentJsonController extends Controller
@@ -26,9 +28,10 @@ class CommentJsonController extends Controller
      *
      * @param CommentService $commentService
      */
-    public function __construct(CommentService $commentService)
+    public function __construct(CommentService $commentService, JsonApiHydrator $jsonApiHydrator)
     {
         $this->commentService = $commentService;
+        $this->jsonApiHidrator = $jsonApiHydrator;
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -57,15 +60,21 @@ class CommentJsonController extends Controller
             $request->user()->id ?? null
         );
 
-        return reply()->json(
-            $commentData['results'], [
-                'totalResults' => $commentData['total_results'],
-                'transformer' => DataTransformer::class,
-                'meta' => [
-                    'totalCommentsAndReplies' => $commentData['total_comments_and_results'],
-                ],
-            ]
-        );
+        $qb = $this->commentService->getQb(  $request->get('page', 1),
+            $request->get('limit', 10),
+            $request->get('sort', $request->get('sort', '-created_on')));
+
+        return ResponseService::comment($commentData, $qb);
+//        return reply()->json(
+//            $commentData['results'],
+//            [
+//                'totalResults' => $commentData['total_results'],
+//                'transformer' => DataTransformer::class,
+//                'meta' => [
+//                    'totalCommentsAndReplies' => $commentData['total_comments_and_results'],
+//                ],
+//            ]
+//        );
     }
 
     /**
@@ -81,8 +90,8 @@ class CommentJsonController extends Controller
             $request->input('data.attributes.comment'),
             $request->input('data.relationships.content.id'),
             null,
-            $request->user()->id ?? null,
-                $request->input('data.attributes.display_name')?? ''
+            auth()->id() ?? null,
+            $request->input('data.attributes.temporary_display_name') ?? ''
         );
 
         throw_if(
@@ -95,12 +104,7 @@ class CommentJsonController extends Controller
             new NotAllowedException('Only registered user can add comment. Please sign in.')
         );
 
-        return reply()->json(
-            [$comment],
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return ResponseService::comment($comment);
     }
 
     /**
@@ -116,16 +120,7 @@ class CommentJsonController extends Controller
         //update comment with the data sent on the request
         $comment = $this->commentService->update(
             $commentId,
-            array_intersect_key(
-                $request->all(),
-                [
-                    'comment' => '',
-                    'content_id' => '',
-                    'parent_id' => '',
-                    'user_id' => '',
-                    'display_name' => '',
-                ]
-            )
+            $request->onlyAllowed()
         );
 
         //if the user it's not logged in into the application
@@ -146,13 +141,8 @@ class CommentJsonController extends Controller
             new NotFoundException('Update failed, comment not found with id: ' . $commentId)
         );
 
-        return reply()->json(
-            [$comment],
-            [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
-            ]
-        );
+        return ResponseService::comment($comment)
+            ->respond(201);
     }
 
     /**
@@ -179,7 +169,7 @@ class CommentJsonController extends Controller
             new NotAllowedException('Delete failed, you can delete only your comments.')
         );
 
-        return reply()->json(null, ['code' => 204]);
+        return ResponseService::empty(204);
     }
 
     /**
@@ -192,14 +182,14 @@ class CommentJsonController extends Controller
     public function reply(ReplyRequest $request)
     {
         $reply = $this->commentService->create(
-            $request->get('comment'),
-            $request->get('content_id'),
-            $request->get('parent_id'),
-            $request->user()->id ?? null
+            $request->input('data.attributes.comment'),
+            $request->input('data.relationships.content.id'),
+            $request->input('data.relationships.parent.id'),
+            auth()->id() ?? null
         );
 
         throw_if(
-            is_null($request),
+            is_null($reply),
             new NotAllowedException('The content type does not allow comments.')
         );
 
@@ -208,12 +198,8 @@ class CommentJsonController extends Controller
             new NotAllowedException('Only registered user can reply to comment. Please sign in.')
         );
 
-        return reply()->json(
-            [$reply],
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return ResponseService::comment($reply)
+            ->respond(200);
     }
 
     /**

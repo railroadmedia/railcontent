@@ -27,8 +27,8 @@ class CommentUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => 'nullable|max:10024',
-            'content_id' =>
+            'data.attributes.comment' => 'nullable|max:10024',
+            'data.relationships.content.id' =>
                 ['numeric',
                     Rule::exists(
                         ConfigService::$databaseConnectionName . '.' .
@@ -42,9 +42,19 @@ class CommentUpdateRequest extends FormRequest
                         }
                     )
                 ],
-            'parent_id' => 'numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
+            'data.relationships.parent.id' => 'numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
                 ConfigService::$tableComments . ',id',
-            'display_name' => 'filled'
+            'data.attributes.display_name' => 'filled'
         ];
+    }
+
+    public function onlyAllowed()
+    {
+        return $this->only([
+            'data.attributes.comment',
+            'data.attributes.display_name',
+            'data.relationships.content.id',
+            'data.relationships.parent.id'
+        ]);
     }
 }

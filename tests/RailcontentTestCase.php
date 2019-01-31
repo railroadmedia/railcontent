@@ -346,25 +346,25 @@ class RailcontentTestCase extends BaseTestCase
         $userId = 1;
         $email = $this->faker->email;
 
-//        Auth::shouldReceive('check')
-//            ->andReturn(true);
+        Auth::shouldReceive('check')
+            ->andReturn(true);
         Auth::shouldReceive('id')
             ->andReturn($userId);
-//        $userMockResults = ['id' => $userId, 'email' => $email];
-//        Auth::shouldReceive('user')
-//            ->andReturn($userMockResults);
-//        return $userId;
+        $userMockResults = ['id' => $userId, 'email' => $email];
+        Auth::shouldReceive('user')
+            ->andReturn($userMockResults);
+        return $userId;
 //        $userId = $this->databaseManager->connection()->query()->from('users')->insertGetId(
 //            ['email' => $this->faker->email]
 //        );
 //
        // $this->authManager->guard()->onceUsingId($userId);
 //
-        request()->setUserResolver(
-            function () use ($userId, $email) {
-                return ['id' => $userId, 'email' => $email];
-            }
-        );
+//        request()->setUserResolver(
+//            function () use ($userId, $email) {
+//                return ['id' => $userId, 'email' => $email];
+//            }
+//        );
 //
         return $userId;
     }

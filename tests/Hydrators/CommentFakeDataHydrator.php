@@ -3,14 +3,14 @@
 namespace Railroad\Railcontent\Tests\Hydrators;
 
 use Railroad\Doctrine\Hydrators\FakeDataHydrator;
-use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\Comment;
 
-class ContentFakeDataHydrator extends FakeDataHydrator
+class CommentFakeDataHydrator extends FakeDataHydrator
 {
     public function fill(&$entity, $customColumnFormatters = [])
     {
         /**
-         * @var $defaultEntity User
+         * @var $defaultEntity Comment
          */
         $defaultEntity = parent::fill($entity, $customColumnFormatters);
 

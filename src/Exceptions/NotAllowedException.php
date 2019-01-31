@@ -18,16 +18,15 @@ class NotAllowedException extends \Exception
 
     public function render($request)
     {
-        return reply()->json(
-            null,
+        return response()->json(
             [
-                'code' => 403,
-                'totalResults' => 0,
                 'errors' => [
                     'title' => 'Not allowed.',
                     'detail' => $this->message,
                 ],
-            ]
+
+            ],
+            403
         );
     }
 

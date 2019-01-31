@@ -4,7 +4,9 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
+use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Decorators\Decorator;
+use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
@@ -25,6 +27,11 @@ class CommentService
      */
     protected $contentRepository;
 
+    /**
+     * @var JsonApiHydrator
+     */
+    private $jsonApiHidrator;
+
     /** The value it's set in ContentPermissionMiddleware;
      * if the user it's an administrator the value it's true and the administrator can update/delete any comment;
      * otherwise the value it's false and the user can update/delete only his own comments
@@ -39,13 +46,14 @@ class CommentService
      * @param CommentRepository $commentRepository
      */
     public function __construct(
-        EntityManager $entityManager
-       // CommentRepository $commentRepository,
-        //ContentRepository $contentRepository
+        EntityManager $entityManager,
+        JsonApiHydrator $jsonApiHydrator
     ) {
         $this->entityManager = $entityManager;
-       // $this->commentRepository = $commentRepository;
+        $this->commentRepository = $this->entityManager->getRepository(Comment::class);
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
+
+        $this->jsonApiHidrator = $jsonApiHydrator;
     }
 
     /** Call the getById method from repository and return the comment if exist and null otherwise
@@ -55,13 +63,13 @@ class CommentService
      */
     public function get($id)
     {
-        return $this->commentRepository->getById($id);
+        return $this->commentRepository->find($id);
     }
 
     /**
-     * Call the create method from repository that save a comment or a comment reply (based on the parent_id: if the parent_id it's null the method save a comment;
-     * otherwise save a reply for the comment with given id)
-     * Return the comment or null if the content it's not commentable
+     * Call the create method from repository that save a comment or a comment reply (based on the parent_id: if the
+     * parent_id it's null the method save a comment; otherwise save a reply for the comment with given id) Return the
+     * comment or null if the content it's not commentable
      *
      * @param string $comment
      * @param integer|null $contentId
@@ -70,13 +78,15 @@ class CommentService
      * @param string $temporaryUserDisplayName
      * @return array|null
      */
-    public function create($comment, $contentId, $parentId, $userId, $temporaryUserDisplayName = '')
+    public function create($commentText, $contentId, $parentId, $userId, $temporaryUserDisplayName = '')
     {
         //if we have defined parentId we have a comment reply
         if ($parentId) {
             $parentComment = $this->get($parentId);
             //set for the reply the comment content_id
-            $contentId = $parentComment['content_id'];
+            $contentId =
+                $parentComment->getContent()
+                    ->getId();
         }
 
         //check if the content type allow comments
@@ -84,35 +94,46 @@ class CommentService
 
         //return null if the content type it's not predefined in config file
         if (!in_array($content->getType(), ConfigService::$commentableContentTypes)) {
-            dd('iese');
             return null;
         }
-dd($userId);
+
         if (!$userId) {
             return -1;
         }
 
-        $comment = $this->commentRepository->create(
-            [
-                'comment' => $comment,
-                'content_id' => $contentId,
-                'parent_id' => $parentId,
-                'user_id' => $userId,
-                'temporary_display_name' => $temporaryUserDisplayName,
-                'created_on' => Carbon::now()->toDateTimeString()
-            ]
-        );
+        $comment = new Comment();
+        $comment->setComment($commentText);
+        $comment->setTemporaryDisplayName($temporaryUserDisplayName);
+        $comment->setUserId($userId);
+        $comment->setContent($content);
+        $comment->setParent($parentComment ?? null);
+        $comment->setCreatedOn(Carbon::now());
 
-        CacheHelper::deleteCache('content_' . $contentId);
+        $this->entityManager->persist($comment);
+        $this->entityManager->flush();
 
-        event(new CommentCreated($comment['id'], $userId, $parentId, $comment));
+        //        $comment = $this->commentRepository->create(
+        //            [
+        //                'comment' => $comment,
+        //                'content_id' => $contentId,
+        //                'parent_id' => $parentId,
+        //                'user_id' => $userId,
+        //                'temporary_display_name' => $temporaryUserDisplayName,
+        //                'created_on' => Carbon::now()->toDateTimeString()
+        //            ]
+        //        );
 
-        return $this->commentRepository->getById($comment['id']);
+        //CacheHelper::deleteCache('content_' . $contentId);
+
+        // event(new CommentCreated($comment['id'], $userId, $parentId, $comment));
+
+        return $comment;
     }
 
     /**
      * Call the update method from repository if the comment exist and the user have rights to update the comment
-     * Return the updated comment; null if the comment it's inexistent or -1 if the user have not rights to update the comment
+     * Return the updated comment; null if the comment it's inexistent or -1 if the user have not rights to update the
+     * comment
      *
      * @param integer $id
      * @param array $data
@@ -121,16 +142,17 @@ dd($userId);
     public function update($id, array $data)
     {
         //check if comment exist
-        $comment = $this->commentRepository->getById($id);
+        $comment = $this->commentRepository->find($id);
 
         if (empty($comment)) {
             return null;
         }
 
-        if (!(request()->user()->id)) {
+        if (!(auth()->id())) {
             return 0;
         }
-        request()->attributes->set('user_id', request()->user()->id ?? null);
+        request()->attributes->set('user_id', auth()->id() ?? null);
+
         //check if user can update the comment
         if (!$this->userCanManageComment($comment)) {
             return -1;
@@ -139,11 +161,16 @@ dd($userId);
         if (count($data) == 0) {
             return $comment;
         }
-        CacheHelper::deleteCache('content_' . $comment['content_id']);
+        CacheHelper::deleteCache(
+            'content_' .
+            $comment->getContent()
+                ->getId()
+        );
+        $this->jsonApiHidrator->hydrate($comment, $data);
 
-        $this->commentRepository->update($id, $data);
+        $this->entityManager->flush();
 
-        return $this->get($id);
+        return $comment;
     }
 
     /**
@@ -155,9 +182,8 @@ dd($userId);
      */
     public function delete($id)
     {
-
         //check if comment exist
-        $comment = $this->commentRepository->getById($id);
+        $comment = $this->commentRepository->find($id);
 
         if (empty($comment)) {
             return null;
@@ -175,12 +201,19 @@ dd($userId);
         //trigger an event that delete the corresponding comment assignments if the deletion it's not soft
         event(new CommentDeleted($id));
 
+        CacheHelper::deleteCache(
+            'content_' .
+            $comment->getContent()
+                ->getId()
+        );
+
         if ($isSoftDelete) {
-            $this->commentRepository->update($id, ['deleted_at' => Carbon::now()->toDateTimeString()]);
+            $comment->setDeletedAt(Carbon::now());
+            $this->entityManager->flush();
         } else {
-            $this->commentRepository->delete($id);
+            $this->entityManager->remove($comment);
+            $this->entityManager->flush();
         }
-        CacheHelper::deleteCache('content_' . $comment['content_id']);
 
         return true;
     }
@@ -198,17 +231,17 @@ dd($userId);
      */
     private function userCanManageComment($comment)
     {
-        if (is_null($comment['user_id'])) { // Very unlikely, but better safe than sorry.
+        if (is_null($comment->getUserId())) { // Very unlikely, but better safe than sorry.
             return false;
         }
 
-        return self::$canManageOtherComments || ($comment['user_id'] == auth()->id());
+        return self::$canManageOtherComments || ($comment->getUserId() == auth()->id());
     }
 
     /**
      *  Set the data necessary for the pagination ($page, $limit, $orderByDirection and $orderByColumn),
-     * call the method from the repository to pull the paginated comments that meet the criteria and call a method that return the total number of comments.
-     * Return an array with the paginated results and the total number of results
+     * call the method from the repository to pull the paginated comments that meet the criteria and call a method that
+     * return the total number of comments. Return an array with the paginated results and the total number of results
      *
      * @param int $page
      * @param int $limit
@@ -217,61 +250,62 @@ dd($userId);
      */
     public function getComments($page = 1, $limit = 25, $orderByAndDirection = '-created_on', $currentUserId = null)
     {
-        if ($limit == 'null') {
-            $limit = -1;
-        }
+        $hash =
+            'get_comments_' .
+            (CommentRepository::$availableContentId ?? '') .
+            '_' .
+            (CommentRepository::$assignedToUserId ?? '') .
+            '_' .
+            (CommentRepository::$availableContentType ?? '') .
+            '_' .
+            (CommentRepository::$availableUserId ?? '') .
+            '_' .
+            CacheHelper::getKey($page, $limit, $orderByAndDirection);
 
-        $orderByDirection = substr($orderByAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
-
-        $orderByColumn = trim($orderByAndDirection, '-');
-
-        $hash = 'get_comments_'
-            . (CommentRepository::$availableContentId ?? '')
-            .'_'.(CommentRepository::$assignedToUserId ??'')
-            .'_'.(CommentRepository::$availableContentType ??'')
-            .'_'.(CommentRepository::$availableUserId ??'')
-            .'_'. CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            if ($orderByColumn == 'mine') {
-                $this->commentRepository->setData(
-                    $page,
-                    $limit,
-                    $orderByDirection,
-                    'created_on'
-                );
-                CommentRepository::$availableUserId = $currentUserId;
-                $orderByColumn = 'created_on';
-                $results = [
-                    'results' => $this->commentRepository
-                        ->getCurrentUserComments(),
-                    'total_results' => $this->commentRepository
-                        ->countCurrentUserComments(),
-                    'total_comments_and_results' => $this->commentRepository
-                        ->countCommentsAndReplies()
-                ];
-            } else {
-                $this->commentRepository->setData(
-                    $page,
-                    $limit,
-                    $orderByDirection,
-                    $orderByColumn
-                );
-                $results = [
-                    'results' => $this->commentRepository->getComments(),
-                    'total_results' => $this->commentRepository->countComments(),
-                    'total_comments_and_results' => $this->commentRepository
-                        ->countCommentsAndReplies()
-                ];
-            }
 
-            if($results['total_results'] > 0){
-                $contentIds = $results['results']->pluck('content_id');
-            } else {
-                $contentIds = null;
-            }
-            $results = CacheHelper::saveUserCache($hash, $results, $contentIds);
+            $qb = $this->getQb($page, $limit, $orderByAndDirection);
+
+            $results =
+                $qb->getQuery()
+                    ->getResult();
+
+            //            if ($orderByColumn == 'mine') {
+            //                $this->commentRepository->setData(
+            //                    $page,
+            //                    $limit,
+            //                    $orderByDirection,
+            //                    'created_on'
+            //                );
+            //                CommentRepository::$availableUserId = $currentUserId;
+            //                $orderByColumn = 'created_on';
+            //                $results = [
+            //                    'results' => $this->commentRepository->getCurrentUserComments(),
+            //                    'total_results' => $this->commentRepository->countCurrentUserComments(),
+            //                    'total_comments_and_results' => $this->commentRepository->countCommentsAndReplies(),
+            //                ];
+            //            } else {
+            //                $this->commentRepository->setData(
+            //                    $page,
+            //                    $limit,
+            //                    $orderByDirection,
+            //                    $orderByColumn
+            //                );
+            //                $results = [
+            //                    'results' => $this->commentRepository->getComments(),
+            //                    'total_results' => $this->commentRepository->countComments(),
+            //                    'total_comments_and_results' => $this->commentRepository->countCommentsAndReplies(),
+            //                ];
+            //            }
+            //
+            //            if ($results['total_results'] > 0) {
+            //                $contentIds = $results['results']->pluck('content_id');
+            //            } else {
+            //                $contentIds = null;
+            //            }
+            //            $results = CacheHelper::saveUserCache($hash, $results, $contentIds);
         }
 
         return $results;
@@ -314,6 +348,7 @@ dd($userId);
 
     /**
      * Count the comments that have been created after the comment
+     *
      * @param $commentId
      * @return int
      */
@@ -327,6 +362,7 @@ dd($userId);
 
     /**
      * Calculate the page that should be current page to display the comment
+     *
      * @param int $commentId
      * @param int $limit
      * @return float|int
@@ -336,6 +372,52 @@ dd($userId);
         $countLatestComments = $this->countLatestComments($commentId);
 
         return floor($countLatestComments / $limit) + 1;
+    }
+
+    /**
+     * @param $page
+     * @param $limit
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getQb($page, $limit, $orderByAndDirection)
+    : \Doctrine\ORM\QueryBuilder {
+
+        if ($limit == 'null') {
+            $limit = -1;
+        }
+
+        $orderByDirection = substr($orderByAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
+
+        $orderByColumn = trim($orderByAndDirection, '-');
+        if (strpos($orderByColumn, '_') !== false || strpos($orderByColumn, '-') !== false) {
+            $orderByColumn = camel_case($orderByColumn);
+        }
+
+        // parse request params and prepare db query parms
+        $alias = 'c';
+        $aliasProduct = 'p';
+        // $orderBy = $request->get('order_by_column', 'created_at');
+        //
+        $orderByColumn = $alias . '.' . $orderByColumn;
+        $first = ($page - 1) * $limit;
+        /**
+         * @var $qb \Doctrine\ORM\QueryBuilder
+         */
+        $qb = $this->commentRepository->createQueryBuilder($alias);
+        if ($orderByColumn == 'mine') {
+            $qb->where($alias . '.user_id = :user')
+                ->setParameter('user', auth()->id());
+            $orderByColumn = 'created_on';
+
+        }
+        $qb->select([$alias])
+            ->setMaxResults($limit)
+            ->setFirstResult($first)
+            ->orderBy($orderByColumn, $orderByDirection);
+
+        return $qb;
     }
 
 }

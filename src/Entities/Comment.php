@@ -26,7 +26,7 @@ class Comment
     protected $comment;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", nullable=true, name="temporary_display_name")
      * @var string
      */
     protected $temporaryDisplayName;

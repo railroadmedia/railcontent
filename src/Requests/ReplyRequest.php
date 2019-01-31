@@ -24,8 +24,8 @@ class ReplyRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => 'required|max:10024',
-            'parent_id' => 'required|numeric|exists:' .
+            'data.attributes.comment' => 'required|max:10024',
+            'data.relationships.parent.id' => 'required|numeric|exists:' .
                 ConfigService::$databaseConnectionName .
                 '.' .
                 ConfigService::$tableComments .

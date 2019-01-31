@@ -14,10 +14,11 @@ class UnassignCommentEventListener
 
     private $commentRepository;
 
-    public function __construct(CommentAssignmentService $commentAssignmentService, CommentRepository $commentRepository)
+
+    public function __construct(CommentAssignmentService $commentAssignmentService)
     {
         $this->commentAssignmentService = $commentAssignmentService;
-        $this->commentRepository = $commentRepository;
+       // $this->commentRepository = $commentRepository;
     }
 
     /**
@@ -28,11 +29,11 @@ class UnassignCommentEventListener
      */
     public function handle(CommentDeleted $event)
     {
-        $this->commentRepository->deleteCommentReplies($event->commentId);
-
-        $results = $this->commentAssignmentService->deleteCommentAssignations($event->commentId);
-
-        return $results;
+//        $this->commentRepository->deleteCommentReplies($event->commentId);
+//
+//        $results = $this->commentAssignmentService->deleteCommentAssignations($event->commentId);
+//
+//        return $results;
     }
 
 }
