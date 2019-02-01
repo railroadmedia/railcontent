@@ -57,7 +57,7 @@ class CommentJsonController extends Controller
             $request->get('page', 1),
             $request->get('limit', 10),
             $request->get('sort', $request->get('sort', '-created_on')),
-            $request->user()->id ?? null
+            auth()->id() ?? null
         );
 
         $qb = $this->commentService->getQb(  $request->get('page', 1),

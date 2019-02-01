@@ -45,13 +45,14 @@ class Comment
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Comment")
+     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Comment", inversedBy="reply")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      *
      */
     private $parent;
 
-    /**
+
+   /**
      * @var \DateTime $createdOn
      *
      * @Gedmo\Timestampable(on="create")

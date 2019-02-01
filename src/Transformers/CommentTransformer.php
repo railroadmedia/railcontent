@@ -12,17 +12,18 @@ use Railroad\Railcontent\Entities\Permission;
 class CommentTransformer extends TransformerAbstract
 {
     protected $defaultIncludes = [
-
+'content'
     ];
 
     public function transform(Comment $comment)
     {
         $entityManager = app()->make(EntityManager::class);
 
-        if ($comment->getParent()) {
-
-            //$this->defaultIncludes[] = 'parent';
-        }
+        //if ($comment->getParent()) {
+//echo ('am parent');
+//dd($this->item($comment->getParent(), new CommentTransformer(), 'comment'));
+        //    $this->defaultIncludes[] = 'parent';
+       // }
 
         $serializer = new BasicEntitySerializer();
 
@@ -37,5 +38,10 @@ class CommentTransformer extends TransformerAbstract
     public function includeParent(Comment $comment)
     {
         return $this->item($comment->getParent(), new CommentTransformer(), 'comment');
+    }
+
+    public function includeContent(Comment $comment)
+    {
+        return $this->item($comment->getContent(), new ContentTransformer(), 'content');
     }
 }

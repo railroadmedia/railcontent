@@ -397,21 +397,38 @@ class CommentService
 
         // parse request params and prepare db query parms
         $alias = 'c';
-        $aliasProduct = 'p';
-        // $orderBy = $request->get('order_by_column', 'created_at');
-        //
+        $aliasContent = 'content';
+
         $orderByColumn = $alias . '.' . $orderByColumn;
         $first = ($page - 1) * $limit;
         /**
          * @var $qb \Doctrine\ORM\QueryBuilder
          */
         $qb = $this->commentRepository->createQueryBuilder($alias);
-        if ($orderByColumn == 'mine') {
-            $qb->where($alias . '.user_id = :user')
-                ->setParameter('user', auth()->id());
-            $orderByColumn = 'created_on';
+        if ($orderByColumn == $alias . ".mine") {
 
+            $orderByColumn = $alias . '.createdOn';
+
+            $qb->andWhere($alias . '.userId = :user')
+                ->setParameter('user', auth()->id());
         }
+
+        if (CommentRepository::$availableUserId) {
+            $qb->andWhere($alias . '.userId = :availableUserId')
+                ->setParameter('availableUserId', CommentRepository::$availableUserId);
+        }
+
+        if (CommentRepository::$availableContentType) {
+            $qb->join($alias . '.content', $aliasContent)
+                ->andWhere($aliasContent . '.type = :availableContentType')
+                ->setParameter('availableContentType', CommentRepository::$availableContentType);
+        }
+
+        if (CommentRepository::$availableContentId) {
+            $qb->andWhere($alias . '.content = :availableContentId')
+                ->setParameter('availableContentId', CommentRepository::$availableContentId);
+        }
+
         $qb->select([$alias])
             ->setMaxResults($limit)
             ->setFirstResult($first)
