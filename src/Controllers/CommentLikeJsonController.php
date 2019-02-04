@@ -7,7 +7,7 @@ use Railroad\Railcontent\Requests\CommentLikeRequest;
 use Railroad\Railcontent\Requests\CommentUnLikeRequest;
 use Railroad\Railcontent\Services\CommentLikeService;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Transformers\DataTransformer;
+use Railroad\Railcontent\Services\ResponseService;
 
 class CommentLikeJsonController extends Controller
 {
@@ -35,13 +35,7 @@ class CommentLikeJsonController extends Controller
     {
         $store = $this->commentLikeService->create($id, auth()->id());
 
-        return reply()->json(
-            [[$store]],
-            [
-                'code' => $store ? 200 : 500,
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return ResponseService::commentLike($store);
     }
 
     /**
@@ -53,14 +47,8 @@ class CommentLikeJsonController extends Controller
      */
     public function delete(CommentUnLikeRequest $request, $id)
     {
-        $delete = $this->commentLikeService->delete($id, auth()->id());
+        $this->commentLikeService->delete($id, auth()->id());
 
-        return reply()->json(
-            [[$delete]],
-            [
-                'code' => $delete ? 200 : 500,
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return ResponseService::empty(200);
     }
 }

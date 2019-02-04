@@ -405,6 +405,10 @@ class CommentService
          * @var $qb \Doctrine\ORM\QueryBuilder
          */
         $qb = $this->commentRepository->createQueryBuilder($alias);
+        $qb->join($alias . '.content', $aliasContent)
+            ->andWhere($qb->expr()->in($aliasContent . '.brand',':availableBrands'))
+            ->setParameter('availableBrands', array_values(array_wrap(ConfigService::$availableBrands)));
+
         if ($orderByColumn == $alias . ".mine") {
 
             $orderByColumn = $alias . '.createdOn';
@@ -419,7 +423,7 @@ class CommentService
         }
 
         if (CommentRepository::$availableContentType) {
-            $qb->join($alias . '.content', $aliasContent)
+            $qb//->join($alias . '.content', $aliasContent)
                 ->andWhere($aliasContent . '.type = :availableContentType')
                 ->setParameter('availableContentType', CommentRepository::$availableContentType);
         }

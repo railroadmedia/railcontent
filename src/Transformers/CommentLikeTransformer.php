@@ -7,18 +7,20 @@ use Illuminate\Support\Collection;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\Comment;
+use Railroad\Railcontent\Entities\CommentLikes;
 
-class CommentTransformer extends TransformerAbstract
+class CommentLikeTransformer extends TransformerAbstract
 {
-    public function transform(Comment $comment)
+    public function transform(CommentLikes $comment)
     {
         $entityManager = app()->make(EntityManager::class);
 
-        if (count($comment->getChildren()) > 0) {
-            $this->defaultIncludes = ['content', 'replies'];
-        } else {
-            $this->defaultIncludes = ['content'];
-        }
+//        if (count($comment->getChildren()) > 0) {
+//            $this->defaultIncludes[] = 'content';
+//            $this->defaultIncludes[] = 'replies';
+//        } else {
+//            $this->defaultIncludes = ['content'];
+//        }
 
         $serializer = new BasicEntitySerializer();
 

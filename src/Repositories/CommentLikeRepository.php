@@ -2,37 +2,12 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Doctrine\ORM\EntityRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Queries\CachedQuery;
 
-class CommentLikeRepository extends \Railroad\Resora\Repositories\RepositoryBase
+class CommentLikeRepository extends EntityRepository
 {
-    /**
-     * @return CachedQuery|$this
-     */
-    protected function newQuery()
-    {
-        return (new CachedQuery($this->connection()))->from(ConfigService::$tableCommentLikes);
-    }
-
-    /**
-     * Returns [[id, count], ...]
-     *
-     * @param $commentIds
-     * @return array
-     */
-    public function countForCommentIds($commentIds)
-    {
-        $results = $this->query()
-            ->selectRaw($this->connection()->raw('comment_id, COUNT(*) as count'))
-            ->whereIn('comment_id', $commentIds)
-            ->groupBy('comment_id')
-            ->get()
-            ->toArray();
-
-        return array_combine(array_column($results, 'comment_id'), array_column($results, 'count'));
-    }
-
     /**
      * Returns [[id, count], ...]
      *

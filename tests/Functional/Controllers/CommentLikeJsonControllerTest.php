@@ -2,75 +2,66 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
-use Railroad\Railcontent\Factories\CommentFactory;
-use Railroad\Railcontent\Factories\ContentFactory;
+use Faker\ORM\Doctrine\Populator;
+use Railroad\Railcontent\Entities\Comment;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentLikeJsonControllerTest extends RailcontentTestCase
 {
-    /** @var ContentFactory */
-    private $contentFactory;
-
-    /** @var CommentFactory */
-    private $commentFactory;
-
-
-    private $comments;
-    private $content;
+    /**
+     * @var Populator
+     */
+    private $populator;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->commentFactory = $this->app->make(CommentFactory::class);
-
-        $this->comments = [];
-        $this->content = [];
+        $this->populator = new Populator($this->faker, $this->entityManager);
     }
 
-    // ========================== helper classes ====================================
-
-    private function createContent($amount = 1)
+    public function fakeComment($nr = 1, $commentData = [])
     {
-        for ($i = 0; $i < $amount; $i++) {
-            $this->content[] = $this->contentFactory->create(
-                $this->faker->word,
-                $this->faker->randomElement(ConfigService::$commentableContentTypes),
-                ContentService::STATUS_PUBLISHED
-            );
-        }
-    }
+        $this->populator->addEntity(
+            Content::class,
+            1,
+            [
+                'slug' => 'slug1',
+                'status' => 'published',
+                'type' => 'course',
+                'brand' => ConfigService::$brand,
+            ]
+        );
+        $this->populator->execute();
 
-    private function createComments($content = null, $amount = 1, $parentId = null)
-    {
-        if (empty($content)) {
-            if (empty($this->content[0])) {
-                $this->createContent();
-            }
-            $content = $this->content[0];
+        if (empty($commentData)) {
+            $commentData = [
+                'userId' => 1,
+                'content' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+            ];
         }
+        $this->populator->addEntity(
+            Comment::class,
+            $nr,
+            $commentData
 
-        for ($i = 0; $i < $amount; $i++) {
-            $this->comments[$content['id']][] = $this->commentFactory->create(
-                $this->faker->text,
-                $content['id'],
-                $parentId,
-                rand()
-            );
-        }
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[Comment::class];
     }
 
     public function like($userIdOfLiker, $assertions = false)
     {
-        $this->createComments();
+        $comments = $this->fakeComment();
 
-        $contentId = $this->content[0]['id'];
-        $comment = $this->comments[$contentId][0];
+        $contentId = 1;
+        $comment = $comments[0];
 
-        $commentId = $comment['id'];
+        $commentId = $comment->getId();
 
         $response = $this->call(
             'PUT',

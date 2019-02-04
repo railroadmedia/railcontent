@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -45,14 +46,18 @@ class Comment
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Comment", inversedBy="reply")
+     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Comment", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      *
      */
     private $parent;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\Comment", mappedBy="parent")
+     */
+    private $children;
 
-   /**
+    /**
      * @var \DateTime $createdOn
      *
      * @Gedmo\Timestampable(on="create")
@@ -65,6 +70,11 @@ class Comment
      * @var \DateTime
      */
     protected $deletedAt;
+
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -138,6 +148,7 @@ class Comment
     {
         $this->content = $content;
     }
+
     /**
      * @return mixed
      */
@@ -149,10 +160,15 @@ class Comment
     /**
      * @param mixed $content
      */
-    public function setParent($parent)
+    public function setParent(?Comment $parent)
     {
+        if ($parent) {
+            $parent->addChildren($this);
+        }
+
         $this->parent = $parent;
     }
+
     /**
      * Returns createdOn.
      *
@@ -162,7 +178,6 @@ class Comment
     {
         return $this->createdOn;
     }
-
 
     /**
      * Sets createdOn.
@@ -194,5 +209,45 @@ class Comment
     public function getDeletedAt()
     {
         return $this->deletedAt;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    /**
+     * @param Comment $comment
+     * @return Comment
+     */
+    public function addChildren(
+        Comment $comment
+    ) {
+        $this->children[] = $comment;
+        return $this;
+    }
+
+    /**
+     * @param Comment $comment
+     * @return Comment
+     */
+    public function removeChildren(
+        Comment $comment
+    ) {
+
+        if ($this->children->contains(
+            $comment
+        )) {
+            $this->children->removeElement($comment);
+
+            if ($comment->getParent() === $this) {
+                $comment->setParent(null);
+            }
+        }
+
+        return $this;
     }
 }

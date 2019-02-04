@@ -3,10 +3,16 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityManager;
+use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
+use Railroad\Railcontent\Entities\Comment;
+use Railroad\Railcontent\Entities\CommentLikes;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\CommentUnLiked;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\CommentLikeRepository;
+use Railroad\Railcontent\Repositories\CommentRepository;
 
 class CommentLikeService
 {
@@ -16,13 +22,26 @@ class CommentLikeService
     private $commentLikeRepository;
 
     /**
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    /**
+     * @var CommentRepository
+     */
+    private $commentRepository;
+
+    /**
      * CommentService constructor.
      *
      * @param CommentLikeRepository $commentLikeRepository
      */
-    public function __construct(CommentLikeRepository $commentLikeRepository)
+    public function __construct(EntityManager $entityManager)
     {
-        $this->commentLikeRepository = $commentLikeRepository;
+        $this->entityManager = $entityManager;
+
+        $this->commentLikeRepository = $this->entityManager->getRepository(CommentLikes::class);
+        $this->commentRepository = $this->entityManager->getRepository(Comment::class);
     }
 
     /**
@@ -31,7 +50,7 @@ class CommentLikeService
      */
     public function getByCommentIds($commentIds)
     {
-        return $this->commentLikeRepository->query()->whereIn('comment_id', $commentIds)->get();
+        return $this->commentLikeRepository->findByComment($commentIds);
     }
 
     /**
@@ -42,7 +61,21 @@ class CommentLikeService
      */
     public function countForCommentIds($commentIds)
     {
-        return $this->commentLikeRepository->countForCommentIds($commentIds);
+        $qb =
+            $this->commentLikeRepository->createQueryBuilder('c')
+                ->join('c.comment', 'co');
+        $results =
+            $qb->select('co.id, count(c.id) as nr')
+                ->where(
+                    $qb->expr()
+                        ->in('c.comment', ':commentIds')
+                )
+                ->setParameter('commentIds', $commentIds)
+                ->groupBy('c.comment')
+                ->getQuery()
+                ->getResult();
+
+        return array_combine(array_column($results, 'id'), array_column($results, 'nr'));
     }
 
     /**
@@ -63,21 +96,26 @@ class CommentLikeService
      */
     public function create($commentId, $userId)
     {
-        $commentLikeId = $this->commentLikeRepository->updateOrCreate(
+        $comment = $this->commentRepository->find($commentId);
+        $commentLikes = $this->commentLikeRepository->findBy(
             [
-                'comment_id' => $commentId,
-                'user_id' => $userId,
-            ],
-            [
-                'created_on' => Carbon::now()->toDateTimeString(),
+                'comment' => $comment,
+                'userId' => $userId,
             ]
         );
+        if (empty($commentLikes)) {
+            $commentLikes = new CommentLikes();
+            $commentLikes->setUserId($userId);
+            $commentLikes->setComment($comment);
+        }
+        $this->entityManager->persist($commentLikes);
+        $this->entityManager->flush();
 
         CacheHelper::deleteAllCachedSearchResults('get_comments_');
 
         event(new CommentLiked($commentId, $userId));
 
-        return true;
+        return $commentLikes;
     }
 
     /**
@@ -87,8 +125,16 @@ class CommentLikeService
      */
     public function delete($commentId, $userId)
     {
-        $deleted = $this->commentLikeRepository->query()->where(['user_id' => $userId, 'comment_id' => $commentId])
-            ->delete();
+        $comment = $this->commentRepository->find($commentId);
+        $commentLikes = $this->commentLikeRepository->findOneBy(
+            [
+                'comment' => $comment,
+                'userId' => $userId,
+            ]
+        );
+
+        $this->entityManager->remove($commentLikes);
+        $this->entityManager->flush();
 
         CacheHelper::deleteAllCachedSearchResults('get_comments_');
 
