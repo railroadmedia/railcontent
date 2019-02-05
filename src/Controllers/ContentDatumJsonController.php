@@ -121,15 +121,15 @@ class ContentDatumJsonController extends Controller
     {
         $deleted = $this->datumService->delete($dataId);
 
+        $content_id = $request->input('content_id');
+        $currentContent = $this->contentService->getById($content_id);
+        $data = ["post" => $currentContent];
+
         //if the update method response it's null the datum not exist; we throw the proper exception
         throw_if(
             is_null($deleted),
             new NotFoundException('Delete failed, datum not found with id: ' . $dataId)
         );
-
-        $content_id = $request->input('content_id');
-        $currentContent = $this->contentService->getById($content_id);
-        $data = ["post" => $currentContent];
 
         return response()->json(
             $data,
