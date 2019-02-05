@@ -58,6 +58,11 @@ class Comment
     private $children;
 
     /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\CommentAssignment", mappedBy="comment")
+     */
+    private $assignedToUser;
+
+    /**
      * @var \DateTime $createdOn
      *
      * @Gedmo\Timestampable(on="create")
@@ -74,6 +79,7 @@ class Comment
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->assignedToUser = new ArrayCollection();
     }
 
     /**
@@ -248,6 +254,25 @@ class Comment
             }
         }
 
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAssignedToUser()
+    {
+        return $this->assignedToUser;
+    }
+
+    /**
+     * @param Comment $comment
+     * @return Comment
+     */
+    public function addAssignedToUser(
+        $assignedToUser
+    ) {
+        $this->assignedToUser[] = $assignedToUser;
         return $this;
     }
 }

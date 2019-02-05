@@ -2,39 +2,65 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
-
-use Railroad\Railcontent\Factories\CommentAssignationFactory;
-use Railroad\Railcontent\Factories\CommentFactory;
-use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Repositories\ContentRepository;
+use Faker\ORM\Doctrine\Populator;
+use Railroad\Railcontent\Entities\Comment;
+use Railroad\Railcontent\Entities\CommentAssignment;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentAssignationJsonControllerTest extends RailcontentTestCase
 {
     /**
-     * @var ContentFactory
+     * @var Populator
      */
-    protected $contentFactory;
-
-    /**
-     * @var CommentFactory
-     */
-    protected $commentFactory;
-
-    /**
-     * @var CommentAssignationFactory
-     */
-    protected $commentAssignationFactory;
+    private $populator;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->commentFactory = $this->app->make(CommentFactory::class);
-        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
+        $this->populator = new Populator($this->faker, $this->entityManager);
+
+    }
+
+    public function fakeComment($nr = 1, $commentData = [])
+    {
+        if (empty($commentData)) {
+            $commentData = [
+                'userId' => 1,
+                'content' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'deletedAt' => null,
+            ];
+        }
+        $this->populator->addEntity(
+            Comment::class,
+            $nr,
+            $commentData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[Comment::class];
+    }
+
+    public function fakeContent($nr = 1, $contentData = [])
+    {
+        if (empty($contentData)) {
+            $contentData = [
+                'brand' => ConfigService::$brand,
+            ];
+        }
+        $this->populator->addEntity(
+            Content::class,
+            $nr,
+            $contentData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[Content::class];
     }
 
     public function test_pull_my_assigned_comments_when_not_exists()
@@ -50,49 +76,61 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
     public function test_pull_my_assigned_comments()
     {
         $userId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
-        $assignedComments = [];
-        $content = $this->contentFactory->create(
-            $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-
+        $content = $this->fakeContent();
         for ($i = 0; $i < 5; $i++) {
-            $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-            $assignedComments[$i] = $this->commentAssignationFactory->create($comment['id'], $userId)->getArrayCopy();
-            $assignedComments[$i]['deleted_at'] = null;
-            $assignedComments[$i]['content_id'] = $comment['content_id'];
-            $assignedComments[$i]['comment'] = $comment['comment'];
-            $assignedComments[$i]['user_id'] = $comment['user_id'];
-            $assignedComments[$i]['parent_id'] = $comment['parent_id'];
-            $assignedComments[$i]['created_on'] = $comment['created_on'];
-            unset($assignedComments[$i]['comment_id']);
-            unset($assignedComments[$i]['assigned_on']);
-        }
 
-        $response = $this->call('GET', 'railcontent/assigned-comments',['user_id' => $userId]);
+            $comment = $this->fakeComment();
+
+            $this->populator->addEntity(
+                CommentAssignment::class,
+                1,
+                [
+                    'comment' => $comment[0],
+                    'userId' => $userId,
+                ]
+
+            );
+
+        }
+        $this->populator->execute();
+
+        $response = $this->call('GET', 'railcontent/assigned-comments', ['user_id' => $userId]);
 
         $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals(5, count($response->decodeResponseJson('data')));
 
-        $this->assertArraySubset($assignedComments, $response->decodeResponseJson('data'));
+        foreach ($response->decodeResponseJson('data') as $response)
+        {
+            $this->assertEquals($userId, $response['attributes']['user_id']);
+        }
     }
 
     public function test_delete_assigned_comment()
     {
-        $userId = $this->createAndLogInNewUser();
+        $this->fakeContent();
 
-        $content = $this->contentFactory->create(
-            $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
+        $comment = $this->fakeComment();
+
+        $this->populator->addEntity(
+            CommentAssignment::class,
+            3,
+            [
+                'comment' => $comment[0],
+                'userId' => rand(2, 10),
+            ]
+
         );
+        $this->populator->execute();
 
-        $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-
-        $assignedComments = $this->commentAssignationFactory->create($comment['id'], rand());
-
-        $response = $this->call('DELETE', 'railcontent/assigned-comment/'.$comment['id']);
+        $response = $this->call('DELETE', 'railcontent/assigned-comment/' . $comment[0]->getId());
 
         $this->assertEquals(204, $response->getStatusCode());
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableCommentsAssignment,
+            [
+                'comment_id' => $comment[0]->getId(),
+            ]
+        );
     }
 }

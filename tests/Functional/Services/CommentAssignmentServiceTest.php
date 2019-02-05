@@ -3,6 +3,10 @@
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
+use Faker\ORM\Doctrine\Populator;
+use Railroad\Railcontent\Entities\Comment;
+use Railroad\Railcontent\Entities\CommentAssignment;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Factories\CommentAssignationFactory;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -38,33 +42,82 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
     {
         parent::setUp();
 
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->commentFactory = $this->app->make(CommentFactory::class);
-        $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
+        $this->populator = new Populator($this->faker, $this->entityManager);
 
         $this->classBeingTested = $this->app->make(CommentAssignmentService::class);
+    }
+
+    public function fakeComment($nr = 1, $commentData = [])
+    {
+        if (empty($commentData)) {
+            $commentData = [
+                'userId' => 1,
+                'content' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'deletedAt' => null,
+            ];
+        }
+        $this->populator->addEntity(
+            Comment::class,
+            $nr,
+            $commentData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[Comment::class];
+    }
+
+    public function fakeContent($nr = 1, $contentData = [])
+    {
+        if (empty($contentData)) {
+            $contentData = [
+                'brand' => ConfigService::$brand,
+            ];
+        }
+        $this->populator->addEntity(
+            Content::class,
+            $nr,
+            $contentData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[Content::class];
+    }
+
+    public function fakeCommentAssignation($nr = 1, $assignationData = [])
+    {
+        if (empty($assignationData)) {
+            $assignationData = [
+                'comment' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'userId' => rand(),
+            ];
+        }
+        $this->populator->addEntity(
+            CommentAssignment::class,
+            $nr,
+            $assignationData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[CommentAssignment::class];
     }
 
     public function test_store()
     {
         $managerId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
-        $content = $this->contentFactory->create(
-            $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
-        );
-        $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        $content = $this->fakeContent();
+        $comment = $this->fakeComment();
 
-        $store = $this->classBeingTested->store($comment['id'], $managerId);
+        $store = $this->classBeingTested->store($comment[0]->getId(), $managerId);
 
         $this->assertEquals(
-            [
-                'id' => 1,
-                'comment_id' => $comment['id'],
-                'user_id' => $managerId,
-                'assigned_on' => Carbon::now()
-                    ->toDateTimeString(),
-            ],
-            $store->getArrayCopy()
+            $this->entityManager->getRepository(CommentAssignment::class)
+                ->find(1),
+            $store
         );
     }
 
@@ -78,23 +131,25 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
     public function test_delete_comment_assignation()
     {
         $userId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
+        $this->fakeContent();
+        $comment = $this->fakeComment();
 
-        $content = $this->contentFactory->create(
-            $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes)
+        $this->fakeCommentAssignation(
+            1,
+            [
+                'comment' => $comment[0],
+                'userId' => $userId,
+            ]
         );
 
-        $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-        $this->commentAssignationFactory->create($comment['id'], $userId);
-
-        $results = $this->classBeingTested->deleteCommentAssignations($comment['id']);
+        $results = $this->classBeingTested->deleteCommentAssignations($comment[0]->getId());
 
         $this->assertTrue($results);
 
         $this->assertDatabaseMissing(
             ConfigService::$tableCommentsAssignment,
             [
-                'comment_id' => $comment['id'],
+                'comment_id' => $comment[0]->getId(),
                 'user_id' => $userId,
             ]
 
@@ -103,25 +158,27 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
 
     public function test_get_assigned_comments()
     {
-        $oneContent = $this->contentFactory->create($this->faker->word, 'course', ContentService::STATUS_PUBLISHED);
-        $otherContent =
-            $this->contentFactory->create($this->faker->word, 'course lesson', ContentService::STATUS_PUBLISHED);
         $userId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
-        for ($i = 0; $i <= 4; $i++) {
-            $comments[$i] = $this->commentFactory->create($this->faker->text, $oneContent['id'], null, rand());
-            $assignedComments[$i] = $this->commentAssignationFactory->create($comments[$i]['id'], $userId);
-            unset($comments[$i]['replies']);
-            unset($comments[$i]['like_count']);
-            unset($comments[$i]['like_users']);
-            unset($comments[$i]['is_liked']);
+        $this->fakeContent();
+        $comment = $this->fakeComment(5);
+        $assignedNr = rand(2, 5);
+
+        $this->fakeCommentAssignation(
+            $assignedNr,
+            [
+                'comment' => $this->faker->randomElement($comment),
+                'userId' => $userId,
+            ]
+        );
+        $response = $this->classBeingTested->getAssignedCommentsForUser($userId, 1, 25, 'comment', 'asc');
+
+        foreach ($response as $res) {
+            $this->assertEquals($userId, $res->getUserId());
         }
 
-        $response = $this->classBeingTested->getAssignedCommentsForUser($userId, 1, 25, 'comment_id', 'asc');
+        $count = $this->classBeingTested->countAssignedCommentsForUser($userId);
 
-        $this->assertEquals(array_pluck($comments, 'id'),
-            $response->pluck('id')
-                ->all()
-        );
+        $this->assertEquals($assignedNr, $count);
     }
 
     public function test_get_assigned_comments_empty()

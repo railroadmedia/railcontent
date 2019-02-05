@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Services\CommentAssignmentService;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Transformers\DataTransformer;
+use Railroad\Railcontent\Services\ResponseService;
 
 class CommentAssignationJsonController extends Controller
 {
@@ -46,23 +46,20 @@ class CommentAssignationJsonController extends Controller
         $this->permissionPackageService->canOrThrow(auth()->id(), 'pull.comments.assignation');
 
         $assignedComments = $this->commentAssignationService->getAssignedCommentsForUser(
-            $request->get('user_id', $request->user()->id ?? null),
+            $request->get('user_id', auth()->id() ?? null),
             $request->get('page', 1),
             $request->get('limit', 25),
             $request->get('sort', '-assigned_on')
         );
 
-        $assignedCommentsCount = $this->commentAssignationService->countAssignedCommentsForUser(
-            $request->get('user_id', $request->user()->id ?? null)
+        $qb = $this->commentAssignationService->getQb(
+            $request->get('user_id', auth()->id() ?? null),
+            $request->get('page', 1),
+            $request->get('limit', 25),
+            $request->get('sort', '-assigned_on')
         );
 
-        return reply()->json(
-            $assignedComments,
-            [
-                'totalResults' => $assignedCommentsCount,
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return ResponseService::commentAssigment($assignedComments, $qb);
     }
 
     /**
@@ -81,7 +78,7 @@ class CommentAssignationJsonController extends Controller
             $commentId
         );
 
-        return reply()->json(null, ['code' => 204]);
+        return ResponseService::empty(204);
     }
 
 }

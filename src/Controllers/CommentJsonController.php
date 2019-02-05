@@ -60,21 +60,13 @@ class CommentJsonController extends Controller
             auth()->id() ?? null
         );
 
-        $qb = $this->commentService->getQb(  $request->get('page', 1),
+        $qb = $this->commentService->getQb(
+            $request->get('page', 1),
             $request->get('limit', 10),
-            $request->get('sort', $request->get('sort', '-created_on')));
+            $request->get('sort', $request->get('sort', '-created_on'))
+        );
 
         return ResponseService::comment($commentData, $qb);
-//        return reply()->json(
-//            $commentData['results'],
-//            [
-//                'totalResults' => $commentData['total_results'],
-//                'transformer' => DataTransformer::class,
-//                'meta' => [
-//                    'totalCommentsAndReplies' => $commentData['total_comments_and_results'],
-//                ],
-//            ]
-//        );
     }
 
     /**
@@ -215,21 +207,18 @@ class CommentJsonController extends Controller
 
         $activePage = $this->commentService->getCommentPage($commentId, $limitOnPage);
 
-        //set the page on the request; we need this info for JsonPaginatedResponse
-        $request->merge(['page' => $activePage]);
-
         $commentData = $this->commentService->getComments(
             $activePage,
             $limitOnPage,
-            '-id'
+            '-createdOn'
         );
 
-        return reply()->json(
-            $commentData['results'],
-            [
-                'totalResults' => $commentData['total_results'],
-                'transformer' => DataTransformer::class,
-            ]
+        $qb = $this->commentService->getQb(
+            $activePage,
+            $limitOnPage,
+            '-createdOn'
         );
+
+        return ResponseService::comment($commentData, $qb);
     }
 }

@@ -2,7 +2,9 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Carbon\Carbon;
+use Doctrine\ORM\EntityManager;
+use Railroad\Railcontent\Entities\Comment;
+use Railroad\Railcontent\Entities\CommentAssignment;
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 
 class CommentAssignmentService
@@ -13,13 +15,20 @@ class CommentAssignmentService
     protected $commentAssignmentRepository;
 
     /**
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    /**
      * CommentAssignmentService constructor.
      *
-     * @param CommentAssignmentRepository $commentAssignmentRepository
+     * @param EntityManager $entityManager
      */
-    public function __construct(CommentAssignmentRepository $commentAssignmentRepository)
+    public function __construct(EntityManager $entityManager)
     {
-        $this->commentAssignmentRepository = $commentAssignmentRepository;
+        $this->entityManager = $entityManager;
+
+        $this->commentAssignmentRepository = $this->entityManager->getRepository(CommentAssignment::class);
     }
 
     /**
@@ -29,16 +38,26 @@ class CommentAssignmentService
      */
     public function store($commentId, $userId)
     {
-        return $this->commentAssignmentRepository->query()->updateOrCreate(
+        $comment =
+            $this->entityManager->getRepository(Comment::class)
+                ->find($commentId);
+
+        $commentAssignment = $this->commentAssignmentRepository->findOneBy(
             [
-                'comment_id' => $commentId,
-                'user_id' => $userId,
-            ],
-            [
-                'assigned_on' => Carbon::now()
-                    ->toDateTimeString(),
+                'comment' => $comment,
+                'userId' => $userId,
             ]
         );
+        if (!$commentAssignment) {
+            $commentAssignment = new CommentAssignment();
+            $commentAssignment->setComment($comment);
+            $commentAssignment->setUserId($userId);
+        }
+
+        $this->entityManager->persist($commentAssignment);
+        $this->entityManager->flush();
+
+        return $commentAssignment;
     }
 
     /**
@@ -58,29 +77,10 @@ class CommentAssignmentService
         $limit = 25,
         $orderByColumnAndDirection = '-assigned_on'
     ) {
-        $orderByDirection = substr($orderByColumnAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
-        $orderByColumn = trim($orderByColumnAndDirection, '-');
+        $assignedComments = $this->getQb($userId, $limit, $page, $orderByColumnAndDirection);
 
-        $assignedComments =
-            $this->commentAssignmentRepository->query()
-                ->selectColumns()
-                ->leftJoin(
-                    ConfigService::$tableComments,
-                    'comment_id',
-                    '=',
-                    ConfigService::$tableComments . '.id'
-                )
-                ->where(ConfigService::$tableCommentsAssignment . '.user_id', $userId)
-                ->orderBy(
-                    $orderByColumn,
-                    $orderByDirection,
-                    ConfigService::$tableCommentsAssignment
-                )
-                ->skip(($page - 1) * $limit)
-                ->limit($limit)
-                ->get();
-
-        return $assignedComments;
+        return $assignedComments->getQuery()
+            ->getResult();
     }
 
     /**
@@ -91,16 +91,13 @@ class CommentAssignmentService
      */
     public function countAssignedCommentsForUser($userId)
     {
-        return $this->commentAssignmentRepository->query()
-            ->selectColumns()
-            ->leftJoin(
-                ConfigService::$tableComments,
-                'comment_id',
-                '=',
-                ConfigService::$tableComments . '.id'
-            )
-            ->where(ConfigService::$tableCommentsAssignment . '.user_id', $userId)
-            ->count();
+        $qb = $this->commentAssignmentRepository->createQueryBuilder('a');
+
+        return $qb->select('count(a)')
+            ->where('a.userId = :user')
+            ->setParameter('user', $userId)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     /**
@@ -111,8 +108,49 @@ class CommentAssignmentService
      */
     public function deleteCommentAssignations($commentId)
     {
-        return $this->commentAssignmentRepository->query()
-                ->whereIn('comment_id', [$commentId])
-                ->delete() > 0;
+        $commentAssignments = $this->commentAssignmentRepository->findByComment($commentId);
+
+        if (empty($commentAssignments)) {
+            return false;
+        }
+
+        foreach ($commentAssignments as $commentAssignment) {
+            $this->entityManager->remove($commentAssignment);
+            $this->entityManager->flush();
+
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $userId
+     * @param $limit
+     * @param $first
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getQb($userId, $limit, $page, string $orderByColumnAndDirection)
+    : \Doctrine\ORM\QueryBuilder {
+
+        $orderByDirection = substr($orderByColumnAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
+        $orderByColumn = trim($orderByColumnAndDirection, '-');
+        $first = ($page - 1) * $limit;
+
+        if (strpos($orderByColumn, '_') !== false || strpos($orderByColumn, '-') !== false) {
+            $orderByColumn = camel_case($orderByColumn);
+        }
+
+        $assignedComments =
+            $this->commentAssignmentRepository->createQueryBuilder('a')
+                ->join('a.comment', 'c')
+                ->where('a.userId = :userId')
+                ->setParameter('userId', $userId)
+                ->setMaxResults($limit)
+                ->setFirstResult($first)
+                ->orderBy('a.' . $orderByColumn, $orderByDirection);
+
+        return $assignedComments;
     }
 }

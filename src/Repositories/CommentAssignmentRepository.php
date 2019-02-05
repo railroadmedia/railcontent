@@ -2,19 +2,10 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
-use Railroad\Railcontent\Services\ConfigService;
+use Doctrine\ORM\EntityRepository;
 
-class CommentAssignmentRepository extends \Railroad\Resora\Repositories\RepositoryBase
+
+class CommentAssignmentRepository extends EntityRepository
 {
-    protected function newQuery()
-    {
-        return (new CommentQueryBuilder(
-            $this->connection(),
-            $this->connection()
-                ->getQueryGrammar(),
-            $this->connection()
-                ->getPostProcessor()
-        ))->from(ConfigService::$tableCommentsAssignment);
-    }
+
 }

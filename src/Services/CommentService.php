@@ -112,16 +112,6 @@ class CommentService
         $this->entityManager->persist($comment);
         $this->entityManager->flush();
 
-        //        $comment = $this->commentRepository->create(
-        //            [
-        //                'comment' => $comment,
-        //                'content_id' => $contentId,
-        //                'parent_id' => $parentId,
-        //                'user_id' => $userId,
-        //                'temporary_display_name' => $temporaryUserDisplayName,
-        //                'created_on' => Carbon::now()->toDateTimeString()
-        //            ]
-        //        );
 
         //CacheHelper::deleteCache('content_' . $contentId);
 
@@ -199,7 +189,7 @@ class CommentService
         $isSoftDelete = $this->commentRepository->getSoftDelete();
 
         //trigger an event that delete the corresponding comment assignments if the deletion it's not soft
-        event(new CommentDeleted($id));
+        //        event(new CommentDeleted($id));
 
         CacheHelper::deleteCache(
             'content_' .
@@ -272,34 +262,6 @@ class CommentService
                 $qb->getQuery()
                     ->getResult();
 
-            //            if ($orderByColumn == 'mine') {
-            //                $this->commentRepository->setData(
-            //                    $page,
-            //                    $limit,
-            //                    $orderByDirection,
-            //                    'created_on'
-            //                );
-            //                CommentRepository::$availableUserId = $currentUserId;
-            //                $orderByColumn = 'created_on';
-            //                $results = [
-            //                    'results' => $this->commentRepository->getCurrentUserComments(),
-            //                    'total_results' => $this->commentRepository->countCurrentUserComments(),
-            //                    'total_comments_and_results' => $this->commentRepository->countCommentsAndReplies(),
-            //                ];
-            //            } else {
-            //                $this->commentRepository->setData(
-            //                    $page,
-            //                    $limit,
-            //                    $orderByDirection,
-            //                    $orderByColumn
-            //                );
-            //                $results = [
-            //                    'results' => $this->commentRepository->getComments(),
-            //                    'total_results' => $this->commentRepository->countComments(),
-            //                    'total_comments_and_results' => $this->commentRepository->countCommentsAndReplies(),
-            //                ];
-            //            }
-            //
             //            if ($results['total_results'] > 0) {
             //                $contentIds = $results['results']->pluck('content_id');
             //            } else {
@@ -355,9 +317,59 @@ class CommentService
     public function countLatestComments($commentId)
     {
         $comment = $this->get($commentId);
-        CommentRepository::$availableContentId = $comment['content_id'];
+        CommentRepository::$availableContentId =
+            $comment->getContent()
+                ->getId();
 
-        return $this->commentRepository->countLatestComments($comment['created_on']);
+        $alias = 'c';
+        $aliasContent = 'content';
+        $aliasAssignment = 'a';
+
+        $qb = $this->commentRepository->createQueryBuilder('c');
+
+        $qb->select('count(c)')
+            ->join($alias . '.content', $aliasContent)
+            ->where('c.createdOn >= :createdOn')
+            ->andWhere(
+                $qb->expr()
+                    ->isNull('c.deletedAt')
+            )
+            ->andWhere(
+                $qb->expr()
+                    ->isNull('c.parent')
+            )
+            ->setParameter('createdOn', $comment->getCreatedOn())
+            ->andWhere(
+                $qb->expr()
+                    ->in($aliasContent . '.brand', ':availableBrands')
+            )
+            ->setParameter('availableBrands', array_values(array_wrap(ConfigService::$availableBrands)));
+
+        if (CommentRepository::$availableUserId) {
+            $qb->andWhere($alias . '.userId = :availableUserId')
+                ->setParameter('availableUserId', CommentRepository::$availableUserId);
+        }
+
+        if (CommentRepository::$availableContentType) {
+            $qb->andWhere($aliasContent . '.type = :availableContentType')
+                ->setParameter('availableContentType', CommentRepository::$availableContentType);
+        }
+
+        if (CommentRepository::$availableContentId) {
+            $qb->andWhere($alias . '.content = :availableContentId')
+                ->setParameter('availableContentId', CommentRepository::$availableContentId);
+        }
+        if (CommentRepository::$assignedToUserId) {
+            $qb->join($alias . '.assignedToUser', $aliasAssignment)
+                ->andWhere(
+                    $qb->expr()
+                        ->in($aliasAssignment . '.userId', ':availableUserId')
+                )
+                ->setParameter('availableUserId', CommentRepository::$assignedToUserId);
+        }
+
+        return $qb->getQuery()
+            ->getSingleScalarResult();
     }
 
     /**
@@ -398,6 +410,7 @@ class CommentService
         // parse request params and prepare db query parms
         $alias = 'c';
         $aliasContent = 'content';
+        $aliasAssignment = 'a';
 
         $orderByColumn = $alias . '.' . $orderByColumn;
         $first = ($page - 1) * $limit;
@@ -406,8 +419,15 @@ class CommentService
          */
         $qb = $this->commentRepository->createQueryBuilder($alias);
         $qb->join($alias . '.content', $aliasContent)
-            ->andWhere($qb->expr()->in($aliasContent . '.brand',':availableBrands'))
-            ->setParameter('availableBrands', array_values(array_wrap(ConfigService::$availableBrands)));
+            ->andWhere(
+                $qb->expr()
+                    ->in($aliasContent . '.brand', ':availableBrands')
+            )
+            ->setParameter('availableBrands', array_values(array_wrap(ConfigService::$availableBrands)))
+            ->andWhere(
+                $qb->expr()
+                    ->isNull('c.deletedAt')
+            );
 
         if ($orderByColumn == $alias . ".mine") {
 
@@ -423,8 +443,7 @@ class CommentService
         }
 
         if (CommentRepository::$availableContentType) {
-            $qb//->join($alias . '.content', $aliasContent)
-                ->andWhere($aliasContent . '.type = :availableContentType')
+            $qb->andWhere($aliasContent . '.type = :availableContentType')
                 ->setParameter('availableContentType', CommentRepository::$availableContentType);
         }
 
@@ -432,7 +451,14 @@ class CommentService
             $qb->andWhere($alias . '.content = :availableContentId')
                 ->setParameter('availableContentId', CommentRepository::$availableContentId);
         }
-
+        if (CommentRepository::$assignedToUserId) {
+            $qb->join($alias . '.assignedToUser', $aliasAssignment)
+                ->andWhere(
+                    $qb->expr()
+                        ->in($aliasAssignment . '.userId', ':availableUserId')
+                )
+                ->setParameter('availableUserId', CommentRepository::$assignedToUserId);
+        }
         $qb->select([$alias])
             ->setMaxResults($limit)
             ->setFirstResult($first)

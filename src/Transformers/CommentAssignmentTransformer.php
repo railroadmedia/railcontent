@@ -6,12 +6,11 @@ use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Collection;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
-use Railroad\Railcontent\Entities\Comment;
-use Railroad\Railcontent\Entities\CommentLikes;
+use Railroad\Railcontent\Entities\CommentAssignment;
 
-class CommentLikeTransformer extends TransformerAbstract
+class CommentAssignmentTransformer extends TransformerAbstract
 {
-    public function transform(CommentLikes $comment)
+    public function transform(CommentAssignment $comment)
     {
         $entityManager = app()->make(EntityManager::class);
 
@@ -25,17 +24,8 @@ class CommentLikeTransformer extends TransformerAbstract
         ))->toArray();
     }
 
-    public function includeReplies(Comment $comment)
+    public function includeComment(CommentAssignment $commentAssignment)
     {
-        return $this->collection(
-            $comment->getChildren(),
-            new CommentTransformer(),
-            'comment'
-        );
-    }
-
-    public function includeContent(Comment $comment)
-    {
-        return $this->item($comment->getContent(), new ContentTransformer(), 'content');
+        return $this->item($commentAssignment->getComment(), new CommentTransformer(), 'comment');
     }
 }
