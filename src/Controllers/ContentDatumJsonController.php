@@ -116,20 +116,22 @@ class ContentDatumJsonController extends Controller
      * maybe it needs to be there for that?
      *
      * Jonathan, February 2018
+     * @throws \Throwable
      */
     public function delete(ContentDatumDeleteRequest $request, $dataId)
     {
+        $data = $this->datumService->get($dataId);
         $deleted = $this->datumService->delete($dataId);
-
-        $content_id = $request->input('content_id');
-        $currentContent = $this->contentService->getById($content_id);
-        $data = ["post" => $currentContent];
 
         //if the update method response it's null the datum not exist; we throw the proper exception
         throw_if(
-            is_null($deleted),
+            is_null($deleted) || is_null($data),
             new NotFoundException('Delete failed, datum not found with id: ' . $dataId)
         );
+
+        $content_id = $data['content_id'];
+        $currentContent = $this->contentService->getById($content_id);
+        $data = ["post" => $currentContent];
 
         return response()->json(
             $data,
@@ -138,7 +140,5 @@ class ContentDatumJsonController extends Controller
                 'Content-Type' => 'application/vnd.api+json'
             ]
         );
-
-//        return reply()->json($data, ['code' => 202]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Exceptions\NotFoundException;
@@ -10,7 +11,6 @@ use Railroad\Railcontent\Requests\ContentFieldDeleteRequest;
 use Railroad\Railcontent\Requests\ContentFieldUpdateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFieldService;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
@@ -34,8 +34,7 @@ class ContentFieldJsonController extends Controller
     public function __construct(
         ContentFieldService $fieldService,
         ContentService $contentService
-    )
-    {
+    ) {
         $this->fieldService = $fieldService;
         $this->contentService = $contentService;
 
@@ -89,7 +88,7 @@ class ContentFieldJsonController extends Controller
             $data,
             201,
             [
-                'Content-Type' => 'application/vnd.api+json'
+                'Content-Type' => 'application/vnd.api+json',
             ]
         );
     }
@@ -130,7 +129,7 @@ class ContentFieldJsonController extends Controller
             $data,
             200,
             [
-                'Content-Type' => 'application/vnd.api+json'
+                'Content-Type' => 'application/vnd.api+json',
             ]
         );
     }
@@ -146,26 +145,28 @@ class ContentFieldJsonController extends Controller
      * maybe it needs to be there for that?
      *
      * Jonathan, February 2018
+     * @throws \Throwable
      */
     public function delete(ContentFieldDeleteRequest $request, $fieldId)
     {
+        $field = $this->fieldService->get($fieldId);
         $deleted = $this->fieldService->delete($fieldId);
+
+        //if the update method response it's null the field not exist; we throw the proper exception
+        throw_if(
+            is_null($deleted) || is_null($field),
+            new NotFoundException('Delete failed, field not found with id: ' . $fieldId)
+        );
 
         $content_id = $request->input('content_id');
         $currentContent = $this->contentService->getById($content_id);
         $data = ["post" => $currentContent];
 
-        //if the update method response it's null the field not exist; we throw the proper exception
-        throw_if(
-            is_null($deleted),
-            new NotFoundException('Delete failed, field not found with id: ' . $fieldId)
-        );
-
         return response()->json(
             $data,
             202,
             [
-                'Content-Type' => 'application/vnd.api+json'
+                'Content-Type' => 'application/vnd.api+json',
             ]
         );
     }
