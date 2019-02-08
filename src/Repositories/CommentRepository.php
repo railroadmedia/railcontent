@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
@@ -120,8 +121,8 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
             $query =
                 $this->query()
                     ->selectColumns()
-                    ->addSelect($this->databaseManager->raw('IFNULL(parent_id, railcontent_comments.id) as parent_id'))
-                    ->addSelect($this->databaseManager->raw('MAX(railcontent_comments.created_on) as co'))
+                    ->addSelect(DB::raw('IFNULL(parent_id, railcontent_comments.id) as parent_id'))
+                    ->addSelect(DB::raw('MAX(railcontent_comments.created_on) as co'))
                     ->aggregateOrderTable($this->orderTableName)
                     ->restrictByBrand()
                     ->restrictByType()
