@@ -116,22 +116,62 @@ class CommentRepository extends \Railroad\Resora\Repositories\RepositoryBase
      */
     public function getComments()
     {
-        $query = $this->query()
-            ->selectColumns()
-            ->aggregateOrderTable($this->orderTableName)
-            ->restrictByBrand()
-            ->restrictByType()
-            ->restrictByContentId()
-            ->restrictByUser()
-            ->restrictByVisibility()
-            ->restrictByAssignedUserId()
-            ->onlyComments()
-            ->selectLikeCounts()
-            ->orderBy($this->orderBy, $this->orderDirection, $this->orderTable)
-            ->orderBy('created_on', 'desc', ConfigService::$tableComments)
-            ->directPaginate($this->page, $this->limit);
+        if ($this->orderBy == 'replied_on') {
+            $query =
+                $this->query()
+                    ->selectColumns()
+                    ->addSelect($this->databaseManager->raw('IFNULL(parent_id, railcontent_comments.id) as parent_id'))
+                    ->addSelect($this->databaseManager->raw('MAX(railcontent_comments.created_on) as co'))
+                    ->aggregateOrderTable($this->orderTableName)
+                    ->restrictByBrand()
+                    ->restrictByType()
+                    ->restrictByContentId()
+                    ->restrictByUser()
+                    ->restrictByVisibility()
+                    ->restrictByAssignedUserId()
+                    ->groupBy('parent_id')
+                    ->selectLikeCounts()
+                    ->orderByRaw('co ' . ($this->orderDirection))
+                    ->directPaginate($this->page, $this->limit);
 
-        $rows = $query->get();
+            $rows = $query->get();
+
+            $parentIds = $rows->pluck('parent_id')
+                ->toArray();
+
+            $query = $this->query()
+                ->selectColumns()
+                ->whereIn('id', $parentIds);
+
+            $rows = $query->get();
+
+            $rows = $rows->sortBy(
+                function ($row) use ($parentIds) {
+                    return array_search(
+                        $row['id'],
+                        $parentIds
+                    );
+                }
+            );
+
+        } else {
+            $query = $this->query()
+                ->selectColumns()
+                ->aggregateOrderTable($this->orderTableName)
+                ->restrictByBrand()
+                ->restrictByType()
+                ->restrictByContentId()
+                ->restrictByUser()
+                ->restrictByVisibility()
+                ->restrictByAssignedUserId()
+                ->onlyComments()
+                ->selectLikeCounts()
+                ->orderBy($this->orderBy, $this->orderDirection, $this->orderTable)
+                ->orderBy('created_on', 'desc', ConfigService::$tableComments)
+                ->directPaginate($this->page, $this->limit);
+
+            $rows = $query->get();
+        }
 
         $repliesRows =  $this->getRepliesByCommentIds($rows->pluck('id')->toArray());
 
