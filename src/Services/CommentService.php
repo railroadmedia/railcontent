@@ -50,6 +50,7 @@ class CommentService
         JsonApiHydrator $jsonApiHydrator
     ) {
         $this->entityManager = $entityManager;
+
         $this->commentRepository = $this->entityManager->getRepository(Comment::class);
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
 

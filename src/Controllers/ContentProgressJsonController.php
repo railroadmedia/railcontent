@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\UserContentRequest;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
@@ -38,16 +39,11 @@ class ContentProgressJsonController extends Controller
     {
 
         $response = $this->userContentService->startContent(
-            $request->input('content_id'),
-            $request->user()->id
+            $request->input('data.relationships.content.data.id'),
+            auth()->id()
         );
+        return $response;
 
-        return reply()->json(
-            [[$response]],
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
     }
 
     /**

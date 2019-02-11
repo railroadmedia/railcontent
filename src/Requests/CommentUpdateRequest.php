@@ -28,7 +28,7 @@ class CommentUpdateRequest extends FormRequest
     {
         return [
             'data.attributes.comment' => 'nullable|max:10024',
-            'data.relationships.content.id' =>
+            'data.relationships.content.data.id' =>
                 ['numeric',
                     Rule::exists(
                         ConfigService::$databaseConnectionName . '.' .
@@ -42,7 +42,7 @@ class CommentUpdateRequest extends FormRequest
                         }
                     )
                 ],
-            'data.relationships.parent.id' => 'numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
+            'data.relationships.parent.data.id' => 'numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
                 ConfigService::$tableComments . ',id',
             'data.attributes.display_name' => 'filled'
         ];

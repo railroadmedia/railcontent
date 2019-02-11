@@ -14,14 +14,15 @@ class ContentDatumCreateRequest extends CustomFormRequest
      */
     public function rules()
     {
+
 //        $this->validateContent($this);
 //
 //        //set the general validation rules
         $this->setGeneralRules(
             [
-                'key' => 'required|max:255',
-                'position' => 'nullable|numeric|min:0',
-                'content_id' => 'required|numeric|exists:' .
+                'data.attributes.key' => 'required|max:255',
+                'data.attributes.position' => 'nullable|numeric|min:0',
+                'data.relationships.content.data.id' => 'required|numeric|exists:' .
                     ConfigService::$tableContent . ',id'
             ]
         );

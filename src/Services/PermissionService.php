@@ -14,6 +14,8 @@ use Railroad\Railcontent\Repositories\PermissionRepository;
  */
 class PermissionService
 {
+    private $entityManager;
+
     /**
      * @var PermissionRepository
      */
@@ -36,13 +38,13 @@ class PermissionService
      * @param ContentPermissionRepository $contentPermissionRepository
      */
     public function __construct(
-        PermissionRepository $permissionRepository,
-        ContentPermissionRepository $contentPermissionRepository,
-        ContentRepository $contentRepository
+//        PermissionRepository $permissionRepository,
+//        ContentPermissionRepository $contentPermissionRepository,
+//        ContentRepository $contentRepository
     ) {
-        $this->permissionRepository = $permissionRepository;
-        $this->contentPermissionRepository = $contentPermissionRepository;
-        $this->contentRepository = $contentRepository;
+//        $this->permissionRepository = $permissionRepository;
+//        $this->contentPermissionRepository = $contentPermissionRepository;
+//        $this->contentRepository = $contentRepository;
     }
 
     /**

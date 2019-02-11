@@ -80,7 +80,7 @@ class CommentJsonController extends Controller
     {
         $comment = $this->commentService->create(
             $request->input('data.attributes.comment'),
-            $request->input('data.relationships.content.id'),
+            $request->input('data.relationships.content.data.id'),
             null,
             auth()->id() ?? null,
             $request->input('data.attributes.temporary_display_name') ?? ''
@@ -175,8 +175,8 @@ class CommentJsonController extends Controller
     {
         $reply = $this->commentService->create(
             $request->input('data.attributes.comment'),
-            $request->input('data.relationships.content.id'),
-            $request->input('data.relationships.parent.id'),
+            $request->input('data.relationships.content.data.id'),
+            $request->input('data.relationships.parent.data.id'),
             auth()->id() ?? null
         );
 

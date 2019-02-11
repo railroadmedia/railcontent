@@ -8,7 +8,8 @@ use Illuminate\Routing\Controller;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\UserPermissionCreateRequest;
-use Railroad\Railcontent\Transformers\DataTransformer;
+use Railroad\Railcontent\Services\ResponseService;
+
 
 class UserPermissionsJsonController extends Controller
 {
@@ -47,12 +48,12 @@ class UserPermissionsJsonController extends Controller
 
         $userPermission = $this->userPermissionsService->updateOrCeate(
             [
-                'user_id' => $request->input('user_id'),
-                'permission_id' => $request->input('permission_id'),
+                'user_id' => $request->input('data.attributes.user_id'),
+                'permission_id' => $request->input('data.relationships.permission.data.id'),
             ],
             [
-                'start_date' => $request->input('start_date'),
-                'expiration_date' => $request->input('expiration_date'),
+                'start_date' => $request->input('data.attributes.start_date'),
+                'expiration_date' => $request->input('data.attributes.expiration_date'),
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
                 'updated_on' => Carbon::now()
@@ -60,12 +61,7 @@ class UserPermissionsJsonController extends Controller
             ]
         );
 
-        return reply()->json(
-            [$userPermission],
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return ResponseService::userPermission($userPermission);
     }
 
     /**
@@ -88,7 +84,7 @@ class UserPermissionsJsonController extends Controller
             new NotFoundException('Delete failed, user permission not found with id: ' . $userPermissionId)
         );
 
-        return reply()->json(null, ['code' => 204]);
+        return ResponseService::empty(204);
     }
 
     /**
@@ -108,11 +104,6 @@ class UserPermissionsJsonController extends Controller
             $request->get('only_active', true)
         );
 
-        return reply()->json(
-            $userPermissions,
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return ResponseService::userPermission($userPermissions);
     }
 }

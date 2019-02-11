@@ -11,6 +11,7 @@ use Railroad\Railcontent\Requests\ContentDatumDeleteRequest;
 use Railroad\Railcontent\Requests\ContentDatumUpdateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
+use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentDatumJsonController extends Controller
@@ -37,11 +38,7 @@ class ContentDatumJsonController extends Controller
         $this->datumService = $datumService;
         $this->permissionPackageService = $permissionPackageService;
 
-        $this->serializer =
-            SerializerBuilder::create()
-                ->build();
-
-        $this->middleware(ConfigService::$controllerMiddleware);
+         $this->middleware(ConfigService::$controllerMiddleware);
     }
 
     /**
@@ -55,20 +52,13 @@ class ContentDatumJsonController extends Controller
         $this->permissionPackageService->canOrThrow(auth()->id(), 'create.content.data');
 
         $contentData = $this->datumService->create(
-            $request->input('content_id'),
-            $request->input('key'),
-            $request->input('value'),
-            $request->input('position')
+            $request->input('data.relationships.content.data.id'),
+            $request->input('data.attributes.key'),
+            $request->input('data.attributes.value'),
+            $request->input('data.attributes.position')
         );
 
-        return response($this->serializer->serialize(['data' => [$contentData]], 'json'));
-
-        return reply()->json(
-            [$contentData],
-            [
-                'transformer' => DataTransformer::class,
-            ]
-        );
+        return ResponseService::contentData($contentData);
     }
 
     /**
@@ -100,15 +90,9 @@ class ContentDatumJsonController extends Controller
             is_null($contentData),
             new NotFoundException('Update failed, datum not found with id: ' . $dataId)
         );
-        return response($this->serializer->serialize(['data' => [$contentData]], 'json'), 201);
+        return ResponseService::contentData($contentData)
+            ->respond(201);
 
-//        return reply()->json(
-//            [$contentData],
-//            [
-//                'transformer' => DataTransformer::class,
-//                'code' => 201,
-//            ]
-//        );
     }
 
     /**
@@ -133,7 +117,7 @@ class ContentDatumJsonController extends Controller
             is_null($deleted),
             new NotFoundException('Delete failed, datum not found with id: ' . $dataId)
         );
+        return ResponseService::empty(204);
 
-        return reply()->json(null, ['code' => 204]);
     }
 }

@@ -111,9 +111,10 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 'data' => [
                     'attributes' => $attributes,
                     'relationships' => [
-                        'content' => [
+                        'content' => ['data' => [
                             'type' => 'content',
                             'id' => 1,
+                            ]
                         ],
                     ],
                 ],
@@ -144,9 +145,10 @@ class CommentJsonControllerTest extends RailcontentTestCase
                         'comment' => $this->faker->text(),
                     ],
                     'relationships' => [
-                        'content' => [
+                        'content' => ['data' => [
                             'type' => 'content',
                             'id' => 2,
+                            ]
                         ],
                     ],
                 ],
@@ -167,9 +169,10 @@ class CommentJsonControllerTest extends RailcontentTestCase
             [
                 'data' => [
                     'relationships' => [
-                        'content' => [
+                        'content' => ['data' => [
                             'type' => 'content',
                             'id' => rand(),
+                            ]
                         ],
                     ],
                 ],
@@ -256,13 +259,15 @@ class CommentJsonControllerTest extends RailcontentTestCase
                         'display_name' => '',
                     ],
                     'relationships' => [
-                        'content' => [
+                        'content' => ['data' => [
                             'type' => 'content',
                             'id' => rand(30, 100),
+                            ]
                         ],
-                        'parent' => [
+                        'parent' => ['data' => [
                             'type' => 'comment',
                             'id' => rand(3, 10),
+                            ]
                         ],
                     ],
                 ],
@@ -391,9 +396,10 @@ class CommentJsonControllerTest extends RailcontentTestCase
                         'comment' => $reply,
                     ],
                     'relationships' => [
-                        'parent' => [
+                        'parent' => ['data' => [
                             'type' => 'comment',
                             'id' => $comment[0]->getId(),
+                            ]
                         ],
                     ],
                 ],

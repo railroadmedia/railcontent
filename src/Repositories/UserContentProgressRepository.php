@@ -2,12 +2,13 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Doctrine\ORM\EntityRepository;
 use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Queries\CachedQuery;
 
-class UserContentProgressRepository extends \Railroad\Resora\Repositories\RepositoryBase
+class UserContentProgressRepository extends EntityRepository
 {
     use ByContentIdTrait;
 

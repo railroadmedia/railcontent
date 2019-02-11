@@ -227,12 +227,16 @@ class PermissionControllerTest extends RailcontentTestCase
                     ],
                     'relationships' => [
                         'permission' => [
-                            'type' => 'permission',
-                            'id' => 1,
+                            'data' => [
+                                'type' => 'permission',
+                                'id' => 1,
+                            ],
                         ],
                         'content' => [
-                            'type' => 'content',
-                            'id' => 1,
+                            'data' => [
+                                'type' => 'content',
+                                'id' => 1,
+                            ],
                         ],
                     ],
                 ],
@@ -281,8 +285,10 @@ class PermissionControllerTest extends RailcontentTestCase
                     ],
                     'relationships' => [
                         'permission' => [
-                            'type' => 'permission',
-                            'id' => 1,
+                            'data' => [
+                                'type' => 'permission',
+                                'id' => 1,
+                            ],
                         ],
                     ],
                 ],
@@ -319,8 +325,10 @@ class PermissionControllerTest extends RailcontentTestCase
                     'type' => 'contentPermission',
                     'relationships' => [
                         'permission' => [
-                            'type' => 'permission',
-                            'id' => $randomPermissionId,
+                            'data' => [
+                                'type' => 'permission',
+                                'id' => $randomPermissionId,
+                            ],
                         ],
                     ],
                 ],
@@ -334,12 +342,12 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $expectedErrors = [
             [
-                'source' => 'data.relationships.permission.id',
+                'source' => 'data.relationships.permission.data.id',
                 'detail' => 'The selected permission is invalid.',
                 'title' => 'Validation failed.',
             ],
             [
-                'source' => 'data.relationships.content.id',
+                'source' => 'data.relationships.content.data.id',
                 'detail' => 'The content field is required when none of content type are present.',
                 'title' => 'Validation failed.',
             ],
@@ -362,12 +370,16 @@ class PermissionControllerTest extends RailcontentTestCase
                     'type' => 'contentPermission',
                     'relationships' => [
                         'permission' => [
-                            'type' => 'permission',
-                            'id' => 1,
+                            'data' => [
+                                'type' => 'permission',
+                                'id' => 1,
+                            ],
                         ],
                         'content' => [
-                            'type' => 'content',
-                            'id' => rand(),
+                            'data' => [
+                                'type' => 'content',
+                                'id' => rand(),
+                            ],
                         ],
                     ],
                 ],
@@ -379,7 +391,7 @@ class PermissionControllerTest extends RailcontentTestCase
         $expectedErrors = [
             [
                 "title" => "Validation failed.",
-                "source" => "data.relationships.content.id",
+                "source" => "data.relationships.content.data.id",
                 "detail" => "The selected content is invalid.",
             ],
         ];
@@ -399,8 +411,10 @@ class PermissionControllerTest extends RailcontentTestCase
                     ],
                     'relationships' => [
                         'permission' => [
-                            'type' => 'permission',
-                            'id' => 1,
+                            'data' => [
+                                'type' => 'permission',
+                                'id' => 1,
+                            ],
                         ],
                     ],
                 ],
@@ -456,12 +470,16 @@ class PermissionControllerTest extends RailcontentTestCase
                 'type' => 'contentPermission',
                 'relationships' => [
                     'permission' => [
-                        'type' => 'permission',
-                        'id' => 1,
+                        'data' => [
+                            'type' => 'permission',
+                            'id' => 1,
+                        ],
                     ],
                     'content' => [
-                        'type' => 'content',
-                        'id' => 1,
+                        'data' => [
+                            'type' => 'content',
+                            'id' => 1,
+                        ],
                     ],
                 ],
             ],
@@ -499,8 +517,10 @@ class PermissionControllerTest extends RailcontentTestCase
                 ],
                 'relationships' => [
                     'permission' => [
-                        'type' => 'permission',
-                        'id' => 1,
+                        'data' => [
+                            'type' => 'permission',
+                            'id' => 1,
+                        ],
                     ],
                 ],
             ],

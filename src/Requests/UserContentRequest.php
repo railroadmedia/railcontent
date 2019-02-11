@@ -25,7 +25,7 @@ class UserContentRequest extends FormRequest
     public function rules()
     {
         return [
-            'content_id' => 'required|numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
+            'data.relationships.content.data.id' => 'required|numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
                 ConfigService::$tableContent . ',id'
         ];
     }

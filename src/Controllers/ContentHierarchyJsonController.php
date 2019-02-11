@@ -46,8 +46,8 @@ class ContentHierarchyJsonController extends Controller
         $this->permissionPackageService->canOrThrow(auth()->id(), 'create.content.hierarchy');
 
         $hierarchy = $this->contentHierarchyService->createOrUpdateHierarchy(
-            $request->input('data.relationships.parent.id'),
-            $request->input('data.relationships.child.id'),
+            $request->input('data.relationships.parent.data.id'),
+            $request->input('data.relationships.child.data.id'),
             $request->input('data.attributes.child_position')
         );
 

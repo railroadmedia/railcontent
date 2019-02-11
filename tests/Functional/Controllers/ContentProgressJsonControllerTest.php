@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use Faker\ORM\Doctrine\Populator;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -30,24 +32,47 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
     {
         parent::setUp();
 
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->serviceBeingTested = $this->app->make(ContentService::class);
-        $this->classBeingTested = $this->app->make(ContentRepository::class);
-        $this->userId = $this->createAndLogInNewUser();
+        $this->populator = new Populator($this->faker, $this->entityManager);
+
+        //        $this->contentFactory = $this->app->make(ContentFactory::class);
+        //        $this->serviceBeingTested = $this->app->make(ContentService::class);
+        //        $this->classBeingTested = $this->app->make(ContentRepository::class);
+        //        $this->userId = $this->createAndLogInNewUser();
     }
 
     public function test_start_content()
     {
-        $content = $this->contentFactory->create();
+        $userId = $this->createAndLogInNewUser();
+
+        $this->populator->addEntity(
+            Content::class,
+            1,
+            [
+                'slug' => $this->faker->word,
+                'brand' => ConfigService::$brand,
+                'type' => $this->faker->word,
+                'status' => $this->faker->word
+            ]
+        );
+        $fakeData = $this->populator->execute();
+
         $response = $this->put(
             'railcontent/start',
             [
-                'content_id' => $content['id'],
+                'data' => [
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $fakeData[Content::class][0]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
         $this->assertEquals(200, $response->status());
-        $this->assertTrue($response->decodeResponseJson('data')[0][0]);
+        $this->assertTrue($response->decodeResponseJson('data'));
     }
 
     public function test_start_content_invalid_content_id()
@@ -81,8 +106,6 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
                 'content_id' => $content['id'],
             ]
         );
-
-
 
         $response = $this->put(
             'railcontent/complete',

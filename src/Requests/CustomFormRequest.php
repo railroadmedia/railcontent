@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use App\Http\Requests\Scalecenter\ContentCreate;
 use Carbon\Carbon;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
@@ -65,16 +64,16 @@ class CustomFormRequest extends FormRequest
      */
     public function __construct(
         ContentService $contentService,
-        ContentDatumService $contentDatumService,
-        ContentFieldService $contentFieldService,
-        ValidationFactory $validationFactory,
-        ContentHierarchyService $contentHierarchyService
+        ContentDatumService $contentDatumService
+//        //ContentFieldService $contentFieldService,
+//        ValidationFactory $validationFactory,
+//        ContentHierarchyService $contentHierarchyService
     ) {
         $this->contentService = $contentService;
         $this->contentDatumService = $contentDatumService;
-        $this->contentFieldService = $contentFieldService;
-        $this->validationFactory = $validationFactory;
-        $this->contentHierarchyService = $contentHierarchyService;
+//        //$this->contentFieldService = $contentFieldService;
+//        $this->validationFactory = $validationFactory;
+//        $this->contentHierarchyService = $contentHierarchyService;
 
         ConfigService::$cacheTime = -1;
     }
@@ -229,11 +228,11 @@ response()->json([
         $counts = [];
         $cannotHaveMultiple = [];
 
-        foreach ($rulesForBrand[$content['type']] as $setOfContentTypes => $rulesForContentType) {
+        foreach ($rulesForBrand[$content->getType()] as $setOfContentTypes => $rulesForContentType) {
 
             $setOfContentTypes = explode('|', $setOfContentTypes);
 
-            if (!in_array($content['status'], $setOfContentTypes)) {
+            if (!in_array($content->getStatus(), $setOfContentTypes)) {
                 continue;
             }
 
@@ -264,11 +263,11 @@ response()->json([
 
         $required = [];
 
-        foreach ($rulesForBrand[$content['type']] as $setOfContentTypes => $rulesForContentType) {
+        foreach ($rulesForBrand[$content->getType()] as $setOfContentTypes => $rulesForContentType) {
 
             $setOfContentTypes = explode('|', $setOfContentTypes);
 
-            if (!in_array($content['status'], $setOfContentTypes)) {
+            if (!in_array($content->getStatus(), $setOfContentTypes)) {
                 continue;
             }
 
@@ -451,22 +450,23 @@ response()->json([
         if ($request instanceof ContentDatumDeleteRequest || $request instanceof ContentFieldDeleteRequest) {
             $idInParam = array_values($request->route()->parameters())[0];
             if($request instanceof ContentFieldDeleteRequest){
-                $keyToCheckForExemption = $this->contentFieldService->get($idInParam)['key'];
+                $keyToCheckForExemption = $this->contentFieldService->get($idInParam)->getKey();
             }else{
-                $keyToCheckForExemption = $this->contentDatumService->get($idInParam)['key'];
+                $keyToCheckForExemption = $this->contentDatumService->get($idInParam)->getKey();
             }
         }
 
         if ($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest) {
             $idInParam = array_values($request->route()->parameters())[0];
             if($request instanceof ContentFieldUpdateRequest){
-                $keyToCheckForExemption = $this->contentFieldService->get($idInParam)['key'];
+                $keyToCheckForExemption = $this->contentFieldService->get($idInParam)->getKey();
             }else{
-                $keyToCheckForExemption = $this->contentDatumService->get($idInParam)['key'];
+                $keyToCheckForExemption = $this->contentDatumService->get($idInParam)->getKey();
             }
         }
 
-        $contentCreatedOn = new Carbon($content['created_on']);
+
+        $contentCreatedOn = Carbon::parse($content->getCreatedOn()->format('Y-m-d H:i:s'));
         $exemptionDate = new Carbon('1970-01-01 00:00');
         if(!empty(ConfigService::$validationExemptionDate)){
             $exemptionDate = new Carbon(ConfigService::$validationExemptionDate);
@@ -547,19 +547,19 @@ response()->json([
             return;
         }
 
-        if (empty($content['brand'])) {
+        if (empty($content->getBrand())) {
             $contentValidationRequired = false;
             return;
         }
 
-        $rulesForBrand = $allValidationRules[$content['brand']] ?? [];
+        $rulesForBrand = $allValidationRules[$content->getBrand()] ?? [];
 
-        if (empty($rulesForBrand[$content['type']])) {
+        if (empty($rulesForBrand[$content->getType()])) {
             $contentValidationRequired = false;
             return;
         }
 
-        $restrictions = $this->getStatusRestrictionsForType($content['type'], $rulesForBrand);
+        $restrictions = $this->getStatusRestrictionsForType($content->getType(), $rulesForBrand);
 
         if ($request instanceof ContentCreateRequest) {
             if (isset($input['status'])) {
@@ -600,7 +600,7 @@ response()->json([
         }
 
         if ($request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest) {
-
+dd('ajunge?');
             // part 1
             $contentValidationRequired = in_array($content['status'], $restrictions);
 
@@ -614,21 +614,22 @@ response()->json([
         if ($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest) {
 
             // part 1
-            $contentValidationRequired = in_array($content['status'], $restrictions);
+            $contentValidationRequired = in_array($content->getStatus(), $restrictions);
 
             // part 2
             $fieldsOrData = $request instanceof ContentFieldUpdateRequest ? 'fields' : 'data';
-            foreach ($content[$fieldsOrData] as &$item) {
-                if ($item['id'] == $input['id']) {
-                    $item['value'] = $input['value'];
-                }
-            }
+//            dd($fieldsOrData);
+//            foreach ($content[$fieldsOrData] as &$item) {
+//                if ($item['id'] == $input['id']) {
+//                    $item['value'] = $input['value'];
+//                }
+//            }
         }
 
         if ($request instanceof ContentDatumDeleteRequest || $request instanceof ContentFieldDeleteRequest) {
 
             // part 1
-            $contentValidationRequired = in_array($content['status'], $restrictions);
+            $contentValidationRequired = in_array($content->getStatus(), $restrictions);
 
             // part 2
             if ($contentValidationRequired) {
@@ -641,17 +642,17 @@ response()->json([
 
                 $fieldsOrData = $request instanceof ContentFieldDeleteRequest ? 'fields' : 'data';
 
-                foreach ($content[$fieldsOrData] as $index => $fieldOrData) {
-
-                    if ($fieldOrData['id'] == $idInParam) {
-                        unset($content[$fieldsOrData][$index]);
-                    }
-
-                }
+//                foreach ($content[$fieldsOrData] as $index => $fieldOrData) {
+//
+//                    if ($fieldOrData['id'] == $idInParam) {
+//                        unset($content[$fieldsOrData][$index]);
+//                    }
+//
+//                }
             }
         }
 
-        $contentValidationRequired = $contentValidationRequired && isset($rulesForBrand[$content['type']]);
+        $contentValidationRequired = $contentValidationRequired && isset($rulesForBrand[$content->getType()]);
     }
 
     private function getContentFromRequest(Request $request)

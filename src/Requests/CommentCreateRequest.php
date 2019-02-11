@@ -28,7 +28,7 @@ class CommentCreateRequest extends FormRequest
     {
         return [
             'data.attributes.comment' => 'required|max:10024',
-            'data.relationships.content.id' =>
+            'data.relationships.content.data.id' =>
                 ['required',
                     'numeric',
                     Rule::exists(

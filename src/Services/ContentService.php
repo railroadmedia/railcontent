@@ -109,10 +109,10 @@ class ContentService
      */
     public function __construct(
         EntityManager $entityManager,
-        ContentVersionRepository $versionRepository,
+        //ContentVersionRepository $versionRepository,
        // CommentRepository $commentRepository,
-        CommentAssignmentRepository $commentAssignmentRepository,
-        UserContentProgressRepository $userContentProgressRepository,
+        //CommentAssignmentRepository $commentAssignmentRepository,
+       // UserContentProgressRepository $userContentProgressRepository,
         JsonApiHydrator $jsonApiHydrator
     ) {
         $this->entityManager = $entityManager;
@@ -125,14 +125,14 @@ class ContentService
 
         $this->jsonApiHydrator = $jsonApiHydrator;
 
-        $this->versionRepository = $versionRepository;
+       // $this->versionRepository = $versionRepository;
 
         // $this->datumRepository = $datumRepository;
         // $this->contentHierarchyRepository = $contentHierarchyRepository;
         //$this->contentPermissionRepository = $contentPermissionRepository;
 
-        $this->commentAssignationRepository = $commentAssignmentRepository;
-        $this->userContentProgressRepository = $userContentProgressRepository;
+        //$this->commentAssignationRepository = $commentAssignmentRepository;
+       // $this->userContentProgressRepository = $userContentProgressRepository;
     }
 
     /**

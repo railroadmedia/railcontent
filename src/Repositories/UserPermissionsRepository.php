@@ -3,11 +3,12 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Doctrine\ORM\EntityRepository;
 use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Queries\CachedQuery;
 
-class UserPermissionsRepository extends \Railroad\Resora\Repositories\RepositoryBase
+class UserPermissionsRepository extends EntityRepository
 {
     /**
      * @return CachedQuery|$this

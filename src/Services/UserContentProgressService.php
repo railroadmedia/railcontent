@@ -3,7 +3,9 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Facades\Cache;
+use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Events\UserContentsProgressReset;
 use Railroad\Railcontent\Helpers\CacheHelper;
@@ -13,6 +15,8 @@ use Railroad\Railcontent\Support\Collection;
 
 class UserContentProgressService
 {
+    private $entityManager;
+
     /**
      * @var UserContentProgressRepository
      */
@@ -45,15 +49,21 @@ class UserContentProgressService
      * @param ContentService $contentService
      */
     public function __construct(
-        UserContentProgressRepository $userContentRepository,
+        //  UserContentProgressRepository $userContentRepository,
         ContentHierarchyService $contentHierarchyService,
-        ContentRepository $contentRepository,
+        EntityManager $entityManager,
+        //   ContentRepository $contentRepository,
         ContentService $contentService
     ) {
-        $this->userContentRepository = $userContentRepository;
+        $this->entityManager = $entityManager;
+
         $this->contentHierarchyService = $contentHierarchyService;
-        $this->contentRepository = $contentRepository;
         $this->contentService = $contentService;
+
+          $this->userContentRepository = $this->entityManager->getRepository(UserContentProgress::class);
+
+        //   $this->contentRepository = $contentRepository;
+
     }
 
     /**
@@ -64,11 +74,12 @@ class UserContentProgressService
      */
     public function getMostRecentByContentTypeUserState($contentType, $userId, $state)
     {
-        return $this->userContentRepository->query()->getMostRecentByContentTypeUserState(
-            $contentType,
-            $userId,
-            $state
-        );
+        return $this->userContentRepository->query()
+            ->getMostRecentByContentTypeUserState(
+                $contentType,
+                $userId,
+                $state
+            );
     }
 
     /**
@@ -82,7 +93,9 @@ class UserContentProgressService
      */
     public function countTotalStatesForContentIds($state, $contentIds)
     {
-        $results = $this->userContentRepository->query()->countTotalStatesForContentIds($state, $contentIds);
+        $results =
+            $this->userContentRepository->query()
+                ->countTotalStatesForContentIds($state, $contentIds);
 
         return array_combine(array_column($results, 'content_id'), array_column($results, 'count'));
     }
@@ -99,6 +112,7 @@ class UserContentProgressService
 
         $children = $this->contentService->getByParentId($contentId);
 
+        $content = $this->contentService->getById($contentId);
         if (!empty($children)) {
 
             /*
@@ -113,21 +127,47 @@ class UserContentProgressService
             $progressPercent = $this->getProgressPercentage($userId, $children);
         }
 
-        $isCompleted = $this->userContentRepository->query()->isContentAlreadyCompleteForUser($contentId, $userId);
+        $isCompleted = $this->userContentRepository->findOneBy(
+            [
+                'userId' => $userId,
+                'content' => $content,
+                'state' => 'completed'
+
+            ]
+        );
+        //dd($isCompleted);
+        //query()->isContentAlreadyCompleteForUser($contentId, $userId);
 
         if (!$isCompleted || $forceEvenIfComplete) {
-            $this->userContentRepository->query()->updateOrCreate(
-                [
-                    'content_id' => $contentId,
-                    'user_id' => $userId,
-                ],
-                [
-                    'state' => self::STATE_STARTED,
-                    'progress_percent' => $progressPercent,
-                    'updated_on' => Carbon::now()
-                        ->toDateTimeString(),
-                ]
-            );
+            $userContentProgress = $this->userContentRepository->findOneBy([
+                'userId' => $userId,
+                'content' => $content
+            ]);
+            if(!$userContentProgress){
+                $userContentProgress = new UserContentProgress();
+                $userContentProgress->setUserId($userId);
+                $userContentProgress->setContent($content);
+            }
+
+            $userContentProgress->setProgressPercent($progressPercent);
+            $userContentProgress->setState(self::STATE_STARTED);
+            $userContentProgress->setUpdatedOn(Carbon::parse(now()));
+
+            $this->entityManager->persist($userContentProgress);
+            $this->entityManager->flush();
+//            $this->userContentRepository->query()
+//                ->updateOrCreate(
+//                    [
+//                        'content_id' => $contentId,
+//                        'user_id' => $userId,
+//                    ],
+//                    [
+//                        'state' => self::STATE_STARTED,
+//                        'progress_percent' => $progressPercent,
+//                        'updated_on' => Carbon::now()
+//                            ->toDateTimeString(),
+//                    ]
+//                );
         }
         //delete user progress from cache
         CacheHelper::deleteUserFields(
@@ -148,7 +188,7 @@ class UserContentProgressService
 
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressSaved($userId, $contentId));
+      //  event(new UserContentProgressSaved($userId, $contentId));
 
         return true;
     }
@@ -160,18 +200,19 @@ class UserContentProgressService
      */
     public function completeContent($contentId, $userId)
     {
-        $this->userContentRepository->query()->updateOrCreate(
-            [
-                'content_id' => $contentId,
-                'user_id' => $userId,
-            ],
-            [
-                'state' => self::STATE_COMPLETED,
-                'progress_percent' => 100,
-                'updated_on' => Carbon::now()
-                    ->toDateTimeString(),
-            ]
-        );
+        $this->userContentRepository->query()
+            ->updateOrCreate(
+                [
+                    'content_id' => $contentId,
+                    'user_id' => $userId,
+                ],
+                [
+                    'state' => self::STATE_COMPLETED,
+                    'progress_percent' => 100,
+                    'updated_on' => Carbon::now()
+                        ->toDateTimeString(),
+                ]
+            );
 
         if (is_null($contentId)) {
             error_log(
@@ -235,7 +276,9 @@ class UserContentProgressService
                 $idsToDelete[] = $child['child_id'];
             }
 
-            $childIds = $children->pluck('child_id')->toArray();
+            $childIds =
+                $children->pluck('child_id')
+                    ->toArray();
         } while (count($children) > 0);
 
         $this->userContentRepository->query()
@@ -303,18 +346,19 @@ class UserContentProgressService
             return $this->completeContent($contentId, $userId);
         }
 
-        $this->userContentRepository->query()->updateOrCreate(
-            [
-                'content_id' => $contentId,
-                'user_id' => $userId,
-            ],
-            [
-                'state' => self::STATE_STARTED,
-                'progress_percent' => $progress,
-                'updated_on' => Carbon::now()
-                    ->toDateTimeString(),
-            ]
-        );
+        $this->userContentRepository->query()
+            ->updateOrCreate(
+                [
+                    'content_id' => $contentId,
+                    'user_id' => $userId,
+                ],
+                [
+                    'state' => self::STATE_STARTED,
+                    'progress_percent' => $progress,
+                    'updated_on' => Carbon::now()
+                        ->toDateTimeString(),
+                ]
+            );
 
         if (is_null($contentId)) {
             error_log(
@@ -373,10 +417,12 @@ class UserContentProgressService
         }
 
         if (!empty($contentIds)) {
-            $contentProgressions = $this->userContentRepository->query()->getByUserIdAndWhereContentIdIn($userId, $contentIds);
+            $contentProgressions =
+                $this->userContentRepository->query()
+                    ->getByUserIdAndWhereContentIdIn($userId, $contentIds);
 
             $contentProgressionsByContentId =
-                array_combine(array_pluck($contentProgressions,'content_id'), $contentProgressions);
+                array_combine(array_pluck($contentProgressions, 'content_id'), $contentProgressions);
 
             foreach ($contentOrContents as $index => $content) {
                 if (!empty($contentProgressionsByContentId[$content['id']])) {
@@ -536,7 +582,8 @@ class UserContentProgressService
      */
     public function getForUser($id)
     {
-        return $this->userContentRepository->query()->getForUser($id);
+        return $this->userContentRepository->query()
+            ->getForUser($id);
     }
 
     /**
@@ -556,23 +603,26 @@ class UserContentProgressService
         $orderByDirection = 'desc',
         $limit = 25
     ) {
-        return $this->userContentRepository->query()->getForUserStateContentTypes(
-            $id,
-            $types,
-            $state,
-            $orderByColumn,
-            $orderByDirection,
-            $limit
-        );
+        return $this->userContentRepository->query()
+            ->getForUserStateContentTypes(
+                $id,
+                $types,
+                $state,
+                $orderByColumn,
+                $orderByDirection,
+                $limit
+            );
     }
 
     public function getLessonsForUserByType($id, $type, $state = null)
     {
-        return $this->userContentRepository->query()->getLessonsForUserByType($id, $type, $state);
+        return $this->userContentRepository->query()
+            ->getLessonsForUserByType($id, $type, $state);
     }
 
     public function countLessonsForUserByTypeAndProgressState($id, $type, $state)
     {
-        return $this->userContentRepository->query()->getLessonsForUserByType($id, $type, $state, true);
+        return $this->userContentRepository->query()
+            ->getLessonsForUserByType($id, $type, $state, true);
     }
 }

@@ -17,12 +17,12 @@ class VersionService
     private $request;
 
     public function __construct(
-        ContentVersionRepository $versionRepository,
-        Request $request,
-        ContentRepository $contentRepository
+       // ContentVersionRepository $versionRepository,
+        Request $request
+       // ContentRepository $contentRepository
     ) {
-        $this->versionRepository = $versionRepository;
-        $this->contentRepository = $contentRepository;
+       // $this->versionRepository = $versionRepository;
+      //  $this->contentRepository = $contentRepository;
         $this->request = $request;
     }
 

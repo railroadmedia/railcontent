@@ -2,7 +2,10 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Faker\ORM\Doctrine\Populator;
 use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -27,17 +30,29 @@ class ContentDatumControllerTest extends RailcontentTestCase
     protected function setUp()
     {
         parent::setUp();
+
+        $this->populator = new Populator($this->faker, $this->entityManager);
+        $this->populator->addEntity(
+            Content::class,
+            1,
+            [
+                'slug' => 'slug1',
+                'status' => 'published',
+                'type' => 'course',
+                'brand' => ConfigService::$brand,
+            ]
+        );
+        $this->populator->execute();
+
         //
         $this->serviceBeingTested = $this->app->make(ContentDatumService::class);
         //        $this->classBeingTested = $this->app->make(ContentDatumRepository::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
+        // $this->contentFactory = $this->app->make(ContentFactory::class);
+        //  $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
     }
 
     public function test_add_content_datum_controller_method_response()
     {
-        $content = $this->contentFactory->create();
-
         $key = $this->faker->word;
         $value = $this->faker->text(500);
 
@@ -45,10 +60,20 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/content/datum',
             [
-                'content_id' => $content->getId(),
-                'key' => $key,
-                'value' => $value,
-                'position' => 1,
+                'data' => [
+                    'attributes' => [
+                        'key' => $key,
+                        'value' => $value,
+                        'position' => 1,
+                    ],
+                    'relationships' => [
+                        'content' => ['data' => [
+                            'type' => 'content',
+                            'id' => 1,
+                            ]
+                        ],
+                    ],
+                ],
             ]
         );
 
@@ -57,8 +82,9 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $response->assertJson(
             [
                 'data' => [
-                    0 => [
-                        'id' => '1',
+                    'type' => 'contentData',
+                    'id' => 1,
+                    'attributes' => [
                         'key' => $key,
                         'value' => $value,
                         'position' => 1,
@@ -77,15 +103,17 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $this->assertEquals(
             [
                 [
-                    "source" => "key",
+                    'title' => 'Validation failed.',
+                    "source" => "data.attributes.key",
                     "detail" => "The key field is required.",
                 ],
                 [
-                    "source" => "content_id",
-                    "detail" => "The content id field is required.",
+                    'title' => 'Validation failed.',
+                    "source" => "data.relationships.content.data.id",
+                    "detail" => "The content field is required.",
                 ],
             ],
-            $response->decodeResponseJson('meta')['errors']
+            $response->decodeResponseJson('errors')
         );
     }
 
@@ -94,50 +122,71 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $key = $this->faker->text(600);
         $value = $this->faker->text(500);
 
-        $response =
-            $this->call('PUT', 'railcontent/content/datum', ['content_id' => 1, 'key' => $key, 'value' => $value]);
+        $response = $this->call(
+            'PUT',
+            'railcontent/content/datum',
+            [
+                'data' => [
+                    'attributes' => [
+                        'key' => $key,
+                        'value' => $value,
+                        'position' => 1,
+                    ],
+                    'relationships' => [
+                        'content' => ['data' => [
+                            'type' => 'content',
+                            'id' => rand(100, 1000),
+                            ]
+                        ],
+                    ],
+                ],
+            ]
+        );
 
         $this->assertEquals(422, $response->status());
         $this->assertEquals(
             [
                 [
-                    "source" => "key",
+                    "source" => "data.attributes.key",
                     "detail" => "The key may not be greater than 255 characters.",
+                    'title' => 'Validation failed.',
                 ],
                 [
-                    "source" => "content_id",
-                    "detail" => "The selected content id is invalid.",
+                    "source" => "data.relationships.content.data.id",
+                    "detail" => "The selected content is invalid.",
+                    'title' => 'Validation failed.',
                 ],
             ],
-            $response->decodeResponseJson('meta')['errors']
+            $response->decodeResponseJson('errors')
         );
     }
 
     public function test_update_content_datum_controller_method_response()
     {
-        $content = $this->contentFactory->create();
-
-        $data = [
-            'content_id' => $content->getId(),
-            'key' => $this->faker->word,
-            'value' => $this->faker->text(),
-            'position' => $this->faker->numberBetween(),
-        ];
-        $dataId =
-            $this->query()
-                ->table(ConfigService::$tableContentData)
-                ->insertGetId($data);
+        $this->populator->addEntity(
+            ContentData::class,
+            1,
+            [
+                'content' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'key' => $this->faker->word,
+                'value' => $this->faker->text(),
+                'position' => $this->faker->numberBetween(),
+            ]
+        );
+        $fakeData = $this->populator->execute();
+        $data = $fakeData[ContentData::class][0];
 
         $new_value = $this->faker->text();
 
         $response = $this->call(
             'PATCH',
-            'railcontent/content/datum/' . $dataId,
+            'railcontent/content/datum/' . $data->getId(),
             [
-                'content_id' => $content->getId(),
-                'key' => $data['key'],
+                'content_id' => 1,
+                // 'key' => $data['key'],
                 'value' => $new_value,
-                'position' => $data['position'],
+                // 'position' => $data['position'],
             ]
         );
 
@@ -146,9 +195,10 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $response->assertJson(
             [
                 'data' => [
-                    0 => [
-                        'id' => 1,
-                        'key' => $data['key'],
+                    'type' => 'contentData',
+                    'id' => 1,
+                    'attributes' => [
+                        'key' => $data->getKey(),
                         'value' => $new_value,
                         'position' => 1,
                     ],
@@ -159,24 +209,29 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_update_content_datum_not_pass_validation()
     {
-        $content = $this->contentFactory->create();
-
-        $data = [
-            'key' => $this->faker->word,
-            'value' => $this->faker->word,
-            'position' => $this->faker->numberBetween(),
-            'content_id' => $content->getId(),
-        ];
-        $dataId =
-            $this->query()
-                ->table(ConfigService::$tableContentData)
-                ->insertGetId($data);
+        $this->populator->addEntity(
+            ContentData::class,
+            1,
+            [
+                'content' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'key' => $this->faker->word,
+                'value' => $this->faker->text(),
+                'position' => $this->faker->numberBetween(),
+            ]
+        );
+        $fakeData = $this->populator->execute();
+        $data = $fakeData[ContentData::class][0];
 
         $response = $this->call(
             'PATCH',
-            'railcontent/content/datum/' . $dataId,
+            'railcontent/content/datum/' . $data->getId(),
             [
-                'key' => $this->faker->text(500),
+                'data' => [
+                    'attributes' => [
+                        'key' => $this->faker->text(500),
+                    ],
+                ],
             ]
         );
 
@@ -184,64 +239,99 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $this->assertEquals(
             [
                 [
-                    "source" => "key",
+                    "source" => "data.attributes.key",
                     "detail" => "The key may not be greater than 255 characters.",
+                    'title' => 'Validation failed.',
                 ],
             ],
-            $response->decodeResponseJson('meta')['errors']
+            $response->decodeResponseJson('errors')
         );
     }
 
     public function test_delete_content_datum_controller()
     {
-        $content = $this->contentFactory->create();
+        $this->populator->addEntity(
+            ContentData::class,
+            1,
+            [
+                'content' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'key' => $this->faker->word,
+                'value' => $this->faker->text(),
+                'position' => $this->faker->numberBetween(),
+            ]
+        );
+        $fakeData = $this->populator->execute();
+        $data = $fakeData[ContentData::class][0];
+        $contentDataId = $data->getId();
 
-        $data = $this->contentDatumFactory->create($content->getId());
-        $dataId = $data->getId();
-        $response = $this->call('DELETE', 'railcontent/content/datum/' . $dataId);
+        $response = $this->call('DELETE', 'railcontent/content/datum/' . $contentDataId);
 
         $this->assertNull(json_decode($response->content()));
         $this->assertEquals(204, $response->status());
         $this->assertDatabaseMissing(
             ConfigService::$tableContentData,
             [
-                'id' => $dataId,
+                'id' => $contentDataId,
             ]
         );
     }
 
     public function test_update_content_datum_method_from_service_response()
     {
-        $content = $this->contentFactory->create();
-
-        $data = $this->contentDatumFactory->create($content->getId());
+        $this->populator->addEntity(
+            ContentData::class,
+            1,
+            [
+                'content' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'key' => $this->faker->word,
+                'value' => $this->faker->text(),
+                'position' => $this->faker->numberBetween(),
+            ]
+        );
+        $fakeData = $this->populator->execute();
+        $data = $fakeData[ContentData::class][0];
 
         $newData = [
             'key' => $data->getKey(),
             'value' => $this->faker->text(500),
             'position' => 1,
-            'content_id' => $content->getId(),
         ];
+
         $updatedData = $this->serviceBeingTested->update($data->getId(), $newData);
 
-        unset($newData['content_id']);
         $this->assertEquals(
-            array_merge(
-                [
-                    'id' => $data->getId(),
-                    'content' => $this->serializer->toArray($content),
-                ],
-                $newData
-            ),
-            $this->serializer->toArray($updatedData)
+            $newData['value'],
+            $updatedData->getValue()
+        );
+
+        $this->assertEquals(
+            $newData['key'],
+            $updatedData->getKey()
+        );
+
+        $this->assertEquals(
+            $newData['position'],
+            $updatedData->getPosition()
         );
     }
 
     public function test_get_content_datum_method_from_service_response()
     {
-        $content = $this->contentFactory->create();
-
-        $data = $this->contentDatumFactory->create($content->getId());
+        $this->populator->addEntity(
+            ContentData::class,
+            1,
+            [
+                'content' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'key' => $this->faker->word,
+                'value' => $this->faker->text(),
+                'position' => $this->faker->numberBetween(),
+            ]
+        );
+        $fakeData = $this->populator->execute();
+        $data = $fakeData[ContentData::class][0];
 
         $results = $this->serviceBeingTested->get($data->getId());
 
@@ -250,9 +340,19 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_delete_content_datum_method_from_service_response()
     {
-        $content = $this->contentFactory->create();
-
-        $data = $this->contentDatumFactory->create($content->getId());
+        $this->populator->addEntity(
+            ContentData::class,
+            1,
+            [
+                'content' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'key' => $this->faker->word,
+                'value' => $this->faker->text(),
+                'position' => $this->faker->numberBetween(),
+            ]
+        );
+        $fakeData = $this->populator->execute();
+        $data = $fakeData[ContentData::class][0];
 
         $results = $this->serviceBeingTested->delete($data->getId());
 

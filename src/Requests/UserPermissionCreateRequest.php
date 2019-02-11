@@ -24,11 +24,11 @@ class UserPermissionCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|integer',
-            'permission_id' => 'required|integer|exists:' . ConfigService::$databaseConnectionName . '.' .
+            'data.attributes.user_id' => 'required|integer',
+            'data.relationships.permission.data.id' => 'required|integer|exists:' . ConfigService::$databaseConnectionName . '.' .
                 ConfigService::$tablePermissions . ',id',
-            'start_date' => 'required|date',
-            'expiration_date' => 'nullable|date'
+            'data.attributes.start_date' => 'required|date',
+            'data.attributes.expiration_date' => 'nullable|date'
         ];
     }
 

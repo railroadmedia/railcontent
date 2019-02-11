@@ -15,9 +15,9 @@ class ContentHierarchyCreateRequest extends CustomFormRequest
     {
         $this->setGeneralRules(
             [
-                'data.relationships.child.id' => 'required|exists:' . ConfigService::$databaseConnectionName . '.' .
+                'data.relationships.child.data.id' => 'required|exists:' . ConfigService::$databaseConnectionName . '.' .
                     ConfigService::$tableContent . ',id',
-                'data.relationships.parent.id' => 'required|exists:' . ConfigService::$databaseConnectionName . '.' .
+                'data.relationships.parent.data.id' => 'required|exists:' . ConfigService::$databaseConnectionName . '.' .
                     ConfigService::$tableContent . ',id',
                 'data.attributes.child_position' => 'nullable|numeric|min:0'
             ]

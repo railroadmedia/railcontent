@@ -3,13 +3,20 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
+use Railroad\Railcontent\Entities\Permission;
+use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Helpers\CacheHelper;
-use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 
 class UserPermissionsService
 {
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
+
     /**
      * @var \Railroad\Railcontent\Repositories\UserPermissionsRepository
      */
@@ -18,12 +25,14 @@ class UserPermissionsService
     /**
      * UserPermissionsService constructor.
      *
-     * @param \Railroad\Railcontent\Repositories\UserPermissionsRepository $userPermissionsRepository
+     * @param EntityManager $entityManager
      */
     public function __construct(
-        UserPermissionsRepository $userPermissionsRepository
+        EntityManager $entityManager
     ) {
-        $this->userPermissionsRepository = $userPermissionsRepository;
+        $this->entityManager = $entityManager;
+
+        $this->userPermissionsRepository = $this->entityManager->getRepository(UserPermission::class);
     }
 
     /**
@@ -47,9 +56,30 @@ class UserPermissionsService
             }
             $this->setTTLOrDeleteUserCache($attributes['user_id'], $ttlEndDate);
         }
+        $permission =
+            $this->entityManager->getRepository(Permission::class)
+                ->find($attributes['permission_id']);
+        $userPermission = $this->userPermissionsRepository->findOneBy(
+            [
+                'userId' => $attributes['user_id'],
+                'permission' => $permission,
 
-        return $this->userPermissionsRepository->query()
-            ->updateOrCreate($attributes, $values);
+            ]
+        );
+        if (!$userPermission) {
+            $userPermission = new UserPermission();
+            $userPermission->setUserId($attributes['user_id']);
+            $userPermission->setPermission($permission);
+        }
+
+        $userPermission->setStartDate(Carbon::parse($values['start_date']));
+        $userPermission->setExpirationDate(
+            $values['expiration_date'] ? Carbon::parse($values['expiration_date']) : null
+        );
+        $this->entityManager->persist($userPermission);
+        $this->entityManager->flush();
+
+        return $userPermission;
     }
 
     /**
@@ -60,7 +90,7 @@ class UserPermissionsService
      */
     public function delete($id)
     {
-        $userPermission = $this->userPermissionsRepository->read($id);
+        $userPermission = $this->userPermissionsRepository->find($id);
         if (is_null($userPermission)) {
             return $userPermission;
         }
@@ -69,11 +99,13 @@ class UserPermissionsService
         CacheHelper::deleteCacheKeys(
             [
                 Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userPermission['user_id'],
+                    ->getPrefix() . 'userId_' . $userPermission->getUserId(),
             ]
         );
+        $this->entityManager->remove($userPermission);
+        $this->entityManager->flush();
 
-        return $this->userPermissionsRepository->destroy($id);
+        return true;
     }
 
     /**
@@ -85,8 +117,32 @@ class UserPermissionsService
      */
     public function getUserPermissions($userId = null, $onlyActive = true)
     {
-        return $this->userPermissionsRepository->query()
-            ->getUserPermissions($userId, $onlyActive);
+        $qb = $this->userPermissionsRepository->createQueryBuilder('up');
+
+        if ($userId) {
+            $qb->where('up.userId = :user')
+                ->setParameter('user', $userId);
+        }
+
+        if ($onlyActive) {
+            $qb->andWhere(
+                $qb->expr()
+                    ->orX(
+                        $qb->expr()
+                            ->isNull('up.expirationDate'),
+                        $qb->expr()
+                            ->gte('up.expirationDate', ':expirationDate')
+                    )
+            )
+                ->setParameter(
+                    'expirationDate',
+                    Carbon::now()
+                        ->toDateTimeString()
+                );
+        }
+
+        return $qb->getQuery()
+            ->getResult();
     }
 
     /**
@@ -96,8 +152,14 @@ class UserPermissionsService
      */
     public function getUserPermissionIdByPermissionAndUser($userId, $permissionId)
     {
-        return $this->userPermissionsRepository->query()
-            ->getIdByPermissionAndUser($userId, $permissionId);
+        $userPermission = $this->userPermissionsRepository->findOneBy(
+            [
+                'userId' => $userId,
+                'permission' => $this->entityManager->getRepository(Permission::class)
+                    ->find($permissionId),
+            ]
+        );
+        return $userPermission;
     }
 
     /**
@@ -107,8 +169,15 @@ class UserPermissionsService
      */
     public function userHasPermissionName($userId, $permissionName)
     {
-        return $this->userPermissionsRepository->query()
-            ->userHasPermissionName($userId, $permissionName);
+        $userPermission = $this->userPermissionsRepository->findOneBy(
+            [
+                'userId' => $userId,
+                'permission' => $this->entityManager->getRepository(Permission::class)
+                    ->findOneBy(['name' => $permissionName])
+            ]
+        );
+
+        return $userPermission ? true : false;
     }
 
     /**

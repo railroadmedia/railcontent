@@ -173,9 +173,9 @@ class PermissionJsonController extends Controller
         $this->permissionPackageService->canOrThrow(auth()->id(), 'assign.permission');
 
         $assignedPermission = $this->contentPermissionService->create(
-            $request->input('data.relationships.content.id'),
+            $request->input('data.relationships.content.data.id'),
             $request->input('data.attributes.content_type'),
-            $request->input('data.relationships.permission.id')
+            $request->input('data.relationships.permission.data.id')
         );
         return ResponseService::contentPermission($assignedPermission);
     }
@@ -191,9 +191,9 @@ class PermissionJsonController extends Controller
         $this->permissionPackageService->canOrThrow(auth()->id(), 'disociate.permissions');
 
         $dissociate = $this->contentPermissionService->dissociate(
-            $request->input('data.relationships.content.id'),
+            $request->input('data.relationships.content.data.id'),
             $request->input('data.attributes.content_type'),
-            $request->input('data.relationships.permission.id')
+            $request->input('data.relationships.permission.data.id')
         );
         return ResponseService::empty(200);
     }

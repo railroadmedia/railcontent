@@ -9,10 +9,12 @@ use Railroad\Doctrine\Services\FractalResponseService;
 use Railroad\Railcontent\Transformers\CommentAssignmentTransformer;
 use Railroad\Railcontent\Transformers\CommentLikeTransformer;
 use Railroad\Railcontent\Transformers\CommentTransformer;
+use Railroad\Railcontent\Transformers\ContentDataTransformer;
 use Railroad\Railcontent\Transformers\ContentHierarchyTransformer;
 use Railroad\Railcontent\Transformers\ContentPermissionTransformer;
 use Railroad\Railcontent\Transformers\ContentTransformer;
 use Railroad\Railcontent\Transformers\PermissionTransformer;
+use Railroad\Railcontent\Transformers\UserPermissionTransformer;
 use Spatie\Fractal\Fractal;
 
 class ResponseService extends FractalResponseService
@@ -150,6 +152,60 @@ class ResponseService extends FractalResponseService
             $entityOrEntities,
             'commentAssignment',
             new CommentAssignmentTransformer(),
+            new JsonApiSerializer(),
+            $queryBuilder
+        )
+            ->parseIncludes($includes);
+    }
+
+    /**
+     * @param $entityOrEntities
+     * @param QueryBuilder|null $queryBuilder
+     * @param array $includes
+     * @return Fractal
+     */
+    public static function contentData($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
+    {
+        return self::create(
+            $entityOrEntities,
+            'contentData',
+            new ContentDataTransformer(),
+            new JsonApiSerializer(),
+            $queryBuilder
+        )
+            ->parseIncludes($includes);
+    }
+
+    /**
+     * @param $entityOrEntities
+     * @param QueryBuilder|null $queryBuilder
+     * @param array $includes
+     * @return Fractal
+     */
+    public static function userPermission($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
+    {
+        return self::create(
+            $entityOrEntities,
+            'userPermission',
+            new UserPermissionTransformer(),
+            new JsonApiSerializer(),
+            $queryBuilder
+        )
+            ->parseIncludes($includes);
+    }
+
+    /**
+     * @param $entityOrEntities
+     * @param QueryBuilder|null $queryBuilder
+     * @param array $includes
+     * @return Fractal
+     */
+    public static function userContentProgress($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
+    {
+        return self::create(
+            $entityOrEntities,
+            'userContentProgress',
+            new UserPermissionTransformer(),
             new JsonApiSerializer(),
             $queryBuilder
         )

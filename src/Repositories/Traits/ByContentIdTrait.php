@@ -346,7 +346,8 @@ trait ByContentIdTrait
             $entity = $this->getEntityName();
             $existingData = new $entity();
         }
-        $existingData->setKey($data['key']);
+        //dd($data);
+        $existingData->setKey($data['key']??$existingData->getKey());
         $existingData->setValue($data['value']);
         $existingData->setPosition($data['position']);
         if(array_key_exists('type', $data)) {
