@@ -42,8 +42,8 @@ class ContentProgressJsonController extends Controller
             $request->input('data.relationships.content.data.id'),
             auth()->id()
         );
-        return $response;
 
+        return ResponseService::empty(200)->setData(['data'=> $response]);
     }
 
     /**
@@ -55,9 +55,11 @@ class ContentProgressJsonController extends Controller
     public function completeContent(UserContentRequest $request)
     {
         $response = $this->userContentService->completeContent(
-            $request->input('content_id'),
-            $request->user()->id
+            $request->input('data.relationships.content.data.id'),
+            auth()->id()
         );
+
+        return ResponseService::empty(201)->setData(['data'=> $response]);
 
         return reply()->json(
             [[$response]],
@@ -77,7 +79,7 @@ class ContentProgressJsonController extends Controller
     public function resetContent(UserContentRequest $request)
     {
         $response = $this->userContentService->resetContent(
-            $request->input('content_id'),
+            $request->input('data.relationships.content.data.id'),
             $request->user()->id
         );
 
@@ -99,17 +101,10 @@ class ContentProgressJsonController extends Controller
     public function saveProgress(UserContentRequest $request)
     {
         $response = $this->userContentService->saveContentProgress(
-            $request->input('content_id'),
-            $request->input('progress_percent'),
-            $request->user()->id
+            $request->input('data.relationships.content.data.id'),
+            $request->input('data.attributes.progress_percent'),
+            auth()->id()
         );
-
-        return reply()->json(
-            [[$response]],
-            [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
-            ]
-        );
+        return ResponseService::empty(201)->setData(['data'=> $response]);
     }
 }

@@ -155,19 +155,7 @@ class UserContentProgressService
 
             $this->entityManager->persist($userContentProgress);
             $this->entityManager->flush();
-//            $this->userContentRepository->query()
-//                ->updateOrCreate(
-//                    [
-//                        'content_id' => $contentId,
-//                        'user_id' => $userId,
-//                    ],
-//                    [
-//                        'state' => self::STATE_STARTED,
-//                        'progress_percent' => $progressPercent,
-//                        'updated_on' => Carbon::now()
-//                            ->toDateTimeString(),
-//                    ]
-//                );
+
         }
         //delete user progress from cache
         CacheHelper::deleteUserFields(
@@ -200,20 +188,6 @@ class UserContentProgressService
      */
     public function completeContent($contentId, $userId)
     {
-        $this->userContentRepository->query()
-            ->updateOrCreate(
-                [
-                    'content_id' => $contentId,
-                    'user_id' => $userId,
-                ],
-                [
-                    'state' => self::STATE_COMPLETED,
-                    'progress_percent' => 100,
-                    'updated_on' => Carbon::now()
-                        ->toDateTimeString(),
-                ]
-            );
-
         if (is_null($contentId)) {
             error_log(
                 print_r(
@@ -228,7 +202,41 @@ class UserContentProgressService
             );
         }
 
-        event(new UserContentProgressSaved($userId, $contentId));
+        $content = $this->contentService->getById($contentId);
+
+        $userContentProgress = $this->userContentRepository->findOneBy([
+            'userId' => $userId,
+            'content' => $content
+        ]);
+        if(!$userContentProgress){
+            $userContentProgress = new UserContentProgress();
+            $userContentProgress->setUserId($userId);
+            $userContentProgress->setContent($content);
+        }
+
+        $userContentProgress->setProgressPercent(100);
+        $userContentProgress->setState(self::STATE_COMPLETED);
+        $userContentProgress->setUpdatedOn(Carbon::parse(now()));
+
+        $this->entityManager->persist($userContentProgress);
+        $this->entityManager->flush();
+//        $this->userContentRepository->query()
+//            ->updateOrCreate(
+//                [
+//                    'content_id' => $contentId,
+//                    'user_id' => $userId,
+//                ],
+//                [
+//                    'state' => self::STATE_COMPLETED,
+//                    'progress_percent' => 100,
+//                    'updated_on' => Carbon::now()
+//                        ->toDateTimeString(),
+//                ]
+//            );
+
+
+
+     //   event(new UserContentProgressSaved($userId, $contentId));
 
         CacheHelper::deleteUserFields(
             [
@@ -326,40 +334,6 @@ class UserContentProgressService
      */
     public function saveContentProgress($contentId, $progress, $userId, $overwriteComplete = false)
     {
-        $currentProgress =
-            $this->userContentRepository->query()
-                ->where(
-                    [
-                        'content_id' => $contentId,
-                        'user_id' => $userId,
-                    ]
-                )
-                ->orderBy('updated_on', 'desc')
-                ->first();
-
-        if (!$overwriteComplete &&
-            ($currentProgress['state'] == 'completed' || $currentProgress['progress_percent'] == 100)) {
-            return true;
-        }
-
-        if ($progress == 100) {
-            return $this->completeContent($contentId, $userId);
-        }
-
-        $this->userContentRepository->query()
-            ->updateOrCreate(
-                [
-                    'content_id' => $contentId,
-                    'user_id' => $userId,
-                ],
-                [
-                    'state' => self::STATE_STARTED,
-                    'progress_percent' => $progress,
-                    'updated_on' => Carbon::now()
-                        ->toDateTimeString(),
-                ]
-            );
-
         if (is_null($contentId)) {
             error_log(
                 print_r(
@@ -374,6 +348,63 @@ class UserContentProgressService
             );
         }
 
+        $content = $this->contentService->getById($contentId);
+
+        $userContentProgress = $this->userContentRepository->findOneBy([
+            'content' =>  $content,
+            'userId' => $userId
+        ]);
+
+
+//            $this->userContentRepository->query()
+//                ->where(
+//                    [
+//                        'content_id' => $contentId,
+//                        'user_id' => $userId,
+//                    ]
+//                )
+//                ->orderBy('updated_on', 'desc')
+//                ->first();
+
+        if ($userContentProgress && !$overwriteComplete &&
+            ($userContentProgress->getState() == 'completed' || $userContentProgress->getProgressProcent() == 100)) {
+            return true;
+        }
+
+        if(!$userContentProgress){
+            $userContentProgress = new UserContentProgress();
+            $userContentProgress->setUserId($userId);
+            $userContentProgress->setContent($content);
+        }
+
+        $userContentProgress->setProgressPercent($progress);
+        $userContentProgress->setState(($progress == 100)?self::STATE_COMPLETED : self::STATE_STARTED);
+        $userContentProgress->setUpdatedOn(Carbon::parse(now()));
+
+        $this->entityManager->persist($userContentProgress);
+        $this->entityManager->flush();
+
+
+//        if ($progress == 100) {
+//            return $this->completeContent($contentId, $userId);
+//        }
+//
+//        $this->userContentRepository->query()
+//            ->updateOrCreate(
+//                [
+//                    'content_id' => $contentId,
+//                    'user_id' => $userId,
+//                ],
+//                [
+//                    'state' => self::STATE_STARTED,
+//                    'progress_percent' => $progress,
+//                    'updated_on' => Carbon::now()
+//                        ->toDateTimeString(),
+//                ]
+//            );
+
+
+
         CacheHelper::deleteUserFields(
             [
                 Cache::store(ConfigService::$cacheDriver)
@@ -384,7 +415,7 @@ class UserContentProgressService
 
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressSaved($userId, $contentId));
+        //event(new UserContentProgressSaved($userId, $contentId));
 
         return true;
     }
@@ -397,6 +428,8 @@ class UserContentProgressService
      */
     public function attachProgressToContents($userId, $contentOrContents)
     {
+        return $contentOrContents;
+
         if (empty($userId) || empty($contentOrContents)) {
             return $contentOrContents;
         }
@@ -417,6 +450,7 @@ class UserContentProgressService
         }
 
         if (!empty($contentIds)) {
+            dd($contentIds);
             $contentProgressions =
                 $this->userContentRepository->query()
                     ->getByUserIdAndWhereContentIdIn($userId, $contentIds);

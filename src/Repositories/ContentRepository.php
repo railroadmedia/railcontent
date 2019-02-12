@@ -59,19 +59,6 @@ class ContentRepository extends EntityRepository
     private $slugHierarchy = [];
     private $requiredParentIds = [];
 
-    /**
-     * @return CachedQuery|$this
-     */
-//    protected function newQuery()
-//    {
-//        return (new ContentQueryBuilder(
-//            $this->connection(),
-//            $this->connection()
-//                ->getQueryGrammar(),
-//            $this->connection()
-//                ->getPostProcessor()
-//        ))->from(ConfigService::$tableContent);
-//    }
 
     protected function decorate($results)
     {
@@ -303,46 +290,56 @@ class ContentRepository extends EntityRepository
             array_unshift($groupByColumns, ConfigService::$tableContent . '.' . $orderByColumn);
         }
 
-        $qb = $this->build()
-            ->restrictByUserAccess()
-            ->restrictByTypes($this->typesToInclude)
-            ->restrictByParentIds($this->requiredParentIds)
-            ->getQuery()->getResult();
-dd($qb);
-        $subQuery =
-            $this->newQuery()
-                ->selectCountColumns()
-                ->orderByRaw(
-                    implode(', ', $orderByColumns) . ' ' . $this->orderDirection
-                )
+        $first = ($this->page- 1) * $this->limit;
+
+        $qb =
+            $this->build()
+                ->setMaxResults($this->limit)
+                ->setFirstResult($first)
                 ->restrictByUserAccess()
-                ->directPaginate($this->page, $this->limit)
-                ->restrictByFields($this->requiredFields)
-                ->includeByFields($this->includedFields)
-                ->restrictByUserStates($this->requiredUserStates)
-                ->includeByUserStates($this->includedUserStates)
                 ->restrictByTypes($this->typesToInclude)
-                ->restrictBySlugHierarchy($this->slugHierarchy)
+                ->includeByUserStates($this->includedUserStates)
                 ->restrictByParentIds($this->requiredParentIds)
-                ->groupBy(
-                    array_merge(
-                        [
-                            ConfigService::$tableContent . '.id',
-                            ConfigService::$tableContent . '.' . 'created_on',
-                        ],
-                        $groupByColumns
-                    )
-                );
+                ->restrictByUserStates($this->requiredUserStates)
+                ->restrictBySlugHierarchy($this->slugHierarchy)
+                ->orderBy('railcontent_content.'.$this->orderBy, $this->orderDirection)
+                ->restrictByFields($this->requiredFields);
+        return $qb;
 
-        $query =
-            $this->query()
-                ->orderByRaw(
-                    implode(', ', $orderByColumns) . ' ' . $this->orderDirection
-                )
-                ->addSubJoinToQuery($subQuery)
-                ->get();
-
-        return $query;
+        //        $subQuery =
+        //            $this->newQuery()
+        //                ->selectCountColumns()
+        //                ->orderByRaw(
+        //                    implode(', ', $orderByColumns) . ' ' . $this->orderDirection
+        //                )
+        //                ->restrictByUserAccess()
+        //                ->directPaginate($this->page, $this->limit)
+        //                ->restrictByFields($this->requiredFields)
+        //                ->includeByFields($this->includedFields)
+        //                ->restrictByUserStates($this->requiredUserStates)
+        //                ->includeByUserStates($this->includedUserStates)
+        //                ->restrictByTypes($this->typesToInclude)
+        //                ->restrictBySlugHierarchy($this->slugHierarchy)
+        //                ->restrictByParentIds($this->requiredParentIds)
+        //                ->groupBy(
+        //                    array_merge(
+        //                        [
+        //                            ConfigService::$tableContent . '.id',
+        //                            ConfigService::$tableContent . '.' . 'created_on',
+        //                        ],
+        //                        $groupByColumns
+        //                    )
+        //                );
+        //
+        //        $query =
+        //            $this->query()
+        //                ->orderByRaw(
+        //                    implode(', ', $orderByColumns) . ' ' . $this->orderDirection
+        //                )
+        //                ->addSubJoinToQuery($subQuery)
+        //                ->get();
+        //
+        //        return $query;
     }
 
     /**
@@ -623,8 +620,7 @@ dd($qb);
     {
         $qb = new ContentQueryBuilder($this->getEntityManager());
 
-        return $qb
-            ->select(ConfigService::$tableContent)
-            ->from($this->getEntityName(),ConfigService::$tableContent);
+        return $qb->select(ConfigService::$tableContent)
+            ->from($this->getEntityName(), ConfigService::$tableContent);
     }
 }

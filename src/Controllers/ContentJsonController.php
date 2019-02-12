@@ -67,8 +67,8 @@ class ContentJsonController extends Controller
             $request->get('required_user_states', []),
             $request->get('included_user_states', [])
         );
-
-        return ResponseService::content($contentData);
+        $contentData = ($contentData->getArrayCopy());
+        return ResponseService::content($contentData['results'], $contentData['qb'])->respond();
 
         //        return reply()->json(
         //            $contentData['results'],

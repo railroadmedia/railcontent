@@ -51,7 +51,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
                 'slug' => $this->faker->word,
                 'brand' => ConfigService::$brand,
                 'type' => $this->faker->word,
-                'status' => $this->faker->word
+                'status' => $this->faker->word,
             ]
         );
         $fakeData = $this->populator->execute();
@@ -80,47 +80,84 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/start',
             [
-                'content_id' => 1,
+                'data' => [
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => rand(1, 100),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
         $this->assertEquals(422, $response->status());
-        $responseContent = $response->decodeResponseJson('meta');
-        $responseErrors = $responseContent['errors'];
+        $responseContent = $response->decodeResponseJson('errors');
 
         $expectedErrors = [
-            "source" => "content_id",
-            "detail" => "The selected content id is invalid.",
+            "source" => "data.relationships.content.data.id",
+            "detail" => "The selected content is invalid.",
+            'title' => 'Validation failed.',
         ];
 
-        $this->assertEquals([$expectedErrors], $responseErrors);
+        $this->assertEquals([$expectedErrors], $responseContent);
 
     }
 
     public function test_complete_content()
     {
-        $content = $this->contentFactory->create();
+        $userId = $this->createAndLogInNewUser();
+
+        $this->populator->addEntity(
+            Content::class,
+            1,
+            [
+                'slug' => $this->faker->word,
+                'brand' => ConfigService::$brand,
+                'type' => $this->faker->word,
+                'status' => $this->faker->word,
+            ]
+        );
+        $fakeData = $this->populator->execute();
+        $contentId = $fakeData[Content::class][0]->getId();
         $response = $this->put(
             'railcontent/start',
             [
-                'content_id' => $content['id'],
+                'data' => [
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $contentId,
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
         $response = $this->put(
             'railcontent/complete',
             [
-                'content_id' => $content['id'],
+                'data' => [
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $contentId,
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
         $this->assertEquals(201, $response->status());
-        $this->assertTrue($response->decodeResponseJson('data')[0][0]);
+        $this->assertTrue($response->decodeResponseJson('data'));
         $this->assertDatabaseHas(
             ConfigService::$tableUserContentProgress,
             [
-                'content_id' => $content['id'],
-                'user_id' => $this->userId,
+                'content_id' => $contentId,
+                'user_id' => $userId,
                 'state' => UserContentProgressService::STATE_COMPLETED,
                 'progress_percent' => 100,
                 'updated_on' => Carbon::now()
@@ -134,49 +171,67 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/complete',
             [
-                'content_id' => 1,
+                'data' => [
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => rand(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
         $this->assertEquals(422, $response->status());
-        $responseContent = $response->decodeResponseJson('meta');
-        $responseErrors = $responseContent['errors'];
+        $responseContent = $response->decodeResponseJson('errors');
 
         $expectedErrors = [
-            "source" => "content_id",
-            "detail" => "The selected content id is invalid.",
+            "source" => "data.relationships.content.data.id",
+            "detail" => "The selected content is invalid.",
+            'title' => 'Validation failed.',
         ];
 
-        $this->assertEquals([$expectedErrors], $responseErrors);
+        $this->assertEquals([$expectedErrors], $responseContent);
     }
 
     public function test_save_user_progress_on_content()
     {
-        $content = $this->contentFactory->create();
+        $userId = $this->createAndLogInNewUser();
 
-        $userContent = [
-            'content_id' => $content['id'],
-            'user_id' => $this->userId,
-            'state' => UserContentProgressService::STATE_STARTED,
-            'progress_percent' => $this->faker->numberBetween(0, 10),
-            'updated_on' => Carbon::now()
-                ->toDateTimeString(),
-        ];
-
-        $this->query()
-            ->table(ConfigService::$tableUserContentProgress)
-            ->insertGetId($userContent);
+        $this->populator->addEntity(
+            Content::class,
+            1,
+            [
+                'slug' => $this->faker->word,
+                'brand' => ConfigService::$brand,
+                'type' => $this->faker->word,
+                'status' => $this->faker->word,
+            ]
+        );
+        $fakeData = $this->populator->execute();
+        $contentId = $fakeData[Content::class][0]->getId();
 
         $response = $this->put(
             'railcontent/progress',
             [
-                'content_id' => $content['id'],
-                'progress_percent' => $this->faker->numberBetween(10, 99),
+                'data' => [
+                    'attributes' => [
+                        'progress_percent' => $this->faker->numberBetween(10, 99),
+                    ],
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $contentId,
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
         $this->assertEquals(201, $response->status());
-        $this->assertTrue($response->decodeResponseJson('data')[0][0]);
+        $this->assertTrue($response->decodeResponseJson('data'));
     }
 
     public function test_save_user_progress_on_content_inexistent()
@@ -186,21 +241,31 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/progress',
             [
-                'content_id' => $contentId,
-                'progress_percent' => $this->faker->numberBetween(10, 99),
+                'data' => [
+                    'attributes' => [
+                        'progress_percent' => $this->faker->numberBetween(10, 99),
+                    ],
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => rand(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
         $this->assertEquals(422, $response->status());
 
-        $responseContent = $response->decodeResponseJson('meta');
-        $responseErrors = $responseContent['errors'];
+        $responseContent = $response->decodeResponseJson('errors');
 
         $expectedErrors = [
-            "source" => "content_id",
-            "detail" => "The selected content id is invalid.",
+            "source" => "data.relationships.content.data.id",
+            "detail" => "The selected content is invalid.",
+            'title' => 'Validation failed.',
         ];
 
-        $this->assertEquals([$expectedErrors], $responseErrors);
+        $this->assertEquals([$expectedErrors], $responseContent);
     }
 }

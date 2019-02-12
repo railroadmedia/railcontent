@@ -110,9 +110,9 @@ class ContentService
     public function __construct(
         EntityManager $entityManager,
         //ContentVersionRepository $versionRepository,
-       // CommentRepository $commentRepository,
+        // CommentRepository $commentRepository,
         //CommentAssignmentRepository $commentAssignmentRepository,
-       // UserContentProgressRepository $userContentProgressRepository,
+        // UserContentProgressRepository $userContentProgressRepository,
         JsonApiHydrator $jsonApiHydrator
     ) {
         $this->entityManager = $entityManager;
@@ -125,14 +125,14 @@ class ContentService
 
         $this->jsonApiHydrator = $jsonApiHydrator;
 
-       // $this->versionRepository = $versionRepository;
+        // $this->versionRepository = $versionRepository;
 
         // $this->datumRepository = $datumRepository;
         // $this->contentHierarchyRepository = $contentHierarchyRepository;
         //$this->contentPermissionRepository = $contentPermissionRepository;
 
         //$this->commentAssignationRepository = $commentAssignmentRepository;
-       // $this->userContentProgressRepository = $userContentProgressRepository;
+        // $this->userContentProgressRepository = $userContentProgressRepository;
     }
 
     /**
@@ -262,16 +262,20 @@ class ContentService
                 $this->contentRepository->build()
                     ->restrictByUserAccess()
                     ->whereIn(ConfigService::$tableContent . '.type', $types)
-            ->andWhere(ConfigService::$tableContent . '.status = :status')
-            ->setParameter('status', $status);
-            if (in_array($fieldKey,
+                    ->andWhere(ConfigService::$tableContent . '.status = :status')
+                    ->setParameter('status', $status);
+            if (in_array(
+                $fieldKey,
                 $this->entityManager->getClassMetadata(Content::class)
                     ->getFieldNames()
             )) {
-                $qb->andWhere(ConfigService::$tableContent . '.' . $fieldKey .' '.$fieldComparisonOperator. ' (:value)')
+                $qb->andWhere(
+                    ConfigService::$tableContent . '.' . $fieldKey . ' ' . $fieldComparisonOperator . ' (:value)'
+                )
                     ->setParameter('value', $fieldValue);
             } else {
-                if (in_array($fieldKey,
+                if (in_array(
+                    $fieldKey,
                     $this->entityManager->getClassMetadata(Content::class)
                         ->getAssociationNames()
                 )) {
@@ -282,50 +286,51 @@ class ContentService
                             ->getFieldName($fieldKey),
                         'p'
                     )
-                        ->andWhere('p '.$fieldComparisonOperator.' (:value)')
+                        ->andWhere('p ' . $fieldComparisonOperator . ' (:value)')
                         ->setParameter('value', $fieldValue);
                 }
             }
 
-
             $results = CacheHelper::saveUserCache(
-                $hash, $qb->getQuery()->getResult()
-//                $this->contentRepository->query()
-//                    ->selectPrimaryColumns()
-//                    ->restrictByUserAccess()
-//                    ->join(
-//                        ConfigService::$tableContentFields,
-//                        function (JoinClause $joinClause) use (
-//                            $fieldKey,
-//                            $fieldValue,
-//                            $fieldType,
-//                            $fieldComparisonOperator
-//                        ) {
-//                            $joinClause->on(
-//                                ConfigService::$tableContentFields . '.content_id',
-//                                '=',
-//                                ConfigService::$tableContent . '.id'
-//                            )
-//                                ->where(
-//                                    ConfigService::$tableContentFields . '.key',
-//                                    '=',
-//                                    $fieldKey
-//                                )
-//                                ->where(
-//                                    ConfigService::$tableContentFields . '.type',
-//                                    '=',
-//                                    $fieldType
-//                                )
-//                                ->where(
-//                                    ConfigService::$tableContentFields . '.value',
-//                                    $fieldComparisonOperator,
-//                                    $fieldValue
-//                                );
-//                        }
-//                    )
-//                    ->whereIn(ConfigService::$tableContent . '.type', $types)
-//                    ->where(ConfigService::$tableContent . '.status', $status)
-//                    ->get()
+                $hash,
+                $qb->getQuery()
+                    ->getResult()
+            //                $this->contentRepository->query()
+            //                    ->selectPrimaryColumns()
+            //                    ->restrictByUserAccess()
+            //                    ->join(
+            //                        ConfigService::$tableContentFields,
+            //                        function (JoinClause $joinClause) use (
+            //                            $fieldKey,
+            //                            $fieldValue,
+            //                            $fieldType,
+            //                            $fieldComparisonOperator
+            //                        ) {
+            //                            $joinClause->on(
+            //                                ConfigService::$tableContentFields . '.content_id',
+            //                                '=',
+            //                                ConfigService::$tableContent . '.id'
+            //                            )
+            //                                ->where(
+            //                                    ConfigService::$tableContentFields . '.key',
+            //                                    '=',
+            //                                    $fieldKey
+            //                                )
+            //                                ->where(
+            //                                    ConfigService::$tableContentFields . '.type',
+            //                                    '=',
+            //                                    $fieldType
+            //                                )
+            //                                ->where(
+            //                                    ConfigService::$tableContentFields . '.value',
+            //                                    $fieldComparisonOperator,
+            //                                    $fieldValue
+            //                                );
+            //                        }
+            //                    )
+            //                    ->whereIn(ConfigService::$tableContent . '.type', $types)
+            //                    ->where(ConfigService::$tableContent . '.status', $status)
+            //                    ->get()
             );
         }
 
@@ -420,16 +425,18 @@ class ContentService
                 $hash,
                 $this->contentRepository->build()
                     ->restrictByUserAccess()
-                    ->where(ConfigService::$tableContent .'.slug = :slug')
-                    ->andWhere(ConfigService::$tableContent .'.type = :type')
+                    ->where(ConfigService::$tableContent . '.slug = :slug')
+                    ->andWhere(ConfigService::$tableContent . '.type = :type')
                     ->andWhere(ConfigService::$tableContent . '.userId = :userId')
-                    ->setParameters([
-                        'slug' => $slug,
-                        'type' => $type,
-                        'userId' => $userId
-                    ])
-                ->getQuery()
-                ->getResult()
+                    ->setParameters(
+                        [
+                            'slug' => $slug,
+                            'type' => $type,
+                            'userId' => $userId,
+                        ]
+                    )
+                    ->getQuery()
+                    ->getResult()
             );
         }
 
@@ -605,9 +612,9 @@ class ContentService
         $qb = $this->contentRepository->build();
 
         return $qb->select(
-                $qb->expr()
-                    ->count(ConfigService::$tableContent)
-            )
+            $qb->expr()
+                ->count(ConfigService::$tableContent)
+        )
             ->restrictByUserAccess()
             ->join(ConfigService::$tableContent . '.parent', 'p')
             ->whereIn(ConfigService::$tableContent . '.type', $types)
@@ -1108,37 +1115,16 @@ class ContentService
                 );
             }
 
-            $queryBuilder = $this->contentRepository->createQueryBuilder('c');
-
-            $results =
-                $queryBuilder->setMaxResults($limit)
-                    ->setFirstResult($page)
-                    ->getQuery()
-                    ->getResult();
-            dd($this->contentRepository
-                ->retrieveFilter());
-
-            $contentsQuery = $this->contentRepository->build()//->createQueryBuilder('c')
-            ->restrictByFields($filter->requiredFields)// ->setMaxResults($limit)
-            //->setFirstResult($page)
-            ->getQuery()
-                ->getResult();
-            return $contentsQuery;
-
-            return $contentsQuery->setMaxResults($limit)
-                ->setFirstResult($page)
-                ->getQuery()
-                ->getResult();
+            $qb = $this->contentRepository->retrieveFilter();
 
             $resultsDB = new ContentFilterResultsEntity(
                 [
-                    'results' => $this->contentRepository->query()
-                        ->retrieveFilter(),
-                    'total_results' => $this->contentRepository->query()
-                        ->countFilter(),
-                    'filter_options' => $pullFilterFields ?
-                        $this->contentRepository->query()
-                            ->getFilterFields() : [],
+                    'qb' => $qb,
+                    'results' => $qb->getQuery()
+                        ->getResult(),
+                    //                    'filter_options' => $pullFilterFields ?
+                    //                        $this->contentRepository->query()
+                    //                            ->getFilterFields() : [],
                 ]
             );
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
@@ -1404,14 +1390,16 @@ class ContentService
                 $this->contentRepository->build()
                     ->restrictByUserAccess()
                     ->whereIn(ConfigService::$tableContent . '.type', $contentTypes);
-            if (in_array($contentFieldKey,
+            if (in_array(
+                $contentFieldKey,
                 $this->entityManager->getClassMetadata(Content::class)
                     ->getFieldNames()
             )) {
                 $qb->andWhere(ConfigService::$tableContent . '.' . $contentFieldKey . ' IN (:value)')
                     ->setParameter('value', $contentFieldValues);
             } else {
-                if (in_array($contentFieldKey,
+                if (in_array(
+                    $contentFieldKey,
                     $this->entityManager->getClassMetadata(Content::class)
                         ->getAssociationNames()
                 )) {

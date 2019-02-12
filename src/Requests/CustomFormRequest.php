@@ -7,6 +7,8 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Factory as ValidationFactory;
 use Illuminate\Validation\ValidationException;
+use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\Entity;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
@@ -57,6 +59,8 @@ class CustomFormRequest extends FormRequest
      */
     private $contentHierarchyService;
 
+    private $jsonApiHydrator;
+
     /**
      * ValidationService constructor.
      *
@@ -64,13 +68,15 @@ class CustomFormRequest extends FormRequest
      */
     public function __construct(
         ContentService $contentService,
-        ContentDatumService $contentDatumService
+        ContentDatumService $contentDatumService,
+JsonApiHydrator $jsonApiHydrator
 //        //ContentFieldService $contentFieldService,
 //        ValidationFactory $validationFactory,
 //        ContentHierarchyService $contentHierarchyService
     ) {
         $this->contentService = $contentService;
         $this->contentDatumService = $contentDatumService;
+        $this->jsonApiHydrator = $jsonApiHydrator;
 //        //$this->contentFieldService = $contentFieldService;
 //        $this->validationFactory = $validationFactory;
 //        $this->contentHierarchyService = $contentHierarchyService;
@@ -658,7 +664,9 @@ dd('ajunge?');
     private function getContentFromRequest(Request $request)
     {
         if ($request instanceof ContentCreateRequest) {
-            return $request->get('data')['attributes'];
+            $content = new Content();
+            $this->jsonApiHydrator->hydrate($content, $request->onlyAllowed());
+            return $content;
         }
 
 //        if ($request instanceof ContentUpdateRequest) {

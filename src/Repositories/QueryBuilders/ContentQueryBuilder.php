@@ -6,8 +6,10 @@ use Carbon\Carbon;
 use Doctrine\ORM\Query\Expr\Join;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentField;
 use Railroad\Railcontent\Entities\ContentHierarchy;
+use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Queries\CachedQuery;
@@ -152,41 +154,10 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
             return $this;
         }
 
-        $this->whereIn(
-            ConfigService::$tableContent . '.id',
-            function (Builder $builder) use ($slugHierarchy) {
-                $builder->select([ConfigService::$tableContent . '.id'])
-                    ->from(ConfigService::$tableContent);
-
-                $previousTableName = ConfigService::$tableContent;
-                $previousTableJoinColumn = '.id';
-
-                foreach (array_reverse($slugHierarchy) as $i => $slug) {
-                    $tableName = 'inheritance_' . $i;
-
-                    $builder->leftJoin(
-                        ConfigService::$tableContentHierarchy . ' as ' . $tableName,
-                        $tableName . '.child_id',
-                        '=',
-                        $previousTableName . $previousTableJoinColumn
-                    );
-
-                    $inheritedContentTableName = 'inherited_content_' . $i;
-
-                    $builder->leftJoin(
-                        ConfigService::$tableContent . ' as ' . $inheritedContentTableName,
-                        $inheritedContentTableName . '.id',
-                        '=',
-                        $tableName . '.parent_id'
-                    );
-
-                    $builder->where($inheritedContentTableName . '.slug', $slug);
-
-                    $previousTableName = $tableName;
-                    $previousTableJoinColumn = '.parent_id';
-                }
-            }
-        );
+        $this->join(ContentHierarchy::class, 'hierarchy', 'WITH', 'railcontent_content.id = hierarchy.child');
+        $this->join(Content::class, 'inherited_content_', 'WITH', 'hierarchy.parent = inherited_content_.id');
+        $this->andWhere('inherited_content_.slug IN (:slugs)')
+            ->setParameter('slugs', $slugHierarchy);
 
         return $this;
     }
@@ -233,7 +204,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
             'where',
             $this->expr()
                 ->in(
-                    ConfigService::$tableContent .'.brand',
+                    ConfigService::$tableContent . '.brand',
                     array_values(array_wrap(ConfigService::$availableBrands))
                 )
         );
@@ -263,18 +234,11 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
         if (empty($parentIds)) {
             return $this;
         }
-        $this->join(ContentHierarchy::class, 'h');
-        $this->andWhere( 'h.parent IN (:parentIds)')
-        ->setParameter('parentIds', $parentIds);
-//        $this->whereIn(
-//            ConfigService::$tableContent . '.id',
-//            function (Builder $builder) use ($parentIds) {
-//                $builder->select([ConfigService::$tableContentHierarchy . '.child_id'])
-//                    ->from(ConfigService::$tableContentHierarchy)
-//                    ->whereIn('parent_id', $parentIds);
-//            }
-//        );
-//
+
+        $this->join(ContentHierarchy::class, 'ph', 'WITH', 'railcontent_content.id = ph.child');
+        $this->andWhere('ph.parent IN (:parentIds)')
+            ->setParameter('parentIds', $parentIds);
+
         return $this;
     }
 
@@ -289,30 +253,12 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
         }
 
         foreach ($requiredUserStates as $index => $requiredUserState) {
-            $tableName = 'ucp_' . $index;
-
-            $this->join(
-                ConfigService::$tableUserContentProgress . ' as ' . $tableName,
-                function (JoinClause $joinClause) use ($requiredUserState, $tableName) {
-                    $joinClause->on(
-                        $tableName . '.content_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                        ->on(
-                            $tableName . '.user_id',
-                            '=',
-                            $joinClause->raw("'" . $requiredUserState['user_id'] . "'")
-                        )
-                        ->on(
-                            $tableName . '.state',
-                            '=',
-                            $joinClause->raw("'" . $requiredUserState['state'] . "'")
-                        );
-                }
-            );
+            $this->join(UserContentProgress::class, 'p', 'WITH', 'railcontent_content.id = p.content');
+            $this->andWhere('p.state IN (:states)')
+                ->andWhere('p.userId = :userId')
+                ->setParameter('states', $requiredUserState['state'])
+                ->setParameter('userId', $requiredUserState['user_id']);
         }
-
         return $this;
     }
 
@@ -325,39 +271,25 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
         if (empty($includedUserStates)) {
             return $this;
         }
+        $this->join(UserContentProgress::class, 'pu', 'WITH', 'railcontent_content.id = pu.content');
+        $orX =
+            $this->expr()
+                ->orX();
+        foreach ($includedUserStates as $includedUserState) {
+            $condition =
+                $this->expr()
+                    ->andX(
+                        'pu.state  = ' .
+                        $this->expr()
+                            ->literal($includedUserState['state']) .
+                        ' AND pu.userId = ' .
+                        $this->expr()
+                            ->literal($includedUserState['user_id'])
+                    );
 
-        $this->join(
-            ConfigService::$tableUserContentProgress,
-            function (JoinClause $joinClause) use ($includedUserStates) {
-                $joinClause->on(
-                    ConfigService::$tableUserContentProgress . '.content_id',
-                    '=',
-                    ConfigService::$tableContent . '.id'
-                );
-
-                $joinClause->on(
-                    function (JoinClause $joinClause) use ($includedUserStates) {
-                        foreach ($includedUserStates as $index => $includedUserState) {
-                            $joinClause->orOn(
-                                function (JoinClause $joinClause) use ($includedUserState) {
-                                    $joinClause->on(
-                                        ConfigService::$tableUserContentProgress . '.user_id',
-                                        '=',
-                                        $joinClause->raw("'" . $includedUserState['user_id'] . "'")
-                                    )
-                                        ->on(
-                                            ConfigService::$tableUserContentProgress . '.state',
-                                            '=',
-                                            $joinClause->raw("'" . $includedUserState['state'] . "'")
-                                        );
-                                }
-                            );
-                        }
-                    }
-
-                );
-            }
-        );
+            $orX->add($condition);
+        }
+        $this->andWhere($orX);
 
         return $this;
     }
@@ -371,53 +303,38 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
         if (empty($requiredFields)) {
             return $this;
         }
-        //dd($requiredFields);
+
         foreach ($requiredFields as $index => $requiredFieldData) {
-            $tableName = 'cf_' . $index;
+            if (in_array(
+                $requiredFieldData['name'],
+                $this->getEntityManager()
+                    ->getClassMetadata(Content::class)
+                    ->getFieldNames()
+            )) {
+                $this->andWhere(ConfigService::$tableContent . '.' . $requiredFieldData['name'] . ' IN (:value)')
+                    ->setParameter('value', $requiredFieldData['value']);
+            } else {
+                if (in_array(
+                    $requiredFieldData['name'],
+                    $this->getEntityManager()
+                        ->getClassMetadata(Content::class)
+                        ->getAssociationNames()
+                )) {
+                    $this->join(
+                        ConfigService::$tableContent .
+                        '.' .
+                        $this->getEntityManager()
+                            ->getClassMetadata(Content::class)
+                            ->getFieldName($requiredFieldData['name']),
+                        'p'
+                    )
+                        ->andWhere('p IN (:value)')
+                        ->setParameter('value', $requiredFieldData['value']);
+                }
+            }
 
-            $this->addSelect($tableName)
-                ->leftJoin(
-                    ConfigService::$tableContent . '.fields',
-                    $tableName,
-                    Join::WITH,
-                    $this->expr()
-                        ->andX(
-                            $this->expr()
-                                ->eq($tableName . '.content', 'railcontent_content.id'),
-                            $this->expr()
-                                ->eq($tableName . '.key', ':key' . $index),
-                            $this->expr()
-                                ->eq($tableName . '.value', ':value' . $index)
-                        )
-                // 'railcontent_content.id = '.$tableName.'.content'
-                )
-                ->setParameter('key' . $index, $requiredFieldData['name'])
-                ->setParameter('value' . $index, $requiredFieldData['value']);
-
-            //            $this->join(
-            //                ConfigService::$tableContentFields . ' as ' . $tableName,
-            //                function (JoinClause $joinClause) use ($requiredFieldData, $tableName) {
-            //                    $joinClause->on(
-            //                        $tableName . '.content_id',
-            //                        '=',
-            //                        ConfigService::$tableContent . '.id'
-            //                    )
-            //                        ->on(
-            //                            $tableName . '.key',
-            //                            '=',
-            //                            $joinClause->raw("'" . $requiredFieldData['name'] . "'")
-            //                        )
-            //                        ->on(
-            //                            $tableName . '.value',
-            //                            $requiredFieldData['operator'],
-            //                            is_numeric($requiredFieldData['value']) ? $joinClause->raw($requiredFieldData['value']) :
-            //                                $joinClause->raw("'" . $requiredFieldData['value'] . "'")
-            //                        );
-            //                }
-            //            );
+            return $this;
         }
-
-        return $this;
     }
 
     /**
@@ -547,12 +464,10 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
      */
     public function restrictByUserAccess()
     {
-        $this
-            ->restrictStatuses()
+        $this->restrictStatuses()
             ->restrictPublishedOnDate()
             ->restrictBrand()
-            ->restrictByPermissions()
-        ;
+            ->restrictByPermissions();
 
         return $this;
     }
