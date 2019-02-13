@@ -9,7 +9,9 @@ use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentField;
 use Railroad\Railcontent\Entities\ContentHierarchy;
+use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\UserContentProgress;
+use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Queries\CachedQuery;
@@ -393,68 +395,117 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
         if (ContentRepository::$bypassPermissions === true) {
             return $this;
         }
-
-        $this->leftJoin(
-            ConfigService::$tableContentPermissions . ' as id_content_permissions',
-            function (JoinClause $join) {
-                $join->on(
-                    'id_content_permissions' . '.content_id',
-                    ConfigService::$tableContent . '.id'
-                );
-            }
+        $this->join(
+            ContentPermission::class,
+            'content_permission',
+            'WITH',
+            $this->expr()
+                ->orX(
+                    $this->expr()
+                        ->eq('railcontent_content.id', 'content_permission.content'),
+                    $this->expr()
+                        ->eq('railcontent_content.id', 'content_permission.contentType')
+                )
         )
-            ->leftJoin(
-                ConfigService::$tableContentPermissions . ' as type_content_permissions',
-                function (JoinClause $join) {
-                    $join->on(
-                        'type_content_permissions' . '.content_type',
-                        ConfigService::$tableContent . '.type'
-                    )
-                        ->whereIn('type_content_permissions' . '.brand', ConfigService::$availableBrands);
-                }
-            )
-            ->where(
-                function (Builder $builder) {
-                    return $builder->where(
-                        function (Builder $builder) {
-                            return $builder->whereNull(
-                                'id_content_permissions' . '.permission_id'
-                            )
-                                ->whereNull(
-                                    'type_content_permissions' . '.permission_id'
-                                );
-                        }
-                    )
-                        ->orWhereExists(
-                            function (Builder $builder) {
-                                return $builder->select('id')
-                                    ->from(ConfigService::$tableUserPermissions)
-                                    ->where('user_id', auth()->user()->id ?? null)
-                                    ->where(
-                                        function (Builder $builder) {
-                                            return $builder->whereRaw(
-                                                'permission_id = id_content_permissions.permission_id'
-                                            )
-                                                ->orWhereRaw(
-                                                    'permission_id = type_content_permissions.permission_id'
-                                                );
-                                        }
-                                    )
-                                    ->where(
-                                        function (Builder $builder) {
-                                            return $builder->where(
-                                                'expiration_date',
-                                                '>=',
-                                                Carbon::now()
-                                                    ->toDateTimeString()
-                                            )
-                                                ->orWhereNull('expiration_date');
-                                        }
-                                    );
-                            }
-                        );
-                }
+            ->join(
+                UserPermission::class,
+                'user_permission',
+                'WITH',
+                'content_permission.permission = user_permission.permission'
             );
+        $this->andWhere(
+            $this->expr()
+                ->orX(
+                    $this->expr()
+                        ->isNull('content_permission.id'),
+                    $this->expr()
+                        ->andX(
+                            $this->expr()
+                                ->eq('user_permission.userId', ':userId'),
+                            $this->expr()
+                                ->orX(
+                                    $this->expr()
+                                        ->isNull('user_permission.expirationDate'),
+                                    $this->expr()
+                                        ->gte('user_permission.expirationDate', ':expirationDateOrNow')
+                                )
+                        )
+
+                )
+        )
+            ->setParameter(
+                'expirationDateOrNow',
+                Carbon::now()
+            )
+            ->setParameter(
+                'userId',
+                auth()->id()
+            );
+
+        return $this;
+
+
+//        $this->leftJoin(
+//            ConfigService::$tableContentPermissions . ' as id_content_permissions',
+//            function (JoinClause $join) {
+//                $join->on(
+//                    'id_content_permissions' . '.content_id',
+//                    ConfigService::$tableContent . '.id'
+//                );
+//            }
+//        )
+//            ->leftJoin(
+//                ConfigService::$tableContentPermissions . ' as type_content_permissions',
+//                function (JoinClause $join) {
+//                    $join->on(
+//                        'type_content_permissions' . '.content_type',
+//                        ConfigService::$tableContent . '.type'
+//                    )
+//                        ->whereIn('type_content_permissions' . '.brand', ConfigService::$availableBrands);
+//                }
+//            )
+//            ->where(
+//                function (Builder $builder) {
+//                    return $builder->where(
+//                        function (Builder $builder) {
+//                            return $builder->whereNull(
+//                                'id_content_permissions' . '.permission_id'
+//                            )
+//                                ->whereNull(
+//                                    'type_content_permissions' . '.permission_id'
+//                                );
+//                        }
+//                    )
+//                        ->orWhereExists(
+//                            function (Builder $builder) {
+//                                return $builder->select('id')
+//                                    ->from(ConfigService::$tableUserPermissions)
+//                                    ->where('user_id', auth()->user()->id ?? null)
+//                                    ->where(
+//                                        function (Builder $builder) {
+//                                            return $builder->whereRaw(
+//                                                'permission_id = id_content_permissions.permission_id'
+//                                            )
+//                                                ->orWhereRaw(
+//                                                    'permission_id = type_content_permissions.permission_id'
+//                                                );
+//                                        }
+//                                    )
+//                                    ->where(
+//                                        function (Builder $builder) {
+//                                            return $builder->where(
+//                                                'expiration_date',
+//                                                '>=',
+//                                                Carbon::now()
+//                                                    ->toDateTimeString()
+//                                            )
+//                                                ->orWhereNull('expiration_date');
+//                                        }
+//                                    );
+//                            }
+//                        );
+//                }
+//            );
 
         return $this;
     }

@@ -43,7 +43,7 @@ class ContentRepository extends EntityRepository
      *
      * @var array|bool
      */
-    public static $bypassPermissions = true;
+    public static $bypassPermissions = false;
 
     public $requiredFields = [];
     private $includedFields = [];
@@ -58,7 +58,6 @@ class ContentRepository extends EntityRepository
     private $typesToInclude = [];
     private $slugHierarchy = [];
     private $requiredParentIds = [];
-
 
     protected function decorate($results)
     {
@@ -278,10 +277,13 @@ class ContentRepository extends EntityRepository
     {
         $orderByExploded = explode(' ', $this->orderBy);
 
-        $orderByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
-        $groupByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
+        $orderByColumns = [ConfigService::$tableContent . '.' . 'createdOn'];
+        $groupByColumns = [ConfigService::$tableContent . '.' . 'createdOn'];
 
         foreach ($orderByExploded as $orderByColumn) {
+            if (strpos($orderByColumn, '_') !== false || strpos($orderByColumn, '-') !== false) {
+                $orderByColumn = camel_case($orderByColumn);
+            }
             array_unshift(
                 $orderByColumns,
                 ConfigService::$tableContent . '.' . $orderByColumn . ' ' . $this->orderDirection
@@ -290,7 +292,7 @@ class ContentRepository extends EntityRepository
             array_unshift($groupByColumns, ConfigService::$tableContent . '.' . $orderByColumn);
         }
 
-        $first = ($this->page- 1) * $this->limit;
+        $first = ($this->page - 1) * $this->limit;
 
         $qb =
             $this->build()
@@ -302,7 +304,7 @@ class ContentRepository extends EntityRepository
                 ->restrictByParentIds($this->requiredParentIds)
                 ->restrictByUserStates($this->requiredUserStates)
                 ->restrictBySlugHierarchy($this->slugHierarchy)
-                ->orderBy('railcontent_content.'.$this->orderBy, $this->orderDirection)
+                ->orderBy(implode(', ', $orderByColumns))
                 ->restrictByFields($this->requiredFields);
         return $qb;
 

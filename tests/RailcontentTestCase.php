@@ -28,8 +28,10 @@ use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentInstructor;
+use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Entities\UserContentProgress;
+use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Services\RemoteStorageService;
@@ -676,6 +678,54 @@ class RailcontentTestCase extends BaseTestCase
         $fakePopulator = $this->populator->execute();
 
         return $fakePopulator[Comment::class];
+    }
+
+    public function fakeContentPermission($nr = 1, $commentData = [])
+    {
+
+        if (empty($commentData)) {
+            $commentData = [
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+            ];
+        }
+        if(!array_key_exists('permission', $commentData)){
+            $commentData['permission'] = $this->fakePermission()[0];
+        }
+
+        $this->populator->addEntity(
+            ContentPermission::class,
+            $nr,
+            $commentData
+        );
+
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[ContentPermission::class];
+    }
+
+    public function fakeUserPermission($nr = 1, $commentData = [])
+    {
+
+        if (empty($commentData)) {
+            $commentData = [
+                'userId' => 1,
+                'startDate' => Carbon::now(),
+            ];
+        }
+        if(!array_key_exists('permission', $commentData)){
+            $commentData['permission'] = $this->fakePermission()[0];
+        }
+
+        $this->populator->addEntity(
+            UserPermission::class,
+            $nr,
+            $commentData
+        );
+
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[UserPermission::class];
     }
 
 }

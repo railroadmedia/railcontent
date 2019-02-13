@@ -9,6 +9,7 @@ use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentInstructor;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Entities\UserContentProgress;
+use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -605,11 +606,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
     {
         $parent = $this->fakeContent();
         $child = $this->fakeContent();
-        $hierarchy = $this->fakeHierarchy(1,
+        $hierarchy = $this->fakeHierarchy(
+            1,
             [
                 'parent' => $parent[0],
-                'child' => $child[0]
-            ]);
+                'child' => $child[0],
+            ]
+        );
 
         $response = $this->call(
             'GET',
@@ -739,100 +742,98 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_pull_content_permission()
     {
+        $userId = $this->createAndLogInNewUser();
         $content1 = $this->fakeContent();
 
         $permission = $this->fakePermission();
 
-        $contentPermission = $this->contentPermissionRepository->create(
+        $this->fakeContentPermission(
+            1,
             [
-                'content_id' => $content1['id'],
-                'permission_id' => $permission['id'],
+                'content' => $content1[0],
+                'permission' => $permission[0],
             ]
         );
-        $userPermission = $this->userPermissionRepository->create(
+
+        $content2 = $this->fakeContent();
+
+        $permission2 = $this->fakePermission();
+
+        $this->fakeContentPermission(
+            1,
             [
-                'user_id' => 1,
-                'permission_id' => $permission['id'],
-                'start_date' => Carbon::now()
-                    ->subMonth(2)
-                    ->toDateTimeString(),
-                'expiration_date' => Carbon::now()
-                    ->subMonth(1)
-                    ->toDateTimeString(),
-                'created_on' => Carbon::now()
-                    ->subMonth(2)
-                    ->toDateTimeString(),
+                'content' => $content2[0],
+                'permission' => $permission2[0],
             ]
         );
-        $content2 = $this->contentFactory->create(
-            $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
+
+        $userPermission = $this->fakeUserPermission(
+            1,
+            [
+                'permission' => $permission[0],
+                'userId' => $userId,
+                'startDate' => Carbon::parse(now())
+                    ->subMonth(2),
+                'expirationDate' => Carbon::parse(now())
+                    ->addMonth(1),
+            ]
         );
 
         $response = $this->call(
             'GET',
             'railcontent/content/get-by-ids',
-            ['ids' => $content2['id'] . ',' . $content1['id']]
+            ['ids' => $content2[0]->getId() . ',' . $content1[0]->getId()]
         );
-        $expectedResults = [(array)$content2];
+        $results = $response->decodeResponseJson('data');
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+        $this->assertEquals(1, count($results));
+        $this->assertEquals($content1[0]->getId(), $results[0]['id']);
     }
 
-    public function _test_pull_content_user_permission()
+    public function test_pull_content_user_permission()
     {
         $user = $this->createAndLogInNewUser();
-        $content1 = $this->contentFactory->create(
-            $this->faker->word,
-            'course',
-            ContentService::STATUS_PUBLISHED
-        );
+        $contents = $this->fakeContent(2);
 
-        $content2 = $this->contentFactory->create(
-            $this->faker->word,
-            'lesson',
-            ContentService::STATUS_PUBLISHED
-        );
+        $permission = $this->fakePermission();
+        $this->fakeContentPermission(1, [
+            'content' => $contents[0],
+            'permission' => $permission[0]
+        ]);
 
-        $permission = $this->permissionRepository->create(
-            [
-                'name' => $this->faker->word,
-                'brand' => ConfigService::$brand,
-            ]
-        );
+   $this->fakeUserPermission(1, [
+       'userId' => $user,
+       'permission' => $permission[0],
+       'startDate' => Carbon::now()->subMonth(2),
+       'expirationDate' => Carbon::now()
+           ->subMonth(1)
+           ,
+   ]);
 
-        $contentPermission = $this->contentPermissionRepository->create(
-            [
-                'content_id' => $content1['id'],
-                'permission_id' => $permission['id'],
-            ]
-        );
-
-        $userPermission = $this->userPermissionRepository->create(
-            [
-                'user_id' => $user,
-                'permission_id' => $permission['id'],
-                'start_date' => Carbon::now()
-                    ->subMonth(2)
-                    ->toDateTimeString(),
-                'expiration_date' => Carbon::now()
-                    ->subMonth(1)
-                    ->toDateTimeString(),
-                'created_on' => Carbon::now()
-                    ->subMonth(2)
-                    ->toDateTimeString(),
-            ]
-        );
+//        $userPermission = $this->userPermissionRepository->create(
+//            [
+//                'user_id' => $user,
+//                'permission_id' => $permission['id'],
+//                'start_date' => Carbon::now()
+//                    ->subMonth(2)
+//                    ->toDateTimeString(),
+//                'expiration_date' => Carbon::now()
+//                    ->subMonth(1)
+//                    ->toDateTimeString(),
+//                'created_on' => Carbon::now()
+//                    ->subMonth(2)
+//                    ->toDateTimeString(),
+//            ]
+//        );
 
         $response = $this->call(
             'GET',
             'railcontent/content/get-by-ids',
-            ['ids' => $content2['id'] . ',' . $content1['id']]
+            ['ids' => $contents[0]->getId(). ',' . $contents[1]->getId()]
         );
-        $expectedResults = [(array)$content2];
-
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+       // $expectedResults = [(array)$content2];
+dd($response);
+       // $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
     }
 
 }

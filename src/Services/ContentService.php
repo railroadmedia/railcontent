@@ -177,10 +177,12 @@ class ContentService
         if (!$results) {
             $unorderedContentRows =
                 $this->contentRepository->build()
-                    ->restrictByUserAccess()
                     ->whereIn(ConfigService::$tableContent . '.id', $ids)
+                    ->restrictByUserAccess()
+
                     ->getQuery()
-                    ->getResult();
+            //dd($unorderedContentRows->getDql());
+                  ->getResult();
 
             // restore order of ids passed in
             $contentRows = [];
