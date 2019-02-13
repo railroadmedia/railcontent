@@ -3,22 +3,12 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Faker\ORM\Doctrine\Populator;
-use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\ContentExercise;
 use Railroad\Railcontent\Entities\ContentHierarchy;
+use Railroad\Railcontent\Entities\ContentInstructor;
+use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Entities\UserContentProgress;
-use Railroad\Railcontent\Factories\ContentContentFieldFactory;
-use Railroad\Railcontent\Factories\ContentDatumFactory;
-use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Factories\ContentHierarchyFactory;
-use Railroad\Railcontent\Repositories\ContentPermissionRepository;
-//use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\PermissionRepository;
-use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -26,148 +16,19 @@ use Response;
 
 class ContentJsonControllerTest extends RailcontentTestCase
 {
-    //    /**
-    //     * @var ContentRepository
-    //     */
-    //    protected $classBeingTested;
-    //
-    //    /**
-    //     * @var ContentFactory
-    //     */
-    //    protected $contentFactory;
-    //
-    //    /**
-    //     * @var ContentHierarchyFactory
-    //     */
-    //    protected $contentHierarchyFactory;
-    //
-    //    /**
-    //     * @var ContentContentFieldFactory
-    //     */
-    //    protected $fieldFactory;
-    //
-    //    /**
-    //     * @var ContentDatumFactory
-    //     */
-    //    protected $contentDatumFactory;
-    //
-    //    /**
-    //     * @var ContentService
-    //     */
+    /**
+     * @var ContentService
+     */
     protected $serviceBeingTested;
-
-    private $populator;
-    //
-    //    /**
-    //     * @var \Railroad\Railcontent\Repositories\ContentPermissionRepository
-    //     */
-    //    protected $contentPermissionRepository;
-    //
-    //    /**
-    //     * @var \Railroad\Railcontent\Repositories\UserPermissionsRepository
-    //     */
-    //    protected $userPermissionRepository;
-    //
-    //    /**
-    //     * @var \Railroad\Railcontent\Repositories\PermissionRepository
-    //     */
-    //    protected $permissionRepository;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->populator = new Populator($this->faker, $this->entityManager);
-        $this->populator->addEntity(
-            Content::class,
-            1,
-            [
-                'slug' => 'slug1',
-                'status' => 'published',
-                'type' => 'course',
-                'brand' => ConfigService::$brand,
-            ]
-        );
-        $this->populator->execute();
-        $this->populator->addEntity(
-            Content::class,
-            2,
-            [
-                'slug' => 'exercise',
-                'type' => 'course',
-                'brand' => ConfigService::$brand,
-                'difficulty' => 1,
-            ]
-        );
-        $this->populator->execute();
-
-        $this->populator->addEntity(
-            ContentExercise::class,
-            1,
-            [
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'exercise' => $this->entityManager->getRepository(Content::class)
-                    ->find(2),
-            ]
-        );
-        $this->populator->execute();
-
-        $this->populator->addEntity(
-            ContentHierarchy::class,
-            1,
-            [
-                'parent' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'child' => $this->entityManager->getRepository(Content::class)
-                    ->find(2),
-                'childPosition' => 1,
-            ]
-        );
-        // $this->populator->execute();
-        $this->populator->addEntity(
-            ContentHierarchy::class,
-            1,
-            [
-                'parent' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'child' => $this->entityManager->getRepository(Content::class)
-                    ->find(3),
-                'childPosition' => 2,
-            ]
-        );
-        // $this->populator->execute();
-        $this->populator->addEntity(
-            ContentHierarchy::class,
-            1,
-            [
-                'parent' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'child' => $this->entityManager->getRepository(Content::class)
-                    ->find(4),
-                'childPosition' => 3,
-            ]
-        );
-        //$this->populator->execute();
-
-        $this->populator->addEntity(
-            UserContentProgress::class,
-            1,
-            [
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'userId' => 1,
-                'state' => 'completed',
-                'progressPercent' => 100,
-            ]
-        );
-
-        $fakeData = $this->populator->execute();
-        //dd($fakeData[Content::class]);
         $this->serviceBeingTested = $this->app->make(ContentService::class);
     }
 
-    public function _test_index_empty()
+    public function test_index_empty()
     {
         $response = $this->call('GET', 'railcontent/content');
 
@@ -347,9 +208,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_content_service_return_new_content_after_create()
     {
-        $content = [];
+        $content = $this->fakeContent(
+            1,
+            [
+                'slug' => 'slug1',
+            ]
+        );
 
-        $response = $this->call('GET', 'railcontent/content/' . 1);
+        $response = $this->call('GET', 'railcontent/content/' . $content[0]->getId());
 
         // assert the user data is subset of response
         $this->assertArraySubset(
@@ -362,9 +228,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_update_response_status()
     {
+        $content = $this->fakeContent();
+
         $response = $this->call(
             'PATCH',
-            'railcontent/content/' . 1,
+            'railcontent/content/' . $content[0]->getId(),
             [
                 'slug' => 'new slug',
                 'status' => ContentService::STATUS_PUBLISHED,
@@ -450,11 +318,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_after_update_content_is_returned_in_json_format()
     {
+        $content = $this->fakeContent();
+
         $new_slug = implode('-', $this->faker->words());
 
         $response = $this->call(
             'PATCH',
-            'railcontent/content/' . 1,
+            'railcontent/content/' . $content[0]->getId(),
             [
                 'data' => [
                     'attributes' => [
@@ -480,10 +350,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_content_service_return_updated_content_after_update()
     {
+        $content = $this->fakeContent();
 
         $new_slug = implode('-', $this->faker->words());
         $updatedContent = $this->serviceBeingTested->update(
-            1,
+            $content[0]->getId(),
             [
                 'data' => [
                     'attributes' => [
@@ -498,14 +369,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_service_delete_method_result()
     {
-        $delete = $this->serviceBeingTested->delete(1);
+        $content = $this->fakeContent();
+        $delete = $this->serviceBeingTested->delete($content[0]->getId());
 
         $this->assertTrue($delete);
     }
 
     public function test_service_delete_method_when_content_not_exist()
     {
-
         $delete = $this->serviceBeingTested->delete(rand(100, 500));
 
         $this->assertNull($delete);
@@ -513,8 +384,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_controller_delete_method_response_status()
     {
+        $content = $this->fakeContent();
 
-        $response = $this->call('DELETE', 'railcontent/content/' . 1);
+        $response = $this->call('DELETE', 'railcontent/content/' . $content[0]->getId());
 
         $this->assertEquals(204, $response->status());
 
@@ -534,8 +406,10 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(404, $response->getStatusCode());
     }
 
-    public function _test_index_response_no_results()
+    public function test_index_response_no_results()
     {
+        $randomContents = $this->fakeContent(12);
+
         $response = $this->call(
             'GET',
             'railcontent/content',
@@ -559,6 +433,15 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_index_with_results()
     {
+        $content = $this->fakeContent(
+            3,
+            [
+                'difficulty' => 1,
+                'type' => 'course',
+            ]
+        );
+        $otherContent = $this->fakeContent(12);
+
         $types = ['course'];
         $page = 1;
         $limit = 10;
@@ -648,83 +531,42 @@ class ContentJsonControllerTest extends RailcontentTestCase
     }
 
     //Get 5 courses with given string field
-    public function _test_index_with_fields_and_datum()
+    public function test_index_with_fields()
     {
-        $expectedResults = [];
         $statues = ['published'];
         $types = ['course'];
         $page = 1;
         $limit = 5;
 
-        $expectedContent = [
-            'page' => $page,
-            'limit' => $limit,
-            'status' => 'ok',
-            'code' => 200,
-        ];
-
-        //create 30th courses
-        for ($i = 0; $i < 30; $i++) {
-            $content = $this->contentFactory->create($this->faker->word, $types[0]);
-            $contents[$content->getId()] = $this->serializer->toArray($content);
-        }
-
-        //create the required field
-        $requiredField = [
-            'key' => $this->faker->word,
-            'value' => $this->faker->text(255),
-            'type' => 'string',
-        ];
-
-        //only first 5 courses have the required field associated
-        for ($i = 1; $i < 6; $i++) {
-            $field = $this->fieldFactory->create(
-                $contents[$i]['id'],
-                $requiredField['key'],
-                $requiredField['value'],
-                null,
-                $requiredField['type']
+        $randomContents = $this->fakeContent(5);
+        $contents = $this->fakeContent(
+            6,
+            [
+                'difficulty' => 1,
+                'type' => 'course',
+                'status' => 'published',
+            ]
+        );
+        $instructor = $this->fakeContent(
+            1,
+            [
+                'type' => 'instructor',
+                'status' => 'published',
+                'slug' => $this->faker->name,
+                'brand' => config('railcontent.brand'),
+            ]
+        );
+        foreach ($contents as $content) {
+            $contentInstructor = $this->fakeContentInstructor(
+                1,
+                [
+                    'content' => $content,
+                    'instructor' => $instructor[0],
+                ]
             );
-
-            $expectedResults[$i - 1] = $contents[$i];
-            $expectedResults[$i - 1]['fields'][] = $this->serializer->toArray($field);
         }
 
-        $instructor =
-            $this->contentFactory->create($this->faker->word, 'instructor', $this->faker->randomElement($statues));
-
-        $fieldInstructor = [
-            'key' => 'instructor',
-            'value' => $instructor->getId(),
-            'type' => 'content_id',
-        ];
-
-        for ($i = 1; $i < 7; $i++) {
-            $contentField = $this->fieldFactory->create(
-                $contents[$i]['id'],
-                $fieldInstructor['key'],
-                $fieldInstructor['value'],
-                null,
-                $fieldInstructor['type']
-            );
-
-            // $contentField['type'] = 'content';
-            // $contentField['value'] = (array)$instructor;
-            if (array_key_exists(($i - 1), $expectedResults)) {
-                $expectedResults[$i - 1]['fields'][] = $this->serializer->toArray($contentField);
-            }
-        }
-
-        //        for ($i = 1; $i < 25; $i++) {
-        //            $datum = $this->contentDatumFactory->create($contents[$i]['id']);
-        //            if (array_key_exists(($i - 1), $expectedResults)) {
-        //                $expectedResults[$i - 1]['data'][] = $datum->getArrayCopy();
-        //            }
-        //        }
-
-        $expectedContent['results'] = $expectedResults;
-        $expectedContent['total_results'] = count($expectedContent['results']);
-        $expectedContent['filter_options'] = [$fieldInstructor['key'] => [(array)$instructor]];
+        $randomContents = $this->fakeContent(19);
 
         $response = $this->call(
             'GET',
@@ -735,19 +577,18 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'statues' => $statues,
                 'sort' => 'id',
                 'included_types' => $types,
-                //'filter' => [
                 'required_fields' => [
-                    $requiredField['key'] . ',' . $requiredField['value'] . ',' . $requiredField['type'],
-                    $fieldInstructor['key'] . ',' . $fieldInstructor['value'] . ',' . $fieldInstructor['type'],
+                    'difficulty,1',
+                    'instructor,' . $instructor[0]->getId(),
                 ],
-                // ],
-                'parent_slug' => '',
             ]
         );
 
-        $responseContent = $response->decodeResponseJson();
-
-        $this->assertArraySubset($expectedContent['results'], $responseContent);
+        $responseContent = $response->decodeResponseJson('data');
+        foreach ($responseContent as $data) {
+            $this->assertEquals(1, $data['attributes']['difficulty']);
+            $this->assertEquals($statues[0], $data['attributes']['status']);
+        }
     }
 
     public function test_getByParentId_when_parentId_not_exist()
@@ -762,13 +603,23 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_getByParentId()
     {
+        $parent = $this->fakeContent();
+        $child = $this->fakeContent();
+        $hierarchy = $this->fakeHierarchy(1,
+            [
+                'parent' => $parent[0],
+                'child' => $child[0]
+            ]);
 
         $response = $this->call(
             'GET',
-            'railcontent/content/parent/' . 1
+            'railcontent/content/parent/' . $parent[0]->getId()
         );
 
-        $this->assertEquals(1, count($response->decodeResponseJson('data')));
+        $results = $response->decodeResponseJson('data');
+
+        $this->assertEquals(1, count($results));
+        $this->assertEquals($child[0]->getId(), $results[0]['id']);
     }
 
     public function test_get_by_ids_when_ids_not_exists()
@@ -784,6 +635,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_get_by_ids()
     {
+        $contents = $this->fakeContent(2);
         $response = $this->call(
             'GET',
             'railcontent/content/get-by-ids',
@@ -885,19 +737,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(201, $response->status());
     }
 
-    public function _test_pull_content_permission()
+    public function test_pull_content_permission()
     {
-        $content1 = $this->contentFactory->create(
-            $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
-        );
-        $permission = $this->permissionRepository->create(
-            [
-                'name' => $this->faker->word,
-                'brand' => ConfigService::$brand,
-            ]
-        );
+        $content1 = $this->fakeContent();
+
+        $permission = $this->fakePermission();
 
         $contentPermission = $this->contentPermissionRepository->create(
             [

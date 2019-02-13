@@ -16,43 +16,18 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class ContentDatumControllerTest extends RailcontentTestCase
 {
-    protected $classBeingTested;
-    /**
-     * @var ContentFactory
-     */
-    protected $contentFactory;
-
-    /**
-     * @var ContentDatumFactory
-     */
-    protected $contentDatumFactory;
+    protected $serviceBeingTested;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->populator = new Populator($this->faker, $this->entityManager);
-        $this->populator->addEntity(
-            Content::class,
-            1,
-            [
-                'slug' => 'slug1',
-                'status' => 'published',
-                'type' => 'course',
-                'brand' => ConfigService::$brand,
-            ]
-        );
-        $this->populator->execute();
-
-        //
         $this->serviceBeingTested = $this->app->make(ContentDatumService::class);
-        //        $this->classBeingTested = $this->app->make(ContentDatumRepository::class);
-        // $this->contentFactory = $this->app->make(ContentFactory::class);
-        //  $this->contentDatumFactory = $this->app->make(ContentDatumFactory::class);
     }
 
     public function test_add_content_datum_controller_method_response()
     {
+        $content = $this->fakeContent();
         $key = $this->faker->word;
         $value = $this->faker->text(500);
 
@@ -69,7 +44,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
                     'relationships' => [
                         'content' => ['data' => [
                             'type' => 'content',
-                            'id' => 1,
+                            'id' => $content[0]->getId(),
                             ]
                         ],
                     ],
@@ -163,12 +138,13 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_update_content_datum_controller_method_response()
     {
+        $content = $this->fakeContent();
+
         $this->populator->addEntity(
             ContentData::class,
             1,
             [
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
+                'content' => $content[0],
                 'key' => $this->faker->word,
                 'value' => $this->faker->text(),
                 'position' => $this->faker->numberBetween(),
@@ -183,10 +159,8 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'PATCH',
             'railcontent/content/datum/' . $data->getId(),
             [
-                'content_id' => 1,
-                // 'key' => $data['key'],
+                'content_id' => $content[0]->getId(),
                 'value' => $new_value,
-                // 'position' => $data['position'],
             ]
         );
 
@@ -209,12 +183,12 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_update_content_datum_not_pass_validation()
     {
+        $content = $this->fakeContent();
         $this->populator->addEntity(
             ContentData::class,
             1,
             [
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
+                'content' => $content[0],
                 'key' => $this->faker->word,
                 'value' => $this->faker->text(),
                 'position' => $this->faker->numberBetween(),
@@ -250,12 +224,13 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_delete_content_datum_controller()
     {
+        $content = $this->fakeContent();
+
         $this->populator->addEntity(
             ContentData::class,
             1,
             [
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
+                'content' => $content[0],
                 'key' => $this->faker->word,
                 'value' => $this->faker->text(),
                 'position' => $this->faker->numberBetween(),
@@ -279,12 +254,13 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_update_content_datum_method_from_service_response()
     {
+        $content = $this->fakeContent();
+
         $this->populator->addEntity(
             ContentData::class,
             1,
             [
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
+                'content' => $content[0],
                 'key' => $this->faker->word,
                 'value' => $this->faker->text(),
                 'position' => $this->faker->numberBetween(),
@@ -319,12 +295,13 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_get_content_datum_method_from_service_response()
     {
+        $content = $this->fakeContent();
+
         $this->populator->addEntity(
             ContentData::class,
             1,
             [
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
+                'content' => $content[0],
                 'key' => $this->faker->word,
                 'value' => $this->faker->text(),
                 'position' => $this->faker->numberBetween(),
@@ -340,12 +317,13 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_delete_content_datum_method_from_service_response()
     {
+        $content = $this->fakeContent();
+
         $this->populator->addEntity(
             ContentData::class,
             1,
             [
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
+                'content' => $content[0],
                 'key' => $this->faker->word,
                 'value' => $this->faker->text(),
                 'position' => $this->faker->numberBetween(),

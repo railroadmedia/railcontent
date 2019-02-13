@@ -11,56 +11,9 @@ use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentAssignationJsonControllerTest extends RailcontentTestCase
 {
-    /**
-     * @var Populator
-     */
-    private $populator;
-
     protected function setUp()
     {
         parent::setUp();
-
-        $this->populator = new Populator($this->faker, $this->entityManager);
-
-    }
-
-    public function fakeComment($nr = 1, $commentData = [])
-    {
-        if (empty($commentData)) {
-            $commentData = [
-                'userId' => 1,
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'deletedAt' => null,
-            ];
-        }
-        $this->populator->addEntity(
-            Comment::class,
-            $nr,
-            $commentData
-
-        );
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[Comment::class];
-    }
-
-    public function fakeContent($nr = 1, $contentData = [])
-    {
-        if (empty($contentData)) {
-            $contentData = [
-                'brand' => ConfigService::$brand,
-            ];
-        }
-        $this->populator->addEntity(
-            Content::class,
-            $nr,
-            $contentData
-
-        );
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[Content::class];
     }
 
     public function test_pull_my_assigned_comments_when_not_exists()
@@ -76,23 +29,20 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
     public function test_pull_my_assigned_comments()
     {
         $userId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
-        $content = $this->fakeContent();
+
+        $comment = $this->fakeComment(5);
         for ($i = 0; $i < 5; $i++) {
-
-            $comment = $this->fakeComment();
-
             $this->populator->addEntity(
                 CommentAssignment::class,
                 1,
                 [
-                    'comment' => $comment[0],
+                    'comment' => $comment[$i],
                     'userId' => $userId,
                 ]
-
             );
-
+            $this->populator->execute();
         }
-        $this->populator->execute();
+
 
         $response = $this->call('GET', 'railcontent/assigned-comments', ['user_id' => $userId]);
 

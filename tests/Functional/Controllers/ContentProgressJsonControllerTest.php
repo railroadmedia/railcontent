@@ -3,58 +3,21 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Faker\ORM\Doctrine\Populator;
-use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentProgressJsonControllerTest extends RailcontentTestCase
 {
-    /**
-     * @var ContentRepository
-     */
-    protected $classBeingTested;
-
-    /**
-     * @var ContentFactory
-     */
-    protected $contentFactory;
-
-    protected $serviceBeingTested;
-
-    protected $userId;
-
     protected function setUp()
     {
         parent::setUp();
-
-        $this->populator = new Populator($this->faker, $this->entityManager);
-
-        //        $this->contentFactory = $this->app->make(ContentFactory::class);
-        //        $this->serviceBeingTested = $this->app->make(ContentService::class);
-        //        $this->classBeingTested = $this->app->make(ContentRepository::class);
-        //        $this->userId = $this->createAndLogInNewUser();
     }
 
     public function test_start_content()
     {
         $userId = $this->createAndLogInNewUser();
-
-        $this->populator->addEntity(
-            Content::class,
-            1,
-            [
-                'slug' => $this->faker->word,
-                'brand' => ConfigService::$brand,
-                'type' => $this->faker->word,
-                'status' => $this->faker->word,
-            ]
-        );
-        $fakeData = $this->populator->execute();
+        $content = $this->fakeContent();
 
         $response = $this->put(
             'railcontent/start',
@@ -63,7 +26,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
                     'relationships' => [
                         'content' => [
                             'data' => [
-                                'id' => $fakeData[Content::class][0]->getId(),
+                                'id' => $content[0]->getId(),
                             ],
                         ],
                     ],
@@ -109,18 +72,9 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
     {
         $userId = $this->createAndLogInNewUser();
 
-        $this->populator->addEntity(
-            Content::class,
-            1,
-            [
-                'slug' => $this->faker->word,
-                'brand' => ConfigService::$brand,
-                'type' => $this->faker->word,
-                'status' => $this->faker->word,
-            ]
-        );
-        $fakeData = $this->populator->execute();
-        $contentId = $fakeData[Content::class][0]->getId();
+        $content = $this->fakeContent();
+        $contentId = $content[0]->getId();
+
         $response = $this->put(
             'railcontent/start',
             [
@@ -197,20 +151,10 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
 
     public function test_save_user_progress_on_content()
     {
-        $userId = $this->createAndLogInNewUser();
+        $this->createAndLogInNewUser();
 
-        $this->populator->addEntity(
-            Content::class,
-            1,
-            [
-                'slug' => $this->faker->word,
-                'brand' => ConfigService::$brand,
-                'type' => $this->faker->word,
-                'status' => $this->faker->word,
-            ]
-        );
-        $fakeData = $this->populator->execute();
-        $contentId = $fakeData[Content::class][0]->getId();
+        $content = $this->fakeContent();
+        $contentId = $content[0]->getId();
 
         $response = $this->put(
             'railcontent/progress',

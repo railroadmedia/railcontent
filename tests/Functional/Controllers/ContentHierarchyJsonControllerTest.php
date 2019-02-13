@@ -15,69 +15,51 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
     {
         parent::setUp();
 
-        $populator = new Populator($this->faker, $this->entityManager);
-
-        $populator->addEntity(
-            Content::class,
+        $contents = $this->fakeContent(
             6,
             [
+
                 'status' => 'published',
                 'type' => 'course',
                 'difficulty' => 5,
                 'userId' => 1,
                 'publishedOn' => Carbon::now(),
+
             ]
         );
-        $populator->execute();
-
-        $populator->addEntity(
-            ContentHierarchy::class,
+        $hierarchy = $this->fakeHierarchy(
             1,
             [
-                'parent' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'child' => $this->entityManager->getRepository(Content::class)
-                    ->find(2),
+                'parent' => $contents[0],
+                'child' => $contents[1],
                 'childPosition' => 1,
             ]
         );
-        $populator->execute();
-        $populator->addEntity(
-            ContentHierarchy::class,
+        $hierarchy = $this->fakeHierarchy(
             1,
             [
-                'parent' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'child' => $this->entityManager->getRepository(Content::class)
-                    ->find(3),
+                'parent' => $contents[0],
+                'child' => $contents[2],
                 'childPosition' => 2,
             ]
         );
-        $populator->execute();
-        $populator->addEntity(
-            ContentHierarchy::class,
+        $hierarchy = $this->fakeHierarchy(
             1,
             [
-                'parent' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'child' => $this->entityManager->getRepository(Content::class)
-                    ->find(4),
+                'parent' => $contents[0],
+                'child' => $contents[3],
                 'childPosition' => 3,
             ]
         );
-        $populator->execute();
-        $populator->addEntity(
-            ContentHierarchy::class,
+
+        $hierarchy = $this->fakeHierarchy(
             1,
             [
-                'parent' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'child' => $this->entityManager->getRepository(Content::class)
-                    ->find(5),
+                'parent' => $contents[0],
+                'child' => $contents[4],
                 'childPosition' => 4,
             ]
         );
-        $populator->execute();
     }
 
     public function test_create_validation_fails()
@@ -104,22 +86,23 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
 
     public function test_create_without_position()
     {
-
         $response = $this->call(
             'PUT',
             'railcontent/content/hierarchy',
             [
                 'data' => [
                     'relationships' => [
-                        'child' => ['data' => [
-                            'type' => 'content',
-                            'id' => 6,
-                            ]
+                        'child' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => 6,
+                            ],
                         ],
-                        'parent' => ['data' => [
-                            'type' => 'content',
-                            'id' => 1,
-                            ]
+                        'parent' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => 1,
+                            ],
                         ],
                     ],
                 ],
@@ -166,15 +149,17 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
                         'child_position' => 3,
                     ],
                     'relationships' => [
-                        'child' => ['data' => [
-                            'type' => 'content',
-                            'id' => 6,
-                            ]
+                        'child' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => 6,
+                            ],
                         ],
-                        'parent' => ['data' => [
-                            'type' => 'content',
-                            'id' => 1,
-                            ]
+                        'parent' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => 1,
+                            ],
                         ],
                     ],
                 ],
@@ -220,15 +205,17 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
                         'child_position' => 3,
                     ],
                     'relationships' => [
-                        'child' => ['data' => [
-                            'type' => 'content',
-                            'id' => 2,
-                            ]
+                        'child' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => 2,
+                            ],
                         ],
-                        'parent' => ['data' => [
-                            'type' => 'content',
-                            'id' => 1,
-                            ]
+                        'parent' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => 1,
+                            ],
                         ],
                     ],
                 ],
@@ -355,15 +342,17 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
                         'child_position' => 14,
                     ],
                     'relationships' => [
-                        'child' => ['data' => [
-                            'type' => 'content',
-                            'id' => 6,
-                            ]
+                        'child' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => 6,
+                            ],
                         ],
-                        'parent' => ['data' => [
-                            'type' => 'content',
-                            'id' => 3,
-                            ]
+                        'parent' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => 3,
+                            ],
                         ],
                     ],
                 ],

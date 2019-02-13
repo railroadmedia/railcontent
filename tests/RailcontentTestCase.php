@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Dotenv\Dotenv;
 use Exception;
 use Faker\Generator;
+use Faker\ORM\Doctrine\Populator;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Connection;
@@ -23,6 +24,12 @@ use Railroad\Doctrine\Hydrators\FakeDataHydrator;
 use Railroad\Doctrine\Providers\DoctrineServiceProvider;
 use Railroad\Permissions\Providers\PermissionsServiceProvider;
 use Railroad\Permissions\Services\PermissionService;
+use Railroad\Railcontent\Entities\Comment;
+use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\ContentHierarchy;
+use Railroad\Railcontent\Entities\ContentInstructor;
+use Railroad\Railcontent\Entities\Permission;
+use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Services\RemoteStorageService;
@@ -77,6 +84,8 @@ class RailcontentTestCase extends BaseTestCase
 
     protected $fakeDataHydrator;
 
+    protected $populator;
+
     protected function setUp()
     {
         parent::setUp();
@@ -97,6 +106,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $this->faker = $this->app->make(Generator::class);
         $this->fakeDataHydrator = new FakeDataHydrator($this->entityManager);
+        $this->populator =  new Populator($this->faker, $this->entityManager);
 
         $this->databaseManager = $this->app->make(DatabaseManager::class);
         $this->authManager = $this->app->make(AuthManager::class);
@@ -537,6 +547,135 @@ class RailcontentTestCase extends BaseTestCase
     public function getConnectionType()
     {
         return $this->connectionType;
+    }
+
+    public function fakeContent($nr = 1, $contentData = [])
+    {
+        if (empty($contentData)) {
+            $contentData = [
+                'brand' => config('railcontent.brand'),
+            ];
+        }
+        $this->populator->addEntity(
+            Content::class,
+            $nr,
+            $contentData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[Content::class];
+    }
+
+    public function fakeHierarchy($nr = 1, $contentData = [])
+    {
+        if (empty($contentData)) {
+            $contentData = [
+                'parent' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'child' => $this->entityManager->getRepository(Content::class)
+                    ->find(2),
+                'childPosition' => 1,
+            ];
+        }
+        $this->populator->addEntity(
+            ContentHierarchy::class,
+            $nr,
+            $contentData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[ContentHierarchy::class];
+    }
+
+    public function fakeUserContentProgress($nr = 1, $contentData = [])
+    {
+        if (empty($contentData)) {
+            $contentData = [
+                'content' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'userId' => 1,
+                'state' => 'completed',
+                'progressPercent' => 100,
+            ];
+        }
+        $this->populator->addEntity(
+            UserContentProgress::class,
+            $nr,
+            $contentData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[UserContentProgress::class];
+    }
+
+    public function fakeContentInstructor($nr = 1, $contentData = [])
+    {
+        if (empty($contentData)) {
+            $contentData = [
+                'content' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'instructor' => $this->entityManager->getRepository(Content::class)
+                    ->find(2),
+            ];
+        }
+        $this->populator->addEntity(
+            ContentInstructor::class,
+            $nr,
+            $contentData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[ContentInstructor::class];
+    }
+
+    public function fakePermission($nr = 1, $contentData = [])
+    {
+        if (empty($contentData)) {
+            $contentData = [
+                'name' => $this->faker->word,
+                'brand' => config('railcontent.brand'),
+            ];
+        }
+        $this->populator->addEntity(
+            Permission::class,
+            $nr,
+            $contentData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[Permission::class];
+    }
+
+    public function fakeComment($nr = 1, $commentData = [])
+    {
+
+        if (empty($commentData)) {
+            $commentData = [
+                'userId' => 1,
+                'deletedAt' => null,
+            ];
+        }
+        if(!array_key_exists('content', $commentData)){
+            $commentData['content'] = $this->fakeContent(1,[
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
+                'brand' => $this->faker->randomElement(config('railcontent.available_brands')),
+            ])[0];
+        }
+
+        $this->populator->addEntity(
+            Comment::class,
+            $nr,
+            $commentData
+        );
+
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[Comment::class];
     }
 
 }
