@@ -152,7 +152,7 @@ class ContentService
                 $hash,
                 $this->contentRepository->build()
                     ->restrictByUserAccess()
-                    ->where(ConfigService::$tableContent . '.id = :id')
+                    ->andWhere(ConfigService::$tableContent . '.id = :id')
                     ->setParameter('id', $id)
                     ->getQuery()
                     ->getSingleResult(),
@@ -462,7 +462,7 @@ class ContentService
                 $this->contentRepository->build()
                     ->restrictByUserAccess()
                     ->join(ConfigService::$tableContent . '.parent', 'p')
-                    ->where('p.parent = :parentId')
+                    ->andWhere('p.parent = :parentId')
                     ->setParameter('parentId', $parentId)
                     ->orderBy('p.' . $orderBy, $orderByDirection)
                     ->getQuery()

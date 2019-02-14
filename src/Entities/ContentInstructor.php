@@ -20,17 +20,17 @@ class ContentInstructor
 
     /**
      * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
-     * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
-     *
-     */
-    private $content;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
      * @ORM\JoinColumn(name="instructor_id", referencedColumnName="id")
      *
      */
     private $instructor;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
+     * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
+     *
+     */
+    private $content;
 
     /**
      * @return int
@@ -39,23 +39,6 @@ class ContentInstructor
     : int
     {
         return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * @param mixed $content
-     */
-    public function setContent($content)
-    {
-       // $content->addExercise($this);
-        $this->content = $content;
     }
 
     /**
@@ -72,5 +55,23 @@ class ContentInstructor
     public function setInstructor($instructor)
     {
         $this->instructor = $instructor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content)
+    {
+        $content->addInstructor($this);
+
+        $this->content = $content;
     }
 }

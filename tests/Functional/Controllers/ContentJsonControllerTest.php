@@ -134,11 +134,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call(
             'PUT',
             'railcontent/content',
-            [
+            ['data' => ['attributes' => [
                 'slug' => $slug,
                 'status' => $status,
                 'type' => $this->faker->word,
                 'position' => 1,
+        ]]
             ]
         );
 
@@ -213,6 +214,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'slug' => 'slug1',
+                'brand' => config('railcontent.brand'),
             ]
         );
 
@@ -468,51 +470,24 @@ class ContentJsonControllerTest extends RailcontentTestCase
         }
     }
 
-    public function _test_index_with_required_fields()
+    public function test_index_with_required_fields()
     {
-        $expectedResults = [];
-        $statues = ['published'];
-        $types = ['course'];
+        $statues = ['published','scheduled'];
+        $types = ['course','course-part'];
         $page = 1;
         $limit = 10;
 
-        $expectedContent = [
-            'page' => $page,
-            'limit' => $limit,
-            'status' => 'ok',
-            'code' => 200,
-        ];
-
-        $nrCourses = 30;
-
-        //create courses
-        //        for ($i = 1; $i < $nrCourses; $i++) {
-        //            $content = $this->contentFactory->create(
-        //                $this->faker->word,
-        //                $types[0],
-        //                $this->faker->randomElement($statues)
-        //            );
-        //            $contents[$i] = (array)$content;
-        //        }
-        //
-        //        $contentWithFieldsNr = 5;
+        $contentWithFieldsNr = 5;
         $fieldKey = 'difficulty';
         $fieldValue = 1;
         $fieldType = 'integer';
-        //
-        $filter = [$fieldKey . ',' . $fieldValue . ',' . $fieldType];
-        //        $expectedContent['filter_options'] = [];
 
-        //        for ($i = 1; $i < $contentWithFieldsNr; $i++) {
-        //            $field =
-        //                $this->fieldFactory->create($contents[$i]['id'], $fieldKey, $fieldValue, null, $fieldType)
-        //                    ->getArrayCopy();
-        //
-        //            $expectedResults[$i - 1] = $contents[$i];
-        //            $expectedResults[$i - 1]['fields'][] = array_merge($field, ['id' => $field['id']]);
-        //        }
-        //        $expectedContent['results'] = $expectedResults;
-        //        $expectedContent['total_results'] = $contentWithFieldsNr - 1;
+        $filter = [$fieldKey . ',' . $fieldValue . ',' . $fieldType];
+        $contents = $this->fakeContent($contentWithFieldsNr, [
+            $fieldKey => $fieldValue,
+            'type' => $this->faker->randomElement($types),
+            'status' => $this->faker->randomElement($statues)
+        ]);
 
         $response = $this->call(
             'GET',
@@ -528,11 +503,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
         $responseContent = $response->decodeResponseJson('data');
 
-        $this->assertArraySubset($expectedContent['results'], $responseContent);
+        $this->assertEquals($contentWithFieldsNr, count($responseContent));
+        foreach($responseContent as $content){
+            $this->assertEquals($fieldValue, $content['attributes']['difficulty']);
+        }
     }
 
     //Get 5 courses with given string field
-    public function test_index_with_fields()
+    public function test_index_with_fields_and_data()
     {
         $statues = ['published'];
         $types = ['course'];
@@ -548,6 +526,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'status' => 'published',
             ]
         );
+
+
+
         $instructor = $this->fakeContent(
             1,
             [
@@ -557,6 +538,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'brand' => config('railcontent.brand'),
             ]
         );
+
         foreach ($contents as $content) {
             $contentInstructor = $this->fakeContentInstructor(
                 1,
@@ -568,6 +550,22 @@ class ContentJsonControllerTest extends RailcontentTestCase
         }
 
         $randomContents = $this->fakeContent(19);
+
+        $data = $this->fakeContentData(1,
+            [
+                'content' => $contents[0],
+                'key' => $this->faker->word,
+                'value' => $this->faker->text,
+                'position' => 1
+            ]);
+
+        $data = $this->fakeContentData(1,
+            [
+                'content' => $contents[0],
+                'key' => $this->faker->word,
+                'value' => $this->faker->text,
+                'position' => 2
+            ]);
 
         $response = $this->call(
             'GET',
@@ -586,6 +584,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $responseContent = $response->decodeResponseJson('data');
+
         foreach ($responseContent as $data) {
             $this->assertEquals(1, $data['attributes']['difficulty']);
             $this->assertEquals($statues[0], $data['attributes']['status']);
@@ -604,7 +603,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_getByParentId()
     {
-        $parent = $this->fakeContent();
+        $parent = $this->fakeContent(
+            1,
+            [
+                'brand' => config('railcontent.brand'),
+            ]
+        );
         $child = $this->fakeContent();
         $hierarchy = $this->fakeHierarchy(
             1,
@@ -638,7 +642,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_get_by_ids()
     {
-        $contents = $this->fakeContent(2);
+        $contents = $this->fakeContent(
+            2,
+            [
+                'brand' => config('railcontent.brand'),
+            ]
+        );
         $response = $this->call(
             'GET',
             'railcontent/content/get-by-ids',
@@ -796,44 +805,34 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $contents = $this->fakeContent(2);
 
         $permission = $this->fakePermission();
-        $this->fakeContentPermission(1, [
-            'content' => $contents[0],
-            'permission' => $permission[0]
-        ]);
+        $this->fakeContentPermission(
+            1,
+            [
+                'content' => $contents[0],
+                'permission' => $permission[0],
+            ]
+        );
 
-   $this->fakeUserPermission(1, [
-       'userId' => $user,
-       'permission' => $permission[0],
-       'startDate' => Carbon::now()->subMonth(2),
-       'expirationDate' => Carbon::now()
-           ->subMonth(1)
-           ,
-   ]);
-
-//        $userPermission = $this->userPermissionRepository->create(
-//            [
-//                'user_id' => $user,
-//                'permission_id' => $permission['id'],
-//                'start_date' => Carbon::now()
-//                    ->subMonth(2)
-//                    ->toDateTimeString(),
-//                'expiration_date' => Carbon::now()
-//                    ->subMonth(1)
-//                    ->toDateTimeString(),
-//                'created_on' => Carbon::now()
-//                    ->subMonth(2)
-//                    ->toDateTimeString(),
-//            ]
-//        );
+        $this->fakeUserPermission(
+            1,
+            [
+                'userId' => $user,
+                'permission' => $permission[0],
+                'startDate' => Carbon::now()
+                    ->subMonth(2),
+                'expirationDate' => Carbon::now()
+                    ->subMonth(1),
+            ]
+        );
 
         $response = $this->call(
             'GET',
             'railcontent/content/get-by-ids',
-            ['ids' => $contents[0]->getId(). ',' . $contents[1]->getId()]
+            ['ids' => $contents[0]->getId() . ',' . $contents[1]->getId()]
         );
-       // $expectedResults = [(array)$content2];
-dd($response);
-       // $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+
+        $this->assertEquals(1, count($response->decodeResponseJson('data')));
+        $this->assertEquals($contents[1]->getId(), $response->decodeResponseJson('data')[0]['id']);
     }
 
 }

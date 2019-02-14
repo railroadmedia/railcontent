@@ -4,9 +4,7 @@ namespace Railroad\Railcontent\Entities;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Faker\Generator;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Railroad\Railcontent\Services\ContentService;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentRepository")
@@ -274,7 +272,7 @@ class Content
     protected $exercises;
 
     /**
-     * @ORM\OneToMany(targetEntity="ContentInstructor", mappedBy="content")
+     * @ORM\OneToMany(targetEntity="Content", mappedBy="content")
      */
     protected $instructor;
 
@@ -300,6 +298,17 @@ class Content
      *      )
      */
     protected $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentData", mappedBy="content")
+     */
+    private $data;
+
+    public function __construct()
+    {
+        $this->data = new ArrayCollection();
+        $this->instructor = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -356,7 +365,7 @@ class Content
      * @param string $key
      */
     public function setSort(string $sort)
-{
+    {
         $this->sort = $sort;
     }
 
@@ -389,7 +398,7 @@ class Content
      * @param string $key
      */
     public function setBrand(string $brand)
-{
+    {
         $this->brand = $brand;
     }
 
@@ -406,7 +415,7 @@ class Content
      * @param string $key
      */
     public function setLanguage(string $language)
- {
+    {
         $this->language = $language;
     }
 
@@ -721,6 +730,7 @@ class Content
     {
         return $this->includesSong;
     }
+
     /**
      * @param bool $includesSong
      */
@@ -744,6 +754,7 @@ class Content
     {
         $this->instructors = $instructors;
     }
+
     /**
      * @param  \DateTime $liveEventStartTime
      */
@@ -935,7 +946,6 @@ class Content
         return $this->createdOn;
     }
 
-
     /**
      * Sets createdOn.
      *
@@ -946,8 +956,6 @@ class Content
     {
         $this->createdOn = $createdOn;
     }
-
-
 
     /**
      * Sets archivedOn.
@@ -994,5 +1002,33 @@ class Content
         return $this->vimeoVideo;
     }
 
+    /**
+     * @return Content|null
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
 
+    /**
+     * @param ContentData $data
+     * @return Content
+     */
+    public function addData(ContentData $data)
+    {
+        $this->data[] = $data;
+
+        return $this;
+    }
+
+    /**
+     * @param ContentData $data
+     * @return Content
+     */
+    public function addInstructor(ContentInstructor $instructor)
+    {
+        $this->instructor[] = $instructor->getInstructor();
+
+        return $this;
+    }
 }

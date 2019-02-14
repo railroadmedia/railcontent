@@ -37,7 +37,7 @@ class ContentData
     protected $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
+     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content", inversedBy="data")
      * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
      *
      */
@@ -116,6 +116,9 @@ class ContentData
      */
     public function setContent($content)
     : void {
+
+        $content->addData($this);
+
         $this->content = $content;
     }
 }

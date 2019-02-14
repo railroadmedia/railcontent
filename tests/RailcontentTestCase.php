@@ -26,6 +26,7 @@ use Railroad\Permissions\Providers\PermissionsServiceProvider;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentInstructor;
 use Railroad\Railcontent\Entities\ContentPermission;
@@ -553,11 +554,9 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeContent($nr = 1, $contentData = [])
     {
-        if (empty($contentData)) {
-            $contentData = [
-                'brand' => config('railcontent.brand'),
-            ];
-        }
+        if (!array_key_exists('brand',$contentData)) {
+            $contentData['brand'] = config('railcontent.brand');
+                    }
         $this->populator->addEntity(
             Content::class,
             $nr,
@@ -726,6 +725,19 @@ class RailcontentTestCase extends BaseTestCase
         $fakePopulator = $this->populator->execute();
 
         return $fakePopulator[UserPermission::class];
+    }
+
+    public function fakeContentData($nr = 1, $contentData = [])
+    {
+          $this->populator->addEntity(
+            ContentData::class,
+            $nr,
+            $contentData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[ContentData::class];
     }
 
 }

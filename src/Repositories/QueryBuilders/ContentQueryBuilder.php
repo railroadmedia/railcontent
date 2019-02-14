@@ -202,14 +202,10 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
      */
     public function restrictBrand()
     {
-        $this->add(
-            'where',
-            $this->expr()
-                ->in(
-                    ConfigService::$tableContent . '.brand',
-                    array_values(array_wrap(ConfigService::$availableBrands))
-                )
-        );
+        $this->andWhere(
+            ConfigService::$tableContent . '.brand IN (:brands)'
+        )
+            ->setParameter('brands', array_values(array_wrap(ConfigService::$availableBrands)));
 
         return $this;
     }
@@ -395,7 +391,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
         if (ContentRepository::$bypassPermissions === true) {
             return $this;
         }
-        $this->join(
+        $this->leftJoin(
             ContentPermission::class,
             'content_permission',
             'WITH',
@@ -407,7 +403,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                         ->eq('railcontent_content.id', 'content_permission.contentType')
                 )
         )
-            ->join(
+            ->leftJoin(
                 UserPermission::class,
                 'user_permission',
                 'WITH',
@@ -417,7 +413,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
             $this->expr()
                 ->orX(
                     $this->expr()
-                        ->isNull('content_permission.id'),
+                        ->isNull('content_permission'),
                     $this->expr()
                         ->andX(
                             $this->expr()
@@ -515,21 +511,21 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
      */
     public function restrictByUserAccess()
     {
-        $this->restrictStatuses()
+        $this
+            ->restrictStatuses()
             ->restrictPublishedOnDate()
             ->restrictBrand()
-            ->restrictByPermissions();
+            ->restrictByPermissions()
+        ;
 
         return $this;
     }
 
     public function whereIn($param, $values)
     {
-        $this->add(
-            'where',
-            $this->expr()
-                ->in($param, $values)
-        );
+        $this->andWhere($param .' IN (:values)')
+            ->setParameter('values', $values);
+
 
         return $this;
     }
