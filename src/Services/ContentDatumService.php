@@ -108,7 +108,6 @@ class ContentDatumService
     {
         //check if datum exist in the database
         $datum = $this->get($id);
-
         if (is_null($datum)) {
             return $datum;
         }
@@ -116,7 +115,7 @@ class ContentDatumService
         $delete = $this->datumRepository->deleteAndReposition($datum);
 
         //save a content version 
-        event(new ContentDatumDeleted($datum['content_id'], $datum));
+//        event(new ContentDatumDeleted($datum['content_id'], $datum));
 
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $datum['content_id']);

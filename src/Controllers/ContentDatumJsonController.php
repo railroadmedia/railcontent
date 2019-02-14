@@ -125,7 +125,7 @@ class ContentDatumJsonController extends Controller
 
         //if the update method response it's null the datum not exist; we throw the proper exception
         throw_if(
-            is_null($deleted) || is_null($data),
+            is_null($data),
             new NotFoundException('Delete failed, datum not found with id: ' . $dataId)
         );
 

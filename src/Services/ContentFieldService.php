@@ -195,7 +195,7 @@ class ContentFieldService
 
         $deleted = $this->fieldRepository->deleteAndReposition(['id' => $id]);
 
-        event(new ContentFieldDeleted($field));
+//        event(new ContentFieldDeleted($field));
 
         //delete cache for associated content id
         CacheHelper::deleteCache('content_' . $field['content_id']);

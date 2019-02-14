@@ -154,12 +154,13 @@ class ContentFieldJsonController extends Controller
 
         //if the update method response it's null the field not exist; we throw the proper exception
         throw_if(
-            is_null($deleted) || is_null($field),
+            is_null($field),
             new NotFoundException('Delete failed, field not found with id: ' . $fieldId)
         );
 
-        $content_id = $request->input('content_id');
+        $content_id = $field['content_id'];
         $currentContent = $this->contentService->getById($content_id);
+
         $data = ["post" => $currentContent];
 
         return response()->json(
