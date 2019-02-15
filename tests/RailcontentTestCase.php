@@ -30,6 +30,7 @@ use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentInstructor;
 use Railroad\Railcontent\Entities\ContentPermission;
+use Railroad\Railcontent\Entities\ContentTopic;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Entities\UserPermission;
@@ -109,7 +110,6 @@ class RailcontentTestCase extends BaseTestCase
 
         $this->faker = $this->app->make(Generator::class);
         $this->fakeDataHydrator = new FakeDataHydrator($this->entityManager);
-        $this->populator =  new Populator($this->faker, $this->entityManager);
 
         $this->databaseManager = $this->app->make(DatabaseManager::class);
         $this->authManager = $this->app->make(AuthManager::class);
@@ -554,6 +554,8 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeContent($nr = 1, $contentData = [])
     {
+        $this->populator =  new Populator($this->faker, $this->entityManager);
+
         if (!array_key_exists('brand',$contentData)) {
             $contentData['brand'] = config('railcontent.brand');
                     }
@@ -570,6 +572,8 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeHierarchy($nr = 1, $contentData = [])
     {
+        $this->populator =  new Populator($this->faker, $this->entityManager);
+
         if (empty($contentData)) {
             $contentData = [
                 'parent' => $this->entityManager->getRepository(Content::class)
@@ -592,6 +596,8 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeUserContentProgress($nr = 1, $contentData = [])
     {
+        $this->populator =  new Populator($this->faker, $this->entityManager);
+
         if (empty($contentData)) {
             $contentData = [
                 'content' => $this->entityManager->getRepository(Content::class)
@@ -614,6 +620,8 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeContentInstructor($nr = 1, $contentData = [])
     {
+        $this->populator =  new Populator($this->faker, $this->entityManager);
+
         if (empty($contentData)) {
             $contentData = [
                 'content' => $this->entityManager->getRepository(Content::class)
@@ -635,6 +643,8 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakePermission($nr = 1, $contentData = [])
     {
+        $this->populator =  new Populator($this->faker, $this->entityManager);
+
         if (empty($contentData)) {
             $contentData = [
                 'name' => $this->faker->word,
@@ -654,6 +664,7 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeComment($nr = 1, $commentData = [])
     {
+        $this->populator =  new Populator($this->faker, $this->entityManager);
 
         if (empty($commentData)) {
             $commentData = [
@@ -681,6 +692,7 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeContentPermission($nr = 1, $commentData = [])
     {
+        $this->populator =  new Populator($this->faker, $this->entityManager);
 
         if (empty($commentData)) {
             $commentData = [
@@ -705,6 +717,7 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeUserPermission($nr = 1, $commentData = [])
     {
+        $this->populator =  new Populator($this->faker, $this->entityManager);
 
         if (empty($commentData)) {
             $commentData = [
@@ -729,15 +742,40 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeContentData($nr = 1, $contentData = [])
     {
-          $this->populator->addEntity(
+        $this->populator =  new Populator($this->faker, $this->entityManager);
+
+        $this->populator->addEntity(
             ContentData::class,
             $nr,
             $contentData
+        );
+
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[ContentData::class];
+    }
+
+    public function fakeContentTopic($nr = 1, $topic = [])
+    {
+        $this->populator =  new Populator($this->faker, $this->entityManager);
+
+        if (empty($topic)) {
+            $topic = [
+                'content' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'topic' => $this->faker->word,
+                'position' => 1
+            ];
+        }
+        $this->populator->addEntity(
+            ContentTopic::class,
+            $nr,
+            $topic
 
         );
         $fakePopulator = $this->populator->execute();
 
-        return $fakePopulator[ContentData::class];
+        return $fakePopulator[ContentTopic::class];
     }
 
 }

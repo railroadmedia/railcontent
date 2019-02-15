@@ -2,17 +2,13 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
-use Illuminate\Database\Query\JoinClause;
-use Illuminate\Support\Facades\DB;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Entities\ContentEntity;
-use Railroad\Railcontent\Entities\ContentField;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Events\ContentCreated;
@@ -43,16 +39,6 @@ class ContentService
     private $contentRepository;
 
     /**
-     * @var ContentVersionRepository
-     */
-    private $versionRepository;
-
-    /**
-     * @var ContentFieldRepository
-     */
-    private $fieldRepository;
-
-    /**
      * @var ContentDatumRepository
      */
     private $datumRepository;
@@ -68,19 +54,9 @@ class ContentService
     private $commentRepository;
 
     /**
-     * @var CommentAssignmentRepository
-     */
-    private $commentAssignationRepository;
-
-    /**
      * @var ContentPermissionRepository
      */
     private $contentPermissionRepository;
-
-    /**
-     * @var UserContentProgressRepository
-     */
-    private $userContentProgressRepository;
 
     /**
      * @var JsonApiHydrator
@@ -97,42 +73,21 @@ class ContentService
     /**
      * ContentService constructor.
      *
-     * @param ContentRepository $contentRepository
-     * @param ContentVersionRepository $versionRepository
-     * @param ContentFieldRepository $fieldRepository
-     * @param ContentDatumRepository $datumRepository
-     * @param ContentHierarchyRepository $contentHierarchyRepository
-     * @param ContentPermissionRepository $contentPermissionRepository
-     * @param CommentRepository $commentRepository
-     * @param CommentAssignmentRepository $commentAssignmentRepository
-     * @param UserContentProgressRepository $userContentProgressRepository
+     * @param EntityManager $entityManager
+     * @param JsonApiHydrator $jsonApiHydrator
      */
     public function __construct(
         EntityManager $entityManager,
-        //ContentVersionRepository $versionRepository,
-        // CommentRepository $commentRepository,
-        //CommentAssignmentRepository $commentAssignmentRepository,
-        // UserContentProgressRepository $userContentProgressRepository,
         JsonApiHydrator $jsonApiHydrator
     ) {
         $this->entityManager = $entityManager;
 
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
-        //  $this->fieldRepository = $this->entityManager->getRepository(ContentField::class);
         $this->datumRepository = $this->entityManager->getRepository(ContentData::class);
         $this->contentPermissionRepository = $this->entityManager->getRepository(ContentPermission::class);
         $this->commentRepository = $this->entityManager->getRepository(Comment::class);
 
         $this->jsonApiHydrator = $jsonApiHydrator;
-
-        // $this->versionRepository = $versionRepository;
-
-        // $this->datumRepository = $datumRepository;
-        // $this->contentHierarchyRepository = $contentHierarchyRepository;
-        //$this->contentPermissionRepository = $contentPermissionRepository;
-
-        //$this->commentAssignationRepository = $commentAssignmentRepository;
-        // $this->userContentProgressRepository = $userContentProgressRepository;
     }
 
     /**
@@ -179,10 +134,8 @@ class ContentService
                 $this->contentRepository->build()
                     ->whereIn(ConfigService::$tableContent . '.id', $ids)
                     ->restrictByUserAccess()
-
                     ->getQuery()
-            //dd($unorderedContentRows->getDql());
-                  ->getResult();
+                    ->getResult();
 
             // restore order of ids passed in
             $contentRows = [];
@@ -297,42 +250,6 @@ class ContentService
                 $hash,
                 $qb->getQuery()
                     ->getResult()
-            //                $this->contentRepository->query()
-            //                    ->selectPrimaryColumns()
-            //                    ->restrictByUserAccess()
-            //                    ->join(
-            //                        ConfigService::$tableContentFields,
-            //                        function (JoinClause $joinClause) use (
-            //                            $fieldKey,
-            //                            $fieldValue,
-            //                            $fieldType,
-            //                            $fieldComparisonOperator
-            //                        ) {
-            //                            $joinClause->on(
-            //                                ConfigService::$tableContentFields . '.content_id',
-            //                                '=',
-            //                                ConfigService::$tableContent . '.id'
-            //                            )
-            //                                ->where(
-            //                                    ConfigService::$tableContentFields . '.key',
-            //                                    '=',
-            //                                    $fieldKey
-            //                                )
-            //                                ->where(
-            //                                    ConfigService::$tableContentFields . '.type',
-            //                                    '=',
-            //                                    $fieldType
-            //                                )
-            //                                ->where(
-            //                                    ConfigService::$tableContentFields . '.value',
-            //                                    $fieldComparisonOperator,
-            //                                    $fieldValue
-            //                                );
-            //                        }
-            //                    )
-            //                    ->whereIn(ConfigService::$tableContent . '.type', $types)
-            //                    ->where(ConfigService::$tableContent . '.status', $status)
-            //                    ->get()
             );
         }
 
@@ -358,7 +275,6 @@ class ContentService
         $orderByColumn = 'publishedOn',
         $orderByDirection = 'desc'
     ) {
-
         return $this->contentRepository->build()
             ->restrictByUserAccess()
             ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types)
@@ -396,8 +312,8 @@ class ContentService
         if (!$results) {
             $results = CacheHelper::saveUserCache(
                 $hash,
-                $this->contentRepository->build()//  ->selectPrimaryColumns()
-                ->restrictByUserAccess()
+                $this->contentRepository->build()
+                    ->restrictByUserAccess()
                     ->where(config('railcontent.table_prefix') . 'content' . '.slug = :slug')
                     ->andWhere(config('railcontent.table_prefix') . 'content' . '.type = :type')
                     ->setParameters(['slug' => $slug, 'type' => $type])
@@ -704,7 +620,6 @@ class ContentService
 
         if (!$results) {
             $resultsDB =
-
                 $this->contentRepository->build()
                     ->restrictByUserAccess()
                     ->join(ConfigService::$tableContent . '.child', 'c')
@@ -748,7 +663,7 @@ class ContentService
                     ->whereIn(ConfigService::$tableContent . '.type', $types)
                     ->selectInheritenceColumns()
                     ->get();
-            //->getByChildIdWhereParentTypeIn($childId, $types);
+
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$childId]));
         }
@@ -1147,6 +1062,37 @@ class ContentService
         $data
     ) {
         $content = new Content();
+
+        if (array_key_exists('fields', $data['data']['attributes'])) {
+            $fields = $data['data']['attributes']['fields'];
+            foreach ($fields as $field) {
+                if (strpos($field['key'], '_') !== false || strpos($field['key'], '-') !== false) {
+                    $field['key'] = camel_case($field['key']);
+                }
+                if (in_array(
+                    $field['key'],
+                    $this->entityManager->getClassMetadata(Content::class)
+                        ->getFieldNames()
+                )) {
+                    $data['data']['attributes'] = array_merge(
+                        $data['data']['attributes'],
+                        [
+                            $field['key'] => $field['value'],
+                        ]
+                    );
+                } elseif (in_array(
+                    $field['key'],
+                    $this->entityManager->getClassMetadata(Content::class)
+                        ->getAssociationNames()
+                )) {
+                    //TODO: association
+
+                    // dd($this->entityManager->getClassMetadata(get_class($content))->associationMappings[$field['key']]);
+
+                }
+            }
+        }
+
         $this->jsonApiHydrator->hydrate($content, $data);
 
         if (!$content->getBrand()) {
@@ -1161,21 +1107,7 @@ class ContentService
         $this->entityManager->flush();
 
         return $content;
-        //        $content = $this->contentRepository->create(
-        //            [
-        //                'slug' => $slug,
-        //                'type' => $type,
-        //                'sort' => $sort,
-        //                'status' => $status ?? self::STATUS_DRAFT,
-        //                'language' => $language ?? ConfigService::$defaultLanguage,
-        //                'brand' => $brand ?? ConfigService::$brand,
-        //                'user_id' => $userId,
-        //                'published_on' => $publishedOn,
-        //                'created_on' => Carbon::now()
-        //                    ->toDateTimeString(),
-        //            ]
-        //        );
-        //
+
         //        //save the link with parent if the parent id exist on the request
         //        if ($parentId) {
         //            $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
@@ -1425,10 +1357,5 @@ class ContentService
         }
 
         return $results;
-    }
-
-    public function test($id)
-    {
-        return $this->contentRepository->findAll();
     }
 }

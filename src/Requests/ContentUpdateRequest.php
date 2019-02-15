@@ -154,20 +154,8 @@ class ContentUpdateRequest extends CustomFormRequest
                     'data.attributes.published_on' ,
                     'data.attributes.created_on' ,
                     'data.attributes.archived_on' ,
-                    //                    'data.attributes.type',
-                    //                    // todo: use proper json API spec structure for changing relationships
-                    //                    //                    'data.attributes.user_id',
-                    //                    //                    'data.attributes.customer_id',
-                    //                    'data.attributes.first_name',
-                    //                    'data.attributes.last_name',
-                    //                    'data.attributes.street_line_1',
-                    //                    'data.attributes.street_line_2',
-                    //                    'data.attributes.city',
-                    //                    'data.attributes.zip',
-                    //                    'data.attributes.state',
-                    //                    'data.attributes.country',
-                    //                    'data.relationships.user',
-                    //                    'data.relationships.customer',
+
+                    'data.attributes.key'
                 ]
 
             );

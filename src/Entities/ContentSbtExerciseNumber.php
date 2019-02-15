@@ -5,12 +5,12 @@ namespace Railroad\Railcontent\Entities;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentTopicRepository")
+ * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentSbtExerciseNumberRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_content_topic")
+ * @ORM\Table(name="railcontent_content_sbt_exercise_number")
  *
  */
-class ContentTopic
+class ContentSbtExerciseNumber
 {
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
@@ -26,10 +26,10 @@ class ContentTopic
     private $content;
 
     /**
-     * @ORM\Column(type="string")
-     * @var string
+     * @ORM\Column(type="integer")
+     * @var int
      */
-    protected $topic;
+    protected $sbtExerciseNumber;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -59,25 +59,23 @@ class ContentTopic
      */
     public function setContent($content)
     {
-        $content->addTopic($this);
-
         $this->content = $content;
     }
 
     /**
      * @return mixed
      */
-    public function getTopic()
+    public function getSbtExerciseNumber()
     {
-        return $this->topic;
+        return $this->sbtExerciseNumber;
     }
 
     /**
-     * @param mixed $topic
+     * @param $sbtExerciseNumber
      */
-    public function setTopic($topic)
+    public function setSbtExerciseNumber($sbtExerciseNumber)
     {
-        $this->topic = $topic;
+        $this->sbtExerciseNumber = $sbtExerciseNumber;
     }
 
     /**

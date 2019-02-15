@@ -34,16 +34,20 @@ class ContentTransformer extends TransformerAbstract
         if($content->getInstructor()){
             $contents['relationships']['instructor'] = $this->serializeInstructor($content);
         }
+
+        if ($content->getTopic()) {
+            $contents['relationships']['topic'] = $this->serializeContentTopic($content);
+        }
+
         return $contents;
     }
 
     public function serializeInstructor($content)
     {
-        return $this->item(
-            $content->getInstructor(),
-            new ContentTransformer(),
-            'instructor'
-        );
+        return fractal()
+            ->serializeWith(new ArraySerializer())
+            ->collection($content->getInstructor(), ContentTransformer::class)
+            ->toArray();
     }
 
     public function serializeContentData($content)
@@ -52,6 +56,15 @@ class ContentTransformer extends TransformerAbstract
             ->serializeWith(new ArraySerializer())
             ->collection($content->getData())
             ->transformWith(ContentDataTransformer::class)
+            ->toArray();
+    }
+
+    public function serializeContentTopic($content)
+    {
+        return fractal()
+            ->serializeWith(new ArraySerializer())
+            ->collection($content->getTopic())
+            ->transformWith(ContentTopicTransformer::class)
             ->toArray();
     }
 }

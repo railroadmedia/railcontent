@@ -75,7 +75,7 @@ class AddCoreColumnsToContentTable extends Migration
 
                     $table->integer('bpm')
                         ->index()
-                        ->after('video')
+                        ->after('artist')
                         ->nullable();
 
                     $table->string('cd_tracks')
@@ -165,6 +165,41 @@ class AddCoreColumnsToContentTable extends Migration
                         ->index()
                         ->after('transcriber_name')
                         ->nullable();
+
+                    $table->string('avatar_url')
+                        ->index()
+                        ->after('week')
+                        ->nullable();
+
+                    $table->integer('length_in_seconds')
+                        ->index()
+                        ->after('avatar_url')
+                        ->nullable();
+
+                    $table->string('soundslice_slug')
+                        ->index()
+                        ->after('avatar_url')
+                        ->nullable();
+
+                    $table->integer('staff_pick_rating')
+                        ->index()
+                        ->after('soundslice_slug')
+                        ->nullable();
+
+                    $table->integer('student_id')
+                        ->index()
+                        ->after('staff_pick_rating')
+                        ->nullable();
+
+                    $table->string('vimeo_video_id')
+                        ->index()
+                        ->after('student_id')
+                        ->nullable();
+
+                    $table->string('youtube_video_id')
+                        ->index()
+                        ->after('vimeo_video_id')
+                        ->nullable();
                 }
             );
     }
@@ -214,6 +249,13 @@ class AddCoreColumnsToContentTable extends Migration
                     $table->dropColumn('total_xp');
                     $table->dropColumn('transcriber_name');
                     $table->dropColumn('week');
+                    $table->dropColumn('avatar_url');
+                    $table->dropColumn('length_in_seconds');
+                    $table->dropColumn('soundslice_slug');
+                    $table->dropColumn('staff_pick_rating');
+                    $table->dropColumn('student_id');
+                    $table->dropColumn('vimeo_video_id');
+                    $table->dropColumn('youtube_video_id');
                 }
             );
     }

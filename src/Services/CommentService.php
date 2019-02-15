@@ -5,11 +5,8 @@ namespace Railroad\Railcontent\Services;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
-use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Events\CommentCreated;
-use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -43,7 +40,8 @@ class CommentService
     /**
      * CommentService constructor.
      *
-     * @param CommentRepository $commentRepository
+     * @param EntityManager $entityManager
+     * @param JsonApiHydrator $jsonApiHydrator
      */
     public function __construct(
         EntityManager $entityManager,

@@ -117,7 +117,6 @@ class CommentAssignmentService
         foreach ($commentAssignments as $commentAssignment) {
             $this->entityManager->remove($commentAssignment);
             $this->entityManager->flush();
-
         }
 
         return true;

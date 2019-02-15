@@ -231,7 +231,7 @@ class Content
     protected $totalXp;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * @var string
      */
     protected $transcriberName;
@@ -241,6 +241,48 @@ class Content
      * @var int
      */
     protected $week;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    protected $avatarUrl;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var int
+     */
+    protected $lengthInSeconds;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    protected $soundsliceSlug;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var int
+     */
+    protected $staffPickRating;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var int
+     */
+    protected $studentId;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    protected $vimeoVideoId;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    protected $youtubeVideoId;
 
     /**
      * @ORM\Column(type="datetime", name="published_on", nullable=true)
@@ -272,7 +314,7 @@ class Content
     protected $exercises;
 
     /**
-     * @ORM\OneToMany(targetEntity="Content", mappedBy="content")
+     * @ORM\OneToMany(targetEntity="Content",mappedBy="content")
      */
     protected $instructor;
 
@@ -304,10 +346,52 @@ class Content
      */
     private $data;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentTopic", mappedBy="content")
+     */
+    private $topic;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentTag", mappedBy="content")
+     */
+    private $tag;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentKey", mappedBy="content")
+     */
+    private $key;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentKeyPitchType", mappedBy="content")
+     */
+    private $keyPitchType;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentSbtBpm", mappedBy="content")
+     */
+    private $sbtBpm;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentSbtExerciseNumber", mappedBy="content")
+     */
+    private $sbtExerciseNumber;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentPlaylist", mappedBy="content")
+     */
+    private $playlist;
+
     public function __construct()
     {
         $this->data = new ArrayCollection();
         $this->instructor = new ArrayCollection();
+        $this->topic = new ArrayCollection();
+        $this->tag = new ArrayCollection();
+        $this->key = new ArrayCollection();
+        $this->keyPitchType = new ArrayCollection();
+        $this->sbtBpm = new ArrayCollection();
+        $this->sbtExerciseNumber = new ArrayCollection();
+        $this->playlist = new ArrayCollection();
     }
 
     /**
@@ -916,6 +1000,102 @@ class Content
     }
 
     /**
+     * @return text
+     */
+    public function getAvatarUrl()
+    {
+        return $this->avatarUrl;
+    }
+
+    /**
+     * @param string $key
+     */
+    public function setAvatarUrl($avatarUrl)
+    {
+        $this->avatarUrl = $avatarUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSoundsliceSlug()
+    {
+        return $this->soundsliceSlug;
+    }
+
+    /**
+     * @param string $soundsliceSlug
+     */
+    public function setSoundsliceSlug($soundsliceSlug)
+    {
+        $this->soundsliceSlug = $soundsliceSlug;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStaffPickRating()
+    {
+        return $this->staffPickRating;
+    }
+
+    /**
+     * @param $staffPickRating
+     */
+    public function setStaffPickRating($staffPickRating)
+    {
+        $this->staffPickRating = $staffPickRating;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getStudentId()
+    {
+        return $this->studentId;
+    }
+
+    /**
+     * @param $studentId
+     */
+    public function setStudentId($studentId)
+    {
+        $this->studentId = $studentId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVimeoVideoId()
+    {
+        return $this->vimeoVideoId;
+    }
+
+    /**
+     * @param $vimeoVideoId
+     */
+    public function setVimeoVideoId($vimeoVideoId)
+    {
+        $this->vimeoVideoId = $vimeoVideoId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getYoutubeVideoId()
+    {
+        return $this->youtubeVideoId;
+    }
+
+    /**
+     * @param $youtubeVideoId
+     */
+    public function setYoutubeVideoId($youtubeVideoId)
+    {
+        $this->youtubeVideoId = $youtubeVideoId;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getPublishedOn()
@@ -1022,13 +1202,40 @@ class Content
     }
 
     /**
-     * @param ContentData $data
-     * @return Content
+     * @param ContentInstructor $instructor
+     * @return $this
      */
     public function addInstructor(ContentInstructor $instructor)
     {
         $this->instructor[] = $instructor->getInstructor();
 
         return $this;
+    }
+
+    /**
+     * @param ContentTopic $contentTopic
+     * @return $this
+     */
+    public function addTopic(ContentTopic $contentTopic)
+    {
+        $this->topic[] = $contentTopic;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTopic()
+    {
+        return $this->topic;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function setTopic($topic)
+    {
+        $this->topic[] = $topic;
     }
 }

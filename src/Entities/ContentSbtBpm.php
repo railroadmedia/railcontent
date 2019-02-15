@@ -5,12 +5,12 @@ namespace Railroad\Railcontent\Entities;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentTopicRepository")
+ * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentSbtBpmRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_content_topic")
+ * @ORM\Table(name="railcontent_content_sbt_bpm")
  *
  */
-class ContentTopic
+class ContentSbtBpm
 {
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
@@ -29,7 +29,7 @@ class ContentTopic
      * @ORM\Column(type="string")
      * @var string
      */
-    protected $topic;
+    protected $sbtBpm;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -59,25 +59,23 @@ class ContentTopic
      */
     public function setContent($content)
     {
-        $content->addTopic($this);
-
         $this->content = $content;
     }
 
     /**
      * @return mixed
      */
-    public function getTopic()
+    public function getSbtBpm()
     {
-        return $this->topic;
+        return $this->sbtBpm;
     }
 
     /**
-     * @param mixed $topic
+     * @param $sbtBpm
      */
-    public function setTopic($topic)
+    public function setSbtBpm($sbtBpm)
     {
-        $this->topic = $topic;
+        $this->sbt = $sbtBpm;
     }
 
     /**

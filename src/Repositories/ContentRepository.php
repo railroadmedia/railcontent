@@ -622,7 +622,7 @@ class ContentRepository extends EntityRepository
     {
         $qb = new ContentQueryBuilder($this->getEntityManager());
 
-        return $qb->select(ConfigService::$tableContent)
-            ->from($this->getEntityName(), ConfigService::$tableContent);
+        return $qb->select(config('railcontent.table_prefix') . 'content')
+            ->from($this->getEntityName(), config('railcontent.table_prefix') . 'content');
     }
 }

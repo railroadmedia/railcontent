@@ -33,30 +33,39 @@ class ContentFieldControllerTest extends RailcontentTestCase
         parent::setUp();
 
         $this->contentFieldService = $this->app->make(ContentFieldService::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
+        // $this->contentFactory = $this->app->make(ContentFactory::class);
+        // $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
     }
 
     public function test_create_content_field_controller_method_response()
     {
-        $content = $this->contentFactory->create();
-        $key = $this->faker->word();
+        $content = $this->fakeContent();
+        $key = 'topic';
         $value = $this->faker->text(255);
-        $type = $this->faker->word;
         $position = $this->faker->numberBetween();
 
         $response = $this->call(
             'PUT',
             'railcontent/content/field',
             [
-                'content_id' => $content->getId(),
-                'key' => $key,
-                'value' => $value,
-                'type' => $type,
-                'position' => $position,
+                'data' => [
+                    'attributes' => [
+                        'key' => $key,
+                        'value' => $value,
+                        'position' => $position,
+                    ],
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => $content[0]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
-
+        dd($response);
         $expectedResults = [
             "id" => "1",
             "content" => $this->serializer->toArray($content),
@@ -415,7 +424,12 @@ class ContentFieldControllerTest extends RailcontentTestCase
         );
 
         $this->assertArraySubset(
-            [['id' => 1, 'position' => 1], ['id' => 2, 'position' => 4], ['id' => 3, 'position' => 2],['id' => 4, 'position' => 3]],
+            [
+                ['id' => 1, 'position' => 1],
+                ['id' => 2, 'position' => 4],
+                ['id' => 3, 'position' => 2],
+                ['id' => 4, 'position' => 3],
+            ],
             $response->decodeResponseJson()['fields']
         );
     }
@@ -441,7 +455,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         );
 
         $this->assertArraySubset(
-             ['id' => 4, 'position' => 3],
+            ['id' => 4, 'position' => 3],
             last($response->decodeResponseJson()['fields'])
         );
 

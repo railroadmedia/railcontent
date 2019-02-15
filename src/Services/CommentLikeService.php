@@ -2,10 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Carbon\Carbon;
-use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
-use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentLikes;
 use Railroad\Railcontent\Events\CommentLiked;
@@ -32,9 +29,9 @@ class CommentLikeService
     private $commentRepository;
 
     /**
-     * CommentService constructor.
+     * CommentLikeService constructor.
      *
-     * @param CommentLikeRepository $commentLikeRepository
+     * @param EntityManager $entityManager
      */
     public function __construct(EntityManager $entityManager)
     {

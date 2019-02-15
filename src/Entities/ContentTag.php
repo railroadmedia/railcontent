@@ -5,12 +5,12 @@ namespace Railroad\Railcontent\Entities;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentTopicRepository")
+ * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentTagRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_content_topic")
+ * @ORM\Table(name="railcontent_content_tag")
  *
  */
-class ContentTopic
+class ContentTag
 {
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
@@ -29,7 +29,7 @@ class ContentTopic
      * @ORM\Column(type="string")
      * @var string
      */
-    protected $topic;
+    protected $tag;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -59,25 +59,23 @@ class ContentTopic
      */
     public function setContent($content)
     {
-        $content->addTopic($this);
-
         $this->content = $content;
     }
 
     /**
      * @return mixed
      */
-    public function getTopic()
+    public function getTag()
     {
-        return $this->topic;
+        return $this->tag;
     }
 
     /**
-     * @param mixed $topic
+     * @param mixed $tag
      */
-    public function setTopic($topic)
+    public function setTag($tag)
     {
-        $this->topic = $topic;
+        $this->tag = $tag;
     }
 
     /**
