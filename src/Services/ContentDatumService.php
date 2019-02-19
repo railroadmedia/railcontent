@@ -68,10 +68,10 @@ class ContentDatumService
         );
 
         //call the event that save a new content version in the database
-       // event(new ContentDatumCreated($contentId));
+        event(new ContentDatumCreated($contentId));
 
         //delete cache associated with the content id
-       // CacheHelper::deleteCache('content_' . $contentId);
+        CacheHelper::deleteCache('content_' . $contentId);
 
         return $this->get($contentDatum->getId());
     }
@@ -98,10 +98,10 @@ class ContentDatumService
         $this->datumRepository->reposition($id, $data);
 
         //save a content version
-//        event(new ContentDatumUpdated($datum['content_id']));
+        event(new ContentDatumUpdated($datum->getContent()->getId()));
 
         //delete cache associated with the content id
-     //   CacheHelper::deleteCache('content_' . $datum['content_id']);
+        CacheHelper::deleteCache('content_' . $datum->getContent()->getId());
 
         return $this->get($id);
     }
@@ -122,10 +122,10 @@ class ContentDatumService
         $delete = $this->datumRepository->deleteAndReposition(['id' => $id]);
 
         //save a content version 
-      //  event(new ContentDatumDeleted($datum['content_id']));
+        event(new ContentDatumDeleted($datum->getContent()->getId()));
 
         //delete cache associated with the content id
-      //  CacheHelper::deleteCache('content_' . $datum['content_id']);
+        CacheHelper::deleteCache('content_' . $datum->getContent()->getId());
 
         return $delete;
     }
