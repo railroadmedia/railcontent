@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Routing\Controller;
-use JMS\Serializer\SerializerBuilder;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentDatumCreateRequest;
@@ -12,7 +11,6 @@ use Railroad\Railcontent\Requests\ContentDatumUpdateRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Services\ResponseService;
-use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentDatumJsonController extends Controller
 {
@@ -26,7 +24,6 @@ class ContentDatumJsonController extends Controller
      */
     private $permissionPackageService;
 
-    private $serializer;
 
     /**
      * DatumController constructor.
