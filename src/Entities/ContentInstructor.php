@@ -33,6 +33,12 @@ class ContentInstructor
     private $content;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var int
+     */
+    protected $position;
+
+    /**
      * @return int
      */
     public function getId()
@@ -70,8 +76,33 @@ class ContentInstructor
      */
     public function setContent($content)
     {
-        $content->addInstructor($this);
-
         $this->content = $content;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param integer|null $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * @param  $instructor
+     * @return $this
+     */
+    public function addInstructor( $instructor)
+    {
+        $this->instructor = $instructor;
+
+        return $this;
     }
 }

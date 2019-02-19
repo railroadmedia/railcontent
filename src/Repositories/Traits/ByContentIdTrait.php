@@ -128,7 +128,7 @@ trait ByContentIdTrait
     public function recalculatePosition($position, $dataCount, $existingData)
     {
         if ($position === null || $position > $dataCount) {
-            if (empty($existingData)) {
+            if (!$existingData->isEmpty()) {
                 $position = $dataCount + 1;
             } else {
                 $position = $dataCount;

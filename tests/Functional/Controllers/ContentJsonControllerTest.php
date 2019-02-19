@@ -41,6 +41,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $slug = $this->faker->word;
         $type = 'course';
         $status = ContentService::STATUS_SCHEDULED;
+        $instructor = $this->fakeContent(1,[
+            'type' => 'instructor'
+        ]);
+        $exercises = $this->fakeContent(2,[
+            'type' => 'assignment'
+        ]);
 
         $response = $this->call(
             'PUT',
@@ -59,13 +65,28 @@ class ContentJsonControllerTest extends RailcontentTestCase
                             [
                                 'key' => 'topic',
                                 'value' => $this->faker->word,
+                            ],
+                            [
+                                'key' => 'topic',
+                                'value' => $this->faker->word,
                                 'position' => 1,
-                                'id' => 0,
                             ],
                             [
                                 'key' => 'difficulty',
                                 'value' => 10,
                                 'position' => 1,
+                            ],
+                            [
+                                'key' => 'instructor',
+                                'value' => $instructor[0]->getId(),
+                            ],
+                            [
+                                'key' => 'exercise',
+                                'value' => $exercises[0]->getId(),
+                            ],
+                            [
+                                'key' => 'exercise',
+                                'value' => $exercises[1]->getId(),
                             ],
                         ],
                         'published_on' => Carbon::now()
@@ -74,8 +95,16 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 ],
             ]
         );
+        $responseContent = $response->decodeResponseJson('data');
 
         $this->assertEquals(201, $response->status());
+        $this->assertArrayHasKey('relationships', $responseContent['attributes']);
+        $this->assertArrayHasKey('contentData', $responseContent['attributes']['relationships']);
+        $this->assertArrayHasKey('instructor', $responseContent['attributes']['relationships']);
+        $this->assertArrayHasKey('topic', $responseContent['attributes']['relationships']);
+        $this->assertArrayHasKey('exercise', $responseContent['attributes']['relationships']);
+        $this->assertEquals($instructor[0]->getId(), $responseContent['attributes']['relationships']['instructor']['data'][0]['instructor']['id']);
+        $this->assertEquals(2, count($responseContent['attributes']['relationships']['exercise']['data']));
     }
 
     public function test_store_not_pass_the_validation()

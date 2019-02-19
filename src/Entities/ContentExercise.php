@@ -20,6 +20,7 @@ class ContentExercise
 
     /**
      * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
+     * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
      *
      */
     private $content;
@@ -30,6 +31,12 @@ class ContentExercise
      *
      */
     private $exercise;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var int
+     */
+    protected $position;
 
     /**
      * @return int
@@ -53,7 +60,7 @@ class ContentExercise
      */
     public function setContent($content)
     {
-       // $content->addExercise($this);
+        // $content->addExercise($this);
         $this->content = $content;
     }
 
@@ -72,4 +79,32 @@ class ContentExercise
     {
         $this->exercise = $exercise;
     }
+
+    /**
+     * @return integer
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param integer|null $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * @param $exercise
+     * @return $this
+     */
+    public function addExercise( $exercise)
+    {
+        $this->exercise = $exercise;
+
+        return $this;
+    }
+
 }

@@ -20,6 +20,7 @@ class CreateContentExerciseTable extends Migration
                 $table->increments('id');
                 $table->integer('content_id')->index();
                 $table->integer('exercise_id')->index();
+                $table->integer('position')->index();
 
                 $table->index(['exercise_id', 'content_id'], 'ec');
             }

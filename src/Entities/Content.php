@@ -305,16 +305,12 @@ class Content
     protected $createdOn;
 
     /**
-     * @ORM\OneToMany(targetEntity="ContentExercise", mappedBy="content")
-     * @ORM\JoinTable(name="railcontent_content_exercise",
-     *      joinColumns={@ORM\JoinColumn(name="content_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="exercise_id", referencedColumnName="id", unique=true)}
-     *      )
+     * @ORM\OneToMany(targetEntity="ContentExercise", mappedBy="content", cascade={"persist"})
      */
-    protected $exercises;
+    protected $exercise;
 
     /**
-     * @ORM\OneToMany(targetEntity="Content",mappedBy="content")
+     * @ORM\OneToMany(targetEntity="ContentInstructor",mappedBy="content", cascade={"persist"})
      */
     protected $instructor;
 
@@ -347,7 +343,7 @@ class Content
     private $data;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentTopic", mappedBy="content")
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentTopic", mappedBy="content", cascade={"persist"})
      */
     private $topic;
 
@@ -392,6 +388,7 @@ class Content
         $this->sbtBpm = new ArrayCollection();
         $this->sbtExerciseNumber = new ArrayCollection();
         $this->playlist = new ArrayCollection();
+        $this->exercise = new ArrayCollection();
     }
 
     /**
@@ -1205,9 +1202,9 @@ class Content
      * @param ContentInstructor $instructor
      * @return $this
      */
-    public function addInstructor(ContentInstructor $instructor)
+    public function addInstructor($instructor)
     {
-        $this->instructor[] = $instructor->getInstructor();
+        $this->instructor[] = $instructor;
 
         return $this;
     }
@@ -1216,7 +1213,7 @@ class Content
      * @param ContentTopic $contentTopic
      * @return $this
      */
-    public function addTopic(ContentTopic $contentTopic)
+    public function addTopic($contentTopic)
     {
         $this->topic[] = $contentTopic;
 
@@ -1238,4 +1235,16 @@ class Content
     {
         $this->topic[] = $topic;
     }
+
+    /**
+     * @param ContentInstructor $instructor
+     * @return $this
+     */
+    public function addExercise($exercise)
+    {
+        $this->exercise[] = $exercise;
+
+        return $this;
+    }
+
 }

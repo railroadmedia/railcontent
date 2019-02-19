@@ -102,8 +102,16 @@ class RailcontentTestCase extends BaseTestCase
             ->deleteAll();
 
         // make sure laravel is using the same connection
-        DB::connection()->setPdo($this->entityManager->getConnection()->getWrappedConnection());
-        DB::connection()->setReadPdo($this->entityManager->getConnection()->getWrappedConnection());
+        DB::connection()
+            ->setPdo(
+                $this->entityManager->getConnection()
+                    ->getWrappedConnection()
+            );
+        DB::connection()
+            ->setReadPdo(
+                $this->entityManager->getConnection()
+                    ->getWrappedConnection()
+            );
 
         $this->artisan('migrate:fresh', []);
         $this->artisan('cache:clear', []);
@@ -114,9 +122,15 @@ class RailcontentTestCase extends BaseTestCase
         $this->databaseManager = $this->app->make(DatabaseManager::class);
         $this->authManager = $this->app->make(AuthManager::class);
         $this->router = $this->app->make(Router::class);
-        $this->serializer =   SerializerBuilder::create()->setSerializationContextFactory(function(){
-            return SerializationContext::create()->setSerializeNull(true);
-        })            ->build();
+        $this->serializer =
+            SerializerBuilder::create()
+                ->setSerializationContextFactory(
+                    function () {
+                        return SerializationContext::create()
+                            ->setSerializeNull(true);
+                    }
+                )
+                ->build();
 
         $this->permissionServiceMock =
             $this->getMockBuilder(PermissionService::class)
@@ -179,23 +193,23 @@ class RailcontentTestCase extends BaseTestCase
 
         // setup default database to use sqlite :memory:
         $app['config']->set('database.default', $this->getConnectionType());
-//        $app['config']->set(
-//            'database.connections.mysql',
-//            [
-//                'driver' => 'mysql',
-//                'host' => 'mysql',
-//                'port' => env('MYSQL_PORT', '3306'),
-//                'database' => env('MYSQL_DB', 'railcontent'),
-//                'username' => 'root',
-//                'password' => 'root',
-//                'charset' => 'utf8',
-//                'collation' => 'utf8_general_ci',
-//                'prefix' => '',
-//                'options' => [
-//                    \PDO::ATTR_PERSISTENT => true,
-//                ]
-//            ]
-//        );
+        //        $app['config']->set(
+        //            'database.connections.mysql',
+        //            [
+        //                'driver' => 'mysql',
+        //                'host' => 'mysql',
+        //                'port' => env('MYSQL_PORT', '3306'),
+        //                'database' => env('MYSQL_DB', 'railcontent'),
+        //                'username' => 'root',
+        //                'password' => 'root',
+        //                'charset' => 'utf8',
+        //                'collation' => 'utf8_general_ci',
+        //                'prefix' => '',
+        //                'options' => [
+        //                    \PDO::ATTR_PERSISTENT => true,
+        //                ]
+        //            ]
+        //        );
         // database
         $app['config']->set('doctrine.database_driver', 'pdo_sqlite');
         $app['config']->set('doctrine.database_user', 'root');
@@ -206,28 +220,28 @@ class RailcontentTestCase extends BaseTestCase
         config()->set('railcontent.database_password', 'root');
         config()->set('railcontent.database_driver', 'pdo_sqlite');
         config()->set('railcontent.database_in_memory', true);
-//
+        //
 
-//         //mysql
-//         $app['config']->set('doctrine.database_driver', $defaultConfig['database_driver']);
-//         $app['config']->set('doctrine.database_name', $defaultConfig['database_name']);
-//         $app['config']->set('doctrine.database_user', $defaultConfig['database_user']);
-//         $app['config']->set('doctrine.database_password', $defaultConfig['database_password']);
-//         $app['config']->set('doctrine.database_host', $defaultConfig['database_host']);
-//         $app['config']->set('ecommerce.database_connection_name', $defaultConfig['database_connection_name']);
-//         $app['config']->set('database.default', $defaultConfig['database_connection_name']);
-//
-//
-//         $app['config']->set(
-//             'database.connections.' . $defaultConfig['database_connection_name'],
-//             [
-//                 'driver' => 'mysql',
-//                 'database' => $defaultConfig['database_name'],
-//                 'username' => $defaultConfig['database_user'],
-//                 'password' => $defaultConfig['database_password'],
-//                 'host' => $defaultConfig['database_host'],
-//             ]
-//         );
+        //         //mysql
+        //         $app['config']->set('doctrine.database_driver', $defaultConfig['database_driver']);
+        //         $app['config']->set('doctrine.database_name', $defaultConfig['database_name']);
+        //         $app['config']->set('doctrine.database_user', $defaultConfig['database_user']);
+        //         $app['config']->set('doctrine.database_password', $defaultConfig['database_password']);
+        //         $app['config']->set('doctrine.database_host', $defaultConfig['database_host']);
+        //         $app['config']->set('ecommerce.database_connection_name', $defaultConfig['database_connection_name']);
+        //         $app['config']->set('database.default', $defaultConfig['database_connection_name']);
+        //
+        //
+        //         $app['config']->set(
+        //             'database.connections.' . $defaultConfig['database_connection_name'],
+        //             [
+        //                 'driver' => 'mysql',
+        //                 'database' => $defaultConfig['database_name'],
+        //                 'username' => $defaultConfig['database_user'],
+        //                 'password' => $defaultConfig['database_password'],
+        //                 'host' => $defaultConfig['database_host'],
+        //             ]
+        //         );
 
         // if new packages entities are required for testing, their entity directory/namespace config should be merged here
         $app['config']->set(
@@ -257,7 +271,7 @@ class RailcontentTestCase extends BaseTestCase
                 'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
                 'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
                 'region' => env('AWS_S3_REMOTE_STORAGE_REGION'),
-                'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET')
+                'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET'),
             ]
         );
 
@@ -272,7 +286,7 @@ class RailcontentTestCase extends BaseTestCase
                     'password' => env('REDIS_PASSWORD', null),
                     'port' => env('REDIS_PORT', 6379),
                     'database' => 0,
-                ]
+                ],
             ]
         );
         $app['config']->set('cache.default', env('CACHE_DRIVER', 'redis'));
@@ -282,23 +296,29 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.decorators', $defaultConfig['decorators']);
         $app['config']->set('railcontent.use_collections', $defaultConfig['use_collections']);
         $app['config']->set('railcontent.content_hierarchy_max_depth', $defaultConfig['content_hierarchy_max_depth']);
-        $app['config']->set('railcontent.content_hierarchy_decorator_allowed_types', $defaultConfig['content_hierarchy_decorator_allowed_types']);
+        $app['config']->set(
+            'railcontent.content_hierarchy_decorator_allowed_types',
+            $defaultConfig['content_hierarchy_decorator_allowed_types']
+        );
 
         // vimeo
         $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);
 
-        if (!$app['db']->connection()->getSchemaBuilder()->hasTable('users')) {
+        if (!$app['db']->connection()
+            ->getSchemaBuilder()
+            ->hasTable('users')) {
 
-            $app['db']->connection()->getSchemaBuilder()->create(
-                'users',
-                function (Blueprint $table) {
-                    $table->increments('id');
-                    $table->string('email');
-                }
-            );
+            $app['db']->connection()
+                ->getSchemaBuilder()
+                ->create(
+                    'users',
+                    function (Blueprint $table) {
+                        $table->increments('id');
+                        $table->string('email');
+                    }
+                );
 
         }
-
 
         // register provider
         $app->register(DoctrineServiceProvider::class);
@@ -318,21 +338,24 @@ class RailcontentTestCase extends BaseTestCase
     {
         $events = is_array($events) ? $events : func_get_args();
 
-        $mock = $this->getMockBuilder(Dispatcher::class)
-            ->setMethods(['fire', 'dispatch'])
-            ->getMockForAbstractClass();
+        $mock =
+            $this->getMockBuilder(Dispatcher::class)
+                ->setMethods(['fire', 'dispatch'])
+                ->getMockForAbstractClass();
 
-        $mock->method('fire')->willReturnCallback(
-            function ($called) {
-                $this->firedEvents[] = $called;
-            }
-        );
+        $mock->method('fire')
+            ->willReturnCallback(
+                function ($called) {
+                    $this->firedEvents[] = $called;
+                }
+            );
 
-        $mock->method('dispatch')->willReturnCallback(
-            function ($called) {
-                $this->firedEvents[] = $called;
-            }
-        );
+        $mock->method('dispatch')
+            ->willReturnCallback(
+                function ($called) {
+                    $this->firedEvents[] = $called;
+                }
+            );
 
         $this->app->instance('events', $mock);
 
@@ -341,8 +364,7 @@ class RailcontentTestCase extends BaseTestCase
                 $fired = $this->getFiredEvents($events);
                 if ($eventsNotFired = array_diff($events, $fired)) {
                     throw new Exception(
-                        'These expected events were not fired: [' .
-                        implode(', ', $eventsNotFired) . ']'
+                        'These expected events were not fired: [' . implode(', ', $eventsNotFired) . ']'
                     );
                 }
             }
@@ -367,18 +389,18 @@ class RailcontentTestCase extends BaseTestCase
         Auth::shouldReceive('user')
             ->andReturn($userMockResults);
         return $userId;
-//        $userId = $this->databaseManager->connection()->query()->from('users')->insertGetId(
-//            ['email' => $this->faker->email]
-//        );
-//
-       // $this->authManager->guard()->onceUsingId($userId);
-//
-//        request()->setUserResolver(
-//            function () use ($userId, $email) {
-//                return ['id' => $userId, 'email' => $email];
-//            }
-//        );
-//
+        //        $userId = $this->databaseManager->connection()->query()->from('users')->insertGetId(
+        //            ['email' => $this->faker->email]
+        //        );
+        //
+        // $this->authManager->guard()->onceUsingId($userId);
+        //
+        //        request()->setUserResolver(
+        //            function () use ($userId, $email) {
+        //                return ['id' => $userId, 'email' => $email];
+        //            }
+        //        );
+        //
         return $userId;
     }
 
@@ -435,8 +457,7 @@ class RailcontentTestCase extends BaseTestCase
         $filenameAbsolute = $this->faker->image(sys_get_temp_dir());
 
         if (!empty($useThisFilenameWithoutExtension)) {
-            $filenameAbsolute =
-                $this->changeImageNameLocally($filenameAbsolute, $useThisFilenameWithoutExtension);
+            $filenameAbsolute = $this->changeImageNameLocally($filenameAbsolute, $useThisFilenameWithoutExtension);
         }
 
         $filenameRelative = $this->getFilenameRelativeFromAbsolute($filenameAbsolute);
@@ -525,7 +546,7 @@ class RailcontentTestCase extends BaseTestCase
         return [
             "status" => $status,
             "code" => $code,
-            "results" => $results
+            "results" => $results,
         ];
     }
 
@@ -538,7 +559,7 @@ class RailcontentTestCase extends BaseTestCase
             "limit" => $limit,
             "total_results" => $totalResults,
             "results" => $results,
-            "filter_options" => $filter
+            "filter_options" => $filter,
         ];
     }
 
@@ -554,11 +575,11 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeContent($nr = 1, $contentData = [])
     {
-        $this->populator =  new Populator($this->faker, $this->entityManager);
+        $this->populator = new Populator($this->faker, $this->entityManager);
 
-        if (!array_key_exists('brand',$contentData)) {
+        if (!array_key_exists('brand', $contentData)) {
             $contentData['brand'] = config('railcontent.brand');
-                    }
+        }
         $this->populator->addEntity(
             Content::class,
             $nr,
@@ -572,7 +593,7 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeHierarchy($nr = 1, $contentData = [])
     {
-        $this->populator =  new Populator($this->faker, $this->entityManager);
+        $this->populator = new Populator($this->faker, $this->entityManager);
 
         if (empty($contentData)) {
             $contentData = [
@@ -596,7 +617,7 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeUserContentProgress($nr = 1, $contentData = [])
     {
-        $this->populator =  new Populator($this->faker, $this->entityManager);
+        $this->populator = new Populator($this->faker, $this->entityManager);
 
         if (empty($contentData)) {
             $contentData = [
@@ -620,12 +641,18 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeContentInstructor($nr = 1, $contentData = [])
     {
-        $this->populator =  new Populator($this->faker, $this->entityManager);
+        $this->populator = new Populator($this->faker, $this->entityManager);
+        if (!array_key_exists('content', $contentData)) {
+            $content =
+                $this->entityManager->getRepository(Content::class)
+                    ->find(1);
+        } else {
+            $content = $contentData['content'];
+        }
 
         if (empty($contentData)) {
             $contentData = [
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
+                'content' => $content,
                 'instructor' => $this->entityManager->getRepository(Content::class)
                     ->find(2),
             ];
@@ -637,13 +664,16 @@ class RailcontentTestCase extends BaseTestCase
 
         );
         $fakePopulator = $this->populator->execute();
+        for($i=0; $i<$nr; $i++) {
+            $content->addInstructor($fakePopulator[ContentInstructor::class][$i]);
+        }
 
         return $fakePopulator[ContentInstructor::class];
     }
 
     public function fakePermission($nr = 1, $contentData = [])
     {
-        $this->populator =  new Populator($this->faker, $this->entityManager);
+        $this->populator = new Populator($this->faker, $this->entityManager);
 
         if (empty($contentData)) {
             $contentData = [
@@ -664,7 +694,7 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeComment($nr = 1, $commentData = [])
     {
-        $this->populator =  new Populator($this->faker, $this->entityManager);
+        $this->populator = new Populator($this->faker, $this->entityManager);
 
         if (empty($commentData)) {
             $commentData = [
@@ -672,11 +702,14 @@ class RailcontentTestCase extends BaseTestCase
                 'deletedAt' => null,
             ];
         }
-        if(!array_key_exists('content', $commentData)){
-            $commentData['content'] = $this->fakeContent(1,[
-                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
-                'brand' => $this->faker->randomElement(config('railcontent.available_brands')),
-            ])[0];
+        if (!array_key_exists('content', $commentData)) {
+            $commentData['content'] = $this->fakeContent(
+                1,
+                [
+                    'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
+                    'brand' => $this->faker->randomElement(config('railcontent.available_brands')),
+                ]
+            )[0];
         }
 
         $this->populator->addEntity(
@@ -692,7 +725,7 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeContentPermission($nr = 1, $commentData = [])
     {
-        $this->populator =  new Populator($this->faker, $this->entityManager);
+        $this->populator = new Populator($this->faker, $this->entityManager);
 
         if (empty($commentData)) {
             $commentData = [
@@ -700,7 +733,7 @@ class RailcontentTestCase extends BaseTestCase
                 'brand' => config('railcontent.brand'),
             ];
         }
-        if(!array_key_exists('permission', $commentData)){
+        if (!array_key_exists('permission', $commentData)) {
             $commentData['permission'] = $this->fakePermission()[0];
         }
 
@@ -717,7 +750,7 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeUserPermission($nr = 1, $commentData = [])
     {
-        $this->populator =  new Populator($this->faker, $this->entityManager);
+        $this->populator = new Populator($this->faker, $this->entityManager);
 
         if (empty($commentData)) {
             $commentData = [
@@ -725,7 +758,7 @@ class RailcontentTestCase extends BaseTestCase
                 'startDate' => Carbon::now(),
             ];
         }
-        if(!array_key_exists('permission', $commentData)){
+        if (!array_key_exists('permission', $commentData)) {
             $commentData['permission'] = $this->fakePermission()[0];
         }
 
@@ -742,7 +775,7 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeContentData($nr = 1, $contentData = [])
     {
-        $this->populator =  new Populator($this->faker, $this->entityManager);
+        $this->populator = new Populator($this->faker, $this->entityManager);
 
         $this->populator->addEntity(
             ContentData::class,
@@ -757,14 +790,20 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeContentTopic($nr = 1, $topic = [])
     {
-        $this->populator =  new Populator($this->faker, $this->entityManager);
+        $this->populator = new Populator($this->faker, $this->entityManager);
+        if (!array_key_exists('content', $topic)) {
+            $content =
+                $this->entityManager->getRepository(Content::class)
+                    ->find(1);
+        } else {
+            $content = $topic['content'];
+        }
 
         if (empty($topic)) {
             $topic = [
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
+                'content' => $content,
                 'topic' => $this->faker->word,
-                'position' => 1
+                'position' => 1,
             ];
         }
         $this->populator->addEntity(
@@ -775,6 +814,9 @@ class RailcontentTestCase extends BaseTestCase
         );
         $fakePopulator = $this->populator->execute();
 
+        for($i=0; $i<$nr; $i++) {
+            $content->setTopic($fakePopulator[ContentTopic::class][$i]);
+        }
         return $fakePopulator[ContentTopic::class];
     }
 

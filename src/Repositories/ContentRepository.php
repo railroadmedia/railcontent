@@ -8,6 +8,7 @@ use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
+use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Resora\Decorators\Decorator;
@@ -15,6 +16,7 @@ use Railroad\Resora\Queries\CachedQuery;
 
 class ContentRepository extends EntityRepository
 {
+    use ByContentIdTrait;
     /**
      * If this is false content with any status will be pulled. If its an array, only content with those
      * statuses will be pulled.

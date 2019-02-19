@@ -59,7 +59,7 @@ class ContentTopic
      */
     public function setContent($content)
     {
-        $content->addTopic($this);
+//        $content->addTopic($this);
 
         $this->content = $content;
     }

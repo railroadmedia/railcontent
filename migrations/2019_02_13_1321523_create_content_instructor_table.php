@@ -19,6 +19,7 @@ class CreateContentInstructorTable extends Migration
                 $table->increments('id');
                 $table->integer('content_id')->index();
                 $table->integer('instructor_id')->index();
+                $table->integer('position')->index();
 
                 $table->index(['instructor_id', 'content_id'], 'ic');
             }
