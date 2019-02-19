@@ -356,7 +356,6 @@ class ContentRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContent . '.id'
             )
-            ->orderBy($orderBy, $orderByDirection, ConfigService::$tableContentHierarchy)
             ->where(ConfigService::$tableContentHierarchy . '.parent_id', $parentId)
             ->whereIn(ConfigService::$tableContent . '.type', $types)
             ->selectInheritenceColumns()
