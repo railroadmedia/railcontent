@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests;
 
 use Carbon\Carbon;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Dotenv\Dotenv;
 use Exception;
@@ -580,6 +581,10 @@ class RailcontentTestCase extends BaseTestCase
         if (!array_key_exists('brand', $contentData)) {
             $contentData['brand'] = config('railcontent.brand');
         }
+
+        $contentData['topic'] = new ArrayCollection();
+        $contentData['data'] = new ArrayCollection();
+
         $this->populator->addEntity(
             Content::class,
             $nr,
@@ -815,7 +820,7 @@ class RailcontentTestCase extends BaseTestCase
         $fakePopulator = $this->populator->execute();
 
         for($i=0; $i<$nr; $i++) {
-            $content->setTopic($fakePopulator[ContentTopic::class][$i]);
+            $content->addTopic($fakePopulator[ContentTopic::class][$i]);
         }
         return $fakePopulator[ContentTopic::class];
     }

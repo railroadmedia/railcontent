@@ -8,7 +8,6 @@ use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentDatumCreateRequest;
 use Railroad\Railcontent\Requests\ContentDatumDeleteRequest;
 use Railroad\Railcontent\Requests\ContentDatumUpdateRequest;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Services\ResponseService;
 
@@ -35,7 +34,7 @@ class ContentDatumJsonController extends Controller
         $this->datumService = $datumService;
         $this->permissionPackageService = $permissionPackageService;
 
-         $this->middleware(ConfigService::$controllerMiddleware);
+         $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /**

@@ -5,7 +5,6 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\UserContentRequest;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Transformers\DataTransformer;
@@ -27,7 +26,7 @@ class ContentProgressJsonController extends Controller
     ) {
         $this->userContentService = $userContentService;
 
-        $this->middleware(ConfigService::$controllerMiddleware);
+        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /** Start a content for the authenticated user

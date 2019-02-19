@@ -12,7 +12,6 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ResponseService;
 
@@ -40,7 +39,7 @@ class ContentJsonController extends Controller
         $this->contentService = $contentService;
         $this->permissionPackageService = $permissionPackageService;
 
-        $this->middleware(ConfigService::$controllerMiddleware);
+        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /**

@@ -6,7 +6,6 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\CommentLikeRequest;
 use Railroad\Railcontent\Requests\CommentUnLikeRequest;
 use Railroad\Railcontent\Services\CommentLikeService;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ResponseService;
 
 class CommentLikeJsonController extends Controller
@@ -21,7 +20,7 @@ class CommentLikeJsonController extends Controller
     ) {
         $this->commentLikeService = $commentLikeService;
 
-        $this->middleware(ConfigService::$controllerMiddleware);
+        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /**

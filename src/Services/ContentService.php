@@ -6,6 +6,7 @@ use function Clue\StreamFilter\fun;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\Comment;
@@ -1067,95 +1068,7 @@ class ContentService
     ) {
         $content = new Content();
 
-        if (array_key_exists('fields', $data['data']['attributes'])) {
-            $fields = $data['data']['attributes']['fields'];
-            foreach ($fields as $field) {
-                $relationships = null;
-                if (strpos($field['key'], '_') !== false || strpos($field['key'], '-') !== false) {
-                    $field['key'] = camel_case($field['key']);
-                }
-                if (in_array(
-                    $field['key'],
-                    $this->entityManager->getClassMetadata(Content::class)
-                        ->getFieldNames()
-                )) {
-                    $data['data']['attributes'] = array_merge(
-                        $data['data']['attributes'],
-                        [
-                            $field['key'] => $field['value'],
-                        ]
-                    );
-                } elseif (in_array(
-                    $field['key'],
-                    $this->entityManager->getClassMetadata(Content::class)
-                        ->getAssociationNames()
-                )) {
-                    $assoc =
-                        $this->entityManager->getClassMetadata(get_class($content))->associationMappings[$field['key']];
-                    $entityName = $assoc['targetEntity'];
-
-                    $fieldEntity = new $entityName();
-
-                    if (in_array(
-                        $field['key'],
-                        $this->entityManager->getClassMetadata($entityName)
-                            ->getFieldNames()
-                    )) {
-                        $field[$assoc['fieldName']] = $field['value'];
-                    } elseif (in_array(
-                        $field['key'],
-                        $this->entityManager->getClassMetadata($entityName)
-                            ->getAssociationNames()
-                    )) {
-                        $assoc =
-                            $this->entityManager->getClassMetadata(($entityName))->associationMappings[$field['key']];
-
-                        $associatedEntity =
-                            $this->entityManager->getRepository($assoc['targetEntity'])
-                                ->find($field['value']);
-
-                        $addMethod = 'add' . ucwords($field['key']);
-
-                        $fieldEntity->setContent($content);
-                        $fieldEntity->$addMethod($associatedEntity);
-                    }
-
-                    $data2['data']['attributes'] = $field;
-
-                    if ($relationships) {
-                        $data2['data'][] = ['relationships' => $relationships];
-                    }
-
-                    $this->jsonApiHydrator->hydrate($fieldEntity, $data2);
-                    $getFields = 'get' . ucwords($assoc['fieldName']);
-
-                    $position = $this->contentRepository->recalculatePosition(
-                        $field['position'] ?? null,
-                        count($content->$getFields()),
-                        $content->$getFields()
-                    );
-
-                    $expr = new Comparison('position', '>=', $position);
-                    $criteria = new Criteria();
-                    $criteria->where($expr);
-
-                    $matched =
-                        $content->$getFields()
-                            ->matching($criteria);
-
-                    if (!$matched->isEmpty()) {
-                        foreach ($matched as $f) {
-                            $f->setPosition($f->getPosition() + 1);
-                        }
-                    }
-
-                    $fieldEntity->setPosition($position);
-                    $fieldEntity->setContent($content);
-                    $addFieldNameMethod = 'add' . ucwords($assoc['fieldName']);
-                    $content->$addFieldNameMethod($fieldEntity);
-                }
-            }
-        }
+        $data = $this->saveContentFields($data, $content);
 
         $this->jsonApiHydrator->hydrate($content, $data);
 
@@ -1202,6 +1115,9 @@ class ContentService
         if (empty($content)) {
             return null;
         }
+
+        $data = $this->saveContentFields($data, $content);
+
         $this->jsonApiHydrator->hydrate($content, $data);
 
         $this->entityManager->persist($content);
@@ -1421,5 +1337,113 @@ class ContentService
         }
 
         return $results;
+    }
+
+    /**
+     * @param $data
+     * @param Content $content
+     * @param $data2
+     * @return mixed
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \ReflectionException
+     */
+    private function saveContentFields($data, Content $content)
+    {
+        if (array_key_exists('fields', $data['data']['attributes'])) {
+            $fields = $data['data']['attributes']['fields'];
+            foreach ($fields as $field) {
+                $relationships = null;
+                if (strpos($field['key'], '_') !== false || strpos($field['key'], '-') !== false) {
+                    $field['key'] = camel_case($field['key']);
+                }
+                if (in_array(
+                    $field['key'],
+                    $this->entityManager->getClassMetadata(Content::class)
+                        ->getFieldNames()
+                )) {
+                    $data['data']['attributes'] = array_merge(
+                        $data['data']['attributes'],
+                        [
+                            $field['key'] => $field['value'],
+                        ]
+                    );
+                } elseif (in_array(
+                    $field['key'],
+                    $this->entityManager->getClassMetadata(Content::class)
+                        ->getAssociationNames()
+                ) ) {
+                    $assoc =
+                        $this->entityManager->getClassMetadata(get_class($content))->associationMappings[$field['key']];
+                    $entityName = $assoc['targetEntity'];
+
+                    $fieldEntity = new $entityName();
+
+                    if (in_array(
+                        $field['key'],
+                        $this->entityManager->getClassMetadata($entityName)
+                            ->getFieldNames()
+                    )) {
+                        $field[$assoc['fieldName']] = $field['value'];
+                    } elseif (in_array(
+                        $field['key'],
+                        $this->entityManager->getClassMetadata($entityName)
+                            ->getAssociationNames()
+                    )) {
+                        $assoc =
+                            $this->entityManager->getClassMetadata(($entityName))->associationMappings[$field['key']];
+
+                        $associatedEntity =
+                            $this->entityManager->getRepository($assoc['targetEntity'])
+                                ->find($field['value']);
+
+                        $addMethod = 'add' . ucwords($field['key']);
+
+                        $fieldEntity->setContent($content);
+                        $fieldEntity->$addMethod($associatedEntity);
+                    }
+
+                    $data2['data']['attributes'] = $field;
+
+                    if ($relationships) {
+                        $data2['data'][] = ['relationships' => $relationships];
+                    }
+
+                    $this->jsonApiHydrator->hydrate($fieldEntity, $data2);
+
+                    $getFields = 'get' . ucwords($assoc['fieldName']);
+
+                    $position = $this->contentRepository->recalculatePosition(
+                        $field['position'] ?? null,
+                        count($content->$getFields()),
+                        $content->$getFields()
+                    );
+
+                    if ($assoc['type'] == ClassMetadataInfo::ONE_TO_MANY) {
+                        $expr = new Comparison('position', '>=', $position);
+                        $criteria = new Criteria();
+                        $criteria->where($expr);
+
+                        if ($content->$getFields()) {
+                            $matched =
+                                $content->$getFields()
+                                    ->matching($criteria);
+
+                            if (!$matched->isEmpty()) {
+                                foreach ($matched as $f) {
+                                    $f->setPosition($f->getPosition() + 1);
+                                }
+                            }
+                        }
+                    }
+
+                    $fieldEntity->setPosition($position);
+                    $fieldEntity->setContent($content);
+                    $addFieldNameMethod = 'add' . ucwords($assoc['fieldName']);
+                    $content->$addFieldNameMethod($fieldEntity);
+                }
+            }
+        }
+        return $data;
     }
 }

@@ -3,14 +3,8 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Faker\ORM\Doctrine\Populator;
-use Railroad\Railcontent\Entities\Content;
+use Doctrine\ORM\EntityManager;
 use Railroad\Railcontent\Entities\ContentHierarchy;
-use Railroad\Railcontent\Entities\ContentInstructor;
-use Railroad\Railcontent\Entities\Permission;
-use Railroad\Railcontent\Entities\UserContentProgress;
-use Railroad\Railcontent\Entities\UserPermission;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Response;
@@ -41,12 +35,19 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $slug = $this->faker->word;
         $type = 'course';
         $status = ContentService::STATUS_SCHEDULED;
-        $instructor = $this->fakeContent(1,[
-            'type' => 'instructor'
-        ]);
-        $exercises = $this->fakeContent(2,[
-            'type' => 'assignment'
-        ]);
+        $instructor = $this->fakeContent(
+            1,
+            [
+                'type' => 'instructor',
+            ]
+        );
+
+        $exercises = $this->fakeContent(
+            2,
+            [
+                'type' => 'assignment',
+            ]
+        );
 
         $response = $this->call(
             'PUT',
@@ -59,7 +60,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                         'position' => null,
                         'status' => $status,
                         'parent_id' => null,
-                        'brand' => ConfigService::$brand,
+                        'brand' => config('railcontent.brand'),
                         'type' => $type,
                         'fields' => [
                             [
@@ -100,10 +101,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(201, $response->status());
         $this->assertArrayHasKey('relationships', $responseContent['attributes']);
         $this->assertArrayHasKey('contentData', $responseContent['attributes']['relationships']);
-        $this->assertArrayHasKey('instructor', $responseContent['attributes']['relationships']);
+        $this->assertArrayHasKey('contentInstructor', $responseContent['attributes']['relationships']);
         $this->assertArrayHasKey('topic', $responseContent['attributes']['relationships']);
         $this->assertArrayHasKey('exercise', $responseContent['attributes']['relationships']);
-        $this->assertEquals($instructor[0]->getId(), $responseContent['attributes']['relationships']['instructor']['data'][0]['instructor']['id']);
+
+        $this->assertEquals(
+            $instructor[0]->getId(),
+            $responseContent['attributes']['relationships']['contentInstructor']['instructor']['id']
+        );
         $this->assertEquals(2, count($responseContent['attributes']['relationships']['exercise']['data']));
     }
 
@@ -232,13 +237,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $type = $this->faker->word;
         $position = $this->faker->numberBetween();
         $status = ContentService::STATUS_PUBLISHED;
+        $parent = $this->fakeContent();
 
         $contentData = [
             'slug' => $slug,
             'status' => $status,
             'type' => $type,
             'sort' => $position,
-            'brand' => ConfigService::$brand,
+            'brand' => config('railcontent.brand'),
             'fields' => [
                 [
                     'key' => 'title',
@@ -254,12 +260,21 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 ],
             ],
         ];
+
         $response = $this->call(
             'PUT',
             'railcontent/content',
             [
                 'data' => [
                     'attributes' => $contentData,
+//                    'relationships' => [
+//                        'parent' => [
+//                            'data' => [
+//                                'type' => 'content',
+//                                'id' => $parent[0]->getId(),
+//                            ],
+//                        ],
+//                    ],
                 ],
             ]
         );
@@ -298,9 +313,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'PATCH',
             'railcontent/content/' . $content[0]->getId(),
             [
-                'slug' => 'new slug',
-                'status' => ContentService::STATUS_PUBLISHED,
-                'type' => 'roxana',
+                'data' => [
+                    'attributes' => [
+                        'slug' => 'new slug',
+                        'status' => ContentService::STATUS_PUBLISHED,
+                        'type' => 'roxana',
+                    ],
+                ],
             ]
         );
 
@@ -345,7 +364,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $errors = [
             [
                 'source' => 'data.attributes.position',
-                'detail' => 'The data.attributes.position must be at least 0.',
+                'detail' => 'The position must be at least 0.',
                 'title' => 'Validation failed.',
             ],
         ];
@@ -382,7 +401,39 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_after_update_content_is_returned_in_json_format()
     {
-        $content = $this->fakeContent();
+        $content = $this->fakeContent(
+            1,
+            [
+                'difficulty' => 1,
+            ]
+        );
+
+        $contentTopic = $this->fakeContentTopic(
+            1,
+            [
+                'content' => $content[0],
+                'topic' => $this->faker->word,
+                'position' => 1,
+            ]
+        );
+
+        $instructors = $this->fakeContent(
+            2,
+            [
+                'type' => 'instructor',
+                'status' => 'published',
+                'slug' => $this->faker->name,
+                'brand' => config('railcontent.brand'),
+            ]
+        );
+
+        $contentInstructor = $this->fakeContentInstructor(
+            1,
+            [
+                'content' => $content[0],
+                'instructor' => $instructors[0],
+            ]
+        );
 
         $new_slug = implode('-', $this->faker->words());
 
@@ -394,6 +445,28 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     'attributes' => [
                         'slug' => $new_slug,
                         'status' => ContentService::STATUS_PUBLISHED,
+                        'fields' => [
+                            [
+                                'key' => 'topic',
+                                'value' => $content[0]->getTopic()[0]->getTopic(),
+                                'position' => 10,
+                            ],
+                            [
+                                'key' => 'topic',
+                                'value' => $this->faker->word,
+                                'position' => 1,
+                            ],
+                            [
+                                'key' => 'difficulty',
+                                'value' => 2,
+                                'position' => 1,
+                            ],
+                            [
+                                'key' => 'instructor',
+                                'value' => $instructors[1]->getId(),
+                                'position' => 1,
+                            ],
+                        ],
                     ],
                 ],
             ]
@@ -405,6 +478,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     'attributes' => [
                         'slug' => $new_slug,
                         'status' => ContentService::STATUS_PUBLISHED,
+                        'difficulty' => 2,
+                        'relationships' => [
+                            'contentInstructor' => [
+                                'instructor' => [
+                                    'id' => 3,
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ],
@@ -450,12 +531,28 @@ class ContentJsonControllerTest extends RailcontentTestCase
     {
         $content = $this->fakeContent();
 
+        $contentTopic = $this->fakeContentTopic(
+            1,
+            [
+                'content' => $content[0],
+                'topic' => $this->faker->word,
+                'position' => 1,
+            ]
+        );
+
         $response = $this->call('DELETE', 'railcontent/content/' . $content[0]->getId());
 
         $this->assertEquals(204, $response->status());
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableContent,
+            config('railcontent.table_prefix') . 'content',
+            [
+                'id' => 1,
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix') . 'content_topic',
             [
                 'id' => 1,
             ]
@@ -968,7 +1065,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals($content[0]->getId(), $responseContent['id']);
         $this->assertArrayHasKey('relationships', $responseContent['attributes']);
         $this->assertArrayHasKey('contentData', $responseContent['attributes']['relationships']);
-        $this->assertArrayHasKey('instructor', $responseContent['attributes']['relationships']);
+        $this->assertArrayHasKey('contentInstructor', $responseContent['attributes']['relationships']);
         $this->assertArrayHasKey('topic', $responseContent['attributes']['relationships']);
     }
 

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Services\CommentAssignmentService;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ResponseService;
 
 class CommentAssignationJsonController extends Controller
@@ -31,7 +30,7 @@ class CommentAssignationJsonController extends Controller
         $this->commentAssignationService = $commentAssignationService;
         $this->permissionPackageService = $permissionPackageService;
 
-        $this->middleware(ConfigService::$controllerMiddleware);
+        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /**

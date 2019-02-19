@@ -37,7 +37,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         // $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
     }
 
-    public function test_create_content_field_controller_method_response()
+    public function _test_create_content_field_controller_method_response()
     {
         $content = $this->fakeContent();
         $key = 'topic';
@@ -81,7 +81,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
     }
 
-    public function test_add_content_field_not_pass_the_validation()
+    public function _test_add_content_field_not_pass_the_validation()
     {
         $content = $this->contentFactory->create();
         $response = $this->call(
@@ -96,7 +96,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $this->assertEquals(2, count($response->decodeResponseJson('meta')['errors']));
     }
 
-    public function test_add_content_field_incorrect_fields()
+    public function _test_add_content_field_incorrect_fields()
     {
         $key = $this->faker->text(500);
         $value = $this->faker->text(500);
@@ -139,7 +139,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $this->assertEquals($expectedErrors, $response->decodeResponseJson('meta')['errors']);
     }
 
-    public function test_update_content_field_controller_method_response()
+    public function _test_update_content_field_controller_method_response()
     {
         $content = $this->contentFactory->create();
 
@@ -174,7 +174,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
     }
 
-    public function test_update_content_field_not_pass_validation()
+    public function _test_update_content_field_not_pass_validation()
     {
         $content = $this->contentFactory->create();
 
@@ -202,7 +202,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $this->assertEquals($expectedErrors, $decodedResponse['errors']);
     }
 
-    public function test_delete_content_field_controller()
+    public function _test_delete_content_field_controller()
     {
         $content = $this->contentFactory->create();
 
@@ -214,7 +214,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $this->assertEquals(204, $response->status());
     }
 
-    public function test_delete_content_field_not_exist()
+    public function _test_delete_content_field_not_exist()
     {
         $fieldId = $this->faker->numberBetween();
         $contentId = $this->faker->numberBetween();
@@ -228,7 +228,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $this->assertEquals(404, $response->status());
     }
 
-    public function test_update_content_field_method_from_service_response()
+    public function _test_update_content_field_method_from_service_response()
     {
         $content = $this->contentFactory->create();
 
@@ -250,7 +250,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $this->assertEquals($updatedField, $this->serializer->toArray($results));
     }
 
-    public function test_delete_content_field_method_from_service_response()
+    public function _test_delete_content_field_method_from_service_response()
     {
         $content = $this->contentFactory->create();
 
@@ -261,7 +261,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $this->assertTrue($results);
     }
 
-    public function content_updated_event_dispatched_when_link_content_field()
+    public function _content_updated_event_dispatched_when_link_content_field()
     {
         Event::fake();
 
@@ -293,7 +293,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         );
     }
 
-    public function content_updated_event_dispatched_when_unlink_content_field()
+    public function _content_updated_event_dispatched_when_unlink_content_field()
     {
         Event::fake();
 
@@ -332,7 +332,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         );
     }
 
-    public function test_update_content_field_()
+    public function _test_update_content_field_()
     {
         $content = $this->contentFactory->create();
 
@@ -368,7 +368,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
     }
 
-    public function test_create_new_field_and_reposition_other_fields_increment()
+    public function _test_create_new_field_and_reposition_other_fields_increment()
     {
         $content = $this->contentFactory->create();
         $key = $this->faker->word();
@@ -397,7 +397,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         );
     }
 
-    public function test_update_field_and_reposition_other_fields_decrement()
+    public function _test_update_field_and_reposition_other_fields_decrement()
     {
         $content = $this->contentFactory->create();
         $key = $this->faker->word();
@@ -434,7 +434,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
         );
     }
 
-    public function test_delete_content_field_and_reposition()
+    public function _test_delete_content_field_and_reposition()
     {
         $content = $this->contentFactory->create();
         $contentId = $content->getId();

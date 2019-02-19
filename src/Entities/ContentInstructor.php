@@ -26,7 +26,7 @@ class ContentInstructor
     private $instructor;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
+     * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\Content")
      * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
      *
      */

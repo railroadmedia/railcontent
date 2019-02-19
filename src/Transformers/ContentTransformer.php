@@ -32,7 +32,7 @@ class ContentTransformer extends TransformerAbstract
         }
 
         if($content->getInstructor()){
-            $contents['relationships']['instructor'] = $this->serializeInstructor($content);
+            $contents['relationships']['contentInstructor'] = $this->serializeInstructor($content);
         }
 
         if ($content->getTopic()) {
@@ -49,7 +49,7 @@ class ContentTransformer extends TransformerAbstract
     {
         return fractal()
             ->serializeWith(new ArraySerializer())
-            ->collection($content->getInstructor(), ContentInstructorTransformer::class)
+            ->item($content->getInstructor(), ContentInstructorTransformer::class)
             ->toArray();
     }
     public function serializeExercise($content)

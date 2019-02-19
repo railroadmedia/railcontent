@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Requests\ContentHierarchyCreateRequest;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ResponseService;
 
@@ -32,7 +31,7 @@ class ContentHierarchyJsonController extends Controller
         $this->contentHierarchyService = $contentHierarchyService;
         $this->permissionPackageService = $permissionPackageService;
 
-        $this->middleware(ConfigService::$controllerMiddleware);
+        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /**

@@ -129,7 +129,7 @@ JsonApiHydrator $jsonApiHydrator
         $thereIsEntity = (!$noEntity);
 
         $contentType =
-            $thereIsEntity ? $this->getContentTypeVal($request) : $request->request->get('data')['attributes']['type'];
+            $thereIsEntity ? $this->getContentTypeVal($request) : $request->request->get('data')['attributes']['type']??'';
 
         if (isset(ConfigService::$validationRules[ConfigService::$brand]) &&
             array_key_exists($contentType, ConfigService::$validationRules[ConfigService::$brand]) &&
@@ -665,6 +665,7 @@ dd('ajunge?');
     {
         if ($request instanceof ContentCreateRequest) {
             $content = new Content();
+
             $this->jsonApiHydrator->hydrate($content, $request->onlyAllowed());
             return $content;
         }

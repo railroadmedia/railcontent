@@ -12,7 +12,6 @@ use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Requests\PermissionAssignRequest;
 use Railroad\Railcontent\Requests\PermissionDissociateRequest;
 use Railroad\Railcontent\Requests\PermissionRequest;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\ResponseService;
 
@@ -69,7 +68,7 @@ class PermissionJsonController extends Controller
         $this->entityManager = $entityManager;
         $this->permissionRepository = $this->entityManager->getRepository(Permission::class);
 
-        $this->middleware(ConfigService::$controllerMiddleware);
+        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /**

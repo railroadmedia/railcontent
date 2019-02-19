@@ -19,11 +19,11 @@ class ContentTopic
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
+     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content", inversedBy="topic")
      * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
      *
      */
-    private $content;
+    protected $content;
 
     /**
      * @ORM\Column(type="string")
@@ -59,7 +59,7 @@ class ContentTopic
      */
     public function setContent($content)
     {
-//        $content->addTopic($this);
+        $content->addTopic($this);
 
         $this->content = $content;
     }

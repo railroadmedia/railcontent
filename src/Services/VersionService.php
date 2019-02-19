@@ -26,7 +26,7 @@ class VersionService
     private $contentRepository;
 
     /**
-     * @var Request 
+     * @var Request
      */
     private $request;
 

@@ -12,9 +12,7 @@ use Railroad\Railcontent\Requests\CommentCreateRequest;
 use Railroad\Railcontent\Requests\CommentUpdateRequest;
 use Railroad\Railcontent\Requests\ReplyRequest;
 use Railroad\Railcontent\Services\CommentService;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ResponseService;
-use Railroad\Railcontent\Transformers\DataTransformer;
 
 class CommentJsonController extends Controller
 {
@@ -33,7 +31,7 @@ class CommentJsonController extends Controller
         $this->commentService = $commentService;
         $this->jsonApiHidrator = $jsonApiHydrator;
 
-        $this->middleware(ConfigService::$controllerMiddleware);
+        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /**
