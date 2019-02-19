@@ -2,27 +2,43 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Carbon\Carbon;
+use Doctrine\ORM\EntityManager;
 use Illuminate\Http\Request;
+use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\Version;
 use Railroad\Railcontent\Helpers\CacheHelper;
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\ContentVersionRepository;
 
 class VersionService
 {
-    // todo: revamp this class
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
 
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     */
     private $versionRepository;
+
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     */
     private $contentRepository;
+
+    /**
+     * @var Request 
+     */
     private $request;
 
     public function __construct(
-       // ContentVersionRepository $versionRepository,
-        Request $request
-       // ContentRepository $contentRepository
-    ) {
-       // $this->versionRepository = $versionRepository;
-      //  $this->contentRepository = $contentRepository;
+        Request $request,
+        EntityManager $entityManager
+    )
+    {
+        $this->entityManager = $entityManager;
+
+        $this->versionRepository = $this->entityManager->getRepository(Version::class);
+        $this->contentRepository = $this->entityManager->getRepository(Content::class);
         $this->request = $request;
     }
 
@@ -38,20 +54,17 @@ class VersionService
         $userId = $this->request->user()->id ?? null;
 
         //get content
-        $content = $this->contentRepository->getById($contentId);
+        $content = $this->contentRepository->find($contentId);
 
-        $versionContentId =
-            $this->versionRepository->create(
-                [
-                    'content_id' => $contentId,
-                    'author_id' => $userId,
-                    'state' => '',
-                    'data' => serialize($content),
-                    'saved_on' => Carbon::now()->toDateTimeString(),
-                ]
-            );
+        $versionContent = new Version();
+        $versionContent->setData(serialize($content));
+        $versionContent->setAuthorId($userId);
+        $versionContent->setContent($content);
 
-        return $versionContentId;
+        $this->entityManager->persist($versionContent);
+        $this->entityManager->flush();
+
+        return $versionContent;
     }
 
     /**
@@ -62,11 +75,16 @@ class VersionService
      */
     public function get($versionId)
     {
-        $hash = 'version_'. CacheHelper::getKey($versionId);
-        $results = Cache::store(ConfigService::$cacheDriver)->rememberForever($hash, function () use ($hash, $versionId) {
-            $results = $this->versionRepository->read($versionId);
-            return $results;
-        });
+        $hash = 'version_' . CacheHelper::getKey($versionId);
+        $results =
+            Cache::store(ConfigService::$cacheDriver)
+                ->rememberForever(
+                    $hash,
+                    function () use ($hash, $versionId) {
+                        $results = $this->versionRepository->find($versionId);
+                        return $results;
+                    }
+                );
 
         return $results;
     }

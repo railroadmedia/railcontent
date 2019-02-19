@@ -2,17 +2,9 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Illuminate\Database\Query\Builder;
-use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Resora\Queries\CachedQuery;
+use Doctrine\ORM\EntityRepository;
 
-class ContentVersionRepository extends \Railroad\Resora\Repositories\RepositoryBase
+class ContentVersionRepository extends EntityRepository
 {
-    /**
-     * @return CachedQuery|$this
-     */
-    protected function newQuery()
-    {
-        return (new CachedQuery($this->connection()))->from(ConfigService::$tableContentVersions);
-    }
+
 }
