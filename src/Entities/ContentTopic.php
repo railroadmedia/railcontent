@@ -32,7 +32,7 @@ class ContentTopic
     protected $topic;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      * @var string
      */
     protected $position;

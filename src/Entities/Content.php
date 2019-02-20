@@ -349,32 +349,38 @@ class Content
     private $topic;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentTag", mappedBy="content", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentTag", mappedBy="content",
+     *     cascade={"persist","remove"})
      */
     private $tag;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentKey", mappedBy="content", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentKey", mappedBy="content",
+     *     cascade={"persist","remove"})
      */
     private $key;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentKeyPitchType", mappedBy="content", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentKeyPitchType", mappedBy="content",
+     *     cascade={"persist","remove"})
      */
     private $keyPitchType;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentSbtBpm", mappedBy="content", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentSbtBpm", mappedBy="content",
+     *     cascade={"persist","remove"})
      */
     private $sbtBpm;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentSbtExerciseNumber", mappedBy="content", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentSbtExerciseNumber", mappedBy="content",
+     *     cascade={"persist","remove"})
      */
     private $sbtExerciseNumber;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentPlaylist", mappedBy="content", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentPlaylist", mappedBy="content",
+     *     cascade={"persist","remove"})
      */
     private $playlist;
 
@@ -413,7 +419,7 @@ class Content
      * @param string $key
      */
     public function setParent($parent)
-     {
+    {
         $this->parent = $parent;
     }
 
@@ -1228,18 +1234,24 @@ class Content
             return;
         }
 
-        $this->topic->add($contentTopic);
-//        $predictate = function ($element) use ($contentTopic) {
-//            return $element->getTopic() === $contentTopic->getTopic();
-//        };
-//        $existTopic = $this->topic->filter($predictate);
-//
-//        if ($existTopic->isEmpty()) {
-//            $this->topic->add($contentTopic);
-//        } else {
-//            //$topic = $existTopic->first();
-//            //$topic->setPosition($contentTopic->getPosition());
-//        }
+        $predictate = function ($element) use ($contentTopic) {
+            return $element->getTopic() === $contentTopic->getTopic();
+        };
+        $existTopic = $this->topic->filter($predictate);
+
+        if ($existTopic->isEmpty()) {
+            $this->topic->add($contentTopic);
+        } else {
+            $topic = $existTopic->first();
+            if ($topic->getPosition() == $contentTopic->getPosition()) {
+                return $this;
+            }
+
+            $key = $existTopic->key();
+            $this->getTopic()
+                ->get($key)
+                ->setPosition($contentTopic->getPosition());
+        }
 
         return $this;
     }
@@ -1250,6 +1262,7 @@ class Content
      */
     public function removeTopic(ContentTopic $contentTopic)
     {
+
         // If the topic does not exist in the collection, then we don't need to do anything
         if (!$this->topic->contains($contentTopic)) {
             return;
@@ -1257,7 +1270,6 @@ class Content
 
         $this->topic->removeElement($contentTopic);
 
-        $contentTopic->setContent(null);
     }
 
     /**
