@@ -54,7 +54,7 @@ class CommentJsonController extends Controller
             $request->get('page', 1),
             $request->get('limit', 10),
             $request->get('sort', $request->get('sort', '-created_on')),
-            $request->user()->id ?? null
+            auth()->id() ?? null
         );
 
         return reply()->json(
@@ -81,7 +81,7 @@ class CommentJsonController extends Controller
             $request->get('comment'),
             $request->get('content_id'),
             null,
-            $request->user()->id ?? null,
+            auth()->id() ?? null,
             $request->get('display_name') ?? ''
         );
 
@@ -195,7 +195,7 @@ class CommentJsonController extends Controller
             $request->get('comment'),
             $request->get('content_id'),
             $request->get('parent_id'),
-            $request->user()->id ?? null
+            auth()->id() ?? null
         );
 
         throw_if(
