@@ -79,7 +79,7 @@ class ContentProgressJsonController extends Controller
     {
         $response = $this->userContentService->resetContent(
             $request->input('data.relationships.content.data.id'),
-            $request->user()->id
+            auth()->id()
         );
 
         return reply()->json(
