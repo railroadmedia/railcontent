@@ -99,17 +99,16 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $responseContent = $response->decodeResponseJson('data');
 
         $this->assertEquals(201, $response->status());
-        $this->assertArrayHasKey('relationships', $responseContent['attributes']);
-        $this->assertArrayHasKey('contentData', $responseContent['attributes']['relationships']);
-        $this->assertArrayHasKey('contentInstructor', $responseContent['attributes']['relationships']);
-        $this->assertArrayHasKey('topic', $responseContent['attributes']['relationships']);
-        $this->assertArrayHasKey('exercise', $responseContent['attributes']['relationships']);
 
+        $this->assertArrayHasKey('data', $responseContent['relationships']);
+        $this->assertArrayHasKey('instructor', $responseContent['relationships']);
+        $this->assertArrayHasKey('topic', $responseContent['relationships']);
+        $this->assertArrayHasKey('exercise', $responseContent['relationships']);
         $this->assertEquals(
             $instructor[0]->getId(),
-            $responseContent['attributes']['relationships']['contentInstructor']['instructor']['id']
+            $responseContent['relationships']['instructor']['data']['id']
         );
-        $this->assertEquals(2, count($responseContent['attributes']['relationships']['exercise']['data']));
+        $this->assertEquals(2, count($responseContent['relationships']['exercise']['data']));
     }
 
     public function test_store_not_pass_the_validation()
@@ -239,6 +238,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_PUBLISHED;
         $parent = $this->fakeContent();
 
+        $exercise = $this->fakeContent();
+
         $contentData = [
             'slug' => $slug,
             'status' => $status,
@@ -257,6 +258,38 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 [
                     'key' => 'difficulty',
                     'value' => $this->faker->randomNumber(1),
+                ],
+                [
+                    'key' => 'tag',
+                    'value' => $this->faker->word,
+                ],
+                [
+                    'key' => 'tag',
+                    'value' => $this->faker->word,
+                ],
+                [
+                    'key' => 'key',
+                    'value' => $this->faker->word,
+                ],
+                [
+                    'key' => 'keyPitchType',
+                    'value' => $this->faker->word,
+                ],
+                [
+                    'key' => 'sbtBpm',
+                    'value' => $this->faker->numberBetween(1,250),
+                ],
+                [
+                    'key' => 'exercise',
+                    'value' => $exercise[0]->getId(),
+                ],
+                [
+                    'key' => 'sbtExerciseNumber',
+                    'value' => $this->faker->word(),
+                ],
+                [
+                    'key' => 'playlist',
+                    'value' => $this->faker->word,
                 ],
             ],
         ];
@@ -280,8 +313,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         unset($contentData['fields']);
-
+        //dd($response);
         $this->assertArraySubset($contentData, $response->decodeResponseJson('data')['attributes']);
+        $this->assertArrayHasKey('tag', $response->decodeResponseJson('data')['relationships']);
+        $this->assertArrayHasKey('key', $response->decodeResponseJson('data')['relationships']);
+        $this->assertArrayHasKey('keyPitchType', $response->decodeResponseJson('data')['relationships']);
+        $this->assertArrayHasKey('sbtBpm', $response->decodeResponseJson('data')['relationships']);
+        $this->assertArrayHasKey('exercise', $response->decodeResponseJson('data')['relationships']);
+        $this->assertArrayHasKey('sbtExerciseNumber', $response->decodeResponseJson('data')['relationships']);
     }
 
     public function test_content_service_return_new_content_after_create()
@@ -480,7 +519,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 ],
             ]
         );
-
+        // dd($response->decodeResponseJson('included'));
         $this->assertArraySubset(
             [
                 'data' => [
@@ -488,22 +527,23 @@ class ContentJsonControllerTest extends RailcontentTestCase
                         'slug' => $new_slug,
                         'status' => ContentService::STATUS_PUBLISHED,
                         'difficulty' => 2,
-                        'relationships' => [
-                            'contentInstructor' => [
-                                'instructor' => [
-                                    'id' => $instructors[1]->getId(),
-                                ],
+                    ],
+                    'relationships' => [
+                        'instructor' => [
+                            'data' => [
+                                'type' => 'instructor',
+                                'id' => 2,
                             ],
-                            'topic' => [
-                                'data' => [
-                                    [
-                                        'topic' => 'topic1',
-                                        'position' => 2,
-                                    ],
-                                                                      [
-                                        'topic' => 'topic2',
-                                        'position' => 1,
-                                    ]
+                        ],
+                        'topic' => [
+                            'data' => [
+                                [
+                                    'type' => 'topic',
+                                    'id' => 1,
+                                ],
+                                [
+                                    'type' => 'topic',
+                                    'id' => 14,
                                 ],
                             ],
                         ],
@@ -1084,10 +1124,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $responseContent = $response->decodeResponseJson('data');
 
         $this->assertEquals($content[0]->getId(), $responseContent['id']);
-        $this->assertArrayHasKey('relationships', $responseContent['attributes']);
-        $this->assertArrayHasKey('contentData', $responseContent['attributes']['relationships']);
-        $this->assertArrayHasKey('contentInstructor', $responseContent['attributes']['relationships']);
-        $this->assertArrayHasKey('topic', $responseContent['attributes']['relationships']);
+        $this->assertArrayHasKey('data', $responseContent['relationships']);
+        $this->assertArrayHasKey('instructor', $responseContent['relationships']);
+        $this->assertArrayHasKey('topic', $responseContent['relationships']);
     }
 
     public function test_after_update_content_reposition_associated_fields()
@@ -1135,7 +1174,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-
         $response = $this->call(
             'PATCH',
             'railcontent/content/' . $content[0]->getId(),
@@ -1172,20 +1210,105 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'data' => [
                     'attributes' => [
                         'status' => ContentService::STATUS_PUBLISHED,
-                        'difficulty' => 2,
-                        'relationships' => [
-                               'topic' => [
-                                'data' => [
-                                    [
-                                        'topic' => 'topic1',
-                                        'position' => 2,
-                                    ],
-                                    [
-                                        'topic' => 'topic2',
-                                        'position' => 1,
-                                    ]
+                    ],
+                ],
+            ],
+            $response->decodeResponseJson()
+        );
+
+        $this->assertEquals(4, count($response->decodeResponseJson('data')['relationships']['topic']['data']));
+        $this->assertArraySubset(
+            [
+                [
+                    "topic" => "topic1",
+                    "position" => 1,
+                ],
+                [
+                    "topic" => "topic3",
+                    "position" => 3,
+                ],
+                [
+                    "topic" => "topic4",
+                    "position" => 2,
+                ],
+                [
+                    "topic" => "topic5",
+                    "position" => 4,
+                ],
+            ],
+            array_pluck($response->decodeResponseJson('included'), 'attributes')
+        );
+    }
+
+    public function test_after_update_content_delete_associated_field()
+    {
+        $content = $this->fakeContent(
+            1,
+            [
+                'difficulty' => 1,
+            ]
+        );
+
+        $contentTopic = $this->fakeContentTopic(
+            1,
+            [
+                'content' => $content[0],
+                'topic' => 'topic1',
+                'position' => 1,
+            ]
+        );
+
+        $contentTopic = $this->fakeContentTopic(
+            1,
+            [
+                'content' => $content[0],
+                'topic' => 'topic2',
+                'position' => 2,
+            ]
+        );
+
+        $response = $this->call(
+            'PATCH',
+            'railcontent/content/' . $content[0]->getId(),
+            [
+                'data' => [
+                    'attributes' => [
+                        'status' => ContentService::STATUS_PUBLISHED,
+                        'fields' => [
+                            [
+                                'key' => 'topic',
+                                'value' => 'topic2',
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        $this->assertArraySubset(
+            [
+                'data' => [
+                    'attributes' => [
+                        'status' => ContentService::STATUS_PUBLISHED,
+                    ],
+                    'relationships' => [
+                        'topic' => [
+                            'data' => [
+                                [
+                                    'type' => 'topic',
+                                    'id' => $contentTopic[0]->getId(),
                                 ],
                             ],
+                        ],
+                    ],
+                ],
+                'included' => [
+                    [
+                        'type' => 'topic',
+                        'id' => $contentTopic[0]->getId(),
+                        'attributes' => [
+                            'topic' => 'topic2',
+                            'position' => 1,
                         ],
                     ],
                 ],
@@ -1193,5 +1316,4 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $response->decodeResponseJson()
         );
     }
-
 }

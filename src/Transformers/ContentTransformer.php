@@ -2,15 +2,11 @@
 
 namespace Railroad\Railcontent\Transformers;
 
-use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Collection;
-use League\Fractal\Serializer\ArraySerializer;
-use League\Fractal\Serializer\DataArraySerializer;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\ContentData;
 
 class ContentTransformer extends TransformerAbstract
 {
@@ -28,52 +24,175 @@ class ContentTransformer extends TransformerAbstract
         ))->toArray();
 
         if ($content->getData()) {
-            $contents['relationships']['contentData'] = $this->serializeContentData($content);
+            $this->defaultIncludes[] = 'data';
         }
 
         if($content->getInstructor()){
-            $contents['relationships']['contentInstructor'] = $this->serializeInstructor($content);
+            $this->defaultIncludes[] = 'instructor';
         }
 
         if ($content->getTopic()) {
-            $contents['relationships']['topic'] = $this->serializeContentTopic($content);
+            $this->defaultIncludes[] = 'topic';
         }
 
         if($content->getExercise()){
-            $contents['relationships']['exercise'] = $this->serializeExercise($content);
+            $this->defaultIncludes[] = 'exercise';
         }
+
+        if($content->getTag()){
+            $this->defaultIncludes[] = 'tag';
+        }
+
+        if($content->getKey()){
+            $this->defaultIncludes[] = 'key';
+        }
+
+        if($content->getKeyPitchType()){
+            $this->defaultIncludes[] = 'keyPitchType';
+        }
+
+        if($content->getSbtBpm()){
+            $this->defaultIncludes[] = 'sbtBpm';
+        }
+
+        if($content->getSbtExerciseNumber()){
+            $this->defaultIncludes[] = 'sbtExerciseNumber';
+        }
+
+        if($content->getPlaylist()){
+            $this->defaultIncludes[] = 'playlist';
+        }
+
         return $contents;
     }
 
-    public function serializeInstructor($content)
+    /**
+     * @param Content $content
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includeTag(Content $content)
     {
-        return fractal()
-            ->serializeWith(new ArraySerializer())
-            ->item($content->getInstructor(), ContentInstructorTransformer::class)
-            ->toArray();
-    }
-    public function serializeExercise($content)
-    {
-        return fractal()
-            ->serializeWith(new ArraySerializer())
-            ->collection($content->getExercise(), ContentExerciseTransformer::class)
-            ->toArray();
-    }
-    public function serializeContentData($content)
-    {
-        return fractal()
-            ->serializeWith(new ArraySerializer())
-            ->collection($content->getData())
-            ->transformWith(ContentDataTransformer::class)
-            ->toArray();
+            return $this->collection(
+                $content->getTag(),
+                new ContentTagTransformer(),
+                'tag'
+            );
     }
 
-    public function serializeContentTopic($content)
+    /**
+     * @param Content $content
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includeData(Content $content)
     {
-        return fractal()
-            ->serializeWith(new ArraySerializer())
-            ->collection($content->getTopic())
-            ->transformWith(ContentTopicTransformer::class)
-            ->toArray();
+        return $this->collection(
+            $content->getData(),
+            new ContentDataTransformer(),
+            'contentData'
+        );
+    }
+
+    /**
+     * @param Content $content
+     * @return \League\Fractal\Resource\Item
+     */
+    public function includeInstructor(Content $content)
+    {
+        return $this->item(
+            $content->getInstructor(),
+            new ContentInstructorTransformer(),
+            'instructor'
+        );
+    }
+
+    /**
+     * @param Content $content
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includeTopic(Content $content)
+    {
+        return $this->collection(
+            $content->getTopic(),
+            new ContentTopicTransformer(),
+            'topic'
+        );
+    }
+
+    /**
+     * @param Content $content
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includeKey(Content $content)
+    {
+        return $this->collection(
+            $content->getKey(),
+            new ContentKeyTransformer(),
+            'key'
+        );
+    }
+
+    /**
+     * @param Content $content
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includeKeyPitchType(Content $content)
+    {
+        return $this->collection(
+            $content->getKeyPitchType(),
+            new ContentKeyPitchTypeTransformer(),
+            'keyPitchType'
+        );
+    }
+
+    /**
+     * @param Content $content
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includeSbtBpm(Content $content)
+    {
+        return $this->collection(
+            $content->getSbtBpm(),
+            new ContentSbtBpmTransformer(),
+            'sbtBpm'
+        );
+    }
+
+    /**
+     * @param Content $content
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includeExercise(Content $content)
+    {
+        return $this->collection(
+            $content->getExercise(),
+            new ContentExerciseTransformer(),
+            'exercise'
+        );
+    }
+
+    /**
+     * @param Content $content
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includePlaylist(Content $content)
+    {
+        return $this->collection(
+            $content->getPlaylist(),
+            new ContentPlaylistTransformer(),
+            'playlist'
+        );
+    }
+
+    /**
+     * @param Content $content
+     * @return \League\Fractal\Resource\Collection
+     */
+    public function includeSbtExerciseNumber(Content $content)
+    {
+        return $this->collection(
+            $content->getSbtExerciseNumber(),
+            new ContentSbtExerciseNumberTransformer(),
+            'sbtExerciseNumber'
+        );
     }
 }

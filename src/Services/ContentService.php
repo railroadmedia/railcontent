@@ -1413,31 +1413,16 @@ class ContentService
 
                     $getFields = 'get' . ucwords($assoc['fieldName']);
 
-                    $position = $this->contentRepository->recalculatePosition(
-                        $field['position'] ?? null,
-                        count($content->$getFields()),
-                        $content->$getFields()
-                    );
+                    if(array_key_exists('position', $field)){
+                        $position = $this->contentRepository->recalculatePosition(
+                            $field['position'] ?? null,
+                            count($content->$getFields()),
+                            $content->$getFields()
+                        );
 
-                    if ($assoc['type'] == ClassMetadataInfo::ONE_TO_MANY) {
-                        $expr = new Comparison('position', '>=', $position);
-                        $criteria = new Criteria();
-                        $criteria->where($expr);
-
-                        if ($content->$getFields()) {
-                            $matched =
-                                $content->$getFields()
-                                    ->matching($criteria);
-
-                            if (!$matched->isEmpty()) {
-                                foreach ($matched as $f) {
-                                    $f->setPosition($f->getPosition() + 1);
-                                }
-                            }
-                        }
+                        $fieldEntity->setPosition($position);
                     }
 
-                    $fieldEntity->setPosition($position);
                     $fieldEntity->setContent($content);
                     $addFieldNameMethod = 'add' . ucwords($assoc['fieldName']);
                     $content->$addFieldNameMethod($fieldEntity);
@@ -1451,7 +1436,6 @@ class ContentService
     {
         if (array_key_exists('fields', $data['data']['attributes'])) {
             $fields = $data['data']['attributes']['fields'];
-            //            dd($content);
             $groupedFields = $fields;
             foreach ($fields as $field) {
                 $relationships = null;
@@ -1516,39 +1500,24 @@ class ContentService
                     $removeField = 'remove' . ucwords($assoc['fieldName']);
 
                     $oldFields = $content->$getFields();
+
                     foreach ($oldFields as $oldField) {
                         //check if field was deleted
                         if (!in_array($oldField->$getFields(), array_column($groupedFields, 'value'))) {
                             $content->$removeField($oldField);
+                            $this->entityManager->remove($oldField);
                         }
                     }
 
-                    $position = $this->contentRepository->recalculatePosition(
-                        $field['position'] ?? null,
-                        count($content->$getFields()),
-                        $content->$getFields()
-                    );
-
-                    if ($assoc['type'] == ClassMetadataInfo::ONE_TO_MANY) {
-                        $expr = new Comparison('position', '>=', $position);
-
-                        $criteria = new Criteria();
-                        $criteria->where($expr);
-
-                        if ($content->$getFields()) {
-                            $matched =
-                                $content->$getFields()
-                                    ->matching($criteria);
-
-                            if (!$matched->isEmpty()) {
-                                foreach ($matched as $f) {
-                                    $f->setPosition($f->getPosition() + 1);
-                                }
-                            }
-                        }
+                    if(array_key_exists('position', $field)) {
+                        $position = $this->contentRepository->recalculatePosition(
+                            $field['position'] ?? null,
+                            count($content->$getFields()),
+                            $content->$getFields()
+                        );
+                        $fieldEntity->setPosition($position);
                     }
 
-                    $fieldEntity->setPosition($position);
                     $fieldEntity->setContent($content);
                     $addFieldNameMethod = 'add' . ucwords($assoc['fieldName']);
                     $content->$addFieldNameMethod($fieldEntity);

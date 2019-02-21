@@ -3,9 +3,10 @@
 namespace Railroad\Railcontent\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentInstructorRepository")
+ * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_content_instructor")
  *
@@ -33,8 +34,8 @@ class ContentInstructor
     private $content;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @var int
+     * @Gedmo\SortablePosition()
+     * @ORM\Column(type="integer")
      */
     protected $position;
 

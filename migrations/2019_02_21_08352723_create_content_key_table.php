@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContentKeyPitchTypeTable extends Migration
+class CreateContentKeyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,14 @@ class CreateContentKeyPitchTypeTable extends Migration
     public function up()
     {
         Schema::connection(config('railcontent.database_connection_name'))->create(
-            config('railcontent.table_prefix') . 'content_key_pitch_type',
+            config('railcontent.table_prefix') . 'content_key',
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('content_id')->index();
-                $table->string('key_pitch_type')->index();
+                $table->string('key')->index();
                 $table->integer('position')->index();
 
-                $table->index(['key_pitch_type', 'content_id'], 'kpc');
+                $table->index(['key', 'content_id'], 'kc');
             }
         );
     }
@@ -33,6 +33,6 @@ class CreateContentKeyPitchTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('railcontent.table_prefix') . 'content_key_pitch_type');
+        Schema::dropIfExists(config('railcontent.table_prefix') . 'content_key');
     }
 }

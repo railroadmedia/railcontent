@@ -3,9 +3,10 @@
 namespace Railroad\Railcontent\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentSbtExerciseNumberRepository")
+ * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_content_sbt_exercise_number")
  *
@@ -26,14 +27,14 @@ class ContentSbtExerciseNumber
     private $content;
 
     /**
-     * @ORM\Column(type="integer")
-     * @var int
+     * @ORM\Column(type="string")
+     * @var string
      */
     protected $sbtExerciseNumber;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @var string
+     * @Gedmo\SortablePosition()
+     * @ORM\Column(type="integer")
      */
     protected $position;
 

@@ -3,9 +3,10 @@
 namespace Railroad\Railcontent\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentSbtBpmRepository")
+ * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_content_sbt_bpm")
  *
@@ -32,8 +33,8 @@ class ContentSbtBpm
     protected $sbtBpm;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @var string
+     * @Gedmo\SortablePosition()
+     * @ORM\Column(type="integer")
      */
     protected $position;
 
@@ -75,7 +76,7 @@ class ContentSbtBpm
      */
     public function setSbtBpm($sbtBpm)
     {
-        $this->sbt = $sbtBpm;
+        $this->sbtBpm = $sbtBpm;
     }
 
     /**
