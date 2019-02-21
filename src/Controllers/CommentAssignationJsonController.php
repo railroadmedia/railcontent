@@ -46,14 +46,14 @@ class CommentAssignationJsonController extends Controller
         $this->permissionPackageService->canOrThrow(auth()->id(), 'pull.comments.assignation');
 
         $assignedComments = $this->commentAssignationService->getAssignedCommentsForUser(
-            $request->get('user_id', $request->user()->id ?? null),
+            $request->get('user_id', auth()->id() ?? null),
             $request->get('page', 1),
             $request->get('limit', 25),
             $request->get('sort', '-assigned_on')
         );
 
         $assignedCommentsCount = $this->commentAssignationService->countAssignedCommentsForUser(
-            $request->get('user_id', $request->user()->id ?? null)
+            $request->get('user_id', auth()->id() ?? null)
         );
 
         return reply()->json(
