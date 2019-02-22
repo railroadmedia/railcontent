@@ -126,6 +126,10 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
             }
         }
 
+        foreach ($values as $valueIndex => $value) {
+            $values[$valueIndex] = str_replace('/', '_', $value);
+        }
+
         return implode(' ', $values);
     }
 
