@@ -180,6 +180,11 @@ class FullTextSearchRepository extends RepositoryBase
                 $values = array_merge($values, ContentHelper::getDatumValues($content, $dataKey));
             }
         }
+
+        foreach ($values as $valueIndex => $value) {
+            $values[$valueIndex] = str_replace('/', '_', $value);
+        }
+
         return implode(' ', $values);
     }
 
