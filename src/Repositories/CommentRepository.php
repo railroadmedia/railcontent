@@ -112,7 +112,7 @@ class CommentRepository extends RepositoryBase
             $query =
                 $this->query()
                     ->selectColumns()
-                    ->addSelect($this->databaseManager->raw('IFNULL(parent_id, railcontent_comments.id) as parent_id'))
+                    ->addSelect($this->databaseManager->raw('COALESCE(parent_id, UUID()) as u_parent_id'))
                     ->addSelect($this->databaseManager->raw('MAX(railcontent_comments.created_on) as co'))
                     ->aggregateOrderTable($this->orderTableName)
                     ->restrictByBrand()
@@ -121,7 +121,7 @@ class CommentRepository extends RepositoryBase
                     ->restrictByUser()
                     ->restrictByVisibility()
                     ->restrictByAssignedUserId()
-                    ->groupBy('parent_id')
+                    ->groupBy('u_parent_id')
                     ->selectLikeCounts()
                     ->orderByRaw('co ' . ($this->orderDirection))
                     ->directPaginate($this->page, $this->limit);
@@ -135,16 +135,13 @@ class CommentRepository extends RepositoryBase
                 ->selectColumns()
                 ->whereIn('id', $parentIds);
 
-            $rows = $query->get();
+            $parents = $query->get()->keyBy('id');
 
-            $rows = $rows->sortBy(
-                function ($row) use ($parentIds) {
-                    return array_search(
-                        $row['id'],
-                        $parentIds
-                    );
+            foreach ($rows as $rowIndex => $row) {
+                if (!empty($row['parent_id']) && !empty($parents[$row['parent_id']])) {
+                    $rows[$rowIndex] = $parents[$row['parent_id']];
                 }
-            );
+            }
 
             $rows = $rows->toArray();
 
