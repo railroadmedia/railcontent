@@ -32,29 +32,6 @@ trait ContentFieldsAssociations
     protected $vimeoVideo;
 
     /**
-     * @ORM\OneToMany(targetEntity="ContentHierarchy", mappedBy="parent")
-     * @ORM\JoinTable(name="railcontent_content_hierarchy",
-     *      joinColumns={@ORM\JoinColumn(name="content_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="child_id", referencedColumnName="id", unique=true)}
-     *      )
-     */
-    protected $child;
-
-    /**
-     * @ORM\OneToMany(targetEntity="ContentHierarchy", mappedBy="child")
-     * @ORM\JoinTable(name="railcontent_content_hierarchy",
-     *      joinColumns={@ORM\JoinColumn(name="content_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="parent_id", referencedColumnName="id", unique=true)}
-     *      )
-     */
-    protected $parent;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentData", mappedBy="content", cascade={"remove"})
-     */
-    private $data;
-
-    /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentTopic", mappedBy="content",
      *     cascade={"persist","remove"})
      */
@@ -95,19 +72,6 @@ trait ContentFieldsAssociations
      *     cascade={"persist","remove"})
      */
     private $playlist;
-
-    public function __construct()
-    {
-        $this->data = new ArrayCollection();
-        $this->topic = new ArrayCollection();
-        $this->tag = new ArrayCollection();
-        $this->key = new ArrayCollection();
-        $this->keyPitchType = new ArrayCollection();
-        $this->sbtBpm = new ArrayCollection();
-        $this->sbtExerciseNumber = new ArrayCollection();
-        $this->playlist = new ArrayCollection();
-        $this->exercise = new ArrayCollection();
-    }
 
     /**
      * @return Content|null
@@ -213,16 +177,7 @@ trait ContentFieldsAssociations
         return $this->data;
     }
 
-    /**
-     * @param ContentData $data
-     * @return Content
-     */
-    public function addData(ContentData $data)
-    {
-        $this->data[] = $data;
 
-        return $this;
-    }
 
     /**
      * @param ContentTopic $contentTopic

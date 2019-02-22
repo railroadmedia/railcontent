@@ -102,19 +102,19 @@ class ContentHierarchyService
             ]
         );
 
-        $oldPosition = ($hierarchy) ? $hierarchy->getChildPosition() : 0;
-
-        $otherChildrenForParent = $this->contentHierarchyRepository->findby(
+        $otherChildrenForParent = count($this->contentHierarchyRepository->findby(
             [
                 'parent' => $parentId,
             ]
-        );
+        ));
 
-        $position = $this->contentHierarchyRepository->recalculatePosition(
-            $childPosition,
-            count($otherChildrenForParent),
-            $hierarchy
-        );
+        if (!$childPosition || ($childPosition > $otherChildrenForParent)) {
+            $childPosition = -1;
+        }
+
+        if ($childPosition < -1) {
+            $childPosition = 0;
+        }
 
         if (!$hierarchy) {
             $hierarchy = new ContentHierarchy();
@@ -128,46 +128,10 @@ class ContentHierarchyService
             );
         }
 
-        $hierarchy->setChildPosition($position);
+        $hierarchy->setChildPosition($childPosition);
 
         $this->entityManager->persist($hierarchy);
         $this->entityManager->flush();
-
-        if ($position <= $oldPosition) {
-            $this->entityManager->createQuery(
-                '   UPDATE Railroad\Railcontent\Entities\ContentHierarchy h
-                SET h.childPosition = h.childPosition + 1 
-                WHERE h.parent = :id 
-                AND h.childPosition < :oldPosition 
-                AND h.childPosition >= :newPosition 
-                AND h.id != :excludedId '
-            )
-                ->execute(
-                    [
-                        'id' => $parentId,
-                        'oldPosition' => $oldPosition,
-                        'newPosition' => $position,
-                        'excludedId' => $hierarchy->getId(),
-                    ]
-                );
-        } else {
-            $this->entityManager->createQuery(
-                '   UPDATE Railroad\Railcontent\Entities\ContentHierarchy h
-                SET h.childPosition = h.childPosition - 1 
-                WHERE h.parent = :id 
-                AND h.childPosition > :oldPosition 
-                AND h.childPosition <= :newPosition 
-                AND h.id != :excludedId '
-            )
-                ->execute(
-                    [
-                        'id' => $parentId,
-                        'oldPosition' => $oldPosition,
-                        'newPosition' => $position,
-                        'excludedId' => $hierarchy->getId(),
-                    ]
-                );
-        }
 
         //delete the cached results for parent id
         CacheHelper::deleteCache('content_' . $parentId);
@@ -200,18 +164,6 @@ class ContentHierarchyService
         if (!$hierarchy) {
             return true;
         }
-
-        $this->entityManager->createQuery(
-            '   UPDATE Railroad\Railcontent\Entities\ContentHierarchy h
-                SET h.childPosition = h.childPosition - 1 
-                WHERE h.parent = :id AND h.childPosition > :oldPosition'
-        )
-            ->execute(
-                [
-                    'id' => $parentId,
-                    'oldPosition' => $hierarchy->getChildPosition(),
-                ]
-            );
 
         $this->entityManager->remove($hierarchy);
         $this->entityManager->flush();

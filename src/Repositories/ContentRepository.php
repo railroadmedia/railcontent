@@ -16,7 +16,7 @@ use Railroad\Resora\Queries\CachedQuery;
 
 class ContentRepository extends EntityRepository
 {
-    use ByContentIdTrait;
+
     /**
      * If this is false content with any status will be pulled. If its an array, only content with those
      * statuses will be pulled.

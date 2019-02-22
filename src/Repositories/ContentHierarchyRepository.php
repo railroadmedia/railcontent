@@ -8,6 +8,6 @@ use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 
 class ContentHierarchyRepository extends EntityRepository
 {
-    use ByContentIdTrait;
+ 
 
 }

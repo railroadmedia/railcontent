@@ -31,7 +31,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $key = $this->faker->word;
         $value = $this->faker->text(500);
 
-        $response = $this->call(
+        $response1 = $this->call(
             'PUT',
             'railcontent/content/datum',
             [
@@ -39,7 +39,6 @@ class ContentDatumControllerTest extends RailcontentTestCase
                     'attributes' => [
                         'key' => $key,
                         'value' => $value,
-                        'position' => 1,
                     ],
                     'relationships' => [
                         'content' => ['data' => [
@@ -52,9 +51,9 @@ class ContentDatumControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(200, $response1->status());
 
-        $response->assertJson(
+        $response1->assertJson(
             [
                 'data' => [
                     'type' => 'contentData',
@@ -62,7 +61,81 @@ class ContentDatumControllerTest extends RailcontentTestCase
                     'attributes' => [
                         'key' => $key,
                         'value' => $value,
+                        'position' => 0,
+                    ],
+
+                ],
+            ]
+        );
+
+        $newValue = $this->faker->word;
+
+        $response2 = $this->call(
+            'PUT',
+            'railcontent/content/datum',
+            [
+                'data' => [
+                    'attributes' => [
+                        'key' => $key,
+                        'value' => $newValue,
+                    ],
+                    'relationships' => [
+                        'content' => ['data' => [
+                            'type' => 'content',
+                            'id' => $content[0]->getId(),
+                        ]
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        $response2->assertJson(
+            [
+                'data' => [
+                    'type' => 'contentData',
+                    'id' => 2,
+                    'attributes' => [
+                        'key' => $key,
+                        'value' => $newValue,
                         'position' => 1,
+                    ],
+
+                ],
+            ]
+        );
+
+        $otherKey = $this->faker->word;
+
+        $response3 = $this->call(
+            'PUT',
+            'railcontent/content/datum',
+            [
+                'data' => [
+                    'attributes' => [
+                        'key' => $otherKey,
+                        'value' => $newValue,
+                    ],
+                    'relationships' => [
+                        'content' => ['data' => [
+                            'type' => 'content',
+                            'id' => $content[0]->getId(),
+                        ]
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        $response3->assertJson(
+            [
+                'data' => [
+                    'type' => 'contentData',
+                    'id' => 3,
+                    'attributes' => [
+                        'key' => $otherKey,
+                        'value' => $newValue,
+                        'position' => 0,
                     ],
 
                 ],
@@ -147,7 +220,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
                 'content' => $content[0],
                 'key' => $this->faker->word,
                 'value' => $this->faker->text(),
-                'position' => $this->faker->numberBetween(),
+                'position' => 1,
             ]
         );
         $fakeData = $this->populator->execute();

@@ -15,7 +15,7 @@ use Railroad\Resora\Queries\CachedQuery;
  */
 class ContentPermissionRepository extends EntityRepository
 {
-    use ByContentIdTrait;
+
 
     /**
      * @return CachedQuery|$this

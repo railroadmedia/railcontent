@@ -20,9 +20,9 @@ class ContentTopic
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content", inversedBy="topic")
-     * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
-     *
+     * @Gedmo\SortableGroup()
+     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content", inversedBy="children")
+     * @ORM\JoinColumn(referencedColumnName="content_id", referencedColumnName="id")
      */
     protected $content;
 

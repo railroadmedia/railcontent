@@ -27,6 +27,7 @@ class ContentInstructor
     private $instructor;
 
     /**
+     * @Gedmo\SortableGroup()
      * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\Content")
      * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
      *

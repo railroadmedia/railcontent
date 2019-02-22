@@ -365,7 +365,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
                 'data' => [
                     'type' => 'contentHierarchy',
                     'attributes' => [
-                        'child_position' => 1,
+                        'child_position' => 0,
                     ],
                     'relationships' => [
                         'parent' => [

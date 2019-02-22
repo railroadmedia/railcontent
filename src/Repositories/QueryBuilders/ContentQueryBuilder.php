@@ -186,11 +186,11 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
     public function restrictPublishedOnDate()
     {
         if (!ContentRepository::$pullFutureContent) {
-            $this->where(
-                'published_on',
-                '<=',
-                Carbon::now()
-                    ->toDateTimeString()
+            $this->add(
+                'where',
+                $this->expr()
+                    ->lte('published_on', Carbon::now()
+                        ->toDateTimeString())
             );
         }
 

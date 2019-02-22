@@ -20,6 +20,7 @@ class ContentKeyPitchType
     protected $id;
 
     /**
+     * @Gedmo\SortableGroup()
      * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
      * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
      *

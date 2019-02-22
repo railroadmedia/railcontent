@@ -3,9 +3,10 @@
 namespace Railroad\Railcontent\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentHierarchyRepository")
+ * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_content_hierarchy")
  *
@@ -19,24 +20,25 @@ class ContentHierarchy
     protected $id;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @var string
+     * @Gedmo\SortablePosition()
+     * @ORM\Column(type="integer")
      */
     protected $childPosition;
 
     /**
+     * @Gedmo\SortableGroup()
      * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      *
      */
-    private $parent;
+    protected $parent;
 
     /**
      * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
      * @ORM\JoinColumn(name="child_id", referencedColumnName="id")
      *
      */
-    private $child;
+    protected $child;
 
     /**
      * @return int
@@ -61,6 +63,8 @@ class ContentHierarchy
     public function setParent($parent)
     {
         $this->parent = $parent;
+
+        $parent->addChild($this);
     }
     /**
      * @return mixed
@@ -76,6 +80,8 @@ class ContentHierarchy
     public function setChild($child)
     {
         $this->child = $child;
+
+        $child->setParent($this);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsAssociations;
@@ -67,6 +68,25 @@ class Content
     protected $userId;
 
     /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy", mappedBy="parent")
+     * @ORM\JoinTable(name="railcontent_content_hierarchy",
+     *      joinColumns={@ORM\JoinColumn(name="content_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="child_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    protected $child;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy",mappedBy="child", cascade={"persist"}, fetch="EAGER")
+     */
+    protected $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentData", mappedBy="content", cascade={"remove"})
+     */
+    private $data;
+
+    /**
      * @ORM\Column(type="datetime", name="published_on", nullable=true)
      * @var \DateTime
      */
@@ -86,6 +106,20 @@ class Content
      */
     protected $createdOn;
 
+    public function __construct()
+    {
+        $this->child = new ArrayCollection();
+        $this->data = new ArrayCollection();
+        $this->topic = new ArrayCollection();
+        $this->tag = new ArrayCollection();
+        $this->key = new ArrayCollection();
+        $this->keyPitchType = new ArrayCollection();
+        $this->sbtBpm = new ArrayCollection();
+        $this->sbtExerciseNumber = new ArrayCollection();
+        $this->playlist = new ArrayCollection();
+        $this->exercise = new ArrayCollection();
+    }
+
     /**
      * @return int
      */
@@ -102,14 +136,6 @@ class Content
     : string
     {
         return $this->slug;
-    }
-
-    /**
-     * @param string $key
-     */
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
     }
 
     /**
@@ -282,4 +308,62 @@ class Content
         return $this->archivedOn;
     }
 
+    /**
+     * @param ContentData $data
+     * @return Content
+     */
+    public function addData(ContentData $data)
+    {
+        $this->data[] = $data;
+
+        return $this;
+    }
+
+    /**
+     * @param ContentData $data
+     * @return Content
+     */
+    public function addChild($child)
+    {
+        $this->child[] = $child;
+
+       // $child->setParent($this);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param $parent
+     * @return $this
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @param ContentInstructor $contentInstructor
+     */
+    public function removeParent(ContentHierarchy $parent)
+    {
+        // If does not exist in the collection, then we don't need to do anything
+        if (!$this->parent->contains($parent)) {
+            return;
+        }
+
+        $this->parent->removeElement($parent);
+    }
+
+    public function getChild()
+    {
+        return $this->child;
+    }
 }

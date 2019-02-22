@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Doctrine\ORM\EntityManager;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Events\ContentDatumCreated;
 use Railroad\Railcontent\Events\ContentDatumDeleted;
@@ -45,7 +46,8 @@ class ContentDatumService
      */
     public function getByContentIds(array $contentIds)
     {
-        return $this->datumRepository->query()->getByContentIds($contentIds);
+        return $this->datumRepository->query()
+            ->getByContentIds($contentIds);
     }
 
     /**
@@ -57,15 +59,19 @@ class ContentDatumService
      */
     public function create($contentId, $key, $value, $position)
     {
-        $contentDatum = $this->datumRepository->reposition(
-            null,
-            [
-                'content_id' => $contentId,
-                'key' => $key,
-                'value' => $value,
-                'position' => $position
-            ]
-        );
+        $contentRepository = $this->entityManager->getRepository(Content::class);
+        $content = $contentRepository->find($contentId);
+
+        $position = $this->recalculatePosition($key, $position, $content);
+
+        $contentDatum = new ContentData();
+        $contentDatum->setKey($key);
+        $contentDatum->setValue($value);
+        $contentDatum->setContent($content);
+        $contentDatum->setPosition($position);
+
+        $this->entityManager->persist($contentDatum);
+        $this->entityManager->flush();
 
         //call the event that save a new content version in the database
         event(new ContentDatumCreated($contentId));
@@ -95,13 +101,34 @@ class ContentDatumService
             return $datum;
         }
 
-        $this->datumRepository->reposition($id, $data);
+        $position =
+            $this->recalculatePosition(
+                $data['key'] ?? $datum->getKey(),
+                $data['position'] ?? $datum->getPosition(),
+                $datum->getContent()
+            );
+
+        $datum->setKey($data['key'] ?? $datum->getKey());
+        $datum->setValue($data['value'] ?? $datum->getValue());
+        $datum->setPosition($position ?? $datum->getPosition());
+
+        $this->entityManager->persist($datum);
+        $this->entityManager->flush();
 
         //save a content version
-        event(new ContentDatumUpdated($datum->getContent()->getId()));
+        event(
+            new ContentDatumUpdated(
+                $datum->getContent()
+                    ->getId()
+            )
+        );
 
         //delete cache associated with the content id
-        CacheHelper::deleteCache('content_' . $datum->getContent()->getId());
+        CacheHelper::deleteCache(
+            'content_' .
+            $datum->getContent()
+                ->getId()
+        );
 
         return $this->get($id);
     }
@@ -118,15 +145,52 @@ class ContentDatumService
         if (is_null($datum)) {
             return $datum;
         }
-
-        $delete = $this->datumRepository->deleteAndReposition(['id' => $id]);
+        $this->entityManager->remove($datum);
+        $this->entityManager->flush();
 
         //save a content version 
-        event(new ContentDatumDeleted($datum->getContent()->getId()));
+        event(
+            new ContentDatumDeleted(
+                $datum->getContent()
+                    ->getId()
+            )
+        );
 
         //delete cache associated with the content id
-        CacheHelper::deleteCache('content_' . $datum->getContent()->getId());
+        CacheHelper::deleteCache(
+            'content_' .
+            $datum->getContent()
+                ->getId()
+        );
 
-        return $delete;
+        return true;
+    }
+
+    /**
+     * @param $key
+     * @param $position
+     * @param $content
+     * @return int
+     */
+    private function recalculatePosition($key, $position, $content)
+    : int {
+        $otherDatumNr = count(
+            $this->datumRepository->findBy(
+                [
+                    'content' => $content->getId(),
+                    'key' => $key,
+                ]
+            )
+        );
+
+        if (!$position || ($position > $otherDatumNr)) {
+            $position = -1;
+        }
+
+        if ($position < -1) {
+            $position = 0;
+        }
+
+        return $position;
     }
 }

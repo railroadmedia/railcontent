@@ -100,7 +100,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(201, $response->status());
 
-        $this->assertArrayHasKey('data', $responseContent['relationships']);
+//        $this->assertArrayHasKey('data', $responseContent['relationships']);
         $this->assertArrayHasKey('instructor', $responseContent['relationships']);
         $this->assertArrayHasKey('topic', $responseContent['relationships']);
         $this->assertArrayHasKey('exercise', $responseContent['relationships']);
@@ -239,6 +239,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $parent = $this->fakeContent();
 
         $exercise = $this->fakeContent();
+        $instructor = $this->fakeContent();
 
         $contentData = [
             'slug' => $slug,
@@ -277,7 +278,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 ],
                 [
                     'key' => 'sbtBpm',
-                    'value' => $this->faker->numberBetween(1,250),
+                    'value' => $this->faker->numberBetween(1, 250),
                 ],
                 [
                     'key' => 'exercise',
@@ -291,6 +292,10 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     'key' => 'playlist',
                     'value' => $this->faker->word,
                 ],
+                [
+                                        'key' => 'instructor',
+                                        'value' => $instructor[0]->getId(),
+                                    ],
             ],
         ];
 
@@ -300,20 +305,20 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'data' => [
                     'attributes' => $contentData,
-                    //                    'relationships' => [
-                    //                        'parent' => [
-                    //                            'data' => [
-                    //                                'type' => 'content',
-                    //                                'id' => $parent[0]->getId(),
-                    //                            ],
-                    //                        ],
-                    //                    ],
+                    'relationships' => [
+                        'parent' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => $parent[0]->getId(),
+                            ],
+                        ],
+                    ],
                 ],
             ]
         );
 
         unset($contentData['fields']);
-        //dd($response);
+
         $this->assertArraySubset($contentData, $response->decodeResponseJson('data')['attributes']);
         $this->assertArrayHasKey('tag', $response->decodeResponseJson('data')['relationships']);
         $this->assertArrayHasKey('key', $response->decodeResponseJson('data')['relationships']);
@@ -321,6 +326,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertArrayHasKey('sbtBpm', $response->decodeResponseJson('data')['relationships']);
         $this->assertArrayHasKey('exercise', $response->decodeResponseJson('data')['relationships']);
         $this->assertArrayHasKey('sbtExerciseNumber', $response->decodeResponseJson('data')['relationships']);
+        $this->assertArrayHasKey('parent', $response->decodeResponseJson('data')['relationships']);
     }
 
     public function test_content_service_return_new_content_after_create()
@@ -380,6 +386,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'type' => $type,
             ]
         );
+
         $this->assertEquals(404, $response->status());
     }
 
@@ -833,7 +840,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'brand' => config('railcontent.brand'),
             ]
         );
+
         $child = $this->fakeContent();
+
         $hierarchy = $this->fakeHierarchy(
             1,
             [
@@ -850,6 +859,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $results = $response->decodeResponseJson('data');
 
         $this->assertEquals(1, count($results));
+
         $this->assertEquals($child[0]->getId(), $results[0]['id']);
     }
 
@@ -1315,5 +1325,124 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ],
             $response->decodeResponseJson()
         );
+    }
+
+    public function test_create_contents_topics_position()
+    {
+        $content1Data = [
+            'slug' => $this->faker->word,
+            'status' => 'published',
+            'type' => $this->faker->word,
+            'brand' => config('railcontent.brand'),
+            'fields' => [
+                [
+                    'key' => 'title',
+                    'value' => $this->faker->word,
+                ],
+                [
+                    'key' => 'difficulty',
+                    'value' => $this->faker->randomNumber(1),
+                ],
+                [
+                    'key' => 'topic',
+                    'value' => $this->faker->word,
+                ],
+                [
+                    'key' => 'topic',
+                    'value' => $this->faker->word,
+                ],
+            ],
+        ];
+
+        $response1 = $this->call(
+            'PUT',
+            'railcontent/content',
+            [
+                'data' => [
+                    'attributes' => $content1Data,
+                ],
+            ]
+        );
+
+        $content2Data = [
+            'slug' => $this->faker->word,
+            'status' => 'published',
+            'type' => $this->faker->word,
+            'brand' => config('railcontent.brand'),
+            'fields' => [
+                [
+                    'key' => 'title',
+                    'value' => $this->faker->word,
+                ],
+                [
+                    'key' => 'difficulty',
+                    'value' => $this->faker->randomNumber(1),
+                ],
+                [
+                    'key' => 'topic',
+                    'value' => $this->faker->word,
+                ],
+                [
+                    'key' => 'topic',
+                    'value' => $this->faker->word,
+                ],
+            ],
+        ];
+
+        $response2 = $this->call(
+            'PUT',
+            'railcontent/content',
+            [
+                'data' => [
+                    'attributes' => $content2Data,
+                ],
+            ]
+        );
+
+        //assert position on each sortable group(content)
+        $this->assertEquals(0, $response1->decodeResponseJson('included')[0]['attributes']['position']);
+        $this->assertEquals(1, $response1->decodeResponseJson('included')[1]['attributes']['position']);
+        $this->assertEquals(0, $response2->decodeResponseJson('included')[0]['attributes']['position']);
+        $this->assertEquals(1, $response2->decodeResponseJson('included')[1]['attributes']['position']);
+    }
+
+    public function test_controller_soft_delete_method()
+    {
+        $content = $this->fakeContent(2);
+
+        $this->fakeHierarchy(1,
+            [
+                'parent' => $content[0],
+                'child' => $content[1]
+            ]);
+
+        $contentTopic = $this->fakeContentTopic(
+            1,
+            [
+                'content' => $content[0],
+                'topic' => $this->faker->word,
+                'position' => 1,
+            ]
+        );
+
+        $response = $this->call('DELETE', 'railcontent/soft/content/' . $content[0]->getId());
+
+        $this->assertEquals(204, $response->status());
+
+        $this->assertDatabaseHas(
+            config('railcontent.table_prefix') . 'content',
+            [
+                'id' => 2,
+                'status' => ContentService::STATUS_DELETED
+            ]
+        );
+
+//        $this->assertDatabaseMissing(
+//            config('railcontent.table_prefix') . 'content',
+//            [
+//                'id' => 2,
+//                'status' => ContentService::STATUS_DELETED
+//            ]
+//        );
     }
 }

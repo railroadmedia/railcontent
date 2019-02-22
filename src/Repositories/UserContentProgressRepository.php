@@ -10,8 +10,6 @@ use Railroad\Resora\Queries\CachedQuery;
 
 class UserContentProgressRepository extends EntityRepository
 {
-    use ByContentIdTrait;
-
     public static $cache = [];
 
     /**

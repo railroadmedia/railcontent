@@ -216,6 +216,7 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('doctrine.database_user', 'root');
         $app['config']->set('doctrine.database_password', 'root');
         $app['config']->set('doctrine.database_in_memory', true);
+        $app['config']->set('doctrine.development_mode', true);
 
         config()->set('railcontent.database_user', 'root');
         config()->set('railcontent.database_password', 'root');
@@ -609,12 +610,15 @@ class RailcontentTestCase extends BaseTestCase
                 'childPosition' => 1,
             ];
         }
+
         $this->populator->addEntity(
             ContentHierarchy::class,
             $nr,
             $contentData
 
         );
+
+        //dd($this->populator);
         $fakePopulator = $this->populator->execute();
 
         return $fakePopulator[ContentHierarchy::class];

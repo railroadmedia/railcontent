@@ -13,7 +13,7 @@ use Railroad\Resora\Decorators\Decorator;
 
 class CommentRepository extends EntityRepository
 {
-    use ByContentIdTrait;
+
     /** The value it's set in ContentPermissionMiddleware: if the user it's admin the value it's false, otherwise it's true.
      * If the value it' is false the comment with all his replies will be deleted.
      * If it's true the comment with the replies are only soft deleted (marked as deleted).

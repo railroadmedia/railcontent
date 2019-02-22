@@ -14,8 +14,10 @@ use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\ContentTopic;
+use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
@@ -177,7 +179,7 @@ class ContentService
                 $hash,
                 $this->contentRepository->build()
                     ->restrictByUserAccess()
-                    ->where(ConfigService::$tableContent . '.type = :type')
+                    ->andWhere(ConfigService::$tableContent . '.type = :type')
                     ->setParameter('type', $type)
                     ->getQuery()
                     ->getResult()
@@ -282,7 +284,7 @@ class ContentService
     ) {
         return $this->contentRepository->build()
             ->restrictByUserAccess()
-            ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types)
+            ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
             ->andWhere(config('railcontent.table_prefix') . 'content' . '.status = :status')
             ->andWhere(
                 config('railcontent.table_prefix') .
@@ -292,12 +294,9 @@ class ContentService
                 ' :publishedOn'
             )
             ->orderBy(config('railcontent.table_prefix') . 'content.' . $orderByColumn, $orderByDirection)
-            ->setParameters(
-                [
-                    'status' => $status,
-                    'publishedOn' => $publishedOnValue,
-                ]
-            )
+            ->setParameter('status', $status)
+            ->setParameter('publishedOn', $publishedOnValue)
+            ->setParameter('types', $types)
             ->getQuery()
             ->getResult();
     }
@@ -422,7 +421,7 @@ class ContentService
                 $this->contentRepository->build()
                     ->restrictByUserAccess()
                     ->join(ConfigService::$tableContent . '.parent', 'p')
-                    ->where('p.parent = :parentId')
+                    ->andWhere('p.parent = :parentId')
                     ->setParameter('parentId', $parentId)
                     ->orderBy('p.' . $orderBy, $orderByDirection)
                     ->setMaxResults($limit)
@@ -591,7 +590,7 @@ class ContentService
 
         if (!$results) {
             $resultsDB =
-                $this->contentRepository->query()
+                $this->contentRepository->build()
                     ->selectPrimaryColumns()
                     ->restrictByUserAccess()
                     ->leftJoin(
@@ -655,19 +654,14 @@ class ContentService
 
         if (is_null($results)) {
             $resultsDB =
-                $this->contentRepository->query()
-                    ->selectPrimaryColumns()
+                $this->contentRepository->build()
                     ->restrictByUserAccess()
-                    ->leftJoin(
-                        ConfigService::$tableContentHierarchy,
-                        ConfigService::$tableContentHierarchy . '.parent_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                    ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
-                    ->whereIn(ConfigService::$tableContent . '.type', $types)
-                    ->selectInheritenceColumns()
-                    ->get();
+                    ->join(ConfigService::$tableContent . '.child', 'c')
+                    ->whereIn('c.child', [$childId])
+                    ->andWhere(ConfigService::$tableContent . '.type IN (:type)')
+                    ->setParameter('type', $types)
+                    ->getQuery()
+                    ->getResult();
 
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$childId]));
@@ -698,25 +692,26 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $results = CacheHelper::saveUserCache(
-                $hash,
-                $this->contentRepository->query()
-                    ->selectPrimaryColumns()
-                    ->restrictByUserAccess()
-                    ->leftJoin(
-                        ConfigService::$tableUserContentProgress,
-                        ConfigService::$tableUserContentProgress . '.content_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                    ->where(ConfigService::$tableContent . '.type', $type)
-                    ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
-                    ->where(ConfigService::$tableUserContentProgress . '.state', $state)
-                    ->orderBy('published_on', 'desc')
-                    ->limit($limit)
-                    ->skip($skip)
-                    ->get()
-            );
+            $alias = 'up';
+
+            $qb =
+                $this->entityManager->getRepository(UserContentProgress::class)
+                    ->createQueryBuilder($alias);
+            $qb->setFirstResult($skip)
+                ->setMaxResults($limit)
+                ->join(
+                    $alias . '.content',
+                    config('railcontent.table_prefix') . 'content'
+                );
+            $qb->where($alias . '.userId = :userId')
+                ->andWhere($alias . '.state = :state')
+                ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
+                ->setParameter('userId', $userId)
+                ->setParameter('state', $state)
+                ->setParameter('types', $type);
+            $results =
+                $qb->getQuery()
+                    ->getResult();
         }
 
         return $results;
@@ -749,25 +744,26 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $results = CacheHelper::saveUserCache(
-                $hash,
-                $this->contentRepository->query()
-                    ->selectPrimaryColumns()
-                    ->restrictByUserAccess()
-                    ->leftJoin(
-                        ConfigService::$tableUserContentProgress,
-                        ConfigService::$tableUserContentProgress . '.content_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                    ->whereIn(ConfigService::$tableContent . '.type', $types)
-                    ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
-                    ->where(ConfigService::$tableUserContentProgress . '.state', $state)
-                    ->orderBy('published_on', 'desc')
-                    ->limit($limit)
-                    ->skip($skip)
-                    ->get()
-            );
+            $alias = 'up';
+
+            $qb =
+                $this->entityManager->getRepository(UserContentProgress::class)
+                    ->createQueryBuilder($alias);
+            $qb->setFirstResult($skip)
+                ->setMaxResults($limit)
+                ->join(
+                    $alias . '.content',
+                    config('railcontent.table_prefix') . 'content'
+                );
+            $qb->where($alias . '.userId = :userId')
+                ->andWhere($alias . '.state = :state')
+                ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
+                ->setParameter('userId', $userId)
+                ->setParameter('state', $state)
+                ->setParameter('types', $types);
+            $results =
+                $qb->getQuery()
+                    ->getResult();
         }
 
         return $results;
@@ -839,6 +835,7 @@ class ContentService
         $userId,
         $state
     ) {
+
         return $this->contentRepository->query()
             ->selectPrimaryColumns()
             ->restrictByUserAccess()
@@ -925,23 +922,27 @@ class ContentService
      */
     public function countByTypesUserProgressState(array $types, $userId, $state)
     {
-        $results =
-            $this->contentRepository->query()
-                ->selectPrimaryColumns()
-                ->restrictByUserAccess()
-                ->leftJoin(
-                    ConfigService::$tableUserContentProgress,
-                    ConfigService::$tableUserContentProgress . '.content_id',
-                    '=',
-                    ConfigService::$tableContent . '.id'
-                )
-                ->whereIn(ConfigService::$tableContent . '.type', $types)
-                ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
-                ->where(ConfigService::$tableUserContentProgress . '.state', $state)
-                ->orderBy('published_on', 'desc')
-                ->count();
+        $alias = 'up';
 
-        return $results;
+        $qb =
+            $this->entityManager->getRepository(UserContentProgress::class)
+                ->createQueryBuilder($alias);
+        $qb->select('count(' . $alias . '.id)')
+            ->join(
+                $alias . '.content',
+                config('railcontent.table_prefix') . 'content'
+            );
+        $qb->where($alias . '.userId = :userId')
+            ->andWhere($alias . '.state = :state')
+            ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
+            ->setParameter('userId', $userId)
+            ->setParameter('state', $state)
+            ->setParameter('types', $types);
+        $res =
+            $qb->getQuery()
+                ->getSingleScalarResult();
+
+        return $res;
     }
 
     /**
@@ -1080,25 +1081,27 @@ class ContentService
             $content->setLanguage(config('railcontent.default_language'));
         }
 
+        $content->setParent(null);
+
         $this->entityManager->persist($content);
         $this->entityManager->flush();
 
-        return $content;
+        if (array_key_exists('relationships', $data['data'])) {
+            $parentId = $data['data']['relationships']['parent']['data']['id'];
+            $parent = $this->contentRepository->find($parentId);
 
-        //        //save the link with parent if the parent id exist on the request
-        //        if ($parentId) {
-        //            $this->contentHierarchyRepository->updateOrCreateChildToParentLink(
-        //                $parentId,
-        //                $content['id'],
-        //                null
-        //            );
-        //        }
-        //
-        //        CacheHelper::deleteUserFields(null, 'contents');
-        //
-        //        event(new ContentCreated($content['id']));
-        //
-        //        return $this->getById($content['id']);
+            $hierarchy = new ContentHierarchy();
+            $hierarchy->setParent($parent);
+            $hierarchy->setChild($content);
+            $this->entityManager->persist($hierarchy);
+            $this->entityManager->flush();
+        }
+
+        //CacheHelper::deleteUserFields(null, 'contents');
+
+        event(new ContentCreated($content->getId()));
+
+        return $content;
     }
 
     /**
@@ -1116,14 +1119,13 @@ class ContentService
             return null;
         }
 
-        $data = $this->updateContentFields($data, $content);
+        $data = $this->saveContentFields($data, $content);
 
         $this->jsonApiHydrator->hydrate($content, $data);
 
         $this->entityManager->persist($content);
         $this->entityManager->flush();
 
-        //TODO: update VersionService
         event(new ContentUpdated($id));
 
         CacheHelper::deleteCache('content_' . $id);
@@ -1266,16 +1268,19 @@ class ContentService
      */
     public function softDeleteContentChildren($id)
     {
-        $children = $this->contentHierarchyRepository->getByParentIds([$id]);
+        $children =
+            $this->entityManager->getRepository(ContentHierarchy::class)
+                ->findByParent($id);
 
         //delete parent content cache
         CacheHelper::deleteCache('content_' . $id);
 
-        return $this->contentRepository->query()
-            ->whereIn('id', array_pluck($children, 'child_id'))
-            ->update(
-                ['status' => ContentService::STATUS_DELETED]
-            );
+        foreach ($children as $child) {
+            $child->getChild()
+                ->setStatus(ContentService::STATUS_DELETED);
+        }
+
+        $this->entityManager->flush();
     }
 
     /**
@@ -1342,7 +1347,6 @@ class ContentService
     /**
      * @param $data
      * @param Content $content
-     * @param $data2
      * @return mixed
      * @throws \Doctrine\DBAL\DBALException
      * @throws \Doctrine\ORM\ORMException
@@ -1352,49 +1356,40 @@ class ContentService
     {
         if (array_key_exists('fields', $data['data']['attributes'])) {
             $fields = $data['data']['attributes']['fields'];
+            $groupedFields = $fields;
+
             foreach ($fields as $field) {
-                $relationships = null;
                 if (strpos($field['key'], '_') !== false || strpos($field['key'], '-') !== false) {
                     $field['key'] = camel_case($field['key']);
                 }
-                if (in_array(
-                    $field['key'],
-                    $this->entityManager->getClassMetadata(Content::class)
-                        ->getFieldNames()
-                )) {
+
+                if ($this->isEntityAttribute($field, Content::class)) {
+
                     $data['data']['attributes'] = array_merge(
                         $data['data']['attributes'],
                         [
                             $field['key'] => $field['value'],
                         ]
                     );
-                } elseif (in_array(
-                    $field['key'],
-                    $this->entityManager->getClassMetadata(Content::class)
-                        ->getAssociationNames()
-                )) {
-                    $assoc =
-                        $this->entityManager->getClassMetadata(get_class($content))->associationMappings[$field['key']];
-                    $entityName = $assoc['targetEntity'];
+
+                } elseif ($this->isEntityAssociation($field, Content::class)) {
+
+                    $associationMappings = $this->getAssociationMappings(get_class($content), $field);
+
+                    $entityName = $associationMappings['targetEntity'];
 
                     $fieldEntity = new $entityName();
 
-                    if (in_array(
-                        $field['key'],
-                        $this->entityManager->getClassMetadata($entityName)
-                            ->getFieldNames()
-                    )) {
-                        $field[$assoc['fieldName']] = $field['value'];
-                    } elseif (in_array(
-                        $field['key'],
-                        $this->entityManager->getClassMetadata($entityName)
-                            ->getAssociationNames()
-                    )) {
-                        $assoc =
-                            $this->entityManager->getClassMetadata(($entityName))->associationMappings[$field['key']];
+                    if ($this->isEntityAttribute($field, $entityName)) {
+
+                        $field[$associationMappings['fieldName']] = $field['value'];
+
+                    } elseif ($this->isEntityAssociation($field, $entityName)) {
+
+                        $associationMappings = $this->getAssociationMappings($entityName, $field);
 
                         $associatedEntity =
-                            $this->entityManager->getRepository($assoc['targetEntity'])
+                            $this->entityManager->getRepository($associationMappings['targetEntity'])
                                 ->find($field['value']);
 
                         $addMethod = 'add' . ucwords($field['key']);
@@ -1403,28 +1398,47 @@ class ContentService
                         $fieldEntity->$addMethod($associatedEntity);
                     }
 
-                    $data2['data']['attributes'] = $field;
+                    $this->jsonApiHydrator->hydrate(
+                        $fieldEntity,
+                        [
+                            'data' => [
+                                'attributes' => $field,
+                            ],
+                        ]
+                    );
 
-                    if ($relationships) {
-                        $data2['data'][] = ['relationships' => $relationships];
+                    $getFields = 'get' . ucwords($associationMappings['fieldName']);
+
+                    if ($this->entityManager->contains($content)) {
+
+                        $oldFields = $content->$getFields();
+                        $removeField = 'remove' . ucwords($associationMappings['fieldName']);
+
+                        foreach ($oldFields as $oldField) {
+                            //check if field was deleted
+                            if (!in_array($oldField->$getFields(), array_column($groupedFields, 'value'))) {
+                                $content->$removeField($oldField);
+                                $this->entityManager->remove($oldField);
+                            }
+                        }
                     }
 
-                    $this->jsonApiHydrator->hydrate($fieldEntity, $data2);
+                    if (array_key_exists('position', $field)) {
+                        $position = $field['position'];
+                        if (!$field['position'] || ($field['position'] > count($content->$getFields()))) {
+                            $position = -1;
+                        }
 
-                    $getFields = 'get' . ucwords($assoc['fieldName']);
-
-                    if(array_key_exists('position', $field)){
-                        $position = $this->contentRepository->recalculatePosition(
-                            $field['position'] ?? null,
-                            count($content->$getFields()),
-                            $content->$getFields()
-                        );
+                        if ($field['position'] < -1) {
+                            $position = 0;
+                        }
 
                         $fieldEntity->setPosition($position);
                     }
 
                     $fieldEntity->setContent($content);
-                    $addFieldNameMethod = 'add' . ucwords($assoc['fieldName']);
+
+                    $addFieldNameMethod = 'add' . ucwords($associationMappings['fieldName']);
                     $content->$addFieldNameMethod($fieldEntity);
                 }
             }
@@ -1432,98 +1446,40 @@ class ContentService
         return $data;
     }
 
-    private function updateContentFields($data, Content $content)
+    /**
+     * @param $field
+     * @return bool
+     */
+    private function isEntityAttribute($field, $entityName)
+    : bool {
+        return in_array(
+            $field['key'],
+            $this->entityManager->getClassMetadata($entityName)
+                ->getFieldNames()
+        );
+    }
+
+    /**
+     * @param $field
+     * @param $entityName
+     * @return bool
+     */
+    private function isEntityAssociation($field, $entityName)
+    : bool {
+        return in_array(
+            $field['key'],
+            $this->entityManager->getClassMetadata($entityName)
+                ->getAssociationNames()
+        );
+    }
+
+    /**
+     * @param $entity
+     * @param $field
+     * @return mixed
+     */
+    private function getAssociationMappings($entity, $field)
     {
-        if (array_key_exists('fields', $data['data']['attributes'])) {
-            $fields = $data['data']['attributes']['fields'];
-            $groupedFields = $fields;
-            foreach ($fields as $field) {
-                $relationships = null;
-                if (strpos($field['key'], '_') !== false || strpos($field['key'], '-') !== false) {
-                    $field['key'] = camel_case($field['key']);
-                }
-                if (in_array(
-                    $field['key'],
-                    $this->entityManager->getClassMetadata(Content::class)
-                        ->getFieldNames()
-                )) {
-                    $data['data']['attributes'] = array_merge(
-                        $data['data']['attributes'],
-                        [
-                            $field['key'] => $field['value'],
-                        ]
-                    );
-                } elseif (in_array(
-                    $field['key'],
-                    $this->entityManager->getClassMetadata(Content::class)
-                        ->getAssociationNames()
-                )) {
-                    $assoc =
-                        $this->entityManager->getClassMetadata(get_class($content))->associationMappings[$field['key']];
-                    $entityName = $assoc['targetEntity'];
-
-                    $fieldEntity = new $entityName();
-
-                    if (in_array(
-                        $field['key'],
-                        $this->entityManager->getClassMetadata($entityName)
-                            ->getFieldNames()
-                    )) {
-                        $field[$assoc['fieldName']] = $field['value'];
-                    } elseif (in_array(
-                        $field['key'],
-                        $this->entityManager->getClassMetadata($entityName)
-                            ->getAssociationNames()
-                    )) {
-                        $assoc =
-                            $this->entityManager->getClassMetadata(($entityName))->associationMappings[$field['key']];
-
-                        $associatedEntity =
-                            $this->entityManager->getRepository($assoc['targetEntity'])
-                                ->find($field['value']);
-
-                        $addMethod = 'add' . ucwords($field['key']);
-
-                        $fieldEntity->setContent($content);
-                        $fieldEntity->$addMethod($associatedEntity);
-                    }
-
-                    $data2['data']['attributes'] = $field;
-
-                    if ($relationships) {
-                        $data2['data'][] = ['relationships' => $relationships];
-                    }
-
-                    $this->jsonApiHydrator->hydrate($fieldEntity, $data2);
-
-                    $getFields = 'get' . ucwords($assoc['fieldName']);
-                    $removeField = 'remove' . ucwords($assoc['fieldName']);
-
-                    $oldFields = $content->$getFields();
-
-                    foreach ($oldFields as $oldField) {
-                        //check if field was deleted
-                        if (!in_array($oldField->$getFields(), array_column($groupedFields, 'value'))) {
-                            $content->$removeField($oldField);
-                            $this->entityManager->remove($oldField);
-                        }
-                    }
-
-                    if(array_key_exists('position', $field)) {
-                        $position = $this->contentRepository->recalculatePosition(
-                            $field['position'] ?? null,
-                            count($content->$getFields()),
-                            $content->$getFields()
-                        );
-                        $fieldEntity->setPosition($position);
-                    }
-
-                    $fieldEntity->setContent($content);
-                    $addFieldNameMethod = 'add' . ucwords($assoc['fieldName']);
-                    $content->$addFieldNameMethod($fieldEntity);
-                }
-            }
-        }
-        return $data;
+        return $this->entityManager->getClassMetadata($entity)->associationMappings[$field['key']];
     }
 }

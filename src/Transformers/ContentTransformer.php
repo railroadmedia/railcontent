@@ -23,44 +23,48 @@ class ContentTransformer extends TransformerAbstract
             )
         ))->toArray();
 
-        if ($content->getData()) {
+        if (count($content->getData()) > 0) {
             $this->defaultIncludes[] = 'data';
         }
 
-        if($content->getInstructor()){
+        if ($content->getInstructor()) {
             $this->defaultIncludes[] = 'instructor';
         }
 
-        if ($content->getTopic()) {
+        if (count($content->getTopic()) > 0) {
             $this->defaultIncludes[] = 'topic';
         }
 
-        if($content->getExercise()){
+        if (count($content->getExercise()) > 0) {
             $this->defaultIncludes[] = 'exercise';
         }
 
-        if($content->getTag()){
+        if (count($content->getTag()) > 0) {
             $this->defaultIncludes[] = 'tag';
         }
 
-        if($content->getKey()){
+        if (count($content->getKey()) > 0) {
             $this->defaultIncludes[] = 'key';
         }
 
-        if($content->getKeyPitchType()){
+        if (count($content->getKeyPitchType()) > 0) {
             $this->defaultIncludes[] = 'keyPitchType';
         }
 
-        if($content->getSbtBpm()){
+        if (count($content->getSbtBpm()) > 0) {
             $this->defaultIncludes[] = 'sbtBpm';
         }
 
-        if($content->getSbtExerciseNumber()){
+        if (count($content->getSbtExerciseNumber()) > 0) {
             $this->defaultIncludes[] = 'sbtExerciseNumber';
         }
 
-        if($content->getPlaylist()){
+        if (count($content->getPlaylist()) > 0) {
             $this->defaultIncludes[] = 'playlist';
+        }
+
+        if ($content->getParent()) {
+            $this->defaultIncludes[] = 'parent';
         }
 
         return $contents;
@@ -72,11 +76,11 @@ class ContentTransformer extends TransformerAbstract
      */
     public function includeTag(Content $content)
     {
-            return $this->collection(
-                $content->getTag(),
-                new ContentTagTransformer(),
-                'tag'
-            );
+        return $this->collection(
+            $content->getTag(),
+            new ContentTagTransformer(),
+            'tag'
+        );
     }
 
     /**
@@ -193,6 +197,19 @@ class ContentTransformer extends TransformerAbstract
             $content->getSbtExerciseNumber(),
             new ContentSbtExerciseNumberTransformer(),
             'sbtExerciseNumber'
+        );
+    }
+
+    /**
+     * @param Content $content
+     * @return \League\Fractal\Resource\Item
+     */
+    public function includeParent(Content $content)
+    {
+        return $this->item(
+            $content->getParent(),
+            new ContentParentTransformer(),
+            'parent'
         );
     }
 }
