@@ -796,24 +796,32 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
+            $alias = 'up';
+
+            $qb =
+                $this->entityManager->getRepository(UserContentProgress::class)
+                    ->createQueryBuilder($alias);
+            $qb->setFirstResult($skip)
+                ->setMaxResults($limit)
+                ->join(
+                    $alias . '.content',
+                    config('railcontent.table_prefix') . 'content'
+                );
+            $qb->where($alias . '.userId = :userId')
+                ->andWhere($alias . '.state = :state')
+                ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
+                ->setMaxResults($limit)
+                ->setFirstResult($skip)
+                ->orderBy($alias . '.updatedOn', 'desc')
+                ->setParameter('userId', $userId)
+                ->setParameter('state', $state)
+                ->setParameter('types', $types);
+            $res =
+                $qb->getQuery()
+                    ->getResult();
             $results = CacheHelper::saveUserCache(
                 $hash,
-                $this->contentRepository->query()
-                    ->selectPrimaryColumns()
-                    ->restrictByUserAccess()
-                    ->leftJoin(
-                        ConfigService::$tableUserContentProgress,
-                        ConfigService::$tableUserContentProgress . '.content_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                    ->whereIn(ConfigService::$tableContent . '.type', $types)
-                    ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
-                    ->where(ConfigService::$tableUserContentProgress . '.state', $state)
-                    ->orderBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
-                    ->limit($limit)
-                    ->skip($skip)
-                    ->get()
+                $res
             );
         }
 
@@ -835,21 +843,25 @@ class ContentService
         $userId,
         $state
     ) {
+        $alias = 'up';
 
-        return $this->contentRepository->query()
-            ->selectPrimaryColumns()
-            ->restrictByUserAccess()
-            ->leftJoin(
-                ConfigService::$tableUserContentProgress,
-                ConfigService::$tableUserContentProgress . '.content_id',
-                '=',
-                ConfigService::$tableContent . '.id'
-            )
-            ->whereIn(ConfigService::$tableContent . '.type', $types)
-            ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
-            ->where(ConfigService::$tableUserContentProgress . '.state', $state)
-            ->orderBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
-            ->count();
+        $qb =
+            $this->entityManager->getRepository(UserContentProgress::class)
+                ->createQueryBuilder($alias);
+        $qb->select('count(' . $alias . '.id)')
+            ->join(
+                $alias . '.content',
+                config('railcontent.table_prefix') . 'content'
+            );
+        $qb->where($alias . '.userId = :userId')
+            ->andWhere($alias . '.state = :state')
+            ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
+            ->setParameter('userId', $userId)
+            ->setParameter('state', $state)
+            ->setParameter('types', $types);
+
+        return $qb->getQuery()
+            ->getSingleScalarResult();
     }
 
     /**
@@ -880,16 +892,6 @@ class ContentService
                 $orderDirection
             );
 
-        // $5 sez we can remove this
-        $this->contentRepository->query()
-            ->getTypeNeighbouringSiblings(
-                $type,
-                $columnName,
-                $columnValue,
-                $siblingPairLimit,
-                $orderColumn,
-                $orderDirection
-            );
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -905,9 +907,6 @@ class ContentService
                 )
             );
         }
-
-        $results['before'] = Decorator::decorate($results['before'], 'content');
-        $results['after'] = Decorator::decorate($results['after'], 'content');
 
         return $results;
     }
@@ -1045,9 +1044,7 @@ class ContentService
                     'qb' => $qb,
                     'results' => $qb->getQuery()
                         ->getResult(),
-                    //                    'filter_options' => $pullFilterFields ?
-                    //                        $this->contentRepository->query()
-                    //                            ->getFilterFields() : [],
+                    'filter_options' => $pullFilterFields ? $this->contentRepository->getFilterFields() : [],
                 ]
             );
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
@@ -1212,11 +1209,23 @@ class ContentService
             $contents = [$contents];
         }
 
-        $userPlaylistContents = $this->contentRepository->getByUserIdWhereChildIdIn(
-            $userId,
-            array_column($contents, 'id'),
-            $singlePlaylistSlug
-        );
+        $userPlaylistContents =
+            $this->contentRepository->build()
+                ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->join(
+                    ContentHierarchy::class,
+                    'hierarchy',
+                    'WITH',
+                    'railcontent_content.id = hierarchy.child'
+                )
+                ->andWhere(ConfigService::$tableContent . '.userId = :userId')
+                ->andWhere('hierarchy.child IN (:childIds)')
+                ->setParameter('childIds', array_column($contents, 'id'))
+                ->setParameter('userId', $userId)
+                ->selectInheritenceColumns()
+                ->getQuery()
+                ->getResult();
 
         foreach ($contents as $index => $content) {
             $contents[$index]['user_playlists'][$userId] = [];

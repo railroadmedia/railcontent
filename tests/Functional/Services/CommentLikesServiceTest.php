@@ -18,16 +18,9 @@ class CommentLikesServiceTest extends RailcontentTestCase
      */
     protected $classBeingTested;
 
-    /**
-     * @var Populator
-     */
-    private $populator;
-
     protected function setUp()
     {
         parent::setUp();
-
-        $this->populator = new Populator($this->faker, $this->entityManager);
 
         $this->classBeingTested = $this->app->make(CommentLikeService::class);
     }

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
@@ -70,7 +71,7 @@ class ContentRepository extends EntityRepository
      * @param integer $id
      * @return array|null
      */
-    public function getById($id)
+    public function _getById($id)
     {
         return $this->query()
             ->selectPrimaryColumns()
@@ -83,7 +84,7 @@ class ContentRepository extends EntityRepository
      * @param array $ids
      * @return array
      */
-    public function getByIds(array $ids)
+    public function _getByIds(array $ids)
     {
         $unorderedContentRows =
             $this->query()
@@ -125,33 +126,41 @@ class ContentRepository extends EntityRepository
         $orderColumn = 'published_on',
         $orderDirection = 'desc'
     ) {
+        $alias = config('railcontent.table_prefix') . 'content';
+        if (strpos($orderColumn, '_') !== false || strpos($orderColumn, '-') !== false) {
+            $orderColumn = camel_case($orderColumn);
+        }
+        $orderColumn = $alias . '.' . $orderColumn;
+
         $beforeContents =
-            $this->query()
-                ->selectPrimaryColumns()
+            $this->build()
                 ->restrictByUserAccess()
-                ->where(ConfigService::$tableContent . '.type', $type)
-                ->where(ConfigService::$tableContent . '.' . $columnName, '<', $columnValue)
+                ->andWhere($alias . '.type = :type')
+                ->andWhere($alias . '.' . $columnName . ' < :columnValue')
+                ->setParameter('type', $type)
+                ->setParameter('columnValue', $columnValue)
                 ->orderBy($orderColumn, 'desc')
-                ->limit($siblingPairLimit)
-                ->get()
-                ->toArray();
+                ->setMaxResults($siblingPairLimit)
+                ->getQuery()
+                ->getResult();
 
         $afterContents =
-            $this->query()
-                ->selectPrimaryColumns()
+            $this->build()
                 ->restrictByUserAccess()
-                ->where(ConfigService::$tableContent . '.type', $type)
-                ->where(ConfigService::$tableContent . '.' . $columnName, '>', $columnValue)
-                ->orderBy($orderColumn, 'asc')
-                ->limit($siblingPairLimit)
-                ->get()
-                ->toArray();
+                ->andWhere($alias . '.type = :type')
+                ->andWhere($alias . '.' . $columnName . ' > :columnValue')
+                ->setParameter('type', $type)
+                ->setParameter('columnValue', $columnValue)
+                ->orderBy($orderColumn, 'desc')
+                ->setMaxResults($siblingPairLimit)
+                ->getQuery()
+                ->getResult();
 
         $processedContents = array_merge($beforeContents, $afterContents);
 
         foreach ($afterContents as $afterContentIndex => $afterContent) {
             foreach ($processedContents as $processedContentIndex => $processedContent) {
-                if ($processedContent['id'] == $afterContent['id']) {
+                if ($processedContent->getId() == $afterContent->getId()) {
                     $afterContents[$afterContentIndex] = $processedContents[$processedContentIndex];
                 }
             }
@@ -159,7 +168,7 @@ class ContentRepository extends EntityRepository
 
         foreach ($beforeContents as $beforeContentIndex => $beforeContent) {
             foreach ($processedContents as $processedContentIndex => $processedContent) {
-                if ($processedContent['id'] == $beforeContent['id']) {
+                if ($processedContent->getId() == $beforeContent->getId()) {
                     $beforeContents[$beforeContentIndex] = $processedContents[$processedContentIndex];
                 }
             }
@@ -184,7 +193,7 @@ class ContentRepository extends EntityRepository
      * @param $state
      * @return integer
      */
-    public function countByTypesUserProgressState(array $types, $userId, $state)
+    public function _countByTypesUserProgressState(array $types, $userId, $state)
     {
         return $this->query()
             ->selectPrimaryColumns()
@@ -208,7 +217,7 @@ class ContentRepository extends EntityRepository
      * @param null $slug
      * @return array
      */
-    public function getByUserIdWhereChildIdIn($userId, $childContentIds, $slug = null)
+    public function _getByUserIdWhereChildIdIn($userId, $childContentIds, $slug = null)
     {
         $query =
             $this->query()
@@ -378,29 +387,20 @@ class ContentRepository extends EntityRepository
      */
     public function getFilterFields()
     {
-        $possibleContentFields =
-            $this->query()
-                ->selectFilterOptionColumns()
-                ->restrictByUserAccess()
-                ->restrictByFields($this->requiredFields)
-                ->includeByFields($this->includedFields)
-                ->restrictByUserStates($this->requiredUserStates)
-                ->includeByUserStates($this->includedUserStates)
-                ->restrictByTypes($this->typesToInclude)
-                ->restrictByParentIds($this->requiredParentIds)
-                ->leftJoin(
-                    ConfigService::$tableContentFields,
-                    ConfigService::$tableContentFields . '.content_id',
-                    '=',
-                    ConfigService::$tableContent . '.id'
-                )
-                ->whereIn(
-                    ConfigService::$tableContentFields . '.key',
-                    ConfigService::$fieldOptionList
-                )
-                ->get();
+        $possibleContentFields = $this->build()
+        ->restrictByUserAccess()
+            ->restrictByFields($this->requiredFields)
+            ->includeByFields($this->includedFields)
+            ->restrictByUserStates($this->requiredUserStates)
+            ->includeByUserStates($this->includedUserStates)
+            ->restrictByTypes($this->typesToInclude)
+            ->restrictByParentIds($this->requiredParentIds)
+            ->restrictByFilterOptions()
+            ->getQuery()
+            ->getResult();
 
         return $this->parseAvailableFields($possibleContentFields);
+
     }
 
     /**
@@ -460,49 +460,33 @@ class ContentRepository extends EntityRepository
 
     private function parseAvailableFields($rows)
     {
-        $rows = array_map("unserialize", array_unique(array_map("serialize", $rows->toArray())));
-
         $availableFields = [];
-        $subContentIds = [];
 
         foreach ($rows as $row) {
-            if ($row['type'] == 'content_id') {
-                $subContentIds[] = $row['value'];
-            } else {
-                $availableFields[$row['key']][] = trim(strtolower($row['value']));
-
-                // only uniques
-                $availableFields[$row['key']] = array_values(array_unique($availableFields[$row['key']]));
-
-                usort(
-                    $availableFields[$row['key']],
-                    function ($a, $b) {
-                        return strcmp($a, $b);
+            foreach (ConfigService::$fieldOptionList as $fieldOption) {
+                $getField = 'get' . ucwords($fieldOption);
+                if ($row->$getField() && (count($row->$getField()) > 0)) {
+                    if (in_array(
+                        $fieldOption,
+                        $this->getEntityManager()
+                            ->getClassMetadata(Content::class)
+                            ->getAssociationNames()
+                    )) {
+                        if (!in_array(
+                            $row->$getField()
+                                ->$getField(),
+                            $availableFields[$fieldOption] ?? []
+                        )) {
+                            $availableFields[$fieldOption][] =
+                                $row->$getField()
+                                    ->$getField();
+                        }
+                    } else {
+                        if (!in_array($row->$getField(), $availableFields[$fieldOption] ?? [])) {
+                            $availableFields[$fieldOption][] = $row->$getField();
+                        }
                     }
-                );
-            }
-        }
-
-        $subContents = $this->getByIds($subContentIds);
-
-        $subContents = array_combine(array_pluck($subContents, 'id'), $subContents);
-
-        foreach ($rows as $row) {
-            if ($row['type'] == 'content_id' && !empty($subContents[$row['value']])) {
-                $availableFields[$row['key']][] = $subContents[strtolower($row['value'])];
-
-                // only uniques (this is a multidimensional array_unique equivalent)
-                $availableFields[$row['key']] =
-                    array_map("unserialize", array_unique(array_map("serialize", $availableFields[$row['key']])));
-
-                usort(
-                    $availableFields[$row['key']],
-                    function ($a, $b) {
-                        return strcmp($a['slug'], $b['slug']);
-                    }
-                );
-
-                $availableFields[$row['key']] = array_values($availableFields[$row['key']]);
+                }
             }
         }
 
@@ -530,7 +514,7 @@ class ContentRepository extends EntityRepository
         return $availableFields;
     }
 
-    public function softDelete(array $contentIds)
+    public function _softDelete(array $contentIds)
     {
         return $this->query()
             ->whereIn('id', $contentIds)
@@ -548,7 +532,7 @@ class ContentRepository extends EntityRepository
      * can get all for content_field key by not passing content_field values, or can filter by values.
      *
      */
-    public function getByContentFieldValuesForTypes($contentTypes, $contentFieldKey, $contentFieldValues = [])
+    public function _getByContentFieldValuesForTypes($contentTypes, $contentFieldKey, $contentFieldValues = [])
     {
         $query =
             $this->query()
@@ -601,7 +585,7 @@ class ContentRepository extends EntityRepository
      * @param string $startDate
      * @return array
      */
-    public function getRecentPublishedContents($startDate)
+    public function _getRecentPublishedContents($startDate)
     {
         $contentRows =
             $this->query()

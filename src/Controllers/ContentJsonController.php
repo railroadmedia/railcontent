@@ -68,8 +68,7 @@ class ContentJsonController extends Controller
         );
 
 
-        $contentData = ($contentData->getArrayCopy());
-        return ResponseService::content($contentData['results'], $contentData['qb'])->respond();
+        return ResponseService::content($contentData['results'], $contentData['qb'], [], $contentData['filter_options'])->respond();
 
         //        return reply()->json(
         //            $contentData['results'],

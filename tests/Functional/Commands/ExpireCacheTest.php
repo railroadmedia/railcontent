@@ -33,28 +33,35 @@ class ExpireCacheTest extends RailcontentTestCase
         CacheHelper::setPrefix();
         $type = $this->faker->word;
 
-        $content1 = $this->contentFactory->create(
-            ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
-            $type,
-            ContentService::STATUS_PUBLISHED,
-            'en-US',
-            ConfigService::$brand,
-            null,
-            Carbon::now()->addSeconds(30)->toDateTimeString());
+        $content1 = $this->fakeContent(1,[
+            'type' => $type,
+            'status' => ContentService::STATUS_PUBLISHED,
+            'brand' => config('railcontent.brand'),
+            'publishedOn' => Carbon::now()->addSeconds(30)
+        ]);
 
+//        $content1 = $this->contentFactory->create(
+//            ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+//            $type,
+//            ContentService::STATUS_PUBLISHED,
+//            'en-US',
+//            ConfigService::$brand,
+//            null,
+//            Carbon::now()->addSeconds(30)->toDateTimeString());
+//
         $results =  $this->contentService->getAllByType($type);
-
+        dd(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys('*'));
         $this->assertEquals(1, count(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys(Cache::store(ConfigService::$cacheDriver)
             ->getPrefix().'content*')));
-
-        $content2 = $this->contentFactory->create(
-            ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
-            $type,
-            ContentService::STATUS_PUBLISHED,
-            'en-US',
-            ConfigService::$brand,
-            null,
-            Carbon::now()->toDateTimeString());
+//
+//        $content2 = $this->contentFactory->create(
+//            ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+//            $type,
+//            ContentService::STATUS_PUBLISHED,
+//            'en-US',
+//            ConfigService::$brand,
+//            null,
+//            Carbon::now()->toDateTimeString());
 
         $this->artisan('command:expireCache');
 

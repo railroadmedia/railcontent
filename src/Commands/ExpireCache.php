@@ -4,8 +4,10 @@ namespace Railroad\Railcontent\Commands;
 
 
 use Carbon\Carbon;
+use Doctrine\ORM\EntityManager;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -31,16 +33,19 @@ class ExpireCache extends Command
      */
     protected $contentRepository;
 
+    protected $entityManager;
+
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(ContentRepository $contentRepository)
+    public function __construct(EntityManager $entityManager)
     {
         parent::__construct();
 
-        $this->contentRepository = $contentRepository;
+        $this->entityManager = $entityManager;
+        $this->contentRepository = $this->entityManager->getRepository(Content::class);
     }
 
     /**
@@ -57,7 +62,16 @@ class ExpireCache extends Command
                 return Carbon::now()->subHour()->toDateTimeString();
             });
 
-        $contents = $this->contentRepository->getRecentPublishedContents($lastExecutionTime);
+        $alias = 'content';
+        $qb = $this->contentRepository->createQueryBuilder($alias);
+
+        $qb->where($alias.'.userId is null')
+            ->andWhere($alias.'.publishedOn >= :publishedOn')
+            ->andWhere($alias.'.publishedOn <= :now')
+            ->setParameter('now', Carbon::now()->toDateTimeString())
+            ->setParameter('publishedOn', $lastExecutionTime);
+
+        $contents = $qb->getQuery()->getResult();
 
         if (!empty($contents)) {
             CacheHelper::deleteUserFields(null, 'contents');

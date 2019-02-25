@@ -99,8 +99,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $responseContent = $response->decodeResponseJson('data');
 
         $this->assertEquals(201, $response->status());
-
-//        $this->assertArrayHasKey('data', $responseContent['relationships']);
         $this->assertArrayHasKey('instructor', $responseContent['relationships']);
         $this->assertArrayHasKey('topic', $responseContent['relationships']);
         $this->assertArrayHasKey('exercise', $responseContent['relationships']);
@@ -526,7 +524,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 ],
             ]
         );
-        // dd($response->decodeResponseJson('included'));
+
         $this->assertArraySubset(
             [
                 'data' => [
@@ -746,7 +744,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $page = 1;
         $limit = 5;
 
-        $randomContents = $this->fakeContent(5);
+        $randomContents = $this->fakeContent(5,
+            [
+                'difficulty' => rand(1,10),
+                'type' => $this->faker->word,
+                'status' => 'published',
+            ]);
         $contents = $this->fakeContent(
             6,
             [
@@ -763,6 +766,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'status' => 'published',
                 'slug' => $this->faker->name,
                 'brand' => config('railcontent.brand'),
+                'difficulty' => null,
             ]
         );
 
@@ -776,7 +780,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
             );
         }
 
-        $randomContents = $this->fakeContent(19);
+        $randomContents = $this->fakeContent(19,[
+            'difficulty' =>rand(1,10)
+        ]);
 
         $data = $this->fakeContentData(
             1,
@@ -820,6 +826,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $this->assertEquals(1, $data['attributes']['difficulty']);
             $this->assertEquals($statues[0], $data['attributes']['status']);
         }
+
+        $this->assertArrayHasKey('filterOption', $response->decodeResponseJson('meta'));
+        $this->assertArrayHasKey('instructor', $response->decodeResponseJson('meta')['filterOption']);
+        $this->assertArrayHasKey('difficulty', $response->decodeResponseJson('meta')['filterOption']);
+        $this->assertArrayHasKey('style', $response->decodeResponseJson('meta')['filterOption']);
+        $this->assertArrayHasKey('artist', $response->decodeResponseJson('meta')['filterOption']);
     }
 
     public function test_getByParentId_when_parentId_not_exist()

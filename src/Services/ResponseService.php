@@ -26,8 +26,12 @@ class ResponseService extends FractalResponseService
      * @param array $includes
      * @return Fractal
      */
-    public static function content($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
-    {
+    public static function content(
+        $entityOrEntities,
+        QueryBuilder $queryBuilder = null,
+        array $includes = [],
+        array $filterOptions = []
+    ) {
         return self::create(
             $entityOrEntities,
             'content',
@@ -35,7 +39,8 @@ class ResponseService extends FractalResponseService
             new JsonApiSerializer(),
             $queryBuilder
         )
-            ->parseIncludes($includes);
+            ->parseIncludes($includes)
+            ->addMeta((count($filterOptions) > 0) ? ['filterOption' => $filterOptions] : []);
     }
 
     /**
@@ -128,7 +133,6 @@ class ResponseService extends FractalResponseService
             ->parseIncludes($includes);
     }
 
-
     /**
      * @param $entityOrEntities
      * @param QueryBuilder|null $queryBuilder
@@ -201,8 +205,11 @@ class ResponseService extends FractalResponseService
      * @param array $includes
      * @return Fractal
      */
-    public static function userContentProgress($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
-    {
+    public static function userContentProgress(
+        $entityOrEntities,
+        QueryBuilder $queryBuilder = null,
+        array $includes = []
+    ) {
         return self::create(
             $entityOrEntities,
             'userContentProgress',

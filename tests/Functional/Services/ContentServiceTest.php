@@ -476,10 +476,27 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_getAllByType()
     {
-        $results = $this->classBeingTested->getAllByType('course-part');
+        $nr = $this->faker->randomNumber(1);
+        $type = $this->faker->word;
 
+        $contents = $this->fakeContent(
+            $nr,
+            [
+                'slug' => $this->faker->slug,
+                'status' => 'published',
+                'type' => $type,
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+
+        $results = $this->classBeingTested->getAllByType($type);
+
+        $this->assertEquals($nr, count($results));
         foreach ($results as $content) {
-            $this->assertEquals('course-part', $content->getType());
+            $this->assertEquals($type, $content->getType());
         }
     }
 
@@ -605,74 +622,391 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_get_content_by_id()
     {
-        $contentResponse1 = $this->classBeingTested->getById(1);
-        $contentResponse2 = $this->classBeingTested->getById(1);
+        $content = $this->fakeContent();
+        $contentResponse1 = $this->classBeingTested->getById($content[0]->getId());
+        $contentResponse2 = $this->classBeingTested->getById($content[0]->getId());
 
         $this->assertEquals($contentResponse1, $contentResponse2);
-        $this->assertEquals(1, $contentResponse1->getId());
+        $this->assertEquals($content[0]->getId(), $contentResponse1->getId());
     }
 
     public function test_get_content_by_ids()
     {
-        $response = $this->classBeingTested->getByIds([2, 1]);
+        $contents = $this->fakeContent(2);
+        $response = $this->classBeingTested->getByIds([$contents[1]->getId(), $contents[0]->getId()]);
 
         $this->assertEquals(2, count($response));
-        $this->assertEquals(2, $response[0]->getId());
-        $this->assertEquals(1, $response[1]->getId());
+        $this->assertEquals($contents[1]->getId(), $response[0]->getId());
+        $this->assertEquals($contents[0]->getId(), $response[1]->getId());
     }
 
     public function test_get_by_parent_id()
     {
-        $response = $this->classBeingTested->getByParentId(1);
+        $parent = $this->fakeContent(
+            1,
+            [
+                'slug' => 'slug1',
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        $child = $this->fakeContent(
+            1,
+            [
+                'slug' => 'slug2',
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        $this->fakeHierarchy(
+            1,
+            [
+                'parent' => $parent[0],
+                'child' => $child[0],
+                'childPosition' => 1,
+            ]
+        );
+        $response = $this->classBeingTested->getByParentId($parent[0]->getId());
 
-        $this->assertEquals(3, count($response));
-        $this->assertEquals(2, $response[0]->getId());
+        $this->assertEquals(1, count($response));
+        $this->assertEquals($child[0]->getId(), $response[0]->getId());
     }
 
     public function test_get_by_parent_id_paginated()
     {
+        $parent = $this->fakeContent(
+            1,
+            [
+                'slug' => 'slug1',
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        $children = $this->fakeContent(
+            10,
+            [
+                'slug' => 'slug2',
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        foreach ($children as $child) {
+            $this->fakeHierarchy(
+                1,
+                [
+                    'parent' => $parent[0],
+                    'child' => $child,
+                ]
+            );
+        }
+
         //get childrens from page 2
-        $response = $this->classBeingTested->getByParentIdPaginated(1, 2, 1);
+        $response = $this->classBeingTested->getByParentIdPaginated($parent[0]->getId(), 2, 1);
 
         //assert one child it's returned
-        $this->assertEquals(1, count($response));
-
-        $this->assertEquals(4, $response[0]->getId());
+        $this->assertEquals(2, count($response));
+        foreach ($response as $res) {
+            $this->assertEquals(
+                $parent[0]->getId(),
+                $res->getParent()
+                    ->getParent()
+                    ->getId()
+            );
+        }
     }
 
     public function test_get_by_parent_id_and_type()
     {
+        $type = $this->faker->word;
+
+        $parent = $this->fakeContent(
+            1,
+            [
+                'slug' => 'slug1',
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        $children = $this->fakeContent(
+            3,
+            [
+                'slug' => 'slug2',
+                'status' => 'published',
+                'type' => $type,
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        foreach ($children as $child) {
+            $this->fakeHierarchy(
+                1,
+                [
+                    'parent' => $parent[0],
+                    'child' => $child,
+                    'childPosition' => 1,
+                ]
+            );
+        }
+
+        $children = $this->fakeContent(
+            2,
+            [
+                'slug' => 'slug2',
+                'status' => 'published',
+                'type' => $this->faker->word,
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        foreach ($children as $child) {
+            $this->fakeHierarchy(
+                1,
+                [
+                    'parent' => $parent[0],
+                    'child' => $child,
+                    'childPosition' => 1,
+                ]
+            );
+        }
         //get childrens with type 'course-part'
-        $response = $this->classBeingTested->getByParentIdWhereTypeIn(1, ['course-part']);
+        $response = $this->classBeingTested->getByParentIdWhereTypeIn($parent[0]->getId(), [$type]);
 
         $this->assertEquals(3, count($response));
 
-        $this->assertEquals(2, $response[0]->getId());
+        foreach ($response as $content) {
+            $this->assertEquals($type, $content->getType());
+            $this->assertEquals(
+                $parent[0]->getId(),
+                $content->getParent()
+                    ->getParent()
+                    ->getId()
+            );
+        }
+
     }
 
     public function test_get_by_parent_id_and_type_in_paginated()
     {
+        $type = $this->faker->word;
+
+        $parent = $this->fakeContent(
+            1,
+            [
+                'slug' => 'slug1',
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        $children = $this->fakeContent(
+            3,
+            [
+                'slug' => 'slug2',
+                'status' => 'published',
+                'type' => $type,
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        foreach ($children as $child) {
+            $this->fakeHierarchy(
+                1,
+                [
+                    'parent' => $parent[0],
+                    'child' => $child,
+                    'childPosition' => 1,
+                ]
+            );
+        }
+
+        $children = $this->fakeContent(
+            2,
+            [
+                'slug' => 'slug2',
+                'status' => 'published',
+                'type' => $this->faker->word,
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        foreach ($children as $child) {
+            $this->fakeHierarchy(
+                1,
+                [
+                    'parent' => $parent[0],
+                    'child' => $child,
+                    'childPosition' => 1,
+                ]
+            );
+        }
+
         //get childrens with type 'course-part'
-        $response = $this->classBeingTested->getByParentIdWhereTypeInPaginated(1, ['course-part'], 2, 1);
+        $response = $this->classBeingTested->getByParentIdWhereTypeInPaginated($parent[0]->getId(), [$type], 2, 1);
 
         $this->assertEquals(1, count($response));
-
-        $this->assertEquals(4, $response[0]->getId());
+        $this->assertEquals($type, $response[0]->getType());
+        $this->assertEquals(
+            $parent[0]->getId(),
+            $response[0]->getParent()
+                ->getParent()
+                ->getId()
+        );
     }
 
     public function test_countByParentIdWhereTypeIn()
     {
-        $response = $this->classBeingTested->countByParentIdWhereTypeIn(1, ['course-part']);
+        $parent = $this->fakeContent(
+            1,
+            [
+                'slug' => 'slug1',
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        $nrChildrenParent1 = $this->faker->randomNumber(1);
+        $childType = $this->faker->word;
 
-        $this->assertEquals(3, $response);
+        $children = $this->fakeContent(
+            $nrChildrenParent1,
+            [
+                'slug' => 'slug2',
+                'status' => 'published',
+                'type' => $childType,
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        foreach ($children as $child) {
+            $this->fakeHierarchy(
+                1,
+                [
+                    'parent' => $parent[0],
+                    'child' => $child,
+                    'childPosition' => 1,
+                ]
+            );
+        }
+
+        $response = $this->classBeingTested->countByParentIdWhereTypeIn($parent[0]->getId(), [$childType]);
+
+        $this->assertEquals($nrChildrenParent1, $response);
     }
 
     public function test_getByParentIds()
     {
-        //get childrens by parent ids
-        $response = $this->classBeingTested->getByParentIds([1, 4]);
+        $parent = $this->fakeContent(
+            1,
+            [
+                'slug' => 'slug1',
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        $nrChildrenParent1 = $this->faker->randomNumber(1);
+        $children = $this->fakeContent(
+            $nrChildrenParent1,
+            [
+                'slug' => 'slug2',
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        foreach ($children as $child) {
+            $this->fakeHierarchy(
+                1,
+                [
+                    'parent' => $parent[0],
+                    'child' => $child,
+                    'childPosition' => 1,
+                ]
+            );
+        }
 
-        $this->assertEquals(4, count($response));
+        $parent2 = $this->fakeContent(
+            1,
+            [
+                'slug' => 'slug1',
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        $nrChildrenParent2 = $this->faker->randomNumber(1);
+        $children2 = $this->fakeContent(
+            $nrChildrenParent2,
+            [
+                'slug' => 'slug2',
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        foreach ($children2 as $child) {
+            $this->fakeHierarchy(
+                1,
+                [
+                    'parent' => $parent2[0],
+                    'child' => $child,
+                    'childPosition' => 1,
+                ]
+            );
+        }
+
+        //get childrens by parent ids
+        $response = $this->classBeingTested->getByParentIds([$parent[0]->getId(), $parent2[0]->getId()]);
+
+        $this->assertEquals(($nrChildrenParent1 + $nrChildrenParent2), count($response));
     }
 
     public function test_getByChildIdWhereParentTypeIn()
@@ -682,4 +1016,126 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals(1, $results[0]->getId());
         $this->assertEquals('course', $results[0]->getType());
     }
+
+    public function test_getPaginatedByTypesRecentUserProgressState()
+    {
+        $type = 'song';
+        $userId = $this->faker->numberBetween();
+
+        $contents = $this->fakeContent(
+            10,
+            [
+                'type' => $type,
+            ]
+        );
+        $contentOtherType = $this->fakeContent();
+
+        $this->fakeUserContentProgress(
+            1,
+            [
+                'userId' => $userId,
+                'content' => $contents[0],
+                'state' => 'started',
+            ]
+        );
+
+        $this->fakeUserContentProgress(
+            1,
+            [
+                'userId' => $userId,
+                'content' => $contents[1],
+                'state' => 'started',
+                'updatedOn' => Carbon::now(),
+            ]
+        );
+
+        $this->fakeUserContentProgress(
+            1,
+            [
+                'userId' => $userId,
+                'content' => $contentOtherType[0],
+                'state' => 'started',
+            ]
+        );
+
+        $results = $this->classBeingTested->getPaginatedByTypesRecentUserProgressState([$type], $userId, 'started');
+
+        $this->assertEquals(2, count($results));
+
+        $updatedOn = Carbon::now();
+
+        foreach ($results as $result) {
+            $this->assertTrue($result->getUpdatedOn() <= $updatedOn);
+            $updatedOn = $result->getUpdatedOn();
+        }
+    }
+
+    public function test_countByTypesRecentUserProgressState()
+    {
+        $type = 'song';
+        $userId = $this->faker->numberBetween();
+
+        $contents = $this->fakeContent(
+            10,
+            [
+                'type' => $type,
+            ]
+        );
+        $contentOtherType = $this->fakeContent();
+
+        $this->fakeUserContentProgress(
+            1,
+            [
+                'userId' => $userId,
+                'content' => $contents[0],
+                'state' => 'started',
+            ]
+        );
+
+        $this->fakeUserContentProgress(
+            1,
+            [
+                'userId' => $userId,
+                'content' => $contentOtherType[0],
+                'state' => 'started',
+            ]
+        );
+
+        $results = $this->classBeingTested->countByTypesRecentUserProgressState([$type], $userId, 'started');
+
+        $this->assertEquals(1, $results);
+    }
+
+    public function test_getTypeNeighbouringSiblings()
+    {
+        $type = $this->faker->word;
+
+        $contents1 = $this->fakeContent(
+            1,
+            [
+                'type' => $type,
+                'sort' => 1,
+            ]
+        );
+        $contents2 = $this->fakeContent(
+            1,
+            [
+                'type' => $type,
+                'sort' => 2,
+            ]
+        );
+        $contents3 = $this->fakeContent(
+            1,
+            [
+                'type' => $type,
+                'sort' => 3,
+            ]
+        );
+        $results = $this->classBeingTested->getTypeNeighbouringSiblings($type, 'sort',$contents2[0]->getSort());
+
+        $this->assertEquals($contents3[0], $results['before'][0]);
+        $this->assertEquals($contents1[0], $results['after'][0]);
+
+    }
+
 }
