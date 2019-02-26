@@ -25,56 +25,6 @@ class CommentLikesServiceTest extends RailcontentTestCase
         $this->classBeingTested = $this->app->make(CommentLikeService::class);
     }
 
-    public function fakeComment($nr = 1, $commentData = [])
-    {
-        $this->populator->addEntity(
-            Content::class,
-            1,
-            [
-                'slug' => 'slug1',
-                'status' => 'published',
-                'type' => 'course',
-                'brand' => ConfigService::$brand,
-            ]
-        );
-        $this->populator->execute();
-
-        if (empty($commentData)) {
-            $commentData = [
-                'userId' => 1,
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-            ];
-        }
-        $this->populator->addEntity(
-            Comment::class,
-            $nr,
-            $commentData
-
-        );
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[Comment::class];
-    }
-
-    public function fakeCommentLike($nr = 1, $commentLikeData = [])
-    {
-        if (empty($commentLikeData)) {
-            $commentLikeData = [
-                'userId' => 1,
-                'comment' => $this->fakeComment(),
-            ];
-        }
-        $this->populator->addEntity(
-            CommentLikes::class,
-            $nr,
-            $commentLikeData
-
-        );
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[CommentLikes::class];
-    }
 
     public function test_get_by_comment_ids()
     {

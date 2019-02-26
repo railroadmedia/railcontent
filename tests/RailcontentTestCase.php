@@ -26,6 +26,7 @@ use Railroad\Doctrine\Providers\DoctrineServiceProvider;
 use Railroad\Permissions\Providers\PermissionsServiceProvider;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Entities\Comment;
+use Railroad\Railcontent\Entities\CommentLikes;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Entities\ContentHierarchy;
@@ -618,7 +619,6 @@ class RailcontentTestCase extends BaseTestCase
 
         );
 
-        //dd($this->populator);
         $fakePopulator = $this->populator->execute();
 
         return $fakePopulator[ContentHierarchy::class];
@@ -827,6 +827,25 @@ class RailcontentTestCase extends BaseTestCase
             $content->addTopic($fakePopulator[ContentTopic::class][$i]);
         }
         return $fakePopulator[ContentTopic::class];
+    }
+
+    public function fakeCommentLike($nr = 1, $commentLikeData = [])
+    {
+        if (empty($commentLikeData)) {
+            $commentLikeData = [
+                'userId' => 1,
+                'comment' => $this->fakeComment(),
+            ];
+        }
+        $this->populator->addEntity(
+            CommentLikes::class,
+            $nr,
+            $commentLikeData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[CommentLikes::class];
     }
 
 }
