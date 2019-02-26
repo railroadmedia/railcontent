@@ -5,12 +5,9 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Permissions\Services\PermissionService;
-use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Exceptions\DeleteFailedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentCreateRequest;
-use Railroad\Railcontent\Requests\ContentIndexRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ResponseService;
@@ -69,15 +66,6 @@ class ContentJsonController extends Controller
 
 
         return ResponseService::content($contentData['results'], $contentData['qb'], [], $contentData['filter_options'])->respond();
-
-        //        return reply()->json(
-        //            $contentData['results'],
-        //            [
-        //                'transformer' => DataTransformer::class,
-        //                'totalResults' => $contentData['total_results'],
-        //                'filterOptions' => $contentData['filter_options'],
-        //            ]
-        //        );
     }
 
     /** Pull the children contents for the parent id

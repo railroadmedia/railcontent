@@ -4,20 +4,15 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
-use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Resora\Decorators\Decorator;
-use Railroad\Resora\Queries\CachedQuery;
 
 class ContentRepository extends EntityRepository
 {
-
     /**
      * If this is false content with any status will be pulled. If its an array, only content with those
      * statuses will be pulled.
@@ -65,47 +60,6 @@ class ContentRepository extends EntityRepository
     protected function decorate($results)
     {
         return Decorator::decorate($results, 'content');
-    }
-
-    /**
-     * @param integer $id
-     * @return array|null
-     */
-    public function _getById($id)
-    {
-        return $this->query()
-            ->selectPrimaryColumns()
-            ->restrictByUserAccess()
-            ->where(ConfigService::$tableContent . '.id', $id)
-            ->first();
-    }
-
-    /**
-     * @param array $ids
-     * @return array
-     */
-    public function _getByIds(array $ids)
-    {
-        $unorderedContentRows =
-            $this->query()
-                ->selectPrimaryColumns()
-                ->restrictByUserAccess()
-                ->whereIn(ConfigService::$tableContent . '.id', $ids)
-                ->get();
-
-        // restore order of ids passed in
-        $contentRows = [];
-
-        foreach ($ids as $id) {
-            foreach ($unorderedContentRows as $index => $unorderedContentRow) {
-                if ($id == $unorderedContentRow['id']) {
-                    $contentRows[] = $unorderedContentRow;
-                }
-            }
-        }
-
-        return $contentRows;
-
     }
 
     /**
@@ -185,63 +139,6 @@ class ContentRepository extends EntityRepository
             'before' => $beforeContents,
             'after' => $afterContents,
         ];
-    }
-
-    /**
-     * @param array $types
-     * @param $userId
-     * @param $state
-     * @return integer
-     */
-    public function _countByTypesUserProgressState(array $types, $userId, $state)
-    {
-        return $this->query()
-            ->selectPrimaryColumns()
-            ->restrictByUserAccess()
-            ->leftJoin(
-                ConfigService::$tableUserContentProgress,
-                ConfigService::$tableUserContentProgress . '.content_id',
-                '=',
-                ConfigService::$tableContent . '.id'
-            )
-            ->whereIn(ConfigService::$tableContent . '.type', $types)
-            ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
-            ->where(ConfigService::$tableUserContentProgress . '.state', $state)
-            ->orderBy('published_on', 'desc')
-            ->count();
-    }
-
-    /**
-     * @param $userId
-     * @param $childContentIds
-     * @param null $slug
-     * @return array
-     */
-    public function _getByUserIdWhereChildIdIn($userId, $childContentIds, $slug = null)
-    {
-        $query =
-            $this->query()
-                ->selectPrimaryColumns()
-                ->selectInheritenceColumns()
-                ->restrictByUserAccess()
-                ->leftJoin(
-                    ConfigService::$tableContentHierarchy,
-                    function (JoinClause $joinClause) use ($childContentIds) {
-                        $joinClause->on(
-                            ConfigService::$tableContentHierarchy . '.parent_id',
-                            '=',
-                            ConfigService::$tableContent . '.id'
-                        )
-                            ->whereIn(ConfigService::$tableContentHierarchy . '.child_id', $childContentIds);
-                    }
-                )
-                ->where(ConfigService::$tableContent . '.user_id', $userId);
-
-        if (!empty($slug)) {
-            $query->where('slug', $slug);
-        }
-
-        return $query->get();
     }
 
     /**
@@ -387,17 +284,18 @@ class ContentRepository extends EntityRepository
      */
     public function getFilterFields()
     {
-        $possibleContentFields = $this->build()
-        ->restrictByUserAccess()
-            ->restrictByFields($this->requiredFields)
-            ->includeByFields($this->includedFields)
-            ->restrictByUserStates($this->requiredUserStates)
-            ->includeByUserStates($this->includedUserStates)
-            ->restrictByTypes($this->typesToInclude)
-            ->restrictByParentIds($this->requiredParentIds)
-            ->restrictByFilterOptions()
-            ->getQuery()
-            ->getResult();
+        $possibleContentFields =
+            $this->build()
+                ->restrictByUserAccess()
+                ->restrictByFields($this->requiredFields)
+                ->includeByFields($this->includedFields)
+                ->restrictByUserStates($this->requiredUserStates)
+                ->includeByUserStates($this->includedUserStates)
+                ->restrictByTypes($this->typesToInclude)
+                ->restrictByParentIds($this->requiredParentIds)
+                ->restrictByFilterOptions()
+                ->getQuery()
+                ->getResult();
 
         return $this->parseAvailableFields($possibleContentFields);
 
@@ -458,6 +356,10 @@ class ContentRepository extends EntityRepository
         return $this;
     }
 
+    /**
+     * @param $rows
+     * @return array
+     */
     private function parseAvailableFields($rows)
     {
         $availableFields = [];
@@ -514,96 +416,9 @@ class ContentRepository extends EntityRepository
         return $availableFields;
     }
 
-    public function _softDelete(array $contentIds)
-    {
-        return $this->query()
-            ->whereIn('id', $contentIds)
-            ->update(
-                ['status' => ContentService::STATUS_DELETED]
-            );
-    }
-
     /**
-     * @param $contentTypes
-     * @param $contentFieldKey
-     * @param array $contentFieldValues
-     * @return array
-     *
-     * can get all for content_field key by not passing content_field values, or can filter by values.
-     *
+     * @return \Doctrine\ORM\QueryBuilder|ContentQueryBuilder
      */
-    public function _getByContentFieldValuesForTypes($contentTypes, $contentFieldKey, $contentFieldValues = [])
-    {
-        $query =
-            $this->query()
-                ->addSelect(
-                    [
-                        ConfigService::$tableContent . '.id as id',
-                    ]
-                );
-
-        $rows =
-            $query->restrictByUserAccess()
-                ->join(
-                    ConfigService::$tableContentFields,
-                    function (JoinClause $joinClause) use (
-                        $contentFieldKey,
-                        $contentFieldValues
-                    ) {
-                        $joinClause->on(
-                            ConfigService::$tableContentFields . '.content_id',
-                            '=',
-                            ConfigService::$tableContent . '.id'
-                        )
-                            ->where(
-                                ConfigService::$tableContentFields . '.key',
-                                '=',
-                                $contentFieldKey
-                            );
-                        if (!empty($contentFieldValues)) {
-                            $joinClause->whereIn(
-                                ConfigService::$tableContentFields . '.value',
-                                $contentFieldValues
-                            );
-                        }
-                    }
-                )
-                ->whereIn(ConfigService::$tableContent . '.type', $contentTypes)
-                ->getToArray();
-
-        $ids = [];
-
-        foreach ($rows as $row) {
-            $ids[] = $row['id'];
-        }
-
-        return $rows;
-    }
-
-    /** Get from the database the contents that have been published starting with a date.
-     *
-     * @param string $startDate
-     * @return array
-     */
-    public function _getRecentPublishedContents($startDate)
-    {
-        $contentRows =
-            $this->query()
-                ->selectPrimaryColumns()
-                ->whereBetween(
-                    ConfigService::$tableContent . '.published_on',
-                    [
-                        $startDate,
-                        Carbon::now()
-                            ->toDateTimeString(),
-                    ]
-                )
-                ->whereNull('user_id')
-                ->getToArray();
-
-        return $contentRows;
-    }
-
     public function build()
     {
         $qb = new ContentQueryBuilder($this->getEntityManager());

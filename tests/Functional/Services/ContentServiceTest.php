@@ -419,7 +419,7 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_getByChildIdWhereType()
     {
-        $results = $this->classBeingTested->getByChildIdsWhereType([2], 'course');
+        $results = $this->classBeingTested->getByChildIdWhereType([2], 'course');
 
         $this->assertEquals(1, $results[0]->getId());
         $this->assertEquals('course', $results[0]->getType());

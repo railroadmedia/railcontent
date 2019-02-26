@@ -2,13 +2,8 @@
 
 namespace Railroad\Railcontent\Services;
 
-use function Clue\StreamFilter\fun;
-use Doctrine\Common\Collections\Criteria;
-use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
-use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
@@ -16,22 +11,17 @@ use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentPermission;
-use Railroad\Railcontent\Entities\ContentTopic;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Helpers\CacheHelper;
-use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
-use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\ContentVersionRepository;
-use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Support\Collection;
 
 class ContentService
@@ -40,6 +30,7 @@ class ContentService
      * @var EntityManager
      */
     private $entityManager;
+
     /**
      * @var ContentRepository
      */
@@ -49,11 +40,6 @@ class ContentService
      * @var ContentDatumRepository
      */
     private $datumRepository;
-
-    /**
-     * @var ContentHierarchyRepository
-     */
-    private $contentHierarchyRepository;
 
     /**
      * @var CommentRepository
@@ -121,6 +107,7 @@ class ContentService
                 [$id]
             );
         }
+
         return $results;
     }
 
@@ -591,18 +578,15 @@ class ContentService
         if (!$results) {
             $resultsDB =
                 $this->contentRepository->build()
-                    ->selectPrimaryColumns()
                     ->restrictByUserAccess()
-                    ->leftJoin(
-                        ConfigService::$tableContentHierarchy,
-                        ConfigService::$tableContentHierarchy . '.parent_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                    ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
-                    ->where(ConfigService::$tableContent . '.type', $type)
-                    ->selectInheritenceColumns()
-                    ->get();
+                    ->join(ConfigService::$tableContent . '.child', 'c')
+                    ->andWhere('c.child = :childId')
+                    ->andWhere(ConfigService::$tableContent . '.type = :type')
+                    ->setParameter('type', $type)
+                    ->setParameter('childId', $childId)
+                    ->getQuery()
+                    ->getResult();
+
             $results =
                 CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$childId]));
         }
@@ -1050,6 +1034,7 @@ class ContentService
             $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
             $results = new ContentFilterResultsEntity($results);
         }
+
         return $results;
     }
 
@@ -1220,12 +1205,18 @@ class ContentService
                     'railcontent_content.id = hierarchy.child'
                 )
                 ->andWhere(ConfigService::$tableContent . '.userId = :userId')
-                ->andWhere('hierarchy.child IN (:childIds)')
-                ->setParameter('childIds', array_column($contents, 'id'))
-                ->setParameter('userId', $userId)
-                ->selectInheritenceColumns()
-                ->getQuery()
-                ->getResult();
+                ->andWhere('hierarchy.child IN (:childIds)');
+
+        if ($singlePlaylistSlug) {
+            $userPlaylistContents->andWhere(ConfigService::$tableContent . '.slug = :slug')
+                ->setParameter('slug', $singlePlaylistSlug);
+        }
+
+        $userPlaylistContents->setParameter('childIds', array_column($contents, 'id'))
+            ->setParameter('userId', $userId)
+            ->selectInheritenceColumns()
+            ->getQuery()
+            ->getResult();
 
         foreach ($contents as $index => $content) {
             $contents[$index]['user_playlists'][$userId] = [];
@@ -1305,7 +1296,6 @@ class ContentService
         $contentFieldKey,
         array $contentFieldValues = []
     ) {
-
         $hash = 'contents_by_types_and_field_value_' . CacheHelper::getKey(
                 $contentTypes,
                 $contentFieldKey,
