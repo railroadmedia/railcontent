@@ -264,15 +264,13 @@ class CommentRepository extends EntityRepository
      */
     private function softDeleteReplies($id)
     {
-        $deleted = $this->query()
-            ->where(['parent_id' => $id])
-            ->update(
-                [
-                    'deleted_at' => Carbon::now()->toDateTimeString()
-                ]
-            );
+        $replies = $this->findByParent($id);
+        foreach($replies as $reply){
+            $reply->setDeletedAt(Carbon::now());
+            $this->getEntityManager()->flush();
+        }
 
-        return $deleted;
+        return true;
     }
 
     /** Delete comment and it's replies
@@ -281,11 +279,11 @@ class CommentRepository extends EntityRepository
      */
     private function deleteReplies($id)
     {
-        $deleted = $this->query()
-            ->where(['parent_id' => $id])
-            ->delete();
-
-        return $deleted;
+        $replies = $this->findByParent($id);
+        foreach($replies as $reply){
+            $this->getEntityManager()->remove($reply);
+            $this->getEntityManager()->flush();
+        }
     }
 
     /**

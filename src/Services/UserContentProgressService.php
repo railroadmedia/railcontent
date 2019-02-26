@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Services;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Facades\Cache;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Events\UserContentsProgressReset;
@@ -60,7 +61,7 @@ class UserContentProgressService
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentService = $contentService;
 
-          $this->userContentRepository = $this->entityManager->getRepository(UserContentProgress::class);
+        $this->userContentRepository = $this->entityManager->getRepository(UserContentProgress::class);
 
         //   $this->contentRepository = $contentRepository;
 
@@ -113,6 +114,7 @@ class UserContentProgressService
         $children = $this->contentService->getByParentId($contentId);
 
         $content = $this->contentService->getById($contentId);
+
         if (!empty($children)) {
 
             /*
@@ -131,19 +133,19 @@ class UserContentProgressService
             [
                 'userId' => $userId,
                 'content' => $content,
-                'state' => 'completed'
+                'state' => 'completed',
 
             ]
         );
-        //dd($isCompleted);
-        //query()->isContentAlreadyCompleteForUser($contentId, $userId);
 
         if (!$isCompleted || $forceEvenIfComplete) {
-            $userContentProgress = $this->userContentRepository->findOneBy([
-                'userId' => $userId,
-                'content' => $content
-            ]);
-            if(!$userContentProgress){
+            $userContentProgress = $this->userContentRepository->findOneBy(
+                [
+                    'userId' => $userId,
+                    'content' => $content,
+                ]
+            );
+            if (!$userContentProgress) {
                 $userContentProgress = new UserContentProgress();
                 $userContentProgress->setUserId($userId);
                 $userContentProgress->setContent($content);
@@ -176,7 +178,7 @@ class UserContentProgressService
 
         UserContentProgressRepository::$cache = [];
 
-      //  event(new UserContentProgressSaved($userId, $contentId));
+        event(new UserContentProgressSaved($userId, $contentId));
 
         return true;
     }
@@ -204,11 +206,13 @@ class UserContentProgressService
 
         $content = $this->contentService->getById($contentId);
 
-        $userContentProgress = $this->userContentRepository->findOneBy([
-            'userId' => $userId,
-            'content' => $content
-        ]);
-        if(!$userContentProgress){
+        $userContentProgress = $this->userContentRepository->findOneBy(
+            [
+                'userId' => $userId,
+                'content' => $content,
+            ]
+        );
+        if (!$userContentProgress) {
             $userContentProgress = new UserContentProgress();
             $userContentProgress->setUserId($userId);
             $userContentProgress->setContent($content);
@@ -220,23 +224,8 @@ class UserContentProgressService
 
         $this->entityManager->persist($userContentProgress);
         $this->entityManager->flush();
-//        $this->userContentRepository->query()
-//            ->updateOrCreate(
-//                [
-//                    'content_id' => $contentId,
-//                    'user_id' => $userId,
-//                ],
-//                [
-//                    'state' => self::STATE_COMPLETED,
-//                    'progress_percent' => 100,
-//                    'updated_on' => Carbon::now()
-//                        ->toDateTimeString(),
-//                ]
-//            );
 
-
-
-     //   event(new UserContentProgressSaved($userId, $contentId));
+        event(new UserContentProgressSaved($userId, $contentId));
 
         CacheHelper::deleteUserFields(
             [
@@ -350,60 +339,31 @@ class UserContentProgressService
 
         $content = $this->contentService->getById($contentId);
 
-        $userContentProgress = $this->userContentRepository->findOneBy([
-            'content' =>  $content,
-            'userId' => $userId
-        ]);
+        $userContentProgress = $this->userContentRepository->findOneBy(
+            [
+                'content' => $content,
+                'userId' => $userId,
+            ]
+        );
 
-
-//            $this->userContentRepository->query()
-//                ->where(
-//                    [
-//                        'content_id' => $contentId,
-//                        'user_id' => $userId,
-//                    ]
-//                )
-//                ->orderBy('updated_on', 'desc')
-//                ->first();
-
-        if ($userContentProgress && !$overwriteComplete &&
+        if ($userContentProgress &&
+            !$overwriteComplete &&
             ($userContentProgress->getState() == 'completed' || $userContentProgress->getProgressProcent() == 100)) {
             return true;
         }
 
-        if(!$userContentProgress){
+        if (!$userContentProgress) {
             $userContentProgress = new UserContentProgress();
             $userContentProgress->setUserId($userId);
             $userContentProgress->setContent($content);
         }
 
         $userContentProgress->setProgressPercent($progress);
-        $userContentProgress->setState(($progress == 100)?self::STATE_COMPLETED : self::STATE_STARTED);
+        $userContentProgress->setState(($progress == 100) ? self::STATE_COMPLETED : self::STATE_STARTED);
         $userContentProgress->setUpdatedOn(Carbon::parse(now()));
 
         $this->entityManager->persist($userContentProgress);
         $this->entityManager->flush();
-
-
-//        if ($progress == 100) {
-//            return $this->completeContent($contentId, $userId);
-//        }
-//
-//        $this->userContentRepository->query()
-//            ->updateOrCreate(
-//                [
-//                    'content_id' => $contentId,
-//                    'user_id' => $userId,
-//                ],
-//                [
-//                    'state' => self::STATE_STARTED,
-//                    'progress_percent' => $progress,
-//                    'updated_on' => Carbon::now()
-//                        ->toDateTimeString(),
-//                ]
-//            );
-
-
 
         CacheHelper::deleteUserFields(
             [
@@ -428,52 +388,50 @@ class UserContentProgressService
      */
     public function attachProgressToContents($userId, $contentOrContents)
     {
-        return $contentOrContents;
-
         if (empty($userId) || empty($contentOrContents)) {
             return $contentOrContents;
         }
 
         $isArray = !isset($contentOrContents['id']);
-
-        if (!$isArray) {
-            $contentOrContents = [(array)$contentOrContents];
-        }
-
-        if ($contentOrContents instanceof Collection) {
-            $contentIds =
-                $contentOrContents->pluck('id')
-                    ->toArray();
-
-        } else {
-            $contentIds = array_column($contentOrContents, 'id');
-        }
+        $contentIds = array_map(
+            function ($entity) {
+                return $entity->getId();
+            },
+            $contentOrContents
+        );
 
         if (!empty($contentIds)) {
-            dd($contentIds);
-            $contentProgressions =
-                $this->userContentRepository->query()
-                    ->getByUserIdAndWhereContentIdIn($userId, $contentIds);
 
-            $contentProgressionsByContentId =
-                array_combine(array_pluck($contentProgressions, 'content_id'), $contentProgressions);
+            $contentProgressions = $this->userContentRepository->getByUserIdAndWhereContentIdIn($userId, $contentIds);
+
+            $contentProgressionsByContentId = array_combine(
+                array_map(
+                    function ($entity) {
+                        return $entity->getId();
+                    },
+                    $contentProgressions
+                ),
+                $contentProgressions
+            );
 
             foreach ($contentOrContents as $index => $content) {
-                if (!empty($contentProgressionsByContentId[$content['id']])) {
-                    $contentOrContents[$index]['user_progress'][$userId] =
-                        $contentProgressionsByContentId[$content['id']];
+                $id = $content->getId();
 
-                    $contentOrContents[$index][self::STATE_COMPLETED] =
-                        $contentProgressionsByContentId[$content['id']]['state'] == self::STATE_COMPLETED;
+                if (!empty($contentProgressionsByContentId[$id])) {
+                    $contentOrContents[$index]->addUserProgress($contentProgressionsByContentId[$id]);
+                    $contentOrContents[$index]->setCompleted(
+                        $contentProgressionsByContentId[$id]->getState() == self::STATE_COMPLETED
+                    );
 
-                    $contentOrContents[$index][self::STATE_STARTED] =
-                        $contentProgressionsByContentId[$content['id']]['state'] == self::STATE_STARTED;
+                    $contentOrContents[$index]->setCompleted(
+                        $contentProgressionsByContentId[$id]->getState() == self::STATE_STARTED
+                    );
                 } else {
-                    $contentOrContents[$index]['user_progress'][$userId] = [];
-
-                    $contentOrContents[$index][self::STATE_COMPLETED] = false;
-                    $contentOrContents[$index][self::STATE_STARTED] = false;
+                    $contentOrContents[$index]->setCompleted(false);
+                    $contentOrContents[$index]->setStarted(false);
+                    $contentOrContents[$index]->addUserProgress([]);
                 }
+
             }
         }
 
@@ -491,7 +449,11 @@ class UserContentProgressService
      */
     public function bubbleProgress($userId, $contentId)
     {
-        $content = $this->attachProgressToContents($userId, ['id' => $contentId]);
+        $content =
+            $this->entityManager->getRepository(Content::class)
+                ->find($contentId);
+
+        $content = $this->attachProgressToContents($userId, [$content])[0];
 
         $allowedTypesForStarted = config('railcontent.allowed_types_for_bubble_progress')['started'];
         $allowedTypesForCompleted = config('railcontent.allowed_types_for_bubble_progress')['completed'];
@@ -500,24 +462,23 @@ class UserContentProgressService
         $parents = $this->attachProgressToContents(
             $userId,
             $this->contentService->getByChildIdWhereParentTypeIn(
-                $content['id'],
+                $contentId,
                 $allowedTypes
             )
         );
 
         foreach ($parents as $parent) {
-
             // start parent if necessary
-            if ($content[self::STATE_STARTED] &&
-                !$parent[self::STATE_STARTED] &&
-                in_array($parent['type'], $allowedTypesForStarted)) {
-                $this->startContent($parent['id'], $userId);
+            if ($content->isStarted() &&
+                !$parent->isStarted() &&
+                in_array($parent->getType(), $allowedTypesForStarted)) {
+                $this->startContent($parent->getId(), $userId);
             }
 
             // get siblings
-            $siblings = $parent['lessons'] ?? $this->attachProgressToContents(
+            $siblings = $parent->getChild() ?? $this->attachProgressToContents(
                     $userId,
-                    $this->contentService->getByParentId($parent['id'])
+                    $this->contentService->getByParentId($parent->getId())
                 );
 
             if (is_array($siblings)) {
@@ -525,28 +486,26 @@ class UserContentProgressService
             }
 
             // complete parent content if necessary
-            if ($content[self::STATE_COMPLETED]) {
+            if ($content->isCompleted()) {
                 $complete = true;
                 foreach ($siblings as $sibling) {
-                    if (!$sibling[self::STATE_COMPLETED]) {
+                    if (!$sibling->getChild()
+                        ->isCompleted()) {
                         $complete = false;
                     }
                 }
-                if ($complete &&
-                    !$parent[self::STATE_COMPLETED] &&
-                    in_array($parent['type'], $allowedTypesForCompleted)) {
-                    $this->completeContent($parent['id'], $userId);
+                if ($complete && !$parent->isCompleted() && in_array($parent->getType(), $allowedTypesForCompleted)) {
+                    $this->completeContent($parent->id(), $userId);
                 }
             }
 
             // calculate and save parent progress percent from children
-
-            $alreadyStarted = $parent[self::STATE_STARTED];
-            $typeAllows = in_array($parent['type'], $allowedTypesForStarted);
+            $alreadyStarted = $parent->isStarted();
+            $typeAllows = in_array($parent->getType(), $allowedTypesForStarted);
 
             if ($alreadyStarted || $typeAllows) {
                 $this->saveContentProgress(
-                    $parent['id'],
+                    $parent->getId(),
                     $this->getProgressPercentage($userId, $siblings),
                     $userId,
                     true
@@ -559,21 +518,18 @@ class UserContentProgressService
 
     private function getProgressPercentage($userId, $siblings)
     {
+
         $progressOfSiblingsDeNested = [];
         $percentages = [];
 
-        if ($siblings instanceof Collection) {
-            $progressOfSiblings =
-                ($siblings->has('user_progress')) ?
-                    $siblings->pluck('user_progress')
-                        ->toArray() : [];
-        } else {
-            $progressOfSiblings = array_column($siblings, 'user_progress');
-        }
-
         foreach ($siblings as $sibling) {
-            if (!empty($sibling['user_progress'])) {
-                $progressOfSiblings[] = $sibling['user_progress'];
+            if (!empty(
+            $sibling->getChild()
+                ->getUserProgress()
+            )) {
+                $progressOfSiblings[] =
+                    $sibling->getChild()
+                        ->getUserProgress();
             }
         }
 

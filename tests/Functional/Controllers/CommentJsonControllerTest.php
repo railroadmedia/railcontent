@@ -9,6 +9,7 @@ use Railroad\Railcontent\Entities\CommentAssignment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
+use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ConfigService;
@@ -33,6 +34,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'status' => $this->faker->randomElement(ContentRepository::$availableContentStatues)
             ]
         );
 
@@ -76,7 +78,9 @@ class CommentJsonControllerTest extends RailcontentTestCase
     public function test_add_comment_on_not_commentable_type_response()
     {
         $this->createAndLogInNewUser();
-        $content = $this->fakeContent();
+        $content = $this->fakeContent(1,[
+            'status' => $this->faker->randomElement(ContentRepository::$availableContentStatues)
+        ]);
 
         $response = $this->call(
             'PUT',
@@ -279,7 +283,15 @@ class CommentJsonControllerTest extends RailcontentTestCase
     {
         $userId = $this->createAndLogInNewUser();
 
-        $comment = $this->fakeComment();
+        $comment = $this->fakeComment(2,[
+            'parent' => null
+        ]);
+        $replies = $this->fakeComment(1,[
+            'parent' => $comment[0]
+        ]);
+        $replies = $this->fakeComment(5,[
+            'parent' => $comment[1]
+        ]);
 
         $response = $this->call('DELETE', 'railcontent/comment/' . $comment[0]->getId());
 
@@ -327,11 +339,20 @@ class CommentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        CommentService::$canManageOtherComments = true;
+        $commentId = $comment[0]->getId();
 
-        $response = $this->call('DELETE', 'railcontent/comment/' . $comment[0]->getId());
+        CommentService::$canManageOtherComments = true;
+        CommentRepository::$softDelete = false;
+
+        $response = $this->call('DELETE', 'railcontent/comment/' . $commentId);
 
         $this->assertEquals(204, $response->getStatusCode());
+
+        $this->assertDatabaseMissing(
+            ConfigService::$tableComments,[
+                'id' => $commentId
+            ]
+        );
     }
 
     public function test_reply_to_a_comment()

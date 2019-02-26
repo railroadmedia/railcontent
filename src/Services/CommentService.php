@@ -7,6 +7,8 @@ use Doctrine\ORM\EntityManager;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Events\CommentCreated;
+use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -114,7 +116,7 @@ class CommentService
 
         //CacheHelper::deleteCache('content_' . $contentId);
 
-        // event(new CommentCreated($comment['id'], $userId, $parentId, $comment));
+         event(new CommentCreated($comment->getId(), $userId, $parentId, $comment));
 
         return $comment;
     }
@@ -188,7 +190,7 @@ class CommentService
         $isSoftDelete = $this->commentRepository->getSoftDelete();
 
         //trigger an event that delete the corresponding comment assignments if the deletion it's not soft
-        //        event(new CommentDeleted($id));
+        event(new CommentDeleted($id));
 
         CacheHelper::deleteCache(
             'content_' .

@@ -98,6 +98,12 @@ class Content
      */
     protected $archivedOn;
 
+    private $started;
+
+    private $completed;
+
+    private $userProgress;
+
     /**
      * @var \DateTime $createdOn
      *
@@ -118,6 +124,7 @@ class Content
         $this->sbtExerciseNumber = new ArrayCollection();
         $this->playlist = new ArrayCollection();
         $this->exercise = new ArrayCollection();
+        $this->userProgress = new ArrayCollection();
     }
 
     /**
@@ -365,5 +372,47 @@ class Content
     public function getChild()
     {
         return $this->child;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStarted()
+    {
+        return $this->started;
+    }
+
+    /**
+     * @param Boolean $started
+     */
+    public function setStarted(bool $started)
+    {
+        $this->started = $started;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCompleted()
+    {
+        return $this->completed;
+    }
+
+    /**
+     * @param Boolean $completed
+     */
+    public function setCompleted(bool $completed)
+    {
+        $this->completed = $completed;
+    }
+
+    public function getUserProgress()
+    {
+        return $this->userProgress;
+    }
+
+    public function addUserProgress($userProgress)
+    {
+        $this->userProgress[auth()->id()] = $userProgress;
     }
 }

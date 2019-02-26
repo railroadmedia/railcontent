@@ -134,7 +134,9 @@ return [
 
     // progress bubbling
     'allowed_types_for_bubble_progress' => [
-        'started' => [],
+        'started' => [
+            'course',
+        ],
         'completed' => [],
     ],
 

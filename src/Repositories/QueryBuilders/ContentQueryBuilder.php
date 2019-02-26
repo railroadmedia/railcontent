@@ -173,7 +173,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
             $this->add(
                 'where',
                 $this->expr()
-                    ->in('status', ContentRepository::$availableContentStatues)
+                    ->in(config('railcontent.table_prefix') . 'content'.'.status', ContentRepository::$availableContentStatues)
             );
         }
 

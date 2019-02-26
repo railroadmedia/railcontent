@@ -17,7 +17,12 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
     public function test_start_content()
     {
         $userId = $this->createAndLogInNewUser();
-        $content = $this->fakeContent();
+        $content = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+            ]
+        );
 
         $response = $this->put(
             'railcontent/start',
@@ -72,7 +77,10 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
     {
         $userId = $this->createAndLogInNewUser();
 
-        $content = $this->fakeContent();
+        $content = $this->fakeContent(1,
+            [
+                'status' => 'published',
+            ]);
         $contentId = $content[0]->getId();
 
         $response = $this->put(
@@ -153,15 +161,22 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
     {
         $this->createAndLogInNewUser();
 
-        $content = $this->fakeContent();
+        $content = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+            ]
+        );
+
         $contentId = $content[0]->getId();
+        $percent = $this->faker->numberBetween(10, 99);
 
         $response = $this->put(
             'railcontent/progress',
             [
                 'data' => [
                     'attributes' => [
-                        'progress_percent' => $this->faker->numberBetween(10, 99),
+                        'progress_percent' => $percent,
                     ],
                     'relationships' => [
                         'content' => [
@@ -176,6 +191,13 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(201, $response->status());
         $this->assertTrue($response->decodeResponseJson('data'));
+
+        $this->assertDatabaseHas(ConfigService::$tableUserContentProgress,[
+            'user_id' => auth()->id(),
+            'state' => 'started',
+            'content_id' => $content[0]->getId(),
+            'progress_percent' => $percent
+        ]);
     }
 
     public function test_save_user_progress_on_content_inexistent()
@@ -211,5 +233,61 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         ];
 
         $this->assertEquals([$expectedErrors], $responseContent);
+    }
+
+    public function test_start_child_and_parent_content()
+    {
+        $userId = $this->createAndLogInNewUser();
+        $content = $this->fakeContent(
+            2,
+            [
+                'status' => 'published',
+                'type' => 'course',
+            ]
+        );
+
+        $this->fakeHierarchy(
+            1,
+            [
+                'parent' => $content[0],
+                'child' => $content[1],
+            ]
+        );
+
+        $response = $this->put(
+            'railcontent/start',
+            [
+                'data' => [
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $content[1]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        $this->assertEquals(200, $response->status());
+        $this->assertTrue($response->decodeResponseJson('data'));
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableUserContentProgress,
+            [
+                'user_id' => auth()->id(),
+                'state' => 'started',
+                'content_id' => $content[0]->getId(),
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            ConfigService::$tableUserContentProgress,
+            [
+                'user_id' => auth()->id(),
+                'state' => 'started',
+                'content_id' => $content[1]->getId(),
+            ]
+        );
     }
 }

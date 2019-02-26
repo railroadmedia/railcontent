@@ -31,11 +31,13 @@ class UserContentProgressRepository extends EntityRepository
 
         if (!key_exists($key, self::$cache)) {
             self::$cache[$key] =
-                $this->query()
-                    ->where('user_id', $userId)
-                    ->whereIn('content_id', $contentIds)
-                    ->get()
-                    ->toArray();
+                $this->createQueryBuilder('up')
+                    ->where('up.content IN (:contentIds)')
+                    ->andWhere('up.userId = :userId')
+                    ->setParameter('userId', $userId)
+                    ->setParameter('contentIds', $contentIds)
+                    ->getQuery()
+                    ->getResult();
 
             return self::$cache[$key];
         }
