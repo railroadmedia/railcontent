@@ -26,13 +26,6 @@ class UserContentProgress
     protected $userId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
-     * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
-     *
-     */
-    private $content;
-
-    /**
      * @ORM\Column(type="string", name="state")
      *
      */
@@ -43,6 +36,13 @@ class UserContentProgress
      * @var integer
      */
     protected $progressPercent;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content", inversedBy="userProgress")
+     * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
+     *
+     */
+    private $content;
 
     /**
      * @ORM\Column(type="datetime", name="updated_on", nullable=true)
@@ -138,5 +138,7 @@ class UserContentProgress
     public function setContent($content)
     {
         $this->content = $content;
+
+        $content->addUserProgress($this);
     }
 }

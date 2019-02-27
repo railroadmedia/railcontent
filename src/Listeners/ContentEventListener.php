@@ -3,10 +3,8 @@
 namespace Railroad\Railcontent\Listeners;
 
 use Illuminate\Support\Facades\Event;
-use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Services\VersionService;
 
 class ContentEventListener
 {

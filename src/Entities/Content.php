@@ -77,7 +77,8 @@ class Content
     protected $child;
 
     /**
-     * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy",mappedBy="child", cascade={"persist"}, fetch="EAGER")
+     * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy",mappedBy="child", cascade={"persist"},
+     *     fetch="EAGER")
      */
     protected $parent;
 
@@ -98,11 +99,21 @@ class Content
      */
     protected $archivedOn;
 
-    private $started;
-
-    private $completed;
-
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\UserContentProgress", mappedBy="content",
+     *     indexBy="userId")
+     */
     private $userProgress;
+
+    /**
+     * @var bool
+     */
+    private $started = false;
+
+    /**
+     * @var bool
+     */
+    private $completed = false;
 
     /**
      * @var \DateTime $createdOn
@@ -333,8 +344,6 @@ class Content
     public function addChild($child)
     {
         $this->child[] = $child;
-
-       // $child->setParent($this);
     }
 
     /**
@@ -369,6 +378,9 @@ class Content
         $this->parent->removeElement($parent);
     }
 
+    /**
+     * @return ArrayCollection
+     */
     public function getChild()
     {
         return $this->child;
@@ -406,13 +418,26 @@ class Content
         $this->completed = $completed;
     }
 
-    public function getUserProgress()
+    /**
+     * @param $userId
+     * @return array
+     */
+    public function getUserProgress($userId)
     {
-        return $this->userProgress;
+        if (!isset($this->userProgress[$userId])) {
+            return [];
+        }
+        return $this->userProgress[$userId];
     }
 
+    /**
+     * @param $userProgress
+     */
     public function addUserProgress($userProgress)
     {
-        $this->userProgress[auth()->id()] = $userProgress;
+        $this->userProgress[$userProgress->getUserId()] = $userProgress;
+
+        $this->setStarted($userProgress->getState() == 'started' ? true : false);
+        $this->setCompleted($userProgress->getState() == 'completed' ? true : false);
     }
 }

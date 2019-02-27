@@ -3,10 +3,8 @@
 namespace Railroad\Railcontent\Listeners;
 
 use Doctrine\ORM\EntityManager;
-use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Events\CommentDeleted;
-use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Services\CommentAssignmentService;
 
 

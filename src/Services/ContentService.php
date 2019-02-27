@@ -126,8 +126,9 @@ class ContentService
         if (!$results) {
             $unorderedContentRows =
                 $this->contentRepository->build()
-                    ->whereIn(ConfigService::$tableContent . '.id', $ids)
                     ->restrictByUserAccess()
+                    ->andWhere(ConfigService::$tableContent . '.id IN (:ids)')
+                    ->setParameter('ids', $ids)
                     ->getQuery()
                     ->getResult();
 

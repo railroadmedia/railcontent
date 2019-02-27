@@ -1444,17 +1444,149 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertDatabaseHas(
             config('railcontent.table_prefix') . 'content',
             [
-                'id' => 2,
+                'id' => $content[0]->getId(),
                 'status' => ContentService::STATUS_DELETED
             ]
         );
 
-//        $this->assertDatabaseMissing(
-//            config('railcontent.table_prefix') . 'content',
-//            [
-//                'id' => 2,
-//                'status' => ContentService::STATUS_DELETED
-//            ]
-//        );
+        $this->assertDatabaseHas(
+            config('railcontent.table_prefix') . 'content',
+            [
+                'id' => $content[1]->getId(),
+                'status' => ContentService::STATUS_DELETED
+            ]
+        );
+    }
+
+
+    public function test_delete_content_and_associations()
+    {
+        $content = $this->fakeContent();
+
+        $contentTopic = $this->fakeContentTopic(
+            1,
+            [
+                'content' => $content[0],
+                'topic' => $this->faker->word,
+                'position' => 1,
+            ]
+        );
+
+        $response = $this->call('DELETE', 'railcontent/content/' . $content[0]->getId());
+
+        $this->assertEquals(204, $response->status());
+
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix') . 'content',
+            [
+                'id' => 1,
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix') . 'content_topic',
+            [
+                'id' => 1,
+            ]
+        );
+    }
+
+    public function test_delete_content_reposition_siblings()
+    {
+        $contents = $this->fakeContent(4);
+
+        $this->fakeHierarchy(1,[
+            'parent' => $contents[0],
+            'child' => $contents[1]
+        ]);
+
+        $this->fakeHierarchy(1,[
+            'parent' => $contents[0],
+            'child' => $contents[2]
+        ]);
+
+        $this->fakeHierarchy(1,[
+            'parent' => $contents[0],
+            'child' => $contents[3]
+        ]);
+
+        $id = $contents[2]->getId();
+
+        $response = $this->call('DELETE', 'railcontent/content/' . $id);
+
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix') . 'content',
+            [
+                'id' => $id,
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix') . 'content_hierarchy',
+            [
+                'parent_id' => $contents[0]->getId(),
+                'child_id' => $contents[1]->getId(),
+                'child_position' => 1
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix') . 'content_hierarchy',
+            [
+                'parent_id' => $contents[0]->getId(),
+                'child_id' => $contents[3]->getId(),
+                'child_position' => 2
+            ]
+        );
+    }
+
+    public function test_soft_delete_content_reposition_siblings()
+    {
+        $contents = $this->fakeContent(4);
+
+        $this->fakeHierarchy(1,[
+            'parent' => $contents[0],
+            'child' => $contents[1]
+        ]);
+
+        $this->fakeHierarchy(1,[
+            'parent' => $contents[0],
+            'child' => $contents[2]
+        ]);
+
+        $this->fakeHierarchy(1,[
+            'parent' => $contents[0],
+            'child' => $contents[3]
+        ]);
+
+        $id = $contents[2]->getId();
+
+        $response = $this->call('DELETE', 'railcontent/soft/content/' . $id);
+
+        $this->assertDatabaseHas(
+            config('railcontent.table_prefix') . 'content',
+            [
+                'id' => $id,
+                'status' => 'deleted'
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix') . 'content_hierarchy',
+            [
+                'parent_id' => $contents[0]->getId(),
+                'child_id' => $contents[1]->getId(),
+                'child_position' => 1
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix') . 'content_hierarchy',
+            [
+                'parent_id' => $contents[0]->getId(),
+                'child_id' => $contents[3]->getId(),
+                'child_position' => 2
+            ]
+        );
     }
 }

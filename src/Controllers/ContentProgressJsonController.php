@@ -59,14 +59,6 @@ class ContentProgressJsonController extends Controller
         );
 
         return ResponseService::empty(201)->setData(['data'=> $response]);
-
-        return reply()->json(
-            [[$response]],
-            [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
-            ]
-        );
     }
 
     /**
@@ -82,13 +74,7 @@ class ContentProgressJsonController extends Controller
             auth()->id()
         );
 
-        return reply()->json(
-            [[$response]],
-            [
-                'transformer' => DataTransformer::class,
-                'code' => 201,
-            ]
-        );
+        return ResponseService::empty(201)->setData(['data'=> $response]);
     }
 
     /**

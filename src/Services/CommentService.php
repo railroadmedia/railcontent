@@ -114,7 +114,7 @@ class CommentService
         $this->entityManager->flush();
 
 
-        //CacheHelper::deleteCache('content_' . $contentId);
+        CacheHelper::deleteCache('content_' . $contentId);
 
          event(new CommentCreated($comment->getId(), $userId, $parentId, $comment));
 

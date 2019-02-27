@@ -173,7 +173,10 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
             $this->add(
                 'where',
                 $this->expr()
-                    ->in(config('railcontent.table_prefix') . 'content'.'.status', ContentRepository::$availableContentStatues)
+                    ->in(
+                        config('railcontent.table_prefix') . 'content' . '.status',
+                        ContentRepository::$availableContentStatues
+                    )
             );
         }
 
@@ -190,11 +193,11 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                 'where',
                 $this->expr()
                     ->lte(
-                        'published_on',
-                        Carbon::now()
-                            ->toDateTimeString()
+                        config('railcontent.table_prefix') . 'content' . '.publishedOn',
+                        ':published'
                     )
-            );
+            )
+                ->setParameter('published', Carbon::now());
         }
 
         return $this;
@@ -206,7 +209,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
     public function restrictBrand()
     {
         $this->andWhere(
-            ConfigService::$tableContent . '.brand IN (:brands)'
+            config('railcontent.table_prefix') . 'content' . '.brand IN (:brands)'
         )
             ->setParameter('brands', array_values(array_wrap(ConfigService::$availableBrands)));
 
@@ -220,7 +223,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
     public function restrictByTypes(array $typesToInclude)
     {
         if (!empty($typesToInclude)) {
-            $this->whereIn(ConfigService::$tableContent . '.type', $typesToInclude);
+            $this->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $typesToInclude);
         }
 
         return $this;
