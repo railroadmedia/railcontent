@@ -33,9 +33,6 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
 
         parent::setUp();
 
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
     }
 
     public function test_no_results()
@@ -51,29 +48,46 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
     {
         $page = 1;
         $limit = 3;
-        for ($i = 0; $i < 6; $i++) {
-            $content[$i] = $this->contentFactory->create(
-                'slug',
-                $this->faker->randomElement(ConfigService::$searchableContentTypes),
-                $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
-                ConfigService::$defaultLanguage,
-                ConfigService::$brand,
-                rand(),
-                Carbon::yesterday()
-                    ->hour($i)
-                    ->toDateTimeString()
-            );
+  
+        $content1 = $this->fakeContent(
+            1,
+            [
+                'brand' => config('railcontent.brand'),
+                'type' => 'courses',
+                'title' => $this->faker->word,
+            ]
+        );
+        $this->fakeContentTopic(
+            15,
+            [
+                'content' => $content1[0],
+                'topic' => $this->faker->word,
+            ]
+        );
+        $content2 = $this->fakeContent(
+            1,
+            [
+                'brand' => config('railcontent.brand'),
+                'type' => 'courses',
+                'title' => $this->faker->word,
+            ]
+        );
+        $this->fakeContentTopic(
+            15,
+            [
+                'content' => $content2[0],
+                'topic' => $this->faker->word,
+            ]
+        );
 
-            $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', 'field ' . $i);
-            $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field ' . $i);
-            $content[$i]['fields'] = [$titleField[$i]->getArrayCopy(), $otherField[$i]->getArrayCopy()];
-
-            $descriptionData =
-                $this->datumFactory->create($content[$i]['id'], 'description', 'description ' . $this->faker->word);
-            $otherData = $this->datumFactory->create($content[$i]['id'], 'other datum ' . $i);
-            $content[$i]['data'] = [$descriptionData->getArrayCopy(), $otherData->getArrayCopy()];
-            $content[$i] = $content[$i];
-        }
+        $contents = $this->fakeContent(
+            10,
+            [
+                'brand' => config('railcontent.brand'),
+                'type' => 'courses',
+                'title' => $this->faker->word,
+            ]
+        );
 
         $this->artisan('command:createSearchIndexesForContents');
 
@@ -83,9 +97,10 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             [
                 'page' => $page,
                 'limit' => $limit,
+                'term' => $content1[0]->getTitle() . ' ' . $content2[0]->getTitle(),
             ]
         );
-
+        dd($response);
         $results = $response->decodeResponseJson();
         $espectedResults = array_splice($content, 0, $limit);
 
@@ -194,8 +209,10 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-
-        $this->assertEquals(array_pluck($expectedResults->decodeResponseJson('data'),'id'), array_pluck($results,'id'));
+        $this->assertEquals(
+            array_pluck($expectedResults->decodeResponseJson('data'), 'id'),
+            array_pluck($results, 'id')
+        );
     }
 
     public function test_search_with_status()
@@ -246,6 +263,9 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(array_pluck($expectedResults->decodeResponseJson('data'),'id'), array_pluck($results,'id'));
+        $this->assertEquals(
+            array_pluck($expectedResults->decodeResponseJson('data'), 'id'),
+            array_pluck($results, 'id')
+        );
     }
 }

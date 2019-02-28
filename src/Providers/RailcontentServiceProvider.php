@@ -101,7 +101,7 @@ class RailcontentServiceProvider extends ServiceProvider
 
         $this->commands(
             [
-//                CreateSearchIndexes::class,
+                CreateSearchIndexes::class,
 //                CreateVimeoVideoContentRecords::class,
 //                RepairMissingDurations::class,
 //                CreateYoutubeVideoContentRecords::class,

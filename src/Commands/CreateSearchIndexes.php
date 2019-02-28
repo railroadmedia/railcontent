@@ -3,11 +3,13 @@
 namespace Railroad\Railcontent\Commands;
 
 use Carbon\Carbon;
+use Doctrine\ORM\EntityManager;
 use Illuminate\Console\Command;
+use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\SearchIndex;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\FullTextSearchRepository;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentService;
+
 
 class CreateSearchIndexes extends Command
 {
@@ -29,18 +31,20 @@ class CreateSearchIndexes extends Command
 
     protected $contentRepository;
 
+    private $entityManager;
+
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(FullTextSearchRepository $searchRepository, ContentRepository $contentRepository)
+    public function __construct(EntityManager $entityManager)
     {
         parent::__construct();
 
-        $this->searchRepository = $searchRepository;
-
-        $this->contentRepository = $contentRepository;
+        $this->entityManager = $entityManager;
+        $this->contentRepository = $this->entityManager->getRepository(Content::class);
+        $this->searchRepository = $this->entityManager->getRepository(SearchIndex::class);
     }
 
     /**
@@ -57,34 +61,43 @@ class CreateSearchIndexes extends Command
 
         $this->searchRepository->deleteOldIndexes();
 
-        $contents =
-            $this->contentRepository->query()
-                ->selectPrimaryColumns()
-                ->restrictByTypes(ConfigService::$searchableContentTypes)
-                ->restrictBrand()
-                ->orderBy('id')
-                ->get();
+        $contents = $this->contentRepository->build()
+            ->restrictByTypes(ConfigService::$searchableContentTypes)
+            ->restrictBrand()
+            ->orderBy(ConfigService::$tableContent . '.id')
+            ->getQuery()
+            ->getResult();
 
         foreach ($contents as $content) {
+
             $searchInsertData = [
-                'content_id' => $content['id'],
-                'high_value' => $this->searchRepository->query()
-                    ->prepareIndexesValues('high_value', $content),
-                'medium_value' => $this->searchRepository->query()
-                    ->prepareIndexesValues('medium_value', $content),
-                'low_value' => $this->searchRepository->query()
-                    ->prepareIndexesValues('low_value', $content),
-                'brand' => $content['brand'],
-                'content_type' => $content['type'],
-                'content_status' => $content['status'],
-                'content_published_on' => $content['published_on'] ?? Carbon::now(),
+                'content_id' => $content->getId(),
+                'high_value' => $this->searchRepository->prepareIndexesValues('high_value', $content),
+                'medium_value' => $this->searchRepository->prepareIndexesValues('medium_value', $content),
+                'low_value' => $this->searchRepository->prepareIndexesValues('low_value', $content),
+                'brand' => $content->getBrand(),
+                'content_type' => $content->getType(),
+                'content_status' => $content->getStatus(),
+                'content_published_on' => $content->getPublishedOn() ?? Carbon::now(),
                 'created_at' => Carbon::now()
                     ->toDateTimeString(),
             ];
 
-            $this->searchRepository->query()
-                ->insert($searchInsertData);
+            $searchIndex = new SearchIndex();
+            $searchIndex->setBrand($searchInsertData['brand']);
+            $searchIndex->setContentType($searchInsertData['content_type']);
+            $searchIndex->setContentStatus($searchInsertData['content_status']);
+            $searchIndex->setContentPublishedOn($searchInsertData['content_published_on']);
+            $searchIndex->setHighValue($searchInsertData['high_value']);
+            $searchIndex->setMediumValue($searchInsertData['medium_value']);
+            $searchIndex->setLowValue($searchInsertData['low_value']);
+            $searchIndex->setContent($content);
+
+            $this->entityManager->persist($searchIndex);
         }
+
+        $this->entityManager->flush();
+
         $this->info('CreateSearchIndexesForContents complete.');
     }
 }

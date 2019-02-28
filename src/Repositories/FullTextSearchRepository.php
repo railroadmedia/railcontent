@@ -3,7 +3,10 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\PersistentCollection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
@@ -14,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 use Railroad\Resora\Decorators\Decorator;
 use Railroad\Resora\Entities\Entity;
 
-class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryBase
+class FullTextSearchRepository extends EntityRepository
 {
     use RefreshDatabase;
 
@@ -35,7 +38,7 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
      */
     private $datumRepository;
 
-
+    private $entityManager;
 
     /**
      * @return FullTextSearchQueryBuilder
@@ -44,10 +47,11 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
     {
         return (new FullTextSearchQueryBuilder(
             $this->connection(),
-            $this->connection()->getQueryGrammar(),
-            $this->connection()->getPostProcessor()
-        ))
-            ->from(ConfigService::$tableSearchIndexes);
+            $this->connection()
+                ->getQueryGrammar(),
+            $this->connection()
+                ->getPostProcessor()
+        ))->from(ConfigService::$tableSearchIndexes);
     }
 
     /**
@@ -57,19 +61,21 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
     {
         return (new ContentQueryBuilder(
             $this->connection(),
-            $this->connection()->getQueryGrammar(),
-            $this->connection()->getPostProcessor()
-        ))
-            ->from(ConfigService::$tableContent);
+            $this->connection()
+                ->getQueryGrammar(),
+            $this->connection()
+                ->getPostProcessor()
+        ))->from(ConfigService::$tableContent);
     }
-    
+
     /** Delete old indexes for the brand
      *
      * @return mixed
      */
     public function deleteOldIndexes()
     {
-        return $this->query()->where('brand', ConfigService::$brand)->delete();
+        return true;
+        //$this->query()->where('brand', ConfigService::$brand)->delete();
     }
 
     /** Prepare search indexes based on config settings
@@ -85,44 +91,61 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
         $values = [];
 
         foreach ($configSearchIndexValues['content_attributes'] as $contentAttribute) {
-            $values[] = $content["$contentAttribute"];
+            $getter = 'get' . ucwords($contentAttribute);
+            $values[] = $content->$getter();
         }
 
         if (in_array('*', $configSearchIndexValues['field_keys'])) {
-            foreach ($content['fields'] as $field) {
-                if(($field['value'] instanceof Entity) || $field['value'] instanceof ContentEntity){
+
+            $associations =
+                ($this->getEntityManager()
+                    ->getClassMetadata(Content::class)
+                    ->getAssociationNames());
+
+            foreach ($associations as $association) {
+                if ($association == 'userProgress' || $association == 'data') {
                     continue;
-                } else {
-                    $values[] = $field['value'];
+                }
+
+                $getter = 'get' . ucwords($association);
+                if ($content->$getter()) {
+                    if (!$content->$getter() instanceof PersistentCollection) {
+                        $values[] =
+                            $content->$getter()
+                                ->$getter();
+                    } else {
+                        foreach ($content->$getter() as $assoc) {
+                            $values[] = $assoc->$getter();
+                        }
+                    }
                 }
             }
         } else {
             foreach ($configSearchIndexValues['field_keys'] as $fieldKey) {
                 $conf = explode(':', $fieldKey);
                 if (count($conf) == 2) {
-                    $values = array_merge(
-                        $values,
-                        ContentHelper::getFieldSubContentValues(
-                            $content,
-                            $conf[0],
-                            $conf[1]
-                        )
-                    );
+                    $getter = 'get' . ucwords($conf[0]);
+                    $assocAttribute = 'get' . ucwords($conf[1]);
+                    if ($content->$getter()) {
+                        $values[] =
+                            $content->$getter()
+                                ->$assocAttribute();
+                    }
                 } else {
                     if (count($conf) == 1) {
-                        $values = array_merge($values, ContentHelper::getFieldValues($content, $conf[0]));
+                        // $values = array_merge($values, ContentHelper::getFieldValues($content, $conf[0]));
                     }
                 }
             }
         }
 
         if (in_array('*', $configSearchIndexValues['data_keys'])) {
-            foreach ($content['data'] as $data) {
-                $values[] = $data['value'];
+            foreach ($content->getData() as $data) {
+                $values[] = $data->getValue();
             }
         } else {
             foreach ($configSearchIndexValues['data_keys'] as $dataKey) {
-                $values = array_merge($values, ContentHelper::getDatumValues($content, $dataKey));
+                // $values = array_merge($values, ContentHelper::getDatumValues($content, $dataKey));
             }
         }
 
@@ -159,32 +182,68 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
         $dateTimeCutoff = null
     ) {
 
-        $query = $this->query()
-            ->selectColumns($term)
-            ->restrictBrand()
-            ->restrictByTerm($term)
-            ->orderByRaw(
-                $this->connection()->raw(
-                     $orderByColumn . ' ' . $orderByDirection
-                )
+        $first = ($page - 1) * $limit;
+        $alias = 'p';
+
+        $query = $this->createQueryBuilder($alias);
+        $query->addSelect(
+                "(MATCH_AGAINST(" .
+                $alias .
+                ".highValue, :searchterm 'IN BOOLEAN MODE')*18 *(UNIX_TIMESTAMP(" .
+                $alias .
+                ".contentPublishedOn)/1000000000)  +  (MATCH_AGAINST(" .
+                $alias .
+                ".mediumValue, :searchterm 'IN BOOLEAN MODE')*2) + (MATCH_AGAINST(" .
+                $alias .
+                ".lowValue, :searchterm 'IN BOOLEAN MODE')) ) as score "
             )
-            ->limit($limit)
-            ->skip(($page - 1) * $limit);
+            ->addSelect(
+                "MATCH_AGAINST(" .
+                $alias .
+                ".highValue, :searchterm 'IN BOOLEAN MODE')*18 *(UNIX_TIMESTAMP(" .
+                $alias .
+                ".contentPublishedOn)/1000000000) as high_score"
+            )
+            ->addSelect("MATCH_AGAINST(" . $alias . ".mediumValue, :searchterm 'IN BOOLEAN MODE')*2 as medium_score")
+            ->addSelect("MATCH_AGAINST(" . $alias . ".lowValue, :searchterm 'IN BOOLEAN MODE') as low_score")
+            ->where($alias . '.brand IN (:brands)')
+            ->andWhere(
+                $query->expr()
+                    ->orX(
+                        $query->expr()
+                            ->gt('MATCH_AGAINST(' . $alias . '.highValue, :searchterm)', 0),
+                        $query->expr()
+                            ->gt('MATCH_AGAINST(' . $alias . '.mediumValue, :searchterm)', 0),
+                        $query->expr()
+                            ->gt('MATCH_AGAINST(' . $alias . '.lowValue, :searchterm)', 0)
+                    )
+            )
+            ->setParameter('searchterm', implode(' +', explode(' ', $term)))
+            ->setParameter('brands', array_values(array_wrap(ConfigService::$availableBrands)))
+            ->orderBy($orderByColumn, $orderByDirection)
+            ->setMaxResults($limit)
+            ->setFirstResult($first);
 
         if (!empty($contentTypes)) {
-            $query->whereIn('content_type', $contentTypes);
+            $query->andWhere($alias . '.content_type IN (:contentTypes)')
+                ->setParameter('contentTypes', $contentTypes);
         }
 
         if (!empty($contentStatuses)) {
-            $query->whereIn('content_status', $contentStatuses);
+            $query->andWhere($alias . '.content_status IN (:contentStatuses)')
+                ->setParameter('contentStatuses', $contentStatuses);
         }
 
-        if (!empty($dateCutoff)) {
-            $query->where('content_published_on', '>', $dateTimeCutoff);
+        if (!empty($dateTimeCutoff)) {
+            $query->where($alias . '.contentPublishedOn > :dateTimeCutoff')
+                ->setParameter('dateTimeCutoff', $dateTimeCutoff);
         }
 
-        $contentRows = $query->getToArray();
-        return array_column($contentRows, 'content_id');
+        $results =
+            $query->getQuery()
+                ->getResult();
+
+        return $results;
 
     }
 
@@ -200,10 +259,11 @@ class FullTextSearchRepository extends \Railroad\Resora\Repositories\RepositoryB
         $contentStatus = null,
         $dateTimeCutoff = null
     ) {
-        $query = $this->query()
-            ->selectColumns($term)
-            ->restrictByTerm($term)
-            ->restrictBrand();
+        $query =
+            $this->query()
+                ->selectColumns($term)
+                ->restrictByTerm($term)
+                ->restrictBrand();
 
         if (!empty($contentType)) {
             $query->where('content_type', $contentType);

@@ -18,7 +18,7 @@ class CreateContentSbtExerciseNumberTable extends Migration
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('content_id')->index();
-                $table->string('sbt_exercise_number')->index();
+                $table->string('sbt_exercise_number')->index('ex');
                 $table->integer('position')->index();
 
                 $table->index(['sbt_exercise_number', 'content_id'], 'sec');

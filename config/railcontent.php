@@ -116,8 +116,8 @@ return [
     'searchable_content_types' => ['recordings', 'courses'],
     'search_index_values' => [
         'high_value' => [
-            'content_attributes' => ['slug'],
-            'field_keys' => ['title', 'instructor:name'],
+            'content_attributes' => ['slug','title'],
+            'field_keys' => ['instructor:name'],
             'data_keys' => [],
         ],
         'medium_value' => [
