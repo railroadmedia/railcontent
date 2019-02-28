@@ -148,7 +148,7 @@ class UserContentProgressService
 
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressSaved($userId, $contentId));
+        event(new UserContentProgressSaved($userId, $contentId, $progressPercent, self::STATE_STARTED));
 
         return true;
     }
@@ -210,13 +210,13 @@ class UserContentProgressService
                     ]
                 );
 
-                event(new UserContentProgressSaved($userId, $child['child_id'], false));
+                event(new UserContentProgressSaved($userId, $child['child_id'], 100, self::STATE_COMPLETED, false));
             }
 
             $childIds = array_column($children, 'child_id');
         } while (count($children) > 0);
 
-        event(new UserContentProgressSaved($userId, $contentId));
+        event(new UserContentProgressSaved($userId, $contentId, 100, self::STATE_COMPLETED));
 
         CacheHelper::deleteUserFields(
             [
@@ -281,7 +281,7 @@ class UserContentProgressService
         //delete user content progress cache
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressSaved($userId, $contentId));
+        event(new UserContentProgressSaved($userId, $contentId, 0, self::STATE_STARTED));
 
         //delete user progress from cache
         CacheHelper::deleteUserFields(
@@ -369,7 +369,7 @@ class UserContentProgressService
 
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressSaved($userId, $contentId));
+        event(new UserContentProgressSaved($userId, $contentId, $progress, self::STATE_STARTED));
 
         return true;
     }
