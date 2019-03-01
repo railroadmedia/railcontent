@@ -102,9 +102,9 @@ class RailcontentServiceProvider extends ServiceProvider
         $this->commands(
             [
                 CreateSearchIndexes::class,
-//                CreateVimeoVideoContentRecords::class,
-//                RepairMissingDurations::class,
-//                CreateYoutubeVideoContentRecords::class,
+                CreateVimeoVideoContentRecords::class,
+                RepairMissingDurations::class,
+                CreateYoutubeVideoContentRecords::class,
                 ExpireCache::class,
             ]
         );
@@ -255,13 +255,6 @@ class RailcontentServiceProvider extends ServiceProvider
 
         $redisCache = new RedisCache();
         $redisCache->setRedis($redis);
-
-        // annotations
-        // setup default doctrine annotations
-//        \Doctrine\Common\Annotations\AnnotationRegistry::registerFile(
-//            __DIR__ . '/../../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php'
-//        );
-
 
         // create entity manager with proper db details
         if (config('railcontent.database_in_memory') === true) {

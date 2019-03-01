@@ -18,23 +18,25 @@ class FullTextSearchService
      */
     private $contentService;
 
+    /**
+     * @var EntityManager
+     */
     private $entityManager;
 
     /**
      * FullTextSearchService constructor.
      *
-     * @param FullTextSearchRepository $fullTextSearchRepository
+     * @param EntityManager $entityManager
      * @param ContentService $contentService
      */
     public function __construct(
         EntityManager $entityManager,
-       // FullTextSearchRepository $fullTextSearchRepository,
         ContentService $contentService
     ) {
         $this->entityManager = $entityManager;
+        $this->contentService = $contentService;
 
         $this->fullTextSearchRepository = $this->entityManager->getRepository(SearchIndex::class);
-        $this->contentService = $contentService;
     }
 
     /** Full text search by term
@@ -82,25 +84,32 @@ class FullTextSearchService
             ConfigService::$availableBrands = $brands;
         }
 
+        $qb = $this->fullTextSearchRepository->search(
+            $term,
+            $page,
+            $limit,
+            $contentTypes,
+            $contentStatuses,
+            $orderByColumn,
+            $orderByDirection,
+            $dateTimeCutoff
+        );
+
+        $results =
+            $qb->getQuery()
+                ->getResult();
+
+        $contentIds = array_flatten(array_values($results));
+
         $return = [
-            'results' => $this->contentService->getByIds(
-                $this->fullTextSearchRepository->search(
-                    $term,
-                    $page,
-                    $limit,
-                    $contentTypes,
-                    $contentStatuses,
-                    $orderByColumn,
-                    $orderByDirection,
-                    $dateTimeCutoff
-                )
-            ),
+            'results' => $this->contentService->getByIds($contentIds),
             'total_results' => $this->fullTextSearchRepository->countTotalResults(
                 $term,
                 $contentTypes,
                 $contentStatuses,
                 $dateTimeCutoff
             ),
+            'qb' => $qb->addSelect('p'),
         ];
 
         ConfigService::$availableBrands = $oldBrands;

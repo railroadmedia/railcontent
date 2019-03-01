@@ -13,7 +13,6 @@ use Illuminate\Auth\AuthManager;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -40,7 +39,6 @@ use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Services\RemoteStorageService;
 use Railroad\Railcontent\Tests\Resources\Models\User;
-use Railroad\Response\Providers\ResponseServiceProvider;
 
 class RailcontentTestCase extends BaseTestCase
 {
@@ -195,56 +193,50 @@ class RailcontentTestCase extends BaseTestCase
 
         // setup default database to use sqlite :memory:
         $app['config']->set('database.default', $this->getConnectionType());
-        //        $app['config']->set(
-        //            'database.connections.mysql',
-        //            [
-        //                'driver' => 'mysql',
-        //                'host' => 'mysql',
-        //                'port' => env('MYSQL_PORT', '3306'),
-        //                'database' => env('MYSQL_DB', 'railcontent'),
-        //                'username' => 'root',
-        //                'password' => 'root',
-        //                'charset' => 'utf8',
-        //                'collation' => 'utf8_general_ci',
-        //                'prefix' => '',
-        //                'options' => [
-        //                    \PDO::ATTR_PERSISTENT => true,
-        //                ]
-        //            ]
-        //        );
+        $app['config']->set(
+            'database.connections.mysql',
+            [
+                'driver' => 'mysql',
+                'host' => 'mysql',
+                'port' => env('MYSQL_PORT', '3306'),
+                'database' => env('MYSQL_DB', 'railcontent'),
+                'username' => 'root',
+                'password' => 'root',
+                'charset' => 'utf8',
+                'collation' => 'utf8_general_ci',
+                'prefix' => '',
+                'options' => [
+                    \PDO::ATTR_PERSISTENT => true,
+                ],
+            ]
+        );
+
         // database
-        $app['config']->set('doctrine.database_driver', 'pdo_sqlite');
-        $app['config']->set('doctrine.database_user', 'root');
-        $app['config']->set('doctrine.database_password', 'root');
-        $app['config']->set('doctrine.database_in_memory', true);
-        $app['config']->set('doctrine.development_mode', true);
+        if ($this->getConnectionType() == "mysql") {
+            //mysql
+            $app['config']->set('doctrine.database_driver', $defaultConfig['database_driver']);
+            $app['config']->set('doctrine.database_name', $defaultConfig['database_name']);
+            $app['config']->set('doctrine.database_user', $defaultConfig['database_user']);
+            $app['config']->set('doctrine.database_password', $defaultConfig['database_password']);
+            $app['config']->set('doctrine.database_host', $defaultConfig['database_host']);
 
-        config()->set('railcontent.database_user', 'root');
-        config()->set('railcontent.database_password', 'root');
-        config()->set('railcontent.database_driver', 'pdo_sqlite');
-        config()->set('railcontent.database_in_memory', true);
-        //
-
-        //         //mysql
-        //         $app['config']->set('doctrine.database_driver', $defaultConfig['database_driver']);
-        //         $app['config']->set('doctrine.database_name', $defaultConfig['database_name']);
-        //         $app['config']->set('doctrine.database_user', $defaultConfig['database_user']);
-        //         $app['config']->set('doctrine.database_password', $defaultConfig['database_password']);
-        //         $app['config']->set('doctrine.database_host', $defaultConfig['database_host']);
-        //         $app['config']->set('ecommerce.database_connection_name', $defaultConfig['database_connection_name']);
-        //         $app['config']->set('database.default', $defaultConfig['database_connection_name']);
-        //
-        //
-        //         $app['config']->set(
-        //             'database.connections.' . $defaultConfig['database_connection_name'],
-        //             [
-        //                 'driver' => 'mysql',
-        //                 'database' => $defaultConfig['database_name'],
-        //                 'username' => $defaultConfig['database_user'],
-        //                 'password' => $defaultConfig['database_password'],
-        //                 'host' => $defaultConfig['database_host'],
-        //             ]
-        //         );
+            $app['config']->set(
+                'database.connections.' . $defaultConfig['database_connection_name'],
+                [
+                    'driver' => 'mysql',
+                    'database' => $defaultConfig['database_name'],
+                    'username' => $defaultConfig['database_user'],
+                    'password' => $defaultConfig['database_password'],
+                    'host' => $defaultConfig['database_host'],
+                ]
+            );
+        } else {
+            $app['config']->set('doctrine.database_driver', 'pdo_sqlite');
+            $app['config']->set('doctrine.database_user', 'root');
+            $app['config']->set('doctrine.database_password', 'root');
+            $app['config']->set('doctrine.database_in_memory', true);
+            $app['config']->set('doctrine.development_mode', true);
+        }
 
         // if new packages entities are required for testing, their entity directory/namespace config should be merged here
         $app['config']->set(
@@ -307,21 +299,21 @@ class RailcontentTestCase extends BaseTestCase
         // vimeo
         $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);
 
-        if (!$app['db']->connection()
-            ->getSchemaBuilder()
-            ->hasTable('users')) {
-
-            $app['db']->connection()
-                ->getSchemaBuilder()
-                ->create(
-                    'users',
-                    function (Blueprint $table) {
-                        $table->increments('id');
-                        $table->string('email');
-                    }
-                );
-
-        }
+        //        if (!$app['db']->connection()
+        //            ->getSchemaBuilder()
+        //            ->hasTable('users')) {
+        //
+        //            $app['db']->connection()
+        //                ->getSchemaBuilder()
+        //                ->create(
+        //                    'users',
+        //                    function (Blueprint $table) {
+        //                        $table->increments('id');
+        //                        $table->string('email');
+        //                    }
+        //                );
+        //
+        //        }
 
         // register provider
         $app->register(DoctrineServiceProvider::class);
@@ -391,19 +383,7 @@ class RailcontentTestCase extends BaseTestCase
         $userMockResults = ['id' => $userId, 'email' => $email];
         Auth::shouldReceive('user')
             ->andReturn($userMockResults);
-        return $userId;
-        //        $userId = $this->databaseManager->connection()->query()->from('users')->insertGetId(
-        //            ['email' => $this->faker->email]
-        //        );
-        //
-        // $this->authManager->guard()->onceUsingId($userId);
-        //
-        //        request()->setUserResolver(
-        //            function () use ($userId, $email) {
-        //                return ['id' => $userId, 'email' => $email];
-        //            }
-        //        );
-        //
+        
         return $userId;
     }
 
@@ -673,7 +653,7 @@ class RailcontentTestCase extends BaseTestCase
 
         );
         $fakePopulator = $this->populator->execute();
-        for($i=0; $i<$nr; $i++) {
+        for ($i = 0; $i < $nr; $i++) {
             $content->addInstructor($fakePopulator[ContentInstructor::class][$i]);
         }
 
@@ -823,7 +803,7 @@ class RailcontentTestCase extends BaseTestCase
         );
         $fakePopulator = $this->populator->execute();
 
-        for($i=0; $i<$nr; $i++) {
+        for ($i = 0; $i < $nr; $i++) {
             $content->addTopic($fakePopulator[ContentTopic::class][$i]);
         }
         return $fakePopulator[ContentTopic::class];

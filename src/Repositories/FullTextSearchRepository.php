@@ -8,6 +8,7 @@ use Doctrine\ORM\PersistentCollection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentEntity;
+use Railroad\Railcontent\Entities\SearchIndex;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Repositories\QueryBuilders\FullTextSearchQueryBuilder;
@@ -21,17 +22,10 @@ class FullTextSearchRepository extends EntityRepository
 {
     use RefreshDatabase;
 
-    use ByContentIdTrait;
-
     /**
      * @var ContentRepository
      */
     private $contentRepository;
-
-    /**
-     * @var ContentFieldRepository
-     */
-    private $fieldRepository;
 
     /**
      * @var ContentDatumRepository
@@ -40,42 +34,19 @@ class FullTextSearchRepository extends EntityRepository
 
     private $entityManager;
 
-    /**
-     * @return FullTextSearchQueryBuilder
-     */
-    public function newQuery()
-    {
-        return (new FullTextSearchQueryBuilder(
-            $this->connection(),
-            $this->connection()
-                ->getQueryGrammar(),
-            $this->connection()
-                ->getPostProcessor()
-        ))->from(ConfigService::$tableSearchIndexes);
-    }
-
-    /**
-     * @return ContentQueryBuilder
-     */
-    protected function contentQuery()
-    {
-        return (new ContentQueryBuilder(
-            $this->connection(),
-            $this->connection()
-                ->getQueryGrammar(),
-            $this->connection()
-                ->getPostProcessor()
-        ))->from(ConfigService::$tableContent);
-    }
-
     /** Delete old indexes for the brand
      *
      * @return mixed
      */
     public function deleteOldIndexes()
     {
+        $qb = $this->createQueryBuilder('s');
+
+        $qb->delete('s');
+        $qb->where('s.brand = :brand');
+        $qb->setParameter('brand', ConfigService::$brand);
+
         return true;
-        //$this->query()->where('brand', ConfigService::$brand)->delete();
     }
 
     /** Prepare search indexes based on config settings
@@ -96,7 +67,6 @@ class FullTextSearchRepository extends EntityRepository
         }
 
         if (in_array('*', $configSearchIndexValues['field_keys'])) {
-
             $associations =
                 ($this->getEntityManager()
                     ->getClassMetadata(Content::class)
@@ -131,10 +101,6 @@ class FullTextSearchRepository extends EntityRepository
                             $content->$getter()
                                 ->$assocAttribute();
                     }
-                } else {
-                    if (count($conf) == 1) {
-                        // $values = array_merge($values, ContentHelper::getFieldValues($content, $conf[0]));
-                    }
                 }
             }
         }
@@ -145,7 +111,11 @@ class FullTextSearchRepository extends EntityRepository
             }
         } else {
             foreach ($configSearchIndexValues['data_keys'] as $dataKey) {
-                // $values = array_merge($values, ContentHelper::getDatumValues($content, $dataKey));
+                foreach ($content->getData() as $data) {
+                    if ($data->getKey() == $dataKey) {
+                        $values[] = $data->getValue();
+                    }
+                }
             }
         }
 
@@ -160,16 +130,15 @@ class FullTextSearchRepository extends EntityRepository
      * Perform a boolean full text search by term, paginate and order the results by score.
      * Returns an array with the contents that contain the search criteria
      *
-     * @param string|null $term
+     * @param $term
      * @param int $page
      * @param int $limit
      * @param array $contentTypes
      * @param array $contentStatuses
-     * @param $orderByColumn
-     * @param $orderByDirection
+     * @param string $orderByColumn
+     * @param string $orderByDirection
      * @param null $dateTimeCutoff
-     * @return array
-     * @internal param null $contentType
+     * @return \Doctrine\ORM\QueryBuilder
      */
     public function search(
         $term,
@@ -181,31 +150,119 @@ class FullTextSearchRepository extends EntityRepository
         $orderByDirection = 'desc',
         $dateTimeCutoff = null
     ) {
+        $alias = 'p';
+
+        if (strpos($orderByColumn, '_') !== false || strpos($orderByColumn, '-') !== false) {
+            $orderByColumn = camel_case($orderByColumn);
+        }
+        if ($orderByColumn != 'score') {
+            $orderByColumn = $alias . '.' . $orderByColumn;
+        }
+
+        $query = $this->prepareQb(
+            $term,
+            $page,
+            $limit,
+            $contentTypes,
+            $contentStatuses,
+            $orderByColumn,
+            $orderByDirection,
+            $dateTimeCutoff
+        );
+
+        return $query;
+    }
+
+    /** Count all the matches
+     *
+     * @param string|null $term
+     * @param null $contentType
+     * @return int
+     */
+    public function countTotalResults(
+        $term,
+        $contentType = null,
+        $contentStatus = null,
+        $dateTimeCutoff = null
+    ) {
+
+        $alias = 'p';
+        $query = $this->createQueryBuilder($alias);
+        $query->select('count(p.id)');
+        $query->where($alias . '.brand IN (:brands)')
+            ->andWhere(
+                $query->expr()
+                    ->orX(
+                        $query->expr()
+                            ->gt('MATCH_AGAINST(' . $alias . '.highValue, :searchterm)', 0),
+                        $query->expr()
+                            ->gt('MATCH_AGAINST(' . $alias . '.mediumValue, :searchterm)', 0),
+                        $query->expr()
+                            ->gt('MATCH_AGAINST(' . $alias . '.lowValue, :searchterm)', 0)
+                    )
+            )
+            ->setParameter('searchterm', implode(' +', explode(' ', $term)))
+            ->setParameter('brands', array_values(array_wrap(ConfigService::$availableBrands)));
+
+        if (!empty($contentTypes)) {
+            $query->andWhere($alias . '.content_type IN (:contentTypes)')
+                ->setParameter('contentTypes', $contentType);
+        }
+
+        if (!empty($contentStatuses)) {
+            $query->andWhere($alias . '.content_status IN (:contentStatuses)')
+                ->setParameter('contentStatuses', $contentStatus);
+        }
+
+        if (!empty($dateTimeCutoff)) {
+            $query->where($alias . '.contentPublishedOn > :dateTimeCutoff')
+                ->setParameter('dateTimeCutoff', $dateTimeCutoff);
+        }
+
+        return $query->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    /**
+     * @param $term
+     * @param $page
+     * @param $limit
+     * @param $contentTypes
+     * @param $contentStatuses
+     * @param $orderByColumn
+     * @param $orderByDirection
+     * @param $dateTimeCutoff
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    private function prepareQb(
+        $term,
+        $page,
+        $limit,
+        $contentTypes,
+        $contentStatuses,
+        $orderByColumn,
+        $orderByDirection,
+        $dateTimeCutoff
+    )
+    : \Doctrine\ORM\QueryBuilder {
 
         $first = ($page - 1) * $limit;
         $alias = 'p';
 
         $query = $this->createQueryBuilder($alias);
+
+        $query->select('IDENTITY(p.content)');
         $query->addSelect(
-                "(MATCH_AGAINST(" .
-                $alias .
-                ".highValue, :searchterm 'IN BOOLEAN MODE')*18 *(UNIX_TIMESTAMP(" .
-                $alias .
-                ".contentPublishedOn)/1000000000)  +  (MATCH_AGAINST(" .
-                $alias .
-                ".mediumValue, :searchterm 'IN BOOLEAN MODE')*2) + (MATCH_AGAINST(" .
-                $alias .
-                ".lowValue, :searchterm 'IN BOOLEAN MODE')) ) as score "
-            )
-            ->addSelect(
-                "MATCH_AGAINST(" .
-                $alias .
-                ".highValue, :searchterm 'IN BOOLEAN MODE')*18 *(UNIX_TIMESTAMP(" .
-                $alias .
-                ".contentPublishedOn)/1000000000) as high_score"
-            )
-            ->addSelect("MATCH_AGAINST(" . $alias . ".mediumValue, :searchterm 'IN BOOLEAN MODE')*2 as medium_score")
-            ->addSelect("MATCH_AGAINST(" . $alias . ".lowValue, :searchterm 'IN BOOLEAN MODE') as low_score")
+            "(MATCH_AGAINST(" .
+            $alias .
+            ".highValue, :searchterm 'IN BOOLEAN MODE')*18 *(UNIX_TIMESTAMP(" .
+            $alias .
+            ".contentPublishedOn)/1000000000)  +  (MATCH_AGAINST(" .
+            $alias .
+            ".mediumValue, :searchterm 'IN BOOLEAN MODE')*2) + (MATCH_AGAINST(" .
+            $alias .
+            ".lowValue, :searchterm 'IN BOOLEAN MODE')) ) as HIDDEN score "
+        )
             ->where($alias . '.brand IN (:brands)')
             ->andWhere(
                 $query->expr()
@@ -225,12 +282,12 @@ class FullTextSearchRepository extends EntityRepository
             ->setFirstResult($first);
 
         if (!empty($contentTypes)) {
-            $query->andWhere($alias . '.content_type IN (:contentTypes)')
+            $query->andWhere($alias . '.contentType IN (:contentTypes)')
                 ->setParameter('contentTypes', $contentTypes);
         }
 
         if (!empty($contentStatuses)) {
-            $query->andWhere($alias . '.content_status IN (:contentStatuses)')
+            $query->andWhere($alias . '.contentStatus IN (:contentStatuses)')
                 ->setParameter('contentStatuses', $contentStatuses);
         }
 
@@ -239,44 +296,6 @@ class FullTextSearchRepository extends EntityRepository
                 ->setParameter('dateTimeCutoff', $dateTimeCutoff);
         }
 
-        $results =
-            $query->getQuery()
-                ->getResult();
-
-        return $results;
-
-    }
-
-    /** Count all the matches
-     *
-     * @param string|null $term
-     * @param null $contentType
-     * @return int
-     */
-    public function countTotalResults(
-        $term,
-        $contentType = null,
-        $contentStatus = null,
-        $dateTimeCutoff = null
-    ) {
-        $query =
-            $this->query()
-                ->selectColumns($term)
-                ->restrictByTerm($term)
-                ->restrictBrand();
-
-        if (!empty($contentType)) {
-            $query->where('content_type', $contentType);
-        }
-
-        if (!empty($contentStatus)) {
-            $query->where('content_status', $contentStatus);
-        }
-
-        if (!empty($dateCutoff)) {
-            $query->where('content_published_on', '>', $dateTimeCutoff);
-        }
-
-        return $query->count();
+        return $query;
     }
 }

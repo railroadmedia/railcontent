@@ -5,7 +5,6 @@ namespace Railroad\Railcontent\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentFieldService;
 use Railroad\Railcontent\Services\ContentService;
 use Google_Client;
 
@@ -35,21 +34,15 @@ class CreateYoutubeVideoContentRecords extends Command
 
     protected $scope = 'https://www.googleapis.com/auth/youtube';
 
-    /**
-     * @var ContentFieldService
-     */
-    protected $contentFieldService;
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(ContentFieldService $contentFieldService, ContentService $contentService)
+    public function __construct(ContentService $contentService)
     {
         parent::__construct();
-
-        $this->contentFieldService = $contentFieldService;
 
         $this->contentService = $contentService;
     }
@@ -182,20 +175,20 @@ class CreateYoutubeVideoContentRecords extends Command
                     $contentCreationFailed[] = $video['videoId'];
                 } else {
                     $contentCreatedCount++;
-                    $contentFieldsInsertData[] = $this->contentFieldService->create(
-                        $content['id'],
-                        'youtube_video_id',
-                        $video['videoId'],
-                        1,
-                        'string'
-                    );
-                    $contentFieldsInsertData[] = $this->contentFieldService->create(
-                        $content['id'],
-                        'length_in_seconds',
-                        $video['duration'],
-                        1,
-                        'integer'
-                    );
+//                    $contentFieldsInsertData[] = $this->contentFieldService->create(
+//                        $content['id'],
+//                        'youtube_video_id',
+//                        $video['videoId'],
+//                        1,
+//                        'string'
+//                    );
+//                    $contentFieldsInsertData[] = $this->contentFieldService->create(
+//                        $content['id'],
+//                        'length_in_seconds',
+//                        $video['duration'],
+//                        1,
+//                        'integer'
+//                    );
                 }
             } else {
                 if ($video['duration'] === 0) {

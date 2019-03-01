@@ -8,7 +8,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Responses\JsonPaginatedResponse;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\FullTextSearchService;
-use Railroad\Railcontent\Transformers\DataTransformer;
+use Railroad\Railcontent\Services\ResponseService;
 
 class FullTextSearchJsonController extends Controller
 {
@@ -51,12 +51,6 @@ class FullTextSearchJsonController extends Controller
             $request->get('brands', null)
         );
 
-        return reply()->json(
-            $contentsData['results'],
-            [
-                'transformer' => DataTransformer::class,
-                'totalResults' => $contentsData['total_results'],
-            ]
-        );
+        return ResponseService::content($contentsData['results'], $contentsData['qb'])->respond();
     }
 }
