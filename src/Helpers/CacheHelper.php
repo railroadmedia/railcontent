@@ -271,16 +271,20 @@ class CacheHelper
      */
     public static function saveUserCache($hash, $data, $contentIds = [])
     {
-        return $data;
+        $cacheTime = self::getExpirationCacheTime() * 60;
+
+
+        $userKey = self::getUserSpecificHashedKey();
+
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
-            $userKey = self::getUserSpecificHashedKey();
-            if (!is_null($contentIds)) {
-                if (empty($contentIds)) {
-                    $contentIds = array_pluck($data, 'id');
-                }
-                self::addLists($userKey . ' ' . $hash, $contentIds);
-            }
+//            if (!is_null($contentIds)) {
+//                if (empty($contentIds)) {
+//                    $contentIds = array_pluck($data, 'id');
+//                }
+//
+//                self::addLists($userKey . ' ' . $hash, $contentIds);
+//            }
 
             //cache time in seconds
             $cacheTime = self::getExpirationCacheTime() * 60;
@@ -302,14 +306,14 @@ class CacheHelper
                                 $t->hset(
                                     $userKey,
                                     $hash,
-                                    json_encode($data)
+                                    serialize($data)
                                 );
                                 $t->multi();
                                 $t->hget(self::getUserSpecificHashedKey(), $hash);
                                 $t->expire(self::getUserSpecificHashedKey(), $cacheTime);
                             }
                         );
-                return (json_decode($results[1], true));
+               return (unserialize($results[1]));
             } catch (AbortedMultiExecException $e) {
 
             }
@@ -326,6 +330,16 @@ class CacheHelper
      */
     public static function deleteUserFields($userKeys = null, $fieldKey = 'content')
     {
+       // dd($fieldKey);
+
+//        $userKeys = iterator_to_array(
+//            new \Predis\Collection\Iterator\Keyspace(
+//                Cache::store(ConfigService::$cacheDriver)
+//                    ->connection()
+//                    ->client(), '*userId*'
+//            )
+//        );
+
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
             if (!$userKeys) {
@@ -333,33 +347,36 @@ class CacheHelper
                     new \Predis\Collection\Iterator\Keyspace(
                         Cache::store(ConfigService::$cacheDriver)
                             ->connection()
-                            ->client(), '*userId*'
+                            ->client(), '*railcontent:userId*'
                     )
                 );
             }
-            foreach ($userKeys as $userKey) {
-                $fields = iterator_to_array(
-                    new \Predis\Collection\Iterator\HashKey(
-                        Cache::store(ConfigService::$cacheDriver)
-                            ->connection()
-                            ->client(), $userKey, '*' . $fieldKey . '*'
-                    )
-                );
-                $myNewArray = array_combine(
-                    array_map(
-                        function ($key) use ($userKey) {
-                            return ' ' . $userKey . ' ' . $key;
-                        },
-                        array_keys($fields)
-                    ),
-                    $fields
-                );
-                if (!empty($myNewArray)) {
-                    Cache::store(ConfigService::$cacheDriver)
-                        ->connection()
-                        ->executeRaw(array_merge(['UNLINK'], explode(' ', implode(array_keys($myNewArray)))));
-                }
-            }
+
+//TODO: delete user cache
+//            foreach ($userKeys as $userKey) {
+//                $fields = iterator_to_array(
+//                    new \Predis\Collection\Iterator\HashKey(
+//                        Cache::store(ConfigService::$cacheDriver)
+//                            ->connection()
+//                            ->client(), $userKey, '*' . $fieldKey . '*'
+//                    )
+//                );
+//
+////                $myNewArray = array_combine(
+////                    array_map(
+////                        function ($key) use ($userKey) {
+////                            return ' ' . $userKey . ' ' . $key;
+////                        },
+////                        array_keys($fields)
+////                    ),
+////                    $fields
+////                );
+////                if (!empty($myNewArray)) {
+////                    Cache::store(ConfigService::$cacheDriver)
+////                        ->connection()
+////                        ->executeRaw(array_merge(['UNLINK'], explode(' ', implode(array_keys($myNewArray)))));
+////                }
+//            }
         }
     }
 }

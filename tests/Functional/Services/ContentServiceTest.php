@@ -623,11 +623,19 @@ class ContentServiceTest extends RailcontentTestCase
     public function test_get_content_by_id()
     {
         $content = $this->fakeContent();
+
+        $start1 = microtime(true);
         $contentResponse1 = $this->classBeingTested->getById($content[0]->getId());
+        $time1 = microtime(true) - $start1;
+
+        $start2 = microtime(true);
         $contentResponse2 = $this->classBeingTested->getById($content[0]->getId());
+        $time2 = microtime(true) - $start2;
 
         $this->assertEquals($contentResponse1, $contentResponse2);
         $this->assertEquals($content[0]->getId(), $contentResponse1->getId());
+
+        $this->assertTrue($time2 < $time1);
     }
 
     public function test_get_content_by_ids()
@@ -1131,7 +1139,7 @@ class ContentServiceTest extends RailcontentTestCase
                 'sort' => 3,
             ]
         );
-        $results = $this->classBeingTested->getTypeNeighbouringSiblings($type, 'sort',$contents2[0]->getSort());
+        $results = $this->classBeingTested->getTypeNeighbouringSiblings($type, 'sort', $contents2[0]->getSort());
 
         $this->assertEquals($contents3[0], $results['before'][0]);
         $this->assertEquals($contents1[0], $results['after'][0]);

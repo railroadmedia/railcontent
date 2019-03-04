@@ -291,9 +291,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     'value' => $this->faker->word,
                 ],
                 [
-                                        'key' => 'instructor',
-                                        'value' => $instructor[0]->getId(),
-                                    ],
+                    'key' => 'instructor',
+                    'value' => $instructor[0]->getId(),
+                ],
             ],
         ];
 
@@ -334,6 +334,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'slug' => 'slug1',
                 'brand' => config('railcontent.brand'),
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
             ]
         );
 
@@ -449,6 +451,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'difficulty' => 1,
+                'slug' => 'test 1',
+                'status' => 'published',
+                'publishedOn' => Carbon::now()
             ]
         );
 
@@ -489,6 +494,10 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $new_slug = implode('-', $this->faker->words());
+
+        $first = $this->call('GET', 'railcontent/content/' . $content[0]->getId());
+
+        $this->assertEquals($content[0]->getSlug(), $first->decodeResponseJson('data')['attributes']['slug']);
 
         $response = $this->call(
             'PATCH',
@@ -744,12 +753,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $page = 1;
         $limit = 5;
 
-        $randomContents = $this->fakeContent(5,
+        $randomContents = $this->fakeContent(
+            5,
             [
-                'difficulty' => rand(1,10),
+                'difficulty' => rand(1, 10),
                 'type' => $this->faker->word,
                 'status' => 'published',
-            ]);
+            ]
+        );
         $contents = $this->fakeContent(
             6,
             [
@@ -780,9 +791,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
             );
         }
 
-        $randomContents = $this->fakeContent(19,[
-            'difficulty' =>rand(1,10)
-        ]);
+        $randomContents = $this->fakeContent(
+            19,
+            [
+                'difficulty' => rand(1, 10),
+            ]
+        );
 
         $data = $this->fakeContentData(
             1,
@@ -862,11 +876,22 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'child' => $child[0],
             ]
         );
-
+        $start1 = microtime(true);
         $response = $this->call(
             'GET',
             'railcontent/content/parent/' . $parent[0]->getId()
         );
+
+        $time1 = microtime(true) - $start1;
+
+        $start2 = microtime(true);
+        $response = $this->call(
+            'GET',
+            'railcontent/content/parent/' . $parent[0]->getId()
+        );
+        $time2 = microtime(true) - $start2;
+
+        $this->assertTrue($time2 < $time1);
 
         $results = $response->decodeResponseJson('data');
 
@@ -1422,11 +1447,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
     {
         $content = $this->fakeContent(2);
 
-        $this->fakeHierarchy(1,
+        $this->fakeHierarchy(
+            1,
             [
                 'parent' => $content[0],
-                'child' => $content[1]
-            ]);
+                'child' => $content[1],
+            ]
+        );
 
         $contentTopic = $this->fakeContentTopic(
             1,
@@ -1445,7 +1472,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             config('railcontent.table_prefix') . 'content',
             [
                 'id' => $content[0]->getId(),
-                'status' => ContentService::STATUS_DELETED
+                'status' => ContentService::STATUS_DELETED,
             ]
         );
 
@@ -1453,11 +1480,10 @@ class ContentJsonControllerTest extends RailcontentTestCase
             config('railcontent.table_prefix') . 'content',
             [
                 'id' => $content[1]->getId(),
-                'status' => ContentService::STATUS_DELETED
+                'status' => ContentService::STATUS_DELETED,
             ]
         );
     }
-
 
     public function test_delete_content_and_associations()
     {
@@ -1495,20 +1521,29 @@ class ContentJsonControllerTest extends RailcontentTestCase
     {
         $contents = $this->fakeContent(4);
 
-        $this->fakeHierarchy(1,[
-            'parent' => $contents[0],
-            'child' => $contents[1]
-        ]);
+        $this->fakeHierarchy(
+            1,
+            [
+                'parent' => $contents[0],
+                'child' => $contents[1],
+            ]
+        );
 
-        $this->fakeHierarchy(1,[
-            'parent' => $contents[0],
-            'child' => $contents[2]
-        ]);
+        $this->fakeHierarchy(
+            1,
+            [
+                'parent' => $contents[0],
+                'child' => $contents[2],
+            ]
+        );
 
-        $this->fakeHierarchy(1,[
-            'parent' => $contents[0],
-            'child' => $contents[3]
-        ]);
+        $this->fakeHierarchy(
+            1,
+            [
+                'parent' => $contents[0],
+                'child' => $contents[3],
+            ]
+        );
 
         $id = $contents[2]->getId();
 
@@ -1526,7 +1561,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'parent_id' => $contents[0]->getId(),
                 'child_id' => $contents[1]->getId(),
-                'child_position' => 1
+                'child_position' => 1,
             ]
         );
 
@@ -1535,7 +1570,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'parent_id' => $contents[0]->getId(),
                 'child_id' => $contents[3]->getId(),
-                'child_position' => 2
+                'child_position' => 2,
             ]
         );
     }
@@ -1544,20 +1579,29 @@ class ContentJsonControllerTest extends RailcontentTestCase
     {
         $contents = $this->fakeContent(4);
 
-        $this->fakeHierarchy(1,[
-            'parent' => $contents[0],
-            'child' => $contents[1]
-        ]);
+        $this->fakeHierarchy(
+            1,
+            [
+                'parent' => $contents[0],
+                'child' => $contents[1],
+            ]
+        );
 
-        $this->fakeHierarchy(1,[
-            'parent' => $contents[0],
-            'child' => $contents[2]
-        ]);
+        $this->fakeHierarchy(
+            1,
+            [
+                'parent' => $contents[0],
+                'child' => $contents[2],
+            ]
+        );
 
-        $this->fakeHierarchy(1,[
-            'parent' => $contents[0],
-            'child' => $contents[3]
-        ]);
+        $this->fakeHierarchy(
+            1,
+            [
+                'parent' => $contents[0],
+                'child' => $contents[3],
+            ]
+        );
 
         $id = $contents[2]->getId();
 
@@ -1567,7 +1611,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             config('railcontent.table_prefix') . 'content',
             [
                 'id' => $id,
-                'status' => 'deleted'
+                'status' => 'deleted',
             ]
         );
 
@@ -1576,7 +1620,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'parent_id' => $contents[0]->getId(),
                 'child_id' => $contents[1]->getId(),
-                'child_position' => 1
+                'child_position' => 1,
             ]
         );
 
@@ -1585,7 +1629,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'parent_id' => $contents[0]->getId(),
                 'child_id' => $contents[3]->getId(),
-                'child_position' => 2
+                'child_position' => 2,
             ]
         );
     }

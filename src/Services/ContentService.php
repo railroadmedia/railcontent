@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\Common\Cache\RedisCache;
 use Doctrine\ORM\EntityManager;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Entities\Comment;
@@ -96,7 +97,8 @@ class ContentService
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
-            $results = CacheHelper::saveUserCache(
+            $results =
+                CacheHelper::saveUserCache(
                 $hash,
                 $this->contentRepository->build()
                     ->restrictByUserAccess()
@@ -694,9 +696,9 @@ class ContentService
                 ->setParameter('userId', $userId)
                 ->setParameter('state', $state)
                 ->setParameter('types', $type);
-            $results =
-                $qb->getQuery()
-                    ->getResult();
+
+            $results = CacheHelper::saveUserCache($hash, $qb->getQuery()
+                ->getResult());
         }
 
         return $results;
@@ -746,9 +748,8 @@ class ContentService
                 ->setParameter('userId', $userId)
                 ->setParameter('state', $state)
                 ->setParameter('types', $types);
-            $results =
-                $qb->getQuery()
-                    ->getResult();
+
+            $results = CacheHelper::saveUserCache($hash, $qb->getQuery()->getResult());
         }
 
         return $results;
@@ -1032,7 +1033,9 @@ class ContentService
                     'filter_options' => $pullFilterFields ? $this->contentRepository->getFilterFields() : [],
                 ]
             );
-            $results = CacheHelper::saveUserCache($hash, $resultsDB, array_pluck($resultsDB['results'], 'id'));
+
+            $results = $resultsDB;
+//            $results = CacheHelper::saveUserCache($hash, $resultsDB, []);
             $results = new ContentFilterResultsEntity($results);
         }
 
@@ -1080,7 +1083,7 @@ class ContentService
             $this->entityManager->flush();
         }
 
-        //CacheHelper::deleteUserFields(null, 'contents');
+        CacheHelper::deleteUserFields(null, 'contents');
 
         event(new ContentCreated($content->getId()));
 
@@ -1113,7 +1116,6 @@ class ContentService
 
         CacheHelper::deleteCache('content_' . $id);
 
-        //TODO: check Redis cache
         if (array_key_exists('status', $data)) {
             CacheHelper::deleteUserFields(null, 'contents');
         }
