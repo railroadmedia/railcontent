@@ -5,28 +5,22 @@ namespace Railroad\Railcontent\Tests\Functional\Repositories;
 use Carbon\Carbon;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
+use Doctrine\ORM\Cache\EntityCacheKey;
+use Doctrine\ORM\Cache\Logging\StatisticsCacheLogger;
 use Faker\ORM\Doctrine\Populator;
 use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentHierarchy;
-use Railroad\Railcontent\Factories\CommentAssignationFactory;
-use Railroad\Railcontent\Factories\CommentFactory;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Factories\ContentHierarchyFactory;
 use Railroad\Railcontent\Factories\ContentPermissionsFactory;
 use Railroad\Railcontent\Factories\PermissionsFactory;
-use Railroad\Railcontent\Factories\UserContentProgressFactory;
 use Railroad\Railcontent\Helpers\CacheHelper;
-use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\Hydrators\ContentFakeDataHydrator;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
-use Railroad\Railcontent\Transformers\ContentTransformer;
-use Railroad\Resora\Entities\Entity;
 
 class ContentServiceTest extends RailcontentTestCase
 {
@@ -36,58 +30,15 @@ class ContentServiceTest extends RailcontentTestCase
     protected $classBeingTested;
 
     /**
-     * @var ContentFactory
+     * @var StatisticsCacheLogger
      */
-    protected $contentFactory;
-
-    /**
-     * @var ContentContentFieldFactory
-     */
-    protected $fieldFactory;
-
-    /**
-     * @var PermissionsFactory
-     */
-    protected $permissionFactory;
-
-    /**
-     * @var ContentPermissionsFactory
-     */
-    protected $contentPermissionFactory;
-
-    /**
-     * @var ContentHierarchyFactory
-     */
-    protected $contentHierarchyFactory;
-
-    /**
-     * @var ContentDatumFactory
-     */
-    protected $datumFactory;
-
-    /**
-     * @var ContentHierarchyRepository
-     */
-    protected $contentHierarchyRepository;
-
-    /**
-     * @var CommentFactory
-     */
-    protected $commentFactory;
-
-    /**
-     * @var CommentAssignationFactory
-     */
-    protected $commentAssignationFactory;
-
-    /**
-     * @var UserContentProgressFactory
-     */
-    protected $userContentProgressFactory;
+    protected $logger;
 
     protected function setUp()
     {
         parent::setUp();
+
+        $this->logger = new StatisticsCacheLogger();
 
         $this->fakeDataHydrator = new ContentFakeDataHydrator($this->entityManager);
 
@@ -186,11 +137,6 @@ class ContentServiceTest extends RailcontentTestCase
         $this->datumFactory = $this->app->make(ContentDatumFactory::class);
         $this->permissionFactory = $this->app->make(PermissionsFactory::class);
         $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
-        //        $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
-        //   $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
-        //        $this->commentFactory = $this->app->make(CommentFactory::class);
-        //   $this->commentAssignationFactory = $this->app->make(CommentAssignationFactory::class);
-        //  $this->userContentProgressFactory = $this->app->make(UserContentProgressFactory::class);
     }
 
     public function _test_delete_content()
@@ -425,22 +371,39 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertEquals('course', $results[0]->getType());
     }
 
-    public function _test_entireCacheNotFlushed()
+    public function test_entireCacheNotFlushed()
     {
         $user = $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
+        $content = $this->fakeContent(
+            2,
+            [
+                'slug' => $this->faker->slug(),
+                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'status' => ContentService::STATUS_PUBLISHED,
+            ]
         );
 
-        $contentResponse = $this->classBeingTested->getById($content['id']);
+        $this->fakeContentTopic(
+            1,
+            [
+                'content' => $content[0],
+                'topic' => $this->faker->word,
+            ]
+        );
+
+        $contentResponse = $this->classBeingTested->getById($content[0]->getId());
+        $contentResponse = $this->classBeingTested->getById($content[1]->getId());
+        $contentResponse = $this->classBeingTested->getById($content[0]->getId());
 
         CacheHelper::setPrefix();
+
         Cache::store(ConfigService::$cacheDriver)
             ->put('do_not_delete', 'a_value', 10);
 
-        $this->classBeingTested->update($contentResponse['id'], ['slug' => 'slug-' . rand()]);
+        $this->classBeingTested->update(
+            $contentResponse->getId(),
+            ['data' => ['attributes' => ['slug' => 'slug-' . rand()]]]
+        );
 
         $this->assertEquals(
             'a_value',
@@ -448,29 +411,12 @@ class ContentServiceTest extends RailcontentTestCase
                 ->get('do_not_delete')
         );
 
-        $this->assertEquals(
-            3,
-            count(
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getRedis()
-                    ->keys('*')
-            )
-        );
-
-        $this->classBeingTested->delete($contentResponse['id']);
+        $this->classBeingTested->delete($contentResponse->getId());
 
         $this->assertEquals(
             'a_value',
             Cache::store(ConfigService::$cacheDriver)
                 ->get('do_not_delete')
-        );
-        $this->assertEquals(
-            2,
-            count(
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getRedis()
-                    ->keys('*')
-            )
         );
     }
 
@@ -1143,7 +1089,43 @@ class ContentServiceTest extends RailcontentTestCase
 
         $this->assertEquals($contents3[0], $results['before'][0]);
         $this->assertEquals($contents1[0], $results['after'][0]);
+    }
 
+    public function test_cache()
+    {
+        $contents = $this->fakeContent(1);
+
+        $name = 'pull';
+        $key = new EntityCacheKey(Content::class, ['id' => $contents[0]->getId()]);
+        $result1 = $this->classBeingTested->getById($contents[0]->getId());
+        $result2 = $this->classBeingTested->getById($contents[0]->getId());
+
+        $this->classBeingTested->update(
+            $contents[0]->getId(),
+            [
+                'data' => [
+                    'attributes' => [
+                        'slug' => 'new slug',
+                    ],
+                ],
+            ]
+        );
+        $result3 = $this->classBeingTested->getById($contents[0]->getId());
+
+        $result4 = $this->classBeingTested->getById($contents[0]->getId());
+        //var_dump($this->entityManager->getCache());
+        //        $this->logger->entityCacheHit($name, $key);
+        //        $this->logger->entityCachePut($name, $key);
+        //        $this->logger->entityCacheMiss($name, $key);
+
+        $this->assertEquals($result1, $result2);
+        $this->assertEquals($result3, $result2);
+        $this->assertEquals($result3, $result4);
+        
+        //        $this->assertEquals(1, $this->logger->getMissCount());
+        //        $this->assertEquals(1, $this->logger->getRegionHitCount($name));
+        //        $this->assertEquals(1, $this->logger->getRegionPutCount($name));
+        //        $this->assertEquals(1, $this->logger->getRegionMissCount($name));
     }
 
 }

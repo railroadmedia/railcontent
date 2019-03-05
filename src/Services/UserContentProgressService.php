@@ -184,22 +184,7 @@ class UserContentProgressService
 
         }
 
-        //delete user progress from cache
-        CacheHelper::deleteUserFields(
-            [
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userId,
-            ],
-            'user_progress'
-        );
-
-        CacheHelper::deleteUserFields(
-            [
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userId,
-            ],
-            'content'
-        );
+        $this->entityManager->getCache()->evictEntityRegion(Content::class);
 
         UserContentProgressRepository::$cache = [];
 
@@ -283,21 +268,8 @@ class UserContentProgressService
 
         event(new UserContentProgressSaved($userId, $contentId));
 
-        CacheHelper::deleteUserFields(
-            [
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userId,
-            ],
-            'user_progress'
-        );
+        $this->entityManager->getCache()->evictEntityRegion(Content::class);
 
-        CacheHelper::deleteUserFields(
-            [
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userId,
-            ],
-            'content'
-        );
         UserContentProgressRepository::$cache = [];
 
         return true;

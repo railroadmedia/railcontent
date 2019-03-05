@@ -170,8 +170,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
     public function restrictStatuses()
     {
         if (is_array(ContentRepository::$availableContentStatues)) {
-            $this->add(
-                'where',
+            $this->andWhere(
                 $this->expr()
                     ->in(
                         config('railcontent.table_prefix') . 'content' . '.status',
@@ -445,70 +444,6 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
             );
 
         return $this;
-
-        //        $this->leftJoin(
-        //            ConfigService::$tableContentPermissions . ' as id_content_permissions',
-        //            function (JoinClause $join) {
-        //                $join->on(
-        //                    'id_content_permissions' . '.content_id',
-        //                    ConfigService::$tableContent . '.id'
-        //                );
-        //            }
-        //        )
-        //            ->leftJoin(
-        //                ConfigService::$tableContentPermissions . ' as type_content_permissions',
-        //                function (JoinClause $join) {
-        //                    $join->on(
-        //                        'type_content_permissions' . '.content_type',
-        //                        ConfigService::$tableContent . '.type'
-        //                    )
-        //                        ->whereIn('type_content_permissions' . '.brand', ConfigService::$availableBrands);
-        //                }
-        //            )
-        //            ->where(
-        //                function (Builder $builder) {
-        //                    return $builder->where(
-        //                        function (Builder $builder) {
-        //                            return $builder->whereNull(
-        //                                'id_content_permissions' . '.permission_id'
-        //                            )
-        //                                ->whereNull(
-        //                                    'type_content_permissions' . '.permission_id'
-        //                                );
-        //                        }
-        //                    )
-        //                        ->orWhereExists(
-        //                            function (Builder $builder) {
-        //                                return $builder->select('id')
-        //                                    ->from(ConfigService::$tableUserPermissions)
-        //                                    ->where('user_id', auth()->user()->id ?? null)
-        //                                    ->where(
-        //                                        function (Builder $builder) {
-        //                                            return $builder->whereRaw(
-        //                                                'permission_id = id_content_permissions.permission_id'
-        //                                            )
-        //                                                ->orWhereRaw(
-        //                                                    'permission_id = type_content_permissions.permission_id'
-        //                                                );
-        //                                        }
-        //                                    )
-        //                                    ->where(
-        //                                        function (Builder $builder) {
-        //                                            return $builder->where(
-        //                                                'expiration_date',
-        //                                                '>=',
-        //                                                Carbon::now()
-        //                                                    ->toDateTimeString()
-        //                                            )
-        //                                                ->orWhereNull('expiration_date');
-        //                                        }
-        //                                    );
-        //                            }
-        //                        );
-        //                }
-        //            );
-
-        return $this;
     }
 
     /**
@@ -516,8 +451,8 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
      */
     public function restrictByUserAccess()
     {
-        $this->restrictStatuses()
-            ->restrictPublishedOnDate()
+        $this->restrictPublishedOnDate()
+            ->restrictStatuses()
             ->restrictBrand()
             ->restrictByPermissions();
 

@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Carbon\Carbon;
 use Faker\ORM\Doctrine\Populator;
 use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Entities\Content;
@@ -27,7 +28,14 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_add_content_datum_controller_method_response()
     {
-        $content = $this->fakeContent();
+        $content = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+                'brand' => config('railcontent.brand'),
+            ]
+        );
         $key = $this->faker->word;
         $value = $this->faker->text(500);
 
@@ -41,10 +49,11 @@ class ContentDatumControllerTest extends RailcontentTestCase
                         'value' => $value,
                     ],
                     'relationships' => [
-                        'content' => ['data' => [
-                            'type' => 'content',
-                            'id' => $content[0]->getId(),
-                            ]
+                        'content' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => $content[0]->getId(),
+                            ],
                         ],
                     ],
                 ],
@@ -80,10 +89,11 @@ class ContentDatumControllerTest extends RailcontentTestCase
                         'value' => $newValue,
                     ],
                     'relationships' => [
-                        'content' => ['data' => [
-                            'type' => 'content',
-                            'id' => $content[0]->getId(),
-                        ]
+                        'content' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => $content[0]->getId(),
+                            ],
                         ],
                     ],
                 ],
@@ -117,10 +127,11 @@ class ContentDatumControllerTest extends RailcontentTestCase
                         'value' => $newValue,
                     ],
                     'relationships' => [
-                        'content' => ['data' => [
-                            'type' => 'content',
-                            'id' => $content[0]->getId(),
-                        ]
+                        'content' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => $content[0]->getId(),
+                            ],
                         ],
                     ],
                 ],
@@ -181,10 +192,11 @@ class ContentDatumControllerTest extends RailcontentTestCase
                         'position' => 1,
                     ],
                     'relationships' => [
-                        'content' => ['data' => [
-                            'type' => 'content',
-                            'id' => rand(100, 1000),
-                            ]
+                        'content' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => rand(100, 1000),
+                            ],
                         ],
                     ],
                 ],
@@ -211,7 +223,14 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_update_content_datum_controller_method_response()
     {
-        $content = $this->fakeContent();
+        $content = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+                'brand' => config('railcontent.brand'),
+            ]
+        );
 
         $this->populator->addEntity(
             ContentData::class,
@@ -256,7 +275,15 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_update_content_datum_not_pass_validation()
     {
-        $content = $this->fakeContent();
+        $content = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+                'brand' => config('railcontent.brand'),
+            ]
+        );
+
         $this->populator->addEntity(
             ContentData::class,
             1,
@@ -297,7 +324,14 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_delete_content_datum_controller()
     {
-        $content = $this->fakeContent();
+        $content = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+                'brand' => config('railcontent.brand'),
+            ]
+        );
 
         $this->populator->addEntity(
             ContentData::class,
@@ -327,7 +361,14 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_update_content_datum_method_from_service_response()
     {
-        $content = $this->fakeContent();
+        $content = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+                'brand' => config('railcontent.brand'),
+            ]
+        );
 
         $this->populator->addEntity(
             ContentData::class,
@@ -368,7 +409,14 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_get_content_datum_method_from_service_response()
     {
-        $content = $this->fakeContent();
+        $content = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+                'brand' => config('railcontent.brand'),
+            ]
+        );
 
         $this->populator->addEntity(
             ContentData::class,
@@ -390,7 +438,14 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
     public function test_delete_content_datum_method_from_service_response()
     {
-        $content = $this->fakeContent();
+        $content = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+                'brand' => config('railcontent.brand'),
+            ]
+        );
 
         $this->populator->addEntity(
             ContentData::class,
@@ -414,7 +469,14 @@ class ContentDatumControllerTest extends RailcontentTestCase
     {
         // Event::fake();
 
-        $content = $this->contentFactory->create();
+        $content = $this->contentFactory->create(
+            1,
+            [
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+                'brand' => config('railcontent.brand'),
+            ]
+        );
 
         $key = $this->faker->word;
         $value = $this->faker->text(500);

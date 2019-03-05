@@ -2,13 +2,11 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Carbon\Carbon;
+
 use Doctrine\ORM\EntityRepository;
-use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentService;
 use Railroad\Resora\Decorators\Decorator;
 
 class ContentRepository extends EntityRepository
@@ -96,6 +94,8 @@ class ContentRepository extends EntityRepository
                 ->orderBy($orderColumn, 'desc')
                 ->setMaxResults($siblingPairLimit)
                 ->getQuery()
+                ->setCacheable(true)
+                ->setCacheRegion('pull')
                 ->getResult();
 
         $afterContents =
@@ -108,6 +108,8 @@ class ContentRepository extends EntityRepository
                 ->orderBy($orderColumn, 'desc')
                 ->setMaxResults($siblingPairLimit)
                 ->getQuery()
+                ->setCacheable(true)
+                ->setCacheRegion('pull')
                 ->getResult();
 
         $processedContents = array_merge($beforeContents, $afterContents);

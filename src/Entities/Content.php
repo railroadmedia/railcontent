@@ -12,6 +12,7 @@ use Railroad\Railcontent\Entities\Traits\ContentFieldsProperties;
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_content")
+ * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */
 class Content

@@ -245,34 +245,6 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // setup doctrine
-        // this is where proxy class files will be stored
-        $proxyDir = sys_get_temp_dir();
-
-        // redis cache
-        $redis = new \Redis();
-        $redis->connect('redis', 6379);
-
-        $redisCache = new RedisCache();
-        $redisCache->setRedis($redis);
-
-        // create entity manager with proper db details
-        if (config('railcontent.database_in_memory') === true) {
-            $databaseOptions = [
-                'driver' => config('railcontent.database_driver'),
-                'dbname' => config('railcontent.database_name'),
-                'user' => config('railcontent.database_user'),
-                'password' => config('railcontent.database_password'),
-                'host' => config('railcontent.database_host'),
-            ];
-        } else {
-            $databaseOptions = [
-                'driver' => config('railcontent.database_driver'),
-                'user' => config('railcontent.database_user'),
-                'password' => config('railcontent.database_password'),
-                'memory' => true,
-            ];
-        }
 
     }
 }

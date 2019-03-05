@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -13,7 +14,6 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $this->setConnectionType('mysql');
 
         parent::setUp();
-
     }
 
     public function test_no_results()
@@ -36,6 +36,8 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'brand' => config('railcontent.brand'),
                 'type' => 'courses',
                 'title' => $this->faker->word,
+                'publishedOn' => Carbon::now(),
+                'status' => 'published'
             ]
         );
         $this->fakeContentTopic(
@@ -51,6 +53,8 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'brand' => config('railcontent.brand'),
                 'type' => 'courses',
                 'title' => $this->faker->word,
+                'status' => 'published',
+                'publishedOn' => Carbon::now()
             ]
         );
         $this->fakeContentTopic(
@@ -67,6 +71,8 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'brand' => config('railcontent.brand'),
                 'type' => 'courses',
                 'title' => $this->faker->word,
+                'status' => 'published',
+                'publishedOn' => Carbon::now()
             ]
         );
 
@@ -102,6 +108,8 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'brand' => config('railcontent.brand'),
                 'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
                 'title' => $this->faker->word,
+                'status' => 'published',
+                'publishedOn' => Carbon::now()
             ]
         );
 
@@ -111,6 +119,8 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'brand' => config('railcontent.brand'),
                 'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
                 'title' => $this->faker->word,
+                'status' => 'published',
+                'publishedOn' => Carbon::now()
             ]
         );
 
@@ -120,6 +130,8 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'brand' => config('railcontent.brand'),
                 'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
                 'title' => $this->faker->word,
+                'status' => 'published',
+                'publishedOn' => Carbon::now()
             ]
         );
 
@@ -155,6 +167,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
                 'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
                 'status' => $this->faker->randomElement(
                     [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]
@@ -167,6 +180,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             [
                 'brand' => config('railcontent.brand'),
                 'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                'publishedOn' => Carbon::now(),
                 'status' => $this->faker->randomElement(
                     [ContentService::STATUS_DELETED, ContentService::STATUS_ARCHIVED]
                 ),
@@ -178,6 +192,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             [
                 'brand' => config('railcontent.brand'),
                 'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                'publishedOn' => Carbon::now(),
                 'status' => $this->faker->randomElement(
                     [ContentService::STATUS_DRAFT, ContentService::STATUS_SCHEDULED]
                 ),

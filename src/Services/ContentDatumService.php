@@ -76,8 +76,7 @@ class ContentDatumService
         //call the event that save a new content version in the database
         event(new ContentDatumCreated($contentId));
 
-        //delete cache associated with the content id
-        CacheHelper::deleteCache('content_' . $contentId);
+        $this->entityManager->getCache()->evictEntityRegion(Content::class);
 
         return $this->get($contentDatum->getId());
     }
@@ -123,12 +122,7 @@ class ContentDatumService
             )
         );
 
-        //delete cache associated with the content id
-        CacheHelper::deleteCache(
-            'content_' .
-            $datum->getContent()
-                ->getId()
-        );
+        $this->entityManager->getCache()->evictEntity(Content::class, $datum->getContent()->getId());
 
         return $this->get($id);
     }
@@ -157,11 +151,7 @@ class ContentDatumService
         );
 
         //delete cache associated with the content id
-        CacheHelper::deleteCache(
-            'content_' .
-            $datum->getContent()
-                ->getId()
-        );
+        $this->entityManager->getCache()->evictEntity(Content::class, $datum->getContent()->getId());
 
         return true;
     }

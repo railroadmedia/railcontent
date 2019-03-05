@@ -3,7 +3,9 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use Doctrine\DBAL\Logging\DebugStack;
 use Doctrine\ORM\EntityManager;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -453,7 +455,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'difficulty' => 1,
                 'slug' => 'test 1',
                 'status' => 'published',
-                'publishedOn' => Carbon::now()
+                'publishedOn' => Carbon::now(),
             ]
         );
 
@@ -498,6 +500,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $first = $this->call('GET', 'railcontent/content/' . $content[0]->getId());
 
         $this->assertEquals($content[0]->getSlug(), $first->decodeResponseJson('data')['attributes']['slug']);
+
+        //assert cache exist
+        $this->assertTrue(
+            $this->entityManager->getCache()
+                ->containsEntity(Content::class, $content[0]->getId())
+        );
 
         $response = $this->call(
             'PATCH',
@@ -565,6 +573,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 ],
             ],
             $response->decodeResponseJson()
+        );
+
+        //assert cache was inactivated
+        $this->assertFalse(
+            $this->entityManager->getCache()
+                ->containsEntity(Content::class, $content[0]->getId())
         );
     }
 
@@ -674,6 +688,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'difficulty' => 1,
                 'type' => 'course',
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+
             ]
         );
         $otherContent = $this->fakeContent(12);
@@ -864,10 +881,19 @@ class ContentJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'brand' => config('railcontent.brand'),
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
             ]
         );
 
-        $child = $this->fakeContent();
+        $child = $this->fakeContent(
+            1,
+            [
+                'brand' => config('railcontent.brand'),
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+            ]
+        );
 
         $hierarchy = $this->fakeHierarchy(
             1,
@@ -917,6 +943,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
             2,
             [
                 'brand' => config('railcontent.brand'),
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
             ]
         );
         $response = $this->call(
@@ -930,39 +958,42 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_get_id_cached()
     {
-        //        $content1 = $this->contentFactory->create(
-        //            $this->faker->word,
-        //            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-        //            ContentService::STATUS_PUBLISHED
-        //        );
+        $content = $this->fakeContent(
+            1,
+            [
+                'brand' => config('railcontent.brand'),
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+            ]
+        );
 
-        // $id = $content1->getId();
+        $id = $content[0]->getId();
         $start1 = microtime(true);
-        $response = $this->call('GET', 'railcontent/content/' . 1);
+        $response = $this->call('GET', 'railcontent/content/' . $id);
 
         $time1 = microtime(true) - $start1;
 
         $start2 = microtime(true);
-        $response = $this->call('GET', 'railcontent/content/' . 1);
+        $response = $this->call('GET', 'railcontent/content/' . $id);
         $time2 = microtime(true) - $start2;
 
         $start3 = microtime(true);
-        $response = $this->call('GET', 'railcontent/content/' . 1);
+        $response = $this->call('GET', 'railcontent/content/' . $id);
         $time3 = microtime(true) - $start3;
 
         $start4 = microtime(true);
-        $response = $this->call('GET', 'railcontent/content/' . 1);
+        $response = $this->call('GET', 'railcontent/content/' . $id);
         $time4 = microtime(true) - $start4;
 
         $start5 = microtime(true);
-        $response = $this->call('GET', 'railcontent/content/' . 1);
+        $response = $this->call('GET', 'railcontent/content/' . $id);
         $time5 = microtime(true) - $start5;
 
         $start6 = microtime(true);
         $response = $this->call(
             'GET',
             'railcontent/content/get-by-ids',
-            ['ids' => 1]
+            ['ids' => $id]
         );
         $time6 = microtime(true) - $start6;
 
@@ -970,9 +1001,15 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call(
             'GET',
             'railcontent/content/get-by-ids',
-            ['ids' => 1]
+            ['ids' => $id]
         );
         $time7 = microtime(true) - $start7;
+
+        $this->assertTrue($time7 < $time6);
+        $this->assertTrue($time5 < $time1);
+        $this->assertTrue($time4 < $time1);
+        $this->assertTrue($time3 < $time1);
+        $this->assertTrue($time2 < $time1);
 
         $response->assertStatus(200);
     }
@@ -1023,7 +1060,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
     public function test_pull_content_permission()
     {
         $userId = $this->createAndLogInNewUser();
-        $content1 = $this->fakeContent();
+        $content1 = $this->fakeContent(
+            1,
+            [
+                'brand' => config('railcontent.brand'),
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+            ]
+        );
 
         $permission = $this->fakePermission();
 
@@ -1035,7 +1079,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $content2 = $this->fakeContent();
+        $content2 = $this->fakeContent(
+            1,
+            [
+                'brand' => config('railcontent.brand'),
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+            ]
+        );
 
         $permission2 = $this->fakePermission();
 
@@ -1073,7 +1124,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
     public function test_pull_content_user_permission()
     {
         $user = $this->createAndLogInNewUser();
-        $contents = $this->fakeContent(2);
+        $contents = $this->fakeContent(
+            2,
+            [
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+                'brand' => config('railcontent.brand'),
+            ]
+        );
 
         $permission = $this->fakePermission();
         $this->fakeContentPermission(
@@ -1488,6 +1546,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
     public function test_delete_content_and_associations()
     {
         $content = $this->fakeContent();
+        $id = $content[0]->getId();
 
         $contentTopic = $this->fakeContentTopic(
             1,
@@ -1498,14 +1557,23 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $response = $this->call('DELETE', 'railcontent/content/' . $content[0]->getId());
+        $this->assertTrue(
+            $this->entityManager->getCache()
+                ->containsEntity(Content::class, $id)
+        );
 
+        $response = $this->call('DELETE', 'railcontent/content/' . $id);
+
+        $this->assertFalse(
+            $this->entityManager->getCache()
+                ->containsEntity(Content::class, $id)
+        );
         $this->assertEquals(204, $response->status());
 
         $this->assertDatabaseMissing(
             config('railcontent.table_prefix') . 'content',
             [
-                'id' => 1,
+                'id' => $id,
             ]
         );
 
@@ -1632,5 +1700,152 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'child_position' => 2,
             ]
         );
+    }
+
+    public function test_after_delete()
+    {
+        $contents = $this->fakeContent(
+            10,
+            [
+                'brand' => config('railcontent.brand'),
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+
+        $firstRequest = $this->call(
+            'GET',
+            'railcontent/content/get-by-ids',
+            ['ids' => $contents[2]->getId() . ',' . $contents[1]->getId() . ',' . $contents[5]->getId()]
+        );
+
+        $this->assertEquals(3, count($firstRequest->decodeResponseJson('data')));
+
+        $id = $contents[1]->getId();
+
+        $response = $this->call('DELETE', 'railcontent/content/' . $id);
+
+        $secondRequest = $this->call(
+            'GET',
+            'railcontent/content/get-by-ids',
+            ['ids' => $contents[2]->getId() . ',' . $id . ',' . $contents[5]->getId()]
+        );
+
+        $this->assertEquals(2, count($secondRequest->decodeResponseJson('data')));
+    }
+
+    public function test_create_new_content()
+    {
+        $content = $this->fakeContent(
+            1,
+            [
+                'difficulty' => 1,
+                'type' => 'course',
+            ]
+        );
+        $otherContent = $this->fakeContent(12);
+
+        $types = ['course'];
+        $page = 1;
+        $limit = 10;
+        $filter = ['difficulty,1'];
+
+        $response1 = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => 'id',
+                'included_types' => $types,
+                'required_fields' => $filter,
+            ]
+        );
+
+        $responseContent = $response1->decodeResponseJson('data');
+
+        $contentData = [
+            'slug' => $this->faker->word,
+            'status' => 'published',
+            'type' => 'course',
+            'sort' => 1,
+            'title' => $this->faker->word,
+            'brand' => config('railcontent.brand'),
+            'published_on' => Carbon::now(),
+            'fields' => [
+                [
+                    'key' => 'difficulty',
+                    'value' => 1,
+                ],
+            ],
+        ];
+
+        $response = $this->call(
+            'PUT',
+            'railcontent/content',
+            [
+                'data' => [
+                    'attributes' => $contentData,
+                ],
+            ]
+        );
+
+        $response2 = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => 'id',
+                'included_types' => $types,
+                'required_fields' => $filter,
+            ]
+        );
+
+        $responseContent2 = $response2->decodeResponseJson('data');
+
+        $this->assertEquals(count($responseContent) + 1, count($responseContent2));
+    }
+
+    public function test_after_soft_delete()
+    {
+        $contents = $this->fakeContent(
+            10,
+            [
+                'status' => 'published',
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+
+        $stack = new DebugStack();
+        $this->entityManager->getConfiguration()
+            ->setSQLLogger($stack);
+
+        $firstRequest = $this->call(
+            'GET',
+            'railcontent/content/get-by-ids',
+            ['ids' => $contents[2]->getId() . ',' . $contents[1]->getId() . ',' . $contents[5]->getId()]
+        );
+
+        $this->assertEquals(3, count($firstRequest->decodeResponseJson('data')));
+
+        $id = $contents[1]->getId();
+
+        $response = $this->call('DELETE', 'railcontent/soft/content/' . $id);
+
+        $secondRequest = $this->call(
+            'GET',
+            'railcontent/content/get-by-ids',
+            ['ids' => $contents[2]->getId() . ',' . $id . ',' . $contents[5]->getId()]
+        );
+
+        $secondRequest = $this->call(
+            'GET',
+            'railcontent/content/get-by-ids',
+            ['ids' => $contents[2]->getId() . ',' . $id . ',' . $contents[5]->getId()]
+        );
+
+        $this->assertEquals(2, count($secondRequest->decodeResponseJson('data')));
     }
 }

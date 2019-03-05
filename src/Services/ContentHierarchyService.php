@@ -133,11 +133,8 @@ class ContentHierarchyService
         $this->entityManager->persist($hierarchy);
         $this->entityManager->flush();
 
-        //delete the cached results for parent id
-        CacheHelper::deleteCache('content_' . $parentId);
-
-        //delete the cached results for child id
-        CacheHelper::deleteCache('content_' . $childId);
+        $this->entityManager->getCache()->evictEntity(Content::class, $parentId);
+        $this->entityManager->getCache()->evictEntity(Content::class, $childId);
 
         return $hierarchy;
     }
@@ -150,9 +147,8 @@ class ContentHierarchyService
     public function delete($parentId, $childId)
     {
         //delete the cached results for parent id
-        CacheHelper::deleteCache('content_' . $parentId);
-
-        CacheHelper::deleteCache('content_' . $childId);
+        $this->entityManager->getCache()->evictEntity(Content::class, $parentId);
+        $this->entityManager->getCache()->evictEntity(Content::class, $childId);
 
         $hierarchy = $this->contentHierarchyRepository->findOneBy(
             [
@@ -183,14 +179,8 @@ class ContentHierarchyService
             return true;
         }
 
-        //delete the cached results for parent id
-        CacheHelper::deleteCache(
-            'content_' .
-            $parentHierarchy->getParent()
-                ->getId()
-        );
-
-        CacheHelper::deleteCache('content_' . $childId);
+        $this->entityManager->getCache()->evictEntity(Content::class, $parentHierarchy->getParent()->getId());
+        $this->entityManager->getCache()->evictEntity(Content::class, $childId);
 
         return $this->entityManager->createQuery(
             '   UPDATE Railroad\Railcontent\Entities\ContentHierarchy h

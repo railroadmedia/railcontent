@@ -113,8 +113,7 @@ class CommentService
         $this->entityManager->persist($comment);
         $this->entityManager->flush();
 
-
-        CacheHelper::deleteCache('content_' . $contentId);
+        $this->entityManager->getCache()->evictEntity(Content::class, $contentId);
 
          event(new CommentCreated($comment->getId(), $userId, $parentId, $comment));
 
@@ -152,11 +151,9 @@ class CommentService
         if (count($data) == 0) {
             return $comment;
         }
-        CacheHelper::deleteCache(
-            'content_' .
-            $comment->getContent()
-                ->getId()
-        );
+
+        $this->entityManager->getCache()->evictEntity(Content::class, $comment->getContent()->getId());
+
         $this->jsonApiHidrator->hydrate($comment, $data);
 
         $this->entityManager->flush();
@@ -192,11 +189,7 @@ class CommentService
         //trigger an event that delete the corresponding comment assignments if the deletion it's not soft
         event(new CommentDeleted($id));
 
-        CacheHelper::deleteCache(
-            'content_' .
-            $comment->getContent()
-                ->getId()
-        );
+        $this->entityManager->getCache()->evictEntity(Content::class, $comment->getContent()->getId());
 
         if ($isSoftDelete) {
             $comment->setDeletedAt(Carbon::now());

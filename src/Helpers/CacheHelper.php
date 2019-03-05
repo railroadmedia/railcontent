@@ -247,6 +247,8 @@ class CacheHelper
      */
     public static function getCachedResultsForKey($hash)
     {
+
+        //var_dump('getCachedResultsForKey.......................................'.$hash);
         $results = null;
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
@@ -330,7 +332,8 @@ class CacheHelper
      */
     public static function deleteUserFields($userKeys = null, $fieldKey = 'content')
     {
-       // dd($fieldKey);
+
+        // dd($fieldKey);
 
 //        $userKeys = iterator_to_array(
 //            new \Predis\Collection\Iterator\Keyspace(
