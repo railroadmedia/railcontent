@@ -10,6 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\CommentRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_comments")
+ * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */
 class Comment

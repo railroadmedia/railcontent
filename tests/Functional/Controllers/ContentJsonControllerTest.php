@@ -683,6 +683,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_index_with_results()
     {
+        $userId = $this->createAndLogInNewUser();
+        $permission = $this->fakePermission(2);
+
         $content = $this->fakeContent(
             3,
             [
@@ -694,6 +697,19 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
         $otherContent = $this->fakeContent(12);
+        $this->fakeUserPermission(1,[
+            'userId' => $userId,
+            'permission' => $permission[0],
+            'startDate' => Carbon::now(),
+            'expirationDate' => Carbon::now()->addMinute(10)
+        ]);
+
+        $this->fakeUserPermission(1,[
+            'userId' => $userId,
+            'permission' => $permission[1],
+            'startDate' => Carbon::now(),
+            'expirationDate' => Carbon::now()->addDays(10)
+        ]);
 
         $types = ['course'];
         $page = 1;

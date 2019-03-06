@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\Version;
-use Railroad\Railcontent\Helpers\CacheHelper;
+
 
 class VersionService
 {
@@ -75,17 +75,6 @@ class VersionService
      */
     public function get($versionId)
     {
-        $hash = 'version_' . CacheHelper::getKey($versionId);
-        $results =
-            Cache::store(ConfigService::$cacheDriver)
-                ->rememberForever(
-                    $hash,
-                    function () use ($hash, $versionId) {
-                        $results = $this->versionRepository->find($versionId);
-                        return $results;
-                    }
-                );
-
-        return $results;
+        return $this->versionRepository->find($versionId);
     }
 }

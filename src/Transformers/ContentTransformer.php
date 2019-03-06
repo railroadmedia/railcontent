@@ -23,49 +23,52 @@ class ContentTransformer extends TransformerAbstract
             )
         ))->toArray();
 
+        $defaultIncludes = [];
         if (count($content->getData()) > 0) {
-            $this->defaultIncludes[] = 'data';
+            $defaultIncludes[] = 'data';
         }
 
         if ($content->getInstructor()) {
-            $this->defaultIncludes[] = 'instructor';
+            $defaultIncludes[] = 'instructor';
         }
 
         if (count($content->getTopic()) > 0) {
-            $this->defaultIncludes[] = 'topic';
+            $defaultIncludes[] = 'topic';
         }
 
         if (count($content->getExercise()) > 0) {
-            $this->defaultIncludes[] = 'exercise';
+            $defaultIncludes[] = 'exercise';
         }
 
         if (count($content->getTag()) > 0) {
-            $this->defaultIncludes[] = 'tag';
+            $defaultIncludes[] = 'tag';
         }
 
         if (count($content->getKey()) > 0) {
-            $this->defaultIncludes[] = 'key';
+            $defaultIncludes[] = 'key';
         }
 
         if (count($content->getKeyPitchType()) > 0) {
-            $this->defaultIncludes[] = 'keyPitchType';
+            $defaultIncludes[] = 'keyPitchType';
         }
 
         if (count($content->getSbtBpm()) > 0) {
-            $this->defaultIncludes[] = 'sbtBpm';
+            $defaultIncludes[] = 'sbtBpm';
         }
 
         if (count($content->getSbtExerciseNumber()) > 0) {
-            $this->defaultIncludes[] = 'sbtExerciseNumber';
+            $defaultIncludes[] = 'sbtExerciseNumber';
         }
 
         if (count($content->getPlaylist()) > 0) {
-            $this->defaultIncludes[] = 'playlist';
+            $defaultIncludes[] = 'playlist';
         }
 
         if ($content->getParent()) {
-            $this->defaultIncludes[] = 'parent';
+            $defaultIncludes[] = 'parent';
         }
+
+        $this->setDefaultIncludes($defaultIncludes);
 
         return $contents;
     }

@@ -3,12 +3,9 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Faker\ORM\Doctrine\Populator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
-use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Entities\UserPermission;
-use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -156,7 +153,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                         'start_date' => Carbon::now()
                             ->toDateTimeString(),
                         'expiration_date' => Carbon::now()
-                            ->addMonth(1)
+                            ->addMinutes(1)
                             ->toDateTimeString(),
                     ],
                     'relationships' => [
@@ -181,7 +178,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                     'start_date' => Carbon::now()
                         ->toDateTimeString(),
                     'expiration_date' => Carbon::now()
-                        ->addMonth(1)
+                        ->addMinutes(1)
                         ->toDateTimeString(),
                 ],
                 'relationships' => [
@@ -204,7 +201,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
                 'expiration_date' => Carbon::now()
-                    ->addMonth(1)
+                    ->addMinutes(1)
                     ->toDateTimeString(),
                 'updated_at' => Carbon::now()
                     ->toDateTimeString(),
@@ -437,21 +434,27 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(2, count($results->decodeResponseJson('data')));
     }
 
-    public function _test_old_user_cache_deleted_when_new_user_permission_activate()
+    public function test_old_user_cache_deleted_when_new_user_permission_activate()
     {
         $userId = $this->createAndLogInNewUser();
-        $content1 = $this->contentFactory->create();
-        $content2 = $this->contentFactory->create();
-        $permission1 = $this->permissionRepository->create(
+        $content1 = $this->fakeContent(
+            2,
             [
-                'name' => $this->faker->word,
+                'slug' => $this->faker->word,
+                'type' => $this->faker->word,
+                'status' => 'published',
                 'brand' => ConfigService::$brand,
+                'publishedOn' => Carbon::now(),
             ]
         );
-        $contentPermission = $this->contentPermissionRepository->create(
+
+        $permission1 = $this->fakePermission();
+
+        $contentPermission = $this->fakeContentPermission(
+            1,
             [
-                'content_id' => $content1['id'],
-                'permission_id' => $permission1['id'],
+                'content' => $content1[0],
+                'permission' => $permission1[0],
             ]
         );
 
@@ -463,19 +466,31 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'sort' => 'id',
             ]
         );
-
-        $this->assertArraySubset([(array)$content2], $response->decodeResponseJson('data'));
+        $this->assertEquals(1, $response->decodeResponseJson('meta')['pagination']['total']);
+        $this->assertEquals($content1[1]->getId(), $response->decodeResponseJson('data')[0]['id']);
 
         //assign permission to user
         $this->call(
             'PUT',
             'railcontent/user-permission',
             [
-                'user_id' => $userId,
-                'permission_id' => $permission1['id'],
-                'start_date' => Carbon::now()
-                    ->toDateTimeString(),
+                'data' => [
+                    'attributes' => [
+                        'user_id' => $userId,
+                        'start_date' => Carbon::now()
+                            ->toDateTimeString(),
+                    ],
+                    'relationships' => [
+                        'permission' => [
+                            'data' => [
+                                'id' => $permission1[0]->getId(),
+                                'type' => 'permission',
+                            ],
+                        ],
+                    ],
+                ],
             ]
+
         );
 
         //both contents are returned to user
@@ -486,172 +501,90 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'sort' => 'id',
             ]
         );
-        $this->assertArraySubset([(array)$content1, (array)$content2], $response->decodeResponseJson('data'));
+
+        $this->assertEquals(2, $response->decodeResponseJson('meta')['pagination']['total']);
+        $this->assertEquals($content1[0]->getId(), $response->decodeResponseJson('data')[0]['id']);
+        $this->assertEquals($content1[1]->getId(), $response->decodeResponseJson('data')[1]['id']);
     }
 
-    public function _test_ttl_to_user_permission_start_date()
+    public function test_user_cache_deleted_when_user_permission_deleted()
     {
         $userId = $this->createAndLogInNewUser();
 
-        $userCacheKeys = CacheHelper::getUserSpecificHashedKey();
-
-        $content1 = $this->contentFactory->create();
-        $content2 = $this->contentFactory->create();
-        $permission1 = $this->permissionRepository->create(
+        $content = $this->fakeContent(
+            1,
             [
-                'name' => $this->faker->word,
+                'slug' => $this->faker->word,
+                'type' => $this->faker->word,
+                'status' => 'published',
                 'brand' => ConfigService::$brand,
-            ]
-        );
-        $contentPermission = $this->call(
-            'PUT',
-            'railcontent/permission/assign',
-            [
-                'content_id' => $content1['id'],
-                'permission_id' => $permission1['id'],
+                'publishedOn' => Carbon::now(),
             ]
         );
 
-        //only the content2 it's returned to the user
-        $response = $this->call(
-            'GET',
-            'railcontent/content',
-            [
-                'sort' => 'id',
-            ]
-        );
-        $this->assertArraySubset([(array)$content2], $response->decodeResponseJson('data'));
+        $permission = $this->fakePermission();
 
-        //assign permission to user
-        $this->call(
-            'PUT',
-            'railcontent/user-permission',
+        $this->fakeContentPermission(
+            1,
             [
-                'user_id' => $userId,
-                'permission_id' => $permission1['id'],
-                'start_date' => Carbon::now()
-                    ->addMinutes(60)
-                    ->toDateTimeString(),
+                'content' => $content[0],
+                'permission' => $permission[0],
             ]
         );
 
-        //both contents are returned to user
-        $response2 = $this->call(
-            'GET',
-            'railcontent/content',
+        $userPermission = $this->fakeUserPermission(
+            1,
             [
-                'sort' => 'id',
-            ]
-        );
-        // assert that the user receive only content 2
-        $this->assertArraySubset([(array)$content2], $response2->decodeResponseJson('data'));
-
-        //assert that the time to live was set for user cached keys
-        $this->assertNotEquals(
-            -1,
-            Redis::ttl(
-                $userCacheKeys
-            )
-        );
-
-        //assert ttl it's the seconds until permission activation date
-        $this->assertEquals(
-            60 * 60,
-            Redis::ttl(
-                $userCacheKeys
-            )
-        );
-    }
-
-    public function _test_user_cache_deleted_when_user_permission_deleted()
-    {
-        $userId = $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create();
-        $permission = $this->permissionRepository->create(
-            [
-                'name' => $this->faker->word,
-                'brand' => ConfigService::$brand,
-            ]
-        );
-        $contentPermission = $this->call(
-            'PUT',
-            'railcontent/permission/assign',
-            [
-                'content_id' => $content['id'],
-                'permission_id' => $permission['id'],
-            ]
-        );
-
-        $userPermission = $this->userPermissionRepository->create(
-            [
-                'user_id' => $userId,
-                'permission_id' => $permission['id'],
-                'start_date' => Carbon::now()
-                    ->toDateTimeString(),
-                'created_on' => Carbon::now()
-                    ->toDateTimeString(),
+                'userId' => $userId,
+                'permission' => $permission[0],
+                'startDate' => Carbon::now(),
+                'expirationDate' => null,
             ]
         );
 
         $response = $this->call(
             'GET',
-            'railcontent/content',
-            [
-                'sort' => 'id',
-            ]
+            'railcontent/content'
         );
-        $this->assertArraySubset([(array)$content], $response->decodeResponseJson('data'));
+
+        $this->assertTrue(in_array($content[0]->getId(), array_pluck($response->decodeResponseJson('data'), 'id')));
 
         $this->call(
             'DELETE',
-            'railcontent/user-permission/' . $userPermission['id']
+            'railcontent/user-permission/' . $userPermission[0]->getId()
         );
 
-        $this->assertEquals(
-            [],
-            Redis::hgetall(
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userId
-            )
+        $response = $this->call(
+            'GET',
+            'railcontent/content'
         );
+
+        $this->assertFalse(in_array($content[0]->getId(), array_pluck($response->decodeResponseJson('data'), 'id')));
+
     }
 
-    public function _test_user_multiple_permissions()
+    public function test_user_multiple_permissions()
     {
         $userId = $this->createAndLogInNewUser();
 
-        $userCacheKeys = CacheHelper::getUserSpecificHashedKey();
-
-        $content = $this->contentRepository->create(
+        $content = $this->fakeContent(
+            1,
             [
                 'slug' => $this->faker->word,
                 'type' => $this->faker->word,
                 'status' => 'published',
                 'brand' => ConfigService::$brand,
                 'language' => 'en',
-                'created_on' => Carbon::now()
-                    ->toDateTimeString(),
             ]
         );
 
-        $permission = $this->permissionRepository->create(
-            [
-                'name' => $this->faker->word,
-                'brand' => ConfigService::$brand,
-            ]
-        );
+        $permission = $this->fakePermission(2);
 
-        $permission2 = $this->permissionRepository->create(
+        $contentPermission = $this->fakeContentPermission(
+            1,
             [
-                'name' => $this->faker->word,
-                'brand' => ConfigService::$brand,
-            ]
-        );
-
-        $contentPermission = $this->contentPermissionRepository->create(
-            [
-                'content_id' => $content['id'],
-                'permission_id' => $permission['id'],
+                'content' => $content[0],
+                'permission' => $permission[0],
             ]
         );
 
@@ -659,42 +592,65 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/user-permission',
             [
-                'user_id' => $userId,
-                'permission_id' => $permission['id'],
-                'start_date' => Carbon::now()
-                    ->subDay(1)
-                    ->toDateTimeString(),
-                'expiration_date' => Carbon::now()
-                    ->addDays(3)
-                    ->toDateTimeString(),
+                'data' => [
+                    'attributes' => [
+                        'user_id' => $userId,
+                        'start_date' => Carbon::now()
+                            ->subDay(1)
+                            ->toDateTimeString(),
+                        'expiration_date' => Carbon::now()
+                            ->addDays(3)
+                            ->toDateTimeString(),
+                    ],
+                    'relationships' => [
+                        'permission' => [
+                            'data' => [
+                                'id' => $permission[0]->getId(),
+                                'type' => 'permission',
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
         $this->call(
             'GET',
-            'railcontent/content',
-            [
-                'sort' => 'id',
-            ]
+            'railcontent/content'
         );
 
         $this->call(
             'PUT',
             'railcontent/user-permission',
             [
-                'user_id' => $userId,
-                'permission_id' => $permission2['id'],
-                'start_date' => Carbon::now()
-                    ->addDays(5)
-                    ->toDateTimeString(),
+                'data' => [
+                    'attributes' => [
+                        'user_id' => $userId,
+                        'start_date' => Carbon::now()
+                            ->addHour(1)
+                            ->toDateTimeString(),
+                        'expiration_date' => Carbon::now()
+                            ->addDays(3)
+                            ->toDateTimeString(),
+                    ],
+                    'relationships' => [
+                        'permission' => [
+                            'data' => [
+                                'id' => $permission[1]->getId(),
+                                'type' => 'permission',
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
+        $cacheKeys = Redis::keys('*pull*');
+        $redisTTL = Redis::ttl($cacheKeys[0]);
 
-        //expected 5 days in seconds (the expiration date for user's permission 1)
-        $recentExpirationSeconds = 5 * 24 * 60 * 60;
-
-        $redisTTL = Redis::ttl($userCacheKeys);
+        //expected 1 hour in seconds (the expiration date for user's permission 1)
+        $recentExpirationSeconds = 1 * 60 * 60;
 
         $this->assertEquals($recentExpirationSeconds, $redisTTL);
     }
+
 }

@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\PermissionRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_permissions")
+ * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */
 class Permission

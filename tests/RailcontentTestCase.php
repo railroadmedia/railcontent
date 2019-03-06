@@ -38,6 +38,10 @@ use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Services\RemoteStorageService;
+use Railroad\Railcontent\Tests\Fixtures\UserProvider;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
+use Railroad\Doctrine\Contracts\UserProviderInterface as DoctrineUserProviderInterface;
+use Railroad\DoctrineArrayHydrator\Contracts\UserProviderInterface as DoctrineArrayHydratorUserProviderInterface;
 use Railroad\Railcontent\Tests\Resources\Models\User;
 
 class RailcontentTestCase extends BaseTestCase
@@ -112,6 +116,13 @@ class RailcontentTestCase extends BaseTestCase
                 $this->entityManager->getConnection()
                     ->getWrappedConnection()
             );
+
+
+        $userProvider = new UserProvider();
+
+        $this->app->instance(UserProviderInterface::class, $userProvider);
+        $this->app->instance(DoctrineArrayHydratorUserProviderInterface::class, $userProvider);
+        $this->app->instance(\Railroad\Doctrine\Contracts\UserProviderInterface::class, $userProvider);
 
         $this->artisan('migrate:fresh', []);
         $this->artisan('cache:clear', []);
@@ -299,26 +310,29 @@ class RailcontentTestCase extends BaseTestCase
         // vimeo
         $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);
 
-        //        if (!$app['db']->connection()
-        //            ->getSchemaBuilder()
-        //            ->hasTable('users')) {
-        //
-        //            $app['db']->connection()
-        //                ->getSchemaBuilder()
-        //                ->create(
-        //                    'users',
-        //                    function (Blueprint $table) {
-        //                        $table->increments('id');
-        //                        $table->string('email');
-        //                    }
-        //                );
-        //
-        //        }
-
         // register provider
         $app->register(DoctrineServiceProvider::class);
         $app->register(RailcontentServiceProvider::class);
         $app->register(PermissionsServiceProvider::class);
+
+        $app->bind(
+            'UserProviderInterface',
+            function () {
+                $mock =
+                    $this->getMockBuilder('UserProviderInterface')
+                        ->setMethods(['create'])
+                        ->getMock();
+
+                $mock->method('create')
+                    ->willReturn(
+                        [
+                            'id' => 1,
+                            'email' => $this->faker->email,
+                        ]
+                    );
+                return $mock;
+            }
+        );
     }
 
     /**

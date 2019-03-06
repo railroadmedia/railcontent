@@ -27,7 +27,7 @@ class ContentService
     /**
      * @var EntityManager
      */
-    private $entityManager;
+    public $entityManager;
 
     /**
      * @var ContentRepository

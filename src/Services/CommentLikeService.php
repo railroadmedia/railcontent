@@ -7,7 +7,6 @@ use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentLikes;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\CommentUnLiked;
-use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\CommentLikeRepository;
 use Railroad\Railcontent\Repositories\CommentRepository;
 
@@ -108,7 +107,7 @@ class CommentLikeService
         $this->entityManager->persist($commentLikes);
         $this->entityManager->flush();
 
-        CacheHelper::deleteAllCachedSearchResults('get_comments_');
+       $this->entityManager->getCache()->evictEntity(Comment::class, $commentId);
 
         event(new CommentLiked($commentId, $userId));
 
@@ -133,7 +132,7 @@ class CommentLikeService
         $this->entityManager->remove($commentLikes);
         $this->entityManager->flush();
 
-        CacheHelper::deleteAllCachedSearchResults('get_comments_');
+        $this->entityManager->getCache()->evictEntity(Comment::class, $commentId);
 
         event(new CommentUnLiked($commentId, $userId));
 

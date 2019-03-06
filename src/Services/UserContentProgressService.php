@@ -4,13 +4,10 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
-use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Events\UserContentsProgressReset;
-use Railroad\Railcontent\Helpers\CacheHelper;
-use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Support\Collection;
 
@@ -27,11 +24,6 @@ class UserContentProgressService
      * @var ContentHierarchyService
      */
     private $contentHierarchyService;
-
-    /**
-     * @var ContentRepository
-     */
-    private $contentRepository;
 
     /**
      * @var ContentService
@@ -322,21 +314,7 @@ class UserContentProgressService
         event(new UserContentProgressSaved($userId, $contentId));
 
         //delete user progress from cache
-        CacheHelper::deleteUserFields(
-            [
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userId,
-            ],
-            'user_progress'
-        );
-
-        CacheHelper::deleteUserFields(
-            [
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userId,
-            ],
-            'content'
-        );
+        $this->entityManager->getCache()->evictEntityRegion(Content::class);
 
         return true;
     }
@@ -392,13 +370,7 @@ class UserContentProgressService
         $this->entityManager->persist($userContentProgress);
         $this->entityManager->flush();
 
-        CacheHelper::deleteUserFields(
-            [
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userId,
-            ],
-            'user_progress'
-        );
+        $this->entityManager->getCache()->evictEntityRegion(Content::class);
 
         UserContentProgressRepository::$cache = [];
 

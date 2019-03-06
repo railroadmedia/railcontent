@@ -2,9 +2,10 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-
+use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Decorators\Decorator;
@@ -216,42 +217,8 @@ class ContentRepository extends EntityRepository
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->orderBy(implode(', ', $orderByColumns))
                 ->restrictByFields($this->requiredFields);
-        return $qb;
 
-        //        $subQuery =
-        //            $this->newQuery()
-        //                ->selectCountColumns()
-        //                ->orderByRaw(
-        //                    implode(', ', $orderByColumns) . ' ' . $this->orderDirection
-        //                )
-        //                ->restrictByUserAccess()
-        //                ->directPaginate($this->page, $this->limit)
-        //                ->restrictByFields($this->requiredFields)
-        //                ->includeByFields($this->includedFields)
-        //                ->restrictByUserStates($this->requiredUserStates)
-        //                ->includeByUserStates($this->includedUserStates)
-        //                ->restrictByTypes($this->typesToInclude)
-        //                ->restrictBySlugHierarchy($this->slugHierarchy)
-        //                ->restrictByParentIds($this->requiredParentIds)
-        //                ->groupBy(
-        //                    array_merge(
-        //                        [
-        //                            ConfigService::$tableContent . '.id',
-        //                            ConfigService::$tableContent . '.' . 'created_on',
-        //                        ],
-        //                        $groupByColumns
-        //                    )
-        //                );
-        //
-        //        $query =
-        //            $this->query()
-        //                ->orderByRaw(
-        //                    implode(', ', $orderByColumns) . ' ' . $this->orderDirection
-        //                )
-        //                ->addSubJoinToQuery($subQuery)
-        //                ->get();
-        //
-        //        return $query;
+        return $qb;
     }
 
     /**
@@ -300,7 +267,6 @@ class ContentRepository extends EntityRepository
                 ->getResult();
 
         return $this->parseAvailableFields($possibleContentFields);
-
     }
 
     /**
@@ -424,6 +390,26 @@ class ContentRepository extends EntityRepository
     public function build()
     {
         $qb = new ContentQueryBuilder($this->getEntityManager());
+
+        $userPermissionRepository =
+            $this->getEntityManager()
+                ->getRepository(UserPermission::class);
+
+        $userPermission = $userPermissionRepository->getUserPermissions(auth()->id(), true);
+
+        if ($userPermission) {
+            $lifetime =
+                Carbon::parse($userPermission[0]->getExpirationDate())
+                    ->diffInSeconds(Carbon::now());
+
+            $this->getEntityManager()
+                ->getConfiguration()
+                ->getSecondLevelCacheConfiguration()
+                ->getRegionsConfiguration()
+                ->setDefaultLifetime(
+                    $lifetime
+                );
+        }
 
         return $qb->select(config('railcontent.table_prefix') . 'content')
             ->from($this->getEntityName(), config('railcontent.table_prefix') . 'content');

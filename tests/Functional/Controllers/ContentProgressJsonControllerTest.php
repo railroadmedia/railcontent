@@ -769,12 +769,15 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $contentId = $content[0]->getId();
         $randomPercent = $this->faker->randomNumber(2);
 
-        $this->fakeUserContentProgress(1,[
-            'userId' => $userId,
-            'content' => $content[0],
-            'state' => 'started',
-            'progressPercent' => $randomPercent
-        ]);
+        $this->fakeUserContentProgress(
+            1,
+            [
+                'userId' => $userId,
+                'content' => $content[0],
+                'state' => 'started',
+                'progressPercent' => $randomPercent,
+            ]
+        );
 
         $response = $this->put(
             'railcontent/reset',
@@ -843,27 +846,36 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->fakeHierarchy(1,[
-            'parent' => $content[0],
-            'child' => $content[1]
-        ]);
+        $this->fakeHierarchy(
+            1,
+            [
+                'parent' => $content[0],
+                'child' => $content[1],
+            ]
+        );
 
         $contentId = $content[0]->getId();
 
-        $this->fakeUserContentProgress(1,[
-            'userId' => $userId,
-            'content' => $content[1],
-            'state' => 'started',
-            'progressPercent' => 10
-        ]);
+        $this->fakeUserContentProgress(
+            1,
+            [
+                'userId' => $userId,
+                'content' => $content[1],
+                'state' => 'started',
+                'progressPercent' => 10,
+            ]
+        );
         $randomPercent = $this->faker->randomNumber(2);
 
-        $this->fakeUserContentProgress(1,[
-            'userId' => $userId,
-            'content' => $content[0],
-            'state' => 'started',
-            'progressPercent' => ($randomPercent+10)/2
-        ]);
+        $this->fakeUserContentProgress(
+            1,
+            [
+                'userId' => $userId,
+                'content' => $content[0],
+                'state' => 'started',
+                'progressPercent' => ($randomPercent + 10) / 2,
+            ]
+        );
 
         $response = $this->put(
             'railcontent/reset',
@@ -898,6 +910,78 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
                 'user_id' => $userId,
             ]
         );
+    }
+
+    public function test_reset_progress_cache_invalidation()
+    {
+        $userId = $this->createAndLogInNewUser();
+
+        $content = $this->fakeContent(
+            3,
+            [
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+                'brand' => config('railcontent.brand'),
+            ]
+        );
+
+        $contentId = $content[0]->getId();
+
+        $this->fakeUserContentProgress(
+            1,
+            [
+                'userId' => $userId,
+                'content' => $content[1],
+                'state' => 'completed',
+                'progressPercent' => 100,
+            ]
+        );
+        $randomPercent = $this->faker->randomNumber(2);
+
+        $this->fakeUserContentProgress(
+            1,
+            [
+                'userId' => $userId,
+                'content' => $content[0],
+                'state' => 'completed',
+                'progressPercent' => 100,
+            ]
+        );
+
+        $firstRequest = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'required_user_states' => ['completed'],
+            ]
+        );
+
+        $this->assertEquals(2, $firstRequest->decodeResponseJson('meta')['pagination']['total']);
+
+        $this->put(
+            'railcontent/reset',
+            [
+                'data' => [
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $contentId,
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        $secondRequest = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'required_user_states' => ['completed'],
+            ]
+        );
+
+        $this->assertEquals(1, $secondRequest->decodeResponseJson('meta')['pagination']['total']);
     }
 
 }

@@ -5,7 +5,6 @@ namespace Railroad\Railcontent\Services;
 use Doctrine\ORM\EntityManager;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentHierarchy;
-use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 
 class ContentHierarchyService

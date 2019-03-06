@@ -26,37 +26,33 @@ class UserPermissionsRepository extends EntityRepository
      */
     public function getUserPermissions($userId, $onlyActive)
     {
-        $query =
-            $this->query()
-                ->join(
-                    ConfigService::$tablePermissions,
-                    function (JoinClause $join) {
-                        $join->on(
-                            ConfigService::$tablePermissions . '.id',
-                            '=',
-                            ConfigService::$tableUserPermissions . '.permission_id'
-                        );
-                    }
-                );
-        if ($onlyActive) {
-            $query = $query->where(
-                function ($query) {
-                    $query->whereDate(
-                        'expiration_date',
-                        '>=',
-                        Carbon::now()
-                            ->toDateTimeString()
-                    )
-                        ->orWhereNull('expiration_date');
-                }
-            );
-        }
+        $qb = $this->createQueryBuilder('up');
+
         if ($userId) {
-            $query = $query->where(ConfigService::$tableUserPermissions . '.user_id', $userId);
+            $qb->where('up.userId = :user')
+                ->setParameter('user', $userId)
+            ->orderBy('up.expirationDate', 'asc');
         }
 
-        return $query->get()
-            ->toArray();
+        if ($onlyActive) {
+            $qb->andWhere(
+                $qb->expr()
+                    ->orX(
+                        $qb->expr()
+                            ->isNull('up.expirationDate'),
+                        $qb->expr()
+                            ->gte('up.expirationDate', ':expirationDate')
+                    )
+            )
+                ->setParameter(
+                    'expirationDate',
+                    Carbon::now()
+                        ->toDateTimeString()
+                );
+        }
+
+        return $qb->getQuery()
+            ->getResult();
     }
 
     /**

@@ -4,11 +4,9 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redis;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Entities\UserPermission;
-use Railroad\Railcontent\Helpers\CacheHelper;
 
 class UserPermissionsService
 {
@@ -79,6 +77,9 @@ class UserPermissionsService
         $this->entityManager->persist($userPermission);
         $this->entityManager->flush();
 
+        $this->entityManager->getCache()
+            ->evictEntityRegion(Content::class);
+
         return $userPermission;
     }
 
@@ -95,15 +96,11 @@ class UserPermissionsService
             return $userPermission;
         }
 
-        //delete the cache for user
-        CacheHelper::deleteCacheKeys(
-            [
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userPermission->getUserId(),
-            ]
-        );
         $this->entityManager->remove($userPermission);
         $this->entityManager->flush();
+
+        $this->entityManager->getCache()
+            ->evictEntityRegion(Content::class);
 
         return true;
     }
@@ -173,7 +170,7 @@ class UserPermissionsService
             [
                 'userId' => $userId,
                 'permission' => $this->entityManager->getRepository(Permission::class)
-                    ->findOneBy(['name' => $permissionName])
+                    ->findOneBy(['name' => $permissionName]),
             ]
         );
 
@@ -191,35 +188,34 @@ class UserPermissionsService
      */
     private function setTTLOrDeleteUserCache($userId, $startDate)
     {
+        $regionConfig =
+            $this->entityManager->getConfiguration()
+                ->getSecondLevelCacheConfiguration();
+
         if ($startDate ==
             Carbon::now()
                 ->toDateTimeString()) {
 
             //should delete the cache for user
-            CacheHelper::deleteCacheKeys(
-                [
-                    Cache::store(ConfigService::$cacheDriver)
-                        ->getPrefix() . 'userId_' . $userId,
-                ]
-            );
+            $this->entityManager->getCache()
+                ->evictEntityRegion(Content::class);
         } else {
-            $existingTTL = Redis::ttl(
-                Cache::store(ConfigService::$cacheDriver)
-                    ->getPrefix() . 'userId_' . $userId
-            );
+
+            $existingTTL =
+                $regionConfig->getRegionsConfiguration()
+                    ->getDefaultLifetime();
 
             if ((Carbon::parse($startDate)
-                    ->gt(Carbon::now())) &&
+                    ->gte(Carbon::now()) &&
                 (($existingTTL == -2) ||
                     ($existingTTL >
                         Carbon::parse($startDate)
-                            ->diffInSeconds(Carbon::now())))) {
-                CacheHelper::setTimeToLiveForKey(
-                    Cache::store(ConfigService::$cacheDriver)
-                        ->getPrefix() . 'userId_' . $userId,
-                    Carbon::parse($startDate)
-                        ->diffInSeconds(Carbon::now())
-                );
+                            ->diffInSeconds(Carbon::now()))))) {
+                $regionConfig->getRegionsConfiguration()
+                    ->setDefaultLifetime(
+                        Carbon::parse($startDate)
+                            ->diffInSeconds(Carbon::now())
+                    );
             }
         }
     }

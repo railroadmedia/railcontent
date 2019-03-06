@@ -8,7 +8,6 @@ use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Events\ContentDatumCreated;
 use Railroad\Railcontent\Events\ContentDatumDeleted;
 use Railroad\Railcontent\Events\ContentDatumUpdated;
-use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 
 class ContentDatumService
@@ -46,8 +45,11 @@ class ContentDatumService
      */
     public function getByContentIds(array $contentIds)
     {
-        return $this->datumRepository->query()
-            ->getByContentIds($contentIds);
+        return $this->datumRepository->createQueryBuilder('d')
+            ->where('content IN (:contents)')
+            ->setParameter('contents', $contentIds)
+            ->getQuery()
+            ->getResult();
     }
 
     /**
@@ -76,7 +78,8 @@ class ContentDatumService
         //call the event that save a new content version in the database
         event(new ContentDatumCreated($contentId));
 
-        $this->entityManager->getCache()->evictEntityRegion(Content::class);
+        $this->entityManager->getCache()
+            ->evictEntityRegion(Content::class);
 
         return $this->get($contentDatum->getId());
     }
@@ -100,12 +103,11 @@ class ContentDatumService
             return $datum;
         }
 
-        $position =
-            $this->recalculatePosition(
-                $data['key'] ?? $datum->getKey(),
-                $data['position'] ?? $datum->getPosition(),
-                $datum->getContent()
-            );
+        $position = $this->recalculatePosition(
+            $data['key'] ?? $datum->getKey(),
+            $data['position'] ?? $datum->getPosition(),
+            $datum->getContent()
+        );
 
         $datum->setKey($data['key'] ?? $datum->getKey());
         $datum->setValue($data['value'] ?? $datum->getValue());
@@ -122,7 +124,12 @@ class ContentDatumService
             )
         );
 
-        $this->entityManager->getCache()->evictEntity(Content::class, $datum->getContent()->getId());
+        $this->entityManager->getCache()
+            ->evictEntity(
+                Content::class,
+                $datum->getContent()
+                    ->getId()
+            );
 
         return $this->get($id);
     }
@@ -151,7 +158,12 @@ class ContentDatumService
         );
 
         //delete cache associated with the content id
-        $this->entityManager->getCache()->evictEntity(Content::class, $datum->getContent()->getId());
+        $this->entityManager->getCache()
+            ->evictEntity(
+                Content::class,
+                $datum->getContent()
+                    ->getId()
+            );
 
         return true;
     }

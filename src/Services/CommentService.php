@@ -9,7 +9,6 @@ use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
-use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
@@ -113,9 +112,13 @@ class CommentService
         $this->entityManager->persist($comment);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()->evictEntity(Content::class, $contentId);
+        $this->entityManager->getCache()
+            ->evictEntity(Content::class, $contentId);
 
-         event(new CommentCreated($comment->getId(), $userId, $parentId, $comment));
+        $this->entityManager->getCache()
+            ->evictEntityRegion(Comment::class);
+
+        event(new CommentCreated($comment->getId(), $userId, $parentId, $comment));
 
         return $comment;
     }
@@ -152,11 +155,19 @@ class CommentService
             return $comment;
         }
 
-        $this->entityManager->getCache()->evictEntity(Content::class, $comment->getContent()->getId());
+        $this->entityManager->getCache()
+            ->evictEntity(
+                Content::class,
+                $comment->getContent()
+                    ->getId()
+            );
 
         $this->jsonApiHidrator->hydrate($comment, $data);
 
         $this->entityManager->flush();
+
+        $this->entityManager->getCache()
+            ->evictEntity(Comment::class, $id);
 
         return $comment;
     }
@@ -189,7 +200,12 @@ class CommentService
         //trigger an event that delete the corresponding comment assignments if the deletion it's not soft
         event(new CommentDeleted($id));
 
-        $this->entityManager->getCache()->evictEntity(Content::class, $comment->getContent()->getId());
+        $this->entityManager->getCache()
+            ->evictEntity(
+                Content::class,
+                $comment->getContent()
+                    ->getId()
+            );
 
         if ($isSoftDelete) {
             $comment->setDeletedAt(Carbon::now());
@@ -198,6 +214,9 @@ class CommentService
             $this->entityManager->remove($comment);
             $this->entityManager->flush();
         }
+
+        $this->entityManager->getCache()
+            ->evictEntityRegion(Comment::class);
 
         return true;
     }
@@ -234,72 +253,14 @@ class CommentService
      */
     public function getComments($page = 1, $limit = 25, $orderByAndDirection = '-created_on', $currentUserId = null)
     {
-        $hash =
-            'get_comments_' .
-            (CommentRepository::$availableContentId ?? '') .
-            '_' .
-            (CommentRepository::$assignedToUserId ?? '') .
-            '_' .
-            (CommentRepository::$availableContentType ?? '') .
-            '_' .
-            (CommentRepository::$availableUserId ?? '') .
-            '_' .
-            CacheHelper::getKey($page, $limit, $orderByAndDirection);
+        $qb = $this->getQb($page, $limit, $orderByAndDirection);
 
-        $results = CacheHelper::getCachedResultsForKey($hash);
-
-        if (!$results) {
-
-            $qb = $this->getQb($page, $limit, $orderByAndDirection);
-
-            $results =
-                $qb->getQuery()
-                    ->getResult();
-
-            //            if ($results['total_results'] > 0) {
-            //                $contentIds = $results['results']->pluck('content_id');
-            //            } else {
-            //                $contentIds = null;
-            //            }
-            //            $results = CacheHelper::saveUserCache($hash, $results, $contentIds);
-        }
+        $results =
+            $qb->getQuery()
+                ->setCacheable(true)
+                ->getResult();
 
         return $results;
-    }
-
-    /**
-     * @param array $contentOrContents
-     * @return array
-     */
-    public function attachCommentsToContents($contentOrContents)
-    {
-        /*
-         * Remember comments *are* arrays, so here have to distinguish between a single comment
-         * *not* nested in another array and an array containing any number of "comment-arrays".
-         */
-        $arrayOfCommentsPassedIn = !isset($contentOrContents['id']);
-
-        if (!$arrayOfCommentsPassedIn) {
-            $contentOrContents = [$contentOrContents];
-        }
-
-        foreach ($contentOrContents as $index => $content) {
-            CommentRepository::$availableContentId = $content['id'];
-
-            $comments = $this->getComments(1, null);
-
-            $contentOrContents[$index]['comments'] = [];
-
-            foreach ($comments['results'] as $comment) {
-                $contentOrContents[$index]['comments'][] = $comment;
-            }
-        }
-
-        if ($arrayOfCommentsPassedIn) {
-            return $contentOrContents;
-        } else {
-            return reset($contentOrContents);
-        }
     }
 
     /**

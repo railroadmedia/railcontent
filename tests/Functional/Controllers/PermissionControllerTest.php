@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Carbon\Carbon;
 use Faker\ORM\Doctrine\Populator;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\Permission;
@@ -78,6 +79,7 @@ class PermissionControllerTest extends RailcontentTestCase
                 ],
             ]
         );
+
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals(
             [
@@ -558,5 +560,239 @@ class PermissionControllerTest extends RailcontentTestCase
             ConfigService::$tableContentPermissions,
             ['content_type' => 'course', 'permission_id' => $permission[0]->getId()]
         );
+    }
+
+    public function test_content_filter_after_permission_assignation()
+    {
+        $type = $this->faker->word;
+
+        $contents = $this->fakeContent(
+            10,
+            [
+                'status' => 'published',
+                'type' => $type,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+
+        $types = [$type, $this->faker->word];
+        $page = 1;
+        $limit = 10;
+
+        $firstRequest = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => 'id',
+                'included_types' => $types,
+            ]
+        );
+        $this->assertTrue(
+            in_array($contents[0]->getId(), array_pluck($firstRequest->decodeResponseJson('data'), 'id'))
+        );
+
+        $permission = $this->fakePermission();
+
+        $this->call(
+            'PUT',
+            'railcontent/permission/assign',
+            [
+                'data' => [
+                    'type' => 'contentPermission',
+                    'attributes' => [
+                        'brand' => config('railcontent.brand'),
+                    ],
+                    'relationships' => [
+                        'permission' => [
+                            'data' => [
+                                'type' => 'permission',
+                                'id' => $permission[0]->getId(),
+                            ],
+                        ],
+                        'content' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => $contents[0]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        $secondRequest = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => 'id',
+                'included_types' => $types,
+            ]
+        );
+
+        $this->assertEquals(
+            $secondRequest->decodeResponseJson('meta')['pagination']['total'],
+            $firstRequest->decodeResponseJson('meta')['pagination']['total'] - 1
+        );
+
+        $this->assertFalse(
+            in_array($contents[0]->getId(), array_pluck($secondRequest->decodeResponseJson('data'), 'id'))
+        );
+    }
+
+    public function test_content_filter_after_type_permission_assignation()
+    {
+        $type = $this->faker->word;
+
+        $contents = $this->fakeContent(
+            10,
+            [
+                'status' => 'published',
+                'type' => $type,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+
+        $types = [$type, $this->faker->word];
+        $page = 1;
+        $limit = 10;
+
+        $firstRequest = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => 'id',
+                'included_types' => $types,
+            ]
+        );
+
+        $this->assertTrue(
+            in_array(
+                $contents[0]->getType(),
+                array_pluck(array_pluck($firstRequest->decodeResponseJson('data'), 'attributes'), 'type')
+            )
+        );
+
+        $permission = $this->fakePermission();
+
+        $a = $this->call(
+            'PUT',
+            'railcontent/permission/assign',
+            [
+                'data' => [
+                    'type' => 'contentPermission',
+                    'attributes' => [
+                        'brand' => config('railcontent.brand'),
+                        'content_type' => $contents[0]->getType(),
+                    ],
+                    'relationships' => [
+                        'permission' => [
+                            'data' => [
+                                'type' => 'permission',
+                                'id' => $permission[0]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        $secondRequest = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => 'id',
+                'included_types' => $types,
+            ]
+        );
+
+        $this->assertFalse(
+            in_array(
+                $contents[0]->getType(),
+                array_pluck(array_pluck($secondRequest->decodeResponseJson('data'), 'attributes'), 'type')
+            )
+        );
+    }
+
+    public function test_contents_filter_without_rights()
+    {
+        $user = $this->createAndLogInNewUser();
+
+        $type = $this->faker->word;
+
+        $contents = $this->fakeContent(
+            10,
+            [
+                'status' => 'published',
+                'type' => $type,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+
+        $permission = $this->fakePermission();
+
+        $this->fakeContentPermission(1,[
+            'content' => $contents[0],
+            'permission' => $permission[0]
+        ]);
+
+
+        $types = [$type, $this->faker->word];
+        $page = 1;
+        $limit = 10;
+
+        $firstRequest = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => 'id',
+                'included_types' => $types,
+            ]
+        );
+
+        $this->assertEquals(9, $firstRequest->decodeResponseJson('meta')['pagination']['total']);
+
+        $response = $this->call('PATCH', 'railcontent/permission/dissociate/', [
+            'data' => [
+                'type' => 'contentPermission',
+                'relationships' => [
+                    'permission' => [
+                        'data' => [
+                            'type' => 'permission',
+                            'id' => $permission[0]->getId(),
+                        ],
+                    ],
+                    'content' => [
+                        'data' => [
+                            'type' => 'content',
+                            'id' => $contents[0]->getId(),
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+        $secondRequest = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => 'id',
+                'included_types' => $types,
+            ]
+        );
+        $this->assertEquals(10, $secondRequest->decodeResponseJson('meta')['pagination']['total']);
     }
 }

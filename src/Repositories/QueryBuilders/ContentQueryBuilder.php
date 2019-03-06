@@ -405,7 +405,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                     $this->expr()
                         ->eq('railcontent_content.id', 'content_permission.content'),
                     $this->expr()
-                        ->eq('railcontent_content.id', 'content_permission.contentType')
+                        ->eq('railcontent_content.type', 'content_permission.contentType')
                 )
         )
             ->leftJoin(

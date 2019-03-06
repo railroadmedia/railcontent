@@ -72,10 +72,17 @@ class ExpireCache extends Command
             ->setParameter('publishedOn', $lastExecutionTime);
 
         $contents = $qb->getQuery()->getResult();
-
-        if (!empty($contents)) {
-            CacheHelper::deleteUserFields(null, 'contents');
-        }
+//TODO : delete cache
+//        if (!empty($contents)) {
+//            foreach($contents as $content) {
+//                $this->contentRepository->getEntityManagers()
+//                    ->getCache()
+//                    ->evictQueryRegions();
+//                $this->contentRepository->getEntityManagers()
+//                    ->getCache()
+//                    ->evictEntityRegion(Content::class);
+//            }
+//        }
 
         //update last execution time to current time
         Cache::store(ConfigService::$cacheDriver)->delete('expireCacheCommand');

@@ -46,7 +46,7 @@ class ExpireCacheTest extends RailcontentTestCase
 
         $this->artisan('command:expireCache');
         $this->assertTrue(Cache::store(ConfigService::$cacheDriver)->has('expireCacheCommand'));
-        $this->assertEquals(0, count(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys('*contents*')));
 
+        $this->assertEquals(0, count(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys('*content*')));
     }
 }
