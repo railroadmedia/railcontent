@@ -448,10 +448,19 @@ class UserContentProgressService
 
         $parents = $this->attachProgressToContents(
             $userId,
-            $this->contentService->getByChildIdWhereParentTypeIn(
-                $content['id'],
-                $allowedTypes
-            )
+            $this->contentRepository->query()
+                ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->leftJoin(
+                    ConfigService::$tableContentHierarchy,
+                    ConfigService::$tableContentHierarchy . '.parent_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                ->where(ConfigService::$tableContentHierarchy . '.child_id', $content['id'])
+                ->whereIn(ConfigService::$tableContent . '.type', $allowedTypes)
+                ->selectInheritenceColumns()
+                ->getToArray()
         );
 
         foreach ($parents as $parent) {
@@ -473,9 +482,15 @@ class UserContentProgressService
             ContentRepository::$availableContentStatues =
                 [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
 
+            $contentFakeArray = [];
+
+            foreach ($this->contentHierarchyService->getByParentIds([$parent['id']]) as $hierarchyRow) {
+                $contentFakeArray[] = ['id' => $hierarchyRow['child_id']];
+            }
+
             $siblings = $parent['lessons'] ?? $this->attachProgressToContents(
                     $userId,
-                    $this->contentService->getByParentId($parent['id'])
+                    $contentFakeArray
                 );
 
             ContentRepository::$bypassPermissions = $oldBypassPermissions;

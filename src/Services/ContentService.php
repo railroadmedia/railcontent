@@ -77,6 +77,8 @@ class ContentService
     const STATUS_ARCHIVED = 'archived';
     const STATUS_DELETED = 'deleted';
 
+    private $arrayCache = [];
+
     /**
      * ContentService constructor.
      *
@@ -122,13 +124,19 @@ class ContentService
     {
         $hash = 'contents_by_id_' . CacheHelper::getKey($id);
 
+        if (isset($this->idContentCache[$hash])) {
+            return $this->idContentCache[$hash];
+        }
+
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
             $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getById($id), [$id]);
         }
 
-        return Decorator::decorate($results, 'content');
+        $this->idContentCache[$hash] = Decorator::decorate($results, 'content');
+
+        return $this->idContentCache[$hash];
     }
 
     /**
@@ -141,13 +149,19 @@ class ContentService
     {
         $hash = 'contents_by_ids_' . CacheHelper::getKey(...$ids);
 
+        if (isset($this->idContentCache[$hash])) {
+            return $this->idContentCache[$hash];
+        }
+
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
             $results = CacheHelper::saveUserCache($hash, $this->contentRepository->getByIds($ids));
         }
 
-        return Decorator::decorate($results, 'content');
+        $this->idContentCache[$hash] = Decorator::decorate($results, 'content');
+
+        return $this->idContentCache[$hash];
     }
 
     /**
