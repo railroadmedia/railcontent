@@ -1,21 +1,11 @@
 <?php
 
-
 use Carbon\Carbon;
-use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Helpers\CacheHelper;
-use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ExpireCacheTest extends RailcontentTestCase
 {
-    /**
-     * @var ContentFactory
-     */
-    private $contentFactory;
-
     /**
      * @var ContentService
      */
@@ -24,29 +14,68 @@ class ExpireCacheTest extends RailcontentTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->contentFactory = $this->app->make(ContentFactory::class);
+
         $this->contentService = $this->app->make(ContentService::class);
     }
 
     public function test_command()
     {
-        CacheHelper::setPrefix();
+        $logger = new \Doctrine\ORM\Cache\Logging\StatisticsCacheLogger();
+
+        $this->entityManager->getConfiguration()
+            ->getSecondLevelCacheConfiguration()
+            ->setCacheLogger($logger);
+
         $type = $this->faker->word;
 
-        $content1 = $this->fakeContent(1,[
-            'type' => $type,
-            'status' => ContentService::STATUS_PUBLISHED,
-            'brand' => config('railcontent.brand'),
-            'publishedOn' => Carbon::now(),
-            'userId' => null
-        ]);
+        $content1 = $this->fakeContent(
+            100,
+            [
+                'type' => $type,
+                'status' => ContentService::STATUS_PUBLISHED,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+                'userId' => null,
+            ]
+        );
 
-        $results =  $this->contentService->getAllByType($type);
+        $this->contentService->getAllByType($type);
 
+        $this->assertEquals(1, $logger->getRegionMissCount('pull'));
+        $this->assertEquals(0, $logger->getRegionHitCount('pull'));
+
+        $this->contentService->getAllByType($type);
+
+        $this->assertEquals(1, $logger->getRegionMissCount('pull'));
+        $this->assertEquals(1, $logger->getRegionHitCount('pull'));
 
         $this->artisan('command:expireCache');
-        $this->assertTrue(Cache::store(ConfigService::$cacheDriver)->has('expireCacheCommand'));
 
-        $this->assertEquals(0, count(Cache::store(ConfigService::$cacheDriver)->getRedis()->keys('*content*')));
+        //clear logger stats
+        $logger->clearStats();
+
+        $this->assertTrue(
+            count(
+                $this->entityManager->getConfiguration()
+                    ->getMetadataCacheImpl()
+                    ->getRedis()
+                    ->keys('*expireCache*')
+            ) > 0
+        );
+
+        $this->assertEquals(
+            0,
+            count(
+                $this->entityManager->getConfiguration()
+                    ->getMetadataCacheImpl()
+                    ->getRedis()
+                    ->keys('*entities.content*')
+            )
+        );
+
+        $this->contentService->getAllByType($type);
+
+        //assert cache entry not found; the cache was cleared
+        $this->assertEquals(1, $logger->getRegionMissCount('pull'));
     }
 }
