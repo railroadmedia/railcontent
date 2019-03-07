@@ -149,6 +149,17 @@ trait ContentFieldsAssociations
     }
 
     /**
+     * @param ContentInstructor $instructor
+     * @return $this
+     */
+    public function setInstructor($instructor)
+    {
+        $this->instructor = $instructor;
+
+        return $this;
+    }
+
+    /**
      * @param ContentInstructor $contentInstructor
      */
     public function removeInstructor(ContentInstructor $contentInstructor)

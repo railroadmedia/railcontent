@@ -568,7 +568,18 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_get_content_by_id()
     {
-        $content = $this->fakeContent();
+        $content = $this->fakeContent(
+            1,
+            [
+                'slug' => $this->faker->slug,
+                'status' => 'published',
+                'type' => $this->faker->word,
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
 
         $start1 = microtime(true);
         $contentResponse1 = $this->classBeingTested->getById($content[0]->getId());
@@ -586,7 +597,18 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_get_content_by_ids()
     {
-        $contents = $this->fakeContent(2);
+        $contents = $this->fakeContent(
+            2,
+            [
+                'slug' => 'slug1',
+                'status' => 'published',
+                'type' => 'course',
+                'difficulty' => 5,
+                'userId' => 1,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
         $response = $this->classBeingTested->getByIds([$contents[1]->getId(), $contents[0]->getId()]);
 
         $this->assertEquals(2, count($response));
@@ -1069,6 +1091,9 @@ class ContentServiceTest extends RailcontentTestCase
             [
                 'type' => $type,
                 'sort' => 1,
+                'status' => 'published',
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
             ]
         );
         $contents2 = $this->fakeContent(
@@ -1076,6 +1101,9 @@ class ContentServiceTest extends RailcontentTestCase
             [
                 'type' => $type,
                 'sort' => 2,
+                'status' => 'published',
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
             ]
         );
         $contents3 = $this->fakeContent(
@@ -1083,6 +1111,9 @@ class ContentServiceTest extends RailcontentTestCase
             [
                 'type' => $type,
                 'sort' => 3,
+                'status' => 'published',
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
             ]
         );
         $results = $this->classBeingTested->getTypeNeighbouringSiblings($type, 'sort', $contents2[0]->getSort());
@@ -1093,7 +1124,14 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_cache()
     {
-        $contents = $this->fakeContent(1);
+        $contents = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
 
         $name = 'pull';
         $key = new EntityCacheKey(Content::class, ['id' => $contents[0]->getId()]);
@@ -1113,19 +1151,9 @@ class ContentServiceTest extends RailcontentTestCase
         $result3 = $this->classBeingTested->getById($contents[0]->getId());
 
         $result4 = $this->classBeingTested->getById($contents[0]->getId());
-        //var_dump($this->entityManager->getCache());
-        //        $this->logger->entityCacheHit($name, $key);
-        //        $this->logger->entityCachePut($name, $key);
-        //        $this->logger->entityCacheMiss($name, $key);
 
         $this->assertEquals($result1, $result2);
         $this->assertEquals($result3, $result2);
         $this->assertEquals($result3, $result4);
-        
-        //        $this->assertEquals(1, $this->logger->getMissCount());
-        //        $this->assertEquals(1, $this->logger->getRegionHitCount($name));
-        //        $this->assertEquals(1, $this->logger->getRegionPutCount($name));
-        //        $this->assertEquals(1, $this->logger->getRegionMissCount($name));
     }
-
 }

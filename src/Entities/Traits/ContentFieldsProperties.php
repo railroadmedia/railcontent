@@ -802,4 +802,20 @@ trait ContentFieldsProperties
         $this->youtubeVideoId = $youtubeVideoId;
     }
 
+    /**
+     * @return int
+     */
+    public function getLengthInSeconds()
+    {
+        return $this->lengthInSeconds;
+    }
+
+    /**
+     * @param int $lengthInSeconds
+     */
+    public function setLengthInSeconds($lengthInSeconds)
+    {
+        $this->lengthInSeconds = $lengthInSeconds;
+    }
+
 }

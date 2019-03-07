@@ -725,10 +725,11 @@ class CommentJsonControllerTest extends RailcontentTestCase
         );
 
         $comment = $this->fakeComment(
-            1,
+            10,
             [
                 'content' => $content[0],
                 'deletedAt' => null,
+                'parent' => null
             ]
         );
 
@@ -789,6 +790,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $contentForBrand1[0],
                 'deletedAt' => null,
+                'parent' => null
             ]
         );
 
@@ -797,6 +799,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $ContentBrandConfig[0],
                 'deletedAt' => null,
+                'parent' => null
             ]
         );
 
@@ -885,10 +888,11 @@ class CommentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(3, count($response->decodeResponseJson('data')));
+        $this->assertEquals(2, count($response->decodeResponseJson('data')));
 
         $this->assertEquals($comment[0]->getId(), $response->decodeResponseJson('data')[0]['id']);
         $this->assertEquals($comment[1]->getId(), $response->decodeResponseJson('data')[1]['id']);
+        $this->assertEquals(3, $response->decodeResponseJson('meta')['totalCommentsAndReplies']);
     }
 
     public function test_cache_invalidation()
@@ -901,7 +905,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
         ]);
         $comment = $this->fakeComment(
-            2,
+            3,
             [
                 'parent' => null,
                 'userId' => $userId,
@@ -979,7 +983,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(2, count($response->decodeResponseJson('data')));
+        $this->assertEquals(3, count($response->decodeResponseJson('data')));
 
         CommentService::$canManageOtherComments = true;
         $updatedComment = $this->faker->text();

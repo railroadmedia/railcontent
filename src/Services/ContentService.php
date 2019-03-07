@@ -459,8 +459,6 @@ class ContentService
             ->andWhere('p.parent = :parentId')
             ->setParameter('parentId', $parentId)
             ->getQuery()
-            ->setCacheable(true)
-            ->setCacheRegion('pull')
             ->getSingleScalarResult();
     }
 
@@ -723,8 +721,6 @@ class ContentService
             ->setParameter('types', $types);
 
         return $qb->getQuery()
-            ->setCacheable(true)
-            ->setCacheRegion('pull')
             ->getSingleScalarResult();
     }
 
@@ -789,8 +785,6 @@ class ContentService
             ->setParameter('types', $types);
         $res =
             $qb->getQuery()
-                ->setCacheable(true)
-                ->setCacheRegion('pull')
                 ->getSingleScalarResult();
 
         return $res;

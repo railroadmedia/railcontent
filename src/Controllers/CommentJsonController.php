@@ -64,7 +64,8 @@ class CommentJsonController extends Controller
             $request->get('sort', $request->get('sort', '-created_on'))
         );
 
-        return ResponseService::comment($commentData, $qb);
+        return ResponseService::comment($commentData, $qb)
+            ->addMeta(['totalCommentsAndReplies' => $this->commentService->countCommentsAndReplies()]);
     }
 
     /**

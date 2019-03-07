@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Responses\JsonPaginatedResponse;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\FullTextSearchService;
 use Railroad\Railcontent\Services\ResponseService;
 
@@ -26,7 +25,7 @@ class FullTextSearchJsonController extends Controller
     {
         $this->fullTextSearchService = $fullTextSearchService;
 
-        $this->middleware(ConfigService::$controllerMiddleware);
+        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /** Call the method from the service to pull the contents based on the criteria passed in request.

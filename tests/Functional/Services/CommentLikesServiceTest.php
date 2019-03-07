@@ -25,7 +25,6 @@ class CommentLikesServiceTest extends RailcontentTestCase
         $this->classBeingTested = $this->app->make(CommentLikeService::class);
     }
 
-
     public function test_get_by_comment_ids()
     {
         $comments = $this->fakeComment(2);
@@ -69,4 +68,80 @@ class CommentLikesServiceTest extends RailcontentTestCase
         $this->assertEquals(2, $results[$comments[1]->getId()]);
     }
 
+    public function test_like_comment()
+    {
+        $userId = $this->createAndLogInNewUser();
+
+        $comment = $this->fakeComment();
+
+        $results = $this->classBeingTested->create($comment[0]->getId(), $userId);
+
+        $this->assertEquals($comment[0], $results->getComment());
+        $this->assertEquals($userId, $results->getUserId());
+
+        $this->assertDatabaseHas(
+            config('railcontent.table_prefix') . 'comment_likes',
+            [
+                'comment_id' => $comment[0]->getId(),
+                'user_id' => $userId,
+            ]
+        );
+    }
+
+    public function test_delete_comment_like()
+    {
+        $userId = $this->createAndLogInNewUser();
+
+        $comment = $this->fakeComment();
+        $this->fakeCommentLike(
+            1,
+            [
+                'comment' => $comment[0],
+                'userId' => $userId,
+            ]
+        );
+
+        $results = $this->classBeingTested->delete($comment[0]->getId(), $userId);
+
+        $this->assertTrue($results);
+
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix') . 'comment_likes',
+            [
+                'comment_id' => $comment[0]->getId(),
+                'user_id' => $userId,
+            ]
+        );
+    }
+
+    public function test_count_likes()
+    {
+        $comments = $this->fakeComment(2);
+
+        $this->fakeCommentLike(
+            5,
+            [
+                'comment' => $comments[0],
+                'userId' => rand(1, 100),
+            ]
+        );
+
+        $this->fakeCommentLike(
+            12,
+            [
+                'comment' => $comments[1],
+                'userId' => rand(100, 150),
+            ]
+        );
+
+        $result = $this->classBeingTested->countForCommentIds([$comments[0]->getId(), $comments[1]->getId()]);
+
+        $this->assertEquals(
+            [
+                $comments[0]->getId() => 5,
+                $comments[1]->getId() => 12,
+            ],
+            $result
+        );
+    }
 }

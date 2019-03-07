@@ -9,6 +9,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\UserContentProgressRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_user_content_progress")
+ * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */
 class UserContentProgress
