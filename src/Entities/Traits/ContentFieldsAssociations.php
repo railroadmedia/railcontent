@@ -22,7 +22,7 @@ trait ContentFieldsAssociations
     protected $exercise;
 
     /**
-     * @ORM\OneToOne(targetEntity="ContentInstructor",mappedBy="content", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="ContentInstructor",mappedBy="content", cascade={"persist","remove"})
      */
     protected $instructor;
 

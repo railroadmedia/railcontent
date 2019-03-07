@@ -139,49 +139,72 @@ class ContentServiceTest extends RailcontentTestCase
         $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
     }
 
-    public function _test_delete_content()
+    public function test_delete_content()
     {
-        $parent = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
+        $contents = $this->fakeContent(
+            3,
+            [
+                'brand' => config('railcontent.brand'),
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+        $this->fakeContentData(
+            1,
+            [
+                'content' => $contents[0],
+                'key' => $this->faker->word,
+                'value' => $this->faker->word,
+            ]
         );
 
-        $content = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
+        $this->fakeHierarchy(1,[
+            'parent' => $contents[1],
+            'child' => $contents[0]
+        ]);
+
+        $instructor = $this->fakeContent(
+            1,
+            [
+                'brand' => config('railcontent.brand'),
+                'status' => 'published',
+                'type' => 'instructor',
+                'publishedOn' => Carbon::now(),
+            ]
         );
-        $otherContent = $this->contentFactory->create(
-            $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
-            ContentService::STATUS_PUBLISHED
+        $this->fakeContentInstructor(
+            1,
+            [
+                'content' => $contents[0],
+                'instructor' => $instructor[0],
+            ]
         );
-        for ($i = 0; $i < 3; $i++) {
-            $expectedFields = $this->fieldFactory->create($content['id']);
-            $expectedData[] = $this->datumFactory->create($content['id']);
-            $children = $this->contentHierarchyFactory->create($content['id']);
-            $comment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-            $reply = $this->commentFactory->create($this->faker->text, null, $comment['id'], rand());
-        }
+
+        $this->fakeComment(1,[
+            'content' => $contents[0],
+            'comment' => $this->faker->word,
+            'parent' => null
+        ]);
 
         //save content in user playlist
-        $playlist = $this->userContentProgressFactory->startContent($content['id'], rand());
+        //        $playlist = $this->userContentProgressFactory->startContent($content['id'], rand());
+        //
+        //        $parentLink = $this->contentHierarchyFactory->create($parent['id'], $content['id'], 1);
+        //
+        //        $otherChildLink = $this->contentHierarchyFactory->create($parent['id'], $otherContent['id'], 2);
 
-        $parentLink = $this->contentHierarchyFactory->create($parent['id'], $content['id'], 1);
-
-        $otherChildLink = $this->contentHierarchyFactory->create($parent['id'], $otherContent['id'], 2);
-
-        $results = $this->classBeingTested->delete($content['id']);
+        $id = $contents[0]->getId();
+        $results = $this->classBeingTested->delete($id);
 
         //check that the results it's true
         $this->assertTrue($results);
 
         //check that the content fields are deleted
         $this->assertDatabaseMissing(
-            ConfigService::$tableContentFields,
+            config('railcontent.table_prefix') . 'content_instructor',
             [
-                'content_id' => $content['id'],
+                'content_id' => $id,
+                'instructor_id' => $instructor[0]->getId(),
             ]
         );
 
@@ -189,32 +212,22 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertDatabaseMissing(
             ConfigService::$tableContentData,
             [
-                'content_id' => $content['id'],
+                'content_id' => $id,
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix') . 'content_topic',
+            [
+                'content_id' => $id,
             ]
         );
 
         //check that the link with the parent was deleted
         $this->assertDatabaseMissing(
-            ConfigService::$tableContentHierarchy,
+            config('railcontent.table_prefix') . 'content_hierarchy',
             [
-                'child_id' => $content['id'],
-            ]
-        );
-
-        //check that the other children are repositioned correctly
-        $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
-            [
-                'child_id' => $otherContent['id'],
-                'child_position' => 1,
-            ]
-        );
-
-        //check the the links with the content children are deleted
-        $this->assertDatabaseMissing(
-            ConfigService::$tableContentHierarchy,
-            [
-                'parent_id' => $content['id'],
+                'child_id' => $id,
             ]
         );
 
@@ -222,31 +235,31 @@ class ContentServiceTest extends RailcontentTestCase
         $this->assertDatabaseMissing(
             ConfigService::$tableContent,
             [
-                'id' => $content['id'],
+                'id' => $id,
             ]
         );
 
         //check that the content comments and replies are deleted
-        $this->assertDatabaseMissing(
-            ConfigService::$tableComments,
-            [
-                'content_id' => $content['id'],
-            ]
-        );
-
-        //check that the comments/replies assignments are deleted
-        $this->assertDatabaseMissing(
-            ConfigService::$tableCommentsAssignment,
-            []
-        );
-
-        //check that the content it's deleted from the playlists
-        $this->assertDatabaseMissing(
-            ConfigService::$tableUserContentProgress,
-            [
-                'content_id' => $content['id'],
-            ]
-        );
+//        $this->assertDatabaseMissing(
+//            ConfigService::$tableComments,
+//            [
+//                'content_id' => $id,
+//            ]
+//        );
+//
+//        //check that the comments/replies assignments are deleted
+//        $this->assertDatabaseMissing(
+//            ConfigService::$tableCommentsAssignment,
+//            []
+//        );
+//
+//        //check that the content it's deleted from the playlists
+//        $this->assertDatabaseMissing(
+//            ConfigService::$tableUserContentProgress,
+//            [
+//                'content_id' => $content['id'],
+//            ]
+//        );
     }
 
     public function _test_soft_delete_content()

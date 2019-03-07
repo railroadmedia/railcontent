@@ -78,7 +78,7 @@ class Content
     protected $child;
 
     /**
-     * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy",mappedBy="child", cascade={"persist"},
+     * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy",mappedBy="child", cascade={"persist", "remove"},
      *     fetch="EAGER")
      */
     protected $parent;

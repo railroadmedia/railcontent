@@ -743,18 +743,15 @@ class ContentService
         $orderColumn = 'published_on',
         $orderDirection = 'desc'
     ) {
-        $results =
 
-            $this->contentRepository->getTypeNeighbouringSiblings(
-                $type,
-                $columnName,
-                $columnValue,
-                $siblingPairLimit,
-                $orderColumn,
-                $orderDirection
-            );
-
-        return $results;
+        return $this->contentRepository->getTypeNeighbouringSiblings(
+            $type,
+            $columnName,
+            $columnValue,
+            $siblingPairLimit,
+            $orderColumn,
+            $orderDirection
+        );
     }
 
     /**
@@ -994,18 +991,7 @@ class ContentService
     public function deleteContentRelated($contentId)
     {
         //TODO
-        //delete the link with the parent and reposition other siblings
-        //        $this->contentHierarchyRepository->deleteChildParentLinks($contentId);
-        //
-        //        //delete the content children
-        //        $this->contentHierarchyRepository->deleteParentChildLinks($contentId);
-        //
-        //        //delete the content fields
-        //        $this->fieldRepository->deleteByContentId($contentId);
-        //
-        //        //delete the content datum
-        //        $this->datumRepository->deleteByContentId($contentId);
-        //
+
         //        //delete the links with the permissions
         //        $this->contentPermissionRepository->deleteByContentId($contentId);
         //
