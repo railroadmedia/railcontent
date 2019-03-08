@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 use Carbon\Carbon;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\UserContentProgressService;
+use Railroad\Railcontent\Tests\Fixtures\UserProvider;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentProgressJsonControllerTest extends RailcontentTestCase
@@ -301,6 +302,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
     public function test_start_child_and_recalculate_parent_progress()
     {
         $userId = $this->createAndLogInNewUser();
+
         $progressChild1 = 30;
 
         $content = $this->fakeContent(
@@ -326,13 +328,21 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->fakeUserContentProgress(
-            1,
+        $this->put(
+            'railcontent/progress',
             [
-                'userId' => $userId,
-                'content' => $content[2],
-                'state' => 'started',
-                'progressPercent' => $progressChild1,
+                'data' => [
+                    'attributes' => [
+                        'progress_percent' => $progressChild1,
+                    ],
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $content[2]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
@@ -413,13 +423,21 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->fakeUserContentProgress(
-            1,
+        $this->put(
+            'railcontent/progress',
             [
-                'userId' => $userId,
-                'content' => $content[2],
-                'state' => 'started',
-                'progressPercent' => $progressChild1,
+                'data' => [
+                    'attributes' => [
+                        'progress_percent' => $progressChild1,
+                    ],
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $content[2]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
@@ -500,13 +518,18 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->fakeUserContentProgress(
-            1,
+        $this->put(
+            'railcontent/start',
             [
-                'userId' => $userId,
-                'content' => $content[2],
-                'state' => 'started',
-                'progressPercent' => $progressChild1,
+                'data' => [
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $content[0]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
@@ -586,13 +609,18 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->fakeUserContentProgress(
-            1,
+        $this->put(
+            'railcontent/complete',
             [
-                'userId' => $userId,
-                'content' => $content[2],
-                'state' => 'completed',
-                'progressPercent' => 100,
+                'data' => [
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $content[2]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
@@ -673,33 +701,56 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->fakeUserContentProgress(
-            1,
+        $this->put(
+            'railcontent/progress',
             [
-                'userId' => $userId,
-                'content' => $content[2],
-                'state' => 'started',
-                'progressPercent' => $progressPercentChild2,
+                'data' => [
+                    'attributes' => [
+                        'progress_percent' => $progressPercentChild2,
+                    ],
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $content[2]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
-        $this->fakeUserContentProgress(
-            1,
+        $this->put(
+            'railcontent/progress',
             [
-                'userId' => $userId,
-                'content' => $content[1],
-                'state' => 'started',
-                'progressPercent' => $progressPercentChild2,
+                'data' => [
+                    'attributes' => [
+                        'progress_percent' => $progressPercentChild2,
+                    ],
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $content[1]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
-
-        $this->fakeUserContentProgress(
-            1,
+        $this->put(
+            'railcontent/progress',
             [
-                'userId' => $userId,
-                'content' => $content[0],
-                'state' => 'started',
-                'progressPercent' => $progressPercentChild2,
+                'data' => [
+                    'attributes' => [
+                        'progress_percent' => $progressPercentChild2,
+                    ],
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $content[0]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
@@ -769,13 +820,21 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $contentId = $content[0]->getId();
         $randomPercent = $this->faker->randomNumber(2);
 
-        $this->fakeUserContentProgress(
-            1,
+        $this->put(
+            'railcontent/progress',
             [
-                'userId' => $userId,
-                'content' => $content[0],
-                'state' => 'started',
-                'progressPercent' => $randomPercent,
+                'data' => [
+                    'attributes' => [
+                        'progress_percent' => $randomPercent,
+                    ],
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $content[0]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
@@ -856,26 +915,61 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
 
         $contentId = $content[0]->getId();
 
-        $this->fakeUserContentProgress(
-            1,
+        $this->put(
+            'railcontent/progress',
             [
-                'userId' => $userId,
-                'content' => $content[1],
-                'state' => 'started',
-                'progressPercent' => 10,
+                'data' => [
+                    'attributes' => [
+                        'progress_percent' => 10,
+                    ],
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $content[1]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
+
+        //        $this->fakeUserContentProgress(
+        //            1,
+        //            [
+        //                'userId' => $userId,
+        //                'content' => $content[1],
+        //                'state' => 'started',
+        //                'progressPercent' => 10,
+        //            ]
+        //        );
         $randomPercent = $this->faker->randomNumber(2);
 
-        $this->fakeUserContentProgress(
-            1,
+        $this->put(
+            'railcontent/progress',
             [
-                'userId' => $userId,
-                'content' => $content[0],
-                'state' => 'started',
-                'progressPercent' => ($randomPercent + 10) / 2,
+                'data' => [
+                    'attributes' => [
+                        'progress_percent' => ($randomPercent + 10) / 2,
+                    ],
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $content[0]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
+        //        $this->fakeUserContentProgress(
+        //            1,
+        //            [
+        //                'userId' => $userId,
+        //                'content' => $content[0],
+        //                'state' => 'started',
+        //                'progressPercent' => ($randomPercent + 10) / 2,
+        //            ]
+        //        );
 
         $response = $this->put(
             'railcontent/reset',
@@ -926,27 +1020,53 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $contentId = $content[0]->getId();
-
-        $this->fakeUserContentProgress(
-            1,
+        $this->put(
+            'railcontent/complete',
             [
-                'userId' => $userId,
-                'content' => $content[1],
-                'state' => 'completed',
-                'progressPercent' => 100,
+                'data' => [
+                     'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $content[1]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
+//        $this->fakeUserContentProgress(
+//            1,
+//            [
+//                'userId' => $userId,
+//                'content' => $content[1],
+//                'state' => 'completed',
+//                'progressPercent' => 100,
+//            ]
+//        );
         $randomPercent = $this->faker->randomNumber(2);
-
-        $this->fakeUserContentProgress(
-            1,
+        $this->put(
+            'railcontent/complete',
             [
-                'userId' => $userId,
-                'content' => $content[0],
-                'state' => 'completed',
-                'progressPercent' => 100,
+                'data' => [
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'id' => $content[0]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
+//        $this->fakeUserContentProgress(
+//            1,
+//            [
+//                'userId' => $userId,
+//                'content' => $content[0],
+//                'state' => 'completed',
+//                'progressPercent' => 100,
+//            ]
+//        );
 
         $firstRequest = $this->call(
             'GET',

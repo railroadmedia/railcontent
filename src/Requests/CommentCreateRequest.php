@@ -49,10 +49,10 @@ class CommentCreateRequest extends FormRequest
             $this->only(
                 [
                     'data.attributes.comment',
-                    'data.attributes.user_id',
                     'data.attributes.temporary_display_name',
                     'data.relationships.content',
                     'data.relationships.parent',
+                    'data.relationships.user'
                 ]
         );
     }

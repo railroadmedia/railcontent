@@ -52,7 +52,7 @@ class ContentServiceTest extends RailcontentTestCase
                 'status' => 'published',
                 'type' => 'course',
                 'difficulty' => 5,
-                'userId' => 1,
+                //'userId' => 1,
                 'brand' => config('railcontent.brand'),
                 'publishedOn' => Carbon::now(),
             ]
@@ -490,12 +490,18 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_getByUserIdTypeSlug()
     {
-        $results = $this->classBeingTested->getByUserIdTypeSlug(1, 'course', 'slug1');
+        $contents = $this->fakeContent(rand(2,10),[
+            'userId' => 1,
+            'brand' => config('railcontent.brand'),
+            'status' => 'published',
+            'publishedOn' => Carbon::now()
+        ]);
+        $results = $this->classBeingTested->getByUserIdTypeSlug(1, $contents[0]->getType(), $contents[0]->getSlug());
 
         foreach ($results as $content) {
-            $this->assertEquals('course', $content->getType());
-            $this->assertEquals('slug1', $content->getSlug());
-            $this->assertEquals(1, $content->getUserId());
+            $this->assertEquals($contents[0]->getType(), $content->getType());
+            $this->assertEquals($contents[0]->getSlug(), $content->getSlug());
+            $this->assertEquals(1, $content->getUser()->getId());
         }
     }
 
@@ -887,7 +893,7 @@ class ContentServiceTest extends RailcontentTestCase
                 'publishedOn' => Carbon::now(),
             ]
         );
-        $nrChildrenParent1 = $this->faker->randomNumber(1);
+        $nrChildrenParent1 = rand(1,10);
         $childType = $this->faker->word;
 
         $children = $this->fakeContent(
@@ -932,7 +938,7 @@ class ContentServiceTest extends RailcontentTestCase
                 'publishedOn' => Carbon::now(),
             ]
         );
-        $nrChildrenParent1 = $this->faker->randomNumber(1);
+        $nrChildrenParent1 = rand(2,5);
         $children = $this->fakeContent(
             $nrChildrenParent1,
             [
@@ -968,7 +974,7 @@ class ContentServiceTest extends RailcontentTestCase
                 'publishedOn' => Carbon::now(),
             ]
         );
-        $nrChildrenParent2 = $this->faker->randomNumber(1);
+        $nrChildrenParent2 = rand(1, 10);
         $children2 = $this->fakeContent(
             $nrChildrenParent2,
             [
@@ -976,7 +982,6 @@ class ContentServiceTest extends RailcontentTestCase
                 'status' => 'published',
                 'type' => 'course',
                 'difficulty' => 5,
-                'userId' => 1,
                 'brand' => config('railcontent.brand'),
                 'publishedOn' => Carbon::now(),
             ]

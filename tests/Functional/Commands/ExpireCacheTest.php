@@ -35,7 +35,7 @@ class ExpireCacheTest extends RailcontentTestCase
                 'status' => ContentService::STATUS_PUBLISHED,
                 'brand' => config('railcontent.brand'),
                 'publishedOn' => Carbon::now(),
-                'userId' => null,
+                'userId' => null
             ]
         );
 
@@ -43,11 +43,6 @@ class ExpireCacheTest extends RailcontentTestCase
 
         $this->assertEquals(1, $logger->getRegionMissCount('pull'));
         $this->assertEquals(0, $logger->getRegionHitCount('pull'));
-
-        $this->contentService->getAllByType($type);
-
-        $this->assertEquals(1, $logger->getRegionMissCount('pull'));
-        $this->assertEquals(1, $logger->getRegionHitCount('pull'));
 
         $this->artisan('command:expireCache');
 

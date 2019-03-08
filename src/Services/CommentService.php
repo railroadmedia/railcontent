@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Services;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Events\CommentCreated;
@@ -30,6 +31,11 @@ class CommentService
      */
     private $jsonApiHidrator;
 
+    /**
+     * @var UserProviderInterface
+     */
+    private $userProvider;
+
     /** The value it's set in ContentPermissionMiddleware;
      * if the user it's an administrator the value it's true and the administrator can update/delete any comment;
      * otherwise the value it's false and the user can update/delete only his own comments
@@ -46,10 +52,12 @@ class CommentService
      */
     public function __construct(
         EntityManager $entityManager,
-        JsonApiHydrator $jsonApiHydrator
+        JsonApiHydrator $jsonApiHydrator,
+    UserProviderInterface $userProvider
     ) {
         $this->entityManager = $entityManager;
         $this->jsonApiHidrator = $jsonApiHydrator;
+        $this->userProvider = $userProvider;
 
         $this->commentRepository = $this->entityManager->getRepository(Comment::class);
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
@@ -100,10 +108,12 @@ class CommentService
             return -1;
         }
 
+        $user = $this->userProvider->getUserById($userId);
+
         $comment = new Comment();
         $comment->setComment($commentText);
         $comment->setTemporaryDisplayName($temporaryUserDisplayName);
-        $comment->setUserId($userId);
+        $comment->setUser($user);
         $comment->setContent($content);
         $comment->setParent($parentComment ?? null);
         $comment->setCreatedOn(Carbon::now());
@@ -233,11 +243,11 @@ class CommentService
      */
     private function userCanManageComment($comment)
     {
-        if (is_null($comment->getUserId())) { // Very unlikely, but better safe than sorry.
+        if (is_null($comment->getUser())) { // Very unlikely, but better safe than sorry.
             return false;
         }
 
-        return self::$canManageOtherComments || ($comment->getUserId() == auth()->id());
+        return self::$canManageOtherComments || ($comment->getUser()->getId() == auth()->id());
     }
 
     /**
@@ -388,15 +398,17 @@ class CommentService
             );
 
         if ($orderByColumn == $alias . ".mine") {
+            $user = $this->userProvider->getUserById(auth()->id());
+
             CommentRepository::$availableUserId = $currentUserId;
             $orderByColumn = $alias . '.createdOn';
 
-            $qb->andWhere($alias . '.userId = :user')
-                ->setParameter('user', auth()->id());
+            $qb->andWhere($alias . '.user = :user')
+                ->setParameter('user', $user);
         }
 
         if (CommentRepository::$availableUserId) {
-            $qb->andWhere($alias . '.userId = :availableUserId')
+            $qb->andWhere($alias . '.user = :availableUserId')
                 ->setParameter('availableUserId', CommentRepository::$availableUserId);
         }
 
@@ -413,7 +425,7 @@ class CommentService
             $qb->join($alias . '.assignedToUser', $aliasAssignment)
                 ->andWhere(
                     $qb->expr()
-                        ->in($aliasAssignment . '.userId', ':availableUserId')
+                        ->in($aliasAssignment . '.user', ':availableUserId')
                 )
                 ->setParameter('availableUserId', CommentRepository::$assignedToUserId);
         }
@@ -450,7 +462,7 @@ class CommentService
             ->setParameter('availableBrands', array_values(array_wrap(config('railcontent.available_brands'))));
 
         if (CommentRepository::$availableUserId) {
-            $qb->andWhere($alias . '.userId = :availableUserId')
+            $qb->andWhere($alias . '.user = :availableUserId')
                 ->setParameter('availableUserId', CommentRepository::$availableUserId);
         }
 
@@ -467,7 +479,7 @@ class CommentService
             $qb->join($alias . '.assignedToUser', $aliasAssignment)
                 ->andWhere(
                     $qb->expr()
-                        ->in($aliasAssignment . '.userId', ':availableUserId')
+                        ->in($aliasAssignment . '.user', ':availableUserId')
                 )
                 ->setParameter('availableUserId', CommentRepository::$assignedToUserId);
         }

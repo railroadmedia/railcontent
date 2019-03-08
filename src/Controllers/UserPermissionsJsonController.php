@@ -48,7 +48,7 @@ class UserPermissionsJsonController extends Controller
 
         $userPermission = $this->userPermissionsService->updateOrCeate(
             [
-                'user_id' => $request->input('data.attributes.user_id'),
+                'user_id' => $request->input('data.relationships.user.data.id'),
                 'permission_id' => $request->input('data.relationships.permission.data.id'),
             ],
             [

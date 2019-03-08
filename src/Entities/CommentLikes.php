@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\Collection;
+use Railroad\Railcontent\Contracts\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\CommentLikeRepository")
@@ -22,10 +23,11 @@ class CommentLikes
     protected $id;
 
     /**
-     * @ORM\Column(type="integer")
-     * @var integer
+     * @var int
+     *
+     * @ORM\Column(type="user_id", name="user_id", nullable=true)
      */
-    protected $userId;
+    protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Comment")
@@ -68,19 +70,20 @@ class CommentLikes
     }
 
     /**
-     * @return mixed
+     * @param UserInterface|null $user
      */
-    public function getUserId()
+    public function setUser(?UserInterface $user)
     {
-        return $this->userId;
+        $this->user = $user;
     }
 
+
     /**
-     * @param mixed $content
+     * @return UserInterface|null
      */
-    public function setUserId($userId)
+    public function getUser(): ?UserInterface
     {
-        $this->userId = $userId;
+        return $this->user;
     }
 
     /**

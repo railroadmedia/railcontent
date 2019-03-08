@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Faker\ORM\Doctrine\Populator;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentAssignment;
 use Railroad\Railcontent\Entities\Content;
@@ -37,7 +38,7 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
                 1,
                 [
                     'comment' => $comment[$i],
-                    'userId' => $userId,
+                    'user' => $this->app->make(UserProviderInterface::class)->getUserById($userId),
                 ]
             );
             $this->populator->execute();
@@ -51,7 +52,7 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
 
         foreach ($response->decodeResponseJson('data') as $response)
         {
-            $this->assertEquals($userId, $response['attributes']['user_id']);
+            $this->assertEquals($userId, $response['attributes']['user']);
         }
     }
 
@@ -66,7 +67,7 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
             3,
             [
                 'comment' => $comment[0],
-                'userId' => rand(2, 10),
+                'user' => $this->app->make(UserProviderInterface::class)->getUserById(rand(2,10)),
             ]
 
         );

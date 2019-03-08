@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
@@ -30,6 +31,11 @@ class UserContentProgressService
      */
     private $contentService;
 
+    /**
+     * @var UserProviderInterface
+     */
+    private $userProvider;
+
     const STATE_STARTED = 'started';
     const STATE_COMPLETED = 'completed';
 
@@ -43,11 +49,13 @@ class UserContentProgressService
     public function __construct(
         ContentHierarchyService $contentHierarchyService,
         EntityManager $entityManager,
-        ContentService $contentService
+        ContentService $contentService,
+    UserProviderInterface $userProvider
     ) {
         $this->entityManager = $entityManager;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentService = $contentService;
+        $this->userProvider = $userProvider;
 
         $this->userContentRepository = $this->entityManager->getRepository(UserContentProgress::class);
     }
@@ -60,6 +68,8 @@ class UserContentProgressService
      */
     public function getMostRecentByContentTypeUserState($contentType, $userId, $state)
     {
+        $user = $this->userProvider->getUserById($userId);
+
         $alias = 'uc';
         $aliasContent = 'c';
         $qb = $this->userContentRepository->createQueryBuilder($alias);
@@ -70,13 +80,13 @@ class UserContentProgressService
             ->where($aliasContent . '.brand = :brand')
             ->andWhere($aliasContent . '.type = :contentType')
             ->andWhere($alias . '.state = :state')
-            ->andWhere($alias . '.userId = :userId')
+            ->andWhere($alias . '.user = :user')
             ->setParameters(
                 [
                     'brand' => ConfigService::$brand,
                     'contentType' => $contentType,
                     'state' => $state,
-                    'userId' => $userId,
+                    'user' => $user,
                 ]
             )
             ->setMaxResults(1)
@@ -130,6 +140,8 @@ class UserContentProgressService
 
         $content = $this->contentService->getById($contentId);
 
+        $user = $this->userProvider->getUserById($userId);
+
         if (!empty($children)) {
 
             /*
@@ -146,7 +158,7 @@ class UserContentProgressService
 
         $isCompleted = $this->userContentRepository->findOneBy(
             [
-                'userId' => $userId,
+                'user' => $user,
                 'content' => $content,
                 'state' => 'completed',
 
@@ -156,7 +168,7 @@ class UserContentProgressService
         if (!$isCompleted || $forceEvenIfComplete) {
             $userContentProgress = $this->userContentRepository->findOneBy(
                 [
-                    'userId' => $userId,
+                    'user' => $user,
                     'content' => $content,
                 ]
             );
@@ -167,7 +179,7 @@ class UserContentProgressService
 
             $userContentProgress->setProgressPercent($progressPercent);
             $userContentProgress->setState(self::STATE_STARTED);
-            $userContentProgress->setUserId($userId);
+            $userContentProgress->setUser($user);
             $userContentProgress->setContent($content);
             $userContentProgress->setUpdatedOn(Carbon::parse(now()));
 
@@ -207,10 +219,11 @@ class UserContentProgressService
         }
 
         $content = $this->contentService->getById($contentId);
+        $user = $this->userProvider->getUserById($userId);
 
         $userContentProgress = $this->userContentRepository->findOneBy(
             [
-                'userId' => $userId,
+                'user' => $user,
                 'content' => $content,
             ]
         );
@@ -220,7 +233,7 @@ class UserContentProgressService
 
         $userContentProgress->setProgressPercent(100);
         $userContentProgress->setState(self::STATE_COMPLETED);
-        $userContentProgress->setUserId($userId);
+        $userContentProgress->setUser($user);
         $userContentProgress->setContent($content);
         $userContentProgress->setUpdatedOn(Carbon::parse(now()));
 
@@ -237,7 +250,7 @@ class UserContentProgressService
 
             $userContentProgress = $this->userContentRepository->findOneBy(
                 [
-                    'userId' => $userId,
+                    'user' => $user,
                     'content' => $child,
                 ]
             );
@@ -248,7 +261,7 @@ class UserContentProgressService
 
             $userContentProgress->setProgressPercent(100);
             $userContentProgress->setState(self::STATE_COMPLETED);
-            $userContentProgress->setUserId($userId);
+            $userContentProgress->setUser($user);
             $userContentProgress->setContent($child);
             $userContentProgress->setUpdatedOn(Carbon::parse(now()));
 
@@ -275,10 +288,11 @@ class UserContentProgressService
     public function resetContent($contentId, $userId)
     {
         $content = $this->contentService->getById($contentId);
+        $user = $this->userProvider->getUserById($userId);
 
         $userContentProgress = $this->userContentRepository->findOneBy(
             [
-                'userId' => $userId,
+                'user' => $user,
                 'content' => $content,
             ]
         );
@@ -295,7 +309,7 @@ class UserContentProgressService
 
             $userContentProgress = $this->userContentRepository->findOneBy(
                 [
-                    'userId' => $userId,
+                    'user' => $user,
                     'content' => $child,
                 ]
             );
@@ -328,6 +342,8 @@ class UserContentProgressService
      */
     public function saveContentProgress($contentId, $progress, $userId, $overwriteComplete = false)
     {
+
+
         if (is_null($contentId)) {
             error_log(
                 print_r(
@@ -343,11 +359,12 @@ class UserContentProgressService
         }
 
         $content = $this->contentService->getById($contentId);
+        $user = $this->userProvider->getUserById($userId);
 
         $userContentProgress = $this->userContentRepository->findOneBy(
             [
                 'content' => $content,
-                'userId' => $userId,
+                'user' => $user,
             ]
         );
 
@@ -359,7 +376,7 @@ class UserContentProgressService
 
         if (!$userContentProgress) {
             $userContentProgress = new UserContentProgress();
-            $userContentProgress->setUserId($userId);
+            $userContentProgress->setUser($user);
             $userContentProgress->setContent($content);
         }
 
@@ -490,16 +507,18 @@ class UserContentProgressService
      */
     public function getForUser($id)
     {
+        $user = $this->userProvider->getUserById($id);
+
         $alias = 'uc';
         $contentAlias = 'c';
 
         $qb = $this->userContentRepository->createQueryBuilder($alias);
 
         $qb->join($alias . '.content', $contentAlias)
-            ->where($alias . '.userId = :userId')
+            ->where($alias . '.user = :user')
             ->andWhere($contentAlias . '.brand' . ' = :brand')
             ->setParameter('brand', config('railcontent.brand'))
-            ->setParameter('userId', $id)
+            ->setParameter('user', $user)
             ->setMaxResults(100);
 
         $results =
@@ -526,6 +545,7 @@ class UserContentProgressService
         $orderByDirection = 'desc',
         $limit = 25
     ) {
+        $user = $this->userProvider->getUserById($id);
 
         $alias = 'uc';
         $aliasContent = 'c';
@@ -541,13 +561,13 @@ class UserContentProgressService
             ->where($aliasContent . '.brand = :brand')
             ->andWhere($aliasContent . '.type IN (:contentType)')
             ->andWhere($alias . '.state = :state')
-            ->andWhere($alias . '.userId = :userId')
+            ->andWhere($alias . '.user = :user')
             ->setParameters(
                 [
                     'brand' => ConfigService::$brand,
                     'contentType' => $types,
                     'state' => $state,
-                    'userId' => $id,
+                    'user' => $user,
                 ]
             )
             ->setMaxResults($limit)
@@ -559,6 +579,8 @@ class UserContentProgressService
 
     public function getLessonsForUserByType($id, $type, $state = null)
     {
+        $user = $this->userProvider->getUserById($id);
+
         $alias = 'uc';
         $aliasContent = 'c';
 
@@ -567,7 +589,7 @@ class UserContentProgressService
         $qb->join($alias . '.content', $aliasContent)
             ->where($aliasContent . '.brand = :brand')
             ->andWhere($aliasContent . '.type = :contentType')
-            ->andWhere($alias . '.userId = :userId');
+            ->andWhere($alias . '.user = :user');
 
         if ($state) {
             $qb->andWhere($alias . '.state = :state')
@@ -576,7 +598,7 @@ class UserContentProgressService
 
         $qb->setParameter('brand', config('railcontent.brand'))
             ->setParameter('contentType', $type)
-            ->setParameter('userId', $id);
+            ->setParameter('user', $user);
 
         return $qb->getQuery()
             ->getResult();
@@ -584,6 +606,8 @@ class UserContentProgressService
 
     public function countLessonsForUserByTypeAndProgressState($id, $type, $state)
     {
+        $user = $this->userProvider->getUserById($id);
+
         $alias = 'uc';
         $aliasContent = 'c';
 
@@ -593,7 +617,7 @@ class UserContentProgressService
             ->join($alias . '.content', $aliasContent)
             ->where($aliasContent . '.brand = :brand')
             ->andWhere($aliasContent . '.type = :contentType')
-            ->andWhere($alias . '.userId = :userId');
+            ->andWhere($alias . '.user = :user');
 
         if ($state) {
             $qb->andWhere($alias . '.state = :state')
@@ -602,7 +626,7 @@ class UserContentProgressService
 
         $qb->setParameter('brand', config('railcontent.brand'))
             ->setParameter('contentType', $type)
-            ->setParameter('userId', $id);
+            ->setParameter('user', $user);
 
         $results =
             $qb->getQuery()

@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
@@ -307,7 +308,7 @@ class ContentRepository extends EntityRepository
      */
     public function requireUserStates($state, $userId = null)
     {
-        $this->requiredUserStates[] = ['state' => $state, 'user_id' => $userId ?? auth()->id()];
+        $this->requiredUserStates[] = ['state' => $state, 'user' => app()->make(UserProviderInterface::class)->getUserById($userId ?? auth()->id())];
 
         return $this;
     }
@@ -319,7 +320,7 @@ class ContentRepository extends EntityRepository
      */
     public function includeUserStates($state, $userId = null)
     {
-        $this->includedUserStates[] = ['state' => $state, 'user_id' => $userId ?? auth()->id()];
+        $this->includedUserStates[] = ['state' => $state, 'user' => app()->make(UserProviderInterface::class)->getUserById($userId ?? auth()->id())];
 
         return $this;
     }
@@ -400,16 +401,18 @@ class ContentRepository extends EntityRepository
         if ($userPermission) {
             $lifetime =
                 Carbon::parse($userPermission[0]->getExpirationDate())
-                    ->diffInSeconds(Carbon::now());
-
-            $this->getEntityManager()
-                ->getConfiguration()
-                ->getSecondLevelCacheConfiguration()
-                ->getRegionsConfiguration()
-                ->setDefaultLifetime(
-                    $lifetime
-                );
+                    ->diffInSeconds(Carbon::now());        }
+        else{
+            $lifetime = config('railcontent.cache_duration');
         }
+
+        $this->getEntityManager()
+            ->getConfiguration()
+            ->getSecondLevelCacheConfiguration()
+            ->getRegionsConfiguration()
+            ->setDefaultLifetime(
+                $lifetime
+            );
 
         return $qb->select(config('railcontent.table_prefix') . 'content')
             ->from($this->getEntityName(), config('railcontent.table_prefix') . 'content');

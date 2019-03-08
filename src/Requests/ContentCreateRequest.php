@@ -53,12 +53,12 @@ class ContentCreateRequest extends CustomFormRequest
                 'data.attributes.status',
                 'data.attributes.brand',
                 'data.attributes.language',
-                'data.attributes.user_id',
                 'data.attributes.published_on',
                 'data.attributes.created_on',
                 'data.attributes.archived_on',
                 'data.attributes.fields',
                 'data.relationships.parent',
+                'data.relationships.user'
             ]
         );
     }

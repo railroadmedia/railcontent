@@ -2,8 +2,9 @@
 
 namespace Railroad\Railcontent\Tests\Fixtures;
 
+use Faker\Generator;
 use Railroad\Railcontent\Contracts\UserInterface;
-use Railroad\Railcontent\Faker\Factory;
+use Railroad\Railcontent\Factories\Factory;
 
 class User implements UserInterface
 {
@@ -15,7 +16,7 @@ class User implements UserInterface
         $this->id = $id;
 
         if (func_num_args() < 2) {
-            $faker = Factory::create();
+            $faker = app()->make(Generator::class);
 
             $this->email = $faker->email;
         } else {

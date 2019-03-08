@@ -24,7 +24,7 @@ class UserPermissionCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'data.attributes.user_id' => 'required|integer',
+            'data.relationships.user.data.id' => 'required|integer',
             'data.relationships.permission.data.id' => 'required|integer|exists:' . ConfigService::$databaseConnectionName . '.' .
                 ConfigService::$tablePermissions . ',id',
             'data.attributes.start_date' => 'required|date',

@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Entities\UserPermission;
@@ -21,14 +22,20 @@ class UserPermissionsService
     private $userPermissionsRepository;
 
     /**
+     * @var UserProviderInterface
+     */
+    private $userProvider;
+
+    /**
      * UserPermissionsService constructor.
      *
      * @param EntityManager $entityManager
      */
     public function __construct(
-        EntityManager $entityManager
+        EntityManager $entityManager, UserProviderInterface $userProvider
     ) {
         $this->entityManager = $entityManager;
+        $this->userProvider = $userProvider;
 
         $this->userPermissionsRepository = $this->entityManager->getRepository(UserPermission::class);
     }
@@ -44,6 +51,8 @@ class UserPermissionsService
      */
     public function updateOrCeate($attributes, $values)
     {
+        $user = $this->userProvider->getUserById($attributes['user_id']);
+
         if (array_key_exists('start_date', $values)) {
             $ttlEndDate = $values['start_date'];
             if (Carbon::parse($values['start_date'])
@@ -59,14 +68,15 @@ class UserPermissionsService
                 ->find($attributes['permission_id']);
         $userPermission = $this->userPermissionsRepository->findOneBy(
             [
-                'userId' => $attributes['user_id'],
+                'user' => $user,
                 'permission' => $permission,
 
             ]
         );
+
         if (!$userPermission) {
             $userPermission = new UserPermission();
-            $userPermission->setUserId($attributes['user_id']);
+            $userPermission->setUser($user);
             $userPermission->setPermission($permission);
         }
 
@@ -117,8 +127,9 @@ class UserPermissionsService
         $qb = $this->userPermissionsRepository->createQueryBuilder('up');
 
         if ($userId) {
-            $qb->where('up.userId = :user')
-                ->setParameter('user', $userId);
+            $user = $this->userProvider->getUserById($userId);
+            $qb->where('up.user = :user')
+                ->setParameter('user', $user);
         }
 
         if ($onlyActive) {

@@ -27,7 +27,6 @@ class ContentHierarchyServiceTest extends RailcontentTestCase
                 'status' => 'published',
                 'type' => 'course',
                 'difficulty' => 5,
-                'userId' => 1,
                 'publishedOn' => Carbon::now(),
             ]
         );

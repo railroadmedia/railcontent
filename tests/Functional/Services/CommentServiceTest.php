@@ -88,7 +88,7 @@ class CommentServiceTest extends RailcontentTestCase
                 ->getId()
         );
         $this->assertEquals($comment['comment'], $result->getComment());
-        $this->assertEquals($comment['user_id'], $result->getUserId());
+        $this->assertEquals($comment['user_id'], $result->getUser()->getId());
         $this->assertEquals($comment['display_name'], $result->getTemporaryDisplayName());
     }
 
@@ -190,7 +190,7 @@ class CommentServiceTest extends RailcontentTestCase
                 ->getId()
         );
         $this->assertEquals($reply['comment'], $result->getComment());
-        $this->assertEquals($reply['user_id'], $result->getUserId());
+        $this->assertEquals($reply['user_id'], $result->getUser()->getId());
         $this->assertEquals($reply['display_name'], $result->getTemporaryDisplayName());
 
         $this->assertEquals($comment[0], $result->getParent());

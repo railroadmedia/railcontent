@@ -14,6 +14,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Tests\Fixtures\UserProvider;
 use Railroad\Railcontent\Tests\Hydrators\CommentFakeDataHydrator;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Railroad\Railcontent\Transformers\CommentTransformer;
@@ -40,7 +41,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $attributes = $this->fakeDataHydrator->getAttributeArray(Comment::class, new CommentTransformer());
 
-        $attributes['user_id'] = $userId;
+        $attributes['user'] = $userId;
 
         unset($attributes['id']);
         unset($attributes['created_on']);
@@ -161,7 +162,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $expectedResults = [
             'comment' => $updatedComment,
-            'user_id' => $userId,
+            'user' => $userId,
 
         ];
 
@@ -401,7 +402,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 'type' => 'comment',
                 'attributes' => [
                     'comment' => $reply,
-                    'user_id' => $userId,
+                    'user' => $userId,
                 ],
             ],
         ];
@@ -528,7 +529,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals($limit, count($data));
 
         foreach ($data as $res) {
-            $this->assertEquals($userId, $res['attributes']['user_id']);
+            $this->assertEquals($userId, $res['attributes']['user']);
         }
     }
 
@@ -551,7 +552,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             CommentAssignment::class,
             1,
             [
-                'userId' => $userId,
+                'user' => $this->app->make(UserProvider::class)->getUserById($userId),
                 'comment' => $comments[0],
             ]
         );
@@ -733,17 +734,15 @@ class CommentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->populator->addEntity(
-            Comment::class,
+        $this->fakeComment(
             $totalNumber,
             [
                 'content' => $content[0],
                 'parent' => $comment[0],
                 'deletedAt' => null,
+                'parent' => null
             ]
         );
-
-        $fakeData = $this->populator->execute();
 
         $response = $this->call(
             'GET',

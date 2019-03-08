@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Doctrine\ORM\EntityManager;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentLikes;
 use Railroad\Railcontent\Events\CommentLiked;
@@ -28,13 +29,19 @@ class CommentLikeService
     private $commentRepository;
 
     /**
+     * @var UserProviderInterface
+     */
+    private $userProvider;
+
+    /**
      * CommentLikeService constructor.
      *
      * @param EntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager, UserProviderInterface  $userProvider)
     {
         $this->entityManager = $entityManager;
+        $this->userProvider = $userProvider;
 
         $this->commentLikeRepository = $this->entityManager->getRepository(CommentLikes::class);
         $this->commentRepository = $this->entityManager->getRepository(Comment::class);
@@ -92,16 +99,18 @@ class CommentLikeService
      */
     public function create($commentId, $userId)
     {
+        $user = $this->userProvider->getUserById($userId);
         $comment = $this->commentRepository->find($commentId);
+
         $commentLikes = $this->commentLikeRepository->findBy(
             [
                 'comment' => $comment,
-                'userId' => $userId,
+                'user' => $user,
             ]
         );
         if (empty($commentLikes)) {
             $commentLikes = new CommentLikes();
-            $commentLikes->setUserId($userId);
+            $commentLikes->setUser($user);
             $commentLikes->setComment($comment);
         }
         $this->entityManager->persist($commentLikes);
@@ -121,11 +130,13 @@ class CommentLikeService
      */
     public function delete($commentId, $userId)
     {
+        $user = $this->userProvider->getUserById($userId);
         $comment = $this->commentRepository->find($commentId);
+
         $commentLikes = $this->commentLikeRepository->findOneBy(
             [
                 'comment' => $comment,
-                'userId' => $userId,
+                'user' => $user,
             ]
         );
 

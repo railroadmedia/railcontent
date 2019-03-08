@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Doctrine\ORM\EntityManager;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
@@ -54,6 +55,11 @@ class ContentService
      */
     private $jsonApiHydrator;
 
+    /**
+     * @var UserProviderInterface
+     */
+    private $userProvider;
+
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
@@ -69,9 +75,11 @@ class ContentService
      */
     public function __construct(
         EntityManager $entityManager,
-        JsonApiHydrator $jsonApiHydrator
+        JsonApiHydrator $jsonApiHydrator,
+        UserProviderInterface $userProvider
     ) {
         $this->entityManager = $entityManager;
+        $this->userProvider = $userProvider;
 
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
         $this->datumRepository = $this->entityManager->getRepository(ContentData::class);
@@ -294,12 +302,12 @@ class ContentService
                 ->restrictByUserAccess()
                 ->where(ConfigService::$tableContent . '.slug = :slug')
                 ->andWhere(ConfigService::$tableContent . '.type = :type')
-                ->andWhere(ConfigService::$tableContent . '.userId = :userId')
+                ->andWhere(ConfigService::$tableContent . '.user = :user')
                 ->setParameters(
                     [
                         'slug' => $slug,
                         'type' => $type,
-                        'userId' => $userId,
+                        'user' => $userId,
                     ]
                 )
                 ->getQuery()
@@ -582,7 +590,7 @@ class ContentService
                 $alias . '.content',
                 config('railcontent.table_prefix') . 'content'
             );
-        $qb->where($alias . '.userId = :userId')
+        $qb->where($alias . '.user = :userId')
             ->andWhere($alias . '.state = :state')
             ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
             ->setParameter('userId', $userId)
@@ -626,7 +634,7 @@ class ContentService
                 $alias . '.content',
                 config('railcontent.table_prefix') . 'content'
             );
-        $qb->where($alias . '.userId = :userId')
+        $qb->where($alias . '.user = :userId')
             ->andWhere($alias . '.state = :state')
             ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
             ->setParameter('userId', $userId)
@@ -659,6 +667,7 @@ class ContentService
         $limit = 25,
         $skip = 0
     ) {
+        //user
         $alias = 'up';
 
         $qb =
@@ -670,7 +679,7 @@ class ContentService
                 $alias . '.content',
                 config('railcontent.table_prefix') . 'content'
             );
-        $qb->where($alias . '.userId = :userId')
+        $qb->where($alias . '.user = :userId')
             ->andWhere($alias . '.state = :state')
             ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
             ->setMaxResults($limit)
@@ -703,6 +712,7 @@ class ContentService
         $userId,
         $state
     ) {
+        //$user = $this
         $alias = 'up';
 
         $qb =
@@ -713,7 +723,7 @@ class ContentService
                 $alias . '.content',
                 config('railcontent.table_prefix') . 'content'
             );
-        $qb->where($alias . '.userId = :userId')
+        $qb->where($alias . '.user = :userId')
             ->andWhere($alias . '.state = :state')
             ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
             ->setParameter('userId', $userId)
@@ -764,6 +774,7 @@ class ContentService
      */
     public function countByTypesUserProgressState(array $types, $userId, $state)
     {
+        //user
         $alias = 'up';
 
         $qb =
@@ -774,7 +785,7 @@ class ContentService
                 $alias . '.content',
                 config('railcontent.table_prefix') . 'content'
             );
-        $qb->where($alias . '.userId = :userId')
+        $qb->where($alias . '.user = :userId')
             ->andWhere($alias . '.state = :state')
             ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
             ->setParameter('userId', $userId)

@@ -5,18 +5,12 @@ namespace Railroad\Railcontent\Repositories;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Illuminate\Database\Query\JoinClause;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Queries\CachedQuery;
 
 class UserPermissionsRepository extends EntityRepository
 {
-    /**
-     * @return CachedQuery|$this
-     */
-    protected function newQuery()
-    {
-        return (new CachedQuery($this->connection()))->from(ConfigService::$tableUserPermissions);
-    }
 
     /** Pull the user permissions record
      *
@@ -26,11 +20,17 @@ class UserPermissionsRepository extends EntityRepository
      */
     public function getUserPermissions($userId, $onlyActive)
     {
+        if(!$userId){
+            return;
+        }
+
+        $user = app()->make(UserProviderInterface::class)->getUserById(auth()->id());
+
         $qb = $this->createQueryBuilder('up');
 
         if ($userId) {
-            $qb->where('up.userId = :user')
-                ->setParameter('user', $userId)
+            $qb->where('up.user = :user')
+                ->setParameter('user', $user)
             ->orderBy('up.expirationDate', 'asc');
         }
 

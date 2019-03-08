@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Entities;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Railroad\Railcontent\Contracts\UserInterface;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsAssociations;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsProperties;
 
@@ -63,10 +64,11 @@ class Content
     protected $language;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @var integer
+     * @var int
+     *
+     * @ORM\Column(type="user_id", name="user_id", nullable=true)
      */
-    protected $userId;
+    protected $user;
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy", mappedBy="parent")
@@ -78,8 +80,8 @@ class Content
     protected $child;
 
     /**
-     * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy",mappedBy="child", cascade={"persist", "remove"},
-     *     fetch="EAGER")
+     * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy",mappedBy="child", cascade={"persist",
+     *     "remove"}, fetch="EAGER")
      */
     protected $parent;
 
@@ -249,19 +251,20 @@ class Content
     }
 
     /**
-     * @return integer
+     * @param UserInterface|null $user
      */
-    public function getUserId()
+    public function setUser(?UserInterface $user)
     {
-        return $this->userId;
+        $this->user = $user;
     }
 
     /**
-     * @param integer $userId
+     * @return UserInterface|null
      */
-    public function setUserId($userId)
-    : void {
-        $this->userId = $userId;
+    public function getUser()
+    : ?UserInterface
+    {
+        return $this->user;
     }
 
     /**
@@ -436,9 +439,12 @@ class Content
      */
     public function addUserProgress($userProgress)
     {
-        $this->userProgress[$userProgress->getUserId()] = $userProgress;
+        if ($userProgress->getUser()) {
+            $this->userProgress[$userProgress->getUser()
+                ->getId()] = $userProgress;
 
-        $this->setStarted($userProgress->getState() == 'started' ? true : false);
-        $this->setCompleted($userProgress->getState() == 'completed' ? true : false);
+            $this->setStarted($userProgress->getState() == 'started' ? true : false);
+            $this->setCompleted($userProgress->getState() == 'completed' ? true : false);
+        }
     }
 }

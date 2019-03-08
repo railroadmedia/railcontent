@@ -77,7 +77,7 @@ class CommentLikesServiceTest extends RailcontentTestCase
         $results = $this->classBeingTested->create($comment[0]->getId(), $userId);
 
         $this->assertEquals($comment[0], $results->getComment());
-        $this->assertEquals($userId, $results->getUserId());
+        $this->assertEquals($userId, $results->getUser()->getId());
 
         $this->assertDatabaseHas(
             config('railcontent.table_prefix') . 'comment_likes',

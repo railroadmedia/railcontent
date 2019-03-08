@@ -3,9 +3,11 @@
 namespace Railroad\Railcontent\Services;
 
 use Doctrine\ORM\EntityManager;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentAssignment;
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
+use Railroad\Railcontent\Tests\Fixtures\UserProvider;
 
 class CommentAssignmentService
 {
@@ -20,13 +22,19 @@ class CommentAssignmentService
     private $entityManager;
 
     /**
+     * @var UserProviderInterface
+     */
+    private $userProvider;
+
+    /**
      * CommentAssignmentService constructor.
      *
      * @param EntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager, UserProviderInterface $userProvider)
     {
         $this->entityManager = $entityManager;
+        $this->userProvider = $userProvider;
 
         $this->commentAssignmentRepository = $this->entityManager->getRepository(CommentAssignment::class);
     }
@@ -41,17 +49,18 @@ class CommentAssignmentService
         $comment =
             $this->entityManager->getRepository(Comment::class)
                 ->find($commentId);
+        $user = $this->userProvider->getUserById($userId);
 
         $commentAssignment = $this->commentAssignmentRepository->findOneBy(
             [
                 'comment' => $comment,
-                'userId' => $userId,
+                'user' => $user,
             ]
         );
         if (!$commentAssignment) {
             $commentAssignment = new CommentAssignment();
             $commentAssignment->setComment($comment);
-            $commentAssignment->setUserId($userId);
+            $commentAssignment->setUser($user);
         }
 
         $this->entityManager->persist($commentAssignment);
@@ -91,11 +100,13 @@ class CommentAssignmentService
      */
     public function countAssignedCommentsForUser($userId)
     {
+        $user = $this->userProvider->getUserById($userId);
+
         $qb = $this->commentAssignmentRepository->createQueryBuilder('a');
 
         return $qb->select('count(a)')
-            ->where('a.userId = :user')
-            ->setParameter('user', $userId)
+            ->where('a.user = :user')
+            ->setParameter('user', $user)
             ->getQuery()
             ->getSingleScalarResult();
     }
@@ -141,11 +152,13 @@ class CommentAssignmentService
             $orderByColumn = camel_case($orderByColumn);
         }
 
+        $user = $this->userProvider->getUserById($userId);
+
         $assignedComments =
             $this->commentAssignmentRepository->createQueryBuilder('a')
                 ->join('a.comment', 'c')
-                ->where('a.userId = :userId')
-                ->setParameter('userId', $userId)
+                ->where('a.user = :user')
+                ->setParameter('user', $user)
                 ->setMaxResults($limit)
                 ->setFirstResult($first)
                 ->orderBy('a.' . $orderByColumn, $orderByDirection);

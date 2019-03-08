@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Services\UserContentProgressService;
+use Railroad\Railcontent\Tests\Fixtures\UserProvider;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class UserContentProgressServiceTest extends RailcontentTestCase
@@ -257,7 +258,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $this->assertEquals(3, count($results));
 
         foreach ($results as $result) {
-            $this->assertEquals($userId, $result->getUserId());
+            $this->assertEquals($userId, $result->getUser()->getId());
             $this->assertEquals(
                 config('railcontent.brand'),
                 $result->getContent()
@@ -336,7 +337,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $this->assertEquals(2, count($results));
 
         foreach ($results as $result) {
-            $this->assertEquals($userId, $result->getUserId());
+            $this->assertEquals($userId, $result->getUser()->getId());
             $this->assertEquals('started', $result->getState());
             $this->assertTrue(
                 in_array(
@@ -418,7 +419,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $this->assertEquals(2, count($results));
 
         foreach ($results as $result) {
-            $this->assertEquals($userId, $result->getUserId());
+            $this->assertEquals($userId, $result->getUser()->getId());
             $this->assertEquals(
                 'course',
                 $result->getContent()
@@ -430,6 +431,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
     public function test_countLessonsForUserByTypeAndProgressState()
     {
         $userId = $this->createAndLogInNewUser();
+
         $courses = $this->fakeContent(
             2,
             [
@@ -456,6 +458,7 @@ class UserContentProgressServiceTest extends RailcontentTestCase
                 'updatedOn' => Carbon::now(),
             ]
         );
+
 
         $up2 = $this->fakeUserContentProgress(
             1,

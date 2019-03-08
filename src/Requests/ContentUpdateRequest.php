@@ -63,8 +63,8 @@ class ContentUpdateRequest extends CustomFormRequest
                     'data.attributes.status',
                     'data.attributes.brand',
                     'data.attributes.language' ,
-                    'data.attributes.user_id',
                     'data.attributes.fields',
+                    'data.relationships.user'
                 ]
             );
     }

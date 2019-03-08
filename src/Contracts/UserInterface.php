@@ -1,6 +1,6 @@
 <?php
 
-namespace Railroad\Contracts\Contracts;
+namespace Railroad\Railcontent\Contracts;
 
 use Railroad\Doctrine\Contracts\UserEntityInterface;
 

@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Railroad\Railcontent\Contracts\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\UserPermissionsRepository")
@@ -21,10 +22,11 @@ class UserPermission
     protected $id;
 
     /**
-     * @ORM\Column(type="integer")
-     * @var integer
+     * @var int
+     *
+     * @ORM\Column(type="user_id", name="user_id", nullable=true)
      */
-    protected $userId;
+    protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Permission")
@@ -56,19 +58,19 @@ class UserPermission
     }
 
     /**
-     * @return integer
+     * @return UserInterface|null
      */
-    public function getUserId()
+    public function getUser(): ?UserInterface
     {
-        return $this->userId;
+        return $this->user;
     }
 
     /**
-     * @param string $key
+     * @param UserInterface|null $user
      */
-    public function setUserId($userId)
+    public function setUser(?UserInterface $user)
     {
-        $this->userId = $userId;
+        $this->user = $user;
     }
 
     /**

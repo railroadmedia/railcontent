@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Doctrine\ORM\Query\Expr\Join;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentField;
 use Railroad\Railcontent\Entities\ContentHierarchy;
@@ -258,9 +259,9 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
         foreach ($requiredUserStates as $index => $requiredUserState) {
             $this->join(UserContentProgress::class, 'p', 'WITH', 'railcontent_content.id = p.content');
             $this->andWhere('p.state IN (:states)')
-                ->andWhere('p.userId = :userId')
+                ->andWhere('p.user = :user')
                 ->setParameter('states', $requiredUserState['state'])
-                ->setParameter('userId', $requiredUserState['user_id']);
+                ->setParameter('user', $requiredUserState['user']);
         }
         return $this;
     }
@@ -285,9 +286,8 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                         'pu.state  = ' .
                         $this->expr()
                             ->literal($includedUserState['state']) .
-                        ' AND pu.userId = ' .
-                        $this->expr()
-                            ->literal($includedUserState['user_id'])
+                        ' AND pu.user = ' .
+                                $includedUserState['user']
                     );
 
             $orX->add($condition);
@@ -422,7 +422,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                     $this->expr()
                         ->andX(
                             $this->expr()
-                                ->eq('user_permission.userId', ':userId'),
+                                ->eq('user_permission.user', ':user'),
                             $this->expr()
                                 ->orX(
                                     $this->expr()
@@ -439,8 +439,8 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                 Carbon::now()
             )
             ->setParameter(
-                'userId',
-                auth()->id()
+                'user',
+                app()->make(UserProviderInterface::class)->getUserById(auth()->id()??0)
             );
 
         return $this;

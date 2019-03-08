@@ -13,6 +13,7 @@ use Illuminate\Auth\AuthManager;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,7 @@ use Railroad\Doctrine\Providers\DoctrineServiceProvider;
 use Railroad\Permissions\Providers\PermissionsServiceProvider;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Entities\Comment;
+use Railroad\Railcontent\Entities\CommentAssignment;
 use Railroad\Railcontent\Entities\CommentLikes;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
@@ -117,7 +119,6 @@ class RailcontentTestCase extends BaseTestCase
                     ->getWrappedConnection()
             );
 
-
         $userProvider = new UserProvider();
 
         $this->app->instance(UserProviderInterface::class, $userProvider);
@@ -126,6 +127,8 @@ class RailcontentTestCase extends BaseTestCase
 
         $this->artisan('migrate:fresh', []);
         $this->artisan('cache:clear', []);
+
+        $this->createUsersTable();
 
         $this->faker = $this->app->make(Generator::class);
         $this->fakeDataHydrator = new FakeDataHydrator($this->entityManager);
@@ -390,6 +393,21 @@ class RailcontentTestCase extends BaseTestCase
         $userId = 1;
         $email = $this->faker->email;
 
+        $email = $this->faker->email;
+        $userId =
+            $this->databaseManager->table('users')
+                ->insertGetId(
+                    [
+                        'email' => $email,
+                        'password' => $this->faker->password,
+                        'display_name' => $this->faker->name,
+                        'created_at' => Carbon::now()
+                            ->toDateTimeString(),
+                        'updated_at' => Carbon::now()
+                            ->toDateTimeString(),
+                    ]
+                );
+
         Auth::shouldReceive('check')
             ->andReturn(true);
         Auth::shouldReceive('id')
@@ -397,8 +415,29 @@ class RailcontentTestCase extends BaseTestCase
         $userMockResults = ['id' => $userId, 'email' => $email];
         Auth::shouldReceive('user')
             ->andReturn($userMockResults);
-        
+
         return $userId;
+
+    }
+
+    protected function createUsersTable()
+    {
+        if (!$this->app['db']->connection()
+            ->getSchemaBuilder()
+            ->hasTable('users')) {
+            $this->app['db']->connection()
+                ->getSchemaBuilder()
+                ->create(
+                    'users',
+                    function (Blueprint $table) {
+                        $table->increments('id');
+                        $table->string('email');
+                        $table->string('password');
+                        $table->string('display_name');
+                        $table->timestamps();
+                    }
+                );
+        }
     }
 
     /**
@@ -580,6 +619,12 @@ class RailcontentTestCase extends BaseTestCase
 
         $contentData['topic'] = new ArrayCollection();
         $contentData['data'] = new ArrayCollection();
+        if (array_key_exists('userId',$contentData)) {
+            $contentData['user'] =
+                $this->app->make(UserProvider::class)
+                    ->getUserById($contentData['userId']);
+            unset($contentData['userId']);
+        }
 
         $this->populator->addEntity(
             Content::class,
@@ -622,21 +667,28 @@ class RailcontentTestCase extends BaseTestCase
     {
         $this->populator = new Populator($this->faker, $this->entityManager);
 
+        $contentData['user'] =
+            $this->app->make(UserProvider::class)
+                ->getUserById($contentData['userId'] ?? 1);
+
         if (empty($contentData)) {
             $contentData = [
                 'content' => $this->entityManager->getRepository(Content::class)
                     ->find(1),
-                'userId' => 1,
                 'state' => 'completed',
                 'progressPercent' => 100,
             ];
         }
+
+        unset($contentData['userId']);
+
         $this->populator->addEntity(
             UserContentProgress::class,
             $nr,
             $contentData
 
         );
+
         $fakePopulator = $this->populator->execute();
 
         return $fakePopulator[UserContentProgress::class];
@@ -714,6 +766,10 @@ class RailcontentTestCase extends BaseTestCase
                 ]
             )[0];
         }
+        $commentData['user'] =
+            $this->app->make(UserProvider::class)
+                ->getUserById($commentData['userId'] ?? 1);
+        unset($commentData['userId']);
 
         $this->populator->addEntity(
             Comment::class,
@@ -764,6 +820,11 @@ class RailcontentTestCase extends BaseTestCase
         if (!array_key_exists('permission', $commentData)) {
             $commentData['permission'] = $this->fakePermission()[0];
         }
+        $commentData['user'] =
+            $this->app->make(UserProvider::class)
+                ->getUserById($commentData['userId'] ?? 1);
+
+        unset ($commentData['userId']);
 
         $this->populator->addEntity(
             UserPermission::class,
@@ -831,6 +892,13 @@ class RailcontentTestCase extends BaseTestCase
                 'comment' => $this->fakeComment(),
             ];
         }
+
+        $commentLikeData['user'] =
+            $this->app->make(UserProvider::class)
+                ->getUserById($commentLikeData['userId'] ?? 1);
+
+        unset ($commentLikeData['userId']);
+
         $this->populator->addEntity(
             CommentLikes::class,
             $nr,
@@ -840,6 +908,33 @@ class RailcontentTestCase extends BaseTestCase
         $fakePopulator = $this->populator->execute();
 
         return $fakePopulator[CommentLikes::class];
+    }
+
+    public function fakeCommentAssignation($nr = 1, $assignationData = [])
+    {
+        if (empty($assignationData)) {
+            $assignationData = [
+                'comment' => $this->entityManager->getRepository(Content::class)
+                    ->find(1),
+                'userId' => rand(),
+            ];
+        }
+
+        $assignationData['user'] =
+            $this->app->make(UserProvider::class)
+                ->getUserById($assignationData['userId'] ?? 1);
+
+        unset ($assignationData['userId']);
+
+        $this->populator->addEntity(
+            CommentAssignment::class,
+            $nr,
+            $assignationData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[CommentAssignment::class];
     }
 
 }

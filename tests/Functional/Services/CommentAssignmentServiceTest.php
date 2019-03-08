@@ -47,65 +47,6 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
         $this->classBeingTested = $this->app->make(CommentAssignmentService::class);
     }
 
-    public function fakeComment($nr = 1, $commentData = [])
-    {
-        if (empty($commentData)) {
-            $commentData = [
-                'userId' => 1,
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'deletedAt' => null,
-            ];
-        }
-        $this->populator->addEntity(
-            Comment::class,
-            $nr,
-            $commentData
-
-        );
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[Comment::class];
-    }
-
-    public function fakeContent($nr = 1, $contentData = [])
-    {
-        if (empty($contentData)) {
-            $contentData = [
-                'brand' => ConfigService::$brand,
-            ];
-        }
-        $this->populator->addEntity(
-            Content::class,
-            $nr,
-            $contentData
-
-        );
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[Content::class];
-    }
-
-    public function fakeCommentAssignation($nr = 1, $assignationData = [])
-    {
-        if (empty($assignationData)) {
-            $assignationData = [
-                'comment' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'userId' => rand(),
-            ];
-        }
-        $this->populator->addEntity(
-            CommentAssignment::class,
-            $nr,
-            $assignationData
-
-        );
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[CommentAssignment::class];
-    }
-
     public function test_store()
     {
         $managerId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
@@ -173,7 +114,7 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
         $response = $this->classBeingTested->getAssignedCommentsForUser($userId, 1, 25, 'comment', 'asc');
 
         foreach ($response as $res) {
-            $this->assertEquals($userId, $res->getUserId());
+            $this->assertEquals($userId, $res->getUser()->getId());
         }
 
         $count = $this->classBeingTested->countAssignedCommentsForUser($userId);

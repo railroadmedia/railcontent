@@ -68,7 +68,7 @@ class ExpireCache extends Command
         $alias = 'content';
         $qb = $this->contentRepository->createQueryBuilder($alias);
 
-        $qb->where($alias . '.userId is null')
+        $qb->where($alias . '.user is null')
             ->andWhere($alias . '.publishedOn >= :publishedOn')
             ->andWhere($alias . '.publishedOn <= :now')
             ->setParameter(
