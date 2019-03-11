@@ -712,7 +712,6 @@ class ContentService
         $userId,
         $state
     ) {
-        //$user = $this
         $alias = 'up';
 
         $qb =
@@ -774,7 +773,6 @@ class ContentService
      */
     public function countByTypesUserProgressState(array $types, $userId, $state)
     {
-        //user
         $alias = 'up';
 
         $qb =
@@ -1001,23 +999,27 @@ class ContentService
      */
     public function deleteContentRelated($contentId)
     {
-        //TODO
+        $contentPermissions = $this->contentPermissionRepository->findByContent($contentId);
 
-        //        //delete the links with the permissions
-        //        $this->contentPermissionRepository->deleteByContentId($contentId);
-        //
-        //        //delete the content comments, replies and assignation
-        //        $comments = $this->commentRepository->getByContentId($contentId);
-        //
-        //        $this->commentAssignationRepository->query()
-        //            ->whereIn('comment_id', array_pluck($comments, 'id'))
-        //            ->delete();
-        //        //->deleteCommentAssignations(array_pluck($comments, 'id'));
-        //
-        //        $this->commentRepository->deleteByContentId($contentId);
-        //
-        //        //delete content playlists
-        //        $this->userContentProgressRepository->deleteByContentId($contentId);
+        foreach ($contentPermissions as $contentPermission) {
+            $this->entityManager->remove($contentPermission);
+        }
+
+        $comments = $this->commentRepository->findByContent($contentId);
+
+        foreach ($comments as $comment) {
+            $this->entityManager->remove($comment);
+        }
+
+        $userContentProgress =
+            $this->entityManager->getRepository(UserContentProgress::class)
+                ->findByContent($contentId);
+
+        foreach ($userContentProgress as $contentProgress) {
+            $this->entityManager->remove($contentProgress);
+        }
+
+        $this->entityManager->flush();
     }
 
     /**

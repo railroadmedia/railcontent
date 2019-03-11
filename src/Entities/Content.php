@@ -119,6 +119,16 @@ class Content
     private $completed = false;
 
     /**
+     * @var ArrayCollection
+     */
+    private $permissions;
+
+    /**
+     * @var int
+     */
+    private $progressPercent = 0;
+
+    /**
      * @var \DateTime $createdOn
      *
      * @Gedmo\Timestampable(on="create")
@@ -126,6 +136,9 @@ class Content
      */
     protected $createdOn;
 
+    /**
+     * Content constructor.
+     */
     public function __construct()
     {
         $this->child = new ArrayCollection();
@@ -139,6 +152,7 @@ class Content
         $this->playlist = new ArrayCollection();
         $this->exercise = new ArrayCollection();
         $this->userProgress = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
     }
 
     /**
@@ -163,7 +177,7 @@ class Content
      * @param string $key
      */
     public function setSlug(string $slug)
-    : void {
+    {
         $this->slug = $slug;
     }
 
@@ -180,7 +194,7 @@ class Content
      * @param string $key
      */
     public function setType(string $type)
-    : void {
+    {
         $this->type = $type;
     }
 
@@ -213,7 +227,7 @@ class Content
      * @param string $key
      */
     public function setStatus(string $status)
-    : void {
+    {
         $this->status = $status;
     }
 
@@ -445,6 +459,43 @@ class Content
 
             $this->setStarted($userProgress->getState() == 'started' ? true : false);
             $this->setCompleted($userProgress->getState() == 'completed' ? true : false);
+            $this->setProgressPercent($userProgress->getProgressPercent());
         }
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
+
+    /**
+     * @param ContentPermission $contentPermission
+     */
+    public function addPermission(ContentPermission $contentPermission)
+    {
+        if (($contentPermission->getContent()
+                    ->getId() == $this->getId()) || ($contentPermission->getContentType() == $this->getType())) {
+            $this->permissions[] = $contentPermission;
+        }
+    }
+
+    /**
+     * @param $progressPercent
+     */
+    public function setProgressPercent($progressPercent)
+    {
+        $this->progressPercent = $progressPercent;
+    }
+
+    /**
+     * @param array $contentPermissions
+     */
+    public function setPermissions(array $contentPermissions)
+    {
+        $this->permissions = $contentPermissions;
+
     }
 }

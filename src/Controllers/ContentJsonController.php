@@ -64,7 +64,7 @@ class ContentJsonController extends Controller
             $request->get('included_user_states', [])
         );
 
-        return ResponseService::content($contentData['results'], $contentData['qb'], [], $contentData['filter_options'])->respond();
+        return ResponseService::content($contentData->results(), $contentData->qb(), [], $contentData->filterOptions())->respond();
     }
 
     /** Pull the children contents for the parent id

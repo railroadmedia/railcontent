@@ -63,4 +63,9 @@ class ContentFilterResultsEntity extends Entity
     {
         return $this['filter_options'] ?? [];
     }
+
+    public function qb()
+    {
+        return $this['qb'] ?? '';
+    }
 }

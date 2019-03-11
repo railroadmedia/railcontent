@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Entities;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\PermissionRepository")
+ * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_permissions")
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")

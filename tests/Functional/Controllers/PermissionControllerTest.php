@@ -741,11 +741,13 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $permission = $this->fakePermission();
 
-        $this->fakeContentPermission(1,[
-            'content' => $contents[0],
-            'permission' => $permission[0]
-        ]);
-
+        $this->fakeContentPermission(
+            1,
+            [
+                'content' => $contents[0],
+                'permission' => $permission[0],
+            ]
+        );
 
         $types = [$type, $this->faker->word];
         $page = 1;
@@ -764,25 +766,29 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $this->assertEquals(9, $firstRequest->decodeResponseJson('meta')['pagination']['total']);
 
-        $response = $this->call('PATCH', 'railcontent/permission/dissociate/', [
-            'data' => [
-                'type' => 'contentPermission',
-                'relationships' => [
-                    'permission' => [
-                        'data' => [
-                            'type' => 'permission',
-                            'id' => $permission[0]->getId(),
+        $response = $this->call(
+            'PATCH',
+            'railcontent/permission/dissociate/',
+            [
+                'data' => [
+                    'type' => 'contentPermission',
+                    'relationships' => [
+                        'permission' => [
+                            'data' => [
+                                'type' => 'permission',
+                                'id' => $permission[0]->getId(),
+                            ],
                         ],
-                    ],
-                    'content' => [
-                        'data' => [
-                            'type' => 'content',
-                            'id' => $contents[0]->getId(),
+                        'content' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => $contents[0]->getId(),
+                            ],
                         ],
                     ],
                 ],
-            ],
-        ]);
+            ]
+        );
         $secondRequest = $this->call(
             'GET',
             'railcontent/content',
@@ -794,5 +800,80 @@ class PermissionControllerTest extends RailcontentTestCase
             ]
         );
         $this->assertEquals(10, $secondRequest->decodeResponseJson('meta')['pagination']['total']);
+    }
+
+    public function test_getByContentTypeOrIdAndByPermissionId()
+    {
+        $contents = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+                'type' => 'course',
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+
+        $permission = $this->fakePermission(
+            2,
+            [
+                'brand' => config('railcontent.brand'),
+            ]
+        );
+
+        $type = $this->faker->word;
+        $otherTypeContent = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+                'type' => $type,
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+            ]
+        );
+
+        $this->fakeContentPermission(
+            1,
+            [
+                'content' => $contents[0],
+                'permission' => $permission[0],
+                'brand' => config('railcontent.brand'),
+            ]
+        );
+        $this->fakeContentPermission(
+            1,
+            [
+                'contentType' => $type,
+                'permission' => $permission[0],
+                'brand' => config('railcontent.brand'),
+            ]
+        );
+
+        $this->fakeContentPermission(
+            1,
+            [
+                'contentType' => $type,
+                'permission' => $permission[0],
+                'brand' => $this->faker->word,
+            ]
+        );
+
+        $results = $this->contentPermissionService->getByContentTypeOrIdAndByPermissionId(
+            $contents[0]->getId(),
+            $type,
+            $permission[0]->getId()
+        );
+
+        $this->assertEquals(2, count($results));
+
+        foreach ($results as $result) {
+            $this->assertTrue(
+                (($result->getContentType() == $type) ||
+                    ($result->getContent()
+                            ->getId() == $contents[0]->getId())) &&
+                $result->getPermission()
+                    ->getId() == $permission[0]->getId()
+            );
+        }
     }
 }

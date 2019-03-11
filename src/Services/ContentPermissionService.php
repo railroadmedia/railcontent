@@ -6,9 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\Permission;
-use Railroad\Railcontent\Repositories\ContentPermissionRepository;
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\PermissionRepository;
 
 /**
  * Class PermissionService
@@ -18,17 +15,17 @@ use Railroad\Railcontent\Repositories\PermissionRepository;
 class ContentPermissionService
 {
     /**
-     * @var ContentPermissionRepository
+     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
      */
     private $contentPermissionRepository;
 
     /**
-     * @var ContentRepository
+     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
      */
     private $contentRepository;
 
     /**
-     * @var PermissionRepository
+     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
      */
     private $permissionRepository;
 
@@ -38,9 +35,9 @@ class ContentPermissionService
     private $entityManager;
 
     /**
-     * PermissionService constructor.
+     * ContentPermissionService constructor.
      *
-     * @param ContentPermissionRepository $contentPermissionRepository
+     * @param EntityManager $entityManager
      */
     public function __construct(
         EntityManager $entityManager
@@ -53,15 +50,6 @@ class ContentPermissionService
     }
 
     /**
-     * @param integer $id
-     * @return mixed
-     */
-    public function _get($id)
-    {
-        return $this->contentPermissionRepository->getById($id);
-    }
-
-    /**
      * @param null $contentId
      * @param null $contentType
      * @param $permissionId
@@ -69,17 +57,30 @@ class ContentPermissionService
      */
     public function getByContentTypeOrIdAndByPermissionId($contentId = null, $contentType = null, $permissionId)
     {
-        $contentPermissions = $this->contentPermissionRepository->getByContentIdsOrTypes([$contentId], [$contentType]);
-
-        $contentPermissionsMatchingPermissionId = [];
-
-        foreach ($contentPermissions as $contentPermission) {
-            if ($contentPermission['permission_id'] === $permissionId) {
-                $contentPermissionsMatchingPermissionId[] = $contentPermission;
-            }
+        if (empty($contentId) && empty($contentType)) {
+            return [];
         }
 
-        return $contentPermissionsMatchingPermissionId;
+        $qb = $this->contentPermissionRepository->createQueryBuilder('cp');
+
+        $qb->where('cp.brand = :brand')
+            ->andWhere('cp.permission = :permission')
+            ->andWhere(
+                $qb->expr()
+                    ->orX(
+                        $qb->expr()
+                            ->eq('cp.content', ':contentId'),
+                        $qb->expr()
+                            ->eq('cp.contentType', ':contentType')
+                    )
+            )
+            ->setParameter('brand', config('railcontent.brand'))
+            ->setParameter('permission', $permissionId)
+            ->setParameter('contentId', $contentId)
+            ->setParameter('contentType', $contentType);
+
+        return $qb->getQuery()
+            ->getResult();
     }
 
     /**

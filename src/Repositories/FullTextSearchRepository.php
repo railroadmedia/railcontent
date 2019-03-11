@@ -2,37 +2,14 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\PersistentCollection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\ContentEntity;
-use Railroad\Railcontent\Entities\SearchIndex;
-use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
-use Railroad\Railcontent\Repositories\QueryBuilders\FullTextSearchQueryBuilder;
-use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
-use Railroad\Railcontent\Services\ConfigService;
-use Illuminate\Support\Facades\DB;
-use Railroad\Resora\Decorators\Decorator;
-use Railroad\Resora\Entities\Entity;
 
 class FullTextSearchRepository extends EntityRepository
 {
     use RefreshDatabase;
-
-    /**
-     * @var ContentRepository
-     */
-    private $contentRepository;
-
-    /**
-     * @var ContentDatumRepository
-     */
-    private $datumRepository;
-
-    private $entityManager;
 
     /** Delete old indexes for the brand
      *
@@ -44,7 +21,7 @@ class FullTextSearchRepository extends EntityRepository
 
         $qb->delete('s');
         $qb->where('s.brand = :brand');
-        $qb->setParameter('brand', ConfigService::$brand);
+        $qb->setParameter('brand', config('railcontent.brand'));
 
         return true;
     }
@@ -57,7 +34,7 @@ class FullTextSearchRepository extends EntityRepository
      */
     public function prepareIndexesValues($type, $content)
     {
-        $searchIndexValues = ConfigService::$searchIndexValues;
+        $searchIndexValues = config('railcontent.search_index_values');
         $configSearchIndexValues = $searchIndexValues[$type];
         $values = [];
 
@@ -202,7 +179,7 @@ class FullTextSearchRepository extends EntityRepository
                     )
             )
             ->setParameter('searchterm', implode(' +', explode(' ', $term)))
-            ->setParameter('brands', array_values(array_wrap(ConfigService::$availableBrands)));
+            ->setParameter('brands', array_values(array_wrap(config('railcontent.available_brands'))));
 
         if (!empty($contentTypes)) {
             $query->andWhere($alias . '.content_type IN (:contentTypes)')
@@ -276,7 +253,7 @@ class FullTextSearchRepository extends EntityRepository
                     )
             )
             ->setParameter('searchterm', implode(' +', explode(' ', $term)))
-            ->setParameter('brands', array_values(array_wrap(ConfigService::$availableBrands)))
+            ->setParameter('brands', array_values(array_wrap(config('railcontent.available_brands'))))
             ->orderBy($orderByColumn, $orderByDirection)
             ->setMaxResults($limit)
             ->setFirstResult($first);

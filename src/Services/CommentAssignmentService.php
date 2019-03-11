@@ -6,13 +6,11 @@ use Doctrine\ORM\EntityManager;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentAssignment;
-use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
-use Railroad\Railcontent\Tests\Fixtures\UserProvider;
 
 class CommentAssignmentService
 {
     /**
-     * @var CommentAssignmentRepository
+     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
      */
     protected $commentAssignmentRepository;
 

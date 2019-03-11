@@ -20,15 +20,10 @@ class UserPermissionsRepository extends EntityRepository
      */
     public function getUserPermissions($userId, $onlyActive)
     {
-        if(!$userId){
-            return;
-        }
-
-        $user = app()->make(UserProviderInterface::class)->getUserById(auth()->id());
-
         $qb = $this->createQueryBuilder('up');
 
         if ($userId) {
+            $user = app()->make(UserProviderInterface::class)->getUserById($userId);
             $qb->where('up.user = :user')
                 ->setParameter('user', $user)
             ->orderBy('up.expirationDate', 'asc');
@@ -53,49 +48,5 @@ class UserPermissionsRepository extends EntityRepository
 
         return $qb->getQuery()
             ->getResult();
-    }
-
-    /**
-     * @param int $userId
-     * @param int $permissionId
-     * @return array
-     */
-    public function getIdByPermissionAndUser($userId, $permissionId)
-    {
-        return $this->query()
-            ->where('user_id', $userId)
-            ->where('permission_id', $permissionId)
-            ->get()
-            ->toArray();
-    }
-
-    /**
-     * @param int $userId
-     * @param int $permissionName
-     * @return boolean
-     */
-    public function userHasPermissionName($userId, $permissionName)
-    {
-        return $this->query()
-            ->join(
-                ConfigService::$tablePermissions,
-                ConfigService::$tablePermissions . '.id',
-                '=',
-                ConfigService::$tableUserPermissions . '.permission_id'
-            )
-            ->where(
-                function ($query) {
-                    $query->whereDate(
-                        'expiration_date',
-                        '>=',
-                        Carbon::now()
-                            ->toDateTimeString()
-                    )
-                        ->orWhereNull('expiration_date');
-                }
-            )
-            ->where('user_id', $userId)
-            ->where('name', $permissionName)
-            ->exists();
     }
 }

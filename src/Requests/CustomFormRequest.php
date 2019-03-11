@@ -62,24 +62,21 @@ class CustomFormRequest extends FormRequest
     private $jsonApiHydrator;
 
     /**
-     * ValidationService constructor.
+     * CustomFormRequest constructor.
      *
-     * @param $contentService
+     * @param ContentService $contentService
+     * @param ContentDatumService $contentDatumService
+     * @param JsonApiHydrator $jsonApiHydrator
      */
     public function __construct(
         ContentService $contentService,
         ContentDatumService $contentDatumService,
-JsonApiHydrator $jsonApiHydrator
-//        //ContentFieldService $contentFieldService,
-//        ValidationFactory $validationFactory,
-//        ContentHierarchyService $contentHierarchyService
-    ) {
+        JsonApiHydrator $jsonApiHydrator
+    )
+    {
         $this->contentService = $contentService;
         $this->contentDatumService = $contentDatumService;
         $this->jsonApiHydrator = $jsonApiHydrator;
-//        //$this->contentFieldService = $contentFieldService;
-//        $this->validationFactory = $validationFactory;
-//        $this->contentHierarchyService = $contentHierarchyService;
 
         ConfigService::$cacheTime = -1;
     }
@@ -129,14 +126,21 @@ JsonApiHydrator $jsonApiHydrator
         $thereIsEntity = (!$noEntity);
 
         $contentType =
-            $thereIsEntity ? $this->getContentTypeVal($request) : $request->request->get('data')['attributes']['type']??'';
+            $thereIsEntity ? $this->getContentTypeVal($request) :
+                $request->request->get('data')['attributes']['type'] ?? '';
 
         if (isset(ConfigService::$validationRules[ConfigService::$brand]) &&
             array_key_exists($contentType, ConfigService::$validationRules[ConfigService::$brand]) &&
-            array_key_exists($request->request->get('data')['attributes']['status'], ConfigService::$validationRules[ConfigService::$brand][$contentType])) {
+            array_key_exists(
+                $request->request->get('data')['attributes']['status'],
+                ConfigService::$validationRules[ConfigService::$brand][$contentType]
+            )) {
             if (!$entity) {
-                $customRules = ConfigService::$validationRules[ConfigService::$brand][$contentType][$request->request->get('data')['attributes']['status']];
-              } else {
+                $customRules =
+                    ConfigService::$validationRules[ConfigService::$brand][$contentType][$request->request->get(
+                        'data'
+                    )['attributes']['status']];
+            } else {
                 $customRules = $this->prepareCustomRules($request, $contentType, $entity);
             }
         }
@@ -153,8 +157,7 @@ JsonApiHydrator $jsonApiHydrator
     private function getContentTypeVal($request)
     {
         $type = '';
-        if (($request instanceof ContentDatumCreateRequest) ||
-            ($request instanceof ContentFieldCreateRequest)) {
+        if (($request instanceof ContentDatumCreateRequest) || ($request instanceof ContentFieldCreateRequest)) {
             $contentId = $request->request->get('content_id');
             $content = $this->contentService->getById($contentId);
 
@@ -213,17 +216,12 @@ JsonApiHydrator $jsonApiHydrator
             $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
         } catch (\Exception $exception) {
             throw new HttpResponseException(
-response()->json([
-    'code' => 500,
-    'errors' => $exception,
-])
-//                reply()->json(
-//                    null,
-//                    [
-//                        'code' => 500,
-//                        'errors' => $exception,
-//                    ]
-//                )
+                response()->json(
+                    [
+                        'code' => 500,
+                        'errors' => $exception,
+                    ]
+                )
             );
         }
 
@@ -454,45 +452,64 @@ response()->json([
          */
 
         if ($request instanceof ContentDatumDeleteRequest || $request instanceof ContentFieldDeleteRequest) {
-            $idInParam = array_values($request->route()->parameters())[0];
-            if($request instanceof ContentFieldDeleteRequest){
-                $keyToCheckForExemption = $this->contentFieldService->get($idInParam)->getKey();
-            }else{
-                $keyToCheckForExemption = $this->contentDatumService->get($idInParam)->getKey();
+            $idInParam =
+                array_values(
+                    $request->route()
+                        ->parameters()
+                )[0];
+            if ($request instanceof ContentFieldDeleteRequest) {
+                $keyToCheckForExemption =
+                    $this->contentFieldService->get($idInParam)
+                        ->getKey();
+            } else {
+                $keyToCheckForExemption =
+                    $this->contentDatumService->get($idInParam)
+                        ->getKey();
             }
         }
 
         if ($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest) {
-            $idInParam = array_values($request->route()->parameters())[0];
-            if($request instanceof ContentFieldUpdateRequest){
-                $keyToCheckForExemption = $this->contentFieldService->get($idInParam)->getKey();
-            }else{
-                $keyToCheckForExemption = $this->contentDatumService->get($idInParam)->getKey();
+            $idInParam =
+                array_values(
+                    $request->route()
+                        ->parameters()
+                )[0];
+            if ($request instanceof ContentFieldUpdateRequest) {
+                $keyToCheckForExemption =
+                    $this->contentFieldService->get($idInParam)
+                        ->getKey();
+            } else {
+                $keyToCheckForExemption =
+                    $this->contentDatumService->get($idInParam)
+                        ->getKey();
             }
         }
 
-
-        $contentCreatedOn = Carbon::parse($content->getCreatedOn()->format('Y-m-d H:i:s'));
+        $contentCreatedOn =
+            Carbon::parse(
+                $content->getCreatedOn()
+                    ->format('Y-m-d H:i:s')
+            );
         $exemptionDate = new Carbon('1970-01-01 00:00');
-        if(!empty(ConfigService::$validationExemptionDate)){
+        if (!empty(ConfigService::$validationExemptionDate)) {
             $exemptionDate = new Carbon(ConfigService::$validationExemptionDate);
         }
         $exempt = $exemptionDate->gt($contentCreatedOn);
 
-        foreach($messages as $message){
-            if(empty($keyToCheckForExemption)){
+        foreach ($messages as $message) {
+            if (empty($keyToCheckForExemption)) {
                 $keyToCheckForExemption = null;
-                if(!empty($request->request->all()['key'])){
+                if (!empty($request->request->all()['key'])) {
                     $keyToCheckForExemption = $request->request->all()['key'];
                 }
             }
-            if($keyToCheckForExemption === $message['key']){
+            if ($keyToCheckForExemption === $message['key']) {
                 $exempt = false;
                 $alternativeMessages = [$message];
             }
         }
 
-        if(isset($alternativeMessages)){
+        if (isset($alternativeMessages)) {
             $messages = $alternativeMessages;
         }
 
@@ -501,22 +518,22 @@ response()->json([
         /*
          * Passes Validation
          */
-        if(empty($messages) || $exempt){
+        if (empty($messages) || $exempt) {
             return true;
         }
 
         /*
          * Fails Validation
          */
-            throw new HttpResponseException(
-                reply()->json(
-                    new Entity(['messages' => $messages]),
-                    [
-                        'code' => 422,
-                        'errors' => $messages,
-                    ]
-                )
-            );
+        throw new HttpResponseException(
+            reply()->json(
+                new Entity(['messages' => $messages]),
+                [
+                    'code' => 422,
+                    'errors' => $messages,
+                ]
+            )
+        );
     }
 
     /**
@@ -536,7 +553,7 @@ response()->json([
         $contentValidationRequired = false;
 
         $input = $request->request->all();
-            //$request->request->get('data')['attributes'];
+        //$request->request->get('data')['attributes'];
 
         $brand = null;
         $content = $this->getContentFromRequest($request);
@@ -606,7 +623,7 @@ response()->json([
         }
 
         if ($request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest) {
-dd('ajunge?');
+            dd('ajunge?');
             // part 1
             $contentValidationRequired = in_array($content['status'], $restrictions);
 
@@ -624,12 +641,12 @@ dd('ajunge?');
 
             // part 2
             $fieldsOrData = $request instanceof ContentFieldUpdateRequest ? 'fields' : 'data';
-//            dd($fieldsOrData);
-//            foreach ($content[$fieldsOrData] as &$item) {
-//                if ($item['id'] == $input['id']) {
-//                    $item['value'] = $input['value'];
-//                }
-//            }
+            //            dd($fieldsOrData);
+            //            foreach ($content[$fieldsOrData] as &$item) {
+            //                if ($item['id'] == $input['id']) {
+            //                    $item['value'] = $input['value'];
+            //                }
+            //            }
         }
 
         if ($request instanceof ContentDatumDeleteRequest || $request instanceof ContentFieldDeleteRequest) {
@@ -640,21 +657,20 @@ dd('ajunge?');
             // part 2
             if ($contentValidationRequired) {
 
-                $idInParam =
-                    array_values(
-                        $request->route()
-                            ->parameters()
-                    )[0];
+                $idInParam = array_values(
+                    $request->route()
+                        ->parameters()
+                )[0];
 
                 $fieldsOrData = $request instanceof ContentFieldDeleteRequest ? 'fields' : 'data';
 
-//                foreach ($content[$fieldsOrData] as $index => $fieldOrData) {
-//
-//                    if ($fieldOrData['id'] == $idInParam) {
-//                        unset($content[$fieldsOrData][$index]);
-//                    }
-//
-//                }
+                //                foreach ($content[$fieldsOrData] as $index => $fieldOrData) {
+                //
+                //                    if ($fieldOrData['id'] == $idInParam) {
+                //                        unset($content[$fieldsOrData][$index]);
+                //                    }
+                //
+                //                }
             }
         }
 
@@ -670,10 +686,10 @@ dd('ajunge?');
             return $content;
         }
 
-//        if ($request instanceof ContentUpdateRequest) {
-//            $urlPath = explode('/', parse_url($request->fullUrl())['path']);
-//            return $this->contentService->getById((integer)array_values(array_slice($urlPath, -1))[0]);
-//        }
+        //        if ($request instanceof ContentUpdateRequest) {
+        //            $urlPath = explode('/', parse_url($request->fullUrl())['path']);
+        //            return $this->contentService->getById((integer)array_values(array_slice($urlPath, -1))[0]);
+        //        }
 
         if ($request instanceof ContentDatumCreateRequest || $request instanceof ContentFieldCreateRequest) {
 
@@ -690,25 +706,36 @@ dd('ajunge?');
         }
 
         if ($request instanceof ContentFieldUpdateRequest || $request instanceof ContentDatumUpdateRequest) {
-            $idInParam = array_values($request->route()->parameters())[0];
-            if($request instanceof ContentFieldUpdateRequest){
+            $idInParam =
+                array_values(
+                    $request->route()
+                        ->parameters()
+                )[0];
+            if ($request instanceof ContentFieldUpdateRequest) {
                 $contentDatumOrField = $this->contentFieldService->get($idInParam);
-            }else{
+            } else {
                 $contentDatumOrField = $this->contentDatumService->get($idInParam);
             }
         }
 
         if ($request instanceof ContentFieldDeleteRequest || $request instanceof ContentDatumDeleteRequest) {
-            $idInParam = array_values($request->route()->parameters())[0];
-            if($request instanceof ContentFieldDeleteRequest){
+            $idInParam =
+                array_values(
+                    $request->route()
+                        ->parameters()
+                )[0];
+            if ($request instanceof ContentFieldDeleteRequest) {
                 $contentDatumOrField = $this->contentFieldService->get($idInParam);
-            }else{
+            } else {
                 $contentDatumOrField = $this->contentDatumService->get($idInParam);
             }
         }
 
         if (!empty($contentDatumOrField)) {
-            return $this->contentService->getById($contentDatumOrField->getContent()->getId());
+            return $this->contentService->getById(
+                $contentDatumOrField->getContent()
+                    ->getId()
+            );
         }
 
         return [];

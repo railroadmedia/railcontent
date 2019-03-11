@@ -629,7 +629,21 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $response = $this->call('DELETE', 'railcontent/content/' . $content[0]->getId());
+        $this->fakeContentPermission(
+            1,
+            [
+                'content' => $content[0],
+                'permission' => $this->fakePermission()[0],
+            ]
+        );
+
+        $this->fakeComment(5, [
+            'content' => $content[0],
+            'comment' => $this->faker->paragraph
+        ]);
+
+        $id = $content[0]->getId();
+        $response = $this->call('DELETE', 'railcontent/content/' . $id);
 
         $this->assertEquals(204, $response->status());
 
@@ -643,7 +657,21 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertDatabaseMissing(
             config('railcontent.table_prefix') . 'content_topic',
             [
-                'id' => 1,
+                'content_id' => $id,
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix') . 'comments',
+            [
+                'content_id' => $id,
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix') . 'content_permissions',
+            [
+                'content_id' => $id,
             ]
         );
     }
@@ -697,19 +725,27 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
         $otherContent = $this->fakeContent(12);
-        $this->fakeUserPermission(1,[
-            'userId' => $userId,
-            'permission' => $permission[0],
-            'startDate' => Carbon::now(),
-            'expirationDate' => Carbon::now()->addMinute(10)
-        ]);
+        $this->fakeUserPermission(
+            1,
+            [
+                'userId' => $userId,
+                'permission' => $permission[0],
+                'startDate' => Carbon::now(),
+                'expirationDate' => Carbon::now()
+                    ->addMinute(10),
+            ]
+        );
 
-        $this->fakeUserPermission(1,[
-            'userId' => $userId,
-            'permission' => $permission[1],
-            'startDate' => Carbon::now(),
-            'expirationDate' => Carbon::now()->addDays(10)
-        ]);
+        $this->fakeUserPermission(
+            1,
+            [
+                'userId' => $userId,
+                'permission' => $permission[1],
+                'startDate' => Carbon::now(),
+                'expirationDate' => Carbon::now()
+                    ->addDays(10),
+            ]
+        );
 
         $types = ['course'];
         $page = 1;

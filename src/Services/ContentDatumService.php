@@ -12,6 +12,9 @@ use Railroad\Railcontent\Repositories\ContentDatumRepository;
 
 class ContentDatumService
 {
+    /**
+     * @var EntityManager
+     */
     private $entityManager;
     /**
      * @var ContentDatumRepository

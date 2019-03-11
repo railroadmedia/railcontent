@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Entities;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentPermissionRepository")
+ * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_content_permissions")
  *
@@ -99,6 +99,9 @@ class ContentPermission
     public function setContent($content)
     {
         $this->content = $content;
+        if ($content) {
+            $content->addPermission($this);
+        }
     }
 
     /**

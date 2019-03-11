@@ -61,7 +61,7 @@ class Comment
     private $children;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\CommentAssignment", mappedBy="comment")
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\CommentAssignment", mappedBy="comment", cascade={"remove"})
      */
     private $assignedToUser;
 

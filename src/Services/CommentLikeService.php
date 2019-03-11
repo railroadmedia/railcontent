@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Services;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\ResultSetMapping;
+use Doctrine\ORM\QueryBuilder;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentLikes;
@@ -38,7 +40,7 @@ class CommentLikeService
      *
      * @param EntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager, UserProviderInterface  $userProvider)
+    public function __construct(EntityManager $entityManager, UserProviderInterface $userProvider)
     {
         $this->entityManager = $entityManager;
         $this->userProvider = $userProvider;
@@ -82,17 +84,41 @@ class CommentLikeService
     }
 
     /**
-     * Returns [[id, count], ...]
+     * Returns [commentId => [user1, user2], ...]
      *
      * @param $commentIds
      * @return array
      */
     public function getUserIdsForEachCommentId($commentIds, $amountOfUserIdsToPull)
     {
-        return $this->commentLikeRepository->getUserIdsForEachCommentId($commentIds, $amountOfUserIdsToPull);
+        $commentIds = array_unique(array_values($commentIds));
+        $commentLikes = [];
+
+        $qb =
+            $this->commentLikeRepository->createQueryBuilder('c')
+                ->where('c.comment IN (:commentIds)')
+                ->setParameter('commentIds', $commentIds)
+                ->orderBy('c.createdOn', 'desc');
+        $results =
+            $qb->getQuery()
+                ->getResult();
+
+        foreach ($results as $result) {
+            if (count(
+                    $commentLikes[$result->getComment()
+                        ->getId()] ?? []
+                ) < $amountOfUserIdsToPull) {
+                $commentLikes[$result->getComment()
+                    ->getId()][] =
+                    $result->getUser()
+                        ->getId();
+            }
+        }
+
+        return $commentLikes;
     }
 
-    /**
+   /**
      * @param $commentId
      * @param integer $userId
      * @return bool
@@ -116,7 +142,8 @@ class CommentLikeService
         $this->entityManager->persist($commentLikes);
         $this->entityManager->flush();
 
-       $this->entityManager->getCache()->evictEntity(Comment::class, $commentId);
+        $this->entityManager->getCache()
+            ->evictEntity(Comment::class, $commentId);
 
         event(new CommentLiked($commentId, $userId));
 
@@ -143,7 +170,8 @@ class CommentLikeService
         $this->entityManager->remove($commentLikes);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()->evictEntity(Comment::class, $commentId);
+        $this->entityManager->getCache()
+            ->evictEntity(Comment::class, $commentId);
 
         event(new CommentUnLiked($commentId, $userId));
 

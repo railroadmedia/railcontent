@@ -63,9 +63,11 @@ class UserPermissionsService
             }
             $this->setTTLOrDeleteUserCache($attributes['user_id'], $ttlEndDate);
         }
+
         $permission =
             $this->entityManager->getRepository(Permission::class)
                 ->find($attributes['permission_id']);
+
         $userPermission = $this->userPermissionsRepository->findOneBy(
             [
                 'user' => $user,
@@ -124,33 +126,7 @@ class UserPermissionsService
      */
     public function getUserPermissions($userId = null, $onlyActive = true)
     {
-        $qb = $this->userPermissionsRepository->createQueryBuilder('up');
-
-        if ($userId) {
-            $user = $this->userProvider->getUserById($userId);
-            $qb->where('up.user = :user')
-                ->setParameter('user', $user);
-        }
-
-        if ($onlyActive) {
-            $qb->andWhere(
-                $qb->expr()
-                    ->orX(
-                        $qb->expr()
-                            ->isNull('up.expirationDate'),
-                        $qb->expr()
-                            ->gte('up.expirationDate', ':expirationDate')
-                    )
-            )
-                ->setParameter(
-                    'expirationDate',
-                    Carbon::now()
-                        ->toDateTimeString()
-                );
-        }
-
-        return $qb->getQuery()
-            ->getResult();
+        return  $this->userPermissionsRepository->getUserPermissions($userId, $onlyActive);
     }
 
     /**

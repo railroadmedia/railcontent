@@ -223,33 +223,6 @@ class ContentRepository extends EntityRepository
     }
 
     /**
-     * @return int
-     */
-    public function countFilter()
-    {
-        $subQuery =
-            $this->newQuery()
-                ->selectCountColumns()
-                ->restrictByUserAccess()
-                ->restrictByFields($this->requiredFields)
-                ->includeByFields($this->includedFields)
-                ->restrictByUserStates($this->requiredUserStates)
-                ->includeByUserStates($this->includedUserStates)
-                ->restrictByTypes($this->typesToInclude)
-                ->restrictBySlugHierarchy($this->slugHierarchy)
-                ->restrictByParentIds($this->requiredParentIds)
-                ->groupBy(ConfigService::$tableContent . '.id');
-
-        return $this->connection()
-            ->table(
-                $this->connection()
-                    ->raw('(' . $subQuery->toSql() . ') as rows')
-            )
-            ->addBinding($subQuery->getBindings())
-            ->count();
-    }
-
-    /**
      * @return array
      */
     public function getFilterFields()

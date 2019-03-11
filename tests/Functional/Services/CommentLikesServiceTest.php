@@ -77,7 +77,10 @@ class CommentLikesServiceTest extends RailcontentTestCase
         $results = $this->classBeingTested->create($comment[0]->getId(), $userId);
 
         $this->assertEquals($comment[0], $results->getComment());
-        $this->assertEquals($userId, $results->getUser()->getId());
+        $this->assertEquals($userId,
+            $results->getUser()
+                ->getId()
+        );
 
         $this->assertDatabaseHas(
             config('railcontent.table_prefix') . 'comment_likes',
@@ -143,5 +146,46 @@ class CommentLikesServiceTest extends RailcontentTestCase
             ],
             $result
         );
+    }
+
+    public function test_get_user_ids_for_comments()
+    {
+        $comments = $this->fakeComment(2);
+
+        $this->fakeCommentLike(
+            1,
+            [
+                'comment' => $comments[0],
+                'userId' => rand(1, 100),
+            ]
+        );
+
+        $this->fakeCommentLike(
+            1,
+            [
+                'comment' => $comments[0],
+                'userId' => rand(1, 100),
+            ]
+        );
+        $this->fakeCommentLike(
+            1,
+            [
+                'comment' => $comments[0],
+                'userId' => rand(1, 100),
+            ]
+        );
+        $this->fakeCommentLike(
+            1,
+            [
+                'comment' => $comments[1],
+                'userId' => rand(1, 100),
+            ]
+        );
+
+        $results =
+            $this->classBeingTested->getUserIdsForEachCommentId([$comments[0]->getId(), $comments[1]->getId()], 2);
+
+        $this->assertEquals(2, count($results[$comments[0]->getId()]));
+        $this->assertEquals(1, count($results[$comments[1]->getId()]));
     }
 }

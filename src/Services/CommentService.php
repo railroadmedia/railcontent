@@ -53,7 +53,7 @@ class CommentService
     public function __construct(
         EntityManager $entityManager,
         JsonApiHydrator $jsonApiHydrator,
-    UserProviderInterface $userProvider
+        UserProviderInterface $userProvider
     ) {
         $this->entityManager = $entityManager;
         $this->jsonApiHidrator = $jsonApiHydrator;
@@ -247,7 +247,9 @@ class CommentService
             return false;
         }
 
-        return self::$canManageOtherComments || ($comment->getUser()->getId() == auth()->id());
+        return self::$canManageOtherComments ||
+            ($comment->getUser()
+                    ->getId() == auth()->id());
     }
 
     /**
@@ -438,6 +440,7 @@ class CommentService
     }
 
     /** Count comments and replies
+     *
      * @return mixed
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -486,6 +489,6 @@ class CommentService
 
         return $qb->getQuery()
             ->getSingleScalarResult();
-    
+
     }
 }

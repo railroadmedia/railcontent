@@ -65,6 +65,7 @@ class ContentHierarchyService
     public function countParentsChildren(array $parentIds)
     {
         $results = [];
+
         $parents =
             $this->contentHierarchyRepository->createQueryBuilder('ch')
                 ->addSelect('COUNT(ch) as nr')
@@ -73,6 +74,7 @@ class ContentHierarchyService
                 ->groupBy('ch.parent')
                 ->getQuery()
                 ->getResult();
+
         foreach ($parents as $hierarchy) {
             $parentId =
                 $hierarchy[0]->getParent()

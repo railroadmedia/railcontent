@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Railroad\Railcontent\Contracts\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\CommentAssignmentRepository")
+ * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_comment_assignment")
  *

@@ -14,6 +14,9 @@ use Railroad\Railcontent\Support\Collection;
 
 class UserContentProgressService
 {
+    /**
+     * @var EntityManager
+     */
     private $entityManager;
 
     /**
@@ -50,7 +53,7 @@ class UserContentProgressService
         ContentHierarchyService $contentHierarchyService,
         EntityManager $entityManager,
         ContentService $contentService,
-    UserProviderInterface $userProvider
+        UserProviderInterface $userProvider
     ) {
         $this->entityManager = $entityManager;
         $this->contentHierarchyService = $contentHierarchyService;
@@ -188,7 +191,8 @@ class UserContentProgressService
 
         }
 
-        $this->entityManager->getCache()->evictEntityRegion(Content::class);
+        $this->entityManager->getCache()
+            ->evictEntityRegion(Content::class);
 
         UserContentProgressRepository::$cache = [];
 
@@ -273,7 +277,8 @@ class UserContentProgressService
 
         event(new UserContentProgressSaved($userId, $contentId));
 
-        $this->entityManager->getCache()->evictEntityRegion(Content::class);
+        $this->entityManager->getCache()
+            ->evictEntityRegion(Content::class);
 
         UserContentProgressRepository::$cache = [];
 
@@ -328,7 +333,8 @@ class UserContentProgressService
         event(new UserContentProgressSaved($userId, $contentId));
 
         //delete user progress from cache
-        $this->entityManager->getCache()->evictEntityRegion(Content::class);
+        $this->entityManager->getCache()
+            ->evictEntityRegion(Content::class);
 
         return true;
     }
@@ -342,7 +348,6 @@ class UserContentProgressService
      */
     public function saveContentProgress($contentId, $progress, $userId, $overwriteComplete = false)
     {
-
 
         if (is_null($contentId)) {
             error_log(
@@ -387,7 +392,8 @@ class UserContentProgressService
         $this->entityManager->persist($userContentProgress);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()->evictEntityRegion(Content::class);
+        $this->entityManager->getCache()
+            ->evictEntityRegion(Content::class);
 
         UserContentProgressRepository::$cache = [];
 

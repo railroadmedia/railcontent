@@ -3,150 +3,18 @@
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
 use Carbon\Carbon;
-use Doctrine\ORM\Query\Expr\Join;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\ContentField;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Resora\Queries\CachedQuery;
 
 class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
 {
-    /**
-     * @return $this
-     */
-    public function selectPrimaryColumns()
-    {
-        $this->addSelect(
-            [
-                ConfigService::$tableContent . '.id as id',
-                ConfigService::$tableContent . '.slug as slug',
-                ConfigService::$tableContent . '.type as type',
-                ConfigService::$tableContent . '.sort as sort',
-                ConfigService::$tableContent . '.status as status',
-                ConfigService::$tableContent . '.language as language',
-                ConfigService::$tableContent . '.brand as brand',
-                //                ConfigService::$tableContent . '.published_on as published_on',
-                //                ConfigService::$tableContent . '.created_on as created_on',
-                //                ConfigService::$tableContent . '.archived_on as archived_on',
-            ]
-        );
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function selectCountColumns()
-    {
-        $this->addSelect(
-            [
-                ConfigService::$tableContent . '.id as id',
-            ]
-        );
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function selectInheritenceColumns()
-    {
-        $this->addSelect(
-            [
-                ConfigService::$tableContentHierarchy . '.child_position as child_position',
-                ConfigService::$tableContentHierarchy . '.child_id as child_id',
-                ConfigService::$tableContentHierarchy . '.parent_id as parent_id',
-            ]
-        );
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function selectFilterOptionColumns()
-    {
-        $this->addSelect(
-            [
-                ConfigService::$tableContentFields . '.key as key',
-                ConfigService::$tableContentFields . '.value as value',
-                ConfigService::$tableContentFields . '.type as type',
-            ]
-        );
-
-        return $this;
-    }
-
-    /**
-     * Sub query must be completely created before being passed in here.
-     * Any changes to the $subQuery object after being passed in will not be reflected at retrieval time.
-     *
-     * @param Builder $subQuery
-     * @return $this
-     */
-    public function addSubJoinToQuery(Builder $subQuery)
-    {
-        $this->join(
-            $this->raw('(' . $subQuery->toSql() . ') inner_content'),
-            function (JoinClause $joinClause) {
-                $joinClause->on(ConfigService::$tableContent . '.id', '=', 'inner_content.id');
-            }
-        )
-            ->addBinding($subQuery->getBindings());
-
-        return $this;
-    }
-
-    /**
-     * @param array $slugHierarchy
-     * @return $this
-     */
-    public function addSlugInheritance(array $slugHierarchy)
-    {
-        $previousTableName = ConfigService::$tableContent;
-        $previousTableJoinColumn = '.id';
-
-        foreach ($slugHierarchy as $i => $slug) {
-            $tableName = 'inheritance_' . $i;
-
-            $this->leftJoin(
-                ConfigService::$tableContentHierarchy . ' as ' . $tableName,
-                $tableName . '.child_id',
-                '=',
-                $previousTableName . $previousTableJoinColumn
-            );
-
-            $inheritedContentTableName = 'inherited_content_' . $i;
-
-            $this->leftJoin(
-                ConfigService::$tableContent . ' as ' . $inheritedContentTableName,
-                $inheritedContentTableName . '.id',
-                '=',
-                $tableName . '.parent_id'
-            );
-
-            $this->addSelect([$tableName . '.child_position as child_position_' . $i]);
-            $this->addSelect([$tableName . '.parent_id as parent_id_' . $i]);
-            $this->addSelect([$inheritedContentTableName . '.slug as parent_slug_' . $i]);
-
-            $previousTableName = $tableName;
-            $previousTableJoinColumn = '.parent_id';
-        }
-
-        return $this;
-    }
-
     /**
      * @param array $slugHierarchy
      * @return $this
@@ -459,6 +327,11 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
         return $this;
     }
 
+    /**
+     * @param $param
+     * @param $values
+     * @return $this
+     */
     public function whereIn($param, $values)
     {
         $this->andWhere($param . ' IN (:values)')
@@ -468,7 +341,6 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
     }
 
     /**
-     * @param array $requiredFields
      * @return $this
      */
     public function restrictByFilterOptions()

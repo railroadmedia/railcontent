@@ -14,6 +14,7 @@ use Railroad\Railcontent\Transformers\ContentDataTransformer;
 use Railroad\Railcontent\Transformers\ContentHierarchyTransformer;
 use Railroad\Railcontent\Transformers\ContentPermissionTransformer;
 use Railroad\Railcontent\Transformers\ContentTransformer;
+use Railroad\Railcontent\Transformers\DecoratedContentTransformer;
 use Railroad\Railcontent\Transformers\PermissionTransformer;
 use Railroad\Railcontent\Transformers\UserPermissionTransformer;
 use Spatie\Fractal\Fractal;
@@ -35,30 +36,12 @@ class ResponseService extends FractalResponseService
         return self::create(
             $entityOrEntities,
             'content',
-            new ContentTransformer(),
+            new DecoratedContentTransformer(),
             new JsonApiSerializer(),
             $queryBuilder
         )
             ->parseIncludes($includes)
             ->addMeta((count($filterOptions) > 0) ? ['filterOption' => $filterOptions] : []);
-    }
-
-    /**
-     * @param $entityOrEntities
-     * @param QueryBuilder|null $queryBuilder
-     * @param array $includes
-     * @return Fractal
-     */
-    public static function contentArray($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
-    {
-        return self::create(
-            $entityOrEntities,
-            'content',
-            new ContentTransformer(),
-            new ArraySerializer(),
-            $queryBuilder
-        )
-            ->parseIncludes($includes);
     }
 
     /**
