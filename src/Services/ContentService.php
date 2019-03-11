@@ -1137,17 +1137,17 @@ class ContentService
 
         ContentRepository::$pullFutureContent = true;
 
-        $typesForCalendars = config('railcontent.types-for-calendars.' . ConfigService::$brand);
-        $semesterPacksToGet = config('railcontent.semester-packs-for-calendars.' . ConfigService::$brand);
+        $typesForCalendars = config('railcontent.types-for-calendars.' . ConfigService::$brand, []);
+        $semesterPacksToGet = config('railcontent.semester-packs-for-calendars.' . ConfigService::$brand, []);
 
         if(empty($typesForCalendars) && empty($semesterPacksToGet)){
             return new Collection();
         }
 
         if($typesForCalendars){
-            $shows = $typesForCalendars['shows'];
-            $liveEventsTypes = $typesForCalendars['live-events-types'];
-            $contentReleasesTypes = $typesForCalendars['content-releases-types'];
+            $shows = $typesForCalendars['shows'] ?? [];
+            $liveEventsTypes = $typesForCalendars['live-events-types'] ?? [];
+            $contentReleasesTypes = $typesForCalendars['content-releases-types'] ?? [];
         }
 
         $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -1166,7 +1166,7 @@ class ContentService
             '>'
         );
 
-        foreach($semesterPacksToGet as $semesterPack){
+        foreach($semesterPacksToGet ?? [] as $semesterPack){
             $parents[] = $this->getTypesBySlugSpecialStatus($semesterPack);
         }
 
