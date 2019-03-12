@@ -86,7 +86,7 @@ class UserContentProgressService
             ->andWhere($alias . '.user = :user')
             ->setParameters(
                 [
-                    'brand' => ConfigService::$brand,
+                    'brand' => config('railcontent.brand'),
                     'contentType' => $contentType,
                     'state' => $state,
                     'user' => $user,
@@ -570,7 +570,7 @@ class UserContentProgressService
             ->andWhere($alias . '.user = :user')
             ->setParameters(
                 [
-                    'brand' => ConfigService::$brand,
+                    'brand' => config('railcontent.brand'),
                     'contentType' => $types,
                     'state' => $state,
                     'user' => $user,

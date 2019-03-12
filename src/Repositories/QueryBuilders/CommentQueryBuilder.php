@@ -11,14 +11,14 @@ class CommentQueryBuilder extends QueryBuilder
     protected function getSelectColumns()
     {
         return [
-            ConfigService::$tableComments . '.id' => 'id',
-            ConfigService::$tableComments . '.content_id' => 'content_id',
-            ConfigService::$tableComments . '.comment' => 'comment',
-            ConfigService::$tableComments . '.parent_id' => 'parent_id',
-            ConfigService::$tableComments . '.user_id' => 'user_id',
-            ConfigService::$tableComments . '.temporary_display_name' => 'display_name',
-            ConfigService::$tableComments . '.created_on' => 'created_on',
-            ConfigService::$tableComments . '.deleted_at' => 'deleted_at'
+            config('railcontent.table_prefix'). 'comments'. '.id' => 'id',
+            config('railcontent.table_prefix'). 'comments' . '.content_id' => 'content_id',
+            config('railcontent.table_prefix'). 'comments' . '.comment' => 'comment',
+            config('railcontent.table_prefix'). 'comments' . '.parent_id' => 'parent_id',
+            config('railcontent.table_prefix'). 'comments'. '.user_id' => 'user_id',
+            config('railcontent.table_prefix'). 'comments' . '.temporary_display_name' => 'display_name',
+            config('railcontent.table_prefix'). 'comments'. '.created_on' => 'created_on',
+            config('railcontent.table_prefix'). 'comments'. '.deleted_at' => 'deleted_at'
         ];
     }
 
@@ -44,7 +44,7 @@ class CommentQueryBuilder extends QueryBuilder
     public function aggregateOrderTable($table)
     {
         if (
-            $table != ConfigService::$tableComments &&
+            $table != config('railcontent.table_prefix'). 'comments' &&
             isset(ConfigService::$tableCommentsAggregates[$table])
         ) {
             $config = ConfigService::$tableCommentsAggregates[$table];
@@ -58,7 +58,7 @@ class CommentQueryBuilder extends QueryBuilder
                     $table,
                     $table .'.'. $config['foreignField'],
                     '=',
-                    ConfigService::$tableComments .'.'. $config['localField']
+                    config('railcontent.table_prefix'). 'comments' .'.'. $config['localField']
                 );
 
             if (isset($config['groupBy'])) {
@@ -77,7 +77,7 @@ class CommentQueryBuilder extends QueryBuilder
     public function excludeByUser()
     {
         if (CommentRepository::$availableUserId) {
-            $this->where(ConfigService::$tableComments . '.user_id', '<>', CommentRepository::$availableUserId);
+            $this->where(config('railcontent.table_prefix'). 'comments' . '.user_id', '<>', CommentRepository::$availableUserId);
         }
 
         return $this;
@@ -91,12 +91,12 @@ class CommentQueryBuilder extends QueryBuilder
     {
         if (CommentRepository::$availableContentType) {
             $this->leftJoin(
-                ConfigService::$tableContent,
+                config('railcontent.table_prefix') . 'content',
                 'content_id',
                 '=',
-                ConfigService::$tableContent . '.id'
+                config('railcontent.table_prefix') . 'content' . '.id'
             );
-            $this->where(ConfigService::$tableContent . '.type', CommentRepository::$availableContentType);
+            $this->where(config('railcontent.table_prefix') . 'content' . '.type', CommentRepository::$availableContentType);
         }
 
         return $this;
@@ -122,7 +122,7 @@ class CommentQueryBuilder extends QueryBuilder
     public function restrictByUser()
     {
         if (CommentRepository::$availableUserId) {
-            $this->where(ConfigService::$tableComments . '.user_id', CommentRepository::$availableUserId);
+            $this->where(config('railcontent.table_prefix'). 'comments'. '.user_id', CommentRepository::$availableUserId);
         }
 
         return $this;
@@ -147,12 +147,12 @@ class CommentQueryBuilder extends QueryBuilder
     public function restrictByBrand()
     {
         $this->leftJoin(
-            ConfigService::$tableContent . ' as content',
+            config('railcontent.table_prefix') . 'content' . ' as content',
             'content.id',
             '=',
-            ConfigService::$tableComments . '.content_id'
+            config('railcontent.table_prefix'). 'comments' . '.content_id'
         )
-            ->whereIn('content.brand', array_values(array_wrap(ConfigService::$availableBrands)));
+            ->whereIn('content.brand', array_values(array_wrap(config('railcontent.available_brands'))));
 
         return $this;
     }
@@ -165,16 +165,16 @@ class CommentQueryBuilder extends QueryBuilder
     {
         if (CommentRepository::$assignedToUserId !== false) {
             $this->leftJoin(
-                ConfigService::$tableCommentsAssignment,
-                ConfigService::$tableCommentsAssignment . '.comment_id',
+                config('railcontent.table_prefix'). 'comment_assignment',
+                config('railcontent.table_prefix'). 'comment_assignment' . '.comment_id',
                 '=',
-                ConfigService::$tableComments . '.id'
+                config('railcontent.table_prefix'). 'comments' . '.id'
             )
                 ->where(
-                    ConfigService::$tableCommentsAssignment . '.user_id',
+                    config('railcontent.table_prefix'). 'comment_assignment' . '.user_id',
                     CommentRepository::$assignedToUserId
                 )
-                ->addSelect(ConfigService::$tableCommentsAssignment . '.assigned_on');
+                ->addSelect( config('railcontent.table_prefix'). 'comment_assignment' . '.assigned_on');
         }
 
         return $this;
@@ -200,7 +200,7 @@ class CommentQueryBuilder extends QueryBuilder
 
         if (CommentAssignmentRepository::$availableAssociatedManagerId) {
             $this->where(
-                ConfigService::$tableCommentsAssignment . '.user_id',
+                config('railcontent.table_prefix'). 'comment_assignment' . '.user_id',
                 CommentAssignmentRepository::$availableAssociatedManagerId
             );
         }
@@ -216,7 +216,7 @@ class CommentQueryBuilder extends QueryBuilder
     public function restrictByCommentId($commentId)
     {
         if ($commentId) {
-            $this->where(ConfigService::$tableCommentsAssignment . '.comment_id', $commentId);
+            $this->where( config('railcontent.table_prefix'). 'comment_assignment' . '.comment_id', $commentId);
         }
 
         return $this;
@@ -229,7 +229,7 @@ class CommentQueryBuilder extends QueryBuilder
      */
     public function restrictByCreationDate($creationDate)
     {
-        $this->where(ConfigService::$tableComments . '.created_on', '>=', $creationDate);
+        $this->where(config('railcontent.table_prefix'). 'comments' . '.created_on', '>=', $creationDate);
 
         return $this;
     }

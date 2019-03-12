@@ -38,7 +38,7 @@ class FullTextSearchServiceTest extends RailcontentTestCase
         $contents = $this->fakeContent($nr,
             [
                 'slug' => 'slug',
-                'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.searchable_content_types')),
                 'title' => 'field '.rand(1, 15)
             ]);
 
@@ -46,7 +46,7 @@ class FullTextSearchServiceTest extends RailcontentTestCase
 
         $diffContents = $this->fakeContent(10,
             [
-                'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.searchable_content_types')),
             ]);
 
         $this->artisan('command:createSearchIndexesForContents');

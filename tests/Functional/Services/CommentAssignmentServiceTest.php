@@ -2,17 +2,9 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
-use Carbon\Carbon;
 use Faker\ORM\Doctrine\Populator;
-use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentAssignment;
-use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Factories\CommentAssignationFactory;
-use Railroad\Railcontent\Factories\CommentFactory;
-use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Services\CommentAssignmentService;
-use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentAssignmentServiceTest extends RailcontentTestCase
@@ -22,21 +14,6 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
      * @var CommentAssignmentService
      */
     protected $classBeingTested;
-
-    /**
-     * @var ContentFactory
-     */
-    protected $contentFactory;
-
-    /**
-     * @var CommentFactory
-     */
-    protected $commentFactory;
-
-    /**
-     * @var CommentAssignationFactory
-     */
-    protected $commentAssignationFactory;
 
     protected function setUp()
     {
@@ -49,7 +26,7 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
 
     public function test_store()
     {
-        $managerId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
+        $managerId = $this->faker->randomElement(config('railcontent.comment_assignation_owner_ids'));
         $content = $this->fakeContent();
         $comment = $this->fakeComment();
 
@@ -71,7 +48,7 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
 
     public function test_delete_comment_assignation()
     {
-        $userId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
+        $userId = $this->faker->randomElement(config('railcontent.comment_assignation_owner_ids'));
         $this->fakeContent();
         $comment = $this->fakeComment();
 
@@ -88,7 +65,7 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
         $this->assertTrue($results);
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableCommentsAssignment,
+            config('railcontent.table_prefix'). 'comment_assignment',
             [
                 'comment_id' => $comment[0]->getId(),
                 'user_id' => $userId,
@@ -99,7 +76,7 @@ class CommentAssignmentServiceTest extends RailcontentTestCase
 
     public function test_get_assigned_comments()
     {
-        $userId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
+        $userId = $this->faker->randomElement(config('railcontent.comment_assignation_owner_ids'));
         $this->fakeContent();
         $comment = $this->fakeComment(5);
         $assignedNr = rand(2, 5);

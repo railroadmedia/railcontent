@@ -18,41 +18,41 @@ class AddIdColumnToSearchIndexesTable extends Migration
             //DB::unprepared('ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' DROP PRIMARY KEY');
             Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
                 'ALTER TABLE ' .
-                ConfigService::$tableSearchIndexes .
+                config('railcontent.table_prefix'). 'search_indexes' .
                 ' DROP PRIMARY KEY'
             );
             Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
                 'ALTER TABLE ' .
-                ConfigService::$tableSearchIndexes .
+                config('railcontent.table_prefix'). 'search_indexes'.
                 ' DROP INDEX high_full_text'
             );
             Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
                 'ALTER TABLE ' .
-                ConfigService::$tableSearchIndexes .
+                config('railcontent.table_prefix'). 'search_indexes' .
                 ' DROP INDEX medium_full_text'
             );
             Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
                 'ALTER TABLE ' .
-                ConfigService::$tableSearchIndexes .
+                config('railcontent.table_prefix'). 'search_indexes' .
                 ' DROP INDEX low_full_text'
             );
             Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
                 'ALTER TABLE ' .
-                ConfigService::$tableSearchIndexes .
+                config('railcontent.table_prefix'). 'search_indexes' .
                 ' ADD `id` int unsigned not null auto_increment primary key'
             );
             Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
                 'ALTER TABLE ' .
-                ConfigService::$tableSearchIndexes .
+                config('railcontent.table_prefix'). 'search_indexes' .
                 ' ADD FULLTEXT high_full_text(high_value)'
             );
             Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
                 'ALTER TABLE ' .
-                ConfigService::$tableSearchIndexes .
+                config('railcontent.table_prefix'). 'search_indexes' .
                 ' ADD FULLTEXT medium_full_text(medium_value)'
             );
             Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
-                'ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' ADD FULLTEXT low_full_text(low_value)'
+                'ALTER TABLE ' . config('railcontent.table_prefix'). 'search_indexes' . ' ADD FULLTEXT low_full_text(low_value)'
             );
         }
     }
@@ -65,7 +65,7 @@ class AddIdColumnToSearchIndexesTable extends Migration
     public function down()
     {
         Schema::connection(ConfigService::$databaseConnectionName)->table(
-            ConfigService::$tableSearchIndexes,
+            config('railcontent.table_prefix'). 'search_indexes',
             function ($table) {
                 /**
                  * @var $table \Illuminate\Database\Schema\Blueprint

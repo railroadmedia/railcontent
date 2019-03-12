@@ -15,7 +15,7 @@ class CreateCommentLikesTable extends Migration
     public function up()
     {
         Schema::connection(ConfigService::$databaseConnectionName)->create(
-            ConfigService::$tableCommentLikes,
+            config('railcontent.table_prefix'). 'comment_likes',
             function(Blueprint $table) {
                 $table->increments('id');
                 $table->integer('comment_id')->index();
@@ -32,6 +32,6 @@ class CreateCommentLikesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableCommentLikes);
+        Schema::dropIfExists(config('railcontent.table_prefix'). 'comment_likes');
     }
 }

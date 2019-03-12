@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Requests;
 
 use Railroad\Railcontent\Services\ConfigService;
 
-
 class ContentDatumCreateRequest extends CustomFormRequest
 {
     /**
@@ -14,21 +13,22 @@ class ContentDatumCreateRequest extends CustomFormRequest
      */
     public function rules()
     {
+        $this->validateContent($this);
 
-//        $this->validateContent($this);
-//
-//        //set the general validation rules
+        //set the general validation rules
         $this->setGeneralRules(
             [
                 'data.attributes.key' => 'required|max:255',
                 'data.attributes.position' => 'nullable|numeric|min:0',
                 'data.relationships.content.data.id' => 'required|numeric|exists:' .
-                    ConfigService::$tableContent . ',id'
+                    config('railcontent.table_prefix') .
+                    'content' .
+                    ',id',
             ]
         );
-//
-//        //set the custom validation rules
-//        $this->setCustomRules($this, 'datum');
+
+        //set the custom validation rules
+        $this->setCustomRules($this, 'data');
 
         //get all the rules for the request
         return parent::rules();

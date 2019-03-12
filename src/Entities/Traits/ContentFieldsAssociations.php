@@ -74,6 +74,25 @@ trait ContentFieldsAssociations
     private $playlist;
 
     /**
+     * Content constructor.
+     */
+    public function __construct()
+    {
+        $this->child = new ArrayCollection();
+        $this->data = new ArrayCollection();
+        $this->topic = new ArrayCollection();
+        $this->tag = new ArrayCollection();
+        $this->key = new ArrayCollection();
+        $this->keyPitchType = new ArrayCollection();
+        $this->sbtBpm = new ArrayCollection();
+        $this->sbtExerciseNumber = new ArrayCollection();
+        $this->playlist = new ArrayCollection();
+        $this->exercise = new ArrayCollection();
+        $this->userProgress = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
+    }
+
+    /**
      * @return Content|null
      */
     public function getExercise()
@@ -253,15 +272,11 @@ trait ContentFieldsAssociations
      */
     public function addTag(ContentTag $contentTag)
     {
-        if ($this->tag->contains($contentTag)) {
-            // Do nothing if its already part of our collection
-            return;
-        }
 
         $predictate = function ($element) use ($contentTag) {
             return $element->getTag() === $contentTag->getTag();
         };
-        $existTag = $this->topic->filter($predictate);
+        $existTag = $this->tag->filter($predictate);
 
         if ($existTag->isEmpty()) {
             $this->tag->add($contentTag);

@@ -26,7 +26,7 @@ class UserContentRequest extends FormRequest
     {
         return [
             'data.relationships.content.data.id' => 'required|numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
-                ConfigService::$tableContent . ',id'
+                config('railcontent.table_prefix'). 'content' . ',id'
         ];
     }
 }

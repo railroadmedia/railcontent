@@ -35,7 +35,6 @@ class ExpireCacheTest extends RailcontentTestCase
                 'status' => ContentService::STATUS_PUBLISHED,
                 'brand' => config('railcontent.brand'),
                 'publishedOn' => Carbon::now(),
-                'userId' => null
             ]
         );
 

@@ -23,12 +23,12 @@ class ContentPermissionsDecorator implements DecoratorInterface
     {
         $contentPermissions =
             $this->contentPermissionsRepository->query()
-                ->select([ConfigService::$tableContentPermissions . '.*', ConfigService::$tablePermissions . '.name'])
+                ->select([config('railcontent.table_prefix'). 'content_permissions' . '.*', config('railcontent.table_prefix'). 'permissions' . '.name'])
                 ->join(
-                    ConfigService::$tablePermissions,
-                    ConfigService::$tablePermissions . '.id',
+                    config('railcontent.table_prefix'). 'permissions',
+                    config('railcontent.table_prefix'). 'permissions' . '.id',
                     '=',
-                    ConfigService::$tableContentPermissions . '.permission_id'
+                    config('railcontent.table_prefix'). 'content_permissions' . '.permission_id'
                 )
                 ->whereIn('content_id', $contents->pluck('id'))
                 ->orWhereIn('content_type', $contents->pluck('type'))

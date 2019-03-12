@@ -18,8 +18,14 @@ class BrandMiddleware
     public function handle(Request $request, Closure $next)
     {
         if ($request->has('brand') && ConfigService::$dataMode == 'host') {
-            ConfigService::$brand = $request->get('brand');
-            ConfigService::$availableBrands = array_wrap($request->get('brand'));
+            config(
+                [
+                    'railcontent.brand' => $request->get('brand'),
+                    'railcontent.available_brands' => array_wrap($request->get('brand')),
+                ]
+            );
+//            ConfigService::$brand = $request->get('brand');
+//            ConfigService::$availableBrands = array_wrap($request->get('brand'));
         }
 
         return $next($request);

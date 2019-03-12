@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use Railroad\Railcontent\Services\ConfigService;
 
 class CreateCommentAssignmentTable extends Migration
 {
@@ -14,8 +13,8 @@ class CreateCommentAssignmentTable extends Migration
      */
     public function up()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)->create(
-            ConfigService::$tableCommentsAssignment,
+        Schema::connection(config('railcontent.database_connection_name'))->create(
+            config('railcontent.table_prefix'). 'comment_assignment',
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('comment_id')->index();
@@ -31,6 +30,6 @@ class CreateCommentAssignmentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableCommentsAssignment);
+        Schema::dropIfExists(config('railcontent.table_prefix'). 'comment_assignment');
     }
 }

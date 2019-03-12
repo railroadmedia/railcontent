@@ -22,14 +22,27 @@ class ContentDatumUpdateRequest extends CustomFormRequest
                 'data.attributes.key' => 'max:255',
                 'data.attributes.position' => 'nullable|numeric|min:0',
                 'data.relationships.content.data.id' => 'numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
-                    ConfigService::$tableContent . ',id'
+                    config('railcontent.table_prefix'). 'content' . ',id'
             ]
         );
 
         //set the custom validation rules
-        $this->setCustomRules($this, 'datum');
+        $this->setCustomRules($this, 'data');
 
         //get all the rules for the request
         return parent::rules();
+    }
+
+    public function onlyAllowed()
+    {
+        return
+            $this->only(
+                [
+                    'data.attributes.key',
+                    'data.attributes.value',
+                    'data.attributes.position',
+                    'data.relationships.content'
+                ]
+            );
     }
 }

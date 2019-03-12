@@ -71,14 +71,7 @@ class ContentDatumJsonController extends Controller
 
         $contentData = $this->datumService->update(
             $dataId,
-            $request->only(
-                [
-                    'content_id',
-                    'key',
-                    'value',
-                    'position',
-                ]
-            )
+            $request->onlyAllowed()
         );
 
         //if the update method response it's null the datum not exist; we throw the proper exception

@@ -210,7 +210,7 @@ class ContentServiceTest extends RailcontentTestCase
 
         //check that the content datum are deleted
         $this->assertDatabaseMissing(
-            ConfigService::$tableContentData,
+            config('railcontent.table_prefix'). 'content_data',
             [
                 'content_id' => $id,
             ]
@@ -233,7 +233,7 @@ class ContentServiceTest extends RailcontentTestCase
 
         //check that the content it's deleted
         $this->assertDatabaseMissing(
-            ConfigService::$tableContent,
+            config('railcontent.table_prefix'). 'content',
             [
                 'id' => $id,
             ]
@@ -266,18 +266,18 @@ class ContentServiceTest extends RailcontentTestCase
     {
         $parent = $this->contentFactory->create(
             $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ContentService::STATUS_PUBLISHED
         );
 
         $content = $this->contentFactory->create(
             $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ContentService::STATUS_PUBLISHED
         );
         $otherSiblingContent = $this->contentFactory->create(
             $this->faker->slug(),
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ContentService::STATUS_PUBLISHED
         );
         for ($i = 0; $i < 3; $i++) {
@@ -306,7 +306,7 @@ class ContentServiceTest extends RailcontentTestCase
 
         //check that the content it's marked as deleted
         $this->assertDatabaseHas(
-            ConfigService::$tableContent,
+            config('railcontent.table_prefix'). 'content',
             [
                 'id' => $content['id'],
                 'status' => ContentService::STATUS_DELETED,
@@ -323,7 +323,7 @@ class ContentServiceTest extends RailcontentTestCase
 
         //check that the content datum are not deleted
         $this->assertDatabaseHas(
-            ConfigService::$tableContentData,
+            config('railcontent.table_prefix'). 'content_data',
             [
                 'content_id' => $content['id'],
             ]
@@ -331,7 +331,7 @@ class ContentServiceTest extends RailcontentTestCase
 
         //check that the link with the parent was not deleted
         $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
+            config('railcontent.table_prefix'). 'content_hierarchy',
             [
                 'child_id' => $content['id'],
             ]
@@ -339,7 +339,7 @@ class ContentServiceTest extends RailcontentTestCase
 
         //check that the link with the parent was not deleted
         $this->assertDatabaseHas(
-            ConfigService::$tableContent,
+            config('railcontent.table_prefix'). 'content',
             [
                 'id' => $children['id'],
                 'status' => ContentService::STATUS_DELETED,
@@ -348,7 +348,7 @@ class ContentServiceTest extends RailcontentTestCase
 
         //check that the siblings was repositioned
         $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
+            config('railcontent.table_prefix'). 'content_hierarchy',
             [
                 'child_id' => $otherSiblingContent['id'],
                 'child_position' => $otherChildLink['child_position'] - 1,
@@ -391,7 +391,7 @@ class ContentServiceTest extends RailcontentTestCase
             2,
             [
                 'slug' => $this->faker->slug(),
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
                 'status' => ContentService::STATUS_PUBLISHED,
             ]
         );

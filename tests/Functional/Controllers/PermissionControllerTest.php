@@ -3,10 +3,6 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Faker\ORM\Doctrine\Populator;
-use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\Permission;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -48,7 +44,7 @@ class PermissionControllerTest extends RailcontentTestCase
                     'type' => 'permission',
                     'attributes' => [
                         'name' => 'permission 1',
-                        'brand' => ConfigService::$brand,
+                        'brand' => config('railcontent.brand'),
                     ],
                 ],
             ],
@@ -86,7 +82,7 @@ class PermissionControllerTest extends RailcontentTestCase
                 'data' => [
                     'id' => 1,
                     'type' => 'permission',
-                    'attributes' => array_add($permission, 'brand', ConfigService::$brand),
+                    'attributes' => array_add($permission, 'brand', config('railcontent.brand')),
                 ],
             ],
             $response->decodeResponseJson()
@@ -135,7 +131,7 @@ class PermissionControllerTest extends RailcontentTestCase
                 'data' => [
                     'id' => 1,
                     'type' => 'permission',
-                    'attributes' => array_add($permission, 'brand', ConfigService::$brand),
+                    'attributes' => array_add($permission, 'brand', config('railcontent.brand')),
                 ],
             ],
             $response->decodeResponseJson()
@@ -218,7 +214,7 @@ class PermissionControllerTest extends RailcontentTestCase
                 'data' => [
                     'type' => 'contentPermission',
                     'attributes' => [
-                        'brand' => ConfigService::$brand,
+                        'brand' => config('railcontent.brand'),
                     ],
                     'relationships' => [
                         'permission' => [
@@ -240,7 +236,7 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $expectedResults = [
             "content_type" => null,
-            "brand" => ConfigService::$brand,
+            "brand" => config('railcontent.brand'),
         ];
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -300,7 +296,7 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $expectedResults = [
             "content_type" => 'course',
-            "brand" => ConfigService::$brand,
+            "brand" => config('railcontent.brand'),
         ];
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -500,7 +496,7 @@ class PermissionControllerTest extends RailcontentTestCase
             ],
         ];
         $this->assertDatabaseHas(
-            ConfigService::$tableContentPermissions,
+            config('railcontent.table_prefix') . 'content_permissions',
             [
                 'permission_id' => $permission[0]->getId(),
                 'content_id' => $content[0]->getId(),
@@ -512,7 +508,7 @@ class PermissionControllerTest extends RailcontentTestCase
         $this->assertEquals(200, $response->status());
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableContentPermissions,
+            config('railcontent.table_prefix') . 'content_permissions',
             [
                 'permission_id' => $permission[0]->getId(),
                 'content_id' => $content[0]->getId(),
@@ -550,14 +546,14 @@ class PermissionControllerTest extends RailcontentTestCase
         ];
 
         $this->assertDatabaseHas(
-            ConfigService::$tableContentPermissions,
+            config('railcontent.table_prefix'). 'content_permissions',
             ['content_type' => 'course', 'permission_id' => $permission[0]->getId()]
         );
 
         $response = $this->call('PATCH', 'railcontent/permission/dissociate/', $data);
         $this->assertEquals(200, $response->status());
         $this->assertDatabaseMissing(
-            ConfigService::$tableContentPermissions,
+            config('railcontent.table_prefix'). 'content_permissions',
             ['content_type' => 'course', 'permission_id' => $permission[0]->getId()]
         );
     }

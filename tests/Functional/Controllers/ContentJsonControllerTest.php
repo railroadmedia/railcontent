@@ -1292,6 +1292,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'difficulty' => 1,
+                'brand' => config('railcontent.brand'),
+                'status' => 'published'
             ]
         );
 
@@ -1403,6 +1405,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'difficulty' => 1,
+                'type' => 'course',
+                'brand' =>config('railcontent.brand'),
+                'status' => 'published'
             ]
         );
 
@@ -1431,10 +1436,15 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'data' => [
                     'attributes' => [
                         'status' => ContentService::STATUS_PUBLISHED,
+                        //'title' => 'test',
                         'fields' => [
                             [
                                 'key' => 'topic',
                                 'value' => 'topic2',
+                            ],
+                            [
+                                'key' => 'difficulty',
+                                'value' => 2,
                             ],
                         ],
                     ],

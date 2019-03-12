@@ -107,13 +107,13 @@ class ContentDatumService
         }
 
         $position = $this->recalculatePosition(
-            $data['key'] ?? $datum->getKey(),
-            $data['position'] ?? $datum->getPosition(),
+            $data['data']['attributes']['key'] ?? $datum->getKey(),
+            $data['data']['attributes']['position'] ?? $datum->getPosition(),
             $datum->getContent()
         );
 
-        $datum->setKey($data['key'] ?? $datum->getKey());
-        $datum->setValue($data['value'] ?? $datum->getValue());
+        $datum->setKey($data['data']['attributes']['key'] ?? $datum->getKey());
+        $datum->setValue($data['data']['attributes']['value'] ?? $datum->getValue());
         $datum->setPosition($position ?? $datum->getPosition());
 
         $this->entityManager->persist($datum);

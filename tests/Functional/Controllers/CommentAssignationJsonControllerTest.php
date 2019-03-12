@@ -29,7 +29,7 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
 
     public function test_pull_my_assigned_comments()
     {
-        $userId = $this->faker->randomElement(ConfigService::$commentsAssignationOwnerIds);
+        $userId = $this->faker->randomElement(config('railcontent.comment_assignation_owner_ids'));
 
         $comment = $this->fakeComment(5);
         for ($i = 0; $i < 5; $i++) {
@@ -78,7 +78,7 @@ class CommentAssignationJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(204, $response->getStatusCode());
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableCommentsAssignment,
+            config('railcontent.table_prefix'). 'comment_assignment',
             [
                 'comment_id' => $comment[0]->getId(),
             ]

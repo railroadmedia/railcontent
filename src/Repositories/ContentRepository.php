@@ -189,8 +189,8 @@ class ContentRepository extends EntityRepository
     {
         $orderByExploded = explode(' ', $this->orderBy);
 
-        $orderByColumns = [ConfigService::$tableContent . '.' . 'createdOn'];
-        $groupByColumns = [ConfigService::$tableContent . '.' . 'createdOn'];
+        $orderByColumns = [config('railcontent.table_prefix') . 'content' . '.' . 'createdOn'];
+        $groupByColumns = [config('railcontent.table_prefix') . 'content' . '.' . 'createdOn'];
 
         foreach ($orderByExploded as $orderByColumn) {
             if (strpos($orderByColumn, '_') !== false || strpos($orderByColumn, '-') !== false) {
@@ -198,10 +198,10 @@ class ContentRepository extends EntityRepository
             }
             array_unshift(
                 $orderByColumns,
-                ConfigService::$tableContent . '.' . $orderByColumn . ' ' . $this->orderDirection
+                config('railcontent.table_prefix') . 'content' . '.' . $orderByColumn . ' ' . $this->orderDirection
             );
 
-            array_unshift($groupByColumns, ConfigService::$tableContent . '.' . $orderByColumn);
+            array_unshift($groupByColumns, config('railcontent.table_prefix') . 'content' . '.' . $orderByColumn);
         }
 
         $first = ($this->page - 1) * $this->limit;

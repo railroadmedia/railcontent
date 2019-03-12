@@ -119,7 +119,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(201, $response->status());
         $this->assertTrue($response->decodeResponseJson('data'));
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'content_id' => $contentId,
                 'user_id' => $userId,
@@ -196,7 +196,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->assertTrue($response->decodeResponseJson('data'));
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'started',
@@ -279,7 +279,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->assertTrue($response->decodeResponseJson('data'));
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'started',
@@ -289,7 +289,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'started',
@@ -365,7 +365,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->assertTrue($response->decodeResponseJson('data'));
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'started',
@@ -375,7 +375,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'started',
@@ -385,7 +385,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'started',
@@ -460,7 +460,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->assertTrue($response->decodeResponseJson('data'));
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'started',
@@ -470,7 +470,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'completed',
@@ -480,7 +480,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'started',
@@ -552,7 +552,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->assertTrue($response->decodeResponseJson('data'));
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'completed',
@@ -562,7 +562,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'completed',
@@ -572,7 +572,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'completed',
@@ -643,7 +643,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->assertTrue($response->decodeResponseJson('data'));
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'completed',
@@ -653,7 +653,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'completed',
@@ -663,7 +663,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'completed',
@@ -777,7 +777,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->assertTrue($response->decodeResponseJson('data'));
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'started',
@@ -787,7 +787,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'started',
@@ -797,7 +797,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'user_id' => auth()->id(),
                 'state' => 'started',
@@ -857,7 +857,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->assertTrue($response->decodeResponseJson('data'));
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'content_id' => $contentId,
                 'user_id' => $userId,
@@ -990,7 +990,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->assertTrue($response->decodeResponseJson('data'));
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'content_id' => $contentId,
                 'user_id' => $userId,
@@ -998,7 +998,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             [
                 'content_id' => $content[1]->getId(),
                 'user_id' => $userId,

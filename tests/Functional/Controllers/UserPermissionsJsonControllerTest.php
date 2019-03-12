@@ -120,7 +120,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserPermissions,
+            config('railcontent.table_prefix'). 'user_permissions',
             [
                 'user_id' => 1,
                 'permission_id' => $permission[0]->getId(),
@@ -211,7 +211,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableUserPermissions,
+            config('railcontent.table_prefix'). 'user_permissions',
             [
                 'user_id' => $userId,
                 'permission_id' => $permission[0]->getId(),
@@ -311,7 +311,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(204, $results->getStatusCode());
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableUserPermissions,
+            config('railcontent.table_prefix'). 'user_permissions',
             [
                 'id' => $userPermissionId,
                 'user_id' => $userId,
@@ -466,7 +466,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'slug' => $this->faker->word,
                 'type' => $this->faker->word,
                 'status' => 'published',
-                'brand' => ConfigService::$brand,
+                'brand' => config('railcontent.brand'),
                 'publishedOn' => Carbon::now(),
             ]
         );
@@ -545,7 +545,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'slug' => $this->faker->word,
                 'type' => $this->faker->word,
                 'status' => 'published',
-                'brand' => ConfigService::$brand,
+                'brand' => config('railcontent.brand'),
                 'publishedOn' => Carbon::now(),
             ]
         );
@@ -601,7 +601,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                 'slug' => $this->faker->word,
                 'type' => $this->faker->word,
                 'status' => 'published',
-                'brand' => ConfigService::$brand,
+                'brand' => config('railcontent.brand'),
                 'language' => 'en',
             ]
         );

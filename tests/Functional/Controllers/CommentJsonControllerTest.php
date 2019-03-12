@@ -34,7 +34,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $content = $this->fakeContent(
             1,
             [
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
                 'status' => $this->faker->randomElement(ContentRepository::$availableContentStatues),
             ]
         );
@@ -362,7 +362,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(204, $response->getStatusCode());
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableComments,
+            config('railcontent.table_prefix'). 'comments',
             [
                 'id' => $commentId,
             ]
@@ -582,7 +582,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         // create content
         $content = $this->contentFactory->create(
             $this->faker->word,
-            $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ContentService::STATUS_PUBLISHED
         );
 
@@ -607,7 +607,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 ->toDateTimeString(),
         ];
 
-        $this->databaseManager->table(ConfigService::$tableCommentLikes)
+        $this->databaseManager->table(config('railcontent.table_prefix'). 'comment_likes')
             ->insertGetId($commentThreeLikeOne);
 
         $commentThreeLikeTwo = [
@@ -617,7 +617,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 ->toDateTimeString(),
         ];
 
-        $this->databaseManager->table(ConfigService::$tableCommentLikes)
+        $this->databaseManager->table(config('railcontent.table_prefix'). 'comment_likes')
             ->insertGetId($commentThreeLikeTwo);
 
         $commentFourLike = [
@@ -627,7 +627,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 ->toDateTimeString(),
         ];
 
-        $this->databaseManager->table(ConfigService::$tableCommentLikes)
+        $this->databaseManager->table(config('railcontent.table_prefix'). 'comment_likes')
             ->insertGetId($commentFourLike);
 
         $response = $this->call(
@@ -721,7 +721,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'type' => $type,
-                'brand' => ConfigService::$brand,
+                'brand' => config('railcontent.brand'),
             ]
         );
 
@@ -901,7 +901,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $content = $this->fakeContent(1,[
             'brand' => config('railcontent.brand'),
             'status' => 'published',
-            'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+            'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
         ]);
         $comment = $this->fakeComment(
             3,

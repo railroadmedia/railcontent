@@ -15,7 +15,7 @@ class CreateUserPermissionsTable extends Migration
     public function up()
     {
         Schema::connection(ConfigService::$databaseConnectionName)->create(
-            ConfigService::$tableUserPermissions,
+            config('railcontent.table_prefix'). 'user_permissions',
             function(Blueprint $table) {
                 $table->increments('id');
                 $table->integer('user_id')->index();
@@ -35,6 +35,6 @@ class CreateUserPermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableUserPermissions);
+        Schema::dropIfExists(config('railcontent.table_prefix'). 'user_permissions');
     }
 }

@@ -16,7 +16,7 @@ class DropUserContentProgressUniqueIndex extends Migration
     {
         Schema::connection(ConfigService::$databaseConnectionName)
             ->table(
-                ConfigService::$tableUserContentProgress,
+                config('railcontent.table_prefix'). 'user_content_progress',
                 function (Blueprint $table) {
 
                     $table->dropIndex('railcontent_user_content_progress_content_id_user_id_unique');
@@ -34,7 +34,7 @@ class DropUserContentProgressUniqueIndex extends Migration
     {
         Schema::connection(ConfigService::$databaseConnectionName)
             ->table(
-                ConfigService::$tableUserContentProgress,
+                config('railcontent.table_prefix'). 'user_content_progress',
                 function (Blueprint $table) {
 
                     $table->unique(['content_id', 'user_id']);

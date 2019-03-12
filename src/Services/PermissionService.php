@@ -101,7 +101,7 @@ class PermissionService
         $permission = $this->permissionRepository->create(
             [
                 'name' => $name,
-                'brand' => $brand ?? ConfigService::$brand
+                'brand' => $brand ?? config('railcontent.brand')
             ]
         );
         CacheHelper::deleteAllCachedSearchResults('permissions_');
@@ -128,7 +128,7 @@ class PermissionService
 
         $this->permissionRepository->update(
             $id,
-            ['name' => $name, 'brand' => $brand ?? ConfigService::$brand]
+            ['name' => $name, 'brand' => $brand ?? config('railcontent.brand')]
         );
 
         CacheHelper::deleteAllCachedSearchResults('permissions_');

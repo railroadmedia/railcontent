@@ -28,7 +28,7 @@ class ReplyRequest extends FormRequest
             'data.relationships.parent.data.id' => 'required|numeric|exists:' .
                 ConfigService::$databaseConnectionName .
                 '.' .
-                ConfigService::$tableComments .
+                config('railcontent.table_prefix'). 'comments' .
                 ',id'
         ];
     }

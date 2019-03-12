@@ -124,7 +124,7 @@ class ContentPermissionService
         $permission = $this->permissionRepository->find($permissionId);
 
         $contentPermission = new ContentPermission();
-        $contentPermission->setBrand($brand ?? ConfigService::$brand);
+        $contentPermission->setBrand($brand ?? config('railcontent.brand'));
         $contentPermission->setContentType($contentType);
         $contentPermission->setContent($content);
         $contentPermission->setPermission($permission);

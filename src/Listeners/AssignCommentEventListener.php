@@ -25,7 +25,7 @@ class AssignCommentEventListener
      */
     public function handle(CommentCreated $commentCreatedEvent)
     {
-        if (in_array($commentCreatedEvent->userId, ConfigService::$commentsAssignationOwnerIds)) {
+        if (in_array($commentCreatedEvent->userId, config('railcontent.comment_assignation_owner_ids'))) {
             $this->commentAssignmentService->deleteCommentAssignations($commentCreatedEvent->parentId);
         }
     }

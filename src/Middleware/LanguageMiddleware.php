@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Services\ConfigService;
 
 class LanguageMiddleware
 {
@@ -28,11 +27,11 @@ class LanguageMiddleware
         // if the header is missed
         if (empty($locale)) {
             // take the default local language
-            $locale = ConfigService::$defaultLanguage;
+            $locale = config('railcontent.default_language');
         }
 
         // check if the language defined is supported by the CMS; if not return not found exception
-        throw_if(!in_array($locale, ConfigService::$availableLanguages), new NotFoundException('The language with locale ' . $locale . ' is not supported by the CMS.'));
+        throw_if(!in_array($locale, config('railcontent.available_languages')), new NotFoundException('The language with locale ' . $locale . ' is not supported by the CMS.'));
 
         // only show content in this language
         // this may change in the future

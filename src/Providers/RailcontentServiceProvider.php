@@ -150,32 +150,32 @@ class RailcontentServiceProvider extends ServiceProvider
         // tables
         ConfigService::$tablePrefix = config('railcontent.table_prefix');
 
-        ConfigService::$tableContent = ConfigService::$tablePrefix . 'content';
-        ConfigService::$tableContentHierarchy = ConfigService::$tablePrefix . 'content_hierarchy';
-        ConfigService::$tableContentVersions = ConfigService::$tablePrefix . 'versions';
+        //ConfigService::$tableContent = ConfigService::$tablePrefix . 'content';
+        //ConfigService::$tableContentHierarchy = ConfigService::$tablePrefix . 'content_hierarchy';
+        //ConfigService::$tableContentVersions = ConfigService::$tablePrefix . 'versions';
         ConfigService::$tableContentFields = ConfigService::$tablePrefix . 'content_fields';
-        ConfigService::$tableContentData = ConfigService::$tablePrefix . 'content_data';
-        ConfigService::$tablePermissions = ConfigService::$tablePrefix . 'permissions';
-        ConfigService::$tableContentPermissions = ConfigService::$tablePrefix . 'content_permissions';
-        ConfigService::$tableUserPermissions = ConfigService::$tablePrefix . 'user_permissions';
-        ConfigService::$tableUserContentProgress = ConfigService::$tablePrefix . 'user_content_progress';
+       // ConfigService::$tableContentData = ConfigService::$tablePrefix . 'content_data';
+        //ConfigService::$tablePermissions = ConfigService::$tablePrefix . 'permissions';
+        //ConfigService::$tableContentPermissions = ConfigService::$tablePrefix . 'content_permissions';
+       // ConfigService::$tableUserPermissions = ConfigService::$tablePrefix . 'user_permissions';
+       // ConfigService::$tableUserContentProgress = ConfigService::$tablePrefix . 'user_content_progress';
         ConfigService::$tablePlaylists = ConfigService::$tablePrefix . 'playlists';
         ConfigService::$tablePlaylistContents = ConfigService::$tablePrefix . 'playlist_contents';
-        ConfigService::$tableComments = ConfigService::$tablePrefix . 'comments';
-        ConfigService::$tableCommentsAssignment = ConfigService::$tablePrefix . 'comment_assignment';
-        ConfigService::$tableCommentLikes = ConfigService::$tablePrefix . 'comment_likes';
-        ConfigService::$tableSearchIndexes = ConfigService::$tablePrefix . 'search_indexes';
+        //ConfigService::$tableComments = ConfigService::$tablePrefix . 'comments';
+        //ConfigService::$tableCommentsAssignment = ConfigService::$tablePrefix . 'comment_assignment';
+        //ConfigService::$tableCommentLikes = ConfigService::$tablePrefix . 'comment_likes';
+      //  ConfigService::$tableSearchIndexes = ConfigService::$tablePrefix . 'search_indexes';
 
         // brand
-        ConfigService::$brand = config('railcontent.brand');
-        ConfigService::$availableBrands = config('railcontent.available_brands');
+        //ConfigService::$brand = config('railcontent.brand');
+        //ConfigService::$availableBrands = config('railcontent.available_brands');
 
         // lanuage
-        ConfigService::$defaultLanguage = config('railcontent.default_language');
-        ConfigService::$availableLanguages = config('railcontent.available_languages');
+        //ConfigService::$defaultLanguage = config('railcontent.default_language');
+       // ConfigService::$availableLanguages = config('railcontent.available_languages');
 
         // middlware
-        ConfigService::$controllerMiddleware = config('railcontent.controller_middleware');
+        //ConfigService::$controllerMiddleware = config('railcontent.controller_middleware');
 
         // api middleware
         ConfigService::$apiMiddleware = config('railcontent.api_middleware');
@@ -190,14 +190,14 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$fieldOptionList = config('railcontent.field_option_list', []);
 
         //restrict which content type can have comment
-        ConfigService::$commentableContentTypes = config('railcontent.commentable_content_types');
+       // ConfigService::$commentableContentTypes = config('railcontent.commentable_content_types');
 
-        ConfigService::$commentsAssignationOwnerIds = config('railcontent.comment_assignation_owner_ids');
+        //ConfigService::$commentsAssignationOwnerIds = config('railcontent.comment_assignation_owner_ids');
 
-        ConfigService::$searchableContentTypes = config('railcontent.searchable_content_types');
+        //ConfigService::$searchableContentTypes = config('railcontent.searchable_content_types');
 
-        ConfigService::$searchIndexValues = config('railcontent.search_index_values');
-        ConfigService::$indexableContentStatuses = config('railcontent.indexable_content_statuses');
+        //ConfigService::$searchIndexValues = config('railcontent.search_index_values'); ???
+      //  ConfigService::$indexableContentStatuses = config('railcontent.indexable_content_statuses'); ???
 
         ConfigService::$videoSync = config('railcontent.video_sync');
 
@@ -217,11 +217,11 @@ class RailcontentServiceProvider extends ServiceProvider
 
         // aggregates
         ConfigService::$tableCommentsAggregates = [
-            ConfigService::$tableCommentLikes => [
-                'selectColumn' => 'COUNT(`' . ConfigService::$tableCommentLikes . '`.`id`) as `like_count`',
+            config('railcontent.table_prefix'). 'comment_likes' => [
+                'selectColumn' => 'COUNT(`' . config('railcontent.table_prefix'). 'comment_likes' . '`.`id`) as `like_count`',
                 'foreignField' => 'comment_id',
                 'localField' => 'id',
-                'groupBy' => ConfigService::$tableComments . '.id',
+                'groupBy' => config('railcontent.table_prefix'). 'comments' . '.id',
             ],
         ];
     }

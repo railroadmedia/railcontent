@@ -86,9 +86,9 @@ class CommentRepository extends EntityRepository
         $this->orderDirection = $orderByDirection;
 
         $this->orderTableName =
-            ($orderByColumn == 'like_count' ? ConfigService::$tableCommentLikes : ConfigService::$tableComments);
+            ($orderByColumn == 'like_count' ? config('railcontent.table_prefix'). 'comment_likes' : config('railcontent.table_prefix'). 'comments');
 
-        $this->orderTable = ($orderByColumn == 'like_count' ? '' : ConfigService::$tableComments);
+        $this->orderTable = ($orderByColumn == 'like_count' ? '' : config('railcontent.table_prefix'). 'comments');
 
         return $this;
     }

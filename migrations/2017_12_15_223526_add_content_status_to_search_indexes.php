@@ -15,7 +15,7 @@ class AddContentStatusToSearchIndexes extends Migration
     {
         if (config()->get('database.default') != 'testbench') {
             Schema::connection(ConfigService::$databaseConnectionName)->table(
-                ConfigService::$tableSearchIndexes,
+                config('railcontent.table_prefix'). 'search_indexes',
                 function ($table) {
                     /**
                      * @var $table \Illuminate\Database\Schema\Blueprint
@@ -37,7 +37,7 @@ class AddContentStatusToSearchIndexes extends Migration
         if (config()->get('database.default') != 'testbench') {
 
             Schema::connection(ConfigService::$databaseConnectionName)->table(
-                ConfigService::$tableSearchIndexes,
+                config('railcontent.table_prefix'). 'search_indexes',
                 function ($table) {
                     /**
                      * @var $table \Illuminate\Database\Schema\Blueprint

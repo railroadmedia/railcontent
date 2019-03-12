@@ -29,7 +29,7 @@ class CommentServiceTest extends RailcontentTestCase
         $content = $this->fakeContent(
             1,
             [
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
 
@@ -58,7 +58,7 @@ class CommentServiceTest extends RailcontentTestCase
         $content = $this->fakeContent(
             1,
             [
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
 
@@ -100,7 +100,7 @@ class CommentServiceTest extends RailcontentTestCase
         $content = $this->fakeContent(
             1,
             [
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
 
@@ -150,7 +150,7 @@ class CommentServiceTest extends RailcontentTestCase
         $content = $this->fakeContent(
             1,
             [
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
 
@@ -203,7 +203,7 @@ class CommentServiceTest extends RailcontentTestCase
         $content = $this->fakeContent(
             1,
             [
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
 
@@ -241,7 +241,7 @@ class CommentServiceTest extends RailcontentTestCase
         $content = $this->fakeContent(
             1,
             [
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
 
@@ -273,7 +273,7 @@ class CommentServiceTest extends RailcontentTestCase
         $content = $this->fakeContent(
             1,
             [
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
 
@@ -304,7 +304,7 @@ class CommentServiceTest extends RailcontentTestCase
         $content = $this->fakeContent(
             1,
             [
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
 
@@ -335,7 +335,7 @@ class CommentServiceTest extends RailcontentTestCase
         $content = $this->fakeContent(
             1,
             [
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
 
@@ -351,7 +351,7 @@ class CommentServiceTest extends RailcontentTestCase
         $this->classBeingTested->delete($comment[0]->getId());
 
         $this->assertSoftDeleted(
-            ConfigService::$tableComments,
+            config('railcontent.table_prefix'). 'comments',
             [
                 'id' => $comment[0]->getId(),
             ]
@@ -364,7 +364,7 @@ class CommentServiceTest extends RailcontentTestCase
         $content = $this->fakeContent(
             1,
             [
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
 
@@ -390,7 +390,7 @@ class CommentServiceTest extends RailcontentTestCase
         $this->classBeingTested->delete($comment[0]->getId());
 
         $this->assertDatabaseHas(
-            ConfigService::$tableComments,
+            config('railcontent.table_prefix'). 'comments',
             [
                 'id' => $comment[0]->getId(),
                 'deleted_at' => Carbon::now()
@@ -399,7 +399,7 @@ class CommentServiceTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableComments,
+            config('railcontent.table_prefix'). 'comments',
             [
                 'id' => $reply[0]->getId(),
                 'deleted_at' => Carbon::now()
@@ -417,7 +417,7 @@ class CommentServiceTest extends RailcontentTestCase
         $content = $this->fakeContent(
             1,
             [
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
 
@@ -435,7 +435,7 @@ class CommentServiceTest extends RailcontentTestCase
         $this->classBeingTested->delete($commentId);
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableComments,
+            config('railcontent.table_prefix'). 'comments',
             [
                 'id' => $commentId,
             ]
@@ -453,7 +453,7 @@ class CommentServiceTest extends RailcontentTestCase
         $content = $this->fakeContent(
             1,
             [
-                'type' => $this->faker->randomElement(ConfigService::$commentableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
 
@@ -482,14 +482,14 @@ class CommentServiceTest extends RailcontentTestCase
         $this->classBeingTested->delete($commentId);
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableComments,
+            config('railcontent.table_prefix'). 'comments',
             [
                 'id' => $commentId,
             ]
         );
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableComments,
+            config('railcontent.table_prefix'). 'comments',
             [
                 'id' => $replyId,
             ]

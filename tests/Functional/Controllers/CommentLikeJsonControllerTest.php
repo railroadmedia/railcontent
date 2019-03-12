@@ -34,7 +34,7 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
             $this->assertEquals(200, $response->getStatusCode());
 
             $this->assertDatabaseHas(
-                ConfigService::$tableCommentLikes,
+                config('railcontent.table_prefix'). 'comment_likes',
                 [
                     'comment_id' => $commentId,
                     'user_id' => $userIdOfLiker,
@@ -72,7 +72,7 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(200, $response->getStatusCode());
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableCommentLikes,
+            config('railcontent.table_prefix'). 'comment_likes',
             [
                 'comment_id' => $commentId,
                 'user_id' => $userIdOfLiker,

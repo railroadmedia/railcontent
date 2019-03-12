@@ -105,7 +105,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'brand' => config('railcontent.brand'),
-                'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.searchable_content_types')),
                 'title' => $this->faker->word,
                 'status' => 'published',
                 'publishedOn' => Carbon::now(),
@@ -116,7 +116,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'brand' => config('railcontent.brand'),
-                'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.searchable_content_types')),
                 'title' => $this->faker->word,
                 'status' => 'published',
                 'publishedOn' => Carbon::now(),
@@ -127,7 +127,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             10,
             [
                 'brand' => config('railcontent.brand'),
-                'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.searchable_content_types')),
                 'title' => $this->faker->word,
                 'status' => 'published',
                 'publishedOn' => Carbon::now(),
@@ -143,7 +143,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'page' => $page,
                 'limit' => $limit,
                 'term' => $content1[0]->getTitle(),
-                'included_types' => ConfigService::$searchableContentTypes,
+                'included_types' => config('railcontent.searchable_content_types'),
             ]
         );
 
@@ -153,7 +153,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $this->assertTrue(count($results) > 0);
 
         foreach ($results as $result) {
-            $this->assertTrue(in_array($result['attributes']['type'], ConfigService::$searchableContentTypes));
+            $this->assertTrue(in_array($result['attributes']['type'], config('railcontent.searchable_content_types')));
         }
     }
 
@@ -167,7 +167,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             [
                 'brand' => config('railcontent.brand'),
                 'publishedOn' => Carbon::now(),
-                'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.searchable_content_types')),
                 'status' => $this->faker->randomElement(
                     [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]
                 ),
@@ -178,7 +178,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'brand' => config('railcontent.brand'),
-                'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.searchable_content_types')),
                 'publishedOn' => Carbon::now(),
                 'status' => $this->faker->randomElement(
                     [ContentService::STATUS_DELETED, ContentService::STATUS_ARCHIVED]
@@ -190,7 +190,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
             10,
             [
                 'brand' => config('railcontent.brand'),
-                'type' => $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                'type' => $this->faker->randomElement(config('railcontent.searchable_content_types')),
                 'publishedOn' => Carbon::now(),
                 'status' => $this->faker->randomElement(
                     [ContentService::STATUS_DRAFT, ContentService::STATUS_SCHEDULED]

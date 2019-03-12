@@ -14,8 +14,8 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)->create(
-            ConfigService::$tableComments,
+        Schema::connection(config('railcontent.database_connection_name'))->create(
+            config('railcontent.table_prefix'). 'comments',
             function(Blueprint $table) {
                 $table->increments('id');
                 $table->integer('content_id')->index();
@@ -38,6 +38,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableComments);
+        Schema::dropIfExists(config('railcontent.table_prefix'). 'comments');
     }
 }

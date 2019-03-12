@@ -29,19 +29,19 @@ class ContentSlugHierarchyDecorator implements DecoratorInterface
 	//TODO: integrate resora		
         return $contentResults;
 
-        $query = DB::table(ConfigService::$tableContent . ' as parent_content_0')
+        $query = DB::table(config('railcontent.table_prefix'). 'content' . ' as parent_content_0')
             ->whereIn('parent_content_0.id', $contentResults->pluck('id'));
 
         for ($i = 0; $i < ConfigService::$contentHierarchyMaxDepth; $i++) {
 
             $query->leftJoin(
-                ConfigService::$tableContentHierarchy . ' as content_hierarchy_' . $i,
+                config('railcontent.table_prefix'). 'content_hierarchy' . ' as content_hierarchy_' . $i,
                 'content_hierarchy_' . $i . '.child_id',
                 '=',
                 'parent_content_' . $i . '.id'
             )
                 ->leftJoin(
-                    ConfigService::$tableContent . ' as parent_content_' . ($i + 1),
+                    config('railcontent.table_prefix'). 'content' . ' as parent_content_' . ($i + 1),
                     function (JoinClause $join) use ($i) {
 
                         $join->on(

@@ -39,7 +39,7 @@ class PermissionRequest extends FormRequest
             [
                 'data' => [
                     'attributes' => [
-                        'brand' => $this->input('brand', ConfigService::$brand),
+                        'brand' => $this->input('brand', config('railcontent.brand')),
                     ],
                 ],
             ]

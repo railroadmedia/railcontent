@@ -129,7 +129,7 @@ class ContentHierarchyServiceTest extends RailcontentTestCase
         $this->classBeingTested->repositionSiblings(3);
 
         $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
+            config('railcontent.table_prefix'). 'content_hierarchy',
             [
                 'parent_id' => 1,
                 'child_id' => 4,

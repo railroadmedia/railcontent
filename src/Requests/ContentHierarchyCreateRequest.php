@@ -16,9 +16,9 @@ class ContentHierarchyCreateRequest extends CustomFormRequest
         $this->setGeneralRules(
             [
                 'data.relationships.child.data.id' => 'required|exists:' . ConfigService::$databaseConnectionName . '.' .
-                    ConfigService::$tableContent . ',id',
+                    config('railcontent.table_prefix'). 'content' . ',id',
                 'data.relationships.parent.data.id' => 'required|exists:' . ConfigService::$databaseConnectionName . '.' .
-                    ConfigService::$tableContent . ',id',
+                    config('railcontent.table_prefix'). 'content'. ',id',
                 'data.attributes.child_position' => 'nullable|numeric|min:0'
             ]
         );

@@ -15,7 +15,7 @@ class CreateContentTable extends Migration
     public function up()
     {
         Schema::connection(ConfigService::$databaseConnectionName)->create(
-            ConfigService::$tableContent,
+            config('railcontent.table_prefix'). 'content',
             function(Blueprint $table) {
                 $table->increments('id');
                 
@@ -40,6 +40,6 @@ class CreateContentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableContent);
+        Schema::dropIfExists(config('railcontent.table_prefix'). 'content');
     }
 }

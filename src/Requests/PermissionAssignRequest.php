@@ -25,14 +25,14 @@ class PermissionAssignRequest extends FormRequest
     {
         return [
             'data.relationships.permission.data.id' => 'required|integer|exists:' . ConfigService::$databaseConnectionName . '.' .
-                ConfigService::$tablePermissions . ',id',
+                config('railcontent.table_prefix'). 'permissions' . ',id',
             'data.relationships.content.data.id' => 'nullable|numeric|required_without_all:data.attributes.content_type|exists:' .
                 ConfigService::$databaseConnectionName . '.' .
-                ConfigService::$tableContent .
+                config('railcontent.table_prefix'). 'content' .
                 ',id',
             'data.attributes.content_type' => 'nullable|string|required_without_all:data.relationships.content.data.id|exists:' .
                 ConfigService::$databaseConnectionName . '.' .
-                ConfigService::$tableContent .
+                config('railcontent.table_prefix'). 'content' .
                 ',type'
         ];
     }

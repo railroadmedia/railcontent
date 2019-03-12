@@ -619,6 +619,8 @@ class RailcontentTestCase extends BaseTestCase
 
         $contentData['topic'] = new ArrayCollection();
         $contentData['data'] = new ArrayCollection();
+        $contentData['tag'] = new ArrayCollection();
+
         if (array_key_exists('userId',$contentData)) {
             $contentData['user'] =
                 $this->app->make(UserProvider::class)

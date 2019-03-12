@@ -249,7 +249,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
+            config('railcontent.table_prefix'). 'content_hierarchy',
             [
                 'parent_id' => 1,
                 'child_id' => 3,
@@ -258,7 +258,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
+            config('railcontent.table_prefix'). 'content_hierarchy',
             [
                 'parent_id' => 1,
                 'child_id' => 4,
@@ -267,7 +267,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
+            config('railcontent.table_prefix'). 'content_hierarchy',
             [
                 'parent_id' => 1,
                 'child_id' => 2,
@@ -275,7 +275,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             ]
         );
         $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
+            config('railcontent.table_prefix'). 'content_hierarchy',
             [
                 'parent_id' => 1,
                 'child_id' => 5,
@@ -294,7 +294,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseMissing(
-            ConfigService::$tableContentHierarchy,
+            config('railcontent.table_prefix'). 'content_hierarchy',
             [
                 'child_id' => 3,
                 'parent_id' => 1,
@@ -302,7 +302,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
+            config('railcontent.table_prefix'). 'content_hierarchy',
             [
                 'parent_id' => 1,
                 'child_id' => 2,
@@ -311,7 +311,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
+            config('railcontent.table_prefix'). 'content_hierarchy',
             [
                 'parent_id' => 1,
                 'child_id' => 4,
@@ -320,7 +320,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseHas(
-            ConfigService::$tableContentHierarchy,
+            config('railcontent.table_prefix'). 'content_hierarchy',
             [
                 'parent_id' => 1,
                 'child_id' => 5,

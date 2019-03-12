@@ -15,7 +15,7 @@ class CreateSearchIndexes extends Migration
     {
         if (config()->get('database.default') != 'testbench') {
             Schema::connection(ConfigService::$databaseConnectionName)->create(
-                ConfigService::$tableSearchIndexes,
+                config('railcontent.table_prefix'). 'search_indexes',
                 function ($table) {
                     /**
                      * @var $table \Illuminate\Database\Schema\Blueprint
@@ -33,16 +33,16 @@ class CreateSearchIndexes extends Migration
             );
             Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
                 'ALTER TABLE ' .
-                ConfigService::$tableSearchIndexes .
+                config('railcontent.table_prefix'). 'search_indexes'.
                 ' ADD FULLTEXT high_full_text(high_value)'
             );
             Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
                 'ALTER TABLE ' .
-                ConfigService::$tableSearchIndexes .
+                config('railcontent.table_prefix'). 'search_indexes' .
                 ' ADD FULLTEXT medium_full_text(medium_value)'
             );
             Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
-                'ALTER TABLE ' . ConfigService::$tableSearchIndexes . ' ADD FULLTEXT low_full_text(low_value)'
+                'ALTER TABLE ' . config('railcontent.table_prefix'). 'search_indexes' . ' ADD FULLTEXT low_full_text(low_value)'
             );
         }
     }
@@ -55,7 +55,7 @@ class CreateSearchIndexes extends Migration
     public function down()
     {
         Schema::connection(ConfigService::$databaseConnectionName)->dropIfExists(
-            ConfigService::$tableSearchIndexes
+            config('railcontent.table_prefix'). 'search_indexes'
         );
     }
 }

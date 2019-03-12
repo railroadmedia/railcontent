@@ -34,8 +34,19 @@ class ContentDatumControllerTest extends RailcontentTestCase
                 'status' => 'published',
                 'publishedOn' => Carbon::now(),
                 'brand' => config('railcontent.brand'),
+                'type' => 'course',
+                'difficulty' => 1,
             ]
         );
+
+        $contentTopic = $this->fakeContentTopic(
+            1,
+            [
+                'content' => $content['0'],
+                'topic' => $this->faker->word,
+            ]
+        );
+
         $key = $this->faker->word;
         $value = $this->faker->text(500);
 
@@ -229,6 +240,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
                 'status' => 'published',
                 'publishedOn' => Carbon::now(),
                 'brand' => config('railcontent.brand'),
+                'type' => $this->faker->word,
             ]
         );
 
@@ -251,11 +263,21 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'PATCH',
             'railcontent/content/datum/' . $data->getId(),
             [
-                'content_id' => $content[0]->getId(),
-                'value' => $new_value,
+                'data' => [
+                    'attributes' => [
+                        'value' => $new_value,
+                    ],
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => $content[0]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
-
         $this->assertEquals(201, $response->status());
 
         $response->assertJson(
@@ -352,7 +374,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $this->assertNull(json_decode($response->content()));
         $this->assertEquals(204, $response->status());
         $this->assertDatabaseMissing(
-            ConfigService::$tableContentData,
+            config('railcontent.table_prefix') . 'content_data',
             [
                 'id' => $contentDataId,
             ]
@@ -384,25 +406,29 @@ class ContentDatumControllerTest extends RailcontentTestCase
         $data = $fakeData[ContentData::class][0];
 
         $newData = [
-            'key' => $data->getKey(),
-            'value' => $this->faker->text(500),
-            'position' => 1,
+            'data' => [
+                'attributes' => [
+                    'key' => $data->getKey(),
+                    'value' => $this->faker->text(500),
+                    'position' => 1,
+                ],
+            ],
         ];
 
         $updatedData = $this->serviceBeingTested->update($data->getId(), $newData);
 
         $this->assertEquals(
-            $newData['value'],
+            $newData['data']['attributes']['value'],
             $updatedData->getValue()
         );
 
         $this->assertEquals(
-            $newData['key'],
+            $newData['data']['attributes']['key'],
             $updatedData->getKey()
         );
 
         $this->assertEquals(
-            $newData['position'],
+            $newData['data']['attributes']['position'],
             $updatedData->getPosition()
         );
     }
@@ -520,7 +546,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
         ];
         $contentDataId =
             $this->query()
-                ->table(ConfigService::$tableContentData)
+                ->table(config('railcontent.table_prefix') . 'content_data')
                 ->insertGetId($contentData);
 
         $response = $this->call(

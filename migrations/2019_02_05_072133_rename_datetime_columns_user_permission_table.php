@@ -15,7 +15,7 @@ class RenameDatetimeColumnsUserPermissionTable extends Migration
     {
         Schema::connection(ConfigService::$databaseConnectionName)
             ->table(
-                ConfigService::$tableUserPermissions,
+                config('railcontent.table_prefix'). 'user_permissions',
                 function ($table) {
                     /**
                      * @var $table \Illuminate\Database\Schema\Blueprint
@@ -26,7 +26,7 @@ class RenameDatetimeColumnsUserPermissionTable extends Migration
 
         Schema::connection(ConfigService::$databaseConnectionName)
             ->table(
-                ConfigService::$tableUserPermissions,
+                config('railcontent.table_prefix'). 'user_permissions',
                 function ($table) {
                     /**
                      * @var $table \Illuminate\Database\Schema\Blueprint
@@ -45,7 +45,7 @@ class RenameDatetimeColumnsUserPermissionTable extends Migration
     {
         Schema::connection(ConfigService::$databaseConnectionName)
             ->table(
-                ConfigService::$tableUserPermissions,
+                config('railcontent.table_prefix'). 'user_permissions',
                 function ($table) {
                     /**
                      * @var $table \Illuminate\Database\Schema\Blueprint
@@ -56,7 +56,7 @@ class RenameDatetimeColumnsUserPermissionTable extends Migration
 
         Schema::connection(ConfigService::$databaseConnectionName)
             ->table(
-                ConfigService::$tableUserPermissions,
+                Cconfig('railcontent.table_prefix'). 'user_permissions',
                 function ($table) {
                     /**
                      * @var $table \Illuminate\Database\Schema\Blueprint

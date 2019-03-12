@@ -15,7 +15,7 @@ class CreateContentHierarchyTable extends Migration
     public function up()
     {
         Schema::connection(ConfigService::$databaseConnectionName)->create(
-            ConfigService::$tableContentHierarchy,
+            config('railcontent.table_prefix'). 'content_hierarchy',
             function(Blueprint $table) {
                 $table->increments('id');
 
@@ -35,6 +35,6 @@ class CreateContentHierarchyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableContentHierarchy);
+        Schema::dropIfExists(config('railcontent.table_prefix'). 'content_hierarchy');
     }
 }

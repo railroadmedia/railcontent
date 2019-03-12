@@ -79,7 +79,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
         $this->andWhere(
             config('railcontent.table_prefix') . 'content' . '.brand IN (:brands)'
         )
-            ->setParameter('brands', array_values(array_wrap(ConfigService::$availableBrands)));
+            ->setParameter('brands', array_values(array_wrap(config('railcontent.available_brands'))));
 
         return $this;
     }
@@ -182,7 +182,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                     ->getClassMetadata(Content::class)
                     ->getFieldNames()
             )) {
-                $this->andWhere(ConfigService::$tableContent . '.' . $requiredFieldData['name'] . ' IN (:value)')
+                $this->andWhere(config('railcontent.table_prefix') . 'content' . '.' . $requiredFieldData['name'] . ' IN (:value)')
                     ->setParameter('value', $requiredFieldData['value']);
             } else {
                 if (in_array(
@@ -192,7 +192,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                         ->getAssociationNames()
                 )) {
                     $this->join(
-                        ConfigService::$tableContent .
+                        config('railcontent.table_prefix') . 'content' .
                         '.' .
                         $this->getEntityManager()
                             ->getClassMetadata(Content::class)
@@ -226,7 +226,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                 $joinClause->on(
                     $tableName . '.content_id',
                     '=',
-                    ConfigService::$tableContent . '.id'
+                    config('railcontent.table_prefix') . 'content' . '.id'
                 );
 
                 $joinClause->on(
@@ -354,7 +354,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
             )) {
                 $this->addSelect($requiredFieldData);
                 $this->leftJoin(
-                    ConfigService::$tableContent .
+                    config('railcontent.table_prefix') . 'content' .
                     '.' .
                     $this->getEntityManager()
                         ->getClassMetadata(Content::class)

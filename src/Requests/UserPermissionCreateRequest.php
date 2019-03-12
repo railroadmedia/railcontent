@@ -26,7 +26,7 @@ class UserPermissionCreateRequest extends FormRequest
         return [
             'data.relationships.user.data.id' => 'required|integer',
             'data.relationships.permission.data.id' => 'required|integer|exists:' . ConfigService::$databaseConnectionName . '.' .
-                ConfigService::$tablePermissions . ',id',
+                config('railcontent.table_prefix'). 'permissions' . ',id',
             'data.attributes.start_date' => 'required|date',
             'data.attributes.expiration_date' => 'nullable|date'
         ];

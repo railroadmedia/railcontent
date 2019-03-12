@@ -5,7 +5,6 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Entities\Entity;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\RemoteStorageService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
@@ -20,7 +19,7 @@ class RemoteStorageJsonController extends Controller
     {
         $this->remoteStorageService = $remoteStorageService;
 
-        $this->middleware(ConfigService::$controllerMiddleware);
+        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     public function put(Request $request)

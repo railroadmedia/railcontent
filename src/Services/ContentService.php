@@ -100,12 +100,12 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->andWhere(ConfigService::$tableContent . '.id = :id')
+                ->andWhere(config('railcontent.table_prefix'). 'content' . '.id = :id')
                 ->setParameter('id', $id)
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getSingleResult();
+                ->getOneOrNullResult();
 
         return $results;
     }
@@ -121,7 +121,7 @@ class ContentService
         $unorderedContentRows =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->andWhere(ConfigService::$tableContent . '.id IN (:ids)')
+                ->andWhere(config('railcontent.table_prefix'). 'content' . '.id IN (:ids)')
                 ->setParameter('ids', $ids)
                 ->getQuery()
                 ->setCacheable(true)
@@ -152,7 +152,7 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->andWhere(ConfigService::$tableContent . '.type = :type')
+                ->andWhere(config('railcontent.table_prefix'). 'content' . '.type = :type')
                 ->setParameter('type', $type)
                 ->getQuery()
                 ->setCacheable(true)
@@ -185,8 +185,8 @@ class ContentService
         $qb =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->whereIn(ConfigService::$tableContent . '.type', $types)
-                ->andWhere(ConfigService::$tableContent . '.status = :status')
+                ->whereIn(config('railcontent.table_prefix'). 'content' . '.type', $types)
+                ->andWhere(config('railcontent.table_prefix'). 'content' . '.status = :status')
                 ->setParameter('status', $status);
         if (in_array(
             $fieldKey,
@@ -194,7 +194,7 @@ class ContentService
                 ->getFieldNames()
         )) {
             $qb->andWhere(
-                ConfigService::$tableContent . '.' . $fieldKey . ' ' . $fieldComparisonOperator . ' (:value)'
+                config('railcontent.table_prefix'). 'content' . '.' . $fieldKey . ' ' . $fieldComparisonOperator . ' (:value)'
             )
                 ->setParameter('value', $fieldValue);
         } else {
@@ -204,7 +204,7 @@ class ContentService
                     ->getAssociationNames()
             )) {
                 $qb->join(
-                    ConfigService::$tableContent .
+                    config('railcontent.table_prefix'). 'content' .
                     '.' .
                     $this->entityManager->getClassMetadata(Content::class)
                         ->getFieldName($fieldKey),
@@ -300,9 +300,9 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->where(ConfigService::$tableContent . '.slug = :slug')
-                ->andWhere(ConfigService::$tableContent . '.type = :type')
-                ->andWhere(ConfigService::$tableContent . '.user = :user')
+                ->where(config('railcontent.table_prefix'). 'content' . '.slug = :slug')
+                ->andWhere(config('railcontent.table_prefix'). 'content' . '.type = :type')
+                ->andWhere(config('railcontent.table_prefix'). 'content' . '.user = :user')
                 ->setParameters(
                     [
                         'slug' => $slug,
@@ -331,7 +331,7 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(ConfigService::$tableContent . '.parent', 'p')
+                ->join(config('railcontent.table_prefix'). 'content' . '.parent', 'p')
                 ->andWhere('p.parent = :parentId')
                 ->setParameter('parentId', $parentId)
                 ->orderBy('p.' . $orderBy, $orderByDirection)
@@ -362,7 +362,7 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(ConfigService::$tableContent . '.parent', 'p')
+                ->join(config('railcontent.table_prefix'). 'content' . '.parent', 'p')
                 ->andWhere('p.parent = :parentId')
                 ->setParameter('parentId', $parentId)
                 ->orderBy('p.' . $orderBy, $orderByDirection)
@@ -395,8 +395,8 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(ConfigService::$tableContent . '.parent', 'p')
-                ->whereIn(ConfigService::$tableContent . '.type', $types)
+                ->join(config('railcontent.table_prefix'). 'content' . '.parent', 'p')
+                ->whereIn(config('railcontent.table_prefix'). 'content' . '.type', $types)
                 ->andWhere('p.parent = :parentId')
                 ->setParameter('parentId', $parentId)
                 ->orderBy('p.' . $orderBy, $orderByDirection)
@@ -429,8 +429,8 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(ConfigService::$tableContent . '.parent', 'p')
-                ->whereIn(ConfigService::$tableContent . '.type', $types)
+                ->join(config('railcontent.table_prefix'). 'content' . '.parent', 'p')
+                ->whereIn(config('railcontent.table_prefix'). 'content' . '.type', $types)
                 ->andWhere('p.parent = :parentId')
                 ->setParameter('parentId', $parentId)
                 ->orderBy('p.' . $orderBy, $orderByDirection)
@@ -459,11 +459,11 @@ class ContentService
 
         return $qb->select(
             $qb->expr()
-                ->count(ConfigService::$tableContent)
+                ->count(config('railcontent.table_prefix'). 'content')
         )
             ->restrictByUserAccess()
-            ->join(ConfigService::$tableContent . '.parent', 'p')
-            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->join(config('railcontent.table_prefix'). 'content' . '.parent', 'p')
+            ->whereIn(config('railcontent.table_prefix'). 'content' . '.type', $types)
             ->andWhere('p.parent = :parentId')
             ->setParameter('parentId', $parentId)
             ->getQuery()
@@ -483,7 +483,7 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(ConfigService::$tableContent . '.parent', 'p')
+                ->join(config('railcontent.table_prefix'). 'content'. '.parent', 'p')
                 ->whereIn('p.parent', $parentIds)
                 ->orderBy('p.' . $orderBy, $orderByDirection)
                 ->getQuery()
@@ -506,9 +506,9 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(ConfigService::$tableContent . '.child', 'c')
+                ->join(config('railcontent.table_prefix'). 'content' . '.child', 'c')
                 ->andWhere('c.child = :childId')
-                ->andWhere(ConfigService::$tableContent . '.type = :type')
+                ->andWhere(config('railcontent.table_prefix'). 'content' . '.type = :type')
                 ->setParameter('type', $type)
                 ->setParameter('childId', $childId)
                 ->getQuery()
@@ -531,9 +531,9 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(ConfigService::$tableContent . '.child', 'c')
+                ->join(config('railcontent.table_prefix'). 'content' . '.child', 'c')
                 ->whereIn('c.child', $childIds)
-                ->andWhere(ConfigService::$tableContent . '.type = :type')
+                ->andWhere(config('railcontent.table_prefix'). 'content' . '.type = :type')
                 ->setParameter('type', $type)
                 ->getQuery()
                 ->setCacheable(true)
@@ -555,9 +555,9 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(ConfigService::$tableContent . '.child', 'c')
+                ->join(config('railcontent.table_prefix'). 'content'. '.child', 'c')
                 ->whereIn('c.child', [$childId])
-                ->andWhere(ConfigService::$tableContent . '.type IN (:type)')
+                ->andWhere(config('railcontent.table_prefix'). 'content' . '.type IN (:type)')
                 ->setParameter('type', $types)
                 ->getQuery()
                 ->setCacheable(true)
@@ -1046,11 +1046,11 @@ class ContentService
                     'WITH',
                     'railcontent_content.id = hierarchy.child'
                 )
-                ->andWhere(ConfigService::$tableContent . '.userId = :userId')
+                ->andWhere(config('railcontent.table_prefix'). 'content' . '.userId = :userId')
                 ->andWhere('hierarchy.child IN (:childIds)');
 
         if ($singlePlaylistSlug) {
-            $userPlaylistContents->andWhere(ConfigService::$tableContent . '.slug = :slug')
+            $userPlaylistContents->andWhere(config('railcontent.table_prefix'). 'content' . '.slug = :slug')
                 ->setParameter('slug', $singlePlaylistSlug);
         }
 
@@ -1143,13 +1143,13 @@ class ContentService
         $qb =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->whereIn(ConfigService::$tableContent . '.type', $contentTypes);
+                ->whereIn(config('railcontent.table_prefix'). 'content' . '.type', $contentTypes);
         if (in_array(
             $contentFieldKey,
             $this->entityManager->getClassMetadata(Content::class)
                 ->getFieldNames()
         )) {
-            $qb->andWhere(ConfigService::$tableContent . '.' . $contentFieldKey . ' IN (:value)')
+            $qb->andWhere(config('railcontent.table_prefix'). 'content'. '.' . $contentFieldKey . ' IN (:value)')
                 ->setParameter('value', $contentFieldValues);
         } else {
             if (in_array(
@@ -1158,7 +1158,7 @@ class ContentService
                     ->getAssociationNames()
             )) {
                 $qb->join(
-                    ConfigService::$tableContent .
+                    config('railcontent.table_prefix'). 'content' .
                     '.' .
                     $this->entityManager->getClassMetadata(Content::class)
                         ->getFieldName($contentFieldKey),

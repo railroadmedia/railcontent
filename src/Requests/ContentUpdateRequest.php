@@ -37,7 +37,7 @@ class ContentUpdateRequest extends CustomFormRequest
                 'data.attributes.sort' => 'nullable|numeric',
                 'data.attributes.position' => 'nullable|numeric|min:0',
                 'data.relationships.parent.data.id' => 'nullable|numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
-                    ConfigService::$tableContent . ',id',
+                    config('railcontent.table_prefix'). 'content' . ',id',
                 'data.attributes.published_on' => 'nullable|date'
             ]
         );

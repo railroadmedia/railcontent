@@ -34,7 +34,7 @@ class QueryBuilder extends CachedQuery
         if ($column) {
             // this properly formats orderBy table names
             // including the case with '' table name used for non-mapped generated columns such as counts
-            $tableName = $table ?? ConfigService::$tableContent;
+            $tableName = $table ?? config('railcontent.table_prefix'). 'content';
             $orderByTable = $tableName ? $tableName . '.' : '';
             parent::orderBy($orderByTable . $column, $direction);
         }

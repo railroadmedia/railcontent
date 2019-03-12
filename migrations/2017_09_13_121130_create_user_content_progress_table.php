@@ -15,7 +15,7 @@ class CreateUserContentProgressTable extends Migration
     public function up()
     {
         Schema::connection(ConfigService::$databaseConnectionName)->create(
-            ConfigService::$tableUserContentProgress,
+            config('railcontent.table_prefix'). 'user_content_progress',
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('content_id')->index();
@@ -36,6 +36,6 @@ class CreateUserContentProgressTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableUserContentProgress);
+        Schema::dropIfExists(config('railcontent.table_prefix'). 'user_content_progress');
     }
 }

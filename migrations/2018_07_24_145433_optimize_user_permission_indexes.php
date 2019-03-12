@@ -14,7 +14,7 @@ class OptimizeUserPermissionIndexes extends Migration
     public function up()
     {
         Schema::connection(ConfigService::$databaseConnectionName)->table(
-            ConfigService::$tableUserPermissions,
+            config('railcontent.table_prefix'). 'user_permissions',
             function ($table) {
                 /**
                  * @var $table \Illuminate\Database\Schema\Blueprint
@@ -37,7 +37,7 @@ class OptimizeUserPermissionIndexes extends Migration
     public function down()
     {
         Schema::connection(ConfigService::$databaseConnectionName)->table(
-            ConfigService::$tableUserPermissions,
+            config('railcontent.table_prefix'). 'user_permissions',
             function ($table) {
                 /**
                  * @var $table \Illuminate\Database\Schema\Blueprint

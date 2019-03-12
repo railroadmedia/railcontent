@@ -32,7 +32,7 @@ class CommentUpdateRequest extends FormRequest
                 ['numeric',
                     Rule::exists(
                         ConfigService::$databaseConnectionName . '.' .
-                        ConfigService::$tableContent,
+                        config('railcontent.table_prefix'). 'content',
                         'id'
                     )->where(
                         function ($query) {
@@ -43,7 +43,7 @@ class CommentUpdateRequest extends FormRequest
                     )
                 ],
             'data.relationships.parent.data.id' => 'numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
-                ConfigService::$tableComments . ',id',
+                config('railcontent.table_prefix'). 'comments' . ',id',
             'data.attributes.display_name' => 'filled'
         ];
     }

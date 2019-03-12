@@ -15,7 +15,7 @@ class CreateContentVersionsTable extends Migration
     public function up()
     {
         Schema::connection(ConfigService::$databaseConnectionName)->create(
-            ConfigService::$tableContentVersions,
+            config('railcontent.table_prefix'). 'versions',
             function (Blueprint $table) {
                 $table->increments('id');
 
@@ -35,6 +35,6 @@ class CreateContentVersionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableContentVersions);
+        Schema::dropIfExists(config('railcontent.table_prefix'). 'versions');
     }
 }
