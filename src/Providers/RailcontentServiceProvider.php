@@ -16,6 +16,7 @@ use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\ExpireCache;
+use Railroad\Railcontent\Commands\MigrateContentFields;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
 use Railroad\Railcontent\Decorators\Content\ContentChildsAndParentsDecorator;
 use Railroad\Railcontent\Decorators\Content\ContentDataDecorator;
@@ -94,6 +95,7 @@ class RailcontentServiceProvider extends ServiceProvider
                 RepairMissingDurations::class,
                 CreateYoutubeVideoContentRecords::class,
                 ExpireCache::class,
+                MigrateContentFields::class
             ]
         );
 
