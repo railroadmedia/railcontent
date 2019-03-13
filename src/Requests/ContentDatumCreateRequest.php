@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Railroad\Railcontent\Services\ConfigService;
 
 class ContentDatumCreateRequest extends CustomFormRequest
 {
@@ -28,7 +27,7 @@ class ContentDatumCreateRequest extends CustomFormRequest
         );
 
         //set the custom validation rules
-        $this->setCustomRules($this, 'data');
+        $this->setCustomRules($this, 'datum');
 
         //get all the rules for the request
         return parent::rules();

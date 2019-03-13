@@ -36,7 +36,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
     {
         $slug = $this->faker->word;
         $type = 'course';
-        $status = ContentService::STATUS_SCHEDULED;
+        $status = ContentService::STATUS_DRAFT;
         $instructor = $this->fakeContent(
             1,
             [
@@ -98,6 +98,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 ],
             ]
         );
+
         $responseContent = $response->decodeResponseJson('data');
 
         $this->assertEquals(201, $response->status());
@@ -1405,9 +1406,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'difficulty' => 1,
-                'type' => 'course',
                 'brand' =>config('railcontent.brand'),
-                'status' => 'published'
+                'status' => 'published',
             ]
         );
 
@@ -1436,7 +1436,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'data' => [
                     'attributes' => [
                         'status' => ContentService::STATUS_PUBLISHED,
-                        //'title' => 'test',
                         'fields' => [
                             [
                                 'key' => 'topic',
@@ -1798,16 +1797,18 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_create_new_content()
     {
+        $type = $this->faker->word;
+
         $content = $this->fakeContent(
             1,
             [
                 'difficulty' => 1,
-                'type' => 'course',
+                'type' => $type,
             ]
         );
         $otherContent = $this->fakeContent(12);
 
-        $types = ['course'];
+        $types = [$type];
         $page = 1;
         $limit = 10;
         $filter = ['difficulty,1'];
@@ -1829,7 +1830,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $contentData = [
             'slug' => $this->faker->word,
             'status' => 'published',
-            'type' => 'course',
+            'type' => $type,
             'sort' => 1,
             'title' => $this->faker->word,
             'brand' => config('railcontent.brand'),

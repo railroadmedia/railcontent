@@ -34,7 +34,6 @@ class ContentDatumControllerTest extends RailcontentTestCase
                 'status' => 'published',
                 'publishedOn' => Carbon::now(),
                 'brand' => config('railcontent.brand'),
-                'type' => 'course',
                 'difficulty' => 1,
             ]
         );
@@ -47,8 +46,8 @@ class ContentDatumControllerTest extends RailcontentTestCase
             ]
         );
 
-        $key = $this->faker->word;
-        $value = $this->faker->text(500);
+        $key = 'description';
+        $value = $this->faker->text(20);
 
         $response1 = $this->call(
             'PUT',

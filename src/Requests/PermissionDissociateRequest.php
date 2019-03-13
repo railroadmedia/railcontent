@@ -36,15 +36,4 @@ class PermissionDissociateRequest extends FormRequest
                 ',type'
         ];
     }
-
-//    public function attributes()
-//    {
-//        return [
-//            'content_id' => 'content id',
-//            'content_type' => 'content type',
-//            'permission_id' => 'permission id'
-//        ];
-//
-//    }
-
 }

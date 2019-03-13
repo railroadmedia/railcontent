@@ -10,11 +10,8 @@ use Illuminate\Validation\Factory as ValidationFactory;
 use Illuminate\Validation\ValidationException;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\ContentData;
-use Railroad\Railcontent\Entities\Entity;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
-use Railroad\Railcontent\Services\ContentFieldService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 
@@ -44,25 +41,30 @@ class CustomFormRequest extends FormRequest
      * @var ContentService
      */
     protected $contentService;
+
     /**
      * @var ContentDatumService
      */
     private $contentDatumService;
-    /**
-     * @var ContentFieldService
-     */
-    private $contentFieldService;
+
     /**
      * @var ValidationFactory
      */
     private $validationFactory;
+
     /**
      * @var ContentHierarchyService
      */
     private $contentHierarchyService;
 
+    /**
+     * @var JsonApiHydrator
+     */
     private $jsonApiHydrator;
 
+    /**
+     * @var EntityManager
+     */
     private $entityManager;
 
     /**
@@ -70,11 +72,15 @@ class CustomFormRequest extends FormRequest
      *
      * @param ContentService $contentService
      * @param ContentDatumService $contentDatumService
+     * @param ContentHierarchyService $contentHierarchyService
      * @param JsonApiHydrator $jsonApiHydrator
+     * @param EntityManager $entityManager
+     * @param ValidationFactory $validationFactory
      */
     public function __construct(
         ContentService $contentService,
         ContentDatumService $contentDatumService,
+        ContentHierarchyService $contentHierarchyService,
         JsonApiHydrator $jsonApiHydrator,
         EntityManager $entityManager,
         ValidationFactory $validationFactory
@@ -84,6 +90,7 @@ class CustomFormRequest extends FormRequest
         $this->jsonApiHydrator = $jsonApiHydrator;
         $this->entityManager = $entityManager;
         $this->validationFactory = $validationFactory;
+        $this->contentHierarchyService = $contentHierarchyService;
 
         ConfigService::$cacheTime = -1;
     }
@@ -121,7 +128,7 @@ class CustomFormRequest extends FormRequest
     /** Set the validation custom rules defined in the configuration file per brand and content type
      *
      * @param CustomFormRequest $request - the requests
-     * @param null|string $entity - can be null, 'fields' or 'datum'
+     * @param null|string $entity - can be null or 'datum'
      *
      * @return array $customRules
      */
@@ -140,9 +147,7 @@ class CustomFormRequest extends FormRequest
             array_key_exists($contentType, ConfigService::$validationRules[config('railcontent.brand')])) {
             if (!$entity) {
                 $customRules['data.attributes.fields'] =
-                    ConfigService::$validationRules[config('railcontent.brand')][$contentType][$request->request->get(
-                        'data'
-                    )['attributes']['status']];
+                    ConfigService::$validationRules[config('railcontent.brand')][$contentType];
             } else {
                 $customRules = $this->prepareCustomRules($request, $contentType, $entity);
             }
@@ -243,50 +248,78 @@ class CustomFormRequest extends FormRequest
                 continue;
             }
 
-            //            if (isset($rulesForContentType['number_of_children'])) {
-            //
-            //                $numberOfChildren = $this->contentHierarchyService->countParentsChildren(
-            //                        [$content['id']]
-            //                    )[$content['id']] ?? 0;
-            //
-            //                $rule = $rulesForContentType['number_of_children'];
-            //
-            //                if (is_array($rule) && key_exists('rules', $rule)) {
-            //                    $rule = $rule['rules'];
-            //                }
-            //
-            //                $messages = array_merge(
-            //                    $messages,
-            //                    $this->validateRuleAndGetErrors($numberOfChildren, $rule, 'number_of_children', 1)
-            //                );
-            //            }
+            if (isset($rulesForContentType['number_of_children'])) {
 
-            foreach ($rulesForContentType as $key => $rules) {
-                if ($key == "fields") {
-                    foreach ($rules as $field => $rule) {
-                        $messages = array_merge(
-                            $messages,
-                            $this->validateRuleAndGetErrors($content, $rule['rules'] ?? $rule, $field)
-                        );
-                    }
+                $numberOfChildren = $this->contentHierarchyService->countParentsChildren(
+                        [$content->getId()]
+                    )[$content->getId()] ?? 0;
+
+                $rule = $rulesForContentType['number_of_children'];
+
+                if (is_array($rule) && key_exists('rules', $rule)) {
+                    $rule = $rule['rules'];
                 }
+
+                $messages = array_merge(
+                    $messages,
+                    $this->validateRuleAndGetErrors($numberOfChildren, $rule, 'number_of_children', 1)
+                );
+            }
+
+            $fieldRules = $rulesForContentType['fields'] ?? [];
+            $dataRules = $rulesForContentType['data'] ?? [];
+
+            foreach ($fieldRules as $field => $rule) {
+
+                $requestData = null;
+
+                //get field from request if exist; otherwise from entity
+                if ($request instanceof ContentCreateRequest || $request instanceof ContentUpdateRequest) {
+                    $requestData = array_search(
+                        $field,
+                        array_column(
+                            $request->get('data')['attributes']['fields'],
+                            'key'
+                        )
+                    );
+                }
+
+                if ($requestData >= 0) {
+                    $val = $request->get('data')['attributes']['fields'][$requestData]['value'];
+                } else {
+                    $get = 'get' . ucfirst($field);
+                    $val = $content->$get();
+                }
+
+                $messages = array_merge(
+                    $messages,
+                    $this->validateRuleAndGetErrors($val, $rule['rules'] ?? $rule, $field)
+                );
+                $this->multipleFields($rule, $field, $cannotHaveMultiple, $counts);
+            }
+
+            foreach ($dataRules as $field => $rule) {
+                if (($request instanceof ContentDatumCreateRequest || $request instanceof ContentDatumUpdateRequest) &&
+                    ($request->get('data')['attributes']['key'] == $field)) {
+                    $data = $request->get('data')['attributes']['value'];
+                } else {
+                    $predictate = function ($element) use ($field) {
+                        return $element->getKey() === $field;
+                    };
+
+                    $data =
+                        $content->getData()
+                            ->filter($predictate);
+                }
+
+                $messages = array_merge(
+                    $messages,
+                    $this->validateRuleAndGetErrors($data, $rule['rules'] ?? $rule, $field)
+                );
+
+                $this->multipleFields($rule, $field, $cannotHaveMultiple, $counts);
             }
         }
-
-        /*
-         * Determine "required" elements, and validate that they're present in the content.
-         * The main validation section below fails to do this, thus its handled here by itself.
-         * Maybe one day refactor it so it's all tidy and together, for now this works.
-         */
-
-        $required = [];
-
-
-        /*
-         * Loop through the components of the content which we're modifying (or modifying a component of) and on
-         * each of those loops, then loop through validation rules for that content's type
-         */
-
 
         foreach ($cannotHaveMultiple as $key) {
             $messages = array_merge(
@@ -425,25 +458,18 @@ class CustomFormRequest extends FormRequest
         $restrictions = $this->getStatusRestrictionsForType($content->getType(), $rulesForBrand);
 
         if ($request instanceof ContentCreateRequest) {
-            if (isset($input['status'])) {
-                if (in_array($input['status'], $restrictions)) {
-                    throw new \Exception('Status cannot be set to: "' . $input['status'] . '" on content-create.');
+            if (isset($input['data']['attributes']['status'])) {
+                if (in_array($input['data']['attributes']['status'], $restrictions)) {
+                    throw new \Exception(
+                        'Status cannot be set to: "' . $input['data']['attributes']['status'] . '" on content-create.'
+                    );
                 }
             }
         }
 
-        /*
-         * For each of the following "if request is instance of x" sections:
-         *
-         * part 1 - Validation required?
-         *
-         * part 2 - If request to create, update, or delete **A FIELD OR DATUM**, need content prepared for validation
-         * to reflect the "requested whole" of the content - fields, data and all. The many cases below accomplish that
-         * by preparing the content
-         */
+        $contentValidationRequired = in_array($content->getStatus(), $restrictions);
 
         if ($request instanceof ContentUpdateRequest) {
-            // part 1
             $requestedStatusRequiresValidation = false;
             if (isset($input['data']['attributes']['status'])) {
                 if (in_array($input['data']['attributes']['status'], $restrictions)) {
@@ -455,59 +481,6 @@ class CustomFormRequest extends FormRequest
                     $content->getStatus(),
                     $restrictions
                 );
-
-            // part 2
-            if (array_key_exists('fields', $input['data']['attributes'])) {
-                foreach ($input['data']['attributes']['fields'] as $field) {
-                    if (in_array(
-                        $field['key'],
-                        $this->entityManager->getClassMetadata(Content::class)
-                            ->getFieldNames()
-                    )) {
-                        $input['data']['attributes'][$field['key']] = $field['value'];
-                    } else {
-                        $set = 'set' . ucfirst($field['key']);
-                        $add = 'add' . ucfirst($field['key']);
-                        $newResource =
-                            $this->entityManager->getClassMetadata(Content::class)
-                                ->getAssociationTargetClass($field['key']);
-                        $relationship = new $newResource;
-                        $relationship->setContent($content);
-                        $relationship->$set($field['value']);
-                        $content->$add($relationship);
-                    }
-                }
-
-                unset($input['fields']);
-            }
-
-            $this->jsonApiHydrator->hydrate($content, $input);
-        }
-
-        if ($request instanceof ContentDatumCreateRequest) {
-            // part 1
-            $contentValidationRequired = in_array($content->getStatus(), $restrictions);
-
-            //            $contentData = new ContentData();
-            //            $contentData->setContent($content);
-            //            $contentData->setKey($input['data']['attributes']['key']);
-            //            $contentData->setValue($input['data']['attributes']['value']);
-            //$content->addData($contentData);
-        }
-
-        if ($request instanceof ContentDatumUpdateRequest) {
-
-            // part 1
-            $contentValidationRequired = in_array($content->getStatus(), $restrictions);
-
-            // part 2
-            $fieldsOrData = $request instanceof ContentFieldUpdateRequest ? 'fields' : 'data';
-            //            dd($fieldsOrData);
-            //            foreach ($content[$fieldsOrData] as &$item) {
-            //                if ($item['id'] == $input['id']) {
-            //                    $item['value'] = $input['value'];
-            //                }
-            //            }
         }
 
         $contentValidationRequired = $contentValidationRequired && isset($rulesForBrand[$content->getType()]);
@@ -585,12 +558,9 @@ class CustomFormRequest extends FormRequest
 
     public function validateRule($fieldOrDatumValue, $rule, $key, $position = 0)
     {
-        $get = 'get' . ucfirst($key);
-        $val = $fieldOrDatumValue->$get();
-
         try {
             $this->validationFactory->make(
-                [$key => $val ?? null],
+                [$key => $fieldOrDatumValue],
                 [$key => $rule]
             )
                 ->validate();
@@ -634,334 +604,24 @@ class CustomFormRequest extends FormRequest
     }
 
     /**
-     * @param CustomFormRequest $request
-     * @return bool
+     * @param $rule
+     * @param $field
+     * @param array $cannotHaveMultiple
+     * @param array $counts
+     * @return array
      */
-    public function validateContentOld($request)
-    {
-        $contentValidationRequired = null;
-        $rulesForBrand = null;
-        $content = null;
-        $messages = [];
+    private function multipleFields($rule, $field, array &$cannotHaveMultiple, array &$counts)
+    : array {
+        $thisOneCanHaveMultiple = false;
 
-        try {
-            $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
-        } catch (\Exception $exception) {
-            throw new HttpResponseException(
-                response()->json(
-                    [
-                        'code' => 500,
-                        'errors' => $exception,
-                    ]
-                )
-            );
+        if (is_array($rule) && array_key_exists('can_have_multiple', $rule)) {
+            $thisOneCanHaveMultiple = $rule['can_have_multiple'];
         }
 
-        if (!$contentValidationRequired) {
-            return true;
+        if (!$thisOneCanHaveMultiple) {
+            $cannotHaveMultiple[] = $field;
+            $counts[$field] = isset($counts[$field]) ? $counts[$field] + 1 : 1;
         }
-
-        $counts = [];
-        $cannotHaveMultiple = [];
-
-        foreach ($rulesForBrand[$content->getType()] as $setOfContentTypes => $rulesForContentType) {
-
-            $setOfContentTypes = explode('|', $setOfContentTypes);
-
-            if (!in_array($content->getStatus(), $setOfContentTypes)) {
-                continue;
-            }
-
-            if (isset($rulesForContentType['number_of_children'])) {
-
-                $numberOfChildren = $this->contentHierarchyService->countParentsChildren(
-                        [$content['id']]
-                    )[$content['id']] ?? 0;
-
-                $rule = $rulesForContentType['number_of_children'];
-
-                if (is_array($rule) && key_exists('rules', $rule)) {
-                    $rule = $rule['rules'];
-                }
-
-                $messages = array_merge(
-                    $messages,
-                    $this->validateRuleAndGetErrors($numberOfChildren, $rule, 'number_of_children', 1)
-                );
-            }
-        }
-
-        /*
-         * Determine "required" elements, and validate that they're present in the content.
-         * The main validation section below fails to do this, thus its handled here by itself.
-         * Maybe one day refactor it so it's all tidy and together, for now this works.
-         */
-
-        $required = [];
-
-        foreach ($rulesForBrand[$content->getType()] as $setOfContentTypes => $rulesForContentType) {
-
-            $setOfContentTypes = explode('|', $setOfContentTypes);
-
-            if (!in_array($content->getStatus(), $setOfContentTypes)) {
-                continue;
-            }
-
-            foreach ($rulesForContentType as $rulesPropertyKey => $rules) {
-
-                if (!is_array($rules)) {
-                    continue;
-                }
-
-                if ($rulesPropertyKey === 'number_of_children') {
-                    continue;
-                }
-
-                foreach ($rules as $criteriaKey => &$criteria) {
-
-                    if (!isset($criteria['rules'])) {
-                        error_log(
-                            $content['type'] .
-                            '.' .
-                            $criteriaKey .
-                            ' for one of the brands is missing the ' .
-                            '"rules" key in the validation config'
-                        );
-                    }
-
-                    if (is_array($criteria['rules'])) {
-                        if (in_array('required', $criteria['rules'])) {
-                            $required[$rulesPropertyKey][] = $criteriaKey;
-                        }
-                    } elseif (strpos($criteria['rules'], 'required') !== false) {
-                        $required[$rulesPropertyKey][] = $criteriaKey;
-                    }
-                }
-            }
-        }
-
-        foreach ($required as $propertyKey => $list) {
-
-            if (!is_string($propertyKey)) {
-                $message =
-                    'You are likely missing a key in the config validation rules for this content-type: "' .
-                    print_r(json_encode($required), true) .
-                    '"';
-                if (!array_key_exists('fields', $required)) {
-                    $message = $message . ' Perhaps the "' . $propertyKey . '" key should instead be "fields"?';
-                } elseif (!array_key_exists('data', $required)) {
-                    $message = $message . ' Perhaps the "' . $propertyKey . '" key should instead be "data"?';
-                }
-                throw new HttpResponseException(
-                    reply()->json(
-                        new Entity(['messages' => $message]),
-                        [
-                            'code' => 500,
-                            'errors' => $message,
-                        ]
-                    )
-                );
-            }
-
-            foreach ($list as $requiredElement) {
-                $pass = false;
-                foreach ($content[$propertyKey] as $contentPropertySet) {
-                    if ($contentPropertySet['key'] === $requiredElement) {
-                        $pass = true;
-                    }
-                }
-                if (!$pass) {
-                    $messages = array_merge(
-                        $messages,
-                        $this->validateRuleAndGetErrors(null, 'required', $requiredElement)
-                    );
-                }
-            }
-        }
-
-        /*
-         * Loop through the components of the content which we're modifying (or modifying a component of) and on
-         * each of those loops, then loop through validation rules for that content's type
-         */
-        foreach ($content as $propertyName => $contentPropertySet) {
-
-            foreach ($rulesForBrand[$content['type']] as $setOfContentTypes => $rulesForContentType) {
-
-                $setOfContentTypes = explode('|', $setOfContentTypes);
-
-                if (!in_array($content['status'], $setOfContentTypes)) {
-                    continue;
-                }
-
-                foreach ($rulesForContentType as $rulesPropertyKey => $rules) {
-
-                    /*
-                     * "number_of_children" rules are handled elsewhere.
-                     */
-                    if ($rulesPropertyKey === 'number_of_children') {
-                        continue;
-                    }
-
-                    // $rulesPropertyKey will be "data" or "fields"
-
-                    /*
-                     * If there's rule for the content-component we're currently at in our looping, then validate
-                     * that component.
-                     */
-                    foreach ($rules as $criteriaKey => $criteria) {
-
-                        if (!($propertyName === $rulesPropertyKey && !empty($criteria))) {
-                            continue; // if does not match field & datum segments
-                        }
-
-                        /*
-                         * Loop through the components to validate where needed
-                         */
-                        foreach ($contentPropertySet as $contentProperty) {
-
-                            $key = $contentProperty['key'];
-                            $fieldOrDatumValue = $contentProperty['value'];
-
-                            /*
-                             * If the field|datum item is itself a piece of content, get the id so that can be
-                             * passed to the closure that evaluates the presence of that content in the database
-                             */
-                            if (($contentProperty['type'] ?? null) === 'content' && isset($fieldOrDatumValue['id'])) {
-                                $fieldOrDatumValue = $fieldOrDatumValue['id'];
-                            }
-
-                            if ($key !== $criteriaKey) {
-                                continue;
-                            }
-
-                            // Validate the component
-
-                            $position = $contentProperty['position'] ?? null;
-
-                            $messages = array_merge(
-                                $messages,
-                                $this->validateRuleAndGetErrors(
-                                    $fieldOrDatumValue,
-                                    $criteria['rules'],
-                                    $key,
-                                    $position
-                                )
-                            );
-
-                            $thisOneCanHaveMultiple = false;
-
-                            if (array_key_exists('can_have_multiple', $criteria)) {
-                                $thisOneCanHaveMultiple = $criteria['can_have_multiple'];
-                            }
-
-                            if (!$thisOneCanHaveMultiple) {
-                                $cannotHaveMultiple[] = $key;
-                                $counts[$key] = isset($counts[$key]) ? $counts[$key] + 1 : 1;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        foreach ($cannotHaveMultiple as $key) {
-            $messages = array_merge(
-                $messages,
-                $this->validateRuleAndGetErrors((int)$counts[$key], 'numeric|max:1', $key . '_count', 1)
-            );
-        }
-
-        // -------------------------------------------------------------------------------------------------------------
-
-        /*
-         * Make a request exempt from validation if the content was created before the validation was implemented
-         * (defined by the "validation_exemption_date" in config"), AND the content property edited (when applicable)
-         * does not fail validation.
-         *
-         * Otherwise users can't edit old content that was created before the validation was implemented and may not pass
-         * validation. This means that while it's state is a protected one, nothing could be edited because the content
-         * would always fail validation.
-         */
-
-        if ($request instanceof ContentDatumDeleteRequest || $request instanceof ContentFieldDeleteRequest) {
-            $idInParam = array_values(
-                $request->route()
-                    ->parameters()
-            )[0];
-            if ($request instanceof ContentFieldDeleteRequest) {
-                $keyToCheckForExemption =
-                    $this->contentFieldService->get($idInParam)
-                        ->getKey();
-            } else {
-                $keyToCheckForExemption =
-                    $this->contentDatumService->get($idInParam)
-                        ->getKey();
-            }
-        }
-
-        if ($request instanceof ContentDatumUpdateRequest || $request instanceof ContentFieldUpdateRequest) {
-            $idInParam = array_values(
-                $request->route()
-                    ->parameters()
-            )[0];
-            if ($request instanceof ContentFieldUpdateRequest) {
-                $keyToCheckForExemption =
-                    $this->contentFieldService->get($idInParam)
-                        ->getKey();
-            } else {
-                $keyToCheckForExemption =
-                    $this->contentDatumService->get($idInParam)
-                        ->getKey();
-            }
-        }
-
-        $contentCreatedOn = Carbon::parse(
-            $content->getCreatedOn()
-                ->format('Y-m-d H:i:s')
-        );
-        $exemptionDate = new Carbon('1970-01-01 00:00');
-        if (!empty(ConfigService::$validationExemptionDate)) {
-            $exemptionDate = new Carbon(ConfigService::$validationExemptionDate);
-        }
-        $exempt = $exemptionDate->gt($contentCreatedOn);
-
-        foreach ($messages as $message) {
-            if (empty($keyToCheckForExemption)) {
-                $keyToCheckForExemption = null;
-                if (!empty($request->request->all()['key'])) {
-                    $keyToCheckForExemption = $request->request->all()['key'];
-                }
-            }
-            if ($keyToCheckForExemption === $message['key']) {
-                $exempt = false;
-                $alternativeMessages = [$message];
-            }
-        }
-
-        if (isset($alternativeMessages)) {
-            $messages = $alternativeMessages;
-        }
-
-        // -------------------------------------------------------------------------------------------------------------
-
-        /*
-         * Passes Validation
-         */
-        if (empty($messages) || $exempt) {
-            return true;
-        }
-
-        /*
-         * Fails Validation
-         */
-        throw new HttpResponseException(
-            reply()->json(
-                new Entity(['messages' => $messages]),
-                [
-                    'code' => 422,
-                    'errors' => $messages,
-                ]
-            )
-        );
+        return [$cannotHaveMultiple, $counts];
     }
 }
