@@ -55,206 +55,231 @@ class MigrateContentFields extends Command
      */
     public function handle()
     {
+        $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
+        $dbConnection->disableQueryLog();
+        $pdo = $dbConnection->getPdo();
+        $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
+
         $this->info('Migrate fields command starting.');
+        $migratedFields = 0;
 
         $contentColumnNames =
             $this->entityManager->getClassMetadata(Content::class)
                 ->getColumnNames();
 
-                $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                    ->table(config('railcontent.table_prefix') . 'content_fields')
-                    ->select('id', 'content_id', 'key', 'value','position')
-                    ->where('key', 'topic')
-                    ->orderBy('content_id', 'desc')
-                    ->chunk(
-                        500,
-                        function (Collection $rows) {
-                            $data = [];
-                            foreach($rows as $row){
-                                $data[] = [
-                                    'content_id' =>$row->content_id,
-                                    'topic' => $row->value,
-                                    'position' => $row->position
-                                ];
-                            }
-                            $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                                ->table(config('railcontent.table_prefix') . 'content_topic')
-                                ->insert($data);
-                        });
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->select('id', 'content_id', 'key', 'value', 'position')
+            ->where('key', 'topic')
+            ->orderBy('content_id', 'desc')
+            ->chunk(
+                500,
+                function (Collection $rows) use (&$migratedFields, $dbConnection) {
+                    $data = [];
+                    foreach ($rows as $row) {
+                        $data[] = [
+                            'content_id' => $row->content_id,
+                            'topic' => $row->value,
+                            'position' => $row->position,
+                        ];
+                        $migratedFields++;
+                    }
+                    $dbConnection->table(config('railcontent.table_prefix') . 'content_topic')
+                        ->insert($data);
+                }
+            );
 
-                $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                    ->table(config('railcontent.table_prefix') . 'content_fields')
-                    ->select('id', 'content_id', 'key', 'value','position')
-                    ->where('key', 'tag')
-                    ->orderBy('content_id', 'desc')
-                    ->chunk(
-                        500,
-                        function (Collection $rows) {
-                            $data = [];
-                            foreach($rows as $row){
-                                $data[] = [
-                                    'content_id' =>$row->content_id,
-                                    'tag' => $row->value,
-                                    'position' => $row->position
-                                ];
-                            }
-                            $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                                ->table(config('railcontent.table_prefix') . 'content_tag')
-                                ->insert($data);
-                        });
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->select('id', 'content_id', 'key', 'value', 'position')
+            ->where('key', 'tag')
+            ->orderBy('content_id', 'desc')
+            ->chunk(
+                500,
+                function (Collection $rows) use (&$migratedFields, $dbConnection) {
+                    $data = [];
+                    foreach ($rows as $row) {
+                        $data[] = [
+                            'content_id' => $row->content_id,
+                            'tag' => $row->value,
+                            'position' => $row->position,
+                        ];
+                        $migratedFields++;
+                    }
+                    $dbConnection->table(config('railcontent.table_prefix') . 'content_tag')
+                        ->insert($data);
+                }
+            );
 
-                $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                    ->table(config('railcontent.table_prefix') . 'content_fields')
-                    ->select('id', 'content_id', 'key', 'value','position')
-                    ->where('key', 'sbt_bpm')
-                    ->orderBy('content_id', 'desc')
-                    ->chunk(
-                        500,
-                        function (Collection $rows) {
-                            $data = [];
-                            foreach($rows as $row){
-                                $data[] = [
-                                    'content_id' =>$row->content_id,
-                                    'sbt_bpm' => $row->value,
-                                    'position' => $row->position
-                                ];
-                            }
-                            $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                                ->table(config('railcontent.table_prefix') . 'content_sbt_bpm')
-                                ->insert($data);
-                        });
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->select('id', 'content_id', 'key', 'value', 'position')
+            ->where('key', 'sbt_bpm')
+            ->orderBy('content_id', 'desc')
+            ->chunk(
+                500,
+                function (Collection $rows) use (&$migratedFields, $dbConnection) {
+                    $data = [];
+                    foreach ($rows as $row) {
+                        $data[] = [
+                            'content_id' => $row->content_id,
+                            'sbt_bpm' => $row->value,
+                            'position' => $row->position,
+                        ];
+                        $migratedFields++;
+                    }
+                    $dbConnection->table(config('railcontent.table_prefix') . 'content_sbt_bpm')
+                        ->insert($data);
+                }
+            );
 
-                $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                    ->table(config('railcontent.table_prefix') . 'content_fields')
-                    ->select('id', 'content_id', 'key', 'value','position')
-                    ->where('key', 'sbt_exercise_number')
-                    ->orderBy('content_id', 'desc')
-                    ->chunk(
-                        500,
-                        function (Collection $rows) {
-                            $data = [];
-                            foreach($rows as $row){
-                                $data[] = [
-                                    'content_id' =>$row->content_id,
-                                    'sbt_exercise_number' => $row->value,
-                                    'position' => $row->position
-                                ];
-                            }
-                            $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                                ->table(config('railcontent.table_prefix') . 'content_sbt_exercise_number')
-                                ->insert($data);
-                        });
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->select('id', 'content_id', 'key', 'value', 'position')
+            ->where('key', 'sbt_exercise_number')
+            ->orderBy('content_id', 'desc')
+            ->chunk(
+                500,
+                function (Collection $rows) use (&$migratedFields, $dbConnection) {
+                    $data = [];
+                    foreach ($rows as $row) {
+                        $data[] = [
+                            'content_id' => $row->content_id,
+                            'sbt_exercise_number' => $row->value,
+                            'position' => $row->position,
+                        ];
+                        $migratedFields++;
+                    }
+                    $dbConnection->table(config('railcontent.table_prefix') . 'content_sbt_exercise_number')
+                        ->insert($data);
+                }
+            );
 
-                $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                    ->table(config('railcontent.table_prefix') . 'content_fields')
-                    ->select('id', 'content_id', 'key', 'value','position')
-                    ->where('key', 'playlist')
-                    ->orderBy('content_id', 'desc')
-                    ->chunk(
-                        500,
-                        function (Collection $rows) {
-                            $data = [];
-                            foreach($rows as $row){
-                                $data[] = [
-                                    'content_id' =>$row->content_id,
-                                    'playlist' => $row->value,
-                                    'position' => $row->position
-                                ];
-                            }
-                            $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                                ->table(config('railcontent.table_prefix') . 'content_playlist')
-                                ->insert($data);
-                        });
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->select('id', 'content_id', 'key', 'value', 'position')
+            ->where('key', 'playlist')
+            ->orderBy('content_id', 'desc')
+            ->chunk(
+                500,
+                function (Collection $rows) use (&$migratedFields, $dbConnection) {
+                    $data = [];
+                    foreach ($rows as $row) {
+                        $data[] = [
+                            'content_id' => $row->content_id,
+                            'playlist' => $row->value,
+                            'position' => $row->position,
+                        ];
 
-                $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                    ->table(config('railcontent.table_prefix') . 'content_fields')
-                    ->select('id', 'content_id', 'key', 'value','position')
-                    ->where('key', 'key')
-                    ->orderBy('content_id', 'desc')
-                    ->chunk(
-                        500,
-                        function (Collection $rows) {
-                            $data = [];
-                            foreach($rows as $row){
-                                $data[] = [
-                                    'content_id' =>$row->content_id,
-                                    'key' => $row->value,
-                                    'position' => $row->position
-                                ];
-                            }
-                            $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                                ->table(config('railcontent.table_prefix') . 'content_key')
-                                ->insert($data);
-                        });
+                        $migratedFields++;
+                    }
+                    $dbConnection->table(config('railcontent.table_prefix') . 'content_playlist')
+                        ->insert($data);
+                }
+            );
 
-                $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                    ->table(config('railcontent.table_prefix') . 'content_fields')
-                    ->select('id', 'content_id', 'key', 'value','position')
-                    ->where('key', 'key_pitch_type')
-                    ->orderBy('content_id', 'desc')
-                    ->chunk(
-                        500,
-                        function (Collection $rows) {
-                            $data = [];
-                            foreach($rows as $row){
-                                $data[] = [
-                                    'content_id' =>$row->content_id,
-                                    'key_pitch_type' => $row->value,
-                                    'position' => $row->position
-                                ];
-                            }
-                            $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                                ->table(config('railcontent.table_prefix') . 'content_key_pitch_type')
-                                ->insert($data);
-                        });
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->select('id', 'content_id', 'key', 'value', 'position')
+            ->where('key', 'key')
+            ->orderBy('content_id', 'desc')
+            ->chunk(
+                500,
+                function (Collection $rows) use (&$migratedFields, $dbConnection) {
+                    $data = [];
+                    foreach ($rows as $row) {
+                        $data[] = [
+                            'content_id' => $row->content_id,
+                            'key' => $row->value,
+                            'position' => $row->position,
+                        ];
+                        $migratedFields++;
+                    }
+                    $dbConnection->table(config('railcontent.table_prefix') . 'content_key')
+                        ->insert($data);
+                }
+            );
 
-                $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                    ->table(config('railcontent.table_prefix') . 'content_fields')
-                    ->select('id', 'content_id', 'key', 'value','position')
-                    ->where('key', 'instructor')
-                    ->orderBy('content_id', 'desc')
-                    ->chunk(
-                        500,
-                        function (Collection $rows) {
-                            $data = [];
-                            foreach($rows as $row){
-                                $data[] = [
-                                    'content_id' =>$row->content_id,
-                                    'instructor_id' => $row->value,
-                                    'position' => $row->position
-                                ];
-                            }
-                            $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                                ->table(config('railcontent.table_prefix') . 'content_instructor')
-                                ->insert($data);
-                        });
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->select('id', 'content_id', 'key', 'value', 'position')
+            ->where('key', 'key_pitch_type')
+            ->orderBy('content_id', 'desc')
+            ->chunk(
+                500,
+                function (Collection $rows) use (&$migratedFields, $dbConnection) {
+                    $data = [];
+                    foreach ($rows as $row) {
+                        $data[] = [
+                            'content_id' => $row->content_id,
+                            'key_pitch_type' => $row->value,
+                            'position' => $row->position,
+                        ];
+                        $migratedFields++;
+                    }
+                    $dbConnection->table(config('railcontent.table_prefix') . 'content_key_pitch_type')
+                        ->insert($data);
+                }
+            );
 
-        $this->databaseManager->connection(config('railcontent.database_connection_name'))
-            ->table(config('railcontent.table_prefix') . 'content_fields')
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->select('id', 'content_id', 'key', 'value', 'position')
+            ->where('key', 'instructor')
+            ->orderBy('content_id', 'desc')
+            ->chunk(
+                500,
+                function (Collection $rows) use (&$migratedFields, $dbConnection) {
+                    $data = [];
+                    foreach ($rows as $row) {
+                        $data[] = [
+                            'content_id' => $row->content_id,
+                            'instructor_id' => $row->value,
+                            'position' => $row->position,
+                        ];
+                        $migratedFields++;
+                    }
+                    $dbConnection->table(config('railcontent.table_prefix') . 'content_instructor')
+                        ->insert($data);
+                }
+            );
+
+        $contentColumns = [];
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
             ->select('id', 'content_id', 'key', 'value')
             ->whereIn('key', $contentColumnNames)
             ->orderBy('content_id', 'desc')
             ->chunk(
                 500,
-                function (Collection $rows) {
+                function (Collection $rows) use (&$migratedFields, &$contentColumns) {
                     $groupRows = $rows->groupBy('content_id');
                     foreach ($groupRows as $contentId => $row) {
                         $data = [];
                         foreach ($row as $item) {
                             $data[$item->key] = $item->value;
+                            $migratedFields++;
                         }
-
-                        $this->databaseManager->connection(config('railcontent.database_connection_name'))
-                            ->table(config('railcontent.table_prefix') . 'content')
-                            ->where('id', $contentId)
-                            ->update(
-                                $data
-                            );
+                        $contentColumns[$contentId] = $data;
                     }
                 }
-
             );
 
-        $this->info('Migration completed.');
+        $contentIdsToUpdate = array_keys($contentColumns);
+
+        foreach ($contentColumnNames as $column) {
+            $query1 = ' CASE';
+            $exist = false;
+            foreach ($contentIdsToUpdate as $index2 => $contentId) {
+                if (array_key_exists($column, $contentColumns[$contentId])) {
+                    $value = $contentColumns[$contentId][$column];
+                    $query1 .= "  WHEN id = " . $contentId . " THEN " . $pdo->quote($value);
+                    $exist = true;
+                }
+            }
+            if ($exist) {
+                $query1 .= " ELSE " . $column . " = " . $column . " END";
+
+                $cq = " SET " . $column . " = " . $query1;
+
+                $statement = "UPDATE " . config('railcontent.table_prefix') . 'content' . $cq;
+                $statement .= " WHERE id IN (" . implode(",", $contentIdsToUpdate) . ")";
+
+                $dbConnection->statement($statement);
+            }
+        }
+
+        $this->info('Migration completed. ' . $migratedFields . ' fields migrated.');
     }
 }
