@@ -140,8 +140,7 @@ class CustomFormRequest extends FormRequest
         $thereIsEntity = (!$noEntity);
 
         $contentType =
-            $thereIsEntity ? $this->getContentTypeVal($request) :
-                $request->request->get('data')['attributes']['type'] ?? '';
+            $thereIsEntity ? $this->getContentTypeVal($request) : $request->input('data.attributes.type')  ?? '';
 
         if (isset(ConfigService::$validationRules[config('railcontent.brand')]) &&
             array_key_exists($contentType, ConfigService::$validationRules[config('railcontent.brand')])) {
@@ -166,7 +165,7 @@ class CustomFormRequest extends FormRequest
     {
         $type = '';
         if (($request instanceof ContentDatumCreateRequest) || ($request instanceof ContentFieldCreateRequest)) {
-            $contentId = $request->request->get('data')['relationships']['content']['data']['id'];
+            $contentId = $request->input('data.relationships.content.data.id');
             $content = $this->contentService->getById($contentId);
 
             return ($content) ? $content->getType() : '';
@@ -505,7 +504,7 @@ class CustomFormRequest extends FormRequest
         }
 
         if ($request instanceof ContentDatumCreateRequest) {
-            $contentId = $request->request->get('data')['relationships']['content']['data']['id'];
+            $contentId = $request->input('data.relationships.content.data.id');
 
             if (empty($contentId)) {
                 error_log(

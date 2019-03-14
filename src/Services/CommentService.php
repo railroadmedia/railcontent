@@ -218,6 +218,7 @@ class CommentService
 
         if ($isSoftDelete) {
             $comment->setDeletedAt(Carbon::now());
+            $this->entityManager->persist($comment);
             $this->entityManager->flush();
         } else {
             $this->entityManager->remove($comment);

@@ -348,12 +348,13 @@ class CommentServiceTest extends RailcontentTestCase
             ]
         );
 
-        $this->classBeingTested->delete($comment[0]->getId());
+        $commentId = $comment[0]->getId();
+        $this->classBeingTested->delete($commentId);
 
         $this->assertSoftDeleted(
             config('railcontent.table_prefix'). 'comments',
             [
-                'id' => $comment[0]->getId(),
+                'id' => $commentId,
             ]
         );
     }
