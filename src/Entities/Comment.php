@@ -66,6 +66,10 @@ class Comment
     private $assignedToUser;
 
     /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\CommentLikes", mappedBy="comment")
+     */
+    private $likes;
+    /**
      * @var \DateTime $createdOn
      *
      * @Gedmo\Timestampable(on="create")
@@ -79,10 +83,13 @@ class Comment
      */
     protected $deletedAt;
 
+    private $extra;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->assignedToUser = new ArrayCollection();
+        $this->extra = new ArrayCollection();
     }
 
     /**
@@ -278,5 +285,22 @@ class Comment
     ) {
         $this->assignedToUser[] = $assignedToUser;
         return $this;
+    }
+
+    public function createProperty($propertyName, $propertyValue)
+    {
+        $this->{$propertyName} = $propertyValue;
+        $this->extra[] = $propertyName;
+    }
+
+    public function getProperty($propertyName)
+    {
+
+        return $this->{$propertyName};
+    }
+
+    public function getExtra()
+    {
+        return $this->extra;
     }
 }

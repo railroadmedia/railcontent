@@ -17,10 +17,20 @@ class DecoratedContentTransformer extends TransformerAbstract
 
         $serializer = new BasicEntitySerializer();
 
+        $extraProperties = [];
+        $extra = $content->getExtra();
+
+        foreach ($extra as  $item) {
+            $extraProperties[$item] = $content->getProperty($item);
+        }
+
         $contents = (new Collection(
-            $serializer->serializeToUnderScores(
-                $content,
-                $entityManager->getClassMetadata(get_class($content))
+            array_merge(
+                $serializer->serialize(
+                    $content,
+                    $entityManager->getClassMetadata(get_class($content))
+                ),
+                $extraProperties
             )
         ))->toArray();
 

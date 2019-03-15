@@ -6,9 +6,11 @@ use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Cache\RedisCache;
+use Doctrine\Common\EventManager;
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -24,6 +26,7 @@ use Railroad\Railcontent\Decorators\Content\ContentDecorator;
 use Railroad\Railcontent\Decorators\Content\ContentFielsDecorator;
 use Railroad\Railcontent\Decorators\Content\ContentPermissionsDecorator;
 use Railroad\Railcontent\Decorators\Hierarchy\ContentSlugHierarchyDecorator;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Events\ContentCreated;
@@ -39,6 +42,7 @@ use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\ContentEventListener;
+use Railroad\Railcontent\Listeners\RailcontentEventSubscriber;
 use Railroad\Railcontent\Listeners\UnassignCommentEventListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
 use Railroad\Railcontent\Listeners\VersionContentEventListener;
@@ -95,7 +99,7 @@ class RailcontentServiceProvider extends ServiceProvider
                 RepairMissingDurations::class,
                 CreateYoutubeVideoContentRecords::class,
                 ExpireCache::class,
-                MigrateContentFields::class
+                MigrateContentFields::class,
             ]
         );
 
@@ -107,34 +111,34 @@ class RailcontentServiceProvider extends ServiceProvider
             'double-check the input value and try again.'
         );
 
-        config()->set(
-            'resora.decorators.content',
-            array_merge(
-                [
-                    ContentPermissionsDecorator::class,
-                    ContentDataDecorator::class,
-                    ContentFielsDecorator::class,
-                    ContentSlugHierarchyDecorator::class,
-                    ContentChildsAndParentsDecorator::class,
-                ],
-                config()->get('railcontent.decorators.content', [])
-            )
-        );
+//                config()->set(
+//                    'resora.decorators.content',
+//                    array_merge(
+//                        [
+//                            ContentPermissionsDecorator::class,
+//                            ContentDataDecorator::class,
+//                            ContentFielsDecorator::class,
+//                            ContentSlugHierarchyDecorator::class,
+//                            ContentChildsAndParentsDecorator::class,
+//                        ],
+//                        config()->get('railcontent.decorators.content', [])
+//                    )
+//                );
 
-        config()->set(
-            'resora.decorators.comment',
-            config()->get('railcontent.decorators.comment', [])
-        );
-
-        config()->set(
-            'resora.decorators.content-field',
-            array_merge(
-                config()->get('resora.decorators.content-field', []),
-                [
-                    ContentDecorator::class,
-                ]
-            )
-        );
+                config()->set(
+                    'resora.decorators.comment',
+                    config()->get('railcontent.decorators.comment', [])
+                );
+        //
+        //        config()->set(
+        //            'resora.decorators.content-field',
+        //            array_merge(
+        //                config()->get('resora.decorators.content-field', []),
+        //                [
+        //                    ContentDecorator::class,
+        //                ]
+        //            )
+        //        );
 
         config()->set('resora.default_connection_name', ConfigService::$databaseConnectionName);
     }
@@ -156,17 +160,17 @@ class RailcontentServiceProvider extends ServiceProvider
         //ConfigService::$tableContentHierarchy = ConfigService::$tablePrefix . 'content_hierarchy';
         //ConfigService::$tableContentVersions = ConfigService::$tablePrefix . 'versions';
         ConfigService::$tableContentFields = ConfigService::$tablePrefix . 'content_fields';
-       // ConfigService::$tableContentData = ConfigService::$tablePrefix . 'content_data';
+        // ConfigService::$tableContentData = ConfigService::$tablePrefix . 'content_data';
         //ConfigService::$tablePermissions = ConfigService::$tablePrefix . 'permissions';
         //ConfigService::$tableContentPermissions = ConfigService::$tablePrefix . 'content_permissions';
-       // ConfigService::$tableUserPermissions = ConfigService::$tablePrefix . 'user_permissions';
-       // ConfigService::$tableUserContentProgress = ConfigService::$tablePrefix . 'user_content_progress';
+        // ConfigService::$tableUserPermissions = ConfigService::$tablePrefix . 'user_permissions';
+        // ConfigService::$tableUserContentProgress = ConfigService::$tablePrefix . 'user_content_progress';
         ConfigService::$tablePlaylists = ConfigService::$tablePrefix . 'playlists';
         ConfigService::$tablePlaylistContents = ConfigService::$tablePrefix . 'playlist_contents';
         //ConfigService::$tableComments = ConfigService::$tablePrefix . 'comments';
         //ConfigService::$tableCommentsAssignment = ConfigService::$tablePrefix . 'comment_assignment';
         //ConfigService::$tableCommentLikes = ConfigService::$tablePrefix . 'comment_likes';
-      //  ConfigService::$tableSearchIndexes = ConfigService::$tablePrefix . 'search_indexes';
+        //  ConfigService::$tableSearchIndexes = ConfigService::$tablePrefix . 'search_indexes';
 
         // brand
         //ConfigService::$brand = config('railcontent.brand');
@@ -174,7 +178,7 @@ class RailcontentServiceProvider extends ServiceProvider
 
         // lanuage
         //ConfigService::$defaultLanguage = config('railcontent.default_language');
-       // ConfigService::$availableLanguages = config('railcontent.available_languages');
+        // ConfigService::$availableLanguages = config('railcontent.available_languages');
 
         // middlware
         //ConfigService::$controllerMiddleware = config('railcontent.controller_middleware');
@@ -192,14 +196,14 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$fieldOptionList = config('railcontent.field_option_list', []);
 
         //restrict which content type can have comment
-       // ConfigService::$commentableContentTypes = config('railcontent.commentable_content_types');
+        // ConfigService::$commentableContentTypes = config('railcontent.commentable_content_types');
 
         //ConfigService::$commentsAssignationOwnerIds = config('railcontent.comment_assignation_owner_ids');
 
         //ConfigService::$searchableContentTypes = config('railcontent.searchable_content_types');
 
         //ConfigService::$searchIndexValues = config('railcontent.search_index_values'); ???
-      //  ConfigService::$indexableContentStatuses = config('railcontent.indexable_content_statuses'); ???
+        //  ConfigService::$indexableContentStatuses = config('railcontent.indexable_content_statuses'); ???
 
         ConfigService::$videoSync = config('railcontent.video_sync');
 
@@ -219,11 +223,14 @@ class RailcontentServiceProvider extends ServiceProvider
 
         // aggregates
         ConfigService::$tableCommentsAggregates = [
-            config('railcontent.table_prefix'). 'comment_likes' => [
-                'selectColumn' => 'COUNT(`' . config('railcontent.table_prefix'). 'comment_likes' . '`.`id`) as `like_count`',
+            config('railcontent.table_prefix') . 'comment_likes' => [
+                'selectColumn' => 'COUNT(`' .
+                    config('railcontent.table_prefix') .
+                    'comment_likes' .
+                    '`.`id`) as `like_count`',
                 'foreignField' => 'comment_id',
                 'localField' => 'id',
-                'groupBy' => config('railcontent.table_prefix'). 'comments' . '.id',
+                'groupBy' => config('railcontent.table_prefix') . 'comments' . '.id',
             ],
         ];
     }
@@ -235,6 +242,9 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $entityManager = app()->make(EntityManager::class);
+        $eventManager = $entityManager->getEventManager();
 
+        $eventManager->addEventSubscriber(new RailcontentEventSubscriber());
     }
 }

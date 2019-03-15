@@ -2,44 +2,26 @@
 
 namespace Railroad\Railcontent\Decorators\Content;
 
-use Railroad\Railcontent\Repositories\ContentFieldRepository;
 use Railroad\Resora\Decorators\DecoratorInterface;
 
-class ContentFielsDecorator implements DecoratorInterface
+class ContentFielsDecorator
 {
-    /**
-     * @var ContentFieldRepository
-     */
-    private $contentFieldsRepository;
-
     /**
      * CommentLikesDecorator constructor.
      *
-     * @param CommentLikeRepository $commentLikeRepository
      */
-    public function __construct(ContentFieldRepository $contentFieldRepository)
+    public function __construct()
     {
-        $this->contentFieldsRepository = $contentFieldRepository;
+
     }
 
     public function decorate($contents)
     {
-        $contentIds = $contents->pluck('id');
+        $contents->createProperty('vimeo video url',[
+            'url1', 'url2'
+        ]);
+        $contents->createProperty('other','value');
 
-        $contentFields =
-            $this->contentFieldsRepository->query()
-                ->whereIn('content_id', $contentIds)
-                ->get()
-                ->groupBy('content_id');
-
-        foreach ($contents as $index => $content) {
-            if(!array_key_exists('id', $content)){
-                $contents[$index]['fields'] = [];
-            } else {
-                $contents[$index]['fields'] = $contentFields[$content['id']] ?? [];
-            }
-        }
-
-        return $contents;
+        return ($contents);
     }
 }

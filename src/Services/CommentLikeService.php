@@ -67,16 +67,17 @@ class CommentLikeService
     public function countForCommentIds($commentIds)
     {
         $qb =
-            $this->commentLikeRepository->createQueryBuilder('c')
-                ->join('c.comment', 'co');
+            $this->commentRepository->createQueryBuilder('co')
+                ->leftjoin('co.likes', 'c')->select('co.id, count(c.id) as nr');
+
         $results =
             $qb->select('co.id, count(c.id) as nr')
                 ->where(
                     $qb->expr()
-                        ->in('c.comment', ':commentIds')
+                        ->in('co.id', ':commentIds')
                 )
                 ->setParameter('commentIds', $commentIds)
-                ->groupBy('c.comment')
+                ->groupBy('co.id')
                 ->getQuery()
                 ->getResult();
 

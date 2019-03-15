@@ -136,6 +136,8 @@ class Content
      */
     protected $createdOn;
 
+    private $extra;
+
     /**
      * Content constructor.
      */
@@ -153,6 +155,7 @@ class Content
         $this->exercise = new ArrayCollection();
         $this->userProgress = new ArrayCollection();
         $this->permissions = new ArrayCollection();
+        $this->extra = new ArrayCollection();
     }
 
     /**
@@ -497,5 +500,22 @@ class Content
     {
         $this->permissions = $contentPermissions;
 
+    }
+
+    public function createProperty($propertyName, $propertyValue)
+    {
+        $this->{$propertyName} = $propertyValue;
+        $this->extra[] = $propertyName;
+    }
+
+    public function getProperty($propertyName)
+    {
+
+        return $this->{$propertyName};
+    }
+
+    public function getExtra()
+    {
+        return $this->extra;
     }
 }

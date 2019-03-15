@@ -170,8 +170,8 @@ return [
     'decorators' => [
         'content' => [
             \Railroad\Railcontent\Decorators\Content\ContentFielsDecorator::class,
-            \Railroad\Railcontent\Decorators\Hierarchy\ContentSlugHierarchyDecorator::class,
-            \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
+//            \Railroad\Railcontent\Decorators\Hierarchy\ContentSlugHierarchyDecorator::class,
+//            \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
         ],
         'comment' => [
             \Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator::class,
