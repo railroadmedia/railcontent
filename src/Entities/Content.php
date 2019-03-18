@@ -8,6 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Railroad\Railcontent\Contracts\UserInterface;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsAssociations;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsProperties;
+use Railroad\Railcontent\Entities\Traits\DecoratedFields;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentRepository")
@@ -20,6 +21,7 @@ class Content
 {
     use ContentFieldsProperties;
     use ContentFieldsAssociations;
+    use DecoratedFields;
 
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
@@ -136,8 +138,6 @@ class Content
      */
     protected $createdOn;
 
-    private $extra;
-
     /**
      * Content constructor.
      */
@@ -155,7 +155,6 @@ class Content
         $this->exercise = new ArrayCollection();
         $this->userProgress = new ArrayCollection();
         $this->permissions = new ArrayCollection();
-        $this->extra = new ArrayCollection();
     }
 
     /**
@@ -500,22 +499,5 @@ class Content
     {
         $this->permissions = $contentPermissions;
 
-    }
-
-    public function createProperty($propertyName, $propertyValue)
-    {
-        $this->{$propertyName} = $propertyValue;
-        $this->extra[] = $propertyName;
-    }
-
-    public function getProperty($propertyName)
-    {
-
-        return $this->{$propertyName};
-    }
-
-    public function getExtra()
-    {
-        return $this->extra;
     }
 }

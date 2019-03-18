@@ -2,54 +2,32 @@
 
 namespace Railroad\Railcontent\Decorators\Content;
 
-use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Repositories\ContentPermissionRepository;
-use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Resora\Decorators\DecoratorInterface;
 
 class ContentPermissionsDecorator implements DecoratorInterface
 {
     /**
-     * @var ContentPermissionRepository
+     * @var ContentPermissionService
+     *
      */
-    private $contentPermissionsRepository;
+    private $contentPermissionService;
 
-    public function __construct(ContentPermissionRepository $contentPermissionsRepository)
+    /**
+     * ContentPermissionsDecorator constructor.
+     *
+     * @param ContentPermissionService $contentPermissionService
+     */
+    public function __construct(ContentPermissionService $contentPermissionService)
     {
-        $this->contentPermissionsRepository = $contentPermissionsRepository;
+        $this->contentPermissionService = $contentPermissionService;
     }
 
     public function decorate($contents)
     {
-        $contentPermissions =
-            $this->contentPermissionsRepository->query()
-                ->select([config('railcontent.table_prefix'). 'content_permissions' . '.*', config('railcontent.table_prefix'). 'permissions' . '.name'])
-                ->join(
-                    config('railcontent.table_prefix'). 'permissions',
-                    config('railcontent.table_prefix'). 'permissions' . '.id',
-                    '=',
-                    config('railcontent.table_prefix'). 'content_permissions' . '.permission_id'
-                )
-                ->whereIn('content_id', $contents->pluck('id'))
-                ->orWhereIn('content_type', $contents->pluck('type'))
-                ->get()
-                ->toArray();
+        $permissions = $this->contentPermissionService->getByContentTypeOrId($contents->getId(), $contents->getType());
 
-        $permissionRowsGroupedById = ContentHelper::groupArrayBy($contentPermissions, 'content_id');
-        $permissionRowsGroupedByType = ContentHelper::groupArrayBy($contentPermissions, 'content_type');
-
-        foreach ($contents as $index => $content) {
-            if (empty($contentPermissions)) {
-                $contents[$index]['permissions'] = [];
-            } else {
-                $contents[$index]['permissions'] = array_merge(
-                    $permissionRowsGroupedById[$content['id']] ?? [],
-                    (array_key_exists('type', $content) &&
-                        array_key_exists($content['type'], $permissionRowsGroupedByType)) ?
-                        $permissionRowsGroupedByType[$content['type']] : []
-                );
-            }
-        }
+        $contents->createProperty('permissions', $permissions);
 
         return $contents;
     }

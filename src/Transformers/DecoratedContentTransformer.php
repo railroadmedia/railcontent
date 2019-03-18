@@ -7,7 +7,6 @@ use Illuminate\Support\Collection;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\ContentPermission;
 
 class DecoratedContentTransformer extends TransformerAbstract
 {
@@ -19,9 +18,24 @@ class DecoratedContentTransformer extends TransformerAbstract
 
         $extraProperties = [];
         $extra = $content->getExtra();
-
-        foreach ($extra as  $item) {
-            $extraProperties[$item] = $content->getProperty($item);
+        if ($extra) {
+            foreach ($extra as $item) {
+                $value = $content->getProperty($item);
+                if(is_array($value)) {
+                    foreach ($value as $val) {
+                        if (is_object($val)) {
+                            $extraProperties[$item][] =  $serializer->serialize(
+                                $val,
+                                $entityManager->getClassMetadata(get_class($val))
+                            );
+                        }else{
+                            $extraProperties[$item][] = $value;
+                        }
+                    }
+                } else {
+                    $extraProperties[$item] = $value;
+                }
+            }
         }
 
         $contents = (new Collection(
@@ -79,12 +93,6 @@ class DecoratedContentTransformer extends TransformerAbstract
             $defaultIncludes[] = 'parent';
         }
 
-        $permissions = $this->getPermissions($content, $entityManager);
-
-        if ($permissions) {
-            $content->setPermissions($permissions);
-            $defaultIncludes[] = 'permissions';
-        }
 
         $this->setDefaultIncludes($defaultIncludes);
 
@@ -234,36 +242,4 @@ class DecoratedContentTransformer extends TransformerAbstract
         );
     }
 
-    /**
-     * @param Content $content
-     * @return \League\Fractal\Resource\Collection
-     */
-    public function includePermissions(Content $content)
-    {
-        return $this->collection(
-            $content->getPermissions(),
-            new ContentPermissionTransformer(),
-            'permissions'
-        );
-    }
-
-    /**
-     * @param Content $content
-     * @param $entityManager
-     * @return mixed
-     */
-    private function getPermissions(Content $content, $entityManager)
-    {
-        $contentPermission = $entityManager->getRepository(ContentPermission::class);
-
-        $permissions =
-            $contentPermission->createQueryBuilder('cp')
-                ->where('cp.content IN (:content)')
-                ->orWhere('cp.contentType = :contentType')
-                ->setParameter('content', $content->getId())
-                ->setParameter('contentType', $content->getType())
-                ->getQuery()
-                ->getResult();
-        return $permissions;
-    }
 }

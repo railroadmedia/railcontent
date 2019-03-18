@@ -62,10 +62,12 @@ class CommentLikes
     }
 
     /**
-     * @param mixed $content
+     * @param Comment $comment
      */
-    public function setComment($comment)
+    public function setComment(Comment $comment)
     {
+        $comment->addLikes($this);
+
         $this->comment = $comment;
     }
 

@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Railroad\Railcontent\Contracts\UserInterface;
+use Railroad\Railcontent\Entities\Traits\DecoratedFields;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\CommentRepository")
@@ -16,6 +17,8 @@ use Railroad\Railcontent\Contracts\UserInterface;
  */
 class Comment
 {
+    use DecoratedFields;
+
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
      * @var int
@@ -83,13 +86,13 @@ class Comment
      */
     protected $deletedAt;
 
-    private $extra;
+
 
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->assignedToUser = new ArrayCollection();
-        $this->extra = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     /**
@@ -287,20 +290,19 @@ class Comment
         return $this;
     }
 
-    public function createProperty($propertyName, $propertyValue)
+    /**
+     * @param CommentLikes $likes
+     */
+    public function addLikes(CommentLikes $likes)
     {
-        $this->{$propertyName} = $propertyValue;
-        $this->extra[] = $propertyName;
+        $this->likes[] = $likes;
     }
 
-    public function getProperty($propertyName)
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikes()
     {
-
-        return $this->{$propertyName};
-    }
-
-    public function getExtra()
-    {
-        return $this->extra;
+        return $this->likes;
     }
 }

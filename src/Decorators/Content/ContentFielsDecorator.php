@@ -17,11 +17,11 @@ class ContentFielsDecorator
 
     public function decorate($contents)
     {
-        $contents->createProperty('vimeo video url',[
-            'url1', 'url2'
-        ]);
-        $contents->createProperty('other','value');
-
-        return ($contents);
+//        $contents->createProperty('vimeo video url',[
+//            'url1', 'url2'
+//        ]);
+//        $contents->createProperty('other','value');
+//
+//        return ($contents);
     }
 }

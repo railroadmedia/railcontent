@@ -192,6 +192,7 @@ class RailcontentTestCase extends BaseTestCase
             'railcontent.comment_assignation_owner_ids',
             $defaultConfig['comment_assignation_owner_ids']
         );
+        $app['config']->set('railcontent.comment_likes_amount_of_users', $defaultConfig['comment_likes_amount_of_users']);
         $app['config']->set('railcontent.searchable_content_types', $defaultConfig['searchable_content_types']);
         $app['config']->set('railcontent.search_index_values', $defaultConfig['search_index_values']);
         $app['config']->set(

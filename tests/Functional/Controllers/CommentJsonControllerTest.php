@@ -433,9 +433,9 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
     public function test_pull_comments_paginated()
     {
-        $limit = 10;
+        $limit = 3;
         $totalNumber = $this->faker->numberBetween($limit, ($limit + 25));
-
+        $totalNumber = 3;
         $comments = $this->fakeComment(
             $totalNumber,
             [
@@ -443,10 +443,14 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 'deletedAt' => null,
             ]
         );
+        $this->fakeCommentLike(1,[
+            'comment' => $comments[0],
+            'userId' => 1
+        ]);
 
         $request = [
             'limit' => $limit,
-            'sort' => '-createdOn',
+            'sort' => 'id',
         ];
         $response = $this->call(
             'GET',
@@ -459,6 +463,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $data = $response->decodeResponseJson()['data'];
 
         $this->assertEquals($request['limit'], count($data));
+
+        $this->assertEquals(1, $response->decodeResponseJson('data')[0]['attributes']['like_count']);
     }
 
     public function test_pull_content_comments_paginated()

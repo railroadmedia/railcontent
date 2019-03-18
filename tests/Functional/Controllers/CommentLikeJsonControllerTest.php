@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 use Faker\ORM\Doctrine\Populator;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -17,7 +18,22 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
 
     public function like($userIdOfLiker, $assertions = false)
     {
-        $comments = $this->fakeComment();
+        $content = $this->fakeContent(
+            1,
+            [
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
+                'status' => $this->faker->randomElement(ContentRepository::$availableContentStatues),
+                'brand' => config('railcontent.brand'),
+            ]
+        );
+        $comments = $this->fakeComment(
+            1,
+            [
+                'content' => $content[0],
+                'deletedAt' => null,
+            ]
+        );
+
         $comment = $comments[0];
         $commentId = $comment->getId();
 
@@ -25,7 +41,6 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/comment-like/' . $commentId,
             [
-                'comment_id' => $commentId,
                 'user_id' => $userIdOfLiker,
             ]
         );
@@ -34,7 +49,7 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
             $this->assertEquals(200, $response->getStatusCode());
 
             $this->assertDatabaseHas(
-                config('railcontent.table_prefix'). 'comment_likes',
+                config('railcontent.table_prefix') . 'comment_likes',
                 [
                     'comment_id' => $commentId,
                     'user_id' => $userIdOfLiker,
@@ -42,6 +57,15 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
             );
         }
 
+        $commentRequestResponse = $this->call(
+            'GET',
+            'railcontent/comment/' . $commentId
+        );
+
+
+        $this->assertEquals(1, $commentRequestResponse->decodeResponseJson('data')[0]['attributes']['like_count']);
+        $this->assertEquals(1, count($commentRequestResponse->decodeResponseJson('data')[0]['attributes']['like_users']));
+        $this->assertTrue($commentRequestResponse->decodeResponseJson('data')[0]['attributes']['is_liked']);
         return $commentId;
     }
 
@@ -72,7 +96,7 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(200, $response->getStatusCode());
 
         $this->assertDatabaseMissing(
-            config('railcontent.table_prefix'). 'comment_likes',
+            config('railcontent.table_prefix') . 'comment_likes',
             [
                 'comment_id' => $commentId,
                 'user_id' => $userIdOfLiker,

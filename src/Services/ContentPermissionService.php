@@ -137,4 +137,37 @@ class ContentPermissionService
 
         return $contentPermission;
     }
+
+    /**
+     * @param null $contentId
+     * @param null $contentType
+     * @param $permissionId
+     * @return array
+     */
+    public function getByContentTypeOrId($contentId = null, $contentType = null)
+    {
+        if (empty($contentId) && empty($contentType)) {
+            return [];
+        }
+
+        $qb = $this->contentPermissionRepository->createQueryBuilder('cp');
+
+        $qb
+            ->where('cp.brand = :brand')
+            ->andWhere(
+                $qb->expr()
+                    ->orX(
+                        $qb->expr()
+                            ->eq('cp.content', ':contentId'),
+                        $qb->expr()
+                            ->eq('cp.contentType', ':contentType')
+                    )
+            )
+            ->setParameter('brand', config('railcontent.brand'))
+            ->setParameter('contentId', $contentId)
+            ->setParameter('contentType', $contentType);
+
+        return $qb->getQuery()
+            ->getResult();
+    }
 }

@@ -111,34 +111,20 @@ class RailcontentServiceProvider extends ServiceProvider
             'double-check the input value and try again.'
         );
 
-//                config()->set(
-//                    'resora.decorators.content',
-//                    array_merge(
-//                        [
-//                            ContentPermissionsDecorator::class,
-//                            ContentDataDecorator::class,
-//                            ContentFielsDecorator::class,
-//                            ContentSlugHierarchyDecorator::class,
-//                            ContentChildsAndParentsDecorator::class,
-//                        ],
-//                        config()->get('railcontent.decorators.content', [])
-//                    )
-//                );
+                config()->set(
+                    'resora.decorators.content',
+                    array_merge(
+                        [
+                            ContentPermissionsDecorator::class,
+                        ],
+                        config()->get('railcontent.decorators.content', [])
+                    )
+                );
 
                 config()->set(
                     'resora.decorators.comment',
                     config()->get('railcontent.decorators.comment', [])
                 );
-        //
-        //        config()->set(
-        //            'resora.decorators.content-field',
-        //            array_merge(
-        //                config()->get('resora.decorators.content-field', []),
-        //                [
-        //                    ContentDecorator::class,
-        //                ]
-        //            )
-        //        );
 
         config()->set('resora.default_connection_name', ConfigService::$databaseConnectionName);
     }

@@ -546,14 +546,14 @@ class PermissionControllerTest extends RailcontentTestCase
         ];
 
         $this->assertDatabaseHas(
-            config('railcontent.table_prefix'). 'content_permissions',
+            config('railcontent.table_prefix') . 'content_permissions',
             ['content_type' => 'course', 'permission_id' => $permission[0]->getId()]
         );
 
         $response = $this->call('PATCH', 'railcontent/permission/dissociate/', $data);
         $this->assertEquals(200, $response->status());
         $this->assertDatabaseMissing(
-            config('railcontent.table_prefix'). 'content_permissions',
+            config('railcontent.table_prefix') . 'content_permissions',
             ['content_type' => 'course', 'permission_id' => $permission[0]->getId()]
         );
     }
@@ -642,6 +642,8 @@ class PermissionControllerTest extends RailcontentTestCase
 
     public function test_content_filter_after_type_permission_assignation()
     {
+        $userId = $this->createAndLogInNewUser();
+
         $type = $this->faker->word;
 
         $contents = $this->fakeContent(
@@ -700,6 +702,16 @@ class PermissionControllerTest extends RailcontentTestCase
             ]
         );
 
+        $userPermission = $this->fakeUserPermission(
+            1,
+            [
+                'userId' => $userId,
+                'permission' => $permission[0],
+                'startDate' => Carbon::now(),
+                'expirationDate' => null,
+            ]
+        );
+
         $secondRequest = $this->call(
             'GET',
             'railcontent/content',
@@ -711,7 +723,7 @@ class PermissionControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertFalse(
+        $this->assertTrue(
             in_array(
                 $contents[0]->getType(),
                 array_pluck(array_pluck($secondRequest->decodeResponseJson('data'), 'attributes'), 'type')

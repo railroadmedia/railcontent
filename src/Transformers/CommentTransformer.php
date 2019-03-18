@@ -22,11 +22,34 @@ class CommentTransformer extends TransformerAbstract
 
         $serializer = new BasicEntitySerializer();
 
+        $extraProperties = [];
+        $extra = $comment->getExtra();
+        if ($extra) {
+            foreach ($extra as $item) {
+                $value = $comment->getProperty($item);
+                if(is_array($value)) {
+                    foreach ($value as $val) {
+                        if (is_object($val)) {
+                            $extraProperties[$item][] =  $serializer->serialize(
+                                $val,
+                                $entityManager->getClassMetadata(get_class($val))
+                            );
+                        }else{
+                            $extraProperties[$item][] = $value;
+                        }
+                    }
+                } else {
+                    $extraProperties[$item] = $value;
+                }
+            }
+        }
+
         return (new Collection(
+            array_merge(
             $serializer->serializeToUnderScores(
                 $comment,
                 $entityManager->getClassMetadata(get_class($comment))
-            )
+            ), $extraProperties)
         ))->toArray();
     }
 

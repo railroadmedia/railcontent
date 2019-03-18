@@ -8,6 +8,7 @@ use Doctrine\ORM\QueryBuilder;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentLikes;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\CommentUnLiked;
 use Railroad\Railcontent\Repositories\CommentLikeRepository;
@@ -68,7 +69,7 @@ class CommentLikeService
     {
         $qb =
             $this->commentRepository->createQueryBuilder('co')
-                ->leftjoin('co.likes', 'c')->select('co.id, count(c.id) as nr');
+                ->leftJoin('co.likes', 'c');
 
         $results =
             $qb->select('co.id, count(c.id) as nr')
@@ -109,17 +110,16 @@ class CommentLikeService
                     $commentLikes[$result->getComment()
                         ->getId()] ?? []
                 ) < $amountOfUserIdsToPull) {
+
                 $commentLikes[$result->getComment()
-                    ->getId()][] =
-                    $result->getUser()
-                        ->getId();
+                    ->getId()][] = $result->getUser()->getId();
             }
         }
 
         return $commentLikes;
     }
 
-   /**
+    /**
      * @param $commentId
      * @param integer $userId
      * @return bool
@@ -135,16 +135,25 @@ class CommentLikeService
                 'user' => $user,
             ]
         );
+
         if (empty($commentLikes)) {
             $commentLikes = new CommentLikes();
             $commentLikes->setUser($user);
-            $commentLikes->setComment($comment);
+
         }
+        $commentLikes->setComment($comment);
         $this->entityManager->persist($commentLikes);
         $this->entityManager->flush();
 
         $this->entityManager->getCache()
             ->evictEntity(Comment::class, $commentId);
+
+        $this->entityManager->getCache()
+            ->evictEntity(
+                Content::class,
+                $comment->getContent()
+                    ->getId()
+            );
 
         event(new CommentLiked($commentId, $userId));
 
@@ -177,5 +186,24 @@ class CommentLikeService
         event(new CommentUnLiked($commentId, $userId));
 
         return true;
+    }
+
+    public function isLikedByUserId($commentAndReplyIds, $userId)
+    {
+        $qb = $this->commentLikeRepository->createQueryBuilder('cl')
+        ->join('cl.comment','c');
+        $qb ->select('cl.user as user, c.id as commentId')
+            ->where('cl.user = :userId')
+            ->andWhere('cl.comment IN (:commentIds)')
+            ->setParameter('userId', $userId)
+            ->setParameter('commentIds', $commentAndReplyIds);
+
+        $results = $qb->getQuery()
+            ->getResult();
+
+        if(!empty($results)) {
+            $results = array_combine(array_column($results, 'commentId'), array_column($results, 'user'));
+        }
+        return $results;
     }
 }
