@@ -1144,31 +1144,70 @@ class ContentService
             return new Collection();
         }
 
-        if($typesForCalendars){
-            $shows = $typesForCalendars['shows'] ?? [];
-            $liveEventsTypes = $typesForCalendars['live-events-types'] ?? [];
-            $contentReleasesTypes = $typesForCalendars['content-releases-types'] ?? [];
-        }
-
-        $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
-            array_merge($liveEventsTypes, $shows),
-            ContentService::STATUS_SCHEDULED,
-            Carbon::now()
-                ->toDateTimeString(),
-            '>'
-        );
-
-        $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
-            array_merge($contentReleasesTypes, $shows),
-            ContentService::STATUS_PUBLISHED,
-            Carbon::now()
-                ->toDateTimeString(),
-            '>'
-        );
-
         foreach($semesterPacksToGet ?? [] as $semesterPack){
             $parents[] = $this->getTypesBySlugSpecialStatus($semesterPack);
         }
+
+        $nested = false;
+
+        foreach($typesForCalendars as $value) {
+            if (is_array($value)) {
+                $nested = true;
+            }
+
+        }
+
+        foreach($typesForCalendars as $value) {
+            if(gettype($value) === 'string'  && $nested){
+                error_log(
+                    'config/railcontent.php misconfiguation. All values of a brand\'s "types-for-calendars" config ' .
+                    'must be either all arrays or all strings.'
+                );
+                die();
+            }
+        }
+
+        if($nested){
+
+            if($typesForCalendars){
+                $shows = $typesForCalendars['shows'] ?? [];
+                $liveEventsTypes = $typesForCalendars['live-events-types'] ?? [];
+                $contentReleasesTypes = $typesForCalendars['content-releases-types'] ?? [];
+            }
+
+            $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+                array_merge($liveEventsTypes, $shows),
+                ContentService::STATUS_SCHEDULED,
+                Carbon::now()
+                    ->toDateTimeString(),
+                '>'
+            );
+
+            $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+                array_merge($contentReleasesTypes, $shows),
+                ContentService::STATUS_PUBLISHED,
+                Carbon::now()
+                    ->toDateTimeString(),
+                '>'
+            );
+        } else {
+            $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+                $typesForCalendars,
+                ContentService::STATUS_SCHEDULED,
+                Carbon::now()
+                    ->toDateTimeString(),
+                '>'
+            );
+
+            $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+                $typesForCalendars,
+                ContentService::STATUS_PUBLISHED,
+                Carbon::now()
+                    ->toDateTimeString(),
+                '>'
+            );
+        }
+
 
         /*
          * -------------------------------------------------------------------------------------------------------------
