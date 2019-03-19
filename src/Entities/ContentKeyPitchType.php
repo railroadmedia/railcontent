@@ -57,9 +57,9 @@ class ContentKeyPitchType
     }
 
     /**
-     * @param mixed $content
+     * @param Content $content
      */
-    public function setContent($content)
+    public function setContent(Content $content)
     {
         $this->content = $content;
     }

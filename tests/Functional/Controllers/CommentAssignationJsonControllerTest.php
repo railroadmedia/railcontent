@@ -7,7 +7,7 @@ use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentAssignment;
 use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Services\ConfigService;
+
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentAssignationJsonControllerTest extends RailcontentTestCase

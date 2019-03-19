@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Decorators\Hierarchy;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Services\ConfigService;
+
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Resora\Decorators\DecoratorInterface;
 use Railroad\Resora\Queries\CachedQuery;

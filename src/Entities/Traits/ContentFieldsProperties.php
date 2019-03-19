@@ -227,7 +227,7 @@ trait ContentFieldsProperties
     protected $youtubeVideoId;
 
     /**
-     * @return text
+     * @return string
      */
     public function getDifficulty()
     {
@@ -243,7 +243,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return string
      */
     public function getHomeStaffPickRating()
     {
@@ -275,7 +275,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return int
      */
     public function getLegacyWordpressPostId()
     {
@@ -291,7 +291,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return string
      */
     public function getQnaVideo()
     {
@@ -299,7 +299,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param string $key
+     * @param $qnaVideo
      */
     public function setQnaVideo($qnaVideo)
     {
@@ -307,7 +307,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return string
      */
     public function getStyle()
     {
@@ -315,7 +315,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param string $key
+     * @param $style
      */
     public function setStyle($style)
     {
@@ -323,7 +323,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return string
      */
     public function getTitle()
     {
@@ -331,7 +331,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param string $key
+     * @param $title
      */
     public function setTitle($title)
     {
@@ -339,7 +339,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return string
      */
     public function getVideo()
     {
@@ -347,7 +347,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param string $key
+     * @param string $video
      */
     public function setVideo(string $video)
     {
@@ -355,7 +355,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return int
      */
     public function getXp()
     {
@@ -363,7 +363,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param string $key
+     * @param $xp
      */
     public function setXp($xp)
     {
@@ -371,7 +371,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return string
      */
     public function getAlbum()
     {
@@ -379,7 +379,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param string $video
+     * @param $album
      */
     public function setAlbum($album)
     {
@@ -387,7 +387,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return string
      */
     public function getArtist()
     {
@@ -395,7 +395,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param string $artist
+     * @param $artist
      */
     public function setArtist($artist)
     {
@@ -411,7 +411,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param int $bpm
+     * @param $bpm
      */
     public function setBpm($bpm)
     {
@@ -419,7 +419,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return string
      */
     public function getCdTracks()
     {
@@ -427,7 +427,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param string $key
+     * @param $cdTracks
      */
     public function setCdTracks($cdTracks)
     {
@@ -435,7 +435,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return string
      */
     public function getChordOrScale()
     {
@@ -443,7 +443,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param string $key
+     * @param $chordOrScale
      */
     public function setChordOrScale($chordOrScale)
     {
@@ -451,7 +451,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return string
      */
     public function getDifficultyRange()
     {
@@ -459,7 +459,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param string $difficultyRange
+     * @param $difficultyRange
      */
     public function setDifficultyRange($difficultyRange)
     {
@@ -475,7 +475,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param int $episodeNumber
+     * @param $episodeNumber
      */
     public function setEpisodeNumber($episodeNumber)
     {
@@ -483,7 +483,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return string
      */
     public function getExerciseBookPages()
     {
@@ -491,7 +491,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param string $exerciseBookPages
+     * @param $exerciseBookPages
      */
     public function setExerciseBookPages($exerciseBookPages)
     {
@@ -507,7 +507,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param int $fastBpm
+     * @param $fastBpm
      */
     public function setFastBpm($fastBpm)
     {
@@ -523,7 +523,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param bool $includesSong
+     * @param $includesSong
      */
     public function setIncludesSong($includesSong)
     {
@@ -531,7 +531,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return string
      */
     public function getInstructors()
     {
@@ -539,7 +539,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param string $instructors
+     * @param $instructors
      */
     public function setInstructors($instructors)
     {
@@ -579,7 +579,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param  \DateTime $liveEventStartTime
+     * @param $liveEventYoutubeId
      */
     public function setLiveEventYoutubeId($liveEventYoutubeId)
     {
@@ -595,7 +595,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param  string $liveStreamFeedType
+     * @param $liveStreamFeedType
      */
     public function setLiveStreamFeedType($liveStreamFeedType)
     {
@@ -643,7 +643,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param  string $liveStreamFeedType
+     * @param $slowBpm
      */
     public function setSlowBpm($slowBpm)
     {
@@ -707,7 +707,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return text
+     * @return string
      */
     public function getAvatarUrl()
     {
@@ -715,7 +715,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param string $key
+     * @param $avatarUrl
      */
     public function setAvatarUrl($avatarUrl)
     {

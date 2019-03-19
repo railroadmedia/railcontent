@@ -2,7 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
-use Railroad\Railcontent\Services\ConfigService;
+
 use Railroad\Railcontent\Services\FullTextSearchService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 

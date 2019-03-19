@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Railroad\Railcontent\Services\ConfigService;
+
 
 class DropUserContentProgressUniqueIndex extends Migration
 {
@@ -14,7 +14,7 @@ class DropUserContentProgressUniqueIndex extends Migration
      */
     public function up()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)
+        Schema::connection(config('railcontent.database_connection_name'))
             ->table(
                 config('railcontent.table_prefix'). 'user_content_progress',
                 function (Blueprint $table) {
@@ -32,7 +32,7 @@ class DropUserContentProgressUniqueIndex extends Migration
      */
     public function down()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)
+        Schema::connection(config('railcontent.database_connection_name'))
             ->table(
                 config('railcontent.table_prefix'). 'user_content_progress',
                 function (Blueprint $table) {

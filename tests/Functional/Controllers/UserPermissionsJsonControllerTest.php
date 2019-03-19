@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Entities\UserPermission;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\Fixtures\UserProvider;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 

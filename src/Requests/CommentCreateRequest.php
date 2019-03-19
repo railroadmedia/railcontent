@@ -5,7 +5,6 @@ namespace Railroad\Railcontent\Requests;
 
 use Illuminate\Validation\Rule;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Services\ConfigService;
 
 class CommentCreateRequest extends FormRequest
 {
@@ -32,7 +31,7 @@ class CommentCreateRequest extends FormRequest
                 ['required',
                     'numeric',
                     Rule::exists(
-                        ConfigService::$databaseConnectionName . '.' . config('railcontent.table_prefix'). 'content', 'id'
+                        config('railcontent.database_connection_name') . '.' . config('railcontent.table_prefix'). 'content', 'id'
                     )->where(function ($query) {
                         if (is_array(ContentRepository::$availableContentStatues)) {
                             $query->whereIn('status', ContentRepository::$availableContentStatues);

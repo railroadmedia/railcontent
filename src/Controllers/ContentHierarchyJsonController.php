@@ -26,8 +26,10 @@ class ContentHierarchyJsonController extends Controller
      *
      * @param ContentHierarchyService $contentHierarchyService
      */
-    public function __construct(ContentHierarchyService $contentHierarchyService, PermissionService $permissionPackageService)
-    {
+    public function __construct(
+        ContentHierarchyService $contentHierarchyService,
+        PermissionService $permissionPackageService
+    ) {
         $this->contentHierarchyService = $contentHierarchyService;
         $this->permissionPackageService = $permissionPackageService;
 
@@ -53,7 +55,7 @@ class ContentHierarchyJsonController extends Controller
         return ResponseService::contentHierarchy($hierarchy);
     }
 
-     /**
+    /**
      * @param Request $request
      * @param $childId
      * @param $parentId

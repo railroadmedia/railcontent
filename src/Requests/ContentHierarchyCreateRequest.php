@@ -2,8 +2,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Railroad\Railcontent\Services\ConfigService;
-
 class ContentHierarchyCreateRequest extends CustomFormRequest
 {
     /**
@@ -15,9 +13,9 @@ class ContentHierarchyCreateRequest extends CustomFormRequest
     {
         $this->setGeneralRules(
             [
-                'data.relationships.child.data.id' => 'required|exists:' . ConfigService::$databaseConnectionName . '.' .
+                'data.relationships.child.data.id' => 'required|exists:' . config('railcontent.database_connection_name') . '.' .
                     config('railcontent.table_prefix'). 'content' . ',id',
-                'data.relationships.parent.data.id' => 'required|exists:' . ConfigService::$databaseConnectionName . '.' .
+                'data.relationships.parent.data.id' => 'required|exists:' . config('railcontent.database_connection_name') . '.' .
                     config('railcontent.table_prefix'). 'content'. ',id',
                 'data.attributes.child_position' => 'nullable|numeric|min:0'
             ]

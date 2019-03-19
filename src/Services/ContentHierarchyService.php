@@ -168,6 +168,10 @@ class ContentHierarchyService
         return true;
     }
 
+    /**
+     * @param $childId
+     * @return bool|mixed
+     */
     public function repositionSiblings($childId)
     {
         $parentHierarchy = $this->contentHierarchyRepository->findOneBy(

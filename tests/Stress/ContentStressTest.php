@@ -3,14 +3,7 @@
 namespace Railroad\Railcontent\Tests\Stress;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Redis;
-use Railroad\Railcontent\Helpers\CacheHelper;
-use Railroad\Railcontent\Repositories\ContentFieldRepository;
-use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\PermissionRepository;
-use Railroad\Railcontent\Repositories\UserPermissionsRepository;
+
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Railroad\Railcontent\Tests\SeedDatabase;
@@ -19,30 +12,6 @@ class ContentStressTest extends RailcontentTestCase
 {
     use SeedDatabase;
 
-    /**
-     * @var UserPermissionsRepository
-     */
-    private $userPermissionRepository;
-
-    /**
-     * @var \Railroad\Railcontent\Repositories\ContentRepository
-     */
-    private $contentRepository;
-
-    /**
-     * @var \Railroad\Railcontent\Repositories\ContentHierarchyRepository
-     */
-    private $contentHierarchyRepository;
-
-    /**
-     * @var ContentFieldRepository
-     */
-    private $contentFieldRepository;
-
-    /**
-     * @var PermissionRepository
-     */
-    private $permissionRepository;
 
     protected static $migrationsRun = false;
 
@@ -50,28 +19,28 @@ class ContentStressTest extends RailcontentTestCase
     {
         parent::setUp();
 
-        $this->userPermissionRepository = $this->app->make(UserPermissionsRepository::class);
-        $this->contentRepository = $this->app->make(ContentRepository::class);
-        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
-        $this->contentFieldRepository = $this->app->make(ContentFieldRepository::class);
-        $this->permissionRepository = $this->app->make(PermissionRepository::class);
+//        $this->userPermissionRepository = $this->app->make(UserPermissionsRepository::class);
+//        $this->contentRepository = $this->app->make(ContentRepository::class);
+//        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
+//        $this->contentFieldRepository = $this->app->make(ContentFieldRepository::class);
+//        $this->permissionRepository = $this->app->make(PermissionRepository::class);
 
-        $this->seedDatabase();
+        //$this->seedDatabase();
     }
 
     public function test_get_contents()
     {
         $userId = $this->createAndLogInNewUser();
-        $userPermission = $this->userPermissionRepository->create(
-            [
-                'user_id' => $userId,
-                'permission_id' => 1,
-                'start_date' => Carbon::now()
-                    ->toDateTimeString(),
-                'created_on' => Carbon::now()
-                    ->toDateTimeString(),
-            ]
-        );
+//        $userPermission = $this->userPermissionRepository->create(
+//            [
+//                'user_id' => $userId,
+//                'permission_id' => 1,
+//                'start_date' => Carbon::now()
+//                    ->toDateTimeString(),
+//                'created_on' => Carbon::now()
+//                    ->toDateTimeString(),
+//            ]
+//        );
         $tStart = microtime(true);
 
         $results = $this->call('GET', 'railcontent/content');
@@ -136,7 +105,7 @@ class ContentStressTest extends RailcontentTestCase
                 'slug' => $this->faker->word,
                 'type' => $this->faker->word,
                 'status' => 'published',
-                'brand' => ConfigService::$brand,
+                'brand' => config('railcontent.brand'),
                 'language' => $this->faker->languageCode,
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
@@ -227,10 +196,9 @@ class ContentStressTest extends RailcontentTestCase
         $permission = $this->permissionRepository->create(
             [
                 'name' => $this->faker->word,
-                'brand' => ConfigService::$brand,
+                'brand' => config('railcontent.brand'),
             ]
         );
-        $this->assertGreaterThan(0, count(Redis::hgetall(CacheHelper::getUserSpecificHashedKey())));
 
         $userPermission = $this->call(
             'PUT',
@@ -252,7 +220,7 @@ class ContentStressTest extends RailcontentTestCase
                 'content_id' => $this->faker->numberBetween(1, 100000),
             ]
         );
-        $this->assertEquals([], Redis::hgetall(CacheHelper::getUserSpecificHashedKey()));
+
         $tEnd = microtime(true) - $tStart;
         $this->assertLessThan(0.1, $tEnd);
     }
@@ -360,7 +328,7 @@ class ContentStressTest extends RailcontentTestCase
                     'railcontent.content_hierarchy_decorator_allowed_types' . ''
                 )),
                 'status' => 'published',
-                'brand' => ConfigService::$brand,
+                'brand' => config('railcontent.brand'),
                 'language' => $this->faker->languageCode,
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
@@ -374,7 +342,7 @@ class ContentStressTest extends RailcontentTestCase
                     'railcontent.content_hierarchy_decorator_allowed_types' . ''
                 )),
                 'status' => 'published',
-                'brand' => ConfigService::$brand,
+                'brand' => config('railcontent.brand'),
                 'language' => $this->faker->languageCode,
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
@@ -388,7 +356,7 @@ class ContentStressTest extends RailcontentTestCase
                     'railcontent.content_hierarchy_decorator_allowed_types' . ''
                 )),
                 'status' => 'published',
-                'brand' => ConfigService::$brand,
+                'brand' => config('railcontent.brand'),
                 'language' => $this->faker->languageCode,
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),

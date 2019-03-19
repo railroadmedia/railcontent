@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Railroad\Railcontent\Services\ConfigService;
+
 
 class CreateContentFieldsTable extends Migration
 {
@@ -14,8 +14,8 @@ class CreateContentFieldsTable extends Migration
      */
     public function up()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)->create(
-            ConfigService::$tableContentFields,
+        Schema::connection(config('railcontent.database_connection_name'))->create(
+            config('railcontent.table_prefix') . 'content_fields',
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('content_id')->index();
@@ -36,6 +36,6 @@ class CreateContentFieldsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(ConfigService::$tableContentFields);
+        Schema::dropIfExists(config('railcontent.table_prefix') . 'content_fields');
     }
 }

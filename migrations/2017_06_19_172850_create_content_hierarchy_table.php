@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Railroad\Railcontent\Services\ConfigService;
+
 
 class CreateContentHierarchyTable extends Migration
 {
@@ -14,7 +14,7 @@ class CreateContentHierarchyTable extends Migration
      */
     public function up()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)->create(
+        Schema::connection(config('railcontent.database_connection_name'))->create(
             config('railcontent.table_prefix'). 'content_hierarchy',
             function(Blueprint $table) {
                 $table->increments('id');

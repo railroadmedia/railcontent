@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Entities\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Entities\ContentExercise;
 use Railroad\Railcontent\Entities\ContentInstructor;
 use Railroad\Railcontent\Entities\ContentKey;
@@ -74,11 +73,10 @@ trait ContentFieldsAssociations
     private $playlist;
 
     /**
-     * Content constructor.
+     * ContentFieldsAssociations constructor.
      */
     public function __construct()
     {
-        $this->child = new ArrayCollection();
         $this->data = new ArrayCollection();
         $this->topic = new ArrayCollection();
         $this->tag = new ArrayCollection();
@@ -93,7 +91,7 @@ trait ContentFieldsAssociations
     }
 
     /**
-     * @return Content|null
+     * @return ArrayCollection
      */
     public function getExercise()
     {
@@ -158,24 +156,18 @@ trait ContentFieldsAssociations
 
     /**
      * @param ContentInstructor $instructor
-     * @return $this
      */
-    public function addInstructor($instructor)
+    public function addInstructor(ContentInstructor $instructor)
     {
         $this->instructor = $instructor;
-
-        return $this;
     }
 
     /**
      * @param ContentInstructor $instructor
-     * @return $this
      */
-    public function setInstructor($instructor)
+    public function setInstructor(?ContentInstructor $instructor)
     {
         $this->instructor = $instructor;
-
-        return $this;
     }
 
     /**
@@ -192,7 +184,7 @@ trait ContentFieldsAssociations
     }
 
     /**
-     * @return Content|null
+     * @return mixed
      */
     public function getVimeoVideo()
     {
@@ -200,18 +192,16 @@ trait ContentFieldsAssociations
     }
 
     /**
-     * @return Content|null
+     * @return ArrayCollection
      */
     public function getData()
     {
         return $this->data;
     }
 
-
-
     /**
      * @param ContentTopic $contentTopic
-     * @return $this
+     * @return $this|void
      */
     public function addTopic(ContentTopic $contentTopic)
     {
@@ -240,13 +230,10 @@ trait ContentFieldsAssociations
                     ->setPosition($contentTopic->getPosition());
             }
         }
-
-        return $this;
     }
 
     /**
      * @param ContentTopic $contentTopic
-     * @return $this
      */
     public function removeTopic(ContentTopic $contentTopic)
     {
@@ -268,7 +255,7 @@ trait ContentFieldsAssociations
 
     /**
      * @param ContentTag $contentTag
-     * @return $this|void
+     * @return $this
      */
     public function addTag(ContentTag $contentTag)
     {

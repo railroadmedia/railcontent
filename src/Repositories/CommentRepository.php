@@ -4,10 +4,6 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
-use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Railcontent\Support\Collection;
-use Railroad\Resora\Decorators\Decorator;
 
 class CommentRepository extends EntityRepository
 {
@@ -64,29 +60,6 @@ class CommentRepository extends EntityRepository
     protected $orderDirection;
     protected $orderTableName;
     protected $orderTable;
-
-    /** Set the pagination parameters
-     *
-     * @param int $page
-     * @param int $limit
-     * @param string $orderByDirection
-     * @param string $orderByColumn
-     * @return $this
-     */
-    public function setData($page, $limit, $orderByDirection, $orderByColumn)
-    {
-        $this->page = $page;
-        $this->limit = $limit;
-        $this->orderBy = $orderByColumn;
-        $this->orderDirection = $orderByDirection;
-
-        $this->orderTableName =
-            ($orderByColumn == 'like_count' ? config('railcontent.table_prefix'). 'comment_likes' : config('railcontent.table_prefix'). 'comments');
-
-        $this->orderTable = ($orderByColumn == 'like_count' ? '' : config('railcontent.table_prefix'). 'comments');
-
-        return $this;
-    }
 
     /** Based on softDelete we soft delete or permanently delete the comment with all his replies
      *

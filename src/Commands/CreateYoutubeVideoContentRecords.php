@@ -4,7 +4,7 @@ namespace Railroad\Railcontent\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Railroad\Railcontent\Services\ConfigService;
+
 use Railroad\Railcontent\Services\ContentService;
 use Google_Client;
 
@@ -83,7 +83,7 @@ class CreateYoutubeVideoContentRecords extends Command
         $channelsResponse = $youtube->channels->listChannels(
             'contentDetails',
             array(
-                'forUsername' => config('railcontent.video_sync')['youtube'][ConfigService::$brand]['user'],
+                'forUsername' => config('railcontent.video_sync')['youtube'][config('railcontent.brand')]['user'],
                 'maxResults' => 50
             )
         );

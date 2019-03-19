@@ -17,6 +17,9 @@ class RailcontentEventSubscriber implements EventSubscriber
         ];
     }
 
+    /**
+     * @param LifecycleEventArgs $args
+     */
     public function postPersist(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
@@ -31,6 +34,9 @@ class RailcontentEventSubscriber implements EventSubscriber
         }
     }
 
+    /**
+     * @param PostFlushEventArgs $args
+     */
     public function postFlush(PostFlushEventArgs $args)
     {
         foreach (

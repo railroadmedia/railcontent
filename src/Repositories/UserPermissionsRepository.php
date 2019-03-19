@@ -4,10 +4,7 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
-use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
-use Railroad\Railcontent\Services\ConfigService;
-use Railroad\Resora\Queries\CachedQuery;
 
 class UserPermissionsRepository extends EntityRepository
 {

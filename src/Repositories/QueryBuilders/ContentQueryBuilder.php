@@ -11,7 +11,7 @@ use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Services\ConfigService;
+
 
 class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
 {
@@ -221,7 +221,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
         $tableName = '_icf';
 
         $this->join(
-            ConfigService::$tableContentFields . ' as ' . $tableName,
+            config('railcontent.table_prefix') . 'content_fields' . ' as ' . $tableName,
             function (JoinClause $joinClause) use ($includedFields, $tableName) {
                 $joinClause->on(
                     $tableName . '.content_id',

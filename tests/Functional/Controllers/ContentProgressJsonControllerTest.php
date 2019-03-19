@@ -3,9 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\UserContentProgressService;
-use Railroad\Railcontent\Tests\Fixtures\UserProvider;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentProgressJsonControllerTest extends RailcontentTestCase

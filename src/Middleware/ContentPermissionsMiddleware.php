@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentService;
 

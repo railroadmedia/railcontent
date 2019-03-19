@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Railroad\Railcontent\Services\ConfigService;
 
 class UserPermissionCreateRequest extends FormRequest
 {
@@ -25,7 +24,7 @@ class UserPermissionCreateRequest extends FormRequest
     {
         return [
             'data.relationships.user.data.id' => 'required|integer',
-            'data.relationships.permission.data.id' => 'required|integer|exists:' . ConfigService::$databaseConnectionName . '.' .
+            'data.relationships.permission.data.id' => 'required|integer|exists:' . config('railcontent.database_connection_name') . '.' .
                 config('railcontent.table_prefix'). 'permissions' . ',id',
             'data.attributes.start_date' => 'required|date',
             'data.attributes.expiration_date' => 'nullable|date'

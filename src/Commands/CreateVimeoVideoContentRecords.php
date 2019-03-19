@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Railroad\Railcontent\Services\ConfigService;
+
 use Railroad\Railcontent\Services\ContentService;
 use Vimeo\Exceptions\VimeoRequestException;
 use Vimeo\Vimeo;
@@ -47,9 +47,9 @@ class CreateVimeoVideoContentRecords extends Command
 
         $this->info('Starting. The requests can take 5-30 seconds.');
 
-        $client_id = config('railcontent.video_sync')['vimeo'][ConfigService::$brand]['client_id'];
-        $client_secret = config('railcontent.video_sync')['vimeo'][ConfigService::$brand]['client_secret'];
-        $access_token = config('railcontent.video_sync')['vimeo'][ConfigService::$brand]['access_token'];
+        $client_id = config('railcontent.video_sync')['vimeo'][config('railcontent.brand')]['client_id'];
+        $client_secret = config('railcontent.video_sync')['vimeo'][config('railcontent.brand')]['client_secret'];
+        $access_token = config('railcontent.video_sync')['vimeo'][config('railcontent.brand')]['access_token'];
         $this->lib = new Vimeo($client_id, $client_secret);
         $this->lib->setToken($access_token);
 
@@ -186,9 +186,9 @@ class CreateVimeoVideoContentRecords extends Command
 
             // content-field data insert and assess DB-writing success
             $contentFieldsWriteSuccess = $this->databaseManager->connection(
-                ConfigService::$databaseConnectionName
+                config('railcontent.database_connection_name')
             )
-                ->table(ConfigService::$tableContentFields)->insert($contentFieldsInsertData);
+                ->table(config('railcontent.table_prefix') . 'content_fields')->insert($contentFieldsInsertData);
             if ($contentFieldsWriteSuccess && empty($contentCreationFailed)) {
                 $this->info(
                     'Processed ' . count($videos) . ' videos. ' .

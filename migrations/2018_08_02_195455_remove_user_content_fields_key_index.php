@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
-use Railroad\Railcontent\Services\ConfigService;
+
 
 class RemoveUserContentFieldsKeyIndex extends Migration
 {
@@ -13,8 +13,8 @@ class RemoveUserContentFieldsKeyIndex extends Migration
      */
     public function up()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)->table(
-            ConfigService::$tableContentFields,
+        Schema::connection(config('railcontent.database_connection_name'))->table(
+            config('railcontent.table_prefix') . 'content_fields',
             function ($table) {
                 /**
                  * @var $table \Illuminate\Database\Schema\Blueprint

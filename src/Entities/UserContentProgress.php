@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Railroad\Railcontent\Contracts\UserInterface;
 
 /**
@@ -64,17 +63,17 @@ class UserContentProgress
     }
 
     /**
-     * @return UserInterface|null
+     * @return UserInterface
      */
-    public function getUser(): ?UserInterface
+    public function getUser()
     {
         return $this->user;
     }
 
     /**
-     * @param UserInterface|null $user
+     * @param UserInterface $user
      */
-    public function setUser(?UserInterface $user)
+    public function setUser(UserInterface $user)
     {
         $this->user = $user;
     }
@@ -136,9 +135,9 @@ class UserContentProgress
     }
 
     /**
-     * @param mixed $content
+     * @param Content $content
      */
-    public function setContent($content)
+    public function setContent(Content $content)
     {
         $this->content = $content;
 

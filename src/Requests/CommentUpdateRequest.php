@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Requests;
 
 use Illuminate\Validation\Rule;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Services\ConfigService;
+
 
 class CommentUpdateRequest extends FormRequest
 {
@@ -31,7 +31,7 @@ class CommentUpdateRequest extends FormRequest
             'data.relationships.content.data.id' =>
                 ['numeric',
                     Rule::exists(
-                        ConfigService::$databaseConnectionName . '.' .
+                        config('railcontent.database_connection_name') . '.' .
                         config('railcontent.table_prefix'). 'content',
                         'id'
                     )->where(
@@ -42,7 +42,7 @@ class CommentUpdateRequest extends FormRequest
                         }
                     )
                 ],
-            'data.relationships.parent.data.id' => 'numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
+            'data.relationships.parent.data.id' => 'numeric|exists:' . config('railcontent.database_connection_name') . '.' .
                 config('railcontent.table_prefix'). 'comments' . ',id',
             'data.attributes.display_name' => 'filled'
         ];

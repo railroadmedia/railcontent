@@ -10,7 +10,6 @@ use Illuminate\Validation\Factory as ValidationFactory;
 use Illuminate\Validation\ValidationException;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
@@ -92,7 +91,7 @@ class CustomFormRequest extends FormRequest
         $this->validationFactory = $validationFactory;
         $this->contentHierarchyService = $contentHierarchyService;
 
-        ConfigService::$cacheTime = -1;
+        config('railcontent.cache_duration', -1);
     }
 
     /**
@@ -140,7 +139,7 @@ class CustomFormRequest extends FormRequest
         $thereIsEntity = (!$noEntity);
 
         $contentType =
-            $thereIsEntity ? $this->getContentTypeVal($request) : $request->input('data.attributes.type')  ?? '';
+            $thereIsEntity ? $this->getContentTypeVal($request) : $request->input('data.attributes.type') ?? '';
 
         if (isset(config('railcontent.validation')[config('railcontent.brand')]) &&
             array_key_exists($contentType, config('railcontent.validation')[config('railcontent.brand')])) {

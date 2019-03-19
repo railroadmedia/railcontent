@@ -3,16 +3,12 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Faker\ORM\Doctrine\Populator;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentAssignment;
 use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Factories\CommentFactory;
-use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\CommentService;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\Fixtures\UserProvider;
 use Railroad\Railcontent\Tests\Hydrators\CommentFakeDataHydrator;
@@ -814,7 +810,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
-        
+
         $comments = $this->fakeComment(
             $commentsNr / 2,
             [

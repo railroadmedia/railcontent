@@ -5,7 +5,7 @@ namespace Railroad\Railcontent\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Services\ConfigService;
+
 use Railroad\Railcontent\Services\ContentService;
 use Vimeo\Vimeo;
 use Vimeo\Exceptions\VimeoRequestException;
@@ -74,9 +74,9 @@ class RepairMissingDurations extends Command
                 $this->info('No duration value for: ' . print_r([$contentId => $duration]));
             }else{
                 $contentFieldsWriteSuccess[] = $this->databaseManager->connection(
-                    ConfigService::$databaseConnectionName
+                    config('railcontent.database_connection_name')
                 )
-                    ->table(ConfigService::$tableContentFields)->where([
+                    ->table(config('railcontent.table_prefix') . 'content_fields')->where([
                         'content_id' => $contentId,
                         'key' => 'length_in_seconds',
                         'value' => 0,

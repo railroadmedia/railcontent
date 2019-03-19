@@ -82,7 +82,6 @@ class FullTextSearchService
 
         if (!empty($brands)) {
             config(['railcontent.available_brands' => $brands]);
-            //ConfigService::$availableBrands = $brands;
         }
 
         $qb = $this->fullTextSearchRepository->search(
@@ -113,7 +112,6 @@ class FullTextSearchService
             'qb' => $qb->addSelect('p'),
         ];
         config(['railcontent.available_brands' => $oldBrands]);
-        //ConfigService::$availableBrands = $oldBrands;
 
         return $return;
     }

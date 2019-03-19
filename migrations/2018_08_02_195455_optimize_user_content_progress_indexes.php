@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
-use Railroad\Railcontent\Services\ConfigService;
+
 
 class OptimizeUserContentProgressIndexes extends Migration
 {
@@ -13,7 +13,7 @@ class OptimizeUserContentProgressIndexes extends Migration
      */
     public function up()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)->table(
+        Schema::connection(config('railcontent.database_connection_name'))->table(
             config('railcontent.table_prefix'). 'user_content_progress',
             function ($table) {
                 /**
@@ -32,7 +32,7 @@ class OptimizeUserContentProgressIndexes extends Migration
      */
     public function down()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)->table(
+        Schema::connection(config('railcontent.database_connection_name'))->table(
             config('railcontent.table_prefix'). 'user_content_progress',
             function ($table) {
                 /**

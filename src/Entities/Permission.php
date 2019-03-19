@@ -53,7 +53,7 @@ class Permission
      * @param string $key
      */
     public function setName(string $name)
-    : void {
+    {
         $this->name = $name;
     }
 

@@ -70,18 +70,17 @@ class CommentLikes
     }
 
     /**
-     * @param UserInterface|null $user
+     * @param UserInterface $user
      */
-    public function setUser(?UserInterface $user)
+    public function setUser(UserInterface $user)
     {
         $this->user = $user;
     }
 
-
     /**
-     * @return UserInterface|null
+     * @return UserInterface
      */
-    public function getUser(): ?UserInterface
+    public function getUser(): UserInterface
     {
         return $this->user;
     }

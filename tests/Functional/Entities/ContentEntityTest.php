@@ -3,65 +3,20 @@
 namespace Railroad\Railcontent\Tests\Functional\Entities;
 
 use Carbon\Carbon;
-use Illuminate\Support\Debug\Dumper;
-use Railroad\Railcontent\Entities\ContentEntity;
-use Railroad\Railcontent\Factories\ContentContentFieldFactory;
-use Railroad\Railcontent\Factories\ContentDatumFactory;
-use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Factories\ContentPermissionsFactory;
-use Railroad\Railcontent\Factories\PermissionsFactory;
-use Railroad\Railcontent\Repositories\PermissionRepository;
-use Railroad\Railcontent\Repositories\UserPermissionsRepository;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentEntityTest extends RailcontentTestCase
 {
     /**
-     * @var ContentFactory
-     */
-    protected $contentFactory;
-
-    /**
-     * @var ContentDatumFactory
-     */
-    protected $datumFactory;
-
-    /**
-     * @var ContentContentFieldFactory
-     */
-    protected $fieldFactory;
-
-    /**
-     * @var PermissionsFactory
-     */
-    protected $permissionFactory;
-
-    /**
-     * @var ContentPermissionsFactory
-     */
-    protected $contentPermissionsFactory;
-
-    /**
      * @var ContentService
      */
     protected $serviceBeingTested;
 
-    /**
-     * @var \Railroad\Railcontent\Repositories\UserPermissionsRepository
-     */
-    protected $userPermissionsRepository;
-
     protected function setUp()
     {
         parent::setUp();
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
-        $this->contentPermissionsFactory = $this->app->make(ContentPermissionsFactory::class);
-        $this->userPermissionsRepository = $this->app->make(UserPermissionsRepository::class);
 
         $this->serviceBeingTested = $this->app->make(ContentService::class);
 
@@ -69,142 +24,112 @@ class ContentEntityTest extends RailcontentTestCase
 
     public function test_get_by_entity_mapping()
     {
-
         $userId = $this->createAndLogInNewUser();
-        $content = $this->contentFactory->create();
-        $linkedContent = $this->contentFactory->create();
 
-        $linkedContentField = $this->fieldFactory->create(
-            $content['id'],
-            'linked-content',
-            $linkedContent['id'],
+        $content = $this->fakeContent(
             1,
-            'content_id'
+            [
+                'brand' => config('railcontent.brand'),
+                'status' => 'published',
+            ]
         );
 
-        $randomLinkedContentField = $this->fieldFactory->create($linkedContent['id']);
-        $randomLinkedContentDatum = $this->datumFactory->create($linkedContent['id']);
+        $contentTopic = $this->fakeContentTopic(
+            3,
+            [
+                'content' => $content[0],
+            ]
+        );
 
-        $randomFields = [];
-        $randomData = [];
-        $randomPermissions = [];
+        $instructor = $this->fakeContent();
+        $contentInstructor = $this->fakeContentInstructor(
+            1,
+            [
+                'content' => $content[0],
+                'instructor' => $instructor[0],
+            ]
+        );
 
-        for ($i = 0; $i < 3; $i++) {
-            $randomFields[] = $this->fieldFactory->create($content['id']);
+        $contentData = $this->fakeContentData(
+            1,
+            [
+                'content' => $content[0],
+                'key' => $this->faker->word,
+                'value' => $this->faker->paragraph,
+            ]
+        );
+
+        $permission = $this->fakePermission(
+            1,
+            [
+                'brand' => config('railcontent.brand'),
+            ]
+        );
+
+        $contentPermission = $this->call(
+            'PUT',
+            'railcontent/permission/assign',
+            [
+                'data' => [
+                    'type' => 'contentPermission',
+                    'attributes' => [
+                        'content_type' => $content[0]->getType(),
+                    ],
+                    'relationships' => [
+                        'permission' => [
+                            'data' => [
+                                'type' => 'permission',
+                                'id' => $permission[0]->getId(),
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        $userPermission = $this->fakeUserPermission(
+            1,
+            [
+                'userId' => $userId,
+                'permission' => $permission[0],
+                'startDate' => Carbon::now(),
+                'expirationDate' => Carbon::now()
+                    ->addYear(1),
+            ]
+        );
+
+        $results = $this->serviceBeingTested->getById($content[0]->getId());
+
+        $this->assertInstanceOf(Content::class, $results);
+
+        $this->assertEquals($content[0]->getId(), $results->getId());
+        $this->assertEquals($content[0]->getSlug(), $results->getSlug());
+        $this->assertEquals($content[0]->getType(), $results->getType());
+        $this->assertEquals($content[0]->getSort(), $results->getSort());
+        $this->assertEquals($content[0]->getStatus(), $results->getStatus());
+        $this->assertEquals($content[0]->getLanguage(), $results->getLanguage());
+        $this->assertEquals($content[0]->getBrand(), $results->getBrand());
+        $this->assertEquals($content[0]->getPublishedOn(), $results->getPublishedOn());
+        $this->assertEquals($content[0]->getCreatedOn(), $results->getCreatedOn());
+        $this->assertEquals($content[0]->getArchivedOn(), $results->getArchivedOn());
+
+        $this->assertEquals(count($contentTopic), count($results->getTopic()));
+        foreach ($results->getTopic() as $index => $topic) {
+            $this->assertEquals($contentTopic[$index]->getId(), $topic->getId());
         }
 
-        for ($i = 0; $i < 3; $i++) {
-            $randomData[] = $this->datumFactory->create($content['id']);
+        $this->assertEquals($instructor[0]->getId(), $results->getInstructor()->getInstructor()->getId());
+
+
+        $this->assertEquals(count($contentData), count($results->getData()));
+        foreach ($results->getData() as $index => $data) {
+            $this->assertEquals($contentData[$index]->getId(), $data->getId());
         }
 
-        for ($i = 0; $i < 2; $i++) {
-            $permission = $this->permissionFactory->create();
-            $this->contentPermissionsFactory->create($content['id'], null, $permission['id']);
-            $randomPermissions[] = $permission;
-        }
+        $this->assertEquals(1, count($results->getPermissions()));
+        $this->assertEquals($content[0]->getType(), $results->getPermissions()[0]->getContentType());
+        $this->assertEquals($permission[0]->getName(), $results->getPermissions()[0]->getPermission()->getName());
 
-        for ($i = 0; $i < 2; $i++) {
-            $permission = $this->permissionFactory->create();
-            $this->contentPermissionsFactory->create(null, $content['type'], $permission['id']);
-            $randomPermissions[] = $permission;
-
-            //assign user permission
-            $this->userPermissionsRepository->create(
-                [
-                    'user_id' => $userId,
-                    'permission_id' => $permission['id'],
-                    'start_date' => Carbon::now()
-                        ->toDateTimeString(),
-                    'created_on' => Carbon::now()
-                        ->toDateTimeString(),
-                ]
-            );
-        }
-
-        $results = $this->serviceBeingTested->getById($content['id']);
-
-        $this->assertInstanceOf(ContentEntity::class, $results);
-
-        $this->assertEquals($content['id'], $results->fetch('id'));
-        $this->assertEquals($content['slug'], $results->fetch('slug'));
-        $this->assertEquals($content['type'], $results->fetch('type'));
-        $this->assertEquals($content['sort'], $results->fetch('sort'));
-        $this->assertEquals($content['status'], $results->fetch('status'));
-        $this->assertEquals($content['language'], $results->fetch('language'));
-        $this->assertEquals($content['brand'], $results->fetch('brand'));
-        $this->assertEquals($content['published_on'], $results->fetch('published_on'));
-        $this->assertEquals($content['created_on'], $results->fetch('created_on'));
-        $this->assertEquals($content['archived_on'], $results->fetch('archived_on'));
-
-        foreach ($randomFields as $randomField) {
-            $this->assertEquals($randomField['value'], $results->fetch('fields.' . $randomField['key']));
-            $this->assertEquals(
-                $randomField['value'],
-                $results->fetch('fields.' . $randomField['key'] . '.' . $randomField['position'])
-            );
-            $this->assertEquals(
-                $randomField['value'],
-                $results->fetch(
-                    'fields.' . $randomField['key'] . '.' . $randomField['type'] . '.' . $randomField['position']
-                )
-            );
-
-            foreach ($randomField as $randomFieldColumnName => $randomFieldColumnValue) {
-                $this->assertEquals(
-                    $randomField[$randomFieldColumnName],
-                    $results->fetch('fields.' . $randomField['key'] . '.' . $randomFieldColumnName)
-                );
-                $this->assertEquals(
-                    $randomField[$randomFieldColumnName],
-                    $results->fetch(
-                        'fields.' . $randomField['key'] . '.' . $randomField['position'] . '.' . $randomFieldColumnName
-                    )
-                );
-                $this->assertEquals(
-                    $randomField[$randomFieldColumnName],
-                    $results->fetch(
-                        'fields.' .
-                        $randomField['key'] .
-                        '.' .
-                        $randomField['type'] .
-                        '.' .
-                        $randomField['position'] .
-                        '.' .
-                        $randomFieldColumnName
-                    )
-                );
-            }
-        }
-
-        foreach ($randomData as $randomDatum) {
-            $this->assertEquals($randomDatum['value'], $results->fetch('data.' . $randomDatum['key']));
-            $this->assertEquals(
-                $randomDatum['value'],
-                $results->fetch('data.' . $randomDatum['key'] . '.' . $randomDatum['position'])
-            );
-
-            foreach ($randomDatum as $randomDatumColumnName => $randomDatumColumnValue) {
-                $this->assertEquals(
-                    $randomDatum[$randomDatumColumnName],
-                    $results->fetch('data.' . $randomDatum['key'] . '.' . $randomDatumColumnName)
-                );
-                $this->assertEquals(
-                    $randomDatum[$randomDatumColumnName],
-                    $results->fetch(
-                        'data.' . $randomDatum['key'] . '.' . $randomDatum['position'] . '.' . $randomDatumColumnName
-                    )
-                );
-            }
-        }
-
-        foreach ($randomPermissions as $randomPermission) {
-            foreach ($randomPermission as $randomPermissionColumnName => $randomPermissionColumnValue) {
-                $this->assertEquals(
-                    $randomPermission[$randomPermissionColumnName],
-                    $results->fetch('permissions.' . $randomPermission['name'] . '.' . $randomPermissionColumnName)
-                );
-            }
-        }
     }
 
     protected function getEnvironmentSetUp($app)

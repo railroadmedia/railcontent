@@ -58,9 +58,9 @@ class ContentInstructor
     }
 
     /**
-     * @param mixed $content
+     * @param Content $instructor
      */
-    public function setInstructor($instructor)
+    public function setInstructor(Content $instructor)
     {
         $this->instructor = $instructor;
     }
@@ -74,9 +74,9 @@ class ContentInstructor
     }
 
     /**
-     * @param mixed $content
+     * @param Content $content
      */
-    public function setContent($content)
+    public function setContent(Content $content)
     {
         $this->content = $content;
     }
@@ -98,10 +98,10 @@ class ContentInstructor
     }
 
     /**
-     * @param  $instructor
+     * @param Content $instructor
      * @return $this
      */
-    public function addInstructor( $instructor)
+    public function addInstructor(Content $instructor)
     {
         $this->instructor = $instructor;
 

@@ -60,15 +60,15 @@ class UserPermission
     /**
      * @return UserInterface|null
      */
-    public function getUser(): ?UserInterface
+    public function getUser(): UserInterface
     {
         return $this->user;
     }
 
     /**
-     * @param UserInterface|null $user
+     * @param UserInterface $user
      */
-    public function setUser(?UserInterface $user)
+    public function setUser(UserInterface $user)
     {
         $this->user = $user;
     }
@@ -114,9 +114,9 @@ class UserPermission
     }
 
     /**
-     * @param mixed $content
+     * @param Permission $permission
      */
-    public function setPermission($permission)
+    public function setPermission(Permission $permission)
     {
         $this->permission = $permission;
     }

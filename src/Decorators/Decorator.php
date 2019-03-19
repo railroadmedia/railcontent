@@ -2,7 +2,7 @@
 
 namespace Railroad\Railcontent\Decorators;
 
-use Railroad\Railcontent\Services\ConfigService;
+
 use Railroad\Railcontent\Support\Collection;
 
 class Decorator

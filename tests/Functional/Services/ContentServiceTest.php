@@ -11,13 +11,6 @@ use Faker\ORM\Doctrine\Populator;
 use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentHierarchy;
-use Railroad\Railcontent\Factories\ContentContentFieldFactory;
-use Railroad\Railcontent\Factories\ContentDatumFactory;
-use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Factories\ContentPermissionsFactory;
-use Railroad\Railcontent\Factories\PermissionsFactory;
-use Railroad\Railcontent\Helpers\CacheHelper;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\Hydrators\ContentFakeDataHydrator;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -131,12 +124,6 @@ class ContentServiceTest extends RailcontentTestCase
         $executor = new ORMExecutor($this->entityManager, $purger);
 
         $this->classBeingTested = $this->app->make(ContentService::class);
-
-        $this->contentFactory = $this->app->make(ContentFactory::class);
-        $this->fieldFactory = $this->app->make(ContentContentFieldFactory::class);
-        $this->datumFactory = $this->app->make(ContentDatumFactory::class);
-        $this->permissionFactory = $this->app->make(PermissionsFactory::class);
-        $this->contentPermissionFactory = $this->app->make(ContentPermissionsFactory::class);
     }
 
     public function test_delete_content()
@@ -186,13 +173,6 @@ class ContentServiceTest extends RailcontentTestCase
             'parent' => null
         ]);
 
-        //save content in user playlist
-        //        $playlist = $this->userContentProgressFactory->startContent($content['id'], rand());
-        //
-        //        $parentLink = $this->contentHierarchyFactory->create($parent['id'], $content['id'], 1);
-        //
-        //        $otherChildLink = $this->contentHierarchyFactory->create($parent['id'], $otherContent['id'], 2);
-
         $id = $contents[0]->getId();
         $results = $this->classBeingTested->delete($id);
 
@@ -238,28 +218,6 @@ class ContentServiceTest extends RailcontentTestCase
                 'id' => $id,
             ]
         );
-
-        //check that the content comments and replies are deleted
-//        $this->assertDatabaseMissing(
-//            ConfigService::$tableComments,
-//            [
-//                'content_id' => $id,
-//            ]
-//        );
-//
-//        //check that the comments/replies assignments are deleted
-//        $this->assertDatabaseMissing(
-//            ConfigService::$tableCommentsAssignment,
-//            []
-//        );
-//
-//        //check that the content it's deleted from the playlists
-//        $this->assertDatabaseMissing(
-//            ConfigService::$tableUserContentProgress,
-//            [
-//                'content_id' => $content['id'],
-//            ]
-//        );
     }
 
     public function _test_soft_delete_content()
@@ -315,7 +273,7 @@ class ContentServiceTest extends RailcontentTestCase
 
         //check that the content fields are not deleted
         $this->assertDatabaseHas(
-            ConfigService::$tableContentFields,
+            config('railcontent.table_prefix') . 'content_fields',
             [
                 'content_id' => $content['id'],
             ]
@@ -408,9 +366,7 @@ class ContentServiceTest extends RailcontentTestCase
         $contentResponse = $this->classBeingTested->getById($content[1]->getId());
         $contentResponse = $this->classBeingTested->getById($content[0]->getId());
 
-        CacheHelper::setPrefix();
-
-        Cache::store(ConfigService::$cacheDriver)
+        Cache::store(config('railcontent.cache_driver'))
             ->put('do_not_delete', 'a_value', 10);
 
         $this->classBeingTested->update(
@@ -420,7 +376,7 @@ class ContentServiceTest extends RailcontentTestCase
 
         $this->assertEquals(
             'a_value',
-            Cache::store(ConfigService::$cacheDriver)
+            Cache::store(config('railcontent.cache_driver'))
                 ->get('do_not_delete')
         );
 
@@ -428,14 +384,14 @@ class ContentServiceTest extends RailcontentTestCase
 
         $this->assertEquals(
             'a_value',
-            Cache::store(ConfigService::$cacheDriver)
+            Cache::store(config('railcontent.cache_driver'))
                 ->get('do_not_delete')
         );
     }
 
     public function test_getAllByType()
     {
-        $nr = $this->faker->randomNumber(1);
+        $nr = rand(2, 10);
         $type = $this->faker->word;
 
         $contents = $this->fakeContent(

@@ -8,7 +8,6 @@ use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
-use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Resora\Decorators\Decorator;
 
 class ContentRepository extends EntityRepository
@@ -56,11 +55,6 @@ class ContentRepository extends EntityRepository
     private $typesToInclude = [];
     private $slugHierarchy = [];
     private $requiredParentIds = [];
-
-    protected function decorate($results)
-    {
-        return Decorator::decorate($results, 'content');
-    }
 
     /**
      * @param int $id

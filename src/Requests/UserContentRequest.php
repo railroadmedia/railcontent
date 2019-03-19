@@ -3,7 +3,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Railroad\Railcontent\Services\ConfigService;
 
 class UserContentRequest extends FormRequest
 {
@@ -25,7 +24,7 @@ class UserContentRequest extends FormRequest
     public function rules()
     {
         return [
-            'data.relationships.content.data.id' => 'required|numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
+            'data.relationships.content.data.id' => 'required|numeric|exists:' . config('railcontent.database_connection_name') . '.' .
                 config('railcontent.table_prefix'). 'content' . ',id'
         ];
     }

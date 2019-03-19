@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
-use Railroad\Railcontent\Services\ConfigService;
+
 
 class AddCreatedOnToContentHierarchy extends Migration
 {
@@ -13,7 +13,7 @@ class AddCreatedOnToContentHierarchy extends Migration
      */
     public function up()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)->table(
+        Schema::connection(config('railcontent.database_connection_name'))->table(
             config('railcontent.table_prefix'). 'content_hierarchy',
             function ($table) {
                 /**
@@ -32,7 +32,7 @@ class AddCreatedOnToContentHierarchy extends Migration
      */
     public function down()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)->table(
+        Schema::connection(config('railcontent.database_connection_name'))->table(
             config('railcontent.table_prefix'). 'content_hierarchy',
             function ($table) {
                 /**

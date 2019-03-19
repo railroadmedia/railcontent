@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
-use Railroad\Railcontent\Services\ConfigService;
+
 
 class CreateSearchIndexes extends Migration
 {
@@ -14,7 +14,7 @@ class CreateSearchIndexes extends Migration
     public function up()
     {
         if (config()->get('database.default') != 'testbench') {
-            Schema::connection(ConfigService::$databaseConnectionName)->create(
+            Schema::connection(config('railcontent.database_connection_name'))->create(
                 config('railcontent.table_prefix'). 'search_indexes',
                 function ($table) {
                     /**
@@ -31,17 +31,17 @@ class CreateSearchIndexes extends Migration
                     $table->timestamps();
                 }
             );
-            Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
+            Schema::connection(config('railcontent.database_connection_name'))->getConnection()->getPdo()->exec(
                 'ALTER TABLE ' .
                 config('railcontent.table_prefix'). 'search_indexes'.
                 ' ADD FULLTEXT high_full_text(high_value)'
             );
-            Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
+            Schema::connection(config('railcontent.database_connection_name'))->getConnection()->getPdo()->exec(
                 'ALTER TABLE ' .
                 config('railcontent.table_prefix'). 'search_indexes' .
                 ' ADD FULLTEXT medium_full_text(medium_value)'
             );
-            Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
+            Schema::connection(config('railcontent.database_connection_name'))->getConnection()->getPdo()->exec(
                 'ALTER TABLE ' . config('railcontent.table_prefix'). 'search_indexes' . ' ADD FULLTEXT low_full_text(low_value)'
             );
         }
@@ -54,7 +54,7 @@ class CreateSearchIndexes extends Migration
      */
     public function down()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)->dropIfExists(
+        Schema::connection(config('railcontent.database_connection_name'))->dropIfExists(
             config('railcontent.table_prefix'). 'search_indexes'
         );
     }

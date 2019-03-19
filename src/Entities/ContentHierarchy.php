@@ -58,9 +58,9 @@ class ContentHierarchy
     }
 
     /**
-     * @param mixed $content
+     * @param Content $parent
      */
-    public function setParent($parent)
+    public function setParent(Content $parent)
     {
         $this->parent = $parent;
 
@@ -75,9 +75,9 @@ class ContentHierarchy
     }
 
     /**
-     * @param mixed $content
+     * @param Content $child
      */
-    public function setChild($child)
+    public function setChild(Content $child)
     {
         $this->child = $child;
 

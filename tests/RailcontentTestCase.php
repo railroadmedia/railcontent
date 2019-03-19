@@ -90,7 +90,7 @@ class RailcontentTestCase extends BaseTestCase
      */
     protected $entityManager;
 
-    protected $serializer;
+//    protected $serializer;
 
     protected $fakeDataHydrator;
 
@@ -136,15 +136,15 @@ class RailcontentTestCase extends BaseTestCase
         $this->databaseManager = $this->app->make(DatabaseManager::class);
         $this->authManager = $this->app->make(AuthManager::class);
         $this->router = $this->app->make(Router::class);
-        $this->serializer =
-            SerializerBuilder::create()
-                ->setSerializationContextFactory(
-                    function () {
-                        return SerializationContext::create()
-                            ->setSerializeNull(true);
-                    }
-                )
-                ->build();
+//        $this->serializer =
+//            SerializerBuilder::create()
+//                ->setSerializationContextFactory(
+//                    function () {
+//                        return SerializationContext::create()
+//                            ->setSerializeNull(true);
+//                    }
+//                )
+//                ->build();
 
         $this->permissionServiceMock =
             $this->getMockBuilder(PermissionService::class)

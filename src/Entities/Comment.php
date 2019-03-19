@@ -86,8 +86,9 @@ class Comment
      */
     protected $deletedAt;
 
-
-
+    /**
+     * Comment constructor.
+     */
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -137,18 +138,17 @@ class Comment
     }
 
     /**
-     * @param UserInterface|null $user
+     * @param UserInterface $user
      */
-    public function setUser(?UserInterface $user)
+    public function setUser(UserInterface $user)
     {
         $this->user = $user;
     }
 
-
     /**
-     * @return UserInterface|null
+     * @return UserInterface
      */
-    public function getUser(): ?UserInterface
+    public function getUser(): UserInterface
     {
         return $this->user;
     }
@@ -162,9 +162,9 @@ class Comment
     }
 
     /**
-     * @param mixed $content
+     * @param Content $content
      */
-    public function setContent($content)
+    public function setContent(?Content $content)
     {
         $this->content = $content;
     }

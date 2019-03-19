@@ -186,6 +186,11 @@ class CommentLikeService
         return true;
     }
 
+    /**
+     * @param $commentAndReplyIds
+     * @param $userId
+     * @return array|false|mixed
+     */
     public function isLikedByUserId($commentAndReplyIds, $userId)
     {
         $qb =

@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
-use Railroad\Railcontent\Services\ConfigService;
 
 class AddContentStatusToSearchIndexes extends Migration
 {
@@ -14,7 +13,7 @@ class AddContentStatusToSearchIndexes extends Migration
     public function up()
     {
         if (config()->get('database.default') != 'testbench') {
-            Schema::connection(ConfigService::$databaseConnectionName)->table(
+            Schema::connection(config('railcontent.database_connection_name'))->table(
                 config('railcontent.table_prefix'). 'search_indexes',
                 function ($table) {
                     /**
@@ -36,7 +35,7 @@ class AddContentStatusToSearchIndexes extends Migration
     {
         if (config()->get('database.default') != 'testbench') {
 
-            Schema::connection(ConfigService::$databaseConnectionName)->table(
+            Schema::connection(config('railcontent.database_connection_name'))->table(
                 config('railcontent.table_prefix'). 'search_indexes',
                 function ($table) {
                     /**

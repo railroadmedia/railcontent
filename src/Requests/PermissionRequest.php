@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Railroad\Railcontent\Services\ConfigService;
 
 class PermissionRequest extends FormRequest
 {

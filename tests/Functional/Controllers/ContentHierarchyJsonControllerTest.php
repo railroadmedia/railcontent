@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Faker\ORM\Doctrine\Populator;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentHierarchy;
-use Railroad\Railcontent\Services\ConfigService;
+
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentHierarchyJsonControllerTest extends RailcontentTestCase

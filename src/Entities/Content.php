@@ -120,10 +120,10 @@ class Content
      */
     private $completed = false;
 
-    /**
-     * @var ArrayCollection
-     */
-    private $permissions;
+//    /**
+//     * @var ArrayCollection
+//     */
+//    private $permissions;
 
     /**
      * @var int
@@ -154,7 +154,7 @@ class Content
         $this->playlist = new ArrayCollection();
         $this->exercise = new ArrayCollection();
         $this->userProgress = new ArrayCollection();
-        $this->permissions = new ArrayCollection();
+        //$this->permissions = new ArrayCollection();
     }
 
     /**

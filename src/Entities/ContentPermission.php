@@ -94,9 +94,9 @@ class ContentPermission
     }
 
     /**
-     * @param mixed $content
+     * @param Content $content
      */
-    public function setContent($content)
+    public function setContent(?Content $content)
     {
         $this->content = $content;
         if ($content) {
@@ -113,9 +113,9 @@ class ContentPermission
     }
 
     /**
-     * @param mixed $content
+     * @param Permission $permission
      */
-    public function setPermission($permission)
+    public function setPermission(Permission $permission)
     {
         $this->permission = $permission;
     }

@@ -171,6 +171,10 @@ class ContentPermissionService
             ->getResult();
     }
 
+    /**
+     * @param $permissionId
+     * @return mixed
+     */
     public function getByPermission($permissionId)
     {
         return $this->contentPermissionRepository->findByPermission($permissionId);

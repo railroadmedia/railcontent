@@ -58,11 +58,12 @@ class ContentExercise
     }
 
     /**
-     * @param mixed $content
+     * @param Content $content
      */
-    public function setContent($content)
+    public function setContent(Content $content)
     {
-        // $content->addExercise($this);
+        $content->addExercise($this);
+
         $this->content = $content;
     }
 
@@ -77,7 +78,7 @@ class ContentExercise
     /**
      * @param mixed $content
      */
-    public function setExercise($exercise)
+    public function setExercise(Content $exercise)
     {
         $this->exercise = $exercise;
     }
@@ -102,7 +103,7 @@ class ContentExercise
      * @param $exercise
      * @return $this
      */
-    public function addExercise( $exercise)
+    public function addExercise(Content $exercise)
     {
         $this->exercise = $exercise;
 

@@ -2,10 +2,8 @@
 
 namespace Railroad\Railcontent\Entities;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\Collection;
 use Railroad\Railcontent\Contracts\UserInterface;
 
 /**
@@ -64,7 +62,7 @@ class CommentAssignment
     /**
      * @param mixed $content
      */
-    public function setComment($comment)
+    public function setComment(Comment $comment)
     {
         $comment->addAssignedToUser($this);
 
@@ -74,7 +72,7 @@ class CommentAssignment
     /**
      * @param UserInterface|null $user
      */
-    public function setUser(?UserInterface $user)
+    public function setUser(UserInterface $user)
     {
         $this->user = $user;
     }
@@ -83,7 +81,7 @@ class CommentAssignment
     /**
      * @return UserInterface|null
      */
-    public function getUser(): ?UserInterface
+    public function getUser(): UserInterface
     {
         return $this->user;
     }

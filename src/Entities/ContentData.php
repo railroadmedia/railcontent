@@ -115,11 +115,10 @@ class ContentData
     }
 
     /**
-     * @param mixed $content
+     * @param Content $content
      */
-    public function setContent($content)
-    : void {
-
+    public function setContent(Content $content)
+    {
         $content->addData($this);
 
         $this->content = $content;

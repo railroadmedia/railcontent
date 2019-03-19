@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
-use Railroad\Railcontent\Services\ConfigService;
+
 
 class RenameDatetimeColumnsUserPermissionTable extends Migration
 {
@@ -13,7 +13,7 @@ class RenameDatetimeColumnsUserPermissionTable extends Migration
      */
     public function up()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)
+        Schema::connection(config('railcontent.database_connection_name'))
             ->table(
                 config('railcontent.table_prefix'). 'user_permissions',
                 function ($table) {
@@ -24,7 +24,7 @@ class RenameDatetimeColumnsUserPermissionTable extends Migration
                 }
             );
 
-        Schema::connection(ConfigService::$databaseConnectionName)
+        Schema::connection(config('railcontent.database_connection_name'))
             ->table(
                 config('railcontent.table_prefix'). 'user_permissions',
                 function ($table) {
@@ -43,7 +43,7 @@ class RenameDatetimeColumnsUserPermissionTable extends Migration
      */
     public function down()
     {
-        Schema::connection(ConfigService::$databaseConnectionName)
+        Schema::connection(config('railcontent.database_connection_name'))
             ->table(
                 config('railcontent.table_prefix'). 'user_permissions',
                 function ($table) {
@@ -54,7 +54,7 @@ class RenameDatetimeColumnsUserPermissionTable extends Migration
                 }
             );
 
-        Schema::connection(ConfigService::$databaseConnectionName)
+        Schema::connection(config('railcontent.database_connection_name'))
             ->table(
                 Cconfig('railcontent.table_prefix'). 'user_permissions',
                 function ($table) {

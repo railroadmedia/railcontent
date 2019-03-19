@@ -5,7 +5,6 @@ namespace Railroad\Railcontent\Listeners;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Services\CommentAssignmentService;
 use Railroad\Railcontent\Services\CommentService;
-use Railroad\Railcontent\Services\ConfigService;
 
 class AssignCommentEventListener
 {

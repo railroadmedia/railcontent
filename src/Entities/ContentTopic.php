@@ -56,9 +56,9 @@ class ContentTopic
     }
 
     /**
-     * @param mixed $content
+     * @param Content $content
      */
-    public function setContent($content)
+    public function setContent(Content $content)
     {
         $content->addTopic($this);
 
