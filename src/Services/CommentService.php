@@ -410,6 +410,15 @@ class CommentService
                 ->setParameter('user', $user);
         }
 
+        if ($orderByColumn == $alias . ".likeCount") {
+
+            $qb->leftJoin($alias . '.likes', 'likes');
+            $qb->addSelect('COUNT(likes) AS HIDDEN counter')
+                ->groupBy($alias . '.id');
+
+            $orderByColumn = 'counter';
+        }
+
         if (CommentRepository::$availableUserId) {
             $qb->andWhere($alias . '.user = :availableUserId')
                 ->setParameter('availableUserId', CommentRepository::$availableUserId);
@@ -432,7 +441,7 @@ class CommentService
                 )
                 ->setParameter('availableUserId', CommentRepository::$assignedToUserId);
         }
-        $qb->select([$alias])
+        $qb->addSelect([$alias])
             ->setMaxResults($limit)
             ->setFirstResult($first)
             ->orderBy($orderByColumn, $orderByDirection);

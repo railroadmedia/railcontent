@@ -362,7 +362,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(204, $response->getStatusCode());
 
         $this->assertDatabaseMissing(
-            config('railcontent.table_prefix'). 'comments',
+            config('railcontent.table_prefix') . 'comments',
             [
                 'id' => $commentId,
             ]
@@ -443,10 +443,13 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 'deletedAt' => null,
             ]
         );
-        $this->fakeCommentLike(1,[
-            'comment' => $comments[0],
-            'userId' => 1
-        ]);
+        $this->fakeCommentLike(
+            1,
+            [
+                'comment' => $comments[0],
+                'userId' => 1,
+            ]
+        );
 
         $request = [
             'limit' => $limit,
@@ -558,7 +561,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
             CommentAssignment::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($userId),
+                'user' => $this->app->make(UserProvider::class)
+                    ->getUserById($userId),
                 'comment' => $comments[0],
             ]
         );
@@ -583,58 +587,37 @@ class CommentJsonControllerTest extends RailcontentTestCase
         );
     }
 
-    public function _test_pull_comments_ordered_by_like_count()
+    public function test_pull_comments_ordered_by_like_count()
     {
         // create content
-        $content = $this->contentFactory->create(
-            $this->faker->word,
-            $this->faker->randomElement(config('railcontent.commentable_content_types')),
-            ContentService::STATUS_PUBLISHED
+        $content = $this->fakeContent(
+            1,
+            [
+                'slug' => $this->faker->word,
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
+                'status' => ContentService::STATUS_PUBLISHED,
+                'brand' => config('railcontent.brand'),
+            ]
         );
 
         // create content comments
-        $comments = [];
-
-        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
-        $comments[] = $this->commentFactory->create($this->faker->text, $content['id'], null, rand());
+        $comments = $this->fakeComment(5,[
+            'content' => $content[0],
+            'deletedAt' => null,
+            'parent' => null
+        ]);
 
         // select two comment ids
-        $firstOrderedCommentId = $comments[2]['id'];
-        $secondOrderedCommentId = $comments[4]['id'];
+        $firstOrderedCommentId = $comments[2]->getId();
+        $secondOrderedCommentId = $comments[4]->getId();
 
-        // add a known number of likes to selected comments
-        $commentThreeLikeOne = [
-            'comment_id' => $firstOrderedCommentId,
-            'user_id' => $this->faker->randomNumber(),
-            'created_on' => Carbon::instance($this->faker->dateTime)
-                ->toDateTimeString(),
-        ];
+        $this->fakeCommentLike(2,[
+            'comment' => $comments[2],
+        ]);
 
-        $this->databaseManager->table(config('railcontent.table_prefix'). 'comment_likes')
-            ->insertGetId($commentThreeLikeOne);
-
-        $commentThreeLikeTwo = [
-            'comment_id' => $firstOrderedCommentId,
-            'user_id' => $this->faker->randomNumber(),
-            'created_on' => Carbon::instance($this->faker->dateTime)
-                ->toDateTimeString(),
-        ];
-
-        $this->databaseManager->table(config('railcontent.table_prefix'). 'comment_likes')
-            ->insertGetId($commentThreeLikeTwo);
-
-        $commentFourLike = [
-            'comment_id' => $secondOrderedCommentId,
-            'user_id' => $this->faker->randomNumber(),
-            'created_on' => Carbon::instance($this->faker->dateTime)
-                ->toDateTimeString(),
-        ];
-
-        $this->databaseManager->table(config('railcontent.table_prefix'). 'comment_likes')
-            ->insertGetId($commentFourLike);
+        $this->fakeCommentLike(1,[
+            'comment' => $comments[4],
+        ]);
 
         $response = $this->call(
             'GET',
@@ -642,16 +625,16 @@ class CommentJsonControllerTest extends RailcontentTestCase
             [
                 'page' => 1,
                 'limit' => 25,
-                'content_id' => $content['id'],
+                'content_id' => $content[0]->getId(),
                 'sort' => '-like_count',
             ]
         );
 
-        $decodedResponse = $response->decodeResponseJson();
+        $decodedResponse = $response->decodeResponseJson('data');
 
         // assert the order of results
-        $this->assertEquals($decodedResponse['data'][0]['id'], $firstOrderedCommentId);
-        $this->assertEquals($decodedResponse['data'][1]['id'], $secondOrderedCommentId);
+        $this->assertEquals($decodedResponse[0]['id'], $firstOrderedCommentId);
+        $this->assertEquals($decodedResponse[1]['id'], $secondOrderedCommentId);
     }
 
     public function test_pull_comments_filtered_by_my_comments()
@@ -736,7 +719,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $content[0],
                 'deletedAt' => null,
-                'parent' => null
+                'parent' => null,
             ]
         );
 
@@ -746,7 +729,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 'content' => $content[0],
                 'parent' => $comment[0],
                 'deletedAt' => null,
-                'parent' => null
+                'parent' => null,
             ]
         );
 
@@ -795,7 +778,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $contentForBrand1[0],
                 'deletedAt' => null,
-                'parent' => null
+                'parent' => null,
             ]
         );
 
@@ -804,7 +787,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $ContentBrandConfig[0],
                 'deletedAt' => null,
-                'parent' => null
+                'parent' => null,
             ]
         );
 
@@ -831,6 +814,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
             ]
         );
+        
         $comments = $this->fakeComment(
             $commentsNr / 2,
             [
@@ -904,11 +888,14 @@ class CommentJsonControllerTest extends RailcontentTestCase
     {
         $userId = $this->createAndLogInNewUser();
 
-        $content = $this->fakeContent(1,[
-            'brand' => config('railcontent.brand'),
-            'status' => 'published',
-            'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
-        ]);
+        $content = $this->fakeContent(
+            1,
+            [
+                'brand' => config('railcontent.brand'),
+                'status' => 'published',
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
+            ]
+        );
         $comment = $this->fakeComment(
             3,
             [
