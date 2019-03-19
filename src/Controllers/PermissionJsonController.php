@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Illuminate\Routing\Controller;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Permissions\Services\PermissionService;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Repositories\PermissionRepository;
@@ -160,12 +161,20 @@ class PermissionJsonController extends Controller
             $permission,
             new NotFoundException('Delete failed, permission not found with id: ' . $id)
         );
+        
+        $contentPermissions = $this->contentPermissionService->getByPermission($id);
+        foreach ($contentPermissions as $contentPermission) {
+            $this->entityManager->remove($contentPermission);
+        }
 
         $this->entityManager->remove($permission);
         $this->entityManager->flush();
 
         $this->entityManager->getCache()
             ->evictEntity(Permission::class, $id);
+
+        $this->entityManager->getCache()
+            ->evictEntityRegion(Content::class);
 
         return ResponseService::empty(204);
     }
