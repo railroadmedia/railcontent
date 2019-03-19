@@ -345,7 +345,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
      */
     public function restrictByFilterOptions()
     {
-        foreach (ConfigService::$fieldOptionList as $requiredFieldData) {
+        foreach (config('railcontent.field_option_list', []) as $requiredFieldData) {
             if (in_array(
                 $requiredFieldData,
                 $this->getEntityManager()

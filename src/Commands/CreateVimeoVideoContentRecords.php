@@ -47,9 +47,9 @@ class CreateVimeoVideoContentRecords extends Command
 
         $this->info('Starting. The requests can take 5-30 seconds.');
 
-        $client_id = ConfigService::$videoSync['vimeo'][ConfigService::$brand]['client_id'];
-        $client_secret = ConfigService::$videoSync['vimeo'][ConfigService::$brand]['client_secret'];
-        $access_token = ConfigService::$videoSync['vimeo'][ConfigService::$brand]['access_token'];
+        $client_id = config('railcontent.video_sync')['vimeo'][ConfigService::$brand]['client_id'];
+        $client_secret = config('railcontent.video_sync')['vimeo'][ConfigService::$brand]['client_secret'];
+        $access_token = config('railcontent.video_sync')['vimeo'][ConfigService::$brand]['access_token'];
         $this->lib = new Vimeo($client_id, $client_secret);
         $this->lib->setToken($access_token);
 

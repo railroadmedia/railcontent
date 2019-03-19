@@ -25,6 +25,7 @@ class ContentUserProgressDecorator implements DecoratorInterface
 
     public function decorate($contents, $userId = null)
     {
+        // TODO
         if (empty($userId) && !empty(auth()->id())) {
             $userId = auth()->id();
         }

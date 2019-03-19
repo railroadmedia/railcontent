@@ -32,7 +32,7 @@ class ContentSlugHierarchyDecorator implements DecoratorInterface
         $query = DB::table(config('railcontent.table_prefix'). 'content' . ' as parent_content_0')
             ->whereIn('parent_content_0.id', $contentResults->pluck('id'));
 
-        for ($i = 0; $i < ConfigService::$contentHierarchyMaxDepth; $i++) {
+        for ($i = 0; $i < config('railcontent.content_hierarchy_max_depth'); $i++) {
 
             $query->leftJoin(
                 config('railcontent.table_prefix'). 'content_hierarchy' . ' as content_hierarchy_' . $i,
@@ -51,7 +51,9 @@ class ContentSlugHierarchyDecorator implements DecoratorInterface
                         )
                             ->whereIn(
                                 'parent_content_' . ($i + 1) . '.type',
-                                ConfigService::$contentHierarchyDecoratorAllowedTypes
+                                config(
+                                    'railcontent.content_hierarchy_decorator_allowed_types' . ''
+                                )
                             );
                     }
                 )
@@ -66,7 +68,7 @@ class ContentSlugHierarchyDecorator implements DecoratorInterface
         foreach ($contentResults as $contentIndex => $content) {
             foreach ($slugHierarchies as $slugHierarchy) {
                 $slugHierarchy = (array)$slugHierarchy;
-                for ($i = 1; $i < ConfigService::$contentHierarchyMaxDepth; $i++) {
+                for ($i = 1; $i < config('railcontent.content_hierarchy_max_depth'); $i++) {
                     if ($slugHierarchy['id'] == $content['id'] &&
                         !empty($slugHierarchy['parent_content_' . ($i) . '.slug'])) {
 

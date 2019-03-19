@@ -63,9 +63,9 @@ class RailcontentServiceProvider extends ServiceProvider
             ContentUpdated::class => [VersionContentEventListener::class . '@handle'],
             ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
             ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
-            ContentFieldCreated::class => [VersionContentEventListener::class . '@handle'],
-            ContentFieldUpdated::class => [VersionContentEventListener::class . '@handle'],
-            ContentFieldDeleted::class => [VersionContentEventListener::class . '@handle'],
+            //            ContentFieldCreated::class => [VersionContentEventListener::class . '@handle'],
+            //            ContentFieldUpdated::class => [VersionContentEventListener::class . '@handle'],
+            //            ContentFieldDeleted::class => [VersionContentEventListener::class . '@handle'],
             ContentDatumCreated::class => [VersionContentEventListener::class . '@handle'],
             ContentDatumUpdated::class => [VersionContentEventListener::class . '@handle'],
             ContentDatumDeleted::class => [VersionContentEventListener::class . '@handle'],
@@ -84,7 +84,7 @@ class RailcontentServiceProvider extends ServiceProvider
             ]
         );
 
-        if (ConfigService::$dataMode == 'host') {
+        if (config('railcontent.data_mode') == 'host') {
             $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
         }
 
@@ -111,20 +111,20 @@ class RailcontentServiceProvider extends ServiceProvider
             'double-check the input value and try again.'
         );
 
-                config()->set(
-                    'resora.decorators.content',
-                    array_merge(
-                        [
-                            ContentPermissionsDecorator::class,
-                        ],
-                        config()->get('railcontent.decorators.content', [])
-                    )
-                );
+        config()->set(
+            'resora.decorators.content',
+            array_merge(
+                [
+                    ContentPermissionsDecorator::class,
+                ],
+                config()->get('railcontent.decorators.content', [])
+            )
+        );
 
-                config()->set(
-                    'resora.decorators.comment',
-                    config()->get('railcontent.decorators.comment', [])
-                );
+        config()->set(
+            'resora.decorators.comment',
+            config()->get('railcontent.decorators.comment', [])
+        );
 
         config()->set('resora.default_connection_name', ConfigService::$databaseConnectionName);
     }
@@ -137,7 +137,7 @@ class RailcontentServiceProvider extends ServiceProvider
         // database
         ConfigService::$databaseConnectionName = config('railcontent.database_connection_name');
         ConfigService::$connectionMaskPrefix = config('railcontent.connection_mask_prefix');
-        ConfigService::$dataMode = config('railcontent.data_mode');
+        //ConfigService::$dataMode = config('railcontent.data_mode');
 
         // tables
         ConfigService::$tablePrefix = config('railcontent.table_prefix');
@@ -151,8 +151,8 @@ class RailcontentServiceProvider extends ServiceProvider
         //ConfigService::$tableContentPermissions = ConfigService::$tablePrefix . 'content_permissions';
         // ConfigService::$tableUserPermissions = ConfigService::$tablePrefix . 'user_permissions';
         // ConfigService::$tableUserContentProgress = ConfigService::$tablePrefix . 'user_content_progress';
-        ConfigService::$tablePlaylists = ConfigService::$tablePrefix . 'playlists';
-        ConfigService::$tablePlaylistContents = ConfigService::$tablePrefix . 'playlist_contents';
+        //ConfigService::$tablePlaylists = ConfigService::$tablePrefix . 'playlists';
+        //ConfigService::$tablePlaylistContents = ConfigService::$tablePrefix . 'playlist_contents';
         //ConfigService::$tableComments = ConfigService::$tablePrefix . 'comments';
         //ConfigService::$tableCommentsAssignment = ConfigService::$tablePrefix . 'comment_assignment';
         //ConfigService::$tableCommentLikes = ConfigService::$tablePrefix . 'comment_likes';
@@ -170,16 +170,16 @@ class RailcontentServiceProvider extends ServiceProvider
         //ConfigService::$controllerMiddleware = config('railcontent.controller_middleware');
 
         // api middleware
-        ConfigService::$apiMiddleware = config('railcontent.api_middleware');
+        //ConfigService::$apiMiddleware = config('railcontent.api_middleware');
 
         // validation rules defined for each brand and content type
-        ConfigService::$validationRules = config('railcontent.validation');
+        //ConfigService::$validationRules = config('railcontent.validation');
 
         // validation rules defined for each brand and content type
-        ConfigService::$validationExemptionDate = config('railcontent.validation_exemption_date');
+        //ConfigService::$validationExemptionDate = config('railcontent.validation_exemption_date');
 
         // restrict which fields can be listed to avoid massive queries
-        ConfigService::$fieldOptionList = config('railcontent.field_option_list', []);
+        //ConfigService::$fieldOptionList = config('railcontent.field_option_list', []);
 
         //restrict which content type can have comment
         // ConfigService::$commentableContentTypes = config('railcontent.commentable_content_types');
@@ -191,21 +191,21 @@ class RailcontentServiceProvider extends ServiceProvider
         //ConfigService::$searchIndexValues = config('railcontent.search_index_values'); ???
         //  ConfigService::$indexableContentStatuses = config('railcontent.indexable_content_statuses'); ???
 
-        ConfigService::$videoSync = config('railcontent.video_sync');
+       // ConfigService::$videoSync = config('railcontent.video_sync');
 
         ConfigService::$redisPrefix = config('railcontent.cache_prefix');
         ConfigService::$cacheDriver = config('railcontent.cache_driver');
 
         // decorators
-        ConfigService::$decorators = config('railcontent.decorators');
-        ConfigService::$useCollections = config('railcontent.use_collections');
+       // ConfigService::$decorators = config('railcontent.decorators');
+       // ConfigService::$useCollections = config('railcontent.use_collections');
 
-        ConfigService::$commentLikesDecoratorAmountOfUsers = config('railcontent.comment_likes_amount_of_users');
+       // ConfigService::$commentLikesDecoratorAmountOfUsers = config('railcontent.comment_likes_amount_of_users');
 
-        ConfigService::$contentHierarchyMaxDepth = config('railcontent.content_hierarchy_max_depth');
-        ConfigService::$contentHierarchyDecoratorAllowedTypes = config(
-            'railcontent.content_hierarchy_decorator_allowed_types' . ''
-        );
+        //ConfigService::$contentHierarchyMaxDepth = config('railcontent.content_hierarchy_max_depth');
+//        ConfigService::$contentHierarchyDecoratorAllowedTypes = config(
+//            'railcontent.content_hierarchy_decorator_allowed_types' . ''
+//        );
 
         // aggregates
         ConfigService::$tableCommentsAggregates = [

@@ -29,10 +29,10 @@ class Decorator
             $data = new Collection($data);
         }
 
-        if (!empty(ConfigService::$decorators[$type]) || !empty($decoratorClass)) {
+        if (!empty(config('railcontent.decorators')[$type]) || !empty($decoratorClass)) {
 
             if (empty($decoratorClass)) {
-                $decoratorClassNames = ConfigService::$decorators[$type];
+                $decoratorClassNames = config('railcontent.decorators')[$type];
             } else {
                 $decoratorClassNames = [$decoratorClass];
             }

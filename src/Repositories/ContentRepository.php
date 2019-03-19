@@ -307,7 +307,7 @@ class ContentRepository extends EntityRepository
         $availableFields = [];
 
         foreach ($rows as $row) {
-            foreach (ConfigService::$fieldOptionList as $fieldOption) {
+            foreach (config('railcontent.field_option_list', []) as $fieldOption) {
                 $getField = 'get' . ucwords($fieldOption);
                 if ($row->$getField() && (count($row->$getField()) > 0)) {
                     if (in_array(

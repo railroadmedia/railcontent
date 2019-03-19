@@ -142,11 +142,11 @@ class CustomFormRequest extends FormRequest
         $contentType =
             $thereIsEntity ? $this->getContentTypeVal($request) : $request->input('data.attributes.type')  ?? '';
 
-        if (isset(ConfigService::$validationRules[config('railcontent.brand')]) &&
-            array_key_exists($contentType, ConfigService::$validationRules[config('railcontent.brand')])) {
+        if (isset(config('railcontent.validation')[config('railcontent.brand')]) &&
+            array_key_exists($contentType, config('railcontent.validation')[config('railcontent.brand')])) {
             if (!$entity) {
                 $customRules['data.attributes.fields'] =
-                    ConfigService::$validationRules[config('railcontent.brand')][$contentType];
+                    config('railcontent.validation')[config('railcontent.brand')][$contentType];
             } else {
                 $customRules = $this->prepareCustomRules($request, $contentType, $entity);
             }
@@ -186,8 +186,8 @@ class CustomFormRequest extends FormRequest
     {
         $rules = [];
 
-        if (array_key_exists($entity, ConfigService::$validationRules[config('railcontent.brand')][$contentType])) {
-            $customRules = ConfigService::$validationRules[config('railcontent.brand')][$contentType][$entity];
+        if (array_key_exists($entity, config('railcontent.validation')[config('railcontent.brand')][$contentType])) {
+            $customRules = config('railcontent.validation')[config('railcontent.brand')][$contentType][$entity];
 
             $entity_key = $request->request->get('key');
             $entity_type = $request->request->get('type');
@@ -366,8 +366,8 @@ class CustomFormRequest extends FormRequest
                 ->format('Y-m-d H:i:s')
         );
         $exemptionDate = new Carbon('1970-01-01 00:00');
-        if (!empty(ConfigService::$validationExemptionDate)) {
-            $exemptionDate = new Carbon(ConfigService::$validationExemptionDate);
+        if (!empty(config('railcontent.validation_exemption_date'))) {
+            $exemptionDate = new Carbon(config('railcontent.validation_exemption_date'));
         }
         $exempt = $exemptionDate->gt($contentCreatedOn);
 
@@ -435,7 +435,7 @@ class CustomFormRequest extends FormRequest
             return;
         }
 
-        $allValidationRules = ConfigService::$validationRules;
+        $allValidationRules = config('railcontent.validation');
 
         if (empty($allValidationRules)) {
             $contentValidationRequired = false;

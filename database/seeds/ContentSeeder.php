@@ -71,7 +71,9 @@ class ContentSeeder extends Seeder
                 $user_data = [
                     'slug' => $this->faker->word,
                     'type' => $this->faker->randomElement(
-                        \Railroad\Railcontent\Services\ConfigService::$contentHierarchyDecoratorAllowedTypes
+                        config(
+                            'railcontent.content_hierarchy_decorator_allowed_types' . ''
+                        )
                     ),
                     'status' => 'published',
                     'user_id' => null,

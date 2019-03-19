@@ -55,7 +55,7 @@ class CreateYoutubeVideoContentRecords extends Command
     public function handle()
     {
         $client = new Google_Client();
-        $client->setDeveloperKey(ConfigService::$videoSync['youtube']['key']);
+        $client->setDeveloperKey(config('railcontent.video_sync')['youtube']['key']);
         $client->setScopes($this->scope);
 
         $youtube = new \Google_Service_YouTube($client);
@@ -83,7 +83,7 @@ class CreateYoutubeVideoContentRecords extends Command
         $channelsResponse = $youtube->channels->listChannels(
             'contentDetails',
             array(
-                'forUsername' => ConfigService::$videoSync['youtube'][ConfigService::$brand]['user'],
+                'forUsername' => config('railcontent.video_sync')['youtube'][ConfigService::$brand]['user'],
                 'maxResults' => 50
             )
         );

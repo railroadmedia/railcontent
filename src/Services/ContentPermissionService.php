@@ -170,4 +170,9 @@ class ContentPermissionService
         return $qb->getQuery()
             ->getResult();
     }
+
+    public function getByPermission($permissionId)
+    {
+        return $this->contentPermissionRepository->findByPermission($permissionId);
+    }
 }

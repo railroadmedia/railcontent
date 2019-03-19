@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Illuminate\Http\UploadedFile;
+use Railroad\Railcontent\Services\RemoteStorageService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class RemoteStorageJsonControllerTest extends RailcontentTestCase

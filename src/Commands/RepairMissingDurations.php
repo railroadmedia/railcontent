@@ -32,9 +32,9 @@ class RepairMissingDurations extends Command
         $contentFieldRowsUpdated = 0;
         $contentFieldsWriteSuccess = [];
 
-        $client_id = ConfigService::$videoSync['vimeo']['drumeo']['client_id'];
-        $client_secret = ConfigService::$videoSync['vimeo']['drumeo']['client_secret'];
-        $access_token = ConfigService::$videoSync['vimeo']['drumeo']['access_token'];
+        $client_id = config('railcontent.video_sync')['vimeo']['drumeo']['client_id'];
+        $client_secret = config('railcontent.video_sync')['vimeo']['drumeo']['client_secret'];
+        $access_token = config('railcontent.video_sync')['vimeo']['drumeo']['access_token'];
         $lib = new Vimeo($client_id, $client_secret);
         $lib->setToken($access_token);
 

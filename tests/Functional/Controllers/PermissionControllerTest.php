@@ -184,10 +184,28 @@ class PermissionControllerTest extends RailcontentTestCase
     public function test_delete_permission_response()
     {
         $permission = $this->fakePermission();
-        $response = $this->call('DELETE', 'railcontent/permission/' . $permission[0]->getId());
+        $id = $permission[0]->getId();
+        $this->fakeContentPermission(1,[
+            'contentType'=> $this->faker->word,
+            'permission' => $permission[0]
+        ]);
+
+
+        $response = $this->call('DELETE', 'railcontent/permission/' . $id);
 
         $this->assertEquals(204, $response->status());
         $this->assertEquals('', $response->content());
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix'.'permission'),[
+                'id' =>$id
+            ]
+        );
+
+        $this->assertDatabaseMissing(
+            config('railcontent.table_prefix'.'content_permissions'),[
+                'permission_id' =>$id
+            ]
+        );
     }
 
     public function test_delete_missing_permission_response()

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(
     [
         'prefix' => 'api/railcontent',
-        'middleware' => \Railroad\Railcontent\Services\ConfigService::$apiMiddleware,
+        'middleware' => config('railcontent.api_middleware'),
     ],
     function () {
 

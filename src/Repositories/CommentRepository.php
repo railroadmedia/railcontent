@@ -65,11 +65,6 @@ class CommentRepository extends EntityRepository
     protected $orderTableName;
     protected $orderTable;
 
-    protected function decorate($results)
-    {
-        return Decorator::decorate($results, 'comment');
-    }
-
     /** Set the pagination parameters
      *
      * @param int $page

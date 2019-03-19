@@ -30,14 +30,17 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         $this->contentFactory = app()->make(ContentFactory::class);
     }
 
-    private function createContent(...$arg){
-        $content = $this->contentFactory->create(...$arg);
+    private function createContent($type, $slug){
+        $content = $this->fakeContent(1,[
+            'type' => $type,
+            'slug' => $slug
+        ]);
 
         if(is_null($content)){
             $this->fail('Failed to generate mock content.');
         }
 
-        return $content;
+        return $content[0];
     }
 
     /**
@@ -48,12 +51,12 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
     public function test_pass()
     {
         $typeOne = $this->faker->word;
-        $contentOne = $this->createContent($this->faker->word, $typeOne);
+        $contentOne = $this->createContent($typeOne, $this->faker->word);
         $connectionName = RailcontentTestCase::getConnectionType();
         $rule = 'exists_multiple_columns:' . $connectionName . ',' . 'railcontent_content,' . 'id' . '&' .
             $connectionName . ',' . 'railcontent_content,' . 'type,' . $typeOne;
         /** @var $validator Validator */
-        $validator = Validator::make(['id' => $contentOne['id']],['id' => $rule]);
+        $validator = Validator::make(['id' => $contentOne->getId()],['id' => $rule]);
         $this->assertEquals('1', $validator->validate()['id']);
     }
 
@@ -65,11 +68,10 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
     public function test_pass_and_fail()
     {
         $typeOne = $this->faker->word;
-        $contentOne = $this->createContent($this->faker->word, $typeOne);
+        $contentOne = $this->createContent($typeOne, $this->faker->word);
 
         $typeTwo = $this->faker->word;
-        $this->createContent($this->faker->word, $typeTwo);
-
+        $this->createContent($typeTwo, $this->faker->word);
         $connectionName = RailcontentTestCase::getConnectionType();
 
         $rule = 'exists_multiple_columns:' .
@@ -88,7 +90,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
          * @var $validator Validator
          */
         $validator = Validator::make(
-            ['id' => $contentOne['id']],
+            ['id' => $contentOne->getId()],
             ['id' => $rule]
         );
 
@@ -110,7 +112,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
          * @var $validator Validator
          */
         $validatorAgain = Validator::make(
-            ['id' => $contentOne['id']],
+            ['id' => $contentOne->getId()],
             ['id' => $ruleAgain]
         );
 
@@ -129,7 +131,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         $slug = $this->faker->word;
         $type = $this->faker->word;
 
-        $content = $this->createContent($slug, $type);
+        $content = $this->createContent($type, $slug);
 
         $connectionName = RailcontentTestCase::getConnectionType();
 
@@ -156,7 +158,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
          * @var $validator Validator
          */
         $validator = Validator::make(
-            ['id' => $content['id']],
+            ['id' => $content->getId()],
             ['id' => $rule]
         );
 
@@ -176,7 +178,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         $typeForFailOne = $this->faker->word;
         $typeForFailTwo = $this->faker->word;
 
-        $content = $this->createContent('testslug', $type);
+        $content = $this->createContent($type, 'testslug');
 
         $connectionName = RailcontentTestCase::getConnectionType();
 
@@ -203,7 +205,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
          * @var $validator Validator
          */
         $validator = Validator::make(
-            ['id' => $content['id']],
+            ['id' => $content->getId()],
             ['id' => $rule]
         );
 
@@ -222,7 +224,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         $slug = $this->faker->word;
         $type = $this->faker->word;
 
-        $content = $this->createContent($slug, $type);
+        $content = $this->createContent($type, $slug);
 
         $this->createContent($type, $this->faker->word);
         $this->createContent($type, $this->faker->word);
@@ -288,7 +290,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
          * @var $validator Validator
          */
         $validator = Validator::make(
-            ['id' => $content['id']],
+            ['id' => $content->getId()],
             ['id' => $rule]
         );
 
@@ -321,7 +323,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         $slug = $this->faker->word;
         $type = $this->faker->word;
 
-        $content = $this->createContent($slug, $type);
+        $content = $this->createContent($type, $slug);
 
         $this->createContent($type, $this->faker->word);
         $this->createContent($type, $this->faker->word);
@@ -403,7 +405,7 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
          * @var $validator Validator
          */
         $validator = Validator::make(
-            ['id' => $content['id']],
+            ['id' => $content->getId()],
             ['id' => $rule]
         );
 

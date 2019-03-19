@@ -356,7 +356,9 @@ class ContentStressTest extends RailcontentTestCase
         $parent = $this->contentRepository->create(
             [
                 'slug' => $this->faker->word,
-                'type' => $this->faker->randomElement(ConfigService::$contentHierarchyDecoratorAllowedTypes),
+                'type' => $this->faker->randomElement(config(
+                    'railcontent.content_hierarchy_decorator_allowed_types' . ''
+                )),
                 'status' => 'published',
                 'brand' => ConfigService::$brand,
                 'language' => $this->faker->languageCode,
@@ -368,7 +370,9 @@ class ContentStressTest extends RailcontentTestCase
         $parent2 = $this->contentRepository->create(
             [
                 'slug' => $this->faker->word,
-                'type' => $this->faker->randomElement(ConfigService::$contentHierarchyDecoratorAllowedTypes),
+                'type' => $this->faker->randomElement(config(
+                    'railcontent.content_hierarchy_decorator_allowed_types' . ''
+                )),
                 'status' => 'published',
                 'brand' => ConfigService::$brand,
                 'language' => $this->faker->languageCode,
@@ -380,7 +384,9 @@ class ContentStressTest extends RailcontentTestCase
         $parent3 = $this->contentRepository->create(
             [
                 'slug' => $this->faker->word,
-                'type' => $this->faker->randomElement(ConfigService::$contentHierarchyDecoratorAllowedTypes),
+                'type' => $this->faker->randomElement(config(
+                    'railcontent.content_hierarchy_decorator_allowed_types' . ''
+                )),
                 'status' => 'published',
                 'brand' => ConfigService::$brand,
                 'language' => $this->faker->languageCode,

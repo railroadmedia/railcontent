@@ -7,7 +7,6 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\UserContentRequest;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Services\UserContentProgressService;
-use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentProgressJsonController extends Controller
 {
