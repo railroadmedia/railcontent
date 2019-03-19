@@ -3,21 +3,17 @@
 namespace Railroad\Railcontent\Services;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query\ResultSetMapping;
-use Doctrine\ORM\QueryBuilder;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentLikes;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\CommentUnLiked;
-use Railroad\Railcontent\Repositories\CommentLikeRepository;
-use Railroad\Railcontent\Repositories\CommentRepository;
 
 class CommentLikeService
 {
     /**
-     * @var CommentLikeRepository
+     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
      */
     private $commentLikeRepository;
 
@@ -27,7 +23,7 @@ class CommentLikeService
     private $entityManager;
 
     /**
-     * @var CommentRepository
+     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
      */
     private $commentRepository;
 
@@ -112,7 +108,9 @@ class CommentLikeService
                 ) < $amountOfUserIdsToPull) {
 
                 $commentLikes[$result->getComment()
-                    ->getId()][] = $result->getUser()->getId();
+                    ->getId()][] =
+                    $result->getUser()
+                        ->getId();
             }
         }
 
@@ -190,18 +188,20 @@ class CommentLikeService
 
     public function isLikedByUserId($commentAndReplyIds, $userId)
     {
-        $qb = $this->commentLikeRepository->createQueryBuilder('cl')
-        ->join('cl.comment','c');
-        $qb ->select('cl.user as user, c.id as commentId')
+        $qb =
+            $this->commentLikeRepository->createQueryBuilder('cl')
+                ->join('cl.comment', 'c');
+        $qb->select('cl.user as user, c.id as commentId')
             ->where('cl.user = :userId')
             ->andWhere('cl.comment IN (:commentIds)')
             ->setParameter('userId', $userId)
             ->setParameter('commentIds', $commentAndReplyIds);
 
-        $results = $qb->getQuery()
-            ->getResult();
+        $results =
+            $qb->getQuery()
+                ->getResult();
 
-        if(!empty($results)) {
+        if (!empty($results)) {
             $results = array_combine(array_column($results, 'commentId'), array_column($results, 'user'));
         }
         return $results;

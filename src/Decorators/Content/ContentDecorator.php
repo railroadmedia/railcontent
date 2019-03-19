@@ -15,9 +15,9 @@ class ContentDecorator implements DecoratorInterface
     private $contentRepository;
 
     /**
-     * CommentLikesDecorator constructor.
+     * ContentDecorator constructor.
      *
-     * @param CommentLikeRepository $commentLikeRepository
+     * @param ContentRepository $contentRepository
      */
     public function __construct(ContentRepository $contentRepository)
     {

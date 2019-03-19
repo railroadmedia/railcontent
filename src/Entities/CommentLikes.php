@@ -2,14 +2,12 @@
 
 namespace Railroad\Railcontent\Entities;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Doctrine\Common\Collections\Collection;
 use Railroad\Railcontent\Contracts\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\CommentLikeRepository")
+ * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_comment_likes")
  *

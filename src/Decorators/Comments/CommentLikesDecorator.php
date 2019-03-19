@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Decorators\Comments;
 
-use Railroad\Railcontent\Repositories\CommentLikeRepository;
 use Railroad\Railcontent\Services\CommentLikeService;
 use Railroad\Resora\Decorators\DecoratorInterface;
 
@@ -16,7 +15,7 @@ class CommentLikesDecorator implements DecoratorInterface
     /**
      * CommentLikesDecorator constructor.
      *
-     * @param CommentLikeRepository $commentLikeRepository
+     * @param CommentLikeService $commentLikeService
      */
     public function __construct(CommentLikeService $commentLikeService)
     {
