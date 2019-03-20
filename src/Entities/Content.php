@@ -120,11 +120,6 @@ class Content
      */
     private $completed = false;
 
-//    /**
-//     * @var ArrayCollection
-//     */
-//    private $permissions;
-
     /**
      * @var int
      */
@@ -149,12 +144,9 @@ class Content
         $this->tag = new ArrayCollection();
         $this->key = new ArrayCollection();
         $this->keyPitchType = new ArrayCollection();
-        $this->sbtBpm = new ArrayCollection();
-        $this->sbtExerciseNumber = new ArrayCollection();
         $this->playlist = new ArrayCollection();
         $this->exercise = new ArrayCollection();
         $this->userProgress = new ArrayCollection();
-        //$this->permissions = new ArrayCollection();
     }
 
     /**

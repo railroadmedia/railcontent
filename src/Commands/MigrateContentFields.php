@@ -111,7 +111,7 @@ class MigrateContentFields extends Command
 
         $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
             ->select('id', 'content_id', 'key', 'value', 'position')
-            ->where('key', 'sbt_bpm')
+            ->whereIn('key', ['sbt_bpm','sbt_exercise_number'])
             ->orderBy('content_id', 'desc')
             ->chunk(
                 500,
@@ -120,33 +120,13 @@ class MigrateContentFields extends Command
                     foreach ($rows as $row) {
                         $data[] = [
                             'content_id' => $row->content_id,
-                            'sbt_bpm' => $row->value,
+                            'key' => $row->key,
+                            'value' => $row->value,
                             'position' => $row->position,
                         ];
                         $migratedFields++;
                     }
-                    $dbConnection->table(config('railcontent.table_prefix') . 'content_sbt_bpm')
-                        ->insert($data);
-                }
-            );
-
-        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
-            ->select('id', 'content_id', 'key', 'value', 'position')
-            ->where('key', 'sbt_exercise_number')
-            ->orderBy('content_id', 'desc')
-            ->chunk(
-                500,
-                function (Collection $rows) use (&$migratedFields, $dbConnection) {
-                    $data = [];
-                    foreach ($rows as $row) {
-                        $data[] = [
-                            'content_id' => $row->content_id,
-                            'sbt_exercise_number' => $row->value,
-                            'position' => $row->position,
-                        ];
-                        $migratedFields++;
-                    }
-                    $dbConnection->table(config('railcontent.table_prefix') . 'content_sbt_exercise_number')
+                    $dbConnection->table(config('railcontent.table_prefix') . 'content_data')
                         ->insert($data);
                 }
             );

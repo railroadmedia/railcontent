@@ -5,7 +5,6 @@ namespace Railroad\Railcontent\Tests\Feature;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class MultipleColumnExistsRuleTest extends RailcontentTestCase
@@ -14,10 +13,6 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
      * @var DatabaseManager
      */
     protected $databaseManager;
-    /**
-     * @var ContentFactory
-     */
-    protected $contentFactory;
 
     /**
      * MultipleColumnExistsRuleTest constructor.
@@ -27,7 +22,6 @@ class MultipleColumnExistsRuleTest extends RailcontentTestCase
         parent::setUp();
 
         $this->databaseManager = app()->make(DatabaseManager::class);
-        $this->contentFactory = app()->make(ContentFactory::class);
     }
 
     private function createContent($type, $slug){

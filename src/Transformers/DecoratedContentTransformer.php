@@ -77,14 +77,6 @@ class DecoratedContentTransformer extends TransformerAbstract
             $defaultIncludes[] = 'keyPitchType';
         }
 
-        if (count($content->getSbtBpm()) > 0) {
-            $defaultIncludes[] = 'sbtBpm';
-        }
-
-        if (count($content->getSbtExerciseNumber()) > 0) {
-            $defaultIncludes[] = 'sbtExerciseNumber';
-        }
-
         if (count($content->getPlaylist()) > 0) {
             $defaultIncludes[] = 'playlist';
         }
@@ -181,19 +173,6 @@ class DecoratedContentTransformer extends TransformerAbstract
      * @param Content $content
      * @return \League\Fractal\Resource\Collection
      */
-    public function includeSbtBpm(Content $content)
-    {
-        return $this->collection(
-            $content->getSbtBpm(),
-            new ContentSbtBpmTransformer(),
-            'sbtBpm'
-        );
-    }
-
-    /**
-     * @param Content $content
-     * @return \League\Fractal\Resource\Collection
-     */
     public function includeExercise(Content $content)
     {
         return $this->collection(
@@ -213,19 +192,6 @@ class DecoratedContentTransformer extends TransformerAbstract
             $content->getPlaylist(),
             new ContentPlaylistTransformer(),
             'playlist'
-        );
-    }
-
-    /**
-     * @param Content $content
-     * @return \League\Fractal\Resource\Collection
-     */
-    public function includeSbtExerciseNumber(Content $content)
-    {
-        return $this->collection(
-            $content->getSbtExerciseNumber(),
-            new ContentSbtExerciseNumberTransformer(),
-            'sbtExerciseNumber'
         );
     }
 

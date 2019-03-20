@@ -278,16 +278,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     'value' => $this->faker->word,
                 ],
                 [
-                    'key' => 'sbtBpm',
-                    'value' => $this->faker->numberBetween(1, 250),
-                ],
-                [
                     'key' => 'exercise',
                     'value' => $exercise[0]->getId(),
-                ],
-                [
-                    'key' => 'sbtExerciseNumber',
-                    'value' => $this->faker->word(),
                 ],
                 [
                     'key' => 'playlist',
@@ -324,9 +316,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertArrayHasKey('tag', $response->decodeResponseJson('data')['relationships']);
         $this->assertArrayHasKey('key', $response->decodeResponseJson('data')['relationships']);
         $this->assertArrayHasKey('keyPitchType', $response->decodeResponseJson('data')['relationships']);
-        $this->assertArrayHasKey('sbtBpm', $response->decodeResponseJson('data')['relationships']);
         $this->assertArrayHasKey('exercise', $response->decodeResponseJson('data')['relationships']);
-        $this->assertArrayHasKey('sbtExerciseNumber', $response->decodeResponseJson('data')['relationships']);
         $this->assertArrayHasKey('parent', $response->decodeResponseJson('data')['relationships']);
     }
 

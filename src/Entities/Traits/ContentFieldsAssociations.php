@@ -8,8 +8,6 @@ use Railroad\Railcontent\Entities\ContentInstructor;
 use Railroad\Railcontent\Entities\ContentKey;
 use Railroad\Railcontent\Entities\ContentKeyPitchType;
 use Railroad\Railcontent\Entities\ContentPlaylist;
-use Railroad\Railcontent\Entities\ContentSbtBpm;
-use Railroad\Railcontent\Entities\ContentSbtExerciseNumber;
 use Railroad\Railcontent\Entities\ContentTag;
 use Railroad\Railcontent\Entities\ContentTopic;
 
@@ -55,18 +53,6 @@ trait ContentFieldsAssociations
     private $keyPitchType;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentSbtBpm", mappedBy="content",
-     *     cascade={"persist","remove"})
-     */
-    private $sbtBpm;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentSbtExerciseNumber", mappedBy="content",
-     *     cascade={"persist","remove"})
-     */
-    private $sbtExerciseNumber;
-
-    /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentPlaylist", mappedBy="content",
      *     cascade={"persist","remove"})
      */
@@ -82,8 +68,6 @@ trait ContentFieldsAssociations
         $this->tag = new ArrayCollection();
         $this->key = new ArrayCollection();
         $this->keyPitchType = new ArrayCollection();
-        $this->sbtBpm = new ArrayCollection();
-        $this->sbtExerciseNumber = new ArrayCollection();
         $this->playlist = new ArrayCollection();
         $this->exercise = new ArrayCollection();
         $this->userProgress = new ArrayCollection();
@@ -417,120 +401,6 @@ trait ContentFieldsAssociations
     public function getKeyPitchType()
     {
         return $this->keyPitchType;
-    }
-
-    /**
-     * @param ContentSbtBpm $contentSbtBpm
-     * @return $this|void
-     */
-    public function addSbtBpm(ContentSbtBpm $contentSbtBpm)
-    {
-        if ($this->sbtBpm->contains($contentSbtBpm)) {
-            // Do nothing if its already part of our collection
-            return;
-        }
-
-        $predictate = function ($element) use ($contentSbtBpm) {
-            return $element->getSbtBpm() === $contentSbtBpm->getSbtBpm();
-        };
-
-        $exist = $this->sbtBpm->filter($predictate);
-
-        if ($exist->isEmpty()) {
-            $this->sbtBpm->add($contentSbtBpm);
-        } else {
-            $key = $exist->first();
-            if ($key->getPosition() == $contentSbtBpm->getPosition()) {
-                return $this;
-            }
-
-            $key = $exist->key();
-            if ($contentSbtBpm->getPosition()) {
-                $this->getKey()
-                    ->get($key)
-                    ->setPosition($contentSbtBpm->getPosition());
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param ContentSbtBpm $contentSbtBpm
-     */
-    public function removeSbtBpm(ContentSbtBpm $contentSbtBpm)
-    {
-        // If does not exist in the collection, then we don't need to do anything
-        if (!$this->sbtBpm->contains($contentSbtBpm)) {
-            return;
-        }
-
-        $this->sbtBpm->removeElement($contentSbtBpm);
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getSbtBpm()
-    {
-        return $this->sbtBpm;
-    }
-
-    /**
-     * @param ContentSbtExerciseNumber $contentSbtExerciseNumber
-     * @return $this|void
-     */
-    public function addSbtExerciseNumber(ContentSbtExerciseNumber $contentSbtExerciseNumber)
-    {
-        if ($this->sbtExerciseNumber->contains($contentSbtExerciseNumber)) {
-            // Do nothing if its already part of our collection
-            return;
-        }
-
-        $predictate = function ($element) use ($contentSbtExerciseNumber) {
-            return $element->getSbtExerciseNumber() === $contentSbtExerciseNumber->getSbtExerciseNumber();
-        };
-
-        $exist = $this->sbtExerciseNumber->filter($predictate);
-
-        if ($exist->isEmpty()) {
-            $this->sbtExerciseNumber->add($contentSbtExerciseNumber);
-        } else {
-            $sbtExerciseNumber = $exist->first();
-            if ($sbtExerciseNumber->getPosition() == $contentSbtExerciseNumber->getPosition()) {
-                return $this;
-            }
-
-            $key = $exist->key();
-            if ($contentSbtExerciseNumber->getPosition()) {
-                $this->getKey()
-                    ->get($key)
-                    ->setPosition($contentSbtExerciseNumber->getPosition());
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param ContentSbtExerciseNumber $contentSbtExerciseNumber
-     */
-    public function removeSbtExerciseNumber(ContentSbtExerciseNumber $contentSbtExerciseNumber)
-    {
-        // If does not exist in the collection, then we don't need to do anything
-        if (!$this->sbtExerciseNumber->contains($contentSbtExerciseNumber)) {
-            return;
-        }
-
-        $this->sbtExerciseNumber->removeElement($contentSbtExerciseNumber);
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getSbtExerciseNumber()
-    {
-        return $this->sbtExerciseNumber;
     }
 
     /**

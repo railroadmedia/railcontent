@@ -54,7 +54,6 @@ return [
         'instructor',
         'topic',
         'difficulty',
-        'sbtBpm',
         'style',
         'artist',
     ],
