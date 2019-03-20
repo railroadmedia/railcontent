@@ -13,7 +13,6 @@ return [
 
     // database
     'database_connection_name' => 'mysql',
-    'connection_mask_prefix' => 'railcontent_',
     'data_mode' => 'host',
     'table_prefix' => 'railcontent_',
 
