@@ -2,8 +2,8 @@
 
 namespace Railroad\Railcontent\Decorators\Comments;
 
+use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Services\CommentLikeService;
-use Railroad\Resora\Decorators\DecoratorInterface;
 
 class CommentLikesDecorator implements DecoratorInterface
 {

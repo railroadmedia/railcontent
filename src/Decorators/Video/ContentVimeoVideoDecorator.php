@@ -4,8 +4,8 @@ namespace Railroad\Railcontent\Decorators\Video;
 
 use Carbon\Carbon;
 use Illuminate\Cache\Repository;
+use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Services\ContentService;
-use Railroad\Resora\Decorators\DecoratorInterface;
 use Vimeo\Vimeo;
 
 class ContentVimeoVideoDecorator implements DecoratorInterface
@@ -47,7 +47,9 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
 
     public function decorate($contentResults)
     {
+
         if ($contentResults->getVideo()) {
+
             $videoId = $contentResults->getVideo();
             $video = $this->contentService->getById($videoId);
             $vimeoVideoId = $video->getVimeoVideoId();
@@ -65,7 +67,6 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
                 );
 
                 if (!array_key_exists('error', $response['body'])) {
-
                     $expirationDate =
                         Carbon::parse($response['body']['download'][0]['expires'])
                             ->diffInMinutes(
@@ -79,8 +80,6 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
                     );
 
                     if (!empty($response['body']['files'])) {
-                      //  $properties = [];
-
                         foreach ($response['body']['files'] as $fileData) {
                             if (isset($fileData['height'])) {
                                 $properties[] = [

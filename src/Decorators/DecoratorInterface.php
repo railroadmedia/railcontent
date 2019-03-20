@@ -3,13 +3,11 @@
 namespace Railroad\Railcontent\Decorators;
 
 
-use Railroad\Railcontent\Support\Collection;
-
 interface DecoratorInterface
 {
     /**
-     * @param Collection $data
+     * @param $data
      * @return mixed
      */
-    public function decorate(Collection $data);
+    public function decorate($data);
 }

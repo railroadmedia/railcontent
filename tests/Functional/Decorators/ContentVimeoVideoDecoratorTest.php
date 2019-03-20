@@ -33,7 +33,7 @@ class ContentVimeoVideoDecoratorTest extends RailcontentTestCase
             [
                 'brand' => config('railcontent.brand'),
                 'type' => 'vimeo-video',
-                'vimeoVideoId' => '146616887',
+                'vimeoVideoId' => env('VIMEO_TEST_VIDEO_ID'),
                 'video' => null,
                 'status' => 'published',
             ]
@@ -51,9 +51,7 @@ class ContentVimeoVideoDecoratorTest extends RailcontentTestCase
 
         $contentResults = $this->serviceBeingTested->getById($content[0]->getId());
 
-        $this->assertArrayHasKey(270, $contentResults->getProperty('vimeo_video_playback_endpoints'));
-        $this->assertArrayHasKey(360, $contentResults->getProperty('vimeo_video_playback_endpoints'));
-        $this->assertArrayHasKey(720, $contentResults->getProperty('vimeo_video_playback_endpoints'));
+        $this->assertEquals(4, count($contentResults->getProperty('vimeo_video_playback_endpoints')));
     }
 
     protected function getEnvironmentSetUp($app)

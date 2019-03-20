@@ -62,7 +62,6 @@ class RailcontentServiceProvider extends ServiceProvider
             [
                 CreateSearchIndexes::class,
                 CreateVimeoVideoContentRecords::class,
-                RepairMissingDurations::class,
                 CreateYoutubeVideoContentRecords::class,
                 ExpireCache::class,
                 MigrateContentFields::class,

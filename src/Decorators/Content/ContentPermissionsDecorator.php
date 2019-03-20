@@ -2,8 +2,9 @@
 
 namespace Railroad\Railcontent\Decorators\Content;
 
+use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Services\ContentPermissionService;
-use Railroad\Resora\Decorators\DecoratorInterface;
+
 
 class ContentPermissionsDecorator implements DecoratorInterface
 {
