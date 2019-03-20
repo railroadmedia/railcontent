@@ -18,15 +18,12 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
-use JMS\Serializer\SerializationContext;
-use JMS\Serializer\SerializerBuilder;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Doctrine\Hydrators\FakeDataHydrator;
 use Railroad\Doctrine\Providers\DoctrineServiceProvider;
 use Railroad\Permissions\Providers\PermissionsServiceProvider;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Entities\Comment;
-use Railroad\Railcontent\Entities\CommentAssignment;
 use Railroad\Railcontent\Entities\CommentLikes;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
@@ -188,10 +185,6 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.field_option_list', $defaultConfig['field_option_list']);
         $app['config']->set('railcontent.commentable_content_types', $defaultConfig['commentable_content_types']);
         $app['config']->set('railcontent.validation', $defaultConfig['validation']);
-        $app['config']->set(
-            'railcontent.comment_assignation_owner_ids',
-            $defaultConfig['comment_assignation_owner_ids']
-        );
         $app['config']->set('railcontent.comment_likes_amount_of_users', $defaultConfig['comment_likes_amount_of_users']);
         $app['config']->set('railcontent.searchable_content_types', $defaultConfig['searchable_content_types']);
         $app['config']->set('railcontent.search_index_values', $defaultConfig['search_index_values']);
@@ -911,33 +904,6 @@ class RailcontentTestCase extends BaseTestCase
         $fakePopulator = $this->populator->execute();
 
         return $fakePopulator[CommentLikes::class];
-    }
-
-    public function fakeCommentAssignation($nr = 1, $assignationData = [])
-    {
-        if (empty($assignationData)) {
-            $assignationData = [
-                'comment' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'userId' => rand(),
-            ];
-        }
-
-        $assignationData['user'] =
-            $this->app->make(UserProvider::class)
-                ->getUserById($assignationData['userId'] ?? 1);
-
-        unset ($assignationData['userId']);
-
-        $this->populator->addEntity(
-            CommentAssignment::class,
-            $nr,
-            $assignationData
-
-        );
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[CommentAssignment::class];
     }
 
 }

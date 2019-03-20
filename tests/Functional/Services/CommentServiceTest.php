@@ -332,6 +332,7 @@ class CommentServiceTest extends RailcontentTestCase
     public function test_soft_delete_comment()
     {
         $userId = $this->createAndLogInNewUser();
+
         $content = $this->fakeContent(
             1,
             [
@@ -441,6 +442,8 @@ class CommentServiceTest extends RailcontentTestCase
                 'id' => $commentId,
             ]
         );
+
+        CommentRepository::$softDelete = true;
     }
 
     public function test_delete_comment_with_replies()
@@ -448,8 +451,6 @@ class CommentServiceTest extends RailcontentTestCase
         CommentRepository::$softDelete = false;
 
         $userId = $this->createAndLogInNewUser();
-
-        CommentRepository::$softDelete = false;
 
         $content = $this->fakeContent(
             1,
@@ -495,5 +496,7 @@ class CommentServiceTest extends RailcontentTestCase
                 'id' => $replyId,
             ]
         );
+
+        CommentRepository::$softDelete = true;
     }
 }

@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Entities\Comment;
-use Railroad\Railcontent\Entities\CommentAssignment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -363,6 +362,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 'id' => $commentId,
             ]
         );
+
+        CommentRepository::$softDelete = true;
     }
 
     public function test_reply_to_a_comment()
@@ -536,51 +537,6 @@ class CommentJsonControllerTest extends RailcontentTestCase
         foreach ($data as $res) {
             $this->assertEquals($userId, $res['attributes']['user']);
         }
-    }
-
-    public function test_pull_comments_assigned_to_user()
-    {
-        $page = 1;
-        $limit = 3;
-        $totalNumber = $this->faker->numberBetween(3, 10);
-        $userId = 1;
-        $comments = $this->fakeComment(
-            $totalNumber,
-            [
-                'userId' => rand(2, 10),
-                'parent' => null,
-                'deletedAt' => null,
-            ]
-        );
-
-        $this->populator->addEntity(
-            CommentAssignment::class,
-            1,
-            [
-                'user' => $this->app->make(UserProvider::class)
-                    ->getUserById($userId),
-                'comment' => $comments[0],
-            ]
-        );
-
-        $fakeData = $this->populator->execute();
-
-        $response = $this->call(
-            'GET',
-            'railcontent/comment',
-            [
-                'page' => $page,
-                'limit' => $limit,
-                'assigned_to_user_id' => $userId,
-            ]
-        );
-
-        $this->assertEquals(200, $response->getStatusCode());
-
-        $this->assertEquals(
-            1,
-            $response->decodeResponseJson('meta')['pagination']['total']
-        );
     }
 
     public function test_pull_comments_ordered_by_like_count()

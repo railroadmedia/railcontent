@@ -209,6 +209,8 @@ class CommentService
         //trigger an event that delete the corresponding comment assignments if the deletion it's not soft
         event(new CommentDeleted($id));
 
+        $this->commentRepository->deleteCommentReplies($id);
+
         $this->entityManager->getCache()
             ->evictEntity(
                 Content::class,
@@ -326,14 +328,6 @@ class CommentService
             $qb->andWhere($alias . '.content = :availableContentId')
                 ->setParameter('availableContentId', CommentRepository::$availableContentId);
         }
-        if (CommentRepository::$assignedToUserId) {
-            $qb->join($alias . '.assignedToUser', $aliasAssignment)
-                ->andWhere(
-                    $qb->expr()
-                        ->in($aliasAssignment . '.userId', ':availableUserId')
-                )
-                ->setParameter('availableUserId', CommentRepository::$assignedToUserId);
-        }
 
         return $qb->getQuery()
             ->getSingleScalarResult();
@@ -433,14 +427,7 @@ class CommentService
             $qb->andWhere($alias . '.content = :availableContentId')
                 ->setParameter('availableContentId', CommentRepository::$availableContentId);
         }
-        if (CommentRepository::$assignedToUserId) {
-            $qb->join($alias . '.assignedToUser', $aliasAssignment)
-                ->andWhere(
-                    $qb->expr()
-                        ->in($aliasAssignment . '.user', ':availableUserId')
-                )
-                ->setParameter('availableUserId', CommentRepository::$assignedToUserId);
-        }
+
         $qb->addSelect([$alias])
             ->setMaxResults($limit)
             ->setFirstResult($first)
@@ -487,14 +474,6 @@ class CommentService
         if (CommentRepository::$availableContentId) {
             $qb->andWhere($alias . '.content = :availableContentId')
                 ->setParameter('availableContentId', CommentRepository::$availableContentId);
-        }
-        if (CommentRepository::$assignedToUserId) {
-            $qb->join($alias . '.assignedToUser', $aliasAssignment)
-                ->andWhere(
-                    $qb->expr()
-                        ->in($aliasAssignment . '.user', ':availableUserId')
-                )
-                ->setParameter('availableUserId', CommentRepository::$assignedToUserId);
         }
 
         return $qb->getQuery()

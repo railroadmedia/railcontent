@@ -17,7 +17,7 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Illuminate\Support\Facades\Event;
 
-class ContentVersionEventsTest extends RailcontentTestCase
+class ContentEventsTest extends RailcontentTestCase
 {
     /**
      * @var ContentFactory
@@ -39,7 +39,7 @@ class ContentVersionEventsTest extends RailcontentTestCase
         parent::setUp();
     }
 
-    public function test_version_content_on_content_creation()
+    public function test_event_on_content_creation()
     {
         Event::fake();
 
@@ -68,7 +68,7 @@ class ContentVersionEventsTest extends RailcontentTestCase
         );
     }
 
-    public function test_version_content_on_content_update()
+    public function test_event_on_content_update()
     {
         Event::fake();
 
@@ -95,7 +95,7 @@ class ContentVersionEventsTest extends RailcontentTestCase
         );
     }
 
-    public function test_version_content_on_link_content_datum()
+    public function test_event_on_link_content_datum()
     {
         Event::fake();
         $content = $this->fakeContent();
@@ -131,7 +131,7 @@ class ContentVersionEventsTest extends RailcontentTestCase
         );
     }
 
-    public function test_version_content_on_update_content_datum()
+    public function test_event_on_update_content_datum()
     {
         Event::fake();
 
@@ -167,7 +167,7 @@ class ContentVersionEventsTest extends RailcontentTestCase
         );
     }
 
-    public function test_version_content_on_delete_content_datum()
+    public function test_event_on_delete_content_datum()
     {
         Event::fake();
 

@@ -22,10 +22,8 @@ use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
-use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\ContentEventListener;
 use Railroad\Railcontent\Listeners\RailcontentEventSubscriber;
-use Railroad\Railcontent\Listeners\UnassignCommentEventListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
 use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
 
@@ -41,8 +39,6 @@ class RailcontentServiceProvider extends ServiceProvider
         $this->listen = [
             ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
             ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
-            CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
-            CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
             UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
         ];
 

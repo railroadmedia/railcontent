@@ -226,17 +226,6 @@ Route::group(
                     Railroad\Railcontent\Controllers\RemoteStorageJsonController::class . '@put'
                 )->name('remote.put');
 
-                //comments
-                Route::get(
-                    '/assigned-comments',
-                    \Railroad\Railcontent\Controllers\CommentAssignationJsonController::class . '@index'
-                )->name('comment.assigned-to-me');
-
-                Route::delete(
-                    '/assigned-comment/{commentId}',
-                    \Railroad\Railcontent\Controllers\CommentAssignationJsonController::class . '@delete'
-                )->name('comment.assignation-delete');
-
                 //user permission
                 Route::put(
                     '/user-permission',

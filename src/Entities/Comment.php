@@ -64,11 +64,6 @@ class Comment
     private $children;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\CommentAssignment", mappedBy="comment", cascade={"remove"})
-     */
-    private $assignedToUser;
-
-    /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\CommentLikes", mappedBy="comment")
      */
     private $likes;
@@ -92,7 +87,6 @@ class Comment
     public function __construct()
     {
         $this->children = new ArrayCollection();
-        $this->assignedToUser = new ArrayCollection();
         $this->likes = new ArrayCollection();
     }
 
@@ -268,25 +262,6 @@ class Comment
             }
         }
 
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection
-     */
-    public function getAssignedToUser()
-    {
-        return $this->assignedToUser;
-    }
-
-    /**
-     * @param Comment $comment
-     * @return Comment
-     */
-    public function addAssignedToUser(
-        $assignedToUser
-    ) {
-        $this->assignedToUser[] = $assignedToUser;
         return $this;
     }
 

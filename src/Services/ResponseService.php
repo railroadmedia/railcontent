@@ -3,17 +3,14 @@
 namespace Railroad\Railcontent\Services;
 
 use Doctrine\ORM\QueryBuilder;
-use League\Fractal\Serializer\ArraySerializer;
 use League\Fractal\Serializer\JsonApiSerializer;
 use Railroad\Doctrine\Services\FractalResponseService;
 use Railroad\Railcontent\Transformers\BooleanTransformer;
-use Railroad\Railcontent\Transformers\CommentAssignmentTransformer;
 use Railroad\Railcontent\Transformers\CommentLikeTransformer;
 use Railroad\Railcontent\Transformers\CommentTransformer;
 use Railroad\Railcontent\Transformers\ContentDataTransformer;
 use Railroad\Railcontent\Transformers\ContentHierarchyTransformer;
 use Railroad\Railcontent\Transformers\ContentPermissionTransformer;
-use Railroad\Railcontent\Transformers\ContentTransformer;
 use Railroad\Railcontent\Transformers\DecoratedContentTransformer;
 use Railroad\Railcontent\Transformers\PermissionTransformer;
 use Railroad\Railcontent\Transformers\UserPermissionTransformer;
@@ -128,18 +125,6 @@ class ResponseService extends FractalResponseService
             $entityOrEntities,
             'commentlike',
             new CommentLikeTransformer(),
-            new JsonApiSerializer(),
-            $queryBuilder
-        )
-            ->parseIncludes($includes);
-    }
-
-    public static function commentAssigment($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
-    {
-        return self::create(
-            $entityOrEntities,
-            'commentAssignment',
-            new CommentAssignmentTransformer(),
             new JsonApiSerializer(),
             $queryBuilder
         )

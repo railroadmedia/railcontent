@@ -47,12 +47,6 @@ class CommentRepository extends EntityRepository
      */
     public static $pullSoftDeletedComments = false;
 
-    /**
-     * If not false only pull comments that have been assigned to this user id.
-     *
-     * @var integer|bool
-     */
-    public static $assignedToUserId = false;
 
     protected $page;
     protected $limit;
