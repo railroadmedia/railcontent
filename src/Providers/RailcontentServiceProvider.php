@@ -27,7 +27,6 @@ use Railroad\Railcontent\Listeners\ContentEventListener;
 use Railroad\Railcontent\Listeners\RailcontentEventSubscriber;
 use Railroad\Railcontent\Listeners\UnassignCommentEventListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
-use Railroad\Railcontent\Listeners\VersionContentEventListener;
 use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
 
 class RailcontentServiceProvider extends ServiceProvider
@@ -40,13 +39,8 @@ class RailcontentServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->listen = [
-            ContentCreated::class => [VersionContentEventListener::class . '@handle'],
-            ContentUpdated::class => [VersionContentEventListener::class . '@handle'],
             ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
             ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
-            ContentDatumCreated::class => [VersionContentEventListener::class . '@handle'],
-            ContentDatumUpdated::class => [VersionContentEventListener::class . '@handle'],
-            ContentDatumDeleted::class => [VersionContentEventListener::class . '@handle'],
             CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
             CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
             UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
