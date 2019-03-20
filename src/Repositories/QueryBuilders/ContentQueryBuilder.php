@@ -155,7 +155,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                         $this->expr()
                             ->literal($includedUserState['state']) .
                         ' AND pu.user = ' .
-                                $includedUserState['user']
+                        $includedUserState['user']
                     );
 
             $orX->add($condition);
@@ -182,7 +182,9 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                     ->getClassMetadata(Content::class)
                     ->getFieldNames()
             )) {
-                $this->andWhere(config('railcontent.table_prefix') . 'content' . '.' . $requiredFieldData['name'] . ' IN (:value)')
+                $this->andWhere(
+                    config('railcontent.table_prefix') . 'content' . '.' . $requiredFieldData['name'] . ' IN (:value)'
+                )
                     ->setParameter('value', $requiredFieldData['value']);
             } else {
                 if (in_array(
@@ -192,7 +194,8 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                         ->getAssociationNames()
                 )) {
                     $this->join(
-                        config('railcontent.table_prefix') . 'content' .
+                        config('railcontent.table_prefix') .
+                        'content' .
                         '.' .
                         $this->getEntityManager()
                             ->getClassMetadata(Content::class)
@@ -218,40 +221,52 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
             return $this;
         }
 
-        $tableName = '_icf';
+        $conditions = [];
 
-        $this->join(
-            config('railcontent.table_prefix') . 'content_fields' . ' as ' . $tableName,
-            function (JoinClause $joinClause) use ($includedFields, $tableName) {
-                $joinClause->on(
-                    $tableName . '.content_id',
-                    '=',
-                    config('railcontent.table_prefix') . 'content' . '.id'
-                );
-
-                $joinClause->on(
-                    function (JoinClause $joinClause) use ($tableName, $includedFields) {
-                        foreach ($includedFields as $index => $includedFieldData) {
-                            $joinClause->orOn(
-                                function (JoinClause $joinClause) use ($tableName, $includedFieldData) {
-                                    $joinClause->on(
-                                        $tableName . '.key',
-                                        '=',
-                                        $joinClause->raw("'" . $includedFieldData['name'] . "'")
-                                    )
-                                        ->on(
-                                            $tableName . '.value',
-                                            $includedFieldData['operator'],
-                                            $joinClause->raw("'" . $includedFieldData['value'] . "'")
-                                        );
-                                }
-                            );
-                        }
-                    }
-
-                );
+        foreach ($includedFields as $index => $requiredFieldData) {
+            if (in_array(
+                $requiredFieldData['name'],
+                $this->getEntityManager()
+                    ->getClassMetadata(Content::class)
+                    ->getFieldNames()
+            )) {
+                $conditions[config('railcontent.table_prefix') . 'content' . '.' . $requiredFieldData['name']] =
+                    $requiredFieldData['value'];
+            } else {
+                if (in_array(
+                    $requiredFieldData['name'],
+                    $this->getEntityManager()
+                        ->getClassMetadata(Content::class)
+                        ->getAssociationNames()
+                )) {
+                    $this->join(
+                        config('railcontent.table_prefix') .
+                        'content' .
+                        '.' .
+                        $this->getEntityManager()
+                            ->getClassMetadata(Content::class)
+                            ->getFieldName($requiredFieldData['name']),
+                        'p' . $index
+                    );
+                    $conditions['p' . $index] = $requiredFieldData['value'];
+                }
             }
-        );
+        }
+        if (!empty($conditions)) {
+            $orX =
+                $this->expr()
+                    ->orX();
+            foreach ($conditions as $key => $value) {
+                $condition =
+                    $this->expr()
+                        ->orX(
+                            $key . ' IN (' . $value . ')'
+                        );
+
+                $orX->add($condition);
+            }
+            $this->andWhere($orX);
+        }
 
         return $this;
     }
@@ -308,7 +323,9 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
             )
             ->setParameter(
                 'user',
-                app()->make(UserProviderInterface::class)->getUserById(auth()->id()??0)
+                app()
+                    ->make(UserProviderInterface::class)
+                    ->getUserById(auth()->id() ?? 0)
             );
 
         return $this;
@@ -354,7 +371,8 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
             )) {
                 $this->addSelect($requiredFieldData);
                 $this->leftJoin(
-                    config('railcontent.table_prefix') . 'content' .
+                    config('railcontent.table_prefix') .
+                    'content' .
                     '.' .
                     $this->getEntityManager()
                         ->getClassMetadata(Content::class)

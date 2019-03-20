@@ -831,7 +831,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $instructor = $this->fakeContent(
-            1,
+            2,
             [
                 'type' => 'instructor',
                 'status' => 'published',
@@ -887,9 +887,10 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'statues' => $statues,
                 'sort' => 'id',
                 'included_types' => $types,
-                'required_fields' => [
+                'included_fields' => [
                     'difficulty,1',
                     'instructor,' . $instructor[0]->getId(),
+                    'instructor,' . $instructor[1]->getId(),
                 ],
             ]
         );
