@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Commands;
 
-use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 
@@ -88,6 +87,7 @@ class CreateVimeoVideoContentRecords extends Command
 
             // Get and parse videos
             $response = $this->getVideos();
+
             $videos = $response['body']['data'];
 
             if (!empty($videos)) {
@@ -99,7 +99,9 @@ class CreateVimeoVideoContentRecords extends Command
                     // validate
                     if (!is_numeric($id)) {
                         $this->info(
-                            'URI "' . $uri . '" failed to convert to a numeric video id. (used: "$id = ' .
+                            'URI "' .
+                            $uri .
+                            '" failed to convert to a numeric video id. (used: "$id = ' .
                             'str_replace(\'/videos/\', \'\', $uri);"'
                         );
                     }
@@ -112,34 +114,25 @@ class CreateVimeoVideoContentRecords extends Command
                         ) == 0;
 
                     if ($noRecordOfVideoInCMS && $duration !== 0 && is_numeric($duration)) {
-                        // store and add to array for mass insert
+                        // store the content
                         $content = $this->contentService->create(
-                            'vimeo-video-' . $id,
-                            'vimeo-video',
-                            ContentService::STATUS_PUBLISHED,
-                            null,
-                            null,
-                            null,
-                            Carbon::now()->toDateTimeString()
+                            [
+                                'data' => [
+                                    'attributes' => [
+                                        'slug' => 'vimeo-video-' . $id,
+                                        'type' => 'vimeo-video',
+                                        'status' => ContentService::STATUS_PUBLISHED,
+                                        'vimeo_video_id' => $id,
+                                        'length_in_seconds' => $duration,
+                                    ],
+                                ],
+                            ]
                         );
+
                         if (empty($content)) {
                             $contentCreationFailed[] = $id;
                         } else {
                             $contentCreatedCount++;
-                            $contentFieldsInsertData[] = [
-                                'content_id' => $content['id'],
-                                'key' => 'vimeo_video_id',
-                                'value' => $id,
-                                'type' => 'string',
-                                'position' => 1,
-                            ];
-                            $contentFieldsInsertData[] = [
-                                'content_id' => $content['id'],
-                                'key' => 'length_in_seconds',
-                                'value' => $duration,
-                                'type' => 'integer',
-                                'position' => 1,
-                            ];
                         }
                     } else {
                         if ($duration === 0) {
@@ -184,15 +177,9 @@ class CreateVimeoVideoContentRecords extends Command
                 $this->totalNumberOfPagesToProcess = ceil($this->totalNumberToProcess / $this->perPage);
             }
 
-            // content-field data insert and assess DB-writing success
-            $contentFieldsWriteSuccess = $this->databaseManager->connection(
-                config('railcontent.database_connection_name')
-            )
-                ->table(config('railcontent.table_prefix') . 'content_fields')->insert($contentFieldsInsertData);
-            if ($contentFieldsWriteSuccess && empty($contentCreationFailed)) {
+            if (empty($contentCreationFailed)) {
                 $this->info(
-                    'Processed ' . count($videos) . ' videos. ' .
-                    (count($contentFieldsInsertData) + $contentCreatedCount) . ' DB rows created.'
+                    'Processed ' . count($videos) . ' videos. ' . ($contentCreatedCount) . ' DB rows created.'
                 );
             } else {
                 if (!empty($contentCreationFailed)) {
@@ -200,9 +187,6 @@ class CreateVimeoVideoContentRecords extends Command
                         'There was|were ' . count($contentCreationFailed) . ' content creation failure(s):'
                     );
                     $this->info(print_r($contentCreationFailed, true));
-                }
-                if (!$contentFieldsWriteSuccess) {
-                    $this->info("contentFields write failed");
                 }
             }
         } while ($this->amountProcessed < $this->totalNumberToProcess);
@@ -218,12 +202,9 @@ class CreateVimeoVideoContentRecords extends Command
                 $totalNumberRemainingToProcess = $this->totalNumberToProcess - $this->amountProcessed;
                 $lastPage = $totalNumberRemainingToProcess < $this->perPage;
                 $this->info(
-                    'Requesting page ' .
-                    $this->pageToGet() .
-                    ' of ' .
-                    $this->totalNumberOfPagesToProcess .
-                    '.'
+                    'Requesting page ' . $this->pageToGet() . ' of ' . $this->totalNumberOfPagesToProcess . '.'
                 );
+
                 $response = $this->lib->request( // developer.vimeo.com/api/endpoints/videos#GET/users/{user_id}/videos
                     '/me/videos',
                     [
@@ -234,6 +215,7 @@ class CreateVimeoVideoContentRecords extends Command
                     ],
                     'GET'
                 );
+
                 if ($lastPage) {
                     $response['body']['data'] = array_slice(
                         $response['body']['data'],
@@ -241,6 +223,7 @@ class CreateVimeoVideoContentRecords extends Command
                         $totalNumberRemainingToProcess
                     ); // Note that we're getting the videos by date in descending order.
                 }
+
                 $success = true;
             } catch (VimeoRequestException $e) {
                 $success = false;
