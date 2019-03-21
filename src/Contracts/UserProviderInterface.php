@@ -2,21 +2,20 @@
 
 namespace Railroad\Railcontent\Contracts;
 
-use Railroad\Railcontent\Contracts\UserInterface;
-use Railroad\Doctrine\Contracts\UserEntityInterface;
 use League\Fractal\TransformerAbstract;
+use Railroad\Railcontent\Entities\User;
 
 interface UserProviderInterface
 {
-    public function getUserById(int $id): ?UserEntityInterface;
+    public function getUserById(int $id): User;
 
-    public function getUserId(UserEntityInterface $user): int;
+    public function getUserId(User $user): int;
 
-    public function getCurrentUser(): UserInterface;
+    public function getCurrentUser(): User;
 
     public function getCurrentUserId(): int;
 
     public function getUserTransformer(): TransformerAbstract;
 
-    public function createUser(string $email, string $password): ?UserInterface;
+    public function createUser(string $email, string $password): User;
 }
