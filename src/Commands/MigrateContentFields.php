@@ -76,12 +76,14 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        $data[] = [
-                            'content_id' => $row->content_id,
-                            'topic' => $row->value,
-                            'position' => $row->position,
-                        ];
-                        $migratedFields++;
+                        if($row->value) {
+                            $data[] = [
+                                'content_id' => $row->content_id,
+                                'topic' => $row->value,
+                                'position' => $row->position,
+                            ];
+                            $migratedFields++;
+                        }
                     }
                     $dbConnection->table(config('railcontent.table_prefix') . 'content_topic')
                         ->insert($data);
@@ -97,12 +99,14 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        $data[] = [
-                            'content_id' => $row->content_id,
-                            'tag' => $row->value,
-                            'position' => $row->position,
-                        ];
-                        $migratedFields++;
+                        if($row->value) {
+                            $data[] = [
+                                'content_id' => $row->content_id,
+                                'tag' => $row->value,
+                                'position' => $row->position,
+                            ];
+                            $migratedFields++;
+                        }
                     }
                     $dbConnection->table(config('railcontent.table_prefix') . 'content_tag')
                         ->insert($data);
@@ -118,13 +122,15 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        $data[] = [
-                            'content_id' => $row->content_id,
-                            'key' => $row->key,
-                            'value' => $row->value,
-                            'position' => $row->position,
-                        ];
-                        $migratedFields++;
+                        if($row->value) {
+                            $data[] = [
+                                'content_id' => $row->content_id,
+                                'key' => $row->key,
+                                'value' => $row->value,
+                                'position' => $row->position,
+                            ];
+                            $migratedFields++;
+                        }
                     }
                     $dbConnection->table(config('railcontent.table_prefix') . 'content_data')
                         ->insert($data);
@@ -140,13 +146,15 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        $data[] = [
-                            'content_id' => $row->content_id,
-                            'playlist' => $row->value,
-                            'position' => $row->position,
-                        ];
+                        if($row->value) {
+                            $data[] = [
+                                'content_id' => $row->content_id,
+                                'playlist' => $row->value,
+                                'position' => $row->position,
+                            ];
 
-                        $migratedFields++;
+                            $migratedFields++;
+                        }
                     }
                     $dbConnection->table(config('railcontent.table_prefix') . 'content_playlist')
                         ->insert($data);
@@ -162,12 +170,14 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        $data[] = [
-                            'content_id' => $row->content_id,
-                            'key' => $row->value,
-                            'position' => $row->position,
-                        ];
-                        $migratedFields++;
+                        if($row->value) {
+                            $data[] = [
+                                'content_id' => $row->content_id,
+                                'key' => $row->value,
+                                'position' => $row->position,
+                            ];
+                            $migratedFields++;
+                        }
                     }
                     $dbConnection->table(config('railcontent.table_prefix') . 'content_key')
                         ->insert($data);
@@ -183,12 +193,14 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        $data[] = [
-                            'content_id' => $row->content_id,
-                            'key_pitch_type' => $row->value,
-                            'position' => $row->position,
-                        ];
-                        $migratedFields++;
+                        if($row->value) {
+                            $data[] = [
+                                'content_id' => $row->content_id,
+                                'key_pitch_type' => $row->value,
+                                'position' => $row->position,
+                            ];
+                            $migratedFields++;
+                        }
                     }
                     $dbConnection->table(config('railcontent.table_prefix') . 'content_key_pitch_type')
                         ->insert($data);
@@ -204,12 +216,14 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        $data[] = [
-                            'content_id' => $row->content_id,
-                            'instructor_id' => $row->value,
-                            'position' => $row->position,
-                        ];
-                        $migratedFields++;
+                        if(($row->value)&&(is_numeric($row->value))) {
+                            $data[] = [
+                                'content_id' => $row->content_id,
+                                'instructor_id' => $row->value,
+                                'position' => $row->position,
+                            ];
+                            $migratedFields++;
+                        }
                     }
                     $dbConnection->table(config('railcontent.table_prefix') . 'content_instructor')
                         ->insert($data);
@@ -220,6 +234,7 @@ class MigrateContentFields extends Command
         $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
             ->select('id', 'content_id', 'key', 'value')
             ->whereIn('key', $contentColumnNames)
+            ->where('content_id','!= ',0)
             ->orderBy('content_id', 'desc')
             ->chunk(
                 500,
@@ -244,8 +259,10 @@ class MigrateContentFields extends Command
             foreach ($contentIdsToUpdate as $index2 => $contentId) {
                 if (array_key_exists($column, $contentColumns[$contentId])) {
                     $value = $contentColumns[$contentId][$column];
-                    $query1 .= "  WHEN id = " . $contentId . " THEN " . $pdo->quote($value);
-                    $exist = true;
+                    if($value == '') {
+                        $query1 .= "  WHEN id = " . $contentId . " THEN " . $pdo->quote($value);
+                        $exist = true;
+                    }
                 }
             }
             if ($exist) {
