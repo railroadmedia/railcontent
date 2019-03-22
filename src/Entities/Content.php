@@ -4,11 +4,13 @@ namespace Railroad\Railcontent\Entities;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Railroad\Railcontent\Contracts\UserInterface;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsAssociations;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsProperties;
 use Railroad\Railcontent\Entities\Traits\DecoratedFields;
+use Doctrine\Common\Persistence\Proxy;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentRepository")
@@ -485,11 +487,74 @@ class Content
     }
 
     /**
+     * @return int
+     */
+    public function getProgressPercent()
+    {
+        return $this->progressPercent;
+    }
+
+    /**
      * @param array $contentPermissions
      */
     public function setPermissions(array $contentPermissions)
     {
         $this->permissions = $contentPermissions;
 
+    }
+
+    public function __get($name)
+    {
+        $_classMethods = get_class_methods($this);
+        $method = 'get' . ucfirst($name);
+
+        if (in_array($method, $_classMethods)) {
+            return $this->$method();
+        }
+    }
+
+    public function fetch($dotNotationString, $default = '')
+    {
+        $fields = explode('.', $dotNotationString);
+
+        $value = $this;
+        foreach ($fields as $field) {
+            if (strpos($field, '_') !== false || strpos($field, '-') !== false) {
+                $field = camel_case($field);
+            }
+            if ($value instanceof Content) {
+                $value = $value->__get($field);
+            } else {
+                if($value instanceof PersistentCollection){
+                    foreach($value as $element){
+                        if(($element instanceof ContentData) && ($element->getKey() == $field)){
+                            $value = $element->getValue();
+                        } else {
+                            //TODO
+                        }
+
+                    }
+                }
+            }
+
+        }
+
+        return $value ?? $default;
+    }
+
+    public function toArray()
+    {
+        $arr = get_object_vars($this);
+        foreach ($arr as $key => $value){
+            if($value instanceof PersistentCollection){
+                foreach($value as $val) {
+                    var_dump($val instanceof Proxy);
+                    if($val instanceof Proxy) {
+                        $arr[$key][] = get_object_vars($val);
+                    }
+                }
+            }
+        }
+        return $arr;
     }
 }
