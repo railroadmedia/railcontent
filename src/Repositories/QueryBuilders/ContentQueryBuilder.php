@@ -183,7 +183,13 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                     ->getFieldNames()
             )) {
                 $this->andWhere(
-                    config('railcontent.table_prefix') . 'content' . '.' . $requiredFieldData['name'] . ' IN (:value)'
+                    config('railcontent.table_prefix') .
+                    'content' .
+                    '.' .
+                    $requiredFieldData['name'] .
+                    ' ' .
+                    $requiredFieldData['operator'] .
+                    '  (:value)'
                 )
                     ->setParameter('value', $requiredFieldData['value']);
             } else {
@@ -206,9 +212,9 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                         ->setParameter('value', $requiredFieldData['value']);
                 }
             }
-
-            return $this;
         }
+
+        return $this;
     }
 
     /**
@@ -276,19 +282,26 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
      */
     public function restrictByPermissions()
     {
+
         if (ContentRepository::$bypassPermissions === true) {
             return $this;
         }
+
         $this->leftJoin(
             ContentPermission::class,
             'content_permission',
             'WITH',
             $this->expr()
-                ->orX(
+                ->andX(
                     $this->expr()
-                        ->eq('railcontent_content.id', 'content_permission.content'),
+                        ->eq('content_permission.brand', ':brand'),
                     $this->expr()
-                        ->eq('railcontent_content.type', 'content_permission.contentType')
+                        ->orX(
+                            $this->expr()
+                                ->eq('railcontent_content.id', 'content_permission.content'),
+                            $this->expr()
+                                ->eq('railcontent_content.type', 'content_permission.contentType')
+                        )
                 )
         )
             ->leftJoin(
@@ -296,7 +309,8 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                 'user_permission',
                 'WITH',
                 'content_permission.permission = user_permission.permission'
-            );
+            )->setParameter('brand', config('railcontent.brand'));
+
         $this->andWhere(
             $this->expr()
                 ->orX(
@@ -321,6 +335,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                 'expirationDateOrNow',
                 Carbon::now()
             )
+            ->setParameter('brand', config('railcontent.brand'))
             ->setParameter(
                 'user',
                 app()
@@ -329,6 +344,7 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
             );
 
         return $this;
+
     }
 
     /**
