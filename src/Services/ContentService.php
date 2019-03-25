@@ -276,9 +276,10 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->where(config('railcontent.table_prefix') . 'content' . '.slug = :slug')
+                ->andWhere(config('railcontent.table_prefix') . 'content' . '.slug = :slug')
                 ->andWhere(config('railcontent.table_prefix') . 'content' . '.type = :type')
-                ->setParameters(['slug' => $slug, 'type' => $type])
+                ->setParameter('slug', $slug)
+                ->setParameter('type', $type)
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
@@ -881,6 +882,7 @@ class ContentService
                 'results' => $qb->getQuery()
                     ->setCacheable(true)
                     ->setCacheRegion('pull')
+                    ->useResultCache(true)
                     ->getResult(),
                 'filter_options' => $pullFilterFields ? $this->contentRepository->getFilterFields() : [],
             ]

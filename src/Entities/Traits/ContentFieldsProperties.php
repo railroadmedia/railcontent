@@ -11,8 +11,8 @@ trait ContentFieldsProperties
     protected $difficulty;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
-     * @var string
+     * @ORM\Column(type="integer", nullable=true)
+     * @var int
      */
     protected $homeStaffPickRating;
 
