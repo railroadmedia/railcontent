@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Entities;
 use Illuminate\Http\JsonResponse;
 use Railroad\Railcontent\Support\Collection;
 use Railroad\Railcontent\Transformers\DataTransformer;
+use Railroad\Railcontent\Transformers\DecoratedContentTransformer;
 
 class ContentFilterResultsEntity extends Entity
 {
@@ -17,7 +18,7 @@ class ContentFilterResultsEntity extends Entity
             ->json(
                 $this->results(),
                 [
-                    'transformer' => DataTransformer::class,
+                    'transformer' => DecoratedContentTransformer::class,
                     'totalResults' => $this->totalResults(),
                     'filterOptions' => $this->filterOptions(),
                 ]
@@ -33,7 +34,7 @@ class ContentFilterResultsEntity extends Entity
         return reply()->json(
             $this->results(),
             [
-                'transformer' => DataTransformer::class,
+                'transformer' => DecoratedContentTransformer::class,
                 'totalResults' => $this->totalResults(),
                 'filterOptions' => $this->filterOptions(),
             ]
