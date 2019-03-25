@@ -259,7 +259,7 @@ class MigrateContentFields extends Command
             foreach ($contentIdsToUpdate as $index2 => $contentId) {
                 if (array_key_exists($column, $contentColumns[$contentId])) {
                     $value = $contentColumns[$contentId][$column];
-                    if($value == '') {
+                    if($value != '') {
                         $query1 .= "  WHEN id = " . $contentId . " THEN " . $pdo->quote($value);
                         $exist = true;
                     }
