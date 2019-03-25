@@ -1145,7 +1145,7 @@ class ContentService
         }
 
         foreach($semesterPacksToGet ?? [] as $semesterPack){
-            $parents[] = $this->getTypesBySlugSpecialStatus($semesterPack);
+            $parents[] = $this->getSemesterPackParent($semesterPack);
         }
 
         $nested = false;
@@ -1290,31 +1290,34 @@ class ContentService
         return Decorator::decorate($scheduleEvents, 'content');
     }
 
-    public function getTypesBySlugSpecialStatus($slug, $type = 'semester-pack', $statuses = null, $all = false)
+    /**
+     * @param $parentSlug
+     * @return mixed
+     */
+    public function getSemesterPackParent($parentSlug)
     {
-        if(!$statuses){
-            $statuses = [ContentService::STATUS_DRAFT];
+        $before = ContentRepository::$availableContentStatues;
+
+        if(empty(ContentRepository::$availableContentStatues)){
+            ContentRepository::$availableContentStatues = [
+                ContentService::STATUS_PUBLISHED,
+                ContentService::STATUS_SCHEDULED,
+            ];
         }
 
-        // make a note of what this was set to so it can be re-set after we're done with it here
-        $statusesBefore = ContentRepository::$availableContentStatues;
-
-        if(!is_array($statusesBefore)){
-            $statusesBefore = [];
-        }
+        $setWithThis = array_merge(
+            ContentRepository::$availableContentStatues,
+            [ContentService::STATUS_DRAFT]
+        );
 
         // include drafts because packs might not be published, but we still want to get their *lessons*
-        ContentRepository::$availableContentStatues = array_merge($statusesBefore, $statuses);
+        ContentRepository::$availableContentStatues = $setWithThis;
 
-        $results = $this->getBySlugAndType($slug, $type);
+        $result = $this->getBySlugAndType($parentSlug, 'semester-pack');
+        $result = $result->first();
 
-        // set this to what it was before
-        ContentRepository::$availableContentStatues = $statusesBefore;
+        ContentRepository::$availableContentStatues = $before;
 
-        if($all){
-            return $results;
-        }
-
-        return $results->first();
+        return $result;
     }
 }
