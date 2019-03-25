@@ -1285,7 +1285,9 @@ class ContentService
         $liveEventsAndContentReleases = $liveEvents->merge($contentReleases)->sort($compareFunc)->values();
         $scheduleEvents = $liveEventsAndContentReleases->merge($culledSemesterPackLessons)->sort($compareFunc)->values();
 
-        return $scheduleEvents ?? new Collection();
+        if(empty($scheduleEvents)) return new Collection();
+
+        return Decorator::decorate($scheduleEvents, 'content');
     }
 
     public function getTypesBySlugSpecialStatus($slug, $type = 'semester-pack', $statuses = null, $all = false)
@@ -1296,6 +1298,10 @@ class ContentService
 
         // make a note of what this was set to so it can be re-set after we're done with it here
         $statusesBefore = ContentRepository::$availableContentStatues;
+
+        if(!is_array($statusesBefore)){
+            $statusesBefore = [];
+        }
 
         // include drafts because packs might not be published, but we still want to get their *lessons*
         ContentRepository::$availableContentStatues = array_merge($statusesBefore, $statuses);
