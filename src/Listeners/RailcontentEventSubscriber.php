@@ -14,6 +14,7 @@ class RailcontentEventSubscriber implements EventSubscriber
         return [
             Events::postPersist,
             Events::postFlush,
+            Events::postLoad,
         ];
     }
 
@@ -54,6 +55,20 @@ class RailcontentEventSubscriber implements EventSubscriber
                         $decorator->decorate($entity);
                     }
                 }
+            }
+        }
+    }
+
+    public function postLoad(LifecycleEventArgs $args)
+    {
+        $entity = $args->getObject();
+        $name = strtolower(explode('\\', get_class($entity))[3]);
+
+        if (array_key_exists($name, config('resora.decorators'))) {
+            foreach (config('resora.decorators')[$name] as $decoratorClassName) {
+                $decorator = app()->make($decoratorClassName);
+
+                $decorator->decorate($entity);
             }
         }
     }
