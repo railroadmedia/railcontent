@@ -7,7 +7,7 @@ use Railroad\Railcontent\Entities\User;
 
 interface UserProviderInterface
 {
-    public function getUserById(int $id): User;
+    public function getUserById(int $id): ?User;
 
     public function getUserId(User $user): int;
 
