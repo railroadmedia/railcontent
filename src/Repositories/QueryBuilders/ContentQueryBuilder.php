@@ -189,9 +189,9 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                     $requiredFieldData['name'] .
                     ' ' .
                     $requiredFieldData['operator'] .
-                    '  (:value)'
+                    '  (:value'.$index.')'
                 )
-                    ->setParameter('value', $requiredFieldData['value']);
+                    ->setParameter('value'.$index, $requiredFieldData['value']);
             } else {
                 if (in_array(
                     $requiredFieldData['name'],
@@ -208,8 +208,8 @@ class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
                             ->getFieldName($requiredFieldData['name']),
                         'p'
                     )
-                        ->andWhere('p IN (:value)')
-                        ->setParameter('value', $requiredFieldData['value']);
+                        ->andWhere('p '.$requiredFieldData['operator'] .' (:value'.$index.')')
+                        ->setParameter('value'.$index, $requiredFieldData['value']);
                 }
             }
         }
