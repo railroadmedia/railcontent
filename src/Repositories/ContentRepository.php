@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\PersistentCollection;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserPermission;
@@ -275,7 +276,12 @@ class ContentRepository extends EntityRepository
      */
     public function requireUserStates($state, $userId = null)
     {
-        $this->requiredUserStates[] = ['state' => $state, 'user' => app()->make(UserProviderInterface::class)->getUserById($userId ?? auth()->id())];
+        $this->requiredUserStates[] = [
+            'state' => $state,
+            'user' => app()
+                ->make(UserProviderInterface::class)
+                ->getUserById($userId ?? auth()->id()),
+        ];
 
         return $this;
     }
@@ -287,7 +293,12 @@ class ContentRepository extends EntityRepository
      */
     public function includeUserStates($state, $userId = null)
     {
-        $this->includedUserStates[] = ['state' => $state, 'user' => app()->make(UserProviderInterface::class)->getUserById($userId ?? auth()->id())];
+        $this->includedUserStates[] = [
+            'state' => $state,
+            'user' => app()
+                ->make(UserProviderInterface::class)
+                ->getUserById($userId ?? auth()->id()),
+        ];
 
         return $this;
     }
@@ -302,7 +313,13 @@ class ContentRepository extends EntityRepository
 
         foreach ($rows as $row) {
             foreach (config('railcontent.field_option_list', []) as $fieldOption) {
+
+                if (strpos($fieldOption, '_') !== false || strpos($fieldOption, '-') !== false) {
+                    $fieldOption = camel_case($fieldOption);
+                }
+
                 $getField = 'get' . ucwords($fieldOption);
+
                 if ($row->$getField() && (count($row->$getField()) > 0)) {
                     if (in_array(
                         $fieldOption,
@@ -310,7 +327,17 @@ class ContentRepository extends EntityRepository
                             ->getClassMetadata(Content::class)
                             ->getAssociationNames()
                     )) {
-                        if (!in_array(
+
+                        if ($row->$getField() instanceof PersistentCollection) {
+                            foreach ($row->$getField() as $field) {
+                                if (!in_array(
+                                    $field->$getField(),
+                                    $availableFields[$fieldOption] ?? []
+                                )) {
+                                    $availableFields[$fieldOption][] = $field->$getField();
+                                }
+                            }
+                        } elseif (!in_array(
                             $row->$getField()
                                 ->$getField(),
                             $availableFields[$fieldOption] ?? []
