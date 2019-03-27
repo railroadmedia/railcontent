@@ -385,19 +385,20 @@ class ContentRepository extends EntityRepository
     public function build()
     {
         $qb = new ContentQueryBuilder($this->getEntityManager());
+        $lifetime = config('railcontent.cache_duration');
 
-        $userPermissionRepository =
-            $this->getEntityManager()
-                ->getRepository(UserPermission::class);
+        if (auth()->id()) {
+            $userPermissionRepository =
+                $this->getEntityManager()
+                    ->getRepository(UserPermission::class);
 
-        $userPermission = $userPermissionRepository->getUserPermissions(auth()->id(), true);
+            $userPermission = $userPermissionRepository->getUserPermissions(auth()->id(), true);
 
-        if ($userPermission) {
-            $lifetime =
-                Carbon::parse($userPermission[0]->getExpirationDate())
-                    ->diffInSeconds(Carbon::now());        }
-        else{
-            $lifetime = config('railcontent.cache_duration');
+            if ($userPermission) {
+                $lifetime =
+                    Carbon::parse($userPermission[0]->getExpirationDate())
+                        ->diffInSeconds(Carbon::now());
+            }
         }
 
         $this->getEntityManager()

@@ -10,6 +10,7 @@ use Railroad\Railcontent\Contracts\UserInterface;
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\UserPermissionsRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_user_permissions")
+ * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */
 class UserPermission

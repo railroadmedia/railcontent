@@ -114,6 +114,8 @@ class UserPermissionsService
         $this->entityManager->getCache()
             ->evictEntityRegion(Content::class);
 
+        $this->entityManager->getCache()->evictEntity(UserPermission::class,'permission');
+
         return true;
     }
 
@@ -205,5 +207,7 @@ class UserPermissionsService
                     );
             }
         }
+
+        $this->entityManager->getCache()->evictEntity(UserPermission::class,'permission');
     }
 }
