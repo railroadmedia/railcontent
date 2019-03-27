@@ -24,12 +24,12 @@ class ContentPermissionsDecorator implements DecoratorInterface
         $this->contentPermissionService = $contentPermissionService;
     }
 
-    public function decorate($contents)
+    public function decorate(array $entities): array
     {
-        $permissions = $this->contentPermissionService->getByContentTypeOrId($contents->getId(), $contents->getType());
+        $permissions = $this->contentPermissionService->getByContentTypeOrId($entities->getId(), $entities->getType());
 
-        $contents->createProperty('permissions', $permissions);
+        $entities->createProperty('permissions', $permissions);
 
-        return $contents;
+        return $entities;
     }
 }

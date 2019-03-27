@@ -6,8 +6,8 @@ namespace Railroad\Railcontent\Decorators;
 interface DecoratorInterface
 {
     /**
-     * @param $data
+     * @param array $entities
      * @return mixed
      */
-    public function decorate($data);
+    public function decorate(array $entities): array;
 }

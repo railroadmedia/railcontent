@@ -45,12 +45,12 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
         $this->contentService = $contentService;
     }
 
-    public function decorate($contentResults)
+    public function decorate(array $entities): array
     {
 
-        if ($contentResults->getVideo()) {
+        if ($entities->getVideo()) {
 
-            $videoId = $contentResults->getVideo();
+            $videoId = $entities->getVideo();
             $video = $this->contentService->getById($videoId);
             $vimeoVideoId = $video->getVimeoVideoId();
 
@@ -93,7 +93,7 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
                                     $response['body']['pictures']['sizes']
                                 );
 
-                                $contentResults->createProperty(
+                                $entities->createProperty(
                                     'video_poster_image_url',
                                     $response['body']['pictures']
                                     ['sizes']['720']['link'] ?? ''
@@ -106,11 +106,11 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
                 }
             }
 
-            $contentResults->createProperty(
+            $entities->createProperty(
                 'vimeo_video_playback_endpoints',
                 $properties
             );
         }
-        return ($contentResults);
+        return ($entities);
     }
 }

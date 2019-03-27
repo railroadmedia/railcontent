@@ -17,6 +17,7 @@ use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
@@ -26,7 +27,7 @@ use Railroad\Railcontent\Support\Collection;
 class ContentService
 {
     /**
-     * @var EntityManager
+     * @var RailcontentEntityManager
      */
     public $entityManager;
 
@@ -70,11 +71,11 @@ class ContentService
     /**
      * ContentService constructor.
      *
-     * @param EntityManager $entityManager
+     * @param RailcontentEntityManager $entityManager
      * @param JsonApiHydrator $jsonApiHydrator
      */
     public function __construct(
-        EntityManager $entityManager,
+        RailcontentEntityManager $entityManager,
         JsonApiHydrator $jsonApiHydrator,
         UserProviderInterface $userProvider
     ) {
@@ -105,7 +106,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getOneOrNullResult();
+                ->getOneOrNullResult('Railcontent');
 
         return $results;
     }
@@ -126,7 +127,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         // restore order of ids passed in
         $contentRows = [];
@@ -157,7 +158,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -219,7 +220,7 @@ class ContentService
             $qb->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -261,7 +262,7 @@ class ContentService
             ->getQuery()
             ->setCacheable(true)
             ->setCacheRegion('pull')
-            ->getResult();
+            ->getResult('Railcontent');
     }
 
     /**
@@ -283,7 +284,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -314,7 +315,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -339,7 +340,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -372,7 +373,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -404,7 +405,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -440,7 +441,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -490,7 +491,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -515,7 +516,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -539,7 +540,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -563,7 +564,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -602,7 +603,7 @@ class ContentService
             $qb->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -646,7 +647,7 @@ class ContentService
             $qb->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -693,7 +694,7 @@ class ContentService
             $qb->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -883,7 +884,7 @@ class ContentService
                     ->setCacheable(true)
                     ->setCacheRegion('pull')
                     ->useResultCache(true)
-                    ->getResult(),
+                    ->getResult('Railcontent'),
                 'filter_options' => $pullFilterFields ? $this->contentRepository->getFilterFields() : [],
             ]
         );
@@ -1060,7 +1061,7 @@ class ContentService
             ->setParameter('userId', $userId)
             ->selectInheritenceColumns()
             ->getQuery()
-            ->getResult();
+            ->getResult('Railcontent');
 
         foreach ($contents as $index => $content) {
             $contents[$index]['user_playlists'][$userId] = [];
@@ -1175,7 +1176,7 @@ class ContentService
             $qb->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }

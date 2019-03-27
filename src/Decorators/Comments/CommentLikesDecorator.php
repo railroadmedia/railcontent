@@ -22,18 +22,18 @@ class CommentLikesDecorator implements DecoratorInterface
         $this->commentLikeService = $commentLikeService;
     }
 
-    public function decorate($comments)
+    public function decorate(array $entities): array
     {
-        $likeCount = $this->commentLikeService->countForCommentIds([$comments->getId()]);
+        $likeCount = $this->commentLikeService->countForCommentIds([$entities->getId()]);
 
         $likeUsers = $this->commentLikeService->getUserIdsForEachCommentId(
-            [$comments],
+            [$entities],
             config('railcontent.comment_likes_amount_of_users')
         );
-        $isLikedByCurrentUser = $this->commentLikeService->isLikedByUserId([$comments], auth()->id());
+        $isLikedByCurrentUser = $this->commentLikeService->isLikedByUserId([$entities], auth()->id());
 
-        $comments->createProperty('like_count', $likeCount[$comments->getId()]);
-        $comments->createProperty('like_users', $likeUsers[$comments->getId()] ?? []);
-        $comments->createProperty('is_liked', empty($isLikedByCurrentUser) ? false : true);
+        $entities->createProperty('like_count', $likeCount[$entities->getId()]);
+        $entities->createProperty('like_users', $likeUsers[$entities->getId()] ?? []);
+        $entities->createProperty('is_liked', empty($isLikedByCurrentUser) ? false : true);
     }
 }

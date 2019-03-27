@@ -1,5 +1,11 @@
 <?php
 
+use Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator;
+use Railroad\Railcontent\Decorators\Content\ContentPermissionsDecorator;
+use Railroad\Railcontent\Entities\Comment;
+use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\ContentExercise;
+
 return [
     // brands
     'brand' => 'brand',
@@ -151,14 +157,20 @@ return [
     'user_routes_middleware' => [],
     'administrator_routes_middleware' => [],
 
-    // decorators
+    // decorators example
     'decorators' => [
-        'content' => [
+        Content::class => [
+
+            // todo: this breaks because the decorator is not updated to implement the new hydration logic
+//            ContentPermissionsDecorator::class
+        ],
+        ContentExercise::class => [
 
         ],
-        'comment' => [
-            \Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator::class,
-        ],
+        Comment::class => [
+            // todo: this breaks because the decorator is not updated to implement the new hydration logic
+//            CommentLikesDecorator::class,
+        ]
     ],
 
     // use collections
