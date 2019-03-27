@@ -230,6 +230,30 @@ class MigrateContentFields extends Command
                 }
             );
 
+
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->select('id', 'content_id', 'key', 'value', 'position')
+            ->where('key', 'exercise_id')
+            ->orderBy('content_id', 'desc')
+            ->chunk(
+                500,
+                function (Collection $rows) use (&$migratedFields, $dbConnection) {
+                    $data = [];
+                    foreach ($rows as $row) {
+                        if(($row->value)&&(is_numeric($row->value))) {
+                            $data[] = [
+                                'content_id' => $row->content_id,
+                                'exercise_id' => $row->value,
+                                'position' => $row->position,
+                            ];
+                            $migratedFields++;
+                        }
+                    }
+                    $dbConnection->table(config('railcontent.table_prefix') . 'content_exercise')
+                        ->insert($data);
+                }
+            );
+
         $contentColumns = [];
         $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
             ->select('id', 'content_id', 'key', 'value')
