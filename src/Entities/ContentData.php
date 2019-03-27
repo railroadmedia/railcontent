@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="railcontent_content_data")
  *
  */
-class ContentData
+class ContentData extends ArrayExpressible
 {
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")

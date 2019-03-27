@@ -4,13 +4,11 @@ namespace Railroad\Railcontent\Entities;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\PersistentCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Railroad\Railcontent\Contracts\UserInterface;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsAssociations;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsProperties;
 use Railroad\Railcontent\Entities\Traits\DecoratedFields;
-use Doctrine\Common\Persistence\Proxy;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentRepository")
@@ -19,7 +17,7 @@ use Doctrine\Common\Persistence\Proxy;
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */
-class Content
+class Content extends ArrayExpressible
 {
     use ContentFieldsProperties;
     use ContentFieldsAssociations;
@@ -81,18 +79,18 @@ class Content
      *      inverseJoinColumns={@ORM\JoinColumn(name="child_id", referencedColumnName="id", unique=true)}
      *      )
      */
-    protected $child;
+    private $child;
 
     /**
      * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy",mappedBy="child", cascade={"persist",
      *     "remove"}, fetch="EAGER")
      */
-    protected $parent;
+    private $parent;
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentData", mappedBy="content", cascade={"remove"})
      */
-    private $data;
+    protected $data;
 
     /**
      * @ORM\Column(type="datetime", name="published_on", nullable=true)
@@ -115,17 +113,17 @@ class Content
     /**
      * @var bool
      */
-    private $started = false;
+    protected $started = false;
 
     /**
      * @var bool
      */
-    private $completed = false;
+    protected $completed = false;
 
     /**
      * @var int
      */
-    private $progressPercent = 0;
+    protected $progressPercent = 0;
 
     /**
      * @var \DateTime $createdOn
@@ -459,24 +457,6 @@ class Content
         }
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getPermissions()
-    {
-        return $this->permissions;
-    }
-
-    /**
-     * @param ContentPermission $contentPermission
-     */
-    public function addPermission(ContentPermission $contentPermission)
-    {
-        if (($contentPermission->getContent()
-                    ->getId() == $this->getId()) || ($contentPermission->getContentType() == $this->getType())) {
-            $this->permissions[] = $contentPermission;
-        }
-    }
 
     /**
      * @param $progressPercent
@@ -494,111 +474,4 @@ class Content
         return $this->progressPercent;
     }
 
-    /**
-     * @param array $contentPermissions
-     */
-    public function setPermissions(array $contentPermissions)
-    {
-        $this->permissions = $contentPermissions;
-
-    }
-
-    public function __get($name)
-    {
-        $_classMethods = get_class_methods($this);
-        $method = 'get' . ucfirst($name);
-
-        if (in_array($method, $_classMethods)) {
-            return $this->$method();
-        }
-    }
-
-    public function fetch($dotNotationString, $default = '')
-    {
-        return $this->dot()[$dotNotationString] ?? $default;
-    }
-
-    public function dot()
-    {
-        $arr = get_object_vars($this);
-
-        foreach ($arr as $key => $value) {
-            if (($key != 'vimeoVideo')) {
-                if ($value instanceof PersistentCollection && !($value->isEmpty())) {
-                    unset($arr[$key]);
-                    foreach ($value as $dataIndex => $elem) {
-                        if ($elem instanceof ContentData) {
-                            if ($elem->getPosition() == 1) {
-                                $datumDots['data.' . $elem->getKey()] = $elem->getValue();
-                                $datumDots['data.*.' . $elem->getKey()] = $elem;
-                            }
-
-                            $datumDots['data.' . $elem->getKey() . '.' . $elem->getPosition()] = $elem->getValue();
-                            $datumDots['data.*.' . $elem->getKey() . '.' . $elem->getPosition()] = $elem;
-
-                            foreach ($elem as $datumColumnName => $datumColumnValue) {
-                                if ($elem->getPosition() == 1) {
-                                    $datumDots['data.' . $elem->getKey() . '.' . $datumColumnName] = $datumColumnValue;
-                                }
-
-                                'data.' .
-                                $datumDots[$elem->getKey() . '.' . $elem->getPosition() . '.' . $datumColumnName] =
-                                    $datumColumnValue;
-                            }
-
-                            $arr = array_merge($arr, $datumDots);
-                        } elseif (!($elem instanceof ContentHierarchy) && !($elem instanceof UserContentProgress)) {
-                            //dd($key);
-                            //                            if ($elem->getPosition()== 1) {
-                            //                                $datumDots['fields.'.$elem->getKey()] = $elem->getValue();
-                            //                                $datumDots['fields.*.' . $elem->getKey()] = $elem;
-                            //                            }
-                            //
-                            //                            $datumDots['fields.'.$elem->getKey() . '.' . $elem->getPosition()] = $elem->getValue();
-                            //                            $datumDots['fields.*.' . $elem->getKey() . '.' . $elem->getPosition()] = $elem;
-                            //                            //  $fieldDots['*.' . $elem->getKey() . '.' . 'value'][] = $elem->getValue();
-                            //
-                            //                            foreach ($elem as $datumColumnName => $datumColumnValue) {
-                            //                                if ($elem->getPosition() == 1) {
-                            //                                    $datumDots['fields.' . $elem->getKey() . '.' . $datumColumnName] = $datumColumnValue;
-                            //                                }
-                            //
-                            //                                'fields.'.$datumDots[$elem->getKey() . '.' . $elem->getPosition() . '.' . $datumColumnName] =
-                            //                                    $datumColumnValue;
-                            //                            }
-                            //
-                            //                            //$arr[$key] = $datumDots;
-                            //                            $arr = array_merge($arr,$datumDots);
-                            // $arr = array_merge($arr,$elem->toArray());
-                            // $arr[$key] = $elem->toArray();
-                        }
-                    }
-                } elseif ($value instanceof ContentInstructor) {
-                    $instructor = $value->getInstructor();
-
-                    $fieldDots['*fields.instructor'] = [$instructor];
-                    $fieldDots['fields.instructor.' . $value->getPosition()] = $value->getInstructor();
-                    $fieldDots['fields.instructor.' . $value->getPosition() . '.id'] = $instructor->getId();
-                    $fieldDots['fields.instructor.' . $value->getPosition() . '.name'] = $instructor->getName();
-                    $fieldDots['fields.instructor.' . $value->getPosition() . '.slug'] = $instructor->getSlug();
-                    $fieldDots['fields.instructor.' . $value->getPosition() . '.brand'] = $instructor->getBrand();
-                    $fieldDots['fields.instructor.' . $value->getPosition() . '.type'] = $instructor->getType();
-                    $fieldDots['fields.instructor.' . $value->getPosition() . '.status'] = $instructor->getStatus();
-
-                    $data = $instructor->getData();
-
-                    $fieldDots['fields.instructor.' . $value->getPosition() . '.data'] = $data;
-
-                    foreach ($data as $dataElement) {
-                        $fieldDots['fields.instructor.' . $value->getPosition() . '.data.' . $dataElement->getKey()] =
-                            $dataElement->getValue();
-                    }
-                    $arr = array_merge($arr, $fieldDots);
-                }
-
-            }
-        }
-
-        return $arr;
-    }
 }

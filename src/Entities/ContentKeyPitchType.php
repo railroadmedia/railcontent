@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="railcontent_content_key_pitch_type")
  *
  */
-class ContentKeyPitchType
+class ContentKeyPitchType extends ArrayExpressible
 {
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")

@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="railcontent_content_topic")
  *
  */
-class ContentTopic
+class ContentTopic extends ArrayExpressible
 {
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
@@ -24,7 +24,7 @@ class ContentTopic
      * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content", inversedBy="children")
      * @ORM\JoinColumn(referencedColumnName="content_id", referencedColumnName="id")
      */
-    protected $content;
+    private $content;
 
     /**
      * @ORM\Column(type="string")
