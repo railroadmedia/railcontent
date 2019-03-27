@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Entities\Traits;
 
+use Railroad\Railcontent\Entities\Content;
+
 trait ContentFieldsProperties
 {
     /**
@@ -45,12 +47,6 @@ trait ContentFieldsProperties
      * @var string
      */
     protected $title;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     * @var string
-     */
-    protected $video;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -336,22 +332,6 @@ trait ContentFieldsProperties
     public function setTitle($title)
     {
         $this->title = $title;
-    }
-
-    /**
-     * @return string
-     */
-    public function getVideo()
-    {
-        return $this->video;
-    }
-
-    /**
-     * @param string $video
-     */
-    public function setVideo(string $video)
-    {
-        $this->video = $video;
     }
 
     /**

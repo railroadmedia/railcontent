@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Entities\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentExercise;
 use Railroad\Railcontent\Entities\ContentInstructor;
 use Railroad\Railcontent\Entities\ContentKey;
@@ -24,39 +25,40 @@ trait ContentFieldsAssociations
     protected $instructor;
 
     /**
-     * @ORM\OneToMany(targetEntity="ContentVimeoVideo", mappedBy="content")
-     */
-    protected $vimeoVideo;
-
-    /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentTopic", mappedBy="content",
      *     cascade={"persist","remove"})
      */
-    private $topic;
+    protected $topic;
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentTag", mappedBy="content",
      *     cascade={"persist","remove"})
      */
-    private $tag;
+    protected $tag;
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentKey", mappedBy="content",
      *     cascade={"persist","remove"})
      */
-    private $key;
+    protected $key;
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentKeyPitchType", mappedBy="content",
      *     cascade={"persist","remove"})
      */
-    private $keyPitchType;
+    protected $keyPitchType;
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentPlaylist", mappedBy="content",
      *     cascade={"persist","remove"})
      */
-    private $playlist;
+    protected $playlist;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\Content")
+     * @ORM\JoinColumn(name="video", referencedColumnName="id")
+     */
+    protected $video;
 
     /**
      * ContentFieldsAssociations constructor.
@@ -71,7 +73,6 @@ trait ContentFieldsAssociations
         $this->playlist = new ArrayCollection();
         $this->exercise = new ArrayCollection();
         $this->userProgress = new ArrayCollection();
-        $this->permissions = new ArrayCollection();
     }
 
     /**
@@ -165,14 +166,6 @@ trait ContentFieldsAssociations
         }
 
         $this->instructor->removeElement($contentInstructor);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getVimeoVideo()
-    {
-        return $this->vimeoVideo;
     }
 
     /**
@@ -450,6 +443,38 @@ trait ContentFieldsAssociations
         }
 
         $this->playlist->removeElement($contentPlaylist);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVideo()
+    {
+        return $this->video;
+    }
+
+    /**
+     * @param Content $video
+     */
+    public function addVideo(Content $video)
+    {
+        $this->video = $video;
+    }
+
+    /**
+     * @param Content|null $video
+     */
+    public function setVideo(?Content $video)
+    {
+        $this->video = $video;
+    }
+
+    /**
+     * @param Content $video
+     */
+    public function removeVideo(Content $video)
+    {
+        $this->video->removeElement($video);
     }
 
     /**
