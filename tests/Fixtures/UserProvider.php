@@ -12,34 +12,36 @@ use Railroad\DoctrineArrayHydrator\Contracts\UserProviderInterface as DoctrineAr
 use League\Fractal\TransformerAbstract;
 
 class UserProvider implements
-    UserProviderInterface,
-    DoctrineUserProviderInterface,
-    DoctrineArrayHydratorUserProviderInterface
+    UserProviderInterface
 {
     CONST RESOURCE_TYPE = 'user';
 
-    public function getUserById(int $id): ?UserEntityInterface
+    public function getUserById(int $id): ?\Railroad\Railcontent\Entities\User
     {
         $user = DB::table('users')->find($id);
 
         if ($user) {
-            return new User($id, $user->email);
+            return new \Railroad\Railcontent\Entities\User($id, $user->email);
         }
 
-        return new User($id);
+        return null;
     }
 
-    public function getUserId(UserEntityInterface $user): int
+    public function getUserId(\Railroad\Railcontent\Entities\User $user): int
     {
         return $user->getId();
     }
 
-    public function getCurrentUser(): UserInterface
+    public function getCurrentUser(): ?\Railroad\Railcontent\Entities\User
     {
+        if (!auth()->id()) {
+            return null;
+        }
+
         return $this->getUserById(auth()->id());
     }
 
-    public function getCurrentUserId(): int
+    public function getCurrentUserId(): ?int
     {
         return auth()->id();
     }
@@ -81,7 +83,7 @@ class UserProvider implements
     public function createUser(
         string $email,
         string $password
-    ): ?UserInterface {
+    ): ?\Railroad\Railcontent\Entities\User {
 
         $userId = DB::table('users')
             ->insertGetId([

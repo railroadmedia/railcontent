@@ -38,9 +38,9 @@ class Comment
     protected $temporaryDisplayName;
 
     /**
-     * @var int
+     * @var User
      *
-     * @ORM\Column(type="user_id", name="user_id", nullable=true)
+     * @ORM\Column(type="user_id", name="user_id")
      */
     protected $user;
 
@@ -134,7 +134,7 @@ class Comment
     /**
      * @param UserInterface $user
      */
-    public function setUser(UserInterface $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }
@@ -142,7 +142,7 @@ class Comment
     /**
      * @return UserInterface
      */
-    public function getUser(): UserInterface
+    public function getUser(): User
     {
         return $this->user;
     }

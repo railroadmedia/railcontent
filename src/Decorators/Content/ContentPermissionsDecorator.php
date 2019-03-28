@@ -5,7 +5,6 @@ namespace Railroad\Railcontent\Decorators\Content;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Services\ContentPermissionService;
 
-
 class ContentPermissionsDecorator implements DecoratorInterface
 {
     /**
@@ -24,11 +23,13 @@ class ContentPermissionsDecorator implements DecoratorInterface
         $this->contentPermissionService = $contentPermissionService;
     }
 
-    public function decorate(array $entities): array
-    {
-        $permissions = $this->contentPermissionService->getByContentTypeOrId($entities->getId(), $entities->getType());
+    public function decorate(array $entities)
+    : array {
+        foreach ($entities as $entity) {
+            $permissions = $this->contentPermissionService->getByContentTypeOrId($entity->getId(), $entity->getType());
 
-        $entities->createProperty('permissions', $permissions);
+            $entity->createProperty('permissions', $permissions);
+        }
 
         return $entities;
     }

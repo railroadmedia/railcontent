@@ -3,16 +3,16 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
-use Doctrine\ORM\EntityManager;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Entities\UserPermission;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
 class UserPermissionsService
 {
     /**
-     * @var EntityManager
+     * @var RailcontentEntityManager
      */
     private $entityManager;
 
@@ -29,10 +29,12 @@ class UserPermissionsService
     /**
      * UserPermissionsService constructor.
      *
-     * @param EntityManager $entityManager
+     * @param RailcontentEntityManager $entityManager
+     * @param UserProviderInterface $userProvider
      */
     public function __construct(
-        EntityManager $entityManager, UserProviderInterface $userProvider
+        RailcontentEntityManager $entityManager,
+        UserProviderInterface $userProvider
     ) {
         $this->entityManager = $entityManager;
         $this->userProvider = $userProvider;
@@ -114,7 +116,8 @@ class UserPermissionsService
         $this->entityManager->getCache()
             ->evictEntityRegion(Content::class);
 
-        $this->entityManager->getCache()->evictEntity(UserPermission::class,'permission');
+        $this->entityManager->getCache()
+            ->evictEntity(UserPermission::class, 'permission');
 
         return true;
     }
@@ -128,7 +131,7 @@ class UserPermissionsService
      */
     public function getUserPermissions($userId = null, $onlyActive = true)
     {
-        return  $this->userPermissionsRepository->getUserPermissions($userId, $onlyActive);
+        return $this->userPermissionsRepository->getUserPermissions($userId, $onlyActive);
     }
 
     /**
@@ -208,6 +211,7 @@ class UserPermissionsService
             }
         }
 
-        $this->entityManager->getCache()->evictEntity(UserPermission::class,'permission');
+        $this->entityManager->getCache()
+            ->evictEntity(UserPermission::class, 'permission');
     }
 }

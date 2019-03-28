@@ -27,12 +27,13 @@ class CommentLikesServiceTest extends RailcontentTestCase
 
     public function test_get_by_comment_ids()
     {
+        $randomUser = $this->fakeUser();
         $comments = $this->fakeComment(2);
         $this->fakeCommentLike(
             5,
             [
                 'comment' => $comments[0],
-                'userId' => rand(),
+                'userId' => $randomUser['id'],
             ]
         );
 
@@ -40,7 +41,7 @@ class CommentLikesServiceTest extends RailcontentTestCase
             2,
             [
                 'comment' => $comments[1],
-                'userId' => rand(),
+                'userId' => $randomUser['id'],
             ]
         );
         $results = $this->classBeingTested->getByCommentIds(
@@ -156,7 +157,6 @@ class CommentLikesServiceTest extends RailcontentTestCase
             1,
             [
                 'comment' => $comments[0],
-                'userId' => rand(1, 100),
             ]
         );
 
@@ -164,21 +164,18 @@ class CommentLikesServiceTest extends RailcontentTestCase
             1,
             [
                 'comment' => $comments[0],
-                'userId' => rand(1, 100),
             ]
         );
         $this->fakeCommentLike(
             1,
             [
                 'comment' => $comments[0],
-                'userId' => rand(1, 100),
             ]
         );
         $this->fakeCommentLike(
             1,
             [
                 'comment' => $comments[1],
-                'userId' => rand(1, 100),
             ]
         );
 

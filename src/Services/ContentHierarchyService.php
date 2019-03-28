@@ -2,9 +2,9 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Doctrine\ORM\EntityManager;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentHierarchy;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 
 class ContentHierarchyService
@@ -15,16 +15,16 @@ class ContentHierarchyService
     private $contentHierarchyRepository;
 
     /**
-     * @var EntityManager
+     * @var RailcontentEntityManager
      */
     private $entityManager;
 
     /**
      * ContentHierarchyService constructor.
      *
-     * @param EntityManager $entityManager
+     * @param RailcontentEntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(RailcontentEntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
 
@@ -73,7 +73,7 @@ class ContentHierarchyService
                 ->setParameter('parentIds', $parentIds)
                 ->groupBy('ch.parent')
                 ->getQuery()
-                ->getResult();
+                ->getResult('Railcontent');
 
         foreach ($parents as $hierarchy) {
             $parentId =
@@ -83,7 +83,7 @@ class ContentHierarchyService
             $results[$parentId] = $count;
         }
 
-        return  $results;
+        return $results;
     }
 
     /**
@@ -103,11 +103,13 @@ class ContentHierarchyService
             ]
         );
 
-        $otherChildrenForParent = count($this->contentHierarchyRepository->findby(
-            [
-                'parent' => $parentId,
-            ]
-        ));
+        $otherChildrenForParent = count(
+            $this->contentHierarchyRepository->findby(
+                [
+                    'parent' => $parentId,
+                ]
+            )
+        );
 
         if (!$childPosition || ($childPosition > $otherChildrenForParent)) {
             $childPosition = -1;
@@ -134,8 +136,10 @@ class ContentHierarchyService
         $this->entityManager->persist($hierarchy);
         $this->entityManager->flush();
 
-        $this->entityManager->getCache()->evictEntity(Content::class, $parentId);
-        $this->entityManager->getCache()->evictEntity(Content::class, $childId);
+        $this->entityManager->getCache()
+            ->evictEntity(Content::class, $parentId);
+        $this->entityManager->getCache()
+            ->evictEntity(Content::class, $childId);
 
         return $hierarchy;
     }
@@ -148,8 +152,10 @@ class ContentHierarchyService
     public function delete($parentId, $childId)
     {
         //delete the cached results for parent id
-        $this->entityManager->getCache()->evictEntity(Content::class, $parentId);
-        $this->entityManager->getCache()->evictEntity(Content::class, $childId);
+        $this->entityManager->getCache()
+            ->evictEntity(Content::class, $parentId);
+        $this->entityManager->getCache()
+            ->evictEntity(Content::class, $childId);
 
         $hierarchy = $this->contentHierarchyRepository->findOneBy(
             [
@@ -184,8 +190,14 @@ class ContentHierarchyService
             return true;
         }
 
-        $this->entityManager->getCache()->evictEntity(Content::class, $parentHierarchy->getParent()->getId());
-        $this->entityManager->getCache()->evictEntity(Content::class, $childId);
+        $this->entityManager->getCache()
+            ->evictEntity(
+                Content::class,
+                $parentHierarchy->getParent()
+                    ->getId()
+            );
+        $this->entityManager->getCache()
+            ->evictEntity(Content::class, $childId);
 
         return $this->entityManager->createQuery(
             '   UPDATE Railroad\Railcontent\Entities\ContentHierarchy h

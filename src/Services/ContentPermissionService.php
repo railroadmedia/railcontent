@@ -2,10 +2,10 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Doctrine\ORM\EntityManager;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\Permission;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
 /**
  * Class PermissionService
@@ -30,17 +30,17 @@ class ContentPermissionService
     private $permissionRepository;
 
     /**
-     * @var EntityManager
+     * @var RailcontentEntityManager
      */
     private $entityManager;
 
     /**
      * ContentPermissionService constructor.
      *
-     * @param EntityManager $entityManager
+     * @param RailcontentEntityManager $entityManager
      */
     public function __construct(
-        EntityManager $entityManager
+        RailcontentEntityManager $entityManager
     ) {
         $this->entityManager = $entityManager;
 
@@ -80,7 +80,7 @@ class ContentPermissionService
             ->setParameter('contentType', $contentType);
 
         return $qb->getQuery()
-            ->getResult();
+            ->getResult('Railcontent');
     }
 
     /**
@@ -152,8 +152,7 @@ class ContentPermissionService
 
         $qb = $this->contentPermissionRepository->createQueryBuilder('cp');
 
-        $qb
-            ->where('cp.brand = :brand')
+        $qb->where('cp.brand = :brand')
             ->andWhere(
                 $qb->expr()
                     ->orX(
@@ -168,7 +167,7 @@ class ContentPermissionService
             ->setParameter('contentType', $contentType);
 
         return $qb->getQuery()
-            ->getResult();
+            ->getResult('Railcontent');
     }
 
     /**

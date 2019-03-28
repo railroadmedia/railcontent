@@ -3,9 +3,9 @@
 namespace Railroad\Railcontent\Commands;
 
 use Carbon\Carbon;
-use Doctrine\ORM\EntityManager;
 use Illuminate\Console\Command;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
 class ExpireCache extends Command
@@ -30,7 +30,7 @@ class ExpireCache extends Command
     protected $contentRepository;
 
     /**
-     * @var EntityManager
+     * @var RailcontentEntityManager
      */
     protected $entityManager;
 
@@ -39,7 +39,7 @@ class ExpireCache extends Command
      *
      * @return void
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(RailcontentEntityManager $entityManager)
     {
         parent::__construct();
 

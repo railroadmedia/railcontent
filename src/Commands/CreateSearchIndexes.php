@@ -3,10 +3,10 @@
 namespace Railroad\Railcontent\Commands;
 
 use Carbon\Carbon;
-use Doctrine\ORM\EntityManager;
 use Illuminate\Console\Command;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\SearchIndex;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
 class CreateSearchIndexes extends Command
@@ -36,7 +36,7 @@ class CreateSearchIndexes extends Command
     protected $contentRepository;
 
     /**
-     * @var EntityManager
+     * @var RailcontentEntityManager
      */
     private $entityManager;
 
@@ -45,7 +45,7 @@ class CreateSearchIndexes extends Command
      *
      * @return void
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(RailcontentEntityManager $entityManager)
     {
         parent::__construct();
 

@@ -34,6 +34,7 @@ use Railroad\Railcontent\Entities\ContentTopic;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Entities\UserPermission;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
 use Railroad\Railcontent\Services\RemoteStorageService;
@@ -98,7 +99,7 @@ class RailcontentTestCase extends BaseTestCase
         parent::setUp();
 
         // Run the schema update tool using our entity metadata
-        $this->entityManager = app(EntityManager::class);
+        $this->entityManager = app(RailcontentEntityManager::class);
 
         $this->entityManager->getMetadataFactory()
             ->getCacheDriver()
@@ -195,7 +196,7 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set(
             'database.connections.mysql',
             [
-                'driver' => 'mysql',
+                'driver' => 'pdo_mysql',
                 'host' => 'mysql',
                 'port' => env('MYSQL_PORT', '3306'),
                 'database' => env('MYSQL_DB', 'railcontent'),
@@ -213,11 +214,11 @@ class RailcontentTestCase extends BaseTestCase
         // database
         if ($this->getConnectionType() == "mysql") {
             //mysql
-            $app['config']->set('doctrine.database_driver', $defaultConfig['database_driver']);
-            $app['config']->set('doctrine.database_name', $defaultConfig['database_name']);
-            $app['config']->set('doctrine.database_user', $defaultConfig['database_user']);
-            $app['config']->set('doctrine.database_password', $defaultConfig['database_password']);
-            $app['config']->set('doctrine.database_host', $defaultConfig['database_host']);
+            $app['config']->set('railcontent.database_driver', $defaultConfig['database_driver']);
+            $app['config']->set('railcontent.database_name', $defaultConfig['database_name']);
+            $app['config']->set('railcontent.database_user', $defaultConfig['database_user']);
+            $app['config']->set('railcontent.database_password', $defaultConfig['database_password']);
+            $app['config']->set('railcontent.database_host', $defaultConfig['database_host']);
 
             $app['config']->set(
                 'database.connections.' . $defaultConfig['database_connection_name'],
@@ -229,7 +230,15 @@ class RailcontentTestCase extends BaseTestCase
                     'host' => $defaultConfig['database_host'],
                 ]
             );
+
+            $app['config']->set('doctrine.database_driver', 'pdo_sqlite');
         } else {
+            $app['config']->set('railcontent.database_driver', 'pdo_sqlite');
+            $app['config']->set('railcontent.database_user', 'root');
+            $app['config']->set('railcontent.database_password', 'root');
+            $app['config']->set('railcontent.database_in_memory', true);
+            $app['config']->set('railcontent.development_mode', true);
+
             $app['config']->set('doctrine.database_driver', 'pdo_sqlite');
             $app['config']->set('doctrine.database_user', 'root');
             $app['config']->set('doctrine.database_password', 'root');
@@ -244,6 +253,8 @@ class RailcontentTestCase extends BaseTestCase
                 $defaultConfig['entities']
             )
         );
+        $app['config']->set('railcontent.redis_host', $defaultConfig['redis_host']);
+        $app['config']->set('railcontent.redis_port', $defaultConfig['redis_port']);
         $app['config']->set('doctrine.redis_host', $defaultConfig['redis_host']);
         $app['config']->set('doctrine.redis_port', $defaultConfig['redis_port']);
 
@@ -654,9 +665,15 @@ class RailcontentTestCase extends BaseTestCase
     {
         $this->populator = new Populator($this->faker, $this->entityManager);
 
+        if(!array_key_exists('userId', $contentData)){
+            $user = $this->fakeUser();
+        }
+
         $contentData['user'] =
             $this->app->make(UserProvider::class)
-                ->getUserById($contentData['userId'] ?? 1);
+                ->getUserById($contentData['userId']??$user['id']) ;
+
+        unset($contentData['userId']);
 
         if (empty($contentData)) {
             $contentData = [
@@ -740,7 +757,6 @@ class RailcontentTestCase extends BaseTestCase
 
         if (empty($commentData)) {
             $commentData = [
-                'userId' => 1,
                 'deletedAt' => null,
             ];
         }
@@ -753,9 +769,15 @@ class RailcontentTestCase extends BaseTestCase
                 ]
             )[0];
         }
+
+        if(!array_key_exists('userId', $commentData)){
+            $user = $this->fakeUser();
+        }
+
         $commentData['user'] =
             $this->app->make(UserProvider::class)
-                ->getUserById($commentData['userId'] ?? 1);
+                ->getUserById($commentData['userId']??$user['id']) ;
+
         unset($commentData['userId']);
 
         $this->populator->addEntity(
@@ -875,16 +897,19 @@ class RailcontentTestCase extends BaseTestCase
     {
         if (empty($commentLikeData)) {
             $commentLikeData = [
-                'userId' => 1,
                 'comment' => $this->fakeComment(),
             ];
         }
 
+        if(!array_key_exists('userId', $commentLikeData)){
+            $user = $this->fakeUser();
+        }
+
         $commentLikeData['user'] =
             $this->app->make(UserProvider::class)
-                ->getUserById($commentLikeData['userId'] ?? 1);
+                ->getUserById($commentLikeData['userId']??$user['id']) ;
 
-        unset ($commentLikeData['userId']);
+        unset($commentLikeData['userId']);
 
         $this->populator->addEntity(
             CommentLikes::class,
@@ -895,6 +920,23 @@ class RailcontentTestCase extends BaseTestCase
         $fakePopulator = $this->populator->execute();
 
         return $fakePopulator[CommentLikes::class];
+    }
+
+    public function fakeUser($userData = [])
+    {
+        $userData += [
+            'email' => $this->faker->email,
+            'password' => $this->faker->password,
+            'display_name' => $this->faker->name,
+            'created_at' => Carbon::now()
+                ->toDateTimeString(),
+            'updated_at' => Carbon::now()
+                ->toDateTimeString(),
+        ];
+        $userId = $this->databaseManager->table('users')
+            ->insertGetId($userData);
+        $userData['id'] = $userId;
+        return $userData;
     }
 
 }

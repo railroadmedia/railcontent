@@ -23,9 +23,9 @@ class UserPermission
     protected $id;
 
     /**
-     * @var int
+     * @var User
      *
-     * @ORM\Column(type="user_id", name="user_id", nullable=true)
+     * @ORM\Column(type="user_id", name="user_id")
      */
     protected $user;
 
@@ -59,17 +59,17 @@ class UserPermission
     }
 
     /**
-     * @return UserInterface|null
+     * @return User|null
      */
-    public function getUser(): UserInterface
+    public function getUser(): User
     {
         return $this->user;
     }
 
     /**
-     * @param UserInterface $user
+     * @param User $user
      */
-    public function setUser(UserInterface $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }

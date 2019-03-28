@@ -9,7 +9,6 @@ use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
-use Railroad\Resora\Decorators\Decorator;
 
 class ContentRepository extends EntityRepository
 {

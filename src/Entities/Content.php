@@ -66,7 +66,7 @@ class Content extends ArrayExpressible
     protected $language;
 
     /**
-     * @var int
+     * @var User
      *
      * @ORM\Column(type="user_id", name="user_id", nullable=true)
      */
@@ -259,18 +259,18 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @param UserInterface|null $user
+     * @param User|null $user
      */
-    public function setUser(?UserInterface $user)
+    public function setUser(?User $user)
     {
         $this->user = $user;
     }
 
     /**
-     * @return UserInterface|null
+     * @return User|null
      */
     public function getUser()
-    : ?UserInterface
+    : ?User
     {
         return $this->user;
     }

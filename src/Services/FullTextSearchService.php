@@ -2,8 +2,8 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Doctrine\ORM\EntityManager;
 use Railroad\Railcontent\Entities\SearchIndex;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\FullTextSearchRepository;
 
@@ -19,18 +19,18 @@ class FullTextSearchService
     private $contentService;
 
     /**
-     * @var EntityManager
+     * @var RailcontentEntityManager
      */
     private $entityManager;
 
     /**
      * FullTextSearchService constructor.
      *
-     * @param EntityManager $entityManager
+     * @param RailcontentEntityManager $entityManager
      * @param ContentService $contentService
      */
     public function __construct(
-        EntityManager $entityManager,
+        RailcontentEntityManager $entityManager,
         ContentService $contentService
     ) {
         $this->entityManager = $entityManager;

@@ -19,13 +19,15 @@ class CommentJsonControllerTest extends RailcontentTestCase
     protected function setUp()
     {
         parent::setUp();
-
-        $this->fakeDataHydrator = new CommentFakeDataHydrator($this->entityManager);
+//dd($this->entityManager);
+        //$this->fakeDataHydrator = new CommentFakeDataHydrator($this->entityManager);
     }
 
     public function test_add_comment_response()
     {
+
         $userId = $this->createAndLogInNewUser();
+
         $content = $this->fakeContent(
             1,
             [
@@ -34,7 +36,11 @@ class CommentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $attributes = $this->fakeDataHydrator->getAttributeArray(Comment::class, new CommentTransformer());
+        $attributes = [
+            'comment' => $this->faker->paragraph,
+            'content' => $content[0],
+            'temporary_display_name' => $this->faker->word
+        ];
 
         $attributes['user'] = $userId;
 
@@ -60,14 +66,9 @@ class CommentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $expectedResults = [
-            'type' => 'comment',
-            'id' => 1,
-            'attributes' => $attributes,
-        ];
-
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data'));
+
+        $this->assertEquals($attributes['comment'], $response->decodeResponseJson('data')['attributes']['comment']);
 
     }
 
@@ -136,10 +137,15 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
     public function test_update_my_comment_response()
     {
+
         $userId = $this->createAndLogInNewUser();
-        $comment = $this->fakeComment();
+
+        $comment = $this->fakeComment(1, [
+            'userId' => $userId
+        ]);
 
         $updatedComment = $this->faker->text();
+
         $response = $this->call(
             'PATCH',
             'railcontent/comment/' . $comment[0]->getId(),
@@ -161,16 +167,18 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         ];
 
-        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data')['attributes']);
+        $this->assertEquals($updatedComment, $response->decodeResponseJson('data')['attributes']['comment']);
     }
 
     public function test_update_other_comment_response()
     {
         $userId = $this->createAndLogInNewUser();
+        $randomUser = $this->fakeUser();
+
         $comment = $this->fakeComment(
             1,
             [
-                'userId' => rand(2, 10),
+                'userId' => $randomUser['id'],
             ]
         );
 
@@ -244,12 +252,13 @@ class CommentJsonControllerTest extends RailcontentTestCase
     public function test_admin_can_update_other_comment_response()
     {
         $userId = $this->createAndLogInNewUser();
+        $randomUser = $this->fakeUser();
         $content = $this->fakeContent();
 
         $comment = $this->fakeComment(
             1,
             [
-                'userId' => rand(2, 10),
+                'userId' => $randomUser['id'],
                 'content' => $content[0],
             ]
         );
@@ -286,6 +295,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             2,
             [
                 'parent' => null,
+                'userId' => $userId
             ]
         );
         $replies = $this->fakeComment(
@@ -309,10 +319,12 @@ class CommentJsonControllerTest extends RailcontentTestCase
     public function test_user_can_not_delete_others_comment()
     {
         $userId = $this->createAndLogInNewUser();
+        $randomUser = $this->fakeUser();
+
         $comment = $this->fakeComment(
             1,
             [
-                'userId' => rand(2, 10),
+                'userId' => $randomUser['id'],
             ]
         );
 
@@ -337,12 +349,13 @@ class CommentJsonControllerTest extends RailcontentTestCase
     public function test_admin_can_delete_other_comment_response()
     {
         $userId = $this->createAndLogInNewUser();
+        $randomUser = $this->fakeUser();
         $content = $this->fakeContent();
 
         $comment = $this->fakeComment(
             1,
             [
-                'userId' => rand(2, 10),
+                'userId' => $randomUser['id'],
                 'content' => $content[0],
             ]
         );
@@ -430,12 +443,16 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
     public function test_pull_comments_paginated()
     {
+        $user = $this->fakeUser();
+        $otherUser = $this->fakeUser();
+
         $limit = 3;
         $totalNumber = $this->faker->numberBetween($limit, ($limit + 25));
         $totalNumber = 3;
         $comments = $this->fakeComment(
             $totalNumber,
             [
+                'userId' => $otherUser['id'],
                 'parent' => null,
                 'deletedAt' => null,
             ]
@@ -444,7 +461,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'comment' => $comments[0],
-                'userId' => 1,
+                'userId' => $user['id'],
             ]
         );
 
@@ -502,12 +519,12 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $page = 1;
         $limit = 3;
         $totalNumber = $this->faker->numberBetween(3, 10);
-        $userId = 1;
+        $user = $this->fakeUser();
 
         $comments = $this->fakeComment(
             $totalNumber,
             [
-                'userId' => $userId,
+                'userId' => $user['id'],
                 'parent' => null,
                 'deletedAt' => null,
             ]
@@ -519,7 +536,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             [
                 'page' => $page,
                 'limit' => $limit,
-                'user_id' => $userId,
+                'user_id' => $user['id'],
             ]
         );
 
@@ -535,7 +552,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals($limit, count($data));
 
         foreach ($data as $res) {
-            $this->assertEquals($userId, $res['attributes']['user']);
+            $this->assertEquals($user['id'], $res['attributes']['user']);
         }
     }
 
@@ -592,6 +609,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
     public function test_pull_comments_filtered_by_my_comments()
     {
         $currentUserId = $this->createAndLogInNewUser();
+        $randomUser = $this->fakeUser();
+
         $content1 = $this->fakeContent(
             1,
             [
@@ -618,7 +637,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $replyToMyComment = $this->fakeComment(
             1,
             [
-                'userId' => rand(2, 10),
+                'userId' => $randomUser['id'],
                 'content' => $content1[0],
                 'parent' => $this->entityManager->getRepository(Comment::class)
                     ->find(1),

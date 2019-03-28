@@ -569,6 +569,7 @@ class PermissionControllerTest extends RailcontentTestCase
         );
 
         $response = $this->call('PATCH', 'railcontent/permission/dissociate/', $data);
+
         $this->assertEquals(200, $response->status());
         $this->assertDatabaseMissing(
             config('railcontent.table_prefix') . 'content_permissions',
@@ -772,6 +773,7 @@ class PermissionControllerTest extends RailcontentTestCase
             [
                 'content' => $contents[0],
                 'permission' => $permission[0],
+                'brand' => config('railcontent.brand')
             ]
         );
 

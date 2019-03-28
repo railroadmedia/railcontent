@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Decorators;
 
 use Railroad\Railcontent\Decorators\Video\ContentVimeoVideoDecorator;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -22,11 +23,10 @@ class ContentVimeoVideoDecoratorTest extends RailcontentTestCase
 
     public function test_decorate()
     {
-        config(
-            [
-                'resora.decorators.content' => [ContentVimeoVideoDecorator::class,]
-            ]
-        );
+         config(['railcontent.decorators' => [
+            Content::class => [ContentVimeoVideoDecorator::class]
+        ]]);
+
 
         $vimeoVideo = $this->fakeContent(
             1,
@@ -45,13 +45,13 @@ class ContentVimeoVideoDecoratorTest extends RailcontentTestCase
                 'brand' => config('railcontent.brand'),
                 'type' => 'course',
                 'status' => 'published',
-                'video' => $vimeoVideo[0]->getId(),
+                'video' => $vimeoVideo[0],
             ]
         );
 
         $contentResults = $this->serviceBeingTested->getById($content[0]->getId());
 
-        $this->assertEquals(4, count($contentResults->getProperty('vimeo_video_playback_endpoints')));
+        $this->assertEquals(3, count($contentResults->getProperty('vimeo_video_playback_endpoints')));
     }
 
     protected function getEnvironmentSetUp($app)

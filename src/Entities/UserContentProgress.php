@@ -21,9 +21,9 @@ class UserContentProgress
     protected $id;
 
     /**
-     * @var int
+     * @var User
      *
-     * @ORM\Column(type="user_id", name="user_id", nullable=true)
+     * @ORM\Column(type="user_id", name="user_id")
      */
     protected $user;
 
@@ -63,7 +63,7 @@ class UserContentProgress
     }
 
     /**
-     * @return UserInterface
+     * @return User
      */
     public function getUser()
     {
@@ -71,9 +71,9 @@ class UserContentProgress
     }
 
     /**
-     * @param UserInterface $user
+     * @param User $user
      */
-    public function setUser(UserInterface $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }

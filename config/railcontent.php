@@ -162,14 +162,14 @@ return [
         Content::class => [
 
             // todo: this breaks because the decorator is not updated to implement the new hydration logic
-//            ContentPermissionsDecorator::class
+            ContentPermissionsDecorator::class
         ],
         ContentExercise::class => [
 
         ],
         Comment::class => [
             // todo: this breaks because the decorator is not updated to implement the new hydration logic
-//            CommentLikesDecorator::class,
+            CommentLikesDecorator::class,
         ]
     ],
 

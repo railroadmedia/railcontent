@@ -3,18 +3,21 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
-use Doctrine\ORM\EntityManager;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
 class CommentService
 {
+    /**
+     * @var RailcontentEntityManager
+     */
     private $entityManager;
     /**
      * @var CommentRepository
@@ -47,11 +50,12 @@ class CommentService
     /**
      * CommentService constructor.
      *
-     * @param EntityManager $entityManager
+     * @param RailcontentEntityManager $entityManager
      * @param JsonApiHydrator $jsonApiHydrator
+     * @param UserProviderInterface $userProvider
      */
     public function __construct(
-        EntityManager $entityManager,
+        RailcontentEntityManager $entityManager,
         JsonApiHydrator $jsonApiHydrator,
         UserProviderInterface $userProvider
     ) {
@@ -272,7 +276,7 @@ class CommentService
         $results =
             $qb->getQuery()
                 ->setCacheable(true)
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -330,7 +334,7 @@ class CommentService
         }
 
         return $qb->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult('Railcontent');
     }
 
     /**
@@ -477,7 +481,7 @@ class CommentService
         }
 
         return $qb->getQuery()
-            ->getSingleScalarResult();
+            ->getSingleScalarResult('Railcontent');
 
     }
 }

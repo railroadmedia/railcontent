@@ -99,9 +99,9 @@ class ContentPermission
     public function setContent(?Content $content)
     {
         $this->content = $content;
-        if ($content) {
-            $content->addPermission($this);
-        }
+//        if ($content) {
+//            $content->addPermission($this);
+//        }
     }
 
     /**

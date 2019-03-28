@@ -2,11 +2,11 @@
 
 namespace Railroad\Railcontent\Commands;
 
-use Doctrine\ORM\EntityManager;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
 class MigrateContentFields extends Command
 {
@@ -30,7 +30,7 @@ class MigrateContentFields extends Command
     private $databaseManager;
 
     /**
-     * @var EntityManager
+     * @var RailcontentEntityManager
      */
     private $entityManager;
 
@@ -39,7 +39,7 @@ class MigrateContentFields extends Command
      *
      * @return void
      */
-    public function __construct(DatabaseManager $databaseManager, EntityManager $entityManager)
+    public function __construct(DatabaseManager $databaseManager, RailcontentEntityManager $entityManager)
     {
         parent::__construct();
 
@@ -76,7 +76,7 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        if($row->value) {
+                        if ($row->value) {
                             $data[] = [
                                 'content_id' => $row->content_id,
                                 'topic' => $row->value,
@@ -99,7 +99,7 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        if($row->value) {
+                        if ($row->value) {
                             $data[] = [
                                 'content_id' => $row->content_id,
                                 'tag' => $row->value,
@@ -115,14 +115,14 @@ class MigrateContentFields extends Command
 
         $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
             ->select('id', 'content_id', 'key', 'value', 'position')
-            ->whereIn('key', ['sbt_bpm','sbt_exercise_number'])
+            ->whereIn('key', ['sbt_bpm', 'sbt_exercise_number'])
             ->orderBy('content_id', 'desc')
             ->chunk(
                 500,
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        if($row->value) {
+                        if ($row->value) {
                             $data[] = [
                                 'content_id' => $row->content_id,
                                 'key' => $row->key,
@@ -146,7 +146,7 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        if($row->value) {
+                        if ($row->value) {
                             $data[] = [
                                 'content_id' => $row->content_id,
                                 'playlist' => $row->value,
@@ -170,7 +170,7 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        if($row->value) {
+                        if ($row->value) {
                             $data[] = [
                                 'content_id' => $row->content_id,
                                 'key' => $row->value,
@@ -193,7 +193,7 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        if($row->value) {
+                        if ($row->value) {
                             $data[] = [
                                 'content_id' => $row->content_id,
                                 'key_pitch_type' => $row->value,
@@ -216,7 +216,7 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        if(($row->value)&&(is_numeric($row->value))) {
+                        if (($row->value) && (is_numeric($row->value))) {
                             $data[] = [
                                 'content_id' => $row->content_id,
                                 'instructor_id' => $row->value,
@@ -230,7 +230,6 @@ class MigrateContentFields extends Command
                 }
             );
 
-
         $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
             ->select('id', 'content_id', 'key', 'value', 'position')
             ->where('key', 'exercise_id')
@@ -240,7 +239,7 @@ class MigrateContentFields extends Command
                 function (Collection $rows) use (&$migratedFields, $dbConnection) {
                     $data = [];
                     foreach ($rows as $row) {
-                        if(($row->value)&&(is_numeric($row->value))) {
+                        if (($row->value) && (is_numeric($row->value))) {
                             $data[] = [
                                 'content_id' => $row->content_id,
                                 'exercise_id' => $row->value,
@@ -258,7 +257,7 @@ class MigrateContentFields extends Command
         $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
             ->select('id', 'content_id', 'key', 'value')
             ->whereIn('key', $contentColumnNames)
-            ->where('content_id','!= ',0)
+            ->where('content_id', '!= ', 0)
             ->orderBy('content_id', 'desc')
             ->chunk(
                 500,
@@ -283,7 +282,7 @@ class MigrateContentFields extends Command
             foreach ($contentIdsToUpdate as $index2 => $contentId) {
                 if (array_key_exists($column, $contentColumns[$contentId])) {
                     $value = $contentColumns[$contentId][$column];
-                    if($value != '') {
+                    if ($value != '') {
                         $query1 .= "  WHEN id = " . $contentId . " THEN " . $pdo->quote($value);
                         $exist = true;
                     }

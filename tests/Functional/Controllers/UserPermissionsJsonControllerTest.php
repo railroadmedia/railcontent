@@ -67,6 +67,8 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
 
     public function test_store()
     {
+        $user = $this->fakeUser();
+
         $permission = $this->fakePermission();
 
         $results = $this->call(
@@ -88,7 +90,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
                         'user' => [
                             'data' => [
                                 'type' => 'user',
-                                'id' => 1
+                                'id' => $user['id']
                             ]
                         ]
                     ],
@@ -101,7 +103,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             [
                 'data' => [
                     'attributes' => [
-                        'user' => 1,
+                        'user' => $user['id'],
                         'start_date' => Carbon::now()
                             ->toDateTimeString(),
                     ],
@@ -290,13 +292,13 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
     {
         $permission = $this->fakePermission();
 
-        $userId = rand();
+        $user = $this->fakeUser();
 
         $this->populator->addEntity(
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($userId),
+                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
                 'permission' => $permission[0],
                 'startDate' => Carbon::now(),
                 'createdAt' => Carbon::now(),
@@ -313,7 +315,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             config('railcontent.table_prefix'). 'user_permissions',
             [
                 'id' => $userPermissionId,
-                'user_id' => $userId,
+                'user_id' => $user['id'],
                 'permission_id' => $permission[0]->getId(),
                 'start_date' => Carbon::now()
                     ->toDateTimeString(),
@@ -328,13 +330,13 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
     public function test_index_all_active_permissions()
     {
         $permissions = $this->fakePermission(2);
-        $userId = rand();
+        $user = $this->fakeUser();
 
         $this->populator->addEntity(
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($userId),
+                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
                 'permission' => $permissions[0],
                 'expirationDate' => Carbon::now()
                     ->addDays(10),
@@ -348,7 +350,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($userId),
+                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
                 'permission' => $permissions[1],
                 'expirationDate' => null,
                 'startDate' => Carbon::now(),
@@ -367,13 +369,13 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
     public function test_index_specific_user_active_permissions()
     {
         $permissions = $this->fakePermission(2);
-        $userId = rand();
+        $user = $this->fakeUser();
 
         $this->populator->addEntity(
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($userId),
+                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
                 'permission' => $permissions[0],
                 'expirationDate' => Carbon::now()
                     ->addDays(10),
@@ -388,7 +390,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($userId),
+                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
                 'permission' => $permissions[1],
                 'expirationDate' => null,
                 'startDate' => Carbon::now(),
@@ -403,7 +405,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'GET',
             '/railcontent/user-permission',
             [
-                'user_id' => $userId,
+                'user_id' => $user['id'],
             ]
         );
 
@@ -414,13 +416,13 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
     public function test_index_pull_active_and_expired_user_permissions()
     {
         $permissions = $this->fakePermission(2);
-        $userId = rand();
+        $user = $this->fakeUser();
 
         $this->populator->addEntity(
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($userId),
+                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
                 'permission' => $permissions[0],
                 'expirationDate' => Carbon::now()
                     ->subMonth(10),
@@ -434,7 +436,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($userId),
+                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
                 'permission' => $permissions[1],
                 'expirationDate' => null,
                 'startDate' => Carbon::now(),
@@ -477,6 +479,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $content1[0],
                 'permission' => $permission1[0],
+                'brand' => config('railcontent.brand')
             ]
         );
 
@@ -556,6 +559,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $content[0],
                 'permission' => $permission[0],
+                'brand' => config('railcontent.brand')
             ]
         );
 

@@ -3,19 +3,18 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
-use Doctrine\ORM\EntityManager;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
-use Railroad\Railcontent\Events\UserContentsProgressReset;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Support\Collection;
 
 class UserContentProgressService
 {
     /**
-     * @var EntityManager
+     * @var RailcontentEntityManager
      */
     private $entityManager;
 
@@ -46,12 +45,13 @@ class UserContentProgressService
      * UserContentProgressService constructor.
      *
      * @param ContentHierarchyService $contentHierarchyService
-     * @param EntityManager $entityManager
+     * @param RailcontentEntityManager $entityManager
      * @param ContentService $contentService
+     * @param UserProviderInterface $userProvider
      */
     public function __construct(
         ContentHierarchyService $contentHierarchyService,
-        EntityManager $entityManager,
+        RailcontentEntityManager $entityManager,
         ContentService $contentService,
         UserProviderInterface $userProvider
     ) {
@@ -96,7 +96,7 @@ class UserContentProgressService
             ->orderBy($alias . '.updatedOn', 'desc');
 
         return $qb->getQuery()
-            ->getSingleResult();
+            ->getSingleResult('Railcontent');
     }
 
     /**
@@ -124,7 +124,7 @@ class UserContentProgressService
 
         $results =
             $qb->getQuery()
-                ->getResult();
+                ->getResult('Railcontent');
 
         return array_combine(array_column($results, 'content_id'), array_column($results, 'count'));
     }
@@ -529,7 +529,7 @@ class UserContentProgressService
 
         $results =
             $qb->getQuery()
-                ->getResult();
+                ->getResult('Railcontent');
 
         return $results;
     }
@@ -580,7 +580,7 @@ class UserContentProgressService
             ->orderBy($orderByColumn, $orderByDirection);
 
         return $qb->getQuery()
-            ->getResult();
+            ->getResult('Railcontent');
     }
 
     public function getLessonsForUserByType($id, $type, $state = null)
@@ -607,7 +607,7 @@ class UserContentProgressService
             ->setParameter('user', $user);
 
         return $qb->getQuery()
-            ->getResult();
+            ->getResult('Railcontent');
     }
 
     public function countLessonsForUserByTypeAndProgressState($id, $type, $state)
@@ -636,7 +636,7 @@ class UserContentProgressService
 
         $results =
             $qb->getQuery()
-                ->getSingleResult();
+                ->getSingleResult('Railcontent');
 
         return $results['count'];
     }

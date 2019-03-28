@@ -154,7 +154,6 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $up42 = $this->fakeUserContentProgress(
             1,
             [
-                'userId' => rand(2, 10),
                 'content' => $contents[3],
                 'state' => 'started',
                 'progressPercent' => 30,
@@ -244,7 +243,6 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $up4 = $this->fakeUserContentProgress(
             1,
             [
-                'userId' => rand(2, 10),
                 'content' => $contents[3],
                 'state' => 'started',
                 'progressPercent' => 30,
@@ -323,7 +321,6 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $up4 = $this->fakeUserContentProgress(
             1,
             [
-                'userId' => rand(2, 10),
                 'content' => $songs[1],
                 'state' => 'started',
                 'progressPercent' => 30,
@@ -405,7 +402,6 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $up4 = $this->fakeUserContentProgress(
             1,
             [
-                'userId' => rand(2, 10),
                 'content' => $songs[1],
                 'state' => 'started',
                 'progressPercent' => 30,
@@ -486,7 +482,6 @@ class UserContentProgressServiceTest extends RailcontentTestCase
         $up4 = $this->fakeUserContentProgress(
             1,
             [
-                'userId' => rand(2, 10),
                 'content' => $songs[1],
                 'state' => 'started',
                 'progressPercent' => 30,

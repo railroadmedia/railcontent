@@ -2,13 +2,13 @@
 
 namespace Railroad\Railcontent\Controllers;
 
-use Doctrine\ORM\EntityManager;
 use Illuminate\Routing\Controller;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Exceptions\NotFoundException;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Requests\PermissionAssignRequest;
 use Railroad\Railcontent\Requests\PermissionDissociateRequest;
@@ -24,7 +24,7 @@ use Railroad\Railcontent\Services\ResponseService;
 class PermissionJsonController extends Controller
 {
     /**
-     * @var EntityManager
+     * @var RailcontentEntityManager
      */
     private $entityManager;
 
@@ -51,13 +51,13 @@ class PermissionJsonController extends Controller
     /**
      * PermissionJsonController constructor.
      *
-     * @param EntityManager $entityManager
+     * @param RailcontentEntityManager $entityManager
      * @param ContentPermissionService $contentPermissionService
      * @param PermissionService $permissionPackageService
      * @param JsonApiHydrator $jsonApiHydrator
      */
     public function __construct(
-        EntityManager $entityManager,
+        RailcontentEntityManager $entityManager,
         ContentPermissionService $contentPermissionService,
         PermissionService $permissionPackageService,
         JsonApiHydrator $jsonApiHydrator
@@ -161,7 +161,7 @@ class PermissionJsonController extends Controller
             $permission,
             new NotFoundException('Delete failed, permission not found with id: ' . $id)
         );
-        
+
         $contentPermissions = $this->contentPermissionService->getByPermission($id);
         foreach ($contentPermissions as $contentPermission) {
             $this->entityManager->remove($contentPermission);

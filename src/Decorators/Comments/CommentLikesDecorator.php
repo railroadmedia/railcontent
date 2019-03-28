@@ -22,18 +22,30 @@ class CommentLikesDecorator implements DecoratorInterface
         $this->commentLikeService = $commentLikeService;
     }
 
-    public function decorate(array $entities): array
-    {
-        $likeCount = $this->commentLikeService->countForCommentIds([$entities->getId()]);
+    public function decorate(array $entitites)
+    : array {
+        $entitiesIds = array_map(
+            function ($value) {
+                return $value->getId();
+            },
+            $entitites
+        );
+
+        $likeCount = $this->commentLikeService->countForCommentIds($entitiesIds);
 
         $likeUsers = $this->commentLikeService->getUserIdsForEachCommentId(
-            [$entities],
+            $entitiesIds,
             config('railcontent.comment_likes_amount_of_users')
         );
-        $isLikedByCurrentUser = $this->commentLikeService->isLikedByUserId([$entities], auth()->id());
 
-        $entities->createProperty('like_count', $likeCount[$entities->getId()]);
-        $entities->createProperty('like_users', $likeUsers[$entities->getId()] ?? []);
-        $entities->createProperty('is_liked', empty($isLikedByCurrentUser) ? false : true);
+        $isLikedByCurrentUser = $this->commentLikeService->isLikedByUserId($entitiesIds, auth()->id());
+
+        foreach ($entitites as $index => $entity) {
+            $entity->createProperty('like_count', $likeCount[$entity->getId()]);
+            $entity->createProperty('like_users', $likeUsers[$entity->getId()] ?? []);
+            $entity->createProperty('is_liked', empty($isLikedByCurrentUser) ? false : true);
+        }
+
+        return $entitites;
     }
 }

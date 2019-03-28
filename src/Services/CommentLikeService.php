@@ -2,13 +2,13 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Doctrine\ORM\EntityManager;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentLikes;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\CommentUnLiked;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
 class CommentLikeService
 {
@@ -18,7 +18,7 @@ class CommentLikeService
     private $commentLikeRepository;
 
     /**
-     * @var EntityManager
+     * @var RailcontentEntityManager
      */
     private $entityManager;
 
@@ -35,9 +35,10 @@ class CommentLikeService
     /**
      * CommentLikeService constructor.
      *
-     * @param EntityManager $entityManager
+     * @param RailcontentEntityManager $entityManager
+     * @param UserProviderInterface $userProvider
      */
-    public function __construct(EntityManager $entityManager, UserProviderInterface $userProvider)
+    public function __construct(RailcontentEntityManager $entityManager, UserProviderInterface $userProvider)
     {
         $this->entityManager = $entityManager;
         $this->userProvider = $userProvider;
@@ -76,7 +77,7 @@ class CommentLikeService
                 ->setParameter('commentIds', $commentIds)
                 ->groupBy('co.id')
                 ->getQuery()
-                ->getResult();
+                ->getResult('Railcontent');
 
         return array_combine(array_column($results, 'id'), array_column($results, 'nr'));
     }
@@ -99,7 +100,7 @@ class CommentLikeService
                 ->orderBy('c.createdOn', 'desc');
         $results =
             $qb->getQuery()
-                ->getResult();
+                ->getResult('Railcontent');
 
         foreach ($results as $result) {
             if (count(
@@ -204,7 +205,7 @@ class CommentLikeService
 
         $results =
             $qb->getQuery()
-                ->getResult();
+                ->getResult('Railcontent');
 
         if (!empty($results)) {
             $results = array_combine(array_column($results, 'commentId'), array_column($results, 'user'));

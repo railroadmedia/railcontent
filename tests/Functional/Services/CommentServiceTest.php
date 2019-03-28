@@ -55,6 +55,8 @@ class CommentServiceTest extends RailcontentTestCase
 
     public function test_create_comment()
     {
+        $user = $this->fakeUser();
+
         $content = $this->fakeContent(
             1,
             [
@@ -66,7 +68,7 @@ class CommentServiceTest extends RailcontentTestCase
             'id' => 1,
             'content_id' => $content[0]->getId(),
             'parent_id' => null,
-            'user_id' => rand(),
+            'user_id' => $user['id'],
             'comment' => $this->faker->text,
             'created_on' => Carbon::now()
                 ->toDateTimeString(),
@@ -238,6 +240,7 @@ class CommentServiceTest extends RailcontentTestCase
     public function test_update_others_comment()
     {
         $userId = $this->createAndLogInNewUser();
+
         $content = $this->fakeContent(
             1,
             [
@@ -249,7 +252,6 @@ class CommentServiceTest extends RailcontentTestCase
             1,
             [
                 'content' => $content[0],
-                'userId' => rand(5, 100),
                 'comment' => $this->faker->text,
             ]
         );
@@ -312,7 +314,6 @@ class CommentServiceTest extends RailcontentTestCase
             1,
             [
                 'content' => $content[0],
-                'userId' => rand(3, 20),
                 'comment' => $this->faker->text,
             ]
         );

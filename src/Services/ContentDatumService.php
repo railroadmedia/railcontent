@@ -2,18 +2,18 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Doctrine\ORM\EntityManager;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Events\ContentDatumCreated;
 use Railroad\Railcontent\Events\ContentDatumDeleted;
 use Railroad\Railcontent\Events\ContentDatumUpdated;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
 
 class ContentDatumService
 {
     /**
-     * @var EntityManager
+     * @var RailcontentEntityManager
      */
     private $entityManager;
     /**
@@ -22,11 +22,11 @@ class ContentDatumService
     private $datumRepository;
 
     /**
-     * DatumService constructor.
+     * ContentDatumService constructor.
      *
-     * @param ContentDatumRepository $datumRepository
+     * @param RailcontentEntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(RailcontentEntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
 
@@ -52,7 +52,7 @@ class ContentDatumService
             ->where('content IN (:contents)')
             ->setParameter('contents', $contentIds)
             ->getQuery()
-            ->getResult();
+            ->getResult('Railcontent');
     }
 
     /**

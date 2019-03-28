@@ -11,11 +11,11 @@ interface UserProviderInterface
 
     public function getUserId(User $user): int;
 
-    public function getCurrentUser(): User;
+    public function getCurrentUser(): ?User;
 
-    public function getCurrentUserId(): int;
+    public function getCurrentUserId(): ?int;
 
     public function getUserTransformer(): TransformerAbstract;
 
-    public function createUser(string $email, string $password): User;
+    public function createUser(string $email, string $password): ?User;
 }

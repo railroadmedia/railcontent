@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
 use Carbon\Carbon;
-use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentHierarchy;

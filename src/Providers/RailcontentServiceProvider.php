@@ -11,7 +11,6 @@ use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
 use Doctrine\ORM\Cache\DefaultCacheFactory;
 use Doctrine\ORM\Cache\RegionsConfiguration;
 use Doctrine\ORM\Configuration;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
 use Gedmo\DoctrineExtensions;
@@ -28,7 +27,6 @@ use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Hydrators\RailcontentHydrator;
 use Railroad\Railcontent\Listeners\ContentEventListener;
-use Railroad\Railcontent\Listeners\RailcontentEventSubscriber;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Redis;
@@ -84,21 +82,14 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // todo: remove this, railcontent should setup its own entity manager
-        $entityManager = app()->make(EntityManager::class);
-        $eventManager = $entityManager->getEventManager();
-
-        $eventManager->addEventSubscriber(new RailcontentEventSubscriber());
-        //-----------------------------------------------------------------
-
         // set proxy dir to temp folder on server
         $proxyDir = sys_get_temp_dir();
 
         // setup redis
         $redis = new Redis();
         $redis->connect(
-            config('usora.redis_host'),
-            config('usora.redis_port')
+            config('railcontent.redis_host'),
+            config('railcontent.redis_port')
         );
         $redisCache = new RedisCache();
         $redisCache->setRedis($redis);
@@ -119,7 +110,7 @@ class RailcontentServiceProvider extends ServiceProvider
             $cachedAnnotationReader
         );
 
-        foreach (config('usora.entities') as $driverConfig) {
+        foreach (config('doctrine.entities') as $driverConfig) {
             $annotationDriver = new AnnotationDriver(
                 $cachedAnnotationReader, $driverConfig['path']
             );
@@ -148,13 +139,16 @@ class RailcontentServiceProvider extends ServiceProvider
         $ormConfiguration->setSecondLevelCacheEnabled();
         $ormConfiguration->getSecondLevelCacheConfiguration()->setCacheFactory($factory);
 
+        $ormConfiguration->addCustomStringFunction('MATCH_AGAINST','Railroad\\Railcontent\\Extensions\\Doctrine\\MatchAgainst');
+        $ormConfiguration->addCustomStringFunction('UNIX_TIMESTAMP','Railroad\\Railcontent\\Extensions\\Doctrine\\UnixTimestamp');
+
         $ormConfiguration->setMetadataCacheImpl($redisCache);
         $ormConfiguration->setQueryCacheImpl($redisCache);
         $ormConfiguration->setResultCacheImpl($redisCache);
         $ormConfiguration->setProxyDir($proxyDir);
         $ormConfiguration->setProxyNamespace('DoctrineProxies');
         $ormConfiguration->setAutoGenerateProxyClasses(
-            config('usora.development_mode')
+            config('railcontent.development_mode')
         );
         $ormConfiguration->setMetadataDriverImpl($driverChain);
         $ormConfiguration->setNamingStrategy(
@@ -162,19 +156,19 @@ class RailcontentServiceProvider extends ServiceProvider
         );
 
         // orm configuration instance is referenced in laravel container to be reused when needed
-        if (config('usora.database_in_memory') !== true) {
+        if (config('railcontent.database_in_memory') !== true) {
             $databaseOptions = [
-                'driver' => config('usora.database_driver'),
-                'dbname' => config('usora.database_name'),
-                'user' => config('usora.database_user'),
-                'password' => config('usora.database_password'),
-                'host' => config('usora.database_host'),
+                'driver' => config('railcontent.database_driver'),
+                'dbname' => config('railcontent.database_name'),
+                'user' => config('railcontent.database_user'),
+                'password' => config('railcontent.database_password'),
+                'host' => config('railcontent.database_host'),
             ];
         } else {
             $databaseOptions = [
-                'driver' => config('usora.database_driver'),
-                'user' => config('usora.database_user'),
-                'password' => config('usora.database_password'),
+                'driver' => config('railcontent.database_driver'),
+                'user' => config('railcontent.database_user'),
+                'password' => config('railcontent.database_password'),
                 'memory' => true,
             ];
         }

@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Doctrine\ORM\EntityManager;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
@@ -302,16 +301,12 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->where(config('railcontent.table_prefix'). 'content' . '.slug = :slug')
+                ->andWhere(config('railcontent.table_prefix'). 'content' . '.slug = :slug')
                 ->andWhere(config('railcontent.table_prefix'). 'content' . '.type = :type')
                 ->andWhere(config('railcontent.table_prefix'). 'content' . '.user = :user')
-                ->setParameters(
-                    [
-                        'slug' => $slug,
-                        'type' => $type,
-                        'user' => $userId,
-                    ]
-                )
+                ->setParameter('slug', $slug)
+                ->setParameter('type', $type)
+                ->setParameter('user', $userId)
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
@@ -883,7 +878,6 @@ class ContentService
                 'results' => $qb->getQuery()
                     ->setCacheable(true)
                     ->setCacheRegion('pull')
-                    ->useResultCache(true)
                     ->getResult('Railcontent'),
                 'filter_options' => $pullFilterFields ? $this->contentRepository->getFilterFields() : [],
             ]
@@ -932,9 +926,11 @@ class ContentService
             $this->entityManager->persist($hierarchy);
             $this->entityManager->flush();
         }
-
-        $this->entityManager->getCache()
+//dd($this->entityManager->getCache('Railcontent'));
+        $this->entityManager->getCache('Railcontent')
             ->evictEntityRegion(Content::class);
+
+        $this->entityManager->getCache('Railcontent')->evictEntity(Content::class,'pull');
 
         event(new ContentCreated($content->getId()));
 

@@ -50,7 +50,7 @@ class FullTextSearchRepository extends EntityRepository
                     ->getAssociationNames());
 
             foreach ($associations as $association) {
-                if ($association == 'userProgress' || $association == 'data') {
+                if ($association == 'userProgress' || $association == 'data' || $association = 'video') {
                     continue;
                 }
 
@@ -97,6 +97,9 @@ class FullTextSearchRepository extends EntityRepository
         }
 
         foreach ($values as $valueIndex => $value) {
+            if(is_object($value) ) {
+                dd($values[$valueIndex]);
+            }
             $values[$valueIndex] = str_replace('/', '_', $value);
         }
 

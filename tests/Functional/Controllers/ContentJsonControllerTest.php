@@ -1120,6 +1120,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $content1[0],
                 'permission' => $permission[0],
+                'brand' => config('railcontent.brand')
             ]
         );
 
@@ -1139,6 +1140,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $content2[0],
                 'permission' => $permission2[0],
+                'brand' => config('railcontent.brand')
             ]
         );
 
@@ -1183,6 +1185,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $contents[0],
                 'permission' => $permission[0],
+                'brand' => config('railcontent.brand')
             ]
         );
 
@@ -1795,6 +1798,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'difficulty' => 1,
                 'type' => $type,
+                'brand' => config('railcontent.brand'),
+                'status' => 'published'
             ]
         );
         $otherContent = $this->fakeContent(12);
@@ -1887,12 +1892,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $id = $contents[1]->getId();
 
         $response = $this->call('DELETE', 'railcontent/soft/content/' . $id);
-
-        $secondRequest = $this->call(
-            'GET',
-            'railcontent/content/get-by-ids',
-            ['ids' => $contents[2]->getId() . ',' . $id . ',' . $contents[5]->getId()]
-        );
 
         $secondRequest = $this->call(
             'GET',

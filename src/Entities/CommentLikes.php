@@ -21,7 +21,7 @@ class CommentLikes
     protected $id;
 
     /**
-     * @var int
+     * @var User
      *
      * @ORM\Column(type="user_id", name="user_id", nullable=true)
      */
@@ -70,17 +70,17 @@ class CommentLikes
     }
 
     /**
-     * @param UserInterface $user
+     * @param User $user
      */
-    public function setUser(UserInterface $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
     }
 
     /**
-     * @return UserInterface
+     * @return User
      */
-    public function getUser(): UserInterface
+    public function getUser(): User
     {
         return $this->user;
     }

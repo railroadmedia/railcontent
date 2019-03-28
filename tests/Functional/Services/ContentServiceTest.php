@@ -446,25 +446,26 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_getByUserIdTypeSlug()
     {
+        $user = $this->fakeUser();
         $contents = $this->fakeContent(rand(2,10),[
-            'userId' => 1,
+            'userId' => $user['id'],
             'brand' => config('railcontent.brand'),
             'status' => 'published',
             'publishedOn' => Carbon::now()
         ]);
-        $results = $this->classBeingTested->getByUserIdTypeSlug(1, $contents[0]->getType(), $contents[0]->getSlug());
+        $results = $this->classBeingTested->getByUserIdTypeSlug($user['id'], $contents[0]->getType(), $contents[0]->getSlug());
 
         foreach ($results as $content) {
             $this->assertEquals($contents[0]->getType(), $content->getType());
             $this->assertEquals($contents[0]->getSlug(), $content->getSlug());
-            $this->assertEquals(1, $content->getUser()->getId());
+            $this->assertEquals($user['id'], $content->getUser()->getId());
         }
     }
 
     public function test_getPaginatedByTypeUserProgressState()
     {
         $type = 'song';
-        $userId = $this->faker->numberBetween();
+        $user = $this->fakeUser();
 
         $contents = $this->fakeContent(
             10,
@@ -477,7 +478,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->fakeUserContentProgress(
             1,
             [
-                'userId' => $userId,
+                'userId' => $user['id'],
                 'content' => $contents[0],
                 'state' => 'started',
             ]
@@ -486,13 +487,13 @@ class ContentServiceTest extends RailcontentTestCase
         $this->fakeUserContentProgress(
             1,
             [
-                'userId' => $userId,
+                'userId' => $user['id'],
                 'content' => $contentOtherType[0],
                 'state' => 'started',
             ]
         );
 
-        $results = $this->classBeingTested->getPaginatedByTypeUserProgressState($type, $userId, 'started');
+        $results = $this->classBeingTested->getPaginatedByTypeUserProgressState($type, $user['id'], 'started');
 
         $this->assertEquals(1, count($results));
     }
@@ -508,7 +509,7 @@ class ContentServiceTest extends RailcontentTestCase
     public function test_countByTypesUserProgressState()
     {
         $type = 'song';
-        $userId = $this->faker->numberBetween();
+        $user = $this->fakeUser();
 
         $contents = $this->fakeContent(
             10,
@@ -521,7 +522,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->fakeUserContentProgress(
             1,
             [
-                'userId' => $userId,
+                'userId' => $user['id'],
                 'content' => $contents[0],
                 'state' => 'started',
             ]
@@ -530,13 +531,13 @@ class ContentServiceTest extends RailcontentTestCase
         $this->fakeUserContentProgress(
             1,
             [
-                'userId' => $userId,
+                'userId' => $user['id'],
                 'content' => $contentOtherType[0],
                 'state' => 'started',
             ]
         );
 
-        $results = $this->classBeingTested->countByTypesUserProgressState([$type], $userId, 'started');
+        $results = $this->classBeingTested->countByTypesUserProgressState([$type], $user['id'], 'started');
 
         $this->assertEquals(1, $results);
     }
@@ -970,7 +971,7 @@ class ContentServiceTest extends RailcontentTestCase
     public function test_getPaginatedByTypesRecentUserProgressState()
     {
         $type = 'song';
-        $userId = $this->faker->numberBetween();
+        $user = $this->fakeUser();
 
         $contents = $this->fakeContent(
             10,
@@ -983,7 +984,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->fakeUserContentProgress(
             1,
             [
-                'userId' => $userId,
+                'userId' => $user['id'],
                 'content' => $contents[0],
                 'state' => 'started',
             ]
@@ -992,7 +993,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->fakeUserContentProgress(
             1,
             [
-                'userId' => $userId,
+                'userId' => $user['id'],
                 'content' => $contents[1],
                 'state' => 'started',
                 'updatedOn' => Carbon::now(),
@@ -1002,13 +1003,13 @@ class ContentServiceTest extends RailcontentTestCase
         $this->fakeUserContentProgress(
             1,
             [
-                'userId' => $userId,
+                'userId' => $user['id'],
                 'content' => $contentOtherType[0],
                 'state' => 'started',
             ]
         );
 
-        $results = $this->classBeingTested->getPaginatedByTypesRecentUserProgressState([$type], $userId, 'started');
+        $results = $this->classBeingTested->getPaginatedByTypesRecentUserProgressState([$type], $user['id'], 'started');
 
         $this->assertEquals(2, count($results));
 
@@ -1023,7 +1024,7 @@ class ContentServiceTest extends RailcontentTestCase
     public function test_countByTypesRecentUserProgressState()
     {
         $type = 'song';
-        $userId = $this->faker->numberBetween();
+        $user = $this->fakeUser();
 
         $contents = $this->fakeContent(
             10,
@@ -1036,7 +1037,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->fakeUserContentProgress(
             1,
             [
-                'userId' => $userId,
+                'userId' => $user['id'],
                 'content' => $contents[0],
                 'state' => 'started',
             ]
@@ -1045,13 +1046,13 @@ class ContentServiceTest extends RailcontentTestCase
         $this->fakeUserContentProgress(
             1,
             [
-                'userId' => $userId,
+                'userId' => $user['id'],
                 'content' => $contentOtherType[0],
                 'state' => 'started',
             ]
         );
 
-        $results = $this->classBeingTested->countByTypesRecentUserProgressState([$type], $userId, 'started');
+        $results = $this->classBeingTested->countByTypesRecentUserProgressState([$type], $user['id'], 'started');
 
         $this->assertEquals(1, $results);
     }
