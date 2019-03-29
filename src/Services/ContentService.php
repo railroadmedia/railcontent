@@ -794,6 +794,36 @@ class ContentService
     }
 
     /**
+     * Get contents by child ids with specified type.
+     *
+     * @param array $childIds
+     * @param string $type
+     * @return array|Collection|ContentEntity[]
+     */
+    public function getByUserIdWhereChildIdIn($userId, array $childContentIds, $slug = null)
+    {
+        $qb =
+            $this->contentRepository->build()
+                ->restrictByUserAccess()
+                ->join(config('railcontent.table_prefix'). 'content' . '.child', 'c')
+                ->whereIn('c.child', $childContentIds)
+                ->andWhere(config('railcontent.table_prefix'). 'content' . '.user = :user')
+                ->setParameter('user', $userId);
+
+        if($slug){
+            $qb->andWhere(config('railcontent.table_prefix'). 'content' . '.slug = :slug')
+                ->setParameter('slug', $slug);
+        }
+        $results = $qb
+                ->getQuery()
+                ->setCacheable(true)
+                ->setCacheRegion('pull')
+                ->getResult('Railcontent');
+
+        return $results;
+    }
+
+    /**
      * Get filtered contents.
      * Returns:
      * ['results' => $lessons, 'total_results' => $totalLessonsAfterFiltering]
@@ -926,7 +956,7 @@ class ContentService
             $this->entityManager->persist($hierarchy);
             $this->entityManager->flush();
         }
-//dd($this->entityManager->getCache('Railcontent'));
+
         $this->entityManager->getCache('Railcontent')
             ->evictEntityRegion(Content::class);
 
