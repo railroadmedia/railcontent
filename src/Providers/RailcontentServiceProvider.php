@@ -83,7 +83,12 @@ class RailcontentServiceProvider extends ServiceProvider
     public function register()
     {
         // set proxy dir to temp folder on server
-        $proxyDir = sys_get_temp_dir();
+        if (app()->runningUnitTests()) {
+            $proxyDir = sys_get_temp_dir();
+        } else {
+            $proxyDir = sys_get_temp_dir() . '/railroad/railcontent/proxies';
+        }
+
 
         // setup redis
         $redis = new Redis();
