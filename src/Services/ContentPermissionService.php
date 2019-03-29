@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\ORM\Query;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\Permission;
@@ -144,9 +145,9 @@ class ContentPermissionService
      * @param $permissionId
      * @return array
      */
-    public function getByContentTypeOrId($contentId = null, $contentType = null)
+    public function getByContentTypeOrIds($contentIds = [], $contentType = null)
     {
-        if (empty($contentId) && empty($contentType)) {
+        if (empty($contentIds) && empty($contentType)) {
             return [];
         }
 
@@ -157,13 +158,13 @@ class ContentPermissionService
                 $qb->expr()
                     ->orX(
                         $qb->expr()
-                            ->eq('cp.content', ':contentId'),
+                            ->in('cp.content', ':contentIds'),
                         $qb->expr()
                             ->eq('cp.contentType', ':contentType')
                     )
             )
             ->setParameter('brand', config('railcontent.brand'))
-            ->setParameter('contentId', $contentId)
+            ->setParameter('contentIds', $contentIds)
             ->setParameter('contentType', $contentType);
 
         return $qb->getQuery()
