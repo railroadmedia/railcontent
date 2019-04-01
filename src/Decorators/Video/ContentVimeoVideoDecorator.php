@@ -47,69 +47,74 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
 
     public function decorate(array $entities)
     : array {
-        foreach ($entities as $entity) {
-            if ($entity->getVideo()) {
 
-                $videoId = $entity->getVideo();
-                $video = $this->contentService->getById($videoId);
-                $vimeoVideoId = $video->getVimeoVideoId();
+        $entitiesWithVideo = array_filter(
+            $entities,
+            function ($value) {
+                return $value->getVideo() != null;
+            }
+        );
 
-                // cache
-                $response = $this->cache->get(self::CACHE_KEY_PREFIX . $vimeoVideoId);
+        foreach ($entitiesWithVideo as $entity) {
+            $vimeoVideoId =
+                $entity->getVideo()
+                    ->getVimeoVideoId();
 
-                $properties = $response['body']['files'] ?? [];
+            // cache
+            $response = $this->cache->get(self::CACHE_KEY_PREFIX . $vimeoVideoId);
 
-                if (empty($response['body']['files'])) {
-                    $response = $this->vimeo->request(
-                        '/me/videos/' . $vimeoVideoId,
-                        [],
-                        'GET'
+            $properties = $response['body']['files'] ?? [];
+
+            if (empty($response['body']['files'])) {
+                $response = $this->vimeo->request(
+                    '/me/videos/' . $vimeoVideoId,
+                    [],
+                    'GET'
+                );
+
+                if (!array_key_exists('error', $response['body'])) {
+                    $expirationDate =
+                        Carbon::parse($response['body']['download'][0]['expires'])
+                            ->diffInMinutes(
+                                Carbon::now()
+                            ) - 30;
+
+                    $this->cache->put(
+                        self::CACHE_KEY_PREFIX . $vimeoVideoId,
+                        $response,
+                        $expirationDate
                     );
 
-                    if (!array_key_exists('error', $response['body'])) {
-                        $expirationDate =
-                            Carbon::parse($response['body']['download'][0]['expires'])
-                                ->diffInMinutes(
-                                    Carbon::now()
-                                ) - 30;
+                    if (!empty($response['body']['files'])) {
+                        foreach ($response['body']['files'] as $fileData) {
+                            if (isset($fileData['height'])) {
+                                $properties[] = [
+                                    'file' => $fileData['link_secure'],
+                                    'width' => $fileData['width'],
+                                    'height' => $fileData['height'],
+                                ];
 
-                        $this->cache->put(
-                            self::CACHE_KEY_PREFIX . $vimeoVideoId,
-                            $response,
-                            $expirationDate
-                        );
+                                $response['body']['pictures']['sizes'] = array_combine(
+                                    array_column($response['body']['pictures']['sizes'], 'height'),
+                                    $response['body']['pictures']['sizes']
+                                );
 
-                        if (!empty($response['body']['files'])) {
-                            foreach ($response['body']['files'] as $fileData) {
-                                if (isset($fileData['height'])) {
-                                    $properties[] = [
-                                        'file' => $fileData['link_secure'],
-                                        'width' => $fileData['width'],
-                                        'height' => $fileData['height'],
-                                    ];
-
-                                    $response['body']['pictures']['sizes'] = array_combine(
-                                        array_column($response['body']['pictures']['sizes'], 'height'),
-                                        $response['body']['pictures']['sizes']
-                                    );
-
-                                    $entity->createProperty(
-                                        'video_poster_image_url',
-                                        $response['body']['pictures']
-                                        ['sizes']['720']['link'] ?? ''
-                                    );
-                                }
+                                $entity->createProperty(
+                                    'video_poster_image_url',
+                                    $response['body']['pictures']
+                                    ['sizes']['720']['link'] ?? ''
+                                );
                             }
-
                         }
+
                     }
                 }
-
-                $entity->createProperty(
-                    'vimeo_video_playback_endpoints',
-                    $properties
-                );
             }
+
+            $entity->createProperty(
+                'vimeo_video_playback_endpoints',
+                $properties
+            );
         }
         return ($entities);
     }
