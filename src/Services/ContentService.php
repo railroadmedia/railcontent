@@ -1276,7 +1276,7 @@ class ContentService
                     if(array_key_exists($parentSlug, $labels)){
                         $parentSlug = $labels[$parentSlug];
                     }
-                    $lesson['type'] = $parentSlug;
+                    
                     $culledSemesterPackLessons[] = $lesson;
                 }
             }
