@@ -116,6 +116,20 @@ Route::group(
                     \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@delete'
                 )->name('comment-like.delete');
 
+                // content-likes
+                Route::get(
+                    '/content-like/{id}',
+                    \Railroad\Railcontent\Controllers\ContentLikeJsonController::class . '@index'
+                )->name('content-likes.index');
+                Route::put(
+                    '/content-like',
+                    \Railroad\Railcontent\Controllers\ContentLikeJsonController::class . '@like'
+                )->name('content-like.store');
+                Route::delete(
+                    '/content-like',
+                    \Railroad\Railcontent\Controllers\ContentLikeJsonController::class . '@unlike'
+                )->name('content-like.delete');
+
 
                 //full text search
                 Route::get(

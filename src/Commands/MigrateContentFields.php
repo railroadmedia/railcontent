@@ -257,7 +257,7 @@ class MigrateContentFields extends Command
         $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
             ->select('id', 'content_id', 'key', 'value')
             ->whereIn('key', $contentColumnNames)
-            ->where('content_id', '!= ', 0)
+            ->where('content_id', '<> ', 0)
             ->orderBy('content_id', 'desc')
             ->chunk(
                 500,

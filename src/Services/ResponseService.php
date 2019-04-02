@@ -10,6 +10,7 @@ use Railroad\Railcontent\Transformers\CommentLikeTransformer;
 use Railroad\Railcontent\Transformers\CommentTransformer;
 use Railroad\Railcontent\Transformers\ContentDataTransformer;
 use Railroad\Railcontent\Transformers\ContentHierarchyTransformer;
+use Railroad\Railcontent\Transformers\ContentLikeTransformer;
 use Railroad\Railcontent\Transformers\ContentPermissionTransformer;
 use Railroad\Railcontent\Transformers\DecoratedContentTransformer;
 use Railroad\Railcontent\Transformers\PermissionTransformer;
@@ -182,6 +183,24 @@ class ResponseService extends FractalResponseService
             $entityOrEntities,
             'userContentProgress',
             new UserPermissionTransformer(),
+            new JsonApiSerializer(),
+            $queryBuilder
+        )
+            ->parseIncludes($includes);
+    }
+
+    /**
+     * @param $entityOrEntities
+     * @param QueryBuilder|null $queryBuilder
+     * @param array $includes
+     * @return Fractal
+     */
+    public static function contentLike($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
+    {
+        return self::create(
+            $entityOrEntities,
+            'contentlike',
+            new ContentLikeTransformer(),
             new JsonApiSerializer(),
             $queryBuilder
         )

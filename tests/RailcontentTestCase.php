@@ -29,6 +29,7 @@ use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentInstructor;
+use Railroad\Railcontent\Entities\ContentLikes;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\ContentTopic;
 use Railroad\Railcontent\Entities\Permission;
@@ -937,6 +938,35 @@ class RailcontentTestCase extends BaseTestCase
             ->insertGetId($userData);
         $userData['id'] = $userId;
         return $userData;
+    }
+
+    public function fakeContentLike($nr = 1, $contentLikeData = [])
+    {
+        if (empty($contentLikeData)) {
+            $contentLikeData = [
+                'content' => $this->fakeContent(),
+            ];
+        }
+
+        if(!array_key_exists('userId', $contentLikeData)){
+            $user = $this->fakeUser();
+        }
+
+        $contentLikeData['user'] =
+            $this->app->make(UserProvider::class)
+                ->getUserById($contentLikeData['userId']??$user['id']) ;
+
+        unset($contentLikeData['userId']);
+
+        $this->populator->addEntity(
+            ContentLikes::class,
+            $nr,
+            $contentLikeData
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[ContentLikes::class];
     }
 
 }

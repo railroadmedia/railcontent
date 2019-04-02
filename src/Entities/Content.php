@@ -126,12 +126,18 @@ class Content extends ArrayExpressible
     protected $progressPercent = 0;
 
     /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentLikes", mappedBy="content")
+     */
+    private $likes;
+
+    /**
      * @var \DateTime $createdOn
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     protected $createdOn;
+
 
     /**
      * Content constructor.
@@ -147,6 +153,7 @@ class Content extends ArrayExpressible
         $this->playlist = new ArrayCollection();
         $this->exercise = new ArrayCollection();
         $this->userProgress = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     /**
@@ -478,4 +485,19 @@ class Content extends ArrayExpressible
         return $this->progressPercent;
     }
 
+    /**
+     * @param ContentLikes $likes
+     */
+    public function addLikes(ContentLikes $likes)
+    {
+        $this->likes[] = $likes;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getLikes()
+    {
+        return $this->likes;
+    }
 }

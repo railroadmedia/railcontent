@@ -126,9 +126,9 @@ class ContentEntityTest extends RailcontentTestCase
             $this->assertEquals($contentData[$index]->getId(), $data->getId());
         }
 
-        $this->assertEquals(1, count($results->getPermissions()));
-        $this->assertEquals($content[0]->getType(), $results->getPermissions()[0]->getContentType());
-        $this->assertEquals($permission[0]->getName(), $results->getPermissions()[0]->getPermission()->getName());
+        $this->assertEquals(1, count($results->getProperty('permissions')));
+        $this->assertEquals($content[0]->getType(), $results->getProperty('permissions')[0]->getContentType());
+        $this->assertEquals($permission[0]->getName(), $results->getProperty('permissions')[0]->getPermission()->getName());
 
     }
 

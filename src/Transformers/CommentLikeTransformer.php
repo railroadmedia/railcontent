@@ -15,6 +15,8 @@ class CommentLikeTransformer extends TransformerAbstract
     {
         $entityManager = app()->make(EntityManager::class);
 
+        $this->defaultIncludes = ['comment'];
+
         $serializer = new BasicEntitySerializer();
 
         return (new Collection(
@@ -25,17 +27,8 @@ class CommentLikeTransformer extends TransformerAbstract
         ))->toArray();
     }
 
-    public function includeReplies(Comment $comment)
+    public function includeComment(CommentLikes $comment)
     {
-        return $this->collection(
-            $comment->getChildren(),
-            new CommentTransformer(),
-            'comment'
-        );
-    }
-
-    public function includeContent(Comment $comment)
-    {
-        return $this->item($comment->getContent(), new ContentTransformer(), 'content');
+        return $this->item($comment->getComment(), new CommentTransformer(), 'comment');
     }
 }
