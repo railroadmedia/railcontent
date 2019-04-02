@@ -464,6 +464,10 @@ class Content extends ArrayExpressible
     public function setProgressPercent($progressPercent)
     {
         $this->progressPercent = $progressPercent;
+
+        if($progressPercent == 100) {
+            $this->setCompleted(true);
+        }
     }
 
     /**
