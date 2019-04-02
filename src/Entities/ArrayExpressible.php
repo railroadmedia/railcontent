@@ -99,7 +99,14 @@ abstract class ArrayExpressible
         }
 
         if (isset($arr['video'])) {
-            $arr['fields.video'] = $arr['video']->dot();
+
+            $video = $arr['video'];
+
+            $arr['fields.video'] = $video->dot();
+            $arr['fields.video.vimeo_video_id'] = $video->getVimeoVideoId();
+            $arr['fields.video.youtube_video_id'] = $video->getYoutubeVideoId();
+            $arr['fields.video.length_in_seconds'] = $video->getLengthInSeconds();
+
             unset($arr['video']);
         }
 

@@ -170,4 +170,31 @@ class ContentLikeService
 
         return true;
     }
+
+    /**
+     * @param $commentAndReplyIds
+     * @param $userId
+     * @return array|false|mixed
+     */
+    public function isLikedByUserId($contentIds, $userId)
+    {
+        $qb =
+            $this->contentLikeRepository->createQueryBuilder('cl')
+        ->join('cl.content', 'c');
+        $qb->select('cl.user as user, c.id as contentId')
+            ->where('cl.user = :userId')
+            ->andWhere('cl.content IN (:contentIds)')
+            ->setParameter('userId', $userId)
+            ->setParameter('contentIds', $contentIds);
+
+        $results =
+            $qb->getQuery()
+                ->getResult('Railcontent');
+
+        if (!empty($results)) {
+            $results = array_combine(array_column($results, 'contentId'), array_column($results, 'user'));
+        }
+
+        return $results;
+    }
 }

@@ -63,9 +63,12 @@ class MigrateContentFields extends Command
         $this->info('Migrate fields command starting.');
         $migratedFields = 0;
 
-        $contentColumnNames =
+        $contentColumnNames = array_merge(
             $this->entityManager->getClassMetadata(Content::class)
-                ->getColumnNames();
+                ->getColumnNames(),
+            ['video']
+        );
+
 
         $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
             ->select('id', 'content_id', 'key', 'value', 'position')
@@ -257,7 +260,6 @@ class MigrateContentFields extends Command
         $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
             ->select('id', 'content_id', 'key', 'value')
             ->whereIn('key', $contentColumnNames)
-            ->where('content_id', '<> ', 0)
             ->orderBy('content_id', 'desc')
             ->chunk(
                 500,
