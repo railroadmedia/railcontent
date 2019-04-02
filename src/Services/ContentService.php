@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\ORM\Query;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
@@ -118,15 +119,22 @@ class ContentService
      */
     public function getByIds($ids)
     {
-        $unorderedContentRows =
-            $this->contentRepository->build()
+        $dql = $this->contentRepository->build()
                 ->restrictByUserAccess()
                 ->andWhere(config('railcontent.table_prefix'). 'content' . '.id IN (:ids)')
                 ->setParameter('ids', $ids)
-                ->getQuery()
-                ->setCacheable(true)
-                ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+        ->getQuery();
+
+        $unorderedContentRows = $this->entityManager->createQuery($dql->getDQL())->setParameters($dql->getParameters())->getResult('Railcontent');
+//        $unorderedContentRows =
+//            $this->contentRepository->build()
+//                ->restrictByUserAccess()
+//                ->andWhere(config('railcontent.table_prefix'). 'content' . '.id IN (:ids)')
+//                ->setParameter('ids', $ids)
+//                ->getQuery()
+//                ->setCacheable(true)
+//                ->setCacheRegion('pull')
+//                ->setHint(Query::HINT_INCLUDE_META_COLUMNS, true);
 
         // restore order of ids passed in
         $contentRows = [];
