@@ -27,14 +27,14 @@ class ContentHierarchy
 
     /**
      * @Gedmo\SortableGroup()
-     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
+     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content", inversedBy="parent")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
      *
      */
     protected $parent;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
+     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content", inversedBy="child")
      * @ORM\JoinColumn(name="child_id", referencedColumnName="id")
      *
      */

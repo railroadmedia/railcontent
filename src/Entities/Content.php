@@ -74,21 +74,18 @@ class Content extends ArrayExpressible
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy", mappedBy="parent")
-     * @ORM\JoinTable(name="railcontent_content_hierarchy",
-     *      joinColumns={@ORM\JoinColumn(name="content_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="child_id", referencedColumnName="id", unique=true)}
-     *      )
      */
     private $child;
 
     /**
      * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy",mappedBy="child", cascade={"persist",
-     *     "remove"}, fetch="EAGER")
+     *     "remove"})
      */
     private $parent;
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentData", mappedBy="content", cascade={"remove"})
+     * @ORM\JoinColumn(name="id", referencedColumnName="content_id")
      */
     protected $data;
 
@@ -352,8 +349,6 @@ class Content extends ArrayExpressible
     public function addData(ContentData $data)
     {
         $this->data[] = $data;
-
-        return $this;
     }
 
     /**
