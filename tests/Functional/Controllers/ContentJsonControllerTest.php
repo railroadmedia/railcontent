@@ -313,6 +313,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
         unset($contentData['fields']);
 
         $this->assertArraySubset($contentData, $response->decodeResponseJson('data')['attributes']);
+        $this->assertArrayHasKey('title', $response->decodeResponseJson('data')['attributes']);
+        $this->assertArrayHasKey('difficulty', $response->decodeResponseJson('data')['attributes']);
         $this->assertArrayHasKey('tag', $response->decodeResponseJson('data')['relationships']);
         $this->assertArrayHasKey('key', $response->decodeResponseJson('data')['relationships']);
         $this->assertArrayHasKey('keyPitchType', $response->decodeResponseJson('data')['relationships']);

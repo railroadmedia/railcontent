@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\Common\Inflector\Inflector;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
@@ -1016,9 +1017,9 @@ class ContentService
     ) {
         $content = new Content();
 
-        $data = $this->saveContentFields($data, $content);
-
         $this->jsonApiHydrator->hydrate($content, $data);
+
+        $data = $this->saveContentFields($data, $content);
 
         if (!$content->getBrand()) {
             $content->setBrand(config('railcontent.brand'));
@@ -1070,9 +1071,9 @@ class ContentService
             return null;
         }
 
-        $data = $this->saveContentFields($data, $content);
-
         $this->jsonApiHydrator->hydrate($content, $data);
+
+        $this->saveContentFields($data, $content);
 
         $this->entityManager->persist($content);
         $this->entityManager->flush();
@@ -1305,22 +1306,20 @@ class ContentService
     private function saveContentFields($data, Content $content)
     {
         if (array_key_exists('fields', $data['data']['attributes'])) {
+
             $fields = $data['data']['attributes']['fields'];
-            $groupedFields = $fields;
 
             foreach ($fields as $field) {
+
                 if (strpos($field['key'], '_') !== false || strpos($field['key'], '-') !== false) {
                     $field['key'] = camel_case($field['key']);
                 }
 
                 if ($this->isEntityAttribute($field, Content::class)) {
 
-                    $data['data']['attributes'] = array_merge(
-                        $data['data']['attributes'],
-                        [
-                            $field['key'] => $field['value'],
-                        ]
-                    );
+                    $setterName = Inflector::camelize('set' . ucwords($field['key']));
+
+                    call_user_func([$content, $setterName], $field['value']);
 
                 } elseif ($this->isEntityAssociation($field, Content::class)) {
 
@@ -1332,7 +1331,9 @@ class ContentService
 
                     if ($this->isEntityAttribute($field, $entityName)) {
 
-                        $field[$associationMappings['fieldName']] = $field['value'];
+                        $setterName = Inflector::camelize('set' . ucwords($associationMappings['fieldName']));
+
+                        call_user_func([$fieldEntity, $setterName], $field['value']);
 
                     } elseif ($this->isEntityAssociation($field, $entityName)) {
 
@@ -1342,32 +1343,29 @@ class ContentService
                             $this->entityManager->getRepository($associationMappings['targetEntity'])
                                 ->find($field['value']);
 
-                        $addMethod = 'add' . ucwords($field['key']);
+                        $addMethod = Inflector::camelize('add' . ucwords($field['key']));
 
                         $fieldEntity->setContent($content);
-                        $fieldEntity->$addMethod($associatedEntity);
+
+                        call_user_func([$fieldEntity, $addMethod], $associatedEntity);
                     }
 
-                    $this->jsonApiHydrator->hydrate(
-                        $fieldEntity,
-                        [
-                            'data' => [
-                                'attributes' => $field,
-                            ],
-                        ]
-                    );
+                    $getterName = $getFields = Inflector::camelize('get' . ucwords($associationMappings['fieldName']));
+                    $removeField = Inflector::camelize('remove' . ucwords($associationMappings['fieldName']));
 
-                    $getFields = 'get' . ucwords($associationMappings['fieldName']);
+                    $oldFields = call_user_func([$content, $getterName]);
 
                     if ($this->entityManager->contains($content)) {
 
-                        $oldFields = $content->$getFields();
-                        $removeField = 'remove' . ucwords($associationMappings['fieldName']);
-
                         foreach ($oldFields as $oldField) {
+
                             //check if field was deleted
-                            if (!in_array($oldField->$getFields(), array_column($groupedFields, 'value'))) {
-                                $content->$removeField($oldField);
+                            $oldFieldValue = call_user_func([$oldField, $getterName]);
+
+                            if (!in_array($oldFieldValue, array_column($fields, 'value'))) {
+
+                                call_user_func([$content, $removeField], $oldField);
+
                                 $this->entityManager->remove($oldField);
                             }
                         }
@@ -1375,7 +1373,7 @@ class ContentService
 
                     if (array_key_exists('position', $field)) {
                         $position = $field['position'];
-                        if (!$field['position'] || ($field['position'] > count($content->$getFields()))) {
+                        if (!$field['position'] || ($field['position'] > count($oldFields))) {
                             $position = -1;
                         }
 
@@ -1388,11 +1386,13 @@ class ContentService
 
                     $fieldEntity->setContent($content);
 
-                    $addFieldNameMethod = 'add' . ucwords($associationMappings['fieldName']);
-                    $content->$addFieldNameMethod($fieldEntity);
+                    $addMethod = Inflector::camelize('add' . ucwords($associationMappings['fieldName']));
+
+                    call_user_func([$content, $addMethod], $fieldEntity);
                 }
             }
         }
+
         return $data;
     }
 
