@@ -60,22 +60,7 @@ trait ContentFieldsAssociations
      */
     protected $video;
 
-    /**
-     * ContentFieldsAssociations constructor.
-     */
-    public function __construct()
-    {
-        $this->data = new ArrayCollection();
-        $this->topic = new ArrayCollection();
-        $this->tag = new ArrayCollection();
-        $this->key = new ArrayCollection();
-        $this->keyPitchType = new ArrayCollection();
-        $this->playlist = new ArrayCollection();
-        $this->exercise = new ArrayCollection();
-        $this->userProgress = new ArrayCollection();
-    }
-
-    /**
+     /**
      * @return ArrayCollection
      */
     public function getExercise()

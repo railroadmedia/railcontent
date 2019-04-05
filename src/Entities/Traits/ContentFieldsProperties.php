@@ -67,8 +67,8 @@ trait ContentFieldsProperties
     protected $artist;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @var int
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
      */
     protected $bpm;
 
@@ -103,8 +103,8 @@ trait ContentFieldsProperties
     protected $exerciseBookPages;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
-     * @var int
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
      */
     protected $fastBpm;
 
@@ -383,7 +383,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getBpm()
     {
@@ -479,7 +479,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getFastBpm()
     {
