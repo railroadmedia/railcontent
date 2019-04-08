@@ -212,6 +212,15 @@ class ContentQueryBuilder extends QueryBuilder
                     ->toDateTimeString()
             );
         }
+        else {
+            // this strange hack is required to get the DB indexing to be used, todo: fix properly
+            $this->where(
+                'published_on',
+                '<=',
+                Carbon::now()->addMonths(6)
+                    ->toDateTimeString()
+            );
+        }
 
         return $this;
     }
