@@ -26,7 +26,15 @@ class DataTransformer extends TransformerAbstract
                 unset($data[$rowIndex]['lessons']);
             }
 
+            if ((is_array($row) || $row instanceof ArrayAccess) && isset($row['assignments'])) {
+                unset($data[$rowIndex]['assignments']);
+            }
+
             if ($rowIndex == 'lessons') {
+                unset($data[$rowIndex]);
+            }
+
+            if ($rowIndex == 'assignments') {
                 unset($data[$rowIndex]);
             }
         }
