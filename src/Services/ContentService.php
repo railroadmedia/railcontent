@@ -77,7 +77,7 @@ class ContentService
     const STATUS_ARCHIVED = 'archived';
     const STATUS_DELETED = 'deleted';
 
-    private $arrayCache = [];
+    private $idContentCache = [];
 
     /**
      * ContentService constructor.
