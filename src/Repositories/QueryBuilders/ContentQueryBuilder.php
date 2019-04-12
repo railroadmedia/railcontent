@@ -220,7 +220,7 @@ class ContentQueryBuilder extends QueryBuilder
                         'published_on',
                         '<=',
                         Carbon::now()
-                            ->addMonths(6)
+                            ->addMonths(18)
                             ->toDateTimeString()
                     )
                         ->orWhereNull('published_on');
