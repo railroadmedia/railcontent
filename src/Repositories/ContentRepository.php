@@ -1577,4 +1577,17 @@ class ContentRepository extends RepositoryBase
         return $contentRows;
 
     }
+
+    /**
+     * @param array $type
+     * @return int
+     */
+    public function countByTypes(array $type)
+    {
+        return $this->query()
+            ->selectCountColumns()
+            ->restrictByUserAccess()
+            ->whereIn(ConfigService::$tableContent . '.type', $type)
+            ->count();
+    }
 }

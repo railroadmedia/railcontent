@@ -1320,4 +1320,13 @@ class ContentService
 
         return $result;
     }
+
+    /**
+     * @param array $types
+     * @return int
+     */
+    public function countByTypes(array $types)
+    {
+        return $this->contentRepository->countByTypes($types);
+    }
 }
