@@ -2,7 +2,9 @@
 
 namespace Railroad\Railcontent\Exceptions;
 
-class DeleteFailedException extends \Exception
+use Exception;
+
+class DeleteFailedException extends Exception
 {
     public function render($request)
     {

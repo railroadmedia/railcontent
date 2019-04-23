@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Entities;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -34,7 +35,7 @@ class ContentLikes
     private $content;
 
     /**
-     * @var \DateTime $createdOn
+     * @var DateTime $createdOn
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime",  name="created_on")

@@ -13,6 +13,7 @@ use Railroad\Railcontent\Requests\CommentUpdateRequest;
 use Railroad\Railcontent\Requests\ReplyRequest;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ResponseService;
+use Throwable;
 
 class CommentJsonController extends Controller
 {
@@ -72,7 +73,7 @@ class CommentJsonController extends Controller
      *
      * @param CommentCreateRequest $request
      * @return JsonResponse|NotAllowedException
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function store(CommentCreateRequest $request)
     {
@@ -103,7 +104,7 @@ class CommentJsonController extends Controller
      * @param integer $commentId
      * @param CommentCreateRequest $request
      * @return JsonResponse|NotAllowedException|NotFoundException
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function update(CommentUpdateRequest $request, $commentId)
     {
@@ -140,7 +141,7 @@ class CommentJsonController extends Controller
      *
      * @param integer $contentId
      * @return JsonResponse|NotFoundException|NotAllowedException
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function delete($commentId)
     {
@@ -167,7 +168,7 @@ class CommentJsonController extends Controller
      *
      * @param ReplyRequest $request
      * @return JsonResponse|NotAllowedException
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function reply(ReplyRequest $request)
     {

@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Entities\Traits;
 
+use DateTime;
 use Railroad\Railcontent\Entities\Content;
 
 trait ContentFieldsProperties
@@ -122,13 +123,13 @@ trait ContentFieldsProperties
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @var \DateTime
+     * @var DateTime
      */
     protected $liveEventStartTime;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @var \DateTime
+     * @var DateTime
      */
     protected $liveEventEndTime;
 
@@ -527,7 +528,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param  \DateTime $liveEventStartTime
+     * @param  DateTime $liveEventStartTime
      */
     public function setLiveEventStartTime($liveEventStartTime)
     {
@@ -543,7 +544,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param  \DateTime $liveEventEndTime
+     * @param  DateTime $liveEventEndTime
      */
     public function setLiveEventEndTime($liveEventEndTime)
     {
@@ -551,7 +552,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getLiveEventEndTime()
     {
@@ -607,7 +608,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @param  \DateTime $released
+     * @param  DateTime $released
      */
     public function setReleased($released)
     {
@@ -615,7 +616,7 @@ trait ContentFieldsProperties
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getReleased()
     {

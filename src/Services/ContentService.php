@@ -3,6 +3,9 @@
 namespace Railroad\Railcontent\Services;
 
 use Doctrine\Common\Inflector\Inflector;
+use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
@@ -23,6 +26,7 @@ use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Support\Collection;
+use ReflectionException;
 
 class ContentService
 {
@@ -926,10 +930,10 @@ class ContentService
     /**
      * @param $data
      * @return Content
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \ReflectionException
+     * @throws DBALException
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws ReflectionException
      */
     public function create(
         $data
@@ -1218,9 +1222,9 @@ class ContentService
      * @param $data
      * @param Content $content
      * @return mixed
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \ReflectionException
+     * @throws DBALException
+     * @throws ORMException
+     * @throws ReflectionException
      */
     private function saveContentFields($data, Content $content)
     {

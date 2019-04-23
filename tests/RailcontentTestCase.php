@@ -14,11 +14,14 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Foundation\Application;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use PDO;
+use PHPUnit\Framework\MockObject\MockObject;
 use Railroad\Doctrine\Hydrators\FakeDataHydrator;
 use Railroad\Doctrine\Providers\DoctrineServiceProvider;
 use Railroad\Permissions\Providers\PermissionsServiceProvider;
@@ -74,7 +77,7 @@ class RailcontentTestCase extends BaseTestCase
     protected $remoteStorageService;
 
     /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
+     * @var MockObject
      */
     protected $permissionServiceMock;
 
@@ -122,7 +125,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $this->app->instance(UserProviderInterface::class, $userProvider);
         $this->app->instance(DoctrineArrayHydratorUserProviderInterface::class, $userProvider);
-        $this->app->instance(\Railroad\Doctrine\Contracts\UserProviderInterface::class, $userProvider);
+        $this->app->instance(DoctrineUserProviderInterface::class, $userProvider);
 
         $this->artisan('migrate:fresh', []);
         $this->artisan('cache:clear', []);
@@ -156,7 +159,7 @@ class RailcontentTestCase extends BaseTestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param  Application $app
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -207,7 +210,7 @@ class RailcontentTestCase extends BaseTestCase
                 'collation' => 'utf8_general_ci',
                 'prefix' => '',
                 'options' => [
-                    \PDO::ATTR_PERSISTENT => true,
+                    PDO::ATTR_PERSISTENT => true,
                 ],
             ]
         );

@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentPermission;
@@ -16,17 +18,17 @@ use Railroad\Railcontent\Managers\RailcontentEntityManager;
 class ContentPermissionService
 {
     /**
-     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $contentPermissionRepository;
 
     /**
-     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $contentRepository;
 
     /**
-     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $permissionRepository;
 

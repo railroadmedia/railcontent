@@ -9,12 +9,13 @@ use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\UserPermissionCreateRequest;
 use Railroad\Railcontent\Services\ResponseService;
-
+use Railroad\Railcontent\Services\UserPermissionsService;
+use Throwable;
 
 class UserPermissionsJsonController extends Controller
 {
     /**
-     * @var \Railroad\Railcontent\Services\UserPermissionsService
+     * @var UserPermissionsService
      */
     private $userPermissionsService;
 
@@ -26,10 +27,10 @@ class UserPermissionsJsonController extends Controller
     /**
      * UserPermissionsJsonController constructor.
      *
-     * @param \Railroad\Railcontent\Services\UserPermissionsService $userPermissionsService
+     * @param UserPermissionsService $userPermissionsService
      */
     public function __construct(
-        \Railroad\Railcontent\Services\UserPermissionsService $userPermissionsService,
+        UserPermissionsService $userPermissionsService,
         PermissionService $permissionPackageService
     ) {
         $this->userPermissionsService = $userPermissionsService;
@@ -39,7 +40,7 @@ class UserPermissionsJsonController extends Controller
     /**
      * Create/update user permission record and return data in JSON format.
      *
-     * @param \Railroad\Railcontent\Requests\UserPermissionCreateRequest $request
+     * @param UserPermissionCreateRequest $request
      * @return JsonResponse
      */
     public function store(UserPermissionCreateRequest $request)
@@ -69,7 +70,7 @@ class UserPermissionsJsonController extends Controller
      *
      * @param int $userPermissionId
      * @return JsonResponse
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function delete($userPermissionId)
     {
@@ -92,7 +93,7 @@ class UserPermissionsJsonController extends Controller
      *  IF "only_active" it's set false on the request the expired permissions are returned also
      *  IF "user_id" it's set on the request only the permissions for the specified user are returned
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return JsonResponse
      */
     public function index(Request $request)

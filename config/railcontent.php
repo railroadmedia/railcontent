@@ -1,10 +1,15 @@
 <?php
 
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Session\Middleware\StartSession;
 use Railroad\Railcontent\Decorators\Comments\CommentLikesDecorator;
 use Railroad\Railcontent\Decorators\Content\ContentPermissionsDecorator;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentExercise;
+use Tymon\JWTAuth\Http\Middleware\RefreshToken;
 
 return [
     // brands
@@ -44,15 +49,15 @@ return [
 
     // if you have any of these middleware classes in your global http kernel, they must be removed from this array
     'controller_middleware' => [
-        \Illuminate\Cookie\Middleware\EncryptCookies::class,
-        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-        \Illuminate\Session\Middleware\StartSession::class,
-        \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
+        EncryptCookies::class,
+        AddQueuedCookiesToResponse::class,
+        StartSession::class,
+        VerifyCsrfToken::class,
     ],
 
     //middleware for API requests
     'api_middleware' => [
-        \Tymon\JWTAuth\Http\Middleware\RefreshToken::class,
+        RefreshToken::class,
     ],
 
     // filter options limitation

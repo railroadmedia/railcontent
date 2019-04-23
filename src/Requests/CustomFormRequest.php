@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Requests;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
+use Exception;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Factory as ValidationFactory;
@@ -220,7 +221,7 @@ class CustomFormRequest extends FormRequest
 
         try {
             $this->getContentForValidation($request, $contentValidationRequired, $rulesForBrand, $content);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             throw new HttpResponseException(
                 response()->json(
                     [
@@ -412,7 +413,7 @@ class CustomFormRequest extends FormRequest
      * @param $contentValidationRequired
      * @param $rulesForBrand
      * @param $content
-     * @throws \Exception
+     * @throws Exception
      */
     private function getContentForValidation(
         CustomFormRequest $request,
@@ -458,7 +459,7 @@ class CustomFormRequest extends FormRequest
         if ($request instanceof ContentCreateRequest) {
             if (isset($input['data']['attributes']['status'])) {
                 if (in_array($input['data']['attributes']['status'], $restrictions)) {
-                    throw new \Exception(
+                    throw new Exception(
                         'Status cannot be set to: "' . $input['data']['attributes']['status'] . '" on content-create.'
                     );
                 }

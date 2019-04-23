@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Commands;
 
 use Carbon\Carbon;
+use DateInterval;
+use Google_Service_YouTube;
 use Illuminate\Console\Command;
 
 use Railroad\Railcontent\Services\ContentService;
@@ -58,7 +60,7 @@ class CreateYoutubeVideoContentRecords extends Command
         );
         $client->setScopes($this->scope);
 
-        $youtube = new \Google_Service_YouTube($client);
+        $youtube = new Google_Service_YouTube($client);
 
         $shouldEnd = 0;
         $items = [];
@@ -226,7 +228,7 @@ class CreateYoutubeVideoContentRecords extends Command
      */
     function covtime($youtube_time)
     {
-        $interval = new \DateInterval($youtube_time);
+        $interval = new DateInterval($youtube_time);
 
         return ($interval->d * 24 * 60 * 60) + ($interval->h * 60 * 60) + ($interval->i * 60) + $interval->s;
     }

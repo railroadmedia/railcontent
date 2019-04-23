@@ -11,6 +11,7 @@ use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ResponseService;
+use Throwable;
 
 class ContentJsonController extends Controller
 {
@@ -137,7 +138,7 @@ class ContentJsonController extends Controller
      * @param integer $contentId
      * @param ContentUpdateRequest $request
      * @return JsonResponse
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function update(ContentUpdateRequest $request, $contentId)
     {
@@ -163,7 +164,7 @@ class ContentJsonController extends Controller
      *
      * @param integer $contentId
      * @return JsonResponse
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function delete($contentId)
     {

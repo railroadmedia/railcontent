@@ -517,7 +517,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->expectsEvents(\Railroad\Railcontent\Events\ContentUpdated::class);
+        $this->expectsEvents(ContentUpdated::class);
         //check that the ContentUpdated event was dispatched with the correct content id
         /* Event::assertDispatched(ContentUpdated::class, function ($event) use ($content) {
              return $event->contentId == $content['id'];

@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Entities;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -68,7 +69,7 @@ class Comment
      */
     private $likes;
     /**
-     * @var \DateTime $createdOn
+     * @var DateTime $createdOn
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime",  name="created_on")
@@ -77,7 +78,7 @@ class Comment
 
     /**
      * @ORM\Column(type="datetime", name="deleted_at", nullable=true)
-     * @var \DateTime
+     * @var DateTime
      */
     protected $deletedAt;
 

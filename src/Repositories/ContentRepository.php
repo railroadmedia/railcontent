@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\PersistentCollection;
+use Doctrine\ORM\QueryBuilder;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserPermission;
@@ -379,7 +380,7 @@ class ContentRepository extends EntityRepository
     }
 
     /**
-     * @return \Doctrine\ORM\QueryBuilder|ContentQueryBuilder
+     * @return QueryBuilder|ContentQueryBuilder
      */
     public function build()
     {

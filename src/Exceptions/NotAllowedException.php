@@ -2,7 +2,9 @@
 
 namespace Railroad\Railcontent\Exceptions;
 
-class NotAllowedException extends \Exception
+use Exception;
+
+class NotAllowedException extends Exception
 {
     protected $message;
 

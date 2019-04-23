@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Repositories;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\PersistentCollection;
+use Doctrine\ORM\QueryBuilder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Railroad\Railcontent\Entities\Content;
 
@@ -118,7 +119,7 @@ class FullTextSearchRepository extends EntityRepository
      * @param string $orderByColumn
      * @param string $orderByDirection
      * @param null $dateTimeCutoff
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
     public function search(
         $term,
@@ -212,7 +213,7 @@ class FullTextSearchRepository extends EntityRepository
      * @param $orderByColumn
      * @param $orderByDirection
      * @param $dateTimeCutoff
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
     private function prepareQb(
         $term,
@@ -224,7 +225,7 @@ class FullTextSearchRepository extends EntityRepository
         $orderByDirection,
         $dateTimeCutoff
     )
-    : \Doctrine\ORM\QueryBuilder {
+    : QueryBuilder {
 
         $first = ($page - 1) * $limit;
         $alias = 'p';

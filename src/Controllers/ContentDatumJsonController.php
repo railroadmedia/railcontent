@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Routing\Controller;
+use Railroad\Permissions\Exceptions\NotAllowedException;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\ContentDatumCreateRequest;
@@ -10,6 +11,8 @@ use Railroad\Railcontent\Requests\ContentDatumDeleteRequest;
 use Railroad\Railcontent\Requests\ContentDatumUpdateRequest;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Services\ResponseService;
+use Spatie\Fractal\Fractal;
+use Throwable;
 
 class ContentDatumJsonController extends Controller
 {
@@ -37,11 +40,11 @@ class ContentDatumJsonController extends Controller
          $this->middleware(config('railcontent.controller_middleware'));
     }
 
-    /**
-     * Call the method from service that create new data and link the content with the data.
+    /** Call the method from service that create new data and link the content with the data.
      *
      * @param ContentDatumCreateRequest $request
-     * @return JsonResponse
+     * @return Fractal
+     * @throws NotAllowedException
      */
     public function store(ContentDatumCreateRequest $request)
     {
@@ -63,7 +66,7 @@ class ContentDatumJsonController extends Controller
      * @param integer $dataId
      * @param ContentDatumUpdateRequest $request
      * @return JsonResponse
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function update($dataId, ContentDatumUpdateRequest $request)
     {

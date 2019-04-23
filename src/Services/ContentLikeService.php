@@ -2,6 +2,9 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentLikes;
@@ -11,7 +14,7 @@ class ContentLikeService
 {
 
     /**
-     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $contentLikeRepository;
 
@@ -21,7 +24,7 @@ class ContentLikeService
     private $entityManager;
 
     /**
-     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $contentRepository;
 
@@ -62,7 +65,7 @@ class ContentLikeService
     /**
      * @param $id
      * @param $request
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
     public function getQb($id, $request)
     {

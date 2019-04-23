@@ -1,6 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Railroad\Railcontent\Controllers\CommentJsonController;
+use Railroad\Railcontent\Controllers\CommentLikeJsonController;
+use Railroad\Railcontent\Controllers\ContentDatumJsonController;
+use Railroad\Railcontent\Controllers\ContentFieldJsonController;
+use Railroad\Railcontent\Controllers\ContentHierarchyJsonController;
+use Railroad\Railcontent\Controllers\ContentJsonController;
+use Railroad\Railcontent\Controllers\ContentLikeJsonController;
+use Railroad\Railcontent\Controllers\FullTextSearchJsonController;
+use Railroad\Railcontent\Controllers\PermissionJsonController;
+use Railroad\Railcontent\Controllers\UserPermissionsJsonController;
 
 Route::group(
     [
@@ -18,39 +28,39 @@ Route::group(
                 // content fields
                 Route::get(
                     '/content/field/{id}',
-                    \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@show'
+                    ContentFieldJsonController::class . '@show'
                 )->name('content.field.show');
 
                 // permissions
                 Route::get(
                     '/permission',
-                    \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@index'
+                    PermissionJsonController::class . '@index'
                 )->name('permissions.index');
 
                 // content
                 Route::options(
                     '/content',
-                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@options'
+                    ContentJsonController::class . '@options'
                 )->name('content.options');
 
                 Route::get(
                     '/content',
-                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@index'
+                    ContentJsonController::class . '@index'
                 )->name('content.index');
 
                 Route::get(
                     '/content/parent/{parentId}',
-                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getByParentId'
+                    ContentJsonController::class . '@getByParentId'
                 )->name('content.get-by-parent-id');
 
                 Route::get(
                     '/content/get-by-ids',
-                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getByIds'
+                    ContentJsonController::class . '@getByIds'
                 )->name('content.get-by-ids');
 
                 Route::get(
                     '/content/{id}',
-                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@show'
+                    ContentJsonController::class . '@show'
                 )->name('content.show');
 
                 // content user progression
@@ -77,64 +87,64 @@ Route::group(
                 //comments
                 Route::put(
                     '/comment',
-                    \Railroad\Railcontent\Controllers\CommentJsonController::class . '@store'
+                    CommentJsonController::class . '@store'
                 )->name('comment.store');
 
                 Route::patch(
                     '/comment/{id}',
-                    \Railroad\Railcontent\Controllers\CommentJsonController::class . '@update'
+                    CommentJsonController::class . '@update'
                 )->name('comment.update');
 
                 Route::delete(
                     '/comment/{id}',
-                    \Railroad\Railcontent\Controllers\CommentJsonController::class . '@delete'
+                    CommentJsonController::class . '@delete'
                 )->name('comment.delete');
 
                 Route::put(
                     '/comment/reply',
-                    \Railroad\Railcontent\Controllers\CommentJsonController::class . '@reply'
+                    CommentJsonController::class . '@reply'
                 )->name('comment.reply');
 
                 Route::get(
                     '/comment',
-                    \Railroad\Railcontent\Controllers\CommentJsonController::class . '@index'
+                    CommentJsonController::class . '@index'
                 )->name('comment.index');
 
                 Route::get(
                     '/comment/{id}',
-                    \Railroad\Railcontent\Controllers\CommentJsonController::class . '@getLinkedComment'
+                    CommentJsonController::class . '@getLinkedComment'
                 )->name('comment.linked');
 
                 //comment-likes
                 Route::put(
                     '/comment-like/{id}',
-                    \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@store'
+                    CommentLikeJsonController::class . '@store'
                 )->name('comment-like.store');
 
                 Route::delete(
                     '/comment-like/{id}',
-                    \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@delete'
+                    CommentLikeJsonController::class . '@delete'
                 )->name('comment-like.delete');
 
                 // content-likes
                 Route::get(
                     '/content-like/{id}',
-                    \Railroad\Railcontent\Controllers\ContentLikeJsonController::class . '@index'
+                    ContentLikeJsonController::class . '@index'
                 )->name('content-likes.index');
                 Route::put(
                     '/content-like',
-                    \Railroad\Railcontent\Controllers\ContentLikeJsonController::class . '@like'
+                    ContentLikeJsonController::class . '@like'
                 )->name('content-like.store');
                 Route::delete(
                     '/content-like',
-                    \Railroad\Railcontent\Controllers\ContentLikeJsonController::class . '@unlike'
+                    ContentLikeJsonController::class . '@unlike'
                 )->name('content-like.delete');
 
 
                 //full text search
                 Route::get(
                     '/search',
-                    \Railroad\Railcontent\Controllers\FullTextSearchJsonController::class . '@index'
+                    FullTextSearchJsonController::class . '@index'
                 )->name('search.index');
             }
         );
@@ -147,91 +157,91 @@ Route::group(
                 // content fields
                 Route::put(
                     '/content/field',
-                    \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@store'
+                    ContentFieldJsonController::class . '@store'
                 )->name('content.field.store');
 
                 Route::delete(
                     '/content/field/{fieldId}',
-                    \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@delete'
+                    ContentFieldJsonController::class . '@delete'
                 )->name('content.field.delete');
 
                 // content datum
                 Route::put(
                     '/content/datum',
-                    \Railroad\Railcontent\Controllers\ContentDatumJsonController::class . '@store'
+                    ContentDatumJsonController::class . '@store'
                 )->name('content.data.store');
 
                 Route::patch(
                     '/content/datum/{datumId}',
-                    \Railroad\Railcontent\Controllers\ContentDatumJsonController::class . '@update'
+                    ContentDatumJsonController::class . '@update'
                 )->name('content.data.update');
 
                 Route::delete(
                     '/content/datum/{datumId}',
-                    \Railroad\Railcontent\Controllers\ContentDatumJsonController::class . '@delete'
+                    ContentDatumJsonController::class . '@delete'
                 )->name('content.data.delete');
 
                 // permissions
                 Route::put(
                     '/permission',
-                    \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@store'
+                    PermissionJsonController::class . '@store'
                 )->name('permissions.store');
 
                 Route::patch(
                     '/permission/dissociate',
-                    \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@dissociate'
+                    PermissionJsonController::class . '@dissociate'
                 )->name('permissions.dissociate');
 
                 Route::patch(
                     '/permission/{permissionId}',
-                    \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@update'
+                    PermissionJsonController::class . '@update'
                 )->name('permissions.update');
 
                 Route::delete(
                     '/permission/{permissionId}',
-                    \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@delete'
+                    PermissionJsonController::class . '@delete'
                 )->name('permissions.delete');
 
                 Route::put(
                     '/permission/assign',
-                    \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@assign'
+                    PermissionJsonController::class . '@assign'
                 )->name('permissions.assign');
 
                 // content hierarchy
                 Route::put(
                     '/content/hierarchy',
-                    \Railroad\Railcontent\Controllers\ContentHierarchyJsonController::class . '@store'
+                    ContentHierarchyJsonController::class . '@store'
                 )->name('content.hierarchy.store');
 
                 Route::delete(
                     '/content/hierarchy/{parentId}/{childId}',
-                    \Railroad\Railcontent\Controllers\ContentHierarchyJsonController::class . '@delete'
+                    ContentHierarchyJsonController::class . '@delete'
                 )->name('content.hierarchy.delete');
 
                 // content
                 Route::options(
                     '/content',
-                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@options'
+                    ContentJsonController::class . '@options'
                 )->name('content.options');
 
                 Route::put(
                     '/content',
-                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@store'
+                    ContentJsonController::class . '@store'
                 )->name('content.store');
 
                 Route::patch(
                     '/content/{id}',
-                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@update'
+                    ContentJsonController::class . '@update'
                 )->name('content.update');
 
                 Route::delete(
                     '/content/{id}',
-                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@delete'
+                    ContentJsonController::class . '@delete'
                 )->name('content.delete');
 
                 Route::delete(
                     '/soft/content/{id}',
-                    \Railroad\Railcontent\Controllers\ContentJsonController::class . '@softDelete'
+                    ContentJsonController::class . '@softDelete'
                 )->name('content.softdelete');
 
                 // remote storage
@@ -243,17 +253,17 @@ Route::group(
                 //user permission
                 Route::put(
                     '/user-permission',
-                    \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@store'
+                    UserPermissionsJsonController::class . '@store'
                 )->name('user.permissions.store');
 
                 Route::delete(
                     '/user-permission/{userPermissionId}',
-                    \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@delete'
+                    UserPermissionsJsonController::class . '@delete'
                 )->name('user.permissions.delete');
 
                 Route::get(
                     '/user-permission',
-                    \Railroad\Railcontent\Controllers\UserPermissionsJsonController::class . '@index'
+                    UserPermissionsJsonController::class . '@index'
                 )->name('user.permissions.index');
             }
         );

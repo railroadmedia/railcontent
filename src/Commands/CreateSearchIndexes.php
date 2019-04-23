@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Commands;
 
 use Carbon\Carbon;
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityRepository;
 use Illuminate\Console\Command;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\SearchIndex;
@@ -26,12 +28,12 @@ class CreateSearchIndexes extends Command
     protected $description = 'Create search indexes';
 
     /**
-     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     * @var ObjectRepository|EntityRepository
      */
     protected $searchRepository;
 
     /**
-     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     * @var ObjectRepository|EntityRepository
      */
     protected $contentRepository;
 

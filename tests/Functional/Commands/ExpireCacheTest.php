@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Doctrine\ORM\Cache\Logging\StatisticsCacheLogger;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
@@ -20,7 +21,7 @@ class ExpireCacheTest extends RailcontentTestCase
 
     public function test_command()
     {
-        $logger = new \Doctrine\ORM\Cache\Logging\StatisticsCacheLogger();
+        $logger = new StatisticsCacheLogger();
 
         $this->entityManager->getConfiguration()
             ->getSecondLevelCacheConfiguration()

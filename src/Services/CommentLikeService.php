@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityRepository;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentLikes;
@@ -13,7 +15,7 @@ use Railroad\Railcontent\Managers\RailcontentEntityManager;
 class CommentLikeService
 {
     /**
-     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $commentLikeRepository;
 
@@ -23,7 +25,7 @@ class CommentLikeService
     private $entityManager;
 
     /**
-     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $commentRepository;
 

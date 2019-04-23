@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Transformers;
 
 use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Collection;
+use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\Content;
@@ -119,7 +120,7 @@ class DecoratedContentTransformer extends TransformerAbstract
 
     /**
      * @param Content $content
-     * @return \League\Fractal\Resource\Item
+     * @return Item
      */
     public function includeInstructor(Content $content)
     {
@@ -197,7 +198,7 @@ class DecoratedContentTransformer extends TransformerAbstract
 
     /**
      * @param Content $content
-     * @return \League\Fractal\Resource\Item
+     * @return Item
      */
     public function includeParent(Content $content)
     {

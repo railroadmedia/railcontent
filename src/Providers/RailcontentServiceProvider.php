@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Providers;
 
+use Doctrine\Common\Annotations\AnnotationException;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\CachedReader;
@@ -13,6 +14,7 @@ use Doctrine\ORM\Cache\RegionsConfiguration;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
+use Doctrine\ORM\ORMException;
 use Gedmo\DoctrineExtensions;
 use Gedmo\Sortable\SortableListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -77,8 +79,8 @@ class RailcontentServiceProvider extends ServiceProvider
      * Register the application services.
      *
      * @return void
-     * @throws \Doctrine\Common\Annotations\AnnotationException
-     * @throws \Doctrine\ORM\ORMException
+     * @throws AnnotationException
+     * @throws ORMException
      */
     public function register()
     {

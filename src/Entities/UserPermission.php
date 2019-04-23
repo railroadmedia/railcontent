@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Entities;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Railroad\Railcontent\Contracts\UserInterface;
@@ -45,7 +47,7 @@ class UserPermission
     /**
      * @ORM\Column(type="datetime", name="expiration_date", nullable=true)
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $expirationDate;
 
@@ -91,7 +93,7 @@ class UserPermission
     }
 
     /**
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
     public function getExpirationDate()
     {

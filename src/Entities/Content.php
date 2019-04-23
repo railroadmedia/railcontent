@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Entities;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -91,13 +92,13 @@ class Content extends ArrayExpressible
 
     /**
      * @ORM\Column(type="datetime", name="published_on", nullable=true)
-     * @var \DateTime
+     * @var DateTime
      */
     protected $publishedOn;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @var \DateTime
+     * @var DateTime
      */
     protected $archivedOn;
 
@@ -128,7 +129,7 @@ class Content extends ArrayExpressible
     private $likes;
 
     /**
-     * @var \DateTime $createdOn
+     * @var DateTime $createdOn
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
@@ -280,7 +281,7 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getPublishedOn()
     {
@@ -290,7 +291,7 @@ class Content extends ArrayExpressible
     /**
      * Sets publishedOn.
      *
-     * @param  \DateTime $publishedOn
+     * @param  DateTime $publishedOn
      * @return $this
      */
     public function setPublishedOn($publishedOn)

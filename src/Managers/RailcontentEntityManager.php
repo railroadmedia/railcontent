@@ -8,6 +8,7 @@ use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query;
+use InvalidArgumentException;
 
 class RailcontentEntityManager extends EntityManager
 {
@@ -20,7 +21,7 @@ class RailcontentEntityManager extends EntityManager
      *
      * @return EntityManager The created EntityManager.
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @throws ORMException
      */
     public static function create($connection, Configuration $config, EventManager $eventManager = null)

@@ -2,8 +2,12 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Illuminate\Routing\Controller;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
+use Railroad\Permissions\Exceptions\NotAllowedException;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\Permission;
@@ -15,6 +19,9 @@ use Railroad\Railcontent\Requests\PermissionDissociateRequest;
 use Railroad\Railcontent\Requests\PermissionRequest;
 use Railroad\Railcontent\Services\ContentPermissionService;
 use Railroad\Railcontent\Services\ResponseService;
+use ReflectionException;
+use Spatie\Fractal\Fractal;
+use Throwable;
 
 /**
  * Class PermissionController
@@ -39,7 +46,7 @@ class PermissionJsonController extends Controller
     private $contentPermissionService;
 
     /**
-     * @var \Railroad\Permissions\Services\PermissionService
+     * @var PermissionService
      */
     private $permissionPackageService;
 
@@ -91,12 +98,12 @@ class PermissionJsonController extends Controller
      * Create a new permission and return it in JSON format
      *
      * @param PermissionRequest $request
-     * @return \Spatie\Fractal\Fractal
-     * @throws \Doctrine\DBAL\DBALException
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @throws \Railroad\Permissions\Exceptions\NotAllowedException
-     * @throws \ReflectionException
+     * @return Fractal
+     * @throws DBALException
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws NotAllowedException
+     * @throws ReflectionException
      */
     public function store(PermissionRequest $request)
     {
@@ -121,7 +128,7 @@ class PermissionJsonController extends Controller
      * @param integer $id
      * @param PermissionRequest $request
      * @return JsonResponse
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function update($id, PermissionRequest $request)
     {
@@ -150,7 +157,7 @@ class PermissionJsonController extends Controller
      *
      * @param integer $id
      * @return JsonResponse
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function delete($id)
     {

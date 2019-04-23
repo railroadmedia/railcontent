@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Validators;
 
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Repositories\QueryBuilders\QueryBuilder;
 
 class MultipleColumnExistsValidator
@@ -68,7 +69,7 @@ class MultipleColumnExistsValidator
             $value = $paramsForClause[3];
             $or = isset($paramsForClause[4]) && ($paramsForClause[4] === 'or' );
 
-            /** @var \Illuminate\Database\Query\Builder $query */
+            /** @var Builder $query */
             $query = &$queries[$connection][$table];
 
             if($or){

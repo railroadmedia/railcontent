@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Entities;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Railroad\Railcontent\Contracts\UserInterface;
 
@@ -49,7 +50,7 @@ class UserContentProgress
     /**
      * @ORM\Column(type="datetime", name="updated_on", nullable=true)
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $updatedOn;
 

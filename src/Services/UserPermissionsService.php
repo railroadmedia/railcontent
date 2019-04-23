@@ -8,6 +8,7 @@ use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
+use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 
 class UserPermissionsService
 {
@@ -17,7 +18,7 @@ class UserPermissionsService
     private $entityManager;
 
     /**
-     * @var \Railroad\Railcontent\Repositories\UserPermissionsRepository
+     * @var UserPermissionsRepository
      */
     private $userPermissionsRepository;
 

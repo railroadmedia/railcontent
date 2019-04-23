@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\QueryBuilder;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
@@ -356,10 +358,10 @@ class CommentService
      * @param $limit
      * @param string $orderByColumn
      * @param string $orderByDirection
-     * @return \Doctrine\ORM\QueryBuilder
+     * @return QueryBuilder
      */
     public function getQb($page, $limit, $orderByAndDirection, $currentUserId = null)
-    : \Doctrine\ORM\QueryBuilder {
+    : QueryBuilder {
 
         if ($limit == 'null') {
             $limit = -1;
@@ -380,7 +382,7 @@ class CommentService
         $orderByColumn = $alias . '.' . $orderByColumn;
         $first = ($page - 1) * $limit;
         /**
-         * @var $qb \Doctrine\ORM\QueryBuilder
+         * @var $qb QueryBuilder
          */
         $qb = $this->commentRepository->createQueryBuilder($alias);
         $qb->join($alias . '.content', $aliasContent)
@@ -443,7 +445,7 @@ class CommentService
     /** Count comments and replies
      *
      * @return mixed
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function countCommentsAndReplies()
     {

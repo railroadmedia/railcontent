@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Entities;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -71,7 +72,7 @@ class SearchIndex
 
     /**
      * @ORM\Column(type="datetime", name="content_published_on", nullable=true)
-     * @var \DateTime
+     * @var DateTime
      */
     protected $contentPublishedOn;
 
@@ -188,7 +189,7 @@ class SearchIndex
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getContentPublishedOn()
     {
