@@ -1115,9 +1115,10 @@ class ContentService
     }
 
     /**
+     * @param null $brand
      * @return Collection|ContentEntity[]
      */
-    public function getContentForCalendar()
+    public function getContentForCalendar($brand = null)
     {
         $shows = [];
         $liveEventsTypes = [];
@@ -1125,6 +1126,8 @@ class ContentService
         $parents = [];
         $idsOfChildrenOfSelectSemesterPacks = [];
         $culledSemesterPackLessons = [];
+
+        $brand = $brand ?? ConfigService::$brand;
 
         $compareFunc = function ($a, $b) {
             return Carbon::parse($a['published_on']) >= Carbon::parse($b['published_on']);
@@ -1137,8 +1140,8 @@ class ContentService
 
         ContentRepository::$pullFutureContent = true;
 
-        $typesForCalendars = config('railcontent.types-for-calendars.' . ConfigService::$brand, []);
-        $semesterPacksToGet = config('railcontent.semester-packs-for-calendars.' . ConfigService::$brand, []);
+        $typesForCalendars = config('railcontent.types-for-calendars.' . $brand, []);
+        $semesterPacksToGet = config('railcontent.semester-packs-for-calendars.' . $brand, []);
 
         if(empty($typesForCalendars) && empty($semesterPacksToGet)){
             return new Collection();
@@ -1272,12 +1275,12 @@ class ContentService
         foreach($semesterPackLessons as $lesson) {
             foreach($idsOfChildrenOfSelectSemesterPacks as $parentSlug => $setOfIds){
                 if (in_array($lesson['id'], $setOfIds)) {
-                    $labels = config('railcontent.semester-pack-schedule-labels.' . ConfigService::$brand);
+                    $labels = config('railcontent.semester-pack-schedule-labels.' . $brand);
                     if(array_key_exists($parentSlug, $labels)){
-                        $parentSlug = $labels[$parentSlug];
+                        $result = $this->getByChildIdWhereParentTypeIn($lesson['id'],['semester-pack'])->first();
+                        $lesson['parent_id'] = $result['id'];
+                        $culledSemesterPackLessons[$labels[$parentSlug]] = $lesson;
                     }
-                    
-                    $culledSemesterPackLessons[] = $lesson;
                 }
             }
         }
@@ -1287,7 +1290,19 @@ class ContentService
 
         if(empty($scheduleEvents)) return new Collection();
 
-        return Decorator::decorate($scheduleEvents, 'content');
+        foreach($scheduleEvents as $key => $content){
+            $contentBrand = $content['brand'];
+            $incorrectBrand = $contentBrand !== $brand;
+            if($incorrectBrand){
+                $keysToUnset[] = $key;
+            }
+        }
+
+        foreach($keysToUnset ?? [] as $key){
+            unset($scheduleEvents[$key]);
+        }
+
+        return $scheduleEvents;
     }
 
     /**
