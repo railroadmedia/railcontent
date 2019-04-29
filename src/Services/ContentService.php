@@ -1141,14 +1141,14 @@ class ContentService
         ContentRepository::$pullFutureContent = true;
 
         $typesForCalendars = config('railcontent.types-for-calendars.' . $brand, []);
-        $semesterPacksToGet = config('railcontent.semester-packs-for-calendars.' . $brand, []);
+        $semesterPacksToGet = config('railcontent.semester-pack-schedule-labels.' . $brand, []);
 
         if(empty($typesForCalendars) && empty($semesterPacksToGet)){
             return new Collection();
         }
 
-        foreach($semesterPacksToGet ?? [] as $semesterPack){
-            $parents[] = $this->getSemesterPackParent($semesterPack);
+        foreach($semesterPacksToGet ?? [] as $slug => $kebabCaseLabel){
+            $parents[] = $this->getSemesterPackParent($slug);
         }
 
         $nested = false;
@@ -1272,6 +1272,9 @@ class ContentService
         /*
          * Section Three
          */
+
+        $culledSemesterPackLessons = new Collection();
+
         foreach($semesterPackLessons as $lesson) {
             foreach($idsOfChildrenOfSelectSemesterPacks as $parentSlug => $setOfIds){
                 if (in_array($lesson['id'], $setOfIds)) {
@@ -1279,16 +1282,21 @@ class ContentService
                     if(array_key_exists($parentSlug, $labels)){
                         $result = $this->getByChildIdWhereParentTypeIn($lesson['id'],['semester-pack'])->first();
                         $lesson['parent_id'] = $result['id'];
-                        $culledSemesterPackLessons[$labels[$parentSlug]] = $lesson;
+                        //$culledSemesterPackLessons[$labels[$parentSlug]] = $lesson;
+                        $culledSemesterPackLessons[] = $lesson;
                     }
                 }
             }
         }
 
-        $liveEventsAndContentReleases = $liveEvents->merge($contentReleases)->sort($compareFunc)->values();
-        $scheduleEvents = $liveEventsAndContentReleases->merge($culledSemesterPackLessons)->sort($compareFunc)->values();
+        $scheduleEvents = $liveEvents->merge($contentReleases)->sort($compareFunc)->values();
 
-        if(empty($scheduleEvents)) return new Collection();
+        $culledSemesterPackLessons = collect($culledSemesterPackLessons);
+        $scheduleEvents = $scheduleEvents->merge($culledSemesterPackLessons)->sort($compareFunc)->values();
+
+        if(empty($scheduleEvents)){
+            return new Collection();
+        }
 
         foreach($scheduleEvents as $key => $content){
             $contentBrand = $content['brand'];
