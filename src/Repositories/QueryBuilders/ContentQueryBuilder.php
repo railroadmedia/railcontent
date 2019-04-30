@@ -12,7 +12,7 @@ use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
 
-class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
+class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
 {
     /**
      * @param array $slugHierarchy
