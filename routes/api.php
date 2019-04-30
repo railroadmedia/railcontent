@@ -1,138 +1,173 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
+use Railroad\Railcontent\Controllers\CommentJsonController;
+use Railroad\Railcontent\Controllers\CommentLikeJsonController;
+use Railroad\Railcontent\Controllers\ContentFieldJsonController;
+use Railroad\Railcontent\Controllers\ContentJsonController;
+use Railroad\Railcontent\Controllers\ContentLikeJsonController;
+use Railroad\Railcontent\Controllers\ContentProgressJsonController;
+use Railroad\Railcontent\Controllers\FullTextSearchJsonController;
+use Railroad\Railcontent\Controllers\PermissionJsonController;
+use Railroad\Railcontent\Controllers\MyListJsonController;
+use Railroad\Railcontent\Controllers\ApiJsonController;
+use Railroad\Railcontent\Services\ConfigService;
+
 Route::group(
     [
         'prefix' => 'api/railcontent',
-        'middleware' => \Railroad\Railcontent\Services\ConfigService::$apiMiddleware,
+        'middleware' => ConfigService::$apiMiddleware,
     ],
     function () {
         // content fields
         Route::get(
             '/content/field/{id}',
-            \Railroad\Railcontent\Controllers\ContentFieldJsonController::class . '@show'
+            ContentFieldJsonController::class . '@show'
         )
             ->name('content.field.show');
         // permissions
         Route::get(
             '/permission',
-            \Railroad\Railcontent\Controllers\PermissionJsonController::class . '@index'
+            PermissionJsonController::class . '@index'
         )
             ->name('permissions.index');
         // content
         Route::options(
             '/content',
-            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@options'
+            ContentJsonController::class . '@options'
         )
             ->name('content.options');
         Route::get(
             '/content',
-            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@index'
+            ContentJsonController::class . '@index'
         )
             ->name('content.index');
         Route::get(
             '/content/parent/{parentId}',
-            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getByParentId'
+            ContentJsonController::class . '@getByParentId'
         )
             ->name('content.get-by-parent-id');
         Route::get(
             '/content/get-by-ids',
-            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@getByIds'
+            ContentJsonController::class . '@getByIds'
         )
             ->name('content.get-by-ids');
-        Route::get(
-            '/content/{id}',
-            \Railroad\Railcontent\Controllers\ContentJsonController::class . '@show'
-        )
-            ->name('content.show');
+//        Route::get(
+//            '/content/{id}',
+//            ContentJsonController::class . '@show'
+//        )
+//            ->name('content.show');
         // content user progression
         Route::put(
             '/start',
-            Railroad\Railcontent\Controllers\ContentProgressJsonController::class . '@startContent'
+            ContentProgressJsonController::class . '@startContent'
         )
             ->name('content.progress.start');
         Route::put(
             '/complete',
-            Railroad\Railcontent\Controllers\ContentProgressJsonController::class . '@completeContent'
+            ContentProgressJsonController::class . '@completeContent'
         )
             ->name('content.progress.complete');
         Route::put(
             '/reset',
-            Railroad\Railcontent\Controllers\ContentProgressJsonController::class . '@resetContent'
+            ContentProgressJsonController::class . '@resetContent'
         )
             ->name('content.progress.reset');
         Route::put(
             '/progress',
-            Railroad\Railcontent\Controllers\ContentProgressJsonController::class . '@saveProgress'
+            ContentProgressJsonController::class . '@saveProgress'
         )
             ->name('content.progress.store');
         //comments
         Route::put(
             '/comment',
-            \Railroad\Railcontent\Controllers\CommentJsonController::class . '@store'
+            CommentJsonController::class . '@store'
         )
             ->name('comment.store');
         Route::patch(
             '/comment/{id}',
-            \Railroad\Railcontent\Controllers\CommentJsonController::class . '@update'
+            CommentJsonController::class . '@update'
         )
             ->name('comment.update');
         Route::delete(
             '/comment/{id}',
-            \Railroad\Railcontent\Controllers\CommentJsonController::class . '@delete'
+            CommentJsonController::class . '@delete'
         )
             ->name('comment.delete');
         Route::put(
             '/comment/reply',
-            \Railroad\Railcontent\Controllers\CommentJsonController::class . '@reply'
+            CommentJsonController::class . '@reply'
         )
             ->name('comment.reply');
         Route::get(
             '/comment',
-            \Railroad\Railcontent\Controllers\CommentJsonController::class . '@index'
+            CommentJsonController::class . '@index'
         )
             ->name('comment.index');
         Route::get(
             '/comment/{id}',
-            \Railroad\Railcontent\Controllers\CommentJsonController::class . '@getLinkedComment'
+            CommentJsonController::class . '@getLinkedComment'
         )
             ->name('comment.linked');
         //comment-likes
         Route::get(
             '/comment-likes/{commentId}',
-            \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@index'
+            CommentLikeJsonController::class . '@index'
         )
             ->name('comment-likes.index');
         Route::put(
             '/comment-like/{id}',
-            \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@store'
+            CommentLikeJsonController::class . '@store'
         )
             ->name('comment-like.store');
         Route::delete(
             '/comment-like/{id}',
-            \Railroad\Railcontent\Controllers\CommentLikeJsonController::class . '@delete'
+            CommentLikeJsonController::class . '@delete'
         )
             ->name('comment-like.delete');
         // content-likes
         Route::get(
             '/content-like/{id}',
-            \Railroad\Railcontent\Controllers\ContentLikeJsonController::class . '@index'
+            ContentLikeJsonController::class . '@index'
         )
             ->name('content-likes.index');
         Route::put(
             '/content-like',
-            \Railroad\Railcontent\Controllers\ContentLikeJsonController::class . '@like'
+            ContentLikeJsonController::class . '@like'
         )
             ->name('content-like.store');
         Route::delete(
             '/content-like',
-            \Railroad\Railcontent\Controllers\ContentLikeJsonController::class . '@unlike'
+            ContentLikeJsonController::class . '@unlike'
         )
             ->name('content-like.delete');
         //full text search
         Route::get(
             '/search',
-            \Railroad\Railcontent\Controllers\FullTextSearchJsonController::class . '@index'
+            FullTextSearchJsonController::class . '@index'
         )
             ->name('search.index');
+
+        Route::get('/all', ContentJsonController::class . '@getAllContent');
+        Route::get(
+            '/in-progress',
+            ContentJsonController::class . '@getInProgressContent'
+        );
+        Route::get(
+            '/our-picks',
+            ContentJsonController::class . '@getOurPicksContent'
+        );
+
+        Route::put('/add-to-my-list', MyListJsonController::class . '@addToPrimaryPlaylist');
+        Route::put('/remove-from-my-list', MyListJsonController::class . '@removeFromPrimaryPlaylist');
+        Route::get('/my-list', MyListJsonController::class . '@getMyLists');
+
+        Route::get('/onboarding', ApiJsonController::class . '@onboarding');
+
+        Route::get('/shows', ApiJsonController::class . '@getShows');
+
+        Route::get('/comments', ApiJsonController::class . '@getComments');
+
+        Route::get('/content/{id}', ApiJsonController::class . '@getContentWithVimeoData');
     }
 );

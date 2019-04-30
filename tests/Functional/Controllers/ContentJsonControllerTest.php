@@ -1032,6 +1032,99 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
     }
 
+    public function test_all_content()
+    {
+        for ($i = 1; $i < 15; $i++) {
+            $courses[] = $this->contentFactory->create(
+                $this->faker->word,
+                'course',
+                ContentService::STATUS_PUBLISHED
+            );
+        }
+
+        $content2 = $this->contentFactory->create(
+            $this->faker->word,
+            'lesson',
+            ContentService::STATUS_PUBLISHED
+        );
+
+        $response = $this->call(
+            'GET',
+            'api/railcontent/all',
+            [
+                'included_types' => ['course'],
+                'statuses' => ['published', 'scheduled'],
+                'sort' => 'published_on',
+                'brand' => config('railcontent.brand'),
+                'limit' => 10,
+            ]
+
+        );
+        $results = $response->decodeResponseJson('data');
+
+        $this->assertTrue(count($results) <= 10);
+
+        foreach ($results as $result) {
+            $this->assertEquals('course', $result['type']);
+            $this->assertTrue(in_array($result['status'], ['published', 'scheduled']));
+            $this->assertEquals($result['brand'], config('railcontent.brand'));
+        }
+    }
+
+    public function test_our_picks()
+    {
+        $statues = ['published'];
+        $types = ['course'];
+        $page = 1;
+        $limit = 10;
+
+        $expectedContent = [
+            'page' => $page,
+            'limit' => $limit,
+            'status' => 'ok',
+            'code' => 200,
+        ];
+
+        $nrCourses = 30;
+
+        //create courses
+        for ($i = 1; $i < $nrCourses; $i++) {
+            $content = $this->contentFactory->create(
+                $this->faker->word,
+                $types[0],
+                $this->faker->randomElement($statues)
+            );
+            $contents[$i] = (array)$content;
+        }
+
+        for ($i = 1; $i < $nrCourses; $i++) {
+            $field =
+                $this->fieldFactory->create($contents[$i]['id'], 'home_staff_pick_rating', rand(1, 30), null, 'string');
+        }
+
+        $response = $this->call(
+            'GET',
+            'api/railcontent/our-picks',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'included_types' => $types,
+            ]
+        );
+
+        $responseContent = $response->decodeResponseJson('data');
+
+        $previousValue = 0;
+
+        foreach ($responseContent as $result) {
+            $this->assertTrue(
+                (($result['fields'][0]['key'] == 'home_staff_pick_rating') && ($result['fields'][0]['value'] <= 20))
+            );
+            $this->assertTrue($result['fields'][0]['value'] >= $previousValue);
+            $previousValue = $result['fields'][0]['value'];
+        }
+    }
+
     /**
      * @return \Illuminate\Database\Connection
      */

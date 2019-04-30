@@ -180,4 +180,65 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals([$expectedErrors], $responseErrors);
     }
+
+    public function test_in_progress_contents()
+    {
+        $user = $this->createAndLogInNewUser();
+
+        for ($i = 1; $i < 15; $i++) {
+            $courses[$i] = $this->contentFactory->create(
+                $this->faker->word,
+                'course',
+                ContentService::STATUS_PUBLISHED
+            );
+        }
+
+        $userContent = [
+            'content_id' => $courses[2]['id'],
+            'user_id' => $user,
+            'state' => UserContentProgressService::STATE_STARTED,
+            'progress_percent' => $this->faker->numberBetween(0, 10),
+            'updated_on' => Carbon::now()
+                ->toDateTimeString(),
+        ];
+
+        $this->query()
+            ->table(ConfigService::$tableUserContentProgress)
+            ->insertGetId($userContent);
+
+        $userContent = [
+            'content_id' => $courses[4]['id'],
+            'user_id' => $user,
+            'state' => UserContentProgressService::STATE_STARTED,
+            'progress_percent' => $this->faker->numberBetween(0, 10),
+            'updated_on' => Carbon::now()
+                ->toDateTimeString(),
+        ];
+
+        $this->query()
+            ->table(ConfigService::$tableUserContentProgress)
+            ->insertGetId($userContent);
+
+        $response = $this->call(
+            'GET',
+            'api/railcontent/in-progress',
+            [
+                'included_types' => ['course'],
+                'statuses' => ['published', 'scheduled'],
+                'sort' => 'published_on',
+                'brand' => config('railcontent.brand'),
+                'limit' => 10,
+            ]
+
+        );
+        $results = $response->decodeResponseJson('data');
+
+        $this->assertTrue(count($results) <= 10);
+
+        foreach ($results as $result) {
+            $this->assertEquals('course', $result['type']);
+            $this->assertTrue(in_array($result['id'],[2, 4]));
+            $this->assertEquals($result['brand'], config('railcontent.brand'));
+        }
+    }
 }

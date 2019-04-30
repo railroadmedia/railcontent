@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\Factory as ValidationFactory;
+use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -302,5 +303,131 @@ class ContentJsonController extends Controller
         );
 
         return reply()->json(null, ['code' => 204]);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getInProgressContent(Request $request)
+    {
+        $lessons = [];
+        $totalResults = 0;
+
+        $types = $request->get('included_types', []);
+        $limit = $request->get('limit', 10);
+        $page = $request->get('page', 1);
+
+        if (in_array('shows', $types)) {
+            $types = array_merge($types, array_keys(config('railcontent.shows')));
+        }
+
+        if (!empty($types)) {
+            $lessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
+                $types,
+                auth()->id(),
+                'started',
+                $limit,
+                $page - 1
+            );
+
+            $totalResults = $this->contentService->countByTypesUserProgressState(
+                $types,
+                auth()->id(),
+                'started'
+            );
+        }
+
+        return (new ContentFilterResultsEntity(
+            [
+                'results' => $lessons,
+                'total_results' => $totalResults,
+                'filter_options' => $lessons->pluck('type')
+                    ->unique()
+                    ->values(),
+            ]
+        ))->toJsonResponse();
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getOurPicksContent(Request $request)
+    {
+        $staffPicks = [];
+        $types = $request->get('included_types', []);
+        $limit = $request->get('limit', 10);
+        $page = $request->get('page', 1);
+
+        if (in_array('shows', $types)) {
+            $types = array_merge($types, array_keys(config('railcontent.shows')));
+        }
+
+        if (!empty($types)) {
+            $staffPicks = $this->contentService->getFiltered(
+                $page,
+                $limit,
+                '-published_on',
+                $types,
+                [],
+                [],
+                ['home_staff_pick_rating,20,integer,<=']
+            );
+
+            $results =
+                $staffPicks->results()
+                    ->sortByFieldValue('home_staff_pick_rating', 'asc');
+        }
+
+        return (new ContentFilterResultsEntity(
+            ['results' => $results, 'total_results' => $staffPicks->totalResults()]
+        ))->toJsonResponse();
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAllContent(Request $request)
+    {
+        $results = [];
+        $types = $request->get('included_types', []);
+
+        $sortedBy = '-published_on';
+        foreach ($types as $type) {
+            if (array_key_exists($type, config('railcontent.shows'))) {
+                $sortedBy = config('railcontent.shows')[$type]['sortedBy'];
+            }
+        }
+
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', 10);
+        $requiredFields = $request->get('required_fields', []);
+        $requiredUserState = $request->get('required_user_states', []);
+
+        ContentRepository::$availableContentStatues =
+            $request->get('statuses', [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]);
+        ContentRepository::$pullFutureContent = true;
+
+        if (!empty($types)) {
+            $results = $this->contentService->getFiltered(
+                $page,
+                $limit,
+                $sortedBy,
+                $types,
+                [],
+                [],
+                $requiredFields,
+                [],
+                $requiredUserState,
+                [],
+                true
+            );
+
+            return $results->toJsonResponse();
+        }
+
+        return (new ContentFilterResultsEntity(['results' => $results]))->toJsonResponse();
     }
 }
