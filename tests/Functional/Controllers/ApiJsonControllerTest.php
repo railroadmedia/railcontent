@@ -98,7 +98,7 @@ class ApiJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call(
             'GET',
-            'api/railcontent/comment',
+            'api/railcontent/comments',
             [
                 'content_id' => $content['id'],
             ]
@@ -106,112 +106,5 @@ class ApiJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(200, $response->status());
         $this->assertEquals($commentText, $response->decodeResponseJson('data')[0]['comment']);
-    }
-
-    public function test_get_content_with_vimeo_endpoints()
-    {
-        $content = $this->contentFactory->create();
-        $video = $this->contentFactory->create(
-            ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
-            'vimeo-video'
-        );
-
-        $description = $this->faker->paragraph;
-        $this->contentDataFactory->create(
-            $content['id'],
-            'description',
-            '<p>' . $description . '</p>&lt;',
-            1
-        );
-
-        $this->contentFieldFactory->create($content['id'], 'video', $video['id'], 1, 'content_id');
-        $this->contentFieldFactory->create(
-            $video['id'],
-            'vimeo_video_id',
-            env('VIMEO_TEST_VIDEO_ID'),
-            1,
-            'string'
-        );
-
-        $response = $this->call(
-            'GET',
-            'api/railcontent/content/' . $content['id']
-        );
-
-        $this->assertArrayHasKey('related_lessons', $response->decodeResponseJson('data')[0]);
-        $this->assertArrayHasKey('video_playback_endpoints', $response->decodeResponseJson('data')[0]);
-        $this->assertArrayHasKey('video_poster_image_url', $response->decodeResponseJson('data')[0]);
-        $this->assertEquals($description, $response->decodeResponseJson('data')[0]['data'][0]['value']);
-    }
-
-    public function test_get_content_for_download_with_vimeo_endpoints()
-    {
-        $content =
-            $this->contentFactory->create(ContentHelper::slugify($this->faker->words(rand(2, 6), true)), 'course','published',
-                'en',
-                config('railcontent.brand'),
-                null,
-                Carbon::now()->toDateTimeString());
-
-        $lesson =
-            $this->contentFactory->create(
-                ContentHelper::slugify($this->faker->words(rand(2, 6), true)), 'course-part',
-                'published',
-                'en',
-                config('railcontent.brand'),
-                null,
-                Carbon::now()->toDateTimeString(),
-                $content['id']
-            );
-
-        $assignment =  $this->contentFactory->create(
-            ContentHelper::slugify($this->faker->words(rand(2, 6), true)), 'assignment',
-            'published',
-            'en',
-            config('railcontent.brand'),
-            null,
-            Carbon::now()->toDateTimeString(),
-            $lesson['id']
-        );
-
-        $video = $this->contentFactory->create(
-            ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
-            'vimeo-video'
-        );
-
-        $description = $this->faker->paragraph;
-        $this->contentDataFactory->create(
-            $content['id'],
-            'description',
-            '<p>' . $description . '</p>&lt;',
-            1
-        );
-
-        $this->contentFieldFactory->create($content['id'], 'video', $video['id'], 1, 'content_id');
-        $this->contentFieldFactory->create(
-            $video['id'],
-            'vimeo_video_id',
-            env('VIMEO_TEST_VIDEO_ID'),
-            1,
-            'string'
-        );
-
-        $this->contentFieldFactory->create($lesson['id'], 'video', $video['id'], 1, 'content_id');
-
-        $response = $this->call(
-            'GET',
-            'api/railcontent/content/' . $content['id'],[
-                'download' => true
-            ]
-        );
-
-        $this->assertArrayHasKey('related_lessons', $response->decodeResponseJson('data')[0]);
-        $this->assertArrayHasKey('video_playback_endpoints', $response->decodeResponseJson('data')[0]);
-        $this->assertArrayHasKey('video_poster_image_url', $response->decodeResponseJson('data')[0]);
-        $this->assertArrayHasKey('related_lessons', $response->decodeResponseJson('data')[0]['lessons'][0]);
-        $this->assertArrayHasKey('video_playback_endpoints', $response->decodeResponseJson('data')[0]['lessons'][0]);
-        $this->assertArrayHasKey('video_poster_image_url', $response->decodeResponseJson('data')[0]['lessons'][0]);
-
-        $this->assertEquals($description, $response->decodeResponseJson('data')[0]['data'][0]['value']);
     }
 }

@@ -167,7 +167,5 @@ Route::group(
         Route::get('/shows', ApiJsonController::class . '@getShows');
 
         Route::get('/comments', ApiJsonController::class . '@getComments');
-
-        Route::get('/content/{id}', ApiJsonController::class . '@getContentWithVimeoData');
     }
 );

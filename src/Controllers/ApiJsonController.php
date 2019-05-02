@@ -2,15 +2,11 @@
 
 namespace Railroad\Railcontent\Controllers;
 
-use Railroad\Railcontent\Decorators\Mobile\LessonAssignmentDecorator;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Decorators\Mobile\StripTagDecorator;
-use Railroad\Railcontent\Decorators\Mobile\VimeoVideoSourcesDecorator;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Services\CommentService;
-use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Support\Collection;
 use Symfony\Component\HttpFoundation\Request;
 
 class ApiJsonController extends Controller
@@ -26,46 +22,26 @@ class ApiJsonController extends Controller
     private $commentService;
 
     /**
-     * @var ContentHierarchyService
-     */
-    private $contentHierarchyService;
-
-    /**
      * @var StripTagDecorator
      */
     private $stripTagsDecorator;
 
     /**
-     * @var VimeoVideoSourcesDecorator
-     */
-    private $vimeoVideoSourcesDecorator;
-
-    /**
-     * @var LessonAssignmentDecorator
-     */
-    private $lessonAssignmentsDecorator;
-
-    /**
-     * MyListJsonController constructor.
+     * ApiJsonController constructor.
      *
      * @param ContentService $contentService
-     * @param ContentHierarchyService $contentHierarchyService
+     * @param CommentService $commentService
+     * @param StripTagDecorator $stripTagDecorator
      */
     public function __construct(
         ContentService $contentService,
-        ContentHierarchyService $contentHierarchyService,
         CommentService $commentService,
-        StripTagDecorator $stripTagDecorator,
-        VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
-        LessonAssignmentDecorator $lessonAssignmentDecorator
+        StripTagDecorator $stripTagDecorator
     ) {
-        $this->contentHierarchyService = $contentHierarchyService;
         $this->contentService = $contentService;
         $this->commentService = $commentService;
 
         $this->stripTagsDecorator = $stripTagDecorator;
-        $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
-        $this->lessonAssignmentsDecorator = $lessonAssignmentDecorator;
     }
 
     /**
@@ -127,96 +103,4 @@ class ApiJsonController extends Controller
             ]
         );
     }
-
-    /**
-     * @param $contentId
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getContentWithVimeoData($contentId, Request $request)
-    {
-        $content = $this->contentService->getById($contentId);
-
-        $isDownload = $request->get('download', false);
-
-        $lessonParent =
-            $this->contentService->getByChildIdWhereParentTypeIn($contentId, ['course', 'song', 'show', 'play-along']);
-
-        $parentChildren = [];
-
-        if ($content['type'] == 'course') {
-            $parentChildren = [];
-        } elseif ($lessonParent->isNotEmpty()) {
-            $parentChildren = $this->contentService->getByParentId($lessonParent->first()['id']);
-        } else {
-            $parentChildren = $this->contentService->getFiltered(
-                $request->get('page', 1),
-                $request->get('limit', 10),
-                '-published_on',
-                [$content['type']]
-            )['results'];
-        }
-
-        if ($lessonParent->isNotEmpty()) {
-            $content['parent'] = $lessonParent;
-        }
-
-        $parentChildrenTrimmed = $this->getParentChildTrimmed($parentChildren, $content);
-
-        $content['related_lessons'] = $parentChildrenTrimmed;
-        $lessons = $this->contentService->getByParentId($contentId);
-
-        if ($isDownload && (count($lessons) > 0)) {
-            $content['lessons'] = $lessons;
-
-            //for download feature we need lessons assignments, vimeo urls, comments
-            $this->vimeoVideoSourcesDecorator->decorate(new Collection($content['lessons']));
-
-            $this->lessonAssignmentsDecorator->decorate(new Collection($content['lessons']));
-
-            $this->commentService->attachCommentsToContents($content['lessons']);
-
-            $parentChildren = $this->contentService->getByParentId($content['id']);
-
-            foreach ($content['lessons'] as $lessonIndex => $lesson) {
-                $content['lessons'][$lessonIndex]['related_lessons'] = $parentChildren;
-            }
-        }
-
-        $this->stripTagsDecorator->decorate(new Collection([$content]));
-
-        $lessonContent =
-            $this->vimeoVideoSourcesDecorator->decorate(new Collection([$content]))
-                ->first();
-
-        return response()->json(['data' => [$lessonContent]]);
-    }
-
-    /**
-     * @param $parentChildren
-     * @param $content
-     * @return array
-     */
-    private function getParentChildTrimmed($parentChildren, $content)
-    : array {
-        $parentChildrenTrimmed = [];
-        $matched = false;
-
-        foreach ($parentChildren as $parentChildIndex => $parentChild) {
-
-            if ((count($parentChildren) - $parentChildIndex) <= 10 && count($parentChildrenTrimmed) < 10) {
-                $parentChildrenTrimmed[] = $parentChild;
-            } elseif ($matched && count($parentChildrenTrimmed) < 10) {
-                $parentChildrenTrimmed[] = $parentChild;
-            }
-
-            if ($parentChild['id'] == $content['id']) {
-                $matched = true;
-            }
-
-        }
-
-        return $parentChildrenTrimmed;
-    }
-
 }

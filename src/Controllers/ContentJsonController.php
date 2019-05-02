@@ -364,6 +364,8 @@ class ContentJsonController extends Controller
             $types = array_merge($types, array_keys(config('railcontent.shows')));
         }
 
+        $field = ($request->has('is_home')) ? 'staff_pick_rating' : 'home_staff_pick_rating';
+
         if (!empty($types)) {
             $staffPicks = $this->contentService->getFiltered(
                 $page,
@@ -372,12 +374,12 @@ class ContentJsonController extends Controller
                 $types,
                 [],
                 [],
-                ['home_staff_pick_rating,20,integer,<=']
+                [$field.',20,integer,<=']
             );
 
             $results =
                 $staffPicks->results()
-                    ->sortByFieldValue('home_staff_pick_rating', 'asc');
+                    ->sortByFieldValue($field, 'asc');
         }
 
         return (new ContentFilterResultsEntity(
