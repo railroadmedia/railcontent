@@ -364,7 +364,7 @@ class ContentJsonController extends Controller
             $types = array_merge($types, array_keys(config('railcontent.shows')));
         }
 
-        $field = ($request->has('is_home')) ? 'staff_pick_rating' : 'home_staff_pick_rating';
+        $field = ($request->has('is_home')) ? 'home_staff_pick_rating' : 'staff_pick_rating';
 
         if (!empty($types)) {
             $staffPicks = $this->contentService->getFiltered(
