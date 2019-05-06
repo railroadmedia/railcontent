@@ -410,7 +410,12 @@ class ContentJsonController extends Controller
 
         ContentRepository::$availableContentStatues =
             $request->get('statuses', [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]);
-        ContentRepository::$pullFutureContent = true;
+
+        if($request->has('future')) {
+            ContentRepository::$pullFutureContent = true;
+        } else {
+            ContentRepository::$pullFutureContent = false;
+        }
 
         if (!empty($types)) {
             $results = $this->contentService->getFiltered(
