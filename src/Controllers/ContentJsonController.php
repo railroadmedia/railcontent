@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Permissions\Services\PermissionService;
+use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentCreateRequest;
@@ -217,5 +218,153 @@ class ContentJsonController extends Controller
         );
 
         return ResponseService::empty(204);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getInProgressContent(Request $request)
+    {
+        $lessons = new ContentFilterResultsEntity([]);
+
+        $types = $request->get('included_types', []);
+        $limit = $request->get('limit', 10);
+        $page = $request->get('page', 1);
+
+        if (in_array('shows', $types)) {
+            $types = array_merge($types, array_keys(config('railcontent.shows')));
+        }
+
+        $requiredFields = [];
+        foreach ($request->get('required_fields', []) as $filter) {
+            $criteria = explode(',', $filter);
+            $requiredFields[] = ['name' => $criteria[0], 'value' => $criteria[1], 'operator' => '='];
+        }
+
+        if (!empty($types)) {
+            $lessons = $this->contentService->getPaginatedByTypesRecentUserProgressState(
+                $types,
+                auth()->id(),
+                'started',
+                $limit,
+                $page - 1,
+                $requiredFields
+            );
+
+            if (!empty($lessons->results())) {
+                $contentTypes = array_map(
+                    function ($res) {
+                        return $res->getType();
+                    },
+                    $lessons->results()
+                );
+
+                $filterTypes = ['content_type' => array_unique($contentTypes)];
+            }
+        }
+
+        return ResponseService::content(
+            $lessons->results(),
+            $lessons->qb(),
+            [],
+            array_merge($lessons->filterOptions(), $filterTypes ?? [])
+        )
+            ->respond();
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getOurPicksContent(Request $request)
+    {
+        $staffPicks = new ContentFilterResultsEntity([]);
+
+        $types = $request->get('included_types', []);
+        $limit = $request->get('limit', 10);
+        $page = $request->get('page', 1);
+
+        if (in_array('shows', $types)) {
+            $types = array_merge($types, array_keys(config('railcontent.shows')));
+        }
+
+        $field = ($request->has('is_home')) ? 'homeStaffPickRating' : 'staffPickRating';
+
+        if (!empty($types)) {
+            $staffPicks = $this->contentService->getFiltered(
+                $page,
+                $limit,
+                $field,
+                $types,
+                [],
+                [],
+                [$field . ',20,integer,<=']
+            );
+        }
+
+        return ResponseService::content(
+            $staffPicks->results(),
+            $staffPicks->qb(),
+            [],
+            $staffPicks->filterOptions()
+        )
+            ->respond();
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAllContent(Request $request)
+    {
+        $results = new ContentFilterResultsEntity([]);
+
+        $types = $request->get('included_types', []);
+
+        $sortedBy = '-published_on';
+        foreach ($types as $type) {
+            if (array_key_exists($type, config('railcontent.shows', []))) {
+                $sortedBy = config('railcontent.shows')[$type]['sortedBy'];
+            }
+        }
+
+        $page = $request->get('page', 1);
+        $limit = $request->get('limit', 10);
+        $requiredFields = $request->get('required_fields', []);
+        $requiredUserState = $request->get('required_user_states', []);
+
+        ContentRepository::$availableContentStatues =
+            $request->get('statuses', [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]);
+
+        if ($request->has('future')) {
+            ContentRepository::$pullFutureContent = true;
+        } else {
+            ContentRepository::$pullFutureContent = false;
+        }
+
+        if (!empty($types)) {
+            $results = $this->contentService->getFiltered(
+                $page,
+                $limit,
+                $sortedBy,
+                $types,
+                [],
+                [],
+                $requiredFields,
+                [],
+                $requiredUserState,
+                [],
+                true
+            );
+        }
+
+        return ResponseService::content(
+            $results->results(),
+            $results->qb(),
+            [],
+            $results->filterOptions()
+        )
+            ->respond();
     }
 }

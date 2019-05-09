@@ -8,6 +8,8 @@ use Railroad\Railcontent\Controllers\ContentJsonController;
 use Railroad\Railcontent\Controllers\ContentLikeJsonController;
 use Railroad\Railcontent\Controllers\FullTextSearchJsonController;
 use Railroad\Railcontent\Controllers\PermissionJsonController;
+use Railroad\Railcontent\Controllers\MyListJsonController;
+use Railroad\Railcontent\Controllers\ApiJsonController;
 
 Route::group(
     [
@@ -55,11 +57,11 @@ Route::group(
         )
             ->name('content.get-by-ids');
 
-        Route::get(
-            '/content/{id}',
-            ContentJsonController::class . '@show'
-        )
-            ->name('content.show');
+//        Route::get(
+//            '/content/{id}',
+//            ContentJsonController::class . '@show'
+//        )
+//            ->name('content.show');
 
         // content user progression
         Route::put(
@@ -168,5 +170,21 @@ Route::group(
         )
             ->name('search.index');
 
+        Route::get('/all', ContentJsonController::class . '@getAllContent');
+
+        Route::get(
+            '/in-progress',
+            ContentJsonController::class . '@getInProgressContent'
+        );
+        Route::get(
+            '/our-picks',
+            ContentJsonController::class . '@getOurPicksContent'
+        );
+        Route::put('/add-to-my-list', MyListJsonController::class . '@addToPrimaryPlaylist');
+        Route::put('/remove-from-my-list', MyListJsonController::class . '@removeFromPrimaryPlaylist');
+        Route::get('/my-list', MyListJsonController::class . '@getMyLists');
+        Route::get('/onboarding', ApiJsonController::class . '@onboarding');
+        Route::get('/shows', ApiJsonController::class . '@getShows');
+        Route::get('/comments', ApiJsonController::class . '@getComments');
     }
 );

@@ -673,34 +673,45 @@ class ContentService
         $userId,
         $state,
         $limit = 25,
-        $skip = 0
+        $skip = 0,
+        $requiredFilters = []
     ) {
         //user
         $alias = 'up';
 
         $qb =
-            $this->entityManager->getRepository(UserContentProgress::class)
-                ->createQueryBuilder($alias);
-        $qb->setFirstResult($skip)
-            ->setMaxResults($limit)
-            ->join(
-                $alias . '.content',
-                config('railcontent.table_prefix') . 'content'
+            $this->contentRepository->build()
+                ->restrictByUserAccess()
+                ->join(config('railcontent.table_prefix') . 'content' . '.userProgress', $alias)
+                ->andWhere($alias . '.user = :userId')
+                ->andWhere($alias . '.state = :state')
+                ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)');
+
+        if ($requiredFilters) {
+            $qb->restrictByFields(
+                $requiredFilters
             );
-        $qb->where($alias . '.user = :userId')
-            ->andWhere($alias . '.state = :state')
-            ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
-            ->setMaxResults($limit)
-            ->setFirstResult($skip)
-            ->orderBy($alias . '.updatedOn', 'desc')
-            ->setParameter('userId', $userId)
+        }
+
+        $qb->setParameter('userId', $userId)
+            ->setParameter('types', $types)
             ->setParameter('state', $state)
-            ->setParameter('types', $types);
-        $results =
-            $qb->getQuery()
-                ->setCacheable(true)
-                ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+            ->setFirstResult($skip)
+            ->setMaxResults($limit)
+            ->orderBy($alias . '.updatedOn', 'desc');
+
+        $this->contentRepository->requireUserStates($state, $userId);
+
+        $results = new ContentFilterResultsEntity(
+            [
+                'qb' => $qb,
+                'results' => $qb->getQuery()
+                    ->setCacheable(true)
+                    ->setCacheRegion('pull')
+                    ->getResult('Railcontent'),
+                'filter_options' => $this->contentRepository->getFilterFields(),
+            ]
+        );
 
         return $results;
     }
@@ -958,14 +969,16 @@ class ContentService
         $this->entityManager->flush();
 
         if (array_key_exists('relationships', $data['data'])) {
-            $parentId = $data['data']['relationships']['parent']['data']['id'];
-            $parent = $this->contentRepository->find($parentId);
+            $parentId = $data['data']['relationships']['parent']['data']['id'] ?? null;
+            if ($parentId) {
+                $parent = $this->contentRepository->find($parentId);
 
-            $hierarchy = new ContentHierarchy();
-            $hierarchy->setParent($parent);
-            $hierarchy->setChild($content);
-            $this->entityManager->persist($hierarchy);
-            $this->entityManager->flush();
+                $hierarchy = new ContentHierarchy();
+                $hierarchy->setParent($parent);
+                $hierarchy->setChild($content);
+                $this->entityManager->persist($hierarchy);
+                $this->entityManager->flush();
+            }
         }
 
         $this->entityManager->getCache('Railcontent')
@@ -1354,5 +1367,24 @@ class ContentService
     private function getAssociationMappings($entity, $field)
     {
         return $this->entityManager->getClassMetadata($entity)->associationMappings[$field['key']];
+    }
+
+    /**
+     * @param $types
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function countByTypes($types)
+    {
+        $qb = $this->contentRepository->build();
+
+        return $qb->select(
+            $qb->expr()
+                ->count(config('railcontent.table_prefix') . 'content')
+        )
+            ->restrictByUserAccess()
+            ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }
