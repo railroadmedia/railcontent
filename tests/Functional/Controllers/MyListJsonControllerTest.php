@@ -2,10 +2,13 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Carbon\Carbon;
+use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Factories\ContentHierarchyFactory;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class MyListJsonControllerTest extends RailcontentTestCase
@@ -23,12 +26,18 @@ class MyListJsonControllerTest extends RailcontentTestCase
      */
     protected $contentHierarchyFactory;
 
+    /**
+     * @var ContentContentFieldFactory
+     */
+    protected $contentFieldFactory;
+
     protected function setUp()
     {
         parent::setUp();
 
         $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->contentHierarchyFactory = $this->app->make(ContentHierarchyFactory::class);
+        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
 
         $this->userId = $this->createAndLogInNewUser();
     }
@@ -145,6 +154,58 @@ class MyListJsonControllerTest extends RailcontentTestCase
         $response = $this->call(
             'GET',
             'api/railcontent/my-list'
+        );
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals(2, count($response->decodeResponseJson('data')));
+    }
+
+    public function test_my_list_in_progress()
+    {
+        $user = $this->createAndLogInNewUser();
+
+        for ($i = 1; $i < 15; $i++) {
+            $courses[$i] = $this->contentFactory->create(
+                $this->faker->word,
+                'course',
+                ContentService::STATUS_PUBLISHED,
+                'en-US',
+                ConfigService::$brand,
+                rand(), Carbon::now()->subMinute($i)
+            );
+            $difficulty[$i] = $this->contentFieldFactory->create($courses[$i]['id'],'difficulty', $i);
+        }
+
+        $userContent = [
+            'content_id' => $courses[2]['id'],
+            'user_id' => $user,
+            'state' => UserContentProgressService::STATE_STARTED,
+            'progress_percent' => $this->faker->numberBetween(0, 10),
+            'updated_on' => Carbon::now()
+                ->toDateTimeString(),
+        ];
+
+        $this->query()
+            ->table(ConfigService::$tableUserContentProgress)
+            ->insertGetId($userContent);
+
+        $userContent = [
+            'content_id' => $courses[4]['id'],
+            'user_id' => $user,
+            'state' => UserContentProgressService::STATE_STARTED,
+            'progress_percent' => $this->faker->numberBetween(0, 10),
+            'updated_on' => Carbon::now()->addHours(5)
+                ->toDateTimeString(),
+        ];
+
+        $this->query()
+            ->table(ConfigService::$tableUserContentProgress)
+            ->insertGetId($userContent);
+
+
+        $response = $this->call(
+            'GET',
+            'api/railcontent/my-list?state=started'
         );
 
         $this->assertEquals(200, $response->status());

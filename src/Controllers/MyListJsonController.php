@@ -136,7 +136,6 @@ class MyListJsonController extends Controller
             $usersPrimaryPlaylist = reset($usersPrimaryPlaylists);
 
             if (empty($usersPrimaryPlaylist)) {
-                dd($usersPrimaryPlaylists);
                 return response()->json([]);
             }
 
@@ -153,10 +152,10 @@ class MyListJsonController extends Controller
                 []
             );
         } else {
-
             $contentTypes = array_diff($contentTypes, ['course-part']);
+            $lessons = new ContentFilterResultsEntity();
 
-            $lessons = $this->contentService->getFiltered(
+            $filters = $this->contentService->getFiltered(
                 $page,
                 $limit,
                 '-published_on',
@@ -168,6 +167,16 @@ class MyListJsonController extends Controller
                 [$state],
                 []
             );
+
+            $lessons['results'] = $this->contentService->getPaginatedByTypesRecentUserProgressState(
+                $contentTypes,
+                auth()->id(),
+                'started',
+                $limit,
+                $page - 1
+            );
+
+            $lessons['filter_options'] = $filters->filterOptions();
         }
 
         $filterOptions = array_merge(
