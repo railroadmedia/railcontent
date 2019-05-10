@@ -2,15 +2,18 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
-use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 
 class ContentHierarchyService
 {
     /**
-     * @var ContentHierarchyRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $contentHierarchyRepository;
 
@@ -61,6 +64,7 @@ class ContentHierarchyService
 
     /**
      * @param array $parentIds
+     * @return array
      */
     public function countParentsChildren(array $parentIds)
     {
@@ -86,13 +90,14 @@ class ContentHierarchyService
         return $results;
     }
 
-    /**
-     * Create/update a new hierarchy and return it.
+    /** Create/update a new hierarchy and return it.
      *
-     * @param int $parentId
-     * @param int $childId
-     * @param int|null $childPosition
-     * @return array
+     * @param $parentId
+     * @param $childId
+     * @param null $childPosition
+     * @return object|ContentHierarchy|null
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function createOrUpdateHierarchy($parentId, $childId, $childPosition = null)
     {
@@ -148,6 +153,8 @@ class ContentHierarchyService
      * @param $parentId
      * @param $childId
      * @return bool
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete($parentId, $childId)
     {

@@ -2,11 +2,14 @@
 
 namespace Railroad\Railcontent\Controllers;
 
-use Illuminate\Http\Request;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\UserContentRequest;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Services\UserContentProgressService;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ContentProgressJsonController extends Controller
 {
@@ -30,25 +33,30 @@ class ContentProgressJsonController extends Controller
 
     /** Start a content for the authenticated user
      *
-     * @param Request $request
-     * @return JsonResponse
+     * @param UserContentRequest $request
+     * @return \Illuminate\Http\JsonResponse|JsonResponse
+     * @throws NonUniqueResultException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function startContent(UserContentRequest $request)
     {
-
         $response = $this->userContentService->startContent(
             $request->input('data.relationships.content.data.id'),
             auth()->id()
         );
 
-        return ResponseService::empty(200)->setData(['data'=> $response]);
+        return ResponseService::empty(200)
+            ->setData(['data' => $response]);
     }
 
-    /**
-     * Set content as complete for the authenticated user
+    /** Set content as complete for the authenticated user
      *
-     * @param Request $request
-     * @return JsonResponse
+     * @param UserContentRequest $request
+     * @return \Illuminate\Http\JsonResponse|JsonResponse
+     * @throws NonUniqueResultException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function completeContent(UserContentRequest $request)
     {
@@ -57,14 +65,17 @@ class ContentProgressJsonController extends Controller
             auth()->id()
         );
 
-        return ResponseService::empty(201)->setData(['data'=> $response]);
+        return ResponseService::empty(201)
+            ->setData(['data' => $response]);
     }
 
-    /**
-     * Set content as complete for the authenticated user
+    /** Reset content progress for authenticated user
      *
-     * @param Request $request
-     * @return JsonResponse
+     * @param UserContentRequest $request
+     * @return \Illuminate\Http\JsonResponse|JsonResponse
+     * @throws NonUniqueResultException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function resetContent(UserContentRequest $request)
     {
@@ -73,14 +84,17 @@ class ContentProgressJsonController extends Controller
             auth()->id()
         );
 
-        return ResponseService::empty(201)->setData(['data'=> $response]);
+        return ResponseService::empty(201)
+            ->setData(['data' => $response]);
     }
 
-    /**
-     * Save the progress on a content for the authenticated user
+    /** Save the progress on a content for the authenticated user
      *
-     * @param Request $request
-     * @return JsonResponse
+     * @param UserContentRequest $request
+     * @return \Illuminate\Http\JsonResponse|JsonResponse
+     * @throws NonUniqueResultException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function saveProgress(UserContentRequest $request)
     {
@@ -89,6 +103,7 @@ class ContentProgressJsonController extends Controller
             $request->input('data.attributes.progress_percent'),
             auth()->id()
         );
-        return ResponseService::empty(201)->setData(['data'=> $response]);
+        return ResponseService::empty(201)
+            ->setData(['data' => $response]);
     }
 }

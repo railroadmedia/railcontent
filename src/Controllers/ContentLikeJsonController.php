@@ -2,11 +2,15 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\ContentLikeRequest;
 use Railroad\Railcontent\Services\ContentLikeService;
 use Railroad\Railcontent\Services\ResponseService;
+use Spatie\Fractal\Fractal;
 
 class ContentLikeJsonController extends Controller
 {
@@ -46,11 +50,12 @@ class ContentLikeJsonController extends Controller
         return ResponseService::contentLike($likes, $qb);
     }
 
-    /**
-     * Authenticated user like content.
+    /** Authenticated user like content.
      *
-     * @param Request $request
-     * @return mixed
+     * @param ContentLikeRequest $request
+     * @return Fractal
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function like(ContentLikeRequest $request)
     {
@@ -59,11 +64,12 @@ class ContentLikeJsonController extends Controller
         return ResponseService::contentLike($like);
     }
 
-    /**
-     * Authenticated user unlike content.
+    /** Authenticated user dislike content.
      *
-     * @param CommentUnLikeRequest $request
-     * @return mixed
+     * @param ContentLikeRequest $request
+     * @return JsonResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function unlike(ContentLikeRequest $request)
     {

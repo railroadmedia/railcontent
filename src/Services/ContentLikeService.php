@@ -4,6 +4,8 @@ namespace Railroad\Railcontent\Services;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
@@ -12,7 +14,6 @@ use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
 class ContentLikeService
 {
-
     /**
      * @var ObjectRepository|EntityRepository
      */
@@ -88,12 +89,11 @@ class ContentLikeService
         return $qb;
     }
 
-    /**
-     * Returns array with content ids as the key and like count as the value.
+    /** Returns array with content ids as the key and like count as the value.
      * [46236 => 5]
      *
      * @param $contentIds
-     * @return array
+     * @return array|false
      */
     public function countForContentIds($contentIds)
     {
@@ -118,7 +118,9 @@ class ContentLikeService
     /**
      * @param $contentId
      * @param $userId
-     * @return array
+     * @return array|object[]|ContentLikes
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function like($contentId, $userId)
     {
@@ -151,7 +153,9 @@ class ContentLikeService
     /**
      * @param $contentId
      * @param $userId
-     * @return int
+     * @return bool
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function unlike($contentId, $userId)
     {
@@ -175,7 +179,7 @@ class ContentLikeService
     }
 
     /**
-     * @param $commentAndReplyIds
+     * @param $contentIds
      * @param $userId
      * @return array|false|mixed
      */
@@ -183,7 +187,7 @@ class ContentLikeService
     {
         $qb =
             $this->contentLikeRepository->createQueryBuilder('cl')
-        ->join('cl.content', 'c');
+                ->join('cl.content', 'c');
         $qb->select('cl.user as user, c.id as contentId')
             ->where('cl.user = :userId')
             ->andWhere('cl.content IN (:contentIds)')

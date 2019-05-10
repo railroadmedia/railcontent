@@ -4,6 +4,8 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 
 class CommentRepository extends EntityRepository
 {
@@ -57,8 +59,10 @@ class CommentRepository extends EntityRepository
 
     /** Based on softDelete we soft delete or permanently delete the comment with all his replies
      *
-     * @param int $id
-     * @return bool|int
+     * @param $id
+     * @return bool
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function deleteCommentReplies($id)
     {
@@ -71,8 +75,10 @@ class CommentRepository extends EntityRepository
 
     /** Mark comment and it's replies as deleted
      *
-     * @param integer $id
+     * @param $id
      * @return bool
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     private function softDeleteReplies($id)
     {
@@ -86,10 +92,10 @@ class CommentRepository extends EntityRepository
         return true;
     }
 
-    /** Delete comment and it's replies
-     *
-     * @param integer $id
-     * @return bool
+    /**
+     * @param $id
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     private function deleteReplies($id)
     {

@@ -3,12 +3,15 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
-use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 
 class UserPermissionsService
 {
@@ -18,7 +21,7 @@ class UserPermissionsService
     private $entityManager;
 
     /**
-     * @var UserPermissionsRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $userPermissionsRepository;
 
@@ -43,14 +46,13 @@ class UserPermissionsService
         $this->userPermissionsRepository = $this->entityManager->getRepository(UserPermission::class);
     }
 
-    /**
-     * Save user permission record in database
+    /** Save/update user permission
      *
-     * @param integer $userId
-     * @param integer $permissionId
-     * @param date $startDate
-     * @param date|null $expirationDate
-     * @return array
+     * @param $attributes
+     * @param $values
+     * @return object|UserPermission|null
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function updateOrCeate($attributes, $values)
     {
@@ -98,11 +100,12 @@ class UserPermissionsService
         return $userPermission;
     }
 
-    /**
-     * Call the method that delete the user permission, if the user permission exists in the database
+    /** Call the method that delete the user permission, if the user permission exists
      *
-     * @param int $id
-     * @return array|bool
+     * @param $id
+     * @return bool|object|null
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete($id)
     {
@@ -123,10 +126,9 @@ class UserPermissionsService
         return true;
     }
 
-    /**
-     * Call the method from repository that pull user permissions and return an array with the results
+    /** Call the method from repository that pull user permissions and return an array with the results
      *
-     * @param null|int $userId
+     * @param null $userId
      * @param bool $onlyActive
      * @return array
      */
@@ -136,9 +138,9 @@ class UserPermissionsService
     }
 
     /**
-     * @param int $userId
-     * @param int $permissionId
-     * @return array
+     * @param $userId
+     * @param $permissionId
+     * @return object|null
      */
     public function getUserPermissionIdByPermissionAndUser($userId, $permissionId)
     {
@@ -153,9 +155,9 @@ class UserPermissionsService
     }
 
     /**
-     * @param int $userId
-     * @param int $permissionName
-     * @return array
+     * @param $userId
+     * @param $permissionName
+     * @return bool
      */
     public function userHasPermissionName($userId, $permissionName)
     {

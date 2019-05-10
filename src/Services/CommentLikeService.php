@@ -51,18 +51,17 @@ class CommentLikeService
 
     /**
      * @param $commentIds
-     * @return array|null
+     * @return mixed
      */
     public function getByCommentIds($commentIds)
     {
         return $this->commentLikeRepository->findByComment($commentIds);
     }
 
-    /**
-     * Returns [[id, count], ...]
+    /** Returns [[id, count], ...]
      *
      * @param $commentIds
-     * @return array
+     * @return array|false
      */
     public function countForCommentIds($commentIds)
     {
@@ -84,10 +83,10 @@ class CommentLikeService
         return array_combine(array_column($results, 'id'), array_column($results, 'nr'));
     }
 
-    /**
-     * Returns [commentId => [user1, user2], ...]
+    /** Returns [commentId => [user1, user2], ...]
      *
      * @param $commentIds
+     * @param $amountOfUserIdsToPull
      * @return array
      */
     public function getUserIdsForEachCommentId($commentIds, $amountOfUserIdsToPull)
@@ -122,8 +121,10 @@ class CommentLikeService
 
     /**
      * @param $commentId
-     * @param integer $userId
-     * @return bool
+     * @param $userId
+     * @return array|object[]|CommentLikes
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function create($commentId, $userId)
     {
@@ -164,7 +165,9 @@ class CommentLikeService
     /**
      * @param $commentId
      * @param $userId
-     * @return bool|int|null|array
+     * @return bool
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function delete($commentId, $userId)
     {

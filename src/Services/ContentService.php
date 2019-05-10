@@ -3,7 +3,10 @@
 namespace Railroad\Railcontent\Services;
 
 use Doctrine\Common\Inflector\Inflector;
+use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
@@ -11,7 +14,6 @@ use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
-use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentPermission;
@@ -21,11 +23,6 @@ use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
-use Railroad\Railcontent\Repositories\CommentRepository;
-use Railroad\Railcontent\Repositories\ContentDatumRepository;
-use Railroad\Railcontent\Repositories\ContentPermissionRepository;
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Support\Collection;
 use ReflectionException;
 
 class ContentService
@@ -36,22 +33,22 @@ class ContentService
     public $entityManager;
 
     /**
-     * @var ContentRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $contentRepository;
 
     /**
-     * @var ContentDatumRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $datumRepository;
 
     /**
-     * @var CommentRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $commentRepository;
 
     /**
-     * @var ContentPermissionRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $contentPermissionRepository;
 
@@ -77,6 +74,7 @@ class ContentService
      *
      * @param RailcontentEntityManager $entityManager
      * @param JsonApiHydrator $jsonApiHydrator
+     * @param UserProviderInterface $userProvider
      */
     public function __construct(
         RailcontentEntityManager $entityManager,
@@ -94,11 +92,11 @@ class ContentService
         $this->jsonApiHydrator = $jsonApiHydrator;
     }
 
-    /**
-     * Call the get by id method from repository and return the content
+    /** Call the get by id method from repository and return the content
      *
-     * @param integer $id
-     * @return ContentEntity|array|null
+     * @param $id
+     * @return mixed
+     * @throws NonUniqueResultException
      */
     public function getById($id)
     {
@@ -115,11 +113,10 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Call the get by ids method from repository
+    /** Call the get by ids method from repository
      *
-     * @param integer[] $ids
-     * @return array|Collection|ContentEntity[]
+     * @param $ids
+     * @return array
      */
     public function getByIds($ids)
     {
@@ -146,11 +143,10 @@ class ContentService
         return $contentRows;
     }
 
-    /**
-     * Get all contents with specified type.
+    /** Get all contents with specified type.
      *
-     * @param string $type
-     * @return array|Collection|ContentEntity[]
+     * @param $type
+     * @return mixed
      */
     public function getAllByType($type)
     {
@@ -167,23 +163,22 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get all contents with specified status, field and type.
+    /** Get all contents with specified status, field and type.
      *
      * @param array $types
-     * @param string $status
-     * @param string $fieldKey
-     * @param string $fieldValue
+     * @param $status
+     * @param $fieldKey
+     * @param $fieldValue
      * @param string $fieldType
      * @param string $fieldComparisonOperator
-     * @return array|Collection|ContentEntity[]
+     * @return mixed
      */
     public function getWhereTypeInAndStatusAndField(
         array $types,
         $status,
         $fieldKey,
         $fieldValue,
-        $fieldType,
+        $fieldType = '',
         $fieldComparisonOperator = '='
     ) {
 
@@ -236,16 +231,15 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get ordered contents by type, status and published_on date.
+    /** Get ordered contents by type, status and published_on date.
      *
      * @param array $types
-     * @param string $status
-     * @param string $publishedOnValue
+     * @param $status
+     * @param $publishedOnValue
      * @param string $publishedOnComparisonOperator
      * @param string $orderByColumn
      * @param string $orderByDirection
-     * @return array|Collection|ContentEntity[]
+     * @return mixed
      */
     public function getWhereTypeInAndStatusAndPublishedOnOrdered(
         array $types,
@@ -276,12 +270,11 @@ class ContentService
             ->getResult('Railcontent');
     }
 
-    /**
-     * Get contents by slug and title.
+    /** Get contents by slug and title.
      *
-     * @param string $slug
-     * @param string $type
-     * @return array|Collection|ContentEntity[]
+     * @param $slug
+     * @param $type
+     * @return mixed
      */
     public function getBySlugAndType($slug, $type)
     {
@@ -300,13 +293,12 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get contents by userId, type and slug.
+    /** Get contents by userId, type and slug.
      *
-     * @param integer $userId
-     * @param string $type
-     * @param string $slug
-     * @return array|Collection|ContentEntity[]
+     * @param $userId
+     * @param $type
+     * @param $slug
+     * @return mixed
      */
     public function getByUserIdTypeSlug($userId, $type, $slug)
     {
@@ -327,13 +319,12 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get contents based on parent id.
+    /** Get contents based on parent id.
      *
-     * @param integer $parentId
+     * @param $parentId
      * @param string $orderBy
      * @param string $orderByDirection
-     * @return array|Collection|ContentEntity[]
+     * @return mixed
      */
     public function getByParentId($parentId, $orderBy = 'childPosition', $orderByDirection = 'asc')
     {
@@ -352,13 +343,14 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get paginated contents by parent id.
+    /** Get paginated contents by parent id.
      *
-     * @param integer $parentId
+     * @param $parentId
+     * @param int $limit
+     * @param int $skip
      * @param string $orderBy
      * @param string $orderByDirection
-     * @return array|Collection|ContentEntity[]
+     * @return mixed
      */
     public function getByParentIdPaginated(
         $parentId,
@@ -384,14 +376,13 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get ordered contents by parent id with specified type.
+    /** Get ordered contents by parent id with specified type.
      *
-     * @param integer $parentId
-     * @param array $types
+     * @param $parentId
+     * @param $types
      * @param string $orderBy
      * @param string $orderByDirection
-     * @return array|Collection|ContentEntity[]
+     * @return mixed
      */
     public function getByParentIdWhereTypeIn(
         $parentId,
@@ -416,14 +407,15 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get ordered contents by parent id and type.
+    /** Get ordered contents by parent id and type.
      *
-     * @param integer $parentId
-     * @param array $types
+     * @param $parentId
+     * @param $types
+     * @param int $limit
+     * @param int $skip
      * @param string $orderBy
      * @param string $orderByDirection
-     * @return array|Collection|ContentEntity[]
+     * @return mixed
      */
     public function getByParentIdWhereTypeInPaginated(
         $parentId,
@@ -452,12 +444,12 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Count contents with specified type and parent id.
+    /** Count contents with specified type and parent id.
      *
-     * @param integer $parentId
-     * @param array $types
-     * @return integer
+     * @param $parentId
+     * @param $types
+     * @return mixed
+     * @throws NonUniqueResultException
      */
     public function countByParentIdWhereTypeIn(
         $parentId,
@@ -478,13 +470,12 @@ class ContentService
             ->getSingleScalarResult();
     }
 
-    /**
-     * Get ordered contents based on parent ids.
+    /** Get ordered contents based on parent ids.
      *
      * @param array $parentIds
      * @param string $orderBy
      * @param string $orderByDirection
-     * @return array|Collection|ContentEntity[]
+     * @return mixed
      */
     public function getByParentIds(array $parentIds, $orderBy = 'childPosition', $orderByDirection = 'asc')
     {
@@ -502,12 +493,11 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get contents by child and type.
+    /** Get contents by child and type.
      *
-     * @param integer $childId
-     * @param string $type
-     * @return array|Collection|ContentEntity[]
+     * @param $childId
+     * @param $type
+     * @return mixed
      */
     public function getByChildIdWhereType($childId, $type)
     {
@@ -527,12 +517,11 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get contents by child ids with specified type.
+    /** Get contents by child ids with specified type.
      *
      * @param array $childIds
-     * @param string $type
-     * @return array|Collection|ContentEntity[]
+     * @param $type
+     * @return mixed
      */
     public function getByChildIdsWhereType(array $childIds, $type)
     {
@@ -551,12 +540,11 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get contents by child id where parent type met the criteria.
+    /** Get contents by child id where parent type met the criteria.
      *
-     * @param integer $childId
+     * @param $childId
      * @param array $types
-     * @return array|Collection|ContentEntity[]
+     * @return mixed
      */
     public function getByChildIdWhereParentTypeIn($childId, array $types)
     {
@@ -575,15 +563,14 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get paginated contents by type and user progress state.
+    /** Get paginated contents by type and user progress state.
      *
-     * @param string $type
-     * @param integer $userId
-     * @param string $state
+     * @param $type
+     * @param $userId
+     * @param $state
      * @param int $limit
      * @param int $skip
-     * @return array|Collection|ContentEntity[]
+     * @return mixed
      */
     public function getPaginatedByTypeUserProgressState($type, $userId, $state, $limit = 25, $skip = 0)
     {
@@ -614,15 +601,14 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get paginated contents by types and user progress state.
+    /** Get paginated contents by types and user progress state.
      *
      * @param array $types
-     * @param integer $userId
-     * @param string $state
+     * @param $userId
+     * @param $state
      * @param int $limit
      * @param int $skip
-     * @return array|Collection|ContentEntity[]
+     * @return mixed
      */
     public function getPaginatedByTypesUserProgressState(
         array $types,
@@ -658,15 +644,15 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get recent paginated contents by types and user progress state.
+    /** Get recent paginated contents by types and user progress state.
      *
      * @param array $types
-     * @param integer $userId
-     * @param string $state
+     * @param $userId
+     * @param $state
      * @param int $limit
      * @param int $skip
-     * @return array|Collection|ContentEntity[]
+     * @param array $requiredFilters
+     * @return ContentFilterResultsEntity
      */
     public function getPaginatedByTypesRecentUserProgressState(
         array $types,
@@ -716,15 +702,13 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Count recent contents with user progress state and type.
+    /** Count recent contents with user progress state and type.
      *
      * @param array $types
-     * @param integer $userId
-     * @param string $state
-     * @param int $limit
-     * @param int $skip
-     * @return array|Collection|ContentEntity[]
+     * @param $userId
+     * @param $state
+     * @return mixed
+     * @throws NonUniqueResultException
      */
     public function countByTypesRecentUserProgressState(
         array $types,
@@ -752,16 +736,15 @@ class ContentService
             ->getSingleScalarResult();
     }
 
-    /**
-     * Get neighbouring siblings by type.
+    /** Get neighbouring siblings by type.
      *
-     * @param string $type
-     * @param string $columnName
-     * @param string $columnValue
+     * @param $type
+     * @param $columnName
+     * @param $columnValue
      * @param int $siblingPairLimit
      * @param string $orderColumn
      * @param string $orderDirection
-     * @return array|ContentEntity|Collection
+     * @return array
      */
     public function getTypeNeighbouringSiblings(
         $type,
@@ -782,13 +765,13 @@ class ContentService
         );
     }
 
-    /**
-     * Count contents by type and user progress state.
+    /** Count contents by type and user progress state.
      *
      * @param array $types
-     * @param integer $userId
-     * @param string $state
-     * @return integer
+     * @param $userId
+     * @param $state
+     * @return mixed
+     * @throws NonUniqueResultException
      */
     public function countByTypesUserProgressState(array $types, $userId, $state)
     {
@@ -815,12 +798,12 @@ class ContentService
         return $res;
     }
 
-    /**
-     * Get contents by child ids with specified type.
+    /** Get contents by child ids with specified type.
      *
-     * @param array $childIds
-     * @param string $type
-     * @return array|Collection|ContentEntity[]
+     * @param $userId
+     * @param array $childContentIds
+     * @param null $slug
+     * @return mixed
      */
     public function getByUserIdWhereChildIdIn($userId, array $childContentIds, $slug = null)
     {
@@ -845,13 +828,10 @@ class ContentService
         return $results;
     }
 
-    /**
-     * Get filtered contents.
-     * Returns:
-     * ['results' => $lessons, 'total_results' => $totalLessonsAfterFiltering]
+    /** Get filtered contents.
      *
-     * @param int $page
-     * @param int $limit
+     * @param $page
+     * @param $limit
      * @param string $orderByAndDirection
      * @param array $includedTypes
      * @param array $slugHierarchy
@@ -860,8 +840,8 @@ class ContentService
      * @param array $includedFields
      * @param array $requiredUserStates
      * @param array $includedUserStates
-     * @param boolean $pullFilterFields
-     * @return ContentFilterResultsEntity
+     * @param bool $pullFilterFields
+     * @return ContentFilterResultsEntity|null
      */
     public function getFiltered(
         $page,
@@ -992,12 +972,15 @@ class ContentService
         return $content;
     }
 
-    /**
-     * Update and return the updated content.
+    /** Update and return the updated content.
      *
-     * @param integer $id
+     * @param $id
      * @param array $data
-     * @return array|ContentEntity
+     * @return object|null
+     * @throws DBALException
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws ReflectionException
      */
     public function update($id, array $data)
     {
@@ -1022,11 +1005,12 @@ class ContentService
         return $content;
     }
 
-    /**
-     * Call the delete method from repository and returns true if the content was deleted
+    /** Call the delete method from repository and returns true if the content was deleted
      *
      * @param $id
-     * @return bool|null - if the content not exist
+     * @return bool|null
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete($id)
     {
@@ -1046,10 +1030,11 @@ class ContentService
         return true;
     }
 
-    /**
-     * Delete data related with the specified content id.
+    /** Delete data related with the specified content id.
      *
-     * @param integer $contentId
+     * @param $contentId
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function deleteContentRelated($contentId)
     {
@@ -1078,9 +1063,9 @@ class ContentService
 
     /**
      * @param $userId
-     * @param array $contents
+     * @param $contents
      * @param null $singlePlaylistSlug
-     * @return array|Collection|ContentEntity[]
+     * @return array|mixed
      */
     public function attachChildrenToContents($userId, $contents, $singlePlaylistSlug = null)
     {
@@ -1128,11 +1113,12 @@ class ContentService
         }
     }
 
-    /**
-     * Call the update method from repository to mark the content as deleted and returns true if the content was updated
+    /** Call the update method from repository to mark the content as deleted and returns true if the content was updated
      *
      * @param $id
-     * @return bool|null - if the content not exist
+     * @return object|null
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function softDelete($id)
     {
@@ -1155,11 +1141,11 @@ class ContentService
         return $content;
     }
 
-    /**
-     * Soft delete the children for specified content id.
+    /** Soft delete the children for specified content id.
      *
-     * @param int $id
-     * @return int
+     * @param $id
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function softDeleteContentChildren($id)
     {
@@ -1179,11 +1165,10 @@ class ContentService
         $this->entityManager->flush();
     }
 
-    /**
-     * Get contents by field value and types.
+    /** Get contents by field value and types.
      *
      * @param array $contentTypes
-     * @param string $contentFieldKey
+     * @param $contentFieldKey
      * @param array $contentFieldValues
      * @return mixed
      */
@@ -1235,9 +1220,7 @@ class ContentService
      * @param $data
      * @param Content $content
      * @return mixed
-     * @throws DBALException
      * @throws ORMException
-     * @throws ReflectionException
      */
     private function saveContentFields($data, Content $content)
     {
@@ -1334,6 +1317,7 @@ class ContentService
 
     /**
      * @param $field
+     * @param $entityName
      * @return bool
      */
     private function isEntityAttribute($field, $entityName)
@@ -1372,7 +1356,7 @@ class ContentService
     /**
      * @param $types
      * @return mixed
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function countByTypes($types)
     {

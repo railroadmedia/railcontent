@@ -15,6 +15,11 @@ class RemoteStorageJsonController extends Controller
      */
     private $remoteStorageService;
 
+    /**
+     * RemoteStorageJsonController constructor.
+     *
+     * @param RemoteStorageService $remoteStorageService
+     */
     public function __construct(RemoteStorageService $remoteStorageService)
     {
         $this->remoteStorageService = $remoteStorageService;
@@ -22,6 +27,10 @@ class RemoteStorageJsonController extends Controller
         $this->middleware(config('railcontent.controller_middleware'));
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public function put(Request $request)
     {
         $target = $request->get('target');

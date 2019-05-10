@@ -3,7 +3,12 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
@@ -13,7 +18,7 @@ use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\CommentRepository;
-use Railroad\Railcontent\Repositories\ContentRepository;
+use ReflectionException;
 
 class CommentService
 {
@@ -21,13 +26,14 @@ class CommentService
      * @var RailcontentEntityManager
      */
     private $entityManager;
+
     /**
-     * @var CommentRepository
+     * @var ObjectRepository|EntityRepository
      */
     protected $commentRepository;
 
     /**
-     * @var ContentRepository
+     * @var ObjectRepository|EntityRepository
      */
     protected $contentRepository;
 
@@ -79,17 +85,18 @@ class CommentService
         return $this->commentRepository->find($id);
     }
 
-    /**
-     * Call the create method from repository that save a comment or a comment reply (based on the parent_id: if the
+    /** Call the create method from repository that save a comment or a comment reply (based on the parent_id: if the
      * parent_id it's null the method save a comment; otherwise save a reply for the comment with given id) Return the
      * comment or null if the content it's not commentable
      *
-     * @param string $commentText
-     * @param integer|null $contentId
-     * @param integer|null $parentId
-     * @param integer $userId
+     * @param $commentText
+     * @param $contentId
+     * @param $parentId
+     * @param $userId
      * @param string $temporaryUserDisplayName
-     * @return array|null
+     * @return int|Comment|null
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function create($commentText, $contentId, $parentId, $userId, $temporaryUserDisplayName = '')
     {
@@ -138,14 +145,17 @@ class CommentService
         return $comment;
     }
 
-    /**
-     * Call the update method from repository if the comment exist and the user have rights to update the comment
+    /** Call the update method from repository if the comment exist and the user have rights to update the comment
      * Return the updated comment; null if the comment it's inexistent or -1 if the user have not rights to update the
      * comment
      *
-     * @param integer $id
+     * @param $id
      * @param array $data
-     * @return array|int|null
+     * @return int|object|null
+     * @throws DBALException
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws ReflectionException
      */
     public function update($id, array $data)
     {
@@ -187,12 +197,13 @@ class CommentService
         return $comment;
     }
 
-    /**
-     * Call the delete method from repository if the comment exist and the user have rights to delete the comment
+    /**  Call the delete method from repository if the comment exist and the user have rights to delete the comment
      * Return null if the comment not exist in database, -1 if the user have not rights to delete the comment or bool
      *
-     * @param integer $id
-     * @return bool|int|null|array
+     * @param $id
+     * @return bool|int|null
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete($id)
     {
@@ -243,10 +254,6 @@ class CommentService
      * Administrator can edit/delete any comment; other users can edit/delete only their comments
      * Return true if the user have rights to edit/update the comment and false otherwise
      *
-     * You **may** have to set a 'user_id' attribute in the Request before you can call this method.
-     * Ex (w/ param: Illuminate\Http\Request $request):
-     *      ```$request->attributes->set('user_id', current_member()->getId());```
-     *
      * @param array $comment
      * @return boolean
      */
@@ -261,15 +268,15 @@ class CommentService
                     ->getId() == auth()->id());
     }
 
-    /**
-     *  Set the data necessary for the pagination ($page, $limit, $orderByDirection and $orderByColumn),
+    /** Set the data necessary for the pagination ($page, $limit, $orderByDirection and $orderByColumn),
      * call the method from the repository to pull the paginated comments that meet the criteria and call a method that
      * return the total number of comments. Return an array with the paginated results and the total number of results
      *
      * @param int $page
      * @param int $limit
      * @param string $orderByAndDirection
-     * @return array
+     * @param null $currentUserId
+     * @return mixed
      */
     public function getComments($page = 1, $limit = 25, $orderByAndDirection = '-created_on', $currentUserId = null)
     {
@@ -283,11 +290,11 @@ class CommentService
         return $results;
     }
 
-    /**
-     * Count the comments that have been created after the comment
+    /** Count the comments that have been created after the comment
      *
      * @param $commentId
-     * @return int
+     * @return mixed
+     * @throws NonUniqueResultException
      */
     public function countLatestComments($commentId)
     {
@@ -298,7 +305,6 @@ class CommentService
 
         $alias = 'c';
         $aliasContent = 'content';
-        $aliasAssignment = 'a';
 
         $qb = $this->commentRepository->createQueryBuilder('c');
 
@@ -339,12 +345,12 @@ class CommentService
             ->getSingleScalarResult('Railcontent');
     }
 
-    /**
-     * Calculate the page that should be current page to display the comment
+    /** Calculate the page that should be current page to display the comment
      *
-     * @param int $commentId
-     * @param int $limit
+     * @param $commentId
+     * @param $limit
      * @return float|int
+     * @throws NonUniqueResultException
      */
     public function getCommentPage($commentId, $limit)
     {
@@ -356,8 +362,8 @@ class CommentService
     /**
      * @param $page
      * @param $limit
-     * @param string $orderByColumn
-     * @param string $orderByDirection
+     * @param $orderByAndDirection
+     * @param null $currentUserId
      * @return QueryBuilder
      */
     public function getQb($page, $limit, $orderByAndDirection, $currentUserId = null)
@@ -377,14 +383,12 @@ class CommentService
         // parse request params and prepare db query parms
         $alias = 'c';
         $aliasContent = 'content';
-        $aliasAssignment = 'a';
 
         $orderByColumn = $alias . '.' . $orderByColumn;
         $first = ($page - 1) * $limit;
-        /**
-         * @var $qb QueryBuilder
-         */
+
         $qb = $this->commentRepository->createQueryBuilder($alias);
+
         $qb->join($alias . '.content', $aliasContent)
             ->andWhere(
                 $qb->expr()
@@ -451,7 +455,6 @@ class CommentService
     {
         $alias = 'c';
         $aliasContent = 'content';
-        $aliasAssignment = 'a';
 
         $qb = $this->commentRepository->createQueryBuilder('c');
 

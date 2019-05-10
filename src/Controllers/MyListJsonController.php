@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Controllers;
 
 use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Illuminate\Http\JsonResponse;
@@ -104,6 +105,9 @@ class MyListJsonController extends Controller
     /**
      * @param Request $request
      * @return JsonResponse|\Symfony\Component\HttpFoundation\JsonResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws NonUniqueResultException
      */
     public function removeFromPrimaryPlaylist(Request $request)
     {
@@ -124,8 +128,7 @@ class MyListJsonController extends Controller
             ->setData(['data' => 'success']);
     }
 
-    /** Pull my list content
-     *
+    /**
      * @param Request $request
      * @return JsonResponse
      */

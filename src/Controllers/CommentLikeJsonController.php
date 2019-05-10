@@ -15,6 +15,11 @@ class CommentLikeJsonController extends Controller
      */
     private $commentLikeService;
 
+    /**
+     * CommentLikeJsonController constructor.
+     *
+     * @param CommentLikeService $commentLikeService
+     */
     public function __construct(
         CommentLikeService $commentLikeService
     ) {
@@ -23,12 +28,13 @@ class CommentLikeJsonController extends Controller
         $this->middleware(config('railcontent.controller_middleware'));
     }
 
-    /**
-     * Authenticated user like a comment.
+    /** Authenticated user like a comment.
      *
      * @param CommentLikeRequest $request
-     * @param integer $id - comment id
-     * @return mixed
+     * @param $id
+     * @return \Spatie\Fractal\Fractal
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function store(CommentLikeRequest $request, $id)
     {
@@ -37,12 +43,13 @@ class CommentLikeJsonController extends Controller
         return ResponseService::commentLike($store);
     }
 
-    /**
-     * Authenticated user unlike a comment.
+    /** Authenticated user dislike a comment.
      *
      * @param CommentUnLikeRequest $request
-     * @param integer $id
-     * @return mixed
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function delete(CommentUnLikeRequest $request, $id)
     {

@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Controllers;
 
 use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Illuminate\Http\JsonResponse;
@@ -34,9 +35,10 @@ class ContentJsonController extends Controller
     private $permissionPackageService;
 
     /**
-     * ContentController constructor.
+     * ContentJsonController constructor.
      *
      * @param ContentService $contentService
+     * @param PermissionService $permissionPackageService
      */
     public function __construct(
         ContentService $contentService,
@@ -84,6 +86,7 @@ class ContentJsonController extends Controller
     }
 
     /** Pull the children contents for the parent id
+     *
      * @param $parentId
      * @return Fractal
      * @throws NotAllowedException
@@ -115,6 +118,7 @@ class ContentJsonController extends Controller
      * @param $id
      * @return Fractal
      * @throws Throwable
+     * @throws NonUniqueResultException
      */
     public function show($id)
     {
@@ -126,12 +130,13 @@ class ContentJsonController extends Controller
     }
 
     /** Create a new content and return it in JSON format
+     *
      * @param ContentCreateRequest $request
      * @return JsonResponse
      * @throws DBALException
+     * @throws NotAllowedException
      * @throws ORMException
      * @throws OptimisticLockException
-     * @throws NotAllowedException
      * @throws ReflectionException
      */
     public function store(ContentCreateRequest $request)
@@ -148,11 +153,16 @@ class ContentJsonController extends Controller
     }
 
     /** Update a content based on content id and return it in JSON format
+     *
      * @param ContentUpdateRequest $request
      * @param $contentId
      * @return JsonResponse
-     * @throws Throwable
+     * @throws DBALException
      * @throws NotAllowedException
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws ReflectionException
+     * @throws Throwable
      */
     public function update(ContentUpdateRequest $request, $contentId)
     {
@@ -174,9 +184,12 @@ class ContentJsonController extends Controller
     }
 
     /** Call the delete method if the content exist
+     *
      * @param $contentId
      * @return JsonResponse
      * @throws NotAllowedException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete($contentId)
     {
@@ -209,10 +222,13 @@ class ContentJsonController extends Controller
     }
 
     /** Call the soft delete method if the content exist
+     *
      * @param $contentId
      * @return JsonResponse
-     * @throws Throwable
      * @throws NotAllowedException
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws Throwable
      */
     public function softDelete($contentId)
     {

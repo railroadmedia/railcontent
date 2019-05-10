@@ -2,6 +2,11 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
@@ -13,6 +18,8 @@ use Railroad\Railcontent\Requests\CommentUpdateRequest;
 use Railroad\Railcontent\Requests\ReplyRequest;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ResponseService;
+use ReflectionException;
+use Spatie\Fractal\Fractal;
 use Throwable;
 
 class CommentJsonController extends Controller
@@ -26,6 +33,7 @@ class CommentJsonController extends Controller
      * CommentJsonController constructor.
      *
      * @param CommentService $commentService
+     * @param JsonApiHydrator $jsonApiHydrator
      */
     public function __construct(CommentService $commentService, JsonApiHydrator $jsonApiHydrator)
     {
@@ -35,15 +43,15 @@ class CommentJsonController extends Controller
         $this->middleware(config('railcontent.controller_middleware'));
     }
 
-    /**
-     * Call the method from the service to pull the comments based on the criteria passed in request:
+    /** Call the method from the service to pull the comments based on the criteria passed in request:
      *      - content_id   => pull the comments for given content id
      *      - user_id      => pull user's comments
      *      - content_type => pull the comments for the contents with given type
      *  Return a Json paginated response with the comments
      *
      * @param Request $request
-     * @return JsonPaginatedResponse
+     * @return Fractal
+     * @throws NonUniqueResultException
      */
     public function index(Request $request)
     {
@@ -68,12 +76,13 @@ class CommentJsonController extends Controller
             ->addMeta(['totalCommentsAndReplies' => $this->commentService->countCommentsAndReplies()]);
     }
 
-    /**
-     * Call the method from service that create a new comment if the request data pass the validation
+    /** Call the method from service that create a new comment if the request data pass the validation
      *
      * @param CommentCreateRequest $request
-     * @return JsonResponse|NotAllowedException
+     * @return Fractal
      * @throws Throwable
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function store(CommentCreateRequest $request)
     {
@@ -98,13 +107,16 @@ class CommentJsonController extends Controller
         return ResponseService::comment($comment);
     }
 
-    /**
-     * Update a comment based on id and return it in JSON format
+    /** Update a comment based on id and return it in JSON format
      *
-     * @param integer $commentId
-     * @param CommentCreateRequest $request
-     * @return JsonResponse|NotAllowedException|NotFoundException
+     * @param CommentUpdateRequest $request
+     * @param $commentId
+     * @return JsonResponse
      * @throws Throwable
+     * @throws DBALException
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws ReflectionException
      */
     public function update(CommentUpdateRequest $request, $commentId)
     {
@@ -136,12 +148,13 @@ class CommentJsonController extends Controller
             ->respond(201);
     }
 
-    /**
-     * Call the delete method if the comment exist and the user have rights to delete the comment
+    /** Call the delete method if the comment exist and the user have rights to delete the comment
      *
-     * @param integer $contentId
-     * @return JsonResponse|NotFoundException|NotAllowedException
+     * @param $commentId
+     * @return JsonResponse
      * @throws Throwable
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete($commentId)
     {
@@ -163,12 +176,13 @@ class CommentJsonController extends Controller
         return ResponseService::empty(204);
     }
 
-    /**
-     * Call the method from service that create a new comment if the request data pass the validation
+    /** Call the method from service that create a new comment if the request data pass the validation
      *
      * @param ReplyRequest $request
-     * @return JsonResponse|NotAllowedException
+     * @return JsonResponse
      * @throws Throwable
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function reply(ReplyRequest $request)
     {
@@ -193,12 +207,12 @@ class CommentJsonController extends Controller
             ->respond(200);
     }
 
-    /**
-     * Return the comments, the current page it's the page with the comment
+    /** Return the comments, the current page it's the page with the comment
      *
-     * @param int $commentId
+     * @param $commentId
      * @param Request $request
-     * @return JsonPaginatedResponse
+     * @return Fractal
+     * @throws NonUniqueResultException
      */
     public function getLinkedComment($commentId, Request $request)
     {

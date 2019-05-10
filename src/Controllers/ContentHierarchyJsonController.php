@@ -2,12 +2,16 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Railroad\Permissions\Exceptions\NotAllowedException;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Requests\ContentHierarchyCreateRequest;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ResponseService;
+use Spatie\Fractal\Fractal;
 
 class ContentHierarchyJsonController extends Controller
 {
@@ -22,9 +26,10 @@ class ContentHierarchyJsonController extends Controller
     private $permissionPackageService;
 
     /**
-     * FieldController constructor.
+     * ContentHierarchyJsonController constructor.
      *
      * @param ContentHierarchyService $contentHierarchyService
+     * @param PermissionService $permissionPackageService
      */
     public function __construct(
         ContentHierarchyService $contentHierarchyService,
@@ -36,11 +41,13 @@ class ContentHierarchyJsonController extends Controller
         $this->middleware(config('railcontent.controller_middleware'));
     }
 
-    /**
-     * Create/update a content hierarchy.
+    /** Create/update a content hierarchy.
      *
      * @param ContentHierarchyCreateRequest $request
-     * @return JsonResponse
+     * @return Fractal
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws NotAllowedException
      */
     public function store(ContentHierarchyCreateRequest $request)
     {
@@ -57,9 +64,12 @@ class ContentHierarchyJsonController extends Controller
 
     /**
      * @param Request $request
-     * @param $childId
      * @param $parentId
-     * @return JsonResponse
+     * @param $childId
+     * @return \Illuminate\Http\JsonResponse
+     * @throws NotAllowedException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete(Request $request, $parentId, $childId)
     {

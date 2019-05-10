@@ -3,6 +3,12 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserContentProgress;
@@ -19,7 +25,7 @@ class UserContentProgressService
     private $entityManager;
 
     /**
-     * @var UserContentProgressRepository
+     * @var ObjectRepository|EntityRepository
      */
     protected $userContentRepository;
 
@@ -67,7 +73,9 @@ class UserContentProgressService
      * @param $contentType
      * @param $userId
      * @param $state
-     * @return array
+     * @return mixed
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function getMostRecentByContentTypeUserState($contentType, $userId, $state)
     {
@@ -99,14 +107,13 @@ class UserContentProgressService
             ->getSingleResult('Railcontent');
     }
 
-    /**
-     * Keyed by content id.
+    /** Keyed by content id.
      *
      * [ content_id => count ]
      *
      * @param $state
      * @param $contentIds
-     * @return mixed
+     * @return array|false
      */
     public function countTotalStatesForContentIds($state, $contentIds)
     {
@@ -134,6 +141,9 @@ class UserContentProgressService
      * @param $userId
      * @param bool $forceEvenIfComplete
      * @return bool
+     * @throws NonUniqueResultException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function startContent($contentId, $userId, $forceEvenIfComplete = false)
     {
@@ -202,9 +212,12 @@ class UserContentProgressService
     }
 
     /**
-     * @param integer $contentId
-     * @param integer $userId
+     * @param $contentId
+     * @param $userId
      * @return bool
+     * @throws NonUniqueResultException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function completeContent($contentId, $userId)
     {
@@ -286,9 +299,12 @@ class UserContentProgressService
     }
 
     /**
-     * @param integer $contentId
-     * @param integer $userId
+     * @param $contentId
+     * @param $userId
      * @return bool
+     * @throws NonUniqueResultException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function resetContent($contentId, $userId)
     {
@@ -340,11 +356,14 @@ class UserContentProgressService
     }
 
     /**
-     * @param integer $contentId
-     * @param integer $progress
-     * @param integer $userId
+     * @param $contentId
+     * @param $progress
+     * @param $userId
      * @param bool $overwriteComplete
      * @return bool
+     * @throws NonUniqueResultException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function saveContentProgress($contentId, $progress, $userId, $overwriteComplete = false)
     {
@@ -403,9 +422,12 @@ class UserContentProgressService
     }
 
     /**
-     * @param int $userId
-     * @param int $contentId
+     * @param $userId
+     * @param $contentId
      * @return bool
+     * @throws NonUniqueResultException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function bubbleProgress($userId, $contentId)
     {
@@ -583,6 +605,12 @@ class UserContentProgressService
             ->getResult('Railcontent');
     }
 
+    /**
+     * @param $id
+     * @param $type
+     * @param null $state
+     * @return mixed
+     */
     public function getLessonsForUserByType($id, $type, $state = null)
     {
         $user = $this->userProvider->getUserById($id);
@@ -610,6 +638,14 @@ class UserContentProgressService
             ->getResult('Railcontent');
     }
 
+    /**
+     * @param $id
+     * @param $type
+     * @param $state
+     * @return mixed
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
     public function countLessonsForUserByTypeAndProgressState($id, $type, $state)
     {
         $user = $this->userProvider->getUserById($id);

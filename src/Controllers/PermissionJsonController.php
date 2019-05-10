@@ -2,9 +2,12 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Railroad\DoctrineArrayHydrator\JsonApiHydrator;
 use Railroad\Permissions\Exceptions\NotAllowedException;
@@ -13,7 +16,6 @@ use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
-use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Requests\PermissionAssignRequest;
 use Railroad\Railcontent\Requests\PermissionDissociateRequest;
 use Railroad\Railcontent\Requests\PermissionRequest;
@@ -36,7 +38,7 @@ class PermissionJsonController extends Controller
     private $entityManager;
 
     /**
-     * @var PermissionRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $permissionRepository;
 
@@ -80,10 +82,8 @@ class PermissionJsonController extends Controller
     }
 
     /**
-     * Create a new permission and return it in JSON format
-     *
-     * @param Request $request
-     * @return JsonResponse
+     * @return Fractal
+     * @throws NotAllowedException
      */
     public function index()
     {
@@ -94,15 +94,14 @@ class PermissionJsonController extends Controller
         return ResponseService::permission($permissions);
     }
 
-    /**
-     * Create a new permission and return it in JSON format
+    /** Create a new permission and return it in JSON API format
      *
      * @param PermissionRequest $request
      * @return Fractal
      * @throws DBALException
+     * @throws NotAllowedException
      * @throws ORMException
      * @throws OptimisticLockException
-     * @throws NotAllowedException
      * @throws ReflectionException
      */
     public function store(PermissionRequest $request)
@@ -122,12 +121,16 @@ class PermissionJsonController extends Controller
         return ResponseService::permission($permission);
     }
 
-    /**
-     * Update a permission if exist and return it in JSON format
+    /** Update a permission if exist and return it in JSON API format
      *
-     * @param integer $id
+     * @param $id
      * @param PermissionRequest $request
      * @return JsonResponse
+     * @throws DBALException
+     * @throws NotAllowedException
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws ReflectionException
      * @throws Throwable
      */
     public function update($id, PermissionRequest $request)
@@ -152,11 +155,13 @@ class PermissionJsonController extends Controller
             ->respond(201);
     }
 
-    /**
-     * Delete a permission if exist and it's not linked with content id or content type
+    /** Delete a permission if exist and it's not linked with content id or content type
      *
-     * @param integer $id
+     * @param $id
      * @return JsonResponse
+     * @throws NotAllowedException
+     * @throws ORMException
+     * @throws OptimisticLockException
      * @throws Throwable
      */
     public function delete($id)
@@ -186,11 +191,13 @@ class PermissionJsonController extends Controller
         return ResponseService::empty(204);
     }
 
-    /**
-     * Attach permission to a specific content or to all content of a certain type
+    /** Attach permission to a specific content or to all content of a certain type
      *
      * @param PermissionAssignRequest $request
-     * @return JsonResponse
+     * @return Fractal
+     * @throws NotAllowedException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function assign(PermissionAssignRequest $request)
     {
@@ -204,11 +211,11 @@ class PermissionJsonController extends Controller
         return ResponseService::contentPermission($assignedPermission);
     }
 
-    /**
-     * Dissociate ("unattach") permissions from a specific content or all content of a certain type
+    /** Dissociate ("unattach") permissions from a specific content or all content of a certain type
      *
      * @param PermissionDissociateRequest $request
      * @return JsonResponse
+     * @throws NotAllowedException
      */
     public function dissociate(PermissionDissociateRequest $request)
     {

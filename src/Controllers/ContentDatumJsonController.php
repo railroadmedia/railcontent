@@ -2,6 +2,9 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Railroad\Permissions\Exceptions\NotAllowedException;
 use Railroad\Permissions\Services\PermissionService;
@@ -26,18 +29,18 @@ class ContentDatumJsonController extends Controller
      */
     private $permissionPackageService;
 
-
     /**
-     * DatumController constructor.
+     * ContentDatumJsonController constructor.
      *
      * @param ContentDatumService $datumService
+     * @param PermissionService $permissionPackageService
      */
     public function __construct(ContentDatumService $datumService, PermissionService $permissionPackageService)
     {
         $this->datumService = $datumService;
         $this->permissionPackageService = $permissionPackageService;
 
-         $this->middleware(config('railcontent.controller_middleware'));
+        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /** Call the method from service that create new data and link the content with the data.
@@ -45,6 +48,8 @@ class ContentDatumJsonController extends Controller
      * @param ContentDatumCreateRequest $request
      * @return Fractal
      * @throws NotAllowedException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function store(ContentDatumCreateRequest $request)
     {
@@ -60,13 +65,15 @@ class ContentDatumJsonController extends Controller
         return ResponseService::contentData($contentData);
     }
 
-    /**
-     * Call the method from service to update a content datum
+    /** Call the method from service to update a content datum
      *
-     * @param integer $dataId
+     * @param $dataId
      * @param ContentDatumUpdateRequest $request
      * @return JsonResponse
+     * @throws NotAllowedException
      * @throws Throwable
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function update($dataId, ContentDatumUpdateRequest $request)
     {
@@ -87,16 +94,15 @@ class ContentDatumJsonController extends Controller
 
     }
 
-    /**
-     * Call the method from service to delete the content data
+    /** Call the method from service to delete the content data
      *
-     * @param integer $dataId
+     * @param ContentDatumDeleteRequest $request
+     * @param $dataId
      * @return JsonResponse
-     *
-     * Hmm... we're not actually using that request in here, but including it triggers the prepending validation, so
-     * maybe it needs to be there for that?
-     *
-     * Jonathan, February 2018
+     * @throws NotAllowedException
+     * @throws Throwable
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete(ContentDatumDeleteRequest $request, $dataId)
     {

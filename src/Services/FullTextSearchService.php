@@ -13,6 +13,7 @@ class FullTextSearchService
      * @var FullTextSearchRepository
      */
     protected $fullTextSearchRepository;
+
     /**
      * @var ContentService
      */

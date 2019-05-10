@@ -47,11 +47,12 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
     : array {
 
         foreach ($entities as $entity) {
-            if ($entity->getVideo() && ($entity->getVideo()->getVimeoVideoId())) {
+            if ($entity->getVideo() &&
+                ($entity->getVideo()
+                    ->getVimeoVideoId())) {
 
                 $video = $entity->getVideo();
                 $vimeoVideoId = $video->getVimeoVideoId();
-
 
                 // cache
                 $response = $this->cache->get(self::CACHE_KEY_PREFIX . $vimeoVideoId);
@@ -97,7 +98,6 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
 
                                 }
                             }
-
                         }
                     }
                 }

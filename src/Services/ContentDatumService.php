@@ -2,13 +2,16 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Events\ContentDatumCreated;
 use Railroad\Railcontent\Events\ContentDatumDeleted;
 use Railroad\Railcontent\Events\ContentDatumUpdated;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
-use Railroad\Railcontent\Repositories\ContentDatumRepository;
 
 class ContentDatumService
 {
@@ -16,8 +19,9 @@ class ContentDatumService
      * @var RailcontentEntityManager
      */
     private $entityManager;
+
     /**
-     * @var ContentDatumRepository
+     * @var ObjectRepository|EntityRepository
      */
     private $datumRepository;
 
@@ -44,7 +48,7 @@ class ContentDatumService
 
     /**
      * @param array $contentIds
-     * @return array
+     * @return mixed
      */
     public function getByContentIds(array $contentIds)
     {
@@ -56,11 +60,13 @@ class ContentDatumService
     }
 
     /**
-     * @param integer $contentId
-     * @param string $key
-     * @param string $value
-     * @param integer $position
+     * @param $contentId
+     * @param $key
+     * @param $value
+     * @param $position
      * @return array
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function create($contentId, $key, $value, $position)
     {
@@ -88,9 +94,11 @@ class ContentDatumService
     }
 
     /**
-     * @param integer $id
+     * @param $id
      * @param array $data
      * @return array
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function update($id, array $data)
     {
@@ -139,7 +147,9 @@ class ContentDatumService
 
     /**
      * @param $id
-     * @return bool
+     * @return array|bool
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete($id)
     {

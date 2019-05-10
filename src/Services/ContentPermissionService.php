@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Services;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\Permission;
@@ -56,7 +55,7 @@ class ContentPermissionService
      * @param null $contentId
      * @param null $contentType
      * @param $permissionId
-     * @return array
+     * @return array|mixed
      */
     public function getByContentTypeOrIdAndByPermissionId($contentId = null, $contentType = null, $permissionId)
     {
@@ -90,7 +89,7 @@ class ContentPermissionService
      * @param null $contentId
      * @param null $contentType
      * @param $permissionId
-     * @return array
+     * @return bool
      */
     public function dissociate($contentId = null, $contentType = null, $permissionId)
     {
@@ -112,10 +111,13 @@ class ContentPermissionService
     }
 
     /**
-     * @param int|null $contentId
-     * @param string|null $contentType
-     * @param int $permissionId
-     * @return mixed
+     * @param null $contentId
+     * @param null $contentType
+     * @param $permissionId
+     * @param null $brand
+     * @return ContentPermission
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function create($contentId = null, $contentType = null, $permissionId, $brand = null)
     {
@@ -142,10 +144,9 @@ class ContentPermissionService
     }
 
     /**
-     * @param null $contentId
+     * @param array $contentIds
      * @param null $contentType
-     * @param $permissionId
-     * @return array
+     * @return array|mixed
      */
     public function getByContentTypeOrIds($contentIds = [], $contentType = null)
     {

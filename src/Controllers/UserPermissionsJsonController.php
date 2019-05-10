@@ -3,13 +3,18 @@
 namespace Railroad\Railcontent\Controllers;
 
 use Carbon\Carbon;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Railroad\Permissions\Exceptions\NotAllowedException;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Requests\UserPermissionCreateRequest;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Services\UserPermissionsService;
+use Spatie\Fractal\Fractal;
 use Throwable;
 
 class UserPermissionsJsonController extends Controller
@@ -28,6 +33,7 @@ class UserPermissionsJsonController extends Controller
      * UserPermissionsJsonController constructor.
      *
      * @param UserPermissionsService $userPermissionsService
+     * @param PermissionService $permissionPackageService
      */
     public function __construct(
         UserPermissionsService $userPermissionsService,
@@ -37,11 +43,13 @@ class UserPermissionsJsonController extends Controller
         $this->permissionPackageService = $permissionPackageService;
     }
 
-    /**
-     * Create/update user permission record and return data in JSON format.
+    /** Create/update user permission record and return data in JSON API format.
      *
      * @param UserPermissionCreateRequest $request
-     * @return JsonResponse
+     * @return Fractal
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws NotAllowedException
      */
     public function store(UserPermissionCreateRequest $request)
     {
@@ -65,12 +73,14 @@ class UserPermissionsJsonController extends Controller
         return ResponseService::userPermission($userPermission);
     }
 
-    /**
-     * Delete user permission if exists in database
+    /** Delete user permission if exists
      *
-     * @param int $userPermissionId
+     * @param $userPermissionId
      * @return JsonResponse
      * @throws Throwable
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws NotAllowedException
      */
     public function delete($userPermissionId)
     {
@@ -88,13 +98,13 @@ class UserPermissionsJsonController extends Controller
         return ResponseService::empty(204);
     }
 
-    /**
-     * Pull active user permissions.
+    /** Pull active user permissions.
      *  IF "only_active" it's set false on the request the expired permissions are returned also
      *  IF "user_id" it's set on the request only the permissions for the specified user are returned
      *
      * @param Request $request
-     * @return JsonResponse
+     * @return Fractal
+     * @throws NotAllowedException
      */
     public function index(Request $request)
     {

@@ -4,6 +4,8 @@ namespace Railroad\Railcontent\Services;
 
 use Aws\S3\S3Client;
 use League\Flysystem\AwsS3v3\AwsS3Adapter;
+use League\Flysystem\FileExistsException;
+use League\Flysystem\FileNotFoundException;
 use League\Flysystem\Filesystem;
 
 class RemoteStorageService
@@ -14,19 +16,26 @@ class RemoteStorageService
     public $filesystem;
 
     protected $availableVisibilities = [
-        'public' => 'public'
+        'public' => 'public',
     ];
 
+    /**
+     * RemoteStorageService constructor.
+     *
+     * @param null $optionalPathPrefix
+     */
     public function __construct($optionalPathPrefix = null)
     {
-        $client = new S3Client([
-            'credentials' => [
-                'key'    => config('railcontent.awsS3_remote_storage.accessKey'),
-                'secret' => config('railcontent.awsS3_remote_storage.accessSecret')
-            ],
-            'region' => config('railcontent.awsS3_remote_storage.region'),
-            'version' => 'latest',
-        ]);
+        $client = new S3Client(
+            [
+                'credentials' => [
+                    'key' => config('railcontent.awsS3_remote_storage.accessKey'),
+                    'secret' => config('railcontent.awsS3_remote_storage.accessSecret'),
+                ],
+                'region' => config('railcontent.awsS3_remote_storage.region'),
+                'version' => 'latest',
+            ]
+        );
 
         $adapter = new AwsS3Adapter(
             $client, config('railcontent.awsS3_remote_storage.bucket'), $optionalPathPrefix
@@ -56,6 +65,7 @@ class RemoteStorageService
     /**
      * @param $target
      * @return bool|false|string
+     * @throws FileNotFoundException
      */
     public function read($target)
     {
@@ -74,6 +84,7 @@ class RemoteStorageService
     /**
      * @param string $target
      * @return bool
+     * @throws FileNotFoundException
      */
     public function delete($target)
     {
@@ -81,9 +92,11 @@ class RemoteStorageService
     }
 
     /**
-     * @param string $target
-     * @param string $newName
+     * @param $target
+     * @param $newName
      * @return bool
+     * @throws FileExistsException
+     * @throws FileNotFoundException
      */
     public function rename($target, $newName)
     {
@@ -91,9 +104,11 @@ class RemoteStorageService
     }
 
     /**
-     * @param string $original
-     * @param string $duplicate
+     * @param $original
+     * @param $duplicate
      * @return bool
+     * @throws FileExistsException
+     * @throws FileNotFoundException
      */
     public function copy($original, $duplicate)
     {
@@ -101,8 +116,9 @@ class RemoteStorageService
     }
 
     /**
-     * @param string $target
+     * @param $target
      * @return bool|false|string
+     * @throws FileNotFoundException
      */
     public function getMimetype($target)
     {
@@ -110,8 +126,9 @@ class RemoteStorageService
     }
 
     /**
-     * @param string $target
+     * @param $target
      * @return bool|false|string
+     * @throws FileNotFoundException
      */
     public function getTimestamp($target)
     {
@@ -119,8 +136,9 @@ class RemoteStorageService
     }
 
     /**
-     * @param string $target
+     * @param $target
      * @return bool|false|int
+     * @throws FileNotFoundException
      */
     public function getSize($target)
     {
@@ -128,7 +146,7 @@ class RemoteStorageService
     }
 
     /**
-     * @param string $target
+     * @param $target
      * @return bool
      */
     public function createDir($target)
@@ -151,9 +169,9 @@ class RemoteStorageService
      */
     public function listContents($targetDir = null)
     {
-        if(!empty($targetDir)){
+        if (!empty($targetDir)) {
             return $this->filesystem->listContents($targetDir, true);
-        }else{
+        } else {
             return $this->filesystem->listContents();
         }
     }
