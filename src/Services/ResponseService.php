@@ -3,8 +3,10 @@
 namespace Railroad\Railcontent\Services;
 
 use Doctrine\ORM\QueryBuilder;
+use League\Fractal\Serializer\DataArraySerializer;
 use League\Fractal\Serializer\JsonApiSerializer;
 use Railroad\Doctrine\Services\FractalResponseService;
+use Railroad\Railcontent\Transformers\ArrayTransformer;
 use Railroad\Railcontent\Transformers\BooleanTransformer;
 use Railroad\Railcontent\Transformers\CommentLikeTransformer;
 use Railroad\Railcontent\Transformers\CommentTransformer;
@@ -205,5 +207,22 @@ class ResponseService extends FractalResponseService
             $queryBuilder
         )
             ->parseIncludes($includes);
+    }
+
+    /**
+     * @param $entityOrEntities
+     * @param QueryBuilder|null $queryBuilder
+     * @param array $includes
+     * @return Fractal
+     */
+    public static function shows($entityOrEntities, QueryBuilder $queryBuilder = null)
+    {
+        return self::create(
+            $entityOrEntities,
+            'shows',
+            new ArrayTransformer(),
+            new DataArraySerializer(),
+            $queryBuilder
+        );
     }
 }

@@ -2,8 +2,13 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Railroad\Permissions\Exceptions\NotAllowedException;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Exceptions\NotFoundException;
@@ -12,6 +17,8 @@ use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ResponseService;
+use ReflectionException;
+use Spatie\Fractal\Fractal;
 use Throwable;
 
 class ContentJsonController extends Controller
@@ -43,7 +50,8 @@ class ContentJsonController extends Controller
 
     /**
      * @param Request $request
-     * @return JsonPaginatedResponse
+     * @return JsonResponse
+     * @throws NotAllowedException
      */
     public function index(Request $request)
     {
@@ -76,9 +84,9 @@ class ContentJsonController extends Controller
     }
 
     /** Pull the children contents for the parent id
-     *
-     * @param integer $parentId
-     * @return JsonResponse
+     * @param $parentId
+     * @return Fractal
+     * @throws NotAllowedException
      */
     public function getByParentId($parentId)
     {
@@ -91,7 +99,8 @@ class ContentJsonController extends Controller
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return Fractal
+     * @throws NotAllowedException
      */
     public function getByIds(Request $request)
     {
@@ -104,7 +113,8 @@ class ContentJsonController extends Controller
 
     /**
      * @param $id
-     * @return JsonResponse
+     * @return Fractal
+     * @throws Throwable
      */
     public function show($id)
     {
@@ -115,11 +125,14 @@ class ContentJsonController extends Controller
         return ResponseService::content($content);
     }
 
-    /**
-     * Create a new content and return it in JSON format
-     *
-     * @param ContentUpdateRequest $request
+    /** Create a new content and return it in JSON format
+     * @param ContentCreateRequest $request
      * @return JsonResponse
+     * @throws DBALException
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws NotAllowedException
+     * @throws ReflectionException
      */
     public function store(ContentCreateRequest $request)
     {
@@ -135,11 +148,11 @@ class ContentJsonController extends Controller
     }
 
     /** Update a content based on content id and return it in JSON format
-     *
-     * @param integer $contentId
      * @param ContentUpdateRequest $request
+     * @param $contentId
      * @return JsonResponse
      * @throws Throwable
+     * @throws NotAllowedException
      */
     public function update(ContentUpdateRequest $request, $contentId)
     {
@@ -160,12 +173,10 @@ class ContentJsonController extends Controller
             ->respond(200);
     }
 
-    /**
-     * Call the delete method if the content exist
-     *
-     * @param integer $contentId
+    /** Call the delete method if the content exist
+     * @param $contentId
      * @return JsonResponse
-     * @throws Throwable
+     * @throws NotAllowedException
      */
     public function delete($contentId)
     {
@@ -182,7 +193,7 @@ class ContentJsonController extends Controller
 
     /**
      * @param Request $request
-     * @return Response
+     * @return mixed
      */
     public function options(Request $request)
     {
@@ -197,12 +208,11 @@ class ContentJsonController extends Controller
         );
     }
 
-    /**
-     * Call the soft delete method if the content exist
-     *
-     * @param integer $contentId
-     * @param Request $request
+    /** Call the soft delete method if the content exist
+     * @param $contentId
      * @return JsonResponse
+     * @throws Throwable
+     * @throws NotAllowedException
      */
     public function softDelete($contentId)
     {
@@ -222,7 +232,7 @@ class ContentJsonController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function getInProgressContent(Request $request)
     {
@@ -275,7 +285,7 @@ class ContentJsonController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function getOurPicksContent(Request $request)
     {
@@ -314,7 +324,7 @@ class ContentJsonController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function getAllContent(Request $request)
     {

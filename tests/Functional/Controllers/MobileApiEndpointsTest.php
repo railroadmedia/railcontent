@@ -683,11 +683,50 @@ class MobileApiEndpointsTest extends RailcontentTestCase
             'GET',
             'api/railcontent/shows'
         );
-        $results = $response->decodeResponseJson();
+        $results = $response->decodeResponseJson('data')[0];
+
         $this->assertEquals(200, $response->status());
 
         foreach ($results as $key => $result) {
+            $this->assertTrue(array_key_exists($result['type'], config('railcontent.shows')));
             $this->assertTrue(array_key_exists($key, config('railcontent.shows')));
         }
+    }
+
+    public function test_strip_comments()
+    {
+        $user = $this->createAndLogInNewUser();
+        $content = $this->fakeContent(1,[
+            'type' => 'course',
+            'status' => 'published',
+            'publishedOn' => Carbon::now(),
+        ]);
+
+        $commentText = $this->faker->paragraph;
+        $comment = $this->fakeComment(1,[
+            'content' => $content[0],
+            'comment' => '<p>' . $commentText . '</p>',
+            'userId' => $user,
+            'deletedAt' => null
+        ]);
+
+        $replyText = $this->faker->paragraph;
+        $this->fakeComment(1,[
+            'content' => $content[0],
+            'comment' => '<p>' . $replyText . '</p>',
+            'parent' => $comment[0],
+            'deletedAt' => null
+        ]);
+
+        $response = $this->call(
+            'GET',
+            'api/railcontent/comments',
+            [
+                'content_id' => $content[0]->getId(),
+            ]
+        );
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals($commentText, $response->decodeResponseJson('data')[0]['attributes']['comment']);
     }
 }
