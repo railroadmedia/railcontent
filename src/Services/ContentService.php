@@ -1116,16 +1116,20 @@ class ContentService
 
     /**
      * @param null $brand
+     * @param bool $includeSemesterPackLessons
      * @return Collection|ContentEntity[]
      */
-    public function getContentForCalendar($brand = null)
+    public function getContentForCalendar($brand = null, $includeSemesterPackLessons = true)
     {
         $shows = [];
         $liveEventsTypes = [];
         $contentReleasesTypes = [];
-        $parents = [];
-        $idsOfChildrenOfSelectSemesterPacks = [];
-        $culledSemesterPackLessons = [];
+
+        if($includeSemesterPackLessons){
+            $parents = [];
+            $idsOfChildrenOfSelectSemesterPacks = [];
+            $culledSemesterPackLessons = [];
+        }
 
         $brand = $brand ?? ConfigService::$brand;
 
@@ -1141,14 +1145,19 @@ class ContentService
         ContentRepository::$pullFutureContent = true;
 
         $typesForCalendars = config('railcontent.types-for-calendars.' . $brand, []);
-        $semesterPacksToGet = config('railcontent.semester-pack-schedule-labels.' . $brand, []);
+
+        if($includeSemesterPackLessons){
+            $semesterPacksToGet = config('railcontent.semester-pack-schedule-labels.' . $brand, []);
+        }
 
         if(empty($typesForCalendars) && empty($semesterPacksToGet)){
             return new Collection();
         }
 
-        foreach($semesterPacksToGet ?? [] as $slug => $kebabCaseLabel){
-            $parents[] = $this->getSemesterPackParent($slug);
+        if($includeSemesterPackLessons){
+            foreach($semesterPacksToGet ?? [] as $slug => $kebabCaseLabel){
+                $parents[] = $this->getSemesterPackParent($slug);
+            }
         }
 
         $nested = false;
@@ -1250,40 +1259,43 @@ class ContentService
          *      this here, then the label showing would be "SEMESTER-PACK-LESSON". That wouldn't do at all.
          */
 
-        /*
-         * Section One
-         */
-        foreach($parents as $parent){
-            foreach($this->getByParentIdWhereTypeIn($parent['id'], ['semester-pack-lesson'])->all() as $lesson){
-                $idsOfChildrenOfSelectSemesterPacks[$parent['slug']][] = $lesson['id'];
+
+        if($includeSemesterPackLessons){
+            /*
+             * Section One
+             */
+            foreach($parents ?? [] as $parent){
+                foreach($this->getByParentIdWhereTypeIn($parent['id'], ['semester-pack-lesson'])->all() as $lesson){
+                    $idsOfChildrenOfSelectSemesterPacks[$parent['slug']][] = $lesson['id'];
+                }
             }
-        }
 
-        /*
-         * Section Two
-         */
-        $semesterPackLessons = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
-            ['semester-pack-lesson'],
-            ContentService::STATUS_PUBLISHED,
-            Carbon::now()->toDateTimeString(),
-            '>'
-        );
+            /*
+             * Section Two
+             */
+            $semesterPackLessons = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+                ['semester-pack-lesson'],
+                ContentService::STATUS_PUBLISHED,
+                Carbon::now()->toDateTimeString(),
+                '>'
+            );
 
-        /*
-         * Section Three
-         */
+            /*
+             * Section Three
+             */
 
-        $culledSemesterPackLessons = new Collection();
+            $culledSemesterPackLessons = new Collection();
 
-        foreach($semesterPackLessons as $lesson) {
-            foreach($idsOfChildrenOfSelectSemesterPacks as $parentSlug => $setOfIds){
-                if (in_array($lesson['id'], $setOfIds)) {
-                    $labels = config('railcontent.semester-pack-schedule-labels.' . $brand);
-                    if(array_key_exists($parentSlug, $labels)){
-                        $result = $this->getByChildIdWhereParentTypeIn($lesson['id'],['semester-pack'])->first();
-                        $lesson['parent_id'] = $result['id'];
-                        //$culledSemesterPackLessons[$labels[$parentSlug]] = $lesson;
-                        $culledSemesterPackLessons[] = $lesson;
+            foreach($semesterPackLessons as $lesson) {
+                foreach($idsOfChildrenOfSelectSemesterPacks ?? [] as $parentSlug => $setOfIds){
+                    if (in_array($lesson['id'], $setOfIds)) {
+                        $labels = config('railcontent.semester-pack-schedule-labels.' . $brand);
+                        if(array_key_exists($parentSlug, $labels)){
+                            $result = $this->getByChildIdWhereParentTypeIn($lesson['id'],['semester-pack'])->first();
+                            $lesson['parent_id'] = $result['id'];
+                            //$culledSemesterPackLessons[$labels[$parentSlug]] = $lesson;
+                            $culledSemesterPackLessons[] = $lesson;
+                        }
                     }
                 }
             }
@@ -1291,8 +1303,12 @@ class ContentService
 
         $scheduleEvents = $liveEvents->merge($contentReleases)->sort($compareFunc)->values();
 
-        $culledSemesterPackLessons = collect($culledSemesterPackLessons);
-        $scheduleEvents = $scheduleEvents->merge($culledSemesterPackLessons)->sort($compareFunc)->values();
+        if($includeSemesterPackLessons){
+            $culledSemesterPackLessons = collect($culledSemesterPackLessons ?? []);
+            $scheduleEvents = $scheduleEvents->merge($culledSemesterPackLessons)->sort($compareFunc)->values();
+        }else{
+            $scheduleEvents = $scheduleEvents->sort($compareFunc)->values();
+        }
 
         if(empty($scheduleEvents)){
             return new Collection();
