@@ -43,8 +43,6 @@ class MyListJsonController extends Controller
     ) {
         $this->contentService = $contentService;
         $this->contentHierarchyService = $contentHierarchyService;
-
-        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /**

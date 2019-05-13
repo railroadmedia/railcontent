@@ -39,8 +39,6 @@ class ContentDatumJsonController extends Controller
     {
         $this->datumService = $datumService;
         $this->permissionPackageService = $permissionPackageService;
-
-        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /** Call the method from service that create new data and link the content with the data.

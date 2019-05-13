@@ -46,8 +46,6 @@ class ContentJsonController extends Controller
     ) {
         $this->contentService = $contentService;
         $this->permissionPackageService = $permissionPackageService;
-
-        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /**

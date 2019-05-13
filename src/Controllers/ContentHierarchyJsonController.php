@@ -37,8 +37,6 @@ class ContentHierarchyJsonController extends Controller
     ) {
         $this->contentHierarchyService = $contentHierarchyService;
         $this->permissionPackageService = $permissionPackageService;
-
-        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /** Create/update a content hierarchy.

@@ -197,6 +197,12 @@ class RailcontentTestCase extends BaseTestCase
             $defaultConfig['administrator_routes_middleware']
         );
 
+        $app['config']->set('railcontent.autoload_all_routes', true);
+        $app['config']->set('railcontent.route_middleware_public_groups', []);
+        $app['config']->set('railcontent.route_middleware_logged_in_groups', []);
+        $app['config']->set('railcontent.route_prefix', $defaultConfig['route_prefix']);
+        $app['config']->set('railcontent.api_route_prefix', $defaultConfig['api_route_prefix']);
+
         // setup default database to use sqlite :memory:
         $app['config']->set('database.default', $this->getConnectionType());
         $app['config']->set(

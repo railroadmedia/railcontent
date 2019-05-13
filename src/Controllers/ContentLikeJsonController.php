@@ -26,8 +26,6 @@ class ContentLikeJsonController extends Controller
      */
     public function __construct(ContentLikeService $contentLikeService)
     {
-        $this->middleware(config('railcontent.controller_middleware'));
-
         $this->contentLikeService = $contentLikeService;
     }
 

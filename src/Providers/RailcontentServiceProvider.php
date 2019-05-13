@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
 use Doctrine\ORM\ORMException;
 use Gedmo\DoctrineExtensions;
 use Gedmo\Sortable\SortableListener;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Railroad\Doctrine\TimestampableListener;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
@@ -31,10 +32,28 @@ use Railroad\Railcontent\Hydrators\RailcontentHydrator;
 use Railroad\Railcontent\Listeners\ContentEventListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
+use Railroad\Railcontent\Routes\RouteRegistrar;
 use Redis;
 
 class RailcontentServiceProvider extends ServiceProvider
 {
+    /**
+     * @var RouteRegistrar
+     */
+    private $routeRegistar;
+
+    /**
+     * RailcontentServiceProvider constructor.
+     *
+     * @param Application $application
+     */
+    public function __construct(Application $application)
+    {
+       parent::__construct($application);
+
+        $this->routeRegistar = $application->make(RouteRegistrar::class);
+    }
+
     /**
      * Bootstrap the application services.
      *
@@ -61,8 +80,10 @@ class RailcontentServiceProvider extends ServiceProvider
         }
 
         //load package routes file
-        $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
-        $this->loadRoutesFrom(__DIR__ . '/../../routes/api.php');
+        // routes
+        if (config('railcontent.autoload_all_routes') == true) {
+            $this->routeRegistar->registerAll();
+        }
 
         $this->commands(
             [

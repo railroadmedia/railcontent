@@ -77,8 +77,6 @@ class PermissionJsonController extends Controller
 
         $this->entityManager = $entityManager;
         $this->permissionRepository = $this->entityManager->getRepository(Permission::class);
-
-        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /**

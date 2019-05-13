@@ -27,8 +27,6 @@ class ContentProgressJsonController extends Controller
         UserContentProgressService $userContentService
     ) {
         $this->userContentService = $userContentService;
-
-        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /** Start a content for the authenticated user

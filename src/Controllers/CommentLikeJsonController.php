@@ -24,8 +24,6 @@ class CommentLikeJsonController extends Controller
         CommentLikeService $commentLikeService
     ) {
         $this->commentLikeService = $commentLikeService;
-
-        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /** Authenticated user like a comment.

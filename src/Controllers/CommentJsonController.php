@@ -39,8 +39,6 @@ class CommentJsonController extends Controller
     {
         $this->commentService = $commentService;
         $this->jsonApiHidrator = $jsonApiHydrator;
-
-        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /** Call the method from the service to pull the comments based on the criteria passed in request:

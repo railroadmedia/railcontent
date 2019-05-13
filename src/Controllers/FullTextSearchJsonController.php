@@ -24,8 +24,6 @@ class FullTextSearchJsonController extends Controller
     public function __construct(FullTextSearchService $fullTextSearchService)
     {
         $this->fullTextSearchService = $fullTextSearchService;
-
-        $this->middleware(config('railcontent.controller_middleware'));
     }
 
     /** Call the method from the service to pull the contents based on the criteria passed in request.
