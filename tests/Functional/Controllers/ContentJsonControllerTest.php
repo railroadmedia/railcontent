@@ -547,7 +547,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                         'instructor' => [
                             'data' => [
                                 'type' => 'instructor',
-                                'id' => 2,
+                                'id' => 3,
                             ],
                         ],
                         'topic' => [
@@ -630,10 +630,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->fakeComment(5, [
-            'content' => $content[0],
-            'comment' => $this->faker->paragraph
-        ]);
+        $this->fakeComment(
+            5,
+            [
+                'content' => $content[0],
+                'comment' => $this->faker->paragraph,
+            ]
+        );
 
         $id = $content[0]->getId();
         $response = $this->call('DELETE', 'railcontent/content/' . $id);
@@ -1122,7 +1125,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $content1[0],
                 'permission' => $permission[0],
-                'brand' => config('railcontent.brand')
+                'brand' => config('railcontent.brand'),
             ]
         );
 
@@ -1142,7 +1145,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $content2[0],
                 'permission' => $permission2[0],
-                'brand' => config('railcontent.brand')
+                'brand' => config('railcontent.brand'),
             ]
         );
 
@@ -1187,7 +1190,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $contents[0],
                 'permission' => $permission[0],
-                'brand' => config('railcontent.brand')
+                'brand' => config('railcontent.brand'),
             ]
         );
 
@@ -1290,7 +1293,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'difficulty' => 1,
                 'brand' => config('railcontent.brand'),
-                'status' => 'published'
+                'status' => 'published',
             ]
         );
 
@@ -1402,7 +1405,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             1,
             [
                 'difficulty' => 1,
-                'brand' =>config('railcontent.brand'),
+                'brand' => config('railcontent.brand'),
                 'status' => 'published',
             ]
         );
@@ -1801,7 +1804,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'difficulty' => 1,
                 'type' => $type,
                 'brand' => config('railcontent.brand'),
-                'status' => 'published'
+                'status' => 'published',
             ]
         );
         $otherContent = $this->fakeContent(12);
@@ -1902,5 +1905,77 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(2, count($secondRequest->decodeResponseJson('data')));
+    }
+
+    public function test_fetch()
+    {
+        $user = $this->createAndLogInNewUser();
+
+        $content = $this->fakeContent(
+            10,
+            [
+                'status' => 'published',
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+                'difficulty' => 2,
+                'title' => $this->faker->word
+            ]
+        );
+        $instructor = $this->fakeContent(
+            1,
+            [
+                'type' => 'instructor',
+                'slug' => 'dave-atkinson',
+                'status' => 'published',
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now(),
+                'name' => 'Dave Atkinson',
+            ]
+        );
+
+        $instructorData = $this->fakeContentData(1,[
+            'content' => $instructor[0],
+            'key' => 'head_shot_picture_url',
+            'value' => 'https://s3.amazonaws.com/drumeo-assets/instructors/adam-smith.png?v=1513185407'
+        ]);
+
+        $this->fakeContentInstructor(
+            1,
+            [
+                'content' => $content[0],
+                'instructor' => $instructor[0],
+            ]
+        );
+        $desc = $this->faker->word;
+
+        $this->fakeContentData(
+            1,
+            [
+                'content' => $content[0],
+                'key' => 'description',
+                'value' => $desc,
+            ]
+        );
+
+        $this->fakeUserContentProgress(1,[
+            'content' => $content[0],
+            'userId' => $user,
+            'state' => 'started',
+            'progressPercent' => 30
+        ]);
+
+        $this->assertFalse($content[0]->fetch('completed'));
+        $this->assertEquals($instructor[0]->getName(), $content[0]->fetch('fields.instructor.fields.name'));
+        $this->assertEquals($instructor[0]->getName(), $content[0]->fetch('fields.instructor.fields.name'));
+        $this->assertEquals($instructor[0]->getName(), $content[0]->fetch('fields.instructor.fields.name'));
+        $this->assertEquals($content[0]->getDifficulty(), $content[0]->fetch('fields.difficulty'));
+        $this->assertEquals($content[0]->getHomeStaffPickRating(), $content[0]->fetch('fields.home_staff_pick_rating'));
+        $this->assertEquals(1, $content[0]->fetch('fields.video.fields.length_in_seconds', 1));
+        $this->assertEquals($content[0]->getType(), $content[0]->fetch('type'));
+        $this->assertEquals($content[0]->getTitle(), $content[0]->fetch('fields.title', ''));
+        $this->assertEquals($content[0]->getTitle(), $content[0]->fetch('fields.title', ''));
+        $this->assertEquals($instructorData[0]->getValue(), $content[0]->fetch('fields.instructor.data.head_shot_picture_url',null));
+        $this->assertNull($content[0]->fetch('url',null));
+        $this->assertEquals(0, $content[0]->fetch('data.timecode', 0));
     }
 }

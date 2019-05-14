@@ -434,6 +434,14 @@ class Content extends ArrayExpressible
     }
 
     /**
+     * @return bool
+     */
+    public function getCompleted()
+    {
+        return $this->completed;
+    }
+
+    /**
      * @param $userId
      * @return array
      */

@@ -2,18 +2,46 @@
 
 namespace Railroad\Railcontent\Entities;
 
+use Doctrine\Common\Inflector\Inflector;
+
 use Doctrine\ORM\PersistentCollection;
+use Illuminate\Cache\Repository;
+use Illuminate\Support\Facades\Cache;
 
 abstract class ArrayExpressible
 {
+    private $cache;
+
+    const CACHE_KEY_PREFIX = 'railcontent_fetch_';
+
+    /**
+     * ArrayExpressible constructor.
+     *
+     * @param $cache
+     */
+    public function __construct()
+    {
+        $this->cache = app()->make(Repository::class);
+    }
+
     /**
      * @param $dotNotationString
      * @param string $default
-     * @return string
+     * @return mixed
      */
     public function fetch($dotNotationString, $default = '')
     {
-        return $this->dot()[$dotNotationString] ?? $default;
+        $hash = self::CACHE_KEY_PREFIX . $this->getId(). '_'. $dotNotationString;
+
+        $results = Cache::store()->remember(
+            $hash,
+            5,
+            function () use ($hash, $dotNotationString, $default){
+                return $this->dot($dotNotationString) ?? $default;
+            }
+        );
+
+        return $results;
     }
 
     /**
@@ -25,9 +53,62 @@ abstract class ArrayExpressible
     }
 
     /**
+     * @param $dotNotationString
+     * @return mixed|ArrayExpressible|string|null
+     */
+    public function dot($dotNotationString)
+    {
+        $criteria = explode('.', $dotNotationString);
+
+        $fields = $this;
+
+        foreach ($criteria as $key => $criterion) {
+
+            if ($criterion == 'fields') {
+                continue;
+            }
+
+            $getterName = Inflector::camelize('get' . ucwords($criterion));
+
+            if (($fields instanceof PersistentCollection)) {
+
+                foreach ($fields as $field) {
+                    if ($field instanceof ContentData && $field->getKey() == $criterion) {
+                        $fields = $field->getValue();
+                    } elseif (method_exists($fields, $getterName)) {
+                        $fields = call_user_func([$field, $getterName]);
+                        if (!$fields) {
+                            return $fields;
+                        }
+                    } else {
+                        $fields = null;
+                    }
+                }
+            } else {
+                if (method_exists($fields, $getterName)) {
+                    $fields = call_user_func([$fields, $getterName]);
+                    if (!$fields) {
+                        return $fields;
+                    }
+                } else {
+                    $extraProperties = $fields->getExtra();
+
+                    if ($extraProperties && array_key_exists($criterion, $extraProperties)) {
+                        $fields = $fields->getProperty($criterion);
+                    } else {
+                        return null;
+                    }
+                }
+            }
+        }
+
+        return $fields;
+    }
+
+    /**
      * @return array
      */
-    public function dot()
+    public function dot_deprecated()
     {
         $arr = $this->toArray();
 
