@@ -31,15 +31,17 @@ abstract class ArrayExpressible
      */
     public function fetch($dotNotationString, $default = '')
     {
-        $hash = self::CACHE_KEY_PREFIX . $this->getId(). '_'. $dotNotationString;
+        $hash = self::CACHE_KEY_PREFIX . $this->getId() . '_' . $dotNotationString;
 
-        $results = Cache::store()->remember(
-            $hash,
-            5,
-            function () use ($hash, $dotNotationString, $default){
-                return $this->dot($dotNotationString) ?? $default;
-            }
-        );
+        $results =
+            Cache::store()
+                ->remember(
+                    $hash,
+                    5,
+                    function () use ($hash, $dotNotationString, $default) {
+                        return $this->dot($dotNotationString) ?? $default;
+                    }
+                );
 
         return $results;
     }
@@ -58,6 +60,8 @@ abstract class ArrayExpressible
      */
     public function dot($dotNotationString)
     {
+        $allValues = str_contains('*', $dotNotationString);
+        $dotNotationString = str_replace('*','',$dotNotationString);
         $criteria = explode('.', $dotNotationString);
 
         $fields = $this;
@@ -66,6 +70,10 @@ abstract class ArrayExpressible
 
             if ($criterion == 'fields') {
                 continue;
+            }
+
+            if(!$fields){
+                return $fields;
             }
 
             $getterName = Inflector::camelize('get' . ucwords($criterion));
@@ -87,8 +95,13 @@ abstract class ArrayExpressible
             } else {
                 if (method_exists($fields, $getterName)) {
                     $fields = call_user_func([$fields, $getterName]);
+
                     if (!$fields) {
                         return $fields;
+                    }
+
+                    if ($fields instanceof ContentInstructor) {
+                        $fields = call_user_func([$fields, $getterName]);
                     }
                 } else {
                     $extraProperties = $fields->getExtra();

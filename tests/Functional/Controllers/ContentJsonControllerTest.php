@@ -547,7 +547,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                         'instructor' => [
                             'data' => [
                                 'type' => 'instructor',
-                                'id' => 3,
+                                'id' => 2,
                             ],
                         ],
                         'topic' => [
@@ -1977,5 +1977,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals($instructorData[0]->getValue(), $content[0]->fetch('fields.instructor.data.head_shot_picture_url',null));
         $this->assertNull($content[0]->fetch('url',null));
         $this->assertEquals(0, $content[0]->fetch('data.timecode', 0));
+        $this->assertEquals($desc, $content[0]->fetch('data.description', ''));
+        $this->assertEquals([], $content[0]->fetch('*assignments', []));
     }
 }

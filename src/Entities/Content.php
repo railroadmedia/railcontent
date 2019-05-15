@@ -6,7 +6,6 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Railroad\Railcontent\Contracts\UserInterface;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsAssociations;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsProperties;
 use Railroad\Railcontent\Entities\Traits\DecoratedFields;
