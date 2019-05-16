@@ -1918,7 +1918,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'brand' => config('railcontent.brand'),
                 'publishedOn' => Carbon::now(),
                 'difficulty' => 2,
-                'title' => $this->faker->word
+                'title' => $this->faker->word,
             ]
         );
         $instructor = $this->fakeContent(
@@ -1933,11 +1933,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $instructorData = $this->fakeContentData(1,[
-            'content' => $instructor[0],
-            'key' => 'head_shot_picture_url',
-            'value' => 'https://s3.amazonaws.com/drumeo-assets/instructors/adam-smith.png?v=1513185407'
-        ]);
+        $instructorData = $this->fakeContentData(
+            1,
+            [
+                'content' => $instructor[0],
+                'key' => 'head_shot_picture_url',
+                'value' => 'https://s3.amazonaws.com/drumeo-assets/instructors/adam-smith.png?v=1513185407',
+            ]
+        );
 
         $this->fakeContentInstructor(
             1,
@@ -1956,14 +1959,56 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'value' => $desc,
             ]
         );
+        $sheet_music_image_url1 = $this->fakeContentData(
+            1,
+            [
+                'content' => $content[0],
+                'key' => 'sheet_music_image_url',
+                'value' => 'https://dz5i3s4prcfun.cloudfront.net/04-drum-rudiment-system/jpegs/28-single-flammed-mill.png',
+            ]
+        );
+        $sheet_music_image_url2 = $this->fakeContentData(
+            1,
+            [
+                'content' => $content[0],
+                'key' => 'sheet_music_image_url',
+                'value' => 'https://dz5i3s4prcfun.cloudfront.net/05-drum-fill-system/jpegs/05-8th-note-triplets-to-8th-notes.png',
+            ]
+        );
 
-        $this->fakeUserContentProgress(1,[
+        $this->fakeUserContentProgress(
+            1,
+            [
+                'content' => $content[0],
+                'userId' => $user,
+                'state' => 'started',
+                'progressPercent' => 30,
+            ]
+        );
+
+        $contentTopic1 = $this->fakeContentTopic(1,[
             'content' => $content[0],
-            'userId' => $user,
-            'state' => 'started',
-            'progressPercent' => 30
+            'topic' => 'general',
+            'position' => 1
         ]);
 
+        $contentTopic2 = $this->fakeContentTopic(1,[
+            'content' => $content[0],
+            'topic' => 'performances',
+            'position' => 2
+        ]);
+
+        $this->assertEquals($desc, $content[0]->fetch('data.description', ''));
+        $this->assertEquals(0, $content[0]->fetch('data.timecode', 0));
+        $this->assertEquals(2, count($content[0]->fetch('*data.sheet_music_image_url', [])));
+
+        $this->assertEquals(2, count($content[0]->fetch('*fields.topic', [])));
+        $this->assertEquals($contentTopic1[0]->getTopic(), $content[0]->fetch('fields.topic.1', null));
+        $this->assertEquals($contentTopic2[0]->getTopic(), $content[0]->fetch('fields.topic.2', null));
+
+        $this->assertEquals([], $content[0]->fetch('*fields.tag', []));
+
+        $this->assertEquals(2, count($content[0]->fetch('*data.sheet_music_image_url', [])));
         $this->assertFalse($content[0]->fetch('completed'));
         $this->assertEquals($instructor[0]->getName(), $content[0]->fetch('fields.instructor.fields.name'));
         $this->assertEquals($instructor[0]->getName(), $content[0]->fetch('fields.instructor.fields.name'));
@@ -1974,10 +2019,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals($content[0]->getType(), $content[0]->fetch('type'));
         $this->assertEquals($content[0]->getTitle(), $content[0]->fetch('fields.title', ''));
         $this->assertEquals($content[0]->getTitle(), $content[0]->fetch('fields.title', ''));
-        $this->assertEquals($instructorData[0]->getValue(), $content[0]->fetch('fields.instructor.data.head_shot_picture_url',null));
-        $this->assertNull($content[0]->fetch('url',null));
+        $this->assertEquals(
+            $instructorData[0]->getValue(),
+            $content[0]->fetch('fields.instructor.data.head_shot_picture_url', null)
+        );
+        $this->assertNull($content[0]->fetch('url', null));
         $this->assertEquals(0, $content[0]->fetch('data.timecode', 0));
         $this->assertEquals($desc, $content[0]->fetch('data.description', ''));
-        $this->assertEquals([], $content[0]->fetch('*assignments', []));
     }
 }

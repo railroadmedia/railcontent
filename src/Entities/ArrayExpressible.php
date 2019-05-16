@@ -5,24 +5,12 @@ namespace Railroad\Railcontent\Entities;
 use Doctrine\Common\Inflector\Inflector;
 
 use Doctrine\ORM\PersistentCollection;
-use Illuminate\Cache\Repository;
-use Illuminate\Support\Facades\Cache;
 
 abstract class ArrayExpressible
 {
-    private $cache;
+    private $cache = [];
 
     const CACHE_KEY_PREFIX = 'railcontent_fetch_';
-
-    /**
-     * ArrayExpressible constructor.
-     *
-     * @param $cache
-     */
-    public function __construct()
-    {
-        $this->cache = app()->make(Repository::class);
-    }
 
     /**
      * @param $dotNotationString
@@ -33,81 +21,137 @@ abstract class ArrayExpressible
     {
         $hash = self::CACHE_KEY_PREFIX . $this->getId() . '_' . $dotNotationString;
 
-        $results =
-            Cache::store()
-                ->remember(
-                    $hash,
-                    5,
-                    function () use ($hash, $dotNotationString, $default) {
-                        return $this->dot($dotNotationString) ?? $default;
-                    }
-                );
+        if (isset($this->cache[$hash])) {
+            return $this->cache[$hash];
+        }
+
+        $results = $this->dot($dotNotationString) ?? $default;
+
+        $this->cache[$hash] = $results;
+
+        return $this->cache[$hash];
+    }
+
+    /**
+     * @param $dotNotationString
+     * @return array|mixed|null
+     */
+    public function dot($dotNotationString)
+    {
+        $dotNotationString = str_replace('fields.', '', $dotNotationString);
+
+        $criteria = explode('.', $dotNotationString);
+
+        $isData = ($criteria[0] == 'data' || $criteria[0] == '*data');
+
+        $results = ($isData) ? $this->fetchData($this->getData(), $criteria) : $this->fetchField($this, $criteria);
 
         return $results;
     }
 
     /**
-     * @return array
+     * @param $contentData
+     * @param $criteria
+     * @param int $index
+     * @return array|null
      */
-    public function toArray()
+    private function fetchData($contentData, $criteria, $index = 0)
     {
-        return get_object_vars($this);
+        $results = null;
+
+        $allValues = in_array('*data', $criteria);
+
+        $customPosition = false;
+
+        if (is_numeric($criteria[count($criteria) - 1])) {
+            $customPosition = $criteria[count($criteria) - 1];
+        }
+
+        for ($i = $index; $i < count($criteria); $i++) {
+            foreach ($contentData as $data) {
+                if ($data->getKey() == $criteria[$i]) {
+                    if ($allValues) {
+                        $results[] = $data->getValue();
+                    } else {
+                        if ($customPosition) {
+                            if ($data->getPosition() == $customPosition) {
+                                $results = $data->getValue();
+                            }
+                        } else {
+                            $results = $data->getValue();
+                        }
+                    }
+                }
+            }
+        }
+
+        return $results;
     }
 
     /**
-     * @param $dotNotationString
-     * @return mixed|ArrayExpressible|string|null
+     * @param $fields
+     * @param $criteria
+     * @param int $index
+     * @return array|mixed|null
      */
-    public function dot($dotNotationString)
+    private function fetchField(&$fields, $criteria, $index = 0)
     {
-        $allValues = str_contains('*', $dotNotationString);
-        $dotNotationString = str_replace('*','',$dotNotationString);
-        $criteria = explode('.', $dotNotationString);
+        $results = null;
 
-        $fields = $this;
+        $allValues = str_contains($criteria[0], '*');
+        $criteria[0] = str_replace('*', '', $criteria[0]);
+        $customPosition = false;
 
-        foreach ($criteria as $key => $criterion) {
+        if (is_numeric($criteria[count($criteria) - 1])) {
+            $customPosition = $criteria[count($criteria) - 1];
+            unset($criteria[count($criteria) - 1]);
+        }
 
-            if ($criterion == 'fields') {
-                continue;
-            }
+        for ($i = $index; $i < count($criteria); $i++) {
 
-            if(!$fields){
-                return $fields;
-            }
+            if ($criteria[$i] == 'data') {
 
-            $getterName = Inflector::camelize('get' . ucwords($criterion));
+                return $this->fetchData($fields->getData(), $criteria, $i);
 
-            if (($fields instanceof PersistentCollection)) {
-
-                foreach ($fields as $field) {
-                    if ($field instanceof ContentData && $field->getKey() == $criterion) {
-                        $fields = $field->getValue();
-                    } elseif (method_exists($fields, $getterName)) {
-                        $fields = call_user_func([$field, $getterName]);
-                        if (!$fields) {
-                            return $fields;
-                        }
-                    } else {
-                        $fields = null;
-                    }
-                }
             } else {
+
+                $getterName = Inflector::camelize('get' . ucwords($criteria[$i]));
+
                 if (method_exists($fields, $getterName)) {
+
                     $fields = call_user_func([$fields, $getterName]);
 
-                    if (!$fields) {
-                        return $fields;
+                    if ($fields instanceof PersistentCollection) {
+                        foreach ($fields as $field) {
+                            if ($allValues) {
+                                $results[] = $this->fetchField($field, $criteria, $i);
+                            } else {
+                                if ($customPosition) {
+                                    if ($field->getPosition() == $customPosition) {
+                                        $results = $this->fetchField($field, $criteria, $i);
+                                    }
+                                } else {
+                                    $results = $this->fetchField($field, $criteria, $i);
+                                }
+                            }
+                        }
+                        return $results;
                     }
 
-                    if ($fields instanceof ContentInstructor) {
-                        $fields = call_user_func([$fields, $getterName]);
+                    $results = $fields;
+
+                    if (!$results) {
+                        return $results;
+                    }
+
+                    if (($fields instanceof ContentInstructor)) {
+                        $results = $fields = call_user_func([$fields, $getterName]);
                     }
                 } else {
-                    $extraProperties = $fields->getExtra();
 
-                    if ($extraProperties && array_key_exists($criterion, $extraProperties)) {
-                        $fields = $fields->getProperty($criterion);
+                    $extraProperties = $fields->getExtra();
+                    if ($extraProperties && array_key_exists($criteria[$i], $extraProperties)) {
+                        $results = $fields = $fields->getProperty($criteria[$i]);
                     } else {
                         return null;
                     }
@@ -115,95 +159,6 @@ abstract class ArrayExpressible
             }
         }
 
-        return $fields;
-    }
-
-    /**
-     * @return array
-     */
-    public function dot_deprecated()
-    {
-        $arr = $this->toArray();
-
-        foreach ($arr as $key => $value) {
-
-            if ($value instanceof PersistentCollection) {
-
-                if ($value->isEmpty()) {
-                    $arr[$key] = [];
-                    continue;
-                }
-
-                $prefix = 'fields.';
-                $propertyName = $key;
-                $getterMethodName = 'get' . ucfirst($key);
-
-                foreach ($value as $dataIndex => $elem) {
-
-                    if ($elem instanceof ContentData) {
-                        $prefix = 'data.';
-                        $propertyName = $elem->getKey();
-                        $propertyValue = $elem->getValue();
-                    } else {
-                        $propertyValue = $elem->$getterMethodName();
-                    }
-
-                    if ($elem->getPosition() == 1) {
-                        $datumDots[$prefix . $propertyName] = $propertyValue;
-                    }
-
-                    $datumDots[$prefix . '*.' . $propertyName][] = $elem->toArray();
-                    $datumDots[$prefix . $propertyName . '.' . $elem->getPosition()] = $propertyValue;
-                    $datumDots[$prefix . '*.' . $propertyName . '.' . $elem->getPosition()] = $elem->toArray();
-
-                    foreach ($elem as $datumColumnName => $datumColumnValue) {
-                        if ($elem->getPosition() == 1) {
-                            $datumDots[$prefix . $propertyName . '.' . $datumColumnName] = $datumColumnValue;
-                        }
-                        $datumDots[$prefix . $propertyName . '.' . $elem->getPosition() . '.' . $datumColumnName] =
-                            $datumColumnValue;
-                    }
-
-                    unset($arr[$key]);
-
-                    $arr = array_merge($arr, $datumDots);
-                }
-            } elseif ($value instanceof ContentInstructor) {
-
-                $instructor = $value->getInstructor();
-
-                $fieldDots['fields.instructor'] = $instructor->dot();
-                $fieldDots['fields.*.instructor'] = [$instructor->dot()];
-                $fieldDots['fields.instructor.' . $value->getPosition()] = $instructor->dot();
-
-                unset($arr[$key]);
-
-                $arr = array_merge($arr, $fieldDots);
-            }
-        }
-
-        if (isset($arr['permissions'])) {
-
-            foreach ($arr['permissions'] as $contentPermission) {
-                $permission = $contentPermission->getPermission();
-                $permissionDots['permissions.' . $permission->getName()] = $permission->toArray();
-            }
-
-            $arr['permissions'] = $permissionDots ?? [];
-        }
-
-        if (isset($arr['video'])) {
-
-            $video = $arr['video'];
-
-            $arr['fields.video'] = $video->dot();
-            $arr['fields.video.vimeo_video_id'] = $video->getVimeoVideoId();
-            $arr['fields.video.youtube_video_id'] = $video->getYoutubeVideoId();
-            $arr['fields.video.length_in_seconds'] = $video->getLengthInSeconds();
-
-            unset($arr['video']);
-        }
-
-        return $arr;
+        return $results;
     }
 }
