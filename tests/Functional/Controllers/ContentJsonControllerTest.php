@@ -1959,6 +1959,18 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'value' => $desc,
             ]
         );
+
+        for ($i = 0; $i < 3; $i++) {
+            $randomData[] = $this->fakeContentData(
+                1,
+                [
+                    'content' => $content[0],
+                    'key' => $this->faker->word,
+                    'value' => $this->faker->paragraph,
+                ]
+            );
+        }
+
         $sheet_music_image_url1 = $this->fakeContentData(
             1,
             [
@@ -1986,17 +1998,46 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $contentTopic1 = $this->fakeContentTopic(1,[
-            'content' => $content[0],
-            'topic' => 'general',
-            'position' => 1
-        ]);
+        $contentTopic1 = $this->fakeContentTopic(
+            1,
+            [
+                'content' => $content[0],
+                'topic' => 'general',
+                'position' => 1,
+            ]
+        );
 
-        $contentTopic2 = $this->fakeContentTopic(1,[
-            'content' => $content[0],
-            'topic' => 'performances',
-            'position' => 2
-        ]);
+        $contentTopic2 = $this->fakeContentTopic(
+            1,
+            [
+                'content' => $content[0],
+                'topic' => 'performances',
+                'position' => 2,
+            ]
+        );
+
+        $results = $this->serviceBeingTested->getById($content[0]->getId());
+
+        $this->assertInstanceOf(Content::class, $results);
+
+        $this->assertEquals($content[0]->getId(), $results->fetch('id'));
+        $this->assertEquals($content[0]->getSlug(), $results->fetch('slug'));
+        $this->assertEquals($content[0]->getType(), $results->fetch('type'));
+        $this->assertEquals($content[0]->getSort(), $results->fetch('sort'));
+        $this->assertEquals($content[0]->getStatus(), $results->fetch('status'));
+        $this->assertEquals($content[0]->getLanguage(), $results->fetch('language'));
+        $this->assertEquals($content[0]->getBrand(), $results->fetch('brand'));
+        $this->assertEquals($content[0]->getPublishedOn(), $results->fetch('published_on'));
+        $this->assertEquals($content[0]->getCreatedOn(), $results->fetch('created_on'));
+        $this->assertEquals($content[0]->getArchivedOn(), $results->fetch('archived_on'));
+
+        foreach ($randomData as $randomDatum) {
+            $this->assertEquals($randomDatum[0]->getValue(), $results->fetch('data.' . $randomDatum[0]->getKey()));
+            $this->assertEquals(
+                $randomDatum[0]->getValue(),
+                $results->fetch('data.' . $randomDatum[0]->getKey() . '.' . $randomDatum[0]->getPosition())
+            );
+        }
 
         $this->assertEquals($desc, $content[0]->fetch('data.description', ''));
         $this->assertEquals(0, $content[0]->fetch('data.timecode', 0));
@@ -2024,7 +2065,5 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $content[0]->fetch('fields.instructor.data.head_shot_picture_url', null)
         );
         $this->assertNull($content[0]->fetch('url', null));
-        $this->assertEquals(0, $content[0]->fetch('data.timecode', 0));
-        $this->assertEquals($desc, $content[0]->fetch('data.description', ''));
     }
 }
