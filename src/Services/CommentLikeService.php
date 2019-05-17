@@ -157,7 +157,7 @@ class CommentLikeService
                     ->getId()
             );
 
-        event(new CommentLiked($commentId, $userId));
+        event(new CommentLiked($comment, $user));
 
         return $commentLikes;
     }
@@ -187,7 +187,7 @@ class CommentLikeService
         $this->entityManager->getCache()
             ->evictEntity(Comment::class, $commentId);
 
-        event(new CommentUnLiked($commentId, $userId));
+        event(new CommentUnLiked($comment, $user));
 
         return true;
     }

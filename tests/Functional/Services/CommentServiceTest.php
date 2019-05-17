@@ -130,8 +130,8 @@ class CommentServiceTest extends RailcontentTestCase
         //check that the ContentCreated event was dispatched with the correct content id
         Event::assertDispatched(
             CommentCreated::class,
-            function ($event) use ($comment, $content) {
-                return (($event->commentId == $comment['id']));
+            function ($event) use ($result, $content) {
+                return (($event->comment == $result));
             }
         );
     }

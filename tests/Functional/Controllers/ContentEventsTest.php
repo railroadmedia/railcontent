@@ -2,13 +2,11 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDatumCreated;
 use Railroad\Railcontent\Events\ContentDatumDeleted;
 use Railroad\Railcontent\Events\ContentDatumUpdated;
-use Railroad\Railcontent\Events\ContentFieldCreated;
-use Railroad\Railcontent\Events\ContentFieldDeleted;
-use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
@@ -59,11 +57,15 @@ class ContentEventsTest extends RailcontentTestCase
         );
         $content = $res->decodeResponseJson('data');
 
+        $contentEntity =
+            $this->entityManager->getRepository(Content::class)
+                ->find(1);
+
         //check that the ContentCreated event was dispatched with the correct content id
         Event::assertDispatched(
             ContentCreated::class,
-            function ($event) use ($content) {
-                return $event->contentId == $content['id'];
+            function ($event) use ($contentEntity) {
+                return $event->content == $contentEntity;
             }
         );
     }
@@ -90,7 +92,7 @@ class ContentEventsTest extends RailcontentTestCase
         Event::assertDispatched(
             ContentUpdated::class,
             function ($event) use ($content) {
-                return $event->contentId == $content[0]->getId();
+                return $event->content == $content[0];
             }
         );
     }
@@ -126,7 +128,7 @@ class ContentEventsTest extends RailcontentTestCase
         Event::assertDispatched(
             ContentDatumCreated::class,
             function ($event) use ($content) {
-                return $event->contentId == $content[0]->getId();
+                return $event->content == $content[0];
             }
         );
     }
@@ -162,7 +164,7 @@ class ContentEventsTest extends RailcontentTestCase
         Event::assertDispatched(
             ContentDatumUpdated::class,
             function ($event) use ($content) {
-                return $event->contentId == $content[0]->getId();
+                return $event->content == $content[0];
             }
         );
     }
@@ -186,7 +188,7 @@ class ContentEventsTest extends RailcontentTestCase
         Event::assertDispatched(
             ContentDatumDeleted::class,
             function ($event) use ($content) {
-                return $event->contentId == $content[0]->getId();
+                return $event->content == $content[0];
             }
         );
     }

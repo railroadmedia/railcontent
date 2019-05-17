@@ -667,8 +667,8 @@ class ContentService
 
         $qb =
             $this->contentRepository->build()
-                ->restrictByUserAccess()
                 ->join(config('railcontent.table_prefix') . 'content' . '.userProgress', $alias)
+                ->restrictByUserAccess()
                 ->andWhere($alias . '.user = :userId')
                 ->andWhere($alias . '.state = :state')
                 ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)');
@@ -967,7 +967,7 @@ class ContentService
         $this->entityManager->getCache('Railcontent')
             ->evictEntity(Content::class, 'pull');
 
-        event(new ContentCreated($content->getId()));
+        event(new ContentCreated($content));
 
         return $content;
     }
@@ -997,7 +997,7 @@ class ContentService
         $this->entityManager->persist($content);
         $this->entityManager->flush();
 
-        event(new ContentUpdated($id));
+        event(new ContentUpdated($content));
 
         $this->entityManager->getCache()
             ->evictEntityRegion(Content::class);
@@ -1019,7 +1019,7 @@ class ContentService
         if (empty($content)) {
             return null;
         }
-        event(new ContentDeleted($id));
+        event(new ContentDeleted($content));
 
         $this->entityManager->remove($content);
         $this->entityManager->flush();
@@ -1030,14 +1030,15 @@ class ContentService
         return true;
     }
 
-    /** Delete data related with the specified content id.
+    /** Delete data related with the specified content.
      *
-     * @param $contentId
+     * @param $content
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function deleteContentRelated($contentId)
+    public function deleteContentRelated($content)
     {
+        $contentId = $content->getId();
         $contentPermissions = $this->contentPermissionRepository->findByContent($contentId);
 
         foreach ($contentPermissions as $contentPermission) {
@@ -1130,7 +1131,7 @@ class ContentService
 
         $content->setStatus(ContentService::STATUS_DELETED);
 
-        event(new ContentSoftDeleted($id));
+        event(new ContentSoftDeleted($content));
 
         $this->entityManager->persist($content);
         $this->entityManager->flush();

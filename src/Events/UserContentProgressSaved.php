@@ -3,19 +3,30 @@
 namespace Railroad\Railcontent\Events;
 
 use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\User;
 
 class UserContentProgressSaved extends Event
 {
-    public $userId;
-    public $contentId;
+    /**
+     * @var User
+     */
+    public $user;
 
     /**
-     * @param int $userId
-     * @param int $contentId
+     * @var Content
      */
-    public function __construct($userId, $contentId)
+    public $content;
+
+    /**
+     * UserContentProgressSaved constructor.
+     *
+     * @param User $user
+     * @param Content $content
+     */
+    public function __construct(User $user, Content $content)
     {
-        $this->userId = $userId;
-        $this->contentId = $contentId;
+        $this->user = $user;
+        $this->content = $content;
     }
 }

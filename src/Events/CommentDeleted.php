@@ -4,16 +4,22 @@ namespace Railroad\Railcontent\Events;
 
 
 use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Entities\Comment;
 
 class CommentDeleted extends Event
 {
     /**
-     * @var int
+     * @var Comment
      */
-    public $commentId;
+    public $comment;
 
-    public function __construct($commentId)
+    /**
+     * CommentDeleted constructor.
+     *
+     * @param Comment $comment
+     */
+    public function __construct(Comment $comment)
     {
-        $this->commentId = $commentId;
+        $this->comment = $comment;
     }
 }

@@ -20,7 +20,7 @@ class ContentEventListener
 
     public function handleDelete(Event $event)
     {
-        $results = $this->contentService->deleteContentRelated($event->contentId);
+        $results = $this->contentService->deleteContentRelated($event->content);
 
         return $results;
     }
@@ -28,10 +28,10 @@ class ContentEventListener
     public function handleSoftDelete(Event $event)
     {
         //reposition other siblings
-        $this->contentHierarchyService->repositionSiblings($event->contentId);
+        $this->contentHierarchyService->repositionSiblings($event->content);
 
         //soft delete content children
-        $results = $this->contentService->softDeleteContentChildren($event->contentId);
+        $results = $this->contentService->softDeleteContentChildren($event->content);
 
         return $results;
     }

@@ -3,14 +3,9 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Faker\ORM\Doctrine\Populator;
 use Illuminate\Support\Facades\Event;
-use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Events\ContentUpdated;
-use Railroad\Railcontent\Factories\ContentDatumFactory;
-use Railroad\Railcontent\Factories\ContentFactory;
-use Railroad\Railcontent\Repositories\ContentDatumRepository;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Railroad\Railcontent\Services\ConfigService;
@@ -519,9 +514,9 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
         $this->expectsEvents(ContentUpdated::class);
         //check that the ContentUpdated event was dispatched with the correct content id
-        /* Event::assertDispatched(ContentUpdated::class, function ($event) use ($content) {
-             return $event->contentId == $content['id'];
-         }); */
+        Event::assertDispatched(ContentUpdated::class, function ($event) use ($content) {
+             return $event->content == $content;
+         });
     }
 
     public function content_updated_event_dispatched_when_unlink_content_datum()
@@ -560,7 +555,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
         Event::assertDispatched(
             ContentUpdated::class,
             function ($event) use ($contentId) {
-                return $event->contentId == $contentId;
+                return $event->content == $contentId;
             }
         );
     }

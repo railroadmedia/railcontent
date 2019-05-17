@@ -126,7 +126,8 @@ class ContentHierarchyServiceTest extends RailcontentTestCase
 
     public function test_reposition_siblings()
     {
-        $this->classBeingTested->repositionSiblings(3);
+        $this->classBeingTested->repositionSiblings($this->entityManager->getRepository(Content::class)
+            ->find(3));
 
         $this->assertDatabaseHas(
             config('railcontent.table_prefix'). 'content_hierarchy',

@@ -206,7 +206,7 @@ class UserContentProgressService
 
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressSaved($userId, $contentId));
+        event(new UserContentProgressSaved($user, $content));
 
         return true;
     }
@@ -285,10 +285,10 @@ class UserContentProgressService
             $this->entityManager->persist($userContentProgress);
             $this->entityManager->flush();
 
-            event(new UserContentProgressSaved($userId, $child->getId(), false));
+            event(new UserContentProgressSaved($user, $child, false));
         }
 
-        event(new UserContentProgressSaved($userId, $contentId));
+        event(new UserContentProgressSaved($user, $content));
 
         $this->entityManager->getCache()
             ->evictEntityRegion(Content::class);
@@ -339,14 +339,14 @@ class UserContentProgressService
                 $this->entityManager->remove($userContentProgress);
                 $this->entityManager->flush();
 
-                event(new UserContentProgressSaved($userId, $child->getId(), false));
+                event(new UserContentProgressSaved($user, $child, false));
             }
         }
 
         //delete user content progress cache
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressSaved($userId, $contentId));
+        event(new UserContentProgressSaved($user, $content));
 
         //delete user progress from cache
         $this->entityManager->getCache()
@@ -416,7 +416,7 @@ class UserContentProgressService
 
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressSaved($userId, $contentId));
+        event(new UserContentProgressSaved($user, $content));
 
         return true;
     }
@@ -429,18 +429,14 @@ class UserContentProgressService
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function bubbleProgress($userId, $contentId)
+    public function bubbleProgress($user, $content)
     {
-        $content =
-            $this->entityManager->getRepository(Content::class)
-                ->find($contentId);
-
         $allowedTypesForStarted = config('railcontent.allowed_types_for_bubble_progress')['started'];
         $allowedTypesForCompleted = config('railcontent.allowed_types_for_bubble_progress')['completed'];
         $allowedTypes = array_unique(array_merge($allowedTypesForStarted, $allowedTypesForCompleted));
 
         $parents = $this->contentService->getByChildIdWhereParentTypeIn(
-            $contentId,
+            $content->getId(),
             $allowedTypes
         );
 
@@ -449,12 +445,12 @@ class UserContentProgressService
             if ($content->isStarted() &&
                 !$parent->isStarted() &&
                 in_array($parent->getType(), $allowedTypesForStarted)) {
-                $this->startContent($parent->getId(), $userId);
+                $this->startContent($parent->getId(), $user->getId());
             }
 
             // get siblings
             $siblings = $parent->getChild() ?? $this->attachProgressToContents(
-                    $userId,
+                    $user->getId(),
                     $this->contentService->getByParentId($parent->getId())
                 );
 
@@ -472,7 +468,7 @@ class UserContentProgressService
                     }
                 }
                 if ($complete && !$parent->isCompleted() && in_array($parent->getType(), $allowedTypesForCompleted)) {
-                    $this->completeContent($parent->id(), $userId);
+                    $this->completeContent($parent->id(), $user->getId());
                 }
             }
 
@@ -483,8 +479,8 @@ class UserContentProgressService
             if ($alreadyStarted || $typeAllows) {
                 $this->saveContentProgress(
                     $parent->getId(),
-                    $this->getProgressPercentage($userId, $this->contentService->getByParentId($parent->getId())),
-                    $userId,
+                    $this->getProgressPercentage($user->getId(), $this->contentService->getByParentId($parent->getId())),
+                    $user->getId(),
                     true
                 );
             }

@@ -3,13 +3,22 @@
 namespace Railroad\Railcontent\Events;
 
 use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Entities\Content;
 
 class ContentUpdated extends Event
 {
-    public $contentId;
+    /**
+     * @var Content
+     */
+    public $content;
 
-    public function __construct($contentId)
+    /**
+     * ContentUpdated constructor.
+     *
+     * @param Content $content
+     */
+    public function __construct(Content $content)
     {
-        $this->contentId = $contentId;
+        $this->content = $content;
     }
 }

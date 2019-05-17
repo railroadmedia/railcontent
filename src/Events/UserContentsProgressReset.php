@@ -3,19 +3,22 @@
 namespace Railroad\Railcontent\Events;
 
 use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Entities\User;
 
 class UserContentsProgressReset extends Event
 {
-    public $userId;
-    public $contentIds;
+    public $user;
+    public $contents;
 
     /**
-     * @param int $userId
-     * @param array $contentIds
+     * UserContentsProgressReset constructor.
+     *
+     * @param User $user
+     * @param array $contents
      */
-    public function __construct($userId, array $contentIds)
+    public function __construct(User $user, array $contents)
     {
-        $this->userId = $userId;
-        $this->contentIds = $contentIds;
+        $this->user = $user;
+        $this->contents = $contents;
     }
 }

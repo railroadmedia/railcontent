@@ -3,28 +3,30 @@
 namespace Railroad\Railcontent\Events;
 
 use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Entities\Comment;
+use Railroad\Railcontent\Entities\User;
 
 class CommentLiked extends Event
 {
     /**
-     * @var integer
+     * @var Comment
      */
-    public $commentId;
+    public $comment;
 
     /**
-     * @var
+     * @var User
      */
-    public $userId;
+    public $user;
 
     /**
-     * CommentCreated constructor.
+     * CommentLiked constructor.
      *
-     * @param integer $commentId
-     * @param $userId
+     * @param Comment $comment
+     * @param User $user
      */
-    public function __construct($commentId, $userId)
+    public function __construct(Comment $comment, User $user)
     {
-        $this->commentId = $commentId;
-        $this->userId = $userId;
+        $this->comment = $comment;
+        $this->user = $user;
     }
 }

@@ -185,8 +185,9 @@ class ContentHierarchyService
      * @param $childId
      * @return bool|mixed
      */
-    public function repositionSiblings($childId)
+    public function repositionSiblings($child)
     {
+        $childId = $child->getId();
         $parentHierarchy = $this->contentHierarchyRepository->findOneBy(
             [
                 'child' => $childId,

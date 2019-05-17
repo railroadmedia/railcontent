@@ -85,7 +85,7 @@ class ContentDatumService
         $this->entityManager->flush();
 
         //call the event that save a new content version in the database
-        event(new ContentDatumCreated($contentId));
+        event(new ContentDatumCreated($content));
 
         $this->entityManager->getCache()
             ->evictEntityRegion(Content::class);
@@ -131,7 +131,6 @@ class ContentDatumService
         event(
             new ContentDatumUpdated(
                 $datum->getContent()
-                    ->getId()
             )
         );
 
@@ -166,7 +165,6 @@ class ContentDatumService
         event(
             new ContentDatumDeleted(
                 $datum->getContent()
-                    ->getId()
             )
         );
 

@@ -4,13 +4,22 @@ namespace Railroad\Railcontent\Events;
 
 
 use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Entities\Content;
 
 class ContentDatumCreated extends Event
 {
-    public $contentId;
+    /**
+     * @var Content
+     */
+    public $content;
 
-    public function __construct($contentId)
+    /**
+     * ContentDatumCreated constructor.
+     *
+     * @param Content $content
+     */
+    public function __construct(Content $content)
     {
-        $this->contentId = $contentId;
+        $this->content = $content;
     }
 }

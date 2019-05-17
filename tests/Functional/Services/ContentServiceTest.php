@@ -971,12 +971,14 @@ class ContentServiceTest extends RailcontentTestCase
     public function test_getPaginatedByTypesRecentUserProgressState()
     {
         $type = 'song';
-        $user = $this->fakeUser();
+        $user = $this->createAndLogInNewUser();
 
         $contents = $this->fakeContent(
             10,
             [
                 'type' => $type,
+                'status' => 'published',
+                'publishedOn' => Carbon::now()
             ]
         );
         $contentOtherType = $this->fakeContent();
@@ -984,7 +986,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->fakeUserContentProgress(
             1,
             [
-                'userId' => $user['id'],
+                'userId' => $user,
                 'content' => $contents[0],
                 'state' => 'started',
             ]
@@ -993,7 +995,7 @@ class ContentServiceTest extends RailcontentTestCase
         $this->fakeUserContentProgress(
             1,
             [
-                'userId' => $user['id'],
+                'userId' => $user,
                 'content' => $contents[1],
                 'state' => 'started',
                 'updatedOn' => Carbon::now(),
@@ -1003,22 +1005,18 @@ class ContentServiceTest extends RailcontentTestCase
         $this->fakeUserContentProgress(
             1,
             [
-                'userId' => $user['id'],
+                'userId' => $user,
                 'content' => $contentOtherType[0],
                 'state' => 'started',
             ]
         );
 
-        $results = $this->classBeingTested->getPaginatedByTypesRecentUserProgressState([$type], $user['id'], 'started');
+        $results = $this->classBeingTested->getPaginatedByTypesRecentUserProgressState([$type], $user, 'started');
 
-        $this->assertEquals(2, count($results));
+        $this->assertEquals(2, count($results->results()));
 
-        $updatedOn = Carbon::now();
-
-        foreach ($results as $result) {
-            $this->assertTrue($result->getUpdatedOn() <= $updatedOn);
-            $updatedOn = $result->getUpdatedOn();
-        }
+        $this->assertEquals($contents[1]->getId(), $results->results()[0]->getId());
+        $this->assertEquals($contents[0]->getId(), $results->results()[1]->getId());
     }
 
     public function test_countByTypesRecentUserProgressState()
