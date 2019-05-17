@@ -71,20 +71,13 @@ class ContentLikeService
     public function getQb($id, $request)
     {
         $alias = 'l';
-        $first = ($request->get('page', 1) - 1) * $request->get('limit', 10);
-        $orderBy = $request->get('sort', '-created_on');
-        if (strpos($orderBy, '_') !== false || strpos($orderBy, '-') !== false) {
-            $orderBy = camel_case($orderBy);
-        }
-        $orderBy = $alias . '.' . $orderBy;
 
         $qb = $this->contentLikeRepository->createQueryBuilder($alias);
 
         $qb->where($alias . '.content IN (:id)')
             ->setParameter('id', $id)
-            ->setMaxResults($request->get('limit', 10))
-            ->setFirstResult($first)
-            ->orderBy($orderBy, substr($request->get('sort', '-created_on'), 0, 1) !== '-' ? 'asc' : 'desc');
+            ->paginateByRequest($request)
+            ->orderByRequest($request, $alias);
 
         return $qb;
     }

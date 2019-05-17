@@ -249,18 +249,15 @@ class ContentService
         $orderByColumn = 'publishedOn',
         $orderByDirection = 'desc'
     ) {
+        $alias = config('railcontent.table_prefix') . 'content';
         return $this->contentRepository->build()
             ->restrictByUserAccess()
-            ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
-            ->andWhere(config('railcontent.table_prefix') . 'content' . '.status = :status')
+            ->andWhere($alias . '.type IN (:types)')
+            ->andWhere($alias . '.status = :status')
             ->andWhere(
-                config('railcontent.table_prefix') .
-                'content' .
-                '.publishedOn ' .
-                $publishedOnComparisonOperator .
-                ' :publishedOn'
+                $alias . '.publishedOn ' . $publishedOnComparisonOperator . ' :publishedOn'
             )
-            ->orderBy(config('railcontent.table_prefix') . 'content.' . $orderByColumn, $orderByDirection)
+            ->orderByColumn($alias, $orderByColumn, $orderByDirection)
             ->setParameter('status', $status)
             ->setParameter('publishedOn', $publishedOnValue)
             ->setParameter('types', $types)
@@ -334,7 +331,7 @@ class ContentService
                 ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
                 ->andWhere('p.parent = :parentId')
                 ->setParameter('parentId', $parentId)
-                ->orderBy('p.' . $orderBy, $orderByDirection)
+                ->orderByColumn('p', $orderBy, $orderByDirection)
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
@@ -365,9 +362,8 @@ class ContentService
                 ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
                 ->andWhere('p.parent = :parentId')
                 ->setParameter('parentId', $parentId)
-                ->orderBy('p.' . $orderBy, $orderByDirection)
-                ->setMaxResults($limit)
-                ->setFirstResult($skip * $limit)
+                ->orderByColumn('p', $orderBy, $orderByDirection)
+                ->paginate($limit, $skip)
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
@@ -398,7 +394,7 @@ class ContentService
                 ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types)
                 ->andWhere('p.parent = :parentId')
                 ->setParameter('parentId', $parentId)
-                ->orderBy('p.' . $orderBy, $orderByDirection)
+                ->orderByColumn('p', $orderBy, $orderByDirection)
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
@@ -433,9 +429,8 @@ class ContentService
                 ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types)
                 ->andWhere('p.parent = :parentId')
                 ->setParameter('parentId', $parentId)
-                ->orderBy('p.' . $orderBy, $orderByDirection)
-                ->setMaxResults($limit)
-                ->setFirstResult($skip * $limit)
+                ->orderByColumn('p', $orderBy, $orderByDirection)
+                ->paginate($limit, $skip)
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
@@ -484,7 +479,7 @@ class ContentService
                 ->restrictByUserAccess()
                 ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
                 ->whereIn('p.parent', $parentIds)
-                ->orderBy('p.' . $orderBy, $orderByDirection)
+                ->orderByColumn('p', $orderBy, $orderByDirection)
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
@@ -622,8 +617,7 @@ class ContentService
         $qb =
             $this->entityManager->getRepository(UserContentProgress::class)
                 ->createQueryBuilder($alias);
-        $qb->setFirstResult($skip)
-            ->setMaxResults($limit)
+        $qb->paginate($limit, $skip)
             ->join(
                 $alias . '.content',
                 config('railcontent.table_prefix') . 'content'
@@ -682,9 +676,8 @@ class ContentService
         $qb->setParameter('userId', $userId)
             ->setParameter('types', $types)
             ->setParameter('state', $state)
-            ->setFirstResult($skip)
-            ->setMaxResults($limit)
-            ->orderBy($alias . '.updatedOn', 'desc');
+            ->paginate($limit, $skip)
+            ->orderByColumn($alias, 'updatedOn', 'desc');
 
         $this->contentRepository->requireUserStates($state, $userId);
 

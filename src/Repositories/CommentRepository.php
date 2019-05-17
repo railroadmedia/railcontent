@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Railroad\Railcontent\Repositories\QueryBuilders\FromRequestRailcontentQueryBuilder;
 
 class CommentRepository extends EntityRepository
 {
@@ -56,6 +57,20 @@ class CommentRepository extends EntityRepository
     protected $orderDirection;
     protected $orderTableName;
     protected $orderTable;
+
+    /**
+     * @param string $alias
+     * @param null $indexBy
+     * @return \Doctrine\ORM\QueryBuilder|FromRequestRailcontentQueryBuilder
+     */
+    public function createQueryBuilder($alias, $indexBy = null)
+    {
+        $queryBuilder = new FromRequestRailcontentQueryBuilder($this->_em);
+        $queryBuilder->select($alias)
+            ->from($this->_entityName, $alias, $indexBy);
+        return $queryBuilder;
+    }
+
 
     /** Based on softDelete we soft delete or permanently delete the comment with all his replies
      *

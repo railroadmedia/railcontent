@@ -29,23 +29,51 @@ class FromRequestRailcontentQueryBuilder extends QueryBuilder
     /**
      * @param Request $request
      * @param $entityAlias
-     * @param string $defaultOrderByColumn
-     * @param string $defaultOrderByDirection
+     * @param string $defaultOrderByColumnAndDirection
      * @return $this
      */
     public function orderByRequest(
         Request $request,
         $entityAlias,
-        $defaultOrderByColumn = 'created_at',
-        $defaultOrderByDirection = 'desc'
+        $defaultOrderByColumnAndDirection = '-created_on'
     ) {
-        $orderByColumn = $request->get('order_by_column', $defaultOrderByColumn);
-        $orderByDirection = $request->get('order_by_direction', $defaultOrderByDirection);
 
-        if (strpos($orderByColumn, '_') !== false || strpos($orderByColumn, '-') !== false) {
-            $orderByColumn = camel_case($orderByColumn);
+        $orderBy = $request->get('sort', $defaultOrderByColumnAndDirection);
+        if (strpos($orderBy, '_') !== false || strpos($orderBy, '-') !== false) {
+            $orderBy = camel_case($orderBy);
         }
 
+        $orderByColumn = $entityAlias . '.' . $orderBy;
+        $orderByDirection = substr($orderBy, 0, 1) !== '-' ? 'asc' : 'desc';
+
+        $this->orderBy($orderByColumn, $orderByDirection);
+
+        return $this;
+    }
+
+    /**
+     * @param int $limit
+     * @param int $skip
+     * @return $this
+     */
+    public function paginate($limit = 10, $skip = 0)
+    {
+        $first = $skip * $limit;
+
+        $this->setMaxResults($limit)
+            ->setFirstResult($first);
+
+        return $this;
+    }
+
+    /**
+     * @param $entityAlias
+     * @param $orderByColumn
+     * @param $orderByDirection
+     * @return $this
+     */
+    public function orderByColumn($entityAlias, $orderByColumn, $orderByDirection)
+    {
         $orderByColumn = $entityAlias . '.' . $orderByColumn;
 
         $this->orderBy($orderByColumn, $orderByDirection);

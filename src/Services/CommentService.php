@@ -439,8 +439,7 @@ class CommentService
         }
 
         $qb->addSelect([$alias])
-            ->setMaxResults($limit)
-            ->setFirstResult($first)
+            ->paginate($limit, $page - 1)
             ->orderBy($orderByColumn, $orderByDirection);
 
         return $qb;

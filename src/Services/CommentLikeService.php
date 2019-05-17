@@ -93,12 +93,13 @@ class CommentLikeService
     {
         $commentIds = array_unique(array_values($commentIds));
         $commentLikes = [];
+        $alias = 'c';
 
         $qb =
-            $this->commentLikeRepository->createQueryBuilder('c')
-                ->where('c.comment IN (:commentIds)')
+            $this->commentLikeRepository->createQueryBuilder($alias)
+                ->where($alias . '.comment IN (:commentIds)')
                 ->setParameter('commentIds', $commentIds)
-                ->orderBy('c.createdOn', 'desc');
+                ->orderBy($alias . '.createdOn', 'desc');
         $results =
             $qb->getQuery()
                 ->getResult('Railcontent');

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentLikeRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_content_likes")
  *
