@@ -6,10 +6,14 @@ use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Railroad\Railcontent\Repositories\QueryBuilders\FromRequestRailcontentQueryBuilder;
+use Railroad\Railcontent\Entities\Comment;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
+use Railroad\Railcontent\Repositories\Traits\RailcontentCustomQueryBuilder;
 
 class CommentRepository extends EntityRepository
 {
+
+    use RailcontentCustomQueryBuilder;
 
     /** The value it's set in ContentPermissionMiddleware: if the user it's admin the value it's false, otherwise it's true.
      * If the value it' is false the comment with all his replies will be deleted.
@@ -59,18 +63,14 @@ class CommentRepository extends EntityRepository
     protected $orderTable;
 
     /**
-     * @param string $alias
-     * @param null $indexBy
-     * @return \Doctrine\ORM\QueryBuilder|FromRequestRailcontentQueryBuilder
+     * CommentRepository constructor.
+     *
+     * @param RailcontentEntityManager $entityManager
      */
-    public function createQueryBuilder($alias, $indexBy = null)
+    public function __construct(RailcontentEntityManager $entityManager)
     {
-        $queryBuilder = new FromRequestRailcontentQueryBuilder($this->_em);
-        $queryBuilder->select($alias)
-            ->from($this->_entityName, $alias, $indexBy);
-        return $queryBuilder;
+        parent::__construct($entityManager, $entityManager->getClassMetadata(Comment::class));
     }
-
 
     /** Based on softDelete we soft delete or permanently delete the comment with all his replies
      *

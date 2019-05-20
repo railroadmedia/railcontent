@@ -3,21 +3,22 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Doctrine\ORM\EntityRepository;
-use Railroad\Railcontent\Entities\ContentLikes;
+
+use Railroad\Railcontent\Entities\CommentLikes;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\Traits\RailcontentCustomQueryBuilder;
 
-class ContentLikeRepository extends EntityRepository
+class CommentLikeRepository extends EntityRepository
 {
     use RailcontentCustomQueryBuilder;
 
     /**
-     * ContentLikeRepository constructor.
+     * CommentLikeRepository constructor.
      *
      * @param RailcontentEntityManager $entityManager
      */
     public function __construct(RailcontentEntityManager $entityManager)
     {
-        parent::__construct($entityManager, $entityManager->getClassMetadata(ContentLikes::class));
+        parent::__construct($entityManager, $entityManager->getClassMetadata(CommentLikes::class));
     }
 }

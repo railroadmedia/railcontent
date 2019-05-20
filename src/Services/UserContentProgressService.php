@@ -59,14 +59,14 @@ class UserContentProgressService
         ContentHierarchyService $contentHierarchyService,
         RailcontentEntityManager $entityManager,
         ContentService $contentService,
-        UserProviderInterface $userProvider
+        UserProviderInterface $userProvider,
+        UserContentProgressRepository $userContentProgressRepository
     ) {
         $this->entityManager = $entityManager;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentService = $contentService;
         $this->userProvider = $userProvider;
-
-        $this->userContentRepository = $this->entityManager->getRepository(UserContentProgress::class);
+        $this->userContentRepository = $userContentProgressRepository;
     }
 
     /**
@@ -101,7 +101,7 @@ class UserContentProgressService
                 ]
             )
             ->setMaxResults(1)
-            ->orderBy($alias . '.updatedOn', 'desc');
+            ->orderByColumn($alias , 'updatedOn', 'desc');
 
         return $qb->getQuery()
             ->getSingleResult('Railcontent');
@@ -479,7 +479,10 @@ class UserContentProgressService
             if ($alreadyStarted || $typeAllows) {
                 $this->saveContentProgress(
                     $parent->getId(),
-                    $this->getProgressPercentage($user->getId(), $this->contentService->getByParentId($parent->getId())),
+                    $this->getProgressPercentage(
+                        $user->getId(),
+                        $this->contentService->getByParentId($parent->getId())
+                    ),
                     $user->getId(),
                     true
                 );
@@ -595,7 +598,7 @@ class UserContentProgressService
                 ]
             )
             ->setMaxResults($limit)
-            ->orderBy($orderByColumn, $orderByDirection);
+            ->orderByColumn($alias, $orderByColumn, $orderByDirection);
 
         return $qb->getQuery()
             ->getResult('Railcontent');

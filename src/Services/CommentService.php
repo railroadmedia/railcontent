@@ -385,7 +385,6 @@ class CommentService
         $aliasContent = 'content';
 
         $orderByColumn = $alias . '.' . $orderByColumn;
-        $first = ($page - 1) * $limit;
 
         $qb = $this->commentRepository->createQueryBuilder($alias);
 

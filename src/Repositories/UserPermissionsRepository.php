@@ -5,9 +5,12 @@ namespace Railroad\Railcontent\Repositories;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
+use Railroad\Railcontent\Repositories\Traits\RailcontentCustomQueryBuilder;
 
 class UserPermissionsRepository extends EntityRepository
 {
+
+    use RailcontentCustomQueryBuilder;
 
     /** Pull the user permissions record
      *
@@ -23,7 +26,7 @@ class UserPermissionsRepository extends EntityRepository
             $user = app()->make(UserProviderInterface::class)->getUserById($userId);
             $qb->where('up.user = :user')
                 ->setParameter('user', $user)
-            ->orderBy('up.expirationDate', 'asc');
+            ->orderByColumn('up','expirationDate', 'asc');
         }
 
         if ($onlyActive) {

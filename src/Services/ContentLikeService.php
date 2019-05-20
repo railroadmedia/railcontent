@@ -11,6 +11,7 @@ use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentLikes;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
+use Railroad\Railcontent\Repositories\ContentLikeRepository;
 
 class ContentLikeService
 {
@@ -40,12 +41,14 @@ class ContentLikeService
      * @param RailcontentEntityManager $entityManager
      * @param UserProviderInterface $userProvider
      */
-    public function __construct(RailcontentEntityManager $entityManager, UserProviderInterface $userProvider)
-    {
+    public function __construct(
+        RailcontentEntityManager $entityManager,
+        UserProviderInterface $userProvider,
+        ContentLikeRepository $contentLikeRepository
+    ) {
         $this->entityManager = $entityManager;
         $this->userProvider = $userProvider;
-
-        $this->contentLikeRepository = $this->entityManager->getRepository(ContentLikes::class);
+        $this->contentLikeRepository = $contentLikeRepository;
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
     }
 

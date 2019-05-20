@@ -203,8 +203,7 @@ class ContentRepository extends EntityRepository
 
         $qb =
             $this->build()
-                ->setMaxResults($this->limit)
-                ->setFirstResult($first)
+                ->paginate($this->limit, $this->page - 1)
                 ->restrictByUserAccess()
                 ->restrictByTypes($this->typesToInclude)
                 ->includeByUserStates($this->includedUserStates)

@@ -3,11 +3,20 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Doctrine\ORM\EntityRepository;
-
+use Railroad\Railcontent\Entities\UserContentProgress;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
+use Railroad\Railcontent\Repositories\Traits\RailcontentCustomQueryBuilder;
 
 class UserContentProgressRepository extends EntityRepository
 {
+    use RailcontentCustomQueryBuilder;
+
     public static $cache = [];
+
+    public function __construct(RailcontentEntityManager $entityManager)
+    {
+        parent::__construct($entityManager, $entityManager->getClassMetadata(UserContentProgress::class));
+    }
 
     /**
      * @param $userId

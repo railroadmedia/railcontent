@@ -1,12 +1,26 @@
 <?php
 
-namespace Railroad\Railcontent\Repositories\QueryBuilders;
+namespace Railroad\Railcontent\Repositories\Traits;
 
 use \Doctrine\ORM\QueryBuilder;
 use Illuminate\Http\Request;
+use Railroad\Railcontent\Repositories\QueryBuilders\FromRequestRailcontentQueryBuilder;
 
-class FromRequestRailcontentQueryBuilder extends QueryBuilder
+trait RailcontentCustomQueryBuilder
 {
+    /**
+     * @param string $alias
+     * @param null $indexBy
+     * @return FromRequestEcommerceQueryBuilder
+     */
+    public function createQueryBuilder($alias, $indexBy = null)
+    {
+        $queryBuilder = new FromRequestRailcontentQueryBuilder($this->getEntityManager());
+        $queryBuilder->select($alias)
+            ->from($this->getEntityName(), $alias, $indexBy);
+        return $queryBuilder;
+    }
+
     /**
      * @param Request $request
      * @param int $defaultPage
@@ -75,26 +89,6 @@ class FromRequestRailcontentQueryBuilder extends QueryBuilder
     public function orderByColumn($entityAlias, $orderByColumn, $orderByDirection)
     {
         $orderByColumn = $entityAlias . '.' . $orderByColumn;
-
-        $this->orderBy($orderByColumn, $orderByDirection);
-
-        return $this;
-    }
-
-    /**
-     * @param $entityAlias
-     * @param $orderByColumn
-     * @param $orderByDirection
-     * @return $this
-     */
-    public function sorted($entityAlias, $orderBy)
-    {
-        if (strpos($orderBy, '_') !== false || strpos($orderBy, '-') !== false) {
-            $orderBy = camel_case($orderBy);
-        }
-
-        $orderByColumn = $entityAlias . '.' . $orderBy;
-        $orderByDirection = substr($orderBy, 0, 1) !== '-' ? 'asc' : 'desc';
 
         $this->orderBy($orderByColumn, $orderByDirection);
 

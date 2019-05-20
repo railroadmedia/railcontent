@@ -10,10 +10,12 @@ use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\Traits\RailcontentCustomQueryBuilder;
 
-
-class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
+class ContentQueryBuilder extends \Doctrine\ORM\QueryBuilder
 {
+    use RailcontentCustomQueryBuilder;
+
     /**
      * @param array $slugHierarchy
      * @return $this

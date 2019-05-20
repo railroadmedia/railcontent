@@ -5,10 +5,9 @@ namespace Railroad\Railcontent\Entities;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Railroad\Railcontent\Contracts\UserInterface;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\CommentLikeRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_comment_likes")
  *

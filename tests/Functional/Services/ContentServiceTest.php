@@ -493,9 +493,18 @@ class ContentServiceTest extends RailcontentTestCase
             ]
         );
 
+        $this->fakeUserContentProgress(
+            1,
+            [
+                'userId' => $user['id'],
+                'content' => $contents[1],
+                'state' => 'started',
+            ]
+        );
+
         $results = $this->classBeingTested->getPaginatedByTypeUserProgressState($type, $user['id'], 'started');
 
-        $this->assertEquals(1, count($results));
+        $this->assertEquals(2, count($results));
     }
 
     public function test_getByContentFieldValuesForTypes()

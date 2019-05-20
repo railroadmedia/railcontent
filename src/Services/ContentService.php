@@ -574,18 +574,21 @@ class ContentService
         $qb =
             $this->entityManager->getRepository(UserContentProgress::class)
                 ->createQueryBuilder($alias);
-        $qb->setFirstResult($skip)
-            ->setMaxResults($limit)
+
+        $qb
             ->join(
                 $alias . '.content',
                 config('railcontent.table_prefix') . 'content'
             );
+
         $qb->where($alias . '.user = :userId')
             ->andWhere($alias . '.state = :state')
             ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
             ->setParameter('userId', $userId)
             ->setParameter('state', $state)
             ->setParameter('types', $type);
+
+        $qb->paginate($limit, $skip);
 
         $results =
             $qb->getQuery()

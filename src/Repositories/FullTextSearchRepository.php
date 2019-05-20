@@ -98,9 +98,6 @@ class FullTextSearchRepository extends EntityRepository
         }
 
         foreach ($values as $valueIndex => $value) {
-            if(is_object($value) ) {
-                dd($values[$valueIndex]);
-            }
             $values[$valueIndex] = str_replace('/', '_', $value);
         }
 

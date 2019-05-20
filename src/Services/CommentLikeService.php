@@ -11,6 +11,7 @@ use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\CommentUnLiked;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
+use Railroad\Railcontent\Repositories\CommentRepository;
 
 class CommentLikeService
 {
@@ -40,13 +41,17 @@ class CommentLikeService
      * @param RailcontentEntityManager $entityManager
      * @param UserProviderInterface $userProvider
      */
-    public function __construct(RailcontentEntityManager $entityManager, UserProviderInterface $userProvider)
-    {
+    public function __construct(
+        RailcontentEntityManager $entityManager,
+        UserProviderInterface $userProvider,
+        CommentRepository $commentRepository
+    ) {
         $this->entityManager = $entityManager;
         $this->userProvider = $userProvider;
+        $this->commentRepository = $commentRepository;
 
         $this->commentLikeRepository = $this->entityManager->getRepository(CommentLikes::class);
-        $this->commentRepository = $this->entityManager->getRepository(Comment::class);
+
     }
 
     /**
@@ -99,7 +104,7 @@ class CommentLikeService
             $this->commentLikeRepository->createQueryBuilder($alias)
                 ->where($alias . '.comment IN (:commentIds)')
                 ->setParameter('commentIds', $commentIds)
-                ->orderBy($alias . '.createdOn', 'desc');
+                ->orderByColumn($alias , 'createdOn', 'desc');
         $results =
             $qb->getQuery()
                 ->getResult('Railcontent');
