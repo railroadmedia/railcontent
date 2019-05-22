@@ -6,9 +6,9 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
-use Railroad\Railcontent\Services\ConfigService;
 
 class ContentDatumControllerTest extends RailcontentTestCase
 {

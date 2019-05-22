@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Services\CommentService;
-
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentServiceTest extends RailcontentTestCase

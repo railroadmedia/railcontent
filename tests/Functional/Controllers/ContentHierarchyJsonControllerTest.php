@@ -3,10 +3,6 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Faker\ORM\Doctrine\Populator;
-use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\ContentHierarchy;
-
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentHierarchyJsonControllerTest extends RailcontentTestCase

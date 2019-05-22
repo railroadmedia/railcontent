@@ -3,10 +3,6 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Doctrine\DBAL\Logging\DebugStack;
-use Doctrine\ORM\EntityManager;
-use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Response;

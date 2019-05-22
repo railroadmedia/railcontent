@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDatumCreated;
@@ -13,7 +14,6 @@ use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
-use Illuminate\Support\Facades\Event;
 
 class ContentEventsTest extends RailcontentTestCase
 {

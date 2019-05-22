@@ -2,11 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
-use Faker\ORM\Doctrine\Populator;
-use Railroad\Railcontent\Entities\Comment;
-use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Repositories\ContentRepository;
-
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentLikeJsonControllerTest extends RailcontentTestCase

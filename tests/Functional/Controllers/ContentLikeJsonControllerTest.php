@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Railroad\Railcontent\Repositories\ContentRepository;
-
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentLikeJsonControllerTest extends RailcontentTestCase

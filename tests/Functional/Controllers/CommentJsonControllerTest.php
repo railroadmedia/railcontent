@@ -9,23 +9,17 @@ use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Tests\Fixtures\UserProvider;
-use Railroad\Railcontent\Tests\Hydrators\CommentFakeDataHydrator;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
-use Railroad\Railcontent\Transformers\CommentTransformer;
 
 class CommentJsonControllerTest extends RailcontentTestCase
 {
     protected function setUp()
     {
         parent::setUp();
-//dd($this->entityManager);
-        //$this->fakeDataHydrator = new CommentFakeDataHydrator($this->entityManager);
     }
 
     public function test_add_comment_response()
     {
-
         $userId = $this->createAndLogInNewUser();
 
         $content = $this->fakeContent(
@@ -69,7 +63,6 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(200, $response->getStatusCode());
 
         $this->assertEquals($attributes['comment'], $response->decodeResponseJson('data')['attributes']['comment']);
-
     }
 
     public function test_add_comment_on_not_commentable_type_response()
@@ -137,7 +130,6 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
     public function test_update_my_comment_response()
     {
-
         $userId = $this->createAndLogInNewUser();
 
         $comment = $this->fakeComment(1, [

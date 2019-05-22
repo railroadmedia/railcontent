@@ -2,14 +2,10 @@
 
 namespace Railroad\Railcontent\Tests\Fixtures;
 
-use Illuminate\Support\Facades\DB;
-use Railroad\Railcontent\Contracts\UserInterface;
-use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Doctrine\Common\Inflector\Inflector;
-use Railroad\Doctrine\Contracts\UserEntityInterface;
-use Railroad\Doctrine\Contracts\UserProviderInterface as DoctrineUserProviderInterface;
-use Railroad\DoctrineArrayHydrator\Contracts\UserProviderInterface as DoctrineArrayHydratorUserProviderInterface;
+use Illuminate\Support\Facades\DB;
 use League\Fractal\TransformerAbstract;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 
 class UserProvider implements
     UserProviderInterface

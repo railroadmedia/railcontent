@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Faker\ORM\Doctrine\Populator;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentHierarchy;
-
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 

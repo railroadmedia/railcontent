@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Tests\Hydrators;
 
 use Railroad\Doctrine\Hydrators\FakeDataHydrator;
-use Railroad\Railcontent\Entities\Content;
 
 class ContentFakeDataHydrator extends FakeDataHydrator
 {

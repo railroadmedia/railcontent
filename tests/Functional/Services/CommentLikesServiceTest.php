@@ -2,13 +2,8 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Repositories;
 
-use Faker\ORM\Doctrine\Populator;
-use Railroad\Railcontent\Entities\Comment;
-use Railroad\Railcontent\Entities\CommentLikes;
-use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Services\CommentLikeService;
 use Railroad\Railcontent\Services\CommentService;
-
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class CommentLikesServiceTest extends RailcontentTestCase
