@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Entities\Traits;
 
 use DateTime;
-use Railroad\Railcontent\Entities\Content;
 
 trait ContentFieldsProperties
 {

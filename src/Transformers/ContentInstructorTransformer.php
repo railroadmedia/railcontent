@@ -6,8 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Collection;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
-use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Entities\ContentInstructor;
 
 class ContentInstructorTransformer extends TransformerAbstract

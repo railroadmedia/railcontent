@@ -15,8 +15,6 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
      */
     private $vimeo;
 
-    private $contentService;
-
     /**
      * @var Repository
      */

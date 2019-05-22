@@ -172,7 +172,7 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @param string $key
+     * @param string $slug
      */
     public function setSlug(string $slug)
     {
@@ -189,7 +189,7 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @param string $key
+     * @param string $type
      */
     public function setType(string $type)
     {
@@ -205,7 +205,7 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @param string $key
+     * @param string $sort
      */
     public function setSort(string $sort)
     {
@@ -222,7 +222,7 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @param string $key
+     * @param string $status
      */
     public function setStatus(string $status)
     {
@@ -238,7 +238,7 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @param string $key
+     * @param string $brand
      */
     public function setBrand(string $brand)
     {
@@ -255,7 +255,7 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @param string $key
+     * @param string $language
      */
     public function setLanguage(string $language)
     {
@@ -344,7 +344,6 @@ class Content extends ArrayExpressible
 
     /**
      * @param ContentData $data
-     * @return Content
      */
     public function addData(ContentData $data)
     {
@@ -352,8 +351,7 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @param ContentData $data
-     * @return Content
+     * @param $child
      */
     public function addChild($child)
     {
@@ -380,7 +378,7 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @param ContentInstructor $contentInstructor
+     * @param ContentHierarchy $parent
      */
     public function removeParent(ContentHierarchy $parent)
     {

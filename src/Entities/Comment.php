@@ -109,7 +109,7 @@ class Comment
     }
 
     /**
-     * @param mixed $content
+     * @param $comment
      */
     public function setComment($comment)
     {
@@ -125,7 +125,7 @@ class Comment
     }
 
     /**
-     * @param mixed $content
+     * @param $temporaryDisplayName
      */
     public function setTemporaryDisplayName($temporaryDisplayName)
     {
@@ -133,7 +133,7 @@ class Comment
     }
 
     /**
-     * @param UserInterface $user
+     * @param User $user
      */
     public function setUser(User $user)
     {
@@ -141,7 +141,7 @@ class Comment
     }
 
     /**
-     * @return UserInterface
+     * @return User
      */
     public function getUser(): User
     {
@@ -173,7 +173,7 @@ class Comment
     }
 
     /**
-     * @param mixed $content
+     * @param Comment|null $parent
      */
     public function setParent(?Comment $parent)
     {
@@ -195,10 +195,7 @@ class Comment
     }
 
     /**
-     * Sets createdOn.
-     *
-     * @param  string $createdOn
-     * @return $this
+     * @param $createdOn
      */
     public function setCreatedOn($createdOn)
     {

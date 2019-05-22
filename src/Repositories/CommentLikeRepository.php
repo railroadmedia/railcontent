@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Doctrine\ORM\EntityRepository;
-
 use Railroad\Railcontent\Entities\CommentLikes;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\Traits\RailcontentCustomQueryBuilder;

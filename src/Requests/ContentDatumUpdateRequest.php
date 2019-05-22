@@ -18,7 +18,6 @@ class ContentDatumUpdateRequest extends CustomFormRequest
         //set the general validation rules
         $this->setGeneralRules(
             [
-               // 'id' => 'required|max:255|exists:' . ConfigService::$tableContentData . ',id',
                 'data.attributes.key' => 'max:255',
                 'data.attributes.position' => 'nullable|numeric|min:0',
                 'data.relationships.content.data.id' => 'numeric|exists:' . config('railcontent.database_connection_name') . '.' .

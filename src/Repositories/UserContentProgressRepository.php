@@ -13,6 +13,11 @@ class UserContentProgressRepository extends EntityRepository
 
     public static $cache = [];
 
+    /**
+     * UserContentProgressRepository constructor.
+     *
+     * @param RailcontentEntityManager $entityManager
+     */
     public function __construct(RailcontentEntityManager $entityManager)
     {
         parent::__construct($entityManager, $entityManager->getClassMetadata(UserContentProgress::class));

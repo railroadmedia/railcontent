@@ -54,6 +54,7 @@ class UserContentProgressService
      * @param RailcontentEntityManager $entityManager
      * @param ContentService $contentService
      * @param UserProviderInterface $userProvider
+     * @param UserContentProgressRepository $userContentProgressRepository
      */
     public function __construct(
         ContentHierarchyService $contentHierarchyService,
@@ -422,8 +423,8 @@ class UserContentProgressService
     }
 
     /**
-     * @param $userId
-     * @param $contentId
+     * @param $user
+     * @param $content
      * @return bool
      * @throws NonUniqueResultException
      * @throws ORMException
@@ -568,19 +569,13 @@ class UserContentProgressService
         $id,
         array $types,
         $state,
-        $orderByColumn = 'updated_on',
-        $orderByDirection = 'desc',
+        $orderByColumn = '-updated_on',
         $limit = 25
     ) {
         $user = $this->userProvider->getUserById($id);
 
         $alias = 'uc';
         $aliasContent = 'c';
-
-        if (strpos($orderByColumn, '_') !== false || strpos($orderByColumn, '-') !== false) {
-            $orderByColumn = camel_case($orderByColumn);
-        }
-        $orderByColumn = $alias . '.' . $orderByColumn;
 
         $qb = $this->userContentRepository->createQueryBuilder($alias);
 
@@ -598,7 +593,7 @@ class UserContentProgressService
                 ]
             )
             ->setMaxResults($limit)
-            ->orderByColumn($alias, $orderByColumn, $orderByDirection);
+            ->sorted($alias, $orderByColumn);
 
         return $qb->getQuery()
             ->getResult('Railcontent');

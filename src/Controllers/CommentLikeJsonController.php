@@ -2,11 +2,15 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Requests\CommentLikeRequest;
 use Railroad\Railcontent\Requests\CommentUnLikeRequest;
 use Railroad\Railcontent\Services\CommentLikeService;
 use Railroad\Railcontent\Services\ResponseService;
+use Spatie\Fractal\Fractal;
 
 class CommentLikeJsonController extends Controller
 {
@@ -30,9 +34,9 @@ class CommentLikeJsonController extends Controller
      *
      * @param CommentLikeRequest $request
      * @param $id
-     * @return \Spatie\Fractal\Fractal
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @return Fractal
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function store(CommentLikeRequest $request, $id)
     {
@@ -45,9 +49,9 @@ class CommentLikeJsonController extends Controller
      *
      * @param CommentUnLikeRequest $request
      * @param $id
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @return JsonResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete(CommentUnLikeRequest $request, $id)
     {

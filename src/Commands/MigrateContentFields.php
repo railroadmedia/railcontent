@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Commands;
 
-use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
@@ -36,9 +35,10 @@ class MigrateContentFields extends Command
     private $entityManager;
 
     /**
-     * Create a new command instance.
+     * MigrateContentFields constructor.
      *
-     * @return void
+     * @param DatabaseManager $databaseManager
+     * @param RailcontentEntityManager $entityManager
      */
     public function __construct(DatabaseManager $databaseManager, RailcontentEntityManager $entityManager)
     {

@@ -5,6 +5,8 @@ namespace Railroad\Railcontent\Commands;
 use Carbon\Carbon;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Illuminate\Console\Command;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\SearchIndex;
@@ -58,9 +60,8 @@ class CreateSearchIndexes extends Command
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return mixed
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function handle()
     {
@@ -75,7 +76,7 @@ class CreateSearchIndexes extends Command
             $this->contentRepository->build()
                 ->restrictByTypes(config('railcontent.searchable_content_types'))
                 ->restrictBrand()
-                ->orderByColumn(config('railcontent.table_prefix') . 'content','id','asc')
+                ->orderByColumn(config('railcontent.table_prefix') . 'content', 'id', 'asc')
                 ->getQuery()
                 ->getResult();
 

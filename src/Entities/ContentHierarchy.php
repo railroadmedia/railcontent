@@ -66,6 +66,7 @@ class ContentHierarchy
 
         $parent->addChild($this);
     }
+
     /**
      * @return mixed
      */
@@ -93,7 +94,7 @@ class ContentHierarchy
     }
 
     /**
-     * @param mixed $content
+     * @param $childPosition
      */
     public function setChildPosition($childPosition)
     {

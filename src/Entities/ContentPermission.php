@@ -62,7 +62,7 @@ class ContentPermission
     }
 
     /**
-     * @param string $key
+     * @param $contentType
      */
     public function setContentType($contentType)
     {
@@ -78,7 +78,7 @@ class ContentPermission
     }
 
     /**
-     * @param string $value
+     * @param string $brand
      */
     public function setBrand(string $brand)
     {
@@ -99,9 +99,6 @@ class ContentPermission
     public function setContent(?Content $content)
     {
         $this->content = $content;
-//        if ($content) {
-//            $content->addPermission($this);
-//        }
     }
 
     /**

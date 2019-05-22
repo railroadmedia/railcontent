@@ -2,13 +2,16 @@
 
 namespace Railroad\Railcontent\Commands;
 
-use Carbon\Carbon;
 use DateInterval;
+use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Exception;
+use Google_Client;
 use Google_Service_YouTube;
 use Illuminate\Console\Command;
-
 use Railroad\Railcontent\Services\ContentService;
-use Google_Client;
+use ReflectionException;
 
 class CreateYoutubeVideoContentRecords extends Command
 {
@@ -33,6 +36,9 @@ class CreateYoutubeVideoContentRecords extends Command
      */
     protected $contentService;
 
+    /**
+     * @var string
+     */
     protected $scope = 'https://www.googleapis.com/auth/youtube';
 
     /**
@@ -48,9 +54,10 @@ class CreateYoutubeVideoContentRecords extends Command
     }
 
     /**
-     * Execute the console command.
-     *
-     * @return mixed
+     * @throws DBALException
+     * @throws ORMException
+     * @throws OptimisticLockException
+     * @throws ReflectionException
      */
     public function handle()
     {
@@ -221,10 +228,11 @@ class CreateYoutubeVideoContentRecords extends Command
         $this->info('CreateYoutubeVideoContentRecords complete.');
     }
 
-    /** Convert video's duration from ISO 8601 to seconds
+    /**Convert video's duration from ISO 8601 to seconds
      *
      * @param string $youtube_time - ISO 8601
      * @return float|int
+     * @throws Exception
      */
     function covtime($youtube_time)
     {

@@ -7,7 +7,6 @@ use Illuminate\Support\Collection;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\ContentTag;
-use Railroad\Railcontent\Entities\ContentTopic;
 
 class ContentTagTransformer extends TransformerAbstract
 {

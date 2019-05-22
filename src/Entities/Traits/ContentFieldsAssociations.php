@@ -247,7 +247,7 @@ trait ContentFieldsAssociations
     }
 
     /**
-     * @param ContentTag $contentTopic
+     * @param ContentTag $contentTag
      */
     public function removeTag(ContentTag $contentTag)
     {

@@ -6,7 +6,6 @@ namespace Railroad\Railcontent\Requests;
 use Illuminate\Validation\Rule;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
-
 class CommentUpdateRequest extends FormRequest
 {
     /**

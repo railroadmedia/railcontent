@@ -158,8 +158,9 @@ class CustomFormRequest extends FormRequest
 
     /** Get the content's type based on content id for DatumRequest and FieldRequest instances
      *
-     * @param ContentDatumCreateRequest|ContentFieldCreateRequest $request
+     * @param $request
      * @return string
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     private function getContentTypeVal($request)
     {
@@ -485,6 +486,14 @@ class CustomFormRequest extends FormRequest
         $contentValidationRequired = $contentValidationRequired && isset($rulesForBrand[$content->getType()]);
     }
 
+    /**
+     * @param Request $request
+     * @return array|mixed|Content|\Railroad\Railcontent\Entities\ContentEntity|null
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \ReflectionException
+     */
     private function getContentFromRequest(Request $request)
     {
         if ($request instanceof ContentCreateRequest) {
@@ -545,6 +554,11 @@ class CustomFormRequest extends FormRequest
         return [];
     }
 
+    /**
+     * @param $contentType
+     * @param $rulesForBrand
+     * @return array
+     */
     private function getStatusRestrictionsForType($contentType, $rulesForBrand)
     {
         $restrictions = [];
@@ -555,6 +569,12 @@ class CustomFormRequest extends FormRequest
         return $restrictions;
     }
 
+    /**
+     * @param $fieldOrDatumValue
+     * @param $rule
+     * @param $key
+     * @param int $position
+     */
     public function validateRule($fieldOrDatumValue, $rule, $key, $position = 0)
     {
         try {
@@ -590,6 +610,13 @@ class CustomFormRequest extends FormRequest
         }
     }
 
+    /**
+     * @param $fieldOrDatumValue
+     * @param $rule
+     * @param $key
+     * @param int $position
+     * @return array
+     */
     public function validateRuleAndGetErrors($fieldOrDatumValue, $rule, $key, $position = 0)
     {
         try {

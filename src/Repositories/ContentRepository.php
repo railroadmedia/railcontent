@@ -10,9 +10,12 @@ use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
+use Railroad\Railcontent\Repositories\Traits\RailcontentCustomQueryBuilder;
 
 class ContentRepository extends EntityRepository
 {
+    use RailcontentCustomQueryBuilder;
+
     /**
      * If this is false content with any status will be pulled. If its an array, only content with those
      * statuses will be pulled.
@@ -58,10 +61,9 @@ class ContentRepository extends EntityRepository
     private $requiredParentIds = [];
 
     /**
-     * @param int $id
-     * @param string $type
-     * @param string $columnName
-     * @param string $columnValue
+     * @param $type
+     * @param $columnName
+     * @param $columnValue
      * @param int $siblingPairLimit
      * @param string $orderColumn
      * @param string $orderDirection

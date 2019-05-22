@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\ORM\NonUniqueResultException;
 use Railroad\Railcontent\Entities\SearchIndex;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -41,8 +42,7 @@ class FullTextSearchService
     }
 
     /** Full text search by term
-     *
-     * @param string $term
+     * @param $term
      * @param int $page
      * @param int $limit
      * @param array $contentTypes
@@ -50,8 +50,8 @@ class FullTextSearchService
      * @param string $sort
      * @param null $dateTimeCutoff
      * @param null $brands
-     * @return array|null
-     * @internal param null $brand
+     * @return array
+     * @throws NonUniqueResultException
      */
     public function search(
         $term,

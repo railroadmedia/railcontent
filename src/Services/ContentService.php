@@ -1353,7 +1353,6 @@ class ContentService
     /**
      * @param $types
      * @return mixed
-     * @throws NonUniqueResultException
      */
     public function countByTypes($types)
     {

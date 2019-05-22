@@ -10,10 +10,12 @@ class User implements UserEntityInterface
      * @var int
      */
     private $id;
+
     /**
      * @var string
      */
     private $email;
+
     /**
      * User constructor.
      *
@@ -25,34 +27,41 @@ class User implements UserEntityInterface
         $this->id = $id;
         $this->email = $email;
     }
+
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
+    : int
     {
         return $this->id;
     }
+
     /**
      * @param mixed $id
      */
-    public function setId($id): void
-    {
+    public function setId($id)
+    : void {
         $this->id = $id;
     }
+
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail()
+    : string
     {
         return $this->email;
     }
+
     /**
      * @param mixed $email
      */
-    public function setEmail($email): void
-    {
+    public function setEmail($email)
+    : void {
         $this->email = $email;
     }
+
     /**
      * @return string
      */

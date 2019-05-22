@@ -7,7 +7,6 @@ use Illuminate\Support\Collection;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\ContentPermission;
-use Railroad\Railcontent\Entities\Permission;
 
 class ContentPermissionTransformer extends TransformerAbstract
 {

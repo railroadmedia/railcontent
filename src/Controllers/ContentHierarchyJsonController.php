@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Controllers;
 
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Permissions\Exceptions\NotAllowedException;
@@ -64,7 +65,7 @@ class ContentHierarchyJsonController extends Controller
      * @param Request $request
      * @param $parentId
      * @param $childId
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      * @throws NotAllowedException
      * @throws ORMException
      * @throws OptimisticLockException

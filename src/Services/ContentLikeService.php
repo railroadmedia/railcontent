@@ -40,6 +40,7 @@ class ContentLikeService
      *
      * @param RailcontentEntityManager $entityManager
      * @param UserProviderInterface $userProvider
+     * @param ContentLikeRepository $contentLikeRepository
      */
     public function __construct(
         RailcontentEntityManager $entityManager,

@@ -76,7 +76,7 @@ class ContentExercise extends ArrayExpressible
     }
 
     /**
-     * @param mixed $content
+     * @param Content $exercise
      */
     public function setExercise(Content $exercise)
     {

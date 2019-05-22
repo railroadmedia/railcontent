@@ -4,6 +4,8 @@ namespace Railroad\Railcontent\Services;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentLikes;
@@ -40,6 +42,7 @@ class CommentLikeService
      *
      * @param RailcontentEntityManager $entityManager
      * @param UserProviderInterface $userProvider
+     * @param CommentRepository $commentRepository
      */
     public function __construct(
         RailcontentEntityManager $entityManager,
@@ -129,8 +132,8 @@ class CommentLikeService
      * @param $commentId
      * @param $userId
      * @return array|object[]|CommentLikes
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function create($commentId, $userId)
     {
@@ -172,8 +175,8 @@ class CommentLikeService
      * @param $commentId
      * @param $userId
      * @return bool
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function delete($commentId, $userId)
     {

@@ -48,6 +48,7 @@ class FullTextSearchJsonController extends Controller
             $request->get('brands', null)
         );
 
-        return ResponseService::content($contentsData['results'], $contentsData['qb'])->respond();
+        return ResponseService::content($contentsData['results'], $contentsData['qb'])
+            ->respond();
     }
 }

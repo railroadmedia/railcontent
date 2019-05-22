@@ -38,8 +38,8 @@ class ContentDatumService
     }
 
     /**
-     * @param integer $id
-     * @return array
+     * @param $id
+     * @return object|null
      */
     public function get($id)
     {
@@ -96,7 +96,7 @@ class ContentDatumService
     /**
      * @param $id
      * @param array $data
-     * @return array
+     * @return object|null
      * @throws ORMException
      * @throws OptimisticLockException
      */

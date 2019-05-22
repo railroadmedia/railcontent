@@ -79,8 +79,7 @@ class RailcontentServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
         }
 
-        //load package routes file
-        // routes
+        //load package routes
         if (config('railcontent.autoload_all_routes') == true) {
             $this->routeRegistar->registerAll();
         }
@@ -111,7 +110,6 @@ class RailcontentServiceProvider extends ServiceProvider
         } else {
             $proxyDir = sys_get_temp_dir() . '/railroad/railcontent/proxies';
         }
-
 
         // setup redis
         $redis = new Redis();

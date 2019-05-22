@@ -50,7 +50,7 @@ class Permission extends ArrayExpressible
     }
 
     /**
-     * @param string $key
+     * @param string $name
      */
     public function setName(string $name)
     {
@@ -66,7 +66,7 @@ class Permission extends ArrayExpressible
     }
 
     /**
-     * @param string $key
+     * @param string $brand
      */
     public function setBrand(string $brand)
     {

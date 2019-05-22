@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Services\ConfigService;
 
 class ContentFieldCreateRequest extends CustomFormRequest
@@ -14,8 +13,6 @@ class ContentFieldCreateRequest extends CustomFormRequest
      */
     public function rules()
     {
-        //$this->validateContent($this);
-
         //set the general validation rules
         $this->setGeneralRules(
             [
@@ -25,10 +22,6 @@ class ContentFieldCreateRequest extends CustomFormRequest
                 'content_id' => 'required_without:id|numeric|exists:'.ConfigService::$tableContent . ',id'
             ]
         );
-
-
-        //set the custom validation rules
-       // $this->setCustomRules($this, 'fields');
 
         //get all the validation rules that apply to the request
         return parent::rules();

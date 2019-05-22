@@ -2,8 +2,8 @@
 
 namespace Railroad\Railcontent\Requests;
 
-use Illuminate\Foundation\Http\FormRequest as LaravelFormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest as LaravelFormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 /**  Form Request - extend the Laravel Form Request class and handle the validation errors messages

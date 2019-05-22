@@ -54,7 +54,6 @@ class CommentRepository extends EntityRepository
      */
     public static $pullSoftDeletedComments = false;
 
-
     protected $page;
     protected $limit;
     protected $orderBy;

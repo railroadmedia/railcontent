@@ -151,11 +151,13 @@ class FullTextSearchRepository extends EntityRepository
         return $query;
     }
 
-    /** Count all the matches
-     *
-     * @param string|null $term
+    /**
+     * @param $term
      * @param null $contentType
-     * @return int
+     * @param null $contentStatus
+     * @param null $dateTimeCutoff
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function countTotalResults(
         $term,

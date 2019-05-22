@@ -6,7 +6,6 @@ use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Railroad\Railcontent\Contracts\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\UserPermissionsRepository")
@@ -85,7 +84,7 @@ class UserPermission
     }
 
     /**
-     * @param string $value
+     * @param $startDate
      */
     public function setStartDate($startDate)
     {

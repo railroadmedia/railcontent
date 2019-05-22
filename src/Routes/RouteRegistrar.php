@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Routes;
 
 use Illuminate\Routing\Router;
-use MembersArea\Lists\MyListController;
 use Railroad\Railcontent\Controllers\ApiJsonController;
 use Railroad\Railcontent\Controllers\CommentJsonController;
 use Railroad\Railcontent\Controllers\CommentLikeJsonController;

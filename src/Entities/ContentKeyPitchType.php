@@ -73,7 +73,7 @@ class ContentKeyPitchType extends ArrayExpressible
     }
 
     /**
-     * @param $key
+     * @param $keyPitchType
      */
     public function setKeyPitchType($keyPitchType)
     {

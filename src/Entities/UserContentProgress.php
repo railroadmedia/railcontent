@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Entities;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Railroad\Railcontent\Contracts\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\UserContentProgressRepository")
@@ -120,7 +119,7 @@ class UserContentProgress
     }
 
     /**
-     * @param string $value
+     * @param $updatedOn
      */
     public function setUpdatedOn($updatedOn)
     {

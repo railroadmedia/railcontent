@@ -23,8 +23,12 @@ class ContentPermissionsDecorator implements DecoratorInterface
         $this->contentPermissionService = $contentPermissionService;
     }
 
-    public function decorate(array $entities): array
-    {
+    /**
+     * @param array $entities
+     * @return array
+     */
+    public function decorate(array $entities)
+    : array {
         $entityIds = [];
 
         foreach ($entities as $entity) {
@@ -37,8 +41,10 @@ class ContentPermissionsDecorator implements DecoratorInterface
             $permissionsForThisEntity = [];
 
             foreach ($contentPermissions as $contentPermission) {
-                if ((!empty($contentPermission->getContent()) && $entity->getId() == $contentPermission->getContent()->getId())
-                    || $entity->getType() == $contentPermission->getContentType()) {
+                if ((!empty($contentPermission->getContent()) &&
+                        $entity->getId() ==
+                        $contentPermission->getContent()
+                            ->getId()) || $entity->getType() == $contentPermission->getContentType()) {
                     $permissionsForThisEntity[] = $contentPermission;
 
                 }
@@ -46,7 +52,6 @@ class ContentPermissionsDecorator implements DecoratorInterface
 
             $entity->createProperty('permissions', $permissionsForThisEntity);
         }
-
 
         return $entities;
     }

@@ -4,6 +4,8 @@ namespace Railroad\Railcontent\Services;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\Permission;
@@ -116,8 +118,8 @@ class ContentPermissionService
      * @param $permissionId
      * @param null $brand
      * @return ContentPermission
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function create($contentId = null, $contentType = null, $permissionId, $brand = null)
     {

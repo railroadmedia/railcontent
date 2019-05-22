@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Entities;
 
 use Doctrine\Common\Inflector\Inflector;
-
 use Doctrine\ORM\PersistentCollection;
 
 abstract class ArrayExpressible

@@ -6,9 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Collection;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
-use Railroad\Railcontent\Entities\ContentKey;
 use Railroad\Railcontent\Entities\ContentKeyPitchType;
-use Railroad\Railcontent\Entities\ContentTopic;
 
 class ContentKeyPitchTypeTransformer extends TransformerAbstract
 {

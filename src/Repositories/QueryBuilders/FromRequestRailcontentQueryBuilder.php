@@ -2,7 +2,7 @@
 
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
-use \Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\QueryBuilder;
 use Illuminate\Http\Request;
 
 class FromRequestRailcontentQueryBuilder extends QueryBuilder

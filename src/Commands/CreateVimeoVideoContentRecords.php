@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-
 use Railroad\Railcontent\Services\ContentService;
 use Vimeo\Exceptions\VimeoRequestException;
 use Vimeo\Vimeo;
@@ -26,6 +25,12 @@ class CreateVimeoVideoContentRecords extends Command
     private $totalNumberOfPagesToProcess;
     private $numberOnLastPage;
 
+    /**
+     * CreateVimeoVideoContentRecords constructor.
+     *
+     * @param ContentService $contentService
+     * @param DatabaseManager $databaseManager
+     */
     public function __construct(
         ContentService $contentService,
         DatabaseManager $databaseManager
@@ -35,6 +40,12 @@ class CreateVimeoVideoContentRecords extends Command
         $this->databaseManager = $databaseManager;
     }
 
+    /**
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \ReflectionException
+     */
     public function handle()
     {
         $this->numberOnLastPage = null;

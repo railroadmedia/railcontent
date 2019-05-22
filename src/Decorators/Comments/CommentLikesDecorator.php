@@ -22,6 +22,10 @@ class CommentLikesDecorator implements DecoratorInterface
         $this->commentLikeService = $commentLikeService;
     }
 
+    /**
+     * @param array $entitites
+     * @return array
+     */
     public function decorate(array $entitites)
     : array {
         $entitiesIds = array_map(

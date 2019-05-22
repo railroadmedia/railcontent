@@ -182,7 +182,7 @@ class ContentHierarchyService
     }
 
     /**
-     * @param $childId
+     * @param $child
      * @return bool|mixed
      */
     public function repositionSiblings($child)

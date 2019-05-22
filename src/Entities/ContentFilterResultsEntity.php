@@ -4,10 +4,9 @@ namespace Railroad\Railcontent\Entities;
 
 use Illuminate\Http\JsonResponse;
 use Railroad\Railcontent\Support\Collection;
-use Railroad\Railcontent\Transformers\DataTransformer;
 use Railroad\Railcontent\Transformers\DecoratedContentTransformer;
 
-class ContentFilterResultsEntity extends Entity
+class ContentFilterResultsEntity extends \ArrayObject
 {
     /**
      * @return string

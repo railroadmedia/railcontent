@@ -25,6 +25,7 @@ class ResponseService extends FractalResponseService
      * @param $entityOrEntities
      * @param QueryBuilder|null $queryBuilder
      * @param array $includes
+     * @param array $filterOptions
      * @return Fractal
      */
     public static function content(
