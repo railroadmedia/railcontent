@@ -139,6 +139,7 @@ Change permission name or the brand where the permission it's available.
 
 |Type|Key|Required|Default|Options|Notes|
 |----|---|--------|-------|-------|-----|
+|path|id|yes||||
 |body|data.type|yes||must be 'permission'||
 |body|data.attributes.name|||||
 |body|data.attributes.brand|||||
@@ -202,7 +203,7 @@ Delete an existing permission and all the links with contents.
 
 |Type|Key|Required|Default|Options|Notes|
 |----|---|--------|-------|-------|-----|
-|path|permission id|yes||||
+|path|id|yes||||
 
 ### Request Example
 
