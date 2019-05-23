@@ -24,9 +24,9 @@ Create/update content hierarchy specifying parent id, child id and child positio
 |----|---|--------|-------|-------|-----|
 |body|data.type|yes||must be 'contentHierarchy'||
 |body|data.attributes.child_position|no| | |The position relative to the other children of the given parent. Will automatically shift other children. If null - position will be set to the end of the child stack.|
-|body|data.relationships.parent.data.type|yes|must be 'content'|||
+|body|data.relationships.parent.data.type|yes| |must be 'content'||
 |body|data.relationships.parent.data.id|yes||||
-|body|data.relationships.child.data.type|yes|must be 'content'|||
+|body|data.relationships.child.data.type|yes| |must be 'content'||
 |body|data.relationships.child.data.id|yes||||
 
 ### Validation Rules
