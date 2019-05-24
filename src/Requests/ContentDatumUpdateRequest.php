@@ -19,9 +19,7 @@ class ContentDatumUpdateRequest extends CustomFormRequest
         $this->setGeneralRules(
             [
                 'data.attributes.key' => 'max:255',
-                'data.attributes.position' => 'nullable|numeric|min:0',
-                'data.relationships.content.data.id' => 'numeric|exists:' . config('railcontent.database_connection_name') . '.' .
-                    config('railcontent.table_prefix'). 'content' . ',id'
+                'data.attributes.position' => 'nullable|numeric|min:0'
             ]
         );
 
@@ -39,8 +37,7 @@ class ContentDatumUpdateRequest extends CustomFormRequest
                 [
                     'data.attributes.key',
                     'data.attributes.value',
-                    'data.attributes.position',
-                    'data.relationships.content'
+                    'data.attributes.position'
                 ]
             );
     }

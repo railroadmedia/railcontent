@@ -242,11 +242,11 @@ Assign permission to a specific content or to all content of certain type.
 
 |Type|Key|Required|Default|Options|Notes|
 |----|---|--------|-------|-------|-----|
-|body|data.type|yes||must be 'contentPermission'||
+|body|data.type|yes| |must be 'contentPermission'||
 |body|data.attributes.content_type|Required without content|||| 
-|body|data.relationships.permission.data.type|yes|must be 'permission'|||
+|body|data.relationships.permission.data.type|yes| |must be 'permission'||
 |body|data.relationships.permission.data.id|yes||||
-|body|data.relationships.content.data.type|Required without content type|must be 'content'|||
+|body|data.relationships.content.data.type|Required without content type| |must be 'content'||
 |body|data.relationships.content.data.id|Required without content type ||||
 
 
@@ -342,11 +342,11 @@ Dissociate permissions from a specific content or all content of a certain type.
 
 |Type|Key|Required|Default|Options|Notes|
 |----|---|--------|-------|-------|-----|
-|body|data.type|yes||must be 'contentPermission'||
+|body|data.type|yes| |must be 'contentPermission'||
 |body|data.attributes.content_type|Required without content|||| 
-|body|data.relationships.permission.data.type|yes|must be 'permission'|||
+|body|data.relationships.permission.data.type|yes| |must be 'permission'||
 |body|data.relationships.permission.data.id|yes||||
-|body|data.relationships.content.data.type|Required without content type|must be 'content'|||
+|body|data.relationships.content.data.type|Required without content type| |must be 'content'||
 |body|data.relationships.content.data.id|Required without content type ||||
 
 

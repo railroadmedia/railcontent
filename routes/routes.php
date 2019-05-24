@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use Railroad\Railcontent\Controllers\CommentJsonController;
 use Railroad\Railcontent\Controllers\CommentLikeJsonController;
 use Railroad\Railcontent\Controllers\ContentDatumJsonController;
-use Railroad\Railcontent\Controllers\ContentFieldJsonController;
 use Railroad\Railcontent\Controllers\ContentHierarchyJsonController;
 use Railroad\Railcontent\Controllers\ContentJsonController;
 use Railroad\Railcontent\Controllers\ContentLikeJsonController;
@@ -24,13 +23,6 @@ Route::group(
                 'middleware' => config('railcontent.user_routes_middleware')
             ],
             function () {
-
-                // content fields
-                Route::get(
-                    '/content/field/{id}',
-                    ContentFieldJsonController::class . '@show'
-                )->name('content.field.show');
-
                 // permissions
                 Route::get(
                     '/permission',
@@ -154,17 +146,6 @@ Route::group(
                 'middleware' => config('railcontent.administrator_routes_middleware')
             ],
             function () {
-                // content fields
-                Route::put(
-                    '/content/field',
-                    ContentFieldJsonController::class . '@store'
-                )->name('content.field.store');
-
-                Route::delete(
-                    '/content/field/{fieldId}',
-                    ContentFieldJsonController::class . '@delete'
-                )->name('content.field.delete');
-
                 // content datum
                 Route::put(
                     '/content/datum',
