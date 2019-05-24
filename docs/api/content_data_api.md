@@ -128,7 +128,6 @@ $.ajax({
             type: "contentData",
             attributes: {
                 value: "new value"
-
         }, 
     }, 
     success: function(response) {},

@@ -35,8 +35,6 @@ class ContentUpdateRequest extends CustomFormRequest
                 'data.attributes.type' => 'max:64',
                 'data.attributes.sort' => 'nullable|numeric',
                 'data.attributes.position' => 'nullable|numeric|min:0',
-                'data.relationships.parent.data.id' => 'nullable|numeric|exists:' . config('railcontent.database_connection_name') . '.' .
-                    config('railcontent.table_prefix'). 'content' . ',id',
                 'data.attributes.published_on' => 'nullable|date'
             ]
         );
@@ -62,6 +60,7 @@ class ContentUpdateRequest extends CustomFormRequest
                     'data.attributes.status',
                     'data.attributes.brand',
                     'data.attributes.language' ,
+                    'data.attributes.published_on',
                     'data.attributes.fields',
                     'data.relationships.user'
                 ]
