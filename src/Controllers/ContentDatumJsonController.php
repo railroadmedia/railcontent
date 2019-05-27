@@ -17,6 +17,13 @@ use Railroad\Railcontent\Services\ResponseService;
 use Spatie\Fractal\Fractal;
 use Throwable;
 
+/**
+ * Class ContentDatumJsonController
+ *
+ * @group Content Data API
+ *
+ * @package Railroad\Railcontent\Controllers
+ */
 class ContentDatumJsonController extends Controller
 {
     /**

@@ -14,6 +14,13 @@ use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ResponseService;
 use Spatie\Fractal\Fractal;
 
+/**
+ * Class ContentHierarchyJsonController
+ *
+ * @group Hierarchy API
+ *
+ * @package Railroad\Railcontent\Controllers
+ */
 class ContentHierarchyJsonController extends Controller
 {
     /**

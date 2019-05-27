@@ -28,6 +28,8 @@ use Throwable;
 /**
  * Class PermissionController
  *
+ * @group Permissions API
+ *
  * @package Railroad\Railcontent\Controllers
  */
 class PermissionJsonController extends Controller

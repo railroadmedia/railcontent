@@ -40,7 +40,8 @@
     "phpunit/php-code-coverage": "~6.0",
     "mockery/mockery": "^1.0",
     "orchestra/testbench": "~3.6",
-    "filp/whoops":"~2.1"
+    "filp/whoops":"~2.1",
+    "mpociot/laravel-apidoc-generator": "~3.7"
   },
   "autoload": {
     "classmap": [

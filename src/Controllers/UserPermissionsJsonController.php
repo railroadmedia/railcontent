@@ -17,6 +17,13 @@ use Railroad\Railcontent\Services\UserPermissionsService;
 use Spatie\Fractal\Fractal;
 use Throwable;
 
+/**
+ * Class UserPermissionsJsonController
+ *
+ * @group User access API
+ *
+ * @package Railroad\Railcontent\Controllers
+ */
 class UserPermissionsJsonController extends Controller
 {
     /**

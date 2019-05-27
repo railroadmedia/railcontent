@@ -2,7 +2,18 @@
 
 namespace Railroad\Railcontent\Requests;
 
-
+/**
+ * Class ContentDatumCreateRequest
+ *
+ * @package Railroad\Railcontent\Requests
+ *
+ * @bodyParam data.type string required  Must be 'contentData'. Example: contentData
+ * @bodyParam data.attributes.key string required  The data key. Example: description
+ * @bodyParam data.attributes.value string  required Data value.  Example: indsf fdgg  gfg
+ * @bodyParam data.attributes.position integer The position of this datum relative to other datum with the same key under the same content id.
+ * @bodyParam data.relationships.content.data.type string required  Must be 'content'. Example: content
+ * @bodyParam data.relationships.content.data.id integer required  Must exists in contents. Example: 1
+ */
 class ContentDatumCreateRequest extends CustomFormRequest
 {
     /**

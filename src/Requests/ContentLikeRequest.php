@@ -3,7 +3,14 @@
 
 namespace Railroad\Railcontent\Requests;
 
-
+/**
+ * Class ContentLikeRequest
+ *
+ * @package Railroad\Railcontent\Requests
+ *
+ * @bodyParam data.relationships.content.data.type string  required Must be 'content'. Example: content
+ * @bodyParam data.relationships.content.data.id integer  required Must exists in contents. Example: 1
+ */
 class ContentLikeRequest extends FormRequest
 {
     /**

@@ -7,7 +7,6 @@ use Railroad\Railcontent\Controllers\ApiJsonController;
 use Railroad\Railcontent\Controllers\CommentJsonController;
 use Railroad\Railcontent\Controllers\CommentLikeJsonController;
 use Railroad\Railcontent\Controllers\ContentDatumJsonController;
-use Railroad\Railcontent\Controllers\ContentFieldJsonController;
 use Railroad\Railcontent\Controllers\ContentHierarchyJsonController;
 use Railroad\Railcontent\Controllers\ContentJsonController;
 use Railroad\Railcontent\Controllers\ContentLikeJsonController;
@@ -84,12 +83,6 @@ class RouteRegistrar
                     ContentJsonController::class . '@show'
                 )
                     ->name('content.show');
-
-                $this->router->get(
-                    'content/field/{id}',
-                    ContentFieldJsonController::class . '@show'
-                )
-                    ->name('content.field.show');
             }
         );
     }
@@ -248,19 +241,6 @@ class RouteRegistrar
                 'middleware' => config('railcontent.route_middleware_admin_groups'),
             ],
             function () {
-
-                $this->router->put(
-                    'content/field',
-                    ContentFieldJsonController::class . '@store'
-                )
-                    ->name('content.field.store');
-
-                $this->router->delete(
-                    'content/field/{fieldId}',
-                    ContentFieldJsonController::class . '@delete'
-                )
-                    ->name('content.delete');
-
                 $this->router->put(
                     'content/datum',
                     ContentDatumJsonController::class . '@store'
@@ -447,12 +427,6 @@ class RouteRegistrar
                     ContentJsonController::class . '@getByIds'
                 )
                     ->name('content.get-by-ids');
-
-                $this->router->get(
-                    'content/field/{id}',
-                    ContentFieldJsonController::class . '@show'
-                )
-                    ->name('content.field.show');
 
                 $this->router->put(
                     'start',

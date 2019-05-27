@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Railroad\Railcontent\Controllers\CommentJsonController;
 use Railroad\Railcontent\Controllers\CommentLikeJsonController;
-use Railroad\Railcontent\Controllers\ContentFieldJsonController;
 use Railroad\Railcontent\Controllers\ContentJsonController;
 use Railroad\Railcontent\Controllers\ContentLikeJsonController;
 use Railroad\Railcontent\Controllers\FullTextSearchJsonController;
@@ -17,14 +16,6 @@ Route::group(
         'middleware' => config('railcontent.api_middleware'),
     ],
     function () {
-
-        // content fields
-        Route::get(
-            '/content/field/{id}',
-            ContentFieldJsonController::class . '@show'
-        )
-            ->name('content.field.show');
-
         // permissions
         Route::get(
             '/permission',

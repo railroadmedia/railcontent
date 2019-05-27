@@ -12,6 +12,13 @@ use Railroad\Railcontent\Services\CommentLikeService;
 use Railroad\Railcontent\Services\ResponseService;
 use Spatie\Fractal\Fractal;
 
+/**
+ * Class CommentLikeJsonController
+ *
+ * @group Comments API
+ *
+ * @package Railroad\Railcontent\Controllers
+ */
 class CommentLikeJsonController extends Controller
 {
     /**

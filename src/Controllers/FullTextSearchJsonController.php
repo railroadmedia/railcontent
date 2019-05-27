@@ -9,6 +9,13 @@ use Railroad\Railcontent\Responses\JsonPaginatedResponse;
 use Railroad\Railcontent\Services\FullTextSearchService;
 use Railroad\Railcontent\Services\ResponseService;
 
+/**
+ * Class FullTextSearchJsonController
+ *
+ * @package Railroad\Railcontent\Controllers
+ *
+ * @group Full text search API
+ */
 class FullTextSearchJsonController extends Controller
 {
     /**

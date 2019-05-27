@@ -8,6 +8,13 @@ use Railroad\Railcontent\Entities\Entity;
 use Railroad\Railcontent\Services\RemoteStorageService;
 use Railroad\Railcontent\Transformers\DataTransformer;
 
+/**
+ * Class RemoteStorageJsonController
+ *
+ * @package Railroad\Railcontent\Controllers
+ *
+ * @group Remote storage API
+ */
 class RemoteStorageJsonController extends Controller
 {
     /**

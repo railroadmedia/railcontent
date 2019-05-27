@@ -9,6 +9,7 @@ class ContentCreateRequest extends CustomFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
+     * @bodyParam status string required Specific values
      * @return array
      */
     public function rules()

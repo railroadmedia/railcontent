@@ -22,6 +22,13 @@ use ReflectionException;
 use Spatie\Fractal\Fractal;
 use Throwable;
 
+/**
+ * Class CommentJsonController
+ *
+ * @group Comments API
+ *
+ * @package Railroad\Railcontent\Controllers
+ */
 class CommentJsonController extends Controller
 {
     /**
@@ -41,15 +48,19 @@ class CommentJsonController extends Controller
         $this->jsonApiHidrator = $jsonApiHydrator;
     }
 
-    /** Call the method from the service to pull the comments based on the criteria passed in request:
+    /** List comments
+     *
+     *  Pull comments based on the criteria passed in request
      *      - content_id   => pull the comments for given content id
      *      - user_id      => pull user's comments
      *      - content_type => pull the comments for the contents with given type
-     *  Return a Json paginated response with the comments
+     *
      *
      * @param Request $request
      * @return Fractal
      * @throws NonUniqueResultException
+     *
+     *
      */
     public function index(Request $request)
     {
@@ -74,9 +85,11 @@ class CommentJsonController extends Controller
             ->addMeta(['totalCommentsAndReplies' => $this->commentService->countCommentsAndReplies()]);
     }
 
-    /** Call the method from service that create a new comment if the request data pass the validation
+    /** Create a new comment
      *
      * @param CommentCreateRequest $request
+     * @responseFile ../../../../../docs/comment.json
+     *
      * @return Fractal
      * @throws Throwable
      * @throws ORMException
@@ -105,7 +118,7 @@ class CommentJsonController extends Controller
         return ResponseService::comment($comment);
     }
 
-    /** Update a comment based on id and return it in JSON format
+    /** Update a comment
      *
      * @param CommentUpdateRequest $request
      * @param $commentId
@@ -115,6 +128,8 @@ class CommentJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      * @throws ReflectionException
+     *
+     * @responseFile ../../../../../docs/comment.json
      */
     public function update(CommentUpdateRequest $request, $commentId)
     {
@@ -146,13 +161,17 @@ class CommentJsonController extends Controller
             ->respond(201);
     }
 
-    /** Call the delete method if the comment exist and the user have rights to delete the comment
+    /** Delete an existing comment
      *
      * @param $commentId
      * @return JsonResponse
      * @throws Throwable
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @response 204 { }
+     * @response 403 { "message": "Delete failed, you can delete only your comments." }
+     * @response 404 { "message": "Delete failed, comment not found with id: 1" }
      */
     public function delete($commentId)
     {
@@ -174,13 +193,15 @@ class CommentJsonController extends Controller
         return ResponseService::empty(204);
     }
 
-    /** Call the method from service that create a new comment if the request data pass the validation
+    /** Create a reply
      *
      * @param ReplyRequest $request
      * @return JsonResponse
      * @throws Throwable
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @responseFile ../../../../../docs/comment.json
      */
     public function reply(ReplyRequest $request)
     {
@@ -205,7 +226,7 @@ class CommentJsonController extends Controller
             ->respond(200);
     }
 
-    /** Return the comments, the current page it's the page with the comment
+    /** List comments, the current page it's the page with the comment
      *
      * @param $commentId
      * @param Request $request

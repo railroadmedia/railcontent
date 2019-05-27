@@ -12,6 +12,13 @@ use Railroad\Railcontent\Services\ContentLikeService;
 use Railroad\Railcontent\Services\ResponseService;
 use Spatie\Fractal\Fractal;
 
+/**
+ * Class ContentLikeJsonController
+ *
+ * @group Content Likes API
+ *
+ * @package Railroad\Railcontent\Controllers
+ */
 class ContentLikeJsonController extends Controller
 {
     /**

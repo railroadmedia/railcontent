@@ -1,0 +1,74 @@
+{
+  "data":{
+    "type":"comment",
+    "id":"1",
+    "attributes":{
+      "comment":"Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae. Aspernatur facilis et quia saepe nemo.",
+      "temporary_display_name":"in",
+      "user":"1",
+      "created_on":"2019-05-24 13:35:39",
+      "deleted_at":null
+    },
+    "relationships":{
+      "content":{
+        "data":{
+          "type":"content",
+          "id":"1"
+        }
+      }
+    }
+  },
+  "included":[
+    {
+      "type":"content",
+      "id":"1",
+      "attributes":{
+        "slug":"Perspiciatis asperiores reprehenderit ut dolores. Quia inventore doloribus sed neque. Voluptates quam fugiat eius consequatur.",
+        "type":"course lesson",
+        "sort":"1",
+        "status":"published",
+        "brand":"brand",
+        "language":"en-EN",
+        "user":"",
+        "published_on":"2002-12-27 01:35:00",
+        "archived_on":null,
+        "created_on":"2002-11-05 04:37:59.000000",
+        "difficulty":"easy",
+        "home_staff_pick_rating":"2",
+        "legacy_id":847371928,
+        "legacy_wordpress_post_id":962480732,
+        "qna_video":null,
+        "style":null,
+        "title":"Sapiente aperiam sunt et et ipsa quia voluptate.",
+        "xp":15,
+        "album":null,
+        "artist":null,
+        "bpm":null,    "cdTracks": null,
+        "chordOrScale": null,
+        "difficultyRange": null,
+        "episodeNumber": null,
+        "exerciseBookPages": null,
+        "fastBpm": null,
+        "includesSong": false,
+        "instructors": null,
+        "liveEventStartTime": null,
+        "liveEventEndTime": null,
+        "liveEventYoutubeId": null,
+        "liveStreamFeedType": null,
+        "name": null,
+        "released": null,
+        "slowBpm": null,
+        "totalXp": null,
+        "transcriberName": null,
+        "week": null,
+        "avatarUrl": null,
+        "lengthInSeconds": null,
+        "soundsliceSlug": null,
+        "staffPickRating": null,
+        "studentId": null,
+        "vimeoVideoId": null,
+        "youtubeVideoId": null
+      }
+    }
+  ]
+}

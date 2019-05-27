@@ -22,6 +22,13 @@ use ReflectionException;
 use Spatie\Fractal\Fractal;
 use Throwable;
 
+/**
+ * Class ContentJsonController
+ *
+ * @group Content API
+ *
+ * @package Railroad\Railcontent\Controllers
+ */
 class ContentJsonController extends Controller
 {
     /**
@@ -86,6 +93,8 @@ class ContentJsonController extends Controller
     /** Pull the children contents for the parent id
      *
      * @param $parentId
+     *
+     * @transformer Railroad\Railcontent\Transformers\DecoratedContentTransformer
      * @return Fractal
      * @throws NotAllowedException
      */
@@ -98,8 +107,11 @@ class ContentJsonController extends Controller
         return ResponseService::content($contentData);
     }
 
-    /**
+    /** Pull the contents based on ids
      * @param Request $request
+     *
+     * @transformerCollection Railroad\Railcontent\Transformers\DecoratedContentTransformer
+     *
      * @return Fractal
      * @throws NotAllowedException
      */
@@ -114,6 +126,7 @@ class ContentJsonController extends Controller
 
     /**
      * @param $id
+     * @transformer Railroad\Railcontent\Transformers\DecoratedContentTransformer
      * @return Fractal
      * @throws Throwable
      * @throws NonUniqueResultException

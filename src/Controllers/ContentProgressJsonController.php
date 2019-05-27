@@ -11,6 +11,13 @@ use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * Class ContentProgressJsonController
+ *
+ * @group User progress API
+ *
+ * @package Railroad\Railcontent\Controllers
+ */
 class ContentProgressJsonController extends Controller
 {
     /**

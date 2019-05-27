@@ -19,6 +19,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
+use Mpociot\ApiDoc\ApiDocGeneratorServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use PDO;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -169,6 +170,7 @@ class RailcontentTestCase extends BaseTestCase
         $dotenv->load();
 
         $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
+        $apiDocConfig = require(__DIR__ . '/../config/apidoc.php');
 
         $app['config']->set('railcontent.database_connection_name', $this->getConnectionType());
         $app['config']->set('railcontent.cache_duration', $defaultConfig['cache_duration']);
@@ -321,10 +323,17 @@ class RailcontentTestCase extends BaseTestCase
         // vimeo
         $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);
 
+        //apidoc
+        $app['config']->set('apidoc.output', $apiDocConfig['output']);
+        $app['config']->set('apidoc.routes', $apiDocConfig['routes']);
+        $app['config']->set('apidoc.example_languages', $apiDocConfig['example_languages']);
+        $app['config']->set('apidoc.fractal', $apiDocConfig['fractal']);
+
         // register provider
         $app->register(DoctrineServiceProvider::class);
         $app->register(RailcontentServiceProvider::class);
         $app->register(PermissionsServiceProvider::class);
+        $app->register(ApiDocGeneratorServiceProvider::class);
 
         $app->bind(
             'UserProviderInterface',

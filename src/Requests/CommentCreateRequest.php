@@ -6,6 +6,17 @@ namespace Railroad\Railcontent\Requests;
 use Illuminate\Validation\Rule;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
+/**
+ * Class CommentCreateRequest
+ *
+ * @bodyParam data.type string required  Must be 'comment'. Example: comment
+ * @bodyParam data.attributes.comment string required  The text of the comment. Example: Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.
+ * @bodyParam data.attributes.temporary_display_name string Temporary display name for user.  Example: in
+ * @bodyParam data.relationships.content.data.type string required  Must be 'content'. Example: content
+ * @bodyParam data.relationships.content.data.id integer required  Must exists in contents. Example: 1
+ *
+ * @package Railroad\Railcontent\Requests
+ */
 class CommentCreateRequest extends FormRequest
 {
     /**
