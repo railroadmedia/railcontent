@@ -34,7 +34,7 @@ class CommentUpdateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public static function rules()
     {
         return [
             'data.attributes.comment' => 'nullable|max:10024',

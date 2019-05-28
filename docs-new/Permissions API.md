@@ -1,49 +1,39 @@
----
-title: API Reference
+# Permissions API
 
-language_tabs:
-- bash
-- javascript
+# JSON Endpoints
 
-includes:
-
-search: true
-
-toc_footers:
-- <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
----
-<!-- START_INFO -->
-# Info
-
-Welcome to the generated API reference.
-[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
-
-<!-- END_INFO -->
 
 <!-- START_82b005afd78be37707ededcd4afc2d84 -->
 ## railcontent/permission
-> Example request:
 
-```bash
-curl -X GET -G "http://localhost/railcontent/permission" 
+### HTTP Request
+    `GET railcontent/permission`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/permission',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/permission");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
+### Example response (200):
 
 ```json
 {
@@ -51,8 +41,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`GET railcontent/permission`
+
 
 
 <!-- END_82b005afd78be37707ededcd4afc2d84 -->
@@ -60,28 +49,41 @@ fetch(url, {
 <!-- START_00fbbab029caab0b24691443083c1788 -->
 ## Create a new permission and return it in JSON API format
 
-> Example request:
 
-```bash
-curl -X PUT "http://localhost/railcontent/permission" 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/permission");
+### HTTP Request
+    `PUT railcontent/permission`
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+### Validation Rules
+```php
+{
+    "data.attributes.name": "required|max:255"
 }
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
 ```
 
-> Example response (422):
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/permission',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
+```
+
+### Example response (422):
 
 ```json
 {
@@ -95,8 +97,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PUT railcontent/permission`
+
 
 
 <!-- END_00fbbab029caab0b24691443083c1788 -->
@@ -104,28 +105,43 @@ fetch(url, {
 <!-- START_4342e3c5e05a771e85749f018f936e97 -->
 ## Dissociate (&quot;unattach&quot;) permissions from a specific content or all content of a certain type
 
-> Example request:
 
-```bash
-curl -X PATCH "http://localhost/railcontent/permission/dissociate" 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/permission/dissociate");
+### HTTP Request
+    `PATCH railcontent/permission/dissociate`
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+### Validation Rules
+```php
+{
+    "data.relationships.permission.data.id": "required|integer|exists:testbench.railcontent_permissions,id",
+    "data.relationships.content.data.id": "nullable|numeric|required_without_all:data.attributes.content_type|exists:testbench.railcontent_content,id",
+    "data.attributes.content_type": "nullable|string|required_without_all:data.relationships.content.data.id|exists:testbench.railcontent_content,type"
 }
-
-fetch(url, {
-    method: "PATCH",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
 ```
 
-> Example response (422):
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/permission/dissociate',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
+```
+
+### Example response (422):
 
 ```json
 {
@@ -149,8 +165,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PATCH railcontent/permission/dissociate`
+
 
 
 <!-- END_4342e3c5e05a771e85749f018f936e97 -->
@@ -158,28 +173,41 @@ fetch(url, {
 <!-- START_d4001b71581880f49c6f7083414bd750 -->
 ## Update a permission if exist and return it in JSON API format
 
-> Example request:
 
-```bash
-curl -X PATCH "http://localhost/railcontent/permission/1" 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/permission/1");
+### HTTP Request
+    `PATCH railcontent/permission/{permissionId}`
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+### Validation Rules
+```php
+{
+    "data.attributes.name": "required|max:255"
 }
-
-fetch(url, {
-    method: "PATCH",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
 ```
 
-> Example response (422):
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/permission/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
+```
+
+### Example response (422):
 
 ```json
 {
@@ -193,8 +221,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PATCH railcontent/permission/{permissionId}`
+
 
 
 <!-- END_d4001b71581880f49c6f7083414bd750 -->
@@ -202,28 +229,35 @@ fetch(url, {
 <!-- START_dc1d30ff5a5c1478fb8b60e51a1d35e7 -->
 ## Delete a permission if exist and it&#039;s not linked with content id or content type
 
-> Example request:
 
-```bash
-curl -X DELETE "http://localhost/railcontent/permission/1" 
+### HTTP Request
+    `DELETE railcontent/permission/{permissionId}`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/permission/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/permission/1");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (404):
+### Example response (404):
 
 ```json
 {
@@ -234,8 +268,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`DELETE railcontent/permission/{permissionId}`
+
 
 
 <!-- END_dc1d30ff5a5c1478fb8b60e51a1d35e7 -->
@@ -243,28 +276,43 @@ fetch(url, {
 <!-- START_3fb971d9458d8f1bc2c8d99bfdcf36b0 -->
 ## Attach permission to a specific content or to all content of a certain type
 
-> Example request:
 
-```bash
-curl -X PUT "http://localhost/railcontent/permission/assign" 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/permission/assign");
+### HTTP Request
+    `PUT railcontent/permission/assign`
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+### Validation Rules
+```php
+{
+    "data.relationships.permission.data.id": "required|integer|exists:testbench.railcontent_permissions,id",
+    "data.relationships.content.data.id": "nullable|numeric|required_without_all:data.attributes.content_type|exists:testbench.railcontent_content,id",
+    "data.attributes.content_type": "nullable|string|required_without_all:data.relationships.content.data.id|exists:testbench.railcontent_content,type"
 }
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
 ```
 
-> Example response (422):
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/permission/assign',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
+```
+
+### Example response (422):
 
 ```json
 {
@@ -288,8 +336,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PUT railcontent/permission/assign`
+
 
 
 <!-- END_3fb971d9458d8f1bc2c8d99bfdcf36b0 -->

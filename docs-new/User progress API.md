@@ -1,50 +1,46 @@
----
-title: API Reference
+# User progress API
 
-language_tabs:
-- bash
-- javascript
+# JSON Endpoints
 
-includes:
-
-search: true
-
-toc_footers:
-- <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
----
-<!-- START_INFO -->
-# Info
-
-Welcome to the generated API reference.
-[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
-
-<!-- END_INFO -->
 
 <!-- START_c0f3be7f8a8582faf9eded5ca139e05e -->
 ## Start a content for the authenticated user
 
-> Example request:
 
-```bash
-curl -X PUT "http://localhost/railcontent/start" 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/start");
+### HTTP Request
+    `PUT railcontent/start`
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+### Validation Rules
+```php
+{
+    "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
 ```
 
-> Example response (422):
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/start',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
+```
+
+### Example response (422):
 
 ```json
 {
@@ -58,8 +54,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PUT railcontent/start`
+
 
 
 <!-- END_c0f3be7f8a8582faf9eded5ca139e05e -->
@@ -67,28 +62,41 @@ fetch(url, {
 <!-- START_c771ec122eac231459ef2eeb003a51b6 -->
 ## Set content as complete for the authenticated user
 
-> Example request:
 
-```bash
-curl -X PUT "http://localhost/railcontent/complete" 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/complete");
+### HTTP Request
+    `PUT railcontent/complete`
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+### Validation Rules
+```php
+{
+    "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
 ```
 
-> Example response (422):
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/complete',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
+```
+
+### Example response (422):
 
 ```json
 {
@@ -102,8 +110,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PUT railcontent/complete`
+
 
 
 <!-- END_c771ec122eac231459ef2eeb003a51b6 -->
@@ -111,28 +118,41 @@ fetch(url, {
 <!-- START_b2202db6547dcbe6b75e0cbc642af8de -->
 ## Reset content progress for authenticated user
 
-> Example request:
 
-```bash
-curl -X PUT "http://localhost/railcontent/reset" 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/reset");
+### HTTP Request
+    `PUT railcontent/reset`
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+### Validation Rules
+```php
+{
+    "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
 ```
 
-> Example response (422):
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/reset',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
+```
+
+### Example response (422):
 
 ```json
 {
@@ -146,8 +166,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PUT railcontent/reset`
+
 
 
 <!-- END_b2202db6547dcbe6b75e0cbc642af8de -->
@@ -155,28 +174,41 @@ fetch(url, {
 <!-- START_0300c7a6d3d72c86c7cd80b0736a1e10 -->
 ## Save the progress on a content for the authenticated user
 
-> Example request:
 
-```bash
-curl -X PUT "http://localhost/railcontent/progress" 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/progress");
+### HTTP Request
+    `PUT railcontent/progress`
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+### Validation Rules
+```php
+{
+    "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
 ```
 
-> Example response (422):
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/progress',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
+```
+
+### Example response (422):
 
 ```json
 {
@@ -190,8 +222,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PUT railcontent/progress`
+
 
 
 <!-- END_0300c7a6d3d72c86c7cd80b0736a1e10 -->

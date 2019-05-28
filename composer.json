@@ -16,6 +16,12 @@
     }
   ],
   "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/roxanariza/laravel-apidoc-generator"
+    }
+  ],
   "require": {
     "php": "~7",
     "laravel/framework": "5.6.*",
@@ -36,12 +42,12 @@
     "jms/serializer": "1.*"
   },
   "require-dev": {
+    "mpociot/laravel-apidoc-generator": "dev-master",
     "phpunit/phpunit": "~7.0",
     "phpunit/php-code-coverage": "~6.0",
     "mockery/mockery": "^1.0",
     "orchestra/testbench": "~3.6",
-    "filp/whoops":"~2.1",
-    "mpociot/laravel-apidoc-generator": "~3.7"
+    "filp/whoops":"~2.1"
   },
   "autoload": {
     "classmap": [

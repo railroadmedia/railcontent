@@ -87,7 +87,7 @@ return [
              * Note that the route must be referenced by name here (wildcards are supported).
              */
             'exclude' => [
-                'permissions.user-ability*','permissions.user-role*','api/railcontent*'
+                'permissions.user-ability*','permissions.user-role*','api/railcontent*','options*'
                 // 'users.create', 'admin.*'
             ],
 
@@ -201,8 +201,7 @@ return [
      *
      */
     'example_languages' => [
-        'bash',
-        'javascript'
+        'ajax'
     ],
 
     /*

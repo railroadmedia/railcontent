@@ -34,7 +34,7 @@ class CommentCreateRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public static function rules()
     {
         return [
             'data.attributes.comment' => 'required|max:10024',

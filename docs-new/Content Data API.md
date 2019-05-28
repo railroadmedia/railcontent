@@ -1,51 +1,45 @@
----
-title: API Reference
+# Content Data API
 
-language_tabs:
-- bash
-- javascript
+# JSON Endpoints
 
-includes:
-
-search: true
-
-toc_footers:
-- <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
----
-<!-- START_INFO -->
-# Info
-
-Welcome to the generated API reference.
-[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
-
-<!-- END_INFO -->
 
 <!-- START_2897a4200e3365f16bdc09c4a556e35c -->
 ## Call the method from service that create new data and link the content with the data.
 
-> Example request:
 
-```bash
-curl -X PUT "http://localhost/railcontent/content/datum" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"type":"contentData","attributes":{"key":"description","value":"indsf fdgg  gfg","position":11},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+### HTTP Request
+    `PUT railcontent/content/datum`
 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/content/datum");
 
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
+###Permissions
 
-let body = {
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+    |body|  data.type |  required  | | string  | Must be 'contentData'. |
+    |body|  data.attributes.key |  required  | | string  | The data key. |
+    |body|  data.attributes.value |  required  | | string  | Data value.  |
+    |body|  data.attributes.position |  optional  | | integer  | The position of this datum relative to other datum with the same key under the same content id. |
+    |body|  data.relationships.content.data.type |  required  | | string  | Must be 'content'. |
+    |body|  data.relationships.content.data.id |  required  | | integer  | Must exists in contents. |
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content/datum',
+{
     "data": {
         "type": "contentData",
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 11
+            "position": 6
         },
         "relationships": {
             "content": {
@@ -57,17 +51,13 @@ let body = {
         }
     }
 }
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
-> Example response (422):
+### Example response (422):
 
 ```json
 {
@@ -86,48 +76,48 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PUT railcontent/content/datum`
 
-#### Body Parameters
 
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    data.type | string |  required  | Must be 'contentData'.
-    data.attributes.key | string |  required  | The data key.
-    data.attributes.value | string |  required  | Data value. 
-    data.attributes.position | integer |  optional  | The position of this datum relative to other datum with the same key under the same content id.
-    data.relationships.content.data.type | string |  required  | Must be 'content'.
-    data.relationships.content.data.id | integer |  required  | Must exists in contents.
 
 <!-- END_2897a4200e3365f16bdc09c4a556e35c -->
 
 <!-- START_fb363b9c870922ffa55b96a23cd5a425 -->
 ## Call the method from service to update a content datum
 
-> Example request:
 
-```bash
-curl -X PATCH "http://localhost/railcontent/content/datum/1" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"type":"contentData","attributes":{"key":"description","value":"indsf fdgg  gfg","position":19},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+### HTTP Request
+    `PATCH railcontent/content/datum/{datumId}`
 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/content/datum/1");
 
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-}
+###Permissions
 
-let body = {
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+    |body|  data.type |  required  | | string  | Must be 'contentData'. |
+    |body|  data.attributes.key |  optional  | | string  | The data key. |
+    |body|  data.attributes.value |  optional  | | string  | Data value.  |
+    |body|  data.attributes.position |  optional  | | integer  | The position of this datum relative to other datum with the same key under the same content id. |
+    |body|  data.relationships.content.data.type |  optional  | | string  | Must be 'content'. |
+    |body|  data.relationships.content.data.id |  optional  | | integer  | Must exists in contents. |
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content/datum/1',
+{
     "data": {
         "type": "contentData",
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 19
+            "position": 11
         },
         "relationships": {
             "content": {
@@ -139,17 +129,13 @@ let body = {
         }
     }
 }
-
-fetch(url, {
-    method: "PATCH",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
-> Example response (404):
+### Example response (404):
 
 ```json
 {
@@ -160,47 +146,43 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PATCH railcontent/content/datum/{datumId}`
 
-#### Body Parameters
 
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    data.type | string |  required  | Must be 'contentData'.
-    data.attributes.key | string |  optional  | The data key.
-    data.attributes.value | string |  optional  | Data value. 
-    data.attributes.position | integer |  optional  | The position of this datum relative to other datum with the same key under the same content id.
-    data.relationships.content.data.type | string |  optional  | Must be 'content'.
-    data.relationships.content.data.id | integer |  optional  | Must exists in contents.
 
 <!-- END_fb363b9c870922ffa55b96a23cd5a425 -->
 
 <!-- START_a4137a74763de18a36fc0ff882de62d3 -->
 ## Call the method from service to delete the content data
 
-> Example request:
 
-```bash
-curl -X DELETE "http://localhost/railcontent/content/datum/1" 
+### HTTP Request
+    `DELETE railcontent/content/datum/{datumId}`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content/datum/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/content/datum/1");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (404):
+### Example response (404):
 
 ```json
 {
@@ -211,8 +193,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`DELETE railcontent/content/datum/{datumId}`
+
 
 
 <!-- END_a4137a74763de18a36fc0ff882de62d3 -->

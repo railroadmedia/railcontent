@@ -16,7 +16,7 @@ class CommentUnLikeRequest extends FormRequest
         return true;
     }
 
-    public function rules()
+    public static function rules()
     {
         return [];
     }

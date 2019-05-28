@@ -90,7 +90,7 @@ class RailcontentServiceProvider extends ServiceProvider
                 CreateVimeoVideoContentRecords::class,
                 CreateYoutubeVideoContentRecords::class,
                 ExpireCache::class,
-                MigrateContentFields::class,
+                MigrateContentFields::class
             ]
         );
     }

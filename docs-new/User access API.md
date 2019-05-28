@@ -1,50 +1,49 @@
----
-title: API Reference
+# User access API
 
-language_tabs:
-- bash
-- javascript
+# JSON Endpoints
 
-includes:
-
-search: true
-
-toc_footers:
-- <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
----
-<!-- START_INFO -->
-# Info
-
-Welcome to the generated API reference.
-[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
-
-<!-- END_INFO -->
 
 <!-- START_4572abc09b0a4dfedb76009dca5d6065 -->
 ## Create/update user permission record and return data in JSON API format.
 
-> Example request:
 
-```bash
-curl -X PUT "http://localhost/railcontent/user-permission" 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/user-permission");
+### HTTP Request
+    `PUT railcontent/user-permission`
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+### Validation Rules
+```php
+{
+    "data.relationships.user.data.id": "required|integer",
+    "data.relationships.permission.data.id": "required|integer|exists:testbench.railcontent_permissions,id",
+    "data.attributes.start_date": "required|date",
+    "data.attributes.expiration_date": "nullable|date"
 }
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
 ```
 
-> Example response (422):
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/user-permission',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
+```
+
+### Example response (422):
 
 ```json
 {
@@ -68,8 +67,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PUT railcontent/user-permission`
+
 
 
 <!-- END_4572abc09b0a4dfedb76009dca5d6065 -->
@@ -77,28 +75,35 @@ fetch(url, {
 <!-- START_091f922183423b288cd6002e9275c608 -->
 ## Delete user permission if exists
 
-> Example request:
 
-```bash
-curl -X DELETE "http://localhost/railcontent/user-permission/1" 
+### HTTP Request
+    `DELETE railcontent/user-permission/{userPermissionId}`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/user-permission/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/user-permission/1");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (404):
+### Example response (404):
 
 ```json
 {
@@ -109,8 +114,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`DELETE railcontent/user-permission/{userPermissionId}`
+
 
 
 <!-- END_091f922183423b288cd6002e9275c608 -->
@@ -121,28 +125,35 @@ fetch(url, {
 IF "only_active" it's set false on the request the expired permissions are returned also
  IF "user_id" it's set on the request only the permissions for the specified user are returned
 
-> Example request:
 
-```bash
-curl -X GET -G "http://localhost/railcontent/user-permission" 
+### HTTP Request
+    `GET railcontent/user-permission`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/user-permission',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/user-permission");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
+### Example response (200):
 
 ```json
 {
@@ -150,8 +161,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`GET railcontent/user-permission`
+
 
 
 <!-- END_11e3427c786ec11eb4b04a07b221d9eb -->

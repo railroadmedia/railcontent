@@ -1,50 +1,40 @@
----
-title: API Reference
+# Content Likes API
 
-language_tabs:
-- bash
-- javascript
+# JSON Endpoints
 
-includes:
-
-search: true
-
-toc_footers:
-- <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
----
-<!-- START_INFO -->
-# Info
-
-Welcome to the generated API reference.
-[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
-
-<!-- END_INFO -->
 
 <!-- START_6bf34590090ea43f90bc0b8aca783f73 -->
 ## Fetch likes for content with pagination.
 
-> Example request:
 
-```bash
-curl -X GET -G "http://localhost/railcontent/content-like/1" 
+### HTTP Request
+    `GET railcontent/content-like/{id}`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content-like/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/content-like/1");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
+### Example response (200):
 
 ```json
 {
@@ -66,8 +56,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`GET railcontent/content-like/{id}`
+
 
 
 <!-- END_6bf34590090ea43f90bc0b8aca783f73 -->
@@ -75,23 +64,36 @@ fetch(url, {
 <!-- START_c864f9442ee531ba11d7259fb511a17c -->
 ## Authenticated user like content.
 
-> Example request:
 
-```bash
-curl -X PUT "http://localhost/railcontent/content-like" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+### HTTP Request
+    `PUT railcontent/content-like`
 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/content-like");
 
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+    |body|  data.relationships.content.data.type |  required  | | string  | Must be 'content'. |
+    |body|  data.relationships.content.data.id |  required  | | integer  | Must exists in contents. |
+
+### Validation Rules
+```php
+{
+    "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
+```
 
-let body = {
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content-like',
+{
     "data": {
         "relationships": {
             "content": {
@@ -103,17 +105,13 @@ let body = {
         }
     }
 }
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
-> Example response (422):
+### Example response (422):
 
 ```json
 {
@@ -127,38 +125,44 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PUT railcontent/content-like`
 
-#### Body Parameters
 
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    data.relationships.content.data.type | string |  required  | Must be 'content'.
-    data.relationships.content.data.id | integer |  required  | Must exists in contents.
 
 <!-- END_c864f9442ee531ba11d7259fb511a17c -->
 
 <!-- START_4f7915ff2544f600944155f3e2c529eb -->
 ## Authenticated user dislike content.
 
-> Example request:
 
-```bash
-curl -X DELETE "http://localhost/railcontent/content-like" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+### HTTP Request
+    `DELETE railcontent/content-like`
 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/content-like");
 
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+    |body|  data.relationships.content.data.type |  required  | | string  | Must be 'content'. |
+    |body|  data.relationships.content.data.id |  required  | | integer  | Must exists in contents. |
+
+### Validation Rules
+```php
+{
+    "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
+```
 
-let body = {
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content-like',
+{
     "data": {
         "relationships": {
             "content": {
@@ -170,17 +174,13 @@ let body = {
         }
     }
 }
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
-> Example response (422):
+### Example response (422):
 
 ```json
 {
@@ -194,15 +194,8 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`DELETE railcontent/content-like`
 
-#### Body Parameters
 
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    data.relationships.content.data.type | string |  required  | Must be 'content'.
-    data.relationships.content.data.id | integer |  required  | Must exists in contents.
 
 <!-- END_4f7915ff2544f600944155f3e2c529eb -->
 

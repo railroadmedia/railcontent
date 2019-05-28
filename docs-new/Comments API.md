@@ -1,45 +1,49 @@
----
-title: API Reference
+# Comments API
 
-language_tabs:
-- bash
-- javascript
+# JSON Endpoints
 
-includes:
-
-search: true
-
-toc_footers:
-- <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
----
-<!-- START_INFO -->
-# Info
-
-Welcome to the generated API reference.
-[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
-
-<!-- END_INFO -->
 
 <!-- START_f625f9c6a130f4a7897d109f2ba98bc6 -->
 ## Create a new comment
 
-> Example request:
 
-```bash
-curl -X PUT "http://localhost/railcontent/comment" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"type":"comment","attributes":{"comment":"Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.","temporary_display_name":"in"},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+### HTTP Request
+    `PUT railcontent/comment`
 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/comment");
 
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+    |body|  data.type |  required  | | string  | Must be 'comment'. |
+    |body|  data.attributes.comment |  required  | | string  | The text of the comment. |
+    |body|  data.attributes.temporary_display_name |  optional  | | string  | Temporary display name for user.  |
+    |body|  data.relationships.content.data.type |  required  | | string  | Must be 'content'. |
+    |body|  data.relationships.content.data.id |  required  | | integer  | Must exists in contents. |
+
+### Validation Rules
+```php
+{
+    "data.attributes.comment": "required|max:10024",
+    "data.relationships.content.data.id": [
+        "required",
+        "numeric",
+        {}
+    ]
 }
+```
 
-let body = {
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/comment',
+{
     "data": {
         "type": "comment",
         "attributes": {
@@ -56,17 +60,13 @@ let body = {
         }
     }
 }
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
-> Example response (200):
+### Example response (200):
 
 ```json
 {
@@ -146,46 +146,58 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PUT railcontent/comment`
 
-#### Body Parameters
 
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    data.type | string |  required  | Must be 'comment'.
-    data.attributes.comment | string |  required  | The text of the comment.
-    data.attributes.temporary_display_name | string |  optional  | Temporary display name for user. 
-    data.relationships.content.data.type | string |  required  | Must be 'content'.
-    data.relationships.content.data.id | integer |  required  | Must exists in contents.
 
 <!-- END_f625f9c6a130f4a7897d109f2ba98bc6 -->
 
 <!-- START_26daf74246cc31035b3821e283f2c144 -->
 ## Update a comment
 
-> Example request:
 
-```bash
-curl -X PATCH "http://localhost/railcontent/comment/1" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"type":"comment","attributes":{"comment":"Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.","temporary_display_name":"nesciunt"},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+### HTTP Request
+    `PATCH railcontent/comment/{id}`
 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/comment/1");
 
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+    |body|  data.type |  required  | | string  | Must be 'comment'. |
+    |body|  data.attributes.comment |  optional  | | string  | The text of the comment. |
+    |body|  data.attributes.temporary_display_name |  optional  | | string  |  |
+    |body|  data.relationships.content.data.type |  optional  | | string  | Must be 'content'. |
+    |body|  data.relationships.content.data.id |  optional  | | integer  | Must exists in contents. |
+
+### Validation Rules
+```php
+{
+    "data.attributes.comment": "nullable|max:10024",
+    "data.relationships.content.data.id": [
+        "numeric",
+        {}
+    ],
+    "data.relationships.parent.data.id": "numeric|exists:testbench.railcontent_comments,id",
+    "data.attributes.temporary_display_name": "filled"
 }
+```
 
-let body = {
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/comment/1',
+{
     "data": {
         "type": "comment",
         "attributes": {
             "comment": "Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.",
-            "temporary_display_name": "nesciunt"
+            "temporary_display_name": "aut"
         },
         "relationships": {
             "content": {
@@ -197,17 +209,13 @@ let body = {
         }
     }
 }
-
-fetch(url, {
-    method: "PATCH",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
-> Example response (200):
+### Example response (200):
 
 ```json
 {
@@ -287,58 +295,55 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PATCH railcontent/comment/{id}`
 
-#### Body Parameters
 
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    data.type | string |  required  | Must be 'comment'.
-    data.attributes.comment | string |  optional  | The text of the comment.
-    data.attributes.temporary_display_name | string |  optional  | 
-    data.relationships.content.data.type | string |  optional  | Must be 'content'.
-    data.relationships.content.data.id | integer |  optional  | Must exists in contents.
 
 <!-- END_26daf74246cc31035b3821e283f2c144 -->
 
 <!-- START_121b2cd5d84d7140b7802b630daed743 -->
 ## Delete an existing comment
 
-> Example request:
 
-```bash
-curl -X DELETE "http://localhost/railcontent/comment/1" 
+### HTTP Request
+    `DELETE railcontent/comment/{id}`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/comment/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/comment/1");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (204):
+### Example response (204):
 
 ```json
 []
 ```
-> Example response (403):
+### Example response (403):
 
 ```json
 {
     "message": "Delete failed, you can delete only your comments."
 }
 ```
-> Example response (404):
+### Example response (404):
 
 ```json
 {
@@ -346,8 +351,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`DELETE railcontent/comment/{id}`
+
 
 
 <!-- END_121b2cd5d84d7140b7802b630daed743 -->
@@ -355,23 +359,39 @@ fetch(url, {
 <!-- START_7ce1a818c2f016fa930880c23ef690f8 -->
 ## Create a reply
 
-> Example request:
 
-```bash
-curl -X PUT "http://localhost/railcontent/comment/reply" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"type":"comment","attributes":{"comment":"Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae."},"relationships":{"parent":{"data":{"type":"comment","id":1}}}}}'
+### HTTP Request
+    `PUT railcontent/comment/reply`
 
-```
-```javascript
-const url = new URL("http://localhost/railcontent/comment/reply");
 
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+    |body|  data.type |  required  | | string  | Must be 'comment'. |
+    |body|  data.attributes.comment |  required  | | string  | The text of the reply. |
+    |body|  data.relationships.parent.data.type |  required  | | string  | Must be 'comment'. |
+    |body|  data.relationships.parent.data.id |  required  | | integer  | Must exists in comments. |
+
+### Validation Rules
+```php
+{
+    "data.attributes.comment": "required|max:10024",
+    "data.relationships.parent.data.id": "required|numeric|exists:testbench.railcontent_comments,id"
 }
+```
 
-let body = {
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/comment/reply',
+{
     "data": {
         "type": "comment",
         "attributes": {
@@ -387,17 +407,13 @@ let body = {
         }
     }
 }
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-    body: body
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
-> Example response (200):
+### Example response (200):
 
 ```json
 {
@@ -477,17 +493,8 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PUT railcontent/comment/reply`
 
-#### Body Parameters
 
-Parameter | Type | Status | Description
---------- | ------- | ------- | ------- | -----------
-    data.type | string |  required  | Must be 'comment'.
-    data.attributes.comment | string |  required  | The text of the reply.
-    data.relationships.parent.data.type | string |  required  | Must be 'comment'.
-    data.relationships.parent.data.id | integer |  required  | Must exists in comments.
 
 <!-- END_7ce1a818c2f016fa930880c23ef690f8 -->
 
@@ -499,28 +506,35 @@ Pull comments based on the criteria passed in request
      - user_id      => pull user's comments
      - content_type => pull the comments for the contents with given type
 
-> Example request:
 
-```bash
-curl -X GET -G "http://localhost/railcontent/comment" 
+### HTTP Request
+    `GET railcontent/comment`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/comment',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/comment");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
+### Example response (200):
 
 ```json
 {
@@ -543,8 +557,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`GET railcontent/comment`
+
 
 
 <!-- END_c209c8d8b857438eb1c1eeda5a870ead -->
@@ -552,28 +565,35 @@ fetch(url, {
 <!-- START_3beda97b8a46ab8885399051f413b5e1 -->
 ## List comments, the current page it&#039;s the page with the comment
 
-> Example request:
 
-```bash
-curl -X GET -G "http://localhost/railcontent/comment/1" 
+### HTTP Request
+    `GET railcontent/comment/{id}`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/comment/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/comment/1");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (500):
+### Example response (500):
 
 ```json
 {
@@ -581,8 +601,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`GET railcontent/comment/{id}`
+
 
 
 <!-- END_3beda97b8a46ab8885399051f413b5e1 -->
@@ -590,28 +609,35 @@ fetch(url, {
 <!-- START_5a905c9e9e8df6e1c999d38d3ad1c599 -->
 ## Authenticated user like a comment.
 
-> Example request:
 
-```bash
-curl -X PUT "http://localhost/railcontent/comment-like/1" 
+### HTTP Request
+    `PUT railcontent/comment-like/{id}`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/comment-like/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/comment-like/1");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (500):
+### Example response (500):
 
 ```json
 {
@@ -619,8 +645,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PUT railcontent/comment-like/{id}`
+
 
 
 <!-- END_5a905c9e9e8df6e1c999d38d3ad1c599 -->
@@ -628,28 +653,35 @@ fetch(url, {
 <!-- START_f93a1974aa0b0e828f72446fa23d4419 -->
 ## Authenticated user dislike a comment.
 
-> Example request:
 
-```bash
-curl -X DELETE "http://localhost/railcontent/comment-like/1" 
+### HTTP Request
+    `DELETE railcontent/comment-like/{id}`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/comment-like/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/comment-like/1");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (500):
+### Example response (500):
 
 ```json
 {
@@ -657,8 +689,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`DELETE railcontent/comment-like/{id}`
+
 
 
 <!-- END_f93a1974aa0b0e828f72446fa23d4419 -->

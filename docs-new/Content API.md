@@ -1,49 +1,39 @@
----
-title: API Reference
+# Content API
 
-language_tabs:
-- bash
-- javascript
+# JSON Endpoints
 
-includes:
-
-search: true
-
-toc_footers:
-- <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
----
-<!-- START_INFO -->
-# Info
-
-Welcome to the generated API reference.
-[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
-
-<!-- END_INFO -->
 
 <!-- START_61bfda18a7d18e87c48fe08c708c8abe -->
 ## railcontent/content
-> Example request:
 
-```bash
-curl -X OPTIONS "http://localhost/railcontent/content" 
+### HTTP Request
+    `OPTIONS railcontent/content`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/content");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "OPTIONS",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (500):
+### Example response (500):
 
 ```json
 {
@@ -51,36 +41,42 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`OPTIONS railcontent/content`
+
 
 
 <!-- END_61bfda18a7d18e87c48fe08c708c8abe -->
 
 <!-- START_d33050309856c95cc17d90bb91fbca9c -->
 ## railcontent/content
-> Example request:
 
-```bash
-curl -X GET -G "http://localhost/railcontent/content" 
+### HTTP Request
+    `GET railcontent/content`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/content");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
+### Example response (200):
 
 ```json
 {
@@ -102,8 +98,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`GET railcontent/content`
+
 
 
 <!-- END_d33050309856c95cc17d90bb91fbca9c -->
@@ -111,28 +106,35 @@ fetch(url, {
 <!-- START_5749008282f838b8688849041825f55a -->
 ## Pull the children contents for the parent id
 
-> Example request:
 
-```bash
-curl -X GET -G "http://localhost/railcontent/content/parent/1" 
+### HTTP Request
+    `GET railcontent/content/parent/{parentId}`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content/parent/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/content/parent/1");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
+### Example response (200):
 
 ```json
 {
@@ -191,8 +193,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`GET railcontent/content/parent/{parentId}`
+
 
 
 <!-- END_5749008282f838b8688849041825f55a -->
@@ -200,28 +201,35 @@ fetch(url, {
 <!-- START_e55b02d4c8dd5d9849bcb5ea9764baa7 -->
 ## Pull the contents based on ids
 
-> Example request:
 
-```bash
-curl -X GET -G "http://localhost/railcontent/content/get-by-ids" 
+### HTTP Request
+    `GET railcontent/content/get-by-ids`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content/get-by-ids',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/content/get-by-ids");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
+### Example response (200):
 
 ```json
 {
@@ -334,36 +342,42 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`GET railcontent/content/get-by-ids`
+
 
 
 <!-- END_e55b02d4c8dd5d9849bcb5ea9764baa7 -->
 
 <!-- START_590f05a5a1b2df09a96398373df36802 -->
 ## railcontent/content/{id}
-> Example request:
 
-```bash
-curl -X GET -G "http://localhost/railcontent/content/1" 
+### HTTP Request
+    `GET railcontent/content/{id}`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/content/1");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "GET",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (200):
+### Example response (200):
 
 ```json
 {
@@ -422,8 +436,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`GET railcontent/content/{id}`
+
 
 
 <!-- END_590f05a5a1b2df09a96398373df36802 -->
@@ -431,28 +444,35 @@ fetch(url, {
 <!-- START_041a3bcbff15a33078ad0fc39db6ceda -->
 ## Create a new content and return it in JSON format
 
-> Example request:
 
-```bash
-curl -X PUT "http://localhost/railcontent/content" 
+### HTTP Request
+    `PUT railcontent/content`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/content");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PUT",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (422):
+### Example response (422):
 
 ```json
 {
@@ -471,8 +491,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PUT railcontent/content`
+
 
 
 <!-- END_041a3bcbff15a33078ad0fc39db6ceda -->
@@ -480,28 +499,35 @@ fetch(url, {
 <!-- START_5828f7048c0cc2858373a9cf44c55e02 -->
 ## Update a content based on content id and return it in JSON format
 
-> Example request:
 
-```bash
-curl -X PATCH "http://localhost/railcontent/content/1" 
+### HTTP Request
+    `PATCH railcontent/content/{contentId}`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/content/1");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "PATCH",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (404):
+### Example response (404):
 
 ```json
 {
@@ -512,8 +538,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`PATCH railcontent/content/{contentId}`
+
 
 
 <!-- END_5828f7048c0cc2858373a9cf44c55e02 -->
@@ -521,35 +546,41 @@ fetch(url, {
 <!-- START_6db1e06526b714b35026eddcf5e1efb9 -->
 ## Call the delete method if the content exist
 
-> Example request:
 
-```bash
-curl -X DELETE "http://localhost/railcontent/content/1" 
+### HTTP Request
+    `DELETE railcontent/content/{id}`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/content/1");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (404):
+### Example response (404):
 
 ```json
 {}
 ```
 
-### HTTP Request
-`DELETE railcontent/content/{id}`
+
 
 
 <!-- END_6db1e06526b714b35026eddcf5e1efb9 -->
@@ -557,28 +588,35 @@ fetch(url, {
 <!-- START_cd36dc2623a54c340f0bc0db37986ba8 -->
 ## Call the soft delete method if the content exist
 
-> Example request:
 
-```bash
-curl -X DELETE "http://localhost/railcontent/soft/content/1" 
+### HTTP Request
+    `DELETE railcontent/soft/content/{id}`
+
+
+###Permissions
+
+
+### Request Parameters
+
+
+|Type|Key|Required|Default|Options|Notes|
+|----|---|--------|-------|-------|-----|
+
+
+### Example request:
+
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/soft/content/1',
+[]
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
-```javascript
-const url = new URL("http://localhost/railcontent/soft/content/1");
 
-let headers = {
-    "Accept": "application/json",
-    "Content-Type": "application/json",
-}
-
-fetch(url, {
-    method: "DELETE",
-    headers: headers,
-})
-    .then(response => response.json())
-    .then(json => console.log(json));
-```
-
-> Example response (404):
+### Example response (404):
 
 ```json
 {
@@ -589,8 +627,7 @@ fetch(url, {
 }
 ```
 
-### HTTP Request
-`DELETE railcontent/soft/content/{id}`
+
 
 
 <!-- END_cd36dc2623a54c340f0bc0db37986ba8 -->

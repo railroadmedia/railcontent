@@ -20,7 +20,7 @@ class PermissionRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public static function rules()
     {
         return [
             'data.attributes.name' => 'required|max:255',
