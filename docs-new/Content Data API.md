@@ -12,7 +12,15 @@ search: true
 toc_footers:
 - <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
 ---
-                    <!-- START_2897a4200e3365f16bdc09c4a556e35c -->
+<!-- START_INFO -->
+# Info
+
+Welcome to the generated API reference.
+[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
+
+<!-- END_INFO -->
+
+<!-- START_2897a4200e3365f16bdc09c4a556e35c -->
 ## Call the method from service that create new data and link the content with the data.
 
 > Example request:
@@ -20,7 +28,7 @@ toc_footers:
 ```bash
 curl -X PUT "http://localhost/railcontent/content/datum" \
     -H "Content-Type: application/json" \
-    -d '{"data":{"type":"contentData","attributes":{"key":"description","value":"indsf fdgg  gfg","position":8},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+    -d '{"data":{"type":"contentData","attributes":{"key":"description","value":"indsf fdgg  gfg","position":11},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
 
 ```
 ```javascript
@@ -37,7 +45,7 @@ let body = {
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 8
+            "position": 11
         },
         "relationships": {
             "content": {
@@ -94,8 +102,7 @@ Parameter | Type | Status | Description
 
 <!-- END_2897a4200e3365f16bdc09c4a556e35c -->
 
-        
-                    <!-- START_fb363b9c870922ffa55b96a23cd5a425 -->
+<!-- START_fb363b9c870922ffa55b96a23cd5a425 -->
 ## Call the method from service to update a content datum
 
 > Example request:
@@ -103,7 +110,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X PATCH "http://localhost/railcontent/content/datum/1" \
     -H "Content-Type: application/json" \
-    -d '{"data":{"type":"contentData","attributes":{"key":"description","value":"indsf fdgg  gfg","position":13},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+    -d '{"data":{"type":"contentData","attributes":{"key":"description","value":"indsf fdgg  gfg","position":19},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
 
 ```
 ```javascript
@@ -120,7 +127,7 @@ let body = {
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 13
+            "position": 19
         },
         "relationships": {
             "content": {
@@ -169,8 +176,7 @@ Parameter | Type | Status | Description
 
 <!-- END_fb363b9c870922ffa55b96a23cd5a425 -->
 
-        
-                    <!-- START_a4137a74763de18a36fc0ff882de62d3 -->
+<!-- START_a4137a74763de18a36fc0ff882de62d3 -->
 ## Call the method from service to delete the content data
 
 > Example request:
@@ -211,4 +217,3 @@ fetch(url, {
 
 <!-- END_a4137a74763de18a36fc0ff882de62d3 -->
 
-        

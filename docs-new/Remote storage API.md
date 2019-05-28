@@ -12,7 +12,15 @@ search: true
 toc_footers:
 - <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
 ---
-                    <!-- START_339568376072f2f110420dc04236f894 -->
+<!-- START_INFO -->
+# Info
+
+Welcome to the generated API reference.
+[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
+
+<!-- END_INFO -->
+
+<!-- START_339568376072f2f110420dc04236f894 -->
 ## railcontent/remote
 > Example request:
 
@@ -49,4 +57,3 @@ fetch(url, {
 
 <!-- END_339568376072f2f110420dc04236f894 -->
 
-        

@@ -12,7 +12,15 @@ search: true
 toc_footers:
 - <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
 ---
-                    <!-- START_4572abc09b0a4dfedb76009dca5d6065 -->
+<!-- START_INFO -->
+# Info
+
+Welcome to the generated API reference.
+[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
+
+<!-- END_INFO -->
+
+<!-- START_4572abc09b0a4dfedb76009dca5d6065 -->
 ## Create/update user permission record and return data in JSON API format.
 
 > Example request:
@@ -66,8 +74,7 @@ fetch(url, {
 
 <!-- END_4572abc09b0a4dfedb76009dca5d6065 -->
 
-        
-                    <!-- START_091f922183423b288cd6002e9275c608 -->
+<!-- START_091f922183423b288cd6002e9275c608 -->
 ## Delete user permission if exists
 
 > Example request:
@@ -108,8 +115,7 @@ fetch(url, {
 
 <!-- END_091f922183423b288cd6002e9275c608 -->
 
-        
-                    <!-- START_11e3427c786ec11eb4b04a07b221d9eb -->
+<!-- START_11e3427c786ec11eb4b04a07b221d9eb -->
 ## Pull active user permissions.
 
 IF "only_active" it's set false on the request the expired permissions are returned also
@@ -150,4 +156,3 @@ fetch(url, {
 
 <!-- END_11e3427c786ec11eb4b04a07b221d9eb -->
 
-        

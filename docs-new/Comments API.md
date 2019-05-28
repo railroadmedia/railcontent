@@ -12,7 +12,15 @@ search: true
 toc_footers:
 - <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
 ---
-                    <!-- START_f625f9c6a130f4a7897d109f2ba98bc6 -->
+<!-- START_INFO -->
+# Info
+
+Welcome to the generated API reference.
+[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
+
+<!-- END_INFO -->
+
+<!-- START_f625f9c6a130f4a7897d109f2ba98bc6 -->
 ## Create a new comment
 
 > Example request:
@@ -153,8 +161,7 @@ Parameter | Type | Status | Description
 
 <!-- END_f625f9c6a130f4a7897d109f2ba98bc6 -->
 
-        
-                    <!-- START_26daf74246cc31035b3821e283f2c144 -->
+<!-- START_26daf74246cc31035b3821e283f2c144 -->
 ## Update a comment
 
 > Example request:
@@ -162,7 +169,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X PATCH "http://localhost/railcontent/comment/1" \
     -H "Content-Type: application/json" \
-    -d '{"data":{"type":"comment","attributes":{"comment":"Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.","temporary_display_name":"omnis"},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+    -d '{"data":{"type":"comment","attributes":{"comment":"Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.","temporary_display_name":"nesciunt"},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
 
 ```
 ```javascript
@@ -178,7 +185,7 @@ let body = {
         "type": "comment",
         "attributes": {
             "comment": "Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.",
-            "temporary_display_name": "omnis"
+            "temporary_display_name": "nesciunt"
         },
         "relationships": {
             "content": {
@@ -295,8 +302,7 @@ Parameter | Type | Status | Description
 
 <!-- END_26daf74246cc31035b3821e283f2c144 -->
 
-        
-                    <!-- START_121b2cd5d84d7140b7802b630daed743 -->
+<!-- START_121b2cd5d84d7140b7802b630daed743 -->
 ## Delete an existing comment
 
 > Example request:
@@ -346,8 +352,7 @@ fetch(url, {
 
 <!-- END_121b2cd5d84d7140b7802b630daed743 -->
 
-        
-                    <!-- START_7ce1a818c2f016fa930880c23ef690f8 -->
+<!-- START_7ce1a818c2f016fa930880c23ef690f8 -->
 ## Create a reply
 
 > Example request:
@@ -486,8 +491,7 @@ Parameter | Type | Status | Description
 
 <!-- END_7ce1a818c2f016fa930880c23ef690f8 -->
 
-        
-                    <!-- START_c209c8d8b857438eb1c1eeda5a870ead -->
+<!-- START_c209c8d8b857438eb1c1eeda5a870ead -->
 ## List comments
 
 Pull comments based on the criteria passed in request
@@ -545,8 +549,7 @@ fetch(url, {
 
 <!-- END_c209c8d8b857438eb1c1eeda5a870ead -->
 
-        
-                    <!-- START_3beda97b8a46ab8885399051f413b5e1 -->
+<!-- START_3beda97b8a46ab8885399051f413b5e1 -->
 ## List comments, the current page it&#039;s the page with the comment
 
 > Example request:
@@ -584,8 +587,7 @@ fetch(url, {
 
 <!-- END_3beda97b8a46ab8885399051f413b5e1 -->
 
-        
-                    <!-- START_5a905c9e9e8df6e1c999d38d3ad1c599 -->
+<!-- START_5a905c9e9e8df6e1c999d38d3ad1c599 -->
 ## Authenticated user like a comment.
 
 > Example request:
@@ -623,8 +625,7 @@ fetch(url, {
 
 <!-- END_5a905c9e9e8df6e1c999d38d3ad1c599 -->
 
-        
-                    <!-- START_f93a1974aa0b0e828f72446fa23d4419 -->
+<!-- START_f93a1974aa0b0e828f72446fa23d4419 -->
 ## Authenticated user dislike a comment.
 
 > Example request:
@@ -662,4 +663,3 @@ fetch(url, {
 
 <!-- END_f93a1974aa0b0e828f72446fa23d4419 -->
 
-        

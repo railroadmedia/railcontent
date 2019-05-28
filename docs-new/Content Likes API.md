@@ -12,7 +12,15 @@ search: true
 toc_footers:
 - <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
 ---
-                    <!-- START_6bf34590090ea43f90bc0b8aca783f73 -->
+<!-- START_INFO -->
+# Info
+
+Welcome to the generated API reference.
+[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
+
+<!-- END_INFO -->
+
+<!-- START_6bf34590090ea43f90bc0b8aca783f73 -->
 ## Fetch likes for content with pagination.
 
 > Example request:
@@ -64,8 +72,7 @@ fetch(url, {
 
 <!-- END_6bf34590090ea43f90bc0b8aca783f73 -->
 
-        
-                    <!-- START_c864f9442ee531ba11d7259fb511a17c -->
+<!-- START_c864f9442ee531ba11d7259fb511a17c -->
 ## Authenticated user like content.
 
 > Example request:
@@ -132,8 +139,7 @@ Parameter | Type | Status | Description
 
 <!-- END_c864f9442ee531ba11d7259fb511a17c -->
 
-        
-                    <!-- START_4f7915ff2544f600944155f3e2c529eb -->
+<!-- START_4f7915ff2544f600944155f3e2c529eb -->
 ## Authenticated user dislike content.
 
 > Example request:
@@ -200,4 +206,3 @@ Parameter | Type | Status | Description
 
 <!-- END_4f7915ff2544f600944155f3e2c529eb -->
 
-        

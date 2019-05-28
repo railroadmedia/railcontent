@@ -12,7 +12,15 @@ search: true
 toc_footers:
 - <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
 ---
-                    <!-- START_f6d838bb700192d56d216ae84700c66d -->
+<!-- START_INFO -->
+# Info
+
+Welcome to the generated API reference.
+[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
+
+<!-- END_INFO -->
+
+<!-- START_f6d838bb700192d56d216ae84700c66d -->
 ## Create/update a content hierarchy.
 
 > Example request:
@@ -20,7 +28,7 @@ toc_footers:
 ```bash
 curl -X PUT "http://localhost/railcontent/content/hierarchy" \
     -H "Content-Type: application/json" \
-    -d '{"data":{"type":"contentHierarchy","attributes":{"child_position":5},"relationships":{"parent":{"data":{"type":"content","id":1}},"child":{"data":{"type":"content","id":1}}}}}'
+    -d '{"data":{"type":"contentHierarchy","attributes":{"child_position":11},"relationships":{"parent":{"data":{"type":"content","id":1}},"child":{"data":{"type":"content","id":1}}}}}'
 
 ```
 ```javascript
@@ -35,7 +43,7 @@ let body = {
     "data": {
         "type": "contentHierarchy",
         "attributes": {
-            "child_position": 5
+            "child_position": 11
         },
         "relationships": {
             "parent": {
@@ -98,8 +106,7 @@ Parameter | Type | Status | Description
 
 <!-- END_f6d838bb700192d56d216ae84700c66d -->
 
-        
-                    <!-- START_522506d0e5c355eb192c83407b0da522 -->
+<!-- START_522506d0e5c355eb192c83407b0da522 -->
 ## railcontent/content/hierarchy/{parentId}/{childId}
 > Example request:
 
@@ -134,4 +141,3 @@ null
 
 <!-- END_522506d0e5c355eb192c83407b0da522 -->
 
-        

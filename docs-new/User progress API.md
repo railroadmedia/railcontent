@@ -12,7 +12,15 @@ search: true
 toc_footers:
 - <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
 ---
-                    <!-- START_c0f3be7f8a8582faf9eded5ca139e05e -->
+<!-- START_INFO -->
+# Info
+
+Welcome to the generated API reference.
+[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
+
+<!-- END_INFO -->
+
+<!-- START_c0f3be7f8a8582faf9eded5ca139e05e -->
 ## Start a content for the authenticated user
 
 > Example request:
@@ -56,8 +64,7 @@ fetch(url, {
 
 <!-- END_c0f3be7f8a8582faf9eded5ca139e05e -->
 
-        
-                    <!-- START_c771ec122eac231459ef2eeb003a51b6 -->
+<!-- START_c771ec122eac231459ef2eeb003a51b6 -->
 ## Set content as complete for the authenticated user
 
 > Example request:
@@ -101,8 +108,7 @@ fetch(url, {
 
 <!-- END_c771ec122eac231459ef2eeb003a51b6 -->
 
-        
-                    <!-- START_b2202db6547dcbe6b75e0cbc642af8de -->
+<!-- START_b2202db6547dcbe6b75e0cbc642af8de -->
 ## Reset content progress for authenticated user
 
 > Example request:
@@ -146,8 +152,7 @@ fetch(url, {
 
 <!-- END_b2202db6547dcbe6b75e0cbc642af8de -->
 
-        
-                    <!-- START_0300c7a6d3d72c86c7cd80b0736a1e10 -->
+<!-- START_0300c7a6d3d72c86c7cd80b0736a1e10 -->
 ## Save the progress on a content for the authenticated user
 
 > Example request:
@@ -191,4 +196,3 @@ fetch(url, {
 
 <!-- END_0300c7a6d3d72c86c7cd80b0736a1e10 -->
 
-        

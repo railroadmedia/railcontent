@@ -12,7 +12,15 @@ search: true
 toc_footers:
 - <a href='http://github.com/mpociot/documentarian'>Documentation Powered by Documentarian</a>
 ---
-                    <!-- START_61bfda18a7d18e87c48fe08c708c8abe -->
+<!-- START_INFO -->
+# Info
+
+Welcome to the generated API reference.
+[Get Postman Collection](http://localhost/../../../docs-new/collection.json)
+
+<!-- END_INFO -->
+
+<!-- START_61bfda18a7d18e87c48fe08c708c8abe -->
 ## railcontent/content
 > Example request:
 
@@ -49,8 +57,7 @@ fetch(url, {
 
 <!-- END_61bfda18a7d18e87c48fe08c708c8abe -->
 
-        
-                    <!-- START_d33050309856c95cc17d90bb91fbca9c -->
+<!-- START_d33050309856c95cc17d90bb91fbca9c -->
 ## railcontent/content
 > Example request:
 
@@ -101,8 +108,7 @@ fetch(url, {
 
 <!-- END_d33050309856c95cc17d90bb91fbca9c -->
 
-        
-                    <!-- START_5749008282f838b8688849041825f55a -->
+<!-- START_5749008282f838b8688849041825f55a -->
 ## Pull the children contents for the parent id
 
 > Example request:
@@ -191,8 +197,7 @@ fetch(url, {
 
 <!-- END_5749008282f838b8688849041825f55a -->
 
-        
-                    <!-- START_e55b02d4c8dd5d9849bcb5ea9764baa7 -->
+<!-- START_e55b02d4c8dd5d9849bcb5ea9764baa7 -->
 ## Pull the contents based on ids
 
 > Example request:
@@ -335,8 +340,7 @@ fetch(url, {
 
 <!-- END_e55b02d4c8dd5d9849bcb5ea9764baa7 -->
 
-        
-                    <!-- START_590f05a5a1b2df09a96398373df36802 -->
+<!-- START_590f05a5a1b2df09a96398373df36802 -->
 ## railcontent/content/{id}
 > Example request:
 
@@ -424,8 +428,7 @@ fetch(url, {
 
 <!-- END_590f05a5a1b2df09a96398373df36802 -->
 
-        
-                    <!-- START_041a3bcbff15a33078ad0fc39db6ceda -->
+<!-- START_041a3bcbff15a33078ad0fc39db6ceda -->
 ## Create a new content and return it in JSON format
 
 > Example request:
@@ -474,8 +477,7 @@ fetch(url, {
 
 <!-- END_041a3bcbff15a33078ad0fc39db6ceda -->
 
-        
-                    <!-- START_5828f7048c0cc2858373a9cf44c55e02 -->
+<!-- START_5828f7048c0cc2858373a9cf44c55e02 -->
 ## Update a content based on content id and return it in JSON format
 
 > Example request:
@@ -516,8 +518,7 @@ fetch(url, {
 
 <!-- END_5828f7048c0cc2858373a9cf44c55e02 -->
 
-        
-                    <!-- START_6db1e06526b714b35026eddcf5e1efb9 -->
+<!-- START_6db1e06526b714b35026eddcf5e1efb9 -->
 ## Call the delete method if the content exist
 
 > Example request:
@@ -553,8 +554,7 @@ fetch(url, {
 
 <!-- END_6db1e06526b714b35026eddcf5e1efb9 -->
 
-        
-                    <!-- START_cd36dc2623a54c340f0bc0db37986ba8 -->
+<!-- START_cd36dc2623a54c340f0bc0db37986ba8 -->
 ## Call the soft delete method if the content exist
 
 > Example request:
@@ -595,4 +595,3 @@ fetch(url, {
 
 <!-- END_cd36dc2623a54c340f0bc0db37986ba8 -->
 
-        
