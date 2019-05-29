@@ -13,7 +13,7 @@ Return a Json paginated response with the contents
     `GET railcontent/search`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -23,7 +23,7 @@ Return a Json paginated response with the contents
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -36,7 +36,7 @@ $.ajax({
 });
 ```
 
-### Example response (500):
+### Response Example (500):
 
 ```json
 {

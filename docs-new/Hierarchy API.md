@@ -11,7 +11,7 @@
     `PUT railcontent/content/hierarchy`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -19,15 +19,15 @@
 
 |Type|Key|Required|Default|Options|Notes|
 |----|---|--------|-------|-------|-----|
-    |body|  data.type |  required  | | string  | Must be 'contentHierarchy'. |
-    |body|  data.attributes.child_position |  optional  | | integer  | The position relative to the other children of the given parent. Will automatically shift other children. If null - position will be set to the end of the child stack. |
-    |body|  data.relationships.parent.data.type |  optional  | | string  | Must be 'content'. |
-    |body|  data.relationships.parent.data.id |  optional  | | integer  | Must exists in contents. |
-    |body|  data.relationships.child.data.type |  optional  | | string  | Must be 'content'. |
-    |body|  data.relationships.child.data.id |  optional  | | integer  | Must exists in contents. |
+|body|data.type|  required  | |string|Must be 'contentHierarchy'.|
+|body|data.attributes.child_position|  optional  | |integer|The position relative to the other children of the given parent. Will automatically shift other children. If null - position will be set to the end of the child stack.|
+|body|data.relationships.parent.data.type|  optional  | |string|Must be 'content'.|
+|body|data.relationships.parent.data.id|  optional  | |integer|Must exists in contents.|
+|body|data.relationships.child.data.type|  optional  | |string|Must be 'content'.|
+|body|data.relationships.child.data.id|  optional  | |integer|Must exists in contents.|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -37,7 +37,7 @@ $.ajax({
     "data": {
         "type": "contentHierarchy",
         "attributes": {
-            "child_position": 17
+            "child_position": 4
         },
         "relationships": {
             "parent": {
@@ -61,7 +61,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {
@@ -92,7 +92,7 @@ $.ajax({
     `DELETE railcontent/content/hierarchy/{parentId}/{childId}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -102,7 +102,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -115,7 +115,7 @@ $.ajax({
 });
 ```
 
-### Example response (204):
+### Response Example (204):
 
 ```json
 null

@@ -10,7 +10,7 @@
     `GET railcontent/permission`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -20,7 +20,7 @@
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -33,7 +33,7 @@ $.ajax({
 });
 ```
 
-### Example response (200):
+### Response Example (200):
 
 ```json
 {
@@ -54,7 +54,7 @@ $.ajax({
     `PUT railcontent/permission`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -70,7 +70,7 @@ $.ajax({
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -83,7 +83,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {
@@ -110,7 +110,7 @@ $.ajax({
     `PATCH railcontent/permission/dissociate`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -128,7 +128,7 @@ $.ajax({
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -141,7 +141,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {
@@ -178,7 +178,7 @@ $.ajax({
     `PATCH railcontent/permission/{permissionId}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -194,7 +194,7 @@ $.ajax({
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -207,7 +207,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {
@@ -234,7 +234,7 @@ $.ajax({
     `DELETE railcontent/permission/{permissionId}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -244,7 +244,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -257,7 +257,7 @@ $.ajax({
 });
 ```
 
-### Example response (404):
+### Response Example (404):
 
 ```json
 {
@@ -281,7 +281,7 @@ $.ajax({
     `PUT railcontent/permission/assign`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -299,7 +299,7 @@ $.ajax({
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -312,7 +312,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {

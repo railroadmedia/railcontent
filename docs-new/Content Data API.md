@@ -11,7 +11,7 @@
     `PUT railcontent/content/datum`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -19,15 +19,15 @@
 
 |Type|Key|Required|Default|Options|Notes|
 |----|---|--------|-------|-------|-----|
-    |body|  data.type |  required  | | string  | Must be 'contentData'. |
-    |body|  data.attributes.key |  required  | | string  | The data key. |
-    |body|  data.attributes.value |  required  | | string  | Data value.  |
-    |body|  data.attributes.position |  optional  | | integer  | The position of this datum relative to other datum with the same key under the same content id. |
-    |body|  data.relationships.content.data.type |  required  | | string  | Must be 'content'. |
-    |body|  data.relationships.content.data.id |  required  | | integer  | Must exists in contents. |
+|body|data.type|  required  | |string|Must be 'contentData'.|
+|body|data.attributes.key|  required  | |string|The data key.|
+|body|data.attributes.value|  required  | |string|Data value. |
+|body|data.attributes.position|  optional  | |integer|The position of this datum relative to other datum with the same key under the same content id.|
+|body|data.relationships.content.data.type|  required  | |string|Must be 'content'.|
+|body|data.relationships.content.data.id|  required  | |integer|Must exists in contents.|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -39,7 +39,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 6
+            "position": 5
         },
         "relationships": {
             "content": {
@@ -57,7 +57,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {
@@ -89,7 +89,7 @@ $.ajax({
     `PATCH railcontent/content/datum/{datumId}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -97,15 +97,15 @@ $.ajax({
 
 |Type|Key|Required|Default|Options|Notes|
 |----|---|--------|-------|-------|-----|
-    |body|  data.type |  required  | | string  | Must be 'contentData'. |
-    |body|  data.attributes.key |  optional  | | string  | The data key. |
-    |body|  data.attributes.value |  optional  | | string  | Data value.  |
-    |body|  data.attributes.position |  optional  | | integer  | The position of this datum relative to other datum with the same key under the same content id. |
-    |body|  data.relationships.content.data.type |  optional  | | string  | Must be 'content'. |
-    |body|  data.relationships.content.data.id |  optional  | | integer  | Must exists in contents. |
+|body|data.type|  required  | |string|Must be 'contentData'.|
+|body|data.attributes.key|  optional  | |string|The data key.|
+|body|data.attributes.value|  optional  | |string|Data value. |
+|body|data.attributes.position|  optional  | |integer|The position of this datum relative to other datum with the same key under the same content id.|
+|body|data.relationships.content.data.type|  optional  | |string|Must be 'content'.|
+|body|data.relationships.content.data.id|  optional  | |integer|Must exists in contents.|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -117,7 +117,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 11
+            "position": 12
         },
         "relationships": {
             "content": {
@@ -135,7 +135,7 @@ $.ajax({
 });
 ```
 
-### Example response (404):
+### Response Example (404):
 
 ```json
 {
@@ -159,7 +159,7 @@ $.ajax({
     `DELETE railcontent/content/datum/{datumId}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -169,7 +169,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -182,7 +182,7 @@ $.ajax({
 });
 ```
 
-### Example response (404):
+### Response Example (404):
 
 ```json
 {

@@ -10,7 +10,7 @@
     `PUT railcontent/remote`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -20,7 +20,7 @@
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -33,7 +33,7 @@ $.ajax({
 });
 ```
 
-### Example response (500):
+### Response Example (500):
 
 ```json
 {

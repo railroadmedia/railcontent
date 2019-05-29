@@ -11,7 +11,7 @@
     `PUT railcontent/user-permission`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -30,7 +30,7 @@
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -43,7 +43,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {
@@ -80,7 +80,7 @@ $.ajax({
     `DELETE railcontent/user-permission/{userPermissionId}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -90,7 +90,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -103,7 +103,7 @@ $.ajax({
 });
 ```
 
-### Example response (404):
+### Response Example (404):
 
 ```json
 {
@@ -130,7 +130,7 @@ IF "only_active" it's set false on the request the expired permissions are retur
     `GET railcontent/user-permission`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -140,7 +140,7 @@ IF "only_active" it's set false on the request the expired permissions are retur
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -153,7 +153,7 @@ $.ajax({
 });
 ```
 
-### Example response (200):
+### Response Example (200):
 
 ```json
 {

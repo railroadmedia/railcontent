@@ -11,7 +11,7 @@
     `PUT railcontent/start`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -27,7 +27,7 @@
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -40,7 +40,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {
@@ -67,7 +67,7 @@ $.ajax({
     `PUT railcontent/complete`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -83,7 +83,7 @@ $.ajax({
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -96,7 +96,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {
@@ -123,7 +123,7 @@ $.ajax({
     `PUT railcontent/reset`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -139,7 +139,7 @@ $.ajax({
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -152,7 +152,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {
@@ -179,7 +179,7 @@ $.ajax({
     `PUT railcontent/progress`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -195,7 +195,7 @@ $.ajax({
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -208,7 +208,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {

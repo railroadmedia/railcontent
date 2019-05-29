@@ -10,7 +10,7 @@
     `OPTIONS railcontent/content`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -20,7 +20,7 @@
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -33,7 +33,7 @@ $.ajax({
 });
 ```
 
-### Example response (500):
+### Response Example (500):
 
 ```json
 {
@@ -53,7 +53,7 @@ $.ajax({
     `GET railcontent/content`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -63,7 +63,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -76,7 +76,7 @@ $.ajax({
 });
 ```
 
-### Example response (200):
+### Response Example (200):
 
 ```json
 {
@@ -111,7 +111,7 @@ $.ajax({
     `GET railcontent/content/parent/{parentId}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -121,7 +121,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -134,7 +134,7 @@ $.ajax({
 });
 ```
 
-### Example response (200):
+### Response Example (200):
 
 ```json
 {
@@ -206,7 +206,7 @@ $.ajax({
     `GET railcontent/content/get-by-ids`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -216,7 +216,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -229,7 +229,7 @@ $.ajax({
 });
 ```
 
-### Example response (200):
+### Response Example (200):
 
 ```json
 {
@@ -354,7 +354,7 @@ $.ajax({
     `GET railcontent/content/{id}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -364,7 +364,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -377,7 +377,7 @@ $.ajax({
 });
 ```
 
-### Example response (200):
+### Response Example (200):
 
 ```json
 {
@@ -449,7 +449,7 @@ $.ajax({
     `PUT railcontent/content`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -459,7 +459,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -472,7 +472,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {
@@ -504,7 +504,7 @@ $.ajax({
     `PATCH railcontent/content/{contentId}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -514,7 +514,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -527,7 +527,7 @@ $.ajax({
 });
 ```
 
-### Example response (404):
+### Response Example (404):
 
 ```json
 {
@@ -551,7 +551,7 @@ $.ajax({
     `DELETE railcontent/content/{id}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -561,7 +561,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -574,7 +574,7 @@ $.ajax({
 });
 ```
 
-### Example response (404):
+### Response Example (404):
 
 ```json
 {}
@@ -593,7 +593,7 @@ $.ajax({
     `DELETE railcontent/soft/content/{id}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -603,7 +603,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -616,7 +616,7 @@ $.ajax({
 });
 ```
 
-### Example response (404):
+### Response Example (404):
 
 ```json
 {

@@ -11,7 +11,7 @@
     `PUT railcontent/comment`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -19,11 +19,11 @@
 
 |Type|Key|Required|Default|Options|Notes|
 |----|---|--------|-------|-------|-----|
-    |body|  data.type |  required  | | string  | Must be 'comment'. |
-    |body|  data.attributes.comment |  required  | | string  | The text of the comment. |
-    |body|  data.attributes.temporary_display_name |  optional  | | string  | Temporary display name for user.  |
-    |body|  data.relationships.content.data.type |  required  | | string  | Must be 'content'. |
-    |body|  data.relationships.content.data.id |  required  | | integer  | Must exists in contents. |
+|body|data.type|  required  | |string|Must be 'comment'.|
+|body|data.attributes.comment|  required  | |string|The text of the comment.|
+|body|data.attributes.temporary_display_name|  optional  | |string|Temporary display name for user. |
+|body|data.relationships.content.data.type|  required  | |string|Must be 'content'.|
+|body|data.relationships.content.data.id|  required  | |integer|Must exists in contents.|
 
 ### Validation Rules
 ```php
@@ -37,7 +37,7 @@
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -66,7 +66,7 @@ $.ajax({
 });
 ```
 
-### Example response (200):
+### Response Example (200):
 
 ```json
 {
@@ -159,7 +159,7 @@ $.ajax({
     `PATCH railcontent/comment/{id}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -167,11 +167,11 @@ $.ajax({
 
 |Type|Key|Required|Default|Options|Notes|
 |----|---|--------|-------|-------|-----|
-    |body|  data.type |  required  | | string  | Must be 'comment'. |
-    |body|  data.attributes.comment |  optional  | | string  | The text of the comment. |
-    |body|  data.attributes.temporary_display_name |  optional  | | string  |  |
-    |body|  data.relationships.content.data.type |  optional  | | string  | Must be 'content'. |
-    |body|  data.relationships.content.data.id |  optional  | | integer  | Must exists in contents. |
+|body|data.type|  required  | |string|Must be 'comment'.|
+|body|data.attributes.comment|  optional  | |string|The text of the comment.|
+|body|data.attributes.temporary_display_name|  optional  | |string||
+|body|data.relationships.content.data.type|  optional  | |string|Must be 'content'.|
+|body|data.relationships.content.data.id|  optional  | |integer|Must exists in contents.|
 
 ### Validation Rules
 ```php
@@ -186,7 +186,7 @@ $.ajax({
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -197,7 +197,7 @@ $.ajax({
         "type": "comment",
         "attributes": {
             "comment": "Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.",
-            "temporary_display_name": "aut"
+            "temporary_display_name": "praesentium"
         },
         "relationships": {
             "content": {
@@ -215,7 +215,7 @@ $.ajax({
 });
 ```
 
-### Example response (200):
+### Response Example (200):
 
 ```json
 {
@@ -298,7 +298,6 @@ $.ajax({
 
 
 
-
 <!-- END_26daf74246cc31035b3821e283f2c144 -->
 
 <!-- START_121b2cd5d84d7140b7802b630daed743 -->
@@ -309,7 +308,7 @@ $.ajax({
     `DELETE railcontent/comment/{id}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -319,7 +318,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -332,19 +331,19 @@ $.ajax({
 });
 ```
 
-### Example response (204):
+### Response Example (204):
 
 ```json
 []
 ```
-### Example response (403):
+### Response Example (403):
 
 ```json
 {
     "message": "Delete failed, you can delete only your comments."
 }
 ```
-### Example response (404):
+### Response Example (404):
 
 ```json
 {
@@ -365,7 +364,7 @@ $.ajax({
     `PUT railcontent/comment/reply`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -373,10 +372,10 @@ $.ajax({
 
 |Type|Key|Required|Default|Options|Notes|
 |----|---|--------|-------|-------|-----|
-    |body|  data.type |  required  | | string  | Must be 'comment'. |
-    |body|  data.attributes.comment |  required  | | string  | The text of the reply. |
-    |body|  data.relationships.parent.data.type |  required  | | string  | Must be 'comment'. |
-    |body|  data.relationships.parent.data.id |  required  | | integer  | Must exists in comments. |
+|body|data.type|  required  | |string|Must be 'comment'.|
+|body|data.attributes.comment|  required  | |string|The text of the reply.|
+|body|data.relationships.parent.data.type|  required  | |string|Must be 'comment'.|
+|body|data.relationships.parent.data.id|  required  | |integer|Must exists in comments.|
 
 ### Validation Rules
 ```php
@@ -386,7 +385,7 @@ $.ajax({
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -414,7 +413,7 @@ $.ajax({
 });
 ```
 
-### Example response (200):
+### Response Example (200):
 
 ```json
 {
@@ -497,7 +496,6 @@ $.ajax({
 
 
 
-
 <!-- END_7ce1a818c2f016fa930880c23ef690f8 -->
 
 <!-- START_c209c8d8b857438eb1c1eeda5a870ead -->
@@ -513,7 +511,7 @@ Pull comments based on the criteria passed in request
     `GET railcontent/comment`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -523,7 +521,7 @@ Pull comments based on the criteria passed in request
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -536,7 +534,7 @@ $.ajax({
 });
 ```
 
-### Example response (200):
+### Response Example (200):
 
 ```json
 {
@@ -572,7 +570,7 @@ $.ajax({
     `GET railcontent/comment/{id}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -582,7 +580,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -595,7 +593,7 @@ $.ajax({
 });
 ```
 
-### Example response (500):
+### Response Example (500):
 
 ```json
 {
@@ -616,7 +614,7 @@ $.ajax({
     `PUT railcontent/comment-like/{id}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -626,7 +624,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -639,7 +637,7 @@ $.ajax({
 });
 ```
 
-### Example response (500):
+### Response Example (500):
 
 ```json
 {
@@ -660,7 +658,7 @@ $.ajax({
     `DELETE railcontent/comment-like/{id}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -670,7 +668,7 @@ $.ajax({
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -683,7 +681,7 @@ $.ajax({
 });
 ```
 
-### Example response (500):
+### Response Example (500):
 
 ```json
 {

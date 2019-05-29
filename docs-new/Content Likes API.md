@@ -11,7 +11,7 @@
     `GET railcontent/content-like/{id}`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -21,7 +21,7 @@
 |----|---|--------|-------|-------|-----|
 
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -34,7 +34,7 @@ $.ajax({
 });
 ```
 
-### Example response (200):
+### Response Example (200):
 
 ```json
 {
@@ -69,7 +69,7 @@ $.ajax({
     `PUT railcontent/content-like`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -77,8 +77,8 @@ $.ajax({
 
 |Type|Key|Required|Default|Options|Notes|
 |----|---|--------|-------|-------|-----|
-    |body|  data.relationships.content.data.type |  required  | | string  | Must be 'content'. |
-    |body|  data.relationships.content.data.id |  required  | | integer  | Must exists in contents. |
+|body|data.relationships.content.data.type|  required  | |string|Must be 'content'.|
+|body|data.relationships.content.data.id|  required  | |integer|Must exists in contents.|
 
 ### Validation Rules
 ```php
@@ -87,7 +87,7 @@ $.ajax({
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -111,7 +111,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {
@@ -138,7 +138,7 @@ $.ajax({
     `DELETE railcontent/content-like`
 
 
-###Permissions
+### Permissions
 
 
 ### Request Parameters
@@ -146,8 +146,8 @@ $.ajax({
 
 |Type|Key|Required|Default|Options|Notes|
 |----|---|--------|-------|-------|-----|
-    |body|  data.relationships.content.data.type |  required  | | string  | Must be 'content'. |
-    |body|  data.relationships.content.data.id |  required  | | integer  | Must exists in contents. |
+|body|data.relationships.content.data.type|  required  | |string|Must be 'content'.|
+|body|data.relationships.content.data.id|  required  | |integer|Must exists in contents.|
 
 ### Validation Rules
 ```php
@@ -156,7 +156,7 @@ $.ajax({
 }
 ```
 
-### Example request:
+### Request Example:
 
 ```js
 $.ajax({
@@ -180,7 +180,7 @@ $.ajax({
 });
 ```
 
-### Example response (422):
+### Response Example (422):
 
 ```json
 {
