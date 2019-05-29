@@ -24,6 +24,20 @@ class ContentLikeRequest extends FormRequest
     }
 
     /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'data.type' => 'json data type',
+            'data.relationships.content.data.type' => 'content type',
+            'data.relationships.content.data.id' => 'content id',
+        ];
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -31,6 +45,7 @@ class ContentLikeRequest extends FormRequest
     public static function rules()
     {
         return [
+            'data.relationships.content.data.type' => 'required|in:content',
             'data.relationships.content.data.id' => 'required|numeric|exists:' . config('railcontent.database_connection_name') . '.' .
                 config('railcontent.table_prefix'). 'content' . ',id'
         ];

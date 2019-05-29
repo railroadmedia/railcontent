@@ -17,6 +17,23 @@ namespace Railroad\Railcontent\Requests;
 class ContentHierarchyCreateRequest extends CustomFormRequest
 {
     /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'data.type' => 'json data type',
+            'data.attributes.child_position' => 'child position',
+            'data.relationships.parent.data.type' => 'parent type',
+            'data.relationships.parent.data.id' => 'parent id',
+            'data.relationships.child.data.type' => 'child type',
+            'data.relationships.child.data.id' => 'child id',
+        ];
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -25,9 +42,11 @@ class ContentHierarchyCreateRequest extends CustomFormRequest
     {
         $this->setGeneralRules(
             [
-                'data.type' => 'in:contentHierarchy',
+                'data.type' => 'required|in:contentHierarchy',
+                'data.relationships.child.data.type' => 'required|in:content',
                 'data.relationships.child.data.id' => 'required|exists:' . config('railcontent.database_connection_name') . '.' .
                     config('railcontent.table_prefix'). 'content' . ',id',
+                'data.relationships.parent.data.type' => 'required|in:content',
                 'data.relationships.parent.data.id' => 'required|exists:' . config('railcontent.database_connection_name') . '.' .
                     config('railcontent.table_prefix'). 'content'. ',id',
                 'data.attributes.child_position' => 'nullable|numeric|min:0'

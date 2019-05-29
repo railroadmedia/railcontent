@@ -17,6 +17,22 @@ namespace Railroad\Railcontent\Requests;
 class ContentDatumCreateRequest extends CustomFormRequest
 {
     /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'data.type' => 'json data type',
+            'data.attributes.key' => 'key',
+            'data.attributes.position' => 'position',
+            'data.relationships.content.data.type' => 'content type',
+            'data.relationships.content.data.id' => 'content id',
+        ];
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -28,9 +44,10 @@ class ContentDatumCreateRequest extends CustomFormRequest
         //set the general validation rules
         $this->setGeneralRules(
             [
-                'data.type' => 'in:contentData',
+                'data.type' => 'required|in:contentData',
                 'data.attributes.key' => 'required|max:255',
                 'data.attributes.position' => 'nullable|numeric|min:0',
+                'data.relationships.content.data.type' => 'required|in:content',
                 'data.relationships.content.data.id' => 'required|numeric|exists:' .
                     config('railcontent.table_prefix') .
                     'content' .

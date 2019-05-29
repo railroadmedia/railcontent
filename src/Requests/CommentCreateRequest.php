@@ -30,6 +30,22 @@ class CommentCreateRequest extends FormRequest
     }
 
     /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'data.type' => 'json data type',
+            'data.attributes.comment' => 'comment',
+            'data.relationships.content.data.type' => 'content type',
+            'data.relationships.content.data.id' => 'content id',
+            'data.attributes.temporary_display_name' => 'display name'
+        ];
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -37,8 +53,9 @@ class CommentCreateRequest extends FormRequest
     public static function rules()
     {
         return [
-            'data.type' => 'in:comment',
+            'data.type' => 'required|in:comment',
             'data.attributes.comment' => 'required|max:10024',
+            'data.relationships.content.data.type' => 'required|in:content',
             'data.relationships.content.data.id' =>
                 ['required',
                     'numeric',

@@ -26,6 +26,21 @@ class ReplyRequest extends FormRequest
     }
 
     /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'data.type' => 'json data type',
+            'data.attributes.comment' => 'comment',
+            'data.relationships.parent.data.type' => 'parent type',
+            'data.relationships.parent.data.id' => 'parent id',
+        ];
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -33,9 +48,9 @@ class ReplyRequest extends FormRequest
     public static function rules()
     {
         return [
-            'data.type' => 'in:comment',
+            'data.type' => 'required|in:comment',
             'data.attributes.comment' => 'required|max:10024',
-            'data.relationships.parent.data.type' => 'in:comment',
+            'data.relationships.parent.data.type' => 'required|in:comment',
             'data.relationships.parent.data.id' => 'required|numeric|exists:' .
                 config('railcontent.database_connection_name') .
                 '.' .

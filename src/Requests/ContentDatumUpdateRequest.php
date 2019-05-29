@@ -28,7 +28,7 @@ class ContentDatumUpdateRequest extends CustomFormRequest
         //set the general validation rules
         $this->setGeneralRules(
             [
-                'data.type' => 'in:contentData',
+                'data.type' => 'required|in:contentData',
                 'data.attributes.key' => 'max:255',
                 'data.attributes.position' => 'nullable|numeric|min:0'
             ]

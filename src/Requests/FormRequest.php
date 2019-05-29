@@ -34,7 +34,7 @@ class FormRequest extends LaravelFormRequest
         $attributePrettyNames = [];
 
         foreach ($this->rules() as $attribute => $rules) {
-            $attributePrettyNames[$attribute] = str_replace('_', ' ', explode('.', $attribute)[2]);
+            $attributePrettyNames[$attribute] = str_replace('_', ' ', last(explode('.', $attribute)));
         }
         return $attributePrettyNames;
     }

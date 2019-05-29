@@ -18,7 +18,7 @@ class ContentCreateRequest extends CustomFormRequest
 
         $this->setGeneralRules(
             [
-                'data.type' => 'in:content',
+                'data.type' => 'required|in:content',
                 'data.attributes.status' => 'max:64|required|in:' . implode(
                         ',',
                         [
@@ -34,6 +34,8 @@ class ContentCreateRequest extends CustomFormRequest
                 'data.attributes.sort' => 'nullable|numeric',
                 'data.attributes.position' => 'nullable|numeric|min:0',
                 'data.attributes.published_on' => 'nullable|date',
+                'data.relationships.parent.data.type' => 'nullable|in:content',
+                'data.relationships.user.data.type' => 'nullable|in:user',
             ]
         );
 
@@ -61,7 +63,7 @@ class ContentCreateRequest extends CustomFormRequest
                 'data.attributes.archived_on',
                 'data.attributes.fields',
                 'data.relationships.parent',
-                'data.relationships.user'
+                'data.relationships.user',
             ]
         );
     }

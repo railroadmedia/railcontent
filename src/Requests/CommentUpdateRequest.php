@@ -9,6 +9,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 /**
  * Class CommentUpdateRequest
  *
+ * @queryParam comment_id int required
  * @bodyParam data.type string required  Must be 'comment'. Example: comment
  * @bodyParam data.attributes.comment string   The text of the comment. Example: Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.
  * @bodyParam data.attributes.temporary_display_name string
@@ -30,6 +31,24 @@ class CommentUpdateRequest extends FormRequest
     }
 
     /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'data.type' => 'json data type',
+            'data.attributes.comment' => 'comment',
+            'data.relationships.parent.data.type' => 'parent type',
+            'data.relationships.parent.data.id' => 'parent id',
+            'data.relationships.content.data.type' => 'content type',
+            'data.relationships.content.data.id' => 'content id',
+            'data.attributes.temporary_display_name' => 'display name'
+        ];
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -37,8 +56,9 @@ class CommentUpdateRequest extends FormRequest
     public static function rules()
     {
         return [
-            'data.type' => 'in:comment',
+            'data.type' => 'required|in:comment',
             'data.attributes.comment' => 'nullable|max:10024',
+            'data.relationships.content.data.type' => 'in:content',
             'data.relationships.content.data.id' =>
                 ['numeric',
                     Rule::exists(
@@ -53,6 +73,7 @@ class CommentUpdateRequest extends FormRequest
                         }
                     )
                 ],
+            'data.relationships.parent.data.type' => 'in:comment',
             'data.relationships.parent.data.id' => 'numeric|exists:' . config('railcontent.database_connection_name') . '.' .
                 config('railcontent.table_prefix'). 'comments' . ',id',
             'data.attributes.temporary_display_name' => 'filled'
