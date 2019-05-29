@@ -30,6 +30,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'railcontent/user-permission',
             [
                 'data' => [
+                    'type' => 'userPermission',
                     'attributes' => [
                         'start_date' => Carbon::now()
                             ->toDateTimeString(),
@@ -57,7 +58,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             [
                 [
                     'source' => 'data.relationships.permission.data.id',
-                    'detail' => 'The selected permission is invalid.',
+                    'detail' => 'The selected permission id is invalid.',
                     'title' => 'Validation failed.',
                 ],
             ],
@@ -76,6 +77,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'railcontent/user-permission',
             [
                 'data' => [
+                    'type' => 'userPermission',
                     'attributes' => [
                         'start_date' => Carbon::now()
                             ->toDateTimeString(),
@@ -160,6 +162,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'railcontent/user-permission',
             [
                 'data' => [
+                    'type' => 'userPermission',
                     'attributes' => [
                         'user_id' => $userId,
                         'start_date' => Carbon::now()
@@ -234,6 +237,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'railcontent/user-permission',
             [
                 'data' => [
+                    'type' => 'userPermission',
                     'attributes' => [
                         'start_date' => $this->faker->word,
                     ],
@@ -261,7 +265,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             [
                 [
                     'source' => 'data.relationships.permission.data.id',
-                    'detail' => 'The selected permission is invalid.',
+                    'detail' => 'The selected permission id is invalid.',
                     'title' => 'Validation failed.',
                 ],
                 [
@@ -500,6 +504,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'railcontent/user-permission',
             [
                 'data' => [
+                    'type' => 'userPermission',
                     'attributes' => [
                         'start_date' => Carbon::now()
                             ->toDateTimeString(),

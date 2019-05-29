@@ -121,6 +121,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $errors = [
             [
                 'title' => 'Validation failed.',
+                'source' => 'data.type',
+                'detail' => 'The type field is required.',
+            ],
+            [
+                'title' => 'Validation failed.',
                 'source' => 'data.attributes.status',
                 'detail' => 'The status field is required.',
             ],
@@ -215,6 +220,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content',
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => [
                         'slug' => $slug,
                         'status' => $status,
@@ -295,6 +301,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content',
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => $contentData,
                     'relationships' => [
                         'parent' => [
@@ -352,6 +359,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content/' . $content[0]->getId(),
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => [
                         'slug' => 'new slug',
                         'status' => ContentService::STATUS_PUBLISHED,
@@ -372,11 +380,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call(
             'PATCH',
             'railcontent/content/' . rand(),
-            [
+            ['data' =>['type'=>'content',
+                'attributes' => [
                 'slug' => $slug,
                 'position' => 1,
                 'status' => ContentService::STATUS_DRAFT,
                 'type' => $type,
+                    ]
+                ]
             ]
         );
 
@@ -390,6 +401,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content/' . 1,
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => [
                         'position' => -1,
                     ],
@@ -417,6 +429,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content/' . 1,
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => [
                         'status' => $this->faker->word,
                     ],
@@ -503,6 +516,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content/' . $content[0]->getId(),
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => [
                         'slug' => $new_slug,
                         'status' => ContentService::STATUS_PUBLISHED,
@@ -1081,6 +1095,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content',
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => [
                         'slug' => $slug,
                         'position' => null,
@@ -1336,6 +1351,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content/' . $content[0]->getId(),
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => [
                         'status' => ContentService::STATUS_PUBLISHED,
                         'fields' => [
@@ -1431,6 +1447,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content/' . $content[0]->getId(),
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => [
                         'status' => ContentService::STATUS_PUBLISHED,
                         'fields' => [
@@ -1512,6 +1529,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content',
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => $content1Data,
                 ],
             ]
@@ -1547,6 +1565,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content',
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => $content2Data,
                 ],
             ]
@@ -1847,6 +1866,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content',
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => $contentData,
                 ],
             ]

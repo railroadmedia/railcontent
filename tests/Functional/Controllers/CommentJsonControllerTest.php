@@ -47,6 +47,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'railcontent/comment',
             [
                 'data' => [
+                    'type' => 'comment',
                     'attributes' => $attributes,
                     'relationships' => [
                         'content' => [
@@ -80,6 +81,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'railcontent/comment',
             [
                 'data' => [
+                    'type' => 'comment',
                     'attributes' => [
                         'comment' => $this->faker->text(),
                     ],
@@ -203,7 +205,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             [
                 'data' => [
                     'attributes' => [
-                        'display_name' => '',
+                        'temporary_display_name' => '',
                     ],
                     'relationships' => [
                         'content' => [
@@ -225,8 +227,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(422, $response->getStatusCode());
 
-        $response->assertJsonFragment(['The selected content is invalid.']);
-        $response->assertJsonFragment(['The selected parent is invalid.']);
+        $response->assertJsonFragment(['The selected content id is invalid.']);
+        $response->assertJsonFragment(['The selected parent id is invalid.']);
         $response->assertJsonFragment(['The display name field must have a value.']);
     }
 
@@ -234,7 +236,10 @@ class CommentJsonControllerTest extends RailcontentTestCase
     {
         $userId = $this->createAndLogInNewUser();
         $randomId = rand();
-        $response = $this->call('PATCH', 'railcontent/comment/' . $randomId);
+        $response = $this->call('PATCH', 'railcontent/comment/' . $randomId,[
+            'data'=>[
+                'type' => 'comment'
+            ]]);
 
         $this->assertEquals(404, $response->getStatusCode());
 
@@ -382,6 +387,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'railcontent/comment/reply',
             [
                 'data' => [
+                    'type' => 'comment',
                     'attributes' => [
                         'comment' => $reply,
                     ],
@@ -421,7 +427,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals(422, $response->getStatusCode());
         $response->assertJsonFragment(['The comment field is required.']);
-        $response->assertJsonFragment(['The parent field is required.']);
+        $response->assertJsonFragment(['The parent type field is required.']);
+        $response->assertJsonFragment(['The parent id field is required.']);
     }
 
     public function test_pull_comments_when_not_exists()
@@ -896,6 +903,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'railcontent/comment',
             [
                 'data' => [
+                    'type' => 'comment',
                     'attributes' => [
                         'comment' => 'roxana',
                     ],

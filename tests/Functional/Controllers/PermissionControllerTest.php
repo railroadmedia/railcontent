@@ -91,11 +91,19 @@ class PermissionControllerTest extends RailcontentTestCase
 
     public function test_store_validation()
     {
+        $this->permissionServiceMock->method('canOrThrow')
+            ->willReturn(true);
+
         $response = $this->call('PUT', 'railcontent/permission');
 
         $this->assertEquals(422, $response->status());
         $this->assertEquals(
             [
+                [
+                    'title' => 'Validation failed.',
+                    'source' => 'data.type',
+                    'detail' => 'The type field is required.',
+                ],
                 [
                     'title' => 'Validation failed.',
                     'source' => 'data.attributes.name',
@@ -108,6 +116,9 @@ class PermissionControllerTest extends RailcontentTestCase
 
     public function test_update_response()
     {
+        $this->permissionServiceMock->method('canOrThrow')
+            ->willReturn(true);
+
         $name = $this->faker->word;
         $fakeData = $this->fakePermission(1);
         $permission['name'] = $name;
@@ -140,6 +151,8 @@ class PermissionControllerTest extends RailcontentTestCase
 
     public function test_update_not_exist_permission()
     {
+        $this->permissionServiceMock->method('canOrThrow')
+            ->willReturn(true);
 
         $name = $this->faker->word;
         $id = rand(2, 10);
@@ -149,8 +162,8 @@ class PermissionControllerTest extends RailcontentTestCase
             'railcontent/permission/' . $id,
             [
                 'id' => $id,
-                'type' => 'permission',
                 'data' => [
+                    'type' => 'permission',
                     'attributes' => [
                         'name' => $name,
                     ],
@@ -168,7 +181,14 @@ class PermissionControllerTest extends RailcontentTestCase
 
     public function test_update_validation()
     {
-        $response = $this->call('PATCH', 'railcontent/permission/1');
+        $this->permissionServiceMock->method('canOrThrow')
+            ->willReturn(true);
+
+        $response = $this->call('PATCH', 'railcontent/permission/1',[
+            'data' => [
+                'type' => 'permission'
+            ]
+        ]);
 
         $this->assertEquals(422, $response->status());
 
@@ -360,17 +380,22 @@ class PermissionControllerTest extends RailcontentTestCase
         $expectedErrors = [
             [
                 'source' => 'data.relationships.permission.data.id',
-                'detail' => 'The selected permission is invalid.',
+                'detail' => 'The selected permission id is invalid.',
+                'title' => 'Validation failed.',
+            ],
+            [
+                'source' => 'data.relationships.content.data.type',
+                'detail' => 'The content type field is required when none of content type are present.',
                 'title' => 'Validation failed.',
             ],
             [
                 'source' => 'data.relationships.content.data.id',
-                'detail' => 'The content field is required when none of content type are present.',
+                'detail' => 'The content id field is required when none of content type are present.',
                 'title' => 'Validation failed.',
             ],
             [
                 'source' => 'data.attributes.content_type',
-                'detail' => 'The content type field is required when none of content are present.',
+                'detail' => 'The content type field is required when none of content id are present.',
                 'title' => 'Validation failed.',
             ],
         ];
@@ -411,7 +436,7 @@ class PermissionControllerTest extends RailcontentTestCase
             [
                 "title" => "Validation failed.",
                 "source" => "data.relationships.content.data.id",
-                "detail" => "The selected content is invalid.",
+                "detail" => "The selected content id is invalid.",
             ],
         ];
         $this->assertEquals($expectedErrors, $response->decodeResponseJson('errors'));

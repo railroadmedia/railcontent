@@ -49,6 +49,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'railcontent/content/datum',
             [
                 'data' => [
+                    'type' => 'contentData',
                     'attributes' => [
                         'key' => $key,
                         'value' => $value,
@@ -89,6 +90,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'railcontent/content/datum',
             [
                 'data' => [
+                    'type' => 'contentData',
                     'attributes' => [
                         'key' => $key,
                         'value' => $newValue,
@@ -127,6 +129,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'railcontent/content/datum',
             [
                 'data' => [
+                    'type' => 'contentData',
                     'attributes' => [
                         'key' => $otherKey,
                         'value' => $newValue,
@@ -168,13 +171,23 @@ class ContentDatumControllerTest extends RailcontentTestCase
             [
                 [
                     'title' => 'Validation failed.',
+                    "source" => "data.type",
+                    "detail" => "The json data type field is required.",
+                ],
+                [
+                    'title' => 'Validation failed.',
                     "source" => "data.attributes.key",
                     "detail" => "The key field is required.",
                 ],
                 [
                     'title' => 'Validation failed.',
+                    "source" => "data.relationships.content.data.type",
+                    "detail" => "The content type field is required.",
+                ],
+                [
+                    'title' => 'Validation failed.',
                     "source" => "data.relationships.content.data.id",
-                    "detail" => "The content field is required.",
+                    "detail" => "The content id field is required.",
                 ],
             ],
             $response->decodeResponseJson('errors')
@@ -191,6 +204,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'railcontent/content/datum',
             [
                 'data' => [
+                    'type' => 'contentData',
                     'attributes' => [
                         'key' => $key,
                         'value' => $value,
@@ -218,7 +232,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
                 ],
                 [
                     "source" => "data.relationships.content.data.id",
-                    "detail" => "The selected content is invalid.",
+                    "detail" => "The selected content id is invalid.",
                     'title' => 'Validation failed.',
                 ],
             ],
@@ -258,6 +272,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'railcontent/content/datum/' . $data->getId(),
             [
                 'data' => [
+                    'type' => 'contentData',
                     'attributes' => [
                         'value' => $new_value,
                     ],
@@ -318,6 +333,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
             'railcontent/content/datum/' . $data->getId(),
             [
                 'data' => [
+                    'type' => 'contentData',
                     'attributes' => [
                         'key' => $this->faker->text(500),
                     ],

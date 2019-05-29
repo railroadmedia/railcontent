@@ -46,6 +46,7 @@ class ContentEventsTest extends RailcontentTestCase
             'railcontent/content',
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => [
                         'slug' => $this->faker->word,
                         'position' => $this->faker->numberBetween(),
@@ -81,6 +82,7 @@ class ContentEventsTest extends RailcontentTestCase
             'railcontent/content/' . $content[0]->getId(),
             [
                 'data' => [
+                    'type' => 'content',
                     'attributes' => [
                         'slug' => $this->faker->word,
                     ],
@@ -107,6 +109,7 @@ class ContentEventsTest extends RailcontentTestCase
             'railcontent/content/datum',
             [
                 'data' => [
+                    'type' => 'contentData',
                     'attributes' => [
                         'key' => $this->faker->word,
                         'value' => $this->faker->word,
@@ -151,6 +154,7 @@ class ContentEventsTest extends RailcontentTestCase
             'railcontent/content/datum/' . $datum[0]->getId(),
             [
                 'data' => [
+                    'type' => 'contentData',
                     'attributes' => [
                         'key' => $this->faker->word,
                         'value' => $this->faker->word,

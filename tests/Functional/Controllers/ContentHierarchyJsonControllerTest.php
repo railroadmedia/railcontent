@@ -66,13 +66,28 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
 
         $errors = [
             [
+                'source' => 'data.type',
+                'detail' => 'The json data type field is required.',
+                'title' => 'Validation failed.',
+            ],
+            [
+                'source' => 'data.relationships.child.data.type',
+                'detail' => 'The child type field is required.',
+                'title' => 'Validation failed.',
+            ],
+            [
                 'source' => 'data.relationships.child.data.id',
-                'detail' => 'The child field is required.',
+                'detail' => 'The child id field is required.',
+                'title' => 'Validation failed.',
+            ],
+            [
+                'source' => 'data.relationships.parent.data.type',
+                'detail' => 'The parent type field is required.',
                 'title' => 'Validation failed.',
             ],
             [
                 'source' => 'data.relationships.parent.data.id',
-                'detail' => 'The parent field is required.',
+                'detail' => 'The parent id field is required.',
                 'title' => 'Validation failed.',
             ],
         ];
@@ -87,6 +102,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             'railcontent/content/hierarchy',
             [
                 'data' => [
+                    'type' => 'contentHierarchy',
                     'relationships' => [
                         'child' => [
                             'data' => [
@@ -141,6 +157,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             'railcontent/content/hierarchy',
             [
                 'data' => [
+                    'type' => 'contentHierarchy',
                     'attributes' => [
                         'child_position' => 3,
                     ],
@@ -197,6 +214,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             'railcontent/content/hierarchy',
             [
                 'data' => [
+                    'type' => 'contentHierarchy',
                     'attributes' => [
                         'child_position' => 3,
                     ],
@@ -334,6 +352,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             'railcontent/content/hierarchy',
             [
                 'data' => [
+                    'type' => 'contentHierarchy',
                     'attributes' => [
                         'child_position' => 14,
                     ],
