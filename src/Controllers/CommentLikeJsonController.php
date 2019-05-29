@@ -47,6 +47,7 @@ class CommentLikeJsonController extends Controller
      *
      * @queryParam comment_id required
      * @responseFile ../../../../../docs/commentLikeResponse.json
+     * @permission authenticated user
      */
     public function store(CommentLikeRequest $request, $id)
     {
@@ -64,6 +65,7 @@ class CommentLikeJsonController extends Controller
      * @throws OptimisticLockException
      *
      * @queryParam comment_id required
+     * @permission authenticated user
      * @response 200 { }
      */
     public function delete(CommentUnLikeRequest $request, $id)

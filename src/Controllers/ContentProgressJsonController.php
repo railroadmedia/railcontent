@@ -43,6 +43,8 @@ class ContentProgressJsonController extends Controller
      * @throws NonUniqueResultException
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @permission authenticated user
      */
     public function startContent(UserContentRequest $request)
     {
@@ -62,6 +64,8 @@ class ContentProgressJsonController extends Controller
      * @throws NonUniqueResultException
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @permission authenticated user
      */
     public function completeContent(UserContentRequest $request)
     {
@@ -81,6 +85,8 @@ class ContentProgressJsonController extends Controller
      * @throws NonUniqueResultException
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @permission authenticated user
      */
     public function resetContent(UserContentRequest $request)
     {
@@ -100,6 +106,8 @@ class ContentProgressJsonController extends Controller
      * @throws NonUniqueResultException
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @permission authenticated user
      */
     public function saveProgress(UserContentRequest $request)
     {

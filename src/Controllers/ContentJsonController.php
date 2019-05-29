@@ -59,6 +59,8 @@ class ContentJsonController extends Controller
      * @param Request $request
      * @return JsonResponse
      * @throws NotAllowedException
+     *
+     * @permission pull.contents required
      */
     public function index(Request $request)
     {
@@ -97,6 +99,8 @@ class ContentJsonController extends Controller
      * @transformer Railroad\Railcontent\Transformers\DecoratedContentTransformer
      * @return Fractal
      * @throws NotAllowedException
+     *
+     * @permission pull.contents required
      */
     public function getByParentId($parentId)
     {
@@ -114,6 +118,8 @@ class ContentJsonController extends Controller
      *
      * @return Fractal
      * @throws NotAllowedException
+     *
+     * @permission pull.contents required
      */
     public function getByIds(Request $request)
     {
@@ -149,6 +155,8 @@ class ContentJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      * @throws ReflectionException
+     *
+     * @permission create.content required
      */
     public function store(ContentCreateRequest $request)
     {
@@ -174,6 +182,8 @@ class ContentJsonController extends Controller
      * @throws OptimisticLockException
      * @throws ReflectionException
      * @throws Throwable
+     *
+     * @permission update.content required
      */
     public function update(ContentUpdateRequest $request, $contentId)
     {
@@ -201,6 +211,8 @@ class ContentJsonController extends Controller
      * @throws NotAllowedException
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @permission delete.content required
      */
     public function delete($contentId)
     {
@@ -240,6 +252,8 @@ class ContentJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      * @throws Throwable
+     *
+     * @permission delete.content required
      */
     public function softDelete($contentId)
     {

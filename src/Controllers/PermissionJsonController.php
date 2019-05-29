@@ -84,6 +84,8 @@ class PermissionJsonController extends Controller
     /**
      * @return Fractal
      * @throws NotAllowedException
+     *
+     * @responseFile ../../../../../docs/permissions.json
      */
     public function index()
     {
@@ -103,6 +105,9 @@ class PermissionJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      * @throws ReflectionException
+     *
+     * @permission create.permission required
+     * @transformer Railroad\Railcontent\Transformers\PermissionTransformer
      */
     public function store(PermissionRequest $request)
     {
@@ -132,6 +137,9 @@ class PermissionJsonController extends Controller
      * @throws OptimisticLockException
      * @throws ReflectionException
      * @throws Throwable
+     *
+     * @permission update.permission required
+     * @transformer Railroad\Railcontent\Transformers\PermissionTransformer
      */
     public function update($id, PermissionRequest $request)
     {
@@ -163,6 +171,8 @@ class PermissionJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      * @throws Throwable
+     *
+     * @permission delete.permission required
      */
     public function delete($id)
     {
@@ -198,6 +208,8 @@ class PermissionJsonController extends Controller
      * @throws NotAllowedException
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @permission assign.permission required
      */
     public function assign(PermissionAssignRequest $request)
     {
@@ -216,6 +228,8 @@ class PermissionJsonController extends Controller
      * @param PermissionDissociateRequest $request
      * @return JsonResponse
      * @throws NotAllowedException
+     *
+     * @permission disociate.permissions required
      */
     public function dissociate(PermissionDissociateRequest $request)
     {

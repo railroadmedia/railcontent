@@ -55,6 +55,8 @@ class ContentDatumJsonController extends Controller
      * @throws NotAllowedException
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @permission create.content.data required
      */
     public function store(ContentDatumCreateRequest $request)
     {
@@ -79,6 +81,8 @@ class ContentDatumJsonController extends Controller
      * @throws Throwable
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @permission update.content.data required
      */
     public function update($dataId, ContentDatumUpdateRequest $request)
     {
@@ -108,6 +112,8 @@ class ContentDatumJsonController extends Controller
      * @throws Throwable
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @permission delete.content.data required
      */
     public function delete(ContentDatumDeleteRequest $request, $dataId)
     {

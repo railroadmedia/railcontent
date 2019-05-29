@@ -54,6 +54,8 @@ class ContentHierarchyJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      * @throws NotAllowedException
+     *
+     * @permission create.content.hierarchy required
      */
     public function store(ContentHierarchyCreateRequest $request)
     {
@@ -76,6 +78,8 @@ class ContentHierarchyJsonController extends Controller
      * @throws NotAllowedException
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @permission delete.content.hierarchy required
      */
     public function delete(Request $request, $parentId, $childId)
     {

@@ -61,6 +61,8 @@ class ContentLikeJsonController extends Controller
      * @return Fractal
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @permission authenticated user
      */
     public function like(ContentLikeRequest $request)
     {
@@ -75,6 +77,8 @@ class ContentLikeJsonController extends Controller
      * @return JsonResponse
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @permission authenticated user
      */
     public function unlike(ContentLikeRequest $request)
     {

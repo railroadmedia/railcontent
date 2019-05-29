@@ -96,6 +96,7 @@ class CommentJsonController extends Controller
      * @throws OptimisticLockException
      *
      * @responseFile ../../../../../docs/comment.json
+     * @permission authenticated user
      */
     public function store(CommentCreateRequest $request)
     {
@@ -132,6 +133,7 @@ class CommentJsonController extends Controller
      * @throws ReflectionException
      *
      * @responseFile ../../../../../docs/comment.json
+     * @permission authenticated user
      */
     public function update(CommentUpdateRequest $request, $commentId)
     {
@@ -175,6 +177,7 @@ class CommentJsonController extends Controller
      * @response 204 { }
      * @response 403 { "message": "Delete failed, you can delete only your comments." }
      * @response 404 { "message": "Delete failed, comment not found with id: 1" }
+     * @permission authenticated users can delete their own comments
      */
     public function delete($commentId)
     {
@@ -205,6 +208,7 @@ class CommentJsonController extends Controller
      * @throws OptimisticLockException
      *
      * @responseFile ../../../../../docs/comment.json
+     * @permission authenticated user
      */
     public function reply(ReplyRequest $request)
     {
