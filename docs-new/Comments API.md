@@ -12,8 +12,8 @@
 
 
 ### Permissions
-
-
+    - authenticated user
+    
 ### Request Parameters
 
 
@@ -162,8 +162,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - authenticated user
+    
 ### Request Parameters
 
 
@@ -203,7 +203,7 @@ $.ajax({
         "type": "comment",
         "attributes": {
             "comment": "Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.",
-            "temporary_display_name": "voluptas"
+            "temporary_display_name": "doloremque"
         },
         "relationships": {
             "content": {
@@ -315,8 +315,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - authenticated users can delete their own comments
+    
 ### Request Parameters
 
 
@@ -370,8 +370,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - authenticated user
+    
 ### Request Parameters
 
 
@@ -514,7 +514,6 @@ $.ajax({
 
 
 ### Permissions
-
 
 ### Request Parameters
 
@@ -696,7 +695,6 @@ $.ajax({
 
 ### Permissions
 
-
 ### Request Parameters
 
 
@@ -713,7 +711,7 @@ $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/comment/1',
 {
-    "limit": "laudantium"
+    "limit": "totam"
 }
    ,
     success: function(response) {},
@@ -876,8 +874,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - authenticated user
+    
 ### Request Parameters
 
 
@@ -1031,8 +1029,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - authenticated user
+    
 ### Request Parameters
 
 

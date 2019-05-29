@@ -12,7 +12,6 @@
 
 ### Permissions
 
-
 ### Request Parameters
 
 
@@ -35,7 +34,24 @@ $.ajax({
 
 ```json
 {
-    "data": []
+    "data": [
+        {
+            "type": "permission",
+            "id": "1",
+            "attributes": {
+                "name": "permission 1",
+                "brand": "brand"
+            }
+        },
+        {
+            "type": "permission",
+            "id": "2",
+            "attributes": {
+                "name": "permission 2",
+                "brand": "brand"
+            }
+        }
+    ]
 }
 ```
 
@@ -53,13 +69,16 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - create.permission required
+    
 ### Request Parameters
 
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|body|data.type|    |Must be 'permission'.|
+|body|data.attributes.name|    |Permission name.|
+|body|data.attributes.brand|    |brand|
 
 ### Validation Rules
 ```php
@@ -75,27 +94,33 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/permission',
+{
+    "data": {
+        "type": "permission",
+        "attributes": {
+            "name": "Permission 1",
+            "brand": "eaque"
+        }
+    }
+}
+   ,
     success: function(response) {},
     error: function(response) {}
 });
 ```
 
-### Response Example (422):
+### Response Example (200):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.type",
-            "detail": "The type field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.attributes.name",
-            "detail": "The name field is required."
+    "data": {
+        "type": null,
+        "id": "",
+        "attributes": {
+            "name": null,
+            "brand": null
         }
-    ]
+    }
 }
 ```
 
@@ -113,8 +138,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - disociate.permissions required
+    
 ### Request Parameters
 
 
@@ -197,13 +222,16 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - update.permission required
+    
 ### Request Parameters
 
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|body|data.type|    |Must be 'permission'.|
+|body|data.attributes.name|    |Permission name.|
+|body|data.attributes.brand|    |brand|
 
 ### Validation Rules
 ```php
@@ -219,27 +247,33 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/permission/1',
+{
+    "data": {
+        "type": "permission",
+        "attributes": {
+            "name": "Permission 1",
+            "brand": "dignissimos"
+        }
+    }
+}
+   ,
     success: function(response) {},
     error: function(response) {}
 });
 ```
 
-### Response Example (422):
+### Response Example (200):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.type",
-            "detail": "The type field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.attributes.name",
-            "detail": "The name field is required."
+    "data": {
+        "type": null,
+        "id": "",
+        "attributes": {
+            "name": null,
+            "brand": null
         }
-    ]
+    }
 }
 ```
 
@@ -257,8 +291,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - delete.permission required
+    
 ### Request Parameters
 
 
@@ -302,8 +336,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - assign.permission required
+    
 ### Request Parameters
 
 

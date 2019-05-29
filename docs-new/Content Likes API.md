@@ -13,7 +13,6 @@
 
 ### Permissions
 
-
 ### Request Parameters
 
 
@@ -68,8 +67,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - authenticated user
+    
 ### Request Parameters
 
 
@@ -143,8 +142,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - authenticated user
+    
 ### Request Parameters
 
 

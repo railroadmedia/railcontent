@@ -2,7 +2,15 @@
 
 namespace Railroad\Railcontent\Requests;
 
-
+/**
+ * Class PermissionRequest
+ *
+ * @package Railroad\Railcontent\Requests
+ *
+ * @bodyParam data.type  required  Must be 'permission'. Example: permission
+ * @bodyParam data.attributes.name required  Permission name. Example: Permission 1
+ * @bodyParam data.attributes.brand Example: brand
+ */
 class PermissionRequest extends FormRequest
 {
     /**

@@ -12,8 +12,8 @@
 
 
 ### Permissions
-
-
+    - create.content.data required
+    
 ### Request Parameters
 
 
@@ -39,7 +39,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 5
+            "position": 8
         },
         "relationships": {
             "content": {
@@ -100,8 +100,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - update.content.data required
+    
 ### Request Parameters
 
 
@@ -127,7 +127,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 11
+            "position": 8
         },
         "relationships": {
             "content": {
@@ -173,8 +173,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - delete.content.data required
+    
 ### Request Parameters
 
 

@@ -12,8 +12,8 @@
 
 
 ### Permissions
-
-
+    - create.content.hierarchy required
+    
 ### Request Parameters
 
 
@@ -37,7 +37,7 @@ $.ajax({
     "data": {
         "type": "contentHierarchy",
         "attributes": {
-            "child_position": 12
+            "child_position": 2
         },
         "relationships": {
             "parent": {
@@ -108,8 +108,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - delete.content.hierarchy required
+    
 ### Request Parameters
 
 

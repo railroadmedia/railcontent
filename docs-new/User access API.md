@@ -13,7 +13,6 @@
 
 ### Permissions
 
-
 ### Request Parameters
 
 
@@ -98,7 +97,6 @@ $.ajax({
 
 ### Permissions
 
-
 ### Request Parameters
 
 
@@ -145,7 +143,6 @@ IF "only_active" it's set false on the request the expired permissions are retur
 
 
 ### Permissions
-
 
 ### Request Parameters
 

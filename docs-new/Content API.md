@@ -12,7 +12,6 @@
 
 ### Permissions
 
-
 ### Request Parameters
 
 
@@ -52,8 +51,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - pull.contents required
+    
 ### Request Parameters
 
 
@@ -108,8 +107,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - pull.contents required
+    
 ### Request Parameters
 
 
@@ -201,8 +200,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - pull.contents required
+    
 ### Request Parameters
 
 
@@ -348,7 +347,6 @@ $.ajax({
 
 ### Permissions
 
-
 ### Request Parameters
 
 
@@ -440,8 +438,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - create.content required
+    
 ### Request Parameters
 
 
@@ -498,8 +496,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - update.content required
+    
 ### Request Parameters
 
 
@@ -546,8 +544,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - delete.content required
+    
 ### Request Parameters
 
 
@@ -586,8 +584,8 @@ $.ajax({
 
 
 ### Permissions
-
-
+    - delete.content required
+    
 ### Request Parameters
 
 

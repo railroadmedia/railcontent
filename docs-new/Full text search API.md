@@ -15,7 +15,6 @@ Return a Json paginated response with the contents
 
 ### Permissions
 
-
 ### Request Parameters
 
 
