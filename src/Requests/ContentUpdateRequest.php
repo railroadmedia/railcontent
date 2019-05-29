@@ -21,6 +21,7 @@ class ContentUpdateRequest extends CustomFormRequest
         //set the general validation rules
         $this->setGeneralRules(
             [
+                'data.type' => 'in:content',
                 'data.attributes.status' => 'max:64|in:' .
                     implode(
                         ',',

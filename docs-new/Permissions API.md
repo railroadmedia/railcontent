@@ -66,6 +66,7 @@ $.ajax({
 ### Validation Rules
 ```php
 {
+    "data.type": "in:permission",
     "data.attributes.name": "required|max:255"
 }
 ```
@@ -83,17 +84,11 @@ $.ajax({
 });
 ```
 
-### Response Example (422):
+### Response Example (500):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.attributes.name",
-            "detail": "The name field is required."
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 
@@ -190,6 +185,7 @@ $.ajax({
 ### Validation Rules
 ```php
 {
+    "data.type": "in:permission",
     "data.attributes.name": "required|max:255"
 }
 ```
@@ -207,17 +203,11 @@ $.ajax({
 });
 ```
 
-### Response Example (422):
+### Response Example (500):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.attributes.name",
-            "detail": "The name field is required."
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 

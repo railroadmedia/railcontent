@@ -37,7 +37,7 @@ $.ajax({
     "data": {
         "type": "contentHierarchy",
         "attributes": {
-            "child_position": 4
+            "child_position": 5
         },
         "relationships": {
             "parent": {
@@ -61,22 +61,11 @@ $.ajax({
 });
 ```
 
-### Response Example (422):
+### Response Example (500):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.child.data.id",
-            "detail": "The child field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.parent.data.id",
-            "detail": "The parent field is required."
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 

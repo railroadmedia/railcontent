@@ -39,7 +39,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 5
+            "position": 2
         },
         "relationships": {
             "content": {
@@ -57,22 +57,11 @@ $.ajax({
 });
 ```
 
-### Response Example (422):
+### Response Example (500):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.attributes.key",
-            "detail": "The key field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.content.data.id",
-            "detail": "The content field is required."
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 
@@ -117,7 +106,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 12
+            "position": 18
         },
         "relationships": {
             "content": {
@@ -135,14 +124,11 @@ $.ajax({
 });
 ```
 
-### Response Example (404):
+### Response Example (500):
 
 ```json
 {
-    "errors": {
-        "title": "Not found.",
-        "detail": "Update failed, datum not found with id: 1"
-    }
+    "message": "Server Error"
 }
 ```
 

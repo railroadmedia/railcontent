@@ -23,6 +23,8 @@
 ### Validation Rules
 ```php
 {
+    "data.type": "in:userContentProgress",
+    "data.relationships.content.data.type": "in:content",
     "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
 ```
@@ -40,17 +42,11 @@ $.ajax({
 });
 ```
 
-### Response Example (422):
+### Response Example (500):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.content.data.id",
-            "detail": "The content field is required."
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 
@@ -79,6 +75,8 @@ $.ajax({
 ### Validation Rules
 ```php
 {
+    "data.type": "in:userContentProgress",
+    "data.relationships.content.data.type": "in:content",
     "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
 ```
@@ -96,17 +94,11 @@ $.ajax({
 });
 ```
 
-### Response Example (422):
+### Response Example (500):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.content.data.id",
-            "detail": "The content field is required."
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 
@@ -135,6 +127,8 @@ $.ajax({
 ### Validation Rules
 ```php
 {
+    "data.type": "in:userContentProgress",
+    "data.relationships.content.data.type": "in:content",
     "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
 ```
@@ -152,17 +146,11 @@ $.ajax({
 });
 ```
 
-### Response Example (422):
+### Response Example (500):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.content.data.id",
-            "detail": "The content field is required."
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 
@@ -191,6 +179,8 @@ $.ajax({
 ### Validation Rules
 ```php
 {
+    "data.type": "in:userContentProgress",
+    "data.relationships.content.data.type": "in:content",
     "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
 ```
@@ -208,17 +198,11 @@ $.ajax({
 });
 ```
 
-### Response Example (422):
+### Response Example (500):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.content.data.id",
-            "detail": "The content field is required."
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 

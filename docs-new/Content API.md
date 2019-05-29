@@ -472,22 +472,11 @@ $.ajax({
 });
 ```
 
-### Response Example (422):
+### Response Example (500):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.attributes.status",
-            "detail": "The status field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.attributes.type",
-            "detail": "The type field is required."
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 
@@ -527,14 +516,11 @@ $.ajax({
 });
 ```
 
-### Response Example (404):
+### Response Example (500):
 
 ```json
 {
-    "errors": {
-        "title": "Not found.",
-        "detail": "Update failed, content not found with id: 1"
-    }
+    "message": "Server Error"
 }
 ```
 

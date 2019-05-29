@@ -23,7 +23,10 @@
 ### Validation Rules
 ```php
 {
+    "data.type": "in:userPermission",
+    "data.relationships.user.data.type": "in:user",
     "data.relationships.user.data.id": "required|integer",
+    "data.relationships.permission.data.type": "in:permission",
     "data.relationships.permission.data.id": "required|integer|exists:testbench.railcontent_permissions,id",
     "data.attributes.start_date": "required|date",
     "data.attributes.expiration_date": "nullable|date"
@@ -43,27 +46,11 @@ $.ajax({
 });
 ```
 
-### Response Example (422):
+### Response Example (500):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.user.data.id",
-            "detail": "The user field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.permission.data.id",
-            "detail": "The permission field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.attributes.start_date",
-            "detail": "The start date field is required."
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 

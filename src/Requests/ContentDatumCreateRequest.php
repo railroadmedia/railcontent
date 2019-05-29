@@ -28,6 +28,7 @@ class ContentDatumCreateRequest extends CustomFormRequest
         //set the general validation rules
         $this->setGeneralRules(
             [
+                'data.type' => 'in:contentData',
                 'data.attributes.key' => 'required|max:255',
                 'data.attributes.position' => 'nullable|numeric|min:0',
                 'data.relationships.content.data.id' => 'required|numeric|exists:' .

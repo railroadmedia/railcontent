@@ -23,6 +23,7 @@ class PermissionRequest extends FormRequest
     public static function rules()
     {
         return [
+            'data.type' => 'in:permission',
             'data.attributes.name' => 'required|max:255',
         ];
     }

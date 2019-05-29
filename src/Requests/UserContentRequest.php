@@ -24,6 +24,8 @@ class UserContentRequest extends FormRequest
     public static function rules()
     {
         return [
+            'data.type' =>'in:userContentProgress',
+            'data.relationships.content.data.type' =>'in:content',
             'data.relationships.content.data.id' => 'required|numeric|exists:' . config('railcontent.database_connection_name') . '.' .
                 config('railcontent.table_prefix'). 'content' . ',id'
         ];

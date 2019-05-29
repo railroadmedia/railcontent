@@ -18,6 +18,7 @@ class ContentCreateRequest extends CustomFormRequest
 
         $this->setGeneralRules(
             [
+                'data.type' => 'in:content',
                 'data.attributes.status' => 'max:64|required|in:' . implode(
                         ',',
                         [
@@ -29,6 +30,7 @@ class ContentCreateRequest extends CustomFormRequest
                         ]
                     ),
                 'data.attributes.type' => 'required|max:64',
+                'data.attributes.slug' => 'max:255',
                 'data.attributes.sort' => 'nullable|numeric',
                 'data.attributes.position' => 'nullable|numeric|min:0',
                 'data.attributes.published_on' => 'nullable|date',

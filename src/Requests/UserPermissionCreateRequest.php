@@ -23,7 +23,10 @@ class UserPermissionCreateRequest extends FormRequest
     public static function rules()
     {
         return [
+            'data.type' => 'in:userPermission',
+            'data.relationships.user.data.type' =>'in:user',
             'data.relationships.user.data.id' => 'required|integer',
+            'data.relationships.permission.data.type' => 'in:permission',
             'data.relationships.permission.data.id' => 'required|integer|exists:' . config('railcontent.database_connection_name') . '.' .
                 config('railcontent.table_prefix'). 'permissions' . ',id',
             'data.attributes.start_date' => 'required|date',

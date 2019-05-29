@@ -8,7 +8,8 @@ namespace Railroad\Railcontent\Requests;
  * @package Railroad\Railcontent\Requests
  *
  * @bodyParam data.type string required  Must be 'comment'. Example: comment
- * @bodyParam data.attributes.comment string required  The text of the reply. Example: Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.
+ * @bodyParam data.attributes.comment string required  The text of the reply. Example: Omnis doloremque reiciendis enim
+ *     et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.
  * @bodyParam data.relationships.parent.data.type string required  Must be 'comment'. Example: comment
  * @bodyParam data.relationships.parent.data.id integer required  Must exists in comments. Example: 1
  */
@@ -32,12 +33,15 @@ class ReplyRequest extends FormRequest
     public static function rules()
     {
         return [
+            'data.type' => 'in:comment',
             'data.attributes.comment' => 'required|max:10024',
+            'data.relationships.parent.data.type' => 'in:comment',
             'data.relationships.parent.data.id' => 'required|numeric|exists:' .
                 config('railcontent.database_connection_name') .
                 '.' .
-                config('railcontent.table_prefix'). 'comments' .
-                ',id'
+                config('railcontent.table_prefix') .
+                'comments' .
+                ',id',
         ];
     }
 }

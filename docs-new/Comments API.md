@@ -28,6 +28,7 @@
 ### Validation Rules
 ```php
 {
+    "data.type": "in:comment",
     "data.attributes.comment": "required|max:10024",
     "data.relationships.content.data.id": [
         "required",
@@ -176,6 +177,7 @@ $.ajax({
 ### Validation Rules
 ```php
 {
+    "data.type": "in:comment",
     "data.attributes.comment": "nullable|max:10024",
     "data.relationships.content.data.id": [
         "numeric",
@@ -197,7 +199,7 @@ $.ajax({
         "type": "comment",
         "attributes": {
             "comment": "Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.",
-            "temporary_display_name": "praesentium"
+            "temporary_display_name": "nobis"
         },
         "relationships": {
             "content": {
@@ -380,7 +382,9 @@ $.ajax({
 ### Validation Rules
 ```php
 {
+    "data.type": "in:comment",
     "data.attributes.comment": "required|max:10024",
+    "data.relationships.parent.data.type": "in:comment",
     "data.relationships.parent.data.id": "required|numeric|exists:testbench.railcontent_comments,id"
 }
 ```
@@ -395,7 +399,7 @@ $.ajax({
     "data": {
         "type": "comment",
         "attributes": {
-            "comment": "Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae."
+            "comment": "Omnis doloremque reiciendis enim"
         },
         "relationships": {
             "parent": {

@@ -37,6 +37,7 @@ class CommentUpdateRequest extends FormRequest
     public static function rules()
     {
         return [
+            'data.type' => 'in:comment',
             'data.attributes.comment' => 'nullable|max:10024',
             'data.relationships.content.data.id' =>
                 ['numeric',
