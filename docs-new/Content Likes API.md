@@ -17,8 +17,8 @@
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -27,8 +27,6 @@
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content-like/1',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -75,14 +73,15 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
-|body|data.relationships.content.data.type|  required  | |string|Must be 'content'.|
-|body|data.relationships.content.data.id|  required  | |integer|Must exists in contents.|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
+|body|data.relationships.content.data.type|  yes  |Must be 'content'.|
+|body|data.relationships.content.data.id|  yes  |Must exists in contents.|
 
 ### Validation Rules
 ```php
 {
+    "data.relationships.content.data.type": "required|in:content",
     "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
 ```
@@ -118,8 +117,13 @@ $.ajax({
     "errors": [
         {
             "title": "Validation failed.",
+            "source": "data.relationships.content.data.type",
+            "detail": "The content type field is required."
+        },
+        {
+            "title": "Validation failed.",
             "source": "data.relationships.content.data.id",
-            "detail": "The content field is required."
+            "detail": "The content id field is required."
         }
     ]
 }
@@ -144,14 +148,15 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
-|body|data.relationships.content.data.type|  required  | |string|Must be 'content'.|
-|body|data.relationships.content.data.id|  required  | |integer|Must exists in contents.|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
+|body|data.relationships.content.data.type|  yes  |Must be 'content'.|
+|body|data.relationships.content.data.id|  yes  |Must exists in contents.|
 
 ### Validation Rules
 ```php
 {
+    "data.relationships.content.data.type": "required|in:content",
     "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
 ```
@@ -187,8 +192,13 @@ $.ajax({
     "errors": [
         {
             "title": "Validation failed.",
+            "source": "data.relationships.content.data.type",
+            "detail": "The content type field is required."
+        },
+        {
+            "title": "Validation failed.",
             "source": "data.relationships.content.data.id",
-            "detail": "The content field is required."
+            "detail": "The content id field is required."
         }
     ]
 }

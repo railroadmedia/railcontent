@@ -17,14 +17,14 @@
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
-|body|data.type|  required  | |string|Must be 'contentData'.|
-|body|data.attributes.key|  required  | |string|The data key.|
-|body|data.attributes.value|  required  | |string|Data value. |
-|body|data.attributes.position|  optional  | |integer|The position of this datum relative to other datum with the same key under the same content id.|
-|body|data.relationships.content.data.type|  required  | |string|Must be 'content'.|
-|body|data.relationships.content.data.id|  required  | |integer|Must exists in contents.|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
+|body|data.type|  yes  |Must be 'contentData'.|
+|body|data.attributes.key|  yes  |The data key.|
+|body|data.attributes.value|  yes  |Data value. |
+|body|data.attributes.position|    |The position of this datum relative to other datum with the same key under the same content id.|
+|body|data.relationships.content.data.type|  yes  |Must be 'content'.|
+|body|data.relationships.content.data.id|  yes  |Must exists in contents.|
 
 
 ### Request Example:
@@ -39,7 +39,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 2
+            "position": 5
         },
         "relationships": {
             "content": {
@@ -57,11 +57,32 @@ $.ajax({
 });
 ```
 
-### Response Example (500):
+### Response Example (422):
 
 ```json
 {
-    "message": "Server Error"
+    "errors": [
+        {
+            "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The json data type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.attributes.key",
+            "detail": "The key field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.content.data.type",
+            "detail": "The content type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.content.data.id",
+            "detail": "The content id field is required."
+        }
+    ]
 }
 ```
 
@@ -84,14 +105,14 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
-|body|data.type|  required  | |string|Must be 'contentData'.|
-|body|data.attributes.key|  optional  | |string|The data key.|
-|body|data.attributes.value|  optional  | |string|Data value. |
-|body|data.attributes.position|  optional  | |integer|The position of this datum relative to other datum with the same key under the same content id.|
-|body|data.relationships.content.data.type|  optional  | |string|Must be 'content'.|
-|body|data.relationships.content.data.id|  optional  | |integer|Must exists in contents.|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
+|body|data.type|  yes  |Must be 'contentData'.|
+|body|data.attributes.key|    |The data key.|
+|body|data.attributes.value|    |Data value. |
+|body|data.attributes.position|    |The position of this datum relative to other datum with the same key under the same content id.|
+|body|data.relationships.content.data.type|    |Must be 'content'.|
+|body|data.relationships.content.data.id|    |Must exists in contents.|
 
 
 ### Request Example:
@@ -106,7 +127,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 18
+            "position": 11
         },
         "relationships": {
             "content": {
@@ -124,11 +145,17 @@ $.ajax({
 });
 ```
 
-### Response Example (500):
+### Response Example (422):
 
 ```json
 {
-    "message": "Server Error"
+    "errors": [
+        {
+            "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The type field is required."
+        }
+    ]
 }
 ```
 
@@ -151,8 +178,8 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -161,8 +188,6 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content/datum/1',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });

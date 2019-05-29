@@ -17,16 +17,16 @@
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 ### Validation Rules
 ```php
 {
-    "data.type": "in:userPermission",
-    "data.relationships.user.data.type": "in:user",
+    "data.type": "required|in:userPermission",
+    "data.relationships.user.data.type": "required|in:user",
     "data.relationships.user.data.id": "required|integer",
-    "data.relationships.permission.data.type": "in:permission",
+    "data.relationships.permission.data.type": "required|in:permission",
     "data.relationships.permission.data.id": "required|integer|exists:testbench.railcontent_permissions,id",
     "data.attributes.start_date": "required|date",
     "data.attributes.expiration_date": "nullable|date"
@@ -39,18 +39,47 @@
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/user-permission',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
 ```
 
-### Response Example (500):
+### Response Example (422):
 
 ```json
 {
-    "message": "Server Error"
+    "errors": [
+        {
+            "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The json data type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.user.data.type",
+            "detail": "The user type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.user.data.id",
+            "detail": "The user id field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.permission.data.type",
+            "detail": "The permission type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.permission.data.id",
+            "detail": "The permission id field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.attributes.start_date",
+            "detail": "The start date field is required."
+        }
+    ]
 }
 ```
 
@@ -73,8 +102,8 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -83,8 +112,6 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/user-permission/1',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -123,8 +150,8 @@ IF "only_active" it's set false on the request the expired permissions are retur
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -133,8 +160,6 @@ IF "only_active" it's set false on the request the expired permissions are retur
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/user-permission',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });

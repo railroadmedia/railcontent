@@ -16,8 +16,8 @@
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -26,8 +26,6 @@
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -59,8 +57,8 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -69,8 +67,6 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -117,8 +113,8 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -127,8 +123,6 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content/parent/1',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -212,8 +206,8 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -222,8 +216,6 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content/get-by-ids',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -360,8 +352,8 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -370,8 +362,6 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content/1',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -455,8 +445,8 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -465,18 +455,32 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
 ```
 
-### Response Example (500):
+### Response Example (422):
 
 ```json
 {
-    "message": "Server Error"
+    "errors": [
+        {
+            "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.attributes.status",
+            "detail": "The status field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.attributes.type",
+            "detail": "The type field is required."
+        }
+    ]
 }
 ```
 
@@ -499,8 +503,8 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -509,18 +513,22 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content/1',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
 ```
 
-### Response Example (500):
+### Response Example (422):
 
 ```json
 {
-    "message": "Server Error"
+    "errors": [
+        {
+            "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The type field is required."
+        }
+    ]
 }
 ```
 
@@ -543,8 +551,8 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -553,8 +561,6 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content/1',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -585,8 +591,8 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -595,8 +601,6 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/soft/content/1',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });

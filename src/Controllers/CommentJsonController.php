@@ -50,16 +50,17 @@ class CommentJsonController extends Controller
 
     /** List comments
      *
-     *  Pull comments based on the criteria passed in request
-     *      - content_id   => pull the comments for given content id
-     *      - user_id      => pull user's comments
-     *      - content_type => pull the comments for the contents with given type
-     *
-     *
      * @param Request $request
      * @return Fractal
      * @throws NonUniqueResultException
      *
+     * @queryParam content_id  pull the comments for given content id
+     * @queryParam user_id  pull user's comments
+     * @queryParam content_type  pull for the contents with given type
+     * @queryParam page default:1
+     * @queryParam limit default:10
+     * @queryParam sort default:'-created_on'
+     * @responseFile ../../../../../docs/linkedCommentsResponse.json
      *
      */
     public function index(Request $request)
@@ -88,12 +89,13 @@ class CommentJsonController extends Controller
     /** Create a new comment
      *
      * @param CommentCreateRequest $request
-     * @responseFile ../../../../../docs/comment.json
      *
      * @return Fractal
      * @throws Throwable
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @responseFile ../../../../../docs/comment.json
      */
     public function store(CommentCreateRequest $request)
     {
@@ -169,6 +171,7 @@ class CommentJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      *
+     * @queryParam comment_id required
      * @response 204 { }
      * @response 403 { "message": "Delete failed, you can delete only your comments." }
      * @response 404 { "message": "Delete failed, comment not found with id: 1" }
@@ -232,6 +235,10 @@ class CommentJsonController extends Controller
      * @param Request $request
      * @return Fractal
      * @throws NonUniqueResultException
+     *
+     * @queryParam comment_id required
+     * @bodyParam limit default:10
+     * @responseFile ../../../../../docs/linkedCommentsResponse.json
      */
     public function getLinkedComment($commentId, Request $request)
     {

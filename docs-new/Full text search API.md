@@ -19,8 +19,8 @@ Return a Json paginated response with the contents
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -29,8 +29,6 @@ Return a Json paginated response with the contents
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/search',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });

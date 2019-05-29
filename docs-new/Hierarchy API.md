@@ -17,14 +17,14 @@
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
-|body|data.type|  required  | |string|Must be 'contentHierarchy'.|
-|body|data.attributes.child_position|  optional  | |integer|The position relative to the other children of the given parent. Will automatically shift other children. If null - position will be set to the end of the child stack.|
-|body|data.relationships.parent.data.type|  optional  | |string|Must be 'content'.|
-|body|data.relationships.parent.data.id|  optional  | |integer|Must exists in contents.|
-|body|data.relationships.child.data.type|  optional  | |string|Must be 'content'.|
-|body|data.relationships.child.data.id|  optional  | |integer|Must exists in contents.|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
+|body|data.type|  yes  |Must be 'contentHierarchy'.|
+|body|data.attributes.child_position|    |The position relative to the other children of the given parent. Will automatically shift other children. If null - position will be set to the end of the child stack.|
+|body|data.relationships.parent.data.type|    |Must be 'content'.|
+|body|data.relationships.parent.data.id|    |Must exists in contents.|
+|body|data.relationships.child.data.type|    |Must be 'content'.|
+|body|data.relationships.child.data.id|    |Must exists in contents.|
 
 
 ### Request Example:
@@ -37,7 +37,7 @@ $.ajax({
     "data": {
         "type": "contentHierarchy",
         "attributes": {
-            "child_position": 5
+            "child_position": 12
         },
         "relationships": {
             "parent": {
@@ -61,11 +61,37 @@ $.ajax({
 });
 ```
 
-### Response Example (500):
+### Response Example (422):
 
 ```json
 {
-    "message": "Server Error"
+    "errors": [
+        {
+            "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The json data type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.child.data.type",
+            "detail": "The child type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.child.data.id",
+            "detail": "The child id field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.parent.data.type",
+            "detail": "The parent type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.parent.data.id",
+            "detail": "The parent id field is required."
+        }
+    ]
 }
 ```
 
@@ -87,8 +113,8 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -97,8 +123,6 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content/hierarchy/1/1',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });

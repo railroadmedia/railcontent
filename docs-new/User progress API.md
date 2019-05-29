@@ -17,14 +17,14 @@
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 ### Validation Rules
 ```php
 {
-    "data.type": "in:userContentProgress",
-    "data.relationships.content.data.type": "in:content",
+    "data.type": "required|in:userContentProgress",
+    "data.relationships.content.data.type": "required|in:content",
     "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
 ```
@@ -35,18 +35,32 @@
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/start',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
 ```
 
-### Response Example (500):
+### Response Example (422):
 
 ```json
 {
-    "message": "Server Error"
+    "errors": [
+        {
+            "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The json data type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.content.data.type",
+            "detail": "The content type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.content.data.id",
+            "detail": "The content id field is required."
+        }
+    ]
 }
 ```
 
@@ -69,14 +83,14 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 ### Validation Rules
 ```php
 {
-    "data.type": "in:userContentProgress",
-    "data.relationships.content.data.type": "in:content",
+    "data.type": "required|in:userContentProgress",
+    "data.relationships.content.data.type": "required|in:content",
     "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
 ```
@@ -87,18 +101,32 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/complete',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
 ```
 
-### Response Example (500):
+### Response Example (422):
 
 ```json
 {
-    "message": "Server Error"
+    "errors": [
+        {
+            "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The json data type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.content.data.type",
+            "detail": "The content type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.content.data.id",
+            "detail": "The content id field is required."
+        }
+    ]
 }
 ```
 
@@ -121,14 +149,14 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 ### Validation Rules
 ```php
 {
-    "data.type": "in:userContentProgress",
-    "data.relationships.content.data.type": "in:content",
+    "data.type": "required|in:userContentProgress",
+    "data.relationships.content.data.type": "required|in:content",
     "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
 ```
@@ -139,18 +167,32 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/reset',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
 ```
 
-### Response Example (500):
+### Response Example (422):
 
 ```json
 {
-    "message": "Server Error"
+    "errors": [
+        {
+            "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The json data type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.content.data.type",
+            "detail": "The content type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.content.data.id",
+            "detail": "The content id field is required."
+        }
+    ]
 }
 ```
 
@@ -173,14 +215,14 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 ### Validation Rules
 ```php
 {
-    "data.type": "in:userContentProgress",
-    "data.relationships.content.data.type": "in:content",
+    "data.type": "required|in:userContentProgress",
+    "data.relationships.content.data.type": "required|in:content",
     "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
 }
 ```
@@ -191,18 +233,32 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/progress',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
 ```
 
-### Response Example (500):
+### Response Example (422):
 
 ```json
 {
-    "message": "Server Error"
+    "errors": [
+        {
+            "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The json data type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.content.data.type",
+            "detail": "The content type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.content.data.id",
+            "detail": "The content id field is required."
+        }
+    ]
 }
 ```
 

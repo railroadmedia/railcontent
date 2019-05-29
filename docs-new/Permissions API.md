@@ -16,8 +16,8 @@
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -26,8 +26,6 @@
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/permission',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -60,13 +58,13 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 ### Validation Rules
 ```php
 {
-    "data.type": "in:permission",
+    "data.type": "required|in:permission",
     "data.attributes.name": "required|max:255"
 }
 ```
@@ -77,18 +75,27 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/permission',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
 ```
 
-### Response Example (500):
+### Response Example (422):
 
 ```json
 {
-    "message": "Server Error"
+    "errors": [
+        {
+            "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.attributes.name",
+            "detail": "The name field is required."
+        }
+    ]
 }
 ```
 
@@ -111,13 +118,16 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 ### Validation Rules
 ```php
 {
+    "data.type": "required|in:contentPermission",
+    "data.relationships.permission.data.type": "required|in:permission",
     "data.relationships.permission.data.id": "required|integer|exists:testbench.railcontent_permissions,id",
+    "data.relationships.content.data.type": "nullable|in:content|required_without_all:data.attributes.content_type",
     "data.relationships.content.data.id": "nullable|numeric|required_without_all:data.attributes.content_type|exists:testbench.railcontent_content,id",
     "data.attributes.content_type": "nullable|string|required_without_all:data.relationships.content.data.id|exists:testbench.railcontent_content,type"
 }
@@ -129,8 +139,6 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/permission/dissociate',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -143,18 +151,33 @@ $.ajax({
     "errors": [
         {
             "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The json data type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.permission.data.type",
+            "detail": "The permission type field is required."
+        },
+        {
+            "title": "Validation failed.",
             "source": "data.relationships.permission.data.id",
-            "detail": "The permission field is required."
+            "detail": "The permission id field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.content.data.type",
+            "detail": "The content type field is required when none of content type are present."
         },
         {
             "title": "Validation failed.",
             "source": "data.relationships.content.data.id",
-            "detail": "The content field is required when none of content type are present."
+            "detail": "The content id field is required when none of content type are present."
         },
         {
             "title": "Validation failed.",
             "source": "data.attributes.content_type",
-            "detail": "The content type field is required when none of content are present."
+            "detail": "The content type field is required when none of content id are present."
         }
     ]
 }
@@ -179,13 +202,13 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 ### Validation Rules
 ```php
 {
-    "data.type": "in:permission",
+    "data.type": "required|in:permission",
     "data.attributes.name": "required|max:255"
 }
 ```
@@ -196,18 +219,27 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/permission/1',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
 ```
 
-### Response Example (500):
+### Response Example (422):
 
 ```json
 {
-    "message": "Server Error"
+    "errors": [
+        {
+            "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.attributes.name",
+            "detail": "The name field is required."
+        }
+    ]
 }
 ```
 
@@ -230,8 +262,8 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -240,8 +272,6 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/permission/1',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -277,13 +307,16 @@ $.ajax({
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 ### Validation Rules
 ```php
 {
+    "data.type": "required|in:contentPermission",
+    "data.relationships.permission.data.type": "required|in:permission",
     "data.relationships.permission.data.id": "required|integer|exists:testbench.railcontent_permissions,id",
+    "data.relationships.content.data.type": "nullable|in:content|required_without_all:data.attributes.content_type",
     "data.relationships.content.data.id": "nullable|numeric|required_without_all:data.attributes.content_type|exists:testbench.railcontent_content,id",
     "data.attributes.content_type": "nullable|string|required_without_all:data.relationships.content.data.id|exists:testbench.railcontent_content,type"
 }
@@ -295,8 +328,6 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/permission/assign',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -309,18 +340,33 @@ $.ajax({
     "errors": [
         {
             "title": "Validation failed.",
+            "source": "data.type",
+            "detail": "The json data type field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.permission.data.type",
+            "detail": "The permission type field is required."
+        },
+        {
+            "title": "Validation failed.",
             "source": "data.relationships.permission.data.id",
-            "detail": "The permission field is required."
+            "detail": "The permission id field is required."
+        },
+        {
+            "title": "Validation failed.",
+            "source": "data.relationships.content.data.type",
+            "detail": "The content type field is required when none of content type are present."
         },
         {
             "title": "Validation failed.",
             "source": "data.relationships.content.data.id",
-            "detail": "The content field is required when none of content type are present."
+            "detail": "The content id field is required when none of content type are present."
         },
         {
             "title": "Validation failed.",
             "source": "data.attributes.content_type",
-            "detail": "The content type field is required when none of content are present."
+            "detail": "The content type field is required when none of content id are present."
         }
     ]
 }

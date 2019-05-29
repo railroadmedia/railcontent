@@ -44,6 +44,9 @@ class CommentLikeJsonController extends Controller
      * @return Fractal
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @queryParam comment_id required
+     * @responseFile ../../../../../docs/commentLikeResponse.json
      */
     public function store(CommentLikeRequest $request, $id)
     {
@@ -59,6 +62,9 @@ class CommentLikeJsonController extends Controller
      * @return JsonResponse
      * @throws ORMException
      * @throws OptimisticLockException
+     *
+     * @queryParam comment_id required
+     * @response 200 { }
      */
     public function delete(CommentUnLikeRequest $request, $id)
     {

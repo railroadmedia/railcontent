@@ -16,8 +16,8 @@
 ### Request Parameters
 
 
-|Type|Key|Required|Default|Options|Notes|
-|----|---|--------|-------|-------|-----|
+|Type|Key|Required|Notes|
+|----|---|--------|-----|
 
 
 ### Request Example:
@@ -26,8 +26,6 @@
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/remote',
-[]
-   ,
     success: function(response) {},
     error: function(response) {}
 });
