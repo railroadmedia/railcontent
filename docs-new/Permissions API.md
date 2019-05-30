@@ -82,10 +82,12 @@ $.ajax({
 
 ### Validation Rules
 ```php
-{
-    "data.type": "required|in:permission",
-    "data.attributes.name": "required|max:255"
-}
+[
+    "        return [",
+    "            'data.type' => 'required|in:permission',",
+    "            'data.attributes.name' => 'required|max:255',",
+    "        ];"
+]
 ```
 
 ### Request Example:
@@ -99,7 +101,7 @@ $.ajax({
         "type": "permission",
         "attributes": {
             "name": "Permission 1",
-            "brand": "eaque"
+            "brand": "voluptatem"
         }
     }
 }
@@ -145,17 +147,32 @@ $.ajax({
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|body|data.type|  yes  |Must be 'contentPermission'.|
+|body|data.attributes.content_type|    |Required without content.|
+|body|data.relationships.permission.data.type|  yes  |Must be 'permission'.|
+|body|data.relationships.permission.data.id|  yes  |Must exists in permission.|
+|body|data.relationships.content.data.type|    |Required without content_type.  Must be 'content'.|
+|body|data.relationships.content.data.id|    |Required without content_type. Must exists in content.|
 
 ### Validation Rules
 ```php
-{
-    "data.type": "required|in:contentPermission",
-    "data.relationships.permission.data.type": "required|in:permission",
-    "data.relationships.permission.data.id": "required|integer|exists:testbench.railcontent_permissions,id",
-    "data.relationships.content.data.type": "nullable|in:content|required_without_all:data.attributes.content_type",
-    "data.relationships.content.data.id": "nullable|numeric|required_without_all:data.attributes.content_type|exists:testbench.railcontent_content,id",
-    "data.attributes.content_type": "nullable|string|required_without_all:data.relationships.content.data.id|exists:testbench.railcontent_content,type"
-}
+[
+    "        return [",
+    "            'data.type' => 'required|in:contentPermission',",
+    "            'data.relationships.permission.data.type' => 'required|in:permission',",
+    "            'data.relationships.permission.data.id' => 'required|integer|exists:' . config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'permissions' . ',id',",
+    "            'data.relationships.content.data.type' => 'nullable|in:content|required_without_all:data.attributes.content_type',",
+    "            'data.relationships.content.data.id' => 'nullable|numeric|required_without_all:data.attributes.content_type|exists:' .",
+    "                config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'content' .",
+    "                ',id',",
+    "            'data.attributes.content_type' => 'nullable|string|required_without_all:data.relationships.content.data.id|exists:' .",
+    "                config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'content' .",
+    "                ',type'",
+    "        ];"
+]
 ```
 
 ### Request Example:
@@ -164,6 +181,29 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/permission/dissociate',
+{
+    "data": {
+        "type": "contentPermission",
+        "attributes": {
+            "content_type": "course"
+        },
+        "relationships": {
+            "permission": {
+                "data": {
+                    "type": "permission",
+                    "id": 1
+                }
+            },
+            "content": {
+                "data": {
+                    "type": "content",
+                    "id": 1
+                }
+            }
+        }
+    }
+}
+   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -235,10 +275,12 @@ $.ajax({
 
 ### Validation Rules
 ```php
-{
-    "data.type": "required|in:permission",
-    "data.attributes.name": "required|max:255"
-}
+[
+    "        return [",
+    "            'data.type' => 'required|in:permission',",
+    "            'data.attributes.name' => 'required|max:255',",
+    "        ];"
+]
 ```
 
 ### Request Example:
@@ -252,7 +294,7 @@ $.ajax({
         "type": "permission",
         "attributes": {
             "name": "Permission 1",
-            "brand": "dignissimos"
+            "brand": "eos"
         }
     }
 }
@@ -343,17 +385,32 @@ $.ajax({
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|body|data.type|  yes  |Must be 'contentPermission'.|
+|body|data.attributes.content_type|    |Required without content.|
+|body|data.relationships.permission.data.type|    |Must be 'permission'.|
+|body|data.relationships.permission.data.id|    |Must exists in permission.|
+|body|data.relationships.content.data.type|    |Required without content_type.  Must be 'content'.|
+|body|data.relationships.content.data.id|    |Required without content_type. Must exists in content.|
 
 ### Validation Rules
 ```php
-{
-    "data.type": "required|in:contentPermission",
-    "data.relationships.permission.data.type": "required|in:permission",
-    "data.relationships.permission.data.id": "required|integer|exists:testbench.railcontent_permissions,id",
-    "data.relationships.content.data.type": "nullable|in:content|required_without_all:data.attributes.content_type",
-    "data.relationships.content.data.id": "nullable|numeric|required_without_all:data.attributes.content_type|exists:testbench.railcontent_content,id",
-    "data.attributes.content_type": "nullable|string|required_without_all:data.relationships.content.data.id|exists:testbench.railcontent_content,type"
-}
+[
+    "        return [",
+    "            'data.type' => 'required|in:contentPermission',",
+    "            'data.relationships.permission.data.type' => 'required|in:permission',",
+    "            'data.relationships.permission.data.id' => 'required|integer|exists:' . config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'permissions' . ',id',",
+    "            'data.relationships.content.data.type' => 'nullable|in:content|required_without_all:data.attributes.content_type',",
+    "            'data.relationships.content.data.id' => 'nullable|numeric|required_without_all:data.attributes.content_type|exists:' .",
+    "                config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'content' .",
+    "                ',id',",
+    "            'data.attributes.content_type' => 'nullable|string|required_without_all:data.relationships.content.data.id|exists:' .",
+    "                config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'content' .",
+    "                ',type'",
+    "        ];"
+]
 ```
 
 ### Request Example:
@@ -362,6 +419,29 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/permission/assign',
+{
+    "data": {
+        "type": "contentPermission",
+        "attributes": {
+            "content_type": "course"
+        },
+        "relationships": {
+            "permission": {
+                "data": {
+                    "type": "permission",
+                    "id": 1
+                }
+            },
+            "content": {
+                "data": {
+                    "type": "content",
+                    "id": 1
+                }
+            }
+        }
+    }
+}
+   ,
     success: function(response) {},
     error: function(response) {}
 });

@@ -430,7 +430,7 @@ $.ajax({
 <!-- END_590f05a5a1b2df09a96398373df36802 -->
 
 <!-- START_041a3bcbff15a33078ad0fc39db6ceda -->
-## Create a new content and return it in JSON format
+## Create a new content
 
 
 ### HTTP Request
@@ -438,14 +438,64 @@ $.ajax({
 
 
 ### Permissions
-    - create.content required
+    - Must be logged in
+    - Must have the create.content permission to create
     
 ### Request Parameters
 
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|body|data.type|  yes  |Must be 'content'.|
+|body|data.attributes.slug|    ||
+|body|data.attributes.type|  yes  ||
+|body|data.attributes.status|  yes  ||
+|body|data.attributes.language|    |default:'en-US'.|
+|body|data.attributes.sort|    ||
+|body|data.attributes.published_on|    ||
+|body|data.attributes.created_on|    ||
+|body|data.attributes.archived_on|    ||
+|body|data.attributes.fields|    ||
+|body|data.attributes.brand|    ||
+|body|data.relationships.parent.data.type|    |Must be 'content'.|
+|body|data.relationships.parent.data.id|    |Must exists in contents.|
+|body|data.relationships.user.data.type|    |Must be 'user'.|
+|body|data.relationships.user.data.id|    |Must exists in user.|
 
+### Validation Rules
+```php
+[
+    "        $this->validateContent($this);",
+    "",
+    "        $this->setGeneralRules(",
+    "            [",
+    "                'data.type' => 'required|in:content',",
+    "                'data.attributes.status' => 'max:64|required|in:' . implode(",
+    "                        ',',",
+    "                        [",
+    "                            ContentService::STATUS_DRAFT,",
+    "                            ContentService::STATUS_PUBLISHED,",
+    "                            ContentService::STATUS_ARCHIVED,",
+    "                            ContentService::STATUS_SCHEDULED,",
+    "                            ContentService::STATUS_DELETED,",
+    "                        ]",
+    "                    ),",
+    "                'data.attributes.type' => 'required|max:64',",
+    "                'data.attributes.slug' => 'max:255',",
+    "                'data.attributes.sort' => 'nullable|numeric',",
+    "                'data.attributes.position' => 'nullable|numeric|min:0',",
+    "                'data.attributes.published_on' => 'nullable|date',",
+    "                'data.relationships.parent.data.type' => 'nullable|in:content',",
+    "                'data.relationships.user.data.type' => 'nullable|in:user',",
+    "            ]",
+    "        );",
+    "",
+    "        \/\/set the custom validation rules based on content type and brand",
+    "        $this->setCustomRules($this);",
+    "",
+    "        return parent::rules();"
+]
+```
 
 ### Request Example:
 
@@ -453,32 +503,99 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content',
+{
+    "data": {
+        "type": "content",
+        "attributes": {
+            "slug": "01-getting-started",
+            "type": "course",
+            "status": "draft",
+            "language": "en-US",
+            "sort": 0,
+            "published_on": "null",
+            "created_on": "eaque",
+            "archived_on": "neque",
+            "fields": [],
+            "brand": "brand"
+        },
+        "relationships": {
+            "parent": {
+                "data": {
+                    "type": "content",
+                    "id": 1
+                }
+            },
+            "user": {
+                "data": {
+                    "type": "user",
+                    "id": 1
+                }
+            }
+        }
+    }
+}
+   ,
     success: function(response) {},
     error: function(response) {}
 });
 ```
 
-### Response Example (422):
+### Response Example (200):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.type",
-            "detail": "The type field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.attributes.status",
-            "detail": "The status field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.attributes.type",
-            "detail": "The type field is required."
+    "data": {
+        "type": null,
+        "id": "",
+        "attributes": {
+            "slug": null,
+            "type": null,
+            "sort": 0,
+            "status": null,
+            "brand": null,
+            "language": null,
+            "user": "",
+            "publishedOn": null,
+            "archivedOn": null,
+            "createdOn": null,
+            "difficulty": null,
+            "homeStaffPickRating": null,
+            "legacyId": null,
+            "legacyWordpressPostId": null,
+            "qnaVideo": null,
+            "style": null,
+            "title": null,
+            "xp": null,
+            "album": null,
+            "artist": null,
+            "bpm": null,
+            "cdTracks": null,
+            "chordOrScale": null,
+            "difficultyRange": null,
+            "episodeNumber": null,
+            "exerciseBookPages": null,
+            "fastBpm": null,
+            "includesSong": false,
+            "instructors": null,
+            "liveEventStartTime": null,
+            "liveEventEndTime": null,
+            "liveEventYoutubeId": null,
+            "liveStreamFeedType": null,
+            "name": null,
+            "released": null,
+            "slowBpm": null,
+            "totalXp": null,
+            "transcriberName": null,
+            "week": null,
+            "avatarUrl": null,
+            "lengthInSeconds": null,
+            "soundsliceSlug": null,
+            "staffPickRating": null,
+            "studentId": null,
+            "vimeoVideoId": null,
+            "youtubeVideoId": null
         }
-    ]
+    }
 }
 ```
 
@@ -496,14 +613,62 @@ $.ajax({
 
 
 ### Permissions
-    - update.content required
+    - Must be logged in
+    - Must have the update.content permission to update
     
 ### Request Parameters
 
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|query|content_id|  yes  ||
+|body|data.type|  yes  |Must be 'content'.|
+|body|data.attributes.slug|    ||
+|body|data.attributes.type|    ||
+|body|data.attributes.status|    ||
+|body|data.attributes.language|    |en-US|
+|body|data.attributes.sort|    ||
+|body|data.attributes.published_on|    ||
+|body|data.attributes.archived_on|    ||
+|body|data.attributes.fields|    ||
+|body|data.attributes.brand|    ||
+|body|data.relationships.user.data.type|    |Must be 'user'.|
+|body|data.relationships.user.data.id|    |Must exists in user.|
 
+### Validation Rules
+```php
+[
+    "        $this->validateContent($this);",
+    "",
+    "        \/\/set the general validation rules",
+    "        $this->setGeneralRules(",
+    "            [",
+    "                'data.type' => 'required|in:content',",
+    "                'data.attributes.status' => 'max:64|in:' .",
+    "                    implode(",
+    "                        ',',",
+    "                        [",
+    "                            ContentService::STATUS_DRAFT,",
+    "                            ContentService::STATUS_PUBLISHED,",
+    "                            ContentService::STATUS_ARCHIVED,",
+    "                            ContentService::STATUS_SCHEDULED,",
+    "                            ContentService::STATUS_DELETED,",
+    "                        ]",
+    "                    ),",
+    "                'data.attributes.type' => 'max:64',",
+    "                'data.attributes.sort' => 'nullable|numeric',",
+    "                'data.attributes.position' => 'nullable|numeric|min:0',",
+    "                'data.attributes.published_on' => 'nullable|date'",
+    "            ]",
+    "        );",
+    "",
+    "        \/\/set the custom validation rules based on content type and brand",
+    "        $this->setCustomRules($this);",
+    "",
+    "        \/\/get the validation rules",
+    "        return parent::rules();"
+]
+```
 
 ### Request Example:
 
@@ -511,6 +676,31 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content/1',
+{
+    "data": {
+        "type": "content",
+        "attributes": {
+            "slug": "01-getting-started",
+            "type": "course",
+            "status": "draft",
+            "language": "harum",
+            "sort": 0,
+            "published_on": "null",
+            "archived_on": "impedit",
+            "fields": "",
+            "brand": "brand"
+        },
+        "relationships": {
+            "user": {
+                "data": {
+                    "type": "user",
+                    "id": 1
+                }
+            }
+        }
+    }
+}
+   ,
     success: function(response) {},
     error: function(response) {}
 });

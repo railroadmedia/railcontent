@@ -79,10 +79,13 @@ $.ajax({
 
 ### Validation Rules
 ```php
-{
-    "data.relationships.content.data.type": "required|in:content",
-    "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
-}
+[
+    "        return [",
+    "            'data.relationships.content.data.type' => 'required|in:content',",
+    "            'data.relationships.content.data.id' => 'required|numeric|exists:' . config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'content' . ',id'",
+    "        ];"
+]
 ```
 
 ### Request Example:
@@ -154,10 +157,13 @@ $.ajax({
 
 ### Validation Rules
 ```php
-{
-    "data.relationships.content.data.type": "required|in:content",
-    "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
-}
+[
+    "        return [",
+    "            'data.relationships.content.data.type' => 'required|in:content',",
+    "            'data.relationships.content.data.id' => 'required|numeric|exists:' . config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'content' . ',id'",
+    "        ];"
+]
 ```
 
 ### Request Example:

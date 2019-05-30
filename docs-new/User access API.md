@@ -18,18 +18,28 @@
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|body|data.type|  yes  |Must be 'userPermission'.|
+|body|data.attributes.start_date|    |Permission name.|
+|body|data.attributes.expiration_date|    |expiration date is null they have access forever; otherwise the user have access until the expiration date.|
+|body|data.relationships.permission.data.type|  yes  |Must be 'permission'.|
+|body|data.relationships.permission.data.id|  yes  |Must exists in permission.|
+|body|data.relationships.user.data.type|  yes  |Must be 'user'.|
+|body|data.relationships.user.data.id|  yes  |Must exists in user.|
 
 ### Validation Rules
 ```php
-{
-    "data.type": "required|in:userPermission",
-    "data.relationships.user.data.type": "required|in:user",
-    "data.relationships.user.data.id": "required|integer",
-    "data.relationships.permission.data.type": "required|in:permission",
-    "data.relationships.permission.data.id": "required|integer|exists:testbench.railcontent_permissions,id",
-    "data.attributes.start_date": "required|date",
-    "data.attributes.expiration_date": "nullable|date"
-}
+[
+    "        return [",
+    "            'data.type' => 'required|in:userPermission',",
+    "            'data.relationships.user.data.type' =>'required|in:user',",
+    "            'data.relationships.user.data.id' => 'required|integer',",
+    "            'data.relationships.permission.data.type' => 'required|in:permission',",
+    "            'data.relationships.permission.data.id' => 'required|integer|exists:' . config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'permissions' . ',id',",
+    "            'data.attributes.start_date' => 'required|date',",
+    "            'data.attributes.expiration_date' => 'nullable|date'",
+    "        ];"
+]
 ```
 
 ### Request Example:
@@ -38,6 +48,30 @@
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/user-permission',
+{
+    "data": {
+        "type": "userPermission",
+        "attributes": {
+            "start_date": "Permission 1",
+            "expiration_date": "2019-06-01"
+        },
+        "relationships": {
+            "permission": {
+                "data": {
+                    "type": "permission",
+                    "id": 1
+                }
+            },
+            "user": {
+                "data": {
+                    "type": "user",
+                    "id": 1
+                }
+            }
+        }
+    }
+}
+   ,
     success: function(response) {},
     error: function(response) {}
 });

@@ -19,14 +19,20 @@
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|body|data.type|  yes  |Must be 'userContentProgress'.|
+|body|data.relationships.content.data.type|  yes  |Must be 'content'.|
+|body|data.relationships.content.data.id|  yes  |Must exists in content.|
 
 ### Validation Rules
 ```php
-{
-    "data.type": "required|in:userContentProgress",
-    "data.relationships.content.data.type": "required|in:content",
-    "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
-}
+[
+    "        return [",
+    "            'data.type' =>'required|in:userContentProgress',",
+    "            'data.relationships.content.data.type' =>'required|in:content',",
+    "            'data.relationships.content.data.id' => 'required|numeric|exists:' . config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'content' . ',id'",
+    "        ];"
+]
 ```
 
 ### Request Example:
@@ -35,6 +41,20 @@
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/start',
+{
+    "data": {
+        "type": "userContentProgress",
+        "relationships": {
+            "content": {
+                "data": {
+                    "type": "content",
+                    "id": 1
+                }
+            }
+        }
+    }
+}
+   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -85,14 +105,20 @@ $.ajax({
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|body|data.type|  yes  |Must be 'userContentProgress'.|
+|body|data.relationships.content.data.type|  yes  |Must be 'content'.|
+|body|data.relationships.content.data.id|  yes  |Must exists in content.|
 
 ### Validation Rules
 ```php
-{
-    "data.type": "required|in:userContentProgress",
-    "data.relationships.content.data.type": "required|in:content",
-    "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
-}
+[
+    "        return [",
+    "            'data.type' =>'required|in:userContentProgress',",
+    "            'data.relationships.content.data.type' =>'required|in:content',",
+    "            'data.relationships.content.data.id' => 'required|numeric|exists:' . config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'content' . ',id'",
+    "        ];"
+]
 ```
 
 ### Request Example:
@@ -101,6 +127,20 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/complete',
+{
+    "data": {
+        "type": "userContentProgress",
+        "relationships": {
+            "content": {
+                "data": {
+                    "type": "content",
+                    "id": 1
+                }
+            }
+        }
+    }
+}
+   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -151,14 +191,20 @@ $.ajax({
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|body|data.type|  yes  |Must be 'userContentProgress'.|
+|body|data.relationships.content.data.type|  yes  |Must be 'content'.|
+|body|data.relationships.content.data.id|  yes  |Must exists in content.|
 
 ### Validation Rules
 ```php
-{
-    "data.type": "required|in:userContentProgress",
-    "data.relationships.content.data.type": "required|in:content",
-    "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
-}
+[
+    "        return [",
+    "            'data.type' =>'required|in:userContentProgress',",
+    "            'data.relationships.content.data.type' =>'required|in:content',",
+    "            'data.relationships.content.data.id' => 'required|numeric|exists:' . config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'content' . ',id'",
+    "        ];"
+]
 ```
 
 ### Request Example:
@@ -167,6 +213,20 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/reset',
+{
+    "data": {
+        "type": "userContentProgress",
+        "relationships": {
+            "content": {
+                "data": {
+                    "type": "content",
+                    "id": 1
+                }
+            }
+        }
+    }
+}
+   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -217,14 +277,20 @@ $.ajax({
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|body|data.type|  yes  |Must be 'userContentProgress'.|
+|body|data.relationships.content.data.type|  yes  |Must be 'content'.|
+|body|data.relationships.content.data.id|  yes  |Must exists in content.|
 
 ### Validation Rules
 ```php
-{
-    "data.type": "required|in:userContentProgress",
-    "data.relationships.content.data.type": "required|in:content",
-    "data.relationships.content.data.id": "required|numeric|exists:testbench.railcontent_content,id"
-}
+[
+    "        return [",
+    "            'data.type' =>'required|in:userContentProgress',",
+    "            'data.relationships.content.data.type' =>'required|in:content',",
+    "            'data.relationships.content.data.id' => 'required|numeric|exists:' . config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'content' . ',id'",
+    "        ];"
+]
 ```
 
 ### Request Example:
@@ -233,6 +299,20 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/progress',
+{
+    "data": {
+        "type": "userContentProgress",
+        "relationships": {
+            "content": {
+                "data": {
+                    "type": "content",
+                    "id": 1
+                }
+            }
+        }
+    }
+}
+   ,
     success: function(response) {},
     error: function(response) {}
 });

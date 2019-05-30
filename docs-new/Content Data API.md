@@ -26,6 +26,32 @@
 |body|data.relationships.content.data.type|  yes  |Must be 'content'.|
 |body|data.relationships.content.data.id|  yes  |Must exists in contents.|
 
+### Validation Rules
+```php
+[
+    "        $this->validateContent($this);",
+    "",
+    "        \/\/set the general validation rules",
+    "        $this->setGeneralRules(",
+    "            [",
+    "                'data.type' => 'required|in:contentData',",
+    "                'data.attributes.key' => 'required|max:255',",
+    "                'data.attributes.position' => 'nullable|numeric|min:0',",
+    "                'data.relationships.content.data.type' => 'required|in:content',",
+    "                'data.relationships.content.data.id' => 'required|numeric|exists:' .",
+    "                    config('railcontent.table_prefix') .",
+    "                    'content' .",
+    "                    ',id',",
+    "            ]",
+    "        );",
+    "",
+    "        \/\/set the custom validation rules",
+    "        $this->setCustomRules($this, 'datum');",
+    "",
+    "        \/\/get all the rules for the request",
+    "        return parent::rules();"
+]
+```
 
 ### Request Example:
 
@@ -114,6 +140,27 @@ $.ajax({
 |body|data.relationships.content.data.type|    |Must be 'content'.|
 |body|data.relationships.content.data.id|    |Must exists in contents.|
 
+### Validation Rules
+```php
+[
+    "        $this->validateContent($this);",
+    "",
+    "        \/\/set the general validation rules",
+    "        $this->setGeneralRules(",
+    "            [",
+    "                'data.type' => 'required|in:contentData',",
+    "                'data.attributes.key' => 'max:255',",
+    "                'data.attributes.position' => 'nullable|numeric|min:0'",
+    "            ]",
+    "        );",
+    "",
+    "        \/\/set the custom validation rules",
+    "        $this->setCustomRules($this, 'datum');",
+    "",
+    "        \/\/get all the rules for the request",
+    "        return parent::rules();"
+]
+```
 
 ### Request Example:
 
@@ -127,7 +174,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 8
+            "position": 14
         },
         "relationships": {
             "content": {
@@ -181,6 +228,15 @@ $.ajax({
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
 
+### Validation Rules
+```php
+[
+    "        $this->validateContent($this);",
+    "",
+    "        \/\/get all the validation rules that apply to the request",
+    "        return parent::rules();"
+]
+```
 
 ### Request Example:
 

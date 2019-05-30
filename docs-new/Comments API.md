@@ -12,7 +12,8 @@
 
 
 ### Permissions
-    - authenticated user
+    - Must be logged in
+    - The content type should allow comments
     
 ### Request Parameters
 
@@ -27,16 +28,24 @@
 
 ### Validation Rules
 ```php
-{
-    "data.type": "required|in:comment",
-    "data.attributes.comment": "required|max:10024",
-    "data.relationships.content.data.type": "required|in:content",
-    "data.relationships.content.data.id": [
-        "required",
-        "numeric",
-        {}
-    ]
-}
+[
+    "        return [",
+    "            'data.type' => 'required|in:comment',",
+    "            'data.attributes.comment' => 'required|max:10024',",
+    "            'data.relationships.content.data.type' => 'required|in:content',",
+    "            'data.relationships.content.data.id' =>",
+    "                ['required',",
+    "                    'numeric',",
+    "                    Rule::exists(",
+    "                        config('railcontent.database_connection_name') . '.' . config('railcontent.table_prefix'). 'content', 'id'",
+    "                    )->where(function ($query) {",
+    "                        if (is_array(ContentRepository::$availableContentStatues)) {",
+    "                            $query->whereIn('status', ContentRepository::$availableContentStatues);",
+    "                        }",
+    "                    })",
+    "                ],",
+    "        ];"
+]
 ```
 
 ### Request Example:
@@ -162,34 +171,50 @@ $.ajax({
 
 
 ### Permissions
-    - authenticated user
+    - Must be logged in to modify own comments
+    - Must be logged in with an administrator account to modify other user comments
     
 ### Request Parameters
 
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
-|query|comment_id|    |int required|
+|query|comment_id|  yes  ||
 |body|data.type|  yes  |Must be 'comment'.|
 |body|data.attributes.comment|    |The text of the comment.|
 |body|data.attributes.temporary_display_name|    ||
 |body|data.relationships.content.data.type|    |Must be 'content'.|
 |body|data.relationships.content.data.id|    |Must exists in contents.|
+|body|data.relationships.parent.data.type|    |Must be 'comment'.|
+|body|data.relationships.parent.data.id|    |Must exists in comments.|
 
 ### Validation Rules
 ```php
-{
-    "data.type": "required|in:comment",
-    "data.attributes.comment": "nullable|max:10024",
-    "data.relationships.content.data.type": "in:content",
-    "data.relationships.content.data.id": [
-        "numeric",
-        {}
-    ],
-    "data.relationships.parent.data.type": "in:comment",
-    "data.relationships.parent.data.id": "numeric|exists:testbench.railcontent_comments,id",
-    "data.attributes.temporary_display_name": "filled"
-}
+[
+    "        return [",
+    "            'data.type' => 'required|in:comment',",
+    "            'data.attributes.comment' => 'nullable|max:10024',",
+    "            'data.relationships.content.data.type' => 'in:content',",
+    "            'data.relationships.content.data.id' =>",
+    "                ['numeric',",
+    "                    Rule::exists(",
+    "                        config('railcontent.database_connection_name') . '.' .",
+    "                        config('railcontent.table_prefix'). 'content',",
+    "                        'id'",
+    "                    )->where(",
+    "                        function ($query) {",
+    "                            if (is_array(ContentRepository::$availableContentStatues)) {",
+    "                                $query->whereIn('status', ContentRepository::$availableContentStatues);",
+    "                            }",
+    "                        }",
+    "                    )",
+    "                ],",
+    "            'data.relationships.parent.data.type' => 'in:comment',",
+    "            'data.relationships.parent.data.id' => 'numeric|exists:' . config('railcontent.database_connection_name') . '.' .",
+    "                config('railcontent.table_prefix'). 'comments' . ',id',",
+    "            'data.attributes.temporary_display_name' => 'filled'",
+    "        ];"
+]
 ```
 
 ### Request Example:
@@ -203,12 +228,18 @@ $.ajax({
         "type": "comment",
         "attributes": {
             "comment": "Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.",
-            "temporary_display_name": "doloremque"
+            "temporary_display_name": "quis"
         },
         "relationships": {
             "content": {
                 "data": {
                     "type": "content",
+                    "id": 1
+                }
+            },
+            "parent": {
+                "data": {
+                    "type": "comment",
                     "id": 1
                 }
             }
@@ -384,12 +415,19 @@ $.ajax({
 
 ### Validation Rules
 ```php
-{
-    "data.type": "required|in:comment",
-    "data.attributes.comment": "required|max:10024",
-    "data.relationships.parent.data.type": "required|in:comment",
-    "data.relationships.parent.data.id": "required|numeric|exists:testbench.railcontent_comments,id"
-}
+[
+    "        return [",
+    "            'data.type' => 'required|in:comment',",
+    "            'data.attributes.comment' => 'required|max:10024',",
+    "            'data.relationships.parent.data.type' => 'required|in:comment',",
+    "            'data.relationships.parent.data.id' => 'required|numeric|exists:' .",
+    "                config('railcontent.database_connection_name') .",
+    "                '.' .",
+    "                config('railcontent.table_prefix') .",
+    "                'comments' .",
+    "                ',id',",
+    "        ];"
+]
 ```
 
 ### Request Example:
@@ -711,7 +749,7 @@ $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/comment/1',
 {
-    "limit": "totam"
+    "limit": "fugiat"
 }
    ,
     success: function(response) {},
@@ -883,6 +921,12 @@ $.ajax({
 |----|---|--------|-----|
 |query|comment_id|  yes  ||
 
+### Validation Rules
+```php
+[
+    "        return [];"
+]
+```
 
 ### Request Example:
 
@@ -1038,6 +1082,12 @@ $.ajax({
 |----|---|--------|-----|
 |query|comment_id|  yes  ||
 
+### Validation Rules
+```php
+[
+    "        return [];"
+]
+```
 
 ### Request Example:
 

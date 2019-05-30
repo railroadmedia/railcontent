@@ -26,6 +26,29 @@
 |body|data.relationships.child.data.type|    |Must be 'content'.|
 |body|data.relationships.child.data.id|    |Must exists in contents.|
 
+### Validation Rules
+```php
+[
+    "        $this->setGeneralRules(",
+    "            [",
+    "                'data.type' => 'required|in:contentHierarchy',",
+    "                'data.relationships.child.data.type' => 'required|in:content',",
+    "                'data.relationships.child.data.id' => 'required|exists:' . config('railcontent.database_connection_name') . '.' .",
+    "                    config('railcontent.table_prefix'). 'content' . ',id',",
+    "                'data.relationships.parent.data.type' => 'required|in:content',",
+    "                'data.relationships.parent.data.id' => 'required|exists:' . config('railcontent.database_connection_name') . '.' .",
+    "                    config('railcontent.table_prefix'). 'content'. ',id',",
+    "                'data.attributes.child_position' => 'nullable|numeric|min:0'",
+    "            ]",
+    "        );",
+    "",
+    "        $this->setCustomRules($this, 'fields');",
+    "",
+    "        $this->validateContent($this);",
+    "",
+    "        return parent::rules();"
+]
+```
 
 ### Request Example:
 
@@ -37,7 +60,7 @@ $.ajax({
     "data": {
         "type": "contentHierarchy",
         "attributes": {
-            "child_position": 2
+            "child_position": 6
         },
         "relationships": {
             "parent": {
