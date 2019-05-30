@@ -4,6 +4,27 @@ namespace Railroad\Railcontent\Requests;
 
 use Railroad\Railcontent\Services\ContentService as ContentService;
 
+/**
+ * Class ContentCreateRequest
+ *
+ * @package Railroad\Railcontent\Requests
+ *
+ * @bodyParam data.type string required  Must be 'content'. Example: content
+ * @bodyParam data.attributes.slug string Example:01-getting-started
+ * @bodyParam data.attributes.type string required Example:course
+ * @bodyParam data.attributes.status string required Example:draft
+ * @bodyParam data.attributes.language   By default:'en-US'. Example: en-US
+ * @bodyParam data.attributes.sort integer Example:null
+ * @bodyParam data.attributes.published_on datetime Example:null
+ * @bodyParam data.attributes.created_on datetime
+ * @bodyParam data.attributes.archived_on datetime
+ * @bodyParam data.attributes.fields array
+ * @bodyParam data.attributes.brand string Example:brand
+ * @bodyParam data.relationships.parent.data.type string   Must be 'content'. Example: content
+ * @bodyParam data.relationships.parent.data.id integer   Must exists in contents. Example: 1
+ * @bodyParam data.relationships.user.data.type string   Must be 'user'. Example: user
+ * @bodyParam data.relationships.user.data.id integer   Must exists in user. Example: 1
+ */
 class ContentCreateRequest extends CustomFormRequest
 {
     /**

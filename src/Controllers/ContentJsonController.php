@@ -146,7 +146,7 @@ class ContentJsonController extends Controller
         return ResponseService::content($content);
     }
 
-    /** Create a new content and return it in JSON format
+    /** Create a new content
      *
      * @param ContentCreateRequest $request
      * @return JsonResponse
@@ -156,7 +156,9 @@ class ContentJsonController extends Controller
      * @throws OptimisticLockException
      * @throws ReflectionException
      *
-     * @permission create.content required
+     * @permission Must be logged in
+     * @permission Must have the create.content permission to create
+     * @transformer Railroad\Railcontent\Transformers\DecoratedContentTransformer
      */
     public function store(ContentCreateRequest $request)
     {
@@ -183,7 +185,10 @@ class ContentJsonController extends Controller
      * @throws ReflectionException
      * @throws Throwable
      *
-     * @permission update.content required
+     * @permission Must be logged in
+     * @permission Must have the update.content permission to update
+     *
+     * @queryParam content_id required
      */
     public function update(ContentUpdateRequest $request, $contentId)
     {

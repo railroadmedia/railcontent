@@ -9,12 +9,14 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 /**
  * Class CommentUpdateRequest
  *
- * @queryParam comment_id int required
+ * @queryParam comment_id required
  * @bodyParam data.type string required  Must be 'comment'. Example: comment
  * @bodyParam data.attributes.comment string   The text of the comment. Example: Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.
  * @bodyParam data.attributes.temporary_display_name string
  * @bodyParam data.relationships.content.data.type string   Must be 'content'. Example: content
  * @bodyParam data.relationships.content.data.id integer   Must exists in contents. Example: 1
+ * @bodyParam data.relationships.parent.data.type string   Must be 'comment'. Example: comment
+ * @bodyParam data.relationships.parent.data.id integer   Must exists in comments. Example: 1
  *
  * @package Railroad\Railcontent\Requests
  */

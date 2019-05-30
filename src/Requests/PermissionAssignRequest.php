@@ -2,7 +2,18 @@
 
 namespace Railroad\Railcontent\Requests;
 
-
+/**
+ * Class PermissionAssignRequest
+ *
+ * @package Railroad\Railcontent\Requests
+ *
+ * @bodyParam data.type string required  Must be 'contentPermission'. Example: contentPermission
+ * @bodyParam data.attributes.content_type string Required without content. Example:course
+ * @bodyParam data.relationships.permission.data.type string   Must be 'permission'. Example: permission
+ * @bodyParam data.relationships.permission.data.id integer   Must exists in permission. Example: 1
+ * @bodyParam data.relationships.content.data.type string Required without content_type.  Must be 'content'. Example: content
+ * @bodyParam data.relationships.content.data.id integer   Required without content_type. Must exists in content. Example: 1
+ */
 class PermissionAssignRequest extends FormRequest
 {
     /**

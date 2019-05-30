@@ -96,7 +96,8 @@ class CommentJsonController extends Controller
      * @throws OptimisticLockException
      *
      * @responseFile ../../../../../docs/comment.json
-     * @permission authenticated user
+     * @permission Must be logged in
+     * @permission The content type should allow comments
      */
     public function store(CommentCreateRequest $request)
     {
@@ -133,7 +134,8 @@ class CommentJsonController extends Controller
      * @throws ReflectionException
      *
      * @responseFile ../../../../../docs/comment.json
-     * @permission authenticated user
+     * @permission Must be logged in to modify own comments
+     * @permission Must be logged in with an administrator account to modify other user comments
      */
     public function update(CommentUpdateRequest $request, $commentId)
     {
