@@ -19,7 +19,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/roxanariza/laravel-apidoc-generator"
+      "url": "https://github.com/railroadmedia/laravel-apidoc-generator"
     }
   ],
   "require": {
