@@ -13,6 +13,8 @@ return [
      */
     'router' => 'laravel',
 
+    'actAsUserId' => 1,
+
     /*
      * Generate a Postman collection in addition to HTML docs.
      */
@@ -145,7 +147,7 @@ return [
                      * Headers which should be sent with the API call.
                      */
                     'headers' => [
-                        'Content-Type' => 'application/json',
+                       // 'Content-Type' => 'application/json',
                         'Accept' => 'application/json',
                         // 'key' => 'value',
                     ],

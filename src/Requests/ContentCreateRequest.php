@@ -15,9 +15,9 @@ use Railroad\Railcontent\Services\ContentService as ContentService;
  * @bodyParam data.attributes.status string required Example:draft
  * @bodyParam data.attributes.language   By default:'en-US'. Example: en-US
  * @bodyParam data.attributes.sort integer Example:null
- * @bodyParam data.attributes.published_on datetime Example:null
- * @bodyParam data.attributes.created_on datetime
- * @bodyParam data.attributes.archived_on datetime
+ * @bodyParam data.attributes.published_on datetime Example:2019-05-21 21:20:10
+ * @bodyParam data.attributes.created_on datetime Example:2019-05-21 21:20:10
+ * @bodyParam data.attributes.archived_on datetime Example:2019-05-21 21:20:10
  * @bodyParam data.attributes.fields array
  * @bodyParam data.attributes.brand string Example:brand
  * @bodyParam data.relationships.parent.data.type string   Must be 'content'. Example: content

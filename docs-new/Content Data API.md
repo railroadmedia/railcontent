@@ -55,60 +55,18 @@
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/content/datum',
-{
-    "data": {
-        "type": "contentData",
-        "attributes": {
-            "key": "description",
-            "value": "indsf fdgg  gfg",
-            "position": 8
-        },
-        "relationships": {
-            "content": {
-                "data": {
-                    "type": "content",
-                    "id": 1
-                }
-            }
-        }
-    }
-}
-   ,
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X PUT "http://localhost/railcontent/content/datum" \
+    -H "Content-Type: application/json" \
+    -d '{"data":{"type":"contentData","attributes":{"key":"description","value":"indsf fdgg  gfg","position":4},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+
 ```
 
-### Response Example (422):
+### Response Example (500):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.type",
-            "detail": "The json data type field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.attributes.key",
-            "detail": "The key field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.content.data.type",
-            "detail": "The content type field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.content.data.id",
-            "detail": "The content id field is required."
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 
@@ -164,45 +122,21 @@ $.ajax({
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/content/datum/1',
-{
-    "data": {
-        "type": "contentData",
-        "attributes": {
-            "key": "description",
-            "value": "indsf fdgg  gfg",
-            "position": 14
-        },
-        "relationships": {
-            "content": {
-                "data": {
-                    "type": "content",
-                    "id": 1
-                }
-            }
-        }
-    }
-}
-   ,
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X PATCH "http://localhost/railcontent/content/datum/1" \
+    -H "Content-Type: application/json" \
+    -d '{"data":{"type":"contentData","attributes":{"key":"description","value":"indsf fdgg  gfg","position":2},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+
 ```
 
-### Response Example (422):
+### Response Example (404):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.type",
-            "detail": "The type field is required."
-        }
-    ]
+    "errors": {
+        "title": "Not found.",
+        "detail": "Update failed, datum not found with id: 1"
+    }
 }
 ```
 
@@ -240,13 +174,8 @@ $.ajax({
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/content/datum/1',
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X DELETE "http://localhost/railcontent/content/datum/1" 
 ```
 
 ### Response Example (404):

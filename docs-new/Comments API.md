@@ -14,6 +14,8 @@
 ### Permissions
     - Must be logged in
     - The content type should allow comments
+
+ * @bodyParam data.type string required  Must be &#039;comment&#039;. Example: comment
     
 ### Request Parameters
 
@@ -33,8 +35,12 @@
     "            'data.type' => 'required|in:comment',",
     "            'data.attributes.comment' => 'required|max:10024',",
     "            'data.relationships.content.data.type' => 'required|in:content',",
+    "            'data.relationships.content9.data.id' => 'nullable|numeric|exists:' .",
+    "                config('railcontent.table_prefix') .",
+    "                'content' .",
+    "                ',id',",
     "            'data.relationships.content.data.id' =>",
-    "                ['required',",
+    "                ['nullable',",
     "                    'numeric',",
     "                    Rule::exists(",
     "                        config('railcontent.database_connection_name') . '.' . config('railcontent.table_prefix'). 'content', 'id'",
@@ -50,110 +56,18 @@
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/comment',
-{
-    "data": {
-        "type": "comment",
-        "attributes": {
-            "comment": "Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.",
-            "temporary_display_name": "in"
-        },
-        "relationships": {
-            "content": {
-                "data": {
-                    "type": "content",
-                    "id": 1
-                }
-            }
-        }
-    }
-}
-   ,
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X PUT "http://localhost/railcontent/comment" \
+    -H "Content-Type: application/json" \
+    -d '{"data":{"type":"comment","attributes":{"comment":"Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.","temporary_display_name":"in"},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+
 ```
 
-### Response Example (200):
+### Response Example (500):
 
 ```json
 {
-    "data": {
-        "type": "comment",
-        "id": "1",
-        "attributes": {
-            "comment": "Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae. Aspernatur facilis et quia saepe nemo.",
-            "temporary_display_name": "in",
-            "user": "1",
-            "created_on": "2019-05-24 13:35:39",
-            "deleted_at": null
-        },
-        "relationships": {
-            "content": {
-                "data": {
-                    "type": "content",
-                    "id": "1"
-                }
-            }
-        }
-    },
-    "included": [
-        {
-            "type": "content",
-            "id": "1",
-            "attributes": {
-                "slug": "Perspiciatis asperiores reprehenderit ut dolores. Quia inventore doloribus sed neque. Voluptates quam fugiat eius consequatur.",
-                "type": "course lesson",
-                "sort": "1",
-                "status": "published",
-                "brand": "brand",
-                "language": "en-EN",
-                "user": "",
-                "published_on": "2002-12-27 01:35:00",
-                "archived_on": null,
-                "created_on": "2002-11-05 04:37:59.000000",
-                "difficulty": "easy",
-                "home_staff_pick_rating": "2",
-                "legacy_id": 847371928,
-                "legacy_wordpress_post_id": 962480732,
-                "qna_video": null,
-                "style": null,
-                "title": "Sapiente aperiam sunt et et ipsa quia voluptate.",
-                "xp": 15,
-                "album": null,
-                "artist": null,
-                "bpm": null,
-                "cdTracks": null,
-                "chordOrScale": null,
-                "difficultyRange": null,
-                "episodeNumber": null,
-                "exerciseBookPages": null,
-                "fastBpm": null,
-                "includesSong": false,
-                "instructors": null,
-                "liveEventStartTime": null,
-                "liveEventEndTime": null,
-                "liveEventYoutubeId": null,
-                "liveStreamFeedType": null,
-                "name": null,
-                "released": null,
-                "slowBpm": null,
-                "totalXp": null,
-                "transcriberName": null,
-                "week": null,
-                "avatarUrl": null,
-                "lengthInSeconds": null,
-                "soundsliceSlug": null,
-                "staffPickRating": null,
-                "studentId": null,
-                "vimeoVideoId": null,
-                "youtubeVideoId": null
-            }
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 
@@ -219,37 +133,11 @@ $.ajax({
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/comment/1',
-{
-    "data": {
-        "type": "comment",
-        "attributes": {
-            "comment": "Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.",
-            "temporary_display_name": "quis"
-        },
-        "relationships": {
-            "content": {
-                "data": {
-                    "type": "content",
-                    "id": 1
-                }
-            },
-            "parent": {
-                "data": {
-                    "type": "comment",
-                    "id": 1
-                }
-            }
-        }
-    }
-}
-   ,
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X PATCH "http://localhost/railcontent/comment/1" \
+    -H "Content-Type: application/json" \
+    -d '{"data":{"type":"comment","attributes":{"comment":"Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.","temporary_display_name":"non"},"relationships":{"content":{"data":{"type":"content","id":1}},"parent":{"data":{"type":"comment","id":1}}}}}'
+
 ```
 
 ### Response Example (200):
@@ -358,13 +246,8 @@ $.ajax({
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/comment/1',
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X DELETE "http://localhost/railcontent/comment/1" 
 ```
 
 ### Response Example (204):
@@ -432,30 +315,11 @@ $.ajax({
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/comment/reply',
-{
-    "data": {
-        "type": "comment",
-        "attributes": {
-            "comment": "Omnis doloremque reiciendis enim"
-        },
-        "relationships": {
-            "parent": {
-                "data": {
-                    "type": "comment",
-                    "id": 1
-                }
-            }
-        }
-    }
-}
-   ,
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X PUT "http://localhost/railcontent/comment/reply" \
+    -H "Content-Type: application/json" \
+    -d '{"data":{"type":"comment","attributes":{"comment":"Omnis doloremque reiciendis enim"},"relationships":{"parent":{"data":{"type":"comment","id":1}}}}}'
+
 ```
 
 ### Response Example (200):
@@ -568,13 +432,8 @@ $.ajax({
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/comment',
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X GET -G "http://localhost/railcontent/comment" 
 ```
 
 ### Response Example (200):
@@ -744,17 +603,11 @@ $.ajax({
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/comment/1',
-{
-    "limit": "fugiat"
-}
-   ,
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X GET -G "http://localhost/railcontent/comment/1" \
+    -H "Content-Type: application/json" \
+    -d '{"limit":"nisi"}'
+
 ```
 
 ### Response Example (200):
@@ -930,13 +783,8 @@ $.ajax({
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/comment-like/1',
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X PUT "http://localhost/railcontent/comment-like/1" 
 ```
 
 ### Response Example (200):
@@ -1091,13 +939,8 @@ $.ajax({
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/comment-like/1',
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X DELETE "http://localhost/railcontent/comment-like/1" 
 ```
 
 ### Response Example (200):

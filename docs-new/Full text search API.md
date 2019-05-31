@@ -24,13 +24,8 @@ Return a Json paginated response with the contents
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/search',
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X GET -G "http://localhost/railcontent/search" 
 ```
 
 ### Response Example (500):

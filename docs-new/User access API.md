@@ -44,37 +44,11 @@
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/user-permission',
-{
-    "data": {
-        "type": "userPermission",
-        "attributes": {
-            "start_date": "Permission 1",
-            "expiration_date": "2019-06-01"
-        },
-        "relationships": {
-            "permission": {
-                "data": {
-                    "type": "permission",
-                    "id": 1
-                }
-            },
-            "user": {
-                "data": {
-                    "type": "user",
-                    "id": 1
-                }
-            }
-        }
-    }
-}
-   ,
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X PUT "http://localhost/railcontent/user-permission" \
+    -H "Content-Type: application/json" \
+    -d '{"data":{"type":"userPermission","attributes":{"start_date":"Permission 1","expiration_date":"2019-06-01"},"relationships":{"permission":{"data":{"type":"permission","id":1}},"user":{"data":{"type":"user","id":{}}}}}}'
+
 ```
 
 ### Response Example (422):
@@ -84,33 +58,13 @@ $.ajax({
     "errors": [
         {
             "title": "Validation failed.",
-            "source": "data.type",
-            "detail": "The json data type field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.user.data.type",
-            "detail": "The user type field is required."
-        },
-        {
-            "title": "Validation failed.",
             "source": "data.relationships.user.data.id",
-            "detail": "The user id field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.permission.data.type",
-            "detail": "The permission type field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.permission.data.id",
-            "detail": "The permission id field is required."
+            "detail": "The user id must be an integer."
         },
         {
             "title": "Validation failed.",
             "source": "data.attributes.start_date",
-            "detail": "The start date field is required."
+            "detail": "The start date is not a valid date."
         }
     ]
 }
@@ -140,13 +94,8 @@ $.ajax({
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/user-permission/1',
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X DELETE "http://localhost/railcontent/user-permission/1" 
 ```
 
 ### Response Example (404):
@@ -187,13 +136,8 @@ IF "only_active" it's set false on the request the expired permissions are retur
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/user-permission',
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X GET -G "http://localhost/railcontent/user-permission" 
 ```
 
 ### Response Example (200):

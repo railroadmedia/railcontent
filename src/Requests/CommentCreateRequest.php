@@ -13,12 +13,20 @@ use Railroad\Railcontent\Repositories\ContentRepository;
  * @bodyParam data.attributes.comment string required  The text of the comment. Example: Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.
  * @bodyParam data.attributes.temporary_display_name string Temporary display name for user.  Example: in
  * @bodyParam data.relationships.content.data.type string required  Must be 'content'. Example: content
- * @bodyParam data.relationships.content.data.id integer required  Must exists in contents. Example: 1
+ * @bodyParam data.relationships.content.data.id integer required  Must exists in contents. Example:1
  *
  * @package Railroad\Railcontent\Requests
  */
 class CommentCreateRequest extends FormRequest
 {
+    /**
+     * CommentCreateRequest constructor.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -56,8 +64,12 @@ class CommentCreateRequest extends FormRequest
             'data.type' => 'required|in:comment',
             'data.attributes.comment' => 'required|max:10024',
             'data.relationships.content.data.type' => 'required|in:content',
+            'data.relationships.content9.data.id' => 'nullable|numeric|exists:' .
+                config('railcontent.table_prefix') .
+                'content' .
+                ',id',
             'data.relationships.content.data.id' =>
-                ['required',
+                ['nullable',
                     'numeric',
                     Rule::exists(
                         config('railcontent.database_connection_name') . '.' . config('railcontent.table_prefix'). 'content', 'id'

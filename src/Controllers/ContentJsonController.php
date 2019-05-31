@@ -120,6 +120,7 @@ class ContentJsonController extends Controller
      * @throws NotAllowedException
      *
      * @permission pull.contents required
+     * @paramParam ids required array Example:[1,2]
      */
     public function getByIds(Request $request)
     {
@@ -132,10 +133,10 @@ class ContentJsonController extends Controller
 
     /**
      * @param $id
-     * @transformer Railroad\Railcontent\Transformers\DecoratedContentTransformer
      * @return Fractal
      * @throws Throwable
      * @throws NonUniqueResultException
+     * @queryParam id required Example:1
      */
     public function show($id)
     {
@@ -158,7 +159,6 @@ class ContentJsonController extends Controller
      *
      * @permission Must be logged in
      * @permission Must have the create.content permission to create
-     * @transformer Railroad\Railcontent\Transformers\DecoratedContentTransformer
      */
     public function store(ContentCreateRequest $request)
     {
@@ -188,7 +188,7 @@ class ContentJsonController extends Controller
      * @permission Must be logged in
      * @permission Must have the update.content permission to update
      *
-     * @queryParam content_id required
+     * @queryParam content_id required Example:1
      */
     public function update(ContentUpdateRequest $request, $contentId)
     {

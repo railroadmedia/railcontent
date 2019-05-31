@@ -448,9 +448,9 @@ class RailcontentTestCase extends BaseTestCase
                     'users',
                     function (Blueprint $table) {
                         $table->increments('id');
-                        $table->string('email');
-                        $table->string('password');
-                        $table->string('display_name');
+                        $table->string('email')->nullable();
+                        $table->string('password')->nullable();
+                        $table->string('display_name')->nullable();
                         $table->timestamps();
                     }
                 );

@@ -21,13 +21,8 @@
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/remote',
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X PUT "http://localhost/railcontent/remote" 
 ```
 
 ### Response Example (500):

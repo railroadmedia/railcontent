@@ -3,10 +3,17 @@
 namespace Railroad\Railcontent\Entities;
 
 use Railroad\Doctrine\Contracts\UserEntityInterface;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\Table(name="users")
+ */
 class User implements UserEntityInterface
 {
     /**
+     * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
      * @var int
      */
     private $id;
@@ -22,7 +29,7 @@ class User implements UserEntityInterface
      * @param int $id
      * @param string $email
      */
-    public function __construct(int $id, string $email)
+    public function __construct(int $id, $email)
     {
         $this->id = $id;
         $this->email = $email;

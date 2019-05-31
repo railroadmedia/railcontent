@@ -12,6 +12,7 @@ class GenerateDocumentation extends RailcontentTestCase
 
     public function test_command()
     {
+
         \Illuminate\Support\Facades\Artisan::call('apidoc:generate');
 
         $this->assertTrue(true);

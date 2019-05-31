@@ -94,13 +94,19 @@ class CommentJsonController extends Controller
      * @throws Throwable
      * @throws ORMException
      * @throws OptimisticLockException
-     *
-     * @responseFile ../../../../../docs/comment.json
+//     * @transformer Railroad\Railcontent\Transformers\CommentTransformer
      * @permission Must be logged in
      * @permission The content type should allow comments
+     *
+     *  * @bodyParam data.type string required  Must be 'comment'. Example: comment
+     * @bodyParam data.attributes.comment string required  The text of the comment. Example: Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.
+     * @bodyParam data.attributes.temporary_display_name string Temporary display name for user.  Example: in
+     * @bodyParam data.relationships.content.data.type string required  Must be 'content'. Example: content
+     * @bodyParam data.relationships.content.data.id integer required  Must exists in contents. Example:1
      */
     public function store(CommentCreateRequest $request)
     {
+
         $comment = $this->commentService->create(
             $request->input('data.attributes.comment'),
             $request->input('data.relationships.content.data.id'),

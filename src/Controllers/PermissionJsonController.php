@@ -107,7 +107,7 @@ class PermissionJsonController extends Controller
      * @throws ReflectionException
      *
      * @permission create.permission required
-     * @transformer Railroad\Railcontent\Transformers\PermissionTransformer
+
      */
     public function store(PermissionRequest $request)
     {

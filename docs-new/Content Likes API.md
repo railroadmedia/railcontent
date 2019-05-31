@@ -22,13 +22,8 @@
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/content-like/1',
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X GET -G "http://localhost/railcontent/content-like/1" 
 ```
 
 ### Response Example (200):
@@ -90,44 +85,18 @@ $.ajax({
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/content-like',
-{
-    "data": {
-        "relationships": {
-            "content": {
-                "data": {
-                    "type": "content",
-                    "id": 1
-                }
-            }
-        }
-    }
-}
-   ,
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X PUT "http://localhost/railcontent/content-like" \
+    -H "Content-Type: application/json" \
+    -d '{"data":{"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+
 ```
 
-### Response Example (422):
+### Response Example (500):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.content.data.type",
-            "detail": "The content type field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.content.data.id",
-            "detail": "The content id field is required."
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 
@@ -168,44 +137,18 @@ $.ajax({
 
 ### Request Example:
 
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/content-like',
-{
-    "data": {
-        "relationships": {
-            "content": {
-                "data": {
-                    "type": "content",
-                    "id": 1
-                }
-            }
-        }
-    }
-}
-   ,
-    success: function(response) {},
-    error: function(response) {}
-});
+```bash
+curl -X DELETE "http://localhost/railcontent/content-like" \
+    -H "Content-Type: application/json" \
+    -d '{"data":{"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
+
 ```
 
-### Response Example (422):
+### Response Example (500):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.content.data.type",
-            "detail": "The content type field is required."
-        },
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.content.data.id",
-            "detail": "The content id field is required."
-        }
-    ]
+    "message": "Server Error"
 }
 ```
 

@@ -13,7 +13,7 @@ namespace Railroad\Railcontent\Requests;
  * @bodyParam data.relationships.permission.data.type string required  Must be 'permission'. Example: permission
  * @bodyParam data.relationships.permission.data.id integer required Must exists in permission. Example: 1
  * @bodyParam data.relationships.user.data.type string required  Must be 'user'. Example: user
- * @bodyParam data.relationships.user.data.id integer required Must exists in user. Example: 1
+ * @bodyParam data.relationships.user.data.id object required Must exists in user.
  */
 class UserPermissionCreateRequest extends FormRequest
 {
