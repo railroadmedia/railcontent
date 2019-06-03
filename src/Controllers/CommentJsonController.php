@@ -60,7 +60,7 @@ class CommentJsonController extends Controller
      * @queryParam page default:1
      * @queryParam limit default:10
      * @queryParam sort default:'-created_on'
-     * @responseFile ../../../../../docs/linkedCommentsResponse.json
+//     * @responseFile ../../../../../docs/linkedCommentsResponse.json
      *
      */
     public function index(Request $request)
@@ -94,11 +94,10 @@ class CommentJsonController extends Controller
      * @throws Throwable
      * @throws ORMException
      * @throws OptimisticLockException
-//     * @transformer Railroad\Railcontent\Transformers\CommentTransformer
+     *
      * @permission Must be logged in
      * @permission The content type should allow comments
-     *
-     *  * @bodyParam data.type string required  Must be 'comment'. Example: comment
+     * @bodyParam data.type string required  Must be 'comment'. Example: comment
      * @bodyParam data.attributes.comment string required  The text of the comment. Example: Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.
      * @bodyParam data.attributes.temporary_display_name string Temporary display name for user.  Example: in
      * @bodyParam data.relationships.content.data.type string required  Must be 'content'. Example: content
@@ -138,8 +137,6 @@ class CommentJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      * @throws ReflectionException
-     *
-     * @responseFile ../../../../../docs/comment.json
      * @permission Must be logged in to modify own comments
      * @permission Must be logged in with an administrator account to modify other user comments
      */
@@ -182,9 +179,9 @@ class CommentJsonController extends Controller
      * @throws OptimisticLockException
      *
      * @queryParam comment_id required
-     * @response 204 { }
-     * @response 403 { "message": "Delete failed, you can delete only your comments." }
-     * @response 404 { "message": "Delete failed, comment not found with id: 1" }
+//     * @response 204 { }
+//     * @response 403 { "message": "Delete failed, you can delete only your comments." }
+//     * @response 404 { "message": "Delete failed, comment not found with id: 1" }
      * @permission authenticated users can delete their own comments
      */
     public function delete($commentId)
@@ -214,8 +211,6 @@ class CommentJsonController extends Controller
      * @throws Throwable
      * @throws ORMException
      * @throws OptimisticLockException
-     *
-     * @responseFile ../../../../../docs/comment.json
      * @permission authenticated user
      */
     public function reply(ReplyRequest $request)
@@ -248,9 +243,8 @@ class CommentJsonController extends Controller
      * @return Fractal
      * @throws NonUniqueResultException
      *
-     * @queryParam comment_id required
-     * @bodyParam limit default:10
-     * @responseFile ../../../../../docs/linkedCommentsResponse.json
+     * @queryParam comment_id integer required Example:1
+     * @bodyParam limit integer default:10
      */
     public function getLinkedComment($commentId, Request $request)
     {

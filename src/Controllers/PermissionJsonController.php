@@ -85,7 +85,7 @@ class PermissionJsonController extends Controller
      * @return Fractal
      * @throws NotAllowedException
      *
-     * @responseFile ../../../../../docs/permissions.json
+//     * @responseFile ../../../../../docs/permissions.json
      */
     public function index()
     {

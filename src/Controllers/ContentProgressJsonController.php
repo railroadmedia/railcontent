@@ -108,9 +108,11 @@ class ContentProgressJsonController extends Controller
      * @throws OptimisticLockException
      *
      * @permission authenticated user
+     * @bodyParam data.attributes.progress_percent integer required Progress percent. Example:10
      */
     public function saveProgress(UserContentRequest $request)
     {
+        //dd($request->input('data.attributes.progress_percent'));
         $response = $this->userContentService->saveContentProgress(
             $request->input('data.relationships.content.data.id'),
             $request->input('data.attributes.progress_percent'),

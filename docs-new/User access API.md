@@ -44,11 +44,37 @@
 
 ### Request Example:
 
-```bash
-curl -X PUT "http://localhost/railcontent/user-permission" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"type":"userPermission","attributes":{"start_date":"Permission 1","expiration_date":"2019-06-01"},"relationships":{"permission":{"data":{"type":"permission","id":1}},"user":{"data":{"type":"user","id":{}}}}}}'
-
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/user-permission',
+{
+    "data": {
+        "type": "userPermission",
+        "attributes": {
+            "start_date": "Permission 1",
+            "expiration_date": "2019-06-01"
+        },
+        "relationships": {
+            "permission": {
+                "data": {
+                    "type": "permission",
+                    "id": 1
+                }
+            },
+            "user": {
+                "data": {
+                    "type": "user",
+                    "id": {}
+                }
+            }
+        }
+    }
+}
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
 ### Response Example (422):
@@ -94,8 +120,13 @@ curl -X PUT "http://localhost/railcontent/user-permission" \
 
 ### Request Example:
 
-```bash
-curl -X DELETE "http://localhost/railcontent/user-permission/1" 
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/user-permission/1',
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
 ### Response Example (404):
@@ -136,8 +167,13 @@ IF "only_active" it's set false on the request the expired permissions are retur
 
 ### Request Example:
 
-```bash
-curl -X GET -G "http://localhost/railcontent/user-permission" 
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/user-permission',
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
 ### Response Example (200):

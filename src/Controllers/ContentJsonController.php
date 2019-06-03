@@ -92,11 +92,10 @@ class ContentJsonController extends Controller
             ->respond();
     }
 
-    /** Pull the children contents for the parent id
+    /** Pull contents that are children of the specified content id
      *
      * @param $parentId
      *
-     * @transformer Railroad\Railcontent\Transformers\DecoratedContentTransformer
      * @return Fractal
      * @throws NotAllowedException
      *
@@ -111,16 +110,17 @@ class ContentJsonController extends Controller
         return ResponseService::content($contentData);
     }
 
-    /** Pull the contents based on ids
+    /** Pull contents based on content ids.
      * @param Request $request
      *
-     * @transformerCollection Railroad\Railcontent\Transformers\DecoratedContentTransformer
      *
      * @return Fractal
      * @throws NotAllowedException
      *
-     * @permission pull.contents required
-     * @paramParam ids required array Example:[1,2]
+     * @permission Must be logged in
+     * @permission Must have the pull.contents permission
+     *
+     * @queryParam ids required Example:2,1
      */
     public function getByIds(Request $request)
     {
@@ -173,7 +173,7 @@ class ContentJsonController extends Controller
 
     }
 
-    /** Update a content based on content id and return it in JSON format
+    /** Update an existing content.
      *
      * @param ContentUpdateRequest $request
      * @param $contentId
@@ -192,6 +192,7 @@ class ContentJsonController extends Controller
      */
     public function update(ContentUpdateRequest $request, $contentId)
     {
+
         $this->permissionPackageService->canOrThrow(auth()->id(), 'update.content');
 
         $content = $this->contentService->update(
@@ -209,7 +210,9 @@ class ContentJsonController extends Controller
             ->respond(200);
     }
 
-    /** Call the delete method if the content exist
+    /** Delete an existing content and content related links.
+     *
+     * The content related links are: links with the parent, content childrens, content fields, content datum, links with the permissions, content comments, replies and assignation and links with the playlists.
      *
      * @param $contentId
      * @return JsonResponse
@@ -217,7 +220,9 @@ class ContentJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      *
-     * @permission delete.content required
+     * @permission Must be logged in
+     * @permission Must have the delete.content permission
+     * @queryParam id required Example:2
      */
     public function delete($contentId)
     {
@@ -249,7 +254,9 @@ class ContentJsonController extends Controller
         );
     }
 
-    /** Call the soft delete method if the content exist
+    /** Soft delete existing content
+     *
+     * If a content it's soft deleted the API will automatically filter it out from the pull request unless the status set on the pull requests explicitly state otherwise.
      *
      * @param $contentId
      * @return JsonResponse
@@ -258,7 +265,9 @@ class ContentJsonController extends Controller
      * @throws OptimisticLockException
      * @throws Throwable
      *
-     * @permission delete.content required
+     * @permission Must be logged in
+     * @permission Must have the delete.content permission
+     * @queryParam id required Content Example:2
      */
     public function softDelete($contentId)
     {

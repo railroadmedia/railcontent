@@ -11,6 +11,7 @@ namespace Railroad\Railcontent\Requests;
  * @bodyParam data.type string required  Must be 'userContentProgress'. Example: userContentProgress
  * @bodyParam data.relationships.content.data.type string required  Must be 'content'. Example: content
  * @bodyParam data.relationships.content.data.id integer required Must exists in content. Example: 1
+ * @bodyParam data.attributes.progress_percent integer required Progress percent. Example:10
  */
 class UserContentRequest extends FormRequest
 {

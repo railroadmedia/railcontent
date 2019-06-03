@@ -47,4 +47,24 @@ class UserContentProgressRepository extends EntityRepository
 
         return self::$cache[$key];
     }
+
+    public function getByUserContentState($user, $content, $state = '')
+    {
+        $alias = 'uc';
+        $qb = $this->createQueryBuilder($alias);
+
+        $qb->where($alias . '.user = :user')
+            ->andWhere($alias . '.content = :content')
+            ->setParameter('content', $content)
+            ->setParameter('user', $user)
+            ->setMaxResults(100);
+
+        if ($state) {
+            $qb->andWhere($alias . '.state = :state')
+                ->setParameter('state', $state);
+        }
+
+        return $qb->getQuery()
+            ->getOneOrNullResult('Railcontent');
+    }
 }

@@ -169,31 +169,31 @@ class RouteRegistrar
                     'comment',
                     CommentJsonController::class . '@store'
                 )
-                    ->name('comments.store');
+                    ->name('comment.store');
 
                 $this->router->patch(
                     'comment/{id}',
                     CommentJsonController::class . '@update'
                 )
-                    ->name('comments.update');
+                    ->name('comment.update');
 
                 $this->router->delete(
                     'comment/{id}',
                     CommentJsonController::class . '@delete'
                 )
-                    ->name('comments.delete');
+                    ->name('comment.delete');
 
                 $this->router->put(
                     'comment/reply',
                     CommentJsonController::class . '@reply'
                 )
-                    ->name('comments.reply');
+                    ->name('comment.reply');
 
                 $this->router->get(
                     'comment',
                     CommentJsonController::class . '@index'
                 )
-                    ->name('comments.index');
+                    ->name('comment.index');
 
                 $this->router->get(
                     'comment/{id}',
@@ -320,16 +320,16 @@ class RouteRegistrar
                     ->name('content.update');
 
                 $this->router->delete(
-                    'content/{id}',
-                    ContentJsonController::class . '@delete'
-                )
-                    ->name('content.delete');
-
-                $this->router->delete(
                     'soft/content/{id}',
                     ContentJsonController::class . '@softDelete'
                 )
                     ->name('content.softDelete');
+
+                $this->router->delete(
+                    'content/{id}',
+                    ContentJsonController::class . '@delete'
+                )
+                    ->name('content.delete');
 
                 $this->router->put(
                     'remote',

@@ -46,7 +46,7 @@ class CommentLikeJsonController extends Controller
      * @throws OptimisticLockException
      *
      * @queryParam comment_id required
-     * @responseFile ../../../../../docs/commentLikeResponse.json
+//     * @responseFile ../../../../../docs/commentLikeResponse.json
      * @permission authenticated user
      */
     public function store(CommentLikeRequest $request, $id)

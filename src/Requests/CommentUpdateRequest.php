@@ -16,7 +16,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
  * @bodyParam data.relationships.content.data.type string   Must be 'content'. Example: content
  * @bodyParam data.relationships.content.data.id integer   Must exists in contents. Example: 1
  * @bodyParam data.relationships.parent.data.type string   Must be 'comment'. Example: comment
- * @bodyParam data.relationships.parent.data.id integer   Must exists in comments. Example: 1
+ * @bodyParam data.relationships.parent.data.id integer   Must exists in comments. Example: 2
  *
  * @package Railroad\Railcontent\Requests
  */

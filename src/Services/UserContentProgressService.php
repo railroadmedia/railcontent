@@ -170,22 +170,10 @@ class UserContentProgressService
             $progressPercent = $this->getProgressPercentage($userId, $children);
         }
 
-        $isCompleted = $this->userContentRepository->findOneBy(
-            [
-                'user' => $user,
-                'content' => $content,
-                'state' => 'completed',
-
-            ]
-        );
+        $isCompleted = $this->userContentRepository->getByUserContentState($user, $content, 'completed');
 
         if (!$isCompleted || $forceEvenIfComplete) {
-            $userContentProgress = $this->userContentRepository->findOneBy(
-                [
-                    'user' => $user,
-                    'content' => $content,
-                ]
-            );
+            $userContentProgress = $this->userContentRepository->getByUserContentState($user, $content);
 
             if (!$userContentProgress) {
                 $userContentProgress = new UserContentProgress();
@@ -198,8 +186,8 @@ class UserContentProgressService
             $userContentProgress->setUpdatedOn(Carbon::parse(now()));
 
             $this->entityManager->persist($userContentProgress);
-            $this->entityManager->flush();
 
+            $this->entityManager->flush();
         }
 
         $this->entityManager->getCache()
@@ -239,12 +227,8 @@ class UserContentProgressService
         $content = $this->contentService->getById($contentId);
         $user = $this->userProvider->getUserById($userId);
 
-        $userContentProgress = $this->userContentRepository->findOneBy(
-            [
-                'user' => $user,
-                'content' => $content,
-            ]
-        );
+        $userContentProgress = $this->userContentRepository->getByUserContentState($user, $content);
+
         if (!$userContentProgress) {
             $userContentProgress = new UserContentProgress();
         }
@@ -266,12 +250,7 @@ class UserContentProgressService
         foreach ($hierarchies as $hierarchy) {
             $child = $hierarchy->getChild();
 
-            $userContentProgress = $this->userContentRepository->findOneBy(
-                [
-                    'user' => $user,
-                    'content' => $child,
-                ]
-            );
+            $userContentProgress = $this->userContentRepository->getByUserContentState($user, $child);
 
             if (!$userContentProgress) {
                 $userContentProgress = new UserContentProgress();
@@ -312,14 +291,12 @@ class UserContentProgressService
         $content = $this->contentService->getById($contentId);
         $user = $this->userProvider->getUserById($userId);
 
-        $userContentProgress = $this->userContentRepository->findOneBy(
-            [
-                'user' => $user,
-                'content' => $content,
-            ]
-        );
-        $this->entityManager->remove($userContentProgress);
-        $this->entityManager->flush();
+        $userContentProgress = $this->userContentRepository->getByUserContentState($user, $content);
+
+        if($userContentProgress) {
+            $this->entityManager->remove($userContentProgress);
+            $this->entityManager->flush();
+        }
 
         // also reset progress on children
         $childIds = [$contentId];
@@ -329,12 +306,7 @@ class UserContentProgressService
         foreach ($hierarchies as $hierarchy) {
             $child = $hierarchy->getChild();
 
-            $userContentProgress = $this->userContentRepository->findOneBy(
-                [
-                    'user' => $user,
-                    'content' => $child,
-                ]
-            );
+            $userContentProgress = $this->userContentRepository->getByUserContentState($user, $child);
 
             if ($userContentProgress) {
                 $this->entityManager->remove($userContentProgress);
@@ -365,6 +337,7 @@ class UserContentProgressService
      * @throws NonUniqueResultException
      * @throws ORMException
      * @throws OptimisticLockException
+     *
      */
     public function saveContentProgress($contentId, $progress, $userId, $overwriteComplete = false)
     {
@@ -386,12 +359,7 @@ class UserContentProgressService
         $content = $this->contentService->getById($contentId);
         $user = $this->userProvider->getUserById($userId);
 
-        $userContentProgress = $this->userContentRepository->findOneBy(
-            [
-                'content' => $content,
-                'user' => $user,
-            ]
-        );
+        $userContentProgress = $this->userContentRepository->getByUserContentState($user, $content);
 
         if ($userContentProgress &&
             !$overwriteComplete &&

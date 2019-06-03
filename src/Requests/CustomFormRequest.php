@@ -215,6 +215,7 @@ class CustomFormRequest extends FormRequest
      */
     public function validateContent($request)
     {
+
         $contentValidationRequired = null;
         $rulesForBrand = null;
         $content = null;

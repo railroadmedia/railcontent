@@ -22,6 +22,7 @@
 |body|data.type|  yes  |Must be 'userContentProgress'.|
 |body|data.relationships.content.data.type|  yes  |Must be 'content'.|
 |body|data.relationships.content.data.id|  yes  |Must exists in content.|
+|body|data.attributes.progress_percent|  yes  |Progress percent.|
 
 ### Validation Rules
 ```php
@@ -37,11 +38,30 @@
 
 ### Request Example:
 
-```bash
-curl -X PUT "http://localhost/railcontent/start" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"type":"userContentProgress","relationships":{"content":{"data":{"type":"content","id":1}}}}}'
-
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/start',
+{
+    "data": {
+        "type": "userContentProgress",
+        "relationships": {
+            "content": {
+                "data": {
+                    "type": "content",
+                    "id": 1
+                }
+            }
+        },
+        "attributes": {
+            "progress_percent": 10
+        }
+    }
+}
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
 ### Response Example (500):
@@ -76,6 +96,7 @@ curl -X PUT "http://localhost/railcontent/start" \
 |body|data.type|  yes  |Must be 'userContentProgress'.|
 |body|data.relationships.content.data.type|  yes  |Must be 'content'.|
 |body|data.relationships.content.data.id|  yes  |Must exists in content.|
+|body|data.attributes.progress_percent|  yes  |Progress percent.|
 
 ### Validation Rules
 ```php
@@ -91,11 +112,30 @@ curl -X PUT "http://localhost/railcontent/start" \
 
 ### Request Example:
 
-```bash
-curl -X PUT "http://localhost/railcontent/complete" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"type":"userContentProgress","relationships":{"content":{"data":{"type":"content","id":1}}}}}'
-
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/complete',
+{
+    "data": {
+        "type": "userContentProgress",
+        "relationships": {
+            "content": {
+                "data": {
+                    "type": "content",
+                    "id": 1
+                }
+            }
+        },
+        "attributes": {
+            "progress_percent": 10
+        }
+    }
+}
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
 ### Response Example (500):
@@ -130,6 +170,7 @@ curl -X PUT "http://localhost/railcontent/complete" \
 |body|data.type|  yes  |Must be 'userContentProgress'.|
 |body|data.relationships.content.data.type|  yes  |Must be 'content'.|
 |body|data.relationships.content.data.id|  yes  |Must exists in content.|
+|body|data.attributes.progress_percent|  yes  |Progress percent.|
 
 ### Validation Rules
 ```php
@@ -145,18 +186,37 @@ curl -X PUT "http://localhost/railcontent/complete" \
 
 ### Request Example:
 
-```bash
-curl -X PUT "http://localhost/railcontent/reset" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"type":"userContentProgress","relationships":{"content":{"data":{"type":"content","id":1}}}}}'
-
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/reset',
+{
+    "data": {
+        "type": "userContentProgress",
+        "relationships": {
+            "content": {
+                "data": {
+                    "type": "content",
+                    "id": 1
+                }
+            }
+        },
+        "attributes": {
+            "progress_percent": 10
+        }
+    }
+}
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
-### Response Example (500):
+### Response Example (201):
 
 ```json
 {
-    "message": "Server Error"
+    "data": true
 }
 ```
 
@@ -184,6 +244,7 @@ curl -X PUT "http://localhost/railcontent/reset" \
 |body|data.type|  yes  |Must be 'userContentProgress'.|
 |body|data.relationships.content.data.type|  yes  |Must be 'content'.|
 |body|data.relationships.content.data.id|  yes  |Must exists in content.|
+|body|data.attributes.progress_percent|  yes  |Progress percent.|
 
 ### Validation Rules
 ```php
@@ -199,18 +260,37 @@ curl -X PUT "http://localhost/railcontent/reset" \
 
 ### Request Example:
 
-```bash
-curl -X PUT "http://localhost/railcontent/progress" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"type":"userContentProgress","relationships":{"content":{"data":{"type":"content","id":1}}}}}'
-
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/progress',
+{
+    "data": {
+        "type": "userContentProgress",
+        "relationships": {
+            "content": {
+                "data": {
+                    "type": "content",
+                    "id": 1
+                }
+            }
+        },
+        "attributes": {
+            "progress_percent": 10
+        }
+    }
+}
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
-### Response Example (500):
+### Response Example (201):
 
 ```json
 {
-    "message": "Server Error"
+    "data": true
 }
 ```
 

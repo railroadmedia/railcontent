@@ -55,18 +55,47 @@
 
 ### Request Example:
 
-```bash
-curl -X PUT "http://localhost/railcontent/content/datum" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"type":"contentData","attributes":{"key":"description","value":"indsf fdgg  gfg","position":4},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
-
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content/datum',
+{
+    "data": {
+        "type": "contentData",
+        "attributes": {
+            "key": "description",
+            "value": "indsf fdgg  gfg",
+            "position": 10
+        },
+        "relationships": {
+            "content": {
+                "data": {
+                    "type": "content",
+                    "id": 1
+                }
+            }
+        }
+    }
+}
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
-### Response Example (500):
+### Response Example (200):
 
 ```json
 {
-    "message": "Server Error"
+    "data": {
+        "type": "contentData",
+        "id": "1",
+        "attributes": {
+            "key": "description",
+            "value": "indsf fdgg  gfg",
+            "position": 0
+        }
+    }
 }
 ```
 
@@ -122,20 +151,46 @@ curl -X PUT "http://localhost/railcontent/content/datum" \
 
 ### Request Example:
 
-```bash
-curl -X PATCH "http://localhost/railcontent/content/datum/1" \
-    -H "Content-Type: application/json" \
-    -d '{"data":{"type":"contentData","attributes":{"key":"description","value":"indsf fdgg  gfg","position":2},"relationships":{"content":{"data":{"type":"content","id":1}}}}}'
-
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content/datum/1',
+{
+    "data": {
+        "type": "contentData",
+        "attributes": {
+            "key": "description",
+            "value": "indsf fdgg  gfg",
+            "position": 10
+        },
+        "relationships": {
+            "content": {
+                "data": {
+                    "type": "content",
+                    "id": 1
+                }
+            }
+        }
+    }
+}
+   ,
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
-### Response Example (404):
+### Response Example (201):
 
 ```json
 {
-    "errors": {
-        "title": "Not found.",
-        "detail": "Update failed, datum not found with id: 1"
+    "data": {
+        "type": "contentData",
+        "id": "1",
+        "attributes": {
+            "key": "description",
+            "value": "indsf fdgg  gfg",
+            "position": 0
+        }
     }
 }
 ```
@@ -174,19 +229,19 @@ curl -X PATCH "http://localhost/railcontent/content/datum/1" \
 
 ### Request Example:
 
-```bash
-curl -X DELETE "http://localhost/railcontent/content/datum/1" 
+```js
+$.ajax({
+    url: 'https://www.domain.com' +
+             '/railcontent/content/datum/1',
+    success: function(response) {},
+    error: function(response) {}
+});
 ```
 
-### Response Example (404):
+### Response Example (204):
 
 ```json
-{
-    "errors": {
-        "title": "Not found.",
-        "detail": "Delete failed, datum not found with id: 1"
-    }
-}
+null
 ```
 
 

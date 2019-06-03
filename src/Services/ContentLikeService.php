@@ -124,12 +124,14 @@ class ContentLikeService
         $user = $this->userProvider->getUserById($userId);
         $content = $this->contentRepository->find($contentId);
 
-        $contentLikes = $this->contentLikeRepository->findBy(
-            [
-                'content' => $content,
-                'user' => $user,
-            ]
-        );
+        $alias = 'ul';
+
+        $contentLikes = $this->contentLikeRepository->createQueryBuilder($alias)
+            ->where($alias.'.content = :content')
+            ->andWhere($alias.'.user = :user')
+            ->setParameter('content', $content)
+            ->setParameter('user', $user)
+            ->getQuery()->getResult();
 
         if (empty($contentLikes)) {
             $contentLikes = new ContentLikes();
@@ -158,16 +160,19 @@ class ContentLikeService
     {
         $user = $this->userProvider->getUserById($userId);
         $content = $this->contentRepository->find($contentId);
+        $alias = 'ul';
 
-        $contentLikes = $this->contentLikeRepository->findOneBy(
-            [
-                'content' => $content,
-                'user' => $user,
-            ]
-        );
+        $contentLikes = $this->contentLikeRepository->createQueryBuilder($alias)
+            ->where($alias.'.content = :content')
+            ->andWhere($alias.'.user = :user')
+            ->setParameter('content', $content)
+            ->setParameter('user', $user)
+            ->getQuery()->getOneOrNullResult();
 
-        $this->entityManager->remove($contentLikes);
-        $this->entityManager->flush();
+        if($contentLikes) {
+            $this->entityManager->remove($contentLikes);
+            $this->entityManager->flush();
+        }
 
         $this->entityManager->getCache()
             ->evictEntity(Content::class, $contentId);

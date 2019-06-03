@@ -89,7 +89,10 @@ return [
              * Note that the route must be referenced by name here (wildcards are supported).
              */
             'exclude' => [
-                'permissions.user-ability*','permissions.user-role*','api/railcontent*','options*'
+                'permissions.user-ability*',
+                'permissions.user-role*',
+                'api/railcontent*',
+                'options*'
                 // 'users.create', 'admin.*'
             ],
 
@@ -127,8 +130,7 @@ return [
                      * for instance 'users/{id}' => 1 and 'apps/{id}' => 'htTviP'.
                      * However, there must only be one parameter per path.
                      */
-                    'bindings' => [
-                        // '{user}' => 1,
+                    'bindings' => [// '{user}' => 1,
                     ],
 
                     /*
@@ -147,7 +149,7 @@ return [
                      * Headers which should be sent with the API call.
                      */
                     'headers' => [
-                       // 'Content-Type' => 'application/json',
+                        // 'Content-Type' => 'application/json',
                         'Accept' => 'application/json',
                         // 'key' => 'value',
                     ],
@@ -155,24 +157,41 @@ return [
                     /*
                      * Cookies which should be sent with the API call.
                      */
-                    'cookies' => [
-                        // 'name' => 'value'
+                    'cookies' => [// 'name' => 'value'
                     ],
 
                     /*
                      * Query parameters which should be sent with the API call.
                      */
-                    'query' => [
-                        // 'key' => 'value',
+                    'query' => [// 'key' => 'value',
                     ],
 
                     /*
                      * Body parameters which should be sent with the API call.
                      */
-                    'body' => [
-                        // 'key' => 'value',
+                    'body' => [// 'key' => 'value',
                     ],
                 ],
+            ],
+        ],
+    ],
+    'requiredEntities' => [
+        'Railroad\Railcontent\Entities\Content' => [
+            'nr' => 2,
+            'data' => [
+
+            ],
+        ],
+        'Railroad\Railcontent\Entities\ContentData' => [
+            'nr' => 1,
+        ],
+        'Railroad\Railcontent\Entities\ContentExercise' => [
+            'nr' => 1,
+        ],
+        'Railroad\Railcontent\Entities\ContentHierarchy' => [
+            'nr' => 1,
+            'data' => [
+
             ],
         ],
     ],
@@ -203,7 +222,7 @@ return [
      *
      */
     'example_languages' => [
-        'ajax'
+        'ajax',
     ],
 
     /*

@@ -10,17 +10,17 @@ use Railroad\Railcontent\Services\ContentService as ContentService;
  * @package Railroad\Railcontent\Requests
  *
  * @bodyParam data.type string required  Must be 'content'. Example: content
- * @bodyParam data.attributes.slug string Example:01-getting-started
+ * @bodyParam data.attributes.slug string Example:02-getting-started
  * @bodyParam data.attributes.type string  Example:course
  * @bodyParam data.attributes.status string  Example:draft
- * @bodyParam data.attributes.language    Example: en-US
- * @bodyParam data.attributes.sort integer Example:null
- * @bodyParam data.attributes.published_on datetime Example:null
- * @bodyParam data.attributes.archived_on datetime
- * @bodyParam data.attributes.fields array Example:
+ * @bodyParam data.attributes.language
+// * @bodyParam data.attributes.sort integer
+ * @bodyParam data.attributes.published_on datetime Example:2019-05-21 21:20:10
+ * @bodyParam data.attributes.archived_on datetime Example:2019-05-31 21:20:10
+ * @bodyParam data.attributes.fields array
  * @bodyParam data.attributes.brand string Example:brand
- * @bodyParam data.relationships.user.data.type string   Must be 'user'. Example: user
- * @bodyParam data.relationships.user.data.id integer   Must exists in user. Example: 1
+ * @bodyParam data.relationships.user.data.type string   Must be 'user'. Example:user
+ * @bodyParam data.relationships.user.data.id integer   Must exists in user. Example:1
  */
 class ContentUpdateRequest extends CustomFormRequest
 {
@@ -34,7 +34,7 @@ class ContentUpdateRequest extends CustomFormRequest
      */
     public function rules()
     {
-        $this->validateContent($this);
+       $this->validateContent($this);
 
         //set the general validation rules
         $this->setGeneralRules(
