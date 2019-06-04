@@ -1007,6 +1007,7 @@ class ContentService
      * @return bool|null
      * @throws ORMException
      * @throws OptimisticLockException
+     *
      */
     public function delete($id)
     {
@@ -1015,8 +1016,9 @@ class ContentService
         if (empty($content)) {
             return null;
         }
-        event(new ContentDeleted($content));
 
+        event(new ContentDeleted($content));
+      //  dd($content);
         $this->entityManager->remove($content);
         $this->entityManager->flush();
 
@@ -1128,8 +1130,9 @@ class ContentService
         $content->setStatus(ContentService::STATUS_DELETED);
 
         event(new ContentSoftDeleted($content));
-
+       // dd($content);
         $this->entityManager->persist($content);
+
         $this->entityManager->flush();
 
         $this->entityManager->getCache()

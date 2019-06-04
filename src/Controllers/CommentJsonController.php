@@ -54,13 +54,12 @@ class CommentJsonController extends Controller
      * @return Fractal
      * @throws NonUniqueResultException
      *
-     * @queryParam content_id  pull the comments for given content id
-     * @queryParam user_id  pull user's comments
-     * @queryParam content_type  pull for the contents with given type
-     * @queryParam page default:1
-     * @queryParam limit default:10
-     * @queryParam sort default:'-created_on'
-//     * @responseFile ../../../../../docs/linkedCommentsResponse.json
+     * @queryParam content_id  pull the comments for given content id Example:
+     * @queryParam user_id  pull user's comments Example:
+     * @queryParam content_type  string pull for the contents with given type Example:
+     * @queryParam page integer Default:1. Example:1
+     * @queryParam limit integer Default:10. Example:10
+     * @queryParam sort string Default:'-created_on'. Example:-created_on
      *
      */
     public function index(Request $request)

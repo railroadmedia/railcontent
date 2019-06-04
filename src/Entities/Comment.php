@@ -65,7 +65,7 @@ class Comment
     private $children;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\CommentLikes", mappedBy="comment")
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\CommentLikes", mappedBy="comment", cascade={"remove"})
      */
     private $likes;
     /**

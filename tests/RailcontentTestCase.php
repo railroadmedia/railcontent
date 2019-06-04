@@ -328,6 +328,8 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('apidoc.routes', $apiDocConfig['routes']);
         $app['config']->set('apidoc.example_languages', $apiDocConfig['example_languages']);
         $app['config']->set('apidoc.fractal', $apiDocConfig['fractal']);
+        $app['config']->set('apidoc.requiredEntities', $apiDocConfig['requiredEntities']);
+        $app['config']->set('apidoc.entityManager', $apiDocConfig['entityManager']);
 
         // register provider
         $app->register(DoctrineServiceProvider::class);

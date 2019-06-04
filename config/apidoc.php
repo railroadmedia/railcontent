@@ -175,25 +175,49 @@ return [
             ],
         ],
     ],
+    'entityManager'=>'Railroad\Railcontent\Managers\RailcontentEntityManager',
     'requiredEntities' => [
+        'Railroad\Railcontent\Entities\User' => [
+            'nr' => 1,
+        ],
         'Railroad\Railcontent\Entities\Content' => [
-            'nr' => 2,
+            'nr' => 3,
             'data' => [
-
-            ],
+                'brand' => 'brand',
+                'type' => 'course',
+                'status' => 'published',
+                'video' => null,
+                'user' => null,
+                'userProgress' => null
+            ]
         ],
         'Railroad\Railcontent\Entities\ContentData' => [
             'nr' => 1,
         ],
-        'Railroad\Railcontent\Entities\ContentExercise' => [
+         'Railroad\Railcontent\Entities\ContentHierarchy' => [
             'nr' => 1,
         ],
-        'Railroad\Railcontent\Entities\ContentHierarchy' => [
-            'nr' => 1,
-            'data' => [
 
-            ],
+        'Railroad\Railcontent\Entities\Permission' => [
+            'nr' => 10,
+            'data' => [
+                'brand' =>'brand',
+            ]
         ],
+        'Railroad\Railcontent\Entities\Comment' => [
+            'nr' => 2,
+            'data' => [
+                'deletedAt' => null,
+            ]
+        ],
+        'Railroad\Railcontent\Entities\ContentPermission' => [
+            'nr' => 1
+        ],
+
+        'Railroad\Railcontent\Entities\UserContentProgress' => [
+            'nr' => 1
+        ]
+
     ],
 
     /*

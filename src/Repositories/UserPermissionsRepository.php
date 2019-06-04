@@ -51,4 +51,24 @@ class UserPermissionsRepository extends EntityRepository
             ->setCacheRegion('userPermissions')
             ->getResult();
     }
+
+    /**
+     * @param $user
+     * @param $permission
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function userPermission($user, $permission)
+    {
+        $alias = 'up';
+        $qb = $this->createQueryBuilder($alias);
+        $qb->where($alias.'.user = :user')
+            ->andWhere($alias.'.permission = :permission')
+            ->setParameter('user', $user)
+            ->setParameter('permission', $permission);
+
+        return $qb->getQuery()
+            ->getOneOrNullResult('Railcontent');
+
+    }
 }

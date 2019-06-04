@@ -140,12 +140,7 @@ class CommentLikeService
         $user = $this->userProvider->getUserById($userId);
         $comment = $this->commentRepository->find($commentId);
 
-        $commentLikes = $this->commentLikeRepository->findBy(
-            [
-                'comment' => $comment,
-                'user' => $user,
-            ]
-        );
+        $commentLikes = $this->commentLikeRepository->getUserCommentLikes($user, $comment);
 
         if (empty($commentLikes)) {
             $commentLikes = new CommentLikes();

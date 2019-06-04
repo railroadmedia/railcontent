@@ -8,7 +8,7 @@ namespace Railroad\Railcontent\Requests;
  * @package Railroad\Railcontent\Requests
  *
  * @bodyParam data.type string required  Must be 'contentPermission'. Example: contentPermission
- * @bodyParam data.attributes.content_type string Required without content. Example:course
+ * @bodyParam data.attributes.content_type string Required without content. Example:
  * @bodyParam data.relationships.permission.data.type string   Must be 'permission'. Example: permission
  * @bodyParam data.relationships.permission.data.id integer   Must exists in permission. Example: 1
  * @bodyParam data.relationships.content.data.type string Required without content_type.  Must be 'content'. Example: content

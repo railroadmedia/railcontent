@@ -258,6 +258,23 @@ class RouteRegistrar
                     ContentDatumJsonController::class . '@delete'
                 )
                     ->name('content.data.delete');
+                $this->router->put(
+                    'user-permission',
+                    UserPermissionsJsonController::class . '@store'
+                )
+                    ->name('user.permissions.store');
+
+                $this->router->delete(
+                    'user-permission/{userPermissionId}',
+                    UserPermissionsJsonController::class . '@delete'
+                )
+                    ->name('user.permissions.delete');
+
+                $this->router->get(
+                    'user-permission',
+                    UserPermissionsJsonController::class . '@index'
+                )
+                    ->name('user.permissions.index');
 
                 $this->router->put(
                     'permission',
@@ -337,23 +354,7 @@ class RouteRegistrar
                 )
                     ->name('remote.put');
 
-                $this->router->put(
-                    'user-permission',
-                    UserPermissionsJsonController::class . '@store'
-                )
-                    ->name('user.permissions.store');
 
-                $this->router->delete(
-                    'user-permission/{userPermissionId}',
-                    UserPermissionsJsonController::class . '@delete'
-                )
-                    ->name('user.permissions.delete');
-
-                $this->router->get(
-                    'user-permission',
-                    UserPermissionsJsonController::class . '@index'
-                )
-                    ->name('user.permissions.index');
 
             }
         );

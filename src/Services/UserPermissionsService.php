@@ -73,13 +73,7 @@ class UserPermissionsService
             $this->entityManager->getRepository(Permission::class)
                 ->find($attributes['permission_id']);
 
-        $userPermission = $this->userPermissionsRepository->findOneBy(
-            [
-                'user' => $user,
-                'permission' => $permission,
-
-            ]
-        );
+        $userPermission = $this->userPermissionsRepository->userPermission($user, $permission);
 
         if (!$userPermission) {
             $userPermission = new UserPermission();

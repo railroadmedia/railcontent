@@ -85,7 +85,6 @@ class PermissionJsonController extends Controller
      * @return Fractal
      * @throws NotAllowedException
      *
-//     * @responseFile ../../../../../docs/permissions.json
      */
     public function index()
     {
@@ -139,7 +138,6 @@ class PermissionJsonController extends Controller
      * @throws Throwable
      *
      * @permission update.permission required
-     * @transformer Railroad\Railcontent\Transformers\PermissionTransformer
      */
     public function update($id, PermissionRequest $request)
     {

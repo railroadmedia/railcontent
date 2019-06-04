@@ -8,12 +8,12 @@ namespace Railroad\Railcontent\Requests;
  * @package Railroad\Railcontent\Requests
  *
  * @bodyParam data.type string required  Must be 'userPermission'. Example: userPermission
- * @bodyParam data.attributes.start_date required  Permission name. Example: Permission 1
+ * @bodyParam data.attributes.start_date required  Permission name. Example: 2019-05-01
  * @bodyParam data.attributes.expiration_date   If expiration date is null they have access forever; otherwise the user have access until the expiration date. Example: 2019-06-01
  * @bodyParam data.relationships.permission.data.type string required  Must be 'permission'. Example: permission
- * @bodyParam data.relationships.permission.data.id integer required Must exists in permission. Example: 1
+ * @bodyParam data.relationships.permission.data.id integer required Must exists in permission. Example: 10
  * @bodyParam data.relationships.user.data.type string required  Must be 'user'. Example: user
- * @bodyParam data.relationships.user.data.id object required Must exists in user.
+ * @bodyParam data.relationships.user.data.id object required Must exists in user. Example: 1
  */
 class UserPermissionCreateRequest extends FormRequest
 {

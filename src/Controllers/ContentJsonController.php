@@ -222,7 +222,7 @@ class ContentJsonController extends Controller
      *
      * @permission Must be logged in
      * @permission Must have the delete.content permission
-     * @queryParam id required Example:2
+     * @queryParam id required Content that will be deleted. Example:2
      */
     public function delete($contentId)
     {
