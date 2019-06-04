@@ -65,7 +65,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 10
+            "position": 6
         },
         "relationships": {
             "content": {
@@ -89,7 +89,7 @@ $.ajax({
 {
     "data": {
         "type": "contentData",
-        "id": "1",
+        "id": "2",
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
@@ -161,7 +161,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 10
+            "position": 16
         },
         "relationships": {
             "content": {

@@ -52,20 +52,20 @@ $.ajax({
     "data": {
         "type": "userPermission",
         "attributes": {
-            "start_date": "Permission 1",
+            "start_date": "2019-05-01",
             "expiration_date": "2019-06-01"
         },
         "relationships": {
             "permission": {
                 "data": {
                     "type": "permission",
-                    "id": 1
+                    "id": 10
                 }
             },
             "user": {
                 "data": {
                     "type": "user",
-                    "id": {}
+                    "id": "1"
                 }
             }
         }
@@ -77,20 +77,37 @@ $.ajax({
 });
 ```
 
-### Response Example (422):
+### Response Example (200):
 
 ```json
 {
-    "errors": [
-        {
-            "title": "Validation failed.",
-            "source": "data.relationships.user.data.id",
-            "detail": "The user id must be an integer."
+    "data": {
+        "type": "userPermission",
+        "id": "1",
+        "attributes": {
+            "user": "1",
+            "start_date": "2019-05-01 00:00:00",
+            "expiration_date": "2019-06-01 00:00:00",
+            "created_at": "2019-06-04 13:45:32",
+            "updated_at": "2019-06-04 13:45:32"
         },
+        "relationships": {
+            "permission": {
+                "data": {
+                    "type": "permission",
+                    "id": "10"
+                }
+            }
+        }
+    },
+    "included": [
         {
-            "title": "Validation failed.",
-            "source": "data.attributes.start_date",
-            "detail": "The start date is not a valid date."
+            "type": "permission",
+            "id": "10",
+            "attributes": {
+                "name": "In sit rerum et possimus unde molestiae necessitatibus. Corrupti dolores et error quia. Corporis rerum quam tempora veniam molestias ipsum aut. Nisi velit nihil eius libero laboriosam quis. Quod consequatur eius quos accusamus molestias alias fugit.",
+                "brand": "brand"
+            }
         }
     ]
 }
@@ -129,15 +146,10 @@ $.ajax({
 });
 ```
 
-### Response Example (404):
+### Response Example (204):
 
 ```json
-{
-    "errors": {
-        "title": "Not found.",
-        "detail": "Delete failed, user permission not found with id: 1"
-    }
-}
+null
 ```
 
 

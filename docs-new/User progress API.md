@@ -138,11 +138,11 @@ $.ajax({
 });
 ```
 
-### Response Example (500):
+### Response Example (201):
 
 ```json
 {
-    "message": "Server Error"
+    "data": true
 }
 ```
 
