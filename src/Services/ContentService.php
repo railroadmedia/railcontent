@@ -1137,6 +1137,9 @@ class ContentService
             return Carbon::parse($a['published_on']) >= Carbon::parse($b['published_on']);
         };
 
+        $oldStatuses = ContentRepository::$availableContentStatues;
+        $oldFutureContent = ContentRepository::$pullFutureContent;
+
         ContentRepository::$availableContentStatues = [
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
@@ -1309,6 +1312,9 @@ class ContentService
         }else{
             $scheduleEvents = $scheduleEvents->sort($compareFunc)->values();
         }
+
+        ContentRepository::$availableContentStatues = $oldStatuses;
+        ContentRepository::$pullFutureContent = $oldFutureContent;
 
         if(empty($scheduleEvents)){
             return new Collection();
