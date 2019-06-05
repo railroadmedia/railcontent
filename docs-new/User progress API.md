@@ -12,7 +12,7 @@
 
 
 ### Permissions
-    - authenticated user
+    - Must be logged in
     
 ### Request Parameters
 
@@ -64,11 +64,11 @@ $.ajax({
 });
 ```
 
-### Response Example (500):
+### Response Example (200):
 
 ```json
 {
-    "message": "Server Error"
+    "data": true
 }
 ```
 
@@ -86,7 +86,7 @@ $.ajax({
 
 
 ### Permissions
-    - authenticated user
+    - Must be logged in
     
 ### Request Parameters
 
@@ -160,7 +160,7 @@ $.ajax({
 
 
 ### Permissions
-    - authenticated user
+    - Must be logged in
     
 ### Request Parameters
 
@@ -234,7 +234,7 @@ $.ajax({
 
 
 ### Permissions
-    - authenticated user
+    - Must be logged in
     
 ### Request Parameters
 

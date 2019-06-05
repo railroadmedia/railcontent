@@ -50,13 +50,16 @@ class UserPermissionsJsonController extends Controller
         $this->permissionPackageService = $permissionPackageService;
     }
 
-    /** Create/update user permission record and return data in JSON API format.
+    /** Give or modify users access to specific content for a specific amount of time.
      *
      * @param UserPermissionCreateRequest $request
      * @return Fractal
      * @throws ORMException
      * @throws OptimisticLockException
      * @throws NotAllowedException
+     *
+     * @permission Must be logged in
+     * @permission Must have the create.user.permissions permission
      */
     public function store(UserPermissionCreateRequest $request)
     {
@@ -80,7 +83,7 @@ class UserPermissionsJsonController extends Controller
         return ResponseService::userPermission($userPermission);
     }
 
-    /** Delete user permission if exists
+    /** Delete user access to content.
      *
      * @param $userPermissionId
      * @return JsonResponse
@@ -88,6 +91,10 @@ class UserPermissionsJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      * @throws NotAllowedException
+     *
+     * @permission Must be logged in
+     * @permission Must have the delete.user.permissions permission
+     * @queryParam id required
      */
     public function delete($userPermissionId)
     {
@@ -105,13 +112,16 @@ class UserPermissionsJsonController extends Controller
         return ResponseService::empty(204);
     }
 
-    /** Pull active user permissions.
-     *  IF "only_active" it's set false on the request the expired permissions are returned also
-     *  IF "user_id" it's set on the request only the permissions for the specified user are returned
+    /** List active users permissions.
      *
      * @param Request $request
      * @return Fractal
      * @throws NotAllowedException
+     *
+     * @permission Must be logged in
+     * @permission Must have the pull.user.permissions permission
+     * @bodyParam only_active boolean Include the expired permissions if it's false. Default:true. Example: true
+     * @bodyParam user_id integer Only the permissions for the specified user are returned. Default:null. Example:1
      */
     public function index(Request $request)
     {

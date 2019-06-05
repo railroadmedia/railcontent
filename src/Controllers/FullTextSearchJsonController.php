@@ -33,11 +33,19 @@ class FullTextSearchJsonController extends Controller
         $this->fullTextSearchService = $fullTextSearchService;
     }
 
-    /** Call the method from the service to pull the contents based on the criteria passed in request.
-     *  Return a Json paginated response with the contents
-     *
+    /** Full text search in contents
      * @param Request $request
-     * @return JsonPaginatedResponse
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @bodyParam term string required 	Serch criteria. Example:Expanding The Triple Paradiddle
+     * @bodyParam included_types string Contents with these types will be returned. Example:
+     * @bodyParam statuses string  	All content must have one of these statuses. By default:published. Example:published
+     * @bodyParam sort string  Defaults to descending order; to switch to ascending order remove the minus sign (-). Can be any of the following: score or content_published_on. By default:-score. Example:-score
+     * @bodyParam brand string  Contents from the brand will be returned. Example:brand
+     * @bodyParam page integer  Which page to load, will be {limit} long.By default:1. Example:1
+     * @bodyParam limit integer  How many to load per page. By default:10. Example:10
+     * @responseFile ../../../../../docs-new/responseFile/fullTextSearch.json
      */
     public function index(Request $request)
     {

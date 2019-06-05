@@ -44,7 +44,7 @@ class ContentProgressJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      *
-     * @permission authenticated user
+     * @permission Must be logged in
      */
     public function startContent(UserContentRequest $request)
     {
@@ -65,7 +65,7 @@ class ContentProgressJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      *
-     * @permission authenticated user
+     * @permission Must be logged in
      */
     public function completeContent(UserContentRequest $request)
     {
@@ -86,7 +86,7 @@ class ContentProgressJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      *
-     * @permission authenticated user
+     * @permission Must be logged in
      */
     public function resetContent(UserContentRequest $request)
     {
@@ -107,12 +107,11 @@ class ContentProgressJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      *
-     * @permission authenticated user
+     * @permission Must be logged in
      * @bodyParam data.attributes.progress_percent integer required Progress percent. Example:10
      */
     public function saveProgress(UserContentRequest $request)
     {
-        //dd($request->input('data.attributes.progress_percent'));
         $response = $this->userContentService->saveContentProgress(
             $request->input('data.relationships.content.data.id'),
             $request->input('data.attributes.progress_percent'),

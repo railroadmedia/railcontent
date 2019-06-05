@@ -39,7 +39,7 @@ $.ajax({
             "type": "permission",
             "id": "1",
             "attributes": {
-                "name": "Minus voluptatem repudiandae minus qui dolor eius sequi. Totam consequuntur non molestias alias iste. Quibusdam rem et harum sit ad. Sequi eligendi harum incidunt sint odit.",
+                "name": "At minus consequuntur cumque ducimus. Molestiae qui ipsum fugiat cumque expedita. Cum facere assumenda quia repudiandae doloremque. Delectus eum eveniet quis reprehenderit necessitatibus suscipit.",
                 "brand": "brand"
             }
         },
@@ -47,7 +47,7 @@ $.ajax({
             "type": "permission",
             "id": "2",
             "attributes": {
-                "name": "Beatae qui ex ut quo. Sapiente nam consequatur velit tenetur rerum et est vel. Fugiat est adipisci iure tenetur inventore eveniet.",
+                "name": "Necessitatibus quam sit deleniti qui. Consequatur omnis dolores eius sunt quis doloremque.",
                 "brand": "brand"
             }
         },
@@ -55,7 +55,7 @@ $.ajax({
             "type": "permission",
             "id": "3",
             "attributes": {
-                "name": "Consequatur dolorem provident itaque consequatur. Et doloremque omnis in earum. Ex ab cum numquam ab laborum. Deserunt incidunt eligendi velit ea tempora vel molestias.",
+                "name": "Ut dicta velit debitis voluptatum facilis eos maiores. Quis reiciendis in quia fugit excepturi. Nemo soluta quos rerum aperiam.",
                 "brand": "brand"
             }
         },
@@ -63,7 +63,7 @@ $.ajax({
             "type": "permission",
             "id": "4",
             "attributes": {
-                "name": "Itaque dolores laudantium voluptatibus sed est expedita. Mollitia ea et vel voluptate. Eos odio velit possimus voluptatem dolorem.",
+                "name": "Aspernatur provident asperiores est. Accusantium sint ut et molestiae ad. Minima iste sapiente qui explicabo at nihil. Vel inventore eveniet voluptatem rerum ratione ut et ipsam. Culpa ipsum rerum et.",
                 "brand": "brand"
             }
         },
@@ -71,7 +71,7 @@ $.ajax({
             "type": "permission",
             "id": "5",
             "attributes": {
-                "name": "Enim minima perferendis nam inventore ut eos. Dolor est consequuntur sed veniam dolore. Eaque sit iste voluptatem molestias fugiat hic quae. Et praesentium fugiat eius earum facere.",
+                "name": "Iste quis quibusdam porro neque ut expedita dicta quibusdam. Voluptas tempora voluptatem explicabo. Qui sed exercitationem voluptatem odio error explicabo et. Nam earum repellendus alias architecto eligendi voluptatem non est.",
                 "brand": "brand"
             }
         },
@@ -79,7 +79,7 @@ $.ajax({
             "type": "permission",
             "id": "6",
             "attributes": {
-                "name": "Voluptatem sit aut dolorem labore cum. Aspernatur a sapiente et culpa. Aut et voluptates natus nihil. Recusandae harum sit nobis veritatis.",
+                "name": "Excepturi sed ipsum nihil. Omnis itaque nihil asperiores aut asperiores. Itaque voluptas omnis quo sed nam. Possimus deserunt sunt cupiditate et et libero et maiores. Itaque qui eum nostrum commodi illum maiores quis. Iste molestiae est quo aut.",
                 "brand": "brand"
             }
         },
@@ -87,7 +87,7 @@ $.ajax({
             "type": "permission",
             "id": "7",
             "attributes": {
-                "name": "Eligendi enim aliquid et enim possimus molestiae nemo. Laborum libero ullam nihil. Provident quasi consectetur ullam ut. Ut praesentium nemo non sed dolor.",
+                "name": "A sint aut illum maiores aspernatur. Esse aut nam voluptatibus. Deleniti delectus et deserunt recusandae. Molestiae sit omnis corporis sed. Tempora aut error optio ipsam et deleniti magni.",
                 "brand": "brand"
             }
         },
@@ -95,7 +95,7 @@ $.ajax({
             "type": "permission",
             "id": "8",
             "attributes": {
-                "name": "Vero rem non natus veritatis aut beatae. Sunt corrupti qui et distinctio. Exercitationem tenetur qui enim laudantium. Ipsa laudantium dolores error minus aperiam eveniet numquam quas.",
+                "name": "Et ex qui sit non. Nobis quaerat neque quam hic pariatur voluptatem sed rerum. Expedita cupiditate dolorum rerum corrupti ut fugiat accusantium.",
                 "brand": "brand"
             }
         },
@@ -103,7 +103,7 @@ $.ajax({
             "type": "permission",
             "id": "9",
             "attributes": {
-                "name": "Explicabo odit aliquam rerum expedita. Sed distinctio sunt nisi molestias. Explicabo ratione et autem dicta non ut labore odit. Sed adipisci nisi illum consequatur et ex quae. Sed quia eum nisi suscipit qui fuga eius. Est aut ab veritatis animi et.",
+                "name": "Maxime ea recusandae enim dicta. Ex debitis perspiciatis porro eum magni id incidunt. Similique est delectus porro illum aut corrupti. Officia iusto facere voluptatem dignissimos a consequatur autem veritatis. Laborum id et ut reiciendis aut.",
                 "brand": "brand"
             }
         },
@@ -111,7 +111,7 @@ $.ajax({
             "type": "permission",
             "id": "10",
             "attributes": {
-                "name": "In sit rerum et possimus unde molestiae necessitatibus. Corrupti dolores et error quia. Corporis rerum quam tempora veniam molestias ipsum aut. Nisi velit nihil eius libero laboriosam quis. Quod consequatur eius quos accusamus molestias alias fugit.",
+                "name": "Perferendis rerum similique aut itaque. Et mollitia ipsam ut. Quasi totam natus necessitatibus quia et rerum.",
                 "brand": "brand"
             }
         }
@@ -125,7 +125,7 @@ $.ajax({
 <!-- END_82b005afd78be37707ededcd4afc2d84 -->
 
 <!-- START_00fbbab029caab0b24691443083c1788 -->
-## Create a new permission and return it in JSON API format
+## Create a new permission
 
 
 ### HTTP Request
@@ -133,7 +133,8 @@ $.ajax({
 
 
 ### Permissions
-    - create.permission required
+    - Must be logged in
+    - Must have the create.permission permission to create
     
 ### Request Parameters
 
@@ -165,7 +166,7 @@ $.ajax({
         "type": "permission",
         "attributes": {
             "name": "Permission 1",
-            "brand": "nulla"
+            "brand": "provident"
         }
     }
 }
@@ -184,7 +185,7 @@ $.ajax({
         "id": "11",
         "attributes": {
             "name": "Permission 1",
-            "brand": "nulla"
+            "brand": "provident"
         }
     }
 }
@@ -196,7 +197,7 @@ $.ajax({
 <!-- END_00fbbab029caab0b24691443083c1788 -->
 
 <!-- START_4342e3c5e05a771e85749f018f936e97 -->
-## Dissociate (&quot;unattach&quot;) permissions from a specific content or all content of a certain type
+## Dissociate permissions from a specific content or all content of a certain type
 
 
 ### HTTP Request
@@ -204,7 +205,8 @@ $.ajax({
 
 
 ### Permissions
-    - disociate.permissions required
+    - Must be logged in
+    - Must have the disociate.permissions permission
     
 ### Request Parameters
 
@@ -285,7 +287,7 @@ $.ajax({
 <!-- END_4342e3c5e05a771e85749f018f936e97 -->
 
 <!-- START_d4001b71581880f49c6f7083414bd750 -->
-## Update a permission if exist and return it in JSON API format
+## Change permission name or the brand where the permission it&#039;s available.
 
 
 ### HTTP Request
@@ -293,13 +295,15 @@ $.ajax({
 
 
 ### Permissions
-    - update.permission required
+    - Must be logged in
+    - Must have the update.permission permission to update
     
 ### Request Parameters
 
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|query|id|  yes  ||
 |body|data.type|    |Must be 'permission'.|
 |body|data.attributes.name|    |Permission name.|
 |body|data.attributes.brand|    |brand|
@@ -325,7 +329,7 @@ $.ajax({
         "type": "permission",
         "attributes": {
             "name": "Permission 1",
-            "brand": "sit"
+            "brand": "alias"
         }
     }
 }
@@ -344,7 +348,7 @@ $.ajax({
         "id": "1",
         "attributes": {
             "name": "Permission 1",
-            "brand": "sit"
+            "brand": "alias"
         }
     }
 }
@@ -356,7 +360,7 @@ $.ajax({
 <!-- END_d4001b71581880f49c6f7083414bd750 -->
 
 <!-- START_dc1d30ff5a5c1478fb8b60e51a1d35e7 -->
-## Delete a permission if exist and it&#039;s not linked with content id or content type
+## Delete an existing permission and all the links with contents
 
 
 ### HTTP Request
@@ -364,13 +368,15 @@ $.ajax({
 
 
 ### Permissions
-    - delete.permission required
+    - Must be logged in
+    - Must have the delete.permission permission
     
 ### Request Parameters
 
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|query|id|  yes  ||
 
 
 ### Request Example:
@@ -396,7 +402,7 @@ null
 <!-- END_dc1d30ff5a5c1478fb8b60e51a1d35e7 -->
 
 <!-- START_3fb971d9458d8f1bc2c8d99bfdcf36b0 -->
-## Attach permission to a specific content or to all content of a certain type
+## Assign permission to a specific content or to all content of certain type.
 
 
 ### HTTP Request
@@ -404,7 +410,8 @@ null
 
 
 ### Permissions
-    - assign.permission required
+    - Must be logged in
+    - Must have the assign.permission permission to assign
     
 ### Request Parameters
 
@@ -455,7 +462,7 @@ $.ajax({
             "permission": {
                 "data": {
                     "type": "permission",
-                    "id": 1
+                    "id": 2
                 }
             },
             "content": {
@@ -488,7 +495,7 @@ $.ajax({
             "permission": {
                 "data": {
                     "type": "permission",
-                    "id": "1"
+                    "id": "2"
                 }
             },
             "content": {
@@ -502,9 +509,9 @@ $.ajax({
     "included": [
         {
             "type": "permission",
-            "id": "1",
+            "id": "2",
             "attributes": {
-                "name": "Minus voluptatem repudiandae minus qui dolor eius sequi. Totam consequuntur non molestias alias iste. Quibusdam rem et harum sit ad. Sequi eligendi harum incidunt sint odit.",
+                "name": "Necessitatibus quam sit deleniti qui. Consequatur omnis dolores eius sunt quis doloremque.",
                 "brand": "brand"
             }
         },
@@ -512,72 +519,72 @@ $.ajax({
             "type": "content",
             "id": "1",
             "attributes": {
-                "slug": "Hic odit ratione tenetur quam. Dolores qui cum consequatur enim natus fuga et illum. Impedit voluptates quis doloribus dolores expedita. Soluta sit ab tempore aut quis quidem eaque. Quaerat quam eius neque itaque fugiat iste.",
+                "slug": "Unde modi amet soluta ipsum dolorem. Rerum facere quo est totam vero quasi facilis. Tempore animi omnis consectetur dolor repudiandae sit fuga. Ipsa qui dignissimos unde dolorem quibusdam quisquam laudantium.",
                 "type": "course",
-                "sort": "1846408275",
+                "sort": "2067485678",
                 "status": "published",
                 "brand": "brand",
-                "language": "Dolores commodi earum ut. Impedit rerum rerum ut officia. Sint nulla voluptatem ducimus beatae explicabo recusandae impedit.",
+                "language": "Ipsa repellendus eos id ut qui nobis odit. Hic harum ipsum illum incidunt vitae. Qui tempora voluptas nulla modi et. Voluptates architecto velit velit et omnis natus consequatur. Dolores rem ipsa alias quia voluptatum libero inventore.",
                 "user": "1",
                 "published_on": {
-                    "date": "1989-12-06 00:15:26.000000",
+                    "date": "1977-09-27 19:18:30.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "archived_on": {
-                    "date": "1973-04-28 07:23:07.000000",
+                    "date": "1988-12-24 01:14:14.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "created_on": {
-                    "date": "1988-11-29 11:48:05.000000",
+                    "date": "2012-09-17 21:17:41.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "difficulty": "Atque et laboriosam et sint itaque. Tempora consequuntur esse tenetur. Et reprehenderit ut non. Eveniet qui ut quis omnis sint quis aspernatur et.",
-                "home_staff_pick_rating": "211594015",
-                "legacy_id": 2029105382,
-                "legacy_wordpress_post_id": 2110749050,
-                "qna_video": "Quas ab repudiandae facere aut impedit aspernatur. Est hic dicta ut et quidem aliquid natus. Accusantium asperiores dolorem voluptas quas delectus natus voluptates. Explicabo error quae dolor et neque.",
-                "style": "Accusantium ratione dolores mollitia assumenda voluptates consequatur. Dignissimos dolorum impedit repudiandae fugit. Dignissimos facere amet aut dolores. Nesciunt totam consequatur itaque aut esse ipsum nihil.",
-                "title": "Quasi qui modi ad dolores enim iusto est.",
-                "xp": 465338215,
-                "album": "Enim officia qui aspernatur amet magnam. Ut voluptate et soluta est soluta et eligendi. Aspernatur iusto molestiae perspiciatis veritatis optio. Quidem quas nesciunt ipsum vel. Omnis aut inventore rerum laborum sit.",
-                "artist": "Et omnis ut impedit aut eveniet eos. Beatae magni voluptate maxime alias voluptatibus repellendus et. Qui qui doloribus soluta. Fuga magni laborum eligendi alias nihil. Quod quam veritatis debitis dolorem.",
-                "bpm": "Enim et voluptatem cupiditate. Facere iure id autem. Voluptas aut exercitationem deserunt neque voluptatem.",
-                "cd_tracks": "Molestias rerum doloribus sit aut quis quas. Aliquam beatae libero sed. Dolorum quia est aut fuga. Sint omnis id aut occaecati et et natus.",
-                "chord_or_scale": "Vitae ut ipsa aliquam impedit accusamus. Molestiae eos laudantium et eum tempore. Asperiores omnis libero natus earum inventore enim id. Eum ducimus libero repudiandae perferendis rerum labore ducimus.",
-                "difficulty_range": "Consequuntur autem pariatur est et. Aspernatur sed ratione nesciunt. Quo porro eum quia ullam eum. Fugiat aut quaerat dolor maiores aut. Illo voluptatem ullam tempora voluptatem. Totam omnis ut molestias consequuntur.",
-                "episode_number": 870317541,
-                "exercise_book_pages": "Sed minima voluptatibus qui et ad voluptatem rerum. Nobis et impedit necessitatibus sit. Porro vel numquam laboriosam dicta quod. Porro accusamus nam rerum omnis alias quibusdam praesentium.",
-                "fast_bpm": "Cumque in molestiae ea dolore rerum facilis. Et iusto molestiae doloremque. Sint est quia dolor odio voluptatum ea unde. Doloribus autem voluptas et dignissimos eaque. Expedita aut vel a.",
-                "includes_song": true,
-                "instructors": "Sed eum fuga delectus ex. Esse explicabo pariatur quos a. Qui mollitia nisi molestiae dolores adipisci et aut totam. Ut sit sapiente laborum.",
+                "difficulty": "Ut nemo omnis deleniti quos consequatur quia. Et odit magni pariatur soluta qui non.",
+                "home_staff_pick_rating": "316288058",
+                "legacy_id": 1920143894,
+                "legacy_wordpress_post_id": 950948364,
+                "qna_video": "Voluptates quo tempore ut nihil rerum. Et aut laboriosam et aliquid hic aliquid. Error aut qui illo sint deleniti ut a. Voluptatem mollitia tempora sequi nesciunt ratione rem. Dolores at ut fuga. In amet totam officia autem numquam.",
+                "style": "Qui ducimus possimus odit ut est quam fuga. Qui accusamus esse aliquid. Illum aspernatur quo fugit cumque sequi earum laudantium dolor. Inventore nostrum corporis eum totam magnam.",
+                "title": "Corrupti voluptatem sunt tenetur provident dignissimos.",
+                "xp": 300676256,
+                "album": "Eos labore soluta dolorem id vero ut sit. Laboriosam delectus aut ipsam reprehenderit impedit quasi dicta. Et voluptate ipsa et quis temporibus non rem.",
+                "artist": "Reiciendis soluta sed voluptate consequatur blanditiis. Repellendus sed nihil at occaecati ut. Rerum veritatis inventore sunt molestiae rerum corrupti. Incidunt id ut voluptates modi ducimus quos.",
+                "bpm": "Dolorem error veniam inventore eaque aut. Sed facilis in doloribus vel. Et nobis voluptatem quae consectetur. Voluptatem qui illo et alias aut.",
+                "cd_tracks": "Eaque dicta et cupiditate sit ducimus voluptates voluptates et. Quia at eum consequatur sit autem.",
+                "chord_or_scale": "Et facilis ratione sunt maiores. Maxime libero minima provident magni facere nostrum. Tempore excepturi quia saepe quia laboriosam vel.",
+                "difficulty_range": "Iusto et officia molestiae aut. Omnis quo ipsa et voluptatum. Non ut quia voluptas adipisci. Assumenda voluptas repellendus minus ad praesentium ut in. Quis expedita a in accusantium et. Officiis voluptas nesciunt id sapiente.",
+                "episode_number": 100534324,
+                "exercise_book_pages": "Eligendi non pariatur hic alias. Illo et autem sit velit officiis et. Illum illo dolorem dolores officiis magni illo quo. Dolorem veritatis illo accusantium vel ducimus.",
+                "fast_bpm": "Distinctio ut perferendis natus est molestias doloremque. Amet et eius sunt ad autem. Vel quo quas ratione doloribus. Sint error autem ex vel quisquam. Ut totam consequatur repellendus nisi. Cum tenetur vero reprehenderit aut ad maiores.",
+                "includes_song": false,
+                "instructors": "Quo ullam accusamus officiis exercitationem possimus veritatis non sunt. Est in corporis dolor. Nesciunt saepe ratione ex eveniet voluptas qui porro.",
                 "live_event_start_time": {
-                    "date": "2012-10-01 00:06:20.000000",
+                    "date": "1998-12-31 22:59:10.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "live_event_end_time": {
-                    "date": "1972-08-02 00:32:19.000000",
+                    "date": "1986-11-25 06:26:37.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "live_event_youtube_id": "Adipisci est earum reiciendis et quia a. Dolore vel ducimus et occaecati iure sed vel sit. Et voluptatum ut doloribus sunt.",
-                "live_stream_feed_type": "Assumenda soluta similique eligendi. Eos libero sequi assumenda. Tempora et sint adipisci voluptatem magni ex. Ullam nisi nobis tenetur beatae occaecati. Voluptate repudiandae animi minus sint debitis.",
-                "name": "Nostrum nobis minus modi qui sit. Accusantium autem inventore possimus optio dolorum repellat reprehenderit. Consequuntur sed dignissimos voluptatum alias totam.",
-                "released": "Rerum blanditiis optio ut eveniet aut. Vel quo fugiat soluta autem quasi eos quia. Quos provident iusto nostrum officiis deleniti harum.",
-                "slow_bpm": "Quidem sequi architecto mollitia natus. Ad sed nulla vitae dolores provident accusamus aliquam. Blanditiis officia qui voluptatem veritatis porro tenetur voluptate.",
-                "total_xp": "Qui minus unde et nobis. Voluptatem sed veritatis non sit iusto. Exercitationem est doloremque rerum dolorem rerum laudantium rem. Sit ea porro cumque autem.",
-                "transcriber_name": "Enim enim consequatur ut optio. Mollitia fugit error qui quia dolor et sed vel. Nobis rerum nam est eaque aut.",
-                "week": 1549229504,
-                "avatar_url": "Amet qui voluptas consequatur expedita facere aut nihil. Et sit autem laboriosam sunt beatae. Magni explicabo et eos nihil tenetur et et. Doloremque dolorum animi corrupti architecto.",
-                "length_in_seconds": 1889120521,
-                "soundslice_slug": "At rerum totam et et. Suscipit in quaerat velit sunt provident dolorem ducimus. Quae ea pariatur tempore odit in et.",
-                "staff_pick_rating": 1882244654,
-                "student_id": 1107745055,
-                "vimeo_video_id": "Qui similique dolor doloremque rerum deserunt error velit nihil. Ut vel laboriosam dicta numquam nam ad assumenda exercitationem. Unde est voluptatibus error repudiandae eius id esse. Odio quibusdam labore sed maxime.",
-                "youtube_video_id": "Voluptas eaque ipsum in quod perferendis qui provident. Nemo minus quos minus deserunt delectus magnam. Ducimus impedit provident cupiditate dolorem. Nihil dolor deserunt nihil repellat. Ad assumenda nam molestiae qui."
+                "live_event_youtube_id": "Consequatur qui rerum iste vel qui non nisi. Doloremque odio ad dicta minima omnis dolores. Dolore qui nostrum dolore deserunt molestiae.",
+                "live_stream_feed_type": "Est fuga et qui esse asperiores impedit vel quas. Et quisquam qui enim aliquid assumenda. Iure quo officiis maxime earum consectetur impedit rerum similique. Consectetur architecto praesentium ut eos doloremque voluptas quam natus.",
+                "name": "Error veniam iusto non aliquam ea voluptas amet. Facilis minima laudantium at itaque. Est nihil qui inventore quo. Id atque et eaque voluptas. Vero dolorem sapiente consequuntur ad eius laudantium veritatis.",
+                "released": "Error sed velit molestiae. Ut minima est repellat. Fuga iusto facilis ipsum vel at. Quam laboriosam libero nam voluptatum.",
+                "slow_bpm": "Provident distinctio omnis qui consequatur fugiat. Iure a et aliquid eligendi alias quia quis. Fugiat et provident eos atque aut.",
+                "total_xp": "Tenetur sed et aut provident. Dolorem alias suscipit pariatur. Cumque dolor et corrupti fuga qui eum minus. Perspiciatis aspernatur est voluptatibus sit laudantium ut reiciendis. Quia quia quis iste.",
+                "transcriber_name": "Sed quia natus cumque perferendis ut aliquam. Odio repellat nihil fugit sed laboriosam. Omnis accusantium est facilis sint exercitationem.",
+                "week": 334193965,
+                "avatar_url": "Dolor quia commodi maiores. Et libero in sapiente tenetur. Quis voluptates doloribus labore quis enim nam. Ut rerum nihil sint minima distinctio possimus. Dicta quo eos doloribus aut nemo quaerat aut asperiores.",
+                "length_in_seconds": 1953132732,
+                "soundslice_slug": "Qui est quia voluptatem repellat natus atque aperiam. Quod eum dolor facere dolores quos. Libero in error quis consequatur cupiditate et eos veniam. Nesciunt repellendus laborum sit adipisci et explicabo iusto quam.",
+                "staff_pick_rating": 961041226,
+                "student_id": 524121876,
+                "vimeo_video_id": "Repellat rerum quasi porro corrupti fugit. Sunt dolores temporibus ipsum a. Sit accusantium cum optio quis odio.",
+                "youtube_video_id": "Nesciunt nihil ullam quo soluta sunt esse. Odio architecto eligendi amet ex velit. Impedit aliquam nulla beatae voluptas voluptatem. A quia modi quae aut. Corrupti quibusdam inventore rerum qui quibusdam ipsa et."
             }
         }
     ]

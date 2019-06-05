@@ -54,12 +54,12 @@ class CommentJsonController extends Controller
      * @return Fractal
      * @throws NonUniqueResultException
      *
-     * @queryParam content_id  pull the comments for given content id Example:
-     * @queryParam user_id  pull user's comments Example:
-     * @queryParam content_type  string pull for the contents with given type Example:
-     * @queryParam page integer Default:1. Example:1
-     * @queryParam limit integer Default:10. Example:10
-     * @queryParam sort string Default:'-created_on'. Example:-created_on
+     * @bodyParam content_id  pull the comments for given content id Example:
+     * @bodyParam user_id  pull user's comments Example:
+     * @bodyParam content_type  string pull for the contents with given type Example:
+     * @bodyParam page integer  Which page to load, will be {limit} long.By default:1. Example:1
+     * @bodyParam limit integer  How many to load per page. By default:10. Example:10
+     * @bodyParam sort string Default:'-created_on'. Example:-created_on
      *
      */
     public function index(Request $request)
@@ -235,7 +235,7 @@ class CommentJsonController extends Controller
             ->respond(200);
     }
 
-    /** List comments, the current page it's the page with the comment
+    /** List linked comments, the current page it's the page with the comment
      *
      * @param $commentId
      * @param Request $request
@@ -243,7 +243,7 @@ class CommentJsonController extends Controller
      * @throws NonUniqueResultException
      *
      * @queryParam comment_id integer required Example:1
-     * @bodyParam limit integer default:10
+     * @bodyParam limit integer How many to load per page. By default:10 Example:10
      */
     public function getLinkedComment($commentId, Request $request)
     {

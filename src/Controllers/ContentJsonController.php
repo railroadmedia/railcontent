@@ -61,6 +61,19 @@ class ContentJsonController extends Controller
      * @throws NotAllowedException
      *
      * @permission pull.contents required
+     * @bodyParam statuses array All content must have one of these statuses. Default:published. Example:['published']
+     * @bodyParam included_types array Contents with these types will be returned.. Example:[]
+     * @bodyParam required_parent_ids array All contents must be a child of any of the passed in parent ids. Example:[]
+     * @bodyParam filter[required_fields] array All returned contents are required to have this field. Value format is: key;value;type (type is optional if its not declared all types will be included). Example:[]
+     * @bodyParam filter[included_fields] array 	All contents must be a child of any of the passed in parent ids.. Example:[]
+     * @bodyParam filter[required_user_states] array All returned contents are required to have these states for the authenticated user. Value format is: state. Example:[]
+     * @bodyParam filter[included_user_states] array Contents that have any of these states for the authenticated user will be returned. The first included user state is the same as a required user state but all included states after the first act inclusively. Value format is: state. Example:[]
+     * @bodyParam filter[required_user_playlists] array All returned contents are required to be inside these authenticated users playlists. Value format is: name. Example:[]
+     * @bodyParam filter[included_user_playlists] array Contents that are in any of the authenticated users playlists will be returned. The first included user playlist is the same as a required user playlist but all included playlist after the first act inclusively. Value format is: name. Example:[]
+     * @bodyParam slug_hierarchy string  Example:[]
+     * @bodyParam sort string Default:-published_on. Example:-published_on
+     * @bodyParam page integer  Which page to load, will be {limit} long.By default:1. Example:1
+     * @bodyParam limit integer  How many to load per page. By default:10. Example:10
      */
     public function index(Request $request)
     {

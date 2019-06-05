@@ -13,8 +13,8 @@ use Railroad\Railcontent\Services\ContentService as ContentService;
  * @bodyParam data.attributes.slug string Example:02-getting-started
  * @bodyParam data.attributes.type string  Example:course
  * @bodyParam data.attributes.status string  Example:draft
- * @bodyParam data.attributes.language
-// * @bodyParam data.attributes.sort integer
+ * @bodyParam data.attributes.language string Example:en-EN
+ * @bodyParam data.attributes.sort integer Example:1
  * @bodyParam data.attributes.published_on datetime Example:2019-05-21 21:20:10
  * @bodyParam data.attributes.archived_on datetime Example:2019-05-31 21:20:10
  * @bodyParam data.attributes.fields array

@@ -55,7 +55,8 @@ class ContentHierarchyJsonController extends Controller
      * @throws OptimisticLockException
      * @throws NotAllowedException
      *
-     * @permission create.content.hierarchy required
+     * @permission Must be logged in
+     * @permission Must have the create.content.hierarchy permission
      */
     public function store(ContentHierarchyCreateRequest $request)
     {
@@ -70,7 +71,8 @@ class ContentHierarchyJsonController extends Controller
         return ResponseService::contentHierarchy($hierarchy);
     }
 
-    /**
+    /** Delete the link between parent content and child content and reposition other children.
+     *
      * @param Request $request
      * @param $parentId
      * @param $childId
@@ -79,7 +81,10 @@ class ContentHierarchyJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      *
-     * @permission delete.content.hierarchy required
+     * @permission Must be logged in
+     * @permission Must have the delete.content.hierarchy permission
+     * @queryParam parentId required
+     * @queryParam childId required
      */
     public function delete(Request $request, $parentId, $childId)
     {

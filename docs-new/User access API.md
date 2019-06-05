@@ -4,7 +4,7 @@
 
 
 <!-- START_4572abc09b0a4dfedb76009dca5d6065 -->
-## Create/update user permission record and return data in JSON API format.
+## Give or modify users access to specific content for a specific amount of time.
 
 
 ### HTTP Request
@@ -12,7 +12,9 @@
 
 
 ### Permissions
-
+    - Must be logged in
+    - Must have the create.user.permissions permission
+    
 ### Request Parameters
 
 
@@ -88,8 +90,8 @@ $.ajax({
             "user": "1",
             "start_date": "2019-05-01 00:00:00",
             "expiration_date": "2019-06-01 00:00:00",
-            "created_at": "2019-06-04 13:45:32",
-            "updated_at": "2019-06-04 13:45:32"
+            "created_at": "2019-06-05 11:00:15",
+            "updated_at": "2019-06-05 11:00:15"
         },
         "relationships": {
             "permission": {
@@ -105,7 +107,7 @@ $.ajax({
             "type": "permission",
             "id": "10",
             "attributes": {
-                "name": "In sit rerum et possimus unde molestiae necessitatibus. Corrupti dolores et error quia. Corporis rerum quam tempora veniam molestias ipsum aut. Nisi velit nihil eius libero laboriosam quis. Quod consequatur eius quos accusamus molestias alias fugit.",
+                "name": "Perferendis rerum similique aut itaque. Et mollitia ipsam ut. Quasi totam natus necessitatibus quia et rerum.",
                 "brand": "brand"
             }
         }
@@ -119,7 +121,7 @@ $.ajax({
 <!-- END_4572abc09b0a4dfedb76009dca5d6065 -->
 
 <!-- START_091f922183423b288cd6002e9275c608 -->
-## Delete user permission if exists
+## Delete user access to content.
 
 
 ### HTTP Request
@@ -127,12 +129,15 @@ $.ajax({
 
 
 ### Permissions
-
+    - Must be logged in
+    - Must have the delete.user.permissions permission
+    
 ### Request Parameters
 
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|query|id|  yes  ||
 
 
 ### Request Example:
@@ -158,10 +163,7 @@ null
 <!-- END_091f922183423b288cd6002e9275c608 -->
 
 <!-- START_11e3427c786ec11eb4b04a07b221d9eb -->
-## Pull active user permissions.
-
-IF "only_active" it's set false on the request the expired permissions are returned also
- IF "user_id" it's set on the request only the permissions for the specified user are returned
+## List active users permissions.
 
 
 ### HTTP Request
@@ -169,12 +171,16 @@ IF "only_active" it's set false on the request the expired permissions are retur
 
 
 ### Permissions
-
+    - Must be logged in
+    - Must have the pull.user.permissions permission
+    
 ### Request Parameters
 
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|body|only_active|    |Include the expired permissions if it's false. Default:true.|
+|body|user_id|    |Only the permissions for the specified user are returned. Default:null.|
 
 
 ### Request Example:
@@ -183,6 +189,11 @@ IF "only_active" it's set false on the request the expired permissions are retur
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/user-permission',
+{
+    "only_active": [],
+    "user_id": 1
+}
+   ,
     success: function(response) {},
     error: function(response) {}
 });

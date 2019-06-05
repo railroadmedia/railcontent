@@ -3,46 +3,6 @@
 # JSON Endpoints
 
 
-<!-- START_61bfda18a7d18e87c48fe08c708c8abe -->
-## railcontent/content
-
-### HTTP Request
-    `OPTIONS railcontent/content`
-
-
-### Permissions
-
-### Request Parameters
-
-
-|Type|Key|Required|Notes|
-|----|---|--------|-----|
-
-
-### Request Example:
-
-```js
-$.ajax({
-    url: 'https://www.domain.com' +
-             '/railcontent/content',
-    success: function(response) {},
-    error: function(response) {}
-});
-```
-
-### Response Example (500):
-
-```json
-{
-    "message": "Server Error"
-}
-```
-
-
-
-
-<!-- END_61bfda18a7d18e87c48fe08c708c8abe -->
-
 <!-- START_d33050309856c95cc17d90bb91fbca9c -->
 ## railcontent/content
 
@@ -58,6 +18,19 @@ $.ajax({
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|body|statuses|    |All content must have one of these statuses. Default:published.|
+|body|included_types|    |Contents with these types will be returned..|
+|body|required_parent_ids|    |All contents must be a child of any of the passed in parent ids.|
+|body|filter[required_fields]|    |All returned contents are required to have this field. Value format is: key;value;type (type is optional if its not declared all types will be included).|
+|body|filter[included_fields]|    |All contents must be a child of any of the passed in parent ids..|
+|body|filter[required_user_states]|    |All returned contents are required to have these states for the authenticated user. Value format is: state.|
+|body|filter[included_user_states]|    |Contents that have any of these states for the authenticated user will be returned. The first included user state is the same as a required user state but all included states after the first act inclusively. Value format is: state.|
+|body|filter[required_user_playlists]|    |All returned contents are required to be inside these authenticated users playlists. Value format is: name.|
+|body|filter[included_user_playlists]|    |Contents that are in any of the authenticated users playlists will be returned. The first included user playlist is the same as a required user playlist but all included playlist after the first act inclusively. Value format is: name.|
+|body|slug_hierarchy|    ||
+|body|sort|    |Default:-published_on.|
+|body|page|    |Which page to load, will be {limit} long.By default:1.|
+|body|limit|    |How many to load per page. By default:10.|
 
 
 ### Request Example:
@@ -66,6 +39,24 @@ $.ajax({
 $.ajax({
     url: 'https://www.domain.com' +
              '/railcontent/content',
+{
+    "statuses": "['published']",
+    "included_types": [],
+    "required_parent_ids": [],
+    "filter": {
+        "required_fields": [],
+        "included_fields": [],
+        "required_user_states": [],
+        "included_user_states": [],
+        "required_user_playlists": [],
+        "included_user_playlists": []
+    },
+    "slug_hierarchy": [],
+    "sort": "-published_on",
+    "page": 1,
+    "limit": 10
+}
+   ,
     success: function(response) {},
     error: function(response) {}
 });
@@ -80,144 +71,224 @@ $.ajax({
             "type": "content",
             "id": "3",
             "attributes": {
-                "slug": "Omnis mollitia facilis aut consectetur et. Nisi ipsum et aut natus. Dolor enim delectus rem ducimus consectetur architecto saepe.",
+                "slug": "Accusantium porro numquam facilis accusamus delectus optio et. Atque ex quod est sit non saepe non. Vitae non eveniet voluptatibus praesentium atque fuga minima. Reiciendis quis eum animi soluta. Ipsum maiores expedita earum animi numquam.",
                 "type": "course",
-                "sort": "271935822",
+                "sort": "1452119573",
                 "status": "published",
                 "brand": "brand",
-                "language": "Et quia deleniti cupiditate dolorem quasi sit hic. Minus nihil id non recusandae rem. Optio nesciunt sapiente aliquid.",
+                "language": "Et voluptatem dolores ipsa laborum expedita ducimus. Ipsa eaque consectetur nihil. Tenetur tempora ex dolores et quas. Debitis non delectus perspiciatis amet. Et omnis ut ut totam enim tempora minima. Ut soluta eius unde et illo et.",
                 "user": "1",
                 "publishedOn": {
-                    "date": "1995-07-03 17:53:01.000000",
+                    "date": "2000-01-01 04:27:47.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "archivedOn": {
-                    "date": "2005-06-30 19:28:30.000000",
+                    "date": "2017-02-23 05:30:54.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "createdOn": {
-                    "date": "1971-08-28 12:31:10.000000",
+                    "date": "2007-05-25 12:57:02.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "difficulty": "At illum repudiandae eum laboriosam sunt error. Numquam maxime accusantium voluptate et laudantium quia eligendi. Iure quasi ad aliquam. Praesentium soluta et minus maxime et. Voluptatem doloribus et inventore consequuntur quia. Iste enim quos aut.",
-                "homeStaffPickRating": "368641094",
-                "legacyId": 709242079,
-                "legacyWordpressPostId": 1360271890,
-                "qnaVideo": "Sapiente ipsum qui qui provident. Sed sit nihil consectetur veniam. Minus nesciunt provident quia dolorem maxime optio.",
-                "style": "Rerum sunt perspiciatis sequi voluptatem inventore nisi reiciendis. Et quia rem ducimus. Beatae quo dolorum facere ducimus nobis.",
-                "title": "Accusamus reprehenderit aspernatur vel laborum qui sunt magnam.",
-                "xp": 1603984760,
-                "album": "Itaque impedit neque ut dolorum et. Tenetur quidem ea deleniti enim explicabo corrupti eos iure. Eligendi voluptatem libero consectetur fuga reiciendis a fugit. Excepturi illum nemo praesentium asperiores voluptatem atque.",
-                "artist": "Quam ut velit qui magnam. Et totam recusandae ab et esse quo. Ea recusandae fugiat accusantium illum sed. Est voluptatum odit ut.",
-                "bpm": "Nisi quo unde et quae doloremque molestiae necessitatibus. Ut iusto vero eos fugiat omnis consequatur. Minus illum voluptates aut sit veritatis corrupti voluptatibus ipsum. Rem quia rerum ut officiis. Nulla optio voluptates sunt minima voluptatem aut.",
-                "cdTracks": "Aut sint nostrum qui eum voluptatum. Eum ut dicta cupiditate et voluptatem. Maiores non sapiente ut officiis earum.",
-                "chordOrScale": "Reprehenderit iste aut adipisci inventore in. Doloribus natus blanditiis sint amet assumenda dolorem ducimus. Beatae quae consequuntur dolores aut vero odit temporibus. Perspiciatis dicta explicabo voluptate sint ratione.",
-                "difficultyRange": "Architecto aspernatur vel qui quas quibusdam omnis et. In id est voluptas ut dicta excepturi magnam. Iste magni neque laboriosam ducimus odio fugit necessitatibus.",
-                "episodeNumber": 2022633409,
-                "exerciseBookPages": "Aperiam quam quaerat et ut. Rerum ut laboriosam aspernatur occaecati. Ullam odio voluptate est. Ea enim unde sapiente ullam. Aut neque quia reiciendis et et.",
-                "fastBpm": "Sequi maxime repellendus minus libero culpa. Id et fuga occaecati illo. Voluptas ut est quasi velit aut quos. Architecto aliquid pariatur iure placeat natus.",
+                "difficulty": "Vel dolorem beatae inventore. Dolor ducimus quia velit ipsum voluptatem nulla dolores. Fugiat sit porro ad quis nobis quisquam accusantium.",
+                "homeStaffPickRating": "485999414",
+                "legacyId": 1269980887,
+                "legacyWordpressPostId": 504943709,
+                "qnaVideo": "Voluptate saepe et velit ducimus labore dignissimos. Natus voluptatem amet cum beatae. Minus vel est cum recusandae autem dolores.",
+                "style": "Dicta quia sint deserunt quia. Occaecati quam provident voluptas labore ad unde. Odit in sed id enim occaecati. Doloribus voluptates et sed praesentium sit autem dolorem velit.",
+                "title": "Assumenda nostrum quas veritatis corrupti.",
+                "xp": 1666894316,
+                "album": "Aperiam sit facilis iure rerum in repudiandae expedita temporibus. Voluptates quos aut laboriosam excepturi accusantium. Debitis eum velit accusamus qui quasi perferendis. Aliquam quasi libero qui corrupti quod perspiciatis qui ut.",
+                "artist": "Eum quia doloribus et perspiciatis qui reprehenderit illum. Id vero labore suscipit et pariatur autem. Molestiae dolorem occaecati repudiandae doloremque alias ad. Quia eum rem quam assumenda.",
+                "bpm": "Porro error quo quibusdam est atque reiciendis. Et dolorem autem rerum ab quas at. Dolores quo ut totam nam facere neque magni. Enim fugiat vel corrupti dolorem reiciendis omnis.",
+                "cdTracks": "Nesciunt ab nostrum totam similique soluta dignissimos ut eum. Impedit autem ipsum commodi sint sint totam. Ad doloribus minus exercitationem dolorem. Dignissimos enim dolor itaque et. Alias veritatis vero pariatur vel sed labore nemo.",
+                "chordOrScale": "Reprehenderit dicta officia aspernatur et impedit iste. Et sed nesciunt accusantium voluptate doloribus nesciunt amet. Ut voluptatibus aut esse aut error et quasi. Voluptatem facere debitis eius. Rerum blanditiis qui sint ut asperiores blanditiis.",
+                "difficultyRange": "Sapiente corrupti excepturi repellat placeat autem exercitationem expedita. Libero excepturi sunt explicabo officia accusantium. Possimus cupiditate sint qui. Aliquam sit est excepturi.",
+                "episodeNumber": 1706662374,
+                "exerciseBookPages": "Consequatur ut repellat et animi rerum cumque. Aut odit ea ea ut sit et quam est. Commodi neque reiciendis voluptatem quia dolorem ut. Quo molestias aliquam itaque aliquid et voluptate id quae.",
+                "fastBpm": "Nobis tenetur et debitis dicta omnis nostrum fuga et. Vel sunt ad beatae voluptas reprehenderit. Quasi est autem quam doloribus. Ratione animi est est nam reprehenderit ea sint. Officiis exercitationem alias nostrum itaque.",
                 "includesSong": true,
-                "instructors": "Ipsa eos commodi placeat. Ut tempore modi eaque nihil harum recusandae. Officia voluptatem sit illo blanditiis. Deserunt commodi harum molestias optio ex aperiam consequuntur. Nihil ut libero molestiae facere consequatur.",
+                "instructors": "Ut unde ipsa nostrum animi ut officiis laborum. In non est ut quis adipisci facere. Est et nulla eum quia odio.",
                 "liveEventStartTime": {
-                    "date": "1975-03-18 15:22:52.000000",
+                    "date": "2002-01-21 22:33:54.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "liveEventEndTime": {
-                    "date": "1994-12-20 08:57:46.000000",
+                    "date": "1988-12-15 15:39:53.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "liveEventYoutubeId": "Aspernatur modi atque autem necessitatibus vel modi blanditiis. Ut autem ut qui reprehenderit. Nostrum omnis modi similique.",
-                "liveStreamFeedType": "Adipisci aut ut eaque quo. Aliquid excepturi qui rerum. Nisi harum adipisci eum iste. Delectus voluptatem dolore soluta sint aut. Cumque optio dolorem deleniti error ullam. Magnam sit dolorem qui accusantium.",
-                "name": "In ipsam ut aut sit et illum. Repudiandae qui neque sit et magnam. Optio nulla nihil sit asperiores aut sapiente.",
-                "released": "Aut minima ad autem fugit eos. Ea aut earum ut ut minus accusamus. Nobis exercitationem nihil optio vitae. Delectus pariatur quia sed in quae. Voluptas ex sint vitae qui modi.",
-                "slowBpm": "In labore quae et iste blanditiis. Corrupti ea veritatis quidem minus in. Dolor ea accusantium assumenda sit et sed non. Illo sed officiis sunt non. Vel eum hic alias rem delectus. Nihil consectetur rerum magni dicta in et.",
-                "totalXp": "Suscipit exercitationem qui blanditiis aut distinctio dignissimos. Molestias deserunt aut quaerat aspernatur. In est nisi nisi pariatur quae. Debitis et qui est dolores impedit. Officiis similique nemo quas voluptatem voluptatem.",
-                "transcriberName": "Quam impedit facilis natus magnam perferendis rerum. Molestiae velit quidem dolorem expedita doloremque eum. Quam enim aut inventore voluptatum alias explicabo qui aut.",
-                "week": 916845408,
-                "avatarUrl": "Earum harum et accusamus amet vitae ut id tempore. Omnis animi et iusto sint vero amet. Sequi nihil voluptatibus quam possimus asperiores ea tempora cum. Dolor et quisquam sequi ut consequuntur. Rerum eaque nemo autem aut.",
-                "lengthInSeconds": 784434468,
-                "soundsliceSlug": "Dolor sapiente et quasi incidunt. Repudiandae necessitatibus adipisci nesciunt quia nesciunt. Molestias temporibus expedita tempora consequuntur exercitationem sit sint beatae. Excepturi minus veritatis atque soluta recusandae.",
-                "staffPickRating": 1199220288,
-                "studentId": 1740849784,
-                "vimeoVideoId": "Rerum molestiae rerum dignissimos. Esse velit aut porro a voluptatem qui. Quasi cumque quam ipsum autem et.",
-                "youtubeVideoId": "Et vel reprehenderit unde voluptate dignissimos error ad. Veritatis cumque et sint omnis sapiente fugiat. Et temporibus et fugiat maiores."
+                "liveEventYoutubeId": "Distinctio vel qui ipsa accusamus. Sit corrupti qui qui ea. Atque pariatur et fuga consequuntur. Unde error iste explicabo sed odit excepturi suscipit. Voluptas earum aut tempore doloremque assumenda.",
+                "liveStreamFeedType": "Ut deleniti et asperiores est explicabo aut. Iste impedit minima laudantium eos odit illum. Sed sed enim magni animi. Suscipit eaque qui porro rem tenetur. Est autem quam corporis veniam suscipit fugit est.",
+                "name": "Dignissimos voluptatibus id ex sit. Dolores inventore nam magni a. Quas minima dolorem labore quaerat. Officia aliquid quae voluptatibus.",
+                "released": "Eos neque sint porro. Aut vero temporibus officiis. Est nostrum in asperiores voluptas distinctio rerum ut.",
+                "slowBpm": "Eaque placeat eos quam enim. Voluptatem a minima voluptatem rerum inventore deserunt. Est est quos voluptates ipsam. Dolore quibusdam ut eligendi aut veritatis eligendi in. Illum sint molestias quia aut iusto corrupti.",
+                "totalXp": "Dignissimos sit reprehenderit hic porro eaque laborum. Quia tempora corrupti ipsam nulla tempore beatae rem sed. Deserunt at illum impedit optio aspernatur laboriosam consectetur.",
+                "transcriberName": "Et distinctio provident fuga sapiente. Omnis ullam ut qui placeat natus. Non non quasi illum et. Delectus modi maiores ut sed.",
+                "week": 1372378284,
+                "avatarUrl": "Fugit dolorem maiores aspernatur minus eligendi cupiditate explicabo. Magni molestias omnis amet ratione et. Cumque qui aut temporibus ea nam qui debitis. Nemo commodi voluptas dolores distinctio nihil.",
+                "lengthInSeconds": 1953754223,
+                "soundsliceSlug": "Sit accusantium id ut odio. Et reprehenderit alias quis totam voluptas quae. Quas rerum fugiat asperiores vel.",
+                "staffPickRating": 375144910,
+                "studentId": 62717361,
+                "vimeoVideoId": "Omnis labore est corrupti praesentium dolores et. Repellendus qui accusamus voluptatibus iusto quos quis velit. Occaecati nisi necessitatibus omnis provident quidem.",
+                "youtubeVideoId": "Enim maxime aut saepe natus aut pariatur cum eum. Non modi dolores cupiditate. Illum aut in nisi quia. Aliquid dolores repellat id beatae hic pariatur."
+            }
+        },
+        {
+            "type": "content",
+            "id": "2",
+            "attributes": {
+                "slug": "Id inventore est enim expedita quia commodi voluptate. Ut ut ducimus repellat non. Sunt in impedit sapiente voluptas autem dolores. Nisi libero voluptas sequi doloremque sit. Facere rem quae inventore. Quaerat dolor distinctio fuga accusamus dolorum.",
+                "type": "course",
+                "sort": "1136220408",
+                "status": "published",
+                "brand": "brand",
+                "language": "Consequuntur quidem harum mollitia recusandae sequi hic dicta. Ea repellat praesentium provident repellendus et. Harum ipsam et et corrupti.",
+                "user": "1",
+                "publishedOn": {
+                    "date": "1998-12-03 19:50:36.000000",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "archivedOn": {
+                    "date": "1989-10-02 17:49:41.000000",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "createdOn": {
+                    "date": "1983-04-10 11:16:10.000000",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "difficulty": "Consequatur sit nostrum ut officiis perspiciatis et et sit. Tempore officia possimus optio voluptatum at cum. Tempore officia dolor et eos qui inventore voluptatibus veniam. Iure id ratione excepturi et.",
+                "homeStaffPickRating": "2103125775",
+                "legacyId": 341536101,
+                "legacyWordpressPostId": 65556271,
+                "qnaVideo": "Omnis corrupti fuga modi aut odio animi odio quos. Voluptas eligendi provident nostrum alias reiciendis optio. Asperiores voluptas sit et dolorem culpa. Nemo corrupti quibusdam debitis ut doloribus quos debitis.",
+                "style": "Qui mollitia at nihil voluptatem numquam velit. Neque quia aut ad debitis eveniet. Quidem minima ipsum incidunt exercitationem exercitationem itaque.",
+                "title": "Tempore maiores nam corrupti voluptatem.",
+                "xp": 921126235,
+                "album": "Sint quo voluptatibus sequi fuga. Optio cum aspernatur vel architecto. Numquam et adipisci laboriosam rem. Quia nam dignissimos illo aliquid deleniti porro.",
+                "artist": "Quia est molestiae nesciunt modi deserunt. Sed at vitae est qui necessitatibus. Hic quas sunt ut odio error aut nihil. Quia est et qui voluptatem cum. Qui consequatur id maxime consequatur dolor non quos.",
+                "bpm": "Repudiandae similique quae aut explicabo vero quia. Tempore nulla saepe temporibus enim id et. Minus et magnam commodi quis voluptas odio. Laboriosam et atque iste. Cum quisquam dolor natus. Aut commodi ut similique harum commodi porro accusantium.",
+                "cdTracks": "Vitae ratione ut omnis ad. Nemo voluptatem error illo libero vel dolorem. Est corporis qui distinctio ipsam. Beatae magni autem ea.",
+                "chordOrScale": "Eos repudiandae beatae fugiat consequatur tempore maiores. Voluptate dolorem fugit sit asperiores odit. Ut exercitationem quae quae earum iure ad. Aut ducimus vel provident quae non consequatur.",
+                "difficultyRange": "Ipsam architecto recusandae a. Voluptatum rerum qui voluptatem itaque libero delectus quia.",
+                "episodeNumber": 1845016899,
+                "exerciseBookPages": "Ut vel consequatur provident id error. Expedita facere impedit ducimus. Pariatur aut accusamus est et sed nihil harum ut. Possimus omnis facere doloribus aliquam. Qui quo rem mollitia eum atque. Ex dolor velit cum molestias aut.",
+                "fastBpm": "Fugiat consequatur eum autem veritatis ipsum. Molestiae aspernatur sint explicabo repellat beatae. Accusantium adipisci impedit aut ut porro aut qui. Aliquam commodi sit excepturi tenetur placeat iure repellendus.",
+                "includesSong": true,
+                "instructors": "Expedita voluptates veritatis consequatur illo dolore sint dolor. Doloribus commodi id quibusdam non ipsam. Eligendi ipsa et itaque facilis aut. Accusantium distinctio tempora optio quibusdam quisquam unde.",
+                "liveEventStartTime": {
+                    "date": "1973-09-23 23:37:24.000000",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "liveEventEndTime": {
+                    "date": "2017-04-06 05:44:17.000000",
+                    "timezone_type": 3,
+                    "timezone": "UTC"
+                },
+                "liveEventYoutubeId": "Consequatur cupiditate molestias placeat atque. Dicta occaecati veritatis sunt minima qui. Voluptates nulla recusandae cupiditate placeat et non rerum. Doloremque est quis voluptas voluptas eveniet odit deserunt.",
+                "liveStreamFeedType": "Dolores sapiente in voluptatem esse. Similique necessitatibus reprehenderit id aut natus nemo ut. Libero aut odio ducimus nesciunt repellendus magnam voluptas. Porro ut voluptatibus voluptatem consequatur.",
+                "name": "Asperiores sed debitis iste reiciendis modi voluptatem debitis. Optio vero est quia repellat reiciendis temporibus. Consectetur accusamus voluptatibus facere occaecati perspiciatis facilis.",
+                "released": "Quidem ullam ipsa minus in debitis eius minus. Velit voluptatum voluptatem quidem fugiat accusamus ipsum. Vero sunt quibusdam expedita at accusamus deleniti ullam. Repellat tenetur animi error rem. Aut sunt et dicta molestiae harum dolorem.",
+                "slowBpm": "Pariatur nulla maiores cumque voluptatem. Qui sint laudantium sint aut eius voluptatem occaecati et. Nobis aut id voluptatibus provident.",
+                "totalXp": "Et ut blanditiis repellat voluptatibus et impedit exercitationem. Modi nam voluptas magnam. Sint repellat rerum quod labore exercitationem nam itaque.",
+                "transcriberName": "A distinctio ducimus nobis sit et quidem. Est aspernatur sed soluta et. Labore excepturi voluptas quaerat voluptas facere. Blanditiis eos ducimus quia non rerum vel repellendus aut. Repellat ut quis dolore et sunt vero.",
+                "week": 257115133,
+                "avatarUrl": "Deleniti dolorem qui hic quia natus ullam. Ut ut praesentium quo recusandae aut sunt.",
+                "lengthInSeconds": 2113101049,
+                "soundsliceSlug": "Recusandae accusamus vitae ea non repellendus. Nulla fuga dignissimos porro neque. Est sed quia nesciunt maiores. Commodi in a sint molestiae nam maiores dolores ut.",
+                "staffPickRating": 2034941493,
+                "studentId": 796409932,
+                "vimeoVideoId": "Eos placeat mollitia explicabo et qui repellat iusto. Consequatur qui aut explicabo sapiente. Aut expedita sed fugit voluptates. Commodi quae vel autem eveniet sit vero cum.",
+                "youtubeVideoId": "Neque ducimus est omnis sed veritatis enim. Aliquam excepturi quidem at suscipit aliquam quia ea eligendi. Ex sequi quaerat dolores libero aut. Odit repudiandae illo adipisci sapiente."
+            },
+            "relationships": {
+                "parent": {
+                    "data": {
+                        "type": "parent",
+                        "id": "1"
+                    }
+                }
             }
         },
         {
             "type": "content",
             "id": "1",
             "attributes": {
-                "slug": "Hic odit ratione tenetur quam. Dolores qui cum consequatur enim natus fuga et illum. Impedit voluptates quis doloribus dolores expedita. Soluta sit ab tempore aut quis quidem eaque. Quaerat quam eius neque itaque fugiat iste.",
+                "slug": "Unde modi amet soluta ipsum dolorem. Rerum facere quo est totam vero quasi facilis. Tempore animi omnis consectetur dolor repudiandae sit fuga. Ipsa qui dignissimos unde dolorem quibusdam quisquam laudantium.",
                 "type": "course",
-                "sort": "1846408275",
+                "sort": "2067485678",
                 "status": "published",
                 "brand": "brand",
-                "language": "Dolores commodi earum ut. Impedit rerum rerum ut officia. Sint nulla voluptatem ducimus beatae explicabo recusandae impedit.",
+                "language": "Ipsa repellendus eos id ut qui nobis odit. Hic harum ipsum illum incidunt vitae. Qui tempora voluptas nulla modi et. Voluptates architecto velit velit et omnis natus consequatur. Dolores rem ipsa alias quia voluptatum libero inventore.",
                 "user": "1",
                 "publishedOn": {
-                    "date": "1989-12-06 00:15:26.000000",
+                    "date": "1977-09-27 19:18:30.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "archivedOn": {
-                    "date": "1973-04-28 07:23:07.000000",
+                    "date": "1988-12-24 01:14:14.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "createdOn": {
-                    "date": "1988-11-29 11:48:05.000000",
+                    "date": "2012-09-17 21:17:41.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "difficulty": "Atque et laboriosam et sint itaque. Tempora consequuntur esse tenetur. Et reprehenderit ut non. Eveniet qui ut quis omnis sint quis aspernatur et.",
-                "homeStaffPickRating": "211594015",
-                "legacyId": 2029105382,
-                "legacyWordpressPostId": 2110749050,
-                "qnaVideo": "Quas ab repudiandae facere aut impedit aspernatur. Est hic dicta ut et quidem aliquid natus. Accusantium asperiores dolorem voluptas quas delectus natus voluptates. Explicabo error quae dolor et neque.",
-                "style": "Accusantium ratione dolores mollitia assumenda voluptates consequatur. Dignissimos dolorum impedit repudiandae fugit. Dignissimos facere amet aut dolores. Nesciunt totam consequatur itaque aut esse ipsum nihil.",
-                "title": "Quasi qui modi ad dolores enim iusto est.",
-                "xp": 465338215,
-                "album": "Enim officia qui aspernatur amet magnam. Ut voluptate et soluta est soluta et eligendi. Aspernatur iusto molestiae perspiciatis veritatis optio. Quidem quas nesciunt ipsum vel. Omnis aut inventore rerum laborum sit.",
-                "artist": "Et omnis ut impedit aut eveniet eos. Beatae magni voluptate maxime alias voluptatibus repellendus et. Qui qui doloribus soluta. Fuga magni laborum eligendi alias nihil. Quod quam veritatis debitis dolorem.",
-                "bpm": "Enim et voluptatem cupiditate. Facere iure id autem. Voluptas aut exercitationem deserunt neque voluptatem.",
-                "cdTracks": "Molestias rerum doloribus sit aut quis quas. Aliquam beatae libero sed. Dolorum quia est aut fuga. Sint omnis id aut occaecati et et natus.",
-                "chordOrScale": "Vitae ut ipsa aliquam impedit accusamus. Molestiae eos laudantium et eum tempore. Asperiores omnis libero natus earum inventore enim id. Eum ducimus libero repudiandae perferendis rerum labore ducimus.",
-                "difficultyRange": "Consequuntur autem pariatur est et. Aspernatur sed ratione nesciunt. Quo porro eum quia ullam eum. Fugiat aut quaerat dolor maiores aut. Illo voluptatem ullam tempora voluptatem. Totam omnis ut molestias consequuntur.",
-                "episodeNumber": 870317541,
-                "exerciseBookPages": "Sed minima voluptatibus qui et ad voluptatem rerum. Nobis et impedit necessitatibus sit. Porro vel numquam laboriosam dicta quod. Porro accusamus nam rerum omnis alias quibusdam praesentium.",
-                "fastBpm": "Cumque in molestiae ea dolore rerum facilis. Et iusto molestiae doloremque. Sint est quia dolor odio voluptatum ea unde. Doloribus autem voluptas et dignissimos eaque. Expedita aut vel a.",
-                "includesSong": true,
-                "instructors": "Sed eum fuga delectus ex. Esse explicabo pariatur quos a. Qui mollitia nisi molestiae dolores adipisci et aut totam. Ut sit sapiente laborum.",
+                "difficulty": "Ut nemo omnis deleniti quos consequatur quia. Et odit magni pariatur soluta qui non.",
+                "homeStaffPickRating": "316288058",
+                "legacyId": 1920143894,
+                "legacyWordpressPostId": 950948364,
+                "qnaVideo": "Voluptates quo tempore ut nihil rerum. Et aut laboriosam et aliquid hic aliquid. Error aut qui illo sint deleniti ut a. Voluptatem mollitia tempora sequi nesciunt ratione rem. Dolores at ut fuga. In amet totam officia autem numquam.",
+                "style": "Qui ducimus possimus odit ut est quam fuga. Qui accusamus esse aliquid. Illum aspernatur quo fugit cumque sequi earum laudantium dolor. Inventore nostrum corporis eum totam magnam.",
+                "title": "Corrupti voluptatem sunt tenetur provident dignissimos.",
+                "xp": 300676256,
+                "album": "Eos labore soluta dolorem id vero ut sit. Laboriosam delectus aut ipsam reprehenderit impedit quasi dicta. Et voluptate ipsa et quis temporibus non rem.",
+                "artist": "Reiciendis soluta sed voluptate consequatur blanditiis. Repellendus sed nihil at occaecati ut. Rerum veritatis inventore sunt molestiae rerum corrupti. Incidunt id ut voluptates modi ducimus quos.",
+                "bpm": "Dolorem error veniam inventore eaque aut. Sed facilis in doloribus vel. Et nobis voluptatem quae consectetur. Voluptatem qui illo et alias aut.",
+                "cdTracks": "Eaque dicta et cupiditate sit ducimus voluptates voluptates et. Quia at eum consequatur sit autem.",
+                "chordOrScale": "Et facilis ratione sunt maiores. Maxime libero minima provident magni facere nostrum. Tempore excepturi quia saepe quia laboriosam vel.",
+                "difficultyRange": "Iusto et officia molestiae aut. Omnis quo ipsa et voluptatum. Non ut quia voluptas adipisci. Assumenda voluptas repellendus minus ad praesentium ut in. Quis expedita a in accusantium et. Officiis voluptas nesciunt id sapiente.",
+                "episodeNumber": 100534324,
+                "exerciseBookPages": "Eligendi non pariatur hic alias. Illo et autem sit velit officiis et. Illum illo dolorem dolores officiis magni illo quo. Dolorem veritatis illo accusantium vel ducimus.",
+                "fastBpm": "Distinctio ut perferendis natus est molestias doloremque. Amet et eius sunt ad autem. Vel quo quas ratione doloribus. Sint error autem ex vel quisquam. Ut totam consequatur repellendus nisi. Cum tenetur vero reprehenderit aut ad maiores.",
+                "includesSong": false,
+                "instructors": "Quo ullam accusamus officiis exercitationem possimus veritatis non sunt. Est in corporis dolor. Nesciunt saepe ratione ex eveniet voluptas qui porro.",
                 "liveEventStartTime": {
-                    "date": "2012-10-01 00:06:20.000000",
+                    "date": "1998-12-31 22:59:10.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "liveEventEndTime": {
-                    "date": "1972-08-02 00:32:19.000000",
+                    "date": "1986-11-25 06:26:37.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "liveEventYoutubeId": "Adipisci est earum reiciendis et quia a. Dolore vel ducimus et occaecati iure sed vel sit. Et voluptatum ut doloribus sunt.",
-                "liveStreamFeedType": "Assumenda soluta similique eligendi. Eos libero sequi assumenda. Tempora et sint adipisci voluptatem magni ex. Ullam nisi nobis tenetur beatae occaecati. Voluptate repudiandae animi minus sint debitis.",
-                "name": "Nostrum nobis minus modi qui sit. Accusantium autem inventore possimus optio dolorum repellat reprehenderit. Consequuntur sed dignissimos voluptatum alias totam.",
-                "released": "Rerum blanditiis optio ut eveniet aut. Vel quo fugiat soluta autem quasi eos quia. Quos provident iusto nostrum officiis deleniti harum.",
-                "slowBpm": "Quidem sequi architecto mollitia natus. Ad sed nulla vitae dolores provident accusamus aliquam. Blanditiis officia qui voluptatem veritatis porro tenetur voluptate.",
-                "totalXp": "Qui minus unde et nobis. Voluptatem sed veritatis non sit iusto. Exercitationem est doloremque rerum dolorem rerum laudantium rem. Sit ea porro cumque autem.",
-                "transcriberName": "Enim enim consequatur ut optio. Mollitia fugit error qui quia dolor et sed vel. Nobis rerum nam est eaque aut.",
-                "week": 1549229504,
-                "avatarUrl": "Amet qui voluptas consequatur expedita facere aut nihil. Et sit autem laboriosam sunt beatae. Magni explicabo et eos nihil tenetur et et. Doloremque dolorum animi corrupti architecto.",
-                "lengthInSeconds": 1889120521,
-                "soundsliceSlug": "At rerum totam et et. Suscipit in quaerat velit sunt provident dolorem ducimus. Quae ea pariatur tempore odit in et.",
-                "staffPickRating": 1882244654,
-                "studentId": 1107745055,
-                "vimeoVideoId": "Qui similique dolor doloremque rerum deserunt error velit nihil. Ut vel laboriosam dicta numquam nam ad assumenda exercitationem. Unde est voluptatibus error repudiandae eius id esse. Odio quibusdam labore sed maxime.",
-                "youtubeVideoId": "Voluptas eaque ipsum in quod perferendis qui provident. Nemo minus quos minus deserunt delectus magnam. Ducimus impedit provident cupiditate dolorem. Nihil dolor deserunt nihil repellat. Ad assumenda nam molestiae qui."
+                "liveEventYoutubeId": "Consequatur qui rerum iste vel qui non nisi. Doloremque odio ad dicta minima omnis dolores. Dolore qui nostrum dolore deserunt molestiae.",
+                "liveStreamFeedType": "Est fuga et qui esse asperiores impedit vel quas. Et quisquam qui enim aliquid assumenda. Iure quo officiis maxime earum consectetur impedit rerum similique. Consectetur architecto praesentium ut eos doloremque voluptas quam natus.",
+                "name": "Error veniam iusto non aliquam ea voluptas amet. Facilis minima laudantium at itaque. Est nihil qui inventore quo. Id atque et eaque voluptas. Vero dolorem sapiente consequuntur ad eius laudantium veritatis.",
+                "released": "Error sed velit molestiae. Ut minima est repellat. Fuga iusto facilis ipsum vel at. Quam laboriosam libero nam voluptatum.",
+                "slowBpm": "Provident distinctio omnis qui consequatur fugiat. Iure a et aliquid eligendi alias quia quis. Fugiat et provident eos atque aut.",
+                "totalXp": "Tenetur sed et aut provident. Dolorem alias suscipit pariatur. Cumque dolor et corrupti fuga qui eum minus. Perspiciatis aspernatur est voluptatibus sit laudantium ut reiciendis. Quia quia quis iste.",
+                "transcriberName": "Sed quia natus cumque perferendis ut aliquam. Odio repellat nihil fugit sed laboriosam. Omnis accusantium est facilis sint exercitationem.",
+                "week": 334193965,
+                "avatarUrl": "Dolor quia commodi maiores. Et libero in sapiente tenetur. Quis voluptates doloribus labore quis enim nam. Ut rerum nihil sint minima distinctio possimus. Dicta quo eos doloribus aut nemo quaerat aut asperiores.",
+                "lengthInSeconds": 1953132732,
+                "soundsliceSlug": "Qui est quia voluptatem repellat natus atque aperiam. Quod eum dolor facere dolores quos. Libero in error quis consequatur cupiditate et eos veniam. Nesciunt repellendus laborum sit adipisci et explicabo iusto quam.",
+                "staffPickRating": 961041226,
+                "studentId": 524121876,
+                "vimeoVideoId": "Repellat rerum quasi porro corrupti fugit. Sunt dolores temporibus ipsum a. Sit accusantium cum optio quis odio.",
+                "youtubeVideoId": "Nesciunt nihil ullam quo soluta sunt esse. Odio architecto eligendi amet ex velit. Impedit aliquam nulla beatae voluptas voluptatem. A quia modi quae aut. Corrupti quibusdam inventore rerum qui quibusdam ipsa et."
             },
             "relationships": {
                 "data": {
@@ -229,86 +300,6 @@ $.ajax({
                     ]
                 }
             }
-        },
-        {
-            "type": "content",
-            "id": "2",
-            "attributes": {
-                "slug": "Accusantium odit sit accusantium. Excepturi dolor quis reiciendis sapiente minima maxime nemo. Quisquam numquam qui odit labore. Eveniet aut qui laboriosam reprehenderit.",
-                "type": "course",
-                "sort": "1207045682",
-                "status": "published",
-                "brand": "brand",
-                "language": "Aut velit repudiandae quia aliquid magni quos minima ut. Minus eligendi commodi tenetur accusantium ducimus quia. Reiciendis quasi et eius fugit aut quam. Sit quibusdam labore sint.",
-                "user": "1",
-                "publishedOn": {
-                    "date": "1975-05-07 00:00:50.000000",
-                    "timezone_type": 3,
-                    "timezone": "UTC"
-                },
-                "archivedOn": {
-                    "date": "2005-01-27 04:47:32.000000",
-                    "timezone_type": 3,
-                    "timezone": "UTC"
-                },
-                "createdOn": {
-                    "date": "1989-12-14 17:50:08.000000",
-                    "timezone_type": 3,
-                    "timezone": "UTC"
-                },
-                "difficulty": "Earum tempora placeat placeat sunt placeat magnam. Officiis repellat vero consequuntur velit. Facere magni repellat quisquam rerum quis. Tempore eligendi error sunt itaque et. Laudantium magnam recusandae eos minima amet odit.",
-                "homeStaffPickRating": "651830587",
-                "legacyId": 135314308,
-                "legacyWordpressPostId": 136174500,
-                "qnaVideo": "Fugit dolorum ducimus modi quis quis fugit quis. Accusantium nobis exercitationem nobis nisi quam ex unde. Ducimus est et qui. Ut quis qui vitae blanditiis eum.",
-                "style": "Placeat sapiente enim sequi est qui quia non. Animi ratione sed eligendi id. Eos distinctio eos illum voluptatem. Doloribus illo sit dignissimos vel.",
-                "title": "Quos distinctio ducimus at.",
-                "xp": 1916995098,
-                "album": "Dolor inventore eos est quo unde quae similique aperiam. Consequatur aut laudantium qui et incidunt. Amet officia et cumque illo et quia quia adipisci. Tempora reprehenderit necessitatibus eaque distinctio.",
-                "artist": "Voluptas quia at ut perspiciatis. Iste ut quaerat nemo sed. Quam velit sint nisi dolores et. Cupiditate et qui aliquid dolorem consequatur.",
-                "bpm": "Praesentium praesentium tenetur explicabo quasi. Minima velit rerum autem. Dolor quis doloremque quis aut nemo necessitatibus illum. Praesentium reprehenderit maxime harum commodi adipisci aut sunt.",
-                "cdTracks": "Voluptatem sunt rerum placeat doloremque. Quibusdam et sunt asperiores. Ut velit est facere vero voluptatem ratione earum mollitia.",
-                "chordOrScale": "Vero incidunt non voluptas pariatur aut. Odio quam fuga accusamus ducimus quis magnam consectetur. Iste non in perferendis esse sit eius odit.",
-                "difficultyRange": "Omnis mollitia eos qui. Vitae aut voluptatem nemo nesciunt et. Optio dolore velit optio voluptas perferendis maiores doloribus.",
-                "episodeNumber": 1443553567,
-                "exerciseBookPages": "Sed nulla et a ab est doloremque ex. Recusandae officiis quis voluptatem id earum iusto. Qui pariatur vitae exercitationem aut maiores eveniet facere natus.",
-                "fastBpm": "Provident tempora temporibus sit enim rem. Molestiae atque sit asperiores commodi. Quasi dolores aperiam libero sit numquam.",
-                "includesSong": true,
-                "instructors": "Magni maxime quam voluptas. Sunt fugit quasi deleniti sint amet omnis voluptas. Odio et est ducimus aut quisquam accusamus dolor quis. Dolor ex ratione aut enim provident.",
-                "liveEventStartTime": {
-                    "date": "2013-09-11 06:48:04.000000",
-                    "timezone_type": 3,
-                    "timezone": "UTC"
-                },
-                "liveEventEndTime": {
-                    "date": "1979-04-29 10:51:03.000000",
-                    "timezone_type": 3,
-                    "timezone": "UTC"
-                },
-                "liveEventYoutubeId": "Provident laboriosam labore est voluptate et qui minus. Perferendis corporis ipsum qui et. In esse sed quos accusamus. Aut voluptatum maiores aliquid sunt cupiditate blanditiis.",
-                "liveStreamFeedType": "Ut aut sed aut. Consequatur tempora provident nihil ut. Fugit nihil cum officiis. Quis et laborum esse sit. Explicabo voluptatem tempora non deleniti autem. Nemo et beatae iste. Doloribus perspiciatis ut autem.",
-                "name": "Et et molestiae placeat iure eum. Aliquid sed placeat at iste voluptatibus. Quo repellendus nisi distinctio.",
-                "released": "Voluptas deserunt enim vero quam enim quasi veniam. Quia rerum eaque necessitatibus laudantium reprehenderit unde cupiditate. Magni sed porro molestiae eveniet.",
-                "slowBpm": "Et est maiores illo consequatur beatae. Vitae maxime quaerat illum saepe ipsum. Harum omnis iure nihil cumque quas. Recusandae eum iste debitis et reiciendis sit. Fugiat dolores quo quod. Suscipit eos quis et minima qui est.",
-                "totalXp": "Qui voluptatibus enim architecto est. Reiciendis iure corrupti vel beatae est. Aut delectus numquam ut ab suscipit. Sint et et illum deserunt ipsa.",
-                "transcriberName": "Ullam sunt et dolorem commodi ipsam omnis sapiente totam. Ut sunt sed nihil sint beatae ut voluptas. In eos quis nihil voluptatem. Totam et in et reiciendis omnis ducimus.",
-                "week": 1943046946,
-                "avatarUrl": "Laboriosam tenetur porro harum totam odio numquam beatae. Modi commodi omnis exercitationem quasi dolorem ea. Alias expedita ut ut quo.",
-                "lengthInSeconds": 251143756,
-                "soundsliceSlug": "Nesciunt quia vero voluptas suscipit illo aliquam. Quae nostrum qui dolorem similique odio. Molestias natus aut velit sit nihil. Quis repellendus veritatis consequuntur mollitia.",
-                "staffPickRating": 431525804,
-                "studentId": 97158999,
-                "vimeoVideoId": "Quia aut et quia harum quo. Pariatur aspernatur magni eos consequatur ea. Sequi dolorum eligendi nihil sed. Praesentium perspiciatis quasi incidunt aut iusto nisi. Nostrum praesentium dolores eos consectetur quis.",
-                "youtubeVideoId": "Quidem eum sed accusamus sint voluptates sapiente sit saepe. Veritatis commodi dignissimos optio error dolore occaecati quibusdam. Voluptatem repellat nihil quisquam repellendus vitae neque eveniet."
-            },
-            "relationships": {
-                "parent": {
-                    "data": {
-                        "type": "parent",
-                        "id": "1"
-                    }
-                }
-            }
         }
     ],
     "included": [
@@ -316,100 +307,100 @@ $.ajax({
             "type": "parent",
             "id": "1",
             "attributes": {
-                "slug": "Hic odit ratione tenetur quam. Dolores qui cum consequatur enim natus fuga et illum. Impedit voluptates quis doloribus dolores expedita. Soluta sit ab tempore aut quis quidem eaque. Quaerat quam eius neque itaque fugiat iste.",
+                "slug": "Unde modi amet soluta ipsum dolorem. Rerum facere quo est totam vero quasi facilis. Tempore animi omnis consectetur dolor repudiandae sit fuga. Ipsa qui dignissimos unde dolorem quibusdam quisquam laudantium.",
                 "type": "course",
-                "sort": "1846408275",
+                "sort": "2067485678",
                 "status": "published",
                 "brand": "brand",
-                "language": "Dolores commodi earum ut. Impedit rerum rerum ut officia. Sint nulla voluptatem ducimus beatae explicabo recusandae impedit.",
+                "language": "Ipsa repellendus eos id ut qui nobis odit. Hic harum ipsum illum incidunt vitae. Qui tempora voluptas nulla modi et. Voluptates architecto velit velit et omnis natus consequatur. Dolores rem ipsa alias quia voluptatum libero inventore.",
                 "user": "1",
                 "published_on": {
-                    "date": "1989-12-06 00:15:26.000000",
+                    "date": "1977-09-27 19:18:30.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "archived_on": {
-                    "date": "1973-04-28 07:23:07.000000",
+                    "date": "1988-12-24 01:14:14.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "created_on": {
-                    "date": "1988-11-29 11:48:05.000000",
+                    "date": "2012-09-17 21:17:41.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "difficulty": "Atque et laboriosam et sint itaque. Tempora consequuntur esse tenetur. Et reprehenderit ut non. Eveniet qui ut quis omnis sint quis aspernatur et.",
-                "home_staff_pick_rating": "211594015",
-                "legacy_id": 2029105382,
-                "legacy_wordpress_post_id": 2110749050,
-                "qna_video": "Quas ab repudiandae facere aut impedit aspernatur. Est hic dicta ut et quidem aliquid natus. Accusantium asperiores dolorem voluptas quas delectus natus voluptates. Explicabo error quae dolor et neque.",
-                "style": "Accusantium ratione dolores mollitia assumenda voluptates consequatur. Dignissimos dolorum impedit repudiandae fugit. Dignissimos facere amet aut dolores. Nesciunt totam consequatur itaque aut esse ipsum nihil.",
-                "title": "Quasi qui modi ad dolores enim iusto est.",
-                "xp": 465338215,
-                "album": "Enim officia qui aspernatur amet magnam. Ut voluptate et soluta est soluta et eligendi. Aspernatur iusto molestiae perspiciatis veritatis optio. Quidem quas nesciunt ipsum vel. Omnis aut inventore rerum laborum sit.",
-                "artist": "Et omnis ut impedit aut eveniet eos. Beatae magni voluptate maxime alias voluptatibus repellendus et. Qui qui doloribus soluta. Fuga magni laborum eligendi alias nihil. Quod quam veritatis debitis dolorem.",
-                "bpm": "Enim et voluptatem cupiditate. Facere iure id autem. Voluptas aut exercitationem deserunt neque voluptatem.",
-                "cd_tracks": "Molestias rerum doloribus sit aut quis quas. Aliquam beatae libero sed. Dolorum quia est aut fuga. Sint omnis id aut occaecati et et natus.",
-                "chord_or_scale": "Vitae ut ipsa aliquam impedit accusamus. Molestiae eos laudantium et eum tempore. Asperiores omnis libero natus earum inventore enim id. Eum ducimus libero repudiandae perferendis rerum labore ducimus.",
-                "difficulty_range": "Consequuntur autem pariatur est et. Aspernatur sed ratione nesciunt. Quo porro eum quia ullam eum. Fugiat aut quaerat dolor maiores aut. Illo voluptatem ullam tempora voluptatem. Totam omnis ut molestias consequuntur.",
-                "episode_number": 870317541,
-                "exercise_book_pages": "Sed minima voluptatibus qui et ad voluptatem rerum. Nobis et impedit necessitatibus sit. Porro vel numquam laboriosam dicta quod. Porro accusamus nam rerum omnis alias quibusdam praesentium.",
-                "fast_bpm": "Cumque in molestiae ea dolore rerum facilis. Et iusto molestiae doloremque. Sint est quia dolor odio voluptatum ea unde. Doloribus autem voluptas et dignissimos eaque. Expedita aut vel a.",
-                "includes_song": true,
-                "instructors": "Sed eum fuga delectus ex. Esse explicabo pariatur quos a. Qui mollitia nisi molestiae dolores adipisci et aut totam. Ut sit sapiente laborum.",
+                "difficulty": "Ut nemo omnis deleniti quos consequatur quia. Et odit magni pariatur soluta qui non.",
+                "home_staff_pick_rating": "316288058",
+                "legacy_id": 1920143894,
+                "legacy_wordpress_post_id": 950948364,
+                "qna_video": "Voluptates quo tempore ut nihil rerum. Et aut laboriosam et aliquid hic aliquid. Error aut qui illo sint deleniti ut a. Voluptatem mollitia tempora sequi nesciunt ratione rem. Dolores at ut fuga. In amet totam officia autem numquam.",
+                "style": "Qui ducimus possimus odit ut est quam fuga. Qui accusamus esse aliquid. Illum aspernatur quo fugit cumque sequi earum laudantium dolor. Inventore nostrum corporis eum totam magnam.",
+                "title": "Corrupti voluptatem sunt tenetur provident dignissimos.",
+                "xp": 300676256,
+                "album": "Eos labore soluta dolorem id vero ut sit. Laboriosam delectus aut ipsam reprehenderit impedit quasi dicta. Et voluptate ipsa et quis temporibus non rem.",
+                "artist": "Reiciendis soluta sed voluptate consequatur blanditiis. Repellendus sed nihil at occaecati ut. Rerum veritatis inventore sunt molestiae rerum corrupti. Incidunt id ut voluptates modi ducimus quos.",
+                "bpm": "Dolorem error veniam inventore eaque aut. Sed facilis in doloribus vel. Et nobis voluptatem quae consectetur. Voluptatem qui illo et alias aut.",
+                "cd_tracks": "Eaque dicta et cupiditate sit ducimus voluptates voluptates et. Quia at eum consequatur sit autem.",
+                "chord_or_scale": "Et facilis ratione sunt maiores. Maxime libero minima provident magni facere nostrum. Tempore excepturi quia saepe quia laboriosam vel.",
+                "difficulty_range": "Iusto et officia molestiae aut. Omnis quo ipsa et voluptatum. Non ut quia voluptas adipisci. Assumenda voluptas repellendus minus ad praesentium ut in. Quis expedita a in accusantium et. Officiis voluptas nesciunt id sapiente.",
+                "episode_number": 100534324,
+                "exercise_book_pages": "Eligendi non pariatur hic alias. Illo et autem sit velit officiis et. Illum illo dolorem dolores officiis magni illo quo. Dolorem veritatis illo accusantium vel ducimus.",
+                "fast_bpm": "Distinctio ut perferendis natus est molestias doloremque. Amet et eius sunt ad autem. Vel quo quas ratione doloribus. Sint error autem ex vel quisquam. Ut totam consequatur repellendus nisi. Cum tenetur vero reprehenderit aut ad maiores.",
+                "includes_song": false,
+                "instructors": "Quo ullam accusamus officiis exercitationem possimus veritatis non sunt. Est in corporis dolor. Nesciunt saepe ratione ex eveniet voluptas qui porro.",
                 "live_event_start_time": {
-                    "date": "2012-10-01 00:06:20.000000",
+                    "date": "1998-12-31 22:59:10.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "live_event_end_time": {
-                    "date": "1972-08-02 00:32:19.000000",
+                    "date": "1986-11-25 06:26:37.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "live_event_youtube_id": "Adipisci est earum reiciendis et quia a. Dolore vel ducimus et occaecati iure sed vel sit. Et voluptatum ut doloribus sunt.",
-                "live_stream_feed_type": "Assumenda soluta similique eligendi. Eos libero sequi assumenda. Tempora et sint adipisci voluptatem magni ex. Ullam nisi nobis tenetur beatae occaecati. Voluptate repudiandae animi minus sint debitis.",
-                "name": "Nostrum nobis minus modi qui sit. Accusantium autem inventore possimus optio dolorum repellat reprehenderit. Consequuntur sed dignissimos voluptatum alias totam.",
-                "released": "Rerum blanditiis optio ut eveniet aut. Vel quo fugiat soluta autem quasi eos quia. Quos provident iusto nostrum officiis deleniti harum.",
-                "slow_bpm": "Quidem sequi architecto mollitia natus. Ad sed nulla vitae dolores provident accusamus aliquam. Blanditiis officia qui voluptatem veritatis porro tenetur voluptate.",
-                "total_xp": "Qui minus unde et nobis. Voluptatem sed veritatis non sit iusto. Exercitationem est doloremque rerum dolorem rerum laudantium rem. Sit ea porro cumque autem.",
-                "transcriber_name": "Enim enim consequatur ut optio. Mollitia fugit error qui quia dolor et sed vel. Nobis rerum nam est eaque aut.",
-                "week": 1549229504,
-                "avatar_url": "Amet qui voluptas consequatur expedita facere aut nihil. Et sit autem laboriosam sunt beatae. Magni explicabo et eos nihil tenetur et et. Doloremque dolorum animi corrupti architecto.",
-                "length_in_seconds": 1889120521,
-                "soundslice_slug": "At rerum totam et et. Suscipit in quaerat velit sunt provident dolorem ducimus. Quae ea pariatur tempore odit in et.",
-                "staff_pick_rating": 1882244654,
-                "student_id": 1107745055,
-                "vimeo_video_id": "Qui similique dolor doloremque rerum deserunt error velit nihil. Ut vel laboriosam dicta numquam nam ad assumenda exercitationem. Unde est voluptatibus error repudiandae eius id esse. Odio quibusdam labore sed maxime.",
-                "youtube_video_id": "Voluptas eaque ipsum in quod perferendis qui provident. Nemo minus quos minus deserunt delectus magnam. Ducimus impedit provident cupiditate dolorem. Nihil dolor deserunt nihil repellat. Ad assumenda nam molestiae qui."
+                "live_event_youtube_id": "Consequatur qui rerum iste vel qui non nisi. Doloremque odio ad dicta minima omnis dolores. Dolore qui nostrum dolore deserunt molestiae.",
+                "live_stream_feed_type": "Est fuga et qui esse asperiores impedit vel quas. Et quisquam qui enim aliquid assumenda. Iure quo officiis maxime earum consectetur impedit rerum similique. Consectetur architecto praesentium ut eos doloremque voluptas quam natus.",
+                "name": "Error veniam iusto non aliquam ea voluptas amet. Facilis minima laudantium at itaque. Est nihil qui inventore quo. Id atque et eaque voluptas. Vero dolorem sapiente consequuntur ad eius laudantium veritatis.",
+                "released": "Error sed velit molestiae. Ut minima est repellat. Fuga iusto facilis ipsum vel at. Quam laboriosam libero nam voluptatum.",
+                "slow_bpm": "Provident distinctio omnis qui consequatur fugiat. Iure a et aliquid eligendi alias quia quis. Fugiat et provident eos atque aut.",
+                "total_xp": "Tenetur sed et aut provident. Dolorem alias suscipit pariatur. Cumque dolor et corrupti fuga qui eum minus. Perspiciatis aspernatur est voluptatibus sit laudantium ut reiciendis. Quia quia quis iste.",
+                "transcriber_name": "Sed quia natus cumque perferendis ut aliquam. Odio repellat nihil fugit sed laboriosam. Omnis accusantium est facilis sint exercitationem.",
+                "week": 334193965,
+                "avatar_url": "Dolor quia commodi maiores. Et libero in sapiente tenetur. Quis voluptates doloribus labore quis enim nam. Ut rerum nihil sint minima distinctio possimus. Dicta quo eos doloribus aut nemo quaerat aut asperiores.",
+                "length_in_seconds": 1953132732,
+                "soundslice_slug": "Qui est quia voluptatem repellat natus atque aperiam. Quod eum dolor facere dolores quos. Libero in error quis consequatur cupiditate et eos veniam. Nesciunt repellendus laborum sit adipisci et explicabo iusto quam.",
+                "staff_pick_rating": 961041226,
+                "student_id": 524121876,
+                "vimeo_video_id": "Repellat rerum quasi porro corrupti fugit. Sunt dolores temporibus ipsum a. Sit accusantium cum optio quis odio.",
+                "youtube_video_id": "Nesciunt nihil ullam quo soluta sunt esse. Odio architecto eligendi amet ex velit. Impedit aliquam nulla beatae voluptas voluptatem. A quia modi quae aut. Corrupti quibusdam inventore rerum qui quibusdam ipsa et."
             }
         },
         {
             "type": "contentData",
             "id": "1",
             "attributes": {
-                "key": "In voluptas rerum iure at sunt et voluptatem et. Nesciunt est qui sit et. Quis vero aliquam temporibus inventore et aperiam. Maiores eaque illum iste sunt deserunt et.",
-                "value": "Eligendi aut nisi et. Autem voluptatibus et autem sed accusamus facilis eligendi. Aut in veniam est. Et aut cum eaque laborum. Quo necessitatibus saepe odit nostrum sequi quae. Atque reprehenderit ut quo aut molestias.",
-                "position": 1114424162
+                "key": "Fugit tenetur praesentium quae eum deleniti. Temporibus voluptatem eius sit id. Et quas in reprehenderit eligendi reiciendis ex perspiciatis.",
+                "value": "Eum nemo eos quia repellat quaerat animi accusantium. Vel odit corrupti ea dolorem dolor. Minima reiciendis occaecati reprehenderit et nisi. Aliquam aut sit laborum ut perspiciatis. Quasi ut cum tempora tempore mollitia omnis.",
+                "position": 6071148
             }
         }
     ],
     "meta": {
         "filterOption": {
             "difficulty": [
-                "Atque et laboriosam et sint itaque. Tempora consequuntur esse tenetur. Et reprehenderit ut non. Eveniet qui ut quis omnis sint quis aspernatur et.",
-                "Earum tempora placeat placeat sunt placeat magnam. Officiis repellat vero consequuntur velit. Facere magni repellat quisquam rerum quis. Tempore eligendi error sunt itaque et. Laudantium magnam recusandae eos minima amet odit.",
-                "At illum repudiandae eum laboriosam sunt error. Numquam maxime accusantium voluptate et laudantium quia eligendi. Iure quasi ad aliquam. Praesentium soluta et minus maxime et. Voluptatem doloribus et inventore consequuntur quia. Iste enim quos aut."
+                "Ut nemo omnis deleniti quos consequatur quia. Et odit magni pariatur soluta qui non.",
+                "Consequatur sit nostrum ut officiis perspiciatis et et sit. Tempore officia possimus optio voluptatum at cum. Tempore officia dolor et eos qui inventore voluptatibus veniam. Iure id ratione excepturi et.",
+                "Vel dolorem beatae inventore. Dolor ducimus quia velit ipsum voluptatem nulla dolores. Fugiat sit porro ad quis nobis quisquam accusantium."
             ],
             "style": [
-                "Accusantium ratione dolores mollitia assumenda voluptates consequatur. Dignissimos dolorum impedit repudiandae fugit. Dignissimos facere amet aut dolores. Nesciunt totam consequatur itaque aut esse ipsum nihil.",
-                "Placeat sapiente enim sequi est qui quia non. Animi ratione sed eligendi id. Eos distinctio eos illum voluptatem. Doloribus illo sit dignissimos vel.",
-                "Rerum sunt perspiciatis sequi voluptatem inventore nisi reiciendis. Et quia rem ducimus. Beatae quo dolorum facere ducimus nobis."
+                "Qui ducimus possimus odit ut est quam fuga. Qui accusamus esse aliquid. Illum aspernatur quo fugit cumque sequi earum laudantium dolor. Inventore nostrum corporis eum totam magnam.",
+                "Qui mollitia at nihil voluptatem numquam velit. Neque quia aut ad debitis eveniet. Quidem minima ipsum incidunt exercitationem exercitationem itaque.",
+                "Dicta quia sint deserunt quia. Occaecati quam provident voluptas labore ad unde. Odit in sed id enim occaecati. Doloribus voluptates et sed praesentium sit autem dolorem velit."
             ],
             "artist": [
-                "Et omnis ut impedit aut eveniet eos. Beatae magni voluptate maxime alias voluptatibus repellendus et. Qui qui doloribus soluta. Fuga magni laborum eligendi alias nihil. Quod quam veritatis debitis dolorem.",
-                "Voluptas quia at ut perspiciatis. Iste ut quaerat nemo sed. Quam velit sint nisi dolores et. Cupiditate et qui aliquid dolorem consequatur.",
-                "Quam ut velit qui magnam. Et totam recusandae ab et esse quo. Ea recusandae fugiat accusantium illum sed. Est voluptatum odit ut."
+                "Reiciendis soluta sed voluptate consequatur blanditiis. Repellendus sed nihil at occaecati ut. Rerum veritatis inventore sunt molestiae rerum corrupti. Incidunt id ut voluptates modi ducimus quos.",
+                "Quia est molestiae nesciunt modi deserunt. Sed at vitae est qui necessitatibus. Hic quas sunt ut odio error aut nihil. Quia est et qui voluptatem cum. Qui consequatur id maxime consequatur dolor non quos.",
+                "Eum quia doloribus et perspiciatis qui reprehenderit illum. Id vero labore suscipit et pariatur autem. Molestiae dolorem occaecati repudiandae doloremque alias ad. Quia eum rem quam assumenda."
             ]
         },
         "pagination": {
@@ -471,72 +462,72 @@ $.ajax({
             "type": "content",
             "id": "2",
             "attributes": {
-                "slug": "Accusantium odit sit accusantium. Excepturi dolor quis reiciendis sapiente minima maxime nemo. Quisquam numquam qui odit labore. Eveniet aut qui laboriosam reprehenderit.",
+                "slug": "Id inventore est enim expedita quia commodi voluptate. Ut ut ducimus repellat non. Sunt in impedit sapiente voluptas autem dolores. Nisi libero voluptas sequi doloremque sit. Facere rem quae inventore. Quaerat dolor distinctio fuga accusamus dolorum.",
                 "type": "course",
-                "sort": "1207045682",
+                "sort": "1136220408",
                 "status": "published",
                 "brand": "brand",
-                "language": "Aut velit repudiandae quia aliquid magni quos minima ut. Minus eligendi commodi tenetur accusantium ducimus quia. Reiciendis quasi et eius fugit aut quam. Sit quibusdam labore sint.",
+                "language": "Consequuntur quidem harum mollitia recusandae sequi hic dicta. Ea repellat praesentium provident repellendus et. Harum ipsam et et corrupti.",
                 "user": "1",
                 "publishedOn": {
-                    "date": "1975-05-07 00:00:50.000000",
+                    "date": "1998-12-03 19:50:36.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "archivedOn": {
-                    "date": "2005-01-27 04:47:32.000000",
+                    "date": "1989-10-02 17:49:41.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "createdOn": {
-                    "date": "1989-12-14 17:50:08.000000",
+                    "date": "1983-04-10 11:16:10.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "difficulty": "Earum tempora placeat placeat sunt placeat magnam. Officiis repellat vero consequuntur velit. Facere magni repellat quisquam rerum quis. Tempore eligendi error sunt itaque et. Laudantium magnam recusandae eos minima amet odit.",
-                "homeStaffPickRating": "651830587",
-                "legacyId": 135314308,
-                "legacyWordpressPostId": 136174500,
-                "qnaVideo": "Fugit dolorum ducimus modi quis quis fugit quis. Accusantium nobis exercitationem nobis nisi quam ex unde. Ducimus est et qui. Ut quis qui vitae blanditiis eum.",
-                "style": "Placeat sapiente enim sequi est qui quia non. Animi ratione sed eligendi id. Eos distinctio eos illum voluptatem. Doloribus illo sit dignissimos vel.",
-                "title": "Quos distinctio ducimus at.",
-                "xp": 1916995098,
-                "album": "Dolor inventore eos est quo unde quae similique aperiam. Consequatur aut laudantium qui et incidunt. Amet officia et cumque illo et quia quia adipisci. Tempora reprehenderit necessitatibus eaque distinctio.",
-                "artist": "Voluptas quia at ut perspiciatis. Iste ut quaerat nemo sed. Quam velit sint nisi dolores et. Cupiditate et qui aliquid dolorem consequatur.",
-                "bpm": "Praesentium praesentium tenetur explicabo quasi. Minima velit rerum autem. Dolor quis doloremque quis aut nemo necessitatibus illum. Praesentium reprehenderit maxime harum commodi adipisci aut sunt.",
-                "cdTracks": "Voluptatem sunt rerum placeat doloremque. Quibusdam et sunt asperiores. Ut velit est facere vero voluptatem ratione earum mollitia.",
-                "chordOrScale": "Vero incidunt non voluptas pariatur aut. Odio quam fuga accusamus ducimus quis magnam consectetur. Iste non in perferendis esse sit eius odit.",
-                "difficultyRange": "Omnis mollitia eos qui. Vitae aut voluptatem nemo nesciunt et. Optio dolore velit optio voluptas perferendis maiores doloribus.",
-                "episodeNumber": 1443553567,
-                "exerciseBookPages": "Sed nulla et a ab est doloremque ex. Recusandae officiis quis voluptatem id earum iusto. Qui pariatur vitae exercitationem aut maiores eveniet facere natus.",
-                "fastBpm": "Provident tempora temporibus sit enim rem. Molestiae atque sit asperiores commodi. Quasi dolores aperiam libero sit numquam.",
+                "difficulty": "Consequatur sit nostrum ut officiis perspiciatis et et sit. Tempore officia possimus optio voluptatum at cum. Tempore officia dolor et eos qui inventore voluptatibus veniam. Iure id ratione excepturi et.",
+                "homeStaffPickRating": "2103125775",
+                "legacyId": 341536101,
+                "legacyWordpressPostId": 65556271,
+                "qnaVideo": "Omnis corrupti fuga modi aut odio animi odio quos. Voluptas eligendi provident nostrum alias reiciendis optio. Asperiores voluptas sit et dolorem culpa. Nemo corrupti quibusdam debitis ut doloribus quos debitis.",
+                "style": "Qui mollitia at nihil voluptatem numquam velit. Neque quia aut ad debitis eveniet. Quidem minima ipsum incidunt exercitationem exercitationem itaque.",
+                "title": "Tempore maiores nam corrupti voluptatem.",
+                "xp": 921126235,
+                "album": "Sint quo voluptatibus sequi fuga. Optio cum aspernatur vel architecto. Numquam et adipisci laboriosam rem. Quia nam dignissimos illo aliquid deleniti porro.",
+                "artist": "Quia est molestiae nesciunt modi deserunt. Sed at vitae est qui necessitatibus. Hic quas sunt ut odio error aut nihil. Quia est et qui voluptatem cum. Qui consequatur id maxime consequatur dolor non quos.",
+                "bpm": "Repudiandae similique quae aut explicabo vero quia. Tempore nulla saepe temporibus enim id et. Minus et magnam commodi quis voluptas odio. Laboriosam et atque iste. Cum quisquam dolor natus. Aut commodi ut similique harum commodi porro accusantium.",
+                "cdTracks": "Vitae ratione ut omnis ad. Nemo voluptatem error illo libero vel dolorem. Est corporis qui distinctio ipsam. Beatae magni autem ea.",
+                "chordOrScale": "Eos repudiandae beatae fugiat consequatur tempore maiores. Voluptate dolorem fugit sit asperiores odit. Ut exercitationem quae quae earum iure ad. Aut ducimus vel provident quae non consequatur.",
+                "difficultyRange": "Ipsam architecto recusandae a. Voluptatum rerum qui voluptatem itaque libero delectus quia.",
+                "episodeNumber": 1845016899,
+                "exerciseBookPages": "Ut vel consequatur provident id error. Expedita facere impedit ducimus. Pariatur aut accusamus est et sed nihil harum ut. Possimus omnis facere doloribus aliquam. Qui quo rem mollitia eum atque. Ex dolor velit cum molestias aut.",
+                "fastBpm": "Fugiat consequatur eum autem veritatis ipsum. Molestiae aspernatur sint explicabo repellat beatae. Accusantium adipisci impedit aut ut porro aut qui. Aliquam commodi sit excepturi tenetur placeat iure repellendus.",
                 "includesSong": true,
-                "instructors": "Magni maxime quam voluptas. Sunt fugit quasi deleniti sint amet omnis voluptas. Odio et est ducimus aut quisquam accusamus dolor quis. Dolor ex ratione aut enim provident.",
+                "instructors": "Expedita voluptates veritatis consequatur illo dolore sint dolor. Doloribus commodi id quibusdam non ipsam. Eligendi ipsa et itaque facilis aut. Accusantium distinctio tempora optio quibusdam quisquam unde.",
                 "liveEventStartTime": {
-                    "date": "2013-09-11 06:48:04.000000",
+                    "date": "1973-09-23 23:37:24.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "liveEventEndTime": {
-                    "date": "1979-04-29 10:51:03.000000",
+                    "date": "2017-04-06 05:44:17.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "liveEventYoutubeId": "Provident laboriosam labore est voluptate et qui minus. Perferendis corporis ipsum qui et. In esse sed quos accusamus. Aut voluptatum maiores aliquid sunt cupiditate blanditiis.",
-                "liveStreamFeedType": "Ut aut sed aut. Consequatur tempora provident nihil ut. Fugit nihil cum officiis. Quis et laborum esse sit. Explicabo voluptatem tempora non deleniti autem. Nemo et beatae iste. Doloribus perspiciatis ut autem.",
-                "name": "Et et molestiae placeat iure eum. Aliquid sed placeat at iste voluptatibus. Quo repellendus nisi distinctio.",
-                "released": "Voluptas deserunt enim vero quam enim quasi veniam. Quia rerum eaque necessitatibus laudantium reprehenderit unde cupiditate. Magni sed porro molestiae eveniet.",
-                "slowBpm": "Et est maiores illo consequatur beatae. Vitae maxime quaerat illum saepe ipsum. Harum omnis iure nihil cumque quas. Recusandae eum iste debitis et reiciendis sit. Fugiat dolores quo quod. Suscipit eos quis et minima qui est.",
-                "totalXp": "Qui voluptatibus enim architecto est. Reiciendis iure corrupti vel beatae est. Aut delectus numquam ut ab suscipit. Sint et et illum deserunt ipsa.",
-                "transcriberName": "Ullam sunt et dolorem commodi ipsam omnis sapiente totam. Ut sunt sed nihil sint beatae ut voluptas. In eos quis nihil voluptatem. Totam et in et reiciendis omnis ducimus.",
-                "week": 1943046946,
-                "avatarUrl": "Laboriosam tenetur porro harum totam odio numquam beatae. Modi commodi omnis exercitationem quasi dolorem ea. Alias expedita ut ut quo.",
-                "lengthInSeconds": 251143756,
-                "soundsliceSlug": "Nesciunt quia vero voluptas suscipit illo aliquam. Quae nostrum qui dolorem similique odio. Molestias natus aut velit sit nihil. Quis repellendus veritatis consequuntur mollitia.",
-                "staffPickRating": 431525804,
-                "studentId": 97158999,
-                "vimeoVideoId": "Quia aut et quia harum quo. Pariatur aspernatur magni eos consequatur ea. Sequi dolorum eligendi nihil sed. Praesentium perspiciatis quasi incidunt aut iusto nisi. Nostrum praesentium dolores eos consectetur quis.",
-                "youtubeVideoId": "Quidem eum sed accusamus sint voluptates sapiente sit saepe. Veritatis commodi dignissimos optio error dolore occaecati quibusdam. Voluptatem repellat nihil quisquam repellendus vitae neque eveniet."
+                "liveEventYoutubeId": "Consequatur cupiditate molestias placeat atque. Dicta occaecati veritatis sunt minima qui. Voluptates nulla recusandae cupiditate placeat et non rerum. Doloremque est quis voluptas voluptas eveniet odit deserunt.",
+                "liveStreamFeedType": "Dolores sapiente in voluptatem esse. Similique necessitatibus reprehenderit id aut natus nemo ut. Libero aut odio ducimus nesciunt repellendus magnam voluptas. Porro ut voluptatibus voluptatem consequatur.",
+                "name": "Asperiores sed debitis iste reiciendis modi voluptatem debitis. Optio vero est quia repellat reiciendis temporibus. Consectetur accusamus voluptatibus facere occaecati perspiciatis facilis.",
+                "released": "Quidem ullam ipsa minus in debitis eius minus. Velit voluptatum voluptatem quidem fugiat accusamus ipsum. Vero sunt quibusdam expedita at accusamus deleniti ullam. Repellat tenetur animi error rem. Aut sunt et dicta molestiae harum dolorem.",
+                "slowBpm": "Pariatur nulla maiores cumque voluptatem. Qui sint laudantium sint aut eius voluptatem occaecati et. Nobis aut id voluptatibus provident.",
+                "totalXp": "Et ut blanditiis repellat voluptatibus et impedit exercitationem. Modi nam voluptas magnam. Sint repellat rerum quod labore exercitationem nam itaque.",
+                "transcriberName": "A distinctio ducimus nobis sit et quidem. Est aspernatur sed soluta et. Labore excepturi voluptas quaerat voluptas facere. Blanditiis eos ducimus quia non rerum vel repellendus aut. Repellat ut quis dolore et sunt vero.",
+                "week": 257115133,
+                "avatarUrl": "Deleniti dolorem qui hic quia natus ullam. Ut ut praesentium quo recusandae aut sunt.",
+                "lengthInSeconds": 2113101049,
+                "soundsliceSlug": "Recusandae accusamus vitae ea non repellendus. Nulla fuga dignissimos porro neque. Est sed quia nesciunt maiores. Commodi in a sint molestiae nam maiores dolores ut.",
+                "staffPickRating": 2034941493,
+                "studentId": 796409932,
+                "vimeoVideoId": "Eos placeat mollitia explicabo et qui repellat iusto. Consequatur qui aut explicabo sapiente. Aut expedita sed fugit voluptates. Commodi quae vel autem eveniet sit vero cum.",
+                "youtubeVideoId": "Neque ducimus est omnis sed veritatis enim. Aliquam excepturi quidem at suscipit aliquam quia ea eligendi. Ex sequi quaerat dolores libero aut. Odit repudiandae illo adipisci sapiente."
             },
             "relationships": {
                 "parent": {
@@ -553,72 +544,72 @@ $.ajax({
             "type": "parent",
             "id": "1",
             "attributes": {
-                "slug": "Hic odit ratione tenetur quam. Dolores qui cum consequatur enim natus fuga et illum. Impedit voluptates quis doloribus dolores expedita. Soluta sit ab tempore aut quis quidem eaque. Quaerat quam eius neque itaque fugiat iste.",
+                "slug": "Unde modi amet soluta ipsum dolorem. Rerum facere quo est totam vero quasi facilis. Tempore animi omnis consectetur dolor repudiandae sit fuga. Ipsa qui dignissimos unde dolorem quibusdam quisquam laudantium.",
                 "type": "course",
-                "sort": "1846408275",
+                "sort": "2067485678",
                 "status": "published",
                 "brand": "brand",
-                "language": "Dolores commodi earum ut. Impedit rerum rerum ut officia. Sint nulla voluptatem ducimus beatae explicabo recusandae impedit.",
+                "language": "Ipsa repellendus eos id ut qui nobis odit. Hic harum ipsum illum incidunt vitae. Qui tempora voluptas nulla modi et. Voluptates architecto velit velit et omnis natus consequatur. Dolores rem ipsa alias quia voluptatum libero inventore.",
                 "user": "1",
                 "published_on": {
-                    "date": "1989-12-06 00:15:26.000000",
+                    "date": "1977-09-27 19:18:30.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "archived_on": {
-                    "date": "1973-04-28 07:23:07.000000",
+                    "date": "1988-12-24 01:14:14.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "created_on": {
-                    "date": "1988-11-29 11:48:05.000000",
+                    "date": "2012-09-17 21:17:41.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "difficulty": "Atque et laboriosam et sint itaque. Tempora consequuntur esse tenetur. Et reprehenderit ut non. Eveniet qui ut quis omnis sint quis aspernatur et.",
-                "home_staff_pick_rating": "211594015",
-                "legacy_id": 2029105382,
-                "legacy_wordpress_post_id": 2110749050,
-                "qna_video": "Quas ab repudiandae facere aut impedit aspernatur. Est hic dicta ut et quidem aliquid natus. Accusantium asperiores dolorem voluptas quas delectus natus voluptates. Explicabo error quae dolor et neque.",
-                "style": "Accusantium ratione dolores mollitia assumenda voluptates consequatur. Dignissimos dolorum impedit repudiandae fugit. Dignissimos facere amet aut dolores. Nesciunt totam consequatur itaque aut esse ipsum nihil.",
-                "title": "Quasi qui modi ad dolores enim iusto est.",
-                "xp": 465338215,
-                "album": "Enim officia qui aspernatur amet magnam. Ut voluptate et soluta est soluta et eligendi. Aspernatur iusto molestiae perspiciatis veritatis optio. Quidem quas nesciunt ipsum vel. Omnis aut inventore rerum laborum sit.",
-                "artist": "Et omnis ut impedit aut eveniet eos. Beatae magni voluptate maxime alias voluptatibus repellendus et. Qui qui doloribus soluta. Fuga magni laborum eligendi alias nihil. Quod quam veritatis debitis dolorem.",
-                "bpm": "Enim et voluptatem cupiditate. Facere iure id autem. Voluptas aut exercitationem deserunt neque voluptatem.",
-                "cd_tracks": "Molestias rerum doloribus sit aut quis quas. Aliquam beatae libero sed. Dolorum quia est aut fuga. Sint omnis id aut occaecati et et natus.",
-                "chord_or_scale": "Vitae ut ipsa aliquam impedit accusamus. Molestiae eos laudantium et eum tempore. Asperiores omnis libero natus earum inventore enim id. Eum ducimus libero repudiandae perferendis rerum labore ducimus.",
-                "difficulty_range": "Consequuntur autem pariatur est et. Aspernatur sed ratione nesciunt. Quo porro eum quia ullam eum. Fugiat aut quaerat dolor maiores aut. Illo voluptatem ullam tempora voluptatem. Totam omnis ut molestias consequuntur.",
-                "episode_number": 870317541,
-                "exercise_book_pages": "Sed minima voluptatibus qui et ad voluptatem rerum. Nobis et impedit necessitatibus sit. Porro vel numquam laboriosam dicta quod. Porro accusamus nam rerum omnis alias quibusdam praesentium.",
-                "fast_bpm": "Cumque in molestiae ea dolore rerum facilis. Et iusto molestiae doloremque. Sint est quia dolor odio voluptatum ea unde. Doloribus autem voluptas et dignissimos eaque. Expedita aut vel a.",
-                "includes_song": true,
-                "instructors": "Sed eum fuga delectus ex. Esse explicabo pariatur quos a. Qui mollitia nisi molestiae dolores adipisci et aut totam. Ut sit sapiente laborum.",
+                "difficulty": "Ut nemo omnis deleniti quos consequatur quia. Et odit magni pariatur soluta qui non.",
+                "home_staff_pick_rating": "316288058",
+                "legacy_id": 1920143894,
+                "legacy_wordpress_post_id": 950948364,
+                "qna_video": "Voluptates quo tempore ut nihil rerum. Et aut laboriosam et aliquid hic aliquid. Error aut qui illo sint deleniti ut a. Voluptatem mollitia tempora sequi nesciunt ratione rem. Dolores at ut fuga. In amet totam officia autem numquam.",
+                "style": "Qui ducimus possimus odit ut est quam fuga. Qui accusamus esse aliquid. Illum aspernatur quo fugit cumque sequi earum laudantium dolor. Inventore nostrum corporis eum totam magnam.",
+                "title": "Corrupti voluptatem sunt tenetur provident dignissimos.",
+                "xp": 300676256,
+                "album": "Eos labore soluta dolorem id vero ut sit. Laboriosam delectus aut ipsam reprehenderit impedit quasi dicta. Et voluptate ipsa et quis temporibus non rem.",
+                "artist": "Reiciendis soluta sed voluptate consequatur blanditiis. Repellendus sed nihil at occaecati ut. Rerum veritatis inventore sunt molestiae rerum corrupti. Incidunt id ut voluptates modi ducimus quos.",
+                "bpm": "Dolorem error veniam inventore eaque aut. Sed facilis in doloribus vel. Et nobis voluptatem quae consectetur. Voluptatem qui illo et alias aut.",
+                "cd_tracks": "Eaque dicta et cupiditate sit ducimus voluptates voluptates et. Quia at eum consequatur sit autem.",
+                "chord_or_scale": "Et facilis ratione sunt maiores. Maxime libero minima provident magni facere nostrum. Tempore excepturi quia saepe quia laboriosam vel.",
+                "difficulty_range": "Iusto et officia molestiae aut. Omnis quo ipsa et voluptatum. Non ut quia voluptas adipisci. Assumenda voluptas repellendus minus ad praesentium ut in. Quis expedita a in accusantium et. Officiis voluptas nesciunt id sapiente.",
+                "episode_number": 100534324,
+                "exercise_book_pages": "Eligendi non pariatur hic alias. Illo et autem sit velit officiis et. Illum illo dolorem dolores officiis magni illo quo. Dolorem veritatis illo accusantium vel ducimus.",
+                "fast_bpm": "Distinctio ut perferendis natus est molestias doloremque. Amet et eius sunt ad autem. Vel quo quas ratione doloribus. Sint error autem ex vel quisquam. Ut totam consequatur repellendus nisi. Cum tenetur vero reprehenderit aut ad maiores.",
+                "includes_song": false,
+                "instructors": "Quo ullam accusamus officiis exercitationem possimus veritatis non sunt. Est in corporis dolor. Nesciunt saepe ratione ex eveniet voluptas qui porro.",
                 "live_event_start_time": {
-                    "date": "2012-10-01 00:06:20.000000",
+                    "date": "1998-12-31 22:59:10.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "live_event_end_time": {
-                    "date": "1972-08-02 00:32:19.000000",
+                    "date": "1986-11-25 06:26:37.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "live_event_youtube_id": "Adipisci est earum reiciendis et quia a. Dolore vel ducimus et occaecati iure sed vel sit. Et voluptatum ut doloribus sunt.",
-                "live_stream_feed_type": "Assumenda soluta similique eligendi. Eos libero sequi assumenda. Tempora et sint adipisci voluptatem magni ex. Ullam nisi nobis tenetur beatae occaecati. Voluptate repudiandae animi minus sint debitis.",
-                "name": "Nostrum nobis minus modi qui sit. Accusantium autem inventore possimus optio dolorum repellat reprehenderit. Consequuntur sed dignissimos voluptatum alias totam.",
-                "released": "Rerum blanditiis optio ut eveniet aut. Vel quo fugiat soluta autem quasi eos quia. Quos provident iusto nostrum officiis deleniti harum.",
-                "slow_bpm": "Quidem sequi architecto mollitia natus. Ad sed nulla vitae dolores provident accusamus aliquam. Blanditiis officia qui voluptatem veritatis porro tenetur voluptate.",
-                "total_xp": "Qui minus unde et nobis. Voluptatem sed veritatis non sit iusto. Exercitationem est doloremque rerum dolorem rerum laudantium rem. Sit ea porro cumque autem.",
-                "transcriber_name": "Enim enim consequatur ut optio. Mollitia fugit error qui quia dolor et sed vel. Nobis rerum nam est eaque aut.",
-                "week": 1549229504,
-                "avatar_url": "Amet qui voluptas consequatur expedita facere aut nihil. Et sit autem laboriosam sunt beatae. Magni explicabo et eos nihil tenetur et et. Doloremque dolorum animi corrupti architecto.",
-                "length_in_seconds": 1889120521,
-                "soundslice_slug": "At rerum totam et et. Suscipit in quaerat velit sunt provident dolorem ducimus. Quae ea pariatur tempore odit in et.",
-                "staff_pick_rating": 1882244654,
-                "student_id": 1107745055,
-                "vimeo_video_id": "Qui similique dolor doloremque rerum deserunt error velit nihil. Ut vel laboriosam dicta numquam nam ad assumenda exercitationem. Unde est voluptatibus error repudiandae eius id esse. Odio quibusdam labore sed maxime.",
-                "youtube_video_id": "Voluptas eaque ipsum in quod perferendis qui provident. Nemo minus quos minus deserunt delectus magnam. Ducimus impedit provident cupiditate dolorem. Nihil dolor deserunt nihil repellat. Ad assumenda nam molestiae qui."
+                "live_event_youtube_id": "Consequatur qui rerum iste vel qui non nisi. Doloremque odio ad dicta minima omnis dolores. Dolore qui nostrum dolore deserunt molestiae.",
+                "live_stream_feed_type": "Est fuga et qui esse asperiores impedit vel quas. Et quisquam qui enim aliquid assumenda. Iure quo officiis maxime earum consectetur impedit rerum similique. Consectetur architecto praesentium ut eos doloremque voluptas quam natus.",
+                "name": "Error veniam iusto non aliquam ea voluptas amet. Facilis minima laudantium at itaque. Est nihil qui inventore quo. Id atque et eaque voluptas. Vero dolorem sapiente consequuntur ad eius laudantium veritatis.",
+                "released": "Error sed velit molestiae. Ut minima est repellat. Fuga iusto facilis ipsum vel at. Quam laboriosam libero nam voluptatum.",
+                "slow_bpm": "Provident distinctio omnis qui consequatur fugiat. Iure a et aliquid eligendi alias quia quis. Fugiat et provident eos atque aut.",
+                "total_xp": "Tenetur sed et aut provident. Dolorem alias suscipit pariatur. Cumque dolor et corrupti fuga qui eum minus. Perspiciatis aspernatur est voluptatibus sit laudantium ut reiciendis. Quia quia quis iste.",
+                "transcriber_name": "Sed quia natus cumque perferendis ut aliquam. Odio repellat nihil fugit sed laboriosam. Omnis accusantium est facilis sint exercitationem.",
+                "week": 334193965,
+                "avatar_url": "Dolor quia commodi maiores. Et libero in sapiente tenetur. Quis voluptates doloribus labore quis enim nam. Ut rerum nihil sint minima distinctio possimus. Dicta quo eos doloribus aut nemo quaerat aut asperiores.",
+                "length_in_seconds": 1953132732,
+                "soundslice_slug": "Qui est quia voluptatem repellat natus atque aperiam. Quod eum dolor facere dolores quos. Libero in error quis consequatur cupiditate et eos veniam. Nesciunt repellendus laborum sit adipisci et explicabo iusto quam.",
+                "staff_pick_rating": 961041226,
+                "student_id": 524121876,
+                "vimeo_video_id": "Repellat rerum quasi porro corrupti fugit. Sunt dolores temporibus ipsum a. Sit accusantium cum optio quis odio.",
+                "youtube_video_id": "Nesciunt nihil ullam quo soluta sunt esse. Odio architecto eligendi amet ex velit. Impedit aliquam nulla beatae voluptas voluptatem. A quia modi quae aut. Corrupti quibusdam inventore rerum qui quibusdam ipsa et."
             }
         }
     ]
@@ -670,72 +661,72 @@ $.ajax({
             "type": "content",
             "id": "2",
             "attributes": {
-                "slug": "Accusantium odit sit accusantium. Excepturi dolor quis reiciendis sapiente minima maxime nemo. Quisquam numquam qui odit labore. Eveniet aut qui laboriosam reprehenderit.",
+                "slug": "Id inventore est enim expedita quia commodi voluptate. Ut ut ducimus repellat non. Sunt in impedit sapiente voluptas autem dolores. Nisi libero voluptas sequi doloremque sit. Facere rem quae inventore. Quaerat dolor distinctio fuga accusamus dolorum.",
                 "type": "course",
-                "sort": "1207045682",
+                "sort": "1136220408",
                 "status": "published",
                 "brand": "brand",
-                "language": "Aut velit repudiandae quia aliquid magni quos minima ut. Minus eligendi commodi tenetur accusantium ducimus quia. Reiciendis quasi et eius fugit aut quam. Sit quibusdam labore sint.",
+                "language": "Consequuntur quidem harum mollitia recusandae sequi hic dicta. Ea repellat praesentium provident repellendus et. Harum ipsam et et corrupti.",
                 "user": "1",
                 "publishedOn": {
-                    "date": "1975-05-07 00:00:50.000000",
+                    "date": "1998-12-03 19:50:36.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "archivedOn": {
-                    "date": "2005-01-27 04:47:32.000000",
+                    "date": "1989-10-02 17:49:41.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "createdOn": {
-                    "date": "1989-12-14 17:50:08.000000",
+                    "date": "1983-04-10 11:16:10.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "difficulty": "Earum tempora placeat placeat sunt placeat magnam. Officiis repellat vero consequuntur velit. Facere magni repellat quisquam rerum quis. Tempore eligendi error sunt itaque et. Laudantium magnam recusandae eos minima amet odit.",
-                "homeStaffPickRating": "651830587",
-                "legacyId": 135314308,
-                "legacyWordpressPostId": 136174500,
-                "qnaVideo": "Fugit dolorum ducimus modi quis quis fugit quis. Accusantium nobis exercitationem nobis nisi quam ex unde. Ducimus est et qui. Ut quis qui vitae blanditiis eum.",
-                "style": "Placeat sapiente enim sequi est qui quia non. Animi ratione sed eligendi id. Eos distinctio eos illum voluptatem. Doloribus illo sit dignissimos vel.",
-                "title": "Quos distinctio ducimus at.",
-                "xp": 1916995098,
-                "album": "Dolor inventore eos est quo unde quae similique aperiam. Consequatur aut laudantium qui et incidunt. Amet officia et cumque illo et quia quia adipisci. Tempora reprehenderit necessitatibus eaque distinctio.",
-                "artist": "Voluptas quia at ut perspiciatis. Iste ut quaerat nemo sed. Quam velit sint nisi dolores et. Cupiditate et qui aliquid dolorem consequatur.",
-                "bpm": "Praesentium praesentium tenetur explicabo quasi. Minima velit rerum autem. Dolor quis doloremque quis aut nemo necessitatibus illum. Praesentium reprehenderit maxime harum commodi adipisci aut sunt.",
-                "cdTracks": "Voluptatem sunt rerum placeat doloremque. Quibusdam et sunt asperiores. Ut velit est facere vero voluptatem ratione earum mollitia.",
-                "chordOrScale": "Vero incidunt non voluptas pariatur aut. Odio quam fuga accusamus ducimus quis magnam consectetur. Iste non in perferendis esse sit eius odit.",
-                "difficultyRange": "Omnis mollitia eos qui. Vitae aut voluptatem nemo nesciunt et. Optio dolore velit optio voluptas perferendis maiores doloribus.",
-                "episodeNumber": 1443553567,
-                "exerciseBookPages": "Sed nulla et a ab est doloremque ex. Recusandae officiis quis voluptatem id earum iusto. Qui pariatur vitae exercitationem aut maiores eveniet facere natus.",
-                "fastBpm": "Provident tempora temporibus sit enim rem. Molestiae atque sit asperiores commodi. Quasi dolores aperiam libero sit numquam.",
+                "difficulty": "Consequatur sit nostrum ut officiis perspiciatis et et sit. Tempore officia possimus optio voluptatum at cum. Tempore officia dolor et eos qui inventore voluptatibus veniam. Iure id ratione excepturi et.",
+                "homeStaffPickRating": "2103125775",
+                "legacyId": 341536101,
+                "legacyWordpressPostId": 65556271,
+                "qnaVideo": "Omnis corrupti fuga modi aut odio animi odio quos. Voluptas eligendi provident nostrum alias reiciendis optio. Asperiores voluptas sit et dolorem culpa. Nemo corrupti quibusdam debitis ut doloribus quos debitis.",
+                "style": "Qui mollitia at nihil voluptatem numquam velit. Neque quia aut ad debitis eveniet. Quidem minima ipsum incidunt exercitationem exercitationem itaque.",
+                "title": "Tempore maiores nam corrupti voluptatem.",
+                "xp": 921126235,
+                "album": "Sint quo voluptatibus sequi fuga. Optio cum aspernatur vel architecto. Numquam et adipisci laboriosam rem. Quia nam dignissimos illo aliquid deleniti porro.",
+                "artist": "Quia est molestiae nesciunt modi deserunt. Sed at vitae est qui necessitatibus. Hic quas sunt ut odio error aut nihil. Quia est et qui voluptatem cum. Qui consequatur id maxime consequatur dolor non quos.",
+                "bpm": "Repudiandae similique quae aut explicabo vero quia. Tempore nulla saepe temporibus enim id et. Minus et magnam commodi quis voluptas odio. Laboriosam et atque iste. Cum quisquam dolor natus. Aut commodi ut similique harum commodi porro accusantium.",
+                "cdTracks": "Vitae ratione ut omnis ad. Nemo voluptatem error illo libero vel dolorem. Est corporis qui distinctio ipsam. Beatae magni autem ea.",
+                "chordOrScale": "Eos repudiandae beatae fugiat consequatur tempore maiores. Voluptate dolorem fugit sit asperiores odit. Ut exercitationem quae quae earum iure ad. Aut ducimus vel provident quae non consequatur.",
+                "difficultyRange": "Ipsam architecto recusandae a. Voluptatum rerum qui voluptatem itaque libero delectus quia.",
+                "episodeNumber": 1845016899,
+                "exerciseBookPages": "Ut vel consequatur provident id error. Expedita facere impedit ducimus. Pariatur aut accusamus est et sed nihil harum ut. Possimus omnis facere doloribus aliquam. Qui quo rem mollitia eum atque. Ex dolor velit cum molestias aut.",
+                "fastBpm": "Fugiat consequatur eum autem veritatis ipsum. Molestiae aspernatur sint explicabo repellat beatae. Accusantium adipisci impedit aut ut porro aut qui. Aliquam commodi sit excepturi tenetur placeat iure repellendus.",
                 "includesSong": true,
-                "instructors": "Magni maxime quam voluptas. Sunt fugit quasi deleniti sint amet omnis voluptas. Odio et est ducimus aut quisquam accusamus dolor quis. Dolor ex ratione aut enim provident.",
+                "instructors": "Expedita voluptates veritatis consequatur illo dolore sint dolor. Doloribus commodi id quibusdam non ipsam. Eligendi ipsa et itaque facilis aut. Accusantium distinctio tempora optio quibusdam quisquam unde.",
                 "liveEventStartTime": {
-                    "date": "2013-09-11 06:48:04.000000",
+                    "date": "1973-09-23 23:37:24.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "liveEventEndTime": {
-                    "date": "1979-04-29 10:51:03.000000",
+                    "date": "2017-04-06 05:44:17.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "liveEventYoutubeId": "Provident laboriosam labore est voluptate et qui minus. Perferendis corporis ipsum qui et. In esse sed quos accusamus. Aut voluptatum maiores aliquid sunt cupiditate blanditiis.",
-                "liveStreamFeedType": "Ut aut sed aut. Consequatur tempora provident nihil ut. Fugit nihil cum officiis. Quis et laborum esse sit. Explicabo voluptatem tempora non deleniti autem. Nemo et beatae iste. Doloribus perspiciatis ut autem.",
-                "name": "Et et molestiae placeat iure eum. Aliquid sed placeat at iste voluptatibus. Quo repellendus nisi distinctio.",
-                "released": "Voluptas deserunt enim vero quam enim quasi veniam. Quia rerum eaque necessitatibus laudantium reprehenderit unde cupiditate. Magni sed porro molestiae eveniet.",
-                "slowBpm": "Et est maiores illo consequatur beatae. Vitae maxime quaerat illum saepe ipsum. Harum omnis iure nihil cumque quas. Recusandae eum iste debitis et reiciendis sit. Fugiat dolores quo quod. Suscipit eos quis et minima qui est.",
-                "totalXp": "Qui voluptatibus enim architecto est. Reiciendis iure corrupti vel beatae est. Aut delectus numquam ut ab suscipit. Sint et et illum deserunt ipsa.",
-                "transcriberName": "Ullam sunt et dolorem commodi ipsam omnis sapiente totam. Ut sunt sed nihil sint beatae ut voluptas. In eos quis nihil voluptatem. Totam et in et reiciendis omnis ducimus.",
-                "week": 1943046946,
-                "avatarUrl": "Laboriosam tenetur porro harum totam odio numquam beatae. Modi commodi omnis exercitationem quasi dolorem ea. Alias expedita ut ut quo.",
-                "lengthInSeconds": 251143756,
-                "soundsliceSlug": "Nesciunt quia vero voluptas suscipit illo aliquam. Quae nostrum qui dolorem similique odio. Molestias natus aut velit sit nihil. Quis repellendus veritatis consequuntur mollitia.",
-                "staffPickRating": 431525804,
-                "studentId": 97158999,
-                "vimeoVideoId": "Quia aut et quia harum quo. Pariatur aspernatur magni eos consequatur ea. Sequi dolorum eligendi nihil sed. Praesentium perspiciatis quasi incidunt aut iusto nisi. Nostrum praesentium dolores eos consectetur quis.",
-                "youtubeVideoId": "Quidem eum sed accusamus sint voluptates sapiente sit saepe. Veritatis commodi dignissimos optio error dolore occaecati quibusdam. Voluptatem repellat nihil quisquam repellendus vitae neque eveniet."
+                "liveEventYoutubeId": "Consequatur cupiditate molestias placeat atque. Dicta occaecati veritatis sunt minima qui. Voluptates nulla recusandae cupiditate placeat et non rerum. Doloremque est quis voluptas voluptas eveniet odit deserunt.",
+                "liveStreamFeedType": "Dolores sapiente in voluptatem esse. Similique necessitatibus reprehenderit id aut natus nemo ut. Libero aut odio ducimus nesciunt repellendus magnam voluptas. Porro ut voluptatibus voluptatem consequatur.",
+                "name": "Asperiores sed debitis iste reiciendis modi voluptatem debitis. Optio vero est quia repellat reiciendis temporibus. Consectetur accusamus voluptatibus facere occaecati perspiciatis facilis.",
+                "released": "Quidem ullam ipsa minus in debitis eius minus. Velit voluptatum voluptatem quidem fugiat accusamus ipsum. Vero sunt quibusdam expedita at accusamus deleniti ullam. Repellat tenetur animi error rem. Aut sunt et dicta molestiae harum dolorem.",
+                "slowBpm": "Pariatur nulla maiores cumque voluptatem. Qui sint laudantium sint aut eius voluptatem occaecati et. Nobis aut id voluptatibus provident.",
+                "totalXp": "Et ut blanditiis repellat voluptatibus et impedit exercitationem. Modi nam voluptas magnam. Sint repellat rerum quod labore exercitationem nam itaque.",
+                "transcriberName": "A distinctio ducimus nobis sit et quidem. Est aspernatur sed soluta et. Labore excepturi voluptas quaerat voluptas facere. Blanditiis eos ducimus quia non rerum vel repellendus aut. Repellat ut quis dolore et sunt vero.",
+                "week": 257115133,
+                "avatarUrl": "Deleniti dolorem qui hic quia natus ullam. Ut ut praesentium quo recusandae aut sunt.",
+                "lengthInSeconds": 2113101049,
+                "soundsliceSlug": "Recusandae accusamus vitae ea non repellendus. Nulla fuga dignissimos porro neque. Est sed quia nesciunt maiores. Commodi in a sint molestiae nam maiores dolores ut.",
+                "staffPickRating": 2034941493,
+                "studentId": 796409932,
+                "vimeoVideoId": "Eos placeat mollitia explicabo et qui repellat iusto. Consequatur qui aut explicabo sapiente. Aut expedita sed fugit voluptates. Commodi quae vel autem eveniet sit vero cum.",
+                "youtubeVideoId": "Neque ducimus est omnis sed veritatis enim. Aliquam excepturi quidem at suscipit aliquam quia ea eligendi. Ex sequi quaerat dolores libero aut. Odit repudiandae illo adipisci sapiente."
             },
             "relationships": {
                 "parent": {
@@ -750,72 +741,72 @@ $.ajax({
             "type": "content",
             "id": "1",
             "attributes": {
-                "slug": "Hic odit ratione tenetur quam. Dolores qui cum consequatur enim natus fuga et illum. Impedit voluptates quis doloribus dolores expedita. Soluta sit ab tempore aut quis quidem eaque. Quaerat quam eius neque itaque fugiat iste.",
+                "slug": "Unde modi amet soluta ipsum dolorem. Rerum facere quo est totam vero quasi facilis. Tempore animi omnis consectetur dolor repudiandae sit fuga. Ipsa qui dignissimos unde dolorem quibusdam quisquam laudantium.",
                 "type": "course",
-                "sort": "1846408275",
+                "sort": "2067485678",
                 "status": "published",
                 "brand": "brand",
-                "language": "Dolores commodi earum ut. Impedit rerum rerum ut officia. Sint nulla voluptatem ducimus beatae explicabo recusandae impedit.",
+                "language": "Ipsa repellendus eos id ut qui nobis odit. Hic harum ipsum illum incidunt vitae. Qui tempora voluptas nulla modi et. Voluptates architecto velit velit et omnis natus consequatur. Dolores rem ipsa alias quia voluptatum libero inventore.",
                 "user": "1",
                 "publishedOn": {
-                    "date": "1989-12-06 00:15:26.000000",
+                    "date": "1977-09-27 19:18:30.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "archivedOn": {
-                    "date": "1973-04-28 07:23:07.000000",
+                    "date": "1988-12-24 01:14:14.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "createdOn": {
-                    "date": "1988-11-29 11:48:05.000000",
+                    "date": "2012-09-17 21:17:41.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "difficulty": "Atque et laboriosam et sint itaque. Tempora consequuntur esse tenetur. Et reprehenderit ut non. Eveniet qui ut quis omnis sint quis aspernatur et.",
-                "homeStaffPickRating": "211594015",
-                "legacyId": 2029105382,
-                "legacyWordpressPostId": 2110749050,
-                "qnaVideo": "Quas ab repudiandae facere aut impedit aspernatur. Est hic dicta ut et quidem aliquid natus. Accusantium asperiores dolorem voluptas quas delectus natus voluptates. Explicabo error quae dolor et neque.",
-                "style": "Accusantium ratione dolores mollitia assumenda voluptates consequatur. Dignissimos dolorum impedit repudiandae fugit. Dignissimos facere amet aut dolores. Nesciunt totam consequatur itaque aut esse ipsum nihil.",
-                "title": "Quasi qui modi ad dolores enim iusto est.",
-                "xp": 465338215,
-                "album": "Enim officia qui aspernatur amet magnam. Ut voluptate et soluta est soluta et eligendi. Aspernatur iusto molestiae perspiciatis veritatis optio. Quidem quas nesciunt ipsum vel. Omnis aut inventore rerum laborum sit.",
-                "artist": "Et omnis ut impedit aut eveniet eos. Beatae magni voluptate maxime alias voluptatibus repellendus et. Qui qui doloribus soluta. Fuga magni laborum eligendi alias nihil. Quod quam veritatis debitis dolorem.",
-                "bpm": "Enim et voluptatem cupiditate. Facere iure id autem. Voluptas aut exercitationem deserunt neque voluptatem.",
-                "cdTracks": "Molestias rerum doloribus sit aut quis quas. Aliquam beatae libero sed. Dolorum quia est aut fuga. Sint omnis id aut occaecati et et natus.",
-                "chordOrScale": "Vitae ut ipsa aliquam impedit accusamus. Molestiae eos laudantium et eum tempore. Asperiores omnis libero natus earum inventore enim id. Eum ducimus libero repudiandae perferendis rerum labore ducimus.",
-                "difficultyRange": "Consequuntur autem pariatur est et. Aspernatur sed ratione nesciunt. Quo porro eum quia ullam eum. Fugiat aut quaerat dolor maiores aut. Illo voluptatem ullam tempora voluptatem. Totam omnis ut molestias consequuntur.",
-                "episodeNumber": 870317541,
-                "exerciseBookPages": "Sed minima voluptatibus qui et ad voluptatem rerum. Nobis et impedit necessitatibus sit. Porro vel numquam laboriosam dicta quod. Porro accusamus nam rerum omnis alias quibusdam praesentium.",
-                "fastBpm": "Cumque in molestiae ea dolore rerum facilis. Et iusto molestiae doloremque. Sint est quia dolor odio voluptatum ea unde. Doloribus autem voluptas et dignissimos eaque. Expedita aut vel a.",
-                "includesSong": true,
-                "instructors": "Sed eum fuga delectus ex. Esse explicabo pariatur quos a. Qui mollitia nisi molestiae dolores adipisci et aut totam. Ut sit sapiente laborum.",
+                "difficulty": "Ut nemo omnis deleniti quos consequatur quia. Et odit magni pariatur soluta qui non.",
+                "homeStaffPickRating": "316288058",
+                "legacyId": 1920143894,
+                "legacyWordpressPostId": 950948364,
+                "qnaVideo": "Voluptates quo tempore ut nihil rerum. Et aut laboriosam et aliquid hic aliquid. Error aut qui illo sint deleniti ut a. Voluptatem mollitia tempora sequi nesciunt ratione rem. Dolores at ut fuga. In amet totam officia autem numquam.",
+                "style": "Qui ducimus possimus odit ut est quam fuga. Qui accusamus esse aliquid. Illum aspernatur quo fugit cumque sequi earum laudantium dolor. Inventore nostrum corporis eum totam magnam.",
+                "title": "Corrupti voluptatem sunt tenetur provident dignissimos.",
+                "xp": 300676256,
+                "album": "Eos labore soluta dolorem id vero ut sit. Laboriosam delectus aut ipsam reprehenderit impedit quasi dicta. Et voluptate ipsa et quis temporibus non rem.",
+                "artist": "Reiciendis soluta sed voluptate consequatur blanditiis. Repellendus sed nihil at occaecati ut. Rerum veritatis inventore sunt molestiae rerum corrupti. Incidunt id ut voluptates modi ducimus quos.",
+                "bpm": "Dolorem error veniam inventore eaque aut. Sed facilis in doloribus vel. Et nobis voluptatem quae consectetur. Voluptatem qui illo et alias aut.",
+                "cdTracks": "Eaque dicta et cupiditate sit ducimus voluptates voluptates et. Quia at eum consequatur sit autem.",
+                "chordOrScale": "Et facilis ratione sunt maiores. Maxime libero minima provident magni facere nostrum. Tempore excepturi quia saepe quia laboriosam vel.",
+                "difficultyRange": "Iusto et officia molestiae aut. Omnis quo ipsa et voluptatum. Non ut quia voluptas adipisci. Assumenda voluptas repellendus minus ad praesentium ut in. Quis expedita a in accusantium et. Officiis voluptas nesciunt id sapiente.",
+                "episodeNumber": 100534324,
+                "exerciseBookPages": "Eligendi non pariatur hic alias. Illo et autem sit velit officiis et. Illum illo dolorem dolores officiis magni illo quo. Dolorem veritatis illo accusantium vel ducimus.",
+                "fastBpm": "Distinctio ut perferendis natus est molestias doloremque. Amet et eius sunt ad autem. Vel quo quas ratione doloribus. Sint error autem ex vel quisquam. Ut totam consequatur repellendus nisi. Cum tenetur vero reprehenderit aut ad maiores.",
+                "includesSong": false,
+                "instructors": "Quo ullam accusamus officiis exercitationem possimus veritatis non sunt. Est in corporis dolor. Nesciunt saepe ratione ex eveniet voluptas qui porro.",
                 "liveEventStartTime": {
-                    "date": "2012-10-01 00:06:20.000000",
+                    "date": "1998-12-31 22:59:10.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "liveEventEndTime": {
-                    "date": "1972-08-02 00:32:19.000000",
+                    "date": "1986-11-25 06:26:37.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "liveEventYoutubeId": "Adipisci est earum reiciendis et quia a. Dolore vel ducimus et occaecati iure sed vel sit. Et voluptatum ut doloribus sunt.",
-                "liveStreamFeedType": "Assumenda soluta similique eligendi. Eos libero sequi assumenda. Tempora et sint adipisci voluptatem magni ex. Ullam nisi nobis tenetur beatae occaecati. Voluptate repudiandae animi minus sint debitis.",
-                "name": "Nostrum nobis minus modi qui sit. Accusantium autem inventore possimus optio dolorum repellat reprehenderit. Consequuntur sed dignissimos voluptatum alias totam.",
-                "released": "Rerum blanditiis optio ut eveniet aut. Vel quo fugiat soluta autem quasi eos quia. Quos provident iusto nostrum officiis deleniti harum.",
-                "slowBpm": "Quidem sequi architecto mollitia natus. Ad sed nulla vitae dolores provident accusamus aliquam. Blanditiis officia qui voluptatem veritatis porro tenetur voluptate.",
-                "totalXp": "Qui minus unde et nobis. Voluptatem sed veritatis non sit iusto. Exercitationem est doloremque rerum dolorem rerum laudantium rem. Sit ea porro cumque autem.",
-                "transcriberName": "Enim enim consequatur ut optio. Mollitia fugit error qui quia dolor et sed vel. Nobis rerum nam est eaque aut.",
-                "week": 1549229504,
-                "avatarUrl": "Amet qui voluptas consequatur expedita facere aut nihil. Et sit autem laboriosam sunt beatae. Magni explicabo et eos nihil tenetur et et. Doloremque dolorum animi corrupti architecto.",
-                "lengthInSeconds": 1889120521,
-                "soundsliceSlug": "At rerum totam et et. Suscipit in quaerat velit sunt provident dolorem ducimus. Quae ea pariatur tempore odit in et.",
-                "staffPickRating": 1882244654,
-                "studentId": 1107745055,
-                "vimeoVideoId": "Qui similique dolor doloremque rerum deserunt error velit nihil. Ut vel laboriosam dicta numquam nam ad assumenda exercitationem. Unde est voluptatibus error repudiandae eius id esse. Odio quibusdam labore sed maxime.",
-                "youtubeVideoId": "Voluptas eaque ipsum in quod perferendis qui provident. Nemo minus quos minus deserunt delectus magnam. Ducimus impedit provident cupiditate dolorem. Nihil dolor deserunt nihil repellat. Ad assumenda nam molestiae qui."
+                "liveEventYoutubeId": "Consequatur qui rerum iste vel qui non nisi. Doloremque odio ad dicta minima omnis dolores. Dolore qui nostrum dolore deserunt molestiae.",
+                "liveStreamFeedType": "Est fuga et qui esse asperiores impedit vel quas. Et quisquam qui enim aliquid assumenda. Iure quo officiis maxime earum consectetur impedit rerum similique. Consectetur architecto praesentium ut eos doloremque voluptas quam natus.",
+                "name": "Error veniam iusto non aliquam ea voluptas amet. Facilis minima laudantium at itaque. Est nihil qui inventore quo. Id atque et eaque voluptas. Vero dolorem sapiente consequuntur ad eius laudantium veritatis.",
+                "released": "Error sed velit molestiae. Ut minima est repellat. Fuga iusto facilis ipsum vel at. Quam laboriosam libero nam voluptatum.",
+                "slowBpm": "Provident distinctio omnis qui consequatur fugiat. Iure a et aliquid eligendi alias quia quis. Fugiat et provident eos atque aut.",
+                "totalXp": "Tenetur sed et aut provident. Dolorem alias suscipit pariatur. Cumque dolor et corrupti fuga qui eum minus. Perspiciatis aspernatur est voluptatibus sit laudantium ut reiciendis. Quia quia quis iste.",
+                "transcriberName": "Sed quia natus cumque perferendis ut aliquam. Odio repellat nihil fugit sed laboriosam. Omnis accusantium est facilis sint exercitationem.",
+                "week": 334193965,
+                "avatarUrl": "Dolor quia commodi maiores. Et libero in sapiente tenetur. Quis voluptates doloribus labore quis enim nam. Ut rerum nihil sint minima distinctio possimus. Dicta quo eos doloribus aut nemo quaerat aut asperiores.",
+                "lengthInSeconds": 1953132732,
+                "soundsliceSlug": "Qui est quia voluptatem repellat natus atque aperiam. Quod eum dolor facere dolores quos. Libero in error quis consequatur cupiditate et eos veniam. Nesciunt repellendus laborum sit adipisci et explicabo iusto quam.",
+                "staffPickRating": 961041226,
+                "studentId": 524121876,
+                "vimeoVideoId": "Repellat rerum quasi porro corrupti fugit. Sunt dolores temporibus ipsum a. Sit accusantium cum optio quis odio.",
+                "youtubeVideoId": "Nesciunt nihil ullam quo soluta sunt esse. Odio architecto eligendi amet ex velit. Impedit aliquam nulla beatae voluptas voluptatem. A quia modi quae aut. Corrupti quibusdam inventore rerum qui quibusdam ipsa et."
             },
             "relationships": {
                 "data": {
@@ -834,81 +825,81 @@ $.ajax({
             "type": "parent",
             "id": "1",
             "attributes": {
-                "slug": "Hic odit ratione tenetur quam. Dolores qui cum consequatur enim natus fuga et illum. Impedit voluptates quis doloribus dolores expedita. Soluta sit ab tempore aut quis quidem eaque. Quaerat quam eius neque itaque fugiat iste.",
+                "slug": "Unde modi amet soluta ipsum dolorem. Rerum facere quo est totam vero quasi facilis. Tempore animi omnis consectetur dolor repudiandae sit fuga. Ipsa qui dignissimos unde dolorem quibusdam quisquam laudantium.",
                 "type": "course",
-                "sort": "1846408275",
+                "sort": "2067485678",
                 "status": "published",
                 "brand": "brand",
-                "language": "Dolores commodi earum ut. Impedit rerum rerum ut officia. Sint nulla voluptatem ducimus beatae explicabo recusandae impedit.",
+                "language": "Ipsa repellendus eos id ut qui nobis odit. Hic harum ipsum illum incidunt vitae. Qui tempora voluptas nulla modi et. Voluptates architecto velit velit et omnis natus consequatur. Dolores rem ipsa alias quia voluptatum libero inventore.",
                 "user": "1",
                 "published_on": {
-                    "date": "1989-12-06 00:15:26.000000",
+                    "date": "1977-09-27 19:18:30.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "archived_on": {
-                    "date": "1973-04-28 07:23:07.000000",
+                    "date": "1988-12-24 01:14:14.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "created_on": {
-                    "date": "1988-11-29 11:48:05.000000",
+                    "date": "2012-09-17 21:17:41.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "difficulty": "Atque et laboriosam et sint itaque. Tempora consequuntur esse tenetur. Et reprehenderit ut non. Eveniet qui ut quis omnis sint quis aspernatur et.",
-                "home_staff_pick_rating": "211594015",
-                "legacy_id": 2029105382,
-                "legacy_wordpress_post_id": 2110749050,
-                "qna_video": "Quas ab repudiandae facere aut impedit aspernatur. Est hic dicta ut et quidem aliquid natus. Accusantium asperiores dolorem voluptas quas delectus natus voluptates. Explicabo error quae dolor et neque.",
-                "style": "Accusantium ratione dolores mollitia assumenda voluptates consequatur. Dignissimos dolorum impedit repudiandae fugit. Dignissimos facere amet aut dolores. Nesciunt totam consequatur itaque aut esse ipsum nihil.",
-                "title": "Quasi qui modi ad dolores enim iusto est.",
-                "xp": 465338215,
-                "album": "Enim officia qui aspernatur amet magnam. Ut voluptate et soluta est soluta et eligendi. Aspernatur iusto molestiae perspiciatis veritatis optio. Quidem quas nesciunt ipsum vel. Omnis aut inventore rerum laborum sit.",
-                "artist": "Et omnis ut impedit aut eveniet eos. Beatae magni voluptate maxime alias voluptatibus repellendus et. Qui qui doloribus soluta. Fuga magni laborum eligendi alias nihil. Quod quam veritatis debitis dolorem.",
-                "bpm": "Enim et voluptatem cupiditate. Facere iure id autem. Voluptas aut exercitationem deserunt neque voluptatem.",
-                "cd_tracks": "Molestias rerum doloribus sit aut quis quas. Aliquam beatae libero sed. Dolorum quia est aut fuga. Sint omnis id aut occaecati et et natus.",
-                "chord_or_scale": "Vitae ut ipsa aliquam impedit accusamus. Molestiae eos laudantium et eum tempore. Asperiores omnis libero natus earum inventore enim id. Eum ducimus libero repudiandae perferendis rerum labore ducimus.",
-                "difficulty_range": "Consequuntur autem pariatur est et. Aspernatur sed ratione nesciunt. Quo porro eum quia ullam eum. Fugiat aut quaerat dolor maiores aut. Illo voluptatem ullam tempora voluptatem. Totam omnis ut molestias consequuntur.",
-                "episode_number": 870317541,
-                "exercise_book_pages": "Sed minima voluptatibus qui et ad voluptatem rerum. Nobis et impedit necessitatibus sit. Porro vel numquam laboriosam dicta quod. Porro accusamus nam rerum omnis alias quibusdam praesentium.",
-                "fast_bpm": "Cumque in molestiae ea dolore rerum facilis. Et iusto molestiae doloremque. Sint est quia dolor odio voluptatum ea unde. Doloribus autem voluptas et dignissimos eaque. Expedita aut vel a.",
-                "includes_song": true,
-                "instructors": "Sed eum fuga delectus ex. Esse explicabo pariatur quos a. Qui mollitia nisi molestiae dolores adipisci et aut totam. Ut sit sapiente laborum.",
+                "difficulty": "Ut nemo omnis deleniti quos consequatur quia. Et odit magni pariatur soluta qui non.",
+                "home_staff_pick_rating": "316288058",
+                "legacy_id": 1920143894,
+                "legacy_wordpress_post_id": 950948364,
+                "qna_video": "Voluptates quo tempore ut nihil rerum. Et aut laboriosam et aliquid hic aliquid. Error aut qui illo sint deleniti ut a. Voluptatem mollitia tempora sequi nesciunt ratione rem. Dolores at ut fuga. In amet totam officia autem numquam.",
+                "style": "Qui ducimus possimus odit ut est quam fuga. Qui accusamus esse aliquid. Illum aspernatur quo fugit cumque sequi earum laudantium dolor. Inventore nostrum corporis eum totam magnam.",
+                "title": "Corrupti voluptatem sunt tenetur provident dignissimos.",
+                "xp": 300676256,
+                "album": "Eos labore soluta dolorem id vero ut sit. Laboriosam delectus aut ipsam reprehenderit impedit quasi dicta. Et voluptate ipsa et quis temporibus non rem.",
+                "artist": "Reiciendis soluta sed voluptate consequatur blanditiis. Repellendus sed nihil at occaecati ut. Rerum veritatis inventore sunt molestiae rerum corrupti. Incidunt id ut voluptates modi ducimus quos.",
+                "bpm": "Dolorem error veniam inventore eaque aut. Sed facilis in doloribus vel. Et nobis voluptatem quae consectetur. Voluptatem qui illo et alias aut.",
+                "cd_tracks": "Eaque dicta et cupiditate sit ducimus voluptates voluptates et. Quia at eum consequatur sit autem.",
+                "chord_or_scale": "Et facilis ratione sunt maiores. Maxime libero minima provident magni facere nostrum. Tempore excepturi quia saepe quia laboriosam vel.",
+                "difficulty_range": "Iusto et officia molestiae aut. Omnis quo ipsa et voluptatum. Non ut quia voluptas adipisci. Assumenda voluptas repellendus minus ad praesentium ut in. Quis expedita a in accusantium et. Officiis voluptas nesciunt id sapiente.",
+                "episode_number": 100534324,
+                "exercise_book_pages": "Eligendi non pariatur hic alias. Illo et autem sit velit officiis et. Illum illo dolorem dolores officiis magni illo quo. Dolorem veritatis illo accusantium vel ducimus.",
+                "fast_bpm": "Distinctio ut perferendis natus est molestias doloremque. Amet et eius sunt ad autem. Vel quo quas ratione doloribus. Sint error autem ex vel quisquam. Ut totam consequatur repellendus nisi. Cum tenetur vero reprehenderit aut ad maiores.",
+                "includes_song": false,
+                "instructors": "Quo ullam accusamus officiis exercitationem possimus veritatis non sunt. Est in corporis dolor. Nesciunt saepe ratione ex eveniet voluptas qui porro.",
                 "live_event_start_time": {
-                    "date": "2012-10-01 00:06:20.000000",
+                    "date": "1998-12-31 22:59:10.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "live_event_end_time": {
-                    "date": "1972-08-02 00:32:19.000000",
+                    "date": "1986-11-25 06:26:37.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "live_event_youtube_id": "Adipisci est earum reiciendis et quia a. Dolore vel ducimus et occaecati iure sed vel sit. Et voluptatum ut doloribus sunt.",
-                "live_stream_feed_type": "Assumenda soluta similique eligendi. Eos libero sequi assumenda. Tempora et sint adipisci voluptatem magni ex. Ullam nisi nobis tenetur beatae occaecati. Voluptate repudiandae animi minus sint debitis.",
-                "name": "Nostrum nobis minus modi qui sit. Accusantium autem inventore possimus optio dolorum repellat reprehenderit. Consequuntur sed dignissimos voluptatum alias totam.",
-                "released": "Rerum blanditiis optio ut eveniet aut. Vel quo fugiat soluta autem quasi eos quia. Quos provident iusto nostrum officiis deleniti harum.",
-                "slow_bpm": "Quidem sequi architecto mollitia natus. Ad sed nulla vitae dolores provident accusamus aliquam. Blanditiis officia qui voluptatem veritatis porro tenetur voluptate.",
-                "total_xp": "Qui minus unde et nobis. Voluptatem sed veritatis non sit iusto. Exercitationem est doloremque rerum dolorem rerum laudantium rem. Sit ea porro cumque autem.",
-                "transcriber_name": "Enim enim consequatur ut optio. Mollitia fugit error qui quia dolor et sed vel. Nobis rerum nam est eaque aut.",
-                "week": 1549229504,
-                "avatar_url": "Amet qui voluptas consequatur expedita facere aut nihil. Et sit autem laboriosam sunt beatae. Magni explicabo et eos nihil tenetur et et. Doloremque dolorum animi corrupti architecto.",
-                "length_in_seconds": 1889120521,
-                "soundslice_slug": "At rerum totam et et. Suscipit in quaerat velit sunt provident dolorem ducimus. Quae ea pariatur tempore odit in et.",
-                "staff_pick_rating": 1882244654,
-                "student_id": 1107745055,
-                "vimeo_video_id": "Qui similique dolor doloremque rerum deserunt error velit nihil. Ut vel laboriosam dicta numquam nam ad assumenda exercitationem. Unde est voluptatibus error repudiandae eius id esse. Odio quibusdam labore sed maxime.",
-                "youtube_video_id": "Voluptas eaque ipsum in quod perferendis qui provident. Nemo minus quos minus deserunt delectus magnam. Ducimus impedit provident cupiditate dolorem. Nihil dolor deserunt nihil repellat. Ad assumenda nam molestiae qui."
+                "live_event_youtube_id": "Consequatur qui rerum iste vel qui non nisi. Doloremque odio ad dicta minima omnis dolores. Dolore qui nostrum dolore deserunt molestiae.",
+                "live_stream_feed_type": "Est fuga et qui esse asperiores impedit vel quas. Et quisquam qui enim aliquid assumenda. Iure quo officiis maxime earum consectetur impedit rerum similique. Consectetur architecto praesentium ut eos doloremque voluptas quam natus.",
+                "name": "Error veniam iusto non aliquam ea voluptas amet. Facilis minima laudantium at itaque. Est nihil qui inventore quo. Id atque et eaque voluptas. Vero dolorem sapiente consequuntur ad eius laudantium veritatis.",
+                "released": "Error sed velit molestiae. Ut minima est repellat. Fuga iusto facilis ipsum vel at. Quam laboriosam libero nam voluptatum.",
+                "slow_bpm": "Provident distinctio omnis qui consequatur fugiat. Iure a et aliquid eligendi alias quia quis. Fugiat et provident eos atque aut.",
+                "total_xp": "Tenetur sed et aut provident. Dolorem alias suscipit pariatur. Cumque dolor et corrupti fuga qui eum minus. Perspiciatis aspernatur est voluptatibus sit laudantium ut reiciendis. Quia quia quis iste.",
+                "transcriber_name": "Sed quia natus cumque perferendis ut aliquam. Odio repellat nihil fugit sed laboriosam. Omnis accusantium est facilis sint exercitationem.",
+                "week": 334193965,
+                "avatar_url": "Dolor quia commodi maiores. Et libero in sapiente tenetur. Quis voluptates doloribus labore quis enim nam. Ut rerum nihil sint minima distinctio possimus. Dicta quo eos doloribus aut nemo quaerat aut asperiores.",
+                "length_in_seconds": 1953132732,
+                "soundslice_slug": "Qui est quia voluptatem repellat natus atque aperiam. Quod eum dolor facere dolores quos. Libero in error quis consequatur cupiditate et eos veniam. Nesciunt repellendus laborum sit adipisci et explicabo iusto quam.",
+                "staff_pick_rating": 961041226,
+                "student_id": 524121876,
+                "vimeo_video_id": "Repellat rerum quasi porro corrupti fugit. Sunt dolores temporibus ipsum a. Sit accusantium cum optio quis odio.",
+                "youtube_video_id": "Nesciunt nihil ullam quo soluta sunt esse. Odio architecto eligendi amet ex velit. Impedit aliquam nulla beatae voluptas voluptatem. A quia modi quae aut. Corrupti quibusdam inventore rerum qui quibusdam ipsa et."
             }
         },
         {
             "type": "contentData",
             "id": "1",
             "attributes": {
-                "key": "In voluptas rerum iure at sunt et voluptatem et. Nesciunt est qui sit et. Quis vero aliquam temporibus inventore et aperiam. Maiores eaque illum iste sunt deserunt et.",
-                "value": "Eligendi aut nisi et. Autem voluptatibus et autem sed accusamus facilis eligendi. Aut in veniam est. Et aut cum eaque laborum. Quo necessitatibus saepe odit nostrum sequi quae. Atque reprehenderit ut quo aut molestias.",
-                "position": 1114424162
+                "key": "Fugit tenetur praesentium quae eum deleniti. Temporibus voluptatem eius sit id. Et quas in reprehenderit eligendi reiciendis ex perspiciatis.",
+                "value": "Eum nemo eos quia repellat quaerat animi accusantium. Vel odit corrupti ea dolorem dolor. Minima reiciendis occaecati reprehenderit et nisi. Aliquam aut sit laborum ut perspiciatis. Quasi ut cum tempora tempore mollitia omnis.",
+                "position": 6071148
             }
         }
     ]
@@ -956,72 +947,72 @@ $.ajax({
         "type": "content",
         "id": "1",
         "attributes": {
-            "slug": "Hic odit ratione tenetur quam. Dolores qui cum consequatur enim natus fuga et illum. Impedit voluptates quis doloribus dolores expedita. Soluta sit ab tempore aut quis quidem eaque. Quaerat quam eius neque itaque fugiat iste.",
+            "slug": "Unde modi amet soluta ipsum dolorem. Rerum facere quo est totam vero quasi facilis. Tempore animi omnis consectetur dolor repudiandae sit fuga. Ipsa qui dignissimos unde dolorem quibusdam quisquam laudantium.",
             "type": "course",
-            "sort": "1846408275",
+            "sort": "2067485678",
             "status": "published",
             "brand": "brand",
-            "language": "Dolores commodi earum ut. Impedit rerum rerum ut officia. Sint nulla voluptatem ducimus beatae explicabo recusandae impedit.",
+            "language": "Ipsa repellendus eos id ut qui nobis odit. Hic harum ipsum illum incidunt vitae. Qui tempora voluptas nulla modi et. Voluptates architecto velit velit et omnis natus consequatur. Dolores rem ipsa alias quia voluptatum libero inventore.",
             "user": "1",
             "publishedOn": {
-                "date": "1989-12-06 00:15:26.000000",
+                "date": "1977-09-27 19:18:30.000000",
                 "timezone_type": 3,
                 "timezone": "UTC"
             },
             "archivedOn": {
-                "date": "1973-04-28 07:23:07.000000",
+                "date": "1988-12-24 01:14:14.000000",
                 "timezone_type": 3,
                 "timezone": "UTC"
             },
             "createdOn": {
-                "date": "1988-11-29 11:48:05.000000",
+                "date": "2012-09-17 21:17:41.000000",
                 "timezone_type": 3,
                 "timezone": "UTC"
             },
-            "difficulty": "Atque et laboriosam et sint itaque. Tempora consequuntur esse tenetur. Et reprehenderit ut non. Eveniet qui ut quis omnis sint quis aspernatur et.",
-            "homeStaffPickRating": "211594015",
-            "legacyId": 2029105382,
-            "legacyWordpressPostId": 2110749050,
-            "qnaVideo": "Quas ab repudiandae facere aut impedit aspernatur. Est hic dicta ut et quidem aliquid natus. Accusantium asperiores dolorem voluptas quas delectus natus voluptates. Explicabo error quae dolor et neque.",
-            "style": "Accusantium ratione dolores mollitia assumenda voluptates consequatur. Dignissimos dolorum impedit repudiandae fugit. Dignissimos facere amet aut dolores. Nesciunt totam consequatur itaque aut esse ipsum nihil.",
-            "title": "Quasi qui modi ad dolores enim iusto est.",
-            "xp": 465338215,
-            "album": "Enim officia qui aspernatur amet magnam. Ut voluptate et soluta est soluta et eligendi. Aspernatur iusto molestiae perspiciatis veritatis optio. Quidem quas nesciunt ipsum vel. Omnis aut inventore rerum laborum sit.",
-            "artist": "Et omnis ut impedit aut eveniet eos. Beatae magni voluptate maxime alias voluptatibus repellendus et. Qui qui doloribus soluta. Fuga magni laborum eligendi alias nihil. Quod quam veritatis debitis dolorem.",
-            "bpm": "Enim et voluptatem cupiditate. Facere iure id autem. Voluptas aut exercitationem deserunt neque voluptatem.",
-            "cdTracks": "Molestias rerum doloribus sit aut quis quas. Aliquam beatae libero sed. Dolorum quia est aut fuga. Sint omnis id aut occaecati et et natus.",
-            "chordOrScale": "Vitae ut ipsa aliquam impedit accusamus. Molestiae eos laudantium et eum tempore. Asperiores omnis libero natus earum inventore enim id. Eum ducimus libero repudiandae perferendis rerum labore ducimus.",
-            "difficultyRange": "Consequuntur autem pariatur est et. Aspernatur sed ratione nesciunt. Quo porro eum quia ullam eum. Fugiat aut quaerat dolor maiores aut. Illo voluptatem ullam tempora voluptatem. Totam omnis ut molestias consequuntur.",
-            "episodeNumber": 870317541,
-            "exerciseBookPages": "Sed minima voluptatibus qui et ad voluptatem rerum. Nobis et impedit necessitatibus sit. Porro vel numquam laboriosam dicta quod. Porro accusamus nam rerum omnis alias quibusdam praesentium.",
-            "fastBpm": "Cumque in molestiae ea dolore rerum facilis. Et iusto molestiae doloremque. Sint est quia dolor odio voluptatum ea unde. Doloribus autem voluptas et dignissimos eaque. Expedita aut vel a.",
-            "includesSong": true,
-            "instructors": "Sed eum fuga delectus ex. Esse explicabo pariatur quos a. Qui mollitia nisi molestiae dolores adipisci et aut totam. Ut sit sapiente laborum.",
+            "difficulty": "Ut nemo omnis deleniti quos consequatur quia. Et odit magni pariatur soluta qui non.",
+            "homeStaffPickRating": "316288058",
+            "legacyId": 1920143894,
+            "legacyWordpressPostId": 950948364,
+            "qnaVideo": "Voluptates quo tempore ut nihil rerum. Et aut laboriosam et aliquid hic aliquid. Error aut qui illo sint deleniti ut a. Voluptatem mollitia tempora sequi nesciunt ratione rem. Dolores at ut fuga. In amet totam officia autem numquam.",
+            "style": "Qui ducimus possimus odit ut est quam fuga. Qui accusamus esse aliquid. Illum aspernatur quo fugit cumque sequi earum laudantium dolor. Inventore nostrum corporis eum totam magnam.",
+            "title": "Corrupti voluptatem sunt tenetur provident dignissimos.",
+            "xp": 300676256,
+            "album": "Eos labore soluta dolorem id vero ut sit. Laboriosam delectus aut ipsam reprehenderit impedit quasi dicta. Et voluptate ipsa et quis temporibus non rem.",
+            "artist": "Reiciendis soluta sed voluptate consequatur blanditiis. Repellendus sed nihil at occaecati ut. Rerum veritatis inventore sunt molestiae rerum corrupti. Incidunt id ut voluptates modi ducimus quos.",
+            "bpm": "Dolorem error veniam inventore eaque aut. Sed facilis in doloribus vel. Et nobis voluptatem quae consectetur. Voluptatem qui illo et alias aut.",
+            "cdTracks": "Eaque dicta et cupiditate sit ducimus voluptates voluptates et. Quia at eum consequatur sit autem.",
+            "chordOrScale": "Et facilis ratione sunt maiores. Maxime libero minima provident magni facere nostrum. Tempore excepturi quia saepe quia laboriosam vel.",
+            "difficultyRange": "Iusto et officia molestiae aut. Omnis quo ipsa et voluptatum. Non ut quia voluptas adipisci. Assumenda voluptas repellendus minus ad praesentium ut in. Quis expedita a in accusantium et. Officiis voluptas nesciunt id sapiente.",
+            "episodeNumber": 100534324,
+            "exerciseBookPages": "Eligendi non pariatur hic alias. Illo et autem sit velit officiis et. Illum illo dolorem dolores officiis magni illo quo. Dolorem veritatis illo accusantium vel ducimus.",
+            "fastBpm": "Distinctio ut perferendis natus est molestias doloremque. Amet et eius sunt ad autem. Vel quo quas ratione doloribus. Sint error autem ex vel quisquam. Ut totam consequatur repellendus nisi. Cum tenetur vero reprehenderit aut ad maiores.",
+            "includesSong": false,
+            "instructors": "Quo ullam accusamus officiis exercitationem possimus veritatis non sunt. Est in corporis dolor. Nesciunt saepe ratione ex eveniet voluptas qui porro.",
             "liveEventStartTime": {
-                "date": "2012-10-01 00:06:20.000000",
+                "date": "1998-12-31 22:59:10.000000",
                 "timezone_type": 3,
                 "timezone": "UTC"
             },
             "liveEventEndTime": {
-                "date": "1972-08-02 00:32:19.000000",
+                "date": "1986-11-25 06:26:37.000000",
                 "timezone_type": 3,
                 "timezone": "UTC"
             },
-            "liveEventYoutubeId": "Adipisci est earum reiciendis et quia a. Dolore vel ducimus et occaecati iure sed vel sit. Et voluptatum ut doloribus sunt.",
-            "liveStreamFeedType": "Assumenda soluta similique eligendi. Eos libero sequi assumenda. Tempora et sint adipisci voluptatem magni ex. Ullam nisi nobis tenetur beatae occaecati. Voluptate repudiandae animi minus sint debitis.",
-            "name": "Nostrum nobis minus modi qui sit. Accusantium autem inventore possimus optio dolorum repellat reprehenderit. Consequuntur sed dignissimos voluptatum alias totam.",
-            "released": "Rerum blanditiis optio ut eveniet aut. Vel quo fugiat soluta autem quasi eos quia. Quos provident iusto nostrum officiis deleniti harum.",
-            "slowBpm": "Quidem sequi architecto mollitia natus. Ad sed nulla vitae dolores provident accusamus aliquam. Blanditiis officia qui voluptatem veritatis porro tenetur voluptate.",
-            "totalXp": "Qui minus unde et nobis. Voluptatem sed veritatis non sit iusto. Exercitationem est doloremque rerum dolorem rerum laudantium rem. Sit ea porro cumque autem.",
-            "transcriberName": "Enim enim consequatur ut optio. Mollitia fugit error qui quia dolor et sed vel. Nobis rerum nam est eaque aut.",
-            "week": 1549229504,
-            "avatarUrl": "Amet qui voluptas consequatur expedita facere aut nihil. Et sit autem laboriosam sunt beatae. Magni explicabo et eos nihil tenetur et et. Doloremque dolorum animi corrupti architecto.",
-            "lengthInSeconds": 1889120521,
-            "soundsliceSlug": "At rerum totam et et. Suscipit in quaerat velit sunt provident dolorem ducimus. Quae ea pariatur tempore odit in et.",
-            "staffPickRating": 1882244654,
-            "studentId": 1107745055,
-            "vimeoVideoId": "Qui similique dolor doloremque rerum deserunt error velit nihil. Ut vel laboriosam dicta numquam nam ad assumenda exercitationem. Unde est voluptatibus error repudiandae eius id esse. Odio quibusdam labore sed maxime.",
-            "youtubeVideoId": "Voluptas eaque ipsum in quod perferendis qui provident. Nemo minus quos minus deserunt delectus magnam. Ducimus impedit provident cupiditate dolorem. Nihil dolor deserunt nihil repellat. Ad assumenda nam molestiae qui."
+            "liveEventYoutubeId": "Consequatur qui rerum iste vel qui non nisi. Doloremque odio ad dicta minima omnis dolores. Dolore qui nostrum dolore deserunt molestiae.",
+            "liveStreamFeedType": "Est fuga et qui esse asperiores impedit vel quas. Et quisquam qui enim aliquid assumenda. Iure quo officiis maxime earum consectetur impedit rerum similique. Consectetur architecto praesentium ut eos doloremque voluptas quam natus.",
+            "name": "Error veniam iusto non aliquam ea voluptas amet. Facilis minima laudantium at itaque. Est nihil qui inventore quo. Id atque et eaque voluptas. Vero dolorem sapiente consequuntur ad eius laudantium veritatis.",
+            "released": "Error sed velit molestiae. Ut minima est repellat. Fuga iusto facilis ipsum vel at. Quam laboriosam libero nam voluptatum.",
+            "slowBpm": "Provident distinctio omnis qui consequatur fugiat. Iure a et aliquid eligendi alias quia quis. Fugiat et provident eos atque aut.",
+            "totalXp": "Tenetur sed et aut provident. Dolorem alias suscipit pariatur. Cumque dolor et corrupti fuga qui eum minus. Perspiciatis aspernatur est voluptatibus sit laudantium ut reiciendis. Quia quia quis iste.",
+            "transcriberName": "Sed quia natus cumque perferendis ut aliquam. Odio repellat nihil fugit sed laboriosam. Omnis accusantium est facilis sint exercitationem.",
+            "week": 334193965,
+            "avatarUrl": "Dolor quia commodi maiores. Et libero in sapiente tenetur. Quis voluptates doloribus labore quis enim nam. Ut rerum nihil sint minima distinctio possimus. Dicta quo eos doloribus aut nemo quaerat aut asperiores.",
+            "lengthInSeconds": 1953132732,
+            "soundsliceSlug": "Qui est quia voluptatem repellat natus atque aperiam. Quod eum dolor facere dolores quos. Libero in error quis consequatur cupiditate et eos veniam. Nesciunt repellendus laborum sit adipisci et explicabo iusto quam.",
+            "staffPickRating": 961041226,
+            "studentId": 524121876,
+            "vimeoVideoId": "Repellat rerum quasi porro corrupti fugit. Sunt dolores temporibus ipsum a. Sit accusantium cum optio quis odio.",
+            "youtubeVideoId": "Nesciunt nihil ullam quo soluta sunt esse. Odio architecto eligendi amet ex velit. Impedit aliquam nulla beatae voluptas voluptatem. A quia modi quae aut. Corrupti quibusdam inventore rerum qui quibusdam ipsa et."
         },
         "relationships": {
             "data": {
@@ -1039,9 +1030,9 @@ $.ajax({
             "type": "contentData",
             "id": "1",
             "attributes": {
-                "key": "In voluptas rerum iure at sunt et voluptatem et. Nesciunt est qui sit et. Quis vero aliquam temporibus inventore et aperiam. Maiores eaque illum iste sunt deserunt et.",
-                "value": "Eligendi aut nisi et. Autem voluptatibus et autem sed accusamus facilis eligendi. Aut in veniam est. Et aut cum eaque laborum. Quo necessitatibus saepe odit nostrum sequi quae. Atque reprehenderit ut quo aut molestias.",
-                "position": 1114424162
+                "key": "Fugit tenetur praesentium quae eum deleniti. Temporibus voluptatem eius sit id. Et quas in reprehenderit eligendi reiciendis ex perspiciatis.",
+                "value": "Eum nemo eos quia repellat quaerat animi accusantium. Vel odit corrupti ea dolorem dolor. Minima reiciendis occaecati reprehenderit et nisi. Aliquam aut sit laborum ut perspiciatis. Quasi ut cum tempora tempore mollitia omnis.",
+                "position": 6071148
             }
         }
     ]
@@ -1135,7 +1126,7 @@ $.ajax({
             "type": "course",
             "status": "draft",
             "language": "en-US",
-            "sort": 0,
+            "sort": 1,
             "published_on": "2019-05-21 21:20:10",
             "created_on": "2019-05-21 21:20:10",
             "archived_on": "2019-05-21 21:20:10",
@@ -1174,7 +1165,7 @@ $.ajax({
         "attributes": {
             "slug": "01-getting-started",
             "type": "course",
-            "sort": "0",
+            "sort": "1",
             "status": "draft",
             "brand": "brand",
             "language": "en-US",
@@ -1223,7 +1214,7 @@ $.ajax({
             "parent": {
                 "data": {
                     "type": "parent",
-                    "id": "2"
+                    "id": "4"
                 }
             }
         }
@@ -1233,79 +1224,79 @@ $.ajax({
             "type": "parent",
             "id": "1",
             "attributes": {
-                "slug": "Hic odit ratione tenetur quam. Dolores qui cum consequatur enim natus fuga et illum. Impedit voluptates quis doloribus dolores expedita. Soluta sit ab tempore aut quis quidem eaque. Quaerat quam eius neque itaque fugiat iste.",
+                "slug": "Unde modi amet soluta ipsum dolorem. Rerum facere quo est totam vero quasi facilis. Tempore animi omnis consectetur dolor repudiandae sit fuga. Ipsa qui dignissimos unde dolorem quibusdam quisquam laudantium.",
                 "type": "course",
-                "sort": "1846408275",
+                "sort": "2067485678",
                 "status": "published",
                 "brand": "brand",
-                "language": "Dolores commodi earum ut. Impedit rerum rerum ut officia. Sint nulla voluptatem ducimus beatae explicabo recusandae impedit.",
+                "language": "Ipsa repellendus eos id ut qui nobis odit. Hic harum ipsum illum incidunt vitae. Qui tempora voluptas nulla modi et. Voluptates architecto velit velit et omnis natus consequatur. Dolores rem ipsa alias quia voluptatum libero inventore.",
                 "user": "1",
                 "published_on": {
-                    "date": "1989-12-06 00:15:26.000000",
+                    "date": "1977-09-27 19:18:30.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "archived_on": {
-                    "date": "1973-04-28 07:23:07.000000",
+                    "date": "1988-12-24 01:14:14.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "created_on": {
-                    "date": "1988-11-29 11:48:05.000000",
+                    "date": "2012-09-17 21:17:41.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "difficulty": "Atque et laboriosam et sint itaque. Tempora consequuntur esse tenetur. Et reprehenderit ut non. Eveniet qui ut quis omnis sint quis aspernatur et.",
-                "home_staff_pick_rating": "211594015",
-                "legacy_id": 2029105382,
-                "legacy_wordpress_post_id": 2110749050,
-                "qna_video": "Quas ab repudiandae facere aut impedit aspernatur. Est hic dicta ut et quidem aliquid natus. Accusantium asperiores dolorem voluptas quas delectus natus voluptates. Explicabo error quae dolor et neque.",
-                "style": "Accusantium ratione dolores mollitia assumenda voluptates consequatur. Dignissimos dolorum impedit repudiandae fugit. Dignissimos facere amet aut dolores. Nesciunt totam consequatur itaque aut esse ipsum nihil.",
-                "title": "Quasi qui modi ad dolores enim iusto est.",
-                "xp": 465338215,
-                "album": "Enim officia qui aspernatur amet magnam. Ut voluptate et soluta est soluta et eligendi. Aspernatur iusto molestiae perspiciatis veritatis optio. Quidem quas nesciunt ipsum vel. Omnis aut inventore rerum laborum sit.",
-                "artist": "Et omnis ut impedit aut eveniet eos. Beatae magni voluptate maxime alias voluptatibus repellendus et. Qui qui doloribus soluta. Fuga magni laborum eligendi alias nihil. Quod quam veritatis debitis dolorem.",
-                "bpm": "Enim et voluptatem cupiditate. Facere iure id autem. Voluptas aut exercitationem deserunt neque voluptatem.",
-                "cd_tracks": "Molestias rerum doloribus sit aut quis quas. Aliquam beatae libero sed. Dolorum quia est aut fuga. Sint omnis id aut occaecati et et natus.",
-                "chord_or_scale": "Vitae ut ipsa aliquam impedit accusamus. Molestiae eos laudantium et eum tempore. Asperiores omnis libero natus earum inventore enim id. Eum ducimus libero repudiandae perferendis rerum labore ducimus.",
-                "difficulty_range": "Consequuntur autem pariatur est et. Aspernatur sed ratione nesciunt. Quo porro eum quia ullam eum. Fugiat aut quaerat dolor maiores aut. Illo voluptatem ullam tempora voluptatem. Totam omnis ut molestias consequuntur.",
-                "episode_number": 870317541,
-                "exercise_book_pages": "Sed minima voluptatibus qui et ad voluptatem rerum. Nobis et impedit necessitatibus sit. Porro vel numquam laboriosam dicta quod. Porro accusamus nam rerum omnis alias quibusdam praesentium.",
-                "fast_bpm": "Cumque in molestiae ea dolore rerum facilis. Et iusto molestiae doloremque. Sint est quia dolor odio voluptatum ea unde. Doloribus autem voluptas et dignissimos eaque. Expedita aut vel a.",
-                "includes_song": true,
-                "instructors": "Sed eum fuga delectus ex. Esse explicabo pariatur quos a. Qui mollitia nisi molestiae dolores adipisci et aut totam. Ut sit sapiente laborum.",
+                "difficulty": "Ut nemo omnis deleniti quos consequatur quia. Et odit magni pariatur soluta qui non.",
+                "home_staff_pick_rating": "316288058",
+                "legacy_id": 1920143894,
+                "legacy_wordpress_post_id": 950948364,
+                "qna_video": "Voluptates quo tempore ut nihil rerum. Et aut laboriosam et aliquid hic aliquid. Error aut qui illo sint deleniti ut a. Voluptatem mollitia tempora sequi nesciunt ratione rem. Dolores at ut fuga. In amet totam officia autem numquam.",
+                "style": "Qui ducimus possimus odit ut est quam fuga. Qui accusamus esse aliquid. Illum aspernatur quo fugit cumque sequi earum laudantium dolor. Inventore nostrum corporis eum totam magnam.",
+                "title": "Corrupti voluptatem sunt tenetur provident dignissimos.",
+                "xp": 300676256,
+                "album": "Eos labore soluta dolorem id vero ut sit. Laboriosam delectus aut ipsam reprehenderit impedit quasi dicta. Et voluptate ipsa et quis temporibus non rem.",
+                "artist": "Reiciendis soluta sed voluptate consequatur blanditiis. Repellendus sed nihil at occaecati ut. Rerum veritatis inventore sunt molestiae rerum corrupti. Incidunt id ut voluptates modi ducimus quos.",
+                "bpm": "Dolorem error veniam inventore eaque aut. Sed facilis in doloribus vel. Et nobis voluptatem quae consectetur. Voluptatem qui illo et alias aut.",
+                "cd_tracks": "Eaque dicta et cupiditate sit ducimus voluptates voluptates et. Quia at eum consequatur sit autem.",
+                "chord_or_scale": "Et facilis ratione sunt maiores. Maxime libero minima provident magni facere nostrum. Tempore excepturi quia saepe quia laboriosam vel.",
+                "difficulty_range": "Iusto et officia molestiae aut. Omnis quo ipsa et voluptatum. Non ut quia voluptas adipisci. Assumenda voluptas repellendus minus ad praesentium ut in. Quis expedita a in accusantium et. Officiis voluptas nesciunt id sapiente.",
+                "episode_number": 100534324,
+                "exercise_book_pages": "Eligendi non pariatur hic alias. Illo et autem sit velit officiis et. Illum illo dolorem dolores officiis magni illo quo. Dolorem veritatis illo accusantium vel ducimus.",
+                "fast_bpm": "Distinctio ut perferendis natus est molestias doloremque. Amet et eius sunt ad autem. Vel quo quas ratione doloribus. Sint error autem ex vel quisquam. Ut totam consequatur repellendus nisi. Cum tenetur vero reprehenderit aut ad maiores.",
+                "includes_song": false,
+                "instructors": "Quo ullam accusamus officiis exercitationem possimus veritatis non sunt. Est in corporis dolor. Nesciunt saepe ratione ex eveniet voluptas qui porro.",
                 "live_event_start_time": {
-                    "date": "2012-10-01 00:06:20.000000",
+                    "date": "1998-12-31 22:59:10.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "live_event_end_time": {
-                    "date": "1972-08-02 00:32:19.000000",
+                    "date": "1986-11-25 06:26:37.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "live_event_youtube_id": "Adipisci est earum reiciendis et quia a. Dolore vel ducimus et occaecati iure sed vel sit. Et voluptatum ut doloribus sunt.",
-                "live_stream_feed_type": "Assumenda soluta similique eligendi. Eos libero sequi assumenda. Tempora et sint adipisci voluptatem magni ex. Ullam nisi nobis tenetur beatae occaecati. Voluptate repudiandae animi minus sint debitis.",
-                "name": "Nostrum nobis minus modi qui sit. Accusantium autem inventore possimus optio dolorum repellat reprehenderit. Consequuntur sed dignissimos voluptatum alias totam.",
-                "released": "Rerum blanditiis optio ut eveniet aut. Vel quo fugiat soluta autem quasi eos quia. Quos provident iusto nostrum officiis deleniti harum.",
-                "slow_bpm": "Quidem sequi architecto mollitia natus. Ad sed nulla vitae dolores provident accusamus aliquam. Blanditiis officia qui voluptatem veritatis porro tenetur voluptate.",
-                "total_xp": "Qui minus unde et nobis. Voluptatem sed veritatis non sit iusto. Exercitationem est doloremque rerum dolorem rerum laudantium rem. Sit ea porro cumque autem.",
-                "transcriber_name": "Enim enim consequatur ut optio. Mollitia fugit error qui quia dolor et sed vel. Nobis rerum nam est eaque aut.",
-                "week": 1549229504,
-                "avatar_url": "Amet qui voluptas consequatur expedita facere aut nihil. Et sit autem laboriosam sunt beatae. Magni explicabo et eos nihil tenetur et et. Doloremque dolorum animi corrupti architecto.",
-                "length_in_seconds": 1889120521,
-                "soundslice_slug": "At rerum totam et et. Suscipit in quaerat velit sunt provident dolorem ducimus. Quae ea pariatur tempore odit in et.",
-                "staff_pick_rating": 1882244654,
-                "student_id": 1107745055,
-                "vimeo_video_id": "Qui similique dolor doloremque rerum deserunt error velit nihil. Ut vel laboriosam dicta numquam nam ad assumenda exercitationem. Unde est voluptatibus error repudiandae eius id esse. Odio quibusdam labore sed maxime.",
-                "youtube_video_id": "Voluptas eaque ipsum in quod perferendis qui provident. Nemo minus quos minus deserunt delectus magnam. Ducimus impedit provident cupiditate dolorem. Nihil dolor deserunt nihil repellat. Ad assumenda nam molestiae qui."
+                "live_event_youtube_id": "Consequatur qui rerum iste vel qui non nisi. Doloremque odio ad dicta minima omnis dolores. Dolore qui nostrum dolore deserunt molestiae.",
+                "live_stream_feed_type": "Est fuga et qui esse asperiores impedit vel quas. Et quisquam qui enim aliquid assumenda. Iure quo officiis maxime earum consectetur impedit rerum similique. Consectetur architecto praesentium ut eos doloremque voluptas quam natus.",
+                "name": "Error veniam iusto non aliquam ea voluptas amet. Facilis minima laudantium at itaque. Est nihil qui inventore quo. Id atque et eaque voluptas. Vero dolorem sapiente consequuntur ad eius laudantium veritatis.",
+                "released": "Error sed velit molestiae. Ut minima est repellat. Fuga iusto facilis ipsum vel at. Quam laboriosam libero nam voluptatum.",
+                "slow_bpm": "Provident distinctio omnis qui consequatur fugiat. Iure a et aliquid eligendi alias quia quis. Fugiat et provident eos atque aut.",
+                "total_xp": "Tenetur sed et aut provident. Dolorem alias suscipit pariatur. Cumque dolor et corrupti fuga qui eum minus. Perspiciatis aspernatur est voluptatibus sit laudantium ut reiciendis. Quia quia quis iste.",
+                "transcriber_name": "Sed quia natus cumque perferendis ut aliquam. Odio repellat nihil fugit sed laboriosam. Omnis accusantium est facilis sint exercitationem.",
+                "week": 334193965,
+                "avatar_url": "Dolor quia commodi maiores. Et libero in sapiente tenetur. Quis voluptates doloribus labore quis enim nam. Ut rerum nihil sint minima distinctio possimus. Dicta quo eos doloribus aut nemo quaerat aut asperiores.",
+                "length_in_seconds": 1953132732,
+                "soundslice_slug": "Qui est quia voluptatem repellat natus atque aperiam. Quod eum dolor facere dolores quos. Libero in error quis consequatur cupiditate et eos veniam. Nesciunt repellendus laborum sit adipisci et explicabo iusto quam.",
+                "staff_pick_rating": 961041226,
+                "student_id": 524121876,
+                "vimeo_video_id": "Repellat rerum quasi porro corrupti fugit. Sunt dolores temporibus ipsum a. Sit accusantium cum optio quis odio.",
+                "youtube_video_id": "Nesciunt nihil ullam quo soluta sunt esse. Odio architecto eligendi amet ex velit. Impedit aliquam nulla beatae voluptas voluptatem. A quia modi quae aut. Corrupti quibusdam inventore rerum qui quibusdam ipsa et."
             }
         },
         {
             "type": "parent",
-            "id": "2",
+            "id": "4",
             "attributes": {
-                "child_position": 74958920
+                "child_position": 1684253885
             },
             "relationships": {
                 "parent": {
@@ -1347,7 +1338,8 @@ $.ajax({
 |body|data.attributes.slug|    ||
 |body|data.attributes.type|    ||
 |body|data.attributes.status|    ||
-|body|data.attributes.language|    |* @bodyParam data.attributes.sort integer|
+|body|data.attributes.language|    ||
+|body|data.attributes.sort|    ||
 |body|data.attributes.published_on|    ||
 |body|data.attributes.archived_on|    ||
 |body|data.attributes.fields|    ||
@@ -1403,7 +1395,8 @@ $.ajax({
             "slug": "02-getting-started",
             "type": "course",
             "status": "draft",
-            "language": "consequuntur",
+            "language": "en-EN",
+            "sort": 1,
             "published_on": "2019-05-21 21:20:10",
             "archived_on": "2019-05-31 21:20:10",
             "fields": [],
@@ -1435,66 +1428,66 @@ $.ajax({
         "attributes": {
             "slug": "02-getting-started",
             "type": "course",
-            "sort": "1846408275",
+            "sort": "1",
             "status": "draft",
             "brand": "brand",
-            "language": "consequuntur",
+            "language": "en-EN",
             "user": "1",
             "publishedOn": "2019-05-21 21:20:10",
             "archivedOn": {
-                "date": "1973-04-28 07:23:07.000000",
+                "date": "1988-12-24 01:14:14.000000",
                 "timezone_type": 3,
                 "timezone": "UTC"
             },
             "createdOn": {
-                "date": "1988-11-29 11:48:05.000000",
+                "date": "2012-09-17 21:17:41.000000",
                 "timezone_type": 3,
                 "timezone": "UTC"
             },
-            "difficulty": "Atque et laboriosam et sint itaque. Tempora consequuntur esse tenetur. Et reprehenderit ut non. Eveniet qui ut quis omnis sint quis aspernatur et.",
-            "homeStaffPickRating": "211594015",
-            "legacyId": 2029105382,
-            "legacyWordpressPostId": 2110749050,
-            "qnaVideo": "Quas ab repudiandae facere aut impedit aspernatur. Est hic dicta ut et quidem aliquid natus. Accusantium asperiores dolorem voluptas quas delectus natus voluptates. Explicabo error quae dolor et neque.",
-            "style": "Accusantium ratione dolores mollitia assumenda voluptates consequatur. Dignissimos dolorum impedit repudiandae fugit. Dignissimos facere amet aut dolores. Nesciunt totam consequatur itaque aut esse ipsum nihil.",
-            "title": "Quasi qui modi ad dolores enim iusto est.",
-            "xp": 465338215,
-            "album": "Enim officia qui aspernatur amet magnam. Ut voluptate et soluta est soluta et eligendi. Aspernatur iusto molestiae perspiciatis veritatis optio. Quidem quas nesciunt ipsum vel. Omnis aut inventore rerum laborum sit.",
-            "artist": "Et omnis ut impedit aut eveniet eos. Beatae magni voluptate maxime alias voluptatibus repellendus et. Qui qui doloribus soluta. Fuga magni laborum eligendi alias nihil. Quod quam veritatis debitis dolorem.",
-            "bpm": "Enim et voluptatem cupiditate. Facere iure id autem. Voluptas aut exercitationem deserunt neque voluptatem.",
-            "cdTracks": "Molestias rerum doloribus sit aut quis quas. Aliquam beatae libero sed. Dolorum quia est aut fuga. Sint omnis id aut occaecati et et natus.",
-            "chordOrScale": "Vitae ut ipsa aliquam impedit accusamus. Molestiae eos laudantium et eum tempore. Asperiores omnis libero natus earum inventore enim id. Eum ducimus libero repudiandae perferendis rerum labore ducimus.",
-            "difficultyRange": "Consequuntur autem pariatur est et. Aspernatur sed ratione nesciunt. Quo porro eum quia ullam eum. Fugiat aut quaerat dolor maiores aut. Illo voluptatem ullam tempora voluptatem. Totam omnis ut molestias consequuntur.",
-            "episodeNumber": 870317541,
-            "exerciseBookPages": "Sed minima voluptatibus qui et ad voluptatem rerum. Nobis et impedit necessitatibus sit. Porro vel numquam laboriosam dicta quod. Porro accusamus nam rerum omnis alias quibusdam praesentium.",
-            "fastBpm": "Cumque in molestiae ea dolore rerum facilis. Et iusto molestiae doloremque. Sint est quia dolor odio voluptatum ea unde. Doloribus autem voluptas et dignissimos eaque. Expedita aut vel a.",
-            "includesSong": true,
-            "instructors": "Sed eum fuga delectus ex. Esse explicabo pariatur quos a. Qui mollitia nisi molestiae dolores adipisci et aut totam. Ut sit sapiente laborum.",
+            "difficulty": "Ut nemo omnis deleniti quos consequatur quia. Et odit magni pariatur soluta qui non.",
+            "homeStaffPickRating": "316288058",
+            "legacyId": 1920143894,
+            "legacyWordpressPostId": 950948364,
+            "qnaVideo": "Voluptates quo tempore ut nihil rerum. Et aut laboriosam et aliquid hic aliquid. Error aut qui illo sint deleniti ut a. Voluptatem mollitia tempora sequi nesciunt ratione rem. Dolores at ut fuga. In amet totam officia autem numquam.",
+            "style": "Qui ducimus possimus odit ut est quam fuga. Qui accusamus esse aliquid. Illum aspernatur quo fugit cumque sequi earum laudantium dolor. Inventore nostrum corporis eum totam magnam.",
+            "title": "Corrupti voluptatem sunt tenetur provident dignissimos.",
+            "xp": 300676256,
+            "album": "Eos labore soluta dolorem id vero ut sit. Laboriosam delectus aut ipsam reprehenderit impedit quasi dicta. Et voluptate ipsa et quis temporibus non rem.",
+            "artist": "Reiciendis soluta sed voluptate consequatur blanditiis. Repellendus sed nihil at occaecati ut. Rerum veritatis inventore sunt molestiae rerum corrupti. Incidunt id ut voluptates modi ducimus quos.",
+            "bpm": "Dolorem error veniam inventore eaque aut. Sed facilis in doloribus vel. Et nobis voluptatem quae consectetur. Voluptatem qui illo et alias aut.",
+            "cdTracks": "Eaque dicta et cupiditate sit ducimus voluptates voluptates et. Quia at eum consequatur sit autem.",
+            "chordOrScale": "Et facilis ratione sunt maiores. Maxime libero minima provident magni facere nostrum. Tempore excepturi quia saepe quia laboriosam vel.",
+            "difficultyRange": "Iusto et officia molestiae aut. Omnis quo ipsa et voluptatum. Non ut quia voluptas adipisci. Assumenda voluptas repellendus minus ad praesentium ut in. Quis expedita a in accusantium et. Officiis voluptas nesciunt id sapiente.",
+            "episodeNumber": 100534324,
+            "exerciseBookPages": "Eligendi non pariatur hic alias. Illo et autem sit velit officiis et. Illum illo dolorem dolores officiis magni illo quo. Dolorem veritatis illo accusantium vel ducimus.",
+            "fastBpm": "Distinctio ut perferendis natus est molestias doloremque. Amet et eius sunt ad autem. Vel quo quas ratione doloribus. Sint error autem ex vel quisquam. Ut totam consequatur repellendus nisi. Cum tenetur vero reprehenderit aut ad maiores.",
+            "includesSong": false,
+            "instructors": "Quo ullam accusamus officiis exercitationem possimus veritatis non sunt. Est in corporis dolor. Nesciunt saepe ratione ex eveniet voluptas qui porro.",
             "liveEventStartTime": {
-                "date": "2012-10-01 00:06:20.000000",
+                "date": "1998-12-31 22:59:10.000000",
                 "timezone_type": 3,
                 "timezone": "UTC"
             },
             "liveEventEndTime": {
-                "date": "1972-08-02 00:32:19.000000",
+                "date": "1986-11-25 06:26:37.000000",
                 "timezone_type": 3,
                 "timezone": "UTC"
             },
-            "liveEventYoutubeId": "Adipisci est earum reiciendis et quia a. Dolore vel ducimus et occaecati iure sed vel sit. Et voluptatum ut doloribus sunt.",
-            "liveStreamFeedType": "Assumenda soluta similique eligendi. Eos libero sequi assumenda. Tempora et sint adipisci voluptatem magni ex. Ullam nisi nobis tenetur beatae occaecati. Voluptate repudiandae animi minus sint debitis.",
-            "name": "Nostrum nobis minus modi qui sit. Accusantium autem inventore possimus optio dolorum repellat reprehenderit. Consequuntur sed dignissimos voluptatum alias totam.",
-            "released": "Rerum blanditiis optio ut eveniet aut. Vel quo fugiat soluta autem quasi eos quia. Quos provident iusto nostrum officiis deleniti harum.",
-            "slowBpm": "Quidem sequi architecto mollitia natus. Ad sed nulla vitae dolores provident accusamus aliquam. Blanditiis officia qui voluptatem veritatis porro tenetur voluptate.",
-            "totalXp": "Qui minus unde et nobis. Voluptatem sed veritatis non sit iusto. Exercitationem est doloremque rerum dolorem rerum laudantium rem. Sit ea porro cumque autem.",
-            "transcriberName": "Enim enim consequatur ut optio. Mollitia fugit error qui quia dolor et sed vel. Nobis rerum nam est eaque aut.",
-            "week": 1549229504,
-            "avatarUrl": "Amet qui voluptas consequatur expedita facere aut nihil. Et sit autem laboriosam sunt beatae. Magni explicabo et eos nihil tenetur et et. Doloremque dolorum animi corrupti architecto.",
-            "lengthInSeconds": 1889120521,
-            "soundsliceSlug": "At rerum totam et et. Suscipit in quaerat velit sunt provident dolorem ducimus. Quae ea pariatur tempore odit in et.",
-            "staffPickRating": 1882244654,
-            "studentId": 1107745055,
-            "vimeoVideoId": "Qui similique dolor doloremque rerum deserunt error velit nihil. Ut vel laboriosam dicta numquam nam ad assumenda exercitationem. Unde est voluptatibus error repudiandae eius id esse. Odio quibusdam labore sed maxime.",
-            "youtubeVideoId": "Voluptas eaque ipsum in quod perferendis qui provident. Nemo minus quos minus deserunt delectus magnam. Ducimus impedit provident cupiditate dolorem. Nihil dolor deserunt nihil repellat. Ad assumenda nam molestiae qui."
+            "liveEventYoutubeId": "Consequatur qui rerum iste vel qui non nisi. Doloremque odio ad dicta minima omnis dolores. Dolore qui nostrum dolore deserunt molestiae.",
+            "liveStreamFeedType": "Est fuga et qui esse asperiores impedit vel quas. Et quisquam qui enim aliquid assumenda. Iure quo officiis maxime earum consectetur impedit rerum similique. Consectetur architecto praesentium ut eos doloremque voluptas quam natus.",
+            "name": "Error veniam iusto non aliquam ea voluptas amet. Facilis minima laudantium at itaque. Est nihil qui inventore quo. Id atque et eaque voluptas. Vero dolorem sapiente consequuntur ad eius laudantium veritatis.",
+            "released": "Error sed velit molestiae. Ut minima est repellat. Fuga iusto facilis ipsum vel at. Quam laboriosam libero nam voluptatum.",
+            "slowBpm": "Provident distinctio omnis qui consequatur fugiat. Iure a et aliquid eligendi alias quia quis. Fugiat et provident eos atque aut.",
+            "totalXp": "Tenetur sed et aut provident. Dolorem alias suscipit pariatur. Cumque dolor et corrupti fuga qui eum minus. Perspiciatis aspernatur est voluptatibus sit laudantium ut reiciendis. Quia quia quis iste.",
+            "transcriberName": "Sed quia natus cumque perferendis ut aliquam. Odio repellat nihil fugit sed laboriosam. Omnis accusantium est facilis sint exercitationem.",
+            "week": 334193965,
+            "avatarUrl": "Dolor quia commodi maiores. Et libero in sapiente tenetur. Quis voluptates doloribus labore quis enim nam. Ut rerum nihil sint minima distinctio possimus. Dicta quo eos doloribus aut nemo quaerat aut asperiores.",
+            "lengthInSeconds": 1953132732,
+            "soundsliceSlug": "Qui est quia voluptatem repellat natus atque aperiam. Quod eum dolor facere dolores quos. Libero in error quis consequatur cupiditate et eos veniam. Nesciunt repellendus laborum sit adipisci et explicabo iusto quam.",
+            "staffPickRating": 961041226,
+            "studentId": 524121876,
+            "vimeoVideoId": "Repellat rerum quasi porro corrupti fugit. Sunt dolores temporibus ipsum a. Sit accusantium cum optio quis odio.",
+            "youtubeVideoId": "Nesciunt nihil ullam quo soluta sunt esse. Odio architecto eligendi amet ex velit. Impedit aliquam nulla beatae voluptas voluptatem. A quia modi quae aut. Corrupti quibusdam inventore rerum qui quibusdam ipsa et."
         },
         "relationships": {
             "data": {
@@ -1508,7 +1501,7 @@ $.ajax({
             "parent": {
                 "data": {
                     "type": "parent",
-                    "id": "2"
+                    "id": "3"
                 }
             }
         }
@@ -1520,66 +1513,66 @@ $.ajax({
             "attributes": {
                 "slug": "02-getting-started",
                 "type": "course",
-                "sort": "1846408275",
+                "sort": "1",
                 "status": "draft",
                 "brand": "brand",
-                "language": "consequuntur",
+                "language": "en-EN",
                 "user": "1",
                 "published_on": "2019-05-21 21:20:10",
                 "archived_on": {
-                    "date": "1973-04-28 07:23:07.000000",
+                    "date": "1988-12-24 01:14:14.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "created_on": {
-                    "date": "1988-11-29 11:48:05.000000",
+                    "date": "2012-09-17 21:17:41.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "difficulty": "Atque et laboriosam et sint itaque. Tempora consequuntur esse tenetur. Et reprehenderit ut non. Eveniet qui ut quis omnis sint quis aspernatur et.",
-                "home_staff_pick_rating": "211594015",
-                "legacy_id": 2029105382,
-                "legacy_wordpress_post_id": 2110749050,
-                "qna_video": "Quas ab repudiandae facere aut impedit aspernatur. Est hic dicta ut et quidem aliquid natus. Accusantium asperiores dolorem voluptas quas delectus natus voluptates. Explicabo error quae dolor et neque.",
-                "style": "Accusantium ratione dolores mollitia assumenda voluptates consequatur. Dignissimos dolorum impedit repudiandae fugit. Dignissimos facere amet aut dolores. Nesciunt totam consequatur itaque aut esse ipsum nihil.",
-                "title": "Quasi qui modi ad dolores enim iusto est.",
-                "xp": 465338215,
-                "album": "Enim officia qui aspernatur amet magnam. Ut voluptate et soluta est soluta et eligendi. Aspernatur iusto molestiae perspiciatis veritatis optio. Quidem quas nesciunt ipsum vel. Omnis aut inventore rerum laborum sit.",
-                "artist": "Et omnis ut impedit aut eveniet eos. Beatae magni voluptate maxime alias voluptatibus repellendus et. Qui qui doloribus soluta. Fuga magni laborum eligendi alias nihil. Quod quam veritatis debitis dolorem.",
-                "bpm": "Enim et voluptatem cupiditate. Facere iure id autem. Voluptas aut exercitationem deserunt neque voluptatem.",
-                "cd_tracks": "Molestias rerum doloribus sit aut quis quas. Aliquam beatae libero sed. Dolorum quia est aut fuga. Sint omnis id aut occaecati et et natus.",
-                "chord_or_scale": "Vitae ut ipsa aliquam impedit accusamus. Molestiae eos laudantium et eum tempore. Asperiores omnis libero natus earum inventore enim id. Eum ducimus libero repudiandae perferendis rerum labore ducimus.",
-                "difficulty_range": "Consequuntur autem pariatur est et. Aspernatur sed ratione nesciunt. Quo porro eum quia ullam eum. Fugiat aut quaerat dolor maiores aut. Illo voluptatem ullam tempora voluptatem. Totam omnis ut molestias consequuntur.",
-                "episode_number": 870317541,
-                "exercise_book_pages": "Sed minima voluptatibus qui et ad voluptatem rerum. Nobis et impedit necessitatibus sit. Porro vel numquam laboriosam dicta quod. Porro accusamus nam rerum omnis alias quibusdam praesentium.",
-                "fast_bpm": "Cumque in molestiae ea dolore rerum facilis. Et iusto molestiae doloremque. Sint est quia dolor odio voluptatum ea unde. Doloribus autem voluptas et dignissimos eaque. Expedita aut vel a.",
-                "includes_song": true,
-                "instructors": "Sed eum fuga delectus ex. Esse explicabo pariatur quos a. Qui mollitia nisi molestiae dolores adipisci et aut totam. Ut sit sapiente laborum.",
+                "difficulty": "Ut nemo omnis deleniti quos consequatur quia. Et odit magni pariatur soluta qui non.",
+                "home_staff_pick_rating": "316288058",
+                "legacy_id": 1920143894,
+                "legacy_wordpress_post_id": 950948364,
+                "qna_video": "Voluptates quo tempore ut nihil rerum. Et aut laboriosam et aliquid hic aliquid. Error aut qui illo sint deleniti ut a. Voluptatem mollitia tempora sequi nesciunt ratione rem. Dolores at ut fuga. In amet totam officia autem numquam.",
+                "style": "Qui ducimus possimus odit ut est quam fuga. Qui accusamus esse aliquid. Illum aspernatur quo fugit cumque sequi earum laudantium dolor. Inventore nostrum corporis eum totam magnam.",
+                "title": "Corrupti voluptatem sunt tenetur provident dignissimos.",
+                "xp": 300676256,
+                "album": "Eos labore soluta dolorem id vero ut sit. Laboriosam delectus aut ipsam reprehenderit impedit quasi dicta. Et voluptate ipsa et quis temporibus non rem.",
+                "artist": "Reiciendis soluta sed voluptate consequatur blanditiis. Repellendus sed nihil at occaecati ut. Rerum veritatis inventore sunt molestiae rerum corrupti. Incidunt id ut voluptates modi ducimus quos.",
+                "bpm": "Dolorem error veniam inventore eaque aut. Sed facilis in doloribus vel. Et nobis voluptatem quae consectetur. Voluptatem qui illo et alias aut.",
+                "cd_tracks": "Eaque dicta et cupiditate sit ducimus voluptates voluptates et. Quia at eum consequatur sit autem.",
+                "chord_or_scale": "Et facilis ratione sunt maiores. Maxime libero minima provident magni facere nostrum. Tempore excepturi quia saepe quia laboriosam vel.",
+                "difficulty_range": "Iusto et officia molestiae aut. Omnis quo ipsa et voluptatum. Non ut quia voluptas adipisci. Assumenda voluptas repellendus minus ad praesentium ut in. Quis expedita a in accusantium et. Officiis voluptas nesciunt id sapiente.",
+                "episode_number": 100534324,
+                "exercise_book_pages": "Eligendi non pariatur hic alias. Illo et autem sit velit officiis et. Illum illo dolorem dolores officiis magni illo quo. Dolorem veritatis illo accusantium vel ducimus.",
+                "fast_bpm": "Distinctio ut perferendis natus est molestias doloremque. Amet et eius sunt ad autem. Vel quo quas ratione doloribus. Sint error autem ex vel quisquam. Ut totam consequatur repellendus nisi. Cum tenetur vero reprehenderit aut ad maiores.",
+                "includes_song": false,
+                "instructors": "Quo ullam accusamus officiis exercitationem possimus veritatis non sunt. Est in corporis dolor. Nesciunt saepe ratione ex eveniet voluptas qui porro.",
                 "live_event_start_time": {
-                    "date": "2012-10-01 00:06:20.000000",
+                    "date": "1998-12-31 22:59:10.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
                 "live_event_end_time": {
-                    "date": "1972-08-02 00:32:19.000000",
+                    "date": "1986-11-25 06:26:37.000000",
                     "timezone_type": 3,
                     "timezone": "UTC"
                 },
-                "live_event_youtube_id": "Adipisci est earum reiciendis et quia a. Dolore vel ducimus et occaecati iure sed vel sit. Et voluptatum ut doloribus sunt.",
-                "live_stream_feed_type": "Assumenda soluta similique eligendi. Eos libero sequi assumenda. Tempora et sint adipisci voluptatem magni ex. Ullam nisi nobis tenetur beatae occaecati. Voluptate repudiandae animi minus sint debitis.",
-                "name": "Nostrum nobis minus modi qui sit. Accusantium autem inventore possimus optio dolorum repellat reprehenderit. Consequuntur sed dignissimos voluptatum alias totam.",
-                "released": "Rerum blanditiis optio ut eveniet aut. Vel quo fugiat soluta autem quasi eos quia. Quos provident iusto nostrum officiis deleniti harum.",
-                "slow_bpm": "Quidem sequi architecto mollitia natus. Ad sed nulla vitae dolores provident accusamus aliquam. Blanditiis officia qui voluptatem veritatis porro tenetur voluptate.",
-                "total_xp": "Qui minus unde et nobis. Voluptatem sed veritatis non sit iusto. Exercitationem est doloremque rerum dolorem rerum laudantium rem. Sit ea porro cumque autem.",
-                "transcriber_name": "Enim enim consequatur ut optio. Mollitia fugit error qui quia dolor et sed vel. Nobis rerum nam est eaque aut.",
-                "week": 1549229504,
-                "avatar_url": "Amet qui voluptas consequatur expedita facere aut nihil. Et sit autem laboriosam sunt beatae. Magni explicabo et eos nihil tenetur et et. Doloremque dolorum animi corrupti architecto.",
-                "length_in_seconds": 1889120521,
-                "soundslice_slug": "At rerum totam et et. Suscipit in quaerat velit sunt provident dolorem ducimus. Quae ea pariatur tempore odit in et.",
-                "staff_pick_rating": 1882244654,
-                "student_id": 1107745055,
-                "vimeo_video_id": "Qui similique dolor doloremque rerum deserunt error velit nihil. Ut vel laboriosam dicta numquam nam ad assumenda exercitationem. Unde est voluptatibus error repudiandae eius id esse. Odio quibusdam labore sed maxime.",
-                "youtube_video_id": "Voluptas eaque ipsum in quod perferendis qui provident. Nemo minus quos minus deserunt delectus magnam. Ducimus impedit provident cupiditate dolorem. Nihil dolor deserunt nihil repellat. Ad assumenda nam molestiae qui."
+                "live_event_youtube_id": "Consequatur qui rerum iste vel qui non nisi. Doloremque odio ad dicta minima omnis dolores. Dolore qui nostrum dolore deserunt molestiae.",
+                "live_stream_feed_type": "Est fuga et qui esse asperiores impedit vel quas. Et quisquam qui enim aliquid assumenda. Iure quo officiis maxime earum consectetur impedit rerum similique. Consectetur architecto praesentium ut eos doloremque voluptas quam natus.",
+                "name": "Error veniam iusto non aliquam ea voluptas amet. Facilis minima laudantium at itaque. Est nihil qui inventore quo. Id atque et eaque voluptas. Vero dolorem sapiente consequuntur ad eius laudantium veritatis.",
+                "released": "Error sed velit molestiae. Ut minima est repellat. Fuga iusto facilis ipsum vel at. Quam laboriosam libero nam voluptatum.",
+                "slow_bpm": "Provident distinctio omnis qui consequatur fugiat. Iure a et aliquid eligendi alias quia quis. Fugiat et provident eos atque aut.",
+                "total_xp": "Tenetur sed et aut provident. Dolorem alias suscipit pariatur. Cumque dolor et corrupti fuga qui eum minus. Perspiciatis aspernatur est voluptatibus sit laudantium ut reiciendis. Quia quia quis iste.",
+                "transcriber_name": "Sed quia natus cumque perferendis ut aliquam. Odio repellat nihil fugit sed laboriosam. Omnis accusantium est facilis sint exercitationem.",
+                "week": 334193965,
+                "avatar_url": "Dolor quia commodi maiores. Et libero in sapiente tenetur. Quis voluptates doloribus labore quis enim nam. Ut rerum nihil sint minima distinctio possimus. Dicta quo eos doloribus aut nemo quaerat aut asperiores.",
+                "length_in_seconds": 1953132732,
+                "soundslice_slug": "Qui est quia voluptatem repellat natus atque aperiam. Quod eum dolor facere dolores quos. Libero in error quis consequatur cupiditate et eos veniam. Nesciunt repellendus laborum sit adipisci et explicabo iusto quam.",
+                "staff_pick_rating": 961041226,
+                "student_id": 524121876,
+                "vimeo_video_id": "Repellat rerum quasi porro corrupti fugit. Sunt dolores temporibus ipsum a. Sit accusantium cum optio quis odio.",
+                "youtube_video_id": "Nesciunt nihil ullam quo soluta sunt esse. Odio architecto eligendi amet ex velit. Impedit aliquam nulla beatae voluptas voluptatem. A quia modi quae aut. Corrupti quibusdam inventore rerum qui quibusdam ipsa et."
             }
         },
         {
@@ -1593,9 +1586,9 @@ $.ajax({
         },
         {
             "type": "parent",
-            "id": "2",
+            "id": "3",
             "attributes": {
-                "child_position": 74958920
+                "child_position": 1684253884
             },
             "relationships": {
                 "parent": {

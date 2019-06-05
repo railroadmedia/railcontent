@@ -95,7 +95,7 @@ class PermissionJsonController extends Controller
         return ResponseService::permission($permissions);
     }
 
-    /** Create a new permission and return it in JSON API format
+    /** Create a new permission
      *
      * @param PermissionRequest $request
      * @return Fractal
@@ -105,7 +105,8 @@ class PermissionJsonController extends Controller
      * @throws OptimisticLockException
      * @throws ReflectionException
      *
-     * @permission create.permission required
+     * @permission Must be logged in
+     * @permission Must have the create.permission permission to create
 
      */
     public function store(PermissionRequest $request)
@@ -125,7 +126,7 @@ class PermissionJsonController extends Controller
         return ResponseService::permission($permission);
     }
 
-    /** Update a permission if exist and return it in JSON API format
+    /** Change permission name or the brand where the permission it's available.
      *
      * @param $id
      * @param PermissionRequest $request
@@ -137,7 +138,9 @@ class PermissionJsonController extends Controller
      * @throws ReflectionException
      * @throws Throwable
      *
-     * @permission update.permission required
+     * @permission Must be logged in
+     * @permission Must have the update.permission permission to update
+     * @queryParam id required
      */
     public function update($id, PermissionRequest $request)
     {
@@ -161,7 +164,7 @@ class PermissionJsonController extends Controller
             ->respond(201);
     }
 
-    /** Delete a permission if exist and it's not linked with content id or content type
+    /** Delete an existing permission and all the links with contents
      *
      * @param $id
      * @return JsonResponse
@@ -170,7 +173,9 @@ class PermissionJsonController extends Controller
      * @throws OptimisticLockException
      * @throws Throwable
      *
-     * @permission delete.permission required
+     * @permission Must be logged in
+     * @permission Must have the delete.permission permission
+     * @queryParam id required
      */
     public function delete($id)
     {
@@ -199,7 +204,7 @@ class PermissionJsonController extends Controller
         return ResponseService::empty(204);
     }
 
-    /** Attach permission to a specific content or to all content of a certain type
+    /** Assign permission to a specific content or to all content of certain type.
      *
      * @param PermissionAssignRequest $request
      * @return Fractal
@@ -207,7 +212,8 @@ class PermissionJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      *
-     * @permission assign.permission required
+     * @permission Must be logged in
+     * @permission Must have the assign.permission permission to assign
      */
     public function assign(PermissionAssignRequest $request)
     {
@@ -221,13 +227,14 @@ class PermissionJsonController extends Controller
         return ResponseService::contentPermission($assignedPermission);
     }
 
-    /** Dissociate ("unattach") permissions from a specific content or all content of a certain type
+    /** Dissociate permissions from a specific content or all content of a certain type
      *
      * @param PermissionDissociateRequest $request
      * @return JsonResponse
      * @throws NotAllowedException
      *
-     * @permission disociate.permissions required
+     * @permission Must be logged in
+     * @permission Must have the disociate.permissions permission
      */
     public function dissociate(PermissionDissociateRequest $request)
     {

@@ -4,7 +4,7 @@
 
 
 <!-- START_2897a4200e3365f16bdc09c4a556e35c -->
-## Call the method from service that create new data and link the content with the data.
+## Create a new content data.
 
 
 ### HTTP Request
@@ -12,7 +12,8 @@
 
 
 ### Permissions
-    - create.content.data required
+    - Must be logged in
+    - Must have the create.content.data permission to create
     
 ### Request Parameters
 
@@ -65,7 +66,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 6
+            "position": 5
         },
         "relationships": {
             "content": {
@@ -105,7 +106,7 @@ $.ajax({
 <!-- END_2897a4200e3365f16bdc09c4a556e35c -->
 
 <!-- START_fb363b9c870922ffa55b96a23cd5a425 -->
-## Call the method from service to update a content datum
+## Change content data.
 
 
 ### HTTP Request
@@ -113,13 +114,15 @@ $.ajax({
 
 
 ### Permissions
-    - update.content.data required
+    - Must be logged in
+    - Must have the update.content.data permission to update
     
 ### Request Parameters
 
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|query|id|  yes  ||
 |body|data.type|  yes  |Must be 'contentData'.|
 |body|data.attributes.key|    |The data key.|
 |body|data.attributes.value|    |Data value. |
@@ -161,7 +164,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 16
+            "position": 3
         },
         "relationships": {
             "content": {
@@ -189,7 +192,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 0
+            "position": 1
         }
     }
 }
@@ -201,7 +204,7 @@ $.ajax({
 <!-- END_fb363b9c870922ffa55b96a23cd5a425 -->
 
 <!-- START_a4137a74763de18a36fc0ff882de62d3 -->
-## Call the method from service to delete the content data
+## Delete content datum.
 
 
 ### HTTP Request
@@ -209,13 +212,15 @@ $.ajax({
 
 
 ### Permissions
-    - delete.content.data required
+    - Must be logged in
+    - Must have the delete.content.data permission
     
 ### Request Parameters
 
 
 |Type|Key|Required|Notes|
 |----|---|--------|-----|
+|query|id|  yes  ||
 
 ### Validation Rules
 ```php

@@ -48,7 +48,7 @@ class ContentDatumJsonController extends Controller
         $this->permissionPackageService = $permissionPackageService;
     }
 
-    /** Call the method from service that create new data and link the content with the data.
+    /** Create a new content data.
      *
      * @param ContentDatumCreateRequest $request
      * @return Fractal
@@ -56,7 +56,8 @@ class ContentDatumJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      *
-     * @permission create.content.data required
+     * @permission Must be logged in
+     * @permission Must have the create.content.data permission to create
      */
     public function store(ContentDatumCreateRequest $request)
     {
@@ -72,7 +73,7 @@ class ContentDatumJsonController extends Controller
         return ResponseService::contentData($contentData);
     }
 
-    /** Call the method from service to update a content datum
+    /** Change content data.
      *
      * @param $dataId
      * @param ContentDatumUpdateRequest $request
@@ -82,7 +83,9 @@ class ContentDatumJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      *
-     * @permission update.content.data required
+     * @permission Must be logged in
+     * @permission Must have the update.content.data permission to update
+     * @queryParam id required
      */
     public function update($dataId, ContentDatumUpdateRequest $request)
     {
@@ -103,7 +106,7 @@ class ContentDatumJsonController extends Controller
 
     }
 
-    /** Call the method from service to delete the content data
+    /** Delete content datum.
      *
      * @param ContentDatumDeleteRequest $request
      * @param $dataId
@@ -113,7 +116,9 @@ class ContentDatumJsonController extends Controller
      * @throws ORMException
      * @throws OptimisticLockException
      *
-     * @permission delete.content.data required
+     * @permission Must be logged in
+     * @permission Must have the delete.content.data permission
+     * @queryParam id required
      */
     public function delete(ContentDatumDeleteRequest $request, $dataId)
     {
