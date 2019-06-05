@@ -15,11 +15,22 @@ class ContentUserProgressDecorator implements DecoratorInterface
     protected $userContentProgressRepository;
 
     /**
-     * CommentLikesDecorator constructor.
+     * @var UserContentProgressService
      */
-    public function __construct(UserContentProgressRepository $userContentProgressRepository)
+    protected $userContentProgressService;
+
+    /**
+     * CommentLikesDecorator constructor.
+     * @param UserContentProgressRepository $userContentProgressRepository
+     * @param UserContentProgressService $userContentProgressService
+     */
+    public function __construct(
+        UserContentProgressRepository $userContentProgressRepository,
+        UserContentProgressService $userContentProgressService
+    )
     {
         $this->userContentProgressRepository = $userContentProgressRepository;
+        $this->userContentProgressService = $userContentProgressService;
     }
 
     public function decorate(Collection $contents, $userId = null)
@@ -44,8 +55,59 @@ class ContentUserProgressDecorator implements DecoratorInterface
             $contentProgressions =
                 $this->userContentProgressRepository->getByUserIdAndWhereContentIdIn($userId, $contentIds);
 
-            $contentProgressionsByContentId =
-                array_combine(array_column($contentProgressions, 'content_id'), $contentProgressions);
+            $contentProgressionsByContentId = [];
+
+            foreach ($contentProgressions as $contentProgression) {
+                if (isset($contentProgressionsByContentId[$contentProgression['content_id']])) {
+
+                    if (($contentProgression['state'] == 'started' &&
+                        $contentProgressionsByContentId[$contentProgression['content_id']]['state'] == 'completed')) {
+
+                        $contentProgressionsByContentId[$contentProgression['content_id']] = $contentProgression;
+
+                        $this->userContentProgressRepository->query()
+                            ->where(
+                                [
+                                    'content_id' => $contentProgression['content_id'],
+                                    'user_id' => $contentProgression['user_id'],
+                                    'state' => 'started'
+                                ]
+                            )
+                            ->delete();
+
+                        $this->userContentProgressService->completeContent(
+                            $contentProgression['content_id'],
+                            $contentProgression['user_id']
+                        );
+                    }
+
+                    if (($contentProgression['state'] == 'completed' &&
+                        $contentProgressionsByContentId[$contentProgression['content_id']]['state'] == 'started')) {
+
+                        $contentProgressionsByContentId[$contentProgression['content_id']] = $contentProgression;
+
+                        $this->userContentProgressRepository->query()
+                            ->where(
+                                [
+                                    'content_id' => $contentProgressionsByContentId[$contentProgression['content_id']]['content_id'],
+                                    'user_id' => $contentProgressionsByContentId[$contentProgression['content_id']]['user_id'],
+                                    'state' => 'started'
+                                ]
+                            )
+                            ->delete();
+
+                        $this->userContentProgressService->completeContent(
+                            $contentProgressionsByContentId[$contentProgression['content_id']]['content_id'],
+                            $contentProgressionsByContentId[$contentProgression['content_id']]['user_id']
+                        );
+
+                        $contentProgressionsByContentId[$contentProgression['content_id']] = $contentProgression;
+                    }
+                }
+                else {
+                    $contentProgressionsByContentId[$contentProgression['content_id']] = $contentProgression;
+                }
+            }
 
             foreach ($contents as $index => $content) {
                 if (!empty($contentProgressionsByContentId[$content['id']])) {
@@ -59,8 +121,10 @@ class ContentUserProgressDecorator implements DecoratorInterface
                         $contentProgressionsByContentId[$content['id']]['state'] ==
                         UserContentProgressService::STATE_STARTED;
 
-                    $contents[$index]['progress_percent'] = $contentProgressionsByContentId[$content['id']]['progress_percent'];
-                } else {
+                    $contents[$index]['progress_percent'] =
+                        $contentProgressionsByContentId[$content['id']]['progress_percent'];
+                }
+                else {
                     $contents[$index]['user_progress'][$userId] = [];
 
                     $contents[$index][UserContentProgressService::STATE_COMPLETED] = false;
