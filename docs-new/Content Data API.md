@@ -29,29 +29,27 @@
 
 ### Validation Rules
 ```php
-[
-    "        $this->validateContent($this);",
-    "",
-    "        \/\/set the general validation rules",
-    "        $this->setGeneralRules(",
-    "            [",
-    "                'data.type' => 'required|in:contentData',",
-    "                'data.attributes.key' => 'required|max:255',",
-    "                'data.attributes.position' => 'nullable|numeric|min:0',",
-    "                'data.relationships.content.data.type' => 'required|in:content',",
-    "                'data.relationships.content.data.id' => 'required|numeric|exists:' .",
-    "                    config('railcontent.table_prefix') .",
-    "                    'content' .",
-    "                    ',id',",
-    "            ]",
-    "        );",
-    "",
-    "        \/\/set the custom validation rules",
-    "        $this->setCustomRules($this, 'datum');",
-    "",
-    "        \/\/get all the rules for the request",
-    "        return parent::rules();"
-]
+        $this->validateContent($this);
+
+        //set the general validation rules
+        $this->setGeneralRules(
+            [
+                'data.type' => 'required|in:contentData',
+                'data.attributes.key' => 'required|max:255',
+                'data.attributes.position' => 'nullable|numeric|min:0',
+                'data.relationships.content.data.type' => 'required|in:content',
+                'data.relationships.content.data.id' => 'required|numeric|exists:' .
+                    config('railcontent.table_prefix') .
+                    'content' .
+                    ',id',
+            ]
+        );
+
+        //set the custom validation rules
+        $this->setCustomRules($this, 'datum');
+
+        //get all the rules for the request
+        return parent::rules();
 ```
 
 ### Request Example:
@@ -66,7 +64,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 5
+            "position": 4
         },
         "relationships": {
             "content": {
@@ -132,24 +130,22 @@ $.ajax({
 
 ### Validation Rules
 ```php
-[
-    "        $this->validateContent($this);",
-    "",
-    "        \/\/set the general validation rules",
-    "        $this->setGeneralRules(",
-    "            [",
-    "                'data.type' => 'required|in:contentData',",
-    "                'data.attributes.key' => 'max:255',",
-    "                'data.attributes.position' => 'nullable|numeric|min:0'",
-    "            ]",
-    "        );",
-    "",
-    "        \/\/set the custom validation rules",
-    "        $this->setCustomRules($this, 'datum');",
-    "",
-    "        \/\/get all the rules for the request",
-    "        return parent::rules();"
-]
+        $this->validateContent($this);
+
+        //set the general validation rules
+        $this->setGeneralRules(
+            [
+                'data.type' => 'required|in:contentData',
+                'data.attributes.key' => 'max:255',
+                'data.attributes.position' => 'nullable|numeric|min:0'
+            ]
+        );
+
+        //set the custom validation rules
+        $this->setCustomRules($this, 'datum');
+
+        //get all the rules for the request
+        return parent::rules();
 ```
 
 ### Request Example:
@@ -164,7 +160,7 @@ $.ajax({
         "attributes": {
             "key": "description",
             "value": "indsf fdgg  gfg",
-            "position": 3
+            "position": 20
         },
         "relationships": {
             "content": {
@@ -224,12 +220,10 @@ $.ajax({
 
 ### Validation Rules
 ```php
-[
-    "        $this->validateContent($this);",
-    "",
-    "        \/\/get all the validation rules that apply to the request",
-    "        return parent::rules();"
-]
+        $this->validateContent($this);
+
+        //get all the validation rules that apply to the request
+        return parent::rules();
 ```
 
 ### Request Example:

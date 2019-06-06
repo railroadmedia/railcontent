@@ -30,18 +30,16 @@
 
 ### Validation Rules
 ```php
-[
-    "        return [",
-    "            'data.type' => 'required|in:userPermission',",
-    "            'data.relationships.user.data.type' =>'required|in:user',",
-    "            'data.relationships.user.data.id' => 'required|integer',",
-    "            'data.relationships.permission.data.type' => 'required|in:permission',",
-    "            'data.relationships.permission.data.id' => 'required|integer|exists:' . config('railcontent.database_connection_name') . '.' .",
-    "                config('railcontent.table_prefix'). 'permissions' . ',id',",
-    "            'data.attributes.start_date' => 'required|date',",
-    "            'data.attributes.expiration_date' => 'nullable|date'",
-    "        ];"
-]
+        return [
+            'data.type' => 'required|in:userPermission',
+            'data.relationships.user.data.type' =>'required|in:user',
+            'data.relationships.user.data.id' => 'required|integer',
+            'data.relationships.permission.data.type' => 'required|in:permission',
+            'data.relationships.permission.data.id' => 'required|integer|exists:' . config('railcontent.database_connection_name') . '.' .
+                config('railcontent.table_prefix'). 'permissions' . ',id',
+            'data.attributes.start_date' => 'required|date',
+            'data.attributes.expiration_date' => 'nullable|date'
+        ];
 ```
 
 ### Request Example:
@@ -90,8 +88,8 @@ $.ajax({
             "user": "1",
             "start_date": "2019-05-01 00:00:00",
             "expiration_date": "2019-06-01 00:00:00",
-            "created_at": "2019-06-05 11:00:15",
-            "updated_at": "2019-06-05 11:00:15"
+            "created_at": "2019-06-06 11:52:55",
+            "updated_at": "2019-06-06 11:52:55"
         },
         "relationships": {
             "permission": {
@@ -107,7 +105,7 @@ $.ajax({
             "type": "permission",
             "id": "10",
             "attributes": {
-                "name": "Perferendis rerum similique aut itaque. Et mollitia ipsam ut. Quasi totam natus necessitatibus quia et rerum.",
+                "name": "Accusantium veniam ratione natus aperiam laboriosam. Est itaque natus voluptas esse. Provident dolores voluptas porro labore voluptas natus.",
                 "brand": "brand"
             }
         }

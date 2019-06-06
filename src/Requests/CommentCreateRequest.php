@@ -64,7 +64,7 @@ class CommentCreateRequest extends FormRequest
             'data.type' => 'required|in:comment',
             'data.attributes.comment' => 'required|max:10024',
             'data.relationships.content.data.type' => 'required|in:content',
-            'data.relationships.content9.data.id' => 'nullable|numeric|exists:' .
+            'data.relationships.content.data.id' => 'nullable|numeric|exists:' .
                 config('railcontent.table_prefix') .
                 'content' .
                 ',id',
