@@ -25,6 +25,7 @@ use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\MigrateContentFields;
+use Railroad\Railcontent\Commands\OrphanContent;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
@@ -90,7 +91,8 @@ class RailcontentServiceProvider extends ServiceProvider
                 CreateVimeoVideoContentRecords::class,
                 CreateYoutubeVideoContentRecords::class,
                 ExpireCache::class,
-                MigrateContentFields::class
+                MigrateContentFields::class,
+                OrphanContent::class
             ]
         );
     }
