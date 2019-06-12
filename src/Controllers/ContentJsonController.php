@@ -319,7 +319,7 @@ class ContentJsonController extends Controller
         $page = $request->get('page', 1);
 
         if (in_array('shows', $types)) {
-            $types = array_merge($types, array_keys(config('railcontent.shows')));
+            $types = array_merge($types, array_values(config('railcontent.showTypes')));
         }
 
         if (!empty($types)) {
@@ -361,7 +361,7 @@ class ContentJsonController extends Controller
         $page = $request->get('page', 1);
 
         if (in_array('shows', $types)) {
-            $types = array_merge($types, array_keys(config('railcontent.shows')));
+            $types = array_merge($types, array_values(config('railcontent.showTypes')));
         }
 
         $field = ($request->has('is_home')) ? 'home_staff_pick_rating' : 'staff_pick_rating';
@@ -398,8 +398,8 @@ class ContentJsonController extends Controller
 
         $sortedBy = '-published_on';
         foreach ($types as $type) {
-            if (array_key_exists($type, config('railcontent.shows'))) {
-                $sortedBy = config('railcontent.shows')[$type]['sortedBy'];
+            if (array_key_exists($type, config('railcontent.cataloguesMetadata'))) {
+                $sortedBy = config('railcontent.cataloguesMetadata')[$type]['sortedBy'];
             }
         }
 

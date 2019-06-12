@@ -117,7 +117,7 @@ class MyListJsonController extends Controller
                 'play-along',
                 'song',
             ],
-            array_keys(config('railcontent.shows'))
+            array_values(config('railcontent.showTypes'))
         );
 
         $page = $request->get('page', 1);

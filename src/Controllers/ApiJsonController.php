@@ -59,16 +59,16 @@ class ApiJsonController extends Controller
      */
     public function getShows()
     {
-        $contentTypes = array_keys(config('railcontent.shows'));
-
-        foreach ($contentTypes as $type) {
+        foreach (config('railcontent.showTypes') as $type) {
             $episodes[$type]['episodeNumber'] = $this->contentService->countByTypes(
                 [$type]
-
             );
         }
 
-        return response()->json(array_merge_recursive(config('railcontent.shows'), $episodes));
+        $contentTypes = array_flip(config('railcontent.showTypes'));
+        $shows = array_intersect_key(array_replace($contentTypes, config('railcontent.cataloguesMetadata')), $contentTypes);
+
+        return response()->json(array_merge_recursive($shows, $episodes));
     }
 
     /**
