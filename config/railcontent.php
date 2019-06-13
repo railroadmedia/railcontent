@@ -423,6 +423,10 @@ return [
             "sortedBy" => "-published_on"
         ]
     ],
+    /**
+     * The order of the show types it's IMPORTANT.
+     * The show cards on 'Shows' page are displayed in this order.
+     */
     'showTypes' => [
         'live',
         'question-and-answer',
@@ -443,6 +447,45 @@ return [
         'podcasts',
         'behind-the-scenes',
         'performances',
-        '25-days-of-christmas'
+        '25-days-of-christmas',
     ],
+    'userListContentTypes' => [
+        'course',
+        'play-along',
+        'song',
+        'student-focus',
+        'pack-lesson',
+        'rudiment',
+        'semester-pack-lesson',
+    ],
+    'liveContentTypes' => [
+        'student-focus',
+        'song',
+    ],
+    'topLevelContentTypes' => [
+        'learning-path',
+        'pack',
+        'pack-bundle',
+        'pack-bundle-lesson',
+        'semester-pack',
+        'semester-pack-lesson',
+        'course',
+        'song',
+        'play-along',
+        'student-focus',
+        'rudiment',
+    ],
+    'catalogueContentTypes' => [
+        'course',
+        'play-along',
+        'student-focus',
+        'song',
+        'rudiment',
+    ],
+    'contentReleaseContentTypes' => [
+        'course',
+        'play-along',
+        'student-focus',
+        'song',
+    ]
 ];
