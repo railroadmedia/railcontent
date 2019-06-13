@@ -104,7 +104,8 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.default_language', $defaultConfig['default_language']);
         $app['config']->set('railcontent.field_option_list', $defaultConfig['field_option_list']);
         $app['config']->set('railcontent.commentable_content_types', $defaultConfig['commentable_content_types']);
-        $app['config']->set('railcontent.shows', $defaultConfig['shows']);
+        $app['config']->set('railcontent.showTypes', $defaultConfig['showTypes']);
+        $app['config']->set('railcontent.cataloguesMetadata', $defaultConfig['cataloguesMetadata']);
         $app['config']->set('railcontent.onboardingContentIds', $defaultConfig['onboardingContentIds']);
         $app['config']->set('railcontent.validation', $defaultConfig['validation']);
         $app['config']->set(
