@@ -1121,9 +1121,14 @@ class ContentService
      */
     public function getContentForCalendar($brand = null, $includeSemesterPackLessons = true)
     {
-        $shows = [];
-        $liveEventsTypes = [];
-        $contentReleasesTypes = [];
+        $liveEventsTypes =  array_merge(
+            (array)config('railcontent.showTypes'),
+            (array)config('railcontent.liveContentTypes')
+        );
+        $contentReleasesTypes =  array_merge(
+            (array)config('railcontent.showTypes'),
+            (array)config('railcontent.contentReleaseContentTypes')
+        );
 
         if($includeSemesterPackLessons){
             $parents = [];
@@ -1147,13 +1152,11 @@ class ContentService
 
         ContentRepository::$pullFutureContent = true;
 
-        $typesForCalendars = config('railcontent.types-for-calendars.' . $brand, []);
-
         if($includeSemesterPackLessons){
             $semesterPacksToGet = config('railcontent.semester-pack-schedule-labels.' . $brand, []);
         }
 
-        if(empty($typesForCalendars) && empty($semesterPacksToGet)){
+        if(empty($liveEventsTypes) && empty($contentReleasesTypes) &&empty($semesterPacksToGet)){
             return new Collection();
         }
 
@@ -1163,66 +1166,21 @@ class ContentService
             }
         }
 
-        $nested = false;
+        $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            $liveEventsTypes,
+            ContentService::STATUS_SCHEDULED,
+            Carbon::now()
+                ->toDateTimeString(),
+            '>'
+        );
 
-        foreach($typesForCalendars as $value) {
-            if (is_array($value)) {
-                $nested = true;
-            }
-
-        }
-
-        foreach($typesForCalendars as $value) {
-            if(gettype($value) === 'string'  && $nested){
-                error_log(
-                    'config/railcontent.php misconfiguation. All values of a brand\'s "types-for-calendars" config ' .
-                    'must be either all arrays or all strings.'
-                );
-                die();
-            }
-        }
-
-        if($nested){
-
-            if($typesForCalendars){
-                $shows = $typesForCalendars['shows'] ?? [];
-                $liveEventsTypes = $typesForCalendars['live-events-types'] ?? [];
-                $contentReleasesTypes = $typesForCalendars['content-releases-types'] ?? [];
-            }
-
-            $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
-                array_merge($liveEventsTypes, $shows),
-                ContentService::STATUS_SCHEDULED,
-                Carbon::now()
-                    ->toDateTimeString(),
-                '>'
-            );
-
-            $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
-                array_merge($contentReleasesTypes, $shows),
-                ContentService::STATUS_PUBLISHED,
-                Carbon::now()
-                    ->toDateTimeString(),
-                '>'
-            );
-        } else {
-            $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
-                $typesForCalendars,
-                ContentService::STATUS_SCHEDULED,
-                Carbon::now()
-                    ->toDateTimeString(),
-                '>'
-            );
-
-            $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
-                $typesForCalendars,
-                ContentService::STATUS_PUBLISHED,
-                Carbon::now()
-                    ->toDateTimeString(),
-                '>'
-            );
-        }
-
+        $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            $contentReleasesTypes,
+            ContentService::STATUS_PUBLISHED,
+            Carbon::now()
+                ->toDateTimeString(),
+            '>'
+        );
 
         /*
          * -------------------------------------------------------------------------------------------------------------
