@@ -442,8 +442,8 @@ class UserContentProgressService
     {
         $content = $this->attachProgressToContents($userId, ['id' => $contentId]);
 
-        $allowedTypesForStarted = config('railcontent.allowed_types_for_bubble_progress')['started'];
-        $allowedTypesForCompleted = config('railcontent.allowed_types_for_bubble_progress')['completed'];
+        $allowedTypesForStarted = array_merge(config('railcontent.allowed_types_for_bubble_progress')['started'], config('railcontent.showTypes'));
+        $allowedTypesForCompleted = array_merge(config('railcontent.allowed_types_for_bubble_progress')['completed'], config('railcontent.showTypes'));
         $allowedTypes = array_unique(array_merge($allowedTypesForStarted, $allowedTypesForCompleted));
 
         $parents = $this->attachProgressToContents(

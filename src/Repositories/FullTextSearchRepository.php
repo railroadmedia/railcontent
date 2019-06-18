@@ -80,7 +80,10 @@ class FullTextSearchRepository extends RepositoryBase
 
         $query = $this->contentQuery()
             ->selectPrimaryColumns()
-            ->restrictByTypes(ConfigService::$searchableContentTypes)
+            ->restrictByTypes(array_merge(
+                config('railcontent.showTypes'),
+                config('railcontent.topLevelContentTypes')
+            ))
             ->orderBy('id');
 
         $query->chunk(
