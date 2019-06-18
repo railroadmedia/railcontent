@@ -62,7 +62,7 @@ class FullTextSearchServiceTest extends RailcontentTestCase
         for ($i = 0; $i < 15; $i++) {
             $content[$i] = $this->contentFactory->create(
                 'slug',
-                $this->faker->randomElement(ConfigService::$searchableContentTypes)
+                $this->faker->randomElement(config('railcontent.showTypes'))
             );
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title', 'field ' . $i);

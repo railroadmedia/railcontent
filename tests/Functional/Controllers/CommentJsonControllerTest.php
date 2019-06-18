@@ -508,7 +508,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $this->commentFactory->create($this->faker->text, $content['id'], null, rand(5, 50));
 
         // 6th comment, no parent, should be returned
-        $sixthComment = $this->commentFactory->create($this->faker->text, $content['id'], null, rand(5, 50));
+        $sixthComment = $this->commentFactory->create($this->faker->text, $content['id'], null, $currentUserId);
 
         // 7th comment, parent is 6th comment, should be returned as nested
         $seventhComment = $this->commentFactory->create($this->faker->text, $content['id'], $sixthComment['id'], $currentUserId);
@@ -530,7 +530,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $decodedResponse = $response->decodeResponseJson();
 
         // assert results count
-        $this->assertEquals($decodedResponse['meta']['totalResults'], 2);
+        $this->assertEquals($decodedResponse['meta']['totalResults'], 3);
 
         // assert results
         $this->assertEquals($decodedResponse['data'][0]['id'], $firstComment['id']);

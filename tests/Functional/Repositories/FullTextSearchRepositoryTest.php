@@ -41,7 +41,7 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
 
     public function test_indexes_are_created()
     {
-        $content = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$searchableContentTypes));
+        $content = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(config('railcontent.showTypes')));
 
         $titleField = $this->fieldFactory->create($content['id'], 'title');
         $otherField = $this->fieldFactory->create($content['id'], $this->faker->word);
@@ -66,7 +66,7 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
     {
         for ($i = 1; $i < 10; $i++) {
             $content[$i] = (array)$this->contentFactory->create( $this->faker->word,
-                $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                $this->faker->randomElement(config('railcontent.showTypes')),
                 ContentService::STATUS_PUBLISHED);
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title');
@@ -89,7 +89,7 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
     public function test_search_no_results()
     {
         for ($i = 0; $i < 10; $i++) {
-            $content[$i] = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(ConfigService::$searchableContentTypes));
+            $content[$i] = $this->contentFactory->create($this->faker->slug(), $this->faker->randomElement(config('railcontent.showTypes')));
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title','field'.$i);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field'.$i);
@@ -114,7 +114,7 @@ class FullTextSearchRepositoryTest extends RailcontentTestCase
         $page = 1;
         $limit = 10;
         for ($i = 0; $i < 15; $i++) {
-            $content[$i] = $this->contentFactory->create('slug',  $this->faker->randomElement(ConfigService::$searchableContentTypes));
+            $content[$i] = $this->contentFactory->create('slug',  $this->faker->randomElement(config('railcontent.showTypes')));
 
             $titleField[$i] = $this->fieldFactory->create($content[$i]['id'], 'title','field '.$i);
             $otherField[$i] = $this->fieldFactory->create($content[$i]['id'], 'other field '.$i);

@@ -355,7 +355,9 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         );
 
         //pull all the active user permissions
-        $results = ($this->call('GET', '/railcontent/user-permission'));
+        $results = ($this->call('GET', '/railcontent/user-permission',[
+            'only_active' => true
+        ]));
 
         $this->assertEquals(200, $results->getStatusCode());
         $this->assertEquals(2, count($results->decodeResponseJson('data')));
@@ -418,6 +420,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             '/railcontent/user-permission',
             [
                 'user_id' => 1,
+                'only_active' => true,
             ]
         );
 

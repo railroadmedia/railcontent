@@ -52,21 +52,18 @@ class ContentDatumControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(201, $response->status());
 
-        $response->assertJson(
+        $this->assertArraySubset(
             [
-                'data' => [
-                    0 => [
+                'datum' => [
                         'id' => '1',
                         'content_id' => $content['id'],
                         'key' => $key,
                         'value' => $value,
                         'position' => 1,
-                    ],
-
                 ],
-            ]
+            ], $response->decodeResponseJson()
         );
     }
 
@@ -136,20 +133,18 @@ class ContentDatumControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(201, $response->status());
+        $this->assertEquals(200, $response->status());
 
-        $response->assertJson(
+        $this->assertArraySubset(
             [
-                'data' => [
-                    0 => [
+                'datum' => [
                         'id' => 1,
                         'content_id' => $content['id'],
                         'key' => $data['key'],
                         'value' => $new_value,
                         'position' => 1,
-                    ],
                 ],
-            ]
+            ], $response->decodeResponseJson()
         );
     }
 
@@ -193,8 +188,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
 
         $response = $this->call('DELETE', 'railcontent/content/datum/' . $data['id']);
 
-        $this->assertNull(json_decode($response->content()));
-        $this->assertEquals(204, $response->status());
+        $this->assertEquals(202, $response->status());
     }
 
     public function test_update_content_datum_method_from_service_response()

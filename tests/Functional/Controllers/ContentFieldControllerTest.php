@@ -65,8 +65,8 @@ class ContentFieldControllerTest extends RailcontentTestCase
             "position" => 1,
         ];
 
-        $this->assertEquals(200, $response->status());
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+        $this->assertEquals(201, $response->status());
+        $this->assertEquals($expectedResults, $response->decodeResponseJson('field'));
 
     }
 
@@ -148,7 +148,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(201, $response->status());
+        $this->assertEquals(200, $response->status());
 
         $expectedResults = [
             "id" => "1",
@@ -159,7 +159,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
             "position" => $field['position'],
         ];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+        $this->assertEquals($expectedResults, $response->decodeResponseJson()['field']);
     }
 
     public function test_update_content_field_not_pass_validation()
@@ -197,8 +197,7 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $response = $this->call('DELETE', 'railcontent/content/field/' . $field['id']);
 
-        $this->assertEquals(null, json_decode($response->getContent()));
-        $this->assertEquals(204, $response->status());
+        $this->assertEquals(202, $response->status());
     }
 
     public function test_delete_content_field_not_exist()
@@ -323,7 +322,6 @@ class ContentFieldControllerTest extends RailcontentTestCase
 
         $field = $this->contentFieldFactory->create($content['id']);
 
-        $content = $this->contentFactory->create();
         $key = $this->faker->text(255);
         $value = $this->faker->text(255);
         $type = $this->faker->word;
@@ -350,8 +348,8 @@ class ContentFieldControllerTest extends RailcontentTestCase
             "position" => 1,
         ];
 
-        $this->assertEquals(200, $response->status());
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+        $this->assertEquals(201, $response->status());
+        $this->assertEquals($expectedResults, $response->decodeResponseJson()['field']);
 
     }
 }

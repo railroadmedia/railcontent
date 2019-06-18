@@ -59,17 +59,15 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             ['child_id' => $childContent['id'], 'parent_id' => $parentContent['id']]
         );
 
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(201, $response->status());
 
         $this->assertArraySubset(
             [
-                'parent_id' => $parentContent['id'],
-                'child_id' => $childContent['id'],
-                'child_position' => 1,
+                'id' => $parentContent['id'],
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
             ],
-            $response->decodeResponseJson('data')[0]
+            $response->decodeResponseJson('post')
         );
     }
 
@@ -88,17 +86,15 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(201, $response->status());
 
         $this->assertArraySubset(
             [
-                'parent_id' => $parentContent['id'],
-                'child_id' => $childContent['id'],
-                'child_position' => 1,
+                'id' => $parentContent['id'],
                 'created_on' => Carbon::now()
                     ->toDateTimeString(),
             ],
-            $response->decodeResponseJson('data')[0]
+            $response->decodeResponseJson()['post']
         );
     }
 
@@ -134,7 +130,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(201, $response->status());
     }
 
     public function test_delete()
@@ -157,6 +153,6 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(204, $response->status());
+        $this->assertEquals(202, $response->status());
     }
 }

@@ -262,8 +262,7 @@ class PermissionControllerTest extends RailcontentTestCase
             "brand" => ConfigService::$brand,
         ];
 
-        $this->assertEquals(200, $response->status());
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data')[0]);
+        $this->assertEquals(201, $response->status());
     }
 
     public function test_assign_permission_to_specific_content_type()
@@ -284,7 +283,7 @@ class PermissionControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(200, $response->status());
+        $this->assertEquals(201, $response->status());
     }
 
     public function test_assign_permission_validation()
@@ -425,8 +424,8 @@ class PermissionControllerTest extends RailcontentTestCase
         $this->assertDatabaseHas(ConfigService::$tableContentPermissions, $data);
 
         $response = $this->call('PATCH', 'railcontent/permission/dissociate/', $data);
+
         $this->assertEquals(200, $response->status());
-        $this->assertEquals(1, $response->decodeResponseJson('data')[0][0]);
         $this->assertDatabaseMissing(ConfigService::$tableContentPermissions, $data);
     }
 
@@ -444,7 +443,6 @@ class PermissionControllerTest extends RailcontentTestCase
 
         $response = $this->call('PATCH', 'railcontent/permission/dissociate/', $data);
         $this->assertEquals(200, $response->status());
-        $this->assertEquals(1, $response->decodeResponseJson('data')[0][0]);
         $this->assertDatabaseMissing(ConfigService::$tableContentPermissions, $data);
     }
 }

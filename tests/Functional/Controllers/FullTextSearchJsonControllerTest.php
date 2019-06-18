@@ -54,7 +54,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         for ($i = 0; $i < 6; $i++) {
             $content[$i] = $this->contentFactory->create(
                 'slug',
-                $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                $this->faker->randomElement(config('railcontent.showTypes')),
                 $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
                 ConfigService::$defaultLanguage,
                 ConfigService::$brand,
@@ -101,7 +101,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         for ($i = 0; $i < 5; $i++) {
             $content[$i] = $this->contentFactory->create(
                 'slug',
-                $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                $this->faker->randomElement(config('railcontent.showTypes')),
                 ContentService::STATUS_PUBLISHED,
                 ConfigService::$defaultLanguage,
                 ConfigService::$brand,
@@ -146,7 +146,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         for ($i = 0; $i < 6; $i++) {
             $content[$i] = $this->contentFactory->create(
                 'slug',
-                $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                $this->faker->randomElement(config('railcontent.showTypes')),
                 $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
                 ConfigService::$defaultLanguage,
                 ConfigService::$brand,
@@ -169,7 +169,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
 
         $this->artisan('command:createSearchIndexesForContents');
 
-        $contentType = $this->faker->randomElement(ConfigService::$searchableContentTypes);
+        $contentType = $this->faker->randomElement(config('railcontent.showTypes'));
         $response = $this->call(
             'GET',
             'railcontent/search',
@@ -204,7 +204,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         for ($i = 0; $i < 6; $i++) {
             $content[$i] = $this->contentFactory->create(
                 'slug',
-                $this->faker->randomElement(ConfigService::$searchableContentTypes),
+                $this->faker->randomElement(config('railcontent.showTypes')),
                 $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
                 ConfigService::$defaultLanguage,
                 ConfigService::$brand,

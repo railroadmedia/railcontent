@@ -1099,7 +1099,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         for ($i = 1; $i < $nrCourses; $i++) {
             $field =
-                $this->fieldFactory->create($contents[$i]['id'], 'home_staff_pick_rating', rand(1, 30), null, 'string');
+                $this->fieldFactory->create($contents[$i]['id'], 'staff_pick_rating', rand(1, 30), null, 'string');
         }
 
         $response = $this->call(
@@ -1118,7 +1118,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         foreach ($responseContent as $result) {
             $this->assertTrue(
-                (($result['fields'][0]['key'] == 'home_staff_pick_rating') && ($result['fields'][0]['value'] <= 20))
+                (($result['fields'][0]['key'] == 'staff_pick_rating') && ($result['fields'][0]['value'] <= 20))
             );
             $this->assertTrue($result['fields'][0]['value'] >= $previousValue);
             $previousValue = $result['fields'][0]['value'];
