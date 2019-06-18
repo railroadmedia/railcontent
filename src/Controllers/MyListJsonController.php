@@ -111,12 +111,7 @@ class MyListJsonController extends Controller
         $state = $request->get('state');
 
         $contentTypes = array_merge(
-            [
-                'course',
-                'course-part',
-                'play-along',
-                'song',
-            ],
+            config('railcontent.appUserListContentTypes'),
             array_values(config('railcontent.showTypes'))
         );
 
@@ -168,13 +163,19 @@ class MyListJsonController extends Controller
             );
         }
 
+        $allowedTypes = array_merge( config('railcontent.showTypes'),
+            config('railcontent.userListContentTypes'));
+
+        usort(
+            $allowedTypes,
+            function ($a, $b) {
+                return strcmp($a, $b);
+            }
+        );
+
         $filterOptions = array_merge(
             [
-                'content_type' => $lessons->results()
-                    ->pluck('type')
-                    ->unique()
-                    ->values()
-                    ->toArray(),
+                'content_type' => $allowedTypes,
             ],
             $lessons->filterOptions()
         );

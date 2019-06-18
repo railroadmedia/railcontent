@@ -338,13 +338,27 @@ class ContentJsonController extends Controller
             );
         }
 
+        $allowedTypes = array_merge(
+            config('railcontent.showTypes'),
+            config('railcontent.userListContentTypes')
+        );
+
+        usort(
+            $allowedTypes,
+            function ($a, $b) {
+                return strcmp($a, $b);
+            }
+        );
+
+        $filterOptions = [
+            'content_type' => $allowedTypes,
+        ];
+
         return (new ContentFilterResultsEntity(
             [
                 'results' => $lessons,
                 'total_results' => $totalResults,
-                'filter_options' => $lessons->pluck('type')
-                    ->unique()
-                    ->values(),
+                'filter_options' => $filterOptions,
             ]
         ))->toJsonResponse();
     }
@@ -374,7 +388,7 @@ class ContentJsonController extends Controller
                 $types,
                 [],
                 [],
-                [$field.',20,integer,<=']
+                [$field . ',20,integer,<=']
             );
 
             $results =
@@ -411,7 +425,7 @@ class ContentJsonController extends Controller
         ContentRepository::$availableContentStatues =
             $request->get('statuses', [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]);
 
-        if($request->has('future')) {
+        if ($request->has('future')) {
             ContentRepository::$pullFutureContent = true;
         } else {
             ContentRepository::$pullFutureContent = false;

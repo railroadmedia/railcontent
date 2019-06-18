@@ -507,4 +507,10 @@ return [
         'student-focus',
         'semester-pack-lesson',
     ],
+    'appUserListContentTypes' => [
+        'course',
+        'course-part',
+        'play-along',
+        'song',
+    ],
 ];
