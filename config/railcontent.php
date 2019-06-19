@@ -159,8 +159,23 @@ return [
 
     #'commentable-content-types' => [],
 
+    //content display on app mobile - onboarding screens
     'onboardingContentIds' => [],
 
+    /**
+     * When a new content type it's created it's REQUIRED to set the content meta data.
+     *
+     * Should set an array with catalogues data
+     *      key = content type
+     *      value = array with
+     *          name - used by mobile app and website
+     *          icon - used by website
+     *          description - used by mobile app and website
+     *          allowableFilters - used by mobile app and website
+     *          sortedBy - used by the mobile app to order the episode from a show
+     *          thumbnailUrl - for shows
+     *
+     */
     'cataloguesMetadata' => [
         'courses' => [
             'name' => 'Courses',
@@ -393,6 +408,7 @@ return [
 //        ],
     ],
     /**
+     * When a new show type it's created it's REQUIRED to add the show type in this array.
      * The order of the show types it's IMPORTANT.
      * The show cards on 'Shows' page are displayed in this order.
      */
@@ -418,6 +434,9 @@ return [
         'performances',
         '25-days-of-christmas',
     ],
+    /**
+     * The content types used when display the user's lists(added, in progress, completed) on website. The showTypes are automatically merged if are defined.
+     */
     'userListContentTypes' => [
         'course',
         'play-along',
@@ -427,10 +446,17 @@ return [
         'rudiment',
         'semester-pack-lesson',
     ],
+    /**
+     * The content types take into consideration for live events. The showTypes are automatically merged if are defined.
+     */
     'liveContentTypes' => [
         'student-focus',
         'song',
     ],
+    /**
+     * Top level content types - used to map theme color on type and to calculate the search indexes.
+     * The showTypes are automatically merged if are defined.
+     */
     'topLevelContentTypes' => [
         'learning-path',
         'pack',
@@ -444,6 +470,10 @@ return [
         'student-focus',
         'rudiment',
     ],
+    /**
+     * The sub-nav menu it's displayed only for the content type defined.
+     * The showTypes are automatically merged if are defined.
+     */
     'catalogueContentTypes' => [
         'course',
         'play-along',
@@ -451,29 +481,49 @@ return [
         'song',
         'rudiment',
     ],
+    /**
+     * Only contents with specified type are displayed as content releases.
+     * The showTypes are automatically merged if are defined.
+     */
     'contentReleaseContentTypes' => [
         'course',
         'play-along',
         'student-focus',
         'song',
     ],
+    /**
+     * Only the completed contents with these types are counted and display in user's stats.
+     * The showTypes are automatically merged if are defined.
+     */
     'countedCompletedContentTypes' => [
         'course',
         'song',
         'play-along',
     ],
+    /**
+     * Content types displayed on Home - Our picks.
+     * The showTypes are automatically merged if are defined.
+     */
     'homeOurPicksContentTypes' => [
         'course',
         'course-lesson',
         'song',
         'play-along',
     ],
+    /**
+     * Content types displayed on Home - New content.
+     * The showTypes are automatically merged if are defined.
+     */
     'homeNewContentTypes' => [
         'course',
         'play-along',
         'student-focus',
         'song',
     ],
+    /**
+     * Content types displayed on Home - In progress.
+     * The showTypes are automatically merged if are defined.
+     */
     'homeInProgressContentTypes' => [
         'course',
         'play-along',
@@ -482,6 +532,10 @@ return [
         'pack-lesson',
         'rudiment',
     ],
+    /**
+     * Content types displayed on Dashboard - In progress.
+     * The showTypes are automatically merged if are defined.
+     */
     'dashboardInProgressContentTypes' => [
         'course',
         'course-part',
@@ -489,6 +543,10 @@ return [
         'student-focus',
         'song',
     ],
+    /**
+     * User dashboard - lists with user progress(started/completed) on the contents with this type.
+     * The showTypes are automatically merged if are defined.
+     */
     'userProgressListContentTypes' => [
         'pack-bundle-lesson',
         'course',
@@ -498,6 +556,10 @@ return [
         'song',
         'student-focus',
     ],
+    /**
+     * Singular content types.
+     * The showTypes are automatically merged if are defined.
+     */
     'singularContentTypes' => [
         'course-part',
         'pack-bundle-lesson',
@@ -507,6 +569,10 @@ return [
         'student-focus',
         'semester-pack-lesson',
     ],
+    /**
+     * The content types used when display the user's list on mobile app.
+     * The showTypes are automatically merged if are defined.
+     */
     'appUserListContentTypes' => [
         'course',
         'course-part',
