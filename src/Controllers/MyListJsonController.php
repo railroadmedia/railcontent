@@ -111,8 +111,8 @@ class MyListJsonController extends Controller
         $state = $request->get('state');
 
         $contentTypes = array_merge(
-            config('railcontent.appUserListContentTypes'),
-            array_values(config('railcontent.showTypes'))
+            config('railcontent.appUserListContentTypes', []),
+            array_values(config('railcontent.showTypes', []))
         );
 
         $page = $request->get('page', 1);
@@ -163,8 +163,10 @@ class MyListJsonController extends Controller
             );
         }
 
-        $allowedTypes = array_merge( config('railcontent.showTypes'),
-            config('railcontent.userListContentTypes'));
+        $allowedTypes = array_merge(
+            config('railcontent.showTypes', []),
+            config('railcontent.appUserListContentTypes', [])
+        );
 
         usort(
             $allowedTypes,

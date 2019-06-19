@@ -78,19 +78,30 @@ class FullTextSearchRepository extends RepositoryBase
         //delete old indexes
         $this->deleteOldIndexes();
 
-        $query = $this->contentQuery()
-            ->selectPrimaryColumns()
-            ->restrictByTypes(array_merge(
-                config('railcontent.showTypes'),
-                config('railcontent.topLevelContentTypes')
-            ))
-            ->orderBy('id');
+        $query =
+            $this->contentQuery()
+                ->selectPrimaryColumns()
+                ->restrictByTypes(
+                    array_merge(
+                        config('railcontent.showTypes', []),
+                        config('railcontent.topLevelContentTypes', [])
+                    )
+                )
+                ->orderBy('id');
 
         $query->chunk(
             100,
             function ($query) {
-                $contentFieldRows = $this->fieldRepository->getByContentIds($query->pluck('id')->toArray());
-                $contentDatumRows = $this->datumRepository->getByContentIds($query->pluck('id')->toArray());
+                $contentFieldRows =
+                    $this->fieldRepository->getByContentIds(
+                        $query->pluck('id')
+                            ->toArray()
+                    );
+                $contentDatumRows =
+                    $this->datumRepository->getByContentIds(
+                        $query->pluck('id')
+                            ->toArray()
+                    );
 
                 $fieldRowsGrouped = ContentHelper::groupArrayBy($contentFieldRows, 'content_id');
                 $datumRowsGrouped = ContentHelper::groupArrayBy($contentDatumRows, 'content_id');
@@ -108,7 +119,8 @@ class FullTextSearchRepository extends RepositoryBase
                         'content_type' => $content['type'],
                         'content_status' => $content['status'],
                         'content_published_on' => $content['published_on'] ?? Carbon::now(),
-                        'created_at' => Carbon::now()->toDateTimeString()
+                        'created_at' => Carbon::now()
+                            ->toDateTimeString(),
                     ];
 
                     $this->updateOrCreate(
@@ -120,7 +132,7 @@ class FullTextSearchRepository extends RepositoryBase
             }
         );
 
-        DB::statement('OPTIMIZE table '.ConfigService::$tableSearchIndexes);
+        DB::statement('OPTIMIZE table ' . ConfigService::$tableSearchIndexes);
     }
 
     /** Delete old indexes for the brand
@@ -129,7 +141,9 @@ class FullTextSearchRepository extends RepositoryBase
      */
     private function deleteOldIndexes()
     {
-        return $this->query()->where('brand', ConfigService::$brand)->delete();
+        return $this->query()
+            ->where('brand', ConfigService::$brand)
+            ->delete();
     }
 
     /** Prepare search indexes based on config settings
@@ -216,12 +230,13 @@ class FullTextSearchRepository extends RepositoryBase
         $orderByDirection = 'desc',
         $dateTimeCutoff = null
     ) {
-        $query = $this->query()
-            ->selectColumns($term)
-            ->restrictBrand()
-            ->restrictByTerm($term)
-            ->order($orderByColumn, $orderByDirection)
-            ->directPaginate($page, $limit);
+        $query =
+            $this->query()
+                ->selectColumns($term)
+                ->restrictBrand()
+                ->restrictByTerm($term)
+                ->order($orderByColumn, $orderByDirection)
+                ->directPaginate($page, $limit);
 
         if (!empty($contentTypes)) {
             $query->whereIn('content_type', $contentTypes);
@@ -253,10 +268,11 @@ class FullTextSearchRepository extends RepositoryBase
         $contentStatus = null,
         $dateTimeCutoff = null
     ) {
-        $query = $this->query()
-            ->selectColumns($term)
-            ->restrictByTerm($term)
-            ->restrictBrand();
+        $query =
+            $this->query()
+                ->selectColumns($term)
+                ->restrictByTerm($term)
+                ->restrictBrand();
 
         if (!empty($contentType)) {
             $query->where('content_type', $contentType);

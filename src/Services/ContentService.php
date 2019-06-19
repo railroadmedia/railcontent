@@ -1121,16 +1121,16 @@ class ContentService
      */
     public function getContentForCalendar($brand = null, $includeSemesterPackLessons = true)
     {
-        $liveEventsTypes =  array_merge(
-            (array)config('railcontent.showTypes'),
-            (array)config('railcontent.liveContentTypes')
+        $liveEventsTypes = array_merge(
+            (array)config('railcontent.showTypes', []),
+            (array)config('railcontent.liveContentTypes', [])
         );
-        $contentReleasesTypes =  array_merge(
-            (array)config('railcontent.showTypes'),
-            (array)config('railcontent.contentReleaseContentTypes')
+        $contentReleasesTypes = array_merge(
+            (array)config('railcontent.showTypes', []),
+            (array)config('railcontent.contentReleaseContentTypes', [])
         );
 
-        if($includeSemesterPackLessons){
+        if ($includeSemesterPackLessons) {
             $parents = [];
             $idsOfChildrenOfSelectSemesterPacks = [];
             $culledSemesterPackLessons = [];
@@ -1152,16 +1152,16 @@ class ContentService
 
         ContentRepository::$pullFutureContent = true;
 
-        if($includeSemesterPackLessons){
+        if ($includeSemesterPackLessons) {
             $semesterPacksToGet = config('railcontent.semester-pack-schedule-labels.' . $brand, []);
         }
 
-        if(empty($liveEventsTypes) && empty($contentReleasesTypes) &&empty($semesterPacksToGet)){
+        if (empty($liveEventsTypes) && empty($contentReleasesTypes) && empty($semesterPacksToGet)) {
             return new Collection();
         }
 
-        if($includeSemesterPackLessons){
-            foreach($semesterPacksToGet ?? [] as $slug => $kebabCaseLabel){
+        if ($includeSemesterPackLessons) {
+            foreach ($semesterPacksToGet ?? [] as $slug => $kebabCaseLabel) {
                 $parents[] = $this->getSemesterPackParent($slug);
             }
         }
@@ -1220,13 +1220,15 @@ class ContentService
          *      this here, then the label showing would be "SEMESTER-PACK-LESSON". That wouldn't do at all.
          */
 
-
-        if($includeSemesterPackLessons){
+        if ($includeSemesterPackLessons) {
             /*
              * Section One
              */
-            foreach($parents ?? [] as $parent){
-                foreach($this->getByParentIdWhereTypeIn($parent['id'], ['semester-pack-lesson'])->all() as $lesson){
+            foreach ($parents ?? [] as $parent) {
+                foreach (
+                    $this->getByParentIdWhereTypeIn($parent['id'], ['semester-pack-lesson'])
+                        ->all() as $lesson
+                ) {
                     $idsOfChildrenOfSelectSemesterPacks[$parent['slug']][] = $lesson['id'];
                 }
             }
@@ -1237,7 +1239,8 @@ class ContentService
             $semesterPackLessons = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
                 ['semester-pack-lesson'],
                 ContentService::STATUS_PUBLISHED,
-                Carbon::now()->toDateTimeString(),
+                Carbon::now()
+                    ->toDateTimeString(),
                 '>'
             );
 
@@ -1247,12 +1250,14 @@ class ContentService
 
             $culledSemesterPackLessons = new Collection();
 
-            foreach($semesterPackLessons as $lesson) {
-                foreach($idsOfChildrenOfSelectSemesterPacks ?? [] as $parentSlug => $setOfIds){
+            foreach ($semesterPackLessons as $lesson) {
+                foreach ($idsOfChildrenOfSelectSemesterPacks ?? [] as $parentSlug => $setOfIds) {
                     if (in_array($lesson['id'], $setOfIds)) {
                         $labels = config('railcontent.semester-pack-schedule-labels.' . $brand);
-                        if(array_key_exists($parentSlug, $labels)){
-                            $result = $this->getByChildIdWhereParentTypeIn($lesson['id'],['semester-pack'])->first();
+                        if (array_key_exists($parentSlug, $labels)) {
+                            $result =
+                                $this->getByChildIdWhereParentTypeIn($lesson['id'], ['semester-pack'])
+                                    ->first();
                             $lesson['parent_id'] = $result['id'];
                             //$culledSemesterPackLessons[$labels[$parentSlug]] = $lesson;
                             $culledSemesterPackLessons[] = $lesson;
@@ -1262,31 +1267,39 @@ class ContentService
             }
         }
 
-        $scheduleEvents = $liveEvents->merge($contentReleases)->sort($compareFunc)->values();
+        $scheduleEvents =
+            $liveEvents->merge($contentReleases)
+                ->sort($compareFunc)
+                ->values();
 
-        if($includeSemesterPackLessons){
+        if ($includeSemesterPackLessons) {
             $culledSemesterPackLessons = collect($culledSemesterPackLessons ?? []);
-            $scheduleEvents = $scheduleEvents->merge($culledSemesterPackLessons)->sort($compareFunc)->values();
-        }else{
-            $scheduleEvents = $scheduleEvents->sort($compareFunc)->values();
+            $scheduleEvents =
+                $scheduleEvents->merge($culledSemesterPackLessons)
+                    ->sort($compareFunc)
+                    ->values();
+        } else {
+            $scheduleEvents =
+                $scheduleEvents->sort($compareFunc)
+                    ->values();
         }
 
         ContentRepository::$availableContentStatues = $oldStatuses;
         ContentRepository::$pullFutureContent = $oldFutureContent;
 
-        if(empty($scheduleEvents)){
+        if (empty($scheduleEvents)) {
             return new Collection();
         }
 
-        foreach($scheduleEvents as $key => $content){
+        foreach ($scheduleEvents as $key => $content) {
             $contentBrand = $content['brand'];
             $incorrectBrand = $contentBrand !== $brand;
-            if($incorrectBrand){
+            if ($incorrectBrand) {
                 $keysToUnset[] = $key;
             }
         }
 
-        foreach($keysToUnset ?? [] as $key){
+        foreach ($keysToUnset ?? [] as $key) {
             unset($scheduleEvents[$key]);
         }
 
@@ -1301,7 +1314,7 @@ class ContentService
     {
         $before = ContentRepository::$availableContentStatues;
 
-        if(empty(ContentRepository::$availableContentStatues)){
+        if (empty(ContentRepository::$availableContentStatues)) {
             ContentRepository::$availableContentStatues = [
                 ContentService::STATUS_PUBLISHED,
                 ContentService::STATUS_SCHEDULED,

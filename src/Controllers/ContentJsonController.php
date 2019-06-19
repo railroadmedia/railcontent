@@ -319,7 +319,7 @@ class ContentJsonController extends Controller
         $page = $request->get('page', 1);
 
         if (in_array('shows', $types)) {
-            $types = array_merge($types, array_values(config('railcontent.showTypes')));
+            $types = array_merge($types, array_values(config('railcontent.showTypes', [])));
         }
 
         if (!empty($types)) {
@@ -339,8 +339,8 @@ class ContentJsonController extends Controller
         }
 
         $allowedTypes = array_merge(
-            config('railcontent.showTypes'),
-            config('railcontent.userListContentTypes')
+            config('railcontent.showTypes', []),
+            config('railcontent.userListContentTypes', [])
         );
 
         usort(
@@ -375,7 +375,7 @@ class ContentJsonController extends Controller
         $page = $request->get('page', 1);
 
         if (in_array('shows', $types)) {
-            $types = array_merge($types, array_values(config('railcontent.showTypes')));
+            $types = array_merge($types, array_values(config('railcontent.showTypes', [])));
         }
 
         $field = ($request->has('is_home')) ? 'home_staff_pick_rating' : 'staff_pick_rating';

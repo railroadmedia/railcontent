@@ -55,9 +55,9 @@ class CommentService
     }
 
     /**
-     * Call the create method from repository that save a comment or a comment reply (based on the parent_id: if the parent_id it's null the method save a comment;
-     * otherwise save a reply for the comment with given id)
-     * Return the comment or null if the content it's not commentable
+     * Call the create method from repository that save a comment or a comment reply (based on the parent_id: if the
+     * parent_id it's null the method save a comment; otherwise save a reply for the comment with given id) Return the
+     * comment or null if the content it's not commentable
      *
      * @param string $comment
      * @param integer|null $contentId
@@ -79,7 +79,10 @@ class CommentService
         $content = $this->contentRepository->getById($contentId);
 
         //return null if the content type it's not predefined in config file
-        if (!in_array($content['type'], array_merge(config('railcontent.commentable_content_types'), config('railcontent.showTypes')))) {
+        if (!in_array(
+            $content['type'],
+            array_merge(config('railcontent.commentable_content_types', []), config('railcontent.showTypes', []))
+        )) {
             return null;
         }
 
@@ -94,7 +97,8 @@ class CommentService
                 'parent_id' => $parentId,
                 'user_id' => $userId,
                 'temporary_display_name' => $temporaryUserDisplayName,
-                'created_on' => Carbon::now()->toDateTimeString()
+                'created_on' => Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
 
@@ -109,7 +113,8 @@ class CommentService
 
     /**
      * Call the update method from repository if the comment exist and the user have rights to update the comment
-     * Return the updated comment; null if the comment it's inexistent or -1 if the user have not rights to update the comment
+     * Return the updated comment; null if the comment it's inexistent or -1 if the user have not rights to update the
+     * comment
      *
      * @param integer $id
      * @param array $data
@@ -173,7 +178,13 @@ class CommentService
         event(new CommentDeleted($id));
 
         if ($isSoftDelete) {
-            $this->commentRepository->update($id, ['deleted_at' => Carbon::now()->toDateTimeString()]);
+            $this->commentRepository->update(
+                $id,
+                [
+                    'deleted_at' => Carbon::now()
+                        ->toDateTimeString(),
+                ]
+            );
         } else {
             $this->commentRepository->delete($id);
         }
@@ -204,8 +215,8 @@ class CommentService
 
     /**
      *  Set the data necessary for the pagination ($page, $limit, $orderByDirection and $orderByColumn),
-     * call the method from the repository to pull the paginated comments that meet the criteria and call a method that return the total number of comments.
-     * Return an array with the paginated results and the total number of results
+     * call the method from the repository to pull the paginated comments that meet the criteria and call a method that
+     * return the total number of comments. Return an array with the paginated results and the total number of results
      *
      * @param int $page
      * @param int $limit
@@ -224,16 +235,21 @@ class CommentService
 
         $contentTypeString = CommentRepository::$availableContentType;
 
-        if(is_array(CommentRepository::$availableContentType)){
+        if (is_array(CommentRepository::$availableContentType)) {
             $contentTypeString = serialize(CommentRepository::$availableContentType);
         }
 
-        $hash = 'get_comments_'
-            . (CommentRepository::$availableContentId ?? '')
-            .'_'.(CommentRepository::$assignedToUserId ??'')
-            .'_'.($contentTypeString ??'')
-            .'_'.(CommentRepository::$availableUserId ??'')
-            .'_'. CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
+        $hash =
+            'get_comments_' .
+            (CommentRepository::$availableContentId ?? '') .
+            '_' .
+            (CommentRepository::$assignedToUserId ?? '') .
+            '_' .
+            ($contentTypeString ?? '') .
+            '_' .
+            (CommentRepository::$availableUserId ?? '') .
+            '_' .
+            CacheHelper::getKey($page, $limit, $orderByDirection, $orderByColumn);
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
@@ -247,12 +263,9 @@ class CommentService
                 CommentRepository::$availableUserId = $currentUserId;
                 $orderByColumn = 'created_on';
                 $results = [
-                    'results' => $this->commentRepository
-                        ->getCurrentUserComments(),
-                    'total_results' => $this->commentRepository
-                        ->countCurrentUserComments(),
-                    'total_comments_and_results' => $this->commentRepository
-                        ->countCommentsAndReplies()
+                    'results' => $this->commentRepository->getCurrentUserComments(),
+                    'total_results' => $this->commentRepository->countCurrentUserComments(),
+                    'total_comments_and_results' => $this->commentRepository->countCommentsAndReplies(),
                 ];
             } else {
                 $this->commentRepository->setData(
@@ -264,12 +277,11 @@ class CommentService
                 $results = [
                     'results' => $this->commentRepository->getComments(),
                     'total_results' => $this->commentRepository->countComments(),
-                    'total_comments_and_results' => $this->commentRepository
-                        ->countCommentsAndReplies()
+                    'total_comments_and_results' => $this->commentRepository->countCommentsAndReplies(),
                 ];
             }
 
-            if($results['total_results'] > 0){
+            if ($results['total_results'] > 0) {
                 $contentIds = array_pluck(array_values($results['results']), 'content_id');
             } else {
                 $contentIds = null;
@@ -317,6 +329,7 @@ class CommentService
 
     /**
      * Count the comments that have been created after the comment
+     *
      * @param $commentId
      * @return int
      */
@@ -330,6 +343,7 @@ class CommentService
 
     /**
      * Calculate the page that should be current page to display the comment
+     *
      * @param int $commentId
      * @param int $limit
      * @return float|int
