@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Hydrators;
 
+use Doctrine\Common\Inflector\Inflector;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\Internal\Hydration\ObjectHydrator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 
@@ -10,12 +12,10 @@ class RailcontentHydrator extends ObjectHydrator
     protected function hydrateAllData()
     {
         $objects = parent::hydrateAllData();
+        $allDecorators = [];
 
         foreach (config('railcontent.decorators') as $entityClass => $decoratorClasses) {
             foreach ($decoratorClasses as $decoratorClass) {
-
-                // im not sure if its possible for the entity manager to return
-                // multiple different entity classes in a single query, if so this will need some more work
                 foreach ($objects as $object) {
                     if ($object instanceof $entityClass) {
 
@@ -30,7 +30,59 @@ class RailcontentHydrator extends ObjectHydrator
                         break;
                     }
                 }
+            }
+        }
 
+        foreach ($objects as $object) {
+            if (is_object($object)) {
+                $associations =
+                    ($this->_em->getClassMetadata(get_class($object))
+                        ->getAssociationMappings());
+
+                foreach ($associations as $key => $value) {
+                    if ($key == 'userProgress') {
+                        break;
+                    }
+
+                    $getterName = Inflector::camelize('get' . ucwords($key));
+
+                    if (method_exists($object, $getterName)) {
+
+                        $result = call_user_func([$object, $getterName]);
+
+                        if ($result) {
+                            $result = (array)$result;
+                            foreach ($result as $res) {
+                                if (!is_object($res)) {
+                                    break;
+                                }
+                                if (method_exists($res, $getterName)) {
+                                    $entity = call_user_func([$res, $getterName]);
+
+                                    if (array_key_exists(
+                                        ClassUtils::getRealClass(get_class($entity)),
+                                        config('railcontent.decorators')
+                                    )) {
+                                        $associationsDecorators =
+                                            config('railcontent.decorators')[ClassUtils::getRealClass(
+                                                get_class($entity)
+                                            )];
+                                        foreach ($associationsDecorators as $decorator) {
+                                            $allDecorators[$decorator][$entity->getId()] = $entity;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!empty($allDecorators)) {
+            foreach ($allDecorators as $key => $value) {
+                $decoratorInstance = app()->make($key);
+                $decoratorInstance->decorate($value);
             }
         }
 

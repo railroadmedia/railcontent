@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Entities;
 
 use Doctrine\Common\Inflector\Inflector;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\ORM\PersistentCollection;
 
 abstract class ArrayExpressible
@@ -149,10 +150,24 @@ abstract class ArrayExpressible
                 } else {
 
                     $extraProperties = $fields->getExtra();
+
                     if ($extraProperties && array_key_exists($criteria[$i], $extraProperties)) {
                         $results = $fields = $fields->getProperty($criteria[$i]);
                     } else {
                         return null;
+                    }
+
+                    //decorate extra properties
+                    if (is_array($results) && !empty($results)) {
+                        if (is_object(array_first($results))) {
+                            $className = ClassUtils::getRealClass(get_class(array_first($results)));
+                            $allDecorators = config('railcontent.decorators')[$className] ?? [];
+
+                            foreach ($allDecorators as $decorator) {
+                                $decoratorInstance = app()->make($decorator);
+                                $decoratorInstance->decorate($results);
+                            }
+                        }
                     }
                 }
             }

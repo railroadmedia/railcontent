@@ -37,7 +37,7 @@ trait DecoratedFields
     public function getProperty($propertyName)
     {
 
-        return $this->{$propertyName};
+        return $this->{$propertyName} ?? null;
     }
 
     /**
