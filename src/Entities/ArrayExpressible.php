@@ -145,7 +145,12 @@ abstract class ArrayExpressible
                     }
 
                     if (($fields instanceof ContentInstructor)) {
+
+                    if($allValues){
+                        $results = $fields = [call_user_func([$fields, $getterName])];
+                    } else{
                         $results = $fields = call_user_func([$fields, $getterName]);
+                    }
                     }
                 } else {
 
