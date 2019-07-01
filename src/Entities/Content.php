@@ -78,7 +78,7 @@ class Content extends ArrayExpressible
     private $child;
 
     /**
-     * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy",mappedBy="child", cascade={"persist",
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy",mappedBy="child", cascade={"persist",
      *     "remove"})
      */
     private $parent;
@@ -142,6 +142,7 @@ class Content extends ArrayExpressible
     public function __construct()
     {
         $this->child = new ArrayCollection();
+        $this->parent = new ArrayCollection();
         $this->data = new ArrayCollection();
         $this->topic = new ArrayCollection();
         $this->tag = new ArrayCollection();
@@ -363,7 +364,14 @@ class Content extends ArrayExpressible
      */
     public function getParent()
     {
-        return $this->parent;
+        $parent = $this->parent->filter(
+            function (ContentHierarchy $hierarchy) {
+                return $hierarchy->getParent()
+                        ->getType() != 'user-playlist';
+            }
+        );
+
+        return $parent->first();
     }
 
     /**
@@ -372,7 +380,7 @@ class Content extends ArrayExpressible
      */
     public function setParent($parent)
     {
-        $this->parent = $parent;
+        $this->parent[] = $parent;
 
         return $this;
     }

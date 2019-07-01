@@ -747,7 +747,7 @@ class ContentService
         $columnName,
         $columnValue,
         $siblingPairLimit = 1,
-        $orderColumn = 'published_on',
+        $orderColumn = 'publishedOn',
         $orderDirection = 'desc'
     ) {
 

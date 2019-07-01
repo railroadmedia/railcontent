@@ -74,7 +74,7 @@ class ContentRepository extends EntityRepository
         $columnName,
         $columnValue,
         $siblingPairLimit = 1,
-        $orderColumn = 'published_on',
+        $orderColumn = 'publishedOn',
         $orderDirection = 'desc'
     ) {
         $alias = config('railcontent.table_prefix') . 'content';
@@ -109,7 +109,7 @@ class ContentRepository extends EntityRepository
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult();
+                ->getResult('Railcontent');
 
         $processedContents = array_merge($beforeContents, $afterContents);
 
