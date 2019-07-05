@@ -259,12 +259,12 @@ class FullTextSearchRepository extends RepositoryBase
     /** Count all the matches
      *
      * @param string|null $term
-     * @param null $contentType
+     * @param array $contentType
      * @return int
      */
     public function countTotalResults(
         $term,
-        $contentType = null,
+        $contentType = [],
         $contentStatus = null,
         $dateTimeCutoff = null
     ) {
@@ -275,7 +275,7 @@ class FullTextSearchRepository extends RepositoryBase
                 ->restrictBrand();
 
         if (!empty($contentType)) {
-            $query->where('content_type', $contentType);
+            $query->whereIn('content_type', $contentType);
         }
 
         if (!empty($contentStatus)) {
