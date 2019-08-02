@@ -244,26 +244,13 @@ class FullTextSearchRepository extends RepositoryBase
                         );
                     }
                 )
-                ->leftJoin(
-                    ConfigService::$tableContentPermissions . ' as type_content_permissions',
-                    function (JoinClause $join) {
-                        $join->on(
-                            'type_content_permissions' . '.content_type',
-                            ConfigService::$tableSearchIndexes . '.content_type'
-                        )
-                            ->whereIn('type_content_permissions' . '.brand', ConfigService::$availableBrands);
-                    }
-                )
                 ->where(
                     function (Builder $builder) {
                         return $builder->where(
                             function (Builder $builder) {
                                 return $builder->whereNull(
                                     'id_content_permissions' . '.permission_id'
-                                )
-                                    ->whereNull(
-                                        'type_content_permissions' . '.permission_id'
-                                    );
+                                );
                             }
                         )
                             ->orWhereExists(
@@ -275,10 +262,7 @@ class FullTextSearchRepository extends RepositoryBase
                                             function (Builder $builder) {
                                                 return $builder->whereRaw(
                                                     'permission_id = id_content_permissions.permission_id'
-                                                )
-                                                    ->orWhereRaw(
-                                                        'permission_id = type_content_permissions.permission_id'
-                                                    );
+                                                );
                                             }
                                         )
                                         ->where(
@@ -302,7 +286,7 @@ class FullTextSearchRepository extends RepositoryBase
                 ->directPaginate($page, $limit);
 
         if (!empty($contentTypes)) {
-            $query->whereIn('content_type', $contentTypes);
+            $query->whereIn(ConfigService::$tableSearchIndexes . '.content_type', $contentTypes);
         }
 
         if (!empty($contentStatuses)) {
@@ -343,26 +327,13 @@ class FullTextSearchRepository extends RepositoryBase
                         );
                     }
                 )
-                ->leftJoin(
-                    ConfigService::$tableContentPermissions . ' as type_content_permissions',
-                    function (JoinClause $join) {
-                        $join->on(
-                            'type_content_permissions' . '.content_type',
-                            ConfigService::$tableSearchIndexes . '.content_type'
-                        )
-                            ->whereIn('type_content_permissions' . '.brand', ConfigService::$availableBrands);
-                    }
-                )
                 ->where(
                     function (Builder $builder) {
                         return $builder->where(
                             function (Builder $builder) {
                                 return $builder->whereNull(
                                     'id_content_permissions' . '.permission_id'
-                                )
-                                    ->whereNull(
-                                        'type_content_permissions' . '.permission_id'
-                                    );
+                                );
                             }
                         )
                             ->orWhereExists(
@@ -374,10 +345,7 @@ class FullTextSearchRepository extends RepositoryBase
                                             function (Builder $builder) {
                                                 return $builder->whereRaw(
                                                     'permission_id = id_content_permissions.permission_id'
-                                                )
-                                                    ->orWhereRaw(
-                                                        'permission_id = type_content_permissions.permission_id'
-                                                    );
+                                                );
                                             }
                                         )
                                         ->where(
@@ -399,7 +367,7 @@ class FullTextSearchRepository extends RepositoryBase
                 ->restrictBrand();
 
         if (!empty($contentType)) {
-            $query->whereIn('content_type', $contentType);
+            $query->whereIn(ConfigService::$tableSearchIndexes . '.content_type', $contentType);
         }
 
         if (!empty($contentStatus)) {
