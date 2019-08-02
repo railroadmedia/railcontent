@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
@@ -233,6 +235,67 @@ class FullTextSearchRepository extends RepositoryBase
         $query =
             $this->query()
                 ->selectColumns($term)
+                ->leftJoin(
+                    ConfigService::$tableContentPermissions . ' as id_content_permissions',
+                    function (JoinClause $join) {
+                        $join->on(
+                            'id_content_permissions' . '.content_id',
+                            ConfigService::$tableSearchIndexes . '.content_id'
+                        );
+                    }
+                )
+                ->leftJoin(
+                    ConfigService::$tableContentPermissions . ' as type_content_permissions',
+                    function (JoinClause $join) {
+                        $join->on(
+                            'type_content_permissions' . '.content_type',
+                            ConfigService::$tableSearchIndexes . '.content_type'
+                        )
+                            ->whereIn('type_content_permissions' . '.brand', ConfigService::$availableBrands);
+                    }
+                )
+                ->where(
+                    function (Builder $builder) {
+                        return $builder->where(
+                            function (Builder $builder) {
+                                return $builder->whereNull(
+                                    'id_content_permissions' . '.permission_id'
+                                )
+                                    ->whereNull(
+                                        'type_content_permissions' . '.permission_id'
+                                    );
+                            }
+                        )
+                            ->orWhereExists(
+                                function (Builder $builder) {
+                                    return $builder->select('id')
+                                        ->from(ConfigService::$tableUserPermissions)
+                                        ->where('user_id', auth()->id() ?? null)
+                                        ->where(
+                                            function (Builder $builder) {
+                                                return $builder->whereRaw(
+                                                    'permission_id = id_content_permissions.permission_id'
+                                                )
+                                                    ->orWhereRaw(
+                                                        'permission_id = type_content_permissions.permission_id'
+                                                    );
+                                            }
+                                        )
+                                        ->where(
+                                            function (Builder $builder) {
+                                                return $builder->where(
+                                                    'expiration_date',
+                                                    '>=',
+                                                    Carbon::now()
+                                                        ->toDateTimeString()
+                                                )
+                                                    ->orWhereNull('expiration_date');
+                                            }
+                                        );
+                                }
+                            );
+                    }
+                )
                 ->restrictBrand()
                 ->restrictByTerm($term)
                 ->order($orderByColumn, $orderByDirection)
@@ -271,6 +334,67 @@ class FullTextSearchRepository extends RepositoryBase
         $query =
             $this->query()
                 ->selectColumns($term)
+                ->leftJoin(
+                    ConfigService::$tableContentPermissions . ' as id_content_permissions',
+                    function (JoinClause $join) {
+                        $join->on(
+                            'id_content_permissions' . '.content_id',
+                            ConfigService::$tableSearchIndexes . '.content_id'
+                        );
+                    }
+                )
+                ->leftJoin(
+                    ConfigService::$tableContentPermissions . ' as type_content_permissions',
+                    function (JoinClause $join) {
+                        $join->on(
+                            'type_content_permissions' . '.content_type',
+                            ConfigService::$tableSearchIndexes . '.content_type'
+                        )
+                            ->whereIn('type_content_permissions' . '.brand', ConfigService::$availableBrands);
+                    }
+                )
+                ->where(
+                    function (Builder $builder) {
+                        return $builder->where(
+                            function (Builder $builder) {
+                                return $builder->whereNull(
+                                    'id_content_permissions' . '.permission_id'
+                                )
+                                    ->whereNull(
+                                        'type_content_permissions' . '.permission_id'
+                                    );
+                            }
+                        )
+                            ->orWhereExists(
+                                function (Builder $builder) {
+                                    return $builder->select('id')
+                                        ->from(ConfigService::$tableUserPermissions)
+                                        ->where('user_id', auth()->id() ?? null)
+                                        ->where(
+                                            function (Builder $builder) {
+                                                return $builder->whereRaw(
+                                                    'permission_id = id_content_permissions.permission_id'
+                                                )
+                                                    ->orWhereRaw(
+                                                        'permission_id = type_content_permissions.permission_id'
+                                                    );
+                                            }
+                                        )
+                                        ->where(
+                                            function (Builder $builder) {
+                                                return $builder->where(
+                                                    'expiration_date',
+                                                    '>=',
+                                                    Carbon::now()
+                                                        ->toDateTimeString()
+                                                )
+                                                    ->orWhereNull('expiration_date');
+                                            }
+                                        );
+                                }
+                            );
+                    }
+                )
                 ->restrictByTerm($term)
                 ->restrictBrand();
 

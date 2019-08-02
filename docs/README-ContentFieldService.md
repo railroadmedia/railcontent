@@ -166,7 +166,7 @@ $videoFields = $this->contentFieldService->getByKeyValueType(
  $this->contentFieldService->create(
                 $video['id'],
                 'length_in_seconds',
-                $songData['video_length_in_seconds'],
+                $songData['length_in_seconds'],
                 1,
                 'integer'
             );
