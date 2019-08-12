@@ -163,30 +163,11 @@ class MyListJsonController extends Controller
             );
         }
 
-        $allowedTypes = array_merge(
-            config('railcontent.showTypes', []),
-            config('railcontent.appUserListContentTypes', [])
-        );
-
-        usort(
-            $allowedTypes,
-            function ($a, $b) {
-                return strcmp($a, $b);
-            }
-        );
-
-        $filterOptions = array_merge(
-            [
-                'content_type' => $allowedTypes,
-            ],
-            $lessons->filterOptions()
-        );
-
         return (new ContentFilterResultsEntity(
             [
                 'results' => $lessons->results(),
                 'total_results' => $lessons->totalResults(),
-                'filter_options' => $filterOptions,
+                'filter_options' =>  $lessons->filterOptions(),
             ]
         ))->toJsonResponse();
     }
