@@ -1345,4 +1345,15 @@ class ContentService
     {
         return $this->contentRepository->countByTypes($types);
     }
+
+    /**
+     * @param $userId
+     * @param $state
+     * @return array
+     */
+    public function getFiltersForUserProgressState($userId, $state)
+    {
+        return $this->contentRepository->getFiltersUserProgressState($userId, $state);
+    }
+
 }

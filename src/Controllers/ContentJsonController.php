@@ -338,21 +338,7 @@ class ContentJsonController extends Controller
             );
         }
 
-        $allowedTypes = array_merge(
-            config('railcontent.showTypes', []),
-            config('railcontent.userListContentTypes', [])
-        );
-
-        usort(
-            $allowedTypes,
-            function ($a, $b) {
-                return strcmp($a, $b);
-            }
-        );
-
-        $filterOptions = [
-            'content_type' => $allowedTypes,
-        ];
+        $filterOptions = $this->contentService->getFiltersForUserProgressState(auth()->id(), 'started');
 
         return (new ContentFilterResultsEntity(
             [

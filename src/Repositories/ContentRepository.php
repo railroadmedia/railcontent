@@ -1592,4 +1592,34 @@ class ContentRepository extends RepositoryBase
             ->whereIn(ConfigService::$tableContent . '.type', $type)
             ->count();
     }
+
+    /**
+     * @param $userId
+     * @param $state
+     * @return array
+     */
+    public function getFiltersUserProgressState($userId, $state)
+    {
+        $possibleFilters =
+            $this->query()
+                ->selectFilterOptionColumns()
+                ->restrictByUserAccess()
+                ->leftJoin(
+                    ConfigService::$tableUserContentProgress,
+                    ConfigService::$tableUserContentProgress . '.content_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                ->leftJoin(
+                    ConfigService::$tableContentFields,
+                    ConfigService::$tableContentFields . '.content_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
+                ->where(ConfigService::$tableUserContentProgress . '.state', $state)
+                ->getToArray();
+
+        return $this->parseAvailableFields($possibleFilters);
+    }
 }
