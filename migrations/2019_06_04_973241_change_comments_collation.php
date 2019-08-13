@@ -29,13 +29,14 @@ class ChangeCommentsCollation extends Migration
                                     ->toDateTimeString()
                             ]
                         );
-
-                    DB::connection(ConfigService::$databaseConnectionName)
-                        ->statement(
-                            'ALTER TABLE ' .
-                            ConfigService::$tableComments .
-                            ' MODIFY comment TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'
-                        );
+                    if (config()->get('database.default') != 'testbench') {
+                        DB::connection(ConfigService::$databaseConnectionName)
+                            ->statement(
+                                'ALTER TABLE ' .
+                                ConfigService::$tableComments .
+                                ' MODIFY comment TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'
+                            );
+                    }
                 }
             );
     }
