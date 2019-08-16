@@ -44,6 +44,22 @@ class ContentHierarchyService
 
     /**
      * @param array $parentIds
+     * @param array $contentStatuses
+     * @return array|null
+     */
+    public function getByParentIdsWhereContentStatusIn(
+        array $parentIds,
+        array $contentStatuses = [
+            ContentService::STATUS_PUBLISHED,
+            ContentService::STATUS_SCHEDULED
+        ]
+    )
+    {
+        return $this->contentHierarchyRepository->getByParentIdsWhereContentStatusIn($parentIds, $contentStatuses);
+    }
+
+    /**
+     * @param array $parentIds
      */
     public function countParentsChildren(array $parentIds)
     {

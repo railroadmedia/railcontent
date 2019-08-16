@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentService;
 
 class ContentHierarchyRepository extends RepositoryBase
 {
@@ -30,6 +31,34 @@ class ContentHierarchyRepository extends RepositoryBase
     {
         return $this->query()
             ->whereIn('parent_id', $parentIds)
+            ->orderBy('child_position', 'asc')
+            ->get()
+            ->toArray();
+    }
+
+    /**
+     * @param array $parentIds
+     * @param array $contentStatuses
+     * @return array|null
+     */
+    public function getByParentIdsWhereContentStatusIn(
+        array $parentIds,
+        array $contentStatuses = [
+            ContentService::STATUS_PUBLISHED,
+            ContentService::STATUS_SCHEDULED
+        ]
+    )
+    {
+        return $this->query()
+            ->select([ConfigService::$tableContentHierarchy . '.*', ConfigService::$tableContent . '.status as status'])
+            ->join(
+                ConfigService::$tableContent,
+                ConfigService::$tableContent . '.id',
+                '=',
+                ConfigService::$tableContentHierarchy . '.child_id'
+            )
+            ->whereIn('parent_id', $parentIds)
+            ->whereIn('status', $contentStatuses)
             ->orderBy('child_position', 'asc')
             ->get()
             ->toArray();

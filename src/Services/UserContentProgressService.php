@@ -492,7 +492,7 @@ class UserContentProgressService
 
             $contentFakeArray = [];
 
-            foreach ($this->contentHierarchyService->getByParentIds([$parent['id']]) as $hierarchyRow) {
+            foreach ($this->contentHierarchyService->getByParentIdsWhereContentStatusIn([$parent['id']]) as $hierarchyRow) {
                 $contentFakeArray[] = ['id' => $hierarchyRow['child_id']];
             }
 
