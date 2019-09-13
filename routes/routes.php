@@ -148,6 +148,12 @@ Route::group(
                     '/search',
                     \Railroad\Railcontent\Controllers\FullTextSearchJsonController::class . '@index'
                 )->name('search.index');
+                
+                // vimeo endpoints
+                Route::get(
+                    '/vimeo-video/{vimeoVideoId}',
+                    \Railroad\Railcontent\Controllers\VimeoJsonController::class . '@show'
+                )->name('vimeo-video.show');
             }
         );
 
