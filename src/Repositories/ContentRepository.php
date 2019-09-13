@@ -48,6 +48,8 @@ class ContentRepository extends RepositoryBase
     private $requiredUserStates = [];
     private $includedUserStates = [];
 
+    private $getFutureContentOnly = false;
+
     private $page;
     private $limit;
     private $orderBy;
@@ -1135,7 +1137,8 @@ class ContentRepository extends RepositoryBase
         $orderDirection,
         array $typesToInclude,
         array $slugHierarchy,
-        array $requiredParentIds
+        array $requiredParentIds,
+        $getFutureContentOnly = false
     ) {
         $this->page = $page;
         $this->limit = $limit;
@@ -1144,6 +1147,7 @@ class ContentRepository extends RepositoryBase
         $this->typesToInclude = $typesToInclude;
         $this->slugHierarchy = $slugHierarchy;
         $this->requiredParentIds = $requiredParentIds;
+        $this->getFutureContentOnly = $getFutureContentOnly;
 
         // reset all the filters for the new query
         $this->requiredFields = [];
@@ -1199,6 +1203,10 @@ class ContentRepository extends RepositoryBase
                         $groupByColumns
                     )
                 );
+
+        if ($this->getFutureContentOnly) {
+            $subQuery->where('published_on', '>', Carbon::now()->toDateTimeString());
+        }
 
         $query =
             $this->query()

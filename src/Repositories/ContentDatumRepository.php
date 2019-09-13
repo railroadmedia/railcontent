@@ -46,7 +46,7 @@ class ContentDatumRepository extends RepositoryBase
         }
         
         return $this->query()
-            ->whereIn('content_id', $contentIds)
+            ->whereIn('content_id', array_unique($contentIds))
             ->orderBy('position', 'asc')
             ->get()
             ->toArray();

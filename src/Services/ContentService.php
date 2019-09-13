@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Services;
 
-use App\Services\ContentTypes;
 use Carbon\Carbon;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
@@ -787,8 +786,10 @@ class ContentService
         array $includedFields = [],
         array $requiredUserStates = [],
         array $includedUserStates = [],
-        $pullFilterFields = true
-    ) {
+        $pullFilterFields = true,
+        $getFutureContentOnly = false
+    )
+    {
         $results = null;
         if ($limit == 'null') {
             $limit = -1;
@@ -825,7 +826,8 @@ class ContentService
                 $orderByDirection,
                 $includedTypes,
                 $slugHierarchy,
-                $requiredParentIds
+                $requiredParentIds,
+                $getFutureContentOnly
             );
 
             foreach ($requiredFields as $requiredField) {

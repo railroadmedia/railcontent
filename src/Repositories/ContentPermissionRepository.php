@@ -61,8 +61,8 @@ class ContentPermissionRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContentPermissions . '.permission_id'
             )
-            ->orWhereIn(ConfigService::$tableContentPermissions . '.content_id', $contentIds)
-            ->orWhereIn(ConfigService::$tableContentPermissions . '.content_type', $contentTypes)
+            ->orWhereIn(ConfigService::$tableContentPermissions . '.content_id', array_unique($contentIds))
+            ->orWhereIn(ConfigService::$tableContentPermissions . '.content_type', array_unique($contentTypes))
             ->where(ConfigService::$tablePermissions . '.brand', ConfigService::$brand)
             ->get()
             ->toArray();
