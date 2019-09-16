@@ -469,10 +469,23 @@ class MobileApiEndpointsTest extends RailcontentTestCase
             'success',
             $response->decodeResponseJson('data')
         );
+
         $this->assertDatabaseHas(
-            config('railcontent.table_prefix') . 'content_hierarchy',
+            config('railcontent.table_prefix') . 'user_playlists',
             [
-                'child_id' => $content[0]->getId(),
+                'user_id' => $loggedInUserId,
+                'brand' => config('railcontent.brand'),
+                'type' => 'primary-playlist',
+                'created_at' => Carbon::now()->toDateTimeString()
+            ]
+        );
+
+        $this->assertDatabaseHas(
+            config('railcontent.table_prefix') . 'user_playlist_content',
+            [
+                'content_id' => $content[0]->getId(),
+                'user_playlist_id' => 1,
+                'created_at' => Carbon::now()->toDateTimeString()
             ]
         );
     }
@@ -480,16 +493,8 @@ class MobileApiEndpointsTest extends RailcontentTestCase
     public function test_remove_from_my_list()
     {
         $userId = $this->createAndLogInNewUser();
-        $myList = $this->fakeContent(
-            1,
-            [
-                'slug' => 'primary-playlist',
-                'type' => 'user-playlist',
-                'status' => ContentService::STATUS_PUBLISHED,
-                'brand' => config('railcontent.brand'),
-                'userId' => $userId,
-            ]
-        );
+
+        $myList = $this->fakeUserPlaylist(1, ['userId' => $userId]);
 
         $content1 = $this->fakeContent(
             1,
@@ -506,19 +511,19 @@ class MobileApiEndpointsTest extends RailcontentTestCase
             ]
         );
 
-        $this->fakeHierarchy(
+        $this->fakeUserPlaylistContent(
             1,
             [
-                'parent' => $myList[0],
-                'child' => $content1[0],
+                'userPlaylist' => $myList[0],
+                'content' => $content1[0],
             ]
         );
 
-        $this->fakeHierarchy(
+        $this->fakeUserPlaylistContent(
             1,
             [
-                'parent' => $myList[0],
-                'child' => $content2[0],
+                'userPlaylist' => $myList[0],
+                'content' => $content2[0],
             ]
         );
 
@@ -548,12 +553,10 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         $userId = $this->createAndLogInNewUser();
         $type = $this->faker->randomElement(['course', 'play-along', 'song']);
 
-        $myList = $this->fakeContent(
+        $myList = $this->fakeUserPlaylist(
             1,
             [
-                'slug' => 'primary-playlist',
-                'type' => 'user-playlist',
-                'status' => ContentService::STATUS_PUBLISHED,
+                'type' => 'primary-playlist',
                 'brand' => config('railcontent.brand'),
                 'userId' => $userId,
             ]
@@ -584,19 +587,19 @@ class MobileApiEndpointsTest extends RailcontentTestCase
             ]
         );
 
-        $this->fakeHierarchy(
+        $this->fakeUserPlaylistContent(
             1,
             [
-                'parent' => $myList[0],
-                'child' => $content1[0],
+                'userPlaylist' => $myList[0],
+                'content' => $content1[0],
             ]
         );
 
-        $this->fakeHierarchy(
+        $this->fakeUserPlaylistContent(
             1,
             [
-                'parent' => $myList[0],
-                'child' => $content2[0],
+                'userPlaylist' => $myList[0],
+                'content' => $content2[0],
             ]
         );
 
