@@ -364,14 +364,18 @@ class Content extends ArrayExpressible
      */
     public function getParent()
     {
-        $parent = $this->parent->filter(
-            function (ContentHierarchy $hierarchy) {
-                return $hierarchy->getParent()
-                        ->getType() != 'user-playlist';
-            }
-        );
+        if($this->parent) {
+            $parent = $this->parent->filter(
+                function (ContentHierarchy $hierarchy) {
+                    return $hierarchy->getParent()
+                            ->getType() != 'user-playlist';
+                }
+            );
 
-        return $parent->first();
+            return $parent->first();
+        }
+
+        return null;
     }
 
     /**
@@ -380,7 +384,9 @@ class Content extends ArrayExpressible
      */
     public function setParent($parent)
     {
-        $this->parent[] = $parent;
+       if($parent) {
+           $this->parent[] = $parent;
+       }
 
         return $this;
     }

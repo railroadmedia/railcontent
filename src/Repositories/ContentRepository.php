@@ -52,6 +52,8 @@ class ContentRepository extends EntityRepository
     private $requiredUserStates = [];
     private $includedUserStates = [];
 
+    private $requiredUserPlaylistIds = [];
+
     private $page;
     private $limit;
     private $orderBy;
@@ -160,7 +162,8 @@ class ContentRepository extends EntityRepository
         $orderDirection,
         array $typesToInclude,
         array $slugHierarchy,
-        array $requiredParentIds
+        array $requiredParentIds,
+        array $requiredUserPlaylistsIds
     ) {
         $this->page = $page;
         $this->limit = $limit;
@@ -169,6 +172,7 @@ class ContentRepository extends EntityRepository
         $this->typesToInclude = $typesToInclude;
         $this->slugHierarchy = $slugHierarchy;
         $this->requiredParentIds = $requiredParentIds;
+        $this->requiredUserPlaylistIds = $requiredUserPlaylistsIds;
 
         // reset all the filters for the new query
         $this->requiredFields = [];
@@ -212,6 +216,7 @@ class ContentRepository extends EntityRepository
                 ->restrictByParentIds($this->requiredParentIds)
                 ->restrictByUserStates($this->requiredUserStates)
                 ->restrictBySlugHierarchy($this->slugHierarchy)
+                ->restrictByPlaylistIds($this->requiredUserPlaylistIds)
                 ->orderBy(implode(', ', $orderByColumns))
                 ->restrictByFields($this->requiredFields);
 
@@ -232,6 +237,7 @@ class ContentRepository extends EntityRepository
                 ->includeByUserStates($this->includedUserStates)
                 ->restrictByTypes($this->typesToInclude)
                 ->restrictByParentIds($this->requiredParentIds)
+                ->restrictByPlaylistIds($this->requiredUserPlaylistIds)
                 ->restrictByFilterOptions()
                 ->getQuery()
                 ->getResult();

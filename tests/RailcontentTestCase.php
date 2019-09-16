@@ -39,6 +39,8 @@ use Railroad\Railcontent\Entities\ContentTopic;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Entities\UserPermission;
+use Railroad\Railcontent\Entities\UserPlaylist;
+use Railroad\Railcontent\Entities\UserPlaylistContent;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
@@ -990,6 +992,61 @@ class RailcontentTestCase extends BaseTestCase
         $fakePopulator = $this->populator->execute();
 
         return $fakePopulator[ContentLikes::class];
+    }
+
+    public function fakeUserPlaylist($nr = 1, $userPlaylist = [])
+    {
+        $this->populator = new Populator($this->faker, $this->entityManager);
+
+        if (empty($userPlaylist)) {
+            $userPlaylist = [
+                'type' => 'primary-playlist',
+                'brand' => config('railcontent.brand'),
+            ];
+        }
+
+        if(!array_key_exists('userId', $userPlaylist)){
+            $user = $this->fakeUser();
+        }
+
+
+        $userPlaylist['user'] =
+            $this->app->make(UserProvider::class)
+                ->getUserById($userPlaylist['userId']??$user['id']) ;
+
+        unset($userPlaylist['userId']);
+
+        $this->populator->addEntity(
+            UserPlaylist::class,
+            $nr,
+            $userPlaylist
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[UserPlaylist::class];
+    }
+
+    public function fakeUserPlaylistContent($nr = 1, $userPlaylistContent = [])
+    {
+        $this->populator = new Populator($this->faker, $this->entityManager);
+
+        if (empty($userPlaylistContent)) {
+            $userPlaylistContent = [
+                'content' => $this->fakeContent(),
+                'userPlaylist' => $this->fakeUserPlaylist(),
+            ];
+        }
+
+        $this->populator->addEntity(
+            UserPlaylistContent::class,
+            $nr,
+            $userPlaylistContent
+
+        );
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[UserPlaylistContent::class];
     }
 
 }

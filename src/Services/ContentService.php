@@ -850,7 +850,8 @@ class ContentService
         array $includedFields = [],
         array $requiredUserStates = [],
         array $includedUserStates = [],
-        $pullFilterFields = true
+        $pullFilterFields = true,
+        array $requiredUserPlaylistsIds = []
     ) {
 
         $results = null;
@@ -869,7 +870,8 @@ class ContentService
             $orderByDirection,
             $includedTypes,
             $slugHierarchy,
-            $requiredParentIds
+            $requiredParentIds,
+            $requiredUserPlaylistsIds
         );
 
         foreach ($requiredFields as $requiredField) {

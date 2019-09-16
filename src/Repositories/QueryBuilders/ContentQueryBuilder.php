@@ -9,6 +9,7 @@ use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Entities\UserPermission;
+use Railroad\Railcontent\Entities\UserPlaylistContent;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
 class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
@@ -395,6 +396,23 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                 );
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @param array $userPlaylistIds
+     * @return $this
+     */
+    public function restrictByPlaylistIds(array $userPlaylistIds)
+    {
+        if (empty($userPlaylistIds)) {
+            return $this;
+        }
+
+        $this->join(UserPlaylistContent::class, 'upc', 'WITH', 'railcontent_content.id = upc.content');
+        $this->andWhere('upc.userPlaylist IN (:userPlaylistIds)')
+            ->setParameter('userPlaylistIds', $userPlaylistIds);
 
         return $this;
     }

@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Carbon\Carbon;
 use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
@@ -12,6 +13,7 @@ use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ResponseService;
+use Railroad\Railcontent\Services\UserPlaylistService;
 use ReflectionException;
 
 /**
@@ -31,69 +33,48 @@ class MyListJsonController extends Controller
      */
     private $contentHierarchyService;
 
+    private $userPlaylistService;
+
     /**
      * MyListJsonController constructor.
      *
      * @param ContentService $contentService
      * @param ContentHierarchyService $contentHierarchyService
+     * @param UserPlaylistService $userPlaylistService
      */
     public function __construct(
         ContentService $contentService,
-        ContentHierarchyService $contentHierarchyService
+        ContentHierarchyService $contentHierarchyService,
+        UserPlaylistService $userPlaylistService
     ) {
         $this->contentService = $contentService;
         $this->contentHierarchyService = $contentHierarchyService;
+        $this->userPlaylistService = $userPlaylistService;
     }
 
     /**
      * @param Request $request
      * @return JsonResponse|\Symfony\Component\HttpFoundation\JsonResponse
-     * @throws DBALException
+     * @throws NonUniqueResultException
      * @throws ORMException
      * @throws OptimisticLockException
-     * @throws ReflectionException
      */
     public function addToPrimaryPlaylist(Request $request)
     {
         $userId = auth()->id();
 
         $content = $this->contentService->getById($request->get('content_id'));
-
         if (!$content) {
             return ResponseService::empty(200)
                 ->setData(['error' => 'Incorrect content']);
         }
 
         $userPrimaryPlaylist =
-            array_first($this->contentService->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
+            $this->userPlaylistService->updateOrCeate($userId, 'primary-playlist', config('railcontent.brand'));
 
-        if (!$userPrimaryPlaylist) {
-            $userPrimaryPlaylist = $this->contentService->create(
-                [
-                    'data' => [
-                        'attributes' => [
-                            'slug' => 'primary-playlist',
-                            'type' => 'user-playlist',
-                            'status' => ContentService::STATUS_PUBLISHED,
-                            'brand' => config('railcontent.brand'),
-                        ],
-                        'relationships' => [
-                            'user' => [
-                                'data' => [
-                                    'type' => 'user',
-                                    'id' => $userId,
-                                ],
-                            ],
-                        ],
-                    ],
-                ]
-            );
-        }
-
-        $this->contentHierarchyService->createOrUpdateHierarchy(
+        $this->userPlaylistService->addContentToUserPlaylist(
             $userPrimaryPlaylist->getId(),
-            $request->get('content_id'),
-            1
+            $request->get('content_id')
         );
 
         return ResponseService::empty(200)
@@ -103,9 +84,9 @@ class MyListJsonController extends Controller
     /**
      * @param Request $request
      * @return JsonResponse|\Symfony\Component\HttpFoundation\JsonResponse
+     * @throws NonUniqueResultException
      * @throws ORMException
      * @throws OptimisticLockException
-     * @throws NonUniqueResultException
      */
     public function removeFromPrimaryPlaylist(Request $request)
     {
@@ -118,9 +99,12 @@ class MyListJsonController extends Controller
 
         $userId = auth()->id();
         $userPrimaryPlaylist =
-            array_first($this->contentService->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
+            $this->userPlaylistService->updateOrCeate($userId, 'primary-playlist', config('railcontent.brand'));
 
-        $this->contentHierarchyService->delete($userPrimaryPlaylist->getId(), $request->get('content_id'));
+        $this->userPlaylistService->removeContentFromUserPlaylist(
+            $userPrimaryPlaylist->getId(),
+            $request->get('content_id')
+        );
 
         return ResponseService::empty(200)
             ->setData(['data' => 'success']);
@@ -151,12 +135,8 @@ class MyListJsonController extends Controller
         $requiredFields = $request->get('required_fields', []);
 
         if (!$state) {
-            $usersPrimaryPlaylists = $this->contentService->getByUserIdTypeSlug(
-                auth()->id(),
-                'user-playlist',
-                'primary-playlist'
-            );
 
+            $usersPrimaryPlaylists = $this->userPlaylistService->userPlaylist(auth()->id(), 'primary-playlist');
             if (empty($usersPrimaryPlaylists)) {
                 return ResponseService::empty(200);
             }
@@ -167,11 +147,13 @@ class MyListJsonController extends Controller
                 '-published_on',
                 $contentTypes,
                 [],
-                [$usersPrimaryPlaylists[0]->getId()],
+                [],
                 $requiredFields,
                 [],
                 [],
-                []
+                [],
+                true,
+                [$usersPrimaryPlaylists->getId()]
             );
         } else {
             $contentTypes = array_diff($contentTypes, ['course-part']);
