@@ -443,7 +443,7 @@ class MobileApiEndpointsTest extends RailcontentTestCase
 
     public function test_add_to_my_list()
     {
-        $this->createAndLogInNewUser();
+        $loggedInUserId = $this->createAndLogInNewUser();
 
         $content = $this->fakeContent(
             1,
