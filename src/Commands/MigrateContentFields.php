@@ -349,7 +349,12 @@ class MigrateContentFields extends Command
                     continue;
                 }
                 if (array_key_exists($column, $contentColumns[$contentId])) {
+
                     $value = $contentColumns[$contentId][$column];
+                    if($this->entityManager->getClassMetadata(Content::class)->getTypeOfField($column) == 'integer'){
+                        $value = str_replace(',','', $value);
+                    }
+
                     if ((($column == 'live_event_end_time') || ($column == 'live_event_start_time'))) {
                         $query1 .= "  WHEN id = " .
                             $contentId .
