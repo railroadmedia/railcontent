@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Entities;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -39,6 +40,20 @@ class UserPlaylist
      * @ORM\Column(type="user_id", name="user_id")
      */
     protected $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\UserPlaylistContent", mappedBy="userPlaylist", cascade={"remove","insert"})
+     * @ORM\JoinColumn(name="id", referencedColumnName="user_playlist_id")
+     */
+    protected $playlistContent;
+
+    /**
+     * UserPlaylist constructor.
+     */
+    public function __construct()
+    {
+        $this->playlistContent = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -98,4 +113,21 @@ class UserPlaylist
     {
         $this->user = $user;
     }
+
+    /**
+     * @param UserPlaylistContent $userPlaylistContent
+     */
+    public function addPlaylistContent(UserPlaylistContent $userPlaylistContent)
+    {
+        $this->playlistContent[] = $userPlaylistContent;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPlaylistContent()
+    {
+        return $this->playlistContent;
+    }
+
 }
