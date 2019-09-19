@@ -8,7 +8,6 @@ use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
-use Railroad\Railcontent\Contracts\UserProviderInterface;
 
 class MigrateUserPlaylist extends Command
 {
@@ -32,24 +31,16 @@ class MigrateUserPlaylist extends Command
     private $databaseManager;
 
     /**
-     * @var UserProviderInterface
-     */
-    private $userProvider;
-
-    /**
      * MigrateUserPlaylist constructor.
      *
      * @param DatabaseManager $databaseManager
-     * @param UserProviderInterface $userProvider
      */
     public function __construct(
-        DatabaseManager $databaseManager,
-        UserProviderInterface $userProvider
+        DatabaseManager $databaseManager
     ) {
         parent::__construct();
 
         $this->databaseManager = $databaseManager;
-        $this->userProvider = $userProvider;
     }
 
     /**
@@ -92,32 +83,16 @@ class MigrateUserPlaylist extends Command
                 ]
             );
 
-        $prepareDB = microtime(true) - $start;
-        $format = "Finish DB  in total %s seconds\n";
-        $this->info(sprintf($format, $prepareDB));
-
-        $invalidUserIds = [];
-
         $dbConnection->table(config('railcontent.table_prefix') . 'content')
             ->select('id as old_id', 'brand', 'slug as type', 'user_id', 'created_on as created_at')
             ->where('type', 'user-playlist')
             ->orderBy('id', 'asc')
             ->chunk(
                 $chunkSize,
-                function (Collection $rows) use ($dbConnection, &$invalidUserIds) {
+                function (Collection $rows) use ($dbConnection) {
                     $playlistsIds =
                         $rows->pluck('old_id')
                             ->toArray();
-
-                    foreach ($rows as $index => $row) {
-                        $playlistData = get_object_vars($row);
-                        $user = $this->userProvider->getUserById($playlistData['user_id']);
-
-                        if (!$user) {
-                            unset($rows[$index]);
-                            $invalidUserIds[] = $playlistData['user_id'];
-                        }
-                    }
 
                     $data = json_decode(json_encode($rows), true);
 
@@ -167,8 +142,5 @@ class MigrateUserPlaylist extends Command
         $finish = microtime(true) - $start;
         $format = "Finished user playlist data migration  in total %s seconds\n";
         $this->info(sprintf($format, $finish));
-
-        $this->info(
-            'Not imported playlists for ' . count($invalidUserIds) . ' users.');
     }
 }
