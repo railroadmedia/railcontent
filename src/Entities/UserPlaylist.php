@@ -42,7 +42,7 @@ class UserPlaylist
     protected $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\UserPlaylistContent", mappedBy="userPlaylist", cascade={"remove","insert"})
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\UserPlaylistContent", mappedBy="userPlaylist", cascade={"remove","persist"})
      * @ORM\JoinColumn(name="id", referencedColumnName="user_playlist_id")
      */
     protected $playlistContent;
