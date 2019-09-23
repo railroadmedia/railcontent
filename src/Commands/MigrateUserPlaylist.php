@@ -8,6 +8,7 @@ use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 
 class MigrateUserPlaylist extends Command
 {
@@ -31,16 +32,24 @@ class MigrateUserPlaylist extends Command
     private $databaseManager;
 
     /**
+     * @var UserProviderInterface
+     */
+    private $userProvider;
+
+    /**
      * MigrateUserPlaylist constructor.
      *
      * @param DatabaseManager $databaseManager
+     * @param UserProviderInterface $userProvider
      */
     public function __construct(
-        DatabaseManager $databaseManager
+        DatabaseManager $databaseManager,
+        UserProviderInterface $userProvider
     ) {
         parent::__construct();
 
         $this->databaseManager = $databaseManager;
+        $this->userProvider = $userProvider;
     }
 
     /**
@@ -83,16 +92,36 @@ class MigrateUserPlaylist extends Command
                 ]
             );
 
+        $invalidUserIds = 0;
+        $migrated = 0;
+
         $dbConnection->table(config('railcontent.table_prefix') . 'content')
             ->select('id as old_id', 'brand', 'slug as type', 'user_id', 'created_on as created_at')
             ->where('type', 'user-playlist')
             ->orderBy('id', 'asc')
             ->chunk(
                 $chunkSize,
-                function (Collection $rows) use ($dbConnection) {
+                function (Collection $rows) use ($dbConnection, &$invalidUserIds, &$migrated) {
                     $playlistsIds =
                         $rows->pluck('old_id')
                             ->toArray();
+
+                    foreach ($rows as $index => $row) {
+                        $playlistData = get_object_vars($row);
+                        $user = $this->userProvider->getUserByLegacyId(
+                            $playlistData['user_id'],
+                            ucfirst($playlistData['brand'])
+                        );
+
+                        if (!$user) {
+                            unset($rows[$index]);
+                            $this->info('Not exists user with legacy user id::' . $playlistData['user_id']. ' brand:'.ucfirst($playlistData['brand']));
+                            $invalidUserIds++;
+                        } else {
+                            $rows[$index]->user_id = $user[0]->getId();
+                            $migrated++;
+                        }
+                    }
 
                     $data = json_decode(json_encode($rows), true);
 
@@ -128,6 +157,8 @@ class MigrateUserPlaylist extends Command
 
                     $dbConnection->table(config('railcontent.table_prefix') . 'user_playlist_content')
                         ->insert($userPlaylistsContentData);
+
+                    $this->info('Migrated user playlists: '. $migrated);
                 }
             );
 
@@ -140,7 +171,8 @@ class MigrateUserPlaylist extends Command
             );
 
         $finish = microtime(true) - $start;
-        $format = "Finished user playlist data migration  in total %s seconds\n";
+        $format =
+            "Finished user playlist data migration  in total %s seconds\n Not found " . $invalidUserIds . ' users';
         $this->info(sprintf($format, $finish));
     }
 }
