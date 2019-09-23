@@ -76,6 +76,7 @@ class RailcontentServiceProvider extends ServiceProvider
         $this->publishes(
             [
                 __DIR__ . '/../../config/railcontent.php' => config_path('railcontent.php'),
+                __DIR__ . '/../../config/railcontentNewStructure.php' => config_path('railcontentNewStructure.php'),
             ]
         );
 

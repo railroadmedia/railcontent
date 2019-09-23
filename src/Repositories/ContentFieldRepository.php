@@ -11,6 +11,23 @@ class ContentFieldRepository extends RepositoryBase
     use ByContentIdTrait;
 
     /**
+     * @var ContentNewStructureRepository
+     */
+    private $contentNewStructureRepository;
+
+    /**
+     * ContentFieldRepository constructor.
+     *
+     * @param ContentNewStructureRepository $contentNewStructureRepository
+     */
+    public function __construct(ContentNewStructureRepository $contentNewStructureRepository)
+    {
+        parent::__construct();
+
+        $this->contentNewStructureRepository = $contentNewStructureRepository;
+    }
+
+    /**
      * @return Builder
      */
     public function query()
@@ -50,6 +67,60 @@ class ContentFieldRepository extends RepositoryBase
             ->orderBy('position', 'asc')
             ->get()
             ->toArray();
+
+    }
+
+    /**
+     * @param array $contentRows
+     * @return array
+     */
+    public function getByContents(array $contentRows)
+    {
+        if (empty($contentRows)) {
+            return [];
+        }
+
+        $contentIds = array_column($contentRows, 'id');
+
+        if (ContentRepository::$version == 'new') {
+
+            $contentFieldRows = [];
+            foreach ($contentRows as $contentRow) {
+                foreach (config('railcontentNewStructure.content_columns', []) as $field) {
+                    if ($contentRow[$field]) {
+                        $contentFieldRows[] = [
+                            'content_id' => $contentRow['id'],
+                            'key' => $field,
+                            'value' => $contentRow[$field],
+                            'position' => 1,
+                        ];
+                    }
+                }
+
+                if ($contentRow['video']) {
+                    $contentFieldRows[] = [
+                        'content_id' => $contentRow['id'],
+                        'key' => 'video',
+                        'value' => $contentRow['video'],
+                        'position' => 1,
+                        'type' => 'content_id',
+                    ];
+                }
+            }
+            $contentFieldRows = array_merge(
+                $contentFieldRows,
+                $this->contentNewStructureRepository->getByContentIds(array_column($contentRows, 'id'))
+            );
+            return $contentFieldRows;
+        } else {
+
+            return $this->query()
+                ->whereIn('content_id', array_unique($contentIds))
+                ->orderBy('position', 'asc')
+                ->get()
+                ->toArray();
+        }
+
     }
 
     public function attachLinkedContents(array $fieldRows)

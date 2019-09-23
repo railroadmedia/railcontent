@@ -51,4 +51,42 @@ class ContentDatumRepository extends RepositoryBase
             ->get()
             ->toArray();
     }
+
+    /**
+     * @param array $keys
+     * @param array $contentIds
+     * @return array
+     */
+    public function getByKeysAndContentIds(array $keys, array $contentIds)
+    {
+        if (empty($contentIds)||(empty($keys))) {
+            return [];
+        }
+
+        return $this->query()
+            ->whereIn('content_id', array_unique($contentIds))
+            ->whereIn('key', $keys)
+            ->orderBy('position', 'asc')
+            ->get()
+            ->toArray();
+    }
+
+    /**
+     * @param array $keys
+     * @param $contentId
+     * @return array
+     */
+    public function getByKeysAndContentId(array $keys, $contentId)
+    {
+        if (empty($contentId)||(empty($keys))) {
+            return [];
+        }
+
+        return $this->query()
+            ->where('content_id', $contentId)
+            ->whereIn('key', $keys)
+            ->orderBy('position', 'asc')
+            ->get()
+            ->toArray();
+    }
 }

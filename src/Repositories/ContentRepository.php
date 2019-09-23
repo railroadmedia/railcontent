@@ -42,6 +42,14 @@ class ContentRepository extends RepositoryBase
      */
     public static $bypassPermissions = false;
 
+    /**
+     * If it's 'new' the new database structure it's used for content fields.
+     * Default set to 'old'
+     *
+     * @var string
+     */
+    public static $version = 'old';
+
     private $requiredFields = [];
     private $includedFields = [];
 
@@ -118,7 +126,8 @@ class ContentRepository extends RepositoryBase
             return null;
         }
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
+
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -158,7 +167,7 @@ class ContentRepository extends RepositoryBase
             }
         }
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -195,7 +204,7 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -239,7 +248,7 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -281,7 +290,7 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -327,7 +336,7 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -385,7 +394,7 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -422,7 +431,7 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -459,7 +468,7 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -497,7 +506,7 @@ class ContentRepository extends RepositoryBase
                 ->selectInheritenceColumns()
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -538,7 +547,7 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -582,7 +591,7 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -626,7 +635,7 @@ class ContentRepository extends RepositoryBase
                 ->skip($skip)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -706,7 +715,7 @@ class ContentRepository extends RepositoryBase
 
         $merged = array_merge($beforeContents, $afterContents);
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($merged, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($merged);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($merged, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -787,7 +796,7 @@ class ContentRepository extends RepositoryBase
                 ->where('type', $type)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -818,7 +827,7 @@ class ContentRepository extends RepositoryBase
                 ->where('type', $type)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -851,7 +860,7 @@ class ContentRepository extends RepositoryBase
                 ->where(ConfigService::$tableContent . '.user_id', $userId)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -899,7 +908,7 @@ class ContentRepository extends RepositoryBase
 
         $contentRows = $query->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -970,7 +979,7 @@ class ContentRepository extends RepositoryBase
                 ->where(ConfigService::$tableContent . '.status', $status)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -1013,7 +1022,7 @@ class ContentRepository extends RepositoryBase
                 ->orderBy($orderByColumn, $orderByDirection)
                 ->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
 
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
@@ -1215,7 +1224,7 @@ class ContentRepository extends RepositoryBase
 
         $contentRows = $query->getToArray();
 
-        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentFieldRows = $this->fieldRepository->getByContents($contentRows);
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
             array_column($contentRows, 'id'),
