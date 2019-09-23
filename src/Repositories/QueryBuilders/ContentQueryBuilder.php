@@ -30,6 +30,49 @@ class ContentQueryBuilder extends QueryBuilder
             ]
         );
 
+        if (ContentRepository::$version == 'new') {
+            $this->addSelect(
+                [
+                    ConfigService::$tableContent . '.difficulty as difficulty',
+                    ConfigService::$tableContent . '.home_staff_pick_rating as home_staff_pick_rating',
+                    ConfigService::$tableContent . '.legacy_id as legacy_id',
+                    ConfigService::$tableContent . '.legacy_wordpress_post_id as legacy_wordpress_post_id',
+                    ConfigService::$tableContent . '.style as style',
+                    ConfigService::$tableContent . '.title as title',
+                    ConfigService::$tableContent . '.xp as xp',
+                    ConfigService::$tableContent . '.album as album',
+                    ConfigService::$tableContent . '.artist as artist',
+                    ConfigService::$tableContent . '.bpm as bpm',
+                    ConfigService::$tableContent . '.cd_tracks as cd_tracks',
+                    ConfigService::$tableContent . '.chord_or_scale as chord_or_scale',
+                    ConfigService::$tableContent . '.difficulty_range as difficulty_range',
+                    ConfigService::$tableContent . '.episode_number as episode_number',
+                    ConfigService::$tableContent . '.exercise_book_pages as exercise_book_pages',
+                    ConfigService::$tableContent . '.fast_bpm as fast_bpm',
+                    ConfigService::$tableContent . '.includes_song as includes_song',
+                    ConfigService::$tableContent . '.instructors as instructors',
+                    ConfigService::$tableContent . '.live_event_start_time as live_event_start_time',
+                    ConfigService::$tableContent . '.live_event_end_time as live_event_end_time',
+                    ConfigService::$tableContent . '.live_event_youtube_id as live_event_youtube_id',
+                    ConfigService::$tableContent . '.live_stream_feed_type as live_stream_feed_type',
+                    ConfigService::$tableContent . '.name as name',
+                    ConfigService::$tableContent . '.released as released',
+                    ConfigService::$tableContent . '.slow_bpm as slow_bpm',
+                    ConfigService::$tableContent . '.total_xp as total_xp',
+                    ConfigService::$tableContent . '.transcriber_name as transcriber_name',
+                    ConfigService::$tableContent . '.week as week',
+                    ConfigService::$tableContent . '.avatar_url as avatar_url',
+                    ConfigService::$tableContent . '.soundslice_slug as soundslice_slug',
+                    ConfigService::$tableContent . '.staff_pick_rating as staff_pick_rating',
+                    ConfigService::$tableContent . '.student_id as student_id',
+                    ConfigService::$tableContent . '.vimeo_video_id as vimeo_video_id',
+                    ConfigService::$tableContent . '.youtube_video_id as youtube_video_id',
+                    ConfigService::$tableContent . '.length_in_seconds as length_in_seconds',
+                    ConfigService::$tableContent . '.video as video',
+                ]
+            );
+        }
+
         return $this;
     }
 
@@ -212,8 +255,7 @@ class ContentQueryBuilder extends QueryBuilder
                 Carbon::now()
                     ->toDateTimeString()
             );
-        }
-        else {
+        } else {
             // this strange hack is required to get the DB indexing to be used, todo: fix properly
             $this->where(
                 function ($builder) {
@@ -374,30 +416,72 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        foreach ($requiredFields as $index => $requiredFieldData) {
-            $tableName = 'cf_' . $index;
-
-            $this->join(
-                ConfigService::$tableContentFields . ' as ' . $tableName,
-                function (JoinClause $joinClause) use ($requiredFieldData, $tableName) {
-                    $joinClause->on(
-                        $tableName . '.content_id',
-                        '=',
-                        ConfigService::$tableContent . '.id'
-                    )
-                        ->on(
-                            $tableName . '.key',
-                            '=',
-                            $joinClause->raw("'" . $requiredFieldData['name'] . "'")
-                        )
-                        ->on(
-                            $tableName . '.value',
-                            $requiredFieldData['operator'],
-                            is_numeric($requiredFieldData['value']) ? $joinClause->raw($requiredFieldData['value']) :
-                                $joinClause->raw("'" . $requiredFieldData['value'] . "'")
+        if (ContentRepository::$version == 'new') {
+            foreach ($requiredFields as $requiredField) {
+                if (in_array($requiredField['name'], config('railcontentNewStructure.content_columns', []))) {
+                    $this->where(
+                        ConfigService::$tableContent . '.' . $requiredField['name'],
+                        $requiredField['operator'],
+                        $requiredField['value']
+                    );
+                } else {
+                    if (array_key_exists(
+                        $requiredField['name'],
+                        config('railcontentNewStructure.content_associations', [])
+                    )) {
+                        $tableName =
+                            config('railcontentNewStructure.content_associations')[$requiredField['name']]['table'];
+                        $this->join(
+                            $tableName,
+                            function (JoinClause $joinClause) use ($requiredField, $tableName) {
+                                $joinClause->on(
+                                    $tableName . '.content_id',
+                                    '=',
+                                    ConfigService::$tableContent . '.id'
+                                )
+                                    ->on(
+                                        $tableName .
+                                        '.' .
+                                        config(
+                                            'railcontentNewStructure.content_associations'
+                                        )[$requiredField['name']]['column'],
+                                        $requiredField['operator'],
+                                        is_numeric($requiredField['value']) ?
+                                            $joinClause->raw($requiredField['value']) :
+                                            $joinClause->raw("'" . $requiredField['value'] . "'")
+                                    );
+                            }
                         );
+                    }
                 }
-            );
+            }
+        } else {
+            foreach ($requiredFields as $index => $requiredFieldData) {
+                $tableName = 'cf_' . $index;
+
+                $this->join(
+                    ConfigService::$tableContentFields . ' as ' . $tableName,
+                    function (JoinClause $joinClause) use ($requiredFieldData, $tableName) {
+                        $joinClause->on(
+                            $tableName . '.content_id',
+                            '=',
+                            ConfigService::$tableContent . '.id'
+                        )
+                            ->on(
+                                $tableName . '.key',
+                                '=',
+                                $joinClause->raw("'" . $requiredFieldData['name'] . "'")
+                            )
+                            ->on(
+                                $tableName . '.value',
+                                $requiredFieldData['operator'],
+                                is_numeric($requiredFieldData['value']) ?
+                                    $joinClause->raw($requiredFieldData['value']) :
+                                    $joinClause->raw("'" . $requiredFieldData['value'] . "'")
+                            );
+                    }
+                );
+            }
         }
 
         return $this;
