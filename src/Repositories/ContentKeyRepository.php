@@ -30,7 +30,7 @@ class ContentKeyRepository extends RepositoryBase
         }
         
         return $this->query()
-            ->select(['content_id','key as value','position', DB::raw("'key' as 'key'")])
+            ->select(['content_id','key as value','position', DB::raw("'key' as 'key'"), DB::raw("'string' as 'type'")])
             ->where('content_id', $contentId)
             ->orderBy('position', 'asc')
             ->get()
@@ -48,7 +48,7 @@ class ContentKeyRepository extends RepositoryBase
         }
         
         return $this->query()
-            ->select(['content_id','key as value','position', DB::raw("'key' as 'key'")])
+            ->select(['content_id','key as value','position', DB::raw("'key' as 'key'"), DB::raw("'string' as 'type'")])
             ->whereIn('content_id', array_unique($contentIds))
             ->orderBy('position', 'asc')
             ->get()

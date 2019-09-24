@@ -32,7 +32,8 @@ class ContentFieldRepository extends RepositoryBase
      */
     public function query()
     {
-        return $this->connection()->table(ConfigService::$tableContentFields);
+        return $this->connection()
+            ->table(ConfigService::$tableContentFields);
     }
 
     /**
@@ -44,7 +45,7 @@ class ContentFieldRepository extends RepositoryBase
         if (empty($contentId)) {
             return [];
         }
-        
+
         return $this->query()
             ->where('content_id', $contentId)
             ->orderBy('position', 'asc')
@@ -61,7 +62,7 @@ class ContentFieldRepository extends RepositoryBase
         if (empty($contentIds)) {
             return [];
         }
-        
+
         return $this->query()
             ->whereIn('content_id', array_unique($contentIds))
             ->orderBy('position', 'asc')
@@ -93,18 +94,9 @@ class ContentFieldRepository extends RepositoryBase
                             'key' => $field,
                             'value' => $contentRow[$field],
                             'position' => 1,
+                            'type' => ($field == 'video') ? 'content_id' : 'string',
                         ];
                     }
-                }
-
-                if ($contentRow['video']) {
-                    $contentFieldRows[] = [
-                        'content_id' => $contentRow['id'],
-                        'key' => 'video',
-                        'value' => $contentRow['video'],
-                        'position' => 1,
-                        'type' => 'content_id',
-                    ];
                 }
             }
             $contentFieldRows = array_merge(

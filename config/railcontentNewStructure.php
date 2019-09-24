@@ -45,26 +45,32 @@ return [
         'topic' => [
             'table' => 'railcontent_content_topic',
             'column' => 'topic',
+            'type' =>'string',
         ],
         'tag' => [
             'table' => 'railcontent_content_tag',
             'column' => 'tag',
+            'type' =>'string',
         ],
         'key' => [
             'table' => 'railcontent_content_key',
             'column' => 'key',
+            'type' =>'string',
         ],
         'key_pitch_type' => [
             'table' => 'railcontent_content_key_pitch_type',
             'column' => 'key_pitch_type',
+            'type' =>'string',
         ],
         'playlist' => [
             'table' => 'railcontent_content_playlist',
             'column' => 'playlist',
+            'type' =>'string',
         ],
         'instructor' => [
             'table' => 'railcontent_content_instructor',
             'column' => 'instructor_id',
+            'type' =>'content_id',
         ],
     ],
 

@@ -945,35 +945,12 @@ class ContentRepository extends RepositoryBase
             $this->query()
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
-                ->join(
-                    ConfigService::$tableContentFields,
-                    function (JoinClause $joinClause) use (
-                        $fieldKey,
-                        $fieldValue,
-                        $fieldType,
-                        $fieldComparisonOperator
-                    ) {
-                        $joinClause->on(
-                            ConfigService::$tableContentFields . '.content_id',
-                            '=',
-                            ConfigService::$tableContent . '.id'
-                        )
-                            ->where(
-                                ConfigService::$tableContentFields . '.key',
-                                '=',
-                                $fieldKey
-                            )
-                            ->where(
-                                ConfigService::$tableContentFields . '.type',
-                                '=',
-                                $fieldType
-                            )
-                            ->where(
-                                ConfigService::$tableContentFields . '.value',
-                                $fieldComparisonOperator,
-                                $fieldValue
-                            );
-                    }
+                ->restrictByFields(
+                    [
+                        'name' => $fieldKey,
+                        'operator' => $fieldComparisonOperator,
+                        'value' => $fieldValue,
+                    ]
                 )
                 ->whereIn(ConfigService::$tableContent . '.type', $types)
                 ->where(ConfigService::$tableContent . '.status', $status)
@@ -1214,7 +1191,12 @@ class ContentRepository extends RepositoryBase
                 );
 
         if ($this->getFutureContentOnly) {
-            $subQuery->where('published_on', '>', Carbon::now()->toDateTimeString());
+            $subQuery->where(
+                'published_on',
+                '>',
+                Carbon::now()
+                    ->toDateTimeString()
+            );
         }
 
         $query =
@@ -1272,26 +1254,71 @@ class ContentRepository extends RepositoryBase
     {
         $possibleContentFields =
             $this->query()
-                ->selectFilterOptionColumns()
                 ->restrictByUserAccess()
                 ->restrictByFields($this->requiredFields)
                 ->includeByFields($this->includedFields)
                 ->restrictByUserStates($this->requiredUserStates)
                 ->includeByUserStates($this->includedUserStates)
                 ->restrictByTypes($this->typesToInclude)
-                ->restrictByParentIds($this->requiredParentIds)
-                ->leftJoin(
-                    ConfigService::$tableContentFields,
-                    ConfigService::$tableContentFields . '.content_id',
-                    '=',
-                    ConfigService::$tableContent . '.id'
-                )
-                ->whereIn(
-                    ConfigService::$tableContentFields . '.key',
-                    ConfigService::$fieldOptionList
-                )
-                ->get()
-                ->toArray();
+                ->restrictByParentIds($this->requiredParentIds);
+
+        if (self::$version == 'new') {
+            $fields = [];
+            $columnsAlias = [ConfigService::$tableContent . '.*'];
+            foreach (ConfigService::$fieldOptionList as $fieldOption) {
+                if (array_key_exists($fieldOption, config('railcontentNewStructure.content_associations'))) {
+                    $possibleContentFields = $possibleContentFields->leftJoin(
+                        config('railcontentNewStructure.content_associations')[$fieldOption]['table'],
+                        config('railcontentNewStructure.content_associations')[$fieldOption]['table'] . '.content_id',
+                        '=',
+                        ConfigService::$tableContent . '.id'
+                    );
+                    $columnsAlias[] =
+                        config('railcontentNewStructure.content_associations')[$fieldOption]['table'] .
+                        '.' .
+                        config('railcontentNewStructure.content_associations')[$fieldOption]['column'] .
+                        ' as ' .
+                        $fieldOption;
+                }
+            }
+
+            $possibleContentFields =
+                $possibleContentFields->addSelect($columnsAlias)
+                    ->get()
+                    ->toArray();
+
+            foreach ($possibleContentFields as $possibleContentField) {
+                foreach (ConfigService::$fieldOptionList as $fieldOption) {
+                    if ($possibleContentField[$fieldOption]) {
+                        $fields[] = [
+                            'content_type' => $possibleContentField['type'],
+                            'key' => $fieldOption,
+                            'value' => $possibleContentField[$fieldOption],
+                            'type' => (config('railcontentNewStructure.content_associations')[$fieldOption]['type'])
+                                ??
+                                'string',
+                        ];
+                    }
+                }
+            }
+            $possibleContentFields = $fields;
+        } else {
+            $possibleContentFields =
+                $possibleContentFields->selectFilterOptionColumns()
+                    ->leftJoin(
+                        ConfigService::$tableContentFields,
+                        ConfigService::$tableContentFields . '.content_id',
+                        '=',
+                        ConfigService::$tableContent . '.id'
+                    )
+                    ->whereIn(
+                        ConfigService::$tableContentFields . '.key',
+                        ConfigService::$fieldOptionList
+                    );
+            $possibleContentFields =
+                $possibleContentFields->get()
+                    ->toArray();
+        }
 
         return $this->parseAvailableFields($possibleContentFields);
     }
@@ -1533,33 +1560,21 @@ class ContentRepository extends RepositoryBase
                         ConfigService::$tableContent . '.id as id',
                     ]
                 );
+        $fields = [];
 
+        foreach ($contentFieldValues as $value) {
+            $fields = array_merge(
+                $fields,
+                [
+                    'key' => $contentFieldKey,
+                    'value' => $value,
+                    'operator' => '=',
+                ]
+            );
+        }
         $rows =
             $query->restrictByUserAccess()
-                ->join(
-                    ConfigService::$tableContentFields,
-                    function (JoinClause $joinClause) use (
-                        $contentFieldKey,
-                        $contentFieldValues
-                    ) {
-                        $joinClause->on(
-                            ConfigService::$tableContentFields . '.content_id',
-                            '=',
-                            ConfigService::$tableContent . '.id'
-                        )
-                            ->where(
-                                ConfigService::$tableContentFields . '.key',
-                                '=',
-                                $contentFieldKey
-                            );
-                        if (!empty($contentFieldValues)) {
-                            $joinClause->whereIn(
-                                ConfigService::$tableContentFields . '.value',
-                                $contentFieldValues
-                            );
-                        }
-                    }
-                )
+                ->includeByFields($fields)
                 ->whereIn(ConfigService::$tableContent . '.type', $contentTypes)
                 ->getToArray();
 
@@ -1617,26 +1632,8 @@ class ContentRepository extends RepositoryBase
      */
     public function getFiltersUserProgressState($userId, $state)
     {
-        $possibleFilters =
-            $this->query()
-                ->selectFilterOptionColumns()
-                ->restrictByUserAccess()
-                ->leftJoin(
-                    ConfigService::$tableUserContentProgress,
-                    ConfigService::$tableUserContentProgress . '.content_id',
-                    '=',
-                    ConfigService::$tableContent . '.id'
-                )
-                ->leftJoin(
-                    ConfigService::$tableContentFields,
-                    ConfigService::$tableContentFields . '.content_id',
-                    '=',
-                    ConfigService::$tableContent . '.id'
-                )
-                ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
-                ->where(ConfigService::$tableUserContentProgress . '.state', $state)
-                ->getToArray();
+        $this->requireUserStates($state, $userId);
 
-        return $this->parseAvailableFields($possibleFilters);
+        return $this->getFilterFields();
     }
 }

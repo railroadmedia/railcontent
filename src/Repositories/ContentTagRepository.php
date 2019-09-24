@@ -30,7 +30,7 @@ class ContentTagRepository extends RepositoryBase
         }
         
         return $this->query()
-            ->select(['content_id','tag as value','position', DB::raw("'tag' as 'key'")])
+            ->select(['content_id','tag as value','position', DB::raw("'tag' as 'key'"),DB::raw("'string' as 'type'")])
             ->where('content_id', $contentId)
             ->orderBy('position', 'asc')
             ->get()
@@ -48,7 +48,7 @@ class ContentTagRepository extends RepositoryBase
         }
         
         return $this->query()
-            ->select(['content_id','tag as value','position', DB::raw("'tag' as 'key'")])
+            ->select(['content_id','tag as value','position', DB::raw("'tag' as 'key'"), DB::raw("'string' as 'type'")])
             ->whereIn('content_id', array_unique($contentIds))
             ->orderBy('position', 'asc')
             ->get()

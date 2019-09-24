@@ -30,7 +30,7 @@ class ContentPlaylistRepository extends RepositoryBase
         }
         
         return $this->query()
-            ->select(['id','content_id','playlist as value','position', DB::raw("'playlist' as 'key'")])
+            ->select(['id','content_id','playlist as value','position', DB::raw("'playlist' as 'key'"), DB::raw("'string' as 'type'")])
             ->where('content_id', $contentId)
             ->orderBy('position', 'asc')
             ->get()
@@ -48,7 +48,7 @@ class ContentPlaylistRepository extends RepositoryBase
         }
         
         return $this->query()
-            ->select(['id','content_id','playlist as value','position', DB::raw("'playlist' as 'key'")])
+            ->select(['id','content_id','playlist as value','position', DB::raw("'playlist' as 'key'"), DB::raw("'string' as 'type'")])
             ->whereIn('content_id', array_unique($contentIds))
             ->orderBy('position', 'asc')
             ->get()

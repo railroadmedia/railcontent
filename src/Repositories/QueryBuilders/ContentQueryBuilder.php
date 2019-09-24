@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories\QueryBuilders;
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -417,7 +418,7 @@ class ContentQueryBuilder extends QueryBuilder
         }
 
         if (ContentRepository::$version == 'new') {
-            foreach ($requiredFields as $requiredField) {
+            foreach ($requiredFields as $index => $requiredField) {
                 if (in_array($requiredField['name'], config('railcontentNewStructure.content_columns', []))) {
                     $this->where(
                         ConfigService::$tableContent . '.' . $requiredField['name'],
@@ -430,8 +431,12 @@ class ContentQueryBuilder extends QueryBuilder
                         config('railcontentNewStructure.content_associations', [])
                     )) {
                         $tableName =
-                            config('railcontentNewStructure.content_associations')[$requiredField['name']]['table'];
+                            config('railcontentNewStructure.content_associations')[$requiredField['name']]['table'] .
+                            '_' .
+                            $index;
                         $this->join(
+                            config('railcontentNewStructure.content_associations')[$requiredField['name']]['table'] .
+                            ' as ' .
                             $tableName,
                             function (JoinClause $joinClause) use ($requiredField, $tableName) {
                                 $joinClause->on(
@@ -440,9 +445,7 @@ class ContentQueryBuilder extends QueryBuilder
                                     ConfigService::$tableContent . '.id'
                                 )
                                     ->on(
-                                        $tableName .
-                                        '.' .
-                                        config(
+                                        $tableName . '.' . config(
                                             'railcontentNewStructure.content_associations'
                                         )[$requiredField['name']]['column'],
                                         $requiredField['operator'],
@@ -497,40 +500,111 @@ class ContentQueryBuilder extends QueryBuilder
             return $this;
         }
 
-        $tableName = '_icf';
-
-        $this->join(
-            ConfigService::$tableContentFields . ' as ' . $tableName,
-            function (JoinClause $joinClause) use ($includedFields, $tableName) {
-                $joinClause->on(
-                    $tableName . '.content_id',
-                    '=',
-                    ConfigService::$tableContent . '.id'
+        if (ContentRepository::$version == 'new') {
+            $fieldsAsColumns =
+                array_intersect(
+                    array_pluck($includedFields, 'name'),
+                    config('railcontentNewStructure.content_columns', [])
                 );
 
-                $joinClause->on(
-                    function (JoinClause $joinClause) use ($tableName, $includedFields) {
-                        foreach ($includedFields as $index => $includedFieldData) {
-                            $joinClause->orOn(
-                                function (JoinClause $joinClause) use ($tableName, $includedFieldData) {
-                                    $joinClause->on(
-                                        $tableName . '.key',
-                                        '=',
-                                        $joinClause->raw("'" . $includedFieldData['name'] . "'")
-                                    )
-                                        ->on(
-                                            $tableName . '.value',
-                                            $includedFieldData['operator'],
-                                            $joinClause->raw("'" . $includedFieldData['value'] . "'")
-                                        );
-                                }
-                            );
-                        }
-                    }
+            $fieldsModifiedAsColumns = array_only($includedFields, array_keys($fieldsAsColumns));
+            $fieldsAsAssociations =  array_intersect(
+                array_pluck($includedFields, 'name'),
+                array_keys(config('railcontentNewStructure.content_associations'))
+            );
+            $fieldsModifiedAsNewTables = array_only($includedFields, array_keys($fieldsAsAssociations));
 
+            if ($fieldsModifiedAsColumns) {
+                $this->where(
+                    function (Builder $builder) use ($fieldsModifiedAsColumns) {
+                        foreach ($fieldsModifiedAsColumns as $includedField) {
+
+                                $builder->orWhere(
+                                    ConfigService::$tableContent . '.' . $includedField['name'],
+                                    $includedField['operator'],
+                                    $includedField['value']
+                                );
+
+                        }
+                        return $builder;
+                    }
                 );
             }
-        );
+
+            if($fieldsModifiedAsNewTables){
+                foreach ($fieldsModifiedAsNewTables as $index=>$includedField) {
+                        $tableName =
+                            config('railcontentNewStructure.content_associations')[$includedField['name']]['table'] .
+                            '_' .
+                            $index;
+                        $this->leftJoin(
+                            config('railcontentNewStructure.content_associations')[$includedField['name']]['table'] .
+                            ' as ' .
+                            $tableName,
+                            function (JoinClause $joinClause) use ($tableName) {
+                                $joinClause->on(
+                                    $tableName . '.content_id',
+                                    '=',
+                                    ConfigService::$tableContent . '.id'
+                                );
+                            }
+                        );
+                }
+                     $this->where(
+                         function (Builder $builder) use ($fieldsModifiedAsNewTables) {
+                             foreach ($fieldsModifiedAsNewTables as $index=>$includedField) {
+                               //  if(in_array($includedField['name'], array_keys(config('railcontentNewStructure.content_associations'))) ) {
+                                     $tableName =
+                                         config('railcontentNewStructure.content_associations')[$includedField['name']]['table'] .
+                                         '_' .
+                                         $index;
+                                     $builder->orWhere(
+                                         $tableName . '.' . $includedField['name'],
+                                         $includedField['operator'],
+                                         $includedField['value']
+                                     );
+
+                             }
+                             return $builder;
+                         }
+                     );
+            }
+        } else {
+            $tableName = '_icf';
+
+            $this->join(
+                ConfigService::$tableContentFields . ' as ' . $tableName,
+                function (JoinClause $joinClause) use ($includedFields, $tableName) {
+                    $joinClause->on(
+                        $tableName . '.content_id',
+                        '=',
+                        ConfigService::$tableContent . '.id'
+                    );
+
+                    $joinClause->on(
+                        function (JoinClause $joinClause) use ($tableName, $includedFields) {
+                            foreach ($includedFields as $index => $includedFieldData) {
+                                $joinClause->orOn(
+                                    function (JoinClause $joinClause) use ($tableName, $includedFieldData) {
+                                        $joinClause->on(
+                                            $tableName . '.key',
+                                            '=',
+                                            $joinClause->raw("'" . $includedFieldData['name'] . "'")
+                                        )
+                                            ->on(
+                                                $tableName . '.value',
+                                                $includedFieldData['operator'],
+                                                $joinClause->raw("'" . $includedFieldData['value'] . "'")
+                                            );
+                                    }
+                                );
+                            }
+                        }
+
+                    );
+                }
+            );
+        }
 
         return $this;
     }
