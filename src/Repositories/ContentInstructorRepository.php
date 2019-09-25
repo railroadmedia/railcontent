@@ -54,4 +54,22 @@ class ContentInstructorRepository extends RepositoryBase
             ->get()
             ->toArray();
     }
+
+    /**
+     * @param array $contentIds
+     * @return Builder
+     */
+    public function getByContentIdsQuery(array  $contentIds){
+        return  $this->query()
+            ->select(
+                [
+                    'content_id',
+                    'instructor_id as value',
+                    'position',
+                    DB::raw("'instructor' as 'key'"),
+                    DB::raw("'content_id' as 'type'"),
+                ]
+            )
+            ->whereIn('content_id', $contentIds);
+    }
 }

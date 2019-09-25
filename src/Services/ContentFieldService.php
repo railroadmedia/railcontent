@@ -7,6 +7,7 @@ use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentFieldRepository;
+use Railroad\Railcontent\Repositories\ContentRepository;
 
 class ContentFieldService
 {
@@ -210,16 +211,19 @@ class ContentFieldService
     public function createOrUpdate($data)
     {
         $oldField = $this->get($data['content_id']);
-
-        $id = $this->fieldRepository->createOrUpdateAndReposition(
-            $data['id'] ?? null,
-            $data
-        );
+        if (ContentRepository::$version == 'new' && in_array($data['key'], config('railcontentNewStructure.content_columns', []))) {
+            $newField = $data;
+            $this->contentService->update($data['content_id'], [$data['key'] => $data['value']]);
+        }
+     else {
+         $id = $this->fieldRepository->createOrUpdateAndReposition($data['id'] ?? null, $data);
+         $newField = $this->get($id);
+     }
 
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $data['content_id']);
 
-        $newField = $this->get($id);
+
 
         if(array_key_exists('id',$data)) {
             event(new ContentFieldUpdated($newField, $oldField));

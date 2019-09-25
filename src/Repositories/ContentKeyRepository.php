@@ -54,4 +54,17 @@ class ContentKeyRepository extends RepositoryBase
             ->get()
             ->toArray();
     }
+
+    /**
+     * @param array $contentIds
+     * @return Builder
+     */
+    public function getByContentIdsQuery(array  $contentIds)
+    {
+        return $this->query()
+            ->select(
+                ['content_id', 'key as value', 'position', DB::raw("'key' as 'key'"), DB::raw("'string' as 'type'")]
+            )
+            ->whereIn('content_id', $contentIds);
+    }
 }

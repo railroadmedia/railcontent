@@ -54,4 +54,23 @@ class ContentTopicRepository extends RepositoryBase
             ->get()
             ->toArray();
     }
+
+    /**
+     * @param array $contentIds
+     * @return Builder
+     */
+    public function getByContentIdsQuery(array $contentIds)
+    {
+        return  $this->query()
+            ->select(
+                [
+                    'content_id',
+                    'topic as value',
+                    'position',
+                    DB::raw("'topic' as 'key'"),
+                    DB::raw("'string' as 'type'"),
+                ]
+            )
+            ->whereIn('content_id', $contentIds);
+    }
 }

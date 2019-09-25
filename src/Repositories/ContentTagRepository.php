@@ -6,7 +6,6 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 
-
 class ContentTagRepository extends RepositoryBase
 {
     use ByContentIdTrait;
@@ -16,7 +15,8 @@ class ContentTagRepository extends RepositoryBase
      */
     public function query()
     {
-        return $this->connection()->table('railcontent_content_tag');
+        return $this->connection()
+            ->table('railcontent_content_tag');
     }
 
     /**
@@ -28,9 +28,11 @@ class ContentTagRepository extends RepositoryBase
         if (empty($contentId)) {
             return [];
         }
-        
+
         return $this->query()
-            ->select(['content_id','tag as value','position', DB::raw("'tag' as 'key'"),DB::raw("'string' as 'type'")])
+            ->select(
+                ['content_id', 'tag as value', 'position', DB::raw("'tag' as 'key'"), DB::raw("'string' as 'type'")]
+            )
             ->where('content_id', $contentId)
             ->orderBy('position', 'asc')
             ->get()
@@ -46,12 +48,23 @@ class ContentTagRepository extends RepositoryBase
         if (empty($contentIds)) {
             return [];
         }
-        
-        return $this->query()
-            ->select(['content_id','tag as value','position', DB::raw("'tag' as 'key'"), DB::raw("'string' as 'type'")])
-            ->whereIn('content_id', array_unique($contentIds))
-            ->orderBy('position', 'asc')
+
+        return $this->getByContentIdsQuery($contentIds)
             ->get()
             ->toArray();
+    }
+
+    /**
+     * @param array $contentIds
+     * @return Builder
+     */
+    public function getByContentIdsQuery(array $contentIds)
+    {
+        return $this->query()
+            ->select(
+                ['content_id', 'tag as value', 'position', DB::raw("'tag' as 'key'"), DB::raw("'string' as 'type'")]
+            )
+            ->whereIn('content_id', $contentIds)
+            ->orderBy('position', 'asc');
     }
 }

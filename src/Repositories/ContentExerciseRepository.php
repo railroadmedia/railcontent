@@ -54,4 +54,20 @@ class ContentExerciseRepository extends RepositoryBase
             ->get()
             ->toArray();
     }
+
+
+    public function getByContentIdsQuery(array $contentIds)
+    {
+        return  $this->query()
+            ->select(
+                [
+                    'content_id',
+                    'exercise_id as value',
+                    'position',
+                    DB::raw("'exercise_id' as 'key'"),
+                    DB::raw("'content_id' as 'type'"),
+                ]
+            )
+            ->whereIn('content_id', $contentIds);
+    }
 }

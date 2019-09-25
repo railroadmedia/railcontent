@@ -54,4 +54,19 @@ class ContentPlaylistRepository extends RepositoryBase
             ->get()
             ->toArray();
     }
+
+    public function getByContentIdsQuery(array $contentIds)
+    {
+        return $this->query()
+            ->select(
+                [
+                    'content_id',
+                    'playlist as value',
+                    'position',
+                    DB::raw("'playlist' as 'key'"),
+                    DB::raw("'string' as 'type'"),
+                ]
+            )
+            ->whereIn('content_id', $contentIds);
+    }
 }

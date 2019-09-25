@@ -15,6 +15,7 @@ class ContentFieldRepository extends RepositoryBase
      */
     private $contentNewStructureRepository;
 
+
     /**
      * ContentFieldRepository constructor.
      *
@@ -99,10 +100,12 @@ class ContentFieldRepository extends RepositoryBase
                     }
                 }
             }
+
             $contentFieldRows = array_merge(
                 $contentFieldRows,
-                $this->contentNewStructureRepository->getByContentIds(array_column($contentRows, 'id'))
+                $this->contentNewStructureRepository->getByContentIds($contentIds)
             );
+
             return $contentFieldRows;
         } else {
 
@@ -158,5 +161,14 @@ class ContentFieldRepository extends RepositoryBase
 //        }
 
         dd($subContents);
+    }
+
+    public function createOrUpdateAndReposition($id, $data)
+    {
+        if (ContentRepository::$version == 'new') {
+            return $this->contentNewStructureRepository->createOrUpdateAndReposition($id, $data);
+        } else {
+           return parent::createOrUpdateAndReposition($id, $data);
+        }
     }
 }

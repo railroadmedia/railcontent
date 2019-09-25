@@ -48,7 +48,7 @@ class ContentRepository extends RepositoryBase
      *
      * @var string
      */
-    public static $version = 'old';
+    public static $version = 'new';
 
     private $requiredFields = [];
     private $includedFields = [];
@@ -1403,8 +1403,9 @@ class ContentRepository extends RepositoryBase
         foreach ($parsedContents as $parsedContent) {
             if (!empty($parsedContent['fields'])) {
                 foreach ($parsedContent['fields'] as $field) {
+
                     if ($field['type'] === 'content_id') {
-                        $contentIdsToPull[$field['id']] = $field['value'];
+                        $contentIdsToPull[$field['value']] = $field['value'];
                     }
                 }
             }

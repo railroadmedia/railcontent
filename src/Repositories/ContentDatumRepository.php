@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -88,5 +89,30 @@ class ContentDatumRepository extends RepositoryBase
             ->orderBy('position', 'asc')
             ->get()
             ->toArray();
+    }
+
+    /**
+     * @param array $keys
+     * @param array $contentIds
+     * @return array
+     */
+    public function getByKeysAndContentIdsQuery(array $keys, array $contentIds)
+    {
+        if (empty($contentIds)||(empty($keys))) {
+            return [];
+        }
+
+        return $this->query()
+            ->select(
+                [
+                    'content_id',
+                    'value',
+                    'key',
+                    'position',
+                    DB::raw("'string' as 'type'"),
+                ]
+            )
+            ->whereIn('content_id', $contentIds)
+            ->whereIn('key', $keys);
     }
 }
