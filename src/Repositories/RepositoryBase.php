@@ -221,9 +221,10 @@ abstract class RepositoryBase
             return $updated;
 
         } else {
-            return $this->query()
+            $this->query()
                 ->where('id', $dataId)
                 ->update($data);
+            return $dataId;
         }
     }
 

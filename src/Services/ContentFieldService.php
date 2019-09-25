@@ -212,7 +212,7 @@ class ContentFieldService
         $oldField = $this->get($data['content_id']);
 
         $id = $this->fieldRepository->createOrUpdateAndReposition(
-            ['id' => $data['id'] ?? null],
+            $data['id'] ?? null,
             $data
         );
 
