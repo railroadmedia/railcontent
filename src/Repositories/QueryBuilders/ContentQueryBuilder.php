@@ -70,6 +70,7 @@ class ContentQueryBuilder extends QueryBuilder
                     ConfigService::$tableContent . '.youtube_video_id as youtube_video_id',
                     ConfigService::$tableContent . '.length_in_seconds as length_in_seconds',
                     ConfigService::$tableContent . '.video as video',
+                    ConfigService::$tableContent . '.qna_video as qna_video',
                 ]
             );
         }

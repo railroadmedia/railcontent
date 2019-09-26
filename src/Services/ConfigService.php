@@ -218,4 +218,39 @@ class ConfigService
      * @var array
      */
     public static $tableCommentsAggregates;
+
+    /**
+     * @var array
+     */
+    public static $tableContentExercise;
+
+    /**
+     * @var array
+     */
+    public static $tableContentInstructor;
+
+    /**
+     * @var array
+     */
+    public static $tableContentKey;
+
+    /**
+     * @var array
+     */
+    public static $tableContentKeyPitchType;
+
+    /**
+     * @var array
+     */
+    public static $tableContentPlaylist;
+
+    /**
+     * @var array
+     */
+    public static $tableContentTag;
+
+    /**
+     * @var array
+     */
+    public static $tableContentTopic;
 }

@@ -2,13 +2,13 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
-use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
+use Railroad\Railcontent\Services\ConfigService;
 
 class ContentTagRepository extends RepositoryBase
 {
-    use ByContentIdTrait;
 
     /**
      * @return Builder
@@ -16,7 +16,22 @@ class ContentTagRepository extends RepositoryBase
     public function query()
     {
         return $this->connection()
-            ->table('railcontent_content_tag');
+            ->table(ConfigService::$tableContentTag);
+    }
+
+    /**
+     * @return array
+     */
+    public function columns()
+    {
+        return [
+            'id',
+            'content_id',
+            'tag as value',
+            'position',
+            DB::raw("'tag' as 'key'"),
+            DB::raw("'string' as 'type'"),
+        ];
     }
 
     /**
@@ -30,9 +45,7 @@ class ContentTagRepository extends RepositoryBase
         }
 
         return $this->query()
-            ->select(
-                ['content_id', 'tag as value', 'position', DB::raw("'tag' as 'key'"), DB::raw("'string' as 'type'")]
-            )
+            ->select($this->columns())
             ->where('content_id', $contentId)
             ->orderBy('position', 'asc')
             ->get()
@@ -61,10 +74,20 @@ class ContentTagRepository extends RepositoryBase
     public function getByContentIdsQuery(array $contentIds)
     {
         return $this->query()
-            ->select(
-                ['content_id', 'tag as value', 'position', DB::raw("'tag' as 'key'"), DB::raw("'string' as 'type'")]
-            )
+            ->select($this->columns())
             ->whereIn('content_id', $contentIds)
             ->orderBy('position', 'asc');
+    }
+
+    /**
+     * @param int $id
+     * @return array|Model|Builder|mixed|object|null
+     */
+    public function getById($id)
+    {
+        return $this->query()
+            ->select($this->columns())
+            ->where(['id' => $id])
+            ->first();
     }
 }

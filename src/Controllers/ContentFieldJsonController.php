@@ -50,7 +50,7 @@ class ContentFieldJsonController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $contentField = $this->fieldService->get($id);
+        $contentField = $this->fieldService->get($id, $request->get('key'));
 
         return reply()->json(
             [$contentField],
@@ -80,6 +80,7 @@ class ContentFieldJsonController extends Controller
                 ]
             )
         );
+
         $content_id = $request->input('content_id');
         $currentContent = $this->contentService->getById($content_id);
         $data = ["field" => $contentField, "post" => $currentContent];
@@ -149,8 +150,9 @@ class ContentFieldJsonController extends Controller
      */
     public function delete(ContentFieldDeleteRequest $request, $fieldId)
     {
-        $field = $this->fieldService->get($fieldId);
-        $deleted = $this->fieldService->delete($fieldId);
+        $field = $this->fieldService->get($fieldId, $request->get('key'));
+
+        $deleted = $this->fieldService->delete($fieldId, $request->get('key'));
 
         //if the update method response it's null the field not exist; we throw the proper exception
         throw_if(

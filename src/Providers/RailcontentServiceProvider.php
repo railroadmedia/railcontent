@@ -52,7 +52,7 @@ class RailcontentServiceProvider extends ServiceProvider
                         ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {
                         $event->statement->setFetchMode(PDO::FETCH_ASSOC);
                     }
-                }
+                },
             ],
             ContentCreated::class => [VersionContentEventListener::class . '@handle'],
             ContentUpdated::class => [VersionContentEventListener::class . '@handle'],
@@ -66,7 +66,7 @@ class RailcontentServiceProvider extends ServiceProvider
             ContentDatumDeleted::class => [VersionContentEventListener::class . '@handle'],
             CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
             CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
-            UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle']
+            UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
         ];
 
         parent::boot();
@@ -86,17 +86,22 @@ class RailcontentServiceProvider extends ServiceProvider
 
         //load package routes file
         $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
+        $this->loadRoutesFrom(__DIR__ . '/../../routes/routes_new_structure.php');
         $this->loadRoutesFrom(__DIR__ . '/../../routes/api.php');
 
-        $this->commands([
-            CreateSearchIndexes::class,
-            CreateVimeoVideoContentRecords::class,
-            RepairMissingDurations::class,
-            CreateYoutubeVideoContentRecords::class,
-            ExpireCache::class
-        ]);
+        $this->commands(
+            [
+                CreateSearchIndexes::class,
+                CreateVimeoVideoContentRecords::class,
+                RepairMissingDurations::class,
+                CreateYoutubeVideoContentRecords::class,
+                ExpireCache::class,
+            ]
+        );
 
-        Validator::extend('exists_multiple_columns', MultipleColumnExistsValidator::class . '@validate',
+        Validator::extend(
+            'exists_multiple_columns',
+            MultipleColumnExistsValidator::class . '@validate',
             'The value entered does not exist in the database, or does not match the requirements to be ' .
             'set as the :attribute for this content-type with the current or requested content-status. Please ' .
             'double-check the input value and try again.'
@@ -132,6 +137,13 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableCommentLikes = ConfigService::$tablePrefix . 'comment_likes';
         ConfigService::$tableContentLikes = ConfigService::$tablePrefix . 'content_likes';
         ConfigService::$tableSearchIndexes = ConfigService::$tablePrefix . 'search_indexes';
+        ConfigService::$tableContentExercise = ConfigService::$tablePrefix . 'content_exercise';
+        ConfigService::$tableContentInstructor = ConfigService::$tablePrefix . 'content_instructor';
+        ConfigService::$tableContentKey = ConfigService::$tablePrefix . 'content_key';
+        ConfigService::$tableContentKeyPitchType = ConfigService::$tablePrefix . 'content_key_pitch_type';
+        ConfigService::$tableContentPlaylist = ConfigService::$tablePrefix . 'content_playlist';
+        ConfigService::$tableContentTag = ConfigService::$tablePrefix . 'content_tag';
+        ConfigService::$tableContentTopic = ConfigService::$tablePrefix . 'content_topic';
 
         // brand
         ConfigService::$brand = config('railcontent.brand');
@@ -177,8 +189,7 @@ class RailcontentServiceProvider extends ServiceProvider
 
         ConfigService::$contentHierarchyMaxDepth = config('railcontent.content_hierarchy_max_depth');
         ConfigService::$contentHierarchyDecoratorAllowedTypes = config(
-            'railcontent.content_hierarchy_decorator_allowed_types' .
-            ''
+            'railcontent.content_hierarchy_decorator_allowed_types' . ''
         );
 
         // aggregates
@@ -187,8 +198,8 @@ class RailcontentServiceProvider extends ServiceProvider
                 'selectColumn' => 'COUNT(`' . ConfigService::$tableCommentLikes . '`.`id`) as `like_count`',
                 'foreignField' => 'comment_id',
                 'localField' => 'id',
-                'groupBy' => ConfigService::$tableComments . '.id'
-            ]
+                'groupBy' => ConfigService::$tableComments . '.id',
+            ],
         ];
     }
 

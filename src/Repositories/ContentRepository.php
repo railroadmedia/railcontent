@@ -48,7 +48,7 @@ class ContentRepository extends RepositoryBase
      *
      * @var string
      */
-    public static $version = 'new';
+    public static $version = 'old';
 
     private $requiredFields = [];
     private $includedFields = [];

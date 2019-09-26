@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use App\Http\Requests\Request;
 use Railroad\Railcontent\Events\ContentFieldCreated;
 use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
@@ -37,9 +38,13 @@ class ContentFieldService
      * @param integer $id
      * @return array
      */
-    public function get($id)
+    public function get($id, $key = '')
     {
-        $contentField = $this->fieldRepository->getById($id);
+        if (ContentRepository::$version == 'new') {
+            $contentField = $this->fieldRepository->getById($id, $key);
+        } else {
+            $contentField = $this->fieldRepository->getById($id);
+        }
 
         if (!empty($contentField) && $contentField['type'] == 'content_id') {
             $contentField['value'] = $this->contentService->getById($contentField['value']);
@@ -157,7 +162,7 @@ class ContentFieldService
     public function update($id, array $data)
     {
         //Check if field exist in the database
-        $oldField = $this->get($id);
+        $oldField = $this->get($id, $data['key']);
 
         if (is_null($oldField)) {
             return $oldField;
@@ -185,16 +190,16 @@ class ContentFieldService
      * @param $id
      * @return bool
      */
-    public function delete($id)
+    public function delete($id, $key)
     {
         //Check if field exist in the database
-        $field = $this->get($id);
+        $field = $this->get($id, $key);
 
         if (is_null($field)) {
             return false;
         }
 
-        $deleted = $this->fieldRepository->deleteAndReposition(['id' => $id]);
+        $deleted = $this->fieldRepository->deleteAndReposition(['id' => $id], '', $key);
 
 //        event(new ContentFieldDeleted($field));
 
@@ -210,22 +215,23 @@ class ContentFieldService
      */
     public function createOrUpdate($data)
     {
-        $oldField = $this->get($data['content_id']);
-        if (ContentRepository::$version == 'new' && in_array($data['key'], config('railcontentNewStructure.content_columns', []))) {
+        $oldField = $this->get($data['id'] ?? 0, $data['key'])??[];
+
+        if (ContentRepository::$version == 'new' &&
+            in_array($data['key'], config('railcontentNewStructure.content_columns', []))) {
             $newField = $data;
             $this->contentService->update($data['content_id'], [$data['key'] => $data['value']]);
+        } else {
+            $key = $data['key'];
+            $id = $this->fieldRepository->createOrUpdateAndReposition($data['id'] ?? null, $data);
+
+            $newField = $this->get($id, $key);
         }
-     else {
-         $id = $this->fieldRepository->createOrUpdateAndReposition($data['id'] ?? null, $data);
-         $newField = $this->get($id);
-     }
 
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $data['content_id']);
 
-
-
-        if(array_key_exists('id',$data)) {
+        if (array_key_exists('id', $data)) {
             event(new ContentFieldUpdated($newField, $oldField));
         } else {
             event(new ContentFieldCreated($newField, $data));

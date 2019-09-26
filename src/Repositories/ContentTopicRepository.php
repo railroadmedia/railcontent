@@ -2,21 +2,36 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
-use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
-
+use Railroad\Railcontent\Services\ConfigService;
 
 class ContentTopicRepository extends RepositoryBase
 {
-    use ByContentIdTrait;
 
     /**
      * @return Builder
      */
     public function query()
     {
-        return $this->connection()->table('railcontent_content_topic');
+        return $this->connection()
+            ->table(ConfigService::$tableContentTopic);
+    }
+
+    /**
+     * @return array
+     */
+    public function columns()
+    {
+        return [
+            'id',
+            'content_id',
+            'topic as value',
+            'position',
+            DB::raw("'topic' as 'key'"),
+            DB::raw("'string' as 'type'"),
+        ];
     }
 
     /**
@@ -28,9 +43,9 @@ class ContentTopicRepository extends RepositoryBase
         if (empty($contentId)) {
             return [];
         }
-        
+
         return $this->query()
-            ->select(['id','content_id','topic as value','position', DB::raw("'topic' as 'key'"),DB::raw("'string' as 'type'")])
+            ->select($this->columns())
             ->where('content_id', $contentId)
             ->orderBy('position', 'asc')
             ->get()
@@ -46,10 +61,8 @@ class ContentTopicRepository extends RepositoryBase
         if (empty($contentIds)) {
             return [];
         }
-        
-        return $this->query()
-            ->select(['id','content_id','topic as value','position', DB::raw("'topic' as 'key'"), DB::raw("'string' as 'type'")])
-            ->whereIn('content_id', array_unique($contentIds))
+
+        return $this->getByContentIdsQuery()
             ->orderBy('position', 'asc')
             ->get()
             ->toArray();
@@ -61,16 +74,20 @@ class ContentTopicRepository extends RepositoryBase
      */
     public function getByContentIdsQuery(array $contentIds)
     {
-        return  $this->query()
-            ->select(
-                [
-                    'content_id',
-                    'topic as value',
-                    'position',
-                    DB::raw("'topic' as 'key'"),
-                    DB::raw("'string' as 'type'"),
-                ]
-            )
+        return $this->query()
+            ->select($this->columns())
             ->whereIn('content_id', $contentIds);
+    }
+
+    /**
+     * @param int $id
+     * @return array|Model|Builder|mixed|object|null
+     */
+    public function getById($id)
+    {
+        return $this->query()
+            ->select($this->columns())
+            ->where(['id' => $id])
+            ->first();
     }
 }

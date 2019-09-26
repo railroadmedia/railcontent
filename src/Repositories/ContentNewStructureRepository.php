@@ -3,8 +3,8 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
+use Railroad\Railcontent\Services\ConfigService;
 
 class ContentNewStructureRepository extends RepositoryBase
 {
@@ -33,7 +33,7 @@ class ContentNewStructureRepository extends RepositoryBase
     /**
      * @var ContentInstructorRepository
      */
-    private $contentInstructorsRepository;
+    private $contentInstructorRepository;
 
     /**
      * @var ContentExerciseRepository
@@ -60,6 +60,7 @@ class ContentNewStructureRepository extends RepositoryBase
      * @param ContentInstructorRepository $contentInstructorRepository
      * @param ContentExerciseRepository $contentExerciseRepository
      * @param ContentPlaylistRepository $contentPlaylistRepository
+     * @param ContentDatumRepository $contentDatumRepository
      */
     public function __construct(
         ContentTagRepository $contentTagRepository,
@@ -71,13 +72,14 @@ class ContentNewStructureRepository extends RepositoryBase
         ContentPlaylistRepository $contentPlaylistRepository,
         ContentDatumRepository $contentDatumRepository
     ) {
+
         parent::__construct();
 
         $this->contentTagRepository = $contentTagRepository;
         $this->contentTopicRepository = $contentTopicRepository;
         $this->contentKeyRepository = $contentKeyRepository;
         $this->contentKeyPitchTypeRepository = $contentKeyPitchTypeRepository;
-        $this->contentInstructorsRepository = $contentInstructorRepository;
+        $this->contentInstructorRepository = $contentInstructorRepository;
         $this->contentExerciseRepository = $contentExerciseRepository;
         $this->contentPlaylistRepository = $contentPlaylistRepository;
         $this->contentDatumRepository = $contentDatumRepository;
@@ -89,7 +91,7 @@ class ContentNewStructureRepository extends RepositoryBase
     public function query()
     {
         return $this->connection()
-            ->table('railcontent_content');
+            ->table(ConfigService::$tableContent);
     }
 
     /**
@@ -106,7 +108,7 @@ class ContentNewStructureRepository extends RepositoryBase
         $topics = $this->contentTopicRepository->getByContentId($contentId);
         $keys = $this->contentKeyRepository->getByContentId($contentId);
         $keysPitchTypes = $this->contentKeyPitchTypeRepository->getByContentId($contentId);
-        $instructors = $this->contentInstructorsRepository->getByContentId($contentId);
+        $instructors = $this->contentInstructorRepository->getByContentId($contentId);
         $assignments = $this->contentExerciseRepository->getByContentId($contentId);
         $contentPlaylists = $this->contentPlaylistRepository->getByContentId($contentId);
         $sbtBpmAndSbtExercises =
@@ -136,31 +138,11 @@ class ContentNewStructureRepository extends RepositoryBase
 
         $contentIds = array_unique($contentIds);
 
-        //        $tags = $this->contentTagRepository->getByContentIds($contentIds);
-        //        $topics = $this->contentTopicRepository->getByContentIds($contentIds);
-        //        $keys = $this->contentKeyRepository->getByContentIds($contentIds);
-        //        $keysPitchTypes = $this->contentKeyPitchTypeRepository->getByContentIds($contentIds);
-        //        $instructors = $this->contentInstructorsRepository->getByContentIds($contentIds);
-        //        $assignments = $this->contentExerciseRepository->getByContentIds($contentIds);
-        //        $contentPlaylists = $this->contentPlaylistRepository->getByContentIds($contentIds);
-        //        $sbtBpmAndSbtExercises =
-        //            $this->contentDatumRepository->getByKeysAndContentIds(['sbt_exercise_number', 'sbt_bpm'], $contentIds);
-        //        return array_merge(
-        //            $tags,
-        //            $topics,
-        //            $keys,
-        //            $keysPitchTypes,
-        //            $instructors,
-        //            $assignments,
-        //            $contentPlaylists,
-        //            $sbtBpmAndSbtExercises
-        //        );
-
         $tags = $this->contentTagRepository->getByContentIdsQuery($contentIds);
         $topics = $this->contentTopicRepository->getByContentIdsQuery($contentIds);
         $keysPitchTypes = $this->contentKeyPitchTypeRepository->getByContentIdsQuery($contentIds);
         $playlists = $this->contentPlaylistRepository->getByContentIdsQuery($contentIds);
-        $instructors = $this->contentInstructorsRepository->getByContentIdsQuery($contentIds);
+        $instructors = $this->contentInstructorRepository->getByContentIdsQuery($contentIds);
         $assignments = $this->contentExerciseRepository->getByContentIdsQuery($contentIds);
         $sbt =
             $this->contentDatumRepository->getByKeysAndContentIdsQuery(['sbt_exercise_number', 'sbt_bpm'], $contentIds);
@@ -179,25 +161,57 @@ class ContentNewStructureRepository extends RepositoryBase
             ->toArray();
     }
 
-    public function createOrUpdateAndReposition($dataId = null, $data)
+    /**
+     * @param null $dataId
+     * @param $data
+     * @param bool $isEAV
+     * @return bool|int
+     */
+    public function createOrUpdateAndReposition($dataId = null, $data, $isEAV = true)
     {
         if (array_key_exists(
             $data['key'],
             config('railcontentNewStructure.content_associations', [])
         )) {
-            if(!$dataId){
-                $fieldId = $this->connection()
-                    ->table(config('railcontentNewStructure.content_associations', [])[$data['key']]['table'])
-                    ->insertGetId([
-                        'content_id' => $data['content_id'],
-                        config('railcontentNewStructure.content_associations', [])[$data['key']]['column'] => $data['value']
-                    ]);
-            } else {
-                //TODO
-            }
+            $repository = 'content' . (ucfirst(str_replace('_', '', ucwords($data['key'], "_")))) . 'Repository';
+
+            $reponse = $this->$repository->createOrUpdateAndReposition($dataId, $data, false);
+
+            return $reponse;
         }
 
+        return parent::createOrUpdateAndReposition($dataId, $data, $isEAV = true);
+    }
 
-        //return parent::createOrUpdateAndReposition($dataId, $data); // TODO: Change the autogenerated stub
+    /**
+     * @param int $id
+     * @param string $key
+     * @return array
+     */
+    public function getById($id, $key = '')
+    {
+        if (array_key_exists(
+            $key,
+            config('railcontentNewStructure.content_associations', [])
+        )) {
+            $repository = 'content' . (ucfirst(str_replace('_', '', ucwords($key, "_")))) . 'Repository';
+            return $this->$repository->getById($id);
+        }
+
+        return parent::getById($id);
+    }
+
+    /**
+     * @param $entity
+     * @param string $positionColumnPrefix
+     * @param string $key
+     * @param bool $isEAV
+     * @return bool
+     */
+    public function deleteAndReposition($entity, $positionColumnPrefix = '', $key = '', $isEAV = false)
+    {
+        $repository = 'content' . (ucfirst(str_replace('_', '', ucwords($key, "_")))) . 'Repository';
+
+        return $this->$repository->deleteAndReposition($entity, $positionColumnPrefix = '', $isEAV = false);
     }
 }

@@ -40,6 +40,7 @@ return [
         'vimeo_video_id',
         'youtube_video_id',
         'length_in_seconds',
+        'video'
     ],
     'content_associations' => [
         'topic' => [

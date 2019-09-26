@@ -89,13 +89,14 @@ class ContentFieldRepository extends RepositoryBase
             $contentFieldRows = [];
             foreach ($contentRows as $contentRow) {
                 foreach (config('railcontentNewStructure.content_columns', []) as $field) {
-                    if ($contentRow[$field]) {
+                    if (array_key_exists($field, $contentRow) && $contentRow[$field]) {
                         $contentFieldRows[] = [
+                            'id' => null,
                             'content_id' => $contentRow['id'],
                             'key' => $field,
                             'value' => $contentRow[$field],
                             'position' => 1,
-                            'type' => ($field == 'video') ? 'content_id' : 'string',
+                            'type' => ($field == 'video' || $field == 'qna_video') ? 'content_id' : 'string',
                         ];
                     }
                 }
@@ -163,12 +164,47 @@ class ContentFieldRepository extends RepositoryBase
         dd($subContents);
     }
 
-    public function createOrUpdateAndReposition($id, $data)
+    /**
+     * @param null $id
+     * @param $data
+     * @param bool $isEAV
+     * @return bool|int
+     */
+    public function createOrUpdateAndReposition($id, $data, $isEAV=true)
     {
         if (ContentRepository::$version == 'new') {
-            return $this->contentNewStructureRepository->createOrUpdateAndReposition($id, $data);
+            return $this->contentNewStructureRepository->createOrUpdateAndReposition($id, $data, false);
         } else {
            return parent::createOrUpdateAndReposition($id, $data);
         }
+    }
+
+    /**
+     * @param $entity
+     * @param string $positionColumnPrefix
+     * @param string $key
+     * @param bool $isEAV
+     * @return bool
+     */
+    public function deleteAndReposition($entity, $positionColumnPrefix = '', $key='',$isEAV = true)
+    {
+        if (ContentRepository::$version == 'new') {
+            return $this->contentNewStructureRepository->deleteAndReposition($entity, $positionColumnPrefix, $key, false);
+        } else {
+            return parent::deleteAndReposition($entity, $positionColumnPrefix = '', $key, $isEAV);
+        }
+    }
+
+    /**
+     * @param int $id
+     * @param string $key
+     * @return array
+     */
+    public function getById($id, $key='')
+    {
+        if (ContentRepository::$version == 'new') {
+            return $this->contentNewStructureRepository->getById($id, $key);
+        }
+        return parent::getById($id);
     }
 }

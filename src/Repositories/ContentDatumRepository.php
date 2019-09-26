@@ -16,7 +16,8 @@ class ContentDatumRepository extends RepositoryBase
      */
     public function query()
     {
-        return $this->connection()->table(ConfigService::$tableContentData);
+        return $this->connection()
+            ->table(ConfigService::$tableContentData);
     }
 
     /**
@@ -28,7 +29,7 @@ class ContentDatumRepository extends RepositoryBase
         if (empty($contentId)) {
             return [];
         }
-        
+
         return $this->query()
             ->where('content_id', $contentId)
             ->orderBy('position', 'asc')
@@ -45,7 +46,7 @@ class ContentDatumRepository extends RepositoryBase
         if (empty($contentIds)) {
             return [];
         }
-        
+
         return $this->query()
             ->whereIn('content_id', array_unique($contentIds))
             ->orderBy('position', 'asc')
@@ -60,7 +61,7 @@ class ContentDatumRepository extends RepositoryBase
      */
     public function getByKeysAndContentIds(array $keys, array $contentIds)
     {
-        if (empty($contentIds)||(empty($keys))) {
+        if (empty($contentIds) || (empty($keys))) {
             return [];
         }
 
@@ -79,7 +80,7 @@ class ContentDatumRepository extends RepositoryBase
      */
     public function getByKeysAndContentId(array $keys, $contentId)
     {
-        if (empty($contentId)||(empty($keys))) {
+        if (empty($contentId) || (empty($keys))) {
             return [];
         }
 
@@ -98,13 +99,14 @@ class ContentDatumRepository extends RepositoryBase
      */
     public function getByKeysAndContentIdsQuery(array $keys, array $contentIds)
     {
-        if (empty($contentIds)||(empty($keys))) {
+        if (empty($contentIds) || (empty($keys))) {
             return [];
         }
 
         return $this->query()
             ->select(
                 [
+                    'id',
                     'content_id',
                     'value',
                     'key',
