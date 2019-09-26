@@ -211,7 +211,6 @@ class RailcontentTestCase extends BaseTestCase
 
         // register provider
         $app->register(RailcontentServiceProvider::class);
-        $app->register(ResponseServiceProvider::class);
     }
 
     /**
