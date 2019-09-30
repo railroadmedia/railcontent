@@ -90,4 +90,20 @@ class UserProvider implements
 
         return $this->getUserById($userId);
     }
+
+    public function getUserByLegacyId(int $id, string $brand): array
+    {
+        $user = DB::table('users')->where('legacy_id',$id)->where('brand',$brand)->first();
+
+        if ($user) {
+            return new \Railroad\Railcontent\Entities\User($id, $user->email);
+        }
+
+        return null;
+    }
+
+    public function getUsersByIds(array $ids)
+    : array {
+        // TODO: Implement getUsersByIds() method.
+    }
 }

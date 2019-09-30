@@ -364,7 +364,7 @@ class Content extends ArrayExpressible
      */
     public function getParent()
     {
-        if($this->parent) {
+        if(($this->parent)&&(!$this->parent->isEmpty())) {
             $parent = $this->parent->filter(
                 function (ContentHierarchy $hierarchy) {
                     return $hierarchy->getParent()

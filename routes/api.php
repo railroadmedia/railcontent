@@ -48,11 +48,11 @@ Route::group(
         )
             ->name('content.get-by-ids');
 
-//        Route::get(
-//            '/content/{id}',
-//            ContentJsonController::class . '@show'
-//        )
-//            ->name('content.show');
+        Route::get(
+            '/content/{id}',
+            ContentJsonController::class . '@show'
+        )
+            ->name('content.show');
 
         // content user progression
         Route::put(

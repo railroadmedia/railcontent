@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Doctrine\ORM\QueryBuilder;
+use League\Fractal\Serializer\ArraySerializer;
 use League\Fractal\Serializer\DataArraySerializer;
 use League\Fractal\Serializer\JsonApiSerializer;
 use Railroad\Doctrine\Services\FractalResponseService;
@@ -13,6 +14,7 @@ use Railroad\Railcontent\Transformers\CommentTransformer;
 use Railroad\Railcontent\Transformers\ContentDataTransformer;
 use Railroad\Railcontent\Transformers\ContentHierarchyTransformer;
 use Railroad\Railcontent\Transformers\ContentLikeTransformer;
+use Railroad\Railcontent\Transformers\ContentOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentPermissionTransformer;
 use Railroad\Railcontent\Transformers\DecoratedContentTransformer;
 use Railroad\Railcontent\Transformers\PermissionTransformer;
@@ -21,6 +23,7 @@ use Spatie\Fractal\Fractal;
 
 class ResponseService extends FractalResponseService
 {
+    public static $oldResponseStructure = false;
     /**
      * @param $entityOrEntities
      * @param QueryBuilder|null $queryBuilder
@@ -34,6 +37,16 @@ class ResponseService extends FractalResponseService
         array $includes = [],
         array $filterOptions = []
     ) {
+
+        if(self::$oldResponseStructure) {
+            return self::create(
+                $entityOrEntities,
+                'content',
+                new ContentOldStructureTransformer(),
+                new DataArraySerializer()
+            );
+        }
+
         return self::create(
             $entityOrEntities,
             'content',

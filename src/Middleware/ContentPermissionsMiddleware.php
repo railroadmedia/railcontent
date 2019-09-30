@@ -12,21 +12,6 @@ use Railroad\Railcontent\Services\ContentService;
 class ContentPermissionsMiddleware
 {
     /**
-     * @var ContentService
-     */
-    private $contentService;
-
-    /**
-     * ContentPermissionsMiddleware constructor.
-     *
-     * @param ContentService $contentService
-     */
-    public function __construct(ContentService $contentService)
-    {
-        $this->contentService = $contentService;
-    }
-
-    /**
      * @param  Request $request
      * @param  Closure $next
      * @return mixed
