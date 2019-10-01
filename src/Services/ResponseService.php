@@ -7,9 +7,11 @@ use League\Fractal\Serializer\ArraySerializer;
 use League\Fractal\Serializer\DataArraySerializer;
 use League\Fractal\Serializer\JsonApiSerializer;
 use Railroad\Doctrine\Services\FractalResponseService;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Transformers\ArrayTransformer;
 use Railroad\Railcontent\Transformers\BooleanTransformer;
 use Railroad\Railcontent\Transformers\CommentLikeTransformer;
+use Railroad\Railcontent\Transformers\CommentOldStructureTransformer;
 use Railroad\Railcontent\Transformers\CommentTransformer;
 use Railroad\Railcontent\Transformers\ContentDataTransformer;
 use Railroad\Railcontent\Transformers\ContentHierarchyTransformer;
@@ -23,7 +25,8 @@ use Spatie\Fractal\Fractal;
 
 class ResponseService extends FractalResponseService
 {
-    public static $oldResponseStructure = false;
+    public static $oldResponseStructure = true;
+
     /**
      * @param $entityOrEntities
      * @param QueryBuilder|null $queryBuilder
@@ -38,13 +41,26 @@ class ResponseService extends FractalResponseService
         array $filterOptions = []
     ) {
 
-        if(self::$oldResponseStructure) {
+        if (self::$oldResponseStructure) {
+            $filters = [];
+            foreach ($filterOptions as $key => $filterOption) {
+                foreach ($filterOption as $key2 => $filter) {
+                    if ($filter instanceof Content) {
+                        $transformer = new ContentOldStructureTransformer();
+                        $filterOption[$key2] = $transformer->transform($filter);
+                    }
+                }
+                $filters[$key] = $filterOption;
+            }
+
             return self::create(
                 $entityOrEntities,
                 'content',
                 new ContentOldStructureTransformer(),
-                new DataArraySerializer()
-            );
+                new ArraySerializer(),
+                $queryBuilder
+            )
+                ->addMeta((count($filters) > 0) ? ['filterOptions' => $filters] : []);
         }
 
         return self::create(
@@ -120,6 +136,16 @@ class ResponseService extends FractalResponseService
      */
     public static function comment($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
     {
+        if (self::$oldResponseStructure) {
+            return self::create(
+                $entityOrEntities,
+                'comment',
+                new CommentOldStructureTransformer(),
+                new DataArraySerializer(),
+                $queryBuilder
+            )
+                ->parseIncludes($includes);
+        }
         return self::create(
             $entityOrEntities,
             'comment',

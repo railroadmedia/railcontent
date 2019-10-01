@@ -79,6 +79,18 @@ class ContentOldStructureTransformer extends TransformerAbstract
             }
         }
 
+        $createdOn =
+            $content->getCreatedOn()
+                ->toDateTimeString();
+        $publishedOn =
+            ($content->getPublishedOn()) ?
+                $content->getPublishedOn()
+                    ->toDateTimeString() : null;
+        $archivedOn =
+            ($content->getArchivedOn()) ?
+                $content->getArchivedOn()
+                    ->toDateTimeString() : null;
+
         return [
             'id' => $content->getId(),
             'slug' => $content->getSlug(),
@@ -87,9 +99,9 @@ class ContentOldStructureTransformer extends TransformerAbstract
             'status' => $content->getStatus(),
             'language' => $content->getLanguage(),
             'brand' => $content->getBrand(),
-            'published_on' => $content->getPublishedOn(),
-            'created_on' => $content->getCreatedOn(),
-            'archived_on' => $content->getArchivedOn(),
+            'published_on' => $publishedOn,
+            'created_on' => $createdOn,
+            'archived_on' => $archivedOn,
             'parent_id' => ($content->getParent()) ?
                 $content->getParent()
                     ->getId() : null,
