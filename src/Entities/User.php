@@ -24,15 +24,29 @@ class User implements UserEntityInterface
     private $email;
 
     /**
+     * @var string
+     */
+    private $displayName;
+
+    /**
+     * @var
+     */
+    private $avatar;
+
+    /**
      * User constructor.
      *
      * @param int $id
-     * @param string $email
+     * @param $email
+     * @param $displayName
+     * @param $avatar
      */
-    public function __construct(int $id, $email)
+    public function __construct(int $id, $email, $displayName, $avatar)
     {
         $this->id = $id;
         $this->email = $email;
+        $this->displayName = $displayName;
+        $this->avatar = $avatar;
     }
 
     /**
@@ -67,6 +81,40 @@ class User implements UserEntityInterface
     public function setEmail($email)
     : void {
         $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDisplayName()
+    : string
+    {
+        return $this->displayName;
+    }
+
+    /**
+     * @param $displayName
+     */
+    public function setDisplayName($displayName)
+    : void {
+        $this->displayName = $displayName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar()
+    : string
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param $avatar
+     */
+    public function setAvatar($avatar)
+    : void {
+        $this->avatar = $avatar;
     }
 
     /**

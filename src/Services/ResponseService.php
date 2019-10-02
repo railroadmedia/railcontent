@@ -8,13 +8,16 @@ use League\Fractal\Serializer\DataArraySerializer;
 use League\Fractal\Serializer\JsonApiSerializer;
 use Railroad\Doctrine\Services\FractalResponseService;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Serializer\OldStyleSerializer;
 use Railroad\Railcontent\Transformers\ArrayTransformer;
 use Railroad\Railcontent\Transformers\BooleanTransformer;
+use Railroad\Railcontent\Transformers\CommentLikeOldStructureTransformer;
 use Railroad\Railcontent\Transformers\CommentLikeTransformer;
 use Railroad\Railcontent\Transformers\CommentOldStructureTransformer;
 use Railroad\Railcontent\Transformers\CommentTransformer;
 use Railroad\Railcontent\Transformers\ContentDataTransformer;
 use Railroad\Railcontent\Transformers\ContentHierarchyTransformer;
+use Railroad\Railcontent\Transformers\ContentLikeOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentLikeTransformer;
 use Railroad\Railcontent\Transformers\ContentOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentPermissionTransformer;
@@ -57,7 +60,7 @@ class ResponseService extends FractalResponseService
                 $entityOrEntities,
                 'content',
                 new ContentOldStructureTransformer(),
-                new ArraySerializer(),
+                new OldStyleSerializer(),
                 $queryBuilder
             )
                 ->addMeta((count($filters) > 0) ? ['filterOptions' => $filters] : []);
@@ -141,7 +144,7 @@ class ResponseService extends FractalResponseService
                 $entityOrEntities,
                 'comment',
                 new CommentOldStructureTransformer(),
-                new DataArraySerializer(),
+                new OldStyleSerializer(),
                 $queryBuilder
             )
                 ->parseIncludes($includes);
@@ -164,6 +167,17 @@ class ResponseService extends FractalResponseService
      */
     public static function commentLike($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
     {
+        if (self::$oldResponseStructure) {
+            return self::create(
+                $entityOrEntities,
+                'commentlike',
+                new CommentLikeOldStructureTransformer(),
+                new OldStyleSerializer(),
+                $queryBuilder
+            )
+                ->parseIncludes($includes);
+        }
+
         return self::create(
             $entityOrEntities,
             'commentlike',
@@ -239,6 +253,17 @@ class ResponseService extends FractalResponseService
      */
     public static function contentLike($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
     {
+        if (self::$oldResponseStructure) {
+            return self::create(
+                $entityOrEntities,
+                'contentlike',
+                new ContentLikeOldStructureTransformer(),
+                new OldStyleSerializer(),
+                $queryBuilder
+            )
+                ->parseIncludes($includes);
+        }
+
         return self::create(
             $entityOrEntities,
             'contentlike',

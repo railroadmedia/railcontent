@@ -7,7 +7,9 @@ interface UserProviderInterface
     /**
      * @param $email
      * @param $password
+     * @param $displayName
+     * @param $avatar
      * @return mixed
      */
-    public function create($email, $password);
+    public function create($email, $password, $displayName, $avatar);
 }

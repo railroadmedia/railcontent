@@ -103,7 +103,7 @@ class Content extends ArrayExpressible
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\UserContentProgress", mappedBy="content",
-     *     indexBy="userId")
+     *     indexBy="user")
      */
     private $userProgress;
 
@@ -462,6 +462,15 @@ class Content extends ArrayExpressible
             return [];
         }
         return $this->userProgress[$userId];
+    }
+
+    /**
+     * @param $userId
+     * @return array
+     */
+    public function getUserProgresses()
+    {
+        return $this->userProgress->toArray();
     }
 
     /**

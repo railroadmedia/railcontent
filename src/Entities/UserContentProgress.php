@@ -23,7 +23,7 @@ class UserContentProgress
     /**
      * @var User
      *
-     * @ORM\Column(type="user_id", name="user_id")
+     * @ORM\Column(type="user_id", name="user_id", unique=true)
      */
     protected $user;
 

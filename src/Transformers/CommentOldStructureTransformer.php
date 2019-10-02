@@ -2,29 +2,25 @@
 
 namespace Railroad\Railcontent\Transformers;
 
+use League\Fractal\Resource\Collection;
 use League\Fractal\TransformerAbstract;
 use Railroad\Railcontent\Entities\Comment;
 
-
 class CommentOldStructureTransformer extends TransformerAbstract
 {
+    /**
+     * @param Comment $comment
+     * @return array
+     */
     public function transform(Comment $comment)
     {
+        $defaultIncludes = ['like_users'];
 
         if (count($comment->getChildren()) > 0) {
-            $this->defaultIncludes = ['replies'];
-        } else {
-            $this->defaultIncludes = [];
+            $defaultIncludes[] = 'replies';
         }
 
-         $replies = [];
-
-        if (!$comment->getChildren()
-            ->isEmpty()) {
-            foreach ($comment->getChildren() as $child) {
-                $replies[] = self::transform($child);
-            }
-        }
+        $this->setDefaultIncludes($defaultIncludes);
 
         return [
             'id' => $comment->getId(),
@@ -42,9 +38,34 @@ class CommentOldStructureTransformer extends TransformerAbstract
             'deleted_on' => ($comment->getDeletedAt()) ?
                 $comment->getDeletedAt()
                     ->toDateTimeString() : null,
-            'replies' => $replies,
             'like_count' => $comment->getLikes()
                 ->count(),
         ];
+    }
+
+    /**
+     * @param Comment $comment
+     * @return Collection
+     */
+    public function includeReplies(Comment $comment)
+    {
+        return $this->collection(
+            $comment->getChildren(),
+            new CommentOldStructureTransformer(),
+            'comment'
+        );
+    }
+
+    /**
+     * @param Comment $comment
+     * @return Collection
+     */
+    public function includeLikeUsers(Comment $comment)
+    {
+        return $this->collection(
+            $comment->getLikes(),
+            new CommentLikeOldStructureTransformer(),
+            'commentLikes'
+        );
     }
 }
