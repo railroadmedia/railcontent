@@ -40,6 +40,7 @@ class CommentOldStructureTransformer extends TransformerAbstract
                     ->toDateTimeString() : null,
             'like_count' => $comment->getLikes()
                 ->count(),
+            'is_liked' => $comment->getProperty('is_liked')
         ];
     }
 

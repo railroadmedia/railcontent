@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Services;
 
 use Doctrine\ORM\QueryBuilder;
-use League\Fractal\Serializer\ArraySerializer;
 use League\Fractal\Serializer\DataArraySerializer;
 use League\Fractal\Serializer\JsonApiSerializer;
 use Railroad\Doctrine\Services\FractalResponseService;
@@ -22,7 +21,9 @@ use Railroad\Railcontent\Transformers\ContentLikeTransformer;
 use Railroad\Railcontent\Transformers\ContentOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentPermissionTransformer;
 use Railroad\Railcontent\Transformers\DecoratedContentTransformer;
+use Railroad\Railcontent\Transformers\PermissionOldStructureTransformer;
 use Railroad\Railcontent\Transformers\PermissionTransformer;
+use Railroad\Railcontent\Transformers\UserPermissionOldStructureTransformer;
 use Railroad\Railcontent\Transformers\UserPermissionTransformer;
 use Spatie\Fractal\Fractal;
 
@@ -85,6 +86,16 @@ class ResponseService extends FractalResponseService
      */
     public static function permission($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
     {
+        if (self::$oldResponseStructure) {
+            return self::create(
+                $entityOrEntities,
+                'permission',
+                new PermissionOldStructureTransformer(),
+                new OldStyleSerializer(),
+                $queryBuilder
+            )
+                ->parseIncludes($includes);
+        }
         return self::create(
             $entityOrEntities,
             'permission',
@@ -214,6 +225,17 @@ class ResponseService extends FractalResponseService
      */
     public static function userPermission($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
     {
+        if (self::$oldResponseStructure) {
+            return self::create(
+                $entityOrEntities,
+                'userPermission',
+                new UserPermissionOldStructureTransformer(),
+                new OldStyleSerializer(),
+                $queryBuilder
+            )
+                ->parseIncludes($includes);
+        }
+
         return self::create(
             $entityOrEntities,
             'userPermission',

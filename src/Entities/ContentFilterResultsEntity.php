@@ -74,6 +74,6 @@ class ContentFilterResultsEntity extends \ArrayObject
 
     public function qb()
     {
-        return $this['qb'] ?? '';
+        return $this['qb'] ?? null;
     }
 }
