@@ -3,6 +3,8 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use Railroad\Railcontent\Services\ResponseService;
+
 /**
  * Class UserContentRequest
  *
@@ -52,5 +54,26 @@ class UserContentRequest extends FormRequest
             'data.relationships.content.data.id' => 'required|numeric|exists:' . config('railcontent.database_connection_name') . '.' .
                 config('railcontent.table_prefix'). 'content' . ',id'
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+
+        $all = $this->all();
+        $oldStyle = [];
+        if (ResponseService::$oldResponseStructure) {
+
+            $oldStyle ['data']['type'] = 'userContentProgress';
+        }
+
+        $newParams = array_merge_recursive($all, $oldStyle);
+
+        $this->merge($newParams);
     }
 }

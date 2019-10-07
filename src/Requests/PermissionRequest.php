@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use Railroad\Railcontent\Services\ResponseService;
+
 /**
  * Class PermissionRequest
  *
@@ -52,5 +54,26 @@ class PermissionRequest extends FormRequest
                 ],
             ]
         );
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+
+        $all = $this->all();
+        $oldStyle = [];
+        if (ResponseService::$oldResponseStructure) {
+
+            $oldStyle ['data']['type'] = 'permission';
+        }
+
+        $newParams = array_merge_recursive($all, $oldStyle);
+
+        $this->merge($newParams);
     }
 }

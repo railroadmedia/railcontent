@@ -53,7 +53,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
             'created_on' => $createdOn,
             'archived_on' => $archivedOn,
             'parent_id' => ($content->getParent()) ?
-                $content->getParent()
+                $content->getParent()->getParent()
                     ->getId() : null,
             'child_id' => null,
             'completed' => $content->isCompleted(),

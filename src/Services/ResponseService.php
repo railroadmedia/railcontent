@@ -14,11 +14,15 @@ use Railroad\Railcontent\Transformers\CommentLikeOldStructureTransformer;
 use Railroad\Railcontent\Transformers\CommentLikeTransformer;
 use Railroad\Railcontent\Transformers\CommentOldStructureTransformer;
 use Railroad\Railcontent\Transformers\CommentTransformer;
+use Railroad\Railcontent\Transformers\ContentDataOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentDataTransformer;
+use Railroad\Railcontent\Transformers\ContentDataWithPostOldStructureTransformer;
+use Railroad\Railcontent\Transformers\ContentHierarchyOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentHierarchyTransformer;
 use Railroad\Railcontent\Transformers\ContentLikeOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentLikeTransformer;
 use Railroad\Railcontent\Transformers\ContentOldStructureTransformer;
+use Railroad\Railcontent\Transformers\ContentPermissionOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentPermissionTransformer;
 use Railroad\Railcontent\Transformers\DecoratedContentTransformer;
 use Railroad\Railcontent\Transformers\PermissionOldStructureTransformer;
@@ -114,6 +118,17 @@ class ResponseService extends FractalResponseService
      */
     public static function contentPermission($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
     {
+        if (self::$oldResponseStructure) {
+            return self::create(
+                $entityOrEntities,
+                'contentPermission',
+                new ContentPermissionOldStructureTransformer(),
+                new OldStyleSerializer(),
+                $queryBuilder
+            )
+                ->parseIncludes($includes);
+        }
+
         return self::create(
             $entityOrEntities,
             'contentPermission',
@@ -132,6 +147,17 @@ class ResponseService extends FractalResponseService
      */
     public static function contentHierarchy($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
     {
+        if (self::$oldResponseStructure) {
+            return self::create(
+                $entityOrEntities,
+                'contentHierarchy',
+                new ContentHierarchyOldStructureTransformer(),
+                new OldStyleSerializer(),
+                $queryBuilder
+            )
+                ->parseIncludes($includes);
+        }
+
         return self::create(
             $entityOrEntities,
             'contentHierarchy',
@@ -207,6 +233,16 @@ class ResponseService extends FractalResponseService
      */
     public static function contentData($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
     {
+        if (self::$oldResponseStructure) {
+            return self::create(
+                $entityOrEntities,
+                'contentData',
+                new ContentDataWithPostOldStructureTransformer(),
+                new OldStyleSerializer(),
+                $queryBuilder
+            )
+                ->parseIncludes($includes);
+        }
         return self::create(
             $entityOrEntities,
             'contentData',

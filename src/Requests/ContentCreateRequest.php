@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Requests;
 
 use Railroad\Railcontent\Services\ContentService as ContentService;
+use Railroad\Railcontent\Services\ResponseService;
 
 /**
  * Class ContentCreateRequest
@@ -67,25 +68,61 @@ class ContentCreateRequest extends CustomFormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+
+        $all = $this->all();
+        $oldStyle = [];
+        if (ResponseService::$oldResponseStructure) {
+
+            $oldStyle ['data']['type'] = 'content';
+
+            if (array_key_exists('parent_id', $all)) {
+                $oldStyle['data']['relationships']['parent'] = [
+                    'data' => [
+                        'type' => 'content',
+                        'id' => $all['parent_id'] ?? 0,
+                    ],
+                ];
+            }
+
+        }
+
+        $newParams = array_merge_recursive($all, $oldStyle);
+
+        $this->merge($newParams);
+    }
+
+    /**
      * @return array
      */
     public function onlyAllowed()
     {
-        return $this->only(
-            [
-                'data.attributes.slug',
-                'data.attributes.type',
-                'data.attributes.sort',
-                'data.attributes.status',
-                'data.attributes.brand',
-                'data.attributes.language',
-                'data.attributes.published_on',
-                'data.attributes.created_on',
-                'data.attributes.archived_on',
-                'data.attributes.fields',
-                'data.relationships.parent',
-                'data.relationships.user',
-            ]
+
+        return array_merge(
+            $this->only(
+                [
+                    'data.attributes.slug',
+                    'data.attributes.type',
+                    'data.attributes.sort',
+                    'data.attributes.status',
+                    'data.attributes.brand',
+                    'data.attributes.language',
+                    'data.attributes.published_on',
+                    'data.attributes.created_on',
+                    'data.attributes.archived_on',
+                    'data.attributes.fields',
+                    'data.relationships.user',
+                ],
+                [
+                    'data.relationships.parent' => $this->input('data.relationships.parent'),
+                ]
+            )
         );
     }
 }

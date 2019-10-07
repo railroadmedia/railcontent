@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use Railroad\Railcontent\Services\ResponseService;
+
 /**
  * Class UserPermissionCreateRequest
  *
@@ -62,6 +64,27 @@ class UserPermissionCreateRequest extends FormRequest
             'data.attributes.start_date' => 'required|date',
             'data.attributes.expiration_date' => 'nullable|date'
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+
+        $all = $this->all();
+        $oldStyle = [];
+        if (ResponseService::$oldResponseStructure) {
+
+            $oldStyle ['data']['type'] = 'userPermission';
+        }
+
+        $newParams = array_merge_recursive($all, $oldStyle);
+
+        $this->merge($newParams);
     }
 
 }

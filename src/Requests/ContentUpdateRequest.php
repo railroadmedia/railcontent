@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Requests;
 
 use Railroad\Railcontent\Services\ContentService as ContentService;
+use Railroad\Railcontent\Services\ResponseService;
 
 /**
  * Class ContentUpdateRequest
@@ -63,6 +64,26 @@ class ContentUpdateRequest extends CustomFormRequest
 
         //get the validation rules
         return parent::rules();
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+
+        $all = $this->all();
+        $oldStyle = [];
+        if (ResponseService::$oldResponseStructure) {
+            $oldStyle ['data']['type'] = 'content';
+        }
+
+        $newParams = array_merge_recursive($all, $oldStyle);
+
+        $this->merge($newParams);
     }
 
     /**

@@ -178,7 +178,7 @@ class ContentJsonController extends Controller
         $this->permissionPackageService->canOrThrow(auth()->id(), 'create.content');
 
         $content = $this->contentService->create(
-            $request->onlyAllowed()
+            $request->all()
         );
 
         return ResponseService::content($content)

@@ -21,13 +21,13 @@ class ContentData extends ArrayExpressible
 
     /**
      * @Gedmo\SortableGroup()
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", name="`key`" )
      * @var string
      */
     protected $key;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", name="`value`")
      * @var string
      */
     protected $value;

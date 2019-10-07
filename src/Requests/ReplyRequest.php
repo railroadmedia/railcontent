@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use Railroad\Railcontent\Services\ResponseService;
+
 /**
  * Class ReplyRequest
  *
@@ -23,6 +25,35 @@ class ReplyRequest extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+
+        $all = $this->all();
+        $oldStyle = [];
+        if (ResponseService::$oldResponseStructure) {
+            $oldStyle ['data']['type'] = 'comment';
+
+            if (array_key_exists('parent_id', $all)) {
+                $oldStyle['data']['relationships']['parent'] = [
+                    'data' => [
+                        'type' => 'comment',
+                        'id' => $all['parent_id'] ?? 0,
+                    ],
+                ];
+            }
+        }
+
+        $newParams = array_merge_recursive($all, $oldStyle);
+
+        $this->merge($newParams);
     }
 
     /**

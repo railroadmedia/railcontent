@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use Railroad\Railcontent\Services\ResponseService;
+
 /**
  * Class PermissionDissociateRequest
  *
@@ -65,5 +67,26 @@ class PermissionDissociateRequest extends FormRequest
                 config('railcontent.table_prefix'). 'content' .
                 ',type'
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+
+        $all = $this->all();
+        $oldStyle = [];
+        if (ResponseService::$oldResponseStructure) {
+
+            $oldStyle ['data']['type'] = 'contentPermission';
+        }
+
+        $newParams = array_merge_recursive($all, $oldStyle);
+
+        $this->merge($newParams);
     }
 }

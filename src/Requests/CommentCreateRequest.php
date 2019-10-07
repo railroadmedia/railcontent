@@ -2,15 +2,16 @@
 
 namespace Railroad\Railcontent\Requests;
 
-
 use Illuminate\Validation\Rule;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Services\ResponseService;
 
 /**
  * Class CommentCreateRequest
  *
  * @bodyParam data.type string required  Must be 'comment'. Example: comment
- * @bodyParam data.attributes.comment string required  The text of the comment. Example: Omnis doloremque reiciendis enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.
+ * @bodyParam data.attributes.comment string required  The text of the comment. Example: Omnis doloremque reiciendis
+ *     enim et autem sequi. Ut nihil hic alias sunt voluptatem aut molestiae.
  * @bodyParam data.attributes.temporary_display_name string Temporary display name for user.  Example: in
  * @bodyParam data.relationships.content.data.type string required  Must be 'content'. Example: content
  * @bodyParam data.relationships.content.data.id integer required  Must exists in contents. Example:1
@@ -35,6 +36,26 @@ class CommentCreateRequest extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+
+        $all = $this->request->all();
+        $oldStyle = [];
+        if (ResponseService::$oldResponseStructure) {
+            $oldStyle ['data']['type'] = 'comment';
+        }
+
+        $newParams = array_merge_recursive($all, $oldStyle);
+
+        $this->merge($newParams);
     }
 
     /**
@@ -68,32 +89,37 @@ class CommentCreateRequest extends FormRequest
                 config('railcontent.table_prefix') .
                 'content' .
                 ',id',
-            'data.relationships.content.data.id' =>
-                ['nullable',
-                    'numeric',
-                    Rule::exists(
-                        config('railcontent.database_connection_name') . '.' . config('railcontent.table_prefix'). 'content', 'id'
-                    )->where(function ($query) {
-                        if (is_array(ContentRepository::$availableContentStatues)) {
-                            $query->whereIn('status', ContentRepository::$availableContentStatues);
+            'data.relationships.content.data.id' => [
+                'nullable',
+                'numeric',
+                Rule::exists(
+                    config('railcontent.database_connection_name') .
+                    '.' .
+                    config('railcontent.table_prefix') .
+                    'content',
+                    'id'
+                )
+                    ->where(
+                        function ($query) {
+                            if (is_array(ContentRepository::$availableContentStatues)) {
+                                $query->whereIn('status', ContentRepository::$availableContentStatues);
+                            }
                         }
-                    })
-                ],
+                    ),
+            ],
         ];
     }
 
-
     public function onlyAllowed()
     {
-        return
-            $this->only(
-                [
-                    'data.attributes.comment',
-                    'data.attributes.temporary_display_name',
-                    'data.relationships.content',
-                    'data.relationships.parent',
-                    'data.relationships.user'
-                ]
+        return $this->only(
+            [
+                'data.attributes.comment',
+                'data.attributes.temporary_display_name',
+                'data.relationships.content',
+                'data.relationships.parent',
+                'data.relationships.user',
+            ]
         );
     }
 }

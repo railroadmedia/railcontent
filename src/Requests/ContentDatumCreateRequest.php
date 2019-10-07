@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use Railroad\Railcontent\Services\ResponseService;
+
 /**
  * Class ContentDatumCreateRequest
  *
@@ -48,10 +50,8 @@ class ContentDatumCreateRequest extends CustomFormRequest
                 'data.attributes.key' => 'required|max:255',
                 'data.attributes.position' => 'nullable|numeric|min:0',
                 'data.relationships.content.data.type' => 'required|in:content',
-                'data.relationships.content.data.id' => 'required|numeric|exists:' .
-                    config('railcontent.table_prefix') .
-                    'content' .
-                    ',id',
+                'data.relationships.content.data.id' => 'required|numeric|exists:' . config('railcontent.database_connection_name') . '.' .
+                    config('railcontent.table_prefix'). 'content' . ',id'
             ]
         );
 
@@ -60,5 +60,25 @@ class ContentDatumCreateRequest extends CustomFormRequest
 
         //get all the rules for the request
         return parent::rules();
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+
+        $all = $this->all();
+        $oldStyle = [];
+        if (ResponseService::$oldResponseStructure) {
+            $oldStyle ['data']['type'] = 'contentData';
+        }
+
+        $newParams = array_merge_recursive($all, $oldStyle);
+
+        $this->merge($newParams);
     }
 }

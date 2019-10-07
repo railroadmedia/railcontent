@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use Railroad\Railcontent\Services\ResponseService;
+
 /**
  * Class ContentHierarchyCreateRequest
  *
@@ -58,5 +60,43 @@ class ContentHierarchyCreateRequest extends CustomFormRequest
         $this->validateContent($this);
 
         return parent::rules();
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+
+        $all = $this->all();
+        $oldStyle = [];
+        if (ResponseService::$oldResponseStructure) {
+            $oldStyle ['data']['type'] = 'contentHierarchy';
+
+            if (array_key_exists('parent_id', $all)) {
+                $oldStyle['data']['relationships']['parent'] = [
+                    'data' => [
+                        'type' => 'content',
+                        'id' => $all['parent_id'] ?? 0,
+                    ],
+                ];
+            }
+
+            if (array_key_exists('child_id', $all)) {
+                $oldStyle['data']['relationships']['child'] = [
+                    'data' => [
+                        'type' => 'content',
+                        'id' => $all['child_id'] ?? 0,
+                    ],
+                ];
+            }
+        }
+
+        $newParams = array_merge_recursive($all, $oldStyle);
+
+        $this->merge($newParams);
     }
 }

@@ -3,7 +3,7 @@
 namespace Railroad\Railcontent\Requests;
 
 use Carbon\Carbon;
-use Doctrine\ORM\EntityManager;
+use Railroad\Railcontent\Managers\RailcontentEntityManager as EntityManager;
 use Exception;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;

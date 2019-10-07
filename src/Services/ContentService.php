@@ -929,6 +929,9 @@ class ContentService
     ) {
         $content = new Content();
 
+        $parentId = $data['data']['relationships']['parent']['data']['id'] ?? null;
+        unset($data['data']['relationships']['parent']);
+
         $this->jsonApiHydrator->hydrate($content, $data);
 
         $data = $this->saveContentFields($data, $content);
@@ -946,9 +949,7 @@ class ContentService
         $this->entityManager->persist($content);
         $this->entityManager->flush();
 
-        if (array_key_exists('relationships', $data['data'])) {
-            $parentId = $data['data']['relationships']['parent']['data']['id'] ?? null;
-            if ($parentId) {
+        if ($parentId) {
                 $parent = $this->contentRepository->find($parentId);
 
                 $hierarchy = new ContentHierarchy();
@@ -956,7 +957,6 @@ class ContentService
                 $hierarchy->setChild($content);
                 $this->entityManager->persist($hierarchy);
                 $this->entityManager->flush();
-            }
         }
 
         $this->entityManager->getCache('Railcontent')
