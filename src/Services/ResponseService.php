@@ -33,7 +33,7 @@ use Spatie\Fractal\Fractal;
 
 class ResponseService extends FractalResponseService
 {
-    public static $oldResponseStructure = true;
+    public static $oldResponseStructure = false;
 
     /**
      * @param $entityOrEntities
@@ -68,7 +68,7 @@ class ResponseService extends FractalResponseService
                 new OldStyleSerializer(),
                 $queryBuilder
             )
-                ->addMeta((count($filters) > 0) ? ['filterOptions' => $filters] : []);
+                ->addMeta((count($filters) > 0) ? ['filterOption' => $filters] : []);
         }
 
         return self::create(
