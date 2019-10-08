@@ -87,14 +87,28 @@ class FormRequest extends LaravelFormRequest
             $validator->errors()
                 ->getMessages() as $key => $value
         ) {
-            $errors[] = [
-                "title" => 'Validation failed.',
-                "source" => $key,
-                "detail" => $value[0],
-            ];
+            if(ResponseService::$oldResponseStructure){
+                $errors[] = [
+                    "source" => substr($key, strrpos($key, '.') + 1),
+                    "detail" => $value[0],
+                ];
+            } else {
+                $errors[] = [
+                    "title" => 'Validation failed.',
+                    "source" => $key,
+                    "detail" => $value[0],
+                ];
+            }
         }
-        throw new HttpResponseException(
-            response()->json(['errors' => $errors], 422)
-        );
+
+        if(ResponseService::$oldResponseStructure) {
+            throw new HttpResponseException(
+                response()->json(['meta' => ['errors' => $errors]], 422)
+            );
+        } else {
+            throw new HttpResponseException(
+                response()->json(['errors' => $errors], 422)
+            );
+        }
     }
 }
