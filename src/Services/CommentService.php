@@ -284,7 +284,6 @@ class CommentService
 
         $results =
             $qb->getQuery()
-                ->setCacheable(true)
                 ->getResult('Railcontent');
 
         return $results;
