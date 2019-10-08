@@ -17,7 +17,7 @@ class UserProvider implements
         $user = DB::table('users')->find($id);
 
         if ($user) {
-            return new \Railroad\Railcontent\Entities\User($id, $user->email);
+            return new \Railroad\Railcontent\Entities\User($id, $user->email, $user->display_name, $user->profile_picture_url);
         }
 
         return null;

@@ -173,7 +173,9 @@ class RailcontentTestCase extends BaseTestCase
 
         $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
         $apiDocConfig = require(__DIR__ . '/../config/apidoc.php');
+        $oldResponseMapping =  require(__DIR__ . '/../config/oldResponseMapping.php');
 
+        $app['config']->set('oldResponseMapping', $oldResponseMapping);
         $app['config']->set('railcontent.database_connection_name', $this->getConnectionType());
         $app['config']->set('railcontent.cache_duration', $defaultConfig['cache_duration']);
         $app['config']->set('railcontent.table_prefix', $defaultConfig['table_prefix']);
@@ -456,6 +458,7 @@ class RailcontentTestCase extends BaseTestCase
                         $table->string('email')->nullable();
                         $table->string('password')->nullable();
                         $table->string('display_name')->nullable();
+                        $table->string('profile_picture_url')->nullable();
                         $table->timestamps();
                     }
                 );
@@ -642,6 +645,9 @@ class RailcontentTestCase extends BaseTestCase
         $contentData['topic'] = new ArrayCollection();
         $contentData['data'] = new ArrayCollection();
         $contentData['tag'] = new ArrayCollection();
+        $contentData['createdOn'] = Carbon::now();
+        $contentData['publishedOn'] = Carbon::now();
+        $contentData['archivedOn'] = null;
 
         if (array_key_exists('userId',$contentData)) {
             $contentData['user'] =
@@ -823,7 +829,7 @@ class RailcontentTestCase extends BaseTestCase
 
         if (empty($commentData)) {
             $commentData = [
-                'userId' => 1,
+                'content' => $this->fakeContent(1),
                 'brand' => config('railcontent.brand'),
             ];
         }
@@ -1048,5 +1054,6 @@ class RailcontentTestCase extends BaseTestCase
 
         return $fakePopulator[UserPlaylistContent::class];
     }
+
 
 }

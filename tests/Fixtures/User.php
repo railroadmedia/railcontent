@@ -10,21 +10,26 @@ class User implements UserInterface
 {
     protected $id;
     protected $email;
+    protected $displayName;
+    protected $avatar;
 
-    public function __construct(int $id, string $email = null)
+    public function __construct(int $id, string $email = null, string $displayName = null, string $avatar = null)
     {
         $this->id = $id;
-
+        $faker = app()->make(Generator::class);
         if (func_num_args() < 2) {
-            $faker = app()->make(Generator::class);
 
             $this->email = $faker->email;
         } else {
             $this->email = $email;
         }
+
+        $this->displayName = ($displayName) ? $displayName : $faker->name;
+        $this->avatar = ($avatar)? $avatar:$faker->url;
     }
 
-    public function getId(): int
+    public function getId()
+    : int
     {
         return $this->id;
     }
@@ -41,6 +46,6 @@ class User implements UserInterface
         https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/cookbook/custom-mapping-types.html
         */
 
-        return (string) $this->id;
+        return (string)$this->id;
     }
 }
