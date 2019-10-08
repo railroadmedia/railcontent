@@ -14,6 +14,10 @@ class CommentDeleted extends Event
     public $comment;
 
     /**
+     * @var int
+     */
+    public $commentId;
+    /**
      * CommentDeleted constructor.
      *
      * @param Comment $comment
@@ -21,5 +25,6 @@ class CommentDeleted extends Event
     public function __construct(Comment $comment)
     {
         $this->comment = $comment;
+        $this->commentId = $comment->getId();
     }
 }

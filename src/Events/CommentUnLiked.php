@@ -19,6 +19,15 @@ class CommentUnLiked extends Event
     public $user;
 
     /**
+     * @var integer
+     */
+    public $commentId;
+    /**
+     * @var
+     */
+    public $userId;
+
+    /**
      * CommentUnLiked constructor.
      *
      * @param Comment $comment
@@ -28,5 +37,8 @@ class CommentUnLiked extends Event
     {
         $this->comment = $comment;
         $this->user = $user;
+
+        $this->commentId = $comment->getId();
+        $this->userId = $user->getId();
     }
 }

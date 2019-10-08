@@ -13,6 +13,8 @@ class ContentSoftDeleted extends Event
      */
     public $content;
 
+    public $contentId;
+
     /**
      * ContentSoftDeleted constructor.
      *
@@ -21,5 +23,6 @@ class ContentSoftDeleted extends Event
     public function __construct(Content $content)
     {
         $this->content = $content;
+        $this->contentId = $content->getId();
     }
 }

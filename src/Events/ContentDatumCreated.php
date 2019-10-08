@@ -12,6 +12,7 @@ class ContentDatumCreated extends Event
      * @var Content
      */
     public $content;
+    public $contentId;
 
     /**
      * ContentDatumCreated constructor.
@@ -21,5 +22,6 @@ class ContentDatumCreated extends Event
     public function __construct(Content $content)
     {
         $this->content = $content;
+        $this->contentId = $content->getId();
     }
 }

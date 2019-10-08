@@ -19,6 +19,15 @@ class CommentLiked extends Event
     public $user;
 
     /**
+     * @var integer
+     */
+    public $commentId;
+    /**
+     * @var
+     */
+    public $userId;
+
+    /**
      * CommentLiked constructor.
      *
      * @param Comment $comment
@@ -28,5 +37,8 @@ class CommentLiked extends Event
     {
         $this->comment = $comment;
         $this->user = $user;
+
+        $this->commentId = $comment->getId();
+        $this->userId = $user->getId();
     }
 }

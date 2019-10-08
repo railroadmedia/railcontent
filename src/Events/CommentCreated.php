@@ -25,6 +25,23 @@ class CommentCreated extends Event
     public $content;
 
     /**
+     * @var integer
+     */
+    public $commentId;
+    /**
+     * @var
+     */
+    public $userId;
+    /**
+     * @var integer
+     */
+    public $parentId;
+    /**
+     * @var string
+     */
+    public $commentText;
+
+    /**
      * CommentCreated constructor.
      *
      * @param Comment $comment
@@ -36,5 +53,12 @@ class CommentCreated extends Event
         $this->comment = $comment;
         $this->user = $user;
         $this->content = $content;
+        $this->commentId = $comment->getId();
+        $this->userId = $user->getId();
+        $this->parentId =
+            ($comment->getParent()) ?
+                $comment->getParent()
+                    ->getId() : null;
+        $this->commentText = $comment->getComment();
     }
 }

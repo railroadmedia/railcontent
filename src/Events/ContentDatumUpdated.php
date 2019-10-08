@@ -12,6 +12,8 @@ class ContentDatumUpdated extends Event
      */
     public $content;
 
+    public $contentId;
+
     /**
      * ContentDatumUpdated constructor.
      *
@@ -20,5 +22,6 @@ class ContentDatumUpdated extends Event
     public function __construct(Content $content)
     {
         $this->content = $content;
+        $this->contentId = $content->getId();
     }
 }

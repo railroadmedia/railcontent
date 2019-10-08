@@ -11,6 +11,7 @@ class ContentUpdated extends Event
      * @var Content
      */
     public $content;
+    public $contentId;
 
     /**
      * ContentUpdated constructor.
@@ -20,5 +21,6 @@ class ContentUpdated extends Event
     public function __construct(Content $content)
     {
         $this->content = $content;
+        $this->contentId = $content->getId();
     }
 }

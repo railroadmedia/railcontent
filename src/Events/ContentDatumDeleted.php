@@ -12,6 +12,8 @@ class ContentDatumDeleted extends Event
      */
     public $content;
 
+    public $contentId;
+
     /**
      * ContentDatumDeleted constructor.
      *
@@ -20,5 +22,6 @@ class ContentDatumDeleted extends Event
     public function __construct(Content $content)
     {
         $this->content = $content;
+        $this->contentId = $content->getId();
     }
 }
