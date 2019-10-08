@@ -195,7 +195,7 @@ class UserContentProgressService
 
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressSaved($user, $content));
+        event(new UserContentProgressSaved($user, $content, $progressPercent, self::STATE_STARTED));
 
         return true;
     }
@@ -265,10 +265,10 @@ class UserContentProgressService
             $this->entityManager->persist($userContentProgress);
             $this->entityManager->flush();
 
-            event(new UserContentProgressSaved($user, $child, false));
+            event(new UserContentProgressSaved($user, $child, 100, self::STATE_COMPLETED, false));
         }
 
-        event(new UserContentProgressSaved($user, $content));
+        event(new UserContentProgressSaved($user, $content, 100, self::STATE_COMPLETED));
 
         $this->entityManager->getCache()
             ->evictEntityRegion(Content::class);
@@ -312,14 +312,14 @@ class UserContentProgressService
                 $this->entityManager->remove($userContentProgress);
                 $this->entityManager->flush();
 
-                event(new UserContentProgressSaved($user, $child, false));
+                event(new UserContentProgressSaved($user, $child, 0, self::STATE_STARTED));
             }
         }
 
         //delete user content progress cache
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressSaved($user, $content));
+        event(new UserContentProgressSaved($user, $content, 0 , self::STATE_STARTED));
 
         //delete user progress from cache
         $this->entityManager->getCache()
@@ -358,6 +358,7 @@ class UserContentProgressService
 
         $content = $this->contentService->getById($contentId);
         $user = $this->userProvider->getUserById($userId);
+        $state = ($progress == 100) ? self::STATE_COMPLETED : self::STATE_STARTED;
 
         $userContentProgress = $this->userContentRepository->getByUserContentState($user, $content);
 
@@ -374,7 +375,7 @@ class UserContentProgressService
         }
 
         $userContentProgress->setProgressPercent($progress);
-        $userContentProgress->setState(($progress == 100) ? self::STATE_COMPLETED : self::STATE_STARTED);
+        $userContentProgress->setState($state);
         $userContentProgress->setUpdatedOn(Carbon::parse(now()));
 
         $this->entityManager->persist($userContentProgress);
@@ -385,7 +386,7 @@ class UserContentProgressService
 
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressSaved($user, $content));
+        event(new UserContentProgressSaved($user, $content, $progress, $state));
 
         return true;
     }
