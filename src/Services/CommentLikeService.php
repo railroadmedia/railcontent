@@ -46,12 +46,11 @@ class CommentLikeService
      */
     public function __construct(
         RailcontentEntityManager $entityManager,
-        UserProviderInterface $userProvider,
-        CommentRepository $commentRepository
+        UserProviderInterface $userProvider
     ) {
         $this->entityManager = $entityManager;
         $this->userProvider = $userProvider;
-        $this->commentRepository = $commentRepository;
+        $this->commentRepository = $this->entityManager->getRepository(Comment::class);
 
         $this->commentLikeRepository = $this->entityManager->getRepository(CommentLikes::class);
 
