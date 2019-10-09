@@ -10,6 +10,7 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
+use Railroad\Railcontent\Hydrators\CustomRailcontentHydrator;
 use Railroad\Railcontent\Services\JsonApiHydrator;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Comment;
@@ -47,6 +48,8 @@ class CommentService
      */
     private $userProvider;
 
+    private $resultsHydrator;
+
     /** The value it's set in ContentPermissionMiddleware;
      * if the user it's an administrator the value it's true and the administrator can update/delete any comment;
      * otherwise the value it's false and the user can update/delete only his own comments
@@ -65,11 +68,13 @@ class CommentService
     public function __construct(
         RailcontentEntityManager $entityManager,
         JsonApiHydrator $jsonApiHydrator,
-        UserProviderInterface $userProvider
+        UserProviderInterface $userProvider,
+        CustomRailcontentHydrator $resultsHydrator
     ) {
         $this->entityManager = $entityManager;
         $this->jsonApiHidrator = $jsonApiHydrator;
         $this->userProvider = $userProvider;
+        $this->resultsHydrator = $resultsHydrator;
 
         $this->commentRepository = $this->entityManager->getRepository(Comment::class);
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
@@ -284,9 +289,9 @@ class CommentService
 
         $results =
             $qb->getQuery()
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Count the comments that have been created after the comment
