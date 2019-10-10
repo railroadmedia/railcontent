@@ -425,6 +425,7 @@ class RailcontentTestCase extends BaseTestCase
                         'email' => $email,
                         'password' => $this->faker->password,
                         'display_name' => $this->faker->name,
+                        'profile_picture_url' => $this->faker->url,
                         'created_at' => Carbon::now()
                             ->toDateTimeString(),
                         'updated_at' => Carbon::now()
@@ -642,11 +643,14 @@ class RailcontentTestCase extends BaseTestCase
             $contentData['brand'] = config('railcontent.brand');
         }
 
+        if (!array_key_exists('publishedOn', $contentData)) {
+            $contentData['publishedOn'] = Carbon::now();
+        }
+
         $contentData['topic'] = new ArrayCollection();
         $contentData['data'] = new ArrayCollection();
         $contentData['tag'] = new ArrayCollection();
         $contentData['createdOn'] = Carbon::now();
-        $contentData['publishedOn'] = Carbon::now();
         $contentData['archivedOn'] = null;
 
         if (array_key_exists('userId',$contentData)) {
@@ -809,6 +813,8 @@ class RailcontentTestCase extends BaseTestCase
         $commentData['user'] =
             $this->app->make(UserProvider::class)
                 ->getUserById($commentData['userId']??$user['id']) ;
+        $commentData['createdOn'] = Carbon::now();
+        $commentData['deletedOn'] = null;
 
         unset($commentData['userId']);
 
@@ -960,6 +966,7 @@ class RailcontentTestCase extends BaseTestCase
             'email' => $this->faker->email,
             'password' => $this->faker->password,
             'display_name' => $this->faker->name,
+            'profile_picture_url' => $this->faker->url,
             'created_at' => Carbon::now()
                 ->toDateTimeString(),
             'updated_at' => Carbon::now()

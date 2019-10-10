@@ -13,6 +13,7 @@ use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentEventsTest extends RailcontentTestCase
@@ -35,6 +36,8 @@ class ContentEventsTest extends RailcontentTestCase
     protected function setUp()
     {
         parent::setUp();
+
+        ResponseService::$oldResponseStructure = false;
     }
 
     public function test_event_on_content_creation()

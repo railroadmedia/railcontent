@@ -12,12 +12,13 @@ use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
-class CommentJsonControllerTest extends RailcontentTestCase
+class CommentJsonControllerOldStructureTest extends RailcontentTestCase
 {
     protected function setUp()
     {
         parent::setUp();
-        ResponseService::$oldResponseStructure = false;
+
+        ResponseService::$oldResponseStructure = true;
     }
 
     public function test_add_comment_response()
@@ -35,37 +36,22 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $attributes = [
             'comment' => $this->faker->paragraph,
             'content' => $content[0],
-            'temporary_display_name' => $this->faker->word
+            'display_name' => $this->faker->word
         ];
-
-        $attributes['user'] = $userId;
-
-        unset($attributes['id']);
-        unset($attributes['created_on']);
-        unset($attributes['deleted_at']);
 
         $response = $this->call(
             'PUT',
             'railcontent/comment',
             [
-                'data' => [
-                    'type' => 'comment',
-                    'attributes' => $attributes,
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[0]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'comment'      => $attributes['comment'],
+                'content_id'   => $content[0]->getId(),
+                'display_name' => $attributes['display_name']
             ]
         );
 
         $this->assertEquals(200, $response->getStatusCode());
 
-        $this->assertEquals($attributes['comment'], $response->decodeResponseJson('data')['attributes']['comment']);
+        $this->assertEquals($attributes['comment'], $response->decodeResponseJson('data')['comment']);
     }
 
     public function test_add_comment_on_not_commentable_type_response()
@@ -82,20 +68,9 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/comment',
             [
-                'data' => [
-                    'type' => 'comment',
-                    'attributes' => [
-                        'comment' => $this->faker->text(),
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[0]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'comment'      => $this->faker->text(),
+                'content_id'   => $content[0]->getId(),
+                'display_name' => $this->faker->word()
             ]
         );
 
@@ -111,16 +86,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/comment',
             [
-                'data' => [
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => rand(),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => rand()
             ]
         );
 
@@ -137,7 +103,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $userId = $this->createAndLogInNewUser();
 
         $comment = $this->fakeComment(1, [
-            'userId' => $userId
+            'userId' => $userId,
+            'deletedAt' => null
         ]);
 
         $updatedComment = $this->faker->text();
@@ -146,30 +113,17 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'PATCH',
             'railcontent/comment/' . $comment[0]->getId(),
             [
-                'data' => [
-                    'type' => 'comment',
-                    'attributes' => [
-                        'comment' => $updatedComment,
-                    ],
-                ],
+                'comment' => $updatedComment
             ]
         );
 
         $this->assertEquals(201, $response->getStatusCode());
 
-        $expectedResults = [
-            'comment' => $updatedComment,
-            'user' => $userId,
-
-        ];
-
-        $this->assertEquals($updatedComment, $response->decodeResponseJson('data')['attributes']['comment']);
+        $this->assertEquals($updatedComment, $response->decodeResponseJson('data')['comment']);
     }
 
     public function test_update_other_comment_response()
     {
-        CommentService::$canManageOtherComments = false;
-
         $userId = $this->createAndLogInNewUser();
         $randomUser = $this->fakeUser();
 
@@ -185,12 +139,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'PATCH',
             'railcontent/comment/' . $comment[0]->getId(),
             [
-                'data' => [
-                    'type' => 'comment',
-                    'attributes' => [
-                        'comment' => $updatedComment,
-                    ],
-                ],
+                'comment' => $updatedComment
             ]
         );
 
@@ -207,43 +156,22 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'PATCH',
             'railcontent/comment/' . 1,
             [
-                'data' => [
-                    'attributes' => [
-                        'temporary_display_name' => '',
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => rand(30, 100),
-                            ],
-                        ],
-                        'parent' => [
-                            'data' => [
-                                'type' => 'comment',
-                                'id' => rand(3, 10),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id'   => rand(),
+                'parent_id'    => rand(),
+                'display_name' => ''
             ]
         );
 
         $this->assertEquals(422, $response->getStatusCode());
 
         $response->assertJsonFragment(['The selected content id is invalid.']);
-        $response->assertJsonFragment(['The selected parent id is invalid.']);
-        $response->assertJsonFragment(['The display name field must have a value.']);
     }
 
     public function test_update_inexistent_comment_response()
     {
         $userId = $this->createAndLogInNewUser();
         $randomId = rand();
-        $response = $this->call('PATCH', 'railcontent/comment/' . $randomId,[
-            'data'=>[
-                'type' => 'comment'
-            ]]);
+        $response = $this->call('PATCH', 'railcontent/comment/' . $randomId);
 
         $this->assertEquals(404, $response->getStatusCode());
 
@@ -261,6 +189,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             [
                 'userId' => $randomUser['id'],
                 'content' => $content[0],
+                'deletedAt' => null
             ]
         );
 
@@ -270,12 +199,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'PATCH',
             'railcontent/comment/' . $comment[0]->getId(),
             [
-                'data' => [
-                    'type' => 'comment',
-                    'attributes' => [
-                        'comment' => $updatedComment,
-                    ],
-                ],
+                'comment' => $updatedComment
             ]
         );
 
@@ -285,7 +209,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'comment' => $updatedComment,
         ];
 
-        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data')['attributes']);
+        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data'));
     }
 
     public function test_delete_my_comment_response()
@@ -390,36 +314,20 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/comment/reply',
             [
-                'data' => [
-                    'type' => 'comment',
-                    'attributes' => [
-                        'comment' => $reply,
-                    ],
-                    'relationships' => [
-                        'parent' => [
-                            'data' => [
-                                'type' => 'comment',
-                                'id' => $comment[0]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'comment'   => $reply,
+                'parent_id' => $comment[0]->getId()
             ]
         );
 
         $this->assertEquals(200, $response->getStatusCode());
 
         $expectedResults = [
-            'data' => [
-                'type' => 'comment',
-                'attributes' => [
                     'comment' => $reply,
-                    'user' => $userId,
-                ],
-            ],
+                    'user_id' => $userId,
+
         ];
 
-        $this->assertArraySubset($expectedResults, $response->decodeResponseJson());
+        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data'));
 
     }
 
@@ -484,7 +392,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals($request['limit'], count($data));
 
-        $this->assertEquals(1, $response->decodeResponseJson('data')[0]['attributes']['like_count']);
+        $this->assertEquals(1, $response->decodeResponseJson('data')[0]['like_count']);
     }
 
     public function test_pull_content_comments_paginated()
@@ -555,7 +463,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals($limit, count($data));
 
         foreach ($data as $res) {
-            $this->assertEquals($user['id'], $res['attributes']['user']);
+            $this->assertEquals($user['id'], $res['user_id']);
         }
     }
 
@@ -722,14 +630,6 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $data = $response->decodeResponseJson('data');
 
-        foreach ($data as $comment) {
-            $this->assertEquals(
-                $type,
-                $this->entityManager->getRepository(Content::class)
-                    ->find($comment['relationships']['content']['data']['id'])
-                    ->getType()
-            );
-        }
         $this->assertEquals($limit, count($data));
     }
 
@@ -818,6 +718,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals(3, count($response->decodeResponseJson('data')));
+        $this->assertEquals(($commentsNr + 1), $response->decodeResponseJson('meta')['pagination']['total']);
     }
 
     public function test_pull_comment_with_replies()
@@ -903,20 +804,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/comment',
             [
-                'data' => [
-                    'type' => 'comment',
-                    'attributes' => [
-                        'comment' => 'roxana',
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[0]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'comment' => 'test',
+                'content_id' => $content[0]->getId()
             ]
         );
 
@@ -955,12 +844,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             'PATCH',
             'railcontent/comment/' . $comment[1]->getId(),
             [
-                'data' => [
-                    'type' => 'comment',
-                    'attributes' => [
-                        'comment' => $updatedComment,
-                    ],
-                ],
+                'comment' => $updatedComment,
             ]
         );
 
@@ -974,6 +858,6 @@ class CommentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals($updatedComment, $response->decodeResponseJson('data')[0]['attributes']['comment']);
+        $this->assertEquals($updatedComment, $response->decodeResponseJson('data')[0]['comment']);
     }
 }

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Doctrine\DBAL\Logging\DebugStack;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Response;
 
@@ -21,6 +22,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
         parent::setUp();
 
         $this->serviceBeingTested = $this->app->make(ContentService::class);
+
+        ResponseService::$oldResponseStructure = false;
     }
 
     public function test_index_empty()

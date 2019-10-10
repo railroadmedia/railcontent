@@ -39,6 +39,10 @@ class ContentOldStructureTransformer extends TransformerAbstract
         if ($content->getProperty('permissions')) {
             $defaultIncludes[] = 'permissions';
         }
+
+        if (count($content->getChild()) > 0) {
+            $defaultIncludes[] = 'children';
+        }
         $this->setDefaultIncludes($defaultIncludes);
 
         return [
@@ -182,5 +186,20 @@ class ContentOldStructureTransformer extends TransformerAbstract
                 'contentProgress'
             );
         }
+    }
+
+    /**
+     * @param Content $content
+     * @return Collection
+     */
+    public function includeChildren(Content $content)
+    {
+        $childrens = $content->getChild()->getValues();
+
+        return $this->collection(
+            $childrens,
+            new ContentHierarchyChildrensOldStructureTransformer(),
+            'children'
+        );
     }
 }

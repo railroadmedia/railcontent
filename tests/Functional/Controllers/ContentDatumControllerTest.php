@@ -8,6 +8,7 @@ use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentDatumService;
+use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentDatumControllerTest extends RailcontentTestCase
@@ -19,6 +20,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
         parent::setUp();
 
         $this->serviceBeingTested = $this->app->make(ContentDatumService::class);
+        ResponseService::$oldResponseStructure = false;
     }
 
     public function test_add_content_datum_controller_method_response()

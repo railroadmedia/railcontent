@@ -8,7 +8,7 @@ use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Response;
 
-class MobileApiEndpointsTest extends RailcontentTestCase
+class MobileApiEndpointsOldStructureTest extends RailcontentTestCase
 {
     /**
      * @var ContentService
@@ -21,7 +21,7 @@ class MobileApiEndpointsTest extends RailcontentTestCase
 
         $this->serviceBeingTested = $this->app->make(ContentService::class);
 
-        ResponseService::$oldResponseStructure = false;
+        ResponseService::$oldResponseStructure = true;
     }
 
     public function test_get_all_content()
@@ -146,7 +146,17 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         $this->assertNotEquals([], $response->decodeResponseJson('data'));
 
         foreach ($response->decodeResponseJson('data') as $content) {
-            $this->assertEquals(2, $content['attributes']['difficulty']);
+            $this->assertTrue(
+                in_array(
+                    [
+                        "content_id" => $content['id'],
+                        "key" => "difficulty",
+                        "value" => "2",
+                        "position" => 1,
+                    ],
+                    $content['fields']
+                )
+            );
         }
     }
 
@@ -330,7 +340,17 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['pagination']['total']);
 
         foreach ($response->decodeResponseJson('data') as $item) {
-            $this->assertEquals(8, $item['attributes']['difficulty']);
+            $this->assertTrue(
+                in_array(
+                    [
+                        "content_id" => $item['id'],
+                        "key" => "difficulty",
+                        "value" => 8,
+                        "position" => 1,
+                    ],
+                    $item['fields']
+                )
+            );
         }
     }
 
@@ -382,10 +402,13 @@ class MobileApiEndpointsTest extends RailcontentTestCase
 
         $homeStaffPickRating = 0;
         foreach ($response->decodeResponseJson('data') as $item) {
+            $index = array_search('home_staff_pick_rating', array_column($item['fields'], 'key'));
+            $value = ($item['fields'][$index]['value']);
+
             $this->assertTrue($content3[0]->getId() != $item['id']);
-            $this->assertTrue($item['attributes']['homeStaffPickRating'] <= 20);
-            $this->assertTrue($homeStaffPickRating <= $item['attributes']['homeStaffPickRating']);
-            $homeStaffPickRating = $item['attributes']['homeStaffPickRating'];
+            $this->assertTrue($value <= 20);
+            $this->assertTrue($homeStaffPickRating <= $value);
+            $homeStaffPickRating = $value;
         }
     }
 
@@ -437,10 +460,13 @@ class MobileApiEndpointsTest extends RailcontentTestCase
 
         $staffPickRating = 0;
         foreach ($response->decodeResponseJson('data') as $item) {
+            $index = array_search('staff_pick_rating', array_column($item['fields'], 'key'));
+            $value = ($item['fields'][$index]['value']);
+
             $this->assertTrue($content3[0]->getId() != $item['id']);
-            $this->assertTrue($item['attributes']['staffPickRating'] <= 20);
-            $this->assertTrue($staffPickRating <= $item['attributes']['staffPickRating']);
-            $staffPickRating = $item['attributes']['staffPickRating'];
+            $this->assertTrue($value <= 20);
+            $this->assertTrue($staffPickRating <= $value);
+            $staffPickRating = $value;
         }
     }
 
@@ -479,7 +505,8 @@ class MobileApiEndpointsTest extends RailcontentTestCase
                 'user_id' => $loggedInUserId,
                 'brand' => config('railcontent.brand'),
                 'type' => 'primary-playlist',
-                'created_at' => Carbon::now()->toDateTimeString()
+                'created_at' => Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
 
@@ -488,7 +515,8 @@ class MobileApiEndpointsTest extends RailcontentTestCase
             [
                 'content_id' => $content[0]->getId(),
                 'user_playlist_id' => 1,
-                'created_at' => Carbon::now()->toDateTimeString()
+                'created_at' => Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
     }
@@ -672,7 +700,10 @@ class MobileApiEndpointsTest extends RailcontentTestCase
             'api/railcontent/onboarding'
         );
 
-        $this->assertEquals(count(config('railcontent.onboardingContentIds')), count($response->decodeResponseJson('data')));
+        $this->assertEquals(
+            count(config('railcontent.onboardingContentIds')),
+            count($response->decodeResponseJson('data'))
+        );
 
         foreach ($response->decodeResponseJson('data') as $item) {
             $this->assertTrue(in_array($item['id'], config('railcontent.onboardingContentIds')));
@@ -698,27 +729,36 @@ class MobileApiEndpointsTest extends RailcontentTestCase
     public function test_strip_comments()
     {
         $user = $this->createAndLogInNewUser();
-        $content = $this->fakeContent(1,[
-            'type' => 'course',
-            'status' => 'published',
-            'publishedOn' => Carbon::now(),
-        ]);
+        $content = $this->fakeContent(
+            1,
+            [
+                'type' => 'course',
+                'status' => 'published',
+                'publishedOn' => Carbon::now(),
+            ]
+        );
 
         $commentText = $this->faker->paragraph;
-        $comment = $this->fakeComment(1,[
-            'content' => $content[0],
-            'comment' => '<p>' . $commentText . '</p>',
-            'userId' => $user,
-            'deletedAt' => null
-        ]);
+        $comment = $this->fakeComment(
+            1,
+            [
+                'content' => $content[0],
+                'comment' => '<p>' . $commentText . '</p>',
+                'userId' => $user,
+                'deletedAt' => null,
+            ]
+        );
 
         $replyText = $this->faker->paragraph;
-        $this->fakeComment(1,[
-            'content' => $content[0],
-            'comment' => '<p>' . $replyText . '</p>',
-            'parent' => $comment[0],
-            'deletedAt' => null
-        ]);
+        $this->fakeComment(
+            1,
+            [
+                'content' => $content[0],
+                'comment' => '<p>' . $replyText . '</p>',
+                'parent' => $comment[0],
+                'deletedAt' => null,
+            ]
+        );
 
         $response = $this->call(
             'GET',
@@ -729,6 +769,6 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         );
 
         $this->assertEquals(200, $response->status());
-        $this->assertEquals($commentText, $response->decodeResponseJson('data')[0]['attributes']['comment']);
+        $this->assertEquals($commentText, $response->decodeResponseJson('data')[0]['comment']);
     }
 }

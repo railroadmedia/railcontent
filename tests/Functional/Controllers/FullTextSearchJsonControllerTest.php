@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class FullTextSearchJsonControllerTest extends RailcontentTestCase
@@ -13,6 +14,8 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $this->setConnectionType('mysql');
 
         parent::setUp();
+
+        ResponseService::$oldResponseStructure = false;
     }
 
     public function test_no_results()

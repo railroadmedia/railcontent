@@ -14,7 +14,11 @@ class CommentOldStructureTransformer extends TransformerAbstract
      */
     public function transform(Comment $comment)
     {
-        $defaultIncludes = ['like_users'];
+        $defaultIncludes = [];
+
+        if (count($comment->getLikes()) > 0) {
+            $defaultIncludes[] = 'like_users';
+        }
 
         if (count($comment->getChildren()) > 0) {
             $defaultIncludes[] = 'replies';
@@ -38,9 +42,9 @@ class CommentOldStructureTransformer extends TransformerAbstract
             'deleted_on' => ($comment->getDeletedAt()) ?
                 $comment->getDeletedAt()
                     ->toDateTimeString() : null,
-            'like_count' => $comment->getLikes()
-                ->count(),
-            'is_liked' => $comment->getProperty('is_liked')
+            'like_count' => ($comment->getLikes())?
+                $comment->getLikes()->count():0,
+            'is_liked' => ($comment->getProperty('is_liked'))?$comment->getProperty('is_liked') : false
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class ContentHierarchyJsonControllerTest extends RailcontentTestCase
@@ -10,6 +11,7 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
     protected function setUp()
     {
         parent::setUp();
+        ResponseService::$oldResponseStructure = false;
 
         $contents = $this->fakeContent(
             6,

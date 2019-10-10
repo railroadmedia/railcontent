@@ -68,7 +68,7 @@ class CommentLikeJsonController extends Controller
      * @permission authenticated user
      * @response 200 { }
      */
-    public function delete(CommentUnLikeRequest $request, $id)
+    public function delete(CommentLikeRequest $request, $id)
     {
         $this->commentLikeService->delete($id, auth()->id());
 

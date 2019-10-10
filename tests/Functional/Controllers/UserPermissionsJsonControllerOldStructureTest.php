@@ -10,14 +10,14 @@ use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\Fixtures\UserProvider;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
-class UserPermissionsJsonControllerTest extends RailcontentTestCase
+class UserPermissionsJsonControllerOldStructureTest extends RailcontentTestCase
 {
 
     public function setUp()
     {
         parent::setUp();
 
-        ResponseService::$oldResponseStructure = false;
+        ResponseService::$oldResponseStructure = true;
     }
 
     protected function tearDown()
@@ -32,27 +32,10 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/user-permission',
             [
-                'data' => [
-                    'type' => 'userPermission',
-                    'attributes' => [
-                        'start_date' => Carbon::now()
-                            ->toDateTimeString(),
-                    ],
-                    'relationships' => [
-                        'permission' => [
-                            'data' => [
-                                'type' => 'permission',
-                                'id' => $this->faker->numberBetween(),
-                            ],
-                        ],
-                        'user' => [
-                            'data' => [
-                                'type' => 'user',
-                                'id' => $this->faker->numberBetween()
-                            ]
-                        ]
-                    ],
-                ],
+                'user_id' => $this->faker->numberBetween(),
+                'permission_id' => $this->faker->numberBetween(),
+                'start_date' => Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
 
@@ -60,12 +43,11 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(
             [
                 [
-                    'source' => 'data.relationships.permission.data.id',
+                    'source' => 'id',
                     'detail' => 'The selected permission id is invalid.',
-                    'title' => 'Validation failed.',
                 ],
             ],
-            $results->decodeResponseJson('errors')
+            $results->decodeResponseJson('meta')['errors']
         );
     }
 
@@ -79,54 +61,27 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/user-permission',
             [
-                'data' => [
-                    'type' => 'userPermission',
-                    'attributes' => [
-                        'start_date' => Carbon::now()
-                            ->toDateTimeString(),
-                    ],
-                    'relationships' => [
-                        'permission' => [
-                            'data' => [
-                                'type' => 'permission',
-                                'id' => $permission[0]->getId(),
-                            ],
-                        ],
-                        'user' => [
-                            'data' => [
-                                'type' => 'user',
-                                'id' => $user['id']
-                            ]
-                        ]
-                    ],
-                ],
+                'user_id' => $user['id'],
+                'permission_id' => $permission[0]->getId(),
+                'start_date' => Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
 
         $this->assertEquals(200, $results->getStatusCode());
         $this->assertArraySubset(
             [
-                'data' => [
-                    'attributes' => [
-                        'user' => $user['id'],
-                        'start_date' => Carbon::now()
-                            ->toDateTimeString(),
-                    ],
-                    'relationships' => [
-                        'permission' => [
-                            'data' => [
-                                'type' => 'permission',
-                                'id' => $permission[0]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'id' => 1,
+                'user_id' => $user['id'],
+                'start_date' => Carbon::now()
+                    ->toDateTimeString(),
+                'permission_id' => $permission[0]->getId(),
             ],
-            $results->decodeResponseJson()
+            $results->decodeResponseJson('data')
         );
 
         $this->assertDatabaseHas(
-            config('railcontent.table_prefix'). 'user_permissions',
+            config('railcontent.table_prefix') . 'user_permissions',
             [
                 'user_id' => 1,
                 'permission_id' => $permission[0]->getId(),
@@ -151,7 +106,8 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($userId),
+                'user' => $this->app->make(UserProvider::class)
+                    ->getUserById($userId),
                 'permission' => $permission[0],
                 'startDate' => Carbon::now(),
                 'createdAt' => Carbon::now(),
@@ -164,61 +120,33 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/user-permission',
             [
-                'data' => [
-                    'type' => 'userPermission',
-                    'attributes' => [
-                        'user_id' => $userId,
-                        'start_date' => Carbon::now()
-                            ->toDateTimeString(),
-                        'expiration_date' => Carbon::now()
-                            ->addMinutes(1)
-                            ->toDateTimeString(),
-                    ],
-                    'relationships' => [
-                        'permission' => [
-                            'data' => [
-                                'type' => 'permission',
-                                'id' => $permission[0]->getId(),
-                            ],
-                        ],
-                        'user' => [
-                            'data' => [
-                                'type' => 'user',
-                                'id' => $userId
-                            ]
-                        ]
-                    ],
-                ],
+                'user_id' => $userId,
+                'start_date' => Carbon::now()
+                    ->toDateTimeString(),
+                'expiration_date' => Carbon::now()
+                    ->addMinutes(1)
+                    ->toDateTimeString(),
+                'permission_id' => $permission[0]->getId(),
             ]
         );
 
         $this->assertEquals(200, $results->getStatusCode());
         $this->assertArraySubset(
             [
-                'type' => 'userPermission',
                 'id' => 1,
-                'attributes' => [
-                    'user' => $userId,
-                    'start_date' => Carbon::now()
-                        ->toDateTimeString(),
-                    'expiration_date' => Carbon::now()
-                        ->addMinutes(1)
-                        ->toDateTimeString(),
-                ],
-                'relationships' => [
-                    'permission' => [
-                        'data' => [
-                            'type' => 'permission',
-                            'id' => $permission[0]->getId(),
-                        ],
-                    ],
-                ],
+                'user_id' => $userId,
+                'start_date' => Carbon::now()
+                    ->toDateTimeString(),
+                'permission_id' => $permission[0]->getId(),
+                'expiration_date' => Carbon::now()
+                    ->addMinutes(1)
+                    ->toDateTimeString(),
             ],
             $results->decodeResponseJson('data')
         );
 
         $this->assertDatabaseHas(
-            config('railcontent.table_prefix'). 'user_permissions',
+            config('railcontent.table_prefix') . 'user_permissions',
             [
                 'user_id' => $userId,
                 'permission_id' => $permission[0]->getId(),
@@ -239,27 +167,9 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/user-permission',
             [
-                'data' => [
-                    'type' => 'userPermission',
-                    'attributes' => [
-                        'start_date' => $this->faker->word,
-                    ],
-                    'relationships' => [
-                        'permission' => [
-                            'data' => [
-                                'type' => 'permission',
-                                'id' => rand(),
-                            ],
-                        ],
-                        'user' => [
-                            'data' => [
-                                'type' => 'user',
-                                'id' => $this->faker->numberBetween()
-                            ]
-                        ]
-
-                    ],
-                ],
+                'start_date' => $this->faker->word,
+                'permission_id' => rand(),
+                'user_id' => rand()
             ]
         );
 
@@ -267,17 +177,15 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(
             [
                 [
-                    'source' => 'data.relationships.permission.data.id',
+                    'source' => 'id',
                     'detail' => 'The selected permission id is invalid.',
-                    'title' => 'Validation failed.',
                 ],
                 [
-                    "source" => "data.attributes.start_date",
+                    "source" => "start_date",
                     "detail" => "The start date is not a valid date.",
-                    'title' => 'Validation failed.',
-                ],
+                 ],
             ],
-            $results->decodeResponseJson('errors')
+            $results->decodeResponseJson('meta')['errors']
         );
     }
 
@@ -305,7 +213,8 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
+                'user' => $this->app->make(UserProvider::class)
+                    ->getUserById($user['id']),
                 'permission' => $permission[0],
                 'startDate' => Carbon::now(),
                 'createdAt' => Carbon::now(),
@@ -319,7 +228,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(204, $results->getStatusCode());
 
         $this->assertDatabaseMissing(
-            config('railcontent.table_prefix'). 'user_permissions',
+            config('railcontent.table_prefix') . 'user_permissions',
             [
                 'id' => $userPermissionId,
                 'user_id' => $user['id'],
@@ -343,12 +252,14 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
+                'user' => $this->app->make(UserProvider::class)
+                    ->getUserById($user['id']),
                 'permission' => $permissions[0],
                 'expirationDate' => Carbon::now()
                     ->addDays(10),
                 'startDate' => Carbon::now(),
                 'createdAt' => Carbon::now(),
+                'updatedAt' => null,
             ]
         );
         $this->populator->execute();
@@ -357,11 +268,13 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
+                'user' => $this->app->make(UserProvider::class)
+                    ->getUserById($user['id']),
                 'permission' => $permissions[1],
                 'expirationDate' => null,
                 'startDate' => Carbon::now(),
                 'createdAt' => Carbon::now(),
+                'updatedAt' => null,
             ]
         );
         $this->populator->execute();
@@ -382,12 +295,14 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
+                'user' => $this->app->make(UserProvider::class)
+                    ->getUserById($user['id']),
                 'permission' => $permissions[0],
                 'expirationDate' => Carbon::now()
                     ->addDays(10),
                 'startDate' => Carbon::now(),
                 'createdAt' => Carbon::now(),
+                'updatedAt' => null,
             ]
 
         );
@@ -397,11 +312,13 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
+                'user' => $this->app->make(UserProvider::class)
+                    ->getUserById($user['id']),
                 'permission' => $permissions[1],
                 'expirationDate' => null,
                 'startDate' => Carbon::now(),
                 'createdAt' => Carbon::now(),
+                'updatedAt' => null,
             ]
 
         );
@@ -429,12 +346,14 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
+                'user' => $this->app->make(UserProvider::class)
+                    ->getUserById($user['id']),
                 'permission' => $permissions[0],
                 'expirationDate' => Carbon::now()
                     ->subMonth(10),
                 'startDate' => Carbon::now(),
                 'createdAt' => Carbon::now(),
+                'updatedAt' => null,
             ]
         );
         $this->populator->execute();
@@ -443,11 +362,13 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             UserPermission::class,
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($user['id']),
+                'user' => $this->app->make(UserProvider::class)
+                    ->getUserById($user['id']),
                 'permission' => $permissions[1],
                 'expirationDate' => null,
                 'startDate' => Carbon::now(),
                 'createdAt' => Carbon::now(),
+                'updatedAt' => null,
             ]
         );
         $this->populator->execute();
@@ -486,7 +407,7 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $content1[0],
                 'permission' => $permission1[0],
-                'brand' => config('railcontent.brand')
+                'brand' => config('railcontent.brand'),
             ]
         );
 
@@ -506,27 +427,10 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/user-permission',
             [
-                'data' => [
-                    'type' => 'userPermission',
-                    'attributes' => [
-                        'start_date' => Carbon::now()
-                            ->toDateTimeString(),
-                    ],
-                    'relationships' => [
-                        'permission' => [
-                            'data' => [
-                                'id' => $permission1[0]->getId(),
-                                'type' => 'permission',
-                            ],
-                        ],
-                        'user' => [
-                            'data' => [
-                                'type' => 'user',
-                                'id' => $userId
-                            ]
-                        ]
-                    ],
-                ],
+                'start_date' => Carbon::now()
+                    ->toDateTimeString(),
+                'permission_id' =>  $permission1[0]->getId(),
+                'user_id' => $userId
             ]
 
         );
@@ -567,14 +471,15 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             [
                 'content' => $content[0],
                 'permission' => $permission[0],
-                'brand' => config('railcontent.brand')
+                'brand' => config('railcontent.brand'),
             ]
         );
 
         $userPermission = $this->fakeUserPermission(
             1,
             [
-                'user' => $this->app->make(UserProvider::class)->getUserById($userId),
+                'user' => $this->app->make(UserProvider::class)
+                    ->getUserById($userId),
                 'permission' => $permission[0],
                 'startDate' => Carbon::now(),
                 'expirationDate' => null,
@@ -631,30 +536,14 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/user-permission',
             [
-                'data' => [
-                    'attributes' => [
-                        'start_date' => Carbon::now()
-                            ->subDay(1)
-                            ->toDateTimeString(),
-                        'expiration_date' => Carbon::now()
-                            ->addDays(3)
-                            ->toDateTimeString(),
-                    ],
-                    'relationships' => [
-                        'permission' => [
-                            'data' => [
-                                'id' => $permission[0]->getId(),
-                                'type' => 'permission',
-                            ],
-                        ],
-                        'user' => [
-                            'data' => [
-                                'type' => 'user',
-                                'id' => $userId
-                            ]
-                        ]
-                    ],
-                ],
+                'start_date' => Carbon::now()
+                    ->subDay(1)
+                    ->toDateTimeString(),
+                'expiration_date' => Carbon::now()
+                    ->addDays(3)
+                    ->toDateTimeString(),
+                'permission_id' =>  $permission[0]->getId(),
+                'user_id' => $userId
             ]
         );
 
@@ -667,30 +556,14 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/user-permission',
             [
-                'data' => [
-                    'attributes' => [
-                        'start_date' => Carbon::now()
-                            ->addHour(1)
-                            ->toDateTimeString(),
-                        'expiration_date' => Carbon::now()
-                            ->addDays(3)
-                            ->toDateTimeString(),
-                    ],
-                    'relationships' => [
-                        'permission' => [
-                            'data' => [
-                                'id' => $permission[1]->getId(),
-                                'type' => 'permission',
-                            ],
-                        ],
-                        'user' => [
-                            'data' => [
-                                'type' => 'user',
-                                'id' =>$userId
-                            ]
-                        ]
-                    ],
-                ],
+                'start_date' => Carbon::now()
+                    ->addHour(1)
+                    ->toDateTimeString(),
+                'expiration_date' => Carbon::now()
+                    ->addDays(3)
+                    ->toDateTimeString(),
+                'permission_id' => $permission[1]->getId(),
+                'user_id' => $userId
             ]
         );
         $cacheKeys = Redis::keys('*pull*');

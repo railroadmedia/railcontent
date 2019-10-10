@@ -2,16 +2,17 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
-class ContentLikeJsonControllerTest extends RailcontentTestCase
+class ContentLikeJsonControllerOldStructureTest extends RailcontentTestCase
 {
     protected function setUp()
     {
         parent::setUp();
-        ResponseService::$oldResponseStructure = false;
+        ResponseService::$oldResponseStructure = true;
     }
 
     public function like($userIdOfLiker, $assertions = false)
@@ -29,22 +30,7 @@ class ContentLikeJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/content-like/',
             [
-                'data' => [
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[0]->getId(),
-                            ],
-                        ],
-                        'user' => [
-                            'data' => [
-                                'type' => 'user',
-                                'id' => $userIdOfLiker,
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $content[0]->getId()
             ]
         );
 
@@ -127,7 +113,8 @@ class ContentLikeJsonControllerTest extends RailcontentTestCase
         $limit = rand(5, 10);
 
         $contentLikes = $this->fakeContentLike(15,[
-            'content' => $content[0]
+            'content' => $content[0],
+            'createdOn' => Carbon::now()
         ]);
 
         $response = $this->call(
@@ -144,7 +131,7 @@ class ContentLikeJsonControllerTest extends RailcontentTestCase
         $this->assertEquals($limit, count($responseContent));
 
         foreach ($responseContent as $responseRaw) {
-            $this->assertEquals($content[0]->getId(), $responseRaw['relationships']['content']['data']['id']);
+            $this->assertEquals($content[0]->getId(), $responseRaw['content_id']);
         }
     }
 }
