@@ -46,19 +46,8 @@ class ContentLikeJsonControllerOldStructureTest extends RailcontentTestCase
             );
         }
 
-        //        $commentRequestResponse = $this->call(
-        //            'GET',
-        //            'railcontent/comment/' . $commentId
-        //        );
-        //
-        //
-        //        $this->assertEquals(1, $commentRequestResponse->decodeResponseJson('data')[0]['attributes']['like_count']);
-        //        $this->assertEquals(1, count($commentRequestResponse->decodeResponseJson('data')[0]['attributes']['like_users']));
-        //        $this->assertTrue($commentRequestResponse->decodeResponseJson('data')[0]['attributes']['is_liked']);
         return $content[0]->getId();
     }
-
-    // ============================ test cases ======================================
 
     public function test_user_likes_content()
     {
@@ -77,22 +66,8 @@ class ContentLikeJsonControllerOldStructureTest extends RailcontentTestCase
             'DELETE',
             'railcontent/content-like' ,
             [
-                'data' => [
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $contentId,
-                            ],
-                        ],
-                        'user' => [
-                            'data' => [
-                                'type' => 'user',
-                                'id' => $userIdOfLiker,
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $contentId,
+                'user_id' => $userIdOfLiker
             ]
         );
 
