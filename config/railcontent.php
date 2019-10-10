@@ -9,6 +9,7 @@ use Railroad\Railcontent\Decorators\Content\ContentPermissionsDecorator;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentExercise;
+use Railroad\Railcontent\Middleware\VersionMiddleware;
 use Tymon\JWTAuth\Http\Middleware\RefreshToken;
 
 return [
@@ -53,11 +54,13 @@ return [
         AddQueuedCookiesToResponse::class,
         StartSession::class,
         VerifyCsrfToken::class,
+        VersionMiddleware::class
     ],
 
     //middleware for API requests
     'api_middleware' => [
         RefreshToken::class,
+        VersionMiddleware::class
     ],
 
     // routes
@@ -371,4 +374,10 @@ return [
         ],
     ],
     'onboardingContentIds' => [],
+
+    'route_middleware_logged_in_groups' => [
+        VersionMiddleware::class
+    ],
+    'route_prefix' => 'railcontent',
+    'api_route_prefix' => 'api/railcontent',
 ];
