@@ -14,12 +14,13 @@ class CustomRailcontentHydrator
      * @param $entityManager
      * @return array|mixed
      */
-    public function hydrate($objects, $entityManager)
+    public function hydrate(array $objects, $entityManager)
     {
         $allDecorators = [];
 
         foreach (config('railcontent.decorators') as $entityClass => $decoratorClasses) {
             foreach ($decoratorClasses as $decoratorClass) {
+
                 foreach ($objects as $object) {
                     if ($object instanceof $entityClass) {
 

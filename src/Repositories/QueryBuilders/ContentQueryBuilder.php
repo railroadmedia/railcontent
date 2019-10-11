@@ -61,10 +61,9 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                 $this->expr()
                     ->lte(
                         config('railcontent.table_prefix') . 'content' . '.publishedOn',
-                        ':published'
+                        'CURRENT_TIMESTAMP()'
                     )
-            )
-                ->setParameter('published', Carbon::now());
+            );
         }
 
         return $this;
@@ -188,9 +187,11 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                     $requiredFieldData['name'] .
                     ' ' .
                     $requiredFieldData['operator'] .
-                    '  (:value'.$index.')'
+                    '  (:value' .
+                    $index .
+                    ')'
                 )
-                    ->setParameter('value'.$index, $requiredFieldData['value']);
+                    ->setParameter('value' . $index, $requiredFieldData['value']);
             } else {
                 if (in_array(
                     $requiredFieldData['name'],
@@ -207,8 +208,8 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                             ->getFieldName($requiredFieldData['name']),
                         'p'
                     )
-                        ->andWhere('p '.$requiredFieldData['operator'] .' (:value'.$index.')')
-                        ->setParameter('value'.$index, $requiredFieldData['value']);
+                        ->andWhere('p ' . $requiredFieldData['operator'] . ' (:value' . $index . ')')
+                        ->setParameter('value' . $index, $requiredFieldData['value']);
                 }
             }
         }
@@ -308,7 +309,8 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                 'user_permission',
                 'WITH',
                 'content_permission.permission = user_permission.permission'
-            )->setParameter('brand', config('railcontent.brand'));
+            )
+            ->setParameter('brand', config('railcontent.brand'));
 
         $this->andWhere(
             $this->expr()
@@ -324,16 +326,12 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                                     $this->expr()
                                         ->isNull('user_permission.expirationDate'),
                                     $this->expr()
-                                        ->gte('user_permission.expirationDate', ':expirationDateOrNow')
+                                        ->gte('user_permission.expirationDate', 'CURRENT_TIMESTAMP()')
                                 )
                         )
 
                 )
         )
-            ->setParameter(
-                'expirationDateOrNow',
-                Carbon::now()
-            )
             ->setParameter('brand', config('railcontent.brand'))
             ->setParameter(
                 'user',

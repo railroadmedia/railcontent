@@ -48,6 +48,9 @@ class CommentService
      */
     private $userProvider;
 
+    /**
+     * @var CustomRailcontentHydrator
+     */
     private $resultsHydrator;
 
     /** The value it's set in ContentPermissionMiddleware;

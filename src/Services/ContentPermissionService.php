@@ -83,8 +83,10 @@ class ContentPermissionService
             ->setParameter('contentId', $contentId)
             ->setParameter('contentType', $contentType);
 
-        return $qb->getQuery()
+        $results = $qb->getQuery()
             ->getResult('Railcontent');
+
+        return $results;
     }
 
     /**
@@ -106,8 +108,10 @@ class ContentPermissionService
 
         $q->execute();
 
+        $this->entityManager->getCache()->getQueryCache('pull')->clear();
+
         $this->entityManager->getCache()
-            ->evictEntityRegion(Content::class);
+            ->evictQueryRegion('pull');
 
         return true;
     }
@@ -141,6 +145,11 @@ class ContentPermissionService
 
         $this->entityManager->getCache()
             ->evictEntityRegion(Content::class);
+
+        $this->entityManager->getCache()->getQueryCache('pull')->clear();
+
+        $this->entityManager->getCache()
+            ->evictQueryRegion('pull');
 
         return $contentPermission;
     }

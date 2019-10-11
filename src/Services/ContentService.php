@@ -22,6 +22,7 @@ use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Hydrators\CustomRailcontentHydrator;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use ReflectionException;
 
@@ -58,6 +59,11 @@ class ContentService
     private $jsonApiHydrator;
 
     /**
+     * @var CustomRailcontentHydrator
+     */
+    private $resultsHydrator;
+
+    /**
      * @var UserProviderInterface
      */
     private $userProvider;
@@ -79,10 +85,12 @@ class ContentService
     public function __construct(
         RailcontentEntityManager $entityManager,
         JsonApiHydrator $jsonApiHydrator,
-        UserProviderInterface $userProvider
+        UserProviderInterface $userProvider,
+        CustomRailcontentHydrator $resultsHydrator
     ) {
         $this->entityManager = $entityManager;
         $this->userProvider = $userProvider;
+        $this->resultsHydrator = $resultsHydrator;
 
         $this->contentRepository = $this->entityManager->getRepository(Content::class);
         $this->datumRepository = $this->entityManager->getRepository(ContentData::class);
@@ -108,9 +116,9 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getOneOrNullResult('Railcontent');
+                ->getOneOrNullResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate([$results], $this->entityManager)[0];
     }
 
     /** Call the get by ids method from repository
@@ -128,7 +136,7 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
         // restore order of ids passed in
         $contentRows = [];
@@ -140,7 +148,7 @@ class ContentService
             }
         }
 
-        return $contentRows;
+        return $this->resultsHydrator->hydrate($contentRows, $this->entityManager);
     }
 
     /** Get all contents with specified type.
@@ -158,9 +166,9 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get all contents with specified status, field and type.
@@ -226,9 +234,9 @@ class ContentService
             $qb->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get ordered contents by type, status and published_on date.
@@ -250,21 +258,24 @@ class ContentService
         $orderByDirection = 'desc'
     ) {
         $alias = config('railcontent.table_prefix') . 'content';
-        return $this->contentRepository->build()
-            ->restrictByUserAccess()
-            ->andWhere($alias . '.type IN (:types)')
-            ->andWhere($alias . '.status = :status')
-            ->andWhere(
-                $alias . '.publishedOn ' . $publishedOnComparisonOperator . ' :publishedOn'
-            )
-            ->orderByColumn($alias, $orderByColumn, $orderByDirection)
-            ->setParameter('status', $status)
-            ->setParameter('publishedOn', $publishedOnValue)
-            ->setParameter('types', $types)
-            ->getQuery()
-            ->setCacheable(true)
-            ->setCacheRegion('pull')
-            ->getResult('Railcontent');
+        $results =
+            $this->contentRepository->build()
+                ->restrictByUserAccess()
+                ->andWhere($alias . '.type IN (:types)')
+                ->andWhere($alias . '.status = :status')
+                ->andWhere(
+                    $alias . '.publishedOn ' . $publishedOnComparisonOperator . ' :publishedOn'
+                )
+                ->orderByColumn($alias, $orderByColumn, $orderByDirection)
+                ->setParameter('status', $status)
+                ->setParameter('publishedOn', $publishedOnValue)
+                ->setParameter('types', $types)
+                ->getQuery()
+                ->setCacheable(true)
+                ->setCacheRegion('pull')
+                ->getResult();
+
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get contents by slug and title.
@@ -285,9 +296,9 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get contents by userId, type and slug.
@@ -311,9 +322,9 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get contents based on parent id.
@@ -335,9 +346,9 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get paginated contents by parent id.
@@ -367,9 +378,9 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get ordered contents by parent id with specified type.
@@ -398,9 +409,9 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get ordered contents by parent id and type.
@@ -434,9 +445,9 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Count contents with specified type and parent id.
@@ -483,9 +494,9 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get contents by child and type.
@@ -507,9 +518,9 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get contents by child ids with specified type.
@@ -530,9 +541,9 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get contents by child id where parent type met the criteria.
@@ -553,9 +564,9 @@ class ContentService
                 ->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get paginated contents by type and user progress state.
@@ -575,8 +586,7 @@ class ContentService
             $this->entityManager->getRepository(UserContentProgress::class)
                 ->createQueryBuilder($alias);
 
-        $qb
-            ->join(
+        $qb->join(
                 $alias . '.content',
                 config('railcontent.table_prefix') . 'content'
             );
@@ -594,9 +604,9 @@ class ContentService
             $qb->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get paginated contents by types and user progress state.
@@ -636,9 +646,9 @@ class ContentService
             $qb->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get recent paginated contents by types and user progress state.
@@ -684,13 +694,17 @@ class ContentService
 
         $this->contentRepository->requireUserStates($state, $userId);
 
+        $rows =
+            $qb->getQuery()
+                ->setCacheable(true)
+                ->setCacheRegion('pull')
+                ->getResult();
+        $hydratedResults = $this->resultsHydrator->hydrate($rows, $this->entityManager);
+
         $results = new ContentFilterResultsEntity(
             [
                 'qb' => $qb,
-                'results' => $qb->getQuery()
-                    ->setCacheable(true)
-                    ->setCacheRegion('pull')
-                    ->getResult('Railcontent'),
+                'results' => $hydratedResults,
                 'filter_options' => $this->contentRepository->getFilterFields(),
             ]
         );
@@ -819,9 +833,9 @@ class ContentService
             $qb->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /** Get filtered contents.
@@ -901,14 +915,17 @@ class ContentService
         }
 
         $qb = $this->contentRepository->retrieveFilter();
+        $data =
+            $qb->getQuery()
+                ->setCacheable(true)
+                ->setCacheRegion('pull')
+                ->getResult();
+        $hydratedResults = $this->resultsHydrator->hydrate($data, $this->entityManager);
 
         $results = new ContentFilterResultsEntity(
             [
                 'qb' => $qb,
-                'results' => $qb->getQuery()
-                    ->setCacheable(true)
-                    ->setCacheRegion('pull')
-                    ->getResult('Railcontent'),
+                'results' => $hydratedResults,
                 'filter_options' => $pullFilterFields ? $this->contentRepository->getFilterFields() : [],
             ]
         );
@@ -950,20 +967,24 @@ class ContentService
         $this->entityManager->flush();
 
         if ($parentId) {
-                $parent = $this->contentRepository->find($parentId);
+            $parent = $this->contentRepository->find($parentId);
 
-                $hierarchy = new ContentHierarchy();
-                $hierarchy->setParent($parent);
-                $hierarchy->setChild($content);
-                $this->entityManager->persist($hierarchy);
-                $this->entityManager->flush();
+            $hierarchy = new ContentHierarchy();
+            $hierarchy->setParent($parent);
+            $hierarchy->setChild($content);
+            $this->entityManager->persist($hierarchy);
+            $this->entityManager->flush();
         }
 
-        $this->entityManager->getCache('Railcontent')
+        $this->entityManager->getCache()
             ->evictEntityRegion(Content::class);
 
-        $this->entityManager->getCache('Railcontent')
-            ->evictEntity(Content::class, 'pull');
+        $this->entityManager->getCache()
+            ->getQueryCache('pull')
+            ->clear();
+
+        $this->entityManager->getCache()
+            ->evictQueryRegion('pull');
 
         event(new ContentCreated($content));
 
@@ -1020,7 +1041,7 @@ class ContentService
         }
 
         event(new ContentDeleted($content));
-      //  dd($content);
+
         $this->entityManager->remove($content);
         $this->entityManager->flush();
 
@@ -1096,7 +1117,9 @@ class ContentService
         $userPlaylistContents->setParameter('childIds', array_column($contents, 'id'))
             ->setParameter('userId', $userId)
             ->getQuery()
-            ->getResult('Railcontent');
+            ->getResult();
+
+        $userPlaylistContents = $this->resultsHydrator->hydrate($userPlaylistContents, $this->entityManager);
 
         foreach ($contents as $index => $content) {
             $contents[$index]['user_playlists'][$userId] = [];
@@ -1132,13 +1155,20 @@ class ContentService
         $content->setStatus(ContentService::STATUS_DELETED);
 
         event(new ContentSoftDeleted($content));
-       // dd($content);
+
         $this->entityManager->persist($content);
 
         $this->entityManager->flush();
 
         $this->entityManager->getCache()
             ->evictEntityRegion(Content::class);
+
+        $this->entityManager->getCache()
+            ->getQueryCache('pull')
+            ->clear();
+
+        $this->entityManager->getCache()
+            ->evictQueryRegion('pull');
 
         return $content;
     }
@@ -1213,9 +1243,9 @@ class ContentService
             $qb->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
-                ->getResult('Railcontent');
+                ->getResult();
 
-        return $results;
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
     /**

@@ -19,18 +19,23 @@ class DecoratedContentTransformer extends TransformerAbstract
 
         $extraProperties = [];
         $extra = $content->getExtra();
+
         if ($extra) {
             foreach ($extra as $item) {
                 $value = $content->getProperty($item);
-                if(is_array($value)) {
+
+                if (is_array($value)) {
+                    if (empty($value)) {
+                        $extraProperties[$item] = [];
+                    }
                     foreach ($value as $val) {
                         if (is_object($val)) {
-                            $extraProperties[$item][] =  $serializer->serialize(
+                            $extraProperties[$item][] = $serializer->serialize(
                                 $val,
                                 $entityManager->getClassMetadata(get_class($val))
                             );
-                        }else{
-                            $extraProperties[$item][] = $value;
+                        } else {
+                            $extraProperties[$item] = $value;
                         }
                     }
                 } else {
@@ -85,7 +90,6 @@ class DecoratedContentTransformer extends TransformerAbstract
         if ($content->getParent()) {
             $defaultIncludes[] = 'parent';
         }
-
 
         $this->setDefaultIncludes($defaultIncludes);
 
