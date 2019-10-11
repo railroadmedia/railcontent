@@ -11,13 +11,13 @@ interface UserProviderInterface
      * @param int $id
      * @return User|null
      */
-    public function getUserById(int $id): ?User;
+    public function getRailcontentUserById(int $id): ?User;
 
     /**
      * @param User $user
      * @return int
      */
-    public function getUserId(User $user): int;
+    public function getRailcontentUserId(User $user): int;
 
     /**
      * @param array $ids
@@ -35,7 +35,7 @@ interface UserProviderInterface
     /**
      * @return User|null
      */
-    public function getCurrentUser(): ?User;
+    public function getRailcontentCurrentUser(): ?User;
 
     /**
      * @return int|null
@@ -52,5 +52,5 @@ interface UserProviderInterface
      * @param string $password
      * @return User|null
      */
-    public function createUser(string $email, string $password): ?User;
+    public function createRailcontentUser(string $email, string $password): ?User;
 }

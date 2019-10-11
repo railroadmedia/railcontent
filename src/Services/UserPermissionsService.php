@@ -56,7 +56,7 @@ class UserPermissionsService
      */
     public function updateOrCeate($attributes, $values)
     {
-        $user = $this->userProvider->getUserById($attributes['user_id']);
+        $user = $this->userProvider->getRailcontentUserById($attributes['user_id']);
 
         if (array_key_exists('start_date', $values)) {
             $ttlEndDate = $values['start_date'];

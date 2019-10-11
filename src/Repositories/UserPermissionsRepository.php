@@ -23,7 +23,7 @@ class UserPermissionsRepository extends EntityRepository
         $qb = $this->createQueryBuilder('up');
 
         if ($userId) {
-            $user = app()->make(UserProviderInterface::class)->getUserById($userId);
+            $user = app()->make(UserProviderInterface::class)->getRailcontentUserById($userId);
             $qb->where('up.user = :user')
                 ->setParameter('user', $user)
             ->orderByColumn('up','expirationDate', 'asc');

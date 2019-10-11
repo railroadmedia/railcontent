@@ -80,7 +80,7 @@ class UserContentProgressService
      */
     public function getMostRecentByContentTypeUserState($contentType, $userId, $state)
     {
-        $user = $this->userProvider->getUserById($userId);
+        $user = $this->userProvider->getRailcontentUserById($userId);
 
         $alias = 'uc';
         $aliasContent = 'c';
@@ -154,7 +154,7 @@ class UserContentProgressService
 
         $content = $this->contentService->getById($contentId);
 
-        $user = $this->userProvider->getUserById($userId);
+        $user = $this->userProvider->getRailcontentUserById($userId);
 
         if (!empty($children)) {
 
@@ -225,7 +225,7 @@ class UserContentProgressService
         }
 
         $content = $this->contentService->getById($contentId);
-        $user = $this->userProvider->getUserById($userId);
+        $user = $this->userProvider->getRailcontentUserById($userId);
 
         $userContentProgress = $this->userContentRepository->getByUserContentState($user, $content);
 
@@ -289,7 +289,7 @@ class UserContentProgressService
     public function resetContent($contentId, $userId)
     {
         $content = $this->contentService->getById($contentId);
-        $user = $this->userProvider->getUserById($userId);
+        $user = $this->userProvider->getRailcontentUserById($userId);
 
         $userContentProgress = $this->userContentRepository->getByUserContentState($user, $content);
 
@@ -357,7 +357,7 @@ class UserContentProgressService
         }
 
         $content = $this->contentService->getById($contentId);
-        $user = $this->userProvider->getUserById($userId);
+        $user = $this->userProvider->getRailcontentUserById($userId);
         $state = ($progress == 100) ? self::STATE_COMPLETED : self::STATE_STARTED;
 
         $userContentProgress = $this->userContentRepository->getByUserContentState($user, $content);
@@ -504,7 +504,7 @@ class UserContentProgressService
      */
     public function getForUser($id)
     {
-        $user = $this->userProvider->getUserById($id);
+        $user = $this->userProvider->getRailcontentUserById($id);
 
         $alias = 'uc';
         $contentAlias = 'c';
@@ -541,7 +541,7 @@ class UserContentProgressService
         $orderByColumn = '-updated_on',
         $limit = 25
     ) {
-        $user = $this->userProvider->getUserById($id);
+        $user = $this->userProvider->getRailcontentUserById($id);
 
         $alias = 'uc';
         $aliasContent = 'c';
@@ -576,7 +576,7 @@ class UserContentProgressService
      */
     public function getLessonsForUserByType($id, $type, $state = null)
     {
-        $user = $this->userProvider->getUserById($id);
+        $user = $this->userProvider->getRailcontentUserById($id);
 
         $alias = 'uc';
         $aliasContent = 'c';
@@ -611,7 +611,7 @@ class UserContentProgressService
      */
     public function countLessonsForUserByTypeAndProgressState($id, $type, $state)
     {
-        $user = $this->userProvider->getUserById($id);
+        $user = $this->userProvider->getRailcontentUserById($id);
 
         $alias = 'uc';
         $aliasContent = 'c';

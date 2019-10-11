@@ -337,7 +337,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                 'user',
                 app()
                     ->make(UserProviderInterface::class)
-                    ->getUserById(auth()->id() ?? 0)
+                    ->getRailcontentUserById(auth()->id() ?? 0)
             );
 
         return $this;

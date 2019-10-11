@@ -107,7 +107,7 @@ class UserPermissionsJsonControllerOldStructureTest extends RailcontentTestCase
             1,
             [
                 'user' => $this->app->make(UserProvider::class)
-                    ->getUserById($userId),
+                    ->getRailcontentUserById($userId),
                 'permission' => $permission[0],
                 'startDate' => Carbon::now(),
                 'createdAt' => Carbon::now(),
@@ -214,7 +214,7 @@ class UserPermissionsJsonControllerOldStructureTest extends RailcontentTestCase
             1,
             [
                 'user' => $this->app->make(UserProvider::class)
-                    ->getUserById($user['id']),
+                    ->getRailcontentUserById($user['id']),
                 'permission' => $permission[0],
                 'startDate' => Carbon::now(),
                 'createdAt' => Carbon::now(),
@@ -253,7 +253,7 @@ class UserPermissionsJsonControllerOldStructureTest extends RailcontentTestCase
             1,
             [
                 'user' => $this->app->make(UserProvider::class)
-                    ->getUserById($user['id']),
+                    ->getRailcontentUserById($user['id']),
                 'permission' => $permissions[0],
                 'expirationDate' => Carbon::now()
                     ->addDays(10),
@@ -269,7 +269,7 @@ class UserPermissionsJsonControllerOldStructureTest extends RailcontentTestCase
             1,
             [
                 'user' => $this->app->make(UserProvider::class)
-                    ->getUserById($user['id']),
+                    ->getRailcontentUserById($user['id']),
                 'permission' => $permissions[1],
                 'expirationDate' => null,
                 'startDate' => Carbon::now(),
@@ -296,7 +296,7 @@ class UserPermissionsJsonControllerOldStructureTest extends RailcontentTestCase
             1,
             [
                 'user' => $this->app->make(UserProvider::class)
-                    ->getUserById($user['id']),
+                    ->getRailcontentUserById($user['id']),
                 'permission' => $permissions[0],
                 'expirationDate' => Carbon::now()
                     ->addDays(10),
@@ -313,7 +313,7 @@ class UserPermissionsJsonControllerOldStructureTest extends RailcontentTestCase
             1,
             [
                 'user' => $this->app->make(UserProvider::class)
-                    ->getUserById($user['id']),
+                    ->getRailcontentUserById($user['id']),
                 'permission' => $permissions[1],
                 'expirationDate' => null,
                 'startDate' => Carbon::now(),
@@ -347,7 +347,7 @@ class UserPermissionsJsonControllerOldStructureTest extends RailcontentTestCase
             1,
             [
                 'user' => $this->app->make(UserProvider::class)
-                    ->getUserById($user['id']),
+                    ->getRailcontentUserById($user['id']),
                 'permission' => $permissions[0],
                 'expirationDate' => Carbon::now()
                     ->subMonth(10),
@@ -363,7 +363,7 @@ class UserPermissionsJsonControllerOldStructureTest extends RailcontentTestCase
             1,
             [
                 'user' => $this->app->make(UserProvider::class)
-                    ->getUserById($user['id']),
+                    ->getRailcontentUserById($user['id']),
                 'permission' => $permissions[1],
                 'expirationDate' => null,
                 'startDate' => Carbon::now(),
@@ -479,7 +479,7 @@ class UserPermissionsJsonControllerOldStructureTest extends RailcontentTestCase
             1,
             [
                 'user' => $this->app->make(UserProvider::class)
-                    ->getUserById($userId),
+                    ->getRailcontentUserById($userId),
                 'permission' => $permission[0],
                 'startDate' => Carbon::now(),
                 'expirationDate' => null,

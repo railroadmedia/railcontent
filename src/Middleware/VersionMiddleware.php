@@ -18,7 +18,7 @@ class VersionMiddleware
         if ($request->has('version') && $request->get('version') == 'old') {
             ResponseService::$oldResponseStructure = true;
         } else {
-            ResponseService::$oldResponseStructure = false;
+            ResponseService::$oldResponseStructure = true;
         }
 
         return $next($request);

@@ -33,7 +33,7 @@ use Spatie\Fractal\Fractal;
 
 class ResponseService extends FractalResponseService
 {
-    public static $oldResponseStructure = false;
+    public static $oldResponseStructure = true;
 
     /**
      * @param $entityOrEntities

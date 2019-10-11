@@ -12,7 +12,7 @@ class UserProvider implements
 {
     CONST RESOURCE_TYPE = 'user';
 
-    public function getUserById(int $id): ?\Railroad\Railcontent\Entities\User
+    public function getRailcontentUserById(int $id): ?\Railroad\Railcontent\Entities\User
     {
         $user = DB::table('users')->find($id);
 
@@ -23,18 +23,18 @@ class UserProvider implements
         return null;
     }
 
-    public function getUserId(\Railroad\Railcontent\Entities\User $user): int
+    public function getRailcontentUserId(\Railroad\Railcontent\Entities\User $user): int
     {
         return $user->getId();
     }
 
-    public function getCurrentUser(): ?\Railroad\Railcontent\Entities\User
+    public function getRailcontentCurrentUser(): ?\Railroad\Railcontent\Entities\User
     {
         if (!auth()->id()) {
             return null;
         }
 
-        return $this->getUserById(auth()->id());
+        return $this->getRailcontentUserById(auth()->id());
     }
 
     public function getCurrentUserId(): ?int
@@ -68,7 +68,7 @@ class UserProvider implements
             method_exists($entity, $setterName)
         ) {
 
-            $user = $this->getUserById($data['data']['id']);
+            $user = $this->getRailcontentUserById($data['data']['id']);
 
             call_user_func([$entity, $setterName], $user);
         }
@@ -76,7 +76,7 @@ class UserProvider implements
         // else some exception should be thrown
     }
 
-    public function createUser(
+    public function createRailcontentUser(
         string $email,
         string $password
     ): ?\Railroad\Railcontent\Entities\User {
@@ -88,7 +88,7 @@ class UserProvider implements
                 'display_name' => $email,
             ]);
 
-        return $this->getUserById($userId);
+        return $this->getRailcontentUserById($userId);
     }
 
     public function getUserByLegacyId(int $id, string $brand): array

@@ -656,7 +656,7 @@ class RailcontentTestCase extends BaseTestCase
         if (array_key_exists('userId',$contentData)) {
             $contentData['user'] =
                 $this->app->make(UserProvider::class)
-                    ->getUserById($contentData['userId']);
+                    ->getRailcontentUserById($contentData['userId']);
             unset($contentData['userId']);
         }
 
@@ -707,7 +707,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $contentData['user'] =
             $this->app->make(UserProvider::class)
-                ->getUserById($contentData['userId']??$user['id']) ;
+                ->getRailcontentUserById($contentData['userId']??$user['id']) ;
 
         unset($contentData['userId']);
 
@@ -812,7 +812,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $commentData['user'] =
             $this->app->make(UserProvider::class)
-                ->getUserById($commentData['userId']??$user['id']) ;
+                ->getRailcontentUserById($commentData['userId']??$user['id']) ;
         $commentData['createdOn'] = Carbon::now();
         $commentData['deletedOn'] = null;
 
@@ -869,7 +869,7 @@ class RailcontentTestCase extends BaseTestCase
         }
         $commentData['user'] =
             $this->app->make(UserProvider::class)
-                ->getUserById($commentData['userId'] ?? 1);
+                ->getRailcontentUserById($commentData['userId'] ?? 1);
 
         unset ($commentData['userId']);
 
@@ -945,7 +945,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $commentLikeData['user'] =
             $this->app->make(UserProvider::class)
-                ->getUserById($commentLikeData['userId']??$user['id']) ;
+                ->getRailcontentUserById($commentLikeData['userId']??$user['id']) ;
 
         unset($commentLikeData['userId']);
 
@@ -992,7 +992,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $contentLikeData['user'] =
             $this->app->make(UserProvider::class)
-                ->getUserById($contentLikeData['userId']??$user['id']) ;
+                ->getRailcontentUserById($contentLikeData['userId']??$user['id']) ;
 
         unset($contentLikeData['userId']);
 
@@ -1025,7 +1025,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $userPlaylist['user'] =
             $this->app->make(UserProvider::class)
-                ->getUserById($userPlaylist['userId']??$user['id']) ;
+                ->getRailcontentUserById($userPlaylist['userId']??$user['id']) ;
 
         unset($userPlaylist['userId']);
 

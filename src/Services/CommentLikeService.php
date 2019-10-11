@@ -136,7 +136,7 @@ class CommentLikeService
      */
     public function create($commentId, $userId)
     {
-        $user = $this->userProvider->getUserById($userId);
+        $user = $this->userProvider->getRailcontentUserById($userId);
         $comment = $this->commentRepository->find($commentId);
 
         $commentLikes = $this->commentLikeRepository->getUserCommentLikes($user, $comment);
@@ -174,7 +174,7 @@ class CommentLikeService
      */
     public function delete($commentId, $userId)
     {
-        $user = $this->userProvider->getUserById($userId);
+        $user = $this->userProvider->getRailcontentUserById($userId);
         $comment = $this->commentRepository->find($commentId);
 
         $commentLikes = $this->commentLikeRepository->findOneBy(

@@ -69,7 +69,7 @@ class UserPlaylistService
      */
     public function updateOrCeate($userId, $type, $brand)
     {
-        $user = $this->userProvider->getUserById($userId);
+        $user = $this->userProvider->getRailcontentUserById($userId);
 
         $userPlaylist = $this->userPlaylistRepository->getUserPlaylist($user, $type, $brand);
 
@@ -94,7 +94,7 @@ class UserPlaylistService
      */
     public function userPlaylist($userId, $playlistType)
     {
-        $user = $this->userProvider->getUserById($userId);
+        $user = $this->userProvider->getRailcontentUserById($userId);
 
         $userPlaylist = $this->userPlaylistRepository->findOneBy(
             [
