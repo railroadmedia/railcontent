@@ -993,6 +993,7 @@ class ContentService
         if (!empty($userId)) {
             $data['data']['relationships']['user'] = [
                 'data' => [
+                    'type' => 'user',
                     'id' => $userId,
                 ],
             ];
