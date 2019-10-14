@@ -978,6 +978,14 @@ class ContentService
             ],
         ];
 
+        if (empty($brand)) {
+            $data['data']['attributes']['brand'] = config('railcontent.brand');
+        }
+
+        if (empty($language)) {
+            $data['data']['attributes']['language'] = cconfig('railcontent.default_language');
+        }
+        
         if (!empty($fields)) {
             $data['data']['attributes']['fields'] = $fields;
         }
