@@ -178,7 +178,16 @@ class ContentJsonController extends Controller
         $this->permissionPackageService->canOrThrow(auth()->id(), 'create.content');
 
         $content = $this->contentService->create(
-            $request->all()
+            $request->input('data.attributes.slug'),
+            $request->input('data.attributes.type'),
+            $request->input('data.attributes.status'),
+            $request->input('data.attributes.language', config('railcontent.default_language')),
+            $request->input('data.attributes.brand', config('railcontent.brand')),
+            $request->input('data.relationships.user.data.id'),
+            $request->input('data.attributes.published_on'),
+            $request->input('data.relationships.parent.data.id'),
+            $request->input('data.attributes.sort', 0),
+            $request->input('data.attributes.fields')
         );
 
         return ResponseService::content($content)

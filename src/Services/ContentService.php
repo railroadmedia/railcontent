@@ -587,9 +587,9 @@ class ContentService
                 ->createQueryBuilder($alias);
 
         $qb->join(
-                $alias . '.content',
-                config('railcontent.table_prefix') . 'content'
-            );
+            $alias . '.content',
+            config('railcontent.table_prefix') . 'content'
+        );
 
         $qb->where($alias . '.user = :userId')
             ->andWhere($alias . '.state = :state')
@@ -934,7 +934,16 @@ class ContentService
     }
 
     /**
-     * @param $data
+     * @param $slug
+     * @param $type
+     * @param $status
+     * @param $language
+     * @param $brand
+     * @param $userId
+     * @param $publishedOn
+     * @param null $parentId
+     * @param int $sort
+     * @param array $fields
      * @return Content
      * @throws DBALException
      * @throws ORMException
@@ -942,24 +951,48 @@ class ContentService
      * @throws ReflectionException
      */
     public function create(
-        $data
+        $slug,
+        $type,
+        $status,
+        $language,
+        $brand,
+        $userId,
+        $publishedOn,
+        $parentId = null,
+        $sort = 0,
+        $fields = []
     ) {
         $content = new Content();
 
-        $parentId = $data['data']['relationships']['parent']['data']['id'] ?? null;
-        unset($data['data']['relationships']['parent']);
+        $data = [
+            'data' => [
+                'attributes' => [
+                    'slug' => $slug,
+                    'type' => $type,
+                    'status' => $status,
+                    'published_on' => $publishedOn,
+                    'brand' => $brand,
+                    'language' => $language,
+                    'sort' => $sort,
+                ],
+            ],
+        ];
+
+        if (!empty($fields)) {
+            $data['data']['attributes']['fields'] = $fields;
+        }
+
+        if (!empty($userId)) {
+            $data['data']['relationships']['user'] = [
+                'data' => [
+                    'id' => $userId,
+                ],
+            ];
+        }
 
         $this->jsonApiHydrator->hydrate($content, $data);
 
         $data = $this->saveContentFields($data, $content);
-
-        if (!$content->getBrand()) {
-            $content->setBrand(config('railcontent.brand'));
-        }
-
-        if (!$content->getLanguage()) {
-            $content->setLanguage(config('railcontent.default_language'));
-        }
 
         $content->setParent(null);
 
