@@ -983,7 +983,7 @@ class ContentService
         }
 
         if (empty($language)) {
-            $data['data']['attributes']['language'] = cconfig('railcontent.default_language');
+            $data['data']['attributes']['language'] = config('railcontent.default_language');
         }
         
         if (!empty($fields)) {
