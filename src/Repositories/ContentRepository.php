@@ -287,7 +287,7 @@ class ContentRepository extends EntityRepository
             'state' => $state,
             'user' => app()
                 ->make(UserProviderInterface::class)
-                ->getRailcontentUserById($userId ?? auth()->id()),
+                ->getUserById($userId ?? auth()->id()),
         ];
 
         return $this;
@@ -304,7 +304,7 @@ class ContentRepository extends EntityRepository
             'state' => $state,
             'user' => app()
                 ->make(UserProviderInterface::class)
-                ->getRailcontentUserById($userId ?? auth()->id()),
+                ->getUserById($userId ?? auth()->id()),
         ];
 
         return $this;

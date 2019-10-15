@@ -16,7 +16,7 @@ class ContentFilterResultsEntity extends \ArrayObject
     {
         return ResponseService::content(
             $this->results(),
-            null,
+            $this->qb(),
             [],
             $this->filterOptions()
         )

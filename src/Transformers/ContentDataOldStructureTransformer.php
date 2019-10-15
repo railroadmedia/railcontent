@@ -13,10 +13,15 @@ class ContentDataOldStructureTransformer extends TransformerAbstract
      */
     public function transform(ContentData $contentData)
     {
+        $value = $contentData->getValue();
+        if(mb_check_encoding($value) == false){
+            $value = utf8_encode($value);
+        }
+
         return [
             'content_id' => $contentData->getContent()->getId(),
             'key' => $contentData->getKey(),
-            'value' => $contentData->getValue(),
+            'value' => $value,
             'position' => $contentData->getPosition(),
         ];
     }

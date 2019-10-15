@@ -77,7 +77,7 @@ class ContentJsonController extends Controller
      */
     public function index(Request $request)
     {
-        $this->permissionPackageService->canOrThrow(auth()->id(), 'pull.contents');
+        //$this->permissionPackageService->canOrThrow(auth()->id(), 'pull.contents');
 
         if ($request->has('statuses')) {
             ContentRepository::$availableContentStatues = $request->get('statuses');

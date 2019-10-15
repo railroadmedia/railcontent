@@ -121,7 +121,7 @@ class ContentLikeService
      */
     public function like($contentId, $userId)
     {
-        $user = $this->userProvider->getRailcontentUserById($userId);
+        $user = $this->userProvider->getUserById($userId);
         $content = $this->contentRepository->find($contentId);
 
         $alias = 'ul';
@@ -158,7 +158,7 @@ class ContentLikeService
      */
     public function unlike($contentId, $userId)
     {
-        $user = $this->userProvider->getRailcontentUserById($userId);
+        $user = $this->userProvider->getUserById($userId);
         $content = $this->contentRepository->find($contentId);
         $alias = 'ul';
 

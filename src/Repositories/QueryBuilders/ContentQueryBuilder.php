@@ -337,7 +337,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                 'user',
                 app()
                     ->make(UserProviderInterface::class)
-                    ->getRailcontentUserById(auth()->id() ?? 0)
+                    ->getCurrentUser()
             );
 
         return $this;
@@ -349,7 +349,8 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
      */
     public function restrictByUserAccess()
     {
-        $this->restrictPublishedOnDate()
+        $this
+            ->restrictPublishedOnDate()
             ->restrictStatuses()
             ->restrictBrand()
             ->restrictByPermissions();

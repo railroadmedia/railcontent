@@ -17,8 +17,19 @@ interface UserProviderInterface
      * @param User $user
      * @return int
      */
-    public function getRailcontentUserId(User $user): int;
+    public function getUserId($user): int;
 
+    /**
+     * @param int $id
+     * @return User|null
+     */
+    public function getUserById(int $id): ?User;
+
+    /**
+     * @param User $user
+     * @return int
+     */
+    public function getRailcontentUserId(User $user): int;
     /**
      * @param array $ids
      * @return User[]

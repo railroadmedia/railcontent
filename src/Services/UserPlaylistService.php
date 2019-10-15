@@ -13,6 +13,7 @@ use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Entities\UserPlaylist;
 use Railroad\Railcontent\Entities\UserPlaylistContent;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
+use Railroad\Railcontent\Repositories\UserPlaylistRepository;
 
 class UserPlaylistService
 {
@@ -69,7 +70,7 @@ class UserPlaylistService
      */
     public function updateOrCeate($userId, $type, $brand)
     {
-        $user = $this->userProvider->getRailcontentUserById($userId);
+        $user = $this->userProvider->getUserById($userId);
 
         $userPlaylist = $this->userPlaylistRepository->getUserPlaylist($user, $type, $brand);
 
@@ -92,16 +93,21 @@ class UserPlaylistService
      * @param $playlistType
      * @return object|null
      */
-    public function userPlaylist($userId, $playlistType)
+    public function userPlaylist($userId, $playlistType, $brand)
     {
-        $user = $this->userProvider->getRailcontentUserById($userId);
+        $user = $this->userProvider->getUserById($userId);
 
-        $userPlaylist = $this->userPlaylistRepository->findOneBy(
-            [
-                'user' => $user,
-                'type' => $playlistType,
-            ]
-        );
+        $qb = $this->userPlaylistRepository->createQueryBuilder('up');
+
+        $qb->where('up.user = :user')
+            ->andWhere('up.type = :type')
+            ->andWhere('up.brand = :brand')
+            ->setParameter('user', $user)
+            ->setParameter('type', $playlistType)
+            ->setParameter('brand', $brand)
+            ->orderByColumn('up', 'id', 'desc');
+
+        $userPlaylist = $qb->getQuery()->getResult();
 
         return $userPlaylist;
     }

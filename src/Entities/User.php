@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Entities;
 
 use Railroad\Doctrine\Contracts\UserEntityInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Railroad\Railcontent\Entities\Traits\DecoratedFields;
 
 /**
  * @ORM\Entity()
@@ -12,6 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User implements UserEntityInterface
 {
+    use DecoratedFields;
+
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
      * @var int

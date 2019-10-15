@@ -54,13 +54,13 @@ return [
         AddQueuedCookiesToResponse::class,
         StartSession::class,
         VerifyCsrfToken::class,
-        VersionMiddleware::class
+        VersionMiddleware::class,
     ],
 
     //middleware for API requests
     'api_middleware' => [
         RefreshToken::class,
-        VersionMiddleware::class
+        VersionMiddleware::class,
     ],
 
     // routes
@@ -94,19 +94,19 @@ return [
                 'scheduled' => [
                     'fields' => [
                         'title' => ['rules' => 'required|max:80'],
-                    ]
+                    ],
                 ],
                 'published' => [
                     //'number_of_children' => 'numeric|min:1',
                     'fields' => [
                         'topic' => ['rules' => 'required', 'can_have_multiple' => true],
-                       // 'instructor' => ['rules' => [$instructor_in_database, 'required'], 'can_have_multiple' => true],
+                        // 'instructor' => ['rules' => [$instructor_in_database, 'required'], 'can_have_multiple' => true],
                         'difficulty' => ['rules' => 'required|in:beginner,intermediate,advanced,all,1,2,3,4,5,6,7,8,9,10'],
                     ],
                     'data' => [
                         'resource_name' => ['rules' => 'max:40', 'can_have_multiple' => true],
                         'resource_url' => ['rules' => 'url', 'can_have_multiple' => true],
-                      //  'thumbnail_url' => ['rules' => ['required', 'url', $file_extension_must_be_jpg_or_png]],
+                        //  'thumbnail_url' => ['rules' => ['required', 'url', $file_extension_must_be_jpg_or_png]],
                         'description' => ['rules' => 'required|max:2500'],
                     ],
                 ],
@@ -127,7 +127,7 @@ return [
     'searchable_content_types' => ['recordings', 'courses'],
     'search_index_values' => [
         'high_value' => [
-            'content_attributes' => ['slug','title'],
+            'content_attributes' => ['slug', 'title'],
             'field_keys' => ['instructor:name'],
             'data_keys' => [],
         ],
@@ -178,7 +178,7 @@ return [
         Content::class => [
 
             // todo: this breaks because the decorator is not updated to implement the new hydration logic
-            ContentPermissionsDecorator::class
+            ContentPermissionsDecorator::class,
         ],
         ContentExercise::class => [
 
@@ -186,7 +186,7 @@ return [
         Comment::class => [
             // todo: this breaks because the decorator is not updated to implement the new hydration logic
             CommentLikesDecorator::class,
-        ]
+        ],
     ],
 
     // use collections
@@ -216,7 +216,6 @@ return [
             'namespace' => 'Railroad\Railcontent\Entities',
         ],
     ],
-
 
     'shows' => [
         'live' => [
@@ -376,7 +375,7 @@ return [
     'onboardingContentIds' => [],
 
     'route_middleware_logged_in_groups' => [
-        VersionMiddleware::class
+        VersionMiddleware::class,
     ],
     'route_prefix' => 'railcontent',
     'api_route_prefix' => 'api/railcontent',

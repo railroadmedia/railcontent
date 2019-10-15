@@ -656,7 +656,7 @@ class RailcontentTestCase extends BaseTestCase
         if (array_key_exists('userId',$contentData)) {
             $contentData['user'] =
                 $this->app->make(UserProvider::class)
-                    ->getRailcontentUserById($contentData['userId']);
+                    ->getUserById($contentData['userId']);
             unset($contentData['userId']);
         }
 
@@ -707,7 +707,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $contentData['user'] =
             $this->app->make(UserProvider::class)
-                ->getRailcontentUserById($contentData['userId']??$user['id']) ;
+                ->getUserById($contentData['userId']??$user['id']) ;
 
         unset($contentData['userId']);
 

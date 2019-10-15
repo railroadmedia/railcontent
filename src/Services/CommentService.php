@@ -129,7 +129,7 @@ class CommentService
             return -1;
         }
 
-        $user = $this->userProvider->getRailcontentUserById($userId);
+        $user = $this->userProvider->getUserById($userId);
 
         $comment = new Comment();
         $comment->setComment($commentText);
@@ -411,7 +411,7 @@ class CommentService
             );
 
         if ($orderByColumn == $alias . ".mine") {
-            $user = $this->userProvider->getRailcontentUserById(auth()->id());
+            $user = $this->userProvider->getUserById(auth()->id());
 
             CommentRepository::$availableUserId = $currentUserId;
             $orderByColumn = $alias . '.createdOn';

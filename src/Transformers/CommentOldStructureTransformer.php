@@ -2,8 +2,10 @@
 
 namespace Railroad\Railcontent\Transformers;
 
+use Doctrine\ORM\EntityManager;
 use League\Fractal\Resource\Collection;
 use League\Fractal\TransformerAbstract;
+use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\Comment;
 
 class CommentOldStructureTransformer extends TransformerAbstract
@@ -14,6 +16,37 @@ class CommentOldStructureTransformer extends TransformerAbstract
      */
     public function transform(Comment $comment)
     {
+        $entityManager = app()->make(EntityManager::class);
+
+        $serializer = new BasicEntitySerializer();
+
+        $extraProperties = [];
+        $extra = $comment->getExtra();
+
+        if ($extra) {
+            foreach ($extra as $item) {
+                $value = $comment->getProperty($item);
+
+                if (is_array($value)) {
+                    if (empty($value)) {
+                        $extraProperties[$item] = [];
+                    }
+                    foreach ($value as $val) {
+                        if (is_object($val)) {
+                            $extraProperties[$item][] = $serializer->serialize(
+                                $val,
+                                $entityManager->getClassMetadata(get_class($val))
+                            );
+                        } else {
+                            $extraProperties[$item] = $value;
+                        }
+                    }
+                } else {
+                    $extraProperties[$item] = $value;
+                }
+            }
+        }
+
         $defaultIncludes = [];
 
         if (count($comment->getLikes()) > 0) {
@@ -26,26 +59,43 @@ class CommentOldStructureTransformer extends TransformerAbstract
 
         $this->setDefaultIncludes($defaultIncludes);
 
-        return [
-            'id' => $comment->getId(),
-            'comment' => $comment->getComment(),
-            'content_id' => $comment->getContent()
-                ->getId(),
-            'parent_id' => ($comment->getParent()) ?
-                $comment->getParent()
-                    ->getId() : null,
-            'user_id' => $comment->getUser()
-                ->getId(),
-            'display_name' => $comment->getTemporaryDisplayName(),
-            'created_on' => $comment->getCreatedOn()
-                ->toDateTimeString(),
-            'deleted_on' => ($comment->getDeletedAt()) ?
-                $comment->getDeletedAt()
-                    ->toDateTimeString() : null,
-            'like_count' => ($comment->getLikes())?
-                $comment->getLikes()->count():0,
-            'is_liked' => ($comment->getProperty('is_liked'))?$comment->getProperty('is_liked') : false
-        ];
+        $value = $comment->getComment();
+        if(mb_check_encoding($value) == false){
+            $value = utf8_encode($value);
+        }
+
+        return array_merge(
+            [
+                'id' => $comment->getId(),
+                'comment' => $value,
+                'content_id' => $comment->getContent()
+                    ->getId(),
+                'parent_id' => ($comment->getParent()) ?
+                    $comment->getParent()
+                        ->getId() : null,
+                'user_id' => $comment->getUser()
+                    ->getId(),
+                'display_name' => $comment->getTemporaryDisplayName(),
+                'created_on' => $comment->getCreatedOn()
+                    ->toDateTimeString(),
+                'deleted_on' => ($comment->getDeletedAt()) ?
+                    $comment->getDeletedAt()
+                        ->toDateTimeString() : null,
+                'like_count' => ($comment->getLikes()) ?
+                    $comment->getLikes()
+                        ->count() : 0,
+                'is_liked' => ($comment->getProperty('is_liked')) ? $comment->getProperty('is_liked') : false,
+                'user' => [
+                    "display_name" => $comment->getUser()
+                        ->getDisplayName(),
+                    "fields.profile_picture_image_url" => $comment->getUser()
+                        ->getAvatar(),
+                    "xp" => $comment->getUser()
+                        ->getProperty('xp'),
+                ],
+            ],
+            $extraProperties
+        );
     }
 
     /**

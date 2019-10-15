@@ -55,20 +55,31 @@ class ResponseService extends FractalResponseService
                 foreach ($filterOption as $key2 => $filter) {
                     if ($filter instanceof Content) {
                         $transformer = new ContentOldStructureTransformer();
-                        $filterOption[$key2] = $transformer->transform($filter);
+                        $arrayValue = $transformer->transform($filter);
+                        $arrayValue['fields'] =
+                            $transformer->includeFields($filter)
+                                ->getData();
+                        $arrayValue['data'] =
+                            $transformer->includeData($filter)
+                                ->getData()
+                                ->getValues();
+                        $filterOption[$key2] = $arrayValue;
                     }
                 }
                 $filters[$key] = $filterOption;
             }
 
-            return self::create(
+            $results = self::create(
                 $entityOrEntities,
                 'content',
                 new ContentOldStructureTransformer(),
                 new OldStyleSerializer(),
                 $queryBuilder
             )
-                ->addMeta((count($filters) > 0) ? ['filterOption' => $filters] : []);
+                ->parseIncludes($includes)
+                ->addMeta((count($filters) > 0) ? ['filterOptions' => $filters] : []);
+
+            return $results;
         }
 
         return self::create(
@@ -79,7 +90,7 @@ class ResponseService extends FractalResponseService
             $queryBuilder
         )
             ->parseIncludes($includes)
-            ->addMeta((count($filterOptions) > 0) ? ['filterOption' => $filterOptions] : []);
+            ->addMeta((count($filterOptions) > 0) ? ['filterOptions' => $filterOptions] : []);
     }
 
     /**

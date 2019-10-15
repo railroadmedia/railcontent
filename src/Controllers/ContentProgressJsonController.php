@@ -6,6 +6,7 @@ use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Illuminate\Routing\Controller;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Requests\UserContentRequest;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Services\UserContentProgressService;
@@ -26,14 +27,21 @@ class ContentProgressJsonController extends Controller
     private $userContentService;
 
     /**
+     * @var UserProviderInterface
+     */
+    private $userProvider;
+
+    /**
      * ContentProgressJsonController constructor.
      *
      * @param UserContentProgressService $userContentService
      */
     public function __construct(
-        UserContentProgressService $userContentService
+        UserContentProgressService $userContentService,
+    UserProviderInterface $userProvider
     ) {
         $this->userContentService = $userContentService;
+        $this->userProvider = $userProvider;
     }
 
     /** Start a content for the authenticated user
@@ -69,9 +77,9 @@ class ContentProgressJsonController extends Controller
      */
     public function completeContent(UserContentRequest $request)
     {
-        $response = $this->userContentService->completeContent(
+         $response = $this->userContentService->completeContent(
             $request->input('data.relationships.content.data.id'),
-            auth()->id()
+            $this->userProvider->getCurrentUserId()
         );
 
         return ResponseService::empty(201)
