@@ -77,9 +77,10 @@ class ContentProgressJsonController extends Controller
      */
     public function completeContent(UserContentRequest $request)
     {
+
          $response = $this->userContentService->completeContent(
             $request->input('data.relationships.content.data.id'),
-            $this->userProvider->getCurrentUserId()
+            auth()->id()
         );
 
         return ResponseService::empty(201)

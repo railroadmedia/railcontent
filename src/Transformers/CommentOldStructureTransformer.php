@@ -78,7 +78,7 @@ class CommentOldStructureTransformer extends TransformerAbstract
                 'display_name' => $comment->getTemporaryDisplayName(),
                 'created_on' => $comment->getCreatedOn()
                     ->toDateTimeString(),
-                'deleted_on' => ($comment->getDeletedAt()) ?
+                'deleted_at' => ($comment->getDeletedAt()) ?
                     $comment->getDeletedAt()
                         ->toDateTimeString() : null,
                 'like_count' => ($comment->getLikes()) ?
@@ -93,6 +93,7 @@ class CommentOldStructureTransformer extends TransformerAbstract
                     "xp" => $comment->getUser()
                         ->getProperty('xp'),
                 ],
+                'replies' => []
             ],
             $extraProperties
         );
