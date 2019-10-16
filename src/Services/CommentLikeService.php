@@ -220,4 +220,32 @@ class CommentLikeService
         }
         return $results;
     }
+
+    /**
+     * @param $commentId
+     * @param int $limit
+     * @param int $page
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @return mixed
+     */
+    public function getCommentLikesPaginated(
+        $commentId,
+        $limit = 25,
+        $page = 1,
+        $orderByColumn = 'created_on',
+        $orderByDirection = 'desc'
+    ) {
+
+        $qb =
+            $this->commentLikeRepository->createQueryBuilder('cl')
+                ->join('cl.comment', 'c');
+        $qb
+            ->where('cl.comment = :commentId')
+            ->setParameter('commentId', $commentId);
+
+        return
+            $qb->getQuery()
+                ->getResult('Railcontent');
+    }
 }

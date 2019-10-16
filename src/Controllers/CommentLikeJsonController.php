@@ -6,6 +6,7 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Illuminate\Http\Request;
 use Railroad\Railcontent\Requests\CommentLikeRequest;
 use Railroad\Railcontent\Requests\CommentUnLikeRequest;
 use Railroad\Railcontent\Services\CommentLikeService;
@@ -35,6 +36,13 @@ class CommentLikeJsonController extends Controller
         CommentLikeService $commentLikeService
     ) {
         $this->commentLikeService = $commentLikeService;
+    }
+
+    public function index(Request $request, $id)
+    {
+        $commentLikes = $this->commentLikeService->getCommentLikesPaginated($id, $request->get('limit', 10), $request->get('page', 1));
+
+        return ResponseService::commentLike($commentLikes);
     }
 
     /** Authenticated user like a comment.

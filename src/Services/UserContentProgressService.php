@@ -438,7 +438,7 @@ class UserContentProgressService
                     }
                 }
                 if ($complete && !$parent->isCompleted() && in_array($parent->getType(), $allowedTypesForCompleted)) {
-                    $this->completeContent($parent->id(), $user->getId());
+                    $this->completeContent($parent->getId(), $user->getId());
                 }
             }
 

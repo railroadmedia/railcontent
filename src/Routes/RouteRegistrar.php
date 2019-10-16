@@ -201,6 +201,11 @@ class RouteRegistrar
                 )
                     ->name('comments.linked');
 
+                $this->router->get(
+                    'comment-likes/{id}',
+                    CommentLikeJsonController::class . '@index'
+                );
+
                 $this->router->put(
                     'comment-like/{id}',
                     CommentLikeJsonController::class . '@store'

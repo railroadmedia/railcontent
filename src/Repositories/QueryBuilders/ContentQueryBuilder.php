@@ -208,8 +208,8 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                             ->getFieldName($requiredFieldData['name']),
                         'p'
                     )
-                        ->andWhere('p ' . $requiredFieldData['operator'] . ' (:value' . $index . ')')
-                        ->setParameter('value' . $index, $requiredFieldData['value']);
+                        ->andWhere('p.'.$requiredFieldData['name'] . $requiredFieldData['operator'] . ' (:value' . $index . ')')
+                        ->setParameter('value' . $index,  $requiredFieldData['value'] );
                 }
             }
         }

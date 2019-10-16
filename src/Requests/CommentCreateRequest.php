@@ -48,6 +48,7 @@ class CommentCreateRequest extends FormRequest
         parent::prepareForValidation();
 
         $all = $this->all();
+        $oldStyle = [];
 
         if (ResponseService::$oldResponseStructure) {
             $oldStyle ['data']['type'] = 'comment';

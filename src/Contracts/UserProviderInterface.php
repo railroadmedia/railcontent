@@ -49,6 +49,11 @@ interface UserProviderInterface
     public function getRailcontentCurrentUser(): ?User;
 
     /**
+     * @return User|null
+     */
+    public function getCurrentUser(): ?User;
+
+    /**
      * @return int|null
      */
     public function getCurrentUserId(): ?int;
