@@ -45,17 +45,16 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
     : array {
 
         foreach ($entities as $entity) {
-            if ($entity->getVideo() &&
-                ($entity->getVideo()
-                    ->getVimeoVideoId())) {
+            if (($entity->getVideo()  && $entity->getVideo()->getVimeoVideoId() ) || $entity->getQnaVideo() && ($entity->getQnaVideo()->getVimeoVideoId())) {
 
                 $video = $entity->getVideo();
                 $vimeoVideoId = $video->getVimeoVideoId();
 
+
                 // cache
                 $response = $this->cache->get(self::CACHE_KEY_PREFIX . $vimeoVideoId);
 
-                $properties = $response['body']['files'] ?? [];
+                $files = $response['body']['files'] ?? [];
 
                 $posterImageUrl = $response['body']['pictures']['sizes']['720']['link'] ?? '';
 
@@ -81,22 +80,29 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
 
                         if (!empty($response['body']['files'])) {
                             $posterImageUrl = $response['body']['pictures']['sizes']['720']['link'] ?? '';
-                            foreach ($response['body']['files'] as $fileData) {
-                                if (isset($fileData['height'])) {
-                                    $properties[] = [
-                                        'file' => $fileData['link_secure'],
-                                        'width' => $fileData['width'],
-                                        'height' => $fileData['height'],
-                                    ];
-
-                                    $response['body']['pictures']['sizes'] = array_combine(
-                                        array_column($response['body']['pictures']['sizes'], 'height'),
-                                        $response['body']['pictures']['sizes']
-                                    );
-
-                                }
-                            }
+                            $files = $response['body']['files'] ;
                         }
+                    }
+                }
+
+                foreach ($files as $fileData) {
+                    if (isset($fileData['height'])) {
+                        $properties[] = [
+                            'file' => $fileData['link_secure'],
+                            'width' => $fileData['width'],
+                            'height' => $fileData['height'],
+                        ];
+
+                        $response['body']['pictures']['sizes'] = array_combine(
+                            array_column($response['body']['pictures']['sizes'], 'height'),
+                            $response['body']['pictures']['sizes']
+                        );
+
+                    }
+
+                    if($fileData['quality'] === 'hls'){
+                        $entity->createProperty('hlsManifestUrl', $fileData['link_secure']);
+
                     }
                 }
 
@@ -104,8 +110,9 @@ class ContentVimeoVideoDecorator implements DecoratorInterface
                     'video_poster_image_url',
                     $posterImageUrl ?? ''
                 );
+
                 $entity->createProperty(
-                    'vimeo_video_playback_endpoints',
+                    'video_playback_endpoints',
                     $properties
                 );
             }
