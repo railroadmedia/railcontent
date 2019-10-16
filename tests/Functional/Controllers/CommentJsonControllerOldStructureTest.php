@@ -455,7 +455,7 @@ class CommentJsonControllerOldStructureTest extends RailcontentTestCase
 
         $this->assertEquals(
             count($comments),
-            $response->decodeResponseJson('meta')['pagination']['total']
+            $response->decodeResponseJson('meta')['totalResults']
         );
 
         $data = $response->decodeResponseJson()['data'];
@@ -577,7 +577,7 @@ class CommentJsonControllerOldStructureTest extends RailcontentTestCase
         );
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(1, $response->decodeResponseJson('meta')['pagination']['total']);
+        $this->assertEquals(1,  $response->decodeResponseJson('meta')['totalResults']);
     }
 
     public function test_pull_comments_filtered_by_content_type()
@@ -718,7 +718,7 @@ class CommentJsonControllerOldStructureTest extends RailcontentTestCase
         );
 
         $this->assertEquals(3, count($response->decodeResponseJson('data')));
-        $this->assertEquals(($commentsNr + 1), $response->decodeResponseJson('meta')['pagination']['total']);
+        $this->assertEquals(($commentsNr + 1),  $response->decodeResponseJson('meta')['totalResults']);
     }
 
     public function test_pull_comment_with_replies()

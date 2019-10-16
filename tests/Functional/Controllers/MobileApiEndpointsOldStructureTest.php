@@ -51,9 +51,8 @@ class MobileApiEndpointsOldStructureTest extends RailcontentTestCase
         );
 
         $this->assertNotEquals([], $response->decodeResponseJson('data'));
-        $this->assertEquals($limit, $response->decodeResponseJson('meta')['pagination']['count']);
-        $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['pagination']['total']);
-        $this->assertArrayHasKey('filterOption', $response->decodeResponseJson('meta'));
+        $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['totalResults']);
+        $this->assertArrayHasKey('filterOptions', $response->decodeResponseJson('meta'));
     }
 
     public function test_get_all_content_not_released()
@@ -94,9 +93,8 @@ class MobileApiEndpointsOldStructureTest extends RailcontentTestCase
         );
 
         $this->assertNotEquals([], $response->decodeResponseJson('data'));
-        $this->assertEquals($limit, $response->decodeResponseJson('meta')['pagination']['count']);
-        $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['pagination']['total']);
-        $this->assertArrayHasKey('filterOption', $response->decodeResponseJson('meta'));
+        $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['totalResults']);
+        $this->assertArrayHasKey('filterOptions', $response->decodeResponseJson('meta'));
     }
 
     public function test_get_all_content_filtered()
@@ -168,9 +166,8 @@ class MobileApiEndpointsOldStructureTest extends RailcontentTestCase
         );
 
         $this->assertEquals([], $response->decodeResponseJson('data'));
-        $this->assertEquals(0, $response->decodeResponseJson('meta')['pagination']['count']);
-        $this->assertEquals(0, $response->decodeResponseJson('meta')['pagination']['total']);
-        $this->assertArrayNotHasKey('filterOption', $response->decodeResponseJson('meta'));
+        $this->assertEquals(0, $response->decodeResponseJson('meta')['totalResults']);
+        $this->assertArrayNotHasKey('filterOptions', $response->decodeResponseJson('meta'));
     }
 
     public function test_get_in_progress_no_content()
@@ -194,9 +191,8 @@ class MobileApiEndpointsOldStructureTest extends RailcontentTestCase
         );
 
         $this->assertEquals([], $response->decodeResponseJson('data'));
-        $this->assertEquals(0, $response->decodeResponseJson('meta')['pagination']['count']);
-        $this->assertEquals(0, $response->decodeResponseJson('meta')['pagination']['total']);
-        $this->assertArrayNotHasKey('filterOption', $response->decodeResponseJson('meta'));
+        $this->assertEquals(0, $response->decodeResponseJson('meta')['totalResults']);
+        $this->assertArrayNotHasKey('filterOptions', $response->decodeResponseJson('meta'));
     }
 
     public function test_get_in_progress_content()
@@ -241,11 +237,10 @@ class MobileApiEndpointsOldStructureTest extends RailcontentTestCase
         );
 
         $this->assertNotEquals([], $response->decodeResponseJson('data'));
-        $this->assertEquals(10, $response->decodeResponseJson('meta')['pagination']['count']);
-        $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['pagination']['total']);
-        $this->assertArrayHasKey('filterOption', $response->decodeResponseJson('meta'));
-        $this->assertArrayHasKey('difficulty', $response->decodeResponseJson('meta')['filterOption']);
-        $this->assertArrayHasKey('content_type', $response->decodeResponseJson('meta')['filterOption']);
+        $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['totalResults']);
+        $this->assertArrayHasKey('filterOptions', $response->decodeResponseJson('meta'));
+        $this->assertArrayHasKey('difficulty', $response->decodeResponseJson('meta')['filterOptions']);
+        $this->assertArrayHasKey('content_type', $response->decodeResponseJson('meta')['filterOptions']);
     }
 
     public function test_get_in_progress_content_filtered_without_results()
@@ -290,8 +285,7 @@ class MobileApiEndpointsOldStructureTest extends RailcontentTestCase
         );
 
         $this->assertEquals([], $response->decodeResponseJson('data'));
-        $this->assertEquals(0, $response->decodeResponseJson('meta')['pagination']['count']);
-        $this->assertEquals(0, $response->decodeResponseJson('meta')['pagination']['total']);
+        $this->assertEquals(0, $response->decodeResponseJson('meta')['totalResults']);
     }
 
     public function test_get_in_progress_content_filtered_with_results()
@@ -336,8 +330,8 @@ class MobileApiEndpointsOldStructureTest extends RailcontentTestCase
         );
 
         $this->assertNotEquals([], $response->decodeResponseJson('data'));
-        $this->assertEquals(10, $response->decodeResponseJson('meta')['pagination']['count']);
-        $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['pagination']['total']);
+
+        $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['totalResults']);
 
         foreach ($response->decodeResponseJson('data') as $item) {
             $this->assertTrue(
@@ -397,8 +391,8 @@ class MobileApiEndpointsOldStructureTest extends RailcontentTestCase
         );
 
         $this->assertNotEquals([], $response->decodeResponseJson('data'));
-        $this->assertEquals(2, $response->decodeResponseJson('meta')['pagination']['count']);
-        $this->assertEquals(2, $response->decodeResponseJson('meta')['pagination']['total']);
+
+        $this->assertEquals(2, $response->decodeResponseJson('meta')['totalResults']);
 
         $homeStaffPickRating = 0;
         foreach ($response->decodeResponseJson('data') as $item) {
@@ -455,8 +449,7 @@ class MobileApiEndpointsOldStructureTest extends RailcontentTestCase
         );
 
         $this->assertNotEquals([], $response->decodeResponseJson('data'));
-        $this->assertEquals(2, $response->decodeResponseJson('meta')['pagination']['count']);
-        $this->assertEquals(2, $response->decodeResponseJson('meta')['pagination']['total']);
+        $this->assertEquals(2, $response->decodeResponseJson('meta')['totalResults']);
 
         $staffPickRating = 0;
         foreach ($response->decodeResponseJson('data') as $item) {
@@ -638,7 +631,7 @@ class MobileApiEndpointsOldStructureTest extends RailcontentTestCase
             'GET',
             'api/railcontent/my-list'
         );
-
+dd($response);
         $this->assertEquals(200, $response->status());
         $this->assertEquals(2, count($response->decodeResponseJson('data')));
     }

@@ -55,7 +55,7 @@ class UserProvider implements
      * @param \Railroad\Railcontent\Entities\User $user
      * @return int
      */
-    public function getUserId(\Railroad\Railcontent\Entities\User $user): int
+    public function getUserId($user): int
     {
         return $user->getId();
     }
@@ -72,6 +72,18 @@ class UserProvider implements
         return $this->getRailcontentUserById(auth()->id());
     }
 
+
+    /**
+     * @return \Railroad\Railcontent\Entities\User|null
+     */
+    public function getCurrentUser(): ?\Railroad\Railcontent\Entities\User
+    {
+        if (!auth()->id()) {
+            return null;
+        }
+
+        return $this->getRailcontentUserById(auth()->id());
+    }
     /**
      * @return int|null
      */

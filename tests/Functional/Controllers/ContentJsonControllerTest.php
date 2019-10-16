@@ -922,11 +922,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $this->assertEquals($statues[0], $data['attributes']['status']);
         }
 
-        $this->assertArrayHasKey('filterOption', $response->decodeResponseJson('meta'));
-        $this->assertArrayHasKey('instructor', $response->decodeResponseJson('meta')['filterOption']);
-        $this->assertArrayHasKey('difficulty', $response->decodeResponseJson('meta')['filterOption']);
-        $this->assertArrayHasKey('style', $response->decodeResponseJson('meta')['filterOption']);
-        $this->assertArrayHasKey('artist', $response->decodeResponseJson('meta')['filterOption']);
+        $this->assertArrayHasKey('filterOptions', $response->decodeResponseJson('meta'));
+        $this->assertArrayHasKey('instructor', $response->decodeResponseJson('meta')['filterOptions']);
+        $this->assertArrayHasKey('difficulty', $response->decodeResponseJson('meta')['filterOptions']);
+        $this->assertArrayHasKey('style', $response->decodeResponseJson('meta')['filterOptions']);
+        $this->assertArrayHasKey('artist', $response->decodeResponseJson('meta')['filterOptions']);
     }
 
     public function test_getByParentId_when_parentId_not_exist()

@@ -786,7 +786,7 @@ class ContentProgressJsonControllerOldStructureTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(2, $firstRequest->decodeResponseJson('meta')['pagination']['total']);
+        $this->assertEquals(2, $firstRequest->decodeResponseJson('meta')['totalResults']);
 
         $this->put(
             'railcontent/reset',
@@ -803,7 +803,7 @@ class ContentProgressJsonControllerOldStructureTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(1, $secondRequest->decodeResponseJson('meta')['pagination']['total']);
+        $this->assertEquals(1, $secondRequest->decodeResponseJson('meta')['totalResults']);
     }
 
 }

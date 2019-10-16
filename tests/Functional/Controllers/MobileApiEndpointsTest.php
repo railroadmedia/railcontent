@@ -51,9 +51,8 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         );
 
         $this->assertNotEquals([], $response->decodeResponseJson('data'));
-        $this->assertEquals($limit, $response->decodeResponseJson('meta')['pagination']['count']);
-        $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['pagination']['total']);
-        $this->assertArrayHasKey('filterOption', $response->decodeResponseJson('meta'));
+        $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['totalResults']);
+        $this->assertArrayHasKey('filterOptions', $response->decodeResponseJson('meta'));
     }
 
     public function test_get_all_content_not_released()

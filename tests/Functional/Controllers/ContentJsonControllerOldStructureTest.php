@@ -164,7 +164,6 @@ class ContentJsonControllerOldStructureTest extends RailcontentTestCase
             'completed' => false,
             'started' => false,
             'progress_percent' => 0,
-            'user_progress' => [],
 
         ];
         $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
@@ -685,11 +684,11 @@ class ContentJsonControllerOldStructureTest extends RailcontentTestCase
             $this->assertEquals($statues[0], $data['status']);
         }
 
-        $this->assertArrayHasKey('filterOption', $response->decodeResponseJson('meta'));
-        $this->assertArrayHasKey('instructor', $response->decodeResponseJson('meta')['filterOption']);
-        $this->assertArrayHasKey('difficulty', $response->decodeResponseJson('meta')['filterOption']);
-        $this->assertArrayHasKey('style', $response->decodeResponseJson('meta')['filterOption']);
-        $this->assertArrayHasKey('artist', $response->decodeResponseJson('meta')['filterOption']);
+        $this->assertArrayHasKey('filterOptions', $response->decodeResponseJson('meta'));
+        $this->assertArrayHasKey('instructor', $response->decodeResponseJson('meta')['filterOptions']);
+        $this->assertArrayHasKey('difficulty', $response->decodeResponseJson('meta')['filterOptions']);
+        $this->assertArrayHasKey('style', $response->decodeResponseJson('meta')['filterOptions']);
+        $this->assertArrayHasKey('artist', $response->decodeResponseJson('meta')['filterOptions']);
     }
 
     public function test_getByParentId_when_parentId_not_exist()
@@ -1281,23 +1280,25 @@ class ContentJsonControllerOldStructureTest extends RailcontentTestCase
                 'publishedOn' => Carbon::now(),
             ]
         );
-
+$id2 = $contents[2]->getId();
+$id1 = $contents[1]->getId();
+$id5 = $contents[5]->getId();
         $firstRequest = $this->call(
             'GET',
             'railcontent/content/get-by-ids',
-            ['ids' => $contents[2]->getId() . ',' . $contents[1]->getId() . ',' . $contents[5]->getId()]
+            ['ids' => $id2 . ',' . $id1 . ',' . $id5]
         );
 
         $this->assertEquals(3, count($firstRequest->decodeResponseJson('data')));
 
-        $id = $contents[1]->getId();
+       // $id = $contents[1]->getId();
 
-        $response = $this->call('DELETE', 'railcontent/content/' . $id);
+        $response = $this->call('DELETE', 'railcontent/content/' . $id1);
 
         $secondRequest = $this->call(
             'GET',
             'railcontent/content/get-by-ids',
-            ['ids' => $contents[2]->getId() . ',' . $id . ',' . $contents[5]->getId()]
+            ['ids' => $id2 . ',' . $id1 . ',' . $id5]
         );
 
         $this->assertEquals(2, count($secondRequest->decodeResponseJson('data')));
