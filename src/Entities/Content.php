@@ -103,7 +103,7 @@ class Content extends ArrayExpressible
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\UserContentProgress", mappedBy="content",
-     *     indexBy="user")
+     *     indexBy="user", fetch="EAGER")
      */
     private $userProgress;
 
@@ -291,7 +291,7 @@ class Content extends ArrayExpressible
     /**
      * Sets publishedOn.
      *
-     * @param  DateTime $publishedOn
+     * @param DateTime $publishedOn
      * @return $this
      */
     public function setPublishedOn($publishedOn)
@@ -314,7 +314,7 @@ class Content extends ArrayExpressible
     /**
      * Sets createdOn.
      *
-     * @param  string $createdOn
+     * @param string $createdOn
      * @return $this
      */
     public function setCreatedOn($createdOn)
@@ -325,7 +325,7 @@ class Content extends ArrayExpressible
     /**
      * Sets archivedOn.
      *
-     * @param  string $archivedOn
+     * @param string $archivedOn
      * @return $this
      */
     public function setArchivedOn($archivedOn)
@@ -364,7 +364,7 @@ class Content extends ArrayExpressible
      */
     public function getParent()
     {
-        if(($this->parent)&&(!$this->parent->isEmpty())) {
+        if (($this->parent) && (!$this->parent->isEmpty())) {
             $parent = $this->parent->filter(
                 function (ContentHierarchy $hierarchy) {
                     return $hierarchy->getParent()
@@ -384,9 +384,9 @@ class Content extends ArrayExpressible
      */
     public function setParent($parent)
     {
-       if($parent) {
-           $this->parent[] = $parent;
-       }
+        if ($parent) {
+            $this->parent[] = $parent;
+        }
 
         return $this;
     }
@@ -433,7 +433,13 @@ class Content extends ArrayExpressible
      */
     public function isCompleted()
     {
-        return $this->completed;
+        $userProgress = $this->userProgress[auth()->id()];
+        if (!$userProgress) {
+            return false;
+        }
+        return ($userProgress->getState() == 'completed') ? true : false;
+
+        //return $this->completed;
     }
 
     /**
@@ -496,7 +502,7 @@ class Content extends ArrayExpressible
     {
         $this->progressPercent = $progressPercent;
 
-        if($progressPercent == 100) {
+        if ($progressPercent == 100) {
             $this->setCompleted(true);
         }
     }
@@ -506,7 +512,11 @@ class Content extends ArrayExpressible
      */
     public function getProgressPercent()
     {
-        return $this->progressPercent;
+        $userProgress = $this->userProgress[auth()->id()];
+        if (!$userProgress) {
+            return 0;
+        }
+        return $userProgress->getProgressPercent();
     }
 
     /**

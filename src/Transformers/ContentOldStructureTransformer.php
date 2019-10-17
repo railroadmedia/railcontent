@@ -165,6 +165,23 @@ class ContentOldStructureTransformer extends TransformerAbstract
                     $entityManager->getClassMetadata(get_class($content))
                         ->getAssociationNames()
                 )) {
+                    if($value instanceof Content){
+                        $this->includeFields($value);
+                        $arrayValue = $this->transform($value);
+
+                        $arrayValue['fields'] = $this->includeFields($value)->getData();
+                        $arrayValue['data'] = $this->includeData($value)->getData();
+
+                        $fields[] = [
+                            'id' => rand(),
+                            'content_id' => $content->getId(),
+                            'key' => $field,
+                            'value' => $arrayValue,
+                            'type' => 'content_id',
+                            'position' => 1,
+                        ];
+                    }
+
                     $instructor = call_user_func([$value, $getterName]);
                     if ($instructor) {
                         $this->includeFields($instructor);
@@ -172,7 +189,6 @@ class ContentOldStructureTransformer extends TransformerAbstract
 
                         $arrayValue['fields'] = $this->includeFields($instructor)->getData();
                         $arrayValue['data'] = $this->includeData($instructor)->getData();
-
 
                         $fields[] = [
                             'id' => rand(),
