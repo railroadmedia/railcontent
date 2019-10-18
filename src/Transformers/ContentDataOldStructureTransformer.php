@@ -2,7 +2,9 @@
 
 namespace Railroad\Railcontent\Transformers;
 
+use Doctrine\ORM\EntityManager;
 use League\Fractal\TransformerAbstract;
+use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\ContentData;
 
 class ContentDataOldStructureTransformer extends TransformerAbstract
@@ -13,16 +15,19 @@ class ContentDataOldStructureTransformer extends TransformerAbstract
      */
     public function transform(ContentData $contentData)
     {
-        $value = $contentData->getValue();
-        if(mb_check_encoding($value) == false){
-            $value = utf8_encode($value);
-        }
+        $entityManager = app()->make(EntityManager::class);
 
-        return [
-            'content_id' => $contentData->getContent()->getId(),
-            'key' => $contentData->getKey(),
-            'value' => $value,
-            'position' => $contentData->getPosition(),
-        ];
+        $serializer = new BasicEntitySerializer();
+
+        $serializedEntity = $serializer->serializeToUnderScores($contentData, $entityManager->getClassMetadata(ContentData::class));
+
+            return array_merge(
+                $serializedEntity,
+                [
+                    'content_id' => $contentData->getContent()
+                        ->getId(),
+                ]
+            );
+       
     }
 }

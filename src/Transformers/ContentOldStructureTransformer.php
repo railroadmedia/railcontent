@@ -34,26 +34,25 @@ class ContentOldStructureTransformer extends TransformerAbstract
                     if (empty($value)) {
                         $extraProperties[$item] = [];
                     }
-                    foreach ($value as $val) {
+                    foreach ($value as $index1=>$val) {
                         if (is_object($val)) {
-                            $extraProperties[$item][] = $serializer->serialize(
+                            $extraProperties[$item][] = $serializer->serializeToUnderScores(
                                 $val,
                                 $entityManager->getClassMetadata(get_class($val))
                             );
                         } else {
-//                            array_walk_recursive($value, function(&$item, $key){
-//                                if(!mb_check_encoding($item)){
-//                                    $item = utf8_encode($item);
-//                                }
-//                            });
+                            if(is_array($val)) {
+                                foreach ($val as $index => $val1) {
+                                    if (is_string($val1) && (!mb_check_encoding($val1))) {
+                                        $value[$index1][$index] = utf8_encode($val1);
+                                    }
+                                };
+                            }
 
                             $extraProperties[$item] = $value;
                         }
                     }
                 } else {
-//                    if(mb_check_encoding($value) == false){
-//                        $value = utf8_encode($value);
-//                    }
                     $extraProperties[$item] = $value;
                 }
             }
@@ -88,17 +87,9 @@ class ContentOldStructureTransformer extends TransformerAbstract
 
         $this->setDefaultIncludes($defaultIncludes);
 
-        return array_merge([
-            'id' => $content->getId(),
-            'slug' => $content->getSlug(),
-            'type' => $content->getType(),
-            'sort' => $content->getSort(),
-            'status' => $content->getStatus(),
-            'language' => $content->getLanguage(),
-            'brand' => $content->getBrand(),
-            'published_on' => $publishedOn,
-            'created_on' => $createdOn,
-            'archived_on' => $archivedOn,
+        $serialized = $serializer->serializeToUnderScores($content, $entityManager->getClassMetadata(Content::class));
+
+        return array_merge($serialized, [
             'parent_id' => ($content->getParent()) ?
                 $content->getParent()->getParent()
                     ->getId() : null,
@@ -200,6 +191,9 @@ class ContentOldStructureTransformer extends TransformerAbstract
                         ];
                     }
                 } else {
+                    if(mb_check_encoding($value) == false){
+                                                $value = utf8_encode($value);
+                                            }
                     $fields[] = [
                         'id' => rand(),
                         'content_id' => $content->getId(),
