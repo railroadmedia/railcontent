@@ -157,7 +157,7 @@ class ContentJsonController extends Controller
 
         throw_unless($content, new NotFoundException('No content with id ' . $id . ' exists.'));
 
-        return ResponseService::content($content);
+        return ResponseService::content([$content->getId() => $content]);
     }
 
     /** Create a new content
