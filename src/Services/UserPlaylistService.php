@@ -12,6 +12,7 @@ use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Entities\UserPlaylist;
 use Railroad\Railcontent\Entities\UserPlaylistContent;
+use Railroad\Railcontent\Hydrators\CustomRailcontentHydrator;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\UserPlaylistRepository;
 
@@ -43,6 +44,11 @@ class UserPlaylistService
     private $userProvider;
 
     /**
+     * @var CustomRailcontentHydrator
+     */
+    private $resultsHydrator;
+
+    /**
      * UserPlaylistService constructor.
      *
      * @param RailcontentEntityManager $entityManager
@@ -50,10 +56,12 @@ class UserPlaylistService
      */
     public function __construct(
         RailcontentEntityManager $entityManager,
-        UserProviderInterface $userProvider
+        UserProviderInterface $userProvider,
+        CustomRailcontentHydrator $resultsHydrator
     ) {
         $this->entityManager = $entityManager;
         $this->userProvider = $userProvider;
+        $this->resultsHydrator = $resultsHydrator;
 
         $this->userPlaylistRepository = $this->entityManager->getRepository(UserPlaylist::class);
         $this->contentUserPlaylistRepository = $this->entityManager->getRepository(UserPlaylistContent::class);
@@ -101,13 +109,16 @@ class UserPlaylistService
 
         $qb->where('up.user = :user')
             ->andWhere('up.type = :type')
-            ->andWhere('up.brand = :brand')
-            ->setParameter('user', $user)
+            ->andWhere('up.brand = :brand');
+
+        $qb->setParameter('user', $user)
             ->setParameter('type', $playlistType)
             ->setParameter('brand', $brand)
             ->orderByColumn('up', 'id', 'desc');
 
-        $userPlaylist = $qb->getQuery()->getResult();
+        $userPlaylist =
+            $qb->getQuery()
+                ->getResult();
 
         return $userPlaylist;
     }
@@ -160,5 +171,87 @@ class UserPlaylistService
 
         $this->entityManager->remove($userPlaylistContent);
         $this->entityManager->flush();
+    }
+
+    /**
+     * @param $playlistId
+     * @param array $contentType
+     * @param $limit
+     * @param $skip
+     * @return array|mixed
+     */
+    public function getUserPlaylistContents($playlistId, $contentType = [], $limit, $skip)
+    {
+        $qb = $this->contentRepository->createQueryBuilder('content');
+
+        $qb->join(
+            UserPlaylistContent::class,
+            'upc',
+            'WITH',
+            'upc.content = content'
+        )
+            ->where('upc.userPlaylist = :playlist');
+
+        if (!empty($contentType)) {
+            $qb->andWhere('content.type IN (:types)')
+                ->setParameter('types', $contentType);
+        }
+
+        $qb->setParameter('playlist', $playlistId)
+            ->paginate($limit, $skip)
+            ->orderBy('upc.id', 'desc');
+
+        $results =
+            $qb->getQuery()
+                ->getResult();
+
+        return $this->resultsHydrator->hydrate($results, $this->entityManager);
+    }
+
+    /**
+     * @param $playlistId
+     * @param array $contentType
+     * @return array|mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function countUserPlaylistContents($playlistId, $contentType = [])
+    {
+        $qb = $this->contentRepository->createQueryBuilder('content');
+        $qb->select(
+            $qb->expr()
+                ->count('content')
+        );
+
+        $qb->join(
+                UserPlaylistContent::class,
+                'upc',
+                'WITH',
+                'upc.content = content'
+            )
+            ->where('upc.userPlaylist = :playlist');
+
+        if (!empty($contentType)) {
+            $qb->andWhere('content.type IN (:types)')
+                ->setParameter('types', $contentType);
+        }
+        $qb->setParameter('playlist', $playlistId)
+            ->orderBy('upc.id', 'desc');
+
+        return $qb->getQuery()
+            ->getSingleScalarResult();
+
+        $qb = $this->contentRepository->build();
+
+        return $qb->select(
+            $qb->expr()
+                ->count(config('railcontent.table_prefix') . 'content')
+        )
+            ->restrictByUserAccess()
+            ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
+            ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types)
+            ->andWhere('p.parent = :parentId')
+            ->setParameter('parentId', $parentId)
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }
