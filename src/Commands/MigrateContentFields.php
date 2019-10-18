@@ -67,7 +67,7 @@ class MigrateContentFields extends Command
         $contentColumnNames = array_merge(
             $this->entityManager->getClassMetadata(Content::class)
                 ->getColumnNames(),
-            ['video', 'cd-tracks', 'exercise-book-pages']
+            [ 'cd-tracks', 'exercise-book-pages']
         );
 
         $topicFields = 0;
@@ -230,7 +230,12 @@ class MigrateContentFields extends Command
 
         $instructorsFields = 0;
         $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
-            ->select('id', 'content_id', 'key', 'value', 'position')
+            ->select(config('railcontent.table_prefix') . 'content_fields'.'.id', 'content_id', 'key', 'value', 'position')
+            ->join(
+                config('railcontent.table_prefix') . 'content',
+                config('railcontent.table_prefix') . 'content_fields' . '.value',
+                config('railcontent.table_prefix') . 'content.id'
+            )
             ->where('key', 'instructor')
             ->whereNotNull('value')
             ->orderBy('content_id', 'desc')
@@ -287,6 +292,35 @@ class MigrateContentFields extends Command
                 }
             );
         $this->info('Ending content exercise migration. Migrated - ' . $exercise);
+
+        $video = 0;
+        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
+            ->select('content_id', 'key', 'value', 'position')
+            ->join(
+                config('railcontent.table_prefix') . 'content',
+                config('railcontent.table_prefix') . 'content_fields' . '.value',
+                config('railcontent.table_prefix') . 'content.id'
+            )
+            ->where('key', 'video')
+            ->whereNotNull('value')
+            ->orderBy('content_id', 'desc')
+            ->chunk(
+                500,
+                function (Collection $rows) use (&$migratedFields, $dbConnection, &$video) {
+                    foreach ($rows as $row) {
+                        $cq = " SET video = " . $row->value;
+
+                        $statement = "UPDATE " . config('railcontent.table_prefix') . 'content' . $cq;
+                        $statement .= " WHERE id =".$row->content_id;
+
+                        $dbConnection->statement($statement);
+                        $video++;
+                    }
+                }
+            );
+        $this->info('Ending content video migration. Migrated - ' . $video);
+
+
 
         $specialColumns =
             [
