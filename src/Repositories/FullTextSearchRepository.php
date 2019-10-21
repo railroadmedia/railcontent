@@ -6,11 +6,11 @@ use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Repositories\QueryBuilders\FullTextSearchQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
-use Illuminate\Support\Facades\DB;
 
 class FullTextSearchRepository extends RepositoryBase
 {
@@ -84,9 +84,12 @@ class FullTextSearchRepository extends RepositoryBase
             $this->contentQuery()
                 ->selectPrimaryColumns()
                 ->restrictByTypes(
-                    array_merge(
-                        config('railcontent.showTypes', []),
-                        config('railcontent.topLevelContentTypes', [])
+                    array_unique(
+                        array_merge(
+                            config('railcontent.showTypes', []),
+                            config('railcontent.topLevelContentTypes', []),
+                            config('railcontent.searchable_content_types', [])
+                        )
                     )
                 )
                 ->orderBy('id');
