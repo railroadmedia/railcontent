@@ -417,7 +417,11 @@ class Content extends ArrayExpressible
      */
     public function isStarted()
     {
-        return $this->started;
+        $userProgress = $this->userProgress[auth()->id()];
+        if (!$userProgress) {
+            return false;
+        }
+        return ($userProgress->getState() == 'started') ? true : false;
     }
 
     /**

@@ -20,8 +20,13 @@ class ContentFilterResultsEntity extends \ArrayObject
             [],
             $this->filterOptions()
         )
-            ->addMeta(['totalResults' => $this->totalResults()])
-            ->respond()->getContent();
+            ->addMeta(
+                [
+                    'totalResults' => $this->totalResults()
+                ]
+            )
+            ->respond()
+            ->getContent();
     }
 
     /**

@@ -34,14 +34,14 @@ class ContentOldStructureTransformer extends TransformerAbstract
                     if (empty($value)) {
                         $extraProperties[$item] = [];
                     }
-                    foreach ($value as $index1=>$val) {
+                    foreach ($value as $index1 => $val) {
                         if (is_object($val)) {
                             $extraProperties[$item][] = $serializer->serializeToUnderScores(
                                 $val,
                                 $entityManager->getClassMetadata(get_class($val))
                             );
                         } else {
-                            if(is_array($val)) {
+                            if (is_array($val)) {
                                 foreach ($val as $index => $val1) {
                                     if (is_string($val1) && (!mb_check_encoding($val1))) {
                                         $value[$index1][$index] = utf8_encode($val1);
@@ -71,7 +71,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                 $content->getArchivedOn()
                     ->toDateTimeString() : null;
 
-        $defaultIncludes = ['fields'];
+        $defaultIncludes = ['fields','userProgress'];
         if (count($content->getData()) > 0) {
             $defaultIncludes[] = 'data';
         }
@@ -84,20 +84,26 @@ class ContentOldStructureTransformer extends TransformerAbstract
             $defaultIncludes[] = 'children';
         }
 
-
         $this->setDefaultIncludes($defaultIncludes);
 
         $serialized = $serializer->serializeToUnderScores($content, $entityManager->getClassMetadata(Content::class));
 
-        return array_merge($serialized, [
-            'parent_id' => ($content->getParent()) ?
-                $content->getParent()->getParent()
-                    ->getId() : null,
-            'child_id' => null,
-            'completed' => $content->isCompleted(),
-            'started' => $content->isStarted(),
-            'progress_percent' => $content->getProgressPercent(),
-        ], $extraProperties);
+        $results = array_merge(
+            $serialized,
+            [
+                'parent_id' => ($content->getParent()) ?
+                    $content->getParent()
+                        ->getParent()
+                        ->getId() : null,
+                'child_id' => null,
+                'completed' => $content->isCompleted(),
+                'started' => $content->isStarted(),
+                'progress_percent' => $content->getProgressPercent(),
+            ],
+            $extraProperties
+        );
+
+        return $results;
     }
 
     /**
@@ -135,6 +141,8 @@ class ContentOldStructureTransformer extends TransformerAbstract
     {
         $entityManager = app()->make(EntityManager::class);
 
+        $serializer = new BasicEntitySerializer();
+
         $fields = [];
         foreach (config('oldResponseMapping.fields', []) as $field) {
             $getterName = $getFields = Inflector::camelize('get' . ucwords(camel_case($field)));
@@ -143,10 +151,15 @@ class ContentOldStructureTransformer extends TransformerAbstract
             if ($value) {
                 if ($value instanceof PersistentCollection) {
                     foreach ($value as $item) {
+                        $value = call_user_func([$item, $getterName]);
+                        if (mb_check_encoding($value) == false) {
+                            $value = utf8_encode($value);
+                        }
+
                         $fields[] = [
                             'content_id' => $content->getId(),
                             'key' => $field,
-                            'value' => call_user_func([$item, $getterName]),
+                            'value' => $value,
                             'type' => 'string',
                             'position' => 1,
                         ];
@@ -156,12 +169,16 @@ class ContentOldStructureTransformer extends TransformerAbstract
                     $entityManager->getClassMetadata(get_class($content))
                         ->getAssociationNames()
                 )) {
-                    if($value instanceof Content){
+                    if ($value instanceof Content) {
                         $this->includeFields($value);
                         $arrayValue = $this->transform($value);
 
-                        $arrayValue['fields'] = $this->includeFields($value)->getData();
-                        $arrayValue['data'] = $this->includeData($value)->getData();
+                        $arrayValue['fields'] =
+                            $this->includeFields($value)
+                                ->getData();
+                        $arrayValue['data'] =
+                            $this->includeData($value)
+                                ->getData();
 
                         $fields[] = [
                             'id' => rand(),
@@ -178,8 +195,12 @@ class ContentOldStructureTransformer extends TransformerAbstract
                         $this->includeFields($instructor);
                         $arrayValue = $this->transform($instructor);
 
-                        $arrayValue['fields'] = $this->includeFields($instructor)->getData();
-                        $arrayValue['data'] = $this->includeData($instructor)->getData();
+                        $arrayValue['fields'] =
+                            $this->includeFields($instructor)
+                                ->getData();
+                        $arrayValue['data'] =
+                            $this->includeData($instructor)
+                                ->getData();
 
                         $fields[] = [
                             'id' => rand(),
@@ -191,9 +212,9 @@ class ContentOldStructureTransformer extends TransformerAbstract
                         ];
                     }
                 } else {
-                    if(mb_check_encoding($value) == false){
-                                                $value = utf8_encode($value);
-                                            }
+                    if (mb_check_encoding($value) == false) {
+                        $value = utf8_encode($value);
+                    }
                     $fields[] = [
                         'id' => rand(),
                         'content_id' => $content->getId(),
@@ -233,17 +254,16 @@ class ContentOldStructureTransformer extends TransformerAbstract
     public function includeUserProgress(Content $content)
     {
         if (!empty($content->getUserProgress(auth()->id()))) {
-
             return $this->item(
                 $content->getUserProgress(auth()->id()),
                 new UserContentProgressOldStructureTransformer(),
-                'contentProgress'
+                'user-progress'
             );
         } else {
             return $this->item(
-                $content->getUserProgress(auth()->id()),
+                [auth()->id() => []],
                 new ArrayTransformer(),
-                'contentProgress'
+                'user-progress'
             );
         }
     }
@@ -254,7 +274,9 @@ class ContentOldStructureTransformer extends TransformerAbstract
      */
     public function includeChildren(Content $content)
     {
-        $childrens = $content->getChild()->getValues();
+        $childrens =
+            $content->getChild()
+                ->getValues();
 
         return $this->collection(
             $childrens,

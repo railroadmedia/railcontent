@@ -123,7 +123,7 @@ class CommentJsonController extends Controller
             new NotAllowedException('Only registered user can add comment. Please sign in.')
         );
 
-        return ResponseService::comment($comment);
+        return ResponseService::comment([$comment]);
     }
 
     /** Update a comment
@@ -231,7 +231,7 @@ class CommentJsonController extends Controller
             new NotAllowedException('Only registered user can reply to comment. Please sign in.')
         );
 
-        return ResponseService::comment($reply)
+        return ResponseService::comment([$reply])
             ->respond(200);
     }
 

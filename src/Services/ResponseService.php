@@ -3,10 +3,13 @@
 namespace Railroad\Railcontent\Services;
 
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use League\Fractal\Serializer\DataArraySerializer;
 use League\Fractal\Serializer\JsonApiSerializer;
+use Railroad\Doctrine\Routes\PaginationUrlGenerator;
 use Railroad\Doctrine\Services\FractalResponseService;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Serializer\OldStylePaginatorAdapter;
 use Railroad\Railcontent\Serializer\OldStyleSerializer;
 use Railroad\Railcontent\Transformers\ArrayTransformer;
 use Railroad\Railcontent\Transformers\BooleanTransformer;
@@ -69,7 +72,7 @@ class ResponseService extends FractalResponseService
                 $filters[$key] = $filterOption;
             }
 
-            $results = self::create(
+           return self::create(
                 $entityOrEntities,
                 'content',
                 new ContentOldStructureTransformer(),
@@ -77,16 +80,23 @@ class ResponseService extends FractalResponseService
                 $queryBuilder
             )
                 ->parseIncludes($includes)
-                ->addMeta((count($filters) > 0) ? ['filterOptions' => $filters] : []);
-
-            return $results;
+                ->addMeta(
+                    array_merge(($queryBuilder)?[
+                        'limit' => $queryBuilder
+                            ->getMaxResults(),
+                        'page' => (($queryBuilder
+                                    ->getFirstResult() /
+                                $queryBuilder
+                                    ->getMaxResults()) + 1),
+                    ]:[],
+                    (count($filters) > 0) ? ['filterOptions' => $filters] : []));
         }
 
         return self::create(
             $entityOrEntities,
             'content',
             new DecoratedContentTransformer(),
-            new JsonApiSerializer(),
+            new OldStyleSerializer(),
             $queryBuilder
         )
             ->parseIncludes($includes)
