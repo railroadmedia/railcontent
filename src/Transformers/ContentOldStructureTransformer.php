@@ -58,25 +58,9 @@ class ContentOldStructureTransformer extends TransformerAbstract
             }
         }
 
-        $createdOn =
-            ($content->getCreatedOn()) ?
-                $content->getCreatedOn()
-                    ->toDateTimeString() : null;
-        $publishedOn =
-            ($content->getPublishedOn()) ?
-                $content->getPublishedOn()
-                    ->toDateTimeString() : null;
-        $archivedOn =
-            ($content->getArchivedOn()) ?
-                $content->getArchivedOn()
-                    ->toDateTimeString() : null;
+        $defaultIncludes = ['fields','userProgress', 'data'];
 
-        $defaultIncludes = ['fields','userProgress'];
-        if (count($content->getData()) > 0) {
-            $defaultIncludes[] = 'data';
-        }
-
-        if ($content->getProperty('permissions')) {
+         if ($content->getProperty('permissions')) {
             $defaultIncludes[] = 'permissions';
         }
 
@@ -126,11 +110,19 @@ class ContentOldStructureTransformer extends TransformerAbstract
      */
     public function includeData(Content $content)
     {
-        return $this->collection(
-            $content->getData(),
-            new ContentDataOldStructureTransformer(),
-            'contentData'
-        );
+        if(!empty($content->getData())) {
+            return $this->collection(
+                $content->getData(),
+                new ContentDataOldStructureTransformer(),
+                'contentData'
+            );
+        } else {
+            return $this->collection(
+                [],
+                new ArrayTransformer(),
+                'contentData'
+            );
+        }
     }
 
     /**
@@ -178,7 +170,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                 ->getData();
                         $arrayValue['data'] =
                             $this->includeData($value)
-                                ->getData();
+                                ->getData()->getValues();
 
                         $fields[] = [
                             'id' => rand(),
@@ -200,7 +192,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                 ->getData();
                         $arrayValue['data'] =
                             $this->includeData($instructor)
-                                ->getData();
+                                ->getData()->getValues();
 
                         $fields[] = [
                             'id' => rand(),
