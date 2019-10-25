@@ -401,7 +401,7 @@ class ContentJsonController extends Controller
         $sortedBy = '-published_on';
         foreach ($types as $type) {
             if (array_key_exists($type, config('railcontent.cataloguesMetadata'))) {
-                $sortedBy = config('railcontent.cataloguesMetadata')[$type]['sortedBy'] ?? $sortedBy;
+                $sortedBy = config('railcontent.cataloguesMetadata')[$type]['sortBy'] ?? $sortedBy;
             }
         }
 
