@@ -103,7 +103,7 @@ class Content extends ArrayExpressible
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\UserContentProgress", mappedBy="content",
-     *     indexBy="user", fetch="EAGER")
+     *     indexBy="user")
      */
     private $userProgress;
 

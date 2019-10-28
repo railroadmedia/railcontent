@@ -9,6 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="railcontent_content_instructor")
+ * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */
 class ContentInstructor

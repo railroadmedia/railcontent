@@ -416,7 +416,9 @@ class ContentRepository extends EntityRepository
                 $lifetime
             );
 
-        return $qb->select(config('railcontent.table_prefix') . 'content')
-            ->from($this->getEntityName(), config('railcontent.table_prefix') . 'content');
+        return $qb->select(config('railcontent.table_prefix') . 'content','i','ins')
+            ->from($this->getEntityName(), config('railcontent.table_prefix') . 'content')
+            ->leftJoin(config('railcontent.table_prefix') . 'content' . '.instructor', 'i')
+            ->leftJoin( 'i.instructor', 'ins');
     }
 }

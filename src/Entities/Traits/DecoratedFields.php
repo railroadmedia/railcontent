@@ -34,10 +34,10 @@ trait DecoratedFields
      * @param $propertyName
      * @return mixed
      */
-    public function getProperty($propertyName)
+    public function getProperty($propertyName, $default = null)
     {
 
-        return $this->{$propertyName} ?? null;
+        return $this->{$propertyName} ?? $default;
     }
 
     /**
