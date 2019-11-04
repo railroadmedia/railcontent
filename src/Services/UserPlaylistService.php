@@ -105,7 +105,7 @@ class UserPlaylistService
     {
         $user = $this->userProvider->getUserById($userId);
 
-        $qb = $this->userPlaylistRepository->createQueryBuilder('up');
+        $qb = $this->userPlaylistRepository->createQueryBuilder('up')->addSelect(['up','upc'])->leftJoin('up.playlistContent','upc');
 
         $qb->where('up.user = :user')
             ->andWhere('up.type = :type')
