@@ -23,6 +23,7 @@ use Railroad\Doctrine\TimestampableListener;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
+use Railroad\Railcontent\Commands\DeleteContentAndHierarchiesForUserPlaylists;
 use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\MigrateContentFields;
 use Railroad\Railcontent\Commands\MigrateUserPlaylist;
@@ -94,7 +95,8 @@ class RailcontentServiceProvider extends ServiceProvider
                 ExpireCache::class,
                 MigrateContentFields::class,
                 OrphanContent::class,
-                MigrateUserPlaylist::class
+                MigrateUserPlaylist::class,
+                DeleteContentAndHierarchiesForUserPlaylists::class
             ]
         );
     }
