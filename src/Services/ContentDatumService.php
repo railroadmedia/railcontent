@@ -53,7 +53,7 @@ class ContentDatumService
     public function getByContentIds(array $contentIds)
     {
         return $this->datumRepository->createQueryBuilder('d')
-            ->where('content IN (:contents)')
+            ->where('d.content IN (:contents)')
             ->setParameter('contents', $contentIds)
             ->getQuery()
             ->getResult('Railcontent');
