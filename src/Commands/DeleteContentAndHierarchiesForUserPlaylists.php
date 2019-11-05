@@ -63,6 +63,7 @@ class DeleteContentAndHierarchiesForUserPlaylists extends Command
 
         $hierarchiesIds = [];
         $userPlaylistIds = [];
+
         $dbConnection->table(config('railcontent.table_prefix') . 'content_hierarchy as content_hierarchy')
             ->select('content_hierarchy.id', 'content_hierarchy.child_id', 'content_hierarchy.parent_id')
             ->leftJoin(
@@ -78,6 +79,19 @@ class DeleteContentAndHierarchiesForUserPlaylists extends Command
                     foreach ($rows as $row) {
                         $hierarchiesIds[] = $row->id;
                         $userPlaylistIds[] = $row->parent_id;
+                    }
+                }
+            );
+
+        $dbConnection->table(config('railcontent.table_prefix') . 'content as content')
+            ->select('content.id', 'content.type')
+            ->where('content.type', 'user-playlist')
+            ->orderBy('content.id', 'asc')
+            ->chunk(
+                $chunkSize,
+                function (Collection $rows) use (&$userPlaylistIds) {
+                    foreach ($rows as $row) {
+                        $userPlaylistIds[] = $row->id;
                     }
                 }
             );
