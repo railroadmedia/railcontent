@@ -54,6 +54,11 @@ class ContentService
     private $contentPermissionRepository;
 
     /**
+     * @var ContentHierarchyService
+     */
+    private $contentHierarchyService;
+
+    /**
      * @var JsonApiHydrator
      */
     private $jsonApiHydrator;
@@ -86,7 +91,8 @@ class ContentService
         RailcontentEntityManager $entityManager,
         JsonApiHydrator $jsonApiHydrator,
         UserProviderInterface $userProvider,
-        CustomRailcontentHydrator $resultsHydrator
+        CustomRailcontentHydrator $resultsHydrator,
+        ContentHierarchyService $contentHierarchyService
     ) {
         $this->entityManager = $entityManager;
         $this->userProvider = $userProvider;
@@ -96,6 +102,7 @@ class ContentService
         $this->datumRepository = $this->entityManager->getRepository(ContentData::class);
         $this->contentPermissionRepository = $this->entityManager->getRepository(ContentPermission::class);
         $this->commentRepository = $this->entityManager->getRepository(Comment::class);
+        $this->contentHierarchyService = $contentHierarchyService;
 
         $this->jsonApiHydrator = $jsonApiHydrator;
     }
@@ -1107,6 +1114,8 @@ class ContentService
         foreach ($contentPermissions as $contentPermission) {
             $this->entityManager->remove($contentPermission);
         }
+
+        $this->contentHierarchyService->deleteParentChildLinks($contentId);
 
         $comments = $this->commentRepository->findByContent($contentId);
 

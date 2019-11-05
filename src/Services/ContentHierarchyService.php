@@ -220,4 +220,37 @@ class ContentHierarchyService
                 ]
             );
     }
+
+    /**
+     * @param $parentId
+     * @return bool
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function deleteParentChildLinks($parentId)
+    {
+        //delete the cached results for parent id
+        $this->entityManager->getCache()
+            ->evictEntity(Content::class, $parentId);
+
+        $hierarchies = $this->contentHierarchyRepository->findBy(
+            [
+                'parent' => $parentId,
+            ]
+        );
+
+        if (empty($hierarchies)) {
+            return true;
+        }
+
+        foreach ($hierarchies as $hierarchy) {
+             //delete the cached results for child id
+            $this->entityManager->getCache()
+                ->evictEntity(Content::class, $hierarchy->getChild()->getId());
+            $this->entityManager->remove($hierarchy);
+            $this->entityManager->flush();
+        }
+
+        return true;
+    }
 }
