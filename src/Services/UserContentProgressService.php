@@ -631,13 +631,35 @@ class UserContentProgressService
         );
     }
 
+    /**
+     * @param $id
+     * @param $type
+     * @param null $state
+     * @return mixed
+     */
     public function getLessonsForUserByType($id, $type, $state = null)
     {
         return $this->userContentRepository->getLessonsForUserByType($id, $type, $state);
     }
 
+    /**
+     * @param $id
+     * @param $type
+     * @param $state
+     * @return mixed
+     */
     public function countLessonsForUserByTypeAndProgressState($id, $type, $state)
     {
         return $this->userContentRepository->getLessonsForUserByType($id, $type, $state, true);
+    }
+
+    /**
+     * @param $userId
+     * @param $contentId
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|mixed|object|null
+     */
+    public function getUserProgressOnContent($userId, $contentId)
+    {
+        return $this->userContentRepository->getUserProgressOnContent($userId, $contentId);
     }
 }

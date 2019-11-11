@@ -236,4 +236,17 @@ class UserContentProgressRepository extends RepositoryBase
         return $query->get()
             ->toArray();
     }
+
+    /**
+     * @param $userId
+     * @param $contentId
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|mixed|object|null
+     */
+    public function getUserProgressOnContent($userId, $contentId)
+    {
+        return $this->query()
+            ->where(ConfigService::$tableUserContentProgress . '.content_id', '=', $contentId)
+            ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
+            ->first();
+    }
 }
