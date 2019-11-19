@@ -539,11 +539,11 @@ class UserContentProgressService
             }
         }
 
-        if ($content[self::STATE_COMPLETED]) {
+
             $contentEntity = $this->contentRepository->getById($content['id']);
             if (in_array(
                 $contentEntity['type'],
-                ['learning-path-lesson', 'learning-path-course', 'learning-payh-level']
+                ['learning-path-lesson', 'learning-path-course', 'learning-path-level']
             )) {
                 $drumeoMethod =
                     $this->contentService->getBySlugAndType('drumeo-method', 'learning-path')
@@ -584,7 +584,7 @@ class UserContentProgressService
                     ]
                 );
             }
-        }
+
 
         return true;
     }
