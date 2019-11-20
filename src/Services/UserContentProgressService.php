@@ -442,16 +442,14 @@ class UserContentProgressService
     {
         $content = $this->attachProgressToContents($userId, ['id' => $contentId]);
 
-        $allowedTypesForStarted =
-            array_merge(
-                config('railcontent.allowed_types_for_bubble_progress')['started'],
-                config('railcontent.showTypes', [])
-            );
-        $allowedTypesForCompleted =
-            array_merge(
-                config('railcontent.allowed_types_for_bubble_progress')['completed'],
-                config('railcontent.showTypes', [])
-            );
+        $allowedTypesForStarted = array_merge(
+            config('railcontent.allowed_types_for_bubble_progress')['started'],
+            config('railcontent.showTypes', [])
+        );
+        $allowedTypesForCompleted = array_merge(
+            config('railcontent.allowed_types_for_bubble_progress')['completed'],
+            config('railcontent.showTypes', [])
+        );
         $allowedTypes = array_unique(array_merge($allowedTypesForStarted, $allowedTypesForCompleted));
 
         $parents = $this->attachProgressToContents(
@@ -492,7 +490,10 @@ class UserContentProgressService
 
             $contentFakeArray = [];
 
-            foreach ($this->contentHierarchyService->getByParentIdsWhereContentStatusIn([$parent['id']]) as $hierarchyRow) {
+            foreach (
+                $this->contentHierarchyService->getByParentIdsWhereContentStatusIn([$parent['id']]) as
+                $hierarchyRow
+            ) {
                 $contentFakeArray[] = ['id' => $hierarchyRow['child_id']];
             }
 
@@ -537,6 +538,54 @@ class UserContentProgressService
                     true
                 );
             }
+        }
+
+        $contentEntity = $this->contentRepository->getById($content['id']);
+        if (in_array(
+            $contentEntity['type'],
+            ['learning-path-lesson', 'learning-path-course', 'learning-path-level']
+        )) {
+            $drumeoMethod =
+                $this->contentService->getBySlugAndType('drumeo-method', 'learning-path')
+                    ->first();
+            $currentLevel = 0;
+            $currentCourse = 0;
+            foreach ($drumeoMethod['levels'] as $level) {
+                if ($level[self::STATE_COMPLETED]) {
+                    $currentLevel = $level['position'];
+                }
+            }
+            $courses = $this->contentService->getByParentId($drumeoMethod['levels'][$currentLevel]['id']);
+
+            foreach ($courses as $course) {
+                if ($course[self::STATE_COMPLETED]) {
+                    $currentCourse = $course['position'];
+                }
+            }
+
+            $lessons = $this->contentService->getByParentId($courses[$currentCourse]['id']);
+            foreach ($lessons as $lesson) {
+                if ($lesson[self::STATE_COMPLETED]) {
+                    $currentCourse++;
+                    break;
+                }
+            }
+
+            error_log(
+                ' Drumeo method - user rank ========================= ' .
+                print_r(($currentLevel + 1) . '.' . $currentCourse, true)
+            );
+            $this->userContentRepository->updateOrCreate(
+                [
+                    'content_id' => $drumeoMethod['id'],
+                    'user_id' => $userId,
+                ],
+                [
+                    'higher_key_progress' => ($currentLevel + 1) . '.' . $currentCourse,
+                    'updated_on' => Carbon::now()
+                        ->toDateTimeString(),
+                ]
+            );
         }
 
         return true;
