@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Railroad\Railcontent\Events\HierarchyUpdated;
+//use Railroad\Railcontent\Events\XPModified;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 
@@ -51,10 +53,9 @@ class ContentHierarchyService
         array $parentIds,
         array $contentStatuses = [
             ContentService::STATUS_PUBLISHED,
-            ContentService::STATUS_SCHEDULED
+            ContentService::STATUS_SCHEDULED,
         ]
-    )
-    {
+    ) {
         return $this->contentHierarchyRepository->getByParentIdsWhereContentStatusIn($parentIds, $contentStatuses);
     }
 
@@ -90,6 +91,9 @@ class ContentHierarchyService
         //delete the cached results for child id
         CacheHelper::deleteCache('content_' . $childId);
 
+        event(new HierarchyUpdated($parentId, $childId));
+        // event(new XPModified($parentId));
+
         $results = $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
 
         return $results;
@@ -120,6 +124,8 @@ class ContentHierarchyService
         CacheHelper::deleteCache('content_' . $parentId);
 
         CacheHelper::deleteCache('content_' . $childId);
+        event(new HierarchyUpdated($parentId, $childId));
+        //event(new XPModified($parentId));
 
         return $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
     }
@@ -136,7 +142,11 @@ class ContentHierarchyService
 
         CacheHelper::deleteCache('content_' . $childId);
 
-        return $this->contentHierarchyRepository->deleteParentChildLink($parentId, $childId);
+        $results = $this->contentHierarchyRepository->deleteParentChildLink($parentId, $childId);
+        event(new HierarchyUpdated($parentId, $childId));
+        //event(new XPModified($parentId));
+
+        return $results;
     }
 
     public function repositionSiblings($childId)

@@ -8,8 +8,11 @@ use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
+use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Events\HierarchyUpdated;
+//use Railroad\Railcontent\Events\XPModified;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 use Railroad\Railcontent\Repositories\CommentRepository;
@@ -788,8 +791,7 @@ class ContentService
         array $includedUserStates = [],
         $pullFilterFields = true,
         $getFutureContentOnly = false
-    )
-    {
+    ) {
         $results = null;
         if ($limit == 'null') {
             $limit = -1;
@@ -906,6 +908,7 @@ class ContentService
                 'status' => $status ?? self::STATUS_DRAFT,
                 'language' => $language ?? ConfigService::$defaultLanguage,
                 'brand' => $brand ?? ConfigService::$brand,
+                'total_xp' => $this->getDefaultXP($type, 0),
                 'user_id' => $userId,
                 'published_on' => $publishedOn,
                 'created_on' => Carbon::now()
@@ -920,6 +923,11 @@ class ContentService
                 $id,
                 null
             );
+
+            event( new HierarchyUpdated(
+               $parentId,
+               $id
+            ));
         }
 
         CacheHelper::deleteUserFields(null, 'contents');
@@ -1356,6 +1364,73 @@ class ContentService
     public function getFiltersForUserProgressState($userId, $state)
     {
         return $this->contentRepository->getFiltersUserProgressState($userId, $state);
+    }
+
+    public function getByChildId($childId)
+    {
+        $hash = 'contents_by_child_id_' . '_' . CacheHelper::getKey($childId);
+        $results = CacheHelper::getCachedResultsForKey($hash);
+
+        if (!$results) {
+            $resultsDB = $this->contentRepository->getByChildId($childId);
+            $results =
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), [$childId]));
+        }
+
+        return Decorator::decorate($results, 'content');
+    }
+
+    /**
+     * @param $contentId
+     * @return int
+     */
+    public function calculateTotalXp($contentId)
+    {
+        $content = $this->getById($contentId);
+
+        error_log(print_r($content, true));
+        error_log(
+            'handleFieldUpdated       content id::: ' . $content['id'] . '    content type:::' . $content['type']
+        );
+
+        $children = $this->getByParentId($content['id']);
+
+        error_log('content children:::::::' . print_r($children, true));
+
+        $childrenTotalXP = 0;
+        foreach ($children as $child) {
+            $childrenTotalXP += $child->fetch('total_xp', $this->getDefaultXP($child['type'], $child->fetch('fields.difficulty',0)));
+        }
+
+        $contentTotalXp = $content->fetch('fields.xp', $this->getDefaultXP($content['type'], $content->fetch('fields.difficulty',0))) + $childrenTotalXP;
+
+        error_log(print_r('children total xp:::::' . $childrenTotalXP, true));
+
+        error_log(print_r('content total xp:::::: ' . $contentTotalXp, true));
+
+        return $contentTotalXp;
+    }
+
+
+
+    public function getDefaultXP($type, $difficulty)
+    {
+        if ($type == 'pack') {
+            $defaultXp = config('xp_ranks.pack_content_completed');
+        } elseif ($type == 'pack_bundle') {
+            $defaultXp = config('xp_ranks.pack_bundle_content_completed');
+        } elseif ($type == 'learning_path') {
+            $defaultXp = config('xp_ranks.learning_path_content_completed');
+        } elseif ($type == 'course') {
+            $defaultXp = config('xp_ranks.course_content_completed');
+        } else {
+            $defaultXp =
+                config('xp_ranks.difficulty_xp_map')[$difficulty]
+                ??
+                config('xp_ranks.difficulty_xp_map.all');
+        }
+
+        return $defaultXp;
     }
 
 }

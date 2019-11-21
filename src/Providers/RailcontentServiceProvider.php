@@ -23,12 +23,14 @@ use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
+use Railroad\Railcontent\Events\HierarchyUpdated;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\ContentEventListener;
 use Railroad\Railcontent\Listeners\UnassignCommentEventListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
 use Railroad\Railcontent\Listeners\VersionContentEventListener;
+use Railroad\Railcontent\Listeners\ContentTotalXPListener;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Validators\MultipleColumnExistsValidator;
 
@@ -52,21 +54,32 @@ class RailcontentServiceProvider extends ServiceProvider
                         ConfigService::$connectionMaskPrefix . ConfigService::$databaseConnectionName) {
                         $event->statement->setFetchMode(PDO::FETCH_ASSOC);
                     }
-                }
+                },
             ],
-            ContentCreated::class => [VersionContentEventListener::class . '@handle'],
-            ContentUpdated::class => [VersionContentEventListener::class . '@handle'],
+         //   ContentCreated::class => [VersionContentEventListener::class . '@handle'],
+          //  ContentUpdated::class => [VersionContentEventListener::class . '@handle'],
             ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
             ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
-            ContentFieldCreated::class => [VersionContentEventListener::class . '@handleFieldCreated'],
-            ContentFieldUpdated::class => [VersionContentEventListener::class . '@handleFieldUpdated'],
-            ContentFieldDeleted::class => [VersionContentEventListener::class . '@handleFieldDeleted'],
+            ContentFieldCreated::class => [
+               // VersionContentEventListener::class . '@handleFieldCreated',
+                ContentTotalXPListener::class . '@handleFieldCreated',
+            ],
+            ContentFieldUpdated::class => [
+               // VersionContentEventListener::class . '@handleFieldUpdated',
+                ContentTotalXPListener::class . '@handleFieldUpdated',
+            ],
+            ContentFieldDeleted::class => [
+               // VersionContentEventListener::class . '@handleFieldDeleted',
+                ContentTotalXPListener::class . '@handleFieldDeleted',
+            ],
             ContentDatumCreated::class => [VersionContentEventListener::class . '@handle'],
             ContentDatumUpdated::class => [VersionContentEventListener::class . '@handle'],
             ContentDatumDeleted::class => [VersionContentEventListener::class . '@handle'],
             CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
             CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
-            UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle']
+            UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
+            HierarchyUpdated::class => [ContentTotalXPListener::class . '@handleHierarchyUpdated'],
+            //XPModified::class => [ContentTotalXPListener::class . '@handleXPCalculation']
         ];
 
         parent::boot();
@@ -87,15 +100,19 @@ class RailcontentServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../../routes/routes.php');
         $this->loadRoutesFrom(__DIR__ . '/../../routes/api.php');
 
-        $this->commands([
-            CreateSearchIndexes::class,
-            CreateVimeoVideoContentRecords::class,
-            RepairMissingDurations::class,
-            CreateYoutubeVideoContentRecords::class,
-            ExpireCache::class
-        ]);
+        $this->commands(
+            [
+                CreateSearchIndexes::class,
+                CreateVimeoVideoContentRecords::class,
+                RepairMissingDurations::class,
+                CreateYoutubeVideoContentRecords::class,
+                ExpireCache::class,
+            ]
+        );
 
-        Validator::extend('exists_multiple_columns', MultipleColumnExistsValidator::class . '@validate',
+        Validator::extend(
+            'exists_multiple_columns',
+            MultipleColumnExistsValidator::class . '@validate',
             'The value entered does not exist in the database, or does not match the requirements to be ' .
             'set as the :attribute for this content-type with the current or requested content-status. Please ' .
             'double-check the input value and try again.'
@@ -176,8 +193,7 @@ class RailcontentServiceProvider extends ServiceProvider
 
         ConfigService::$contentHierarchyMaxDepth = config('railcontent.content_hierarchy_max_depth');
         ConfigService::$contentHierarchyDecoratorAllowedTypes = config(
-            'railcontent.content_hierarchy_decorator_allowed_types' .
-            ''
+            'railcontent.content_hierarchy_decorator_allowed_types' . ''
         );
 
         // aggregates
@@ -186,8 +202,8 @@ class RailcontentServiceProvider extends ServiceProvider
                 'selectColumn' => 'COUNT(`' . ConfigService::$tableCommentLikes . '`.`id`) as `like_count`',
                 'foreignField' => 'comment_id',
                 'localField' => 'id',
-                'groupBy' => ConfigService::$tableComments . '.id'
-            ]
+                'groupBy' => ConfigService::$tableComments . '.id',
+            ],
         ];
     }
 
