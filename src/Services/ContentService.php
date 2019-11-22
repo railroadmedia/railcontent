@@ -924,10 +924,7 @@ class ContentService
                 null
             );
 
-            event( new HierarchyUpdated(
-               $parentId,
-               $id
-            ));
+            event(new HierarchyUpdated($parentId));
         }
 
         CacheHelper::deleteUserFields(null, 'contents');
@@ -1382,36 +1379,67 @@ class ContentService
 
     /**
      * @param $contentId
-     * @return int
+     * @return array|ContentEntity
      */
     public function calculateTotalXp($contentId)
     {
         $content = $this->getById($contentId);
-
-        error_log(print_r($content, true));
-        error_log(
-            'handleFieldUpdated       content id::: ' . $content['id'] . '    content type:::' . $content['type']
-        );
-
         $children = $this->getByParentId($content['id']);
-
-        error_log('content children:::::::' . print_r($children, true));
 
         $childrenTotalXP = 0;
         foreach ($children as $child) {
-            $childrenTotalXP += $child->fetch('total_xp', $this->getDefaultXP($child['type'], $child->fetch('fields.difficulty',0)));
+            $childrenTotalXP += $child->fetch(
+                'total_xp',
+                $this->getDefaultXP($child['type'], $child->fetch('fields.difficulty', 0))
+            );
         }
 
-        $contentTotalXp = $content->fetch('fields.xp', $this->getDefaultXP($content['type'], $content->fetch('fields.difficulty',0))) + $childrenTotalXP;
+        $contentTotalXp = $content->fetch(
+                'fields.xp',
+                $this->getDefaultXP($content['type'], $content->fetch('fields.difficulty', 0))
+            ) + $childrenTotalXP;
 
-        error_log(print_r('children total xp:::::' . $childrenTotalXP, true));
+        return $this->update($contentId, ['total_xp' => $contentTotalXp]);
+    }
 
-        error_log(print_r('content total xp:::::: ' . $contentTotalXp, true));
+    /**
+     * @param $contentIds
+     * @return array
+     */
+    public function calculateTotalXpForContents($contentIds)
+    {
+        $contentTotalXp = [];
+
+        $children =
+            $this->getByParentIds($contentIds)
+                ->groupBy('parent_id');
+
+        $childrenTotalXP = array_fill_keys(array_keys($children->toArray()), 0);
+
+        foreach ($children as $parentId => $child) {
+            foreach ($child as $childO) {
+                $childrenTotalXP[$parentId] += $childO->fetch(
+                    'total_xp',
+                    $this->getDefaultXP($childO['type'], $childO->fetch('fields.difficulty', 0))
+                );
+            }
+        }
+
+        $parents =
+            $this->getByIds($contentIds)
+                ->keyBy('id')
+                ->toArray();
+
+        foreach ($parents as $id => $content) {
+            $childrenXp = $childrenTotalXP[$id] ?? 0;
+            $contentTotalXp[$id] = $content->fetch(
+                    'fields.xp',
+                    $this->getDefaultXP($content['type'], $content->fetch('fields.difficulty', 0))
+                ) + $childrenXp;
+        }
 
         return $contentTotalXp;
     }
-
-
 
     public function getDefaultXP($type, $difficulty)
     {
@@ -1424,10 +1452,7 @@ class ContentService
         } elseif ($type == 'course') {
             $defaultXp = config('xp_ranks.course_content_completed');
         } else {
-            $defaultXp =
-                config('xp_ranks.difficulty_xp_map')[$difficulty]
-                ??
-                config('xp_ranks.difficulty_xp_map.all');
+            $defaultXp = config('xp_ranks.difficulty_xp_map')[$difficulty] ?? config('xp_ranks.difficulty_xp_map.all');
         }
 
         return $defaultXp;

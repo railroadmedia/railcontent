@@ -6,7 +6,6 @@ use Railroad\Railcontent\Events\ContentFieldCreated;
 use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\HierarchyUpdated;
-//use Railroad\Railcontent\Events\XPModified;
 use Railroad\Railcontent\Services\ContentService;
 
 class ContentTotalXPListener
@@ -57,31 +56,6 @@ class ContentTotalXPListener
     }
 
     /**
-     * @param XPModified $XPModified
-     * @return bool
-     */
-    public function handleXPCalculation($contentId)
-    {
-        $totalXP = $this->contentService->calculateTotalXp($contentId);
-        $this->contentService->update($contentId, ['total_xp' => $totalXP]);
-
-        return true;
-    }
-
-    /**
-     * @param $contentId
-     */
-    private function recursiveCalculateXP($contentId)
-    {
-        //event(new XPModified($contentId));
-$this->handleXPCalculation($contentId);
-        $parents = $this->contentService->getByChildId($contentId);
-        foreach ($parents as $parent) {
-            $this->recursiveCalculateXP($parent['id']);
-        }
-    }
-
-    /**
      * @param HierarchyUpdated $event
      */
     public function handleHierarchyUpdated(HierarchyUpdated $event)
@@ -89,4 +63,18 @@ $this->handleXPCalculation($contentId);
         $this->recursiveCalculateXP($event->parentId);
     }
 
+    /**
+     * @param $contentId
+     */
+    private function recursiveCalculateXP($contentId)
+    {
+        $this->contentService->calculateTotalXp($contentId);
+
+        $parents = $this->contentService->getByChildId($contentId);
+        foreach ($parents as $parent) {
+            if ($parent['type'] != 'user-playlist') {
+                $this->recursiveCalculateXP($parent['id']);
+            }
+        }
+    }
 }

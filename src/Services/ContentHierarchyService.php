@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Services;
 
 use Railroad\Railcontent\Events\HierarchyUpdated;
-//use Railroad\Railcontent\Events\XPModified;
 use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 
@@ -61,6 +60,7 @@ class ContentHierarchyService
 
     /**
      * @param array $parentIds
+     * @return array|false
      */
     public function countParentsChildren(array $parentIds)
     {
@@ -91,8 +91,7 @@ class ContentHierarchyService
         //delete the cached results for child id
         CacheHelper::deleteCache('content_' . $childId);
 
-        event(new HierarchyUpdated($parentId, $childId));
-        // event(new XPModified($parentId));
+        event(new HierarchyUpdated($parentId));
 
         $results = $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
 
@@ -110,6 +109,7 @@ class ContentHierarchyService
     public function update($parentId, $childId, $childPosition = null)
     {
         $contentHierarchy = $this->get($parentId, $childId);
+
         if (is_null($contentHierarchy)) {
             return $contentHierarchy;
         }
@@ -124,8 +124,8 @@ class ContentHierarchyService
         CacheHelper::deleteCache('content_' . $parentId);
 
         CacheHelper::deleteCache('content_' . $childId);
-        event(new HierarchyUpdated($parentId, $childId));
-        //event(new XPModified($parentId));
+
+        event(new HierarchyUpdated($parentId));
 
         return $this->contentHierarchyRepository->getByChildIdParentId($parentId, $childId);
     }
@@ -143,8 +143,8 @@ class ContentHierarchyService
         CacheHelper::deleteCache('content_' . $childId);
 
         $results = $this->contentHierarchyRepository->deleteParentChildLink($parentId, $childId);
-        event(new HierarchyUpdated($parentId, $childId));
-        //event(new XPModified($parentId));
+
+        event(new HierarchyUpdated($parentId));
 
         return $results;
     }
@@ -156,6 +156,7 @@ class ContentHierarchyService
         if (!$parentHierarchy) {
             return true;
         }
+
         //delete the cached results for parent id
         CacheHelper::deleteCache('content_' . $parentHierarchy['parent_id']);
 
@@ -165,6 +166,5 @@ class ContentHierarchyService
             $parentHierarchy['parent_id'],
             $parentHierarchy['child_position']
         );
-
     }
 }

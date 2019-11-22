@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\Event;
 class HierarchyUpdated extends Event
 {
     public $parentId;
-    public $childId;
-    public $deleted;
 
-    public function __construct($parentId, $childId, $deleted=false)
+    /**
+     * HierarchyUpdated constructor.
+     *
+     * @param $parentId
+     */
+    public function __construct($parentId)
     {
         $this->parentId = $parentId;
-        $this->childId = $childId;
-        $this->deleted = $deleted;
     }
 }
