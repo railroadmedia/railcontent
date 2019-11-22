@@ -6,6 +6,7 @@ use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use PDO;
+use Railroad\Railcontent\Commands\CalculateTotalXP;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
@@ -107,6 +108,7 @@ class RailcontentServiceProvider extends ServiceProvider
                 RepairMissingDurations::class,
                 CreateYoutubeVideoContentRecords::class,
                 ExpireCache::class,
+                CalculateTotalXP::class
             ]
         );
 
