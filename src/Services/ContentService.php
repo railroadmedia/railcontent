@@ -1451,7 +1451,10 @@ class ContentService
             $defaultXp = config('xp_ranks.learning_path_content_completed');
         } elseif ($type == 'course') {
             $defaultXp = config('xp_ranks.course_content_completed');
-        } else {
+        } elseif($type == 'assignment'){
+            $defaultXp = config('xp_ranks.assignment_content_completed');
+        }
+        else {
             $defaultXp = config('xp_ranks.difficulty_xp_map')[$difficulty] ?? config('xp_ranks.difficulty_xp_map.all');
         }
 

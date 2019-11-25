@@ -30,7 +30,7 @@ class ContentTotalXPListener
      */
     public function handleFieldCreated(ContentFieldCreated $contentFieldCreated)
     {
-        if ($contentFieldCreated->newField['key'] == 'xp') {
+        if ($contentFieldCreated->newField['key'] == 'xp' || $contentFieldCreated->newField['key'] == 'difficulty') {
             $this->recursiveCalculateXP($contentFieldCreated->newField['content_id']);
         }
     }
@@ -40,7 +40,7 @@ class ContentTotalXPListener
      */
     public function handleFieldUpdated(ContentFieldUpdated $contentFieldUpdated)
     {
-        if ($contentFieldUpdated->newField['key'] == 'xp') {
+        if ($contentFieldUpdated->newField['key'] == 'xp' || $contentFieldUpdated->newField['key'] == 'difficulty') {
             $this->recursiveCalculateXP($contentFieldUpdated->newField['content_id']);
         }
     }
@@ -50,7 +50,7 @@ class ContentTotalXPListener
      */
     public function handleFieldDeleted(ContentFieldDeleted $contentFieldDeleted)
     {
-        if ($contentFieldDeleted->deletedField['key'] == 'xp') {
+        if ($contentFieldDeleted->deletedField['key'] == 'xp' || $contentFieldDeleted->deletedField['key'] == 'difficulty') {
             $this->recursiveCalculateXP($contentFieldDeleted->deletedField['content_id']);
         }
     }
@@ -71,6 +71,7 @@ class ContentTotalXPListener
         $this->contentService->calculateTotalXp($contentId);
 
         $parents = $this->contentService->getByChildId($contentId);
+
         foreach ($parents as $parent) {
             if ($parent['type'] != 'user-playlist') {
                 $this->recursiveCalculateXP($parent['id']);

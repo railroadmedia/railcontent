@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Redis;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
 use Railroad\Railcontent\Factories\ContentFactory;
@@ -13,6 +12,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PermissionRepository;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ConfigService;
+use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Response;
@@ -64,6 +64,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
      */
     protected $permissionRepository;
 
+    /**
+     * @var ContentHierarchyService
+     */
+    protected $contentHierarchyService;
+
     protected function setUp()
     {
         parent::setUp();
@@ -77,6 +82,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->contentPermissionRepository = $this->app->make(ContentPermissionRepository::class);
         $this->permissionRepository = $this->app->make(PermissionRepository::class);
         $this->userPermissionRepository = $this->app->make(UserPermissionsRepository::class);
+        $this->contentHierarchyService = $this->app->make(ContentHierarchyService::class);
     }
 
     public function test_index_empty()
@@ -250,6 +256,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'permissions' => [],
                 'child_id' => null,
                 'sort' => 0,
+                'total_xp' => config('xp_ranks.difficulty_xp_map.all'),
             ],
         ];
 
@@ -894,11 +901,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_PUBLISHED;
 
         //prepare Redis cache with 300.000 keys that will be deleted when a new content it's created
-//        for ($i = 0; $i < 100000; $i++) {
-//            Redis::set('contents_results_' . $i, $i);
-//            Redis::set('_type_' . $type . $i, $i);
-//            Redis::set('types' . $i, $i);
-//        }
+        //        for ($i = 0; $i < 100000; $i++) {
+        //            Redis::set('contents_results_' . $i, $i);
+        //            Redis::set('_type_' . $type . $i, $i);
+        //            Redis::set('types' . $i, $i);
+        //        }
 
         $executionStartTime = microtime(true);
 
@@ -1098,8 +1105,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         }
 
         for ($i = 1; $i < $nrCourses; $i++) {
-            $field =
-                $this->fieldFactory->create($contents[$i]['id'], 'staff_pick_rating', rand(1, 30), null, 'string');
+            $field = $this->fieldFactory->create($contents[$i]['id'], 'staff_pick_rating', rand(1, 30), null, 'string');
         }
 
         $response = $this->call(
@@ -1123,6 +1129,105 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $this->assertTrue($result['fields'][0]['value'] >= $previousValue);
             $previousValue = $result['fields'][0]['value'];
         }
+    }
+
+    public function test_total_xp()
+    {
+        $content = $this->contentFactory->create(
+            $this->faker->word,
+            'course',
+            'published',
+            $this->faker->word,
+            null,
+            null,
+            Carbon::now()
+                ->toDateTimeString()
+        );
+
+        $this->assertEquals($content['total_xp'], config('xp_ranks.course_content_completed'));
+
+        for ($i = 0; $i < 5; $i++) {
+            $courseParts[] = $this->contentFactory->create(
+                $this->faker->word,
+                'course-part',
+                'published',
+                $this->faker->word,
+                null,
+                null,
+                Carbon::now()
+                    ->toDateTimeString(),
+                $content['id']
+            );
+        }
+
+        for ($i = 0; $i < 5; $i++) {
+            $assignments[] = $this->contentFactory->create($this->faker->word, 'assignment');
+        }
+
+        foreach ($assignments as $index => $assignment) {
+            $this->contentHierarchyFactory->create($courseParts[$index]['id'], $assignment['id']);
+        }
+
+        $response = $this->call('GET', 'railcontent/content/' . $content['id']);
+
+        $assignmentsTotalXp = 0;
+        $coursePartTotalXp = 0;
+
+        foreach ($assignments as $assignment) {
+            $assignmentsTotalXp += $assignment->fetch(
+                'fields.xp',
+                config('xp_ranks.assignment_content_completed')
+            );
+        }
+
+        foreach($courseParts as $index=>$coursePart){
+            $coursePartTotalXp += config('xp_ranks.difficulty_xp_map.all')+ $assignments[$index]->fetch(
+                    'fields.xp',
+                    config('xp_ranks.assignment_content_completed')
+                );
+        }
+
+        $courseTotalXP = $content->fetch(
+            'fields.xp',
+            config('xp_ranks.course_content_completed'));
+
+        $this->assertEquals($assignmentsTotalXp, 5 * config('xp_ranks.assignment_content_completed'));
+        $this->assertEquals($response->decodeResponseJson('data')[0]['total_xp'],$courseTotalXP + $coursePartTotalXp);
+    }
+
+    public function test_total_xp_calculation_when_difficulty_change()
+    {
+        $difficulty = 3;
+
+        $content = $this->contentFactory->create();
+
+        $this->assertEquals($content['total_xp'], config('xp_ranks.difficulty_xp_map.all'));
+
+        $this->fieldFactory->create($content['id'],'difficulty',$difficulty);
+
+        $response = $this->call('GET', 'railcontent/content/' . $content['id']);
+
+        $this->assertEquals($response->decodeResponseJson('data')[0]['total_xp'],config('xp_ranks.difficulty_xp_map.'.$difficulty));
+    }
+
+    public function test_total_xp_calculation_when_delete_child()
+    {
+        $content = $this->contentFactory->create();
+        $children = $this->contentFactory->create( $this->faker->word,
+            $this->faker->word,
+            'published',
+            $this->faker->word,
+            null,
+            null,
+            Carbon::now()
+                ->toDateTimeString(),
+            $content['id']);
+
+        $this->contentHierarchyService->delete($content['id'], $children['id']);
+
+        $response2 =  $this->call('GET', 'railcontent/content/' . $content['id']);
+
+        $this->assertEquals($response2->decodeResponseJson('data')[0]['total_xp'],config('xp_ranks.difficulty_xp_map.all'));
     }
 
     /**
