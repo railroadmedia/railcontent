@@ -221,7 +221,7 @@ class ContentFieldService
 
         $newField = $this->get($id);
 
-        if(array_key_exists('id',$data)) {
+        if(!empty($data['id'])) {
             event(new ContentFieldUpdated($newField, $oldField));
         } else {
             event(new ContentFieldCreated($newField, $data));
