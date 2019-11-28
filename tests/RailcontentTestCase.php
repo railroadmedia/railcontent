@@ -128,6 +128,9 @@ class RailcontentTestCase extends BaseTestCase
             $defaultConfig['administrator_routes_middleware']
         );
 
+        $xpConfig = require(__DIR__ . '/../config/xp_ranks.php');
+        $app['config']->set('xp_ranks', $xpConfig);
+
         // setup default database to use sqlite :memory:
         $app['config']->set('database.default', $this->getConnectionType());
         $app['config']->set(

@@ -34,8 +34,8 @@ class ContentFactory extends ContentService
         $brand = null,
         $userId = null,
         $publishedOn = null,
-        $createdOn = null,
-        $parentId = null
+        $parentId = null,
+    $sort = null
     ) {
         $this->faker = app(Generator::class);
 

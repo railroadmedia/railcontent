@@ -24,6 +24,7 @@ class ContentQueryBuilder extends QueryBuilder
                 ConfigService::$tableContent . '.status as status',
                 ConfigService::$tableContent . '.language as language',
                 ConfigService::$tableContent . '.brand as brand',
+                ConfigService::$tableContent . '.total_xp as total_xp',
                 ConfigService::$tableContent . '.published_on as published_on',
                 ConfigService::$tableContent . '.created_on as created_on',
                 ConfigService::$tableContent . '.archived_on as archived_on',

@@ -1094,6 +1094,7 @@ class ContentRepository extends RepositoryBase
             $contents[$contentRow['id']]['status'] = $contentRow['status'];
             $contents[$contentRow['id']]['language'] = $contentRow['language'];
             $contents[$contentRow['id']]['brand'] = $contentRow['brand'];
+            $contents[$contentRow['id']]['total_xp'] = $contentRow['total_xp'];
             $contents[$contentRow['id']]['published_on'] = $contentRow['published_on'];
             $contents[$contentRow['id']]['created_on'] = $contentRow['created_on'];
             $contents[$contentRow['id']]['archived_on'] = $contentRow['archived_on'];
@@ -1629,5 +1630,37 @@ class ContentRepository extends RepositoryBase
                 ->getToArray();
 
         return $this->parseAvailableFields($possibleFilters);
+    }
+
+    public function getByChildId($childId)
+    {
+        $contentRows =
+            $this->query()
+                ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->leftJoin(
+                    ConfigService::$tableContentHierarchy,
+                    ConfigService::$tableContentHierarchy . '.parent_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                ->where(ConfigService::$tableContentHierarchy . '.child_id', $childId)
+                ->selectInheritenceColumns()
+                ->getToArray();
+
+        $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
+        $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
+
+        $contentPermissionRows = $this->contentPermissionRepository->getByContentIdsOrTypes(
+            array_column($contentRows, 'id'),
+            array_column($contentRows, 'type')
+        );
+
+        return $this->processRows(
+            $contentRows,
+            $contentFieldRows,
+            $contentDatumRows,
+            $contentPermissionRows
+        );
     }
 }
