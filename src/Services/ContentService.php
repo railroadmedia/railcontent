@@ -14,6 +14,7 @@ use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\HierarchyUpdated;
 //use Railroad\Railcontent\Events\XPModified;
 use Railroad\Railcontent\Helpers\CacheHelper;
+use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentDatumRepository;
@@ -1418,24 +1419,23 @@ class ContentService
 
         foreach ($children as $parentId => $child) {
             foreach ($child as $childO) {
-                $childrenTotalXP[$parentId] += $childO->fetch(
-                    'total_xp',
-                    $this->getDefaultXP($childO['type'], $childO->fetch('fields.difficulty', 0))
-                );
+                $childDifficulty = ContentHelper::getFieldValue([$childO['id']], 'difficulty');
+                $childrenTotalXP[$parentId] += $childO['total_xp']
+                    ??
+                    $this->getDefaultXP($childO['type'], $childDifficulty ?? 0);
             }
         }
 
+        $parentsCollection = new Collection($this->contentRepository->getByIds($contentIds));
         $parents =
-            $this->getByIds($contentIds)
-                ->keyBy('id')
+            $parentsCollection->keyBy('id')
                 ->toArray();
 
         foreach ($parents as $id => $content) {
+            $contentDifficulty = ContentHelper::getFieldValue([$content['id']], 'difficulty');
             $childrenXp = $childrenTotalXP[$id] ?? 0;
-            $contentTotalXp[$id] = $content->fetch(
-                    'fields.xp',
-                    $this->getDefaultXP($content['type'], $content->fetch('fields.difficulty', 0))
-                ) + $childrenXp;
+            $contentTotalXp[$id] =
+                ($content['xp'] ?? $this->getDefaultXP($content['type'], $contentDifficulty ?? 0)) + $childrenXp;
         }
 
         return $contentTotalXp;
@@ -1451,10 +1451,9 @@ class ContentService
             $defaultXp = config('xp_ranks.learning_path_content_completed');
         } elseif ($type == 'course') {
             $defaultXp = config('xp_ranks.course_content_completed');
-        } elseif($type == 'assignment'){
+        } elseif ($type == 'assignment') {
             $defaultXp = config('xp_ranks.assignment_content_completed');
-        }
-        else {
+        } else {
             $defaultXp = config('xp_ranks.difficulty_xp_map')[$difficulty] ?? config('xp_ranks.difficulty_xp_map.all');
         }
 

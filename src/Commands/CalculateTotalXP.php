@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Commands;
 
+use App\Decorators\Content\Types\DrumeoMethodLearningPathDecorator;
 use App\Decorators\LessonAssignmentDecorator;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
@@ -72,42 +73,42 @@ class CalculateTotalXP extends Command
         ConfigService::$availableBrands = ['drumeo'];
         $types = [
             "assignment",
-//            "course-part",
-//            "course",
-//            "song",
+            "course-part",
+            "course",
+            "song",
             "learning-path-lesson",
             "learning-path-course",
             "learning-path-level",
             "learning-path",
-//            "play-along",
-//            "question-and-answer",
-//            "25-days-of-christmas",
-//            "behind-the-scenes",
-//            "boot-camps",
-//            "camp-drumeo-ah",
-//            "challenges",
-//            "diy-drum-experiments",
-//            "exploring-beats",
-//            "gear-guides",
-//            "ha-oemurd-pmac",
-//            "live",
-//            "namm-2019",
-//            "on-the-road",
-//            "paiste-cymbals",
-//            "performances",
-//            "podcasts",
-//            "quick-tips",
-//            "rhythmic-adventures-of-captain-carson",
-//            "rhythms-from-another-planet",
-//            "rudiment",
-//            "semester-pack-lesson",
-//            "semester-pack",
-//            "solos",
-//            "sonor-drums",
-//            "student-collaborations",
-//            "student-focus",
-//            "study-the-greats"
-//            "tama-drums"
+            "play-along",
+            "question-and-answer",
+            "25-days-of-christmas",
+            "behind-the-scenes",
+            "boot-camps",
+            "camp-drumeo-ah",
+            "challenges",
+            "diy-drum-experiments",
+            "exploring-beats",
+            "gear-guides",
+            "ha-oemurd-pmac",
+            "live",
+            "namm-2019",
+            "on-the-road",
+            "paiste-cymbals",
+            "performances",
+            "podcasts",
+            "quick-tips",
+            "rhythmic-adventures-of-captain-carson",
+            "rhythms-from-another-planet",
+            "rudiment",
+            "semester-pack-lesson",
+            "semester-pack",
+            "solos",
+            "sonor-drums",
+            "student-collaborations",
+            "student-focus",
+            "study-the-greats",
+            "tama-drums"
         ];
 
         foreach ($types as $type) {
@@ -129,6 +130,7 @@ class CalculateTotalXP extends Command
                             $rows->pluck('id')
                                 ->toArray()
                         );
+
 
                         $contentIdsToUpdate = array_keys($totalXPForContents);
                         if (!empty($contentIdsToUpdate)) {
