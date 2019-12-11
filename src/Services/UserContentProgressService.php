@@ -475,10 +475,10 @@ class UserContentProgressService
         foreach ($parents as $parent) {
 
             // start parent if necessary
-            if ($content[self::STATE_STARTED] &&
-                !$parent[self::STATE_STARTED] &&
+            if (!$parent[self::STATE_STARTED] &&
                 in_array($parent['type'], $allowedTypesForStarted)) {
                 $this->startContent($parent['id'], $userId);
+                $parent[self::STATE_STARTED] = true;
             }
 
             // get siblings
