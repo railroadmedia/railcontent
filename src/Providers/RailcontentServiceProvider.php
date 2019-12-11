@@ -20,6 +20,7 @@ use Gedmo\Sortable\SortableListener;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Railroad\Doctrine\TimestampableListener;
+use Railroad\Railcontent\Commands\CalculateTotalXP;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
@@ -96,7 +97,8 @@ class RailcontentServiceProvider extends ServiceProvider
                 MigrateContentFields::class,
                 OrphanContent::class,
                 MigrateUserPlaylist::class,
-                DeleteContentAndHierarchiesForUserPlaylists::class
+                DeleteContentAndHierarchiesForUserPlaylists::class,
+                CalculateTotalXP::class
             ]
         );
     }

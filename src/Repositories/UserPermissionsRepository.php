@@ -41,8 +41,7 @@ class UserPermissionsRepository extends EntityRepository
             )
                 ->setParameter(
                     'expirationDate',
-                    Carbon::now()
-                        ->toDateTimeString()
+                    'CURRENT_TIMESTAMP()'
                 );
         }
 

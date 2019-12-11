@@ -36,7 +36,7 @@ class UserContentProgressRepository extends EntityRepository
             self::$cache[$key] =
                 $this->createQueryBuilder('up')
                     ->where('up.content IN (:contentIds)')
-                    ->andWhere('up.userId = :userId')
+                    ->andWhere('up.user = :userId')
                     ->setParameter('userId', $userId)
                     ->setParameter('contentIds', $contentIds)
                     ->getQuery()

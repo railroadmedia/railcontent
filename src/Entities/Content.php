@@ -54,6 +54,12 @@ class Content extends ArrayExpressible
     protected $status;
 
     /**
+     * @ORM\Column(type="string")
+     * @var string
+     */
+    protected $totalXp;
+
+    /**
      * @ORM\Column(type="text")
      * @var text
      */
@@ -537,5 +543,21 @@ class Content extends ArrayExpressible
     public function getLikes()
     {
         return $this->likes;
+    }
+
+    /**
+     * @return text
+     */
+    public function getTotalXp()
+    {
+        return $this->totalXp;
+    }
+
+    /**
+     * @param string $brand
+     */
+    public function setTotalXp(?string $totalXP)
+    {
+        $this->totalXp = $totalXP;
     }
 }

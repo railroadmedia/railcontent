@@ -102,7 +102,7 @@ class UserContentProgressService
                 ]
             )
             ->setMaxResults(1)
-            ->orderByColumn($alias , 'updatedOn', 'desc');
+            ->orderByColumn($alias, 'updatedOn', 'desc');
 
         return $qb->getQuery()
             ->getSingleResult('Railcontent');
@@ -243,29 +243,36 @@ class UserContentProgressService
         $this->entityManager->flush();
 
         // also mark children as complete
-        $childIds = [$contentId];
-
-        $hierarchies = $this->contentHierarchyService->getByParentIds($childIds);
-
+        $hierarchies = $this->contentHierarchyService->getByParentIds([$contentId]);
         foreach ($hierarchies as $hierarchy) {
-            $child = $hierarchy->getChild();
+            $childIds[] =
+                $hierarchy->getChild()
+                    ->getId();
+        }
 
-            $userContentProgress = $this->userContentRepository->getByUserContentState($user, $child);
+        $userContentProgress = $this->userContentRepository->getByUserIdAndWhereContentIdIn($user, $childIds);
+        $existingProgress = [];
+        foreach ($userContentProgress as $progress) {
+            $existingProgress[$progress->getContent()
+                ->getId()] = $progress;
+        }
 
-            if (!$userContentProgress) {
-                $userContentProgress = new UserContentProgress();
+        foreach ($hierarchies as $child) {
+            $userContentProgress = new UserContentProgress();
+            if (array_key_exists($child->getId(), $existingProgress)) {
+                $userContentProgress = $existingProgress[$child->getId()];
             }
 
             $userContentProgress->setProgressPercent(100);
             $userContentProgress->setState(self::STATE_COMPLETED);
             $userContentProgress->setUser($user);
-            $userContentProgress->setContent($child);
+            $userContentProgress->setContent($child->getChild());
             $userContentProgress->setUpdatedOn(Carbon::parse(now()));
 
             $this->entityManager->persist($userContentProgress);
             $this->entityManager->flush();
 
-            event(new UserContentProgressSaved($user, $child, 100, self::STATE_COMPLETED, false));
+            event(new UserContentProgressSaved($user, $child->getChild(), 100, self::STATE_COMPLETED, false));
         }
 
         event(new UserContentProgressSaved($user, $content, 100, self::STATE_COMPLETED));
@@ -293,7 +300,7 @@ class UserContentProgressService
 
         $userContentProgress = $this->userContentRepository->getByUserContentState($user, $content);
 
-        if($userContentProgress) {
+        if ($userContentProgress) {
             $this->entityManager->remove($userContentProgress);
             $this->entityManager->flush();
         }
@@ -319,7 +326,7 @@ class UserContentProgressService
         //delete user content progress cache
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressSaved($user, $content, 0 , self::STATE_STARTED));
+        event(new UserContentProgressSaved($user, $content, 0, self::STATE_STARTED));
 
         //delete user progress from cache
         $this->entityManager->getCache()

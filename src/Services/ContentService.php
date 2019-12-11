@@ -1453,4 +1453,73 @@ class ContentService
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    /**
+     * @param $contentIds
+     * @return array
+     */
+    public function calculateTotalXpForContents($contentIds)
+    {
+        $contentTotalXp = [];
+        $children =
+            $this->contentRepository->build()
+                ->restrictByUserAccess()
+                ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
+                ->groupBy('p.id')
+                ->andWhere('p.parent IN (:parentIds)')
+                ->setParameter('parentIds', $contentIds)
+                ->getQuery()
+                ->setCacheable(true)
+                ->setCacheRegion('pull')
+                ->getResult();
+
+        foreach($contentIds as $contentId){
+
+            $childrenTotalXP[$contentId] = 0;
+        }
+
+        foreach ($children as $child) {
+                $childDifficulty = $child->getDifficulty() ?? 0;
+                $childrenTotalXP[$child->getParent()->getParent()->getId()] += $child->getTotalXp()
+                    ??
+                    $this->getDefaultXP($child->getType(), $childDifficulty);
+        }
+
+        $parents = $this->contentRepository->build()
+            ->andWhere(config('railcontent.table_prefix') . 'content'.'.id IN (:ids)')
+            ->setParameter('ids', $contentIds)
+            ->getQuery()
+            ->setCacheable(true)
+            ->setCacheRegion('pull')
+            ->getResult();
+
+        foreach ($parents as $content) {
+            $contentDifficulty = $content->getDifficulty() ?? 0;
+            $childrenXp = $childrenTotalXP[$content->getId()];
+            $contentTotalXp[$content->getId()] =
+                ($content->getXp() ?? $this->getDefaultXP($content->getType(), $contentDifficulty)) + $childrenXp;
+        }
+        return $contentTotalXp;
+    }
+
+    public function getDefaultXP($type, $difficulty)
+    {
+        if ($type == 'pack') {
+            $defaultXp = config('xp_ranks.pack_content_completed');
+        } elseif ($type == 'pack_bundle') {
+            $defaultXp = config('xp_ranks.pack_bundle_content_completed');
+        } elseif ($type == 'learning_path') {
+            $defaultXp = config('xp_ranks.learning_path_content_completed');
+        } elseif ($type == 'course') {
+            $defaultXp = config('xp_ranks.course_content_completed');
+        } elseif ($type == 'assignment') {
+            $defaultXp = config('xp_ranks.assignment_content_completed');
+        } elseif ($type == 'unit') {
+            $defaultXp = config('xp_ranks.unit_content_completed');
+        } else {
+            $defaultXp = config('xp_ranks.difficulty_xp_map')[$difficulty] ?? config('xp_ranks.difficulty_xp_map.all');
+        }
+        return $defaultXp;
+    }
+
 }

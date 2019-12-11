@@ -55,11 +55,15 @@ class ContentHierarchyService
      */
     public function getByParentIds(array $parentIds)
     {
-        return $this->contentHierarchyRepository->findBy(
-            [
-                'parent' => $parentIds,
-            ]
-        );
+        $results = $this->contentHierarchyRepository->createQueryBuilder('ch')
+        ->where('ch.parent IN (:parentIds)')
+        ->setParameter('parentIds', $parentIds)
+            ->setCacheable(true)
+            ->setCacheRegion('pull')
+        ->getQuery()
+        ->getResult();
+
+        return $results;
     }
 
     /**
