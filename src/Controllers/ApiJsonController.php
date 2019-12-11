@@ -93,7 +93,7 @@ class ApiJsonController extends Controller
 
         return response()->json(
             [
-                'data' => $commentData['results'],
+                'data' => $commentData['results']->values()->all(),
                 'meta' => [
                     'totalCommentsAndReplies' => $commentData['total_comments_and_results'],
                     'totalResults' => $commentData['total_results'],
