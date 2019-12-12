@@ -295,7 +295,7 @@ class UserContentProgressService
      */
     public function resetContent($contentId, $userId)
     {
-        $content = $this->contentService->getById($contentId);
+        $content = $this->contentService->getById($contentId, false);
         $user = $this->userProvider->getUserById($userId);
 
         $userContentProgress = $this->userContentRepository->getByUserContentState($user, $content);
@@ -363,7 +363,7 @@ class UserContentProgressService
             );
         }
 
-        $content = $this->contentService->getById($contentId);
+        $content = $this->contentService->getById($contentId, false);
         $user = $this->userProvider->getUserById($userId);
         $state = ($progress == 100) ? self::STATE_COMPLETED : self::STATE_STARTED;
 
@@ -414,7 +414,8 @@ class UserContentProgressService
 
         $parents = $this->contentService->getByChildIdWhereParentTypeIn(
             $content->getId(),
-            $allowedTypes
+            $allowedTypes,
+            false
         );
 
         foreach ($parents as $parent) {
@@ -428,7 +429,7 @@ class UserContentProgressService
             // get siblings
             $siblings = $parent->getChild() ?? $this->attachProgressToContents(
                     $user->getId(),
-                    $this->contentService->getByParentId($parent->getId())
+                    $this->contentService->getByParentId($parent->getId(), false)
                 );
 
             if (is_array($siblings)) {

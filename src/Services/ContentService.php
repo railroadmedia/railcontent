@@ -113,7 +113,7 @@ class ContentService
      * @return mixed
      * @throws NonUniqueResultException
      */
-    public function getById($id)
+    public function getById($id, $decorated = true)
     {
         $results =
             $this->contentRepository->build()
@@ -125,7 +125,11 @@ class ContentService
                 ->setCacheRegion('pull')
                 ->getOneOrNullResult();
 
-        return $this->resultsHydrator->hydrate([$results], $this->entityManager)[0];
+        if($decorated) {
+            return $this->resultsHydrator->hydrate([$results], $this->entityManager)[0];
+        }
+            return $results;
+
     }
 
     /** Call the get by ids method from repository
@@ -341,7 +345,7 @@ class ContentService
      * @param string $orderByDirection
      * @return mixed
      */
-    public function getByParentId($parentId, $orderBy = 'childPosition', $orderByDirection = 'asc')
+    public function getByParentId($parentId, $orderBy = 'childPosition', $orderByDirection = 'asc', $decorated = true)
     {
         $results =
             $this->contentRepository->build()
@@ -355,7 +359,10 @@ class ContentService
                 ->setCacheRegion('pull')
                 ->getResult();
 
-        return $this->resultsHydrator->hydrate($results, $this->entityManager);
+        if($decorated) {
+            return $this->resultsHydrator->hydrate($results, $this->entityManager);
+        }
+        return $results;
     }
 
     /** Get paginated contents by parent id.
@@ -559,7 +566,7 @@ class ContentService
      * @param array $types
      * @return mixed
      */
-    public function getByChildIdWhereParentTypeIn($childId, array $types)
+    public function getByChildIdWhereParentTypeIn($childId, array $types, $decorated = true)
     {
         $results =
             $this->contentRepository->build()
@@ -573,7 +580,10 @@ class ContentService
                 ->setCacheRegion('pull')
                 ->getResult();
 
-        return $this->resultsHydrator->hydrate($results, $this->entityManager);
+        if($decorated) {
+            return $this->resultsHydrator->hydrate($results, $this->entityManager);
+        }
+        return $results;
     }
 
     /** Get paginated contents by type and user progress state.
