@@ -75,10 +75,8 @@ class ContentOldStructureTransformer extends TransformerAbstract
         $results = array_merge(
             $serialized,
             [
-                'parent_id' => ($content->getParent()) ?
-                    $content->getParent()
-                        ->getParent()
-                        ->getId() : null,
+                'parent_id' => (!$content->getParent()->isEmpty()) ?
+                    $content->getParent()[0]->getParent()->getId() : null,
                 'child_id' => null,
                 'completed' => $content->isCompleted(),
                 'started' => $content->isStarted(),

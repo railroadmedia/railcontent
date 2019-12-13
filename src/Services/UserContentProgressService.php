@@ -224,7 +224,7 @@ class UserContentProgressService
             );
         }
 
-        $content = $this->contentService->getById($contentId);
+        $content = $this->contentService->getById($contentId, false);
         $user = $this->userProvider->getUserById($userId);
 
         $userContentProgress = $this->userContentRepository->getByUserContentState($user, $content);
@@ -242,6 +242,7 @@ class UserContentProgressService
         $this->entityManager->persist($userContentProgress);
         $this->entityManager->flush();
 
+        $childIds = [];
         // also mark children as complete
         $hierarchies = $this->contentHierarchyService->getByParentIds([$contentId]);
         foreach ($hierarchies as $hierarchy) {
@@ -271,8 +272,6 @@ class UserContentProgressService
 
             $this->entityManager->persist($userContentProgress);
             $this->entityManager->flush();
-
-            event(new UserContentProgressSaved($user, $child->getChild(), 100, self::STATE_COMPLETED, false));
         }
 
         event(new UserContentProgressSaved($user, $content, 100, self::STATE_COMPLETED));
@@ -318,8 +317,6 @@ class UserContentProgressService
             if ($userContentProgress) {
                 $this->entityManager->remove($userContentProgress);
                 $this->entityManager->flush();
-
-                event(new UserContentProgressSaved($user, $child, 0, self::STATE_STARTED));
             }
         }
 
@@ -429,7 +426,7 @@ class UserContentProgressService
             // get siblings
             $siblings = $parent->getChild() ?? $this->attachProgressToContents(
                     $user->getId(),
-                    $this->contentService->getByParentId($parent->getId(), false)
+                    $this->contentService->getByParentId($parent->getId(), 'childPosition','asc', false)
                 );
 
             if (is_array($siblings)) {
@@ -459,7 +456,7 @@ class UserContentProgressService
                     $parent->getId(),
                     $this->getProgressPercentage(
                         $user->getId(),
-                        $this->contentService->getByParentId($parent->getId())
+                        $this->contentService->getByParentId($parent->getId(),  'childPosition','asc', false)
                     ),
                     $user->getId(),
                     true

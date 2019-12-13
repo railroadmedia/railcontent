@@ -56,6 +56,8 @@ class ContentDatumService
             ->where('d.content IN (:contents)')
             ->setParameter('contents', $contentIds)
             ->getQuery()
+            ->setCacheable(true)
+            ->setCacheRegion('pull')
             ->getResult('Railcontent');
     }
 

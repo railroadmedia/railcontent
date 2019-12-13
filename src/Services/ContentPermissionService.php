@@ -182,6 +182,8 @@ class ContentPermissionService
             ->setParameter('contentType', $contentType);
 
         return $qb->getQuery()
+            ->setCacheable(true)
+            ->setCacheRegion('pull')
             ->getResult('Railcontent');
     }
 
