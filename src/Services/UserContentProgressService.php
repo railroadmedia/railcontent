@@ -576,17 +576,6 @@ class UserContentProgressService
                                 break;
                             }
                         }
-                        $this->userContentRepository->updateOrCreate(
-                            [
-                                'content_id' => $drumeoMethod['id'],
-                                'user_id' => $userId,
-                            ],
-                            [
-                                'higher_key_progress' => ($currentLevel + 1) . '.' . $currentCourse,
-                                'updated_on' => Carbon::now()
-                                    ->toDateTimeString(),
-                            ]
-                        );
                     }
                     $this->userContentRepository->updateOrCreate(
                         [
@@ -612,6 +601,18 @@ class UserContentProgressService
                     ]
                 );
             }
+
+            $this->userContentRepository->updateOrCreate(
+                [
+                    'content_id' => $drumeoMethod['id'],
+                    'user_id' => $userId,
+                ],
+                [
+                    'higher_key_progress' => ($currentLevel + 1) . '.' . $currentCourse,
+                    'updated_on' => Carbon::now()
+                        ->toDateTimeString(),
+                ]
+            );
         }
 
         return true;
