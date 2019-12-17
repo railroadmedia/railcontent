@@ -15,6 +15,10 @@ class Decorator
      */
     public static function decorate($data, $type, $decoratorClass = null)
     {
+        if(is_null($data)){
+            return $data;
+        }
+
         if (isset($data['results'])) {
 
             // content is nested in results

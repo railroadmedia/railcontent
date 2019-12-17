@@ -520,6 +520,7 @@ class UserContentProgressService
                         $complete = false;
                     }
                 }
+
                 if ($complete &&
                     !$parent[self::STATE_COMPLETED] &&
                     in_array($parent['type'], $allowedTypesForCompleted)) {
@@ -549,64 +550,68 @@ class UserContentProgressService
             $drumeoMethod =
                 $this->contentService->getBySlugAndType('drumeo-method', 'learning-path')
                     ->first();
+
             $currentLevel = 0;
             $currentCourse = 0;
             $currentLesson = 0;
-            foreach ($drumeoMethod['levels'] as $level) {
-                if ($level[self::STATE_COMPLETED]) {
-                    $currentLevel = $level['position'];
+            if(!empty($drumeoMethod['levels']->toArray())) {
+                foreach ($drumeoMethod['levels'] as $level) {
+                    if ($level[self::STATE_COMPLETED]) {
+                        $currentLevel = $level['position'] - 1;
+                    }
                 }
-            }
-            $courses = $this->contentService->getByParentId($drumeoMethod['levels'][$currentLevel]['id']);
-
-            foreach ($courses as $course) {
-                if ($course[self::STATE_COMPLETED]) {
-                    $currentCourse = $course['position'];
+                $courses = $this->contentService->getByParentId($drumeoMethod['levels'][$currentLevel]['id']);
+                if (!empty($courses->toArray())) {
+                    foreach ($courses as $course) {
+                        if ($course[self::STATE_COMPLETED]) {
+                            $currentCourse = $course['position'] - 1;
+                        }
+                    }
+                    $lessons = $this->contentService->getByParentId($courses[$currentCourse]['id']);
+                    if (!empty($lessons->toArray())) {
+                        foreach ($lessons as $lesson) {
+                            if ($lesson[self::STATE_COMPLETED]) {
+                                $currentLesson++;
+                            } else {
+                                break;
+                            }
+                        }
+                        $this->userContentRepository->updateOrCreate(
+                            [
+                                'content_id' => $drumeoMethod['id'],
+                                'user_id' => $userId,
+                            ],
+                            [
+                                'higher_key_progress' => ($currentLevel + 1) . '.' . $currentCourse,
+                                'updated_on' => Carbon::now()
+                                    ->toDateTimeString(),
+                            ]
+                        );
+                    }
+                    $this->userContentRepository->updateOrCreate(
+                        [
+                            'content_id' => $courses[$currentCourse]['id'],
+                            'user_id' => $userId,
+                        ],
+                        [
+                            'higher_key_progress' => $currentCourse . '.' . $currentLesson,
+                            'updated_on' => Carbon::now()
+                                ->toDateTimeString(),
+                        ]
+                    );
                 }
+                $this->userContentRepository->updateOrCreate(
+                    [
+                        'content_id' => $drumeoMethod['levels'][$currentLevel]['id'],
+                        'user_id' => $userId,
+                    ],
+                    [
+                        'higher_key_progress' => $currentCourse . '.' . $currentLesson,
+                        'updated_on' => Carbon::now()
+                            ->toDateTimeString(),
+                    ]
+                );
             }
-            $lessons = $this->contentService->getByParentId($courses[$currentCourse]['id']);
-            $isLessonCompleted = false;
-            foreach ($lessons as $lesson) {
-                if ($lesson[self::STATE_COMPLETED]) {
-                    $currentLesson++;
-                }else{
-                    break;
-                }
-            }
-            $this->userContentRepository->updateOrCreate(
-                [
-                    'content_id' => $drumeoMethod['levels'][$currentLevel]['id'],
-                    'user_id' => $userId,
-                ],
-                [
-                    'higher_key_progress' => $currentCourse . '.' . $currentLesson,
-                    'updated_on' => Carbon::now()
-                        ->toDateTimeString(),
-                ]
-            );
-            $this->userContentRepository->updateOrCreate(
-                [
-                    'content_id' => $courses[$currentCourse]['id'],
-                    'user_id' => $userId,
-                ],
-                [
-                    'higher_key_progress' => $currentCourse . '.' . $currentLesson,
-                    'updated_on' => Carbon::now()
-                        ->toDateTimeString(),
-                ]
-            );
-            error_log(' Drumeo method - user rank ========================= ' . print_r(($currentLevel + 1) . '.' . $currentCourse, true));
-            $this->userContentRepository->updateOrCreate(
-                [
-                    'content_id' => $drumeoMethod['id'],
-                    'user_id' => $userId,
-                ],
-                [
-                    'higher_key_progress' => ($currentLevel + 1) . '.' . $currentCourse,
-                    'updated_on' => Carbon::now()
-                        ->toDateTimeString(),
-                ]
-            );
         }
 
         return true;
