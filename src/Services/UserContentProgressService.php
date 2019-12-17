@@ -560,11 +560,12 @@ class UserContentProgressService
                         $currentLevel = $level['position'] - 1;
                     }
                 }
+
                 $courses = $this->contentService->getByParentId($drumeoMethod['levels'][$currentLevel]['id']);
                 if (!empty($courses->toArray())) {
                     foreach ($courses as $course) {
                         if ($course[self::STATE_COMPLETED]) {
-                            $currentCourse = $course['position'] - 1;
+                            $currentCourse = $course['position'];
                         }
                     }
                     $lessons = $this->contentService->getByParentId($courses[$currentCourse]['id']);
