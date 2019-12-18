@@ -558,6 +558,8 @@ class UserContentProgressService
                 foreach ($drumeoMethod['levels'] as $level) {
                     if ($level[self::STATE_COMPLETED]) {
                         $currentLevel = $level['position'] - 1;
+                    } else {
+                        break;
                     }
                 }
 
@@ -566,6 +568,8 @@ class UserContentProgressService
                     foreach ($courses as $course) {
                         if ($course[self::STATE_COMPLETED]) {
                             $currentCourse = $course['position'];
+                        } else {
+                            break;
                         }
                     }
                     $lessons = $this->contentService->getByParentId($courses[$currentCourse]['id']);
