@@ -340,7 +340,7 @@ class ContentJsonController extends Controller
 
         $filterOptions = $this->contentService->getFiltersForUserProgressState(auth()->id(), 'started');
 
-        $filterOptions['content_type'] = array_values(array_diff($filterOptions['content_type'] ?? [], ['course-part','learning-path-lesson','learning-path-course','learning-path-level']));
+        $filterOptions['content_type'] = array_values(array_diff($filterOptions['content_type'] ?? [], ['course-part']));
 
         return (new ContentFilterResultsEntity(
             [
