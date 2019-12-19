@@ -1442,13 +1442,6 @@ class ContentRepository extends RepositoryBase
                 // only uniques
                 $availableFields[$row['key']] = array_values(array_unique($availableFields[$row['key']]));
                 $availableFields['content_type'] = array_values(array_unique($availableFields['content_type']));
-
-                usort(
-                    $availableFields[$row['key']],
-                    function ($a, $b) {
-                        return strcmp($a, $b);
-                    }
-                );
             }
         }
 
@@ -1463,15 +1456,21 @@ class ContentRepository extends RepositoryBase
                 $availableFields[$row['key']] =
                     array_map("unserialize", array_unique(array_map("serialize", $availableFields[$row['key']])));
 
-                usort(
-                    $availableFields[$row['key']],
-                    function ($a, $b) {
-                        return strcmp($a['slug'], $b['slug']);
-                    }
-                );
-
                 $availableFields[$row['key']] = array_values($availableFields[$row['key']]);
             }
+        }
+
+        foreach ($availableFields as $availableFieldIndex => $availableField) {
+            usort(
+                $availableFields[$availableFieldIndex],
+                function ($a, $b) {
+                    if (is_array($a)) {
+                        return strncmp($a['slug'], $b['slug'], 15);
+                    }
+
+                    return strncmp($a, $b, 15);
+                }
+            );
         }
 
         // random use case, should be refactored at some point
