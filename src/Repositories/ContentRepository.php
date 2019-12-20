@@ -1433,16 +1433,16 @@ class ContentRepository extends RepositoryBase
         $subContentIds = [];
 
         foreach ($rows as $row) {
+            $availableFields['content_type'][] = $row['content_type'];
             if ($row['type'] == 'content_id') {
                 $subContentIds[] = $row['value'];
             } else {
-                $availableFields['content_type'][] = $row['content_type'];
                 $availableFields[$row['key']][] = trim(strtolower($row['value']));
-
                 // only uniques
                 $availableFields[$row['key']] = array_values(array_unique($availableFields[$row['key']]));
-                $availableFields['content_type'] = array_values(array_unique($availableFields['content_type']));
             }
+
+            $availableFields['content_type'] = array_values(array_unique($availableFields['content_type']));
         }
 
         $subContents = $this->getByIds($subContentIds);
