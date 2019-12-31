@@ -257,7 +257,7 @@ class UserContentProgressService
             )
             ->delete();
 
-        $idsToDelete = [];
+        $idsToDelete = [(integer)$contentId];
         $childIds = [$contentId];
 
         do {
