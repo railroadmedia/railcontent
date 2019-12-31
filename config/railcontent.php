@@ -147,6 +147,11 @@ return [
         'content-type',
         'content-type',
     ],
+    
+    // ['type' => depth]
+    'content_types_and_depth_to_calculate_hierarchy_higher_key_progress' => [
+        'learning-path',
+    ],
 
     // ecommerce integration
     'enable_ecommerce_integration' => true,
