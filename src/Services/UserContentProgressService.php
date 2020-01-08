@@ -105,7 +105,7 @@ class UserContentProgressService
             ->orderByColumn($alias, 'updatedOn', 'desc');
 
         return $qb->getQuery()
-            ->getSingleResult('Railcontent');
+            ->getOneOrNullResult('Railcontent');
     }
 
     /** Keyed by content id.

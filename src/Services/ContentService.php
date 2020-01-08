@@ -126,7 +126,7 @@ class ContentService
                 ->getOneOrNullResult();
 
         if($decorated) {
-            return $this->resultsHydrator->hydrate([$results], $this->entityManager)[0];
+            return array_first($this->resultsHydrator->hydrate([$results], $this->entityManager));
         }
             return $results;
 
