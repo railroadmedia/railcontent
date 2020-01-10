@@ -281,11 +281,6 @@ class UserContentProgressService
 
         event(new UserContentsProgressReset($userId, $idsToDelete));
 
-        //delete user content progress cache
-        UserContentProgressRepository::$cache = [];
-
-        event(new UserContentProgressSaved($userId, $contentId, 0, self::STATE_STARTED));
-
         //delete user progress from cache
         CacheHelper::deleteUserFields(
             [
@@ -302,6 +297,11 @@ class UserContentProgressService
             ],
             'content'
         );
+
+        //delete user content progress cache
+        UserContentProgressRepository::$cache = [];
+
+        event(new UserContentProgressSaved($userId, $contentId, 0, self::STATE_STARTED));
 
         return true;
     }
@@ -477,7 +477,7 @@ class UserContentProgressService
             // start parent if necessary
             if (!$parent[self::STATE_STARTED] &&
                 in_array($parent['type'], $allowedTypesForStarted)) {
-                $this->startContent($parent['id'], $userId);
+                $this->startContent($parent['id'], $userId, true);
                 $parent[self::STATE_STARTED] = true;
             }
 
