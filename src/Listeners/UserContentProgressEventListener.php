@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Listeners;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\Event;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
