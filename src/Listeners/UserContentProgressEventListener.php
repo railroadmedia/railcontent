@@ -111,9 +111,10 @@ class UserContentProgressEventListener extends Event
                         ->get()
                         ->keyBy('child_position');
 
-                foreach ($level2Children as $level2Child) {
-                    if ($level2Child->state == 'completed' && $level2Position < count($level2Children)) {
-                        $level2Position++;
+                foreach ($level2Children as $index => $level2Child) {
+                    if ($level2Child->state != 'completed') {
+                        $level2Position = $index - 1;
+                        break;
                     }
                 }
             };
@@ -125,7 +126,7 @@ class UserContentProgressEventListener extends Event
                     'user_id' => $event->userId,
                 ],
                 [
-                    'higher_key_progress' => $level1Position.'.'.$level2Position,
+                    'higher_key_progress' => $level1Position . '.' . $level2Position,
                     'updated_on' => Carbon::now()
                         ->toDateTimeString(),
                 ]
