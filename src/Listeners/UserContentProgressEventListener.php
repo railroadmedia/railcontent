@@ -67,17 +67,21 @@ class UserContentProgressEventListener extends Event
                     ->table('railcontent_content_hierarchy')
                     ->leftJoin(
                         'railcontent_user_content_progress',
-                        'railcontent_user_content_progress.content_id',
-                        '=',
-                        'railcontent_content_hierarchy.child_id'
-                    )
-                    ->where('parent_id', $event->contentId)
-                    ->where(
-                        function (Builder $builder) use ($event) {
-                            $builder->where('railcontent_user_content_progress.user_id', $event->userId)
-                                ->orWhereNull('railcontent_user_content_progress.user_id');
+                        function (JoinClause $join) use ($event) {
+                            $join->on(
+                                'railcontent_user_content_progress.content_id',
+                                '=',
+                                'railcontent_content_hierarchy.child_id'
+                            )
+                                ->where(
+                                    function (Builder $builder) use ($event) {
+                                        $builder->where('railcontent_user_content_progress.user_id', $event->userId)
+                                            ->orWhereNull('railcontent_user_content_progress.user_id');
+                                    }
+                                );
                         }
                     )
+                    ->where('parent_id', $event->contentId)
                     ->orderBy('child_position', 'asc')
                     ->get()
                     ->keyBy('child_position');
@@ -96,17 +100,22 @@ class UserContentProgressEventListener extends Event
                         ->table('railcontent_content_hierarchy')
                         ->leftJoin(
                             'railcontent_user_content_progress',
-                            'railcontent_user_content_progress.content_id',
-                            '=',
-                            'railcontent_content_hierarchy.child_id'
-                        )
-                        ->where('parent_id', $level1ChildrenCurrentChild->child_id)
-                        ->where(
-                            function (Builder $builder) use ($event) {
-                                $builder->where('railcontent_user_content_progress.user_id', $event->userId)
-                                    ->orWhereNull('railcontent_user_content_progress.user_id');
+                            function (JoinClause $join) use ($event) {
+                                $join->on(
+                                    'railcontent_user_content_progress.content_id',
+                                    '=',
+                                    'railcontent_content_hierarchy.child_id'
+                                )
+                                    ->where(
+                                        function (Builder $builder) use ($event) {
+                                            $builder->where('railcontent_user_content_progress.user_id', $event->userId)
+                                                ->orWhereNull('railcontent_user_content_progress.user_id');
+                                        }
+                                    );
                             }
                         )
+                        ->where('parent_id', $level1ChildrenCurrentChild->child_id)
+
                         ->orderBy('child_position', 'asc')
                         ->get()
                         ->keyBy('child_position');
