@@ -281,6 +281,11 @@ class UserContentProgressService
 
         event(new UserContentsProgressReset($userId, $idsToDelete));
 
+        //delete user content progress cache
+        UserContentProgressRepository::$cache = [];
+
+        event(new UserContentProgressSaved($userId, $contentId, 0, self::STATE_STARTED));
+
         //delete user progress from cache
         CacheHelper::deleteUserFields(
             [
@@ -297,11 +302,6 @@ class UserContentProgressService
             ],
             'content'
         );
-
-        //delete user content progress cache
-        UserContentProgressRepository::$cache = [];
-
-        event(new UserContentProgressSaved($userId, $contentId, 0, self::STATE_STARTED));
 
         return true;
     }
