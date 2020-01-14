@@ -90,6 +90,15 @@ class Content extends ArrayExpressible
     private $parent;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Railroad\Railcontent\Entities\Content", inversedBy="parent")
+     * @ORM\JoinTable(name="railcontent_content_hierarchy",
+     *      joinColumns={@ORM\JoinColumn(name="child_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="parent_id", referencedColumnName="id")}
+     *      )
+     */
+    private $parentContent;
+
+    /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentData", mappedBy="content", cascade={"remove"})
      * @ORM\JoinColumn(name="id", referencedColumnName="content_id")
      */
@@ -548,5 +557,13 @@ class Content extends ArrayExpressible
     public function setTotalXp(?string $totalXP)
     {
         $this->totalXp = $totalXP;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParentContent()
+    {
+        return $this->parentContent->first();
     }
 }
