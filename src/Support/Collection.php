@@ -36,9 +36,7 @@ class Collection extends \Illuminate\Support\Collection
         $sum = 0;
 
         foreach ($this->items as $itemIndex => $item) {
-            if ($item instanceof Entity) {
-                $sum += (integer)$item->fetch($fetchString, 0);
-            }
+            $sum += (integer)$item->fetch($fetchString, 0);
         }
 
         return $sum;
