@@ -151,10 +151,6 @@ class AddCoreColumnsToContentTable extends Migration
                         ->after('released')
                         ->nullable();
 
-                    $table->string('total_xp')
-                        ->index()
-                        ->after('slow_bpm')
-                        ->nullable();
 
                     $table->string('transcriber_name')
                         ->index()
