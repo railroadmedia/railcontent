@@ -46,7 +46,7 @@ class DeleteContentAndHierarchiesForUserPlaylists extends Command
      */
     public function handle()
     {
-        $chunkSize = 10000;
+        $chunkSize = 1000;
 
         $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
         $dbConnection->disableQueryLog();
