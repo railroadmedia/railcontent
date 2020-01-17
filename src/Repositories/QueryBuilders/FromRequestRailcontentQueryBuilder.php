@@ -60,9 +60,11 @@ class FromRequestRailcontentQueryBuilder extends QueryBuilder
     {
         $first = $skip * $limit;
 
-        if($limit > 0) {
-            $this->setMaxResults($limit);
-            }
+        if($limit < 0) {
+            $limit = null;
+        }
+
+        $this->setMaxResults($limit);
         $this->setFirstResult($first);
 
         return $this;
