@@ -142,15 +142,16 @@ class ContentOldStructureTransformer extends TransformerAbstract
                 if ($value instanceof PersistentCollection) {
                     foreach ($value as $item) {
                         $value = call_user_func([$item, $getterName]);
-                        if (mb_check_encoding($value) == false) {
+
+                        if (!($value instanceof Content) && mb_check_encoding($value) == false) {
                             $value = utf8_encode($value);
                         }
 
                         $fields[] = [
                             'content_id' => $content->getId(),
                             'key' => $field,
-                            'value' => $value,
-                            'type' => 'string',
+                            'value' => ($value instanceof Content)?$this->transform($value):$value,
+                            'type' => ($value instanceof Content)?'content_id':'string',
                             'position' => 1,
                         ];
                     }
