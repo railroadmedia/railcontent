@@ -520,6 +520,27 @@ class ContentService
     }
 
     /**
+     * Get contents by child ids with specified type.
+     *
+     * @param array $childIds
+     * @param string $type
+     * @return array|Collection|ContentEntity[]
+     */
+    public function getByChildIdsWhereTypeForUrl(array $childIds, $type)
+    {
+        $hash = 'contents_by_child_ids_and_type_for_url_' . $type . '_' . CacheHelper::getKey($childIds, $type);
+        $results = CacheHelper::getCachedResultsForKey($hash);
+
+        if (!$results) {
+            $resultsDB = $this->contentRepository->getByChildIdsWhereTypeForUrl($childIds, $type);
+            $results =
+                CacheHelper::saveUserCache($hash, $resultsDB, array_merge(array_pluck($resultsDB, 'id'), $childIds));
+        }
+
+        return Decorator::decorate($results, 'content');
+    }
+
+    /**
      * Get contents by child id where parent type met the criteria.
      *
      * @param integer $childId
@@ -777,6 +798,8 @@ class ContentService
      * @param array $requiredUserStates
      * @param array $includedUserStates
      * @param boolean $pullFilterFields
+     * @param bool $getFutureContentOnly
+     * @param bool $pullPagination
      * @return ContentFilterResultsEntity
      */
     public function getFiltered(
@@ -791,7 +814,8 @@ class ContentService
         array $requiredUserStates = [],
         array $includedUserStates = [],
         $pullFilterFields = true,
-        $getFutureContentOnly = false
+        $getFutureContentOnly = false,
+        $pullPagination = true
     ) {
         $results = null;
         if ($limit == 'null') {
@@ -864,7 +888,7 @@ class ContentService
             $resultsDB = new ContentFilterResultsEntity(
                 [
                     'results' => $filter->retrieveFilter(),
-                    'total_results' => $filter->countFilter(),
+                    'total_results' => $pullPagination ? $filter->countFilter() : 0,
                     'filter_options' => $pullFilterFields ? $filter->getFilterFields() : [],
                 ]
             );

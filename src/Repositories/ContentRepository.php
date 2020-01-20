@@ -476,6 +476,35 @@ class ContentRepository extends RepositoryBase
     }
 
     /**
+     * @param $parentId
+     * @return array
+     */
+    public function getByChildIdsWhereTypeForUrl(array $childIds, $type)
+    {
+        $contentRows =
+            $this->query()
+                ->selectPrimaryColumns()
+                ->restrictByUserAccess()
+                ->leftJoin(
+                    ConfigService::$tableContentHierarchy,
+                    ConfigService::$tableContentHierarchy . '.parent_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                ->whereIn(ConfigService::$tableContentHierarchy . '.child_id', $childIds)
+                ->where(ConfigService::$tableContent . '.type', $type)
+                ->selectInheritenceColumns()
+                ->getToArray(['id', 'slug', 'child_ids']);
+
+        return $this->processRows(
+            $contentRows,
+            [],
+            [],
+            []
+        );
+    }
+
+    /**
      * @param $childId
      * @param array $types
      * @return array
