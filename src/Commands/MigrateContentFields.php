@@ -357,14 +357,20 @@ class MigrateContentFields extends Command
                     foreach ($groupRows as $contentId => $row) {
                         $data = [];
                         foreach ($row as $item) {
+
                             if (array_key_exists($item->key, $mappingColumns)) {
                                 $key = $mappingColumns[$item->key];
                             } else {
                                 $key = $item->key;
                             }
-                            $data[$key] = $item->value;
 
-                            $migratedFields++;
+                            if($item->key == 'home_staff_pick_rating' && !is_numeric($item->value)) {
+                                continue;
+                            }
+
+                                $data[$key] = $item->value;
+
+                                $migratedFields++;
                         }
                         $contentColumns[$contentId] = $data;
                     }

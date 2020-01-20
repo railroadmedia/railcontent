@@ -23,7 +23,7 @@ class AddCoreColumnsToContentTable extends Migration
                         ->after('user_id')
                         ->nullable();
 
-                    $table->string('home_staff_pick_rating')
+                    $table->integer('home_staff_pick_rating')
                         ->index()
                         ->after('difficulty')
                         ->nullable();
