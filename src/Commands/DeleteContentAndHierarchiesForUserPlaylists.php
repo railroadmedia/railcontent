@@ -46,7 +46,7 @@ class DeleteContentAndHierarchiesForUserPlaylists extends Command
      */
     public function handle()
     {
-        $chunkSize = 1000;
+        $chunkSize = 100;
 
         $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
         $dbConnection->disableQueryLog();
@@ -95,17 +95,21 @@ class DeleteContentAndHierarchiesForUserPlaylists extends Command
                     }
                 }
             );
+        
+        if (!empty($hierarchiesIds)) {
+            $statement = "DELETE FROM " . config('railcontent.table_prefix') . 'content_hierarchy';
+            $statement .= " WHERE id IN (" . implode(",", $hierarchiesIds) . ")";
 
-        $statement = "DELETE FROM " . config('railcontent.table_prefix') . 'content_hierarchy';
-        $statement .= " WHERE id IN (" . implode(",", $hierarchiesIds) . ")";
+            $dbConnection->statement($statement);
+        }
 
-        $dbConnection->statement($statement);
+        if (!empty($userPlaylistIds)) {
+            $statement = "DELETE FROM " . config('railcontent.table_prefix') . 'content';
+            $statement .= " WHERE id IN (" . implode(",", $userPlaylistIds) . ")";
 
-        $statement = "DELETE FROM " . config('railcontent.table_prefix') . 'content';
-        $statement .= " WHERE id IN (" . implode(",", $userPlaylistIds) . ")";
-
-        $dbConnection->statement($statement);
-
+            $dbConnection->statement($statement);
+        }
+        
         $i = count($hierarchiesIds) + count($userPlaylistIds);
 
         $finish = microtime(true) - $start;
