@@ -182,12 +182,12 @@ class ContentRepository extends RepositoryBase
             $this->query()
                 ->leftJoin(
                     ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.child_id',
+                    ConfigService::$tableContentHierarchy . '.parent_id',
                     '=',
                     ConfigService::$tableContent . '.id'
                 )
                 ->where(ConfigService::$tableContent . '.type', 'user-playlist')
-                ->where(ConfigService::$tableContentHierarchy . '.parent_id', $id);
+                ->where(ConfigService::$tableContentHierarchy . '.child_id', $id);
 
         if ($smallDate) {
             $query->where(ConfigService::$tableContentHierarchy . '.created_on', '>=', $smallDate);
