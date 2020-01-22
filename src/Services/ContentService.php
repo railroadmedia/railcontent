@@ -117,6 +117,47 @@ class ContentService
         $this->userContentProgressRepository = $userContentProgressRepository;
     }
 
+    public function getIndividualContentStatistics($contentId, ?Carbon $smallDate, ?Carbon $bigDate)
+    {
+        $completedCount = $this->contentRepository->getCompletedContentCount(
+            $contentId,
+            $smallDate,
+            $bigDate
+        );
+
+        $startedCount = $this->contentRepository->getStartedContentCount(
+            $contentId,
+            $smallDate,
+            $bigDate
+        );
+
+        $commentsCount = $this->contentRepository->getContentCommentsCount(
+            $contentId,
+            $smallDate,
+            $bigDate
+        );
+
+        $likesCount = $this->contentRepository->getContentLikesCount(
+            $contentId,
+            $smallDate,
+            $bigDate
+        );
+
+        $listedCount = $this->contentRepository->getContentAddToListCount(
+            $contentId,
+            $smallDate,
+            $bigDate
+        );
+
+        return [
+            'total_completes' => $completedCount,
+            'total_starts' => $startedCount,
+            'total_comments' => $commentsCount,
+            'total_likes' => $likesCount,
+            'total_added_to_list' => $listedCount,
+        ];
+    }
+
     /**
      * Call the get by id method from repository and return the content
      *

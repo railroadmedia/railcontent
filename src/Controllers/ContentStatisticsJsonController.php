@@ -1,0 +1,49 @@
+<?php
+
+namespace Railroad\Railcontent\Controllers;
+
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
+use Railroad\Railcontent\Requests\StatisticsContentRequest;
+use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Transformers\DataTransformer;
+
+class ContentStatisticsJsonController extends Controller
+{
+    /**
+     * @var ContentService
+     */
+    private $contentService;
+
+    /**
+     * ContentStatisticsJsonController constructor.
+     *
+     * @param ContentService $contentService
+     */
+    public function __construct(ContentService $contentService)
+    {
+        $this->contentService = $contentService;
+    }
+
+    /**
+     * Fetch individual content statistics
+     *
+     * @param StatisticsContentRequest $request
+     * @return JsonResponse
+     */
+    public function individualContentStatistics(StatisticsContentRequest $request, $contentId)
+    {
+        $smallDateTime = $request->has('small_date_time') ?
+                            Carbon::parse($request->get('small_date_time')) : null;
+        $bigDateTime = $request->has('big_date_time') ?
+                            Carbon::parse($request->get('big_date_time')) : null;
+
+        $stats = $this->contentService->getIndividualContentStatistics(
+            $contentId,
+            $smallDateTime,
+            $bigDateTime
+        );
+
+        return new JsonResponse($stats);
+    }
+}
