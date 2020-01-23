@@ -149,6 +149,7 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableCommentLikes = ConfigService::$tablePrefix . 'comment_likes';
         ConfigService::$tableContentLikes = ConfigService::$tablePrefix . 'content_likes';
         ConfigService::$tableSearchIndexes = ConfigService::$tablePrefix . 'search_indexes';
+        ConfigService::$tableContentStatistics = ConfigService::$tablePrefix . 'content_statistics';
 
         // brand
         ConfigService::$brand = config('railcontent.brand');
