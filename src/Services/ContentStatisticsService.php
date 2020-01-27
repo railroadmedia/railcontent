@@ -98,7 +98,7 @@ class ContentStatisticsService
         */
 
         foreach ($intervals as $interval) {
-            $this->computeIntervalContentStatistics(...$interval);
+            $this->computeIntervalContentStatistics($interval['start'], $interval['end'], $interval['week']);
         }
     }
 
@@ -113,11 +113,25 @@ class ContentStatisticsService
 
         // fetch content ids, content_type, content_published_on
             // filter by ConfigService::$statisticsContentTypes, maybe also filter by created_on <= $end
+        $contentDataToProcess = $this->contentStatisticsRepository->getStatisticsContentIds($end);
 
         // foreach content id
             // call $this->getIndividualContentStatistics($start, $end)
             // add content details, $weekOfYear, $start, $end
             // insert into ConfigService::$tableContentStatistics
+
+        foreach ($contentDataToProcess as $contentData) {
+            $contentStats = $this->getIndividualContentStatistics($contentData['content_id'], $start, $end);
+
+            $stats = $contentData + $contentStats + [
+                'start_interval' => $start->toDateTimeString(),
+                'end_interval' => $end->toDateTimeString(),
+                'week_of_year' => $weekOfYear,
+                'created_on' => Carbon::now()->toDateTimeString(),
+            ];
+
+            $this->contentStatisticsRepository->create($stats);;
+        }
     }
 
     /**
@@ -128,8 +142,31 @@ class ContentStatisticsService
      */
     public function getContentStatisticsIntervals(Carbon $smallDate, Carbon $bigDate): array
     {
-        // todo - add logic
+        $intervalStart = $smallDate->copy()->subDays($smallDate->dayOfWeek);
+        $intervalEnd = $intervalStart->copy()->addDays(6);
 
-        return []
+        $lastDay = $bigDate->copy()->addDays(6 - $bigDate->dayOfWeek);
+
+        $result = [
+            [
+                'start' => $intervalStart,
+                'end' => $intervalEnd,
+                'week' => $intervalEnd->weekOfYear
+            ]
+        ];
+
+        while ($intervalEnd < $lastDay) {
+
+            $intervalStart = $intervalStart->copy()->addDays(7);
+            $intervalEnd = $intervalEnd->copy()->addDays(7);
+
+            $result[] = [
+                'start' => $intervalStart,
+                'end' => $intervalEnd,
+                'week' => $intervalEnd->weekOfYear
+            ];
+        }
+
+        return $result;
     }
 }

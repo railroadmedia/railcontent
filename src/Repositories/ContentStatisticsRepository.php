@@ -122,6 +122,7 @@ class ContentStatisticsRepository extends RepositoryBase
     {
         $query =
             $this->query()
+                ->from(ConfigService::$tableContent)
                 ->leftJoin(
                     ConfigService::$tableContentHierarchy,
                     ConfigService::$tableContentHierarchy . '.parent_id',
@@ -142,6 +143,23 @@ class ContentStatisticsRepository extends RepositoryBase
         return $query->count();
     }
 
+    public function getStatisticsContentIds(Carbon $bigDate)
+    {
+        return $this->query()
+                ->from(ConfigService::$tableContent)
+                ->select(
+                    [
+                        ConfigService::$tableContent . '.id as content_id',
+                        ConfigService::$tableContent . '.type as content_type',
+                        ConfigService::$tableContent . '.published_on as content_published_on'
+                    ]
+                )
+                ->whereIn(ConfigService::$tableContent . '.type', ConfigService::$statisticsContentTypes)
+                ->where(ConfigService::$tableContent . '.created_on', '<=', $bigDate)
+                ->get()
+                ->toArray();
+    }
+
     /**
      * @return ContentQueryBuilder
      */
@@ -153,6 +171,6 @@ class ContentStatisticsRepository extends RepositoryBase
                 ->getQueryGrammar(),
             $this->connection()
                 ->getPostProcessor()
-        ))->from(ConfigService::$tableContent);
+        ))->from(ConfigService::$tableContentStatistics);
     }
 }

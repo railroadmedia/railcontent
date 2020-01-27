@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Railroad\Railcontent\Services\ConfigService;
 
-class CreateContentLikesTable extends Migration
+class CreateContentStatisticsTable extends Migration
 {
     /**
      * Run the migrations.

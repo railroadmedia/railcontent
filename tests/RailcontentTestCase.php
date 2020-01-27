@@ -116,6 +116,7 @@ class RailcontentTestCase extends BaseTestCase
             $defaultConfig['comment_assignation_owner_ids']
         );
         $app['config']->set('railcontent.searchable_content_types', $defaultConfig['searchable_content_types']);
+        $app['config']->set('railcontent.statistics_content_types', $defaultConfig['statistics_content_types']);
         $app['config']->set('railcontent.search_index_values', $defaultConfig['search_index_values']);
         $app['config']->set(
             'railcontent.allowed_types_for_bubble_progress',

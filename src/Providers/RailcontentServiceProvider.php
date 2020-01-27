@@ -179,6 +179,8 @@ class RailcontentServiceProvider extends ServiceProvider
 
         ConfigService::$commentsAssignationOwnerIds = config('railcontent.comment_assignation_owner_ids');
 
+        ConfigService::$statisticsContentTypes = config('railcontent.statistics_content_types');
+
         ConfigService::$searchIndexValues = config('railcontent.search_index_values');
         ConfigService::$indexableContentStatuses = config('railcontent.indexable_content_statuses');
 

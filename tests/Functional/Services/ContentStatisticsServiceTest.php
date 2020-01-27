@@ -1,20 +1,21 @@
 <?php
 
-namespace Railroad\Railcontent\Tests\Functional\Controllers;
+namespace Railroad\Railcontent\Tests\Functional\Services;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Factories\ContentFactory;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
 use Railroad\Railcontent\Repositories\ContentLikeRepository;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\ContentStatisticsService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
-class ContentJsonControllerTest extends RailcontentTestCase
+class ContentStatisticsServiceTest extends RailcontentTestCase
 {
     /**
      * @var CommentRepository
@@ -32,9 +33,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
     protected $contentLikeRepository;
 
     /**
-     * @var ContentFactory
+     * @var ContentRepository
      */
-    protected $contentFactory;
+    protected $contentRepository;
 
     /**
      * @var UserContentProgressRepository
@@ -46,14 +47,61 @@ class ContentJsonControllerTest extends RailcontentTestCase
         parent::setUp();
 
         $this->commentRepository = $this->app->make(CommentRepository::class);
-        $this->contentFactory = $this->app->make(ContentFactory::class);
         $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
         $this->contentLikeRepository = $this->app->make(ContentLikeRepository::class);
+        $this->contentRepository = $this->app->make(ContentRepository::class);
         $this->userContentRepository = $this->app->make(UserContentProgressRepository::class);
     }
 
-    public function test_individual_content_statistics()
+    /*
+    public function test_get_content_statistics_intervals()
     {
+        $this->contentStatisticsService = $this->app->make(ContentStatisticsService::class);
+
+        $expectedFirstIntervalStartDay = Carbon::parse('2020-01-26'); // Sunday
+        $smallDate = $expectedFirstIntervalStartDay->copy()->addDays(3);
+
+        $expectedLastIntervalDay = Carbon::parse('2020-02-22'); // Saturday
+        $bigDate = $expectedLastIntervalDay->copy()->subDays(2);
+
+        $intervals = $this->contentStatisticsService->getContentStatisticsIntervals($smallDate, $bigDate);
+
+        $firstInterval = $intervals[0];
+
+        // assert first interval start day is the expected Sunday
+        $this->assertEquals($expectedFirstIntervalStartDay, $firstInterval['start']);
+
+        // assert first interval end day is next Saturday
+        $this->assertEquals($expectedFirstIntervalStartDay->copy()->addDays(6), $firstInterval['end']);
+
+        // assert first interval week number
+        $this->assertEquals($expectedFirstIntervalStartDay->copy()->addDays(6)->weekOfYear, $firstInterval['week']);
+
+        $lastInterval = $intervals[count($intervals) - 1];
+
+        // assert last interval start day is the expected Sunday
+        $this->assertEquals($expectedLastIntervalDay->copy()->subDays(6), $lastInterval['start']);
+
+        // assert last interval end day is next Saturday
+        $this->assertEquals($expectedLastIntervalDay, $lastInterval['end']);
+
+        // assert last interval week number
+        $this->assertEquals($expectedLastIntervalDay->weekOfYear, $lastInterval['week']);
+
+        $totalDays = $expectedLastIntervalDay->dayOfYear - $expectedFirstIntervalStartDay->dayOfYear + 1;
+
+        // assert intervals count
+        $this->assertEquals(
+            (int)($totalDays / 7),
+            count($intervals)
+        );
+    }
+    */
+
+    public function test_compute_content_statistics()
+    {
+        $this->contentStatisticsService = $this->app->make(ContentStatisticsService::class);
+
         // random date, between 16 and 30 days ago
         $testSmallDate = Carbon::now()->subDays($this->faker->numberBetween(16, 30));
 
@@ -64,28 +112,18 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $contentIds = [];
 
         for ($i=0; $i < 10; $i++) {
-            $content = $this->contentFactory->create(
-                ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
-                $this->faker->randomElement(ConfigService::$commentableContentTypes),
-                ContentService::STATUS_PUBLISHED
+            $content = $this->addContent(
+                $this->faker->randomElement(ConfigService::$statisticsContentTypes),
+                ContentService::STATUS_PUBLISHED,
+                Carbon::now()->subDays($this->faker->numberBetween(60, 90))
             );
             $contentIds[] = $content['id'];
         }
 
-        $testContentId = $this->faker->randomElement($contentIds);
-
-        $expectedCompleted = 0;
-
         // add progress complete
         for ($i=0; $i < 50; $i++) {
 
-            // increased chance to add progress to test content id
-            $contentId = $this->faker->randomElement(
-                [
-                    $this->faker->randomElement($contentIds),
-                    $testContentId
-                ]
-            );
+            $contentId = $this->faker->randomElement($contentIds);
 
             // user content progress date may be a little out of the test interval
             $updatedOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
@@ -97,26 +135,17 @@ class ContentJsonControllerTest extends RailcontentTestCase
             );
 
             if (
-                $contentId == $testContentId
-                && $updatedOn >= $testSmallDate
+                $updatedOn >= $testSmallDate
                 && $updatedOn <= $testBigDate
             ) {
-                $expectedCompleted++;
+                // todo - add to expected bucket
             }
         }
-
-        $expectedStarts = 0;
 
         // add progress started
         for ($i=0; $i < 50; $i++) {
 
-            // increased chance to add progress to test content id
-            $contentId = $this->faker->randomElement(
-                [
-                    $this->faker->randomElement($contentIds),
-                    $testContentId
-                ]
-            );
+            $contentId = $this->faker->randomElement($contentIds);
 
             // user content progress date may be a little out of the test interval
             $updatedOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
@@ -128,26 +157,18 @@ class ContentJsonControllerTest extends RailcontentTestCase
             );
 
             if (
-                $contentId == $testContentId
-                && $updatedOn >= $testSmallDate
+                $updatedOn >= $testSmallDate
                 && $updatedOn <= $testBigDate
             ) {
-                $expectedStarts++;
+                // todo - add to expected bucket
             }
         }
-
-        $expectedComments = 0;
 
         // add comments
         for ($i=0; $i < 50; $i++) {
 
             // increased chance to add comment to test content id
-            $contentId = $this->faker->randomElement(
-                [
-                    $this->faker->randomElement($contentIds),
-                    $testContentId
-                ]
-            );
+            $contentId = $this->faker->randomElement($contentIds);
 
             // comment date may be a little out of the test interval
             $createdOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
@@ -155,26 +176,17 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $comment = $this->addContentComment($contentId, $createdOn);
 
             if (
-                $contentId == $testContentId
-                && $createdOn >= $testSmallDate
+                $createdOn >= $testSmallDate
                 && $createdOn <= $testBigDate
             ) {
-                $expectedComments++;
+                // todo - add to expected bucket
             }
         }
-
-        $expectedLikes = 0;
 
         // add likes
         for ($i=0; $i < 50; $i++) {
 
-            // increased chance to add like to test content id
-            $contentId = $this->faker->randomElement(
-                [
-                    $this->faker->randomElement($contentIds),
-                    $testContentId
-                ]
-            );
+            $contentId = $this->faker->randomElement($contentIds);
 
             // like date may be a little out of the test interval
             $createdOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
@@ -182,26 +194,17 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $like = $this->addContentLike($contentId, $createdOn);
 
             if (
-                $contentId == $testContentId
-                && $createdOn >= $testSmallDate
+                $createdOn >= $testSmallDate
                 && $createdOn <= $testBigDate
             ) {
-                $expectedLikes++;
+                // todo - add to expected bucket
             }
         }
-
-        $expectedAddToList = 0;
 
         // add to lists
         for ($i=0; $i < 50; $i++) {
 
-            // increased chance to add to a list the test content id
-            $contentId = $this->faker->randomElement(
-                [
-                    $this->faker->randomElement($contentIds),
-                    $testContentId
-                ]
-            );
+            $contentId = $this->faker->randomElement($contentIds);
 
             // add to lists date may be a little out of the test interval
             $createdOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
@@ -209,33 +212,42 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $addToList = $this->addContentToList($contentId, $createdOn);
 
             if (
-                $contentId == $testContentId
-                && $createdOn >= $testSmallDate
+                $createdOn >= $testSmallDate
                 && $createdOn <= $testBigDate
             ) {
-                $expectedAddToList++;
+                // todo - add to expected bucket
             }
         }
 
-        $response = $this->call(
-            'GET',
-            'railcontent/content-statistics/individual/' . $testContentId,
+        $this->contentStatisticsService->computeContentStatistics($testSmallDate, $testBigDate);
+
+        $this->assertTrue(true);
+
+        // todo - assert expected bucket elements exist in content statistics table
+    }
+
+    protected function addContent($contentType, $contentStatus, $contentCreatedOn = null)
+    {
+        // ContentFactory does not allow to specify the content created_on field
+
+        $id = $this->contentRepository->create(
             [
-                'small_date_time' => $testSmallDate->toDateTimeString(),
-                'big_date_time' => $testBigDate->toDateTimeString(),
+                'slug' => ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+                'type' => $contentType,
+                'sort' => 0,
+                'status' => $contentStatus,
+                'language' => 'en-US',
+                'brand' => ConfigService::$brand,
+                'total_xp' => null,
+                'user_id' => null,
+                'published_on' => $contentCreatedOn ?? Carbon::now()
+                    ->toDateTimeString(),
+                'created_on' => $contentCreatedOn ?? Carbon::now()
+                    ->toDateTimeString(),
             ]
         );
 
-        $this->assertEquals(
-            [
-                'total_completes' => $expectedCompleted,
-                'total_starts' => $expectedStarts,
-                'total_comments' => $expectedComments,
-                'total_likes' => $expectedLikes,
-                'total_added_to_list' => $expectedAddToList,
-            ],
-            $response->decodeResponseJson()
-        );
+        return $this->contentRepository->getById($id);
     }
 
     protected function addUserContentProgress($contentId, $state, $updatedOn = null)
@@ -307,10 +319,10 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $createdOn = $createdOn->toDateTimeString();
 
-        $contentUserPlaylist = $this->contentFactory->create(
-            ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
+        $contentUserPlaylist = $this->addContent(
             'user-playlist',
-            ContentService::STATUS_PUBLISHED
+            ContentService::STATUS_PUBLISHED,
+            Carbon::now()->subDays($this->faker->numberBetween(60, 90))
         );
 
         $this->contentHierarchyRepository->create(

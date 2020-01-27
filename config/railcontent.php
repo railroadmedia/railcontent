@@ -98,6 +98,9 @@ return [
         ],
     ],
 
+    // content types to compute statistics for
+    'statistics_content_types' => ['recordings', 'courses'], // todo - update
+
     // progress bubbling
     'allowed_types_for_bubble_progress' => [
         'started' => [],
