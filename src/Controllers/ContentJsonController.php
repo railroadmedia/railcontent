@@ -386,7 +386,12 @@ class ContentJsonController extends Controller
                 $types,
                 [],
                 [],
-                [$field . ',20,integer,<=']
+                [$field . ',20,integer,<='],
+                [],
+                [],
+                [],
+                false,
+                false
             );
 
             $results =
