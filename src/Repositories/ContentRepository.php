@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
@@ -1619,15 +1620,21 @@ class ContentRepository extends RepositoryBase
 
     /**
      * @param array $type
-     * @return int
+     * @param $groupBy
+     * @return \Illuminate\Support\Collection
      */
-    public function countByTypes(array $type)
+    public function countByTypes(array $type, $groupBy)
     {
-        return $this->query()
-            ->selectCountColumns()
+        $query = $this->query()
+           ->select('type', DB::raw('count(*) as total'))
             ->restrictByUserAccess()
-            ->whereIn(ConfigService::$tableContent . '.type', $type)
-            ->count();
+            ->whereIn(ConfigService::$tableContent . '.type', $type);
+
+        if(!empty($groupBy)){
+            $query->groupBy($groupBy);
+        }
+
+         return $query->get()->keyBy('type');
     }
 
     /**

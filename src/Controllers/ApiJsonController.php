@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Decorators\Mobile\StripTagDecorator;
 use Railroad\Railcontent\Repositories\CommentRepository;
@@ -45,7 +46,7 @@ class ApiJsonController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function onboarding()
     {
@@ -56,28 +57,30 @@ class ApiJsonController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function getShows(Request $request)
     {
-        $contentTypes = array_flip(config('railcontent.showTypes'));
-        $results = $shows = array_intersect_key(array_replace($contentTypes, config('railcontent.cataloguesMetadata')), $contentTypes);
-
-        if($request->has('withCount')) {
-            foreach (config('railcontent.showTypes') as $type) {
-                $episodes[$type]['episodeNumber'] = $this->contentService->countByTypes(
-                    [$type]
-                );
-            }
-            $results = array_merge_recursive($shows, $episodes);
+        $shows = [];
+        $metaData = config('railcontent.cataloguesMetadata');
+        if ($request->has('withCount')) {
+            $episodesNumber = $this->contentService->countByTypes(
+                config('railcontent.showTypes'),
+                'type'
+            );
         }
 
-        return response()->json($results);
+        foreach (config('railcontent.showTypes') as $showType) {
+            $shows[$showType] = $metaData[$showType] ?? [];
+            $shows[$showType]['episodeNumber'] = $episodesNumber[$showType]['total'] ?? '';
+        }
+
+        return response()->json($shows);
     }
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function getComments(Request $request)
     {
@@ -97,7 +100,8 @@ class ApiJsonController extends Controller
 
         return response()->json(
             [
-                'data' => $commentData['results']->values()->all(),
+                'data' => $commentData['results']->values()
+                    ->all(),
                 'meta' => [
                     'totalCommentsAndReplies' => $commentData['total_comments_and_results'],
                     'totalResults' => $commentData['total_results'],
