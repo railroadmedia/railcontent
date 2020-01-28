@@ -53,15 +53,14 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         $this->userContentRepository = $this->app->make(UserContentProgressRepository::class);
     }
 
-    /*
     public function test_get_content_statistics_intervals()
     {
         $this->contentStatisticsService = $this->app->make(ContentStatisticsService::class);
 
-        $expectedFirstIntervalStartDay = Carbon::parse('2020-01-26'); // Sunday
+        $expectedFirstIntervalStartDay = Carbon::parse('2020-01-26')->startOfDay(); // Sunday
         $smallDate = $expectedFirstIntervalStartDay->copy()->addDays(3);
 
-        $expectedLastIntervalDay = Carbon::parse('2020-02-22'); // Saturday
+        $expectedLastIntervalDay = Carbon::parse('2020-02-22')->endOfDay(); // Saturday
         $bigDate = $expectedLastIntervalDay->copy()->subDays(2);
 
         $intervals = $this->contentStatisticsService->getContentStatisticsIntervals($smallDate, $bigDate);
@@ -72,7 +71,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         $this->assertEquals($expectedFirstIntervalStartDay, $firstInterval['start']);
 
         // assert first interval end day is next Saturday
-        $this->assertEquals($expectedFirstIntervalStartDay->copy()->addDays(6), $firstInterval['end']);
+        $this->assertEquals($expectedFirstIntervalStartDay->copy()->addDays(6)->endOfDay(), $firstInterval['end']);
 
         // assert first interval week number
         $this->assertEquals($expectedFirstIntervalStartDay->copy()->addDays(6)->weekOfYear, $firstInterval['week']);
@@ -80,7 +79,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         $lastInterval = $intervals[count($intervals) - 1];
 
         // assert last interval start day is the expected Sunday
-        $this->assertEquals($expectedLastIntervalDay->copy()->subDays(6), $lastInterval['start']);
+        $this->assertEquals($expectedLastIntervalDay->copy()->subDays(6)->startOfDay(), $lastInterval['start']);
 
         // assert last interval end day is next Saturday
         $this->assertEquals($expectedLastIntervalDay, $lastInterval['end']);
@@ -96,7 +95,6 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
             count($intervals)
         );
     }
-    */
 
     public function test_compute_content_statistics()
     {
@@ -108,8 +106,13 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         // random date, between 5 and 15 days ago
         $testBigDate = Carbon::now()->subDays($this->faker->numberBetween(5, 15));
 
+        $intervals = $this->contentStatisticsService->getContentStatisticsIntervals($testSmallDate, $testBigDate);
+
+        $firstIntervalsDay = $intervals[0]['start'];
+        $lastIntervalsDay = $intervals[count($intervals) - 1]['end'];
+
         // add content
-        $contentIds = [];
+        $contentData = [];
 
         for ($i=0; $i < 10; $i++) {
             $content = $this->addContent(
@@ -117,13 +120,19 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                 ContentService::STATUS_PUBLISHED,
                 Carbon::now()->subDays($this->faker->numberBetween(60, 90))
             );
-            $contentIds[] = $content['id'];
+            $contentData[$content['id']] = [
+                'content_id' => $content['id'],
+                'content_type' => $content['type'],
+                'content_published_on' => $content['published_on'],
+            ];
         }
+
+        $stats = [];
 
         // add progress complete
         for ($i=0; $i < 50; $i++) {
 
-            $contentId = $this->faker->randomElement($contentIds);
+            $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // user content progress date may be a little out of the test interval
             $updatedOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
@@ -135,17 +144,44 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
             );
 
             if (
-                $updatedOn >= $testSmallDate
-                && $updatedOn <= $testBigDate
+                $updatedOn >= $firstIntervalsDay
+                && $updatedOn <= $lastIntervalsDay
             ) {
-                // todo - add to expected bucket
+                $interval = $this->getIntervalForDate($updatedOn, $intervals);
+
+                $index = $interval['start']->dayOfYear . '-' . $interval['end']->dayOfYear;
+
+                if (!isset($stats[$index])) {
+                    $stats[$index] = [];
+                }
+
+                if (!isset($stats[$index][$contentId])) {
+
+                    $content = $contentData[$contentId];
+
+                    $stats[$index][$contentId] = [
+                        'content_id' => $contentId,
+                        'content_type' => $content['content_type'],
+                        'content_published_on' => $content['content_published_on'],
+                        'total_completes' => 0,
+                        'total_starts' => 0,
+                        'total_comments' => 0,
+                        'total_likes' => 0,
+                        'total_added_to_list' => 0,
+                        'start_interval' => $interval['start']->toDateTimeString(),
+                        'end_interval' => $interval['end']->toDateTimeString(),
+                        'week_of_year' => $interval['week'],
+                    ];
+                }
+
+                $stats[$index][$contentId]['total_completes'] += 1;
             }
         }
 
         // add progress started
         for ($i=0; $i < 50; $i++) {
 
-            $contentId = $this->faker->randomElement($contentIds);
+            $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // user content progress date may be a little out of the test interval
             $updatedOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
@@ -157,10 +193,37 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
             );
 
             if (
-                $updatedOn >= $testSmallDate
-                && $updatedOn <= $testBigDate
+                $updatedOn >= $firstIntervalsDay
+                && $updatedOn <= $lastIntervalsDay
             ) {
-                // todo - add to expected bucket
+                $interval = $this->getIntervalForDate($updatedOn, $intervals);
+
+                $index = $interval['start']->dayOfYear . '-' . $interval['end']->dayOfYear;
+
+                if (!isset($stats[$index])) {
+                    $stats[$index] = [];
+                }
+
+                if (!isset($stats[$index][$contentId])) {
+
+                    $content = $contentData[$contentId];
+
+                    $stats[$index][$contentId] = [
+                        'content_id' => $contentId,
+                        'content_type' => $content['content_type'],
+                        'content_published_on' => $content['content_published_on'],
+                        'total_completes' => 0,
+                        'total_starts' => 0,
+                        'total_comments' => 0,
+                        'total_likes' => 0,
+                        'total_added_to_list' => 0,
+                        'start_interval' => $interval['start']->toDateTimeString(),
+                        'end_interval' => $interval['end']->toDateTimeString(),
+                        'week_of_year' => $interval['week'],
+                    ];
+                }
+
+                $stats[$index][$contentId]['total_starts'] += 1;
             }
         }
 
@@ -168,7 +231,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         for ($i=0; $i < 50; $i++) {
 
             // increased chance to add comment to test content id
-            $contentId = $this->faker->randomElement($contentIds);
+            $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // comment date may be a little out of the test interval
             $createdOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
@@ -176,17 +239,44 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
             $comment = $this->addContentComment($contentId, $createdOn);
 
             if (
-                $createdOn >= $testSmallDate
-                && $createdOn <= $testBigDate
+                $createdOn >= $firstIntervalsDay
+                && $createdOn <= $lastIntervalsDay
             ) {
-                // todo - add to expected bucket
+                $interval = $this->getIntervalForDate($createdOn, $intervals);
+
+                $index = $interval['start']->dayOfYear . '-' . $interval['end']->dayOfYear;
+
+                if (!isset($stats[$index])) {
+                    $stats[$index] = [];
+                }
+
+                if (!isset($stats[$index][$contentId])) {
+
+                    $content = $contentData[$contentId];
+
+                    $stats[$index][$contentId] = [
+                        'content_id' => $contentId,
+                        'content_type' => $content['content_type'],
+                        'content_published_on' => $content['content_published_on'],
+                        'total_completes' => 0,
+                        'total_starts' => 0,
+                        'total_comments' => 0,
+                        'total_likes' => 0,
+                        'total_added_to_list' => 0,
+                        'start_interval' => $interval['start']->toDateTimeString(),
+                        'end_interval' => $interval['end']->toDateTimeString(),
+                        'week_of_year' => $interval['week'],
+                    ];
+                }
+
+                $stats[$index][$contentId]['total_comments'] += 1;
             }
         }
 
         // add likes
         for ($i=0; $i < 50; $i++) {
 
-            $contentId = $this->faker->randomElement($contentIds);
+            $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // like date may be a little out of the test interval
             $createdOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
@@ -194,17 +284,44 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
             $like = $this->addContentLike($contentId, $createdOn);
 
             if (
-                $createdOn >= $testSmallDate
-                && $createdOn <= $testBigDate
+                $createdOn >= $firstIntervalsDay
+                && $createdOn <= $lastIntervalsDay
             ) {
-                // todo - add to expected bucket
+                $interval = $this->getIntervalForDate($createdOn, $intervals);
+
+                $index = $interval['start']->dayOfYear . '-' . $interval['end']->dayOfYear;
+
+                if (!isset($stats[$index])) {
+                    $stats[$index] = [];
+                }
+
+                if (!isset($stats[$index][$contentId])) {
+
+                    $content = $contentData[$contentId];
+
+                    $stats[$index][$contentId] = [
+                        'content_id' => $contentId,
+                        'content_type' => $content['content_type'],
+                        'content_published_on' => $content['content_published_on'],
+                        'total_completes' => 0,
+                        'total_starts' => 0,
+                        'total_comments' => 0,
+                        'total_likes' => 0,
+                        'total_added_to_list' => 0,
+                        'start_interval' => $interval['start']->toDateTimeString(),
+                        'end_interval' => $interval['end']->toDateTimeString(),
+                        'week_of_year' => $interval['week'],
+                    ];
+                }
+
+                $stats[$index][$contentId]['total_likes'] += 1;
             }
         }
 
         // add to lists
         for ($i=0; $i < 50; $i++) {
 
-            $contentId = $this->faker->randomElement($contentIds);
+            $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // add to lists date may be a little out of the test interval
             $createdOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
@@ -212,18 +329,61 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
             $addToList = $this->addContentToList($contentId, $createdOn);
 
             if (
-                $createdOn >= $testSmallDate
-                && $createdOn <= $testBigDate
+                $createdOn >= $firstIntervalsDay
+                && $createdOn <= $lastIntervalsDay
             ) {
-                // todo - add to expected bucket
+                $interval = $this->getIntervalForDate($createdOn, $intervals);
+
+                $index = $interval['start']->dayOfYear . '-' . $interval['end']->dayOfYear;
+
+                if (!isset($stats[$index])) {
+                    $stats[$index] = [];
+                }
+
+                if (!isset($stats[$index][$contentId])) {
+
+                    $content = $contentData[$contentId];
+
+                    $stats[$index][$contentId] = [
+                        'content_id' => $contentId,
+                        'content_type' => $content['content_type'],
+                        'content_published_on' => $content['content_published_on'],
+                        'total_completes' => 0,
+                        'total_starts' => 0,
+                        'total_comments' => 0,
+                        'total_likes' => 0,
+                        'total_added_to_list' => 0,
+                        'start_interval' => $interval['start']->toDateTimeString(),
+                        'end_interval' => $interval['end']->toDateTimeString(),
+                        'week_of_year' => $interval['week'],
+                    ];
+                }
+
+                $stats[$index][$contentId]['total_added_to_list'] += 1;
             }
         }
 
         $this->contentStatisticsService->computeContentStatistics($testSmallDate, $testBigDate);
 
-        $this->assertTrue(true);
+        foreach ($stats as $intervalStats) {
+            foreach ($intervalStats as $expectedContentIntervalStats) {
+                $this->assertDatabaseHas(
+                    ConfigService::$tableContentStatistics,
+                    $expectedContentIntervalStats
+                );
+            }
+        }
+    }
 
-        // todo - assert expected bucket elements exist in content statistics table
+    protected function getIntervalForDate($date, $intervals)
+    {
+        foreach ($intervals as $interval) {
+            if ($date >= $interval['start'] && $date <= $interval['end']) {
+                return $interval;
+            }
+        }
+
+        return null;
     }
 
     protected function addContent($contentType, $contentStatus, $contentCreatedOn = null)

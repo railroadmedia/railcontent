@@ -2,7 +2,7 @@
 
 namespace Railroad\Railcontent\Requests;
 
-class StatisticsContentRequest extends FormRequest
+class IndividualStatisticsContentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,8 @@ class StatisticsContentRequest extends FormRequest
     public function rules()
     {
         return [
-            // todo - add rules
+            'small_date_time' => 'date',
+            'big_date_time' => 'date',
         ];
     }
 }

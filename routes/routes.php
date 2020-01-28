@@ -64,6 +64,11 @@ Route::group(
                     \Railroad\Railcontent\Controllers\ContentStatisticsJsonController::class . '@individualContentStatistics'
                 )->name('content.statistics.individual');
 
+                Route::get(
+                    '/content-statistics',
+                    \Railroad\Railcontent\Controllers\ContentStatisticsJsonController::class . '@contentStatistics'
+                )->name('content.statistics.individual');
+
                 // content user progression
                 Route::put(
                     '/start',

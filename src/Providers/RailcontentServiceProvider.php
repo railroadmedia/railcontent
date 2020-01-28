@@ -7,6 +7,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Validator;
 use PDO;
 use Railroad\Railcontent\Commands\CalculateTotalXP;
+use Railroad\Railcontent\Commands\ComputePastStats;
+use Railroad\Railcontent\Commands\ComputeWeeklyStats;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
@@ -102,6 +104,8 @@ class RailcontentServiceProvider extends ServiceProvider
 
         $this->commands(
             [
+                ComputePastStats::class,
+                ComputeWeeklyStats::class,
                 CreateSearchIndexes::class,
                 CreateVimeoVideoContentRecords::class,
                 RepairMissingDurations::class,

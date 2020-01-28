@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\ContentStatisticsRepository;
+use Railroad\Railcontent\Requests\StatisticsContentRequest;
 
 class ContentStatisticsService
 {
@@ -109,18 +110,10 @@ class ContentStatisticsService
      */
     public function computeIntervalContentStatistics(Carbon $start, Carbon $end, int $weekOfYear)
     {
-        // todo - add logic
-
-        // fetch content ids, content_type, content_published_on
-            // filter by ConfigService::$statisticsContentTypes, maybe also filter by created_on <= $end
         $contentDataToProcess = $this->contentStatisticsRepository->getStatisticsContentIds($end);
 
-        // foreach content id
-            // call $this->getIndividualContentStatistics($start, $end)
-            // add content details, $weekOfYear, $start, $end
-            // insert into ConfigService::$tableContentStatistics
-
         foreach ($contentDataToProcess as $contentData) {
+            // todo - ask for details and add check for stats to have at least one value > 0
             $contentStats = $this->getIndividualContentStatistics($contentData['content_id'], $start, $end);
 
             $stats = $contentData + $contentStats + [
@@ -142,10 +135,10 @@ class ContentStatisticsService
      */
     public function getContentStatisticsIntervals(Carbon $smallDate, Carbon $bigDate): array
     {
-        $intervalStart = $smallDate->copy()->subDays($smallDate->dayOfWeek);
-        $intervalEnd = $intervalStart->copy()->addDays(6);
+        $intervalStart = $smallDate->copy()->subDays($smallDate->dayOfWeek)->startOfDay();
+        $intervalEnd = $intervalStart->copy()->addDays(6)->endOfDay();
 
-        $lastDay = $bigDate->copy()->addDays(6 - $bigDate->dayOfWeek);
+        $lastDay = $bigDate->copy()->addDays(6 - $bigDate->dayOfWeek)->endOfDay();
 
         $result = [
             [
@@ -168,5 +161,11 @@ class ContentStatisticsService
         }
 
         return $result;
+    }
+
+    public function getContentStatistics(StatisticsContentRequest $request)
+    {
+        // todo - add logic
+        return [];
     }
 }
