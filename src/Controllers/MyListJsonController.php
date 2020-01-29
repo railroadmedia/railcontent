@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Controllers;
 use Carbon\Carbon;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
@@ -19,6 +20,11 @@ class MyListJsonController extends Controller
     private $contentService;
 
     /**
+     * @var ContentRepository
+     */
+    private $contentRepository;
+
+    /**
      * @var ContentHierarchyService
      */
     private $contentHierarchyService;
@@ -28,13 +34,16 @@ class MyListJsonController extends Controller
      *
      * @param ContentService $contentService
      * @param ContentHierarchyService $contentHierarchyService
+     * @param ContentRepository $contentRepository
      */
     public function __construct(
         ContentService $contentService,
-        ContentHierarchyService $contentHierarchyService
+        ContentHierarchyService $contentHierarchyService,
+        ContentRepository $contentRepository
     ) {
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentService = $contentService;
+        $this->contentRepository = $contentRepository;
 
         $this->middleware(ConfigService::$controllerMiddleware);
     }
@@ -50,15 +59,14 @@ class MyListJsonController extends Controller
     public function addToPrimaryPlaylist(Request $request)
     {
         $userId = auth()->id();
-        $content = new Collection($this->contentService->getById($request->get('content_id')));
+        $content = new Collection($this->contentRepository->getById($request->get('content_id')));
 
         if ($content->isEmpty()) {
             return response()->json(['error' => 'Incorrect content']);
         }
 
         $userPrimaryPlaylist =
-            $this->contentService->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist')
-                ->first();
+            array_first($this->contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
 
         if (!$userPrimaryPlaylist) {
             $userPrimaryPlaylist = $this->contentService->create(
@@ -84,7 +92,7 @@ class MyListJsonController extends Controller
      */
     public function removeFromPrimaryPlaylist(Request $request)
     {
-        $content = new Collection($this->contentService->getById($request->get('content_id')));
+        $content = new Collection($this->contentRepository->getById($request->get('content_id')));
 
         if ($content->isEmpty()) {
             return response()->json(['error' => 'Incorrect content']);
@@ -93,8 +101,7 @@ class MyListJsonController extends Controller
         $userId = auth()->id();
 
         $userPrimaryPlaylist =
-            $this->contentService->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist')
-                ->first();
+            array_first($this->contentRepository->getByUserIdTypeSlug($userId, 'user-playlist', 'primary-playlist'));
 
         $this->contentHierarchyService->delete($userPrimaryPlaylist['id'], $request->get('content_id'));
 
@@ -122,10 +129,8 @@ class MyListJsonController extends Controller
 
         if (!$state) {
 
-            $usersPrimaryPlaylists = $this->contentService->getByUserIdTypeSlug(
-                auth()->id(),
-                'user-playlist',
-                'primary-playlist'
+            $usersPrimaryPlaylists = array_first(
+                $this->contentRepository->getByUserIdTypeSlug(auth()->id(), 'user-playlist', 'primary-playlist')
             );
 
             $usersPrimaryPlaylist = reset($usersPrimaryPlaylists);
@@ -167,7 +172,7 @@ class MyListJsonController extends Controller
             [
                 'results' => $lessons->results(),
                 'total_results' => $lessons->totalResults(),
-                'filter_options' =>  $lessons->filterOptions(),
+                'filter_options' => $lessons->filterOptions(),
             ]
         ))->toJsonResponse();
     }
