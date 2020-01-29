@@ -2,11 +2,9 @@
 
 namespace Railroad\Railcontent\Controllers;
 
-use App\Decorators\Content\ModeDecoratorBase;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\Factory as ValidationFactory;
-use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Exceptions\DeleteFailedException;
 use Railroad\Railcontent\Exceptions\NotFoundException;
@@ -315,7 +313,6 @@ class ContentJsonController extends Controller
     {
         ContentRepository::$availableContentStatues = $request->get('statuses', [ContentService::STATUS_PUBLISHED]);
         ContentRepository::$pullFutureContent = false;
-        ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $lessons = [];
         $totalResults = 0;
@@ -365,7 +362,6 @@ class ContentJsonController extends Controller
     {
         ContentRepository::$availableContentStatues = $request->get('statuses', [ContentService::STATUS_PUBLISHED]);
         ContentRepository::$pullFutureContent = false;
-        ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $staffPicks = [];
         $types = $request->get('included_types', []);
@@ -412,7 +408,6 @@ class ContentJsonController extends Controller
     {
         ContentRepository::$availableContentStatues = $request->get('statuses', [ContentService::STATUS_PUBLISHED]);
         ContentRepository::$pullFutureContent = false;
-        ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $results = [];
         $types = $request->get('included_types', []);
