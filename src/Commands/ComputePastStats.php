@@ -13,7 +13,7 @@ class ComputePastStats extends Command
      *
      * @var string
      */
-    protected $signature = 'command:ComputePastStats';
+    protected $signature = 'command:ComputePastStats {startDate?} {endDate?}';
 
     /**
      * The console command description.
@@ -46,9 +46,11 @@ class ComputePastStats extends Command
      */
     public function handle()
     {
-        // todo - past interval dates may be specified by commands params, ask for details
-        $startDate = Carbon::parse('2011-01-01');
-        $endDate = Carbon::now();
+        $startDateString = $this->argument('startDate') ?: '2011-01-01';
+        $startDate = Carbon::parse($startDateString);
+
+        $endDate = $this->argument('startDate') ?
+                        Carbon::parse($this->argument('startDate')) : Carbon::now();
 
         $this->contentStatisticsService->computeContentStatistics($startDate, $endDate);
     }

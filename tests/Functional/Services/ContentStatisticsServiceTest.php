@@ -163,18 +163,18 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                         'content_id' => $contentId,
                         'content_type' => $content['content_type'],
                         'content_published_on' => $content['content_published_on'],
-                        'total_completes' => 0,
-                        'total_starts' => 0,
-                        'total_comments' => 0,
-                        'total_likes' => 0,
-                        'total_added_to_list' => 0,
+                        'completes' => 0,
+                        'starts' => 0,
+                        'comments' => 0,
+                        'likes' => 0,
+                        'added_to_list' => 0,
                         'start_interval' => $interval['start']->toDateTimeString(),
                         'end_interval' => $interval['end']->toDateTimeString(),
                         'week_of_year' => $interval['week'],
                     ];
                 }
 
-                $stats[$index][$contentId]['total_completes'] += 1;
+                $stats[$index][$contentId]['completes'] += 1;
             }
         }
 
@@ -212,18 +212,18 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                         'content_id' => $contentId,
                         'content_type' => $content['content_type'],
                         'content_published_on' => $content['content_published_on'],
-                        'total_completes' => 0,
-                        'total_starts' => 0,
-                        'total_comments' => 0,
-                        'total_likes' => 0,
-                        'total_added_to_list' => 0,
+                        'completes' => 0,
+                        'starts' => 0,
+                        'comments' => 0,
+                        'likes' => 0,
+                        'added_to_list' => 0,
                         'start_interval' => $interval['start']->toDateTimeString(),
                         'end_interval' => $interval['end']->toDateTimeString(),
                         'week_of_year' => $interval['week'],
                     ];
                 }
 
-                $stats[$index][$contentId]['total_starts'] += 1;
+                $stats[$index][$contentId]['starts'] += 1;
             }
         }
 
@@ -258,18 +258,18 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                         'content_id' => $contentId,
                         'content_type' => $content['content_type'],
                         'content_published_on' => $content['content_published_on'],
-                        'total_completes' => 0,
-                        'total_starts' => 0,
-                        'total_comments' => 0,
-                        'total_likes' => 0,
-                        'total_added_to_list' => 0,
+                        'completes' => 0,
+                        'starts' => 0,
+                        'comments' => 0,
+                        'likes' => 0,
+                        'added_to_list' => 0,
                         'start_interval' => $interval['start']->toDateTimeString(),
                         'end_interval' => $interval['end']->toDateTimeString(),
                         'week_of_year' => $interval['week'],
                     ];
                 }
 
-                $stats[$index][$contentId]['total_comments'] += 1;
+                $stats[$index][$contentId]['comments'] += 1;
             }
         }
 
@@ -303,18 +303,18 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                         'content_id' => $contentId,
                         'content_type' => $content['content_type'],
                         'content_published_on' => $content['content_published_on'],
-                        'total_completes' => 0,
-                        'total_starts' => 0,
-                        'total_comments' => 0,
-                        'total_likes' => 0,
-                        'total_added_to_list' => 0,
+                        'completes' => 0,
+                        'starts' => 0,
+                        'comments' => 0,
+                        'likes' => 0,
+                        'added_to_list' => 0,
                         'start_interval' => $interval['start']->toDateTimeString(),
                         'end_interval' => $interval['end']->toDateTimeString(),
                         'week_of_year' => $interval['week'],
                     ];
                 }
 
-                $stats[$index][$contentId]['total_likes'] += 1;
+                $stats[$index][$contentId]['likes'] += 1;
             }
         }
 
@@ -348,18 +348,18 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                         'content_id' => $contentId,
                         'content_type' => $content['content_type'],
                         'content_published_on' => $content['content_published_on'],
-                        'total_completes' => 0,
-                        'total_starts' => 0,
-                        'total_comments' => 0,
-                        'total_likes' => 0,
-                        'total_added_to_list' => 0,
+                        'ompletes' => 0,
+                        'starts' => 0,
+                        'comments' => 0,
+                        'likes' => 0,
+                        'added_to_list' => 0,
                         'start_interval' => $interval['start']->toDateTimeString(),
                         'end_interval' => $interval['end']->toDateTimeString(),
                         'week_of_year' => $interval['week'],
                     ];
                 }
 
-                $stats[$index][$contentId]['total_added_to_list'] += 1;
+                $stats[$index][$contentId]['added_to_list'] += 1;
             }
         }
 

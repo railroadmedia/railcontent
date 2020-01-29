@@ -22,7 +22,14 @@ class StatisticsContentRequest extends FormRequest
     public function rules()
     {
         return [
-            // todo - add rules
+            'small_date_time' => 'date',
+            'big_date_time' => 'date',
+            'published_on_small_date_time' => 'date',
+            'published_on_big_date_time' => 'date',
+            'content_types' => 'array',
+            'content_types.*' => 'string|in:' . implode(',', config('railcontent.statistics_content_types')),
+            'sort_by' => 'string|in:completed,started,comments,likes,added_to_list',
+            'sort_dir' => 'string|in:asc,desc',
         ];
     }
 }

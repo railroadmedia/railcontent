@@ -46,8 +46,6 @@ class ComputeWeeklyStats extends Command
      */
     public function handle()
     {
-        // todo - ask details about 'latest week' interval dates
-
         // last Sunday -> Saturday interval, of any current day
         $intervalStart = Carbon::now()->subDays(Carbon::now()->dayOfWeek + 7)->startOfDay(); // preceding last Sunday
         $intervalEnd = $intervalStart->copy()->addDays(6)->endOfDay(); // last Saturday

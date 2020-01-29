@@ -143,6 +143,11 @@ class ContentStatisticsRepository extends RepositoryBase
         return $query->count();
     }
 
+    /**
+     * @param Carbon $bigDate
+     *
+     * @return array
+     */
     public function getStatisticsContentIds(Carbon $bigDate)
     {
         return $this->query()
@@ -157,6 +162,81 @@ class ContentStatisticsRepository extends RepositoryBase
                 ->whereIn(ConfigService::$tableContent . '.type', ConfigService::$statisticsContentTypes)
                 ->where(ConfigService::$tableContent . '.created_on', '<=', $bigDate)
                 ->get()
+                ->toArray();
+    }
+
+    /**
+     * @param Carbon|null $smallDate
+     * @param Carbon|null $bigDate
+     * @param Carbon|null $publishedOnSmall
+     * @param Carbon|null $publishedOnBig
+     * @param array|null $contentTypes
+     * @param string|null $sortBy
+     * @param string|null $sortDir
+     *
+     * @return array
+     */
+    public function getContentStatistics(
+        $smallDate,
+        $bigDate,
+        $publishedOnSmallDate,
+        $publishedOnBigDate,
+        $contentTypes,
+        $sortBy,
+        $sortDir
+    ) {
+        $query = $this->query()
+                ->select(
+                    [
+                        ConfigService::$tableContentStatistics . 'content_id',
+                        ConfigService::$tableContentStatistics . 'content_type',
+                        ConfigService::$tableContentStatistics . 'content_published_on',
+                        $this->databaseManager->raw(
+                            'SUM(' . ConfigService::$tableContentStatistics . '.total_completes_interval) as total_completes'
+                        ),
+                        $this->databaseManager->raw(
+                            'SUM(' . ConfigService::$tableContentStatistics . '.total_starts_interval) as total_starts'
+                        ),
+                        $this->databaseManager->raw(
+                            'SUM(' . ConfigService::$tableContentStatistics . '.total_comments_interval) as total_comments'
+                        ),
+                        $this->databaseManager->raw(
+                            'SUM(' . ConfigService::$tableContentStatistics . '.total_likes_interval) as total_likes'
+                        ),
+                        $this->databaseManager->raw(
+                            'SUM(' . ConfigService::$tableContentStatistics . '.total_added_to_list_interval) as total_added_to_list'
+                        ),
+                    ]
+                )
+                ->groupBy(ConfigService::$tableContentStatistics . 'content_id');
+
+        if ($smallDate) {
+            $query->where(ConfigService::$tableContentStatistics . '.start_interval', '>=', $smallDate)
+                ->where(ConfigService::$tableContentStatistics . '.end_interval', '>=', $smallDate);
+        }
+
+        if ($bigDate) {
+            $query->where(ConfigService::$tableContentStatistics . '.start_interval', '<=', $bigDate)
+                ->where(ConfigService::$tableContentStatistics . '.end_interval', '<=', $bigDate);
+        }
+
+        if ($publishedOnSmallDate) {
+            $query->where(ConfigService::$tableContentStatistics . '.content_published_on', '>=', $publishedOnSmallDate);
+        }
+
+        if ($publishedOnBigDate) {
+            $query->where(ConfigService::$tableContentStatistics . '.content_published_on', '<=', $publishedOnBigDate);
+        }
+
+        if (!empty($contentTypes)) {
+            $query->whereIn(ConfigService::$tableContentStatistics . '.content_type', $contentTypes);
+        }
+
+        if ($sortBy && $sortDir) {
+            $query->orderBy($sortBy, $sortDir);
+        }
+
+        return $query->get()
                 ->toArray();
     }
 

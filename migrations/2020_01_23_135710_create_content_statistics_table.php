@@ -21,11 +21,11 @@ class CreateContentStatisticsTable extends Migration
                 $table->integer('content_id')->index();
                 $table->string('content_type', 128)->index();
                 $table->dateTime('content_published_on')->index()->nullable();
-                $table->integer('total_completes')->index();
-                $table->integer('total_starts')->index();
-                $table->integer('total_comments')->index();
-                $table->integer('total_likes')->index();
-                $table->integer('total_added_to_list')->index();
+                $table->integer('completes')->index();
+                $table->integer('starts')->index();
+                $table->integer('comments')->index();
+                $table->integer('likes')->index();
+                $table->integer('added_to_list')->index();
                 $table->dateTime('start_interval')->index();
                 $table->dateTime('end_interval')->index();
                 $table->integer('week_of_year')->index();

@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\ContentStatisticsRepository;
-use Railroad\Railcontent\Requests\StatisticsContentRequest;
 
 class ContentStatisticsService
 {
@@ -113,17 +112,35 @@ class ContentStatisticsService
         $contentDataToProcess = $this->contentStatisticsRepository->getStatisticsContentIds($end);
 
         foreach ($contentDataToProcess as $contentData) {
-            // todo - ask for details and add check for stats to have at least one value > 0
+
             $contentStats = $this->getIndividualContentStatistics($contentData['content_id'], $start, $end);
 
-            $stats = $contentData + $contentStats + [
+            $hasPositiveValues = false;
+
+            foreach ($contentStats as $statsValue) {
+                if ($statsValue > 0) {
+                    $hasPositiveValues = true;
+                    break;
+                }
+            }
+
+            if (!$hasPositiveValues) {
+                continue;
+            }
+
+            $stats = $contentData + [
+                'completes' => $contentStats['total_completes'],
+                'starts' => $contentStats['total_starts'],
+                'comments' => $contentStats['total_comments'],
+                'likes' => $contentStats['total_likes'],
+                'added_to_list' => $contentStats['total_added_to_list'],
                 'start_interval' => $start->toDateTimeString(),
                 'end_interval' => $end->toDateTimeString(),
                 'week_of_year' => $weekOfYear,
                 'created_on' => Carbon::now()->toDateTimeString(),
             ];
 
-            $this->contentStatisticsRepository->create($stats);;
+            $this->contentStatisticsRepository->create($stats);
         }
     }
 
@@ -161,11 +178,5 @@ class ContentStatisticsService
         }
 
         return $result;
-    }
-
-    public function getContentStatistics(StatisticsContentRequest $request)
-    {
-        // todo - add logic
-        return [];
     }
 }
