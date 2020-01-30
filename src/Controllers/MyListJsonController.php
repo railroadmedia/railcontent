@@ -145,7 +145,7 @@ class MyListJsonController extends Controller
                 '-published_on',
                 $contentTypes,
                 [],
-                array_values(array_pluck($usersPrimaryPlaylist, 'id')),
+                [$usersPrimaryPlaylist],
                 $requiredFields,
                 [],
                 [],
