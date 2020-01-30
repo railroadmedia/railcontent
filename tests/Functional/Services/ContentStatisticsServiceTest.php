@@ -348,7 +348,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                         'content_id' => $contentId,
                         'content_type' => $content['content_type'],
                         'content_published_on' => $content['content_published_on'],
-                        'ompletes' => 0,
+                        'completes' => 0,
                         'starts' => 0,
                         'comments' => 0,
                         'likes' => 0,

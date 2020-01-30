@@ -28,7 +28,7 @@ class StatisticsContentRequest extends FormRequest
             'published_on_big_date_time' => 'date',
             'content_types' => 'array',
             'content_types.*' => 'string|in:' . implode(',', config('railcontent.statistics_content_types')),
-            'sort_by' => 'string|in:completed,started,comments,likes,added_to_list',
+            'sort_by' => 'string|in:content_id,content_type,content_published_on,total_completes,total_starts,total_comments,total_likes,total_added_to_list',
             'sort_dir' => 'string|in:asc,desc',
         ];
     }

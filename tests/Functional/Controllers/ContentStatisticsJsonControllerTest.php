@@ -99,9 +99,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
             Carbon::now()
         );
 
+        $expectedStats = [];
+
         foreach ($intervals as $interval) {
 
-            foreach ($contentData as $content) {
+            foreach ($contentData as $contentId => $content) {
 
                 if (!$this->faker->randomElement([0, 1, 1, 1, 1])) {
                     // for 1 in 5 chance, do not add content stats, as in all stats should be 0
@@ -131,7 +133,21 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     && $interval['end'] >= $testIntervalSmallDate
                     && $interval['end'] <= $testIntervalBigDate
                 ) {
-                    // todo - add to the expected stats sum bucket
+                    if (!isset($expectedStats[$contentId])) {
+                        $expectedStats[$contentId] = $content + [
+                            'total_completes' => 0,
+                            'total_starts' => 0,
+                            'total_comments' => 0,
+                            'total_likes' => 0,
+                            'total_added_to_list' => 0,
+                        ];
+                    }
+
+                    $expectedStats[$contentId]['total_completes'] += $contentStats['completes'];
+                    $expectedStats[$contentId]['total_starts'] += $contentStats['starts'];
+                    $expectedStats[$contentId]['total_comments'] += $contentStats['comments'];
+                    $expectedStats[$contentId]['total_likes'] += $contentStats['likes'];
+                    $expectedStats[$contentId]['total_added_to_list'] += $contentStats['added_to_list'];
                 }
             }
         }
@@ -142,15 +158,30 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'small_date_time' => $testSmallDate->toDateTimeString(),
                 'big_date_time' => $testBigDate->toDateTimeString(),
+                'sort_by' => 'total_completes',
+                'sort_dir' => 'desc',
             ]
         );
 
-        // todo - assert expected stats sum bucket equals response sums
+        $lastSortedByValue = -1;
 
-        $this->assertTrue(true);
+        foreach ($response->decodeResponseJson() as $stats) {
+            // assert stats value
+            $this->assertEquals(
+                $expectedStats[$stats['content_id']],
+                $stats
+            );
+
+            // assert sorting
+            if ($lastSortedByValue >= 0) {
+                // each stats result, starting with second group, should have total_completes less or equal to previous group
+                $this->assertTrue($lastSortedByValue >= $stats['total_completes']);
+            }
+
+            $lastSortedByValue = $stats['total_completes'];
+        }
     }
 
-    /*
     public function test_individual_content_statistics()
     {
         // random date, between 16 and 30 days ago
@@ -336,7 +367,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $response->decodeResponseJson()
         );
     }
-    */
 
     protected function addUserContentProgress($contentId, $state, $updatedOn = null)
     {

@@ -188,27 +188,27 @@ class ContentStatisticsRepository extends RepositoryBase
         $query = $this->query()
                 ->select(
                     [
-                        ConfigService::$tableContentStatistics . 'content_id',
-                        ConfigService::$tableContentStatistics . 'content_type',
-                        ConfigService::$tableContentStatistics . 'content_published_on',
+                        ConfigService::$tableContentStatistics . '.content_id',
+                        ConfigService::$tableContentStatistics . '.content_type',
+                        ConfigService::$tableContentStatistics . '.content_published_on',
                         $this->databaseManager->raw(
-                            'SUM(' . ConfigService::$tableContentStatistics . '.total_completes_interval) as total_completes'
+                            'SUM(' . ConfigService::$tableContentStatistics . '.completes) as total_completes'
                         ),
                         $this->databaseManager->raw(
-                            'SUM(' . ConfigService::$tableContentStatistics . '.total_starts_interval) as total_starts'
+                            'SUM(' . ConfigService::$tableContentStatistics . '.starts) as total_starts'
                         ),
                         $this->databaseManager->raw(
-                            'SUM(' . ConfigService::$tableContentStatistics . '.total_comments_interval) as total_comments'
+                            'SUM(' . ConfigService::$tableContentStatistics . '.comments) as total_comments'
                         ),
                         $this->databaseManager->raw(
-                            'SUM(' . ConfigService::$tableContentStatistics . '.total_likes_interval) as total_likes'
+                            'SUM(' . ConfigService::$tableContentStatistics . '.likes) as total_likes'
                         ),
                         $this->databaseManager->raw(
-                            'SUM(' . ConfigService::$tableContentStatistics . '.total_added_to_list_interval) as total_added_to_list'
+                            'SUM(' . ConfigService::$tableContentStatistics . '.added_to_list) as total_added_to_list'
                         ),
                     ]
                 )
-                ->groupBy(ConfigService::$tableContentStatistics . 'content_id');
+                ->groupBy(ConfigService::$tableContentStatistics . '.content_id');
 
         if ($smallDate) {
             $query->where(ConfigService::$tableContentStatistics . '.start_interval', '>=', $smallDate)
@@ -233,7 +233,7 @@ class ContentStatisticsRepository extends RepositoryBase
         }
 
         if ($sortBy && $sortDir) {
-            $query->orderBy($sortBy, $sortDir);
+            $query->orderByRaw($sortBy . ' ' . $sortDir);
         }
 
         return $query->get()
