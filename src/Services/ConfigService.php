@@ -110,6 +110,11 @@ class ConfigService
     public static $tableSearchIndexes;
 
     /**
+     * @var string
+     */
+    public static $tableContentStatistics;
+
+    /**
      * @var array
      */
     public static $availableLanguages;
@@ -148,6 +153,11 @@ class ConfigService
      * @var array
      */
     public static $commentsAssignationOwnerIds;
+
+    /**
+     * @var array
+     */
+    public static $statisticsContentTypes;
 
     /**
      * @var array

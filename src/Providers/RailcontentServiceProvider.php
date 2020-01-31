@@ -7,6 +7,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Validator;
 use PDO;
 use Railroad\Railcontent\Commands\CalculateTotalXP;
+use Railroad\Railcontent\Commands\ComputePastStats;
+use Railroad\Railcontent\Commands\ComputeWeeklyStats;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
@@ -102,6 +104,8 @@ class RailcontentServiceProvider extends ServiceProvider
 
         $this->commands(
             [
+                ComputePastStats::class,
+                ComputeWeeklyStats::class,
                 CreateSearchIndexes::class,
                 CreateVimeoVideoContentRecords::class,
                 RepairMissingDurations::class,
@@ -149,6 +153,7 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableCommentLikes = ConfigService::$tablePrefix . 'comment_likes';
         ConfigService::$tableContentLikes = ConfigService::$tablePrefix . 'content_likes';
         ConfigService::$tableSearchIndexes = ConfigService::$tablePrefix . 'search_indexes';
+        ConfigService::$tableContentStatistics = ConfigService::$tablePrefix . 'content_statistics';
 
         // brand
         ConfigService::$brand = config('railcontent.brand');
@@ -177,6 +182,8 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$commentableContentTypes = config('railcontent.commentable_content_types');
 
         ConfigService::$commentsAssignationOwnerIds = config('railcontent.comment_assignation_owner_ids');
+
+        ConfigService::$statisticsContentTypes = config('railcontent.statistics_content_types');
 
         ConfigService::$searchIndexValues = config('railcontent.search_index_values');
         ConfigService::$indexableContentStatuses = config('railcontent.indexable_content_statuses');
