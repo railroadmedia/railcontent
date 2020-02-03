@@ -944,6 +944,7 @@ class ContentService
                 'qb' => $qb,
                 'results' => $hydratedResults,
                 'filter_options' => $pullFilterFields ? $this->contentRepository->getFilterFields() : [],
+                'total_results' => $filter->countFilter()
             ]
         );
 
