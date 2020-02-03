@@ -224,6 +224,27 @@ class ContentRepository extends EntityRepository
     }
 
     /**
+     * @return int
+     */
+    public function countFilter()
+    {
+        $subQuery =
+            $this->build()
+                ->restrictByUserAccess()
+                ->restrictByFields($this->requiredFields)
+                ->includeByFields($this->includedFields)
+                ->restrictByUserStates($this->requiredUserStates)
+                ->includeByUserStates($this->includedUserStates)
+                ->restrictByTypes($this->typesToInclude)
+                ->restrictBySlugHierarchy($this->slugHierarchy)
+                ->restrictByParentIds($this->requiredParentIds)
+                ->groupBy(config('railcontent.table_prefix') . 'content.id')
+                ->getQuery()->getResult();
+
+        return count($subQuery);
+    }
+
+        /**
      * @return array
      */
     public function getFilterFields()
