@@ -99,6 +99,11 @@ class ContentStatisticsService
 
         foreach ($intervals as $interval) {
             $this->computeIntervalContentStatistics($interval['start'], $interval['end'], $interval['week']);
+
+            if (app()->runningInConsole()) {
+                echo "Computed: " . $interval['start']->toDateString() . ' -> ' . $interval['end']->toDateString()
+                    . "\n";
+            }
         }
     }
 

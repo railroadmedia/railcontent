@@ -52,6 +52,8 @@ class ComputePastStats extends Command
         $endDate = $this->argument('startDate') ?
                         Carbon::parse($this->argument('startDate')) : Carbon::now();
 
+        $this->info('Calculating stats between: ' . $startDate->toDateString() . ' and ' . $endDate->toDateString());
+
         $this->contentStatisticsService->computeContentStatistics($startDate, $endDate);
     }
 }
