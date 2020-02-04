@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -191,6 +192,8 @@ class ContentStatisticsRepository extends RepositoryBase
                         ConfigService::$tableContentStatistics . '.content_id',
                         ConfigService::$tableContentStatistics . '.content_type',
                         ConfigService::$tableContentStatistics . '.content_published_on',
+                        ConfigService::$tableContent . '.brand as content_brand',
+                        ConfigService::$tableContentFields . '.value as content_title',
                         $this->databaseManager->raw(
                             'SUM(' . ConfigService::$tableContentStatistics . '.completes) as total_completes'
                         ),
@@ -207,6 +210,23 @@ class ContentStatisticsRepository extends RepositoryBase
                             'SUM(' . ConfigService::$tableContentStatistics . '.added_to_list) as total_added_to_list'
                         ),
                     ]
+                )
+                ->leftJoin(
+                    ConfigService::$tableContentFields,
+                    function (JoinClause $joinClause) {
+                        $joinClause->on(
+                            ConfigService::$tableContentStatistics . '.content_id',
+                            '=',
+                            ConfigService::$tableContentFields . '.content_id'
+                        )
+                            ->where(ConfigService::$tableContentFields . '.key', 'title');
+                    }
+                )
+                ->join(
+                    ConfigService::$tableContent,
+                    ConfigService::$tableContent . '.id',
+                    '=',
+                    ConfigService::$tableContentStatistics . '.content_id'
                 )
                 ->groupBy(ConfigService::$tableContentStatistics . '.content_id');
 
