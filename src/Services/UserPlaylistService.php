@@ -180,7 +180,7 @@ class UserPlaylistService
      * @param $skip
      * @return array|mixed
      */
-    public function getUserPlaylistContents($playlistId, $contentType = [], $limit, $skip)
+    public function getUserPlaylistContents($playlistId, $contentType = [], $limit, $skip = 0)
     {
         $qb = $this->contentRepository->createQueryBuilder('content');
 

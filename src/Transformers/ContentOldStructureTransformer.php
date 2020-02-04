@@ -78,9 +78,9 @@ class ContentOldStructureTransformer extends TransformerAbstract
 //                'parent_id' => (!$content->getParent()->isEmpty()) ?
 //                    $content->getParent()[0]->getParent()->getId() : null,
                 'child_id' => null,
-                'completed' => $content->isCompleted(),
-                'started' => $content->isStarted(),
-                'progress_percent' => $content->getProgressPercent(),
+                                'completed' => $content->getCompleted(),
+                                'started' => $content->getStarted(),
+                                'progress_percent' => $content->getProgressPercent(),
             ],
             $extraProperties
         );
@@ -108,7 +108,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
      */
     public function includeData(Content $content)
     {
-        if(!empty($content->getData())) {
+        if (!empty($content->getData())) {
             return $this->collection(
                 $content->getData(),
                 new ContentDataOldStructureTransformer(),
@@ -150,8 +150,8 @@ class ContentOldStructureTransformer extends TransformerAbstract
                         $fields[] = [
                             'content_id' => $content->getId(),
                             'key' => $field,
-                            'value' => ($value instanceof Content)?$this->transform($value):$value,
-                            'type' => ($value instanceof Content)?'content_id':'string',
+                            'value' => ($value instanceof Content) ? $this->transform($value) : $value,
+                            'type' => ($value instanceof Content) ? 'content_id' : 'string',
                             'position' => 1,
                         ];
                     }
@@ -169,7 +169,8 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                 ->getData();
                         $arrayValue['data'] =
                             $this->includeData($value)
-                                ->getData()->getValues();
+                                ->getData()
+                                ->getValues();
 
                         $fields[] = [
                             'id' => rand(),
@@ -191,7 +192,8 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                 ->getData();
                         $arrayValue['data'] =
                             $this->includeData($instructor)
-                                ->getData()->getValues();
+                                ->getData()
+                                ->getValues();
 
                         $fields[] = [
                             'id' => rand(),
@@ -244,9 +246,9 @@ class ContentOldStructureTransformer extends TransformerAbstract
      */
     public function includeUserProgress(Content $content)
     {
-        if (!empty($content->getUserProgress(auth()->id()))) {
+        if (!empty($content->getUserProgresses()[auth()->id()]??null)) {
             return $this->item(
-                $content->getUserProgress(auth()->id()),
+                $content->getUserProgresses()[auth()->id()],
                 new UserContentProgressOldStructureTransformer(),
                 'user-progress'
             );

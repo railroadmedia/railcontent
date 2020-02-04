@@ -138,6 +138,11 @@ class Content extends ArrayExpressible
     protected $progressPercent = 0;
 
     /**
+     * @var string
+     */
+    protected $progressState = null;
+
+    /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentLikes", mappedBy="content")
      */
     private $likes;
@@ -439,6 +444,14 @@ class Content extends ArrayExpressible
     /**
      * @return bool
      */
+    public function getStarted()
+    {
+        return $this->started;
+    }
+
+    /**
+     * @return bool
+     */
     public function isCompleted()
     {
         $userProgress = $this->userProgress[auth()->id()];
@@ -484,7 +497,7 @@ class Content extends ArrayExpressible
      */
     public function getUserProgresses()
     {
-        return $this->userProgress->toArray();
+        return $this->userProgress;
     }
 
     /**
@@ -520,11 +533,7 @@ class Content extends ArrayExpressible
      */
     public function getProgressPercent()
     {
-        $userProgress = $this->userProgress[auth()->id()];
-        if (!$userProgress) {
-            return 0;
-        }
-        return $userProgress->getProgressPercent();
+        return $this->progressPercent;
     }
 
     /**
@@ -565,5 +574,29 @@ class Content extends ArrayExpressible
     public function getParentContent()
     {
         return $this->parentContent->first();
+    }
+
+    /**
+     * @param $progressState
+     */
+    public function setProgressState($progressState)
+    {
+        $this->progressState = $progressState;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProgressState()
+    {
+        if ($this->getProgressPercent() > 0) {
+
+        $userProgress = $this->userProgress[auth()->id()];
+        if (!$userProgress) {
+            return null;
+        }
+        return $userProgress->getState();
+    }
+        return null;
     }
 }

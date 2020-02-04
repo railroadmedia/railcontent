@@ -54,7 +54,7 @@ class ContentDatumService
     {
         return $this->datumRepository->createQueryBuilder('d')
             ->where('d.content IN (:contents)')
-            ->setParameter('contents', $contentIds)
+            ->setParameter('contents', array_unique($contentIds))
             ->getQuery()
             ->setCacheable(true)
             ->setCacheRegion('pull')

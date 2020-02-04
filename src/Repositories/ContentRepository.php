@@ -218,7 +218,9 @@ class ContentRepository extends EntityRepository
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByPlaylistIds($this->requiredUserPlaylistIds)
                 ->orderBy(implode(', ', $orderByColumns))
-                ->restrictByFields($this->requiredFields);
+                ->restrictByFields($this->requiredFields)
+                ->setCacheable(true)
+                ->setCacheRegion('pull');
 
         return $qb;
     }
@@ -437,8 +439,9 @@ class ContentRepository extends EntityRepository
                 $lifetime
             );
 
-        return $qb->select(config('railcontent.table_prefix') . 'content')
+        return $qb->select(config('railcontent.table_prefix') . 'content','i','ins')
             ->from($this->getEntityName(), config('railcontent.table_prefix') . 'content')
-           ;
+            ->leftJoin(config('railcontent.table_prefix') . 'content' . '.instructor', 'i')
+            ->leftJoin( 'i.instructor', 'ins');
     }
 }

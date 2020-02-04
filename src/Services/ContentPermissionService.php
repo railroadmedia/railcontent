@@ -178,7 +178,7 @@ class ContentPermissionService
                     )
             )
             ->setParameter('brand', config('railcontent.brand'))
-            ->setParameter('contentIds', $contentIds)
+            ->setParameter('contentIds', array_unique($contentIds))
             ->setParameter('contentType', $contentType);
 
         return $qb->getQuery()
