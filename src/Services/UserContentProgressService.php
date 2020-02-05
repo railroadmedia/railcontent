@@ -426,7 +426,7 @@ class UserContentProgressService
             // get siblings
             $siblings = $parent->getChild() ?? $this->attachProgressToContents(
                     $user->getId(),
-                    $this->contentService->getByParentId($parent->getId(), 'childPosition','asc', false)
+                    $this->contentService->getByParentId($parent->getId(), 'childPosition', 'asc', false)
                 );
 
             if (is_array($siblings)) {
@@ -456,7 +456,7 @@ class UserContentProgressService
                     $parent->getId(),
                     $this->getProgressPercentage(
                         $user->getId(),
-                        $this->contentService->getByParentId($parent->getId(),  'childPosition','asc', false)
+                        $this->contentService->getByParentId($parent->getId(), 'childPosition', 'asc', false)
                     ),
                     $user->getId(),
                     true
@@ -643,5 +643,44 @@ class UserContentProgressService
                 ->getSingleResult('Railcontent');
 
         return $results['count'];
+    }
+
+    /**
+     * @param $contentTypes
+     * @param $userId
+     * @param string $orderByColumn
+     * @param int $limit
+     * @return mixed
+     */
+    public function getRecentActivitiesOnContentTypes(
+        $contentTypes,
+        $userId,
+        $orderByColumn = '-updated_on',
+        $limit = 10
+    ) {
+        $user = $this->userProvider->getUserById($userId);
+
+        $alias = 'uc';
+        $aliasContent = 'c';
+        $qb = $this->userContentRepository->createQueryBuilder($alias);
+        $qb->join(
+            $alias . '.content',
+            $aliasContent
+        )
+            ->where($aliasContent . '.type' . ' IN (:contentTypes)')
+            ->andWhere($aliasContent . '.brand = :brand')
+            ->andWhere($alias . '.user = :user')
+            ->setParameters(
+                [
+                    'brand' => config('railcontent.brand'),
+                    'contentTypes' => $contentTypes,
+                    'user' => $user,
+                ]
+            )
+             ->setMaxResults($limit)
+            ->sorted($alias, $orderByColumn);
+
+        return $qb->getQuery()
+            ->getResult('Railcontent');
     }
 }
