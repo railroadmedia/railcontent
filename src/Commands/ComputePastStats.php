@@ -49,9 +49,21 @@ class ComputePastStats extends Command
         $startDateString = $this->argument('startDate') ?: '2011-01-01';
         $startDate = Carbon::parse($startDateString);
 
-        $endDate = $this->argument('startDate') ?
-                        Carbon::parse($this->argument('startDate')) : Carbon::now();
+        $endDate = $this->argument('endDate') ?
+                        Carbon::parse($this->argument('endDate')) : Carbon::now();
 
-        $this->contentStatisticsService->computeContentStatistics($startDate, $endDate);
+        $format = "Started computing content stats for interval [%s -> %s].\n";
+
+        $this->info(sprintf($format, $startDate->toDateTimeString(), $endDate->toDateTimeString()));
+
+        $start = microtime(true);
+
+        $this->contentStatisticsService->computeContentStatistics($startDate, $endDate, $this);
+
+        $finish = microtime(true) - $start;
+
+        $format = "Finished computing content stats in total %s seconds\n";
+
+        $this->info(sprintf($format, $finish));
     }
 }

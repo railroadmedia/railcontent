@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Illuminate\Database\DatabaseManager;
 use Railroad\Railcontent\Repositories\ContentStatisticsRepository;
 
 class ContentStatisticsService
@@ -13,6 +14,11 @@ class ContentStatisticsService
     private $contentStatisticsRepository;
 
     /**
+     * @var DatabaseManager
+     */
+    private $databaseManager;
+
+    /**
      * ContentStatisticsService constructor.
      *
      * @param ContentStatisticsRepository $contentStatisticsRepository
@@ -21,6 +27,7 @@ class ContentStatisticsService
         ContentStatisticsRepository $contentStatisticsRepository
     ) {
         $this->contentStatisticsRepository = $contentStatisticsRepository;
+        $this->databaseManager = app('db');
     }
 
     /**
@@ -74,8 +81,9 @@ class ContentStatisticsService
     /**
      * @param Carbon $smallDate
      * @param Carbon $bigDate
+     * @param mixed $command
      */
-    public function computeContentStatistics(Carbon $smallDate, Carbon $bigDate)
+    public function computeContentStatistics(Carbon $smallDate, Carbon $bigDate, $command)
     {
         $intervals = $this->getContentStatisticsIntervals($smallDate, $bigDate);
 
@@ -98,7 +106,24 @@ class ContentStatisticsService
         */
 
         foreach ($intervals as $interval) {
+            if ($command) {
+                // todo - remove after optimizations done
+                $start = microtime(true);
+            }
             $this->computeIntervalContentStatistics($interval['start'], $interval['end'], $interval['week']);
+            if ($command) {
+                // todo - remove after optimizations done
+                $finish = microtime(true) - $start;
+                $format = "Finished sub-interval [%s -> %s] in total %s seconds\n";
+                $command->info(
+                    sprintf(
+                        $format,
+                        $interval['start']->toDateTimeString(),
+                        $interval['end']->toDateTimeString(),
+                        $finish
+                    )
+                );
+            }
         }
     }
 
@@ -110,6 +135,9 @@ class ContentStatisticsService
     public function computeIntervalContentStatistics(Carbon $start, Carbon $end, int $weekOfYear)
     {
         $contentDataToProcess = $this->contentStatisticsRepository->getStatisticsContentIds($end);
+
+        $insertData = [];
+        $insertChunkSize = 1000;
 
         foreach ($contentDataToProcess as $contentData) {
 
@@ -140,7 +168,16 @@ class ContentStatisticsService
                 'created_on' => Carbon::now()->toDateTimeString(),
             ];
 
-            $this->contentStatisticsRepository->create($stats);
+            $insertData[] = $stats;
+
+            if (count($insertData) > $insertChunkSize) {
+                $this->contentStatisticsRepository->bulkInsert($insertData);
+                $insertData = [];
+            }
+        }
+
+        if (!empty($insertData)) {
+            $this->contentStatisticsRepository->bulkInsert($insertData);
         }
     }
 

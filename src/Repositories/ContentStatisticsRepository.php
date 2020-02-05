@@ -10,6 +10,15 @@ use Railroad\Railcontent\Services\ConfigService;
 class ContentStatisticsRepository extends RepositoryBase
 {
     /**
+     * @param array $data
+     */
+    public function bulkInsert($data)
+    {
+        $this->databaseManager->table(ConfigService::$tableContentStatistics)
+            ->insert($data);
+    }
+
+    /**
      * @param integer $id
      * @param Carbon|null $smallDate
      * @param Carbon|null $bigDate
