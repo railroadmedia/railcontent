@@ -9,7 +9,16 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\UserPlaylistRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_user_playlists")
+ * @ORM\Table(
+ *     name="railcontent_user_playlists",
+ *     indexes={
+ *         @ORM\Index(name="railcontent_user_playlists_brand_index", columns={"brand"}),
+ *         @ORM\Index(name="railcontent_user_playlists_type_index", columns={"type"}),
+ *         @ORM\Index(name="railcontent_user_playlists_user_id_index", columns={"user_id"}),
+ *         @ORM\Index(name="railcontent_user_playlists_created_at_index", columns={"created_at"}),
+ *         @ORM\Index(name="railcontent_user_playlists_updated_at_index", columns={"updated_at"})
+ *     }
+ * )
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */

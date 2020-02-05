@@ -8,7 +8,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_content_hierarchy")
+ * @ORM\Table(
+ *     name="railcontent_content_hierarchy",
+ *     indexes={
+ *         @ORM\Index(name="railcontent_content_hierarchy_child_id_parent_id_unique", columns={"child_id","parent_id"}),
+ *         @ORM\Index(name="railcontent_content_hierarchy_parent_id_index", columns={"parent_id"}),
+ *         @ORM\Index(name="railcontent_content_hierarchy_child_id_index", columns={"child_id"}),
+ *         @ORM\Index(name="railcontent_content_hierarchy_child_position_index", columns={"child_position"}),
+ *         @ORM\Index(name="railcontent_content_hierarchy_created_on_index", columns={"created_on"})
+ *     }
+ * )
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */

@@ -9,7 +9,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\CommentLikeRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_comment_likes")
+ * @ORM\Table(
+ *     name="railcontent_comment_likes",
+ *     indexes={
+ *         @ORM\Index(name="railcontent_comment_likes_comment_id_index", columns={"comment_id"}),
+ *         @ORM\Index(name="railcontent_comment_likes_user_id_index", columns={"user_id"}),
+ *         @ORM\Index(name="railcontent_comment_likes_created_on_index", columns={"created_on"})
+ *     }
+ * )
  *
  */
 class CommentLikes

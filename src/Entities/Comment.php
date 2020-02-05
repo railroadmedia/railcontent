@@ -12,7 +12,16 @@ use Railroad\Railcontent\Entities\Traits\DecoratedFields;
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\CommentRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_comments")
+ * @ORM\Table(
+ *     name="railcontent_comments",
+ *     indexes={
+ *         @ORM\Index(name="railcontent_comments_content_id_index", columns={"content_id"}),
+ *         @ORM\Index(name="railcontent_comments_parent_id_index", columns={"parent_id"}),
+ *         @ORM\Index(name="railcontent_comments_user_id_index", columns={"user_id"}),
+ *         @ORM\Index(name="railcontent_comments_created_on_index", columns={"created_on"}),
+ *         @ORM\Index(name="railcontent_comments_deleted_at_index", columns={"deleted_at"})
+ *     }
+ * )
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */

@@ -8,7 +8,16 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 /**
  * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_user_playlist_content")
+ * @ORM\Table(
+ *     name="railcontent_user_playlist_content",
+ *     indexes={
+ *         @ORM\Index(name="upc", columns={"user_playlist_id","content_id"}),
+ *         @ORM\Index(name="railcontent_user_playlist_content_content_id_index", columns={"content_id"}),
+ *         @ORM\Index(name="railcontent_user_playlist_content_user_playlist_id_index", columns={"user_playlist_id"}),
+ *         @ORM\Index(name="railcontent_user_playlist_content_created_at_index", columns={"created_at"}),
+ *         @ORM\Index(name="railcontent_user_playlist_content_updated_at_index", columns={"updated_at"})
+ *     }
+ * )
  *
  */
 class UserPlaylistContent extends ArrayExpressible

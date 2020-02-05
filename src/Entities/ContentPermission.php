@@ -7,7 +7,15 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_content_permissions")
+ * @ORM\Table(
+ *     name="railcontent_content_permissions",
+ *     indexes={
+ *         @ORM\Index(name="railcontent_content_permissions_content_id_index", columns={"content_id"}),
+ *         @ORM\Index(name="railcontent_content_permissions_content_type_index", columns={"content_type"}),
+ *         @ORM\Index(name="railcontent_content_permissions_permission_id_index", columns={"permission_id"}),
+ *         @ORM\Index(name="railcontent_content_permissions_brand_index", columns={"brand"})
+ *     }
+ * )
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */

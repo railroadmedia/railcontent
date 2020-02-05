@@ -8,7 +8,15 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_content_key_pitch_type")
+ * @ORM\Table(
+ *     name="railcontent_content_key_pitch_type",
+ *     indexes={
+ *         @ORM\Index(name="kpc", columns={"key_pitch_type","content_id"}),
+ *         @ORM\Index(name="railcontent_content_key_pitch_type_content_id_index", columns={"content_id"}),
+ *         @ORM\Index(name="railcontent_content_key_pitch_type_key_pitch_type_index", columns={"key_pitch_type"}),
+ *         @ORM\Index(name="railcontent_content_key_pitch_type_position_index", columns={"position"})
+ *     }
+ * )
  *
  */
 class ContentKeyPitchType extends ArrayExpressible

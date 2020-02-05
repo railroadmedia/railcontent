@@ -10,7 +10,15 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\UserPermissionsRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_user_permissions")
+ * @ORM\Table(
+ *     name="railcontent_user_permissions",
+ *     indexes={
+ *         @ORM\Index(name="railcontent_user_permissions_start_date_index", columns={"start_date"}),
+ *         @ORM\Index(name="railcontent_user_permissions_created_on_index", columns={"created_at"}),
+ *         @ORM\Index(name="railcontent_user_permissions_updated_on_index", columns={"updated_at"}),
+ *         @ORM\Index(name="ui_pi_ed", columns={"user_id","permission_id","expiration_date"})
+ *     }
+ * )
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */

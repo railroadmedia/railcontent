@@ -8,7 +8,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\UserContentProgressRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_user_content_progress")
+ * @ORM\Table(
+ *     name="railcontent_user_content_progress",
+ *     indexes={
+ *         @ORM\Index(name="railcontent_user_content_progress_content_id_index", columns={"content_id"}),
+ *         @ORM\Index(name="railcontent_user_content_progress_user_id_index", columns={"user_id"}),
+ *         @ORM\Index(name="railcontent_user_content_progress_state_index", columns={"state"}),
+ *         @ORM\Index(name="railcontent_user_content_progress_state_index", columns={"progress_percent"}),
+ *         @ORM\Index(name="railcontent_user_content_progress_updated_on_index", columns={"updated_on"}),
+ *         @ORM\Index(name="c_s", columns={"content_id","state"}),
+ *         @ORM\Index(name="railcontent_user_content_progress_higher_key_progress_index", columns={"higher_key_progress"}),
+ *         @ORM\Index(name="c_u_s", columns={"content_id","user_id","state"}),
+ *     }
+ * )
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */
@@ -45,6 +57,12 @@ class UserContentProgress
      *
      */
     private $content;
+
+    /**
+     * @ORM\Column(type="string", name="higher_key_progress")
+     *
+     */
+    protected $higherKeyProgress;
 
     /**
      * @ORM\Column(type="datetime", name="updated_on", nullable=true)
@@ -142,5 +160,21 @@ class UserContentProgress
         $this->content = $content;
 
         $content->addUserProgress($this);
+    }
+
+    /**
+     * @return string
+     */
+    public function getHigherKeyProgress()
+    {
+        return $this->higherKeyProgress;
+    }
+
+    /**
+     * @param string $higherKeyProgress
+     */
+    public function setHigherKeyProgress($higherKeyProgress)
+    {
+        $this->higherKeyProgress = $higherKeyProgress;
     }
 }

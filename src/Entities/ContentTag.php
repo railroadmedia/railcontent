@@ -8,7 +8,15 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_content_tag")
+ * @ORM\Table(
+ *     name="railcontent_content_tag",
+ *     indexes={
+ *         @ORM\Index(name="tgc", columns={"tag","content_id"}),
+ *         @ORM\Index(name="railcontent_content_tag_content_id_index", columns={"content_id"}),
+ *         @ORM\Index(name="railcontent_content_tag_tag_index", columns={"tag"}),
+ *         @ORM\Index(name="railcontent_content_tag_position_index", columns={"position"})
+ *     }
+ * )
  *
  */
 class ContentTag extends ArrayExpressible

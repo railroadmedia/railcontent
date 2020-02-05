@@ -8,7 +8,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_content_data")
+ * @ORM\Table(
+ *     name="railcontent_content_data",
+ *     indexes={
+ *         @ORM\Index(name="railcontent_content_data_content_id_index", columns={"content_id"}),
+ *         @ORM\Index(name="railcontent_content_data_key_index", columns={"key"}),
+ *         @ORM\Index(name="railcontent_content_data_position_index", columns={"position"})
+ *     }
+ * )
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */

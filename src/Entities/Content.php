@@ -13,7 +13,51 @@ use Railroad\Railcontent\Entities\Traits\DecoratedFields;
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="railcontent_content")
+ * @ORM\Table(
+ *     name="railcontent_content",
+ *     indexes={
+ *         @ORM\Index(name="railcontent_content_slug_index", columns={"slug"}),
+ *         @ORM\Index(name="railcontent_content_language_index", columns={"language"}),
+ *         @ORM\Index(name="railcontent_content_user_id_index", columns={"user_id"}),
+ *         @ORM\Index(name="railcontent_content_archived_on_index", columns={"archived_on"}),
+ *         @ORM\Index(name="railcontent_content_sort_index", columns={"sort"}),
+ *         @ORM\Index(name="t_s_b", columns={"type","status","brand"}),
+ *         @ORM\Index(name="railcontent_content_total_xp_index", columns={"total_xp"}),
+ *         @ORM\Index(name="railcontent_content_difficulty_index", columns={"difficulty"}),
+ *         @ORM\Index(name="railcontent_content_home_staff_pick_rating_index", columns={"home_staff_pick_rating"}),
+ *         @ORM\Index(name="railcontent_content_legacy_id_index", columns={"legacy_id"}),
+ *         @ORM\Index(name="railcontent_content_legacy_wordpress_post_id_index", columns={"legacy_wordpress_post_id"}),
+ *         @ORM\Index(name="railcontent_content_qna_video_index", columns={"qna_video"}),
+ *         @ORM\Index(name="railcontent_content_style_index", columns={"style"}),
+ *         @ORM\Index(name="railcontent_content_title_index", columns={"title"}),
+ *         @ORM\Index(name="railcontent_content_video_index", columns={"video"}),
+ *         @ORM\Index(name="railcontent_content_xp_index", columns={"xp"}),
+ *         @ORM\Index(name="railcontent_content_album_index", columns={"album"}),
+ *         @ORM\Index(name="railcontent_content_artist_index", columns={"artist"}),
+ *         @ORM\Index(name="railcontent_content_bpm_index", columns={"bpm"}),
+ *         @ORM\Index(name="railcontent_content_cd_tracks_index", columns={"cd_tracks"}),
+ *         @ORM\Index(name="railcontent_content_chord_or_scale_index", columns={"chord_or_scale"}),
+ *         @ORM\Index(name="railcontent_content_difficulty_range_index", columns={"difficulty_range"}),
+ *         @ORM\Index(name="railcontent_content_episode_number_index", columns={"episode_number"}),
+ *         @ORM\Index(name="railcontent_content_exercise_book_pages_index", columns={"exercise_book_pages"}),
+ *         @ORM\Index(name="railcontent_content_includes_song_index", columns={"includes_song"}),
+ *         @ORM\Index(name="railcontent_content_instructors_index", columns={"instructors"}),
+ *         @ORM\Index(name="railcontent_content_live_event_start_time_index", columns={"live_event_start_time"}),
+ *         @ORM\Index(name="railcontent_content_live_event_end_time_index", columns={"live_event_end_time"}),
+ *         @ORM\Index(name="railcontent_content_live_event_youtube_id_index", columns={"live_event_youtube_id"}),
+ *         @ORM\Index(name="railcontent_content_live_stream_feed_type_index", columns={"live_stream_feed_type"}),
+ *         @ORM\Index(name="railcontent_content_name_index", columns={"name"}),
+ *         @ORM\Index(name="railcontent_content_transcriber_name_index", columns={"transcriber_name"}),
+ *         @ORM\Index(name="railcontent_content_week_index", columns={"week"}),
+ *         @ORM\Index(name="railcontent_content_avatar_url_index", columns={"avatar_url"}),
+ *         @ORM\Index(name="railcontent_content_length_in_seconds_index", columns={"length_in_seconds"}),
+ *         @ORM\Index(name="railcontent_content_soundslice_slug_index", columns={"soundslice_slug"}),
+ *         @ORM\Index(name="railcontent_content_staff_pick_rating_index", columns={"staff_pick_rating"}),
+ *         @ORM\Index(name="railcontent_content_student_id_index", columns={"student_id"}),
+ *         @ORM\Index(name="railcontent_content_vimeo_video_id_index", columns={"vimeo_video_id"}),
+ *         @ORM\Index(name="railcontent_content_youtube_video_id_index", columns={"youtube_video_id"})
+ *     }
+ * )
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */
@@ -82,6 +126,15 @@ class Content extends ArrayExpressible
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy", mappedBy="parent")
      */
     private $child;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Railroad\Railcontent\Entities\Content", inversedBy="child")
+     * @ORM\JoinTable(name="railcontent_content_hierarchy",
+     *      joinColumns={@ORM\JoinColumn(name="parent_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="child_id", referencedColumnName="id")}
+     *      )
+     */
+    private $childrenContent;
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentHierarchy",mappedBy="child", cascade={"persist",
@@ -500,6 +553,11 @@ class Content extends ArrayExpressible
         return $this->userProgress;
     }
 
+    public function setUserProgresses($userProgress)
+    {
+         $this->userProgress = $userProgress;
+    }
+
     /**
      * @param $userProgress
      */
@@ -571,9 +629,9 @@ class Content extends ArrayExpressible
     /**
      * @return mixed
      */
-    public function getParentContent()
+    public function getChildrenContent()
     {
-        return $this->parentContent->first();
+        return $this->childrenContent;
     }
 
     /**
@@ -582,6 +640,13 @@ class Content extends ArrayExpressible
     public function setProgressState($progressState)
     {
         $this->progressState = $progressState;
+    }
+    /**
+     * @return mixed
+     */
+    public function getParentContent()
+    {
+        return $this->parentContent->first();
     }
 
     /**
