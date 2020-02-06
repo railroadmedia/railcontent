@@ -3,7 +3,6 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
-use Illuminate\Database\DatabaseManager;
 use Railroad\Railcontent\Repositories\ContentStatisticsRepository;
 
 class ContentStatisticsService
@@ -14,11 +13,6 @@ class ContentStatisticsService
     private $contentStatisticsRepository;
 
     /**
-     * @var DatabaseManager
-     */
-    private $databaseManager;
-
-    /**
      * ContentStatisticsService constructor.
      *
      * @param ContentStatisticsRepository $contentStatisticsRepository
@@ -27,7 +21,6 @@ class ContentStatisticsService
         ContentStatisticsRepository $contentStatisticsRepository
     ) {
         $this->contentStatisticsRepository = $contentStatisticsRepository;
-        $this->databaseManager = app('db');
     }
 
     /**
@@ -132,8 +125,9 @@ class ContentStatisticsService
      * @param Carbon $bigDate
      * @param int $weekOfYear
      */
-    public function computeIntervalContentStatistics(Carbon $start, Carbon $end, int $weekOfYear)
+    public function computeIntervalContentStatistics_(Carbon $start, Carbon $end, int $weekOfYear)
     {
+        // todo - to be removed
         $contentDataToProcess = $this->contentStatisticsRepository->getStatisticsContentIds($end);
 
         $insertData = [];
@@ -179,6 +173,22 @@ class ContentStatisticsService
         if (!empty($insertData)) {
             $this->contentStatisticsRepository->bulkInsert($insertData);
         }
+    }
+
+    /**
+     * @param Carbon $smallDate
+     * @param Carbon $bigDate
+     * @param int $weekOfYear
+     */
+    public function computeIntervalContentStatistics(Carbon $start, Carbon $end, int $weekOfYear)
+    {
+        $this->contentStatisticsRepository->initIntervalContentStatistics($start, $end, $weekOfYear);
+        $this->contentStatisticsRepository->computeIntervalCompletesContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeIntervalStartsContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeIntervalCommentsContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeIntervalLikesContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeIntervalAddToListContentStatistics($start, $end);
+        $this->contentStatisticsRepository->cleanIntervalContentStatistics($start, $end);
     }
 
     /**
