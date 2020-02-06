@@ -479,11 +479,7 @@ class Content extends ArrayExpressible
      */
     public function isStarted()
     {
-        $userProgress = $this->userProgress[auth()->id()];
-        if (!$userProgress) {
-            return false;
-        }
-        return ($userProgress->getState() == 'started') ? true : false;
+        return ($this->getUserProgress())?($this->getUserProgress()->getState() == 'started' ? true : false):false;
     }
 
     /**
@@ -499,7 +495,7 @@ class Content extends ArrayExpressible
      */
     public function getStarted()
     {
-        return $this->started;
+        return ($this->getUserProgress())?($this->getUserProgress()->getState() == 'started' ? true : false):false;
     }
 
     /**
@@ -507,13 +503,7 @@ class Content extends ArrayExpressible
      */
     public function isCompleted()
     {
-        $userProgress = $this->userProgress[auth()->id()];
-        if (!$userProgress) {
-            return false;
-        }
-        return ($userProgress->getState() == 'completed') ? true : false;
-
-        //return $this->completed;
+        return ($this->getUserProgress())?($this->getUserProgress()->getState() == 'completed' ? true : false):false;
     }
 
     /**
@@ -536,12 +526,13 @@ class Content extends ArrayExpressible
      * @param $userId
      * @return array
      */
-    public function getUserProgress($userId)
+    public function getUserProgress()
     {
-        if (!isset($this->userProgress[$userId])) {
+        if (!isset($this->userProgress[auth()->id()])) {
             return [];
         }
-        return $this->userProgress[$userId];
+
+        return $this->userProgress[auth()->id()];
     }
 
     /**

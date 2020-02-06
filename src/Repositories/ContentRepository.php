@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\PersistentCollection;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
@@ -38,6 +39,13 @@ class ContentRepository extends EntityRepository
      * @var array|bool
      */
     public static $pullFutureContent = true;
+
+    /**
+     * Determines whether content with a published_on date in the past will be pulled or not.
+     *
+     * @var array|bool
+     */
+    public static $pullOnlyFutureContent = false;
 
     /**
      * If true all content will be returned regarless of user permissions.
@@ -439,9 +447,9 @@ class ContentRepository extends EntityRepository
                 $lifetime
             );
 
-        return $qb->select(config('railcontent.table_prefix') . 'content','i','ins')
+        return $qb->select(config('railcontent.table_prefix') . 'content', 'progress')
             ->from($this->getEntityName(), config('railcontent.table_prefix') . 'content')
-            ->leftJoin(config('railcontent.table_prefix') . 'content' . '.instructor', 'i')
-            ->leftJoin( 'i.instructor', 'ins');
+            ->leftJoin(config('railcontent.table_prefix') . 'content' . '.userProgress', 'progress', 'WITH','progress.user = :userId')
+            ->setParameter('userId', auth()->id());
     }
 }

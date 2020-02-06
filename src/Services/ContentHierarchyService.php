@@ -61,6 +61,8 @@ class ContentHierarchyService
             ->setCacheable(true)
             ->setCacheRegion('pull')
         ->getQuery()
+            ->setCacheable(true)
+            ->setCacheRegion('pull')
         ->getResult();
 
         return $results;

@@ -17,6 +17,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *         @ORM\Index(name="railcontent_content_key_pitch_type_position_index", columns={"position"})
  *     }
  * )
+ * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */
 class ContentKeyPitchType extends ArrayExpressible

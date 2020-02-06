@@ -58,7 +58,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
             }
         }
 
-        $defaultIncludes = ['fields','userProgress', 'data'];
+        $defaultIncludes = ['fields', 'userProgress', 'data'];
 
          if ($content->getProperty('permissions')) {
             $defaultIncludes[] = 'permissions';
@@ -75,12 +75,11 @@ class ContentOldStructureTransformer extends TransformerAbstract
         $results = array_merge(
             $serialized,
             [
-//                'parent_id' => (!$content->getParent()->isEmpty()) ?
-//                    $content->getParent()[0]->getParent()->getId() : null,
-                'child_id' => null,
-                                'completed' => $content->getCompleted(),
-                                'started' => $content->getStarted(),
-                                'progress_percent' => $content->getProgressPercent(),
+                'completed' => $content->isCompleted(),
+                'started' => $content->isStarted(),
+                'progress_percent' => (!empty($content->getUserProgress())) ?
+                    $content->getUserProgress()
+                        ->getProgressPercent() : 0,
             ],
             $extraProperties
         );
@@ -246,9 +245,10 @@ class ContentOldStructureTransformer extends TransformerAbstract
      */
     public function includeUserProgress(Content $content)
     {
-        if (!empty($content->getUserProgresses()[auth()->id()]??null)) {
+        if (!empty($content->getUserProgress())) {
+
             return $this->item(
-                $content->getUserProgresses()[auth()->id()],
+                $content->getUserProgress(),
                 new UserContentProgressOldStructureTransformer(),
                 'user-progress'
             );

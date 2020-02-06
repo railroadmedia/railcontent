@@ -17,6 +17,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *         @ORM\Index(name="railcontent_content_tag_position_index", columns={"position"})
  *     }
  * )
+ * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */
 class ContentTag extends ArrayExpressible

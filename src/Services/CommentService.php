@@ -396,6 +396,7 @@ class CommentService
         $qb = $this->commentRepository->createQueryBuilder($alias);
 
         $qb->join($alias . '.content', $aliasContent)
+            ->leftJoin($alias . '.children', 'replies')
             ->andWhere(
                 $qb->expr()
                     ->in($aliasContent . '.brand', ':availableBrands')
@@ -444,7 +445,7 @@ class CommentService
                 ->setParameter('availableContentId', CommentRepository::$availableContentId);
         }
 
-        $qb->addSelect([$alias])
+        $qb->addSelect([$alias, "replies"])
             ->paginate($limit, $page - 1)
             ->orderBy($orderByColumn, $orderByDirection);
 

@@ -46,6 +46,7 @@ class UserPermissionsRepository extends EntityRepository
         }
 
         return $qb->getQuery()
+            ->enableResultCache()
             ->setCacheable(true)
             ->setCacheRegion('userPermissions')
             ->getResult();

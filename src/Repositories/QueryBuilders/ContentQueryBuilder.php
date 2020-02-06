@@ -66,6 +66,16 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
             );
         }
 
+        if (ContentRepository::$pullOnlyFutureContent) {
+            $this->andWhere(
+                $this->expr()
+                    ->gte(
+                        config('railcontent.table_prefix') . 'content' . '.publishedOn',
+                        'CURRENT_TIMESTAMP()'
+                    )
+            );
+        }
+
         return $this;
     }
 
@@ -123,9 +133,8 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
         }
 
         foreach ($requiredUserStates as $index => $requiredUserState) {
-            $this->join(UserContentProgress::class, 'p'.$index, 'WITH', 'railcontent_content.id = p'.$index.'.content');
-            $this->andWhere('p'.$index.'.state IN (:states)')
-                ->andWhere('p'.$index.'.user = :user')
+            $this->andWhere('progress.state IN (:states)')
+                ->andWhere('progress.user = :user')
                 ->setParameter('states', $requiredUserState['state'])
                 ->setParameter('user', $requiredUserState['user']);
         }
@@ -206,9 +215,9 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                         $this->getEntityManager()
                             ->getClassMetadata(Content::class)
                             ->getFieldName($requiredFieldData['name']),
-                        'p'
+                        'pf'.$index
                     )
-                        ->andWhere('p.'.$requiredFieldData['name'] . $requiredFieldData['operator'] . ' (:value' . $index . ')')
+                        ->andWhere('pf'.$index.'.'.$requiredFieldData['name'] . $requiredFieldData['operator'] . ' (:value' . $index . ')')
                         ->setParameter('value' . $index,  $requiredFieldData['value'] );
                 }
             }
@@ -252,9 +261,9 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                         $this->getEntityManager()
                             ->getClassMetadata(Content::class)
                             ->getFieldName($requiredFieldData['name']),
-                        'p' . $index
+                        'ipf' . $index
                     );
-                    $conditions['p' . $index] = $requiredFieldData['value'];
+                    $conditions['ipf' . $index] = $requiredFieldData['value'];
                 }
             }
         }
@@ -376,6 +385,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
      */
     public function restrictByFilterOptions()
     {
+        //TODO:   verify in results that at list one filter exists
         foreach (config('railcontent.field_option_list', []) as $requiredFieldData) {
             if (in_array(
                 $requiredFieldData,

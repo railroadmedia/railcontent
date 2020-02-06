@@ -154,7 +154,7 @@ class ContentService
         foreach ($ids as $id) {
             foreach ($unorderedContentRows as $index => $unorderedContentRow) {
                 if ($id == $unorderedContentRow->getId()) {
-                    $contentRows[] = $unorderedContentRow;
+                    $contentRows[$unorderedContentRow->getId()] = $unorderedContentRow;
                 }
             }
         }
@@ -934,16 +934,19 @@ class ContentService
         $qb = $this->contentRepository->retrieveFilter();
         $data =
             $qb->getQuery()
+                ->enableResultCache()
+                ->useQueryCache(true)
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
                 ->getResult();
+        $filters = $pullFilterFields ? $this->contentRepository->getFilterFields() : [];
         $hydratedResults = $this->resultsHydrator->hydrate($data, $this->entityManager);
 
         $results = new ContentFilterResultsEntity(
             [
                 'qb' => $qb,
                 'results' => $hydratedResults,
-                'filter_options' => $pullFilterFields ? $this->contentRepository->getFilterFields() : [],
+                'filter_options' => $filters,
                 'total_results' => $filter->countFilter()
             ]
         );
