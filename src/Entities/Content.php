@@ -208,7 +208,6 @@ class Content extends ArrayExpressible
      */
     protected $createdOn;
 
-
     /**
      * Content constructor.
      */
@@ -479,7 +478,9 @@ class Content extends ArrayExpressible
      */
     public function isStarted()
     {
-        return ($this->getUserProgress())?($this->getUserProgress()->getState() == 'started' ? true : false):false;
+        return ($this->getUserProgress()) ?
+            ($this->getUserProgress()
+                ->getState() == 'started' ? true : false) : false;
     }
 
     /**
@@ -495,7 +496,9 @@ class Content extends ArrayExpressible
      */
     public function getStarted()
     {
-        return ($this->getUserProgress())?($this->getUserProgress()->getState() == 'started' ? true : false):false;
+        return ($this->getUserProgress()) ?
+            ($this->getUserProgress()
+                ->getState() == 'started' ? true : false) : false;
     }
 
     /**
@@ -503,7 +506,9 @@ class Content extends ArrayExpressible
      */
     public function isCompleted()
     {
-        return ($this->getUserProgress())?($this->getUserProgress()->getState() == 'completed' ? true : false):false;
+        return ($this->getUserProgress()) ?
+            ($this->getUserProgress()
+                ->getState() == 'completed' ? true : false) : false;
     }
 
     /**
@@ -546,7 +551,7 @@ class Content extends ArrayExpressible
 
     public function setUserProgresses($userProgress)
     {
-         $this->userProgress = $userProgress;
+        $this->userProgress = $userProgress;
     }
 
     /**
@@ -563,7 +568,6 @@ class Content extends ArrayExpressible
             $this->setProgressPercent($userProgress->getProgressPercent());
         }
     }
-
 
     /**
      * @param $progressPercent
@@ -582,7 +586,9 @@ class Content extends ArrayExpressible
      */
     public function getProgressPercent()
     {
-        return $this->progressPercent;
+        return ($this->getUserProgress()) ?
+            $this->getUserProgress()
+                ->getProgressPercent() : 0;
     }
 
     /**
@@ -626,13 +632,6 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @param $progressState
-     */
-    public function setProgressState($progressState)
-    {
-        $this->progressState = $progressState;
-    }
-    /**
      * @return mixed
      */
     public function getParentContent()
@@ -641,18 +640,18 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @return int
+     * @return |null
      */
     public function getProgressState()
     {
         if ($this->getProgressPercent() > 0) {
 
-        $userProgress = $this->userProgress[auth()->id()];
-        if (!$userProgress) {
-            return null;
+            $userProgress = $this->getUserProgress();
+            if (!$userProgress) {
+                return null;
+            }
+            return $userProgress->getState();
         }
-        return $userProgress->getState();
-    }
         return null;
     }
 }
