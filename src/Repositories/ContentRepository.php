@@ -42,13 +42,6 @@ class ContentRepository extends EntityRepository
     public static $pullFutureContent = true;
 
     /**
-     * Determines whether content with a published_on date in the past will be pulled or not.
-     *
-     * @var array|bool
-     */
-    public static $pullOnlyFutureContent = false;
-
-    /**
      * If true all content will be returned regarless of user permissions.
      *
      * @var array|bool
@@ -61,7 +54,7 @@ class ContentRepository extends EntityRepository
     private $requiredUserStates = [];
     private $includedUserStates = [];
 
-    private $requiredUserPlaylistIds = [];
+    private $getFutureContentOnly = false;
 
     private $page;
     private $limit;
@@ -161,8 +154,8 @@ class ContentRepository extends EntityRepository
      * @param array $typesToInclude
      * @param array $slugHierarchy
      * @param array $requiredParentIds
+     * @param bool $getFutureContentOnly
      * @return $this
-     * @internal param array $requiredParentIds
      */
     public function startFilter(
         $page,
@@ -172,7 +165,7 @@ class ContentRepository extends EntityRepository
         array $typesToInclude,
         array $slugHierarchy,
         array $requiredParentIds,
-        array $requiredUserPlaylistsIds
+        $getFutureContentOnly = false
     ) {
         $this->page = $page;
         $this->limit = $limit;
@@ -181,7 +174,7 @@ class ContentRepository extends EntityRepository
         $this->typesToInclude = $typesToInclude;
         $this->slugHierarchy = $slugHierarchy;
         $this->requiredParentIds = $requiredParentIds;
-        $this->requiredUserPlaylistIds = $requiredUserPlaylistsIds;
+        $this->getFutureContentOnly = $getFutureContentOnly;
 
         // reset all the filters for the new query
         $this->requiredFields = [];
@@ -214,8 +207,6 @@ class ContentRepository extends EntityRepository
             array_unshift($groupByColumns, config('railcontent.table_prefix') . 'content' . '.' . $orderByColumn);
         }
 
-        $first = ($this->page - 1) * $this->limit;
-
         $qb =
             $this->build()
                 ->paginate($this->limit, $this->page - 1)
@@ -225,7 +216,6 @@ class ContentRepository extends EntityRepository
                 ->restrictByParentIds($this->requiredParentIds)
                 ->restrictByUserStates($this->requiredUserStates)
                 ->restrictBySlugHierarchy($this->slugHierarchy)
-                ->restrictByPlaylistIds($this->requiredUserPlaylistIds)
                 ->orderBy(implode(', ', $orderByColumns))
                 ->restrictByFields($this->requiredFields)
                 ->setCacheable(true)
@@ -271,7 +261,6 @@ class ContentRepository extends EntityRepository
                 ->includeByUserStates($this->includedUserStates)
                 ->restrictByTypes($this->typesToInclude)
                 ->restrictByParentIds($this->requiredParentIds)
-                ->restrictByPlaylistIds($this->requiredUserPlaylistIds)
                 ->restrictByFilterOptions()
                 ->getQuery()
                 ->getResult();

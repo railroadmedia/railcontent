@@ -882,7 +882,8 @@ class ContentService
         array $requiredUserStates = [],
         array $includedUserStates = [],
         $pullFilterFields = true,
-        array $requiredUserPlaylistsIds = []
+        $getFutureContentOnly = false,
+        $pullPagination = true
     ) {
 
         $results = null;
@@ -902,7 +903,7 @@ class ContentService
             $includedTypes,
             $slugHierarchy,
             $requiredParentIds,
-            $requiredUserPlaylistsIds
+            $getFutureContentOnly
         );
 
         foreach ($requiredFields as $requiredField) {
@@ -947,7 +948,7 @@ class ContentService
                 'qb' => $qb,
                 'results' => $hydratedResults,
                 'filter_options' => $filters,
-                'total_results' => $filter->countFilter()
+                'total_results' => $pullPagination ? $filter->countFilter() : 0
             ]
         );
 

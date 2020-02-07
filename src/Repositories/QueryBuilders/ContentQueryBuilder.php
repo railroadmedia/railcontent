@@ -66,7 +66,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
             );
         }
 
-        if (ContentRepository::$pullOnlyFutureContent) {
+        if (ContentRepository::$pullFutureContent) {
             $this->andWhere(
                 $this->expr()
                     ->gte(
