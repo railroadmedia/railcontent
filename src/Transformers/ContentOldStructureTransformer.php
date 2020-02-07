@@ -191,8 +191,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                 ->getData();
                         $arrayValue['data'] =
                             $this->includeData($instructor)
-                                ->getData()
-                                ->getValues();
+                                ->getData();
 
                         $fields[] = [
                             'id' => rand(),

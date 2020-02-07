@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Doctrine\Common\Util\Inflector;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\PersistentCollection;
 use Doctrine\ORM\Query\Expr\Join;
@@ -254,12 +255,14 @@ class ContentRepository extends EntityRepository
         return count($subQuery);
     }
 
-        /**
+    /**
      * @return array
+     * @throws \Doctrine\ORM\Mapping\MappingException
      */
     public function getFilterFields()
     {
-        $possibleContentFields =
+        $filteredContents = [];
+        $contents =
             $this->build()
                 ->restrictByUserAccess()
                 ->restrictByFields($this->requiredFields)
@@ -273,7 +276,119 @@ class ContentRepository extends EntityRepository
                 ->getQuery()
                 ->getResult();
 
-        return $this->parseAvailableFields($possibleContentFields);
+        $ids = [];
+        if ($contents) {
+            foreach ($contents as $content) {
+                $ids[] = $content->getId();
+            }
+        }
+
+        if (!empty($contents)) {
+            $instructors = [];
+            foreach (config('railcontent.field_option_list', []) as $requiredFieldData) {
+
+                if (in_array(
+                    $requiredFieldData,
+                    $this->getEntityManager()
+                        ->getClassMetadata(Content::class)
+                        ->getAssociationNames()
+                )) {
+                    $alias = $requiredFieldData;
+                    $targetEntity =
+                        $this->getEntityManager()
+                            ->getClassMetadata(Content::class)
+                            ->getAssociationMapping($requiredFieldData)['targetEntity'];
+
+                    $qb =
+                        $this->getEntityManager()
+                            ->createQueryBuilder();
+
+                    $qb->select($alias)
+                        ->from(
+                            $targetEntity,
+                            $alias
+                        );
+
+                    $assoc =
+                        $this->getEntityManager()
+                            ->getClassMetadata($targetEntity)
+                            ->getAssociationMappings();
+
+                    if ($assoc > 1) {
+                        foreach ($assoc as $index => $j) {
+                            if ($index != 'content') {
+                                $qb->addSelect($j['fieldName'] . $index);
+                                $qb->join($alias . '.' . $j['fieldName'], $j['fieldName'] . $index);
+                            }
+                        }
+                    }
+
+                    $qb->where($alias . '.content IN (:ids)')
+                        ->setParameter('ids', $ids);
+
+                    $results =
+                        $qb->getQuery()
+                            ->getResult();
+
+                    foreach ($results as $result) {
+
+                        $getterName = Inflector::camelize('get' . ucwords(camel_case($requiredFieldData)));
+
+                        $value = call_user_func([$result, $getterName]);
+
+                        if ($requiredFieldData == 'instructor') {
+
+                            $instructor = $result->getInstructor();
+
+                            if(!in_array($instructor->getId(), $instructors)) {
+                                $instructors[] = $instructor->getId();
+                                $filteredContents[$requiredFieldData][] = $instructor;
+                            }
+
+                        } else if(!in_array($value, $filteredContents[$requiredFieldData]??[])){
+
+                            $filteredContents[$requiredFieldData][] = $value;
+                        }
+                    }
+
+                } else {
+
+                    $getterName = Inflector::camelize('get' . ucwords(camel_case($requiredFieldData)));
+
+                    foreach ($contents as $content) {
+
+                        $value = call_user_func([$content, $getterName]);
+                        if ($value) {
+                            $filteredContents[$requiredFieldData][] = $value;
+
+                        }
+                    }
+                }
+            }
+
+            // random use case, should be refactored at some point
+            if (!empty($filteredContents['difficulty']) && count(
+                    array_diff(
+                        $filteredContents['difficulty'],
+                        [
+                            'beginner',
+                            'intermediate',
+                            'advanced',
+                            'all',
+                        ]
+                    )
+                ) == 0) {
+
+                $filteredContents['difficulty'] = [
+                    'beginner',
+                    'intermediate',
+                    'advanced',
+                    'all',
+                ];
+            }
+        }
+
+        return $filteredContents;
     }
 
     /**
@@ -449,7 +564,12 @@ class ContentRepository extends EntityRepository
 
         return $qb->select(config('railcontent.table_prefix') . 'content', 'progress')
             ->from($this->getEntityName(), config('railcontent.table_prefix') . 'content')
-            ->leftJoin(config('railcontent.table_prefix') . 'content' . '.userProgress', 'progress', 'WITH','progress.user = :userId')
+            ->leftJoin(
+                config('railcontent.table_prefix') . 'content' . '.userProgress',
+                'progress',
+                'WITH',
+                'progress.user = :userId'
+            )
             ->setParameter('userId', auth()->id());
     }
 }
