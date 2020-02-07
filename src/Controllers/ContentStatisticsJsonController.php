@@ -98,6 +98,7 @@ class ContentStatisticsJsonController extends Controller
             $bigDate,
             $publishedOnSmallDate,
             $publishedOnBigDate,
+            $request->get('brand'),
             $request->get('content_types'),
             $sortBy,
             $sortDir

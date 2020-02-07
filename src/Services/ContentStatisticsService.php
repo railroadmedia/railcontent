@@ -76,7 +76,7 @@ class ContentStatisticsService
      * @param Carbon $bigDate
      * @param mixed $command
      */
-    public function computeContentStatistics(Carbon $smallDate, Carbon $bigDate, $command)
+    public function computeContentStatistics(Carbon $smallDate, Carbon $bigDate, $command = null)
     {
         $intervals = $this->getContentStatisticsIntervals($smallDate, $bigDate);
 
@@ -125,61 +125,6 @@ class ContentStatisticsService
      * @param Carbon $bigDate
      * @param int $weekOfYear
      */
-    public function computeIntervalContentStatistics_(Carbon $start, Carbon $end, int $weekOfYear)
-    {
-        // todo - to be removed
-        $contentDataToProcess = $this->contentStatisticsRepository->getStatisticsContentIds($end);
-
-        $insertData = [];
-        $insertChunkSize = 1000;
-
-        foreach ($contentDataToProcess as $contentData) {
-
-            $contentStats = $this->getIndividualContentStatistics($contentData['content_id'], $start, $end);
-
-            $hasPositiveValues = false;
-
-            foreach ($contentStats as $statsValue) {
-                if ($statsValue > 0) {
-                    $hasPositiveValues = true;
-                    break;
-                }
-            }
-
-            if (!$hasPositiveValues) {
-                continue;
-            }
-
-            $stats = $contentData + [
-                'completes' => $contentStats['total_completes'],
-                'starts' => $contentStats['total_starts'],
-                'comments' => $contentStats['total_comments'],
-                'likes' => $contentStats['total_likes'],
-                'added_to_list' => $contentStats['total_added_to_list'],
-                'start_interval' => $start->toDateTimeString(),
-                'end_interval' => $end->toDateTimeString(),
-                'week_of_year' => $weekOfYear,
-                'created_on' => Carbon::now()->toDateTimeString(),
-            ];
-
-            $insertData[] = $stats;
-
-            if (count($insertData) > $insertChunkSize) {
-                $this->contentStatisticsRepository->bulkInsert($insertData);
-                $insertData = [];
-            }
-        }
-
-        if (!empty($insertData)) {
-            $this->contentStatisticsRepository->bulkInsert($insertData);
-        }
-    }
-
-    /**
-     * @param Carbon $smallDate
-     * @param Carbon $bigDate
-     * @param int $weekOfYear
-     */
     public function computeIntervalContentStatistics(Carbon $start, Carbon $end, int $weekOfYear)
     {
         $this->contentStatisticsRepository->initIntervalContentStatistics($start, $end, $weekOfYear);
@@ -188,6 +133,7 @@ class ContentStatisticsService
         $this->contentStatisticsRepository->computeIntervalCommentsContentStatistics($start, $end);
         $this->contentStatisticsRepository->computeIntervalLikesContentStatistics($start, $end);
         $this->contentStatisticsRepository->computeIntervalAddToListContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeTopLevelCommentsContentStatistics($start, $end);
         $this->contentStatisticsRepository->cleanIntervalContentStatistics($start, $end);
     }
 
