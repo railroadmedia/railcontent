@@ -60,7 +60,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
 
         $defaultIncludes = ['fields', 'userProgress', 'data'];
 
-         if ($content->getProperty('permissions')) {
+        if ($content->getProperty('permissions')) {
             $defaultIncludes[] = 'permissions';
         }
 
@@ -71,6 +71,13 @@ class ContentOldStructureTransformer extends TransformerAbstract
         $this->setDefaultIncludes($defaultIncludes);
 
         $serialized = $serializer->serializeToUnderScores($content, $entityManager->getClassMetadata(Content::class));
+        
+        if ($content->getParent()->count() > 0) {
+            $extraProperties['position'] =
+                array_first(
+                    $content->getParent()
+                )->getChildPosition();
+        }
 
         $results = array_merge(
             $serialized,
