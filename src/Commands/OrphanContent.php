@@ -195,7 +195,7 @@ class OrphanContent extends Command
     {
         $i = 0;
         $this->connection->table(config('railcontent.table_prefix') . 'content_permissions as content_permissions')
-            ->select('content_permissions.id', 'content_permissions.content_id')
+            ->select('content_permissions.id','content_permissions.permission_id', 'content_permissions.content_id','content_permissions.content_type')
             ->leftJoin(
                 config('railcontent.table_prefix') . 'content as content',
                 'content_permissions.content_id',
@@ -210,7 +210,7 @@ class OrphanContent extends Command
                     foreach ($rows as $row) {
                         $i++;
                         $this->info('Delete content permission for content:' . $row->content_id . ' , id:' . $row->id);
-                        $this->contentPermissionService->delete($row->id);
+                        $this->contentPermissionService->dissociate($row->content_id, $row->content_type, $row->permission_id);
                     }
                 }
             );
