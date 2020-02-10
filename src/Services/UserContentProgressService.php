@@ -409,25 +409,15 @@ class UserContentProgressService
         $allowedTypesForCompleted = config('railcontent.allowed_types_for_bubble_progress')['completed'];
         $allowedTypes = array_unique(array_merge($allowedTypesForStarted, $allowedTypesForCompleted));
 
-        $parents = $this->contentService->getByChildIdWhereParentTypeIn(
-            $content->getId(),
-            $allowedTypes,
-            false
-        );
+        $parent = $content->getParentContent();
 
-        foreach ($parents as $parent) {
-            // start parent if necessary
-            if ($content->isStarted() &&
-                !$parent->isStarted() &&
+        if($parent && in_array($parent->getType(), $allowedTypes)){
+            if (!$parent->isStarted() &&
                 in_array($parent->getType(), $allowedTypesForStarted)) {
                 $this->startContent($parent->getId(), $user->getId());
             }
 
-            // get siblings
-            $siblings = $parent->getChild() ?? $this->attachProgressToContents(
-                    $user->getId(),
-                    $this->contentService->getByParentId($parent->getId(), 'childPosition', 'asc', false)
-                );
+            $siblings = $parent->getChildrenContent()->getValues()??[];
 
             if (is_array($siblings)) {
                 $siblings = new Collection($siblings);
@@ -437,11 +427,11 @@ class UserContentProgressService
             if ($content->isCompleted()) {
                 $complete = true;
                 foreach ($siblings as $sibling) {
-                    if (!$sibling->getChild()
-                        ->isCompleted()) {
+                    if (!$sibling->isCompleted()) {
                         $complete = false;
                     }
                 }
+
                 if ($complete && !$parent->isCompleted() && in_array($parent->getType(), $allowedTypesForCompleted)) {
                     $this->completeContent($parent->getId(), $user->getId());
                 }
