@@ -73,7 +73,7 @@ class AddCoreColumnsToContentTable extends Migration
                         ->after('album')
                         ->nullable();
 
-                    $table->integer('bpm')
+                    $table->string('bpm')
                         ->index()
                         ->after('artist')
                         ->nullable();
