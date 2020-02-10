@@ -54,7 +54,7 @@ class ContentRepository extends EntityRepository
     private $requiredUserStates = [];
     private $includedUserStates = [];
 
-    private $getFutureContentOnly = false;
+    public static $getFutureContentOnly = false;
 
     private $page;
     private $limit;
@@ -174,7 +174,8 @@ class ContentRepository extends EntityRepository
         $this->typesToInclude = $typesToInclude;
         $this->slugHierarchy = $slugHierarchy;
         $this->requiredParentIds = $requiredParentIds;
-        $this->getFutureContentOnly = $getFutureContentOnly;
+
+        self::$getFutureContentOnly = $getFutureContentOnly;
 
         // reset all the filters for the new query
         $this->requiredFields = [];

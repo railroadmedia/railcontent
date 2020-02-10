@@ -66,14 +66,14 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
             );
         }
 
-        if (ContentRepository::$pullFutureContent) {
+        if(ContentRepository::$getFutureContentOnly){
             $this->andWhere(
-                $this->expr()
-                    ->gte(
-                        config('railcontent.table_prefix') . 'content' . '.publishedOn',
-                        'CURRENT_TIMESTAMP()'
-                    )
-            );
+                            $this->expr()
+                                ->gt(
+                                    config('railcontent.table_prefix') . 'content' . '.publishedOn',
+                                    'CURRENT_TIMESTAMP()'
+                                )
+                        );
         }
 
         return $this;
