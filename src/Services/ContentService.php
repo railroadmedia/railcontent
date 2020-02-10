@@ -125,10 +125,10 @@ class ContentService
                 ->setCacheRegion('pull')
                 ->getOneOrNullResult();
 
-        if($decorated) {
+        if ($decorated) {
             return array_first($this->resultsHydrator->hydrate([$results], $this->entityManager));
         }
-            return $results;
+        return $results;
 
     }
 
@@ -359,7 +359,7 @@ class ContentService
                 ->setCacheRegion('pull')
                 ->getResult();
 
-        if($decorated) {
+        if ($decorated) {
             return $this->resultsHydrator->hydrate($results, $this->entityManager);
         }
         return $results;
@@ -545,8 +545,11 @@ class ContentService
      */
     public function getByChildIdsWhereType(array $childIds, $type)
     {
-        $results =
+        $results = [];
+
+        $rows =
             $this->contentRepository->build()
+                ->addSelect('c')
                 ->restrictByUserAccess()
                 ->join(config('railcontent.table_prefix') . 'content' . '.child', 'c')
                 ->whereIn('c.child', $childIds)
@@ -556,6 +559,12 @@ class ContentService
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
                 ->getResult();
+
+        foreach ($rows as $row) {
+            foreach($row->getChild()->getValues() as $child) {
+                $results[$child->getChild()->getId()] = $row;
+            }
+        }
 
         return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
@@ -580,7 +589,7 @@ class ContentService
                 ->setCacheRegion('pull')
                 ->getResult();
 
-        if($decorated) {
+        if ($decorated) {
             return $this->resultsHydrator->hydrate($results, $this->entityManager);
         }
         return $results;
@@ -948,7 +957,7 @@ class ContentService
                 'qb' => $qb,
                 'results' => $hydratedResults,
                 'filter_options' => $filters,
-                'total_results' => $pullPagination ? $filter->countFilter() : 0
+                'total_results' => $pullPagination ? $filter->countFilter() : 0,
             ]
         );
 
@@ -1007,7 +1016,7 @@ class ContentService
         if (empty($language)) {
             $data['data']['attributes']['language'] = config('railcontent.default_language');
         }
-        
+
         if (!empty($fields)) {
             $data['data']['attributes']['fields'] = $fields;
         }
@@ -1488,25 +1497,26 @@ class ContentService
                 ->setCacheRegion('pull')
                 ->getResult();
 
-        foreach($contentIds as $contentId){
+        foreach ($contentIds as $contentId) {
 
             $childrenTotalXP[$contentId] = 0;
         }
 
         foreach ($children as $child) {
-                $childDifficulty = $child->getDifficulty() ?? 0;
-                $childrenTotalXP[$child->getParent()->getParent()->getId()] += $child->getTotalXp()
-                    ??
-                    $this->getDefaultXP($child->getType(), $childDifficulty);
+            $childDifficulty = $child->getDifficulty() ?? 0;
+            $childrenTotalXP[$child->getParent()
+                ->getParent()
+                ->getId()] += $child->getTotalXp() ?? $this->getDefaultXP($child->getType(), $childDifficulty);
         }
 
-        $parents = $this->contentRepository->build()
-            ->andWhere(config('railcontent.table_prefix') . 'content'.'.id IN (:ids)')
-            ->setParameter('ids', $contentIds)
-            ->getQuery()
-            ->setCacheable(true)
-            ->setCacheRegion('pull')
-            ->getResult();
+        $parents =
+            $this->contentRepository->build()
+                ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
+                ->setParameter('ids', $contentIds)
+                ->getQuery()
+                ->setCacheable(true)
+                ->setCacheRegion('pull')
+                ->getResult();
 
         foreach ($parents as $content) {
             $contentDifficulty = $content->getDifficulty() ?? 0;
