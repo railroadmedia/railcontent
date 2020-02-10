@@ -324,6 +324,60 @@ EOT;
         $this->databaseManager->statement($statement);
     }
 
+    public function computeTopLevelLikesContentStatistics(Carbon $start, Carbon $end)
+    {
+        $sql = <<<'EOT'
+UPDATE `%s` cs
+LEFT JOIN (
+    SELECT
+        c.`id` AS `content_id`,
+        SUM(cs.`child_content_likes`) AS `likes`
+    FROM `%s` c
+    LEFT JOIN `%s` ch ON ch.`parent_id` = c.`id`
+    LEFT JOIN (
+        SELECT
+            rc.`id` AS `child_content_id`,
+            COUNT(cl.`id`) AS `child_content_likes`
+        FROM `%s` rc
+        LEFT JOIN `%s` cl
+            ON cl.`content_id` = rc.`id`
+        WHERE
+            cl.`created_on` >= '%s'
+            AND cl.`created_on` <= '%s'
+            AND rc.`type` IN ('%s')
+            AND rc.`created_on` <= '%s'
+        GROUP BY rc.`id`
+    ) cs ON cs.`child_content_id` = ch.`child_id`
+    WHERE
+        c.`type` IN ('%s')
+    GROUP BY c.`id`
+) as s ON cs.`content_id` = s.`content_id`
+SET cs.`likes` = s.`likes`
+WHERE
+    s.`likes` IS NOT NULL
+    AND cs.`start_interval` = '%s'
+    AND cs.`end_interval` = '%s'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            ConfigService::$tableContentStatistics,
+            ConfigService::$tableContent,
+            ConfigService::$tableContentHierarchy,
+            ConfigService::$tableContent,
+            ConfigService::$tableContentLikes,
+            $start->toDateTimeString(),
+            $end->toDateTimeString(),
+            implode("', '", config('railcontent.statistics_content_types')),
+            $end->toDateTimeString(),
+            implode("', '", config('railcontent.topLevelContentTypes')),
+            $start->toDateTimeString(),
+            $end->toDateTimeString()
+        );
+
+        $this->databaseManager->statement($statement);
+    }
+
     public function cleanIntervalContentStatistics(Carbon $start, Carbon $end)
     {
         $this->query()
