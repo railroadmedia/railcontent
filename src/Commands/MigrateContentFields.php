@@ -365,6 +365,8 @@ class MigrateContentFields extends Command
                             }
 
                             if($item->key == 'home_staff_pick_rating' && !is_numeric($item->value)) {
+                                $this->info('home_staff_pick_rating is not integer::' . $item->value.'    content id: '.$contentId);
+
                                 continue;
                             }
 
