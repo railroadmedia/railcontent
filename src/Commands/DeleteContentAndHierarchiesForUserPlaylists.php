@@ -95,19 +95,23 @@ class DeleteContentAndHierarchiesForUserPlaylists extends Command
                     }
                 }
             );
-        
-        if (!empty($hierarchiesIds)) {
-            $statement = "DELETE FROM " . config('railcontent.table_prefix') . 'content_hierarchy';
-            $statement .= " WHERE id IN (" . implode(",", $hierarchiesIds) . ")";
 
-            $dbConnection->statement($statement);
+        if (!empty($hierarchiesIds)) {
+            foreach (array_chunk($hierarchiesIds, $chunkSize) as $chunk) {
+                $statement = "DELETE FROM " . config('railcontent.table_prefix') . 'content_hierarchy';
+                $statement .= " WHERE id IN (" . implode(",", $chunk) . ")";
+
+                $dbConnection->statement($statement);
+            }
         }
 
         if (!empty($userPlaylistIds)) {
-            $statement = "DELETE FROM " . config('railcontent.table_prefix') . 'content';
-            $statement .= " WHERE id IN (" . implode(",", $userPlaylistIds) . ")";
+            foreach (array_chunk($userPlaylistIds, $chunkSize) as $chunk) {
+                $statement = "DELETE FROM " . config('railcontent.table_prefix') . 'content';
+                $statement .= " WHERE id IN (" . implode(",", $chunk) . ")";
 
-            $dbConnection->statement($statement);
+                $dbConnection->statement($statement);
+            }
         }
         
         $i = count($hierarchiesIds) + count($userPlaylistIds);
