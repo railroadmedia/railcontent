@@ -135,6 +135,7 @@ class ContentStatisticsService
         $this->contentStatisticsRepository->computeIntervalAddToListContentStatistics($start, $end);
         $this->contentStatisticsRepository->computeTopLevelCommentsContentStatistics($start, $end);
         $this->contentStatisticsRepository->computeTopLevelLikesContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeContentStatisticsAge($start, $end);
         $this->contentStatisticsRepository->cleanIntervalContentStatistics($start, $end);
     }
 

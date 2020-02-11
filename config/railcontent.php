@@ -151,6 +151,10 @@ return [
         'unit-part',
     ],
 
+    'user_ids_excluded_from_stats' => [
+        0
+    ],
+
     // progress bubbling
     'allowed_types_for_bubble_progress' => [
         'started' => [],

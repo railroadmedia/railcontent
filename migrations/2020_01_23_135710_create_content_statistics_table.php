@@ -29,6 +29,7 @@ class CreateContentStatisticsTable extends Migration
                 $table->dateTime('start_interval')->index();
                 $table->dateTime('end_interval')->index();
                 $table->integer('week_of_year')->index();
+                $table->integer('stats_epoch')->index()->nullable();
                 $table->dateTime('created_on')->index();
             });
     }

@@ -101,7 +101,8 @@ class ContentStatisticsJsonController extends Controller
             $request->get('brand'),
             $request->get('content_types'),
             $sortBy,
-            $sortDir
+            $sortDir,
+            $request->get('stats_epoch')
         );
 
         return new JsonResponse($stats);

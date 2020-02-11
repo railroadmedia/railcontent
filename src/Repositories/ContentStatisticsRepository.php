@@ -24,6 +24,7 @@ INSERT INTO %s (
     `start_interval`,
     `end_interval`,
     `week_of_year`,
+    `stats_epoch`,
     `created_on`
 )
 SELECT
@@ -38,6 +39,7 @@ SELECT
     '%s' as `start_interval`,
     '%s' as `end_interval`,
     %s as `week_of_year`,
+    NULL AS `stats_epoch`,
     '%s' as `created_on`
 FROM `%s` c
 WHERE
@@ -75,6 +77,7 @@ LEFT JOIN (
         ucp.`state` = 'completed'
         AND ucp.`updated_on` >= '%s'
         AND ucp.`updated_on` <= '%s'
+        AND ucp.`user_id` NOT IN (%s)
         AND c.`type` IN ('%s')
         AND c.`created_on` <= '%s'
     GROUP BY c.`id`
@@ -93,6 +96,7 @@ EOT;
             ConfigService::$tableUserContentProgress,
             $start->toDateTimeString(),
             $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
             implode("', '", config('railcontent.statistics_content_types')),
             $end->toDateTimeString(),
             $start->toDateTimeString(),
@@ -117,6 +121,7 @@ LEFT JOIN (
         ucp.`state` = 'started'
         AND ucp.`updated_on` >= '%s'
         AND ucp.`updated_on` <= '%s'
+        AND ucp.`user_id` NOT IN (%s)
         AND c.`type` IN ('%s')
         AND c.`created_on` <= '%s'
     GROUP BY c.`id`
@@ -135,6 +140,7 @@ EOT;
             ConfigService::$tableUserContentProgress,
             $start->toDateTimeString(),
             $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
             implode("', '", config('railcontent.statistics_content_types')),
             $end->toDateTimeString(),
             $start->toDateTimeString(),
@@ -159,6 +165,7 @@ LEFT JOIN (
         rcc.`created_on` >= '%s'
         AND rcc.`created_on` <= '%s'
         AND rcc.`deleted_at` IS NULL
+        AND rcc.`user_id` NOT IN (%s)
         AND c.`type` IN ('%s')
         AND c.`created_on` <= '%s'
     GROUP BY c.`id`
@@ -177,6 +184,7 @@ EOT;
             ConfigService::$tableComments,
             $start->toDateTimeString(),
             $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
             implode("', '", config('railcontent.statistics_content_types')),
             $end->toDateTimeString(),
             $start->toDateTimeString(),
@@ -200,6 +208,7 @@ LEFT JOIN (
     WHERE
         cl.`created_on` >= '%s'
         AND cl.`created_on` <= '%s'
+        AND cl.`user_id` NOT IN (%s)
         AND c.`type` IN ('%s')
         AND c.`created_on` <= '%s'
     GROUP BY c.`id`
@@ -218,6 +227,7 @@ EOT;
             ConfigService::$tableContentLikes,
             $start->toDateTimeString(),
             $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
             implode("', '", config('railcontent.statistics_content_types')),
             $end->toDateTimeString(),
             $start->toDateTimeString(),
@@ -290,6 +300,7 @@ LEFT JOIN (
         WHERE
             rcc.`created_on` >= '%s'
             AND rcc.`created_on` <= '%s'
+            AND rcc.`user_id` NOT IN (%s)
             AND rc.`type` IN ('%s')
             AND rc.`created_on` <= '%s'
         GROUP BY rc.`id`
@@ -314,6 +325,7 @@ EOT;
             ConfigService::$tableComments,
             $start->toDateTimeString(),
             $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
             implode("', '", config('railcontent.statistics_content_types')),
             $end->toDateTimeString(),
             implode("', '", config('railcontent.topLevelContentTypes')),
@@ -344,6 +356,7 @@ LEFT JOIN (
         WHERE
             cl.`created_on` >= '%s'
             AND cl.`created_on` <= '%s'
+            AND cl.`user_id` NOT IN (%s)
             AND rc.`type` IN ('%s')
             AND rc.`created_on` <= '%s'
         GROUP BY rc.`id`
@@ -368,9 +381,32 @@ EOT;
             ConfigService::$tableContentLikes,
             $start->toDateTimeString(),
             $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
             implode("', '", config('railcontent.statistics_content_types')),
             $end->toDateTimeString(),
             implode("', '", config('railcontent.topLevelContentTypes')),
+            $start->toDateTimeString(),
+            $end->toDateTimeString()
+        );
+
+        $this->databaseManager->statement($statement);
+    }
+
+    public function computeContentStatisticsAge(Carbon $start, Carbon $end)
+    {
+        $sql = <<<'EOT'
+UPDATE `%s` cs
+SET cs.`stats_epoch` = CEIL(DATEDIFF('%s', cs.`content_published_on`)/7)
+WHERE
+    cs.`content_published_on` IS NOT NULL
+    AND cs.`start_interval` = '%s'
+    AND cs.`end_interval` = '%s'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            ConfigService::$tableContentStatistics,
+            $end->toDateTimeString(),
             $start->toDateTimeString(),
             $end->toDateTimeString()
         );
@@ -546,7 +582,8 @@ EOT;
         $brand,
         $contentTypes,
         $sortBy,
-        $sortDir
+        $sortDir,
+        $statsEpoch
     ) {
         $query = $this->query()
                 ->select(
@@ -616,6 +653,10 @@ EOT;
 
         if (!empty($contentTypes)) {
             $query->whereIn(ConfigService::$tableContentStatistics . '.content_type', $contentTypes);
+        }
+
+        if ($statsEpoch) {
+            $query->where(ConfigService::$tableContentStatistics . '.stats_epoch', '<=', $statsEpoch);
         }
 
         if ($sortBy && $sortDir) {
