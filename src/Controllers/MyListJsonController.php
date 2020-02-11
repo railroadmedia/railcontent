@@ -2,19 +2,18 @@
 
 namespace Railroad\Railcontent\Controllers;
 
-use Carbon\Carbon;
-use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Services\UserPlaylistService;
-use ReflectionException;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
 /**
  * Class MyListJsonController
@@ -23,6 +22,11 @@ use ReflectionException;
  */
 class MyListJsonController extends Controller
 {
+    /**
+     * @var RailcontentEntityManager
+     */
+    public $entityManager;
+
     /**
      * @var ContentService
      */
@@ -33,23 +37,36 @@ class MyListJsonController extends Controller
      */
     private $contentHierarchyService;
 
+    /**
+     * @var UserPlaylistService
+     */
     private $userPlaylistService;
+
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     */
+    private $contentRepository;
 
     /**
      * MyListJsonController constructor.
      *
+     * @param RailcontentEntityManager $entityManager
      * @param ContentService $contentService
      * @param ContentHierarchyService $contentHierarchyService
      * @param UserPlaylistService $userPlaylistService
      */
     public function __construct(
+        RailcontentEntityManager $entityManager,
         ContentService $contentService,
         ContentHierarchyService $contentHierarchyService,
         UserPlaylistService $userPlaylistService
     ) {
+        $this->entityManager = $entityManager;
         $this->contentService = $contentService;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->userPlaylistService = $userPlaylistService;
+
+        $this->contentRepository = $this->entityManager->getRepository(Content::class);
     }
 
     /**
@@ -63,7 +80,8 @@ class MyListJsonController extends Controller
     {
         $userId = auth()->id();
 
-        $content = $this->contentService->getById($request->get('content_id'));
+        $content = $this->contentRepository->find($request->get('content_id'));
+
         if (!$content) {
             return ResponseService::empty(200)
                 ->setData(['error' => 'Incorrect content']);
@@ -73,7 +91,7 @@ class MyListJsonController extends Controller
             $this->userPlaylistService->updateOrCeate($userId, 'primary-playlist', config('railcontent.brand'));
 
         $this->userPlaylistService->addContentToUserPlaylist(
-            $userPrimaryPlaylist->getId(),
+            array_first($userPrimaryPlaylist)->getId(),
             $request->get('content_id')
         );
 
@@ -90,7 +108,7 @@ class MyListJsonController extends Controller
      */
     public function removeFromPrimaryPlaylist(Request $request)
     {
-        $content = $this->contentService->getById($request->get('content_id'));
+        $content = $this->contentRepository->find($request->get('content_id'));
 
         if (!$content) {
             return ResponseService::empty(200)
@@ -98,11 +116,12 @@ class MyListJsonController extends Controller
         }
 
         $userId = auth()->id();
+
         $userPrimaryPlaylist =
             $this->userPlaylistService->updateOrCeate($userId, 'primary-playlist', config('railcontent.brand'));
 
         $this->userPlaylistService->removeContentFromUserPlaylist(
-            $userPrimaryPlaylist->getId(),
+            array_first($userPrimaryPlaylist)->getId(),
             $request->get('content_id')
         );
 
@@ -116,17 +135,11 @@ class MyListJsonController extends Controller
      */
     public function getMyLists(Request $request)
     {
-
         $state = $request->get('state');
 
         $contentTypes = array_merge(
-            [
-                'course',
-                'course-part',
-                'play-along',
-                'song',
-            ],
-            array_keys(config('railcontent.shows', []))
+            config('railcontent.appUserListContentTypes', []),
+            array_values(config('railcontent.showTypes', []))
         );
 
         $page = $request->get('page', 1);
@@ -137,6 +150,7 @@ class MyListJsonController extends Controller
         if (!$state) {
 
             $usersPrimaryPlaylists = $this->userPlaylistService->userPlaylist(auth()->id(), 'primary-playlist');
+
             if (empty($usersPrimaryPlaylists)) {
                 return ResponseService::empty(200);
             }
@@ -153,8 +167,11 @@ class MyListJsonController extends Controller
                 [],
                 [],
                 true,
-                [$usersPrimaryPlaylists->getId()]
+                false,
+                true,
+                [$usersPrimaryPlaylists[0]->getId()]
             );
+
         } else {
             $contentTypes = array_diff($contentTypes, ['course-part']);
             $lessons = $this->contentService->getFiltered(

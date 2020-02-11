@@ -76,8 +76,7 @@ class FullTextSearchRepository extends EntityRepository
                     $assocAttribute = 'get' . ucwords($conf[1]);
                     if ($content->$getter()) {
                         $values[] =
-                            $content->$getter()
-                                ->$assocAttribute();
+                            $content->$getter()->$getter()->$assocAttribute();
                     }
                 }
             }

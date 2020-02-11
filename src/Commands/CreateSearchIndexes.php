@@ -74,7 +74,15 @@ class CreateSearchIndexes extends Command
 
         $contents =
             $this->contentRepository->build()
-                ->restrictByTypes(config('railcontent.searchable_content_types'))
+                ->restrictByTypes(
+                    array_unique(
+                        array_merge(
+                            config('railcontent.showTypes', []),
+                            config('railcontent.topLevelContentTypes', []),
+                            config('railcontent.searchable_content_types', [])
+                        )
+                    )
+                )
                 ->restrictBrand()
                 ->orderByColumn(config('railcontent.table_prefix') . 'content', 'id', 'asc')
                 ->getQuery()

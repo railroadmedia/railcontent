@@ -54,6 +54,8 @@ class ContentRepository extends EntityRepository
     private $requiredUserStates = [];
     private $includedUserStates = [];
 
+    private $requiredUserPlaylistIds = [];
+
     public static $getFutureContentOnly = false;
 
     private $page;
@@ -165,6 +167,7 @@ class ContentRepository extends EntityRepository
         array $typesToInclude,
         array $slugHierarchy,
         array $requiredParentIds,
+        array $requiredUserPlaylistIds,
         $getFutureContentOnly = false
     ) {
         $this->page = $page;
@@ -174,6 +177,7 @@ class ContentRepository extends EntityRepository
         $this->typesToInclude = $typesToInclude;
         $this->slugHierarchy = $slugHierarchy;
         $this->requiredParentIds = $requiredParentIds;
+        $this->requiredUserPlaylistIds = $requiredUserPlaylistIds;
 
         self::$getFutureContentOnly = $getFutureContentOnly;
 
@@ -217,6 +221,7 @@ class ContentRepository extends EntityRepository
                 ->restrictByParentIds($this->requiredParentIds)
                 ->restrictByUserStates($this->requiredUserStates)
                 ->restrictBySlugHierarchy($this->slugHierarchy)
+                ->restrictByPlaylistIds($this->requiredUserPlaylistIds)
                 ->orderBy(implode(', ', $orderByColumns))
                 ->restrictByFields($this->requiredFields)
                 ->setCacheable(true)

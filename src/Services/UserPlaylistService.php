@@ -101,8 +101,11 @@ class UserPlaylistService
      * @param $playlistType
      * @return object|null
      */
-    public function userPlaylist($userId, $playlistType, $brand)
+    public function userPlaylist($userId, $playlistType, $brand = null)
     {
+        if(!$brand){
+            $brand = config('railcontent.brand');
+        }
         $user = $this->userProvider->getUserById($userId);
 
         $qb = $this->userPlaylistRepository->createQueryBuilder('up')->addSelect(['up','upc'])->leftJoin('up.playlistContent','upc');
@@ -143,6 +146,13 @@ class UserPlaylistService
         $this->entityManager->persist($userPlaylistContent);
         $this->entityManager->flush();
 
+        $this->entityManager->getCache()
+            ->getQueryCache('pull')
+            ->clear();
+
+        $this->entityManager->getCache()
+            ->evictQueryRegion('pull');
+
         return $userPlaylistContent;
     }
 
@@ -171,6 +181,13 @@ class UserPlaylistService
 
         $this->entityManager->remove($userPlaylistContent);
         $this->entityManager->flush();
+
+        $this->entityManager->getCache()
+            ->getQueryCache('pull')
+            ->clear();
+
+        $this->entityManager->getCache()
+            ->evictQueryRegion('pull');
     }
 
     /**

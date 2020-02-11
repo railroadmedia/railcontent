@@ -56,8 +56,7 @@ class UserContentProgressRepository extends EntityRepository
         $qb->where($alias . '.user = :user')
             ->andWhere($alias . '.content = :content')
             ->setParameter('content', $content)
-            ->setParameter('user', $user)
-            ->setMaxResults(100);
+            ->setParameter('user', $user);
 
         if ($state) {
             $qb->andWhere($alias . '.state = :state')
@@ -67,6 +66,6 @@ class UserContentProgressRepository extends EntityRepository
         return $qb->getQuery()
             ->setCacheable(true)
             ->setCacheRegion('pull')
-            ->getOneOrNullResult('Railcontent');
+            ->getFirstResult();
     }
 }

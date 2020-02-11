@@ -123,6 +123,18 @@ class ContentJsonController extends Controller
         return ResponseService::content($contentData);
     }
 
+    /**
+     * @param $childId
+     * @param $type
+     * @return mixed
+     */
+    public function getByChildIdWhereType($childId, $type)
+    {
+        $contentData = $this->contentService->getByChildIdWhereType($childId, $type);
+
+        return ResponseService::content($contentData);
+    }
+
     /** Pull contents based on content ids.
      * @param Request $request
      *
@@ -320,7 +332,7 @@ class ContentJsonController extends Controller
         $page = $request->get('page', 1);
 
         if (in_array('shows', $types)) {
-            $types = array_merge($types, array_keys(config('railcontent.shows')));
+            $types = array_merge($types, array_values(config('railcontent.showTypes', [])));
         }
 
         $requiredFields = [];
@@ -373,7 +385,7 @@ class ContentJsonController extends Controller
         $page = $request->get('page', 1);
 
         if (in_array('shows', $types)) {
-            $types = array_merge($types, array_keys(config('railcontent.shows')));
+            $types = array_merge($types, array_values(config('railcontent.showTypes', [])));
         }
 
         $field = ($request->has('is_home')) ? 'homeStaffPickRating' : 'staffPickRating';
@@ -411,8 +423,8 @@ class ContentJsonController extends Controller
 
         $sortedBy = '-published_on';
         foreach ($types as $type) {
-            if (array_key_exists($type, config('railcontent.shows', []))) {
-                $sortedBy = config('railcontent.shows')[$type]['sortedBy'];
+            if (array_key_exists($type, config('railcontent.cataloguesMetadata'))) {
+                $sortedBy = config('railcontent.cataloguesMetadata')[$type]['sortBy'] ?? $sortedBy;
             }
         }
 

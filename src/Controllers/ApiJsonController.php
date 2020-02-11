@@ -62,20 +62,24 @@ class ApiJsonController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return Fractal
-     * @throws NonUniqueResultException
      */
-    public function getShows()
+    public function getShows(Request $request)
     {
-        $contentTypes = array_keys(config('railcontent.shows'));
-
-        foreach ($contentTypes as $type) {
-            $episodes[$type]['episodeNumber'] = $this->contentService->countByTypes(
-                [$type]
+        $shows = [];
+        $metaData = config('railcontent.cataloguesMetadata');
+        if ($request->has('withCount')) {
+            $episodesNumber = $this->contentService->countByTypes(
+                config('railcontent.showTypes'),
+                'type'
             );
         }
 
-        $shows = array_merge_recursive(config('railcontent.shows'), $episodes);
+        foreach (config('railcontent.showTypes') as $showType) {
+            $shows[$showType] = $metaData[$showType] ?? [];
+            $shows[$showType]['episodeNumber'] = $episodesNumber[$showType] ?? '';
+        }
 
         return ResponseService::shows([$shows]);
     }

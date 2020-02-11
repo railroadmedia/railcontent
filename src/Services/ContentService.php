@@ -892,7 +892,8 @@ class ContentService
         array $includedUserStates = [],
         $pullFilterFields = true,
         $getFutureContentOnly = false,
-        $pullPagination = true
+        $pullPagination = true,
+        array $requiredUserPlaylistIds = []
     ) {
 
         $results = null;
@@ -912,6 +913,7 @@ class ContentService
             $includedTypes,
             $slugHierarchy,
             $requiredParentIds,
+            $requiredUserPlaylistIds,
             $getFutureContentOnly
         );
 
@@ -942,13 +944,13 @@ class ContentService
         }
 
         $qb = $this->contentRepository->retrieveFilter();
+
         $data =
             $qb->getQuery()
-                ->enableResultCache()
-                ->useQueryCache(true)
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
                 ->getResult();
+
         $filters = $pullFilterFields ? $this->contentRepository->getFilterFields() : [];
         $hydratedResults = $this->resultsHydrator->hydrate($data, $this->entityManager);
 
@@ -1464,18 +1466,30 @@ class ContentService
      * @param $types
      * @return mixed
      */
-    public function countByTypes($types)
+    public function countByTypes($types, $groupBy)
     {
+
         $qb = $this->contentRepository->build();
 
-        return $qb->select(
-            $qb->expr()
-                ->count(config('railcontent.table_prefix') . 'content')
+        $qb->select(
+            config('railcontent.table_prefix') .
+            'content' .
+            '.type, count(' .
+            config('railcontent.table_prefix') .
+            'content' .
+            '.id) as nr'
         )
-            ->restrictByUserAccess()
-            ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types)
-            ->getQuery()
-            ->getSingleScalarResult();
+            ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types);
+
+        if (!empty($groupBy)) {
+            $qb->groupBy(config('railcontent.table_prefix') . 'content' . '.'.$groupBy);
+        }
+
+        $results =
+            $qb->getQuery()
+                ->getResult('Railcontent');
+
+        return array_combine(array_column($results, 'type'), array_column($results, 'nr'));
     }
 
     /**

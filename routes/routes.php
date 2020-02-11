@@ -46,6 +46,11 @@ Route::group(
                 )->name('content.get-by-parent-id');
 
                 Route::get(
+                    '/content/child/{childId}/{type}',
+                    ContentJsonController::class . '@getByChildIdWhereType'
+                )->name('content.get-by-child-id');
+
+                Route::get(
                     '/content/get-by-ids',
                     ContentJsonController::class . '@getByIds'
                 )->name('content.get-by-ids');
@@ -138,6 +143,13 @@ Route::group(
                     '/search',
                     FullTextSearchJsonController::class . '@index'
                 )->name('search.index');
+
+                // vimeo endpoints
+                Route::get(
+                    '/vimeo-video/{vimeoVideoId}',
+                    \Railroad\Railcontent\Controllers\VimeoJsonController::class . '@show'
+                )->name('vimeo-video.show');
+
             }
         );
 
