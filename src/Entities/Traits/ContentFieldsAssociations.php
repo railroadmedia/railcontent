@@ -20,7 +20,7 @@ trait ContentFieldsAssociations
     protected $exercise;
 
     /**
-     * @ORM\OneToOne(targetEntity="ContentInstructor",mappedBy="content", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="ContentInstructor",mappedBy="content", cascade={"persist","remove"})
      */
     protected $instructor;
 
@@ -129,7 +129,33 @@ trait ContentFieldsAssociations
      */
     public function addInstructor(ContentInstructor $instructor)
     {
-        $this->instructor = $instructor;
+        if ($this->instructor->contains($instructor)) {
+            // Do nothing if its already part of our collection
+            return;
+        }
+
+        $predictate = function ($element) use ($instructor) {
+            return $element->getInstructor() === $instructor->getInstructor();
+        };
+        $exist = $this->instructor->filter($predictate);
+
+        if ($exist->isEmpty()) {
+            $this->instructor->add($instructor);
+        } else {
+            $instructors = $exist->first();
+            if ($instructors->getPosition() == $instructor->getPosition()) {
+                return $this;
+            }
+
+            $key = $exist->key();
+            if ($instructor->getPosition()) {
+                $this->getInstructor()
+                    ->get($key)
+                    ->setPosition($instructor->getPosition());
+            }
+        }
+
+        return $this;
     }
 
     /**

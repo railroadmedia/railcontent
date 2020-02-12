@@ -222,6 +222,7 @@ class Content extends ArrayExpressible
         $this->keyPitchType = new ArrayCollection();
         $this->playlist = new ArrayCollection();
         $this->exercise = new ArrayCollection();
+        $this->instructor = new ArrayCollection();
         $this->userProgress = new ArrayCollection();
         $this->likes = new ArrayCollection();
     }

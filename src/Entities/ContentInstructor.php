@@ -37,7 +37,7 @@ class ContentInstructor
 
     /**
      * @Gedmo\SortableGroup()
-     * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\Content")
+     * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
      * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
      *
      */
@@ -87,6 +87,8 @@ class ContentInstructor
      */
     public function setContent(Content $content)
     {
+        $content->addInstructor($this);
+
         $this->content = $content;
     }
 

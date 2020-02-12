@@ -150,13 +150,25 @@ class ContentOldStructureTransformer extends TransformerAbstract
                         $value = call_user_func([$item, $getterName]);
 
                         if (!($value instanceof Content) && mb_check_encoding($value) == false) {
-                            $value = utf8_encode($value);
+                            $arrayValue = utf8_encode($value);
+                        } else if (($value instanceof Content)){
+                            $arrayValue = $this->transform($value);
+
+                            $arrayValue['fields'] =
+                                $this->includeFields($value)
+                                    ->getData();
+                            $arrayValue['data'] =
+                                $this->includeData($value)
+                                    ->getData()
+                                    ->getValues();
+                        } else {
+                            $arrayValue = $value;
                         }
 
                         $fields[] = [
                             'content_id' => $content->getId(),
                             'key' => $field,
-                            'value' => ($value instanceof Content) ? $this->transform($value) : $value,
+                            'value' => $arrayValue,
                             'type' => ($value instanceof Content) ? 'content_id' : 'string',
                             'position' => 1,
                         ];
