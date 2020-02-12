@@ -252,6 +252,7 @@ LEFT JOIN (
         ch.`created_on` >= '%s'
         AND ch.`created_on` <= '%s'
         AND csj.`type` = 'user-playlist'
+        AND csj.`user_id` NOT IN (%s)
         AND c.`type` IN ('%s')
         AND c.`created_on` <= '%s'
     GROUP BY c.`id`
@@ -271,6 +272,7 @@ EOT;
             ConfigService::$tableContent,
             $start->toDateTimeString(),
             $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
             implode("', '", config('railcontent.statistics_content_types')),
             $end->toDateTimeString(),
             $start->toDateTimeString(),
