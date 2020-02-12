@@ -68,20 +68,14 @@ class CommentJsonController extends Controller
         CommentRepository::$availableUserId = $request->get('user_id') ?? null;
         CommentRepository::$availableContentType = $request->get('content_type') ?? null;
 
-        $commentData = $this->commentService->getComments(
+        $comments = $this->commentService->getComments(
             $request->get('page', 1),
             $request->get('limit', 10),
             $request->get('sort', $request->get('sort', '-created_on')),
             auth()->id() ?? null
         );
 
-        $qb = $this->commentService->getQb(
-            $request->get('page', 1),
-            $request->get('limit', 10),
-            $request->get('sort', $request->get('sort', '-created_on'))
-        );
-
-        return ResponseService::comment($commentData, $qb)
+        return ResponseService::comment($comments['results'], $comments['qb'])
             ->addMeta(['totalCommentsAndReplies' => $this->commentService->countCommentsAndReplies()]);
     }
 
