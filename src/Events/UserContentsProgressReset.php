@@ -9,7 +9,7 @@ use Railroad\Railcontent\Services\ResponseService;
 class UserContentsProgressReset extends Event
 {
     public $user;
-    public $contents;
+    public $contentIds;
 
     /**
      * UserContentsProgressReset constructor.
@@ -21,7 +21,7 @@ class UserContentsProgressReset extends Event
     {
         if(ResponseService::$oldResponseStructure == true){
             $this->userId = $user->getId();
-            $this->contents = $contents->getId();
+            $this->contentIds = $contents;
         } else {
             $this->user = $user;
             $this->contents = $contents;

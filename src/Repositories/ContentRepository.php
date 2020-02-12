@@ -567,4 +567,41 @@ class ContentRepository extends EntityRepository
             )
             ->setParameter('userId', auth()->id());
     }
+
+    /**
+     * @param $parentId
+     * @param string $orderBy
+     * @param string $orderByDirection
+     * @return mixed
+     */
+    public function getByParentId($parentId, $orderBy = 'childPosition', $orderByDirection = 'asc')
+    {
+        return $this->build()
+            ->restrictByUserAccess()
+            ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
+            ->andWhere('p.parent = :parentId')
+            ->setParameter('parentId', $parentId)
+            ->orderByColumn('p', $orderBy, $orderByDirection)
+            ->getQuery()
+            ->setCacheable(true)
+            ->setCacheRegion('pull')
+            ->getResult();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getById($id)
+    {
+        return  $this->build()
+            ->restrictByUserAccess()
+            ->andWhere(config('railcontent.table_prefix') . 'content' . '.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->setCacheable(true)
+            ->setCacheRegion('pull')
+            ->getOneOrNullResult();
+    }
 }

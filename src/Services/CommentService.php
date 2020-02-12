@@ -292,9 +292,19 @@ class CommentService
 
         $results =
             $qb->getQuery()
+                ->setCacheable(true)
+                ->setCacheRegion('pull')
                 ->getResult();
 
-        return $this->resultsHydrator->hydrate($results, $this->entityManager);
+        $hydratedResults =  $this->resultsHydrator->hydrate($results, $this->entityManager);
+
+        $results = [
+                'qb' => $qb,
+                'results' => $hydratedResults
+            ];
+
+
+        return $results;
     }
 
     /** Count the comments that have been created after the comment
@@ -452,10 +462,10 @@ class CommentService
         return $qb;
     }
 
-    /** Count comments and replies
-     *
+    /**
      * @return mixed
      * @throws NonUniqueResultException
+     * @throws \Doctrine\ORM\NoResultException
      */
     public function countCommentsAndReplies()
     {
@@ -492,7 +502,7 @@ class CommentService
         }
 
         return $qb->getQuery()
-            ->getSingleScalarResult('Railcontent');
+            ->getSingleScalarResult();
 
     }
 }

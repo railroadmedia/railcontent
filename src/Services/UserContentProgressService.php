@@ -13,6 +13,8 @@ use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
+use Railroad\Railcontent\Events\UserContentProgressStarted;
+use Railroad\Railcontent\Events\UserContentsProgressReset;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Support\Collection;
@@ -44,6 +46,8 @@ class UserContentProgressService
      */
     private $userProvider;
 
+    private $contentRepository;
+
     const STATE_STARTED = 'started';
     const STATE_COMPLETED = 'completed';
 
@@ -68,6 +72,7 @@ class UserContentProgressService
         $this->contentService = $contentService;
         $this->userProvider = $userProvider;
         $this->userContentRepository = $userContentProgressRepository;
+        $this->contentRepository = $this->entityManager->getRepository(Content::class);
     }
 
     /**
@@ -150,9 +155,9 @@ class UserContentProgressService
     {
         $progressPercent = 0;
 
-        $children = $this->contentService->getByParentId($contentId);
+        $children = $this->contentRepository->getByParentId($contentId);
 
-        $content = $this->contentService->getById($contentId);
+        $content = $this->contentRepository->getById($contentId);
 
         $user = $this->userProvider->getUserById($userId);
 
@@ -197,6 +202,8 @@ class UserContentProgressService
 
         event(new UserContentProgressSaved($user, $content, $progressPercent, self::STATE_STARTED));
 
+        event(new UserContentProgressStarted($user, $content, $progressPercent));
+
         return true;
     }
 
@@ -224,7 +231,7 @@ class UserContentProgressService
             );
         }
 
-        $content = $this->contentService->getById($contentId, false);
+        $content = $this->contentRepository->getById($contentId, false);
         $user = $this->userProvider->getUserById($userId);
 
         $userContentProgress = $this->userContentRepository->getByUserContentState($user, $content);
@@ -244,30 +251,32 @@ class UserContentProgressService
 
         $childIds = [];
         // also mark children as complete
-        $hierarchies = $this->contentHierarchyService->getByParentIds([$contentId]);
-        foreach ($hierarchies as $hierarchy) {
-            $childIds[] =
-                $hierarchy->getChild()
-                    ->getId();
+        foreach (
+            $content->getChildrenContent()
+                ->getValues() as $child
+        ) {
+            $childIds[$child->getId()] = $child;
         }
 
-        $userContentProgress = $this->userContentRepository->getByUserIdAndWhereContentIdIn($user, $childIds);
+        $userContentProgress =
+            $this->userContentRepository->getByUserIdAndWhereContentIdIn($user, array_keys($childIds));
         $existingProgress = [];
         foreach ($userContentProgress as $progress) {
             $existingProgress[$progress->getContent()
                 ->getId()] = $progress;
         }
 
-        foreach ($hierarchies as $child) {
-            $userContentProgress = new UserContentProgress();
-            if (array_key_exists($child->getId(), $existingProgress)) {
-                $userContentProgress = $existingProgress[$child->getId()];
+        foreach ($childIds as $id => $child) {
+            if (array_key_exists($id, $existingProgress)) {
+                $userContentProgress = $existingProgress[$id];
+            } else {
+                $userContentProgress = new UserContentProgress();
             }
 
             $userContentProgress->setProgressPercent(100);
             $userContentProgress->setState(self::STATE_COMPLETED);
             $userContentProgress->setUser($user);
-            $userContentProgress->setContent($child->getChild());
+            $userContentProgress->setContent($child);
             $userContentProgress->setUpdatedOn(Carbon::parse(now()));
 
             $this->entityManager->persist($userContentProgress);
@@ -294,7 +303,7 @@ class UserContentProgressService
      */
     public function resetContent($contentId, $userId)
     {
-        $content = $this->contentService->getById($contentId, false);
+        $content = $this->contentRepository->getById($contentId, false);
         $user = $this->userProvider->getUserById($userId);
 
         $userContentProgress = $this->userContentRepository->getByUserContentState($user, $content);
@@ -305,20 +314,29 @@ class UserContentProgressService
         }
 
         // also reset progress on children
+        $idsToDelete = [(integer)$contentId];
         $childIds = [$contentId];
 
-        $hierarchies = $this->contentHierarchyService->getByParentIds($childIds);
-
-        foreach ($hierarchies as $hierarchy) {
-            $child = $hierarchy->getChild();
-
-            $userContentProgress = $this->userContentRepository->getByUserContentState($user, $child);
-
-            if ($userContentProgress) {
-                $this->entityManager->remove($userContentProgress);
-                $this->entityManager->flush();
+        do {
+            $children = $this->contentHierarchyService->getByParentIds($childIds);
+            $ids = [];
+            foreach ($children as $child) {
+                $idsToDelete[] =
+                $ids[] =
+                    $child->getChild()
+                        ->getId();
             }
+            $childIds = $ids;
+        } while (count($children) > 0);
+
+        $userContentProgresses = $this->userContentRepository->getByUserIdAndWhereContentIdIn($user, $idsToDelete);
+
+        foreach ($userContentProgresses as $userContentProgress) {
+            $this->entityManager->remove($userContentProgress);
+            $this->entityManager->flush();
         }
+
+        event(new UserContentsProgressReset($user, $idsToDelete));
 
         //delete user content progress cache
         UserContentProgressRepository::$cache = [];
@@ -360,7 +378,7 @@ class UserContentProgressService
             );
         }
 
-        $content = $this->contentService->getById($contentId, false);
+        $content = $this->contentRepository->find($contentId);
         $user = $this->userProvider->getUserById($userId);
         $state = ($progress == 100) ? self::STATE_COMPLETED : self::STATE_STARTED;
 
@@ -411,13 +429,14 @@ class UserContentProgressService
 
         $parent = $content->getParentContent();
 
-        if($parent && in_array($parent->getType(), $allowedTypes)){
-            if (!$parent->isStarted() &&
-                in_array($parent->getType(), $allowedTypesForStarted)) {
+        if ($parent && in_array($parent->getType(), $allowedTypes)) {
+            if (!$parent->isStarted() && in_array($parent->getType(), $allowedTypesForStarted)) {
                 $this->startContent($parent->getId(), $user->getId());
             }
 
-            $siblings = $parent->getChildrenContent()->getValues()??[];
+            $siblings =
+                $parent->getChildrenContent()
+                    ->getValues() ?? [];
 
             if (is_array($siblings)) {
                 $siblings = new Collection($siblings);
@@ -667,10 +686,33 @@ class UserContentProgressService
                     'user' => $user,
                 ]
             )
-             ->setMaxResults($limit)
+            ->setMaxResults($limit)
             ->sorted($alias, $orderByColumn);
 
         return $qb->getQuery()
             ->getResult('Railcontent');
     }
+
+    /**
+     * @param $userId
+     * @param $contentId
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|mixed|object|null
+     */
+    public function getUserProgressOnContent($user, $content)
+    {
+        $qb = $this->userContentRepository->createQueryBuilder('up');
+
+        $qb->where('up.user = :user')
+            ->andWhere('up.content = :content')
+            ->setParameters(
+                [
+                    'user' => $user,
+                    'content' => $content,
+                ]
+            );
+
+        return $qb->getQuery()
+            ->getResult();
+    }
+
 }

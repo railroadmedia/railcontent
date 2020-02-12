@@ -115,15 +115,7 @@ class ContentService
      */
     public function getById($id, $decorated = true)
     {
-        $results =
-            $this->contentRepository->build()
-                ->restrictByUserAccess()
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.id = :id')
-                ->setParameter('id', $id)
-                ->getQuery()
-                ->setCacheable(true)
-                ->setCacheRegion('pull')
-                ->getOneOrNullResult();
+        $results = $this->contentRepository->getById($id);
 
         if ($decorated) {
             return array_first($this->resultsHydrator->hydrate([$results], $this->entityManager));
@@ -347,17 +339,7 @@ class ContentService
      */
     public function getByParentId($parentId, $orderBy = 'childPosition', $orderByDirection = 'asc', $decorated = true)
     {
-        $results =
-            $this->contentRepository->build()
-                ->restrictByUserAccess()
-                ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
-                ->andWhere('p.parent = :parentId')
-                ->setParameter('parentId', $parentId)
-                ->orderByColumn('p', $orderBy, $orderByDirection)
-                ->getQuery()
-                ->setCacheable(true)
-                ->setCacheRegion('pull')
-                ->getResult();
+        $results = $this->contentRepository->getByParentId($parentId, $orderBy, $orderByDirection);
 
         if ($decorated) {
             return $this->resultsHydrator->hydrate($results, $this->entityManager);

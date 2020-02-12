@@ -66,6 +66,6 @@ class UserContentProgressRepository extends EntityRepository
         return $qb->getQuery()
             ->setCacheable(true)
             ->setCacheRegion('pull')
-            ->getFirstResult();
+            ->getOneOrNullResult();
     }
 }

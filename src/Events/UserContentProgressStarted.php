@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Events;
 
 use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\User;
 
 class UserContentProgressStarted extends Event
 {
