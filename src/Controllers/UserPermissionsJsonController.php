@@ -129,7 +129,7 @@ class UserPermissionsJsonController extends Controller
 
         $userPermissions = $this->userPermissionsService->getUserPermissions(
             $request->get('user_id'),
-            $request->get('only_active', true)
+            $request->get('only_active') == 'true' ? true : false
         );
 
         return ResponseService::userPermission($userPermissions);

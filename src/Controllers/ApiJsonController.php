@@ -110,7 +110,7 @@ class ApiJsonController extends Controller
             $request->get('sort', $request->get('sort', '-created_on'))
         );
 
-        return ResponseService::comment($commentData, $qb)
+        return ResponseService::comment($commentData['results'], $qb)
             ->addMeta(['totalCommentsAndReplies' => $this->commentService->countCommentsAndReplies()]);
     }
 }

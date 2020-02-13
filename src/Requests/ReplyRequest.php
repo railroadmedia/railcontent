@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ResponseService;
 
 /**
@@ -78,6 +79,11 @@ class ReplyRequest extends FormRequest
      */
     public static function rules()
     {
+        $availableContentStatues = config('railcontent.commentable-content-types');
+        if($availableContentStatues){
+            ContentRepository::$availableContentStatues = $availableContentStatues;
+        }
+
         return [
             'data.type' => 'required|in:comment',
             'data.attributes.comment' => 'required|max:10024',

@@ -281,6 +281,11 @@ class RouteRegistrar
                 )
                     ->name('user.permissions.index');
 
+                $this->router->patch(
+                    'user-permission/{id}',
+                    UserPermissionsJsonController::class . '@store'
+                )->name('user.permissions.update');
+
                 $this->router->put(
                     'permission',
                     PermissionJsonController::class . '@store'
@@ -412,7 +417,7 @@ class RouteRegistrar
         $this->router->group(
             [
                 'prefix' => config('railcontent.api_route_prefix'),
-                'middleware' => config('railcontent.route_middleware_logged_in_groups'),
+                'middleware' => config('railcontent.api_middleware'),
             ],
             function () {
 

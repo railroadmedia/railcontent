@@ -551,6 +551,39 @@ class ContentService
         return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
+    /**
+     * Get contents by child ids with specified type.
+     *
+     * @param array $childIds
+     * @param string $type
+     * @return array|Collection|ContentEntity[]
+     */
+    public function getByChildIdsWhereTypeForUrl(array $childIds, $type)
+    {
+        $results = [];
+
+        $rows =
+            $this->contentRepository->build()
+                ->addSelect('c')
+                ->restrictByUserAccess()
+                ->join(config('railcontent.table_prefix') . 'content' . '.child', 'c')
+                ->whereIn('c.child', $childIds)
+                ->andWhere(config('railcontent.table_prefix') . 'content' . '.type = :type')
+                ->setParameter('type', $type)
+                ->getQuery()
+                ->setCacheable(true)
+                ->setCacheRegion('pull')
+                ->getResult();
+
+        foreach ($rows as $row) {
+            foreach($row->getChild()->getValues() as $child) {
+                $results[$child->getChild()->getId()] = $row;
+            }
+        }
+
+        return $results;
+    }
+
     /** Get contents by child id where parent type met the criteria.
      *
      * @param $childId

@@ -249,24 +249,32 @@ class UserContentProgressService
         $this->entityManager->persist($userContentProgress);
         $this->entityManager->flush();
 
-        $childIds = [];
         // also mark children as complete
-        foreach (
-            $content->getChildrenContent()
-                ->getValues() as $child
-        ) {
-            $childIds[$child->getId()] = $child;
-        }
+        $childIds = [$contentId];
+        $contentsToComplete = [];
+
+        do {
+            $children = $this->contentHierarchyService->getByParentIds($childIds);
+            $ids = [];
+            foreach ($children as $child) {
+                $contentsToComplete[ $child->getChild()
+                    ->getId()] = $child->getChild();
+                $ids[] =
+                    $child->getChild()
+                        ->getId();
+            }
+            $childIds = $ids;
+        } while (count($children) > 0);
 
         $userContentProgress =
-            $this->userContentRepository->getByUserIdAndWhereContentIdIn($user, array_keys($childIds));
+            $this->userContentRepository->getByUserIdAndWhereContentIdIn($user, array_keys($contentsToComplete));
         $existingProgress = [];
         foreach ($userContentProgress as $progress) {
             $existingProgress[$progress->getContent()
                 ->getId()] = $progress;
         }
 
-        foreach ($childIds as $id => $child) {
+        foreach ($contentsToComplete as $id => $child) {
             if (array_key_exists($id, $existingProgress)) {
                 $userContentProgress = $existingProgress[$id];
             } else {
@@ -281,6 +289,8 @@ class UserContentProgressService
 
             $this->entityManager->persist($userContentProgress);
             $this->entityManager->flush();
+
+            event(new UserContentProgressSaved($user, $child, 100, self::STATE_COMPLETED, false));
         }
 
         event(new UserContentProgressSaved($user, $content, 100, self::STATE_COMPLETED));
@@ -423,8 +433,14 @@ class UserContentProgressService
      */
     public function bubbleProgress($user, $content)
     {
-        $allowedTypesForStarted = config('railcontent.allowed_types_for_bubble_progress')['started'];
-        $allowedTypesForCompleted = config('railcontent.allowed_types_for_bubble_progress')['completed'];
+        $allowedTypesForStarted = array_merge(
+            config('railcontent.allowed_types_for_bubble_progress')['started'],
+            config('railcontent.showTypes', [])
+        );
+        $allowedTypesForCompleted = array_merge(
+            config('railcontent.allowed_types_for_bubble_progress')['completed'],
+            config('railcontent.showTypes', [])
+        );
         $allowedTypes = array_unique(array_merge($allowedTypesForStarted, $allowedTypesForCompleted));
 
         $parent = $content->getParentContent();

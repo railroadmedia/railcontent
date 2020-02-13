@@ -12,7 +12,8 @@ class StripTagDecorator implements DecoratorInterface
      */
     public function decorate(array $entities)
     : array {
-        foreach ($entities as $entity) {
+
+        foreach ($entities['results'] as $entity) {
 
             $commentText = $entity->getComment();
             $entity->setComment(strip_tags(html_entity_decode($commentText)));

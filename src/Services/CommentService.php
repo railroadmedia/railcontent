@@ -402,6 +402,9 @@ class CommentService
         $aliasContent = 'content';
 
         $orderByColumn = $alias . '.' . $orderByColumn;
+        if($orderByColumn == $alias . '.' .'repliedOn'){
+            $orderByColumn = 'replies.createdOn';
+        }
 
         $qb = $this->commentRepository->createQueryBuilder($alias);
 
@@ -446,8 +449,10 @@ class CommentService
         }
 
         if (CommentRepository::$availableContentType) {
-            $qb->andWhere($aliasContent . '.type = :availableContentType')
-                ->setParameter('availableContentType', CommentRepository::$availableContentType);
+            $contentType = (array)CommentRepository::$availableContentType;
+
+            $qb->andWhere($aliasContent . '.type IN (:availableContentType)')
+                ->setParameter('availableContentType', $contentType);
         }
 
         if (CommentRepository::$availableContentId) {

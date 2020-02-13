@@ -237,12 +237,17 @@ class CommentLikeService
         $orderByDirection = 'desc'
     ) {
 
+        $first = ($page - 1) * $limit;
+
         $qb =
             $this->commentLikeRepository->createQueryBuilder('cl')
                 ->join('cl.comment', 'c');
         $qb
             ->where('cl.comment = :commentId')
-            ->setParameter('commentId', $commentId);
+            ->setParameter('commentId', $commentId)
+            ->setMaxResults($limit)
+            ->setFirstResult($first)
+            ->orderBy('cl.'.$orderByColumn, $orderByDirection);
 
         return
             $qb->getQuery()

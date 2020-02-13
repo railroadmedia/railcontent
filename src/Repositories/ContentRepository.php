@@ -275,6 +275,9 @@ class ContentRepository extends EntityRepository
         if ($contents) {
             foreach ($contents as $content) {
                 $ids[] = $content->getId();
+                if(!in_array($content->getType(), $filteredContents['content_type']??[] )) {
+                    $filteredContents['content_type'][] = $content->getType();
+                }
             }
         }
 
@@ -335,14 +338,16 @@ class ContentRepository extends EntityRepository
 
                             $instructor = $result->getInstructor();
 
-                            if(!in_array($instructor->getId(), $instructors)) {
+                            if (!in_array($instructor->getId(), $instructors)) {
                                 $instructors[] = $instructor->getId();
                                 $filteredContents[$requiredFieldData][] = $instructor;
                             }
 
-                        } else if(!in_array($value, $filteredContents[$requiredFieldData]??[])){
+                        } else {
+                            if (!in_array(strtolower($value), array_map("strtolower", $filteredContents[$requiredFieldData]??[]))) {
 
-                            $filteredContents[$requiredFieldData][] = $value;
+                                $filteredContents[$requiredFieldData][] = $value;
+                            }
                         }
                     }
 
@@ -353,12 +358,23 @@ class ContentRepository extends EntityRepository
                     foreach ($contents as $content) {
 
                         $value = call_user_func([$content, $getterName]);
-                        if ($value) {
+                        if ($value && !in_array(strtolower($value), array_map("strtolower", $filteredContents[$requiredFieldData]??[]))) {
                             $filteredContents[$requiredFieldData][] = $value;
-
                         }
                     }
                 }
+            }
+
+            foreach ($filteredContents as $availableFieldIndex => $availableField) {
+                usort(
+                    $filteredContents[$availableFieldIndex],
+                    function ($a, $b) {
+                        if ($a instanceof Content) {
+                            return strncmp($a->getSlug(), $b->getSlug(), 15);
+                        }
+                        return strncmp($a, $b, 15);
+                    }
+                );
             }
 
             // random use case, should be refactored at some point
@@ -595,7 +611,7 @@ class ContentRepository extends EntityRepository
      */
     public function getById($id)
     {
-        return  $this->build()
+        return $this->build()
             ->restrictByUserAccess()
             ->andWhere(config('railcontent.table_prefix') . 'content' . '.id = :id')
             ->setParameter('id', $id)
