@@ -1497,7 +1497,7 @@ class ContentService
             ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types);
 
         if (!empty($groupBy)) {
-            $qb->groupBy(config('railcontent.table_prefix') . 'content' . '.'.$groupBy);
+            $qb->groupBy(config('railcontent.table_prefix') . 'content' . '.' . $groupBy);
         }
 
         $results =
@@ -1533,9 +1533,9 @@ class ContentService
 
         foreach ($children as $child) {
             $childDifficulty = $child->getDifficulty() ?? 0;
-            $childrenTotalXP[$child->getParent()
-                ->getParent()
-                ->getId()] += $child->getTotalXp() ?? $this->getDefaultXP($child->getType(), $childDifficulty);
+            $childrenTotalXP[$child->getParentContent()
+                ->getId()] += ((int)$child->getTotalXp() != 0) ? $child->getTotalXp() :
+                $this->getDefaultXP($child->getType(), $childDifficulty);
         }
 
         $parents =
@@ -1551,8 +1551,10 @@ class ContentService
             $contentDifficulty = $content->getDifficulty() ?? 0;
             $childrenXp = $childrenTotalXP[$content->getId()];
             $contentTotalXp[$content->getId()] =
-                ($content->getXp() ?? $this->getDefaultXP($content->getType(), $contentDifficulty)) + $childrenXp;
+                (((int)$content->getXP() != 0) ? $content->getXP() :
+                    $this->getDefaultXP($content->getType(), $contentDifficulty)) + $childrenXp;
         }
+
         return $contentTotalXp;
     }
 
@@ -1566,6 +1568,8 @@ class ContentService
             $defaultXp = config('xp_ranks.learning_path_content_completed');
         } elseif ($type == 'course') {
             $defaultXp = config('xp_ranks.course_content_completed');
+        } elseif ($type == 'song') {
+            $defaultXp = config('xp_ranks.song_content_completed');
         } elseif ($type == 'assignment') {
             $defaultXp = config('xp_ranks.assignment_content_completed');
         } elseif ($type == 'unit') {

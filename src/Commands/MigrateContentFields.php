@@ -335,6 +335,7 @@ class MigrateContentFields extends Command
                 'published_on',
                 'archived_on',
                 'created_on',
+                'total_xp'
             ];
 
         $contentColumnNames = array_diff($contentColumnNames, $specialColumns);
