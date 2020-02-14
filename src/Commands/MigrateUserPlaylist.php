@@ -108,17 +108,16 @@ class MigrateUserPlaylist extends Command
 
                     foreach ($rows as $index => $row) {
                         $playlistData = get_object_vars($row);
-                        $user = $this->userProvider->getUserByLegacyId(
-                            $playlistData['user_id'],
-                            ucfirst($playlistData['brand'])
+                        $user = $this->userProvider->getUserById(
+                            $playlistData['user_id']
                         );
 
                         if (!$user) {
                             unset($rows[$index]);
-                            $this->info('Not exists user with legacy user id::' . $playlistData['user_id']. ' brand:'.ucfirst($playlistData['brand']));
+                            $this->info('Not exists user with user id::' . $playlistData['user_id']. ' brand:'.ucfirst($playlistData['brand']));
                             $invalidUserIds++;
                         } else {
-                            $rows[$index]->user_id = $user[0]->getId();
+                            $rows[$index]->user_id = $user->getId();
                             $migrated++;
                         }
                     }

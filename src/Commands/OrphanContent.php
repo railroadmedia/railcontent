@@ -18,7 +18,7 @@ class OrphanContent extends Command
      *
      * @var string
      */
-    protected $signature = 'OrphanContent';
+    protected $signature = 'command:deleteOrphanContent';
 
     /**
      * The console command description.
@@ -101,7 +101,7 @@ class OrphanContent extends Command
         $this->connection->disableQueryLog();
 
         $this->getOrphansFromHierarchies();
-        $this->getOrphansFromContentData();
+        //$this->getOrphansFromContentData();
         $this->getOrphansFromContentLikes();
         $this->getOrphansFromContentPermissions();
         $this->getOrphansFromComments();

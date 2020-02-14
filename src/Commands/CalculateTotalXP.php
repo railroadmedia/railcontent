@@ -14,7 +14,7 @@ class CalculateTotalXP extends Command
      *
      * @var string
      */
-    protected $signature = 'command:CalculateTotalXP';
+    protected $signature = 'command:calculateTotalXP';
     /**
      * The console command description.
      *
@@ -48,6 +48,7 @@ class CalculateTotalXP extends Command
     public function handle()
     {
         $this->info('Calculate total XP values.');
+
         $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
         $dbConnection->disableQueryLog();
         $pdo = $dbConnection->getPdo();
@@ -131,6 +132,7 @@ class CalculateTotalXP extends Command
                         );
 
                         $contentIdsToUpdate = array_keys($totalXPForContents);
+
                         if (!empty($contentIdsToUpdate)) {
                             $query1 = ' CASE';
                             foreach ($totalXPForContents as $id => $totalXPForContent) {
@@ -145,7 +147,6 @@ class CalculateTotalXP extends Command
                                 implode(",", $contentIdsToUpdate) .
                                 ")";
                             $dbConnection->statement($statement);
-                            $this->info($statement);
                         }
                     });
             $this->info('End ' . $type);

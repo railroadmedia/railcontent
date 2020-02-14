@@ -27,6 +27,7 @@ use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\DeleteContentAndHierarchiesForUserPlaylists;
 use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\MigrateContentFields;
+use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
 use Railroad\Railcontent\Commands\MigrateUserPlaylist;
 use Railroad\Railcontent\Commands\OrphanContent;
 use Railroad\Railcontent\Events\ContentDeleted;
@@ -98,7 +99,8 @@ class RailcontentServiceProvider extends ServiceProvider
                 OrphanContent::class,
                 MigrateUserPlaylist::class,
                 DeleteContentAndHierarchiesForUserPlaylists::class,
-                CalculateTotalXP::class
+                CalculateTotalXP::class,
+                MigrateContentToNewStructure::class
             ]
         );
     }
