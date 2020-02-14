@@ -24,6 +24,7 @@ use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Hydrators\CustomRailcontentHydrator;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use ReflectionException;
 
 class ContentService
@@ -1513,6 +1514,8 @@ class ContentService
      */
     public function calculateTotalXpForContents($contentIds)
     {
+        ContentRepository::$availableContentStatues = [ ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
+
         $contentTotalXp = [];
         $children =
             $this->contentRepository->build()
@@ -1534,7 +1537,7 @@ class ContentService
         foreach ($children as $child) {
             $childDifficulty = $child->getDifficulty() ?? 0;
             $childrenTotalXP[$child->getParentContent()
-                ->getId()] += ((int)$child->getTotalXp() != 0) ? $child->getTotalXp() :
+                ->getId()] += ($child->getTotalXp()  && (int)$child->getTotalXp() != 0) ? $child->getTotalXp() :
                 $this->getDefaultXP($child->getType(), $childDifficulty);
         }
 
@@ -1551,7 +1554,7 @@ class ContentService
             $contentDifficulty = $content->getDifficulty() ?? 0;
             $childrenXp = $childrenTotalXP[$content->getId()];
             $contentTotalXp[$content->getId()] =
-                (((int)$content->getXP() != 0) ? $content->getXP() :
+                (($content->getXP()  && (int)$content->getXP() != 0) ? $content->getXP():
                     $this->getDefaultXP($content->getType(), $contentDifficulty)) + $childrenXp;
         }
 
@@ -1562,9 +1565,9 @@ class ContentService
     {
         if ($type == 'pack') {
             $defaultXp = config('xp_ranks.pack_content_completed');
-        } elseif ($type == 'pack_bundle') {
-            $defaultXp = config('xp_ranks.pack_bundle_content_completed');
-        } elseif ($type == 'learning_path') {
+        } elseif ($type == 'pack-bundle') {
+            $defaultXp = 0;
+        } elseif ($type == 'learning-path') {
             $defaultXp = config('xp_ranks.learning_path_content_completed');
         } elseif ($type == 'course') {
             $defaultXp = config('xp_ranks.course_content_completed');
