@@ -102,8 +102,60 @@ class ContentStatisticsJsonController extends Controller
             $request->get('content_types'),
             $sortBy,
             $sortDir,
-            $request->get('stats_epoch')
+            $request->get('stats_epoch'),
+            $request->get('difficulty_fields'),
+            $request->get('instructor_fields'),
+            $request->get('style_fields'),
+            $request->get('tag_fields'),
+            $request->get('topic_fields')
         );
+
+        if ($request->has('csv') && $request->get('csv') == true) {
+            $rows = [];
+
+            foreach ($stats as $statsRow) {
+                $rows[] = [
+                    $statsRow['content_id'],
+                    $statsRow['content_brand'],
+                    $statsRow['content_title'],
+                    $statsRow['content_type'],
+                    $statsRow['content_published_on'],
+                    $statsRow['total_completes'],
+                    $statsRow['total_starts'],
+                    $statsRow['total_comments'],
+                    $statsRow['total_likes'],
+                    $statsRow['total_added_to_list'],
+                ];
+            }
+
+            $filePath = sys_get_temp_dir() . "/failed-billing-" . time() . ".csv";
+
+            $f = fopen($filePath, "w");
+
+            fputcsv(
+                $f,
+                [
+                    'Content ID',
+                    'Content Brand',
+                    'Content Title',
+                    'Content Type',
+                    'Content Published On',
+                    'Total Completes',
+                    'Total Starts',
+                    'Total Comments',
+                    'Total Likes',
+                    'Total Added To List',
+                ]
+            );
+
+            foreach ($rows as $line) {
+                fputcsv($f, $line);
+            }
+
+            return response()
+                ->download($filePath)
+                ->deleteFileAfterSend();
+        }
 
         return new JsonResponse($stats);
     }

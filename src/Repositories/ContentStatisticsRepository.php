@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -585,7 +586,12 @@ EOT;
         $contentTypes,
         $sortBy,
         $sortDir,
-        $statsEpoch
+        $statsEpoch,
+        $difficultyFields,
+        $instructorFields,
+        $styleFields,
+        $tagFields,
+        $topicFields
     ) {
         $query = $this->query()
                 ->select(
@@ -664,6 +670,109 @@ EOT;
         if ($sortBy && $sortDir) {
             $query->orderByRaw($sortBy . ' ' . $sortDir);
         }
+
+        if (
+            !empty($difficultyFields)
+            || !empty($instructorFields)
+            || !empty($styleFields)
+            || !empty($tagFields)
+            || !empty($topicFields)
+        ) {
+            $filters = [];
+
+            // todo - add instructors in $filters
+
+            foreach ($difficultyFields ?? [] as $difficultyValue) {
+                $filters[] = [
+                    'key' => 'difficulty',
+                    'value' => $difficultyValue
+                ];
+            }
+
+            foreach ($styleFields ?? [] as $styleValue) {
+                $filters[] = [
+                    'key' => 'style',
+                    'value' => $styleValue
+                ];
+            }
+
+            foreach ($tagFields ?? [] as $tagValue) {
+                $filters[] = [
+                    'key' => 'tag',
+                    'value' => $tagValue
+                ];
+            }
+
+            foreach ($topicFields ?? [] as $topicValue) {
+                $filters[] = [
+                    'key' => 'topic',
+                    'value' => $topicValue
+                ];
+            }
+
+            $query->whereIn(
+                ConfigService::$tableContentStatistics . '.content_id',
+                function($query) use ($filters) {
+
+                    $aliases = range('a', 'z');
+                    $index = 0;
+                    $mainAlias = null;
+
+                    foreach ($filters as $filterData) {
+                        $key = $filterData['key'];
+                        $value = $filterData['value'];
+                        $alias = $aliases[$index];
+
+                        // todo - add instructors specific query
+
+                        if ($index == 0) {
+                            $mainAlias = $alias;
+                            $query->select($alias . '.content_id')
+                                ->fromSub(
+                                    function($query) use ($key, $value) {
+                                        $query->select('content_id')
+                                            ->from(ConfigService::$tableContentFields)
+                                            ->where(
+                                                DB::raw('LOWER(`key`)'),
+                                                $key
+                                            )
+                                            ->where(
+                                                DB::raw('LOWER(`value`)'),
+                                                'LIKE',
+                                                '%' . $value . '%'
+                                            );
+                                    },
+                                    $alias
+                                );
+                        } else {
+                            $subQuery = DB::table(ConfigService::$tableContentFields)
+                                ->select('content_id')
+                                ->where(
+                                    DB::raw('LOWER(`key`)'),
+                                    $key
+                                )
+                                ->where(
+                                    DB::raw('LOWER(`value`)'),
+                                    'LIKE',
+                                    '%' . $value . '%'
+                                );
+
+                            $query->joinSub(
+                                $subQuery,
+                                $alias,
+                                function($join)  use ($alias, $mainAlias) {
+                                    $join->on($alias . '.content_id', '=', $mainAlias . '.content_id');
+                                }
+                            );
+                        }
+
+                        $index++;
+                    }
+                }
+            );
+        }
+
+        // dd($query->toSql());
 
         return $query->get()
                 ->toArray();
