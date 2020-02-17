@@ -311,6 +311,9 @@ class ContentJsonController extends Controller
      */
     public function getInProgressContent(Request $request)
     {
+        ContentRepository::$availableContentStatues = $request->get('statuses', [ContentService::STATUS_PUBLISHED]);
+        ContentRepository::$pullFutureContent = false;
+
         $lessons = [];
         $totalResults = 0;
 
@@ -357,6 +360,9 @@ class ContentJsonController extends Controller
      */
     public function getOurPicksContent(Request $request)
     {
+        ContentRepository::$availableContentStatues = $request->get('statuses', [ContentService::STATUS_PUBLISHED]);
+        ContentRepository::$pullFutureContent = false;
+
         $staffPicks = [];
         $types = $request->get('included_types', []);
         $limit = $request->get('limit', 10);
@@ -376,7 +382,12 @@ class ContentJsonController extends Controller
                 $types,
                 [],
                 [],
-                [$field . ',20,integer,<=']
+                [$field . ',20,integer,<='],
+                [],
+                [],
+                [],
+                false,
+                false
             );
 
             $results =
@@ -395,6 +406,9 @@ class ContentJsonController extends Controller
      */
     public function getAllContent(Request $request)
     {
+        ContentRepository::$availableContentStatues = $request->get('statuses', [ContentService::STATUS_PUBLISHED]);
+        ContentRepository::$pullFutureContent = false;
+
         $results = [];
         $types = $request->get('included_types', []);
 

@@ -67,7 +67,7 @@ Route::group(
                 Route::get(
                     '/content-statistics',
                     \Railroad\Railcontent\Controllers\ContentStatisticsJsonController::class . '@contentStatistics'
-                )->name('content.statistics.individual');
+                )->name('content.statistics.all');
 
                 // content user progression
                 Route::put(

@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Decorators\Mobile\StripTagDecorator;
 use Railroad\Railcontent\Repositories\CommentRepository;
@@ -45,7 +46,7 @@ class ApiJsonController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function onboarding()
     {
@@ -55,25 +56,31 @@ class ApiJsonController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function getShows()
+    public function getShows(Request $request)
     {
-        foreach (config('railcontent.showTypes') as $type) {
-            $episodes[$type]['episodeNumber'] = $this->contentService->countByTypes(
-                [$type]
+        $shows = [];
+        $metaData = config('railcontent.cataloguesMetadata');
+        if ($request->has('withCount')) {
+            $episodesNumber = $this->contentService->countByTypes(
+                config('railcontent.showTypes'),
+                'type'
             );
         }
 
-        $contentTypes = array_flip(config('railcontent.showTypes'));
-        $shows = array_intersect_key(array_replace($contentTypes, config('railcontent.cataloguesMetadata')), $contentTypes);
+        foreach (config('railcontent.showTypes') as $showType) {
+            $shows[$showType] = $metaData[$showType] ?? [];
+            $shows[$showType]['episodeNumber'] = $episodesNumber[$showType]['total'] ?? '';
+        }
 
-        return response()->json(array_merge_recursive($shows, $episodes));
+        return response()->json($shows);
     }
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function getComments(Request $request)
     {
@@ -93,7 +100,8 @@ class ApiJsonController extends Controller
 
         return response()->json(
             [
-                'data' => $commentData['results']->values()->all(),
+                'data' => $commentData['results']->values()
+                    ->all(),
                 'meta' => [
                     'totalCommentsAndReplies' => $commentData['total_comments_and_results'],
                     'totalResults' => $commentData['total_results'],

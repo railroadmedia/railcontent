@@ -3,11 +3,432 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 
 class ContentStatisticsRepository extends RepositoryBase
 {
+    public function initIntervalContentStatistics(Carbon $start, Carbon $end, int $weekOfYear)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `content_type`,
+    `content_published_on`,
+    `completes`,
+    `starts`,
+    `comments`,
+    `likes`,
+    `added_to_list`,
+    `start_interval`,
+    `end_interval`,
+    `week_of_year`,
+    `stats_epoch`,
+    `created_on`
+)
+SELECT
+    c.`id` AS `content_id`,
+    c.`type` AS `content_type`,
+    c.`published_on` AS `content_published_on`,
+    0 AS `completes`,
+    0 AS `starts`,
+    0 AS `comments`,
+    0 AS `likes`,
+    0 AS `added_to_list`,
+    '%s' as `start_interval`,
+    '%s' as `end_interval`,
+    %s as `week_of_year`,
+    NULL AS `stats_epoch`,
+    '%s' as `created_on`
+FROM `%s` c
+WHERE
+    c.`type` IN ('%s')
+    and c.`created_on` <= '%s'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            ConfigService::$tableContentStatistics,
+            $start->toDateTimeString(),
+            $end->toDateTimeString(),
+            $weekOfYear,
+            Carbon::now()->toDateTimeString(),
+            ConfigService::$tableContent,
+            implode("', '", config('railcontent.statistics_content_types')),
+            $end->toDateTimeString()
+        );
+
+        $this->databaseManager->statement($statement);
+    }
+
+    public function computeIntervalCompletesContentStatistics(Carbon $start, Carbon $end)
+    {
+        $sql = <<<'EOT'
+UPDATE `%s` cs
+LEFT JOIN (
+    SELECT
+        c.`id` AS `content_id`,
+        COUNT(ucp.`id`) AS `completes`
+    FROM `%s` c
+    LEFT JOIN `%s` ucp
+        ON ucp.`content_id` = c.`id`
+    WHERE
+        ucp.`state` = 'completed'
+        AND ucp.`updated_on` >= '%s'
+        AND ucp.`updated_on` <= '%s'
+        AND ucp.`user_id` NOT IN (%s)
+        AND c.`type` IN ('%s')
+        AND c.`created_on` <= '%s'
+    GROUP BY c.`id`
+) as s ON cs.`content_id` = s.`content_id`
+SET cs.`completes` = s.`completes`
+WHERE
+    s.`completes` IS NOT NULL
+    AND cs.`start_interval` = '%s'
+    AND cs.`end_interval` = '%s'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            ConfigService::$tableContentStatistics,
+            ConfigService::$tableContent,
+            ConfigService::$tableUserContentProgress,
+            $start->toDateTimeString(),
+            $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
+            implode("', '", config('railcontent.statistics_content_types')),
+            $end->toDateTimeString(),
+            $start->toDateTimeString(),
+            $end->toDateTimeString()
+        );
+
+        $this->databaseManager->statement($statement);
+    }
+
+    public function computeIntervalStartsContentStatistics(Carbon $start, Carbon $end)
+    {
+        $sql = <<<'EOT'
+UPDATE `%s` cs
+LEFT JOIN (
+    SELECT
+        c.`id` AS `content_id`,
+        COUNT(ucp.`id`) AS `starts`
+    FROM `%s` c
+    LEFT JOIN `%s` ucp
+        ON ucp.`content_id` = c.`id`
+    WHERE
+        ucp.`state` = 'started'
+        AND ucp.`updated_on` >= '%s'
+        AND ucp.`updated_on` <= '%s'
+        AND ucp.`user_id` NOT IN (%s)
+        AND c.`type` IN ('%s')
+        AND c.`created_on` <= '%s'
+    GROUP BY c.`id`
+) as s ON cs.`content_id` = s.`content_id`
+SET cs.`starts` = s.`starts`
+WHERE
+    s.`starts` IS NOT NULL
+    AND cs.`start_interval` = '%s'
+    AND cs.`end_interval` = '%s'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            ConfigService::$tableContentStatistics,
+            ConfigService::$tableContent,
+            ConfigService::$tableUserContentProgress,
+            $start->toDateTimeString(),
+            $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
+            implode("', '", config('railcontent.statistics_content_types')),
+            $end->toDateTimeString(),
+            $start->toDateTimeString(),
+            $end->toDateTimeString()
+        );
+
+        $this->databaseManager->statement($statement);
+    }
+
+    public function computeIntervalCommentsContentStatistics(Carbon $start, Carbon $end)
+    {
+        $sql = <<<'EOT'
+UPDATE `%s` cs
+LEFT JOIN (
+    SELECT
+        c.`id` AS `content_id`,
+        COUNT(rcc.`id`) AS `comments`
+    FROM `%s` c
+    LEFT JOIN `%s` rcc
+        ON rcc.`content_id` = c.`id`
+    WHERE
+        rcc.`created_on` >= '%s'
+        AND rcc.`created_on` <= '%s'
+        AND rcc.`deleted_at` IS NULL
+        AND rcc.`user_id` NOT IN (%s)
+        AND c.`type` IN ('%s')
+        AND c.`created_on` <= '%s'
+    GROUP BY c.`id`
+) as s ON cs.`content_id` = s.`content_id`
+SET cs.`comments` = s.`comments`
+WHERE
+    s.`comments` IS NOT NULL
+    AND cs.`start_interval` = '%s'
+    AND cs.`end_interval` = '%s'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            ConfigService::$tableContentStatistics,
+            ConfigService::$tableContent,
+            ConfigService::$tableComments,
+            $start->toDateTimeString(),
+            $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
+            implode("', '", config('railcontent.statistics_content_types')),
+            $end->toDateTimeString(),
+            $start->toDateTimeString(),
+            $end->toDateTimeString()
+        );
+
+        $this->databaseManager->statement($statement);
+    }
+
+    public function computeIntervalLikesContentStatistics(Carbon $start, Carbon $end)
+    {
+        $sql = <<<'EOT'
+UPDATE `%s` cs
+LEFT JOIN (
+    SELECT
+        c.`id` AS `content_id`,
+        COUNT(cl.`id`) AS `likes`
+    FROM `%s` c
+    LEFT JOIN `%s` cl
+        ON cl.`content_id` = c.`id`
+    WHERE
+        cl.`created_on` >= '%s'
+        AND cl.`created_on` <= '%s'
+        AND cl.`user_id` NOT IN (%s)
+        AND c.`type` IN ('%s')
+        AND c.`created_on` <= '%s'
+    GROUP BY c.`id`
+) as s ON cs.`content_id` = s.`content_id`
+SET cs.`likes` = s.`likes`
+WHERE
+    s.`likes` IS NOT NULL
+    AND cs.`start_interval` = '%s'
+    AND cs.`end_interval` = '%s'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            ConfigService::$tableContentStatistics,
+            ConfigService::$tableContent,
+            ConfigService::$tableContentLikes,
+            $start->toDateTimeString(),
+            $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
+            implode("', '", config('railcontent.statistics_content_types')),
+            $end->toDateTimeString(),
+            $start->toDateTimeString(),
+            $end->toDateTimeString()
+        );
+
+        $this->databaseManager->statement($statement);
+    }
+
+    public function computeIntervalAddToListContentStatistics(Carbon $start, Carbon $end)
+    {
+        $sql = <<<'EOT'
+UPDATE `%s` cs
+LEFT JOIN (
+    SELECT
+        c.`id` AS `content_id`,
+        COUNT(csj.`id`) AS `added_to_list`
+    FROM `%s` c
+    LEFT JOIN `%s` ch ON ch.`child_id` = c.`id`
+    LEFT JOIN `%s` csj ON csj.`id` = ch.`parent_id`
+    WHERE
+        ch.`created_on` >= '%s'
+        AND ch.`created_on` <= '%s'
+        AND csj.`type` = 'user-playlist'
+        AND csj.`user_id` NOT IN (%s)
+        AND c.`type` IN ('%s')
+        AND c.`created_on` <= '%s'
+    GROUP BY c.`id`
+) as s ON cs.`content_id` = s.`content_id`
+SET cs.`added_to_list` = s.`added_to_list`
+WHERE
+    s.`added_to_list` IS NOT NULL
+    AND cs.`start_interval` = '%s'
+    AND cs.`end_interval` = '%s'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            ConfigService::$tableContentStatistics,
+            ConfigService::$tableContent,
+            ConfigService::$tableContentHierarchy,
+            ConfigService::$tableContent,
+            $start->toDateTimeString(),
+            $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
+            implode("', '", config('railcontent.statistics_content_types')),
+            $end->toDateTimeString(),
+            $start->toDateTimeString(),
+            $end->toDateTimeString()
+        );
+
+        $this->databaseManager->statement($statement);
+    }
+
+    public function computeTopLevelCommentsContentStatistics(Carbon $start, Carbon $end)
+    {
+        $sql = <<<'EOT'
+UPDATE `%s` cs
+LEFT JOIN (
+    SELECT
+        c.`id` AS `content_id`,
+        SUM(cs.`child_content_comments`) AS `comments`
+    FROM `%s` c
+    LEFT JOIN `%s` ch ON ch.`parent_id` = c.`id`
+    LEFT JOIN (
+        SELECT
+            rc.`id` AS `child_content_id`,
+            COUNT(rcc.`id`) AS `child_content_comments`
+        FROM `%s` rc
+        LEFT JOIN `%s` rcc
+            ON rcc.`content_id` = rc.`id`
+        WHERE
+            rcc.`created_on` >= '%s'
+            AND rcc.`created_on` <= '%s'
+            AND rcc.`user_id` NOT IN (%s)
+            AND rc.`type` IN ('%s')
+            AND rc.`created_on` <= '%s'
+        GROUP BY rc.`id`
+    ) cs ON cs.`child_content_id` = ch.`child_id`
+    WHERE
+        c.`type` IN ('%s')
+    GROUP BY c.`id`
+) as s ON cs.`content_id` = s.`content_id`
+SET cs.`comments` = s.`comments`
+WHERE
+    s.`comments` IS NOT NULL
+    AND cs.`start_interval` = '%s'
+    AND cs.`end_interval` = '%s'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            ConfigService::$tableContentStatistics,
+            ConfigService::$tableContent,
+            ConfigService::$tableContentHierarchy,
+            ConfigService::$tableContent,
+            ConfigService::$tableComments,
+            $start->toDateTimeString(),
+            $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
+            implode("', '", config('railcontent.statistics_content_types')),
+            $end->toDateTimeString(),
+            implode("', '", config('railcontent.topLevelContentTypes')),
+            $start->toDateTimeString(),
+            $end->toDateTimeString()
+        );
+
+        $this->databaseManager->statement($statement);
+    }
+
+    public function computeTopLevelLikesContentStatistics(Carbon $start, Carbon $end)
+    {
+        $sql = <<<'EOT'
+UPDATE `%s` cs
+LEFT JOIN (
+    SELECT
+        c.`id` AS `content_id`,
+        SUM(cs.`child_content_likes`) AS `likes`
+    FROM `%s` c
+    LEFT JOIN `%s` ch ON ch.`parent_id` = c.`id`
+    LEFT JOIN (
+        SELECT
+            rc.`id` AS `child_content_id`,
+            COUNT(cl.`id`) AS `child_content_likes`
+        FROM `%s` rc
+        LEFT JOIN `%s` cl
+            ON cl.`content_id` = rc.`id`
+        WHERE
+            cl.`created_on` >= '%s'
+            AND cl.`created_on` <= '%s'
+            AND cl.`user_id` NOT IN (%s)
+            AND rc.`type` IN ('%s')
+            AND rc.`created_on` <= '%s'
+        GROUP BY rc.`id`
+    ) cs ON cs.`child_content_id` = ch.`child_id`
+    WHERE
+        c.`type` IN ('%s')
+    GROUP BY c.`id`
+) as s ON cs.`content_id` = s.`content_id`
+SET cs.`likes` = s.`likes`
+WHERE
+    s.`likes` IS NOT NULL
+    AND cs.`start_interval` = '%s'
+    AND cs.`end_interval` = '%s'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            ConfigService::$tableContentStatistics,
+            ConfigService::$tableContent,
+            ConfigService::$tableContentHierarchy,
+            ConfigService::$tableContent,
+            ConfigService::$tableContentLikes,
+            $start->toDateTimeString(),
+            $end->toDateTimeString(),
+            implode(", ", config('railcontent.user_ids_excluded_from_stats')),
+            implode("', '", config('railcontent.statistics_content_types')),
+            $end->toDateTimeString(),
+            implode("', '", config('railcontent.topLevelContentTypes')),
+            $start->toDateTimeString(),
+            $end->toDateTimeString()
+        );
+
+        $this->databaseManager->statement($statement);
+    }
+
+    public function computeContentStatisticsAge(Carbon $start, Carbon $end)
+    {
+        $sql = <<<'EOT'
+UPDATE `%s` cs
+SET cs.`stats_epoch` = CEIL(DATEDIFF('%s', cs.`content_published_on`)/7)
+WHERE
+    cs.`content_published_on` IS NOT NULL
+    AND cs.`start_interval` = '%s'
+    AND cs.`end_interval` = '%s'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            ConfigService::$tableContentStatistics,
+            $end->toDateTimeString(),
+            $start->toDateTimeString(),
+            $end->toDateTimeString()
+        );
+
+        $this->databaseManager->statement($statement);
+    }
+
+    public function cleanIntervalContentStatistics(Carbon $start, Carbon $end)
+    {
+        $this->query()
+            ->where(ConfigService::$tableContentStatistics . '.start_interval', $start)
+            ->where(ConfigService::$tableContentStatistics . '.end_interval', $end)
+            ->where(ConfigService::$tableContentStatistics . '.completes', 0)
+            ->where(ConfigService::$tableContentStatistics . '.starts', 0)
+            ->where(ConfigService::$tableContentStatistics . '.comments', 0)
+            ->where(ConfigService::$tableContentStatistics . '.likes', 0)
+            ->where(ConfigService::$tableContentStatistics . '.added_to_list', 0)
+            ->delete();
+    }
+
     /**
      * @param integer $id
      * @param Carbon|null $smallDate
@@ -144,32 +565,11 @@ class ContentStatisticsRepository extends RepositoryBase
     }
 
     /**
-     * @param Carbon $bigDate
-     *
-     * @return array
-     */
-    public function getStatisticsContentIds(Carbon $bigDate)
-    {
-        return $this->query()
-                ->from(ConfigService::$tableContent)
-                ->select(
-                    [
-                        ConfigService::$tableContent . '.id as content_id',
-                        ConfigService::$tableContent . '.type as content_type',
-                        ConfigService::$tableContent . '.published_on as content_published_on'
-                    ]
-                )
-                ->whereIn(ConfigService::$tableContent . '.type', ConfigService::$statisticsContentTypes)
-                ->where(ConfigService::$tableContent . '.created_on', '<=', $bigDate)
-                ->get()
-                ->toArray();
-    }
-
-    /**
      * @param Carbon|null $smallDate
      * @param Carbon|null $bigDate
      * @param Carbon|null $publishedOnSmall
      * @param Carbon|null $publishedOnBig
+     * @param string|null $brand
      * @param array|null $contentTypes
      * @param string|null $sortBy
      * @param string|null $sortDir
@@ -181,9 +581,11 @@ class ContentStatisticsRepository extends RepositoryBase
         $bigDate,
         $publishedOnSmallDate,
         $publishedOnBigDate,
+        $brand,
         $contentTypes,
         $sortBy,
-        $sortDir
+        $sortDir,
+        $statsEpoch
     ) {
         $query = $this->query()
                 ->select(
@@ -191,6 +593,8 @@ class ContentStatisticsRepository extends RepositoryBase
                         ConfigService::$tableContentStatistics . '.content_id',
                         ConfigService::$tableContentStatistics . '.content_type',
                         ConfigService::$tableContentStatistics . '.content_published_on',
+                        ConfigService::$tableContent . '.brand as content_brand',
+                        ConfigService::$tableContentFields . '.value as content_title',
                         $this->databaseManager->raw(
                             'SUM(' . ConfigService::$tableContentStatistics . '.completes) as total_completes'
                         ),
@@ -207,6 +611,23 @@ class ContentStatisticsRepository extends RepositoryBase
                             'SUM(' . ConfigService::$tableContentStatistics . '.added_to_list) as total_added_to_list'
                         ),
                     ]
+                )
+                ->leftJoin(
+                    ConfigService::$tableContentFields,
+                    function (JoinClause $joinClause) {
+                        $joinClause->on(
+                            ConfigService::$tableContentStatistics . '.content_id',
+                            '=',
+                            ConfigService::$tableContentFields . '.content_id'
+                        )
+                            ->where(ConfigService::$tableContentFields . '.key', 'title');
+                    }
+                )
+                ->join(
+                    ConfigService::$tableContent,
+                    ConfigService::$tableContent . '.id',
+                    '=',
+                    ConfigService::$tableContentStatistics . '.content_id'
                 )
                 ->groupBy(ConfigService::$tableContentStatistics . '.content_id');
 
@@ -228,8 +649,16 @@ class ContentStatisticsRepository extends RepositoryBase
             $query->where(ConfigService::$tableContentStatistics . '.content_published_on', '<=', $publishedOnBigDate);
         }
 
+        if ($brand) {
+            $query->where(ConfigService::$tableContent . '.brand', $brand);
+        }
+
         if (!empty($contentTypes)) {
             $query->whereIn(ConfigService::$tableContentStatistics . '.content_type', $contentTypes);
+        }
+
+        if ($statsEpoch) {
+            $query->where(ConfigService::$tableContentStatistics . '.stats_epoch', '<=', $statsEpoch);
         }
 
         if ($sortBy && $sortDir) {

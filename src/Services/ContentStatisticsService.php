@@ -74,8 +74,9 @@ class ContentStatisticsService
     /**
      * @param Carbon $smallDate
      * @param Carbon $bigDate
+     * @param mixed $command
      */
-    public function computeContentStatistics(Carbon $smallDate, Carbon $bigDate)
+    public function computeContentStatistics(Carbon $smallDate, Carbon $bigDate, $command = null)
     {
         $intervals = $this->getContentStatisticsIntervals($smallDate, $bigDate);
 
@@ -98,11 +99,24 @@ class ContentStatisticsService
         */
 
         foreach ($intervals as $interval) {
+            if ($command) {
+                // todo - remove after optimizations done
+                $start = microtime(true);
+            }
             $this->computeIntervalContentStatistics($interval['start'], $interval['end'], $interval['week']);
 
-            if (app()->runningInConsole()) {
-                echo "Computed: " . $interval['start']->toDateString() . ' -> ' . $interval['end']->toDateString()
-                    . "\n";
+            if ($command) {
+                // todo - remove after optimizations done
+                $finish = microtime(true) - $start;
+                $format = "Finished sub-interval [%s -> %s] in total %s seconds\n";
+                $command->info(
+                    sprintf(
+                        $format,
+                        $interval['start']->toDateTimeString(),
+                        $interval['end']->toDateTimeString(),
+                        $finish
+                    )
+                );
             }
         }
     }
@@ -114,39 +128,16 @@ class ContentStatisticsService
      */
     public function computeIntervalContentStatistics(Carbon $start, Carbon $end, int $weekOfYear)
     {
-        $contentDataToProcess = $this->contentStatisticsRepository->getStatisticsContentIds($end);
-
-        foreach ($contentDataToProcess as $contentData) {
-
-            $contentStats = $this->getIndividualContentStatistics($contentData['content_id'], $start, $end);
-
-            $hasPositiveValues = false;
-
-            foreach ($contentStats as $statsValue) {
-                if ($statsValue > 0) {
-                    $hasPositiveValues = true;
-                    break;
-                }
-            }
-
-            if (!$hasPositiveValues) {
-                continue;
-            }
-
-            $stats = $contentData + [
-                'completes' => $contentStats['total_completes'],
-                'starts' => $contentStats['total_starts'],
-                'comments' => $contentStats['total_comments'],
-                'likes' => $contentStats['total_likes'],
-                'added_to_list' => $contentStats['total_added_to_list'],
-                'start_interval' => $start->toDateTimeString(),
-                'end_interval' => $end->toDateTimeString(),
-                'week_of_year' => $weekOfYear,
-                'created_on' => Carbon::now()->toDateTimeString(),
-            ];
-
-            $this->contentStatisticsRepository->create($stats);
-        }
+        $this->contentStatisticsRepository->initIntervalContentStatistics($start, $end, $weekOfYear);
+        $this->contentStatisticsRepository->computeIntervalCompletesContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeIntervalStartsContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeIntervalCommentsContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeIntervalLikesContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeIntervalAddToListContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeTopLevelCommentsContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeTopLevelLikesContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeContentStatisticsAge($start, $end);
+        $this->contentStatisticsRepository->cleanIntervalContentStatistics($start, $end);
     }
 
     /**

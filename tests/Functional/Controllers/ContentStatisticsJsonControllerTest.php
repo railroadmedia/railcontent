@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers;
 use Carbon\Carbon;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Factories\ContentFactory;
+use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Repositories\ContentHierarchyRepository;
@@ -39,6 +40,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
     protected $contentFactory;
 
     /**
+     * @var ContentContentFieldFactory
+     */
+    protected $contentFieldFactory;
+
+    /**
      * @var ContentStatisticsRepository
      */
     private $contentStatisticsRepository;
@@ -59,6 +65,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $this->commentRepository = $this->app->make(CommentRepository::class);
         $this->contentFactory = $this->app->make(ContentFactory::class);
+        $this->contentFieldFactory = $this->app->make(ContentContentFieldFactory::class);
         $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
         $this->contentLikeRepository = $this->app->make(ContentLikeRepository::class);
         $this->contentStatisticsRepository = $this->app->make(ContentStatisticsRepository::class);
@@ -86,10 +93,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 $this->faker->randomElement(ConfigService::$commentableContentTypes),
                 ContentService::STATUS_PUBLISHED
             );
+            $fieldTitle = $this->contentFieldFactory->create($content['id'], 'title');
             $contentData[$content['id']] = [
                 'content_id' => $content['id'],
                 'content_type' => $content['type'],
                 'content_published_on' => $content['published_on'],
+                'content_brand' => $content['brand'],
+                'content_title' => $fieldTitle['value'],
             ];
         }
 
@@ -123,7 +133,10 @@ class ContentJsonControllerTest extends RailcontentTestCase
                     'created_on' => Carbon::now()->toDateTimeString(),
                 ];
 
-                $insertData = $content + $contentStats;
+                $insertData = array_diff_key(
+                    $content,
+                    ['content_brand' => true, 'content_title' => true]
+                ) + $contentStats;
 
                 $this->contentStatisticsRepository->create($insertData);
 

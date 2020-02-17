@@ -1371,11 +1371,26 @@ class ContentService
 
     /**
      * @param array $types
-     * @return int
+     * @param string $groupBy
+     * @return mixed
      */
-    public function countByTypes(array $types)
+    public function countByTypes(array $types, $groupBy = '')
     {
-        return $this->contentRepository->countByTypes($types);
+        $hash = 'count_by_types_' . CacheHelper::getKey(implode($types), $groupBy);
+
+        if (isset($this->idContentCache[$hash])) {
+            return $this->idContentCache[$hash];
+        }
+
+        $results = CacheHelper::getCachedResultsForKey($hash);
+
+        if (!$results) {
+            $results = CacheHelper::saveUserCache($hash, $this->contentRepository->countByTypes($types, $groupBy));
+        }
+
+        $this->idContentCache[$hash] = $results;
+
+        return $this->idContentCache[$hash];
     }
 
     /**
