@@ -680,7 +680,12 @@ EOT;
         ) {
             $filters = [];
 
-            // todo - add instructors in $filters
+            foreach ($instructorFields ?? [] as $instructorValue) {
+                $filters[] = [
+                    'key' => 'instructor',
+                    'value' => $instructorValue
+                ];
+            }
 
             foreach ($difficultyFields ?? [] as $difficultyValue) {
                 $filters[] = [
@@ -723,47 +728,128 @@ EOT;
                         $value = $filterData['value'];
                         $alias = $aliases[$index];
 
-                        // todo - add instructors specific query
-
                         if ($index == 0) {
                             $mainAlias = $alias;
-                            $query->select($alias . '.content_id')
-                                ->fromSub(
-                                    function($query) use ($key, $value) {
-                                        $query->select('content_id')
-                                            ->from(ConfigService::$tableContentFields)
-                                            ->where(
-                                                DB::raw('LOWER(`key`)'),
-                                                $key
-                                            )
-                                            ->where(
-                                                DB::raw('LOWER(`value`)'),
-                                                'LIKE',
-                                                '%' . $value . '%'
-                                            );
-                                    },
-                                    $alias
-                                );
-                        } else {
-                            $subQuery = DB::table(ConfigService::$tableContentFields)
-                                ->select('content_id')
-                                ->where(
-                                    DB::raw('LOWER(`key`)'),
-                                    $key
-                                )
-                                ->where(
-                                    DB::raw('LOWER(`value`)'),
-                                    'LIKE',
-                                    '%' . $value . '%'
-                                );
 
-                            $query->joinSub(
-                                $subQuery,
-                                $alias,
-                                function($join)  use ($alias, $mainAlias) {
-                                    $join->on($alias . '.content_id', '=', $mainAlias . '.content_id');
-                                }
-                            );
+                            if ($key == 'instructor') {
+
+                                $subAlias = 'cfji_' . $alias;
+                                $subJoinAlias = 'cji_' . $alias;
+
+                                $query->select($alias . '.content_id')
+                                    ->from(ConfigService::$tableContentFields . ' AS ' . $alias)
+                                    ->where(
+                                        DB::raw('LOWER(' . $alias . '.`key`)'),
+                                        $key
+                                    )
+                                    ->whereIn(
+                                        DB::raw($alias . '.`value`'),
+                                        function($query) use ($value, $subAlias, $subJoinAlias) {
+                                            $query->selectRaw('CAST(' . $subAlias . '.content_id AS CHAR)')
+                                                ->from(DB::raw(ConfigService::$tableContentFields . ' AS ' . $subAlias))
+                                                ->leftJoin(
+                                                    DB::raw(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
+                                                    DB::raw($subJoinAlias . '.id'),
+                                                    DB::raw($subAlias . '.content_id')
+                                                )
+                                                ->where(
+                                                    DB::raw($subAlias . '.`key`'),
+                                                    'name'
+                                                )
+                                                ->where(
+                                                    DB::raw('LOWER(' . $subAlias . '.`value`)'),
+                                                    'LIKE',
+                                                    '%' . $value . '%'
+                                                )
+                                                ->where(
+                                                    DB::raw($subJoinAlias . '.type'),
+                                                    'instructor'
+                                                );
+                                        }
+                                    );
+                            } else {
+                                $query->select($alias . '.content_id')
+                                    ->fromSub(
+                                        function($query) use ($key, $value) {
+                                            $query->select('content_id')
+                                                ->from(ConfigService::$tableContentFields)
+                                                ->where(
+                                                    DB::raw('LOWER(`key`)'),
+                                                    $key
+                                                )
+                                                ->where(
+                                                    DB::raw('LOWER(`value`)'),
+                                                    'LIKE',
+                                                    '%' . $value . '%'
+                                                );
+                                        },
+                                        $alias
+                                    );
+                            }
+                        } else {
+                            if ($key == 'instructor') {
+                                $subAlias = 'cfji_' . $alias;
+                                $subJoinAlias = 'cji_' . $alias;
+                                $subQuery = DB::table(ConfigService::$tableContentFields)
+                                    ->select('content_id')
+                                    ->where(
+                                        DB::raw('LOWER(`key`)'),
+                                        $key
+                                    )
+                                    ->whereIn(
+                                        'value',
+                                        function($query) use ($value, $subAlias, $subJoinAlias) {
+                                            $query->selectRaw('CAST(' . $subAlias . '.content_id AS CHAR)')
+                                                ->from(DB::raw(ConfigService::$tableContentFields . ' AS ' . $subAlias))
+                                                ->leftJoin(
+                                                    DB::raw(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
+                                                    DB::raw($subJoinAlias . '.id'),
+                                                    DB::raw($subAlias . '.content_id')
+                                                )
+                                                ->where(
+                                                    DB::raw($subAlias . '.`key`'),
+                                                    'name'
+                                                )
+                                                ->where(
+                                                    DB::raw('LOWER(' . $subAlias . '.`value`)'),
+                                                    'LIKE',
+                                                    '%' . $value . '%'
+                                                )
+                                                ->where(
+                                                    DB::raw($subJoinAlias . '.type'),
+                                                    'instructor'
+                                                );
+                                        }
+                                    );
+
+                                $query->joinSub(
+                                    $subQuery,
+                                    $alias,
+                                    function($join)  use ($alias, $mainAlias) {
+                                        $join->on($alias . '.content_id', '=', $mainAlias . '.content_id');
+                                    }
+                                );
+                            } else {
+                                $subQuery = DB::table(ConfigService::$tableContentFields)
+                                    ->select('content_id')
+                                    ->where(
+                                        DB::raw('LOWER(`key`)'),
+                                        $key
+                                    )
+                                    ->where(
+                                        DB::raw('LOWER(`value`)'),
+                                        'LIKE',
+                                        '%' . $value . '%'
+                                    );
+
+                                $query->joinSub(
+                                    $subQuery,
+                                    $alias,
+                                    function($join)  use ($alias, $mainAlias) {
+                                        $join->on($alias . '.content_id', '=', $mainAlias . '.content_id');
+                                    }
+                                );
+                            }
                         }
 
                         $index++;
@@ -771,8 +857,6 @@ EOT;
                 }
             );
         }
-
-        // dd($query->toSql());
 
         return $query->get()
                 ->toArray();
