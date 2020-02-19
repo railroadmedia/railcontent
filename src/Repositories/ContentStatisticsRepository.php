@@ -862,6 +862,68 @@ EOT;
                 ->toArray();
     }
 
+    public function getDifficultyFieldsValues()
+    {
+        return $this->query()
+            ->select([ConfigService::$tableContentFields . '.value'])
+            ->from(ConfigService::$tableContentFields)
+            ->where(ConfigService::$tableContentFields . '.key', 'difficulty')
+            ->whereNotNull(ConfigService::$tableContentFields . '.value')
+            ->distinct()
+            ->pluck(ConfigService::$tableContentFields . '.value')
+            ->toArray();
+    }
+
+    public function getInstructorFieldsValues()
+    {
+        return $this->query()
+            ->from(ConfigService::$tableContentFields)
+            ->where(ConfigService::$tableContentFields . '.key', 'name')
+            ->whereNotNull(ConfigService::$tableContentFields . '.value')
+            ->leftJoin(
+                ConfigService::$tableContent,
+                ConfigService::$tableContent . '.id',
+                ConfigService::$tableContentFields . '.content_id'
+            )
+            ->where(ConfigService::$tableContent . '.type', 'instructor')
+            ->distinct()
+            ->pluck(ConfigService::$tableContentFields . '.value')
+            ->toArray();
+    }
+
+    public function getStyleFieldsValues()
+    {
+        return $this->query()
+            ->from(ConfigService::$tableContentFields)
+            ->where(ConfigService::$tableContentFields . '.key', 'style')
+            ->whereNotNull(ConfigService::$tableContentFields . '.value')
+            ->distinct()
+            ->pluck(ConfigService::$tableContentFields . '.value')
+            ->toArray();
+    }
+
+    public function getTagFieldsValues()
+    {
+        return $this->query()
+            ->from(ConfigService::$tableContentFields)
+            ->where(ConfigService::$tableContentFields . '.key', 'tag')
+            ->whereNotNull(ConfigService::$tableContentFields . '.value')
+            ->distinct()
+            ->pluck(ConfigService::$tableContentFields . '.value')
+            ->toArray();
+    }
+
+    public function getTopicFieldsValues()
+    {
+        return $this->query()
+            ->from(ConfigService::$tableContentFields)
+            ->where(ConfigService::$tableContentFields . '.key', 'topic')
+            ->whereNotNull(ConfigService::$tableContentFields . '.value')
+            ->distinct()
+            ->pluck(ConfigService::$tableContentFields . '.value')
+            ->toArray();
+    }
+
     /**
      * @return ContentQueryBuilder
      */

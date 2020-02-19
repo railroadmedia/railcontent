@@ -159,4 +159,11 @@ class ContentStatisticsJsonController extends Controller
 
         return new JsonResponse($stats);
     }
+
+    public function fieldFiltersValues()
+    {
+        $filterValues = $this->contentStatisticsService->getFieldFiltersValues();
+
+        return new JsonResponse($filterValues);
+    }
 }
