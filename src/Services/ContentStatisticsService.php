@@ -23,6 +23,17 @@ class ContentStatisticsService
         $this->contentStatisticsRepository = $contentStatisticsRepository;
     }
 
+    public function getFieldFiltersValues()
+    {
+        return [
+            'difficulty' => $this->contentStatisticsRepository->getDifficultyFieldsValues(),
+            'instructor' => $this->contentStatisticsRepository->getInstructorFieldsValues(),
+            'style' => $this->contentStatisticsRepository->getStyleFieldsValues(),
+            'tag' => $this->contentStatisticsRepository->getTagFieldsValues(),
+            'topic' => $this->contentStatisticsRepository->getTopicFieldsValues(),
+        ];
+    }
+
     /**
      * @param contentId $id
      * @param Carbon|null $smallDate
@@ -104,6 +115,7 @@ class ContentStatisticsService
                 $start = microtime(true);
             }
             $this->computeIntervalContentStatistics($interval['start'], $interval['end'], $interval['week']);
+
             if ($command) {
                 // todo - remove after optimizations done
                 $finish = microtime(true) - $start;

@@ -52,6 +52,7 @@ class ComputePastStats extends Command
         $endDate = $this->argument('endDate') ?
                         Carbon::parse($this->argument('endDate')) : Carbon::now();
 
+
         $format = "Started computing content stats for interval [%s -> %s].\n";
 
         $this->info(sprintf($format, $startDate->toDateTimeString(), $endDate->toDateTimeString()));

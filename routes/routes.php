@@ -69,6 +69,11 @@ Route::group(
                     \Railroad\Railcontent\Controllers\ContentStatisticsJsonController::class . '@contentStatistics'
                 )->name('content.statistics.all');
 
+                Route::get(
+                    '/content-statistics/field-filters-values',
+                    \Railroad\Railcontent\Controllers\ContentStatisticsJsonController::class . '@fieldFiltersValues'
+                )->name('content.statistics.all');
+
                 // content user progression
                 Route::put(
                     '/start',

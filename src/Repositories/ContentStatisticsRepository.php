@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -585,7 +586,12 @@ EOT;
         $contentTypes,
         $sortBy,
         $sortDir,
-        $statsEpoch
+        $statsEpoch,
+        $difficultyFields,
+        $instructorFields,
+        $styleFields,
+        $tagFields,
+        $topicFields
     ) {
         $query = $this->query()
                 ->select(
@@ -665,8 +671,257 @@ EOT;
             $query->orderByRaw($sortBy . ' ' . $sortDir);
         }
 
+        if (
+            !empty($difficultyFields)
+            || !empty($instructorFields)
+            || !empty($styleFields)
+            || !empty($tagFields)
+            || !empty($topicFields)
+        ) {
+            $filters = [];
+
+            foreach ($instructorFields ?? [] as $instructorValue) {
+                $filters[] = [
+                    'key' => 'instructor',
+                    'value' => $instructorValue
+                ];
+            }
+
+            foreach ($difficultyFields ?? [] as $difficultyValue) {
+                $filters[] = [
+                    'key' => 'difficulty',
+                    'value' => $difficultyValue
+                ];
+            }
+
+            foreach ($styleFields ?? [] as $styleValue) {
+                $filters[] = [
+                    'key' => 'style',
+                    'value' => $styleValue
+                ];
+            }
+
+            foreach ($tagFields ?? [] as $tagValue) {
+                $filters[] = [
+                    'key' => 'tag',
+                    'value' => $tagValue
+                ];
+            }
+
+            foreach ($topicFields ?? [] as $topicValue) {
+                $filters[] = [
+                    'key' => 'topic',
+                    'value' => $topicValue
+                ];
+            }
+
+            $query->whereIn(
+                ConfigService::$tableContentStatistics . '.content_id',
+                function($query) use ($filters) {
+
+                    $aliases = range('a', 'z');
+                    $index = 0;
+                    $mainAlias = null;
+
+                    foreach ($filters as $filterData) {
+                        $key = $filterData['key'];
+                        $value = $filterData['value'];
+                        $alias = $aliases[$index];
+
+                        if ($index == 0) {
+                            $mainAlias = $alias;
+
+                            if ($key == 'instructor') {
+
+                                $subAlias = 'cfji_' . $alias;
+                                $subJoinAlias = 'cji_' . $alias;
+
+                                $query->select($alias . '.content_id')
+                                    ->from(ConfigService::$tableContentFields . ' AS ' . $alias)
+                                    ->where(
+                                        DB::raw('LOWER(' . $alias . '.`key`)'),
+                                        $key
+                                    )
+                                    ->whereIn(
+                                        DB::raw($alias . '.`value`'),
+                                        function($query) use ($value, $subAlias, $subJoinAlias) {
+                                            $query->selectRaw('CAST(' . $subAlias . '.content_id AS CHAR)')
+                                                ->from(DB::raw(ConfigService::$tableContentFields . ' AS ' . $subAlias))
+                                                ->leftJoin(
+                                                    DB::raw(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
+                                                    DB::raw($subJoinAlias . '.id'),
+                                                    DB::raw($subAlias . '.content_id')
+                                                )
+                                                ->where(
+                                                    DB::raw($subAlias . '.`key`'),
+                                                    'name'
+                                                )
+                                                ->where(
+                                                    DB::raw('LOWER(' . $subAlias . '.`value`)'),
+                                                    'LIKE',
+                                                    '%' . $value . '%'
+                                                )
+                                                ->where(
+                                                    DB::raw($subJoinAlias . '.type'),
+                                                    'instructor'
+                                                );
+                                        }
+                                    );
+                            } else {
+                                $query->select($alias . '.content_id')
+                                    ->fromSub(
+                                        function($query) use ($key, $value) {
+                                            $query->select('content_id')
+                                                ->from(ConfigService::$tableContentFields)
+                                                ->where(
+                                                    DB::raw('LOWER(`key`)'),
+                                                    $key
+                                                )
+                                                ->where(
+                                                    DB::raw('LOWER(`value`)'),
+                                                    'LIKE',
+                                                    '%' . $value . '%'
+                                                );
+                                        },
+                                        $alias
+                                    );
+                            }
+                        } else {
+                            if ($key == 'instructor') {
+                                $subAlias = 'cfji_' . $alias;
+                                $subJoinAlias = 'cji_' . $alias;
+                                $subQuery = DB::table(ConfigService::$tableContentFields)
+                                    ->select('content_id')
+                                    ->where(
+                                        DB::raw('LOWER(`key`)'),
+                                        $key
+                                    )
+                                    ->whereIn(
+                                        'value',
+                                        function($query) use ($value, $subAlias, $subJoinAlias) {
+                                            $query->selectRaw('CAST(' . $subAlias . '.content_id AS CHAR)')
+                                                ->from(DB::raw(ConfigService::$tableContentFields . ' AS ' . $subAlias))
+                                                ->leftJoin(
+                                                    DB::raw(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
+                                                    DB::raw($subJoinAlias . '.id'),
+                                                    DB::raw($subAlias . '.content_id')
+                                                )
+                                                ->where(
+                                                    DB::raw($subAlias . '.`key`'),
+                                                    'name'
+                                                )
+                                                ->where(
+                                                    DB::raw('LOWER(' . $subAlias . '.`value`)'),
+                                                    'LIKE',
+                                                    '%' . $value . '%'
+                                                )
+                                                ->where(
+                                                    DB::raw($subJoinAlias . '.type'),
+                                                    'instructor'
+                                                );
+                                        }
+                                    );
+
+                                $query->joinSub(
+                                    $subQuery,
+                                    $alias,
+                                    function($join)  use ($alias, $mainAlias) {
+                                        $join->on($alias . '.content_id', '=', $mainAlias . '.content_id');
+                                    }
+                                );
+                            } else {
+                                $subQuery = DB::table(ConfigService::$tableContentFields)
+                                    ->select('content_id')
+                                    ->where(
+                                        DB::raw('LOWER(`key`)'),
+                                        $key
+                                    )
+                                    ->where(
+                                        DB::raw('LOWER(`value`)'),
+                                        'LIKE',
+                                        '%' . $value . '%'
+                                    );
+
+                                $query->joinSub(
+                                    $subQuery,
+                                    $alias,
+                                    function($join)  use ($alias, $mainAlias) {
+                                        $join->on($alias . '.content_id', '=', $mainAlias . '.content_id');
+                                    }
+                                );
+                            }
+                        }
+
+                        $index++;
+                    }
+                }
+            );
+        }
+
         return $query->get()
                 ->toArray();
+    }
+
+    public function getDifficultyFieldsValues()
+    {
+        return $this->query()
+            ->select([ConfigService::$tableContentFields . '.value'])
+            ->from(ConfigService::$tableContentFields)
+            ->where(ConfigService::$tableContentFields . '.key', 'difficulty')
+            ->whereNotNull(ConfigService::$tableContentFields . '.value')
+            ->distinct()
+            ->pluck(ConfigService::$tableContentFields . '.value')
+            ->toArray();
+    }
+
+    public function getInstructorFieldsValues()
+    {
+        return $this->query()
+            ->from(ConfigService::$tableContentFields)
+            ->where(ConfigService::$tableContentFields . '.key', 'name')
+            ->whereNotNull(ConfigService::$tableContentFields . '.value')
+            ->leftJoin(
+                ConfigService::$tableContent,
+                ConfigService::$tableContent . '.id',
+                ConfigService::$tableContentFields . '.content_id'
+            )
+            ->where(ConfigService::$tableContent . '.type', 'instructor')
+            ->distinct()
+            ->pluck(ConfigService::$tableContentFields . '.value')
+            ->toArray();
+    }
+
+    public function getStyleFieldsValues()
+    {
+        return $this->query()
+            ->from(ConfigService::$tableContentFields)
+            ->where(ConfigService::$tableContentFields . '.key', 'style')
+            ->whereNotNull(ConfigService::$tableContentFields . '.value')
+            ->distinct()
+            ->pluck(ConfigService::$tableContentFields . '.value')
+            ->toArray();
+    }
+
+    public function getTagFieldsValues()
+    {
+        return $this->query()
+            ->from(ConfigService::$tableContentFields)
+            ->where(ConfigService::$tableContentFields . '.key', 'tag')
+            ->whereNotNull(ConfigService::$tableContentFields . '.value')
+            ->distinct()
+            ->pluck(ConfigService::$tableContentFields . '.value')
+            ->toArray();
+    }
+
+    public function getTopicFieldsValues()
+    {
+        return $this->query()
+            ->from(ConfigService::$tableContentFields)
+            ->where(ConfigService::$tableContentFields . '.key', 'topic')
+            ->whereNotNull(ConfigService::$tableContentFields . '.value')
+            ->distinct()
+            ->pluck(ConfigService::$tableContentFields . '.value')
+            ->toArray();
     }
 
     /**
