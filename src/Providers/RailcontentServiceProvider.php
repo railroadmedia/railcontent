@@ -6,6 +6,7 @@ use Illuminate\Database\Events\StatementPrepared;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use PDO;
+use Railroad\Railcontent\Commands\AddDefaultShowNewField;
 use Railroad\Railcontent\Commands\CalculateTotalXP;
 use Railroad\Railcontent\Commands\ComputePastStats;
 use Railroad\Railcontent\Commands\ComputeWeeklyStats;
@@ -104,6 +105,7 @@ class RailcontentServiceProvider extends ServiceProvider
 
         $this->commands(
             [
+                AddDefaultShowNewField::class,
                 ComputePastStats::class,
                 ComputeWeeklyStats::class,
                 CreateSearchIndexes::class,
