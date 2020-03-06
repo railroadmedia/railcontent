@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Support\Collection;
 use Railroad\Railcontent\Services\ConfigService;
 
 class AddDefaultShowNewField extends Command
@@ -80,40 +81,33 @@ class AddDefaultShowNewField extends Command
             'song'
         ];
 
-        $sql = <<<'EOT'
-INSERT INTO %s (`content_id`, `key`, `value`, `type`, `position`) (
-    SELECT
-        `id` AS 'content_id',
-        'show_in_new_feed' AS 'key',
-        %s AS 'value',
-        'boolean' AS 'type',
-        '1' AS 'position'
-    FROM %s
-    WHERE `type` %s ('%s')
-)
-EOT;
+        $chunkSize = 1000;
+        $insertData = [];
 
-        $statement = sprintf(
-            $sql,
-            ConfigService::$tableContentFields, // insert into table
-            1, // show_in_new_feed key's value
-            ConfigService::$tableContent, // select from table
-            'IN', // content type IN list - condition format
-            implode("', '", $showNewFieldDefaultTrueTypes) // content types
-        );
+        $this->databaseManager->table(ConfigService::$tableContent)
+            ->whereIn('type', $showNewFieldDefaultTrueTypes)
+            ->orderBy('id', 'desc')
+            ->chunk(
+                $chunkSize,
+                function (Collection $rows) {
 
-        $this->databaseManager->statement($statement);
+                    foreach ($rows as $item) {
 
-        $statement = sprintf(
-            $sql,
-            ConfigService::$tableContentFields, // insert into table
-            0, // show_in_new_feed key's value
-            ConfigService::$tableContent, // select from table
-            'NOT IN', // content type NOT IN list - condition format
-            implode("', '", $showNewFieldDefaultTrueTypes) // content type list
-        );
+                        $insertData[] = [
+                            'content_id' => $item->id,
+                            'key' => 'show_in_new_feed',
+                            'value' => 1,
+                            'type' => 'boolean',
+                            'position' => 1,
+                        ];
+                    }
 
-        $this->databaseManager->statement($statement);
+                    $this->databaseManager->table(ConfigService::$tableContentFields)
+                        ->insert($insertData);
+
+                    $insertData = [];
+                }
+            );
 
         $finish = microtime(true) - $start;
 
