@@ -84,7 +84,8 @@ class AddDefaultShowNewField extends Command
         $chunkSize = 1000;
         $insertData = [];
 
-        $this->databaseManager->table(ConfigService::$tableContent)
+        $this->databaseManager->connection(config('railcontent.database_connection_name'))
+            ->table(ConfigService::$tableContent)
             ->whereIn('type', $showNewFieldDefaultTrueTypes)
             ->orderBy('id', 'desc')
             ->chunk(
@@ -102,7 +103,8 @@ class AddDefaultShowNewField extends Command
                         ];
                     }
 
-                    $this->databaseManager->table(ConfigService::$tableContentFields)
+                    $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                        ->table(ConfigService::$tableContentFields)
                         ->insert($insertData);
 
                     $insertData = [];
