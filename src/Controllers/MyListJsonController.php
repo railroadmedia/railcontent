@@ -132,11 +132,9 @@ class MyListJsonController extends Controller
 
         if (!$state) {
 
-            $usersPrimaryPlaylists = array_first(
+            $usersPrimaryPlaylist = array_first(
                 $this->contentRepository->getByUserIdTypeSlug(auth()->id(), 'user-playlist', 'primary-playlist')
             );
-
-            $usersPrimaryPlaylist = reset($usersPrimaryPlaylists);
 
             if (empty($usersPrimaryPlaylist)) {
                 return response()->json([]);
