@@ -35,10 +35,10 @@ abstract class RepositoryBase
             /**
              * @var $realConnection Connection
              */
-            $realConnection = app('db')->connection(ConfigService::$databaseConnectionName);
+            $realConnection = app('db')->connection(config('railcontent.database_connection_name'));
             $realConfig = $realConnection->getConfig();
 
-            $realConfig['name'] = ConfigService::$connectionMaskPrefix . $realConfig['name'];
+            $realConfig['name'] = config('railcontent.connection_mask_prefix') . $realConfig['name'];
 
             $maskConnection =
                 new Connection(
