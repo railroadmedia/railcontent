@@ -139,6 +139,7 @@ class ContentStatisticsService
      */
     public function computeIntervalContentStatistics(Carbon $start, Carbon $end, int $weekOfYear)
     {
+        $this->contentStatisticsRepository->removeExistingIntervalContentStatistics($start, $end);
         $this->contentStatisticsRepository->initIntervalContentStatistics($start, $end, $weekOfYear);
         $this->contentStatisticsRepository->computeIntervalCompletesContentStatistics($start, $end);
         $this->contentStatisticsRepository->computeIntervalStartsContentStatistics($start, $end);

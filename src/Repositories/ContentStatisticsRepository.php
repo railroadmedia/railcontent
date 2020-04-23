@@ -10,6 +10,14 @@ use Railroad\Railcontent\Services\ConfigService;
 
 class ContentStatisticsRepository extends RepositoryBase
 {
+    public function removeExistingIntervalContentStatistics(Carbon $start, Carbon $end)
+    {
+        $this->query()
+            ->where('start_interval', $start)
+            ->where('end_interval', $end)
+            ->delete();
+    }
+
     public function initIntervalContentStatistics(Carbon $start, Carbon $end, int $weekOfYear)
     {
         $sql = <<<'EOT'
