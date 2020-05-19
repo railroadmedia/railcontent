@@ -59,7 +59,7 @@ class DecoratedContentTransformer extends TransformerAbstract
             $defaultIncludes[] = 'data';
         }
 
-        if ($content->getInstructor()) {
+        if (count($content->getInstructor()) > 0) {
             $defaultIncludes[] = 'instructor';
         }
 
@@ -87,7 +87,7 @@ class DecoratedContentTransformer extends TransformerAbstract
             $defaultIncludes[] = 'playlist';
         }
 
-        if ($content->getParent()) {
+        if (count($content->getParent()) > 0) {
             $defaultIncludes[] = 'parent';
         }
 
@@ -128,7 +128,7 @@ class DecoratedContentTransformer extends TransformerAbstract
      */
     public function includeInstructor(Content $content)
     {
-        return $this->item(
+        return $this->collection(
             $content->getInstructor(),
             new ContentInstructorTransformer(),
             'instructor'

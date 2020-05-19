@@ -1,6 +1,6 @@
 <?php
 
-namespace Railroad\Railcontent\Tests\Functional\Controllers;
+namespace Railroad\Railcontent\Tests\Functional\Controllers\NewStructure;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;

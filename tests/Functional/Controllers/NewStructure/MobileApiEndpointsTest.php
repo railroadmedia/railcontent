@@ -1,6 +1,6 @@
 <?php
 
-namespace Railroad\Railcontent\Tests\Functional\Controllers;
+namespace Railroad\Railcontent\Tests\Functional\Controllers\NewStructure;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Services\ContentService;
@@ -21,7 +21,9 @@ class MobileApiEndpointsTest extends RailcontentTestCase
 
         $this->serviceBeingTested = $this->app->make(ContentService::class);
 
-        ResponseService::$oldResponseStructure = false;
+        ResponseService::$oldResponseStructure = true;
+
+        config(['railcontent.cataloguesMetadata' => []]);
     }
 
     public function test_get_all_content()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Railroad\Railcontent\Tests\Functional\Controllers;
+namespace Railroad\Railcontent\Tests\Functional\Controllers\NewStructure;
 
 use Carbon\Carbon;
 use Doctrine\DBAL\Logging\DebugStack;
@@ -735,7 +735,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
             ]
         );
+
         $otherContent = $this->fakeContent(12);
+
         $this->fakeUserPermission(
             1,
             [

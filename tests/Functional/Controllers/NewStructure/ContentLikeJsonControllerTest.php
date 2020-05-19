@@ -1,18 +1,17 @@
 <?php
 
-namespace Railroad\Railcontent\Tests\Functional\Controllers;
+namespace Railroad\Railcontent\Tests\Functional\Controllers\NewStructure;
 
-use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
-class ContentLikeJsonControllerOldStructureTest extends RailcontentTestCase
+class ContentLikeJsonControllerTest extends RailcontentTestCase
 {
     protected function setUp()
     {
         parent::setUp();
-        ResponseService::$oldResponseStructure = true;
+        ResponseService::$oldResponseStructure = false;
     }
 
     public function like($userIdOfLiker, $assertions = false)
@@ -30,7 +29,22 @@ class ContentLikeJsonControllerOldStructureTest extends RailcontentTestCase
             'PUT',
             'railcontent/content-like/',
             [
-                'content_id' => $content[0]->getId()
+                'data' => [
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => $content[0]->getId(),
+                            ],
+                        ],
+                        'user' => [
+                            'data' => [
+                                'type' => 'user',
+                                'id' => $userIdOfLiker,
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
@@ -46,8 +60,19 @@ class ContentLikeJsonControllerOldStructureTest extends RailcontentTestCase
             );
         }
 
+        //        $commentRequestResponse = $this->call(
+        //            'GET',
+        //            'railcontent/comment/' . $commentId
+        //        );
+        //
+        //
+        //        $this->assertEquals(1, $commentRequestResponse->decodeResponseJson('data')[0]['attributes']['like_count']);
+        //        $this->assertEquals(1, count($commentRequestResponse->decodeResponseJson('data')[0]['attributes']['like_users']));
+        //        $this->assertTrue($commentRequestResponse->decodeResponseJson('data')[0]['attributes']['is_liked']);
         return $content[0]->getId();
     }
+
+    // ============================ test cases ======================================
 
     public function test_user_likes_content()
     {
@@ -66,8 +91,22 @@ class ContentLikeJsonControllerOldStructureTest extends RailcontentTestCase
             'DELETE',
             'railcontent/content-like' ,
             [
-                'content_id' => $contentId,
-                'user_id' => $userIdOfLiker
+                'data' => [
+                    'relationships' => [
+                        'content' => [
+                            'data' => [
+                                'type' => 'content',
+                                'id' => $contentId,
+                            ],
+                        ],
+                        'user' => [
+                            'data' => [
+                                'type' => 'user',
+                                'id' => $userIdOfLiker,
+                            ],
+                        ],
+                    ],
+                ],
             ]
         );
 
@@ -88,8 +127,7 @@ class ContentLikeJsonControllerOldStructureTest extends RailcontentTestCase
         $limit = rand(5, 10);
 
         $contentLikes = $this->fakeContentLike(15,[
-            'content' => $content[0],
-            'createdOn' => Carbon::now()
+            'content' => $content[0]
         ]);
 
         $response = $this->call(
@@ -106,7 +144,7 @@ class ContentLikeJsonControllerOldStructureTest extends RailcontentTestCase
         $this->assertEquals($limit, count($responseContent));
 
         foreach ($responseContent as $responseRaw) {
-            $this->assertEquals($content[0]->getId(), $responseRaw['content_id']);
+            $this->assertEquals($content[0]->getId(), $responseRaw['relationships']['content']['data']['id']);
         }
     }
 }

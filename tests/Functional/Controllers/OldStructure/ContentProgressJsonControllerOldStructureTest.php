@@ -1,18 +1,18 @@
 <?php
 
-namespace Railroad\Railcontent\Tests\Functional\Controllers;
+namespace Railroad\Railcontent\Tests\Functional\Controllers\OldStructure;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
-class ContentProgressJsonControllerTest extends RailcontentTestCase
+class ContentProgressJsonControllerOldStructureTest extends RailcontentTestCase
 {
     protected function setUp()
     {
         parent::setUp();
-        ResponseService::$oldResponseStructure = false;
+        ResponseService::$oldResponseStructure = true;
     }
 
     public function test_start_content()
@@ -28,17 +28,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/start',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[0]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $content[0]->getId(),
             ]
         );
 
@@ -51,31 +41,18 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/start',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => rand(1, 100),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => 1,
             ]
         );
 
         $this->assertEquals(422, $response->status());
-        $responseContent = $response->decodeResponseJson('errors');
-
+        $responseContent = $response->decodeResponseJson('meta');
+        $responseErrors = $responseContent['errors'];
         $expectedErrors = [
-            "source" => "data.relationships.content.data.id",
+            "source" => "id",
             "detail" => "The selected content id is invalid.",
-            'title' => 'Validation failed.',
         ];
-
-        $this->assertEquals([$expectedErrors], $responseContent);
-
+        $this->assertEquals([$expectedErrors], $responseErrors);
     }
 
     public function test_complete_content()
@@ -93,34 +70,14 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/start',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $contentId,
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $contentId,
             ]
         );
 
         $response = $this->put(
             'railcontent/complete',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $contentId,
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $contentId,
             ]
         );
 
@@ -144,30 +101,18 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/complete',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => rand(),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => 1,
             ]
         );
 
         $this->assertEquals(422, $response->status());
-        $responseContent = $response->decodeResponseJson('errors');
-
+        $responseContent = $response->decodeResponseJson('meta');
+        $responseErrors = $responseContent['errors'];
         $expectedErrors = [
-            "source" => "data.relationships.content.data.id",
+            "source" => "id",
             "detail" => "The selected content id is invalid.",
-            'title' => 'Validation failed.',
         ];
-
-        $this->assertEquals([$expectedErrors], $responseContent);
+        $this->assertEquals([$expectedErrors], $responseErrors);
     }
 
     public function test_save_user_progress_on_content()
@@ -187,20 +132,8 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/progress',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'attributes' => [
-                        'progress_percent' => $percent,
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $contentId,
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $contentId,
+                'progress_percent' => $percent,
             ]
         );
 
@@ -225,34 +158,19 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/progress',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'attributes' => [
-                        'progress_percent' => $this->faker->numberBetween(10, 99),
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => rand(),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $contentId,
+                'progress_percent' => $this->faker->numberBetween(10, 99),
             ]
         );
 
         $this->assertEquals(422, $response->status());
-
-        $responseContent = $response->decodeResponseJson('errors');
-
+        $responseContent = $response->decodeResponseJson('meta');
+        $responseErrors = $responseContent['errors'];
         $expectedErrors = [
-            "source" => "data.relationships.content.data.id",
+            "source" => "id",
             "detail" => "The selected content id is invalid.",
-            'title' => 'Validation failed.',
         ];
-
-        $this->assertEquals([$expectedErrors], $responseContent);
+        $this->assertEquals([$expectedErrors], $responseErrors);
     }
 
     public function test_start_child_and_parent_content()
@@ -277,17 +195,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/start',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[1]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+               'content_id' => $content[1]->getId()
             ]
         );
 
@@ -347,37 +255,15 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->put(
             'railcontent/progress',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'attributes' => [
-                        'progress_percent' => $progressChild1,
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[2]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'progress_percent' => $progressChild1,
+                'content_id' => $content[2]->getId()
             ]
         );
 
         $response = $this->put(
             'railcontent/start',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[1]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $content[1]->getId()
             ]
         );
 
@@ -446,37 +332,15 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->put(
             'railcontent/progress',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'attributes' => [
-                        'progress_percent' => $progressChild1,
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[2]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'progress_percent' => $progressChild1,
+                'content_id' => $content[2]->getId(),
             ]
         );
 
         $response = $this->put(
             'railcontent/complete',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[1]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $content[1]->getId(),
             ]
         );
 
@@ -545,34 +409,14 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->put(
             'railcontent/start',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[0]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $content[0]->getId(),
             ]
         );
 
         $response = $this->put(
             'railcontent/complete',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[0]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $content[0]->getId(),
             ]
         );
 
@@ -640,34 +484,14 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->put(
             'railcontent/complete',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[2]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $content[2]->getId()
             ]
         );
 
         $response = $this->put(
             'railcontent/complete',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[1]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $content[1]->getId(),
             ]
         );
 
@@ -736,59 +560,23 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->put(
             'railcontent/progress',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'attributes' => [
-                        'progress_percent' => $progressPercentChild2,
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[2]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'progress_percent' => $progressPercentChild2,
+                'content_id' => $content[2]->getId(),
             ]
         );
 
         $this->put(
             'railcontent/progress',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'attributes' => [
-                        'progress_percent' => $progressPercentChild2,
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[1]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'progress_percent' => $progressPercentChild2,
+                'content_id' => $content[1]->getId()
             ]
         );
         $this->put(
             'railcontent/progress',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'attributes' => [
-                        'progress_percent' => $progressPercentChild2,
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[0]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'progress_percent' => $progressPercentChild2,
+                'content_id' => $content[0]->getId()
             ]
         );
 
@@ -796,20 +584,8 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/progress',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'attributes' => [
-                        'progress_percent' => $newProgressPercent,
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[1]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'progress_percent' => $newProgressPercent,
+                'content_id' => $content[1]->getId(),
             ]
         );
 
@@ -863,37 +639,15 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->put(
             'railcontent/progress',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'attributes' => [
-                        'progress_percent' => $randomPercent,
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[0]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'progress_percent' => $randomPercent,
+                'content_id' => $content[0]->getId(),
             ]
         );
 
         $response = $this->put(
             'railcontent/reset',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $contentId,
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $contentId
             ]
         );
 
@@ -914,27 +668,16 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $response = $this->put(
             'railcontent/reset',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => rand(),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => rand(),
             ]
         );
 
         $this->assertEquals(422, $response->status());
-        $responseContent = $response->decodeResponseJson('errors');
+        $responseContent = $response->decodeResponseJson('meta')['errors'];
 
         $expectedErrors = [
-            "source" => "data.relationships.content.data.id",
+            "source" => "id",
             "detail" => "The selected content id is invalid.",
-            'title' => 'Validation failed.',
         ];
 
         $this->assertEquals([$expectedErrors], $responseContent);
@@ -964,20 +707,8 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->put(
             'railcontent/progress',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'attributes' => [
-                        'progress_percent' => 10,
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[1]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'progress_percent' => 10,
+                'content_id' => $content[1]->getId(),
             ]
         );
 
@@ -986,37 +717,15 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->put(
             'railcontent/progress',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'attributes' => [
-                        'progress_percent' => ($randomPercent + 10) / 2,
-                    ],
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[0]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'progress_percent' => ($randomPercent + 10) / 2,
+                'content_id' => $content[0]->getId(),
             ]
         );
 
         $response = $this->put(
             'railcontent/reset',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $contentId,
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $contentId
             ]
         );
 
@@ -1057,17 +766,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->put(
             'railcontent/complete',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                     'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[1]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $content[1]->getId()
             ]
         );
 
@@ -1075,17 +774,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->put(
             'railcontent/complete',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[0]->getId(),
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $content[0]->getId(),
             ]
         );
 
@@ -1097,22 +786,12 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(2, $firstRequest->decodeResponseJson('meta')['pagination']['total']);
+        $this->assertEquals(2, $firstRequest->decodeResponseJson('meta')['totalResults']);
 
         $this->put(
             'railcontent/reset',
             [
-                'data' => [
-                    'type' => 'userContentProgress',
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $contentId,
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $contentId,
             ]
         );
 
@@ -1124,7 +803,7 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->assertEquals(1, $secondRequest->decodeResponseJson('meta')['pagination']['total']);
+        $this->assertEquals(1, $secondRequest->decodeResponseJson('meta')['totalResults']);
     }
 
 }

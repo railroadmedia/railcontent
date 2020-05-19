@@ -1,17 +1,18 @@
 <?php
 
-namespace Railroad\Railcontent\Tests\Functional\Controllers;
+namespace Railroad\Railcontent\Tests\Functional\Controllers\OldStructure;
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
-class ContentLikeJsonControllerTest extends RailcontentTestCase
+class ContentLikeJsonControllerOldStructureTest extends RailcontentTestCase
 {
     protected function setUp()
     {
         parent::setUp();
-        ResponseService::$oldResponseStructure = false;
+        ResponseService::$oldResponseStructure = true;
     }
 
     public function like($userIdOfLiker, $assertions = false)
@@ -29,22 +30,7 @@ class ContentLikeJsonControllerTest extends RailcontentTestCase
             'PUT',
             'railcontent/content-like/',
             [
-                'data' => [
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $content[0]->getId(),
-                            ],
-                        ],
-                        'user' => [
-                            'data' => [
-                                'type' => 'user',
-                                'id' => $userIdOfLiker,
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $content[0]->getId()
             ]
         );
 
@@ -60,19 +46,8 @@ class ContentLikeJsonControllerTest extends RailcontentTestCase
             );
         }
 
-        //        $commentRequestResponse = $this->call(
-        //            'GET',
-        //            'railcontent/comment/' . $commentId
-        //        );
-        //
-        //
-        //        $this->assertEquals(1, $commentRequestResponse->decodeResponseJson('data')[0]['attributes']['like_count']);
-        //        $this->assertEquals(1, count($commentRequestResponse->decodeResponseJson('data')[0]['attributes']['like_users']));
-        //        $this->assertTrue($commentRequestResponse->decodeResponseJson('data')[0]['attributes']['is_liked']);
         return $content[0]->getId();
     }
-
-    // ============================ test cases ======================================
 
     public function test_user_likes_content()
     {
@@ -91,22 +66,8 @@ class ContentLikeJsonControllerTest extends RailcontentTestCase
             'DELETE',
             'railcontent/content-like' ,
             [
-                'data' => [
-                    'relationships' => [
-                        'content' => [
-                            'data' => [
-                                'type' => 'content',
-                                'id' => $contentId,
-                            ],
-                        ],
-                        'user' => [
-                            'data' => [
-                                'type' => 'user',
-                                'id' => $userIdOfLiker,
-                            ],
-                        ],
-                    ],
-                ],
+                'content_id' => $contentId,
+                'user_id' => $userIdOfLiker
             ]
         );
 
@@ -127,7 +88,8 @@ class ContentLikeJsonControllerTest extends RailcontentTestCase
         $limit = rand(5, 10);
 
         $contentLikes = $this->fakeContentLike(15,[
-            'content' => $content[0]
+            'content' => $content[0],
+            'createdOn' => Carbon::now()
         ]);
 
         $response = $this->call(
@@ -144,7 +106,7 @@ class ContentLikeJsonControllerTest extends RailcontentTestCase
         $this->assertEquals($limit, count($responseContent));
 
         foreach ($responseContent as $responseRaw) {
-            $this->assertEquals($content[0]->getId(), $responseRaw['relationships']['content']['data']['id']);
+            $this->assertEquals($content[0]->getId(), $responseRaw['content_id']);
         }
     }
 }

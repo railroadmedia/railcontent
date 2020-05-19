@@ -1,6 +1,6 @@
 <?php
 
-namespace Railroad\Railcontent\Tests\Functional\Controllers;
+namespace Railroad\Railcontent\Tests\Functional\Controllers\NewStructure;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Services\ResponseService;
@@ -26,36 +26,32 @@ class ContentHierarchyJsonControllerTest extends RailcontentTestCase
             ]
         );
         $hierarchy = $this->fakeHierarchy(
-            1,
             [
-                'parent' => $contents[0],
-                'child' => $contents[1],
-                'childPosition' => 1,
+                'parent_id' => $contents[0]->getId(),
+                'child_id' => $contents[1]->getId(),
+                'child_position' => 1,
             ]
         );
         $hierarchy = $this->fakeHierarchy(
-            1,
-            [
-                'parent' => $contents[0],
-                'child' => $contents[2],
-                'childPosition' => 2,
+             [
+                'parent_id' => $contents[0]->getId(),
+                'child_id' => $contents[2]->getId(),
+                'child_position' => 2,
             ]
         );
         $hierarchy = $this->fakeHierarchy(
-            1,
             [
-                'parent' => $contents[0],
-                'child' => $contents[3],
-                'childPosition' => 3,
+                'parent_id' => $contents[0]->getId(),
+                'child_id' => $contents[3]->getId(),
+                'child_position' => 3,
             ]
         );
 
         $hierarchy = $this->fakeHierarchy(
-            1,
             [
-                'parent' => $contents[0],
-                'child' => $contents[4],
-                'childPosition' => 4,
+                'parent_id' => $contents[0]->getId(),
+                'child_id' => $contents[4]->getId(),
+                'child_position' => 4,
             ]
         );
     }

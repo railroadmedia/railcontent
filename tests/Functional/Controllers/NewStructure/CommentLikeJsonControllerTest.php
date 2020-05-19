@@ -1,17 +1,17 @@
 <?php
 
-namespace Railroad\Railcontent\Tests\Functional\Controllers;
+namespace Railroad\Railcontent\Tests\Functional\Controllers\NewStructure;
 
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
-class CommentLikeJsonControllerOldStructureTest extends RailcontentTestCase
+class CommentLikeJsonControllerTest extends RailcontentTestCase
 {
     protected function setUp()
     {
         parent::setUp();
-        ResponseService::$oldResponseStructure = true;
+        ResponseService::$oldResponseStructure = false;
     }
 
     public function like($userIdOfLiker, $assertions = false)
@@ -60,12 +60,12 @@ class CommentLikeJsonControllerOldStructureTest extends RailcontentTestCase
             'railcontent/comment/' . $commentId
         );
 
-        $this->assertEquals(1, $commentRequestResponse->decodeResponseJson('data')[0]['like_count']);
+        $this->assertEquals(1, $commentRequestResponse->decodeResponseJson('data')[0]['attributes']['like_count']);
         $this->assertEquals(
             1,
-            count($commentRequestResponse->decodeResponseJson('data')[0]['like_users'])
+            count($commentRequestResponse->decodeResponseJson('data')[0]['attributes']['like_users'])
         );
-        $this->assertTrue($commentRequestResponse->decodeResponseJson('data')[0]['is_liked']);
+        $this->assertTrue($commentRequestResponse->decodeResponseJson('data')[0]['attributes']['is_liked']);
         return $commentId;
     }
 

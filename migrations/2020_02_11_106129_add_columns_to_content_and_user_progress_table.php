@@ -14,27 +14,27 @@ class AddColumnsToContentAndUserProgressTable extends Migration
     public function up()
     {
         //TODO: Should be migrated only for tests
-//        Schema::connection(config('railcontent.database_connection_name'))
-//            ->table(
-//                config('railcontent.table_prefix') . 'content',
-//                function (Blueprint $table) {
-//                    $table->string('total_xp')
-//                        ->index()
-//                        ->after('youtube_video_id')
-//                        ->nullable();
-//                }
-//            );
+        Schema::connection(config('railcontent.database_connection_name'))
+            ->table(
+                config('railcontent.table_prefix') . 'content',
+                function (Blueprint $table) {
+                    $table->string('total_xp')
+                        ->index()
+                        ->after('youtube_video_id')
+                        ->nullable();
+                }
+            );
 
-//        Schema::connection(config('railcontent.database_connection_name'))
-//            ->table(
-//                config('railcontent.table_prefix') . 'user_content_progress',
-//                function (Blueprint $table) {
-//                    $table->string('higher_key_progress')
-//                        ->index()
-//                        ->after('progress_percent')
-//                        ->nullable();
-//                }
-//            );
+        Schema::connection(config('railcontent.database_connection_name'))
+            ->table(
+                config('railcontent.table_prefix') . 'user_content_progress',
+                function (Blueprint $table) {
+                    $table->string('higher_key_progress')
+                        ->index()
+                        ->after('progress_percent')
+                        ->nullable();
+                }
+            );
     }
 
     /**

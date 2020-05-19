@@ -1,6 +1,6 @@
 <?php
 
-namespace Railroad\Railcontent\Tests\Functional\Controllers;
+namespace Railroad\Railcontent\Tests\Functional\Controllers\OldStructure;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Entities\Comment;

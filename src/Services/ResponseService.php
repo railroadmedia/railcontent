@@ -98,7 +98,7 @@ class ResponseService extends FractalResponseService
             $entityOrEntities,
             'content',
             new DecoratedContentTransformer(),
-            new OldStyleSerializer(),
+            new JsonApiSerializer(),
             $queryBuilder
         )
             ->parseIncludes($includes)
@@ -209,6 +209,7 @@ class ResponseService extends FractalResponseService
             )
                 ->parseIncludes($includes);
         }
+
         return self::create(
             $entityOrEntities,
             'comment',

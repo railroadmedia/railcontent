@@ -41,6 +41,7 @@ use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Entities\UserPlaylist;
 use Railroad\Railcontent\Entities\UserPlaylistContent;
+use Railroad\Railcontent\Faker\Factory;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
@@ -135,7 +136,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $this->createUsersTable();
 
-        $this->faker = $this->app->make(Generator::class);
+        $this->faker = Factory::create();
         $this->fakeDataHydrator = new FakeDataHydrator($this->entityManager);
 
         $this->databaseManager = $this->app->make(DatabaseManager::class);
@@ -666,35 +667,23 @@ class RailcontentTestCase extends BaseTestCase
             $contentData
 
         );
+
         $fakePopulator = $this->populator->execute();
 
         return $fakePopulator[Content::class];
     }
 
-    public function fakeHierarchy($nr = 1, $contentData = [])
+    public function fakeHierarchy($data = [])
     {
-        $this->populator = new Populator($this->faker, $this->entityManager);
+        $contentHierarchy = $this->faker->contentHierarchy($data);
 
-        if (empty($contentData)) {
-            $contentData = [
-                'parent' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'child' => $this->entityManager->getRepository(Content::class)
-                    ->find(2),
-                'childPosition' => 1,
-            ];
-        }
+        $contentHierarchyId =
+            $this->databaseManager->table('railcontent_content_hierarchy')
+                ->insertGetId($contentHierarchy);
 
-        $this->populator->addEntity(
-            ContentHierarchy::class,
-            $nr,
-            $contentData
+        $contentHierarchy['id'] = $contentHierarchyId;
 
-        );
-
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[ContentHierarchy::class];
+        return $contentHierarchy;
     }
 
     public function fakeUserContentProgress($nr = 1, $contentData = [])
@@ -766,122 +755,56 @@ class RailcontentTestCase extends BaseTestCase
         return $fakePopulator[ContentInstructor::class];
     }
 
-    public function fakePermission($nr = 1, $contentData = [])
+    public function fakePermission($contentData = [])
     {
-        $this->populator = new Populator($this->faker, $this->entityManager);
+        $permission = $this->faker->permission($contentData);
 
-        if (empty($contentData)) {
-            $contentData = [
-                'name' => $this->faker->word,
-                'brand' => config('railcontent.brand'),
-            ];
-        }
-        $this->populator->addEntity(
-            Permission::class,
-            $nr,
-            $contentData
+        $permissionId =
+            $this->databaseManager->table('railcontent_permissions')
+                ->insertGetId($permission);
 
-        );
-        $fakePopulator = $this->populator->execute();
+        $permission['id'] = $permissionId;
 
-        return $fakePopulator[Permission::class];
+        return $permission;
     }
 
-    public function fakeComment($nr = 1, $commentData = [])
+    public function fakeComment($data = [])
     {
-        $this->populator = new Populator($this->faker, $this->entityManager);
+        $comment = $this->faker->comment($data);
 
-        if (empty($commentData)) {
-            $commentData = [
-                'deletedAt' => null,
-            ];
-        }
-        if (!array_key_exists('content', $commentData)) {
-            $commentData['content'] = $this->fakeContent(
-                1,
-                [
-                    'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
-                    'brand' => $this->faker->randomElement(config('railcontent.available_brands')),
-                ]
-            )[0];
-        }
+        $commentId =
+            $this->databaseManager->table('railcontent_comments')
+                ->insertGetId($comment);
 
-        if(!array_key_exists('userId', $commentData)){
-            $user = $this->fakeUser();
-        }
+        $comment['id'] = $commentId;
 
-        $commentData['user'] =
-            $this->app->make(UserProvider::class)
-                ->getRailcontentUserById($commentData['userId']??$user['id']) ;
-        $commentData['createdOn'] = Carbon::now();
-        $commentData['deletedOn'] = null;
-
-        unset($commentData['userId']);
-
-        $this->populator->addEntity(
-            Comment::class,
-            $nr,
-            $commentData
-        );
-
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[Comment::class];
+        return $comment;
     }
 
-    public function fakeContentPermission($nr = 1, $commentData = [])
+    public function fakeContentPermission($data = [])
     {
-        $this->populator = new Populator($this->faker, $this->entityManager);
+        $contentPermission = $this->faker->contentPermission($data);
 
-        if (empty($commentData)) {
-            $commentData = [
-                'content' => $this->fakeContent(1),
-                'brand' => config('railcontent.brand'),
-            ];
-        }
-        if (!array_key_exists('permission', $commentData)) {
-            $commentData['permission'] = $this->fakePermission()[0];
-        }
+        $contentPermissionId =
+            $this->databaseManager->table('railcontent_content_permissions')
+                ->insertGetId($contentPermission);
 
-        $this->populator->addEntity(
-            ContentPermission::class,
-            $nr,
-            $commentData
-        );
+        $contentPermission['id'] = $contentPermissionId;
 
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[ContentPermission::class];
+        return $contentPermission;
     }
 
-    public function fakeUserPermission($nr = 1, $commentData = [])
+    public function fakeUserPermission($commentData = [])
     {
-        $this->populator = new Populator($this->faker, $this->entityManager);
+        $userPermission = $this->faker->userPermission($commentData);
 
-        if (empty($commentData)) {
-            $commentData = [
-                'userId' => 1,
-                'startDate' => Carbon::now(),
-            ];
-        }
-        if (!array_key_exists('permission', $commentData)) {
-            $commentData['permission'] = $this->fakePermission()[0];
-        }
-        $commentData['user'] =
-            $this->app->make(UserProvider::class)
-                ->getRailcontentUserById($commentData['userId'] ?? 1);
+        $userPermissionId =
+            $this->databaseManager->table('railcontent_user_permissions')
+                ->insertGetId($userPermission);
 
-        unset ($commentData['userId']);
+        $userPermission['id'] = $userPermissionId;
 
-        $this->populator->addEntity(
-            UserPermission::class,
-            $nr,
-            $commentData
-        );
-
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[UserPermission::class];
+        return $userPermission;
     }
 
     public function fakeContentData($nr = 1, $contentData = [])
@@ -931,33 +854,17 @@ class RailcontentTestCase extends BaseTestCase
         return $fakePopulator[ContentTopic::class];
     }
 
-    public function fakeCommentLike($nr = 1, $commentLikeData = [])
+    public function fakeCommentLike($commentLikeData = [])
     {
-        if (empty($commentLikeData)) {
-            $commentLikeData = [
-                'comment' => $this->fakeComment(),
-            ];
-        }
+        $commentLikeData = $this->faker->commentLike($commentLikeData);
 
-        if(!array_key_exists('userId', $commentLikeData)){
-            $user = $this->fakeUser();
-        }
+        $commentLikeDataId =
+            $this->databaseManager->table('railcontent_comment_likes')
+                ->insertGetId($commentLikeData);
 
-        $commentLikeData['user'] =
-            $this->app->make(UserProvider::class)
-                ->getRailcontentUserById($commentLikeData['userId']??$user['id']) ;
+        $commentLikeData['id'] = $commentLikeDataId;
 
-        unset($commentLikeData['userId']);
-
-        $this->populator->addEntity(
-            CommentLikes::class,
-            $nr,
-            $commentLikeData
-
-        );
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[CommentLikes::class];
+        return $commentLikeData;
     }
 
     public function fakeUser($userData = [])
