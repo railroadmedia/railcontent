@@ -807,51 +807,30 @@ class RailcontentTestCase extends BaseTestCase
         return $userPermission;
     }
 
-    public function fakeContentData($nr = 1, $contentData = [])
+    public function fakeContentData($data = [])
     {
-        $this->populator = new Populator($this->faker, $this->entityManager);
+        $contentData = $this->faker->contentData($data);
 
-        $this->populator->addEntity(
-            ContentData::class,
-            $nr,
-            $contentData
-        );
+        $contentDataId =
+            $this->databaseManager->table('railcontent_content_data')
+                ->insertGetId($data);
 
-        $fakePopulator = $this->populator->execute();
+        $contentData['id'] = $contentDataId;
 
-        return $fakePopulator[ContentData::class];
+        return $contentData;
     }
 
-    public function fakeContentTopic($nr = 1, $topic = [])
+    public function fakeContentTopic($topic = [])
     {
-        $this->populator = new Populator($this->faker, $this->entityManager);
-        if (!array_key_exists('content', $topic)) {
-            $content =
-                $this->entityManager->getRepository(Content::class)
-                    ->find(1);
-        } else {
-            $content = $topic['content'];
-        }
+        $contentTopic = $this->faker->contentTopic($topic);
 
-        if (empty($topic)) {
-            $topic = [
-                'content' => $content,
-                'topic' => $this->faker->word,
-                'position' => 1,
-            ];
-        }
-        $this->populator->addEntity(
-            ContentTopic::class,
-            $nr,
-            $topic
+        $contentTopicId =
+            $this->databaseManager->table('railcontent_content_topic')
+                ->insertGetId($contentTopic);
 
-        );
-        $fakePopulator = $this->populator->execute();
+        $contentTopic['id'] = $contentTopicId;
 
-        for ($i = 0; $i < $nr; $i++) {
-            $content->addTopic($fakePopulator[ContentTopic::class][$i]);
-        }
-        return $fakePopulator[ContentTopic::class];
+        return $contentTopic;
     }
 
     public function fakeCommentLike($commentLikeData = [])
@@ -885,33 +864,17 @@ class RailcontentTestCase extends BaseTestCase
         return $userData;
     }
 
-    public function fakeContentLike($nr = 1, $contentLikeData = [])
+    public function fakeContentLike($contentLikeData = [])
     {
-        if (empty($contentLikeData)) {
-            $contentLikeData = [
-                'content' => $this->fakeContent(),
-            ];
-        }
+        $contentLike = $this->faker->contentLike($contentLikeData);
 
-        if(!array_key_exists('userId', $contentLikeData)){
-            $user = $this->fakeUser();
-        }
+        $contentLikeId =
+            $this->databaseManager->table('railcontent_content_likes')
+                ->insertGetId($contentLike);
 
-        $contentLikeData['user'] =
-            $this->app->make(UserProvider::class)
-                ->getRailcontentUserById($contentLikeData['userId']??$user['id']) ;
+        $contentLike['id'] = $contentLikeId;
 
-        unset($contentLikeData['userId']);
-
-        $this->populator->addEntity(
-            ContentLikes::class,
-            $nr,
-            $contentLikeData
-
-        );
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[ContentLikes::class];
+        return $contentLike;
     }
 
     public function fakeUserPlaylist($nr = 1, $userPlaylist = [])

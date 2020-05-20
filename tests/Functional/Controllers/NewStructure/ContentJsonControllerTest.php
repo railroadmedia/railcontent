@@ -108,7 +108,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertArrayHasKey('exercise', $responseContent['relationships']);
         $this->assertEquals(
             $instructor[0]->getId(),
-            $responseContent['relationships']['instructor']['data']['id']
+            $responseContent['relationships']['instructor']['data'][0]['id']
         );
         $this->assertEquals(2, count($responseContent['relationships']['exercise']['data']));
     }

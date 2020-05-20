@@ -36,10 +36,10 @@ class ContentDatumControllerTest extends RailcontentTestCase
         );
 
         $contentTopic = $this->fakeContentTopic(
-            1,
             [
-                'content' => $content['0'],
+                'content_id' => $content['0']->getId(),
                 'topic' => $this->faker->word,
+                'position' => 1
             ]
         );
 
@@ -254,24 +254,20 @@ class ContentDatumControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->populator->addEntity(
-            ContentData::class,
-            1,
+        $data = $this->fakeContentData(
             [
-                'content' => $content[0],
+                'content_id' => $content[0]->getId(),
                 'key' => $this->faker->word,
                 'value' => $this->faker->text(),
                 'position' => 1,
             ]
         );
-        $fakeData = $this->populator->execute();
-        $data = $fakeData[ContentData::class][0];
 
         $new_value = $this->faker->text();
 
         $response = $this->call(
             'PATCH',
-            'railcontent/content/datum/' . $data->getId(),
+            'railcontent/content/datum/' . $data['id'],
             [
                 'data' => [
                     'type' => 'contentData',
@@ -297,7 +293,7 @@ class ContentDatumControllerTest extends RailcontentTestCase
                     'type' => 'contentData',
                     'id' => 1,
                     'attributes' => [
-                        'key' => $data->getKey(),
+                        'key' => $data['key'],
                         'value' => $new_value,
                         'position' => 1,
                     ],
@@ -317,22 +313,18 @@ class ContentDatumControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->populator->addEntity(
-            ContentData::class,
-            1,
+        $data = $this->fakeContentData(
             [
-                'content' => $content[0],
+                'content_id' => $content[0]->getId(),
                 'key' => $this->faker->word,
                 'value' => $this->faker->text(),
-                'position' => $this->faker->numberBetween(),
+                'position' => 1,
             ]
         );
-        $fakeData = $this->populator->execute();
-        $data = $fakeData[ContentData::class][0];
 
         $response = $this->call(
             'PATCH',
-            'railcontent/content/datum/' . $data->getId(),
+            'railcontent/content/datum/' . $data['id'],
             [
                 'data' => [
                     'type' => 'contentData',
@@ -366,20 +358,15 @@ class ContentDatumControllerTest extends RailcontentTestCase
                 'brand' => config('railcontent.brand'),
             ]
         );
-
-        $this->populator->addEntity(
-            ContentData::class,
-            1,
+        $data = $this->fakeContentData(
             [
-                'content' => $content[0],
+                'content_id' => $content[0]->getId(),
                 'key' => $this->faker->word,
                 'value' => $this->faker->text(),
-                'position' => $this->faker->numberBetween(),
+                'position' => 1,
             ]
         );
-        $fakeData = $this->populator->execute();
-        $data = $fakeData[ContentData::class][0];
-        $contentDataId = $data->getId();
+        $contentDataId = $data['id'];
 
         $response = $this->call('DELETE', 'railcontent/content/datum/' . $contentDataId);
 
@@ -404,30 +391,26 @@ class ContentDatumControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->populator->addEntity(
-            ContentData::class,
-            1,
+        $data = $this->fakeContentData(
             [
-                'content' => $content[0],
+                'content_id' => $content[0]->getId(),
                 'key' => $this->faker->word,
                 'value' => $this->faker->text(),
-                'position' => $this->faker->numberBetween(),
+                'position' => 1,
             ]
         );
-        $fakeData = $this->populator->execute();
-        $data = $fakeData[ContentData::class][0];
 
         $newData = [
             'data' => [
                 'attributes' => [
-                    'key' => $data->getKey(),
+                    'key' => $data['key'],
                     'value' => $this->faker->text(500),
                     'position' => 1,
                 ],
             ],
         ];
 
-        $updatedData = $this->serviceBeingTested->update($data->getId(), $newData);
+        $updatedData = $this->serviceBeingTested->update($data['id'], $newData);
 
         $this->assertEquals(
             $newData['data']['attributes']['value'],
@@ -456,22 +439,21 @@ class ContentDatumControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->populator->addEntity(
-            ContentData::class,
-            1,
+        $data = $this->fakeContentData(
             [
-                'content' => $content[0],
+                'content_id' => $content[0]->getId(),
                 'key' => $this->faker->word,
                 'value' => $this->faker->text(),
-                'position' => $this->faker->numberBetween(),
+                'position' => 1,
             ]
         );
-        $fakeData = $this->populator->execute();
-        $data = $fakeData[ContentData::class][0];
 
-        $results = $this->serviceBeingTested->get($data->getId());
+        $results = $this->serviceBeingTested->get($data['id']);
 
-        $this->assertEquals($data, $results);
+        $this->assertEquals($data['id'], $results->getId());
+        $this->assertEquals($data['key'], $results->getKey());
+        $this->assertEquals($data['value'], $results->getValue());
+        $this->assertEquals($data['content_id'], $results->getContent()->getId());
     }
 
     public function test_delete_content_datum_method_from_service_response()
@@ -485,20 +467,16 @@ class ContentDatumControllerTest extends RailcontentTestCase
             ]
         );
 
-        $this->populator->addEntity(
-            ContentData::class,
-            1,
+        $data = $this->fakeContentData(
             [
-                'content' => $content[0],
+                'content_id' => $content[0]->getId(),
                 'key' => $this->faker->word,
                 'value' => $this->faker->text(),
-                'position' => $this->faker->numberBetween(),
+                'position' => 1,
             ]
         );
-        $fakeData = $this->populator->execute();
-        $data = $fakeData[ContentData::class][0];
 
-        $results = $this->serviceBeingTested->delete($data->getId());
+        $results = $this->serviceBeingTested->delete($data['id']);
 
         $this->assertEquals(1, $results);
     }

@@ -409,7 +409,6 @@ class CommentService
         $qb = $this->commentRepository->createQueryBuilder($alias);
 
         $qb->join($alias . '.content', $aliasContent)
-            ->leftJoin($alias . '.children', 'replies')
             ->andWhere(
                 $qb->expr()
                     ->in($aliasContent . '.brand', ':availableBrands')
@@ -422,16 +421,12 @@ class CommentService
             ->andWhere(
                 $qb->expr()
                     ->isNull('c.parent')
-            );
+            )
+        ;
 
         if ($orderByColumn == $alias . ".mine") {
-            $user = $this->userProvider->getUserById(auth()->id());
-
             CommentRepository::$availableUserId = $currentUserId;
             $orderByColumn = $alias . '.createdOn';
-
-            $qb->andWhere($alias . '.user = :user')
-                ->setParameter('user', $user);
         }
 
         if ($orderByColumn == $alias . ".likeCount") {
@@ -460,7 +455,7 @@ class CommentService
                 ->setParameter('availableContentId', CommentRepository::$availableContentId);
         }
 
-        $qb->addSelect([$alias, "replies"])
+        $qb->addSelect([$alias])
             ->paginate($limit, $page - 1)
             ->orderBy($orderByColumn, $orderByDirection);
 
@@ -481,6 +476,7 @@ class CommentService
 
         $qb->select('count(c)')
             ->join($alias . '.content', $aliasContent)
+
             ->where(
                 $qb->expr()
                     ->isNull('c.deletedAt')

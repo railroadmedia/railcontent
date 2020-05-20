@@ -21,6 +21,7 @@ use Railroad\Railcontent\Services\ResponseService;
 use ReflectionException;
 use Spatie\Fractal\Fractal;
 use Throwable;
+use function GuzzleHttp\Promise\all;
 
 /**
  * Class CommentJsonController
@@ -257,6 +258,6 @@ class CommentJsonController extends Controller
             '-createdOn'
         );
 
-        return ResponseService::comment($commentData, $qb);
+        return ResponseService::comment($commentData['results'], $qb);
     }
 }

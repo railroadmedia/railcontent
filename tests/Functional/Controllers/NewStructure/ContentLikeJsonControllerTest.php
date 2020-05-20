@@ -126,9 +126,13 @@ class ContentLikeJsonControllerTest extends RailcontentTestCase
         $content = $this->fakeContent();
         $limit = rand(5, 10);
 
-        $contentLikes = $this->fakeContentLike(15,[
-            'content' => $content[0]
-        ]);
+        for($i = 0; $i< 15; $i++) {
+            $contentLikes[$i] = $this->fakeContentLike(
+                         [
+                    'content_id' => $content[0]->getId()
+                ]
+            );
+        }
 
         $response = $this->call(
             'GET',

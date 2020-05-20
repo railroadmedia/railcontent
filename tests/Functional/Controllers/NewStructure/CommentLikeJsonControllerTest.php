@@ -24,16 +24,15 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
                 'brand' => config('railcontent.brand'),
             ]
         );
-        $comments = $this->fakeComment(
-            1,
+        $comment = $this->fakeComment(
             [
-                'content' => $content[0],
-                'deletedAt' => null,
+                'content_id' => $content[0]->getId(),
+                'deleted_at' => null,
+                'parent_id' => null
             ]
         );
 
-        $comment = $comments[0];
-        $commentId = $comment->getId();
+        $commentId = $comment['id'];
 
         $response = $this->call(
             'PUT',
@@ -81,21 +80,34 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
     public function test_user_unlikes_comment()
     {
         $userIdOfLiker = $this->createAndLogInNewUser();
-        $comments = $this->fakeComment();
-
-        $commentLike = $this->fakeCommentLike(
+        $content = $this->fakeContent(
             1,
             [
-                'comment' => $comments[0],
-                'userId' => $userIdOfLiker,
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
+                'status' => $this->faker->randomElement(ContentRepository::$availableContentStatues),
+                'brand' => config('railcontent.brand'),
+            ]
+        );
+        $comment = $this->fakeComment(
+            [
+                'content_id' => $content[0]->getId(),
+                'deleted_at' => null,
+                'parent_id' => null
+            ]
+        );
+
+        $commentLike = $this->fakeCommentLike(
+            [
+                'comment_id' => $comment['id'],
+                'user_id' => $userIdOfLiker,
             ]
         );
 
         $response = $this->call(
             'DELETE',
-            'railcontent/comment-like/' . $comments[0]->getId(),
+            'railcontent/comment-like/' . $comment['id'],
             [
-                'comment_id' => $comments[0]->getId(),
+                'comment_id' => $comment['id'],
             ]
         );
 
@@ -104,7 +116,7 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
         $this->assertDatabaseMissing(
             config('railcontent.table_prefix') . 'comment_likes',
             [
-                'comment_id' => $comments[0]->getId(),
+                'comment_id' => $comment['id'],
                 'user_id' => $userIdOfLiker,
             ]
         );
