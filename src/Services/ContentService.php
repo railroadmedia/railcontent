@@ -1349,6 +1349,7 @@ class ContentService
      */
     private function saveContentFields($data, Content $content)
     {
+     //   dd($data);
         if (array_key_exists('fields', $data['data']['attributes'])) {
 
             $fields = $data['data']['attributes']['fields'];
@@ -1405,7 +1406,9 @@ class ContentService
 
                             //check if field was deleted
                             $oldFieldValue = call_user_func([$oldField, $getterName]);
-
+if(!is_string($oldFieldValue)){
+    $oldFieldValue = $oldFieldValue->getId();
+}
                             if (!in_array($oldFieldValue, array_column($fields, 'value'))) {
 
                                 call_user_func([$content, $removeField], $oldField);

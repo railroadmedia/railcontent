@@ -206,7 +206,7 @@ class DecoratedContentTransformer extends TransformerAbstract
      */
     public function includeParent(Content $content)
     {
-        return $this->item(
+        return $this->collection(
             $content->getParent(),
             new ContentParentTransformer(),
             'parent'

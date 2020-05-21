@@ -637,7 +637,7 @@ class Content extends ArrayExpressible
      */
     public function getParentContent()
     {
-        return $this->parentContent->first();
+        return ($this->parentContent)?$this->parentContent->first():null;
     }
 
     /**

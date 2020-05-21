@@ -76,12 +76,14 @@ class ApiJsonController extends Controller
             );
         }
 
-        foreach (config('railcontent.showTypes') as $showType) {
-            $shows[$showType] = $metaData[$showType] ?? [];
-            $shows[$showType]['episodeNumber'] = $episodesNumber[$showType] ?? '';
+        if(!empty($metaData)) {
+            foreach (config('railcontent.showTypes') as $showType) {
+                $shows[$showType] = $metaData[$showType] ?? [];
+                $shows[$showType]['episodeNumber'] = $episodesNumber[$showType] ?? '';
+            }
         }
 
-        return ResponseService::shows([$shows]);
+        return ResponseService::shows($shows);
     }
 
     /**

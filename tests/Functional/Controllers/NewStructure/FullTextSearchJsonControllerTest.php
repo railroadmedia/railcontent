@@ -42,13 +42,16 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'status' => 'published',
             ]
         );
-        $this->fakeContentTopic(
-            15,
-            [
-                'content' => $content1[0],
-                'topic' => $this->faker->word,
-            ]
-        );
+
+        for($i=0; $i<15; $i++) {
+            $this->fakeContentTopic(
+                 [
+                    'content_id' => $content1[0]->getId(),
+                    'topic' => $this->faker->word,
+                ]
+            );
+        }
+
         $content2 = $this->fakeContent(
             1,
             [
@@ -59,13 +62,15 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'publishedOn' => Carbon::now(),
             ]
         );
-        $this->fakeContentTopic(
-            15,
-            [
-                'content' => $content2[0],
-                'topic' => $this->faker->word,
-            ]
-        );
+
+        for($i=0; $i<15; $i++) {
+            $this->fakeContentTopic(
+                [
+                    'content_id' => $content2[0]->getId(),
+                    'topic' => $this->faker->word,
+                ]
+            );
+        }
 
         $contents = $this->fakeContent(
             10,

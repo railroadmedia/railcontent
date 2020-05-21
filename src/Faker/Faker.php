@@ -108,7 +108,7 @@ class Faker extends Generator
                 'content_id' => $this->randomNumber(),
                 'key' => $this->word(),
                 'value' => $this->word(),
-                'position' => $this->randomNumber(),
+                'position' => $this->randomNumber(2),
                 'created_on' =>Carbon::now(),
             ],
             $override
@@ -122,6 +122,59 @@ class Faker extends Generator
                 'content_id' => $this->randomNumber(),
                 'user_id' => $this->randomNumber(),
                 'created_on' =>Carbon::now(),
+            ],
+            $override
+        );
+    }
+
+    public function contentInstructor(array $override = [])
+    {
+        return array_merge(
+            [
+                'content_id' => $this->randomNumber(),
+                'instructor_id' => $this->randomNumber(),
+                'position' => $this->randomNumber(),
+            ],
+            $override
+        );
+    }
+
+    public function userContentProgress(array $override = [])
+    {
+        return array_merge(
+            [
+                'content_id' => $this->randomNumber(),
+                'user_id' => $this->randomNumber(),
+                'state' => 'started',
+                'progress_percent' => $this->randomNumber(2),
+                'higher_key_progress' => null,
+                'updated_on' => Carbon::now()->toDateTimeString()
+            ],
+            $override
+        );
+    }
+
+    public function userPlaylist(array $override = [])
+    {
+        return array_merge(
+            [
+                'brand' => config('railcontent.brand'),
+                'user_id' => $this->randomNumber(),
+                'type' => 'primary-playlist',
+                'created_at' => Carbon::now()->toDateTimeString()
+            ],
+            $override
+        );
+    }
+
+    public function userPlaylistContent(array $override = [])
+    {
+        return array_merge(
+            [
+                'content_id' => $this->randomNumber(),
+                'user_playlist_id' => $this->randomNumber(),
+                'created_at' => Carbon::now()->toDateTimeString(),
+                'updated_at' => null
             ],
             $override
         );

@@ -154,7 +154,7 @@ class AddCoreColumnsToContentTable extends Migration
 
                     $table->string('transcriber_name')
                         ->index()
-                        ->after('total_xp')
+                        ->after('released')
                         ->nullable();
 
                     $table->integer('week')
@@ -242,7 +242,7 @@ class AddCoreColumnsToContentTable extends Migration
                     $table->dropColumn('name');
                     $table->dropColumn('released');
                     $table->dropColumn('slow_bpm');
-                    $table->dropColumn('total_xp');
+                 //   $table->dropColumn('total_xp');
                     $table->dropColumn('transcriber_name');
                     $table->dropColumn('week');
                     $table->dropColumn('avatar_url');

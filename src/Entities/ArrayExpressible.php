@@ -67,8 +67,9 @@ abstract class ArrayExpressible
             $customPosition = $criteria[count($criteria) - 1];
         }
 
+
         for ($i = $index; $i < count($criteria); $i++) {
-            foreach ($contentData as $data) {
+             foreach ($contentData as $data) {
                 if ($data->getKey() == $criteria[$i]) {
                     if ($allValues) {
                         $results[] = $data->getValue();

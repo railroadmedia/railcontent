@@ -21,7 +21,7 @@ class MobileApiEndpointsTest extends RailcontentTestCase
 
         $this->serviceBeingTested = $this->app->make(ContentService::class);
 
-        ResponseService::$oldResponseStructure = true;
+        ResponseService::$oldResponseStructure = false;
 
         config(['railcontent.cataloguesMetadata' => []]);
     }
@@ -53,7 +53,7 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         );
 
         $this->assertNotEquals([], $response->decodeResponseJson('data'));
-        $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['totalResults']);
+        $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['pagination']['total']);
         $this->assertArrayHasKey('filterOptions', $response->decodeResponseJson('meta'));
     }
 
@@ -97,7 +97,7 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         $this->assertNotEquals([], $response->decodeResponseJson('data'));
         $this->assertEquals($limit, $response->decodeResponseJson('meta')['pagination']['count']);
         $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['pagination']['total']);
-        $this->assertArrayHasKey('filterOption', $response->decodeResponseJson('meta'));
+        $this->assertArrayHasKey('filterOptions', $response->decodeResponseJson('meta'));
     }
 
     public function test_get_all_content_filtered()
@@ -117,10 +117,9 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         foreach ($contents as $content) {
 
             $this->fakeUserContentProgress(
-                1,
                 [
-                    'userId' => $user,
-                    'content' => $content,
+                    'user_id' => $user,
+                    'content_id' => $content->getId(),
                     'state' => 'started',
                 ]
             );
@@ -217,10 +216,9 @@ class MobileApiEndpointsTest extends RailcontentTestCase
 
         foreach ($contents as $content) {
             $this->fakeUserContentProgress(
-                1,
                 [
-                    'userId' => $user,
-                    'content' => $content,
+                    'user_id' => $user,
+                    'content_id' => $content->getId(),
                     'state' => 'started',
                 ]
             );
@@ -234,9 +232,9 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         $this->assertNotEquals([], $response->decodeResponseJson('data'));
         $this->assertEquals(10, $response->decodeResponseJson('meta')['pagination']['count']);
         $this->assertEquals($courseNumber, $response->decodeResponseJson('meta')['pagination']['total']);
-        $this->assertArrayHasKey('filterOption', $response->decodeResponseJson('meta'));
-        $this->assertArrayHasKey('difficulty', $response->decodeResponseJson('meta')['filterOption']);
-        $this->assertArrayHasKey('content_type', $response->decodeResponseJson('meta')['filterOption']);
+        $this->assertArrayHasKey('filterOptions', $response->decodeResponseJson('meta'));
+        $this->assertArrayHasKey('difficulty', $response->decodeResponseJson('meta')['filterOptions']);
+        $this->assertArrayHasKey('content_type', $response->decodeResponseJson('meta')['filterOptions']);
     }
 
     public function test_get_in_progress_content_filtered_without_results()
@@ -266,10 +264,9 @@ class MobileApiEndpointsTest extends RailcontentTestCase
 
         foreach ($contents as $content) {
             $this->fakeUserContentProgress(
-                1,
                 [
-                    'userId' => $user,
-                    'content' => $content,
+                    'user_id' => $user,
+                    'content_id' => $content->getId(),
                     'state' => 'started',
                 ]
             );
@@ -312,10 +309,9 @@ class MobileApiEndpointsTest extends RailcontentTestCase
 
         foreach ($contents as $content) {
             $this->fakeUserContentProgress(
-                1,
                 [
-                    'userId' => $user,
-                    'content' => $content,
+                    'user_id' => $user,
+                    'content_id' => $content->getId(),
                     'state' => 'started',
                 ]
             );
@@ -498,7 +494,7 @@ class MobileApiEndpointsTest extends RailcontentTestCase
     {
         $userId = $this->createAndLogInNewUser();
 
-        $myList = $this->fakeUserPlaylist(1, ['userId' => $userId]);
+        $myList = $this->fakeUserPlaylist(['user_id' => $userId]);
 
         $content1 = $this->fakeContent(
             1,
@@ -516,18 +512,16 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         );
 
         $this->fakeUserPlaylistContent(
-            1,
             [
-                'userPlaylist' => $myList[0],
-                'content' => $content1[0],
+                'user_playlist_id' => $myList['id'],
+                'content_id' => $content1[0]->getId(),
             ]
         );
 
         $this->fakeUserPlaylistContent(
-            1,
             [
-                'userPlaylist' => $myList[0],
-                'content' => $content2[0],
+                'user_playlist_id' => $myList['id'],
+                'content_id' => $content2[0]->getId(),
             ]
         );
 
@@ -558,11 +552,10 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         $type = $this->faker->randomElement(['course', 'play-along', 'song']);
 
         $myList = $this->fakeUserPlaylist(
-            1,
-            [
+             [
                 'type' => 'primary-playlist',
                 'brand' => config('railcontent.brand'),
-                'userId' => $userId,
+                'user_id' => $userId,
             ]
         );
 
@@ -592,18 +585,16 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         );
 
         $this->fakeUserPlaylistContent(
-            1,
             [
-                'userPlaylist' => $myList[0],
-                'content' => $content1[0],
+                'user_playlist_id' => $myList['id'],
+                'content_id' => $content1[0]->getId(),
             ]
         );
 
         $this->fakeUserPlaylistContent(
-            1,
             [
-                'userPlaylist' => $myList[0],
-                'content' => $content2[0],
+                'user_playlist_id' => $myList['id'],
+                'content_id' => $content2[0]->getId(),
             ]
         );
 
@@ -647,10 +638,9 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         );
 
         $this->fakeUserContentProgress(
-            1,
             [
-                'userId' => $userId,
-                'content' => $content1[0],
+                'user_id' => $userId,
+                'content_id' => $content1[0]->getId(),
                 'state' => 'completed',
             ]
         );
@@ -682,11 +672,12 @@ class MobileApiEndpointsTest extends RailcontentTestCase
 
     public function test_shows()
     {
+
         $response = $this->call(
             'GET',
             'api/railcontent/shows'
         );
-        $results = $response->decodeResponseJson('data')[0];
+        $results = $response->decodeResponseJson('data');
 
         $this->assertEquals(200, $response->status());
 
@@ -706,19 +697,20 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         ]);
 
         $commentText = $this->faker->paragraph;
-        $comment = $this->fakeComment(1,[
-            'content' => $content[0],
+        $comment = $this->fakeComment([
+            'content_id' => $content[0]->getId(),
             'comment' => '<p>' . $commentText . '</p>',
-            'userId' => $user,
-            'deletedAt' => null
+            'user_id' => $user,
+            'deleted_at' => null
         ]);
 
         $replyText = $this->faker->paragraph;
-        $this->fakeComment(1,[
-            'content' => $content[0],
+        $this->fakeComment([
+            'content_id' => $content[0]->getId(),
             'comment' => '<p>' . $replyText . '</p>',
-            'parent' => $comment[0],
-            'deletedAt' => null
+            'parent_id' => $comment['id'],
+            'user_id' => $user,
+            'deleted_at' => null
         ]);
 
         $response = $this->call(
@@ -730,6 +722,6 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         );
 
         $this->assertEquals(200, $response->status());
-        $this->assertEquals($commentText, $response->decodeResponseJson('data')[0]['attributes']['comment']);
+        $this->assertEquals($commentText, $response->decodeResponseJson('data')['attributes']['comment']);
     }
 }

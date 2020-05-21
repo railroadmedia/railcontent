@@ -182,12 +182,14 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.table_prefix', $defaultConfig['table_prefix']);
         $app['config']->set('railcontent.data_mode', $defaultConfig['data_mode']);
         $app['config']->set('railcontent.brand', $defaultConfig['brand']);
+        $app['config']->set('railcontent.showTypes', $defaultConfig['showTypes']);
         $app['config']->set('railcontent.available_brands', $defaultConfig['available_brands']);
         $app['config']->set('railcontent.available_languages', $defaultConfig['available_languages']);
         $app['config']->set('railcontent.default_language', $defaultConfig['default_language']);
         $app['config']->set('railcontent.field_option_list', $defaultConfig['field_option_list']);
         $app['config']->set('railcontent.commentable_content_types', $defaultConfig['commentable_content_types']);
         $app['config']->set('railcontent.shows', $defaultConfig['shows']);
+        $app['config']->set('railcontent.cataloguesMetadata', $defaultConfig['cataloguesMetadata']);
         $app['config']->set('railcontent.onboardingContentIds', $defaultConfig['onboardingContentIds']);
         $app['config']->set('railcontent.validation', $defaultConfig['validation']);
         $app['config']->set('railcontent.comment_likes_amount_of_users', $defaultConfig['comment_likes_amount_of_users']);
@@ -686,73 +688,30 @@ class RailcontentTestCase extends BaseTestCase
         return $contentHierarchy;
     }
 
-    public function fakeUserContentProgress($nr = 1, $contentData = [])
+    public function fakeUserContentProgress($data = [])
     {
-        $this->populator = new Populator($this->faker, $this->entityManager);
+        $userContentProgress = $this->faker->userContentProgress($data);
 
-        if(!array_key_exists('userId', $contentData)){
-            $user = $this->fakeUser();
-        }
+        $userContentProgressId =
+            $this->databaseManager->table('railcontent_user_content_progress')
+                ->insertGetId($userContentProgress);
 
-        $contentData['user'] =
-            $this->app->make(UserProvider::class)
-                ->getUserById($contentData['userId']??$user['id']) ;
+        $userContentProgress['id'] = $userContentProgressId;
 
-        unset($contentData['userId']);
-
-        if (empty($contentData)) {
-            $contentData = [
-                'content' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'state' => 'completed',
-                'progressPercent' => 100,
-            ];
-        }
-
-        unset($contentData['userId']);
-
-        $this->populator->addEntity(
-            UserContentProgress::class,
-            $nr,
-            $contentData
-
-        );
-
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[UserContentProgress::class];
+        return $userContentProgress;
     }
 
-    public function fakeContentInstructor($nr = 1, $contentData = [])
+    public function fakeContentInstructor($contentData = [])
     {
-        $this->populator = new Populator($this->faker, $this->entityManager);
-        if (!array_key_exists('content', $contentData)) {
-            $content =
-                $this->entityManager->getRepository(Content::class)
-                    ->find(1);
-        } else {
-            $content = $contentData['content'];
-        }
+        $contentInstructor = $this->faker->contentInstructor($contentData);
 
-        if (empty($contentData)) {
-            $contentData = [
-                'content' => $content,
-                'instructor' => $this->entityManager->getRepository(Content::class)
-                    ->find(2),
-            ];
-        }
-        $this->populator->addEntity(
-            ContentInstructor::class,
-            $nr,
-            $contentData
+        $contentInstructorId =
+            $this->databaseManager->table('railcontent_content_instructor')
+                ->insertGetId($contentInstructor);
 
-        );
-        $fakePopulator = $this->populator->execute();
-        for ($i = 0; $i < $nr; $i++) {
-            $content->addInstructor($fakePopulator[ContentInstructor::class][$i]);
-        }
+        $contentInstructor['id'] = $contentInstructorId;
 
-        return $fakePopulator[ContentInstructor::class];
+        return $contentInstructor;
     }
 
     public function fakePermission($contentData = [])
@@ -877,59 +836,30 @@ class RailcontentTestCase extends BaseTestCase
         return $contentLike;
     }
 
-    public function fakeUserPlaylist($nr = 1, $userPlaylist = [])
+    public function fakeUserPlaylist($data = [])
     {
-        $this->populator = new Populator($this->faker, $this->entityManager);
+        $userPlaylist = $this->faker->userPlaylist($data);
 
-        if (empty($userPlaylist)) {
-            $userPlaylist = [
-                'type' => 'primary-playlist',
-                'brand' => config('railcontent.brand'),
-            ];
-        }
+        $userPlaylistId =
+            $this->databaseManager->table('railcontent_user_playlists')
+                ->insertGetId($userPlaylist);
 
-        if(!array_key_exists('userId', $userPlaylist)){
-            $user = $this->fakeUser();
-        }
+        $userPlaylist['id'] = $userPlaylistId;
 
-
-        $userPlaylist['user'] =
-            $this->app->make(UserProvider::class)
-                ->getRailcontentUserById($userPlaylist['userId']??$user['id']) ;
-
-        unset($userPlaylist['userId']);
-
-        $this->populator->addEntity(
-            UserPlaylist::class,
-            $nr,
-            $userPlaylist
-
-        );
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[UserPlaylist::class];
+        return $userPlaylist;
     }
 
-    public function fakeUserPlaylistContent($nr = 1, $userPlaylistContent = [])
+    public function fakeUserPlaylistContent($data = [])
     {
-        $this->populator = new Populator($this->faker, $this->entityManager);
+        $userPlaylistContent = $this->faker->userPlaylistContent($data);
 
-        if (empty($userPlaylistContent)) {
-            $userPlaylistContent = [
-                'content' => $this->fakeContent(),
-                'userPlaylist' => $this->fakeUserPlaylist(),
-            ];
-        }
+        $userPlaylistContentId =
+            $this->databaseManager->table('railcontent_user_playlist_content')
+                ->insertGetId($userPlaylistContent);
 
-        $this->populator->addEntity(
-            UserPlaylistContent::class,
-            $nr,
-            $userPlaylistContent
+        $userPlaylistContent['id'] = $userPlaylistContentId;
 
-        );
-        $fakePopulator = $this->populator->execute();
-
-        return $fakePopulator[UserPlaylistContent::class];
+        return $userPlaylistContent;
     }
 
 
