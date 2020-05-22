@@ -75,8 +75,15 @@ class FullTextSearchRepository extends EntityRepository
                     $getter = 'get' . ucwords($conf[0]);
                     $assocAttribute = 'get' . ucwords($conf[1]);
                     if ($content->$getter()) {
+                        if($content->$getter() instanceof PersistentCollection){
+                            foreach ($content->$getter() as $item){
+                                $values[] =
+                                    $item->$getter()->$assocAttribute();
+                            }
+                        } else{
                         $values[] =
                             $content->$getter()->$getter()->$assocAttribute();
+                        }
                     }
                 }
             }

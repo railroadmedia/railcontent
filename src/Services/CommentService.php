@@ -292,8 +292,6 @@ class CommentService
 
         $results =
             $qb->getQuery()
-                ->setCacheable(true)
-                ->setCacheRegion('pull')
                 ->getResult();
 
         $hydratedResults =  $this->resultsHydrator->hydrate($results, $this->entityManager);

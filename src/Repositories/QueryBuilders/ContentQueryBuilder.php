@@ -66,14 +66,14 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
             );
         }
 
-        if(ContentRepository::$getFutureContentOnly){
+        if (ContentRepository::$getFutureContentOnly) {
             $this->andWhere(
-                            $this->expr()
-                                ->gt(
-                                    config('railcontent.table_prefix') . 'content' . '.publishedOn',
-                                    'CURRENT_TIMESTAMP()'
-                                )
-                        );
+                $this->expr()
+                    ->gt(
+                        config('railcontent.table_prefix') . 'content' . '.publishedOn',
+                        'CURRENT_TIMESTAMP()'
+                    )
+            );
         }
 
         return $this;
@@ -215,10 +215,19 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                         $this->getEntityManager()
                             ->getClassMetadata(Content::class)
                             ->getFieldName($requiredFieldData['name']),
-                        'pf'.$index
+                        'pf' . $index
                     )
-                        ->andWhere('pf'.$index.'.'.$requiredFieldData['name'] . $requiredFieldData['operator'] . ' (:value' . $index . ')')
-                        ->setParameter('value' . $index,  $requiredFieldData['value'] );
+                        ->andWhere(
+                            'pf' .
+                            $index .
+                            '.' .
+                            $requiredFieldData['name'] .
+                            $requiredFieldData['operator'] .
+                            ' (:value' .
+                            $index .
+                            ')'
+                        )
+                        ->setParameter('value' . $index, $requiredFieldData['value']);
                 }
             }
         }
@@ -358,8 +367,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
      */
     public function restrictByUserAccess()
     {
-        $this
-            ->restrictPublishedOnDate()
+        $this->restrictPublishedOnDate()
             ->restrictStatuses()
             ->restrictBrand()
             ->restrictByPermissions();
@@ -422,6 +430,39 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
         $this->join(UserPlaylistContent::class, 'upc', 'WITH', 'railcontent_content.id = upc.content');
         $this->andWhere('upc.userPlaylist IN (:userPlaylistIds)')
             ->setParameter('userPlaylistIds', $userPlaylistIds);
+
+        return $this;
+    }
+
+    public function sortResults($orderBy)
+    {
+        switch ($orderBy) {
+            case 'newest':
+                $this->orderBy('railcontent_content.published_on desc');
+
+                break;
+            case 'oldest':
+                $this->orderBy('railcontent_content.published_on asc');
+
+                break;
+            case 'popularity':
+                $this->leftJoin(
+                    UserContentProgress::class,
+                    'user_progress',
+                    'WITH',
+                    'railcontent_content.id = user_progress.content'
+                );
+                $this->addSelect('COUNT(user_progress) as popularity');
+                $this->groupBy('railcontent_content.id');
+                $this->orderBy('popularity', 'desc');
+
+                break;
+
+            case 'trending':
+                break;
+            case 'relevance':
+                break;
+        }
 
         return $this;
     }

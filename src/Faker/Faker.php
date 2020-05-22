@@ -106,10 +106,9 @@ class Faker extends Generator
         return array_merge(
             [
                 'content_id' => $this->randomNumber(),
-                'key' => $this->word(),
-                'value' => $this->word(),
+                'key' => $this->word,
+                'value' => $this->word,
                 'position' => $this->randomNumber(2),
-                'created_on' =>Carbon::now(),
             ],
             $override
         );

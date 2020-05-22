@@ -223,6 +223,7 @@ class ContentRepository extends EntityRepository
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByPlaylistIds($this->requiredUserPlaylistIds)
                 ->orderBy(implode(', ', $orderByColumns))
+                //->sortResults('popularity')
                 ->restrictByFields($this->requiredFields)
                 ->setCacheable(true)
                 ->setCacheRegion('pull');
