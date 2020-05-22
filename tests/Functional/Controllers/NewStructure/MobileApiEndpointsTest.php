@@ -549,7 +549,7 @@ class MobileApiEndpointsTest extends RailcontentTestCase
     public function test_my_list()
     {
         $userId = $this->createAndLogInNewUser();
-        $type = $this->faker->randomElement(['course', 'play-along', 'song']);
+        $type = $this->faker->randomElement(['live', 'quick-tips', 'challenges']);
 
         $myList = $this->fakeUserPlaylist(
              [
@@ -564,7 +564,7 @@ class MobileApiEndpointsTest extends RailcontentTestCase
             [
                 'type' => $type,
                 'status' => 'published',
-                'publishedOn' => Carbon::now(),
+                'publishedOn' => Carbon::now()->subDays(1),
             ]
         );
         $content2 = $this->fakeContent(
@@ -572,7 +572,7 @@ class MobileApiEndpointsTest extends RailcontentTestCase
             [
                 'type' => $type,
                 'status' => 'published',
-                'publishedOn' => Carbon::now(),
+                'publishedOn' => Carbon::now()->subDays(2),
             ]
         );
         $content3 = $this->fakeContent(
@@ -580,7 +580,7 @@ class MobileApiEndpointsTest extends RailcontentTestCase
             [
                 'type' => $type,
                 'status' => 'published',
-                'publishedOn' => Carbon::now(),
+                'publishedOn' => Carbon::now()->subDays(5),
             ]
         );
 
@@ -603,14 +603,15 @@ class MobileApiEndpointsTest extends RailcontentTestCase
             'api/railcontent/my-list'
         );
 
+
         $this->assertEquals(200, $response->status());
-        $this->assertEquals(2, count($response->decodeResponseJson('data')));
+         $this->assertEquals(2, count($response->decodeResponseJson('data')));
     }
 
     public function test_my_list_completed()
     {
         $userId = $this->createAndLogInNewUser();
-        $type = $this->faker->randomElement(['course', 'play-along', 'song']);
+        $type = $this->faker->randomElement(array_values(config('railcontent.showTypes', [])));
 
         $content1 = $this->fakeContent(
             1,
@@ -696,11 +697,13 @@ class MobileApiEndpointsTest extends RailcontentTestCase
             'publishedOn' => Carbon::now(),
         ]);
 
-        $commentText = $this->faker->paragraph;
+        $commentText = 'Roxana first comment';
+            //$this->faker->paragraph;
         $comment = $this->fakeComment([
             'content_id' => $content[0]->getId(),
             'comment' => '<p>' . $commentText . '</p>',
             'user_id' => $user,
+            'parent_id' => null,
             'deleted_at' => null
         ]);
 
@@ -722,6 +725,7 @@ class MobileApiEndpointsTest extends RailcontentTestCase
         );
 
         $this->assertEquals(200, $response->status());
-        $this->assertEquals($commentText, $response->decodeResponseJson('data')['attributes']['comment']);
+
+        $this->assertEquals($commentText, $response->decodeResponseJson('data')[0]['attributes']['comment']);
     }
 }

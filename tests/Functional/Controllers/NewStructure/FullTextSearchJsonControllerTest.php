@@ -115,7 +115,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'type' => $this->faker->randomElement(config('railcontent.searchable_content_types')),
                 'title' => $this->faker->word,
                 'status' => 'published',
-                'publishedOn' => Carbon::now(),
+                'publishedOn' => Carbon::now()->subDays(10),
             ]
         );
 
@@ -126,7 +126,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'type' => $this->faker->randomElement(config('railcontent.searchable_content_types')),
                 'title' => $this->faker->word,
                 'status' => 'published',
-                'publishedOn' => Carbon::now(),
+                'publishedOn' => Carbon::now()->subDays(2),
             ]
         );
 
@@ -137,7 +137,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'type' => $this->faker->randomElement(config('railcontent.searchable_content_types')),
                 'title' => $this->faker->word,
                 'status' => 'published',
-                'publishedOn' => Carbon::now(),
+                'publishedOn' => Carbon::now()->subDays(1),
             ]
         );
 

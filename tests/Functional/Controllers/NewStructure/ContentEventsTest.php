@@ -97,7 +97,7 @@ class ContentEventsTest extends RailcontentTestCase
         Event::assertDispatched(
             ContentUpdated::class,
             function ($event) use ($content) {
-                return $event->content == $content[0];
+                return $event->contentId == $content[0]->getId();
             }
         );
     }
@@ -134,7 +134,7 @@ class ContentEventsTest extends RailcontentTestCase
         Event::assertDispatched(
             ContentDatumCreated::class,
             function ($event) use ($content) {
-                return $event->content == $content[0];
+                return $event->contentId == $content[0]->getId();
             }
         );
     }
@@ -146,15 +146,14 @@ class ContentEventsTest extends RailcontentTestCase
         $content = $this->fakeContent();
 
         $datum = $this->fakeContentData(
-            1,
             [
-                'content' => $content[0],
+                'content_id' => $content[0]->getId(),
             ]
         );
 
         $this->call(
             'PATCH',
-            'railcontent/content/datum/' . $datum[0]->getId(),
+            'railcontent/content/datum/' . $datum['id'],
             [
                 'data' => [
                     'type' => 'contentData',
@@ -171,7 +170,7 @@ class ContentEventsTest extends RailcontentTestCase
         Event::assertDispatched(
             ContentDatumUpdated::class,
             function ($event) use ($content) {
-                return $event->content == $content[0];
+                return $event->contentId == $content[0]->getId();
             }
         );
     }
@@ -183,19 +182,18 @@ class ContentEventsTest extends RailcontentTestCase
         $content = $this->fakeContent();
 
         $datum = $this->fakeContentData(
-            1,
             [
-                'content' => $content[0],
+                'content_id' => $content[0]->getId(),
             ]
         );
 
-        $this->call('DELETE', 'railcontent/content/datum/' . $datum[0]->getId());
+        $this->call('DELETE', 'railcontent/content/datum/' . $datum['id']);
 
         //check that the ContentDatumDeleted event was dispatched with the correct content id
         Event::assertDispatched(
             ContentDatumDeleted::class,
             function ($event) use ($content) {
-                return $event->content == $content[0];
+                return $event->contentId == $content[0]->getId();
             }
         );
     }

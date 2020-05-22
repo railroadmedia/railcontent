@@ -772,7 +772,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $contentDataId =
             $this->databaseManager->table('railcontent_content_data')
-                ->insertGetId($data);
+                ->insertGetId($contentData);
 
         $contentData['id'] = $contentDataId;
 
