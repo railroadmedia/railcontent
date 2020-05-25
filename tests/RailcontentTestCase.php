@@ -12,6 +12,7 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
@@ -67,6 +68,17 @@ class RailcontentTestCase extends BaseTestCase
         $this->authManager = $this->app->make(AuthManager::class);
         $this->router = $this->app->make(Router::class);
 
+        // create temp users table
+        if (!$this->databaseManager->connection()->getSchemaBuilder()->hasTable('users')) {
+            $this->databaseManager->connection()->getSchemaBuilder()->create(
+                'users',
+                function (Blueprint $table) {
+                    $table->increments('id');
+                    $table->string('email');
+                }
+            );
+        }
+
         RepositoryBase::$connectionMask = null;
 
         Carbon::setTestNow(Carbon::now());
@@ -83,7 +95,7 @@ class RailcontentTestCase extends BaseTestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Foundation\Application $app
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -195,23 +207,13 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.decorators', $defaultConfig['decorators']);
         $app['config']->set('railcontent.use_collections', $defaultConfig['use_collections']);
         $app['config']->set('railcontent.content_hierarchy_max_depth', $defaultConfig['content_hierarchy_max_depth']);
-        $app['config']->set('railcontent.content_hierarchy_decorator_allowed_types', $defaultConfig['content_hierarchy_decorator_allowed_types']);
+        $app['config']->set(
+            'railcontent.content_hierarchy_decorator_allowed_types',
+            $defaultConfig['content_hierarchy_decorator_allowed_types']
+        );
 
         // vimeo
         $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);
-
-        if (!$app['db']->connection()->getSchemaBuilder()->hasTable('users')) {
-
-            $app['db']->connection()->getSchemaBuilder()->create(
-                'users',
-                function (Blueprint $table) {
-                    $table->increments('id');
-                    $table->string('email');
-                }
-            );
-
-        }
-
 
         // register provider
         $app->register(RailcontentServiceProvider::class);
@@ -221,7 +223,7 @@ class RailcontentTestCase extends BaseTestCase
     /**
      * We don't want to use mockery so this is a reimplementation of the mockery version.
      *
-     * @param  array|string $events
+     * @param array|string $events
      * @return $this
      *
      * @throws Exception
