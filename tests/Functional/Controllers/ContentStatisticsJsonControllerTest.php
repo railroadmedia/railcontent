@@ -17,7 +17,7 @@ use Railroad\Railcontent\Services\ContentStatisticsService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
-class ContentJsonControllerTest extends RailcontentTestCase
+class ContentStatisticsJsonControllerTest extends RailcontentTestCase
 {
     /**
      * @var CommentRepository
