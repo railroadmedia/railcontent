@@ -178,4 +178,25 @@ class Faker extends Generator
             $override
         );
     }
+
+    public function contentStatistics(array $override = [])
+    {
+        return array_merge(
+            [
+                'content_id' => $this->randomNumber(),
+                'content_type' => $this->word(),
+                'content_published_on' => Carbon::now()->toDateTimeString(),
+                'completes' => $this->randomNumber(),
+                'starts' => $this->randomNumber(),
+                'comments' => $this->randomNumber(),
+                'likes' => $this->randomNumber(),
+                'added_to_list' => $this->randomNumber(),
+                'start_interval' => Carbon::now()->toDateTimeString(),
+                'end_interval' => Carbon::now()->toDateTimeString(),
+                'week_of_year' => $this->randomNumber(),
+                'created_on' => Carbon::now()->toDateTimeString(),
+            ],
+            $override
+        );
+    }
 }

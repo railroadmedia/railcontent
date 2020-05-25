@@ -83,6 +83,21 @@ class RouteRegistrar
                     ContentJsonController::class . '@show'
                 )
                     ->name('content.show');
+                
+                $this->router->get(
+                    '/content-statistics/individual/{id}',
+                    \Railroad\Railcontent\Controllers\ContentStatisticsJsonController::class . '@individualContentStatistics'
+                )->name('content.statistics.individual');
+
+                $this->router->get(
+                    '/content-statistics',
+                    \Railroad\Railcontent\Controllers\ContentStatisticsJsonController::class . '@contentStatistics'
+                )->name('content.statistics.all');
+
+                $this->router->get(
+                    '/content-statistics/field-filters-values',
+                    \Railroad\Railcontent\Controllers\ContentStatisticsJsonController::class . '@fieldFiltersValues'
+                )->name('content.statistics.all');
             }
         );
     }

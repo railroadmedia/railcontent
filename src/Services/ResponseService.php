@@ -27,6 +27,7 @@ use Railroad\Railcontent\Transformers\ContentLikeTransformer;
 use Railroad\Railcontent\Transformers\ContentOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentPermissionOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentPermissionTransformer;
+use Railroad\Railcontent\Transformers\ContentStatsTransformer;
 use Railroad\Railcontent\Transformers\DecoratedContentTransformer;
 use Railroad\Railcontent\Transformers\PermissionOldStructureTransformer;
 use Railroad\Railcontent\Transformers\PermissionTransformer;
@@ -372,4 +373,23 @@ class ResponseService extends FractalResponseService
             $queryBuilder
         );
     }
+
+    /**
+     * @param $entityOrEntities
+     * @param QueryBuilder|null $queryBuilder
+     * @param array $includes
+     * @return Fractal
+     */
+    public static function contentStats($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
+    {
+        return self::create(
+            $entityOrEntities,
+            'contentStats',
+            new ContentStatsTransformer(),
+            new JsonApiSerializer(),
+            $queryBuilder
+        )
+            ->parseIncludes($includes);
+    }
+
 }

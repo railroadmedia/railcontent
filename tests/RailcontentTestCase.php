@@ -199,6 +199,10 @@ class RailcontentTestCase extends BaseTestCase
             'railcontent.allowed_types_for_bubble_progress',
             $defaultConfig['allowed_types_for_bubble_progress']
         );
+
+        $app['config']->set('railcontent.statistics_content_types', $defaultConfig['statistics_content_types']);
+        $app['config']->set('railcontent.user_ids_excluded_from_stats', $defaultConfig['user_ids_excluded_from_stats']);
+
         $app['config']->set('railcontent.all_routes_middleware', $defaultConfig['all_routes_middleware']);
         $app['config']->set('railcontent.user_routes_middleware', $defaultConfig['user_routes_middleware']);
         $app['config']->set(
@@ -862,5 +866,16 @@ class RailcontentTestCase extends BaseTestCase
         return $userPlaylistContent;
     }
 
+    public function fakeContentStatistics($data = [])
+    {
+        $contentStatistics = $this->faker->contentStatistics($data);
 
+        $contentStatisticsId =
+            $this->databaseManager->table('railcontent_content_statistics')
+                ->insertGetId($contentStatistics);
+
+        $contentStatistics['id'] = $contentStatisticsId;
+
+        return $contentStatistics;
+    }
 }

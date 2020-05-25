@@ -21,6 +21,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Railroad\Doctrine\TimestampableListener;
 use Railroad\Railcontent\Commands\CalculateTotalXP;
+use Railroad\Railcontent\Commands\ComputePastStats;
+use Railroad\Railcontent\Commands\ComputeWeeklyStats;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
@@ -100,7 +102,9 @@ class RailcontentServiceProvider extends ServiceProvider
                 MigrateUserPlaylist::class,
                 DeleteContentAndHierarchiesForUserPlaylists::class,
                 CalculateTotalXP::class,
-                MigrateContentToNewStructure::class
+                MigrateContentToNewStructure::class,
+                ComputePastStats::class,
+                ComputeWeeklyStats::class
             ]
         );
     }
