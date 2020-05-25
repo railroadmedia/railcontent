@@ -13,24 +13,25 @@ class CreateSearchIndexes extends Migration
      */
     public function up()
     {
-        if (config()->get('database.default') != 'testbench') {
-            Schema::connection(ConfigService::$databaseConnectionName)->create(
-                ConfigService::$tableSearchIndexes,
-                function ($table) {
-                    /**
-                     * @var $table \Illuminate\Database\Schema\Blueprint
-                     */
-                    $table->engine = 'InnoDB';
-                    $table->integer('content_id')->primary();
-                    $table->text('high_value');
-                    $table->text('medium_value');
-                    $table->text('low_value');
-                    $table->string('brand', 64)->index();
-                    $table->string('content_type', 128)->index();
-                    $table->dateTime('content_published_on')->index();
-                    $table->timestamps();
-                }
-            );
+        Schema::connection(ConfigService::$databaseConnectionName)->create(
+            ConfigService::$tableSearchIndexes,
+            function ($table) {
+                /**
+                 * @var $table \Illuminate\Database\Schema\Blueprint
+                 */
+                $table->engine = 'InnoDB';
+                $table->integer('content_id')->primary();
+                $table->text('high_value');
+                $table->text('medium_value');
+                $table->text('low_value');
+                $table->string('brand', 64)->index();
+                $table->string('content_type', 128)->index();
+                $table->dateTime('content_published_on')->index();
+                $table->timestamps();
+            }
+        );
+
+        if (!app()->runningUnitTests()) {
             Schema::connection(ConfigService::$databaseConnectionName)->getConnection()->getPdo()->exec(
                 'ALTER TABLE ' .
                 ConfigService::$tableSearchIndexes .

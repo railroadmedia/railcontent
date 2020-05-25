@@ -29,7 +29,8 @@ class ChangeCommentsCollation extends Migration
                                     ->toDateTimeString()
                             ]
                         );
-                    if (config()->get('database.default') != 'testbench') {
+
+                    if (!app()->runningUnitTests()) {
                         DB::connection(ConfigService::$databaseConnectionName)
                             ->statement(
                                 'ALTER TABLE ' .
