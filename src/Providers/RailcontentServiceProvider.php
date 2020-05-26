@@ -9,6 +9,7 @@ use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Cache\RedisCache;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
+use Doctrine\DBAL\Types\Type;
 use Doctrine\ORM\Cache\DefaultCacheFactory;
 use Doctrine\ORM\Cache\RegionsConfiguration;
 use Doctrine\ORM\Configuration;
@@ -20,6 +21,10 @@ use Gedmo\Sortable\SortableListener;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Railroad\Doctrine\TimestampableListener;
+use Railroad\Doctrine\Types\Carbon\CarbonDateTimeTimezoneType;
+use Railroad\Doctrine\Types\Carbon\CarbonDateTimeType;
+use Railroad\Doctrine\Types\Carbon\CarbonDateType;
+use Railroad\Doctrine\Types\Carbon\CarbonTimeType;
 use Railroad\Railcontent\Commands\CalculateTotalXP;
 use Railroad\Railcontent\Commands\ComputePastStats;
 use Railroad\Railcontent\Commands\ComputeWeeklyStats;
@@ -118,6 +123,11 @@ class RailcontentServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        Type::overrideType('datetime', CarbonDateTimeType::class);
+        Type::overrideType('datetimetz', CarbonDateTimeTimezoneType::class);
+        Type::overrideType('date', CarbonDateType::class);
+        Type::overrideType('time', CarbonTimeType::class);
+
         // set proxy dir to temp folder on server
         if (app()->runningUnitTests()) {
             $proxyDir = sys_get_temp_dir();

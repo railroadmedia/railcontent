@@ -44,7 +44,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $contentData[$content->getId()] = [
                 'content_id' => $content->getId(),
                 'content_type' => $content->getType(),
-                'content_published_on' => $content->getPublishedOn()->toDateTimeString(),
+                'content_published_on' => $content->getPublishedOn(),
                 'content_brand' => $content->getBrand(),
                 'content_title' => $content->getTitle(),
             ];
@@ -130,17 +130,17 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
             // assert stats value
             $this->assertEquals(
-                $expectedStats[$stats['attributes']['content_id']],
-                $stats['attributes']
+                $expectedStats[$stats['content_id']],
+                $stats
             );
 
             // assert sorting
             if ($lastSortedByValue >= 0) {
                 // each stats result, starting with second group, should have total_completes less or equal to previous group
-                $this->assertTrue($lastSortedByValue >= $stats['attributes']['total_completes']);
+                $this->assertTrue($lastSortedByValue >= $stats['total_completes']);
             }
 
-            $lastSortedByValue = $stats['attributes']['total_completes'];
+            $lastSortedByValue = $stats['total_completes'];
         }
     }
 

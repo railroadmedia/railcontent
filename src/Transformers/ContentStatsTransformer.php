@@ -13,11 +13,14 @@ class ContentStatsTransformer extends TransformerAbstract
      * @var array
      */
     protected $defaultIncludes = [
-        'content',
+       // 'content',
     ];
 
-    public function transform(ContentStatistics $contentStatistics)
+    public function transform( $contentStatistics)
     {
+        $contentStatistics['content_published_on'] = $contentStatistics['content_published_on']->toDateTimeString();
+        return $contentStatistics;
+
         return [
             'id' => $contentStatistics->getId(),
             'content_id' => $contentStatistics->getContent()

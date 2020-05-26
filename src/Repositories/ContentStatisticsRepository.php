@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Illuminate\Database\DatabaseManager;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentStatistics;
@@ -17,6 +18,11 @@ class ContentStatisticsRepository extends EntityRepository
     private $contentRepository;
 
     /**
+     * @var DatabaseManager
+     */
+    private $databaseManager;
+
+    /**
      * CommentRepository constructor.
      *
      * @param RailcontentEntityManager $entityManager
@@ -25,7 +31,8 @@ class ContentStatisticsRepository extends EntityRepository
     {
         parent::__construct($entityManager, $entityManager->getClassMetadata(ContentStatistics::class));
 
-        $this->contentRepository =  $entityManager->getRepository(Content::class);
+        $this->contentRepository = $entityManager->getRepository(Content::class);
+        $this->databaseManager = app()->make(DatabaseManager::class);
     }
 
     /**
@@ -93,12 +100,13 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix'). 'content_statistics',
+            config('railcontent.table_prefix') . 'content_statistics',
             $start->toDateTimeString(),
             $end->toDateTimeString(),
             $weekOfYear,
-            Carbon::now()->toDateTimeString(),
-            config('railcontent.table_prefix'). 'content',
+            Carbon::now()
+                ->toDateTimeString(),
+            config('railcontent.table_prefix') . 'content',
             implode("', '", config('railcontent.statistics_content_types')),
             $end->toDateTimeString()
         );
@@ -179,9 +187,9 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix'). 'content_statistics',
-            config('railcontent.table_prefix'). 'content',
-            config('railcontent.table_prefix'). 'user_content_progress',
+            config('railcontent.table_prefix') . 'content_statistics',
+            config('railcontent.table_prefix') . 'content',
+            config('railcontent.table_prefix') . 'user_content_progress',
             $start->toDateTimeString(),
             $end->toDateTimeString(),
             implode(", ", config('railcontent.user_ids_excluded_from_stats')),
@@ -223,9 +231,9 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix'). 'content_statistics',
-            config('railcontent.table_prefix'). 'content',
-            config('railcontent.table_prefix'). 'comments',
+            config('railcontent.table_prefix') . 'content_statistics',
+            config('railcontent.table_prefix') . 'content',
+            config('railcontent.table_prefix') . 'comments',
             $start->toDateTimeString(),
             $end->toDateTimeString(),
             implode(", ", config('railcontent.user_ids_excluded_from_stats')),
@@ -266,9 +274,9 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix'). 'content_statistics',
-            config('railcontent.table_prefix'). 'content',
-            config('railcontent.table_prefix'). 'content_likes',
+            config('railcontent.table_prefix') . 'content_statistics',
+            config('railcontent.table_prefix') . 'content',
+            config('railcontent.table_prefix') . 'content_likes',
             $start->toDateTimeString(),
             $end->toDateTimeString(),
             implode(", ", config('railcontent.user_ids_excluded_from_stats')),
@@ -310,10 +318,10 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix'). 'content_statistics',
-            config('railcontent.table_prefix'). 'content',
-            config('railcontent.table_prefix'). 'content_hierarchy',
-            config('railcontent.table_prefix'). 'content',
+            config('railcontent.table_prefix') . 'content_statistics',
+            config('railcontent.table_prefix') . 'content',
+            config('railcontent.table_prefix') . 'content_hierarchy',
+            config('railcontent.table_prefix') . 'content',
             $start->toDateTimeString(),
             $end->toDateTimeString(),
             implode(", ", config('railcontent.user_ids_excluded_from_stats')),
@@ -364,11 +372,11 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix'). 'content_statistics',
-            config('railcontent.table_prefix'). 'content',
-            config('railcontent.table_prefix'). 'content_hierarchy',
-            config('railcontent.table_prefix'). 'content',
-            config('railcontent.table_prefix'). 'comments',
+            config('railcontent.table_prefix') . 'content_statistics',
+            config('railcontent.table_prefix') . 'content',
+            config('railcontent.table_prefix') . 'content_hierarchy',
+            config('railcontent.table_prefix') . 'content',
+            config('railcontent.table_prefix') . 'comments',
             $start->toDateTimeString(),
             $end->toDateTimeString(),
             implode(", ", config('railcontent.user_ids_excluded_from_stats')),
@@ -420,11 +428,11 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix'). 'content_statistics',
-            config('railcontent.table_prefix'). 'content',
-            config('railcontent.table_prefix'). 'content_hierarchy',
-            config('railcontent.table_prefix'). 'content',
-            config('railcontent.table_prefix'). 'content_likes',
+            config('railcontent.table_prefix') . 'content_statistics',
+            config('railcontent.table_prefix') . 'content',
+            config('railcontent.table_prefix') . 'content_hierarchy',
+            config('railcontent.table_prefix') . 'content',
+            config('railcontent.table_prefix') . 'content_likes',
             $start->toDateTimeString(),
             $end->toDateTimeString(),
             implode(", ", config('railcontent.user_ids_excluded_from_stats')),
@@ -451,7 +459,7 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix'). 'content_statistics',
+            config('railcontent.table_prefix') . 'content_statistics',
             $end->toDateTimeString(),
             $start->toDateTimeString(),
             $end->toDateTimeString()
@@ -462,15 +470,31 @@ EOT;
 
     public function cleanIntervalContentStatistics(Carbon $start, Carbon $end)
     {
-        $this->query()
-            ->where(config('railcontent.table_prefix'). 'content_statistics' . '.start_interval', $start)
-            ->where(config('railcontent.table_prefix'). 'content_statistics'. '.end_interval', $end)
-            ->where(config('railcontent.table_prefix'). 'content_statistics'. '.completes', 0)
-            ->where(config('railcontent.table_prefix'). 'content_statistics' . '.starts', 0)
-            ->where(config('railcontent.table_prefix'). 'content_statistics'. '.comments', 0)
-            ->where(config('railcontent.table_prefix'). 'content_statistics'. '.likes', 0)
-            ->where(config('railcontent.table_prefix'). 'content_statistics' . '.added_to_list', 0)
-            ->delete();
+        $stats =
+            $this->createQueryBuilder('st')
+                ->where('st.startInterval = :startInterval')
+                ->andWhere('st.endInterval = :endInterval')
+                ->andWhere('st.completes = :completes')
+                ->andWhere('st.starts = :starts')
+                ->andWhere('st.comments = :comments')
+                ->andWhere('st.likes = :likes')
+                ->andWhere('st.addedToList = :addedToList')
+                ->setParameter('startInterval', $start)
+                ->setParameter('endInterval', $end)
+                ->setParameter('completes', 0)
+                ->setParameter('starts', 0)
+                ->setParameter('comments', 0)
+                ->setParameter('likes', 0)
+                ->setParameter('addedToList', 0)
+                ->getQuery()
+                ->getResult();
+
+        foreach ($stats as $stat) {
+            $this->getEntityManager()
+                ->remove($stat);
+            $this->getEntityManager()
+                ->flush();
+        }
     }
 
     /**
@@ -637,56 +661,147 @@ EOT;
         $topicFields
     ) {
 
-        $qb = $this->createQueryBuilder('cs');
+        $qb =
+            $this->createQueryBuilder('cs')
+                ->select(
+                    [
+                        'c.id as content_id',
+                        'cs.contentType as content_type',
+                        'cs.contentPublishedOn as content_published_on',
+                        'c.brand as content_brand',
+                        'c.title as content_title',
+                        'SUM(cs.completes) as total_completes',
+                        'SUM(cs.starts) as total_starts',
+                        'SUM(cs.comments) as total_comments',
+                        'SUM(cs.likes) as total_likes',
+                        'SUM(cs.addedToList) as total_added_to_list',
+                    ]
+                )
+                ->join('cs.content', 'c');
 
-        $results =  $qb->getQuery()
-            ->getResult();
+        if ($smallDate) {
+            $qb->andWhere('cs.startInterval >= :smallDate')
+                ->andWhere('cs.endInterval >= :smallDate')
+                ->setParameter('smallDate', $smallDate);
+        }
+
+        if ($bigDate) {
+            $qb->andWhere('cs.startInterval <= :bigDate')
+                ->andWhere('cs.endInterval <= :bigDate')
+                ->setParameter('bigDate', $bigDate);
+        }
+
+        if ($publishedOnSmallDate) {
+            $qb->andWhere('cs.contentPublishedOn >= :publishedSmallDate')
+                ->setParameter('publishedSmallDate', $publishedOnSmallDate);
+        }
+
+        if ($publishedOnBigDate) {
+            $qb->andWhere('cs.contentPublishedOn <= :publishedOnBigDate')
+                ->setParameter('publishedOnBigDate', $publishedOnBigDate);
+        }
+
+        if ($brand) {
+            $qb->andWhere('c.brand = :brand')
+                ->setParameter('brand', $brand);
+        }
+
+        if (!empty($contentTypes)) {
+            $qb->andWhere('cs.contentType IN (:contentTypes)')
+                ->setParameter('contentTypes', $contentTypes);
+        }
+
+        if ($statsEpoch) {
+            $qb->andWhere('cs.statsEpoch <= :statsEpoch')
+                ->setParameter('statsEpoch', $statsEpoch);
+        }
+
+        if (!empty($difficultyFields)) {
+            $qb->andWhere('c.difficulty IN (:difficulty)')
+                ->setParameter('difficulty', $difficultyFields);
+        }
+
+        if (!empty($styleFields)) {
+            $qb->andWhere('c.style IN (:styles)')
+                ->setParameter('styles', $styleFields);
+        }
+
+        if (!empty($tagFields)) {
+            $qb->join('c.tag', 'tag')
+                ->andWhere('tag.tag IN (:tags)')
+                ->setParameter('tags', $tagFields);
+        }
+
+        if(!empty($topicFields)){
+            $qb->join('c.topic', 'topic')
+                ->andWhere('topic.topic IN (:topics)')
+                ->setParameter('topics', $topicFields);
+        }
+
+        if( !empty($instructorFields)){
+           // $qb->join('c.instructor', 'ci');
+              //  ->join('ci.')
+               // ->andWhere('ci.instructor IN (:topics)')
+              //  ->setParameter('topics', $topicFields);
+        }
+
+
+        $qb->groupBy('cs.content');
+
+        if ($sortBy && $sortDir) {
+            $qb->orderBy($sortBy , $sortDir);
+        }
+
+        $results =
+            $qb->getQuery()
+                ->getResult();
 
         return $results;
 
-        $query = $this->query()
-            ->select(
-                [
-                    ConfigService::$tableContentStatistics . '.content_id',
-                    ConfigService::$tableContentStatistics . '.content_type',
-                    ConfigService::$tableContentStatistics . '.content_published_on',
-                    ConfigService::$tableContent . '.brand as content_brand',
-                    ConfigService::$tableContentFields . '.value as content_title',
-                    $this->databaseManager->raw(
-                        'SUM(' . ConfigService::$tableContentStatistics . '.completes) as total_completes'
-                    ),
-                    $this->databaseManager->raw(
-                        'SUM(' . ConfigService::$tableContentStatistics . '.starts) as total_starts'
-                    ),
-                    $this->databaseManager->raw(
-                        'SUM(' . ConfigService::$tableContentStatistics . '.comments) as total_comments'
-                    ),
-                    $this->databaseManager->raw(
-                        'SUM(' . ConfigService::$tableContentStatistics . '.likes) as total_likes'
-                    ),
-                    $this->databaseManager->raw(
-                        'SUM(' . ConfigService::$tableContentStatistics . '.added_to_list) as total_added_to_list'
-                    ),
-                ]
-            )
-            ->leftJoin(
-                ConfigService::$tableContentFields,
-                function (JoinClause $joinClause) {
-                    $joinClause->on(
+        $query =
+            $this->query()
+                ->select(
+                    [
                         ConfigService::$tableContentStatistics . '.content_id',
-                        '=',
-                        ConfigService::$tableContentFields . '.content_id'
-                    )
-                        ->where(ConfigService::$tableContentFields . '.key', 'title');
-                }
-            )
-            ->join(
-                ConfigService::$tableContent,
-                ConfigService::$tableContent . '.id',
-                '=',
-                ConfigService::$tableContentStatistics . '.content_id'
-            )
-            ->groupBy(ConfigService::$tableContentStatistics . '.content_id');
+                        ConfigService::$tableContentStatistics . '.content_type',
+                        ConfigService::$tableContentStatistics . '.content_published_on',
+                        ConfigService::$tableContent . '.brand as content_brand',
+                        ConfigService::$tableContentFields . '.value as content_title',
+                        $this->databaseManager->raw(
+                            'SUM(' . ConfigService::$tableContentStatistics . '.completes) as total_completes'
+                        ),
+                        $this->databaseManager->raw(
+                            'SUM(' . ConfigService::$tableContentStatistics . '.starts) as total_starts'
+                        ),
+                        $this->databaseManager->raw(
+                            'SUM(' . ConfigService::$tableContentStatistics . '.comments) as total_comments'
+                        ),
+                        $this->databaseManager->raw(
+                            'SUM(' . ConfigService::$tableContentStatistics . '.likes) as total_likes'
+                        ),
+                        $this->databaseManager->raw(
+                            'SUM(' . ConfigService::$tableContentStatistics . '.added_to_list) as total_added_to_list'
+                        ),
+                    ]
+                )
+                ->leftJoin(
+                    ConfigService::$tableContentFields,
+                    function (JoinClause $joinClause) {
+                        $joinClause->on(
+                            ConfigService::$tableContentStatistics . '.content_id',
+                            '=',
+                            ConfigService::$tableContentFields . '.content_id'
+                        )
+                            ->where(ConfigService::$tableContentFields . '.key', 'title');
+                    }
+                )
+                ->join(
+                    ConfigService::$tableContent,
+                    ConfigService::$tableContent . '.id',
+                    '=',
+                    ConfigService::$tableContentStatistics . '.content_id'
+                )
+                ->groupBy(ConfigService::$tableContentStatistics . '.content_id');
 
         if ($smallDate) {
             $query->where(ConfigService::$tableContentStatistics . '.start_interval', '>=', $smallDate)
@@ -699,7 +814,11 @@ EOT;
         }
 
         if ($publishedOnSmallDate) {
-            $query->where(ConfigService::$tableContentStatistics . '.content_published_on', '>=', $publishedOnSmallDate);
+            $query->where(
+                ConfigService::$tableContentStatistics . '.content_published_on',
+                '>=',
+                $publishedOnSmallDate
+            );
         }
 
         if ($publishedOnBigDate) {
@@ -722,53 +841,51 @@ EOT;
             $query->orderByRaw($sortBy . ' ' . $sortDir);
         }
 
-        if (
-            !empty($difficultyFields)
-            || !empty($instructorFields)
-            || !empty($styleFields)
-            || !empty($tagFields)
-            || !empty($topicFields)
-        ) {
+        if (!empty($difficultyFields) ||
+            !empty($instructorFields) ||
+            !empty($styleFields) ||
+            !empty($tagFields) ||
+            !empty($topicFields)) {
             $filters = [];
 
             foreach ($instructorFields ?? [] as $instructorValue) {
                 $filters[] = [
                     'key' => 'instructor',
-                    'value' => $instructorValue
+                    'value' => $instructorValue,
                 ];
             }
 
             foreach ($difficultyFields ?? [] as $difficultyValue) {
                 $filters[] = [
                     'key' => 'difficulty',
-                    'value' => $difficultyValue
+                    'value' => $difficultyValue,
                 ];
             }
 
             foreach ($styleFields ?? [] as $styleValue) {
                 $filters[] = [
                     'key' => 'style',
-                    'value' => $styleValue
+                    'value' => $styleValue,
                 ];
             }
 
             foreach ($tagFields ?? [] as $tagValue) {
                 $filters[] = [
                     'key' => 'tag',
-                    'value' => $tagValue
+                    'value' => $tagValue,
                 ];
             }
 
             foreach ($topicFields ?? [] as $topicValue) {
                 $filters[] = [
                     'key' => 'topic',
-                    'value' => $topicValue
+                    'value' => $topicValue,
                 ];
             }
 
             $query->whereIn(
                 ConfigService::$tableContentStatistics . '.content_id',
-                function($query) use ($filters) {
+                function ($query) use ($filters) {
 
                     $aliases = range('a', 'z');
                     $index = 0;
@@ -795,7 +912,7 @@ EOT;
                                     )
                                     ->whereIn(
                                         DB::raw($alias . '.`value`'),
-                                        function($query) use ($value, $subAlias, $subJoinAlias) {
+                                        function ($query) use ($value, $subAlias, $subJoinAlias) {
                                             $query->selectRaw('CAST(' . $subAlias . '.content_id AS CHAR)')
                                                 ->from(DB::raw(ConfigService::$tableContentFields . ' AS ' . $subAlias))
                                                 ->leftJoin(
@@ -821,7 +938,7 @@ EOT;
                             } else {
                                 $query->select($alias . '.content_id')
                                     ->fromSub(
-                                        function($query) use ($key, $value) {
+                                        function ($query) use ($key, $value) {
                                             $query->select('content_id')
                                                 ->from(ConfigService::$tableContentFields)
                                                 ->where(
@@ -841,62 +958,66 @@ EOT;
                             if ($key == 'instructor') {
                                 $subAlias = 'cfji_' . $alias;
                                 $subJoinAlias = 'cji_' . $alias;
-                                $subQuery = DB::table(ConfigService::$tableContentFields)
-                                    ->select('content_id')
-                                    ->where(
-                                        DB::raw('LOWER(`key`)'),
-                                        $key
-                                    )
-                                    ->whereIn(
-                                        'value',
-                                        function($query) use ($value, $subAlias, $subJoinAlias) {
-                                            $query->selectRaw('CAST(' . $subAlias . '.content_id AS CHAR)')
-                                                ->from(DB::raw(ConfigService::$tableContentFields . ' AS ' . $subAlias))
-                                                ->leftJoin(
-                                                    DB::raw(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
-                                                    DB::raw($subJoinAlias . '.id'),
-                                                    DB::raw($subAlias . '.content_id')
-                                                )
-                                                ->where(
-                                                    DB::raw($subAlias . '.`key`'),
-                                                    'name'
-                                                )
-                                                ->where(
-                                                    DB::raw('LOWER(' . $subAlias . '.`value`)'),
-                                                    'LIKE',
-                                                    '%' . $value . '%'
-                                                )
-                                                ->where(
-                                                    DB::raw($subJoinAlias . '.type'),
-                                                    'instructor'
-                                                );
-                                        }
-                                    );
+                                $subQuery =
+                                    DB::table(ConfigService::$tableContentFields)
+                                        ->select('content_id')
+                                        ->where(
+                                            DB::raw('LOWER(`key`)'),
+                                            $key
+                                        )
+                                        ->whereIn(
+                                            'value',
+                                            function ($query) use ($value, $subAlias, $subJoinAlias) {
+                                                $query->selectRaw('CAST(' . $subAlias . '.content_id AS CHAR)')
+                                                    ->from(
+                                                        DB::raw(ConfigService::$tableContentFields . ' AS ' . $subAlias)
+                                                    )
+                                                    ->leftJoin(
+                                                        DB::raw(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
+                                                        DB::raw($subJoinAlias . '.id'),
+                                                        DB::raw($subAlias . '.content_id')
+                                                    )
+                                                    ->where(
+                                                        DB::raw($subAlias . '.`key`'),
+                                                        'name'
+                                                    )
+                                                    ->where(
+                                                        DB::raw('LOWER(' . $subAlias . '.`value`)'),
+                                                        'LIKE',
+                                                        '%' . $value . '%'
+                                                    )
+                                                    ->where(
+                                                        DB::raw($subJoinAlias . '.type'),
+                                                        'instructor'
+                                                    );
+                                            }
+                                        );
 
                                 $query->joinSub(
                                     $subQuery,
                                     $alias,
-                                    function($join)  use ($alias, $mainAlias) {
+                                    function ($join) use ($alias, $mainAlias) {
                                         $join->on($alias . '.content_id', '=', $mainAlias . '.content_id');
                                     }
                                 );
                             } else {
-                                $subQuery = DB::table(ConfigService::$tableContentFields)
-                                    ->select('content_id')
-                                    ->where(
-                                        DB::raw('LOWER(`key`)'),
-                                        $key
-                                    )
-                                    ->where(
-                                        DB::raw('LOWER(`value`)'),
-                                        'LIKE',
-                                        '%' . $value . '%'
-                                    );
+                                $subQuery =
+                                    DB::table(ConfigService::$tableContentFields)
+                                        ->select('content_id')
+                                        ->where(
+                                            DB::raw('LOWER(`key`)'),
+                                            $key
+                                        )
+                                        ->where(
+                                            DB::raw('LOWER(`value`)'),
+                                            'LIKE',
+                                            '%' . $value . '%'
+                                        );
 
                                 $query->joinSub(
                                     $subQuery,
                                     $alias,
-                                    function($join)  use ($alias, $mainAlias) {
+                                    function ($join) use ($alias, $mainAlias) {
                                         $join->on($alias . '.content_id', '=', $mainAlias . '.content_id');
                                     }
                                 );
@@ -920,14 +1041,14 @@ EOT;
             ->getQuery()
             ->getResult();
 
-//        return $this->query()
-//            ->select([ConfigService::$tableContentFields . '.value'])
-//            ->from(ConfigService::$tableContentFields)
-//            ->where(ConfigService::$tableContentFields . '.key', 'difficulty')
-//            ->whereNotNull(ConfigService::$tableContentFields . '.value')
-//            ->distinct()
-//            ->pluck(ConfigService::$tableContentFields . '.value')
-//            ->toArray();
+        //        return $this->query()
+        //            ->select([ConfigService::$tableContentFields . '.value'])
+        //            ->from(ConfigService::$tableContentFields)
+        //            ->where(ConfigService::$tableContentFields . '.key', 'difficulty')
+        //            ->whereNotNull(ConfigService::$tableContentFields . '.value')
+        //            ->distinct()
+        //            ->pluck(ConfigService::$tableContentFields . '.value')
+        //            ->toArray();
     }
 
     public function getInstructorFieldsValues()

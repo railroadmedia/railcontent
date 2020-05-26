@@ -382,11 +382,12 @@ class ResponseService extends FractalResponseService
      */
     public static function contentStats($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
     {
+
         return self::create(
             $entityOrEntities,
             'contentStats',
             new ContentStatsTransformer(),
-            new JsonApiSerializer(),
+            new DataArraySerializer(),
             $queryBuilder
         )
             ->parseIncludes($includes);

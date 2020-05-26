@@ -202,6 +202,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $app['config']->set('railcontent.statistics_content_types', $defaultConfig['statistics_content_types']);
         $app['config']->set('railcontent.user_ids_excluded_from_stats', $defaultConfig['user_ids_excluded_from_stats']);
+        $app['config']->set('railcontent.topLevelContentTypes', $defaultConfig['topLevelContentTypes']);
 
         $app['config']->set('railcontent.all_routes_middleware', $defaultConfig['all_routes_middleware']);
         $app['config']->set('railcontent.user_routes_middleware', $defaultConfig['user_routes_middleware']);
