@@ -666,4 +666,14 @@ class UserContentProgressService
     {
         return $this->userContentRepository->getUserProgressOnContent($userId, $contentId);
     }
+
+    /**
+     * @param $userId
+     * @param null $date
+     * @return mixed
+     */
+    public function countUserProgress($userId, $date = null)
+    {
+        return $this->userContentRepository->countUserProgress($userId, $date);
+    }
 }

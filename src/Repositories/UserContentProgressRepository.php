@@ -139,10 +139,10 @@ class UserContentProgressRepository extends RepositoryBase
                 ConfigService::$tableContent,
                 function (JoinClause $join) {
                     $join->on(
-                            ConfigService::$tableContent . '.id',
-                            '=',
-                            ConfigService::$tableUserContentProgress . '.content_id'
-                        );
+                        ConfigService::$tableContent . '.id',
+                        '=',
+                        ConfigService::$tableUserContentProgress . '.content_id'
+                    );
                 }
             )
             ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
@@ -174,10 +174,10 @@ class UserContentProgressRepository extends RepositoryBase
                 ConfigService::$tableContent,
                 function (JoinClause $join) use ($types) {
                     $join->on(
-                            ConfigService::$tableContent . '.id',
-                            '=',
-                            ConfigService::$tableUserContentProgress . '.content_id'
-                        )
+                        ConfigService::$tableContent . '.id',
+                        '=',
+                        ConfigService::$tableUserContentProgress . '.content_id'
+                    )
                         ->whereIn('type', $types);
                 }
             )
@@ -214,10 +214,10 @@ class UserContentProgressRepository extends RepositoryBase
                     ConfigService::$tableContent,
                     function (JoinClause $join) use ($type) {
                         $join->on(
-                                ConfigService::$tableContent . '.id',
-                                '=',
-                                ConfigService::$tableUserContentProgress . '.content_id'
-                            )
+                            ConfigService::$tableContent . '.id',
+                            '=',
+                            ConfigService::$tableUserContentProgress . '.content_id'
+                        )
                             ->where(ConfigService::$tableContent . '.type', '=', $type);
                     }
                 )
@@ -248,5 +248,42 @@ class UserContentProgressRepository extends RepositoryBase
             ->where(ConfigService::$tableUserContentProgress . '.content_id', '=', $contentId)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
             ->first();
+    }
+
+    /**
+     * @param $id
+     * @param $type
+     * @param null $state
+     * @param bool $count
+     * @return mixed
+     */
+    public function countUserProgress($userId, $date = null)
+    {
+        $query =
+            $this->query()
+                ->select(
+                    $this->databaseManager->raw(
+                        'COUNT(' . ConfigService::$tableUserContentProgress . '.id) as count'
+                    )
+                )
+                ->join(
+                    ConfigService::$tableContent,
+                    function (JoinClause $join) {
+                        $join->on(
+                            ConfigService::$tableContent . '.id',
+                            '=',
+                            ConfigService::$tableUserContentProgress . '.content_id'
+                        );
+                    }
+                )
+                ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
+                ->where(ConfigService::$tableUserContentProgress . '.user_id', '=', $userId);
+
+        if ($date) {
+            $query->where(ConfigService::$tableUserContentProgress . '.updated_on', '>=', $date);
+        }
+
+        return $query->get()
+            ->first()['count'];
     }
 }
