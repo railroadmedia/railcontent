@@ -3,8 +3,11 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentStatistics;
+use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
+use Railroad\Railcontent\Repositories\ContentStatisticsRepository;
 
 class ContentStatisticsService
 {
@@ -19,6 +22,8 @@ class ContentStatisticsService
      */
     private $contentStatisticsRepository;
 
+    private $contentRepository;
+
     /**
      * ContentStatisticsService constructor.
      *
@@ -29,6 +34,8 @@ class ContentStatisticsService
         $this->entityManager = $entityManager;
 
         $this->contentStatisticsRepository = $this->entityManager->getRepository(ContentStatistics::class);
+
+        $this->contentRepository = $this->entityManager->getRepository(Permission::class);
     }
 
     public function getFieldFiltersValues()
@@ -49,8 +56,8 @@ class ContentStatisticsService
      *
      * @return array
      */
-    public function getIndividualContentStatistics($contentId, ?Carbon $smallDate, ?Carbon $bigDate): array
-    {
+    public function getIndividualContentStatistics($contentId, ?Carbon $smallDate, ?Carbon $bigDate)
+    : array {
         $completedCount = $this->contentStatisticsRepository->getCompletedContentCount(
             $contentId,
             $smallDate,
@@ -149,15 +156,15 @@ class ContentStatisticsService
     {
         $this->contentStatisticsRepository->removeExistingIntervalContentStatistics($start, $end);
         $this->contentStatisticsRepository->initIntervalContentStatistics($start, $end, $weekOfYear);
-       $this->contentStatisticsRepository->computeIntervalCompletesContentStatistics($start, $end);
-        $this->contentStatisticsRepository->computeIntervalStartsContentStatistics($start, $end);
-        $this->contentStatisticsRepository->computeIntervalCommentsContentStatistics($start, $end);
-        $this->contentStatisticsRepository->computeIntervalLikesContentStatistics($start, $end);
-        $this->contentStatisticsRepository->computeIntervalAddToListContentStatistics($start, $end);
-        $this->contentStatisticsRepository->computeTopLevelCommentsContentStatistics($start, $end);
-        $this->contentStatisticsRepository->computeTopLevelLikesContentStatistics($start, $end);
-        $this->contentStatisticsRepository->computeContentStatisticsAge($start, $end);
-        $this->contentStatisticsRepository->cleanIntervalContentStatistics($start, $end);
+//        $this->contentStatisticsRepository->computeIntervalCompletesContentStatistics($start, $end);
+//        $this->contentStatisticsRepository->computeIntervalStartsContentStatistics($start, $end);
+//        $this->contentStatisticsRepository->computeIntervalCommentsContentStatistics($start, $end);
+//        $this->contentStatisticsRepository->computeIntervalLikesContentStatistics($start, $end);
+//        $this->contentStatisticsRepository->computeIntervalAddToListContentStatistics($start, $end);
+//        $this->contentStatisticsRepository->computeTopLevelCommentsContentStatistics($start, $end);
+//        $this->contentStatisticsRepository->computeTopLevelLikesContentStatistics($start, $end);
+//        $this->contentStatisticsRepository->computeContentStatisticsAge($start, $end);
+//        $this->contentStatisticsRepository->cleanIntervalContentStatistics($start, $end);
     }
 
     /**
@@ -166,30 +173,43 @@ class ContentStatisticsService
      *
      * @return array
      */
-    public function getContentStatisticsIntervals(Carbon $smallDate, Carbon $bigDate): array
-    {
-        $intervalStart = $smallDate->copy()->subDays($smallDate->dayOfWeek)->startOfDay();
-        $intervalEnd = $intervalStart->copy()->addDays(6)->endOfDay();
+    public function getContentStatisticsIntervals(Carbon $smallDate, Carbon $bigDate)
+    : array {
+        $intervalStart =
+            $smallDate->copy()
+                ->subDays($smallDate->dayOfWeek)
+                ->startOfDay();
+        $intervalEnd =
+            $intervalStart->copy()
+                ->addDays(6)
+                ->endOfDay();
 
-        $lastDay = $bigDate->copy()->addDays(6 - $bigDate->dayOfWeek)->endOfDay();
+        $lastDay =
+            $bigDate->copy()
+                ->addDays(6 - $bigDate->dayOfWeek)
+                ->endOfDay();
 
         $result = [
             [
                 'start' => $intervalStart,
                 'end' => $intervalEnd,
-                'week' => $intervalEnd->weekOfYear
-            ]
+                'week' => $intervalEnd->weekOfYear,
+            ],
         ];
 
         while ($intervalEnd < $lastDay) {
 
-            $intervalStart = $intervalStart->copy()->addDays(7);
-            $intervalEnd = $intervalEnd->copy()->addDays(7);
+            $intervalStart =
+                $intervalStart->copy()
+                    ->addDays(7);
+            $intervalEnd =
+                $intervalEnd->copy()
+                    ->addDays(7);
 
             $result[] = [
                 'start' => $intervalStart,
                 'end' => $intervalEnd,
-                'week' => $intervalEnd->weekOfYear
+                'week' => $intervalEnd->weekOfYear,
             ];
         }
 

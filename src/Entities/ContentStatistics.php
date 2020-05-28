@@ -26,7 +26,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *         @ORM\Index(name="railcontent_content_statistics_stats_epoch_index", columns={"stats_epoch"})
  *     }
  * )
- * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */
 class ContentStatistics

@@ -15,6 +15,8 @@ use Railroad\Railcontent\Repositories\Traits\RailcontentCustomQueryBuilder;
 
 class ContentStatisticsRepository extends EntityRepository
 {
+    use RailcontentCustomQueryBuilder;
+
     private $contentRepository;
 
     /**
@@ -298,13 +300,12 @@ LEFT JOIN (
         c.`id` AS `content_id`,
         COUNT(csj.`id`) AS `added_to_list`
     FROM `%s` c
-    LEFT JOIN `%s` ch ON ch.`child_id` = c.`id`
-    LEFT JOIN `%s` csj ON csj.`id` = ch.`parent_id`
+    LEFT JOIN `%s` csj ON csj.`content_id` = c.`id`
+    LEFT JOIN `%s` ch ON csj.`user_playlist_id` = ch.`id`
     WHERE
-        ch.`created_on` >= '%s'
-        AND ch.`created_on` <= '%s'
-        AND csj.`type` = 'user-playlist'
-        AND csj.`user_id` NOT IN (%s)
+        csj.`created_at` >= '%s'
+        AND csj.`created_at` <= '%s'
+        AND ch.`user_id` NOT IN (%s)
         AND c.`type` IN ('%s')
         AND c.`created_on` <= '%s'
     GROUP BY c.`id`
@@ -320,8 +321,8 @@ EOT;
             $sql,
             config('railcontent.table_prefix') . 'content_statistics',
             config('railcontent.table_prefix') . 'content',
-            config('railcontent.table_prefix') . 'content_hierarchy',
-            config('railcontent.table_prefix') . 'content',
+             config('railcontent.table_prefix') . 'user_playlist_content',
+            config('railcontent.table_prefix') . 'user_playlists',
             $start->toDateTimeString(),
             $end->toDateTimeString(),
             implode(", ", config('railcontent.user_ids_excluded_from_stats')),
@@ -757,281 +758,6 @@ EOT;
                 ->getResult();
 
         return $results;
-
-        $query =
-            $this->query()
-                ->select(
-                    [
-                        ConfigService::$tableContentStatistics . '.content_id',
-                        ConfigService::$tableContentStatistics . '.content_type',
-                        ConfigService::$tableContentStatistics . '.content_published_on',
-                        ConfigService::$tableContent . '.brand as content_brand',
-                        ConfigService::$tableContentFields . '.value as content_title',
-                        $this->databaseManager->raw(
-                            'SUM(' . ConfigService::$tableContentStatistics . '.completes) as total_completes'
-                        ),
-                        $this->databaseManager->raw(
-                            'SUM(' . ConfigService::$tableContentStatistics . '.starts) as total_starts'
-                        ),
-                        $this->databaseManager->raw(
-                            'SUM(' . ConfigService::$tableContentStatistics . '.comments) as total_comments'
-                        ),
-                        $this->databaseManager->raw(
-                            'SUM(' . ConfigService::$tableContentStatistics . '.likes) as total_likes'
-                        ),
-                        $this->databaseManager->raw(
-                            'SUM(' . ConfigService::$tableContentStatistics . '.added_to_list) as total_added_to_list'
-                        ),
-                    ]
-                )
-                ->leftJoin(
-                    ConfigService::$tableContentFields,
-                    function (JoinClause $joinClause) {
-                        $joinClause->on(
-                            ConfigService::$tableContentStatistics . '.content_id',
-                            '=',
-                            ConfigService::$tableContentFields . '.content_id'
-                        )
-                            ->where(ConfigService::$tableContentFields . '.key', 'title');
-                    }
-                )
-                ->join(
-                    ConfigService::$tableContent,
-                    ConfigService::$tableContent . '.id',
-                    '=',
-                    ConfigService::$tableContentStatistics . '.content_id'
-                )
-                ->groupBy(ConfigService::$tableContentStatistics . '.content_id');
-
-        if ($smallDate) {
-            $query->where(ConfigService::$tableContentStatistics . '.start_interval', '>=', $smallDate)
-                ->where(ConfigService::$tableContentStatistics . '.end_interval', '>=', $smallDate);
-        }
-
-        if ($bigDate) {
-            $query->where(ConfigService::$tableContentStatistics . '.start_interval', '<=', $bigDate)
-                ->where(ConfigService::$tableContentStatistics . '.end_interval', '<=', $bigDate);
-        }
-
-        if ($publishedOnSmallDate) {
-            $query->where(
-                ConfigService::$tableContentStatistics . '.content_published_on',
-                '>=',
-                $publishedOnSmallDate
-            );
-        }
-
-        if ($publishedOnBigDate) {
-            $query->where(ConfigService::$tableContentStatistics . '.content_published_on', '<=', $publishedOnBigDate);
-        }
-
-        if ($brand) {
-            $query->where(ConfigService::$tableContent . '.brand', $brand);
-        }
-
-        if (!empty($contentTypes)) {
-            $query->whereIn(ConfigService::$tableContentStatistics . '.content_type', $contentTypes);
-        }
-
-        if ($statsEpoch) {
-            $query->where(ConfigService::$tableContentStatistics . '.stats_epoch', '<=', $statsEpoch);
-        }
-
-        if ($sortBy && $sortDir) {
-            $query->orderByRaw($sortBy . ' ' . $sortDir);
-        }
-
-        if (!empty($difficultyFields) ||
-            !empty($instructorFields) ||
-            !empty($styleFields) ||
-            !empty($tagFields) ||
-            !empty($topicFields)) {
-            $filters = [];
-
-            foreach ($instructorFields ?? [] as $instructorValue) {
-                $filters[] = [
-                    'key' => 'instructor',
-                    'value' => $instructorValue,
-                ];
-            }
-
-            foreach ($difficultyFields ?? [] as $difficultyValue) {
-                $filters[] = [
-                    'key' => 'difficulty',
-                    'value' => $difficultyValue,
-                ];
-            }
-
-            foreach ($styleFields ?? [] as $styleValue) {
-                $filters[] = [
-                    'key' => 'style',
-                    'value' => $styleValue,
-                ];
-            }
-
-            foreach ($tagFields ?? [] as $tagValue) {
-                $filters[] = [
-                    'key' => 'tag',
-                    'value' => $tagValue,
-                ];
-            }
-
-            foreach ($topicFields ?? [] as $topicValue) {
-                $filters[] = [
-                    'key' => 'topic',
-                    'value' => $topicValue,
-                ];
-            }
-
-            $query->whereIn(
-                ConfigService::$tableContentStatistics . '.content_id',
-                function ($query) use ($filters) {
-
-                    $aliases = range('a', 'z');
-                    $index = 0;
-                    $mainAlias = null;
-
-                    foreach ($filters as $filterData) {
-                        $key = $filterData['key'];
-                        $value = $filterData['value'];
-                        $alias = $aliases[$index];
-
-                        if ($index == 0) {
-                            $mainAlias = $alias;
-
-                            if ($key == 'instructor') {
-
-                                $subAlias = 'cfji_' . $alias;
-                                $subJoinAlias = 'cji_' . $alias;
-
-                                $query->select($alias . '.content_id')
-                                    ->from(ConfigService::$tableContentFields . ' AS ' . $alias)
-                                    ->where(
-                                        DB::raw('LOWER(' . $alias . '.`key`)'),
-                                        $key
-                                    )
-                                    ->whereIn(
-                                        DB::raw($alias . '.`value`'),
-                                        function ($query) use ($value, $subAlias, $subJoinAlias) {
-                                            $query->selectRaw('CAST(' . $subAlias . '.content_id AS CHAR)')
-                                                ->from(DB::raw(ConfigService::$tableContentFields . ' AS ' . $subAlias))
-                                                ->leftJoin(
-                                                    DB::raw(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
-                                                    DB::raw($subJoinAlias . '.id'),
-                                                    DB::raw($subAlias . '.content_id')
-                                                )
-                                                ->where(
-                                                    DB::raw($subAlias . '.`key`'),
-                                                    'name'
-                                                )
-                                                ->where(
-                                                    DB::raw('LOWER(' . $subAlias . '.`value`)'),
-                                                    'LIKE',
-                                                    '%' . $value . '%'
-                                                )
-                                                ->where(
-                                                    DB::raw($subJoinAlias . '.type'),
-                                                    'instructor'
-                                                );
-                                        }
-                                    );
-                            } else {
-                                $query->select($alias . '.content_id')
-                                    ->fromSub(
-                                        function ($query) use ($key, $value) {
-                                            $query->select('content_id')
-                                                ->from(ConfigService::$tableContentFields)
-                                                ->where(
-                                                    DB::raw('LOWER(`key`)'),
-                                                    $key
-                                                )
-                                                ->where(
-                                                    DB::raw('LOWER(`value`)'),
-                                                    'LIKE',
-                                                    '%' . $value . '%'
-                                                );
-                                        },
-                                        $alias
-                                    );
-                            }
-                        } else {
-                            if ($key == 'instructor') {
-                                $subAlias = 'cfji_' . $alias;
-                                $subJoinAlias = 'cji_' . $alias;
-                                $subQuery =
-                                    DB::table(ConfigService::$tableContentFields)
-                                        ->select('content_id')
-                                        ->where(
-                                            DB::raw('LOWER(`key`)'),
-                                            $key
-                                        )
-                                        ->whereIn(
-                                            'value',
-                                            function ($query) use ($value, $subAlias, $subJoinAlias) {
-                                                $query->selectRaw('CAST(' . $subAlias . '.content_id AS CHAR)')
-                                                    ->from(
-                                                        DB::raw(ConfigService::$tableContentFields . ' AS ' . $subAlias)
-                                                    )
-                                                    ->leftJoin(
-                                                        DB::raw(ConfigService::$tableContent . ' AS ' . $subJoinAlias),
-                                                        DB::raw($subJoinAlias . '.id'),
-                                                        DB::raw($subAlias . '.content_id')
-                                                    )
-                                                    ->where(
-                                                        DB::raw($subAlias . '.`key`'),
-                                                        'name'
-                                                    )
-                                                    ->where(
-                                                        DB::raw('LOWER(' . $subAlias . '.`value`)'),
-                                                        'LIKE',
-                                                        '%' . $value . '%'
-                                                    )
-                                                    ->where(
-                                                        DB::raw($subJoinAlias . '.type'),
-                                                        'instructor'
-                                                    );
-                                            }
-                                        );
-
-                                $query->joinSub(
-                                    $subQuery,
-                                    $alias,
-                                    function ($join) use ($alias, $mainAlias) {
-                                        $join->on($alias . '.content_id', '=', $mainAlias . '.content_id');
-                                    }
-                                );
-                            } else {
-                                $subQuery =
-                                    DB::table(ConfigService::$tableContentFields)
-                                        ->select('content_id')
-                                        ->where(
-                                            DB::raw('LOWER(`key`)'),
-                                            $key
-                                        )
-                                        ->where(
-                                            DB::raw('LOWER(`value`)'),
-                                            'LIKE',
-                                            '%' . $value . '%'
-                                        );
-
-                                $query->joinSub(
-                                    $subQuery,
-                                    $alias,
-                                    function ($join) use ($alias, $mainAlias) {
-                                        $join->on($alias . '.content_id', '=', $mainAlias . '.content_id');
-                                    }
-                                );
-                            }
-                        }
-
-                        $index++;
-                    }
-                }
-            );
-        }
-
-        return $query->get()
-            ->toArray();
     }
 
     public function getDifficultyFieldsValues()

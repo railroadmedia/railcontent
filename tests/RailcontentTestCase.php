@@ -655,10 +655,13 @@ class RailcontentTestCase extends BaseTestCase
             $contentData['publishedOn'] = Carbon::now();
         }
 
+        if (!array_key_exists('createdOn', $contentData)) {
+            $contentData['createdOn'] = Carbon::now();
+        }
+
         $contentData['topic'] = new ArrayCollection();
         $contentData['data'] = new ArrayCollection();
         $contentData['tag'] = new ArrayCollection();
-        $contentData['createdOn'] = Carbon::now();
         $contentData['archivedOn'] = null;
 
         if (array_key_exists('userId',$contentData)) {

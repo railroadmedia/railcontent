@@ -47,9 +47,9 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         parent::setUp();
 
         $this->commentRepository = $this->app->make(CommentRepository::class);
-//        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
+        //        $this->contentHierarchyRepository = $this->app->make(ContentHierarchyRepository::class);
         $this->contentLikeRepository = $this->app->make(ContentLikeRepository::class);
-      //  $this->contentRepository = $this->app->make(ContentRepository::class);
+        //  $this->contentRepository = $this->app->make(ContentRepository::class);
         $this->userContentRepository = $this->app->make(UserContentProgressRepository::class);
     }
 
@@ -57,11 +57,19 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
     {
         $this->contentStatisticsService = $this->app->make(ContentStatisticsService::class);
 
-        $expectedFirstIntervalStartDay = Carbon::parse('2020-01-26')->startOfDay(); // Sunday
-        $smallDate = $expectedFirstIntervalStartDay->copy()->addDays(3);
+        $expectedFirstIntervalStartDay =
+            Carbon::parse('2020-01-26')
+                ->startOfDay(); // Sunday
+        $smallDate =
+            $expectedFirstIntervalStartDay->copy()
+                ->addDays(3);
 
-        $expectedLastIntervalDay = Carbon::parse('2020-02-22')->endOfDay(); // Saturday
-        $bigDate = $expectedLastIntervalDay->copy()->subDays(2);
+        $expectedLastIntervalDay =
+            Carbon::parse('2020-02-22')
+                ->endOfDay(); // Saturday
+        $bigDate =
+            $expectedLastIntervalDay->copy()
+                ->subDays(2);
 
         $intervals = $this->contentStatisticsService->getContentStatisticsIntervals($smallDate, $bigDate);
 
@@ -71,15 +79,29 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         $this->assertEquals($expectedFirstIntervalStartDay, $firstInterval['start']);
 
         // assert first interval end day is next Saturday
-        $this->assertEquals($expectedFirstIntervalStartDay->copy()->addDays(6)->endOfDay(), $firstInterval['end']);
+        $this->assertEquals(
+            $expectedFirstIntervalStartDay->copy()
+                ->addDays(6)
+                ->endOfDay(),
+            $firstInterval['end']
+        );
 
         // assert first interval week number
-        $this->assertEquals($expectedFirstIntervalStartDay->copy()->addDays(6)->weekOfYear, $firstInterval['week']);
+        $this->assertEquals(
+            $expectedFirstIntervalStartDay->copy()
+                ->addDays(6)->weekOfYear,
+            $firstInterval['week']
+        );
 
         $lastInterval = $intervals[count($intervals) - 1];
 
         // assert last interval start day is the expected Sunday
-        $this->assertEquals($expectedLastIntervalDay->copy()->subDays(6)->startOfDay(), $lastInterval['start']);
+        $this->assertEquals(
+            $expectedLastIntervalDay->copy()
+                ->subDays(6)
+                ->startOfDay(),
+            $lastInterval['start']
+        );
 
         // assert last interval end day is next Saturday
         $this->assertEquals($expectedLastIntervalDay, $lastInterval['end']);
@@ -101,10 +123,14 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         $this->contentStatisticsService = $this->app->make(ContentStatisticsService::class);
 
         // random date, between 16 and 30 days ago
-        $testSmallDate = Carbon::now()->subDays($this->faker->numberBetween(16, 30));
+        $testSmallDate =
+            Carbon::now()
+                ->subDays($this->faker->numberBetween(16, 30));
 
         // random date, between 5 and 15 days ago
-        $testBigDate = Carbon::now()->subDays($this->faker->numberBetween(5, 15));
+        $testBigDate =
+            Carbon::now()
+                ->subDays($this->faker->numberBetween(5, 15));
 
         $intervals = $this->contentStatisticsService->getContentStatisticsIntervals($testSmallDate, $testBigDate);
 
@@ -114,11 +140,12 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         // add content
         $contentData = [];
 
-        for ($i=0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $content = $this->addContent(
                 $this->faker->randomElement(config('railcontent.statistics_content_types')),
                 ContentService::STATUS_PUBLISHED,
-                Carbon::now()->subDays($this->faker->numberBetween(60, 90))
+                Carbon::now()
+                    ->subDays($this->faker->numberBetween(60, 90))
             );
             $contentData[$content->getId()] = [
                 'content_id' => $content->getId(),
@@ -130,12 +157,14 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         $stats = [];
 
         // add progress complete
-        for ($i=0; $i < 50; $i++) {
+        for ($i = 0; $i < 50; $i++) {
 
             $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // user content progress date may be a little out of the test interval
-            $updatedOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
+            $updatedOn =
+                Carbon::now()
+                    ->subDays($this->faker->numberBetween(2, 35));
 
             $userContentProgress = $this->addUserContentProgress(
                 $contentId,
@@ -143,10 +172,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                 $updatedOn
             );
 
-            if (
-                $updatedOn >= $firstIntervalsDay
-                && $updatedOn <= $lastIntervalsDay
-            ) {
+            if ($updatedOn >= $firstIntervalsDay && $updatedOn <= $lastIntervalsDay) {
                 $interval = $this->getIntervalForDate($updatedOn, $intervals);
 
                 $index = $interval['start']->dayOfYear . '-' . $interval['end']->dayOfYear;
@@ -179,12 +205,14 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         }
 
         // add progress started
-        for ($i=0; $i < 50; $i++) {
+        for ($i = 0; $i < 50; $i++) {
 
             $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // user content progress date may be a little out of the test interval
-            $updatedOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
+            $updatedOn =
+                Carbon::now()
+                    ->subDays($this->faker->numberBetween(2, 35));
 
             $userContentProgress = $this->addUserContentProgress(
                 $contentId,
@@ -192,10 +220,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                 $updatedOn
             );
 
-            if (
-                $updatedOn >= $firstIntervalsDay
-                && $updatedOn <= $lastIntervalsDay
-            ) {
+            if ($updatedOn >= $firstIntervalsDay && $updatedOn <= $lastIntervalsDay) {
                 $interval = $this->getIntervalForDate($updatedOn, $intervals);
 
                 $index = $interval['start']->dayOfYear . '-' . $interval['end']->dayOfYear;
@@ -228,20 +253,19 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         }
 
         // add comments
-        for ($i=0; $i < 50; $i++) {
+        for ($i = 0; $i < 50; $i++) {
 
             // increased chance to add comment to test content id
             $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // comment date may be a little out of the test interval
-            $createdOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
+            $createdOn =
+                Carbon::now()
+                    ->subDays($this->faker->numberBetween(2, 35));
 
             $comment = $this->addContentComment($contentId, $createdOn);
 
-            if (
-                $createdOn >= $firstIntervalsDay
-                && $createdOn <= $lastIntervalsDay
-            ) {
+            if ($createdOn >= $firstIntervalsDay && $createdOn <= $lastIntervalsDay) {
                 $interval = $this->getIntervalForDate($createdOn, $intervals);
 
                 $index = $interval['start']->dayOfYear . '-' . $interval['end']->dayOfYear;
@@ -274,19 +298,18 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         }
 
         // add likes
-        for ($i=0; $i < 50; $i++) {
+        for ($i = 0; $i < 50; $i++) {
 
             $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // like date may be a little out of the test interval
-            $createdOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
+            $createdOn =
+                Carbon::now()
+                    ->subDays($this->faker->numberBetween(2, 35));
 
             $like = $this->addContentLike($contentId, $createdOn);
 
-            if (
-                $createdOn >= $firstIntervalsDay
-                && $createdOn <= $lastIntervalsDay
-            ) {
+            if ($createdOn >= $firstIntervalsDay && $createdOn <= $lastIntervalsDay) {
                 $interval = $this->getIntervalForDate($createdOn, $intervals);
 
                 $index = $interval['start']->dayOfYear . '-' . $interval['end']->dayOfYear;
@@ -319,19 +342,25 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         }
 
         // add to lists
-        for ($i=0; $i < 50; $i++) {
+        for ($i = 0; $i < 50; $i++) {
 
             $contentId = $this->faker->randomElement(array_keys($contentData));
 
             // add to lists date may be a little out of the test interval
-            $createdOn = Carbon::now()->subDays($this->faker->numberBetween(2, 35));
+            $createdOn =
+                Carbon::now()
+                    ->subDays($this->faker->numberBetween(2, 35));
 
-            $addToList = $this->addContentToList($contentId, $createdOn);
+            $userPlaylist = $this->fakeUserPlaylist();
+            $this->fakeUserPlaylistContent(
+                [
+                    'content_id' => $contentId,
+                    'user_playlist_id' => $userPlaylist['id'],
+                    'created_at' => $createdOn,
+                ]
+            );
 
-            if (
-                $createdOn >= $firstIntervalsDay
-                && $createdOn <= $lastIntervalsDay
-            ) {
+            if ($createdOn >= $firstIntervalsDay && $createdOn <= $lastIntervalsDay) {
                 $interval = $this->getIntervalForDate($createdOn, $intervals);
 
                 $index = $interval['start']->dayOfYear . '-' . $interval['end']->dayOfYear;
@@ -368,7 +397,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
         foreach ($stats as $intervalStats) {
             foreach ($intervalStats as $expectedContentIntervalStats) {
                 $this->assertDatabaseHas(
-                    config('railcontent.table_prefix'). 'content_statistics',
+                    config('railcontent.table_prefix') . 'content_statistics',
                     $expectedContentIntervalStats
                 );
             }
@@ -388,39 +417,26 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
 
     protected function addContent($contentType, $contentStatus, $contentCreatedOn = null)
     {
-         // ContentFactory does not allow to specify the content created_on field
-$content = $this->fakeContent(1,[
-    'type' => $contentType,
-    'sort' => 0,
-    'status' => $contentStatus,
-    'language' => 'en-US',
-    'brand' => config('railcontent.brand'),
-    'total_xp' => null,
-    'user_id' => null,
-    'publishedOn' => $contentCreatedOn ?? Carbon::now()
-            ->toDateTimeString(),
-    'createdOn' => $contentCreatedOn->toDateTimeString()?? Carbon::now()->toDateTimeString(),
-]);
-
-return $content[0];
-        $id = $this->contentRepository->create(
+        // ContentFactory does not allow to specify the content created_on field
+        $content = $this->fakeContent(
+            1,
             [
-                'slug' => ContentHelper::slugify($this->faker->words(rand(2, 6), true)),
                 'type' => $contentType,
                 'sort' => 0,
                 'status' => $contentStatus,
                 'language' => 'en-US',
-                'brand' => ConfigService::$brand,
+                'brand' => config('railcontent.brand'),
                 'total_xp' => null,
                 'user_id' => null,
-                'published_on' => $contentCreatedOn ?? Carbon::now()
-                    ->toDateTimeString(),
-                'created_on' => $contentCreatedOn ?? Carbon::now()
-                    ->toDateTimeString(),
+                'publishedOn' => $contentCreatedOn
+                    ??
+                    Carbon::now()
+                        ->toDateTimeString(),
+                'createdOn' => $contentCreatedOn ?? Carbon::now(),
             ]
         );
 
-        return $this->contentRepository->getById($id);
+        return $content[0];
     }
 
     protected function addUserContentProgress($contentId, $state, $updatedOn = null)
@@ -434,64 +450,70 @@ return $content[0];
         }
 
         $updatedOn = $updatedOn->toDateTimeString();
-$prog = $this->fakeUserContentProgress([
-    'content_id' => $contentId,
-    'user_id' => rand(),
-    'state' => $state,
-    'progress_percent' => $progressPercent,
-    'updated_on' => $updatedOn,
-]);
+        $prog = $this->fakeUserContentProgress(
+            [
+                'content_id' => $contentId,
+                'user_id' => rand(),
+                'state' => $state,
+                'progress_percent' => $progressPercent,
+                'updated_on' => $updatedOn,
+            ]
+        );
 
     }
 
     protected function addContentComment($contentId, $createdOn = null)
     {
         // CommentFactory does not allow to specify the comment created_on field
-$comment = $this->fakeComment([
-    'content_id' => $contentId,
-    'user_id' => rand(),
-    'comment' => $this->faker->word,
-    'temporary_display_name' => $this->faker->word,
-    'created_on' => $createdOn,
-]);
-//        if (!$createdOn) {
-//            $createdOn = Carbon::now();
-//        }
-//
-//        $createdOn = $createdOn->toDateTimeString();
-//
-//        $this->commentRepository->create(
-//            [
-//                'content_id' => $contentId,
-//                'user_id' => rand(),
-//                'comment' => $this->faker->word,
-//                'temporary_display_name' => $this->faker->word,
-//                'created_on' => $createdOn,
-//            ]
-//        );
+        $comment = $this->fakeComment(
+            [
+                'content_id' => $contentId,
+                'user_id' => rand(),
+                'comment' => $this->faker->word,
+                'temporary_display_name' => $this->faker->word,
+                'created_on' => $createdOn,
+            ]
+        );
+        //        if (!$createdOn) {
+        //            $createdOn = Carbon::now();
+        //        }
+        //
+        //        $createdOn = $createdOn->toDateTimeString();
+        //
+        //        $this->commentRepository->create(
+        //            [
+        //                'content_id' => $contentId,
+        //                'user_id' => rand(),
+        //                'comment' => $this->faker->word,
+        //                'temporary_display_name' => $this->faker->word,
+        //                'created_on' => $createdOn,
+        //            ]
+        //        );
     }
 
     protected function addContentLike($contentId, $createdOn = null)
     {
-        $this->fakeContentLike([
-            'content_id' => $contentId,
-            'user_id' => rand(),
-            'created_on' => $createdOn,
-        ]);
+        $this->fakeContentLike(
+            [
+                'content_id' => $contentId,
+                'user_id' => rand(),
+                'created_on' => $createdOn,
+            ]
+        );
 
-//        if (!$createdOn) {
-//            $createdOn = Carbon::now();
-//        }
-//
-//        $createdOn = $createdOn->toDateTimeString();
-//
-//        $this->contentLikeRepository->create(
-//            [
-//                'content_id' => $contentId,
-//                'user_id' => rand(),
-//                'created_on' => $createdOn,
-//            ]
-//        );
+        //        if (!$createdOn) {
+        //            $createdOn = Carbon::now();
+        //        }
+        //
+        //        $createdOn = $createdOn->toDateTimeString();
+        //
+        //        $this->contentLikeRepository->create(
+        //            [
+        //                'content_id' => $contentId,
+        //                'user_id' => rand(),
+        //                'created_on' => $createdOn,
+        //            ]
+        //        );
     }
 
     protected function addContentToList($contentId, $createdOn = null)
@@ -505,16 +527,17 @@ $comment = $this->fakeComment([
         $contentUserPlaylist = $this->addContent(
             'user-playlist',
             ContentService::STATUS_PUBLISHED,
-            Carbon::now()->subDays($this->faker->numberBetween(60, 90))
+            Carbon::now()
+                ->subDays($this->faker->numberBetween(60, 90))
         );
 
-//        $this->contentHierarchyRepository->create(
-//            [
-//                'parent_id' => $contentUserPlaylist['id'],
-//                'child_id' => $contentId,
-//                'child_position' => 0,
-//                'created_on' => $createdOn,
-//            ]
-//        );
+        //        $this->contentHierarchyRepository->create(
+        //            [
+        //                'parent_id' => $contentUserPlaylist['id'],
+        //                'child_id' => $contentId,
+        //                'child_position' => 0,
+        //                'created_on' => $createdOn,
+        //            ]
+        //        );
     }
 }
