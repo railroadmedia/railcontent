@@ -882,4 +882,17 @@ class RailcontentTestCase extends BaseTestCase
 
         return $contentStatistics;
     }
+
+    public function fakeContent2($contentData = [])
+    {
+        $content = $this->faker->content($contentData);
+        $contentId =
+            $this->databaseManager->table('railcontent_content')
+                ->insertGetId($content);
+
+        $content['id'] = $contentId;
+
+        return $content;
+
+    }
 }

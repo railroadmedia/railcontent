@@ -156,15 +156,15 @@ class ContentStatisticsService
     {
         $this->contentStatisticsRepository->removeExistingIntervalContentStatistics($start, $end);
         $this->contentStatisticsRepository->initIntervalContentStatistics($start, $end, $weekOfYear);
-//        $this->contentStatisticsRepository->computeIntervalCompletesContentStatistics($start, $end);
-//        $this->contentStatisticsRepository->computeIntervalStartsContentStatistics($start, $end);
-//        $this->contentStatisticsRepository->computeIntervalCommentsContentStatistics($start, $end);
-//        $this->contentStatisticsRepository->computeIntervalLikesContentStatistics($start, $end);
-//        $this->contentStatisticsRepository->computeIntervalAddToListContentStatistics($start, $end);
-//        $this->contentStatisticsRepository->computeTopLevelCommentsContentStatistics($start, $end);
-//        $this->contentStatisticsRepository->computeTopLevelLikesContentStatistics($start, $end);
-//        $this->contentStatisticsRepository->computeContentStatisticsAge($start, $end);
-//        $this->contentStatisticsRepository->cleanIntervalContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeIntervalCompletesContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeIntervalStartsContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeIntervalCommentsContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeIntervalLikesContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeIntervalAddToListContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeTopLevelCommentsContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeTopLevelLikesContentStatistics($start, $end);
+        $this->contentStatisticsRepository->computeContentStatisticsAge($start, $end);
+        $this->contentStatisticsRepository->cleanIntervalContentStatistics($start, $end);
     }
 
     /**

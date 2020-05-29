@@ -147,10 +147,10 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                 Carbon::now()
                     ->subDays($this->faker->numberBetween(60, 90))
             );
-            $contentData[$content->getId()] = [
-                'content_id' => $content->getId(),
-                'content_type' => $content->getType(),
-                'content_published_on' => $content->getPublishedOn(),
+            $contentData[$content['id']] = [
+                'content_id' => $content['id'],
+                'content_type' => $content['type'],
+                'content_published_on' => $content['published_on'],
             ];
         }
 
@@ -418,8 +418,7 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
     protected function addContent($contentType, $contentStatus, $contentCreatedOn = null)
     {
         // ContentFactory does not allow to specify the content created_on field
-        $content = $this->fakeContent(
-            1,
+        $content = $this->fakeContent2(
             [
                 'type' => $contentType,
                 'sort' => 0,
@@ -428,15 +427,15 @@ class ContentStatisticsServiceTest extends RailcontentTestCase
                 'brand' => config('railcontent.brand'),
                 'total_xp' => null,
                 'user_id' => null,
-                'publishedOn' => $contentCreatedOn
+                'published_on' => $contentCreatedOn
                     ??
                     Carbon::now()
                         ->toDateTimeString(),
-                'createdOn' => $contentCreatedOn ?? Carbon::now(),
+                'created_on' => $contentCreatedOn ?? Carbon::now(),
             ]
         );
 
-        return $content[0];
+        return $content;
     }
 
     protected function addUserContentProgress($contentId, $state, $updatedOn = null)
