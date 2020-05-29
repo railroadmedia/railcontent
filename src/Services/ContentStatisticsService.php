@@ -3,11 +3,9 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
-use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentStatistics;
 use Railroad\Railcontent\Entities\Permission;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
-use Railroad\Railcontent\Repositories\ContentStatisticsRepository;
 
 class ContentStatisticsService
 {
@@ -18,10 +16,13 @@ class ContentStatisticsService
     private $entityManager;
 
     /**
-     * @var ContentStatisticsRepository
+     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
      */
     private $contentStatisticsRepository;
 
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectRepository|\Doctrine\ORM\EntityRepository
+     */
     private $contentRepository;
 
     /**

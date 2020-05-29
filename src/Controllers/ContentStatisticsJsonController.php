@@ -10,7 +10,6 @@ use Railroad\Railcontent\Requests\IndividualStatisticsContentRequest;
 use Railroad\Railcontent\Requests\StatisticsContentRequest;
 use Railroad\Railcontent\Services\ContentStatisticsService;
 use Railroad\Railcontent\Services\ResponseService;
-use Railroad\Railcontent\Transformers\DataTransformer;
 
 class ContentStatisticsJsonController extends Controller
 {
@@ -48,10 +47,8 @@ class ContentStatisticsJsonController extends Controller
      */
     public function individualContentStatistics(IndividualStatisticsContentRequest $request, $contentId)
     {
-        $smallDateTime = $request->has('small_date_time') ?
-                            Carbon::parse($request->get('small_date_time')) : null;
-        $bigDateTime = $request->has('big_date_time') ?
-                            Carbon::parse($request->get('big_date_time')) : null;
+        $smallDateTime = $request->has('small_date_time') ? Carbon::parse($request->get('small_date_time')) : null;
+        $bigDateTime = $request->has('big_date_time') ? Carbon::parse($request->get('big_date_time')) : null;
 
         $stats = $this->contentStatisticsService->getIndividualContentStatistics(
             $contentId,
@@ -59,7 +56,7 @@ class ContentStatisticsJsonController extends Controller
             $bigDateTime
         );
 
-        return new JsonResponse($stats);
+        return ResponseService::contentStats($stats);
     }
 
     /**
@@ -73,10 +70,12 @@ class ContentStatisticsJsonController extends Controller
     {
         $smallDate = $request->has('small_date_time') ? Carbon::parse($request->get('small_date_time')) : null;
         $bigDate = $request->has('big_date_time') ? Carbon::parse($request->get('big_date_time')) : null;
-        $publishedOnSmallDate = $request->has('published_on_small_date_time') ?
-                                Carbon::parse($request->get('published_on_small_date_time')) : null;
-        $publishedOnBigDate = $request->has('published_on_big_date_time') ?
-                                Carbon::parse($request->get('published_on_big_date_time')) : null;
+        $publishedOnSmallDate =
+            $request->has('published_on_small_date_time') ?
+                Carbon::parse($request->get('published_on_small_date_time')) : null;
+        $publishedOnBigDate =
+            $request->has('published_on_big_date_time') ? Carbon::parse($request->get('published_on_big_date_time')) :
+                null;
 
         $sortBy = null;
         $sortDir = null;
@@ -87,11 +86,15 @@ class ContentStatisticsJsonController extends Controller
         }
 
         if ($smallDate) {
-            $smallDate = $smallDate->subDays($smallDate->dayOfWeek)->startOfDay();
+            $smallDate =
+                $smallDate->subDays($smallDate->dayOfWeek)
+                    ->startOfDay();
         }
 
         if ($bigDate) {
-            $bigDate = $bigDate->addDays(6 - $bigDate->dayOfWeek)->endOfDay();
+            $bigDate =
+                $bigDate->addDays(6 - $bigDate->dayOfWeek)
+                    ->endOfDay();
         }
 
         $stats = $this->contentStatisticsRepository->getContentStatistics(
@@ -116,9 +119,12 @@ class ContentStatisticsJsonController extends Controller
 
             foreach ($stats as $statsRow) {
                 $rows[] = [
-                    $statsRow->getContent()->getId(),
-                    $statsRow->getContent()->getBrand(),
-                    $statsRow->getContent()->getTitle(),
+                    $statsRow->getContent()
+                        ->getId(),
+                    $statsRow->getContent()
+                        ->getBrand(),
+                    $statsRow->getContent()
+                        ->getTitle(),
                     $statsRow->getContentType(),
                     $statsRow->getContentPublishedOn(),
                     $statsRow->getCompletes(),

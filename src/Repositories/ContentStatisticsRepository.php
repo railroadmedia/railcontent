@@ -9,7 +9,10 @@ use Doctrine\ORM\ORMException;
 use Illuminate\Database\DatabaseManager;
 use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\ContentLikes;
 use Railroad\Railcontent\Entities\ContentStatistics;
+use Railroad\Railcontent\Entities\UserContentProgress;
+use Railroad\Railcontent\Entities\UserPlaylist;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\Traits\RailcontentCustomQueryBuilder;
 
@@ -17,7 +20,30 @@ class ContentStatisticsRepository extends EntityRepository
 {
     use RailcontentCustomQueryBuilder;
 
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectRepository|EntityRepository
+     */
     private $contentRepository;
+
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectRepository|EntityRepository
+     */
+    private $userProgressRepository;
+
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectRepository|EntityRepository
+     */
+    private $commentRepository;
+
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectRepository|EntityRepository
+     */
+    private $contentLikeRepository;
+
+    /**
+     * @var \Doctrine\Common\Persistence\ObjectRepository|EntityRepository
+     */
+    private $userPlaylistRepository;
 
     /**
      * @var DatabaseManager
@@ -25,7 +51,7 @@ class ContentStatisticsRepository extends EntityRepository
     private $databaseManager;
 
     /**
-     * CommentRepository constructor.
+     * ContentStatisticsRepository constructor.
      *
      * @param RailcontentEntityManager $entityManager
      */
@@ -34,6 +60,11 @@ class ContentStatisticsRepository extends EntityRepository
         parent::__construct($entityManager, $entityManager->getClassMetadata(ContentStatistics::class));
 
         $this->contentRepository = $entityManager->getRepository(Content::class);
+        $this->userProgressRepository = $entityManager->getRepository(UserContentProgress::class);
+        $this->commentRepository = $entityManager->getRepository(Comment::class);
+        $this->contentLikeRepository = $entityManager->getRepository(ContentLikes::class);
+        $this->userPlaylistRepository = $entityManager->getRepository(UserPlaylist::class);
+
         $this->databaseManager = app()->make(DatabaseManager::class);
     }
 
@@ -62,6 +93,11 @@ class ContentStatisticsRepository extends EntityRepository
         }
     }
 
+    /**
+     * @param Carbon $start
+     * @param Carbon $end
+     * @param int $weekOfYear
+     */
     public function initIntervalContentStatistics(Carbon $start, Carbon $end, int $weekOfYear)
     {
         $sql = <<<'EOT'
@@ -116,6 +152,10 @@ EOT;
         $this->databaseManager->statement($statement);
     }
 
+    /**
+     * @param Carbon $start
+     * @param Carbon $end
+     */
     public function computeIntervalCompletesContentStatistics(Carbon $start, Carbon $end)
     {
         $sql = <<<'EOT'
@@ -145,9 +185,9 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix'). 'content_statistics',
-            config('railcontent.table_prefix'). 'content',
-            config('railcontent.table_prefix'). 'user_content_progress',
+            config('railcontent.table_prefix') . 'content_statistics',
+            config('railcontent.table_prefix') . 'content',
+            config('railcontent.table_prefix') . 'user_content_progress',
             $start->toDateTimeString(),
             $end->toDateTimeString(),
             implode(", ", config('railcontent.user_ids_excluded_from_stats')),
@@ -160,6 +200,10 @@ EOT;
         $this->databaseManager->statement($statement);
     }
 
+    /**
+     * @param Carbon $start
+     * @param Carbon $end
+     */
     public function computeIntervalStartsContentStatistics(Carbon $start, Carbon $end)
     {
         $sql = <<<'EOT'
@@ -204,6 +248,10 @@ EOT;
         $this->databaseManager->statement($statement);
     }
 
+    /**
+     * @param Carbon $start
+     * @param Carbon $end
+     */
     public function computeIntervalCommentsContentStatistics(Carbon $start, Carbon $end)
     {
         $sql = <<<'EOT'
@@ -248,6 +296,10 @@ EOT;
         $this->databaseManager->statement($statement);
     }
 
+    /**
+     * @param Carbon $start
+     * @param Carbon $end
+     */
     public function computeIntervalLikesContentStatistics(Carbon $start, Carbon $end)
     {
         $sql = <<<'EOT'
@@ -291,6 +343,10 @@ EOT;
         $this->databaseManager->statement($statement);
     }
 
+    /**
+     * @param Carbon $start
+     * @param Carbon $end
+     */
     public function computeIntervalAddToListContentStatistics(Carbon $start, Carbon $end)
     {
         $sql = <<<'EOT'
@@ -321,7 +377,7 @@ EOT;
             $sql,
             config('railcontent.table_prefix') . 'content_statistics',
             config('railcontent.table_prefix') . 'content',
-             config('railcontent.table_prefix') . 'user_playlist_content',
+            config('railcontent.table_prefix') . 'user_playlist_content',
             config('railcontent.table_prefix') . 'user_playlists',
             $start->toDateTimeString(),
             $end->toDateTimeString(),
@@ -335,6 +391,10 @@ EOT;
         $this->databaseManager->statement($statement);
     }
 
+    /**
+     * @param Carbon $start
+     * @param Carbon $end
+     */
     public function computeTopLevelCommentsContentStatistics(Carbon $start, Carbon $end)
     {
         $sql = <<<'EOT'
@@ -391,6 +451,10 @@ EOT;
         $this->databaseManager->statement($statement);
     }
 
+    /**
+     * @param Carbon $start
+     * @param Carbon $end
+     */
     public function computeTopLevelLikesContentStatistics(Carbon $start, Carbon $end)
     {
         $sql = <<<'EOT'
@@ -447,6 +511,10 @@ EOT;
         $this->databaseManager->statement($statement);
     }
 
+    /**
+     * @param Carbon $start
+     * @param Carbon $end
+     */
     public function computeContentStatisticsAge(Carbon $start, Carbon $end)
     {
         $sql = <<<'EOT'
@@ -469,6 +537,12 @@ EOT;
         $this->databaseManager->statement($statement);
     }
 
+    /**
+     * @param Carbon $start
+     * @param Carbon $end
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
     public function cleanIntervalContentStatistics(Carbon $start, Carbon $end)
     {
         $stats =
@@ -508,20 +582,25 @@ EOT;
     public function getCompletedContentCount($id, ?Carbon $smallDate, ?Carbon $bigDate)
     {
         $query =
-            $this->query()
-                ->from(ConfigService::$tableUserContentProgress)
-                ->where(ConfigService::$tableUserContentProgress . '.content_id', $id)
-                ->where(ConfigService::$tableUserContentProgress . '.state', 'completed');
+            $this->userProgressRepository->createQueryBuilder('ucp')
+                ->select('count(ucp.id)')
+                ->where('ucp.content = :content')
+                ->andWhere('ucp.state = :state')
+                ->setParameter('content', $id)
+                ->setParameter('state', 'completed');
 
         if ($smallDate) {
-            $query->where(ConfigService::$tableUserContentProgress . '.updated_on', '>=', $smallDate);
+            $query->andWhere('ucp.updatedOn >= :smallDate')
+                ->setParameter('smallDate', $smallDate);
         }
 
         if ($bigDate) {
-            $query->where(ConfigService::$tableUserContentProgress . '.updated_on', '<=', $bigDate);
+            $query->andWhere('ucp.updatedOn <= :bigDate')
+                ->setParameter('bigDate', $bigDate);
         }
 
-        return $query->count();
+        return $query->getQuery()
+            ->getSingleScalarResult();
     }
 
     /**
@@ -534,20 +613,25 @@ EOT;
     public function getStartedContentCount($id, ?Carbon $smallDate, ?Carbon $bigDate)
     {
         $query =
-            $this->query()
-                ->from(ConfigService::$tableUserContentProgress)
-                ->where(ConfigService::$tableUserContentProgress . '.content_id', $id)
-                ->where(ConfigService::$tableUserContentProgress . '.state', 'started');
+            $this->userProgressRepository->createQueryBuilder('ucp')
+                ->select('count(ucp.id)')
+                ->where('ucp.content = :content')
+                ->andWhere('ucp.state = :state')
+                ->setParameter('content', $id)
+                ->setParameter('state', 'started');
 
         if ($smallDate) {
-            $query->where(ConfigService::$tableUserContentProgress . '.updated_on', '>=', $smallDate);
+            $query->andWhere('ucp.updatedOn >= :smallDate')
+                ->setParameter('smallDate', $smallDate);
         }
 
         if ($bigDate) {
-            $query->where(ConfigService::$tableUserContentProgress . '.updated_on', '<=', $bigDate);
+            $query->andWhere('ucp.updatedOn <= :bigDate')
+                ->setParameter('bigDate', $bigDate);
         }
 
-        return $query->count();
+        return $query->getQuery()
+            ->getSingleScalarResult();
     }
 
     /**
@@ -560,20 +644,24 @@ EOT;
     public function getContentCommentsCount($id, ?Carbon $smallDate, ?Carbon $bigDate)
     {
         $query =
-            $this->query()
-                ->from(ConfigService::$tableComments)
-                ->where(ConfigService::$tableComments . '.content_id', $id)
-                ->whereNull(ConfigService::$tableComments . '.deleted_at');
+            $this->commentRepository->createQueryBuilder('co')
+                ->select('count(co.id)')
+                ->where('co.content = :content')
+                ->andWhere('co.deletedAt is null')
+                ->setParameter('content', $id);
 
         if ($smallDate) {
-            $query->where(ConfigService::$tableComments . '.created_on', '>=', $smallDate);
+            $query->andWhere('co.createdOn >= :smallDate')
+                ->setParameter('smallDate', $smallDate);
         }
 
         if ($bigDate) {
-            $query->where(ConfigService::$tableComments . '.created_on', '<=', $bigDate);
+            $query->andWhere('co.createdOn <= :bigDate')
+                ->setParameter('bigDate', $bigDate);
         }
 
-        return $query->count();
+        return $query->getQuery()
+            ->getSingleScalarResult();
     }
 
     /**
@@ -586,19 +674,23 @@ EOT;
     public function getContentLikesCount($id, ?Carbon $smallDate, ?Carbon $bigDate)
     {
         $query =
-            $this->query()
-                ->from(ConfigService::$tableContentLikes)
-                ->where(ConfigService::$tableContentLikes . '.content_id', $id);
+            $this->contentLikeRepository->createQueryBuilder('cl')
+                ->select('count(cl.id)')
+                ->where('cl.content = :content')
+                ->setParameter('content', $id);
 
         if ($smallDate) {
-            $query->where(ConfigService::$tableContentLikes . '.created_on', '>=', $smallDate);
+            $query->andWhere('cl.createdOn >= :smallDate')
+                ->setParameter('smallDate', $smallDate);
         }
 
         if ($bigDate) {
-            $query->where(ConfigService::$tableContentLikes . '.created_on', '<=', $bigDate);
+            $query->andWhere('cl.createdOn <= :bigDate')
+                ->setParameter('bigDate', $bigDate);
         }
 
-        return $query->count();
+        return $query->getQuery()
+            ->getSingleScalarResult();
     }
 
     /**
@@ -611,26 +703,26 @@ EOT;
     public function getContentAddToListCount($id, ?Carbon $smallDate, ?Carbon $bigDate)
     {
         $query =
-            $this->query()
-                ->from(ConfigService::$tableContent)
-                ->leftJoin(
-                    ConfigService::$tableContentHierarchy,
-                    ConfigService::$tableContentHierarchy . '.parent_id',
-                    '=',
-                    ConfigService::$tableContent . '.id'
-                )
-                ->where(ConfigService::$tableContent . '.type', 'user-playlist')
-                ->where(ConfigService::$tableContentHierarchy . '.child_id', $id);
+            $this->userPlaylistRepository->createQueryBuilder('up')
+                ->select('count(p.id)')
+                ->join('up.playlistContent', 'p')
+                ->where('p.content = :content')
+                ->andWhere('up.type = :type')
+                ->setParameter('content', $id)
+                ->setParameter('type', 'user-playlist');
 
         if ($smallDate) {
-            $query->where(ConfigService::$tableContentHierarchy . '.created_on', '>=', $smallDate);
+            $query->andWhere('p.createdAt >= :smallDate')
+                ->setParameter('smallDate', $smallDate);
         }
 
         if ($bigDate) {
-            $query->where(ConfigService::$tableContentHierarchy . '.created_on', '<=', $bigDate);
+            $query->andWhere('p.createdAt <= :bigDate')
+                ->setParameter('bigDate', $bigDate);
         }
 
-        return $query->count();
+        return $query->getQuery()
+            ->getSingleScalarResult();
     }
 
     /**
@@ -733,24 +825,23 @@ EOT;
                 ->setParameter('tags', $tagFields);
         }
 
-        if(!empty($topicFields)){
+        if (!empty($topicFields)) {
             $qb->join('c.topic', 'topic')
                 ->andWhere('topic.topic IN (:topics)')
                 ->setParameter('topics', $topicFields);
         }
 
-        if( !empty($instructorFields)){
-           // $qb->join('c.instructor', 'ci');
-              //  ->join('ci.')
-               // ->andWhere('ci.instructor IN (:topics)')
-              //  ->setParameter('topics', $topicFields);
+        if (!empty($instructorFields)) {
+            $qb->join('c.instructor', 'ci')
+                ->join('ci.instructor', 'i')
+                ->andWhere('i.name IN (:instructors)')
+                ->setParameter('instructors', $instructorFields);
         }
-
 
         $qb->groupBy('cs.content');
 
         if ($sortBy && $sortDir) {
-            $qb->orderBy($sortBy , $sortDir);
+            $qb->orderBy($sortBy, $sortDir);
         }
 
         $results =
