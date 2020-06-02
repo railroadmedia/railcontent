@@ -1467,7 +1467,7 @@ class ContentRepository extends RepositoryBase
             if ($row['type'] == 'content_id') {
                 $subContentIds[] = $row['value'];
             } else {
-                $availableFields[$row['key']][] = trim(strtolower($row['value']));
+                $availableFields[$row['key']][] = trim($row['value']);
                 // only uniques
                 $availableFields[$row['key']] = array_values(array_unique($availableFields[$row['key']]));
             }
@@ -1491,16 +1491,22 @@ class ContentRepository extends RepositoryBase
         }
 
         foreach ($availableFields as $availableFieldIndex => $availableField) {
-            usort(
-                $availableFields[$availableFieldIndex],
-                function ($a, $b) {
-                    if (is_array($a)) {
-                        return strncmp($a['slug'], $b['slug'], 15);
-                    }
+            // if they are all numeric, sort by numbers, otherwise sort by string comparision
+            if (is_numeric(reset($availableFields[$availableFieldIndex])) &&
+                ctype_digit(implode('', $availableFields[$availableFieldIndex]))) {
+                sort($availableFields[$availableFieldIndex]);
+            } else {
+                usort(
+                    $availableFields[$availableFieldIndex],
+                    function ($a, $b) {
+                        if (is_array($a)) {
+                            return strncmp($a['slug'], $b['slug'], 15);
+                        }
 
-                    return strncmp($a, $b, 15);
-                }
-            );
+                        return strncmp($a, $b, 15);
+                    }
+                );
+            }
         }
 
         // random use case, should be refactored at some point
@@ -1508,19 +1514,19 @@ class ContentRepository extends RepositoryBase
                 array_diff(
                     $availableFields['difficulty'],
                     [
-                        'beginner',
-                        'intermediate',
-                        'advanced',
-                        'all',
+                        'Beginner',
+                        'Intermediate',
+                        'Advanced',
+                        'All',
                     ]
                 )
             ) == 0) {
 
             $availableFields['difficulty'] = [
-                'beginner',
-                'intermediate',
-                'advanced',
-                'all',
+                'Beginner',
+                'Intermediate',
+                'Advanced',
+                'All',
             ];
         }
 
