@@ -19,25 +19,8 @@ class ContentStatsTransformer extends TransformerAbstract
     public function transform( $contentStatistics)
     {
         $contentStatistics['content_published_on'] = $contentStatistics['content_published_on']->toDateTimeString();
-        return $contentStatistics;
 
-        return [
-            'id' => $contentStatistics->getId(),
-            'content_id' => $contentStatistics->getContent()
-                ->getId(),
-            'content_type' => $contentStatistics->getContentType(),
-            'content_brand' => $contentStatistics->getContent()
-                ->getBrand(),
-            'content_published_on' => $contentStatistics->getContentPublishedOn()
-                ->toDateTimeString(),
-            'total_starts' => $contentStatistics->getStarts(),
-            'total_completes' => $contentStatistics->getCompletes(),
-            'content_title' => $contentStatistics->getContent()
-                ->getTitle(),
-            'total_comments' => $contentStatistics->getComments(),
-            'total_likes' => $contentStatistics->getLikes(),
-            'total_added_to_list' => $contentStatistics->getAddedToList(),
-        ];
+        return $contentStatistics;
     }
 
     public function includeContent(ContentStatistics $contentStatistics)

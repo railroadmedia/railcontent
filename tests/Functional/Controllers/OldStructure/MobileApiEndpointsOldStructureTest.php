@@ -114,10 +114,9 @@ class MobileApiEndpointsOldStructureTest extends RailcontentTestCase
         foreach ($contents as $content) {
 
             $this->fakeUserContentProgress(
-                1,
                 [
-                    'userId' => $user,
-                    'content' => $content,
+                    'user_id' => $user,
+                    'content_id' => $content->getId(),
                     'state' => 'started',
                 ]
             );

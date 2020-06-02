@@ -116,6 +116,12 @@ class Content extends ArrayExpressible
     protected $language;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @var boolean
+     */
+    protected $showInNewFeed;
+
+    /**
      * @var User
      *
      * @ORM\Column(type="user_id", name="user_id", nullable=true)
@@ -334,6 +340,23 @@ class Content extends ArrayExpressible
     public function setLanguage(string $language)
     {
         $this->language = $language;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getShowInNewFeed()
+
+    {
+        return $this->showInNewFeed;
+    }
+
+    /**
+     * @param bool $showInNewFeed
+     */
+    public function setShowInNewFeed(bool $showInNewFeed)
+    {
+        $this->showInNewFeed = $showInNewFeed;
     }
 
     /**
