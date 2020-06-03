@@ -963,8 +963,6 @@ class ContentService
 
         $data =
             $qb->getQuery()
-                ->setCacheable(true)
-                ->setCacheRegion('pull')
                 ->getResult();
 
         $filters = $pullFilterFields ? $this->contentRepository->getFilterFields() : [];

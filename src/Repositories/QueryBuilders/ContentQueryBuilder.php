@@ -438,11 +438,11 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
     {
         switch ($orderBy) {
             case 'newest':
-                $this->orderBy('railcontent_content.published_on desc');
+                $this->orderBy('railcontent_content.publishedOn','desc');
 
                 break;
             case 'oldest':
-                $this->orderBy('railcontent_content.published_on asc');
+                $this->orderBy('railcontent_content.publishedOn','asc');
 
                 break;
             case 'popularity':
@@ -452,13 +452,30 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                     'WITH',
                     'railcontent_content.id = user_progress.content'
                 );
-                $this->addSelect('COUNT(user_progress) as popularity');
+
                 $this->groupBy('railcontent_content.id');
-                $this->orderBy('popularity', 'desc');
+                $this->orderBy('COUNT(user_progress)', 'desc');
 
                 break;
 
             case 'trending':
+                $this->leftJoin(
+                    UserContentProgress::class,
+                    'user_progress',
+                    'WITH',
+                    $this->expr()
+                        ->andX(
+                            'railcontent_content.id = user_progress.content',
+                            'user_progress.updatedOn >= :lastWeek'
+                        )
+                );
+                $this->setParameter('lastWeek',
+                    Carbon::now()
+                        ->subWeek(1)
+                );
+                $this->groupBy('railcontent_content.id');
+                $this->orderBy('COUNT(user_progress)', 'desc');
+
                 break;
             case 'relevance':
                 break;

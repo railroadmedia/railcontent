@@ -211,7 +211,7 @@ class ContentRepository extends EntityRepository
 
             array_unshift($groupByColumns, config('railcontent.table_prefix') . 'content' . '.' . $orderByColumn);
         }
-
+        $sortBy = 'newest';
         $qb =
             $this->build()
                 ->paginate($this->limit, $this->page - 1)
@@ -222,9 +222,8 @@ class ContentRepository extends EntityRepository
                 ->restrictByUserStates($this->requiredUserStates)
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByPlaylistIds($this->requiredUserPlaylistIds)
-                ->orderBy(implode(', ', $orderByColumns))
-                //->sortResults('popularity')
                 ->restrictByFields($this->requiredFields)
+                ->sortResults($sortBy)
                 ->setCacheable(true)
                 ->setCacheRegion('pull');
 
