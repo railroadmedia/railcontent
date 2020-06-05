@@ -86,7 +86,7 @@ class ContentJsonController extends Controller
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 10),
-            $request->get('sort', '-published_on'),
+            $request->get('sort', 'newest'),
             $request->get('included_types', []),
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),

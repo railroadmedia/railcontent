@@ -544,8 +544,12 @@ class ContentService
                 ->getResult();
 
         foreach ($rows as $row) {
-            foreach($row->getChild()->getValues() as $child) {
-                $results[$child->getChild()->getId()] = $row;
+            foreach (
+                $row->getChild()
+                    ->getValues() as $child
+            ) {
+                $results[$child->getChild()
+                    ->getId()] = $row;
             }
         }
 
@@ -577,8 +581,12 @@ class ContentService
                 ->getResult();
 
         foreach ($rows as $row) {
-            foreach($row->getChild()->getValues() as $child) {
-                $results[$child->getChild()->getId()] = $row;
+            foreach (
+                $row->getChild()
+                    ->getValues() as $child
+            ) {
+                $results[$child->getChild()
+                    ->getId()] = $row;
             }
         }
 
@@ -880,11 +888,10 @@ class ContentService
         return $this->resultsHydrator->hydrate($results, $this->entityManager);
     }
 
-    /** Get filtered contents.
-     *
+    /**
      * @param $page
      * @param $limit
-     * @param string $orderByAndDirection
+     * @param string $sort
      * @param array $includedTypes
      * @param array $slugHierarchy
      * @param array $requiredParentIds
@@ -893,12 +900,15 @@ class ContentService
      * @param array $requiredUserStates
      * @param array $includedUserStates
      * @param bool $pullFilterFields
-     * @return ContentFilterResultsEntity|null
+     * @param bool $getFutureContentOnly
+     * @param bool $pullPagination
+     * @param array $requiredUserPlaylistIds
+     * @return ContentFilterResultsEntity
      */
     public function getFiltered(
         $page,
         $limit,
-        $orderByAndDirection = '-published_on',
+        $sort = 'newest',
         array $includedTypes = [],
         array $slugHierarchy = [],
         array $requiredParentIds = [],
@@ -918,14 +928,10 @@ class ContentService
             $limit = -1;
         }
 
-        $orderByDirection = substr($orderByAndDirection, 0, 1) !== '-' ? 'asc' : 'desc';
-        $orderByColumn = trim($orderByAndDirection, '-');
-
         $filter = $this->contentRepository->startFilter(
             $page,
             $limit,
-            $orderByColumn,
-            $orderByDirection,
+            $sort,
             $includedTypes,
             $slugHierarchy,
             $requiredParentIds,
@@ -1347,7 +1353,7 @@ class ContentService
      */
     private function saveContentFields($data, Content $content)
     {
-     //   dd($data);
+
         if (array_key_exists('fields', $data['data']['attributes'])) {
 
             $fields = $data['data']['attributes']['fields'];
@@ -1404,9 +1410,9 @@ class ContentService
 
                             //check if field was deleted
                             $oldFieldValue = call_user_func([$oldField, $getterName]);
-if(!is_string($oldFieldValue)){
-    $oldFieldValue = $oldFieldValue->getId();
-}
+                            if (!is_string($oldFieldValue)) {
+                                $oldFieldValue = $oldFieldValue->getId();
+                            }
                             if (!in_array($oldFieldValue, array_column($fields, 'value'))) {
 
                                 call_user_func([$content, $removeField], $oldField);
@@ -1515,7 +1521,8 @@ if(!is_string($oldFieldValue)){
      */
     public function calculateTotalXpForContents($contentIds)
     {
-        ContentRepository::$availableContentStatues = [ ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
+        ContentRepository::$availableContentStatues =
+            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
 
         $contentTotalXp = [];
         $children =
@@ -1538,7 +1545,7 @@ if(!is_string($oldFieldValue)){
         foreach ($children as $child) {
             $childDifficulty = $child->getDifficulty() ?? 0;
             $childrenTotalXP[$child->getParentContent()
-                ->getId()] += ($child->getTotalXp()  && (int)$child->getTotalXp() != 0) ? $child->getTotalXp() :
+                ->getId()] += ($child->getTotalXp() && (int)$child->getTotalXp() != 0) ? $child->getTotalXp() :
                 $this->getDefaultXP($child->getType(), $childDifficulty);
         }
 
@@ -1555,7 +1562,7 @@ if(!is_string($oldFieldValue)){
             $contentDifficulty = $content->getDifficulty() ?? 0;
             $childrenXp = $childrenTotalXP[$content->getId()];
             $contentTotalXp[$content->getId()] =
-                (($content->getXP()  && (int)$content->getXP() != 0) ? $content->getXP():
+                (($content->getXP() && (int)$content->getXP() != 0) ? $content->getXP() :
                     $this->getDefaultXP($content->getType(), $contentDifficulty)) + $childrenXp;
         }
 

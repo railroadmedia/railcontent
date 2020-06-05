@@ -151,19 +151,18 @@ class ContentRepository extends EntityRepository
     /**
      * @param $page
      * @param $limit
-     * @param $orderBy
-     * @param $orderDirection
+     * @param $sort
      * @param array $typesToInclude
      * @param array $slugHierarchy
      * @param array $requiredParentIds
+     * @param array $requiredUserPlaylistIds
      * @param bool $getFutureContentOnly
      * @return $this
      */
     public function startFilter(
         $page,
         $limit,
-        $orderBy,
-        $orderDirection,
+        $sort,
         array $typesToInclude,
         array $slugHierarchy,
         array $requiredParentIds,
@@ -172,8 +171,7 @@ class ContentRepository extends EntityRepository
     ) {
         $this->page = $page;
         $this->limit = $limit;
-        $this->orderBy = $orderBy;
-        $this->orderDirection = $orderDirection;
+        $this->orderBy = $sort;
         $this->typesToInclude = $typesToInclude;
         $this->slugHierarchy = $slugHierarchy;
         $this->requiredParentIds = $requiredParentIds;
@@ -195,23 +193,8 @@ class ContentRepository extends EntityRepository
      */
     public function retrieveFilter()
     {
-        $orderByExploded = explode(' ', $this->orderBy);
+        $sortBy = $this->orderBy;
 
-        $orderByColumns = [config('railcontent.table_prefix') . 'content' . '.' . 'createdOn'];
-        $groupByColumns = [config('railcontent.table_prefix') . 'content' . '.' . 'createdOn'];
-
-        foreach ($orderByExploded as $orderByColumn) {
-            if (strpos($orderByColumn, '_') !== false || strpos($orderByColumn, '-') !== false) {
-                $orderByColumn = camel_case($orderByColumn);
-            }
-            array_unshift(
-                $orderByColumns,
-                config('railcontent.table_prefix') . 'content' . '.' . $orderByColumn . ' ' . $this->orderDirection
-            );
-
-            array_unshift($groupByColumns, config('railcontent.table_prefix') . 'content' . '.' . $orderByColumn);
-        }
-        $sortBy = 'newest';
         $qb =
             $this->build()
                 ->paginate($this->limit, $this->page - 1)

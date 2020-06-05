@@ -434,6 +434,10 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
         return $this;
     }
 
+    /**
+     * @param $orderBy
+     * @return $this
+     */
     public function sortResults($orderBy)
     {
         switch ($orderBy) {
@@ -478,6 +482,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
 
                 break;
             case 'relevance':
+                //TODO
                 break;
         }
 

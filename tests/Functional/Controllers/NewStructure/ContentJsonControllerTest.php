@@ -384,14 +384,16 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $response = $this->call(
             'PATCH',
             'railcontent/content/' . rand(),
-            ['data' =>['type'=>'content',
-                'attributes' => [
-                'slug' => $slug,
-                'position' => 1,
-                'status' => ContentService::STATUS_DRAFT,
-                'type' => $type,
-                    ]
-                ]
+            [
+                'data' => [
+                    'type' => 'content',
+                    'attributes' => [
+                        'slug' => $slug,
+                        'position' => 1,
+                        'status' => ContentService::STATUS_DRAFT,
+                        'type' => $type,
+                    ],
+                ],
             ]
         );
 
@@ -474,15 +476,15 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'position' => 1,
             ]
         );
-for($i = 0; $i<12; $i++) {
-    $contentTopic[$i] = $this->fakeContentTopic(
-        [
-            'content_id' => $content[0]->getId(),
-            'topic' => 'topic3',
-            'position' => 2,
-        ]
-    );
-}
+        for ($i = 0; $i < 12; $i++) {
+            $contentTopic[$i] = $this->fakeContentTopic(
+                [
+                    'content_id' => $content[0]->getId(),
+                    'topic' => 'topic3',
+                    'position' => 2,
+                ]
+            );
+        }
 
         $instructors = $this->fakeContent(
             2,
@@ -495,17 +497,15 @@ for($i = 0; $i<12; $i++) {
         );
 
         $contentInstructor = $this->fakeContentInstructor(
-              [
+            [
                 'content_id' => $content[0]->getId(),
                 'instructor_id' => $instructors[0]->getId(),
             ]
         );
 
-
         $new_slug = implode('-', $this->faker->words());
 
         $first = $this->call('GET', 'railcontent/content/' . $content[0]->getId());
-
 
         $this->assertEquals($content[0]->getSlug(), $first->decodeResponseJson('data')[0]['attributes']['slug']);
 
@@ -742,7 +742,7 @@ for($i = 0; $i<12; $i++) {
         );
 
         $this->fakeUserPermission(
-             [
+            [
                 'user_id' => $userId,
                 'permission_id' => $permission2['id'],
                 'start_date' => Carbon::now(),
@@ -1246,7 +1246,7 @@ for($i = 0; $i<12; $i++) {
         );
 
         $contentInstructor = $this->fakeContentInstructor(
-             [
+            [
                 'content_id' => $content[0]->getId(),
                 'instructor_id' => $instructor[0]->getId(),
             ]
@@ -1705,7 +1705,7 @@ for($i = 0; $i<12; $i++) {
         $this->fakeHierarchy(
             [
                 'parent_id' => $contents[0]->getId(),
-                'child_id' => $contents[2]->getId()
+                'child_id' => $contents[2]->getId(),
             ]
         );
 
@@ -1940,7 +1940,7 @@ for($i = 0; $i<12; $i++) {
                 'content_id' => $content[0]->getId(),
                 'key' => 'description',
                 'value' => $desc,
-                'position' => 1
+                'position' => 1,
             ]
         );
 
@@ -1950,7 +1950,7 @@ for($i = 0; $i<12; $i++) {
                     'content_id' => $content[0]->getId(),
                     'key' => $this->faker->word,
                     'value' => $this->faker->paragraph,
-                    'position' => $i+2
+                    'position' => $i + 2,
                 ]
             );
         }
@@ -2016,11 +2016,11 @@ for($i = 0; $i<12; $i++) {
             );
         }
 
-       // $this->assertEquals($desc, $content[0]->fetch('data.description', ''));
+        // $this->assertEquals($desc, $content[0]->fetch('data.description', ''));
         $this->assertEquals(0, $content[0]->fetch('data.timecode', 0));
-       // $this->assertEquals(2, count($content[0]->fetch('*data.sheet_music_image_url', [])));
+        // $this->assertEquals(2, count($content[0]->fetch('*data.sheet_music_image_url', [])));
 
-       // $this->assertEquals(2, count($content[0]->fetch('*fields.topic', [])));
+        // $this->assertEquals(2, count($content[0]->fetch('*fields.topic', [])));
         $this->assertEquals($contentTopic1['topic'], $content[0]->fetch('fields.topic.1', null));
         $this->assertEquals($contentTopic2['topic'], $content[0]->fetch('fields.topic.2', null));
 
@@ -2042,5 +2042,153 @@ for($i = 0; $i<12; $i++) {
             $content[0]->fetch('fields.instructor.data.head_shot_picture_url', null)
         );
         $this->assertNull($content[0]->fetch('url', null));
+    }
+
+    public function test_sort_by_newest_and_oldest()
+    {
+        for ($i = 0; $i < 20; $i++) {
+            $contents[$i] = $this->fakeContent2(
+                [
+                    'difficulty' => 1,
+                    'type' => 'course',
+                    'status' => 'published',
+                    'language' => $this->faker->word,
+                    'published_on' => Carbon::now()
+                        ->subDays($i),
+                    'created_on' => Carbon::now()
+                        ->subWeek($i),
+                ]
+            );
+        }
+
+        $page = 1;
+        $limit = 10;
+
+        $response = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => 'newest',
+            ]
+        );
+
+        $responseContent = $response->decodeResponseJson('data');
+
+        foreach ($responseContent as $index => $content) {
+            $this->assertEquals($contents[$index]['id'], $content['id']);
+        }
+
+        $response = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => 'oldest',
+            ]
+        );
+
+        $responseContent = $response->decodeResponseJson('data');
+
+        foreach ($responseContent as $index => $content) {
+            $this->assertEquals(array_reverse($contents)[$index]['id'], $content['id']);
+        }
+    }
+
+    public function test_sort_by_popularity()
+    {
+        $expectedResults = [];
+        for ($i = 0; $i < 20; $i++) {
+            $contents[$i] = $this->fakeContent2(
+                [
+                    'difficulty' => 1,
+                    'type' => 'course',
+                    'status' => 'published',
+                    'language' => $this->faker->word,
+                    'published_on' => Carbon::now()
+                        ->subDays($i),
+                    'created_on' => Carbon::now()
+                        ->subWeek($i),
+                ]
+            );
+            if ($i % 2 == 0) {
+                $expectedResults[] = $contents[$i];
+                $this->fakeUserContentProgress(
+                    [
+                        'content_id' => $contents[$i]['id'],
+                    ]
+                );
+            }
+        }
+
+        $page = 1;
+        $limit = 10;
+
+        $response = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => 'popularity',
+            ]
+        );
+
+        $responseContent = $response->decodeResponseJson('data');
+
+        foreach ($responseContent as $index => $content) {
+            $this->assertEquals($expectedResults[$index]['id'], $content['id']);
+        }
+    }
+
+    public function test_sort_by_trending()
+    {
+        $expectedResults = [];
+        for ($i = 0; $i < 20; $i++) {
+            $contents[$i] = $this->fakeContent2(
+                [
+                    'difficulty' => 1,
+                    'type' => 'course',
+                    'status' => 'published',
+                    'language' => $this->faker->word,
+                    'published_on' => Carbon::now()
+                        ->subDays($i),
+                    'created_on' => Carbon::now()
+                        ->subWeek($i),
+                ]
+            );
+            if (in_array($i, [1, 4, 5])) {
+
+                $expectedResults[] = $contents[$i];
+                $this->fakeUserContentProgress(
+                    [
+                        'content_id' => $contents[$i]['id'],
+                        'updated_on' => Carbon::now()
+                            ->subDays($i),
+                    ]
+                );
+            }
+        }
+
+        $page = 1;
+        $limit = 10;
+
+        $response = $this->call(
+            'GET',
+            'railcontent/content',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => 'trending',
+            ]
+        );
+
+        $responseContent = $response->decodeResponseJson('data');
+
+        $this->assertEquals($expectedResults[0]['id'], $responseContent[0]['id']);
+        $this->assertEquals($expectedResults[1]['id'], $responseContent[1]['id']);
+        $this->assertEquals($expectedResults[2]['id'], $responseContent[2]['id']);
     }
 }
