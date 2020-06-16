@@ -9,6 +9,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsAssociations;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsProperties;
 use Railroad\Railcontent\Entities\Traits\DecoratedFields;
+use Doctrine\Search\Mapping\Annotations as MAP;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentRepository")
@@ -59,6 +60,7 @@ use Railroad\Railcontent\Entities\Traits\DecoratedFields;
  *     }
  * )
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
+ * @MAP\ElasticSearchable(index="content", type="post", source=true, numberOfReplicas=0)
  *
  */
 class Content extends ArrayExpressible
@@ -69,12 +71,14 @@ class Content extends ArrayExpressible
 
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
+     * @MAP\ElasticField(type="integer", includeInAll=false)
      * @var int
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string", name="slug")
+     * @MAP\ElasticField(type="string", includeInAll=true, boost=5.0)
      * @var string
      */
     protected $slug;

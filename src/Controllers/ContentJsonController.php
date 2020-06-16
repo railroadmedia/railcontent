@@ -13,6 +13,7 @@ use Railroad\Permissions\Exceptions\NotAllowedException;
 use Railroad\Permissions\Services\PermissionService;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Exceptions\NotFoundException;
+use Railroad\Railcontent\Managers\SearchEntityManager;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentCreateRequest;
 use Railroad\Railcontent\Requests\ContentUpdateRequest;
@@ -201,6 +202,25 @@ class ContentJsonController extends Controller
             $request->input('data.attributes.sort', 0),
             $request->input('data.attributes.fields')
         );
+
+        $sm = SearchEntityManager::get();
+
+        $client = $sm->getClient();
+        $metadatas = $sm->getMetadataFactory()->getAllMetadata();
+
+        // Delete indexes
+        foreach ($metadatas as $metadata) {
+            if ($client->getIndex($metadata->index)->exists()) {
+                $client->deleteIndex($metadata->index);
+            }
+        }
+
+        // Recreate indexes
+        foreach ($metadatas as $metadata) {
+            if (!$client->getIndex($metadata->index)->exists()) {
+                $client->createIndex($metadata->index);
+            }
+        }
 
         return ResponseService::content($content)
             ->respond(201);
