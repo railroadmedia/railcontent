@@ -85,6 +85,7 @@ class Content extends ArrayExpressible
 
     /**
      * @ORM\Column(type="string")
+     * @MAP\ElasticField(type="string", includeInAll=true)
      * @var string
      */
     protected $type;
@@ -97,6 +98,7 @@ class Content extends ArrayExpressible
 
     /**
      * @ORM\Column(type="string")
+     * @MAP\ElasticField(type="string", includeInAll=true)
      * @var string
      */
     protected $status;
@@ -109,6 +111,7 @@ class Content extends ArrayExpressible
 
     /**
      * @ORM\Column(type="text")
+     * @MAP\ElasticField(type="string", includeInAll=true)
      * @var text
      */
     protected $brand;
@@ -682,4 +685,12 @@ class Content extends ArrayExpressible
         }
         return null;
     }
+
+    public function toArray() {
+        return array(
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'name' => $this->getName()
+    );
+  }
 }

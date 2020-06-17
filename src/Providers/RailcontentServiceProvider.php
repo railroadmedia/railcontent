@@ -42,6 +42,7 @@ use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Hydrators\RailcontentHydrator;
 use Railroad\Railcontent\Listeners\ContentEventListener;
+use Railroad\Railcontent\Listeners\SearchableListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Routes\RouteRegistrar;
@@ -178,9 +179,12 @@ class RailcontentServiceProvider extends ServiceProvider
         $sortableListener = new SortableListener();
         $sortableListener->setAnnotationReader($cachedAnnotationReader);
 
+        $searchableListener = new SearchableListener();
+
         $eventManager = new EventManager();
         $eventManager->addEventSubscriber($timestampableListener);
         $eventManager->addEventSubscriber($sortableListener);
+        $eventManager->addEventSubscriber($searchableListener);
 
 
         $ormConfiguration = new Configuration();

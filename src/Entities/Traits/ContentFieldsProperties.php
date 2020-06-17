@@ -44,6 +44,7 @@ trait ContentFieldsProperties
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @MAP\ElasticField(type="string", includeInAll=true, boost=5.0)
      * @var string
      */
     protected $title;
