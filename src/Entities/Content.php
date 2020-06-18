@@ -167,6 +167,7 @@ class Content extends ArrayExpressible
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentData", mappedBy="content", cascade={"remove"})
      * @ORM\JoinColumn(name="id", referencedColumnName="content_id")
+     * @MAP\ElasticField(name="data", type="string", includeInAll=false)
      */
     protected $data;
 
@@ -690,7 +691,16 @@ class Content extends ArrayExpressible
         return array(
             'id' => $this->getId(),
             'title' => $this->getTitle(),
-            'name' => $this->getName()
+            'name' => $this->getName(),
+            'slug' => $this->getSlug(),
+            'difficulty' => $this->getDifficulty(),
+            'datum' => $this->getData()->toArray(),
+            'status' => $this->getStatus(),
+            'brand' => $this->getBrand(),
+            'style' => $this->getStyle(),
+            'content_type' => $this->getType(),
+            'published_on' => $this->getPublishedOn(),
+            'user_progress' => $this->getUserProgresses()
     );
   }
 }

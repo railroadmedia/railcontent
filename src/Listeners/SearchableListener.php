@@ -6,8 +6,10 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Elastica\Document;
+use Elastica\Query\MatchPhrase;
 use Entities\Behaviour\SearchableEntityInterface;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Managers\SearchEntityManager;
 
 class SearchableListener implements EventSubscriber
@@ -21,7 +23,7 @@ class SearchableListener implements EventSubscriber
 
         $oEntity = $oArgs->getEntity();
 
-        if ($oEntity instanceof Content) {
+        if (($oEntity instanceof Content) || ($oEntity instanceof ContentData)) {
             $sm = SearchEntityManager::get();
             $metadatas =
                 $sm->getMetadataFactory()
@@ -36,7 +38,15 @@ class SearchableListener implements EventSubscriber
                     $client->createIndex($metadata->index);
                 }
 
-                $client->addDocuments($metadata, [json_encode($oEntity->toArray())]);
+                //delete document
+                $matchPhraseQuery = new MatchPhrase("id", $oEntity->getId());
+
+                $index = $client->getIndex($metadata->index);
+                $index->deleteByQuery($matchPhraseQuery);
+
+                $document = new Document('', $oEntity->toArray());
+                $client->getIndex($metadata->index)
+                    ->addDocuments([$document]);
             }
         }
     }

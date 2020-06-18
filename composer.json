@@ -40,7 +40,7 @@
     "railroad/doctrine": "^0.0",
     "railroad/doctrine-array-hydrator": "^1.0",
     "jms/serializer": "1.*",
-    "ruflin/elastica":"~6.0",
+    "ruflin/elastica":"7.*",
     "doctrine/search":"dev-master"
   },
   "require-dev": {

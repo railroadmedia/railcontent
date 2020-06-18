@@ -4,7 +4,9 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers\NewStructure;
 
 use Carbon\Carbon;
 use Doctrine\DBAL\Logging\DebugStack;
+use Elastica\Query\Match;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Managers\SearchEntityManager;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -2190,5 +2192,46 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals($expectedResults[0]['id'], $responseContent[0]['id']);
         $this->assertEquals($expectedResults[1]['id'], $responseContent[1]['id']);
         $this->assertEquals($expectedResults[2]['id'], $responseContent[2]['id']);
+    }
+
+    public function test_elastic()
+    {
+        for ($i = 0; $i< 5; $i++){
+            $content = $this->fakeContent(
+                1,[
+                    'difficulty' => rand(1,5),
+                    'type' => $this->faker->randomElement(['course','song','play-along']),
+                    'status' => $this->faker->randomElement(['published','draft']),
+                    'language' => $this->faker->word,
+                    'publishedOn' => Carbon::now()
+                        ->subDays($i),
+                    'createdOn' => Carbon::now()
+                        ->subWeek($i),
+                ]
+            );
+        }
+
+        $sm = SearchEntityManager::get();
+
+        $client = $sm->getClient();
+        $index = $client->getIndex('content');
+        $match = new \Elastica\Query\Match();
+        $match->setFieldQuery('status', 'draft');
+
+       // $elasticaQuery = new \Elastica\QueryBuilder;
+
+
+
+        //        $elasticaQuery->addSort(
+        //            ['_geo_distance' => [
+        //                'pin.location' => [-70, 40],
+        //                'order' => 'asc',
+        //                'unit' => 'km']
+        //            ]
+        //        );
+
+        $elasticaResultSet = $index->search($match);
+        $hits = $elasticaResultSet->getResults();
+dd($hits);
     }
 }
