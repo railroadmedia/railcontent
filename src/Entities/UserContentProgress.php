@@ -177,4 +177,15 @@ class UserContentProgress
     {
         $this->higherKeyProgress = $higherKeyProgress;
     }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->getId(),
+            'user_id' => $this->getUser()->getId(),
+            'udated_on' => $this->getUpdatedOn(),
+            'state' => $this->getState(),
+            'progress_percent' => $this->getProgressPercent()
+        ];
+    }
 }

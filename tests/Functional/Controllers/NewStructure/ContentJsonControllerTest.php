@@ -4,9 +4,18 @@ namespace Railroad\Railcontent\Tests\Functional\Controllers\NewStructure;
 
 use Carbon\Carbon;
 use Doctrine\DBAL\Logging\DebugStack;
+use Elastica\Mapping;
+use Elastica\Processor\Sort;
+use Elastica\Query;
 use Elastica\Query\Match;
+use Elastica\Query\Term;
+use Elastica\QueryBuilder;
+use JMS\Serializer\Tests\Fixtures\Discriminator\Car;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Managers\SearchEntityManager;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -19,11 +28,19 @@ class ContentJsonControllerTest extends RailcontentTestCase
      */
     protected $serviceBeingTested;
 
+    protected $railcontentEntityManager;
+
+    protected $userProviderInterface;
+
     protected function setUp()
     {
         parent::setUp();
 
         $this->serviceBeingTested = $this->app->make(ContentService::class);
+
+        $this->railcontentEntityManager = $this->app->make(RailcontentEntityManager::class);
+
+        $this->userProviderInterface = $this->app->make(UserProviderInterface::class);
 
         ResponseService::$oldResponseStructure = false;
     }
@@ -345,7 +362,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $response = $this->call('GET', 'railcontent/content/' . $content[0]->getId());
-
 
         // assert the user data is subset of response
         $this->assertArraySubset(
@@ -2196,42 +2212,94 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_elastic()
     {
-        for ($i = 0; $i< 5; $i++){
-            $content = $this->fakeContent(
-                1,[
-                    'difficulty' => rand(1,5),
-                    'type' => $this->faker->randomElement(['course','song','play-along']),
-                    'status' => $this->faker->randomElement(['published','draft']),
-                    'language' => $this->faker->word,
-                    'publishedOn' => Carbon::now()
-                        ->subDays($i),
-                    'createdOn' => Carbon::now()
-                        ->subWeek($i),
-                ]
+        for ($i = 0; $i < 5; $i++) {
+            $content = new Content();
+            $content->setTitle('Test content s - ' . $i);
+            $content->setSlug($this->faker->slug());
+            $content->setLanguage($this->faker->word);
+            $content->setDifficulty(rand(1, 5));
+            $content->setType($this->faker->randomElement(['course', 'song', 'play-along']));
+            $content->setBrand(config('railcontent.brand'));
+            $content->setCreatedOn(
+                Carbon::now()
+                    ->subWeek(3)
             );
+            $content->setPublishedOn(
+                Carbon::now()
+                    ->subDays($i)
+            );
+            $content->setStatus($this->faker->randomElement(['published', 'draft']));
+
+            $this->railcontentEntityManager->persist($content);
+            $this->railcontentEntityManager->flush();
+
+            if ($i % 2 == 0) {
+                for ($j = 0; $j <= $i; $j++) {
+                    $userId = $this->createAndLogInNewUser();
+                    $user = $this->userProviderInterface->getRailcontentUserById($userId);
+                    $userProgress = new UserContentProgress();
+                    $userProgress->setUser($user);
+                    $userProgress->setContent($content);
+                    $userProgress->setProgressPercent(rand(1, 99));
+                    $userProgress->setState('started');
+
+                    $userProgress->setUpdatedOn(Carbon::now());
+
+                    $this->railcontentEntityManager->persist($userProgress);
+                    $this->railcontentEntityManager->flush();
+                }
+            }
+
         }
 
         $sm = SearchEntityManager::get();
 
         $client = $sm->getClient();
         $index = $client->getIndex('content');
-        $match = new \Elastica\Query\Match();
-        $match->setFieldQuery('status', 'draft');
 
-       // $elasticaQuery = new \Elastica\QueryBuilder;
+        $query = new Query();
+        $bool = new Query\BoolQuery();
 
+        $updateQuery = new Match();
+        $updateQuery->setField('brand', 'brand');
+        $bool->addMust($updateQuery);
 
+        $localeQuery = new Match();
+        $localeQuery->setField('status', 'draft');
+        $bool->addMust($localeQuery);
 
-        //        $elasticaQuery->addSort(
-        //            ['_geo_distance' => [
-        //                'pin.location' => [-70, 40],
-        //                'order' => 'asc',
-        //                'unit' => 'km']
-        //            ]
-        //        );
+        $contentTypeFilter = new Query\BoolQuery();
+        $type1 = new Match();
+        $type1->setField('content_type', 'course');
+        $type2 = new Match();
+        $type2->setField('content_type', 'song');
+        $contentTypeFilter->addShould($type1)
+            ->addShould($type2);
+        $bool->addFilter($contentTypeFilter);
 
-        $elasticaResultSet = $index->search($match);
+        $query->setQuery($bool);
+
+        $query->addSort(
+            [
+                'all_progress_count' => [
+                    'order' => 'asc',
+                ],
+            ]
+        );
+
+        $elasticaResultSet = $index->search($query);
         $hits = $elasticaResultSet->getResults();
-dd($hits);
+        foreach ($hits as $hit) {
+
+            var_dump(
+                $hit->getData()['id'] .
+                ' - ' .
+                $hit->getData()['title'] .
+                ' - ' .
+                $hit->getData()['status'] .
+                '  -  ' .
+                $hit->getData()['content_type']
+            );
+        }
     }
 }

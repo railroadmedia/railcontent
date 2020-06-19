@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Entities;
 
+use Carbon\Carbon;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -60,7 +61,7 @@ use Doctrine\Search\Mapping\Annotations as MAP;
  *     }
  * )
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
- * @MAP\ElasticSearchable(index="content", type="post", source=true, numberOfReplicas=0)
+ * @MAP\ElasticSearchable(index="content", source=true, numberOfReplicas=0)
  *
  */
 class Content extends ArrayExpressible
@@ -173,6 +174,7 @@ class Content extends ArrayExpressible
 
     /**
      * @ORM\Column(type="datetime", name="published_on", nullable=true)
+     * @MAP\ElasticField(name="publishedOn", type="date")
      * @var DateTime
      */
     protected $publishedOn;
@@ -688,6 +690,19 @@ class Content extends ArrayExpressible
     }
 
     public function toArray() {
+        $progresses = [];
+        $lastWeekProgress = 0;
+
+        foreach ($this->getUserProgresses() as $userProgress){
+            $progresses[] = $userProgress->toArray();
+            if($userProgress->getUpdatedOn() >= Carbon::now()->subWeek(1))
+            {
+                $lastWeekProgress++;
+            }
+        }
+
+        $allProgress = count($progresses);
+
         return array(
             'id' => $this->getId(),
             'title' => $this->getTitle(),
@@ -700,7 +715,9 @@ class Content extends ArrayExpressible
             'style' => $this->getStyle(),
             'content_type' => $this->getType(),
             'published_on' => $this->getPublishedOn(),
-            'user_progress' => $this->getUserProgresses()
+            'user_progress' => $progresses,
+            'all_progress_count' => $allProgress,
+            'last_week_progress_count' => $lastWeekProgress
     );
   }
 }

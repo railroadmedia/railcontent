@@ -10,6 +10,7 @@ use Elastica\Query\MatchPhrase;
 use Entities\Behaviour\SearchableEntityInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
+use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Managers\SearchEntityManager;
 
 class SearchableListener implements EventSubscriber
@@ -23,7 +24,9 @@ class SearchableListener implements EventSubscriber
 
         $oEntity = $oArgs->getEntity();
 
-        if (($oEntity instanceof Content) || ($oEntity instanceof ContentData)) {
+        if (($oEntity instanceof Content) ||
+            ($oEntity instanceof ContentData) ||
+            $oEntity instanceof UserContentProgress) {
             $sm = SearchEntityManager::get();
             $metadatas =
                 $sm->getMetadataFactory()
@@ -39,14 +42,27 @@ class SearchableListener implements EventSubscriber
                 }
 
                 //delete document
-                $matchPhraseQuery = new MatchPhrase("id", $oEntity->getId());
+                $contentID =
+                    ($oEntity instanceof Content) ? $oEntity->getId() :
+                        $oEntity->getContent()
+                            ->getId();
+
+                $matchPhraseQuery = new MatchPhrase("id", $contentID);
 
                 $index = $client->getIndex($metadata->index);
                 $index->deleteByQuery($matchPhraseQuery);
 
-                $document = new Document('', $oEntity->toArray());
+                $document =
+                    new Document(
+                        '',
+                        ($oEntity instanceof Content) ? $oEntity->toArray() :
+                            $oEntity->getContent()
+                                ->toArray()
+                    );
                 $client->getIndex($metadata->index)
                     ->addDocuments([$document]);
+
+                $index->refresh();
             }
         }
     }

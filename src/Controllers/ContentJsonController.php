@@ -205,23 +205,6 @@ class ContentJsonController extends Controller
 
         $sm = SearchEntityManager::get();
 
-        $client = $sm->getClient();
-        $metadatas = $sm->getMetadataFactory()->getAllMetadata();
-
-        // Delete indexes
-        foreach ($metadatas as $metadata) {
-            if ($client->getIndex($metadata->index)->exists()) {
-                $client->deleteIndex($metadata->index);
-            }
-        }
-
-        // Recreate indexes
-        foreach ($metadatas as $metadata) {
-            if (!$client->getIndex($metadata->index)->exists()) {
-                $client->createIndex($metadata->index);
-            }
-        }
-
         return ResponseService::content($content)
             ->respond(201);
 
