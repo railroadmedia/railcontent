@@ -8,8 +8,10 @@ use Elastica\Mapping;
 use Elastica\Processor\Sort;
 use Elastica\Query;
 use Elastica\Query\Match;
+use Elastica\Query\Script as ScriptQuery;
 use Elastica\Query\Term;
 use Elastica\QueryBuilder;
+use Elastica\Script\Script;
 use JMS\Serializer\Tests\Fixtures\Discriminator\Car;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
@@ -2212,12 +2214,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_elastic()
     {
+
         for ($i = 0; $i < 5; $i++) {
             $content = new Content();
             $content->setTitle('Test content s - ' . $i);
             $content->setSlug($this->faker->slug());
             $content->setLanguage($this->faker->word);
-            $content->setDifficulty(rand(1, 5));
+            $content->setDifficulty($i);
             $content->setType($this->faker->randomElement(['course', 'song', 'play-along']));
             $content->setBrand(config('railcontent.brand'));
             $content->setCreatedOn(
@@ -2264,28 +2267,68 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $updateQuery->setField('brand', 'brand');
         $bool->addMust($updateQuery);
 
-        $localeQuery = new Match();
-        $localeQuery->setField('status', 'draft');
-        $bool->addMust($localeQuery);
+//        $localeQuery = new Match();
+//        $localeQuery->setField('status', 'draft');
+//        $bool->addMust($localeQuery);
 
-        $contentTypeFilter = new Query\BoolQuery();
-        $type1 = new Match();
-        $type1->setField('content_type', 'course');
-        $type2 = new Match();
-        $type2->setField('content_type', 'song');
-        $contentTypeFilter->addShould($type1)
-            ->addShould($type2);
-        $bool->addFilter($contentTypeFilter);
+//        $contentTypeFilter = new Query\BoolQuery();
+//        $type1 = new Match();
+//        $type1->setField('content_type', 'course');
+//        $type2 = new Match();
+//        $type2->setField('content_type', 'song');
+//        $contentTypeFilter->addShould($type1)
+//            ->addShould($type2);
+//        $bool->addFilter($contentTypeFilter);
 
         $query->setQuery($bool);
 
-        $query->addSort(
-            [
-                'all_progress_count' => [
-                    'order' => 'asc',
-                ],
-            ]
+//        $query->addSort(
+//            [
+//                'all_progress_count' => [
+//                    'order' => 'asc',
+//                ],
+//            ]
+//        );
+/**
+
+}
+ * */
+//        $query->setSort( new Query\Script( [
+//            "_script" =>[
+//                "script" => "doc['difficulty'].value == 3 ? 1 : 0",
+//                "type" => "number",
+//                "order" => "desc"            ],])
+//
+//
+//        );
+//        $string = "doc['difficulty'].value == 3 ? 1 : 0";
+//        $params = [
+//            'param1' => 'one',
+//            'param2' => 1,
+//        ];
+//        $lang = 'mvel';
+//        $script = new Script($string, $params, $lang);
+//
+//        $query2 = new ScriptQuery();
+//        $query2->setScript($script);
+////dd($query2);
+//      //  $array = $query->toArray();
+//
+//     //   dd($array);
+//
+//       $query->setSort([$query2]);
+        //sort by user difficulty (used for sort by relevance)
+        $sort = array(
+            "_script" => array(
+                'script' => "(doc['difficulty'].value ==2) ? 1 : 0",
+                'type' => 'number',
+                'order' => 'desc'),
+            "_script" => array(
+                'script' => "(doc['id'].value ==6) ? 1 : 0",
+                'type' => 'number',
+                'order' => 'desc'),
         );
+        $query->setSort($sort);
 
         $elasticaResultSet = $index->search($query);
         $hits = $elasticaResultSet->getResults();
@@ -2298,7 +2341,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 ' - ' .
                 $hit->getData()['status'] .
                 '  -  ' .
-                $hit->getData()['content_type']
+                $hit->getData()['content_type'].
+                '  diff-  ' .
+                $hit->getData()['difficulty']
             );
         }
     }

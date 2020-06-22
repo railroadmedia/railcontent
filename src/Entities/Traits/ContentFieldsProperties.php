@@ -3,11 +3,13 @@
 namespace Railroad\Railcontent\Entities\Traits;
 
 use DateTime;
+use Doctrine\Search\Mapping\Annotations as MAP;
 
 trait ContentFieldsProperties
 {
     /**
      * @ORM\Column(type="string", nullable=true)
+     *
      * @var string
      */
     protected $difficulty;
@@ -44,7 +46,6 @@ trait ContentFieldsProperties
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @MAP\ElasticField(type="string", includeInAll=true, boost=5.0)
      * @var string
      */
     protected $title;

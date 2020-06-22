@@ -59,9 +59,11 @@ class SearchableListener implements EventSubscriber
                             $oEntity->getContent()
                                 ->toArray()
                     );
-                $client->getIndex($metadata->index)
-                    ->addDocuments([$document]);
 
+                // Add tweet to type
+                $index->addDocument($document);
+
+                // Refresh Index
                 $index->refresh();
             }
         }

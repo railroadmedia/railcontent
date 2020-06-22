@@ -12,6 +12,7 @@ use Railroad\Railcontent\Entities\Traits\ContentFieldsProperties;
 use Railroad\Railcontent\Entities\Traits\DecoratedFields;
 use Doctrine\Search\Mapping\Annotations as MAP;
 
+
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentRepository")
  * @ORM\HasLifecycleCallbacks
@@ -61,7 +62,7 @@ use Doctrine\Search\Mapping\Annotations as MAP;
  *     }
  * )
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
- * @MAP\ElasticSearchable(index="content", source=true, numberOfReplicas=0)
+ *
  *
  */
 class Content extends ArrayExpressible
@@ -72,21 +73,21 @@ class Content extends ArrayExpressible
 
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
-     * @MAP\ElasticField(type="integer", includeInAll=false)
+     *
      * @var int
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string", name="slug")
-     * @MAP\ElasticField(type="string", includeInAll=true, boost=5.0)
+     *
      * @var string
      */
     protected $slug;
 
     /**
      * @ORM\Column(type="string")
-     * @MAP\ElasticField(type="string", includeInAll=true)
+     *
      * @var string
      */
     protected $type;
@@ -99,7 +100,7 @@ class Content extends ArrayExpressible
 
     /**
      * @ORM\Column(type="string")
-     * @MAP\ElasticField(type="string", includeInAll=true)
+     *
      * @var string
      */
     protected $status;
@@ -112,7 +113,7 @@ class Content extends ArrayExpressible
 
     /**
      * @ORM\Column(type="text")
-     * @MAP\ElasticField(type="string", includeInAll=true)
+     *
      * @var text
      */
     protected $brand;
@@ -168,13 +169,11 @@ class Content extends ArrayExpressible
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentData", mappedBy="content", cascade={"remove"})
      * @ORM\JoinColumn(name="id", referencedColumnName="content_id")
-     * @MAP\ElasticField(name="data", type="string", includeInAll=false)
      */
     protected $data;
 
     /**
      * @ORM\Column(type="datetime", name="published_on", nullable=true)
-     * @MAP\ElasticField(name="publishedOn", type="date")
      * @var DateTime
      */
     protected $publishedOn;
@@ -715,9 +714,10 @@ class Content extends ArrayExpressible
             'style' => $this->getStyle(),
             'content_type' => $this->getType(),
             'published_on' => $this->getPublishedOn(),
-            'user_progress' => $progresses,
+           // 'user_progress' => $progresses,
             'all_progress_count' => $allProgress,
-            'last_week_progress_count' => $lastWeekProgress
+            'last_week_progress_count' => $lastWeekProgress,
+            'topics' => $this->getTopic()->toArray()
     );
   }
 }
