@@ -2,16 +2,13 @@
 
 namespace Railroad\Railcontent\Commands;
 
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
-use Doctrine\Search\SearchManager;
-use Elastica\Client;
+use Carbon\Carbon;
 use Elastica\Document;
+use Elastica\Query\MatchPhrase;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
-use Railroad\Railcontent\Managers\RailcontentEntityManager;
-use Railroad\Railcontent\Managers\SearchEntityManager;
+use Railroad\Railcontent\Services\ElasticService;
 
 class MigrateContentToElasticsearch extends Command
 {
@@ -35,29 +32,28 @@ class MigrateContentToElasticsearch extends Command
     private $databaseManager;
 
     /**
-     * @var RailcontentEntityManager
+     * @var ElasticService
      */
-    private $entityManager;
+    private $elasticService;
 
     /**
      * MigrateContentToElasticsearch constructor.
      *
      * @param DatabaseManager $databaseManager
-     * @param RailcontentEntityManager $entityManager
+     * @param ElasticService $elasticService
      */
-    public function __construct(DatabaseManager $databaseManager, RailcontentEntityManager $entityManager)
-    {
+    public function __construct(
+        DatabaseManager $databaseManager,
+        ElasticService $elasticService
+    ) {
         parent::__construct();
 
         $this->databaseManager = $databaseManager;
 
-        $this->entityManager = $entityManager;
+        $this->elasticService = $elasticService;
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
+
     public function handle()
     {
         $this->info('Starting MigrateContentToElasticsearch.');
@@ -67,23 +63,60 @@ class MigrateContentToElasticsearch extends Command
         $pdo = $dbConnection->getPdo();
         $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
 
-        $sm = SearchEntityManager::get();
-        $client = $sm->getClient();
-
-        if (!$client->getIndex('content')
-            ->exists()) {
-            $client->createIndex('content');
-        }
+        $client = $this->elasticService->getClient();
         $index = $client->getIndex('content');
+
+        if (!$index->exists()) {
+            $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
+        }
+
+        $this->elasticService->setMapping($index);
+
 
         $dbConnection->table(config('railcontent.table_prefix') . 'content')
             ->select('*')
             ->orderBy('id', 'asc')
             ->chunk(
-                5,
+                50,
                 function (Collection $rows) use ($dbConnection, $index) {
-
+                    $elasticBulk = [];
                     foreach ($rows as $row) {
+                        //delete document if exists
+                        $matchPhraseQuery = new MatchPhrase("id", $row->id);
+                        $index->deleteByQuery($matchPhraseQuery);
+
+                        $topics =
+                            $dbConnection->table(config('railcontent.table_prefix') . 'content_topic')
+                                ->select('topic')
+                                ->where('content_id', $row->id)
+                                ->orderBy('id', 'asc')
+                                ->get();
+                        $data =
+                            $dbConnection->table(config('railcontent.table_prefix') . 'content_data')
+                                ->select('*')
+                                ->where('content_id', $row->id)
+                                ->orderBy('id', 'asc')
+                                ->get();
+                        $datum = [];
+                        foreach ($data as $d) {
+                            $datum[] = ['key' => $d->key, 'value' => $d->value];
+                        }
+
+                        $allProgressCount =
+                            $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
+                                ->where('content_id', $row->id)
+                                ->count();
+
+                        $lastWeekProgressCount =
+                            $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
+                                ->where('content_id', $row->id)
+                                ->where(
+                                    'updated_on',
+                                    '>=',
+                                    Carbon::now()
+                                        ->subWeek(1)
+                                )
+                                ->count();
 
                         $document = new Document(
                             '', [
@@ -91,24 +124,32 @@ class MigrateContentToElasticsearch extends Command
                                 'title' => $row->title,
                                 'name' => $row->name,
                                 'slug' => $row->slug,
-                                'difficulty' => $row->difficulty,
+                                'difficulty' =>  $row->difficulty,
                                 'status' => $row->status,
                                 'brand' => $row->brand,
                                 'style' => $row->style,
                                 'content_type' => $row->type,
-                                'published_on' => $row->published_on,
+                                'published_on' => Carbon::parse($row->published_on),
+                                'topics' => $topics->pluck('topic')
+                                    ->toArray(),
+                                'all_progress_count' => $allProgressCount,
+                                'last_week_progress_count' => $lastWeekProgressCount,
+                                'datum' => $datum,
                             ]
                         );
 
-                        // Add tweet to type
-                        $index->addDocument($document);
-
-                        // Refresh Index
-                        $index->refresh();
+                        $elasticBulk[] = $document;
                     }
+                    //Add documents
+                    $index->addDocuments($elasticBulk);
 
+                    //Refresh Index
+                    $index->refresh();
                 }
+
             );
+
+
 
         $this->info('Finished MigrateContentToElasticsearch.');
     }

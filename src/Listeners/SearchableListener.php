@@ -12,9 +12,25 @@ use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Managers\SearchEntityManager;
+use Railroad\Railcontent\Services\ElasticService;
 
 class SearchableListener implements EventSubscriber
 {
+
+    /**
+     * @var ElasticService
+     */
+    protected $elasticService;
+
+    /**
+     * SearchableListener constructor.
+     *
+     * @param ElasticService $elasticService
+     */
+    public function __construct()
+    {
+        $this->elasticService = app()->make(ElasticService::class);
+    }
 
     /**
      * @param LifecycleEventArgs $oArgs
@@ -27,45 +43,40 @@ class SearchableListener implements EventSubscriber
         if (($oEntity instanceof Content) ||
             ($oEntity instanceof ContentData) ||
             $oEntity instanceof UserContentProgress) {
-            $sm = SearchEntityManager::get();
-            $metadatas =
-                $sm->getMetadataFactory()
-                    ->getAllMetadata();
 
-            $client = $sm->getClient();
+            $client = $this->elasticService->getClient();
 
             // Create indexes if not exists and add documents
-            foreach ($metadatas as $metadata) {
-                if (!$client->getIndex($metadata->index)
-                    ->exists()) {
-                    $client->createIndex($metadata->index);
-                }
+            $index = $client->getIndex('content2');
 
-                //delete document
-                $contentID =
-                    ($oEntity instanceof Content) ? $oEntity->getId() :
-                        $oEntity->getContent()
-                            ->getId();
-
-                $matchPhraseQuery = new MatchPhrase("id", $contentID);
-
-                $index = $client->getIndex($metadata->index);
-                $index->deleteByQuery($matchPhraseQuery);
-
-                $document =
-                    new Document(
-                        '',
-                        ($oEntity instanceof Content) ? $oEntity->toArray() :
-                            $oEntity->getContent()
-                                ->toArray()
-                    );
-
-                // Add tweet to type
-                $index->addDocument($document);
-
-                // Refresh Index
-                $index->refresh();
+            if (!$index->exists()) {
+                $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
             }
+
+            //delete document
+            $contentID =
+                ($oEntity instanceof Content) ? $oEntity->getId() :
+                    $oEntity->getContent()
+                        ->getId();
+
+            $matchPhraseQuery = new MatchPhrase("id", $contentID);
+
+            $index = $client->getIndex('content2');
+            $index->deleteByQuery($matchPhraseQuery);
+
+            $document = new Document(
+                '',
+                ($oEntity instanceof Content) ? $oEntity->toArray() :
+                    $oEntity->getContent()
+                        ->toArray()
+            );
+
+            // Add tweet to type
+            $index->addDocument($document);
+
+            // Refresh Index
+            $index->refresh();
+
         }
     }
 
