@@ -64,13 +64,13 @@ class MigrateContentToElasticsearch extends Command
         $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
 
         $client = $this->elasticService->getClient();
-        $index = $client->getIndex('content');
+        $contentIndex = $client->getIndex('content');
 
-        if (!$index->exists()) {
-            $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
+        if (!$contentIndex->exists()) {
+            $contentIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
+
+            $this->elasticService->setMapping($contentIndex);
         }
-
-        $this->elasticService->setMapping($index);
 
 
         $dbConnection->table(config('railcontent.table_prefix') . 'content')
@@ -78,12 +78,12 @@ class MigrateContentToElasticsearch extends Command
             ->orderBy('id', 'asc')
             ->chunk(
                 50,
-                function (Collection $rows) use ($dbConnection, $index) {
+                function (Collection $rows) use ($dbConnection, $contentIndex) {
                     $elasticBulk = [];
                     foreach ($rows as $row) {
                         //delete document if exists
                         $matchPhraseQuery = new MatchPhrase("id", $row->id);
-                        $index->deleteByQuery($matchPhraseQuery);
+                        $contentIndex->deleteByQuery($matchPhraseQuery);
 
                         $topics =
                             $dbConnection->table(config('railcontent.table_prefix') . 'content_topic')
@@ -118,6 +118,16 @@ class MigrateContentToElasticsearch extends Command
                                 )
                                 ->count();
 
+                        $parent =  $dbConnection->table(config('railcontent.table_prefix') . 'content_hierarchy')
+                            ->where('child_id', $row->id)
+                            ->select('parent_id')
+                            ->first();
+
+                        $userPlaylists =  $dbConnection->table(config('railcontent.table_prefix') . 'user_playlist_content')
+                            ->where('content_id', $row->id)
+                            ->select('user_playlist_id')
+                            ->get();
+
                         $document = new Document(
                             '', [
                                 'id' => $row->id,
@@ -135,21 +145,57 @@ class MigrateContentToElasticsearch extends Command
                                 'all_progress_count' => $allProgressCount,
                                 'last_week_progress_count' => $lastWeekProgressCount,
                                 'datum' => $datum,
+                                'parent_id' => ($parent)?$parent->parent_id:null,
+                                'playlist_ids' => $userPlaylists->pluck('user_playlist_id')->toArray()
                             ]
                         );
 
                         $elasticBulk[] = $document;
                     }
                     //Add documents
-                    $index->addDocuments($elasticBulk);
+                    $contentIndex->addDocuments($elasticBulk);
 
                     //Refresh Index
-                    $index->refresh();
+                    $contentIndex->refresh();
                 }
-
             );
 
+        $userProgressIndex = $client->getIndex('progress');
 
+        if (!$userProgressIndex->exists()) {
+            $userProgressIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
+
+          //  $this->elasticService->setMapping($contentIndex);
+        }
+
+
+        $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
+            ->select('*')
+            ->orderBy('id', 'asc')
+            ->chunk(
+                50,
+                function (Collection $rows) use ($dbConnection, $userProgressIndex) {
+                    $elasticBulk = [];
+
+                    foreach ($rows as $row) {
+                        $document = new Document(
+                            '', [
+                                'id' => $row->id,
+                                'user_id' => $row->user_id,
+                                'content_id' => $row->content_id,
+                                'state' => $row->state,
+                            ]
+                        );
+
+                        $elasticBulk[] = $document;
+                    }
+
+                    //Add documents
+                    $userProgressIndex->addDocuments($elasticBulk);
+
+                    //Refresh Index
+                    $userProgressIndex->refresh();
+                });
 
         $this->info('Finished MigrateContentToElasticsearch.');
     }
