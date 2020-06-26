@@ -90,33 +90,19 @@ class ElasticTest extends RailcontentTestCase
 
         }
 
-        $client = $this->serviceBeingTested->getClient();
-        $index = $client->getIndex('content');
+        $results = $this->serviceBeingTested->getElasticFiltered(
+            1,
+            100,
+            'relevance',
+            ['course', 'song']
+        );
 
-        $searchQuery =
-            $this->serviceBeingTested->build()
-                ->restrictByUserAccess()
-                ->sortResults('trend');
-
-        $elasticaResultSet = $index->search($searchQuery);
-
-        //
-        //        $sort = array(
-        //            "_script" => array(
-        //                'script' => "(doc['difficulty'].value ==2) ? 1 : 0",
-        //                'type' => 'number',
-        //                'order' => 'desc'),
-        //            "_script" => array(
-        //                'script' => "(doc['id'].value ==6) ? 1 : 0",
-        //                'type' => 'number',
-        //                'order' => 'desc'),
-        //        );
-        //        $query->setSort($sort);
-
-        $hits = $elasticaResultSet->getResults();
-        foreach ($hits as $hit) {
+        foreach ($results as $hit) {
 
             var_dump(
+                'Score: ' .
+                $hit->getScore() .
+                '  Content Id:' .
                 $hit->getData()['id'] .
                 ' - ' .
                 $hit->getData()['title'] .
@@ -125,7 +111,13 @@ class ElasticTest extends RailcontentTestCase
                 '  -  ' .
                 $hit->getData()['content_type'] .
                 '  diff-  ' .
-                $hit->getData()['difficulty']
+                $hit->getData()['difficulty'] .
+                ' last week progress ' .
+                $hit->getData()['last_week_progress_count'] .
+                ' all_progress_count ' .
+                $hit->getData()['all_progress_count'] .
+                'topics::' .
+                var_dump($hit->getData()['topics'])
             );
         }
     }

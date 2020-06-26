@@ -1590,25 +1590,4 @@ class ContentService
         }
         return $defaultXp;
     }
-
-    public function getElasticFiltered(
-        $page,
-        $limit,
-        $sort = 'newest',
-        array $includedTypes = [],
-        array $slugHierarchy = [],
-        array $requiredParentIds = [],
-        array $requiredFields = [],
-        array $includedFields = [],
-        array $requiredUserStates = [],
-        array $includedUserStates = [],
-        $pullFilterFields = true,
-        $getFutureContentOnly = false,
-        $pullPagination = true,
-        array $requiredUserPlaylistIds = []
-    )
-    {
-
-    }
-
 }

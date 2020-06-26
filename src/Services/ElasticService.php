@@ -96,6 +96,8 @@ class ElasticService
                 'status' => ['type' => 'text'],
                 'difficulty' => ['type' => 'text'],
                 'style' => ['type' => 'text'],
+                'published_on' => ['type' => 'date'],
+                'topics' => ['type' => 'nested']
             ]
         );
 
@@ -103,20 +105,66 @@ class ElasticService
         $mapping->send($index);
     }
 
+    /**
+     * @return ElasticQueryBuilder
+     */
     public function build(){
         $query  = new ElasticQueryBuilder();
 
         return $query;
     }
 
-    public function restrictBrandQuery()
+    /**
+     * @param int $page
+     * @param int $limit
+     * @param string $sort
+     * @param array $includedTypes
+     * @param array $slugHierarchy
+     * @param array $requiredParentIds
+     * @param array $requiredFields
+     * @param array $includedFields
+     * @param array $requiredUserStates
+     * @param array $includedUserStates
+     * @param bool $pullFilterFields
+     * @param bool $getFutureContentOnly
+     * @param bool $pullPagination
+     * @param array $requiredUserPlaylistIds
+     * @return \Elastica\Result[]
+     */
+    public function getElasticFiltered(
+        $page =1,
+        $limit = 10,
+        $sort = 'newest',
+        array $includedTypes = [],
+        array $slugHierarchy = [],
+        array $requiredParentIds = [],
+        array $requiredFields = [],
+        array $includedFields = [],
+        array $requiredUserStates = [],
+        array $includedUserStates = [],
+        $pullFilterFields = true,
+        $getFutureContentOnly = false,
+        $pullPagination = true,
+        array $requiredUserPlaylistIds = []
+    )
     {
-        $bool = new Query\BoolQuery();
+        $client = $this->getClient();
+        $index = $client->getIndex('content');
 
-        $updateQuery = new Match();
-        $updateQuery->setField('brand', 'drumeo');
-        $bool->addMust($updateQuery);
+        $searchQuery =
+            $this->build()
+                ->restrictByUserAccess()
+                ->restrictByTypes($includedTypes)
+                ->includeByUserStates($includedUserStates)
+                ->restrictByParentIds($requiredParentIds)
+                ->restrictByUserStates($requiredUserStates)
+                ->restrictBySlugHierarchy($slugHierarchy)
+                ->restrictByPlaylistIds($requiredUserPlaylistIds)
+                ->restrictByFields($requiredFields)
+                ->sortResults($sort)
+                ->setSize($limit)
+                ->setFrom(($page - 1) * $limit);
 
-        return $bool;
+        return $index->search($searchQuery)->getResults();
     }
 }

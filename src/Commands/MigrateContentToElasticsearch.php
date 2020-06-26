@@ -160,20 +160,22 @@ class MigrateContentToElasticsearch extends Command
                 }
             );
 
-        $userProgressIndex = $client->getIndex('progress');
+        //TODO: Optimize user progress migration to elasticsearch
+//        $userProgressIndex = $client->getIndex('progress');
+//
+//        if (!$userProgressIndex->exists()) {
+//            $userProgressIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
+//
+//          //  $this->elasticService->setMapping($contentIndex);
+//        }
 
-        if (!$userProgressIndex->exists()) {
-            $userProgressIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
-
-          //  $this->elasticService->setMapping($contentIndex);
-        }
-
-
+/*
         $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
             ->select('*')
+            ->limit(1000)
             ->orderBy('id', 'asc')
             ->chunk(
-                50,
+                500,
                 function (Collection $rows) use ($dbConnection, $userProgressIndex) {
                     $elasticBulk = [];
 
@@ -196,7 +198,7 @@ class MigrateContentToElasticsearch extends Command
                     //Refresh Index
                     $userProgressIndex->refresh();
                 });
-
+*/
         $this->info('Finished MigrateContentToElasticsearch.');
     }
 }

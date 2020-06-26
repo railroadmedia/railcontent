@@ -2,20 +2,15 @@
 
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
-use Carbon\Carbon;
-use Elastica\Aggregation\DateRange;
 use Elastica\Query;
+use Elastica\Query\FunctionScore;
 use Elastica\Query\Terms;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Entities\UserPermission;
-use Railroad\Railcontent\Entities\UserPlaylistContent;
 use Railroad\Railcontent\Repositories\ContentRepository;
-
-use Elastica\Query\Match;
 
 class ElasticQueryBuilder extends \Elastica\Query
 {
@@ -147,12 +142,12 @@ class ElasticQueryBuilder extends \Elastica\Query
             return $this;
         }
 
-        foreach ($requiredUserStates as $index => $requiredUserState) {
-            $this->andWhere('progress.state IN (:states)')
-                ->andWhere('progress.user = :user')
-                ->setParameter('states', $requiredUserState['state'])
-                ->setParameter('user', $requiredUserState['user']);
-        }
+//        foreach ($requiredUserStates as $index => $requiredUserState) {
+//            $this->andWhere('progress.state IN (:states)')
+//                ->andWhere('progress.user = :user')
+//                ->setParameter('states', $requiredUserState['state'])
+//                ->setParameter('user', $requiredUserState['user']);
+//        }
         return $this;
     }
 
@@ -166,24 +161,24 @@ class ElasticQueryBuilder extends \Elastica\Query
         if (empty($includedUserStates)) {
             return $this;
         }
-        $this->join(UserContentProgress::class, 'pu', 'WITH', 'railcontent_content.id = pu.content');
-        $orX =
-            $this->expr()
-                ->orX();
-        foreach ($includedUserStates as $includedUserState) {
-            $condition =
-                $this->expr()
-                    ->andX(
-                        'pu.state  = ' .
-                        $this->expr()
-                            ->literal($includedUserState['state']) .
-                        ' AND pu.user = ' .
-                        $includedUserState['user']
-                    );
-
-            $orX->add($condition);
-        }
-        $this->andWhere($orX);
+//        $this->join(UserContentProgress::class, 'pu', 'WITH', 'railcontent_content.id = pu.content');
+//        $orX =
+//            $this->expr()
+//                ->orX();
+//        foreach ($includedUserStates as $includedUserState) {
+//            $condition =
+//                $this->expr()
+//                    ->andX(
+//                        'pu.state  = ' .
+//                        $this->expr()
+//                            ->literal($includedUserState['state']) .
+//                        ' AND pu.user = ' .
+//                        $includedUserState['user']
+//                    );
+//
+//            $orX->add($condition);
+//        }
+//        $this->andWhere($orX);
 
         return $this;
     }
@@ -199,55 +194,55 @@ class ElasticQueryBuilder extends \Elastica\Query
             return $this;
         }
 
-        foreach ($requiredFields as $index => $requiredFieldData) {
-            if (in_array(
-                $requiredFieldData['name'],
-                $this->getEntityManager()
-                    ->getClassMetadata(Content::class)
-                    ->getFieldNames()
-            )) {
-                $this->andWhere(
-                    config('railcontent.table_prefix') .
-                    'content' .
-                    '.' .
-                    $requiredFieldData['name'] .
-                    ' ' .
-                    $requiredFieldData['operator'] .
-                    '  (:value' .
-                    $index .
-                    ')'
-                )
-                    ->setParameter('value' . $index, $requiredFieldData['value']);
-            } else {
-                if (in_array(
-                    $requiredFieldData['name'],
-                    $this->getEntityManager()
-                        ->getClassMetadata(Content::class)
-                        ->getAssociationNames()
-                )) {
-                    $this->join(
-                        config('railcontent.table_prefix') .
-                        'content' .
-                        '.' .
-                        $this->getEntityManager()
-                            ->getClassMetadata(Content::class)
-                            ->getFieldName($requiredFieldData['name']),
-                        'pf' . $index
-                    )
-                        ->andWhere(
-                            'pf' .
-                            $index .
-                            '.' .
-                            $requiredFieldData['name'] .
-                            $requiredFieldData['operator'] .
-                            ' (:value' .
-                            $index .
-                            ')'
-                        )
-                        ->setParameter('value' . $index, $requiredFieldData['value']);
-                }
-            }
-        }
+//        foreach ($requiredFields as $index => $requiredFieldData) {
+//            if (in_array(
+//                $requiredFieldData['name'],
+//                $this->getEntityManager()
+//                    ->getClassMetadata(Content::class)
+//                    ->getFieldNames()
+//            )) {
+//                $this->andWhere(
+//                    config('railcontent.table_prefix') .
+//                    'content' .
+//                    '.' .
+//                    $requiredFieldData['name'] .
+//                    ' ' .
+//                    $requiredFieldData['operator'] .
+//                    '  (:value' .
+//                    $index .
+//                    ')'
+//                )
+//                    ->setParameter('value' . $index, $requiredFieldData['value']);
+//            } else {
+//                if (in_array(
+//                    $requiredFieldData['name'],
+//                    $this->getEntityManager()
+//                        ->getClassMetadata(Content::class)
+//                        ->getAssociationNames()
+//                )) {
+//                    $this->join(
+//                        config('railcontent.table_prefix') .
+//                        'content' .
+//                        '.' .
+//                        $this->getEntityManager()
+//                            ->getClassMetadata(Content::class)
+//                            ->getFieldName($requiredFieldData['name']),
+//                        'pf' . $index
+//                    )
+//                        ->andWhere(
+//                            'pf' .
+//                            $index .
+//                            '.' .
+//                            $requiredFieldData['name'] .
+//                            $requiredFieldData['operator'] .
+//                            ' (:value' .
+//                            $index .
+//                            ')'
+//                        )
+//                        ->setParameter('value' . $index, $requiredFieldData['value']);
+//                }
+//            }
+//        }
 
         return $this;
     }
@@ -263,52 +258,52 @@ class ElasticQueryBuilder extends \Elastica\Query
             return $this;
         }
 
-        $conditions = [];
-
-        foreach ($includedFields as $index => $requiredFieldData) {
-            if (in_array(
-                $requiredFieldData['name'],
-                $this->getEntityManager()
-                    ->getClassMetadata(Content::class)
-                    ->getFieldNames()
-            )) {
-                $conditions[config('railcontent.table_prefix') . 'content' . '.' . $requiredFieldData['name']] =
-                    $requiredFieldData['value'];
-            } else {
-                if (in_array(
-                    $requiredFieldData['name'],
-                    $this->getEntityManager()
-                        ->getClassMetadata(Content::class)
-                        ->getAssociationNames()
-                )) {
-                    $this->join(
-                        config('railcontent.table_prefix') .
-                        'content' .
-                        '.' .
-                        $this->getEntityManager()
-                            ->getClassMetadata(Content::class)
-                            ->getFieldName($requiredFieldData['name']),
-                        'ipf' . $index
-                    );
-                    $conditions['ipf' . $index] = $requiredFieldData['value'];
-                }
-            }
-        }
-        if (!empty($conditions)) {
-            $orX =
-                $this->expr()
-                    ->orX();
-            foreach ($conditions as $key => $value) {
-                $condition =
-                    $this->expr()
-                        ->orX(
-                            $key . ' IN (' . $value . ')'
-                        );
-
-                $orX->add($condition);
-            }
-            $this->andWhere($orX);
-        }
+//        $conditions = [];
+//
+//        foreach ($includedFields as $index => $requiredFieldData) {
+//            if (in_array(
+//                $requiredFieldData['name'],
+//                $this->getEntityManager()
+//                    ->getClassMetadata(Content::class)
+//                    ->getFieldNames()
+//            )) {
+//                $conditions[config('railcontent.table_prefix') . 'content' . '.' . $requiredFieldData['name']] =
+//                    $requiredFieldData['value'];
+//            } else {
+//                if (in_array(
+//                    $requiredFieldData['name'],
+//                    $this->getEntityManager()
+//                        ->getClassMetadata(Content::class)
+//                        ->getAssociationNames()
+//                )) {
+//                    $this->join(
+//                        config('railcontent.table_prefix') .
+//                        'content' .
+//                        '.' .
+//                        $this->getEntityManager()
+//                            ->getClassMetadata(Content::class)
+//                            ->getFieldName($requiredFieldData['name']),
+//                        'ipf' . $index
+//                    );
+//                    $conditions['ipf' . $index] = $requiredFieldData['value'];
+//                }
+//            }
+//        }
+//        if (!empty($conditions)) {
+//            $orX =
+//                $this->expr()
+//                    ->orX();
+//            foreach ($conditions as $key => $value) {
+//                $condition =
+//                    $this->expr()
+//                        ->orX(
+//                            $key . ' IN (' . $value . ')'
+//                        );
+//
+//                $orX->add($condition);
+//            }
+//            $this->andWhere($orX);
+//        }
 
         return $this;
     }
@@ -323,60 +318,60 @@ class ElasticQueryBuilder extends \Elastica\Query
             return $this;
         }
 
-        $this->leftJoin(
-            ContentPermission::class,
-            'content_permission',
-            'WITH',
-            $this->expr()
-                ->andX(
-                    $this->expr()
-                        ->eq('content_permission.brand', ':brand'),
-                    $this->expr()
-                        ->orX(
-                            $this->expr()
-                                ->eq('railcontent_content.id', 'content_permission.content'),
-                            $this->expr()
-                                ->eq('railcontent_content.type', 'content_permission.contentType')
-                        )
-                )
-        )
-            ->leftJoin(
-                UserPermission::class,
-                'user_permission',
-                'WITH',
-                'content_permission.permission = user_permission.permission'
-            )
-            ->setParameter('brand', config('railcontent.brand'));
-
-        $this->andWhere(
-            $this->expr()
-                ->orX(
-                    $this->expr()
-                        ->isNull('content_permission'),
-                    $this->expr()
-                        ->andX(
-                            $this->expr()
-                                ->eq('user_permission.user', ':user'),
-                            $this->expr()
-                                ->orX(
-                                    $this->expr()
-                                        ->isNull('user_permission.expirationDate'),
-                                    $this->expr()
-                                        ->gte('user_permission.expirationDate', 'CURRENT_TIMESTAMP()')
-                                )
-                        )
-
-                )
-        )
-            ->setParameter('brand', config('railcontent.brand'))
-            ->setParameter(
-                'user',
-                app()
-                    ->make(UserProviderInterface::class)
-                    ->getCurrentUser()
-            );
-
-        return $this;
+//        $this->leftJoin(
+//            ContentPermission::class,
+//            'content_permission',
+//            'WITH',
+//            $this->expr()
+//                ->andX(
+//                    $this->expr()
+//                        ->eq('content_permission.brand', ':brand'),
+//                    $this->expr()
+//                        ->orX(
+//                            $this->expr()
+//                                ->eq('railcontent_content.id', 'content_permission.content'),
+//                            $this->expr()
+//                                ->eq('railcontent_content.type', 'content_permission.contentType')
+//                        )
+//                )
+//        )
+//            ->leftJoin(
+//                UserPermission::class,
+//                'user_permission',
+//                'WITH',
+//                'content_permission.permission = user_permission.permission'
+//            )
+//            ->setParameter('brand', config('railcontent.brand'));
+//
+//        $this->andWhere(
+//            $this->expr()
+//                ->orX(
+//                    $this->expr()
+//                        ->isNull('content_permission'),
+//                    $this->expr()
+//                        ->andX(
+//                            $this->expr()
+//                                ->eq('user_permission.user', ':user'),
+//                            $this->expr()
+//                                ->orX(
+//                                    $this->expr()
+//                                        ->isNull('user_permission.expirationDate'),
+//                                    $this->expr()
+//                                        ->gte('user_permission.expirationDate', 'CURRENT_TIMESTAMP()')
+//                                )
+//                        )
+//
+//                )
+//        )
+//            ->setParameter('brand', config('railcontent.brand'))
+//            ->setParameter(
+//                'user',
+//                app()
+//                    ->make(UserProviderInterface::class)
+//                    ->getCurrentUser()
+//            );
+//
+//        return $this;
 
     }
 
@@ -387,13 +382,11 @@ class ElasticQueryBuilder extends \Elastica\Query
     {
         $this->restrictPublishedOnDate()
             ->restrictStatuses()
-            ->restrictBrand();
-//            ->restrictByPermissions();
+            ->restrictBrand()
+                    ->restrictByPermissions();
 
         return $this;
     }
-
-
 
     /**
      * @param array $userPlaylistIds
@@ -424,12 +417,12 @@ class ElasticQueryBuilder extends \Elastica\Query
         switch ($orderBy) {
             case 'newest':
                 $this->addSort(
-                        [
-                            'published_on' => [
-                                'order' => 'desc',
-                            ],
-                        ]
-                    );
+                    [
+                        'published_on' => [
+                            'order' => 'desc',
+                        ],
+                    ]
+                );
                 break;
             case 'oldest':
                 $this->addSort(
@@ -443,12 +436,12 @@ class ElasticQueryBuilder extends \Elastica\Query
                 break;
             case 'popularity':
                 $this->addSort(
-                        [
-                            'all_progress_count' => [
-                                'order' => 'desc',
-                            ],
-                        ]
-                    );
+                    [
+                        'all_progress_count' => [
+                            'order' => 'desc',
+                        ],
+                    ]
+                );
 
                 break;
 
@@ -463,7 +456,40 @@ class ElasticQueryBuilder extends \Elastica\Query
 
                 break;
             case 'relevance':
-                //TODO
+                //difficulty and topics will be defined on user
+                $userDifficulty = 3;
+                $userTopics = ['rock', 'jazz'];
+
+                $contentTypeFilter = new Query\BoolQuery();
+
+                $difficulty = new Terms('difficulty');
+                $difficulty->setTerms([$userDifficulty, 'All Skill Levels']);
+
+                $topics = new Terms('topics');
+                $topics->setTerms($userTopics);
+
+                $contentTypeFilter->addMust($difficulty)
+                    ->addMust($topics);
+
+                $contentTypeFilter2 = new Query\BoolQuery();
+                $contentTypeFilter2->addShould($difficulty)
+                    ->addShould($topics);
+
+                $query = new FunctionScore();
+                $query->setParam('query', $this->getQuery());
+
+                //set different relevance
+                $query->addWeightFunction(15.0, $contentTypeFilter);
+                $query->addWeightFunction(10.0, $contentTypeFilter);
+                $this->setQuery($query);
+                $this->addSort(
+                    [
+                        '_score' => [
+                            'order' => 'desc',
+                        ],
+                    ]
+                );
+
                 break;
         }
 
