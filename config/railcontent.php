@@ -15,7 +15,7 @@ use Tymon\JWTAuth\Http\Middleware\RefreshToken;
 return [
     // brands
     'brand' => 'brand',
-    'available_brands' => ['brand'],
+    'available_brands' => ['brand','drumeo'],
 
     // cache
     // ttl value in minutes

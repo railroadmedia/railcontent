@@ -35,11 +35,15 @@ class ElasticTest extends RailcontentTestCase
 
     protected $userProviderInterface;
 
+    protected $contentService;
+
     protected function setUp()
     {
         parent::setUp();
 
         $this->serviceBeingTested = $this->app->make(ElasticService::class);
+
+        $this->contentService = $this->app->make(ContentService::class);
 
         $this->railcontentEntityManager = $this->app->make(RailcontentEntityManager::class);
 
@@ -66,7 +70,7 @@ class ElasticTest extends RailcontentTestCase
                 Carbon::now()
                     ->subDays($i)
             );
-            $content->setStatus($this->faker->randomElement(['published', 'draft']));
+            $content->setStatus($this->faker->randomElement(['published']));
 
             $this->railcontentEntityManager->persist($content);
             $this->railcontentEntityManager->flush();
@@ -90,35 +94,35 @@ class ElasticTest extends RailcontentTestCase
 
         }
 
-        $results = $this->serviceBeingTested->getElasticFiltered(
+        $results = $this->contentService->getFiltered(
             1,
             100,
-            'relevance',
-            ['course', 'song']
+            'popularity',
+            ['song','course'],
+            [],
+            [],
+            [
+                'difficulty,3' ,
+                //,
+               // 'topics' => 'jazz',
+               // 'topics' => 'Jazz',
+               // 'artist' => 'Miles Davis',
+              // 'topics' => 'Flams'
+            ],
+            [],
+            [],
+            ['started','completed'],
+            true,
+            false,
+            true,[]
+        //    ['102294']
+        //['149253']
+
         );
 
-        foreach ($results as $hit) {
+        foreach ($results->results() as $result) {
+$this->assertTrue($result->getDifficulty() == 3);
 
-            var_dump(
-                'Score: ' .
-                $hit->getScore() .
-                '  Content Id:' .
-                $hit->getData()['id'] .
-                ' - ' .
-                $hit->getData()['title'] .
-                ' - ' .
-                $hit->getData()['status'] .
-                '  -  ' .
-                $hit->getData()['content_type'] .
-                '  diff-  ' .
-                $hit->getData()['difficulty'] .
-                ' last week progress ' .
-                $hit->getData()['last_week_progress_count'] .
-                ' all_progress_count ' .
-                $hit->getData()['all_progress_count'] .
-                'topics::' .
-                var_dump($hit->getData()['topics'])
-            );
         }
     }
 }

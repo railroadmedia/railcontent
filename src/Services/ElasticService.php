@@ -155,9 +155,9 @@ class ElasticService
             $this->build()
                 ->restrictByUserAccess()
                 ->restrictByTypes($includedTypes)
-                ->includeByUserStates($includedUserStates)
+                ->includeByUserStates($includedUserStates, $client)
                 ->restrictByParentIds($requiredParentIds)
-                ->restrictByUserStates($requiredUserStates)
+                ->restrictByUserStates($requiredUserStates, $client)
                 ->restrictBySlugHierarchy($slugHierarchy)
                 ->restrictByPlaylistIds($requiredUserPlaylistIds)
                 ->restrictByFields($requiredFields)
@@ -165,6 +165,6 @@ class ElasticService
                 ->setSize($limit)
                 ->setFrom(($page - 1) * $limit);
 
-        return $index->search($searchQuery)->getResults();
+        return $index->search($searchQuery);
     }
 }

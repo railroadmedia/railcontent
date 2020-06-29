@@ -926,7 +926,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $responseContent = $response->decodeResponseJson('data');
-
+dd($responseContent);
         foreach ($responseContent as $data) {
             $this->assertEquals(1, $data['attributes']['difficulty']);
             $this->assertEquals($statues[0], $data['attributes']['status']);

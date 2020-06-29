@@ -74,6 +74,11 @@ class ContentService
      */
     private $userProvider;
 
+    /**
+     * @var ElasticService
+     */
+    private $elasticService;
+
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
@@ -93,7 +98,8 @@ class ContentService
         JsonApiHydrator $jsonApiHydrator,
         UserProviderInterface $userProvider,
         CustomRailcontentHydrator $resultsHydrator,
-        ContentHierarchyService $contentHierarchyService
+        ContentHierarchyService $contentHierarchyService,
+        ElasticService $elasticService
     ) {
         $this->entityManager = $entityManager;
         $this->userProvider = $userProvider;
@@ -104,6 +110,7 @@ class ContentService
         $this->contentPermissionRepository = $this->entityManager->getRepository(ContentPermission::class);
         $this->commentRepository = $this->entityManager->getRepository(Comment::class);
         $this->contentHierarchyService = $contentHierarchyService;
+        $this->elasticService = $elasticService;
 
         $this->jsonApiHydrator = $jsonApiHydrator;
     }
@@ -147,7 +154,7 @@ class ContentService
         foreach ($ids as $id) {
             foreach ($unorderedContentRows as $index => $unorderedContentRow) {
                 if ($id == $unorderedContentRow->getId()) {
-                    $contentRows[$unorderedContentRow->getId()] = $unorderedContentRow;
+                    $contentRows[] = $unorderedContentRow;
                 }
             }
         }
@@ -967,9 +974,29 @@ class ContentService
 
         $qb = $this->contentRepository->retrieveFilter();
 
-        $data =
-            $qb->getQuery()
-                ->getResult();
+        $elasticData = $this->elasticService->getElasticFiltered(
+            $page,
+            $limit,
+            $sort,
+            $includedTypes,
+            $slugHierarchy,
+            $requiredParentIds,
+            $filter->requiredFields,
+            $includedFields,
+            $requiredUserStates,
+            $includedUserStates,
+            $pullFilterFields,
+            $getFutureContentOnly,
+            $pullPagination,
+            $requiredUserPlaylistIds
+        );
+
+        $ids = [];
+        foreach ($elasticData->getResults() as $elData) {
+            $ids[] = $elData->getData()['id'];
+        }
+
+        $data = $this->getByIds($ids);
 
         $filters = $pullFilterFields ? $this->contentRepository->getFilterFields() : [];
         $hydratedResults = $this->resultsHydrator->hydrate($data, $this->entityManager);
@@ -979,7 +1006,7 @@ class ContentService
                 'qb' => $qb,
                 'results' => $hydratedResults,
                 'filter_options' => $filters,
-                'total_results' => $pullPagination ? $filter->countFilter() : 0,
+                'total_results' => $elasticData->getTotalHits(),
             ]
         );
 

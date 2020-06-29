@@ -66,113 +66,124 @@ class MigrateContentToElasticsearch extends Command
         $client = $this->elasticService->getClient();
         $contentIndex = $client->getIndex('content');
 
-        if (!$contentIndex->exists()) {
-            $contentIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
+//        if (!$contentIndex->exists()) {
+//            $contentIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
+//
+//            $this->elasticService->setMapping($contentIndex);
+//        }
+//
+//
+//        $dbConnection->table(config('railcontent.table_prefix') . 'content')
+//            ->select('*')
+//            ->orderBy('id', 'asc')
+//            ->chunk(
+//                50,
+//                function (Collection $rows) use ($dbConnection, $contentIndex) {
+//                    $elasticBulk = [];
+//                    foreach ($rows as $row) {
+//                        //delete document if exists
+//                        $matchPhraseQuery = new MatchPhrase("id", $row->id);
+//                        $contentIndex->deleteByQuery($matchPhraseQuery);
+//
+//                        $topics =
+//                            $dbConnection->table(config('railcontent.table_prefix') . 'content_topic')
+//                                ->select('topic')
+//                                ->where('content_id', $row->id)
+//                                ->orderBy('id', 'asc')
+//                                ->get();
+//                        $data =
+//                            $dbConnection->table(config('railcontent.table_prefix') . 'content_data')
+//                                ->select('*')
+//                                ->where('content_id', $row->id)
+//                                ->orderBy('id', 'asc')
+//                                ->get();
+//                        $datum = [];
+//                        foreach ($data as $d) {
+//                            $datum[] = ['key' => $d->key, 'value' => $d->value];
+//                        }
+//
+//                        $allProgressCount =
+//                            $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
+//                                ->where('content_id', $row->id)
+//                                ->count();
+//
+//                        $lastWeekProgressCount =
+//                            $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
+//                                ->where('content_id', $row->id)
+//                                ->where(
+//                                    'updated_on',
+//                                    '>=',
+//                                    Carbon::now()
+//                                        ->subWeek(1)
+//                                )
+//                                ->count();
+//
+//                        $parent =  $dbConnection->table(config('railcontent.table_prefix') . 'content_hierarchy')
+//                            ->where('child_id', $row->id)
+//                            ->select('parent_id')
+//                            ->first();
+//
+//                        $userPlaylists =  $dbConnection->table(config('railcontent.table_prefix') . 'user_playlist_content')
+//                            ->where('content_id', $row->id)
+//                            ->select('user_playlist_id')
+//                            ->get();
 
-            $this->elasticService->setMapping($contentIndex);
+        //$instructors =
+            //                            $dbConnection->table(config('railcontent.table_prefix') . 'content_instructor')
+            //                                ->select('instructor_id')
+            //                                ->where('content_id', $row->id)
+            //                                ->orderBy('id', 'asc')
+            //                                ->get();
+//
+//                        $document = new Document(
+//                            '', [
+//                                'id' => $row->id,
+//                                'title' => $row->title,
+//                                'name' => $row->name,
+//                                'slug' => $row->slug,
+//                                'difficulty' =>  $row->difficulty,
+//                                'status' => $row->status,
+//                                'brand' => $row->brand,
+//                                'style' => $row->style,
+//                                'artist => $row->artist,
+//                                'content_type' => $row->type,
+//                                'published_on' => Carbon::parse($row->published_on),
+//                                'topics' => $topics->pluck('topic')
+//                                    ->toArray(),
+//        'instructors' => $instructors->pluck('instructor_id')
+//                                    ->toArray(),
+//                                'all_progress_count' => $allProgressCount,
+//                                'last_week_progress_count' => $lastWeekProgressCount,
+//                                'datum' => $datum,
+//                                'parent_id' => ($parent)?$parent->parent_id:null,
+//                                'playlist_ids' => $userPlaylists->pluck('user_playlist_id')->toArray()
+//                            ]
+//                        );
+//
+//                        $elasticBulk[] = $document;
+//                    }
+//                    //Add documents
+//                    $contentIndex->addDocuments($elasticBulk);
+//
+//                    //Refresh Index
+//                    $contentIndex->refresh();
+//                }
+//            );
+
+        //TODO: Optimize user progress migration to elasticsearch
+        $userProgressIndex = $client->getIndex('progress');
+
+        if (!$userProgressIndex->exists()) {
+            $userProgressIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
+
+          //  $this->elasticService->setMapping($contentIndex);
         }
 
 
-        $dbConnection->table(config('railcontent.table_prefix') . 'content')
-            ->select('*')
-            ->orderBy('id', 'asc')
-            ->chunk(
-                50,
-                function (Collection $rows) use ($dbConnection, $contentIndex) {
-                    $elasticBulk = [];
-                    foreach ($rows as $row) {
-                        //delete document if exists
-                        $matchPhraseQuery = new MatchPhrase("id", $row->id);
-                        $contentIndex->deleteByQuery($matchPhraseQuery);
 
-                        $topics =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'content_topic')
-                                ->select('topic')
-                                ->where('content_id', $row->id)
-                                ->orderBy('id', 'asc')
-                                ->get();
-                        $data =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'content_data')
-                                ->select('*')
-                                ->where('content_id', $row->id)
-                                ->orderBy('id', 'asc')
-                                ->get();
-                        $datum = [];
-                        foreach ($data as $d) {
-                            $datum[] = ['key' => $d->key, 'value' => $d->value];
-                        }
-
-                        $allProgressCount =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
-                                ->where('content_id', $row->id)
-                                ->count();
-
-                        $lastWeekProgressCount =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
-                                ->where('content_id', $row->id)
-                                ->where(
-                                    'updated_on',
-                                    '>=',
-                                    Carbon::now()
-                                        ->subWeek(1)
-                                )
-                                ->count();
-
-                        $parent =  $dbConnection->table(config('railcontent.table_prefix') . 'content_hierarchy')
-                            ->where('child_id', $row->id)
-                            ->select('parent_id')
-                            ->first();
-
-                        $userPlaylists =  $dbConnection->table(config('railcontent.table_prefix') . 'user_playlist_content')
-                            ->where('content_id', $row->id)
-                            ->select('user_playlist_id')
-                            ->get();
-
-                        $document = new Document(
-                            '', [
-                                'id' => $row->id,
-                                'title' => $row->title,
-                                'name' => $row->name,
-                                'slug' => $row->slug,
-                                'difficulty' =>  $row->difficulty,
-                                'status' => $row->status,
-                                'brand' => $row->brand,
-                                'style' => $row->style,
-                                'content_type' => $row->type,
-                                'published_on' => Carbon::parse($row->published_on),
-                                'topics' => $topics->pluck('topic')
-                                    ->toArray(),
-                                'all_progress_count' => $allProgressCount,
-                                'last_week_progress_count' => $lastWeekProgressCount,
-                                'datum' => $datum,
-                                'parent_id' => ($parent)?$parent->parent_id:null,
-                                'playlist_ids' => $userPlaylists->pluck('user_playlist_id')->toArray()
-                            ]
-                        );
-
-                        $elasticBulk[] = $document;
-                    }
-                    //Add documents
-                    $contentIndex->addDocuments($elasticBulk);
-
-                    //Refresh Index
-                    $contentIndex->refresh();
-                }
-            );
-
-        //TODO: Optimize user progress migration to elasticsearch
-//        $userProgressIndex = $client->getIndex('progress');
-//
-//        if (!$userProgressIndex->exists()) {
-//            $userProgressIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
-//
-//          //  $this->elasticService->setMapping($contentIndex);
-//        }
-
-/*
         $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
             ->select('*')
-            ->limit(1000)
+           // ->limit(1000)
             ->orderBy('id', 'asc')
             ->chunk(
                 500,
@@ -198,7 +209,7 @@ class MigrateContentToElasticsearch extends Command
                     //Refresh Index
                     $userProgressIndex->refresh();
                 });
-*/
+
         $this->info('Finished MigrateContentToElasticsearch.');
     }
 }

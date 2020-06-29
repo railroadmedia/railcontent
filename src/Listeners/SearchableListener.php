@@ -47,7 +47,7 @@ class SearchableListener implements EventSubscriber
             $client = $this->elasticService->getClient();
 
             // Create indexes if not exists and add documents
-            $index = $client->getIndex('content2');
+            $index = $client->getIndex('content');
 
             if (!$index->exists()) {
                 $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
@@ -61,7 +61,7 @@ class SearchableListener implements EventSubscriber
 
             $matchPhraseQuery = new MatchPhrase("id", $contentID);
 
-            $index = $client->getIndex('content2');
+            $index = $client->getIndex('content');
             $index->deleteByQuery($matchPhraseQuery);
 
             $document = new Document(
