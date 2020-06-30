@@ -96,8 +96,8 @@ class ElasticService
                 'status' => ['type' => 'text'],
                 'difficulty' => ['type' => 'text'],
                 'style' => ['type' => 'text'],
-                'published_on' => ['type' => 'date'],
-                'topics' => ['type' => 'nested']
+//                'published_on' => ['type' => 'date'],
+               // 'topics' => ['type' => 'nested']
             ]
         );
 

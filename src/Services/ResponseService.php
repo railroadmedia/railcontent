@@ -28,6 +28,7 @@ use Railroad\Railcontent\Transformers\ContentOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentPermissionOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentPermissionTransformer;
 use Railroad\Railcontent\Transformers\ContentStatsTransformer;
+use Railroad\Railcontent\Transformers\ContentTransformer;
 use Railroad\Railcontent\Transformers\DecoratedContentTransformer;
 use Railroad\Railcontent\Transformers\PermissionOldStructureTransformer;
 use Railroad\Railcontent\Transformers\PermissionTransformer;
@@ -37,7 +38,7 @@ use Spatie\Fractal\Fractal;
 
 class ResponseService extends FractalResponseService
 {
-    public static $oldResponseStructure = true;
+    public static $oldResponseStructure = false;
 
     /**
      * @param $entityOrEntities
@@ -95,6 +96,20 @@ class ResponseService extends FractalResponseService
                     (count($filters) > 0) ? ['filterOptions' => $filters] : []));
         }
 
+        $filters = [];
+        foreach ($filterOptions as $key => $filterOption) {
+            foreach ($filterOption as $key2 => $filter) {
+                if ($filter instanceof Content) {
+                    $transformer = new ContentTransformer();
+                    $arrayValue = $transformer->transform($filter);
+                    $filterOption[$key2] = $arrayValue;
+                }  elseif (is_string($filter) && (!mb_check_encoding($filter))) {
+                    $filterOption[$key2] = utf8_encode($filter);
+                }
+            }
+            $filters[$key] = $filterOption;
+        }
+
         return self::create(
             $entityOrEntities,
             'content',
@@ -103,7 +118,7 @@ class ResponseService extends FractalResponseService
             $queryBuilder
         )
             ->parseIncludes($includes)
-            ->addMeta((count($filterOptions) > 0) ? ['filterOptions' => $filterOptions] : []);
+            ->addMeta((count($filterOptions) > 0) ? ['filterOptions' => $filters] : []);
     }
 
     /**

@@ -193,7 +193,21 @@ class ContentRepository extends EntityRepository
      */
     public function retrieveFilter()
     {
-        $sortBy = $this->orderBy;
+        $orderByExploded = explode(' ', $this->orderBy);
+        $orderByColumns = [config('railcontent.table_prefix') . 'content' . '.' . 'createdOn'];
+        $groupByColumns = [config('railcontent.table_prefix') . 'content' . '.' . 'createdOn'];
+
+        foreach ($orderByExploded as $orderByColumn) {
+            if (strpos($orderByColumn, '_') !== false || strpos($orderByColumn, '-') !== false) {
+                $orderByColumn = camel_case($orderByColumn);
+            }
+            array_unshift(
+                $orderByColumns,
+                config('railcontent.table_prefix') . 'content' . '.' . $orderByColumn . ' ' . $this->orderDirection
+            );
+
+            array_unshift($groupByColumns, config('railcontent.table_prefix') . 'content' . '.' . $orderByColumn);
+        }
 
         $qb =
             $this->build()
@@ -206,7 +220,7 @@ class ContentRepository extends EntityRepository
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByPlaylistIds($this->requiredUserPlaylistIds)
                 ->restrictByFields($this->requiredFields)
-                ->sortResults($sortBy)
+                ->orderBy(implode(', ', $orderByColumns))
                 ->setCacheable(true)
                 ->setCacheRegion('pull');
 

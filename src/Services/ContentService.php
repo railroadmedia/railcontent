@@ -974,31 +974,41 @@ class ContentService
 
         $qb = $this->contentRepository->retrieveFilter();
 
-        $elasticData = $this->elasticService->getElasticFiltered(
-            $page,
-            $limit,
-            $sort,
-            $includedTypes,
-            $slugHierarchy,
-            $requiredParentIds,
-            $filter->requiredFields,
-            $includedFields,
-            $requiredUserStates,
-            $includedUserStates,
-            $pullFilterFields,
-            $getFutureContentOnly,
-            $pullPagination,
-            $requiredUserPlaylistIds
-        );
+        if(config('railcontent.useElasticSearch') == true) {
+            $elasticData = $this->elasticService->getElasticFiltered(
+                $page,
+                $limit,
+                $sort,
+                $includedTypes,
+                $slugHierarchy,
+                $requiredParentIds,
+                $filter->requiredFields,
+                $includedFields,
+                $requiredUserStates,
+                $includedUserStates,
+                $pullFilterFields,
+                $getFutureContentOnly,
+                $pullPagination,
+                $requiredUserPlaylistIds
+            );
 
-        $ids = [];
-        foreach ($elasticData->getResults() as $elData) {
-            $ids[] = $elData->getData()['id'];
+            $ids = [];
+            foreach ($elasticData->getResults() as $elData) {
+                $ids[] = $elData->getData()['id'];
+            }
+
+            $data = $this->getByIds($ids);
+            $totalResults = $elasticData->getTotalHits();
+        } else{
+            $data =
+                $qb->getQuery()
+                    ->getResult();
+
+            $totalResults = $pullPagination ? $filter->countFilter() : 0;
         }
 
-        $data = $this->getByIds($ids);
-
         $filters = $pullFilterFields ? $this->contentRepository->getFilterFields() : [];
+
         $hydratedResults = $this->resultsHydrator->hydrate($data, $this->entityManager);
 
         $results = new ContentFilterResultsEntity(
@@ -1006,7 +1016,7 @@ class ContentService
                 'qb' => $qb,
                 'results' => $hydratedResults,
                 'filter_options' => $filters,
-                'total_results' => $elasticData->getTotalHits(),
+                'total_results' => $totalResults,
             ]
         );
 
