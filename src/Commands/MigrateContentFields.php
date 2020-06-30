@@ -371,6 +371,12 @@ class MigrateContentFields extends Command
                                 continue;
                             }
 
+                            if($item->key == 'xp' && !is_numeric($item->value)) {
+                                $this->info('xp is not integer::' . $item->value.'    content id: '.$contentId);
+
+                                continue;
+                            }
+
                                 $data[$key] = $item->value;
 
                                 $migratedFields++;
