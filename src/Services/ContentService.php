@@ -25,6 +25,7 @@ use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Hydrators\CustomRailcontentHydrator;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use ReflectionException;
 
 class ContentService
@@ -915,7 +916,7 @@ class ContentService
     public function getFiltered(
         $page,
         $limit,
-        $sort = 'newest',
+        $sort = '-publishedOn',
         array $includedTypes = [],
         array $slugHierarchy = [],
         array $requiredParentIds = [],
@@ -972,9 +973,8 @@ class ContentService
             );
         }
 
-        $qb = $this->contentRepository->retrieveFilter();
+        if (config('railcontent.useElasticSearch') == true) {
 
-        if(config('railcontent.useElasticSearch') == true) {
             $elasticData = $this->elasticService->getElasticFiltered(
                 $page,
                 $limit,
@@ -992,29 +992,54 @@ class ContentService
                 $requiredUserPlaylistIds
             );
 
+            $totalResults = $elasticData->getTotalHits();
+
             $ids = [];
             foreach ($elasticData->getResults() as $elData) {
                 $ids[] = $elData->getData()['id'];
             }
+            $first = ($page - 1) * $limit;
+            $qb =
+                $this->contentRepository->build()
+                    ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
+                    ->setParameter('ids', $ids)
+                    ->setMaxResults($limit)
+                    ->setFirstResult($first);
 
-            $data = $this->getByIds($ids);
-            $totalResults = $elasticData->getTotalHits();
-        } else{
-            $data =
+            $unorderedContentRows =
+                $qb->getQuery()
+                    ->setCacheable(true)
+                    ->setCacheRegion('pull')
+                    ->getResult();
+
+            // restore order of ids passed in
+            $data = [];
+            foreach ($ids as $id) {
+                foreach ($unorderedContentRows as $index => $unorderedContentRow) {
+                    if ($id == $unorderedContentRow->getId()) {
+                        $data[] = $unorderedContentRow;
+                    }
+                }
+            }
+
+        } else {
+            $qb = $this->contentRepository->retrieveFilter();
+
+            $results =
                 $qb->getQuery()
                     ->getResult();
+
+            $data = $this->resultsHydrator->hydrate($results, $this->entityManager);
 
             $totalResults = $pullPagination ? $filter->countFilter() : 0;
         }
 
         $filters = $pullFilterFields ? $this->contentRepository->getFilterFields() : [];
 
-        $hydratedResults = $this->resultsHydrator->hydrate($data, $this->entityManager);
-
         $results = new ContentFilterResultsEntity(
             [
                 'qb' => $qb,
-                'results' => $hydratedResults,
+                'results' => $data,
                 'filter_options' => $filters,
                 'total_results' => $totalResults,
             ]

@@ -36,6 +36,8 @@ return [
 
     'development_mode' => true,
 
+    'useElasticSearch' => true,
+
     // database
     'database_name' => 'mydb',
     'database_user' => 'root',

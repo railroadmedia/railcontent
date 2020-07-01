@@ -178,7 +178,10 @@ class UserContentProgress
         $this->higherKeyProgress = $higherKeyProgress;
     }
 
-    public function toArray()
+    /**
+     * @return array
+     */
+    public function getElasticData()
     {
         return [
             'id' => $this->getId(),

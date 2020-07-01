@@ -113,7 +113,7 @@ class ResponseService extends FractalResponseService
         return self::create(
             $entityOrEntities,
             'content',
-            new DecoratedContentTransformer(),
+            new ContentTransformer(),
             new JsonApiSerializer(),
             $queryBuilder
         )

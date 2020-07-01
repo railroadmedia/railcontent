@@ -688,12 +688,15 @@ class Content extends ArrayExpressible
         return null;
     }
 
-    public function toArray() {
+    /**
+     * @return array
+     */
+    public function getElasticData() {
         $progresses = [];
         $lastWeekProgress = 0;
 
         foreach ($this->getUserProgresses() as $userProgress){
-            $progresses[] = $userProgress->toArray();
+            $progresses[] = $userProgress->getElasticData();
             if($userProgress->getUpdatedOn() >= Carbon::now()->subWeek(1))
             {
                 $lastWeekProgress++;
@@ -705,10 +708,8 @@ class Content extends ArrayExpressible
         return array(
             'id' => $this->getId(),
             'title' => $this->getTitle(),
-            'name' => $this->getName(),
             'slug' => $this->getSlug(),
             'difficulty' => $this->getDifficulty(),
-            'datum' => $this->getData()->toArray(),
             'status' => $this->getStatus(),
             'brand' => $this->getBrand(),
             'style' => $this->getStyle(),

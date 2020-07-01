@@ -23,11 +23,13 @@ class ElasticQueryBuilder extends \Elastica\Query
         if (empty($slugHierarchy)) {
             return $this;
         }
-        //TODO
-        //        $this->join(ContentHierarchy::class, 'hierarchy', 'WITH', 'railcontent_content.id = hierarchy.child');
-        //        $this->join(Content::class, 'inherited_content_', 'WITH', 'hierarchy.parent = inherited_content_.id');
-        //        $this->andWhere('inherited_content_.slug IN (:slugs)')
-        //            ->setParameter('slugs', $slugHierarchy);
+
+        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
+        $termsQuery = new Terms('parent_slug', $slugHierarchy);
+
+        $query->addMust($termsQuery);
+
+        $this->setQuery($query);
 
         return $this;
     }
@@ -287,61 +289,22 @@ class ElasticQueryBuilder extends \Elastica\Query
             return $this;
         }
 
-        //        $this->leftJoin(
-        //            ContentPermission::class,
-        //            'content_permission',
-        //            'WITH',
-        //            $this->expr()
-        //                ->andX(
-        //                    $this->expr()
-        //                        ->eq('content_permission.brand', ':brand'),
-        //                    $this->expr()
-        //                        ->orX(
-        //                            $this->expr()
-        //                                ->eq('railcontent_content.id', 'content_permission.content'),
-        //                            $this->expr()
-        //                                ->eq('railcontent_content.type', 'content_permission.contentType')
-        //                        )
-        //                )
-        //        )
-        //            ->leftJoin(
-        //                UserPermission::class,
-        //                'user_permission',
-        //                'WITH',
-        //                'content_permission.permission = user_permission.permission'
-        //            )
-        //            ->setParameter('brand', config('railcontent.brand'));
-        //
-        //        $this->andWhere(
-        //            $this->expr()
-        //                ->orX(
-        //                    $this->expr()
-        //                        ->isNull('content_permission'),
-        //                    $this->expr()
-        //                        ->andX(
-        //                            $this->expr()
-        //                                ->eq('user_permission.user', ':user'),
-        //                            $this->expr()
-        //                                ->orX(
-        //                                    $this->expr()
-        //                                        ->isNull('user_permission.expirationDate'),
-        //                                    $this->expr()
-        //                                        ->gte('user_permission.expirationDate', 'CURRENT_TIMESTAMP()')
-        //                                )
-        //                        )
-        //
-        //                )
-        //        )
-        //            ->setParameter('brand', config('railcontent.brand'))
-        //            ->setParameter(
-        //                'user',
-        //                app()
-        //                    ->make(UserProviderInterface::class)
-        //                    ->getCurrentUser()
-        //            );
-        //
-        //        return $this;
+        $currentUserActivePermissions = [1,131];
 
+        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
+
+        $exists = new Query\Exists('permission_ids');
+
+        $nullPermissionsQuery =  new Query\BoolQuery();
+        $mustNot = $nullPermissionsQuery->addMustNot($exists);
+
+        $termsQuery = new Terms('permission_ids', $currentUserActivePermissions);
+        $query3 = new Query\BoolQuery();
+        $query3->addShould($termsQuery)->addShould($mustNot);
+        $query->addMust($query3);
+        $this->setQuery($query);
+
+        return $this;
     }
 
     /**

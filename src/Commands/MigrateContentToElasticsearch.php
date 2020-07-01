@@ -65,113 +65,118 @@ class MigrateContentToElasticsearch extends Command
         $client = $this->elasticService->getClient();
         $contentIndex = $client->getIndex('content');
 
-        if (!$contentIndex->exists()) {
-            $contentIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
-
-            $this->elasticService->setMapping($contentIndex);
-        }
-
-        $dbConnection->table(config('railcontent.table_prefix') . 'content')
-            ->select('*')
-            ->whereNotIn('type', ['assignment', 'instructor', 'exercise', 'vimeo-video', 'youtube-video'])
-            ->orderBy('id', 'asc')
-            ->chunk(
-                500,
-                function (Collection $rows) use ($dbConnection, $contentIndex) {
-                    $elasticBulk = [];
-                    foreach ($rows as $row) {
-                        //delete document if exists
-                        $matchPhraseQuery = new MatchPhrase("id", $row->id);
-                        $contentIndex->deleteByQuery($matchPhraseQuery);
-
-                        $topics =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'content_topic')
-                                ->select('topic')
-                                ->where('content_id', $row->id)
-                                ->orderBy('id', 'asc')
-                                ->get();
-
-                        $allProgressCount =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
-                                ->where('content_id', $row->id)
-                                ->count();
-
-                        $lastWeekProgressCount =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
-                                ->where('content_id', $row->id)
-                                ->where(
-                                    'updated_on',
-                                    '>=',
-                                    Carbon::now()
-                                        ->subWeek(1)
-                                )
-                                ->count();
-
-                        $parent =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'content_hierarchy')
-                                ->where('child_id', $row->id)
-                                ->select('parent_id')
-                                ->first();
-
-                        $userPlaylists =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'user_playlist_content')
-                                ->where('content_id', $row->id)
-                                ->select('user_playlist_id')
-                                ->get();
-
-                        $instructors =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'content_instructor')
-                                ->select('instructor_id')
-                                ->where('content_id', $row->id)
-                                ->orderBy('id', 'asc')
-                                ->get();
-
-                        $permissions =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'content_permissions')
-                                ->select('permission_id')
-                                ->where('content_id', $row->id)
-                                ->orWhere('content_type', $row->type)
-                                ->orderBy('id', 'asc')
-                                ->get();
-
-                        $document = new Document(
-                            '', [
-                                'id' => $row->id,
-                                'title' => $row->title,
-                                //  'name' => $row->name,
-                                'slug' => $row->slug,
-                                'difficulty' => $row->difficulty,
-                                'status' => $row->status,
-                                'brand' => $row->brand,
-                                'style' => $row->style,
-                                'artist' => $row->artist,
-                                'content_type' => $row->type,
-                                'published_on' => Carbon::parse($row->published_on),
-                                'topics' => $topics->pluck('topic')
-                                    ->toArray(),
-                                'instructors' => $instructors->pluck('instructor_id')
-                                    ->toArray(),
-                                'all_progress_count' => $allProgressCount,
-                                'last_week_progress_count' => $lastWeekProgressCount,
-                                // 'datum' => $datum,
-                                'parent_id' => ($parent) ? $parent->parent_id : null,
-                                'playlist_ids' => $userPlaylists->pluck('user_playlist_id')
-                                    ->toArray(),
-                                'permission_ids' => $permissions->pluck('permission_id')
-                                    ->toArray(),
-                            ]
-                        );
-
-                        $elasticBulk[] = $document;
-                    }
-                    //Add documents
-                    $contentIndex->addDocuments($elasticBulk);
-
-                    //Refresh Index
-                    $contentIndex->refresh();
-                }
-            );
-
+//        if (!$contentIndex->exists()) {
+//            $contentIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
+//
+//            $this->elasticService->setMapping($contentIndex);
+//        }
+//
+//        $dbConnection->table(config('railcontent.table_prefix') . 'content')
+//            ->select('*')
+//            ->whereNotIn('type', ['assignment', 'instructor', 'exercise', 'vimeo-video', 'youtube-video'])
+//            ->orderBy('id', 'asc')
+//            ->chunk(
+//                500,
+//                function (Collection $rows) use ($dbConnection, $contentIndex) {
+//                    $elasticBulk = [];
+//                    foreach ($rows as $row) {
+//                        //delete document if exists
+//                        $matchPhraseQuery = new MatchPhrase("id", $row->id);
+//                        $contentIndex->deleteByQuery($matchPhraseQuery);
+//
+//                        $topics =
+//                            $dbConnection->table(config('railcontent.table_prefix') . 'content_topic')
+//                                ->select('topic')
+//                                ->where('content_id', $row->id)
+//                                ->orderBy('id', 'asc')
+//                                ->get();
+//
+//                        $allProgressCount =
+//                            $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
+//                                ->where('content_id', $row->id)
+//                                ->count();
+//
+//                        $lastWeekProgressCount =
+//                            $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
+//                                ->where('content_id', $row->id)
+//                                ->where(
+//                                    'updated_on',
+//                                    '>=',
+//                                    Carbon::now()
+//                                        ->subWeek(1)
+//                                )
+//                                ->count();
+//
+//                        $parent =
+//                            $dbConnection->table(config('railcontent.table_prefix') . 'content_hierarchy')
+//        ->join(config('railcontent.table_prefix') .'content', config('railcontent.table_prefix') .'content_hierarchy.parent_id', '=',
+//            config('railcontent.table_prefix') .'content.id')
+//                                ->where('child_id', $row->id)
+//                                ->select('parent_id',config('railcontent.table_prefix').'content.slug as slug')
+//                                ->first();
+//        $parentSlug = ($parent) ? $parent->slug : null;
+//
+//                        $userPlaylists =
+//                            $dbConnection->table(config('railcontent.table_prefix') . 'user_playlist_content')
+//                                ->where('content_id', $row->id)
+//                                ->select('user_playlist_id')
+//                                ->get();
+//
+//                        $instructors =
+//                            $dbConnection->table(config('railcontent.table_prefix') . 'content_instructor')
+//                                ->select('instructor_id')
+//                                ->where('content_id', $row->id)
+//                                ->orderBy('id', 'asc')
+//                                ->get();
+//
+//                        $permissions =
+//                            $dbConnection->table(config('railcontent.table_prefix') . 'content_permissions')
+//                                ->select('permission_id')
+//                                ->where('content_id', $row->id)
+//                                ->orWhere('content_type', $row->type)
+//                                ->orderBy('id', 'asc')
+//                                ->get();
+//
+//                        $document = new Document(
+//                            '', [
+//                                'id' => $row->id,
+//                                'title' => $row->title,
+//                                //  'name' => $row->name,
+//                                'slug' => $row->slug,
+//                                'difficulty' => $row->difficulty,
+//                                'status' => $row->status,
+//                                'brand' => $row->brand,
+//                                'style' => $row->style,
+//                                'artist' => $row->artist,
+//                                'content_type' => $row->type,
+//                                'published_on' => Carbon::parse($row->published_on),
+//                                'topics' => $topics->pluck('topic')
+//                                    ->toArray(),
+//                                'instructors' => $instructors->pluck('instructor_id')
+//                                    ->toArray(),
+//                                'all_progress_count' => $allProgressCount,
+//                                'last_week_progress_count' => $lastWeekProgressCount,
+//                                // 'datum' => $datum,
+//                                'parent_id' => ($parent) ? $parent->parent_id : null,
+//                                'parent_slug' => $parentSlug,
+//                                'playlist_ids' => $userPlaylists->pluck('user_playlist_id')
+//                                    ->toArray(),
+//                                'permission_ids' => $permissions->pluck('permission_id')
+//                                    ->toArray(),
+//                            ]
+//                        );
+//
+//                        $elasticBulk[] = $document;
+//                    }
+//                    //Add documents
+//                    $contentIndex->addDocuments($elasticBulk);
+//
+//                    //Refresh Index
+//                    $contentIndex->refresh();
+//                }
+//            );
+//
+//        return;
         $userProgressIndex = $client->getIndex('progress');
 
         if (!$userProgressIndex->exists()) {
@@ -190,10 +195,11 @@ class MigrateContentToElasticsearch extends Command
                 '=',
                 config('railcontent.table_prefix') . 'content.id'
             )
+            //->where(config('railcontent.table_prefix') . 'user_content_progress.id','<',1000000)
             ->whereNotIn('type', ['assignment', 'instructor', 'exercise', 'vimeo-video', 'youtube-video'])
             ->orderBy(config('railcontent.table_prefix') . 'user_content_progress.id', 'asc')
             ->chunk(
-                1000,
+                200,
                 function (Collection $rows) use ($dbConnection, $userProgressIndex) {
                     $elasticBulk = [];
 
@@ -213,10 +219,12 @@ class MigrateContentToElasticsearch extends Command
                     //Add documents
                     $userProgressIndex->addDocuments($elasticBulk);
 
+                    //Refresh Index
+                    //$userProgressIndex->refresh();
+
                 }
             );
-        //Refresh Index
-        $userProgressIndex->refresh();
+
 
         $this->info('Finished MigrateContentToElasticsearch.');
     }

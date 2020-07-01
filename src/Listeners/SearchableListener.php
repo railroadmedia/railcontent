@@ -10,6 +10,11 @@ use Elastica\Query\MatchPhrase;
 use Entities\Behaviour\SearchableEntityInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
+use Railroad\Railcontent\Entities\ContentHierarchy;
+use Railroad\Railcontent\Entities\ContentInstructor;
+use Railroad\Railcontent\Entities\ContentPermission;
+use Railroad\Railcontent\Entities\ContentPlaylist;
+use Railroad\Railcontent\Entities\ContentTopic;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Managers\SearchEntityManager;
 use Railroad\Railcontent\Services\ElasticService;
@@ -41,7 +46,11 @@ class SearchableListener implements EventSubscriber
         $oEntity = $oArgs->getEntity();
 
         if (($oEntity instanceof Content) ||
-            ($oEntity instanceof ContentData) ||
+            ($oEntity instanceof ContentInstructor) ||
+            ($oEntity instanceof ContentHierarchy) ||
+            ($oEntity instanceof ContentPermission) ||
+            ($oEntity instanceof ContentPlaylist) ||
+            ($oEntity instanceof ContentTopic) ||
             $oEntity instanceof UserContentProgress) {
 
             $client = $this->elasticService->getClient();
@@ -66,9 +75,9 @@ class SearchableListener implements EventSubscriber
 
             $document = new Document(
                 '',
-                ($oEntity instanceof Content) ? $oEntity->toArray() :
+                ($oEntity instanceof Content) ? $oEntity->getElasticData() :
                     $oEntity->getContent()
-                        ->toArray()
+                        ->getElasticData()
             );
 
             // Add tweet to type
