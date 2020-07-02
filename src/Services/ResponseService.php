@@ -51,7 +51,8 @@ class ResponseService extends FractalResponseService
         $entityOrEntities,
         QueryBuilder $queryBuilder = null,
         array $includes = [],
-        array $filterOptions = []
+        array $filterOptions = [],
+        array $customPaginator = []
     ) {
 
         if (self::$oldResponseStructure) {
@@ -69,14 +70,14 @@ class ResponseService extends FractalResponseService
                                 ->getData()
                                 ->getValues();
                         $filterOption[$key2] = $arrayValue;
-                    }  elseif (is_string($filter) && (!mb_check_encoding($filter))) {
+                    } elseif (is_string($filter) && (!mb_check_encoding($filter))) {
                         $filterOption[$key2] = utf8_encode($filter);
                     }
                 }
                 $filters[$key] = $filterOption;
             }
 
-           return self::create(
+            return self::create(
                 $entityOrEntities,
                 'content',
                 new ContentOldStructureTransformer(),
@@ -85,15 +86,14 @@ class ResponseService extends FractalResponseService
             )
                 ->parseIncludes($includes)
                 ->addMeta(
-                    array_merge(($queryBuilder)?[
-                        'limit' => $queryBuilder
-                            ->getMaxResults(),
-                        'page' => (($queryBuilder
-                                    ->getFirstResult() /
-                                $queryBuilder
-                                    ->getMaxResults()) + 1),
-                    ]:[],
-                    (count($filters) > 0) ? ['filterOptions' => $filters] : []));
+                    array_merge(
+                        ($queryBuilder) ? [
+                            'limit' => $queryBuilder->getMaxResults(),
+                            'page' => (($queryBuilder->getFirstResult() / $queryBuilder->getMaxResults()) + 1),
+                        ] : [],
+                        (count($filters) > 0) ? ['filterOptions' => $filters] : []
+                    )
+                );
         }
 
         $filters = [];
@@ -103,7 +103,7 @@ class ResponseService extends FractalResponseService
                     $transformer = new ContentTransformer();
                     $arrayValue = $transformer->transform($filter);
                     $filterOption[$key2] = $arrayValue;
-                }  elseif (is_string($filter) && (!mb_check_encoding($filter))) {
+                } elseif (is_string($filter) && (!mb_check_encoding($filter))) {
                     $filterOption[$key2] = utf8_encode($filter);
                 }
             }
@@ -113,12 +113,17 @@ class ResponseService extends FractalResponseService
         return self::create(
             $entityOrEntities,
             'content',
-            new ContentTransformer(),
+            new DecoratedContentTransformer(),
             new JsonApiSerializer(),
             $queryBuilder
         )
             ->parseIncludes($includes)
-            ->addMeta((count($filterOptions) > 0) ? ['filterOptions' => $filters] : []);
+            ->addMeta(
+                array_merge(
+                    (count($filterOptions) > 0) ? ['filterOptions' => $filters] : [],
+                    (count($customPaginator) > 0) ? ['pagination' => $customPaginator] : []
+                )
+            );
     }
 
     /**

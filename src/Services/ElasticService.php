@@ -97,7 +97,7 @@ class ElasticService
                 'difficulty' => ['type' => 'text'],
                 'style' => ['type' => 'text'],
 //                'published_on' => ['type' => 'date'],
-               // 'topics' => ['type' => 'nested']
+                'topics' => ['type' => 'text']
             ]
         );
 

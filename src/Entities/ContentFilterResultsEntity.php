@@ -81,4 +81,9 @@ class ContentFilterResultsEntity extends \ArrayObject
     {
         return $this['qb'] ?? null;
     }
+
+    public function customPagination()
+    {
+        return $this['custom_pagination'] ?? null;
+    }
 }

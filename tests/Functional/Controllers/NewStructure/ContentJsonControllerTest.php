@@ -749,6 +749,20 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ]
         );
 
+        $this->fakeContentTopic(
+            [
+                'content_id' => $content[1]->getId(),
+                'topic' => 'test',
+            ]
+        );
+
+        $this->fakeContentTopic(
+            [
+                'content_id' => $content[1]->getId(),
+                'topic' => 'dsdfdf',
+            ]
+        );
+
         $otherContent = $this->fakeContent(12);
 
         $this->fakeUserPermission(
@@ -926,7 +940,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $responseContent = $response->decodeResponseJson('data');
-dd($responseContent);
+
         foreach ($responseContent as $data) {
             $this->assertEquals(1, $data['attributes']['difficulty']);
             $this->assertEquals($statues[0], $data['attributes']['status']);
@@ -2210,141 +2224,5 @@ dd($responseContent);
         $this->assertEquals($expectedResults[0]['id'], $responseContent[0]['id']);
         $this->assertEquals($expectedResults[1]['id'], $responseContent[1]['id']);
         $this->assertEquals($expectedResults[2]['id'], $responseContent[2]['id']);
-    }
-
-    public function test_elastic()
-    {
-
-        for ($i = 0; $i < 5; $i++) {
-            $content = new Content();
-            $content->setTitle('Test content s - ' . $i);
-            $content->setSlug($this->faker->slug());
-            $content->setLanguage($this->faker->word);
-            $content->setDifficulty($i);
-            $content->setType($this->faker->randomElement(['course', 'song', 'play-along']));
-            $content->setBrand(config('railcontent.brand'));
-            $content->setCreatedOn(
-                Carbon::now()
-                    ->subWeek(3)
-            );
-            $content->setPublishedOn(
-                Carbon::now()
-                    ->subDays($i)
-            );
-            $content->setStatus($this->faker->randomElement(['published', 'draft']));
-
-            $this->railcontentEntityManager->persist($content);
-            $this->railcontentEntityManager->flush();
-
-            if ($i % 2 == 0) {
-                for ($j = 0; $j <= $i; $j++) {
-                    $userId = $this->createAndLogInNewUser();
-                    $user = $this->userProviderInterface->getRailcontentUserById($userId);
-                    $userProgress = new UserContentProgress();
-                    $userProgress->setUser($user);
-                    $userProgress->setContent($content);
-                    $userProgress->setProgressPercent(rand(1, 99));
-                    $userProgress->setState('started');
-
-                    $userProgress->setUpdatedOn(Carbon::now());
-
-                    $this->railcontentEntityManager->persist($userProgress);
-                    $this->railcontentEntityManager->flush();
-                }
-            }
-
-        }
-
-        $sm = SearchEntityManager::get();
-
-        $client = $sm->getClient();
-        $index = $client->getIndex('content');
-
-        $query = new Query();
-        $bool = new Query\BoolQuery();
-
-        $updateQuery = new Match();
-        $updateQuery->setField('brand', 'brand');
-        $bool->addMust($updateQuery);
-
-//        $localeQuery = new Match();
-//        $localeQuery->setField('status', 'draft');
-//        $bool->addMust($localeQuery);
-
-//        $contentTypeFilter = new Query\BoolQuery();
-//        $type1 = new Match();
-//        $type1->setField('content_type', 'course');
-//        $type2 = new Match();
-//        $type2->setField('content_type', 'song');
-//        $contentTypeFilter->addShould($type1)
-//            ->addShould($type2);
-//        $bool->addFilter($contentTypeFilter);
-
-        $query->setQuery($bool);
-
-//        $query->addSort(
-//            [
-//                'all_progress_count' => [
-//                    'order' => 'asc',
-//                ],
-//            ]
-//        );
-/**
-
-}
- * */
-//        $query->setSort( new Query\Script( [
-//            "_script" =>[
-//                "script" => "doc['difficulty'].value == 3 ? 1 : 0",
-//                "type" => "number",
-//                "order" => "desc"            ],])
-//
-//
-//        );
-//        $string = "doc['difficulty'].value == 3 ? 1 : 0";
-//        $params = [
-//            'param1' => 'one',
-//            'param2' => 1,
-//        ];
-//        $lang = 'mvel';
-//        $script = new Script($string, $params, $lang);
-//
-//        $query2 = new ScriptQuery();
-//        $query2->setScript($script);
-////dd($query2);
-//      //  $array = $query->toArray();
-//
-//     //   dd($array);
-//
-//       $query->setSort([$query2]);
-        //sort by user difficulty (used for sort by relevance)
-        $sort = array(
-            "_script" => array(
-                'script' => "(doc['difficulty'].value ==2) ? 1 : 0",
-                'type' => 'number',
-                'order' => 'desc'),
-            "_script" => array(
-                'script' => "(doc['id'].value ==6) ? 1 : 0",
-                'type' => 'number',
-                'order' => 'desc'),
-        );
-        $query->setSort($sort);
-
-        $elasticaResultSet = $index->search($query);
-        $hits = $elasticaResultSet->getResults();
-        foreach ($hits as $hit) {
-
-            var_dump(
-                $hit->getData()['id'] .
-                ' - ' .
-                $hit->getData()['title'] .
-                ' - ' .
-                $hit->getData()['status'] .
-                '  -  ' .
-                $hit->getData()['content_type'].
-                '  diff-  ' .
-                $hit->getData()['difficulty']
-            );
-        }
     }
 }

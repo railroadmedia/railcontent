@@ -999,15 +999,13 @@ class ContentService
                 $ids[] = $elData->getData()['id'];
             }
             $first = ($page - 1) * $limit;
-            $qb =
+            $qbIds =
                 $this->contentRepository->build()
                     ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
-                    ->setParameter('ids', $ids)
-                    ->setMaxResults($limit)
-                    ->setFirstResult($first);
+                    ->setParameter('ids', $ids);
 
             $unorderedContentRows =
-                $qb->getQuery()
+                $qbIds->getQuery()
                     ->setCacheable(true)
                     ->setCacheRegion('pull')
                     ->getResult();
@@ -1021,6 +1019,7 @@ class ContentService
                     }
                 }
             }
+            $qb = null;
 
         } else {
             $qb = $this->contentRepository->retrieveFilter();
@@ -1042,6 +1041,14 @@ class ContentService
                 'results' => $data,
                 'filter_options' => $filters,
                 'total_results' => $totalResults,
+                'custom_pagination' =>[
+                    'total' => $totalResults,
+                    'count' => count($data),
+                    'per_page' => $limit,
+                    'current_page' => $page,
+                    'total_pages' => ceil($totalResults/$limit),
+                    'links' => []
+                ]
             ]
         );
 

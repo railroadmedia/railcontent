@@ -65,8 +65,11 @@ class SearchableListener implements EventSubscriber
             //delete document
             $contentID =
                 ($oEntity instanceof Content) ? $oEntity->getId() :
-                    $oEntity->getContent()
-                        ->getId();
+                    (($oEntity instanceof ContentHierarchy) ?
+                        $oEntity->getChild()
+                            ->getId() :
+                        $oEntity->getContent()
+                            ->getId());
 
             $matchPhraseQuery = new MatchPhrase("id", $contentID);
 
@@ -76,8 +79,11 @@ class SearchableListener implements EventSubscriber
             $document = new Document(
                 '',
                 ($oEntity instanceof Content) ? $oEntity->getElasticData() :
-                    $oEntity->getContent()
-                        ->getElasticData()
+                    (($oEntity instanceof ContentHierarchy) ?
+                        $oEntity->getChild()
+                            ->getElasticData() :
+                        $oEntity->getContent()
+                            ->getElasticData())
             );
 
             // Add tweet to type
@@ -86,13 +92,91 @@ class SearchableListener implements EventSubscriber
             // Refresh Index
             $index->refresh();
 
+            if ($oEntity instanceof UserContentProgress) {
+                $indexProgress = $client->getIndex('progress');
+
+                if (!$indexProgress->exists()) {
+                    $indexProgress->create(
+                        ['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]
+                    );
+                }
+
+                //delete document
+                $entityID = $oEntity->getId();
+
+                $matchPhraseQuery = new MatchPhrase("id", $entityID);
+                $indexProgress->deleteByQuery($matchPhraseQuery);
+
+                $document = new Document('', $oEntity->getElasticData());
+
+                // Add tweet to type
+                $indexProgress->addDocument($document);
+
+                // Refresh Index
+                $indexProgress->refresh();
+            }
+
+        }
+    }
+
+    public function postRemove(LifecycleEventArgs $oArgs)
+    {
+        $oEntity = $oArgs->getEntity();
+
+        if (($oEntity instanceof Content) ||
+            ($oEntity instanceof ContentInstructor) ||
+            ($oEntity instanceof ContentHierarchy) ||
+            ($oEntity instanceof ContentPermission) ||
+            ($oEntity instanceof ContentPlaylist) ||
+            ($oEntity instanceof ContentTopic) ||
+            ($oEntity instanceof UserContentProgress)) {
+
+            $client = $this->elasticService->getClient();
+
+            // Create indexes if not exists and add documents
+            $index = $client->getIndex('content');
+
+            if (!$index->exists()) {
+                $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
+            }
+
+            //delete document
+            $contentID =
+                ($oEntity instanceof Content) ? $oEntity->getId() :
+                    (($oEntity instanceof ContentHierarchy) ?
+                        $oEntity->getChild()
+                            ->getId() :
+                        $oEntity->getContent()
+                            ->getId());
+
+            $matchPhraseQuery = new MatchPhrase("id", $contentID);
+            $index->deleteByQuery($matchPhraseQuery);
+
+            if(!$oEntity instanceof Content) {
+                $document = new Document(
+                    '',
+                    ($oEntity instanceof ContentHierarchy) ?
+                        $oEntity->getChild()
+                            ->getElasticData() :
+                        $oEntity->getContent()
+                            ->getElasticData()
+                );
+
+                // Add tweet to type
+                $index->addDocument($document);
+            }
+
+            // Refresh Index
+            $index->refresh();
+
+
         }
     }
 
     public function getSubscribedEvents()
     {
         return [
-            Events::postPersist,
+            Events::postPersist, Events::postRemove
         ];
     }
 }

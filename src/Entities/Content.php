@@ -695,7 +695,7 @@ class Content extends ArrayExpressible
         $progresses = [];
         $lastWeekProgress = 0;
 
-        foreach ($this->getUserProgresses() as $userProgress){
+        foreach ($this->getUserProgresses()??[] as $userProgress){
             $progresses[] = $userProgress->getElasticData();
             if($userProgress->getUpdatedOn() >= Carbon::now()->subWeek(1))
             {
