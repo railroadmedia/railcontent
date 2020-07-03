@@ -75,7 +75,7 @@ class MigrateContentToElasticsearch extends Command
         $nr = 0;
         $dbConnection->table(config('railcontent.table_prefix') . 'content')
             ->select('*')
-            ->whereNotIn('type', ['assignment', 'instructor', 'exercise', 'vimeo-video', 'youtube-video'])
+            ->whereNotIn('type', ['assignment', 'exercise', 'vimeo-video', 'youtube-video'])
             ->orderBy('id', 'asc')
             ->chunk(
                 500,
@@ -210,7 +210,7 @@ class MigrateContentToElasticsearch extends Command
             ->whereNotIn('type', ['assignment', 'instructor', 'exercise', 'vimeo-video', 'youtube-video'])
             ->orderBy(config('railcontent.table_prefix') . 'user_content_progress.id', 'asc')
             ->chunk(
-                500,
+                5000,
                 function (Collection $rows) use ($dbConnection, $userProgressIndex, &$nrProgress) {
                     $elasticBulk = [];
 
