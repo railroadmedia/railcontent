@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Responses\JsonPaginatedResponse;
+use Railroad\Railcontent\Services\ElasticService;
 use Railroad\Railcontent\Services\FullTextSearchService;
 use Railroad\Railcontent\Services\ResponseService;
 
@@ -24,13 +25,20 @@ class FullTextSearchJsonController extends Controller
     private $fullTextSearchService;
 
     /**
+     * @var ElasticService
+     */
+    private $elasticService;
+
+    /**
      * FullTextSearchJsonController constructor.
      *
      * @param FullTextSearchService $fullTextSearchService
      */
-    public function __construct(FullTextSearchService $fullTextSearchService)
+    public function __construct(FullTextSearchService $fullTextSearchService, ElasticService $elasticService)
     {
         $this->fullTextSearchService = $fullTextSearchService;
+
+        $this->elasticService = $elasticService;
     }
 
     /** Full text search in contents
@@ -63,7 +71,7 @@ class FullTextSearchJsonController extends Controller
             $request->get('brands', null)
         );
 
-        return ResponseService::content($contentsData['results'], $contentsData['qb'])
+        return ResponseService::content($contentsData['results'], null,[],[],$contentsData['custom_pagination'])
             ->respond();
     }
 }

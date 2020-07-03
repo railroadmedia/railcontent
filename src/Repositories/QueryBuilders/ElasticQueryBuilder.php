@@ -193,7 +193,7 @@ class ElasticQueryBuilder extends \Elastica\Query
         }
 
         $userId = auth()->id();
-//$userId = 149628;
+        //$userId = 149628;
 
         $progressIndex = $client->getIndex('progress');
         $queryBuilder = new Query();
@@ -289,18 +289,19 @@ class ElasticQueryBuilder extends \Elastica\Query
             return $this;
         }
 
-        $currentUserActivePermissions = [1,131];
+        $currentUserActivePermissions = [1, 131];
 
         $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
 
         $exists = new Query\Exists('permission_ids');
 
-        $nullPermissionsQuery =  new Query\BoolQuery();
+        $nullPermissionsQuery = new Query\BoolQuery();
         $mustNot = $nullPermissionsQuery->addMustNot($exists);
 
         $termsQuery = new Terms('permission_ids', $currentUserActivePermissions);
         $query3 = new Query\BoolQuery();
-        $query3->addShould($termsQuery)->addShould($mustNot);
+        $query3->addShould($termsQuery)
+            ->addShould($mustNot);
         $query->addMust($query3);
         $this->setQuery($query);
 
@@ -426,6 +427,62 @@ class ElasticQueryBuilder extends \Elastica\Query
 
                 break;
         }
+
+        return $this;
+    }
+
+    public function fullSearchSort($term)
+    {
+
+        $contentTypeFilter = new Query\BoolQuery();
+
+        $title = new Terms('title');
+        $title->setTerms($term);
+
+        $slug = new Terms('slug');
+        $slug->setTerms($term);
+
+        $contentTypeFilter->addMust($title)
+            ->addMust($slug);
+
+        $contentTypeFilter2 = new Query\BoolQuery();
+        $contentTypeFilter2->addShould($title)
+            ->addShould($slug);
+
+        $query = new FunctionScore();
+        $query->setParam('query', $this->getQuery());
+
+        //set different relevance
+        $query->addWeightFunction(15.0, $contentTypeFilter);
+        $query->addWeightFunction(10.0, $contentTypeFilter2);
+
+        $this->setQuery($query);
+        $this->addSort(
+            [
+                '_score' => [
+                    'order' => 'desc',
+                ],
+            ]
+        );
+        return $this;
+
+    }
+
+    public function restrictByTerm($arrTerms)
+    {
+        $searchableFields = ['title', 'slug', 'album', 'style'];
+        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
+        $queryFields = new Query\BoolQuery();
+        foreach ($searchableFields as $field) {
+
+            $title = new Terms($field);
+            $title->setTerms($arrTerms);
+
+            $queryFields->addShould($title);
+        }
+
+        $query->addMust($queryFields);
+        $this->setQuery($query);
 
         return $this;
     }

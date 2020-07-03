@@ -18,8 +18,10 @@ use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Managers\SearchEntityManager;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ElasticService;
+use Railroad\Railcontent\Services\FullTextSearchService;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 use Response;
@@ -37,6 +39,8 @@ class ElasticTest extends RailcontentTestCase
 
     protected $contentService;
 
+    protected $fullTextService;
+
     protected function setUp()
     {
         parent::setUp();
@@ -44,6 +48,8 @@ class ElasticTest extends RailcontentTestCase
         $this->serviceBeingTested = $this->app->make(ElasticService::class);
 
         $this->contentService = $this->app->make(ContentService::class);
+
+        $this->fullTextService = $this->app->make(FullTextSearchService::class);
 
         $this->railcontentEntityManager = $this->app->make(RailcontentEntityManager::class);
 
@@ -124,5 +130,10 @@ class ElasticTest extends RailcontentTestCase
 $this->assertTrue($result->getDifficulty() == 3);
 
         }
+    }
+
+    public function test_search()
+    {
+        dd($this->fullTextService->search('mascia'));
     }
 }

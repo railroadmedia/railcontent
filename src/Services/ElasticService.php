@@ -17,6 +17,7 @@ use Railroad\Railcontent\Entities\UserPlaylistContent;
 use Railroad\Railcontent\Hydrators\CustomRailcontentHydrator;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Managers\SearchEntityManager;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 use Railroad\Railcontent\Repositories\UserPlaylistRepository;
 use Elastica\Query;
@@ -162,6 +163,43 @@ class ElasticService
                 ->restrictByPlaylistIds($requiredUserPlaylistIds)
                 ->restrictByFields($requiredFields)
                 ->sortResults($sort)
+                ->setSize($limit)
+                ->setFrom(($page - 1) * $limit);
+
+        return $index->search($searchQuery);
+    }
+
+    /**
+     * @param $term
+     * @param int $page
+     * @param int $limit
+     * @param array $contentTypes
+     * @param array $contentStatuses
+     * @param string $sort
+     * @param null $dateTimeCutoff
+     * @param null $brands
+     * @return \Elastica\ResultSet
+     */
+    public function search( $term,
+        $page = 1,
+        $limit = 10,
+        $contentTypes = [],
+        $contentStatuses = [],
+        $sort = 'full',
+        $dateTimeCutoff = null,
+        $brands = null)
+    {
+
+        $client = $this->getClient();
+        $index = $client->getIndex('content');
+        $arrTerm = explode(' ', $term);
+
+        $searchQuery =
+            $this->build()
+                ->restrictByUserAccess()
+                ->restrictByTypes($contentTypes)
+                ->restrictByTerm($arrTerm)
+                ->fullSearchSort($arrTerm)
                 ->setSize($limit)
                 ->setFrom(($page - 1) * $limit);
 

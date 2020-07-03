@@ -21,6 +21,11 @@ class FullTextSearchService
     private $contentService;
 
     /**
+     * @var ElasticService
+     */
+    private $elasticService;
+
+    /**
      * @var RailcontentEntityManager
      */
     private $entityManager;
@@ -33,15 +38,18 @@ class FullTextSearchService
      */
     public function __construct(
         RailcontentEntityManager $entityManager,
-        ContentService $contentService
+        ContentService $contentService,
+        ElasticService $elasticService
     ) {
         $this->entityManager = $entityManager;
         $this->contentService = $contentService;
+        $this->elasticService = $elasticService;
 
         $this->fullTextSearchRepository = $this->entityManager->getRepository(SearchIndex::class);
     }
 
     /** Full text search by term
+     *
      * @param $term
      * @param int $page
      * @param int $limit
@@ -63,14 +71,7 @@ class FullTextSearchService
         $dateTimeCutoff = null,
         $brands = null
     ) {
-        $term = $output = preg_replace(
-            '!\s+!',
-            ' ',
-            trim(
-                preg_replace("/[^a-zA-Z0-9\\s\/]+/", "", $term)
-            )
-        );
-        $term = str_replace('/', '_', $term);
+        ContentRepository::$bypassPermissions = true;
 
         $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($sort, '-');
@@ -85,32 +86,75 @@ class FullTextSearchService
             config(['railcontent.available_brands' => $brands]);
         }
 
-        $qb = $this->fullTextSearchRepository->search(
-            $term,
-            $page,
-            $limit,
-            $contentTypes,
-            $contentStatuses,
-            $orderByColumn,
-            $orderByDirection,
-            $dateTimeCutoff
-        );
+        $customPagination = [];
 
-        $results =
-            $qb->getQuery()
-                ->getResult();
+        if (config('railcontent.useElasticSearch') == true) {
 
-        $contentIds = array_flatten(array_values($results));
+            $elasticData = $this->elasticService->search(
+                $term,
+                $page,
+                $limit,
+                $contentTypes,
+                $contentStatuses,
+                $orderByColumn,
+                $orderByDirection,
+                $dateTimeCutoff
+            );
 
-        $return = [
-            'results' => $this->contentService->getByIds($contentIds),
-            'total_results' => $this->fullTextSearchRepository->countTotalResults(
+            $totalResults = $elasticData->getTotalHits();
+
+            $contentIds = [];
+            foreach ($elasticData->getResults() as $elData) {
+                $contentIds[] = $elData->getData()['id'];
+            }
+        } else {
+            $term = $output = preg_replace(
+                '!\s+!',
+                ' ',
+                trim(
+                    preg_replace("/[^a-zA-Z0-9\\s\/]+/", "", $term)
+                )
+            );
+            $term = str_replace('/', '_', $term);
+
+            $qb = $this->fullTextSearchRepository->search(
+                $term,
+                $page,
+                $limit,
+                $contentTypes,
+                $contentStatuses,
+                $orderByColumn,
+                $orderByDirection,
+                $dateTimeCutoff
+            );
+
+            $results =
+                $qb->getQuery()
+                    ->getResult();
+
+            $contentIds = array_flatten(array_values($results));
+
+            $totalResults = $this->fullTextSearchRepository->countTotalResults(
                 $term,
                 $contentTypes,
                 $contentStatuses,
                 $dateTimeCutoff
-            ),
-            'qb' => $qb->addSelect('p'),
+            );
+        }
+
+        $contents = $this->contentService->getByIds($contentIds);
+        $return = [
+            'results' => $contents,
+            'total_results' => $totalResults,
+            'custom_pagination' => [
+                'total' => $totalResults,
+                'count' => count($contents),
+                'per_page' => $limit,
+                'current_page' => $page,
+                'total_pages' => ceil($totalResults / $limit),
+                'links' => [],
+            ],
+            // 'qb' => $qb->addSelect('p'),
         ];
         config(['railcontent.available_brands' => $oldBrands]);
 
