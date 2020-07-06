@@ -157,8 +157,10 @@ class MigrateContentToElasticsearch extends Command
                                 'style' => $row->style,
                                 'artist' => $row->artist,
                                 'content_type' => $row->type,
+                                'staff_pick_rating' => $row->staff_pick_rating,
+                                'bpm' => $row->bpm,
                                 'published_on' => Carbon::parse($row->published_on),
-                                'topics' => (!$topics->isEmpty()) ?
+                                'topic' => (!$topics->isEmpty()) ?
                                     $topics->pluck('topic')
                                         ->toArray() : [],
                                 'instructors' => $instructors->pluck('instructor_id')

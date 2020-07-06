@@ -974,7 +974,7 @@ class ContentService
         }
 
         if (config('railcontent.useElasticSearch') == true) {
-
+            $filters = [];
             $elasticData = $this->elasticService->getElasticFiltered(
                 $page,
                 $limit,
@@ -998,7 +998,7 @@ class ContentService
             foreach ($elasticData->getResults() as $elData) {
                 $ids[] = $elData->getData()['id'];
             }
-            $first = ($page - 1) * $limit;
+
             $qbIds =
                 $this->contentRepository->build()
                     ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
@@ -1020,6 +1020,36 @@ class ContentService
                 }
             }
             $qb = null;
+            if ($pullFilterFields) {
+                $filterOptions = $this->elasticService->getFilterFields(
+                    $includedTypes,
+                    $slugHierarchy,
+                    $requiredParentIds,
+                    $filter->requiredFields,
+                    $includedFields,
+                    $requiredUserStates,
+                    $includedUserStates,
+                    $pullFilterFields,
+                    $getFutureContentOnly,
+                    $pullPagination,
+                    $requiredUserPlaylistIds
+                );
+
+                if (array_key_exists('instructors', $filterOptions)) {
+                    $instructors =
+                        $this->contentRepository->build()
+                            ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
+                            ->setParameter('ids', $filterOptions['instructors'])
+                            ->getQuery()
+                            ->setCacheable(true)
+                            ->setCacheRegion('pull')
+                            ->getResult();
+
+                    $filterOptions['instructors'] = $instructors;
+                }
+
+                $filters = $filterOptions;
+            }
 
         } else {
             $qb = $this->contentRepository->retrieveFilter();
@@ -1031,9 +1061,8 @@ class ContentService
             $data = $this->resultsHydrator->hydrate($results, $this->entityManager);
 
             $totalResults = $pullPagination ? $filter->countFilter() : 0;
+            $filters = $pullFilterFields ? $this->contentRepository->getFilterFields() : [];
         }
-
-        $filters = $pullFilterFields ? $this->contentRepository->getFilterFields() : [];
 
         $results = new ContentFilterResultsEntity(
             [
@@ -1041,14 +1070,14 @@ class ContentService
                 'results' => $data,
                 'filter_options' => $filters,
                 'total_results' => $totalResults,
-                'custom_pagination' =>[
+                'custom_pagination' => [
                     'total' => $totalResults,
                     'count' => count($data),
                     'per_page' => $limit,
                     'current_page' => $page,
-                    'total_pages' => ceil($totalResults/$limit),
-                    'links' => []
-                ]
+                    'total_pages' => ceil($totalResults / $limit),
+                    'links' => [],
+                ],
             ]
         );
 

@@ -718,7 +718,9 @@ class Content extends ArrayExpressible
            // 'user_progress' => $progresses,
             'all_progress_count' => $allProgress,
             'last_week_progress_count' => $lastWeekProgress,
-            'topics' => $this->getTopic()->toArray()
+            'topic' => $this->getTopic()->toArray(),
+            'bpm' => $this->getBpm(),
+            'staff_pick_rating' => $this->getStaffPickRating()
     );
   }
 }

@@ -98,7 +98,8 @@ class ElasticService
                 'difficulty' => ['type' => 'text'],
                 'style' => ['type' => 'text'],
 //                'published_on' => ['type' => 'date'],
-                'topics' => ['type' => 'text']
+                'topic' => ['type' => 'text'],
+                'bpm' => ['type' => 'text'],
             ]
         );
 
@@ -204,5 +205,91 @@ class ElasticService
                 ->setFrom(($page - 1) * $limit);
 
         return $index->search($searchQuery);
+    }
+
+    public function getFilterFields(
+        array $includedTypes = [],
+        array $slugHierarchy = [],
+        array $requiredParentIds = [],
+        array $requiredFields = [],
+        array $includedFields = [],
+        array $requiredUserStates = [],
+        array $includedUserStates = [],
+        $pullFilterFields = true,
+        $getFutureContentOnly = false,
+        $pullPagination = true,
+        array $requiredUserPlaylistIds = []
+    ){
+        $filtersEl = $this->getElasticFiltered(
+            1,
+            10000,
+            'newest',
+            $includedTypes,
+            $slugHierarchy,
+            $requiredParentIds,
+            $requiredFields,
+            $includedFields,
+            $requiredUserStates,
+            $includedUserStates,
+            $pullFilterFields,
+            $getFutureContentOnly,
+            $pullPagination,
+            $requiredUserPlaylistIds
+        );
+
+        $idEs = [];
+        $filteredContents = [];
+        $instructorsIds = [];
+        foreach ($filtersEl->getResults() as $elData) {
+            $idEs[] = $elData->getData()['id'];
+
+            if (!in_array($elData->getData()['content_type'], $filteredContents['content_type'] ?? [])) {
+                $filteredContents['content_type'][] = $elData->getData()['content_type'];
+            }
+
+            $requiredFiltersData =(array_intersect_key(config('railcontent.field_option_list', []), array_keys($elData->getData())));
+
+            foreach ($requiredFiltersData as $requiredFieldData) {
+                if ($requiredFieldData == 'instructor') {
+
+                    foreach ($elData->getData()['instructors'] as $insId) {
+                        $instructorsIds[$insId] = $insId;
+                    }
+                }
+                if (array_key_exists($requiredFieldData, $elData->getData())) {
+
+                    if (is_array($elData->getData()[$requiredFieldData])) {
+                        foreach ($elData->getData()[$requiredFieldData] as $option) {
+                            if (!in_array($option, $filteredContents[$requiredFieldData] ?? [])) {
+                                $filteredContents[$requiredFieldData][] = $option;
+                            }
+                        }
+                    } else {
+                        if (($elData->getData()[$requiredFieldData]) &&
+                            (!in_array(
+                                $elData->getData()[$requiredFieldData],
+                                $filteredContents[$requiredFieldData] ?? []
+                            ))) {
+                            $filteredContents[$requiredFieldData][] = $elData->getData()[$requiredFieldData];
+                        }
+                    }
+                }
+            }
+        }
+
+
+        foreach ($filteredContents as $availableFieldIndex => $availableField) {
+            usort(
+                $filteredContents[$availableFieldIndex],
+                function ($a, $b) {
+                    return strncmp($a, $b, 15);
+                }
+            );
+        }
+        if(!empty($instructorsIds)) {
+            $filteredContents['instructors'] = $instructorsIds;
+        }
+
+        return $filteredContents;
     }
 }

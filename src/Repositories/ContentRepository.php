@@ -255,6 +255,7 @@ class ContentRepository extends EntityRepository
     public function getFilterFields()
     {
         $filteredContents = [];
+
         $contents =
             $this->build()
                 ->restrictByUserAccess()

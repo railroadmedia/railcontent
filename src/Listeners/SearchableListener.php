@@ -152,23 +152,25 @@ class SearchableListener implements EventSubscriber
             $matchPhraseQuery = new MatchPhrase("id", $contentID);
             $index->deleteByQuery($matchPhraseQuery);
 
-            if(!$oEntity instanceof Content) {
-                $document = new Document(
-                    '',
+            if (!$oEntity instanceof Content) {
+                $elasticData =
                     ($oEntity instanceof ContentHierarchy) ?
                         $oEntity->getChild()
                             ->getElasticData() :
                         $oEntity->getContent()
-                            ->getElasticData()
-                );
+                            ->getElasticData();
+                if (!empty($elasticData)) {
+                    $document = new Document(
+                        '', $elasticData
+                    );
 
-                // Add tweet to type
-                $index->addDocument($document);
+                    // Add tweet to type
+                    $index->addDocument($document);
+                }
             }
 
             // Refresh Index
             $index->refresh();
-
 
         }
     }
@@ -176,7 +178,8 @@ class SearchableListener implements EventSubscriber
     public function getSubscribedEvents()
     {
         return [
-            Events::postPersist, Events::postRemove
+            Events::postPersist,
+            Events::postRemove,
         ];
     }
 }

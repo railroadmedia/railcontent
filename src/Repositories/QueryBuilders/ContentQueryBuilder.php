@@ -393,7 +393,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
      */
     public function restrictByFilterOptions()
     {
-        //TODO:   verify in results that at list one filter exists
+         //TODO:   verify in results that at list one filter exists
         foreach (config('railcontent.field_option_list', []) as $requiredFieldData) {
             if (in_array(
                 $requiredFieldData,
