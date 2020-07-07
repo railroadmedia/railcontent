@@ -1688,4 +1688,28 @@ class ContentService
         }
         return $defaultXp;
     }
+
+    /**
+     * @param array $includedTypes
+     * @return array
+     */
+    public function getFiltersOptions($includedTypes = [])
+    {
+        $filterOptions = $this->elasticService->getFilterFields($includedTypes);
+
+        if (array_key_exists('instructors', $filterOptions)) {
+            $instructors =
+                $this->contentRepository->build()
+                    ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
+                    ->setParameter('ids', $filterOptions['instructors'])
+                    ->getQuery()
+                    ->setCacheable(true)
+                    ->setCacheRegion('pull')
+                    ->getResult();
+
+            $filterOptions['instructors'] = $instructors;
+        }
+
+        return $filterOptions;
+    }
 }

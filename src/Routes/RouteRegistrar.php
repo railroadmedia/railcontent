@@ -98,6 +98,12 @@ class RouteRegistrar
                     '/content-statistics/field-filters-values',
                     \Railroad\Railcontent\Controllers\ContentStatisticsJsonController::class . '@fieldFiltersValues'
                 )->name('content.statistics.all');
+
+                $this->router->get(
+                    '/filterOptions',
+                    ContentJsonController::class . '@getFiltersOptions'
+                )
+                    ->name('content.filters.index');
             }
         );
     }

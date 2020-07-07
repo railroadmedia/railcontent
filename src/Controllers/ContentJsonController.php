@@ -470,4 +470,20 @@ class ContentJsonController extends Controller
         )
             ->respond();
     }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getFiltersOptions(Request $request)
+    {
+        $contentData = $this->contentService->getFiltersOptions(
+            $request->get('included_types', [])
+        );
+
+        return ResponseService::filtersOptions(
+            [$contentData]
+        )
+            ->respond();
+    }
 }
