@@ -102,7 +102,8 @@ class ContentJsonController extends Controller
             $contentData->qb(),
             [],
             $contentData->filterOptions(),
-            $contentData->customPagination()
+            $contentData->customPagination(),
+            $contentData->activeFilters()
         )
             ->respond();
     }

@@ -54,7 +54,8 @@ class ResponseService extends FractalResponseService
         QueryBuilder $queryBuilder = null,
         array $includes = [],
         array $filterOptions = [],
-        array $customPaginator = []
+        array $customPaginator = [],
+        array $activeFilters = []
     ) {
 
         if (self::$oldResponseStructure) {
@@ -123,6 +124,8 @@ class ResponseService extends FractalResponseService
             ->addMeta(
                 array_merge(
                     (count($filterOptions) > 0) ? ['filterOptions' => $filters] : [],
+                    (count($activeFilters) > 0) ? ['activeFilters' => $activeFilters] : [],
+
                     (count($customPaginator) > 0) ? ['pagination' => $customPaginator] : []
                 )
             );

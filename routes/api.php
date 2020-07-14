@@ -54,6 +54,12 @@ Route::group(
         )
             ->name('content.show');
 
+        Route::get(
+            '/filterOptions',
+            ContentJsonController::class . '@getFiltersOptions'
+        )
+            ->name('content.filters.index');
+
         // content user progression
         Route::put(
             '/start',

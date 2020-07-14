@@ -207,6 +207,20 @@ class ElasticService
         return $index->search($searchQuery);
     }
 
+    /**
+     * @param array $includedTypes
+     * @param array $slugHierarchy
+     * @param array $requiredParentIds
+     * @param array $requiredFields
+     * @param array $includedFields
+     * @param array $requiredUserStates
+     * @param array $includedUserStates
+     * @param bool $pullFilterFields
+     * @param bool $getFutureContentOnly
+     * @param bool $pullPagination
+     * @param array $requiredUserPlaylistIds
+     * @return array
+     */
     public function getFilterFields(
         array $includedTypes = [],
         array $slugHierarchy = [],

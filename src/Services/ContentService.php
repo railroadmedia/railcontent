@@ -1064,11 +1064,19 @@ class ContentService
             $filters = $pullFilterFields ? $this->contentRepository->getFilterFields() : [];
         }
 
+        $activeFilters['requiredFields'] = $requiredFields;
+        foreach($filter->requiredFields as $f){
+          // if($fil)
+           // dd($filter->requiredFields);
+            $activeFilters['requiredFields'] = $f['name'];
+        }
+
         $results = new ContentFilterResultsEntity(
             [
                 'qb' => $qb,
                 'results' => $data,
                 'filter_options' => $filters,
+                'active_filters' => $activeFilters,
                 'total_results' => $totalResults,
                 'custom_pagination' => [
                     'total' => $totalResults,
