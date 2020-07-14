@@ -251,13 +251,13 @@ class UserContentProgressRepository extends RepositoryBase
     }
 
     /**
-     * @param $id
-     * @param $type
+     * @param $userId
+     * @param null $date
      * @param null $state
      * @param bool $count
      * @return mixed
      */
-    public function countUserProgress($userId, $date = null)
+    public function countUserProgress($userId, $date = null, $state = null)
     {
         $query =
             $this->query()
@@ -277,7 +277,12 @@ class UserContentProgressRepository extends RepositoryBase
                     }
                 )
                 ->where(ConfigService::$tableContent . '.brand', ConfigService::$brand)
+                ->whereIn(ConfigService::$tableContent . '.type', config('railcontent.singularContentTypes',[]))
                 ->where(ConfigService::$tableUserContentProgress . '.user_id', '=', $userId);
+
+        if ($state) {
+            $query->where(ConfigService::$tableUserContentProgress . '.state', '=', $state);
+        }
 
         if ($date) {
             $query->where(ConfigService::$tableUserContentProgress . '.updated_on', '>=', $date);

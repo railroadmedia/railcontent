@@ -670,10 +670,11 @@ class UserContentProgressService
     /**
      * @param $userId
      * @param null $date
+     * @param null $state
      * @return mixed
      */
-    public function countUserProgress($userId, $date = null)
+    public function countUserProgress($userId, $date = null, $state = null)
     {
-        return $this->userContentRepository->countUserProgress($userId, $date);
+        return $this->userContentRepository->countUserProgress($userId, $date, $state);
     }
 }
