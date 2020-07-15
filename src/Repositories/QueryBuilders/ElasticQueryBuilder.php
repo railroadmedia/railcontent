@@ -432,7 +432,6 @@ class ElasticQueryBuilder extends \Elastica\Query
 
     public function fullSearchSort($term)
     {
-
         $contentTypeFilter = new Query\BoolQuery();
 
         $title = new Terms('title');
@@ -484,5 +483,41 @@ class ElasticQueryBuilder extends \Elastica\Query
         $this->setQuery($query);
 
         return $this;
+    }
+
+    /**
+     * @param $contentStatuses
+     * @return $this
+     */
+    public function restrictByContentStatuses($contentStatuses)
+    {
+        if (!empty($contentStatuses)) {
+            $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
+            $termsQuery = new Terms('status', $contentStatuses);
+
+            $query->addMust($termsQuery);
+
+            $this->setQuery($query);
+        }
+
+        return $this;
+    }
+
+    public function restrictByPublishedDate($publishedOn)
+    {
+        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
+
+        if ($publishedOn) {
+
+                $range = new \Elastica\Query\Range();
+                $range->addField('published_on.date', ['gt' => $publishedOn]);
+
+                $query->addMust($range);
+
+                $this->setQuery($query);
+            }
+
+        return $this;
+
     }
 }

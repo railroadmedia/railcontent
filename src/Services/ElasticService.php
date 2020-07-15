@@ -198,7 +198,9 @@ class ElasticService
             $this->build()
                 ->restrictByUserAccess()
                 ->restrictByTypes($contentTypes)
+                ->restrictByContentStatuses($contentStatuses)
                 ->restrictByTerm($arrTerm)
+                ->restrictByPublishedDate($dateTimeCutoff)
                 ->fullSearchSort($arrTerm)
                 ->setSize($limit)
                 ->setFrom(($page - 1) * $limit);

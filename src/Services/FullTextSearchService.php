@@ -96,8 +96,7 @@ class FullTextSearchService
                 $limit,
                 $contentTypes,
                 $contentStatuses,
-                $orderByColumn,
-                $orderByDirection,
+                $sort,
                 $dateTimeCutoff
             );
 
