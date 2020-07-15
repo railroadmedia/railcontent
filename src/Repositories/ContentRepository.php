@@ -49,7 +49,7 @@ class ContentRepository extends EntityRepository
     public static $bypassPermissions = false;
 
     public $requiredFields = [];
-    private $includedFields = [];
+    public $includedFields = [];
 
     private $requiredUserStates = [];
     private $includedUserStates = [];
@@ -243,7 +243,8 @@ class ContentRepository extends EntityRepository
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByParentIds($this->requiredParentIds)
                 ->groupBy(config('railcontent.table_prefix') . 'content.id')
-                ->getQuery()->getResult();
+                ->getQuery()
+                ->getResult();
 
         return count($subQuery);
     }
@@ -273,7 +274,8 @@ class ContentRepository extends EntityRepository
         if ($contents) {
             foreach ($contents as $content) {
                 $ids[] = $content->getId();
-                if(!in_array($content->getType(), $filteredContents['content_type']??[] )) {
+                if (!in_array($content->getType(), $filteredContents['content_type'] ?? []) &&
+                    (!in_array($content->getType(), $this->typesToInclude))) {
                     $filteredContents['content_type'][] = $content->getType();
                 }
             }
@@ -342,7 +344,10 @@ class ContentRepository extends EntityRepository
                             }
 
                         } else {
-                            if (!in_array(strtolower($value), array_map("strtolower", $filteredContents[$requiredFieldData]??[]))) {
+                            if (!in_array(
+                                strtolower($value),
+                                array_map("strtolower", $filteredContents[$requiredFieldData] ?? [])
+                            )) {
 
                                 $filteredContents[$requiredFieldData][] = $value;
                             }
@@ -356,7 +361,11 @@ class ContentRepository extends EntityRepository
                     foreach ($contents as $content) {
 
                         $value = call_user_func([$content, $getterName]);
-                        if ($value && !in_array(strtolower($value), array_map("strtolower", $filteredContents[$requiredFieldData]??[]))) {
+                        if ($value &&
+                            !in_array(
+                                strtolower($value),
+                                array_map("strtolower", $filteredContents[$requiredFieldData] ?? [])
+                            )) {
                             $filteredContents[$requiredFieldData][] = $value;
                         }
                     }
@@ -617,5 +626,42 @@ class ContentRepository extends EntityRepository
             ->setCacheable(true)
             ->setCacheRegion('pull')
             ->getOneOrNullResult();
+    }
+
+    /**
+     * @return array
+     */
+    public function getActiveFilters()
+    {
+        $active = [];
+
+        if (!empty($this->typesToInclude)) {
+            $active['content_type'] = $this->typesToInclude;
+        }
+
+        $fields = array_merge($this->includedFields, $this->requiredFields);
+        foreach ($fields as $filter) {
+            $active[$filter['name']][] = $filter['value'];
+        }
+
+        $userStates = array_merge($this->requiredUserStates, $this->includedUserStates);
+        if (!empty($userStates)) {
+            $active['user_states'] = $userStates;
+        }
+
+        if (array_key_exists('instructor', $active)) {
+            $instructors =
+                $this->build()
+                    ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
+                    ->setParameter('ids', $active['instructor'])
+                    ->getQuery()
+                    ->setCacheable(true)
+                    ->setCacheRegion('pull')
+                    ->getResult();
+
+            $active['instructor'] = $instructors;
+        }
+
+        return $active;
     }
 }

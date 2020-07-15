@@ -261,7 +261,6 @@ class ElasticQueryBuilder extends \Elastica\Query
      */
     public function includeByFields(array $includedFields)
     {
-        //TODO
         if (empty($includedFields)) {
             return $this;
         }

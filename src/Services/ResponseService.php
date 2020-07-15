@@ -113,6 +113,21 @@ class ResponseService extends FractalResponseService
             $filters[$key] = $filterOption;
         }
 
+        $activFilters = [];
+        foreach ($activeFilters as $key => $filterOption) {
+            $activFilters[$key] = $filterOption;
+            foreach ($filterOption as $key2 => $filter) {
+                if ($filter instanceof Content) {
+                    $transformer = new ContentTransformer();
+                    $arrayValue = $transformer->transform($filter);
+                    $activFilters[$key][$key2] = $arrayValue;
+                } elseif (is_string($filter) && (!mb_check_encoding($filter))) {
+                    $activFilters[$key][$key2] = utf8_encode($filter);
+                }
+            }
+
+        }
+
         return self::create(
             $entityOrEntities,
             'content',
@@ -124,8 +139,7 @@ class ResponseService extends FractalResponseService
             ->addMeta(
                 array_merge(
                     (count($filterOptions) > 0) ? ['filterOptions' => $filters] : [],
-                    (count($activeFilters) > 0) ? ['activeFilters' => $activeFilters] : [],
-
+                    (count($activFilters) > 0) ? ['activeFilters' => $activFilters] : [],
                     (count($customPaginator) > 0) ? ['pagination' => $customPaginator] : []
                 )
             );

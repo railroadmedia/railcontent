@@ -97,7 +97,7 @@ class ElasticService
                 'status' => ['type' => 'text'],
                 'difficulty' => ['type' => 'text'],
                 'style' => ['type' => 'text'],
-//                'published_on' => ['type' => 'date'],
+                //                'published_on' => ['type' => 'date'],
                 'topic' => ['type' => 'text'],
                 'bpm' => ['type' => 'text'],
             ]
@@ -110,8 +110,9 @@ class ElasticService
     /**
      * @return ElasticQueryBuilder
      */
-    public function build(){
-        $query  = new ElasticQueryBuilder();
+    public function build()
+    {
+        $query = new ElasticQueryBuilder();
 
         return $query;
     }
@@ -134,7 +135,7 @@ class ElasticService
      * @return \Elastica\Result[]
      */
     public function getElasticFiltered(
-        $page =1,
+        $page = 1,
         $limit = 10,
         $sort = 'newest',
         array $includedTypes = [],
@@ -144,12 +145,8 @@ class ElasticService
         array $includedFields = [],
         array $requiredUserStates = [],
         array $includedUserStates = [],
-        $pullFilterFields = true,
-        $getFutureContentOnly = false,
-        $pullPagination = true,
         array $requiredUserPlaylistIds = []
-    )
-    {
+    ) {
         $client = $this->getClient();
         $index = $client->getIndex('content');
 
@@ -158,6 +155,7 @@ class ElasticService
                 ->restrictByUserAccess()
                 ->restrictByTypes($includedTypes)
                 ->includeByUserStates($includedUserStates, $client)
+                ->includeByFields($includedFields)
                 ->restrictByParentIds($requiredParentIds)
                 ->restrictByUserStates($requiredUserStates, $client)
                 ->restrictBySlugHierarchy($slugHierarchy)
@@ -181,15 +179,16 @@ class ElasticService
      * @param null $brands
      * @return \Elastica\ResultSet
      */
-    public function search( $term,
+    public function search(
+        $term,
         $page = 1,
         $limit = 10,
         $contentTypes = [],
         $contentStatuses = [],
         $sort = 'full',
         $dateTimeCutoff = null,
-        $brands = null)
-    {
+        $brands = null
+    ) {
 
         $client = $this->getClient();
         $index = $client->getIndex('content');
@@ -215,9 +214,6 @@ class ElasticService
      * @param array $includedFields
      * @param array $requiredUserStates
      * @param array $includedUserStates
-     * @param bool $pullFilterFields
-     * @param bool $getFutureContentOnly
-     * @param bool $pullPagination
      * @param array $requiredUserPlaylistIds
      * @return array
      */
@@ -229,11 +225,8 @@ class ElasticService
         array $includedFields = [],
         array $requiredUserStates = [],
         array $includedUserStates = [],
-        $pullFilterFields = true,
-        $getFutureContentOnly = false,
-        $pullPagination = true,
         array $requiredUserPlaylistIds = []
-    ){
+    ) {
         $filtersEl = $this->getElasticFiltered(
             1,
             10000,
@@ -245,9 +238,6 @@ class ElasticService
             $includedFields,
             $requiredUserStates,
             $includedUserStates,
-            $pullFilterFields,
-            $getFutureContentOnly,
-            $pullPagination,
             $requiredUserPlaylistIds
         );
 
@@ -257,11 +247,13 @@ class ElasticService
         foreach ($filtersEl->getResults() as $elData) {
             $idEs[] = $elData->getData()['id'];
 
-            if (!in_array($elData->getData()['content_type'], $filteredContents['content_type'] ?? [])) {
+            if (!in_array($elData->getData()['content_type'], $filteredContents['content_type'] ?? []) &&
+                (!in_array($elData->getData()['content_type'], $includedTypes))) {
                 $filteredContents['content_type'][] = $elData->getData()['content_type'];
             }
 
-            $requiredFiltersData =(array_intersect_key(config('railcontent.field_option_list', []), array_keys($elData->getData())));
+            $requiredFiltersData =
+                (array_intersect_key(config('railcontent.field_option_list', []), array_keys($elData->getData())));
 
             foreach ($requiredFiltersData as $requiredFieldData) {
                 if ($requiredFieldData == 'instructor') {
@@ -279,8 +271,7 @@ class ElasticService
                             }
                         }
                     } else {
-                        if (($elData->getData()[$requiredFieldData]) &&
-                            (!in_array(
+                        if (($elData->getData()[$requiredFieldData]) && (!in_array(
                                 $elData->getData()[$requiredFieldData],
                                 $filteredContents[$requiredFieldData] ?? []
                             ))) {
@@ -291,7 +282,6 @@ class ElasticService
             }
         }
 
-
         foreach ($filteredContents as $availableFieldIndex => $availableField) {
             usort(
                 $filteredContents[$availableFieldIndex],
@@ -300,7 +290,7 @@ class ElasticService
                 }
             );
         }
-        if(!empty($instructorsIds)) {
+        if (!empty($instructorsIds)) {
             $filteredContents['instructors'] = $instructorsIds;
         }
 

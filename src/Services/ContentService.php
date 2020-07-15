@@ -983,12 +983,9 @@ class ContentService
                 $slugHierarchy,
                 $requiredParentIds,
                 $filter->requiredFields,
-                $includedFields,
+                $filter->includedFields,
                 $requiredUserStates,
                 $includedUserStates,
-                $pullFilterFields,
-                $getFutureContentOnly,
-                $pullPagination,
                 $requiredUserPlaylistIds
             );
 
@@ -1019,6 +1016,7 @@ class ContentService
                     }
                 }
             }
+
             $qb = null;
             if ($pullFilterFields) {
                 $filterOptions = $this->elasticService->getFilterFields(
@@ -1026,12 +1024,9 @@ class ContentService
                     $slugHierarchy,
                     $requiredParentIds,
                     $filter->requiredFields,
-                    $includedFields,
+                    $filter->includedFields,
                     $requiredUserStates,
                     $includedUserStates,
-                    $pullFilterFields,
-                    $getFutureContentOnly,
-                    $pullPagination,
                     $requiredUserPlaylistIds
                 );
 
@@ -1064,19 +1059,12 @@ class ContentService
             $filters = $pullFilterFields ? $this->contentRepository->getFilterFields() : [];
         }
 
-        $activeFilters['requiredFields'] = $requiredFields;
-        foreach($filter->requiredFields as $f){
-          // if($fil)
-           // dd($filter->requiredFields);
-            $activeFilters['requiredFields'] = $f['name'];
-        }
-
         $results = new ContentFilterResultsEntity(
             [
                 'qb' => $qb,
                 'results' => $data,
                 'filter_options' => $filters,
-                'active_filters' => $activeFilters,
+                'active_filters' => $filter->getActiveFilters(),
                 'total_results' => $totalResults,
                 'custom_pagination' => [
                     'total' => $totalResults,
