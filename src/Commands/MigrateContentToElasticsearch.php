@@ -65,12 +65,14 @@ class MigrateContentToElasticsearch extends Command
         $this->info('Migrate contents.');
         $client = $this->elasticService->getClient();
         $contentIndex = $client->getIndex('content');
-
-        if (!$contentIndex->exists()) {
+        if ($contentIndex->exists()) {
+            $contentIndex->delete();
+        }
+       // if (!$contentIndex->exists()) {
             $contentIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
 
             $this->elasticService->setMapping($contentIndex);
-        }
+       // }
 
         $nr = 0;
         $dbConnection->table(config('railcontent.table_prefix') . 'content')
@@ -145,6 +147,17 @@ class MigrateContentToElasticsearch extends Command
                                 ->orderBy('id', 'asc')
                                 ->get();
 
+                        $data =
+                            $dbConnection->table(config('railcontent.table_prefix') . 'content_data')
+                                ->select('*')
+                                ->where('content_id', $row->id)
+                                ->orderBy('id', 'asc')
+                                ->get();
+                        $datum = [];
+                        foreach ($data as $d) {
+                            $datum[] = ['key' => $d->key, 'value' => $d->value];
+                        }
+
                         $document = new Document(
                             '', [
                                 'id' => $row->id,
@@ -167,7 +180,7 @@ class MigrateContentToElasticsearch extends Command
                                     ->toArray(),
                                 'all_progress_count' => $allProgressCount,
                                 'last_week_progress_count' => $lastWeekProgressCount,
-                                // 'datum' => $datum,
+                                'datum' => $datum,
                                 'parent_id' => ($parent) ? $parent->parent_id : null,
                                 'parent_slug' => $parentSlug,
                                 'playlist_ids' => $userPlaylists->pluck('user_playlist_id')
