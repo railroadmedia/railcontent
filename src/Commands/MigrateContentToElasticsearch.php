@@ -97,6 +97,13 @@ class MigrateContentToElasticsearch extends Command
                                 ->orderBy('id', 'asc')
                                 ->get();
 
+                        $tags =
+                            $dbConnection->table(config('railcontent.table_prefix') . 'content_tag')
+                                ->select('tag')
+                                ->where('content_id', $row->id)
+                                ->orderBy('id', 'asc')
+                                ->get();
+
                         $allProgressCount =
                             $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
                                 ->where('content_id', $row->id)
@@ -134,9 +141,15 @@ class MigrateContentToElasticsearch extends Command
 
                         $instructors =
                             $dbConnection->table(config('railcontent.table_prefix') . 'content_instructor')
-                                ->select('instructor_id')
+                                ->join(
+                                    config('railcontent.table_prefix') . 'content',
+                                    config('railcontent.table_prefix') . 'content_instructor.instructor_id',
+                                    '=',
+                                    config('railcontent.table_prefix') . 'content.id'
+                                )
+                                ->select('instructor_id','name')
                                 ->where('content_id', $row->id)
-                                ->orderBy('id', 'asc')
+                                ->orderBy('content_id', 'asc')
                                 ->get();
 
                         $permissions =
@@ -147,16 +160,13 @@ class MigrateContentToElasticsearch extends Command
                                 ->orderBy('id', 'asc')
                                 ->get();
 
-                        $data =
+                        $description =
                             $dbConnection->table(config('railcontent.table_prefix') . 'content_data')
                                 ->select('*')
                                 ->where('content_id', $row->id)
+                                ->where('key','description')
                                 ->orderBy('id', 'asc')
-                                ->get();
-                        $datum = [];
-                        foreach ($data as $d) {
-                            $datum[] = ['key' => $d->key, 'value' => $d->value];
-                        }
+                                ->first();
 
                         $document = new Document(
                             '', [
@@ -176,11 +186,16 @@ class MigrateContentToElasticsearch extends Command
                                 'topic' => (!$topics->isEmpty()) ?
                                     $topics->pluck('topic')
                                         ->toArray() : [],
+                                'tag' => (!$tags->isEmpty()) ?
+                                    $tags->pluck('tag')
+                                        ->toArray() : [],
                                 'instructors' => $instructors->pluck('instructor_id')
+                                    ->toArray(),
+                                'instructors_name' => $instructors->pluck('name')
                                     ->toArray(),
                                 'all_progress_count' => $allProgressCount,
                                 'last_week_progress_count' => $lastWeekProgressCount,
-                                'datum' => $datum,
+                                'description' => $description->value ?? '',
                                 'parent_id' => ($parent) ? $parent->parent_id : null,
                                 'parent_slug' => $parentSlug,
                                 'playlist_ids' => $userPlaylists->pluck('user_playlist_id')

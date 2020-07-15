@@ -430,29 +430,59 @@ class ElasticQueryBuilder extends \Elastica\Query
         return $this;
     }
 
+    /**
+     * @param $term
+     * @return $this
+     */
     public function fullSearchSort($term)
     {
-        $contentTypeFilter = new Query\BoolQuery();
+        $searchableFields = [];
+        foreach (config('railcontent.search_index_values', []) as $index => $searchFields) {
+            foreach ($searchFields as $field) {
+                if (!empty($field)) {
+                    foreach ($field as $key => $value) {
+                        if ($value == 'instructor:name') {
+                            $searchableFields[$index][] = 'instructors_name';
+                        } else {
+                            if ($value == '*') {
+                                $searchableFields[$index] =
+                                    array_merge(
+                                        $searchableFields[$index] ?? [],
+                                        config('railcontent.search_all_fields_keys', [])
+                                    );
+                            } else {
+                                $searchableFields[$index][] = $value;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-        $title = new Terms('title');
-        $title->setTerms($term);
-
-        $slug = new Terms('slug');
-        $slug->setTerms($term);
-
-        $contentTypeFilter->addMust($title)
-            ->addMust($slug);
-
-        $contentTypeFilter2 = new Query\BoolQuery();
-        $contentTypeFilter2->addShould($title)
-            ->addShould($slug);
+        $searcheableFieldsWeightQueries = [];
+        foreach ($searchableFields as $priority => $fields) {
+            $searcheableFieldsWeightQuery = new Query\BoolQuery();
+            foreach ($fields as $field) {
+                $termF = new Terms($field);
+                $termF->setTerms($term);
+                $searcheableFieldsWeightQuery->addShould($termF);
+            }
+            $searcheableFieldsWeightQueries[$priority] = $searcheableFieldsWeightQuery;
+        }
 
         $query = new FunctionScore();
         $query->setParam('query', $this->getQuery());
 
         //set different relevance
-        $query->addWeightFunction(15.0, $contentTypeFilter);
-        $query->addWeightFunction(10.0, $contentTypeFilter2);
+        $relevance = [
+            'high_value' => 20,
+            'medium_value' => 10,
+            'low_value' => 5,
+        ];
+
+        foreach ($searcheableFieldsWeightQueries as $priority => $filterQuery) {
+            $query->addWeightFunction($relevance[$priority], $filterQuery);
+        }
 
         $this->setQuery($query);
         $this->addSort(
@@ -462,13 +492,32 @@ class ElasticQueryBuilder extends \Elastica\Query
                 ],
             ]
         );
-        return $this;
 
+        return $this;
     }
 
     public function restrictByTerm($arrTerms)
     {
-        $searchableFields = ['title', 'slug', 'album', 'style'];
+        $searchableFields = [];
+        foreach (config('railcontent.search_index_values', []) as $searchFields) {
+            foreach ($searchFields as $field) {
+                if (!empty($field)) {
+                    foreach ($field as $key => $value) {
+                        if ($value == 'instructor:name') {
+                            $searchableFields[] = 'instructors_name';
+                        } else {
+                            if ($value == '*') {
+                                $searchableFields =
+                                    array_merge($searchableFields, config('railcontent.search_all_fields_keys', []));
+                            } else {
+                                $searchableFields[] = $value;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
         $queryFields = new Query\BoolQuery();
         foreach ($searchableFields as $field) {
@@ -509,13 +558,13 @@ class ElasticQueryBuilder extends \Elastica\Query
 
         if ($publishedOn) {
 
-                $range = new \Elastica\Query\Range();
-                $range->addField('published_on.date', ['gt' => $publishedOn]);
+            $range = new \Elastica\Query\Range();
+            $range->addField('published_on.date', ['gt' => $publishedOn]);
 
-                $query->addMust($range);
+            $query->addMust($range);
 
-                $this->setQuery($query);
-            }
+            $this->setQuery($query);
+        }
 
         return $this;
 
