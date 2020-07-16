@@ -214,54 +214,54 @@ class MigrateContentToElasticsearch extends Command
                 }
             );
 
-        $this->info('Migrate user progress.');
-        $userProgressIndex = $client->getIndex('progress');
-
-        if (!$userProgressIndex->exists()) {
-            $userProgressIndex->create(
-                ['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
-
-        }
-        $nrProgress = 0;
-        $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
-            ->select(config('railcontent.table_prefix') . 'user_content_progress.*')
-            ->join(
-                config('railcontent.table_prefix') . 'content',
-                'content_id',
-                '=',
-                config('railcontent.table_prefix') . 'content.id'
-            )
-            ->whereNotIn('type', ['assignment', 'instructor', 'exercise', 'vimeo-video', 'youtube-video'])
-            ->orderBy(config('railcontent.table_prefix') . 'user_content_progress.id', 'asc')
-            ->chunk(
-                5000,
-                function (Collection $rows) use ($dbConnection, $userProgressIndex, &$nrProgress) {
-                    $elasticBulk = [];
-
-                    foreach ($rows as $row) {
-                        $nrProgress++;
-                        $document = new Document(
-                            '', [
-                                'id' => $row->id,
-                                'user_id' => $row->user_id,
-                                'content_id' => $row->content_id,
-                                'state' => $row->state,
-                            ]
-                        );
-
-                        $elasticBulk[] = $document;
-                    }
-
-                    //Add documents
-                    $userProgressIndex->addDocuments($elasticBulk);
-
-                    //Refresh Index
-                    $userProgressIndex->refresh();
-
-                    $this->info('Migrated ' . $nrProgress . ' progresses records');
-
-                }
-            );
+//        $this->info('Migrate user progress.');
+//        $userProgressIndex = $client->getIndex('progress');
+//
+//        if (!$userProgressIndex->exists()) {
+//            $userProgressIndex->create(
+//                ['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
+//
+//        }
+//        $nrProgress = 0;
+//        $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
+//            ->select(config('railcontent.table_prefix') . 'user_content_progress.*')
+//            ->join(
+//                config('railcontent.table_prefix') . 'content',
+//                'content_id',
+//                '=',
+//                config('railcontent.table_prefix') . 'content.id'
+//            )
+//            ->whereNotIn('type', ['assignment', 'instructor', 'exercise', 'vimeo-video', 'youtube-video'])
+//            ->orderBy(config('railcontent.table_prefix') . 'user_content_progress.id', 'asc')
+//            ->chunk(
+//                5000,
+//                function (Collection $rows) use ($dbConnection, $userProgressIndex, &$nrProgress) {
+//                    $elasticBulk = [];
+//
+//                    foreach ($rows as $row) {
+//                        $nrProgress++;
+//                        $document = new Document(
+//                            '', [
+//                                'id' => $row->id,
+//                                'user_id' => $row->user_id,
+//                                'content_id' => $row->content_id,
+//                                'state' => $row->state,
+//                            ]
+//                        );
+//
+//                        $elasticBulk[] = $document;
+//                    }
+//
+//                    //Add documents
+//                    $userProgressIndex->addDocuments($elasticBulk);
+//
+//                    //Refresh Index
+//                    $userProgressIndex->refresh();
+//
+//                    $this->info('Migrated ' . $nrProgress . ' progresses records');
+//
+//                }
+//            );
 
         $this->info('Finished MigrateContentToElasticsearch.');
     }

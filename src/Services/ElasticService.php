@@ -55,16 +55,6 @@ class ElasticService
      */
     private $resultsHydrator;
 
-    /**
-     * UserPlaylistService constructor.
-     *
-     * @param RailcontentEntityManager $entityManager
-     * @param UserProviderInterface $userProvider
-     */
-    public function __construct()
-    {
-
-    }
 
     /**
      * @return Client
@@ -126,13 +116,10 @@ class ElasticService
      * @param array $requiredParentIds
      * @param array $requiredFields
      * @param array $includedFields
-     * @param array $requiredUserStates
-     * @param array $includedUserStates
-     * @param bool $pullFilterFields
-     * @param bool $getFutureContentOnly
-     * @param bool $pullPagination
+     * @param array|null $requiredContentIdsByState
+     * @param array|null $includedContentsIdsByState
      * @param array $requiredUserPlaylistIds
-     * @return \Elastica\Result[]
+     * @return \Elastica\ResultSet
      */
     public function getElasticFiltered(
         $page = 1,
@@ -143,8 +130,8 @@ class ElasticService
         array $requiredParentIds = [],
         array $requiredFields = [],
         array $includedFields = [],
-        array $requiredUserStates = [],
-        array $includedUserStates = [],
+        ?array $requiredContentIdsByState = [],
+        ?array $includedContentsIdsByState = [],
         array $requiredUserPlaylistIds = []
     ) {
         $client = $this->getClient();
@@ -154,10 +141,10 @@ class ElasticService
             $this->build()
                 ->restrictByUserAccess()
                 ->restrictByTypes($includedTypes)
-                ->includeByUserStates($includedUserStates, $client)
+                ->includeByUserStates($includedContentsIdsByState)
                 ->includeByFields($includedFields)
                 ->restrictByParentIds($requiredParentIds)
-                ->restrictByUserStates($requiredUserStates, $client)
+                ->restrictByUserStates($requiredContentIdsByState)
                 ->restrictBySlugHierarchy($slugHierarchy)
                 ->restrictByPlaylistIds($requiredUserPlaylistIds)
                 ->restrictByFields($requiredFields)
@@ -210,8 +197,8 @@ class ElasticService
      * @param array $requiredParentIds
      * @param array $requiredFields
      * @param array $includedFields
-     * @param array $requiredUserStates
-     * @param array $includedUserStates
+     * @param array|null $requiredUserStates
+     * @param array|null $includedUserStates
      * @param array $requiredUserPlaylistIds
      * @return array
      */
@@ -221,8 +208,8 @@ class ElasticService
         array $requiredParentIds = [],
         array $requiredFields = [],
         array $includedFields = [],
-        array $requiredUserStates = [],
-        array $includedUserStates = [],
+        ?array $requiredUserStates = [],
+        ?array $includedUserStates = [],
         array $requiredUserPlaylistIds = []
     ) {
         $filtersEl = $this->getElasticFiltered(

@@ -134,98 +134,42 @@ class ElasticQueryBuilder extends \Elastica\Query
     }
 
     /**
-     * @param array $requiredUserStates
+     * @param array|null $requiredContentIdsByState
      * @return $this
      */
-    public function restrictByUserStates(array $requiredUserStates, $client)
+    public function restrictByUserStates(?array $requiredContentIdsByState)
     {
-        if (empty($requiredUserStates)) {
-            return $this;
-        }
-
-        $userId = auth()->id();
-
-        $progressIndex = $client->getIndex('progress');
-        $queryBuilder = new Query();
-        $query = new Query\BoolQuery();
-        $termsQuery = new Terms('user_id', [$userId]);
-
-        $query->addMust($termsQuery);
-
-        $termsQuery = new Terms('state', $requiredUserStates);
-
-        $query->addMust($termsQuery);
-        $queryBuilder->setQuery($query)
-            ->setSize(1000)
-            ->setFrom(0);
-
-        $contentIds = [];
-        foreach (
-            $progressIndex->search($queryBuilder)
-                ->getResults() as $prog
-        ) {
-            $contentIds[] = $prog->getData()['content_id'];
-        }
-
-        if (empty($contentIds)) {
+        if (!$requiredContentIdsByState) {
             return $this;
         }
 
         $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-        $termsQuery = new Terms('id', $contentIds);
+        $query2 = new Query\BoolQuery();
+        $termsQuery = new Terms('id', $requiredContentIdsByState);
 
-        $query->addMust($termsQuery);
-
+        $query2->addMust($termsQuery);
+        $query->addMust($query2);
         $this->setQuery($query);
 
         return $this;
     }
 
     /**
-     * @param array $includedUserStates
+     * @param array|null $includedContentsIdsByState
      * @return $this
      */
-    public function includeByUserStates(array $includedUserStates, $client)
+    public function includeByUserStates(?array $includedContentsIdsByState)
     {
-        //TODO
-        if (empty($includedUserStates)) {
-            return $this;
-        }
-
-        $userId = auth()->id();
-        //$userId = 149628;
-
-        $progressIndex = $client->getIndex('progress');
-        $queryBuilder = new Query();
-        $query = new Query\BoolQuery();
-        $termsQuery = new Terms('user_id', [$userId]);
-
-        $query->addMust($termsQuery);
-
-        $termsQuery = new Terms('state', $includedUserStates);
-
-        $query->addShould($termsQuery);
-        $queryBuilder->setQuery($query)
-            ->setSize(1000)
-            ->setFrom(0);
-
-        $contentIds = [];
-        foreach (
-            $progressIndex->search($queryBuilder)
-                ->getResults() as $prog
-        ) {
-            $contentIds[] = $prog->getData()['content_id'];
-        }
-
-        if (empty($contentIds)) {
+        if (!$includedContentsIdsByState) {
             return $this;
         }
 
         $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-        $termsQuery = new Terms('id', $contentIds);
+        $query2 = new Query\BoolQuery();
+        $termsQuery = new Terms('id', $includedContentsIdsByState);
 
-        $query->addMust($termsQuery);
-
+        $query2->addShould($termsQuery);
+        $query->addMust($query2);
         $this->setQuery($query);
 
         return $this;
@@ -447,11 +391,10 @@ class ElasticQueryBuilder extends \Elastica\Query
                             $searchableFields[$index][] = 'instructors_name';
                         } else {
                             if ($value == '*') {
-                                $searchableFields[$index] =
-                                    array_merge(
-                                        $searchableFields[$index] ?? [],
-                                        config('railcontent.search_all_fields_keys', [])
-                                    );
+                                $searchableFields[$index] = array_merge(
+                                    $searchableFields[$index] ?? [],
+                                    config('railcontent.search_all_fields_keys', [])
+                                );
                             } else {
                                 $searchableFields[$index][] = $value;
                             }

@@ -80,6 +80,8 @@ class ContentService
      */
     private $elasticService;
 
+    private $userContentProgressRepository;
+
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
@@ -110,6 +112,7 @@ class ContentService
         $this->datumRepository = $this->entityManager->getRepository(ContentData::class);
         $this->contentPermissionRepository = $this->entityManager->getRepository(ContentPermission::class);
         $this->commentRepository = $this->entityManager->getRepository(Comment::class);
+        $this->userContentProgressRepository = $this->entityManager->getRepository(UserContentProgress::class);
         $this->contentHierarchyService = $contentHierarchyService;
         $this->elasticService = $elasticService;
 
@@ -975,6 +978,39 @@ class ContentService
 
         if (config('railcontent.useElasticSearch') == true) {
             $filters = [];
+
+            if (!empty($includedUserStates)) {
+                $includedContentsIdsByState = [];
+                $includedContentsByState =
+                    $this->userContentProgressRepository->createQueryBuilder('up')
+                        ->where('up.user = :userId')
+                        ->andWhere('up.state IN (:state)')
+                        ->setParameter('userId', auth()->id())
+                        ->setParameter('state', $includedUserStates)
+                        ->getQuery()
+                        ->getResult();
+                foreach ($includedContentsByState as $progress) {
+                    $includedContentsIdsByState[] = $progress->getContent()->getId();
+                }
+            }
+
+            if (!empty($requiredUserStates)) {
+                $requiredContentIdsByState = [];
+                $qb =
+                    $this->userContentProgressRepository->createQueryBuilder('up')
+                        ->where('up.user = :userId')
+                        ->setParameter('userId', auth()->id());
+
+                foreach ($requiredUserStates as $state) {
+                    $qb->andWhere('up.state  = :state')->setParameter('state', $state);
+                }
+
+                $requiredContentsByState = $qb->getQuery()->getResult();
+                foreach ($requiredContentsByState as $progress) {
+                    $requiredContentIdsByState[] = $progress->getContent()->getId();
+                }
+            }
+
             $elasticData = $this->elasticService->getElasticFiltered(
                 $page,
                 $limit,
@@ -984,8 +1020,8 @@ class ContentService
                 $requiredParentIds,
                 $filter->requiredFields,
                 $filter->includedFields,
-                $requiredUserStates,
-                $includedUserStates,
+                $requiredContentIdsByState ?? null,
+                $includedContentsIdsByState ?? null,
                 $requiredUserPlaylistIds
             );
 
@@ -1025,8 +1061,8 @@ class ContentService
                     $requiredParentIds,
                     $filter->requiredFields,
                     $filter->includedFields,
-                    $requiredUserStates,
-                    $includedUserStates,
+                    $requiredContentIdsByState ?? null,
+                    $includedContentsIdsByState ?? null,
                     $requiredUserPlaylistIds
                 );
 
