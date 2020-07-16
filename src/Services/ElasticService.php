@@ -90,15 +90,15 @@ class ElasticService
         $mapping->setProperties(
             [
                 'id' => ['type' => 'integer'],
-                'title' => ['type' => 'text'],
-                'slug' => ['type' => 'text'],
+                'title' => ['type' => 'keyword'],
+                'slug' => ['type' => 'keyword'],
                 'brand' => ['type' => 'text'],
-                'content_type' => ['type' => 'text'],
+                'content_type' => ['type' => 'keyword'],
                 'status' => ['type' => 'text'],
                 'difficulty' => ['type' => 'text'],
                 'style' => ['type' => 'text'],
-                //                'published_on' => ['type' => 'date'],
-                'topic' => ['type' => 'text'],
+                'description' => ['type' => 'keyword'],
+                'topic' => ['type' => 'keyword'],
                 'bpm' => ['type' => 'text'],
             ]
         );
@@ -163,7 +163,7 @@ class ElasticService
                 ->restrictByFields($requiredFields)
                 ->sortResults($sort)
                 ->setSize($limit)
-                ->setFrom(($page - 1) * $limit);
+               ->setFrom(($page - 1) * $limit);
 
         return $index->search($searchQuery);
     }
@@ -174,9 +174,7 @@ class ElasticService
      * @param int $limit
      * @param array $contentTypes
      * @param array $contentStatuses
-     * @param string $sort
      * @param null $dateTimeCutoff
-     * @param null $brands
      * @return \Elastica\ResultSet
      */
     public function search(
@@ -185,14 +183,12 @@ class ElasticService
         $limit = 10,
         $contentTypes = [],
         $contentStatuses = [],
-        $sort = 'full',
-        $dateTimeCutoff = null,
-        $brands = null
+        $dateTimeCutoff = null
     ) {
 
         $client = $this->getClient();
         $index = $client->getIndex('content');
-        $arrTerm = explode(' ', $term);
+        $arrTerm = explode(' ', strtolower($term));
 
         $searchQuery =
             $this->build()
@@ -260,7 +256,7 @@ class ElasticService
             foreach ($requiredFiltersData as $requiredFieldData) {
                 if ($requiredFieldData == 'instructor') {
 
-                    foreach ($elData->getData()['instructors'] as $insId) {
+                    foreach ($elData->getData()['instructor'] as $insId) {
                         $instructorsIds[$insId] = $insId;
                     }
                 }

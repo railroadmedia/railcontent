@@ -96,7 +96,6 @@ class FullTextSearchService
                 $limit,
                 $contentTypes,
                 $contentStatuses,
-                $sort,
                 $dateTimeCutoff
             );
 

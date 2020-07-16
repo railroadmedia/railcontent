@@ -247,7 +247,7 @@ class ElasticQueryBuilder extends \Elastica\Query
 
             $termsQuery = new Terms($requiredFieldData['name'], [strtolower($requiredFieldData['value'])]);
 
-            $query->addFilter($termsQuery);
+            $query->addMust($termsQuery);
         }
 
         $this->setQuery($query);
@@ -264,15 +264,17 @@ class ElasticQueryBuilder extends \Elastica\Query
         if (empty($includedFields)) {
             return $this;
         }
-        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
 
+        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
+        $query2 = new Query\BoolQuery();
         foreach ($includedFields as $index => $includedFieldData) {
 
             $termsQuery = new Terms($includedFieldData['name'], [strtolower($includedFieldData['value'])]);
 
-            $query->addShould($termsQuery);
+            $query2->addShould($termsQuery);
         }
 
+        $query->addFilter($query2);
         $this->setQuery($query);
 
         return $this;
@@ -496,6 +498,10 @@ class ElasticQueryBuilder extends \Elastica\Query
         return $this;
     }
 
+    /**
+     * @param $arrTerms
+     * @return $this
+     */
     public function restrictByTerm($arrTerms)
     {
         $searchableFields = [];
@@ -520,6 +526,7 @@ class ElasticQueryBuilder extends \Elastica\Query
 
         $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
         $queryFields = new Query\BoolQuery();
+
         foreach ($searchableFields as $field) {
 
             $title = new Terms($field);
@@ -552,6 +559,10 @@ class ElasticQueryBuilder extends \Elastica\Query
         return $this;
     }
 
+    /**
+     * @param $publishedOn
+     * @return $this
+     */
     public function restrictByPublishedDate($publishedOn)
     {
         $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();

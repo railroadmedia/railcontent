@@ -63,16 +63,12 @@ class MigrateContentToElasticsearch extends Command
         $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
 
         $this->info('Migrate contents.');
+
         $client = $this->elasticService->getClient();
         $contentIndex = $client->getIndex('content');
-        if ($contentIndex->exists()) {
-            $contentIndex->delete();
-        }
-       // if (!$contentIndex->exists()) {
-            $contentIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
+        $contentIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
-            $this->elasticService->setMapping($contentIndex);
-       // }
+        $this->elasticService->setMapping($contentIndex);
 
         $nr = 0;
         $dbConnection->table(config('railcontent.table_prefix') . 'content')
@@ -184,15 +180,16 @@ class MigrateContentToElasticsearch extends Command
                                 'bpm' => $row->bpm,
                                 'published_on' => Carbon::parse($row->published_on),
                                 'topic' => (!$topics->isEmpty()) ?
-                                    $topics->pluck('topic')
-                                        ->toArray() : [],
+                                    array_map('strtolower', $topics->pluck('topic')
+                                        ->toArray()) : [],
                                 'tag' => (!$tags->isEmpty()) ?
-                                    $tags->pluck('tag')
-                                        ->toArray() : [],
-                                'instructors' => $instructors->pluck('instructor_id')
+                                    array_map('strtolower',  $tags->pluck('tag')
+                                        ->toArray())
+                                    : [],
+                                'instructor' => $instructors->pluck('instructor_id')
                                     ->toArray(),
-                                'instructors_name' => $instructors->pluck('name')
-                                    ->toArray(),
+                                'instructors_name' => array_map('strtolower', $instructors->pluck('name')
+                                    ->toArray())                                    ,
                                 'all_progress_count' => $allProgressCount,
                                 'last_week_progress_count' => $lastWeekProgressCount,
                                 'description' => $description->value ?? '',
@@ -216,17 +213,14 @@ class MigrateContentToElasticsearch extends Command
                     $this->info('Migrated ' . $nr . ' contents');
                 }
             );
-        //
 
         $this->info('Migrate user progress.');
         $userProgressIndex = $client->getIndex('progress');
 
         if (!$userProgressIndex->exists()) {
             $userProgressIndex->create(
-                ['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]
-            );
+                ['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
 
-            //  $this->elasticService->setMapping($contentIndex);
         }
         $nrProgress = 0;
         $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')

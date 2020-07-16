@@ -93,6 +93,13 @@ class DecoratedContentTransformer extends TransformerAbstract
 
         $this->setDefaultIncludes($defaultIncludes);
 
+        array_walk_recursive(
+            $contents,
+            function (&$item) {
+                $item = utf8_encode($item);
+            }
+        );
+
         return $contents;
     }
 
