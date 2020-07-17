@@ -646,7 +646,9 @@ class ContentRepository extends EntityRepository
 
         $userStates = array_merge($this->requiredUserStates, $this->includedUserStates);
         if (!empty($userStates)) {
-            $active['user_states'] = $userStates;
+            foreach($userStates as $state) {
+                $active['user_states'][] = $state['state'];
+            }
         }
 
         if (array_key_exists('instructor', $active)) {
