@@ -55,7 +55,6 @@ class ElasticService
      */
     private $resultsHydrator;
 
-
     /**
      * @return Client
      */
@@ -150,7 +149,7 @@ class ElasticService
                 ->restrictByFields($requiredFields)
                 ->sortResults($sort)
                 ->setSize($limit)
-               ->setFrom(($page - 1) * $limit);
+                ->setFrom(($page - 1) * $limit);
 
         return $index->search($searchQuery);
     }
@@ -229,6 +228,7 @@ class ElasticService
         $idEs = [];
         $filteredContents = [];
         $instructorsIds = [];
+
         foreach ($filtersEl->getResults() as $elData) {
             $idEs[] = $elData->getData()['id'];
 
@@ -242,7 +242,6 @@ class ElasticService
 
             foreach ($requiredFiltersData as $requiredFieldData) {
                 if ($requiredFieldData == 'instructor') {
-
                     foreach ($elData->getData()['instructor'] as $insId) {
                         $instructorsIds[$insId] = $insId;
                     }
@@ -275,9 +274,12 @@ class ElasticService
                 }
             );
         }
+        
         if (!empty($instructorsIds)) {
             $filteredContents['instructors'] = $instructorsIds;
         }
+
+        unset($filteredContents['instructor']);
 
         return $filteredContents;
     }
