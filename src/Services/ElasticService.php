@@ -250,14 +250,15 @@ class ElasticService
 
                     if (is_array($elData->getData()[$requiredFieldData])) {
                         foreach ($elData->getData()[$requiredFieldData] as $option) {
-                            if (!in_array($option, $filteredContents[$requiredFieldData] ?? [])) {
+                            if (!in_array(strtolower($option), array_map('strtolower',$filteredContents[$requiredFieldData]?? []) )) {
                                 $filteredContents[$requiredFieldData][] = $option;
                             }
                         }
                     } else {
                         if (($elData->getData()[$requiredFieldData]) && (!in_array(
-                                $elData->getData()[$requiredFieldData],
-                                $filteredContents[$requiredFieldData] ?? []
+                                strtolower($elData->getData()[$requiredFieldData]),
+                                array_map('strtolower',$filteredContents[$requiredFieldData] ?? [])
+
                             ))) {
                             $filteredContents[$requiredFieldData][] = $elData->getData()[$requiredFieldData];
                         }
@@ -274,7 +275,7 @@ class ElasticService
                 }
             );
         }
-        
+
         if (!empty($instructorsIds)) {
             $filteredContents['instructors'] = $instructorsIds;
         }
