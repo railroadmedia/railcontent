@@ -96,7 +96,9 @@ class DecoratedContentTransformer extends TransformerAbstract
         array_walk_recursive(
             $contents,
             function (&$item) {
-                $item = utf8_encode($item);
+                if(is_string($item)) {
+                    $item = utf8_encode($item);
+                }
             }
         );
 
