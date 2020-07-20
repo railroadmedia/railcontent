@@ -19,41 +19,13 @@ use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Managers\SearchEntityManager;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
+use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistRepository;
 use Elastica\Query;
 use Elastica\Query\Match;
 
 class ElasticService
 {
-    /**
-     * @var RailcontentEntityManager
-     */
-    private $entityManager;
-
-    /**
-     * @var ObjectRepository|EntityRepository
-     */
-    private $userPlaylistRepository;
-
-    /**
-     * @var ObjectRepository|EntityRepository
-     */
-    private $contentUserPlaylistRepository;
-
-    /**
-     * @var ObjectRepository|EntityRepository
-     */
-    private $contentRepository;
-
-    /**
-     * @var UserProviderInterface
-     */
-    private $userProvider;
-
-    /**
-     * @var CustomRailcontentHydrator
-     */
-    private $resultsHydrator;
 
     /**
      * @return Client

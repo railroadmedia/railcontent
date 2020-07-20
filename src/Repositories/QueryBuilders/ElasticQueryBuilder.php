@@ -5,15 +5,12 @@ namespace Railroad\Railcontent\Repositories\QueryBuilders;
 use Elastica\Query;
 use Elastica\Query\FunctionScore;
 use Elastica\Query\Terms;
-use Railroad\Railcontent\Contracts\UserProviderInterface;
-use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\ContentPermission;
-use Railroad\Railcontent\Entities\UserContentProgress;
-use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
 class ElasticQueryBuilder extends \Elastica\Query
 {
+    public static $userPermissions = [];
+
     /**
      * @param array $slugHierarchy
      * @return $this
@@ -229,12 +226,11 @@ class ElasticQueryBuilder extends \Elastica\Query
      */
     public function restrictByPermissions()
     {
-
         if (ContentRepository::$bypassPermissions === true) {
             return $this;
         }
 
-        $currentUserActivePermissions = [1, 131];
+        $currentUserActivePermissions = self::$userPermissions;
 
         $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
 
@@ -245,9 +241,10 @@ class ElasticQueryBuilder extends \Elastica\Query
 
         $termsQuery = new Terms('permission_ids', $currentUserActivePermissions);
         $query3 = new Query\BoolQuery();
-        $query3->addShould($termsQuery)
-            ->addShould($mustNot);
+        $query3->addShould($termsQuery)->addShould($mustNot);
+
         $query->addMust($query3);
+
         $this->setQuery($query);
 
         return $this;
@@ -336,7 +333,7 @@ class ElasticQueryBuilder extends \Elastica\Query
 
                 break;
             case 'relevance':
-                //difficulty and topics will be defined on user
+                //TODO:difficulty and topics will be defined on user
                 $userDifficulty = 2;
                 $userTopics = ['Fills'];
 
@@ -521,6 +518,5 @@ class ElasticQueryBuilder extends \Elastica\Query
         }
 
         return $this;
-
     }
 }

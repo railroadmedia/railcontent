@@ -15,15 +15,16 @@ class CommentTransformer extends TransformerAbstract
         $entityManager = app()->make(EntityManager::class);
 
         if (count($comment->getChildren()) > 0) {
-            $this->defaultIncludes = ['content', 'replies'];
+            $this->defaultIncludes = ['content', 'replies','user'];
         } else {
-            $this->defaultIncludes = ['content'];
+            $this->defaultIncludes = ['content','user'];
         }
 
         $serializer = new BasicEntitySerializer();
 
         $extraProperties = [];
         $extra = $comment->getExtra();
+
         if ($extra) {
             foreach ($extra as $item) {
                 $value = $comment->getProperty($item);
@@ -65,5 +66,10 @@ class CommentTransformer extends TransformerAbstract
     public function includeContent(Comment $comment)
     {
         return $this->item($comment->getContent(), new ContentTransformer(), 'content');
+    }
+
+    public function includeUser(Comment $comment)
+    {
+        return $this->item($comment->getUser(), new UserTransformer(), 'user');
     }
 }

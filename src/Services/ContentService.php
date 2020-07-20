@@ -18,6 +18,7 @@ use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\UserContentProgress;
+use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Events\ContentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
@@ -25,7 +26,8 @@ use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Hydrators\CustomRailcontentHydrator;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
+use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
+use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use ReflectionException;
 
 class ContentService
@@ -82,6 +84,11 @@ class ContentService
 
     private $userContentProgressRepository;
 
+    /**
+     * @var UserPermissionsRepository
+     */
+    private $userPermissionRepository;
+
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
@@ -113,6 +120,7 @@ class ContentService
         $this->contentPermissionRepository = $this->entityManager->getRepository(ContentPermission::class);
         $this->commentRepository = $this->entityManager->getRepository(Comment::class);
         $this->userContentProgressRepository = $this->entityManager->getRepository(UserContentProgress::class);
+        $this->userPermissionRepository = $this->entityManager->getRepository(UserPermission::class);
         $this->contentHierarchyService = $contentHierarchyService;
         $this->elasticService = $elasticService;
 
@@ -1010,6 +1018,14 @@ class ContentService
                     $requiredContentIdsByState[] = $progress->getContent()->getId();
                 }
             }
+
+            $permissionIds = [];
+            $userPermissions =  $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
+            foreach ($userPermissions as $permission){
+                $permissionIds[] = $permission->getPermission()->getId();
+            }
+
+            ElasticQueryBuilder::$userPermissions = $permissionIds;
 
             $elasticData = $this->elasticService->getElasticFiltered(
                 $page,
