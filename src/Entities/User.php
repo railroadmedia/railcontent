@@ -36,6 +36,12 @@ class User implements UserEntityInterface
      */
     private $avatar;
 
+    private $drumsSkillLevel;
+
+    private $guitarSkillLevel;
+
+    private $pianoSkillLevel;
+
     /**
      * User constructor.
      *
@@ -43,13 +49,19 @@ class User implements UserEntityInterface
      * @param $email
      * @param $displayName
      * @param $avatar
+     * @param $drumsSkillLevel
+     * @param $guitarSkillLevel
+     * @param $pianoSkillLevel
      */
-    public function __construct(int $id, $email, $displayName, $avatar)
+    public function __construct(int $id, $email, $displayName, $avatar, $drumsSkillLevel, $guitarSkillLevel, $pianoSkillLevel)
     {
         $this->id = $id;
         $this->email = $email;
         $this->displayName = $displayName;
         $this->avatar = $avatar;
+        $this->drumsSkillLevel = $drumsSkillLevel;
+        $this->guitarSkillLevel = $guitarSkillLevel;
+        $this->pianoSkillLevel  = $pianoSkillLevel;
     }
 
     /**
@@ -120,6 +132,56 @@ class User implements UserEntityInterface
         $this->avatar = $avatar;
     }
 
+    /**
+     * @return integer
+     */
+    public function getDrumsSkillLevel()
+    : ?integer
+    {
+        return $this->drumsSkillLevel;
+    }
+
+    /**
+     * @param $drumsSkillLevel
+     */
+    public function setDrumsSkillLevel($drumsSkillLevel)
+    : void {
+        $this->drumsSkillLevel = $drumsSkillLevel;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getGuitarSkillLevel()
+    : ?integer
+    {
+        return $this->guitarSkillLevel;
+    }
+
+    /**
+     * @param $guitarSkillLevel
+     */
+    public function setGuitarSkillLevel($guitarSkillLevel)
+    : void {
+        $this->guitarSkillLevel = $guitarSkillLevel;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getPianoSkillLevel()
+    : ?integer
+    {
+        return $this->pianoSkillLevel;
+    }
+
+    /**
+     * @param $pianoSkillLevel
+     */
+    public function setPianoSkillLevel($pianoSkillLevel)
+    : void {
+        $this->pianoSkillLevel = $pianoSkillLevel;
+    }
     /**
      * @return string
      */
