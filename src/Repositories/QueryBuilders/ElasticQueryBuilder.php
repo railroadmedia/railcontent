@@ -11,6 +11,10 @@ class ElasticQueryBuilder extends \Elastica\Query
 {
     public static $userPermissions = [];
 
+    public static $userTopics = [];
+
+    public static $skillLevel;
+
     /**
      * @param array $slugHierarchy
      * @return $this
@@ -333,9 +337,9 @@ class ElasticQueryBuilder extends \Elastica\Query
 
                 break;
             case 'relevance':
-                //TODO:difficulty and topics will be defined on user
-                $userDifficulty = 2;
-                $userTopics = ['Fills'];
+
+                $userDifficulty = self::$skillLevel;
+                $userTopics = self::$userTopics;
 
                 $contentTypeFilter = new Query\BoolQuery();
 

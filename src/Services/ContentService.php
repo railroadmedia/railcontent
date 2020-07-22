@@ -1025,7 +1025,20 @@ class ContentService
                 $permissionIds[] = $permission->getPermission()->getId();
             }
 
+            switch(config('railcontent.brand')) {
+                case 'drumeo':
+                    ElasticQueryBuilder::$skillLevel =$this->userProvider->getCurrentUser()->getDrumsSkillLevel();
+                    break;
+                case 'pianote':
+                    ElasticQueryBuilder::$skillLevel =$this->userProvider->getCurrentUser()->getPianoSkillLevel();
+                    break;
+                case 'guitareo':
+                    ElasticQueryBuilder::$skillLevel =$this->userProvider->getCurrentUser()->getGuitarSkillLevel();
+                    break;
+            }
+
             ElasticQueryBuilder::$userPermissions = $permissionIds;
+            ElasticQueryBuilder::$userTopics = $this->userProvider->getCurrentUserTopics();
 
             $elasticData = $this->elasticService->getElasticFiltered(
                 $page,

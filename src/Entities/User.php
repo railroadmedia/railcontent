@@ -136,7 +136,7 @@ class User implements UserEntityInterface
      * @return integer
      */
     public function getDrumsSkillLevel()
-    : ?integer
+    : ?int
     {
         return $this->drumsSkillLevel;
     }
@@ -153,7 +153,7 @@ class User implements UserEntityInterface
      * @return integer
      */
     public function getGuitarSkillLevel()
-    : ?integer
+    : ?int
     {
         return $this->guitarSkillLevel;
     }
@@ -170,7 +170,7 @@ class User implements UserEntityInterface
      * @return integer
      */
     public function getPianoSkillLevel()
-    : ?integer
+    : ?int
     {
         return $this->pianoSkillLevel;
     }

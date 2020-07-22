@@ -69,4 +69,6 @@ interface UserProviderInterface
      * @return User|null
      */
     public function createRailcontentUser(string $email, string $password): ?User;
+
+    public function getCurrentUserTopics(): ?array;
 }
