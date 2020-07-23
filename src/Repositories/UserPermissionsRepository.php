@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Repositories\Traits\RailcontentCustomQueryBuilder;
@@ -23,10 +22,13 @@ class UserPermissionsRepository extends EntityRepository
         $qb = $this->createQueryBuilder('up');
 
         if ($userId) {
-            $user = app()->make(UserProviderInterface::class)->getUserById($userId);
+            $user =
+                app()
+                    ->make(UserProviderInterface::class)
+                    ->getUserById($userId);
             $qb->where('up.user = :user')
                 ->setParameter('user', $user)
-            ->orderByColumn('up','expirationDate', 'asc');
+                ->orderByColumn('up', 'expirationDate', 'asc');
         }
 
         if ($onlyActive) {
@@ -62,10 +64,12 @@ class UserPermissionsRepository extends EntityRepository
     {
         $alias = 'up';
         $qb = $this->createQueryBuilder($alias);
-        $qb->where($alias.'.user = :user')
-            ->andWhere($alias.'.permission = :permission')
+        $qb->where($alias . '.user = :user')
+            ->andWhere($alias . '.permission = :permission')
             ->setParameter('user', $user)
-            ->setParameter('permission', $permission);
+            ->setParameter('permission', $permission)
+            ->setMaxResults(1)
+            ->orderBy($alias . '.id', 'desc');
 
         return $qb->getQuery()
             ->getOneOrNullResult('Railcontent');
