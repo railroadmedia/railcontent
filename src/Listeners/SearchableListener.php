@@ -45,13 +45,13 @@ class SearchableListener implements EventSubscriber
 
         $oEntity = $oArgs->getEntity();
 
-        if (($oEntity instanceof Content) ||
+        if  (config('railcontent.useElasticSearch') &&(($oEntity instanceof Content) ||
             ($oEntity instanceof ContentInstructor) ||
             ($oEntity instanceof ContentHierarchy) ||
             ($oEntity instanceof ContentPermission) ||
             ($oEntity instanceof ContentPlaylist) ||
             ($oEntity instanceof ContentTopic) ||
-            $oEntity instanceof UserContentProgress) {
+            $oEntity instanceof UserContentProgress)) {
 
             $client = $this->elasticService->getClient();
 
@@ -123,13 +123,13 @@ class SearchableListener implements EventSubscriber
     {
         $oEntity = $oArgs->getEntity();
 
-        if (($oEntity instanceof Content) ||
+        if (config('railcontent.useElasticSearch') &&(($oEntity instanceof Content) ||
             ($oEntity instanceof ContentInstructor) ||
             ($oEntity instanceof ContentHierarchy) ||
             ($oEntity instanceof ContentPermission) ||
             ($oEntity instanceof ContentPlaylist) ||
             ($oEntity instanceof ContentTopic) ||
-            ($oEntity instanceof UserContentProgress)) {
+            ($oEntity instanceof UserContentProgress))) {
 
             $client = $this->elasticService->getClient();
 

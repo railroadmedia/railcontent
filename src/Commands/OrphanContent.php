@@ -113,6 +113,8 @@ class OrphanContent extends Command
 
     public function getOrphansFromHierarchies()
     {
+        config(['railcontent.useElasticSearch'=>false]);
+
         $i = 0;
         $this->connection->table(config('railcontent.table_prefix') . 'content_hierarchy as content_hierarchy')
             ->select('content_hierarchy.id', 'content_hierarchy.child_id', 'content_hierarchy.parent_id')

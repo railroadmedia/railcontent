@@ -36,6 +36,7 @@ class MigrateContentToNewStructure extends Command
         $this->call('command:deleteOldContentForPlaylist');
         $this->call('command:deleteOrphanContent');
         $this->call('command:calculateTotalXP');
+        $this->call('command:MigrateContentToElasticsearch');
 
         $this->info('Finished MigrateContentToNewStructure.');
     }
