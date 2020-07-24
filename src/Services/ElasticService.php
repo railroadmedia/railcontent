@@ -214,7 +214,7 @@ class ElasticService
 
             foreach ($requiredFiltersData as $requiredFieldData) {
                 if ($requiredFieldData == 'instructor') {
-                    foreach ($elData->getData()['instructor'] as $insId) {
+                    foreach ($elData->getData()['instructor']??[] as $insId) {
                         $instructorsIds[$insId] = $insId;
                     }
                 }

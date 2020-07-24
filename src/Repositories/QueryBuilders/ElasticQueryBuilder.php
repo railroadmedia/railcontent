@@ -245,7 +245,8 @@ class ElasticQueryBuilder extends \Elastica\Query
 
         $termsQuery = new Terms('permission_ids', $currentUserActivePermissions);
         $query3 = new Query\BoolQuery();
-        $query3->addShould($termsQuery)->addShould($mustNot);
+        $query3->addShould($termsQuery)
+            ->addShould($mustNot);
 
         $query->addMust($query3);
 
@@ -341,20 +342,23 @@ class ElasticQueryBuilder extends \Elastica\Query
                 $userDifficulty = self::$skillLevel;
                 $userTopics = self::$userTopics;
 
-                $contentTypeFilter = new Query\BoolQuery();
-
-                $difficulty = new Terms('difficulty');
-                $difficulty->setTerms([$userDifficulty, 'All Skill Levels']);
-
                 $topics = new Terms('topics');
                 $topics->setTerms($userTopics);
 
-                $contentTypeFilter->addMust($difficulty)
-                    ->addMust($topics);
+                $contentTypeFilter = new Query\BoolQuery();
+
+                $contentTypeFilter->addMust($topics);
 
                 $contentTypeFilter2 = new Query\BoolQuery();
-                $contentTypeFilter2->addShould($difficulty)
-                    ->addShould($topics);
+
+                 $contentTypeFilter2->addShould($topics);
+
+                if ($userDifficulty) {
+                    $difficulty = new Terms('difficulty');
+                    $difficulty->setTerms([$userDifficulty, 'All Skill Levels']);
+                    $contentTypeFilter->addMust($difficulty);
+                    $contentTypeFilter2->addShould($difficulty);
+                }
 
                 $query = new FunctionScore();
                 $query->setParam('query', $this->getQuery());
