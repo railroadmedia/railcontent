@@ -45,6 +45,16 @@ class UserPermissionsRepository extends RepositoryBase
                     )
                         ->orWhereNull('expiration_date');
                 }
+            )->where(
+                function ($query) {
+                    $query->whereDate(
+                        'start_date',
+                        '<=',
+                        Carbon::now()
+                            ->toDateTimeString()
+                    )
+                        ->orWhereNull('start_date');
+                }
             );
         }
         if ($userId) {
@@ -92,6 +102,17 @@ class UserPermissionsRepository extends RepositoryBase
                             ->toDateTimeString()
                     )
                         ->orWhereNull('expiration_date');
+                }
+            )
+            ->where(
+                function ($query) {
+                    $query->whereDate(
+                        'start_date',
+                        '<=',
+                        Carbon::now()
+                            ->toDateTimeString()
+                    )
+                        ->orWhereNull('start_date');
                 }
             )
             ->where('user_id', $userId)
