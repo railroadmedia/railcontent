@@ -1039,6 +1039,117 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
     }
 
+
+    public function test_pull_content_user_permission_before_start_date()
+    {
+        $user = $this->createAndLogInNewUser();
+        $content1 = $this->contentFactory->create(
+            $this->faker->word,
+            'course',
+            ContentService::STATUS_PUBLISHED
+        );
+
+        $content2 = $this->contentFactory->create(
+            $this->faker->word,
+            'lesson',
+            ContentService::STATUS_PUBLISHED
+        );
+
+        $permission = $this->permissionRepository->create(
+            [
+                'name' => $this->faker->word,
+                'brand' => ConfigService::$brand,
+            ]
+        );
+
+        $contentPermission = $this->contentPermissionRepository->create(
+            [
+                'content_id' => $content1['id'],
+                'permission_id' => $permission,
+            ]
+        );
+
+        $userPermission = $this->userPermissionRepository->create(
+            [
+                'user_id' => $user,
+                'permission_id' => $permission,
+                'start_date' => Carbon::now()
+                    ->addMonths(2)
+                    ->toDateTimeString(),
+                'expiration_date' => Carbon::now()
+                    ->addMonths(6)
+                    ->toDateTimeString(),
+                'created_on' => Carbon::now()
+                    ->subMonth(2)
+                    ->toDateTimeString(),
+            ]
+        );
+
+        $response = $this->call(
+            'GET',
+            'railcontent/content/get-by-ids',
+            ['ids' => $content2['id'] . ',' . $content1['id']]
+        );
+        $expectedResults = [(array)$content2];
+
+        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+    }
+
+    public function test_pull_content_user_permission_after_start_date()
+    {
+        $user = $this->createAndLogInNewUser();
+        $content1 = $this->contentFactory->create(
+            $this->faker->word,
+            'course',
+            ContentService::STATUS_PUBLISHED
+        );
+
+        $content2 = $this->contentFactory->create(
+            $this->faker->word,
+            'lesson',
+            ContentService::STATUS_PUBLISHED
+        );
+
+        $permission = $this->permissionRepository->create(
+            [
+                'name' => $this->faker->word,
+                'brand' => ConfigService::$brand,
+            ]
+        );
+
+        $contentPermission = $this->contentPermissionRepository->create(
+            [
+                'content_id' => $content1['id'],
+                'permission_id' => $permission,
+            ]
+        );
+
+        $userPermission = $this->userPermissionRepository->create(
+            [
+                'user_id' => $user,
+                'permission_id' => $permission,
+                'start_date' => Carbon::now()
+                    ->subDays(2)
+                    ->toDateTimeString(),
+                'expiration_date' => Carbon::now()
+                    ->addMonths(6)
+                    ->toDateTimeString(),
+                'created_on' => Carbon::now()
+                    ->subMonth(2)
+                    ->toDateTimeString(),
+            ]
+        );
+
+        $response = $this->call(
+            'GET',
+            'railcontent/content/get-by-ids',
+            ['ids' => $content2['id'] . ',' . $content1['id']]
+        );
+        $expectedResults = [(array)$content2, (array)$content1];
+
+        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+    }
+
     public function test_all_content()
     {
         for ($i = 1; $i < 15; $i++) {

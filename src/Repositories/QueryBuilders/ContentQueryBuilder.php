@@ -517,6 +517,17 @@ class ContentQueryBuilder extends QueryBuilder
                                             )
                                                 ->orWhereNull('expiration_date');
                                         }
+                                    )
+                                    ->where(
+                                        function (Builder $builder) {
+                                            return $builder->where(
+                                                'start_date',
+                                                '<=',
+                                                Carbon::now()
+                                                    ->toDateTimeString()
+                                            )
+                                                ->orWhereNull('start_date');
+                                        }
                                     );
                             }
                         );

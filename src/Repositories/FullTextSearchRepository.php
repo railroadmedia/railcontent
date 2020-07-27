@@ -377,6 +377,17 @@ class FullTextSearchRepository extends RepositoryBase
                                                 )
                                                     ->orWhereNull('expiration_date');
                                             }
+                                        )
+                                        ->where(
+                                            function ($query) {
+                                                $query->whereDate(
+                                                    'start_date',
+                                                    '<=',
+                                                    Carbon::now()
+                                                        ->toDateTimeString()
+                                                )
+                                                    ->orWhereNull('start_date');
+                                            }
                                         );
                                 }
                             );

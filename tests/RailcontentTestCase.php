@@ -12,6 +12,7 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
@@ -53,11 +54,16 @@ class RailcontentTestCase extends BaseTestCase
      * @var string database connexion type
      * by default it's testbench; for full text search it's mysql
      */
-    protected $connectionType = 'testbench';
+    protected $connectionType = 'mysql';
 
     protected function setUp()
     {
         parent::setUp();
+
+//        /usr/bin/php" /app/railcontent/vendor/phpunit/phpunit/phpunit --configuration /app/railcontent/phpunit.xml --filter Railroad\\Railcontent\\Tests\\Functional\\Controllers\\ApiJsonControllerTest --test-suffix ApiJsonControllerTest.php /app/railcontent/tests/Functional/Controllers --teamcity
+
+        // suppress predis deprecation warnings
+        error_reporting(E_ERROR);
 
         $this->artisan('migrate:fresh', []);
         $this->artisan('cache:clear', []);
@@ -78,6 +84,16 @@ class RailcontentTestCase extends BaseTestCase
             function () {
             }
         );
+
+        if (!DB::connection()->getSchemaBuilder()->hasTable('users')) {
+            $result = DB::connection()->getSchemaBuilder()->create(
+                'users',
+                function (Blueprint $table) {
+                    $table->increments('id');
+                    $table->string('email');
+                }
+            );
+        }
     }
 
     /**
@@ -200,19 +216,6 @@ class RailcontentTestCase extends BaseTestCase
         // vimeo
         $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);
 
-        if (!$app['db']->connection()->getSchemaBuilder()->hasTable('users')) {
-
-            $app['db']->connection()->getSchemaBuilder()->create(
-                'users',
-                function (Blueprint $table) {
-                    $table->increments('id');
-                    $table->string('email');
-                }
-            );
-
-        }
-
-
         // register provider
         $app->register(RailcontentServiceProvider::class);
         $app->register(ResponseServiceProvider::class);
@@ -268,7 +271,7 @@ class RailcontentTestCase extends BaseTestCase
      */
     public function createAndLogInNewUser()
     {
-        $userId = $this->databaseManager->connection()->query()->from('users')->insertGetId(
+        $userId = $this->databaseManager->connection()->table('users')->insertGetId(
             ['email' => $this->faker->email]
         );
 
