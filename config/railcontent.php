@@ -68,7 +68,7 @@ return [
     // routes
     'autoload_all_routes' => true,
     'route_middleware_public_groups' => ['railcontent_public'],
-    'route_middleware_logged_in_groups' => ['railcontent_logged_in'],
+    'route_middleware_logged_in_groups' => ['railcontent_logged_in', VersionMiddleware::class],
     'route_middleware_admin_groups' => ['railcontent_admin'],
     'route_prefix' => 'railcontent',
     'api_route_prefix' => 'api/railcontent',

@@ -140,7 +140,7 @@ class ElasticQueryBuilder extends \Elastica\Query
      */
     public function restrictByUserStates(?array $requiredContentIdsByState)
     {
-        if (!$requiredContentIdsByState) {
+        if (!is_array($requiredContentIdsByState)) {
             return $this;
         }
 

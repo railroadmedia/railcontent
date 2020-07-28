@@ -1066,11 +1066,13 @@ class ContentService
                     ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
                     ->setParameter('ids', $ids);
 
-            $unorderedContentRows =
+            $results =
                 $qbIds->getQuery()
                     ->setCacheable(true)
                     ->setCacheRegion('pull')
-                    ->getResult();
+                    ->getResult('Railcontent');
+
+            $unorderedContentRows = $this->resultsHydrator->hydrate($results, $this->entityManager);
 
             // restore order of ids passed in
             $data = [];

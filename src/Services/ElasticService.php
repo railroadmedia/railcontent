@@ -101,8 +101,8 @@ class ElasticService
         array $requiredParentIds = [],
         array $requiredFields = [],
         array $includedFields = [],
-        ?array $requiredContentIdsByState = [],
-        ?array $includedContentsIdsByState = [],
+        ?array $requiredContentIdsByState,
+        ?array $includedContentsIdsByState,
         array $requiredUserPlaylistIds = []
     ) {
         $client = $this->getClient();
