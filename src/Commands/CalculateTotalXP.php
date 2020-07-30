@@ -60,7 +60,7 @@ class CalculateTotalXP extends Command
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
         ];
-        config(['railcontent.available_brands' => ['pianote']]);
+        config(['railcontent.available_brands' => ['pianote','drumeo']]);
         $types = [
             "assignment",
             "boot-camps",
@@ -116,7 +116,7 @@ class CalculateTotalXP extends Command
             $dbConnection->table(config('railcontent.table_prefix') . 'content')
                 ->select('id')
                 ->where('type', $type)
-                ->where('brand','pianote')
+             //   ->where('brand','pianote')
                 ->whereIn('status',[
                     ContentService::STATUS_DRAFT,
                     ContentService::STATUS_PUBLISHED,

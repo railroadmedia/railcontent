@@ -1705,9 +1705,11 @@ class ContentService
 
         foreach ($children as $child) {
             $childDifficulty = $child->getDifficulty() ?? 0;
+            $initialTotalXp = $childrenTotalXP[$child->getParentContent()
+                ->getId()]??0;
             $childrenTotalXP[$child->getParentContent()
-                ->getId()] += ($child->getTotalXp() && (int)$child->getTotalXp() != 0) ? $child->getTotalXp() :
-                $this->getDefaultXP($child->getType(), $childDifficulty);
+                ->getId()] = $initialTotalXp + (($child->getTotalXp() && (int)$child->getTotalXp() != 0) ? $child->getTotalXp() :
+                $this->getDefaultXP($child->getType(), $childDifficulty));
         }
 
         $parents =
