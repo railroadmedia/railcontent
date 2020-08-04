@@ -78,7 +78,12 @@ class FromRequestRailcontentQueryBuilder extends QueryBuilder
      */
     public function orderByColumn($entityAlias, $orderByColumn, $orderByDirection)
     {
-        $orderByColumn = $entityAlias . '.' . $orderByColumn;
+        $orderBy =$orderByColumn;
+        if (strpos($orderBy, '_') !== false || strpos($orderBy, '-') !== false) {
+            $orderBy = camel_case($orderBy);
+        }
+
+        $orderByColumn = $entityAlias . '.' . $orderBy;
 
         $this->orderBy($orderByColumn, $orderByDirection);
 

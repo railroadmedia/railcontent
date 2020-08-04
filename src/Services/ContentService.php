@@ -1020,14 +1020,18 @@ class ContentService
             }
 
             $permissionIds = [];
-            $userPermissions =  $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
-            foreach ($userPermissions as $permission){
-                $permissionIds[] = $permission->getPermission()->getId();
+            if(auth()->id()) {
+                $userPermissions = $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
+                foreach ($userPermissions as $permission) {
+                    $permissionIds[] =
+                        $permission->getPermission()
+                            ->getId();
+                }
             }
 
             switch(config('railcontent.brand')) {
                 case 'drumeo':
-                    ElasticQueryBuilder::$skillLevel =$this->userProvider->getCurrentUser()->getDrumsSkillLevel();
+                    ElasticQueryBuilder::$skillLevel = $this->userProvider->getCurrentUser()->getDrumsSkillLevel();
                     break;
                 case 'pianote':
                     ElasticQueryBuilder::$skillLevel =$this->userProvider->getCurrentUser()->getPianoSkillLevel();

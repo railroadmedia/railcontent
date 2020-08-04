@@ -103,12 +103,15 @@ class UserPlaylistService
      */
     public function userPlaylist($userId, $playlistType, $brand = null)
     {
-        if(!$brand){
+        if (!$brand) {
             $brand = config('railcontent.brand');
         }
         $user = $this->userProvider->getUserById($userId);
 
-        $qb = $this->userPlaylistRepository->createQueryBuilder('up')->addSelect(['up','upc'])->leftJoin('up.playlistContent','upc');
+        $qb =
+            $this->userPlaylistRepository->createQueryBuilder('up')
+                ->addSelect(['up', 'upc'])
+                ->leftJoin('up.playlistContent', 'upc');
 
         $qb->where('up.user = :user')
             ->andWhere('up.type = :type')
@@ -137,11 +140,21 @@ class UserPlaylistService
     {
         $content = $this->contentRepository->find($contentId);
         $userPlaylist = $this->userPlaylistRepository->find($userPlaylistId);
+        $userPlaylistContent =
+            $this->contentUserPlaylistRepository->createQueryBuilder('uc')
+                ->where('uc.content = :content')
+                ->andWhere('uc.userPlaylist = :playlist')
+                ->setParameter('content', $content)
+                ->setParameter('playlist', $userPlaylist)
+                ->getQuery()
+                ->getOneOrNullResult();
 
-        $userPlaylistContent = new UserPlaylistContent();
-        $userPlaylistContent->setContent($content);
-        $userPlaylistContent->setUserPlaylist($userPlaylist);
-        $userPlaylistContent->setCreatedAt(Carbon::now());
+        if (!$userPlaylistContent) {
+            $userPlaylistContent = new UserPlaylistContent();
+            $userPlaylistContent->setContent($content);
+            $userPlaylistContent->setUserPlaylist($userPlaylist);
+            $userPlaylistContent->setCreatedAt(Carbon::now());
+        }
 
         $this->entityManager->persist($userPlaylistContent);
         $this->entityManager->flush();
@@ -240,11 +253,11 @@ class UserPlaylistService
         );
 
         $qb->join(
-                UserPlaylistContent::class,
-                'upc',
-                'WITH',
-                'upc.content = content'
-            )
+            UserPlaylistContent::class,
+            'upc',
+            'WITH',
+            'upc.content = content'
+        )
             ->where('upc.userPlaylist = :playlist');
 
         if (!empty($contentType)) {
