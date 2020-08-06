@@ -182,4 +182,9 @@ class UserProvider implements
     : array {
         // TODO: Implement getUsersByIds() method.
     }
+
+    public function getCurrentUserTopics(): ?array
+    {
+        // TODO: Implement getCurrentUserTopics() method.
+    }
 }

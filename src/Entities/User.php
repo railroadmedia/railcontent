@@ -53,7 +53,7 @@ class User implements UserEntityInterface
      * @param $guitarSkillLevel
      * @param $pianoSkillLevel
      */
-    public function __construct(int $id, $email, $displayName, $avatar, $drumsSkillLevel, $guitarSkillLevel, $pianoSkillLevel)
+    public function __construct(int $id, $email, $displayName, $avatar, $drumsSkillLevel = 1, $guitarSkillLevel = 1, $pianoSkillLevel = 1)
     {
         $this->id = $id;
         $this->email = $email;

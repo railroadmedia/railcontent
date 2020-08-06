@@ -176,6 +176,9 @@ class RailcontentTestCase extends BaseTestCase
         $apiDocConfig = require(__DIR__ . '/../config/apidoc.php');
         $oldResponseMapping =  require(__DIR__ . '/../config/oldResponseMapping.php');
 
+        $app['config']->set('app.env', 'testing');
+        $app['config']->set('app.debug', true);
+
         $app['config']->set('oldResponseMapping', $oldResponseMapping);
         $app['config']->set('railcontent.database_connection_name', $this->getConnectionType());
         $app['config']->set('railcontent.cache_duration', $defaultConfig['cache_duration']);
