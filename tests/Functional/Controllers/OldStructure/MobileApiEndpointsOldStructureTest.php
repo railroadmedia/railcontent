@@ -630,7 +630,7 @@ class MobileApiEndpointsOldStructureTest extends RailcontentTestCase
             'GET',
             'api/railcontent/my-list'
         );
-dd($response);
+//dd($response);
         $this->assertEquals(200, $response->status());
         $this->assertEquals(2, count($response->decodeResponseJson('data')));
     }

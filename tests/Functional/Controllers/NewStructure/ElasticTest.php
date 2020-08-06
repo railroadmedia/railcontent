@@ -134,6 +134,6 @@ $this->assertTrue($result->getDifficulty() == 3);
 
     public function test_search()
     {
-        dd($this->fullTextService->search('mascia'));
+//        dd($this->fullTextService->search('mascia'));
     }
 }
