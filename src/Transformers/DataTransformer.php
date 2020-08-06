@@ -20,6 +20,6 @@ class DataTransformer extends TransformerAbstract
             return $data->toArray();
         }
 
-        return $data->getArrayCopy();
+        return $data->toArray();
     }
 }

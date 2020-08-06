@@ -36,9 +36,20 @@ class ContentOldStructureTransformer extends TransformerAbstract
                     }
                     foreach ($value as $index1 => $val) {
                         if (is_object($val)) {
-                            $extraProperties[$item][] = $serializer->serializeToUnderScores(
-                                $val,
-                                $entityManager->getClassMetadata(get_class($val))
+                            $valExtra = $val->getExtra();
+                            $extraPropertiesItem = [];
+                            if ($valExtra) {
+                                foreach ($valExtra as $extraItemVal) {
+                                    $valueExtraItem = $val->getProperty($extraItemVal);
+                                    $extraPropertiesItem[$extraItemVal] = $valueExtraItem;
+                                }
+                            }
+                            $extraProperties[$item][] = array_merge(
+                                $serializer->serializeToUnderScores(
+                                    $val,
+                                    $entityManager->getClassMetadata(get_class($val))
+                                ),
+                                $extraPropertiesItem
                             );
                         } else {
                             if (is_array($val)) {
@@ -46,15 +57,23 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                     if (is_string($val1) && (!mb_check_encoding($val1))) {
                                         $value[$index1][$index] = utf8_encode($val1);
                                     }
-                                };
+                                }
                             }
 
                             $extraProperties[$item] = $value;
                         }
                     }
                 } else {
-                    $extraProperties[$item] = $value;
+                    if ($value instanceof Content) {
+                        $extraProperties[$item] = $serializer->serializeToUnderScores(
+                            $value,
+                            $entityManager->getClassMetadata(get_class($value))
+                        );
+                    } else {
+                        $extraProperties[$item] = $value;
+                    }
                 }
+
             }
         }
 
@@ -71,14 +90,16 @@ class ContentOldStructureTransformer extends TransformerAbstract
         $this->setDefaultIncludes($defaultIncludes);
 
         $serialized = $serializer->serializeToUnderScores($content, $entityManager->getClassMetadata(Content::class));
-        
-        if ($content->getParent()->count() > 0) {
-            $extraProperties['position'] =
-                array_first(
-                    $content->getParent()
-                )->getChildPosition();
-        }
 
+        if ($content->getParent()
+                ->count() > 0) {
+            $extraProperties['position'] = array_first(
+                $content->getParent()
+            )->getChildPosition();
+        }
+        foreach (config('oldResponseMapping.extraProperties') as $extraKey) {
+            unset($serialized[$extraKey]);
+        }
         $results = array_merge(
             $serialized,
             [
@@ -151,18 +172,20 @@ class ContentOldStructureTransformer extends TransformerAbstract
 
                         if (!($value instanceof Content) && mb_check_encoding($value) == false) {
                             $arrayValue = utf8_encode($value);
-                        } else if (($value instanceof Content)){
-                            $arrayValue = $this->transform($value);
-
-                            $arrayValue['fields'] =
-                                $this->includeFields($value)
-                                    ->getData();
-                            $arrayValue['data'] =
-                                $this->includeData($value)
-                                    ->getData()
-                                    ->getValues();
                         } else {
-                            $arrayValue = $value;
+                            if (($value instanceof Content)) {
+                                $arrayValue = $this->transform($value);
+
+                                $arrayValue['fields'] =
+                                    $this->includeFields($value)
+                                        ->getData();
+                                $arrayValue['data'] =
+                                    $this->includeData($value)
+                                        ->getData()
+                                        ->getValues();
+                            } else {
+                                $arrayValue = $value;
+                            }
                         }
 
                         $fields[] = [

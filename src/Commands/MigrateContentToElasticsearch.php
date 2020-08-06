@@ -178,6 +178,7 @@ class MigrateContentToElasticsearch extends Command
                                 'content_type' => $row->type,
                                 'staff_pick_rating' => $row->staff_pick_rating,
                                 'bpm' => $row->bpm,
+                                'show_in_new_feed' => $row->show_in_new_feed,
                                 'published_on' => Carbon::parse($row->published_on),
                                 'topic' => (!$topics->isEmpty()) ?
                                     array_map('strtolower', $topics->pluck('topic')
