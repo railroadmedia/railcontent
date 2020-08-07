@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Commands;
 
 use Carbon\Carbon;
 use Elastica\Document;
-use Elastica\Query\MatchPhrase;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
@@ -62,11 +61,13 @@ class MigrateContentToElasticsearch extends Command
         $pdo = $dbConnection->getPdo();
         $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
 
-        $this->info('Migrate contents.');
-
         $client = $this->elasticService->getClient();
         $contentIndex = $client->getIndex('content');
-        $contentIndex->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
+
+        $contentIndex->create(
+            ['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]],
+            true
+        );
 
         $this->elasticService->setMapping($contentIndex);
 
@@ -81,10 +82,6 @@ class MigrateContentToElasticsearch extends Command
                     $elasticBulk = [];
                     foreach ($rows as $row) {
                         $nr++;
-
-                        //delete document if exists
-                        $matchPhraseQuery = new MatchPhrase("id", $row->id);
-                        $contentIndex->deleteByQuery($matchPhraseQuery);
 
                         $topics =
                             $dbConnection->table(config('railcontent.table_prefix') . 'content_topic')
@@ -143,7 +140,7 @@ class MigrateContentToElasticsearch extends Command
                                     '=',
                                     config('railcontent.table_prefix') . 'content.id'
                                 )
-                                ->select('instructor_id','name')
+                                ->select('instructor_id', 'name')
                                 ->where('content_id', $row->id)
                                 ->orderBy('content_id', 'asc')
                                 ->get();
@@ -160,7 +157,7 @@ class MigrateContentToElasticsearch extends Command
                             $dbConnection->table(config('railcontent.table_prefix') . 'content_data')
                                 ->select('*')
                                 ->where('content_id', $row->id)
-                                ->where('key','description')
+                                ->where('key', 'description')
                                 ->orderBy('id', 'asc')
                                 ->first();
 
@@ -168,7 +165,6 @@ class MigrateContentToElasticsearch extends Command
                             '', [
                                 'id' => $row->id,
                                 'title' => $row->title,
-                                //  'name' => $row->name,
                                 'slug' => $row->slug,
                                 'difficulty' => $row->difficulty,
                                 'status' => $row->status,
@@ -180,17 +176,23 @@ class MigrateContentToElasticsearch extends Command
                                 'bpm' => $row->bpm,
                                 'show_in_new_feed' => $row->show_in_new_feed,
                                 'published_on' => Carbon::parse($row->published_on),
-                                'topic' => (!$topics->isEmpty()) ?
-                                    array_map('strtolower', $topics->pluck('topic')
-                                        ->toArray()) : [],
-                                'tag' => (!$tags->isEmpty()) ?
-                                    array_map('strtolower',  $tags->pluck('tag')
-                                        ->toArray())
-                                    : [],
+                                'topic' => (!$topics->isEmpty()) ? array_map(
+                                    'strtolower',
+                                    $topics->pluck('topic')
+                                        ->toArray()
+                                ) : [],
+                                'tag' => (!$tags->isEmpty()) ? array_map(
+                                    'strtolower',
+                                    $tags->pluck('tag')
+                                        ->toArray()
+                                ) : [],
                                 'instructor' => $instructors->pluck('instructor_id')
                                     ->toArray(),
-                                'instructors_name' => array_map('strtolower', $instructors->pluck('name')
-                                    ->toArray())                                    ,
+                                'instructors_name' => array_map(
+                                    'strtolower',
+                                    $instructors->pluck('name')
+                                        ->toArray()
+                                ),
                                 'all_progress_count' => $allProgressCount,
                                 'last_week_progress_count' => $lastWeekProgressCount,
                                 'description' => $description->value ?? '',
@@ -208,61 +210,11 @@ class MigrateContentToElasticsearch extends Command
                     //Add documents
                     $contentIndex->addDocuments($elasticBulk);
 
-                    //Refresh Index
-                    $contentIndex->refresh();
-
                     $this->info('Migrated ' . $nr . ' contents');
                 }
             );
-
-//        $this->info('Migrate user progress.');
-//        $userProgressIndex = $client->getIndex('progress');
-//
-//        if (!$userProgressIndex->exists()) {
-//            $userProgressIndex->create(
-//                ['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]], true);
-//
-//        }
-//        $nrProgress = 0;
-//        $dbConnection->table(config('railcontent.table_prefix') . 'user_content_progress')
-//            ->select(config('railcontent.table_prefix') . 'user_content_progress.*')
-//            ->join(
-//                config('railcontent.table_prefix') . 'content',
-//                'content_id',
-//                '=',
-//                config('railcontent.table_prefix') . 'content.id'
-//            )
-//            ->whereNotIn('type', ['assignment', 'instructor', 'exercise', 'vimeo-video', 'youtube-video'])
-//            ->orderBy(config('railcontent.table_prefix') . 'user_content_progress.id', 'asc')
-//            ->chunk(
-//                5000,
-//                function (Collection $rows) use ($dbConnection, $userProgressIndex, &$nrProgress) {
-//                    $elasticBulk = [];
-//
-//                    foreach ($rows as $row) {
-//                        $nrProgress++;
-//                        $document = new Document(
-//                            '', [
-//                                'id' => $row->id,
-//                                'user_id' => $row->user_id,
-//                                'content_id' => $row->content_id,
-//                                'state' => $row->state,
-//                            ]
-//                        );
-//
-//                        $elasticBulk[] = $document;
-//                    }
-//
-//                    //Add documents
-//                    $userProgressIndex->addDocuments($elasticBulk);
-//
-//                    //Refresh Index
-//                    $userProgressIndex->refresh();
-//
-//                    $this->info('Migrated ' . $nrProgress . ' progresses records');
-//
-//                }
-//            );
+        //Refresh Index
+        $contentIndex->refresh();
 
         $this->info('Finished MigrateContentToElasticsearch.');
     }
