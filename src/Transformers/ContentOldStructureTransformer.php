@@ -97,7 +97,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                 $content->getParent()
             )->getChildPosition();
         }
-        foreach (config('oldResponseMapping.extraProperties') as $extraKey) {
+        foreach (config('oldResponseMapping.extraProperties',[]) as $extraKey) {
             unset($serialized[$extraKey]);
         }
         $results = array_merge(
