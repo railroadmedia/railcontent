@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Railroad\Railcontent\Entities\UserContentProgress;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\Traits\RailcontentCustomQueryBuilder;
@@ -67,5 +69,28 @@ class UserContentProgressRepository extends EntityRepository
             ->setCacheable(true)
             ->setCacheRegion('pull')
             ->getOneOrNullResult();
+    }
+
+    /**
+     * @param $contentId
+     * @param null $startDate
+     * @return int|mixed|string
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function countContentProgress($contentId, $startDate = null)
+    {
+        $query =
+            $this->createQueryBuilder('ucp')
+                ->select('count(ucp.id)')
+                ->where('ucp.content = :content')
+                ->setParameter('content', $contentId);
+
+        if ($startDate) {
+            $query->andWhere('ucp.updatedOn >= :startDate')
+                ->setParameter('startDate', $startDate);
+        }
+        return $query->getQuery()
+            ->getSingleScalarResult();
     }
 }

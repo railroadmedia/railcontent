@@ -205,8 +205,6 @@ class ContentJsonController extends Controller
             $request->input('data.attributes.fields')
         );
 
-        $sm = SearchEntityManager::get();
-
         return ResponseService::content($content)
             ->respond(201);
 

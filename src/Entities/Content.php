@@ -12,7 +12,6 @@ use Railroad\Railcontent\Entities\Traits\ContentFieldsProperties;
 use Railroad\Railcontent\Entities\Traits\DecoratedFields;
 use Doctrine\Search\Mapping\Annotations as MAP;
 
-
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\ContentRepository")
  * @ORM\HasLifecycleCallbacks
@@ -669,7 +668,7 @@ class Content extends ArrayExpressible
      */
     public function getParentContent()
     {
-        return ($this->parentContent)?$this->parentContent->first():null;
+        return ($this->parentContent) ? $this->parentContent->first() : null;
     }
 
     /**
@@ -691,21 +690,14 @@ class Content extends ArrayExpressible
     /**
      * @return array
      */
-    public function getElasticData() {
-        $progresses = [];
-        $lastWeekProgress = 0;
-
-        foreach ($this->getUserProgresses()??[] as $userProgress){
-            $progresses[] = $userProgress->getElasticData();
-            if($userProgress->getUpdatedOn() >= Carbon::now()->subWeek(1))
-            {
-                $lastWeekProgress++;
-            }
+    public function getElasticData()
+    {
+        $topics = [];
+        foreach ($this->getTopic() as $contentTopic) {
+            $topics[] = $contentTopic->getTopic();
         }
 
-        $allProgress = count($progresses);
-
-        return array(
+        return [
             'id' => $this->getId(),
             'title' => $this->getTitle(),
             'slug' => $this->getSlug(),
@@ -715,12 +707,9 @@ class Content extends ArrayExpressible
             'style' => $this->getStyle(),
             'content_type' => $this->getType(),
             'published_on' => $this->getPublishedOn(),
-           // 'user_progress' => $progresses,
-            'all_progress_count' => $allProgress,
-            'last_week_progress_count' => $lastWeekProgress,
-            'topic' => $this->getTopic()->toArray(),
+            'topic' => $topics,
             'bpm' => $this->getBpm(),
-            'staff_pick_rating' => $this->getStaffPickRating()
-    );
-  }
+            'staff_pick_rating' => $this->getStaffPickRating(),
+        ];
+    }
 }
