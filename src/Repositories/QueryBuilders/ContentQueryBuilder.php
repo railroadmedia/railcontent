@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories\QueryBuilders;
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
@@ -305,12 +306,12 @@ class ContentQueryBuilder extends QueryBuilder
                         ->on(
                             $tableName . '.user_id',
                             '=',
-                            $joinClause->raw("'" . $requiredUserState['user_id'] . "'")
+                            $joinClause->raw(DB::connection()->getPdo()->quote($requiredUserState['user_id']))
                         )
                         ->on(
                             $tableName . '.state',
                             '=',
-                            $joinClause->raw("'" . $requiredUserState['state'] . "'")
+                            $joinClause->raw(DB::connection()->getPdo()->quote($requiredUserState['state']))
                         );
                 }
             );
@@ -346,12 +347,12 @@ class ContentQueryBuilder extends QueryBuilder
                                     $joinClause->on(
                                         ConfigService::$tableUserContentProgress . '.user_id',
                                         '=',
-                                        $joinClause->raw("'" . $includedUserState['user_id'] . "'")
+                                        $joinClause->raw(DB::connection()->getPdo()->quote($includedUserState['user_id']))
                                     )
                                         ->on(
                                             ConfigService::$tableUserContentProgress . '.state',
                                             '=',
-                                            $joinClause->raw("'" . $includedUserState['state'] . "'")
+                                            $joinClause->raw(DB::connection()->getPdo()->quote($includedUserState['state']))
                                         );
                                 }
                             );
@@ -389,13 +390,14 @@ class ContentQueryBuilder extends QueryBuilder
                         ->on(
                             $tableName . '.key',
                             '=',
-                            $joinClause->raw("'" . $requiredFieldData['name'] . "'")
+                            $joinClause->raw(DB::connection()->getPdo()->quote($requiredFieldData['name']))
                         )
                         ->on(
                             $tableName . '.value',
                             $requiredFieldData['operator'],
-                            is_numeric($requiredFieldData['value']) ? $joinClause->raw($requiredFieldData['value']) :
-                                $joinClause->raw("'" . $requiredFieldData['value'] . "'")
+                            is_numeric($requiredFieldData['value']) ?
+                                $joinClause->raw($requiredFieldData['value']) :
+                                $joinClause->raw(DB::connection()->getPdo()->quote($requiredFieldData['value']))
                         );
                 }
             );
@@ -433,12 +435,14 @@ class ContentQueryBuilder extends QueryBuilder
                                     $joinClause->on(
                                         $tableName . '.key',
                                         '=',
-                                        $joinClause->raw("'" . $includedFieldData['name'] . "'")
+                                        $joinClause->raw(DB::connection()->getPdo()->quote($includedFieldData['name']))
                                     )
                                         ->on(
                                             $tableName . '.value',
                                             $includedFieldData['operator'],
-                                            $joinClause->raw("'" . $includedFieldData['value'] . "'")
+                                            is_numeric($includedFieldData['value']) ?
+                                                $joinClause->raw($includedFieldData['value']) :
+                                                $joinClause->raw(DB::connection()->getPdo()->quote($includedFieldData['value']))
                                         );
                                 }
                             );
