@@ -91,7 +91,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
 
         $this->setDefaultIncludes($defaultIncludes);
 
-        $serialized = $serializer->serialize($content, $entityManager->getClassMetadata(Content::class));
+        $serialized = $serializer->serializeToUnderScores($content, $entityManager->getClassMetadata(Content::class));
 
         if ($content->getParent()
                 ->count() > 0) {
