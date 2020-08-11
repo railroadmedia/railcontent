@@ -609,6 +609,10 @@ class RouteRegistrar
                     ApiJsonController::class . '@getComments'
                 )
                     ->name('comments');
+                $this->router->get(
+                    'comment-likes/{id}',
+                    CommentLikeJsonController::class . '@index'
+                );
             }
         );
 

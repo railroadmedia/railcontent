@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Entities;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Railroad\Railcontent\Entities\Traits\DecoratedFields;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\UserContentProgressRepository")
@@ -26,6 +27,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserContentProgress
 {
+    use DecoratedFields;
+
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
      * @var int

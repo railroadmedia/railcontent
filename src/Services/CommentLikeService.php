@@ -233,7 +233,7 @@ class CommentLikeService
         $commentId,
         $limit = 25,
         $page = 1,
-        $orderByColumn = 'created_on',
+        $orderByColumn = 'createdOn',
         $orderByDirection = 'desc'
     ) {
 

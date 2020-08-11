@@ -44,13 +44,15 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                     $extraPropertiesItem[$extraItemVal] = $valueExtraItem;
                                 }
                             }
-                            $extraProperties[$item][] = array_merge(
-                                $serializer->serializeToUnderScores(
-                                    $val,
-                                    $entityManager->getClassMetadata(get_class($val))
-                                ),
-                                $extraPropertiesItem
-                            );
+                            if ($val != $content) {
+                                $extraProperties[$item][$index1] = array_merge(
+                                    $serializer->serializeToUnderScores(
+                                        $val,
+                                        $entityManager->getClassMetadata(get_class($val))
+                                    ),
+                                    $extraPropertiesItem
+                                );
+                            }
                         } else {
                             if (is_array($val)) {
                                 foreach ($val as $index => $val1) {
@@ -77,7 +79,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
             }
         }
 
-        $defaultIncludes = ['fields', 'userProgress', 'data'];
+        $defaultIncludes = ['fields', 'data'];
 
         if ($content->getProperty('permissions')) {
             $defaultIncludes[] = 'permissions';
@@ -89,7 +91,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
 
         $this->setDefaultIncludes($defaultIncludes);
 
-        $serialized = $serializer->serializeToUnderScores($content, $entityManager->getClassMetadata(Content::class));
+        $serialized = $serializer->serialize($content, $entityManager->getClassMetadata(Content::class));
 
         if ($content->getParent()
                 ->count() > 0) {
@@ -97,18 +99,12 @@ class ContentOldStructureTransformer extends TransformerAbstract
                 $content->getParent()
             )->getChildPosition();
         }
-        foreach (config('oldResponseMapping.extraProperties',[]) as $extraKey) {
+        foreach (config('oldResponseMapping.extraProperties', []) as $extraKey) {
             unset($serialized[$extraKey]);
         }
+
         $results = array_merge(
             $serialized,
-            [
-                'completed' => $content->isCompleted(),
-                'started' => $content->isStarted(),
-                'progress_percent' => (!empty($content->getUserProgress())) ?
-                    $content->getUserProgress()
-                        ->getProgressPercent() : 0,
-            ],
             $extraProperties
         );
 
@@ -278,28 +274,6 @@ class ContentOldStructureTransformer extends TransformerAbstract
             new ContentPermissionOldStructureTransformer(),
             'contentPermissions'
         );
-    }
-
-    /**
-     * @param Content $content
-     * @return Item
-     */
-    public function includeUserProgress(Content $content)
-    {
-        if (!empty($content->getUserProgress())) {
-
-            return $this->item(
-                $content->getUserProgress(),
-                new UserContentProgressOldStructureTransformer(),
-                'user-progress'
-            );
-        } else {
-            return $this->item(
-                [auth()->id() => []],
-                new ArrayTransformer(),
-                'user-progress'
-            );
-        }
     }
 
     /**

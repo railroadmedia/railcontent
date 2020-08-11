@@ -61,6 +61,7 @@ class ElasticService
                 'description' => ['type' => 'keyword'],
                 'topic' => ['type' => 'keyword'],
                 'bpm' => ['type' => 'text'],
+                'published_on' => [  'type'=>   'date','format' => 'yyyy-MM-dd HH:mm:ss' ]
             ]
         );
 

@@ -184,8 +184,7 @@ class Content extends ArrayExpressible
     protected $archivedOn;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\UserContentProgress", mappedBy="content",
-     *     indexBy="user")
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\UserContentProgress", mappedBy="content")
      */
     private $userProgress;
 

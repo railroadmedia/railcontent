@@ -62,7 +62,7 @@ class ElasticQueryBuilder extends \Elastica\Query
         if (!ContentRepository::$pullFutureContent) {
 
             $range = new \Elastica\Query\Range();
-            $range->addField('published_on.date', ['lte' => 'now']);
+            $range->addField('published_on', ['lte' => 'now']);
 
             $query->addMust($range);
 
@@ -71,7 +71,7 @@ class ElasticQueryBuilder extends \Elastica\Query
 
         if (ContentRepository::$getFutureContentOnly) {
             $range = new \Elastica\Query\Range();
-            $range->addField('published_on.date', ['gt' => 'now']);
+            $range->addField('published_on', ['gt' => 'now']);
 
             $query->addMust($range);
 
@@ -300,7 +300,6 @@ class ElasticQueryBuilder extends \Elastica\Query
                     [
                         'published_on' => [
                             'order' => 'desc',
-                            'unmapped_type' => 'date',
                         ],
                     ]
                 );
@@ -310,7 +309,6 @@ class ElasticQueryBuilder extends \Elastica\Query
                     [
                         'published_on' => [
                             'order' => 'asc',
-                            'unmapped_type' => 'date',
                         ],
                     ]
                 );
