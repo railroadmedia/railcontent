@@ -42,14 +42,17 @@ class FullTextSearchJsonController extends Controller
     }
 
     /** Full text search in contents
+     *
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      * @throws \Doctrine\ORM\NonUniqueResultException
      *
-     * @bodyParam term string required 	Serch criteria. Example:Expanding The Triple Paradiddle
+     * @bodyParam term string required    Serch criteria. Example:Expanding The Triple Paradiddle
      * @bodyParam included_types string Contents with these types will be returned. Example:
-     * @bodyParam statuses string  	All content must have one of these statuses. By default:published. Example:published
-     * @bodyParam sort string  Defaults to descending order; to switch to ascending order remove the minus sign (-). Can be any of the following: score or content_published_on. By default:-score. Example:-score
+     * @bodyParam statuses string    All content must have one of these statuses. By default:published.
+     *     Example:published
+     * @bodyParam sort string  Defaults to descending order; to switch to ascending order remove the minus sign (-).
+     *     Can be any of the following: score or content_published_on. By default:-score. Example:-score
      * @bodyParam brand string  Contents from the brand will be returned. Example:brand
      * @bodyParam page integer  Which page to load, will be {limit} long.By default:1. Example:1
      * @bodyParam limit integer  How many to load per page. By default:10. Example:10
@@ -71,7 +74,13 @@ class FullTextSearchJsonController extends Controller
             $request->get('brands', null)
         );
 
-        return ResponseService::content($contentsData['results'], null,[],[],$contentsData['custom_pagination'])
+        return ResponseService::content(
+            $contentsData['results'],
+            null,
+            [],
+            $contentsData['filter_options'],
+            $contentsData['custom_pagination']
+        )
             ->respond();
     }
 }

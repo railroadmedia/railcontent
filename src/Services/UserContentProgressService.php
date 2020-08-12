@@ -731,4 +731,17 @@ class UserContentProgressService
             ->getResult();
     }
 
+    /**
+     * @param $userId
+     * @param null $date
+     * @param null $state
+     * @return int|mixed|string
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function countUserProgress($userId, $date = null, $state = null)
+    {
+        return $this->userContentRepository->countUserProgress($userId, $date, $state);
+    }
+
 }

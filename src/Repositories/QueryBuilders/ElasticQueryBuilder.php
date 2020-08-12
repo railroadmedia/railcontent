@@ -423,7 +423,7 @@ class ElasticQueryBuilder extends \Elastica\Query
 
         //set different relevance
         $relevance = [
-            'high_value' => 20,
+            'high_value' => 100,
             'medium_value' => 10,
             'low_value' => 5,
         ];
@@ -522,6 +522,31 @@ class ElasticQueryBuilder extends \Elastica\Query
 
             $this->setQuery($query);
         }
+
+        return $this;
+    }
+
+    /**
+     * @param array $typesToInclude
+     * @return $this
+     */
+    public function includeByTypes(array $typesToInclude)
+    {
+        if (empty($typesToInclude)) {
+            return $this;
+        }
+
+        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
+        $query2 = new Query\BoolQuery();
+        foreach ($typesToInclude as $index => $type) {
+
+            $termsQuery = new Terms('content_type', [$type]);
+
+            $query2->addShould($termsQuery);
+        }
+
+        $query->addFilter($query2);
+        $this->setQuery($query);
 
         return $this;
     }

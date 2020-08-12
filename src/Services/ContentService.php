@@ -1106,6 +1106,7 @@ class ContentService
                         $this->contentRepository->build()
                             ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
                             ->setParameter('ids', $filterOptions['instructors'])
+                            ->orderBy(config('railcontent.table_prefix') . 'content.slug','asc')
                             ->getQuery()
                             ->setCacheable(true)
                             ->setCacheRegion('pull')
@@ -1185,7 +1186,7 @@ class ContentService
         $data = [
             'data' => [
                 'attributes' => [
-                    'slug' => $slug,
+                    'slug' => $this->slugify($slug),
                     'type' => $type,
                     'status' => $status,
                     'published_on' => $publishedOn,
@@ -1780,5 +1781,33 @@ class ContentService
         }
 
         return $filterOptions;
+    }
+
+    /**
+     * @param $text
+     * @return string|void
+     */
+    private function slugify($text)
+    {
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // remove duplicate -
+        $text = preg_replace('~-+~', '-', $text);
+
+        // lowercase
+        $text = strtolower($text);
+
+        if (empty($text)) {
+            return 'n-a';
+        }
+
+        return $text;
     }
 }

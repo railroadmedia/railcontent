@@ -705,7 +705,7 @@ class Content extends ArrayExpressible
             'brand' => $this->getBrand(),
             'style' => $this->getStyle(),
             'content_type' => $this->getType(),
-            'published_on' => $this->getPublishedOn(),
+            'published_on' => $this->getPublishedOn()->toDateTimeString(),
             'topic' => $topics,
             'bpm' => $this->getBpm(),
             'staff_pick_rating' => $this->getStaffPickRating(),

@@ -93,4 +93,36 @@ class UserContentProgressRepository extends EntityRepository
         return $query->getQuery()
             ->getSingleScalarResult();
     }
+
+    /**
+     * @param $contentId
+     * @param null $startDate
+     * @return int|mixed|string
+     * @throws NoResultException
+     * @throws NonUniqueResultException
+     */
+    public function countUserProgress($userId, $startDate = null,  $state = null)
+    {
+        $query =
+            $this->createQueryBuilder('ucp')
+                ->select('count(ucp.id)')
+                ->leftJoin('ucp.content', 'c')
+                ->where('ucp.user = :user')
+                ->andWhere('c.brand = :brand')
+        ->andWhere('c.type IN (:type)');
+        if($state){
+            $query->andWhere('ucp.state = :state')
+                ->setParameter('state', $state);
+        }
+        $query->setParameter('user', $userId)
+                ->setParameter('brand', config('railcontent.brand'))
+        ->setParameter('type', config('railcontent.singularContentTypes',[]));
+
+        if ($startDate) {
+            $query->andWhere('ucp.updatedOn >= :startDate')
+                ->setParameter('startDate', $startDate);
+        }
+        return $query->getQuery()
+            ->getSingleScalarResult();
+    }
 }

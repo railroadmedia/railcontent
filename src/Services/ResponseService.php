@@ -93,7 +93,11 @@ class ResponseService extends FractalResponseService
                         ($queryBuilder) ? [
                             'limit' => $queryBuilder->getMaxResults(),
                             'page' => (($queryBuilder->getFirstResult() / $queryBuilder->getMaxResults()) + 1),
-                        ] : [],
+                        ] : ((!empty($customPaginator))?[
+                            'limit' => $customPaginator['per_page'],
+                            'page' => $customPaginator['current_page'],
+                            'totalResults' => $customPaginator['total']
+                        ]:[]),
                         (count($filters) > 0) ? ['filterOptions' => $filters] : []
                     )
                 );
@@ -407,8 +411,8 @@ class ResponseService extends FractalResponseService
         return self::create(
             $entityOrEntities,
             'shows',
-            new ArrayTransformer(),
-            new DataArraySerializer(),
+            new ArrayTransformer(array_keys($entityOrEntities), array_values($entityOrEntities)),
+            new OldStyleSerializer(),
             $queryBuilder
         );
     }

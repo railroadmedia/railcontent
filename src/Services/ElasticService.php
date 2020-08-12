@@ -61,7 +61,7 @@ class ElasticService
                 'description' => ['type' => 'keyword'],
                 'topic' => ['type' => 'keyword'],
                 'bpm' => ['type' => 'text'],
-                'published_on' => [  'type'=>   'date','format' => 'yyyy-MM-dd HH:mm:ss' ]
+                'published_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
             ]
         );
 
@@ -104,7 +104,8 @@ class ElasticService
         array $includedFields = [],
         ?array $requiredContentIdsByState,
         ?array $includedContentsIdsByState,
-        array $requiredUserPlaylistIds = []
+        array $requiredUserPlaylistIds = [],
+        $searchTerm = null
     ) {
         $client = $this->getClient();
         $index = $client->getIndex('content');
@@ -119,10 +120,13 @@ class ElasticService
                 ->restrictByUserStates($requiredContentIdsByState)
                 ->restrictBySlugHierarchy($slugHierarchy)
                 ->restrictByPlaylistIds($requiredUserPlaylistIds)
-                ->restrictByFields($requiredFields)
-                ->sortResults($sort)
-                ->setSize($limit)
-                ->setFrom(($page - 1) * $limit);
+                ->restrictByFields($requiredFields);
+        if ($searchTerm) {
+            $searchQuery->restrictByTerm(explode(' ', strtolower($searchTerm)));
+        }
+        $searchQuery->sortResults($sort)
+            ->setSize($limit)
+            ->setFrom(($page - 1) * $limit);
 
         return $index->search($searchQuery);
     }
@@ -152,7 +156,7 @@ class ElasticService
         $searchQuery =
             $this->build()
                 ->restrictByUserAccess()
-                ->restrictByTypes($contentTypes)
+                ->includeByTypes($contentTypes)
                 ->restrictByContentStatuses($contentStatuses)
                 ->restrictByTerm($arrTerm)
                 ->restrictByPublishedDate($dateTimeCutoff)
@@ -172,6 +176,7 @@ class ElasticService
      * @param array|null $requiredUserStates
      * @param array|null $includedUserStates
      * @param array $requiredUserPlaylistIds
+     * @param null $searchTerm
      * @return array
      */
     public function getFilterFields(
@@ -182,7 +187,8 @@ class ElasticService
         array $includedFields = [],
         ?array $requiredUserStates = [],
         ?array $includedUserStates = [],
-        array $requiredUserPlaylistIds = []
+        array $requiredUserPlaylistIds = [],
+        $searchTerm = null
     ) {
         $filtersEl = $this->getElasticFiltered(
             1,
@@ -195,7 +201,8 @@ class ElasticService
             $includedFields,
             $requiredUserStates,
             $includedUserStates,
-            $requiredUserPlaylistIds
+            $requiredUserPlaylistIds,
+            $searchTerm
         );
 
         $idEs = [];
@@ -215,7 +222,7 @@ class ElasticService
 
             foreach ($requiredFiltersData as $requiredFieldData) {
                 if ($requiredFieldData == 'instructor') {
-                    foreach ($elData->getData()['instructor']??[] as $insId) {
+                    foreach ($elData->getData()['instructor'] ?? [] as $insId) {
                         $instructorsIds[$insId] = $insId;
                     }
                 }
@@ -223,14 +230,17 @@ class ElasticService
 
                     if (is_array($elData->getData()[$requiredFieldData])) {
                         foreach ($elData->getData()[$requiredFieldData] as $option) {
-                            if (!in_array(strtolower($option), array_map('strtolower',$filteredContents[$requiredFieldData]?? []) )) {
+                            if (!in_array(
+                                strtolower($option),
+                                array_map('strtolower', $filteredContents[$requiredFieldData] ?? [])
+                            )) {
                                 $filteredContents[$requiredFieldData][] = $option;
                             }
                         }
                     } else {
                         if (($elData->getData()[$requiredFieldData]) && (!in_array(
                                 strtolower($elData->getData()[$requiredFieldData]),
-                                array_map('strtolower',$filteredContents[$requiredFieldData] ?? [])
+                                array_map('strtolower', $filteredContents[$requiredFieldData] ?? [])
 
                             ))) {
                             $filteredContents[$requiredFieldData][] = $elData->getData()[$requiredFieldData];
@@ -241,12 +251,17 @@ class ElasticService
         }
 
         foreach ($filteredContents as $availableFieldIndex => $availableField) {
-            usort(
-                $filteredContents[$availableFieldIndex],
-                function ($a, $b) {
-                    return strncmp($a, $b, 15);
-                }
-            );
+            if (is_numeric(reset($filteredContents[$availableFieldIndex])) &&
+                ctype_digit(implode('', $filteredContents[$availableFieldIndex]))) {
+                sort($filteredContents[$availableFieldIndex]);
+            } else {
+                usort(
+                    $filteredContents[$availableFieldIndex],
+                    function ($a, $b) {
+                        return strncmp($a, $b, 15);
+                    }
+                );
+            }
         }
 
         if (!empty($instructorsIds)) {

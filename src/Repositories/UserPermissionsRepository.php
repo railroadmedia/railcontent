@@ -41,16 +41,26 @@ class UserPermissionsRepository extends EntityRepository
                             ->gte('up.expirationDate', ':expirationDate')
                     )
             )
+            ->andWhere(
+                                $qb->expr()
+                                    ->orX(
+                                        $qb->expr()
+                                            ->isNull('up.startDate'),
+                                        $qb->expr()
+                                            ->lte('up.startDate', ':startDate')
+                                    )
+                            )
                 ->setParameter(
                     'expirationDate',
+                    'CURRENT_TIMESTAMP()'
+                )
+                ->setParameter(
+                    'startDate',
                     'CURRENT_TIMESTAMP()'
                 );
         }
 
         return $qb->getQuery()
-            ->enableResultCache()
-            ->setCacheable(true)
-            ->setCacheRegion('userPermissions')
             ->getResult();
     }
 

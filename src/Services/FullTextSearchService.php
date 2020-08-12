@@ -2,11 +2,16 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\SearchIndex;
+use Railroad\Railcontent\Entities\UserPermission;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\FullTextSearchRepository;
+use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 
 class FullTextSearchService
 {
@@ -31,21 +36,36 @@ class FullTextSearchService
     private $entityManager;
 
     /**
+     * @var ObjectRepository|EntityRepository
+     */
+    private $userPermissionRepository;
+
+    /**
+     * @var UserProviderInterface
+     */
+    private $userProvider;
+
+    /**
      * FullTextSearchService constructor.
      *
      * @param RailcontentEntityManager $entityManager
      * @param ContentService $contentService
+     * @param ElasticService $elasticService
+     * @param UserProviderInterface $userProvider
      */
     public function __construct(
         RailcontentEntityManager $entityManager,
         ContentService $contentService,
-        ElasticService $elasticService
+        ElasticService $elasticService,
+        UserProviderInterface $userProvider
     ) {
         $this->entityManager = $entityManager;
         $this->contentService = $contentService;
         $this->elasticService = $elasticService;
+        $this->userProvider = $userProvider;
 
         $this->fullTextSearchRepository = $this->entityManager->getRepository(SearchIndex::class);
+        $this->userPermissionRepository = $this->entityManager->getRepository(UserPermission::class);
     }
 
     /** Full text search by term
@@ -71,7 +91,6 @@ class FullTextSearchService
         $dateTimeCutoff = null,
         $brands = null
     ) {
-        ContentRepository::$bypassPermissions = true;
 
         $orderByDirection = substr($sort, 0, 1) !== '-' ? 'asc' : 'desc';
         $orderByColumn = trim($sort, '-');
@@ -86,9 +105,36 @@ class FullTextSearchService
             config(['railcontent.available_brands' => $brands]);
         }
 
-        $customPagination = [];
-
         if (config('railcontent.useElasticSearch') == true) {
+            $permissionIds = [];
+            if (auth()->id()) {
+                $userPermissions = $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
+                foreach ($userPermissions as $permission) {
+                    $permissionIds[] =
+                        $permission->getPermission()
+                            ->getId();
+                }
+            }
+
+            switch (config('railcontent.brand')) {
+                case 'drumeo':
+                    ElasticQueryBuilder::$skillLevel =
+                        $this->userProvider->getCurrentUser()
+                            ->getDrumsSkillLevel();
+                    break;
+                case 'pianote':
+                    ElasticQueryBuilder::$skillLevel =
+                        $this->userProvider->getCurrentUser()
+                            ->getPianoSkillLevel();
+                    break;
+                case 'guitareo':
+                    ElasticQueryBuilder::$skillLevel =
+                        $this->userProvider->getCurrentUser()
+                            ->getGuitarSkillLevel();
+                    break;
+            }
+
+            ElasticQueryBuilder::$userPermissions = $permissionIds;
 
             $elasticData = $this->elasticService->search(
                 $term,
@@ -105,6 +151,19 @@ class FullTextSearchService
             foreach ($elasticData->getResults() as $elData) {
                 $contentIds[] = $elData->getData()['id'];
             }
+
+            $filters = $this->elasticService->getFilterFields(
+                $contentTypes,
+                [],
+                [],
+                [],
+                [],
+                null,
+                null,
+                [],
+                $term
+            );
+
         } else {
             $term = $output = preg_replace(
                 '!\s+!',
@@ -138,12 +197,14 @@ class FullTextSearchService
                 $contentStatuses,
                 $dateTimeCutoff
             );
+            $filters = [];
         }
 
         $contents = $this->contentService->getByIds($contentIds);
         $return = [
             'results' => $contents,
             'total_results' => $totalResults,
+            'filter_options' => $filters,
             'custom_pagination' => [
                 'total' => $totalResults,
                 'count' => count($contents),

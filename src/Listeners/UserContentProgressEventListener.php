@@ -91,8 +91,7 @@ class UserContentProgressEventListener extends Event
                             )
                                 ->where(
                                     function (Builder $builder) use ($event) {
-                                        $builder->where('railcontent_user_content_progress.user_id', $event->userId)
-                                            ->orWhereNull('railcontent_user_content_progress.user_id');
+                                        $builder->where('railcontent_user_content_progress.user_id', $event->userId);
                                     }
                                 );
                         }
@@ -125,8 +124,7 @@ class UserContentProgressEventListener extends Event
                                 )
                                     ->where(
                                         function (Builder $builder) use ($event) {
-                                            $builder->where('railcontent_user_content_progress.user_id', $event->userId)
-                                                ->orWhereNull('railcontent_user_content_progress.user_id');
+                                            $builder->where('railcontent_user_content_progress.user_id', $event->userId);
                                         }
                                     );
                             }
