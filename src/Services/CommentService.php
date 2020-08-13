@@ -148,7 +148,7 @@ class CommentService
         $this->entityManager->getCache()
             ->evictEntityRegion(Comment::class);
 
-        event(new CommentCreated($comment, $content, $user));
+       // event(new CommentCreated($comment, $content, $user));
 
         return $comment;
     }
@@ -232,7 +232,7 @@ class CommentService
         $isSoftDelete = $this->commentRepository->getSoftDelete();
 
         //trigger an event that delete the corresponding comment assignments if the deletion it's not soft
-        event(new CommentDeleted($comment));
+       // event(new CommentDeleted($comment));
 
         $this->commentRepository->deleteCommentReplies($id);
 

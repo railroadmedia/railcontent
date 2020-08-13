@@ -106,7 +106,7 @@ class CommentLikeService
             $this->commentLikeRepository->createQueryBuilder($alias)
                 ->where($alias . '.comment IN (:commentIds)')
                 ->setParameter('commentIds', $commentIds)
-                ->orderByColumn($alias , 'createdOn', 'desc');
+                ->orderByColumn($alias, 'createdOn', 'desc');
         $results =
             $qb->getQuery()
                 ->getResult('Railcontent');
@@ -140,14 +140,15 @@ class CommentLikeService
         $comment = $this->commentRepository->find($commentId);
 
         $commentLikes = $this->commentLikeRepository->getUserCommentLikes($user, $comment);
+        $commentLike = array_first($commentLikes);
 
-        if (empty($commentLikes)) {
-            $commentLikes = new CommentLikes();
-            $commentLikes->setUser($user);
+        if (empty($commentLike)) {
+            $commentLike = new CommentLikes();
+            $commentLike->setUser($user);
 
         }
-        $commentLikes->setComment($comment);
-        $this->entityManager->persist($commentLikes);
+        $commentLike->setComment($comment);
+        $this->entityManager->persist($commentLike);
         $this->entityManager->flush();
 
         $this->entityManager->getCache()
@@ -160,7 +161,7 @@ class CommentLikeService
                     ->getId()
             );
 
-        event(new CommentLiked($comment, $user));
+        // event(new CommentLiked($comment, $user));
 
         return $commentLikes;
     }
@@ -184,14 +185,15 @@ class CommentLikeService
             ]
         );
 
-        $this->entityManager->remove($commentLikes);
-        $this->entityManager->flush();
+        if ($commentLikes) {
+            $this->entityManager->remove($commentLikes);
+            $this->entityManager->flush();
 
-        $this->entityManager->getCache()
-            ->evictEntity(Comment::class, $commentId);
+            $this->entityManager->getCache()
+                ->evictEntity(Comment::class, $commentId);
 
-        event(new CommentUnLiked($comment, $user));
-
+            //        event(new CommentUnLiked($comment, $user));
+        }
         return true;
     }
 
@@ -242,15 +244,13 @@ class CommentLikeService
         $qb =
             $this->commentLikeRepository->createQueryBuilder('cl')
                 ->join('cl.comment', 'c');
-        $qb
-            ->where('cl.comment = :commentId')
+        $qb->where('cl.comment = :commentId')
             ->setParameter('commentId', $commentId)
             ->setMaxResults($limit)
             ->setFirstResult($first)
-            ->orderBy('cl.'.$orderByColumn, $orderByDirection);
+            ->orderBy('cl.' . $orderByColumn, $orderByDirection);
 
-        return
-            $qb->getQuery()
-                ->getResult('Railcontent');
+        return $qb->getQuery()
+            ->getResult('Railcontent');
     }
 }

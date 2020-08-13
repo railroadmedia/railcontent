@@ -4,7 +4,7 @@ namespace Railroad\Railcontent\Serializer;
 use League\Fractal\Pagination\PaginatorInterface;
 use League\Fractal\Serializer\DataArraySerializer;
 
-class OldStyleSerializer extends DataArraySerializer
+class OldStyleWithoutDataSerializer extends DataArraySerializer
 {
     /**
      * @param $transformedData
@@ -18,6 +18,32 @@ class OldStyleSerializer extends DataArraySerializer
         }, $includedData);
 
         return parent::mergeIncludes($transformedData, $includedData);
+    }
+
+    /**
+     * Serialize a collection.
+     *
+     * @param string $resourceKey
+     * @param array  $data
+     *
+     * @return array
+     */
+    public function collection($resourceKey, array $data)
+    {
+        return $data[0];
+    }
+
+    /**
+     * Serialize an item.
+     *
+     * @param string $resourceKey
+     * @param array  $data
+     *
+     * @return array
+     */
+    public function item($resourceKey, array $data)
+    {
+        return $data;
     }
 
     /**

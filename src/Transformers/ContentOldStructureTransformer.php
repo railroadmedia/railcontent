@@ -93,12 +93,12 @@ class ContentOldStructureTransformer extends TransformerAbstract
 
         $serialized = $serializer->serializeToUnderScores($content, $entityManager->getClassMetadata(Content::class));
 
-        if ($content->getParent()
-                ->count() > 0) {
-            $extraProperties['position'] = array_first(
-                $content->getParent()
-            )->getChildPosition();
-        }
+//        if ($content->getParent()
+//                ->count() > 0) {
+//            $extraProperties['position'] = array_first(
+//                $content->getParent()
+//            )->getChildPosition();
+//        }
         foreach (config('oldResponseMapping.extraProperties', []) as $extraKey) {
             unset($serialized[$extraKey]);
         }
@@ -166,7 +166,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                     foreach ($value as $item) {
                         $value = call_user_func([$item, $getterName]);
 
-                        if (!($value instanceof Content) && mb_check_encoding($value) == false) {
+                        if (is_string($value) && mb_check_encoding($value) == false) {
                             $arrayValue = utf8_encode($value);
                         } else {
                             if (($value instanceof Content)) {
@@ -241,7 +241,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                         ];
                     }
                 } else {
-                    if (mb_check_encoding($value) == false) {
+                    if (is_string($value) && mb_check_encoding($value) == false) {
                         $value = utf8_encode($value);
                     }
                     $fields[] = [

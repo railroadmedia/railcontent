@@ -140,7 +140,7 @@ class UserPermissionsService
     {
         $userPermission = $this->userPermissionsRepository->findOneBy(
             [
-                'userId' => $userId,
+                'user' => $userId,
                 'permission' => $this->entityManager->getRepository(Permission::class)
                     ->find($permissionId),
             ]
@@ -155,15 +155,43 @@ class UserPermissionsService
      */
     public function userHasPermissionName($userId, $permissionName)
     {
-        $userPermission = $this->userPermissionsRepository->findOneBy(
-            [
-                'userId' => $userId,
-                'permission' => $this->entityManager->getRepository(Permission::class)
-                    ->findOneBy(['name' => $permissionName]),
-            ]
-        );
+        $qb = $this->userPermissionsRepository->createQueryBuilder('up')
+            ->join('up.permission','p')
+            ->where('up.user = :user')
+            ->andWhere('p.name = :permissionName');
+        $qb->andWhere(
+            $qb->expr()
+                ->orX(
+                    $qb->expr()
+                        ->isNull('up.expirationDate'),
+                    $qb->expr()
+                        ->gte('up.expirationDate', ':expirationDate')
+                )
+        )
+            ->andWhere(
+                $qb->expr()
+                    ->orX(
+                        $qb->expr()
+                            ->isNull('up.startDate'),
+                        $qb->expr()
+                            ->lte('up.startDate', ':startDate')
+                    )
+            )
+            ->setParameter(
+                'expirationDate',
+                'CURRENT_TIMESTAMP()'
+            )
+            ->setParameter(
+                'startDate',
+                'CURRENT_TIMESTAMP()'
+            )
+            ->setParameter('user', $userId)
+            ->setParameter('permissionName', $permissionName);
 
-        return $userPermission ? true : false;
+            $userPermission = $qb->getQuery()->getResult();
+
+
+        return (count($userPermission) > 0) ? true : false;
     }
 
     /**

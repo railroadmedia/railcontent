@@ -3,22 +3,18 @@
 namespace Railroad\Railcontent\Services;
 
 use Doctrine\ORM\QueryBuilder;
-use Doctrine\ORM\Tools\Pagination\Paginator;
-use League\Fractal\Serializer\ArraySerializer;
 use League\Fractal\Serializer\DataArraySerializer;
 use League\Fractal\Serializer\JsonApiSerializer;
-use Railroad\Doctrine\Routes\PaginationUrlGenerator;
 use Railroad\Doctrine\Services\FractalResponseService;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Serializer\OldStylePaginatorAdapter;
 use Railroad\Railcontent\Serializer\OldStyleSerializer;
-use Railroad\Railcontent\Transformers\ArrayTransformer;
+use Railroad\Railcontent\Serializer\OldStyleWithoutDataSerializer;
 use Railroad\Railcontent\Transformers\BooleanTransformer;
 use Railroad\Railcontent\Transformers\CommentLikeOldStructureTransformer;
 use Railroad\Railcontent\Transformers\CommentLikeTransformer;
 use Railroad\Railcontent\Transformers\CommentOldStructureTransformer;
 use Railroad\Railcontent\Transformers\CommentTransformer;
-use Railroad\Railcontent\Transformers\ContentDataOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentDataTransformer;
 use Railroad\Railcontent\Transformers\ContentDataWithPostOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentHierarchyOldStructureTransformer;
@@ -32,8 +28,10 @@ use Railroad\Railcontent\Transformers\ContentStatsTransformer;
 use Railroad\Railcontent\Transformers\ContentTransformer;
 use Railroad\Railcontent\Transformers\DecoratedContentTransformer;
 use Railroad\Railcontent\Transformers\FilterOptionsTransformer;
+use Railroad\Railcontent\Transformers\PacksTransformer;
 use Railroad\Railcontent\Transformers\PermissionOldStructureTransformer;
 use Railroad\Railcontent\Transformers\PermissionTransformer;
+use Railroad\Railcontent\Transformers\ShowsTransformer;
 use Railroad\Railcontent\Transformers\UserPermissionOldStructureTransformer;
 use Railroad\Railcontent\Transformers\UserPermissionTransformer;
 use Spatie\Fractal\Fractal;
@@ -55,7 +53,8 @@ class ResponseService extends FractalResponseService
         array $includes = [],
         array $filterOptions = [],
         array $customPaginator = [],
-        array $activeFilters = []
+        array $activeFilters = [],
+        $withDataSerialization = false
     ) {
 
         if (self::$oldResponseStructure) {
@@ -84,7 +83,7 @@ class ResponseService extends FractalResponseService
                 $entityOrEntities,
                 'content',
                 new ContentOldStructureTransformer(),
-                new OldStyleSerializer(),
+                ($withDataSerialization) ? new OldStyleSerializer() : new OldStyleWithoutDataSerializer(),
                 $queryBuilder
             )
                 ->parseIncludes($includes)
@@ -93,11 +92,11 @@ class ResponseService extends FractalResponseService
                         ($queryBuilder) ? [
                             'limit' => $queryBuilder->getMaxResults(),
                             'page' => (($queryBuilder->getFirstResult() / $queryBuilder->getMaxResults()) + 1),
-                        ] : ((!empty($customPaginator))?[
+                        ] : ((!empty($customPaginator)) ? [
                             'limit' => $customPaginator['per_page'],
                             'page' => $customPaginator['current_page'],
-                            'totalResults' => $customPaginator['total']
-                        ]:[]),
+                            'totalResults' => $customPaginator['total'],
+                        ] : []),
                         (count($filters) > 0) ? ['filterOptions' => $filters] : []
                     )
                 );
@@ -409,10 +408,10 @@ class ResponseService extends FractalResponseService
     public static function shows($entityOrEntities, QueryBuilder $queryBuilder = null)
     {
         return self::create(
-            $entityOrEntities,
+            [$entityOrEntities],
             'shows',
-            new ArrayTransformer(array_keys($entityOrEntities), array_values($entityOrEntities)),
-            new OldStyleSerializer(),
+            new ShowsTransformer(),
+            new OldStyleWithoutDataSerializer(),
             $queryBuilder
         );
     }
@@ -449,6 +448,23 @@ class ResponseService extends FractalResponseService
             'filterOptions',
             new FilterOptionsTransformer(),
             new DataArraySerializer(),
+            $queryBuilder
+        );
+    }
+
+    /**
+     * @param $entityOrEntities
+     * @param QueryBuilder|null $queryBuilder
+     * @param array $includes
+     * @return Fractal
+     */
+    public static function packsArray($entityOrEntities, QueryBuilder $queryBuilder = null)
+    {
+        return self::create(
+            $entityOrEntities,
+            'packs',
+            new PacksTransformer(),
+            new OldStyleWithoutDataSerializer(),
             $queryBuilder
         );
     }
