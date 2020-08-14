@@ -38,19 +38,9 @@ class ContentFilterResultsEntity extends \ArrayObject
             $this->results(),
             null,
             [],
-            $this->filterOptions()
-        )
-            ->addMeta(['totalResults' => $this->totalResults()])
-            ->respond();
-
-        return reply()->json(
-            $this->results(),
-            [
-                'transformer' => DecoratedContentTransformer::class,
-                'totalResults' => $this->totalResults(),
-                'filterOptions' => $this->filterOptions(),
-            ]
-        );
+            $this->filterOptions(),
+            $this->customPagination()
+        )->respond();
     }
 
     /**

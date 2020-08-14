@@ -14,7 +14,8 @@ class UserPlaylistRepository extends EntityRepository
      * @param $user
      * @param string $type
      * @param $brand
-     * @return mixed
+     * @return int|mixed|string|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getUserPlaylist($user, $type = 'primary-playlist', $brand)
     {
@@ -25,12 +26,11 @@ class UserPlaylistRepository extends EntityRepository
             ->andWhere('up.brand = :brand')
             ->setParameter('user', $user)
             ->setParameter('type', $type)
-            ->setParameter('brand', $brand)
-            ->orderByColumn('up', 'id', 'desc');
+            ->setParameter('brand', $brand);
 
         return $qb->getQuery()
             ->setCacheable(true)
             ->setCacheRegion('userPlaylists')
-            ->getResult();
+            ->getOneOrNullResult();
     }
 }

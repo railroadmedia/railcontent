@@ -67,10 +67,23 @@ class ContentOldStructureTransformer extends TransformerAbstract
                     }
                 } else {
                     if ($value instanceof Content) {
-                        $extraProperties[$item] = $serializer->serializeToUnderScores(
-                            $value,
-                            $entityManager->getClassMetadata(get_class($value))
-                        );
+                        $valExtra = $value->getExtra();
+                        $extraPropertiesItem = [];
+                        if ($valExtra) {
+                            foreach ($valExtra as $extraItemVal) {
+                                $valueExtraItem = $value->getProperty($extraItemVal);
+                                $extraPropertiesItem[$extraItemVal] = $valueExtraItem;
+                            }
+                        }
+                        if ($value != $content) {
+                            $extraProperties[$item] = array_merge(
+                                $serializer->serializeToUnderScores(
+                                    $value,
+                                    $entityManager->getClassMetadata(get_class($value))
+                                ),
+                                $extraPropertiesItem
+                            );
+                        }
                     } else {
                         $extraProperties[$item] = $value;
                     }

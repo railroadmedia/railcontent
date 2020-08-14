@@ -3,34 +3,31 @@
 namespace Railroad\Railcontent\Transformers;
 
 use League\Fractal\TransformerAbstract;
+use Railroad\Railcontent\Entities\Content;
 
 class ShowsTransformer extends TransformerAbstract
 {
 
-    public function transform(array $shows)
+    public function transform(array $data)
     {
-        return $shows;
+        $results = $this->processItems($data);
 
-        $myPacks = [];
-        $morePacks = [];
-        $transformer = new ContentOldStructureTransformer();
+        return $results;
+    }
 
-        foreach($packs['myPacks'] as $myPack){
-
-            $myPacks[] = $transformer->transform($myPack);
+    private function processItems($data)
+    {
+        foreach ($data as $key => $item) {
+            if (is_array($item)) {
+                $data[$key]=  $this->processItems($item);
+            } else {
+                if ($item instanceof Content) {
+                    $transformer = new ContentOldStructureTransformer();
+                    $data[$key] = $transformer->transform($item);
+                }
+            }
         }
 
-        foreach($packs['morePacks'] as $morePack){
-
-            $morePacks[] = $transformer->transform($morePack);
-        }
-
-        $packs['myPacks'] = $myPacks;
-
-        $packs['morePacks'] = $morePacks;
-
-        $packs['topHeaderPack'] = $transformer->transform($packs['topHeaderPack']);
-
-        return $packs;
+        return $data;
     }
 }

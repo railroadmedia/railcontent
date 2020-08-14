@@ -121,7 +121,7 @@ class MyListJsonController extends Controller
             $this->userPlaylistService->updateOrCeate($userId, 'primary-playlist', config('railcontent.brand'));
 
         $this->userPlaylistService->removeContentFromUserPlaylist(
-            array_first($userPrimaryPlaylist)->getId(),
+            $userPrimaryPlaylist->getId(),
             $request->get('content_id')
         );
 

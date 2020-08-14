@@ -9,6 +9,7 @@ use Railroad\Doctrine\Services\FractalResponseService;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Serializer\OldStylePaginatorAdapter;
 use Railroad\Railcontent\Serializer\OldStyleSerializer;
+use Railroad\Railcontent\Serializer\OldStyleWithoutDataForArraySerializer;
 use Railroad\Railcontent\Serializer\OldStyleWithoutDataSerializer;
 use Railroad\Railcontent\Transformers\BooleanTransformer;
 use Railroad\Railcontent\Transformers\CommentLikeOldStructureTransformer;
@@ -54,7 +55,7 @@ class ResponseService extends FractalResponseService
         array $filterOptions = [],
         array $customPaginator = [],
         array $activeFilters = [],
-        $withDataSerialization = false
+        $withoutDataSerialization = false
     ) {
 
         if (self::$oldResponseStructure) {
@@ -83,7 +84,7 @@ class ResponseService extends FractalResponseService
                 $entityOrEntities,
                 'content',
                 new ContentOldStructureTransformer(),
-                ($withDataSerialization) ? new OldStyleSerializer() : new OldStyleWithoutDataSerializer(),
+                ($withoutDataSerialization) ? new OldStyleWithoutDataSerializer() : new OldStyleSerializer(),
                 $queryBuilder
             )
                 ->parseIncludes($includes)
@@ -411,7 +412,7 @@ class ResponseService extends FractalResponseService
             [$entityOrEntities],
             'shows',
             new ShowsTransformer(),
-            new OldStyleWithoutDataSerializer(),
+            new OldStyleWithoutDataForArraySerializer(),
             $queryBuilder
         );
     }
@@ -462,9 +463,26 @@ class ResponseService extends FractalResponseService
     {
         return self::create(
             $entityOrEntities,
-            'packs',
+            'pack',
             new PacksTransformer(),
-            new OldStyleWithoutDataSerializer(),
+            new OldStyleWithoutDataForArraySerializer(),
+            $queryBuilder
+        );
+    }
+
+    /**
+     * @param $entityOrEntities
+     * @param QueryBuilder|null $queryBuilder
+     * @param array $includes
+     * @return Fractal
+     */
+    public static function packs($entityOrEntities, QueryBuilder $queryBuilder = null)
+    {
+        return self::create(
+            $entityOrEntities,
+            'pack',
+            new ContentOldStructureTransformer(),
+            new OldStyleWithoutDataForArraySerializer(),
             $queryBuilder
         );
     }
