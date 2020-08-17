@@ -57,6 +57,20 @@ class ResponseService extends FractalResponseService
         array $activeFilters = [],
         $withoutDataSerialization = false
     ) {
+        $activFilters = [];
+        foreach ($activeFilters as $key => $filterOption) {
+            $activFilters[$key] = $filterOption;
+            foreach ($filterOption as $key2 => $filter) {
+                if ($filter instanceof Content) {
+                    $transformer = new ContentTransformer();
+                    $arrayValue = $transformer->transform($filter);
+                    $activFilters[$key][$key2] = $arrayValue;
+                } elseif (is_string($filter) && (!mb_check_encoding($filter))) {
+                    $activFilters[$key][$key2] = utf8_encode($filter);
+                }
+            }
+
+        }
 
         if (self::$oldResponseStructure) {
             $filters = [];
@@ -77,6 +91,7 @@ class ResponseService extends FractalResponseService
                         $filterOption[$key2] = utf8_encode($filter);
                     }
                 }
+
                 $filters[$key] = $filterOption;
             }
 
@@ -98,7 +113,8 @@ class ResponseService extends FractalResponseService
                             'page' => $customPaginator['current_page'],
                             'totalResults' => $customPaginator['total'],
                         ] : []),
-                        (count($filters) > 0) ? ['filterOptions' => $filters] : []
+                        (count($filters) > 0) ? ['filterOptions' => $filters] : [],
+                        (count($activFilters) > 0) ? ['activeFilters' => $activFilters] : [],
                     )
                 );
         }
@@ -115,21 +131,6 @@ class ResponseService extends FractalResponseService
                 }
             }
             $filters[$key] = $filterOption;
-        }
-
-        $activFilters = [];
-        foreach ($activeFilters as $key => $filterOption) {
-            $activFilters[$key] = $filterOption;
-            foreach ($filterOption as $key2 => $filter) {
-                if ($filter instanceof Content) {
-                    $transformer = new ContentTransformer();
-                    $arrayValue = $transformer->transform($filter);
-                    $activFilters[$key][$key2] = $arrayValue;
-                } elseif (is_string($filter) && (!mb_check_encoding($filter))) {
-                    $activFilters[$key][$key2] = utf8_encode($filter);
-                }
-            }
-
         }
 
         return self::create(

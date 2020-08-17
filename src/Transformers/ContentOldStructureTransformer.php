@@ -28,6 +28,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
 
         if ($extra) {
             foreach ($extra as $item) {
+
                 $value = $content->getProperty($item);
 
                 if (is_array($value)) {
@@ -41,17 +42,46 @@ class ContentOldStructureTransformer extends TransformerAbstract
                             if ($valExtra) {
                                 foreach ($valExtra as $extraItemVal) {
                                     $valueExtraItem = $val->getProperty($extraItemVal);
-                                    $extraPropertiesItem[$extraItemVal] = $valueExtraItem;
+                                    if (is_array($valueExtraItem)) {
+                                        foreach ($valueExtraItem as $index => $item2) {
+                                            if (is_object($item2) && ($item2->getId() != $content->getId())) {
+                                                $extraPropertiesItem[$extraItemVal][$index] =
+                                                    $serializer->serializeToUnderScores(
+                                                        $item2,
+                                                        $entityManager->getClassMetadata(get_class($item2))
+                                                    );
+                                            }
+                                        }
+                                    } elseif (is_object($extraItemVal) && ($extraItemVal->getId() != $content->getId())) {
+                                        $extraPropertiesItem[$extraItemVal] = $serializer->serializeToUnderScores(
+                                            $valueExtraItem,
+                                            $entityManager->getClassMetadata(get_class($valueExtraItem))
+                                        );
+                                    } else {
+                                        $extraPropertiesItem[$extraItemVal] = $valueExtraItem;
+                                    }
                                 }
                             }
-                            if ($val != $content) {
+
+                            if ($val->getId() != $content->getId()) {
+
                                 $extraProperties[$item][$index1] = array_merge(
                                     $serializer->serializeToUnderScores(
                                         $val,
                                         $entityManager->getClassMetadata(get_class($val))
                                     ),
-                                    $extraPropertiesItem
+                                    $extraPropertiesItem ?? []
                                 );
+
+                                if ($val instanceof Content) {
+                                    $extraProperties[$item][$index1]['fields'] =
+                                        $this->includeFields($val)
+                                            ->getData();
+                                    $extraProperties[$item][$index1]['data'] =
+                                        $this->includeData($val)
+                                            ->getData();
+                                }
+
                             }
                         } else {
                             if (is_array($val)) {
@@ -68,6 +98,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                 } else {
                     if ($value instanceof Content) {
                         $valExtra = $value->getExtra();
+
                         $extraPropertiesItem = [];
                         if ($valExtra) {
                             foreach ($valExtra as $extraItemVal) {
@@ -75,7 +106,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                 $extraPropertiesItem[$extraItemVal] = $valueExtraItem;
                             }
                         }
-                        if ($value != $content) {
+                        if ($value->getId() != $content->getId()) {
                             $extraProperties[$item] = array_merge(
                                 $serializer->serializeToUnderScores(
                                     $value,
@@ -83,12 +114,17 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                 ),
                                 $extraPropertiesItem
                             );
+                            $extraProperties[$item]['fields'] =
+                                $this->includeFields($value)
+                                    ->getData();
+                            $extraProperties[$item]['data'] =
+                                $this->includeData($value)
+                                    ->getData();
                         }
                     } else {
                         $extraProperties[$item] = $value;
                     }
                 }
-
             }
         }
 
@@ -106,12 +142,12 @@ class ContentOldStructureTransformer extends TransformerAbstract
 
         $serialized = $serializer->serializeToUnderScores($content, $entityManager->getClassMetadata(Content::class));
 
-//        if ($content->getParent()
-//                ->count() > 0) {
-//            $extraProperties['position'] = array_first(
-//                $content->getParent()
-//            )->getChildPosition();
-//        }
+        //        if ($content->getParent()
+        //                ->count() > 0) {
+        //            $extraProperties['position'] = array_first(
+        //                $content->getParent()
+        //            )->getChildPosition();
+        //        }
         foreach (config('oldResponseMapping.extraProperties', []) as $extraKey) {
             unset($serialized[$extraKey]);
         }
