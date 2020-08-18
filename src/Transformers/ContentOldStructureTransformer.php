@@ -50,6 +50,8 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                                         $item2,
                                                         $entityManager->getClassMetadata(get_class($item2))
                                                     );
+                                            }else{
+                                                $extraPropertiesItem[$extraItemVal][$index] = $item2;
                                             }
                                         }
                                     } elseif (is_object($extraItemVal) && ($extraItemVal->getId() != $content->getId())) {
