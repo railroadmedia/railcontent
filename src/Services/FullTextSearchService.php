@@ -142,7 +142,8 @@ class FullTextSearchService
                 $limit,
                 $contentTypes,
                 $contentStatuses,
-                $dateTimeCutoff
+                $dateTimeCutoff,
+                $sort
             );
 
             $totalResults = $elasticData->getTotalHits();

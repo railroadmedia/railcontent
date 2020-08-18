@@ -383,6 +383,15 @@ class ElasticQueryBuilder extends \Elastica\Query
                     ]
                 );
                 break;
+            case 'score':
+                $this->addSort(
+                    [
+                        '_score' => [
+                            'order' => 'desc',
+                        ],
+                    ]
+                );
+
         }
 
         return $this;
@@ -392,7 +401,7 @@ class ElasticQueryBuilder extends \Elastica\Query
      * @param $term
      * @return $this
      */
-    public function fullSearchSort($term)
+    public function setResultRelevanceBasedOnConfigSettings($term)
     {
         $searchableFields = [];
         foreach (config('railcontent.search_index_values', []) as $index => $searchFields) {
@@ -442,13 +451,6 @@ class ElasticQueryBuilder extends \Elastica\Query
         }
 
         $this->setQuery($query);
-        $this->addSort(
-            [
-                '_score' => [
-                    'order' => 'desc',
-                ],
-            ]
-        );
 
         return $this;
     }

@@ -2,27 +2,10 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Carbon\Carbon;
-use Doctrine\Common\Persistence\ObjectRepository;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Elastica\Client;
-use Elastica\QueryBuilder;
-use Railroad\Railcontent\Contracts\UserProviderInterface;
-use Railroad\Railcontent\Entities\Content;
-use Railroad\Railcontent\Entities\UserPermission;
-use Railroad\Railcontent\Entities\UserPlaylist;
-use Railroad\Railcontent\Entities\UserPlaylistContent;
-use Railroad\Railcontent\Hydrators\CustomRailcontentHydrator;
-use Railroad\Railcontent\Managers\RailcontentEntityManager;
-use Railroad\Railcontent\Managers\SearchEntityManager;
-use Railroad\Railcontent\Repositories\ContentRepository;
+use Elastica\Mapping;
+use Elastica\ResultSet;
 use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
-use Railroad\Railcontent\Repositories\UserPermissionsRepository;
-use Railroad\Railcontent\Repositories\UserPlaylistRepository;
-use Elastica\Query;
-use Elastica\Query\Match;
 
 class ElasticService
 {
@@ -45,7 +28,7 @@ class ElasticService
     public function setMapping($index)
     {
         // Define mapping
-        $mapping = new \Elastica\Mapping();
+        $mapping = new Mapping();
 
         // Set mapping
         $mapping->setProperties(
@@ -91,7 +74,7 @@ class ElasticService
      * @param array|null $requiredContentIdsByState
      * @param array|null $includedContentsIdsByState
      * @param array $requiredUserPlaylistIds
-     * @return \Elastica\ResultSet
+     * @return ResultSet
      */
     public function getElasticFiltered(
         $page = 1,
@@ -138,7 +121,8 @@ class ElasticService
      * @param array $contentTypes
      * @param array $contentStatuses
      * @param null $dateTimeCutoff
-     * @return \Elastica\ResultSet
+     * @param string $sort
+     * @return ResultSet
      */
     public function search(
         $term,
@@ -146,7 +130,8 @@ class ElasticService
         $limit = 10,
         $contentTypes = [],
         $contentStatuses = [],
-        $dateTimeCutoff = null
+        $dateTimeCutoff = null,
+        $sort = 'score'
     ) {
 
         $client = $this->getClient();
@@ -160,7 +145,8 @@ class ElasticService
                 ->restrictByContentStatuses($contentStatuses)
                 ->restrictByTerm($arrTerm)
                 ->restrictByPublishedDate($dateTimeCutoff)
-                ->fullSearchSort($arrTerm)
+                ->setResultRelevanceBasedOnConfigSettings($arrTerm)
+                ->sortResults($sort)
                 ->setSize($limit)
                 ->setFrom(($page - 1) * $limit);
 
