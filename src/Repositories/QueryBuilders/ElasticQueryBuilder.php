@@ -374,6 +374,15 @@ class ElasticQueryBuilder extends \Elastica\Query
                 );
 
                 break;
+            case 'slug':
+                $this->addSort(
+                    [
+                        'slug' => [
+                            'order' => 'asc',
+                        ],
+                    ]
+                );
+                break;
         }
 
         return $this;
