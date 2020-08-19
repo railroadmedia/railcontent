@@ -698,8 +698,8 @@ class Content extends ArrayExpressible
 
         return [
             'id' => $this->getId(),
-            'title' => $this->getTitle(),
-            'slug' => $this->getSlug(),
+            'title' => utf8_encode($this->getTitle()),
+            'slug' => utf8_encode($this->getSlug()),
             'difficulty' => $this->getDifficulty(),
             'status' => $this->getStatus(),
             'brand' => $this->getBrand(),
