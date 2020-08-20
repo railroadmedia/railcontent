@@ -34,6 +34,7 @@ return [
         'en-US',
     ],
 
+    // dev mode
     'development_mode' => true,
 
     // elastic search
@@ -173,11 +174,6 @@ return [
             ],
         ],
     ],
-
-    // middleware
-    'all_routes_middleware' => [],
-    'user_routes_middleware' => [],
-    'administrator_routes_middleware' => [],
 
     // decorators example
     'decorators' => [
@@ -797,12 +793,6 @@ return [
         'play-along',
         'song',
     ],
-
-    'route_middleware_logged_in_groups' => [
-        VersionMiddleware::class,
-    ],
-    'route_prefix' => 'railcontent',
-    'api_route_prefix' => 'api/railcontent',
 
     // content types to compute statistics for
     'statistics_content_types' => [
