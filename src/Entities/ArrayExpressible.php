@@ -157,7 +157,7 @@ abstract class ArrayExpressible
                     $extraProperties = $fields->getExtra();
 
                     if ($extraProperties && array_key_exists($criteria[$i], $extraProperties)) {
-                        $results =  $fields->getProperty($criteria[$i]);
+                        $results = $fields =  $fields->getProperty($criteria[$i]);
                     } else {
                         return null;
                     }

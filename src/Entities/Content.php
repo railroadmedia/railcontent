@@ -189,21 +189,6 @@ class Content extends ArrayExpressible
     private $userProgress;
 
     /**
-     * @var bool
-     */
-    protected $started = false;
-
-    /**
-     * @var bool
-     */
-    protected $completed = false;
-
-    /**
-     * @var int
-     */
-    protected $progressPercent = 0;
-
-    /**
      * @var string
      */
     protected $progressState = null;
@@ -505,60 +490,6 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @return bool
-     */
-    public function isStarted()
-    {
-        return ($this->getUserProgress()) ?
-            ($this->getUserProgress()
-                ->getState() == 'started' ? true : false) : false;
-    }
-
-    /**
-     * @param Boolean $started
-     */
-    public function setStarted(bool $started)
-    {
-        $this->started = $started;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getStarted()
-    {
-        return ($this->getUserProgress()) ?
-            ($this->getUserProgress()
-                ->getState() == 'started' ? true : false) : false;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isCompleted()
-    {
-        return ($this->getUserProgress()) ?
-            ($this->getUserProgress()
-                ->getState() == 'completed' ? true : false) : false;
-    }
-
-    /**
-     * @param Boolean $completed
-     */
-    public function setCompleted(bool $completed)
-    {
-        $this->completed = $completed;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getCompleted()
-    {
-        return $this->completed;
-    }
-
-    /**
      * @param $userId
      * @return array
      */
@@ -593,33 +524,7 @@ class Content extends ArrayExpressible
         if ($userProgress->getUser()) {
             $this->userProgress[$userProgress->getUser()
                 ->getId()] = $userProgress;
-
-            $this->setStarted($userProgress->getState() == 'started' ? true : false);
-            $this->setCompleted($userProgress->getState() == 'completed' ? true : false);
-            $this->setProgressPercent($userProgress->getProgressPercent());
         }
-    }
-
-    /**
-     * @param $progressPercent
-     */
-    public function setProgressPercent($progressPercent)
-    {
-        $this->progressPercent = $progressPercent;
-
-        if ($progressPercent == 100) {
-            $this->setCompleted(true);
-        }
-    }
-
-    /**
-     * @return int
-     */
-    public function getProgressPercent()
-    {
-        return ($this->getUserProgress()) ?
-            $this->getUserProgress()
-                ->getProgressPercent() : 0;
     }
 
     /**
@@ -671,22 +576,6 @@ class Content extends ArrayExpressible
     }
 
     /**
-     * @return |null
-     */
-    public function getProgressState()
-    {
-        if ($this->getProgressPercent() > 0) {
-
-            $userProgress = $this->getUserProgress();
-            if (!$userProgress) {
-                return null;
-            }
-            return $userProgress->getState();
-        }
-        return null;
-    }
-
-    /**
      * @return array
      */
     public function getElasticData()
@@ -705,7 +594,8 @@ class Content extends ArrayExpressible
             'brand' => $this->getBrand(),
             'style' => $this->getStyle(),
             'content_type' => $this->getType(),
-            'published_on' => $this->getPublishedOn()->toDateTimeString(),
+            'published_on' => $this->getPublishedOn()
+                ->toDateTimeString(),
             'topic' => $topics,
             'bpm' => $this->getBpm(),
             'staff_pick_rating' => $this->getStaffPickRating(),

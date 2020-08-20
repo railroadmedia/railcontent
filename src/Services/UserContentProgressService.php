@@ -172,7 +172,7 @@ class UserContentProgressService
              * Jonathan, Dec 2017
              */
 
-            $progressPercent = $this->getProgressPercentage($userId, $children);
+            $progressPercent = $this->getProgressPercentage($children);
         }
 
         $isCompleted = $this->userContentRepository->getByUserContentState($user, $content, 'completed');
@@ -443,11 +443,14 @@ class UserContentProgressService
         );
         $allowedTypes = array_unique(array_merge($allowedTypesForStarted, $allowedTypesForCompleted));
 
-        $parent = $content->getParentContent();
+        $parent = array_first($this->contentService->getByChildIdWhereParentTypeIn($content->getId(),$allowedTypes));
+
 
         if ($parent && in_array($parent->getType(), $allowedTypes)) {
-            if (!$parent->isStarted() && in_array($parent->getType(), $allowedTypesForStarted)) {
+            if (!$parent->fetch('started') && in_array($parent->getType(), $allowedTypesForStarted)) {
+
                 $this->startContent($parent->getId(), $user->getId());
+
             }
 
             $siblings =
@@ -459,29 +462,28 @@ class UserContentProgressService
             }
 
             // complete parent content if necessary
-            if ($content->isCompleted()) {
+            if ($parent->fetch('completed')) {
                 $complete = true;
                 foreach ($siblings as $sibling) {
-                    if (!$sibling->isCompleted()) {
+                    if (!$sibling->fetch('completed')) {
                         $complete = false;
                     }
                 }
 
-                if ($complete && !$parent->isCompleted() && in_array($parent->getType(), $allowedTypesForCompleted)) {
+                if ($complete && !$parent->fetch('completed') && in_array($parent->getType(), $allowedTypesForCompleted)) {
                     $this->completeContent($parent->getId(), $user->getId());
                 }
             }
 
             // calculate and save parent progress percent from children
-            $alreadyStarted = $parent->isStarted();
+            $alreadyStarted = $parent->fetch('started');
             $typeAllows = in_array($parent->getType(), $allowedTypesForStarted);
 
             if ($alreadyStarted || $typeAllows) {
                 $this->saveContentProgress(
                     $parent->getId(),
                     $this->getProgressPercentage(
-                        $user->getId(),
-                        $this->contentService->getByParentId($parent->getId(), 'childPosition', 'asc', false)
+                        $this->contentService->getByParentId($parent->getId(), 'childPosition', 'asc')
                     ),
                     $user->getId(),
                     true
@@ -493,32 +495,17 @@ class UserContentProgressService
     }
 
     /**
-     * @param $userId
      * @param $siblings
      * @return float|int
      */
-    private function getProgressPercentage($userId, $siblings)
+    private function getProgressPercentage($siblings)
     {
-        $progressOfSiblings = [];
-        $percentages = [];
+        $arraySum = 0;
 
         foreach ($siblings as $sibling) {
-            if (!empty(
-            $sibling->getUserProgress($userId)
-            )) {
-                $progressOfSiblings[] = $sibling->getUserProgress($userId);
-            }
+            $arraySum += $sibling->fetch('progress_percent',0);
         }
 
-        foreach ($progressOfSiblings as $progressOfSingleDeNestedSibling) {
-            if (!empty($progressOfSingleDeNestedSibling)) {
-                $percentages[] = $progressOfSingleDeNestedSibling->getProgressPercent();
-            } else {
-                $percentages[] = 0;
-            }
-        }
-
-        $arraySum = array_sum($percentages);
         $siblingCount = count($siblings);
 
         if ($siblingCount == 0) {
