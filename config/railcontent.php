@@ -42,6 +42,8 @@ return [
     'elastic_search_host' => 'elasticsearch',
     'elastic_search_username' => 'elastic',
     'elastic_search_password' => 'changeme',
+    'elastic_search_port' => 9200,
+    'elastic_search_transport' => 'Http',
 
     // database
     'database_name' => 'mydb',

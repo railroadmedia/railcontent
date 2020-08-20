@@ -19,7 +19,10 @@ class ElasticService
             'host' => config('railcontent.elastic_search_host', 'elasticsearch'),
             'username' => config('railcontent.elastic_search_username', 'elastic'),
             'password' => config('railcontent.elastic_search_password', 'changeme'),
+            'port' => config('railcontent.elastic_search_port', 9200),
+            'transport' => config('railcontent.elastic_search_transport', 'Http'),
         ];
+
         $client = new Client($config);
 
         return $client;
