@@ -42,7 +42,7 @@ class SearchableListener implements EventSubscriber
     {
         $oEntity = $oArgs->getEntity();
 
-        if (config('railcontent.useElasticSearch') &&
+        if (config('railcontent.use_elastic_search') &&
             (($oEntity instanceof Content) ||
                 ($oEntity instanceof ContentInstructor) ||
                 ($oEntity instanceof ContentHierarchy) ||
@@ -105,7 +105,7 @@ class SearchableListener implements EventSubscriber
     {
         $oEntity = $oArgs->getEntity();
 
-        if (config('railcontent.useElasticSearch') &&
+        if (config('railcontent.use_elastic_search') &&
             (($oEntity instanceof Content) ||
                 ($oEntity instanceof ContentInstructor) ||
                 ($oEntity instanceof ContentHierarchy) ||

@@ -15,7 +15,7 @@ use Tymon\JWTAuth\Http\Middleware\RefreshToken;
 return [
     // brands
     'brand' => 'brand',
-    'available_brands' => ['brand','drumeo'],
+    'available_brands' => ['brand', 'drumeo'],
 
     // cache
     // ttl value in minutes
@@ -36,7 +36,11 @@ return [
 
     'development_mode' => true,
 
-    'useElasticSearch' => true,
+    // elastic search
+    'use_elastic_search' => true,
+    'elastic_search_host' => 'elasticsearch',
+    'elastic_search_username' => 'elastic',
+    'elastic_search_password' => 'changeme',
 
     // database
     'database_name' => 'mydb',

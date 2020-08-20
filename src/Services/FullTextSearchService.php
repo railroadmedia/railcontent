@@ -105,7 +105,7 @@ class FullTextSearchService
             config(['railcontent.available_brands' => $brands]);
         }
 
-        if (config('railcontent.useElasticSearch') == true) {
+        if (config('railcontent.use_elastic_search') == true) {
             $permissionIds = [];
             if (auth()->id()) {
                 $userPermissions = $this->userPermissionRepository->getUserPermissions(auth()->id(), true);

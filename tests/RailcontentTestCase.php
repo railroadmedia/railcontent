@@ -220,7 +220,7 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.route_prefix', $defaultConfig['route_prefix']);
         $app['config']->set('railcontent.api_route_prefix', $defaultConfig['api_route_prefix']);
 
-        $app['config']->set('railcontent.useElasticSearch', $defaultConfig['useElasticSearch']);
+        $app['config']->set('railcontent.use_elastic_search', $defaultConfig['use_elastic_search']);
 
         // setup default database to use sqlite :memory:
         $app['config']->set('database.default', $this->getConnectionType());

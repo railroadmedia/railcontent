@@ -984,7 +984,7 @@ class ContentService
             );
         }
 
-        if (config('railcontent.useElasticSearch') == true) {
+        if (config('railcontent.use_elastic_search') == true) {
             $filters = [];
 
             if (!empty($includedUserStates)) {

@@ -16,9 +16,9 @@ class ElasticService
     public function getClient()
     {
         $config = [
-            'host' => 'elasticsearch',
-            'username' => 'elastic',
-            'password' => 'changeme',
+            'host' => config('railcontent.elastic_search_host', 'elasticsearch'),
+            'username' => config('railcontent.elastic_search_username', 'elastic'),
+            'password' => config('railcontent.elastic_search_password', 'changeme'),
         ];
         $client = new Client($config);
 
