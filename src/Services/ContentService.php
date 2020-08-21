@@ -1058,11 +1058,11 @@ class ContentService
                 $requiredUserPlaylistIds
             );
 
-            $totalResults = $elasticData->getTotalHits();
+            $totalResults = $elasticData['hits']['total']['value'];
 
             $ids = [];
-            foreach ($elasticData->getResults() as $elData) {
-                $ids[] = $elData->getData()['id'];
+            foreach ($elasticData['hits']['hits'] as $elData) {
+                $ids[] = $elData['_source']['id'];
             }
 
             $qbIds =

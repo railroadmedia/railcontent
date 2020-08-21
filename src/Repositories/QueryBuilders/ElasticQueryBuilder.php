@@ -15,6 +15,10 @@ class ElasticQueryBuilder extends \Elastica\Query
 
     public static $skillLevel;
 
+    private $must = [];
+
+    private $sort = [];
+
     /**
      * @param array $slugHierarchy
      * @return $this
@@ -25,12 +29,7 @@ class ElasticQueryBuilder extends \Elastica\Query
             return $this;
         }
 
-        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-        $termsQuery = new Terms('parent_slug', $slugHierarchy);
-
-        $query->addMust($termsQuery);
-
-        $this->setQuery($query);
+        $this->must[] = ['terms' => ['parent_slug' => $slugHierarchy]];
 
         return $this;
     }
@@ -41,14 +40,10 @@ class ElasticQueryBuilder extends \Elastica\Query
     public function restrictStatuses()
     {
         if (is_array(ContentRepository::$availableContentStatues)) {
-            $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-            $termsQuery = new Terms('status', ContentRepository::$availableContentStatues);
+            $this->must[] =
 
-            $query->addMust($termsQuery);
-
-            $this->setQuery($query);
+                ['terms' => ['status' => ContentRepository::$availableContentStatues]];
         }
-
         return $this;
     }
 
@@ -57,25 +52,12 @@ class ElasticQueryBuilder extends \Elastica\Query
      */
     public function restrictPublishedOnDate()
     {
-        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-
         if (!ContentRepository::$pullFutureContent) {
-
-            $range = new \Elastica\Query\Range();
-            $range->addField('published_on', ['lte' => 'now']);
-
-            $query->addMust($range);
-
-            $this->setQuery($query);
+            $this->must[] = ['range' => ['published_on' => ['lte' => 'now']]];
         }
 
         if (ContentRepository::$getFutureContentOnly) {
-            $range = new \Elastica\Query\Range();
-            $range->addField('published_on', ['gt' => 'now']);
-
-            $query->addMust($range);
-
-            $this->setQuery($query);
+            $this->must[] = ['range' => ['published_on' => ['gt' => 'now']]];
         }
 
         return $this;
@@ -86,12 +68,9 @@ class ElasticQueryBuilder extends \Elastica\Query
      */
     public function restrictBrand()
     {
-        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-        $termsQuery = new Terms('brand', array_values(array_wrap(config('railcontent.available_brands'))));
+        $this->must[] =
 
-        $query->addMust($termsQuery);
-
-        $this->setQuery($query);
+            ['terms' => ['brand' => array_values(array_wrap(config('railcontent.available_brands')))]];
 
         return $this;
     }
@@ -103,12 +82,9 @@ class ElasticQueryBuilder extends \Elastica\Query
     public function restrictByTypes(array $typesToInclude)
     {
         if (!empty($typesToInclude)) {
-            $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-            $termsQuery = new Terms('content_type', $typesToInclude);
+            $this->must[] =
 
-            $query->addMust($termsQuery);
-
-            $this->setQuery($query);
+                ['terms' => ['content_type' => $typesToInclude]];
         }
 
         return $this;
@@ -124,12 +100,7 @@ class ElasticQueryBuilder extends \Elastica\Query
             return $this;
         }
 
-        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-        $termsQuery = new Terms('parent_id', $parentIds);
-
-        $query->addMust($termsQuery);
-
-        $this->setQuery($query);
+        $this->must[] = ['terms' => ['parent_id' => $parentIds]];
 
         return $this;
     }
@@ -144,13 +115,7 @@ class ElasticQueryBuilder extends \Elastica\Query
             return $this;
         }
 
-        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-        $query2 = new Query\BoolQuery();
-        $termsQuery = new Terms('id', $requiredContentIdsByState);
-
-        $query2->addMust($termsQuery);
-        $query->addMust($query2);
-        $this->setQuery($query);
+        $this->must[] = [['terms' => ['id' => $requiredContentIdsByState]],];
 
         return $this;
     }
@@ -165,13 +130,13 @@ class ElasticQueryBuilder extends \Elastica\Query
             return $this;
         }
 
-        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-        $query2 = new Query\BoolQuery();
-        $termsQuery = new Terms('id', $includedContentsIdsByState);
-
-        $query2->addShould($termsQuery);
-        $query->addMust($query2);
-        $this->setQuery($query);
+        $this->must[] = [
+            'bool' => [
+                'should' => [
+                    ['terms' => ['id' => $includedContentsIdsByState]],
+                ],
+            ],
+        ];
 
         return $this;
     }
@@ -186,16 +151,10 @@ class ElasticQueryBuilder extends \Elastica\Query
             return $this;
         }
 
-        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-
         foreach ($requiredFields as $index => $requiredFieldData) {
+            $this->must[] = ['terms' => [$requiredFieldData['name'] => [strtolower($requiredFieldData['value'])]]];
 
-            $termsQuery = new Terms($requiredFieldData['name'], [strtolower($requiredFieldData['value'])]);
-
-            $query->addMust($termsQuery);
         }
-
-        $this->setQuery($query);
 
         return $this;
     }
@@ -210,17 +169,18 @@ class ElasticQueryBuilder extends \Elastica\Query
             return $this;
         }
 
-        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-        $query2 = new Query\BoolQuery();
+        $terms = [];
         foreach ($includedFields as $index => $includedFieldData) {
+            $terms[] = ['terms' => [$includedFieldData['name'] => [strtolower($includedFieldData['value'])]]];
 
-            $termsQuery = new Terms($includedFieldData['name'], [strtolower($includedFieldData['value'])]);
-
-            $query2->addShould($termsQuery);
         }
 
-        $query->addFilter($query2);
-        $this->setQuery($query);
+        $this->must[] = [
+            'bool' => [
+                'should' => $terms,
+
+            ],
+        ];
 
         return $this;
     }
@@ -236,21 +196,14 @@ class ElasticQueryBuilder extends \Elastica\Query
 
         $currentUserActivePermissions = self::$userPermissions;
 
-        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-
-        $exists = new Query\Exists('permission_ids');
-
-        $nullPermissionsQuery = new Query\BoolQuery();
-        $mustNot = $nullPermissionsQuery->addMustNot($exists);
-
-        $termsQuery = new Terms('permission_ids', $currentUserActivePermissions);
-        $query3 = new Query\BoolQuery();
-        $query3->addShould($termsQuery)
-            ->addShould($mustNot);
-
-        $query->addMust($query3);
-
-        $this->setQuery($query);
+        $this->must[] = [
+            'bool' => [
+                'should' => [
+                    ['terms' => ['permission_ids' => $currentUserActivePermissions]],
+                    ['bool' => ['must_not' => ['exists' => ['field' => 'permission_ids']]]],
+                ],
+            ],
+        ];
 
         return $this;
     }
@@ -277,13 +230,10 @@ class ElasticQueryBuilder extends \Elastica\Query
         if (empty($userPlaylistIds)) {
             return $this;
         }
+        $this->must[] = [
+            ['terms' => ['playlist_ids' => $userPlaylistIds]],
 
-        $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
-        $termsQuery = new Terms('playlist_ids', $userPlaylistIds);
-
-        $query->addMust($termsQuery);
-
-        $this->setQuery($query);
+        ];
 
         return $this;
     }
@@ -296,101 +246,74 @@ class ElasticQueryBuilder extends \Elastica\Query
     {
         switch ($orderBy) {
             case 'newest':
-                $this->addSort(
-                    [
-                        'published_on' => [
-                            'order' => 'desc',
-                        ],
-                    ]
-                );
+                $this->sort[] = [
+                    'published_on' => 'desc',
+                ];
                 break;
             case 'oldest':
-                $this->addSort(
-                    [
-                        'published_on' => [
-                            'order' => 'asc',
-                        ],
-                    ]
-                );
-
+                $this->sort[] = [
+                    'published_on' => 'asc',
+                ];
                 break;
             case 'popularity':
-                $this->addSort(
-                    [
-                        'all_progress_count' => [
-                            'order' => 'desc',
-                        ],
-                    ]
-                );
-
+                $this->sort[] = [
+                    'all_progress_count' => 'desc',
+                ];
                 break;
-
             case 'trending':
-                $this->addSort(
-                    [
-                        'last_week_progress_count' => [
-                            'order' => 'desc',
-                        ],
-                    ]
-                );
-
+                $this->sort[] = [
+                    'last_week_progress_count' => 'desc',
+                ];
                 break;
             case 'relevance':
-
-                $userDifficulty = self::$skillLevel;
-                $userTopics = self::$userTopics;
-
-                $topics = new Terms('topics');
-                $topics->setTerms($userTopics);
-
-                $contentTypeFilter = new Query\BoolQuery();
-
-                $contentTypeFilter->addMust($topics);
-
-                $contentTypeFilter2 = new Query\BoolQuery();
-
-                 $contentTypeFilter2->addShould($topics);
-
-                if ($userDifficulty) {
-                    $difficulty = new Terms('difficulty');
-                    $difficulty->setTerms([$userDifficulty, 'All Skill Levels']);
-                    $contentTypeFilter->addMust($difficulty);
-                    $contentTypeFilter2->addShould($difficulty);
-                }
-
-                $query = new FunctionScore();
-                $query->setParam('query', $this->getQuery());
-
-                //set different relevance
-                $query->addWeightFunction(15.0, $contentTypeFilter);
-                $query->addWeightFunction(10.0, $contentTypeFilter);
-                $this->setQuery($query);
-                $this->addSort(
-                    [
-                        '_score' => [
-                            'order' => 'desc',
-                        ],
-                    ]
-                );
+//TODO: Migrate to elasticsearch-php
+                //                $userDifficulty = self::$skillLevel;
+                //                $userTopics = self::$userTopics;
+                //
+                //                $topics = new Terms('topics');
+                //                $topics->setTerms($userTopics);
+                //
+                //                $contentTypeFilter = new Query\BoolQuery();
+                //
+                //                $contentTypeFilter->addMust($topics);
+                //
+                //                $contentTypeFilter2 = new Query\BoolQuery();
+                //
+                //                $contentTypeFilter2->addShould($topics);
+                //
+                //                if ($userDifficulty) {
+                //                    $difficulty = new Terms('difficulty');
+                //                    $difficulty->setTerms([$userDifficulty, 'All Skill Levels']);
+                //                    $contentTypeFilter->addMust($difficulty);
+                //                    $contentTypeFilter2->addShould($difficulty);
+                //                }
+                //
+                //                $query = new FunctionScore();
+                //                $query->setParam('query', $this->getQuery());
+                //
+                //                //set different relevance
+                //                $query->addWeightFunction(15.0, $contentTypeFilter);
+                //                $query->addWeightFunction(10.0, $contentTypeFilter);
+                //                $this->setQuery($query);
+                //                $this->addSort(
+                //                    [
+                //                        '_score' => [
+                //                            'order' => 'desc',
+                //                        ],
+                //                    ]
+                //                );
 
                 break;
             case 'slug':
-                $this->addSort(
-                    [
-                        'slug' => [
-                            'order' => 'asc',
-                        ],
-                    ]
-                );
+                $this->sort[] = [
+                    'slug' => 'asc',
+                ];
                 break;
             case 'score':
-                $this->addSort(
-                    [
-                        '_score' => [
-                            'order' => 'desc',
-                        ],
-                    ]
-                );
+                $this->sort[] = [
+                    '_score' => 'desc',
+                ];
+                break;
 
         }
 
@@ -403,6 +326,7 @@ class ElasticQueryBuilder extends \Elastica\Query
      */
     public function setResultRelevanceBasedOnConfigSettings($term)
     {
+        //TODO: Migrate to elasticsearch-php
         $searchableFields = [];
         foreach (config('railcontent.search_index_values', []) as $index => $searchFields) {
             foreach ($searchFields as $field) {
@@ -461,6 +385,7 @@ class ElasticQueryBuilder extends \Elastica\Query
      */
     public function restrictByTerm($arrTerms)
     {
+        //TODO: Migrate to elasticsearch-php
         $searchableFields = [];
         foreach (config('railcontent.search_index_values', []) as $searchFields) {
             foreach ($searchFields as $field) {
@@ -504,6 +429,7 @@ class ElasticQueryBuilder extends \Elastica\Query
      */
     public function restrictByContentStatuses($contentStatuses)
     {
+        //TODO: Migrate to elasticsearch-php
         if (!empty($contentStatuses)) {
             $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
             $termsQuery = new Terms('status', $contentStatuses);
@@ -522,6 +448,7 @@ class ElasticQueryBuilder extends \Elastica\Query
      */
     public function restrictByPublishedDate($publishedOn)
     {
+        //TODO: Migrate to elasticsearch-php
         $query = ($this->hasParam('query')) ? $this->getQuery() : new Query\BoolQuery();
 
         if ($publishedOn) {
@@ -543,6 +470,7 @@ class ElasticQueryBuilder extends \Elastica\Query
      */
     public function includeByTypes(array $typesToInclude)
     {
+        //TODO: Migrate to elasticsearch-php
         if (empty($typesToInclude)) {
             return $this;
         }
@@ -560,5 +488,21 @@ class ElasticQueryBuilder extends \Elastica\Query
         $this->setQuery($query);
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMust()
+    {
+        return $this->must;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSort()
+    {
+        return $this->sort;
     }
 }

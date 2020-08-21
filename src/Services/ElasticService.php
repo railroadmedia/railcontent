@@ -5,54 +5,30 @@ namespace Railroad\Railcontent\Services;
 use Elastica\Client;
 use Elastica\Mapping;
 use Elastica\ResultSet;
+use Elasticsearch\ClientBuilder;
 use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 
 class ElasticService
 {
 
     /**
-     * @return Client
+     * @return \Elasticsearch\Client
      */
     public function getClient()
     {
         $config = [
             'host' => config('railcontent.elastic_search_host', 'elasticsearch'),
-            'username' => config('railcontent.elastic_search_username', 'elastic'),
-            'password' => config('railcontent.elastic_search_password', 'changeme'),
+            'user' => config('railcontent.elastic_search_username', 'elastic'),
+            'pass' => config('railcontent.elastic_search_password', 'changeme'),
             'port' => config('railcontent.elastic_search_port', 9200),
-            'transport' => config('railcontent.elastic_search_transport', 'Http'),
+            'scheme' => config('railcontent.elastic_search_transport', 'Http'),
         ];
 
-        $client = new Client($config);
+        $client = ClientBuilder::create()           // Instantiate a new Elasticsearch ClientBuilder
+        ->setHosts([$config])      // Set the hosts
+        ->build();
 
         return $client;
-    }
-
-    public function setMapping($index)
-    {
-        // Define mapping
-        $mapping = new Mapping();
-
-        // Set mapping
-        $mapping->setProperties(
-            [
-                'id' => ['type' => 'integer'],
-                'title' => ['type' => 'keyword'],
-                'slug' => ['type' => 'keyword'],
-                'brand' => ['type' => 'text'],
-                'content_type' => ['type' => 'keyword'],
-                'status' => ['type' => 'text'],
-                'difficulty' => ['type' => 'text'],
-                'style' => ['type' => 'text'],
-                'description' => ['type' => 'keyword'],
-                'topic' => ['type' => 'keyword'],
-                'bpm' => ['type' => 'text'],
-                'published_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
-            ]
-        );
-
-        // Send mapping to type
-        $mapping->send($index);
     }
 
     /**
@@ -77,7 +53,8 @@ class ElasticService
      * @param array|null $requiredContentIdsByState
      * @param array|null $includedContentsIdsByState
      * @param array $requiredUserPlaylistIds
-     * @return ResultSet
+     * @param null $searchTerm
+     * @return array|callable
      */
     public function getElasticFiltered(
         $page = 1,
@@ -94,7 +71,6 @@ class ElasticService
         $searchTerm = null
     ) {
         $client = $this->getClient();
-        $index = $client->getIndex('content');
 
         $searchQuery =
             $this->build()
@@ -110,11 +86,25 @@ class ElasticService
         if ($searchTerm) {
             $searchQuery->restrictByTerm(explode(' ', strtolower($searchTerm)));
         }
-        $searchQuery->sortResults($sort)
-            ->setSize($limit)
-            ->setFrom(($page - 1) * $limit);
+        $searchQuery->sortResults($sort);
 
-        return $index->search($searchQuery);
+        $params = [
+            'index' => 'content',
+            'body' => [
+                'query' => [
+                    'bool' => [
+                        'must' => $searchQuery->getMust(),
+                    ],
+                ],
+                'sort' => $searchQuery->getSort(),
+                'from' => ($page - 1) * $limit,
+                'size' => $limit,
+            ],
+        ];
+
+        $results = $client->search($params);
+
+        return $results;
     }
 
     /**
@@ -198,27 +188,27 @@ class ElasticService
         $filteredContents = [];
         $instructorsIds = [];
 
-        foreach ($filtersEl->getResults() as $elData) {
-            $idEs[] = $elData->getData()['id'];
+        foreach ($filtersEl['hits']['hits'] as $elData) {
+            $idEs[] = $elData['_source']['id'];
 
-            if (!in_array($elData->getData()['content_type'], $filteredContents['content_type'] ?? []) &&
-                (!in_array($elData->getData()['content_type'], $includedTypes))) {
-                $filteredContents['content_type'][] = $elData->getData()['content_type'];
+            if (!in_array($elData['_source']['content_type'], $filteredContents['content_type'] ?? []) &&
+                (!in_array($elData['_source']['content_type'], $includedTypes))) {
+                $filteredContents['content_type'][] = $elData['_source']['content_type'];
             }
 
             $requiredFiltersData =
-                (array_intersect_key(config('railcontent.field_option_list', []), array_keys($elData->getData())));
+                (array_intersect_key(config('railcontent.field_option_list', []), array_keys($elData['_source'])));
 
             foreach ($requiredFiltersData as $requiredFieldData) {
                 if ($requiredFieldData == 'instructor') {
-                    foreach ($elData->getData()['instructor'] ?? [] as $insId) {
+                    foreach ($elData['_source']['instructor'] ?? [] as $insId) {
                         $instructorsIds[$insId] = $insId;
                     }
                 }
-                if (array_key_exists($requiredFieldData, $elData->getData())) {
+                if (array_key_exists($requiredFieldData, $elData['_source'])) {
 
-                    if (is_array($elData->getData()[$requiredFieldData])) {
-                        foreach ($elData->getData()[$requiredFieldData] as $option) {
+                    if (is_array($elData['_source'][$requiredFieldData])) {
+                        foreach ($elData['_source'][$requiredFieldData] as $option) {
                             if (!in_array(
                                 strtolower($option),
                                 array_map('strtolower', $filteredContents[$requiredFieldData] ?? [])
@@ -227,12 +217,12 @@ class ElasticService
                             }
                         }
                     } else {
-                        if (($elData->getData()[$requiredFieldData]) && (!in_array(
-                                strtolower($elData->getData()[$requiredFieldData]),
+                        if (($elData['_source'][$requiredFieldData]) && (!in_array(
+                                strtolower($elData['_source'][$requiredFieldData]),
                                 array_map('strtolower', $filteredContents[$requiredFieldData] ?? [])
 
                             ))) {
-                            $filteredContents[$requiredFieldData][] = $elData->getData()[$requiredFieldData];
+                            $filteredContents[$requiredFieldData][] = $elData['_source'][$requiredFieldData];
                         }
                     }
                 }

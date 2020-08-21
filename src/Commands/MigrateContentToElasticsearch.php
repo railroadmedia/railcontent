@@ -62,14 +62,47 @@ class MigrateContentToElasticsearch extends Command
         $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
 
         $client = $this->elasticService->getClient();
-        $contentIndex = $client->getIndex('content');
 
-        $contentIndex->create(
-            ['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 0]]],
-            true
-        );
+        $params = [
+            'index' => 'content',
+            'body' => [
+                'settings' => [
+                    'number_of_shards' => 1,
+                    'number_of_replicas' => 0,
+                ],
+                'mappings' => [
+                    '_source' => [
+                        'enabled' => true,
+                    ],
+                    'properties' => [
+                        'id' => ['type' => 'integer'],
+                        'title' => ['type' => 'keyword'],
+                        'slug' => ['type' => 'keyword'],
+                        'brand' => ['type' => 'text'],
+                        'content_type' => ['type' => 'keyword'],
+                        'status' => ['type' => 'text'],
+                        'difficulty' => ['type' => 'text'],
+                        'style' => ['type' => 'text'],
+                        'description' => ['type' => 'keyword'],
+                        'topic' => ['type' => 'keyword'],
+                        'bpm' => ['type' => 'text'],
+                        'published_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
+                    ],
+                ],
+            ],
+        ];
 
-        $this->elasticService->setMapping($contentIndex);
+        //Delete index if exists
+        if ($client->indices()
+            ->exists(['index' => 'content'])) {
+
+            $client->indices()
+                ->delete(['index' => 'content']);
+        }
+
+        // Create the index with mappings and settings
+        $client->indices()
+            ->create($params);
 
         $nr = 0;
         $dbConnection->table(config('railcontent.table_prefix') . 'content')
@@ -78,7 +111,7 @@ class MigrateContentToElasticsearch extends Command
             ->orderBy('id', 'asc')
             ->chunk(
                 500,
-                function (Collection $rows) use ($dbConnection, $contentIndex, &$nr) {
+                function (Collection $rows) use ($dbConnection, $client, &$nr) {
                     $elasticBulk = [];
                     foreach ($rows as $row) {
                         $nr++;
@@ -161,60 +194,61 @@ class MigrateContentToElasticsearch extends Command
                                 ->orderBy('id', 'asc')
                                 ->first();
 
-                        $document = new Document(
-                            '', [
-                                'id' => $row->id,
-                                'title' => $row->title,
-                                'slug' => $row->slug,
-                                'difficulty' => $row->difficulty,
-                                'status' => $row->status,
-                                'brand' => $row->brand,
-                                'style' => $row->style,
-                                'artist' => $row->artist,
-                                'content_type' => $row->type,
-                                'staff_pick_rating' => $row->staff_pick_rating,
-                                'bpm' => $row->bpm,
-                                'show_in_new_feed' => $row->show_in_new_feed,
-                                'published_on' => $row->published_on,
-                                'topic' => (!$topics->isEmpty()) ? array_map(
-                                    'strtolower',
-                                    $topics->pluck('topic')
-                                        ->toArray()
-                                ) : [],
-                                'tag' => (!$tags->isEmpty()) ? array_map(
-                                    'strtolower',
-                                    $tags->pluck('tag')
-                                        ->toArray()
-                                ) : [],
-                                'instructor' => $instructors->pluck('instructor_id')
-                                    ->toArray(),
-                                'instructors_name' => array_map(
-                                    'strtolower',
-                                    $instructors->pluck('name')
-                                        ->toArray()
-                                ),
-                                'all_progress_count' => $allProgressCount,
-                                'last_week_progress_count' => $lastWeekProgressCount,
-                                'description' => $description->value ?? '',
-                                'parent_id' => ($parent) ? $parent->parent_id : null,
-                                'parent_slug' => $parentSlug,
-                                'playlist_ids' => $userPlaylists->pluck('user_playlist_id')
-                                    ->toArray(),
-                                'permission_ids' => $permissions->pluck('permission_id')
-                                    ->toArray(),
-                            ]
-                        );
+                        $params1['body'][] = [
+                            'index' => [
+                                '_index' => 'content',
+                            ],
+                        ];
 
-                        $elasticBulk[] = $document;
+                        $params1['body'][] = [
+                            'id' => $row->id,
+                            'title' => $row->title,
+                            'slug' => $row->slug,
+                            'difficulty' => $row->difficulty,
+                            'status' => $row->status,
+                            'brand' => $row->brand,
+                            'style' => $row->style,
+                            'artist' => $row->artist,
+                            'content_type' => $row->type,
+                            'staff_pick_rating' => $row->staff_pick_rating,
+                            'bpm' => $row->bpm,
+                            'show_in_new_feed' => $row->show_in_new_feed,
+                            'published_on' => $row->published_on,
+                            'topic' => (!$topics->isEmpty()) ? array_map(
+                                'strtolower',
+                                $topics->pluck('topic')
+                                    ->toArray()
+                            ) : [],
+                            'tag' => (!$tags->isEmpty()) ? array_map(
+                                'strtolower',
+                                $tags->pluck('tag')
+                                    ->toArray()
+                            ) : [],
+                            'instructor' => $instructors->pluck('instructor_id')
+                                ->toArray(),
+                            'instructors_name' => array_map(
+                                'strtolower',
+                                $instructors->pluck('name')
+                                    ->toArray()
+                            ),
+                            'all_progress_count' => $allProgressCount,
+                            'last_week_progress_count' => $lastWeekProgressCount,
+                            'description' => $description->value ?? '',
+                            'parent_id' => ($parent) ? $parent->parent_id : null,
+                            'parent_slug' => $parentSlug,
+                            'playlist_ids' => $userPlaylists->pluck('user_playlist_id')
+                                ->toArray(),
+                            'permission_ids' => $permissions->pluck('permission_id')
+                                ->toArray(),
+                        ];
                     }
-                    //Add documents
-                    $contentIndex->addDocuments($elasticBulk);
+
+                    //Bulk insert documents
+                    $client->bulk($params1);
 
                     $this->info('Migrated ' . $nr . ' contents');
                 }
             );
-        //Refresh Index
-        $contentIndex->refresh();
 
         $this->info('Finished MigrateContentToElasticsearch.');
     }
