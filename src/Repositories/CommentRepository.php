@@ -43,6 +43,14 @@ class CommentRepository extends RepositoryBase
     public static $availableUserId = false;
 
     /**
+     * If this is false comment with any status will be pulled. If its defined, only comments with the given status will
+     * be pulled.
+     *
+     * @var string|bool
+     */
+    public static $conversationStatus = false;
+
+    /**
      * If it's true all the comments (inclusive the comments marked as deleted) will be pulled.
      * If it's false, only the comments that are not marked as deleted will be pulled.
      * @var bool
@@ -62,6 +70,9 @@ class CommentRepository extends RepositoryBase
     protected $orderDirection;
     protected $orderTableName;
     protected $orderTable;
+
+    const CONVERSATION_STATUS_OPEN = 'open';
+    const CONVERSATION_STATUS_CLOSED = 'closed';
 
     /**
      * @param integer $id
@@ -119,6 +130,7 @@ class CommentRepository extends RepositoryBase
                     ->restrictByType()
                     ->restrictByContentId()
                     ->restrictByUser()
+                    ->restrictByConversationStatus()
                     ->restrictByVisibility()
                     ->restrictByAssignedUserId()
                     ->groupBy('u_parent_id')
@@ -153,6 +165,7 @@ class CommentRepository extends RepositoryBase
                 ->restrictByType()
                 ->restrictByContentId()
                 ->restrictByUser()
+                ->restrictByConversationStatus()
                 ->restrictByVisibility()
                 ->restrictByAssignedUserId()
                 ->onlyComments()
@@ -184,6 +197,7 @@ class CommentRepository extends RepositoryBase
             ->restrictByType()
             ->restrictByContentId()
             ->restrictByUser()
+            ->restrictByConversationStatus()
             ->restrictByVisibility()
             ->restrictByAssignedUserId()
             ->orderBy(
@@ -227,6 +241,7 @@ class CommentRepository extends RepositoryBase
             ->restrictByType()
             ->restrictByContentId()
             ->restrictByUser()
+            ->restrictByConversationStatus()
             ->restrictByVisibility()
             ->restrictByAssignedUserId()
             ->onlyComments();
@@ -245,6 +260,7 @@ class CommentRepository extends RepositoryBase
             ->restrictByType()
             ->restrictByContentId()
             ->restrictByUser()
+            ->restrictByConversationStatus()
             ->restrictByVisibility()
             ->restrictByAssignedUserId();
 
@@ -263,6 +279,7 @@ class CommentRepository extends RepositoryBase
             ->restrictByType()
             ->restrictByContentId()
             ->restrictByUser()
+            ->restrictByConversationStatus()
             ->restrictByVisibility()
             ->restrictByAssignedUserId();
 
@@ -446,6 +463,7 @@ class CommentRepository extends RepositoryBase
                 'content_id' => $row['content_id'],
                 'parent_id' => $row['parent_id'],
                 'user_id' => $row['user_id'],
+                'conversation_status' => $row['conversation_status'],
                 'display_name' => $row['display_name'],
                 'created_on' => $row['created_on'],
                 'deleted_at' => $row['deleted_at'],
@@ -528,6 +546,7 @@ class CommentRepository extends RepositoryBase
             ->restrictByType()
             ->restrictByContentId()
             ->restrictByUser()
+            ->restrictByConversationStatus()
             ->restrictByVisibility()
             ->restrictByAssignedUserId()
             ->restrictByCreationDate($createdOn)

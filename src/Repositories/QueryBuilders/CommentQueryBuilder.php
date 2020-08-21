@@ -16,6 +16,7 @@ class CommentQueryBuilder extends QueryBuilder
             ConfigService::$tableComments . '.comment' => 'comment',
             ConfigService::$tableComments . '.parent_id' => 'parent_id',
             ConfigService::$tableComments . '.user_id' => 'user_id',
+            ConfigService::$tableComments . '.conversation_status' => 'conversation_status',
             ConfigService::$tableComments . '.temporary_display_name' => 'display_name',
             ConfigService::$tableComments . '.created_on' => 'created_on',
             ConfigService::$tableComments . '.deleted_at' => 'deleted_at',
@@ -143,6 +144,18 @@ class CommentQueryBuilder extends QueryBuilder
     {
         if (CommentRepository::$availableUserId) {
             $this->where(ConfigService::$tableComments . '.user_id', CommentRepository::$availableUserId);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function restrictByConversationStatus()
+    {
+        if (CommentRepository::$conversationStatus) {
+            $this->where(ConfigService::$tableComments . '.conversation_status', CommentRepository::$conversationStatus);
         }
 
         return $this;

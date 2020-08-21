@@ -49,6 +49,7 @@ class CommentJsonController extends Controller
         CommentRepository::$availableUserId = $request->get('user_id') ?? null;
         CommentRepository::$availableContentType = $request->get('content_type') ?? null;
         CommentRepository::$assignedToUserId = $request->get('assigned_to_user_id', false);
+        CommentRepository::$conversationStatus = $request->get('conversation_status', false);
 
         $commentData = $this->commentService->getComments(
             $request->get('page', 1),
@@ -124,6 +125,7 @@ class CommentJsonController extends Controller
                     'parent_id' => '',
                     'user_id' => '',
                     'display_name' => '',
+                    'conversation_status' => '',
                 ]
             )
         );
