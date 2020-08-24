@@ -146,11 +146,11 @@ class FullTextSearchService
                 $sort
             );
 
-            $totalResults = $elasticData->getTotalHits();
+            $totalResults = $elasticData['hits']['total']['value'];
 
             $contentIds = [];
-            foreach ($elasticData->getResults() as $elData) {
-                $contentIds[] = $elData->getData()['id'];
+            foreach ($elasticData['hits']['hits'] as $elData) {
+                $contentIds[] = $elData['_source']['id'];
             }
 
             $filters = $this->elasticService->getFilterFields(

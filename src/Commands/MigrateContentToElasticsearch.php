@@ -63,35 +63,6 @@ class MigrateContentToElasticsearch extends Command
 
         $client = $this->elasticService->getClient();
 
-        $params = [
-            'index' => 'content',
-            'body' => [
-                'settings' => [
-                    'number_of_shards' => 1,
-                    'number_of_replicas' => 0,
-                ],
-                'mappings' => [
-                    '_source' => [
-                        'enabled' => true,
-                    ],
-                    'properties' => [
-                        'id' => ['type' => 'integer'],
-                        'title' => ['type' => 'keyword'],
-                        'slug' => ['type' => 'keyword'],
-                        'brand' => ['type' => 'text'],
-                        'content_type' => ['type' => 'keyword'],
-                        'status' => ['type' => 'text'],
-                        'difficulty' => ['type' => 'text'],
-                        'style' => ['type' => 'text'],
-                        'description' => ['type' => 'keyword'],
-                        'topic' => ['type' => 'keyword'],
-                        'bpm' => ['type' => 'text'],
-                        'published_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
-                    ],
-                ],
-            ],
-        ];
-
         //Delete index if exists
         if ($client->indices()
             ->exists(['index' => 'content'])) {
@@ -100,9 +71,8 @@ class MigrateContentToElasticsearch extends Command
                 ->delete(['index' => 'content']);
         }
 
-        // Create the index with mappings and settings
-        $client->indices()
-            ->create($params);
+        // Create the index
+       $this->elasticService->createContentIndex();
 
         $nr = 0;
         $dbConnection->table(config('railcontent.table_prefix') . 'content')

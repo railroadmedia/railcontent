@@ -6,8 +6,6 @@ use Carbon\Carbon;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use Elastica\Document;
-use Elastica\Query\MatchPhrase;
 use Entities\Behaviour\SearchableEntityInterface;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentHierarchy;
@@ -54,10 +52,9 @@ class SearchableListener implements EventSubscriber
             $client = $this->elasticService->getClient();
 
             // Create indexes if not exists
-            $index = $client->getIndex('content');
-
-            if (!$index->exists()) {
-                $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
+            if (!$client->indices()
+                ->exists(['index' => 'content'])) {
+                $this->elasticService->createContentIndex();
             }
 
             $content =
@@ -66,9 +63,18 @@ class SearchableListener implements EventSubscriber
             $contentID = $content->getId();
 
             //delete document
-            $matchPhraseQuery = new MatchPhrase("id", $contentID);
-            $index = $client->getIndex('content');
-            $index->deleteByQuery($matchPhraseQuery);
+            $client->deleteByQuery(
+                [
+                    'index' => 'content',
+                    'body' => [
+                        'query' => [
+                            'match' => [
+                                'id' => $content->getId(),
+                            ],
+                        ],
+                    ],
+                ]
+            );
 
             //get progress on content
             $userContentPogress =
@@ -89,15 +95,12 @@ class SearchableListener implements EventSubscriber
                 $content->getElasticData()
             );
 
-            $document = new Document(
-                '', $elasticData
-            );
+            $params = [
+                'index' => 'content',
+                'body' => $elasticData,
+            ];
 
-            // Add document to index
-            $index->addDocument($document);
-
-            // Refresh Index
-            $index->refresh();
+            $client->index($params);
         }
     }
 
@@ -117,10 +120,9 @@ class SearchableListener implements EventSubscriber
             $client = $this->elasticService->getClient();
 
             // Create indexes if not exists
-            $index = $client->getIndex('content');
-
-            if (!$index->exists()) {
-                $index->create(['settings' => ['index' => ['number_of_shards' => 1, 'number_of_replicas' => 1]]]);
+            if (!$client->indices()
+                ->exists(['index' => 'content'])) {
+                $this->elasticService->createContentIndex();
             }
 
             $content =
@@ -129,8 +131,18 @@ class SearchableListener implements EventSubscriber
             $contentID = $content->getId();
 
             //delete document
-            $matchPhraseQuery = new MatchPhrase("id", $contentID);
-            $index->deleteByQuery($matchPhraseQuery);
+            $client->deleteByQuery(
+                [
+                    'index' => 'content',
+                    'body' => [
+                        'query' => [
+                            'match' => [
+                                'id' => $content->getId(),
+                            ],
+                        ],
+                    ],
+                ]
+            );
 
             //update content if relationship removed
             if (!$oEntity instanceof Content) {
@@ -154,17 +166,14 @@ class SearchableListener implements EventSubscriber
                 );
 
                 if (!empty($elasticData)) {
-                    $document = new Document(
-                        '', $elasticData
-                    );
+                    $params = [
+                        'index' => 'content',
+                        'body' => $elasticData,
+                    ];
 
-                    // Add document to index
-                    $index->addDocument($document);
+                    $client->index($params);
                 }
             }
-
-            // Refresh Index
-            $index->refresh();
         }
     }
 

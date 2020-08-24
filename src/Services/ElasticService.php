@@ -2,9 +2,6 @@
 
 namespace Railroad\Railcontent\Services;
 
-use Elastica\Client;
-use Elastica\Mapping;
-use Elastica\ResultSet;
 use Elasticsearch\ClientBuilder;
 use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 
@@ -29,6 +26,48 @@ class ElasticService
         ->build();
 
         return $client;
+    }
+
+    /**
+     * @return array
+     */
+    public function createContentIndex()
+    {
+        $params = [
+            'index' => 'content',
+            'body' => [
+                'settings' => [
+                    'number_of_shards' => 1,
+                    'number_of_replicas' => 0,
+                ],
+                'mappings' => [
+                    '_source' => [
+                        'enabled' => true,
+                    ],
+                    'properties' => [
+                        'id' => ['type' => 'integer'],
+                        'title' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                        'slug' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                        'brand' => ['type' => 'text'],
+                        'content_type' => ['type' => 'keyword'],
+                        'status' => ['type' => 'text'],
+                        'difficulty' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                        'style' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                        'description' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                        'topic' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                        'artist' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                        'bpm' => ['type' => 'text'],
+                        'published_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
+                    ],
+                ],
+            ],
+        ];
+
+        $client = $this->getClient();
+
+        // Create the index with mappings and settings
+        return $client->indices()
+            ->create($params);
     }
 
     /**
@@ -92,8 +131,13 @@ class ElasticService
             'index' => 'content',
             'body' => [
                 'query' => [
-                    'bool' => [
-                        'must' => $searchQuery->getMust(),
+                    'function_score' => [
+                        'query' => [
+                            'bool' => [
+                                'must' => $searchQuery->getMust(),
+                            ],
+                        ],
+                        'functions' => $searchQuery->getFilters(),
                     ],
                 ],
                 'sort' => $searchQuery->getSort(),
@@ -102,9 +146,7 @@ class ElasticService
             ],
         ];
 
-        $results = $client->search($params);
-
-        return $results;
+        return $client->search($params);
     }
 
     /**
@@ -115,7 +157,7 @@ class ElasticService
      * @param array $contentStatuses
      * @param null $dateTimeCutoff
      * @param string $sort
-     * @return ResultSet
+     * @return array|callable
      */
     public function search(
         $term,
@@ -128,7 +170,6 @@ class ElasticService
     ) {
 
         $client = $this->getClient();
-        $index = $client->getIndex('content');
         $arrTerm = explode(' ', strtolower($term));
 
         $searchQuery =
@@ -139,11 +180,28 @@ class ElasticService
                 ->restrictByTerm($arrTerm)
                 ->restrictByPublishedDate($dateTimeCutoff)
                 ->setResultRelevanceBasedOnConfigSettings($arrTerm)
-                ->sortResults($sort)
-                ->setSize($limit)
-                ->setFrom(($page - 1) * $limit);
+                ->sortResults($sort);
 
-        return $index->search($searchQuery);
+        $params = [
+            'index' => 'content',
+            'body' => [
+                'query' => [
+                    'function_score' => [
+                        'query' => [
+                            'bool' => [
+                                'must' => $searchQuery->getMust(),
+                            ],
+                        ],
+                        'functions' => $searchQuery->getFilters(),
+                    ],
+                ],
+                'sort' => $searchQuery->getSort(),
+                'from' => ($page - 1) * $limit,
+                'size' => $limit,
+            ],
+        ];
+
+        return $client->search($params);
     }
 
     /**
