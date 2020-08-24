@@ -129,10 +129,12 @@ class CommentService
             return null;
         }
 
-        if (!(request()->user()->id)) {
+        if (!auth()->check()) {
             return 0;
         }
-        request()->attributes->set('user_id', request()->user()->id ?? null);
+
+        request()->attributes->set('user_id', request()->get('user_id') ?? null);
+
         //check if user can update the comment
         if (!$this->userCanManageComment($comment)) {
             return -1;
