@@ -108,7 +108,7 @@ class CommentQueryBuilder extends QueryBuilder
         if (CommentRepository::$availableContentType) {
             $this->leftJoin(
                 ConfigService::$tableContent,
-                'content_id',
+                ConfigService::$tableComments . '.content_id',
                 '=',
                 ConfigService::$tableContent . '.id'
             );
@@ -130,7 +130,7 @@ class CommentQueryBuilder extends QueryBuilder
     public function restrictByContentId()
     {
         if (CommentRepository::$availableContentId) {
-            $this->where('content_id', CommentRepository::$availableContentId);
+            $this->where(ConfigService::$tableComments . '.content_id', CommentRepository::$availableContentId);
         }
 
         return $this;
@@ -168,7 +168,7 @@ class CommentQueryBuilder extends QueryBuilder
     public function restrictByVisibility()
     {
         if (!CommentRepository::$pullSoftDeletedComments) {
-            $this->whereNull('deleted_at');
+            $this->whereNull(ConfigService::$tableComments . '.deleted_at');
         }
 
         return $this;

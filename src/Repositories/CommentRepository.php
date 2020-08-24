@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\CommentQueryBuilder;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
@@ -123,9 +124,31 @@ class CommentRepository extends RepositoryBase
             $query =
                 $this->query()
                     ->selectColumns()
-                    ->addSelect($this->databaseManager->raw('COALESCE(parent_id, UUID()) as u_parent_id'))
-                    ->addSelect($this->databaseManager->raw('MAX(railcontent_comments.created_on) as co'))
                     ->aggregateOrderTable($this->orderTableName)
+                    ->addSelect($this->databaseManager->raw('child_comment.created_on as child_created_on'))
+                    ->addSelect($this->databaseManager->raw('child_comment.id as child_id'))
+                    ->addSelect($this->databaseManager->raw('GREATEST(COALESCE(child_comment.created_on, "0000-00-00 00.00:00"), COALESCE(' . ConfigService::$tableComments . '.created_on, "0000-00-00 00.00:00")) as replied_on'))
+                    ->leftJoin(
+                        ConfigService::$tableComments . ' as child_comment',
+                        'child_comment.parent_id',
+                        '=',
+                        ConfigService::$tableComments . '.id'
+                    )
+                    ->whereNull(ConfigService::$tableComments . '.parent_id')
+                    ->where(
+                        function (Builder $builder) {
+                            $builder->where(
+                                'child_comment.id',
+                                '=',
+                                function (Builder $builder) {
+                                    $builder->selectRaw('MAX(id) as id')
+                                        ->from(ConfigService::$tableComments . ' as child_sub_comment')
+                                        ->whereRaw('child_sub_comment.parent_id = ' . ConfigService::$tableComments . '.id');
+                                }
+                            )
+                                ->orWhereNull('child_comment.id');
+                        }
+                    )
                     ->restrictByBrand()
                     ->restrictByType()
                     ->restrictByContentId()
@@ -133,29 +156,11 @@ class CommentRepository extends RepositoryBase
                     ->restrictByConversationStatus()
                     ->restrictByVisibility()
                     ->restrictByAssignedUserId()
-                    ->groupBy('u_parent_id')
                     ->selectLikeCounts()
-                    ->orderByRaw('co ' . ($this->orderDirection))
-                    ->directPaginate($this->page, $this->limit);
+                    ->orderByRaw('replied_on ' . ($this->orderDirection))
+                    ->directPaginate($this->page, 25);
 
-            $rows = $query->get();
-
-            $parentIds = $rows->pluck('parent_id')
-                ->toArray();
-
-            $query = $this->query()
-                ->selectColumns()
-                ->whereIn('id', $parentIds);
-
-            $parents = $query->get()->keyBy('id');
-
-            foreach ($rows as $rowIndex => $row) {
-                if (!empty($row['parent_id']) && !empty($parents[$row['parent_id']])) {
-                    $rows[$rowIndex] = $parents[$row['parent_id']];
-                }
-            }
-
-            $rows = $rows->toArray();
+            $rows = $query->get()->toArray();
 
         } else {
             $query = $this->query()
