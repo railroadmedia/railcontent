@@ -54,6 +54,14 @@ class CommentRepository extends EntityRepository
      */
     public static $pullSoftDeletedComments = false;
 
+    /**
+     * If this is false comment with any status will be pulled. If its defined, only comments with the given status will
+     * be pulled.
+     *
+     * @var string|bool
+     */
+    public static $conversationStatus = false;
+
     protected $page;
     protected $limit;
     protected $orderBy;

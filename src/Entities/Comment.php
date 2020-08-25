@@ -55,6 +55,12 @@ class Comment
     protected $user;
 
     /**
+     * @ORM\Column(type="string", name="conversation_status")
+     * @var string
+     */
+    protected $conversationStatus;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
      * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
      *
@@ -147,6 +153,22 @@ class Comment
     public function setUser(User $user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConversationStatus()
+    {
+        return $this->conversationStatus;
+    }
+
+    /**
+     * @param $conversationStatus
+     */
+    public function setConversationStatus($conversationStatus)
+    {
+        $this->conversationStatus = $conversationStatus;
     }
 
     /**

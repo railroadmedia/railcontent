@@ -356,6 +356,11 @@ class CommentService
                 ->setParameter('availableContentId', CommentRepository::$availableContentId);
         }
 
+        if (CommentRepository::$conversationStatus) {
+            $qb->andWhere($alias . '.conversationStatus = :conversationStatus')
+                ->setParameter('conversationStatus', CommentRepository::$conversationStatus);
+        }
+
         return $qb->getQuery()
             ->getSingleScalarResult('Railcontent');
     }
@@ -401,12 +406,13 @@ class CommentService
 
         $orderByColumn = $alias . '.' . $orderByColumn;
         if($orderByColumn == $alias . '.' .'repliedOn'){
-            $orderByColumn = 'replies.createdOn';
+            $orderByColumn ='r.createdOn';
         }
 
         $qb = $this->commentRepository->createQueryBuilder($alias);
 
         $qb->join($alias . '.content', $aliasContent)
+            ->leftJoin($alias.'.children','r')
             ->andWhere(
                 $qb->expr()
                     ->in($aliasContent . '.brand', ':availableBrands')
@@ -451,6 +457,11 @@ class CommentService
         if (CommentRepository::$availableContentId) {
             $qb->andWhere($alias . '.content = :availableContentId')
                 ->setParameter('availableContentId', CommentRepository::$availableContentId);
+        }
+
+        if (CommentRepository::$conversationStatus) {
+//            $qb->andWhere($alias . '.conversationStatus = :conversationStatus')
+//                ->setParameter('conversationStatus', CommentRepository::$conversationStatus);
         }
 
         $qb->addSelect([$alias])
@@ -498,6 +509,11 @@ class CommentService
         if (CommentRepository::$availableContentId) {
             $qb->andWhere($alias . '.content = :availableContentId')
                 ->setParameter('availableContentId', CommentRepository::$availableContentId);
+        }
+
+        if (CommentRepository::$conversationStatus) {
+            $qb->andWhere($alias . '.conversationStatus = :conversationStatus')
+                ->setParameter('conversationStatus', CommentRepository::$conversationStatus);
         }
 
         return $qb->getQuery()

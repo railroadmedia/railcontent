@@ -68,6 +68,7 @@ class CommentJsonController extends Controller
         CommentRepository::$availableContentId = $request->get('content_id') ?? null;
         CommentRepository::$availableUserId = $request->get('user_id') ?? null;
         CommentRepository::$availableContentType = $request->get('content_type') ?? null;
+        CommentRepository::$conversationStatus = $request->get('conversation_status', false);
 
         $comments = $this->commentService->getComments(
             $request->get('page', 1),
@@ -76,8 +77,8 @@ class CommentJsonController extends Controller
             auth()->id() ?? null
         );
 
-        return ResponseService::comment($comments['results'], $comments['qb'])
-            ->addMeta(['totalCommentsAndReplies' => $this->commentService->countCommentsAndReplies()]);
+        return ResponseService::comment($comments['results'], $comments['qb']);
+          //  ->addMeta(['totalCommentsAndReplies' => $this->commentService->countCommentsAndReplies()]);
     }
 
     /** Create a new comment
