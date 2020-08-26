@@ -74,80 +74,77 @@ class MigrateUserPlaylist extends Command
                 ->toDateTimeString()
         );
 
-        $invalidUserIds = 0;
-        $migrated = 0;
-
-        $dbConnection->table(config('railcontent.table_prefix') . 'content')
-            ->select('id', 'brand', 'slug as type', 'user_id', 'created_on as created_at')
-            ->where('type', 'user-playlist')
-            ->orderBy('id', 'asc')
-            ->chunk(
-                $chunkSize,
-                function (Collection $rows) use ($dbConnection, &$invalidUserIds, &$migrated) {
-
-                    $playlistsIds = [];
-                    $rowData = json_decode(json_encode($rows), true);
-
-                    foreach ($rowData as $index => $row) {
-
-                        $user = $this->userProvider->getUserById(
-                            $row['user_id']
-                        );
-
-                        if (!$user) {
-                            unset($rowData[$index]);
-                            $this->info(
-                                'Not exists user with user id::' . $row['user_id'] . ' brand:' . ucfirst($row['brand'])
-                            );
-                            $invalidUserIds++;
-                        } else {
-                            $rowData[$index]['user_id'] = $user->getId();
-                            $migrated++;
-                            $mapping[$row['id']] = $migrated;
-                            $playlistsIds[] = $row['id'];
-                        }
-
-                        unset($rowData[$index]['id']);
-                    }
-
-                    $dbConnection->table(config('railcontent.table_prefix') . 'user_playlists')
-                        ->insert($rowData);
-
-                    $userPlaylistsContent =
-                        $dbConnection->table(config('railcontent.table_prefix') . 'content_hierarchy')
-                            ->select(
-                                [
-                                    'child_id as content_id',
-                                    'parent_id as old_playlist_id',
-                                    'railcontent_content_hierarchy.created_on as created_at',
-                                ]
-                            )
-                            ->whereIn('parent_id', $playlistsIds)
-                            ->where('child_id', '!=', 0)
-                            ->get();
-
-                    $playlistContents = [];
-                    $userPlaylistsContentData = json_decode(json_encode($userPlaylistsContent), true);
-
-                    foreach ($userPlaylistsContentData as $index => $playlistContent) {
-
-                        $newUserPlaylistId = ['user_playlist_id' => $mapping[$playlistContent['old_playlist_id']]];
-
-                        unset($playlistContent['old_playlist_id']);
-
-                        $playlistContents[$index] = array_merge($playlistContent, $newUserPlaylistId);
-                    }
-
-                    $dbConnection->table(config('railcontent.table_prefix') . 'user_playlist_content')
-                        ->insert($playlistContents);
-
-                    $this->info('Migrated user playlists: ' . $migrated);
+        Schema::connection(config('railcontent.database_connection_name'))
+            ->table(
+                config('railcontent.table_prefix') . 'user_playlists',
+                function (Blueprint $table) {
+                    $table->integer('old_id')
+                        ->nullable(true);
                 }
             );
 
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `brand`,
+    `type`,
+    `user_id`,
+     `old_id`,
+    `created_at`
+)
+SELECT
+    c.`brand` AS `brand`,
+    c.`slug` AS `type`,
+    c.`user_id` AS `user_id`,
+    c.`id` AS `old_id`,
+    c.`created_on` AS `created_at`
+FROM `%s` c
+WHERE
+    c.`type` IN ('%s')
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'user_playlists',
+            config('railcontent.table_prefix') . 'content',
+            'user-playlist'
+        );
+
+        $dbConnection->statement($statement);
+
+        $sql2 = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `user_playlist_id`,
+    `created_at`
+)
+SELECT
+    c.`child_id` AS `content_id`,
+    p.`id` AS `user_playlist_id`,
+    c.`created_on` AS `created_at`
+FROM `%s` c
+JOIN `%s` p
+    ON c.`parent_id` = p.`old_id`
+EOT;
+
+        $statement2 = sprintf(
+            $sql2,
+            config('railcontent.table_prefix') . 'user_playlist_content',
+            config('railcontent.table_prefix') . 'content_hierarchy',
+            config('railcontent.table_prefix') . 'user_playlists'
+        );
+
+        $dbConnection->statement($statement2);
+
         $finish = microtime(true) - $start;
-        $format =
-            "Finished user playlist data migration  in total %s seconds\n Not found " . $invalidUserIds . ' users';
+        $format = "Finished user playlist data migration  in total %s seconds\n ";
         $this->info(sprintf($format, $finish));
+
+        Schema::connection(config('railcontent.database_connection_name'))
+            ->table(
+                config('railcontent.table_prefix') . 'user_playlists',
+                function (Blueprint $table) {
+                    $table->dropColumn('old_id');
+                }
+            );
     }
 }
