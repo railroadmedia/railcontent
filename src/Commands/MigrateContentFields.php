@@ -241,16 +241,15 @@ SELECT
     c.`value` AS `instructor_id`,
     c.`position` AS `position`
 FROM `%s` c
-JOIN `%s` ic ON  c.`value` = ic.id
 WHERE
     c.`key` IN ('%s')
+    AND c.`value`  REGEXP '^-?[0-9]+$'
 EOT;
 
         $statement = sprintf(
             $sql,
             config('railcontent.table_prefix') . 'content_instructor',
             config('railcontent.table_prefix') . 'content_fields',
-            config('railcontent.table_prefix') . 'content',
             'instructor'
         );
 
@@ -500,7 +499,6 @@ EOT;
 UPDATE `%s` cs
 JOIN `%s` s 
 ON cs.`id` = s.`content_id`
-JOIN `%s` ic ON  s.`value` = ic.id
 SET cs.`video` = s.`value`
 WHERE
     s.`value` IS NOT NULL
@@ -511,7 +509,6 @@ EOT;
             $sql,
             config('railcontent.table_prefix') . 'content',
             config('railcontent.table_prefix') . 'content_fields',
-            config('railcontent.table_prefix') . 'content',
             'video'
         );
 
