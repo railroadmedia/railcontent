@@ -66,6 +66,11 @@ class UserContentProgressDecorator implements DecoratorInterface
                 );
 
                 $content->createProperty(
+                    'progress_state',
+                         $contentProgressionsByContentId[$content->getId()]->getState()
+                );
+
+                $content->createProperty(
                     'user_progress_updated_on',
                         $contentProgressionsByContentId[$content->getId()]->getUpdatedOn()
                 );
@@ -88,6 +93,12 @@ class UserContentProgressDecorator implements DecoratorInterface
                         auth()->id() => [],
                     ]
                 );
+
+                $content->createProperty(
+                    'progress_state',
+                    false
+                );
+
                 $content->createProperty(
                     'progress_percent',
                     0
