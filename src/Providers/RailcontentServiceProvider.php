@@ -33,6 +33,7 @@ use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
 use Railroad\Railcontent\Commands\DeleteContentAndHierarchiesForUserPlaylists;
 use Railroad\Railcontent\Commands\ExpireCache;
+use Railroad\Railcontent\Commands\MigrateContentColumns;
 use Railroad\Railcontent\Commands\MigrateContentFields;
 use Railroad\Railcontent\Commands\MigrateContentToElasticsearch;
 use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
@@ -112,7 +113,8 @@ class RailcontentServiceProvider extends ServiceProvider
                 MigrateContentToNewStructure::class,
                 ComputePastStats::class,
                 ComputeWeeklyStats::class,
-                MigrateContentToElasticsearch::class
+                MigrateContentToElasticsearch::class,
+                MigrateContentColumns::class
             ]
         );
     }
