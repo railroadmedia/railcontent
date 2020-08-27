@@ -82,147 +82,29 @@ class MigrateContentFields extends Command
 
         $this->info('Ending content sbt_bpm and sbt_exercise_number migration. ');
 
-        $playlistFields = 0;
-        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
-            ->select('id', 'content_id', 'key', 'value', 'position')
-            ->where('key', 'playlist')
-            ->whereNotNull('value')
-            ->orderBy('content_id', 'desc')
-            ->chunk(
-                500,
-                function (Collection $rows) use (&$migratedFields, $dbConnection, &$playlistFields) {
-                    $data = [];
-                    foreach ($rows as $row) {
-                        $data[] = [
-                            'content_id' => $row->content_id,
-                            'playlist' => $row->value,
-                            'position' => $row->position,
-                        ];
+        $this->migrateContentPlaylist($dbConnection);
 
-                        $migratedFields++;
-                        $playlistFields++;
-                    }
-                    $dbConnection->table(config('railcontent.table_prefix') . 'content_playlist')
-                        ->insert($data);
-                }
-            );
+        $this->info('Ending content playlists migration.');
 
-        $this->info('Ending content playlists migration. Migrated - ' . $playlistFields);
+        $this->migrateContentKeys($dbConnection);
 
-        $keyFields = 0;
-        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
-            ->select('id', 'content_id', 'key', 'value', 'position')
-            ->where('key', 'key')
-            ->whereNotNull('value')
-            ->orderBy('content_id', 'desc')
-            ->chunk(
-                500,
-                function (Collection $rows) use (&$migratedFields, $dbConnection, &$keyFields) {
-                    $data = [];
-                    foreach ($rows as $row) {
-                        $data[] = [
-                            'content_id' => $row->content_id,
-                            'key' => $row->value,
-                            'position' => $row->position,
-                        ];
-                        $migratedFields++;
-                        $keyFields++;
-                    }
-                    $dbConnection->table(config('railcontent.table_prefix') . 'content_key')
-                        ->insert($data);
-                }
-            );
+        $this->info('Ending content keys migration. ');
 
-        $this->info('Ending content keys migration. Migrated - ' . $keyFields);
+        $this->migrateContentKeyPitchType($dbConnection);
 
-        $keyPitchTypeFields = 0;
-        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
-            ->select('id', 'content_id', 'key', 'value', 'position')
-            ->where('key', 'key_pitch_type')
-            ->whereNotNull('value')
-            ->orderBy('content_id', 'desc')
-            ->chunk(
-                500,
-                function (Collection $rows) use (&$migratedFields, $dbConnection, &$keyPitchTypeFields) {
-                    $data = [];
-                    foreach ($rows as $row) {
-                        $data[] = [
-                            'content_id' => $row->content_id,
-                            'key_pitch_type' => $row->value,
-                            'position' => $row->position,
-                        ];
-                        $migratedFields++;
-                        $keyPitchTypeFields++;
-                    }
-                    $dbConnection->table(config('railcontent.table_prefix') . 'content_key_pitch_type')
-                        ->insert($data);
-                }
-            );
-
-        $this->info('Ending content key pitch types migration. Migrated - ' . $keyPitchTypeFields);
+        $this->info('Ending content key pitch types migration.');
 
         $this->migrateInstructors($dbConnection);
 
         $this->info('Ending content instructors migration. ');
 
-        $exercise = 0;
-        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
-            ->select('content_id', 'key', 'value', 'position')
-            ->join(
-                config('railcontent.table_prefix') . 'content',
-                config('railcontent.table_prefix') . 'content_fields' . '.value',
-                config('railcontent.table_prefix') . 'content.id'
-            )
-            ->where('key', 'exercise_id')
-            ->whereNotNull('value')
-            ->orderBy('content_id', 'desc')
-            ->chunk(
-                500,
-                function (Collection $rows) use (&$migratedFields, $dbConnection, &$exercise) {
-                    $data = [];
-                    foreach ($rows as $row) {
-                        if ((is_numeric($row->value))) {
-                            $data[] = [
-                                'content_id' => $row->content_id,
-                                'exercise_id' => $row->value,
-                                'position' => $row->position,
-                            ];
-                            $migratedFields++;
-                            $exercise++;
-                        }
-                    }
-                    $dbConnection->table(config('railcontent.table_prefix') . 'content_exercise')
-                        ->insert($data);
-                }
-            );
-        $this->info('Ending content exercise migration. Migrated - ' . $exercise);
+        $this->migrateExercise($dbConnection);
 
-        $video = 0;
-        $dbConnection->table(config('railcontent.table_prefix') . 'content_fields')
-            ->select('content_id', 'key', 'value', 'position')
-            ->join(
-                config('railcontent.table_prefix') . 'content',
-                config('railcontent.table_prefix') . 'content_fields' . '.value',
-                config('railcontent.table_prefix') . 'content.id'
-            )
-            ->where('key', 'video')
-            ->whereNotNull('value')
-            ->orderBy('content_id', 'desc')
-            ->chunk(
-                500,
-                function (Collection $rows) use (&$migratedFields, $dbConnection, &$video) {
-                    foreach ($rows as $row) {
-                        $cq = " SET video = " . $row->value;
+        $this->info('Ending content exercise migration.');
 
-                        $statement = "UPDATE " . config('railcontent.table_prefix') . 'content' . $cq;
-                        $statement .= " WHERE id =" . $row->content_id;
+        $this->migrateVideo();
 
-                        $dbConnection->statement($statement);
-                        $video++;
-                    }
-                }
-            );
-        $this->info('Ending content video migration. Migrated - ' . $video);
+        $this->info('Ending content video migration. ' );
 
         $specialColumns = [
             'id',
@@ -473,6 +355,164 @@ EOT;
         );
 
         $dbConnection->statement($statement);
+        return $statement;
+    }
+
+    /**
+     * @param \Illuminate\Database\Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateContentPlaylist(\Illuminate\Database\Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `playlist`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `playlist`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_playlist',
+            config('railcontent.table_prefix') . 'content_fields',
+            'playlist'
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
+
+    /**
+     * @param \Illuminate\Database\Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateContentKeys(\Illuminate\Database\Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `key`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `key`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_key',
+            config('railcontent.table_prefix') . 'content_fields',
+            'key'
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
+
+    /**
+     * @param \Illuminate\Database\Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateContentKeyPitchType(\Illuminate\Database\Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `key_pitch_type`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `key_pitch_type`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_key_pitch_type',
+            config('railcontent.table_prefix') . 'content_fields',
+            'key_pitch_type'
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
+
+    /**
+     * @param \Illuminate\Database\Connection $dbConnection
+     * @return string|void
+     */
+    private function migrateExercise(\Illuminate\Database\Connection $dbConnection)
+    {
+        $sql = <<<'EOT'
+INSERT INTO %s (
+    `content_id`,
+    `exercise_id`,
+    `position`
+)
+SELECT
+    c.`content_id` AS `content_id`,
+    c.`value` AS `exercise_id`,
+    c.`position` AS `position`
+FROM `%s` c
+WHERE
+    c.`key` IN ('%s')
+    AND  c.`value` is not null
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_exercise',
+            config('railcontent.table_prefix') . 'content_fields',
+            'exercise_id'
+        );
+
+        $dbConnection->statement($statement);
+        return $statement;
+    }
+
+    /**
+     * @return string|void
+     */
+    private function migrateVideo()
+    {
+        $sql = <<<'EOT'
+UPDATE `%s` cs
+JOIN `%s` s 
+ON cs.`id` = s.`content_id`
+SET cs.`video` = s.`value`
+WHERE
+    s.`value` IS NOT NULL
+ AND s.`key` = '%s'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content',
+            config('railcontent.table_prefix') . 'content_fields',
+            'video'
+        );
+
+        $this->databaseManager->statement($statement);
         return $statement;
     }
 }
