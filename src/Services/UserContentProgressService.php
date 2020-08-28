@@ -257,7 +257,7 @@ class UserContentProgressService
             $children = $this->contentHierarchyService->getByParentIds($childIds);
             $ids = [];
             foreach ($children as $child) {
-                $contentsToComplete[ $child->getChild()
+                $contentsToComplete[$child->getChild()
                     ->getId()] = $child->getChild();
                 $ids[] =
                     $child->getChild()
@@ -443,11 +443,10 @@ class UserContentProgressService
         );
         $allowedTypes = array_unique(array_merge($allowedTypesForStarted, $allowedTypesForCompleted));
 
-        $parent = array_first($this->contentService->getByChildIdWhereParentTypeIn($content->getId(),$allowedTypes));
-
+        $parent = array_first($this->contentService->getByChildIdWhereParentTypeIn($content->getId(), $allowedTypes));
 
         if ($parent && in_array($parent->getType(), $allowedTypes)) {
-            if (!$parent->fetch('started') && in_array($parent->getType(), $allowedTypesForStarted)) {
+            if (!$parent->fetch('started', false) && in_array($parent->getType(), $allowedTypesForStarted)) {
 
                 $this->startContent($parent->getId(), $user->getId());
 
@@ -462,21 +461,23 @@ class UserContentProgressService
             }
 
             // complete parent content if necessary
-            if ($parent->fetch('completed')) {
+            if ($parent->fetch('completed', false)) {
                 $complete = true;
                 foreach ($siblings as $sibling) {
-                    if (!$sibling->fetch('completed')) {
+                    if (!$sibling->fetch('completed', false)) {
                         $complete = false;
                     }
                 }
 
-                if ($complete && !$parent->fetch('completed') && in_array($parent->getType(), $allowedTypesForCompleted)) {
+                if ($complete &&
+                    !$parent->fetch('completed', false) &&
+                    in_array($parent->getType(), $allowedTypesForCompleted)) {
                     $this->completeContent($parent->getId(), $user->getId());
                 }
             }
 
             // calculate and save parent progress percent from children
-            $alreadyStarted = $parent->fetch('started');
+            $alreadyStarted = $parent->fetch('started', false);
             $typeAllows = in_array($parent->getType(), $allowedTypesForStarted);
 
             if ($alreadyStarted || $typeAllows) {
@@ -503,7 +504,7 @@ class UserContentProgressService
         $arraySum = 0;
 
         foreach ($siblings as $sibling) {
-            $arraySum += $sibling->fetch('progress_percent',0);
+            $arraySum += $sibling->fetch('progress_percent', 0);
         }
 
         $siblingCount = count($siblings);
