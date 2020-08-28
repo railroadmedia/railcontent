@@ -108,7 +108,7 @@ class ElasticQueryBuilder
             return $this;
         }
 
-        $this->must[] = [['terms' => ['id' => $requiredContentIdsByState]],];
+        $this->must[] = ['terms' => ['id' => $requiredContentIdsByState]];
 
         return $this;
     }

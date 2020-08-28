@@ -60,7 +60,6 @@ class MigrateContentFields extends Command
         $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
 
         $this->info('Migrate fields command starting.');
-        $migratedFields = 0;
 
         $this->migrateTopics($dbConnection);
 
@@ -98,7 +97,7 @@ class MigrateContentFields extends Command
 
         $this->info('Ending content video migration. ' );
 
-        $this->info('Migration completed. ' . $migratedFields . ' fields migrated.');
+        $this->info('Migration completed. ');
     }
 
     /**
