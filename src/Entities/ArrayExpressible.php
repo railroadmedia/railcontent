@@ -8,10 +8,6 @@ use Doctrine\ORM\PersistentCollection;
 
 abstract class ArrayExpressible
 {
-    private $cache = [];
-
-    const CACHE_KEY_PREFIX = 'railcontent_fetch_';
-
     /**
      * @param $dotNotationString
      * @param string $default
@@ -19,17 +15,7 @@ abstract class ArrayExpressible
      */
     public function fetch($dotNotationString, $default = '')
     {
-        $hash = self::CACHE_KEY_PREFIX . $this->getId() . '_' . $dotNotationString;
-
-        if (isset($this->cache[$hash])) {
-            return $this->cache[$hash];
-        }
-
-        $results = $this->dot($dotNotationString) ?? $default;
-
-        $this->cache[$hash] = $results;
-
-        return $this->cache[$hash];
+        return $this->dot($dotNotationString) ?? $default;
     }
 
     /**
