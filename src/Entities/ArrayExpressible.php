@@ -8,6 +8,20 @@ use Doctrine\ORM\PersistentCollection;
 
 abstract class ArrayExpressible
 {
+    private $cache = [];
+
+    const CACHE_KEY_PREFIX = 'railcontent_fetch_';
+
+    // User progress data that should not been cached
+    const NO_CACHE_ON = [
+        'completed',
+        'started',
+        'progress_percent',
+        'user_progress',
+        'progress_state',
+        'user_progress_updated_on',
+    ];
+
     /**
      * @param $dotNotationString
      * @param string $default
@@ -15,7 +29,17 @@ abstract class ArrayExpressible
      */
     public function fetch($dotNotationString, $default = '')
     {
-        return $this->dot($dotNotationString) ?? $default;
+        $hash = self::CACHE_KEY_PREFIX . $this->getId() . '_' . $dotNotationString;
+
+        if (isset($this->cache[$hash]) && (!in_array($dotNotationString, self::NO_CACHE_ON))) {
+            return $this->cache[$hash];
+        }
+
+        $results = $this->dot($dotNotationString) ?? $default;
+
+        $this->cache[$hash] = $results;
+
+        return $this->cache[$hash];
     }
 
     /**
@@ -53,9 +77,8 @@ abstract class ArrayExpressible
             $customPosition = $criteria[count($criteria) - 1];
         }
 
-
         for ($i = $index; $i < count($criteria); $i++) {
-             foreach ($contentData as $data) {
+            foreach ($contentData as $data) {
                 if ($data->getKey() == $criteria[$i]) {
                     if ($allValues) {
                         $results[] = $data->getValue();
@@ -133,17 +156,17 @@ abstract class ArrayExpressible
 
                     if (($fields instanceof ContentInstructor)) {
 
-                    if($allValues){
-                        $results = $fields = [call_user_func([$fields, $getterName])];
-                    } else{
-                        $results = $fields = call_user_func([$fields, $getterName]);
-                    }
+                        if ($allValues) {
+                            $results = $fields = [call_user_func([$fields, $getterName])];
+                        } else {
+                            $results = $fields = call_user_func([$fields, $getterName]);
+                        }
                     }
                 } else {
                     $extraProperties = $fields->getExtra();
 
                     if ($extraProperties && array_key_exists($criteria[$i], $extraProperties)) {
-                        $results = $fields =  $fields->getProperty($criteria[$i]);
+                        $results = $fields = $fields->getProperty($criteria[$i]);
                     } else {
                         return null;
                     }
