@@ -85,7 +85,7 @@ SELECT
     c.`value` AS `instructor_id`,
     c.`position` AS `position`
 FROM `%s` c
-JOIN `%s` ci on  c.`content_id` = ci.id
+JOIN `%s` ci on c.`value` = ci.`id`
 WHERE
     c.`key` IN ('%s')
     AND c.`value`  REGEXP '^-?[0-9]+$'
