@@ -8,7 +8,7 @@ use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
-class MigrateContentFields extends Command
+class MigrateContentVideos extends Command
 {
     /**
      * The name and signature of the console command.

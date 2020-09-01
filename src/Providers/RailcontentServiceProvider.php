@@ -38,6 +38,7 @@ use Railroad\Railcontent\Commands\MigrateContentFields;
 use Railroad\Railcontent\Commands\MigrateContentInstructors;
 use Railroad\Railcontent\Commands\MigrateContentToElasticsearch;
 use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
+use Railroad\Railcontent\Commands\MigrateContentVideos;
 use Railroad\Railcontent\Commands\MigrateUserPlaylist;
 use Railroad\Railcontent\Commands\OrphanContent;
 use Railroad\Railcontent\Events\ContentDeleted;
@@ -117,6 +118,7 @@ class RailcontentServiceProvider extends ServiceProvider
                 MigrateContentToElasticsearch::class,
                 MigrateContentColumns::class,
                 MigrateContentInstructors::class,
+                MigrateContentVideos::class
             ]
         );
     }
