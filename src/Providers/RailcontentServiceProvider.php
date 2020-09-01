@@ -35,6 +35,7 @@ use Railroad\Railcontent\Commands\DeleteContentAndHierarchiesForUserPlaylists;
 use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\MigrateContentColumns;
 use Railroad\Railcontent\Commands\MigrateContentFields;
+use Railroad\Railcontent\Commands\MigrateContentInstructors;
 use Railroad\Railcontent\Commands\MigrateContentToElasticsearch;
 use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
 use Railroad\Railcontent\Commands\MigrateUserPlaylist;
@@ -114,7 +115,8 @@ class RailcontentServiceProvider extends ServiceProvider
                 ComputePastStats::class,
                 ComputeWeeklyStats::class,
                 MigrateContentToElasticsearch::class,
-                MigrateContentColumns::class
+                MigrateContentColumns::class,
+                MigrateContentInstructors::class,
             ]
         );
     }

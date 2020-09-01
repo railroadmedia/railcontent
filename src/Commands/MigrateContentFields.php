@@ -85,10 +85,6 @@ class MigrateContentFields extends Command
 
         $this->info('Ending content key pitch types migration.');
 
-        $this->migrateInstructors($dbConnection);
-
-        $this->info('Ending content instructors migration. ');
-
         $this->migrateExercise($dbConnection);
 
         $this->info('Ending content exercise migration.');
@@ -99,40 +95,7 @@ class MigrateContentFields extends Command
 
         $this->info('Migration completed. ');
     }
-
-    /**
-     * @param \Illuminate\Database\Connection $dbConnection
-     * @return string|void
-     */
-    private function migrateInstructors(\Illuminate\Database\Connection $dbConnection)
-    {
-        $sql = <<<'EOT'
-INSERT INTO %s (
-    `content_id`,
-    `instructor_id`,
-    `position`
-)
-SELECT
-    c.`content_id` AS `content_id`,
-    c.`value` AS `instructor_id`,
-    c.`position` AS `position`
-FROM `%s` c
-WHERE
-    c.`key` IN ('%s')
-    AND c.`value`  REGEXP '^-?[0-9]+$'
-EOT;
-
-        $statement = sprintf(
-            $sql,
-            config('railcontent.table_prefix') . 'content_instructor',
-            config('railcontent.table_prefix') . 'content_fields',
-            'instructor'
-        );
-
-        $dbConnection->statement($statement);
-        return $statement;
-    }
-
+    
     /**
      * @param \Illuminate\Database\Connection $dbConnection
      * @return string|void

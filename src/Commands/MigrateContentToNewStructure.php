@@ -32,6 +32,7 @@ class MigrateContentToNewStructure extends Command
         $this->info('Starting MigrateContentToNewStructure.');
 
         $this->call('command:migrateFields');
+        $this->call('command:migrateInstrutors');
         $this->call('command:migrateContentColumns');
         $this->call('command:migrateUserPlaylists');
         $this->call('command:deleteOldContentForPlaylist');
