@@ -338,6 +338,7 @@ EOT;
 UPDATE `%s` cs
 JOIN `%s` s 
 ON cs.`id` = s.`content_id`
+JOIN `%s` c ON s.`value` = c.`id`
 SET cs.`video` = s.`value`
 WHERE
     s.`value` IS NOT NULL
