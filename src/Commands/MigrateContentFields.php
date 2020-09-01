@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Commands;
 
+use Illuminate\Database\Connection;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
@@ -89,18 +90,14 @@ class MigrateContentFields extends Command
 
         $this->info('Ending content exercise migration.');
 
-        $this->migrateVideo();
-
-        $this->info('Ending content video migration. ' );
-
         $this->info('Migration completed. ');
     }
-    
+
     /**
-     * @param \Illuminate\Database\Connection $dbConnection
+     * @param Connection $dbConnection
      * @return string|void
      */
-    private function migrateTopics(\Illuminate\Database\Connection $dbConnection)
+    private function migrateTopics(Connection $dbConnection)
     {
         $sql = <<<'EOT'
 INSERT INTO %s (
@@ -130,10 +127,10 @@ EOT;
     }
 
     /**
-     * @param \Illuminate\Database\Connection $dbConnection
+     * @param Connection $dbConnection
      * @return string|void
      */
-    private function migrateTags(\Illuminate\Database\Connection $dbConnection)
+    private function migrateTags(Connection $dbConnection)
     {
         $sql = <<<'EOT'
 INSERT INTO %s (
@@ -163,10 +160,10 @@ EOT;
     }
 
     /**
-     * @param \Illuminate\Database\Connection $dbConnection
+     * @param Connection $dbConnection
      * @return string|void
      */
-    private function migrateSBTFields(\Illuminate\Database\Connection $dbConnection)
+    private function migrateSBTFields(Connection $dbConnection)
     {
         $sql = <<<'EOT'
 INSERT INTO %s (
@@ -198,10 +195,10 @@ EOT;
     }
 
     /**
-     * @param \Illuminate\Database\Connection $dbConnection
+     * @param Connection $dbConnection
      * @return string|void
      */
-    private function migrateContentPlaylist(\Illuminate\Database\Connection $dbConnection)
+    private function migrateContentPlaylist(Connection $dbConnection)
     {
         $sql = <<<'EOT'
 INSERT INTO %s (
@@ -231,10 +228,10 @@ EOT;
     }
 
     /**
-     * @param \Illuminate\Database\Connection $dbConnection
+     * @param Connection $dbConnection
      * @return string|void
      */
-    private function migrateContentKeys(\Illuminate\Database\Connection $dbConnection)
+    private function migrateContentKeys(Connection $dbConnection)
     {
         $sql = <<<'EOT'
 INSERT INTO %s (
@@ -264,10 +261,10 @@ EOT;
     }
 
     /**
-     * @param \Illuminate\Database\Connection $dbConnection
+     * @param Connection $dbConnection
      * @return string|void
      */
-    private function migrateContentKeyPitchType(\Illuminate\Database\Connection $dbConnection)
+    private function migrateContentKeyPitchType(Connection $dbConnection)
     {
         $sql = <<<'EOT'
 INSERT INTO %s (
@@ -297,10 +294,10 @@ EOT;
     }
 
     /**
-     * @param \Illuminate\Database\Connection $dbConnection
+     * @param Connection $dbConnection
      * @return string|void
      */
-    private function migrateExercise(\Illuminate\Database\Connection $dbConnection)
+    private function migrateExercise(Connection $dbConnection)
     {
         $sql = <<<'EOT'
 INSERT INTO %s (
@@ -326,34 +323,6 @@ EOT;
         );
 
         $dbConnection->statement($statement);
-        return $statement;
-    }
-
-    /**
-     * @return string|void
-     */
-    private function migrateVideo()
-    {
-        $sql = <<<'EOT'
-UPDATE `%s` cs
-JOIN `%s` s 
-ON cs.`id` = s.`content_id`
-JOIN `%s` c ON s.`value` = c.`id`
-SET cs.`video` = s.`value`
-WHERE
-    s.`value` IS NOT NULL
- AND s.`key` = '%s'
-EOT;
-
-        $statement = sprintf(
-            $sql,
-            config('railcontent.table_prefix') . 'content',
-            config('railcontent.table_prefix') . 'content_fields',
-            config('railcontent.table_prefix') . 'content',
-            'video'
-        );
-
-        $this->databaseManager->statement($statement);
         return $statement;
     }
 }

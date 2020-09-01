@@ -30,12 +30,12 @@ class MigrateContentToNewStructure extends Command
     public function handle()
     {
         $this->info('Starting MigrateContentToNewStructure.');
-
-        $this->call('command:migrateFields');
-        $this->call('command:migrateInstrutors');
-        $this->call('command:migrateContentColumns');
         $this->call('command:migrateUserPlaylists');
         $this->call('command:deleteOldContentForPlaylist');
+        $this->call('command:migrateFields');
+        $this->call('command:migrateContentColumns');
+        $this->call('command:migrateInstructors');
+        $this->call('command:migrateVideos');
         $this->call('command:deleteOrphanContent');
         $this->call('command:calculateTotalXP');
         $this->call('command:MigrateContentToElasticsearch');

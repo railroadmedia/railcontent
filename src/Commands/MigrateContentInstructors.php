@@ -13,7 +13,7 @@ class MigrateContentInstructors extends Command
      *
      * @var string
      */
-    protected $signature = 'command:migrateInstrutors';
+    protected $signature = 'command:migrateInstructors';
 
     /**
      * The console command description.
