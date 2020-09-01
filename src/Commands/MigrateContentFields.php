@@ -349,6 +349,7 @@ EOT;
             $sql,
             config('railcontent.table_prefix') . 'content',
             config('railcontent.table_prefix') . 'content_fields',
+            config('railcontent.table_prefix') . 'content',
             'video'
         );
 
