@@ -33,7 +33,7 @@ class AddStatsEpochToContentStatisticsTable extends Migration
     public function down()
     {
         Schema::connection(ConfigService::$databaseConnectionName)->table(
-            ConfigService::$tableContent,
+            ConfigService::$tableContentStatistics,
             function ($table) {
                 /**
                  * @var $table \Illuminate\Database\Schema\Blueprint
