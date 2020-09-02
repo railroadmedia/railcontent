@@ -10,6 +10,7 @@ use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\Content;
+use Spatie\Fractal\Fractal;
 
 class ContentOldStructureTransformer extends TransformerAbstract
 {
@@ -43,6 +44,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                 foreach ($valExtra as $extraItemVal) {
                                     $valueExtraItem = $val->getProperty($extraItemVal);
                                     if (is_array($valueExtraItem)) {
+
                                         foreach ($valueExtraItem as $index => $item2) {
                                             if (is_object($item2) && ($item2->getId() != $content->getId())) {
                                                 $extraPropertiesItem[$extraItemVal][$index] =
@@ -50,11 +52,12 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                                         $item2,
                                                         $entityManager->getClassMetadata(get_class($item2))
                                                     );
-                                            }else{
+                                            } else {
                                                 $extraPropertiesItem[$extraItemVal][$index] = $item2;
                                             }
                                         }
-                                    } elseif (is_object($extraItemVal) && ($extraItemVal->getId() != $content->getId())) {
+                                    } elseif (is_object($extraItemVal) &&
+                                        ($extraItemVal->getId() != $content->getId())) {
                                         $extraPropertiesItem[$extraItemVal] = $serializer->serializeToUnderScores(
                                             $valueExtraItem,
                                             $entityManager->getClassMetadata(get_class($valueExtraItem))
@@ -67,7 +70,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
 
                             if ($val->getId() != $content->getId()) {
 
-                                $extraProperties[$item][$index1] = array_merge(
+                                $extraForItem = array_merge(
                                     $serializer->serializeToUnderScores(
                                         $val,
                                         $entityManager->getClassMetadata(get_class($val))
@@ -76,12 +79,16 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                 );
 
                                 if ($val instanceof Content) {
-                                    $extraProperties[$item][$index1]['fields'] =
-                                        $this->includeFields($val)
-                                            ->getData();
-                                    $extraProperties[$item][$index1]['data'] =
-                                        $this->includeData($val)
-                                            ->getData();
+                                    $fields = [
+                                        'fields' => $this->includeFields($val)
+                                            ->getData(),
+                                    ];
+
+                                    $data = Fractal::create()->collection($val->getData())->transformWith(ContentDataOldStructureTransformer::class)->toArray();
+
+                                    $extraProperties[$item][] = array_merge($extraForItem, $fields, $data);
+                                } else {
+                                    $extraProperties[$item][] = $extraForItem;
                                 }
 
                             }
@@ -109,18 +116,17 @@ class ContentOldStructureTransformer extends TransformerAbstract
                             }
                         }
                         if ($value->getId() != $content->getId()) {
+                            $data = Fractal::create()->collection($value->getData())->transformWith(ContentDataOldStructureTransformer::class)->toArray();
                             $extraProperties[$item] = array_merge(
                                 $serializer->serializeToUnderScores(
                                     $value,
                                     $entityManager->getClassMetadata(get_class($value))
                                 ),
+                                $data,
                                 $extraPropertiesItem
                             );
                             $extraProperties[$item]['fields'] =
                                 $this->includeFields($value)
-                                    ->getData();
-                            $extraProperties[$item]['data'] =
-                                $this->includeData($value)
                                     ->getData();
                         }
                     } else {
@@ -129,7 +135,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                 }
             }
         }
-
+ 
         $defaultIncludes = ['fields', 'data'];
 
         if ($content->getProperty('permissions')) {
@@ -182,7 +188,8 @@ class ContentOldStructureTransformer extends TransformerAbstract
      */
     public function includeData(Content $content)
     {
-        if (!empty($content->getData())) {
+        if (!$content->getData()
+            ->isEmpty()) {
             return $this->collection(
                 $content->getData(),
                 new ContentDataOldStructureTransformer(),
@@ -257,8 +264,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                 ->getData();
                         $arrayValue['data'] =
                             $this->includeData($value)
-                                ->getData()
-                                ->getValues();
+                                ->getData();
 
                         $fields[] = [
                             'id' => rand(),
