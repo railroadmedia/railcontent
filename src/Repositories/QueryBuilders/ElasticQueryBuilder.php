@@ -145,10 +145,17 @@ class ElasticQueryBuilder
         }
 
         foreach ($requiredFields as $index => $requiredFieldData) {
-            $this->must[] = ['terms' => [$requiredFieldData['name'] . '.raw' => [$requiredFieldData['value']]]];
+            $this->must[] = [
+                'bool' => [
+                    'should' => [
+                        ['terms' => [$requiredFieldData['name'] . '.raw' => [$requiredFieldData['value']]]],
+                        ['terms' => [$requiredFieldData['name'] => [$requiredFieldData['value']]]],
+                    ],
+                ],
+            ];
 
         }
-        //dd($this);
+
         return $this;
     }
 
@@ -165,13 +172,12 @@ class ElasticQueryBuilder
         $terms = [];
         foreach ($includedFields as $index => $includedFieldData) {
             $terms[] = ['terms' => [$includedFieldData['name'] . '.raw' => [strtolower($includedFieldData['value'])]]];
-
+            $terms[] = ['terms' => [$includedFieldData['name'] => [strtolower($includedFieldData['value'])]]];
         }
 
         $this->must[] = [
             'bool' => [
                 'should' => $terms,
-
             ],
         ];
 
