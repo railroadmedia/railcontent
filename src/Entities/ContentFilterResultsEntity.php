@@ -74,7 +74,7 @@ class ContentFilterResultsEntity extends \ArrayObject
 
     public function customPagination()
     {
-        return $this['custom_pagination'] ?? null;
+        return $this['custom_pagination'] ?? [];
     }
 
     public function activeFilters()
