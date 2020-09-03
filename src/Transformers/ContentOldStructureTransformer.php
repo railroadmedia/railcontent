@@ -235,8 +235,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                         ->getData();
                                 $arrayValue['data'] =
                                     $this->includeData($value)
-                                        ->getData()
-                                        ->getValues();
+                                        ->getData();
                             } else {
                                 $arrayValue = $value;
                             }

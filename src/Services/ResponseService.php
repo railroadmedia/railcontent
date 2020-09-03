@@ -84,8 +84,7 @@ class ResponseService extends FractalResponseService
                                 ->getData();
                         $arrayValue['data'] =
                             $transformer->includeData($filter)
-                                ->getData()
-                                ->getValues();
+                                ->getData();
                         $filterOption[$key2] = $arrayValue;
                     } elseif (is_string($filter) && (!mb_check_encoding($filter))) {
                         $filterOption[$key2] = utf8_encode($filter);
