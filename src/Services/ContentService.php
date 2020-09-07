@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Carbon\Carbon;
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\DBAL\DBALException;
@@ -1809,5 +1810,171 @@ class ContentService
         }
 
         return $text;
+    }
+
+    public function getContentForCalendar($brand = null, $includeSemesterPackLessons = true)
+    {
+        $liveEventsTypes = array_merge(
+            (array)config('railcontent.showTypes', []),
+            (array)config('railcontent.liveContentTypes', [])
+        );
+        $contentReleasesTypes = array_merge(
+            (array)config('railcontent.showTypes', []),
+            (array)config('railcontent.contentReleaseContentTypes', [])
+        );
+
+        if ($includeSemesterPackLessons) {
+            $parents = [];
+            $idsOfChildrenOfSelectSemesterPacks = [];
+            $culledSemesterPackLessons = [];
+        }
+
+        $brand = $brand ?? config('railcontent.brand');
+
+        $oldStatuses = ContentRepository::$availableContentStatues;
+        $oldFutureContent = ContentRepository::$pullFutureContent;
+
+        ContentRepository::$availableContentStatues = [
+            ContentService::STATUS_PUBLISHED,
+            ContentService::STATUS_SCHEDULED,
+        ];
+
+        ContentRepository::$pullFutureContent = true;
+
+        if ($includeSemesterPackLessons) {
+            $semesterPacksToGet = config('railcontent.semester-pack-schedule-labels.' . $brand, []);
+        }
+
+        if (empty($liveEventsTypes) && empty($contentReleasesTypes) && empty($semesterPacksToGet)) {
+            return [];
+        }
+
+        if ($includeSemesterPackLessons) {
+            foreach ($semesterPacksToGet ?? [] as $slug => $kebabCaseLabel) {
+                $parents[] = $this->getSemesterPackParent($slug);
+            }
+        }
+
+        $liveEvents = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            $liveEventsTypes,
+            ContentService::STATUS_SCHEDULED,
+            Carbon::now()
+                ->toDateTimeString(),
+            '>'
+        );
+
+        $contentReleases = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            $contentReleasesTypes,
+            ContentService::STATUS_PUBLISHED,
+            Carbon::now()
+                ->toDateTimeString(),
+            '>'
+        );
+
+        if ($includeSemesterPackLessons) {
+            /*
+             * Section One
+             */
+            foreach ($parents ?? [] as $parent) {
+                foreach (
+                    $this->getByParentIdWhereTypeIn($parent->getId(), ['semester-pack-lesson'])
+                         as $lesson
+                ) {
+                    $idsOfChildrenOfSelectSemesterPacks[$parent->getSlug()][] = $lesson->getId();
+                }
+            }
+
+            /*
+             * Section Two
+             */
+            $semesterPackLessons = $this->getWhereTypeInAndStatusAndPublishedOnOrdered(
+                ['semester-pack-lesson'],
+                ContentService::STATUS_PUBLISHED,
+                Carbon::now()
+                    ->toDateTimeString(),
+                '>'
+            );
+
+            /*
+             * Section Three
+             */
+
+            $culledSemesterPackLessons = [];
+
+            foreach ($semesterPackLessons as $lesson) {
+                foreach ($idsOfChildrenOfSelectSemesterPacks ?? [] as $parentSlug => $setOfIds) {
+                    if (in_array($lesson['id'], $setOfIds)) {
+                        $labels = config('railcontent.semester-pack-schedule-labels.' . $brand);
+                        if (array_key_exists($parentSlug, $labels)) {
+                            $result =
+                                $this->getByChildIdWhereParentTypeIn($lesson['id'], ['semester-pack'])
+                                    ->first();
+                            $lesson['parent_id'] = $result['id'];
+                            //$culledSemesterPackLessons[$labels[$parentSlug]] = $lesson;
+                            $culledSemesterPackLessons[] = $lesson;
+                        }
+                    }
+                }
+            }
+        }
+
+        $scheduleEvents = array_merge($liveEvents, $contentReleases);
+
+        if ($includeSemesterPackLessons) {
+            $culledSemesterPackLessons = collect($culledSemesterPackLessons ?? []);
+            $scheduleEvents =array_merge($scheduleEvents, $culledSemesterPackLessons);
+                $scheduleEvents->merge($culledSemesterPackLessons)
+                    ->sort($compareFunc)
+                    ->values();
+        }
+
+        ContentRepository::$availableContentStatues = $oldStatuses;
+        ContentRepository::$pullFutureContent = $oldFutureContent;
+
+        foreach ($scheduleEvents as $key => $content) {
+            $contentBrand = $content->getBrand();
+            $incorrectBrand = $contentBrand !== $brand;
+            if ($incorrectBrand) {
+                $keysToUnset[] = $key;
+            }
+        }
+
+        foreach ($keysToUnset ?? [] as $key) {
+            unset($scheduleEvents[$key]);
+        }
+
+        return $scheduleEvents;
+    }
+
+
+    /**
+     * @param $parentSlug
+     * @return mixed
+     */
+    public function getSemesterPackParent($parentSlug)
+    {
+        $before = ContentRepository::$availableContentStatues;
+
+        if (empty(ContentRepository::$availableContentStatues)) {
+            ContentRepository::$availableContentStatues = [
+                ContentService::STATUS_PUBLISHED,
+                ContentService::STATUS_SCHEDULED,
+            ];
+        }
+
+        $setWithThis = array_merge(
+            ContentRepository::$availableContentStatues,
+            [ContentService::STATUS_DRAFT]
+        );
+
+        // include drafts because packs might not be published, but we still want to get their *lessons*
+        ContentRepository::$availableContentStatues = $setWithThis;
+
+        $result = $this->getBySlugAndType($parentSlug, 'semester-pack');
+        $result = array_first($result);
+
+        ContentRepository::$availableContentStatues = $before;
+
+        return $result;
     }
 }
