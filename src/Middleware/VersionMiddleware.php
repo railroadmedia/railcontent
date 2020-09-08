@@ -15,10 +15,10 @@ class VersionMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->has('version') && $request->get('version') == 'old') {
-            ResponseService::$oldResponseStructure = true;
-        } else {
+        if ($request->has('version') && $request->get('version') == 'new') {
             ResponseService::$oldResponseStructure = false;
+        } else {
+            ResponseService::$oldResponseStructure = true;
         }
 
         return $next($request);
