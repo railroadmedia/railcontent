@@ -51,7 +51,7 @@ class UserContentProgressDecorator implements DecoratorInterface
         }
 
         foreach ($entities as $index => $content) {
-            if (!empty($contentProgressionsByContentId[$content->getId()])) {
+            if (array_key_exists($content->getId(), $contentProgressionsByContentId)) {
 
                 $content->createProperty(
                     'progress_percent',
