@@ -177,8 +177,8 @@ class MyListJsonController extends Controller
             $lessons = $this->contentService->getFiltered(
                 $page,
                 $limit,
-                '-published_on',
-                $contentTypes,
+                'newest',
+                array_values($contentTypes),
                 [],
                 [],
                 $requiredFields,
@@ -196,7 +196,7 @@ class MyListJsonController extends Controller
                 $lessons->results()
             );
 
-            $filterTypes = ['content_type' => array_unique($contentTypes)];
+            $filterTypes = ['content_type' => array_values(array_unique($contentTypes))];
         }
 
         return ResponseService::content(
