@@ -9,6 +9,7 @@ use Railroad\Railcontent\Entities\ContentInstructor;
 use Railroad\Railcontent\Entities\ContentKey;
 use Railroad\Railcontent\Entities\ContentKeyPitchType;
 use Railroad\Railcontent\Entities\ContentPlaylist;
+use Railroad\Railcontent\Entities\ContentStyle;
 use Railroad\Railcontent\Entities\ContentTag;
 use Railroad\Railcontent\Entities\ContentTopic;
 
@@ -35,6 +36,12 @@ trait ContentFieldsAssociations
      *     cascade={"persist","remove"})
      */
     protected $tag;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentStyle", mappedBy="content",
+     *     cascade={"persist","remove"})
+     */
+    protected $styles;
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentKey", mappedBy="content",
@@ -495,5 +502,58 @@ trait ContentFieldsAssociations
     {
         return $this->playlist;
     }
+
+    /**
+     * @param ContentStyle $contentStyle
+     * @return $this
+     */
+    public function addStyle(ContentStyle $contentStyle)
+    {
+
+        $predictate = function ($element) use ($contentStyle) {
+            return $element->getStyle() === $contentStyle->getStyle();
+        };
+        $existStyle = $this->styles->filter($predictate);
+
+        if ($existStyle->isEmpty()) {
+            $this->styles->add($contentStyle);
+        } else {
+            $style = $existStyle->first();
+            if ($style->getPosition() == $contentStyle->getPosition()) {
+                return $this;
+            }
+
+            $key = $existStyle->key();
+            if ($contentStyle->getPosition()) {
+                $this->getStyle()
+                    ->get($key)
+                    ->setPosition($contentStyle->getPosition());
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ContentStyle $contentStyle
+     */
+    public function removeStyle(ContentStyle $contentStyle)
+    {
+        // If the style does not exist in the collection, then we don't need to do anything
+        if (!$this->styles->contains($contentStyle)) {
+            return;
+        }
+
+        $this->stylestag->removeElement($contentStyle);
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getStyles()
+    {
+        return $this->styles;
+    }
+
 
 }

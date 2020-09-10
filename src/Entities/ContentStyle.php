@@ -9,18 +9,18 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(
- *     name="railcontent_content_tag",
+ *     name="railcontent_content_styles",
  *     indexes={
- *         @ORM\Index(name="tgc", columns={"tag","content_id"}),
- *         @ORM\Index(name="railcontent_content_tag_content_id_index", columns={"content_id"}),
- *         @ORM\Index(name="railcontent_content_tag_tag_index", columns={"tag"}),
- *         @ORM\Index(name="railcontent_content_tag_position_index", columns={"position"})
+ *         @ORM\Index(name="sc", columns={"style","content_id"}),
+ *         @ORM\Index(name="railcontent_content_styles_content_id_index", columns={"content_id"}),
+ *         @ORM\Index(name="railcontent_content_styles_style_index", columns={"style"}),
+ *         @ORM\Index(name="railcontent_content_styles_position_index", columns={"position"})
  *     }
  * )
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
  *
  */
-class ContentTag extends ArrayExpressible
+class ContentStyle extends ArrayExpressible
 {
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
@@ -40,7 +40,7 @@ class ContentTag extends ArrayExpressible
      * @ORM\Column(type="string")
      * @var string
      */
-    protected $tag;
+    protected $style;
 
     /**
      * @Gedmo\SortablePosition()
@@ -70,7 +70,7 @@ class ContentTag extends ArrayExpressible
      */
     public function setContent(Content $content)
     {
-        $content->addTag($this);
+        $content->addStyle($this);
 
         $this->content = $content;
     }
@@ -78,17 +78,17 @@ class ContentTag extends ArrayExpressible
     /**
      * @return mixed
      */
-    public function getTag()
+    public function getStyle()
     {
-        return $this->tag;
+        return $this->style;
     }
 
     /**
-     * @param mixed $tag
+     * @param $style
      */
-    public function setTag($tag)
+    public function setStyle($style)
     {
-        $this->tag = $tag;
+        $this->style = $style;
     }
 
     /**

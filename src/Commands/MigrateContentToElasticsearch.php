@@ -163,6 +163,12 @@ class MigrateContentToElasticsearch extends Command
                                 ->where('key', 'description')
                                 ->orderBy('id', 'asc')
                                 ->first();
+                        $styles =
+                            $dbConnection->table(config('railcontent.table_prefix') . 'content_styles')
+                                ->select('style')
+                                ->where('content_id', $row->id)
+                                ->orderBy('id', 'asc')
+                                ->get();
 
                         $params1['body'][] = [
                             'index' => [
@@ -177,7 +183,11 @@ class MigrateContentToElasticsearch extends Command
                             'difficulty' => $row->difficulty,
                             'status' => $row->status,
                             'brand' => $row->brand,
-                            'style' => $row->style,
+                            'style' =>  (!$styles->isEmpty()) ? array_map(
+                                'strtolower',
+                                $styles->pluck('style')
+                                    ->toArray()
+                            ) : [],
                             'artist' => $row->artist,
                             'content_type' => $row->type,
                             'staff_pick_rating' => $row->staff_pick_rating,

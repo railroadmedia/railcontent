@@ -42,12 +42,6 @@ trait ContentFieldsProperties
      * @ORM\Column(type="string", nullable=true)
      * @var string
      */
-    protected $style;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     * @var string
-     */
     protected $title;
 
     /**
@@ -302,22 +296,6 @@ trait ContentFieldsProperties
     public function setQnaVideo($qnaVideo)
     {
         $this->qnaVideo = $qnaVideo;
-    }
-
-    /**
-     * @return string
-     */
-    public function getStyle()
-    {
-        return $this->style;
-    }
-
-    /**
-     * @param $style
-     */
-    public function setStyle($style)
-    {
-        $this->style = $style;
     }
 
     /**

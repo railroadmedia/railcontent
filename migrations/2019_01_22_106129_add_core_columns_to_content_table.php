@@ -43,14 +43,9 @@ class AddCoreColumnsToContentTable extends Migration
                         ->after('legacy_wordpress_post_id')
                         ->nullable();
 
-                    $table->string('style')
-                        ->index()
-                        ->after('qna_video')
-                        ->nullable();
-
                     $table->string('title')
                         ->index()
-                        ->after('style')
+                        ->after('qna_video')
                         ->nullable();
 
                     $table->string('video')

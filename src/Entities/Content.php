@@ -30,7 +30,6 @@ use Doctrine\Search\Mapping\Annotations as MAP;
  *         @ORM\Index(name="railcontent_content_legacy_id_index", columns={"legacy_id"}),
  *         @ORM\Index(name="railcontent_content_legacy_wordpress_post_id_index", columns={"legacy_wordpress_post_id"}),
  *         @ORM\Index(name="railcontent_content_qna_video_index", columns={"qna_video"}),
- *         @ORM\Index(name="railcontent_content_style_index", columns={"style"}),
  *         @ORM\Index(name="railcontent_content_title_index", columns={"title"}),
  *         @ORM\Index(name="railcontent_content_video_index", columns={"video"}),
  *         @ORM\Index(name="railcontent_content_xp_index", columns={"xp"}),
