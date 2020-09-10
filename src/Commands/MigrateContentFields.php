@@ -90,10 +90,6 @@ class MigrateContentFields extends Command
 
         $this->info('Ending content exercise migration.');
 
-        $this->migrateStyles($dbConnection);
-
-        $this->info('Ending content styles migration.');
-
         $this->info('Migration completed. ');
     }
 
@@ -331,36 +327,5 @@ EOT;
     }
 
 
-    /**
-     * @param Connection $dbConnection
-     * @return string|void
-     */
-    private function migrateStyles(Connection $dbConnection)
-    {
-        $sql = <<<'EOT'
-INSERT INTO %s (
-    `content_id`,
-    `style`,
-    `position`
-)
-SELECT
-    c.`content_id` AS `content_id`,
-    c.`value` AS `style`,
-    c.`position` AS `position`
-FROM `%s` c
-WHERE
-    c.`key` IN ('%s')
-    AND  c.`value` is not null
-EOT;
 
-        $statement = sprintf(
-            $sql,
-            config('railcontent.table_prefix') . 'content_styles',
-            config('railcontent.table_prefix') . 'content_fields',
-            'style'
-        );
-
-        $dbConnection->statement($statement);
-        return $statement;
-    }
 }

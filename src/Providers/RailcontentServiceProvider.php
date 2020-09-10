@@ -36,6 +36,7 @@ use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\MigrateContentColumns;
 use Railroad\Railcontent\Commands\MigrateContentFields;
 use Railroad\Railcontent\Commands\MigrateContentInstructors;
+use Railroad\Railcontent\Commands\MigrateContentStyles;
 use Railroad\Railcontent\Commands\MigrateContentToElasticsearch;
 use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
 use Railroad\Railcontent\Commands\MigrateContentVideos;
@@ -118,7 +119,8 @@ class RailcontentServiceProvider extends ServiceProvider
                 MigrateContentToElasticsearch::class,
                 MigrateContentColumns::class,
                 MigrateContentInstructors::class,
-                MigrateContentVideos::class
+                MigrateContentVideos::class,
+                MigrateContentStyles::class,
             ]
         );
     }
