@@ -181,7 +181,7 @@ class ContentServiceTest extends RailcontentTestCase
 
         //check that the content fields are deleted
         $this->assertDatabaseMissing(
-            config('railcontent.table_prefix') . 'content_instructor',
+            config('railcontent.table_prefix') . 'content_instructors',
             [
                 'content_id' => $id,
                 'instructor_id' => $instructor[0]->getId(),
@@ -197,7 +197,7 @@ class ContentServiceTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseMissing(
-            config('railcontent.table_prefix') . 'content_topic',
+            config('railcontent.table_prefix') . 'content_topics',
             [
                 'content_id' => $id,
             ]

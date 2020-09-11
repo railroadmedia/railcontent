@@ -93,7 +93,7 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_instructor',
+            config('railcontent.table_prefix') . 'content_instructors',
             config('railcontent.table_prefix') . 'content_fields',
             config('railcontent.table_prefix') . 'content',
             'instructor'

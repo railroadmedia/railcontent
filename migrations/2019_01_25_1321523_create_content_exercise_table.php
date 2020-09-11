@@ -15,7 +15,7 @@ class CreateContentExerciseTable extends Migration
     public function up()
     {
         Schema::connection(config('railcontent.database_connection_name'))->create(
-            config('railcontent.table_prefix') . 'content_exercise',
+            config('railcontent.table_prefix') . 'content_exercises',
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('content_id')->index();
@@ -34,6 +34,6 @@ class CreateContentExerciseTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('railcontent.table_prefix') . 'content_exercise');
+        Schema::dropIfExists(config('railcontent.table_prefix') . 'content_exercises');
     }
 }

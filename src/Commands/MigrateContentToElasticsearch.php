@@ -87,14 +87,14 @@ class MigrateContentToElasticsearch extends Command
                         $nr++;
 
                         $topics =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'content_topic')
+                            $dbConnection->table(config('railcontent.table_prefix') . 'content_topics')
                                 ->select('topic')
                                 ->where('content_id', $row->id)
                                 ->orderBy('id', 'asc')
                                 ->get();
 
                         $tags =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'content_tag')
+                            $dbConnection->table(config('railcontent.table_prefix') . 'content_tags')
                                 ->select('tag')
                                 ->where('content_id', $row->id)
                                 ->orderBy('id', 'asc')
@@ -136,10 +136,10 @@ class MigrateContentToElasticsearch extends Command
                                 ->get();
 
                         $instructors =
-                            $dbConnection->table(config('railcontent.table_prefix') . 'content_instructor')
+                            $dbConnection->table(config('railcontent.table_prefix') . 'content_instructors')
                                 ->join(
                                     config('railcontent.table_prefix') . 'content',
-                                    config('railcontent.table_prefix') . 'content_instructor.instructor_id',
+                                    config('railcontent.table_prefix') . 'content_instructors.instructor_id',
                                     '=',
                                     config('railcontent.table_prefix') . 'content.id'
                                 )

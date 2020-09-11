@@ -14,7 +14,7 @@ class CreateContentKeyPitchTypeTable extends Migration
     public function up()
     {
         Schema::connection(config('railcontent.database_connection_name'))->create(
-            config('railcontent.table_prefix') . 'content_key_pitch_type',
+            config('railcontent.table_prefix') . 'content_key_pitch_types',
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('content_id')->index();
@@ -33,6 +33,6 @@ class CreateContentKeyPitchTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('railcontent.table_prefix') . 'content_key_pitch_type');
+        Schema::dropIfExists(config('railcontent.table_prefix') . 'content_key_pitch_types');
     }
 }

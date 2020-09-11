@@ -407,7 +407,7 @@ class ContentJsonControllerOldStructureTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseMissing(
-            config('railcontent.table_prefix') . 'content_topic',
+            config('railcontent.table_prefix') . 'content_topics',
             [
                 'content_id' => $id,
             ]
@@ -1146,7 +1146,7 @@ class ContentJsonControllerOldStructureTest extends RailcontentTestCase
         );
 
         $this->assertDatabaseMissing(
-            config('railcontent.table_prefix') . 'content_topic',
+            config('railcontent.table_prefix') . 'content_topics',
             [
                 'id' => 1,
             ]

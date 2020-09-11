@@ -9,12 +9,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Gedmo\Sortable\Entity\Repository\SortableRepository")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(
- *     name="railcontent_content_exercise",
+ *     name="railcontent_content_exercises",
  *     indexes={
  *         @ORM\Index(name="ec", columns={"exercise_id","content_id"}),
- *         @ORM\Index(name="railcontent_content_exercise_content_id_index", columns={"content_id"}),
- *         @ORM\Index(name="railcontent_content_exercise_exercise_id_index", columns={"exercise_id"}),
- *         @ORM\Index(name="railcontent_content_exercise_position_index", columns={"position"})
+ *         @ORM\Index(name="railcontent_content_exercises_content_id_index", columns={"content_id"}),
+ *         @ORM\Index(name="railcontent_content_exercises_exercise_id_index", columns={"exercise_id"}),
+ *         @ORM\Index(name="railcontent_content_exercises_position_index", columns={"position"})
  *     }
  * )
  *

@@ -719,7 +719,7 @@ class RailcontentTestCase extends BaseTestCase
         $contentInstructor = $this->faker->contentInstructor($contentData);
 
         $contentInstructorId =
-            $this->databaseManager->table('railcontent_content_instructor')
+            $this->databaseManager->table('railcontent_content_instructors')
                 ->insertGetId($contentInstructor);
 
         $contentInstructor['id'] = $contentInstructorId;
@@ -797,7 +797,7 @@ class RailcontentTestCase extends BaseTestCase
         $contentTopic = $this->faker->contentTopic($topic);
 
         $contentTopicId =
-            $this->databaseManager->table('railcontent_content_topic')
+            $this->databaseManager->table('railcontent_content_topics')
                 ->insertGetId($contentTopic);
 
         $contentTopic['id'] = $contentTopicId;

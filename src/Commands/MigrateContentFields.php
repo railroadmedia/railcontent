@@ -117,7 +117,7 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_topic',
+            config('railcontent.table_prefix') . 'content_topics',
             config('railcontent.table_prefix') . 'content_fields',
             'topic'
         );
@@ -150,7 +150,7 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_tag',
+            config('railcontent.table_prefix') . 'content_tags',
             config('railcontent.table_prefix') . 'content_fields',
             'tag'
         );
@@ -218,7 +218,7 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_playlist',
+            config('railcontent.table_prefix') . 'content_playlists',
             config('railcontent.table_prefix') . 'content_fields',
             'playlist'
         );
@@ -251,7 +251,7 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_key',
+            config('railcontent.table_prefix') . 'content_keys',
             config('railcontent.table_prefix') . 'content_fields',
             'key'
         );
@@ -284,7 +284,7 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_key_pitch_type',
+            config('railcontent.table_prefix') . 'content_key_pitch_types',
             config('railcontent.table_prefix') . 'content_fields',
             'key_pitch_type'
         );
@@ -317,7 +317,7 @@ EOT;
 
         $statement = sprintf(
             $sql,
-            config('railcontent.table_prefix') . 'content_exercise',
+            config('railcontent.table_prefix') . 'content_exercises',
             config('railcontent.table_prefix') . 'content_fields',
             'exercise_id'
         );

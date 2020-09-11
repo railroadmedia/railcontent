@@ -14,7 +14,7 @@ class CreateContentPlaylistTable extends Migration
     public function up()
     {
         Schema::connection(config('railcontent.database_connection_name'))->create(
-            config('railcontent.table_prefix') . 'content_playlist',
+            config('railcontent.table_prefix') . 'content_playlists',
             function (Blueprint $table) {
                 $table->increments('id');
                 $table->integer('content_id')->index();
@@ -33,6 +33,6 @@ class CreateContentPlaylistTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('railcontent.table_prefix') . 'content_playlist');
+        Schema::dropIfExists(config('railcontent.table_prefix') . 'content_playlists');
     }
 }
