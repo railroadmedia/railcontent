@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
