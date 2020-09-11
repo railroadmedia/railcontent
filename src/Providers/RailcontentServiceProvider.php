@@ -6,6 +6,7 @@ use Doctrine\Common\Annotations\AnnotationException;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\CachedReader;
+use Doctrine\Common\Cache\PhpFileCache;
 use Doctrine\Common\Cache\RedisCache;
 use Doctrine\Common\EventManager;
 use Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain;
@@ -155,6 +156,9 @@ class RailcontentServiceProvider extends ServiceProvider
         $redisCache = new RedisCache();
         $redisCache->setRedis($redis);
 
+        // file cache
+        $phpFileCache = new PhpFileCache($proxyDir);
+
         // redis cache instance is referenced in laravel container to be reused when needed
         AnnotationRegistry::registerLoader('class_exists');
 
@@ -206,8 +210,8 @@ class RailcontentServiceProvider extends ServiceProvider
         $ormConfiguration->addCustomStringFunction('MATCH_AGAINST','Railroad\\Railcontent\\Extensions\\Doctrine\\MatchAgainst');
         $ormConfiguration->addCustomStringFunction('UNIX_TIMESTAMP','Railroad\\Railcontent\\Extensions\\Doctrine\\UnixTimestamp');
 
-        $ormConfiguration->setMetadataCacheImpl($redisCache);
-        $ormConfiguration->setQueryCacheImpl($redisCache);
+        $ormConfiguration->setMetadataCacheImpl($phpFileCache);
+        $ormConfiguration->setQueryCacheImpl($phpFileCache);
         $ormConfiguration->setResultCacheImpl($redisCache);
         $ormConfiguration->setProxyDir($proxyDir);
         $ormConfiguration->setProxyNamespace('DoctrineProxies');
