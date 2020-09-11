@@ -5,7 +5,6 @@ namespace Railroad\Railcontent\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Support\Collection;
 
 class DeleteContentAndHierarchiesForUserPlaylists extends Command
 {
@@ -46,8 +45,6 @@ class DeleteContentAndHierarchiesForUserPlaylists extends Command
      */
     public function handle()
     {
-        $chunkSize = 500;
-
         $dbConnection = $this->databaseManager->connection(config('railcontent.database_connection_name'));
         $dbConnection->disableQueryLog();
         $pdo = $dbConnection->getPdo();
@@ -61,55 +58,35 @@ class DeleteContentAndHierarchiesForUserPlaylists extends Command
                 ->toDateTimeString()
         );
 
-        $hierarchiesIds = [];
-        $userPlaylistIds = [];
+        $sql = <<<'EOT'
+DELETE FROM %s 
+WHERE id IN (
+SELECT
+    implicitTemp.`id`  
+    FROM (SELECT ch.id FROM `%s` ch 
+JOIN `%s` ci on ch.`parent_id` = ci.`id`
+WHERE
+    ci.`type` IN ('%s')) implicitTemp
+    )
+EOT;
 
-        $dbConnection->table(config('railcontent.table_prefix') . 'content_hierarchy as content_hierarchy')
-            ->select('content_hierarchy.id', 'content_hierarchy.child_id', 'content_hierarchy.parent_id')
-            ->join(
-                config('railcontent.table_prefix') . 'content as content',
-                'content_hierarchy.parent_id',
-                'content.id'
-            )
-            ->where('content.type', 'user-playlist')
-            ->orderBy('content_hierarchy.id','asc')
-            ->chunk(
-                $chunkSize,
-                function (Collection $rows) use (&$hierarchiesIds, &$userPlaylistIds) {
-                    foreach ($rows as $row) {
-                        $hierarchiesIds[] = $row->id;
-                        $userPlaylistIds[] = $row->parent_id;
-                    }
-                }
-            );
-
-
-        if (!empty($hierarchiesIds)) {
-            $deletedContentHierarchyes = 0;
-            foreach (array_chunk($hierarchiesIds, $chunkSize) as $chunk) {
-                $statement = "DELETE FROM " . config('railcontent.table_prefix') . 'content_hierarchy';
-                $statement .= " WHERE id IN (" . implode(",", $chunk) . ")";
-
-                $dbConnection->statement($statement);
-                $deletedContentHierarchyes += $chunkSize;
-                $this->info(
-                    'Deleted '.$deletedContentHierarchyes.' old user playlists from railcontent_content_hierarchy table:::: ' .
-                    Carbon::now()
-                        ->toDateTimeString()
-                );
-            }
-        }
-
-
-        $statement = "DELETE FROM " . config('railcontent.table_prefix') . 'content';
-                        $statement .= " WHERE type = 'user-playlist'";
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content_hierarchy',
+            config('railcontent.table_prefix') . 'content_hierarchy',
+            config('railcontent.table_prefix') . 'content',
+            'user-playlist'
+        );
 
         $dbConnection->statement($statement);
-        
-        $i = count($hierarchiesIds) + count($userPlaylistIds);
+
+        $statement = "DELETE FROM " . config('railcontent.table_prefix') . 'content';
+        $statement .= " WHERE type = 'user-playlist'";
+
+        $dbConnection->statement($statement);
 
         $finish = microtime(true) - $start;
-        $format = "Finished delete user playlists " . $i . ' contents deleted in ' . $finish . ' seconds';
-        $this->info(sprintf($format, $i, $finish));
+        $format = 'Finished delete user playlists in ' . $finish . ' seconds';
+        $this->info(sprintf($format, $finish));
     }
 }
