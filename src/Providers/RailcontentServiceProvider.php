@@ -210,8 +210,13 @@ class RailcontentServiceProvider extends ServiceProvider
         $ormConfiguration->addCustomStringFunction('MATCH_AGAINST','Railroad\\Railcontent\\Extensions\\Doctrine\\MatchAgainst');
         $ormConfiguration->addCustomStringFunction('UNIX_TIMESTAMP','Railroad\\Railcontent\\Extensions\\Doctrine\\UnixTimestamp');
 
-        $ormConfiguration->setMetadataCacheImpl($phpFileCache);
-        $ormConfiguration->setQueryCacheImpl($phpFileCache);
+//        $ormConfiguration->setMetadataCacheImpl($phpFileCache);
+//        $ormConfiguration->setQueryCacheImpl($phpFileCache);
+
+        //TODO: Replace with phpFileCache; now only test if deploy pass with previous cache
+        $ormConfiguration->setMetadataCacheImpl($redisCache);
+        $ormConfiguration->setQueryCacheImpl($redisCache);
+
         $ormConfiguration->setResultCacheImpl($redisCache);
         $ormConfiguration->setProxyDir($proxyDir);
         $ormConfiguration->setProxyNamespace('DoctrineProxies');
