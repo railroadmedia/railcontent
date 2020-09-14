@@ -4,7 +4,6 @@ namespace Railroad\Railcontent\Tests\Fixtures;
 
 use Faker\Generator;
 use Railroad\Railcontent\Contracts\UserInterface;
-use Railroad\Railcontent\Factories\Factory;
 
 class User implements UserInterface
 {
@@ -25,11 +24,10 @@ class User implements UserInterface
         }
 
         $this->displayName = ($displayName) ? $displayName : $faker->name;
-        $this->avatar = ($avatar)? $avatar:$faker->url;
+        $this->avatar = ($avatar) ? $avatar : $faker->url;
     }
 
-    public function getId()
-    : int
+    public function getId(): int
     {
         return $this->id;
     }

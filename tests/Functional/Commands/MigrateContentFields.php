@@ -1,5 +1,7 @@
 <?php
 
+namespace Railroad\Railcontent\Tests\Functional\Commands;
+
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 
 class MigrateContentFields extends RailcontentTestCase

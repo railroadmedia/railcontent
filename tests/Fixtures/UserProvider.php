@@ -6,22 +6,27 @@ use Doctrine\Common\Inflector\Inflector;
 use Illuminate\Support\Facades\DB;
 use League\Fractal\TransformerAbstract;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
+use Railroad\Railcontent\Entities\User;
 
-class UserProvider implements
-    UserProviderInterface
+class UserProvider implements UserProviderInterface
 {
-    CONST RESOURCE_TYPE = 'user';
+    const RESOURCE_TYPE = 'user';
 
     /**
      * @param int $id
-     * @return \Railroad\Railcontent\Entities\User|null
+     * @return User|null
      */
-    public function getRailcontentUserById(int $id): ?\Railroad\Railcontent\Entities\User
+    public function getRailcontentUserById(int $id): ?User
     {
         $user = DB::table('users')->find($id);
 
         if ($user) {
-            return new \Railroad\Railcontent\Entities\User($id, $user->email, $user->display_name, $user->profile_picture_url);
+            return new User(
+                $id,
+                $user->email,
+                $user->display_name,
+                $user->profile_picture_url
+            );
         }
 
         return null;
@@ -29,30 +34,35 @@ class UserProvider implements
 
     /**
      * @param int $id
-     * @return \Railroad\Railcontent\Entities\User|null
+     * @return User|null
      */
-    public function getUserById(int $id): ?\Railroad\Railcontent\Entities\User
+    public function getUserById(int $id): ?User
     {
         $user = DB::table('users')->find($id);
 
         if ($user) {
-            return new \Railroad\Railcontent\Entities\User($id, $user->email, $user->display_name, $user->profile_picture_url);
+            return new User(
+                $id,
+                $user->email,
+                $user->display_name,
+                $user->profile_picture_url
+            );
         }
 
         return null;
     }
 
     /**
-     * @param \Railroad\Railcontent\Entities\User $user
+     * @param User $user
      * @return int
      */
-    public function getRailcontentUserId(\Railroad\Railcontent\Entities\User $user): int
+    public function getRailcontentUserId(User $user): int
     {
         return $user->getId();
     }
 
     /**
-     * @param \Railroad\Railcontent\Entities\User $user
+     * @param User $user
      * @return int
      */
     public function getUserId($user): int
@@ -61,9 +71,9 @@ class UserProvider implements
     }
 
     /**
-     * @return \Railroad\Railcontent\Entities\User|null
+     * @return User|null
      */
-    public function getRailcontentCurrentUser(): ?\Railroad\Railcontent\Entities\User
+    public function getRailcontentCurrentUser(): ?User
     {
         if (!auth()->id()) {
             return null;
@@ -74,9 +84,9 @@ class UserProvider implements
 
 
     /**
-     * @return \Railroad\Railcontent\Entities\User|null
+     * @return User|null
      */
-    public function getCurrentUser(): ?\Railroad\Railcontent\Entities\User
+    public function getCurrentUser(): ?User
     {
         if (!auth()->id()) {
             return null;
@@ -84,6 +94,7 @@ class UserProvider implements
 
         return $this->getRailcontentUserById(auth()->id());
     }
+
     /**
      * @return int|null
      */
@@ -104,7 +115,8 @@ class UserProvider implements
      * @param string $resourceType
      * @return bool
      */
-    public function isTransient(string $resourceType): bool {
+    public function isTransient(string $resourceType): bool
+    {
 
         return $resourceType !== self::RESOURCE_TYPE;
     }
@@ -118,7 +130,8 @@ class UserProvider implements
         $entity,
         string $relationName,
         array $data
-    ): void {
+    ): void
+    {
 
         $setterName = Inflector::camelize('set' . ucwords($relationName));
 
@@ -141,19 +154,22 @@ class UserProvider implements
     /**
      * @param string $email
      * @param string $password
-     * @return \Railroad\Railcontent\Entities\User|null
+     * @return User|null
      */
     public function createRailcontentUser(
         string $email,
         string $password
-    ): ?\Railroad\Railcontent\Entities\User {
+    ): ?User
+    {
 
         $userId = DB::table('users')
-            ->insertGetId([
-                'email' => $email,
-                'password' => $password,
-                'display_name' => $email,
-            ]);
+            ->insertGetId(
+                [
+                    'email' => $email,
+                    'password' => $password,
+                    'display_name' => $email,
+                ]
+            );
 
         return $this->getRailcontentUserById($userId);
     }
@@ -161,14 +177,14 @@ class UserProvider implements
     /**
      * @param int $id
      * @param string $brand
-     * @return array
+     * @return User|null
      */
-    public function getUserByLegacyId(int $id, string $brand): array
+    public function getUserByLegacyId(int $id, string $brand): ?User
     {
-        $user = DB::table('users')->where('legacy_id',$id)->where('brand',$brand)->first();
+        $user = DB::table('users')->where('legacy_id', $id)->where('brand', $brand)->first();
 
         if ($user) {
-            return new \Railroad\Railcontent\Entities\User($id, $user->email);
+            return new User($id, $user->email, $user->display_name, $user->profile_picture_url);
         }
 
         return null;
@@ -178,8 +194,8 @@ class UserProvider implements
      * @param array $ids
      * @return array
      */
-    public function getUsersByIds(array $ids)
-    : array {
+    public function getUsersByIds(array $ids): array
+    {
         // TODO: Implement getUsersByIds() method.
     }
 

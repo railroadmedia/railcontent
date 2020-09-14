@@ -1,6 +1,6 @@
 <?php
 
-namespace Railroad\Railcontent\Tests\Functional\Controllers;
+namespace Railroad\Railcontent\Tests\Integration;
 
 use Illuminate\Http\UploadedFile;
 use Railroad\Railcontent\Tests\RailcontentTestCase;

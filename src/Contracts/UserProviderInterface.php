@@ -41,7 +41,7 @@ interface UserProviderInterface
      * @param string $brand
      * @return array
      */
-    public function getUserByLegacyId(int $id, string $brand): array;
+    public function getUserByLegacyId(int $id, string $brand): ?User;
 
     /**
      * @return User|null

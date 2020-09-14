@@ -1,5 +1,7 @@
 <?php
 
+namespace Railroad\Railcontent\Tests\Integration;
+
 use Railroad\Railcontent\Services\RemoteStorageService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
 

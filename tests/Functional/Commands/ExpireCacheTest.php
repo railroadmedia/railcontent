@@ -1,5 +1,7 @@
 <?php
 
+namespace Railroad\Railcontent\Tests\Functional\Commands;
+
 use Carbon\Carbon;
 use Doctrine\ORM\Cache\Logging\StatisticsCacheLogger;
 use Railroad\Railcontent\Services\ContentService;
