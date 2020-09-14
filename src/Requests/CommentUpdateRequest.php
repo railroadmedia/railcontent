@@ -117,6 +117,7 @@ class CommentUpdateRequest extends FormRequest
         return $this->only(
             [
                 'data.attributes.comment',
+                'data.attributes.conversation_status',
                 'data.attributes.display_name',
                 'data.relationships.content.id',
                 'data.relationships.parent.id',

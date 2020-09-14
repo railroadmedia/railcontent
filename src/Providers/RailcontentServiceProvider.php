@@ -43,10 +43,12 @@ use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
 use Railroad\Railcontent\Commands\MigrateContentVideos;
 use Railroad\Railcontent\Commands\MigrateUserPlaylist;
 use Railroad\Railcontent\Commands\OrphanContent;
+use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\ContentDeleted;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Hydrators\RailcontentHydrator;
+use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\ContentEventListener;
 use Railroad\Railcontent\Listeners\SearchableListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
@@ -84,6 +86,7 @@ class RailcontentServiceProvider extends ServiceProvider
             ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
             ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
             UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
+            CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
         ];
 
         parent::boot();

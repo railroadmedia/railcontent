@@ -7,6 +7,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Entities\Behaviour\SearchableEntityInterface;
+use Exception;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentInstructor;
@@ -62,19 +63,22 @@ class SearchableListener implements EventSubscriber
                     (($oEntity instanceof ContentHierarchy) ? $oEntity->getChild() : $oEntity->getContent());
             $contentID = $content->getId();
 
-            //delete document
-            $client->deleteByQuery(
-                [
-                    'index' => 'content',
-                    'body' => [
-                        'query' => [
-                            'match' => [
-                                'id' => $content->getId(),
+            //delete document if it exists
+            try {
+                $client->deleteByQuery(
+                    [
+                        'index' => 'content',
+                        'body' => [
+                            'query' => [
+                                'match' => [
+                                    'id' => $content->getId(),
+                                ],
                             ],
                         ],
-                    ],
-                ]
-            );
+                    ]
+                );
+            } catch (Exception $exception) {
+            }
 
             //get progress on content
             $userContentPogress =

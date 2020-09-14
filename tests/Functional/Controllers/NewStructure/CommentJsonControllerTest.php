@@ -551,6 +551,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $page = 2;
         $limit = 3;
         $totalNumber = $this->faker->numberBetween(10, ($limit + 25));
+        $user = $this->fakeUser();
 
         $content = $this->fakeContent(
             1,
@@ -564,6 +565,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             $comments[$i] = $this->fakeComment(
                 [
                     'content_id' => $content[0]->getId(),
+                    'user_id' => $user['id'],
                     'parent_id' => null,
                     'deleted_at' => null,
                 ]
@@ -641,6 +643,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
     public function test_pull_comments_ordered_by_like_count()
     {
+        $user = $this->fakeUser();
+
         // create content
         $content = $this->fakeContent(
             1,
@@ -657,6 +661,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             $comments[$i] = $this->fakeComment(
                 [
                     'content_id' => $content[0]->getId(),
+                    'user_id' => $user['id'],
                     'deleted_at' => null,
                     'parent_id' => null,
                 ]
@@ -766,6 +771,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $page = 1;
         $limit = 3;
         $totalNumber = 10;
+        $user = $this->fakeUser();
 
         $type = $this->faker->randomElement(config('railcontent.commentable_content_types'));
 
@@ -781,6 +787,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             $comment[$i] = $this->fakeComment(
                 [
                     'content_id' => $content[0]->getId(),
+                    'user_id' => $user['id'],
                     'comment' => $this->faker->text,
                     'deleted_at' => null,
                     'parent_id' => null,
@@ -791,6 +798,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             $this->fakeComment(
                 [
                     'content_id' => $content[0]->getId(),
+                    'user_id' => $user['id'],
                     'parent_id' => $comment[0]['id'],
                     'deleted_at' => null,
                 ]
@@ -844,6 +852,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
                     'content_id' => $contentForBrand1[0]->getId(),
                     'deleted_at' => null,
                     'parent_id' => null,
+                    'user_id' => $user['id'],
                 ]
             );
         }
@@ -853,6 +862,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
                     'content_id' => $ContentBrandConfig[0]->getId(),
                     'deleted_at' => null,
                     'parent_id' => null,
+                    'user_id' => $user['id'],
                 ]
             );
         }
