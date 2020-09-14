@@ -580,11 +580,13 @@ class Content extends ArrayExpressible
     public function getElasticData()
     {
         $topics = [];
+
         foreach ($this->getTopic() as $contentTopic) {
             $topics[] = $contentTopic->getTopic();
         }
 
         $styles = [];
+
         foreach ($this->getStyles() as $contentStyle) {
             $styles[] = $contentStyle->getStyle();
         }
@@ -598,8 +600,7 @@ class Content extends ArrayExpressible
             'brand' => $this->getBrand(),
             'style' => $styles,
             'content_type' => $this->getType(),
-            'published_on' => $this->getPublishedOn()
-                ->toDateTimeString(),
+            'published_on' => $this->getPublishedOn(),
             'topic' => $topics,
             'bpm' => $this->getBpm(),
             'staff_pick_rating' => $this->getStaffPickRating(),

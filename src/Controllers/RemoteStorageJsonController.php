@@ -40,7 +40,7 @@ class RemoteStorageJsonController extends Controller
 
         if ($this->remoteStorageService->put($target, $request->file('file'))) {
             return response()->json(
-                ['data' => [['url' => 'https://' . config('railcontent.awsCloudFront') . '/' . $target]]],
+                ['data' => [['url' => 'https://' . config('railcontent.aws_cloud_front_url_prefix') . '/' . $target]]],
                 201
             );
         }

@@ -14,7 +14,10 @@ use Tymon\JWTAuth\Http\Middleware\RefreshToken;
 
 return [
     // brands
+    // the brand of this installation
     'brand' => 'brand',
+
+    // all the brands available via the api
     'available_brands' => ['brand', 'drumeo'],
 
     // cache
@@ -23,10 +26,20 @@ return [
     'cache_prefix' => 'railcontent',
     'cache_driver' => 'redis',
 
+    // redis
+    'redis_host' => 'redis',
+    'redis_port' => 6379,
+
     // database
     'database_connection_name' => 'mysql',
     'data_mode' => 'host',
     'table_prefix' => 'railcontent_',
+    'database_name' => 'railcontent_testing',
+    'database_user' => 'root',
+    'database_password' => 'root',
+    'database_host' => 'mysql',
+    'database_driver' => 'pdo_mysql',
+    'database_in_memory' => false,
 
     // languages
     'default_language' => 'en-US',
@@ -45,17 +58,13 @@ return [
     'elastic_search_port' => 9200,
     'elastic_search_transport' => 'Http',
 
-    // database
-    'database_name' => 'mydb',
-    'database_user' => 'root',
-    'database_password' => 'root',
-    'database_host' => 'mysql',
-    'database_driver' => 'pdo_mysql',
-    'database_in_memory' => false,
-
-    // cache
-    'redis_host' => 'redis',
-    'redis_port' => 6379,
+    // doctrine entities
+    'entities' => [
+        [
+            'path' => __DIR__ . '/../src/Entities',
+            'namespace' => 'Railroad\Railcontent\Entities',
+        ],
+    ],
 
     // if you have any of these middleware classes in your global http kernel, they must be removed from this array
     'controller_middleware' => [
@@ -66,7 +75,7 @@ return [
         VersionMiddleware::class,
     ],
 
-    //middleware for API requests
+    // middleware for API requests
     'api_middleware' => [
         RefreshToken::class,
         VersionMiddleware::class,
@@ -74,6 +83,9 @@ return [
 
     // routes
     'autoload_all_routes' => true,
+    'all_routes_middleware' => [],
+    'user_routes_middleware' => [],
+    'administrator_routes_middleware' => [],
     'route_middleware_public_groups' => ['railcontent_public'],
     'route_middleware_logged_in_groups' => ['railcontent_logged_in', VersionMiddleware::class],
     'route_middleware_admin_groups' => ['railcontent_admin'],
@@ -124,13 +136,13 @@ return [
     ],
 
     // aws integration
-    'awsS3_remote_storage' => [
+    'aws_remote_storage_s3_credentials' => [
         'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
         'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
         'region' => env('AWS_S3_REMOTE_STORAGE_REGION'),
         'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET'),
     ],
-    'awsCloudFront' => 'd1923uyy6spedc.cloudfront.net',
+    'aws_cloud_front_url_prefix' => 'd1923uyy6spedc.cloudfront.net',
 
     // search
     'searchable_content_types' => ['recordings', 'courses'],
@@ -153,6 +165,8 @@ return [
     ],
 
     // progress bubbling
+    // if a content children all get complete or one of them is started, the parent will automatically
+    // be started/completed as well
     'allowed_types_for_bubble_progress' => [
         'started' => [
             'course',
@@ -212,15 +226,9 @@ return [
     // event to job listeners/map
     'event_to_job_map' => [
 
-    ],
-
-    'entities' => [
-        [
-            'path' => __DIR__ . '/../src/Entities',
-            'namespace' => 'Railroad\Railcontent\Entities',
         ],
-    ],
 
+    // content details
     'shows' => [
         'live' => [
             'title' => 'Live',

@@ -43,7 +43,7 @@ class RemoteStorageJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(201, $response->status());
 
         $this->assertEquals(
-            'https://' . config('railcontent.awsCloudFront') . $filenameToUseTestDirectoryPrefixAdded,
+            'https://' . config('railcontent.aws_cloud_front_url_prefix') . $filenameToUseTestDirectoryPrefixAdded,
             json_decode($response->getContent())->results
         );
     }

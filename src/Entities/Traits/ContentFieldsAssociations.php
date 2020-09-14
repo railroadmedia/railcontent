@@ -18,48 +18,48 @@ trait ContentFieldsAssociations
     /**
      * @ORM\OneToMany(targetEntity="ContentExercise", mappedBy="content", cascade={"persist"})
      */
-    protected $exercise;
+    protected $exercise = [];
 
     /**
      * @ORM\OneToMany(targetEntity="ContentInstructor",mappedBy="content", cascade={"persist","remove"})
      */
-    protected $instructor;
+    protected $instructor = [];
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentTopic", mappedBy="content",
      *     cascade={"persist","remove"})
      */
-    protected $topic;
+    protected $topic = [];
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentTag", mappedBy="content",
      *     cascade={"persist","remove"})
      */
-    protected $tag;
+    protected $tag = [];
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentStyle", mappedBy="content",
      *     cascade={"persist","remove"})
      */
-    protected $styles;
+    protected $styles = [];
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentKey", mappedBy="content",
      *     cascade={"persist","remove"})
      */
-    protected $key;
+    protected $key = [];
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentKeyPitchType", mappedBy="content",
      *     cascade={"persist","remove"})
      */
-    protected $keyPitchType;
+    protected $keyPitchType = [];
 
     /**
      * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentPlaylist", mappedBy="content",
      *     cascade={"persist","remove"})
      */
-    protected $playlist;
+    protected $playlist = [];
 
     /**
      * @ORM\OneToOne(targetEntity="Railroad\Railcontent\Entities\Content")

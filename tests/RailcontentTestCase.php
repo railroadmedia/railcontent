@@ -302,7 +302,7 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('auth.providers.users.model', User::class);
 
         $app['config']->set(
-            'railcontent.awsS3_remote_storage',
+            'railcontent.aws_remote_storage_s3_credentials',
             [
                 'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
                 'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
@@ -311,7 +311,7 @@ class RailcontentTestCase extends BaseTestCase
             ]
         );
 
-        $app['config']->set('railcontent.awsCloudFront', 'd1923uyy6spedc.cloudfront.net');
+        $app['config']->set('railcontent.aws_cloud_front_url_prefix', 'd1923uyy6spedc.cloudfront.net');
 
         $app['config']->set(
             'database.redis',
