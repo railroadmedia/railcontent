@@ -174,7 +174,7 @@ class RailcontentTestCase extends BaseTestCase
 
         $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
         $apiDocConfig = require(__DIR__ . '/../config/apidoc.php');
-        $oldResponseMapping =  require(__DIR__ . '/../config/oldResponseMapping.php');
+        $oldResponseMapping =  require(__DIR__ . '/../config/railcontent_legacy_response_mapping.php');
 
         $app['config']->set('app.env', 'testing');
         $app['config']->set('app.debug', true);
