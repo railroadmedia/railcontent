@@ -6,7 +6,7 @@ return [
      * The output path for the generated documentation.
      * This path should be relative to the root of your application.
      */
-    'output' => '../../../docs-new',
+    'output' => '../../../docs/v1.0',
 
     /*
      * The router to be used (Laravel or Dingo).
