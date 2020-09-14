@@ -47,14 +47,6 @@ class CommentRepository extends EntityRepository
     public static $availableUserId = false;
 
     /**
-     * If it's true all the comments (inclusive the comments marked as deleted) will be pulled.
-     * If it's false, only the comments that are not marked as deleted will be pulled.
-     *
-     * @var bool
-     */
-    public static $pullSoftDeletedComments = false;
-
-    /**
      * If this is false comment with any status will be pulled. If its defined, only comments with the given status will
      * be pulled.
      *
@@ -62,12 +54,23 @@ class CommentRepository extends EntityRepository
      */
     public static $conversationStatus = false;
 
+    /**
+     * If it's true all the comments (inclusive the comments marked as deleted) will be pulled.
+     * If it's false, only the comments that are not marked as deleted will be pulled.
+     *
+     * @var bool
+     */
+    public static $pullSoftDeletedComments = false;
+
     protected $page;
     protected $limit;
     protected $orderBy;
     protected $orderDirection;
     protected $orderTableName;
     protected $orderTable;
+
+    const CONVERSATION_STATUS_OPEN = 'open';
+    const CONVERSATION_STATUS_CLOSED = 'closed';
 
     /**
      * CommentRepository constructor.

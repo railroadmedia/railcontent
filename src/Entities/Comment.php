@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Railroad\Railcontent\Contracts\UserInterface;
 use Railroad\Railcontent\Entities\Traits\DecoratedFields;
+use Railroad\Railcontent\Repositories\CommentRepository;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\CommentRepository")
@@ -58,7 +59,7 @@ class Comment
      * @ORM\Column(type="string", name="conversation_status")
      * @var string
      */
-    protected $conversationStatus;
+    protected $conversationStatus = CommentRepository::CONVERSATION_STATUS_OPEN;
 
     /**
      * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content")
