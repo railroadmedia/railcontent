@@ -43,15 +43,32 @@ class ContentOldStructureTransformer extends TransformerAbstract
                             if ($valExtra) {
                                 foreach ($valExtra as $extraItemVal) {
                                     $valueExtraItem = $val->getProperty($extraItemVal);
+
                                     if (is_array($valueExtraItem)) {
 
                                         foreach ($valueExtraItem as $index => $item2) {
                                             if (is_object($item2) && ($item2->getId() != $content->getId())) {
-                                                $extraPropertiesItem[$extraItemVal][$index] =
+                                                $extraForItem =
                                                     $serializer->serializeToUnderScores(
                                                         $item2,
                                                         $entityManager->getClassMetadata(get_class($item2))
                                                     );
+                                                $fields=[];
+                                                $data=[];
+                                                if ($item2 instanceof Content) {
+                                                    $fields = [
+                                                        'fields' => $this->includeFields($item2)
+                                                            ->getData(),
+                                                    ];
+
+                                                    $data =
+                                                        Fractal::create()
+                                                            ->collection($item2->getData())
+                                                            ->transformWith(ContentDataOldStructureTransformer::class)
+                                                            ->toArray();
+                                                }
+                                                $extraPropertiesItem[$extraItemVal][$index] = array_merge($extraForItem, $fields, $data);
+
                                             } else {
                                                 $extraPropertiesItem[$extraItemVal][$index] = $item2;
                                             }
@@ -87,6 +104,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
                                     $data = Fractal::create()->collection($val->getData())->transformWith(ContentDataOldStructureTransformer::class)->toArray();
 
                                     $extraProperties[$item][] = array_merge($extraForItem, $fields, $data);
+
                                 } else {
                                     $extraProperties[$item][] = $extraForItem;
                                 }
@@ -150,12 +168,6 @@ class ContentOldStructureTransformer extends TransformerAbstract
 
         $serialized = $serializer->serializeToUnderScores($content, $entityManager->getClassMetadata(Content::class));
 
-        //        if ($content->getParent()
-        //                ->count() > 0) {
-        //            $extraProperties['position'] = array_first(
-        //                $content->getParent()
-        //            )->getChildPosition();
-        //        }
         foreach (config('oldResponseMapping.extraProperties', []) as $extraKey) {
             unset($serialized[$extraKey]);
         }
