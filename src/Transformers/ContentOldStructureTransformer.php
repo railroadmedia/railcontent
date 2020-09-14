@@ -10,6 +10,7 @@ use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Serializer\OldStyleWithoutDataForArraySerializer;
 use Spatie\Fractal\Fractal;
 
 class ContentOldStructureTransformer extends TransformerAbstract
@@ -43,10 +44,14 @@ class ContentOldStructureTransformer extends TransformerAbstract
                             if ($valExtra) {
                                 foreach ($valExtra as $extraItemVal) {
                                     $valueExtraItem = $val->getProperty($extraItemVal);
-
-                                    if (is_array($valueExtraItem)) {
-
-                                        foreach ($valueExtraItem as $index => $item2) {
+                                    if($extraItemVal == 'comments'){
+                                        $extraPropertiesItem[$extraItemVal] = Fractal::create()
+                                            ->collection($valueExtraItem)
+                                            ->transformWith(CommentOldStructureTransformer::class)
+                                            ->serializeWith(OldStyleWithoutDataForArraySerializer::class)
+                                            ->toArray();
+                                    } else if (is_array($valueExtraItem)) {
+                                       foreach ($valueExtraItem as $index => $item2) {
                                             if (is_object($item2) && ($item2->getId() != $content->getId())) {
                                                 $extraForItem =
                                                     $serializer->serializeToUnderScores(
