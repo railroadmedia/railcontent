@@ -194,6 +194,7 @@ class MigrateContentToElasticsearch extends Command
                             'bpm' => $row->bpm,
                             'show_in_new_feed' => $row->show_in_new_feed,
                             'published_on' => $row->published_on,
+                            'created_on' => $row->created_on,
                             'topic' => (!$topics->isEmpty()) ? array_map(
                                 'strtolower',
                                 $topics->pluck('topic')

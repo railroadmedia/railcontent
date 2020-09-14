@@ -58,6 +58,7 @@ class ElasticService
                         'artist' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                         'bpm' => ['type' => 'text'],
                         'published_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
+                        'created_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
                         'show_in_new_feed'=>['type' => 'integer'],
                     ],
                 ],

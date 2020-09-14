@@ -147,7 +147,7 @@ class RailcontentServiceProvider extends ServiceProvider
         if (app()->runningUnitTests()) {
             $proxyDir = sys_get_temp_dir();
         } else {
-            $proxyDir = sys_get_temp_dir() . '/railroad/railcontent/proxies';
+            $proxyDir = sys_get_temp_dir() . '/railroad/railcontent-v1.0/proxies';
         }
 
         // setup redis

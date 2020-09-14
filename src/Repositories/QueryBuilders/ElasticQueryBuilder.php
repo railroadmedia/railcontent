@@ -247,6 +247,30 @@ class ElasticQueryBuilder
                 ];
                 break;
 
+            case '-created_on':
+                $this->sort[] = [
+                    'created_on' => 'desc',
+                ];
+                break;
+
+            case 'created_on':
+                $this->sort[] = [
+                    'created_on' => 'asc',
+                ];
+                break;
+
+            case '-published_on':
+                $this->sort[] = [
+                    'published_on' => 'desc',
+                ];
+                break;
+
+            case 'published_on':
+                $this->sort[] = [
+                    'published_on' => 'asc',
+                ];
+                break;
+
             case 'oldest':
                 $this->sort[] = [
                     'published_on' => 'asc',
