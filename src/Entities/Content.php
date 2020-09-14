@@ -584,6 +584,11 @@ class Content extends ArrayExpressible
             $topics[] = $contentTopic->getTopic();
         }
 
+        $styles = [];
+        foreach ($this->getStyles() as $contentStyle) {
+            $styles[] = $contentStyle->getStyle();
+        }
+
         return [
             'id' => $this->getId(),
             'title' => utf8_encode($this->getTitle()),
@@ -591,7 +596,7 @@ class Content extends ArrayExpressible
             'difficulty' => $this->getDifficulty(),
             'status' => $this->getStatus(),
             'brand' => $this->getBrand(),
-            'style' => $this->getStyle(),
+            'style' => $styles,
             'content_type' => $this->getType(),
             'published_on' => $this->getPublishedOn()
                 ->toDateTimeString(),
