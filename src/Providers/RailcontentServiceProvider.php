@@ -157,7 +157,7 @@ class RailcontentServiceProvider extends ServiceProvider
         $redisCache->setRedis($redis);
 
         // file cache
-        $phpFileCache = new PhpFileCache($proxyDir);
+       // $phpFileCache = new PhpFileCache($proxyDir);
 
         // redis cache instance is referenced in laravel container to be reused when needed
         AnnotationRegistry::registerLoader('class_exists');
