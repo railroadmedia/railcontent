@@ -40,7 +40,7 @@
     "google/apiclient":"^2.2",
     "railroad/resora": ">=1.0.10 <1.1",
     "railroad/permissions": "^1.0",
-    "railroad/usora": "2.0.*",
+    "railroad/usora": "dev-v2.0-skill as v2.0.68",
     "ext-redis": "*",
     "railroad/doctrine": "^0.0",
     "railroad/doctrine-array-hydrator": "^1.0",
@@ -57,9 +57,6 @@
     "filp/whoops":"~2.1"
   },
   "autoload": {
-    "classmap": [
-      "database/seeds"
-    ],
     "psr-4": {
       "Railroad\\Railcontent\\": "src"
     }
