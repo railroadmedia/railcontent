@@ -330,8 +330,12 @@ class ContentRepository extends EntityRepository
 
                     foreach ($results as $result) {
 
-                        $getterName = Inflector::camelize('get' . ucwords(camel_case($requiredFieldData)));
+                        if ($requiredFieldData == 'styles') {
+                            $getterName = 'getStyle';
+                        } else {
 
+                            $getterName = Inflector::camelize('get' . ucwords(camel_case($requiredFieldData)));
+                        }
                         $value = call_user_func([$result, $getterName]);
 
                         if ($requiredFieldData == 'instructor') {
@@ -361,8 +365,7 @@ class ContentRepository extends EntityRepository
                     foreach ($contents as $content) {
 
                         $value = call_user_func([$content, $getterName]);
-                        if ($value &&
-                            !in_array(
+                        if ($value && !in_array(
                                 strtolower($value),
                                 array_map("strtolower", $filteredContents[$requiredFieldData] ?? [])
                             )) {
@@ -646,7 +649,7 @@ class ContentRepository extends EntityRepository
 
         $userStates = array_merge($this->requiredUserStates, $this->includedUserStates);
         if (!empty($userStates)) {
-            foreach($userStates as $state) {
+            foreach ($userStates as $state) {
                 $active['user_states'][] = $state['state'];
             }
         }
