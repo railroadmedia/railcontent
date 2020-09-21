@@ -2,9 +2,7 @@
 
 namespace Railroad\Railcontent\Transformers;
 
-use Doctrine\ORM\EntityManager;
 use League\Fractal\TransformerAbstract;
-use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\ContentData;
 
 class ContentDataOldStructureTransformer extends TransformerAbstract
@@ -15,19 +13,35 @@ class ContentDataOldStructureTransformer extends TransformerAbstract
      */
     public function transform(ContentData $contentData)
     {
-        $entityManager = app()->make(EntityManager::class);
+        $data = $this->convert_smart_quotes($contentData->getValue());
 
-        $serializer = new BasicEntitySerializer();
+        return [
+            'content_id' => $contentData->getContent()
+                ->getId(),
+            'key' => $contentData->getKey(),
+            'value' => mb_convert_encoding($data, 'UTF-8', 'UTF-8'),
+            'position' => $contentData->getPosition(),
+        ];
+    }
 
-        $serializedEntity = $serializer->serializeToUnderScores($contentData, $entityManager->getClassMetadata(ContentData::class));
+    function convert_smart_quotes($string)
+    {
+        $search = [
+            chr(145),
+            chr(146),
+            chr(147),
+            chr(148),
+            chr(151),
+        ];
 
-            return array_merge(
-                $serializedEntity,
-                [
-                    'content_id' => $contentData->getContent()
-                        ->getId(),
-                ]
-            );
-       
+        $replace = [
+            "'",
+            "'",
+            '"',
+            '"',
+            '-',
+        ];
+
+        return str_replace($search, $replace, $string);
     }
 }
