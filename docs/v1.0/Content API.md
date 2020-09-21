@@ -28,7 +28,7 @@
 |body|filter[required_user_playlists]|    |All returned contents are required to be inside these authenticated users playlists. Value format is: name.|
 |body|filter[included_user_playlists]|    |Contents that are in any of the authenticated users playlists will be returned. The first included user playlist is the same as a required user playlist but all included playlist after the first act inclusively. Value format is: name.|
 |body|slug_hierarchy|    ||
-|body|sort|    |Default:-published_on.|
+|body|sort|    |Default:newest|Can be any of the following: 'newest', ‘oldest’, ‘popularity’, ‘trending’, ‘relevance’ and 'slug'|
 |body|page|    |Which page to load, will be {limit} long.By default:1.|
 |body|limit|    |How many to load per page. By default:10.|
 
