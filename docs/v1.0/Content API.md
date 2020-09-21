@@ -52,7 +52,7 @@ $.ajax({
         "included_user_playlists": []
     },
     "slug_hierarchy": [],
-    "sort": "-published_on",
+    "sort": "newest",
     "page": 1,
     "limit": 10
 }
