@@ -98,10 +98,10 @@ class ContentData extends ArrayExpressible
     }
 
     /**
-     * @return integer
+     * @return integer/null
      */
     public function getPosition()
-    : int
+    : ?int
     {
         return $this->position;
     }
