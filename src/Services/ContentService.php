@@ -957,7 +957,9 @@ class ContentService
 
         CacheHelper::deleteUserFields(null, 'contents');
 
-        event(new ContentCreated($id));
+        app()->terminating(function () use ($id) {
+            event(new ContentCreated($id));
+        });
 
         return $this->getById($id);
     }
@@ -978,7 +980,9 @@ class ContentService
 
         $this->contentRepository->update($id, $data);
 
-        event(new ContentUpdated($id, $content, $data));
+        app()->terminating(function () use ($data, $content, $id) {
+            event(new ContentUpdated($id, $content, $data));
+        });
 
         CacheHelper::deleteCache('content_' . $id);
 
