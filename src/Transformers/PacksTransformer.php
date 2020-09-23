@@ -3,31 +3,34 @@
 namespace Railroad\Railcontent\Transformers;
 
 use League\Fractal\TransformerAbstract;
+use Railroad\Railcontent\Serializer\OldStyleWithoutDataForArraySerializer;
+use Spatie\Fractal\Fractal;
 
 class PacksTransformer extends TransformerAbstract
 {
 
     public function transform(array $packs)
     {
-        $myPacks = [];
-        $morePacks = [];
-        $transformer = new ContentOldStructureTransformer();
+        $packs['myPacks'] =
+            Fractal::create()
+                ->collection($packs['myPacks'])
+                ->transformWith(ContentOldStructureTransformer::class)
+                ->serializeWith(OldStyleWithoutDataForArraySerializer::class)
+                ->toArray();
 
-        foreach($packs['myPacks'] as $myPack){
+        $packs['morePacks'] =
+            Fractal::create()
+                ->collection($packs['morePacks'])
+                ->transformWith(ContentOldStructureTransformer::class)
+                ->serializeWith(OldStyleWithoutDataForArraySerializer::class)
+                ->toArray();
 
-            $myPacks[] = $transformer->transform($myPack);
-        }
-
-        foreach($packs['morePacks'] as $morePack){
-
-            $morePacks[] = $transformer->transform($morePack);
-        }
-
-        $packs['myPacks'] = $myPacks;
-
-        $packs['morePacks'] = $morePacks;
-
-        $packs['topHeaderPack'] = $transformer->transform($packs['topHeaderPack']);
+        $packs['topHeaderPack'] =
+            Fractal::create()
+                ->item($packs['topHeaderPack'])
+                ->transformWith(ContentOldStructureTransformer::class)
+                ->serializeWith(OldStyleWithoutDataForArraySerializer::class)
+                ->toArray();
 
         return $packs;
     }
