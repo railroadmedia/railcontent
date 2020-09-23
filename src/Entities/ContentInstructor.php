@@ -59,7 +59,7 @@ class ContentInstructor
     }
 
     /**
-     * @return mixed
+     * @return Content
      */
     public function getInstructor()
     {

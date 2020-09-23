@@ -124,7 +124,21 @@ trait ContentFieldsAssociations
     }
 
     /**
-     * @return mixed
+     * @return string
+     */
+    public function getInstructorsNamesString()
+    {
+        $names = [];
+
+        foreach ($this->getInstructor() as $contentInstructor) {
+            $names[] = $contentInstructor->getInstructor()->getName();
+        }
+
+        return implode(', ', $names);
+    }
+
+    /**
+     * @return ContentInstructor[]
      */
     public function getInstructor()
     {
