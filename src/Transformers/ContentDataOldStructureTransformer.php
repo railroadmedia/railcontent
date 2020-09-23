@@ -16,6 +16,7 @@ class ContentDataOldStructureTransformer extends TransformerAbstract
         $data = $this->convert_smart_quotes($contentData->getValue());
 
         return [
+            'id' => $contentData->getId(),
             'content_id' => $contentData->getContent()
                 ->getId(),
             'key' => $contentData->getKey(),
