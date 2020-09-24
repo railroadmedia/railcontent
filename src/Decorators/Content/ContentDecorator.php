@@ -16,7 +16,7 @@ class ContentDecorator implements DecoratorInterface
 
         foreach ($entities as $entity) {
 
-            $entity->createProperty('length_in_seconds', $entity->fetch('video.length_in_seconds'));
+            $entity->setLengthInSeconds($entity->fetch('video.length_in_seconds'));
         }
 
         return $entities;
