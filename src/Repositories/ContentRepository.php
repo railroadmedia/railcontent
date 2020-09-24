@@ -583,7 +583,7 @@ class ContentRepository extends EntityRepository
                 $lifetime
             );
 
-        return $qb->select(config('railcontent.table_prefix') . 'content', 'progress')
+        return $qb->select(config('railcontent.table_prefix') . 'content', 'progress', 'cd')
             ->from($this->getEntityName(), config('railcontent.table_prefix') . 'content')
             ->leftJoin(
                 config('railcontent.table_prefix') . 'content' . '.userProgress',
@@ -591,6 +591,7 @@ class ContentRepository extends EntityRepository
                 'WITH',
                 'progress.user = :userId'
             )
+            ->leftJoin(config('railcontent.table_prefix') . 'content' . '.data', 'cd')
             ->setParameter('userId', auth()->id());
     }
 
