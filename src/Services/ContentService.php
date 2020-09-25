@@ -999,7 +999,9 @@ class ContentService
                         ->getQuery()
                         ->getResult();
                 foreach ($includedContentsByState as $progress) {
-                    $includedContentsIdsByState[] = $progress->getContent()->getId();
+                    $includedContentsIdsByState[] =
+                        $progress->getContent()
+                            ->getId();
                 }
             }
 
@@ -1011,17 +1013,22 @@ class ContentService
                         ->setParameter('userId', auth()->id());
 
                 foreach ($requiredUserStates as $state) {
-                    $qb->andWhere('up.state  = :state')->setParameter('state', $state);
+                    $qb->andWhere('up.state  = :state')
+                        ->setParameter('state', $state);
                 }
 
-                $requiredContentsByState = $qb->getQuery()->getResult();
+                $requiredContentsByState =
+                    $qb->getQuery()
+                        ->getResult();
                 foreach ($requiredContentsByState as $progress) {
-                    $requiredContentIdsByState[] = $progress->getContent()->getId();
+                    $requiredContentIdsByState[] =
+                        $progress->getContent()
+                            ->getId();
                 }
             }
 
             $permissionIds = [];
-            if(auth()->id()) {
+            if (auth()->id()) {
                 $userPermissions = $this->userPermissionRepository->getUserPermissions(auth()->id(), true);
                 foreach ($userPermissions as $permission) {
                     $permissionIds[] =
@@ -1030,15 +1037,21 @@ class ContentService
                 }
             }
 
-            switch(config('railcontent.brand')) {
+            switch (config('railcontent.brand')) {
                 case 'drumeo':
-                    ElasticQueryBuilder::$skillLevel = $this->userProvider->getCurrentUser()->getDrumsSkillLevel();
+                    ElasticQueryBuilder::$skillLevel =
+                        $this->userProvider->getCurrentUser()
+                            ->getDrumsSkillLevel();
                     break;
                 case 'pianote':
-                    ElasticQueryBuilder::$skillLevel =$this->userProvider->getCurrentUser()->getPianoSkillLevel();
+                    ElasticQueryBuilder::$skillLevel =
+                        $this->userProvider->getCurrentUser()
+                            ->getPianoSkillLevel();
                     break;
                 case 'guitareo':
-                    ElasticQueryBuilder::$skillLevel =$this->userProvider->getCurrentUser()->getGuitarSkillLevel();
+                    ElasticQueryBuilder::$skillLevel =
+                        $this->userProvider->getCurrentUser()
+                            ->getGuitarSkillLevel();
                     break;
             }
 
@@ -1107,13 +1120,14 @@ class ContentService
                         $this->contentRepository->build()
                             ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
                             ->setParameter('ids', $filterOptions['instructors'])
-                            ->orderBy(config('railcontent.table_prefix') . 'content.slug','asc')
+                            ->orderBy(config('railcontent.table_prefix') . 'content.slug', 'asc')
                             ->getQuery()
                             ->setCacheable(true)
                             ->setCacheRegion('pull')
                             ->getResult();
-
-                    $filterOptions['instructors'] = $instructors;
+                    
+                    unset($filterOptions['instructors']);
+                    $filterOptions['instructor'] = $instructors;
                 }
 
                 $filters = $filterOptions;
@@ -1711,11 +1725,14 @@ class ContentService
 
         foreach ($children as $child) {
             $childDifficulty = $child->getDifficulty() ?? 0;
-            $initialTotalXp = $childrenTotalXP[$child->getParentContent()
-                ->getId()]??0;
+            $initialTotalXp =
+                $childrenTotalXP[$child->getParentContent()
+                    ->getId()] ?? 0;
             $childrenTotalXP[$child->getParentContent()
-                ->getId()] = $initialTotalXp + (($child->getTotalXp() && (int)$child->getTotalXp() != 0) ? $child->getTotalXp() :
-                $this->getDefaultXP($child->getType(), $childDifficulty));
+                ->getId()] =
+                $initialTotalXp +
+                (($child->getTotalXp() && (int)$child->getTotalXp() != 0) ? $child->getTotalXp() :
+                    $this->getDefaultXP($child->getType(), $childDifficulty));
         }
 
         $parents =
@@ -1877,8 +1894,7 @@ class ContentService
              */
             foreach ($parents ?? [] as $parent) {
                 foreach (
-                    $this->getByParentIdWhereTypeIn($parent->getId(), ['semester-pack-lesson'])
-                         as $lesson
+                    $this->getByParentIdWhereTypeIn($parent->getId(), ['semester-pack-lesson']) as $lesson
                 ) {
                     $idsOfChildrenOfSelectSemesterPacks[$parent->getSlug()][] = $lesson->getId();
                 }
@@ -1922,10 +1938,10 @@ class ContentService
 
         if ($includeSemesterPackLessons) {
             $culledSemesterPackLessons = collect($culledSemesterPackLessons ?? []);
-            $scheduleEvents =array_merge($scheduleEvents, $culledSemesterPackLessons);
-                $scheduleEvents->merge($culledSemesterPackLessons)
-                    ->sort($compareFunc)
-                    ->values();
+            $scheduleEvents = array_merge($scheduleEvents, $culledSemesterPackLessons);
+            $scheduleEvents->merge($culledSemesterPackLessons)
+                ->sort($compareFunc)
+                ->values();
         }
 
         ContentRepository::$availableContentStatues = $oldStatuses;
@@ -1945,7 +1961,6 @@ class ContentService
 
         return $scheduleEvents;
     }
-
 
     /**
      * @param $parentSlug
