@@ -62,8 +62,11 @@ class ResponseService extends FractalResponseService
             $activFilters[$key] = $filterOption;
             foreach ($filterOption as $key2 => $filter) {
                 if ($filter instanceof Content) {
-                    $transformer = new ContentTransformer();
-                    $arrayValue = $transformer->transform($filter);
+                    $arrayValue = Fractal::create()
+                        ->item($filter)
+                        ->transformWith(ContentOldStructureTransformer::class)
+                        ->serializeWith(OldStyleWithoutDataForArraySerializer::class)
+                        ->toArray();
                     $activFilters[$key][$key2] = $arrayValue;
                 } elseif (is_string($filter) && (!mb_check_encoding($filter))) {
                     $activFilters[$key][$key2] = utf8_encode($filter);
@@ -77,14 +80,11 @@ class ResponseService extends FractalResponseService
             foreach ($filterOptions as $key => $filterOption) {
                 foreach ($filterOption as $key2 => $filter) {
                     if ($filter instanceof Content) {
-                        $transformer = new ContentOldStructureTransformer();
-                        $arrayValue = $transformer->transform($filter);
-                        $arrayValue['fields'] =
-                            $transformer->includeFields($filter)
-                                ->getData();
-                        $arrayValue['data'] =
-                            $transformer->includeData($filter)
-                                ->getData();
+                        $arrayValue = Fractal::create()
+                            ->item($filter)
+                            ->transformWith(ContentOldStructureTransformer::class)
+                            ->serializeWith(OldStyleWithoutDataForArraySerializer::class)
+                            ->toArray();
                         $filterOption[$key2] = $arrayValue;
                     } elseif (is_string($filter) && (!mb_check_encoding($filter))) {
                         $filterOption[$key2] = utf8_encode($filter);
