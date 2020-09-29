@@ -144,6 +144,7 @@ class MyListJsonController extends Controller
 
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 10);
+        $sort = $request->get('sort','newest');
         $contentTypes = $request->get('included_types', $contentTypes);
         $requiredFields = $request->get('required_fields', []);
 
@@ -158,7 +159,7 @@ class MyListJsonController extends Controller
             $lessons = $this->contentService->getFiltered(
                 $page,
                 $limit,
-                '-published_on',
+                $sort,
                 $contentTypes,
                 [],
                 [],
@@ -177,7 +178,7 @@ class MyListJsonController extends Controller
             $lessons = $this->contentService->getFiltered(
                 $page,
                 $limit,
-                'newest',
+                $sort,
                 array_values($contentTypes),
                 [],
                 [],
