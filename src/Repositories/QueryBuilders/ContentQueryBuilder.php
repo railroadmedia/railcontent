@@ -326,9 +326,15 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                 UserPermission::class,
                 'user_permission',
                 'WITH',
-                'content_permission.permission = user_permission.permission'
-            )
-            ->setParameter('brand', config('railcontent.brand'));
+                $this->expr()
+                    ->andX(
+                        $this->expr()
+                            ->eq('content_permission.permission','user_permission.permission'),
+
+                                $this->expr()
+                                   ->eq('user_permission.user', ':user')
+                    )
+            );
 
         $this->andWhere(
             $this->expr()
