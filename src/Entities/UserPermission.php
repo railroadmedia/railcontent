@@ -78,7 +78,7 @@ class UserPermission
     /**
      * @param User $user
      */
-    public function setUser(User $user)
+    public function setUser($user)
     {
         $this->user = $user;
     }
