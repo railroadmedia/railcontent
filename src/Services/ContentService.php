@@ -1018,8 +1018,9 @@ class ContentService
                 }
 
                 $requiredContentsByState =
-                    $qb->getQuery()
+                    $qb ->orderByColumn('up', 'updatedOn', 'desc')->getQuery()
                         ->getResult();
+
                 foreach ($requiredContentsByState as $progress) {
                     $requiredContentIdsByState[] =
                         $progress->getContent()
@@ -1074,10 +1075,12 @@ class ContentService
 
             $totalResults = $elasticData['hits']['total']['value'];
 
-            $ids = [];
-            foreach ($elasticData['hits']['hits'] as $elData) {
-                $ids[] = $elData['_source']['id'];
-            }
+
+                $ids = [];
+                foreach ($elasticData['hits']['hits'] as $elData) {
+                    $ids[] = $elData['_source']['id'];
+                }
+
 
             $qbIds =
                 $this->contentRepository->build()
@@ -1093,6 +1096,10 @@ class ContentService
             $unorderedContentRows = $this->resultsHydrator->hydrate($results, $this->entityManager);
 
             // restore order of ids passed in
+//            if (!empty($requiredContentIdsByState)){
+//                $ids = $requiredContentIdsByState;
+//            }
+
             $data = [];
             foreach ($ids as $id) {
                 foreach ($unorderedContentRows as $index => $unorderedContentRow) {

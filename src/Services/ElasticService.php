@@ -115,12 +115,12 @@ class ElasticService
 
         $searchQuery =
             $this->build()
+                ->restrictByUserStates($requiredContentIdsByState)
                 ->restrictByUserAccess()
                 ->restrictByTypes($includedTypes)
                 ->includeByUserStates($includedContentsIdsByState)
                 ->includeByFields($includedFields)
                 ->restrictByParentIds($requiredParentIds)
-                ->restrictByUserStates($requiredContentIdsByState)
                 ->restrictBySlugHierarchy($slugHierarchy)
                 ->restrictByPlaylistIds($requiredUserPlaylistIds)
                 ->restrictByFields($requiredFields);
