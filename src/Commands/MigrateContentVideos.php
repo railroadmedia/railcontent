@@ -99,7 +99,9 @@ EOT;
             'video'
         );
 
-        $this->databaseManager->statement($statementF);
+        $this->databaseManager
+            ->connection(config('railcontent.database_connection_name'))
+            ->statement($statementF);
         $finish = microtime(true) - $start;
         $format = "Finished fields updates in %s seconds\n ";
         $this->info(sprintf($format, $finish));
@@ -120,7 +122,9 @@ EOT;
             'video'
         );
 
-        $this->databaseManager->statement($statement);
+        $this->databaseManager
+            ->connection(config('railcontent.database_connection_name'))
+            ->statement($statement);
         $finish2 = microtime(true) - $finish;
         $format = "Finished content video updates in %s seconds\n ";
         $this->info(sprintf($format, $finish2));
