@@ -1018,7 +1018,8 @@ class ContentService
                 }
 
                 $requiredContentsByState =
-                    $qb ->orderByColumn('up', 'updatedOn', 'desc')->getQuery()
+                    $qb->orderByColumn('up', 'updatedOn', 'desc')
+                        ->getQuery()
                         ->getResult();
 
                 foreach ($requiredContentsByState as $progress) {
@@ -1075,12 +1076,10 @@ class ContentService
 
             $totalResults = $elasticData['hits']['total']['value'];
 
-
-                $ids = [];
-                foreach ($elasticData['hits']['hits'] as $elData) {
-                    $ids[] = $elData['_source']['id'];
-                }
-
+            $ids = [];
+            foreach ($elasticData['hits']['hits'] as $elData) {
+                $ids[] = $elData['_source']['id'];
+            }
 
             $qbIds =
                 $this->contentRepository->build()
@@ -1096,9 +1095,9 @@ class ContentService
             $unorderedContentRows = $this->resultsHydrator->hydrate($results, $this->entityManager);
 
             // restore order of ids passed in
-//            if (!empty($requiredContentIdsByState)){
-//                $ids = $requiredContentIdsByState;
-//            }
+            //            if (!empty($requiredContentIdsByState)){
+            //                $ids = $requiredContentIdsByState;
+            //            }
 
             $data = [];
             foreach ($ids as $id) {
@@ -1132,7 +1131,7 @@ class ContentService
                             ->setCacheable(true)
                             ->setCacheRegion('pull')
                             ->getResult();
-                    
+
                     unset($filterOptions['instructors']);
                     $filterOptions['instructor'] = $instructors;
                 }
@@ -1713,17 +1712,15 @@ class ContentService
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
 
         $contentTotalXp = [];
-        $children =
-            $this->contentRepository->build()
-                ->restrictByUserAccess()
-                ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
-                ->groupBy('p.id')
-                ->andWhere('p.parent IN (:parentIds)')
-                ->setParameter('parentIds', $contentIds)
-                ->getQuery()
-                ->setCacheable(true)
-                ->setCacheRegion('pull')
-                ->getResult();
+        $children = $this->contentRepository->build()
+            ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
+            ->groupBy('p.id')
+            ->andWhere('p.parent IN (:parentIds)')
+            ->setParameter('parentIds', $contentIds)
+            ->getQuery()
+            ->setCacheable(true)
+            ->setCacheRegion('pull')
+            ->getResult();
 
         foreach ($contentIds as $contentId) {
 
@@ -1755,7 +1752,7 @@ class ContentService
             $contentDifficulty = $content->getDifficulty() ?? 0;
             $childrenXp = $childrenTotalXP[$content->getId()];
             $contentTotalXp[$content->getId()] =
-                (($content->getXP() && (int)$content->getXP() != 0) ? $content->getXP() :
+                (($content->getXp() && (int)$content->getXp() != 0) ? $content->getXp() :
                     $this->getDefaultXP($content->getType(), $contentDifficulty)) + $childrenXp;
         }
 
@@ -1764,6 +1761,9 @@ class ContentService
 
     public function getDefaultXP($type, $difficulty)
     {
+        $defaultBasedOnDifficulty =
+            config('xp_ranks.difficulty_xp_map')[$difficulty] ?? config('xp_ranks.difficulty_xp_map.all');
+
         if ($type == 'pack') {
             $defaultXp = config('xp_ranks.pack_content_completed');
         } elseif ($type == 'pack-bundle') {
@@ -1773,13 +1773,13 @@ class ContentService
         } elseif ($type == 'course') {
             $defaultXp = config('xp_ranks.course_content_completed');
         } elseif ($type == 'song') {
-            $defaultXp = config('xp_ranks.song_content_completed');
+            $defaultXp = config('xp_ranks.song_content_completed') ?? $defaultBasedOnDifficulty;
         } elseif ($type == 'assignment') {
             $defaultXp = config('xp_ranks.assignment_content_completed');
         } elseif ($type == 'unit') {
             $defaultXp = config('xp_ranks.unit_content_completed');
         } else {
-            $defaultXp = config('xp_ranks.difficulty_xp_map')[$difficulty] ?? config('xp_ranks.difficulty_xp_map.all');
+            $defaultXp = $defaultBasedOnDifficulty;
         }
         return $defaultXp;
     }
