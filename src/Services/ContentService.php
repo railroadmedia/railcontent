@@ -1095,9 +1095,9 @@ class ContentService
             $unorderedContentRows = $this->resultsHydrator->hydrate($results, $this->entityManager);
 
             // restore order of ids passed in
-            //            if (!empty($requiredContentIdsByState)){
-            //                $ids = $requiredContentIdsByState;
-            //            }
+            if (!empty($requiredContentIdsByState) && ($sort == 'progress')) {
+                $ids = $requiredContentIdsByState;
+            }
 
             $data = [];
             foreach ($ids as $id) {
@@ -1712,15 +1712,16 @@ class ContentService
             [ContentService::STATUS_PUBLISHED, ContentService::STATUS_ARCHIVED];
 
         $contentTotalXp = [];
-        $children = $this->contentRepository->build()
-            ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
-            ->groupBy('p.id')
-            ->andWhere('p.parent IN (:parentIds)')
-            ->setParameter('parentIds', $contentIds)
-            ->getQuery()
-            ->setCacheable(true)
-            ->setCacheRegion('pull')
-            ->getResult();
+        $children =
+            $this->contentRepository->build()
+                ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
+                ->groupBy('p.id')
+                ->andWhere('p.parent IN (:parentIds)')
+                ->setParameter('parentIds', $contentIds)
+                ->getQuery()
+                ->setCacheable(true)
+                ->setCacheRegion('pull')
+                ->getResult();
 
         foreach ($contentIds as $contentId) {
 
