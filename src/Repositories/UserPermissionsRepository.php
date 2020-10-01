@@ -2,7 +2,9 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Repositories\Traits\RailcontentCustomQueryBuilder;
 
@@ -38,25 +40,25 @@ class UserPermissionsRepository extends EntityRepository
                         $qb->expr()
                             ->isNull('up.expirationDate'),
                         $qb->expr()
-                            ->gte('up.expirationDate', ':expirationDate')
+                            ->gte('up.expirationDate', ':currentExpirationDate')
                     )
             )
-            ->andWhere(
-                                $qb->expr()
-                                    ->orX(
-                                        $qb->expr()
-                                            ->isNull('up.startDate'),
-                                        $qb->expr()
-                                            ->lte('up.startDate', ':startDate')
-                                    )
-                            )
+                ->andWhere(
+                    $qb->expr()
+                        ->orX(
+                            $qb->expr()
+                                ->isNull('up.startDate'),
+                            $qb->expr()
+                                ->lte('up.startDate', ':startDate')
+                        )
+                )
                 ->setParameter(
-                    'expirationDate',
-                    'CURRENT_TIMESTAMP()'
+                    'currentExpirationDate',
+                    Carbon::now()
                 )
                 ->setParameter(
                     'startDate',
-                    'CURRENT_TIMESTAMP()'
+                    Carbon::now()
                 );
         }
 
@@ -68,7 +70,7 @@ class UserPermissionsRepository extends EntityRepository
      * @param $user
      * @param $permission
      * @return mixed
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function userPermission($user, $permission)
     {
