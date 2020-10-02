@@ -1001,9 +1001,7 @@ class ContentService
             $this->userProvider->createCurrentUserTopics($topics);
         }
 
-        if (!empty($difficulty)) {
-            $this->userProvider->updateCurrentUserDifficulty($difficulty);
-        }
+        $this->userProvider->updateCurrentUserDifficulty($difficulty);
 
         if (config('railcontent.use_elastic_search') == true) {
             $filters = [];
