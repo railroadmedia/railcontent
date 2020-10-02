@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Contracts;
 
 use League\Fractal\TransformerAbstract;
 use Railroad\Railcontent\Entities\User;
+use Railroad\Usora\Entities\UserTopics;
 
 interface UserProviderInterface
 {
@@ -70,5 +71,25 @@ interface UserProviderInterface
      */
     public function createRailcontentUser(string $email, string $password): ?User;
 
+    /**
+     * @return array|null
+     */
     public function getCurrentUserTopics(): ?array;
+
+    /**
+     * @param array $topic
+     * @return array|null
+     */
+    public function createCurrentUserTopics(array  $topic): ?array ;
+
+    /**
+     * @return mixed
+     */
+    public function deleteCurrentUserTopics();
+
+    /**
+     * @param $difficulty
+     * @return mixed
+     */
+    public function updateCurrentUserDifficulty($difficulty);
 }

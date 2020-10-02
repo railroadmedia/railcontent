@@ -985,6 +985,26 @@ class ContentService
             );
         }
 
+        $topics = [];
+        $difficulty = null;
+        foreach ($filter->requiredFields as $field) {
+            if ($field['name'] == 'topic') {
+                $topics[] = $field['value'];
+            }
+            if ($field['name'] == 'difficulty') {
+                $difficulty = $field['value'];
+            }
+        }
+
+        if (!empty($topics)) {
+            $this->userProvider->deleteCurrentUserTopics();
+            $this->userProvider->createCurrentUserTopics($topics);
+        }
+
+        if (!empty($difficulty)) {
+            $this->userProvider->updateCurrentUserDifficulty($difficulty);
+        }
+
         if (config('railcontent.use_elastic_search') == true) {
             $filters = [];
 
