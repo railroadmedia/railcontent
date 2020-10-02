@@ -204,7 +204,9 @@ class MyListJsonController extends Controller
             $lessons->results(),
             $lessons->qb(),
             [],
-            array_merge($lessons->filterOptions(), $filterTypes ?? [])
+            array_merge($lessons->filterOptions(), $filterTypes ?? []),
+            $lessons->customPagination(),
+            $lessons->activeFilters()
         )
             ->respond();
     }

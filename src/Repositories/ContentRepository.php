@@ -284,13 +284,16 @@ class ContentRepository extends EntityRepository
         if (!empty($contents)) {
             $instructors = [];
             foreach (config('railcontent.field_option_list', []) as $requiredFieldData) {
-
+                if ($requiredFieldData == 'style'){
+                    $requiredFieldData = 'styles';
+                }
+                
                 if (in_array(
                     $requiredFieldData,
                     $this->getEntityManager()
                         ->getClassMetadata(Content::class)
                         ->getAssociationNames()
-                )) {
+                ) ) {
                     $alias = $requiredFieldData;
                     $targetEntity =
                         $this->getEntityManager()
@@ -364,7 +367,9 @@ class ContentRepository extends EntityRepository
 
                     foreach ($contents as $content) {
 
-                        $value = call_user_func([$content, $getterName]);
+                            $value = call_user_func([$content, $getterName]);
+
+
                         if ($value && !in_array(
                                 strtolower($value),
                                 array_map("strtolower", $filteredContents[$requiredFieldData] ?? [])
