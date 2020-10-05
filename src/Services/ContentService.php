@@ -987,7 +987,8 @@ class ContentService
 
         $topics = [];
         $difficulty = null;
-        foreach ($filter->requiredFields as $field) {
+        $requiredAndIncludedFields = array_merge($filter->requiredFields, $filter->includedFields);
+        foreach ($requiredAndIncludedFields as $field) {
             if ($field['name'] == 'topic') {
                 $topics[] = $field['value'];
             }
