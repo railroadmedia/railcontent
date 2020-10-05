@@ -56,6 +56,9 @@ class CommentOldStructureTransformer extends TransformerAbstract
         if (count($comment->getChildren()) > 0) {
             $defaultIncludes[] = 'replies';
         }
+        if ($comment->getUser()) {
+            $defaultIncludes[] = 'user';
+        }
 
         $this->setDefaultIncludes($defaultIncludes);
 
@@ -85,14 +88,6 @@ class CommentOldStructureTransformer extends TransformerAbstract
                     $comment->getLikes()
                         ->count() : 0,
                 'is_liked' => ($comment->getProperty('is_liked')) ? $comment->getProperty('is_liked') : false,
-                'user' => [
-                    "display_name" => $comment->getUser()
-                        ->getDisplayName(),
-                    "fields.profile_picture_image_url" => $comment->getUser()
-                        ->getAvatar(),
-                    "xp" => $comment->getUser()
-                        ->getProperty('xp'),
-                ],
                 'replies' => []
             ],
             $extraProperties
@@ -122,6 +117,20 @@ class CommentOldStructureTransformer extends TransformerAbstract
             $comment->getLikes(),
             new CommentLikeOldStructureTransformer(),
             'commentLikes'
+        );
+    }
+
+    /**
+     * @param Comment $comment
+     * @return Collection
+     */
+    public function includeUser(Comment $comment)
+    {
+
+        return $this->item(
+            $comment->getUser(),
+            new UserTransformer(),
+            'user'
         );
     }
 }
