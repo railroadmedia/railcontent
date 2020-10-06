@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Entities;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Railroad\Railcontent\Entities\Traits\DecoratedFields;
 
 /**
  * @ORM\Entity(repositoryClass="Railroad\Railcontent\Repositories\CommentLikeRepository")
@@ -21,6 +22,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class CommentLikes
 {
+    use DecoratedFields;
+
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
      * @var int

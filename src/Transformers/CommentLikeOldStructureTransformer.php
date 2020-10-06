@@ -13,12 +13,29 @@ class CommentLikeOldStructureTransformer extends TransformerAbstract
      */
     public function transform(CommentLikes $commentLike)
     {
-        return [
-            'id' => $commentLike->getId(),
-            'display_name' => $commentLike->getUser()
-                ->getDisplayName(),
-            'avatar_url' => $commentLike->getUser()
-                ->getAvatar(),
-        ];
+        $extraProperties = [];
+        $extra = $commentLike->getExtra();
+
+        if ($extra) {
+            foreach ($extra as $item) {
+                $extraProperties[$item] = $commentLike->getProperty($item);
+            }
+        }
+
+        return array_merge(
+            $extraProperties,
+            [
+                'id' => $commentLike->getId(),
+                'display_name' => $commentLike->getUser()
+                    ->getDisplayName(),
+                'avatar_url' => $commentLike->getUser()
+                    ->getAvatar(),
+                'comment_id' => $commentLike->getComment()
+                    ->getId(),
+                'user_id' => $commentLike->getUser()
+                    ->getId(),
+                'created_on' => $commentLike->getCreatedOn(),
+            ]
+        );
     }
 }
