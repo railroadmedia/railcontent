@@ -147,6 +147,7 @@ class MyListJsonController extends Controller
         $sort = $request->get('sort','newest');
         $contentTypes = $request->get('included_types', $contentTypes);
         $requiredFields = $request->get('required_fields', []);
+        $includedFields = $request->get('included_fields', []);
 
         if (!$state) {
 
@@ -183,7 +184,7 @@ class MyListJsonController extends Controller
                 [],
                 [],
                 $requiredFields,
-                [],
+                $includedFields,
                 [$state],
                 []
             );
