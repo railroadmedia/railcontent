@@ -124,7 +124,7 @@ class CalculateTotalXP extends Command
                 ])
                 ->orderBy('id', 'asc')
                 ->chunk(
-                    20,
+                    200,
                     function (Collection $rows)  use($type, $pdo, $dbConnection) {
                         $totalXPForContents = $this->contentService->calculateTotalXpForContents(
                             $rows->pluck('id')
