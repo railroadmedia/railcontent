@@ -40,7 +40,7 @@ class AddUpdatedOnIndexToUserContentProgressTable extends Migration
                  * @var $table \Illuminate\Database\Schema\Blueprint
                  */
 
-                $table->dropIndex('updated_on');
+                $table->dropIndex(['updated_on']);
             }
         );
     }
