@@ -214,8 +214,7 @@ class ContentQueryBuilder extends QueryBuilder
                 Carbon::now()
                     ->toDateTimeString()
             );
-        }
-        else {
+        } else {
             // this strange hack is required to get the DB indexing to be used, todo: fix properly
             $this->where(
                 function ($builder) {
@@ -306,12 +305,20 @@ class ContentQueryBuilder extends QueryBuilder
                         ->on(
                             $tableName . '.user_id',
                             '=',
-                            $joinClause->raw(DB::connection()->getPdo()->quote($requiredUserState['user_id']))
+                            $joinClause->raw(
+                                DB::connection()
+                                    ->getPdo()
+                                    ->quote($requiredUserState['user_id'])
+                            )
                         )
                         ->on(
                             $tableName . '.state',
                             '=',
-                            $joinClause->raw(DB::connection()->getPdo()->quote($requiredUserState['state']))
+                            $joinClause->raw(
+                                DB::connection()
+                                    ->getPdo()
+                                    ->quote($requiredUserState['state'])
+                            )
                         );
                 }
             );
@@ -347,12 +354,20 @@ class ContentQueryBuilder extends QueryBuilder
                                     $joinClause->on(
                                         ConfigService::$tableUserContentProgress . '.user_id',
                                         '=',
-                                        $joinClause->raw(DB::connection()->getPdo()->quote($includedUserState['user_id']))
+                                        $joinClause->raw(
+                                            DB::connection()
+                                                ->getPdo()
+                                                ->quote($includedUserState['user_id'])
+                                        )
                                     )
                                         ->on(
                                             ConfigService::$tableUserContentProgress . '.state',
                                             '=',
-                                            $joinClause->raw(DB::connection()->getPdo()->quote($includedUserState['state']))
+                                            $joinClause->raw(
+                                                DB::connection()
+                                                    ->getPdo()
+                                                    ->quote($includedUserState['state'])
+                                            )
                                         );
                                 }
                             );
@@ -390,14 +405,21 @@ class ContentQueryBuilder extends QueryBuilder
                         ->on(
                             $tableName . '.key',
                             '=',
-                            $joinClause->raw(DB::connection()->getPdo()->quote($requiredFieldData['name']))
+                            $joinClause->raw(
+                                DB::connection()
+                                    ->getPdo()
+                                    ->quote($requiredFieldData['name'])
+                            )
                         )
                         ->on(
                             $tableName . '.value',
                             $requiredFieldData['operator'],
-                            is_numeric($requiredFieldData['value']) ?
-                                $joinClause->raw($requiredFieldData['value']) :
-                                $joinClause->raw(DB::connection()->getPdo()->quote($requiredFieldData['value']))
+                            is_numeric($requiredFieldData['value']) ? $joinClause->raw($requiredFieldData['value']) :
+                                $joinClause->raw(
+                                    DB::connection()
+                                        ->getPdo()
+                                        ->quote($requiredFieldData['value'])
+                                )
                         );
                 }
             );
@@ -435,14 +457,21 @@ class ContentQueryBuilder extends QueryBuilder
                                     $joinClause->on(
                                         $tableName . '.key',
                                         '=',
-                                        $joinClause->raw(DB::connection()->getPdo()->quote($includedFieldData['name']))
+                                        $joinClause->raw(
+                                            DB::connection()
+                                                ->getPdo()
+                                                ->quote($includedFieldData['name'])
+                                        )
                                     )
                                         ->on(
                                             $tableName . '.value',
                                             $includedFieldData['operator'],
                                             is_numeric($includedFieldData['value']) ?
-                                                $joinClause->raw($includedFieldData['value']) :
-                                                $joinClause->raw(DB::connection()->getPdo()->quote($includedFieldData['value']))
+                                                $joinClause->raw($includedFieldData['value']) : $joinClause->raw(
+                                                DB::connection()
+                                                    ->getPdo()
+                                                    ->quote($includedFieldData['value'])
+                                            )
                                         );
                                 }
                             );
@@ -552,5 +581,93 @@ class ContentQueryBuilder extends QueryBuilder
             ->restrictByPermissions();
 
         return $this;
+    }
+
+    /**
+     * @param $orderBy
+     * @param $orderDirection
+     * @return $this
+     */
+    public function order($orderBy, $orderDirection)
+    {
+        $orderByExploded = explode(' ', $orderBy);
+
+        $orderByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
+
+        foreach ($orderByExploded as $orderByColumn) {
+            if ($orderByColumn != 'progress') {
+                array_unshift(
+                    $orderByColumns,
+                    ConfigService::$tableContent . '.' . $orderByColumn . ' ' . $orderDirection
+                );
+            } else {
+                array_unshift(
+                    $orderByColumns,
+                    ConfigService::$tableUserContentProgress . '.' . 'updated_on' . ' ' . $orderDirection
+                );
+            }
+        }
+
+        if ($orderBy != 'progress') {
+            $this->orderByRaw(
+                DB::raw(
+                    implode(', ', $orderByColumns) . ' ' . $orderDirection
+                )
+            );
+        } else {
+            $this->leftJoin(
+                ConfigService::$tableUserContentProgress,
+                function (JoinClause $joinClause) {
+                    $joinClause->on(
+                        ConfigService::$tableUserContentProgress . '.content_id',
+                        '=',
+                        ConfigService::$tableContent . '.id'
+                    )
+                        ->on(
+                            ConfigService::$tableUserContentProgress . '.user_id',
+                            '=',
+                            $joinClause->raw(
+                                DB::connection()
+                                    ->getPdo()
+                                    ->quote(auth()->id())
+                            )
+                        );
+                }
+            );
+            $this->orderByRaw(
+                DB::raw(
+                    implode(', ', $orderByColumns) . ' ' . $orderDirection
+                )
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $orderBy
+     * @return \Doctrine\ORM\QueryBuilder|ContentQueryBuilder
+     */
+    public function group($orderBy)
+    {
+        $orderByExploded = explode(' ', $orderBy);
+
+        $groupByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
+
+        foreach ($orderByExploded as $orderByColumn) {
+            if($orderByColumn != 'progress') {
+                array_unshift($groupByColumns, ConfigService::$tableContent . '.' . $orderByColumn);
+            }
+        }
+
+        return $this->groupBy(
+            array_merge(
+                [
+                    ConfigService::$tableContent . '.id',
+                    ConfigService::$tableContent . '.' . 'created_on',
+                ],
+                $groupByColumns
+            )
+        );
     }
 }

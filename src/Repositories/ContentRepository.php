@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories;
 use Carbon\Carbon;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
@@ -1070,7 +1071,7 @@ class ContentRepository extends RepositoryBase
     {
         if (count($newData) == 0) {
             return true;
-        };
+        }
         $amountOfUpdatedRows =
             $this->query()
                 ->where('id', $id)
@@ -1194,28 +1195,9 @@ class ContentRepository extends RepositoryBase
      */
     public function retrieveFilter()
     {
-        $orderByExploded = explode(' ', $this->orderBy);
-
-        $orderByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
-        $groupByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
-
-        foreach ($orderByExploded as $orderByColumn) {
-            array_unshift(
-                $orderByColumns,
-                ConfigService::$tableContent . '.' . $orderByColumn . ' ' . $this->orderDirection
-            );
-
-            array_unshift($groupByColumns, ConfigService::$tableContent . '.' . $orderByColumn);
-        }
-
         $subQuery =
             $this->query()
                 ->selectCountColumns()
-                ->orderByRaw(
-                    $this->databaseManager->raw(
-                        implode(', ', $orderByColumns) . ' ' . $this->orderDirection
-                    )
-                )
                 ->restrictByUserAccess()
                 ->directPaginate($this->page, $this->limit)
                 ->restrictByFields($this->requiredFields)
@@ -1225,23 +1207,21 @@ class ContentRepository extends RepositoryBase
                 ->restrictByTypes($this->typesToInclude)
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByParentIds($this->requiredParentIds)
-                ->groupBy(
-                    array_merge(
-                        [
-                            ConfigService::$tableContent . '.id',
-                            ConfigService::$tableContent . '.' . 'created_on',
-                        ],
-                        $groupByColumns
-                    )
-                );
+                ->order($this->orderBy, $this->orderDirection)
+                ->group($this->orderBy);
 
         if ($this->getFutureContentOnly) {
-            $subQuery->where('published_on', '>', Carbon::now()->toDateTimeString());
+            $subQuery->where(
+                'published_on',
+                '>',
+                Carbon::now()
+                    ->toDateTimeString()
+            );
         }
 
         $query =
             $this->query()
-                ->orderByRaw($this->databaseManager->raw(implode(', ', $orderByColumns) . ' ' . $this->orderDirection))
+                ->order($this->orderBy, $this->orderDirection)
                 ->addSubJoinToQuery($subQuery);
 
         $contentRows = $query->getToArray();
@@ -1627,20 +1607,22 @@ class ContentRepository extends RepositoryBase
     /**
      * @param array $type
      * @param $groupBy
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function countByTypes(array $type, $groupBy)
     {
-        $query = $this->query()
-           ->select('type', DB::raw('count(*) as total'))
-            ->restrictByUserAccess()
-            ->whereIn(ConfigService::$tableContent . '.type', $type);
+        $query =
+            $this->query()
+                ->select('type', DB::raw('count(*) as total'))
+                ->restrictByUserAccess()
+                ->whereIn(ConfigService::$tableContent . '.type', $type);
 
-        if(!empty($groupBy)){
+        if (!empty($groupBy)) {
             $query->groupBy($groupBy);
         }
 
-         return $query->get()->keyBy('type');
+        return $query->get()
+            ->keyBy('type');
     }
 
     /**
