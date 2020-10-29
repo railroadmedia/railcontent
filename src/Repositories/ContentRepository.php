@@ -1510,6 +1510,21 @@ class ContentRepository extends RepositoryBase
             ];
         }
 
+        // random use case, should be refactored at some point
+        if (!empty($availableFields['difficulty']) && count(
+                array_diff(
+                    [
+                        '2',
+                        '3',
+                        '4',
+                        'All',
+                    ],
+                    $availableFields['difficulty']
+                )
+            ) <= 1) {
+            sort($availableFields['difficulty'], SORT_NUMERIC);
+        }
+
         return $availableFields;
     }
 
