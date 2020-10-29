@@ -1534,9 +1534,9 @@ class ContentRepository extends RepositoryBase
         if (!empty($availableFields['difficulty']) && count(
                 array_diff(
                     [
-                        '1',
                         '2',
                         '3',
+                        '4',
                         'All',
                     ],
                     $availableFields['difficulty']
