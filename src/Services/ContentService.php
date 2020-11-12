@@ -1489,6 +1489,9 @@ class ContentService
 
     public function getDefaultXP($type, $difficulty)
     {
+        $defaultBasedOnDifficulty =
+            config('xp_ranks.difficulty_xp_map')[$difficulty] ?? config('xp_ranks.difficulty_xp_map.all');
+
         if ($type == 'pack') {
             $defaultXp = config('xp_ranks.pack_content_completed');
         } elseif ($type == 'pack_bundle') {
@@ -1497,10 +1500,14 @@ class ContentService
             $defaultXp = config('xp_ranks.learning_path_content_completed');
         } elseif ($type == 'course') {
             $defaultXp = config('xp_ranks.course_content_completed');
+        } elseif ($type == 'song') {
+            $defaultXp = config('xp_ranks.song_content_completed') ?? $defaultBasedOnDifficulty;
         } elseif ($type == 'assignment') {
             $defaultXp = config('xp_ranks.assignment_content_completed');
+        } elseif ($type == 'unit') {
+            $defaultXp = config('xp_ranks.unit_content_completed');
         } else {
-            $defaultXp = config('xp_ranks.difficulty_xp_map')[$difficulty] ?? config('xp_ranks.difficulty_xp_map.all');
+            $defaultXp = $defaultBasedOnDifficulty;
         }
 
         return $defaultXp;

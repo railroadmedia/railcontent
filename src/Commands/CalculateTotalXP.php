@@ -76,6 +76,8 @@ class CalculateTotalXP extends Command
             "course-part",
             "course",
             "song",
+            "unit-part",
+            "unit",
             "learning-path-lesson",
             "learning-path-course",
             "learning-path-level",
@@ -108,7 +110,12 @@ class CalculateTotalXP extends Command
             "student-collaborations",
             "student-focus",
             "study-the-greats",
-            "tama-drums"
+            "tama-drums",
+            "pack-bundle-lesson",
+            "pack-bundle",
+            "pack",
+            "recording",
+            "student-review",
         ];
 
         foreach ($types as $type) {
