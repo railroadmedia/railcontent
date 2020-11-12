@@ -123,7 +123,7 @@ class CalculateTotalXP extends Command
             $dbConnection->table(config('railcontent.table_prefix') . 'content')
                 ->select('id')
                 ->where('type', $type)
-                ->where('brand','drumeo')
+                ->whereNull('total_xp')
                 ->whereIn('status',[
                     ContentService::STATUS_DRAFT,
                     ContentService::STATUS_PUBLISHED,
@@ -131,13 +131,12 @@ class CalculateTotalXP extends Command
                 ])
                 ->orderBy('id', 'asc')
                 ->chunk(
-                    150,
+                    500,
                     function (Collection $rows)  use($type, $pdo, $dbConnection) {
                         $totalXPForContents = $this->contentService->calculateTotalXpForContents(
                             $rows->pluck('id')
                                 ->toArray()
                         );
-
 
                         $contentIdsToUpdate = array_keys($totalXPForContents);
                         if (!empty($contentIdsToUpdate)) {
