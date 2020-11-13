@@ -158,7 +158,7 @@ class MyListJsonController extends Controller
             $lessons = $this->contentService->getFiltered(
                 $page,
                 $limit,
-                '-published_on',
+                $request->get('sort', '-published_on'),
                 $contentTypes,
                 [],
                 [],
