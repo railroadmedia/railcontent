@@ -129,6 +129,7 @@ class MyListJsonController extends Controller
         $limit = $request->get('limit', 10);
         $contentTypes = $request->get('included_types', $contentTypes);
         $requiredFields = $request->get('required_fields', []);
+        $includedFields = $request->get('included_fields', []);
 
         if (!$state) {
 
@@ -143,14 +144,14 @@ class MyListJsonController extends Controller
             $lessons = $this->contentService->getFiltered(
                 $page,
                 $limit,
-                '-published_on',
+                $request->get('sort', '-published_on'),
                 $contentTypes,
                 [],
                 [$usersPrimaryPlaylist['id']],
                 $requiredFields,
-                [],
-                [],
-                []
+                $includedFields,
+                $request->get('required_user_states', []),
+                $request->get('included_user_states', [])
             );
         } else {
             $contentTypes = array_diff($contentTypes, ['course-part']);
@@ -158,14 +159,14 @@ class MyListJsonController extends Controller
             $lessons = $this->contentService->getFiltered(
                 $page,
                 $limit,
-                $request->get('sort', '-published_on'),
+                $request->get('sort', '-progress'),
                 $contentTypes,
                 [],
                 [],
                 $requiredFields,
-                [],
-                [$state],
-                []
+                $includedFields,
+                $request->get('required_user_states', [$state]),
+                $request->get('included_user_states', [])
             );
         }
 
