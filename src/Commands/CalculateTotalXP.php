@@ -2,14 +2,10 @@
 
 namespace Railroad\Railcontent\Commands;
 
-use App\Decorators\Content\Types\DrumeoMethodLearningPathDecorator;
-use App\Decorators\LessonAssignmentDecorator;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Support\Collection;
-use Railroad\Railcontent\Events\HierarchyUpdated;
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Services\ConfigService;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Railroad\Railcontent\Services\ContentService;
 
 class CalculateTotalXP extends Command
@@ -64,17 +60,14 @@ class CalculateTotalXP extends Command
         $pdo = $dbConnection->getPdo();
         $pdo->exec('SET TRANSACTION ISOLATION LEVEL READ COMMITTED');
 
-        ContentRepository::$bypassPermissions = true;
-        ContentRepository::$availableContentStatues = [
-            ContentService::STATUS_DRAFT,
-            ContentService::STATUS_PUBLISHED,
-            ContentService::STATUS_SCHEDULED,
-        ];
-        ConfigService::$availableBrands = ['drumeo'];
+        $memoryStart = memory_get_usage();
+        $startTime = microtime(true);
+
         $types = [
             "assignment",
             "course-part",
             "course",
+            "song-part",
             "song",
             "unit-part",
             "unit",
@@ -118,52 +111,150 @@ class CalculateTotalXP extends Command
             "student-review",
         ];
 
-        foreach ($types as $type) {
-            $this->info('Start ' . $type );
-            $dbConnection->table(config('railcontent.table_prefix') . 'content')
-                ->select('id')
-                ->where('type', $type)
-                ->whereNull('total_xp')
-                ->whereIn('status',[
+        Schema::connection(config('railcontent.database_connection_name'))
+            ->table(
+                config('railcontent.table_prefix') . 'content',
+                function (Blueprint $table) {
+                    $table->integer('children_total_xp')
+                        ->nullable(true);
+                }
+            );
+
+        foreach ($types as $lessonType) {
+
+            $start = microtime(true);
+
+            $this->calculateChildrenTotalXP($lessonType);
+
+            $sql = <<<'EOT'
+UPDATE `%s` cs
+INNER JOIN (
+    SELECT
+        c.id AS content_id,
+        f1.value as xp,
+        f2.value as difficulty
+    FROM railcontent_content c
+    LEFT JOIN railcontent_content_fields f1 on f1.content_id  = c.id and f1.key = 'xp'
+    LEFT JOIN railcontent_content_fields f2 on f2.content_id  = c.id and f2.key = 'difficulty'
+    WHERE c.type = '%s'
+) n ON  cs.id = n.content_id 
+SET cs.`total_xp` = IF(n.xp IS NULL, (
+ case
+         when cs.type = '%s' then '%s'
+         when cs.type = '%s' then '%s'
+         when cs.type = '%s' then '%s'
+         when cs.type = '%s' then '%s'
+         when cs.type = '%s' then '%s'
+         when cs.type = '%s' then '%s'
+         when cs.type = '%s' then '%s'
+         when n.difficulty in (1, 2, 3, 'beginner') then 100
+         when n.difficulty in (4, 5, 6, 'intermediate', 'all') then 150
+         when n.difficulty in (7, 8, 9, 10, 'advanced') then 200
+         else 150
+                      
+        end
++ (IF(cs.`children_total_xp` IS NULL, 0, cs.`children_total_xp`))), 
+(n.`xp` + (IF(cs.`children_total_xp` IS NULL, 0, cs.`children_total_xp`)))
+)
+where cs.type = '%s'
+EOT;
+
+            $statement = sprintf(
+                $sql,
+                config('railcontent.table_prefix') . 'content',
+                $lessonType,
+                'assignment',
+                config('xp_ranks.assignment_content_completed'),
+                'course',
+                config('xp_ranks.course_content_completed'),
+                'unit',
+                config('xp_ranks.unit_content_completed'),
+                'song',
+                config('xp_ranks.song_content_completed'),
+                'pack-bundle',
+                config('xp_ranks.pack_bundle_content_completed'),
+                'pack',
+                config('xp_ranks.pack_content_completed'),
+                'learning-path',
+                config('xp_ranks.learning_path_content_completed'),
+                $lessonType
+            );
+
+            $this->databaseManager->connection(config('railcontent.database_connection_name'))
+                ->statement($statement);
+
+            $finish = microtime(true) - $start;
+
+            $format = "Finished processing " . $lessonType . " in total %s seconds\n ";
+
+            $this->info(sprintf($format, $finish));
+        }
+
+        $this->info('Total time::  '.(microtime(true) - $startTime));
+        $this->info('Memory usage :: ' . $this->formatmem(memory_get_usage() - $memoryStart));
+
+        Schema::connection(config('railcontent.database_connection_name'))
+            ->table(
+                config('railcontent.table_prefix') . 'content',
+                function (Blueprint $table) {
+                    $table->dropColumn('children_total_xp');
+                }
+            );
+
+        return true;
+
+    }
+
+    function formatmem($m)
+    {
+        if ($m) {
+            $unit = ['b', 'kb', 'mb', 'gb', 'tb', 'pb'];
+            $m = @round($m / pow(1024, ($i = floor(log($m, 1024)))), 2) . ' ' . $unit[$i];
+        }
+        return str_pad($m, 15, ' ', STR_PAD_LEFT);
+    }
+
+    /**
+     * @param string $type
+     * @return array
+     */
+    private function calculateChildrenTotalXP(string $type)
+    {
+
+        $sql = <<<'EOT'
+UPDATE `%s` cs
+ JOIN (
+    SELECT
+        sum(c.total_xp)  as child_xp, hc.parent_id as parent_id
+    FROM railcontent_content_hierarchy hc 
+    Join railcontent_content c on hc.child_id = c.id
+      where c.status in  ('%s')
+                    GROUP BY hc.parent_id
+
+) n ON
+    cs.id = n.parent_id 
+SET cs.`children_total_xp` = IF(n.child_xp IS NULL, 0, n.child_xp)
+
+where cs.type = '%s'
+EOT;
+
+        $statement = sprintf(
+            $sql,
+            config('railcontent.table_prefix') . 'content',
+            implode(
+                "', '",
+                [
                     ContentService::STATUS_DRAFT,
                     ContentService::STATUS_PUBLISHED,
                     ContentService::STATUS_SCHEDULED,
-                ])
-                ->orderBy('id', 'asc')
-                ->chunk(
-                    500,
-                    function (Collection $rows)  use($type, $pdo, $dbConnection) {
-                        $totalXPForContents = $this->contentService->calculateTotalXpForContents(
-                            $rows->pluck('id')
-                                ->toArray()
-                        );
+                ]
+            ),
+            $type
+        );
 
-                        $contentIdsToUpdate = array_keys($totalXPForContents);
-                        if (!empty($contentIdsToUpdate)) {
-                            $query1 = ' CASE';
-                            foreach ($totalXPForContents as $id => $totalXPForContent) {
-                                $query1 .= "  WHEN id = " . $id . " THEN " . $pdo->quote($totalXPForContent);
-                            }
+        $this->databaseManager->connection(config('railcontent.database_connection_name'))
+            ->statement($statement);
 
-                            $cq = " SET total_xp = (" . $query1 . " END )";
-                            $statement = "UPDATE " . config('railcontent.table_prefix') . 'content' . $cq;
-                            $statement .= " WHERE " .
-                                config('railcontent.table_prefix') .
-                                'content' .
-                                ".id IN (" .
-                                implode(",", $contentIdsToUpdate) .
-                                ")";
-
-                            $dbConnection->statement($statement);
-                        }
-
-                    });
-
-            $this->info('End ' . $type);
-        }
-
-        $this->info('Finished total XP values.');
-
-        return true;
+        return $statement;
     }
 }
