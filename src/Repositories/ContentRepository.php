@@ -1480,10 +1480,10 @@ class ContentRepository extends RepositoryBase
                     $availableFields[$availableFieldIndex],
                     function ($a, $b) {
                         if (is_array($a)) {
-                            return strncmp($a['slug'], $b['slug'], 15);
+                            return strncmp(strtolower($a['slug']), strtolower($b['slug']), 15);
                         }
 
-                        return strncmp($a, $b, 15);
+                        return strncmp(strtolower($a), strtolower($b), 15);
                     }
                 );
             }
