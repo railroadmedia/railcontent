@@ -137,7 +137,7 @@ class FullTextSearchRepository extends RepositoryBase
             }
         );
 
-        DB::statement('OPTIMIZE table ' . ConfigService::$tableSearchIndexes);
+        $this->connection()->statement('OPTIMIZE table ' . ConfigService::$tableSearchIndexes);
     }
 
     /** Delete old indexes for the brand
