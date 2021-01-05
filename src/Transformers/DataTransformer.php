@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Transformers;
 
 use ArrayAccess;
+use Carbon\Carbon;
 use League\Fractal\TransformerAbstract;
 use Railroad\Railcontent\Support\Collection;
 
@@ -36,6 +37,10 @@ class DataTransformer extends TransformerAbstract
 
             if ($rowIndex == 'assignments') {
                 unset($data[$rowIndex]);
+            }
+
+            if ($row instanceof Carbon) {
+                $data[$rowIndex] = $row->toDateTimeString();
             }
         }
 
