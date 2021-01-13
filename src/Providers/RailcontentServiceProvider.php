@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use PDO;
 use Railroad\Railcontent\Commands\AddDefaultShowNewField;
 use Railroad\Railcontent\Commands\CalculateTotalXP;
+use Railroad\Railcontent\Commands\CleanMetadata;
 use Railroad\Railcontent\Commands\ComputePastStats;
 use Railroad\Railcontent\Commands\ComputeWeeklyStats;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
@@ -113,7 +114,8 @@ class RailcontentServiceProvider extends ServiceProvider
                 RepairMissingDurations::class,
                 CreateYoutubeVideoContentRecords::class,
                 ExpireCache::class,
-                CalculateTotalXP::class
+                CalculateTotalXP::class,
+                CleanMetadata::class,
             ]
         );
 
