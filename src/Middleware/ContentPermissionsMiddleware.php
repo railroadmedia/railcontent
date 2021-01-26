@@ -63,7 +63,10 @@ class ContentPermissionsMiddleware
                 ContentService::STATUS_SCHEDULED,
             ];
 
-            ContentRepository::$pullFutureContent = false;
+            ContentRepository::$pullFutureContent = (bool)$request->get(
+                'include_future',
+                false
+            );
         }
 
         return $next($request);
