@@ -561,7 +561,7 @@ class ContentRepository extends RepositoryBase
                     '=',
                     ConfigService::$tableContent . '.id'
                 )
-                ->where(ConfigService::$tableContent . '.type', $type)
+                ->havingRaw(ConfigService::$tableContent . ".type IN (". implode(",", array_fill(0, count([$type]), "?")) . ")", [$type])
                 ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
                 ->where(ConfigService::$tableUserContentProgress . '.state', $state)
                 ->orderBy('published_on', 'desc')
@@ -649,7 +649,7 @@ class ContentRepository extends RepositoryBase
                     '=',
                     ConfigService::$tableContent . '.id'
                 )
-                ->whereIn(ConfigService::$tableContent . '.type', $types)
+                ->havingRaw(ConfigService::$tableContent . ".type IN (". implode(",", array_fill(0, count($types), "?")) . ")", $types)
                 ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
                 ->where(ConfigService::$tableUserContentProgress . '.state', $state)
                 ->orderBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
@@ -690,7 +690,7 @@ class ContentRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContent . '.id'
             )
-            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->havingRaw(ConfigService::$tableContent . ".type IN (". implode(",", array_fill(0, count($types), "?")) . ")", $types)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
             ->orderBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
@@ -798,7 +798,7 @@ class ContentRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContent . '.id'
             )
-            ->whereIn(ConfigService::$tableContent . '.type', $types)
+            ->havingRaw(ConfigService::$tableContent . ".type IN (". implode(",", array_fill(0, count($types), "?")) . ")", $types)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
             ->orderBy('published_on', 'desc')
