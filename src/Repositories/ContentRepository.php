@@ -690,7 +690,7 @@ class ContentRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContent . '.id'
             )
-            ->havingRaw(ConfigService::$tableContent . ".type IN (". implode(",", array_fill(0, count($types), "?")) . ")", $types)
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
             ->orderBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
@@ -798,7 +798,7 @@ class ContentRepository extends RepositoryBase
                 '=',
                 ConfigService::$tableContent . '.id'
             )
-            ->havingRaw(ConfigService::$tableContent . ".type IN (". implode(",", array_fill(0, count($types), "?")) . ")", $types)
+            ->whereIn(ConfigService::$tableContent . '.type', $types)
             ->where(ConfigService::$tableUserContentProgress . '.user_id', $userId)
             ->where(ConfigService::$tableUserContentProgress . '.state', $state)
             ->orderBy('published_on', 'desc')
