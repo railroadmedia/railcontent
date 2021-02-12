@@ -118,7 +118,7 @@ class MyListJsonController extends Controller
         $state = $request->get('state');
 
         $oldFieldOptions = ConfigService::$fieldOptionList;
-        ConfigService::$fieldOptionList = array_merge(ConfigService::$fieldOptionList,['video']);
+        ConfigService::$fieldOptionList = array_merge(ConfigService::$fieldOptionList, ['video']);
 
         $contentTypes = array_merge(
             config('railcontent.appUserListContentTypes', []),
@@ -138,7 +138,11 @@ class MyListJsonController extends Controller
             );
 
             if (empty($usersPrimaryPlaylist)) {
-                return response()->json([]);
+                return (new ContentFilterResultsEntity(
+                    [
+                        'results' => [],
+                    ]
+                ))->toJsonResponse();
             }
 
             $lessons = $this->contentService->getFiltered(
@@ -171,7 +175,7 @@ class MyListJsonController extends Controller
         }
 
         ConfigService::$fieldOptionList = $oldFieldOptions;
-        
+
         return (new ContentFilterResultsEntity(
             [
                 'results' => $lessons->results(),
