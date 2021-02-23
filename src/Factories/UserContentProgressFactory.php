@@ -66,7 +66,7 @@ class UserContentProgressFactory extends UserContentProgressService
         $parameters =
             func_get_args() + [
                 $this->faker->randomNumber(),
-                $this->faker->randomNumber(0, 199),
+                $this->faker->numberBetween(0, 99),
                 $this->faker->randomNumber(),
             ];
 
