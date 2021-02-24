@@ -65,12 +65,23 @@ class ContentJsonController extends Controller
             $request->get('included_user_states', [])
         );
 
+        $filters =  $contentData['filter_options'];
+
+        foreach ($filters as $key => $filterOptions) {
+            if (is_array($filterOptions)) {
+                if (($key != 'content_type') && ($key != 'instructor')) {
+                      $filters[$key] = array_diff($filterOptions, ['All']);
+                    array_unshift($filters[$key], 'All');
+                }
+            }
+        }
+
         return reply()->json(
             $contentData['results'],
             [
                 'transformer' => DataTransformer::class,
                 'totalResults' => $contentData['total_results'],
-                'filterOptions' => $contentData['filter_options'],
+                'filterOptions' => $filters,
             ]
         );
     }
