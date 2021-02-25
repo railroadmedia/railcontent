@@ -1448,8 +1448,10 @@ class ContentRepository extends RepositoryBase
                 $subContentIds[] = $row['value'];
             } else {
                 $availableFields[$row['key']][] = trim(ucfirst($row['value']));
-                // only uniques
-                $availableFields[$row['key']] = array_values(array_unique($availableFields[$row['key']]));
+                // only uniques - despite of upper/lowercase
+                $data = array_intersect_key($availableFields[$row['key']], array_unique(array_map('strtolower', $availableFields[$row['key']])));
+
+                $availableFields[$row['key']] = array_values($data);
             }
 
             $availableFields['content_type'] = array_values(array_unique($availableFields['content_type']));
