@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use PDO;
 use Railroad\Railcontent\Commands\AddDefaultShowNewField;
 use Railroad\Railcontent\Commands\CalculateTotalXP;
+use Railroad\Railcontent\Commands\CleanContentTopicsAndStyles;
 use Railroad\Railcontent\Commands\CleanMetadata;
 use Railroad\Railcontent\Commands\ComputePastStats;
 use Railroad\Railcontent\Commands\ComputeWeeklyStats;
@@ -116,6 +117,7 @@ class RailcontentServiceProvider extends ServiceProvider
                 ExpireCache::class,
                 CalculateTotalXP::class,
                 CleanMetadata::class,
+                CleanContentTopicsAndStyles::class
             ]
         );
 
