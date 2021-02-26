@@ -49,7 +49,7 @@ class CleanContentTopicsAndStyles extends Command
         $this->info('Started cleaning content metadata');
 
         $replaceOldValueInto = [
-            'Question&Answer' => 'Q&A',
+            'Question & Answer' => 'Q&A',
             'Peformance' => 'Performance',
             'Performances' => 'Performance',
             'Bues' => 'Blues',
