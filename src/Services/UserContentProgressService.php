@@ -370,6 +370,14 @@ class UserContentProgressService
             'user_progress'
         );
 
+        CacheHelper::deleteUserFields(
+            [
+                Cache::store(ConfigService::$cacheDriver)
+                    ->getPrefix() . 'userId_' . $userId,
+            ],
+            'content'
+        );
+
         UserContentProgressRepository::$cache = [];
 
         event(new UserContentProgressSaved($userId, $contentId, $progress, self::STATE_STARTED));
