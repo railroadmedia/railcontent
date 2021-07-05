@@ -45,6 +45,16 @@ class ContentHierarchyService
 
     /**
      * @param array $parentIds
+     * @param $childId
+     * @return array|null
+     */
+    public function getByParentIdsWithUserProgress(array $parentIds, $userId)
+    {
+        return $this->contentHierarchyRepository->getByParentIdsWithUserProgress($parentIds, $userId);
+    }
+
+    /**
+     * @param array $parentIds
      * @param array $contentStatuses
      * @return array|null
      */

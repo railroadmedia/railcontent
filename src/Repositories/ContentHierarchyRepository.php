@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
 
@@ -30,6 +31,31 @@ class ContentHierarchyRepository extends RepositoryBase
     public function getByParentIds(array $parentIds)
     {
         return $this->query()
+            ->whereIn('parent_id', $parentIds)
+            ->orderBy('child_position', 'asc')
+            ->get()
+            ->toArray();
+    }
+
+    /**
+     * @param  array  $parentIds
+     * @param $userId
+     * @return array|null
+     */
+    public function getByParentIdsWithUserProgress(array $parentIds, $userId)
+    {
+        return $this->query()
+            ->leftJoin(
+                'railcontent_user_content_progress',
+                function (Builder $join) use ($userId) {
+                    $join->on(
+                        'railcontent_user_content_progress.content_id',
+                        '=',
+                        ConfigService::$tableContentHierarchy.'.child_id'
+                    );
+                    $join->on('railcontent_user_content_progress.user_id', '=', DB::raw($userId));
+                }
+            )
             ->whereIn('parent_id', $parentIds)
             ->orderBy('child_position', 'asc')
             ->get()

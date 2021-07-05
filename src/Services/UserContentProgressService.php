@@ -115,19 +115,34 @@ class UserContentProgressService
         }
 
         $isCompleted = $this->userContentRepository->isContentAlreadyCompleteForUser($contentId, $userId);
+        $existingRow = $this->userContentRepository->query()
+            ->where(
+                [
+                    'content_id' => $contentId,
+                    'user_id' => $userId,
+                ]
+            )
+            ->get()
+            ->first();
 
         if (!$isCompleted || $forceEvenIfComplete) {
+            $dataArray =                 [
+                'state' => self::STATE_STARTED,
+                'progress_percent' => $progressPercent,
+                'updated_on' => Carbon::now()
+                    ->toDateTimeString(),
+            ];
+
+            if (!empty($existingRow) && empty($existingRow['started_on'])) {
+                $dataArray['started_on'] = Carbon::now()->toDateTimeString();
+            }
+
             $this->userContentRepository->updateOrCreate(
                 [
                     'content_id' => $contentId,
                     'user_id' => $userId,
                 ],
-                [
-                    'state' => self::STATE_STARTED,
-                    'progress_percent' => $progressPercent,
-                    'updated_on' => Carbon::now()
-                        ->toDateTimeString(),
-                ]
+                $dataArray
             );
         }
         //delete user progress from cache
@@ -163,17 +178,36 @@ class UserContentProgressService
      */
     public function completeContent($contentId, $userId)
     {
+        $existingRow = $this->userContentRepository->query()
+            ->where(
+                [
+                    'content_id' => $contentId,
+                    'user_id' => $userId,
+                ]
+            )
+            ->get()
+            ->first();
+
+        $updateArray = [
+            'state' => self::STATE_COMPLETED,
+            'progress_percent' => 100,
+            'updated_on' => Carbon::now()
+                ->toDateTimeString(),
+            'completed_on' => Carbon::now()
+                ->toDateTimeString(),
+        ];
+
+        if (empty($existingRow) || empty($existingRow['started_on'])) {
+            $updateArray['started_on'] = Carbon::now()
+                ->toDateTimeString();
+        }
+
         $this->userContentRepository->updateOrCreate(
             [
                 'content_id' => $contentId,
                 'user_id' => $userId,
             ],
-            [
-                'state' => self::STATE_COMPLETED,
-                'progress_percent' => 100,
-                'updated_on' => Carbon::now()
-                    ->toDateTimeString(),
-            ]
+            $updateArray
         );
 
         if (is_null($contentId)) {
@@ -190,30 +224,40 @@ class UserContentProgressService
             );
         }
 
-        // also mark children as complete
+        // also mark children as complete if they have not already been marked as complete
         $childIds = [$contentId];
         $idsToDeleteFromCache = [];
 
         do {
-            $children = $this->contentHierarchyService->getByParentIds($childIds);
+            $children = $this->contentHierarchyService->getByParentIdsWithUserProgress($childIds, $userId);
 
             foreach ($children as $child) {
-                $idsToDeleteFromCache[] = $child['child_id'];
+                if ($child["state"] != self::STATE_COMPLETED) {
+                    $idsToDeleteFromCache[] = $child['child_id'];
 
-                $this->userContentRepository->updateOrCreate(
-                    [
-                        'content_id' => $child['child_id'],
-                        'user_id' => $userId,
-                    ],
-                    [
+                    $updateArray = [
                         'state' => self::STATE_COMPLETED,
                         'progress_percent' => 100,
                         'updated_on' => Carbon::now()
                             ->toDateTimeString(),
-                    ]
-                );
+                        'completed_on' => Carbon::now()
+                            ->toDateTimeString(),
+                    ];
 
-                event(new UserContentProgressSaved($userId, $child['child_id'], 100, self::STATE_COMPLETED, false));
+                    if (empty($child['started_on'])) {
+                        $updateArray['started_on'] = Carbon::now()->toDateTimeString();
+                    }
+
+                    $this->userContentRepository->updateOrCreate(
+                        [
+                            'content_id' => $child['child_id'],
+                            'user_id' => $userId,
+                        ],
+                        $updateArray
+                    );
+
+                    event(new UserContentProgressSaved($userId, $child['child_id'], 100, self::STATE_COMPLETED, false));
+                }
             }
 
             $childIds = array_column($children, 'child_id');
@@ -335,17 +379,24 @@ class UserContentProgressService
             return $this->completeContent($contentId, $userId);
         }
 
+        $updateArray = [
+            'state' => self::STATE_STARTED,
+            'progress_percent' => $progress,
+            'updated_on' => Carbon::now()
+                ->toDateTimeString(),
+            'completed_on' => null,
+        ];
+
+        if (!empty($currentProgress) && empty($currentProgress['started_on'])) {
+            $updateArray['started_on'] = Carbon::now()->toDateTimeString();
+        }
+
         $this->userContentRepository->updateOrCreate(
             [
                 'content_id' => $contentId,
                 'user_id' => $userId,
             ],
-            [
-                'state' => self::STATE_STARTED,
-                'progress_percent' => $progress,
-                'updated_on' => Carbon::now()
-                    ->toDateTimeString(),
-            ]
+            $updateArray
         );
 
         if (is_null($contentId)) {
