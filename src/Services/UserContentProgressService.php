@@ -133,7 +133,7 @@ class UserContentProgressService
                     ->toDateTimeString(),
             ];
 
-            if (!empty($existingRow) && empty($existingRow['started_on'])) {
+            if (empty($existingRow) || empty($existingRow['started_on'])) {
                 $dataArray['started_on'] = Carbon::now()->toDateTimeString();
             }
 
