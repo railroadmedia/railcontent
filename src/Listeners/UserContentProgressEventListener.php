@@ -82,19 +82,18 @@ class UserContentProgressEventListener extends Event
                         }
                     )
                     ->where('parent_id', $event->contentId)
+                    ->where(
+                        function (Builder $builder) use ($event) {
+                            $builder->where('railcontent_user_content_progress.state', 'started')
+                                ->orWhereNull('railcontent_user_content_progress.state');
+                        }
+                    )
                     ->orderBy('child_position', 'asc')
-                    ->get()
-                    ->keyBy('child_position');
+                    ->first();
 
-            foreach ($level1Children as $level1Child) {
-                if ($level1Child->state == 'completed' && $level1Position < count($level1Children)) {
-                    $level1Position++;
-                }
-            }
+            if (!empty($level1Children)) {
+                $level1Position = $level1Children->child_position;
 
-            $level1ChildrenCurrentChild = $level1Children[$level1Position] ?? null;
-
-            if (!empty($level1ChildrenCurrentChild)) {
                 $level2Children =
                     $this->connection()
                         ->table('railcontent_content_hierarchy')
@@ -113,8 +112,7 @@ class UserContentProgressEventListener extends Event
                                     );
                             }
                         )
-                        ->where('parent_id', $level1ChildrenCurrentChild->child_id)
-
+                        ->where('parent_id', $level1Children->child_id)
                         ->orderBy('child_position', 'asc')
                         ->get()
                         ->keyBy('child_position');
