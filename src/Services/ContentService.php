@@ -1165,6 +1165,18 @@ class ContentService
             (array)config('railcontent.contentReleaseContentTypes', [])
         );
 
+        if(empty($liveEventsTypes) && empty($contentReleasesTypes)){
+            // Accommodates AddEvent calling this method from Musora, where railcontent config is different than expected.
+            $liveEventsTypes = array_merge(
+                (array)config('railcontent.calendar-content-types-by-brand.' . $brand . '.showTypes', []),
+                (array)config('railcontent.calendar-content-types-by-brand.' . $brand . '.liveContentTypes', [])
+            );
+            $contentReleasesTypes = array_merge(
+                (array)config('railcontent.calendar-content-types-by-brand.' . $brand . '.showTypes', []),
+                (array)config('railcontent.calendar-content-types-by-brand.' . $brand . '.contentReleaseContentTypes', [])
+            );
+        }
+
         if ($includeSemesterPackLessons) {
             $parents = [];
             $idsOfChildrenOfSelectSemesterPacks = [];
