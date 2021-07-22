@@ -1261,7 +1261,7 @@ class ContentRepository extends RepositoryBase
 
         return $this->connection()
             ->table(
-                $this->databaseManager->raw('(' . $subQuery->toSql() . ') as rows')
+                $this->databaseManager->raw('(' . $subQuery->toSql() . ') as results')
             )
             ->addBinding($subQuery->getBindings())
             ->count();
