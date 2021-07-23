@@ -14,6 +14,13 @@ use Railroad\Railcontent\Services\UserPermissionsService;
 class CacheHelper
 {
     /**
+     * Turn off the cache on the fly.
+     *
+     * @var bool
+     */
+    public static $disableCache = false;
+
+    /**
      * Set redis cache prefix.
      *
      * @return mixed
@@ -247,6 +254,10 @@ class CacheHelper
      */
     public static function getCachedResultsForKey($hash)
     {
+        if (self::$disableCache) {
+            return null;
+        }
+
         $results = null;
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
