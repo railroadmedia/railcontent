@@ -913,6 +913,7 @@ class ContentService
      * @param string|null $publishedOn
      * @param int|null $parentId
      * @param int $sort
+     * @param bool $slugify
      * @return array|ContentEntity
      */
     public function create(
@@ -924,9 +925,12 @@ class ContentService
         $userId,
         $publishedOn,
         $parentId = null,
-        $sort = 0
+        $sort = 0,
+        $slugify = true
     ) {
-        $slug = ContentHelper::slugify($slug);
+        if ($slugify) {
+            $slug = ContentHelper::slugify($slug);
+        }
 
         $id = $this->contentRepository->create(
             [

@@ -176,6 +176,11 @@ return [
                 'user' => env('YOUTUBE_USERNAME'),
             ],
         ],
+        'youtube_client_api' => [
+            'client_id' => env('YOUTUBE_API_CLIENT_ID'),
+            'client_secret' => env('YOUTUBE_API_CLIENT_SECRET'),
+            'refresh_token' => env('YOUTUBE_API_CLIENT_REFRESH_TOKEN'),
+        ],
     ],
 
     // middleware

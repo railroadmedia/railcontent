@@ -15,6 +15,7 @@ use Railroad\Railcontent\Commands\ComputeWeeklyStats;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;
+use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecordsViaClientAPI;
 use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
 use Railroad\Railcontent\Events\CommentCreated;
@@ -114,6 +115,7 @@ class RailcontentServiceProvider extends ServiceProvider
                 CreateVimeoVideoContentRecords::class,
                 RepairMissingDurations::class,
                 CreateYoutubeVideoContentRecords::class,
+                CreateYoutubeVideoContentRecordsViaClientAPI::class,
                 ExpireCache::class,
                 CalculateTotalXP::class,
                 CleanMetadata::class,
