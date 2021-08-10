@@ -2,7 +2,6 @@
 
 namespace Railroad\Railcontent\Factories;
 
-use Carbon\Carbon;
 use Faker\Generator;
 use Railroad\Railcontent\Helpers\ContentHelper;
 use Railroad\Railcontent\Services\ConfigService;
@@ -16,14 +15,14 @@ class ContentFactory extends ContentService
     protected $faker;
 
     /**
-     * @param null $slug
-     * @param null $type
-     * @param null $status
-     * @param null $language
-     * @param null $brand
-     * @param null $userId
-     * @param null $publishedOn
-     * @param null $createdOn
+     * @param  null  $slug
+     * @param  null  $type
+     * @param  null  $status
+     * @param  null  $language
+     * @param  null  $brand
+     * @param  null  $userId
+     * @param  null  $publishedOn
+     * @param  null  $createdOn
      * @return array
      */
     public function create(
@@ -35,7 +34,8 @@ class ContentFactory extends ContentService
         $userId = null,
         $publishedOn = null,
         $parentId = null,
-    $sort = null
+        $sort = null,
+        $slugify = null
     ) {
         $this->faker = app(Generator::class);
 
@@ -46,13 +46,13 @@ class ContentFactory extends ContentService
                 $this->faker->randomElement(
                     [
                         ContentService::STATUS_PUBLISHED,
-                        ContentService::STATUS_SCHEDULED
+                        ContentService::STATUS_SCHEDULED,
                     ]
                 ),
                 'en-US',
                 ConfigService::$brand,
                 rand(),
-                $this->faker->dateTimeThisCentury()
+                $this->faker->dateTimeThisCentury(),
             ];
 
         return parent::create(...$parameters);
