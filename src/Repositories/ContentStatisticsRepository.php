@@ -84,8 +84,8 @@ LEFT JOIN (
         ON ucp.`content_id` = c.`id`
     WHERE
         ucp.`state` = 'completed'
-        AND ucp.`updated_on` >= '%s'
-        AND ucp.`updated_on` <= '%s'
+        AND ucp.`completed_on` >= '%s'
+        AND ucp.`completed_on` <= '%s'
         AND ucp.`user_id` NOT IN (%s)
         AND c.`type` IN ('%s')
         AND c.`created_on` <= '%s'
@@ -127,9 +127,8 @@ LEFT JOIN (
     LEFT JOIN `%s` ucp
         ON ucp.`content_id` = c.`id`
     WHERE
-        ucp.`state` = 'started'
-        AND ucp.`updated_on` >= '%s'
-        AND ucp.`updated_on` <= '%s'
+        ucp.`started_on` >= '%s'
+        AND ucp.`started_on` <= '%s'
         AND ucp.`user_id` NOT IN (%s)
         AND c.`type` IN ('%s')
         AND c.`created_on` <= '%s'
@@ -454,11 +453,11 @@ EOT;
                 ->where(ConfigService::$tableUserContentProgress . '.state', 'completed');
 
         if ($smallDate) {
-            $query->where(ConfigService::$tableUserContentProgress . '.updated_on', '>=', $smallDate);
+            $query->where(ConfigService::$tableUserContentProgress . '.completed_on', '>=', $smallDate);
         }
 
         if ($bigDate) {
-            $query->where(ConfigService::$tableUserContentProgress . '.updated_on', '<=', $bigDate);
+            $query->where(ConfigService::$tableUserContentProgress . '.completed_on', '<=', $bigDate);
         }
 
         return $query->count();
@@ -480,11 +479,11 @@ EOT;
                 ->where(ConfigService::$tableUserContentProgress . '.state', 'started');
 
         if ($smallDate) {
-            $query->where(ConfigService::$tableUserContentProgress . '.updated_on', '>=', $smallDate);
+            $query->where(ConfigService::$tableUserContentProgress . '.started_on', '>=', $smallDate);
         }
 
         if ($bigDate) {
-            $query->where(ConfigService::$tableUserContentProgress . '.updated_on', '<=', $bigDate);
+            $query->where(ConfigService::$tableUserContentProgress . '.started_on', '<=', $bigDate);
         }
 
         return $query->count();
