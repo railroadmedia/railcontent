@@ -906,6 +906,10 @@ class ContentRepository extends RepositoryBase
      */
     public function getByUserIdWhereChildIdIn($userId, $childContentIds, $slug = null)
     {
+        if (empty($userId)) {
+            return [];
+        }
+
         $query =
             $this->query()
                 ->selectPrimaryColumns()

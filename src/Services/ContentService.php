@@ -1054,6 +1054,10 @@ class ContentService
      */
     public function attachChildrenToContents($userId, $contents, $singlePlaylistSlug = null)
     {
+        if (empty($userId)) {
+            return $contents;
+        }
+
         $isArray = !isset($contents['id']);
 
         if (!$isArray) {
