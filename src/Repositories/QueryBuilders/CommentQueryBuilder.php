@@ -48,15 +48,12 @@ class CommentQueryBuilder extends QueryBuilder
     public function selectLikeCounts()
     {
         $this->leftJoin(
-            $this->raw(
-                "(SELECT COUNT(*) AS like_count, content_id as _content_id FROM " .
-                ConfigService::$tableContentLikes .
-                " GROUP BY _content_id) content_likes"
-            ),
-            "content_likes._content_id",
+            ConfigService::$tableContentLikes,
+            ConfigService::$tableContentLikes.".content_id",
             "=",
-            ConfigService::$tableComments . '.content_id'
-        );
+            ConfigService::$tableComments.'.content_id'
+        )
+            ->groupBy([ConfigService::$tableComments.'.id']);
 
         return $this;
     }
@@ -79,7 +76,7 @@ class CommentQueryBuilder extends QueryBuilder
 
             if (isset($config['groupBy'])) {
 
-                $this->groupBy($config['groupBy'], ...array_keys($this->getSelectColumns()));
+                $this->groupBy($config['groupBy'], [ConfigService::$tableComments . '.id' => 'id',]);
             }
         }
 
