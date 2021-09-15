@@ -247,6 +247,8 @@ class CommentService
             '_' .
             (CommentRepository::$assignedToUserId ?? '') .
             '_' .
+            (CommentRepository::$conversationStatus ?? '') .
+            '_' .
             ($contentTypeString ?? '') .
             '_' .
             (CommentRepository::$availableUserId ?? '') .
