@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
+use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Repositories\CommentAssignmentRepository;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Services\ConfigService;
@@ -45,13 +46,22 @@ class CommentQueryBuilder extends QueryBuilder
     /**
      * @return $this
      */
-    public function selectLikeCounts()
+    public function selectCommentLikeCounts()
     {
+        /**
+         * @var $joinClause JoinClause
+         */
+        foreach ($this->joins as $joinClause) {
+            if ($joinClause->type == 'left' && $joinClause->table == ConfigService::$tableCommentLikes) {
+                return $this;
+            }
+        }
+
         $this->leftJoin(
-            ConfigService::$tableContentLikes,
-            ConfigService::$tableContentLikes.".content_id",
+            ConfigService::$tableCommentLikes,
+            ConfigService::$tableCommentLikes.".comment_id",
             "=",
-            ConfigService::$tableComments.'.content_id'
+            ConfigService::$tableComments.'.id'
         )
             ->groupBy([ConfigService::$tableComments.'.id']);
 

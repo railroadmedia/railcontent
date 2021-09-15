@@ -156,7 +156,7 @@ class CommentRepository extends RepositoryBase
                     ->restrictByConversationStatus()
                     ->restrictByVisibility()
                     ->restrictByAssignedUserId()
-                    ->selectLikeCounts()
+                    ->selectCommentLikeCounts()
                     ->orderByRaw('replied_on ' . ($this->orderDirection))
                     ->directPaginate($this->page, 25);
 
@@ -174,7 +174,7 @@ class CommentRepository extends RepositoryBase
                 ->restrictByVisibility()
                 ->restrictByAssignedUserId()
                 ->onlyComments()
-                ->selectLikeCounts()
+                ->selectCommentLikeCounts()
                 ->orderBy($this->orderBy, $this->orderDirection, $this->orderTable)
                 ->orderBy('created_on', 'desc', ConfigService::$tableComments)
                 ->directPaginate($this->page, $this->limit);
@@ -210,7 +210,7 @@ class CommentRepository extends RepositoryBase
                 $this->orderDirection,
                 ConfigService::$tableComments
             )
-            ->selectLikeCounts()
+            ->selectCommentLikeCounts()
             ->onlyComments()
             ->orderBy('created_on', 'desc', ConfigService::$tableComments)
             ->directPaginate($this->page, $this->limit);
