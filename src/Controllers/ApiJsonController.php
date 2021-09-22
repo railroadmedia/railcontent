@@ -4,6 +4,7 @@ namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use Railroad\Railcontent\Decorators\Mobile\DateFormatDecorator;
 use Railroad\Railcontent\Decorators\Mobile\StripTagDecorator;
 use Railroad\Railcontent\Repositories\CommentRepository;
 use Railroad\Railcontent\Services\CommentService;
@@ -28,21 +29,27 @@ class ApiJsonController extends Controller
     private $stripTagsDecorator;
 
     /**
-     * ApiJsonController constructor.
-     *
+     * @var DateFormatDecorator
+     */
+    private $dateFormatDecorator;
+
+    /**
      * @param ContentService $contentService
      * @param CommentService $commentService
      * @param StripTagDecorator $stripTagDecorator
+     * @param DateFormatDecorator $dateFormatDecorator
      */
     public function __construct(
         ContentService $contentService,
         CommentService $commentService,
-        StripTagDecorator $stripTagDecorator
+        StripTagDecorator $stripTagDecorator,
+        DateFormatDecorator $dateFormatDecorator
     ) {
         $this->contentService = $contentService;
         $this->commentService = $commentService;
 
         $this->stripTagsDecorator = $stripTagDecorator;
+        $this->dateFormatDecorator = $dateFormatDecorator;
     }
 
     /**
@@ -97,6 +104,7 @@ class ApiJsonController extends Controller
         );
 
         $this->stripTagsDecorator->decorate($commentData['results']);
+        $this->dateFormatDecorator->decorate($commentData['results']);
 
         return response()->json(
             [

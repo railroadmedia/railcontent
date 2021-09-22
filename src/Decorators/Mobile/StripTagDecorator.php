@@ -34,11 +34,11 @@ class StripTagDecorator implements DecoratorInterface
             }
 
             if ($entity instanceof CommentEntity) {
-                $entities[$entityIndex]['comment'] = strip_tags(html_entity_decode($entity['comment']));
+                $entities[$entityIndex]['comment'] = strip_tags(html_entity_decode($entity['comment']), '<a>');
                 $replies = $entity['replies'] ?? [];
                 foreach ($replies as $index => $reply) {
                     $entities[$entityIndex]['replies'][$index]['comment'] =
-                        strip_tags(html_entity_decode($reply['comment']));
+                        strip_tags(html_entity_decode($reply['comment']),'<a>');
                 }
             }
         }
