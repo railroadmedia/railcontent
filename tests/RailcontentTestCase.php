@@ -54,7 +54,7 @@ class RailcontentTestCase extends BaseTestCase
      * @var string database connexion type
      * by default it's testbench; for full text search it's mysql
      */
-    protected $connectionType = 'mysql';
+    protected $connectionType = 'testbench';
 
     protected function setUp()
     {

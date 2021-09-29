@@ -300,6 +300,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content/' . $content['id'],
             [
                 'slug' => $content['slug'],
+                'brand' => $content['brand'],
                 'status' => ContentService::STATUS_PUBLISHED,
                 'type' => $this->faker->word,
             ]
@@ -319,6 +320,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             [
                 'slug' => $slug,
                 'position' => 1,
+                'brand' => $this->faker->word,
                 'status' => ContentService::STATUS_DRAFT,
                 'type' => $type,
             ]
@@ -407,6 +409,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content/' . $content['id'],
             [
                 'slug' => $new_slug,
+                'brand' => ConfigService::$brand,
                 'status' => ContentService::STATUS_PUBLISHED,
                 'type' => $content['type'],
             ]
@@ -1145,9 +1148,16 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'railcontent/content/get-by-ids',
             ['ids' => $content2['id'] . ',' . $content1['id']]
         );
+
+        $content1['permissions'] = [
+            [
+                'content_id' => $content1['id'],
+                'permission_id' => $permission,
+            ]
+        ];
         $expectedResults = [(array)$content2, (array)$content1];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data'));
     }
 
     public function test_all_content()
