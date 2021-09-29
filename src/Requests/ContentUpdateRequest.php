@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use Illuminate\Validation\Rule;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService as ContentService;
 
@@ -32,7 +33,15 @@ class ContentUpdateRequest extends CustomFormRequest
                             ContentService::STATUS_DELETED,
                         ]
                     ),
-                'type' => 'max:64',
+                'type' => 'required_with:slug|max:64',
+                'brand' => 'required_with:slug',
+                'slug' => [
+                    'nullable',
+                    Rule::unique(ConfigService::$databaseConnectionName . '.' . ConfigService::$tableContent)
+                        ->where('brand',$this->get('brand','drumeo'))
+                        ->where('type',$this->get('type','live'))
+                        ->ignore($this->id)
+                ],
                 'sort' => 'nullable|numeric',
                 'position' => 'nullable|numeric|min:0',
                 'parent_id' => 'nullable|numeric|exists:' . ConfigService::$databaseConnectionName . '.' .

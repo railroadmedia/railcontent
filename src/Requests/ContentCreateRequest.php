@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Requests;
 
+use Illuminate\Validation\Rule;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService as ContentService;
 
@@ -33,6 +34,12 @@ class ContentCreateRequest extends CustomFormRequest
                         ]
                     ),
                 'type' => 'required|max:64',
+                'slug' => [
+                    'string',
+                    Rule::unique(ConfigService::$databaseConnectionName . '.' . ConfigService::$tableContent)
+                        ->where('brand',$this->get('brand'))
+                        ->where('type',$this->get('type'))
+                ],
                 'sort' => 'nullable|numeric',
                 'position' => 'nullable|numeric|min:0',
                 'parent_id' => 'nullable|numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
