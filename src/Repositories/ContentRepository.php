@@ -655,6 +655,7 @@ class ContentRepository extends RepositoryBase
                 ->orderBy('updated_on', 'desc', ConfigService::$tableUserContentProgress)
                 ->limit($limit)
                 ->skip($skip)
+                ->groupBy(ConfigService::$tableContent . '.id')
                 ->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));

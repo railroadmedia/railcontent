@@ -77,10 +77,7 @@ class ContentServiceTest extends RailcontentTestCase
     {
         $results = $this->serviceBeingTested->getById($this->faker->numberBetween());
 
-        $this->assertEquals(
-            [],
-            $results->toArray()
-        );
+        $this->assertNull($results);
     }
 
     public function test_get_by_id_content_with_fields_and_datum()

@@ -86,7 +86,7 @@ class CommentQueryBuilder extends QueryBuilder
 
             if (isset($config['groupBy'])) {
 
-                $this->groupBy($config['groupBy'], [ConfigService::$tableComments . '.id' => 'id',]);
+                $this->groupBy($config['groupBy'], [ConfigService::$tableComments . '.id']);
             }
         }
 
