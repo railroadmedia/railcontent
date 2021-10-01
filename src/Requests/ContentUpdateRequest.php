@@ -33,15 +33,7 @@ class ContentUpdateRequest extends CustomFormRequest
                             ContentService::STATUS_DELETED,
                         ]
                     ),
-                'type' => 'required_with:slug|max:64',
-                'brand' => 'required_with:slug',
-                'slug' => [
-                    'nullable',
-                    Rule::unique(ConfigService::$databaseConnectionName . '.' . ConfigService::$tableContent)
-                        ->where('brand',$this->get('brand','drumeo'))
-                        ->where('type',$this->get('type','live'))
-                        ->ignore($this->id)
-                ],
+                'type' => 'max:64',
                 'sort' => 'nullable|numeric',
                 'position' => 'nullable|numeric|min:0',
                 'parent_id' => 'nullable|numeric|exists:' . ConfigService::$databaseConnectionName . '.' .
