@@ -1,2 +1,2 @@
 # musora-web-platform
-A web application to teach musical instruments and grow a community of musicians. 
+Musora's web application made to teach a variety of musical instruments and grow a community of musicians. 
