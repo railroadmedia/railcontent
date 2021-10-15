@@ -170,6 +170,22 @@ Route::group(
                     '/vimeo-video/{vimeoVideoId}',
                     \Railroad\Railcontent\Controllers\VimeoJsonController::class . '@show'
                 )->name('vimeo-video.show');
+
+                // content follow
+                Route::put(
+                    '/follow',
+                    Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@followContent'
+                )->name('content.follow');
+
+                Route::put(
+                    '/unfollow',
+                    Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@unfollowContent'
+                )->name('content.unfollow');
+
+                Route::get(
+                    '/followed-content',
+                    Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@getFollowedContent'
+                )->name('followed.content');
             }
         );
 
