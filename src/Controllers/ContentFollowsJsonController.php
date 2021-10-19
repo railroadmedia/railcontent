@@ -74,6 +74,7 @@ class ContentFollowsJsonController extends Controller
     {
         $response = $this->contentFollowsService->getUserFollowedContent(
             auth()->id(),
+            $request->get('brand',config('railcontent.brand')),
             $request->get('content_type')
         );
 

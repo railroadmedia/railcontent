@@ -21,26 +21,30 @@ class ContentFollowsRepository extends RepositoryBase
 
     /**
      * @param $userId
+     * @param $brand
      * @param null $contentType
-     * @return mixed
+     * @return array
      */
-    public function getFollowedContent($userId, $contentType = null)
+    public function getFollowedContent($userId, $brand, $contentType = null)
     {
-        $query = $this->query()
-            ->select('*')
-            ->leftJoin(
-                ConfigService::$tableContent,
-                'content_id',
-                '=',
-                ConfigService::$tableContent . '.id'
-            )
-            ->where(ConfigService::$tableContentFollows . '.user_id', $userId);
+        $query =
+            $this->query()
+                ->select('*')
+                ->leftJoin(
+                    ConfigService::$tableContent,
+                    'content_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                )
+                ->where(ConfigService::$tableContentFollows . '.user_id', $userId)
+                ->where(ConfigService::$tableContent . '.brand', $brand);
 
-        if($contentType){
+        if ($contentType) {
             $query->where(ConfigService::$tableContent . '.type', $contentType);
         }
 
-        return $query->get()->toArray();
+        return $query->get()
+            ->toArray();
     }
 
 }

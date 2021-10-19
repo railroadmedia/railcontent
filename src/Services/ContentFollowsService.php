@@ -3,6 +3,8 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Events\ContentFollow;
+use Railroad\Railcontent\Events\ContentUnfollow;
 use Railroad\Railcontent\Repositories\ContentFollowsRepository;
 
 class ContentFollowsService
@@ -35,6 +37,8 @@ class ContentFollowsService
                     ->toDateTimeString(),
             ]);
 
+        event(new ContentFollow($contentId, $userId));
+
         return $this->contentFollowsRepository->getById($id);
     }
 
@@ -45,6 +49,8 @@ class ContentFollowsService
      */
     public function unfollow($contentId, $userId)
     {
+        event(new ContentUnfollow($contentId, $userId));
+
         return $this->contentFollowsRepository->query()
             ->where([
                     'content_id' => $contentId,
@@ -55,11 +61,13 @@ class ContentFollowsService
 
     /**
      * @param $userId
+     * @param $brand
      * @param null $contentType
+     * @return array
      */
-    public function getUserFollowedContent($userId, $contentType = null)
+    public function getUserFollowedContent($userId, $brand, $contentType = null)
     {
-        $results = $this->contentFollowsRepository->getFollowedContent($userId, $contentType);
+        $results = $this->contentFollowsRepository->getFollowedContent($userId, $brand, $contentType);
 
         return $results;
     }
