@@ -86,13 +86,17 @@ class ContentFollowsService
      * @param $userId
      * @param $brand
      * @param null $contentType
-     * @return array
+     * @return mixed|\Railroad\Railcontent\Support\Collection|null
      */
     public function getUserFollowedContent($userId, $brand, $contentType = null)
     {
-        $results = $this->contentFollowsRepository->getFollowedContent($userId, $brand, $contentType);
+        $followedContent = $this->contentFollowsRepository->getFollowedContent($userId, $brand, $contentType);
 
-        return $results;
+        $contentIds = array_pluck($followedContent, 'content_id');
+
+        $contents = $this->contentService->getByIds($contentIds);
+
+        return Decorator::decorate($contents, 'content');
     }
 
     /**
@@ -106,9 +110,6 @@ class ContentFollowsService
      */
     public function getLessonsForFollowedCoaches($brand, $contentType = null, $statuses = [], $page = 1, $limit = 10, $sort='-published_on')
     {
-        ContentRepository::$availableContentStatues = (!empty($statuses))? $statuses : [ContentService::STATUS_PUBLISHED];
-        ContentRepository::$pullFutureContent = false;
-
         $followedContent = $this->getUserFollowedContent(
             auth()->id(),
             $brand,
@@ -119,13 +120,17 @@ class ContentFollowsService
 
         if (!empty($followedContent)) {
             $includedFields = [];
-            $contentIds = (array_pluck($followedContent, 'content_id'));
+            $contentIds = $followedContent->pluck('id');
+
             foreach ($contentIds as $contentId) {
                 $includedFields[] = 'instructor,' . $contentId;
                if(array_key_exists($contentId, config('railcontent.coach_id_instructor_id_mapping'))){
                    $includedFields[] = 'instructor,' . config('railcontent.coach_id_instructor_id_mapping.'.$contentId);
                }
             }
+
+            ContentRepository::$pullFutureContent = false;
+            ContentRepository::$availableContentStatues = (!empty($statuses))? $statuses : [ContentService::STATUS_PUBLISHED];
 
             $contentData = $this->contentService->getFiltered(
                 $page,

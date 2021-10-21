@@ -123,6 +123,7 @@ class FullTextSearchRepository extends RepositoryBase
                         'brand' => $content['brand'],
                         'content_type' => $content['type'],
                         'content_status' => $content['status'],
+                        'content_instructors' => implode(',',ContentHelper::getFieldValues($content, 'instructor')),
                         'content_published_on' => $content['published_on'] ?? Carbon::now(),
                         'created_at' => Carbon::now()
                             ->toDateTimeString(),
@@ -233,7 +234,8 @@ class FullTextSearchRepository extends RepositoryBase
         $contentStatuses = [],
         $orderByColumn = 'score',
         $orderByDirection = 'desc',
-        $dateTimeCutoff = null
+        $dateTimeCutoff = null,
+        $instructorId = null
     ) {
         $query =
             $this->query()
@@ -316,6 +318,10 @@ class FullTextSearchRepository extends RepositoryBase
             $query->where('content_published_on', '>', $dateTimeCutoff);
         }
 
+        if($instructorId) {
+            $query->whereRaw(' FIND_IN_SET('.$instructorId.',content_instructors)');
+        }
+
         $contentRows = $query->getToArray();
 
         return array_column($contentRows, 'content_id');
@@ -332,7 +338,8 @@ class FullTextSearchRepository extends RepositoryBase
         $term,
         $contentType = [],
         $contentStatus = null,
-        $dateTimeCutoff = null
+        $dateTimeCutoff = null,
+        $instructorId = null
     ) {
         $query =
             $this->query()
@@ -406,6 +413,10 @@ class FullTextSearchRepository extends RepositoryBase
 
         if (!empty($dateCutoff)) {
             $query->where('content_published_on', '>', $dateTimeCutoff);
+        }
+
+        if ($instructorId) {
+            $query->whereRaw(' FIND_IN_SET('.$instructorId.',content_instructors)');
         }
 
         return $query->count();
