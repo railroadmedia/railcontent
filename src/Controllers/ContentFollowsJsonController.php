@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Controllers;
 
 use Illuminate\Routing\Controller;
+use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentFollowRequest;
 use Railroad\Railcontent\Services\ConfigService;
@@ -47,9 +48,13 @@ class ContentFollowsJsonController extends Controller
             auth()->id()
         );
 
-        return reply()->json([[$response]], [
-            'transformer' => DataTransformer::class,
-        ]);
+        return reply()->json(
+            [$response],
+            [
+                'code' => $response ? 200 : 500,
+                'transformer' => DataTransformer::class,
+            ]
+        );
     }
 
     /**
@@ -74,7 +79,7 @@ class ContentFollowsJsonController extends Controller
     {
         $response = $this->contentFollowsService->getUserFollowedContent(
             auth()->id(),
-            $request->get('brand',config('railcontent.brand')),
+            $request->get('brand', config('railcontent.brand')),
             $request->get('content_type')
         );
 
@@ -89,34 +94,19 @@ class ContentFollowsJsonController extends Controller
      */
     public function getLatestLessonsForFollowedContentByType(Request $request)
     {
-        ContentRepository::$availableContentStatues = $request->get('statuses', [ContentService::STATUS_PUBLISHED]);
-
-        $followedContent = $this->contentFollowsService->getUserFollowedContent(
-            auth()->id(),
-            $request->get('content_type')
-        );
-
-        $includedFields = [];
-        $contentIds = (array_pluck($followedContent, 'content_id'));
-        foreach ($contentIds as $contentId) {
-            $includedFields[] = 'instructor,' . $contentId;
-        }
-
-        $contentData = $this->contentService->getFiltered(
+        $contentData = $this->contentFollowsService->getLatestLessons(
+            $request->get('brand', config('railcontent.brand')),
+            $request->get('content_type'),
+            $request->get('statuses', [ContentService::STATUS_PUBLISHED]),
             $request->get('page', 1),
             $request->get('limit', 10),
-            $request->get('sort', '-published_on'),
-            [],
-            [],
-            [],
-            [],
-            $includedFields
+            $request->get('sort', '-published_on')
         );
 
         return reply()->json($contentData['results'], [
-                'transformer' => DataTransformer::class,
-                'totalResults' => $contentData['total_results'],
-                'filterOptions' => [],
-            ]);
+            'transformer' => DataTransformer::class,
+            'totalResults' => $contentData['total_results'],
+            'filterOptions' => [],
+        ]);
     }
 }

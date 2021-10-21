@@ -2,8 +2,6 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Illuminate\Database\Query\JoinClause;
-use Railroad\Railcontent\Repositories\QueryBuilders\ContentQueryBuilder;
 use Railroad\Railcontent\Repositories\Traits\ByContentIdTrait;
 use Railroad\Railcontent\Services\ConfigService;
 

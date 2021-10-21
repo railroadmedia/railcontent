@@ -646,4 +646,9 @@ return [
         'play-along',
         'song',
     ],
+
+    'coach_id_instructor_id_mapping' => [
+
+    ]
+
 ];
