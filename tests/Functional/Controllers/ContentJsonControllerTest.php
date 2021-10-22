@@ -260,7 +260,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ],
         ];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+        $this->assertArraySubset($expectedResults, $response->decodeResponseJson('data'));
     }
 
     public function test_content_service_return_new_content_after_create()
@@ -1147,7 +1147,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
         $expectedResults = [(array)$content2, (array)$content1];
 
-        $this->assertEquals($expectedResults, $response->decodeResponseJson('data'));
+        $this->assertArraySubset( $expectedResults, $response->decodeResponseJson('data'));
     }
 
     public function test_all_content()
@@ -1340,6 +1340,91 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals($response2->decodeResponseJson('data')[0]['total_xp'],config('xp_ranks.difficulty_xp_map.all'));
     }
+
+    public function test_follow_content()
+    {
+        $content = $this->contentFactory->create();
+
+        $loggedInUserId = $this->createAndLogInNewUser();
+
+        $response =  $this->call('PUT', 'railcontent/follow/',['content_id' =>  $content['id']]);
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals($response->decodeResponseJson('data')[0]['content_id'], $content['id']);
+        $this->assertEquals($response->decodeResponseJson('data')[0]['user_id'], $loggedInUserId);
+    }
+
+    public function test_follow_content_validation()
+    {
+        $this->createAndLogInNewUser();
+
+        $response =  $this->call('PUT', 'railcontent/follow/',['content_id' =>  rand()]);
+
+        $this->assertEquals(422, $response->status());
+        $errors = [
+            [
+                'source' => "content_id",
+                "detail" => "The selected content id is invalid.",
+            ],
+        ];
+        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+    }
+
+    public function test_unfollow_content()
+    {
+        $content = $this->contentFactory->create();
+        $loggedInUserId = $this->createAndLogInNewUser();
+
+        $this->call('PUT', 'railcontent/follow/',['content_id' =>  $content['id']]);
+
+        $response =  $this->call('PUT', 'railcontent/unfollow/',['content_id' =>  $content['id']]);
+
+        $this->assertEquals(204, $response->status());
+        $this->assertDatabaseMissing(
+            ConfigService::$tableContentFollows,
+            [
+                'content_id' => $content['id'],
+                'user_id' => $loggedInUserId
+            ]
+        );
+    }
+
+    public function test_unfollow_content_validation()
+    {
+        $this->createAndLogInNewUser();
+
+        $response =  $this->call('PUT', 'railcontent/unfollow/',['content_id' =>  rand()]);
+
+        $this->assertEquals(422, $response->status());
+        $errors = [
+            [
+                'source' => "content_id",
+                "detail" => "The selected content id is invalid.",
+            ],
+        ];
+        $this->assertEquals($errors, $response->decodeResponseJson('meta')['errors']);
+    }
+
+    public function test_get_followed_content()
+    {
+        $this->createAndLogInNewUser();
+
+        $content1 = $this->contentFactory->create()->getArrayCopy();
+        $content2 = $this->contentFactory->create()->getArrayCopy();
+        $content3 = $this->contentFactory->create()->getArrayCopy();
+
+        $this->call('PUT', 'railcontent/follow/',['content_id' =>  $content1['id']]);
+        $this->call('PUT', 'railcontent/follow/',['content_id' =>  $content2['id']]);
+        $this->call('PUT', 'railcontent/follow/',['content_id' =>  $content3['id']]);
+
+        $response =  $this->call('GET', 'railcontent/followed-content/');
+
+        $this->assertEquals(200, $response->status());
+        $this->assertEquals(3, count($response->decodeResponseJson('data')));
+        $this->assertEquals([$content1, $content2, $content3], $response->decodeResponseJson('data'));
+    }
+
+
 
     /**
      * @return \Illuminate\Database\Connection
