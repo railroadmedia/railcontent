@@ -319,7 +319,18 @@ class FullTextSearchRepository extends RepositoryBase
         }
 
         if($instructorId) {
-            $query->whereRaw(' FIND_IN_SET('.$instructorId.',content_instructors)');
+            if(config('railcontent.coach_id_instructor_id_mapping.'.$instructorId)){
+                $query->where(
+                    function (Builder $builder) use ($instructorId){
+                        return $builder->whereRaw(
+                            ' FIND_IN_SET('.$instructorId.',content_instructors)'
+                        )
+                            ->orWhereRaw(' FIND_IN_SET('.config('railcontent.coach_id_instructor_id_mapping.'.$instructorId).',content_instructors)');
+                    }
+                );
+            }else {
+                $query->whereRaw(' FIND_IN_SET(' . $instructorId . ',content_instructors)');
+            }
         }
 
         $contentRows = $query->getToArray();
