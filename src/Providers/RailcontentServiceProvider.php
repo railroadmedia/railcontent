@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Validator;
 use PDO;
 use Railroad\Railcontent\Commands\AddDefaultShowNewField;
+use Railroad\Railcontent\Commands\CalculateContentPopularity;
 use Railroad\Railcontent\Commands\CalculateTotalXP;
 use Railroad\Railcontent\Commands\CleanContentTopicsAndStyles;
 use Railroad\Railcontent\Commands\CleanMetadata;
@@ -119,7 +120,8 @@ class RailcontentServiceProvider extends ServiceProvider
                 ExpireCache::class,
                 CalculateTotalXP::class,
                 CleanMetadata::class,
-                CleanContentTopicsAndStyles::class
+                CleanContentTopicsAndStyles::class,
+                CalculateContentPopularity::class
             ]
         );
 

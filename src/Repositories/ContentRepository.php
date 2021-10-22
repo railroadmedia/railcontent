@@ -1123,6 +1123,7 @@ class ContentRepository extends RepositoryBase
 
         foreach ($contentRows as $contentRow) {
             $contents[$contentRow['id']]['id'] = $contentRow['id'];
+            $contents[$contentRow['id']]['popularity'] = $contentRow['popularity'];
             $contents[$contentRow['id']]['slug'] = $contentRow['slug'];
             $contents[$contentRow['id']]['type'] = $contentRow['type'];
             $contents[$contentRow['id']]['sort'] = $contentRow['sort'];
