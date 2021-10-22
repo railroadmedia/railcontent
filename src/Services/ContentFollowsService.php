@@ -88,15 +88,20 @@ class ContentFollowsService
      * @param null $contentType
      * @return mixed|\Railroad\Railcontent\Support\Collection|null
      */
-    public function getUserFollowedContent($userId, $brand, $contentType = null)
+    public function getUserFollowedContent($userId, $brand, $contentType = null, $page, $limit)
     {
-        $followedContent = $this->contentFollowsRepository->getFollowedContent($userId, $brand, $contentType);
+        $followedContent = $this->contentFollowsRepository->getFollowedContent($userId, $brand, $contentType, $page , $limit);
 
         $contentIds = array_pluck($followedContent, 'content_id');
 
         $contents = $this->contentService->getByIds($contentIds);
 
-        return Decorator::decorate($contents, 'content');
+        $results = new ContentFilterResultsEntity( [
+            'results' => $contents,
+            'total_results' => $this->contentFollowsRepository->countFollowedContent($userId, $brand, $contentType),
+        ]);
+
+        return Decorator::decorate($results, 'content');
     }
 
     /**
@@ -110,17 +115,19 @@ class ContentFollowsService
      */
     public function getLessonsForFollowedCoaches($brand, $contentType = null, $statuses = [], $page = 1, $limit = 10, $sort='-published_on')
     {
-        $followedContent = $this->getUserFollowedContent(
+        $followedContent = $this->contentFollowsRepository->getFollowedContent(
             auth()->id(),
             $brand,
-            $contentType
+            $contentType,
+            1,
+            'null'
         );
 
         $contentData = new ContentFilterResultsEntity(['results' => [], 'total_results' => 0]);
 
         if (!empty($followedContent)) {
             $includedFields = [];
-            $contentIds = $followedContent->pluck('id');
+            $contentIds = array_pluck($followedContent, 'id');
 
             foreach ($contentIds as $contentId) {
                 $includedFields[] = 'instructor,' . $contentId;
@@ -143,6 +150,42 @@ class ContentFollowsService
                 $includedFields
             );
         }
+
+        return Decorator::decorate($contentData, 'content');
+    }
+
+    /**
+     * @param $contentId
+     * @param array $statuses
+     * @param int $page
+     * @param int $limit
+     * @param string $sort
+     * @return mixed|\Railroad\Railcontent\Support\Collection|null
+     */
+    public function getLessonsForFollowedContent($contentId, $statuses = [], $page = 1, $limit = 10, $sort='-published_on')
+    {
+       // $contentData = new ContentFilterResultsEntity(['results' => [], 'total_results' => 0]);
+
+
+            $includedFields = [];
+                $includedFields[] = 'instructor,' . $contentId;
+                if(array_key_exists($contentId, config('railcontent.coach_id_instructor_id_mapping'))){
+                    $includedFields[] = 'instructor,' . config('railcontent.coach_id_instructor_id_mapping.'.$contentId);
+                }
+
+            ContentRepository::$pullFutureContent = false;
+            ContentRepository::$availableContentStatues = (!empty($statuses))? $statuses : [ContentService::STATUS_PUBLISHED];
+
+            $contentData = $this->contentService->getFiltered(
+                $page,
+                $limit,
+                $sort,
+                [],
+                [],
+                [],
+                [],
+                $includedFields
+            );
 
         return Decorator::decorate($contentData, 'content');
     }

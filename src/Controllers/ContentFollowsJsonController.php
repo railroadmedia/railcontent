@@ -80,7 +80,9 @@ class ContentFollowsJsonController extends Controller
         $response = $this->contentFollowsService->getUserFollowedContent(
             auth()->id(),
             $request->get('brand', config('railcontent.brand')),
-            $request->get('content_type')
+            $request->get('content_type'),
+            $request->get('page', 1),
+            $request->get('limit', 10)
         );
 
         return reply()->json($response, [
@@ -94,7 +96,7 @@ class ContentFollowsJsonController extends Controller
      */
     public function getLatestLessonsForFollowedContentByType(Request $request)
     {
-        $contentData = $this->contentFollowsService->getLatestLessons(
+        $contentData = $this->contentFollowsService->getLessonsForFollowedCoaches(
             $request->get('brand', config('railcontent.brand')),
             $request->get('content_type'),
             $request->get('statuses', [ContentService::STATUS_PUBLISHED]),
