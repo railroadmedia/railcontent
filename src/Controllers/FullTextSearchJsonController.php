@@ -48,7 +48,8 @@ class FullTextSearchJsonController extends Controller
             $request->get('statuses', []),
             $request->get('sort', '-score'),
             $request->get('date_time_cutoff', null),
-            $request->get('brands', null)
+            $request->get('brands', null),
+            $request->get('coach_ids', [])
         );
 
         return reply()->json(
