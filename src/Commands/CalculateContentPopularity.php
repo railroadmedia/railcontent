@@ -62,21 +62,21 @@ class CalculateContentPopularity extends Command
 
             $sql = <<<'EOT'
 UPDATE `%s` cs
-INNER JOIN (
+LEFT JOIN (
     SELECT
   count(up.id) as nr, up.content_id
     FROM railcontent_user_content_progress up
     where up.state = '%s' and up.updated_on > '%s'
     Group by up.content_id
 )c ON  cs.id = c.content_id 
-INNER JOIN (
+LEFT JOIN (
     SELECT
   count(up.id) as nr, up.content_id
     FROM railcontent_user_content_progress up
     where up.state = '%s' and up.updated_on > '%s'
     Group by up.content_id
 )s ON  cs.id = s.content_id 
-SET cs.`popularity` = ((c.nr * 5) + s.nr)
+SET cs.`popularity` = ((IFNULL(c.nr, 0) * 5) + IFNULL(s.nr, 0))
 EOT;
 
             $statement = sprintf(
@@ -91,8 +91,6 @@ EOT;
 
             $this->databaseManager->connection(config('railcontent.database_connection_name'))
                 ->statement($statement);
-
-
 
         $this->info('Total time::  '.(microtime(true) - $startTime));
         $this->info('Memory usage :: ' . $this->formatmem(memory_get_usage() - $memoryStart));
