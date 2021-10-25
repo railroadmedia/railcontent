@@ -330,7 +330,7 @@ class ContentRepositoryBaseFilteringTest extends RailcontentTestCase
         )
             ->retrieveFilter();
 
-        $this->assertEquals($expectedChildContents, $results);
+        $this->assertArraySubset($expectedChildContents, $results);
     }
 
 }

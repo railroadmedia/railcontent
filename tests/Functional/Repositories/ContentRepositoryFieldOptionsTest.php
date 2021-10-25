@@ -66,7 +66,7 @@ class ContentRepositoryFieldOptionsTest extends RailcontentTestCase
         $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [], [])
             ->getFilterFields();
 
-        $this->assertEquals([$fieldName => [$fieldValue]], $rows);
+        $this->assertArraySubset([$fieldName => [ucfirst($fieldValue)]], $rows);
     }
 
     public function test_get_field_options_multiple()
@@ -97,7 +97,7 @@ class ContentRepositoryFieldOptionsTest extends RailcontentTestCase
 
             ConfigService::$fieldOptionList[] = $fieldName;
 
-            $expectedFields[$fieldName][] = $fieldValue;
+            $expectedFields[$fieldName][] = ucfirst($fieldValue);
         }
 
         // random fields that shouldn't be in the filter
@@ -120,6 +120,6 @@ class ContentRepositoryFieldOptionsTest extends RailcontentTestCase
         $rows = $this->classBeingTested->startFilter(2, 3, 'id', 'asc', [$type], [], [])
             ->getFilterFields();
 
-        $this->assertEquals($expectedFields, $rows);
+        $this->assertArraySubset($expectedFields, $rows);
     }
 }

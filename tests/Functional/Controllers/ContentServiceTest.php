@@ -63,12 +63,9 @@ class ContentServiceTest extends RailcontentTestCase
         $results = $this->serviceBeingTested->getById($content['id']);
 
         $this->assertEquals(
-            array_merge(
-                $content->getArrayCopy(),
-                [
+            array_merge($content->getArrayCopy(), [
                     'id' => $content['id'],
-                ]
-            ),
+                ]),
             $results->getArrayCopy()
         );
     }
@@ -77,10 +74,7 @@ class ContentServiceTest extends RailcontentTestCase
     {
         $results = $this->serviceBeingTested->getById($this->faker->numberBetween());
 
-        $this->assertEquals(
-            [],
-            $results->toArray()
-        );
+        $this->assertNull($results);
     }
 
     public function test_get_by_id_content_with_fields_and_datum()
@@ -104,14 +98,11 @@ class ContentServiceTest extends RailcontentTestCase
         );
 
         $this->assertEquals(
-            array_merge(
-                $content->getArrayCopy(),
-                [
+            array_merge($content->getArrayCopy(), [
                     'id' => $content['id'],
                     'fields' => [$randomField],
                     'data' => [$randomDatum],
-                ]
-            ),
+                ]),
             $results->getArrayCopy()
         );
     }

@@ -87,7 +87,7 @@ class ContentRepositoryTest extends RailcontentTestCase
 
         $results = $this->classBeingTested->getById($contentId);
 
-        $this->assertEquals(
+        $this->assertArraySubset(
             array_merge($content, [
                 'id' => $contentId,
                 'fields' => [],

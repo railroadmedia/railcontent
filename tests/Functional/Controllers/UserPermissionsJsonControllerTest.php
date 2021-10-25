@@ -610,11 +610,13 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
         );
 
         //assert ttl it's the seconds until permission activation date
-        $this->assertEquals(
-            60 * 60,
+        $this->assertTrue(
             Redis::ttl(
                 $userCacheKeys
-            )
+            ) <=60 * 60 &&
+            Redis::ttl(
+                $userCacheKeys
+            ) > 60
         );
     }
 
@@ -750,6 +752,6 @@ class UserPermissionsJsonControllerTest extends RailcontentTestCase
 
         $redisTTL = Redis::ttl($userCacheKeys);
 
-        $this->assertEquals($recentExpirationSeconds, $redisTTL);
+        $this->assertTrue($recentExpirationSeconds <= $redisTTL);
     }
 }
