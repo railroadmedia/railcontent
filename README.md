@@ -398,6 +398,20 @@ Data first simple CMS.
     + [Wordy explaination](#wordy-explaination)
       - [Like](#like)
       - [Unlike](#unlike)
+  * [Follow a content - JSON controller](#follow-a-content---json-controller)
+    + [Request Example](#request-example-43)
+    + [Response Example](#response-example-44)
+  * [Unfollow a content - JSON controller](#unfollow-a-content---json-controller)
+    + [Request Example](#request-example-44)
+    + [Response Example](#response-example-45)
+  * [Get followed contents - JSON controller](#get-followed-contents---json-controller)
+    + [Request Example](#request-example-45)
+    + [Request Parameters](#request-parameters-41)
+    + [Response Example](#response-example-46)
+  * [Get lessons from the specific coaches that the user follows - JSON controller](#get-lessons-from-the-specific-coaches-that-the-user-follows---json-controller)
+    + [Request Example](#request-example-46)
+    + [Request Parameters](#request-parameters-42)
+    + [Response Example](#response-example-47)
 
 
 
