@@ -161,15 +161,26 @@
     + [Response Example](#response-example-40)
   * [Get comment likes- JSON controller](#get-comment-likes--json-controller)
     + [Request Example](#request-example-40)
+    + [Request Parameters](#request-parameters-38)
     + [Response Example](#response-example-41)
   * [Pull assigned to me comments - JSON controller](#pull-assigned-to-me-comments---json-controller)
     + [Request Example](#request-example-41)
-    + [Request Parameters](#request-parameters-38)
+    + [Request Parameters](#request-parameters-39)
     + [Response Example](#response-example-42)
   * [Delete comment assignation - JSON controller](#delete-comment-assignation---json-controller)
     + [Request Example](#request-example-42)
-    + [Request Parameters](#request-parameters-39)
+    + [Request Parameters](#request-parameters-40)
     + [Response Example](#response-example-43)
+  * [Follow a content - JSON controller](#follow-a-content---json-controller)
+    + [Request Example](#request-example-43)
+    + [Response Example](#response-example-44)
+  * [Unfollow a content - JSON controller](#unfollow-a-content---json-controller)
+    + [Request Example](#request-example-44)
+    + [Response Example](#response-example-45)
+  * [Get followed contents - JSON controller](#get-followed-contents---json-controller)
+    + [Request Example](#request-example-45)
+    + [Request Parameters](#request-parameters-41)
+    + [Response Example](#response-example-46)
 
 <!-- ecotrust-canada.github.io/markdown-toc -->
 
@@ -3555,3 +3566,467 @@ path , id , yes, Id of the comment
 ### Response Example
 
 ```204 No Content```
+
+
+Follow a content - JSON controller
+--------------------------------------
+
+`{ PUT /follow }`
+
+Authenticated user follow a content.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/follow',
+    type: 'put',
+    dataType: 'json',
+    data: {content_id: 1},
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Response Example
+
+```200 OK```
+
+
+```json
+{
+  "data": [
+    {
+      "id": 4,
+      "content_id": 1,
+      "user_id": 149628,
+      "created_on": "2021-10-25 11:30:51"
+    }
+  ]
+}
+```
+
+Unfollow a content - JSON controller
+--------------------------------------
+
+`{ PUT /unfollow }`
+
+Authenticated user unfollow a content.
+
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/unfollow',
+    type: 'put',
+    dataType: 'json',
+    data: {content_id: 1},
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Response Example
+
+```204 OK```
+
+
+```json
+{}
+```
+
+Get followed contents - JSON controller
+--------------------------------------
+
+`{ GET /followed-content }`
+
+Get followed contents - paginated.
+
+### Request Example
+
+```js   
+
+$.ajax({
+    url: 'https://www.musora.com' +
+        '/railcontent/followed-content?page=1&limit=2',
+    type: 'get',
+    dataType: 'json',
+    success: function(response) {
+        // handle success
+    },
+    error: function(response) {
+        // handle error
+    }
+});
+
+```
+
+### Request Parameters
+
+| path\|query\|body |  key    |  required |  default |  description\|notes                   |
+|-------------------|---------|-----------|----------|---------------------------------------|
+| query             |  brand   |  no       |  value set in config file    | Pull only followed contents from specified brand                   |
+| query             |  content_type   |  no       |  null       |  Pull only followed contents with specified content type                   |
+| query             |  page   |  no       |  1       |  Pagination page.                     |
+| query             |  limit  |  no       |  10      |  Amount of content to pull per page. |
+
+
+### Response Example
+
+```200 OK```
+
+```json
+{
+  "data": [
+    {
+      "id": 281906,
+      "popularity": null,
+      "slug": "aric-improta",
+      "type": "coach",
+      "sort": 0,
+      "status": "published",
+      "language": "en-US",
+      "brand": "drumeo",
+      "total_xp": "0",
+      "published_on": "2020/12/29 19:31:50",
+      "created_on": "2020-12-29 19:31:50",
+      "archived_on": null,
+      "parent_id": null,
+      "child_id": null,
+      "fields": [
+        {
+          "id": 417372,
+          "content_id": 281906,
+          "key": "name",
+          "value": "Aric Improta",
+          "type": "string",
+          "position": 1
+        },
+        {
+          "id": 417373,
+          "content_id": 281906,
+          "key": "title",
+          "value": "Aric Improta",
+          "type": "string",
+          "position": 1
+        },
+        {
+          "key": "difficulty",
+          "value": "all",
+          "type": "string",
+          "position": 1
+        }
+      ],
+      "data": [
+        {
+          "id": 164381,
+          "content_id": 281906,
+          "key": "head_shot_picture_url",
+          "value": "https://d1923uyy6spedc.cloudfront.net/281906-avatar-1609277595.png",
+          "position": 1
+        },
+        {
+          "id": 164345,
+          "content_id": 281906,
+          "key": "short_description",
+          "value": "<p>Aric Improta is pushing the boundaries of drum performances. Look no further than his exhilarating backflips mid drum solo in front of thousands of screaming fans.</p><p><br></p><p>A dedicated artist, Aric uses his original music projects (Night Verses &amp; Fever333) to deliver sensational visual performances to the masses.</p><p><br></p><p>And now he’s here to help you think outside the box with your drumming and question the implied “rules” that might be holding you back from your next creative breakthrough.</p><p><br></p>",
+          "position": 1
+        },
+        {
+          "id": 164346,
+          "content_id": 281906,
+          "key": "long_description",
+          "value": "<p>Aric Improta is pushing the boundaries of drum performances. Look no further than his exhilarating backflips mid drum solo in front of thousands of screaming fans.</p><p><br></p><p>A dedicated artist, Aric uses his original music projects (Night Verses &amp; Fever333) to deliver sensational visual performances to the masses.</p><p><br></p><p>And now he’s here to help you think outside the box with your drumming and question the implied “rules” that might be holding you back from your next creative breakthrough.</p>",
+          "position": 1
+        },
+        {
+          "id": 164347,
+          "content_id": 281906,
+          "key": "header_image_url",
+          "value": "https://d1923uyy6spedc.cloudfront.net/281906-header-image-1609277589.jpg",
+          "position": 1
+        },
+        {
+          "id": 164348,
+          "content_id": 281906,
+          "key": "thumbnail_url",
+          "value": "https://d1923uyy6spedc.cloudfront.net/281906-card-thumbnail-1624382173.png",
+          "position": 1
+        },
+        {
+          "id": 164349,
+          "content_id": 281906,
+          "key": "original_thumbnail_url",
+          "value": "https://d1923uyy6spedc.cloudfront.net/281906-card-thumbnail-maxres-1624382169.png",
+          "position": 1
+        }
+      ],
+      "permissions": [
+        {
+          "id": 1,
+          "content_id": 281906,
+          "content_type": null,
+          "permission_id": 1,
+          "brand": "drumeo",
+          "name": "Drumeo Edge"
+        }
+      ],
+      "user_progress": {
+        "149628": []
+      },
+      "completed": false,
+      "started": false,
+      "progress_percent": 0,
+      "user_playlists": {
+        "149628": []
+      },
+      "is_added_to_primary_playlist": false,
+      "published_on_in_timezone": "2020/12/29 21:31:50",
+      "is_new": false,
+      "like_count": 0,
+      "url": "https://dev.drumeo.com/laravel/public/members/coaches/aric-improta",
+      "biography": "<p>Aric Improta is pushing the boundaries of drum performances. Look no further than his exhilarating backflips mid drum solo in front of thousands of screaming fans.</p><p><br></p><p>A dedicated artist, Aric uses his original music projects (Night Verses &amp; Fever333) to deliver sensational visual performances to the masses.</p><p><br></p><p>And now he’s here to help you think outside the box with your drumming and question the implied “rules” that might be holding you back from your next creative breakthrough.</p>"
+    },
+    {
+      "id": 281905,
+      "popularity": null,
+      "slug": "dorothea-taylor",
+      "type": "coach",
+      "sort": 0,
+      "status": "published",
+      "language": "en-US",
+      "brand": "drumeo",
+      "total_xp": "0",
+      "published_on": "2020/12/29 19:31:50",
+      "created_on": "2020-12-29 19:31:50",
+      "archived_on": null,
+      "parent_id": null,
+      "child_id": null,
+      "fields": [
+        {
+          "id": 417370,
+          "content_id": 281905,
+          "key": "name",
+          "value": "Dorothea Taylor",
+          "type": "string",
+          "position": 1
+        },
+        {
+          "id": 417371,
+          "content_id": 281905,
+          "key": "title",
+          "value": "Dorothea Taylor",
+          "type": "string",
+          "position": 1
+        },
+        {
+          "key": "difficulty",
+          "value": "all",
+          "type": "string",
+          "position": 1
+        }
+      ],
+      "data": [
+        {
+          "id": 164375,
+          "content_id": 281905,
+          "key": "head_shot_picture_url",
+          "value": "https://d1923uyy6spedc.cloudfront.net/281905-avatar-1609277433.png",
+          "position": 1
+        },
+        {
+          "id": 164340,
+          "content_id": 281905,
+          "key": "short_description",
+          "value": "<p>Dorothea Taylor spent the majority of her drum career out of the spotlight -- teaching lessons to budding Michigan drum students.</p><p><br></p><p>That’s until she partnered with Drumeo to create a powerful viral video addressing societal expectations in drumming culture -- shocking audiences with her (un)surprising command of a hard-rock anthem, garnering millions of views in two days.</p><p><br></p><p>Get ready to hang with one of the internet’s most renowned drum instructors and strengthen your hands with Dorothea’s go-to drumline workouts.</p>",
+          "position": 1
+        },
+        {
+          "id": 164341,
+          "content_id": 281905,
+          "key": "long_description",
+          "value": "<p>Dorothea Taylor spent the majority of her drum career out of the spotlight -- teaching lessons to budding Michigan drum students.</p><p><br></p><p>That’s until she partnered with Drumeo to create a powerful viral video addressing societal expectations in drumming culture -- shocking audiences with her (un)surprising command of a hard-rock anthem, garnering millions of views in two days.</p><p><br></p><p>Get ready to hang with one of the internet’s most renowned drum instructors and strengthen your hands with Dorothea’s go-to drumline workouts.</p>",
+          "position": 1
+        },
+        {
+          "id": 164342,
+          "content_id": 281905,
+          "key": "header_image_url",
+          "value": "https://d1923uyy6spedc.cloudfront.net/header-image-1634059455.jpg",
+          "position": 1
+        },
+        {
+          "id": 164343,
+          "content_id": 281905,
+          "key": "thumbnail_url",
+          "value": "https://d1923uyy6spedc.cloudfront.net/281905-card-thumbnail-1624382185.png",
+          "position": 1
+        },
+        {
+          "id": 164344,
+          "content_id": 281905,
+          "key": "original_thumbnail_url",
+          "value": "https://d1923uyy6spedc.cloudfront.net/281905-card-thumbnail-maxres-1624382181.png",
+          "position": 1
+        }
+      ],
+      "permissions": [
+        {
+          "id": 1,
+          "content_id": 281905,
+          "content_type": null,
+          "permission_id": 1,
+          "brand": "drumeo",
+          "name": "Drumeo Edge"
+        }
+      ],
+      "user_progress": {
+        "149628": []
+      },
+      "completed": false,
+      "started": false,
+      "progress_percent": 0,
+      "user_playlists": {
+        "149628": []
+      },
+      "is_added_to_primary_playlist": false,
+      "published_on_in_timezone": "2020/12/29 21:31:50",
+      "is_new": false,
+      "like_count": 0,
+      "url": "https://dev.drumeo.com/laravel/public/members/coaches/dorothea-taylor",
+      "biography": "<p>Dorothea Taylor spent the majority of her drum career out of the spotlight -- teaching lessons to budding Michigan drum students.</p><p><br></p><p>That’s until she partnered with Drumeo to create a powerful viral video addressing societal expectations in drumming culture -- shocking audiences with her (un)surprising command of a hard-rock anthem, garnering millions of views in two days.</p><p><br></p><p>Get ready to hang with one of the internet’s most renowned drum instructors and strengthen your hands with Dorothea’s go-to drumline workouts.</p>"
+    },
+    {
+      "id": 281904,
+      "popularity": null,
+      "slug": "larnell-lewis",
+      "type": "coach",
+      "sort": 0,
+      "status": "published",
+      "language": "en-US",
+      "brand": "drumeo",
+      "total_xp": "0",
+      "published_on": "2020/12/29 19:31:50",
+      "created_on": "2020-12-29 19:31:50",
+      "archived_on": null,
+      "parent_id": null,
+      "child_id": null,
+      "fields": [
+        {
+          "id": 417368,
+          "content_id": 281904,
+          "key": "name",
+          "value": "Larnell Lewis",
+          "type": "string",
+          "position": 1
+        },
+        {
+          "id": 417369,
+          "content_id": 281904,
+          "key": "title",
+          "value": "Larnell Lewis",
+          "type": "string",
+          "position": 1
+        },
+        {
+          "key": "difficulty",
+          "value": "all",
+          "type": "string",
+          "position": 1
+        }
+      ],
+      "data": [
+        {
+          "id": 164382,
+          "content_id": 281904,
+          "key": "head_shot_picture_url",
+          "value": "https://d1923uyy6spedc.cloudfront.net/281904-avatar-1609277645.png",
+          "position": 1
+        },
+        {
+          "id": 164335,
+          "content_id": 281904,
+          "key": "short_description",
+          "value": "<p>In 2015, Larnell Lewis boarded a plane to the Netherlands to fill in for one of his drumming heroes, Robert “Sput” Searight. The rest is history.</p><p><br></p><p>Larnell learned a complex fusion set during the flight and went on to record one of the most celebrated live albums of the 21st century: <em>We Like It Here</em> by Snarky Puppy.</p><p><br></p><p>He’s a Grammy Award-winning musician, composer, producer, and educator -- and he’s here to teach YOU.</p>",
+          "position": 1
+        },
+        {
+          "id": 164336,
+          "content_id": 281904,
+          "key": "long_description",
+          "value": "<p>In 2015, Larnell Lewis boarded a plane to the Netherlands to fill in for one of his drumming heroes, Robert “Sput” Searight. The rest is history.</p><p><br></p><p>Larnell learned a complex fusion set during the flight and went on to record one of the most celebrated live albums of the 21st century: <em>We Like It Here</em> by Snarky Puppy.</p><p><br></p><p>He’s a Grammy Award-winning musician, composer, producer, and educator -- and he’s here to teach YOU.</p>",
+          "position": 1
+        },
+        {
+          "id": 164337,
+          "content_id": 281904,
+          "key": "header_image_url",
+          "value": "https://d1923uyy6spedc.cloudfront.net/281904-header-image-1609277640.jpg",
+          "position": 1
+        },
+        {
+          "id": 164338,
+          "content_id": 281904,
+          "key": "thumbnail_url",
+          "value": "https://d1923uyy6spedc.cloudfront.net/281904-card-thumbnail-1624382199.png",
+          "position": 1
+        },
+        {
+          "id": 164339,
+          "content_id": 281904,
+          "key": "original_thumbnail_url",
+          "value": "https://d1923uyy6spedc.cloudfront.net/281904-card-thumbnail-maxres-1624382194.png",
+          "position": 1
+        }
+      ],
+      "permissions": [
+        {
+          "id": 1,
+          "content_id": 281904,
+          "content_type": null,
+          "permission_id": 1,
+          "brand": "drumeo",
+          "name": "Drumeo Edge"
+        }
+      ],
+      "user_progress": {
+        "149628": []
+      },
+      "completed": false,
+      "started": false,
+      "progress_percent": 0,
+      "user_playlists": {
+        "149628": []
+      },
+      "is_added_to_primary_playlist": false,
+      "published_on_in_timezone": "2020/12/29 21:31:50",
+      "is_new": false,
+      "like_count": 0,
+      "url": "https://dev.drumeo.com/laravel/public/members/coaches/larnell-lewis",
+      "biography": "<p>In 2015, Larnell Lewis boarded a plane to the Netherlands to fill in for one of his drumming heroes, Robert “Sput” Searight. The rest is history.</p><p><br></p><p>Larnell learned a complex fusion set during the flight and went on to record one of the most celebrated live albums of the 21st century: <em>We Like It Here</em> by Snarky Puppy.</p><p><br></p><p>He’s a Grammy Award-winning musician, composer, producer, and educator -- and he’s here to teach YOU.</p>"
+    }
+  ],
+  "meta": {
+    "totalResults": 3,
+    "page": 1,
+    "limit": 10,
+    "filterOptions": []
+  }
+}
+```
