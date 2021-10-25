@@ -434,6 +434,7 @@ class ContentJsonController extends Controller
         $limit = $request->get('limit', 10);
         $requiredFields = $request->get('required_fields', []);
         $requiredUserState = $request->get('required_user_states', []);
+        $sortedBy = $request->get('sort', $sortedBy);
 
         ContentRepository::$availableContentStatues =
             $request->get('statuses', [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]);
