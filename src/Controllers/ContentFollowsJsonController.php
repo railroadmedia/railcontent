@@ -85,8 +85,10 @@ class ContentFollowsJsonController extends Controller
             $request->get('limit', 10)
         );
 
-        return reply()->json($response, [
+        return reply()->json($response['results'], [
             'transformer' => DataTransformer::class,
+            'totalResults' => $response['total_results'],
+            'filterOptions' => [],
         ]);
     }
 
@@ -98,7 +100,7 @@ class ContentFollowsJsonController extends Controller
     {
         $contentData = $this->contentFollowsService->getLessonsForFollowedCoaches(
             $request->get('brand', config('railcontent.brand')),
-            $request->get('content_type'),
+            $request->get('included_types', []),
             $request->get('statuses', [ContentService::STATUS_PUBLISHED]),
             $request->get('page', 1),
             $request->get('limit', 10),
