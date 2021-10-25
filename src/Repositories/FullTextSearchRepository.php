@@ -235,7 +235,7 @@ class FullTextSearchRepository extends RepositoryBase
         $orderByColumn = 'score',
         $orderByDirection = 'desc',
         $dateTimeCutoff = null,
-        $instructorId = null
+        $instructorIds = []
     ) {
         $query =
             $this->query()
@@ -318,19 +318,25 @@ class FullTextSearchRepository extends RepositoryBase
             $query->where('content_published_on', '>', $dateTimeCutoff);
         }
 
-        if($instructorId) {
-            if(config('railcontent.coach_id_instructor_id_mapping.'.$instructorId)){
-                $query->where(
-                    function (Builder $builder) use ($instructorId){
-                        return $builder->whereRaw(
-                            ' FIND_IN_SET('.$instructorId.',content_instructors)'
-                        )
-                            ->orWhereRaw(' FIND_IN_SET('.config('railcontent.coach_id_instructor_id_mapping.'.$instructorId).',content_instructors)');
+        if(!empty($instructorIds)) {
+            $query->where(function (Builder $builder) use ($instructorIds) {
+                foreach ($instructorIds as $instructorId) {
+                    if (config('railcontent.coach_id_instructor_id_mapping.' . $instructorId)) {
+                        $builder->orwhere(function (Builder $builder2) use ($instructorId) {
+                            return $builder2->orwhereRaw(
+                                ' FIND_IN_SET(' . $instructorId . ',content_instructors)'
+                            )
+                                ->orWhereRaw(
+                                    ' FIND_IN_SET(' .
+                                    config('railcontent.coach_id_instructor_id_mapping.' . $instructorId) .
+                                    ',content_instructors)'
+                                );
+                        });
+                    } else {
+                        return $builder->orwhereRaw(' FIND_IN_SET(' . $instructorId . ',content_instructors)');
                     }
-                );
-            }else {
-                $query->whereRaw(' FIND_IN_SET(' . $instructorId . ',content_instructors)');
-            }
+                }
+            });
         }
 
         $contentRows = $query->getToArray();
@@ -350,7 +356,7 @@ class FullTextSearchRepository extends RepositoryBase
         $contentType = [],
         $contentStatus = null,
         $dateTimeCutoff = null,
-        $instructorId = null
+        $instructorIds = []
     ) {
         $query =
             $this->query()
@@ -426,8 +432,25 @@ class FullTextSearchRepository extends RepositoryBase
             $query->where('content_published_on', '>', $dateTimeCutoff);
         }
 
-        if ($instructorId) {
-            $query->whereRaw(' FIND_IN_SET('.$instructorId.',content_instructors)');
+        if (!empty($instructorIds)) {
+            $query->where(function (Builder $builder) use ($instructorIds) {
+                foreach ($instructorIds as $instructorId) {
+                    if (config('railcontent.coach_id_instructor_id_mapping.' . $instructorId)) {
+                        $builder->orwhere(function (Builder $builder2) use ($instructorId) {
+                            return $builder2->orwhereRaw(
+                                ' FIND_IN_SET(' . $instructorId . ',content_instructors)'
+                            )
+                                ->orWhereRaw(
+                                    ' FIND_IN_SET(' .
+                                    config('railcontent.coach_id_instructor_id_mapping.' . $instructorId) .
+                                    ',content_instructors)'
+                                );
+                        });
+                    } else {
+                        return $builder->orwhereRaw(' FIND_IN_SET(' . $instructorId . ',content_instructors)');
+                    }
+                }
+            });
         }
 
         return $query->count();

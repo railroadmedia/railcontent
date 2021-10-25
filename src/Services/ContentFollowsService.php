@@ -113,12 +113,12 @@ class ContentFollowsService
      * @param string $sort
      * @return mixed|\Railroad\Railcontent\Support\Collection|null
      */
-    public function getLessonsForFollowedCoaches($brand, $contentType = null, $statuses = [], $page = 1, $limit = 10, $sort='-published_on')
+    public function getLessonsForFollowedCoaches($brand, $contentTypes = [], $statuses = [], $page = 1, $limit = 10, $sort='-published_on')
     {
         $followedContent = $this->contentFollowsRepository->getFollowedContent(
             auth()->id(),
             $brand,
-            $contentType,
+            null,
             1,
             'null'
         );
@@ -143,7 +143,7 @@ class ContentFollowsService
                 $page,
                 $limit,
                 $sort,
-                [],
+                $contentTypes,
                 [],
                 [],
                 [],
