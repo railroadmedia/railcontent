@@ -42,26 +42,21 @@ class ContentFollowsService
     public function follow($contentId, $userId)
     {
         $this->contentFollowsRepository->query()
-            ->updateOrInsert(
-                [
-                    'content_id' => $contentId,
-                    'user_id' => $userId,
-                ],
-                [
-                    'created_on' => Carbon::now()
-                        ->toDateTimeString(),
-                ]
-            );
+            ->updateOrInsert([
+                'content_id' => $contentId,
+                'user_id' => $userId,
+            ], [
+                'created_on' => Carbon::now()
+                    ->toDateTimeString(),
+            ]);
 
         event(new ContentFollow($contentId, $userId));
 
         return $this->contentFollowsRepository->query()
-            ->where(
-                [
-                    'content_id' => $contentId,
-                    'user_id' => $userId,
-                ]
-            )
+            ->where([
+                'content_id' => $contentId,
+                'user_id' => $userId,
+            ])
             ->first();
     }
 
@@ -90,13 +85,14 @@ class ContentFollowsService
      */
     public function getUserFollowedContent($userId, $brand, $contentType = null, $page, $limit)
     {
-        $followedContent = $this->contentFollowsRepository->getFollowedContent($userId, $brand, $contentType, $page , $limit);
+        $followedContent =
+            $this->contentFollowsRepository->getFollowedContent($userId, $brand, $contentType, $page, $limit);
 
         $contentIds = array_pluck($followedContent, 'content_id');
 
         $contents = $this->contentService->getByIds($contentIds);
 
-        $results = new ContentFilterResultsEntity( [
+        $results = new ContentFilterResultsEntity([
             'results' => $contents,
             'total_results' => $this->contentFollowsRepository->countFollowedContent($userId, $brand, $contentType),
         ]);
@@ -113,8 +109,14 @@ class ContentFollowsService
      * @param string $sort
      * @return mixed|\Railroad\Railcontent\Support\Collection|null
      */
-    public function getLessonsForFollowedCoaches($brand, $contentTypes = [], $statuses = [], $page = 1, $limit = 10, $sort='-published_on')
-    {
+    public function getLessonsForFollowedCoaches(
+        $brand,
+        $contentTypes = [],
+        $statuses = [],
+        $page = 1,
+        $limit = 10,
+        $sort = '-published_on'
+    ) {
         $followedContent = $this->contentFollowsRepository->getFollowedContent(
             auth()->id(),
             $brand,
@@ -127,17 +129,20 @@ class ContentFollowsService
 
         if (!empty($followedContent)) {
             $includedFields = [];
-            $contentIds = array_pluck($followedContent, 'id');
 
-            foreach ($contentIds as $contentId) {
-                $includedFields[] = 'instructor,' . $contentId;
-               if(array_key_exists($contentId, config('railcontent.coach_id_instructor_id_mapping'))){
-                   $includedFields[] = 'instructor,' . config('railcontent.coach_id_instructor_id_mapping.'.$contentId);
-               }
+            foreach ($followedContent as $content) {
+                $includedFields[] = 'instructor,' . $content['id'];
+                $instructor =
+                    $this->contentService->getBySlugAndType($content['slug'], 'instructor')
+                        ->first();
+                if ($instructor) {
+                    $includedFields[] = 'instructor,' . $instructor['id'];
+                }
             }
 
             ContentRepository::$pullFutureContent = false;
-            ContentRepository::$availableContentStatues = (!empty($statuses))? $statuses : [ContentService::STATUS_PUBLISHED];
+            ContentRepository::$availableContentStatues =
+                (!empty($statuses)) ? $statuses : [ContentService::STATUS_PUBLISHED];
 
             $contentData = $this->contentService->getFiltered(
                 $page,
@@ -162,30 +167,39 @@ class ContentFollowsService
      * @param string $sort
      * @return mixed|\Railroad\Railcontent\Support\Collection|null
      */
-    public function getLessonsForFollowedContent($contentId, $statuses = [], $page = 1, $limit = 10, $sort='-published_on')
-    {
-       // $contentData = new ContentFilterResultsEntity(['results' => [], 'total_results' => 0]);
+    public function getLessonsForFollowedContent(
+        $contentId,
+        $statuses = [],
+        $page = 1,
+        $limit = 10,
+        $sort = '-published_on'
+    ) {
 
+        $content = $this->contentService->getById($contentId);
 
-            $includedFields = [];
-                $includedFields[] = 'instructor,' . $contentId;
-                if(array_key_exists($contentId, config('railcontent.coach_id_instructor_id_mapping'))){
-                    $includedFields[] = 'instructor,' . config('railcontent.coach_id_instructor_id_mapping.'.$contentId);
-                }
+        $includedFields = [];
+        $includedFields[] = 'instructor,' . $contentId;
+        $instructor =
+            $this->contentService->getBySlugAndType($content['slug'], 'instructor')
+                ->first();
+        if ($instructor) {
+            $includedFields[] = 'instructor,' . $instructor['id'];
+        }
 
-            ContentRepository::$pullFutureContent = false;
-            ContentRepository::$availableContentStatues = (!empty($statuses))? $statuses : [ContentService::STATUS_PUBLISHED];
+        ContentRepository::$pullFutureContent = false;
+        ContentRepository::$availableContentStatues =
+            (!empty($statuses)) ? $statuses : [ContentService::STATUS_PUBLISHED];
 
-            $contentData = $this->contentService->getFiltered(
-                $page,
-                $limit,
-                $sort,
-                [],
-                [],
-                [],
-                [],
-                $includedFields
-            );
+        $contentData = $this->contentService->getFiltered(
+            $page,
+            $limit,
+            $sort,
+            [],
+            [],
+            [],
+            [],
+            $includedFields
+        );
 
         return Decorator::decorate($contentData, 'content');
     }

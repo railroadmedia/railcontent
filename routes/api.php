@@ -172,21 +172,21 @@ Route::group(
         Route::put(
             '/follow',
             Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@followContent'
-        )->name('content.follow');
+        )->name('api.content.follow');
 
         Route::put(
             '/unfollow',
             Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@unfollowContent'
-        )->name('content.unfollow');
+        )->name('api.content.unfollow');
 
         Route::get(
             '/followed-content',
             Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@getFollowedContent'
-        )->name('followed.content');
+        )->name('api.followed.content');
 
         Route::get(
             '/followed-lessons',
             Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@getLatestLessonsForFollowedContentByType'
-        )->name('followed.lessons');
+        )->name('api.followed.lessons');
     }
 );

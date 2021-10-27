@@ -113,4 +113,26 @@ class ContentFollowsJsonController extends Controller
             'filterOptions' => [],
         ]);
     }
+
+    /**
+     * @param Request $request
+     * @return mixed
+     */
+    public function getCoachContent(Request $request)
+    {
+        $contentData = $this->contentFollowsService->getLessonsForFollowedContent(
+            $request->get('brand', config('railcontent.brand')),
+            $request->get('included_types', []),
+            $request->get('statuses', [ContentService::STATUS_PUBLISHED]),
+            $request->get('page', 1),
+            $request->get('limit', 10),
+            $request->get('sort', '-published_on')
+        );
+
+        return reply()->json($contentData['results'], [
+            'transformer' => DataTransformer::class,
+            'totalResults' => $contentData['total_results'],
+            'filterOptions' => [],
+        ]);
+    }
 }

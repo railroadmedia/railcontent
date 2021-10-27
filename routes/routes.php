@@ -186,6 +186,11 @@ Route::group(
                     '/followed-content',
                     Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@getFollowedContent'
                 )->name('followed.content');
+
+                Route::get(
+                    '/followed-lessons',
+                    Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@getLatestLessonsForFollowedContentByType'
+                )->name('followed.lessons');
             }
         );
 
