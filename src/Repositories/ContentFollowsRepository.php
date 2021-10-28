@@ -45,12 +45,13 @@ class ContentFollowsRepository extends RepositoryBase
             $query->where(ConfigService::$tableContent . '.type', $contentType);
         }
 
-        if($limit >= 1) {
+        if ($limit >= 1) {
             $query->limit($limit)
                 ->skip(($page - 1) * $limit);
-            }
+        }
 
-        return $query->get()
+        return $query->orderBy(ConfigService::$tableContentFollows . '.created_on', 'desc')
+            ->get()
             ->toArray();
     }
 
