@@ -57,7 +57,16 @@ class CreateCoaches extends Command
                 1,
                 'boolean'
             );
+            $featuredCoachId = $existingCoach->id;
         }
+
+        $this->contentFieldService->create(
+            $featuredCoachId,
+            'featured',
+            1,
+            1,
+            'boolean'
+        );
 
         $instructors = $this->databaseManager->connection(
             ConfigService::$databaseConnectionName
