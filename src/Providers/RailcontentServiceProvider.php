@@ -100,6 +100,10 @@ class RailcontentServiceProvider extends ServiceProvider
             ]
         );
 
+        $this->publishes([
+            __DIR__ . '/../../database/seeds/CoachV2Seeder.php' => database_path('seeds/CoachV2Seeder.php'),
+        ]);
+
         if (ConfigService::$dataMode == 'host') {
             $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
         }
