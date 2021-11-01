@@ -62,7 +62,11 @@ class ContentJsonController extends Controller
             $request->get('required_fields', []),
             $request->get('included_fields', []),
             $request->get('required_user_states', []),
-            $request->get('included_user_states', [])
+            $request->get('included_user_states', []),
+            true,
+            false,
+            true,
+            $request->get('only_subscribed', false)
         );
 
         $filters =  $contentData['filter_options'];

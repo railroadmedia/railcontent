@@ -51,6 +51,7 @@ class ContentRepository extends RepositoryBase
     private $includedUserStates = [];
 
     private $getFutureContentOnly = false;
+    private $getFollowedContentOnly = false;
 
     private $page;
     private $limit;
@@ -1175,7 +1176,8 @@ class ContentRepository extends RepositoryBase
         array $typesToInclude,
         array $slugHierarchy,
         array $requiredParentIds,
-        $getFutureContentOnly = false
+        $getFutureContentOnly = false,
+        $getFollowedContentOnly = false
     ) {
         $this->page = $page;
         $this->limit = $limit;
@@ -1185,6 +1187,7 @@ class ContentRepository extends RepositoryBase
         $this->slugHierarchy = $slugHierarchy;
         $this->requiredParentIds = $requiredParentIds;
         $this->getFutureContentOnly = $getFutureContentOnly;
+        $this->getFollowedContentOnly = $getFollowedContentOnly;
 
         // reset all the filters for the new query
         $this->requiredFields = [];
@@ -1222,6 +1225,10 @@ class ContentRepository extends RepositoryBase
                 Carbon::now()
                     ->toDateTimeString()
             );
+        }
+
+        if($this->getFollowedContentOnly){
+            $subQuery->restrictFollowedContent();
         }
 
         $query =
@@ -1263,6 +1270,10 @@ class ContentRepository extends RepositoryBase
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByParentIds($this->requiredParentIds)
                 ->groupBy(ConfigService::$tableContent . '.id');
+
+        if($this->getFollowedContentOnly){
+            $subQuery->restrictFollowedContent();
+        }
 
         return $this->connection()
             ->table(

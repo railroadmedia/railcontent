@@ -783,12 +783,12 @@ class ContentService
     }
 
     /**
-     * Get filtered contents.
+     *  Get filtered contents.
      * Returns:
      * ['results' => $lessons, 'total_results' => $totalLessonsAfterFiltering]
      *
-     * @param int $page
-     * @param int $limit
+     * @param $page
+     * @param $limit
      * @param string $orderByAndDirection
      * @param array $includedTypes
      * @param array $slugHierarchy
@@ -797,10 +797,11 @@ class ContentService
      * @param array $includedFields
      * @param array $requiredUserStates
      * @param array $includedUserStates
-     * @param boolean $pullFilterFields
-     * @param bool $getFutureContentOnly
+     * @param bool $pullFilterFields
+     * @param false $getFutureContentOnly
      * @param bool $pullPagination
-     * @return ContentFilterResultsEntity
+     * @param false $getFollowedContentOnly
+     * @return mixed|Collection|null
      */
     public function getFiltered(
         $page,
@@ -815,7 +816,8 @@ class ContentService
         array $includedUserStates = [],
         $pullFilterFields = true,
         $getFutureContentOnly = false,
-        $pullPagination = true
+        $pullPagination = true,
+        $getFollowedContentOnly = false
     ) {
         $results = null;
         if ($limit == 'null') {
@@ -855,7 +857,8 @@ class ContentService
                 $includedTypes,
                 $slugHierarchy,
                 $requiredParentIds,
-                $getFutureContentOnly
+                $getFutureContentOnly,
+                $getFollowedContentOnly
             );
 
             foreach ($requiredFields as $requiredField) {

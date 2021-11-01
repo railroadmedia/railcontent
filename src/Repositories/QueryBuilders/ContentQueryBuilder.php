@@ -671,4 +671,23 @@ class ContentQueryBuilder extends QueryBuilder
             )
         );
     }
+
+    /**
+     * @return $this
+     */
+    public function restrictFollowedContent()
+    {
+        $this->join(
+            ConfigService::$tableContentFollows,
+            function (JoinClause $joinClause) {
+                $joinClause->on(
+                    ConfigService::$tableContentFollows . '.content_id',
+                    '=',
+                    ConfigService::$tableContent . '.id'
+                );
+            }
+        )->where(ConfigService::$tableContentFollows . '.user_id', auth()->id() ?? null);
+
+        return $this;
+    }
 }
