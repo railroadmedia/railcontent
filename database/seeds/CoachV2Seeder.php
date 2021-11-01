@@ -47,7 +47,10 @@ class CoachV2Seeder extends Seeder
      */
     public function run()
     {
-        $csv = array_map('str_getcsv', file(__DIR__ . '/../../database/seeds/Coaches v2.0.csv'));
+        //r drumeo artisan db:seed
+        $coachesFilePath = config('railcontent.coachesFilePath');
+
+        $csv = array_map('str_getcsv', file($coachesFilePath));
 
         unset($csv[0]);
 
@@ -65,7 +68,17 @@ class CoachV2Seeder extends Seeder
                     ->toDateTimeString(),
             ]);
 
-            foreach (explode(', ', $row[2]) as $genreIndex => $genre) {
+            if ($row[2] == '') {
+                $genres =
+                    $this->faker->randomElements(
+                        ['Odd Time', 'Adult Contemporary', 'Ballad', 'CCM/Worship'],
+                        rand(1, 3)
+                    );
+            } else {
+                $genres = explode(', ', $row[2]);
+            }
+
+            foreach ($genres as $genreIndex => $genre) {
                 $this->updateOrInsertAndGetFirst('railcontent_content_fields', [
                     'content_id' => $content->id,
                     'key' => 'genre',
@@ -76,7 +89,25 @@ class CoachV2Seeder extends Seeder
                 ]);
             }
 
-            foreach (explode(', ', $row[3]) as $focusIndex => $focus) {
+            if ($row[3] == '') {
+                $focuses =
+                    $this->faker->randomElements(
+                        [
+                            'Performance',
+                            'Rudiments',
+                            'Musicianship',
+                            'Technique',
+                            'Motivation',
+                            'Touring',
+                            'Beginner Focused',
+                        ],
+                        rand(1, 3)
+                    );
+            } else {
+                $focuses = explode(', ', $row[3]);
+            }
+
+            foreach ($focuses as $focusIndex => $focus) {
                 $this->updateOrInsertAndGetFirst('railcontent_content_fields', [
                     'content_id' => $content->id,
                     'key' => 'focus',
@@ -171,6 +202,19 @@ class CoachV2Seeder extends Seeder
 
             echo "Coach " . $row[0] . " is created! \n";
         }
+
+        //set featured on some lessons
+        foreach ($this->featuredLessonsIds() as $lessonId) {
+            $this->updateOrInsertAndGetFirst('railcontent_content_fields', [
+                'content_id' => $lessonId,
+                'key' => 'is_featured',
+                'type' => 'boolean',
+                'position' => 1,
+            ], [
+                'value' => true,
+            ]);
+        }
+
     }
 
     /**
@@ -326,5 +370,18 @@ class CoachV2Seeder extends Seeder
             235598,
             235597,
         ]);
+    }
+
+    private function featuredLessonsIds()
+    {
+        return [
+            312406,
+            312395,
+            305201,
+            299460,
+            316856,
+            319992,
+            316834,
+        ];
     }
 }
