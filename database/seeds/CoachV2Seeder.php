@@ -68,6 +68,15 @@ class CoachV2Seeder extends Seeder
                     ->toDateTimeString(),
             ]);
 
+            $this->updateOrInsertAndGetFirst('railcontent_content_fields', [
+                'content_id' => $content->id,
+                'key' => 'name',
+                'type' => 'string',
+                'position' => 1,
+            ], [
+                'value' => $row[0],
+            ]);
+
             if ($row[2] == '') {
                 $genres =
                     $this->faker->randomElements(
