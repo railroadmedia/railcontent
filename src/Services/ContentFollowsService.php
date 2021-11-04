@@ -203,4 +203,17 @@ class ContentFollowsService
 
         return Decorator::decorate($contentData, 'content');
     }
+
+    /**
+     * @param $contentId
+     * @return bool
+     */
+    public function isSubscribedCurrentUserToContent($contentId)
+    {
+        return $this->contentFollowsRepository->query()
+            ->where([
+                'content_id' => $contentId,
+                'user_id' => auth()->id(),
+            ])->count() > 0;
+    }
 }
