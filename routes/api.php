@@ -41,7 +41,7 @@ Route::group(
             '/content',
             ContentJsonController::class . '@index'
         )
-            ->name('content.index');
+            ->name('api.content.index');
         Route::get(
             '/content/parent/{parentId}',
             ContentJsonController::class . '@getByParentId'
