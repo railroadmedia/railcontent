@@ -1205,7 +1205,7 @@ class ContentRepository extends RepositoryBase
     {
         $subQuery =
             $this->query()
-                ->selectCountColumns()
+                ->selectCountColumns($this->orderBy)
                 ->restrictByUserAccess()
                 ->directPaginate($this->page, $this->limit)
                 ->restrictByFields($this->requiredFields)
@@ -1321,9 +1321,9 @@ class ContentRepository extends RepositoryBase
      * @param $operator
      * @return $this
      */
-    public function requireField($name, $value, $type = '', $operator = '=')
+    public function requireField($name, $value, $type = '', $operator = '=', $field ='')
     {
-        $this->requiredFields[] = ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator];
+        $this->requiredFields[] = ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator,'field' =>$field];
 
         return $this;
     }
