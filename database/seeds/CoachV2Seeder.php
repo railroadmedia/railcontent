@@ -177,9 +177,10 @@ class CoachV2Seeder extends Seeder
                 'value' => ($row[9] != '') ? $row[9] : $this->randomThumbUrl(),
             ]);
 
-            $this->updateOrInsertAndGetFirst(ConfigService::$tableContentData, [
+            $this->updateOrInsertAndGetFirst(ConfigService::$tableContentFields, [
                 'content_id' => $content->id,
                 'key' => 'trailer_video_id',
+                'type' => 'content_id',
                 'position' => 1,
             ], [
                 'value' => ($row[10] != '') ? $row[10] : $this->randomVimeoVideoId(),
