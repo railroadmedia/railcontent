@@ -127,7 +127,6 @@ class RailcontentServiceProvider extends ServiceProvider
                 CleanMetadata::class,
                 CleanContentTopicsAndStyles::class,
                 CalculateContentPopularity::class,
-                CreateCoaches::class,
             ]
         );
 
