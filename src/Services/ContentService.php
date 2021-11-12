@@ -839,7 +839,8 @@ class ContentService
                 implode(' ', array_values($includedFields) ?? ''),
                 implode(' ', array_values($requiredUserStates) ?? ''),
                 implode(' ', array_values($includedUserStates) ?? ''),
-                ContentRepository::$bypassPermissions
+                ContentRepository::$bypassPermissions,
+                $getFollowedContentOnly
             );
 
         $cache = CacheHelper::getCachedResultsForKey($hash);
