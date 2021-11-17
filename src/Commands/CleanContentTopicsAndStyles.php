@@ -53,8 +53,20 @@ class CleanContentTopicsAndStyles extends Command
             'Peformance' => 'Performance',
             'Performances' => 'Performance',
             'Bues' => 'Blues',
-            'Odd-times' => 'Odd times',
-            'rock/pop' => 'pop/rock',
+            'Odd-times' => 'Odd time',
+            'rock/pop' => 'Pop/Rock',
+            'Gear Talk' => 'Gear',
+            'Solos' => 'Solo',
+            'Style' => 'Styles',
+            'Funk. Electronic' => 'Funk',
+            'Funk. Odd Time' => 'Funk',
+            'Odd-Time' => 'Odd time',
+            'Pop/Rock,Blues' => 'Pop/Rock',
+            'Pop/Rock/Metal' => 'Pop/Rock',
+            'Pop/Style' => 'Pop/Rock',
+            'R&B Electronic' => 'R&B',
+            'R&B/Soul' => 'R&B',
+
         ];
 
         foreach ($replaceOldValueInto as $key => $value) {
@@ -75,6 +87,18 @@ class CleanContentTopicsAndStyles extends Command
                         ]
                     );
         }
+
+        $this->databaseManager->connection(config('railcontent.database_connection_name'))
+            ->table(ConfigService::$tableContentFields)
+            ->where('key', 'topic')
+            ->where('value', '-')
+            ->delete();
+
+        $this->databaseManager->connection(config('railcontent.database_connection_name'))
+            ->table(ConfigService::$tableContentFields)
+            ->where('key', 'style')
+            ->where('value', '-')
+            ->delete();
 
         $this->info('Finished cleaning');
     }
