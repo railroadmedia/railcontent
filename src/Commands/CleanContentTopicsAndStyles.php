@@ -56,7 +56,7 @@ class CleanContentTopicsAndStyles extends Command
             'Odd-times' => 'Odd time',
             'rock/pop' => 'Pop/Rock',
             'Gear Talk' => 'Gear',
-            'Solos' => 'Solo',
+            'Solo' => 'Solos',
             'Style' => 'Styles',
             'Funk. Electronic' => 'Funk',
             'Funk. Odd Time' => 'Funk',

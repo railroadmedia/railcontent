@@ -2,15 +2,13 @@
 
 namespace Railroad\Railcontent\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
-use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Requests\ContentFollowRequest;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Transformers\DataTransformer;
-use Illuminate\Http\Request;
 
 class ContentFollowsJsonController extends Controller
 {
@@ -26,6 +24,7 @@ class ContentFollowsJsonController extends Controller
 
     /**
      * @param ContentFollowsService $contentFollowsService
+     * @param ContentService $contentService
      */
     public function __construct(
         ContentFollowsService $contentFollowsService,
@@ -48,13 +47,10 @@ class ContentFollowsJsonController extends Controller
             auth()->id()
         );
 
-        return reply()->json(
-            [$response],
-            [
+        return reply()->json([$response], [
                 'code' => $response ? 200 : 500,
                 'transformer' => DataTransformer::class,
-            ]
-        );
+            ]);
     }
 
     /**
@@ -79,7 +75,7 @@ class ContentFollowsJsonController extends Controller
     {
         $response = $this->contentFollowsService->getUserFollowedContent(
             auth()->id(),
-            $request->get('brand', config('railcontent.brand')),
+            $request->get('brand', ConfigService::$brand),
             $request->get('content_type'),
             $request->get('page', 1),
             $request->get('limit', 10)

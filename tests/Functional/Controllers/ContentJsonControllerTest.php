@@ -1253,7 +1253,15 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $content = $this->contentFactory->create();
         $loggedInUserId = $this->createAndLogInNewUser();
 
-        $this->call('PUT', 'railcontent/follow/', ['content_id' => $content['id']]);
+        $follow1 = [
+            'content_id' => $content['id'],
+            'user_id'=> $loggedInUserId,
+            'created_on' => Carbon::now()->toDateTimeString()
+        ];
+
+        $this->query()
+            ->table(ConfigService::$tableContentFollows)
+            ->insertGetId($follow1);
 
         $response = $this->call('PUT', 'railcontent/unfollow/', ['content_id' => $content['id']]);
 
@@ -1282,15 +1290,41 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_get_followed_content()
     {
-        $this->createAndLogInNewUser();
+       $userId =  $this->createAndLogInNewUser();
 
         $content1 = $this->contentFactory->create($this->faker->word, 'coach', 'published');
         $content2 = $this->contentFactory->create($this->faker->word, 'coach', 'published');
         $content3 = $this->contentFactory->create($this->faker->word, 'coach', 'published');
 
-        $this->call('PUT', 'railcontent/follow/', ['content_id' => $content1['id']]);
-        $this->call('PUT', 'railcontent/follow/', ['content_id' => $content2['id']]);
-        $this->call('PUT', 'railcontent/follow/', ['content_id' => $content3['id']]);
+        $follow1 = [
+            'content_id' => $content1['id'],
+            'user_id'=> $userId,
+            'created_on' => Carbon::now()->toDateTimeString()
+        ];
+
+        $this->query()
+            ->table(ConfigService::$tableContentFollows)
+            ->insertGetId($follow1);
+
+        $follow2 = [
+            'content_id' => $content2['id'],
+            'user_id'=> $userId,
+            'created_on' => Carbon::now()->subDays(1)->toDateTimeString()
+        ];
+
+        $this->query()
+            ->table(ConfigService::$tableContentFollows)
+            ->insertGetId($follow2);
+
+        $follow3 = [
+            'content_id' => $content3['id'],
+            'user_id'=> $userId,
+            'created_on' => Carbon::now()->subDays(2)->toDateTimeString()
+        ];
+
+        $this->query()
+            ->table(ConfigService::$tableContentFollows)
+            ->insertGetId($follow3);
 
         $response = $this->call('GET', 'api/railcontent/followed-content/');
 
@@ -1304,15 +1338,24 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_get_newest_lessons_for_followed_content()
     {
-        $this->createAndLogInNewUser();
+        $userId = $this->createAndLogInNewUser();
 
         $content1 = $this->contentFactory->create($this->faker->word, 'course', 'published');
 
-        $instructor = $this->contentFactory->create($this->faker->word, 'instructor', 'published');
+        $slug = $this->faker->word;
+        $instructor = $this->contentFactory->create($slug, 'instructor', 'published');
 
-        $coach = $this->contentFactory->create($this->faker->word, 'coach', 'published');
+        $coach = $this->contentFactory->create($slug, 'coach', 'published');
 
-        $this->call('PUT', 'railcontent/follow/', ['content_id' => $coach['id']]);
+        $follow1 = [
+            'content_id' => $coach['id'],
+            'user_id'=> $userId,
+            'created_on' => Carbon::now()->toDateTimeString()
+        ];
+
+        $this->query()
+            ->table(ConfigService::$tableContentFollows)
+            ->insertGetId($follow1);
 
         $fieldInstructor = [
             'key' => 'instructor',
@@ -1327,8 +1370,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
             null,
             $fieldInstructor['type']
         );
-
-        Config::set('railcontent.coach_id_instructor_id_mapping', [$coach['id'] => $instructor['id']]);
 
         $response = $this->call('GET', 'api/railcontent/followed-lessons');
 

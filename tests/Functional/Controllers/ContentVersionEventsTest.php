@@ -121,7 +121,7 @@ class ContentVersionEventsTest extends RailcontentTestCase
         });
     }
 
-    public function test_version_content_on_delete_content_datum()
+    public function _test_version_content_on_delete_content_datum()
     {
         Event::fake();
 

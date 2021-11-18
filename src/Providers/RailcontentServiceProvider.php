@@ -13,7 +13,6 @@ use Railroad\Railcontent\Commands\CleanContentTopicsAndStyles;
 use Railroad\Railcontent\Commands\CleanMetadata;
 use Railroad\Railcontent\Commands\ComputePastStats;
 use Railroad\Railcontent\Commands\ComputeWeeklyStats;
-use Railroad\Railcontent\Commands\CreateCoaches;
 use Railroad\Railcontent\Commands\CreateSearchIndexes;
 use Railroad\Railcontent\Commands\CreateVimeoVideoContentRecords;
 use Railroad\Railcontent\Commands\CreateYoutubeVideoContentRecords;

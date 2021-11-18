@@ -254,17 +254,16 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         $page = 1;
         $limit = 3;
 
-        $instructor = $this->contentFactory->create($this->faker->word, 'instructor', 'published');
+        $slug = $this->faker->word;
+        $instructor = $this->contentFactory->create($slug, 'instructor', 'published');
 
-        $coach = $this->contentFactory->create($this->faker->word, 'coach', 'published');
+        $coach = $this->contentFactory->create($slug, 'coach', 'published');
 
         $fieldInstructor = [
             'key' => 'instructor',
             'value' => $instructor['id'],
             'type' => 'content_id',
         ];
-
-        Config::set('railcontent.coach_id_instructor_id_mapping', [$coach['id'] => $instructor['id']]);
 
         $this->contentFactory->create(
             'slug',
@@ -308,7 +307,7 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'page' => $page,
                 'limit' => $limit,
                 'sort' => '-content_published_on',
-                'coach_ids' => [$coach['id']]
+                'included_fields' => ['instructor,'.$coach['id']]
             ]
         );
 
@@ -363,13 +362,13 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
                 'page' => $page,
                 'limit' => $limit,
                 'sort' => '-content_published_on',
-                'coach_ids' => [$coach['id']]
+                'included_fields' => ['instructor,'.$coach['id']]
             ]
         );
 
         $results = $response->decodeResponseJson();
 
-            $this->assertEquals(0,$results['meta']['totalResults']);
+        $this->assertEquals(0,$results['meta']['totalResults']);
 
     }
 }
