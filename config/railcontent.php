@@ -647,10 +647,6 @@ return [
         'song',
     ],
 
-    'coach_id_instructor_id_mapping' => [
-
-    ],
-
     'coachesFilePath' => __DIR__ . '/../../database/seeds/Coaches v2.0.csv',
 
 ];
