@@ -7,6 +7,7 @@ use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Events\ContentFollow;
 use Railroad\Railcontent\Events\ContentUnfollow;
+use Railroad\Railcontent\Helpers\CacheHelper;
 use Railroad\Railcontent\Repositories\ContentFollowsRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 
@@ -50,6 +51,9 @@ class ContentFollowsService
                     ->toDateTimeString(),
             ]);
 
+        //delete the cached results
+        CacheHelper::deleteCache('content_' . $contentId);
+
         event(new ContentFollow($contentId, $userId));
 
         return $this->contentFollowsRepository->query()
@@ -69,6 +73,9 @@ class ContentFollowsService
     {
         event(new ContentUnfollow($contentId, $userId));
 
+        //delete the cached results
+        CacheHelper::deleteCache('content_' . $contentId);
+        
         return $this->contentFollowsRepository->query()
             ->where([
                 'content_id' => $contentId,
