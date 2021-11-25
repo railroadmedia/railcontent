@@ -133,7 +133,7 @@ class CoachV2Seeder extends Seeder
                 'type' => 'boolean',
                 'position' => 1,
             ], [
-                'value' => ($row[4] != '') ? $row[4] : $this->faker->randomElement([true, false]),
+                'value' => ($row[4] != '') ? $row[4] : false,
             ]);
 
             $this->updateOrInsertAndGetFirst('railcontent_content_fields', [
@@ -142,7 +142,7 @@ class CoachV2Seeder extends Seeder
                 'type' => 'boolean',
                 'position' => 1,
             ], [
-                'value' => ($row[5] != '') ? $row[5] : $this->faker->randomElement([true, false]),
+                'value' => ($row[5] != '') ? $row[5] : false,
             ]);
 
             $this->updateOrInsertAndGetFirst(ConfigService::$tableContentData, [
@@ -163,18 +163,18 @@ class CoachV2Seeder extends Seeder
 
             $this->updateOrInsertAndGetFirst(ConfigService::$tableContentData, [
                 'content_id' => $content->id,
-                'key' => 'card_thumbnail_url',
+                'key' => 'coach_card_image',
                 'position' => 1,
             ], [
-                'value' => ($row[8] != '') ? $row[8] : $this->randomThumbUrl(),
+                'value' => ($row[8] != '') ? $row[8] : 'https://d1923uyy6spedc.cloudfront.net/coach-ai-influence-from-outside-fiels (1) 1-1637845344.png',
             ]);
 
             $this->updateOrInsertAndGetFirst(ConfigService::$tableContentData, [
                 'content_id' => $content->id,
-                'key' => 'banner_background_image_url',
+                'key' => 'coach_bottom_banner_image',
                 'position' => 1,
             ], [
-                'value' => ($row[9] != '') ? $row[9] : $this->randomThumbUrl(),
+                'value' => ($row[9] != '') ? $row[9] : 'https://d1923uyy6spedc.cloudfront.net/Ellipse 17577-1637846437.png',
             ]);
 
             $this->updateOrInsertAndGetFirst(ConfigService::$tableContentFields, [
@@ -188,10 +188,10 @@ class CoachV2Seeder extends Seeder
 
             $this->updateOrInsertAndGetFirst(ConfigService::$tableContentData, [
                 'content_id' => $content->id,
-                'key' => 'bio_image',
+                'key' => 'coach_top_banner_image',
                 'position' => 1,
             ], [
-                'value' => ($row[11] != '') ? $row[11] : $this->randomThumbUrl(),
+                'value' => ($row[11] != '') ? $row[11] : 'https://d1923uyy6spedc.cloudfront.net/Rectangle 4089 (1)-1637846474.png',
             ]);
 
             $this->updateOrInsertAndGetFirst(ConfigService::$tableContentData, [
@@ -208,6 +208,22 @@ class CoachV2Seeder extends Seeder
                 'position' => 1,
             ], [
                 'value' => ($row[13] != '') ? $row[13] : $this->faker->sentences(rand(1, 2), true),
+            ]);
+
+            $this->updateOrInsertAndGetFirst(ConfigService::$tableContentData, [
+                'content_id' => $content->id,
+                'key' => 'coach_profile_image',
+                'position' => 1,
+            ], [
+                'value' => ($row[14] != '') ? $row[14] : 'https://d1923uyy6spedc.cloudfront.net/layers (image)-1637846593.png',
+            ]);
+
+            $this->updateOrInsertAndGetFirst(ConfigService::$tableContentData, [
+                'content_id' => $content->id,
+                'key' => 'coach_featured_image',
+                'position' => 1,
+            ], [
+                'value' => ($row[15] != '') ? $row[15] : 'https://d1923uyy6spedc.cloudfront.net/card_thumbnail-1637844287.png',
             ]);
 
             echo "Coach " . $row[0] . " is created! \n";
