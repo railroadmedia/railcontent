@@ -226,6 +226,30 @@ class CoachV2Seeder extends Seeder
                 'value' => ($row[15] != '') ? $row[15] : 'https://d1923uyy6spedc.cloudfront.net/card_thumbnail-1637844287.png',
             ]);
 
+            $bands = ['Lethargy', 'Today Is the Day', 'Mastodon', 'Arcadea'];
+            foreach ($bands as $bandIndex => $band) {
+                $this->updateOrInsertAndGetFirst('railcontent_content_fields', [
+                    'content_id' => $content->id,
+                    'key' => 'bands',
+                    'type' => 'string',
+                    'position' => $bandIndex + 1,
+                ], [
+                    'value' => $band,
+                ]);
+            }
+
+            $endorsements = ['Dailor uses and endorses', 'Tama drums and hardware', 'Meinl cymbals', 'Evans Drumheads, and Vater drumsticks.'];
+            foreach ($endorsements as $endorsementIndex => $endorsement) {
+                $this->updateOrInsertAndGetFirst('railcontent_content_fields', [
+                    'content_id' => $content->id,
+                    'key' => 'endorsements',
+                    'type' => 'string',
+                    'position' => $endorsementIndex + 1,
+                ], [
+                    'value' => $endorsement,
+                ]);
+            }
+
             echo "Coach " . $row[0] . " is created! \n";
         }
 
