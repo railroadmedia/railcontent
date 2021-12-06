@@ -191,7 +191,7 @@ class CoachV2Seeder extends Seeder
                 'key' => 'coach_top_banner_image',
                 'position' => 1,
             ], [
-                'value' => ($row[11] != '') ? $row[11] : 'https://d1923uyy6spedc.cloudfront.net/Rectangle 4089 (1)-1637846474.png',
+                'value' => ($row[11] != '') ? $row[11] : 'https://drumeo-assets.s3.amazonaws.com/headers/ryan-van-poederooyen-action+1.png',
             ]);
 
             $this->updateOrInsertAndGetFirst(ConfigService::$tableContentData, [
