@@ -265,6 +265,19 @@ class CoachV2Seeder extends Seeder
             ]);
         }
 
+        //set coach of the month
+        foreach ([328459, 329496, 329450, 329491] as $lessonId) {
+            $this->updateOrInsertAndGetFirst('railcontent_content_fields', [
+                'content_id' => $lessonId,
+                'key' => 'is_coach_of_the_month',
+                'type' => 'boolean',
+                'position' => 1,
+            ], [
+                'value' => true,
+            ]);
+        }
+
+
     }
 
     /**
