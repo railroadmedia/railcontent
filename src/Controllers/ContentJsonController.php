@@ -60,7 +60,7 @@ class ContentJsonController extends Controller
         }
 
         if ($request->has('title')) {
-            $required_fields[] = 'title,%' . $request->get('term') . '%,string,like';
+            $required_fields[] = 'title,%' . $request->get('title') . '%,string,like';
             $request->merge(['sort' => 'published_on']);
         }
 
