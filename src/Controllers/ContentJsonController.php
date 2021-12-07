@@ -59,6 +59,11 @@ class ContentJsonController extends Controller
             $request->merge(['sort' => 'published_on']);
         }
 
+        if ($request->has('title')) {
+            $required_fields[] = 'title,%' . $request->get('term') . '%,string,like';
+            $request->merge(['sort' => 'published_on']);
+        }
+
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 10),
