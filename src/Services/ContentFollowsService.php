@@ -71,17 +71,19 @@ class ContentFollowsService
      */
     public function unfollow($contentId, $userId)
     {
-        event(new ContentUnfollow($contentId, $userId));
-
         //delete the cached results
         CacheHelper::deleteCache('content_' . $contentId);
-        
-        return $this->contentFollowsRepository->query()
+
+        $results = $this->contentFollowsRepository->query()
             ->where([
                 'content_id' => $contentId,
                 'user_id' => $userId,
             ])
             ->delete();
+
+        event(new ContentUnfollow($contentId, $userId));
+
+        return $results;
     }
 
     /**
