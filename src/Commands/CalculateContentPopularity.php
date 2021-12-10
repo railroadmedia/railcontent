@@ -60,6 +60,8 @@ class CalculateContentPopularity extends Command
 
         $startDate = Carbon::now()->subDays(30)->toDateTimeString();
 
+        // we divide by days published ago so weight newer content higher, can update the divide value to adjust how
+        // much to weight newer content
             $sql = <<<'EOT'
 UPDATE `%s` cs
 LEFT JOIN (
@@ -76,7 +78,7 @@ LEFT JOIN (
     where up.state = '%s' and up.updated_on > '%s'
     Group by up.content_id
 )s ON  cs.id = s.content_id 
-SET cs.`popularity` = ((IFNULL(c.nr, 0) * 5) + IFNULL(s.nr, 0))
+SET cs.`popularity` = (((IFNULL(c.nr, 0) * 5) + IFNULL(s.nr, 0)) / (GREATEST(datediff(CURDATE(), DATE(cs.published_on)) / 60, 0.75)))
 EOT;
 
             $statement = sprintf(
