@@ -142,7 +142,7 @@ class ContentFollowsService
             foreach ($followedContent as $content) {
                 $includedFields[] = 'instructor,' . $content['id'];
                 $instructor =
-                    $this->contentService->getBySlugAndType($content['slug'], 'instructor')
+                    $this->contentService->getBySlugAndType($content['slug'], 'coach')
                         ->first();
                 if ($instructor) {
                     $includedFields[] = 'instructor,' . $instructor['id'];
