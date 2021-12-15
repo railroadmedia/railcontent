@@ -56,12 +56,10 @@ class ContentJsonController extends Controller
 
         if ($request->has('term')) {
             $required_fields[] = 'name,%' . $request->get('term') . '%,string,like';
-            $request->merge(['sort' => 'published_on']);
         }
 
         if ($request->has('title')) {
             $required_fields[] = 'title,%' . $request->get('title') . '%,string,like';
-            $request->merge(['sort' => 'published_on']);
         }
 
         $contentData = $this->contentService->getFiltered(
@@ -71,7 +69,7 @@ class ContentJsonController extends Controller
             $request->get('included_types', []),
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            $request->get('required_fields', $required_fields),
+            $required_fields,
             $request->get('included_fields', []),
             $request->get('required_user_states', []),
             $request->get('included_user_states', []),
