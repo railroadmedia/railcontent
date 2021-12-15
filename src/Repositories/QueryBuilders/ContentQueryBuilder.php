@@ -622,6 +622,11 @@ class ContentQueryBuilder extends QueryBuilder
                     $orderByColumns,
                     $orderByColumn . ' ' . $orderDirection
                 );
+            }elseif ($orderByColumn == 'title') {
+                array_unshift(
+                    $orderByColumns,
+                    ConfigService::$tableContentFields . '.value ' . $orderDirection
+                );
             }
             elseif ($orderByColumn != 'progress') {
                 array_unshift(
@@ -638,28 +643,47 @@ class ContentQueryBuilder extends QueryBuilder
 
 
             if ($orderBy == 'progress') {
-            $this->leftJoin(ConfigService::$tableUserContentProgress, function (JoinClause $joinClause) {
-                $joinClause->on(
-                    ConfigService::$tableUserContentProgress . '.content_id',
-                    '=',
-                    ConfigService::$tableContent . '.id'
-                )
-                    ->on(
-                        ConfigService::$tableUserContentProgress . '.user_id',
+                $this->leftJoin(ConfigService::$tableUserContentProgress, function (JoinClause $joinClause) {
+                    $joinClause->on(
+                        ConfigService::$tableUserContentProgress . '.content_id',
                         '=',
-                        $joinClause->raw(
-                            DB::connection()
-                                ->getPdo()
-                                ->quote(auth()->id())
+                        ConfigService::$tableContent . '.id'
+                    )
+                        ->on(
+                            ConfigService::$tableUserContentProgress . '.user_id',
+                            '=',
+                            $joinClause->raw(
+                                DB::connection()
+                                    ->getPdo()
+                                    ->quote(auth()->id())
+                            )
+                        );
+                });
+                $this->orderByRaw(
+                    DB::raw(
+                        implode(', ', $orderByColumns) . ' ' . $orderDirection
+                    )
+                );
+            } elseif ($orderBy == 'title') {
+                    $this->join(ConfigService::$tableContentFields, function (JoinClause $joinClause) {
+                        $joinClause->on(
+                            ConfigService::$tableContentFields . '.content_id',
+                            '=',
+                            ConfigService::$tableContent . '.id'
                         )
-                    );
-            });
+                            ->where(
+                                ConfigService::$tableContentFields . '.key',
+                                '=',
+                               "title"
+                            );
+                    });
+
             $this->orderByRaw(
                 DB::raw(
                     implode(', ', $orderByColumns) . ' ' . $orderDirection
                 )
             );
-        }elseif($orderBy == 'content_likes'){
+        } elseif($orderBy == 'content_likes'){
                 $this->leftJoin(ConfigService::$tableContentLikes, function (JoinClause $joinClause) {
                     $joinClause->on(
                         ConfigService::$tableContentLikes . '.content_id',
@@ -695,11 +719,13 @@ class ContentQueryBuilder extends QueryBuilder
         $groupByColumns = [ConfigService::$tableContent . '.' . 'created_on'];
 
         foreach ($orderByExploded as $orderByColumn) {
-            if (($orderByColumn != 'progress') && ($orderByColumn != 'content_likes')) {
+            if (($orderByColumn != 'progress') && ($orderByColumn != 'content_likes') && ($orderByColumn != 'title')) {
                 array_unshift($groupByColumns, ConfigService::$tableContent . '.' . $orderByColumn);
             }elseif ($orderByColumn == 'content_likes') {
                 array_unshift($groupByColumns,  ConfigService::$tableContentLikes . '.content_id' );
-            }
+            }elseif ($orderByColumn == 'title') {
+                array_unshift($groupByColumns,  ConfigService::$tableContentFields . '.value' );
+    }
         }
 
         return $this->groupBy(
