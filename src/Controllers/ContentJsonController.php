@@ -56,6 +56,9 @@ class ContentJsonController extends Controller
 
         if ($request->has('term')) {
             $required_fields[] = 'name,%' . $request->get('term') . '%,string,like';
+            if ($request->get('sort') == '-score') {
+                $request->merge(['sort' => 'published_on']);
+            }
         }
 
         if ($request->has('title')) {
