@@ -219,10 +219,16 @@ class ContentFollowsService
      */
     public function isSubscribedCurrentUserToContent($contentId)
     {
-        return $this->contentFollowsRepository->query()
-            ->where([
-                'content_id' => $contentId,
-                'user_id' => auth()->id(),
-            ])->count() > 0;
+        $followedContentIds = $this->getCurrentUserFollowedContentIds();
+
+        return in_array($contentId, $followedContentIds);
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function getCurrentUserFollowedContentIds()
+    {
+        return $this->contentFollowsRepository->getFollowedContentIds();
     }
 }

@@ -9,7 +9,7 @@ class ContentFollowsRepository extends RepositoryBase
 {
     use ByContentIdTrait;
 
-    public static $cache = [];
+    private $cache = [];
 
     public function query()
     {
@@ -79,6 +79,26 @@ class ContentFollowsRepository extends RepositoryBase
         }
 
         return $query->count();
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function getFollowedContentIds()
+    {
+        if (!isset($this->cache[auth()->id()])) {
+            $contents =  $this->query()
+                ->select(ConfigService::$tableContentFollows.'.content_id')
+                ->join(ConfigService::$tableContent, ConfigService::$tableContentFollows.'.content_id','=', ConfigService::$tableContent.'.id')
+                ->where([
+                    ConfigService::$tableContentFollows.'.user_id' => auth()->id(),
+                    'brand' => config('railcontent.brand')
+                ])->get();
+
+            $this->cache[auth()->id()] = $contents->pluck('content_id')->toArray();
+        }
+
+        return $this->cache[auth()->id()];
     }
 
 }
