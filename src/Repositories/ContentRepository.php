@@ -1033,7 +1033,8 @@ class ContentRepository extends RepositoryBase
         $publishedOnValue,
         $publishedOnComparisonOperator = '=',
         $orderByColumn = 'published_on',
-        $orderByDirection = 'desc'
+        $orderByDirection = 'desc',
+        $requiredField = []
     ) {
         $contentRows =
             $this->query()
@@ -1046,8 +1047,35 @@ class ContentRepository extends RepositoryBase
                     $publishedOnComparisonOperator,
                     $publishedOnValue
                 )
-                ->orderBy($orderByColumn, $orderByDirection)
-                ->getToArray();
+                ->orderBy($orderByColumn, $orderByDirection);
+
+        if(!empty($requiredField))
+        {
+            $contentRows ->join(
+                ConfigService::$tableContentFields,
+                function (JoinClause $joinClause) use (
+                    $requiredField
+                ) {
+                    $joinClause->on(
+                        ConfigService::$tableContentFields . '.content_id',
+                        '=',
+                        ConfigService::$tableContent . '.id'
+                    )
+                        ->where(
+                            ConfigService::$tableContentFields . '.key',
+                            '=',
+                            $requiredField['key']
+                        )
+                        ->where(
+                            ConfigService::$tableContentFields . '.value',
+                            '=',
+                            $requiredField['value']
+                        );
+                }
+            );
+        }
+
+        $contentRows = $contentRows->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));

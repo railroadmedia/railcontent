@@ -250,7 +250,8 @@ class ContentService
         $publishedOnValue,
         $publishedOnComparisonOperator = '=',
         $orderByColumn = 'published_on',
-        $orderByDirection = 'desc'
+        $orderByDirection = 'desc',
+        $requiredField = []
     ) {
         return Decorator::decorate(
             $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -259,7 +260,8 @@ class ContentService
                 $publishedOnValue,
                 $publishedOnComparisonOperator,
                 $orderByColumn,
-                $orderByDirection
+                $orderByDirection,
+                $requiredField
             ),
             'content'
         );
