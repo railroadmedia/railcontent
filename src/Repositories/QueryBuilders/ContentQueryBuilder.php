@@ -625,7 +625,7 @@ class ContentQueryBuilder extends QueryBuilder
             }elseif ($orderByColumn == 'title') {
                 array_unshift(
                     $orderByColumns,
-                    ConfigService::$tableContentFields . '.value ' . $orderDirection
+                     'field.value ' . $orderDirection
                 );
             }
             elseif ($orderByColumn != 'progress') {
@@ -665,14 +665,14 @@ class ContentQueryBuilder extends QueryBuilder
                     )
                 );
             } elseif ($orderBy == 'title') {
-                    $this->join(ConfigService::$tableContentFields, function (JoinClause $joinClause) {
+                    $this->join(ConfigService::$tableContentFields. ' as field', function (JoinClause $joinClause) {
                         $joinClause->on(
-                            ConfigService::$tableContentFields . '.content_id',
+                             'field.content_id',
                             '=',
                             ConfigService::$tableContent . '.id'
                         )
                             ->where(
-                                ConfigService::$tableContentFields . '.key',
+                                 'field.key',
                                 '=',
                                "title"
                             );
@@ -724,7 +724,7 @@ class ContentQueryBuilder extends QueryBuilder
             }elseif ($orderByColumn == 'content_likes') {
                 array_unshift($groupByColumns,  ConfigService::$tableContentLikes . '.content_id' );
             }elseif ($orderByColumn == 'title') {
-                array_unshift($groupByColumns,  ConfigService::$tableContentFields . '.value' );
+                array_unshift($groupByColumns,   'field.value' );
     }
         }
 

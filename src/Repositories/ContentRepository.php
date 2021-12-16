@@ -1233,6 +1233,7 @@ class ContentRepository extends RepositoryBase
 
         $query =
             $this->query()
+                ->selectPrimaryColumns()
                 ->order($this->orderBy, $this->orderDirection)
                 ->addSubJoinToQuery($subQuery);
 
