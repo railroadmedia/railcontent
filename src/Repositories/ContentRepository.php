@@ -1025,6 +1025,11 @@ class ContentRepository extends RepositoryBase
     /**
      * @param array $types
      * @param $status
+     * @param $publishedOnValue
+     * @param string $publishedOnComparisonOperator
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @param array $requiredField
      * @return array
      */
     public function getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -1066,9 +1071,8 @@ class ContentRepository extends RepositoryBase
                             '=',
                             $requiredField['key']
                         )
-                        ->where(
+                        ->whereIn(
                             ConfigService::$tableContentFields . '.value',
-                            '=',
                             $requiredField['value']
                         );
                 }
