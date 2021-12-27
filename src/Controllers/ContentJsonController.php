@@ -52,6 +52,19 @@ class ContentJsonController extends Controller
             ContentRepository::$availableContentStatues = $request->get('statuses');
         }
 
+        $required_fields = $request->get('required_fields', []);
+
+        if ($request->has('term')) {
+            $required_fields[] = 'name,%' . $request->get('term') . '%,string,like';
+            if ($request->get('sort') == '-score') {
+                $request->merge(['sort' => 'published_on']);
+            }
+        }
+
+        if ($request->has('title')) {
+            $required_fields[] = 'title,%' . $request->get('title') . '%,string,like';
+        }
+
         $contentData = $this->contentService->getFiltered(
             $request->get('page', 1),
             $request->get('limit', 10),
@@ -59,31 +72,32 @@ class ContentJsonController extends Controller
             $request->get('included_types', []),
             $request->get('slug_hierarchy', []),
             $request->get('required_parent_ids', []),
-            $request->get('required_fields', []),
+            $required_fields,
             $request->get('included_fields', []),
             $request->get('required_user_states', []),
-            $request->get('included_user_states', [])
+            $request->get('included_user_states', []),
+            true,
+            false,
+            true,
+            $request->get('only_subscribed', false)
         );
 
-        $filters =  $contentData['filter_options'];
+        $filters = $contentData['filter_options'];
 
         foreach ($filters as $key => $filterOptions) {
             if (is_array($filterOptions)) {
                 if (($key != 'content_type') && ($key != 'instructor')) {
-                      $filters[$key] = array_diff($filterOptions, ['All']);
+                    $filters[$key] = array_diff($filterOptions, ['All']);
                     array_unshift($filters[$key], 'All');
                 }
             }
         }
 
-        return reply()->json(
-            $contentData['results'],
-            [
+        return reply()->json($contentData['results'], [
                 'transformer' => DataTransformer::class,
                 'totalResults' => $contentData['total_results'],
                 'filterOptions' => $filters,
-            ]
-        );
+            ]);
     }
 
     /** Pull the children contents for the parent id
@@ -95,24 +109,18 @@ class ContentJsonController extends Controller
     {
         $contentData = $this->contentService->getByParentId($parentId);
 
-        return reply()->json(
-            $contentData,
-            [
+        return reply()->json($contentData, [
                 'transformer' => DataTransformer::class,
-            ]
-        );
+            ]);
     }
 
     public function getByChildIdWhereType($childId, $type)
     {
         $contentData = $this->contentService->getByChildIdWhereType($childId, $type);
 
-        return reply()->json(
-            $contentData,
-            [
+        return reply()->json($contentData, [
                 'transformer' => DataTransformer::class,
-            ]
-        );
+            ]);
     }
 
     /**
@@ -123,12 +131,9 @@ class ContentJsonController extends Controller
     {
         $contentData = $this->contentService->getByIds(explode(',', $request->get('ids', '')));
 
-        return reply()->json(
-            $contentData,
-            [
+        return reply()->json($contentData, [
                 'transformer' => DataTransformer::class,
-            ]
-        );
+            ]);
     }
 
     /**
@@ -160,12 +165,9 @@ class ContentJsonController extends Controller
         //
         //        $content = array_merge($content, ['validation' => $validation]);
 
-        return reply()->json(
-            array_values([$id => $content]),
-            [
+        return reply()->json(array_values([$id => $content]), [
                 'transformer' => DataTransformer::class,
-            ]
-        );
+            ]);
     }
 
     public function slugs(Request $request, ...$slugs)
@@ -193,13 +195,10 @@ class ContentJsonController extends Controller
             $request->get('sort', 0)
         );
 
-        return reply()->json(
-            [$content],
-            [
+        return reply()->json([$content], [
                 'transformer' => DataTransformer::class,
                 'code' => 201,
-            ]
-        );
+            ]);
     }
 
     /** Update a content based on content id and return it in JSON format
@@ -214,9 +213,7 @@ class ContentJsonController extends Controller
         //update content with the data sent on the request
         $content = $this->contentService->update(
             $contentId,
-            array_intersect_key(
-                $request->all(),
-                [
+            array_intersect_key($request->all(), [
                     'slug' => '',
                     'type' => '',
                     'sort' => '',
@@ -226,8 +223,7 @@ class ContentJsonController extends Controller
                     'user_id' => '',
                     'published_on' => '',
                     'archived_on' => '',
-                ]
-            )
+                ])
         );
 
         //if the update method response it's null the content not exist; we throw the proper exception
@@ -236,13 +232,10 @@ class ContentJsonController extends Controller
             new NotFoundException('Update failed, content not found with id: ' . $contentId)
         );
 
-        return reply()->json(
-            [$content],
-            [
+        return reply()->json([$content], [
                 'transformer' => DataTransformer::class,
                 'code' => 201,
-            ]
-        );
+            ]);
     }
 
     /**
@@ -278,15 +271,12 @@ class ContentJsonController extends Controller
      */
     public function options(Request $request)
     {
-        return reply()->json(
-            null,
-            [
+        return reply()->json(null, [
                 'code' => 200,
                 'Access-Control-Allow-Origin' => '*',
                 'Access-Control-Allow-Methods' => 'POST, PATCH, GET, OPTIONS, PUT, DELETE',
                 'Access-Control-Allow-Headers' => 'X-Requested-With, content-type',
-            ]
-        );
+            ]);
     }
 
     /**
@@ -354,15 +344,14 @@ class ContentJsonController extends Controller
 
         $filterOptions = $this->contentService->getFiltersForUserProgressState(auth()->id(), 'started');
 
-        $filterOptions['content_type'] = array_values(array_diff($filterOptions['content_type'] ?? [], ['course-part']));
+        $filterOptions['content_type'] =
+            array_values(array_diff($filterOptions['content_type'] ?? [], ['course-part']));
 
-        return (new ContentFilterResultsEntity(
-            [
+        return (new ContentFilterResultsEntity([
                 'results' => $lessons,
                 'total_results' => $totalResults,
                 'filter_options' => $filterOptions,
-            ]
-        ))->toJsonResponse();
+            ]))->toJsonResponse();
     }
 
     /**
@@ -406,8 +395,7 @@ class ContentJsonController extends Controller
                     ->sortByFieldValue($field, 'asc');
         }
 
-        return (new ContentFilterResultsEntity(
-            ['results' => $results, 'total_results' => $staffPicks->totalResults()]
+        return (new ContentFilterResultsEntity(['results' => $results, 'total_results' => $staffPicks->totalResults()]
         ))->toJsonResponse();
     }
 
@@ -434,6 +422,7 @@ class ContentJsonController extends Controller
         $limit = $request->get('limit', 10);
         $requiredFields = $request->get('required_fields', []);
         $requiredUserState = $request->get('required_user_states', []);
+        $sortedBy = $request->get('sort', $sortedBy);
 
         ContentRepository::$availableContentStatues =
             $request->get('statuses', [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]);

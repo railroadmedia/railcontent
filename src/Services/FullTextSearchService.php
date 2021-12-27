@@ -52,7 +52,8 @@ class FullTextSearchService
         $contentStatuses = [],
         $sort = '-score',
         $dateTimeCutoff = null,
-        $brands = null
+        $brands = null,
+        $instructorIds = []
     )
     {
         $term = $output = preg_replace(
@@ -87,14 +88,16 @@ class FullTextSearchService
                     $contentStatuses,
                     $orderByColumn,
                     $orderByDirection,
-                    $dateTimeCutoff
+                    $dateTimeCutoff,
+                    $instructorIds
                 )
             ),
             'total_results' => $this->fullTextSearchRepository->countTotalResults(
                 $term,
                 $contentTypes,
                 $contentStatuses,
-                $dateTimeCutoff
+                $dateTimeCutoff,
+                $instructorIds
             )
         ];
 

@@ -646,4 +646,7 @@ return [
         'play-along',
         'song',
     ],
+
+    'coachesFilePath' => __DIR__ . '/../../database/seeds/Coaches v2.0.csv',
+
 ];

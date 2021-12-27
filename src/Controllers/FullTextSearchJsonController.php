@@ -39,6 +39,16 @@ class FullTextSearchJsonController extends Controller
     {
         ContentRepository::$availableContentStatues =
             $request->get('statuses', ContentRepository::$availableContentStatues);
+        
+        $includedFields = $request->get('included_fields');
+        $coachIds = [];
+        if ($includedFields) {
+            foreach ($includedFields as $includedField) {
+                if (($pos = strpos($includedField, "instructor,")) !== false) {
+                    $coachIds[] = substr($includedField, $pos + 11);
+                }
+            }
+        }
 
         $contentsData = $this->fullTextSearchService->search(
             $request->get('term', null),
@@ -48,15 +58,13 @@ class FullTextSearchJsonController extends Controller
             $request->get('statuses', []),
             $request->get('sort', '-score'),
             $request->get('date_time_cutoff', null),
-            $request->get('brands', null)
+            $request->get('brands', null),
+            $coachIds
         );
 
-        return reply()->json(
-            $contentsData['results'],
-            [
+        return reply()->json($contentsData['results'], [
                 'transformer' => DataTransformer::class,
                 'totalResults' => $contentsData['total_results'],
-            ]
-        );
+            ]);
     }
 }

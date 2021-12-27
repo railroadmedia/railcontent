@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests\Functional\Controllers;
 
+use Config;
 use Carbon\Carbon;
 use Railroad\Railcontent\Factories\ContentContentFieldFactory;
 use Railroad\Railcontent\Factories\ContentDatumFactory;
@@ -246,5 +247,128 @@ class FullTextSearchJsonControllerTest extends RailcontentTestCase
         );
 
         $this->assertEquals($expectedResults->decodeResponseJson('data'), array_values($results));
+    }
+
+    public function test_search_for_coach_content()
+    {
+        $page = 1;
+        $limit = 3;
+
+        $slug = $this->faker->word;
+        $instructor = $this->contentFactory->create($slug, 'instructor', 'published');
+
+        $coach = $this->contentFactory->create($slug, 'coach', 'published');
+
+        $fieldInstructor = [
+            'key' => 'instructor',
+            'value' => $instructor['id'],
+            'type' => 'content_id',
+        ];
+
+        $this->contentFactory->create(
+            'slug',
+            $this->faker->randomElement(config('railcontent.showTypes')),
+            $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
+            ConfigService::$defaultLanguage,
+            ConfigService::$brand,
+            rand(),
+            Carbon::yesterday()
+                ->toDateTimeString()
+        );
+
+        for ($i = 0; $i < 6; $i++) {
+            $content[$i] = $this->contentFactory->create(
+                'slug',
+                $this->faker->randomElement(config('railcontent.showTypes')),
+                $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
+                ConfigService::$defaultLanguage,
+                ConfigService::$brand,
+                rand(),
+                Carbon::yesterday()
+                    ->hour($i)
+                    ->toDateTimeString()
+            );
+            $this->fieldFactory->create(
+                $content[$i]['id'],
+                $fieldInstructor['key'],
+                $fieldInstructor['value'],
+                null,
+                $fieldInstructor['type']
+            );
+            $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
+        }
+
+        $this->artisan('command:createSearchIndexesForContents');
+
+        $response = $this->call(
+            'GET',
+            'railcontent/search',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => '-content_published_on',
+                'included_fields' => ['instructor,'.$coach['id']]
+            ]
+        );
+
+        $results = $response->decodeResponseJson('data');
+
+        foreach ($results as $result)
+        {
+            $this->assertEquals($instructor['id'],$result['fields'][0]['value']['id']);
+        }
+    }
+
+    public function test_search_for_coach_content_no_content()
+    {
+        $page = 1;
+        $limit = 3;
+
+        $coach = $this->contentFactory->create($this->faker->word, 'coach', 'published');
+
+        $this->contentFactory->create(
+            'slug',
+            $this->faker->randomElement(config('railcontent.showTypes')),
+            $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
+            ConfigService::$defaultLanguage,
+            ConfigService::$brand,
+            rand(),
+            Carbon::yesterday()
+                ->toDateTimeString()
+        );
+
+        for ($i = 0; $i < 6; $i++) {
+            $content[$i] = $this->contentFactory->create(
+                'slug',
+                $this->faker->randomElement(config('railcontent.showTypes')),
+                $this->faker->randomElement([ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED]),
+                ConfigService::$defaultLanguage,
+                ConfigService::$brand,
+                rand(),
+                Carbon::yesterday()
+                    ->hour($i)
+                    ->toDateTimeString()
+            );
+
+            $content[$i] = array_merge($content[$i]->getArrayCopy(), ['pluck' => $content[$i]->dot()]);
+        }
+
+        $this->artisan('command:createSearchIndexesForContents');
+
+        $response = $this->call(
+            'GET',
+            'railcontent/search',
+            [
+                'page' => $page,
+                'limit' => $limit,
+                'sort' => '-content_published_on',
+                'included_fields' => ['instructor,'.$coach['id']]
+            ]
+        );
+
+        $results = $response->decodeResponseJson();
+
+        $this->assertEquals(0,$results['meta']['totalResults']);
+
     }
 }

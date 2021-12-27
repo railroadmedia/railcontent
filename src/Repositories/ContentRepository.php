@@ -51,6 +51,7 @@ class ContentRepository extends RepositoryBase
     private $includedUserStates = [];
 
     private $getFutureContentOnly = false;
+    private $getFollowedContentOnly = false;
 
     private $page;
     private $limit;
@@ -1024,6 +1025,11 @@ class ContentRepository extends RepositoryBase
     /**
      * @param array $types
      * @param $status
+     * @param $publishedOnValue
+     * @param string $publishedOnComparisonOperator
+     * @param string $orderByColumn
+     * @param string $orderByDirection
+     * @param array $requiredField
      * @return array
      */
     public function getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -1032,7 +1038,8 @@ class ContentRepository extends RepositoryBase
         $publishedOnValue,
         $publishedOnComparisonOperator = '=',
         $orderByColumn = 'published_on',
-        $orderByDirection = 'desc'
+        $orderByDirection = 'desc',
+        $requiredField = []
     ) {
         $contentRows =
             $this->query()
@@ -1045,8 +1052,34 @@ class ContentRepository extends RepositoryBase
                     $publishedOnComparisonOperator,
                     $publishedOnValue
                 )
-                ->orderBy($orderByColumn, $orderByDirection)
-                ->getToArray();
+                ->orderBy($orderByColumn, $orderByDirection);
+
+        if(!empty($requiredField))
+        {
+            $contentRows ->join(
+                ConfigService::$tableContentFields,
+                function (JoinClause $joinClause) use (
+                    $requiredField
+                ) {
+                    $joinClause->on(
+                        ConfigService::$tableContentFields . '.content_id',
+                        '=',
+                        ConfigService::$tableContent . '.id'
+                    )
+                        ->where(
+                            ConfigService::$tableContentFields . '.key',
+                            '=',
+                            $requiredField['key']
+                        )
+                        ->whereIn(
+                            ConfigService::$tableContentFields . '.value',
+                            $requiredField['value']
+                        );
+                }
+            );
+        }
+
+        $contentRows = $contentRows->getToArray();
 
         $contentFieldRows = $this->fieldRepository->getByContentIds(array_column($contentRows, 'id'));
         $contentDatumRows = $this->datumRepository->getByContentIds(array_column($contentRows, 'id'));
@@ -1123,6 +1156,7 @@ class ContentRepository extends RepositoryBase
 
         foreach ($contentRows as $contentRow) {
             $contents[$contentRow['id']]['id'] = $contentRow['id'];
+            $contents[$contentRow['id']]['popularity'] = $contentRow['popularity'];
             $contents[$contentRow['id']]['slug'] = $contentRow['slug'];
             $contents[$contentRow['id']]['type'] = $contentRow['type'];
             $contents[$contentRow['id']]['sort'] = $contentRow['sort'];
@@ -1174,7 +1208,8 @@ class ContentRepository extends RepositoryBase
         array $typesToInclude,
         array $slugHierarchy,
         array $requiredParentIds,
-        $getFutureContentOnly = false
+        $getFutureContentOnly = false,
+        $getFollowedContentOnly = false
     ) {
         $this->page = $page;
         $this->limit = $limit;
@@ -1184,6 +1219,7 @@ class ContentRepository extends RepositoryBase
         $this->slugHierarchy = $slugHierarchy;
         $this->requiredParentIds = $requiredParentIds;
         $this->getFutureContentOnly = $getFutureContentOnly;
+        $this->getFollowedContentOnly = $getFollowedContentOnly;
 
         // reset all the filters for the new query
         $this->requiredFields = [];
@@ -1201,7 +1237,7 @@ class ContentRepository extends RepositoryBase
     {
         $subQuery =
             $this->query()
-                ->selectCountColumns()
+                ->selectCountColumns($this->orderBy)
                 ->restrictByUserAccess()
                 ->directPaginate($this->page, $this->limit)
                 ->restrictByFields($this->requiredFields)
@@ -1223,8 +1259,13 @@ class ContentRepository extends RepositoryBase
             );
         }
 
+        if($this->getFollowedContentOnly){
+            $subQuery->restrictFollowedContent();
+        }
+
         $query =
             $this->query()
+                ->selectPrimaryColumns()
                 ->order($this->orderBy, $this->orderDirection)
                 ->addSubJoinToQuery($subQuery);
 
@@ -1262,6 +1303,10 @@ class ContentRepository extends RepositoryBase
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByParentIds($this->requiredParentIds)
                 ->groupBy(ConfigService::$tableContent . '.id');
+
+        if($this->getFollowedContentOnly){
+            $subQuery->restrictFollowedContent();
+        }
 
         return $this->connection()
             ->table(
@@ -1309,9 +1354,9 @@ class ContentRepository extends RepositoryBase
      * @param $operator
      * @return $this
      */
-    public function requireField($name, $value, $type = '', $operator = '=')
+    public function requireField($name, $value, $type = '', $operator = '=', $field ='')
     {
-        $this->requiredFields[] = ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator];
+        $this->requiredFields[] = ['name' => $name, 'value' => $value, 'type' => $type, 'operator' => $operator,'field' =>$field];
 
         return $this;
     }

@@ -41,7 +41,7 @@ Route::group(
             '/content',
             ContentJsonController::class . '@index'
         )
-            ->name('content.index');
+            ->name('api.content.index');
         Route::get(
             '/content/parent/{parentId}',
             ContentJsonController::class . '@getByParentId'
@@ -167,5 +167,26 @@ Route::group(
         Route::get('/shows', ApiJsonController::class . '@getShows');
 
         Route::get('/comments', ApiJsonController::class . '@getComments');
+
+        // content follow
+        Route::put(
+            '/follow',
+            Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@followContent'
+        )->name('api.content.follow');
+
+        Route::put(
+            '/unfollow',
+            Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@unfollowContent'
+        )->name('api.content.unfollow');
+
+        Route::get(
+            '/followed-content',
+            Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@getFollowedContent'
+        )->name('api.followed.content');
+
+        Route::get(
+            '/followed-lessons',
+            Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@getLatestLessonsForFollowedContentByType'
+        )->name('api.followed.lessons');
     }
 );

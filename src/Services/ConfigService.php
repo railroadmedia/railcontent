@@ -115,6 +115,11 @@ class ConfigService
     public static $tableContentStatistics;
 
     /**
+     * @var string
+     */
+    public static $tableContentFollows;
+
+    /**
      * @var array
      */
     public static $availableLanguages;

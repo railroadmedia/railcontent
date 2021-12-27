@@ -250,7 +250,8 @@ class ContentService
         $publishedOnValue,
         $publishedOnComparisonOperator = '=',
         $orderByColumn = 'published_on',
-        $orderByDirection = 'desc'
+        $orderByDirection = 'desc',
+        $requiredField = []
     ) {
         return Decorator::decorate(
             $this->contentRepository->getWhereTypeInAndStatusAndPublishedOnOrdered(
@@ -259,7 +260,8 @@ class ContentService
                 $publishedOnValue,
                 $publishedOnComparisonOperator,
                 $orderByColumn,
-                $orderByDirection
+                $orderByDirection,
+                $requiredField
             ),
             'content'
         );
@@ -783,12 +785,12 @@ class ContentService
     }
 
     /**
-     * Get filtered contents.
+     *  Get filtered contents.
      * Returns:
      * ['results' => $lessons, 'total_results' => $totalLessonsAfterFiltering]
      *
-     * @param int $page
-     * @param int $limit
+     * @param $page
+     * @param $limit
      * @param string $orderByAndDirection
      * @param array $includedTypes
      * @param array $slugHierarchy
@@ -797,10 +799,11 @@ class ContentService
      * @param array $includedFields
      * @param array $requiredUserStates
      * @param array $includedUserStates
-     * @param boolean $pullFilterFields
-     * @param bool $getFutureContentOnly
+     * @param bool $pullFilterFields
+     * @param false $getFutureContentOnly
      * @param bool $pullPagination
-     * @return ContentFilterResultsEntity
+     * @param false $getFollowedContentOnly
+     * @return mixed|Collection|null
      */
     public function getFiltered(
         $page,
@@ -815,7 +818,8 @@ class ContentService
         array $includedUserStates = [],
         $pullFilterFields = true,
         $getFutureContentOnly = false,
-        $pullPagination = true
+        $pullPagination = true,
+        $getFollowedContentOnly = false
     ) {
         $results = null;
         if ($limit == 'null') {
@@ -837,7 +841,8 @@ class ContentService
                 implode(' ', array_values($includedFields) ?? ''),
                 implode(' ', array_values($requiredUserStates) ?? ''),
                 implode(' ', array_values($includedUserStates) ?? ''),
-                ContentRepository::$bypassPermissions
+                ContentRepository::$bypassPermissions,
+                $getFollowedContentOnly
             );
 
         $cache = CacheHelper::getCachedResultsForKey($hash);
@@ -855,7 +860,8 @@ class ContentService
                 $includedTypes,
                 $slugHierarchy,
                 $requiredParentIds,
-                $getFutureContentOnly
+                $getFutureContentOnly,
+                $getFollowedContentOnly
             );
 
             foreach ($requiredFields as $requiredField) {

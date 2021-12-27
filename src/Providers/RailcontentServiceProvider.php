@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Validator;
 use PDO;
 use Railroad\Railcontent\Commands\AddDefaultShowNewField;
+use Railroad\Railcontent\Commands\CalculateContentPopularity;
 use Railroad\Railcontent\Commands\CalculateTotalXP;
 use Railroad\Railcontent\Commands\CleanContentTopicsAndStyles;
 use Railroad\Railcontent\Commands\CleanMetadata;
@@ -98,6 +99,10 @@ class RailcontentServiceProvider extends ServiceProvider
             ]
         );
 
+        $this->publishes([
+            __DIR__ . '/../../database/seeds/CoachV2Seeder.php' => database_path('seeds/CoachV2Seeder.php'),
+        ]);
+
         if (ConfigService::$dataMode == 'host') {
             $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
         }
@@ -119,7 +124,8 @@ class RailcontentServiceProvider extends ServiceProvider
                 ExpireCache::class,
                 CalculateTotalXP::class,
                 CleanMetadata::class,
-                CleanContentTopicsAndStyles::class
+                CleanContentTopicsAndStyles::class,
+                CalculateContentPopularity::class,
             ]
         );
 
@@ -162,6 +168,7 @@ class RailcontentServiceProvider extends ServiceProvider
         ConfigService::$tableContentLikes = ConfigService::$tablePrefix . 'content_likes';
         ConfigService::$tableSearchIndexes = ConfigService::$tablePrefix . 'search_indexes';
         ConfigService::$tableContentStatistics = ConfigService::$tablePrefix . 'content_statistics';
+        ConfigService::$tableContentFollows = ConfigService::$tablePrefix . 'content_follows';
 
         // brand
         ConfigService::$brand = config('railcontent.brand');

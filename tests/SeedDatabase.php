@@ -25,6 +25,6 @@ trait SeedDatabase
      */
     public function runSeeders()
     {
-        $this->artisan('db:seed', ['--class' => 'ContentSeeder']);
+        $this->artisan('db:seed', ['--class' => 'CoachV2Seeder']);
     }
 }
