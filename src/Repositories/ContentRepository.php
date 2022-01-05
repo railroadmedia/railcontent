@@ -1321,7 +1321,7 @@ class ContentRepository extends RepositoryBase
      */
     public function getFilterFields()
     {
-        $possibleContentFields =
+        $query =
             $this->query()
                 ->selectFilterOptionColumns()
                 ->restrictByUserAccess()
@@ -1340,8 +1340,12 @@ class ContentRepository extends RepositoryBase
                 ->whereIn(
                     ConfigService::$tableContentFields . '.key',
                     ConfigService::$fieldOptionList
-                )
-                ->get()
+                );
+
+        if($this->getFollowedContentOnly){
+            $query->restrictFollowedContent();
+        }
+        $possibleContentFields = $query->get()
                 ->toArray();
 
         return $this->parseAvailableFields($possibleContentFields);
