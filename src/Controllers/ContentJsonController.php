@@ -52,6 +52,10 @@ class ContentJsonController extends Controller
             ContentRepository::$availableContentStatues = $request->get('statuses');
         }
 
+        if($request->has('include_future_content')){
+            ContentRepository::$pullFutureContent = $request->has('include_future_content');
+        }
+
         $required_fields = $request->get('required_fields', []);
 
         if ($request->has('term')) {
