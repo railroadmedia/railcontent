@@ -61,7 +61,7 @@ class CleanMetadata extends Command
             )
             ->where(ConfigService::$tableContentFields . '.key', 'difficulty')
             ->whereIn(ConfigService::$tableContentFields . '.value', $allDifficultyVariants)
-            ->where(ConfigService::$tableContent . '.brand', 'drumeo')
+            ->where(ConfigService::$tableContent . '.brand', config('railcontent.brand'))
             ->update(
                 [
                     ConfigService::$tableContentFields . '.value' => $allDifficultyValue,
