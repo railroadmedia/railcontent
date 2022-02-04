@@ -992,9 +992,7 @@ class ContentService
 
         CacheHelper::deleteCache('content_' . $id);
 
-        if (array_key_exists('status', $data)) {
-            CacheHelper::deleteUserFields(null, 'contents');
-        }
+        CacheHelper::deleteUserFields(null, 'contents');
 
         return $this->getById($id);
     }
