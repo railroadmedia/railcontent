@@ -171,6 +171,8 @@ class ContentFieldService
         //delete cache for associated content id
         CacheHelper::deleteCache('content_' . $oldField['content_id']);
 
+        CacheHelper::deleteUserFields(null, 'contents');
+
         $newField = $this->get($id);
 
         event(new ContentFieldUpdated($newField, $oldField));
@@ -218,6 +220,8 @@ class ContentFieldService
 
         //delete cache associated with the content id
         CacheHelper::deleteCache('content_' . $data['content_id']);
+
+        CacheHelper::deleteUserFields(null, 'contents');
 
         $newField = $this->get($id);
 

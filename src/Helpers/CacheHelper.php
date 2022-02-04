@@ -347,6 +347,9 @@ class CacheHelper
                     )
                 );
             }
+
+            self::deleteAllCachedSearchResults('userId');
+
             foreach ($userKeys as $userKey) {
                 $fields = iterator_to_array(
                     new \Predis\Collection\Iterator\HashKey(
