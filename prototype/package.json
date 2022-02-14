@@ -7,11 +7,6 @@
     "serve": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "stylesora": "^1.0.102-3.0",
-    "tailwindcss": "^3.0.22",
-    "vue": "^3.2.31"
-=======
     "vue": "^3.2.29",
     "vue-router": "^4.0.12"
   },
@@ -30,9 +25,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.5.1",
     "prettier-plugin-tailwindcss": "^0.1.4",
-    "stylesora": "file:stylesora-1.0.96.tgz",
+    "stylesora": "^1.0.102-3.0",
     "tailwindcss": "^3.0.18",
     "vite": "^2.7.13"
->>>>>>> 58ac7ab1167bf355a83d9df154febd6e2a438be5
   }
 }
