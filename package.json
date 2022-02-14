@@ -18,7 +18,7 @@
     "dependencies": {
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.3.7",
-        "stylesora": "^1.0.67",
+        "stylesora": "^1.0.102-3.0",
         "tailwindcss": "^2.2.16",
         "vue": "^3.2.19",
         "vue-loader": "^16.8.1"
