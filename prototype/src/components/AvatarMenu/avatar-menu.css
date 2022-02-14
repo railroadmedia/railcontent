@@ -1,0 +1,4 @@
+.AvatarMenu {
+    box-shadow: 0px 1px 20px 1px rgba(68, 95, 116, 0.35);
+    backdrop-filter: blur(5px);
+}
