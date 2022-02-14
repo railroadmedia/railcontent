@@ -1058,10 +1058,10 @@ stylehacks@^5.0.3:
     browserslist "^4.16.6"
     postcss-selector-parser "^6.0.4"
 
-stylesora@^1.0.101:
-  version "1.0.101"
-  resolved "https://registry.yarnpkg.com/stylesora/-/stylesora-1.0.101.tgz#7d228a3ac7fd055effe47824b9d8abdbb7ed8539"
-  integrity sha512-AOK6xeurWu8P+ySrJXmE4jyY2E2/tGwMMCqwbfEW5XQJKYjh/O8cIaCnlZ0Q4geanEjVdGao2hqNtco3FPsVRg==
+stylesora@^1.0.102-3.0:
+  version "1.0.102-3.0"
+  resolved "https://registry.yarnpkg.com/stylesora/-/stylesora-1.0.102-3.0.tgz#1de106079cad9f16db7b4db306c78302a23ff5bf"
+  integrity sha512-O6geAoYODxgUpEBPkYpQN5It3VGp3iXl1usQxrqOqtJ1J6t5JDpS4VCVnHZD5fCMv4jeErZtCKenzwr389rjNw==
   dependencies:
     cssnano "^5.0.6"
 
