@@ -3153,6 +3153,13 @@ img-loader@^4.0.0:
   dependencies:
     loader-utils "^1.1.0"
 
+imgix.js@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/imgix.js/-/imgix.js-3.5.1.tgz#d895c261df66f5bde0a02ed5a4a664ea3ab45bdc"
+  integrity sha512-iEQEvTbm4bna2L9jqW3SWylwLQgj7d7LUbeYrXsX+iq2QT3wYXSG3rEwKtwpHofv4KEn+JpWIK+3y5b8SekpWQ==
+  dependencies:
+    lodash.debounce "^4.0.8"
+
 import-cwd@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/import-cwd/-/import-cwd-3.0.0.tgz#20845547718015126ea9b3676b7592fb8bd4cf92"

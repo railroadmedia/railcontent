@@ -18,6 +18,7 @@
     "dependencies": {
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.3.7",
+        "imgix.js": "^3.5.1",
         "stylesora": "^1.0.67",
         "tailwindcss": "^2.2.16",
         "vue": "^3.2.19",
