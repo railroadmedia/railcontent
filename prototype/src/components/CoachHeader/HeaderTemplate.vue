@@ -1,5 +1,5 @@
 <script>
-const imgix = (url) => url
+import { buildUrl } from 'vue-imgix'
 const colors = {
     drumeo: {
         solidBg: '#00101d',
@@ -36,8 +36,8 @@ export default {
     setup(props, context) {
         return {
             colors,
-            brandColors: colors[props.brand],
-            imgix
+            bgImg: buildUrl(backgroundImage),
+            brandColors: colors[props.brand]
         }
     }
 }
