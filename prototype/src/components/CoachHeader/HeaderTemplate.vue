@@ -13,7 +13,7 @@ const colors = {
     },
     singeo: {
         solidBg: '#18131C',
-        bgRgbStart: 'rgba(0, 16, 29, 0)',
+        bgRgb: 'rgba(0, 16, 29, 0)',
         subtitle: '#717179'
     },
     pianote: {
@@ -62,7 +62,7 @@ export default {
                 :style="{
                     width: '100%',
                     height: '100%',
-                    background: `linear-gradient(180deg,${colors[brand]['bgRgbStart']} 50%,${colors[brand]['solidBg']})`
+                    background: `linear-gradient(180deg,${colors[brand].bgRgb} 50%,${colors[brand]['solidBg']})`
                 }"
             ></div>
         </div>
@@ -132,7 +132,7 @@ export default {
                 :style="{
                     width: '100%',
                     height: '100%',
-                    background: `linear-gradient(268deg,${colors[brand]['bgRgbStart']} }} 50%,${colors[brand]['solidBg']})`
+                    background: `linear-gradient(268deg,${colors[brand].bgRgb} 50%,${colors[brand]['solidBg']})`
                 }"
             ></div>
         </div>
