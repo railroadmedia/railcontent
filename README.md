@@ -9,6 +9,9 @@ this repository's website.
 
 **URL: [https://devplatform.musora.com:8443/](https://devplatform.musora.com:8443/)**
 
+Composer and artisan commands will automatically run inside the php 8 container if you specify musora-web-platform as
+the application. For example: **r musora-web-platform composer u** or **r musora-web-platform artisan migrate**
+
 ### Connecting To MySQL 8 With phpMyAdmin
 
 Go to the phpMyAdmin url for our local development: [http://localhost:4805/index.php](http://localhost:4805/index.php).  
