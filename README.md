@@ -24,6 +24,32 @@ Password: root
 
 Please note, mysql 8 databases are totally separate from the legacy mysql 5.6 databases.
 
+# Multi Domain Support
+
+All brand domains/websites such as drumeo.com, pianote.com, etc will use this same repository and laravel install
+to run. To load these brands using the new musora-web-platform repo you must specify the port and URLs like this:  
+
+[https://devplatform.drumeo.com:8443/](https://devplatform.drumeo.com:8443/)  
+[https://devplatform.pianote.com:8443/](https://devplatform.pianote.com:8443/)  
+[https://devplatform.guitareo.com:8443/](https://devplatform.guitareo.com:8443/)  
+[https://devplatform.singeo.com:8443/](https://devplatform.singeo.com:8443/)  
+
+This will load based on the routes defined in the relevant route files for that brand. There are folders for each brand
+inside the routes file of this repo. A route can be locked to a given domain like this:
+
+```php
+Route::domain('{subdomain}.drumeo.com')->group(function () {
+    Route::get('/', function () {
+        return 'Drumeo only route!';
+    });
+});
+```  
+
+Prototyping is totally domain independent meaning the urls will work with any domain. You instead must separate
+your blade files by brand. Currently, in the 'views' folder each brand has its own folder.
+
+**Existing legacy dev URLs are not affected by this. They still work as normal, for example 'https://dev.drumeo.com/'.
+
 # Front End Web Prototyping
 
 ### Loading Blade Files With A Prototype URL
@@ -35,14 +61,17 @@ URL: https://devplatform.musora.com:8443/prototype/{viewPath1}/{viewPath2?}/{vie
 
 This path to the view file is relative to the 'resources/views' directory. For example
 if you have a blade file here:  
-**resources/views/my_category/my_blade.blade.php**  
+**resources/views/my_brand/my_category/my_blade.blade.php**  
 you load that blade file in a browser with this URL:  
-https://devplatform.musora.com:8443/prototype/my_category/my_blade
+https://devplatform.musora.com:8443/prototype/my_brand/my_category/my_blade
 
 You can also link to any blade file using this same URL structure:
 ```html
-<a href="/prototype/my_other_category/my_other_blade"
+<a href="/prototype/my_brand/my_other_category/my_other_blade"
 ```
+
+This URL should work as an example if the example files still exist in this repo:
+[https://devplatform.musora.com:8443/prototype/musora/prototype_testing_example/testing_welcome](https://devplatform.musora.com:8443/prototype/musora/prototype_testing_example/testing_welcome)
 
 ### Loading Test Data In To A Blade
 
