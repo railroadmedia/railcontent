@@ -27,34 +27,30 @@
     }
   ],
   "require": {
-    "php": "~7.1",
-    "laravel/framework": "5.6.*",
-    "guzzlehttp/guzzle": "~6.0",
+    "php": "~8.0",
+    "laravel/framework": "^9.0",
+    "guzzlehttp/guzzle": "^7.4",
     "doctrine/dbal": "^2.5",
-    "ramsey/uuid": "^3.6",
+    "ramsey/uuid": "^4.2",
     "aws/aws-sdk-php":"^3.0.0",
-    "league/flysystem": "^1.0.40",
-    "league/flysystem-aws-s3-v3": "~1.0",
+    "league/flysystem": "^3.0",
+    "league/flysystem-aws-s3-v3": "^3.0",
     "vimeo/vimeo-api": "^1.2",
     "predis/predis": "^1.1",
     "google/apiclient":"^2.2",
-    "railroad/resora": ">=1.0.10 <1.1",
-    "railroad/permissions": "^1.0",
-    "railroad/usora": "dev-v2.0-skill as v2.0.68",
     "ext-redis": "*",
-    "railroad/doctrine": "^0.0",
+
     "railroad/doctrine-array-hydrator": "^1.0",
     "jms/serializer": "1.*",
     "elasticsearch/elasticsearch": "~7.0",
     "doctrine/search":"dev-master"
   },
   "require-dev": {
-    "mpociot/laravel-apidoc-generator": "dev-master",
-    "phpunit/phpunit": "~7.0",
-    "phpunit/php-code-coverage": "~6.0",
-    "mockery/mockery": "^1.0",
-    "orchestra/testbench": "~3.6",
-    "filp/whoops":"~2.1"
+    "phpunit/phpunit": "^9.5",
+    "phpunit/php-code-coverage": "~9.2",
+    "orchestra/testbench": "~7.0",
+    "filp/whoops":"~2.14",
+    "mockery/mockery": "^1.0"
   },
   "autoload": {
     "psr-4": {
@@ -64,6 +60,12 @@
   "autoload-dev": {
     "psr-4": {
       "Railroad\\Railcontent\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "kylekatarnls/update-helper": true,
+      "composer/package-versions-deprecated": true
     }
   }
 }
