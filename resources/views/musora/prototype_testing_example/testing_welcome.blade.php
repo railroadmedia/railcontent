@@ -36,6 +36,6 @@
             <h2>{{ $myJsonValue }}</h2>
         @endforeach
 
-    <a href="/prototype/prototype_testing_example/testing_welcome_2" style="color: blue;">Link</a>
+    <a href="/prototype/musora/prototype_testing_example/testing_welcome_2" style="color: blue;">Link</a>
     </body>
 </html>
