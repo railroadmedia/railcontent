@@ -27,6 +27,8 @@ Log in with these details (you may need to log out if you are already logged in 
 Please note, mysql 8.0 databases are totally separate from the legacy mysql 5.6 databases. They exist on different 
 mysql containers.
 
+<br>
+
 # Multi Domain Support
 
 All brand domains/websites such as drumeo.com, pianote.com, etc use this same repository and laravel install
@@ -52,6 +54,8 @@ Prototyping is totally domain independent meaning the urls will work with any do
 your blade files by brand. Currently, in the 'views' folder each brand has its own folder.
 
 **Existing legacy dev URLs are not affected by this. They still work as normal, for example 'https://dev.drumeo.com/'.**
+
+<br>
 
 # Front End Web Prototyping
 
