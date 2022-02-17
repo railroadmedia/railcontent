@@ -4,7 +4,7 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
 Pull the latest railenvironment master branch changes and update with docker compose. This will install new 
 containers for PHP 8 and MySQL 8. This will not affect legacy repos and websites.
 
-We have multiple versions of PHP running in our dev environments you must specify a port to connect to
+We have multiple versions of PHP running in our dev environments so you must specify a port to connect to
 this repository's website.
 
 **URL: [https://devplatform.musora.com:8443/](https://devplatform.musora.com:8443/)**
