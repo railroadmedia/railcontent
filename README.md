@@ -5,12 +5,14 @@ Pull the latest railenvironment master branch changes and update with docker com
 containers for PHP 8 and MySQL 8. This will not affect legacy repos and websites.
 
 We have multiple versions of PHP running in our dev environments so you must specify a port to connect to
-this repository's website.
+this unified platform repository's website instead of the legacy brand repositories.
 
 **URL: [https://devplatform.musora.com:8443/](https://devplatform.musora.com:8443/)**
 
 Composer and artisan commands will automatically run inside the php 8 container if you specify musora-web-platform as
-the application. For example: **r musora-web-platform composer u** or **r musora-web-platform artisan migrate**
+the application. For example:  
+- **r musora-web-platform composer u**
+- **r musora-web-platform artisan migrate**
 
 ### Connecting To MySQL 8 With phpMyAdmin
 
@@ -18,15 +20,16 @@ Go to the phpMyAdmin url for our local development: [http://localhost:4805/index
 
 Log in with these details (you may need to log out if you are already logged in to another mysql version):
 
-Server: mysql8  
-Username: root  
-Password: root  
+- Server: **mysql8**
+- Username: **root**
+- Password: **root**  
 
-Please note, mysql 8 databases are totally separate from the legacy mysql 5.6 databases.
+Please note, mysql 8.0 databases are totally separate from the legacy mysql 5.6 databases. They exist on different 
+mysql containers.
 
 # Multi Domain Support
 
-All brand domains/websites such as drumeo.com, pianote.com, etc will use this same repository and laravel install
+All brand domains/websites such as drumeo.com, pianote.com, etc use this same repository and laravel install
 to run. To load these brands using the new musora-web-platform repo you must specify the port and URLs like this:  
 
 [https://devplatform.drumeo.com:8443/](https://devplatform.drumeo.com:8443/)  
@@ -48,7 +51,7 @@ Route::domain('{subdomain}.drumeo.com')->group(function () {
 Prototyping is totally domain independent meaning the urls will work with any domain. You instead must separate
 your blade files by brand. Currently, in the 'views' folder each brand has its own folder.
 
-**Existing legacy dev URLs are not affected by this. They still work as normal, for example 'https://dev.drumeo.com/'.
+**Existing legacy dev URLs are not affected by this. They still work as normal, for example 'https://dev.drumeo.com/'.**
 
 # Front End Web Prototyping
 
