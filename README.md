@@ -1,64 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Development Environment
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.  
+Pull the latest railenvironment master branch changes and update with docker compose. This will install new 
+containers for PHP 8 and MySQL 8. This will not affect legacy repos and websites.
 
-## About Laravel
+We have multiple versions of PHP running in our dev environments you must specify a port to connect to
+this repository's website.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**URL: [https://devplatform.musora.com:8443/](https://devplatform.musora.com:8443/)**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Connecting To MySQL 8 With phpMyAdmin
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Go to the phpMyAdmin url for our local development: [http://localhost:4805/index.php](http://localhost:4805/index.php).  
 
-## Learning Laravel
+Log in with these details (you may need to log out if you are already logged in to another mysql version):
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Server: mysql8  
+Username: root  
+Password: root  
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Please note, mysql 8 databases are totally separate from the legacy mysql 5.6 databases.
 
-## Laravel Sponsors
+# Front End Web Prototyping
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Loading Blade Files With A Prototype URL
 
-### Premium Partners
+There is a simple prototyping system set up in this repository which allows for development of blade/view/vue 
+pages without any need for back end routing or data. It works by loading blade files based on the URL.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+URL: https://devplatform.musora.com:8443/prototype/{viewPath1}/{viewPath2?}/{viewPath3?}/{viewPath4?}/{viewPath5?}
 
-## Contributing
+This path to the view file is relative to the 'resources/views' directory. For example
+if you have a blade file here:  
+**resources/views/my_category/my_blade.blade.php**  
+you load that blade file in a browser with this URL:  
+https://devplatform.musora.com:8443/prototype/my_category/my_blade
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+You can also link to any blade file using this same URL structure:
+```html
+<a href="/prototype/my_other_category/my_other_blade"
+```
 
-## Code of Conduct
+### Loading Test Data In To A Blade
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+You can load testing data in the form of PHP variables in to any blade file by including the php
+file inside the blade view file. All test data must be inside .php files and inside the 'resources/prototyping_data' 
+directory. The PHP files should start with '<?php' and include raw variable definitions. For example:  
 
-## Security Vulnerabilities
+File location: resources/prototyping_data/test_data.php    
+```php
+<?php
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+$myString = 'Hello!';
+$myArray = ['data 1', 'data 2'];
+$myJsonObject = json_decode('{"name":"John", "age":30, "car":null}');
+```
 
-## License
+In your blade file you can load in these variables like this:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```php
+@php
+    require_once(resource_path('prototyping_data/test_data.php'))
+@endphp
+
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body class="antialiased">
+        <h1>Hello!</h1>
+        <h2>{{ $myString }}</h2>
+
+        @foreach($myArray as $myArrayValue)
+            <h2>{{ $myArrayValue }}</h2>
+        @endforeach
+
+        @foreach($myJsonObject as $myJsonValue)
+            <h2>{{ $myJsonValue }}</h2>
+        @endforeach
+    </body>
+</html>
+
+```
