@@ -35,7 +35,6 @@ export default {
     setup(props, context) {
         return {
             colors,
-            bgImg: props.backgroundImage,
             brandColors: colors[props.brand]
         }
     }
@@ -50,7 +49,7 @@ export default {
             class="tw-bg-top lg:tw-hidden"
             :style="{
                 backgroundColor: colors[brand]['solidBg'],
-                backgroundImage: `url(${bgImg})`,
+                backgroundImage: `url(${backgroundImage})`,
                 color: '#fff',
                 backgroundSize: 'cover',
                 minHeight: '25vh',
