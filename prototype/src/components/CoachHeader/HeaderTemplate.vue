@@ -30,12 +30,15 @@ export default {
         'topSubtitle',
         'bottomSubtitle',
         'shortBio',
-        'actions'
+        'actionSlot',
+        'titleSlot'
     ],
     setup(props, context) {
         return {
             colors,
-            brandColors: colors[props.brand]
+            brandColors: colors[props.brand],
+            hasTitleSlot: !!context.slots.titleSlot,
+            hasActionSlot: !!context.slots.actionSlot
         }
     }
 }
@@ -69,7 +72,7 @@ export default {
             :style="{ backgroundColor: brandColors['solidBg'] }"
         >
             <div
-                class="tw--mt-24 tw-py-12 tw-px-6 tw-text-center md:tw-mt-0 md:tw-py-12 md:tw-px-14 lg:tw-py-16 lg:tw-text-left"
+                class="tw--mt-24 tw-py-12 tw-pl-6 tw-text-center md:tw-mt-0 md:tw-py-12 md:tw-px-14 lg:tw-py-16 lg:tw-text-left"
             >
                 <h2
                     v-if="topSubtitle"
@@ -84,13 +87,14 @@ export default {
                 </h2>
 
                 <h1
+                    v-if="hasTitleSlot"
                     class="tw-mb-3 tw-font-normal tw-uppercase"
                     :style="{
                         fontSize: '40px',
                         lineHeight: '36px'
                     }"
                 >
-                    {{ title }}
+                    <slot name="titleSlot"></slot>
                 </h1>
                 <h2
                     v-if="bottomSubtitle"
@@ -110,6 +114,7 @@ export default {
                     {{ shortBio }}
                 </h3>
                 <div
+                    v-if="hasActionSlot"
                     class="tw-flex tw-flex-col tw-flex-wrap tw-items-center lg:tw-flex-row xl:tw-flex-nowrap xl:tw-items-start"
                 >
                     <slot name="actionSlot"></slot>

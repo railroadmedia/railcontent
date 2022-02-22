@@ -10,12 +10,20 @@ export default {
         'brand',
         'backgroundImage',
         'vimeoVideo',
-        'focusArray',
+        'coachFocus',
         'forumUrl',
-        'isUserSubscribed'
+        'isUserSubscribed',
+        'coachName'
     ],
     setup(props, context) {
-        return { subscribeToCoach, unsubscribeToCoach }
+        const [name, lastName] = props.coachName.split(' ')
+
+        return {
+            subscribeToCoach,
+            unsubscribeToCoach,
+            name,
+            lastName
+        }
     }
 }
 </script>
@@ -24,10 +32,14 @@ export default {
     <HeaderTemplate
         brand="drumeo"
         backgroundImage="https://musora.imgix.net/https%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2Fgreyson-playing-1643737463.jpg?auto=format&crop=faces%2Cedges&fit=crop&ixlib=php-1.2.1&s=0e22ebce257b6a48adda52d3ba4027bd"
-        topSubtitle="TOP SUBTITLE"
-        bottomSubtitle="BOTTOM SUBTITLE"
+        :bottomSubtitle="coachFocus"
         shortBio="shortbio"
     >
+        <template v-if="name && lastName" #titleSlot
+            ><span class="tw-break-normal"
+                >{{ name }} <strong>{{ lastName }}</strong></span
+            ></template
+        >
         <template #actionSlot>
             <div
                 id="subscribeButton"
@@ -35,8 +47,7 @@ export default {
             >
                 <button
                     v-on:click="subscribeToCoach(coachId, subscribeUrl)"
-                    :class="`tw-btn tw-btn-primary tw-transition lg:tw-mr-4 tw-bg-${brand} hover:tw-bg-${brand}-600 tw-px-auto tw-mb-4 tw-box-border`"
-                    style="width: 200px"
+                    :class="`tw-btn tw-btn-primary tw-static tw-transition lg:tw-mr-4 tw-bg-${brand} hover:tw-bg-${brand}-600 tw-px-auto tw-mb-4 tw-box-border tw-w-[200px]`"
                 >
                     <span>
                         <i aria-hidden="true" class="fa fa-bell tw-px-0.5"></i>
@@ -50,11 +61,10 @@ export default {
             >
                 <button
                     v-on:click="unsubscribeToCoach(coachId, unsubscribeUrl)"
-                    :class="`tw-btn tw-btn-primary tw-transition lg:tw-mr-4 tw-bg-${brandName} hover:tw-bg-${brandName}-600 tw-px-auto tw-mb-4 tw-box-border`"
-                    style="width: 200px"
+                    :class="`tw-btn tw-btn-primary tw-transition lg:tw-mr-4 tw-bg-${brand} hover:tw-bg-${brand}-600 tw-px-auto tw-static tw-mb-4 tw-box-border tw-w-[200px]`"
                 >
                     <span>
-                        <i aria-hidden="true" class="fa fa-check tw-px-0.5"></i>
+                        <i aria-hidden="true" class="fa fa-check tw-px-1"></i>
                         <span>Subscribed</span>
                     </span>
                 </button>
@@ -62,13 +72,13 @@ export default {
             <div v-if="forumUrl !== null" class="lg:tw-mr-4">
                 <a
                     :href="forumUrl"
-                    :class="`tw-btn tw-btn-primary tw-transition tw-bg-${brandName} hover:tw-bg-${brandName}-600 tw-px-auto tw-mb-4 tw-box-border`"
+                    :class="`tw-btn tw-btn-primary tw-transition tw-bg-${brand} hover:tw-bg-${brand}-600 tw-px-auto tw-static tw-mb-4 tw-box-border tw-w-[200px]`"
                     style="width: 200px"
                 >
                     <span>
                         <i
                             aria-hidden="true"
-                            class="fa fa-question-circle tw-px-0.5"
+                            class="fa fa-question-circle tw-px-1"
                         ></i>
                         <span>Ask a question</span></span
                     >
@@ -78,11 +88,11 @@ export default {
                 <button
                     onclick="onModalButtonClick()"
                     data-open-modal="coach-trailer-modal"
-                    class="tw-btn tw-px-auto tw-btn-secondary tw-mb-4 tw-box-border tw-transition hover:tw-bg-white hover:tw-bg-opacity-10"
+                    class="tw-btn tw-px-auto tw-btn-secondary tw-static tw-mb-4 tw-box-border tw-transition hover:tw-bg-white hover:tw-bg-opacity-10"
                     style="width: 200px"
                 >
                     <span>
-                        <i aria-hidden="true" class="fa fa-play tw-px-0.5"></i>
+                        <i aria-hidden="true" class="fa fa-play tw-px-1"></i>
                         <span>Play Trailer</span></span
                     >
                 </button>
