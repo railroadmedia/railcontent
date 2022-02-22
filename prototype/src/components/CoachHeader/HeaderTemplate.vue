@@ -1,5 +1,4 @@
 <script>
-import { buildUrl } from 'vue-imgix'
 const colors = {
     drumeo: {
         solidBg: '#00101d',
@@ -36,7 +35,7 @@ export default {
     setup(props, context) {
         return {
             colors,
-            bgImg: buildUrl(backgroundImage),
+            bgImg: props.backgroundImage,
             brandColors: colors[props.brand]
         }
     }
@@ -51,7 +50,7 @@ export default {
             class="tw-bg-top lg:tw-hidden"
             :style="{
                 backgroundColor: colors[brand]['solidBg'],
-                backgroundImage: `url(${imgix(backgroundImage, [])})`,
+                backgroundImage: `url(${bgImg})`,
                 color: '#fff',
                 backgroundSize: 'cover',
                 minHeight: '25vh',
@@ -122,7 +121,7 @@ export default {
             class="tw-hidden tw-bg-top lg:tw-flex"
             :style="{
                 backgroundColor: colors[brand]['solidBg'],
-                backgroundImage: `url(${imgix(backgroundImage, [])})`,
+                backgroundImage: `url(${backgroundImage})`,
                 color: '#fff',
                 backgroundSize: 'cover',
                 backgroundPosition: '50%'

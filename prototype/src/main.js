@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-import VueImgix from 'vue-imgix'
 import './tailwind.css'
 import App from './App.vue'
 import { routes } from './routes.js'
@@ -20,14 +19,6 @@ app.directive('click-outside', {
     },
     unmounted(el) {
         document.body.removeEventListener('click', el.clickOutsideEvent)
-    }
-})
-
-app.use(VueImgix, {
-    domain: 'https://musora.imgix.net',
-    defaultIxParams: {
-        // This enables the auto format imgix parameter by default for all images, which we recommend to reduce image size, but you might choose to turn this off.
-        auto: 'format'
     }
 })
 

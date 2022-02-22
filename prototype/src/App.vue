@@ -3,7 +3,7 @@ import PageContainer from '@/components/PageContainer/PageContainer.vue'
 import CoachHeader from './components/CoachHeader/CoachHeader.vue'
 export default {
     name: 'App',
-    components: { PageContainer, HeaderTemplate }
+    components: { PageContainer, CoachHeader }
 }
 </script>
 
