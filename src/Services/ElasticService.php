@@ -46,6 +46,10 @@ class ElasticService
                     ],
                     'properties' => [
                         'id' => ['type' => 'integer'],
+                        'is_coach'=>['type' => 'integer'],
+                        'is_coach_of_the_month'=>['type' => 'integer'],
+                        'is_active'=>['type' => 'integer'],
+                        'is_featured'=>['type' => 'integer'],
                         'title' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                         'slug' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                         'brand' => ['type' => 'text'],
