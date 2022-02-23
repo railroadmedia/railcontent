@@ -12,7 +12,7 @@ return [
         'legacy_id',
         'legacy_wordpress_post_id',
         'qna_video',
-        'style',
+        'styles',
         'artist',
         'bpm',
         'cd_tracks',
