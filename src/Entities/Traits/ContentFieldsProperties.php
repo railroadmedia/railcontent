@@ -219,6 +219,72 @@ trait ContentFieldsProperties
     protected $youtubeVideoId;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    protected $highSoundsliceSlug;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    protected $lowSoundsliceSlug;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     */
+    protected $highVideo;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     */
+    protected $lowVideo;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     */
+    protected $originalVideo;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    protected $pdf;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    protected $pdfInG;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    protected $sbtBpm;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @var integer
+     */
+    protected $sbtExerciseNumber;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    protected $songName;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    protected $soundsliceXmlFileUrl;
+
+    /**
      * @return string
      */
     public function getDifficulty()
@@ -776,6 +842,182 @@ trait ContentFieldsProperties
     public function setLengthInSeconds($lengthInSeconds)
     {
         $this->lengthInSeconds = $lengthInSeconds;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHighSoundsliceSlug()
+    {
+        return $this->highSoundsliceSlug;
+    }
+
+    /**
+     * @param $highSoundsliceSlug
+     */
+    public function setHighSoundsliceSlug($highSoundsliceSlug)
+    {
+        $this->highSoundsliceSlug = $highSoundsliceSlug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLowSoundsliceSlug()
+    {
+        return $this->lowSoundsliceSlug;
+    }
+
+    /**
+     * @param $lowSoundsliceSlug
+     */
+    public function setLowSoundsliceSlug($lowSoundsliceSlug)
+    {
+        $this->lowSoundsliceSlug = $lowSoundsliceSlug;
+    }
+
+    /**
+     * @return int
+     */
+    public function getHighVideo()
+    {
+        return $this->highVideo;
+    }
+
+    /**
+     * @param int $lowVideo
+     */
+    public function setLowVideo(int $lowVideo)
+    {
+        $this->lowVideo = $lowVideo;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLowVideo()
+    {
+        return $this->lowVideo;
+    }
+
+    /**
+     * @param int $highVideo
+     */
+    public function setHighVideo(int $highVideo)
+    {
+        $this->highVideo = $highVideo;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOriginalVideo()
+    {
+        return $this->originalVideo;
+    }
+
+    /**
+     * @param int $originalVideo
+     */
+    public function setOriginalVideo(int $originalVideo)
+    {
+        $this->originalVideo = $originalVideo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPdf()
+    {
+        return $this->pdf;
+    }
+
+    /**
+     * @param $pdf
+     */
+    public function setPdf($pdf)
+    {
+        $this->pdf = $pdf;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPdfInG()
+    {
+        return $this->pdfInG;
+    }
+
+    /**
+     * @param $pdfInG
+     */
+    public function setPdfInG($pdfInG)
+    {
+        $this->pdfInG = $pdfInG;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSbtBpm()
+    {
+        return $this->sbtBpm;
+    }
+
+    /**
+     * @param $sbtBpm
+     */
+    public function setSbtBpm($sbtBpm)
+    {
+        $this->sbtBpm = $sbtBpm;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSbtExerciseNumber()
+    {
+        return $this->sbtExerciseNumber;
+    }
+
+    /**
+     * @param int $sbtExerciseNumber
+     */
+    public function setSbtExerciseNumber(int $sbtExerciseNumber)
+    {
+        $this->sbtExerciseNumber = $sbtExerciseNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSongName()
+    {
+        return $this->songName;
+    }
+
+    /**
+     * @param $songName
+     */
+    public function setSongName($songName)
+    {
+        $this->songName = $songName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSoundsliceXmlFileUrl()
+    {
+        return $this->soundsliceXmlFileUrl;
+    }
+
+    /**
+     * @param $soundsliceXmlFileUrl
+     */
+    public function setSoundsliceXmlFileUrl($soundsliceXmlFileUrl)
+    {
+        $this->soundsliceXmlFileUrl = $soundsliceXmlFileUrl;
     }
 
 }

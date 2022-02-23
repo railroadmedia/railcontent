@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Railroad\Railcontent\Entities\Traits\CoachesProperties;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsAssociations;
 use Railroad\Railcontent\Entities\Traits\ContentFieldsProperties;
 use Railroad\Railcontent\Entities\Traits\DecoratedFields;
@@ -56,7 +57,27 @@ use Doctrine\Search\Mapping\Annotations as MAP;
  *         @ORM\Index(name="railcontent_content_staff_pick_rating_index", columns={"staff_pick_rating"}),
  *         @ORM\Index(name="railcontent_content_student_id_index", columns={"student_id"}),
  *         @ORM\Index(name="railcontent_content_vimeo_video_id_index", columns={"vimeo_video_id"}),
- *         @ORM\Index(name="railcontent_content_youtube_video_id_index", columns={"youtube_video_id"})
+ *         @ORM\Index(name="railcontent_content_youtube_video_id_index", columns={"youtube_video_id"}),
+ *         @ORM\Index(name="railcontent_content_bands_index", columns={"bands"}),
+ *         @ORM\Index(name="railcontent_content_endorsements_index", columns={"endorsements"}),
+ *         @ORM\Index(name="railcontent_content_focus_index", columns={"focus"}),
+ *         @ORM\Index(name="railcontent_content_forum_thread_id_index", columns={"forum_thread_id"}),
+ *         @ORM\Index(name="railcontent_content_is_active_index", columns={"is_active"}),
+ *         @ORM\Index(name="railcontent_content_is_coach_index", columns={"is_coach"}),
+ *         @ORM\Index(name="railcontent_content_is_coach_of_the_month_index", columns={"is_coach_of_the_month"}),
+ *         @ORM\Index(name="railcontent_content_is_featured_index", columns={"is_featured"}),
+ *         @ORM\Index(name="railcontent_content_associated_user_id_index", columns={"associated_user_id"}),
+ *         @ORM\Index(name="railcontent_content_high_soundslice_slug_index", columns={"high_soundslice_slug"}),
+ *         @ORM\Index(name="railcontent_content_low_soundslice_slug_index", columns={"low_soundslice_slug"}),
+ *         @ORM\Index(name="railcontent_content_high_video_index", columns={"high_video"}),
+ *         @ORM\Index(name="railcontent_content_low_video_index", columns={"low_video"}),
+ *         @ORM\Index(name="railcontent_content_original_video_index", columns={"original_video"}),
+ *         @ORM\Index(name="railcontent_content_pdf_index", columns={"pdf"}),
+ *         @ORM\Index(name="railcontent_content_pdf_in_g_index", columns={"pdf_in_g"}),
+ *         @ORM\Index(name="railcontent_content_sbt_bpm_index", columns={"sbt_bpm"}),
+ *         @ORM\Index(name="railcontent_content_sbt_exercise_number_index", columns={"sbt_exercise_number"}),
+ *         @ORM\Index(name="railcontent_content_song_name_index", columns={"song_name"}),
+ *         @ORM\Index(name="railcontent_content_soundslice_xml_file_url_index", columns={"soundslice_xml_file_url"})
  *     }
  * )
  * @ORM\Cache(usage="NONSTRICT_READ_WRITE")
@@ -68,6 +89,7 @@ class Content extends ArrayExpressible
     use ContentFieldsProperties;
     use ContentFieldsAssociations;
     use DecoratedFields;
+    use CoachesProperties;
 
     /**
      * @ORM\Id @ORM\GeneratedValue @ORM\Column(type="integer")
@@ -600,11 +622,18 @@ class Content extends ArrayExpressible
             'brand' => $this->getBrand(),
             'style' => $styles,
             'content_type' => $this->getType(),
-            'published_on' => ($this->getPublishedOn())?$this->getPublishedOn()->toDateTimeString():null,
-            'created_on' => $this->getCreatedOn()->toDateTimeString(),
+            'published_on' => ($this->getPublishedOn()) ?
+                $this->getPublishedOn()
+                    ->toDateTimeString() : null,
+            'created_on' => $this->getCreatedOn()
+                ->toDateTimeString(),
             'topic' => $topics,
             'bpm' => $this->getBpm(),
             'staff_pick_rating' => $this->getStaffPickRating(),
+            'is_coach' => $this->getIsCoach(),
+            'is_active' => $this->isActive(),
+            'is_coach_of_the_month' => $this->isCoachOfTheMonth(),
+            'is_featured' => $this->isFeatured()
         ];
     }
 }
