@@ -202,5 +202,22 @@ class UserProvider implements UserProviderInterface
     public function getCurrentUserTopics(): ?array
     {
         // TODO: Implement getCurrentUserTopics() method.
+        return [];
+    }
+
+    public function createCurrentUserTopics(array $topic)
+    : ?array {
+        // TODO: Implement createCurrentUserTopics() method.
+        return [];
+    }
+
+    public function deleteCurrentUserTopics()
+    {
+        // TODO: Implement deleteCurrentUserTopics() method.
+    }
+
+    public function updateCurrentUserDifficulty($difficulty)
+    {
+        // TODO: Implement updateCurrentUserDifficulty() method.
     }
 }
