@@ -108,6 +108,7 @@ export default {
                     {{ bottomSubtitle }}
                 </h2>
                 <h3
+                    v-if="shortBio"
                     class="tw-mb-6 tw-font-normal"
                     style="font-size: 14px; line-height: 24px"
                 >
