@@ -600,7 +600,7 @@ class Content extends ArrayExpressible
             'brand' => $this->getBrand(),
             'style' => $styles,
             'content_type' => $this->getType(),
-            'published_on' => $this->getPublishedOn()->toDateTimeString(),
+            'published_on' => ($this->getPublishedOn())?$this->getPublishedOn()->toDateTimeString():null,
             'created_on' => $this->getCreatedOn()->toDateTimeString(),
             'topic' => $topics,
             'bpm' => $this->getBpm(),
