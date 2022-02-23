@@ -60,56 +60,56 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $type = 'course';
         $status = ContentService::STATUS_DRAFT;
         $instructor = $this->fakeContent(1, [
-                                              'type' => 'instructor',
-                                          ]);
+            'type' => 'instructor',
+        ]);
 
         $exercises = $this->fakeContent(2, [
-                                             'type' => 'assignment',
-                                         ]);
+            'type' => 'assignment',
+        ]);
 
         $response = $this->call('PUT', 'railcontent/content', [
-                                         'data' => [
-                                             'type' => 'content',
-                                             'attributes' => [
-                                                 'slug' => $slug,
-                                                 'position' => null,
-                                                 'status' => $status,
-                                                 'parent_id' => null,
-                                                 'brand' => config('railcontent.brand'),
-                                                 'type' => $type,
-                                                 'fields' => [
-                                                     [
-                                                         'key' => 'topic',
-                                                         'value' => $this->faker->word,
-                                                     ],
-                                                     [
-                                                         'key' => 'topic',
-                                                         'value' => $this->faker->word,
-                                                         'position' => 1,
-                                                     ],
-                                                     [
-                                                         'key' => 'difficulty',
-                                                         'value' => 10,
-                                                         'position' => 1,
-                                                     ],
-                                                     [
-                                                         'key' => 'instructor',
-                                                         'value' => $instructor[0]->getId(),
-                                                     ],
-                                                     [
-                                                         'key' => 'exercise',
-                                                         'value' => $exercises[0]->getId(),
-                                                     ],
-                                                     [
-                                                         'key' => 'exercise',
-                                                         'value' => $exercises[1]->getId(),
-                                                     ],
-                                                 ],
-                                                 'published_on' => Carbon::now()
-                                                     ->toDateTimeString(),
-                                             ],
-                                         ],
-                                     ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => [
+                    'slug' => $slug,
+                    'position' => null,
+                    'status' => $status,
+                    'parent_id' => null,
+                    'brand' => config('railcontent.brand'),
+                    'type' => $type,
+                    'fields' => [
+                        [
+                            'key' => 'topic',
+                            'value' => $this->faker->word,
+                        ],
+                        [
+                            'key' => 'topic',
+                            'value' => $this->faker->word,
+                            'position' => 1,
+                        ],
+                        [
+                            'key' => 'difficulty',
+                            'value' => 10,
+                            'position' => 1,
+                        ],
+                        [
+                            'key' => 'instructor',
+                            'value' => $instructor[0]->getId(),
+                        ],
+                        [
+                            'key' => 'exercise',
+                            'value' => $exercises[0]->getId(),
+                        ],
+                        [
+                            'key' => 'exercise',
+                            'value' => $exercises[1]->getId(),
+                        ],
+                    ],
+                    'published_on' => Carbon::now()
+                        ->toDateTimeString(),
+                ],
+            ],
+        ]);
 
         $responseContent = $response->decodeResponseJson('data');
 
@@ -160,16 +160,16 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_DRAFT;
 
         $response = $this->call('PUT', 'railcontent/content', [
-                                         'data' => [
-                                             'type' => 'content',
-                                             'attributes' => [
-                                                 'slug' => $slug,
-                                                 'status' => $status,
-                                                 'type' => $type,
-                                                 'position' => -1,
-                                             ],
-                                         ],
-                                     ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => [
+                    'slug' => $slug,
+                    'status' => $status,
+                    'type' => $type,
+                    'position' => -1,
+                ],
+            ],
+        ]);
 
         //expecting it to redirect us to previous page.
         $this->assertEquals(422, $response->status());
@@ -192,15 +192,15 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_DRAFT;
 
         $response = $this->call('PUT', 'railcontent/content', [
-                                         'data' => [
-                                             'attributes' => [
-                                                 'slug' => $slug,
-                                                 'status' => $status,
-                                                 'type' => $this->faker->word,
-                                                 'position' => 1,
-                                             ],
-                                         ],
-                                     ]);
+            'data' => [
+                'attributes' => [
+                    'slug' => $slug,
+                    'status' => $status,
+                    'type' => $this->faker->word,
+                    'position' => 1,
+                ],
+            ],
+        ]);
 
         $this->assertEquals(422, $response->status());
 
@@ -222,16 +222,16 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $status = ContentService::STATUS_DRAFT;
 
         $response = $this->call('PUT', 'railcontent/content', [
-                                         'data' => [
-                                             'type' => 'content',
-                                             'attributes' => [
-                                                 'slug' => $slug,
-                                                 'status' => $status,
-                                                 'type' => $type,
-                                                 'position' => $position,
-                                             ],
-                                         ],
-                                     ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => [
+                    'slug' => $slug,
+                    'status' => $status,
+                    'type' => $type,
+                    'position' => $position,
+                ],
+            ],
+        ]);
 
         //expecting that the response has a successful status code
         $response->assertSuccessful();
@@ -299,19 +299,19 @@ class ContentJsonControllerTest extends RailcontentTestCase
         ];
 
         $response = $this->call('PUT', 'railcontent/content', [
-                                         'data' => [
-                                             'type' => 'content',
-                                             'attributes' => $contentData,
-                                             'relationships' => [
-                                                 'parent' => [
-                                                     'data' => [
-                                                         'type' => 'content',
-                                                         'id' => $parent[0]->getId(),
-                                                     ],
-                                                 ],
-                                             ],
-                                         ],
-                                     ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => $contentData,
+                'relationships' => [
+                    'parent' => [
+                        'data' => [
+                            'type' => 'content',
+                            'id' => $parent[0]->getId(),
+                        ],
+                    ],
+                ],
+            ],
+        ]);
 
         unset($contentData['fields']);
 
@@ -328,11 +328,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
     public function test_content_service_return_new_content_after_create()
     {
         $content = $this->fakeContent(1, [
-                                           'slug' => 'slug1',
-                                           'brand' => config('railcontent.brand'),
-                                           'status' => 'published',
-                                           'publishedOn' => Carbon::now(),
-                                       ]);
+            'slug' => 'slug1',
+            'brand' => config('railcontent.brand'),
+            'status' => 'published',
+            'publishedOn' => Carbon::now(),
+        ]);
 
         $response = $this->call('GET', 'railcontent/content/'.$content[0]->getId());
 
@@ -350,15 +350,15 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $content = $this->fakeContent();
 
         $response = $this->call('PATCH', 'railcontent/content/'.$content[0]->getId(), [
-                                           'data' => [
-                                               'type' => 'content',
-                                               'attributes' => [
-                                                   'slug' => 'new slug',
-                                                   'status' => ContentService::STATUS_PUBLISHED,
-                                                   'type' => 'roxana',
-                                               ],
-                                           ],
-                                       ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => [
+                    'slug' => 'new slug',
+                    'status' => ContentService::STATUS_PUBLISHED,
+                    'type' => 'roxana',
+                ],
+            ],
+        ]);
 
         $this->assertEquals(200, $response->status());
     }
@@ -369,16 +369,16 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $type = $this->faker->word;
 
         $response = $this->call('PATCH', 'railcontent/content/'.rand(), [
-                                           'data' => [
-                                               'type' => 'content',
-                                               'attributes' => [
-                                                   'slug' => $slug,
-                                                   'position' => 1,
-                                                   'status' => ContentService::STATUS_DRAFT,
-                                                   'type' => $type,
-                                               ],
-                                           ],
-                                       ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => [
+                    'slug' => $slug,
+                    'position' => 1,
+                    'status' => ContentService::STATUS_DRAFT,
+                    'type' => $type,
+                ],
+            ],
+        ]);
 
         $this->assertEquals(404, $response->status());
     }
@@ -386,13 +386,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
     public function test_update_with_negative_position()
     {
         $response = $this->call('PATCH', 'railcontent/content/'. 1, [
-                                           'data' => [
-                                               'type' => 'content',
-                                               'attributes' => [
-                                                   'position' => -1,
-                                               ],
-                                           ],
-                                       ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => [
+                    'position' => -1,
+                ],
+            ],
+        ]);
 
         //expecting a response with 422 status
         $this->assertEquals(422, $response->status());
@@ -410,13 +410,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
     public function test_update_not_pass_the_validation()
     {
         $response = $this->call('PATCH', 'railcontent/content/'. 1, [
-                                           'data' => [
-                                               'type' => 'content',
-                                               'attributes' => [
-                                                   'status' => $this->faker->word,
-                                               ],
-                                           ],
-                                       ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => [
+                    'status' => $this->faker->word,
+                ],
+            ],
+        ]);
 
         //expecting a response with 422 status
         $this->assertEquals(422, $response->status());
@@ -435,11 +435,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
     public function test_after_update_content_is_returned_in_json_format()
     {
         $content = $this->fakeContent(1, [
-                                           'difficulty' => 1,
-                                           'slug' => 'test 1',
-                                           'status' => 'published',
-                                           'publishedOn' => Carbon::now(),
-                                       ]);
+            'difficulty' => 1,
+            'slug' => 'test 1',
+            'status' => 'published',
+            'publishedOn' => Carbon::now(),
+        ]);
 
         $contentTopic = $this->fakeContentTopic([
                                                     'content_id' => $content[0]->getId(),
@@ -455,11 +455,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
         }
 
         $instructors = $this->fakeContent(2, [
-                                               'type' => 'instructor',
-                                               'status' => 'published',
-                                               'slug' => $this->faker->name,
-                                               'brand' => config('railcontent.brand'),
-                                           ]);
+            'type' => 'instructor',
+            'status' => 'published',
+            'slug' => $this->faker->name,
+            'brand' => config('railcontent.brand'),
+        ]);
 
         $contentInstructor = $this->fakeContentInstructor([
                                                               'content_id' => $content[0]->getId(),
@@ -479,36 +479,36 @@ class ContentJsonControllerTest extends RailcontentTestCase
         );
 
         $response = $this->call('PATCH', 'railcontent/content/'.$content[0]->getId(), [
-                                           'data' => [
-                                               'type' => 'content',
-                                               'attributes' => [
-                                                   'slug' => $new_slug,
-                                                   'status' => ContentService::STATUS_PUBLISHED,
-                                                   'fields' => [
-                                                       [
-                                                           'key' => 'topic',
-                                                           'value' => 'topic1',
-                                                           'position' => 1,
-                                                       ],
-                                                       [
-                                                           'key' => 'topic',
-                                                           'value' => 'topic2',
-                                                           'position' => 1,
-                                                       ],
-                                                       [
-                                                           'key' => 'difficulty',
-                                                           'value' => 2,
-                                                           'position' => 1,
-                                                       ],
-                                                       [
-                                                           'key' => 'instructor',
-                                                           'value' => $instructors[1]->getId(),
-                                                           'position' => 1,
-                                                       ],
-                                                   ],
-                                               ],
-                                           ],
-                                       ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => [
+                    'slug' => $new_slug,
+                    'status' => ContentService::STATUS_PUBLISHED,
+                    'fields' => [
+                        [
+                            'key' => 'topic',
+                            'value' => 'topic1',
+                            'position' => 1,
+                        ],
+                        [
+                            'key' => 'topic',
+                            'value' => 'topic2',
+                            'position' => 1,
+                        ],
+                        [
+                            'key' => 'difficulty',
+                            'value' => 2,
+                            'position' => 1,
+                        ],
+                        [
+                            'key' => 'instructor',
+                            'value' => $instructors[1]->getId(),
+                            'position' => 1,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
 
         $this->assertArraySubset(
             [
@@ -550,12 +550,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $new_slug = implode('-', $this->faker->words());
         $updatedContent = $this->serviceBeingTested->update($content[0]->getId(), [
-                                                                                    'data' => [
-                                                                                        'attributes' => [
-                                                                                            "slug" => $new_slug,
-                                                                                        ],
-                                                                                    ],
-                                                                                ]);
+            'data' => [
+                'attributes' => [
+                    "slug" => $new_slug,
+                ],
+            ],
+        ]);
 
         $this->assertEquals($new_slug, $updatedContent->getSlug());
     }
@@ -601,20 +601,20 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(204, $response->status());
 
         $this->assertDatabaseMissing(config('railcontent.table_prefix').'content', [
-                                                                                     'id' => 1,
-                                                                                 ]);
+            'id' => 1,
+        ]);
 
         $this->assertDatabaseMissing(config('railcontent.table_prefix').'content_topics', [
-                                                                                            'content_id' => $id,
-                                                                                        ]);
+            'content_id' => $id,
+        ]);
 
         $this->assertDatabaseMissing(config('railcontent.table_prefix').'comments', [
-                                                                                      'content_id' => $id,
-                                                                                  ]);
+            'content_id' => $id,
+        ]);
 
         $this->assertDatabaseMissing(config('railcontent.table_prefix').'content_permissions', [
-                                                                                                 'content_id' => $id,
-                                                                                             ]);
+            'content_id' => $id,
+        ]);
     }
 
     public function test_delete_missing_content_response_status()
@@ -630,14 +630,14 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $randomContents = $this->fakeContent(12);
 
         $response = $this->call('GET', 'railcontent/content', [
-                                         'page' => 1,
-                                         'amount' => 10,
-                                         'statues' => ['draft', 'published'],
-                                         'types' => ['course'],
-                                         'fields' => [],
-                                         'parent_slug' => '',
-                                         'include_future_published_on' => false,
-                                     ]);
+            'page' => 1,
+            'amount' => 10,
+            'statues' => ['draft', 'published'],
+            'types' => ['course'],
+            'fields' => [],
+            'parent_slug' => '',
+            'include_future_published_on' => false,
+        ]);
 
         $expectedResults = [];
 
@@ -653,11 +653,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $permission2 = $this->fakePermission();
 
         $content = $this->fakeContent(3, [
-                                           'difficulty' => 1,
-                                           'type' => 'course',
-                                           'status' => 'published',
-                                           'publishedOn' => Carbon::now(),
-                                       ]);
+            'difficulty' => 1,
+            'type' => 'course',
+            'status' => 'published',
+            'publishedOn' => Carbon::now(),
+        ]);
 
         $this->fakeContentTopic([
                                     'content_id' => $content[1]->getId(),
@@ -693,13 +693,13 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $filter = ['difficulty,1'];
 
         $response = $this->call('GET', 'railcontent/content', [
-                                         'page' => $page,
-                                         'limit' => $limit,
-                                         'sort' => 'id',
-                                         'included_types' => $types,
-                                         'required_fields' => $filter,
-                                     ]);
-dd($response);
+            'page' => $page,
+            'limit' => $limit,
+            'sort' => 'id',
+            'included_types' => $types,
+            'required_fields' => $filter,
+        ]);
+
         $responseContent = $response->decodeResponseJson('data');
 
         foreach ($responseContent as $content) {
@@ -722,10 +722,10 @@ dd($response);
 
         $filter = [$fieldKey.','.$fieldValue.','.$fieldType];
         $contents = $this->fakeContent($contentWithFieldsNr, [
-                                                               $fieldKey => $fieldValue,
-                                                               'type' => $this->faker->randomElement($types),
-                                                               'status' => $this->faker->randomElement($statues),
-                                                           ]);
+            $fieldKey => $fieldValue,
+            'type' => $this->faker->randomElement($types),
+            'status' => $this->faker->randomElement($statues),
+        ]);
 
         $response = $this->call('GET', 'railcontent/content', [
                                          'page' => $page,
@@ -753,23 +753,23 @@ dd($response);
         $limit = 5;
 
         $randomContents = $this->fakeContent(5, [
-                                                  'difficulty' => rand(1, 10),
-                                                  'type' => $this->faker->word,
-                                                  'status' => 'published',
-                                              ]);
+            'difficulty' => rand(1, 10),
+            'type' => $this->faker->word,
+            'status' => 'published',
+        ]);
         $contents = $this->fakeContent(6, [
-                                            'difficulty' => 1,
-                                            'type' => 'course',
-                                            'status' => 'published',
-                                        ]);
+            'difficulty' => 1,
+            'type' => 'course',
+            'status' => 'published',
+        ]);
 
         $instructor = $this->fakeContent(2, [
-                                              'type' => 'instructor',
-                                              'status' => 'published',
-                                              'slug' => $this->faker->name,
-                                              'brand' => config('railcontent.brand'),
-                                              'difficulty' => null,
-                                          ]);
+            'type' => 'instructor',
+            'status' => 'published',
+            'slug' => $this->faker->name,
+            'brand' => config('railcontent.brand'),
+            'difficulty' => null,
+        ]);
 
         foreach ($contents as $content) {
             $contentInstructor = $this->fakeContentInstructor([
@@ -779,8 +779,8 @@ dd($response);
         }
 
         $randomContents = $this->fakeContent(19, [
-                                                   'difficulty' => rand(1, 10),
-                                               ]);
+            'difficulty' => rand(1, 10),
+        ]);
 
         $data = $this->fakeContentData([
                                            'content_id' => $contents[0]->getId(),
@@ -797,17 +797,17 @@ dd($response);
                                        ]);
 
         $response = $this->call('GET', 'railcontent/content', [
-                                         'page' => $page,
-                                         'limit' => $limit,
-                                         'statues' => $statues,
-                                         'sort' => 'id',
-                                         'included_types' => $types,
-                                         'included_fields' => [
-                                             'difficulty,1',
-                                             'instructor,'.$instructor[0]->getId(),
-                                             'instructor,'.$instructor[1]->getId(),
-                                         ],
-                                     ]);
+            'page' => $page,
+            'limit' => $limit,
+            'statues' => $statues,
+            'sort' => 'id',
+            'included_types' => $types,
+            'included_fields' => [
+                'difficulty,1',
+                'instructor,'.$instructor[0]->getId(),
+                'instructor,'.$instructor[1]->getId(),
+            ],
+        ]);
 
         $responseContent = $response->decodeResponseJson('data');
 
@@ -843,16 +843,16 @@ dd($response);
     public function test_getByParentId()
     {
         $parent = $this->fakeContent(1, [
-                                          'brand' => config('railcontent.brand'),
-                                          'status' => 'published',
-                                          'publishedOn' => Carbon::now(),
-                                      ]);
+            'brand' => config('railcontent.brand'),
+            'status' => 'published',
+            'publishedOn' => Carbon::now(),
+        ]);
 
         $child = $this->fakeContent(1, [
-                                         'brand' => config('railcontent.brand'),
-                                         'status' => 'published',
-                                         'publishedOn' => Carbon::now(),
-                                     ]);
+            'brand' => config('railcontent.brand'),
+            'status' => 'published',
+            'publishedOn' => Carbon::now(),
+        ]);
 
         $hierarchy = $this->fakeHierarchy([
                                               'parent_id' => $parent[0]->getId(),
@@ -892,10 +892,10 @@ dd($response);
     public function test_get_by_ids()
     {
         $contents = $this->fakeContent(2, [
-                                            'brand' => config('railcontent.brand'),
-                                            'status' => 'published',
-                                            'publishedOn' => Carbon::now(),
-                                        ]);
+            'brand' => config('railcontent.brand'),
+            'status' => 'published',
+            'publishedOn' => Carbon::now(),
+        ]);
         $response = $this->call('GET', 'railcontent/content/get-by-ids', ['ids' => 2 .','. 1]);
 
         $this->assertArraySubset([['id' => 2], ['id' => 1]], $response->decodeResponseJson('data'));
@@ -904,10 +904,10 @@ dd($response);
     public function test_get_id_cached()
     {
         $content = $this->fakeContent(1, [
-                                           'brand' => config('railcontent.brand'),
-                                           'status' => 'published',
-                                           'publishedOn' => Carbon::now(),
-                                       ]);
+            'brand' => config('railcontent.brand'),
+            'status' => 'published',
+            'publishedOn' => Carbon::now(),
+        ]);
 
         $id = $content[0]->getId();
         $start1 = microtime(true);
@@ -964,19 +964,19 @@ dd($response);
         $executionStartTime = microtime(true);
 
         $response = $this->call('PUT', 'railcontent/content', [
-                                         'data' => [
-                                             'type' => 'content',
-                                             'attributes' => [
-                                                 'slug' => $slug,
-                                                 'position' => null,
-                                                 'status' => $status,
-                                                 'parent_id' => null,
-                                                 'type' => $type,
-                                                 'published_on' => Carbon::now()
-                                                     ->toDateTimeString(),
-                                             ],
-                                         ],
-                                     ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => [
+                    'slug' => $slug,
+                    'position' => null,
+                    'status' => $status,
+                    'parent_id' => null,
+                    'type' => $type,
+                    'published_on' => Carbon::now()
+                        ->toDateTimeString(),
+                ],
+            ],
+        ]);
         $executionEndTime = microtime(true);
 
         //The result will be in seconds and milliseconds.
@@ -992,10 +992,10 @@ dd($response);
     {
         $userId = $this->createAndLogInNewUser();
         $content1 = $this->fakeContent(1, [
-                                            'brand' => config('railcontent.brand'),
-                                            'status' => 'published',
-                                            'publishedOn' => Carbon::now(),
-                                        ]);
+            'brand' => config('railcontent.brand'),
+            'status' => 'published',
+            'publishedOn' => Carbon::now(),
+        ]);
 
         $permission = $this->fakePermission();
 
@@ -1006,10 +1006,10 @@ dd($response);
                                      ]);
 
         $content2 = $this->fakeContent(1, [
-                                            'brand' => config('railcontent.brand'),
-                                            'status' => 'published',
-                                            'publishedOn' => Carbon::now(),
-                                        ]);
+            'brand' => config('railcontent.brand'),
+            'status' => 'published',
+            'publishedOn' => Carbon::now(),
+        ]);
 
         $permission2 = $this->fakePermission();
 
@@ -1042,10 +1042,10 @@ dd($response);
     {
         $user = $this->createAndLogInNewUser();
         $contents = $this->fakeContent(2, [
-                                            'status' => 'published',
-                                            'publishedOn' => Carbon::now(),
-                                            'brand' => config('railcontent.brand'),
-                                        ]);
+            'status' => 'published',
+            'publishedOn' => Carbon::now(),
+            'brand' => config('railcontent.brand'),
+        ]);
 
         $permission = $this->fakePermission();
         $this->fakeContentPermission([
@@ -1075,10 +1075,10 @@ dd($response);
     public function test_get_by_id_with_fields()
     {
         $content = $this->fakeContent(1, [
-                                           'difficulty' => 1,
-                                           'type' => 'course',
-                                           'status' => 'published',
-                                       ]);
+            'difficulty' => 1,
+            'type' => 'course',
+            'status' => 'published',
+        ]);
 
         $contentTopic = $this->fakeContentTopic([
                                                     'content_id' => $content[0]->getId(),
@@ -1087,11 +1087,11 @@ dd($response);
                                                 ]);
 
         $instructor = $this->fakeContent(1, [
-                                              'type' => 'instructor',
-                                              'status' => 'published',
-                                              'slug' => $this->faker->name,
-                                              'brand' => config('railcontent.brand'),
-                                          ]);
+            'type' => 'instructor',
+            'status' => 'published',
+            'slug' => $this->faker->name,
+            'brand' => config('railcontent.brand'),
+        ]);
 
         $contentInstructor = $this->fakeContentInstructor([
                                                               'content_id' => $content[0]->getId(),
@@ -1127,10 +1127,10 @@ dd($response);
     public function test_after_update_content_reposition_associated_fields()
     {
         $content = $this->fakeContent(1, [
-                                           'difficulty' => 1,
-                                           'brand' => config('railcontent.brand'),
-                                           'status' => 'published',
-                                       ]);
+            'difficulty' => 1,
+            'brand' => config('railcontent.brand'),
+            'status' => 'published',
+        ]);
 
         $contentTopic = $this->fakeContentTopic([
                                                     'content_id' => $content[0]->getId(),
@@ -1157,32 +1157,32 @@ dd($response);
                                                 ]);
 
         $response = $this->call('PATCH', 'railcontent/content/'.$content[0]->getId(), [
-                                           'data' => [
-                                               'type' => 'content',
-                                               'attributes' => [
-                                                   'status' => ContentService::STATUS_PUBLISHED,
-                                                   'fields' => [
-                                                       [
-                                                           'key' => 'topic',
-                                                           'value' => 'topic1',
-                                                       ],
-                                                       [
-                                                           'key' => 'topic',
-                                                           'value' => 'topic5',
-                                                       ],
-                                                       [
-                                                           'key' => 'topic',
-                                                           'value' => 'topic3',
-                                                           'position' => 3,
-                                                       ],
-                                                       [
-                                                           'key' => 'topic',
-                                                           'value' => 'topic4',
-                                                       ],
-                                                   ],
-                                               ],
-                                           ],
-                                       ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => [
+                    'status' => ContentService::STATUS_PUBLISHED,
+                    'fields' => [
+                        [
+                            'key' => 'topic',
+                            'value' => 'topic1',
+                        ],
+                        [
+                            'key' => 'topic',
+                            'value' => 'topic5',
+                        ],
+                        [
+                            'key' => 'topic',
+                            'value' => 'topic3',
+                            'position' => 3,
+                        ],
+                        [
+                            'key' => 'topic',
+                            'value' => 'topic4',
+                        ],
+                    ],
+                ],
+            ],
+        ]);
 
         $this->assertArraySubset(
             [
@@ -1222,10 +1222,10 @@ dd($response);
     public function test_after_update_content_delete_associated_field()
     {
         $content = $this->fakeContent(1, [
-                                           'difficulty' => 1,
-                                           'brand' => config('railcontent.brand'),
-                                           'status' => 'published',
-                                       ]);
+            'difficulty' => 1,
+            'brand' => config('railcontent.brand'),
+            'status' => 'published',
+        ]);
 
         $contentTopic = $this->fakeContentTopic([
                                                     'content_id' => $content[0]->getId(),
@@ -1240,23 +1240,23 @@ dd($response);
                                                 ]);
 
         $response = $this->call('PATCH', 'railcontent/content/'.$content[0]->getId(), [
-                                           'data' => [
-                                               'type' => 'content',
-                                               'attributes' => [
-                                                   'status' => ContentService::STATUS_PUBLISHED,
-                                                   'fields' => [
-                                                       [
-                                                           'key' => 'topic',
-                                                           'value' => 'topic2',
-                                                       ],
-                                                       [
-                                                           'key' => 'difficulty',
-                                                           'value' => 2,
-                                                       ],
-                                                   ],
-                                               ],
-                                           ],
-                                       ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => [
+                    'status' => ContentService::STATUS_PUBLISHED,
+                    'fields' => [
+                        [
+                            'key' => 'topic',
+                            'value' => 'topic2',
+                        ],
+                        [
+                            'key' => 'difficulty',
+                            'value' => 2,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
 
         $this->assertArraySubset(
             [
@@ -1318,11 +1318,11 @@ dd($response);
         ];
 
         $response1 = $this->call('PUT', 'railcontent/content', [
-                                          'data' => [
-                                              'type' => 'content',
-                                              'attributes' => $content1Data,
-                                          ],
-                                      ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => $content1Data,
+            ],
+        ]);
 
         $content2Data = [
             'slug' => $this->faker->word,
@@ -1350,11 +1350,11 @@ dd($response);
         ];
 
         $response2 = $this->call('PUT', 'railcontent/content', [
-                                          'data' => [
-                                              'type' => 'content',
-                                              'attributes' => $content2Data,
-                                          ],
-                                      ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => $content2Data,
+            ],
+        ]);
 
         //assert position on each sortable group(content)
         $this->assertEquals(0, $response1->decodeResponseJson('included')[0]['attributes']['position']);
@@ -1383,14 +1383,14 @@ dd($response);
         $this->assertEquals(204, $response->status());
 
         $this->assertDatabaseHas(config('railcontent.table_prefix').'content', [
-                                                                                 'id' => $content[0]->getId(),
-                                                                                 'status' => ContentService::STATUS_DELETED,
-                                                                             ]);
+            'id' => $content[0]->getId(),
+            'status' => ContentService::STATUS_DELETED,
+        ]);
 
         $this->assertDatabaseHas(config('railcontent.table_prefix').'content', [
-                                                                                 'id' => $content[1]->getId(),
-                                                                                 'status' => ContentService::STATUS_DELETED,
-                                                                             ]);
+            'id' => $content[1]->getId(),
+            'status' => ContentService::STATUS_DELETED,
+        ]);
     }
 
     public function test_delete_content_and_associations()
@@ -1418,12 +1418,12 @@ dd($response);
         $this->assertEquals(204, $response->status());
 
         $this->assertDatabaseMissing(config('railcontent.table_prefix').'content', [
-                                                                                     'id' => $id,
-                                                                                 ]);
+            'id' => $id,
+        ]);
 
         $this->assertDatabaseMissing(config('railcontent.table_prefix').'content_topics', [
-                                                                                            'id' => 1,
-                                                                                        ]);
+            'id' => 1,
+        ]);
     }
 
     public function test_delete_content_reposition_siblings()
@@ -1450,24 +1450,20 @@ dd($response);
         $response = $this->call('DELETE', 'railcontent/content/'.$id);
 
         $this->assertDatabaseMissing(config('railcontent.table_prefix').'content', [
-                                                                                     'id' => $id,
-                                                                                 ]);
+            'id' => $id,
+        ]);
 
         $this->assertDatabaseMissing(config('railcontent.table_prefix').'content_hierarchy', [
-                                                                                               'parent_id' => $contents[0]->getId(
-                                                                                               ),
-                                                                                               'child_id' => $contents[1]->getId(
-                                                                                               ),
-                                                                                               'child_position' => 1,
-                                                                                           ]);
+            'parent_id' => $contents[0]->getId(),
+            'child_id' => $contents[1]->getId(),
+            'child_position' => 1,
+        ]);
 
         $this->assertDatabaseMissing(config('railcontent.table_prefix').'content_hierarchy', [
-                                                                                               'parent_id' => $contents[0]->getId(
-                                                                                               ),
-                                                                                               'child_id' => $contents[3]->getId(
-                                                                                               ),
-                                                                                               'child_position' => 2,
-                                                                                           ]);
+            'parent_id' => $contents[0]->getId(),
+            'child_id' => $contents[3]->getId(),
+            'child_position' => 2,
+        ]);
     }
 
     public function test_soft_delete_content_reposition_siblings()
@@ -1494,34 +1490,30 @@ dd($response);
         $response = $this->call('DELETE', 'railcontent/soft/content/'.$id);
 
         $this->assertDatabaseHas(config('railcontent.table_prefix').'content', [
-                                                                                 'id' => $id,
-                                                                                 'status' => 'deleted',
-                                                                             ]);
+            'id' => $id,
+            'status' => 'deleted',
+        ]);
 
         $this->assertDatabaseMissing(config('railcontent.table_prefix').'content_hierarchy', [
-                                                                                               'parent_id' => $contents[0]->getId(
-                                                                                               ),
-                                                                                               'child_id' => $contents[1]->getId(
-                                                                                               ),
-                                                                                               'child_position' => 1,
-                                                                                           ]);
+            'parent_id' => $contents[0]->getId(),
+            'child_id' => $contents[1]->getId(),
+            'child_position' => 1,
+        ]);
 
         $this->assertDatabaseMissing(config('railcontent.table_prefix').'content_hierarchy', [
-                                                                                               'parent_id' => $contents[0]->getId(
-                                                                                               ),
-                                                                                               'child_id' => $contents[3]->getId(
-                                                                                               ),
-                                                                                               'child_position' => 2,
-                                                                                           ]);
+            'parent_id' => $contents[0]->getId(),
+            'child_id' => $contents[3]->getId(),
+            'child_position' => 2,
+        ]);
     }
 
     public function test_after_delete()
     {
         $contents = $this->fakeContent(10, [
-                                             'brand' => config('railcontent.brand'),
-                                             'status' => 'published',
-                                             'publishedOn' => Carbon::now(),
-                                         ]);
+            'brand' => config('railcontent.brand'),
+            'status' => 'published',
+            'publishedOn' => Carbon::now(),
+        ]);
 
         $firstRequest = $this->call('GET',
                                     'railcontent/content/get-by-ids',
@@ -1547,20 +1539,17 @@ dd($response);
         $type = 'show';
 
         $content = $this->fakeContent(1, [
-                                           'difficulty' => 1,
-                                           'type' => $type,
-                                           'brand' => config('railcontent.brand'),
-                                           'status' => 'published',
-                                       ]);
-        $otherContent = $this->fakeContent(
-            1,
-            [
-                'difficulty' => 10,
-                'type' => 'other-type',
-                'brand' => config('railcontent.brand'),
-                'status' => 'published',
-            ]
-        );
+            'difficulty' => 1,
+            'type' => $type,
+            'brand' => config('railcontent.brand'),
+            'status' => 'published',
+        ]);
+        $otherContent = $this->fakeContent(1, [
+            'difficulty' => 10,
+            'type' => 'other-type',
+            'brand' => config('railcontent.brand'),
+            'status' => 'published',
+        ]);
 
         $types = [$type];
         $page = 1;
@@ -1568,12 +1557,12 @@ dd($response);
         $filter = ['difficulty,1'];
 
         $response1 = $this->call('GET', 'railcontent/content', [
-                                          'page' => $page,
-                                          'limit' => $limit,
-                                          'sort' => 'id',
-                                          'included_types' => $types,
-                                          'required_fields' => $filter,
-                                      ]);
+            'page' => $page,
+            'limit' => $limit,
+            'sort' => 'id',
+            'included_types' => $types,
+            'required_fields' => $filter,
+        ]);
 
         $responseContent = $response1->decodeResponseJson('data');
 
@@ -1594,19 +1583,19 @@ dd($response);
         ];
 
         $response = $this->call('PUT', 'railcontent/content', [
-                                         'data' => [
-                                             'type' => 'content',
-                                             'attributes' => $contentData,
-                                         ],
-                                     ]);
+            'data' => [
+                'type' => 'content',
+                'attributes' => $contentData,
+            ],
+        ]);
 
         $response2 = $this->call('GET', 'railcontent/content', [
-                                          'page' => $page,
-                                          'limit' => $limit,
-                                          'sort' => 'id',
-                                          'included_types' => $types,
-                                          'required_fields' => $filter,
-                                      ]);
+            'page' => $page,
+            'limit' => $limit,
+            'sort' => 'id',
+            'included_types' => $types,
+            'required_fields' => $filter,
+        ]);
 
         $responseContent2 = $response2->decodeResponseJson('data');
 
@@ -1616,10 +1605,10 @@ dd($response);
     public function test_after_soft_delete()
     {
         $contents = $this->fakeContent(10, [
-                                             'status' => 'published',
-                                             'brand' => config('railcontent.brand'),
-                                             'publishedOn' => Carbon::now(),
-                                         ]);
+            'status' => 'published',
+            'brand' => config('railcontent.brand'),
+            'publishedOn' => Carbon::now(),
+        ]);
 
         $stack = new DebugStack();
         $this->entityManager->getConfiguration()
@@ -1649,20 +1638,20 @@ dd($response);
         $user = $this->createAndLogInNewUser();
 
         $content = $this->fakeContent(10, [
-                                            'status' => 'published',
-                                            'brand' => config('railcontent.brand'),
-                                            'publishedOn' => Carbon::now(),
-                                            'difficulty' => 2,
-                                            'title' => $this->faker->word,
-                                        ]);
+            'status' => 'published',
+            'brand' => config('railcontent.brand'),
+            'publishedOn' => Carbon::now(),
+            'difficulty' => 2,
+            'title' => $this->faker->word,
+        ]);
         $instructor = $this->fakeContent(1, [
-                                              'type' => 'instructor',
-                                              'slug' => 'dave-atkinson',
-                                              'status' => 'published',
-                                              'brand' => config('railcontent.brand'),
-                                              'publishedOn' => Carbon::now(),
-                                              'name' => 'Dave Atkinson',
-                                          ]);
+            'type' => 'instructor',
+            'slug' => 'dave-atkinson',
+            'status' => 'published',
+            'brand' => config('railcontent.brand'),
+            'publishedOn' => Carbon::now(),
+            'name' => 'Dave Atkinson',
+        ]);
 
         $instructorData = $this->fakeContentData([
                                                      'content_id' => $instructor[0]->getId(),
@@ -1777,6 +1766,7 @@ dd($response);
             $contents[$i] = $this->fakeContent2([
                                                     'difficulty' => 1,
                                                     'type' => 'course',
+                                                    'is_coach' => true,
                                                     'status' => 'published',
                                                     'language' => $this->faker->word,
                                                     'published_on' => Carbon::now()
@@ -1790,10 +1780,10 @@ dd($response);
         $limit = 10;
 
         $response = $this->call('GET', 'railcontent/content', [
-                                         'page' => $page,
-                                         'limit' => $limit,
-                                         'sort' => 'newest',
-                                     ]);
+            'page' => $page,
+            'limit' => $limit,
+            'sort' => 'newest',
+        ]);
 
         $responseContent = $response->decodeResponseJson('data');
 
@@ -1802,10 +1792,10 @@ dd($response);
         }
 
         $response = $this->call('GET', 'railcontent/content', [
-                                         'page' => $page,
-                                         'limit' => $limit,
-                                         'sort' => 'oldest',
-                                     ]);
+            'page' => $page,
+            'limit' => $limit,
+            'sort' => 'oldest',
+        ]);
 
         $responseContent = $response->decodeResponseJson('data');
 
@@ -1840,10 +1830,10 @@ dd($response);
         $limit = 10;
 
         $response = $this->call('GET', 'railcontent/content', [
-                                         'page' => $page,
-                                         'limit' => $limit,
-                                         'sort' => 'popularity',
-                                     ]);
+            'page' => $page,
+            'limit' => $limit,
+            'sort' => 'popularity',
+        ]);
 
         $responseContent = $response->decodeResponseJson('data');
 
@@ -1880,15 +1870,57 @@ dd($response);
         $limit = 10;
 
         $response = $this->call('GET', 'railcontent/content', [
-                                         'page' => $page,
-                                         'limit' => $limit,
-                                         'sort' => 'trending',
-                                     ]);
+            'page' => $page,
+            'limit' => $limit,
+            'sort' => 'trending',
+        ]);
 
         $responseContent = $response->decodeResponseJson('data');
 
         $this->assertEquals($expectedResults[0]['id'], $responseContent[0]['id']);
         $this->assertEquals($expectedResults[1]['id'], $responseContent[1]['id']);
         $this->assertEquals($expectedResults[2]['id'], $responseContent[2]['id']);
+    }
+
+    public function test_pull_coaches()
+    {
+        $statues = ['published', 'scheduled'];
+        $types = ['instructor'];
+        $page = 1;
+        $limit = 10;
+
+        $contentWithFieldsNr = 5;
+        $fieldKey = 'isCoach';
+        $fieldValue = 1;
+        $fieldType = 'integer';
+
+        $filter = [$fieldKey.','.$fieldValue.','.$fieldType];
+        $contents = $this->fakeContent($contentWithFieldsNr, [
+            $fieldKey => $fieldValue,
+            'type' => $this->faker->randomElement($types),
+            'status' => $this->faker->randomElement($statues),
+        ]);
+
+        $otherInstructors = $this->fakeContent(3, [
+            'type' => $this->faker->randomElement($types),
+            'status' => $this->faker->randomElement($statues),
+        ]);
+
+        $response = $this->call('GET', 'railcontent/content', [
+                                         'page' => $page,
+                                         'limit' => $limit,
+                                         'sort' => 'id',
+                                         'included_types' => $types,
+                                         'required_fields' => ['is_coach,1'],
+                                     ]
+
+        );
+        $responseContent = $response->decodeResponseJson('data');
+
+        $this->assertEquals($contentWithFieldsNr, $response->decodeResponseJson('meta')['pagination']['total']);
+
+        foreach ($responseContent as $item) {
+            $this->assertEquals(1, $item['attributes']['isCoach']);
+        }
     }
 }
