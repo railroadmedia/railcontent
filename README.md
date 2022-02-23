@@ -1,18 +1,27 @@
 # Development Environment
 
 This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.  
-Pull the latest railenvironment master branch changes and update with docker compose. This will install new 
-containers for PHP 8 and MySQL 8. This will not affect legacy repos and websites.
 
-We have multiple versions of PHP running in our dev environments so you must specify a port to connect to
-this unified platform repository's website instead of the legacy brand repositories.
+### Setup:
+- pull the latest railenvironment master branch changes
+- in the `railenvironment_docker` directory, run `docker-compose build`
+    - _This will install new containers for PHP 8 and MySQL 8. This will not affect legacy repos and websites._ 
+- in the railenvironmet directory, restart the container with the `./rrr.sh` command
+- run `r setup musora-web-platform` then `cd /app/musora-web-platform` 
+- copy the contents of the `.env.example` file into a new `.env` file
+- run `musora-web-platform composer u`
 
-**URL: [https://devplatform.musora.com:8443/](https://devplatform.musora.com:8443/)**
-
+### Running Commands:
 Composer and artisan commands will automatically run inside the php 8 container if you specify musora-web-platform as
 the application. For example:  
 - **r musora-web-platform composer u**
 - **r musora-web-platform artisan migrate**
+
+### Connecting to Dev Platform:
+We have multiple versions of PHP running in our dev environments so you must specify a port to connect to
+this unified platform repository's website instead of the legacy brand repositories.
+
+**URL: [https://devplatform.musora.com:8443/](https://devplatform.musora.com:8443/)**
 
 ### Connecting To MySQL 8 With phpMyAdmin
 
