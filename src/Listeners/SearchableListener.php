@@ -49,42 +49,19 @@ class SearchableListener implements EventSubscriber
                 ($oEntity instanceof ContentPlaylist) ||
                 ($oEntity instanceof ContentTopic) ||
                 $oEntity instanceof UserContentProgress)) {
-
             $client = $this->elasticService->getClient();
-
-            // Create indexes if not exists
-            if (!$client->indices()
-                ->exists(['index' => 'content'])) {
-                $this->elasticService->createContentIndex();
-            }
 
             $content =
                 ($oEntity instanceof Content) ? $oEntity :
                     (($oEntity instanceof ContentHierarchy) ? $oEntity->getChild() : $oEntity->getContent());
             $contentID = $content->getId();
 
-            //delete document if it exists
-            try {
-                $client->deleteByQuery(
-                    [
-                        'index' => 'content',
-                        'body' => [
-                            'query' => [
-                                'match' => [
-                                    'id' => $content->getId(),
-                                ],
-                            ],
-                        ],
-                    ]
-                );
-            } catch (Exception $exception) {
-            }
-
             //get progress on content
             $userContentPogress =
                 $oArgs->getEntityManager()
                     ->getRepository(UserContentProgress::class);
             $allProgress = $userContentPogress->countContentProgress($contentID);
+
             $lastWeekProgress = $userContentPogress->countContentProgress(
                 $contentID,
                 Carbon::now()
@@ -99,13 +76,54 @@ class SearchableListener implements EventSubscriber
                 $content->getElasticData()
             );
 
-            $params = [
+            $paramsContent = [
                 'index' => 'content',
                 'body' => $elasticData,
             ];
 
-            $client->index($params);
+            // Create indexes if not exists
+            if (!$client->indices()
+                ->exists(['index' => 'content'])) {
+                $this->elasticService->createContentIndex();
+            }
+
+            //update or create document
+            try {
+                $paramsSearch = [
+                    'index' => 'content',
+                    'body' => [
+                        'query' => [
+                            'term' => [
+                                'id' => $contentID,
+                            ],
+                        ],
+                    ],
+                ];
+
+                $documents = $client->search($paramsSearch);
+
+                //delete document if exists
+                foreach ($documents['hits']['hits'] as $elData) {
+                    $paramsDelete = [
+                        'index' => 'content',
+                        'id' => $elData['_id'],
+                        'refresh' => true,
+                    ];
+
+                    $client->delete($paramsDelete);
+                }
+
+                $client->index($paramsContent);
+            } catch (Exception $exception) {
+                error_log('Can not delete elasticsearch index '.print_r($exception->getMessage(), true));
+            }
         }
+    }
+
+    public function preRemove(LifecycleEventArgs $args)
+    : void {
+        $entity = $args->getObject();
+        $entity->historicalId = $entity->getId(); // $historicalId is not defined or referenced anywhere but here
     }
 
     public function postRemove(LifecycleEventArgs $oArgs)
@@ -116,11 +134,9 @@ class SearchableListener implements EventSubscriber
             (($oEntity instanceof Content) ||
                 ($oEntity instanceof ContentInstructor) ||
                 ($oEntity instanceof ContentHierarchy) ||
-                ($oEntity instanceof ContentPermission) ||
                 ($oEntity instanceof ContentPlaylist) ||
                 ($oEntity instanceof ContentTopic) ||
                 ($oEntity instanceof UserContentProgress))) {
-
             $client = $this->elasticService->getClient();
 
             // Create indexes if not exists
@@ -132,21 +148,35 @@ class SearchableListener implements EventSubscriber
             $content =
                 ($oEntity instanceof Content) ? $oEntity :
                     (($oEntity instanceof ContentHierarchy) ? $oEntity->getChild() : $oEntity->getContent());
-            $contentID = $content->getId();
+            if ($oEntity instanceof Content) {
+                $contentID = $content->historicalId;
+            } else {
+                $contentID = $content->getId();
+            }
 
-            //delete document
-            $client->deleteByQuery(
-                [
-                    'index' => 'content',
-                    'body' => [
-                        'query' => [
-                            'match' => [
-                                'id' => $content->getId(),
-                            ],
+            $paramsSearch = [
+                'index' => 'content',
+                'body' => [
+                    'query' => [
+                        'term' => [
+                            'id' => $contentID,
                         ],
                     ],
-                ]
-            );
+                ],
+            ];
+
+            $documents = $client->search($paramsSearch);
+
+            //delete document if exists
+            foreach ($documents['hits']['hits'] as $elData) {
+                $paramsDelete = [
+                    'index' => 'content',
+                    'id' => $elData['_id'],
+                    'refresh' => true,
+                ];
+
+                $client->delete($paramsDelete);
+            }
 
             //update content if relationship removed
             if (!$oEntity instanceof Content) {
@@ -185,6 +215,7 @@ class SearchableListener implements EventSubscriber
     {
         return [
             Events::postPersist,
+            Events::preRemove,
             Events::postRemove,
         ];
     }
