@@ -132,7 +132,7 @@ $this->assertTrue($result->getDifficulty() == 3);
         }
     }
 
-    public function test_search()
+    public function _test_search()
     {
 //        dd($this->fullTextService->search('mascia'));
     }

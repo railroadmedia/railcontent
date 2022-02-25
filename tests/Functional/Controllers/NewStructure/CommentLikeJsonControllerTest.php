@@ -27,6 +27,7 @@ class CommentLikeJsonControllerTest extends RailcontentTestCase
         $comment = $this->fakeComment(
             [
                 'content_id' => $content[0]->getId(),
+                'user_id' => $this->fakeUser()['id'],
                 'deleted_at' => null,
                 'parent_id' => null
             ]

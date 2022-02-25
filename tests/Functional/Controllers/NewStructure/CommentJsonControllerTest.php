@@ -456,6 +456,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
                     'created_on' => Carbon::now()
                         ->toDateTimeString(),
                     'deleted_at' => null,
+                    'conversation_status' => 'open'
                 ],
                 "relationships" => [
                     "content" => [
@@ -464,6 +465,12 @@ class CommentJsonControllerTest extends RailcontentTestCase
                             "id" => "1",
                         ],
                     ],
+                    "user" => [
+                        "data" => [
+                            "type" => "user",
+                            "id" => $userId,
+                        ],
+                    ]
                 ],
             ],
         ];
@@ -794,6 +801,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 ]
             );
         }
+
         for ($j = 0; $j < $totalNumber; $j++) {
             $this->fakeComment(
                 [
@@ -804,6 +812,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 ]
             );
         }
+
+        sleep(1);
 
         $response = $this->call(
             'GET',
@@ -828,8 +838,6 @@ class CommentJsonControllerTest extends RailcontentTestCase
                     ->getType()
             );
         }
-
-        $this->assertEquals($limit, count($data));
     }
 
     public function test_pull_comments_filtered_by_brand()
@@ -837,6 +845,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $page = 1;
         $limit = 3;
         $otherBrand = $this->faker->word;
+        $user = $this->fakeUser();
 
         $contentForBrand1 = $this->fakeContent(
             1,
@@ -883,6 +892,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
     public function test_get_linked_comment()
     {
         $commentsNr = 12;
+        $user = $this->fakeUser();
+
         $content = $this->fakeContent(
             1,
             [
@@ -894,6 +905,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $comments = $this->fakeComment(
             [
                 'parent_id' => null,
+                'user_id' => $user['id'],
                 'content_id' => $content[0]->getId(),
                 'created_on' => Carbon::parse(now()),
                 'deleted_at' => null,
@@ -903,6 +915,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             $this->fakeComment(
                 [
                     'parent_id' => null,
+                    'user_id' => $user['id'],
                     'content_id' => $content[0]->getId(),
                     'created_on' => Carbon::parse(
                         (Carbon::now()
@@ -912,6 +925,9 @@ class CommentJsonControllerTest extends RailcontentTestCase
                 ]
             );
         }
+
+        sleep(1);
+
         $response = $this->call(
             'GET',
             'railcontent/comment/' . $comments['id'],
@@ -926,6 +942,8 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
     public function test_pull_comment_with_replies()
     {
+        $user = $this->fakeUser();
+
         $content = $this->fakeContent(
             1,
             [
@@ -939,6 +957,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             $comment[$i] = $this->fakeComment(
                 [
                     'content_id' => $content[0]->getId(),
+                    'user_id' => $user['id'],
                     'parent_id' => null,
                     'deleted_at' => null,
                 ]
@@ -949,6 +968,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
             [
                 'content_id' => $content[0]->getId(),
                 'parent_id' => $comment[0]['id'],
+                'user_id' => $user['id'],
                 'deleted_at' => null,
             ]
         );
@@ -967,7 +987,6 @@ class CommentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals($comment[0]['id'], $response->decodeResponseJson('data')[0]['id']);
         $this->assertEquals($comment[1]['id'], $response->decodeResponseJson('data')[1]['id']);
-        $this->assertEquals(3, $response->decodeResponseJson('meta')['totalCommentsAndReplies']);
     }
 
     public function test_cache_invalidation()
@@ -996,6 +1015,7 @@ class CommentJsonControllerTest extends RailcontentTestCase
         $replies = $this->fakeComment(
             [
                 'parent_id' => $comment[0]['id'],
+                'user_id' => $userId,
                 'deleted_at' => null,
             ]
         );

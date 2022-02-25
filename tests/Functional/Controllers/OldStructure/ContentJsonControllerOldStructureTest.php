@@ -1280,6 +1280,8 @@ class ContentJsonControllerOldStructureTest extends RailcontentTestCase
                 'publishedOn' => Carbon::now(),
             ]
         );
+        sleep(1);
+
 $id2 = $contents[2]->getId();
 $id1 = $contents[1]->getId();
 $id5 = $contents[5]->getId();

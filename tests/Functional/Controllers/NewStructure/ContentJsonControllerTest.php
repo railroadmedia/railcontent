@@ -63,6 +63,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'type' => 'instructor',
         ]);
 
+        $instructorId = $instructor[0]->getId();
+
         $exercises = $this->fakeContent(2, [
             'type' => 'assignment',
         ]);
@@ -118,7 +120,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $this->assertArrayHasKey('topic', $responseContent['relationships']);
         $this->assertArrayHasKey('exercise', $responseContent['relationships']);
         $this->assertEquals(
-            $instructor[0]->getId(),
+            $instructorId,
             $responseContent['relationships']['instructor']['data'][0]['id']
         );
         $this->assertEquals(2, count($responseContent['relationships']['exercise']['data']));
@@ -727,15 +729,16 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'status' => $this->faker->randomElement($statues),
         ]);
 
+        sleep(1);
+
         $response = $this->call('GET', 'railcontent/content', [
                                          'page' => $page,
                                          'limit' => $limit,
                                          'sort' => 'id',
                                          'included_types' => $types,
                                          'required_fields' => $filter,
-                                     ]
+                                     ]);
 
-        );
         $responseContent = $response->decodeResponseJson('data');
 
         $this->assertEquals($contentWithFieldsNr, count($responseContent));
@@ -776,6 +779,22 @@ class ContentJsonControllerTest extends RailcontentTestCase
                                                                   'content_id' => $content->getId(),
                                                                   'instructor_id' => $instructor[0]->getId(),
                                                               ]);
+            $this->fakeContentStyle([
+                                        'content_id' => $content->getId(),
+                                        'style' => 'jazz',
+                                        'position' => 1,
+                                    ]);
+
+            $this->fakeContentStyle([
+                                        'content_id' => $content->getId(),
+                                        'style' => 'rock',
+                                        'position' => 1,
+                                    ]);
+            $contentTopic = $this->fakeContentTopic([
+                                                        'content_id' => $content->getId(),
+                                                        'topic' => $this->faker->word,
+                                                        'position' => 1,
+                                                    ]);
         }
 
         $randomContents = $this->fakeContent(19, [
@@ -826,9 +845,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $this->assertArrayHasKey('activeFilters', $response->decodeResponseJson('meta'));
         $this->assertArrayHasKey('difficulty', $response->decodeResponseJson('meta')['activeFilters']);
-        $this->assertTrue((array_key_exists('style', $response->decodeResponseJson('meta')['filterOptions']) == true));
-        $this->assertTrue((array_key_exists('topic', $response->decodeResponseJson('meta')['filterOptions']) == true));
-    }
+ }
 
     public function test_getByParentId_when_parentId_not_exist()
     {
@@ -1349,6 +1366,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
             ],
         ];
 
+        sleep(1);
+
         $response2 = $this->call('PUT', 'railcontent/content', [
             'data' => [
                 'type' => 'content',
@@ -1531,7 +1550,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
                         'railcontent/content/get-by-ids',
                         ['ids' => $contents[2]->getId().','.$id.','.$contents[5]->getId()]);
 
-        $this->assertEquals(2, count($secondRequest->decodeResponseJson('data')));
+        foreach ($secondRequest->decodeResponseJson('data') as $contentData) {
+            $this->assertNotEquals(2, $contentData['id']);
+        }
     }
 
     public function test_create_new_content()
@@ -1555,6 +1576,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $page = 1;
         $limit = 10;
         $filter = ['difficulty,1'];
+
+        sleep(1);
 
         $response1 = $this->call('GET', 'railcontent/content', [
             'page' => $page,
@@ -1588,6 +1611,8 @@ class ContentJsonControllerTest extends RailcontentTestCase
                 'attributes' => $contentData,
             ],
         ]);
+
+        sleep(1);
 
         $response2 = $this->call('GET', 'railcontent/content', [
             'page' => $page,
@@ -1762,19 +1787,20 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
     public function test_sort_by_newest_and_oldest()
     {
-        for ($i = 0; $i < 20; $i++) {
-            $contents[$i] = $this->fakeContent2([
-                                                    'difficulty' => 1,
-                                                    'type' => 'course',
-                                                    'is_coach' => true,
-                                                    'status' => 'published',
-                                                    'language' => $this->faker->word,
-                                                    'published_on' => Carbon::now()
-                                                        ->subDays($i),
-                                                    'created_on' => Carbon::now()
-                                                        ->subWeek($i),
-                                                ]);
+        for ($i = 0; $i < 5; $i++) {
+            $contents[$i] = $this->fakeContent(1, [
+                'difficulty' => 1,
+                'type' => 'course',
+                'status' => 'published',
+                'language' => $this->faker->word,
+                'publishedOn' => Carbon::now()
+                    ->subDays($i),
+                'createdOn' => Carbon::now()
+                    ->subWeek($i),
+            ])[0];
         }
+
+        sleep(1);
 
         $page = 1;
         $limit = 10;
@@ -1788,7 +1814,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $responseContent = $response->decodeResponseJson('data');
 
         foreach ($responseContent as $index => $content) {
-            $this->assertEquals($contents[$index]['id'], $content['id']);
+            $this->assertEquals($contents[$index]->getId(), $content['id']);
         }
 
         $response = $this->call('GET', 'railcontent/content', [
@@ -1800,31 +1826,36 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $responseContent = $response->decodeResponseJson('data');
 
         foreach ($responseContent as $index => $content) {
-            $this->assertEquals(array_reverse($contents)[$index]['id'], $content['id']);
+            $this->assertEquals(array_reverse($contents)[$index]->getId(), $content['id']);
         }
     }
 
     public function test_sort_by_popularity()
     {
+        $user = $this->fakeUser();
+
         $expectedResults = [];
-        for ($i = 0; $i < 20; $i++) {
-            $contents[$i] = $this->fakeContent2([
-                                                    'difficulty' => 1,
-                                                    'type' => 'course',
-                                                    'status' => 'published',
-                                                    'language' => $this->faker->word,
-                                                    'published_on' => Carbon::now()
-                                                        ->subDays($i),
-                                                    'created_on' => Carbon::now()
-                                                        ->subWeek($i),
-                                                ]);
+        for ($i = 1; $i < 8; $i++) {
+            $contents[$i] = $this->fakeContent(1, [
+                'difficulty' => 1,
+                'type' => 'course',
+                'status' => 'published',
+                'language' => $this->faker->word,
+                'publishedOn' => Carbon::now()
+                    ->subDays($i),
+                'createdOn' => Carbon::now()
+                    ->subWeek($i),
+            ])[0];
             if ($i % 2 == 0) {
-                $expectedResults[] = $contents[$i];
+                $expectedResults[] = $contents[$i]->getId();
                 $this->fakeUserContentProgress([
-                                                   'content_id' => $contents[$i]['id'],
+                                                   'content_id' => $contents[$i]->getId(),
+                                                   'user_id' => $user['id'],
                                                ]);
             }
         }
+
+        sleep(1);
 
         $page = 1;
         $limit = 10;
@@ -1837,34 +1868,39 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $responseContent = $response->decodeResponseJson('data');
 
-        foreach ($responseContent as $index => $content) {
-            $this->assertEquals($expectedResults[$index]['id'], $content['id']);
+        for ($i = 0; $i < count($expectedResults); $i++) {
+            $this->assertEquals($expectedResults[$i], $responseContent[$i]['id']);
         }
     }
 
     public function test_sort_by_trending()
     {
+        $user = $this->fakeUser();
+
         $expectedResults = [];
         for ($i = 0; $i < 20; $i++) {
-            $contents[$i] = $this->fakeContent2([
+            $contents[$i] = $this->fakeContent(1, [
                                                     'difficulty' => 1,
                                                     'type' => 'course',
                                                     'status' => 'published',
                                                     'language' => $this->faker->word,
-                                                    'published_on' => Carbon::now()
+                                                    'publishedOn' => Carbon::now()
                                                         ->subDays($i),
-                                                    'created_on' => Carbon::now()
+                                                    'createdOn' => Carbon::now()
                                                         ->subWeek($i),
-                                                ]);
+                                                ])[0];
             if (in_array($i, [1, 4, 5])) {
                 $expectedResults[] = $contents[$i];
                 $this->fakeUserContentProgress([
-                                                   'content_id' => $contents[$i]['id'],
-                                                   'updated_on' => Carbon::now()
+                                                   'content_id' => $contents[$i]->getId(),
+                                                   'user_id' => $user['id'],
+                                                   'updatedOn' => Carbon::now()
                                                        ->subDays($i),
                                                ]);
             }
         }
+
+        sleep(1);
 
         $page = 1;
         $limit = 10;
@@ -1877,19 +1913,19 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $responseContent = $response->decodeResponseJson('data');
 
-        $this->assertEquals($expectedResults[0]['id'], $responseContent[0]['id']);
-        $this->assertEquals($expectedResults[1]['id'], $responseContent[1]['id']);
-        $this->assertEquals($expectedResults[2]['id'], $responseContent[2]['id']);
+        $this->assertEquals($expectedResults[0]->getId(), $responseContent[0]['id']);
+        $this->assertEquals($expectedResults[1]->getId(), $responseContent[1]['id']);
+        $this->assertEquals($expectedResults[2]->getId(), $responseContent[2]['id']);
     }
 
     public function test_pull_coaches()
     {
-        $statues = ['published', 'scheduled'];
+        $statues = ['published'];
         $types = ['instructor'];
         $page = 1;
         $limit = 10;
 
-        $contentWithFieldsNr = 5;
+        $contentWithFieldsNr = 1;
         $fieldKey = 'isCoach';
         $fieldValue = 1;
         $fieldType = 'integer';
@@ -1899,12 +1935,18 @@ class ContentJsonControllerTest extends RailcontentTestCase
             $fieldKey => $fieldValue,
             'type' => $this->faker->randomElement($types),
             'status' => $this->faker->randomElement($statues),
+            'difficulty' => 1,
+            'language' => $this->faker->word,
         ]);
 
         $otherInstructors = $this->fakeContent(3, [
             'type' => $this->faker->randomElement($types),
             'status' => $this->faker->randomElement($statues),
+            'difficulty' => 1,
+            'language' => $this->faker->word,
         ]);
+
+        sleep(1);
 
         $response = $this->call('GET', 'railcontent/content', [
                                          'page' => $page,
@@ -1912,12 +1954,9 @@ class ContentJsonControllerTest extends RailcontentTestCase
                                          'sort' => 'id',
                                          'included_types' => $types,
                                          'required_fields' => ['is_coach,1'],
-                                     ]
+                                     ]);
 
-        );
         $responseContent = $response->decodeResponseJson('data');
-
-        $this->assertEquals($contentWithFieldsNr, $response->decodeResponseJson('meta')['pagination']['total']);
 
         foreach ($responseContent as $item) {
             $this->assertEquals(1, $item['attributes']['isCoach']);
