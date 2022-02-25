@@ -107,7 +107,6 @@ class ElasticQueryBuilder
         if (!is_array($requiredContentIdsByState)) {
             return $this;
         }
-
         $this->must[] = ['terms' => ['id' => $requiredContentIdsByState]];
 
         return $this;
@@ -148,12 +147,11 @@ class ElasticQueryBuilder
             $this->must[] = [
                 'bool' => [
                     'should' => [
-                        ['terms' => [$requiredFieldData['name'] . '.raw' => [$requiredFieldData['value']]]],
+                        ['terms' => [$requiredFieldData['name'].'.raw' => [$requiredFieldData['value']]]],
                         ['terms' => [$requiredFieldData['name'] => [$requiredFieldData['value']]]],
                     ],
                 ],
             ];
-
         }
 
         return $this;
@@ -171,7 +169,7 @@ class ElasticQueryBuilder
 
         $terms = [];
         foreach ($includedFields as $index => $includedFieldData) {
-            $terms[] = ['terms' => [$includedFieldData['name'] . '.raw' => [strtolower($includedFieldData['value'])]]];
+            $terms[] = ['terms' => [$includedFieldData['name'].'.raw' => [strtolower($includedFieldData['value'])]]];
             $terms[] = ['terms' => [$includedFieldData['name'] => [strtolower($includedFieldData['value'])]]];
         }
 
@@ -449,7 +447,6 @@ class ElasticQueryBuilder
      */
     public function includeByTypes(array $typesToInclude)
     {
-
         if (empty($typesToInclude)) {
             return $this;
         }

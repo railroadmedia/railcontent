@@ -504,7 +504,10 @@ class UserContentProgressService
         $arraySum = 0;
 
         foreach ($siblings as $sibling) {
-            $arraySum += $sibling->fetch('progress_percent', 0);
+            foreach($sibling->getUserProgresses()??[] as $progress) {
+
+                $arraySum += ($progress->getProgressPercent() ?? 0);
+            }
         }
 
         $siblingCount = count($siblings);
