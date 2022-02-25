@@ -33,47 +33,53 @@ class ElasticService
      */
     public function createContentIndex()
     {
-        $params = [
-            'index' => 'content',
-            'body' => [
-                'settings' => [
-                    'number_of_shards' => 1,
-                    'number_of_replicas' => 0,
-                ],
-                'mappings' => [
-                    '_source' => [
-                        'enabled' => true,
-                    ],
-                    'properties' => [
-                        'id' => ['type' => 'integer'],
-                        'is_coach'=>['type' => 'integer'],
-                        'is_coach_of_the_month'=>['type' => 'integer'],
-                        'is_active'=>['type' => 'integer'],
-                        'is_featured'=>['type' => 'integer'],
-                        'title' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
-                        'slug' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
-                        'brand' => ['type' => 'text'],
-                        'content_type' => ['type' => 'keyword'],
-                        'status' => ['type' => 'text'],
-                        'difficulty' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
-                        'style' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
-                        'description' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
-                        'topic' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
-                        'artist' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
-                        'bpm' => ['type' => 'text'],
-                        'published_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
-                        'created_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
-                        'show_in_new_feed'=>['type' => 'integer'],
-                    ],
-                ],
-            ],
-        ];
-
         $client = $this->getClient();
 
-        // Create the index with mappings and settings
-        return $client->indices()
-            ->create($params);
+        if (!$client->indices()
+            ->exists(['index' => 'content'])) {
+            $params = [
+                'index' => 'content',
+                'body' => [
+                    'settings' => [
+                        'number_of_shards' => 1,
+                        'number_of_replicas' => 0,
+                    ],
+                    'mappings' => [
+                        '_source' => [
+                            'enabled' => true,
+                        ],
+                        'properties' => [
+                            'id' => ['type' => 'integer'],
+                            'is_coach' => ['type' => 'integer'],
+                            'is_coach_of_the_month' => ['type' => 'integer'],
+                            'is_active' => ['type' => 'integer'],
+                            'is_featured' => ['type' => 'integer'],
+                            'title' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'slug' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'brand' => ['type' => 'text'],
+                            'content_type' => ['type' => 'keyword'],
+                            'status' => ['type' => 'text'],
+                            'difficulty' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'style' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'description' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'topic' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'artist' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'bpm' => ['type' => 'text'],
+                            'published_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
+                            'created_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
+                            'show_in_new_feed' => ['type' => 'integer'],
+                            'all_progress_count' => ['type' => 'integer'],
+                            'last_week_progress_count' => ['type' => 'integer'],
+                            'permission_ids' => ['type' => 'text'],
+                        ],
+                    ],
+                ],
+            ];
+
+            // Create the index with mappings and settings
+            return $client->indices()
+                ->create($params);
+        }
     }
 
     /**
@@ -270,8 +276,8 @@ class ElasticService
                     }
                 }
                 if (array_key_exists($requiredFieldData, $elData['_source'])) {
-
                     if (is_array($elData['_source'][$requiredFieldData])) {
+                        $filteredContents[$requiredFieldData] = [];
                         foreach ($elData['_source'][$requiredFieldData] as $option) {
                             if (!in_array(
                                 strtolower($option),
@@ -314,5 +320,10 @@ class ElasticService
         unset($filteredContents['instructor']);
 
         return $filteredContents;
+    }
+
+    public function deleteIndex($indexName){
+        $client = $this->getClient();
+        $client->indices()->delete(['index' => $indexName]);
     }
 }
