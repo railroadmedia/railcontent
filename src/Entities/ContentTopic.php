@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *     indexes={
  *         @ORM\Index(name="tc", columns={"topic","content_id"}),
  *         @ORM\Index(name="railcontent_content_topics_content_id_index", columns={"content_id"}),
- *         @ORM\Index(name="railcontent_content_topicss_topic_index", columns={"topic"}),
+ *         @ORM\Index(name="railcontent_content_topics_topic_index", columns={"topic"}),
  *         @ORM\Index(name="railcontent_content_topics_position_index", columns={"position"})
  *     }
  * )
