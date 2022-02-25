@@ -145,9 +145,9 @@ class Faker extends Generator
                 'content_id' => $this->randomNumber(),
                 'user_id' => $this->randomNumber(),
                 'state' => 'started',
-                'progress_percent' => $this->randomNumber(2),
-                'higher_key_progress' => null,
-                'updated_on' => Carbon::now()->toDateTimeString()
+                'progressPercent' => $this->randomNumber(2),
+                'higherKeyProgress' => null,
+                'updatedOn' => Carbon::now()
             ],
             $override
         );
@@ -212,6 +212,18 @@ class Faker extends Generator
                 'title' => $this->word,
                 'published_on' => Carbon::now()->toDateTimeString(),
                 'created_on' => Carbon::now()->toDateTimeString(),
+            ],
+            $override
+        );
+    }
+
+    public function contentStyle(array $override = [])
+    {
+        return array_merge(
+            [
+                'content_id' => $this->randomNumber(),
+                'style' => $this->word(),
+                'position' => $this->randomNumber(),
             ],
             $override
         );

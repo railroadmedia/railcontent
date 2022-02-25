@@ -87,7 +87,7 @@ class DecoratedContentTransformer extends TransformerAbstract
             $defaultIncludes[] = 'playlist';
         }
 
-        if (count($content->getParent()) > 0) {
+        if ($content->getParent() && $content->getParent()->count() > 0) {
             $defaultIncludes[] = 'parent';
         }
 

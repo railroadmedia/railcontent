@@ -523,6 +523,10 @@ trait ContentFieldsAssociations
      */
     public function addStyle(ContentStyle $contentStyle)
     {
+        if ($this->styles->contains($contentStyle)) {
+            // Do nothing if its already part of our collection
+            return;
+        }
 
         $predictate = function ($element) use ($contentStyle) {
             return $element->getStyle() === $contentStyle->getStyle();
@@ -558,7 +562,7 @@ trait ContentFieldsAssociations
             return;
         }
 
-        $this->stylestag->removeElement($contentStyle);
+        $this->styles->removeElement($contentStyle);
     }
 
     /**

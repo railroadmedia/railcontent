@@ -244,6 +244,7 @@ class Content extends ArrayExpressible
         $this->instructor = new ArrayCollection();
         $this->userProgress = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->styles = new ArrayCollection();
     }
 
     /**
