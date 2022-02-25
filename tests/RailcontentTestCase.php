@@ -45,12 +45,15 @@ use Railroad\Railcontent\Faker\Factory;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
+use Railroad\Railcontent\Services\ContentService;
+use Railroad\Railcontent\Services\ElasticService;
 use Railroad\Railcontent\Services\RemoteStorageService;
 use Railroad\Railcontent\Tests\Fixtures\UserProvider;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Doctrine\Contracts\UserProviderInterface as DoctrineUserProviderInterface;
 use Railroad\DoctrineArrayHydrator\Contracts\UserProviderInterface as DoctrineArrayHydratorUserProviderInterface;
 use Railroad\Railcontent\Tests\Resources\Models\User;
+use Railroad\Railnotifications\Tests\Fixtures\ContentProvider;
 
 class RailcontentTestCase extends BaseTestCase
 {
@@ -102,6 +105,11 @@ class RailcontentTestCase extends BaseTestCase
 
     protected $populator;
 
+    /**
+     * @var ElasticService
+     */
+    protected $elasticService;
+
     protected function setUp()
     {
         parent::setUp();
@@ -142,6 +150,9 @@ class RailcontentTestCase extends BaseTestCase
         $this->databaseManager = $this->app->make(DatabaseManager::class);
         $this->authManager = $this->app->make(AuthManager::class);
         $this->router = $this->app->make(Router::class);
+
+        $this->elasticService = $this->app->make(ElasticService::class);
+        $this->elasticService->createContentIndex();
 
         $this->permissionServiceMock =
             $this->getMockBuilder(PermissionService::class)
@@ -490,6 +501,11 @@ class RailcontentTestCase extends BaseTestCase
     protected function tearDown()
     {
         Redis::flushDB();
+
+        $this->elasticService->deleteIndex('content');
+
+        $this->elasticService->createContentIndex();
+
         parent::tearDown();
     }
 
@@ -657,11 +673,23 @@ class RailcontentTestCase extends BaseTestCase
         }
 
         if (!array_key_exists('publishedOn', $contentData)) {
-            $contentData['publishedOn'] = Carbon::now();
+            $contentData['publishedOn'] = Carbon::now()->subDay();
         }
 
         if (!array_key_exists('createdOn', $contentData)) {
-            $contentData['createdOn'] = Carbon::now();
+            $contentData['createdOn'] = Carbon::now()->subDay();
+        }
+
+        if (!array_key_exists('isCoach', $contentData)) {
+            $contentData['isCoach'] = 0;
+        }
+
+        if (!array_key_exists('isCoachOfTheMonth', $contentData)) {
+            $contentData['isCoachOfTheMonth'] = 0;
+        }
+
+        if (!array_key_exists('isFeatured', $contentData)) {
+            $contentData['isFeatured'] = 0;
         }
 
         $contentData['topic'] = new ArrayCollection();
@@ -674,6 +702,13 @@ class RailcontentTestCase extends BaseTestCase
                 $this->app->make(UserProvider::class)
                     ->getUserById($contentData['userId']);
             unset($contentData['userId']);
+        }
+
+        if (array_key_exists('associatedUserId',$contentData)) {
+            $contentData['associatedUser'] =
+                $this->app->make(UserProvider::class)
+                    ->getUserById($contentData['associatedUserId']);
+            unset($contentData['associatedUserId']);
         }
 
         $this->populator->addEntity(
@@ -703,15 +738,33 @@ class RailcontentTestCase extends BaseTestCase
 
     public function fakeUserContentProgress($data = [])
     {
-        $userContentProgress = $this->faker->userContentProgress($data);
+        $contentData = $this->faker->userContentProgress($data);
 
-        $userContentProgressId =
-            $this->databaseManager->table('railcontent_user_content_progress')
-                ->insertGetId($userContentProgress);
+        $this->populator = new Populator($this->faker, $this->entityManager);
 
-        $userContentProgress['id'] = $userContentProgressId;
+        if (array_key_exists('content_id',$contentData)) {
+            $contentData['content'] =
+                $this->app->make(ContentService::class)
+                    ->getById($contentData['content_id']);
+            unset($contentData['content_id']);
+        }
 
-        return $userContentProgress;
+        if (array_key_exists('user_id',$contentData)) {
+            $contentData['user'] =
+                $this->app->make(UserProvider::class)
+                    ->getUserById($contentData['user_id']);
+            unset($contentData['user_id']);
+        }
+
+        $this->populator->addEntity(
+            UserContentProgress::class,
+            1,
+            $contentData
+        );
+
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[UserContentProgress::class];
     }
 
     public function fakeContentInstructor($contentData = [])
@@ -898,6 +951,18 @@ class RailcontentTestCase extends BaseTestCase
         $content['id'] = $contentId;
 
         return $content;
+    }
 
+    public function fakeContentStyle($style = [])
+    {
+        $contentStyleData = $this->faker->contentStyle($style);
+
+        $contentStyleId =
+            $this->databaseManager->table('railcontent_content_styles')
+                ->insertGetId($contentStyleData);
+
+        $contentStyleData['id'] = $contentStyleId;
+
+        return $contentStyleData;
     }
 }
