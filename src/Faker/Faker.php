@@ -228,4 +228,16 @@ class Faker extends Generator
             $override
         );
     }
+
+    public function contentFollow(array $override = [])
+    {
+        return array_merge(
+            [
+                'content_id' => $this->randomNumber(),
+                'user_id' => $this->randomNumber(),
+                'created_on' => Carbon::now()
+            ],
+            $override
+        );
+    }
 }

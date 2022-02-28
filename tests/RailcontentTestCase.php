@@ -31,6 +31,7 @@ use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\CommentLikes;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
+use Railroad\Railcontent\Entities\ContentFollows;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentInstructor;
 use Railroad\Railcontent\Entities\ContentLikes;
@@ -964,5 +965,18 @@ class RailcontentTestCase extends BaseTestCase
         $contentStyleData['id'] = $contentStyleId;
 
         return $contentStyleData;
+    }
+
+    public function fakeUserContentFollow($data = [])
+    {
+        $contentFollow = $this->faker->contentFollow($data);
+
+        $contentFollowId =
+            $this->databaseManager->table('railcontent_content_follows')
+                ->insertGetId($contentFollow);
+
+        $contentFollow['id'] = $contentFollowId;
+
+        return $contentFollow;
     }
 }

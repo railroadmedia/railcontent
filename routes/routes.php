@@ -155,7 +155,6 @@ Route::group(
                     '/vimeo-video/{vimeoVideoId}',
                     \Railroad\Railcontent\Controllers\VimeoJsonController::class . '@show'
                 )->name('vimeo-video.show');
-
             }
         );
 

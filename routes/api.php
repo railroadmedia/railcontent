@@ -183,5 +183,26 @@ Route::group(
         Route::get('/onboarding', ApiJsonController::class . '@onboarding');
         Route::get('/shows', ApiJsonController::class . '@getShows');
         Route::get('/comments', ApiJsonController::class . '@getComments');
+
+        // content follow
+        Route::put(
+            '/follow',
+            Railroad\Railcontent\Controllers\ContentFollowJsonController::class . '@followContent'
+        )->name('content.follow');
+
+        Route::put(
+            '/unfollow',
+            Railroad\Railcontent\Controllers\ContentFollowJsonController::class . '@unfollowContent'
+        )->name('content.unfollow');
+
+        Route::get(
+            '/followed-content',
+            Railroad\Railcontent\Controllers\ContentFollowJsonController::class . '@getFollowedContent'
+        )->name('followed.content');
+
+        Route::get(
+            '/followed-lessons',
+            Railroad\Railcontent\Controllers\ContentFollowJsonController::class . '@getLatestLessonsForFollowedContentByType'
+        )->name('followed.lessons');
     }
 );

@@ -104,6 +104,22 @@ class RouteRegistrar
                     ContentJsonController::class . '@getFiltersOptions'
                 )
                     ->name('content.filters.index');
+
+                // content follow
+                $this->router->put(
+                    '/follow',
+                    \Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@followContent'
+                )->name('content.follow');
+
+                $this->router->put(
+                    '/unfollow',
+                    \Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@unfollowContent'
+                )->name('content.unfollow');
+
+                $this->router->get(
+                    '/followed-content',
+                    \Railroad\Railcontent\Controllers\ContentFollowsJsonController::class . '@getFollowedContent'
+                )->name('followed.content');
             }
         );
     }

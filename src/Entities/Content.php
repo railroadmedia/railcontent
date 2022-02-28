@@ -220,6 +220,11 @@ class Content extends ArrayExpressible
     private $likes;
 
     /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentFollows", mappedBy="content")
+     */
+    private $follows;
+
+    /**
      * @var DateTime $createdOn
      *
      * @Gedmo\Timestampable(on="create")
@@ -245,6 +250,7 @@ class Content extends ArrayExpressible
         $this->userProgress = new ArrayCollection();
         $this->likes = new ArrayCollection();
         $this->styles = new ArrayCollection();
+        $this->follows = new ArrayCollection();
     }
 
     /**
@@ -565,6 +571,21 @@ class Content extends ArrayExpressible
         return $this->likes;
     }
 
+    /**
+     * @param ContentFollows $follows
+     */
+    public function addFollows(ContentFollows $follows)
+    {
+        $this->follows[] = $follows;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getFollows()
+    {
+        return $this->follows;
+    }
     /**
      * @return text
      */

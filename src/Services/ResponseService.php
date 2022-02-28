@@ -18,6 +18,8 @@ use Railroad\Railcontent\Transformers\CommentOldStructureTransformer;
 use Railroad\Railcontent\Transformers\CommentTransformer;
 use Railroad\Railcontent\Transformers\ContentDataTransformer;
 use Railroad\Railcontent\Transformers\ContentDataWithPostOldStructureTransformer;
+use Railroad\Railcontent\Transformers\ContentFollowOldStructureTransformer;
+use Railroad\Railcontent\Transformers\ContentFollowTransformer;
 use Railroad\Railcontent\Transformers\ContentHierarchyOldStructureTransformer;
 use Railroad\Railcontent\Transformers\ContentHierarchyTransformer;
 use Railroad\Railcontent\Transformers\ContentLikeOldStructureTransformer;
@@ -485,6 +487,35 @@ class ResponseService extends FractalResponseService
             new OldStyleWithoutDataForArraySerializer(),
             $queryBuilder
         );
+    }
+
+    /**
+     * @param $entityOrEntities
+     * @param QueryBuilder|null $queryBuilder
+     * @param array $includes
+     * @return Fractal
+     */
+    public static function contentFollow($entityOrEntities, QueryBuilder $queryBuilder = null, array $includes = [])
+    {
+        if (self::$oldResponseStructure) {
+            return self::create(
+                $entityOrEntities,
+                'contentFollow',
+                new ContentFollowOldStructureTransformer(),
+                new OldStyleSerializer(),
+                $queryBuilder
+            )
+                ->parseIncludes($includes);
+        }
+
+        return self::create(
+            $entityOrEntities,
+            'contentFollow',
+            new ContentFollowTransformer(),
+            new JsonApiSerializer(),
+            $queryBuilder
+        )
+            ->parseIncludes($includes);
     }
 
 }
