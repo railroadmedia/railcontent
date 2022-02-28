@@ -44,35 +44,42 @@ export default {
 <template>
     <div>
         <PageContainer>
-            <BeakerIcon class="tw-h-5 tw-w-5 tw-text-blue-500" />
+            Example Hero Icon
             <br />
-            <Drumeo class="tw-h-5 tw-w-5 tw-text-blue-500" />
+            <BeakerIcon
+                class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500"
+            />
+            <BeakerIcon
+                class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500"
+            />
             <br />
-            <Drums class="tw-h-5 tw-w-5 tw-text-blue-500" />
             <br />
-            <DrumsAlt class="tw-h-5 tw-w-5 tw-text-blue-500" />
+            Example Custom MusoraIcons
             <br />
-            <Edge class="tw-h-5 tw-w-5 tw-text-blue-500" />
-            <br />
-            <Guitar class="tw-h-5 tw-w-5 tw-text-blue-500" />
-            <br />
-            <GuitarAlt class="tw-h-5 tw-w-5 tw-text-blue-500" />
-            <br />
-            <Guitareo class="tw-h-5 tw-w-5 tw-text-blue-500" />
-            <br />
-            <Lifetime class="tw-h-5 tw-w-5 tw-text-blue-500" />
-            <br />
-            <Microphone class="tw-h-5 tw-w-5 tw-text-blue-500" />
-            <br />
-            <Piano class="tw-h-5 tw-w-5 tw-text-blue-500" />
-            <br />
-            <Pianote class="tw-h-5 tw-w-5 tw-text-blue-500" />
-            <br />
-            <Singeo class="tw-h-5 tw-w-5 tw-text-blue-500" />
-            <br />
-            <Sticks class="tw-h-5 tw-w-5 tw-text-blue-500" />
-            <br />
-            <Wave class="tw-h-5 tw-w-5 tw-text-blue-500" />
+            <Drumeo class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500" />
+            <Drums class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500" />
+            <DrumsAlt
+                class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500"
+            />
+            <Edge class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500" />
+            <Guitar class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500" />
+            <GuitarAlt
+                class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500"
+            />
+            <Guitareo
+                class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500"
+            />
+            <Lifetime
+                class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500"
+            />
+            <Microphone
+                class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500"
+            />
+            <Piano class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500" />
+            <Pianote class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500" />
+            <Singeo class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500" />
+            <Sticks class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500" />
+            <Wave class="tw-mr-4 tw-inline tw-h-5 tw-w-5 tw-text-blue-500" />
         </PageContainer>
     </div>
 </template>
