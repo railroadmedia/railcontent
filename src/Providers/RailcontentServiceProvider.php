@@ -64,8 +64,8 @@ class RailcontentServiceProvider extends ServiceProvider
                     }
                 }
             ],
-            ContentCreated::class => [VersionContentEventListener::class . '@handle'],
-            ContentUpdated::class => [VersionContentEventListener::class . '@handle'],
+            ContentCreated::class => [],
+            ContentUpdated::class => [],
             ContentDeleted::class => [ContentEventListener::class . '@handleDelete'],
             ContentSoftDeleted::class => [ContentEventListener::class . '@handleSoftDelete'],
             ContentFieldCreated::class => [
@@ -80,9 +80,9 @@ class RailcontentServiceProvider extends ServiceProvider
                // VersionContentEventListener::class . '@handleFieldDeleted',
                 ContentTotalXPListener::class . '@handleFieldDeleted',
             ],
-            ContentDatumCreated::class => [VersionContentEventListener::class . '@handle'],
-            ContentDatumUpdated::class => [VersionContentEventListener::class . '@handle'],
-            ContentDatumDeleted::class => [VersionContentEventListener::class . '@handle'],
+            ContentDatumCreated::class => [],
+            ContentDatumUpdated::class => [],
+            ContentDatumDeleted::class => [],
             CommentCreated::class => [AssignCommentEventListener::class . '@handle'],
             CommentDeleted::class => [UnassignCommentEventListener::class . '@handle'],
             UserContentProgressSaved::class => [UserContentProgressEventListener::class . '@handle'],
