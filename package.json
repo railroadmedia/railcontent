@@ -1,26 +1,29 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production",
-        
-        "marketing-dev": "",
-        "marketing-watch": "",
-        "marketing-prod": "",
-        "platform-dev": "",
-        "platform-watch": "",
-        "platform-prod": ""
+        "platform-development": "mix --mix-config=resources/platform/webpack.mix.js",
+        "platform-production": "mix --mix-config=resources/platform/webpack.mix.js --production",
+        "platform-watch": "mix --mix-config=resources/platform/webpack.mix.js watch",
+        "platform-watch-poll": "mix --mix-config=resources/platform/webpack.mix.js watch -- --watch-options-poll=1000",
+        "platform-hot": "mix --mix-config=resources/platform/webpack.mix.js watch --hot",
+        "platform-dev": "npm run platform-development",
+        "platform-prod": "npm run platform-production",
+        "marketing-development": "mix --mix-config=resources/marketing/webpack.mix.js",
+        "marketing-production": "mix --mix-config=resources/marketing/webpack.mix.js --production",
+        "marketing-watch": "mix --mix-config=resources/marketing/webpack.mix.js watch",
+        "marketing-watch-poll": "mix --mix-config=resources/marketing/webpack.mix.js watch -- --watch-options-poll=1000",
+        "marketing-hot": "mix --mix-config=resources/marketing/webpack.mix.js watch --hot",
+        "marketing-dev": "npm run marketing-development",
+        "marketing-prod": "npm run marketing-production"
     },
     "devDependencies": {
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
-        "postcss": "^8.3.9"
+        "postcss": "^8.3.9",
+        "resolve-url-loader": "^4.0.0",
+        "sass": "^1.49.9",
+        "sass-loader": "^12.1.0"
     },
     "dependencies": {
         "alpinejs": "^3.4.2",
