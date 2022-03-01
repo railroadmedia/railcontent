@@ -1,5 +1,6 @@
 <script setup>
 import InstrumentCard from '../../InstrumentCard/InstrumentCard.vue'
+import ProgressBar from '../../ProgressBar/ProgressBar.vue'
 const props = defineProps({
     brand: {
         type: String
@@ -21,7 +22,7 @@ const props = defineProps({
             instrument at any time in your profile or by using the instrument
             selector in the navigation.
         </p>
-        <div class="tw-flex tw-space-x-6">
+        <div class="tw-mb-[40px] tw-flex tw-space-x-6">
             <InstrumentCard
                 :bgColor="'gray'"
                 :active="brand === brandName"
@@ -55,5 +56,6 @@ const props = defineProps({
                 SINGING
             </InstrumentCard>
         </div>
+        <ProgressBar :brand="brand" :step="1" />
     </div>
 </template>
