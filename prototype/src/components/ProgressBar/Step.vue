@@ -44,7 +44,7 @@ const props = defineProps({
                         v-if="stepType === 'number'"
                         :class="`${bgColor[brand]} tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-text-white`"
                     >
-                        {{ step }}
+                        {{ step + 1 }}
                     </div>
                 </div>
                 <div
