@@ -7,7 +7,14 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        
+        "marketing-dev": "",
+        "marketing-watch": "",
+        "marketing-prod": "",
+        "platform-dev": "",
+        "platform-watch": "",
+        "platform-prod": ""
     },
     "devDependencies": {
         "axios": "^0.21",
