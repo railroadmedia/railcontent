@@ -348,6 +348,7 @@ class RailcontentTestCase extends BaseTestCase
             'railcontent.content_hierarchy_decorator_allowed_types',
             $defaultConfig['content_hierarchy_decorator_allowed_types']
         );
+        $app['config']->set('railcontent.content_types_and_depth_to_calculate_hierarchy_higher_key_progress', $defaultConfig['content_types_and_depth_to_calculate_hierarchy_higher_key_progress']);
 
         // vimeo
         $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);

@@ -3,6 +3,9 @@
 namespace Railroad\Railcontent\Tests\Functional\Controllers\NewStructure;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Event;
+use Railroad\Railcontent\Events\UserContentProgressSaved;
+use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
 use Railroad\Railcontent\Services\ResponseService;
 use Railroad\Railcontent\Services\UserContentProgressService;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -412,6 +415,8 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
 
     public function test_complete_parent()
     {
+        Event::fake();
+
         $userId = $this->createAndLogInNewUser();
         $progressChild1 = 30;
 
@@ -480,6 +485,14 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
             'content_id' => $content[2]->getId(),
             'progress_percent' => 100,
         ]);
+
+        //check that the ContentCreated event was dispatched with the correct content id
+        Event::assertDispatched(
+            UserContentProgressSaved::class,
+            function ($event) use ($content) {
+                return $event->content->getId() == $content[1]->getId();
+            }
+        );
     }
 
     public function test_mark_complete_last_incomplete_children()
@@ -899,4 +912,215 @@ class ContentProgressJsonControllerTest extends RailcontentTestCase
         $this->assertEquals(1, $secondRequest->decodeResponseJson('meta')['pagination']['total']);
     }
 
+    public function test_higher_key_when_complete_method()
+    {
+        $userId = $this->createAndLogInNewUser();
+
+        $method = $this->fakeContent(1, [
+            'status' => 'published',
+            'type' => 'learning-path',
+        ]);
+
+        $levels = $this->fakeContent(2, [
+            'status' => 'published',
+            'type' => 'learning-path-level',
+        ]);
+
+        $courses = $this->fakeContent(3, [
+            'status' => 'published',
+            'type' => 'learning-path-course',
+        ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $method[0]->getId(),
+                                 'child_id' => $levels[0]->getId(),
+            'child_position' => 1
+                             ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $method[0]->getId(),
+                                 'child_id' => $levels[1]->getId(),
+            'child_position' => 2
+                             ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $levels[1]->getId(),
+                                 'child_id' => $courses[0]->getId(),
+                                 'child_position' => 1
+                             ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $levels[1]->getId(),
+                                 'child_id' => $courses[1]->getId(),
+                                 'child_position' => 2
+                             ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $levels[1]->getId(),
+                                 'child_id' => $courses[2]->getId(),
+                                 'child_position' => 3
+                             ]);
+
+        $response = $this->put('railcontent/complete', [
+            'data' => [
+                'type' => 'userContentProgress',
+                'relationships' => [
+                    'content' => [
+                        'data' => [
+                            'type' => 'content',
+                            'id' => $method[0]->getId(),
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertEquals(201, $response->status());
+        $this->assertTrue($response->decodeResponseJson('data'));
+
+        $this->assertDatabaseHas(config('railcontent.table_prefix').'user_content_progress', [
+            'user_id' => auth()->id(),
+            'state' => 'completed',
+            'content_id' => $method[0]->getId(),
+            'progress_percent' => 100,
+            'higher_key_progress' => '2.3'
+        ]);
+    }
+
+    public function test_higher_key_when_start_method()
+    {
+        $userId = $this->createAndLogInNewUser();
+
+        $method = $this->fakeContent(1, [
+            'status' => 'published',
+            'type' => 'learning-path',
+        ]);
+
+        $levels = $this->fakeContent(2, [
+            'status' => 'published',
+            'type' => 'learning-path-level',
+        ]);
+
+        $courses = $this->fakeContent(3, [
+            'status' => 'published',
+            'type' => 'learning-path-course',
+        ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $method[0]->getId(),
+                                 'child_id' => $levels[0]->getId(),
+                                 'child_position' => 1
+                             ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $method[0]->getId(),
+                                 'child_id' => $levels[1]->getId(),
+                                 'child_position' => 2
+                             ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $levels[1]->getId(),
+                                 'child_id' => $courses[0]->getId(),
+                                 'child_position' => 1
+                             ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $levels[1]->getId(),
+                                 'child_id' => $courses[1]->getId(),
+                                 'child_position' => 2
+                             ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $levels[1]->getId(),
+                                 'child_id' => $courses[2]->getId(),
+                                 'child_position' => 3
+                             ]);
+
+        $response = $this->put('railcontent/start', [
+            'data' => [
+                'type' => 'userContentProgress',
+                'relationships' => [
+                    'content' => [
+                        'data' => [
+                            'type' => 'content',
+                            'id' => $courses[0]->getId(),
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertEquals(200, $response->status());
+        $this->assertTrue($response->decodeResponseJson('data'));
+
+        $this->assertDatabaseHas(config('railcontent.table_prefix').'user_content_progress', [
+            'user_id' => auth()->id(),
+            'state' => 'started',
+            'content_id' => $method[0]->getId(),
+            'progress_percent' => 0,
+            'higher_key_progress' => '1.1'
+        ]);
+    }
+
+    public function test_higher_key_when_save_progress_method()
+    {
+        $userId = $this->createAndLogInNewUser();
+
+        $method = $this->fakeContent(1, [
+            'status' => 'published',
+            'type' => 'learning-path',
+        ]);
+
+        $levels = $this->fakeContent(2, [
+            'status' => 'published',
+            'type' => 'learning-path-level',
+        ]);
+
+        $courses = $this->fakeContent(3, [
+            'status' => 'published',
+            'type' => 'learning-path-course',
+        ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $method[0]->getId(),
+                                 'child_id' => $levels[0]->getId(),
+                                 'child_position' => 1
+                             ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $method[0]->getId(),
+                                 'child_id' => $levels[1]->getId(),
+                                 'child_position' => 2
+                             ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $levels[1]->getId(),
+                                 'child_id' => $courses[0]->getId(),
+                                 'child_position' => 1
+                             ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $levels[1]->getId(),
+                                 'child_id' => $courses[1]->getId(),
+                                 'child_position' => 2
+                             ]);
+        $this->fakeHierarchy([
+                                 'parent_id' => $levels[1]->getId(),
+                                 'child_id' => $courses[2]->getId(),
+                                 'child_position' => 3
+                             ]);
+
+        $response = $this->put('railcontent/progress', [
+            'data' => [
+                'type' => 'userContentProgress',
+                'attributes' => [
+                    'progress_percent' => 20,
+                ],
+                'relationships' => [
+                    'content' => [
+                        'data' => [
+                            'type' => 'content',
+                            'id' => $courses[0]->getId(),
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->assertEquals(201, $response->status());
+        $this->assertTrue($response->decodeResponseJson('data'));
+
+        $this->assertDatabaseHas(config('railcontent.table_prefix').'user_content_progress', [
+            'user_id' => auth()->id(),
+            'state' => 'started',
+            'content_id' => $method[0]->getId(),
+            'higher_key_progress' => '1.1'
+        ]);
+    }
 }

@@ -170,8 +170,16 @@ return [
     'allowed_types_for_bubble_progress' => [
         'started' => [
             'course',
+            'learning-path',
+            'learning-path-lesson',
+            'learning-path-course',
+            'learning-path-level'
         ],
-        'completed' => [],
+        'completed' => [
+            'learning-path-lesson',
+            'learning-path-course',
+            'learning-path-level'
+        ],
     ],
 
     // video content sync
@@ -881,5 +889,9 @@ return [
 
     'user_ids_excluded_from_stats' => [
         0
+    ],
+
+    'content_types_and_depth_to_calculate_hierarchy_higher_key_progress' => [
+        'learning-path',
     ],
 ];

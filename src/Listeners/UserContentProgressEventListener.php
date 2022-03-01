@@ -76,68 +76,97 @@ class UserContentProgressEventListener extends Event
 
         if (!empty($type) && in_array($type, $higherOrderTypes)) {
             $level1Position = 1;
-            $level2Position = 0;
+            $level2Position = 1;
 
-            $level1Children =
+            $methodIsCompleted =
                 $this->connection()
-                    ->table('railcontent_content_hierarchy')
-                    ->leftJoin(
-                        'railcontent_user_content_progress',
-                        function (JoinClause $join) use ($event) {
+                            ->table('railcontent_user_content_progress')
+                                ->where('railcontent_user_content_progress.user_id', $event->userId)
+                                ->where('railcontent_user_content_progress.content_id', $event->contentId)
+                                ->where('railcontent_user_content_progress.state', 'completed')
+                                ->first();
+
+            if ($methodIsCompleted) {
+                $lastLevel1Children =
+                    $this->connection()
+                        ->table('railcontent_content_hierarchy')
+                        ->join('railcontent_content', 'child_id','=','railcontent_content.id')
+                        ->where('parent_id', $event->contentId)
+                        ->where('railcontent_content.status','=','published')
+                        ->orderBy('child_position', 'desc')
+                        ->first();
+
+                $level1Position = $lastLevel1Children->child_position;
+
+                $lastLevel2Children =
+                    $this->connection()
+                        ->table('railcontent_content_hierarchy')
+                        ->join('railcontent_content', 'child_id','=','railcontent_content.id')
+                        ->where('parent_id', $lastLevel1Children->child_id)
+                        ->where('railcontent_content.status','=','published')
+                        ->orderBy('child_position', 'desc')
+                        ->first();
+
+                $level2Position = $lastLevel2Children->child_position;
+
+            } else {
+                $level1Children =
+                    $this->connection()
+                        ->table('railcontent_content_hierarchy')
+                        ->leftJoin('railcontent_user_content_progress', function (JoinClause $join) use ($event) {
                             $join->on(
                                 'railcontent_user_content_progress.content_id',
                                 '=',
                                 'railcontent_content_hierarchy.child_id'
                             )
-                                ->where(
-                                    function (Builder $builder) use ($event) {
-                                        $builder->where('railcontent_user_content_progress.user_id', $event->userId);
-                                    }
-                                );
-                        }
-                    )
-                    ->where('parent_id', $event->contentId)
-                    ->orderBy('child_position', 'asc')
-                    ->get()
-                    ->keyBy('child_position');
+                                ->where(function (Builder $builder) use ($event) {
+                                    $builder->where(
+                                        'railcontent_user_content_progress.user_id',
+                                        $event->userId
+                                    );
+                                });
+                        })
+                        ->where('parent_id', $event->contentId)
+                        ->orderBy('child_position', 'asc')
+                        ->get()
+                        ->keyBy('child_position');
 
-            foreach ($level1Children as $index=>$level1Child) {
-                if ($level1Child->state != 'completed') {
-                    $level1Position = $index;
-                    break;
+                foreach ($level1Children as $index => $level1Child) {
+                    if ($level1Child->state != 'completed') {
+                        $level1Position = $index;
+                        break;
+                    }
                 }
-            }
 
-            $level1ChildrenCurrentChild = $level1Children[$level1Position] ?? null;
+                $level1ChildrenCurrentChild = $level1Children[$level1Position] ?? null;
 
-            if (!empty($level1ChildrenCurrentChild)) {
-                $level2Children =
-                    $this->connection()
-                        ->table('railcontent_content_hierarchy')
-                        ->leftJoin(
-                            'railcontent_user_content_progress',
-                            function (JoinClause $join) use ($event) {
+                if (!empty($level1ChildrenCurrentChild)) {
+                    $level2Children =
+                        $this->connection()
+                            ->table('railcontent_content_hierarchy')
+                            ->leftJoin('railcontent_user_content_progress', function (JoinClause $join) use ($event) {
                                 $join->on(
                                     'railcontent_user_content_progress.content_id',
                                     '=',
                                     'railcontent_content_hierarchy.child_id'
                                 )
-                                    ->where(
-                                        function (Builder $builder) use ($event) {
-                                            $builder->where('railcontent_user_content_progress.user_id', $event->userId);
-                                        }
-                                    );
-                            }
-                        )
-                        ->where('parent_id', $level1ChildrenCurrentChild->child_id)
-                        ->orderBy('child_position', 'asc')
-                        ->get()
-                        ->keyBy('child_position');
+                                    ->where(function (Builder $builder) use ($event) {
+                                        $builder->where(
+                                            'railcontent_user_content_progress.user_id',
+                                            $event->userId
+                                        );
+                                    });
+                            })
+                            ->where('parent_id', $level1ChildrenCurrentChild->child_id)
+                            ->orderBy('child_position', 'asc')
+                            ->get()
+                            ->keyBy('child_position');
 
-                foreach ($level2Children as $index => $level2Child) {
-                    if ($level2Child->state != 'completed') {
-                        $level2Position = $index - 1;
-                        break;
+                    foreach ($level2Children as $index => $level2Child) {
+                        if ($level2Child->state != 'completed') {
+                            $level2Position = $index - 1;
+                            break;
+                        }
                     }
                 }
             }
