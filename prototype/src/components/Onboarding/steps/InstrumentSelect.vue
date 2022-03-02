@@ -6,6 +6,7 @@ const props = defineProps({
         type: String
     }
 })
+const emit = defineEmits(['changeStep'])
 </script>
 
 <template>
@@ -25,32 +26,28 @@ const props = defineProps({
         <div class="tw-mb-[40px] tw-flex tw-space-x-6">
             <InstrumentCard
                 :bgColor="'gray'"
-                :active="brand === brandName"
-                :brand="brandName"
+                :brand="brand"
                 @onInstrumentSelect="() => handleSelect(brandName)"
             >
                 DRUMS
             </InstrumentCard>
             <InstrumentCard
                 :bgColor="'gray'"
-                :active="brand === brandName"
-                :brand="brandName"
+                :brand="brand"
                 @onInstrumentSelect="() => handleSelect(brandName)"
             >
                 PIANO
             </InstrumentCard>
             <InstrumentCard
                 :bgColor="'gray'"
-                :active="brand === brandName"
-                :brand="brandName"
+                :brand="brand"
                 @onInstrumentSelect="() => handleSelect(brandName)"
             >
                 GUITAR
             </InstrumentCard>
             <InstrumentCard
                 :bgColor="'gray'"
-                :active="brand === brandName"
-                :brand="brandName"
+                :brand="brand"
                 @onInstrumentSelect="() => handleSelect(brandName)"
             >
                 SINGING
