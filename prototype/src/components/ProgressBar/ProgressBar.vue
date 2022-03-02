@@ -4,29 +4,24 @@ const props = defineProps({
     brand: {
         type: String
     },
-    step: {
+    currentStep: {
         type: Number
+    },
+    steps: {
+        type: Array,
+        default: []
     }
 })
 
-const stepLabels = [
-    'ABOUT',
-    'INSTRUMENT',
-    'EXPERIENCE',
-    'GENRES',
-    'TOPICS',
-    'COACHES'
-]
-
-const getStepType = (stepIndex, currentStep) => {
-    if (stepIndex > currentStep) {
+const getStepType = (stepIndex, checked) => {
+    if (stepIndex === props.currentStep) {
+        return 'number'
+    }
+    if (!checked) {
         return 'white'
     }
-    if (stepIndex < currentStep) {
+    if (checked) {
         return 'tick'
-    }
-    if (stepIndex === currentStep) {
-        return 'number'
     }
 }
 </script>
@@ -34,13 +29,13 @@ const getStepType = (stepIndex, currentStep) => {
 <template>
     <div class="tw-flex">
         <Step
-            v-for="(label, index) in stepLabels"
-            :label="label"
-            v-bind:key="`${label}-step`"
-            :step="step"
+            v-for="(step, index) in steps"
+            :label="step.label"
+            v-bind:key="`${step.label}-step`"
+            :currentStep="currentStep"
             :brand="brand"
-            :stepType="getStepType(index, step)"
-            :isLast="stepLabels.length - 1 === index"
+            :stepType="getStepType(index, step.checked)"
+            :isLast="steps.length - 1 === index"
         />
     </div>
 </template>

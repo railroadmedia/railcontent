@@ -9,10 +9,23 @@ const props = defineProps({
         default: 'drumeo'
     }
 })
-
+const initialSteps = [
+    { label: 'ABOUT', checked: false },
+    { label: 'INSTRUMENT', checked: false },
+    { label: 'EXPERIENCE', checked: false },
+    { label: 'GENRES', checked: false },
+    { label: 'TOPICS', checked: false },
+    { label: 'COACHES', checked: false }
+]
 let currentStep = ref(0)
+let steps = ref(initialSteps)
 function changeStep(step) {
     currentStep.value = step
+}
+function checkStepToggle(step) {
+    const newSteps = steps.value
+    newSteps[step].checked = !newSteps[step].checked
+    steps.value = newSteps
 }
 </script>
 
@@ -22,11 +35,14 @@ function changeStep(step) {
             :brand="brand"
             v-if="currentStep === 0"
             @changeStep="changeStep"
+            @checkStep="checkStepToggle"
+            :steps="steps"
         />
         <InstrumentSelect
             :brand="brand"
             v-if="currentStep === 1"
             @changeStep="changeStep"
+            :steps="steps"
         />
     </ModalRenderer>
 </template>

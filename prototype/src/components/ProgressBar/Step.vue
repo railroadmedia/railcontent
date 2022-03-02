@@ -17,7 +17,7 @@ const props = defineProps({
     brand: {
         type: String
     },
-    step: {
+    currentStep: {
         type: Number
     }
 })
@@ -44,18 +44,27 @@ const props = defineProps({
                         v-if="stepType === 'number'"
                         :class="`${bgColor[brand]} tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-text-white`"
                     >
-                        {{ step + 1 }}
+                        {{ currentStep + 1 }}
                     </div>
                 </div>
                 <div
                     class="tw-absolute tw-mt-[36px] tw-text-center tw-text-[14px] tw-text-white"
+                    :class="
+                        stepType === 'number'
+                            ? 'tw-font-bold'
+                            : 'tw-font-normal'
+                    "
                 >
                     {{ label }}
                 </div>
             </div>
         </div>
         <div v-if="!isLast" class="tw-mt-[14px] tw-w-[80px]">
-            <div class="tw-h-[2px] tw-w-full tw-bg-white"></div>
+            <div
+                :class="`tw-h-[2px] tw-w-full ${
+                    stepType === 'tick' ? bgColor[brand] : 'tw-bg-white'
+                }`"
+            ></div>
         </div>
     </div>
 </template>

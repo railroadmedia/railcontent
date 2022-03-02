@@ -4,6 +4,9 @@ import ProgressBar from '../../ProgressBar/ProgressBar.vue'
 const props = defineProps({
     brand: {
         type: String
+    },
+    steps: {
+        type: Array
     }
 })
 const emit = defineEmits(['changeStep'])
@@ -53,6 +56,6 @@ const emit = defineEmits(['changeStep'])
                 SINGING
             </InstrumentCard>
         </div>
-        <ProgressBar :brand="brand" :step="1" />
+        <ProgressBar :brand="brand" :currentStep="1" :steps="steps" />
     </div>
 </template>
