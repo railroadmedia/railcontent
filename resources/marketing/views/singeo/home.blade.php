@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Pianote</title>
+    <title>Singeo</title>
 </head>
 <body class="antialiased">
-<h1>Pianote sales page!</h1>
+<h1>Singeo home page!</h1>
 </body>
 </html>

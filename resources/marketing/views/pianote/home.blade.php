@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Guitareo</title>
+    <title>Pianote</title>
 </head>
 <body class="antialiased">
-<h1>Guitareo sales page!</h1>
+<h1>Pianote home page!</h1>
 </body>
 </html>

@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Singeo</title>
+    <title>Musora</title>
 </head>
 <body class="antialiased">
-<h1>Singeo sales page!</h1>
+<h1>Musora home page!</h1>
 </body>
 </html>

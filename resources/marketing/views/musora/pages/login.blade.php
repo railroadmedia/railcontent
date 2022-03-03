@@ -7,6 +7,6 @@
     <title>Musora</title>
 </head>
 <body class="antialiased">
-<h1>Musora sales page!</h1>
+<h1>Musora login page!</h1>
 </body>
 </html>

@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Drumeo</title>
+    <title>Guitareo</title>
 </head>
 <body class="antialiased">
-<h1>Drumeo sales page!</h1>
+<h1>Guitareo home page!</h1>
 </body>
 </html>

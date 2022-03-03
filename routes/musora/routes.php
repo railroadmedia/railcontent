@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Platform Routes
 require('platform/home.php');
 
-Route::domain('{subdomain}.musora.com')->group(function () {
-    Route::get('/', function () {
-        return 'Musora sales route!';
-    });
-});
+// Musora Routes
+require('marketing/homepage.php');
+require('marketing/login.php');
