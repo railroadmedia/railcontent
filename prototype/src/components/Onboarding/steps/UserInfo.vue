@@ -1,4 +1,5 @@
 <script setup>
+import AvatarUpload from '../../AvatarUpload/AvatarUpload.vue'
 import { defineEmits, defineProps } from 'vue'
 const props = defineProps({
     brand: {
@@ -16,7 +17,7 @@ const emit = defineEmits(['onChangeStep', 'onCheckStep'])
 
 <template>
     <div
-        class="tw-h-full tw-w-full tw-items-center tw-justify-center tw-bg-[#000C17]"
+        class="tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-bg-[#000C17]"
     >
         <button
             class="tw-text-white"
@@ -29,5 +30,6 @@ const emit = defineEmits(['onChangeStep', 'onCheckStep'])
         >
             CHANGE STEP
         </button>
+        <AvatarUpload />
     </div>
 </template>

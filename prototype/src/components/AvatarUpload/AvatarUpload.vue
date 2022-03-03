@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue'
+import ImageUploader from '../ImageUploader/ImageUploader.vue'
+
 const props = defineProps({
     brand: {
         type: String,
@@ -12,4 +14,8 @@ const props = defineProps({
 })
 </script>
 
-<template></template>
+<template>
+    <div class="tw-h-[360px] tw-w-[480px]">
+        <ImageUploader />
+    </div>
+</template>
