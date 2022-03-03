@@ -42,6 +42,7 @@ function checkStepToggle(step) {
             :brand="brand"
             v-if="currentStep === 1"
             @changeStep="changeStep"
+            @checkStep="checkStepToggle"
             :steps="steps"
         />
     </ModalRenderer>

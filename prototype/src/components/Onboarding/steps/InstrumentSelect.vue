@@ -9,7 +9,7 @@ const props = defineProps({
         type: Array
     }
 })
-const emit = defineEmits(['changeStep'])
+const emit = defineEmits(['changeStep', 'checkStep'])
 </script>
 
 <template>
@@ -56,6 +56,11 @@ const emit = defineEmits(['changeStep'])
                 SINGING
             </InstrumentCard>
         </div>
-        <ProgressBar :brand="brand" :currentStep="1" :steps="steps" />
+        <ProgressBar
+            :brand="brand"
+            :currentStep="1"
+            :steps="steps"
+            @changeStep="(s) => emit('changeStep', s)"
+        />
     </div>
 </template>

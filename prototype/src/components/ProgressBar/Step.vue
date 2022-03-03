@@ -19,8 +19,12 @@ const props = defineProps({
     },
     currentStep: {
         type: Number
+    },
+    changeStep: {
+        type: Function
     }
 })
+const emit = defineEmits(['navigateToStep'])
 </script>
 
 <template>
@@ -36,7 +40,8 @@ const props = defineProps({
                     ></div>
                     <div
                         v-if="stepType === 'tick'"
-                        :class="`${bgColor[brand]} tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-text-white`"
+                        v-on:click="emit('navigateToStep')"
+                        :class="`${bgColor[brand]} tw- tw-flex tw-h-full tw-w-full tw-cursor-pointer tw-items-center tw-justify-center tw-text-white`"
                     >
                         <CheckIcon class="tw-m-0 tw-h-6 tw-w-6 tw-text-white" />
                     </div>
