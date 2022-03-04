@@ -23,8 +23,8 @@ class ContentInstructorTransformer extends TransformerAbstract
 
         return (new Collection(
             $serializer->serializeToUnderScores(
-                $contentInstructor,
-                $entityManager->getClassMetadata(get_class($contentInstructor))
+                $contentInstructor->getInstructor(),
+                $entityManager->getClassMetadata(get_class($contentInstructor->getInstructor()))
             )
         ))->toArray();
     }
