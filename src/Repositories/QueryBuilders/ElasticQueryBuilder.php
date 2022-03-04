@@ -41,6 +41,7 @@ class ElasticQueryBuilder
         if (is_array(ContentRepository::$availableContentStatues)) {
             $this->must[] = ['terms' => ['status' => ContentRepository::$availableContentStatues]];
         }
+
         return $this;
     }
 
@@ -169,13 +170,13 @@ class ElasticQueryBuilder
 
         $terms = [];
         foreach ($includedFields as $index => $includedFieldData) {
-            $terms[] = ['terms' => [$includedFieldData['name'].'.raw' => [strtolower($includedFieldData['value'])]]];
             $terms[] = ['terms' => [$includedFieldData['name'] => [strtolower($includedFieldData['value'])]]];
+            $terms[] = ['terms' => [$includedFieldData['name'].'.raw' => [strtolower($includedFieldData['value'])]]];
         }
 
         $this->must[] = [
             'bool' => [
-                'should' => $terms,
+                'must' => $terms,
             ],
         ];
 
@@ -228,6 +229,20 @@ class ElasticQueryBuilder
             return $this;
         }
         $this->must[] = ['terms' => ['playlist_ids' => $userPlaylistIds]];
+
+        return $this;
+    }
+
+    /**
+     * @param array $userPlaylistIds
+     * @return $this
+     */
+    public function restrictFollowedContent(array $followedContents)
+    {
+        if (empty($followedContents)) {
+            return $this;
+        }
+        $this->must[] = ['terms' => ['id' => $followedContents]];
 
         return $this;
     }
@@ -315,6 +330,12 @@ class ElasticQueryBuilder
             case 'slug':
                 $this->sort[] = [
                     'slug.raw' => 'asc',
+                ];
+                break;
+
+            case 'title':
+                $this->sort[] = [
+                    'title.raw' => 'asc',
                 ];
                 break;
 
