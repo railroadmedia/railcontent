@@ -37,6 +37,7 @@ class ElasticService
 
         if (!$client->indices()
             ->exists(['index' => 'content'])) {
+
             $params = [
                 'index' => 'content',
                 'body' => [
@@ -64,8 +65,9 @@ class ElasticService
                             'description' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'topic' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'artist' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'instructor' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'bpm' => ['type' => 'text'],
-                            'published_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
+                            'published_on' => ['type' => 'date', "format" => "yyyy-MM-dd HH:mm:ss"],
                             'created_on' => ['type' => 'date', 'format' => 'yyyy-MM-dd HH:mm:ss'],
                             'show_in_new_feed' => ['type' => 'integer'],
                             'all_progress_count' => ['type' => 'integer'],
@@ -119,7 +121,8 @@ class ElasticService
         ?array $requiredContentIdsByState,
         ?array $includedContentsIdsByState,
         array $requiredUserPlaylistIds = [],
-        $searchTerm = null
+        $searchTerm = null,
+        array $followedContents = []
     ) {
         $client = $this->getClient();
 
@@ -133,6 +136,7 @@ class ElasticService
                 ->restrictByParentIds($requiredParentIds)
                 ->restrictBySlugHierarchy($slugHierarchy)
                 ->restrictByPlaylistIds($requiredUserPlaylistIds)
+                ->restrictFollowedContent($followedContents)
                 ->restrictByFields($requiredFields);
         if ($searchTerm) {
             $searchQuery->restrictByTerm(explode(' ', strtolower($searchTerm)));
