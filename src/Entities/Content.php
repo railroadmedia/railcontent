@@ -187,12 +187,6 @@ class Content extends ArrayExpressible
     private $parentContent;
 
     /**
-     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentData", mappedBy="content", cascade={"remove"})
-     * @ORM\JoinColumn(name="id", referencedColumnName="content_id")
-     */
-    protected $data;
-
-    /**
      * @ORM\Column(type="datetime", name="published_on", nullable=true)
      * @var DateTime
      */
@@ -635,6 +629,12 @@ class Content extends ArrayExpressible
             $styles[] = $contentStyle->getStyle();
         }
 
+        $instructors = [];
+
+        foreach ($this->getInstructor() as $contentInstructor) {
+            $instructors[] = $contentInstructor->getInstructor()->getId();
+        }
+
         return [
             'id' => $this->getId(),
             'title' => utf8_encode($this->getTitle()),
@@ -643,12 +643,11 @@ class Content extends ArrayExpressible
             'status' => $this->getStatus(),
             'brand' => $this->getBrand(),
             'style' => $styles,
+            'instructor' => $instructors,
             'content_type' => $this->getType(),
             'published_on' => ($this->getPublishedOn()) ?
-                $this->getPublishedOn()
-                    ->toDateTimeString() : null,
-            'created_on' => $this->getCreatedOn()
-                ->toDateTimeString(),
+                $this->getPublishedOn()->toDateTimeString() : null,
+            'created_on' => $this->getCreatedOn()->toDateTimeString(),
             'topic' => $topics,
             'bpm' => $this->getBpm(),
             'staff_pick_rating' => $this->getStaffPickRating(),
