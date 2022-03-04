@@ -67,6 +67,12 @@ trait ContentFieldsAssociations
      */
     protected $video;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Railroad\Railcontent\Entities\ContentData", mappedBy="content",
+     *     cascade={"persist","remove"})
+     */
+    protected $data = [];
+
      /**
      * @return ArrayCollection
      */

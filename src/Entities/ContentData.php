@@ -49,8 +49,7 @@ class ContentData extends ArrayExpressible
     /**
      * @Gedmo\SortableGroup()
      * @ORM\ManyToOne(targetEntity="Railroad\Railcontent\Entities\Content", inversedBy="data")
-     * @ORM\JoinColumn(name="content_id", referencedColumnName="id")
-     *
+     * @ORM\JoinColumn(referencedColumnName="content_id", referencedColumnName="id")
      */
     private $content;
 
