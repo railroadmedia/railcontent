@@ -15,7 +15,11 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="tw-h-[360px] tw-w-[480px]">
-        <ImageUploader />
+    <div class="">
+        <div
+            class="tw-flex tw-h-[150px] tw-w-[150px] tw-items-center tw-justify-center tw-rounded-full tw-border-[2px] tw-border-[#344858] tw-bg-[#002039]"
+        >
+            T
+        </div>
     </div>
 </template>
