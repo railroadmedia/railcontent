@@ -16,6 +16,7 @@ use Railroad\Railcontent\Entities\Comment;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentData;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Entities\ContentFollows;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\UserContentProgress;
@@ -26,6 +27,7 @@ use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Hydrators\CustomRailcontentHydrator;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
+use Railroad\Railcontent\Repositories\ContentFollowsRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\QueryBuilders\ElasticQueryBuilder;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
@@ -90,6 +92,11 @@ class ContentService
      */
     private $userPermissionRepository;
 
+    /**
+     * @var ContentFollowsRepository
+     */
+    private $contentFollowsRepository;
+
     // all possible content statuses
     const STATUS_DRAFT = 'draft';
     const STATUS_PUBLISHED = 'published';
@@ -110,7 +117,8 @@ class ContentService
         UserProviderInterface $userProvider,
         CustomRailcontentHydrator $resultsHydrator,
         ContentHierarchyService $contentHierarchyService,
-        ElasticService $elasticService
+        ElasticService $elasticService,
+        ContentFollowsRepository $contentFollowsRepository
     ) {
         $this->entityManager = $entityManager;
         $this->userProvider = $userProvider;
@@ -122,6 +130,7 @@ class ContentService
         $this->commentRepository = $this->entityManager->getRepository(Comment::class);
         $this->userContentProgressRepository = $this->entityManager->getRepository(UserContentProgress::class);
         $this->userPermissionRepository = $this->entityManager->getRepository(UserPermission::class);
+        $this->contentFollowsRepository = $this->entityManager->getRepository(ContentFollows::class);
         $this->contentHierarchyService = $contentHierarchyService;
         $this->elasticService = $elasticService;
 
@@ -141,8 +150,8 @@ class ContentService
         if ($decorated) {
             return array_first($this->resultsHydrator->hydrate([$results], $this->entityManager));
         }
-        return $results;
 
+        return $results;
     }
 
     /** Call the get by ids method from repository
@@ -155,7 +164,7 @@ class ContentService
         $unorderedContentRows =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
                 ->setParameter('ids', $ids)
                 ->getQuery()
                 ->setCacheable(true)
@@ -185,7 +194,7 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.type = :type')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.type = :type')
                 ->setParameter('type', $type)
                 ->getQuery()
                 ->setCacheable(true)
@@ -213,12 +222,11 @@ class ContentService
         $fieldType = '',
         $fieldComparisonOperator = '='
     ) {
-
         $qb =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types)
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.status = :status')
+                ->whereIn(config('railcontent.table_prefix').'content'.'.type', $types)
+                ->andWhere(config('railcontent.table_prefix').'content'.'.status = :status')
                 ->setParameter('status', $status);
         if (in_array(
             $fieldKey,
@@ -226,13 +234,7 @@ class ContentService
                 ->getFieldNames()
         )) {
             $qb->andWhere(
-                config('railcontent.table_prefix') .
-                'content' .
-                '.' .
-                $fieldKey .
-                ' ' .
-                $fieldComparisonOperator .
-                ' (:value)'
+                config('railcontent.table_prefix').'content'.'.'.$fieldKey.' '.$fieldComparisonOperator.' (:value)'
             )
                 ->setParameter('value', $fieldValue);
         } else {
@@ -242,14 +244,14 @@ class ContentService
                     ->getAssociationNames()
             )) {
                 $qb->join(
-                    config('railcontent.table_prefix') .
-                    'content' .
-                    '.' .
+                    config('railcontent.table_prefix').
+                    'content'.
+                    '.'.
                     $this->entityManager->getClassMetadata(Content::class)
                         ->getFieldName($fieldKey),
                     'p'
                 )
-                    ->andWhere('p ' . $fieldComparisonOperator . ' (:value)')
+                    ->andWhere('p '.$fieldComparisonOperator.' (:value)')
                     ->setParameter('value', $fieldValue);
             }
         }
@@ -279,22 +281,29 @@ class ContentService
         $publishedOnValue,
         $publishedOnComparisonOperator = '=',
         $orderByColumn = 'publishedOn',
-        $orderByDirection = 'desc'
+        $orderByDirection = 'desc',
+        $requiredInstructors = []
     ) {
-        $alias = config('railcontent.table_prefix') . 'content';
-        $results =
+        $alias = config('railcontent.table_prefix').'content';
+        $query =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->andWhere($alias . '.type IN (:types)')
-                ->andWhere($alias . '.status = :status')
+                ->andWhere($alias.'.type IN (:types)')
+                ->andWhere($alias.'.status = :status')
                 ->andWhere(
-                    $alias . '.publishedOn ' . $publishedOnComparisonOperator . ' :publishedOn'
+                    $alias.'.publishedOn '.$publishedOnComparisonOperator.' :publishedOn'
                 )
                 ->orderByColumn($alias, $orderByColumn, $orderByDirection)
                 ->setParameter('status', $status)
                 ->setParameter('publishedOn', $publishedOnValue)
-                ->setParameter('types', $types)
-                ->getQuery()
+                ->setParameter('types', $types);
+
+        if (!empty($requiredInstructors)) {
+            $query->includeByFields($requiredInstructors);
+        }
+
+        $results =
+            $query->getQuery()
                 ->setCacheable(true)
                 ->setCacheRegion('pull')
                 ->getResult();
@@ -313,8 +322,8 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.slug = :slug')
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.type = :type')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.slug = :slug')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.type = :type')
                 ->setParameter('slug', $slug)
                 ->setParameter('type', $type)
                 ->getQuery()
@@ -337,9 +346,9 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.slug = :slug')
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.type = :type')
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.user = :user')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.slug = :slug')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.type = :type')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.user = :user')
                 ->setParameter('slug', $slug)
                 ->setParameter('type', $type)
                 ->setParameter('user', $userId)
@@ -365,6 +374,7 @@ class ContentService
         if ($decorated) {
             return $this->resultsHydrator->hydrate($results, $this->entityManager);
         }
+
         return $results;
     }
 
@@ -387,7 +397,7 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
+                ->join(config('railcontent.table_prefix').'content'.'.parent', 'p')
                 ->andWhere('p.parent = :parentId')
                 ->setParameter('parentId', $parentId)
                 ->orderByColumn('p', $orderBy, $orderByDirection)
@@ -414,12 +424,11 @@ class ContentService
         $orderBy = 'childPosition',
         $orderByDirection = 'asc'
     ) {
-
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
-                ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types)
+                ->join(config('railcontent.table_prefix').'content'.'.parent', 'p')
+                ->whereIn(config('railcontent.table_prefix').'content'.'.type', $types)
                 ->andWhere('p.parent = :parentId')
                 ->setParameter('parentId', $parentId)
                 ->orderByColumn('p', $orderBy, $orderByDirection)
@@ -449,12 +458,11 @@ class ContentService
         $orderBy = 'childPosition',
         $orderByDirection = 'asc'
     ) {
-
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
-                ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types)
+                ->join(config('railcontent.table_prefix').'content'.'.parent', 'p')
+                ->whereIn(config('railcontent.table_prefix').'content'.'.type', $types)
                 ->andWhere('p.parent = :parentId')
                 ->setParameter('parentId', $parentId)
                 ->orderByColumn('p', $orderBy, $orderByDirection)
@@ -482,11 +490,11 @@ class ContentService
 
         return $qb->select(
             $qb->expr()
-                ->count(config('railcontent.table_prefix') . 'content')
+                ->count(config('railcontent.table_prefix').'content')
         )
             ->restrictByUserAccess()
-            ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
-            ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types)
+            ->join(config('railcontent.table_prefix').'content'.'.parent', 'p')
+            ->whereIn(config('railcontent.table_prefix').'content'.'.type', $types)
             ->andWhere('p.parent = :parentId')
             ->setParameter('parentId', $parentId)
             ->getQuery()
@@ -505,7 +513,7 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
+                ->join(config('railcontent.table_prefix').'content'.'.parent', 'p')
                 ->whereIn('p.parent', $parentIds)
                 ->orderByColumn('p', $orderBy, $orderByDirection)
                 ->getQuery()
@@ -527,9 +535,9 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(config('railcontent.table_prefix') . 'content' . '.child', 'c')
+                ->join(config('railcontent.table_prefix').'content'.'.child', 'c')
                 ->andWhere('c.child = :childId')
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.type = :type')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.type = :type')
                 ->setParameter('type', $type)
                 ->setParameter('childId', $childId)
                 ->getQuery()
@@ -554,9 +562,9 @@ class ContentService
             $this->contentRepository->build()
                 ->addSelect('c')
                 ->restrictByUserAccess()
-                ->join(config('railcontent.table_prefix') . 'content' . '.child', 'c')
+                ->join(config('railcontent.table_prefix').'content'.'.child', 'c')
                 ->whereIn('c.child', $childIds)
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.type = :type')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.type = :type')
                 ->setParameter('type', $type)
                 ->getQuery()
                 ->setCacheable(true)
@@ -591,9 +599,9 @@ class ContentService
             $this->contentRepository->build()
                 ->addSelect('c')
                 ->restrictByUserAccess()
-                ->join(config('railcontent.table_prefix') . 'content' . '.child', 'c')
+                ->join(config('railcontent.table_prefix').'content'.'.child', 'c')
                 ->whereIn('c.child', $childIds)
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.type = :type')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.type = :type')
                 ->setParameter('type', $type)
                 ->getQuery()
                 ->setCacheable(true)
@@ -624,9 +632,9 @@ class ContentService
         $results =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(config('railcontent.table_prefix') . 'content' . '.child', 'c')
+                ->join(config('railcontent.table_prefix').'content'.'.child', 'c')
                 ->whereIn('c.child', [$childId])
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:type)')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.type IN (:type)')
                 ->setParameter('type', $types)
                 ->getQuery()
                 ->setCacheable(true)
@@ -636,6 +644,7 @@ class ContentService
         if ($decorated) {
             return $this->resultsHydrator->hydrate($results, $this->entityManager);
         }
+
         return $results;
     }
 
@@ -657,13 +666,13 @@ class ContentService
                 ->createQueryBuilder($alias);
 
         $qb->join(
-            $alias . '.content',
-            config('railcontent.table_prefix') . 'content'
+            $alias.'.content',
+            config('railcontent.table_prefix').'content'
         );
 
-        $qb->where($alias . '.user = :userId')
-            ->andWhere($alias . '.state = :state')
-            ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
+        $qb->where($alias.'.user = :userId')
+            ->andWhere($alias.'.state = :state')
+            ->andWhere(config('railcontent.table_prefix').'content'.'.type IN (:types)')
             ->setParameter('userId', $userId)
             ->setParameter('state', $state)
             ->setParameter('types', $type);
@@ -702,12 +711,12 @@ class ContentService
                 ->createQueryBuilder($alias);
         $qb->paginate($limit, $skip)
             ->join(
-                $alias . '.content',
-                config('railcontent.table_prefix') . 'content'
+                $alias.'.content',
+                config('railcontent.table_prefix').'content'
             );
-        $qb->where($alias . '.user = :userId')
-            ->andWhere($alias . '.state = :state')
-            ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
+        $qb->where($alias.'.user = :userId')
+            ->andWhere($alias.'.state = :state')
+            ->andWhere(config('railcontent.table_prefix').'content'.'.type IN (:types)')
             ->setParameter('userId', $userId)
             ->setParameter('state', $state)
             ->setParameter('types', $types);
@@ -744,11 +753,11 @@ class ContentService
 
         $qb =
             $this->contentRepository->build()
-                ->join(config('railcontent.table_prefix') . 'content' . '.userProgress', $alias)
+                ->join(config('railcontent.table_prefix').'content'.'.userProgress', $alias)
                 ->restrictByUserAccess()
-                ->andWhere($alias . '.user = :userId')
-                ->andWhere($alias . '.state = :state')
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)');
+                ->andWhere($alias.'.user = :userId')
+                ->andWhere($alias.'.state = :state')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.type IN (:types)');
 
         if ($requiredFilters) {
             $qb->restrictByFields(
@@ -771,13 +780,11 @@ class ContentService
                 ->getResult();
         $hydratedResults = $this->resultsHydrator->hydrate($rows, $this->entityManager);
 
-        $results = new ContentFilterResultsEntity(
-            [
-                'qb' => $qb,
-                'results' => $hydratedResults,
-                'filter_options' => $this->contentRepository->getFilterFields(),
-            ]
-        );
+        $results = new ContentFilterResultsEntity([
+                                                      'qb' => $qb,
+                                                      'results' => $hydratedResults,
+                                                      'filter_options' => $this->contentRepository->getFilterFields(),
+                                                  ]);
 
         return $results;
     }
@@ -800,14 +807,14 @@ class ContentService
         $qb =
             $this->entityManager->getRepository(UserContentProgress::class)
                 ->createQueryBuilder($alias);
-        $qb->select('count(' . $alias . '.id)')
+        $qb->select('count('.$alias.'.id)')
             ->join(
-                $alias . '.content',
-                config('railcontent.table_prefix') . 'content'
+                $alias.'.content',
+                config('railcontent.table_prefix').'content'
             );
-        $qb->where($alias . '.user = :userId')
-            ->andWhere($alias . '.state = :state')
-            ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
+        $qb->where($alias.'.user = :userId')
+            ->andWhere($alias.'.state = :state')
+            ->andWhere(config('railcontent.table_prefix').'content'.'.type IN (:types)')
             ->setParameter('userId', $userId)
             ->setParameter('state', $state)
             ->setParameter('types', $types);
@@ -834,7 +841,6 @@ class ContentService
         $orderColumn = 'publishedOn',
         $orderDirection = 'desc'
     ) {
-
         return $this->contentRepository->getTypeNeighbouringSiblings(
             $type,
             $columnName,
@@ -860,14 +866,14 @@ class ContentService
         $qb =
             $this->entityManager->getRepository(UserContentProgress::class)
                 ->createQueryBuilder($alias);
-        $qb->select('count(' . $alias . '.id)')
+        $qb->select('count('.$alias.'.id)')
             ->join(
-                $alias . '.content',
-                config('railcontent.table_prefix') . 'content'
+                $alias.'.content',
+                config('railcontent.table_prefix').'content'
             );
-        $qb->where($alias . '.user = :userId')
-            ->andWhere($alias . '.state = :state')
-            ->andWhere(config('railcontent.table_prefix') . 'content' . '.type IN (:types)')
+        $qb->where($alias.'.user = :userId')
+            ->andWhere($alias.'.state = :state')
+            ->andWhere(config('railcontent.table_prefix').'content'.'.type IN (:types)')
             ->setParameter('userId', $userId)
             ->setParameter('state', $state)
             ->setParameter('types', $types);
@@ -890,13 +896,13 @@ class ContentService
         $qb =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->join(config('railcontent.table_prefix') . 'content' . '.child', 'c')
+                ->join(config('railcontent.table_prefix').'content'.'.child', 'c')
                 ->whereIn('c.child', $childContentIds)
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.user = :user')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.user = :user')
                 ->setParameter('user', $userId);
 
         if ($slug) {
-            $qb->andWhere(config('railcontent.table_prefix') . 'content' . '.slug = :slug')
+            $qb->andWhere(config('railcontent.table_prefix').'content'.'.slug = :slug')
                 ->setParameter('slug', $slug);
         }
         $results =
@@ -939,9 +945,9 @@ class ContentService
         $pullFilterFields = true,
         $getFutureContentOnly = false,
         $pullPagination = true,
-        array $requiredUserPlaylistIds = []
+        array $requiredUserPlaylistIds = [],
+        $getFollowedContentOnly = false
     ) {
-
         $results = null;
 
         if ($limit == 'null') {
@@ -956,7 +962,8 @@ class ContentService
             $slugHierarchy,
             $requiredParentIds,
             $requiredUserPlaylistIds,
-            $getFutureContentOnly
+            $getFutureContentOnly,
+            $getFollowedContentOnly
         );
 
         foreach ($requiredFields as $requiredField) {
@@ -1020,6 +1027,23 @@ class ContentService
                 foreach ($includedContentsByState as $progress) {
                     $includedContentsIdsByState[] =
                         $progress->getContent()
+                            ->getId();
+                }
+            }
+            $followedContents = [];
+            if ($getFollowedContentOnly) {
+                $alias = 'cf';
+                $qb =
+                    $this->contentFollowsRepository->createQueryBuilder($alias)
+                        ->where($alias.'.user = :user')
+                        ->setParameter('user', auth()->id());
+                $contentFollows =
+                    $qb->getQuery()
+                        ->getResult('Railcontent');
+
+                foreach ($contentFollows as $contentFollow) {
+                    $followedContents[] =
+                        $contentFollow->getContent()
                             ->getId();
                 }
             }
@@ -1090,7 +1114,9 @@ class ContentService
                 $filter->includedFields,
                 $requiredContentIdsByState ?? null,
                 $includedContentsIdsByState ?? null,
-                $requiredUserPlaylistIds
+                $requiredUserPlaylistIds,
+                null,
+                $followedContents
             );
 
             $totalResults = $elasticData['hits']['total']['value'];
@@ -1102,7 +1128,7 @@ class ContentService
 
             $qbIds =
                 $this->contentRepository->build()
-                    ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
+                    ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
                     ->setParameter('ids', $ids);
 
             $results =
@@ -1143,9 +1169,9 @@ class ContentService
                 if (array_key_exists('instructors', $filterOptions)) {
                     $instructors =
                         $this->contentRepository->build()
-                            ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
+                            ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
                             ->setParameter('ids', $filterOptions['instructors'])
-                            ->orderBy(config('railcontent.table_prefix') . 'content.slug', 'asc')
+                            ->orderBy(config('railcontent.table_prefix').'content.slug', 'asc')
                             ->getQuery()
                             ->setCacheable(true)
                             ->setCacheRegion('pull')
@@ -1157,7 +1183,6 @@ class ContentService
 
                 $filters = $filterOptions;
             }
-
         } else {
             $qb = $this->contentRepository->retrieveFilter();
 
@@ -1171,23 +1196,21 @@ class ContentService
             $filters = $pullFilterFields ? $this->contentRepository->getFilterFields() : [];
         }
 
-        $results = new ContentFilterResultsEntity(
-            [
-                'qb' => $qb,
-                'results' => $data,
-                'filter_options' => $filters,
-                'active_filters' => $filter->getActiveFilters(),
-                'total_results' => $totalResults,
-                'custom_pagination' => [
-                    'total' => $totalResults,
-                    'count' => count($data),
-                    'per_page' => $limit,
-                    'current_page' => $page,
-                    'total_pages' => ceil($totalResults / $limit),
-                    'links' => [],
-                ],
-            ]
-        );
+        $results = new ContentFilterResultsEntity([
+                                                      'qb' => $qb,
+                                                      'results' => $data,
+                                                      'filter_options' => $filters,
+                                                      'active_filters' => $filter->getActiveFilters(),
+                                                      'total_results' => $totalResults,
+                                                      'custom_pagination' => [
+                                                          'total' => $totalResults,
+                                                          'count' => count($data),
+                                                          'per_page' => $limit,
+                                                          'current_page' => $page,
+                                                          'total_pages' => ceil($totalResults / $limit),
+                                                          'links' => [],
+                                                      ],
+                                                  ]);
 
         return $results;
     }
@@ -1409,11 +1432,11 @@ class ContentService
                     'WITH',
                     'railcontent_content.id = hierarchy.child'
                 )
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.userId = :userId')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.userId = :userId')
                 ->andWhere('hierarchy.child IN (:childIds)');
 
         if ($singlePlaylistSlug) {
-            $userPlaylistContents->andWhere(config('railcontent.table_prefix') . 'content' . '.slug = :slug')
+            $userPlaylistContents->andWhere(config('railcontent.table_prefix').'content'.'.slug = :slug')
                 ->setParameter('slug', $singlePlaylistSlug);
         }
 
@@ -1515,13 +1538,13 @@ class ContentService
         $qb =
             $this->contentRepository->build()
                 ->restrictByUserAccess()
-                ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $contentTypes);
+                ->whereIn(config('railcontent.table_prefix').'content'.'.type', $contentTypes);
         if (in_array(
             $contentFieldKey,
             $this->entityManager->getClassMetadata(Content::class)
                 ->getFieldNames()
         )) {
-            $qb->andWhere(config('railcontent.table_prefix') . 'content' . '.' . $contentFieldKey . ' IN (:value)')
+            $qb->andWhere(config('railcontent.table_prefix').'content'.'.'.$contentFieldKey.' IN (:value)')
                 ->setParameter('value', $contentFieldValues);
         } else {
             if (in_array(
@@ -1530,9 +1553,9 @@ class ContentService
                     ->getAssociationNames()
             )) {
                 $qb->join(
-                    config('railcontent.table_prefix') .
-                    'content' .
-                    '.' .
+                    config('railcontent.table_prefix').
+                    'content'.
+                    '.'.
                     $this->entityManager->getClassMetadata(Content::class)
                         ->getFieldName($contentFieldKey),
                     'p'
@@ -1559,25 +1582,19 @@ class ContentService
      */
     private function saveContentFields($data, Content $content)
     {
-
         if (array_key_exists('fields', $data['data']['attributes'])) {
-
             $fields = $data['data']['attributes']['fields'];
 
             foreach ($fields as $field) {
-
                 if (strpos($field['key'], '_') !== false || strpos($field['key'], '-') !== false) {
                     $field['key'] = camel_case($field['key']);
                 }
 
                 if ($this->isEntityAttribute($field, Content::class)) {
-
-                    $setterName = Inflector::camelize('set' . ucwords($field['key']));
+                    $setterName = Inflector::camelize('set'.ucwords($field['key']));
 
                     call_user_func([$content, $setterName], $field['value']);
-
                 } elseif ($this->isEntityAssociation($field, Content::class)) {
-
                     $associationMappings = $this->getAssociationMappings(get_class($content), $field);
 
                     $entityName = $associationMappings['targetEntity'];
@@ -1585,42 +1602,36 @@ class ContentService
                     $fieldEntity = new $entityName();
 
                     if ($this->isEntityAttribute($field, $entityName)) {
-
-                        $setterName = Inflector::camelize('set' . ucwords($associationMappings['fieldName']));
+                        $setterName = Inflector::camelize('set'.ucwords($associationMappings['fieldName']));
 
                         call_user_func([$fieldEntity, $setterName], $field['value']);
-
                     } elseif ($this->isEntityAssociation($field, $entityName)) {
-
                         $associationMappings = $this->getAssociationMappings($entityName, $field);
 
                         $associatedEntity =
                             $this->entityManager->getRepository($associationMappings['targetEntity'])
                                 ->find($field['value']);
 
-                        $addMethod = Inflector::camelize('add' . ucwords($field['key']));
+                        $addMethod = Inflector::camelize('add'.ucwords($field['key']));
 
                         $fieldEntity->setContent($content);
 
                         call_user_func([$fieldEntity, $addMethod], $associatedEntity);
                     }
 
-                    $getterName = $getFields = Inflector::camelize('get' . ucwords($associationMappings['fieldName']));
-                    $removeField = Inflector::camelize('remove' . ucwords($associationMappings['fieldName']));
+                    $getterName = $getFields = Inflector::camelize('get'.ucwords($associationMappings['fieldName']));
+                    $removeField = Inflector::camelize('remove'.ucwords($associationMappings['fieldName']));
 
                     $oldFields = call_user_func([$content, $getterName]);
 
                     if ($this->entityManager->contains($content)) {
-
                         foreach ($oldFields as $oldField) {
-
                             //check if field was deleted
                             $oldFieldValue = call_user_func([$oldField, $getterName]);
                             if (!is_string($oldFieldValue)) {
                                 $oldFieldValue = $oldFieldValue->getId();
                             }
                             if (!in_array($oldFieldValue, array_column($fields, 'value'))) {
-
                                 call_user_func([$content, $removeField], $oldField);
 
                                 $this->entityManager->remove($oldField);
@@ -1643,7 +1654,7 @@ class ContentService
 
                     $fieldEntity->setContent($content);
 
-                    $addMethod = Inflector::camelize('add' . ucwords($associationMappings['fieldName']));
+                    $addMethod = Inflector::camelize('add'.ucwords($associationMappings['fieldName']));
 
                     call_user_func([$content, $addMethod], $fieldEntity);
                 }
@@ -1697,21 +1708,20 @@ class ContentService
      */
     public function countByTypes($types, $groupBy)
     {
-
         $qb = $this->contentRepository->build();
 
         $qb->select(
-            config('railcontent.table_prefix') .
-            'content' .
-            '.type, count(' .
-            config('railcontent.table_prefix') .
-            'content' .
+            config('railcontent.table_prefix').
+            'content'.
+            '.type, count('.
+            config('railcontent.table_prefix').
+            'content'.
             '.id) as nr'
         )
-            ->whereIn(config('railcontent.table_prefix') . 'content' . '.type', $types);
+            ->whereIn(config('railcontent.table_prefix').'content'.'.type', $types);
 
         if (!empty($groupBy)) {
-            $qb->groupBy(config('railcontent.table_prefix') . 'content' . '.' . $groupBy);
+            $qb->groupBy(config('railcontent.table_prefix').'content'.'.'.$groupBy);
         }
 
         $results =
@@ -1733,7 +1743,7 @@ class ContentService
         $contentTotalXp = [];
         $children =
             $this->contentRepository->build()
-                ->join(config('railcontent.table_prefix') . 'content' . '.parent', 'p')
+                ->join(config('railcontent.table_prefix').'content'.'.parent', 'p')
                 ->groupBy('p.id')
                 ->andWhere('p.parent IN (:parentIds)')
                 ->setParameter('parentIds', $contentIds)
@@ -1743,7 +1753,6 @@ class ContentService
                 ->getResult();
 
         foreach ($contentIds as $contentId) {
-
             $childrenTotalXP[$contentId] = 0;
         }
 
@@ -1761,7 +1770,7 @@ class ContentService
 
         $parents =
             $this->contentRepository->build()
-                ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
+                ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
                 ->setParameter('ids', $contentIds)
                 ->getQuery()
                 ->setCacheable(true)
@@ -1801,6 +1810,7 @@ class ContentService
         } else {
             $defaultXp = $defaultBasedOnDifficulty;
         }
+
         return $defaultXp;
     }
 
@@ -1815,7 +1825,7 @@ class ContentService
         if (array_key_exists('instructors', $filterOptions)) {
             $instructors =
                 $this->contentRepository->build()
-                    ->andWhere(config('railcontent.table_prefix') . 'content' . '.id IN (:ids)')
+                    ->andWhere(config('railcontent.table_prefix').'content'.'.id IN (:ids)')
                     ->setParameter('ids', $filterOptions['instructors'])
                     ->getQuery()
                     ->setCacheable(true)
@@ -1886,7 +1896,7 @@ class ContentService
         ContentRepository::$pullFutureContent = true;
 
         if ($includeSemesterPackLessons) {
-            $semesterPacksToGet = config('railcontent.semester-pack-schedule-labels.' . $brand, []);
+            $semesterPacksToGet = config('railcontent.semester-pack-schedule-labels.'.$brand, []);
         }
 
         if (empty($liveEventsTypes) && empty($contentReleasesTypes) && empty($semesterPacksToGet)) {
@@ -1947,7 +1957,7 @@ class ContentService
             foreach ($semesterPackLessons as $lesson) {
                 foreach ($idsOfChildrenOfSelectSemesterPacks ?? [] as $parentSlug => $setOfIds) {
                     if (in_array($lesson['id'], $setOfIds)) {
-                        $labels = config('railcontent.semester-pack-schedule-labels.' . $brand);
+                        $labels = config('railcontent.semester-pack-schedule-labels.'.$brand);
                         if (array_key_exists($parentSlug, $labels)) {
                             $result =
                                 $this->getByChildIdWhereParentTypeIn($lesson['id'], ['semester-pack'])
@@ -2004,10 +2014,7 @@ class ContentService
             ];
         }
 
-        $setWithThis = array_merge(
-            ContentRepository::$availableContentStatues,
-            [ContentService::STATUS_DRAFT]
-        );
+        $setWithThis = array_merge(ContentRepository::$availableContentStatues, [ContentService::STATUS_DRAFT]);
 
         // include drafts because packs might not be published, but we still want to get their *lessons*
         ContentRepository::$availableContentStatues = $setWithThis;
