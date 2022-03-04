@@ -172,4 +172,48 @@ class ContentFollowJsonControllerTest extends RailcontentTestCase
             $this->assertEquals($content[0]->getId(), $responseRaw['id']);
         }
     }
+
+    public function test_only_followed_content()
+    {
+        $content = $this->fakeContent(
+            5,
+            [
+                'type' => $this->faker->randomElement(config('railcontent.commentable_content_types')),
+                'status' => $this->faker->randomElement(ContentRepository::$availableContentStatues),
+                'brand' => config('railcontent.brand'),
+            ]
+        );
+
+        $user = $this->createAndLogInNewUser();
+
+        for($i = 0; $i< 2; $i++) {
+            $contentLikes[$i] = $this->fakeUserContentFollow(
+                [
+                    'content_id' => $content[$i]->getId(),
+                    'user_id' => $user
+                ]
+            );
+        }
+
+        sleep(1);
+
+        $response = $this->call('GET', 'railcontent/content', [
+            'page' => 1,
+            'limit' => 10,
+            'statues' => ['published'],
+            'sort' => 'id',
+            'included_types' => [$content[0]->getType()],
+            'only_subscribed' => true
+        ]);
+
+        $response->assertStatus(200);
+
+        $responseContent = $response->decodeResponseJson('data');
+
+        $this->assertEquals(2, count($responseContent));
+
+        foreach ($responseContent as $index=>$responseRaw) {
+            $this->assertEquals($content[$index]->getId(), $responseRaw['id']);
+        }
+    }
 }
