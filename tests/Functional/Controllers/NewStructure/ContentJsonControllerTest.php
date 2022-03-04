@@ -732,12 +732,12 @@ class ContentJsonControllerTest extends RailcontentTestCase
         sleep(1);
 
         $response = $this->call('GET', 'railcontent/content', [
-                                         'page' => $page,
-                                         'limit' => $limit,
-                                         'sort' => 'id',
-                                         'included_types' => $types,
-                                         'required_fields' => $filter,
-                                     ]);
+            'page' => $page,
+            'limit' => $limit,
+            'sort' => 'id',
+            'included_types' => $types,
+            'required_fields' => $filter,
+        ]);
 
         $responseContent = $response->decodeResponseJson('data');
 
@@ -845,7 +845,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $this->assertArrayHasKey('activeFilters', $response->decodeResponseJson('meta'));
         $this->assertArrayHasKey('difficulty', $response->decodeResponseJson('meta')['activeFilters']);
- }
+    }
 
     public function test_getByParentId_when_parentId_not_exist()
     {
@@ -1045,10 +1045,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
                                                             ->addMonth(1),
                                                     ]);
 
-        $response =
-            $this->call('GET',
-                        'railcontent/content/get-by-ids',
-                        ['ids' => $content2[0]->getId().','.$content1[0]->getId()]);
+        $response = $this->call(
+            'GET',
+            'railcontent/content/get-by-ids',
+            ['ids' => $content2[0]->getId().','.$content1[0]->getId()]
+        );
         $results = $response->decodeResponseJson('data');
 
         $this->assertEquals(1, count($results));
@@ -1080,10 +1081,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
                                           ->subMonth(1),
                                   ]);
 
-        $response =
-            $this->call('GET',
-                        'railcontent/content/get-by-ids',
-                        ['ids' => $contents[0]->getId().','.$contents[1]->getId()]);
+        $response = $this->call(
+            'GET',
+            'railcontent/content/get-by-ids',
+            ['ids' => $contents[0]->getId().','.$contents[1]->getId()]
+        );
 
         $this->assertEquals(1, count($response->decodeResponseJson('data')));
         $this->assertEquals($contents[1]->getId(), $response->decodeResponseJson('data')[0]['id']);
@@ -1136,7 +1138,6 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $responseContent = $response->decodeResponseJson('data')[0];
 
         $this->assertEquals($content[0]->getId(), $responseContent['id']);
-        $this->assertArrayHasKey('data', $responseContent['relationships']);
         $this->assertArrayHasKey('instructor', $responseContent['relationships']);
         $this->assertArrayHasKey('topic', $responseContent['relationships']);
     }
@@ -1545,10 +1546,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call('DELETE', 'railcontent/content/'.$id);
 
-        $secondRequest =
-            $this->call('GET',
-                        'railcontent/content/get-by-ids',
-                        ['ids' => $contents[2]->getId().','.$id.','.$contents[5]->getId()]);
+        $secondRequest = $this->call(
+            'GET',
+            'railcontent/content/get-by-ids',
+            ['ids' => $contents[2]->getId().','.$id.','.$contents[5]->getId()]
+        );
 
         foreach ($secondRequest->decodeResponseJson('data') as $contentData) {
             $this->assertNotEquals(2, $contentData['id']);
@@ -1650,10 +1652,11 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $response = $this->call('DELETE', 'railcontent/soft/content/'.$id);
 
-        $secondRequest =
-            $this->call('GET',
-                        'railcontent/content/get-by-ids',
-                        ['ids' => $contents[2]->getId().','.$id.','.$contents[5]->getId()]);
+        $secondRequest = $this->call(
+            'GET',
+            'railcontent/content/get-by-ids',
+            ['ids' => $contents[2]->getId().','.$id.','.$contents[5]->getId()]
+        );
 
         $this->assertEquals(2, count($secondRequest->decodeResponseJson('data')));
     }
@@ -1880,15 +1883,15 @@ class ContentJsonControllerTest extends RailcontentTestCase
         $expectedResults = [];
         for ($i = 0; $i < 20; $i++) {
             $contents[$i] = $this->fakeContent(1, [
-                                                    'difficulty' => 1,
-                                                    'type' => 'course',
-                                                    'status' => 'published',
-                                                    'language' => $this->faker->word,
-                                                    'publishedOn' => Carbon::now()
-                                                        ->subDays($i),
-                                                    'createdOn' => Carbon::now()
-                                                        ->subWeek($i),
-                                                ])[0];
+                'difficulty' => 1,
+                'type' => 'course',
+                'status' => 'published',
+                'language' => $this->faker->word,
+                'publishedOn' => Carbon::now()
+                    ->subDays($i),
+                'createdOn' => Carbon::now()
+                    ->subWeek($i),
+            ])[0];
             if (in_array($i, [1, 4, 5])) {
                 $expectedResults[] = $contents[$i];
                 $this->fakeUserContentProgress([
@@ -1949,17 +1952,139 @@ class ContentJsonControllerTest extends RailcontentTestCase
         sleep(1);
 
         $response = $this->call('GET', 'railcontent/content', [
-                                         'page' => $page,
-                                         'limit' => $limit,
-                                         'sort' => 'id',
-                                         'included_types' => $types,
-                                         'required_fields' => ['is_coach,1'],
-                                     ]);
+            'page' => $page,
+            'limit' => $limit,
+            'sort' => 'id',
+            'included_types' => $types,
+            'required_fields' => ['is_coach,1'],
+        ]);
 
         $responseContent = $response->decodeResponseJson('data');
 
         foreach ($responseContent as $item) {
             $this->assertEquals(1, $item['attributes']['isCoach']);
         }
+    }
+
+    public function test_pull_coach_lessons()
+    {
+        $statues = ['published'];
+        $types = ['course'];
+        $page = 1;
+        $limit = 5;
+
+        $contents = $this->fakeContent(2, [
+            'difficulty' => 1,
+            'type' => 'course',
+            'status' => 'published',
+            'brand' => config('railcontent.brand'),
+        ]);
+
+        $futureContent = $this->fakeContent(1, [
+            'difficulty' => 1,
+            'type' => 'course',
+            'status' => 'published',
+            'brand' => config('railcontent.brand'),
+            'publishedOn' => Carbon::now()
+                ->addDay(20),
+        ]);
+
+        $futureContentId = $futureContent[0]->getId();
+
+        $instructor = $this->fakeContent(1, [
+            'type' => 'instructor',
+            'status' => 'published',
+            'slug' => $this->faker->name,
+            'brand' => config('railcontent.brand'),
+            'difficulty' => null,
+        ]);
+        sleep(1);
+        foreach ($contents as $content) {
+            $this->fakeContentInstructor([
+                                             'content_id' => $content->getId(),
+                                             'instructor_id' => $instructor[0]->getId(),
+                                         ]);
+        }
+
+        $this->fakeContentInstructor([
+                                         'content_id' => $futureContentId,
+                                         'instructor_id' => $instructor[0]->getId(),
+                                     ], true);
+
+        sleep(1);
+
+        $response = $this->call('GET', 'railcontent/content?include_future_content', [
+            'page' => $page,
+            'limit' => $limit,
+            'statues' => $statues,
+            'sort' => 'id',
+            'included_types' => $types,
+            'included_fields' => [
+                'instructor,'.$instructor[0]->getId(),
+            ],
+        ]);
+
+        $responseContent = $response->decodeResponseJson('data');
+
+        foreach ($responseContent as $item) {
+            $this->assertEquals('course', $item['attributes']['type']);
+            $this->assertEquals($instructor[0]->getId(), $item['relationships']['instructor']['data'][0]['id']);
+        }
+        $this->assertEquals(
+            (count($contents) + count($futureContent)),
+            $response->decodeResponseJson('meta')['pagination']['total']
+        );
+    }
+
+    public function test_sort_coach_lessons_by_title()
+    {
+        $statues = ['published'];
+        $types = ['course'];
+        $page = 1;
+        $limit = 5;
+
+        for($i=0; $i<2; $i++) {
+            $contents[$i] = $this->fakeContent(1, [
+                'difficulty' => 1,
+                'type' => 'course',
+                'status' => 'published',
+                'brand' => config('railcontent.brand'),
+                'title' => ($i == 0)?'Test_z':'Test_a',
+                'createdOn' => Carbon::now()->subDays(5)
+            ]);
+        }
+
+        $instructor = $this->fakeContent(1, [
+            'type' => 'instructor',
+            'status' => 'published',
+            'slug' => $this->faker->name,
+            'brand' => config('railcontent.brand'),
+            'difficulty' => null,
+        ]);
+
+        foreach ($contents as $content) {
+            $this->fakeContentInstructor([
+                                             'content_id' => $content[0]->getId(),
+                                             'instructor_id' => $instructor[0]->getId(),
+                                         ]);
+        }
+
+        sleep(1);
+
+        $response = $this->call('GET', 'railcontent/content', [
+            'page' => $page,
+            'limit' => $limit,
+            'statues' => $statues,
+            'sort' => 'title',
+            'included_types' => $types,
+            'included_fields' => [
+                'instructor,'.$instructor[0]->getId(),
+            ],
+        ]);
+
+        $responseContent = $response->decodeResponseJson('data');
+
+        $this->assertEquals('Test_a', $responseContent[0]['attributes']['title']);
+        $this->assertEquals('Test_z', $responseContent[1]['attributes']['title']);
     }
 }
