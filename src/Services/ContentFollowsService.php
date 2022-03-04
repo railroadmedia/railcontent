@@ -174,4 +174,19 @@ class ContentFollowsService
 
         return $results;
     }
+
+    public function isSubscribedCurrentUserToContent($contentId)
+    {
+        $followedContentIds = $this->getCurrentUserFollowedContentIds();
+
+        return in_array($contentId, $followedContentIds);
+    }
+
+    /**
+     * @return array|mixed
+     */
+    public function getCurrentUserFollowedContentIds()
+    {
+        return $this->contentFollowsRepository->getFollowedContentIds();
+    }
 }

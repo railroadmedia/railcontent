@@ -20,4 +20,25 @@ class ContentFollowsRepository extends EntityRepository
     {
         parent::__construct($entityManager, $entityManager->getClassMetadata(ContentFollows::class));
     }
+
+    /**
+     * @return array|mixed
+     */
+    public function getFollowedContentIds()
+    {
+        if (!isset(self::$cache[auth()->id()])) {
+            $alias = 'cf';
+            $contents =   $this->createQueryBuilder($alias)
+                ->join($alias.'.content', 'c')
+                ->where('c.brand = :brand')
+                ->andWhere($alias.'.user = :user')
+                ->setParameter('brand', config('railcontent.brand'))
+                ->setParameter('user', auth()->id())
+               ->getResult();
+dd($contents);
+            self::$cache[auth()->id()] = $contents->pluck('content_id')->toArray();
+        }
+
+        return self::$cache[auth()->id()];
+    }
 }
