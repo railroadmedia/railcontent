@@ -46,6 +46,7 @@ use Railroad\Railcontent\Faker\Factory;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\ElasticService;
 use Railroad\Railcontent\Services\RemoteStorageService;
@@ -100,7 +101,7 @@ class RailcontentTestCase extends BaseTestCase
      */
     protected $entityManager;
 
-//    protected $serializer;
+    //    protected $serializer;
 
     protected $fakeDataHydrator;
 
@@ -165,28 +166,25 @@ class RailcontentTestCase extends BaseTestCase
 
         //call the ContentPermissionsMiddleware
         $middleware = $this->app->make(ContentPermissionsMiddleware::class);
-        $middleware->handle(
-            request(),
-            function () {
-            }
-        );
+        $middleware->handle(request(), function () {
+        });
     }
 
     /**
      * Define environment setup.
      *
-     * @param  Application $app
+     * @param Application $app
      * @return void
      */
     protected function getEnvironmentSetUp($app)
     {
         // setup package config for testing
-        $dotenv = new Dotenv(__DIR__ . '/../', '.env.testing');
+        $dotenv = new Dotenv(__DIR__.'/../', '.env.testing');
         $dotenv->load();
 
-        $defaultConfig = require(__DIR__ . '/../config/railcontent.php');
-        $apiDocConfig = require(__DIR__ . '/../config/apidoc.php');
-        $oldResponseMapping =  require(__DIR__ . '/../config/railcontent_legacy_response_mapping.php');
+        $defaultConfig = require(__DIR__.'/../config/railcontent.php');
+        $apiDocConfig = require(__DIR__.'/../config/apidoc.php');
+        $oldResponseMapping = require(__DIR__.'/../config/railcontent_legacy_response_mapping.php');
 
         $app['config']->set('app.env', 'testing');
         $app['config']->set('app.debug', true);
@@ -207,7 +205,10 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('railcontent.cataloguesMetadata', $defaultConfig['cataloguesMetadata']);
         $app['config']->set('railcontent.onboardingContentIds', $defaultConfig['onboardingContentIds']);
         $app['config']->set('railcontent.validation', $defaultConfig['validation']);
-        $app['config']->set('railcontent.comment_likes_amount_of_users', $defaultConfig['comment_likes_amount_of_users']);
+        $app['config']->set(
+            'railcontent.comment_likes_amount_of_users',
+            $defaultConfig['comment_likes_amount_of_users']
+        );
         $app['config']->set('railcontent.searchable_content_types', $defaultConfig['searchable_content_types']);
         $app['config']->set('railcontent.search_index_values', $defaultConfig['search_index_values']);
         $app['config']->set(
@@ -236,23 +237,20 @@ class RailcontentTestCase extends BaseTestCase
 
         // setup default database to use sqlite :memory:
         $app['config']->set('database.default', $this->getConnectionType());
-        $app['config']->set(
-            'database.connections.mysql',
-            [
-                'driver' => 'pdo_mysql',
-                'host' => 'mysql',
-                'port' => env('MYSQL_PORT', '3306'),
-                'database' => env('MYSQL_DB', 'railcontent'),
-                'username' => 'root',
-                'password' => 'root',
-                'charset' => 'utf8',
-                'collation' => 'utf8_general_ci',
-                'prefix' => '',
-                'options' => [
-                    PDO::ATTR_PERSISTENT => true,
-                ],
-            ]
-        );
+        $app['config']->set('database.connections.mysql', [
+                                                            'driver' => 'pdo_mysql',
+                                                            'host' => 'mysql',
+                                                            'port' => env('MYSQL_PORT', '3306'),
+                                                            'database' => env('MYSQL_DB', 'railcontent'),
+                                                            'username' => 'root',
+                                                            'password' => 'root',
+                                                            'charset' => 'utf8',
+                                                            'collation' => 'utf8_general_ci',
+                                                            'prefix' => '',
+                                                            'options' => [
+                                                                PDO::ATTR_PERSISTENT => true,
+                                                            ],
+                                                        ]);
 
         // database
         if ($this->getConnectionType() == "mysql") {
@@ -263,16 +261,13 @@ class RailcontentTestCase extends BaseTestCase
             $app['config']->set('railcontent.database_password', $defaultConfig['database_password']);
             $app['config']->set('railcontent.database_host', $defaultConfig['database_host']);
 
-            $app['config']->set(
-                'database.connections.' . $defaultConfig['database_connection_name'],
-                [
-                    'driver' => 'mysql',
-                    'database' => $defaultConfig['database_name'],
-                    'username' => $defaultConfig['database_user'],
-                    'password' => $defaultConfig['database_password'],
-                    'host' => $defaultConfig['database_host'],
-                ]
-            );
+            $app['config']->set('database.connections.'.$defaultConfig['database_connection_name'], [
+                                                                                                      'driver' => 'mysql',
+                                                                                                      'database' => $defaultConfig['database_name'],
+                                                                                                      'username' => $defaultConfig['database_user'],
+                                                                                                      'password' => $defaultConfig['database_password'],
+                                                                                                      'host' => $defaultConfig['database_host'],
+                                                                                                  ]);
 
             $app['config']->set('doctrine.database_driver', 'pdo_sqlite');
         } else {
@@ -301,42 +296,41 @@ class RailcontentTestCase extends BaseTestCase
         $app['config']->set('doctrine.redis_host', $defaultConfig['redis_host']);
         $app['config']->set('doctrine.redis_port', $defaultConfig['redis_port']);
 
-        $app['config']->set(
-            'database.connections.testbench',
-            [
-                'driver' => 'sqlite',
-                'database' => ':memory:',
-                'prefix' => '',
-            ]
-        );
+        $app['config']->set('database.connections.testbench', [
+                                                                'driver' => 'sqlite',
+                                                                'database' => ':memory:',
+                                                                'prefix' => '',
+                                                            ]);
 
         // allows access to built in user auth
         $app['config']->set('auth.providers.users.model', User::class);
 
-        $app['config']->set(
-            'railcontent.aws_remote_storage_s3_credentials',
-            [
-                'accessKey' => env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'),
-                'accessSecret' => env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'),
-                'region' => env('AWS_S3_REMOTE_STORAGE_REGION'),
-                'bucket' => env('AWS_S3_REMOTE_STORAGE_BUCKET'),
-            ]
-        );
+        $app['config']->set('railcontent.aws_remote_storage_s3_credentials', [
+                                                                               'accessKey' => env(
+                                                                                   'AWS_S3_REMOTE_STORAGE_ACCESS_KEY'
+                                                                               ),
+                                                                               'accessSecret' => env(
+                                                                                   'AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'
+                                                                               ),
+                                                                               'region' => env(
+                                                                                   'AWS_S3_REMOTE_STORAGE_REGION'
+                                                                               ),
+                                                                               'bucket' => env(
+                                                                                   'AWS_S3_REMOTE_STORAGE_BUCKET'
+                                                                               ),
+                                                                           ]);
 
         $app['config']->set('railcontent.aws_cloud_front_url_prefix', 'd1923uyy6spedc.cloudfront.net');
 
-        $app['config']->set(
-            'database.redis',
-            [
-                'client' => 'predis',
-                'default' => [
-                    'host' => env('REDIS_HOST', 'redis'),
-                    'password' => env('REDIS_PASSWORD', null),
-                    'port' => env('REDIS_PORT', 6379),
-                    'database' => 0,
-                ],
-            ]
-        );
+        $app['config']->set('database.redis', [
+                                                'client' => 'predis',
+                                                'default' => [
+                                                    'host' => env('REDIS_HOST', 'redis'),
+                                                    'password' => env('REDIS_PASSWORD', null),
+                                                    'port' => env('REDIS_PORT', 6379),
+                                                    'database' => 0,
+                                                ],
+                                            ]);
         $app['config']->set('cache.default', env('CACHE_DRIVER', 'redis'));
         $app['config']->set('railcontent.cache_prefix', $defaultConfig['cache_prefix']);
         $app['config']->set('railcontent.cache_driver', $defaultConfig['cache_driver']);
@@ -348,7 +342,10 @@ class RailcontentTestCase extends BaseTestCase
             'railcontent.content_hierarchy_decorator_allowed_types',
             $defaultConfig['content_hierarchy_decorator_allowed_types']
         );
-        $app['config']->set('railcontent.content_types_and_depth_to_calculate_hierarchy_higher_key_progress', $defaultConfig['content_types_and_depth_to_calculate_hierarchy_higher_key_progress']);
+        $app['config']->set(
+            'railcontent.content_types_and_depth_to_calculate_hierarchy_higher_key_progress',
+            $defaultConfig['content_types_and_depth_to_calculate_hierarchy_higher_key_progress']
+        );
 
         // vimeo
         $app['config']->set('railcontent.video_sync', $defaultConfig['video_sync']);
@@ -368,30 +365,26 @@ class RailcontentTestCase extends BaseTestCase
         $app->register(PermissionsServiceProvider::class);
         $app->register(ApiDocGeneratorServiceProvider::class);
 
-        $app->bind(
-            'UserProviderInterface',
-            function () {
-                $mock =
-                    $this->getMockBuilder('UserProviderInterface')
-                        ->setMethods(['create'])
-                        ->getMock();
+        $app->bind('UserProviderInterface', function () {
+            $mock =
+                $this->getMockBuilder('UserProviderInterface')
+                    ->setMethods(['create'])
+                    ->getMock();
 
-                $mock->method('create')
-                    ->willReturn(
-                        [
-                            'id' => 1,
-                            'email' => $this->faker->email,
-                        ]
-                    );
-                return $mock;
-            }
-        );
+            $mock->method('create')
+                ->willReturn([
+                                 'id' => 1,
+                                 'email' => $this->faker->email,
+                             ]);
+
+            return $mock;
+        });
     }
 
     /**
      * We don't want to use mockery so this is a reimplementation of the mockery version.
      *
-     * @param  array|string $events
+     * @param array|string $events
      * @return $this
      *
      * @throws Exception
@@ -406,31 +399,25 @@ class RailcontentTestCase extends BaseTestCase
                 ->getMockForAbstractClass();
 
         $mock->method('fire')
-            ->willReturnCallback(
-                function ($called) {
-                    $this->firedEvents[] = $called;
-                }
-            );
+            ->willReturnCallback(function ($called) {
+                $this->firedEvents[] = $called;
+            });
 
         $mock->method('dispatch')
-            ->willReturnCallback(
-                function ($called) {
-                    $this->firedEvents[] = $called;
-                }
-            );
+            ->willReturnCallback(function ($called) {
+                $this->firedEvents[] = $called;
+            });
 
         $this->app->instance('events', $mock);
 
-        $this->beforeApplicationDestroyed(
-            function () use ($events) {
-                $fired = $this->getFiredEvents($events);
-                if ($eventsNotFired = array_diff($events, $fired)) {
-                    throw new Exception(
-                        'These expected events were not fired: [' . implode(', ', $eventsNotFired) . ']'
-                    );
-                }
+        $this->beforeApplicationDestroyed(function () use ($events) {
+            $fired = $this->getFiredEvents($events);
+            if ($eventsNotFired = array_diff($events, $fired)) {
+                throw new Exception(
+                    'These expected events were not fired: ['.implode(', ', $eventsNotFired).']'
+                );
             }
-        );
+        });
 
         return $this;
     }
@@ -446,18 +433,16 @@ class RailcontentTestCase extends BaseTestCase
         $email = $this->faker->email;
         $userId =
             $this->databaseManager->table('users')
-                ->insertGetId(
-                    [
-                        'email' => $email,
-                        'password' => $this->faker->password,
-                        'display_name' => $this->faker->name,
-                        'profile_picture_url' => $this->faker->url,
-                        'created_at' => Carbon::now()
-                            ->toDateTimeString(),
-                        'updated_at' => Carbon::now()
-                            ->toDateTimeString(),
-                    ]
-                );
+                ->insertGetId([
+                                  'email' => $email,
+                                  'password' => $this->faker->password,
+                                  'display_name' => $this->faker->name,
+                                  'profile_picture_url' => $this->faker->url,
+                                  'created_at' => Carbon::now()
+                                      ->toDateTimeString(),
+                                  'updated_at' => Carbon::now()
+                                      ->toDateTimeString(),
+                              ]);
 
         Auth::shouldReceive('check')
             ->andReturn(true);
@@ -468,7 +453,6 @@ class RailcontentTestCase extends BaseTestCase
             ->andReturn($userMockResults);
 
         return $userId;
-
     }
 
     protected function createUsersTable()
@@ -478,17 +462,18 @@ class RailcontentTestCase extends BaseTestCase
             ->hasTable('users')) {
             $this->app['db']->connection()
                 ->getSchemaBuilder()
-                ->create(
-                    'users',
-                    function (Blueprint $table) {
-                        $table->increments('id');
-                        $table->string('email')->nullable();
-                        $table->string('password')->nullable();
-                        $table->string('display_name')->nullable();
-                        $table->string('profile_picture_url')->nullable();
-                        $table->timestamps();
-                    }
-                );
+                ->create('users', function (Blueprint $table) {
+                    $table->increments('id');
+                    $table->string('email')
+                        ->nullable();
+                    $table->string('password')
+                        ->nullable();
+                    $table->string('display_name')
+                        ->nullable();
+                    $table->string('profile_picture_url')
+                        ->nullable();
+                    $table->timestamps();
+                });
         }
     }
 
@@ -517,25 +502,25 @@ class RailcontentTestCase extends BaseTestCase
     {
         if (empty(env('AWS_S3_REMOTE_STORAGE_ACCESS_KEY'))) {
             $this->fail(
-                "You must provide a value for the AWS_S3_REMOTE_STORAGE_ACCESS_KEY \'putenv' (" .
+                "You must provide a value for the AWS_S3_REMOTE_STORAGE_ACCESS_KEY \'putenv' (".
                 "environmental variable setting) function in `/.env.testing`."
             );
         }
         if (empty(env('AWS_S3_REMOTE_STORAGE_ACCESS_SECRET'))) {
             $this->fail(
-                "You must provide a value for the AWS_S3_REMOTE_STORAGE_ACCESS_SECRET \'putenv' (" .
+                "You must provide a value for the AWS_S3_REMOTE_STORAGE_ACCESS_SECRET \'putenv' (".
                 "environmental variable setting) function in `/.env.testing`."
             );
         }
         if (empty(env('AWS_S3_REMOTE_STORAGE_REGION'))) {
             $this->fail(
-                "You must provide a value for the AWS_S3_REMOTE_STORAGE_REGION \'putenv' (" .
+                "You must provide a value for the AWS_S3_REMOTE_STORAGE_REGION \'putenv' (".
                 "environmental variable setting) function in `/.env.testing`."
             );
         }
         if (empty(env('AWS_S3_REMOTE_STORAGE_BUCKET'))) {
             $this->fail(
-                "You must provide a value for the AWS_S3_REMOTE_STORAGE_BUCKET \'putenv' (" .
+                "You must provide a value for the AWS_S3_REMOTE_STORAGE_BUCKET \'putenv' (".
                 "environmental variable setting) function in `/.env.testing`."
             );
         }
@@ -578,6 +563,7 @@ class RailcontentTestCase extends BaseTestCase
         if (!is_string($extension)) {
             $this->fail('Value retrieved for file extension is not a string.');
         }
+
         return $extension;
     }
 
@@ -596,7 +582,7 @@ class RailcontentTestCase extends BaseTestCase
      */
     protected function getFilenameRelativeFromAbsolute($filenameAbsolute)
     {
-        $tempDirPath = sys_get_temp_dir() . '/';
+        $tempDirPath = sys_get_temp_dir().'/';
 
         return str_replace($tempDirPath, '', $filenameAbsolute);
     }
@@ -607,7 +593,7 @@ class RailcontentTestCase extends BaseTestCase
      */
     protected function getFilenameAbsoluteFromRelative($filenameRelative)
     {
-        return sys_get_temp_dir() . '/' . $filenameRelative;
+        return sys_get_temp_dir().'/'.$filenameRelative;
     }
 
     /**
@@ -619,8 +605,9 @@ class RailcontentTestCase extends BaseTestCase
     {
         $extension = $this->getExtensionFromAbsolute($filenameAbsolute);
         $nameWithExtension = $this->concatNameAndExtension($name, $extension);
-        $newFilenameAbsolute = sys_get_temp_dir() . '/' . $nameWithExtension;
+        $newFilenameAbsolute = sys_get_temp_dir().'/'.$nameWithExtension;
         rename($filenameAbsolute, $newFilenameAbsolute);
+
         return $newFilenameAbsolute;
     }
 
@@ -631,7 +618,7 @@ class RailcontentTestCase extends BaseTestCase
      */
     protected function concatNameAndExtension($name, $extension)
     {
-        return $name . '.' . $extension;
+        return $name.'.'.$extension;
     }
 
     public function createExpectedResult($status, $code, $results)
@@ -675,11 +662,15 @@ class RailcontentTestCase extends BaseTestCase
         }
 
         if (!array_key_exists('publishedOn', $contentData)) {
-            $contentData['publishedOn'] = Carbon::now()->subDay();
+            $contentData['publishedOn'] =
+                Carbon::now()
+                    ->subDay();
         }
 
         if (!array_key_exists('createdOn', $contentData)) {
-            $contentData['createdOn'] = Carbon::now()->subDay();
+            $contentData['createdOn'] =
+                Carbon::now()
+                    ->subDay();
         }
 
         if (!array_key_exists('isCoach', $contentData)) {
@@ -699,14 +690,14 @@ class RailcontentTestCase extends BaseTestCase
         $contentData['tag'] = new ArrayCollection();
         $contentData['archivedOn'] = null;
 
-        if (array_key_exists('userId',$contentData)) {
+        if (array_key_exists('userId', $contentData)) {
             $contentData['user'] =
                 $this->app->make(UserProvider::class)
                     ->getUserById($contentData['userId']);
             unset($contentData['userId']);
         }
 
-        if (array_key_exists('associatedUserId',$contentData)) {
+        if (array_key_exists('associatedUserId', $contentData)) {
             $contentData['associatedUser'] =
                 $this->app->make(UserProvider::class)
                     ->getUserById($contentData['associatedUserId']);
@@ -744,14 +735,14 @@ class RailcontentTestCase extends BaseTestCase
 
         $this->populator = new Populator($this->faker, $this->entityManager);
 
-        if (array_key_exists('content_id',$contentData)) {
+        if (array_key_exists('content_id', $contentData)) {
             $contentData['content'] =
                 $this->app->make(ContentService::class)
                     ->getById($contentData['content_id']);
             unset($contentData['content_id']);
         }
 
-        if (array_key_exists('user_id',$contentData)) {
+        if (array_key_exists('user_id', $contentData)) {
             $contentData['user'] =
                 $this->app->make(UserProvider::class)
                     ->getUserById($contentData['user_id']);
@@ -769,17 +760,40 @@ class RailcontentTestCase extends BaseTestCase
         return $fakePopulator[UserContentProgress::class];
     }
 
-    public function fakeContentInstructor($contentData = [])
+    public function fakeContentInstructor($contentData = [], $isFutureContent = false)
     {
+        $contentRepository = $this->entityManager->getRepository(Content::class);
+
+        if ($isFutureContent) {
+            $contentRepository::$pullFutureContent = true;
+        }
+
         $contentInstructor = $this->faker->contentInstructor($contentData);
 
-        $contentInstructorId =
-            $this->databaseManager->table('railcontent_content_instructors')
-                ->insertGetId($contentInstructor);
+        $this->populator = new Populator($this->faker, $this->entityManager);
 
-        $contentInstructor['id'] = $contentInstructorId;
+        if (array_key_exists('content_id', $contentInstructor)) {
+            $contentInstructor['content'] = $contentRepository->getById($contentInstructor['content_id']);
+            unset($contentInstructor['content_id']);
+        }
 
-        return $contentInstructor;
+        if (array_key_exists('instructor_id', $contentInstructor)) {
+            $contentInstructor['instructor'] =
+                $this->app->make(ContentService::class)
+                    ->getById($contentInstructor['instructor_id']);
+            unset($contentInstructor['instructor_id']);
+        }
+
+        $this->populator->addEntity(
+            ContentInstructor::class,
+            1,
+            $contentInstructor
+        );
+        ContentRepository::$pullFutureContent = false;
+
+        $fakePopulator = $this->populator->execute();
+
+        return $fakePopulator[ContentInstructor::class];
     }
 
     public function fakePermission($contentData = [])
@@ -885,9 +899,11 @@ class RailcontentTestCase extends BaseTestCase
             'updated_at' => Carbon::now()
                 ->toDateTimeString(),
         ];
-        $userId = $this->databaseManager->table('users')
-            ->insertGetId($userData);
+        $userId =
+            $this->databaseManager->table('users')
+                ->insertGetId($userData);
         $userData['id'] = $userId;
+
         return $userData;
     }
 
