@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Repositories\QueryBuilders;
 use Carbon\Carbon;
 use Railroad\Railcontent\Contracts\UserProviderInterface;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Entities\ContentFollows;
 use Railroad\Railcontent\Entities\ContentHierarchy;
 use Railroad\Railcontent\Entities\ContentPermission;
 use Railroad\Railcontent\Entities\UserContentProgress;
@@ -255,7 +256,7 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                     ->getFieldNames()
             )) {
                 $conditions[config('railcontent.table_prefix') . 'content' . '.' . $requiredFieldData['name']] =
-                    $requiredFieldData['value'];
+                    [$requiredFieldData['value']];
             } else {
                 if (in_array(
                     $requiredFieldData['name'],
@@ -272,19 +273,22 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
                             ->getFieldName($requiredFieldData['name']),
                         'ipf' . $index
                     );
-                    $conditions['ipf' . $index] = $requiredFieldData['value'];
+                    $conditions['ipf' . $index. '.' . $requiredFieldData['name']] = [$requiredFieldData['value']];
                 }
             }
         }
+
         if (!empty($conditions)) {
             $orX =
                 $this->expr()
                     ->orX();
+
             foreach ($conditions as $key => $value) {
+
                 $condition =
                     $this->expr()
                         ->orX(
-                            $key . ' IN (' . $value . ')'
+                            $key . ' IN (' . implode(",", $value) . ')'
                         );
 
                 $orX->add($condition);
@@ -490,7 +494,23 @@ class ContentQueryBuilder extends FromRequestRailcontentQueryBuilder
             case 'relevance':
                 //TODO
                 break;
+            case 'title':
+                $this->orderBy('railcontent_content.title','asc');
+
+                break;
         }
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function restrictFollowedContent()
+    {
+        $this->join(ContentFollows::class, 'cf', 'WITH', 'railcontent_content.id = cf.content');
+        $this->andWhere('cf.user IN (:user)')
+            ->setParameter('user', auth()->id());
 
         return $this;
     }
