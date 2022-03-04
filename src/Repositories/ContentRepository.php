@@ -57,6 +57,7 @@ class ContentRepository extends EntityRepository
     private $requiredUserPlaylistIds = [];
 
     public static $getFutureContentOnly = false;
+    public static $getFollowedContentOnly = false;
 
     private $page;
     private $limit;
@@ -167,7 +168,8 @@ class ContentRepository extends EntityRepository
         array $slugHierarchy,
         array $requiredParentIds,
         array $requiredUserPlaylistIds,
-        $getFutureContentOnly = false
+        $getFutureContentOnly = false,
+        $getFollowedContentOnly = false
     ) {
         $this->page = $page;
         $this->limit = $limit;
@@ -178,6 +180,7 @@ class ContentRepository extends EntityRepository
         $this->requiredUserPlaylistIds = $requiredUserPlaylistIds;
 
         self::$getFutureContentOnly = $getFutureContentOnly;
+        self::$getFollowedContentOnly = $getFollowedContentOnly;
 
         // reset all the filters for the new query
         $this->requiredFields = [];
@@ -224,6 +227,10 @@ class ContentRepository extends EntityRepository
                 ->setCacheable(true)
                 ->setCacheRegion('pull');
 
+        if(self::$getFollowedContentOnly){
+            $qb->restrictFollowedContent();
+        }
+
         return $qb;
     }
 
@@ -242,7 +249,13 @@ class ContentRepository extends EntityRepository
                 ->restrictByTypes($this->typesToInclude)
                 ->restrictBySlugHierarchy($this->slugHierarchy)
                 ->restrictByParentIds($this->requiredParentIds)
-                ->groupBy(config('railcontent.table_prefix') . 'content.id')
+                ->groupBy(config('railcontent.table_prefix') . 'content.id');
+
+        if(self::$getFollowedContentOnly){
+            $subQuery->restrictFollowedContent();
+        }
+
+        $results = $subQuery
                 ->getQuery()
                 ->getResult();
 
@@ -257,7 +270,7 @@ class ContentRepository extends EntityRepository
     {
         $filteredContents = [];
 
-        $contents =
+        $query =
             $this->build()
                 ->restrictByUserAccess()
                 ->restrictByFields($this->requiredFields)
@@ -266,9 +279,13 @@ class ContentRepository extends EntityRepository
                 ->includeByUserStates($this->includedUserStates)
                 ->restrictByTypes($this->typesToInclude)
                 ->restrictByParentIds($this->requiredParentIds)
-                ->restrictByFilterOptions()
-                ->getQuery()
-                ->getResult();
+                ->restrictByFilterOptions();
+
+        if(self::$getFollowedContentOnly){
+            $query->restrictFollowedContent();
+        }
+
+        $contents = $query->getQuery()->getResult();
 
         $ids = [];
         if ($contents) {
