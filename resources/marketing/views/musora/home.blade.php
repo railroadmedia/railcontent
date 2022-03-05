@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <title>Musora</title>
 </head>
 <body class="antialiased">
-<h1 class="tw-text-2xl">Musora home page!</h1>
+<h1 class="text-2xl text-pink-500">Musora home page!</h1>
 </body>
 </html>

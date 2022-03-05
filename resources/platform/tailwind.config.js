@@ -1,7 +1,5 @@
 // tailwind.config.js
-const plugin = require('tailwindcss/plugin');
 const stylesoraTheme = require('stylesora/theme');
-const colors = require('tailwindcss/colors');
 
 module.exports = {
   mode: 'jit',
@@ -20,22 +18,11 @@ module.exports = {
         pianote: stylesoraTheme.colors.pianote,
         guitareo: stylesoraTheme.colors.guitareo,
         singeo: stylesoraTheme.colors.singeo,
-        "true-gray": colors.trueGray,
-        //Dark Mode
-        dm: stylesoraTheme.colors.dm,
-        inherit: 'inherit',
-        'alert-red': '#FF0744'
       },
       spacing: stylesoraTheme.spacing,
       zIndex: stylesoraTheme.zIndex,
       inset: stylesoraTheme.inset
     },
-  },
-  variants: {
-    extend: {
-        backgroundColor: ['active', 'visited'],
-        textColor: ['visited', 'active'],
-    }
   },
   plugins: [
     require('stylesora/components/')(),

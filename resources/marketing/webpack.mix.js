@@ -1,5 +1,6 @@
 const mix = require('laravel-mix');
 const tailwindcss = require('tailwindcss');
+require('laravel-mix-merge-manifest');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,8 +13,14 @@ const tailwindcss = require('tailwindcss');
  |
  */
 
-mix.js('resources/marketing/assets/js/app.js', 'public/marketing/js')
+mix
+    .js('resources/marketing/assets/js/app.js', 'public/marketing/js')
     .vue()
     .postCss('resources/marketing/assets/css/app.css', 'public/marketing/css', [
-        tailwindcss('./resources/marketing/marketing.tailwind.config.js'),
-    ]);
+        require('tailwindcss')
+    ])
+    .options({
+        postCss: [ tailwindcss('./resources/marketing/marketing.tailwind.config.js')],
+    })
+    .version()
+    .mergeManifest();
