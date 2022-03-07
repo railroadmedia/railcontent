@@ -42,7 +42,7 @@
     "railroad/permissions": "^1.0",
     "railroad/usora": "dev-v2.0-skill as v2.0.68",
     "ext-redis": "*",
-    "railroad/doctrine": "^0.0",
+    "railroad/doctrine": "1.0.*",
     "railroad/doctrine-array-hydrator": "^1.0",
     "jms/serializer": "1.*",
     "elasticsearch/elasticsearch": "~7.0",
