@@ -94,7 +94,7 @@ class SearchableListener implements EventSubscriber
                     'body' => [
                         'query' => [
                             'term' => [
-                                'id' => $contentID,
+                                'content_id' => "$contentID",
                             ],
                         ],
                     ],
@@ -159,7 +159,7 @@ class SearchableListener implements EventSubscriber
                 'body' => [
                     'query' => [
                         'term' => [
-                            'id' => $contentID,
+                            'content_id' => $contentID,
                         ],
                     ],
                 ],

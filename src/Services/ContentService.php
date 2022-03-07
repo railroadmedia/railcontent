@@ -1123,7 +1123,7 @@ class ContentService
 
             $ids = [];
             foreach ($elasticData['hits']['hits'] as $elData) {
-                $ids[] = $elData['_source']['id'];
+                $ids[] = $elData['_source']['content_id'];
             }
 
             $qbIds =

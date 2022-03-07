@@ -636,9 +636,10 @@ class Content extends ArrayExpressible
         }
 
         return [
-            'id' => $this->getId(),
+            'content_id' => $this->getId(),
             'title' => utf8_encode($this->getTitle()),
             'slug' => utf8_encode($this->getSlug()),
+            'name' => utf8_encode($this->getName()),
             'difficulty' => $this->getDifficulty(),
             'status' => $this->getStatus(),
             'brand' => $this->getBrand(),

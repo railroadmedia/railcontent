@@ -145,14 +145,21 @@ class ElasticQueryBuilder
         }
 
         foreach ($requiredFields as $index => $requiredFieldData) {
-            $this->must[] = [
-                'bool' => [
-                    'should' => [
-                        ['terms' => [$requiredFieldData['name'].'.raw' => [$requiredFieldData['value']]]],
-                        ['terms' => [$requiredFieldData['name'] => [$requiredFieldData['value']]]],
+            if($requiredFieldData['operator'] == 'like'){
+
+                $this->must = [
+                    ['match' => [$requiredFieldData['name'] => $requiredFieldData['value']]],
+                ];
+            }else {
+                $this->must[] = [
+                    'bool' => [
+                        'should' => [
+                            ['terms' => [$requiredFieldData['name'].'.raw' => [$requiredFieldData['value']]]],
+                            ['terms' => [$requiredFieldData['name'] => [$requiredFieldData['value']]]],
+                        ],
                     ],
-                ],
-            ];
+                ];
+            }
         }
 
         return $this;

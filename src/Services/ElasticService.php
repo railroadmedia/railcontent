@@ -50,12 +50,13 @@ class ElasticService
                             'enabled' => true,
                         ],
                         'properties' => [
-                            'id' => ['type' => 'integer'],
+                            'content_id' => ['type' => 'integer'],
                             'is_coach' => ['type' => 'integer'],
                             'is_coach_of_the_month' => ['type' => 'integer'],
                             'is_active' => ['type' => 'integer'],
                             'is_featured' => ['type' => 'integer'],
                             'title' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
+                            'name' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'slug' => ['type' => 'text', 'fields' => ['raw' => ['type' => 'keyword']]],
                             'brand' => ['type' => 'text'],
                             'content_type' => ['type' => 'keyword'],
@@ -263,7 +264,7 @@ class ElasticService
         $instructorsIds = [];
 
         foreach ($filtersEl['hits']['hits'] as $elData) {
-            $idEs[] = $elData['_source']['id'];
+            $idEs[] = $elData['_source']['content_id'];
 
             if (!in_array($elData['_source']['content_type'], $filteredContents['content_type'] ?? []) &&
                 (!in_array($elData['_source']['content_type'], $includedTypes))) {

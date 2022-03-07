@@ -2017,7 +2017,7 @@ class ContentJsonControllerTest extends RailcontentTestCase
             'page' => $page,
             'limit' => $limit,
             'statues' => $statues,
-            'sort' => 'id',
+            'sort' => 'content_id',
             'included_types' => $types,
             'included_fields' => [
                 'instructor,'.$instructor[0]->getId(),
@@ -2086,5 +2086,120 @@ class ContentJsonControllerTest extends RailcontentTestCase
 
         $this->assertEquals('Test_a', $responseContent[0]['attributes']['title']);
         $this->assertEquals('Test_z', $responseContent[1]['attributes']['title']);
+    }
+
+    public function test_filter_coach_lessons_by_lesson_title()
+    {
+        $statues = ['published'];
+        $types = ['solos'];
+        $page = 1;
+        $limit = 5;
+
+        for($i=0; $i<2; $i++) {
+            $contents[$i] = $this->fakeContent(1, [
+                'difficulty' => 1,
+                'type' => 'solos',
+                'status' => 'published',
+                'brand' => config('railcontent.brand'),
+                'title' => ($i == 0)?'Test content title z':'Test title a',
+                'createdOn' => Carbon::now()->subDays(5)
+            ]);
+        }
+
+        $newContent = $this->fakeContent(1, [
+            'difficulty' => 1,
+            'type' => 'solos',
+            'status' => 'published',
+            'brand' => config('railcontent.brand'),
+            'title' => $this->faker->paragraph,
+            'createdOn' => Carbon::now()->subDays(3)
+        ]);
+
+        $instructor = $this->fakeContent(1, [
+            'type' => 'instructor',
+            'status' => 'published',
+            'slug' => $this->faker->name,
+            'brand' => config('railcontent.brand'),
+            'difficulty' => null,
+        ]);
+
+        sleep(1);
+
+        foreach ($contents as $content) {
+            $this->fakeContentInstructor([
+                                             'content_id' => $content[0]->getId(),
+                                             'instructor_id' => $instructor[0]->getId(),
+                                         ]);
+        }
+
+        $this->fakeContentInstructor([
+                                         'content_id' => $newContent[0]->getId(),
+                                         'instructor_id' => $instructor[0]->getId(),
+                                     ]);
+        sleep(1);
+
+        $response = $this->call('GET', 'railcontent/content', [
+            'page' => $page,
+            'limit' => $limit,
+            'statues' => $statues,
+            'sort' => '-published_on',
+            'included_types' => $types,
+            'title' => 'Test z',
+            'included_fields' => [
+                'instructor,'.$instructor[0]->getId(),
+            ],
+        ]);
+
+        $responseContent = $response->decodeResponseJson('data');
+
+        $this->assertEquals(2, $response->decodeResponseJson('meta')['pagination']['total']);
+        $this->assertEquals('Test content title z', $responseContent[0]['attributes']['title']);
+        $this->assertEquals('Test title a', $responseContent[1]['attributes']['title']);
+    }
+
+    public function test_filter_coach_by_name()
+    {
+        $statues = ['published'];
+        $types = ['instructor'];
+        $page = 1;
+        $limit = 5;
+
+        for($i=0; $i<2; $i++) {
+            $contents[$i] = $this->fakeContent(1, [
+                'difficulty' => 1,
+                'type' => 'instructor',
+                'status' => 'published',
+                'brand' => config('railcontent.brand'),
+                'name' => 'Coach '.$i,
+                'createdOn' => Carbon::now()->subDays($i + 2),
+                'publishedOn' => Carbon::now()->subDays($i + 1)
+            ]);
+        }
+
+        $newCoach = $this->fakeContent(3, [
+            'difficulty' => 1,
+            'type' => 'instructor',
+            'status' => 'published',
+            'brand' => config('railcontent.brand'),
+            'name' => $this->faker->word,
+            'createdOn' => Carbon::now()->subDays(3)
+        ]);
+
+        sleep(1);
+
+        $response = $this->call('GET', 'railcontent/content', [
+            'page' => $page,
+            'limit' => $limit,
+            'statues' => $statues,
+            'sort' => '-score',
+            'included_types' => $types,
+            'term' => 'Coach',
+        ]);
+
+        $responseContent = $response->decodeResponseJson('data');
+
+        $this->assertEquals(2, $response->decodeResponseJson('meta')['pagination']['total']);
+        $this->assertEquals('Coach 1', $responseContent[0]['attributes']['name']);
+        $this->assertEquals('Coach 0', $responseContent[1]['attributes']['name']);
     }
 }
