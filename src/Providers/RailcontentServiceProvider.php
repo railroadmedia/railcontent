@@ -178,7 +178,7 @@ class RailcontentServiceProvider extends ServiceProvider
             $cachedAnnotationReader
         );
 
-        foreach (config('doctrine.entities') as $driverConfig) {
+        foreach (config('railcontent.entities') as $driverConfig) {
             $annotationDriver = new AnnotationDriver(
                 $cachedAnnotationReader, $driverConfig['path']
             );
