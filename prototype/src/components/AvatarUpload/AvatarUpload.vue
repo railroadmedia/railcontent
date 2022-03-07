@@ -30,5 +30,6 @@ function openUploadForm() {
                 class="tw-absolute tw-z-0 tw-h-[120px] tw-w-[120px] tw-rounded-full tw-bg-white"
             ></div>
         </button>
+        <div class="tw-text-center tw-text-white">UPLOAD PHOTO</div>
     </div>
 </template>
