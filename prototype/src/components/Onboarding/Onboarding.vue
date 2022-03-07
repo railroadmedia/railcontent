@@ -22,9 +22,9 @@ let steps = ref(initialSteps)
 function changeStep(step) {
     currentStep.value = step
 }
-function checkStepToggle(step) {
+function checkStepToggle(step, val) {
     const newSteps = steps.value
-    newSteps[step].checked = !newSteps[step].checked
+    newSteps[step].checked = val
     steps.value = newSteps
 }
 </script>

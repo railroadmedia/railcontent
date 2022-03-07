@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+//import { UserIcon } from '@heroicons/vue/solid'
 import ImageUploader from '../ImageUploader/ImageUploader.vue'
 import UserIcon from './UserIcon.vue'
 
@@ -21,10 +22,13 @@ function openUploadForm() {
 <template>
     <div class="">
         <button
-            class="tw-flex tw-h-[150px] tw-w-[150px] tw-items-center tw-justify-center tw-overflow-hidden tw-rounded-full tw-bg-white"
+            class="tw-relative tw-flex tw-h-[150px] tw-w-[150px] tw-items-center tw-justify-center tw-overflow-hidden tw-rounded-full tw-bg-[#002039]"
             v-on:click="openUploadForm"
         >
             <UserIcon />
+            <div
+                class="tw-absolute tw-z-0 tw-h-[120px] tw-w-[120px] tw-rounded-full tw-bg-white"
+            ></div>
         </button>
     </div>
 </template>

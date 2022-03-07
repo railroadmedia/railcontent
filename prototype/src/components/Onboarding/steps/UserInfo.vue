@@ -1,6 +1,7 @@
 <script setup>
 import AvatarUpload from '../../AvatarUpload/AvatarUpload.vue'
 import InputLabel from '../../InputLabel/InputLabel.vue'
+import ProgressBar from '../../ProgressBar/ProgressBar.vue'
 import { defineEmits, defineProps } from 'vue'
 const props = defineProps({
     brand: {
@@ -11,9 +12,17 @@ const props = defineProps({
     },
     checkStep: {
         type: Function
+    },
+    steps: {
+        type: Array
     }
 })
 const emit = defineEmits(['onChangeStep', 'onCheckStep'])
+function logIt(e) {
+    if (e.target) {
+        console.log(e.target.value)
+    }
+}
 </script>
 
 <template>
@@ -30,13 +39,23 @@ const emit = defineEmits(['onChangeStep', 'onCheckStep'])
             about yourself so that we can get it right.
         </p>
         <AvatarUpload />
-        <br />
-        <InputLabel />
+        <InputLabel
+            labelValue="Display Name"
+            placeholder="Enter your display name..."
+            classOverride="tw-mb-[56px]  lg:tw-w-[471px]"
+            @input="logIt"
+        />
+        <ProgressBar
+            :brand="brand"
+            :currentStep="0"
+            :steps="steps"
+            @changeStep="(s) => emit('changeStep', s)"
+        />
         <button
-            class="tw-text-white"
+            class="tw-mt-24 tw-text-white"
             @click="
                 () => {
-                    emit('checkStep', 0)
+                    emit('checkStep', 0, true)
                     emit('changeStep', 1)
                 }
             "
