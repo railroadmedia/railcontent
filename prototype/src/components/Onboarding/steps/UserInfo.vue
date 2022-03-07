@@ -2,7 +2,8 @@
 import AvatarUpload from '../../AvatarUpload/AvatarUpload.vue'
 import InputLabel from '../../InputLabel/InputLabel.vue'
 import ProgressBar from '../../ProgressBar/ProgressBar.vue'
-import { defineEmits, defineProps } from 'vue'
+import Button from '../../Button/Button.vue'
+import { defineEmits, defineProps, ref } from 'vue'
 const props = defineProps({
     brand: {
         type: String
@@ -18,10 +19,23 @@ const props = defineProps({
     }
 })
 const emit = defineEmits(['onChangeStep', 'onCheckStep'])
-function logIt(e) {
+let inputValue = ref('')
+let isNextStepEnabled = ref(false)
+
+function onInputChange(e) {
     if (e.target) {
-        console.log(e.target.value)
+        inputValue.value = e.target.value
+
+        if (e.target.value.length !== 0) {
+            isNextStepEnabled.value = true
+        } else if (isNextStepEnabled) {
+            isNextStepEnabled.value = false
+        }
     }
+}
+
+function changeIsNextStepEnabled(val) {
+    isNextStepEnabled.value = val
 }
 </script>
 
@@ -43,7 +57,7 @@ function logIt(e) {
             labelValue="Display Name"
             placeholder="Enter your display name..."
             classOverride="tw-mb-[56px]  lg:tw-w-[471px]"
-            @input="logIt"
+            @input="onInputChange"
         />
         <ProgressBar
             :brand="brand"
@@ -51,16 +65,16 @@ function logIt(e) {
             :steps="steps"
             @changeStep="(s) => emit('changeStep', s)"
         />
-        <button
-            class="tw-mt-24 tw-text-white"
-            @click="
+        <Button
+            @buttonClick="
                 () => {
                     emit('checkStep', 0, true)
                     emit('changeStep', 1)
                 }
             "
+            :isDisabled="!isNextStepEnabled"
+            classOverride="tw-w-[543px] tw-mt-[40px]"
+            >Next</Button
         >
-            CHANGE STEP
-        </button>
     </div>
 </template>
