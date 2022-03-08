@@ -177,7 +177,7 @@ class MigrateContentToElasticsearch extends Command
                         ];
 
                         $params1['body'][] = [
-                            'id' => $row->id,
+                            'content_id' => $row->id,
                             'title' => $row->title,
                             'slug' => $row->slug,
                             'difficulty' => $row->difficulty,
