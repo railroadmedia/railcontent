@@ -54,6 +54,7 @@ use Railroad\Railcontent\Listeners\SearchableListener;
 use Railroad\Railcontent\Listeners\UserContentProgressEventListener;
 use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Routes\RouteRegistrar;
+use Railroad\Railcontent\Types\UserType;
 use Redis;
 
 class RailcontentServiceProvider extends ServiceProvider
@@ -142,13 +143,10 @@ class RailcontentServiceProvider extends ServiceProvider
         Type::overrideType('datetimetz', CarbonDateTimeTimezoneType::class);
         Type::overrideType('date', CarbonDateType::class);
         Type::overrideType('time', CarbonTimeType::class);
+        !Type::hasType('user_id') ? Type::addType('user_id', UserType::class) : null;
 
         // set proxy dir to temp folder on server
-        if (app()->runningUnitTests()) {
-            $proxyDir = sys_get_temp_dir();
-        } else {
-            $proxyDir = sys_get_temp_dir() . '/railroad/railcontent-v1.0/proxies';
-        }
+        $proxyDir = sys_get_temp_dir();
 
         // setup redis
         $redis = new Redis();
