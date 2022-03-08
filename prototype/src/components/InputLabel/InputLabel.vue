@@ -5,7 +5,7 @@ export default {
     name: 'InputLabel',
     emits: ['onChange'],
     props: {
-        value: {
+        initialValue: {
             type: String,
             default: ''
         },
@@ -28,7 +28,7 @@ export default {
     },
     setup(props, { emit }) {
         const { input, errors } = useInputValidator(
-            props.value,
+            props.initialValue,
             [minLength(3)],
             (value) => emit('input', value)
         )

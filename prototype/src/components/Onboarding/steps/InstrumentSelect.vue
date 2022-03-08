@@ -29,28 +29,28 @@ const emit = defineEmits(['changeStep', 'checkStep'])
         <div class="tw-mb-[40px] tw-flex tw-space-x-6">
             <InstrumentCard
                 :bgColor="'gray'"
-                :brand="brand"
+                brand="drumeo"
                 @onInstrumentSelect="() => handleSelect(brandName)"
             >
                 DRUMS
             </InstrumentCard>
             <InstrumentCard
                 :bgColor="'gray'"
-                :brand="brand"
+                brand="pianote"
                 @onInstrumentSelect="() => handleSelect(brandName)"
             >
                 PIANO
             </InstrumentCard>
             <InstrumentCard
                 :bgColor="'gray'"
-                :brand="brand"
+                brand="guitareo"
                 @onInstrumentSelect="() => handleSelect(brandName)"
             >
                 GUITAR
             </InstrumentCard>
             <InstrumentCard
                 :bgColor="'gray'"
-                :brand="brand"
+                brand="singeo"
                 @onInstrumentSelect="() => handleSelect(brandName)"
             >
                 SINGING

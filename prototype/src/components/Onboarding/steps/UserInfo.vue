@@ -11,31 +11,28 @@ const props = defineProps({
     changeStep: {
         type: Function
     },
+    changeInfo: {
+        type: Function
+    },
     checkStep: {
         type: Function
     },
     steps: {
         type: Array
+    },
+    info: {
+        type: Object
     }
 })
-const emit = defineEmits(['onChangeStep', 'onCheckStep'])
-let inputValue = ref('')
-let isNextStepEnabled = ref(false)
+const emit = defineEmits(['onChangeStep', 'onCheckStep', 'onChangeInfo'])
 
 function onInputChange(e) {
     if (e.target) {
-        inputValue.value = e.target.value
-
-        if (e.target.value.length !== 0) {
-            isNextStepEnabled.value = true
-        } else if (isNextStepEnabled) {
-            isNextStepEnabled.value = false
-        }
+        emit('changeInfo', {
+            ...props.info,
+            user: { ...props.info.user, name: e.target.value }
+        })
     }
-}
-
-function changeIsNextStepEnabled(val) {
-    isNextStepEnabled.value = val
 }
 </script>
 
@@ -54,6 +51,7 @@ function changeIsNextStepEnabled(val) {
         </p>
         <AvatarUpload />
         <InputLabel
+            :initialValue="info.user.name"
             labelValue="Display Name"
             placeholder="Enter your display name..."
             classOverride="tw-mb-[56px]  lg:tw-w-[471px]"
@@ -68,11 +66,10 @@ function changeIsNextStepEnabled(val) {
         <Button
             @buttonClick="
                 () => {
-                    emit('checkStep', 0, true)
                     emit('changeStep', 1)
                 }
             "
-            :isDisabled="!isNextStepEnabled"
+            :isDisabled="!steps[0].checked"
             classOverride="tw-w-[543px] tw-mt-[40px]"
             >Next</Button
         >

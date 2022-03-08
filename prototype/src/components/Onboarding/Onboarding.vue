@@ -17,10 +17,27 @@ const initialSteps = [
     { label: 'TOPICS', checked: false },
     { label: 'COACHES', checked: false }
 ]
+const initialInfo = {
+    user: {
+        name: '',
+        avatarUrl: ''
+    },
+    instrument: null
+}
 let currentStep = ref(0)
+let info = ref(initialInfo)
 let steps = ref(initialSteps)
 function changeStep(step) {
     currentStep.value = step
+}
+function changeInfo(newInfo) {
+    info.value = newInfo
+
+    if (newInfo.user.name && newInfo.user.name.length > 0) {
+        checkStepToggle(0, true)
+    } else {
+        checkStepToggle(0, false)
+    }
 }
 function checkStepToggle(step, val) {
     const newSteps = steps.value
@@ -35,15 +52,19 @@ function checkStepToggle(step, val) {
             :brand="brand"
             v-if="currentStep === 0"
             @changeStep="changeStep"
+            @changeInfo="changeInfo"
             @checkStep="checkStepToggle"
             :steps="steps"
+            :info="info"
         />
         <InstrumentSelect
             :brand="brand"
             v-if="currentStep === 1"
             @changeStep="changeStep"
+            @changeInfo="changeInfo"
             @checkStep="checkStepToggle"
             :steps="steps"
+            :info="info"
         />
     </ModalRenderer>
 </template>

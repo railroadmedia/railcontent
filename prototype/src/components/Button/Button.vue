@@ -51,5 +51,6 @@ const emit = defineEmits(['onButtonClick'])
 .MusoraButton__disabled {
     background: rgba(68, 95, 116, 0.55) !important;
     color: #00101d !important;
+    cursor: default !important;
 }
 </style>
