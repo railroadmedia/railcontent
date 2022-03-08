@@ -119,11 +119,22 @@ class ContentJsonController extends Controller
             $request->get('only_subscribed', false)
         );
 
+        $filters = $contentData->filterOptions();
+
+        foreach ($filters as $key => $filterOptions) {
+            if (is_array($filterOptions)) {
+                if (($key != 'content_type') && ($key != 'instructor') && ($key != 'focus') && ($key != 'style')) {
+                    $filters[$key] = array_diff($filterOptions, ['All']);
+                    array_unshift($filters[$key], 'All');
+                }
+            }
+        }
+
         return ResponseService::content(
             $contentData->results(),
             $contentData->qb(),
             [],
-            $contentData->filterOptions(),
+            $filters,
             $contentData->customPagination(),
             $contentData->activeFilters()
         )
