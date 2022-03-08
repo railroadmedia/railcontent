@@ -18,6 +18,7 @@ class FieldTransformer extends TransformerAbstract
             }
 
         return [
+            'id' => $field['content_id'],
             'content_id' => $field['content_id'],
             'key' => $field['key'],
             'value' => $field['value'],

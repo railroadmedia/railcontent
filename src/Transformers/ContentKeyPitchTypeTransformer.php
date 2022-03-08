@@ -2,17 +2,17 @@
 
 namespace Railroad\Railcontent\Transformers;
 
-use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Collection;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\ContentKeyPitchType;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
 class ContentKeyPitchTypeTransformer extends TransformerAbstract
 {
     public function transform(ContentKeyPitchType $keyPitchType)
     {
-        $entityManager = app()->make(EntityManager::class);
+        $entityManager = app()->make(RailcontentEntityManager::class);
 
         $serializer = new BasicEntitySerializer();
 

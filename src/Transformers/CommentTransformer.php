@@ -2,17 +2,17 @@
 
 namespace Railroad\Railcontent\Transformers;
 
-use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Collection;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\Comment;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
 class CommentTransformer extends TransformerAbstract
 {
     public function transform(Comment $comment)
     {
-        $entityManager = app()->make(EntityManager::class);
+        $entityManager = app()->make(RailcontentEntityManager::class);
 
         if (count($comment->getChildren()) > 0) {
             $this->defaultIncludes = ['content', 'replies','user'];

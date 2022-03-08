@@ -2,18 +2,18 @@
 
 namespace Railroad\Railcontent\Transformers;
 
-use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
 class DecoratedContentTransformer extends TransformerAbstract
 {
     public function transform(Content $content)
     {
-        $entityManager = app()->make(EntityManager::class);
+        $entityManager = app()->make(RailcontentEntityManager::class);
 
         $serializer = new BasicEntitySerializer();
 

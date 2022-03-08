@@ -2,17 +2,17 @@
 
 namespace Railroad\Railcontent\Transformers;
 
-use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Collection;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\ContentTag;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
 class ContentTagTransformer extends TransformerAbstract
 {
     public function transform(ContentTag $contentTag)
     {
-        $entityManager = app()->make(EntityManager::class);
+        $entityManager = app()->make(RailcontentEntityManager::class);
 
         $serializer = new BasicEntitySerializer();
 

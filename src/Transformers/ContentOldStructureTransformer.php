@@ -3,13 +3,13 @@
 namespace Railroad\Railcontent\Transformers;
 
 use Doctrine\Common\Inflector\Inflector;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\PersistentCollection;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\Content;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 use Railroad\Railcontent\Serializer\OldStyleWithoutDataForArraySerializer;
 use Spatie\Fractal\Fractal;
 
@@ -21,7 +21,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
      */
     public function transform(Content $content)
     {
-        $entityManager = app()->make(EntityManager::class);
+        $entityManager = app()->make(RailcontentEntityManager::class);
 
         $serializer = new BasicEntitySerializer();
 
@@ -227,7 +227,7 @@ class ContentOldStructureTransformer extends TransformerAbstract
      */
     public function includeFields(Content $content)
     {
-        $entityManager = app()->make(EntityManager::class);
+        $entityManager = app()->make(RailcontentEntityManager::class);
 
         $serializer = new BasicEntitySerializer();
 

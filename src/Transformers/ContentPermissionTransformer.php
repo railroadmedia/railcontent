@@ -2,11 +2,11 @@
 
 namespace Railroad\Railcontent\Transformers;
 
-use Doctrine\ORM\EntityManager;
 use Illuminate\Support\Collection;
 use League\Fractal\TransformerAbstract;
 use Railroad\Doctrine\Serializers\BasicEntitySerializer;
 use Railroad\Railcontent\Entities\ContentPermission;
+use Railroad\Railcontent\Managers\RailcontentEntityManager;
 
 class ContentPermissionTransformer extends TransformerAbstract
 {
@@ -25,7 +25,7 @@ class ContentPermissionTransformer extends TransformerAbstract
             $this->defaultIncludes[] = 'content';
         }
 
-        $entityManager = app()->make(EntityManager::class);
+        $entityManager = app()->make(RailcontentEntityManager::class);
 
         $serializer = new BasicEntitySerializer();
 
