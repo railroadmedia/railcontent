@@ -11,6 +11,7 @@ use Faker\ORM\Doctrine\Populator;
 use Illuminate\Support\Facades\Cache;
 use Railroad\Railcontent\Entities\Content;
 use Railroad\Railcontent\Entities\ContentHierarchy;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Tests\Hydrators\ContentFakeDataHydrator;
 use Railroad\Railcontent\Tests\RailcontentTestCase;
@@ -33,95 +34,95 @@ class ContentServiceTest extends RailcontentTestCase
 
         $this->logger = new StatisticsCacheLogger();
 
-        $this->fakeDataHydrator = new ContentFakeDataHydrator($this->entityManager);
+//        $this->fakeDataHydrator = new ContentFakeDataHydrator($this->entityManager);
 
-        $populator = new Populator($this->faker, $this->entityManager);
+//        $populator = new Populator($this->faker, $this->entityManager);
 
-        $populator->addEntity(
-            Content::class,
-            1,
-            [
-                'slug' => 'slug1',
-                'status' => 'published',
-                'type' => 'course',
-                'difficulty' => 5,
-                //'userId' => 1,
-                'brand' => config('railcontent.brand'),
-                'publishedOn' => Carbon::now(),
-            ]
-        );
-        $populator->execute();
+//        $populator->addEntity(
+//            Content::class,
+//            1,
+//            [
+//                'slug' => 'slug1',
+//                'status' => 'published',
+//                'type' => 'course',
+//                'difficulty' => 5,
+//                //'userId' => 1,
+//                'brand' => config('railcontent.brand'),
+//                'publishedOn' => Carbon::now(),
+//            ]
+//        );
+//        $populator->execute();
+//
+//        $populator->addEntity(
+//            Content::class,
+//            3,
+//            [
+//                'type' => 'course-part',
+//            ]
+//        );
+//        $populator->execute();
+//
+//        $populator->addEntity(
+//            Content::class,
+//            1,
+//            [
+//                'type' => 'course',
+//                'difficulty' => 2,
+//            ]
+//        );
+//        $populator->execute();
+//
+//        $populator->addEntity(
+//            ContentHierarchy::class,
+//            1,
+//            [
+//                'parent' => $this->entityManager->getRepository(Content::class)
+//                    ->find(4),
+//                'child' => $this->entityManager->getRepository(Content::class)
+//                    ->find(5),
+//                'childPosition' => 1,
+//            ]
+//        );
+//        $populator->execute();
+//        $populator->addEntity(
+//            ContentHierarchy::class,
+//            1,
+//            [
+//                'parent' => $this->entityManager->getRepository(Content::class)
+//                    ->find(1),
+//                'child' => $this->entityManager->getRepository(Content::class)
+//                    ->find(2),
+//                'childPosition' => 1,
+//            ]
+//        );
+//        $populator->execute();
+//        $populator->addEntity(
+//            ContentHierarchy::class,
+//            1,
+//            [
+//                'parent' => $this->entityManager->getRepository(Content::class)
+//                    ->find(1),
+//                'child' => $this->entityManager->getRepository(Content::class)
+//                    ->find(3),
+//                'childPosition' => 2,
+//            ]
+//        );
+//        $populator->execute();
+//        $populator->addEntity(
+//            ContentHierarchy::class,
+//            1,
+//            [
+//                'parent' => $this->entityManager->getRepository(Content::class)
+//                    ->find(1),
+//                'child' => $this->entityManager->getRepository(Content::class)
+//                    ->find(4),
+//                'childPosition' => 3,
+//            ]
+//        );
+//        $populator->execute();
 
-        $populator->addEntity(
-            Content::class,
-            3,
-            [
-                'type' => 'course-part',
-            ]
-        );
-        $populator->execute();
-
-        $populator->addEntity(
-            Content::class,
-            1,
-            [
-                'type' => 'course',
-                'difficulty' => 2,
-            ]
-        );
-        $populator->execute();
-
-        $populator->addEntity(
-            ContentHierarchy::class,
-            1,
-            [
-                'parent' => $this->entityManager->getRepository(Content::class)
-                    ->find(4),
-                'child' => $this->entityManager->getRepository(Content::class)
-                    ->find(5),
-                'childPosition' => 1,
-            ]
-        );
-        $populator->execute();
-        $populator->addEntity(
-            ContentHierarchy::class,
-            1,
-            [
-                'parent' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'child' => $this->entityManager->getRepository(Content::class)
-                    ->find(2),
-                'childPosition' => 1,
-            ]
-        );
-        $populator->execute();
-        $populator->addEntity(
-            ContentHierarchy::class,
-            1,
-            [
-                'parent' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'child' => $this->entityManager->getRepository(Content::class)
-                    ->find(3),
-                'childPosition' => 2,
-            ]
-        );
-        $populator->execute();
-        $populator->addEntity(
-            ContentHierarchy::class,
-            1,
-            [
-                'parent' => $this->entityManager->getRepository(Content::class)
-                    ->find(1),
-                'child' => $this->entityManager->getRepository(Content::class)
-                    ->find(4),
-                'childPosition' => 3,
-            ]
-        );
-        $populator->execute();
-
-        $purger = new ORMPurger();
-        $executor = new ORMExecutor($this->entityManager, $purger);
+//        $purger = new ORMPurger();
+//        $executor = new ORMExecutor($this->entityManager, $purger);
 
         $this->classBeingTested = $this->app->make(ContentService::class);
     }
@@ -317,21 +318,90 @@ class ContentServiceTest extends RailcontentTestCase
 
     public function test_getWhereTypeInAndStatusAndPublishedOnOrdered()
     {
+        ContentRepository::$pullFutureContent = true;
+
+        $content = $this->fakeContent(
+            10,
+            [
+                'status' => 'published',
+                'type' => 'course',
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now()->addDays(5),
+                'difficulty' => 2,
+                'title' => $this->faker->word,
+            ]
+        );
 
         $results = $this->classBeingTested->getWhereTypeInAndStatusAndPublishedOnOrdered(
             ['course'],
             'published',
             Carbon::now()
-                ->toDateTimeString()
+                ->toDateTimeString(),'>'
         );
 
         $this->assertEquals('course', $results[0]->getType());
         $this->assertEquals('published', $results[0]->getStatus());
-        $this->assertEquals(
+    }
+
+    public function test_next_event_for_specific_coach()
+    {
+        $content = $this->fakeContent(
+            10,
+            [
+                'status' => 'published',
+                'type' => 'course',
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now()->addDays(5),
+                'difficulty' => 2,
+                'title' => $this->faker->word,
+            ]
+        );
+
+        $instructor = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+                'type' => 'instructor',
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now()->subDays(5),
+                'title' => $this->faker->word,
+            ]
+        );
+
+        $ci = $this->fakeContentInstructor([
+         'content_id' => $content[3]->getId(),
+            'instructor_id' => $instructor[0]->getId()
+        ], true);
+
+        $instructor2 = $this->fakeContent(
+            1,
+            [
+                'status' => 'published',
+                'type' => 'instructor',
+                'brand' => config('railcontent.brand'),
+                'publishedOn' => Carbon::now()->subDays(5),
+                'title' => $this->faker->word,
+            ]
+        );
+
+        ContentRepository::$pullFutureContent = true;
+
+        $results = $this->classBeingTested->getWhereTypeInAndStatusAndPublishedOnOrdered(
+            ['course'],
+            'published',
             Carbon::now()
                 ->toDateTimeString(),
-            $results[0]->getPublishedOn()
+            '>',
+             'publishedOn',
+             'desc',
+            [['name' => 'instructor', 'value' => $instructor[0]->getId(), 'operator' => '='],
+                ['name' => 'instructor', 'value' => $instructor2[0]->getId(), 'operator' => '=']
+            ]
         );
+
+        $this->assertEquals('course', $results[0]->getType());
+        $this->assertEquals('published', $results[0]->getStatus());
+        $this->assertEquals($content[3]->getId(), $results[0]->getId());
     }
 
     public function test_getByChildIdWhereType()
