@@ -1,15 +1,25 @@
 <script setup>
 import InstrumentCard from '../../InstrumentCard/InstrumentCard.vue'
+import InstrumentCardContent from '../../InstrumentCard/InstrumentCardContent.vue'
 import ProgressBar from '../../ProgressBar/ProgressBar.vue'
+import { brandUrl, bgColor, bgImg } from '../../../constants/brands'
 const props = defineProps({
     brand: {
         type: String
     },
     steps: {
         type: Array
+    },
+    info: {
+        type: Object
     }
 })
-const emit = defineEmits(['changeStep', 'checkStep'])
+const emit = defineEmits(['onChangeStep', 'onCheckStep', 'onChangeInfo'])
+function onInstrumentSelection(instrument) {
+    emit('changeInfo', { ...props.info, instrument })
+    emit('checkStep', 1)
+    emit('changeStep', 2)
+}
 </script>
 
 <template>
@@ -28,32 +38,48 @@ const emit = defineEmits(['changeStep', 'checkStep'])
         </p>
         <div class="tw-mb-[40px] tw-flex tw-space-x-6">
             <InstrumentCard
-                :bgColor="'gray'"
+                :backgroundUrl="bgImg.drumeo"
                 brand="drumeo"
-                @onInstrumentSelect="() => handleSelect(brandName)"
+                @onInstrumentSelect="() => onInstrumentSelection('drums')"
             >
-                DRUMS
+                <InstrumentCardContent
+                    instrumentText="DRUMS"
+                    :logoUrl="brandUrl.drumeo"
+                    logoAltText="Drumeo Logo"
+                />
             </InstrumentCard>
             <InstrumentCard
-                :bgColor="'gray'"
+                :backgroundUrl="bgImg.pianote"
                 brand="pianote"
-                @onInstrumentSelect="() => handleSelect(brandName)"
+                @onInstrumentSelect="() => onInstrumentSelection('piano')"
             >
-                PIANO
+                <InstrumentCardContent
+                    instrumentText="PIANO"
+                    :logoUrl="brandUrl.pianote"
+                    logoAltText="Pianote Logo"
+                />
             </InstrumentCard>
             <InstrumentCard
-                :bgColor="'gray'"
+                :backgroundUrl="bgImg.guitareo"
                 brand="guitareo"
-                @onInstrumentSelect="() => handleSelect(brandName)"
+                @onInstrumentSelect="() => onInstrumentSelection('guitar')"
             >
-                GUITAR
+                <InstrumentCardContent
+                    instrumentText="GUITAR"
+                    :logoUrl="brandUrl.guitareo"
+                    logoAltText="Guitareo Logo"
+                />
             </InstrumentCard>
             <InstrumentCard
-                :bgColor="'gray'"
+                :backgroundUrl="bgImg.singeo"
                 brand="singeo"
-                @onInstrumentSelect="() => handleSelect(brandName)"
+                @onInstrumentSelect="() => onInstrumentSelection('singing')"
             >
-                SINGING
+                <InstrumentCardContent
+                    instrumentText="SINGING"
+                    :logoUrl="brandUrl.singeo"
+                    logoAltText="Singeo Logo"
+                />
             </InstrumentCard>
         </div>
         <ProgressBar

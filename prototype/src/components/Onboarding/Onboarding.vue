@@ -66,5 +66,6 @@ function checkStepToggle(step, val) {
             :steps="steps"
             :info="info"
         />
+        <div v-if="currentStep === 2">STEP 3</div>
     </ModalRenderer>
 </template>

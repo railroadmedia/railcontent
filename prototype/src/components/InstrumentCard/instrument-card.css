@@ -6,6 +6,7 @@
 
 .InstrumentCard__overlay {
     display: flex;
+    font-family: Bebas Neue;
 }
 
 .InstrumentCard__overlay--drumeo {

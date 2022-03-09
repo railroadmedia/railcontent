@@ -8,15 +8,6 @@ const props = defineProps({
     brand: {
         type: String
     },
-    changeStep: {
-        type: Function
-    },
-    changeInfo: {
-        type: Function
-    },
-    checkStep: {
-        type: Function
-    },
     steps: {
         type: Array
     },
